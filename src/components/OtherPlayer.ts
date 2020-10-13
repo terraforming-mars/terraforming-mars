@@ -3,11 +3,13 @@ import Vue from "vue";
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
 import { hidePlayerData } from "./overview/PlayerStatus";
+import { Card } from "./card/Card";
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player", "playerIndex"],
     components: {
         "stacked-cards": StackedCards,
+        Card
     },
     mixins: [PlayerMixin],
     methods: {
@@ -18,9 +20,6 @@ export const OtherPlayer = Vue.component("other-player", {
             return (this.$root as any).getVisibilityState(
                 "pinned_player_" + this.playerIndex
             );
-        },
-        getCrossHtml: function() {
-            return "<i class='icon icon-cross' /i>";
         }
     },
     template: `
@@ -31,10 +30,10 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
                         <div v-if="player.corporationCard !== undefined" class="cardbox">
-                            <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
+                            <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                         </div>
                         <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card" :actionUsed="isCardActivated(card, player)"></card>
+                            <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                         </div>
 
                         <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>
@@ -46,7 +45,7 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span> Self-Replicating Robots cards </span>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card"></card>
+                            <Card :card="card" />
                         </div>
                     </div>
                 </div>                

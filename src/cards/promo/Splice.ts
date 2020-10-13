@@ -8,11 +8,13 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { ResourceType } from "../../ResourceType";
 import { CardName } from "../../CardName";
 import { ICard } from "../ICard";
+import { CardType } from "../CardType";
 
 export class Splice implements CorporationCard {
     public name: CardName = CardName.SPLICE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
+    public cardType: CardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) { 
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
@@ -52,8 +54,8 @@ export class Splice implements CorporationCard {
         }    
     }
 
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard): void {
-        this.onCardPlayed(player,game,card as ICard as IProjectCard);
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
+        return this.onCardPlayed(player,game,card as ICard as IProjectCard);
     }
 
     public play() {

@@ -1,16 +1,19 @@
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CorporationCard } from '../corporation/CorporationCard';
+import { CorporationCard } from "../corporation/CorporationCard";
 import { SelectSpace } from "../../inputs/SelectSpace";
-import { ISpace } from '../../ISpace';
-import { IActionCard } from '../ICard';
-import { CardName } from '../../CardName';
+import { ISpace } from "../../ISpace";
+import { IActionCard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+
 
 export class ArcadianCommunities implements IActionCard, CorporationCard {
     public name: CardName = CardName.ARCADIAN_COMMUNITIES;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 40; 
+    public cardType: CardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace(

@@ -10,11 +10,14 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { LogHelper } from "../../components/LogHelper";
 import { Resources } from "../../Resources";
+import { CardType } from "../CardType";
+
 
 export class Astrodrill implements IActionCard, CorporationCard {
     public name: CardName = CardName.ASTRODRILL;
     public tags: Array<Tags> = [Tags.SPACE];
     public startingMegaCredits: number = 38;
+    public cardType: CardType = CardType.CORPORATION; 
     public resourceType: ResourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
 
@@ -24,7 +27,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
 
     public action(player: Player, game: Game) {
         const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
-        var opts: Array<SelectOption | SelectCard<ICard>> = [];
+        const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
         const gainStandardResource = new SelectOption("Gain a standard resource", "Gain", () => {
             return new OrOptions(

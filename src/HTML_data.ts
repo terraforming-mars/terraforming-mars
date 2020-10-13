@@ -5697,7 +5697,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="content ">
         <div class="requirements ">1 Science</div>
         <div class="production-box production-box-size1a ">
-            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div>
+            <div class="production-prefix plus"></div><div class="plant production "></div>
         </div>
         <div class="microbe resource "></div><div class="microbe resource "></div>
         <div class="ares-tile board-space-tile--biofertilizer_facility"></div>
@@ -5726,9 +5726,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description " style="text-align:left;">
             (Effect: Place a bronze cube on a dust storm tile and raise oxygen
               1 step, or place a bronze cube on an erosion tile and raise the
-              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)<br><br>
-            (Note: For now, this is the player's marker, with all the benefits of a player
-            marker on a tile.)
+              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
         </div>
     </div>
 `],
@@ -5790,8 +5788,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="ares-tile board-space-tile--ocean_city"></div>
         
         <div class="production-box production-box-size2 ">
-            <div class="production-prefix ">➖︎</div><div class="energy production "></div><br>
-            <div class="production-prefix ">➕︎</div><div class="money production ">3</div>
+            <div class="production-prefix minus"></div><div class="energy production "></div><br>
+            <div class="production-prefix plus"></div><div class="money production ">3</div>
         </div>
 
         <div class="description " style="text-align:left;">
@@ -5804,10 +5802,12 @@ export const HTML_DATA: Map<string, string> =
 [CardName.OCEAN_FARM,`
     <div class="card-number">A10</div>
     <div class="content ">
-        <div class="requirements ">4 Oceans</div>
         <div class="ares-tile board-space-tile--ocean_farm"></div>
-        <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="heat production "></div>
-        <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div>
+        <div class="requirements ">4 Oceans</div>
+        <div class="production-box production-box-size2 ">
+            <div class="production-prefix plus"></div><div class="heat production "></div>
+            <div class="production-prefix plus"></div><div class="plant production "></div>
+        </div>
         <div class="description " style="text-align:left;">
             (Requires 4 ocean tiles. Increase your heat production 1 step and increase your
             plant production 1 step.<br>Place this tile on top of an existing ocean tile.

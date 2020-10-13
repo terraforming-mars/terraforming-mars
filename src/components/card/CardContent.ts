@@ -26,7 +26,7 @@ export const CardContent = Vue.component("CardContent", {
         <div :class="getClasses()">
             <CardPoints v-if="metadata.points !== undefined" :amount="metadata.points" />
             <CardRequirementsComponent v-if="metadata.requirements !== undefined" :requirements="metadata.requirements"/>
-            <div class="description">{{ metadata.description }}</div>
+            <CardDescription v-if="metadata.description !== undefined" :text="metadata.description" />
         </div>
     `,
 });

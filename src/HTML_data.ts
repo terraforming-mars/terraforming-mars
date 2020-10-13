@@ -1196,8 +1196,8 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div>
             <div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:15px;font-size:11px;text-align: left">
-                <div style="width: 120px">Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.</div>
+            <div class="description">
+                Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.
             </div>
         </div>
 `],

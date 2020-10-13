@@ -329,15 +329,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.playerHasPickedCorporationCard(player, new BeginnerCorporation() );
         }
       }
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
 
-      players[0].dealtProjectCards.push(new MiningAreaAres());
-      players[0].dealtProjectCards.push(new MiningRightsAres());
-      players[0].dealtProjectCards.push(new LandClaim());
-      players[0].dealtProjectCards.push(new DesperateMeasures());
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 

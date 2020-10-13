@@ -171,13 +171,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         getBoardColorClass: function(boardName: string): string {
             if (boardName === BoardName.ORIGINAL){
-                return "create-game-tharsis";
+                return "create-game-board-hexagon create-game-tharsis";
             } else if (boardName === BoardName.HELLAS) {
-                return "create-game-hellas";
+                return "create-game-board-hexagon create-game-hellas";
             } else if (boardName === BoardName.ELYSIUM) {
-                return "create-game-elysium";
+                return "create-game-board-hexagon create-game-elysium";
             } else {
-                return "create-game-random";
+                return "create-game-board-hexagon create-game-random";
             }
         },
         getPlayerCubeColorClass: function(color: string): string{
@@ -428,7 +428,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <template v-for="boardName in boards">
                                 <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                                 <label :for="boardName+'-checkbox'" class="expansion-button">
-                                    <span :class="'create-game-board-hexagon '+getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
+                                    <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
                                 </label>
                             </template>
                         </div>

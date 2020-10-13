@@ -6,12 +6,13 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { TileType } from "../../../src/TileType";
 import { MoholeAreaAres } from "../../../src/cards/ares/MoholeAreaAres";
 import { SpaceBonus } from "../../../src/SpaceBonus";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("MoholeAreaAres", function () {
     it("Should play", function () {
         const card = new MoholeAreaAres();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+        const game = new Game("foobar", [player,player], player, ARES_OPTIONS_NO_HAZARDS);
         const action = card.play(player, game);
 
         expect(action).not.to.eq(undefined);

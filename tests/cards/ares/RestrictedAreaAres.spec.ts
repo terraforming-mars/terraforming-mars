@@ -5,6 +5,7 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { RestrictedAreaAres } from "../../../src/cards/ares/RestrictedAreaAres";
 import { SpaceBonus } from "../../../src/SpaceBonus";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("RestrictedAreaAres", function () {
     let card : RestrictedAreaAres, player : Player, game : Game;
@@ -12,7 +13,7 @@ describe("RestrictedAreaAres", function () {
     beforeEach(function() {
         card = new RestrictedAreaAres();
         player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
+        game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     });
 
     it("Should play", function () {

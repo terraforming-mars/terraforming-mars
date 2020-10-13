@@ -7,6 +7,7 @@ import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
 import { Resources } from "../../../src/Resources";
 import { MiningAreaAres } from "../../../src/cards/ares/MiningAreaAres";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("MiningAreaAres", function () {
     let card : MiningAreaAres, player : Player, game : Game;
@@ -14,7 +15,7 @@ describe("MiningAreaAres", function () {
     beforeEach(function() {
         card = new MiningAreaAres();
         player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
+        game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     });
 
     it("Should play", function () {

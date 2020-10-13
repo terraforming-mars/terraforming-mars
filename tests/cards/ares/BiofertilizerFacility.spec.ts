@@ -13,6 +13,7 @@ import { Resources } from "../../../src/Resources";
 import { ResourceType } from "../../../src/ResourceType";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("BiofertilizerFacility", function () {
   let card : BiofertilizerFacility, player : Player, game : Game;
@@ -38,7 +39,7 @@ describe("BiofertilizerFacility", function () {
   beforeEach(function() {
     card = new BiofertilizerFacility();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it("Can't play without a science tag", function () {

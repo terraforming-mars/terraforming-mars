@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { Resources } from "../Resources";
+import { CardMetadata } from "../cards/CardMetadata";
 
 export interface IProjectCard extends ICard {
     addPlayCardInterrupt?: (player: Player, game: Game) => void;
@@ -14,4 +15,5 @@ export interface IProjectCard extends ICard {
     hasRequirements?: boolean;
     bonusResource?: Resources | undefined;
     bonusMc?: number | undefined;
+    metadata?: CardMetadata;
 }

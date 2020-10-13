@@ -1299,15 +1299,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.DUST_SEALS,` 
-        <div class="content ">
-            <div class="points points-big ">1</div>
-            <div class="requirements requirements-max ">max 3 Oceans</div>
-            <div class="description ">
-                (Requires 3 or less ocean tiles.)
-            </div>
-        </div>
-`],
 [CardName.URBANIZED_AREA,` 
         <div class="content ">
             <div class="production-box production-box-size1a ">

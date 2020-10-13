@@ -563,9 +563,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-weight: normal;
     font-size: 15px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
-    background-image: url(./assets/requisites/min_big.png);
-    background-size: 180px 38px;
-    background-position: -15px -6px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
     font-family: Ubuntu;
     font-weight: bold;
 }
@@ -850,9 +848,7 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-right: 5px;
     border-radius: 5px;
     height: 20px;
-    background-image: url(./assets/requisites/min_big.png);
-    background-size: 180px 60px;
-    background-position: -16px -9px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
     filter: drop-shadow(0px 0px 1px black);
 }
 
@@ -1891,7 +1887,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-crash-site-cleanup {
     .requirements {
-        height: 40px;
+        margin-top: 10px;
+        .crash-site-minus-plant{
+            margin-top: -10px;
+        }
     }
 }
 

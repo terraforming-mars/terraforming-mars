@@ -37,9 +37,9 @@
     margin-bottom: 10px;
 }
 
-.create-game--block {
-    background: #202020;
-    padding: 25px;
+.create-game--block {	 
+    padding: 25px;	    
+    border-radius: 15px;
 }
 
 .create-game-form {
@@ -101,7 +101,7 @@
 }
 
 .create-game-subsection-label {
-    font-size: 20px;
+    font-size: 22px;
     color: gray;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -140,8 +140,8 @@
   display: inline-block;
   background-color: #303030;
   padding: 10px 20px 10px 20px;
-  font-family: sans-serif, Arial;
-  font-size: 16px;
+  font-family: Ubuntu, Sans;
+  font-size: 23px;
   border-radius: 8px;
   text-align: center;
   margin: 4px;
@@ -200,3 +200,75 @@
     vertical-align: middle;
     margin: 0px 10px;
   }
+
+.create-game-playerblock-red {
+    background-color: fade(@player_red, 60%);
+}
+
+.create-game-playerblock-yellow {
+    background-color: fade(@player_yellow, 60%);
+}
+
+.create-game-playerblock-green {
+    background-color: fade(@player_green, 60%);
+}
+
+.create-game-playerblock-blue {
+    background-color: fade(@player_blue, 60%);
+}
+.create-game-playerblock-black {
+    background-color: fade(@player_black, 60%);
+}
+.create-game-playerblock-purple {
+    background-color: fade(@player_purple, 60%);
+}
+
+.create-game-player-name {
+    color: #020202;	    color: #020202;
+    max-width: 430px;	    max-width: 430px;
+    height: 40px;
+}
+
+.create-game-page-color-row {
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.create-game-page-color-row > input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.create-game-page-color-row > label {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(41, 41, 41);
+    border-radius: 8px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 4px 6px;
+    margin: 0px 4px;
+}
+  
+.create-game-page-color-row label:hover {
+    background-color: rgb(104, 104, 104);
+}
+
+  
+.create-game-page-color-row input[type="radio"]:checked + label {
+    background-color: rgb(199, 199, 199);
+}
+  
+.create-game-colorbox {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: text-top;
+}

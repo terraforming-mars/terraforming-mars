@@ -1083,7 +1083,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.NUCLEAR_ZONE,` 
       <div class="content">
         <div class="points points-big">-2</div>
-          <div class="tile special-tile" style="font-size:28px;line-height:50px">&#x2622;</div><br>
+          <div class="tile special-tile">&#x2622;</div><br>
           <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
         <div class="description">
           (Place this tile and raise temperature 2 steps.)
@@ -1188,14 +1188,14 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.OPEN_CITY,` 
         <div class="content ">
-            <div class="points points-big ">1</div>
+            <div class="points points-big">1</div>
             <div class="requirements">12% O2</div>
-            <div class="production-box production-box-size1a " style="margin-bottom:5px;">
+            <div class="production-box production-box-size1a">
                 <div class="production-prefix minus"></div><div class="energy production "></div>
                 <div class="production-prefix plus"></div><div class="money production ">4</div>
             </div>
-            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div>
-            <div class="plant resource "></div><div class="plant resource "></div>
+            <div class="tile city-tile"></div>
+            <div class="plant resource"></div><div class="plant resource"></div>
             <div class="description">
                 Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.
             </div>

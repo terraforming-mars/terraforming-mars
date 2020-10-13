@@ -60,7 +60,7 @@ describe("MiningGuild", function () {
         const oceanSpaces = game.board.getOceansTiles();
 
         oceanSpaces.forEach((space) => {
-            game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN }, true); 
+            game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN }); 
         })
 
         expect(player.getProduction(Resources.STEEL)).to.eq(0);

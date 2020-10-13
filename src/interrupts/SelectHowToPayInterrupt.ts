@@ -1,5 +1,5 @@
 import { Player } from "../Player";
-import { PlayerInput } from '../PlayerInput';
+import { PlayerInput } from "../PlayerInput";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { HowToPay } from "../inputs/HowToPay";

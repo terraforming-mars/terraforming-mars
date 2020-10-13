@@ -1,5 +1,5 @@
 import { Game } from "../Game";
-import { PlayerInput } from '../PlayerInput';
+import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 import { ColonyName } from "../colonies/ColonyName";

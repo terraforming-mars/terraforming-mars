@@ -1,5 +1,5 @@
 import { Game } from "../Game";
-import { PlayerInput } from '../PlayerInput';
+import { PlayerInput } from "../PlayerInput";
 import { Player, PlayerId } from "../Player";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 import { OrOptions } from "../inputs/OrOptions";

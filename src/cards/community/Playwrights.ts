@@ -1,7 +1,7 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
@@ -14,7 +14,8 @@ export class Playwrights implements CorporationCard {
     public name: CardName =  CardName.PLAYWRIGHTS;
     public tags: Array<Tags> = [Tags.ENERGY];
     public startingMegaCredits: number = 38;
-
+    public cardType: CardType = CardType.CORPORATION;
+    
     public play(player: Player) {
         player.addProduction(Resources.ENERGY);
         return undefined;

@@ -1,21 +1,13 @@
 import { Player, PlayerId } from "../Player";
 import { SelectSpace } from '../inputs/SelectSpace';
+import { SerializedColony } from "../SerializedColony";
 import { Game } from '../Game';
-import { ColonyName } from './ColonyName';
-import { ResourceType } from '../ResourceType';
 import { CorporationName } from '../CorporationName';
 import { Resources } from '../Resources';
 import { LogHelper } from "../components/LogHelper";
 import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
-export interface IColony {
-    name: ColonyName;
-    description: string;
-    isActive: boolean;
-    visitor: undefined | PlayerId;
-    trackPosition: number;
-    colonies: Array<PlayerId>;
-    resourceType?: ResourceType;
+export interface IColony extends SerializedColony {
     trade: (player: Player, game: Game, usesTradeFleet?: boolean) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
     giveTradeBonus: (player: Player, game: Game) => void;
@@ -24,7 +16,7 @@ export interface IColony {
     decreaseTrack(value?: number): void;
 }
 
-export abstract class Colony  {
+export abstract class Colony {
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];
@@ -91,4 +83,4 @@ export abstract class Colony  {
           poseidon[0].addProduction(Resources.MEGACREDITS);
         }
     }  
-}    
+}

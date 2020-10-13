@@ -2,7 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 
 export class VenusFirst extends PreludeCard implements IProjectCard {
@@ -13,7 +13,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
         game.increaseVenusScaleLevel(player, 2);
 
         if (game.hasCardsWithTag(Tags.VENUS, 2)) {
-            for (let foundCard of game.drawCardsByTag(Tags.VENUS, 2)) {
+            for (const foundCard of game.drawCardsByTag(Tags.VENUS, 2)) {
                 player.cardsInHand.push(foundCard);
             }
 

@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_COMMUNITY_CORPORATIONS} from "./Dealer";
+import {Dealer} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -45,6 +45,7 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {Database} from "./database/Database";
+import { SerializedColony } from "./SerializedColony";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
@@ -222,28 +223,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-
-      // Add Corporate Era corporation cards
-      if (gameOptions.corporateEra) {
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-      }
-
-      // Add prelude corporations cards
-      if (gameOptions.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
       }
 
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-
         const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -258,34 +244,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
         this.turmoil = new Turmoil(this);
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Promo stuff
-      if (gameOptions.promoCardsOption) {
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Community corps
-      if (gameOptions.communityCardsOption) {
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
       // Setup custom corporation list
+      let corporationCards = this.dealer.corporationCards;
+
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
-        // Init all available corporation cards to choose from
-        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
-
-        corporationCards = corporationCards.filter(
+        corporationCards = this.dealer.corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }
@@ -550,8 +517,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.addInterrupt(new SelectHowToPayInterrupt(player, amount, title, canUseSteel, canUseTitanium));
     }
 
-    public addOceanInterrupt(player: Player, title?: string, isWorldGov: boolean = false): void {
-      this.addInterrupt(new SelectOcean(player, this, title, isWorldGov));
+    public addOceanInterrupt(player: Player, title?: string): void {
+      this.addInterrupt(new SelectOcean(player, this, title));
     }
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
@@ -725,18 +692,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       player.corporationCard = corporationCard;
-      corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         const cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * player.cardCost;
+        player.megaCredits -= cardsToPayFor * cardCost;
       }
+      corporationCard.play(player, this);
 
       // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
             const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard);
-            if (actionFromPlayedCard !== undefined) {  // always be undefined for the present
+            if (actionFromPlayedCard !== undefined) {
                 this.interrupts.push({
                     player: player,
                     playerInput: actionFromPlayedCard
@@ -888,6 +855,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       // solar Phase Option
       if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {
+        this.phase = Phase.SOLAR;
         this.gotoWorldGovernmentTerraforming();
         return;
       }
@@ -895,6 +863,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoEndGeneration() {
+      this.phase = Phase.INTERGENERATION
       if (this.gameOptions.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -1238,7 +1207,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public increaseOxygenLevel(
-        player: Player, steps: 1 | 2, isWorldGov: boolean = false): undefined {
+        player: Player, steps: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
@@ -1246,11 +1215,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return this.increaseOxygenLevel(player, 1);
       }
       this.oxygenLevel += steps;
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1, isWorldGov);
+        return this.increaseTemperature(player, 1);
       }
       return undefined;
     }
@@ -1259,42 +1228,42 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(
-      player: Player, steps: 1 | 2 | 3, isWorldGov: boolean = false): SelectSpace | undefined {
-    if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
-      return undefined;
-    }
-    if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-      steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-      return this.increaseVenusScaleLevel(player, steps);
-    }
-    this.venusScaleLevel += 2 * steps;
-    if (!isWorldGov) {
-      player.increaseTerraformRatingSteps(steps, this);
-    }
-
-    // Check for Aphrodite corporation
-    this.players.forEach((player) => {
-      if (player.isCorporation(CorporationName.APHRODITE)) {
-        player.megaCredits += 2 * steps;
+    public increaseVenusScaleLevel(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+      if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+        return undefined;
       }
-    });
+      if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
+        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
+        return this.increaseVenusScaleLevel(player, steps);
+      }
+      this.venusScaleLevel += 2 * steps;
+      if (this.phase !== Phase.SOLAR) {
+        player.increaseTerraformRatingSteps(steps, this);
+      }
 
-    if ((!isWorldGov) && this.venusScaleLevel === 8
-        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10)
-        || (steps === 3 && this.venusScaleLevel === 12)
-    ) {
-      player.cardsInHand.push(this.dealer.dealCard());
-    }
+      // Check for Aphrodite corporation
+      this.players.forEach((player) => {
+        if (player.isCorporation(CorporationName.APHRODITE)) {
+          player.megaCredits += 2 * steps;
+        }
+      });
 
-    if ((!isWorldGov) && this.venusScaleLevel === 16
-        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18)
-        || (steps === 3 && this.venusScaleLevel === 20)
-    ) {
-      player.increaseTerraformRating(this);
-    }
+      if (this.phase !== Phase.SOLAR) {
+        if (this.venusScaleLevel === 8
+            || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10)
+            || (steps === 3 && this.venusScaleLevel === 12)
+        ) {
+          player.cardsInHand.push(this.dealer.dealCard());
+        }
 
-    return undefined;
+        if (this.venusScaleLevel === 16
+            || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18)
+            || (steps === 3 && this.venusScaleLevel === 20)
+        ) {
+          player.increaseTerraformRating(this);
+        }
+      }
+      return undefined;
   }
 
   public getVenusScaleLevel(): number {
@@ -1302,7 +1271,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
   }
 
     public increaseTemperature(
-        player: Player, steps: -2 | 1 | 2 | 3, isWorldGov: boolean = false): undefined {
+        player: Player, steps: -2 | 1 | 2 | 3): undefined {
       if (steps === -2) {
         if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
           this.temperature -= 4;
@@ -1324,11 +1293,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }
       this.temperature += 2 * steps;
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         if (steps === 3 && this.temperature === -20) {
           player.addProduction(Resources.HEAT, 2);
         } else if (this.temperature === -24 || this.temperature === -20 ||
@@ -1348,7 +1317,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
       ) {
-        this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
+        this.addOceanInterrupt(player, "Select space for ocean from temperature increase");
       }
 
       return undefined;
@@ -1406,7 +1375,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addTile(
         player: Player, spaceType: SpaceType,
-        space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
+        space: ISpace, tile: ITile): void {
 
       // Part 1, basic validation checks.
 
@@ -1443,18 +1412,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
 
       // Part 4. Place the tile
-
-      if (tile.tileType === TileType.OCEAN) {
-        space.player = undefined;
-      } else {
-        space.player = player;
-      }
       space.tile = tile;
+      space.player = player;
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
 
       // Part 5. Collect the bonuses
 
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         space.bonus.forEach((spaceBonus) => {
           if (spaceBonus === SpaceBonus.DRAW_CARD) {
             player.cardsInHand.push(this.dealer.dealCard());
@@ -1476,7 +1440,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
 
-        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
 
         if (arcadianCommunityBonus) {
           player.megaCredits += 3;
@@ -1485,6 +1449,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
 
+      // Mining Guild tile placement effects should resolve before removing space.player for Oceans
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
@@ -1496,6 +1461,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
       });
+
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      }
     }
 
     public addGreenery(
@@ -1522,14 +1491,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addOceanTile(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.OCEAN, isWorldGov: boolean = false): void {
+        spaceType: SpaceType = SpaceType.OCEAN): void {
       if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
-      }, isWorldGov);
-      if (!isWorldGov) {
+      });
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRating(this);
       }
     }
@@ -1703,6 +1672,24 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return value;
     }
 
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+      const result: Array<IColony> = [];
+      for (const serialized of colonies) {
+        const colony = getColonyByName(serialized.name);
+        if (colony !== undefined) {
+          colony.isActive = serialized.isActive;
+          colony.visitor = serialized.visitor;
+          colony.trackPosition = serialized.trackPosition;
+          colony.colonies = serialized.colonies;
+          colony.resourceType = serialized.resourceType;
+          result.push(colony);
+        } else {
+          console.warn(`colony ${serialized.name} not found`);
+        }
+      }
+      return result;
+    }
+
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
@@ -1782,24 +1769,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();
-        this.colonies = new Array<IColony>();
 
-        d.colonyDealer?.discardedColonies.forEach((element: IColony) => {
-          if(this.colonyDealer !== undefined) {
-            this.colonyDealer.discardedColonies.push(element);
-          }
-        });
+        if (d.colonyDealer !== undefined) {
+          this.colonyDealer.discardedColonies = this.loadColoniesFromJSON(d.colonyDealer.discardedColonies);
+        }
 
-        d.colonies.forEach((element: IColony) => {
-          const colony = getColonyByName(element.name);
-
-          // Assign each attributes
-          Object.assign(colony, element);
-
-          if (colony !== undefined) {
-            this.colonies.push(colony);
-          }
-        });
+        this.colonies = this.loadColoniesFromJSON(d.colonies);
       }
 
       // Reload turmoil elements if needed

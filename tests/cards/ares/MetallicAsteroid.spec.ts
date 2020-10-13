@@ -6,6 +6,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("MetallicAsteroid", function () {
     let card: MetallicAsteroid, player: Player, otherPlayer: Player, game: Game;
@@ -14,7 +15,7 @@ describe("MetallicAsteroid", function () {
         card = new MetallicAsteroid();
         player = new Player("test", Color.BLUE, false);
         otherPlayer = new Player("other", Color.RED, false);
-        game = new Game("foobar", [player, otherPlayer], player);
+        game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     });
 
     it("Play", function () {

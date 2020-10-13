@@ -8,6 +8,7 @@ import { Tags } from "../../../src/cards/Tags";
 import { CardType } from "../../../src/cards/CardType";
 import { ResourceType } from "../../../src/ResourceType";
 import { expect } from "chai";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("BioengineeringEnclosure", function () {
   let card : BioengineeringEnclosure, player : Player, game : Game;
@@ -33,7 +34,7 @@ describe("BioengineeringEnclosure", function () {
   beforeEach(function() {
     card = new BioengineeringEnclosure();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it("Can't play without a science tag", () => {

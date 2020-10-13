@@ -8,6 +8,7 @@ import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
 import { setCustomGameOptions } from "../TestingUtils";
+import { AresHandler } from "../../src/ares/AresHandler";
 
 export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
     aresExtension: true,
@@ -36,35 +37,35 @@ export class AresTestHelper {
     // provides shared testing between Ecological Survey and Geological Survey
     public static testSurveyBonus(game: Game, player: Player, bonus: SpaceBonus | AresSpaceBonus, expectedMc: number) {
         // tile types in this test are irrelevant.
-        var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         firstSpace.adjacency = { bonus: [ bonus ] };
         game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
         expect(player.getResource(Resources.MEGACREDITS)).is.eq(0);
-        var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
         expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
     }
 
     public static addGreenery(game: Game, player: Player): ISpace {
-        var space = game.board.getAvailableSpacesForGreenery(player)[0];
+        const space = game.board.getAvailableSpacesForGreenery(player)[0];
         game.addGreenery(player, space.id);
         return space;
     }
 
     public static addOcean(game: Game, player: Player): ISpace {
-      var space = game.board.getAvailableSpacesForOcean(player)[0];
+      const space = game.board.getAvailableSpacesForOcean(player)[0];
       game.addOceanTile(player, space.id);
       return space;
     }
 
     public static getHazards(game: Game): Array<ISpace> {
-      return game.board.getSpaces(SpaceType.LAND).filter(space => space.tile?.hazard === true);
+      return game.board.getSpaces(SpaceType.LAND).filter(space => AresHandler.hasHazardTile(space));
     }
 
     public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {
       // Got a better way to initialize this? LMK.
-      var map: Map<number, Array<ISpace>> = new Map([
+      const map: Map<number, Array<ISpace>> = new Map([
         [TileType.GREENERY, []],
         [TileType.OCEAN, []],
         [TileType.CITY, []],
@@ -101,8 +102,8 @@ export class AresTestHelper {
     
       spaces.forEach(space => {
         if (space.tile) {
-          var tileType: TileType = space.tile.tileType;
-          var e = map.get(tileType) || [];
+          const tileType: TileType = space.tile.tileType;
+          const e = map.get(tileType) || [];
           e.push(space);
           map.set(tileType, e);
         }

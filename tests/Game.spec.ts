@@ -17,11 +17,12 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from "../src/milestones/Ecologist";
-import { ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS, Dealer, getProjectCardByName } from "../src/Dealer";
+import { Dealer, getProjectCardByName } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
 import { Helion } from "../src/cards/corporation/Helion";
+import { COMMUNITY_CARD_MANIFEST } from "../src/cards/community/CommunityCardManifest";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -46,7 +47,7 @@ describe("Game", function () {
         const dealer = new Dealer(true, false, false, false, false, false, true);
         const preludeDeck = dealer.preludeDeck;
 
-        const turmoilPreludes = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.map((c) => c.cardName);
+        const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
         turmoilPreludes.forEach((preludeName) => {
             const preludeCard = getProjectCardByName(preludeName)!;
             expect(preludeDeck.includes(preludeCard)).to.eq(false)

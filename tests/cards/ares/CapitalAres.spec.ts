@@ -8,6 +8,7 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
 import { TileType } from "../../../src/TileType";
 import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("CapitalAres", function () {
   let card : CapitalAres, player : Player, game : Game;
@@ -15,7 +16,7 @@ describe("CapitalAres", function () {
   beforeEach(function() {
     card = new CapitalAres();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it("Should play", function () {

@@ -8,11 +8,13 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 import { Game } from "../../Game";
+import { CardType } from "../CardType"
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
     public name: CardName = CardName.ROBINSON_INDUSTRIES;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 47;
+    public cardType: CardType = CardType.CORPORATION;
     public play() {
         return undefined;
     }

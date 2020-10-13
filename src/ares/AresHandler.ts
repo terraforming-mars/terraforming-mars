@@ -19,9 +19,16 @@ import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionT
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
+import { Phase } from "../Phase";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
+
+export enum HazardSeverity {
+    NONE,
+    MILD,
+    SEVERE
+};
 
 export class AresHandler {
     private constructor() {}
@@ -45,7 +52,7 @@ export class AresHandler {
                 erosionOceanCount: { threshold: 3, available: true }, // oceans: add erosion tiles
                 removeDustStormsOceanCount: { threshold: 6, available: true }, // oceans: remove dust storms
                 severeErosionTemperature: { threshold: -4, available: true }, // temperatore: severe erosion
-                severeDustStormOxygen: { threshold: 5, available: true } // oxygen: severe dust storms
+                severeDustStormOxygen: { threshold: 5, available: true }, // oxygen: severe dust storms
             },
             milestoneResults: players.map(p => {
                 return {id: p.id, count: 0};
@@ -59,7 +66,7 @@ export class AresHandler {
     }
 
     public static earnAdjacencyBonuses(game: Game, player: Player, space: ISpace) {
-        var incrementMilestone = false;
+        let incrementMilestone = false;
 
         game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
             if (this.earnAdacencyBonus(game, adjacentSpace, player)) {
@@ -67,8 +74,8 @@ export class AresHandler {
             }
         });
         if (incrementMilestone) {
-            var milestoneResults = game.aresData!.milestoneResults;
-            var entry : IMilestoneCount | undefined = milestoneResults.find(e => e.id === player.id);
+            const milestoneResults = game.aresData!.milestoneResults;
+            const entry : IMilestoneCount | undefined = milestoneResults.find(e => e.id === player.id);
             if (entry === undefined) {
                 throw new Error("Player ID not in the Ares milestone results map: " + player.id);
             }
@@ -85,7 +92,7 @@ export class AresHandler {
             throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
         }
 
-        var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
+        const addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
         const availableCards = player.getResourceCards(resourceType);
         if (availableCards.length === 0) {
         } else if (availableCards.length === 1) {
@@ -107,7 +114,7 @@ export class AresHandler {
         }
         };
     
-        var bonuses = new Multiset<AresSpaceBonus | SpaceBonus>();
+        const bonuses = new Multiset<AresSpaceBonus | SpaceBonus>();
 
         adjacentSpace.adjacency.bonus.forEach(bonus => {
             bonuses.add(bonus);
@@ -135,11 +142,11 @@ export class AresHandler {
             }
         });
 
-        var bonusText = bonuses.entries().map((elem) => `${elem[1]} ${bonusAsString(elem[0])}`).join(", ");
-        var tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
+        const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${bonusAsString(elem[0])}`).join(", ");
+        const tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
         game.log("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
 
-        var ownerBonus = 1;
+        let ownerBonus = 1;
         if (adjacentSpace.player !== undefined) {
             if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
                 ownerBonus = 2;
@@ -152,44 +159,64 @@ export class AresHandler {
         return true;
     }
 
-    private static isMild(tile: ITile): boolean {
-        if (tile.tileType === TileType.DUST_STORM_MILD || tile.tileType === TileType.EROSION_MILD) {
-            return true;
+    public static hasHazardTile(space: ISpace): boolean {
+        return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
+    }
+
+    public static hazardSeverity(space: ISpace): HazardSeverity {
+        const type = space.tile?.tileType;
+
+        switch(type) {
+        case TileType.DUST_STORM_MILD:
+        case TileType.EROSION_MILD:
+            return HazardSeverity.MILD;
+        case TileType.DUST_STORM_SEVERE:
+        case TileType.EROSION_SEVERE:
+            return HazardSeverity.SEVERE;
+        default:
+            return HazardSeverity.NONE;
         }
-        if (tile.tileType === TileType.DUST_STORM_SEVERE || tile.tileType === TileType.EROSION_SEVERE) {
-            return false;
-        }
-        throw new Error("Not a hazard tile: " + tile.tileType);
     }
 
     private static computeAdjacencyCosts(game: Game, space: ISpace): IAdjacencyCost {
         // Summing up production cost isn't really the way to do it, because each tile could
         // reduce different production costs. Oh well.
-        var megaCreditCost = 0;
-        var productionCost = 0;
+        let megaCreditCost = 0;
+        let productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach(adjacentSpace => {
           megaCreditCost += adjacentSpace.adjacency?.cost || 0;
-          if (adjacentSpace.tile?.hazard === true) {
-            productionCost += this.isMild(adjacentSpace.tile) ? 1 : 2;
-          }
-        });
+          const severity = this.hazardSeverity(adjacentSpace);
+          switch(severity) {
+            case HazardSeverity.MILD:
+                productionCost += 1;
+                break;
+            case HazardSeverity.SEVERE:                  
+                productionCost += 2;
+                break;
+        }});
 
-        if (space.tile?.hazard) {
-            megaCreditCost += AresHandler.isMild(space.tile) ? 8 : 16;
+        const severity = this.hazardSeverity(space);
+        switch(severity) {
+            case HazardSeverity.MILD:
+                megaCreditCost += 8;
+                break;
+            case HazardSeverity.SEVERE:                  
+                megaCreditCost += 16;
+                break;
         }
 
         return { megacredits: megaCreditCost, production: productionCost };
     }
 
-    public static assertCanPay(game: Game, player: Player, space: ISpace, isWorldGov: boolean): IAdjacencyCost {
-        if (isWorldGov) {
+    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+        if (game.phase === Phase.SOLAR) {
             return {megacredits: 0, production: 0 };
         }
-        var cost = AresHandler.computeAdjacencyCosts(game, space);
+        const cost = AresHandler.computeAdjacencyCosts(game, space);
 
         // Make this more sophisticated, a player can pay for different adjacencies
         // with different production units, and, a severe hazard can't split payments.
-        var avaialbleProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
+        const avaialbleProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
             + player.getProduction(Resources.STEEL)
             + player.getProduction(Resources.TITANIUM)
             + player.getProduction(Resources.PLANTS)
@@ -206,9 +233,9 @@ export class AresHandler {
         }
     }
 
-    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace, isWorldGov: boolean) {
+    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
 
-        var cost = this.assertCanPay(game, player, space, isWorldGov);
+        const cost = this.assertCanPay(game, player, space);
 
         if (cost.production > 0) {
             // TODO(kberg): don't send interrupt if total is available.
@@ -238,7 +265,7 @@ export class AresHandler {
     // This feature is part of Ecological Survey and Geological Survey.
     //
     public static beforeTilePlacement(player: Player): Multiset<Resources | ResourceType> {
-      var multiset: Multiset<Resources | ResourceType> = new Multiset();
+      const multiset: Multiset<Resources | ResourceType> = new Multiset();
       if (player.playedCards.find((c) => c.name === CardName.ECOLOGICAL_SURVEY)) {
           multiset.add(Resources.PLANTS, player.getResource(Resources.PLANTS));
           multiset.add(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
@@ -268,7 +295,7 @@ export class AresHandler {
             if (giveBonus(startingResources.get(resource), player.getResource(resource))) {
                 player.setResource(resource, 1);
 
-                var cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
+                const cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
                 game.log("${0} gained a bonus ${1} because of ${2}", b => b.player(player).string(resource).cardName(cardName));
             }
         });
@@ -311,9 +338,9 @@ export class AresHandler {
         );
     }
 
-    public static onOceanPlaced(game: Game, player: Player, isWorldGov: boolean) {
+    public static onOceanPlaced(game: Game, player: Player) {
         testToPlaceErosionTiles(game, player);
-        testToRemoveDustStorms(game, player, isWorldGov);
+        testToRemoveDustStorms(game, player);
     }
 
     public static onOxygenChange(game: Game) {
@@ -328,20 +355,21 @@ export class AresHandler {
             return true;
         }
 
-        // A hazard with a player's token on it used Desperate measures.
-        if (space.tile.hazard && hasDesperateMeasuresMarker(space) === false) {
+        // A hazard protected by the Desperate Measures action can't be covered.
+        if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
             return true;
-        } else if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
+        }
+        if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
             return true;
         }
         return false;
     }
 
-    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined, isWorldGov: boolean) {
-        if (isWorldGov) {
+    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined) {
+        if (game.phase === Phase.SOLAR) {
             return;
         }
-        var steps: number;
+        let steps: number;
         switch (initialTileType) {
             case TileType.DUST_STORM_MILD:
             case TileType.EROSION_MILD:
@@ -361,21 +389,12 @@ export class AresHandler {
     }
 
     public static putHazardAt(space: ISpace, tileType: TileType) {
-        space.player = undefined;
-        space.tile = { tileType: tileType, hazard: true };
+        space.tile = { tileType: tileType, protectedHazard: false };
     }
 }
 
 function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
-    var card = game.dealer.dealCard();
-    game.log("Dealt and discarded ${0} (cost ${1}) to place a hazard", b => b.card(card).number(card.cost));
-
-    var distance = card.cost - 1;
-    distance = Math.max(distance, 0); // Some cards cost zero.
-    var space = game.board.getAvailableSpaceByOffset(distance, direction);
-    if (space === undefined) {
-        throw new Error("Couldn't find space when card cost is " + card.cost);
-    }
+    const space = game.getSpaceByOffset(direction, "hazard");
     AresHandler.putHazardAt(space, tileType);
     return space;
 }
@@ -400,20 +419,20 @@ function testConstraint(constraint: IHazardConstraint, testValue: number, cb: ()
     }
 }
 
-function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean) {
+function testToRemoveDustStorms(game: Game, player: Player) {
     testConstraint(
         game.aresData!.hazardData.removeDustStormsOceanCount,
         game.board.getOceansOnBoard(),
         () => {
             game.board.spaces.forEach((space) => {
                 if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
-                    if (!hasDesperateMeasuresMarker(space)) {
+                    if (space.tile.protectedHazard !== true) {
                         space.tile = undefined;
                     }
                 }
             });
 
-            if (!isWorldGov) {
+            if (game.phase !== Phase.SOLAR) {
                 player.increaseTerraformRating(game);
                 game.log("${0}'s TR increases 1 step for eliminating dust storms.", b => b.player(player));
             }
@@ -431,22 +450,13 @@ function testToPlaceErosionTiles(game: Game, player: Player) {
                 type = TileType.EROSION_SEVERE;
             }
 
-            var space1 = randomlyPlaceHazard(game, type, 1);
-            var space2 = randomlyPlaceHazard(game, type, -1);
+            const space1 = randomlyPlaceHazard(game, type, 1);
+            const space2 = randomlyPlaceHazard(game, type, -1);
             [space1, space2].forEach((space) => {
                 LogHelper.logTilePlacement(game, player, space, type);
             });
         }
     );
-}
-
-function hasDesperateMeasuresMarker(space: ISpace): boolean {
-    if (space.player) {
-      if (space.tile && space.tile.hazard && space.tile.hazard === true) {
-          return true;
-      }
-    }
-    return false;
 }
 
 // TODO(kberg): convert to a log message type

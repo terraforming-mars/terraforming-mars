@@ -16,10 +16,10 @@ describe("DesperateMeasures", function () {
   });
 
   it("play on top of dust storm", function () {
-    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
 
-    var priorTr = player.getTerraformRating();
+    const priorTr = player.getTerraformRating();
 
     card.play(player, game).cb(protectedDustStorm);
 
@@ -33,11 +33,11 @@ describe("DesperateMeasures", function () {
     AresTestHelper.addOcean(game, player);
     AresTestHelper.addOcean(game, player);
 
-    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
     const protectedErosion = tiles.get(TileType.EROSION_MILD)![0];
 
-    var priorTr = player.getTerraformRating();
-    var priorTemp = game.getTemperature();
+    const priorTr = player.getTerraformRating();
+    const priorTemp = game.getTemperature();
 
     card.play(player, game).cb(protectedErosion);
 
@@ -46,7 +46,7 @@ describe("DesperateMeasures", function () {
   });
 
   it("hazard tile with player marker can't be played on", function() {
-    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     expect(game.board.getAvailableSpacesOnLand(player).map(s => s.id)).contains(protectedDustStorm.id);
 

@@ -1,7 +1,7 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Game } from "../../Game";
 import { LogHelper } from "../../components/LogHelper";
@@ -15,6 +15,7 @@ export class ProjectWorkshop implements CorporationCard {
     public name: CardName =  CardName.PROJECT_WORKSHOP;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 39;
+    public cardType: CardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.steel = 1;

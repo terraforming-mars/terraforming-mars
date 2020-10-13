@@ -24,6 +24,10 @@ describe("SymbioticFungus", function () {
         expect(card.canPlay(player, game)).to.eq(true);
     });
 
+    it("Can act without targets", function () {
+        expect(card.canAct()).to.eq(true);
+    });
+
     it("Should act - single target", function () {
         player.playedCards.push(new Ants());
         card.action(player, game);

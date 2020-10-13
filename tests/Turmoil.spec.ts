@@ -134,7 +134,7 @@ describe("Turmoil", function () {
 
     it("Does not give Mars First bonus for World Government terraforming", function () {
         turmoil.rulingParty = new MarsFirst();
-        game.phase = Phase.ACTION;
+        game.phase = Phase.SOLAR;
 
         player.worldGovernmentTerraforming(game);
         const action = player.getWaitingFor() as OrOptions;

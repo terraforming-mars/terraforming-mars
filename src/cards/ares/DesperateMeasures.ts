@@ -7,6 +7,7 @@ import { Tags } from "../Tags";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
+import { AresHandler } from "../../ares/AresHandler";
 
 export class DesperateMeasures implements IProjectCard {
     public cost: number = 1;
@@ -15,7 +16,7 @@ export class DesperateMeasures implements IProjectCard {
     public name: CardName = CardName.DESPERATE_MEASURES;
 
     private getHazardTiles(game: Game) {
-      return game.board.spaces.filter(space => space.tile?.hazard === true);
+      return game.board.spaces.filter(space => AresHandler.hasHazardTile(space));
     }
 
     public canPlay(_player: Player, game: Game): boolean {
@@ -24,9 +25,9 @@ export class DesperateMeasures implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      return new SelectSpace("Select a hazard space to own", this.getHazardTiles(game), (space: ISpace) => {
-        space.player = player;
-        var tileType = space.tile!.tileType;
+      return new SelectSpace("Select a hazard space to protect", this.getHazardTiles(game), (space: ISpace) => {
+        space.tile!.protectedHazard = true;
+        const tileType = space.tile!.tileType;
         if (TileType.DUST_STORM_MILD  === tileType || TileType.DUST_STORM_SEVERE === tileType) {
           game.increaseOxygenLevel(player, 1);
         } else {

@@ -43,7 +43,7 @@ export const Board = Vue.component("board", {
             return boardSpaces.filter((s: SpaceModel) => {return s.spaceType !== SpaceType.COLONY})
         },
         getSpaceById: function (spaceId: string) {
-            for (let space of this.spaces) {
+            for (const space of this.spaces) {
                 if (space.id === spaceId) {
                     return space
                 }
@@ -51,12 +51,12 @@ export const Board = Vue.component("board", {
             throw "Board space not found by id '" + spaceId + "'"
         },
         getValuesForParameter: function (targetParameter: string): Array<GlobalParamLevel> {
-            let values: Array<GlobalParamLevel> = [];
-            var startValue: number;
-            var endValue: number;
-            var step: number;
-            var curValue: number;
-            var strValue: string;
+            const values: Array<GlobalParamLevel> = [];
+            let startValue: number;
+            let endValue: number;
+            let step: number;
+            let curValue: number;
+            let strValue: string;
 
             switch (targetParameter) {
                 case "oxygen":
@@ -165,7 +165,7 @@ export const Board = Vue.component("board", {
                         <tspan dy="15">Pavonis</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
-                </g>
+                </g>pla
                 
                 <g v-if="boardName === 'tharsis'" id="arsia_mons" transform="translate(77, 275)">
                     <text class="board-caption">

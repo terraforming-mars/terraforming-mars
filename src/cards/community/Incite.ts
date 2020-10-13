@@ -1,14 +1,17 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CardName } from '../../CardName';
 import { Game } from "../../Game";
 import { SelectParty } from "../../interrupts/SelectParty";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+
 
 export class Incite implements CorporationCard {
     public name: CardName =  CardName.INCITE;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public startingMegaCredits: number = 32;
+    public cardType: CardType = CardType.CORPORATION;
 
     public play(player: Player, game: Game) {
         if (game.turmoil) game.turmoil.addInfluenceBonus(player);

@@ -7,11 +7,15 @@ import { Resources } from "../../Resources";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+
 
 export class Factorum implements IActionCard, CorporationCard {
     public name: CardName = CardName.FACTORUM;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public startingMegaCredits: number = 37;
+    public cardType: CardType = CardType.CORPORATION;
+
 
     public play(player: Player) {
         player.addProduction(Resources.STEEL);

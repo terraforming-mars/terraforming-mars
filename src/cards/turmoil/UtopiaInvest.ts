@@ -6,11 +6,13 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class UtopiaInvest implements IActionCard, CorporationCard {
     public name: CardName = CardName.UTOPIA_INVEST;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
+    public cardType: CardType = CardType.CORPORATION;
     public play(player: Player) {
         player.addProduction(Resources.STEEL);
         player.addProduction(Resources.TITANIUM);

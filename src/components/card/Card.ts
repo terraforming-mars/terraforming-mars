@@ -13,6 +13,7 @@ import { CardExtraContent } from "./CardExtraContent";
 import { CardExpansion } from "./CardExpansion";
 import { CardTags } from "./CardTags";
 import { CardType } from "../../cards/CardType";
+import { Tags } from "../../cards/Tags";
 import {
     ALL_CARD_MANIFESTS,
     ALL_CORPORATION_DECKS,
@@ -110,8 +111,18 @@ export const Card = Vue.component("card", {
                 getCorporationCardByName(this.card.name)
             );
         },
-        getTags: function (): Array<String> | undefined {
-            return this.getCard()?.tags;
+        getTags: function (): Array<string> {
+            let result: Array<string> = [];
+            const type = this.getCardType();
+            const tags = this.getCard()?.tags;
+            if (tags !== undefined) {
+                result = result.concat(tags);
+            }
+            if (type === CardType.EVENT) {
+                result.push(Tags.EVENT);
+            }
+
+            return result;
         },
         getCost: function (): number | undefined {
             const cost = this.getCard()?.cost;

@@ -10,12 +10,12 @@ export class AresCardHelper {
         space.tile!.tileType = TileType.MINING_STEEL_BONUS;
         break;
 
-    case SpaceBonus.TITANIUM:
-      space.tile!.tileType = TileType.MINING_TITANIUM_BONUS;
-      break;
+      case SpaceBonus.TITANIUM:
+          space.tile!.tileType = TileType.MINING_TITANIUM_BONUS;
+          break;
 
-    default:
-      throw new Error("Bad space bonus type for an Ares mining tile " + bonusType);
+      default:
+          throw new Error("Bad space bonus type for an Ares mining tile " + bonusType);
     }
   }
 }

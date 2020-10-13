@@ -393,15 +393,7 @@ export class AresHandler {
 }
 
 function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
-    const card = game.dealer.dealCard();
-    game.log("Dealt and discarded ${0} (cost ${1}) to place a hazard", b => b.card(card).number(card.cost));
-
-    let distance = card.cost - 1;
-    distance = Math.max(distance, 0); // Some cards cost zero.
-    const space = game.board.getAvailableSpaceByOffset(distance, direction);
-    if (space === undefined) {
-        throw new Error("Couldn't find space when card cost is " + card.cost);
-    }
+    const space = game.getSpaceByOffset(direction, "hazard");
     AresHandler.putHazardAt(space, tileType);
     return space;
 }

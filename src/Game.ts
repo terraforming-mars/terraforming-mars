@@ -1786,7 +1786,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const neutral = new Player("neutral", Color.NEUTRAL, true, 0);
 
       function placeCityAndForest(game: Game, direction: -1 | 1) {
-        const space1 = game.getSpaceByOffset(direction);
+        const space1 = game.getSpaceByOffset(direction, "city");
         game.addCityTile(neutral, space1.id, SpaceType.LAND);
         const fspace1 = game.board.getForestSpace(
             game.board.getAdjacentSpaces(space1)

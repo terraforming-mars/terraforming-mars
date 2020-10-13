@@ -1,16 +1,15 @@
 import { Player } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { PartyName } from "./PartyName";
 import { SpaceType } from "../../SpaceType";
 import { Phase } from "../../Phase";
 import { Resources } from "../../Resources";
 
 export class PartyHooks {
-    static applyMarsFirstRulingPolicy(game: Game, player: Player, spaceType: SpaceType, isWorldGov: boolean) {
+    static applyMarsFirstRulingPolicy(game: Game, player: Player, spaceType: SpaceType) {
         if (this.shouldApplyPolicy(game, PartyName.MARS)
         && spaceType !== SpaceType.COLONY
-        && game.phase === Phase.ACTION
-        && !isWorldGov) {
+        && game.phase === Phase.ACTION) {
           player.setResource(Resources.STEEL, 1);
         }
     }

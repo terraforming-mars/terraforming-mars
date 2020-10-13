@@ -7,6 +7,7 @@ import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
 import { Resources } from "../../../src/Resources";
 import { MiningRightsAres } from "../../../src/cards/ares/MiningRightsAres";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("MiningRightsAres", function () {
     let card : MiningRightsAres, player : Player, game : Game;
@@ -14,7 +15,7 @@ describe("MiningRightsAres", function () {
     beforeEach(function() {
         card = new MiningRightsAres();
         player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
+        game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     });
 
     it("Should play", function () {
@@ -22,7 +23,7 @@ describe("MiningRightsAres", function () {
         expect(action instanceof SelectSpace).to.eq(true);
 
         const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
-        expect(titaniumSpace).not.to.eq(undefined);
+        expect(titaniumSpace).is.not.undefined;
         action.cb(titaniumSpace!);
         expect(titaniumSpace!.player).to.eq(player);
         expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
@@ -30,7 +31,7 @@ describe("MiningRightsAres", function () {
         expect(titaniumSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
 
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
-        expect(steelSpace).not.to.eq(undefined);
+        expect(steelSpace).is.not.undefined;
         action.cb(steelSpace!);
         expect(steelSpace!.player).to.eq(player);
         expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_STEEL_BONUS);

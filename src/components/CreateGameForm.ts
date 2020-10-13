@@ -413,6 +413,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
                             <label for="ares-checkbox">
+                                <div class="create-game-expansion-icon ares-icon"></div>
                                 <span v-i18n>Ares</span>&nbsp;<a href="https://boardgamegeek.com/thread/2218211/tm-ares-fan-expansion-more-interaction-map-mars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 

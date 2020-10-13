@@ -68,6 +68,8 @@ export function getCardExpansionByName(cardName: string): string {
             return CorporationGroup.TURMOIL;
         case GameModule.Community:
             return CorporationGroup.COMMUNITY;
+        case GameModule.Ares:
+            return CorporationGroup.ARES;
         default:
             throw new Error(`unknown module ${module} for card ${cardName}`);
     }

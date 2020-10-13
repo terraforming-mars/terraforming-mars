@@ -983,7 +983,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
           new SelectOption("Increase temperature", "Increase", () => {
-            game.increaseTemperature(this,1, true);
+            game.increaseTemperature(this, 1);
             game.log("${0} acted as World Government and increased temperature", b => b.player(this));
             return undefined;
           })
@@ -992,7 +992,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
         action.options.push(
           new SelectOption("Increase oxygen", "Increase", () => {
-            game.increaseOxygenLevel(this,1, true);
+            game.increaseOxygenLevel(this, 1);
             game.log("${0} acted as World Government and increased oxygen level", b => b.player(this));
             return undefined;
           })
@@ -1003,7 +1003,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           new SelectSpace(
             "Add an ocean",
             game.board.getAvailableSpacesForOcean(this), (space) => {
-              game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
+              game.addOceanTile(this, space.id, SpaceType.OCEAN);
               game.log("${0} acted as World Government and placed an ocean", b => b.player(this));
               return undefined;
             }
@@ -1013,7 +1013,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
         action.options.push(
           new SelectOption("Increase Venus scale", "Increase", () => {
-            game.increaseVenusScaleLevel(this,1, true);
+            game.increaseVenusScaleLevel(this, 1);
             game.log("${0} acted as World Government and increased Venus scale", b => b.player(this));
             return undefined;
           })

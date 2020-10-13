@@ -465,7 +465,7 @@ export enum CardName {
     BUTTERFLY_EFFECT = "ButterflyEffect",
     CAPITAL_ARES = "Capital:ares",
     COMMERCIAL_DISTRICT_ARES = "Commercial District:ares",
-    DESPERATE_MEASURES = "DesperateMeasures",
+    DESPERATE_MEASURES = "Desperate Measures",
     ECOLOGICAL_SURVEY = "Ecological Survey",
     ECOLOGICAL_ZONE_ARES = "Ecological Zone:ares",
     GEOLOGICAL_SURVEY = "Geological Survey",

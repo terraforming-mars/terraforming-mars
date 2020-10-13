@@ -12,7 +12,7 @@ export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
             player,
             game.aresData!,
             (response: IAresGlobalParametersResponse) => {
-                var hazardData = game.aresData!.hazardData;
+                const hazardData = game.aresData!.hazardData;
                 if (hazardData.erosionOceanCount.available) {
                     hazardData.erosionOceanCount.threshold += response.lowOceanDelta;
                 }
@@ -36,7 +36,7 @@ export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
                     AresHandler.onOxygenChange(game);
                 }
                 if (response.lowOceanDelta !== 0 || response.highOceanDelta !== 0) {
-                    AresHandler.onOceanPlaced(game, player, false);
+                    AresHandler.onOceanPlaced(game, player);
                 }
                 return undefined;
             });

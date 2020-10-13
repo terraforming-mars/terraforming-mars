@@ -19,6 +19,7 @@ import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionT
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
+import { Phase } from "../Phase";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -207,8 +208,8 @@ export class AresHandler {
         return { megacredits: megaCreditCost, production: productionCost };
     }
 
-    public static assertCanPay(game: Game, player: Player, space: ISpace, isWorldGov: boolean): IAdjacencyCost {
-        if (isWorldGov) {
+    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+        if (game.phase === Phase.SOLAR) {
             return {megacredits: 0, production: 0 };
         }
         const cost = AresHandler.computeAdjacencyCosts(game, space);
@@ -232,9 +233,9 @@ export class AresHandler {
         }
     }
 
-    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace, isWorldGov: boolean) {
+    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
 
-        const cost = this.assertCanPay(game, player, space, isWorldGov);
+        const cost = this.assertCanPay(game, player, space);
 
         if (cost.production > 0) {
             // TODO(kberg): don't send interrupt if total is available.
@@ -337,9 +338,9 @@ export class AresHandler {
         );
     }
 
-    public static onOceanPlaced(game: Game, player: Player, isWorldGov: boolean) {
+    public static onOceanPlaced(game: Game, player: Player) {
         testToPlaceErosionTiles(game, player);
-        testToRemoveDustStorms(game, player, isWorldGov);
+        testToRemoveDustStorms(game, player);
     }
 
     public static onOxygenChange(game: Game) {
@@ -364,8 +365,8 @@ export class AresHandler {
         return false;
     }
 
-    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined, isWorldGov: boolean) {
-        if (isWorldGov) {
+    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined) {
+        if (game.phase === Phase.SOLAR) {
             return;
         }
         let steps: number;
@@ -393,15 +394,7 @@ export class AresHandler {
 }
 
 function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
-    const card = game.dealer.dealCard();
-    game.log("Dealt and discarded ${0} (cost ${1}) to place a hazard", b => b.card(card).number(card.cost));
-
-    let distance = card.cost - 1;
-    distance = Math.max(distance, 0); // Some cards cost zero.
-    const space = game.board.getAvailableSpaceByOffset(distance, direction);
-    if (space === undefined) {
-        throw new Error("Couldn't find space when card cost is " + card.cost);
-    }
+    const space = game.getSpaceByOffset(direction, "hazard");
     AresHandler.putHazardAt(space, tileType);
     return space;
 }
@@ -426,7 +419,7 @@ function testConstraint(constraint: IHazardConstraint, testValue: number, cb: ()
     }
 }
 
-function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean) {
+function testToRemoveDustStorms(game: Game, player: Player) {
     testConstraint(
         game.aresData!.hazardData.removeDustStormsOceanCount,
         game.board.getOceansOnBoard(),
@@ -439,7 +432,7 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
                 }
             });
 
-            if (!isWorldGov) {
+            if (game.phase !== Phase.SOLAR) {
                 player.increaseTerraformRating(game);
                 game.log("${0}'s TR increases 1 step for eliminating dust storms.", b => b.player(player));
             }

@@ -6,6 +6,7 @@ import { TileType } from "../../../src/TileType";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { NaturalPreserveAres } from "../../../src/cards/ares/NaturalPreserveAres";
 import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("NaturalPreserveAres", function () {
     let card : NaturalPreserveAres, player : Player, game : Game;
@@ -13,13 +14,13 @@ describe("NaturalPreserveAres", function () {
     beforeEach(function() {
         card = new NaturalPreserveAres();
         player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
+        game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     });
 
     it("Should play", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         expect(action instanceof SelectSpace).to.eq(true);
 
         const space = action.availableSpaces[0];

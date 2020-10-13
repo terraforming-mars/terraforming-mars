@@ -2,6 +2,7 @@ import { CardName } from "./CardName";
 import { COLONIES_CARD_MANIFEST } from "./cards/colonies/ColoniesCardManifest";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { IProjectCard } from "./cards/IProjectCard";
+import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 import { PRELUDE_CARD_MANIFEST } from "./cards/prelude/PreludeCardManifest";
 import { PROMO_CARD_MANIFEST } from "./cards/promo/PromoCardManifest";
 import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "./cards/StandardCardManifests";
@@ -14,7 +15,6 @@ import { CardManifest } from "./cards/CardManifest";
 import { ICardFactory } from "./cards/ICardFactory";
 import { Deck } from "./Deck";
 import { Expansion } from "./Expansion";
-import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 
 export const decks: Array<CardManifest> = [
     BASE_CARD_MANIFEST,
@@ -143,6 +143,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
         this.deck = this.shuffleCards(filteredDeck);
+
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards(preludeDeck);
         }

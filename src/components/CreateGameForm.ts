@@ -237,6 +237,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const customColoniesList = component.customColoniesList;
             const cardsBlackList = component.cardsBlackList;
             const board =  component.board;
+            console.log("USING " + board + " FOR THE BOARD");
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const communityCardsOption = component.communityCardsOption;
@@ -248,6 +249,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const soloTR = component.soloTR;
             let clonedGamedId: undefined | string = undefined;
 
+            if (1 === 1) {
+                alert("CHANGED IT");
+                return;
+            }
             if (customColoniesList.length > 0) {
                 let playersCount = players.length;
                 let neededColoniesCount = playersCount + 2;

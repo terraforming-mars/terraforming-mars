@@ -751,7 +751,7 @@ function getCards(
 
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
     const turmoil = getTurmoil(game);
-
+    console.log(game.gameOptions.boardName);
     return players.map((player) => {
         return {
             color: player.color,

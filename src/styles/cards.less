@@ -563,9 +563,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-weight: normal;
     font-size: 15px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
-    background-image: url(./assets/requisites/min_big.png);
-    background-size: 180px 38px;
-    background-position: -15px -6px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
     font-family: Ubuntu;
     font-weight: bold;
 }
@@ -850,9 +848,7 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-right: 5px;
     border-radius: 5px;
     height: 20px;
-    background-image: url(./assets/requisites/min_big.png);
-    background-size: 180px 60px;
-    background-position: -16px -9px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
     filter: drop-shadow(0px 0px 1px black);
 }
 
@@ -1757,7 +1753,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-weight: bold;
     letter-spacing: 4px;
     text-align: center;
-    margin: 0 0 40px -20px;
+    margin: -20px 0 40px -20px;
     font-size: 50px;
     position: relative;
     top: 10px;
@@ -1891,7 +1887,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .card-crash-site-cleanup {
     .requirements {
-        height: 40px;
+        margin-top: 10px;
+        .crash-site-minus-plant{
+            margin-top: -10px;
+        }
     }
 }
 
@@ -1976,6 +1975,13 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-red-spot-observatory {
     .description.bottom {
         text-align: left;
+    }
+}
+
+.card-nuclear-zone {
+    .tile.special-tile {
+        font-size:28px;
+        line-height:50px;
     }
 }
 
@@ -2266,6 +2272,34 @@ input[type="radio"]:checked + .filterDiv::after {
     .content .first {
         margin-left: 30px;
     }
+}
+
+.card-open-city {
+    .description {
+        margin-top:10px;
+        font-size:11px;
+        text-align: left;
+        width: 125px;
+    }
+
+    .production-box.production-box-size1a {
+        margin-bottom:5px;
+    }
+
+    .tile.city-tile {
+        margin-left:20px;
+        margin-bottom:5px;
+    }
+}
+
+.card-mons-insurance {
+    .corp-effect-box.production-box {
+        width:50px;
+        margin-left:-2px;
+        height: 35px;
+    }
+
+  .corp-effect { margin-top: 3px; }
 }
 
 .card-sky-docks {

@@ -1007,7 +1007,13 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         file = "favicon.ico";
     } else if (req.url === "/main.js" || req.url === "/main.js.map") {
         res.setHeader("Content-Type", "text/javascript");
-        file = "dist" + req.url;
+        const acceptEncoding = req.headers["accept-encoding"];
+        let suffix = "";
+        if (acceptEncoding !== undefined && acceptEncoding.includes("gzip")) {
+            res.setHeader("Content-Encoding", "gzip");
+            suffix = ".gz";
+        }
+        file = `dist${req.url}${suffix}`;
     } else if (req.url === "/assets/Prototype.ttf") {
         file = "assets/Prototype.ttf";
     } else if (req.url === "/assets/futureforces.ttf") {

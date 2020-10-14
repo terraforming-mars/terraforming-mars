@@ -9,6 +9,7 @@ import { ColoniesFilter } from "./ColoniesFilter";
 import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
 import { Button } from "../components/common/Button";
+import { playerColorClass } from "../utils/utils";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -21,6 +22,7 @@ interface CreateGameModel {
     randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
+    beginnerOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
@@ -77,6 +79,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
+            beginnerOption: false,
             venusNext: false,
             colonies: false,
             showColoniesList: false,
@@ -168,14 +171,20 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         getBoardColorClass: function(boardName: string): string {
             if (boardName === BoardName.ORIGINAL){
-                return "create-game-tharsis";
+                return "create-game-board-hexagon create-game-tharsis";
             } else if (boardName === BoardName.HELLAS) {
-                return "create-game-hellas";
+                return "create-game-board-hexagon create-game-hellas";
             } else if (boardName === BoardName.ELYSIUM) {
-                return "create-game-elysium";
+                return "create-game-board-hexagon create-game-elysium";
             } else {
-                return "create-game-random";
+                return "create-game-board-hexagon create-game-random";
             }
+        },
+        getPlayerCubeColorClass: function(color: string): string{
+            return playerColorClass(color.toLowerCase(), "bg");
+        },
+        getPlayerContainerColorClass: function(color: string): string{
+            return playerColorClass(color.toLowerCase(), "bg_transparent");
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
@@ -352,7 +361,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                     <div class="create-game-page-container">
                         <div class="create-game-page-column" v-if="! isSoloModePage">
-                            <h4 v-i18n># of Players</h4>
+                            <h4 v-i18n>№ of Players</h4>
                                 <template v-for="pCount in [1,2,3,4,5,6]">
                                     <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                     <label :for="pCount+'-radio'">
@@ -407,8 +416,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <div class="create-game-subsection-label">Fan-made</div>
 
-                            <input type="checkbox" name="fan-made" id="fan-made-checkbox" v-model="communityCardsOption">
-                            <label for="fan-made-checkbox">
+                            <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
+                            <label for="communityCards-checkbox">
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
@@ -538,6 +547,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label for="fastMode-checkbox">
                                 <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
+                            <label for="beginnerOption-checkbox">
+                                <span v-i18n>Beginner Options</span>
+                            </label>
                         </div>
 
                         <div class="create-game-action">
@@ -551,29 +565,31 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2 v-i18n>Players</h2>
                 <div class="container">
                     <div class="columns">
-                        <div class="form-group col6 create-game-player create-game--block" v-for="newPlayer in getPlayers()">
+                        <template v-for="newPlayer in getPlayers()">
+                        <div :class="'form-group col6 create-game-player create-game--block '+getPlayerContainerColorClass(newPlayer.color)">
                             <div>
                                 <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                             </div>
-                            <div class="flex">
-                                <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
-                                <span class="create-game-colors-cont">
-                                <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
-                                    <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                    <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
-                                </label>
-                                </span>
+                            <div class="create-game-page-color-row">
+                                <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                                    <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
+                                    <label :for="'radioBox' + color + newPlayer.index">
+                                        <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
+                                    </label>
+                                </template>
                             </div>
                             <div>
-                                <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline">
-                                    <input type="checkbox" v-model="newPlayer.beginner">
-                                    <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
-                                </label>
+                                <template v-if="beginnerOption">
+                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
+                                        <input type="checkbox" v-model="newPlayer.beginner">
+                                        <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
+                                    </label>
 
-                                <label class="form-label">
-                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
-                                    <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
-                                </label>
+                                    <label class="form-label">
+                                        <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
+                                        <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
+                                    </label>
+                                </template>
 
                                 <label class="form-radio form-inline" v-if="!randomFirstPlayer">
                                     <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
@@ -581,6 +597,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 </label>
                             </div>
                         </div>
+                        </template>
                     </div>
                 </div>
             </div>

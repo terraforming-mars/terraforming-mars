@@ -106,14 +106,7 @@ h2 {
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 }
-/*
-input[type="radio"]:checked + label {
-    border: 2px solid rgb(137, 137, 137);
-    box-shadow: inset 0 0 0 3px rgb(68, 68, 68);
-    filter: brightness(120%) drop-shadow(0 0 5px white);
-    transform: translate(0, 2px);
-}
-*/
+
 .filterDiv {
     font-size: 17px !important;
 }
@@ -133,6 +126,56 @@ input[type="radio"]:checked + label {
 
 .mt-10 {
     margin-top: 10px;
+}
+
+// normal backgrounds
+.player_bg_color_red {
+    background-color: @player_red;
+}
+
+.player_bg_color_yellow {
+    background-color: @player_yellow;
+}
+
+.player_bg_color_green {
+    background-color: @player_green;
+}
+
+.player_bg_color_black {
+    background-color: @player_black;
+}
+
+.player_bg_color_blue {
+    background-color: @player_blue;
+}
+
+.player_bg_color_purple {
+    background-color: @player_purple;
+}
+
+// backgroungs with opacity
+.player_translucent_bg_color_red {
+    .player_red_bg_translucent();
+}
+
+.player_translucent_bg_color_yellow {
+    .player_yellow_bg_translucent();
+}
+
+.player_translucent_bg_color_green {
+    .player_green_bg_translucent();
+}
+
+.player_translucent_bg_color_black {
+    .player_black_bg_translucent();
+}
+
+.player_translucent_bg_color_blue {
+    .player_blue_bg_translucent();
+}
+
+.player_translucent_bg_color_purple {
+    .player_purple_bg_translucent();
 }
 
 @import "./language_switcher.less";

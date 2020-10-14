@@ -105,14 +105,6 @@ export abstract class Board {
         return this.spaces.filter((space) => space.tile === undefined);
     }
 
-    // If direction is 1, count from the top left. If -1, count from the other end of the map.
-    public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
-        // By doing an additional filter on space.tile, it skips over hazards.
-        const spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
-        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
-        return spaces[idx];
-    }
-
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
         return this.getAvailableSpacesOnLand(player).filter(
@@ -188,7 +180,9 @@ export abstract class Board {
         const spaces = this.spaces.filter((space) => {
             return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
         }).filter(predicate);
-        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        while (idx < 0) { idx += spaces.length; }
+        while (idx >= spaces.length) { idx -= spaces.length; }
         return spaces[idx];
     }
     

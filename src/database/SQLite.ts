@@ -102,13 +102,14 @@ export class SQLite implements IDatabase {
             return console.warn(err.message);  
             }
         });
-        // Purge unfinished games older than 10 days
-        this.db.run("DELETE FROM games WHERE created_time < strftime('%s',date('now', '-10 day')) and status = 'running'", function(err: { message: any; }) {
-            if (err) {
-            return console.warn(err.message);  
-            }
-        });        
-
+        // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
+        if (process.env.MAX_GAME_DAYS) {
+            this.db.run("DELETE FROM games WHERE created_time < strftime('%s',date('now', '-? day')) and status = 'running'", [process.env.MAX_GAME_DAYS], function(err: { message: any; }) {
+                if (err) {
+                return console.warn(err.message);  
+                }
+            });  
+        }
     }
 
     restoreGame(game_id: string, save_id: number, game: Game): void {

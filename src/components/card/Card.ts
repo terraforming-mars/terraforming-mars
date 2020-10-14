@@ -16,12 +16,7 @@ import { CardType } from "../../cards/CardType";
 import { CardContent } from "./CardContent";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { Tags } from "../../cards/Tags";
-import {
-    ALL_CARD_MANIFESTS,
-    ALL_CORPORATION_DECKS,
-    ALL_PRELUDE_DECKS,
-    ALL_PROJECT_DECKS,
-} from "../../cards/AllCards";
+import { ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, ALL_PRELUDE_DECKS, ALL_PROJECT_DECKS } from "../../cards/AllCards";
 import { Deck, Decks } from "../../Deck";
 import { GameModule } from "../../GameModule";
 
@@ -32,22 +27,13 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
     return Decks.findByName(ALL_CORPORATION_DECKS, cardName);
 }
 
-export function getProjectCardByName(
-    cardName: string
-): IProjectCard | undefined {
-    return Decks.findByName(
-        ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS),
-        cardName
-    );
+export function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    return Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), cardName);
 }
 
 export function getCardExpansionByName(cardName: string): string {
     const manifest = ALL_CARD_MANIFESTS.find((manifest) => {
-        const decks: Array<Deck<any>> = [
-            manifest.corporationCards,
-            manifest.projectCards,
-            manifest.preludeCards,
-        ];
+        const decks: Array<Deck<any>> = [manifest.corporationCards, manifest.projectCards, manifest.preludeCards];
         return Decks.findByName(decks, cardName);
     });
 
@@ -109,10 +95,7 @@ export const Card = Vue.component("card", {
             return getCardExpansionByName(this.card.name);
         },
         getCard: function (): ICard | undefined {
-            return (
-                getProjectCardByName(this.card.name) ||
-                getCorporationCardByName(this.card.name)
-            );
+            return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
         },
         getTags: function (): Array<string> {
             let result: Array<string> = [];
@@ -130,9 +113,7 @@ export const Card = Vue.component("card", {
         getCost: function (): number | undefined {
             const cost = this.getCard()?.cost;
             const type = this.getCardType();
-            return cost === undefined || type === CardType.PRELUDE
-                ? undefined
-                : cost;
+            return cost === undefined || type === CardType.PRELUDE ? undefined : cost;
         },
         getCardType: function (): CardType | undefined {
             return this.getCard()?.cardType;

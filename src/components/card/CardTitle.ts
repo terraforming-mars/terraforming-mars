@@ -10,8 +10,7 @@ export const CardTitle = Vue.component("CardTitle", {
         type: {
             type: String,
             required: true,
-            validator: (card: CardType) =>
-                Object.values(CardType).includes(card),
+            validator: (card: CardType) => Object.values(CardType).includes(card),
         },
     },
     methods: {
@@ -47,7 +46,7 @@ export const CardTitle = Vue.component("CardTitle", {
         getCardTitleWithoutPromoText(title: string): string {
             if (title.toLowerCase().includes("promo")) return title.substring(0, title.length - 6);
             return title;
-        }
+        },
     },
     template: `
         <div class="card-title">

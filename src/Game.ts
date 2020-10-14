@@ -62,10 +62,6 @@ import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { IAresData } from "./ares/IAresData";
 import { LogBuilder } from "./LogBuilder";
-import { MiningAreaAres } from "./cards/ares/MiningAreaAres";
-import { LandClaim } from "./cards/LandClaim";
-import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
-import { MiningRightsAres } from "./cards/ares/MiningRightsAres";
 
 export interface Score {
   corporation: String;
@@ -329,15 +325,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.playerHasPickedCorporationCard(player, new BeginnerCorporation() );
         }
       }
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
-      players[0].dealtProjectCards.pop();
 
-      players[0].dealtProjectCards.push(new MiningAreaAres());
-      players[0].dealtProjectCards.push(new MiningRightsAres());
-      players[0].dealtProjectCards.push(new LandClaim());
-      players[0].dealtProjectCards.push(new DesperateMeasures());
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 

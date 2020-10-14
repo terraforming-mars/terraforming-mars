@@ -7,10 +7,10 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { TileType } from "../../TileType";
 import { CardType } from "../CardType";
-import { IResourceCard, IActionCard } from "../ICard";
+import { IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 
-export class OceanSanctuary implements IActionCard, IResourceCard {
+export class OceanSanctuary implements IResourceCard {
   public cost: number = 9;
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public resourceCount: number = 0;
@@ -27,6 +27,7 @@ export class OceanSanctuary implements IActionCard, IResourceCard {
   }
 
   public play(player: Player, game: Game) {
+    this.resourceCount++;
     return new SelectSpace(
       "Select space for Ocean Sanctuary",
       game.board.getOceansTiles(false),
@@ -38,14 +39,5 @@ export class OceanSanctuary implements IActionCard, IResourceCard {
           space.adjacency = {bonus: [AresSpaceBonus.ANIMAL]};
           return undefined;
         });
-  }
-
-  public canAct(_player: Player, _game: Game) {
-    return true;
-  } 
-
-  public action(_player: Player, _game: Game) {
-    this.resourceCount++;
-    return undefined;
   }
 }

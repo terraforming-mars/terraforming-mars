@@ -1,15 +1,15 @@
 import { RequirementType } from "./RequirementType";
 
 export class CardRequirement {
-    type: RequirementType;
-    amount: number;
+    type: RequirementType | undefined;
+    amount: number = 0;
     isMax?: boolean = false;
-
+    /* 
     constructor(type: RequirementType, amount: number, isMax: boolean) {
         this.type = type;
         this.amount = amount;
         this.isMax = isMax;
-    }
+    } */
 
     private toString(): string {
         if (this.type === RequirementType.OXYGEN) {
@@ -26,5 +26,22 @@ export class CardRequirement {
         const parsedAmount = this.toString();
 
         return `${prefix} ${parsedAmount} ${this.type}`;
+    }
+
+    public oceans(value: number): CardRequirement {
+        this.type = RequirementType.OCEANS;
+        this.amount = value;
+        return this;
+    }
+
+    public science(value: number): CardRequirement {
+        this.type = RequirementType.TAG_SCIENCE;
+        this.amount = value;
+        return this;
+    }
+
+    public max(): CardRequirement {
+        this.isMax = true;
+        return this;
     }
 }

@@ -6,6 +6,15 @@ export class CardRequirements {
         this.requirements = reqs;
     }
 
+    public static create(f: (r: CardRequirement) => void): CardRequirements {
+        const result: Array<CardRequirement> = [];
+        const requirement = new CardRequirement();
+        f(requirement);
+        result.push(requirement);
+
+        return new CardRequirements(result);
+    }
+
     public getRequirementsText(): string {
         const reqTexts: Array<string> = this.requirements.map((req) => req.getRequirementText());
         return reqTexts.join(" ");

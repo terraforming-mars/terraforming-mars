@@ -63,4 +63,21 @@ describe("Board", function () {
         expect(board.getNthAvailableLandSpace(2, -1).id).eq("60");
         expect(board.getNthAvailableLandSpace(3, -1).id).eq("59");
     });
+
+    // This happens with the Ares expansion and cards come out mid-game
+    // after the board is already populated. Though, here, the high
+    // card costs substitite for a heavily-populated board.
+    it("getNthAvailableLandSpace with a large card", function() {
+        expect(board.getNthAvailableLandSpace(46, 1).id).eq("61");
+        expect(board.getNthAvailableLandSpace(47, 1).id).eq("62");
+        expect(board.getNthAvailableLandSpace(48, 1).id).eq("03");
+        expect(board.getNthAvailableLandSpace(49, 1).id).eq("05");
+        expect(board.getNthAvailableLandSpace(50, 1).id).eq("08");
+
+        expect(board.getNthAvailableLandSpace(46, -1).id).eq("05");
+        expect(board.getNthAvailableLandSpace(47, -1).id).eq("03");
+        expect(board.getNthAvailableLandSpace(48, -1).id).eq("62");
+        expect(board.getNthAvailableLandSpace(49, -1).id).eq("61");
+        expect(board.getNthAvailableLandSpace(50, -1).id).eq("60");
+    });
 });

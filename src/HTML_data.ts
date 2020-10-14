@@ -5744,6 +5744,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.GEOLOGICAL_SURVEY,`
+    <div class="card-number">A06</div>
     <div class="content ">
         <div class="requirements ">Max 5 Forests</div>
         <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource steel "></div><div class="resource titanium "></div><div class="resource heat "></div><br/>

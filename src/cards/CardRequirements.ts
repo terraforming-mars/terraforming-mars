@@ -7,9 +7,7 @@ export class CardRequirements {
     }
 
     public getRequirementsText(): string {
-        const reqTexts: Array<string> = this.requirements.map((req) =>
-            req.getReqText()
-        );
+        const reqTexts: Array<string> = this.requirements.map((req) => req.getRequirementText());
         return reqTexts.join(" ");
     }
     public hasMax(): boolean {

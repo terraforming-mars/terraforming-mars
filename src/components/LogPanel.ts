@@ -44,7 +44,7 @@ export const LogPanel = Vue.component("log-panel", {
             if (className === undefined) {
                 return suffixFreeCardName;
             } else {
-                return "<log-card class=\""+ className + "\">"+suffixFreeCardName+"</log-card>";
+                return "<log-card class=\""+ className + "\">" + suffixFreeCardName + "</log-card>";
             }
         },
         parseData: function(data: LogMessageData) {

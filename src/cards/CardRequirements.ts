@@ -20,6 +20,6 @@ export class CardRequirements {
         return reqTexts.join(" ");
     }
     public hasMax(): boolean {
-        return this.requirements.filter((req) => req.isMax).length > 0;
+        return this.requirements.some((req) => req.isMax);
     }
 }

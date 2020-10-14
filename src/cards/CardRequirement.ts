@@ -11,17 +11,19 @@ export class CardRequirement {
         this.isMax = isMax;
     }
 
-    private getParsedAmount(): string {
+    private toString(): string {
         if (this.type === RequirementType.OXYGEN) {
             return `${this.amount}%`;
+        } else if (this.type === RequirementType.TEMPERATURE) {
+            return `${this.amount}°`;
         } else {
             return this.amount.toString();
         }
     }
 
-    public getReqText(): string {
+    public getRequirementText(): string {
         const prefix = this.isMax ? "max" : "";
-        const parsedAmount = this.getParsedAmount();
+        const parsedAmount = this.toString();
 
         return `${prefix} ${parsedAmount} ${this.type}`;
     }

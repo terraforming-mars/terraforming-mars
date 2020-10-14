@@ -1,6 +1,6 @@
 export enum RequirementType {
     OXYGEN = "O2",
-    TEMPERATURE = "temperature",
+    TEMPERATURE = "C",
     OCEANS = "Oceans",
     VENUS = "venus",
     TR = "terraforming",

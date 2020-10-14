@@ -171,13 +171,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         getBoardColorClass: function(boardName: string): string {
             if (boardName === BoardName.ORIGINAL){
-                return "create-game-tharsis";
+                return "create-game-board-hexagon create-game-tharsis";
             } else if (boardName === BoardName.HELLAS) {
-                return "create-game-hellas";
+                return "create-game-board-hexagon create-game-hellas";
             } else if (boardName === BoardName.ELYSIUM) {
-                return "create-game-elysium";
+                return "create-game-board-hexagon create-game-elysium";
             } else {
-                return "create-game-random";
+                return "create-game-board-hexagon create-game-random";
             }
         },
         getPlayerCubeColorClass: function(color: string): string{
@@ -580,7 +580,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
                             <div>
                                 <template v-if="beginnerOption">
-                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline">
+                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
                                         <input type="checkbox" v-model="newPlayer.beginner">
                                         <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
                                     </label>

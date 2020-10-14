@@ -30,6 +30,6 @@ export class DustSeals implements IProjectCard {
         requirements: CardRequirements.create((b) => {
             b.oceans(3).max();
         }),
-        points: 1,
+        victoryPoints: 1,
     };
 }

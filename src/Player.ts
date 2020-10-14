@@ -1103,7 +1103,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             cards.push(
               {
                 resources: targetCard.resourceCount,
-                resourceType: undefined,
+                resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
                 cardType: card.cardType,

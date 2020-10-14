@@ -8,6 +8,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.6",
     "@types/pg": "^7.14.3",
+    "compression-webpack-plugin": "^6.0.3",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
     "less": "^3.10.3",

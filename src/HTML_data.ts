@@ -4882,7 +4882,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-[CardName.OW_ALGAE,` 
+[CardName.SNOW_ALGAE,` 
     <div class="content">
         <div class="requirements">2 Oceans</div>
         <div class="production-box production-box-size2">

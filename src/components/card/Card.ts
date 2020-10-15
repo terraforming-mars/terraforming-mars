@@ -6,6 +6,7 @@ import { BeginnerCorporation } from "../../cards/corporation/BeginnerCorporation
 import { HTML_DATA } from "../../HTML_data";
 import { CardModel } from "../../models/CardModel";
 import { CardTitle } from "./CardTitle";
+import { CardNumber } from "./CardNumber";
 import { CardResourceCounter } from "./CardResourceCounter";
 import { CorporationGroup } from "../../CorporationName";
 import { CardCost } from "./CardCost";
@@ -77,6 +78,7 @@ export const Card = Vue.component("card", {
         CardExpansion,
         CardTags,
         CardContent,
+        CardNumber
     },
     props: {
         "card": {
@@ -96,7 +98,7 @@ export const Card = Vue.component("card", {
         },
         getCard: function (): ICard | undefined {
             return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
-        },
+        }, 
         getTags: function (): Array<string> {
             let result: Array<string> = [];
             const type = this.getCardType();
@@ -117,6 +119,9 @@ export const Card = Vue.component("card", {
         },
         getCardType: function (): CardType | undefined {
             return this.getCard()?.cardType;
+        },
+        getCardNumber: function (): string | undefined {
+            return this.getCardMetadata()?.cardNumber;
         },
         getCardClasses: function (card: CardModel): string {
             const classes = ["card-container", "filterDiv"];
@@ -146,6 +151,7 @@ export const Card = Vue.component("card", {
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
                 <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()"/>
+                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()" />
                 <div v-else class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
             <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />

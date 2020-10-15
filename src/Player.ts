@@ -1205,7 +1205,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           totalToPay += howToPay.microbes * 2;
         }
 
-        if (howToPay.floaters !== undefined) {
+        if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
           if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
             const cardsWithFloater = this.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
             if (cardsWithFloater.length === 1) {

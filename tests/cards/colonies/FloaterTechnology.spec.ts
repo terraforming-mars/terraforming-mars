@@ -42,7 +42,8 @@ describe("FloaterTechnology", function () {
         expect(game.interrupts.length).to.eq(1);
 
         let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([floatingHabs]);
+        selectResourceInterrupt.generatePlayerInput?.();
+        selectResourceInterrupt.playerInput?.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(1);
         expect(dirigibles.resourceCount).to.eq(0);
     });

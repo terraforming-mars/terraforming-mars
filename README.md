@@ -27,6 +27,17 @@ Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERV
 
 Additional information on how to setup the game server locally can be found [here](https://docs.google.com/document/d/1r4GlqA6DkrSAtR6MMYmX_nmh6o4igVTqDUUETiJYGt8/edit?usp=sharing) (short version) and [here](https://docs.google.com/document/d/1y-QnffzkQtpasBkDAFQwBoqhLmUpVTzRPybtvmbktDQ/edit?usp=sharing) (detailed version).
 
+#### dotenv
+
+A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environmental variables like `PORT=443`. The following are supported **and are optional**:
+
+* PORT: (default 8080) Which port to use for this server
+* HOST: What hostname to use
+* CERT_PATH: Your TLS certificate path (=> `fullchain.pem` created by certbot)
+* KEY_PATH: Your TLS private key path (=> `privkey.pem` created by certbot)
+* MAX_GAME_DAYS: How many days to keep unfinished games before deleting them
+* WAITING_FOR_TIMEOUT: (default 5000) How many milliseconds to check for game update on multi-player games
+
 ### Deployment
 
 If you are looking for a dead simple deployment, use Heroku, instructions are are on the [wiki](../../wiki/Heroku-Setup). For Docker, read below.
@@ -39,7 +50,7 @@ Additional information on how to setup the game with Docker can be found [here](
 
 To set up an HTTPS sub/domain for use with this project, set the paths for `KEY_PATH` and `CERT_PATH` in your `.env`. If you do not have a TLS cert/key for your domain, you can get one for free from [certbot](https://certbot.eff.org/).
 
-## Contributors ✨
+## ✨ Contributors ✨
 
 Thanks goes to these wonderful people:
 

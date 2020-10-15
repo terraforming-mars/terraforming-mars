@@ -24,6 +24,7 @@ describe("SpaceMirrors", function () {
         expect(card.canAct(player)).to.eq(true);
 
         card.action(player, game);
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     });

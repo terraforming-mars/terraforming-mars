@@ -5,9 +5,9 @@ import * as http from "http";
 import * as fs from "fs";
 import * as path from "path";
 import * as querystring from "querystring";
-import * as child_process from "child_process";
 
 import { AndOptions } from "./src/inputs/AndOptions";
+import { BoardName } from "./src/BoardName";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
@@ -51,7 +51,6 @@ import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
-const appVersion = generateAppVersion();
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
@@ -186,19 +185,6 @@ function generateRandomGameId(): string {
 
 function generateRandomServerId(): string {
     return generateRandomGameId();
-}
-
-function generateAppVersion(): string {
-    // assumes SOURCE_VERSION is git hash
-    if (process.env.SOURCE_VERSION) {
-        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
-    }
-    try {
-        return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
-    } catch (error) {
-        console.warn("unable to generate app version", error);
-        return "unknown version";
-    }
 }
 
 function processInput(
@@ -427,6 +413,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 }
             }
 
+            if (gameReq.board === "random") {
+                const boards = Object.values(BoardName);
+                gameReq.board = boards[Math.floor(Math.random() * boards.length)];
+            }
+
             const gameOptions = {
                 boardName: gameReq.board,
                 clonedGamedId: gameReq.clonedGamedId,
@@ -530,8 +521,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 }
 
 function getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
+    if (player.corporationCard === undefined) return undefined; 
     return {
         name: player.corporationCard.name,
         resources: player.getResourcesOnCard(player.corporationCard),
@@ -626,6 +616,7 @@ function getCardsAsCardModel(
                 card.resourceCount !== undefined && showResouces
                     ? card.resourceCount
                     : undefined,
+            resourceType: card.resourceType,
             calculatedCost: 0,
             cardType: CardType.AUTOMATED,
             isDisabled: false
@@ -737,6 +728,7 @@ function getCards(
 ): Array<CardModel> {
     return cards.map((card) => ({
         resources: showResouces ? player.getResourcesOnCard(card) : undefined,
+        resourceType: card.resourceType,
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
         cardType: card.cardType,
@@ -987,7 +979,7 @@ function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
             return route.internalServerError(req, res, err);
         }
         res.setHeader("Content-Type", "text/html; charset=utf-8");
-        res.write(data.toString().replace("$$APP_VERSION$$", appVersion));
+        res.write(data);
         res.end();
     });
 }
@@ -1002,7 +994,13 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         file = "favicon.ico";
     } else if (req.url === "/main.js" || req.url === "/main.js.map") {
         res.setHeader("Content-Type", "text/javascript");
-        file = "dist" + req.url;
+        const acceptEncoding = req.headers["accept-encoding"];
+        let suffix = "";
+        if (acceptEncoding !== undefined && acceptEncoding.includes("gzip")) {
+            res.setHeader("Content-Encoding", "gzip");
+            suffix = ".gz";
+        }
+        file = `dist${req.url}${suffix}`;
     } else if (req.url === "/assets/Prototype.ttf") {
         file = "assets/Prototype.ttf";
     } else if (req.url === "/assets/futureforces.ttf") {

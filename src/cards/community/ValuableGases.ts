@@ -2,7 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ResourceType } from "../../ResourceType";
@@ -12,7 +12,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     public name: CardName = CardName.VALUABLE_GASES;
 
     public play(player: Player) {     
-        player.megaCredits += 10;
+        player.megaCredits += 6;
         return undefined;
     }
 

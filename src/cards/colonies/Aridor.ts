@@ -16,6 +16,8 @@ export class Aridor implements CorporationCard {
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 40;
     public allTags = new Set();
+    public cardType: CardType = CardType.CORPORATION;
+
 
     public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;

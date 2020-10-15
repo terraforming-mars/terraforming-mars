@@ -1,30 +1,32 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
-import { SelectSpace } from '../inputs/SelectSpace';
-import { ISpace } from '../ISpace';
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { SpaceType } from '../SpaceType';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
+import * as constants from "../constants";
+import { Player } from "../Player";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { SpaceType } from "../SpaceType";
 
 export class SelectOcean implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
-        public title?: string,
-        public isWorldGov: boolean = false
-    ){
-        if (title === undefined) {
-            title = 'Select space for ocean tile';
+        public title: string = 'Select space for ocean tile'
+    ){}
+
+    public generatePlayerInput() {
+        if (this.game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) {
+            this.playerInput = undefined;
+            return;
         }
         this.playerInput = new SelectSpace(
-            title,
-            game.board.getAvailableSpacesForOcean(player),
+            this.title,
+            this.game.board.getAvailableSpacesForOcean(this.player),
             (space: ISpace) => {
-                game.addOceanTile(player, space.id, SpaceType.OCEAN, isWorldGov);
-                game.pendingOceans--;
+                this.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
                 return undefined;
             }
         );
-    };
-}    
+    }
+}

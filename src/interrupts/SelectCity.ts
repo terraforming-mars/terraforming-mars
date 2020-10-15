@@ -6,19 +6,21 @@ import { ISpace } from '../ISpace';
 import { PlayerInterrupt } from './PlayerInterrupt';
 
 export class SelectCity implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
         public title: string = 'Select space for city tile'
-    ){
+    ){}
+
+    public generatePlayerInput() {
         this.playerInput = new SelectSpace(
-            title,
-            game.board.getAvailableSpacesForCity(player),
+            this.title,
+            this.game.board.getAvailableSpacesForCity(this.player),
             (space: ISpace) => {
-                game.addCityTile(player, space.id);
+                this.game.addCityTile(this.player, space.id);
                 return undefined;
             }
         );
-    };
+    }
 }    

@@ -2,17 +2,19 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class MorningStarInc implements CorporationCard {
     public name: CardName = CardName.MORNING_STAR_INC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 50;
+    public cardType: CardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         if (game.hasCardsWithTag(Tags.VENUS, 3)) {
-            for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
+            for (const foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
                 player.cardsInHand.push(foundCard);
             }
 

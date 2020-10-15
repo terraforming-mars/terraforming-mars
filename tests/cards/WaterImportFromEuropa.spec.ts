@@ -4,6 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
+import { maxOutOceans } from "../TestingUtils";
 
 describe("WaterImportFromEuropa", function () {
     let card : WaterImportFromEuropa, player : Player, game : Game;
@@ -30,11 +31,20 @@ describe("WaterImportFromEuropa", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
 
+        game.runNextInterrupt(() => {}); // HowToPay
         expect(player.megaCredits).to.eq(1);
 
         expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
         const selectOcean = game.interrupts[0].playerInput as SelectSpace;
         selectOcean.cb(selectOcean.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
+    });
+
+    it("Can act if can pay even after oceans are maxed", function () {
+        maxOutOceans(player, game);
+        player.megaCredits = 12;
+        
+        expect(card.canAct(player, game)).to.eq(true);
     });
 });

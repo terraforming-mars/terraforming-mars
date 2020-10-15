@@ -1,10 +1,12 @@
-
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { CardName } from '../CardName';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { CardName } from "../CardName";
+import { CardMetadata } from "../cards/CardMetadata";
+import { CardRequirements } from "../cards/CardRequirements";
+import { CardRequirement } from "../cards/CardRequirement";
 
 export class BreathingFilters implements IProjectCard {
     public cost: number = 11;
@@ -20,4 +22,12 @@ export class BreathingFilters implements IProjectCard {
     public getVictoryPoints() {
       return 2;
     }
+    public metadata: CardMetadata = {
+      description: "Requires 7% oxygen.",
+      cardNumber: "114",
+      requirements: new CardRequirements([
+          CardRequirement.oxygen(7),
+      ]),
+      victoryPoints: 2,
+  };
 }

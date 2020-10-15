@@ -2,15 +2,6 @@ import { CardName } from "./CardName";
 
 export const HTML_DATA: Map<string, string> =
   new Map ([
-    [CardName.COLONIZER_TRAINING_CAMP,` 
-        <div class="content ">
-            <div class="points points-big ">2</div>
-            <div class="requirements requirements-max ">max 5% O2</div>
-            <div class="description ">
-                (Oxygen must be 5% or less.)
-            </div>
-        </div>
-`],
 [CardName.ASTEROID_MINING_CONSORTIUM,` 
         <div class="content ">
             <div class="points points-big ">1</div>
@@ -1241,15 +1232,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="description ">
                 (Increase your energy production 1 step.)
-            </div>
-        </div>
-`],
-[CardName.BREATHING_FILTERS,` 
-        <div class="content ">
-            <div class="points points-big ">2</div>
-            <div class="requirements">7% O2</div>
-            <div class="description ">
-                (Requires 7% oxygen.)
             </div>
         </div>
 `],
@@ -5367,15 +5349,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="resource money">1</div> / <div class="resource-tag tag-earth"></div>
       <div class="description ">
         (Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.)
-      </div>
-  </div>
-`],
-[CardName.PUBLIC_CELEBRATIONS, ` 
-  <div class="content ">
-    <div class="points points-big">2</div>
-    <div class="requirements">Chairman</div>
-      <div class="description ">
-        (Requires that you are Chairman.)
       </div>
   </div>
 `],

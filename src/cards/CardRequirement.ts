@@ -1,18 +1,14 @@
 import { RequirementType } from "./RequirementType";
 
 export class CardRequirement {
-    type: RequirementType | undefined;
-    amount: number = 0;
-    isMax?: boolean = false;
-    /* 
-    constructor(type: RequirementType, amount: number, isMax: boolean) {
-        this.type = type;
-        this.amount = amount;
-        this.isMax = isMax;
-    } */
+    protected constructor(
+        private type: RequirementType, 
+        private amount: number, 
+        private isMax: boolean = false) {
+    }
 
-    private toString(): string {
-        if (this.type === RequirementType.OXYGEN) {
+    private amountToString(): string {
+        if (this.type === RequirementType.OXYGEN || this.type === RequirementType.VENUS) {
             return `${this.amount}%`;
         } else if (this.type === RequirementType.TEMPERATURE) {
             return `${this.amount}°`;
@@ -21,27 +17,45 @@ export class CardRequirement {
         }
     }
 
-    public getRequirementText(): string {
-        const prefix = this.isMax ? "max" : "";
-        const parsedAmount = this.toString();
-
-        return `${prefix} ${parsedAmount} ${this.type}`;
+    private parseType(): string {
+        if (this.type === RequirementType.OCEANS && this.amount > 1) {
+            return `${RequirementType.OCEANS}s`;
+        }
+        return this.type;
     }
 
-    public oceans(value: number): CardRequirement {
-        this.type = RequirementType.OCEANS;
-        this.amount = value;
-        return this;
-    }
+    public getLabel(): string {
+        const prefix = this.isMax ? "max " : "";
 
-    public science(value: number): CardRequirement {
-        this.type = RequirementType.TAG_SCIENCE;
-        this.amount = value;
-        return this;
+        return `${prefix}${this.amountToString()} ${this.parseType()}`;
     }
 
     public max(): CardRequirement {
         this.isMax = true;
         return this;
+    }
+
+    public static oceans(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.OCEANS, amount);
+    }
+
+    public static oxygen(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.OXYGEN, amount);
+    }
+
+    public static temperature(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.TEMPERATURE, amount);
+    }
+
+    public static venus(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.VENUS, amount);
+    }
+
+    public static tr(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.TR, amount);
+    }
+ 
+    public getIsMax(): boolean {
+        return this.isMax;
     }
 }

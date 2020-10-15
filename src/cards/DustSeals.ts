@@ -6,7 +6,7 @@ import { Game } from "../Game";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
-// import { CardRequirement } from "../cards/CardRequirement";
+import { CardRequirement } from "../cards/CardRequirement";
 // import { RequirementType } from "./RequirementType";
 
 export class DustSeals implements IProjectCard {
@@ -26,10 +26,9 @@ export class DustSeals implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires 3 or less ocean tiles.",
         cardNumber: 119,
-        // requirements: new CardRequirements([new CardRequirement(RequirementType.OCEANS, 3, true)]),
-        requirements: CardRequirements.create((b) => {
-            b.oceans(3).max();
-        }),
+        requirements: new CardRequirements([
+            CardRequirement.oceans(3).max(),
+        ]),
         victoryPoints: 1,
     };
 }

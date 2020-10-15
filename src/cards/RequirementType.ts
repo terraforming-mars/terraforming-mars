@@ -1,9 +1,9 @@
 export enum RequirementType {
     OXYGEN = "O2",
     TEMPERATURE = "C",
-    OCEANS = "Oceans",
-    VENUS = "venus",
-    TR = "terraforming",
+    OCEANS = "Ocean",
+    VENUS = "Venus",
+    TR = "TR",
     FLOATERS = "floaters",
     CHAIRMAN = "chairman",
     TAG_SCIENCE = "science",

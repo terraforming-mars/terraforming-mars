@@ -7,7 +7,6 @@ import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
 import { CardRequirement } from "../cards/CardRequirement";
-// import { RequirementType } from "./RequirementType";
 
 export class DustSeals implements IProjectCard {
     public cost: number = 2;

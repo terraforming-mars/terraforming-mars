@@ -13,21 +13,50 @@ export class CardRequirement {
         } else if (this.type === RequirementType.TEMPERATURE) {
             return `${this.amount}°`;
         } else {
-            return this.amount.toString();
+            return this.amount !== -1 ? this.amount.toString(): "";
         }
     }
 
     private parseType(): string {
-        if (this.type === RequirementType.OCEANS && this.amount > 1) {
-            return `${RequirementType.OCEANS}s`;
+        const withPlural: Array<string> = [
+            RequirementType.OCEANS,
+            RequirementType.FLOATERS,
+            RequirementType.FORESTS,
+            RequirementType.CITIES,
+            RequirementType.COLONIES,
+            RequirementType.RESOURCE_TYPES
+        ];
+
+        if (this.amount > 1 && withPlural.includes(this.type)) {
+            return this.getTypePlural();
         }
+
         return this.type;
     }
 
+    public getTypePlural(): string {
+        if(this.type === RequirementType.CITIES) {
+            return "Cities";
+        } else if(this.type === RequirementType.COLONIES) {
+            return "Colonies";
+        } else {
+            return `${this.type}s`;
+        }
+    }
+     
     public getLabel(): string {
-        const prefix = this.isMax ? "max " : "";
+        const parts: Array<string> = [];
+        const prefix = this.isMax ? "max" : "";
+        const amount = this.amountToString();
+        if(prefix !== "") {
+            parts.push(prefix);
+        }
+        if(amount !== "") {
+            parts.push(amount);
+        }
+        parts.push(this.parseType());
 
-        return `${prefix}${this.amountToString()} ${this.parseType()}`;
+        return parts.join(" ");
     }
 
     public max(): CardRequirement {
@@ -54,7 +83,31 @@ export class CardRequirement {
     public static tr(amount: number): CardRequirement {
         return new CardRequirement(RequirementType.TR, amount);
     }
- 
+
+    public static chairman(): CardRequirement {
+        return new CardRequirement(RequirementType.CHAIRMAN, -1);
+    }
+
+    public static resourceTypes(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.RESOURCE_TYPES, amount);
+    }
+
+    public static forests(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.FORESTS, amount);
+    }
+    
+    public static cities(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.CITIES, amount);
+    }
+
+    public static colonies(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.COLONIES, amount);
+    }
+
+    public static floaters(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.FLOATERS, amount);
+    }
+
     public getIsMax(): boolean {
         return this.isMax;
     }

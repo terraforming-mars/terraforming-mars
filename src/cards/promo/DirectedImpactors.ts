@@ -27,14 +27,17 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     }
 
     public canAct(player: Player, game: Game): boolean {
-        const canRaiseTemperature = this.resourceCount > 0 && game.getTemperature() < MAX_TEMPERATURE;
+        const cardHasResources = this.resourceCount > 0;
         const canPayForAsteroid = player.canAfford(6, game, false, true);
 
+        if (game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
+        if (canPayForAsteroid) return true;
+        
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return canPayForAsteroid || (player.canAfford(REDS_RULING_POLICY_COST) && canRaiseTemperature);
+            return player.canAfford(REDS_RULING_POLICY_COST) && cardHasResources;
         }
 
-        return canPayForAsteroid || canRaiseTemperature;
+        return cardHasResources;
     }
 
     public action(player: Player, game: Game) {
@@ -44,9 +47,10 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         const addResource = new SelectOption("Pay 6 to add 1 asteroid to a card", "Pay",() => this.addResource(player, game, asteroidCards));
         const spendResource = new SelectOption("Remove 1 asteroid to raise temperature 1 step", "Remove asteroid", () => this.spendResource(player, game));
         const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+        const temperatureIsMaxed = game.getTemperature() === MAX_TEMPERATURE;
 
-        if (this.resourceCount > 0 && game.getTemperature() < MAX_TEMPERATURE) {
-            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+        if (this.resourceCount > 0) {
+            if (!redsAreRuling || temperatureIsMaxed || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
                 opts.push(spendResource);
             }
         } else {

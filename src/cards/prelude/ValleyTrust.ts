@@ -1,4 +1,3 @@
-
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
@@ -6,11 +5,14 @@ import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+
 
 export class ValleyTrust implements CorporationCard {
     public name: CardName = CardName.VALLEY_TRUST;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 37;
+    public cardType: CardType = CardType.CORPORATION;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         return card.tags.filter(tag => tag === Tags.SCIENCE).length * 2;

@@ -8,6 +8,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.6",
     "@types/pg": "^7.14.3",
+    "compression-webpack-plugin": "^6.0.3",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
     "less": "^3.10.3",
@@ -34,6 +35,7 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
+    "clean": "rm -r ./dist/ ./styles.css",
     "build": "node make_locales.js && eslint src/*.ts src/database/**/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
     "start": "node make_locales.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",

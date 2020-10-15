@@ -8,6 +8,7 @@ import * as querystring from "querystring";
 import * as child_process from "child_process";
 
 import { AndOptions } from "./src/inputs/AndOptions";
+import { BoardName } from "./src/BoardName";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
@@ -427,32 +428,40 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 }
             }
 
+            if (gameReq.board === "random") {
+                const boards = Object.values(BoardName);
+                gameReq.board = boards[Math.floor(Math.random() * boards.length)];
+            }
+
             const gameOptions = {
-                draftVariant: gameReq.draftVariant,
-                corporateEra: gameReq.corporateEra,
-                preludeExtension: gameReq.prelude,
-                venusNextExtension: gameReq.venusNext,
-                coloniesExtension: gameReq.colonies,
-                turmoilExtension: gameReq.turmoil,
                 boardName: gameReq.board,
-                showOtherPlayersVP: gameReq.showOtherPlayersVP,
-                customCorporationsList: gameReq.customCorporationsList,
-                customColoniesList: gameReq.customColoniesList,
-                cardsBlackList: gameReq.cardsBlackList,
-                solarPhaseOption: gameReq.solarPhaseOption,
-                promoCardsOption: gameReq.promoCardsOption,
-                communityCardsOption: gameReq.communityCardsOption,
+                clonedGamedId: gameReq.clonedGamedId,
+
                 undoOption: gameReq.undoOption,
                 fastModeOption: gameReq.fastModeOption,
+                showOtherPlayersVP: gameReq.showOtherPlayersVP,
+
+                corporateEra: gameReq.corporateEra,
+                venusNextExtension: gameReq.venusNext,
+                coloniesExtension: gameReq.colonies,
+                preludeExtension: gameReq.prelude,
+                turmoilExtension: gameReq.turmoil,
+                promoCardsOption: gameReq.promoCardsOption,
+                communityCardsOption: gameReq.communityCardsOption,
+                solarPhaseOption: gameReq.solarPhaseOption,
                 removeNegativeGlobalEventsOption:
                     gameReq.removeNegativeGlobalEventsOption,
-                startingCorporations: gameReq.startingCorporations,
                 includeVenusMA: gameReq.includeVenusMA,
-                soloTR: gameReq.soloTR,
-                clonedGamedId: gameReq.clonedGamedId,
+                
+                draftVariant: gameReq.draftVariant,
                 initialDraftVariant: gameReq.initialDraft,
-                randomMA: gameReq.randomMA,
+                startingCorporations: gameReq.startingCorporations,
                 shuffleMapOption: gameReq.shuffleMapOption,
+                randomMA: gameReq.randomMA,
+                soloTR: gameReq.soloTR,
+                customCorporationsList: gameReq.customCorporationsList,
+                cardsBlackList: gameReq.cardsBlackList,
+                customColoniesList: gameReq.customColoniesList,
             } as GameOptions;
 
             const game = new Game(gameId, players, firstPlayer, gameOptions);
@@ -527,8 +536,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 }
 
 function getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
+    if (player.corporationCard === undefined) return undefined; 
     return {
         name: player.corporationCard.name,
         resources: player.getResourcesOnCard(player.corporationCard),
@@ -582,10 +590,6 @@ function getPlayer(player: Player, game: Game): string {
         titaniumValue: player.getTitaniumValue(game),
         victoryPointsBreakdown: player.getVictoryPoints(game),
         waitingFor: getWaitingFor(player.getWaitingFor()),
-        // DEPRECATED, included for transition to game log route
-        // remove after few days once most users have loaded
-        // new client
-        gameLog: game.gameLog.length > 50 ? game.gameLog.slice(game.gameLog.length - 50) : game.gameLog,
         isSoloModeWin: game.isSoloModeWin(),
         gameAge: game.gameAge,
         isActive: player.id === game.activePlayer,
@@ -1003,7 +1007,13 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         file = "favicon.ico";
     } else if (req.url === "/main.js" || req.url === "/main.js.map") {
         res.setHeader("Content-Type", "text/javascript");
-        file = "dist" + req.url;
+        const acceptEncoding = req.headers["accept-encoding"];
+        let suffix = "";
+        if (acceptEncoding !== undefined && acceptEncoding.includes("gzip")) {
+            res.setHeader("Content-Encoding", "gzip");
+            suffix = ".gz";
+        }
+        file = `dist${req.url}${suffix}`;
     } else if (req.url === "/assets/Prototype.ttf") {
         file = "assets/Prototype.ttf";
     } else if (req.url === "/assets/futureforces.ttf") {

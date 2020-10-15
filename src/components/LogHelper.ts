@@ -43,37 +43,41 @@ export class LogHelper {
     }
 
     static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
+        let type : string;
 
+        switch (tileType) {
+            case TileType.GREENERY:
+                type = "greenery tile";
+                break;
+
+            case TileType.CITY:
+                type = "city tile";
+                break;
+
+            case TileType.OCEAN:
+                type = "ocean tile";
+                break;
+        
+            default:
+                type = "special tile";
+                break;
+        }
+
+        this.logBoardPlacement(game, player, space, type);
+    }
+
+    static logBoardPlacement(game: Game, player: Player, space: ISpace, description: string) {
         // Skip off-grid tiles
         if (space.x === -1 && space.y === -1) return
         // Skip solo play random tiles
         if (player.name === "neutral") return;
 
-        let type : string;
-        let offset: number = Math.abs(space.y - 4);
-        let row: number = space.y + 1;
-        let position: number = space.x - offset + 1;
+        const offset: number = Math.abs(space.y - 4);
+        const row: number = space.y + 1;
+        const position: number = space.x - offset + 1;
 
-        switch (tileType) {
-            case TileType.GREENERY:
-                type = "greenery";
-                break;
-
-            case TileType.CITY:
-                type = "city";
-                break;
-
-            case TileType.OCEAN:
-                type = "ocean";
-                break;
-        
-            default:
-                type = "special";
-                break;
-        }
-
-        game.log("${0} placed ${1} tile on row ${2} position ${3}", b =>
-            b.player(player).string(type).number(row).number(position));
+        game.log("${0} placed ${1} on row ${2} position ${3}", b =>
+            b.player(player).string(description).number(row).number(position));
     }
 
     static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {

@@ -4,12 +4,12 @@ import {ClaimedMilestone} from "./ClaimedMilestone";
 import {FundedAward} from "./FundedAward";
 import {IMilestone} from "./milestones/IMilestone";
 import {IAward} from "./awards/IAward";
-import {IColony} from "./colonies/Colony";
 import {ColonyDealer} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {Board} from "./Board";
 import { CardName } from "./CardName";
 import { BoardName } from "./BoardName";
+import { SerializedColony } from "./SerializedColony";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
@@ -18,45 +18,54 @@ import { GameOptions } from "./Game";
 
 export interface SerializedGame {
     id: string;
-    players: Array<SerializedPlayer>;
-    first: SerializedPlayer;
-    preludeExtension: boolean;
-    draftVariant: boolean;
-    showOtherPlayersVP: boolean;
-    venusNextExtension: boolean;
-    coloniesExtension: boolean;
-    customCorporationsList: boolean;
-    corporationList: Array<CardName>;
-    boardName: BoardName;
+
+    lastSaveId: number;
     seed: number
-    activePlayer: PlayerId;
-    claimedMilestones: Array<ClaimedMilestone>;
-    milestones: Array<IMilestone>;
-    dealer: SerializedDealer;
-    fundedAwards: Array<FundedAward>;
-    awards: Array<IAward>;
+    interrupts: Array<PlayerInterrupt>;
+    gameLog: Array<String>;
+    gameAge: number;
+    
     generation: number;
-    draftRound: number;
     phase: Phase;
-    donePlayers: Set<PlayerId>;
+    dealer: SerializedDealer;
+    boardName: BoardName;
+    board: Board;
+    gameOptions: GameOptions;
+    
     oxygenLevel: number;
+    temperature: number;
+    pendingOceans: number;
     venusScaleLevel: number;
+
+    first: SerializedPlayer;
+    activePlayer: PlayerId;
+    players: Array<SerializedPlayer>;
+    donePlayers: Set<PlayerId>;
     passedPlayers: Set<PlayerId>;
     researchedPlayers: Set<PlayerId>;
     draftedPlayers: Set<PlayerId>;
-    board: Board;
-    temperature: number;
-    gameLog: Array<String>;
-    gameAge: number;
+
+    draftVariant: boolean;
+    draftRound: number;
     unDraftedCards: Map<SerializedPlayer, Array<IProjectCard>>;
-    interrupts: Array<PlayerInterrupt>;
-    monsInsuranceOwner: PlayerId | undefined;
-    colonies: Array<IColony>;
+
+    claimedMilestones: Array<ClaimedMilestone>;
+    milestones: Array<IMilestone>;
+    fundedAwards: Array<FundedAward>;
+    awards: Array<IAward>;
+
+    venusNextExtension: boolean;
+    coloniesExtension: boolean;
+    colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;
-    pendingOceans: number;
-    lastSaveId: number;
+    preludeExtension: boolean;
     turmoil: SerializedTurmoil;
+
+    monsInsuranceOwner: PlayerId | undefined;
     someoneHasRemovedOtherPlayersPlants: boolean;
-    gameOptions: GameOptions;
+
+    showOtherPlayersVP: boolean;
+    customCorporationsList: boolean;
+    corporationList: Array<CardName>;
 }
 

@@ -1,18 +1,10 @@
 import Vue from "vue";
 
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
 import { $t } from "../directives/i18n";
+import { ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
 
-const allItems: Array<CardName> = [
-    ...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_VENUS_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_COLONIES_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-    ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
-].sort();
+const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.sort();
 
 interface CardsFilterModel {
     customCorporationsList: boolean;

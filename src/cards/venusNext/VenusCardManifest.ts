@@ -1,0 +1,119 @@
+import { CardName } from "../../CardName";
+import { GameModule } from "../../GameModule";
+import { CardManifest } from "../CardManifest";
+import { AerialMappers } from "./AerialMappers";
+import { AerosportTournament } from "./AerosportTournament";
+import { AirScrappingExpedition } from "./AirScrappingExpedition";
+import { Aphrodite } from "./Aphrodite";
+import { AtalantaPlanitiaLab } from "./AtalantaPlanitiaLab";
+import { Atmoscoop } from "./Atmoscoop";
+import { Celestic } from "./Celestic";
+import { CometForVenus } from "./CometForVenus";
+import { CorroderSuits } from "./CorroderSuits";
+import { DawnCity } from "./DawnCity";
+import { DeuteriumExport } from "./DeuteriumExport";
+import { Dirigibles } from "./Dirigibles";
+import { ExtractorBalloons } from "./ExtractorBalloons";
+import { Extremophiles } from "./Extremophiles";
+import { FloatingHabs } from "./FloatingHabs";
+import { ForcedPrecipitation } from "./ForcedPrecipitation";
+import { FreyjaBiodomes } from "./FreyjaBiodomes";
+import { GHGImportFromVenus } from "./GHGImportFromVenus";
+import { GiantSolarShade } from "./GiantSolarShade";
+import { Gyropolis } from "./Gyropolis";
+import { HydrogenToVenus } from "./HydrogenToVenus";
+import { IoSulphurResearch } from "./IoSulphurResearch";
+import { IshtarMining } from "./IshtarMining";
+import { JetStreamMicroscrappers } from "./JetStreamMicroscrappers";
+import { LocalShading } from "./LocalShading";
+import { LunaMetropolis } from "./LunaMetropolis";
+import { LuxuryFoods } from "./LuxuryFoods";
+import { Manutech } from "./Manutech";
+import { MaxwellBase } from "./MaxwellBase";
+import { MiningQuota } from "./MiningQuota";
+import { MorningStarInc } from "./MorningStarInc";
+import { NeutralizerFactory } from "./NeutralizerFactory";
+import { Omnicourt } from "./Omnicourt";
+import { OrbitalReflectors } from "./OrbitalReflectors";
+import { RotatorImpacts } from "./RotatorImpacts";
+import { SisterPlanetSupport } from "./SisterPlanetSupport";
+import { Solarnet } from "./Solarnet";
+import { SpinInducingAsteroid } from "./SpinInducingAsteroid";
+import { SponsoredAcademies } from "./SponsoredAcademies";
+import { Stratopolis } from "./Stratopolis";
+import { StratosphericBirds } from "./StratosphericBirds";
+import { SulphurEatingBacteria } from "./SulphurEatingBacteria";
+import { SulphurExports } from "./SulphurExports";
+import { TerraformingContract } from "./TerraformingContract";
+import { Thermophiles } from "./Thermophiles";
+import { VenusGovernor } from "./VenusGovernor";
+import { VenusianAnimals } from "./VenusianAnimals";
+import { VenusianInsects } from "./VenusianInsects";
+import { VenusianPlants } from "./VenusianPlants";
+import { VenusMagnetizer } from "./VenusMagnetizer";
+import { VenusSoils } from "./VenusSoils";
+import { VenusWaystation } from "./VenusWaystation";
+import { Viron } from "./Viron";
+import { WaterToVenus } from "./WaterToVenus";
+
+export const VENUS_CARD_MANIFEST = new CardManifest({
+    module: GameModule.Venus,
+    projectCards: [
+        { cardName: CardName.AERIAL_MAPPERS, factory: AerialMappers },
+        { cardName: CardName.AEROSPORT_TOURNAMENT, factory: AerosportTournament },
+        { cardName: CardName.AIR_SCRAPPING_EXPEDITION, factory: AirScrappingExpedition },
+        { cardName: CardName.ATALANTA_PLANITIA_LAB, factory: AtalantaPlanitiaLab },
+        { cardName: CardName.ATMOSCOOP, factory: Atmoscoop },
+        { cardName: CardName.COMET_FOR_VENUS, factory: CometForVenus },
+        { cardName: CardName.CORRODER_SUITS, factory: CorroderSuits },
+        { cardName: CardName.DAWN_CITY, factory: DawnCity },
+        { cardName: CardName.DEUTERIUM_EXPORT, factory: DeuteriumExport },
+        { cardName: CardName.DIRIGIBLES, factory: Dirigibles },
+        { cardName: CardName.EXTRACTOR_BALLOONS, factory: ExtractorBalloons },
+        { cardName: CardName.EXTREMOPHILES, factory: Extremophiles },
+        { cardName: CardName.FLOATING_HABS, factory: FloatingHabs },
+        { cardName: CardName.FORCED_PRECIPITATION, factory: ForcedPrecipitation },
+        { cardName: CardName.FREYJA_BIODOMES, factory: FreyjaBiodomes },
+        { cardName: CardName.GIANT_SOLAR_SHADE, factory: GiantSolarShade },
+        { cardName: CardName.GHG_IMPORT_FROM_VENUS, factory: GHGImportFromVenus },
+        { cardName: CardName.GYROPOLIS, factory: Gyropolis },
+        { cardName: CardName.HYDROGEN_TO_VENUS, factory: HydrogenToVenus },
+        { cardName: CardName.IO_SULPHUR_RESEARCH, factory: IoSulphurResearch },
+        { cardName: CardName.ISHTAR_MINING, factory: IshtarMining },
+        { cardName: CardName.JET_STREAM_MICROSCRAPPERS, factory: JetStreamMicroscrappers },
+        { cardName: CardName.LUNA_METROPOLIS, factory: LunaMetropolis },
+        { cardName: CardName.LOCAL_SHADING, factory: LocalShading },
+        { cardName: CardName.MAXWELL_BASE, factory: MaxwellBase },
+        { cardName: CardName.ROTATOR_IMPACTS, factory: RotatorImpacts },
+        { cardName: CardName.SISTER_PLANET_SUPPORT, factory: SisterPlanetSupport },
+        { cardName: CardName.SOLARNET, factory: Solarnet },
+        { cardName: CardName.SPIN_INDUCING_ASTEROID, factory: SpinInducingAsteroid },
+        { cardName: CardName.SPONSORED_ACADEMIES, factory: SponsoredAcademies },
+        { cardName: CardName.STRATOPOLIS, factory: Stratopolis },
+        { cardName: CardName.STRATOSPHERIC_BIRDS, factory: StratosphericBirds },
+        { cardName: CardName.SULPHUR_EATING_BACTERIA, factory: SulphurEatingBacteria },
+        { cardName: CardName.SULPHUR_EXPORTS, factory: SulphurExports },
+        { cardName: CardName.TERRAFORMING_CONTRACT, factory: TerraformingContract },
+        { cardName: CardName.THERMOPHILES, factory: Thermophiles },
+        { cardName: CardName.VENUS_GOVERNOR, factory: VenusGovernor },
+        { cardName: CardName.VENUSIAN_ANIMALS, factory: VenusianAnimals },
+        { cardName: CardName.VENUSIAN_INSECTS, factory: VenusianInsects },
+        { cardName: CardName.VENUSIAN_PLANTS, factory: VenusianPlants },
+        { cardName: CardName.VENUS_MAGNETIZER, factory: VenusMagnetizer },
+        { cardName: CardName.VENUS_SOILS, factory: VenusSoils },
+        { cardName: CardName.VENUS_WAYSTATION, factory: VenusWaystation },
+        { cardName: CardName.WATER_TO_VENUS, factory: WaterToVenus },
+        { cardName: CardName.LUXURY_FOODS, factory: LuxuryFoods },
+        { cardName: CardName.NEUTRALIZER_FACTORY, factory: NeutralizerFactory },
+        { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
+        { cardName: CardName.OMNICOURT, factory: Omnicourt },
+        { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
+   ],
+
+    corporationCards: [
+        { cardName: CardName.APHRODITE, factory: Aphrodite },
+        { cardName: CardName.CELESTIC, factory: Celestic },
+        { cardName: CardName.MANUTECH, factory: Manutech },
+        { cardName: CardName.MORNING_STAR_INC, factory: MorningStarInc },
+        { cardName: CardName.VIRON, factory: Viron }
+    ]});

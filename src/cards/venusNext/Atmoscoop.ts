@@ -32,7 +32,7 @@ export class Atmoscoop implements IProjectCard {
   
         return meetsTagRequirements;
     }
-
+    
     public play(player: Player, game: Game) {
         let result = new OrOptions();
         let options: Array<SelectCard<ICard> | SelectOption> = [];
@@ -57,7 +57,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise temperature 2 steps and add 2 floaters to " + floaterCards[0].name,
-                    "Add floaters",
+                    "Raise temperature and add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -69,7 +69,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise Venus 2 steps and add 2 floaters to " + floaterCards[0].name,
-                    "Add floaters",
+                    "Raise Venus and add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -91,8 +91,8 @@ export class Atmoscoop implements IProjectCard {
         } else {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectCard(
-                    "Select card to add 2 floaters and raise temperature 2 steps",
-                    "Add floaters",
+                    "Raise temperature 2 steps and select card to add 2 floaters",
+                    "Raise temperature and add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                         player.addResourceTo(foundCards[0], 2);
@@ -104,8 +104,8 @@ export class Atmoscoop implements IProjectCard {
 
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectCard(
-                    "Select card to add 2 floaters and raise Venus 2 steps",
-                    "Add floaters",
+                    "Raise Venus 2 steps and select card to add 2 floaters",
+                    "Raise Venus and add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);

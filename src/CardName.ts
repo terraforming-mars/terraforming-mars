@@ -410,9 +410,9 @@ export enum CardName {
     PENGUINS = "Penguins",
     SMALL_ASTEROID = "Small Asteroid",
     SNOW_ALGAE = "Snow Algae",
-    DEIMOS_DOWN_PROMO = "Deimos Down Promo",
-    MAGNETIC_FIELD_GENERATORS_PROMO = "Magnetic Field Generators Promo",
-    GREAT_DAM_PROMO = "Great Dam Promo",
+    DEIMOS_DOWN_PROMO = "Deimos Down:promo",
+    MAGNETIC_FIELD_GENERATORS_PROMO = "Magnetic Field Generators:promo",
+    GREAT_DAM_PROMO = "Great Dam:promo",
     DUSK_LASER_MINING = "Dusk Laser Mining",
     MERCURIAN_ALLOYS = "Mercurian Alloys",
     REGO_PLASTICS = "Rego Plastics",
@@ -448,4 +448,13 @@ export enum CardName {
     INCITE = "Incite",
     PLAYWRIGHTS = "Playwrights",
     MIDAS = "Midas",
+
+    // Community preludes
+    VALUABLE_GASES = "Valuable Gases",
+    VENUS_FIRST = "Venus First",
+    RESEARCH_GRANT = "Research Grant",
+    AEROSPACE_MISSION = "Aerospace Mission",
+    TRADE_ADVANCE = "Trade Advance",
+    POLITICAL_UPRISING = "Political Uprising",
+    BY_ELECTION = "By-Election",
 }

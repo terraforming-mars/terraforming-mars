@@ -164,7 +164,9 @@ export abstract class Board {
         const spaces = this.spaces.filter((space) => {
             return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
         }).filter(predicate);
-        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        while (idx < 0) { idx += spaces.length; }
+        while (idx >= spaces.length) { idx -= spaces.length; }
         return spaces[idx];
     }
     

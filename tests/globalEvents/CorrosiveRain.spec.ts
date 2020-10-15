@@ -24,6 +24,9 @@ describe("CorrosiveRain", function () {
         player2.megaCredits = 15;
         
         card.resolve(game, turmoil);
+        while (game.interrupts.length) {
+            game.runNextInterrupt(() => {});
+        }
         expect(player2.cardsInHand.length).to.eq(3);
         expect(player.cardsInHand.length).to.eq(0);
         expect(player.megaCredits).to.eq(5);

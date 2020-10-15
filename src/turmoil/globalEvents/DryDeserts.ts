@@ -22,8 +22,7 @@ export class DryDeserts implements IGlobalEvent {
 
         game.getPlayers().forEach(player => {
             if (turmoil.getPlayerInfluence(player) > 0) {
-                let selectResources = new SelectResources(player, game, turmoil.getPlayerInfluence(player));
-                selectResources.playerInput.title = "Dry Deserts Global Event - Gain " +  turmoil.getPlayerInfluence(player) + " resource(s) for influence";
+                let selectResources = new SelectResources(player, game, turmoil.getPlayerInfluence(player), "Dry Deserts Global Event - Gain " +  turmoil.getPlayerInfluence(player) + " resource(s) for influence");
                 game.addInterrupt(selectResources);
             }            
         });    

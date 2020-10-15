@@ -18,8 +18,8 @@ export const GameEnd = Vue.component("game-end", {
         isSoloGame: function (): boolean {
             return this.player.players.length === 1;
         },
-        getPlayerColorStyle: function (player: PlayerModel): string {
-            return "color: " + player.color;
+        getEndGamePlayerColorClass: function (player: PlayerModel): string {
+            return "player_bg_color_" + player.color;
         },
         getSortedPlayers: function () {
             this.player.players.sort(function (a:PlayerModel, b:PlayerModel){
@@ -94,7 +94,7 @@ export const GameEnd = Vue.component("game-end", {
                         </thead>
                         <tbody>
                             <tr v-for="p in getSortedPlayers()">
-                                <td :style="getPlayerColorStyle(p)">{{ p.name }}</td>
+                                <td><log-player :class="getEndGamePlayerColorClass(p)">{{ p.name }}</log-player></td>
                                 <td v-i18n>{{ p.corporationCard.name }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>

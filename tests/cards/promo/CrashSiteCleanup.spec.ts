@@ -27,6 +27,7 @@ describe("CrashSiteCleanup", function () {
         const smallAsteroid = new SmallAsteroid();
         smallAsteroid.play(player, game);
         // Choose Remove 1 plant option
+        game.interrupts[0].generatePlayerInput?.();
         (game.interrupts[0].playerInput as OrOptions).options[0].cb([player2]);
 
         expect(card.canPlay(player, game)).to.eq(true);

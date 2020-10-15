@@ -1,4 +1,7 @@
 import { CardRequirement } from "../src/cards/CardRequirement";
+import { Tags } from "../src/cards/Tags";
+import { Resources } from "../src/Resources";
+import { PartyName } from "../src/turmoil/parties/PartyName";
 import { expect } from "chai";
 
 describe("CardRequirement", function () {
@@ -86,4 +89,28 @@ describe("CardRequirement", function () {
     it("Res types: success", function(){
         expect(CardRequirement.resourceTypes(9).getLabel()).to.equal("9 Resource types")
     });
+    it("Tag-science(2): success", function(){
+        expect(CardRequirement.tag(Tags.SCIENCE, 2).getLabel()).to.equal("2 Science")
+    });
+    it("Tag-science: success", function(){
+        expect(CardRequirement.tag(Tags.SCIENCE, -1).getLabel()).to.equal("Science")
+    });
+    it("Production-steel: success", function(){
+        expect(CardRequirement.production(Resources.STEEL, -1).getLabel()).to.equal("Steel production")
+    });
+    it("Production-titanium: success", function(){
+        expect(CardRequirement.production(Resources.TITANIUM, -1).getLabel()).to.equal("Titanium production")
+    });
+    it("Production-energy(2): success", function(){
+        expect(CardRequirement.production(Resources.ENERGY, 2).getLabel()).to.equal("2 Energy production")
+    });
+    it("Party-mars first: success", function(){
+        expect(CardRequirement.party(PartyName.MARS).getLabel()).to.equal("mars first")
+    });
+    it("Party-reds: success", function(){
+        expect(CardRequirement.party(PartyName.REDS).getLabel()).to.equal("reds")
+    });
+    it("Party-reds: success", function(){
+        expect(CardRequirement.partyLeaders(2).getLabel()).to.equal("2 Party leaders")
+    });    
 });

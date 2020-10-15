@@ -1,9 +1,13 @@
 import { RequirementType } from "./RequirementType";
+import { Tags } from "./Tags";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { Resources } from "../Resources";
+import { firstLetterUpperCase } from "../utils/utils"; 
 
 export class CardRequirement {
     protected constructor(
         private type: RequirementType, 
-        private amount: number, 
+        protected amount: number, 
         private isMax: boolean = false) {
     }
 
@@ -17,7 +21,7 @@ export class CardRequirement {
         }
     }
 
-    private parseType(): string {
+    protected parseType(): string {
         const withPlural: Array<string> = [
             RequirementType.OCEANS,
             RequirementType.FLOATERS,
@@ -108,7 +112,52 @@ export class CardRequirement {
         return new CardRequirement(RequirementType.FLOATERS, amount);
     }
 
+    public static partyLeaders(amount: number): CardRequirement {
+        return new CardRequirement(RequirementType.PARTY_LEADERS, amount);
+    }
+    
+    public static tag(tag: Tags, amount: number): CardRequirement {
+        return new TagCardRequirement(tag, amount);
+    }
+
+    public static production(resource: Resources, amount: number): CardRequirement {
+        return new ProductionCardRequirement(resource, amount);
+    }
+
+    public static party(party: PartyName): CardRequirement {
+        return new PartyCardRequirement(party);
+    }
+
     public getIsMax(): boolean {
         return this.isMax;
+    }  
+}
+
+export class TagCardRequirement extends CardRequirement {
+    constructor(private tag: Tags, amount: number) {
+        super(RequirementType.TAG, amount);
     }
+
+    protected parseType(): string {
+        return firstLetterUpperCase(this.tag);
+    }
+}
+
+export class ProductionCardRequirement extends CardRequirement {
+    constructor(private resource: Resources, amount: number) {
+        super(RequirementType.RESOURCE_TYPES, amount);
+    }
+
+    protected parseType(): string {
+        return `${firstLetterUpperCase(this.resource)} production`;
+    }    
+}
+
+export class PartyCardRequirement extends CardRequirement {
+    constructor(private party: PartyName) {
+        super(RequirementType.PARTY, -1);
+    }
+    protected parseType(): string {
+        return this.party.toLowerCase();
+    }  
 }

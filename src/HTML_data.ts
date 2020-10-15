@@ -296,12 +296,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.INTERSTELLAR_COLONY_SHIP,` 
-        <div class="content ">
-            <div class="points points-big ">4</div>
-            <div class="requirements ">5 Science</div>
-        </div>
-`],
 [CardName.SECURITY_FLEET,` 
         <div class="content ">
             <div class="points ">1/<div class="resource fighter"></div></div>
@@ -1448,15 +1442,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.ADVANCED_ECOSYSTEMS,` 
-      <div class="content">
-        <div class="points points-big">3</div>
-        <div class="requirements">Plant Microbe Animal</div>
-        <div class="description">
-          (Requires a Plant tag, a Microbe tag, and an Animal tag.)
-        </div>
-      </div>
-`],
 [CardName.GREAT_DAM,` 
       <div class="content">
         <div class="points points-big">1</div>
@@ -2550,12 +2535,6 @@ export const HTML_DATA: Map<string, string> =
                  (Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA)
             </div>
           </div>
-`],
-[CardName.LUXURY_FOODS,` 
-            <div class="content ">
-              <div class="points points-big">2</div>
-              <div class="requirements"> Venus Earth Jovian</div>
-            </div>
 `],
 [CardName.MAXWELL_BASE,` 
             <div class="content ">

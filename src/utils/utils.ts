@@ -12,3 +12,4 @@ export const playerColorClass = (
 };
 
 export const range = (n: number): Array<Number> => Array.from(Array(n).keys());
+export const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);

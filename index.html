@@ -12,7 +12,7 @@
     <body id="ts-preferences-target">
         <div id="app" :class="'topmost-'+screen">
             <div class="main-container">
-                <start-screen v-if="screen === 'start-screen'" version="$$APP_VERSION$$"></start-screen>
+                <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>
                 <create-game-form
                     v-else-if="screen === 'create-game-form'"
                 ></create-game-form>
@@ -25,6 +25,7 @@
                     v-else-if="screen === 'player-home'"
                     :player="player"
                     :key="playerkey"
+                    :settings="settings"
                 ></player-home>
                 <game-end
                     v-else-if="screen === 'the-end'"

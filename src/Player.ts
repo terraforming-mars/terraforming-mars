@@ -1105,6 +1105,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             cards.push(
               {
                 resources: targetCard.resourceCount,
+                resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
                 cardType: card.cardType,
@@ -1205,6 +1206,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         if (howToPay.floaters !== undefined) {
+          if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+            const cardsWithFloater = this.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+            if (cardsWithFloater.length === 1) {
+              throw new Error("Cannot spend all floaters to play Stratospheric Birds");
+            }
+          }
           totalToPay += howToPay.floaters * 3;
         }
 

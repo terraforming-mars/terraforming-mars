@@ -14,20 +14,18 @@ export class BreathingFilters implements IProjectCard {
     public name: CardName = CardName.BREATHING_FILTERS;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);
+        return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);
     }
     public play() {
-      return undefined;
+        return undefined;
     }
     public getVictoryPoints() {
-      return 2;
+        return 2;
     }
     public metadata: CardMetadata = {
-      description: "Requires 7% oxygen.",
-      cardNumber: "114",
-      requirements: new CardRequirements([
-          CardRequirement.oxygen(7),
-      ]),
-      victoryPoints: 2,
-  };
+        description: "Requires 7% oxygen.",
+        cardNumber: "114",
+        requirements: new CardRequirements([CardRequirement.oxygen(7)]),
+        victoryPoints: 2,
+    };
 }

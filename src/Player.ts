@@ -2003,12 +2003,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public takeAction(game: Game): void {
-      this.cardsEarned = 0;
       if (this.hasInterrupt(game)) {
         this.runInterrupt(game, () => this.takeAction(game));
         return;
       }
- 
+
+      // A left-over from the prior action.
+      while (this.cardsEarned > 0) {
+        this.cardsInHand.push(game.dealer.dealCard());
+        this.cardsEarned--;
+      }
+
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         game.phase = Phase.PRELUDES;
@@ -2210,10 +2215,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       this.setWaitingFor(action, () => {
-        while (this.cardsEarned > 0) {
-          this.cardsInHand.push(game.dealer.dealCard());
-          this.cardsEarned--;
-        }
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });

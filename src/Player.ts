@@ -954,7 +954,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private doneWorldGovernmentTerraforming(game: Game): void {
       if (this.hasInterrupt(game)) {
-        this.runInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
+        this.runOwnNextInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
       } else {
         game.doneWorldGovernmentTerraforming();
       }
@@ -1797,17 +1797,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private resolveFinalGreeneryInterrupts(game: Game) {
-      if (game.interrupts.length > 0) {
-        const interrupt = game.interrupts.shift();
-        if (interrupt) {
-          if (interrupt.beforeAction !== undefined) {
-            interrupt.beforeAction();
-          }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-            this.resolveFinalGreeneryInterrupts(game);
-          });
-          return;
-        }
+      if (game.runNextInterrupt(() => { this.resolveFinalGreeneryInterrupts(game) })) {
+        return;
       }
 
       // All final greenery interrupts have been resolved, continue game flow
@@ -1981,18 +1972,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return game.interrupts.find(interrupt => interrupt.player === this) !== undefined;
     }
 
-    private runInterrupt(game: Game, cb: () => void): void {
+    private runOwnNextInterrupt(game: Game, cb: () => void): void {
       //Interrupt action
-      const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
-      if (interruptIndex !== -1) {
-        const interrupt = game.interrupts[interruptIndex];
-        if (interrupt !== undefined && interrupt.beforeAction !== undefined) {
-          interrupt.beforeAction();
-        }
-        this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
-          cb();
-        });
-      } else {
+      if (game.runNextInterrupt(() => { cb() }, this) === false) {
         cb();
       }
     }
@@ -2003,7 +1985,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public takeAction(game: Game): void {
       if (this.hasInterrupt(game)) {
-        this.runInterrupt(game, () => this.takeAction(game));
+        this.runOwnNextInterrupt(game, () => this.takeAction(game));
         return;
       }
  
@@ -2145,15 +2127,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // If you can pay to send some in the Ara
       if (game.gameOptions.turmoilExtension) {
+        let selectParty;
         if (game.turmoil?.lobby.has(this.id)) {
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
         } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
         } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
+        }
+        if (selectParty) {
+          selectParty.generatePlayerInput?.();
+          if (selectParty.playerInput !== undefined) {
+            action.options.push(selectParty.playerInput);
+          }
         }
       }
 

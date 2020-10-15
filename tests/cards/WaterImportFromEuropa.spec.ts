@@ -31,9 +31,11 @@ describe("WaterImportFromEuropa", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
 
+        game.runNextInterrupt(() => {}); // HowToPay
         expect(player.megaCredits).to.eq(1);
 
         expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
         const selectOcean = game.interrupts[0].playerInput as SelectSpace;
         selectOcean.cb(selectOcean.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);

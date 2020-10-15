@@ -6,23 +6,25 @@ import { ISpace } from "../ISpace";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 
 export class RemoveOcean implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
-        public title?: string,
-    ){
-        if (title === undefined) {
-            title = "Select an Ocean tile to remove from board";
+        public title: string = 'Select an Ocean tile to remove from board'
+    ){}
+
+    public generatePlayerInput() {
+        if (this.game.board.getOceansOnBoard() === 0) {
+            this.playerInput = undefined;
+            return;
         }
         this.playerInput = new SelectSpace(
-            title,
-            game.board.getOceansTiles(),
+            this.title,
+            this.game.board.getOceansTiles(),
             (space: ISpace) => {
-                game.removeTile(space.id);
+                this.game.removeTile(space.id);
                 return undefined;
             }
         );
-    };
-}    
-
+    }
+}

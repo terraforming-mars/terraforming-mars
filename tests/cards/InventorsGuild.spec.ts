@@ -31,6 +31,7 @@ describe("InventorsGuild", function () {
         player.megaCredits = 3;
 
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
     });
@@ -41,6 +42,7 @@ describe("InventorsGuild", function () {
         expect(action instanceof SelectCard).to.eq(true);
         
         (action! as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        game.runNextInterrupt(() => {});
         expect(game.dealer.discarded.length).to.eq(1);
         expect(player.cardsInHand.length).to.eq(0);
         expect(player.megaCredits).to.eq(2);

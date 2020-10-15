@@ -7,27 +7,26 @@ import { SelectColony } from "../inputs/SelectColony";
 import { ColonyModel } from "../models/ColonyModel";
 
 export class SelectRemoveColony implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game
-    ){
-        let coloniesModel: Array<ColonyModel> = game.getColoniesModel(game.colonies);
+    ){}
+
+    public generatePlayerInput() {
+        let coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(this.game.colonies);
         let removeColony = new SelectColony("Select colony to remove", "Remove colony", coloniesModel, (colonyName: ColonyName) => {
-            game.colonies.forEach(colony => {
-              if (colony.name === colonyName) {
-                game.colonies.splice(game.colonies.indexOf(colony),1);
-                if (game.colonyDealer === undefined) return;
-                game.colonyDealer.discardedColonies.push(colony);
-              }
-              return undefined;
+            this.game.colonies.forEach(colony => {
+                if (colony.name === colonyName) {
+                    this.game.colonies.splice(this.game.colonies.indexOf(colony),1);
+                    if (this.game.colonyDealer === undefined) return;
+                    this.game.colonyDealer.discardedColonies.push(colony);
+                }
+                return undefined;
             });
             return undefined;
         });
 
         this.playerInput = removeColony;
-    };
+    }
 }    
-
-
-

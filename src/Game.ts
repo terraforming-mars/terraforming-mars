@@ -27,7 +27,6 @@ import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILEST
 import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
 import {SpaceName} from "./SpaceName";
 import {BoardColony, Board} from "./Board";
-import { CorporationName } from "./CorporationName";
 import {ElysiumBoard} from "./ElysiumBoard";
 import {HellasBoard} from "./HellasBoard";
 import {BoardName} from "./BoardName";
@@ -1341,7 +1340,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Check for Aphrodite corporation
       this.players.forEach((player) => {
-        if (player.isCorporation(CorporationName.APHRODITE)) {
+        if (player.isCorporation(CardName.APHRODITE)) {
           player.megaCredits += 2 * steps;
         }
       });
@@ -1507,7 +1506,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
 
       // Part 3. Setup for bonuses
-      const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
+      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
 
       // Part 4. Place the tile
       space.tile = tile;

@@ -19,7 +19,7 @@ import { Button } from "../components/common/Button";
 const dialogPolyfill = require("dialog-polyfill");
 
 export const PlayerHome = Vue.component("player-home", {
-    props: ["player"],
+    props: ["player", "settings"],
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,
@@ -153,7 +153,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="player.color" />
-                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -217,7 +217,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <dynamic-title title="Select initial cards:" :color="player.color"/>
-                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
 

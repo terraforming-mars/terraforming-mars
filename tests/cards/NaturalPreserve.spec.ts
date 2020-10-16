@@ -36,9 +36,11 @@ describe("NaturalPreserve", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);
 
-        action.cb(action.availableSpaces[0]);
+        const space = action.availableSpaces[0];
+        action.cb(space);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+        expect(space.adjacency?.bonus).eq(undefined);
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

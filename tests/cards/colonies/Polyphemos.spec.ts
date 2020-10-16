@@ -2,12 +2,12 @@ import { expect } from "chai";
 import { Polyphemos } from "../../../src/cards/colonies/Polyphemos";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
-import { PowerPlant } from '../../../src/cards/PowerPlant';
-import { BusinessNetwork } from '../../../src/cards/BusinessNetwork';
-import { Game } from '../../../src/Game';
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { IProjectCard } from '../../../src/cards/IProjectCard';
+import { Resources } from "../../../src/Resources";
+import { PowerPlant } from "../../../src/cards/PowerPlant";
+import { BusinessNetwork } from "../../../src/cards/BusinessNetwork";
+import { Game } from "../../../src/Game";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { IProjectCard } from "../../../src/cards/IProjectCard";
 import { AndOptions } from "../../../src/inputs/AndOptions";
 
 describe("Polyphemos", function () {
@@ -31,6 +31,7 @@ describe("Polyphemos", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(35);
         expect(player.cardsInHand.length).to.eq(3);
     });

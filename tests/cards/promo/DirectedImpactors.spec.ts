@@ -33,7 +33,8 @@ describe("DirectedImpactors", function () {
         card.action(player,game);
         expect(game.interrupts.length).to.eq(1);
         let selectHowToPayInterrupt = game.interrupts[0] as SelectHowToPayInterrupt;
-        selectHowToPayInterrupt.playerInput.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+        selectHowToPayInterrupt.generatePlayerInput?.();
+        selectHowToPayInterrupt.playerInput?.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
         
         expect(player.megaCredits).to.eq(0);
         expect(player.titanium).to.eq(0);
@@ -66,7 +67,8 @@ describe("DirectedImpactors", function () {
         const selectCard = action.options[1].cb();
         expect(game.interrupts.length).to.eq(1);
         let selectHowToPayInterrupt = game.interrupts[0] as SelectHowToPayInterrupt;
-        selectHowToPayInterrupt.playerInput.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+        selectHowToPayInterrupt.generatePlayerInput?.();
+        selectHowToPayInterrupt.playerInput?.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
 
         selectCard!.cb([card2]);
         expect(card2.resourceCount).to.eq(1);

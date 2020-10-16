@@ -72,41 +72,58 @@ describe("Board", function () {
         }
     }
 
-    it("getAvailableSpaceByOffset positive", function() {
+    it("getNthAvailableLandSpace positive", function() {
         // First two rows look like this:
         //  - o - o o      - means land
         // - - - - - o     o means ocean
         // This will skip ocean spaces.
 
-        expectSpace(board.getAvailableSpaceByOffset(0, 1), "03", 4, 0);
-        expectSpace(board.getAvailableSpaceByOffset(1, 1), "05", 6, 0);
-        expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
-        expectSpace(board.getAvailableSpaceByOffset(3, 1), "09", 4, 1);
+        expectSpace(board.getNthAvailableLandSpace(0, 1), "03", 4, 0);
+        expectSpace(board.getNthAvailableLandSpace(1, 1), "05", 6, 0);
+        expectSpace(board.getNthAvailableLandSpace(2, 1), "08", 3, 1);
+        expectSpace(board.getNthAvailableLandSpace(3, 1), "09", 4, 1);
     });
 
-    it("Get available space by offset negative", function() {
+    it("getNthAvailableLandSpace negative", function() {
         // Last two rows look like this:
         // - - - - - -    - means land
         //  - - - - o     o means ocean
 
-        expectSpace(board.getAvailableSpaceByOffset(0, -1), "62", 7, 8);
-        expectSpace(board.getAvailableSpaceByOffset(1, -1), "61", 6, 8);
-        expectSpace(board.getAvailableSpaceByOffset(2, -1), "60", 5, 8);
-        expectSpace(board.getAvailableSpaceByOffset(3, -1), "59", 4, 8);
+        expectSpace(board.getNthAvailableLandSpace(0, -1), "62", 7, 8);
+        expectSpace(board.getNthAvailableLandSpace(1, -1), "61", 6, 8);
+        expectSpace(board.getNthAvailableLandSpace(2, -1), "60", 5, 8);
+        expectSpace(board.getNthAvailableLandSpace(3, -1), "59", 4, 8);
     });
 
-    it("getAvailableSpaceByOffset skips tiles", function() {
-        const space = board.getAvailableSpaceByOffset(2, 1);
-        expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
+    it("getNthAvailableLandSpace skips tiles", function() {
+        const space = board.getNthAvailableLandSpace(2, 1);
+        expectSpace(board.getNthAvailableLandSpace(2, 1), "08", 3, 1);
         space.tile = { tileType: TileType.GREENERY };
-        expectSpace(board.getAvailableSpaceByOffset(2, 1), "09", 4, 1);
+        expectSpace(board.getNthAvailableLandSpace(2, 1), "09", 4, 1);
     });
 
-    it("getAvailableSpaceByOffset skips hazard tiles", function() {
-        const space = board.getAvailableSpaceByOffset(2, 1);
-        expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
+    it("getNthAvailableLandSpace skips hazard tiles", function() {
+        const space = board.getNthAvailableLandSpace(2, 1);
+        expectSpace(board.getNthAvailableLandSpace(2, 1), "08", 3, 1);
         space.tile = { tileType: TileType.DUST_STORM_MILD };
-        expectSpace(board.getAvailableSpaceByOffset(2, 1), "09", 4, 1);
+        expectSpace(board.getNthAvailableLandSpace(2, 1), "09", 4, 1);
+    });
+
+    // This happens with the Ares expansion and cards come out mid-game
+    // after the board is already populated. Though, here, the high
+    // card costs substitite for a heavily-populated board.
+    it("getNthAvailableLandSpace with a large card", function() {
+        expect(board.getNthAvailableLandSpace(46, 1).id).eq("61");
+        expect(board.getNthAvailableLandSpace(47, 1).id).eq("62");
+        expect(board.getNthAvailableLandSpace(48, 1).id).eq("03");
+        expect(board.getNthAvailableLandSpace(49, 1).id).eq("05");
+        expect(board.getNthAvailableLandSpace(50, 1).id).eq("08");
+
+        expect(board.getNthAvailableLandSpace(46, -1).id).eq("05");
+        expect(board.getNthAvailableLandSpace(47, -1).id).eq("03");
+        expect(board.getNthAvailableLandSpace(48, -1).id).eq("62");
+        expect(board.getNthAvailableLandSpace(49, -1).id).eq("61");
+        expect(board.getNthAvailableLandSpace(50, -1).id).eq("60");
     });
 
     it("getOceansOnBoard", function() {

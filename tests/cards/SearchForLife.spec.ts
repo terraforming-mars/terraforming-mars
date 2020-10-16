@@ -42,6 +42,7 @@ describe("SearchForLife", function () {
                game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBES) === undefined) {
             player.megaCredits = 1;
             card.action(player, game);
+            game.runNextInterrupt(() => {});
             expect(player.megaCredits).to.eq(0);
         }
         

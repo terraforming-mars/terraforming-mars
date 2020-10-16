@@ -30,6 +30,7 @@ describe("Incite", function () {
         card.initialAction(player, game);
         expect(game.interrupts.length).to.eq(1);
 
+        game.interrupts[0].generatePlayerInput?.();
         const selectParty = game.interrupts[0] as SelectParty;
         (selectParty.playerInput as OrOptions).options[0].cb();
 

@@ -31,21 +31,21 @@ export const LogPanel = Vue.component("log-panel", {
         parseCardType: function(cardType: CardType, cardName: string) {
             cardName = $t(cardName);
             const suffixFreeCardName = cardName.split(":")[0];
-            let color = undefined;
+            let className = undefined;
             if (cardType === CardType.EVENT) {
-                color="background-color-events";
+                className="background-color-events";
             } else if (cardType === CardType.ACTIVE) {
-                color="background-color-active";
+                className="background-color-active";
             } else if (cardType === CardType.AUTOMATED) {
-                color="background-color-automated";
+                className="background-color-automated";
             } else if (cardType === CardType.PRELUDE) {
-                color="background-color-prelude";
+                className="background-color-prelude";
             }
 
-            if (color === undefined) {
+            if (className === undefined) {
                 return suffixFreeCardName;
             } else {
-                return "<log-card class=\""+ color + "\">"+suffixFreeCardName+"</log-card>";
+                return "<log-card class=\""+ className + "\">" + suffixFreeCardName + "</log-card>";
             }
         },
         parseData: function(data: LogMessageData) {

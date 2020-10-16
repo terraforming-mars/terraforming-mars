@@ -31,6 +31,7 @@ describe("Birds", function () {
 
         card.play(player, game);
         expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
         const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
         selectPlayer.cb(player2);
 

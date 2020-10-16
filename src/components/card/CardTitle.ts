@@ -45,7 +45,6 @@ export const CardTitle = Vue.component("CardTitle", {
             return classes.join(" ");
         },
         getCardTitleWithoutSuffix(title: string): string {
-            // split will always return at least one element.
             return title.split(":")[0];
         }
     },

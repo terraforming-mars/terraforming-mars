@@ -26,12 +26,11 @@ export class BiofertilizerFacility implements IProjectCard {
     public play(player: Player, game: Game) {
         player.addProduction(Resources.PLANTS, 1);
 
-        game.addSelectResourceCardInterrupt(
+        game.addResourceInterrupt(
             player,
-            2,
             ResourceType.MICROBE,
-            player.getResourceCards(ResourceType.MICROBE)
-        );
+            2,
+            undefined);
 
         return new SelectSpace(
             "Select space for Biofertilizer Facility tile",

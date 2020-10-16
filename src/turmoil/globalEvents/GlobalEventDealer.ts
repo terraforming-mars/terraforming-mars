@@ -147,8 +147,8 @@ export class GlobalEventDealer {
         this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.factory()));
     };
 
-    private shuffle(cards: Array<any>): Array<any> {
-        const deck: Array<any> = [];
+    private shuffle(cards: Array<IGlobalEvent>): Array<IGlobalEvent> {
+        const deck: Array<IGlobalEvent> = [];
         const copy = cards.slice();
         while (copy.length) {
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);

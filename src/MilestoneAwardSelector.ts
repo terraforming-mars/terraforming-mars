@@ -169,8 +169,7 @@ function getNumbersRange(start: number, end: number): Array<number> {
 // Venusian.) It does this by way of a weighting algorithm, avoiding high-synergy combinations (such as Gardener
 // and Cultivator, both of which are about placing forest tiles.)
 //
-export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number): IDrawnMilestonesAndAwards {
-    const maxSynergyAllowed = 1;
+export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number, maxSynergyAllowed: number = 1): IDrawnMilestonesAndAwards {
     let maxSynergyDetected = 1000;
     let candidateIdxs: Array<number> = [];
     while(maxSynergyDetected > maxSynergyAllowed) {

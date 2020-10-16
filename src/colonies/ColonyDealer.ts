@@ -61,8 +61,8 @@ export class ColonyDealer {
     public coloniesDeck: Array<IColony> = [];
     public discardedColonies: Array<IColony> = [];
 
-    public shuffle(cards: Array<any>): Array<any> {
-        const deck: Array<any> = [];
+    public shuffle(cards: Array<IColony>): Array<IColony> {
+        const deck: Array<IColony> = [];
         const copy = cards.slice();
         while (copy.length) {
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
@@ -95,7 +95,7 @@ export class ColonyDealer {
             )
         );
         for (let i = 0; i < count; i++) {
-            this.coloniesDeck.push(tempDeck.pop());
+            this.coloniesDeck.push(tempDeck.pop()!);
         }    
         this.discardedColonies.push(...tempDeck);
         this.discardedColonies.sort((a,b) => (a.name > b.name) ? 1 : -1);

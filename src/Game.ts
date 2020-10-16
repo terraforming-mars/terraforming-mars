@@ -55,10 +55,12 @@ import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
+import { getRandomMA_OneByOne } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
+import { Decks } from "./Deck";
+import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
 
 export interface Score {
   corporation: String;
@@ -92,6 +94,7 @@ export interface GameOptions {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: boolean;
+  randomMAOption: string;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
@@ -181,6 +184,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           startingCorporations: 2,
           shuffleMapOption: false,
           randomMA: false,
+          randomMAOption: "limited",
           soloTR: false,
           customCorporationsList: [],
           cardsBlackList: [],
@@ -188,7 +192,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.randomMAOption, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
 
@@ -225,7 +229,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
+        this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA, gameOptions.randomMAOption);
       }
 
       // Add colonies stuff
@@ -251,10 +255,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-
-        corporationCards = this.dealer.corporationCards.filter(
-          (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
-        );
+        const customCorporationCards: CorporationCard[] = [];
+        for (const corp of gameOptions.customCorporationsList) {
+            const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp)
+            if (customCorp) customCorporationCards.push(customCorp);
+        }
+        corporationCards = customCorporationCards;
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
@@ -367,12 +373,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName, randomMA: boolean, hasVenus: boolean): Board {
+    public boardConstructor(boardName: BoardName, randomMA: boolean, randomMAOption: string, hasVenus: boolean): Board {
       const requiredQty = 5;
-
       if (boardName === BoardName.ELYSIUM) {
         if (randomMA) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMAOption);
         } else {
           this.milestones.push(...ELYSIUM_MILESTONES);
           this.awards.push(...ELYSIUM_AWARDS);
@@ -381,7 +386,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         if (randomMA) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMAOption);
         } else {
           this.milestones.push(...HELLAS_MILESTONES);
           this.awards.push(...HELLAS_AWARDS);
@@ -390,7 +395,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         if (randomMA) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMAOption);
         } else {
           this.milestones.push(...ORIGINAL_MILESTONES);
           this.awards.push(...ORIGINAL_AWARDS);
@@ -400,18 +405,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
-      const drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty);
+    public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number, randomMAOption: string) {
+      let drawnMilestonesAndAwards;
+      if (randomMAOption === "limited"){
+        drawnMilestonesAndAwards = getRandomMA_OneByOne(hasVenus, requiredQty);
+      } else {
+        drawnMilestonesAndAwards = getRandomMA_OneByOne(hasVenus, requiredQty, 100, 100, 100, 100);
+      }
       this.milestones.push(...drawnMilestonesAndAwards.milestones);
       this.awards.push(...drawnMilestonesAndAwards.awards);
     }
 
     // Add Venus Next board colonies and milestone / award
-    public setVenusElements(randomMA: boolean, includeVenusMA: boolean) {
+    public setVenusElements(randomMA: boolean, includeVenusMA: boolean, randomMAOption: string) {
       if (randomMA && includeVenusMA) {
         this.milestones = []
         this.awards = []
-        this.setRandomMilestonesAndAwards(true, 6);
+        this.setRandomMilestonesAndAwards(true, 6, randomMAOption);
       } else {
         if (includeVenusMA) this.milestones.push(...VENUS_MILESTONES);
         if (includeVenusMA) this.awards.push(...VENUS_AWARDS);

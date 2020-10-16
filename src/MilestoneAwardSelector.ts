@@ -206,3 +206,105 @@ export function computeSynergy(indexes: Array<number>) : number {
     }
     return max;
 }
+
+export function getRandomMA_OneByOne(withVenusian: boolean = true, 
+    numberMARequested: number, 
+    maxSynergyAllowed: number = 6, 
+    totalSynergyAllowed: number = 20,
+    numberOfHighAllowed: number = 2,
+    highThreshold: number = 4): IDrawnMilestonesAndAwards {
+
+    const shuffled_milestones = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+    const shuffled_awards = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
+    const pickedMA = new MASynergyArray(maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+
+    let milestoneCount = 0;
+    let awardCount = 0;
+
+    while(milestoneCount + awardCount !== numberMARequested*2) {
+        // selects indexes of |count| random milestones and |count| random awards.
+        // For example, if count is 3, output looks like this [m1, m2, m3, a1, a2, a3]
+        // where the first three entries are milestone indexes, and the next three are
+        // award indexes.
+
+        if (awardCount === numberMARequested || (milestoneCount !== numberMARequested && Math.round(Math.random()))) {
+            const newMilestone = shuffled_milestones.splice(0, 1)[0];
+            // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
+            if (newMilestone === undefined) {
+                return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+            }
+            const milestoneAddSuccess = pickedMA.addNewMA(newMilestone);
+            milestoneCount = milestoneAddSuccess ? milestoneCount+1 : milestoneCount;
+        } else {
+            const newAward = shuffled_awards.splice(0, 1)[0];
+            // If need to add more award, but not enough award left, restart the function with a recursive call.
+            if (newAward === undefined) {
+                return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+            }
+            const awardAddSuccess = pickedMA.addNewMA(newAward);
+            awardCount = awardAddSuccess ? awardCount+1 : awardCount;
+
+        }
+    }
+    const finalItems = pickedMA.currentMA.map(n => MA_ITEMS[n]);
+    //console.log(`${pickedMA.currentMA}, TS: ${pickedMA.currentTotalSynergy}, NAbove: ${pickedMA.currentNumberOfHigh}`);
+    return {
+        milestones: finalItems.slice(0, numberMARequested) as Array<IMilestone>,
+        awards: finalItems.slice(numberMARequested) as Array<IAward>,
+    }
+}
+
+class MASynergyArray {
+    currentMA: Array<number>;
+    maxSynergyAllowed: number;
+    totalSynergyAllowed: number;
+    numberOfHighAllowed: number;
+    highThreshold: number;
+
+    currentNumberOfHigh: number;
+    currentTotalSynergy: number;
+  
+    constructor(maxSynergyAllowed: number, totalSynergyAllowed: number, numberOfHighAllowed: number, highThreshold:number) {
+        this.currentMA = [];
+        this.maxSynergyAllowed = maxSynergyAllowed;
+        this.totalSynergyAllowed = totalSynergyAllowed;
+        this.numberOfHighAllowed = numberOfHighAllowed;
+        this.highThreshold = highThreshold;
+        this.currentNumberOfHigh = 0;
+        this.currentTotalSynergy = 0;
+    }
+  
+    // A class function for adding a new milestone or award index
+    // Return true if adding successfully without violating any rule.
+    addNewMA(newMAIndex: number): boolean {
+        let tempTotalSynergy = this.currentTotalSynergy;
+        let temptNumberOfHigh = this.currentNumberOfHigh;
+        let max = 0;
+        
+        // Find synergy of this new item with all previous ones
+        for (const indexPicked of this.currentMA) {
+            const synergy = SYNERGIES[indexPicked][newMAIndex];
+            tempTotalSynergy += synergy;
+            if (synergy > this.highThreshold) {
+                temptNumberOfHigh++;
+            }
+            max = Math.max(synergy, max);
+        }
+        // Check whether the addition violate any rule.
+        if (max <= this.maxSynergyAllowed && temptNumberOfHigh <= this.numberOfHighAllowed && tempTotalSynergy <= this.totalSynergyAllowed) {
+            // If it is an award, push to the end of the array.
+            if (newMAIndex > 15) {
+                this.currentMA.push(newMAIndex);
+            } else { 
+            // If it is a milestone, add to the front of the array
+                this.currentMA.unshift(newMAIndex);
+            }
+            // Update the stats
+            this.currentNumberOfHigh = temptNumberOfHigh;
+            this.currentTotalSynergy = tempTotalSynergy;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

@@ -20,6 +20,7 @@ interface CreateGameModel {
     draftVariant: boolean;
     initialDraft: boolean;
     randomMA: boolean;
+    randomMAOption: string;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     beginnerOption: boolean;
@@ -77,6 +78,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             draftVariant: true,
             initialDraft: false,
             randomMA: false,
+            randomMAOption: "limited",
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             beginnerOption: false,
@@ -236,6 +238,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
             const randomMA = component.randomMA;
+            const randomMAOption = component.randomMAOption;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
@@ -258,7 +261,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
-                let playersCount = players.length;
+                const playersCount = players.length;
                 let neededColoniesCount = playersCount + 2;
                 if (playersCount === 1) {
                     neededColoniesCount = 4;
@@ -310,6 +313,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 clonedGamedId,
                 initialDraft,
                 randomMA,
+                randomMAOption,
                 shuffleMapOption,
             });
 
@@ -530,6 +534,18 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div class="create-game-page-column-row" v-if="randomMA">
+                                <input type="radio" name="randomMAOption" v-model="randomMAOption" value="limited" id="limitedRandomMA-radio">
+                                <label for="limitedRandomMA-radio">
+                                    <span v-i18n>Limited Synergy</span>
+                                </label>
+
+                                <input type="radio" name="randomMAOption" v-model="randomMAOption" value="full" id="unlimitedRandomMA-radio">
+                                <label for="unlimitedRandomMA-radio">
+                                    <span v-i18n>Full Random</span>
+                                </label>
+                            </div>
 
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">

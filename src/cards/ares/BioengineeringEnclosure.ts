@@ -6,6 +6,7 @@ import { CardType } from "../CardType";
 import { IActionCard, IResourceCard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
+import { SelectResourceCard } from "../../interrupts/SelectResourceCard";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
   public cost: number = 7;
@@ -37,12 +38,8 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
     this.resourceCount--;
     game.log("${0} removed 1 animal from Bioengineering Enclosure.", b => b.player(player));
 
-    game.addSelectResourceCardInterrupt(
-      player,
-      1,
-      this.resourceType,
-      // This filter is so the player doesn't have own card as an option.
-      player.getResourceCards(this.resourceType).filter(c => c.name !== this.name));
+    game.addInterrupt(new SelectResourceCard(player, game, this.resourceType, undefined, 1, undefined, undefined, [CardName.BIOENGINEERING_ENCLOSURE]));
+
     return undefined;
   }
 }

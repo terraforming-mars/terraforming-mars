@@ -8,6 +8,7 @@ import { TileType } from "../../../src/TileType";
 import { Ants } from "../../../src/cards/Ants";
 import { Pets } from "../../../src/cards/Pets";
 import { EmptyBoard } from "../../ares/EmptyBoard";
+import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 
 describe("EcologicalSurvey", function () {
   let card : EcologicalSurvey, player : Player, game : Game;
@@ -36,12 +37,12 @@ describe("EcologicalSurvey", function () {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: plants, animals, and microbes.
-    var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = { bonus: ALL_ADJACENCY_BONUSES };
     firstSpace.player = player;
 
-    var microbeCard = new Ants();
-    var animalCard = new Pets();
+    const microbeCard = new Ants();
+    const animalCard = new Pets();
 
     player.playedCards = [card, microbeCard, animalCard];
 
@@ -56,8 +57,12 @@ describe("EcologicalSurvey", function () {
     microbeCard.resourceCount = 0;
     animalCard.resourceCount = 0;
 
-    var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+    const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    let selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
+    selectResourceCard.generatePlayerInput();
+    selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
+    selectResourceCard.generatePlayerInput();
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);

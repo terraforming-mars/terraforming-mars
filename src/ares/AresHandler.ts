@@ -301,11 +301,11 @@ export class AresHandler {
         });
         [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
             if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
-                game.addSelectResourceCardInterrupt(
+                game.addResourceInterrupt(
                     player,
-                    1,
                     resourceType,
-                    player.getResourceCards(resourceType)
+                    1,
+                    undefined,
                 );
             }
         });

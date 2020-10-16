@@ -8,11 +8,14 @@ import { LoadGameForm } from "./LoadGameForm";
 import { DebugUI } from "./DebugUI";
 import { HelpIconology } from "./HelpIconology";
 
+import * as raw_settings from "../../assets/settings.json";
+
 export const mainAppSettings = {
     "el": "#app",
     "data": {
         screen: "empty",
         playerkey: 0,
+        settings: raw_settings,
         isServerSideRequestInProgress: false,
         componentsVisibility: {
             "millestones_list": true,

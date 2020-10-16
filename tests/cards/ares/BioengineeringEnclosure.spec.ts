@@ -9,6 +9,7 @@ import { CardType } from "../../../src/cards/CardType";
 import { ResourceType } from "../../../src/ResourceType";
 import { expect } from "chai";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
+import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 
 describe("BioengineeringEnclosure", function () {
   let card : BioengineeringEnclosure, player : Player, game : Game;
@@ -74,8 +75,9 @@ describe("BioengineeringEnclosure", function () {
 
     card.action(player, game);
 
-    // No interrupts because there's only one card that can accept the animals.
-    expect(game.interrupts).is.empty;
+    const selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
+    selectResourceCard.generatePlayerInput();
+
     expect(card.resourceCount).eq(1);
     expect(animalHost.resourceCount).eq(1);
   });

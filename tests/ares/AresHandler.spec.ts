@@ -18,6 +18,7 @@ import { OriginalBoard } from "../../src/OriginalBoard";
 import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
 import { Phase } from "../../src/Phase";
+import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -105,6 +106,8 @@ describe("AresHandler", function () {
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+        selectHowToPay.generatePlayerInput();
 
         // player who placed next to Nuclear zone, loses two money.
         expect(player.megaCredits).is.eq(0);
@@ -190,6 +193,8 @@ describe("AresHandler", function () {
         expect(player.getTerraformRating()).eq(20);
 
         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+        selectHowToPay.generatePlayerInput();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);
@@ -203,6 +208,8 @@ describe("AresHandler", function () {
         expect(player.getTerraformRating()).eq(20);
 
         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+        selectHowToPay.generatePlayerInput();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);

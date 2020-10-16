@@ -8,6 +8,7 @@ import { IProjectCard } from "../../../src/cards/IProjectCard";
 import { Tags } from "../../../src/cards/Tags";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
+import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 import { ResourceType } from "../../../src/ResourceType";
@@ -68,8 +69,9 @@ describe("BiofertilizerFacility", function () {
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZER_FACILITY);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, AresSpaceBonus.MICROBE]});
 
-    // No interrupts because there's only one card that can accept the microbes.
-    expect(game.interrupts).is.empty;
+    const selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
+    selectResourceCard.generatePlayerInput();
+
     expect(microbeHost.resourceCount).is.eq(2);
   });
 

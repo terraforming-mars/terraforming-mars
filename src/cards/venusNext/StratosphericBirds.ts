@@ -27,7 +27,7 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
             const floaterCard = cardsWithFloater[0];
             if (floaterCard.name !== CardName.DIRIGIBLES) return meetsVenusRequirements;
 
-            const canPayForFloater = (floaterCard.resourceCount! * 3 + player.megaCredits) >= 15
+            const canPayForFloater = ((floaterCard.resourceCount! - 1) * 3 + player.megaCredits) >= 12
             return canPayForFloater && meetsVenusRequirements;
         }
     }
@@ -35,17 +35,7 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
         const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
 
         if (cardsWithFloater.length === 1) {
-            const floaterCard = cardsWithFloater[0];
-            
-            if (floaterCard.resourceCount! > 0) {
-                player.removeResourceFrom(floaterCard, 1);
-            } else {
-                player.megaCredits -= 3;
-            }
-
-            return undefined;
-        } else if (cardsWithFloater.length === 0) {
-            player.megaCredits -= 3;
+            player.removeResourceFrom(cardsWithFloater[0], 1);
             return undefined;
         }
 

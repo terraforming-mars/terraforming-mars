@@ -21,9 +21,11 @@ import { ShiftAresGlobalParameters } from "./ShiftAresGlobalParameters";
 var ui_update_timeout_id: number | undefined = undefined;
 
 export const WaitingFor = Vue.component("waiting-for", {
-    props: ["player", "players", "waitingfor"],
+    props: ["player", "players", "settings", "waitingfor"],
     data: function () {
-        return {}
+        return {
+            waitingForTimeout: this.settings.waitingForTimeout
+        }
     },
     components: {
         "and-options": AndOptions,
@@ -83,7 +85,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 xhr.responseType = "json";
                 xhr.send();
             }
-            ui_update_timeout_id = (setTimeout(askForUpdate, 5000) as any);
+            ui_update_timeout_id = (setTimeout(askForUpdate, this.waitingForTimeout) as any);
         }
     },
     render: function (createElement) {

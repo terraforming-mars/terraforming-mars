@@ -1,3 +1,4 @@
+const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
@@ -34,5 +35,32 @@ function getAllTranslations() {
     return translations;
 }
 
-let translationsJSON = JSON.stringify(getAllTranslations());
-fs.writeFileSync("assets/translations.json", translationsJSON);
+function generateAppVersion() {
+    // assumes SOURCE_VERSION is git hash
+    if (process.env.SOURCE_VERSION) {
+        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
+    }
+    try {
+        return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
+    } catch (error) {
+        console.warn("unable to generate app version", error);
+        return "unknown version";
+    }
+}
+
+function getWaitingForTimeout() {
+    if (process.env.WAITING_FOR_TIMEOUT) {
+        return Number(process.env.WAITING_FOR_TIMEOUT);
+    }
+    return 5000;
+}
+
+fs.writeFileSync("assets/settings.json", JSON.stringify({
+    version: generateAppVersion(),
+    waitingForTimeout: getWaitingForTimeout()
+}));
+
+fs.writeFileSync("assets/translations.json", JSON.stringify(
+    getAllTranslations()
+));
+

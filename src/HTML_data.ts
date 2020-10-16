@@ -5682,4 +5682,319 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.BIOENGINEERING_ENCLOSURE,`
+    <div class="card-number">A01</div>
+    <div class="content ">
+        <div class="requirements ">1 Science</div>
+        <div class="description " style="text-align:left;">
+            <div class="resource animal "></div><div class="resource animal "></div><br/>
+            <div class="resource animal "></div><span class="red-arrow"></span><div class="resource animal"></div><br/>
+            (Action: Remove 1 animal from this card to add 1 animal to another card.
+            Requires 1 science tag. Add 2 animals to this card.
+            OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.)<br>
+        </div>
+    </div>
+`],
+[CardName.BIOFERTILIZER_FACILITY,`
+    <div class="card-number">A02</div>
+    <div class="content ">
+        <div class="requirements ">1 Science</div>
+        <div class="production-box production-box-size1a ">
+            <div class="production-prefix plus"></div><div class="plant production "></div>
+        </div>
+        <div class="microbe resource "></div><div class="microbe resource "></div>
+        <div class="ares-tile board-space-tile--biofertilizer_facility"></div>
+        <div class="description " style="text-align:left;">
+            (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)<br>
+        </div>
+    </div>
+`],
+[CardName.BUTTERFLY_EFFECT,`
+    <div class="card-number">A03</div>
+    <div class="content ">
+        <div class="tile rating"></div><br/>
+        <div class="card-content-requirements">
+          <div class="globals-box">All four hazard markers</div>: -1 / 0 / +1
+        </div>
+        <div class="description " style="text-align:left;">
+            (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)<br>
+        </div>
+    </div>
+`],
+[CardName.DESPERATE_MEASURES,`
+    <div class="card-number">A04</div>
+    <div class="content ">
+        <div class="points ">-2</span></div>
+        <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
+        <div class="description " style="text-align:left;">
+            (Effect: Place a bronze cube on a dust storm tile and raise oxygen
+              1 step, or place a bronze cube on an erosion tile and raise the
+              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
+        </div>
+    </div>
+`],
+[CardName.ECOLOGICAL_SURVEY,`
+    <div class="card-number">A05</div>
+    <div class="content ">
+        <div class="requirements ">3 Forests</div>
+        <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource plant "></div><div class="resource animal "></div><div class="resource microbe "></div><br/>
+        </div><br/>
+        <div class="description " style="text-align:left;">
+            (Effect: When placing a tile grants you any plants, animals or microbes,
+              you gain one additional of each of those resources that you gain.
+            Requires 3 greeneries on Mars.)<br>
+        </div>
+    </div>
+`],
+[CardName.GEOLOGICAL_SURVEY,`
+    <div class="card-number">A06</div>
+    <div class="content ">
+        <div class="requirements ">Max 5 Forests</div>
+        <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource steel "></div><div class="resource titanium "></div><div class="resource heat "></div><br/>
+        </div><br/>
+        <div class="description " style="text-align:left;">
+            (Effect: When placing a tile grants you any steel, titanium, or heat,
+              you gain one additional of each of those resources that you gain.
+            Requires 5 or fewer greeneries on Mars.)<br>
+        </div>
+    </div>
+`],
+[CardName.MARKETING_EXPERTS,`
+    <div class="card-number">A07</div>
+    <div class="content ">
+        <div>
+          <div class="ares-tile board-space-tile--empty-tile "></div><div class="ares-tile board-space-tile--adjacency-tile "></div>: <span class=" money resource ">1</span><br/>
+          <div class="production-box">
+            <div class="money production">1</div>
+          </div>
+        </div><br/>
+        <div class="description " style="text-align:left;">
+            (Effect: When an <b>adjacency bonus</b> is collected from a tile you own, you gain 1M€. Increase your M€ production 1 step.)<br>
+        </div>
+    </div>
+`],
+[CardName.METALLIC_ASTEROID,`
+    <div class="card-number">A08</div>
+    <div class="content ">
+        <div class="tile temperature-tile"></div>
+        <div class="titanium resource "></div>
+        -4<div class="resource plant red-outline"></div>
+        <div class="ares-tile board-space-tile--metallic_asteroid"></div>
+        <div class="description " style="text-align:left;">
+            (Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an <b>adjacency bonus</b> of 1 titanium.)<br>
+        </div>
+    </div>
+`],
+[CardName.OCEAN_CITY,`
+    <div class="card-number">A09</div>
+    <div class="content ">
+        <div class="requirements ">6 Oceans</div>
+        <div class="ares-tile board-space-tile--ocean_city"></div>
+        
+        <div class="production-box production-box-size2 ">
+            <div class="production-prefix minus"></div><div class="energy production "></div><br>
+            <div class="production-prefix plus"></div><div class="money production ">3</div>
+        </div>
+
+        <div class="description " style="text-align:left;">
+          (Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps.<br>
+            Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES.
+            The tile counts as a city as well as an ocean.)
+     </div>
+    </div>
+`],
+[CardName.OCEAN_FARM,`
+    <div class="card-number">A10</div>
+    <div class="content ">
+        <div class="ares-tile board-space-tile--ocean_farm"></div>
+        <div class="requirements ">4 Oceans</div>
+        <div class="production-box production-box-size2 ">
+            <div class="production-prefix plus"></div><div class="heat production "></div>
+            <div class="production-prefix plus"></div><div class="plant production "></div>
+        </div>
+        <div class="description " style="text-align:left;">
+            (Requires 4 ocean tiles. Increase your heat production 1 step and increase your
+            plant production 1 step.<br>Place this tile on top of an existing ocean tile.
+            The tile grants an <b>adjacency bonus</b> of 1 plant.)
+        </div>
+    </div>
+`],
+[CardName.CAPITAL_ARES,`
+    <div class="card-number">A11</div>
+    <div class="content ">
+        <div class="points ">1/<span class="resource ocean-resource "></span></div>
+        <div class="requirements ">4 Oceans</div>
+        <div class="production-box production-box-size2a ">
+            <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
+            <div class="production-prefix plus"></div><div class="money production ">5</div>
+        </div>
+        <div class="ares-tile board-space-tile--capital_ares"></div>
+        <div class="description " style="text-align:left;">
+            (Requires 4 ocean tiles. Place this tile which grants an <b>adjacency bonus</b> of 2M€. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+            <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
+                1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
+            </div>
+        </div>
+    </div>
+`],
+[CardName.COMMERCIAL_DISTRICT_ARES,`
+    <div class="card-number">A12</div>
+    <div class="content ">
+      <div class="points big">1/<div class="tile city-tile-small"></div></div>
+      <div class="production-box production-box-size1a">
+          <div class="production-prefix minus"></div><div class="energy production"></div>
+          <div class="production-prefix plus"></div><div class="money production">4</div>
+      </div>
+      <div class="ares-tile board-space-tile--commercial_district_ares"></div>
+      <div class="description" style="margin-top:-5px">
+      (Decrease your energy production 1 step and increase your MC production 4 steps.
+      <br/><br/>
+      Place this tile which grants an <b>adjacency bonus</b> of 2M€. 1 VP PER ADJACENT CITY TILE.)
+      </div>
+    </div>
+`],
+[CardName.OCEAN_SANCTUARY,`
+    <div class="card-number">A13</div>
+    <div class="content ">
+        <div class="points big">1/<div class="resource animal"></div></div>
+        <div class="requirements ">5 Oceans</div>
+        <div class="ares-tile board-space-tile--ocean_sanctuary"></div>
+        <div class="resource animal "></div>
+        <div class="description " style="text-align:left;">
+            (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
+              The tile grants an <b>adjacency bonus</b> of 1 animal.<br/>
+              Add 1 animal to this card. 1 VP per animal on this card.)
+        </div>
+    </div>
+`],
+[CardName.SOLAR_FARM,`
+    <div class="card-number">A14</div>
+    <div class="content ">
+        <div class="production-box production-box-size2a">
+          <div class="energy production"></div> / <div class="resource-tag tag-plant"></div>
+        </div>
+        <div class="ares-tile board-space-tile--solar_farm"></div>
+        <div class="description " style="text-align:left;">
+            Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.<br>
+        </div>
+    </div>
+`],
+[CardName.ECOLOGICAL_ZONE_ARES,`
+    <div class="card-number">A15</div>
+    <div class="content">
+      <div class="points">1/2<div class="resource animal"></div></div>
+      <div class="requirements">Forest</div>
+      <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
+      <div class="ares-tile board-space-tile--ecological_zone_ares"></div>
+      <div class="description">
+        (Effect: When you play an animal or plant tag (including these), add an animal to this card.<br/><br/>
+        Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
+      </div>
+    </div>
+`],
+[CardName.INDUSTRIAL_CENTER_ARES,`
+    <div class="card-number">A16</div>
+    <div class="content ">
+        <div class="money resource ">7</div> <div class="red-arrow "></div> <div class="production-box"><div class="steel production "></div></div>
+        <div class="description ">
+            (Action: Spend 7 MC to increase your steel production 1 step.)
+        </div><br>
+        <div class="ares-tile board-space-tile--industrial_center_ares"></div>
+        <div class="description ">
+            (Place this tile adjacent to a city tile. This tile grants an <b>adjacency bonus</b> of 1 steel.)
+        </div>
+    </div>
+`],
+[CardName.LAVA_FLOWS_ARES,`
+    <div class="card-number">A17</div>
+    <div class="content ">
+        <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
+        <div class="ares-tile board-space-tile--lava_flows_ares"></div>
+        <div class="description ">
+          (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. 
+          This tile grants an <b>adjacency bonus</b> of 2 heat.)
+        </div>
+    </div>
+`],
+[CardName.MINING_AREA_ARES,`
+    <div class="card-number">A18</div>
+    <div class="content">
+      <div class="ares-tile board-space-tile--mining_area_ares"></div>
+      <div class="production-box production-box-size3">
+        <div class="steel production"></div> OR <div class="titanium production"></div>
+      </div> *
+      <div class="description">
+        (Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES.
+          This tile provides an <b>adjacency bonus</b> of the same resource as the area.
+          Increase your production of that resource 1 step.)
+      </div>
+    </div>
+`],
+[CardName.MINING_RIGHTS_ARES,`
+    <div class="card-number">A19</div>
+    <div class="content">
+      <div class="ares-tile board-space-tile--mining_rights_ares"></div>
+      <div class="production-box production-box-size3">
+        <div class="steel production"></div> OR <div class="titanium production"></div>
+      </div> *
+      <div class="description">
+        (Place one of these tiles on an area with a steel or titanium placement bonus.
+        This tile provides an <b>adjacency bonus</b> of the same resource as the area.
+        Increase your production of that resource 1 step.)      
+      </div>
+    </div>
+`],
+[CardName.MOHOLE_AREA_ARES,`
+    <div class="card-number">A20</div>
+    <div class="content">
+      <div class="production-box production-box-size1a">
+        4 <div class="heat production"></div>
+      </div><br>
+      <div class="ares-tile board-space-tile--mohole_area_ares"></div>
+      <div class="description">
+        (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.
+          The tile grants an <b>adjacency bonus</b> of 2 heat.)
+      </div>
+    </div>
+`],
+[CardName.NATURAL_PRESERVE_ARES,`
+    <div class="card-number">A21</div>
+    <div class="content">
+      <div class="points points-big">1</div>
+      <div class="requirements requirements-max">max 4% O2</div>
+      <div class="production-box">
+        <div class="money production">1</div>
+      </div>
+      <div class="ares-tile board-space-tile--natural_preserve_ares"></div>
+      <div class="description">
+        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. 
+          The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
+      </div>
+    </div>
+`],
+[CardName.NUCLEAR_ZONE_ARES,`
+    <div class="card-number">A22</div>
+    <div class="content">
+      <div class="points points-big">-2</div>
+      <div class="ares-tile board-space-tile--nuclear_zone_ares"></div>
+      <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
+      <div class="description">
+        (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€
+          when they place a tile with their player marker on it adjacent to the Nuclear Zone.)
+      </div>
+    </div>
+`],
+[CardName.RESTRICTED_AREA_ARES,`
+    <div class="card-number">A23</div>
+    <div class="content ">
+        <div class="money resource ">2</div> <div class="red-arrow "></div> <div class="card resource "></div>
+        <div class="description ">
+            (Action: Spend 2 M€ to draw a card.)
+        </div><br>
+        <div class="ares-tile board-space-tile--restricted_area_ares"></div>
+        <div class="description ">
+          (Place this tile which grants an <b>adjacency bonus</b> of 1 card.)
+        </div>
+    </div>
+`],
 ]);

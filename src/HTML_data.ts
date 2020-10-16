@@ -1922,7 +1922,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production money">1</div> / <div class="resource-tag tag-space"></div>
           </div>
           <div class="description">
-            (Increase your MC production 1 step for each space tag your have, including this one.)
+            (Increase your MC production 1 step for each space tag you have, including this one.)
           </div>
         </div>
 `],

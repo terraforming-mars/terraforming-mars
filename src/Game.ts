@@ -262,8 +262,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
             }
         }
         corporationCards = customCorporationCards;
-      } else if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length < minCorpsRequired){
-        throw new Error("Not enough custom corps selected for all players");
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);

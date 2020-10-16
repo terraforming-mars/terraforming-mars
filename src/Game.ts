@@ -59,6 +59,8 @@ import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
+import { Decks } from "./Deck";
+import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
 
 export interface Score {
   corporation: String;
@@ -251,10 +253,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-
-        corporationCards = this.dealer.corporationCards.filter(
-          (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
-        );
+        const customCorporationCards: CorporationCard[] = [];
+        for (const corp of gameOptions.customCorporationsList) {
+            const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp)
+            if (customCorp) customCorporationCards.push(customCorp);
+        }
+        corporationCards = customCorporationCards;
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);

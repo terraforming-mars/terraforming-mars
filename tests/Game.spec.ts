@@ -23,6 +23,7 @@ import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
 import { Helion } from "../src/cards/corporation/Helion";
 import { COMMUNITY_CARD_MANIFEST } from "../src/cards/community/CommunityCardManifest";
+import { CardName } from "../src/CardName";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -399,5 +400,24 @@ describe("Game", function () {
 
         expect(prevMilestones).to.not.eq(milestones)
         expect(prevAwards).to.not.eq(awards)
+    });
+
+
+    it("specifically-requested corps override expansion corps", function() {
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const corpsFromTurmoil = [
+            CardName.LAKEFRONT_RESORTS,
+            CardName.PRISTAR,
+            CardName.TERRALABS_RESEARCH,
+            CardName.UTOPIA_INVEST
+        ]
+        const gameOptions = setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false}) as GameOptions;
+        new Game("foobar", [player, player2], player, gameOptions);
+
+        const corpsAssignedToPlayers =
+            [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map(c => c.name);
+
+        expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
     });
 });

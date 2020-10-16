@@ -1922,7 +1922,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production money">1</div> / <div class="resource-tag tag-space"></div>
           </div>
           <div class="description">
-            (Increase your MC production 1 step for each space tag your have, including this one.)
+            (Increase your MC production 1 step for each space tag you have, including this one.)
           </div>
         </div>
 `],
@@ -4268,13 +4268,13 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="tringle triangle-red"></div>: <div class="production-box"><div class="resource money">1</div></div>
+          <div class="tile colony red-outline"></div>: <div class="production-box"><div class="production money">1</div></div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Effect: When any colony is placed, including this, raise your MC production 1 step.)
           </div>
         </div>
         <div class="poseidon">POSEIDON</div>
-        <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="tile colony"></div>
+        <div class="resource money" style="margin-left:70px;">45</div> <div class="tile colony"></div>
         <div class="description" style="text-align:center;margin-top:0px;">
           (You start with 45MC. As your first action, place a colony.)
         </div>

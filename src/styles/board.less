@@ -52,7 +52,7 @@
     width: 16px;
     height: 16px;
     margin: 0 0 0 2px;
-    border-radius: 3px;
+    border-radius: 2px;
 
 	&.board-space-bonus-pos--1 {
 		margin: 15px 0 0 5px;
@@ -249,6 +249,8 @@
 
 .board-space-type-ocean {
 	background: url(assets/hex_blue.png) no-repeat;
+	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    background-color: #0af4;
 }
 
 .board-ocean-checkmark{

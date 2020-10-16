@@ -28,7 +28,7 @@ export const PlayerInfo = Vue.component("player-info", {
             return classes.join(" ");
         },
         getIsActivePlayer: function (): boolean {
-            return this.player.id === this.activePlayer.id;
+            return this.player.id === this.activePlayer.color;
         },
     },
     template: ` 

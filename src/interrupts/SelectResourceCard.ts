@@ -16,17 +16,12 @@ export class SelectResourceCard implements PlayerInterrupt {
         public resourceType: ResourceType,
         public title: string | undefined,
         public count: number = 1,
-        public optionalCard: ICard | undefined,
         public restrictedTag?: Tags
     ){}
 
     public generatePlayerInput() {
         let resourceCards = this.player.getResourceCards(this.resourceType);
 
-        // Played card is not into playedCards array yet
-        if (this.optionalCard !== undefined) {
-            resourceCards.push(this.optionalCard);
-        }
         if (this.restrictedTag !== undefined) {
             resourceCards = resourceCards.filter(card => card.tags.indexOf(this.restrictedTag!) !== -1);
         }

@@ -1,11 +1,11 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { ResourceType } from '../../ResourceType';
+import { Game } from "../../Game";
+import { ResourceType } from "../../ResourceType";
 import { LogHelper } from "../../components/LogHelper";
 
 export class EcologyResearch implements IProjectCard {
@@ -24,7 +24,7 @@ export class EcologyResearch implements IProjectCard {
             player.addResourceTo(animalCards[0], 1);
             LogHelper.logAddResource(game, player, animalCards[0]);
         } else if (animalCards.length > 1) {
-            game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
+            game.addResourceInterrupt(player, ResourceType.ANIMAL, 1);
         }
 
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
@@ -33,7 +33,7 @@ export class EcologyResearch implements IProjectCard {
             player.addResourceTo(microbeCards[0], 2);
             LogHelper.logAddResource(game, player, microbeCards[0], 2);
         } else if (microbeCards.length > 1) {
-            game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
+            game.addResourceInterrupt(player, ResourceType.MICROBE, 2);
         }
 
         return undefined;

@@ -24,7 +24,7 @@ export class FloaterTechnology implements IProjectCard {
             player.addResourceTo(floaterCards[0], 1);
             LogHelper.logAddResource(game, player, floaterCards[0]);
         } else if (floaterCards.length > 1) {
-            game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
+            game.addResourceInterrupt(player, ResourceType.FLOATER, 1);
         }
 
         return undefined;

@@ -1,10 +1,10 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
@@ -26,7 +26,7 @@ export class NitrogenFromTitan implements IProjectCard {
 
     public play(player: Player, game: Game) {
       player.increaseTerraformRatingSteps(2, game);
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
       return undefined;
     }
     public getVictoryPoints() {

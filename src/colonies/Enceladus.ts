@@ -1,8 +1,8 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { ResourceType } from '../ResourceType';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { ColonyName } from "./ColonyName";
+import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
 
 export class Enceladus extends Colony implements IColony {
     public name = ColonyName.ENCELADUS;
@@ -17,15 +17,15 @@ export class Enceladus extends Colony implements IColony {
         } else {
             microbes = this.trackPosition;
         }
-        game.addResourceInterrupt(player, ResourceType.MICROBE, microbes, undefined);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, microbes);
         if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.MICROBE, 3, undefined);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, 3);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        game.addResourceInterrupt(player, ResourceType.MICROBE,1, undefined);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, 1);
     }    
 }

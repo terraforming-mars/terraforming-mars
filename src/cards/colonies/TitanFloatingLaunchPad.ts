@@ -47,7 +47,7 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this, Tags.JOVIAN);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
       return undefined;
     }
 

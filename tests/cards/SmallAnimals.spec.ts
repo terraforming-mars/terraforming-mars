@@ -39,7 +39,8 @@ describe("SmallAnimals", function () {
         
         player.playedCards.push(card);
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(0);
+        game.interrupts[0].generatePlayerInput?.();
+        expect(game.interrupts[0].playerInput).to.eq(undefined);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
     });
 

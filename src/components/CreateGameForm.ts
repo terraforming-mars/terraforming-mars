@@ -11,8 +11,6 @@ import { CardsFilter } from "./CardsFilter";
 import { Button } from "../components/common/Button";
 import { playerColorClass } from "../utils/utils";
 
-
-
 interface CreateGameModel {
     firstIndex: number;
     playersCount: number;
@@ -21,7 +19,8 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
-    randomMA: RandomMilestoneAward;
+    randomMA: boolean;
+    randomMAOption: string;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     beginnerOption: boolean;
@@ -78,7 +77,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
-            randomMA: NONE,
+            randomMA: false,
+            randomMAOption: "limited",
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             beginnerOption: false,

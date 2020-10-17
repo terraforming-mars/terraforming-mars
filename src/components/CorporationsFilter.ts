@@ -5,7 +5,13 @@ import { ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, MANIFEST_BY_MODULE } from ".
 import { GameModule } from "../GameModule";
 
 function corpCardNames(module: GameModule): Array<CardName> {
-    return MANIFEST_BY_MODULE.get(module)!.corporationCards.cards.map(cf => cf.cardName);
+    const manifest = MANIFEST_BY_MODULE.get(module);
+    if (manifest === undefined) {
+        console.log("manifest %s not found", manifest);
+        return [];
+    } else {
+        return manifest.corporationCards.cards.map(cf => cf.cardName);
+    }
 }
 
 // TODO(kberg): no need for both ALL_CORPORATION_DECKS and MANIFEST_BY_MODULE
@@ -37,8 +43,12 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             if (group === "All") return allItems.slice();
 
             const corps = this.cardsByModuleMap.get(group as GameModule);
-                        
-            return corps!.slice();
+            if (corps === undefined) {
+                console.log("module %s not found", group);
+                return [];
+            } else {
+                return corps.slice();
+            }
         },
         selectAll: function (group: string) {
             const items = this.getItemsByGroup(group);

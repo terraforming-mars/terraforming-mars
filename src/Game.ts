@@ -55,7 +55,7 @@ import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { getRandomMA_OneByOne } from "./MilestoneAwardSelector";
+import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
@@ -408,9 +408,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number, randomMAOption: string) {
       let drawnMilestonesAndAwards;
       if (randomMAOption === "limited"){
-        drawnMilestonesAndAwards = getRandomMA_OneByOne(hasVenus, requiredQty);
+        drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty);
       } else {
-        drawnMilestonesAndAwards = getRandomMA_OneByOne(hasVenus, requiredQty, 100, 100, 100, 100);
+        drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty, 100, 100, 100, 100);
       }
       this.milestones.push(...drawnMilestonesAndAwards.milestones);
       this.awards.push(...drawnMilestonesAndAwards.awards);

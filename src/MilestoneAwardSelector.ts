@@ -165,54 +165,12 @@ function getNumbersRange(start: number, end: number): Array<number> {
     return Array.from(Array(end + 1 - start).keys()).map(n => n + start)
 }
 
-// Selects |count| milestones and |count| awards from all available awards and milestones (optionally including
-// Venusian.) It does this by way of a weighting algorithm, avoiding high-synergy combinations (such as Gardener
-// and Cultivator, both of which are about placing forest tiles.)
-//
-export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number, maxSynergyAllowed: number = 1): IDrawnMilestonesAndAwards {
-    let maxSynergyDetected = 1000;
-    let candidateIdxs: Array<number> = [];
-    while(maxSynergyDetected > maxSynergyAllowed) {
-        // selects indexes of |count| random milestones and |count| random awards.
-        // For example, if count is 3, output looks like this [m1, m2, m3, a1, a2, a3]
-        // where the first three entries are milestone indexes, and the next three are
-        // award indexes.
-        const rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
-        const cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
-        candidateIdxs = [...rows.slice(0, count), ...cols.slice(0, count)];
-
-        // Search through all pairs of [m1, m2, m3, a1, a2, a3], reading the synergy of
-        // each. In this way the maximum synergy is computed between the n*(n-1) pairs.
-        maxSynergyDetected = computeSynergy(candidateIdxs);
-
-        // After this, the while loop kicks in again. maxSynergyAllowed is 1. So, if any pairs of
-        // [m1, m2, m3, a1, a2, a3] have synergy > 1, the option is rejected and the loop restarts.
-    }
-    const finalItems = candidateIdxs.map(n => MA_ITEMS[n]);
-    return {
-        milestones: finalItems.slice(0, count) as Array<IMilestone>,
-        awards: finalItems.slice(count) as Array<IAward>,
-    }
-}
-
-// Visible for testing.
-export function computeSynergy(indexes: Array<number>) : number {
-    let max = 0;
-    for (let i = 0; i<indexes.length - 1; i++) {
-        for (let j = i + 1; j<indexes.length; j++) {
-            const synergy = SYNERGIES[indexes[i]][indexes[j]];
-            max = Math.max(synergy, max);
-        }
-    }
-    return max;
-}
-
 // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
 // Venusian.) It does this by following these rules:
 // 1) No pair with synergy above |maxSynergyAllowed|.
 // 2) Total synergy is |totalSynergyAllowed| or below.
 // 3) Limited a number of synergy pair above |highThreshold| to |numberOfHighAllowed| or below.
-export function getRandomMA_OneByOne(withVenusian: boolean = true, 
+export function getRandomMilestonesAndAwards(withVenusian: boolean = true, 
     numberMARequested: number, 
     maxSynergyAllowed: number = 6, 
     totalSynergyAllowed: number = 20,
@@ -235,14 +193,14 @@ export function getRandomMA_OneByOne(withVenusian: boolean = true,
             const newMilestone = shuffled_milestones.splice(0, 1)[0];
             // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
             if (newMilestone === undefined) {
-                return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+                return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
             if (pickedMA.addNewMA(newMilestone)) milestoneCount++;
         } else {
             const newAward = shuffled_awards.splice(0, 1)[0];
             // If need to add more award, but not enough award left, restart the function with a recursive call.
             if (newAward === undefined) {
-                return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+                return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
             if (pickedMA.addNewMA(newAward)) awardCount++;
 

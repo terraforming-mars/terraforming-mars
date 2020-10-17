@@ -12,7 +12,6 @@ import { ColonyModel } from "./models/ColonyModel";
 import { ColonyName } from "./colonies/ColonyName";
 import { Color } from "./Color";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { CorporationName } from "./CorporationName";
 import { Database } from "./database/Database";
 import { Dealer } from "./Dealer";
 import { Decks } from "./Deck";
@@ -1246,7 +1245,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Check for Aphrodite corporation
       this.players.forEach((player) => {
-        if (player.isCorporation(CorporationName.APHRODITE)) {
+        if (player.isCorporation(CardName.APHRODITE)) {
           player.megaCredits += 2 * steps;
         }
       });
@@ -1412,7 +1411,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
 
       // Part 3. Setup for bonuses
-      const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
+      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
 
       // Part 4. Place the tile
       space.tile = tile;

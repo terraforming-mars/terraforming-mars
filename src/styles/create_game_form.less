@@ -272,6 +272,20 @@
 .create-game-page-color-row input[type="radio"]:checked + label {
     background-color: rgb(199, 199, 199);
 }
+
+.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption {
+    position: relative;
+}
+.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption::after {
+    position: absolute;
+    width: 40px;
+    height: 12px;
+    top: -10px;
+    left: 50%;
+    margin-left: -20px;
+    content: " ";
+    background-color: rgb(199, 199, 199);
+}
   
 .create-game-colorbox {
     width: 25px;

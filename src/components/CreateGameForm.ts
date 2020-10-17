@@ -542,14 +542,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <div class="create-game-page-column-row" v-if="randomMA">
                                 <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMAOption" value="limited" id="limitedRandomMA-radio">
-                                <label for="limitedRandomMA-radio">
+                                <label class="label-randomMAOption" for="limitedRandomMA-radio">
                                     <span v-i18n>Limited Synergy</span>
                                 </label>
                                 </div>
 
                                 <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMAOption" value="full" id="unlimitedRandomMA-radio">
-                                <label for="unlimitedRandomMA-radio">
+                                <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
                                     <span v-i18n>Full Random</span>
                                 </label>
                                 </div>

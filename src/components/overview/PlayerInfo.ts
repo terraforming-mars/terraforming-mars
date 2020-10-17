@@ -19,16 +19,16 @@ export const PlayerInfo = Vue.component("player-info", {
     },
     methods: {
         getClasses: function (): string {
-            let classes = ["player-info"];
+            const classes = ["player-info"];
             classes.push(playerColorClass(this.player.color, "bg_transparent"));
             return classes.join(" ");
         },
         getPlayerStatusAndResClasses: function (): string {
-            let classes = ["player-status-and-res"];
+            const classes = ["player-status-and-res"];
             return classes.join(" ");
         },
         getIsActivePlayer: function (): boolean {
-            return this.player.id === this.activePlayer.id;
+            return this.player.color === this.activePlayer.color;
         },
     },
     template: ` 

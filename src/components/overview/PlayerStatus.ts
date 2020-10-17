@@ -28,8 +28,8 @@ export const PlayerStatus = Vue.component("player-status", {
     methods: {
         togglePlayerDetails: function () {
             // for active player => scroll to cards UI
-            if (this.player.id === this.activePlayer.id) {
-                let el: HTMLElement = document.getElementsByClassName(
+            if (this.player.color === this.activePlayer.color) {
+                const el: HTMLElement = document.getElementsByClassName(
                     "preferences_icon--cards"
                 )[0] as HTMLElement;
                 el.click();
@@ -43,7 +43,7 @@ export const PlayerStatus = Vue.component("player-status", {
             return this.actionLabel !== ActionLabel.NONE;
         },
         getLabelClasses: function (): string {
-            let classes = [];
+            const classes = [];
             const baseClass = "player-action-status";
             classes.push(baseClass);
             if (this.actionLabel === ActionLabel.PASSED) {
@@ -54,7 +54,7 @@ export const PlayerStatus = Vue.component("player-status", {
             return classes.join(" ");
         },
         getPlayerNameClasses: function (): string {
-            let classes = [];
+            const classes = [];
             const baseClass = "player-name";
             classes.push(baseClass);
             if (this.player.id === this.activePlayer.id) {
@@ -67,7 +67,7 @@ export const PlayerStatus = Vue.component("player-status", {
         },
         pinPlayer: function () {
             let hiddenPlayersIndexes: Array<Number> = [];
-            let playerPinned = isPinned(this.$root, this.playerIndex);
+            const playerPinned = isPinned(this.$root, this.playerIndex);
 
             // if player is already pinned, add to hidden players (toggle)
             hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
@@ -77,7 +77,7 @@ export const PlayerStatus = Vue.component("player-status", {
                     (index) => index !== this.playerIndex
                 );
             }
-            for (var i = 0; i < hiddenPlayersIndexes.length; i++) {
+            for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
                 if (hiddenPlayersIndexes.includes(i)) {
                     hidePlayerData(this.$root, i.toString());
                 }

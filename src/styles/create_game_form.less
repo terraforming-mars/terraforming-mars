@@ -122,7 +122,12 @@
 .create-game-page-column-row {
     display: flex;
     flex-flow: row nowrap;
-  }
+}
+
+
+.create-game-page-column-row > div{
+    flex-grow: 1;
+}
 
 .create-game-page-column input[type="checkbox"] {
   opacity: 0;
@@ -148,6 +153,8 @@
   min-width: 125px;
   height: 60px;
   line-height: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .create-game-page-column .expansion-button {

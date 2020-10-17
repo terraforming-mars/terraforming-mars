@@ -514,15 +514,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h4 v-i18n>Multiplayer Options</h4>
 
                             <div class="create-game-page-column-row">
+                                <div>
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
                                 <label for="draft-checkbox">
                                     <span v-i18n>Draft variant</span>
                                 </label>
+                                </div>
 
+                                <div>
                                 <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
                                 <label for="initialDraft-checkbox">
                                     <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
+                                </div>
                             </div>
 
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
@@ -536,15 +540,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <div class="create-game-page-column-row" v-if="randomMA">
+                                <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMAOption" value="limited" id="limitedRandomMA-radio">
                                 <label for="limitedRandomMA-radio">
                                     <span v-i18n>Limited Synergy</span>
                                 </label>
+                                </div>
 
+                                <div>
                                 <input type="radio" name="randomMAOption" v-model="randomMAOption" value="full" id="unlimitedRandomMA-radio">
                                 <label for="unlimitedRandomMA-radio">
                                     <span v-i18n>Full Random</span>
                                 </label>
+                                </div>
                             </div>
 
                             <template v-if="venusNext">

@@ -165,6 +165,18 @@ function getNumbersRange(start: number, end: number): Array<number> {
     return Array.from(Array(end + 1 - start).keys()).map(n => n + start)
 }
 
+// Function to compute max synergy of a given set of milestones and awards.
+export function computeSynergy(indexes: Array<number>) : number {
+    let max = 0;
+    for (let i = 0; i<indexes.length - 1; i++) {
+        for (let j = i + 1; j<indexes.length; j++) {
+            const synergy = SYNERGIES[indexes[i]][indexes[j]];
+            max = Math.max(synergy, max);
+        }
+    }
+    return max;
+}
+
 // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
 // Venusian.) It does this by following these rules:
 // 1) No pair with synergy above |maxSynergyAllowed|.
@@ -186,7 +198,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
     let awardCount = 0;
 
     // Keep adding milestone or award until there are enough as requested
-    while(milestoneCount === numberMARequested && awardCount === numberMARequested) {
+    while(milestoneCount + awardCount < numberMARequested*2) {
 
         // If there is enough award, add a milestone. And vice versa. If still need both, flip a coin to decide which to add.
         if (awardCount === numberMARequested || (milestoneCount !== numberMARequested && Math.round(Math.random()))) {
@@ -195,15 +207,16 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
             if (newMilestone === undefined) {
                 return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
-            if (pickedMA.addNewMA(newMilestone)) milestoneCount++;
+            const milestoneAddSuccess = pickedMA.addNewMA(newMilestone);
+            if (milestoneAddSuccess) milestoneCount++;
         } else {
             const newAward = shuffled_awards.splice(0, 1)[0];
             // If need to add more award, but not enough award left, restart the function with a recursive call.
             if (newAward === undefined) {
                 return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
-            if (pickedMA.addNewMA(newAward)) awardCount++;
-
+            const awardAddSuccess = pickedMA.addNewMA(newAward);
+            if (awardAddSuccess) awardCount++;
         }
     }
     const finalItems = pickedMA.currentMA.map(n => MA_ITEMS[n]);

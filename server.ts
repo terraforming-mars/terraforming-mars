@@ -443,7 +443,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 startingCorporations: gameReq.startingCorporations,
                 shuffleMapOption: gameReq.shuffleMapOption,
                 randomMA: gameReq.randomMA,
-                randomMAOption: gameReq.randomMAOption,
                 soloTR: gameReq.soloTR,
                 customCorporationsList: gameReq.customCorporationsList,
                 cardsBlackList: gameReq.cardsBlackList,

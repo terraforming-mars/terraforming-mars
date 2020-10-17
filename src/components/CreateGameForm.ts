@@ -10,6 +10,7 @@ import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
 import { Button } from "../components/common/Button";
 import { playerColorClass } from "../utils/utils";
+import { RandomMAOptionType } from "../RandomMAOptionType";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -19,8 +20,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
-    randomMA: boolean;
-    randomMAOption: string;
+    randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     beginnerOption: boolean;
@@ -77,8 +77,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
-            randomMA: false,
-            randomMAOption: "limited",
+            randomMA: RandomMAOptionType.NONE,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             beginnerOption: false,
@@ -155,6 +154,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPlayers: function (): Array<NewPlayerModel> {
             const component = (this as any) as CreateGameModel;
             return component.players.slice(0, component.playersCount);
+        },
+        isRandomMAEnabled: function (): Boolean {
+            return this.randomMA !== RandomMAOptionType.NONE;
+        },
+        randomMAToggle: function () {
+            const component = (this as any) as CreateGameModel;
+            if (component.randomMA === RandomMAOptionType.NONE){
+                component.randomMA = RandomMAOptionType.LIMITED;
+                this.randomMA = RandomMAOptionType.LIMITED;
+            } else {
+                component.randomMA = RandomMAOptionType.NONE;
+                this.randomMA = RandomMAOptionType.NONE;
+            }
         },
         isBeginnerToggleEnabled: function(): Boolean {
             return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil)
@@ -238,7 +250,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
             const randomMA = component.randomMA;
-            const randomMAOption = component.randomMAOption;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
@@ -313,7 +324,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 clonedGamedId,
                 initialDraft,
                 randomMA,
-                randomMAOption,
                 shuffleMapOption,
             });
 
@@ -534,21 +544,21 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Random first player</span>
                             </label>
 
-                            <input type="checkbox" name="randomMA" v-model="randomMA" id="randomMA-checkbox">
+                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div class="create-game-page-column-row" v-if="randomMA">
+                            <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
                                 <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMAOption" value="limited" id="limitedRandomMA-radio">
+                                <input type="radio" name="randomMAOption" v-model="randomMA" value="RandomMAOptionType.LIMITED" id="limitedRandomMA-radio">
                                 <label class="label-randomMAOption" for="limitedRandomMA-radio">
                                     <span v-i18n>Limited Synergy</span>
                                 </label>
                                 </div>
 
                                 <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMAOption" value="full" id="unlimitedRandomMA-radio">
+                                <input type="radio" name="randomMAOption" v-model="randomMA" value="RandomMAOptionType.UNLIMITED" id="unlimitedRandomMA-radio">
                                 <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
                                     <span v-i18n>Full Random</span>
                                 </label>

@@ -236,7 +236,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, this.gameOptions.turmoilExtension, allowCommunityColonies);
         if (this.players.length === 1) {
           players[0].addProduction(Resources.MEGACREDITS, -2);
           this.defer(new RemoveColonyFromGame(players[0], this));
@@ -397,6 +397,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
       if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
 
       return false;
     }

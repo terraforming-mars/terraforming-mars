@@ -4,5 +4,6 @@ export enum CardType {
     ACTIVE = "blue",
     AUTOMATED = "green",
     PRELUDE = "pink",
-    CORPORATION = "brown"
+    CORPORATION = "brown",
+    SPECIAL = "special"
 }

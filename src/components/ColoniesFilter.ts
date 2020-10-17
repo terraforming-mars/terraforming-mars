@@ -34,23 +34,32 @@ const officialColonies: Array<Colony> = [
   new Triton(),
 ];
 
-const communityColonies: Array<Colony> = [
+let communityColonies: Array<Colony> = [
   new Iapetus(),
   new Mercury(),
   new Hygiea(),
   new Titania(),
   new Venus(),
   new Leavitt(),
-  new Pallas(),
+  new Pallas()
 ];
 
-export const ColoniesFilter = Vue.component('colonies-filter', {
+export const ColoniesFilter = Vue.component("colonies-filter", {
   props: {
     communityCardsOption: {
-      type: Boolean,
+      type: Boolean
+    },
+    venusNext: {
+      type: Boolean
+    },
+    turmoil: {
+      type: Boolean
     },
   },
-  data: function() {
+  data: function () {
+    if (!this.venusNext) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.VENUS);
+    if (!this.turmoil) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.PALLAS);
+
     return {
       allColonies: officialColonies.concat(communityColonies),
       officialColonies: officialColonies,
@@ -82,6 +91,24 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     communityCardsOption: function(enabled) {
       this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
     },
+    venusNext: function (enabled) {
+      const index = communityColonies.findIndex(c => c.name === ColonyName.VENUS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Venus());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
+    },
+    turmoil: function (enabled) {
+      const index = communityColonies.findIndex(c => c.name === ColonyName.PALLAS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Pallas());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
+    }
   },
   template: `
     <div class="colonies-filter">

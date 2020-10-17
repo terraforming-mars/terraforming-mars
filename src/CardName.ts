@@ -461,7 +461,7 @@ export enum CardName {
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = "Bioengineering Enclosure",
     BIOFERTILIZER_FACILITY = "Bio-Fertilizer Facility",
-    BUTTERFLY_EFFECT = "ButterflyEffect",
+    BUTTERFLY_EFFECT = "Butterfly Effect",
     CAPITAL_ARES = "Capital:ares",
     COMMERCIAL_DISTRICT_ARES = "Commercial District:ares",
     DESPERATE_MEASURES = "Desperate Measures",

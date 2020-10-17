@@ -60,11 +60,6 @@ import { Tags } from "./cards/Tags";
 import { TileType } from "./TileType";
 import { Turmoil } from "./turmoil/Turmoil";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
-import { CardType } from "./cards/CardType";
-import { ColonyModel } from "./models/ColonyModel";
-import { LogBuilder } from "./LogBuilder";
-import { Decks } from "./Deck";
-import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
 import { RandomMAOptionType } from "./RandomMAOptionType";
 
 export interface Score {

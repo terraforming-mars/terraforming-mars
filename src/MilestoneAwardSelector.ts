@@ -207,6 +207,11 @@ export function computeSynergy(indexes: Array<number>) : number {
     return max;
 }
 
+// Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
+// Venusian.) It does this by following these rules:
+// 1) No pair with synergy above |maxSynergyAllowed|.
+// 2) Total synergy is |totalSynergyAllowed| or below.
+// 3) Limited a number of synergy pair above |highThreshold| to |numberOfHighAllowed| or below.
 export function getRandomMA_OneByOne(withVenusian: boolean = true, 
     numberMARequested: number, 
     maxSynergyAllowed: number = 6, 
@@ -214,40 +219,36 @@ export function getRandomMA_OneByOne(withVenusian: boolean = true,
     numberOfHighAllowed: number = 2,
     highThreshold: number = 4): IDrawnMilestonesAndAwards {
 
+    // Shuffled arrays on milestones and awards once
     const shuffled_milestones = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
     const shuffled_awards = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
-    const pickedMA = new MASynergyArray(maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
 
+    const pickedMA = new MASynergyArray(maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
     let milestoneCount = 0;
     let awardCount = 0;
 
-    while(milestoneCount + awardCount !== numberMARequested*2) {
-        // selects indexes of |count| random milestones and |count| random awards.
-        // For example, if count is 3, output looks like this [m1, m2, m3, a1, a2, a3]
-        // where the first three entries are milestone indexes, and the next three are
-        // award indexes.
+    // Keep adding milestone or award until there are enough as requested
+    while(milestoneCount === numberMARequested && awardCount === numberMARequested) {
 
+        // If there is enough award, add a milestone. And vice versa. If still need both, flip a coin to decide which to add.
         if (awardCount === numberMARequested || (milestoneCount !== numberMARequested && Math.round(Math.random()))) {
             const newMilestone = shuffled_milestones.splice(0, 1)[0];
             // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
             if (newMilestone === undefined) {
                 return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
-            const milestoneAddSuccess = pickedMA.addNewMA(newMilestone);
-            milestoneCount = milestoneAddSuccess ? milestoneCount+1 : milestoneCount;
+            if (pickedMA.addNewMA(newMilestone)) milestoneCount++;
         } else {
             const newAward = shuffled_awards.splice(0, 1)[0];
             // If need to add more award, but not enough award left, restart the function with a recursive call.
             if (newAward === undefined) {
                 return getRandomMA_OneByOne(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
             }
-            const awardAddSuccess = pickedMA.addNewMA(newAward);
-            awardCount = awardAddSuccess ? awardCount+1 : awardCount;
+            if (pickedMA.addNewMA(newAward)) awardCount++;
 
         }
     }
     const finalItems = pickedMA.currentMA.map(n => MA_ITEMS[n]);
-    //console.log(`${pickedMA.currentMA}, TS: ${pickedMA.currentTotalSynergy}, NAbove: ${pickedMA.currentNumberOfHigh}`);
     return {
         milestones: finalItems.slice(0, numberMARequested) as Array<IMilestone>,
         awards: finalItems.slice(numberMARequested) as Array<IAward>,

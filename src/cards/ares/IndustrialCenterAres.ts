@@ -5,5 +5,5 @@ import { IAdjacencyBonus } from "../../ares/IAdjacencyBonus";
 
 export class IndustrialCenterAres extends IndustrialCenter {
   public name: CardName = CardName.INDUSTRIAL_CENTER_ARES;
-  public adjacencyBonus: IAdjacencyBonus = {bonus: [SpaceBonus.STEEL, SpaceBonus.STEEL]};
+  public adjacencyBonus: IAdjacencyBonus = {bonus: [SpaceBonus.STEEL]};
 }

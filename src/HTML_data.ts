@@ -3263,8 +3263,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big ">1</div>
               <div class="requirements">4 Science</div>
-              <div class="production-box production-box-size3a">
-                <div class="money production">1</div> / <div class="tile colony red-outline"></div>
+              <div class="production-box production-box-size2a">
+                <div class="money production">1</div> / <div class="colony colony-icon-small red-outline"></div>
               </div><br>
               <div class="description">
                 (Requires 4 Science tags. Increase your MC production 1 step for each colony in play.)

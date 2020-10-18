@@ -7,6 +7,7 @@ import { setCustomGameOptions } from "../../TestingUtils";
 import { SelectParty } from "../../../src/interrupts/SelectParty";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { EventAnalysts } from "../../../src/cards/turmoil/EventAnalysts";
 
 describe("Incite", function () {
     let card : Incite, player : Player, game : Game;
@@ -24,6 +25,12 @@ describe("Incite", function () {
 
     it("Starts with +1 influence", function () {
         expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
+    });
+
+    it("Works with Event Analysts", function () {
+        const eventAnalysts = new EventAnalysts();
+        eventAnalysts.play(player, game);
+        expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
     });
 
     it("Can perform initial action", function () {

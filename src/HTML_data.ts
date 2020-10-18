@@ -4244,7 +4244,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="resource wild"></div>
     </div>
     <div class="red-arrow"></div>
-    4<div class="resource wild"></div>
+    4<div class="production wild"></div>
     <div class="description utipia-ability-description">
       (Action: Decrease any production to gain 4 resources of that kind.)
     </div>

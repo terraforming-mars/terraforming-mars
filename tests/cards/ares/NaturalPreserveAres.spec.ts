@@ -5,7 +5,7 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { NaturalPreserveAres } from "../../../src/cards/ares/NaturalPreserveAres";
-import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { SpaceBonus } from "../../../src/SpaceBonus";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("NaturalPreserveAres", function () {
@@ -26,6 +26,6 @@ describe("NaturalPreserveAres", function () {
         const space = action.availableSpaces[0];
         action.cb(space);
         expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
-        expect(space.adjacency).to.deep.eq({bonus: [AresSpaceBonus.MEGACREDITS]});
+        expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS]});
     }); 
 });

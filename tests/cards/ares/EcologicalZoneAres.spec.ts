@@ -4,7 +4,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { TileType } from "../../../src/TileType";
-import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { SpaceBonus } from "../../../src/SpaceBonus";
 import { EcologicalZoneAres } from "../../../src/cards/ares/EcologicalZoneAres";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
@@ -32,7 +32,7 @@ describe("EcologicalZoneAres", function () {
         card.onCardPlayed(player, game, card);
         expect(card.resourceCount).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(1);
-        expect(adjacentSpace.adjacency).to.deep.eq({bonus: [AresSpaceBonus.ANIMAL]});
+        expect(adjacentSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.ANIMAL]});
     });
 });
 

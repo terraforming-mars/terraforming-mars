@@ -1,10 +1,9 @@
 // TODO(kberg): uncomment before completion
 import { expect } from "chai";
-import { AresSpaceBonus } from "../../src/ares/AresSpaceBonus";
+import { SpaceBonus } from "../../src/SpaceBonus";
 import { Game } from "../../src/Game";
 import { Player } from "../../src/Player";
 import { Resources } from "../../src/Resources";
-import { SpaceBonus } from "../../src/SpaceBonus";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
@@ -27,16 +26,16 @@ export const ALL_ADJACENCY_BONUSES = [
     SpaceBonus.PLANT,
     SpaceBonus.DRAW_CARD,
     SpaceBonus.HEAT,
-    AresSpaceBonus.ANIMAL,
-    AresSpaceBonus.MEGACREDITS,
-    AresSpaceBonus.MICROBE,
-    AresSpaceBonus.POWER
+    SpaceBonus.ANIMAL,
+    SpaceBonus.MEGACREDITS,
+    SpaceBonus.MICROBE,
+    SpaceBonus.POWER
 ]
 
 export class AresTestHelper {
 
     // provides shared testing between Ecological Survey and Geological Survey
-    public static testSurveyBonus(game: Game, player: Player, bonus: SpaceBonus | AresSpaceBonus, expectedMc: number) {
+    public static testSurveyBonus(game: Game, player: Player, bonus: SpaceBonus, expectedMc: number) {
         // tile types in this test are irrelevant.
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         firstSpace.adjacency = { bonus: [ bonus ] };

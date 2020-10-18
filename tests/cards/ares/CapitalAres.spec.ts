@@ -7,7 +7,7 @@ import { SpaceType } from "../../../src/SpaceType";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
 import { TileType } from "../../../src/TileType";
-import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { SpaceBonus } from "../../../src/SpaceBonus";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("CapitalAres", function () {
@@ -41,7 +41,7 @@ describe("CapitalAres", function () {
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
     expect(card.getVictoryPoints(player, game)).to.eq(1);
-    expect(citySpace.adjacency).to.deep.eq({bonus: [AresSpaceBonus.MEGACREDITS, AresSpaceBonus.MEGACREDITS]});
+    expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
   });
 
 });

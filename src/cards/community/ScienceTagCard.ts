@@ -7,7 +7,7 @@ export class ScienceTagCard implements IProjectCard {
     public cost: number = 0;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: CardName = CardName.SCIENCE_TAG_BLANK_CARD;
-    public cardType: CardType = CardType.SPECIAL;
+    public cardType: CardType = CardType.PROXY;
 
     public play() {
       return undefined;

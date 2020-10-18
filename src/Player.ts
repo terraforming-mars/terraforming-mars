@@ -1309,7 +1309,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }  
         } 
 
-        if (selectedCard.cardType !== CardType.SPECIAL) this.addPlayedCard(game, selectedCard);
+        if (selectedCard.cardType !== CardType.PROXY) {
+            this.addPlayedCard(game, selectedCard);
+        }
 
         for (const playedCard of this.playedCards) {
             if (playedCard.onCardPlayed !== undefined) {

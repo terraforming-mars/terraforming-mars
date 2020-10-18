@@ -5,5 +5,5 @@ export enum CardType {
     AUTOMATED = "green",
     PRELUDE = "pink",
     CORPORATION = "brown",
-    SPECIAL = "special"
+    PROXY = "proxy"
 }

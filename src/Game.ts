@@ -59,6 +59,7 @@ import { Tags } from "./cards/Tags";
 import { TileType } from "./TileType";
 import { Turmoil } from "./turmoil/Turmoil";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
+import { IAresData } from "./ares/IAresData";
 
 export interface Score {
   corporation: String;
@@ -140,6 +141,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public turmoil: Turmoil | undefined;
+    public aresData: IAresData | undefined;
 
     // Card-specific data
     // Mons Insurance promo corp

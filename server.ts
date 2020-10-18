@@ -1057,7 +1057,10 @@ gameLoader.start();
 console.log("Starting server on port " + (process.env.PORT || 8080));
 console.log("version 0.X");
 
-server.listen(process.env.PORT || 8080);
+server.listen({
+    port: process.env.PORT || 8080,
+    host: process.env.HOST || 'localhost',
+});
 
 console.log(
     "\nThe secret serverId for this server is \x1b[1m" +

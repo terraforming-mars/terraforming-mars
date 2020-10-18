@@ -5,9 +5,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { CorporationName } from "../CorporationName";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 import { Board } from "../Board";
 
 export class ImmigrantCity implements IProjectCard {
@@ -19,14 +18,14 @@ export class ImmigrantCity implements IProjectCard {
     public canPlay(player: Player,game: Game): boolean {
         const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
         const canPlaceCityOnMars = game.board.getAvailableSpacesForCity(player).length > 0;
-        const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CorporationName.THARSIS_REPUBLIC);
+        const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
 
         return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (Board.isCitySpace(space)) {
             if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
-            if (!player.isCorporation(CorporationName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
+            if (!player.isCorporation(CardName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
         }
     }
     public play(player: Player, game: Game) {

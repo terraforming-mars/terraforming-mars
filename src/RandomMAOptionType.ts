@@ -1,6 +1,6 @@
 
 export enum RandomMAOptionType {
-    NONE = "no milestones and awards randomization",
+    NONE = "no randomization",
     LIMITED = "limited synergy",
     UNLIMITED = "full random"
 }

@@ -203,7 +203,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         createGame: function () {
             const component = (this as any) as CreateGameModel;
 
-            var players = component.players.slice(0, component.playersCount);
+            let players = component.players.slice(0, component.playersCount);
 
             if (component.randomFirstPlayer) {
                 // Shuffle players array to assign each player a random seat around the table

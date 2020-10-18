@@ -1015,6 +1015,16 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
         res.setHeader("Content-Type", "image/png");
         file = reqFile;
+    } else if (req.url.endsWith(".svg")) {
+        const assetsRoot = path.resolve("./assets");
+        const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+        // Disallow to go outside of assets directory
+        if (!reqFile.startsWith(assetsRoot) || !fs.existsSync(reqFile)) {
+            return route.notFound(req, res);
+        }
+        res.setHeader("Content-Type", "image/svg+xml");
+        file = reqFile;
     } else if (req.url.endsWith(".jpg")) {
         const assetsRoot = path.resolve("./assets");
         const reqFile = path.resolve(path.normalize(req.url).slice(1));

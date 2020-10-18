@@ -8,7 +8,6 @@ import { CardModel } from "../../models/CardModel";
 import { CardTitle } from "./CardTitle";
 import { CardNumber } from "./CardNumber";
 import { CardResourceCounter } from "./CardResourceCounter";
-import { CorporationGroup } from "../../CorporationName";
 import { CardCost } from "./CardCost";
 import { CardExtraContent } from "./CardExtraContent";
 import { CardExpansion } from "./CardExpansion";
@@ -17,9 +16,13 @@ import { CardType } from "../../cards/CardType";
 import { CardContent } from "./CardContent";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { Tags } from "../../cards/Tags";
-import { ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, ALL_PRELUDE_DECKS, ALL_PROJECT_DECKS } from "../../cards/AllCards";
-import { Deck, Decks } from "../../Deck";
-import { GameModule } from "../../GameModule";
+import {
+    ALL_CARD_MANIFESTS,
+    ALL_CORPORATION_DECKS,
+    ALL_PRELUDE_DECKS,
+    ALL_PROJECT_DECKS,
+} from "../../cards/AllCards";
+import { CardTypes, Deck, Decks } from "../../Deck";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === new BeginnerCorporation().name) {
@@ -34,33 +37,18 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
 
 export function getCardExpansionByName(cardName: string): string {
     const manifest = ALL_CARD_MANIFESTS.find((manifest) => {
-        const decks: Array<Deck<any>> = [manifest.corporationCards, manifest.projectCards, manifest.preludeCards];
+        const decks: Array<Deck<CardTypes>> = [
+            manifest.corporationCards,
+            manifest.projectCards,
+            manifest.preludeCards,
+        ];
         return Decks.findByName(decks, cardName);
     });
 
     if (manifest === undefined) {
         throw new Error(`Can't find card ${cardName}`);
     }
-    switch (manifest.module) {
-        case GameModule.Base:
-            return CorporationGroup.ORIGINAL;
-        case GameModule.CorpEra:
-            return CorporationGroup.CORPORATION;
-        case GameModule.Promo:
-            return CorporationGroup.PROMO;
-        case GameModule.Venus:
-            return CorporationGroup.VENUS_NEXT;
-        case GameModule.Colonies:
-            return CorporationGroup.CORPORATION;
-        case GameModule.Prelude:
-            return CorporationGroup.PRELUDE;
-        case GameModule.Turmoil:
-            return CorporationGroup.TURMOIL;
-        case GameModule.Community:
-            return CorporationGroup.COMMUNITY;
-        default:
-            throw new Error(`unknown module ${module} for card ${cardName}`);
-    }
+    return manifest.module;
 }
 
 function getCardContent(cardName: string): string {
@@ -138,9 +126,6 @@ export const Card = Vue.component("card", {
         getResourceAmount: function (card: CardModel): number {
             return card.resources !== undefined ? card.resources : 0;
         },
-        isCorporationCard: function (): boolean {
-            return getCorporationCardByName(this.card.name) !== undefined;
-        },
     },
     template: `
         <div :class="getCardClasses(card)">
@@ -154,7 +139,7 @@ export const Card = Vue.component("card", {
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()" />
                 <div v-else class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
-            <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />
+            <CardExpansion :expansion="getCardExpansion()" />
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

@@ -12,8 +12,9 @@ import { ILoadable } from "./ILoadable";
 import { SerializedDealer } from "./SerializedDealer"; 
 import { CardManifest } from "./cards/CardManifest";
 import { ICardFactory } from "./cards/ICardFactory";
-import { Deck } from "./Deck";
+import { CardTypes, Deck } from "./Deck";
 import { Expansion } from "./Expansion";
+
 
 export const decks: Array<CardManifest> = [
     BASE_CARD_MANIFEST,
@@ -79,7 +80,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         const projectCardsToRemove:Array<String> = [];
         const corporationCards: Array<CorporationCard> = [];
 
-        function include(cf: ICardFactory<any>) : boolean {
+        function include(cf: ICardFactory<CardTypes>) : boolean {
             const expansion = cf.compatibility;
             switch(expansion) {
                 case undefined:
@@ -94,7 +95,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
                     throw("Unhandled expansion type: " + expansion);                    
             }
         }
-        function addToDeck<T>(deck: Array<T>, cards: Deck<T>): void {
+        function addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
             const cardInstances = cards.cards
                 .filter(cf => include(cf))
                 .map(cf => new cf.factory());

@@ -30,7 +30,8 @@ describe("RestrictedArea", function () {
         player.megaCredits = 2;
         expect(card.canAct(player)).to.eq(true);
         card.action(player, game);
-        
+
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
     });

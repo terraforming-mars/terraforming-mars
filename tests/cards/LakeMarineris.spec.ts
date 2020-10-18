@@ -24,8 +24,10 @@ describe("LakeMarineris", function () {
         card.play(player, game);
 
         expect(game.interrupts.length).to.eq(2);
+        game.interrupts[0].generatePlayerInput?.();
         const firstOcean = game.interrupts[0].playerInput as SelectSpace;
         firstOcean.cb(firstOcean.availableSpaces[0]);
+        game.interrupts[1].generatePlayerInput?.();
         const secondOcean = game.interrupts[1].playerInput as SelectSpace;
         secondOcean.cb(secondOcean.availableSpaces[1]);
         expect(player.getTerraformRating()).to.eq(22);

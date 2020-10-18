@@ -6,13 +6,15 @@ import { AndOptions } from "../inputs/AndOptions";
 import { SelectAmount } from "../inputs/SelectAmount";
 
 export class SelectResources implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
         public count: number = 1,
         public title: string = "Select " + count + " resource(s)"
-    ){
+    ){}
+
+    public generatePlayerInput() {
         let megacreditsAmount: number = 0;
         let steelAmount: number = 0;
         let titaniumAmount: number = 0;
@@ -56,15 +58,16 @@ export class SelectResources implements PlayerInterrupt {
                   ) {
                     throw new Error("Need to select " + this.count + " resource(s)");
                   }
-                  player.megaCredits += megacreditsAmount;
-                  player.steel += steelAmount;
-                  player.titanium += titaniumAmount;
-                  player.plants += plantsAmount;
-                  player.energy += energyAmount;
-                  player.heat += heatAmount;
+                  this.player.megaCredits += megacreditsAmount;
+                  this.player.steel += steelAmount;
+                  this.player.titanium += titaniumAmount;
+                  this.player.plants += plantsAmount;
+                  this.player.energy += energyAmount;
+                  this.player.heat += heatAmount;
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
         selectResources.title = this.title;
+
         this.playerInput = selectResources;
-    };
+    }
 }    

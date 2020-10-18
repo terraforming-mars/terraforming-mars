@@ -1,51 +1,39 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
-import { PlayerInterrupt } from "./PlayerInterrupt";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from "../ResourceType";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";
 import { Tags } from "../cards/Tags";
+import { DeferredAction } from "./DeferredAction";
 
-export class SelectResourceCard implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class AddResourcesToCard implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
         public resourceType: ResourceType,
-        public title: string | undefined,
         public count: number = 1,
-        public optionalCard: ICard | undefined,
-        public restrictedTag?: Tags
+        public restrictedTag?: Tags,
+        public title: string = "Select card to add " + count + " " + resourceType + " resource(s)"
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         let resourceCards = this.player.getResourceCards(this.resourceType);
 
-        // Played card is not into playedCards array yet
-        if (this.optionalCard !== undefined) {
-            resourceCards.push(this.optionalCard);
-        }
         if (this.restrictedTag !== undefined) {
             resourceCards = resourceCards.filter(card => card.tags.indexOf(this.restrictedTag!) !== -1);
         }
         if (resourceCards.length === 0) {
-            this.playerInput = undefined;
             return;
         }
 
         if (resourceCards.length === 1) {
             this.player.addResourceTo(resourceCards[0], this.count);
             LogHelper.logAddResource(this.game, this.player, resourceCards[0], this.count);
-            this.playerInput = undefined;
             return;
         }
 
-        if (this.title === undefined) {
-            this.title = "Select card to add " + this.count + " " + this.resourceType + " resource(s)";
-        }
-        this.playerInput = new SelectCard(
+        return new SelectCard(
             this.title,
             "Add resource(s)",
             resourceCards,

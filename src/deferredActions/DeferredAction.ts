@@ -1,7 +1,7 @@
 import { Player } from "../Player";
 import { PlayerInput } from "../PlayerInput";
-export interface PlayerInterrupt {
+
+export interface DeferredAction {
     player: Player,
-    playerInput?: PlayerInput,
-    generatePlayerInput?(): void
+    execute: () => PlayerInput | void
 }

@@ -8,6 +8,7 @@ import { CardName } from '../CardName';
 import { MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { RemoveAnyPlants } from "./deferredActions/RemoveAnyPlants";
 
 export class MiningExpedition implements IProjectCard {
     public cost: number = 12;
@@ -27,7 +28,7 @@ export class MiningExpedition implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
+        game.defer(new RemoveAnyPlants(player, game, Resources.PLANTS, 2));
         player.steel += 2;
         return game.increaseOxygenLevel(player, 1);
     }

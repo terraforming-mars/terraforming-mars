@@ -35,6 +35,7 @@
         "script.ts",
         "server.ts",
         "src/interrupts/*.ts",
+        "src/deferredActions/*.ts",
         "src/database/*.ts",
         "src/turmoil/*.ts",
         "src/turmoil/globalEvents*.ts",

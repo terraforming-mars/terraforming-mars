@@ -1,24 +1,21 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { PlayerInterrupt } from "./PlayerInterrupt";
+import { DeferredAction } from "./DeferredAction";
 
-export class RemoveOcean implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class RemoveOceanTile implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
-        public title: string = 'Select an Ocean tile to remove from board'
+        public title: string = "Select an Ocean tile to remove from board"
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         if (this.game.board.getOceansOnBoard() === 0) {
-            this.playerInput = undefined;
             return;
         }
-        this.playerInput = new SelectSpace(
+        return new SelectSpace(
             this.title,
             this.game.board.getOceansTiles(),
             (space: ISpace) => {

@@ -33,7 +33,9 @@ export const Milestone = Vue.component("milestone", {
     <div class="milestones_cont" v-trim-whitespace>
         <div class="milestones">
             <div class="ma-title">
-                <a class="ma-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones</a>
+                <a class="ma-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>
+                    <abbr title="costs 8 M€" tabindex="0">Milestones<abbr>
+                </a>
                 <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="claimed-milestone-inline" :title="milestone.player_name">
                     <span v-i18n>{{ milestone.milestone.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.player_color" /></span>

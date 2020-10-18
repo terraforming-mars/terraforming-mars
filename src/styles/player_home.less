@@ -35,6 +35,34 @@
     }
 }
 
+// styling tooltip for mobile
+abbr[title] {
+    position: relative;
+
+    /* ensure consistent styling across browsers */
+    text-decoration: underline dotted; 
+}
+
+abbr[title]:hover::after,
+abbr[title]:focus::after {
+    content: attr(title);
+
+    /* position tooltip like the native one */
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    width: auto;
+    white-space: nowrap;
+
+    /* style tooltip */
+    background-color: #1e1e1e;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+    font-size: 14px;
+    padding: 3px 5px;
+}
+
 .tags-grid {
     display: grid;
     grid-template-columns: max-content repeat(20, 50px);

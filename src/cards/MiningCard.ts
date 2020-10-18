@@ -61,7 +61,7 @@ export abstract class MiningCard implements IProjectCard {
                 bonus = SpaceBonus.TITANIUM;
                 resource = Resources.TITANIUM;
             }
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: this.getTileType(foundBonus) });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: this.getTileType(bonus) });
             foundSpace.adjacency = this.getAdjacencyBonus(bonus);
             player.addProduction(resource);
             this.bonusResource = resource;

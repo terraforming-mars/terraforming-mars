@@ -32,9 +32,11 @@ describe("LavaFlows", function () {
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         
-        action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.LAVA_FLOWS);
-        expect(action.availableSpaces[0].player).to.eq(player);
+        const space = action.availableSpaces[0];
+        action.cb(space);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
+        expect(space.player).to.eq(player);
         expect(game.getTemperature()).to.eq(-26);
+        expect(space.adjacency?.bonus).eq(undefined);
     });
 });

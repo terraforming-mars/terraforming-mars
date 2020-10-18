@@ -45,7 +45,8 @@ describe("TitanShuttles", function () {
         expect(game.interrupts.length).to.eq(1);
 
         let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([card]);
+        selectResourceInterrupt.generatePlayerInput?.();
+        selectResourceInterrupt.playerInput?.cb([card]);
         expect(card.resourceCount).to.eq(2);
     });
 
@@ -68,7 +69,8 @@ describe("TitanShuttles", function () {
         expect(game.interrupts.length).to.eq(1);
 
         let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([card2]);
+        selectResourceInterrupt.generatePlayerInput?.();
+        selectResourceInterrupt.playerInput?.cb([card2]);
         expect(card2.resourceCount).to.eq(2);
     });
 });

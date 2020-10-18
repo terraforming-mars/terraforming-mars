@@ -5,7 +5,6 @@ import * as http from "http";
 import * as fs from "fs";
 import * as path from "path";
 import * as querystring from "querystring";
-import * as child_process from "child_process";
 
 import { AndOptions } from "./src/inputs/AndOptions";
 import { BoardName } from "./src/BoardName";
@@ -52,7 +51,6 @@ import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
-const appVersion = generateAppVersion();
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
@@ -187,19 +185,6 @@ function generateRandomGameId(): string {
 
 function generateRandomServerId(): string {
     return generateRandomGameId();
-}
-
-function generateAppVersion(): string {
-    // assumes SOURCE_VERSION is git hash
-    if (process.env.SOURCE_VERSION) {
-        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
-    }
-    try {
-        return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
-    } catch (error) {
-        console.warn("unable to generate app version", error);
-        return "unknown version";
-    }
 }
 
 function processInput(
@@ -631,6 +616,7 @@ function getCardsAsCardModel(
                 card.resourceCount !== undefined && showResouces
                     ? card.resourceCount
                     : undefined,
+            resourceType: card.resourceType,
             calculatedCost: 0,
             cardType: CardType.AUTOMATED,
             isDisabled: false
@@ -742,6 +728,7 @@ function getCards(
 ): Array<CardModel> {
     return cards.map((card) => ({
         resources: showResouces ? player.getResourcesOnCard(card) : undefined,
+        resourceType: card.resourceType,
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
         cardType: card.cardType,
@@ -992,7 +979,7 @@ function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
             return route.internalServerError(req, res, err);
         }
         res.setHeader("Content-Type", "text/html; charset=utf-8");
-        res.write(data.toString().replace("$$APP_VERSION$$", appVersion));
+        res.write(data);
         res.end();
     });
 }

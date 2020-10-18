@@ -46,7 +46,7 @@ export const PlayersOverview = Vue.component("players-overview", {
             const players = this.player.players;
             let result: Array<PlayerModel> = [];
             let currentPlayerOffset: number = 0;
-            let currentPlayerIndex: number = getCurrentPlayerIndex(
+            const currentPlayerIndex: number = getCurrentPlayerIndex(
                 this.player,
                 this.player.players
             );
@@ -67,7 +67,7 @@ export const PlayersOverview = Vue.component("players-overview", {
                 (p: PlayerModel) => !this.player.passedPlayers.includes(p.color)
             );
 
-            let currentPlayerIndex: number = getCurrentPlayerIndex(
+            const currentPlayerIndex: number = getCurrentPlayerIndex(
                 player,
                 notPassedPlayers
             );

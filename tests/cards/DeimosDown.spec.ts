@@ -20,6 +20,7 @@ describe("DeimosDown", function () {
         card.play(player, game);
 
         expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
         const orOptions = game.interrupts[0].playerInput as OrOptions;
         orOptions.options[0].cb();
 

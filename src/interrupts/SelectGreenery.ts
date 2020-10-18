@@ -6,19 +6,21 @@ import { ISpace } from '../ISpace';
 import { PlayerInterrupt } from './PlayerInterrupt';
 
 export class SelectGreenery implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput?: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
         public title: string = 'Select space for greenery tile'
-    ){
+    ){}
+
+    public generatePlayerInput() {
         this.playerInput = new SelectSpace(
-            title,
-            game.board.getAvailableSpacesForGreenery(player),
+            this.title,
+            this.game.board.getAvailableSpacesForGreenery(this.player),
             (space: ISpace) => {
-                game.addGreenery(player, space.id);
+                this.game.addGreenery(this.player, space.id);
                 return undefined;
             }
         );
-    };
+    }
 }    

@@ -2,10 +2,10 @@ import { Player, PlayerId } from "../Player";
 import { SelectSpace } from '../inputs/SelectSpace';
 import { SerializedColony } from "../SerializedColony";
 import { Game } from '../Game';
-import { CorporationName } from '../CorporationName';
 import { Resources } from '../Resources';
 import { LogHelper } from "../components/LogHelper";
 import { MAX_COLONY_TRACK_POSITION } from "../constants";
+import { CardName } from "../CardName";
 
 export interface IColony extends SerializedColony {
     trade: (player: Player, game: Game, usesTradeFleet?: boolean) => void;
@@ -78,7 +78,7 @@ export abstract class Colony {
         game.log("${0} built a colony on ${1}", b => b.player(player).colony(colony));
 
         // Poseidon hook
-        let poseidon = game.getPlayers().filter(player => player.isCorporation(CorporationName.POSEIDON));
+        let poseidon = game.getPlayers().filter(player => player.isCorporation(CardName.POSEIDON));
         if (poseidon.length > 0) {
           poseidon[0].addProduction(Resources.MEGACREDITS);
         }

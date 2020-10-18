@@ -66,7 +66,8 @@ describe("UrbanDecomposers", function () {
 
         // add two microbes to Ants
         let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([ants]);
+        selectResourceInterrupt.generatePlayerInput?.();
+        selectResourceInterrupt.playerInput?.cb([ants]);
         expect(ants.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });

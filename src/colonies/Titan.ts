@@ -1,8 +1,8 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { ResourceType } from '../ResourceType';
-import { Game } from '../Game';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { ColonyName } from "./ColonyName";
+import { ResourceType } from "../ResourceType";
+import { Game } from "../Game";
 
 export class Titan extends Colony implements IColony {
     public name = ColonyName.TITAN;
@@ -19,15 +19,15 @@ export class Titan extends Colony implements IColony {
             floaters = this.trackPosition - 2;
         }
 
-        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters, undefined);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters);
         if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 3, undefined);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, 3);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, 1);
     }    
 }

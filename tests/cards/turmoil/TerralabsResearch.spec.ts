@@ -2,11 +2,11 @@ import { expect } from "chai";
 import { TerralabsResearch } from "../../../src/cards/turmoil/TerralabsResearch";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { PowerPlant } from '../../../src/cards/PowerPlant';
-import { BusinessNetwork } from '../../../src/cards/BusinessNetwork';
-import { Game } from '../../../src/Game';
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { IProjectCard } from '../../../src/cards/IProjectCard';
+import { PowerPlant } from "../../../src/cards/PowerPlant";
+import { BusinessNetwork } from "../../../src/cards/BusinessNetwork";
+import { Game } from "../../../src/Game";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { IProjectCard } from "../../../src/cards/IProjectCard";
 import { AndOptions } from "../../../src/inputs/AndOptions";
 
 describe("TerralabsResearch", function () {
@@ -31,6 +31,7 @@ describe("TerralabsResearch", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(11);
         expect(player.cardsInHand.length).to.eq(3);
     });

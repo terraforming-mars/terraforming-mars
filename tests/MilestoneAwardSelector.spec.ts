@@ -104,18 +104,18 @@ describe("MilestoneAwardSelecter", function () {
         expect(verifySynergyRules(getMAIndices(...ORIGINAL_MILESTONES, ...ORIGINAL_AWARDS), MAX_SYNERGY_ALLOWED_RULE, TOTAL_SYNERGY_ALLOWED_RULE, NUM_HIGH_ALLOWED_RULE, HIGH_THRESHOLD_RULE)).eq(false);
     });
 
-    it("Elysium's milestones and awards does not break limited synergy rules", function() {
+    it("Elysium's milestones and awards do not break limited synergy rules", function() {
         // Elysium milestones and awards has total synergy of 13 and two high pairs of 4 and 5.
         // This set does not break the rules.
         expect(verifySynergyRules(getMAIndices(...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS), MAX_SYNERGY_ALLOWED_RULE, TOTAL_SYNERGY_ALLOWED_RULE, NUM_HIGH_ALLOWED_RULE, HIGH_THRESHOLD_RULE)).eq(true);
     });
 
-    it("Hellas's milestones and awards does not break limited synergy rules", function() {
+    it("Hellas's milestones and awards do not break limited synergy rules", function() {
         // Hellas milestones and awards has total synergy of 11 and no high pair. It does not break the rules.
         expect(verifySynergyRules(getMAIndices(...HELLAS_MILESTONES, ...HELLAS_AWARDS), MAX_SYNERGY_ALLOWED_RULE, TOTAL_SYNERGY_ALLOWED_RULE, NUM_HIGH_ALLOWED_RULE, HIGH_THRESHOLD_RULE)).eq(true);
     });
 
-    it("Hellas's milestones and awards does not break stringent limited synergy rules", function() {
+    it("Hellas's milestones and awards break stringent limited synergy rules", function() {
         // Hellas milestones and awards break rules if allowed no synergy whatsoever.
         expect(verifySynergyRules(getMAIndices(...HELLAS_MILESTONES, ...HELLAS_AWARDS), 0, 0, 0, HIGH_THRESHOLD_RULE)).eq(false);
     });

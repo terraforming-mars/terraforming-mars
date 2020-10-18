@@ -1,6 +1,15 @@
 import Vue from "vue";
-import { CorporationGroup } from "../../CorporationName";
+import { GameModule } from "../../GameModule";
 
+const MODULE_TO_CSS: Map<string, string> = new Map([
+    [GameModule.CorpEra, "corporate-icon"],
+    [GameModule.Promo , "promo-icon"],
+    [GameModule.Venus , "venus-icon"],
+    [GameModule.Colonies , "colonies-icon"],
+    [GameModule.Prelude , "prelude-icon"],
+    [GameModule.Turmoil , "turmoil-icon"],
+    [GameModule.Community, "community-icon"]]
+);
 export const CardExpansion = Vue.component("CardExpansion", {
     props: {
         expansion: {
@@ -11,20 +20,9 @@ export const CardExpansion = Vue.component("CardExpansion", {
     methods: {
         getClasses: function (): string {
             const classes = ["card-expansion", "project-icon"];
-            if (this.expansion === CorporationGroup.PROMO) {
-                classes.push("promo-icon");
-            } else if (this.expansion === CorporationGroup.COLONIES) {
-                classes.push("colonies-icon");
-            } else if (this.expansion === CorporationGroup.VENUS_NEXT) {
-                classes.push("venus-icon");
-            } else if (this.expansion === CorporationGroup.TURMOIL) {
-                classes.push("turmoil-icon");
-            } else if (this.expansion === CorporationGroup.COMMUNITY) {
-                classes.push("community-icon");
-            } else if (this.expansion === CorporationGroup.PRELUDE) {
-                classes.push("prelude-icon");
-            } else if (this.expansion === CorporationGroup.CORPORATION) {
-                classes.push("corporate-icon");
+            const expansionClass = MODULE_TO_CSS.get(this.expansion);
+            if (expansionClass !== undefined) {
+                classes.push(expansionClass);
             }
 
             return classes.join(" ");

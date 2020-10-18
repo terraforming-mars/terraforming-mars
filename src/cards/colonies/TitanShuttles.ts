@@ -39,7 +39,7 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
                 player.addResourceTo(floaterCards[0], 2);
                 LogHelper.logAddResource(game, player, floaterCards[0], 2);
             } else if (floaterCards.length > 1) {
-                game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
+                game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
             }
 
             return undefined;

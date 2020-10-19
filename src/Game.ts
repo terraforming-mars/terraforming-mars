@@ -12,7 +12,6 @@ import { ColonyModel } from "./models/ColonyModel";
 import { ColonyName } from "./colonies/ColonyName";
 import { Color } from "./Color";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { CorporationName } from "./CorporationName";
 import { Database } from "./database/Database";
 import { Dealer } from "./Dealer";
 import { Decks } from "./Deck";

@@ -44,7 +44,7 @@ export class PharmacyUnion implements CorporationCard {
             player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
         }
             
-        if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
+        if (player.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
             const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
             for (let i = 0; i < scienceTags; i++) {
                 game.defer(new SimpleDeferredAction(

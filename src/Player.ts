@@ -10,7 +10,6 @@ import { ColonyModel } from "./models/ColonyModel";
 import { ColonyName } from "./colonies/ColonyName";
 import { Color } from "./Color";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { CorporationName } from "./CorporationName";
 import { Database } from "./database/Database";
 import { Decks } from "./Deck";
 import { Game } from "./Game";

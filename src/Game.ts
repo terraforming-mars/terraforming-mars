@@ -525,7 +525,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private removeDeferredAction(action: DeferredAction): void {
-        this.deferredActions.splice(this.deferredActions.indexOf(action, 1));
+        this.deferredActions.splice(this.deferredActions.indexOf(action), 1);
     }
 
     public runDeferredAction(action: DeferredAction, cb: () => void): void {

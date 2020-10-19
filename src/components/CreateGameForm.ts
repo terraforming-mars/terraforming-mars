@@ -125,15 +125,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
         if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
-
+        
         const onSucces = (response: any) => {
             this.$data.cloneGameData = response;
         }
-
+         
         fetch("/api/clonablegames")
             .then(response => response.json())
             .then(onSucces)
-            .catch(_ => alert("Unexpected server response"));
+            .catch(_ => alert("Unexpected server response")); 
     },
     methods: { 
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
@@ -166,6 +166,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
             } else {
                 component.randomMA = RandomMAOptionType.NONE;
                 this.randomMA = RandomMAOptionType.NONE;
+            }
+        },
+        getRandomMaOptionType: function(type: "limited" | "full"): RandomMAOptionType {
+            // chosta: we need this as vue does not know about the enum
+            if(type === "limited") {
+                return RandomMAOptionType.LIMITED;
+            } else if(type === "full") {
+                return RandomMAOptionType.UNLIMITED;
+            } else {
+                return RandomMAOptionType.NONE;
             }
         },
         isBeginnerToggleEnabled: function(): Boolean {
@@ -344,6 +354,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 .catch(_ => alert("Unexpected server response"));
         }
     },
+    
     template: `
         <div id="create-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
@@ -551,16 +562,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
                                 <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMA" value="RandomMAOptionType.LIMITED" id="limitedRandomMA-radio">
+                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
                                 <label class="label-randomMAOption" for="limitedRandomMA-radio">
-                                    <span v-i18n>Limited Synergy</span>
+                                    <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
                                 </label>
                                 </div>
 
                                 <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMA" value="RandomMAOptionType.UNLIMITED" id="unlimitedRandomMA-radio">
+                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
                                 <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
-                                    <span v-i18n>Full Random</span>
+                                    <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
                             </div>

@@ -719,6 +719,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
           colony.isActive = true;
         });
+
+        // Check for Venus colony
+        if (corporationCard.tags.includes(Tags.VENUS)) {
+            const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
+            if (venusColony) venusColony.isActive = true;
+        }
       }
 
       this.playerIsFinishedWithResearchPhase(player);

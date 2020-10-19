@@ -5,6 +5,6 @@ import { DeferredAction } from "./DeferredAction";
 export class SimpleDeferredAction implements DeferredAction {
     constructor(
         public player: Player,
-        public execute: () => PlayerInput | void
+        public execute: () => PlayerInput | undefined
     ){}
 }

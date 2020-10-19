@@ -4,6 +4,7 @@ import { PartyName } from "../parties/PartyName";
 import { Game } from "../../Game";
 import { Turmoil } from "../Turmoil";
 import { ResourceType } from "../../ResourceType";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class CloudSocieties implements IGlobalEvent {
     public name = GlobalEventName.CLOUD_SOCIETIES;

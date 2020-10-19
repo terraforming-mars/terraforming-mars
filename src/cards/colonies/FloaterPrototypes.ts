@@ -1,10 +1,11 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class FloaterPrototypes implements IProjectCard {
     public cost: number = 2;
@@ -13,8 +14,8 @@ export class FloaterPrototypes implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined);
-      return undefined;
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        return undefined;
     }
 }
 

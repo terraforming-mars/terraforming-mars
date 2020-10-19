@@ -7,9 +7,10 @@ import { Game } from "../Game";
 import { TileType } from "../TileType";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 import { Board } from "../Board";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -34,7 +35,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
         return player.canAfford(7);
     }
     public action(player: Player, game: Game) {
-        game.addSelectHowToPayInterrupt(player, 7, false, false, "Select how to pay for action");
+        game.defer(new SelectHowToPayDeferred(player, 7, false, false, "Select how to pay for action"));
         player.addProduction(Resources.STEEL);
         return undefined;
     }

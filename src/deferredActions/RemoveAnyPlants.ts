@@ -17,7 +17,7 @@ export class RemoveAnyPlants implements DeferredAction {
         const candidates = this.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.getResource(Resources.PLANTS) > 0);
 
         if (candidates.length === 0) {
-            return;
+            return undefined;
         }
 
         if (candidates.length === 1) {

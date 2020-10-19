@@ -22,7 +22,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
 
         if (floaterCards.length === 0) {
             this.player.setResource(Resources.MEGACREDITS, -10, this.game, undefined, true);
-            return;
+            return undefined;
         }
 
         const selectAction = new OrOptions();

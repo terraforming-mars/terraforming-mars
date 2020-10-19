@@ -22,12 +22,12 @@ export class DecreaseAnyProduction implements DeferredAction {
         }
 
         if (candidates.length === 0) {
-            return;
+            return undefined;
         }
 
         if (candidates.length === 1) {
             candidates[0].addProduction(this.resource, -this.count, this.game, this.player);
-            return;
+            return undefined;
         }
 
         return new SelectPlayer(

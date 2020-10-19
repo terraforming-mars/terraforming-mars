@@ -7,7 +7,7 @@ import { CardName } from '../CardName';
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
-import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class IceAsteroid implements IProjectCard {
     public cost: number = 23;

@@ -8,7 +8,7 @@ import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { IResourceCard } from "./ICard";
-import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
+import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
 
 export class OlympusConference implements IProjectCard, IResourceCard {
     public cost: number = 10;
@@ -18,15 +18,16 @@ export class OlympusConference implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
-    private deferActions(player: Player, game: Game, scienceTags: number): void {
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+        const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
         for (let i = 0; i < scienceTags; i++) {
             game.defer(new SimpleDeferredAction(
                 player,
-                execute: () => {
+                () => {
                     // Can't remove a resource
                     if (this.resourceCount === 0) {
                         this.resourceCount++;
-                        return;
+                        return undefined;
                     }
                     return new OrOptions(
                         new SelectOption("Remove a science resource from this card to draw a card", "Remove resource", () => {
@@ -42,9 +43,6 @@ export class OlympusConference implements IProjectCard, IResourceCard {
                 }
             ));
         }
-    }
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        this.deferActions(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
         return undefined;
     }
     public play() {

@@ -1,14 +1,15 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { IResourceCard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class JovianLanterns implements IProjectCard, IResourceCard {
     public cost: number = 20;
@@ -39,9 +40,9 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this);
-      player.increaseTerraformRating(game);
-      return undefined;
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        player.increaseTerraformRating(game);
+        return undefined;
     }
 
     public getVictoryPoints(): number {

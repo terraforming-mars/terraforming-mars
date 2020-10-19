@@ -9,8 +9,8 @@ export class BuildColony implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
-        public title: string = "Select where to build a colony",
-        public allowDuplicate: boolean = false
+        public allowDuplicate: boolean = false,
+        public title: string = "Select where to build a colony"
     ){}
 
     public execute() {
@@ -18,7 +18,7 @@ export class BuildColony implements DeferredAction {
             && (colony.colonies.indexOf(this.player.id) === -1 || this.allowDuplicate)
             && colony.isActive);
         if (openColonies.length === 0) {
-            return;
+            return undefined;
         }
 
         let coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(openColonies);

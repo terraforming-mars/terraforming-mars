@@ -7,7 +7,7 @@ import { IProjectCard } from "./IProjectCard";
 import { IActionCard } from "./ICard";
 import { CardName } from "../CardName";
 import { LogHelper } from "../components/LogHelper";
-import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;

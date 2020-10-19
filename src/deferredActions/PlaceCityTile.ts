@@ -14,7 +14,7 @@ export class PlaceCityTile implements DeferredAction {
     public execute() {
         const availableSpaces = this.game.board.getAvailableSpacesForCity(this.player);
         if (availableSpaces.length === 0) {
-            return;
+            return undefined;
         }
         return new SelectSpace(
             this.title,

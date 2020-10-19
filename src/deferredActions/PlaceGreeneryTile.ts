@@ -14,7 +14,7 @@ export class PlaceGreeneryTile implements DeferredAction {
     public execute() {
         const availableSpaces = this.game.board.getAvailableSpacesForGreenery(this.player);
         if (availableSpaces.length === 0) {
-            return;
+            return undefined;
         }
 
         return new SelectSpace(

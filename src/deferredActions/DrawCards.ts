@@ -13,5 +13,6 @@ export class DrawCards implements DeferredAction {
         for (let i = 0; i < this.count; i++) {
             this.player.cardsInHand.push(this.game.dealer.dealCard());
         }
+        return undefined;
     }
 }    

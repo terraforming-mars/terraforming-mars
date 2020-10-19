@@ -11,7 +11,7 @@ export class AddResourcesToCard implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
-        public resourceType: ResourceType,
+        public resourceType: ResourceType | undefined,
         public count: number = 1,
         public restrictedTag?: Tags,
         public title: string = "Select card to add " + count + " " + resourceType + " resource(s)"
@@ -24,13 +24,13 @@ export class AddResourcesToCard implements DeferredAction {
             resourceCards = resourceCards.filter(card => card.tags.indexOf(this.restrictedTag!) !== -1);
         }
         if (resourceCards.length === 0) {
-            return;
+            return undefined;
         }
 
         if (resourceCards.length === 1) {
             this.player.addResourceTo(resourceCards[0], this.count);
             LogHelper.logAddResource(this.game, this.player, resourceCards[0], this.count);
-            return;
+            return undefined;
         }
 
         return new SelectCard(

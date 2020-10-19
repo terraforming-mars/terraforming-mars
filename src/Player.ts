@@ -36,15 +36,17 @@ import { ResourceType } from "./ResourceType";
 import { Resources } from "./Resources";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectCard } from "./inputs/SelectCard";
-import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
 import { PlaceCityTile } from "./deferredActions/PlaceCityTile";
+import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
+import { PlaceGreeneryTile } from "./deferredActions/PlaceGreeneryTile";
+import { SendDelegateToArea } from "./deferredActions/SendDelegateToArea";
+import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
+import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { SelectColony } from "./inputs/SelectColony";
 import { SelectDelegate } from "./inputs/SelectDelegate";
-import { PlaceGreeneryTile } from "./deferredActions/PlaceGreeneryTile";
 import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectHowToPayForCard } from "./inputs/SelectHowToPayForCard";
 import { SelectOption } from "./inputs/SelectOption";
-import { SendDelegateToArea } from "./deferredActions/SendDelegateToArea";
 import { SelectPlayer } from "./inputs/SelectPlayer";
 import { SelectSpace } from "./inputs/SelectSpace";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
@@ -539,17 +541,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return result;      
     }
 
-    public getResourceCards(resource: ResourceType): Array<ICard> {
-      const result: Array<ICard> = [];
-        this.playedCards.forEach((card) => {
-          if (card.resourceType !== undefined && card.resourceType === resource) {
-            result.push(card);
-          }
-        });
+    public getResourceCards(resource: ResourceType | undefined): Array<ICard> {
+        let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
-        if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
-          result.push(this.corporationCard);
-        }  
+        if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
+            result.push(this.corporationCard);
+        }
+
+        if (resource !== undefined) {
+            result = result.filter((card) => card.resourceType === resource)
+        }
 
         return result;
     }  
@@ -675,10 +676,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private runInputCb(game: Game, result: PlayerInput | undefined): void {
         if (result !== undefined) {
             game.defer(new SimpleDeferredAction(
-                player: this,
-                execute: () => result
-            });
-        }    
+                this,
+                () => result
+            ));
+        }
     }
     private runInput(
         game: Game,
@@ -1286,8 +1287,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         const action = selectedCard.play(this, game);
         if (action !== undefined) {
             game.defer(new SimpleDeferredAction(
-                player: this,
-                execute: () => action
+                this,
+                () => action
             ));
         }
 
@@ -1318,8 +1319,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
                 if (actionFromPlayedCard !== undefined) {
                     game.defer(new SimpleDeferredAction(
-                        player: this,
-                        execute: () => actionFromPlayedCard
+                        this,
+                        () => actionFromPlayedCard
                     ));
                 }
             }
@@ -1330,8 +1331,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
                 if (actionFromPlayedCard !== undefined) {
                     game.defer(new SimpleDeferredAction(
-                        player: this,
-                        execute: () => actionFromPlayedCard
+                        this,
+                        () => actionFromPlayedCard
                     ));
                 }
             }
@@ -1354,8 +1355,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             const action = foundCard.action!(this, game);
             if (action !== undefined) {
                 game.defer(new SimpleDeferredAction(
-                    player: this,
-                    execute: () => action
+                    this,
+                    () => action
                 ));
             }
             this.actionsThisGeneration.add(foundCard.name);
@@ -1481,7 +1482,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Confirm",
         () => {
           game.defer(new SelectHowToPayDeferred(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project"));
-          game.defer(new PlaceOceanTile(this, "Select space for ocean"));
+          game.defer(new PlaceOceanTile(this, game, "Select space for ocean"));
           this.onStandardProject(StandardProjectType.AQUIFER);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Aquifer"));
           return undefined;
@@ -1782,7 +1783,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   this.takeActionForFinalGreenery(game);
                   
                   // Resolve Philares deferred actions
-                  if (game.deferedActions.length > 0) this.resolveFinalGreeneryDeferredActions(game);
+                  if (game.deferredActions.length > 0) this.resolveFinalGreeneryDeferredActions(game);
 
                   return undefined;
                 }
@@ -1984,9 +1985,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public takeAction(game: Game): void {
-      const action = game.getNextDeferredActionForPlayer(this.id);
-      if (action !== undefined) {
-        game.runDeferredAction(action, () => this.takeAction(game));
+      const deferredAction = game.getNextDeferredActionForPlayer(this.id);
+      if (deferredAction !== undefined) {
+        game.runDeferredAction(deferredAction, () => this.takeAction(game));
         return;
       }
  
@@ -2024,8 +2025,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         const input = this.corporationCard.initialAction(this, game);
         if (input !== undefined) {
           game.defer(new SimpleDeferredAction(
-            player: this,
-            exeucte: () => input
+            this,
+            () => input
           ));
         }
         this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
@@ -2128,18 +2129,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // If you can pay to send some in the Ara
       if (game.gameOptions.turmoilExtension) {
-        let selectParty;
+        let sendDelegate;
         if (game.turmoil?.lobby.has(this.id)) {
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (from lobby)");
         } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
         } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
         }
-        if (selectParty) {
-          selectParty.generatePlayerInput?.();
-          if (selectParty.playerInput !== undefined) {
-            action.options.push(selectParty.playerInput);
+        if (sendDelegate) {
+          const input = sendDelegate.execute();
+          if (input !== undefined) {
+            action.options.push(input);
           }
         }
       }

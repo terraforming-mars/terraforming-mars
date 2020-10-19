@@ -3,7 +3,7 @@ import { GlobalEventName } from "./GlobalEventName";
 import { PartyName } from "../parties/PartyName";
 import { Game } from "../../Game";
 import { Turmoil } from "../Turmoil";
-import { CorrosiveRainDeferredAction } from "../../deferredActions/CorrosiveRaidDeferredAction";
+import { CorrosiveRainDeferredAction } from "../../deferredActions/CorrosiveRainDeferredAction";
 
 export class CorrosiveRain implements IGlobalEvent {
     public name = GlobalEventName.CORROSIVE_RAIN;

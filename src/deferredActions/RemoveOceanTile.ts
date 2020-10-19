@@ -13,7 +13,7 @@ export class RemoveOceanTile implements DeferredAction {
 
     public execute() {
         if (this.game.board.getOceansOnBoard() === 0) {
-            return;
+            return undefined;
         }
         return new SelectSpace(
             this.title,

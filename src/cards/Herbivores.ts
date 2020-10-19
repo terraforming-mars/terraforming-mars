@@ -9,7 +9,7 @@ import { TileType } from "../TileType";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { IResourceCard } from './ICard';
-import { DecreaseAnyProduction } from "./deferredActions/DecreaseAnyProduction";
+import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Herbivores implements IProjectCard, IResourceCard {
     public cost: number = 12;

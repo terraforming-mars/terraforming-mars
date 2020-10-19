@@ -4,7 +4,7 @@ import { PartyName } from "../parties/PartyName";
 import { Game } from "../../Game";
 import { Turmoil } from "../Turmoil";
 import { RemoveOceanTile } from "../../deferredActions/RemoveOceanTile";
-import { DryDesertDeferredAction } from "../../deferredActions/DryDesertDeferredAction";
+import { DryDesertsDeferredAction } from "../../deferredActions/DryDesertsDeferredAction";
 import { MAX_OCEAN_TILES } from "../../constants";
 
 export class DryDeserts implements IGlobalEvent {
@@ -22,7 +22,7 @@ export class DryDeserts implements IGlobalEvent {
 
         game.getPlayers().forEach(player => {
             if (turmoil.getPlayerInfluence(player) > 0) {
-                game.defer(new DryDesertDeferredAction(
+                game.defer(new DryDesertsDeferredAction(
                     player,
                     game,
                     turmoil.getPlayerInfluence(player)

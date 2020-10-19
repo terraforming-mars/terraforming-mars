@@ -10,6 +10,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { IResourceCard } from "../ICard";
 import { LogHelper } from "../../components/LogHelper";
 import { Resources } from "../../Resources";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -30,7 +31,7 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
         return new OrOptions(
             new SelectOption("Add 1 floater to a Jovian card", "Add floater", () => {
-                game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined, Tags.JOVIAN, );
+                game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, "Add 1 floater to a Jovian card"));
                 return undefined;
             }),
             new SelectOption("Gain 1 MC per floater here (max 4) ", "Gain MC", () => {
@@ -43,7 +44,7 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     }
 
     public play() {
-      return undefined;
+        return undefined;
     }
 
     public getVictoryPoints(): number {

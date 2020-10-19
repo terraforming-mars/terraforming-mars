@@ -5,7 +5,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
-import { DecreaseAnyProduction } from "./deferredActions/DecreaseAnyProduction";
+import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class EnergyTapping implements IProjectCard {
     public cost: number = 3;

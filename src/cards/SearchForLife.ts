@@ -1,4 +1,3 @@
-
 import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -7,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 3;
@@ -41,7 +41,7 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         game.log("${0} revealed and discarded ${1}", b => b.player(player).card(topCard));
         
         game.dealer.discard(topCard);
-        game.addSelectHowToPayInterrupt(player, 1, false, false, "Select how to pay for action");
+        game.defer(new SelectHowToPayDeferred(player, 1, false, false, "Select how to pay for action"));
         return undefined;
     }
 }

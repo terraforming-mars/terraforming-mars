@@ -6,7 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
-import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost: number = 6;

@@ -20,7 +20,6 @@ import { ElysiumBoard } from "./ElysiumBoard";
 import { FundedAward } from "./FundedAward";
 import { HellasBoard } from "./HellasBoard";
 import { IAward } from "./awards/IAward";
-import { ICard } from "./cards/ICard";
 import { IColony } from "./colonies/Colony";
 import { ILoadable } from "./ILoadable";
 import { IMilestone } from "./milestones/IMilestone";
@@ -33,7 +32,6 @@ import { LogHelper } from "./components/LogHelper";
 import { LogMessage } from "./LogMessage";
 import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from "./awards/Awards";
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from "./milestones/Milestones";
-import { OrOptions } from "./inputs/OrOptions";
 import { OriginalBoard } from "./OriginalBoard";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { Phase } from "./Phase";
@@ -42,15 +40,11 @@ import { PlayerInput } from "./PlayerInput";
 import { ResourceType } from "./ResourceType";
 import { Resources } from "./Resources";
 import { SelectCard } from "./inputs/SelectCard";
-import { BuildColony } from "./deferredActions/BuildColony";
 import { DeferredAction } from "./deferredActions/DeferredAction";
 import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
 import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
 import { RemoveColonyFromGame } from "./deferredActions/RemoveColonyFromGame";
-import { AddResourcesToCard } from "./deferredActions/AddResourcesToCard";
-import { RemoveAnyPlants } from "./deferredActions/RemoveAnyPlants";
-import { DecreaseAnyProduction } from "./deferredActions/DecreaseAnyProduction";
 import { SelectSpace } from "./inputs/SelectSpace";
 import { SerializedColony } from "./SerializedColony";
 import { SerializedGame } from "./SerializedGame";
@@ -106,7 +100,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public lastSaveId: number = 0;
     private clonedGamedId: string | undefined;
     public seed: number = Math.random();
-    public deferredActions: Array<DeferredActions> = [];
+    public deferredActions: Array<DeferredAction> = [];
     public gameAge: number = 0; // Each log event increases it
     public gameLog: Array<LogMessage> = [];
     
@@ -527,17 +521,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public getNextDeferredActionForPlayer(playerId: string): DeferredAction | undefined {
-        return this.deferredActions.find(player => player.id === playerId);
+        return this.deferredActions.find(action => action.player.id === playerId);
     }
 
     private removeDeferredAction(action: DeferredAction): void {
-        this.deferredActions.splice(this.deferredActions.indexOf(action, 1);
+        this.deferredActions.splice(this.deferredActions.indexOf(action, 1));
     }
 
     public runDeferredAction(action: DeferredAction, cb: () => void): void {
         const input = action.execute();
         if (input !== undefined) {
-            this.setWaitingFor(input, () => {
+            action.player.setWaitingFor(input, () => {
                 this.removeDeferredAction(action);
                 cb();
             });
@@ -670,11 +664,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
             this.defer(new SimpleDeferredAction(
-                player: player,
-                execute: () => {
-                    return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard);
+                player,
+                () => {
+                    if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
+                        return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard) || undefined;
+                    }
+                    return undefined;
                 }
-            );
+            ));
         }
       }
 
@@ -850,8 +847,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private resolveTurmoilDeferredActions() {
-        if (this.getNextDeferredAction() !== undefined) {
-            this.runDeferredAction(this.getNextDeferredAction(), () => this.resolveTurmoilDeferredActions());
+        const action = this.getNextDeferredAction();
+        if (action !== undefined) {
+            this.runDeferredAction(action, () => this.resolveTurmoilDeferredActions());
             return;
         }
         // All turmoil deferred actions have been resolved, continue game flow
@@ -927,8 +925,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
         this.researchedPlayers.add(player.id);
         if (this.allPlayersHaveFinishedResearch()) {
-            if (this.getNextDeferredAction() !== undefined) {
-                this.runDeferredAction(this.getNextDeferredAction(), () => this.playerIsFinishedWithResearchPhase(player));
+            const action = this.getNextDeferredAction();
+            if (action !== undefined) {
+                this.runDeferredAction(action, () => this.playerIsFinishedWithResearchPhase(player));
                 return;
             }
             this.gotoActionPhase();
@@ -1069,8 +1068,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Deferred actions hook
       if (this.deferredActions.length > 0) {
-        if (this.getNextDeferredAction() !== undefined) {
-          this.runDeferredAction(this.getNextDeferredAction(), () => this.playerIsFinishedTakingActions());
+        const action = this.getNextDeferredAction();
+        if (action !== undefined) {
+          this.runDeferredAction(action, () => this.playerIsFinishedTakingActions());
           return;
         }
       }
@@ -1285,7 +1285,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
       ) {
-        this.defer(new PlaceOceanTile(player, "Select space for ocean from temperature increase"));
+        this.defer(new PlaceOceanTile(player, this, "Select space for ocean from temperature increase"));
       }
 
       return undefined;
@@ -1370,7 +1370,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           && this.gameOptions.boardName === BoardName.HELLAS) {
 
           if (player.color !== Color.NEUTRAL) {
-            this.defer(new PlaceOceanTile(player, "Select space for ocean from placement bonus"));
+            this.defer(new PlaceOceanTile(player, this, "Select space for ocean from placement bonus"));
             this.defer(new SelectHowToPayDeferred(player, 6, false, false, "Select how to pay for placement bonus ocean"));
           }
       }

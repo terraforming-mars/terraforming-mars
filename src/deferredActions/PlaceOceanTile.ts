@@ -15,7 +15,7 @@ export class PlaceOceanTile implements DeferredAction {
 
     public execute() {
         if (this.game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) {
-            return;
+            return undefined;
         }
 
         return new SelectSpace(

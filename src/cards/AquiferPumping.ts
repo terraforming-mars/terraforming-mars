@@ -8,7 +8,7 @@ import { CardName } from "../CardName";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
-import { SelectHowToPayDeferred } from "../deferredActions/SelectHOwToPayDeferred";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class AquiferPumping implements IActionCard, IProjectCard {

@@ -10,6 +10,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { IResourceCard } from "../ICard";
 import { LogHelper } from "../../components/LogHelper";
 import { Resources } from "../../Resources";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class AtmoCollectors implements IProjectCard, IResourceCard {
     public cost: number = 15;
@@ -56,8 +57,8 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this);
-      return undefined;
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        return undefined;
     }
 }
 

@@ -7,9 +7,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
     constructor(
         public player: Player,
         public amount: number,
-        public title: string = "Select how to pay for " + amount + " MCs",
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
+        public title: string = "Select how to pay for " + amount + " MCs"
     ){}
 
     public execute() {
@@ -17,7 +17,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
             (!this.canUseSteel || this.player.steel === 0) &&
             (!this.canUseTitanium || this.player.titanium === 0)) {
             this.player.megaCredits -= this.amount;
-            return;
+            return undefined;
         }
 
         return new SelectHowToPay(

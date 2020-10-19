@@ -4,7 +4,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
-import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
+import { SpaceBonus } from "../../../src/SpaceBonus";
 import { CommercialDistrictAres } from "../../../src/cards/ares/CommercialDistrictAres";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
@@ -25,6 +25,6 @@ describe("CommercialDistrictAres", function () {
         expect(action instanceof SelectSpace);
         action.cb(action.availableSpaces[0]);
 
-        expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [AresSpaceBonus.MEGACREDITS, AresSpaceBonus.MEGACREDITS]});
+        expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
     });
 });

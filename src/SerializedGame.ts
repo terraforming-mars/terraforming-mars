@@ -15,6 +15,7 @@ import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
 import { PlayerId } from "./Player";
 import { GameOptions } from "./Game";
+import { IAresData } from "./ares/IAresData";
 
 export interface SerializedGame {
     id: string;
@@ -59,6 +60,7 @@ export interface SerializedGame {
     colonyDealer: ColonyDealer | undefined;
     preludeExtension: boolean;
     turmoil: SerializedTurmoil;
+    aresData: IAresData;
 
     monsInsuranceOwner: PlayerId | undefined;
     someoneHasRemovedOtherPlayersPlants: boolean;

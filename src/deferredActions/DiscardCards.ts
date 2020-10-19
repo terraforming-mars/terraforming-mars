@@ -13,6 +13,11 @@ export class DiscardCards implements DeferredAction {
     ){}
 
     public execute() {
+        if (this.player.cardsInHand.length <= this.count) {
+            const cards = this.player.cardsInHand.splice(0, this.player.cardsInHand.length);
+            cards.forEach((card) => this.game.dealer.discard(card));
+            return undefined;
+        }
         return new SelectCard(this.title, "Discard", this.player.cardsInHand, (foundCards: Array<IProjectCard>) => {
             this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(foundCards[0]), 1);
             this.game.dealer.discard(foundCards[0]);

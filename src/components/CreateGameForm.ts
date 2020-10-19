@@ -134,7 +134,38 @@ export const CreateGameForm = Vue.component("create-game-form", {
             .then(onSucces)
             .catch(_ => alert("Unexpected server response"));
     },
-    methods: { 
+    methods: {
+        downloadCurrentSettings: function () {
+            const serializedData = this.serializeSettings();
+            if (serializedData) {
+                let a = document.createElement("a");
+                const blob = new Blob([serializedData], {'type': "application/json"});
+                a.href = window.URL.createObjectURL(blob);
+                a.download = "tm_settings.json";
+                a.click();
+            }
+        },
+        handleSettingsUpload: function () {
+            let file = (this.$refs.file as any).files[0];
+            let reader  = new FileReader();
+            let results = undefined;
+            const component = (this as any) as CreateGameModel;
+            reader.addEventListener("load", function () {
+                results = reader.result;
+                if (typeof(results) == "string") {
+                    results = JSON.parse(results);
+                    for (let k in results) {
+                        component.playersCount = results["players"].length;
+                        (component as any)[k] = results[k];
+                    }
+                }
+            }.bind(this), false);
+            if(file) {
+              if (/\.json$/i.test(file.name)) {
+                reader.readAsText(file);
+              }
+            }
+        },
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
             return $t("Player " + player.index + " name");
         },
@@ -186,7 +217,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPlayerContainerColorClass: function(color: string): string{
             return playerColorClass(color.toLowerCase(), "bg_transparent");
         },
-        createGame: function () {
+        serializeSettings: function () {
             const component = (this as any) as CreateGameModel;
 
             var players = component.players.slice(0, component.playersCount);
@@ -311,7 +342,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 initialDraft,
                 randomMA,
                 shuffleMapOption,
-            });
+            }, undefined, 4);
+
+            return dataToSend;
+        },
+        createGame: function () {
+            const dataToSend = this.serializeSettings();
+
+            if (dataToSend === undefined) return;
 
             const onSucces = (response: any) => {
                 if (response.players.length === 1) {
@@ -596,6 +634,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-action">
                             <Button title="Create game" size="big" :onClick="createGame"/>
+
+                            <label>
+                                <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
+                                <input style="display: none" type="file" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
+                            </label>
+
+                            <label>
+                                <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                            </label>
                         </div>  
                     </div>
                 </div>

@@ -7,7 +7,6 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
-import { CorporationName } from "../../CorporationName";
 import { ICard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";

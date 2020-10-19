@@ -1,67 +1,54 @@
 import Vue from "vue";
 
 import { CardName } from "../CardName";
-import { CorporationGroup } from "../CorporationName";
-import { ALL_CORPORATION_DECKS } from "../cards/AllCards";
-import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
-import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
-import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
-import { CORP_ERA_CARD_MANIFEST, BASE_CARD_MANIFEST } from "../cards/StandardCardManifests";
-import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
-import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
-import { CardManifest } from "../cards/CardManifest";
-import { COMMUNITY_CARD_MANIFEST } from "../cards/community/CommunityCardManifest";
+import { ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, MANIFEST_BY_MODULE } from "../cards/AllCards";
+import { GameModule } from "../GameModule";
 
+function corpCardNames(module: GameModule): Array<CardName> {
+    const manifest = MANIFEST_BY_MODULE.get(module);
+    if (manifest === undefined) {
+        console.log("manifest %s not found", manifest);
+        return [];
+    } else {
+        return manifest.corporationCards.cards.map(cf => cf.cardName);
+    }
+}
 
+// TODO(kberg): no need for both ALL_CORPORATION_DECKS and MANIFEST_BY_MODULE
 const allItems: Array<CardName> =
     ALL_CORPORATION_DECKS.map((deck) => deck.cards.map((cf) => cf.cardName))
         .reduce((accumulator, cards) => accumulator.concat(cards));
 
-function corporateCardNames(cardManifest: CardManifest) : Array<CardName> {
-    return cardManifest.corporationCards.cards.map((cf) => cf.cardName);
-}
-
 export const CorporationsFilter = Vue.component("corporations-filter", {
     props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
     data: function () {
-        const corpCardNames = {
-            original: corporateCardNames(BASE_CARD_MANIFEST).concat(corporateCardNames(CORP_ERA_CARD_MANIFEST)),
-            prelude:  corporateCardNames(PRELUDE_CARD_MANIFEST),
-            venus: corporateCardNames(VENUS_CARD_MANIFEST),
-            colonies: corporateCardNames(COLONIES_CARD_MANIFEST),
-            turmoil: corporateCardNames(TURMOIL_CARD_MANIFEST),
-            promo: corporateCardNames(PROMO_CARD_MANIFEST),
-            community: corporateCardNames(COMMUNITY_CARD_MANIFEST),
-        };
+        const cardsByModuleMap: Map<GameModule, Array<CardName>> =
+            new Map(ALL_CARD_MANIFESTS.map(m => [m.module, corpCardNames(m.module)]));
         return {
+            cardsByModuleMap: cardsByModuleMap,
             customCorporationsList: false,
             selectedCorporations: [
-                ...this.corporateEra ? corpCardNames.original : [],
-                ...this.prelude ? corpCardNames.prelude : [],
-                ...this.venusNext ? corpCardNames.venus : [],
-                ...this.colonies ? corpCardNames.colonies : [],
-                ...this.turmoil ? corpCardNames.turmoil : [],
-                ...this.promoCardsOption ? corpCardNames.promo : [],
+                ...this.corporateEra ? cardsByModuleMap.get(GameModule.CorpEra)! : [],
+                ...this.prelude ? cardsByModuleMap.get(GameModule.Prelude)! : [],
+                ...this.venusNext ? cardsByModuleMap.get(GameModule.Venus)! : [],
+                ...this.colonies ? cardsByModuleMap.get(GameModule.Colonies)! : [],
+                ...this.turmoil ? cardsByModuleMap.get(GameModule.Turmoil)! : [],
+                ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
             ],
-            corporationGroups: [
-                {"title": CorporationGroup.ORIGINAL, "items": corpCardNames.original},
-                {"title": CorporationGroup.PRELUDE, "items": corpCardNames.prelude},
-                {"title": CorporationGroup.VENUS_NEXT, "items": corpCardNames.venus},
-                {"title": CorporationGroup.COLONIES, "items": corpCardNames.colonies},
-                {"title": CorporationGroup.TURMOIL, "items": corpCardNames.turmoil},
-                {"title": CorporationGroup.PROMO, "items": corpCardNames.promo},
-                {"title": CorporationGroup.COMMUNITY, "items": corpCardNames.community}
-            ]
+            corpsByModule: Array.from(cardsByModuleMap)
         }
     },
     methods: {
         getItemsByGroup: function (group: string): Array<CardName> {
             if (group === "All") return allItems.slice();
 
-            const corps = this.corporationGroups.find((g) => g.title === group);
-            if (corps === undefined) return [];
-                        
-            return (corps.items as any).slice()
+            const corps = this.cardsByModuleMap.get(group as GameModule);
+            if (corps === undefined) {
+                console.log("module %s not found", group);
+                return [];
+            } else {
+                return corps.slice();
+            }
         },
         selectAll: function (group: string) {
             const items = this.getItemsByGroup(group);
@@ -71,7 +58,7 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
                 }
             }
         },
-        removeFromSelecttion: function (cardName: CardName) {
+        removeFromSelection: function (cardName: CardName) {
             const itemIdx = this.selectedCorporations.indexOf(cardName)
             if (itemIdx !== -1) {
                 this.selectedCorporations.splice(itemIdx, 1)
@@ -80,7 +67,7 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
         selectNone: function (group: string) {
             const items = this.getItemsByGroup(group);
             for (const idx in items) {
-                this.removeFromSelecttion(items[idx]);
+                this.removeFromSelection(items[idx]);
             }
         },
         invertSelection: function (group: string) {
@@ -88,7 +75,7 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
 
             for (const idx in items) {
                 if (this.selectedCorporations.includes(items[idx])) {
-                    this.removeFromSelecttion(items[idx]);
+                    this.removeFromSelection(items[idx]);
                 } else {
                     this.selectedCorporations.push(items[idx]);
                 }
@@ -100,25 +87,25 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             this.$emit("corporation-list-changed", value);
         },
         corporateEra: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.ORIGINAL) : this.selectNone(CorporationGroup.ORIGINAL);
+            enabled ? this.selectAll(GameModule.CorpEra) : this.selectNone(GameModule.CorpEra);
         },
         prelude: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.PRELUDE) : this.selectNone(CorporationGroup.PRELUDE);
+            enabled ? this.selectAll(GameModule.Prelude) : this.selectNone(GameModule.Prelude);
         },
         venusNext: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.VENUS_NEXT) : this.selectNone(CorporationGroup.VENUS_NEXT);
+            enabled ? this.selectAll(GameModule.Venus) : this.selectNone(GameModule.Venus);
         },
         colonies: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.COLONIES) : this.selectNone(CorporationGroup.COLONIES);
+            enabled ? this.selectAll(GameModule.Colonies) : this.selectNone(GameModule.Colonies);
         },
         turmoil: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.TURMOIL) : this.selectNone(CorporationGroup.TURMOIL);
+            enabled ? this.selectAll(GameModule.Turmoil) : this.selectNone(GameModule.Turmoil);
         },
         promoCardsOption: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.PROMO) : this.selectNone(CorporationGroup.PROMO);
+            enabled ? this.selectAll(GameModule.Promo) : this.selectNone(GameModule.Promo);
         },
         communityCardsOption: function (enabled) {
-            enabled ? this.selectAll(CorporationGroup.COMMUNITY) : this.selectNone(CorporationGroup.COMMUNITY);
+            enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
         }
     },
     template: `
@@ -131,16 +118,16 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
                 <a href="#" v-on:click.prevent="invertSelection('All')">Invert</a>
             </div>
         </div>
-        <div class="corporations-filter-group" v-for="group in corporationGroups">
+        <div class="corporations-filter-group" v-for="entry in corpsByModule">
             <div class="corporations-filter-toolbox-cont">
-                <h2>{{ group.title }}</h2>
+                <h2>{{ name }}</h2>
                 <div class="corporations-filter-toolbox">
-                    <a href="#" v-on:click.prevent="selectAll(group.title)">All</a> | 
-                    <a href="#" v-on:click.prevent="selectNone(group.title)">None</a> | 
-                    <a href="#" v-on:click.prevent="invertSelection(group.title)">Invert</a>
+                    <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> | 
+                    <a href="#" v-on:click.prevent="selectNone(entry[0])">None</a> | 
+                    <a href="#" v-on:click.prevent="invertSelection(entry[0])">Invert</a>
                 </div>
             </div>
-            <div v-for="corporation in group.items">
+            <div v-for="corporation in entry[1]">
                 <label class="form-checkbox">
                     <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
                     <i class="form-icon"></i>{{ corporation }}

@@ -150,6 +150,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.id = this.generateId();
     }
 
+    public isCorporation(corporationName: CardName): boolean {
+      return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
+    }
+
     public getTitaniumValue(game: Game): number {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY)) return this.titaniumValue + 1;
       return this.titaniumValue;
@@ -206,10 +210,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return this.terraformRating = value;
     }
 
-    public isCorporation(corporationName: CorporationName): boolean {
-      return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
-    }
-
     public getProduction(resource: Resources): number {
       if (resource === Resources.MEGACREDITS) return this.megaCreditProduction;
       if (resource === Resources.STEEL) return this.steelProduction;
@@ -229,7 +229,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) return this.heat;
       throw new Error("Resource " + resource + " not found");
     }
-
 
     private resolveMonsInsurance(game: Game) {
       if (game.monsInsuranceOwner !== undefined) {
@@ -2092,7 +2091,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 
       const canAffordRedsForHeatConversion =
-        !redsAreRuling || (!this.isCorporation(CorporationName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
+        !redsAreRuling || (!this.isCorporation(CardName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
 
       if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
         action.options.push(

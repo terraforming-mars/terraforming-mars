@@ -30,8 +30,8 @@ export class LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.STRING, value));
         return this;
     }
-    
-    public raw_string(value: string): LogBuilder {
+
+    public rawString(value: string): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.RAW_STRING, value));
         return this;
     }

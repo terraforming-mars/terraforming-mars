@@ -51,6 +51,7 @@ describe("Capital", function () {
         expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
         expect(card.getVictoryPoints(player, game)).to.eq(1);
+        expect(citySpace.adjacency?.bonus).eq(undefined);
     });
 
     it("Capital special tile counts as a city", function () {

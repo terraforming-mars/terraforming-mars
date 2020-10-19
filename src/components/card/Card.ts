@@ -7,7 +7,6 @@ import { HTML_DATA } from "../../HTML_data";
 import { CardModel } from "../../models/CardModel";
 import { CardTitle } from "./CardTitle";
 import { CardResourceCounter } from "./CardResourceCounter";
-import { CorporationGroup } from "../../CorporationName";
 import { CardCost } from "./CardCost";
 import { CardExtraContent } from "./CardExtraContent";
 import { CardExpansion } from "./CardExpansion";
@@ -21,7 +20,6 @@ import {
     ALL_PROJECT_DECKS,
 } from "../../cards/AllCards";
 import { CardTypes, Deck, Decks } from "../../Deck";
-import { GameModule } from "../../GameModule";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === new BeginnerCorporation().name) {
@@ -52,26 +50,7 @@ export function getCardExpansionByName(cardName: string): string {
     if (manifest === undefined) {
         throw new Error(`Can't find card ${cardName}`);
     }
-    switch (manifest.module) {
-        case GameModule.Base:
-            return CorporationGroup.ORIGINAL;
-        case GameModule.CorpEra:
-            return CorporationGroup.CORPORATION;
-        case GameModule.Promo:
-            return CorporationGroup.PROMO;
-        case GameModule.Venus:
-            return CorporationGroup.VENUS_NEXT;
-        case GameModule.Colonies:
-            return CorporationGroup.CORPORATION;
-        case GameModule.Prelude:
-            return CorporationGroup.PRELUDE;
-        case GameModule.Turmoil:
-            return CorporationGroup.TURMOIL;
-        case GameModule.Community:
-            return CorporationGroup.COMMUNITY;
-        default:
-            throw new Error(`unknown module ${module} for card ${cardName}`);
-    }
+    return manifest.module;
 }
 
 function getCardContent(cardName: string): string {
@@ -146,9 +125,6 @@ export const Card = Vue.component("card", {
         getResourceAmount: function (card: CardModel): number {
             return card.resources !== undefined ? card.resources : 0;
         },
-        isCorporationCard: function (): boolean {
-            return getCorporationCardByName(this.card.name) !== undefined;
-        },
     },
     template: `
         <div :class="getCardClasses(card)">
@@ -160,7 +136,7 @@ export const Card = Vue.component("card", {
                 <CardTitle :title="card.name" :type="getCardType()"/>
                 <div class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
-            <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />
+            <CardExpansion :expansion="getCardExpansion()" />
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

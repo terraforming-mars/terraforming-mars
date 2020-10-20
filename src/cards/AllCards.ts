@@ -1,4 +1,5 @@
 import { Decks } from "../Deck";
+import { GameModule } from "../GameModule";
 import { CardManifest } from "./CardManifest";
 import { COLONIES_CARD_MANIFEST } from "./colonies/ColoniesCardManifest";
 import { COMMUNITY_CARD_MANIFEST } from "./community/CommunityCardManifest";
@@ -21,6 +22,9 @@ export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
     TURMOIL_CARD_MANIFEST,
     COMMUNITY_CARD_MANIFEST,
 ];
+
+export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> =
+    new Map(ALL_CARD_MANIFESTS.map(manifest => [manifest.module, manifest]));
 
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
     (deck) => deck.projectCards

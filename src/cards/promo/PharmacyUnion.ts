@@ -7,7 +7,6 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
-import { CorporationName } from "../../CorporationName";
 import { ICard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
@@ -44,7 +43,7 @@ export class PharmacyUnion implements CorporationCard {
             player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
         }
             
-        if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
+        if (player.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
             this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
             return undefined;
         }

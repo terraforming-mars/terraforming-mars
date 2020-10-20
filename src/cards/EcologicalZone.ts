@@ -11,6 +11,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { CardName } from '../CardName';
 import { IResourceCard } from './ICard';
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class EcologicalZone implements IProjectCard, IResourceCard {
   public cost: number = 12;
@@ -19,6 +20,8 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
   public name: CardName = CardName.ECOLOGICAL_ZONE;
+  public adjacencyBonus?: IAdjacencyBonus = undefined;
+
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
         .filter(
@@ -57,6 +60,7 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
           game.addTile(player, requestedSpace.spaceType, requestedSpace, {
             tileType: TileType.ECOLOGICAL_ZONE
           });
+          requestedSpace.adjacency = this.adjacencyBonus;
           return undefined;
         }
     );

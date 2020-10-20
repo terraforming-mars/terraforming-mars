@@ -5,5 +5,11 @@ export enum SpaceBonus {
     PLANT,
     DRAW_CARD,
     HEAT,
-    OCEAN
+    OCEAN,
+
+    // Ares-specific
+    MEGACREDITS,
+    ANIMAL,
+    MICROBE,
+    POWER
 }

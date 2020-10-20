@@ -33,8 +33,10 @@ describe("IndustrialCenter", function () {
         expect(game.getCitiesInPlayOnMars()).to.eq(1);
         
         const action = card.play(player, game);
-        action!.cb(action!.availableSpaces[0]);
-        expect(action!.availableSpaces[0].tile).not.to.eq(undefined);
-        expect(action!.availableSpaces[0].tile && action!.availableSpaces[0].tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
+        const space = action!.availableSpaces[0];
+        action!.cb(space);
+        expect(space.tile).not.to.eq(undefined);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
+        expect(space.adjacency?.bonus).eq(undefined);
     });
 });

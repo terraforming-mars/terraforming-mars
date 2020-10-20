@@ -12,7 +12,6 @@ import { ColonyModel } from "./models/ColonyModel";
 import { ColonyName } from "./colonies/ColonyName";
 import { Color } from "./Color";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { CorporationName } from "./CorporationName";
 import { Database } from "./database/Database";
 import { Dealer } from "./Dealer";
 import { Decks } from "./Deck";
@@ -61,6 +60,7 @@ import { TileType } from "./TileType";
 import { Turmoil } from "./turmoil/Turmoil";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { RandomMAOptionType } from "./RandomMAOptionType";
+import { IAresData } from "./ares/IAresData";
 
 export interface Score {
   corporation: String;
@@ -142,6 +142,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public turmoil: Turmoil | undefined;
+    public aresData: IAresData | undefined;
 
     // Card-specific data
     // Mons Insurance promo corp
@@ -316,7 +317,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.log("The id of this game is ${0}", b => b.raw_string(this.id));
+        this.log("The id of this game is ${0}", b => b.rawString(this.id));
       }      
 
       this.log("Generation ${0}", b => b.forNewGeneration().number(this.generation));
@@ -725,6 +726,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
           colony.isActive = true;
         });
+
+        // Check for Venus colony
+        if (corporationCard.tags.includes(Tags.VENUS)) {
+            const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
+            if (venusColony) venusColony.isActive = true;
+        }
       }
 
       this.playerIsFinishedWithResearchPhase(player);
@@ -1251,7 +1258,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Check for Aphrodite corporation
       this.players.forEach((player) => {
-        if (player.isCorporation(CorporationName.APHRODITE)) {
+        if (player.isCorporation(CardName.APHRODITE)) {
           player.megaCredits += 2 * steps;
         }
       });
@@ -1417,7 +1424,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
 
       // Part 3. Setup for bonuses
-      const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
+      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
 
       // Part 4. Place the tile
       space.tile = tile;

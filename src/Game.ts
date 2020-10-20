@@ -59,6 +59,7 @@ import { Tags } from "./cards/Tags";
 import { TileType } from "./TileType";
 import { Turmoil } from "./turmoil/Turmoil";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
+import { AresHandler } from "./ares/AresHandler";
 import { IAresData } from "./ares/IAresData";
 
 export interface Score {
@@ -1393,7 +1394,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 1, basic validation checks.
 
-      if (space.tile !== undefined) {
+      if (space.tile !== undefined && !this.gameOptions.aresExtension) {
         throw new Error("Selected space is occupied");
       }
 
@@ -1434,17 +1435,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (this.phase !== Phase.SOLAR) {
         space.bonus.forEach((spaceBonus) => {
-          if (spaceBonus === SpaceBonus.DRAW_CARD) {
-            player.cardsInHand.push(this.dealer.dealCard());
-          } else if (spaceBonus === SpaceBonus.PLANT) {
-            player.plants++;
-          } else if (spaceBonus === SpaceBonus.STEEL) {
-            player.steel++;
-          } else if (spaceBonus === SpaceBonus.TITANIUM) {
-            player.titanium++;
-          } else if (spaceBonus === SpaceBonus.HEAT) {
-            player.heat++;
-          }
+          this.grantSpaceBonus(player, spaceBonus);
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -1453,6 +1444,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.megaCredits += player.oceanBonus;
           }
         });
+
+        if (this.gameOptions.aresExtension) {
+          AresHandler.earnAdjacencyBonuses(this, player, space);
+        }
 
         PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
 
@@ -1488,6 +1483,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
         // AresHandler.afterTilePlacement(this, player, startingResources);
       }
       
+    }
+
+    public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+      if (spaceBonus === SpaceBonus.DRAW_CARD) {
+        player.cardsInHand.push(this.dealer.dealCard());
+      } else if (spaceBonus === SpaceBonus.PLANT) {
+        player.plants++;
+      } else if (spaceBonus === SpaceBonus.STEEL) {
+        player.steel++;
+      } else if (spaceBonus === SpaceBonus.TITANIUM) {
+        player.titanium++;
+      } else if (spaceBonus === SpaceBonus.HEAT) {
+        player.heat++;
+      }
     }
 
     public addGreenery(

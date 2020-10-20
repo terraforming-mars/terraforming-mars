@@ -134,7 +134,38 @@ export const CreateGameForm = Vue.component("create-game-form", {
             .then(onSucces)
             .catch(_ => alert("Unexpected server response"));
     },
-    methods: { 
+    methods: {
+        downloadCurrentSettings: function () {
+            const serializedData = this.serializeSettings();
+            if (serializedData) {
+                let a = document.createElement("a");
+                const blob = new Blob([serializedData], {'type': "application/json"});
+                a.href = window.URL.createObjectURL(blob);
+                a.download = "tm_settings.json";
+                a.click();
+            }
+        },
+        handleSettingsUpload: function () {
+            let file = (this.$refs.file as any).files[0];
+            let reader  = new FileReader();
+            let results = undefined;
+            const component = (this as any) as CreateGameModel;
+            reader.addEventListener("load", function () {
+                results = reader.result;
+                if (typeof(results) == "string") {
+                    results = JSON.parse(results);
+                    for (let k in results) {
+                        component.playersCount = results["players"].length;
+                        (component as any)[k] = results[k];
+                    }
+                }
+            }.bind(this), false);
+            if(file) {
+              if (/\.json$/i.test(file.name)) {
+                reader.readAsText(file);
+              }
+            }
+        },
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
             return $t("Player " + player.index + " name");
         },
@@ -186,7 +217,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPlayerContainerColorClass: function(color: string): string{
             return playerColorClass(color.toLowerCase(), "bg_transparent");
         },
-        createGame: function () {
+        serializeSettings: function () {
             const component = (this as any) as CreateGameModel;
 
             var players = component.players.slice(0, component.playersCount);
@@ -311,7 +342,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 initialDraft,
                 randomMA,
                 shuffleMapOption,
-            });
+            }, undefined, 4);
+
+            return dataToSend;
+        },
+        createGame: function () {
+            const dataToSend = this.serializeSettings();
+
+            if (dataToSend === undefined) return;
 
             const onSucces = (response: any) => {
                 if (response.players.length === 1) {
@@ -553,54 +591,64 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Beginner Options</span>
                             </label>
                         </div>
+                        
+                        <div class="create-game-players-cont" v-if="playersCount > 1">
+                            <div class="container">
+                                <div class="columns">
+                                    <template v-for="newPlayer in getPlayers()">
+                                    <div :class="'form-group col6 create-game-player create-game--block '+getPlayerContainerColorClass(newPlayer.color)">
+                                        <div>
+                                            <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
+                                        </div>
+                                        <div class="create-game-page-color-row">
+                                            <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                                                <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
+                                                <label :for="'radioBox' + color + newPlayer.index">
+                                                    <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
+                                                </label>
+                                            </template>
+                                        </div>
+                                        <div>
+                                            <template v-if="beginnerOption">
+                                                <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
+                                                    <input type="checkbox" v-model="newPlayer.beginner">
+                                                    <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
+                                                </label>
+            
+                                                <label class="form-label">
+                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
+                                                    <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
+                                                </label>
+                                            </template>
+            
+                                            <label class="form-radio form-inline" v-if="!randomFirstPlayer">
+                                                <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
+                                                <i class="form-icon"></i> <span v-i18n>Goes First?</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="create-game-action">
                             <Button title="Create game" size="big" :onClick="createGame"/>
+
+                            <label>
+                                <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
+                                <input style="display: none" type="file" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
+                            </label>
+
+                            <label>
+                                <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                            </label>
                         </div>  
                     </div>
                 </div>
             </div>
 
-            <div class="create-game-players-cont" v-if="playersCount > 1">
-                <h2 v-i18n>Players</h2>
-                <div class="container">
-                    <div class="columns">
-                        <template v-for="newPlayer in getPlayers()">
-                        <div :class="'form-group col6 create-game-player create-game--block '+getPlayerContainerColorClass(newPlayer.color)">
-                            <div>
-                                <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
-                            </div>
-                            <div class="create-game-page-color-row">
-                                <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
-                                    <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
-                                    <label :for="'radioBox' + color + newPlayer.index">
-                                        <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
-                                    </label>
-                                </template>
-                            </div>
-                            <div>
-                                <template v-if="beginnerOption">
-                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
-                                        <input type="checkbox" v-model="newPlayer.beginner">
-                                        <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
-                                    </label>
 
-                                    <label class="form-label">
-                                        <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
-                                        <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
-                                    </label>
-                                </template>
-
-                                <label class="form-radio form-inline" v-if="!randomFirstPlayer">
-                                    <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
-                                    <i class="form-icon"></i> <span v-i18n>Goes First?</span>
-                                </label>
-                            </div>
-                        </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
 
             <corporations-filter
                 v-if="showCorporationList"

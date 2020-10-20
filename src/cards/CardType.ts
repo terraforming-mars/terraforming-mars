@@ -1,4 +1,3 @@
-ee
 export enum CardType {
     EVENT = "red",
     ACTIVE = "blue",

@@ -29,7 +29,7 @@ export class MetallicAsteroid implements IProjectCard {
               tileType: TileType.METALLIC_ASTEROID,
               card: this.name
             });
-            space.adjacency = {bonus: [SpaceBonus.STEEL]}
+            space.adjacency = {bonus: [SpaceBonus.TITANIUM]}
             return undefined;
           }
       );

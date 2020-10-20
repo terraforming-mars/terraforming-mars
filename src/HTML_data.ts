@@ -4244,20 +4244,22 @@ export const HTML_DATA: Map<string, string> =
       <div class="resource wild"></div>
     </div>
     <div class="red-arrow"></div>
-    4<div class="resource wild"></div>
-    <div class="description" style="text-align:center;margin-top:0px;">
+    4<div class="production wild"></div>
+    <div class="description utopia-ability-description">
       (Action: Decrease any production to gain 4 resources of that kind.)
     </div>
   </div>
-  <div class="utopia">
-    <div class="utopia1">UTOPIA</div>
-    <div class="utopia2">INVEST</div>
+  <div class="utopia-corp-name">
+    <div class="utopia-corp-name-1">UTOPIA</div>
+    <div class="utopia-corp-name-2">INVEST</div>
   </div>
-  <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">40</div>
-  <div class="production-box production-box-size2">
+  <div class="utopia-starting-resources">
+    <div class="resource money">40</div>
+  </div>
+  <div class="production-box production-box-size2 utopia-production-box">
     <div class="production steel"></div><div class="production titanium"></div>
   </div>
-  <div class="description" style="margin-top:-5px;text-align:center;">
+  <div class="description utopia-description-box">
     (You start with 40 MC. Increase your steel and titanium production 1 step each.)
   </div>
 </div>

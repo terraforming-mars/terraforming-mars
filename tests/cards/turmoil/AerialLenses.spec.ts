@@ -31,18 +31,17 @@ describe("AerialLenses", function () {
     it("Should play without plants", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
     });
 
     it("Should play with plants", function () {
         player2.plants = 5;
         card.play(player, game);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player2.plants).to.eq(3);
     });

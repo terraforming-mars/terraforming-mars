@@ -3,7 +3,8 @@ import { FloaterTechnology } from "../../../src/cards/colonies/FloaterTechnology
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { ICard } from "../../../src/cards/ICard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
 
@@ -30,6 +31,9 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles);
 
         card.action(player, game);
+        expect(game.deferredActions.length).to.eq(1);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
         expect(dirigibles.resourceCount).to.eq(1);
     });
 
@@ -39,11 +43,10 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles, floatingHabs);
 
         card.action(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.generatePlayerInput?.();
-        selectResourceInterrupt.playerInput?.cb([floatingHabs]);
+        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        selectCard.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(1);
         expect(dirigibles.resourceCount).to.eq(0);
     });

@@ -66,12 +66,16 @@ describe("PharmacyUnion", function () {
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
+        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        game.deferredActions.shift();
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
 
         const lagrangeObservatory = new LagrangeObservatory();
         player2.playedCards.push(lagrangeObservatory);
         card.onCardPlayed(player2, game, lagrangeObservatory);
+        expect(game.deferredActions.length).to.eq(0);
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
     });
@@ -83,6 +87,11 @@ describe("PharmacyUnion", function () {
         const research = new Research();
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
+        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        game.deferredActions.shift();
+        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        game.deferredActions.shift();
         expect(card.resourceCount).to.eq(0);
         expect(player.getTerraformRating()).to.eq(22);
     });
@@ -93,10 +102,10 @@ describe("PharmacyUnion", function () {
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
         
-        const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.splice(0, 1);
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        game.deferredActions.splice(0, 1);
         orOptions.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(23);
@@ -104,7 +113,7 @@ describe("PharmacyUnion", function () {
         
         // Cannot trigger once per game effect a second time
         card.onCardPlayed(player, game, searchForLife);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions.length).to.eq(0);
         expect(player.getTerraformRating()).to.eq(23);
     });
 
@@ -118,7 +127,8 @@ describe("PharmacyUnion", function () {
         card.resourceCount = 0;
         card.onCardPlayed(player, game, new SearchForLife());
         
-        (game.interrupts[0].playerInput as OrOptions).options[0].cb();
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        orOptions.options[0].cb();
         expect(card.isDisabled).to.eq(true);
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
         expect(advancedEcosystems.canPlay(player)).to.eq(false);

@@ -37,6 +37,6 @@ describe("MetallicAsteroid", function () {
         action.cb(space);
         expect(space.player).to.eq(player);
         expect(space.tile!.tileType).to.eq(TileType.METALLIC_ASTEROID);
-        expect(space.adjacency).to.deep.eq({ bonus: [SpaceBonus.STEEL] });
+        expect(space.adjacency).to.deep.eq({ bonus: [SpaceBonus.TITANIUM] });
     });
 });

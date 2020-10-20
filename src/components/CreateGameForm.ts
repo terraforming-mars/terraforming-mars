@@ -10,6 +10,7 @@ import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
 import { Button } from "../components/common/Button";
 import { playerColorClass } from "../utils/utils";
+import { RandomMAOptionType } from "../RandomMAOptionType";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -19,7 +20,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
-    randomMA: boolean;
+    randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     beginnerOption: boolean;
@@ -76,7 +77,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
-            randomMA: false,
+            randomMA: RandomMAOptionType.NONE,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             beginnerOption: false,
@@ -124,15 +125,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
         if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
-
+        
         const onSucces = (response: any) => {
             this.$data.cloneGameData = response;
         }
-
+         
         fetch("/api/clonablegames")
             .then(response => response.json())
             .then(onSucces)
-            .catch(_ => alert("Unexpected server response"));
+            .catch(_ => alert("Unexpected server response")); 
     },
     methods: {
         downloadCurrentSettings: function () {
@@ -160,7 +161,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     }
                 }
             }.bind(this), false);
-            if(file) {
+            if (file) {
               if (/\.json$/i.test(file.name)) {
                 reader.readAsText(file);
               }
@@ -184,6 +185,28 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPlayers: function (): Array<NewPlayerModel> {
             const component = (this as any) as CreateGameModel;
             return component.players.slice(0, component.playersCount);
+        },
+        isRandomMAEnabled: function (): Boolean {
+            return this.randomMA !== RandomMAOptionType.NONE;
+        },
+        randomMAToggle: function () {
+            const component = (this as any) as CreateGameModel;
+            if (component.randomMA === RandomMAOptionType.NONE){
+                component.randomMA = RandomMAOptionType.LIMITED;
+                this.randomMA = RandomMAOptionType.LIMITED;
+            } else {
+                component.randomMA = RandomMAOptionType.NONE;
+                this.randomMA = RandomMAOptionType.NONE;
+            }
+        },
+        getRandomMaOptionType: function(type: "limited" | "full"): RandomMAOptionType {
+            if (type === "limited") {
+                return RandomMAOptionType.LIMITED;
+            } else if (type === "full") {
+                return RandomMAOptionType.UNLIMITED;
+            } else {
+                return RandomMAOptionType.NONE;
+            }
         },
         isBeginnerToggleEnabled: function(): Boolean {
             return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil)
@@ -220,7 +243,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         serializeSettings: function () {
             const component = (this as any) as CreateGameModel;
 
-            var players = component.players.slice(0, component.playersCount);
+            let players = component.players.slice(0, component.playersCount);
 
             if (component.randomFirstPlayer) {
                 // Shuffle players array to assign each player a random seat around the table
@@ -289,7 +312,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
-                let playersCount = players.length;
+                const playersCount = players.length;
                 let neededColoniesCount = playersCount + 2;
                 if (playersCount === 1) {
                     neededColoniesCount = 4;
@@ -368,6 +391,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 .catch(_ => alert("Unexpected server response"));
         }
     },
+    
     template: `
         <div id="create-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
@@ -548,15 +572,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h4 v-i18n>Multiplayer Options</h4>
 
                             <div class="create-game-page-column-row">
+                                <div>
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
                                 <label for="draft-checkbox">
                                     <span v-i18n>Draft variant</span>
                                 </label>
+                                </div>
 
+                                <div>
                                 <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
                                 <label for="initialDraft-checkbox">
                                     <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
+                                </div>
                             </div>
 
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
@@ -564,10 +592,26 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Random first player</span>
                             </label>
 
-                            <input type="checkbox" name="randomMA" v-model="randomMA" id="randomMA-checkbox">
+                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
+                                <div>
+                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
+                                <label class="label-randomMAOption" for="limitedRandomMA-radio">
+                                    <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
+                                </label>
+                                </div>
+
+                                <div>
+                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
+                                <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
+                                    <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
+                                </label>
+                                </div>
+                            </div>
 
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">

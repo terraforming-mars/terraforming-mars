@@ -120,7 +120,12 @@
 .create-game-page-column-row {
     display: flex;
     flex-flow: row nowrap;
-  }
+}
+
+
+.create-game-page-column-row > div{
+    flex-grow: 1;
+}
 
 .create-game-page-column input[type="checkbox"] {
   opacity: 0;
@@ -146,10 +151,13 @@
   min-width: 125px;
   height: 60px;
   line-height: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .create-game-page-column .expansion-button {
     text-align: left;
+    justify-content: left;
   }
 
 .create-game-page-column label:hover {
@@ -192,13 +200,13 @@
 
 .create-game-expansion-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
     background-position: 0px 0px;
     background-repeat: no-repeat;
     vertical-align: middle;
-    margin: 0px 10px;
+    margin: 5px 10px;
   }
 
 .create-game-playerblock-red {
@@ -275,6 +283,20 @@
   
 .create-game-page-color-row input[type="radio"]:checked + label {
     background-color: rgba(0,0,0,.3);
+}
+
+.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption {
+    position: relative;
+}
+.create-game-page-column input[type="radio"]:checked + label.label-randomMAOption::after {
+    position: absolute;
+    width: 40px;
+    height: 12px;
+    top: -10px;
+    left: 50%;
+    margin-left: -20px;
+    content: " ";
+    background-color: rgb(199, 199, 199);
 }
   
 .create-game-colorbox {

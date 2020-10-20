@@ -7,11 +7,18 @@ import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 import { ISpace } from "../ISpace";
 import { Player } from "../Player";
+import { Resources } from "../Resources";
 import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { TileType } from "../TileType";
+// import { ITile } from "../ITile";
+// import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
+import { IAdjacencyCost } from "./IAdjacencyCost";
+// import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
+// import { ARES_MILESTONES } from "../milestones/Milestones";
+// import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
-// import { IMilestoneCount } from "./IAresData";
+import { Phase } from "../Phase";
 
 export enum HazardSeverity {
     NONE,
@@ -145,6 +152,80 @@ export class AresHandler {
             return HazardSeverity.NONE;
         }
     }
+
+
+    private static computeAdjacencyCosts(game: Game, space: ISpace): IAdjacencyCost {
+        // Summing up production cost isn't really the way to do it, because each tile could
+        // reduce different production costs. Oh well.
+        let megaCreditCost = 0;
+        let productionCost = 0;
+        game.board.getAdjacentSpaces(space).forEach(adjacentSpace => {
+          megaCreditCost += adjacentSpace.adjacency?.cost || 0;
+          const severity = this.hazardSeverity(adjacentSpace);
+          switch(severity) {
+            case HazardSeverity.MILD:
+                productionCost += 1;
+                break;
+            case HazardSeverity.SEVERE:                  
+                productionCost += 2;
+                break;
+        }});
+
+        const severity = this.hazardSeverity(space);
+        switch(severity) {
+            case HazardSeverity.MILD:
+                megaCreditCost += 8;
+                break;
+            case HazardSeverity.SEVERE:                  
+                megaCreditCost += 16;
+                break;
+        }
+
+        return { megacredits: megaCreditCost, production: productionCost };
+    }
+
+    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+        this.assertHasAres(game);
+        if (game.phase === Phase.SOLAR) {
+            return {megacredits: 0, production: 0 };
+        }
+        const cost = AresHandler.computeAdjacencyCosts(game, space);
+
+        // Make this more sophisticated, a player can pay for different adjacencies
+        // with different production units, and, a severe hazard can't split payments.
+        const avaialbleProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
+            + player.getProduction(Resources.STEEL)
+            + player.getProduction(Resources.TITANIUM)
+            + player.getProduction(Resources.PLANTS)
+            + player.getProduction(Resources.ENERGY)
+            + player.getProduction(Resources.HEAT);
+
+        if (avaialbleProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+           return cost;
+        } 
+        if (cost.production > 0) {
+            throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
+        } else {
+            throw new Error(`Placing here costs ${cost.megacredits} M€`);
+        }
+    }
+
+    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
+        this.assertHasAres(game);
+
+        const cost = this.assertCanPay(game, player, space);
+
+        // if (cost.production > 0) {
+        //     // TODO(kberg): don't send interrupt if total is available.
+        //     game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
+        // }
+        if (cost.megacredits > 0) {
+            game.log("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
+
+            game.addSelectHowToPayInterrupt(player, cost.megacredits, false, false, "Select how to pay additional placement costs.");
+        }
+    }
+
 }
 
 

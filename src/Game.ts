@@ -540,7 +540,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, restrictedTag?: Tags, title?: string): void {
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count, restrictedTag));
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count, restrictedTag, []));
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {

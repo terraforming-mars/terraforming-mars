@@ -26,7 +26,10 @@ export class Virus implements IProjectCard {
         const result: Array<ICard> = [];
         game.getPlayers().forEach((p) => {
             if (p.hasProtectedHabitats() && player.id !== p.id) return;
-            result.push(...p.getCardsWithResources().filter(card => card.resourceType === ResourceType.ANIMAL && card.name !== CardName.PETS));
+            // TODO(kberg): the list of cards that can't have animals removed is now 2.
+            // This logic is duplicated in Predators.ts.
+            // TODO(kberg): Add test for pets & bioengineering enclosure respect a la Predators.
+            result.push(...p.getCardsWithResources().filter(card => card.resourceType === ResourceType.ANIMAL && card.name !== CardName.PETS && card.name !== CardName.BIOENGINEERING_ENCLOSURE));
         });
         return result;
     }

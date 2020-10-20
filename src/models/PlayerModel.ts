@@ -33,6 +33,7 @@ export interface PlayerModel {
     name: string;
     plants: number;
     plantProduction: number;
+    players: Array<PlayerModel>;
     steel: number;
     steelProduction: number;
     steelValue: number;

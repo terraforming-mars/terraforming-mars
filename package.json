@@ -16,7 +16,8 @@
     "spectre.css": "^0.5.8",
     "sqlite3": "^4.2.0",
     "typescript": "^3.8.3",
-    "vue": "^2.6.10",
+    "vue": "2.6.10",
+    "vue-template-compiler": "2.6.10",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.0"
   },

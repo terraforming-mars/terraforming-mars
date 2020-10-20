@@ -146,20 +146,42 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
         },
         handleSettingsUpload: function () {
-            let file = (this.$refs.file as any).files[0];
-            let reader  = new FileReader();
-            let results = undefined;
+            const refs  = this.$refs;
+            const file = (refs.file as any).files[0];
+            const reader  = new FileReader();
             const component = (this as any) as CreateGameModel;
+
             reader.addEventListener("load", function () {
-                results = reader.result;
-                if (typeof(results) == "string") {
-                    results = JSON.parse(results);
-                    for (let k in results) {
-                        component.playersCount = results["players"].length;
+                const readerResults = reader.result;
+                if (typeof(readerResults) == "string") {
+                    const results = JSON.parse(readerResults);
+
+                    component.playersCount = results["players"].length;
+                    component.showCorporationList = results["customCorporationsList"].length > 0;
+                    component.showColoniesList = results["customColoniesList"].length > 0;
+                    component.showCardsBlackList = results["cardsBlackList"].length > 0;
+
+                    for (const k in results) {
+                        if (["customCorporationsList", "customColoniesList", "cardsBlackList"].includes(k)) continue;
                         (component as any)[k] = results[k];
                     }
+
+                    Vue.nextTick(() => {
+                        if (component.showColoniesList) {
+                            (refs.coloniesFilter as any).updateColoniesByNames(results["customColoniesList"]);
+                        }
+
+                        if (component.showCorporationList) {
+                            (refs.corporationsFilter as any).selectedCorporations = results["customCorporationsList"];
+                        }
+
+                        if (component.showCardsBlackList) {
+                            (refs.cardsFilter as any).selectedCardNames = results["cardsBlackList"];
+                        }
+                    });
                 }
             }.bind(this), false);
+
             if(file) {
               if (/\.json$/i.test(file.name)) {
                 reader.readAsText(file);
@@ -286,6 +308,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const includeVenusMA = component.includeVenusMA;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
+            const beginnerOption = component.beginnerOption;
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
@@ -342,6 +365,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 initialDraft,
                 randomMA,
                 shuffleMapOption,
+                beginnerOption,
             }, undefined, 4);
 
             return dataToSend;
@@ -651,6 +675,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
 
             <corporations-filter
+                ref="corporationsFilter"
                 v-if="showCorporationList"
                 v-on:corporation-list-changed="updateCustomCorporationsList"
                 v-bind:corporateEra="corporateEra"
@@ -663,12 +688,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ></corporations-filter>
 
             <colonies-filter
+                ref="coloniesFilter"
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
                 v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 
             <cards-filter
+                ref="cardsFilter"
                 v-if="showCardsBlackList"
                 v-on:cards-list-changed="updateCardsBlackList"
             ></cards-filter>

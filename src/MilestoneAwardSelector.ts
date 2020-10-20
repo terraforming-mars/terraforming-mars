@@ -210,7 +210,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
     let awardCount = 0;
 
     // Keep adding milestone or award until there are enough as requested
-    while(milestoneCount + awardCount < numberMARequested*2) {
+    while (milestoneCount + awardCount < numberMARequested*2) {
 
         // If there is enough award, add a milestone. And vice versa. If still need both, flip a coin to decide which to add.
         if (awardCount === numberMARequested || (milestoneCount !== numberMARequested && Math.round(Math.random()))) {

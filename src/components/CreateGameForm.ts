@@ -161,7 +161,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     }
                 }
             }.bind(this), false);
-            if(file) {
+            if (file) {
               if (/\.json$/i.test(file.name)) {
                 reader.readAsText(file);
               }
@@ -200,10 +200,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
         },
         getRandomMaOptionType: function(type: "limited" | "full"): RandomMAOptionType {
-            // chosta: we need this as vue does not know about the enum
-            if(type === "limited") {
+            if (type === "limited") {
                 return RandomMAOptionType.LIMITED;
-            } else if(type === "full") {
+            } else if (type === "full") {
                 return RandomMAOptionType.UNLIMITED;
             } else {
                 return RandomMAOptionType.NONE;

@@ -14,6 +14,12 @@ export class RemoveAnyPlants implements DeferredAction {
     ){}
 
     public execute() {
+        if (this.game.isSoloMode()) {
+            // Crash site cleanup hook
+            this.game.someoneHasRemovedOtherPlayersPlants = true;
+            return undefined;
+        }
+
         const candidates = this.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.getResource(Resources.PLANTS) > 0);
 
         if (candidates.length === 0) {

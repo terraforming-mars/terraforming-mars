@@ -1250,6 +1250,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
         return this.increaseTemperature(player, 1);
       }
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onOxygenChange(this);
+      }
       return undefined;
     }
 
@@ -1347,6 +1350,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           (steps === 3 && this.temperature === 4)
       ) {
         this.addOceanInterrupt(player, "Select space for ocean from temperature increase");
+      }
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onTemperatureChange(this);
       }
 
       return undefined;
@@ -1561,6 +1567,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRating(this);
+      }
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onOceanPlaced(this, player);
       }
     }
 

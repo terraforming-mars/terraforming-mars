@@ -419,9 +419,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public plantsAreProtected(): boolean {
       return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
     }
-    
+
+    // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.
+    // Search for uses of TileType.OCEAN_CITY for reference.
     public getCitiesCount(game: Game) {
-      return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
+      return game.getSpaceCount(TileType.CITY, this)
+          + game.getSpaceCount(TileType.CAPITAL, this)
+          + game.getSpaceCount(TileType.OCEAN_CITY, this);
     }
 
     public getNoTagsCount() {

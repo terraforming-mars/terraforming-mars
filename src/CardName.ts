@@ -375,6 +375,7 @@ export enum CardName {
     ARCADIAN_COMMUNITIES = "Arcadian Communities",
     ASTRODRILL = "Astrodrill",
     ASTEROID_HOLLOWING = "Asteroid Hollowing",
+    ASTEROID_RIGHTS = "Asteroid Rights",
     ADVERTISING = "Advertising",
     PHARMACY_UNION = "Pharmacy Union",
     COMET_AIMING = "Comet Aiming",

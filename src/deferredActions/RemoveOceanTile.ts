@@ -3,6 +3,7 @@ import { Player } from "../Player";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { DeferredAction } from "./DeferredAction";
+import { LogHelper } from "../components/LogHelper";
 
 export class RemoveOceanTile implements DeferredAction {
     constructor(
@@ -20,6 +21,7 @@ export class RemoveOceanTile implements DeferredAction {
             this.game.board.getOceansTiles(),
             (space: ISpace) => {
                 this.game.removeTile(space.id);
+                LogHelper.logBoardTileAction(this.game, this.player, space, "ocean tile", "removed");
                 return undefined;
             }
         );

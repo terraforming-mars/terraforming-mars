@@ -19,7 +19,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     }
 
     public addPlayCardDeferredAction(player: Player, game: Game) {
-        const playableCards = player.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
+        const playableCards = player.getPlayableCards(game).filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
             
         if (playableCards.length > 0) {
             game.defer(new SimpleDeferredAction(

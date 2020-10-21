@@ -14,7 +14,7 @@ export class AddResourcesToCard implements DeferredAction {
         public resourceType: ResourceType | undefined,
         public count: number = 1,
         public restrictedTag?: Tags,
-        public title: string = "Select card to add " + count + " " + resourceType + " resource(s)"
+        public title: string = "Select card to add " + count + " " + resourceType + "(s)"
     ){}
 
     public execute() {
@@ -23,6 +23,7 @@ export class AddResourcesToCard implements DeferredAction {
         if (this.restrictedTag !== undefined) {
             resourceCards = resourceCards.filter(card => card.tags.indexOf(this.restrictedTag!) !== -1);
         }
+
         if (resourceCards.length === 0) {
             return undefined;
         }

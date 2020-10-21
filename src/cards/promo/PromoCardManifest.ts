@@ -5,6 +5,7 @@ import { Advertising } from "./Advertising";
 import { ArcadianCommunities } from "./ArcadianCommunities";
 import { AsteroidDeflectionSystem } from "./AsteroidDeflectionSystem";
 import { AsteroidHollowing } from "./AsteroidHollowing";
+import { AsteroidRights } from "./AsteroidRights";
 import { Astrodrill } from "./Astrodrill";
 import { CometAiming } from "./CometAiming";
 import { CrashSiteCleanup } from "./CrashSiteCleanup";
@@ -64,6 +65,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
         { cardName: CardName.LAW_SUIT, factory: LawSuit },
         { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
         { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing },
+        { cardName: CardName.ASTEROID_RIGHTS, factory: AsteroidRights },
         { cardName: CardName.COMET_AIMING, factory: CometAiming },
         { cardName: CardName.CUTTING_EDGE_TECHNOLOGY, factory: CuttingEdgeTechnology },
         { cardName: CardName.CRASH_SITE_CLEANUP, factory: CrashSiteCleanup },

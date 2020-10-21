@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { PlayerInterrupt } from "./PlayerInterrupt";
+import { LogHelper } from "../components/LogHelper";
 
 export class RemoveOcean implements PlayerInterrupt {
     public playerInput?: PlayerInput;
@@ -23,6 +24,7 @@ export class RemoveOcean implements PlayerInterrupt {
             this.game.board.getOceansTiles(),
             (space: ISpace) => {
                 this.game.removeTile(space.id);
+                LogHelper.logBoardTileAction(this.game, this.player, space, "ocean tile", "removed");
                 return undefined;
             }
         );

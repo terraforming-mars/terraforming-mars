@@ -84,6 +84,8 @@ export interface GameOptions {
   turmoilExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
+  aresExtension: boolean;
+  aresHazards: boolean;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -175,6 +177,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           turmoilExtension: false,
           promoCardsOption: false,
           communityCardsOption: false,
+          aresExtension: false,
+          aresHazards: true,
           solarPhaseOption: false,
           removeNegativeGlobalEventsOption: false,
           includeVenusMA: true,
@@ -1480,6 +1484,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (tile.tileType === TileType.OCEAN) {
         space.player = undefined;
       }
+
+      // Must occur after all other onTilePlaced operations.
+      if (this.gameOptions.aresExtension) {
+        // Erasing the bonus means that overplacing doesn't regrant the bonus, or, for instance, make hazard spaces
+        // available for Mining Area or Solar Farm.
+        space.bonus = [];
+        // AresHandler.afterTilePlacement(this, player, startingResources);
+      }
+      
     }
 
     public addGreenery(
@@ -1759,8 +1772,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       d.board.spaces.forEach((element: ISpace) => {
+        const space = this.getSpace(element.id);
         if(element.tile) {
-          const space = this.getSpace(element.id);
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
           if (element.player){
@@ -1775,12 +1788,22 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
         // Correct Land Claim
         else if(element.player) {
-          const space = this.getSpace(element.id);
           const player = this.players.find((player) => player.id === element.player!.id);
           space.player = player;
         }
+        space.adjacency = element.adjacency;
       });
 
+      if (this.gameOptions.aresExtension) {
+        this.aresData = d.aresData;
+        // Spaces with tiles no longer have the underlying bonuses. If there's overplacement, erasing them
+        // won't regrant them, nor will they be avialable for options like Mining Area.
+        this.board.spaces.forEach(space => {
+          if (space.tile !== undefined) {
+            space.bonus = [];
+          }
+        });
+      }
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();

@@ -1,5 +1,3 @@
-// Game.ts-specific behavior for Ares
-
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
 
@@ -18,16 +16,16 @@ export class AresHandler {
         const type = space.tile?.tileType;
 
         switch(type) {
-        case TileType.DUST_STORM_MILD:
-        case TileType.EROSION_MILD:
-            return HazardSeverity.MILD;
+            case TileType.DUST_STORM_MILD:
+            case TileType.EROSION_MILD:
+                return HazardSeverity.MILD;
 
-        case TileType.DUST_STORM_SEVERE:
-        case TileType.EROSION_SEVERE:
-            return HazardSeverity.SEVERE;
+            case TileType.DUST_STORM_SEVERE:
+            case TileType.EROSION_SEVERE:
+                return HazardSeverity.SEVERE;
 
-        default:
-            return HazardSeverity.NONE;
+            default:
+                return HazardSeverity.NONE;
         }
     }
 }

@@ -17,8 +17,8 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     }
 
     public addPlayCardInterrupt(player: Player, game: Game) {
-        const playableCards = player.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
-            
+        const playableCards = player.getPlayableCards(game).filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
+
         if (playableCards.length > 0) {
             game.interrupts.push({
                 player: player,

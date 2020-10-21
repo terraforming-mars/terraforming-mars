@@ -35,6 +35,7 @@ export class SelectRemoveFloaters implements PlayerInterrupt {
                 "Select card to remove 2 floaters from", "Remove floaters", floaterCards,
                 (foundCards: Array<ICard>) => {
                     this.player.removeResourceFrom(foundCards[0], 2);
+                    this.game.log("${0} removed 2 floaters from ${1} due to Global Event", b => b.player(this.player).card(foundCards[0]));
                     return undefined;
                 }
             );

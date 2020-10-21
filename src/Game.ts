@@ -1491,17 +1491,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
-      if (spaceBonus === SpaceBonus.DRAW_CARD) {
-        player.cardsInHand.push(this.dealer.dealCard());
-      } else if (spaceBonus === SpaceBonus.PLANT) {
-        player.plants++;
-      } else if (spaceBonus === SpaceBonus.STEEL) {
-        player.steel++;
-      } else if (spaceBonus === SpaceBonus.TITANIUM) {
-        player.titanium++;
-      } else if (spaceBonus === SpaceBonus.HEAT) {
-        player.heat++;
-      }
+        if (spaceBonus === SpaceBonus.DRAW_CARD) {
+           player.cardsInHand.push(this.dealer.dealCard());
+        } else if (spaceBonus === SpaceBonus.PLANT) {
+            player.plants++;
+        } else if (spaceBonus === SpaceBonus.STEEL) {
+            player.steel++;
+        } else if (spaceBonus === SpaceBonus.TITANIUM) {
+            player.titanium++;
+        } else if (spaceBonus === SpaceBonus.HEAT) {
+            player.heat++;
+        }
     }
 
     public addGreenery(

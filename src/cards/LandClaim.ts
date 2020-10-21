@@ -24,7 +24,7 @@ export class LandClaim implements IProjectCard {
             game.board.getAvailableSpacesOnLand(player), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
-                LogHelper.logBoardPlacement(game, player, foundSpace, "land claim");
+                LogHelper.logBoardTileAction(game, player, foundSpace, "land claim");
                 return undefined;
             }
         );

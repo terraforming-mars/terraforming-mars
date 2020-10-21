@@ -299,6 +299,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             let current = this.playersInfluenceBonus.get(player.id);
             if (current) {
                 current += bonus;
+                this.playersInfluenceBonus.set(player.id, current);
             }
         }
         else {

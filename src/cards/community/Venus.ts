@@ -7,6 +7,7 @@ import { ICard } from '../ICard';
 import { Tags } from '../Tags';
 import { LogHelper } from '../../components/LogHelper';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CorroderSuits } from '../venusNext/CorroderSuits';
 
 export class Venus extends Colony implements IColony {
     public name = ColonyName.VENUS;
@@ -42,18 +43,25 @@ export class Venus extends Colony implements IColony {
     }
 
     private addVenusResourceCardInterrupt(player: Player, game: Game, qty: number = 1) : void {
-        game.interrupts.push({
-            player: player,
-            playerInput: new SelectCard(
-                "Select Venus card to add 1 resource",
-                "Add resource",
-                this.getResCards(player),
-                (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], qty);
-                  LogHelper.logAddResource(game, player, foundCards[0]);
-                  return undefined;
-                }
-            )
-        });
+        const targetCards = CorroderSuits.getVenusResCards(player);
+
+        if (targetCards.length === 1) {
+            player.addResourceTo(targetCards[0], 1);
+            LogHelper.logAddResource(game, player, targetCards[0]);
+        } else if (targetCards.length > 1) {
+            game.interrupts.push({
+                player: player,
+                playerInput: new SelectCard(
+                    "Select Venus card to add 1 resource",
+                    "Add resource",
+                    this.getResCards(player),
+                    (foundCards: Array<ICard>) => {
+                        player.addResourceTo(foundCards[0], qty);
+                        LogHelper.logAddResource(game, player, foundCards[0]);
+                        return undefined;
+                    }
+                )
+            });
+        }
     }
 }

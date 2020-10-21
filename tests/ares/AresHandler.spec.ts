@@ -14,7 +14,7 @@ import { SpaceType } from "../../src/SpaceType";
 // import { SelectProductionToLose } from "../../src/inputs/SelectProductionToLose";
 import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 // import { IProductionUnits } from "../../src/inputs/IProductionUnits";
-// import { OriginalBoard } from "../../src/OriginalBoard";
+import { OriginalBoard } from "../../src/OriginalBoard";
 // import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
 import { Phase } from "../../src/Phase";
@@ -321,22 +321,22 @@ describe("AresHandler", function () {
 //         expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
 //     });
 
-//     it("Placing on top of an ocean doesn't regrant bonuses", function() {
-//         game.board = new OriginalBoard();
-//         const space = game.board.getSpaces(SpaceType.OCEAN).find(space => {
-//              return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
-//         })!;
-//         const spaceId = space.id;
-//         expect(otherPlayer.plants).eq(0);
-//         expect(player.plants).eq(0);
+    it("Placing on top of an ocean doesn't regrant bonuses", function() {
+        game.board = new OriginalBoard();
+        const space = game.board.getSpaces(SpaceType.OCEAN).find(space => {
+             return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
+        })!;
+        const spaceId = space.id;
+        expect(otherPlayer.plants).eq(0);
+        expect(player.plants).eq(0);
 
-//         game.addOceanTile(otherPlayer, spaceId);
-//         // Placing an Ocean City on top of the ocean will not grant player plants.
-//         game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN_CITY });
+        game.addOceanTile(otherPlayer, spaceId);
+        // Placing an Ocean City on top of the ocean will not grant player plants.
+        game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN_CITY });
 
-//         expect(otherPlayer.plants).greaterThan(0);
-//         expect(player.plants).eq(0);
-//     });
+        expect(otherPlayer.plants).greaterThan(0);
+        expect(player.plants).eq(0);
+    });
 
     it("No adjacency bonuses during WGT", function() {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];

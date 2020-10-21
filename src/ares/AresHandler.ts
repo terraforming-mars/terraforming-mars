@@ -111,14 +111,12 @@ export class AresHandler {
         game.log("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
 
         let ownerBonus = 1;
-        if (adjacentSpace.player !== undefined) {
-            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-                ownerBonus = 2;
-            };
-            
-            adjacentSpace.player.megaCredits += ownerBonus;
-            game.log("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
-        }
+        if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+            ownerBonus = 2;
+        };
+        
+        adjacentSpace.player.megaCredits += ownerBonus;
+        game.log("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
 
         return true;
     }

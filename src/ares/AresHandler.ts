@@ -84,25 +84,25 @@ export class AresHandler {
         adjacentSpace.adjacency.bonus.forEach(bonus => {
             bonuses.add(bonus);
             switch(bonus) {
-            case SpaceBonus.ANIMAL:
-                addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
-                break;
+                case SpaceBonus.ANIMAL:
+                    addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
+                    break;
 
-            case SpaceBonus.MEGACREDITS:
-                player.megaCredits++;
-                break;
+                case SpaceBonus.MEGACREDITS:
+                    player.megaCredits++;
+                    break;
 
-            case SpaceBonus.POWER:
-                player.energy++;
-                break;
+                case SpaceBonus.POWER:
+                    player.energy++;
+                    break;
 
-            case SpaceBonus.MICROBE:
-                addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
-                break;
+                case SpaceBonus.MICROBE:
+                    addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
+                    break;
 
-            default:
-                game.grantSpaceBonus(player, bonus);
-                break;
+                default:
+                    game.grantSpaceBonus(player, bonus);
+                    break;
             }
         });
 

@@ -21,8 +21,8 @@ describe("SolarFarm", function () {
     });
 
     it("Play", function () {
-        // Find the first spot to place a city.
-        const space = game.board.getAvailableSpacesForCity(player)[0];
+        // Find the first spot with no hazard tile on it to place a city.
+        const space = game.board.getAvailableSpacesForCity(player).filter(s => !AresHandler.hasHazardTile(s))[0];
         // Hack the space to have a large number of plants, just to show a matching
         // energy production bump - seven.
         space.bonus = [

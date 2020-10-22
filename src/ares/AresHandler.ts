@@ -91,25 +91,25 @@ export class AresHandler {
         adjacentSpace.adjacency.bonus.forEach(bonus => {
             bonuses.add(bonus);
             switch(bonus) {
-            case SpaceBonus.ANIMAL:
-                addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
-                break;
+                case SpaceBonus.ANIMAL:
+                    addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
+                    break;
 
-            case SpaceBonus.MEGACREDITS:
-                player.megaCredits++;
-                break;
+                case SpaceBonus.MEGACREDITS:
+                    player.megaCredits++;
+                    break;
 
-            case SpaceBonus.POWER:
-                player.energy++;
-                break;
+                case SpaceBonus.POWER:
+                    player.energy++;
+                    break;
 
-            case SpaceBonus.MICROBE:
-                addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
-                break;
+                case SpaceBonus.MICROBE:
+                    addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
+                    break;
 
-            default:
-                game.grantSpaceBonus(player, bonus);
-                break;
+                default:
+                    game.grantSpaceBonus(player, bonus);
+                    break;
             }
         });
 
@@ -118,14 +118,12 @@ export class AresHandler {
         game.log("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
 
         let ownerBonus = 1;
-        if (adjacentSpace.player !== undefined) {
-            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-                ownerBonus = 2;
-            };
-            
-            adjacentSpace.player.megaCredits += ownerBonus;
-            game.log("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
-        }
+        if (adjacentSpace.player.cardIsInEffect(CardName.MARKETING_EXPERTS)) {
+            ownerBonus = 2;
+        };
+        
+        adjacentSpace.player.megaCredits += ownerBonus;
+        game.log("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
 
         return true;
     }
@@ -150,7 +148,6 @@ export class AresHandler {
                 return HazardSeverity.NONE;
         }
     }
-
 
     private static computeAdjacencyCosts(game: Game, space: ISpace): IAdjacencyCost {
         // Summing up production cost isn't really the way to do it, because each tile could

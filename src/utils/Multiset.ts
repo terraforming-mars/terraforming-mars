@@ -15,11 +15,7 @@ export class Multiset<T> {
     }
 
     entries(): Array<[T, number]> {
-        const results: Array<[T, number]> = [];
-        this.map.forEach((count: number, key: T) => {
-            results.push([key, count]);
-        });
-        return results;
+        return Array.from(this.map);
     }
 
     toString(): string {

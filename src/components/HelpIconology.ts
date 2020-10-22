@@ -12,7 +12,7 @@ export const HelpIconology = Vue.component("help-iconology", {
     <div class="help-page-container">
         <div class="help-page-column">
             <div>
-                <div class="help-page-section-title">Card Tags</div>
+                <div class="help-page-section-title" v-i18n>Card Tags</div>
             </div>
             <div>
                 <div class="resource-tag tag-building"></div>
@@ -72,9 +72,9 @@ export const HelpIconology = Vue.component("help-iconology", {
         
         <div class="help-page-column">
             <div>
-                <div class="help-page-section-title">Resources</div>
+                <div class="help-page-section-title" v-i18n>Resources</div>
             </div>
-            <div class="help-page-sublabel">
+            <div class="help-page-sublabel" v-i18n>
                 Standard Resources
             </div>
             <div>
@@ -101,7 +101,7 @@ export const HelpIconology = Vue.component("help-iconology", {
                 <div class="help-page-resource heat"></div>
                 <div class="help-page-label" v-i18n>Heat</div>
             </div>
-            <div class="help-page-sublabel">
+            <div class="help-page-sublabel" v-i18n>
                 Resources on Cards
             </div>
             <div>
@@ -128,7 +128,7 @@ export const HelpIconology = Vue.component("help-iconology", {
         
         <div class="help-page-column">
             <div>
-                <div class="help-page-section-title">Tiles</div>
+                <div class="help-page-section-title" v-i18n>Tiles</div>
             </div>
             <div>
                 <div class="tile greenery-no-O2-tile"></div>
@@ -150,7 +150,7 @@ export const HelpIconology = Vue.component("help-iconology", {
         
         <div class="help-page-column">
             <div>
-                <div class="help-page-section-title">Global Parameters</div>
+                <div class="help-page-section-title" v-i18n>Global Parameters</div>
             </div>
             <div>
                 <div class="tile help-page-param-box-temperature"></div>
@@ -172,7 +172,7 @@ export const HelpIconology = Vue.component("help-iconology", {
         
         <div class="help-page-column">
             <div>
-                <div class="help-page-section-title">Others</div>
+                <div class="help-page-section-title" v-i18n>Others</div>
             </div>
             <div>
                 <div class="help-page-victory-point">?</div>

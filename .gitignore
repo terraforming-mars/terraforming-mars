@@ -17,5 +17,3 @@ pid
 
 # Local Packages
 node_modules/
-
-src/components/*Vue.ts

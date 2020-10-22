@@ -38,6 +38,7 @@ export class CardRequirement {
         return this.type;
     }
 
+    //TODO chosta: add to a top level class - preferrably translatable
     public getTypePlural(): string {
         if(this.type === RequirementType.CITIES) {
             return "Cities";
@@ -49,18 +50,15 @@ export class CardRequirement {
     }
      
     public getLabel(): string {
-        const parts: Array<string> = [];
-        const prefix = this.isMax ? "max" : "";
+        let result: string = this.isMax ? "max " : "";
         const amount = this.amountToString();
-        if(prefix !== "") {
-            parts.push(prefix);
+        if(amount !== ""){
+            result += amount;
+            result += " ";
         }
-        if(amount !== "") {
-            parts.push(amount);
-        }
-        parts.push(this.parseType());
+        result += this.parseType();
 
-        return parts.join(" ");
+        return result; 
     }
 
     public max(): CardRequirement {

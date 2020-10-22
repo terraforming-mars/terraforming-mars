@@ -8,6 +8,9 @@ import { Resources } from "../../Resources";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE } from "../../constants";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
 
 export class SmallAsteroid implements IProjectCard {
     public cost: number = 10;
@@ -19,9 +22,14 @@ export class SmallAsteroid implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && canRaiseTemperature) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+            return player.canAfford(
+                player.getCardCost(game, this) + REDS_RULING_POLICY_COST,
+                game,
+                false,
+                true
+            );
         }
-  
+
         return true;
     }
 
@@ -30,5 +38,12 @@ export class SmallAsteroid implements IProjectCard {
         game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
         return undefined;
     }
-
+    public metadata: CardMetadata = {
+        description: "Increase temperature 1 step. Remove up to 2 plants from any player.",
+        cardNumber: "209",
+        onPlay: [
+            CardRow.add([CardBonus.temperature(1)]),
+            CardRow.add([CardBonus.plants(-2).any()]),
+        ],
+    };
 }

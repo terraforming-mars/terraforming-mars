@@ -1,21 +1,27 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {ISpace} from '../ISpace';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceType} from '../SpaceType';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { ISpace } from "../ISpace";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { SpaceType } from "../SpaceType";
+import { CardName } from "../CardName";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
+import { CardMetadata } from "../cards/CardMetadata";
+import { CardRequirements } from "../cards/CardRequirements";
+import { CardRequirement } from "../cards/CardRequirement";
+import { CardRow } from "../cards/CardRow";
+import { CardBonus } from "../cards/CardBonus";
+import { CardSpecial } from "../cards/CardSpecial";
 
 export class ArtificialLake implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.ARTIFICIAL_LAKE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost  = 15;
+    public tags  = [Tags.STEEL];
+    public name  = CardName.ARTIFICIAL_LAKE;
+    public cardType  = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       const meetsTemperatureRequirements = game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
@@ -30,7 +36,7 @@ export class ArtificialLake implements IProjectCard {
       if (game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;
 
       return new SelectSpace(
-          'Select a land space to place an ocean',
+          "Select a land space to place an ocean",
           game.board.getAvailableSpacesOnLand(player),
           (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
@@ -41,4 +47,18 @@ export class ArtificialLake implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+        description: "Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN",
+        cardNumber: "116",
+        requirements: new CardRequirements([
+            CardRequirement.temperature(-6),
+        ]),
+        onPlay:[
+          CardRow.add([
+            CardBonus.oceans(1),
+            CardSpecial.asterix()
+          ])
+        ],
+        victoryPoints: 1,
+    }; 
 }

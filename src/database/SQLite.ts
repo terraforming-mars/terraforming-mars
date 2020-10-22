@@ -59,11 +59,18 @@ export class SQLite implements IDatabase {
             if (row.game_id === undefined) {
                 return cb(new Error("Game not found"));
             }
-            // Transform string to json
-            const gameToRestore = JSON.parse(row.game);
 
-            // Rebuild each objects
-            game.loadFromJSON(gameToRestore);
+            try {
+                // Transform string to json
+                const gameToRestore = JSON.parse(row.game);
+
+                // Rebuild each objects
+                game.loadFromJSON(gameToRestore);
+            } catch (exception) {
+                console.error(`unable to restore reference game ${game_id}`, exception);
+                cb(exception);
+                return;
+            }
 
             return cb(err);
         });

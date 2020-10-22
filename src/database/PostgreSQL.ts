@@ -91,13 +91,18 @@ export class PostgreSQL implements IDatabase {
             if (res.rows.length === 0) {
                 return cb(new Error("Game not found"));
             }
-            // Transform string to json
-            const gameToRestore = JSON.parse(res.rows[0].game);
+            try {
+                // Transform string to json
+                const gameToRestore = JSON.parse(res.rows[0].game);
 
-            // Rebuild each objects
-            game.loadFromJSON(gameToRestore);
-
-            return cb(err);
+                // Rebuild each objects
+                game.loadFromJSON(gameToRestore);
+            } catch (exception) {
+                console.error(`Unable to restore game ${game_id}`, exception);
+                cb(exception);
+                return;
+            }
+            return cb(undefined);
         });
     }
 

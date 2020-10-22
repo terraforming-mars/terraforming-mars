@@ -4925,6 +4925,32 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.ASTEROID_RIGHTS, ` 
+    <div class="content">
+        <div>
+            <span class="money resource">1</span>
+            <span class="red-arrow"></span>
+            <span class="asteroid resource"></span>*
+        </div>
+        <div class="effect">
+            <span class="asteroid resource"></span>
+            <span class="red-arrow"></span>
+            <div class="production-box">
+                <div class="money production">1</div>
+            </div>
+             OR <div class="resource titanium"></div><div class="resource titanium"></div>
+        </div>
+        <div class="description">
+            (Action: Spend 1 MC to add 1 asteroid to ANY card, or spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.)
+        </div>
+        <div class="effect2">
+            <span class="asteroid resource"></span>
+            <span class="asteroid resource"></span>
+            <span class="description">(Add 2 asteroids to this card.)</span>
+        </div>
+      </div>
+    </div>
+`],
 [CardName.ADVERTISING,` 
       <div class="content ">
         <div class="resource money">20</div>* : <div class="production-box"><div class="production money">1</div></div></div>

@@ -31,7 +31,7 @@ import {SelectCity} from "./interrupts/SelectCity";
 import {SpaceType} from "./SpaceType";
 import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
-import {getProjectCardByName} from "./Dealer";
+import {CardFinder} from "./CardFinder";
 import {ILoadable} from "./ILoadable";
 import {Database} from "./database/Database";
 import {SerializedPlayer} from "./SerializedPlayer";
@@ -2244,7 +2244,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public loadFromJSON(d: SerializedPlayer): Player {
       // Assign each attributes
       const o = Object.assign(this, d);
-
+      const cardFinder = new CardFinder();
       // Rebuild generation played map
       this.generationPlayed = new Map<string, number>(d.generationPlayed);
 
@@ -2281,27 +2281,27 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Rebuild dealt prelude array
       this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        return cardFinder.getProjectCardByName(element.name)!;
       });
       
       // Rebuild dealt cards array
       this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        return cardFinder.getProjectCardByName(element.name)!;
       });      
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        return cardFinder.getProjectCardByName(element.name)!;
       });
 
       // Rebuild each prelude in hand
       this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        return cardFinder.getProjectCardByName(element.name)!;
       });
 
       // Rebuild each played card
       this.playedCards = d.playedCards.map((element: IProjectCard)  => {
-        const card = getProjectCardByName(element.name)!;
+        const card = cardFinder.getProjectCardByName(element.name)!;
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
         }  
@@ -2310,7 +2310,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           const targetCards = (element as SelfReplicatingRobots).targetCards;
           if (targetCards !== undefined) {
             card.targetCards = targetCards;
-            card.targetCards.forEach(robotCard => robotCard.card = getProjectCardByName(robotCard.card.name)!);
+            card.targetCards.forEach(robotCard => robotCard.card = cardFinder.getProjectCardByName(robotCard.card.name)!);
           }
         }
         if(card instanceof MiningArea || card instanceof MiningRights) {
@@ -2325,7 +2325,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Rebuild each drafted cards
       this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        return cardFinder.getProjectCardByName(element.name)!;
       });
       
       return o;

@@ -3,7 +3,7 @@ import {Bonus} from "./Bonus";
 import { TileType } from "../TileType";
 import { $t } from "../directives/i18n";
 
-let tileTypeToCssClass = new Map<TileType, string>([
+const tileTypeToCssClass = new Map<TileType, string>([
     [TileType.COMMERCIAL_DISTRICT, "commercial_district"],
     [TileType.ECOLOGICAL_ZONE, "ecological_zone"],
     [TileType.INDUSTRIAL_CENTER, "industrial_center"],
@@ -20,8 +20,20 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"]
 ]);
 
+const tileTypeToCssClassAresOverride = new Map<TileType, string>([
+    [TileType.COMMERCIAL_DISTRICT, "commercial_district_ares"],
+    [TileType.ECOLOGICAL_ZONE, "ecological_zone_ares"],
+    [TileType.INDUSTRIAL_CENTER, "industrial_center_ares"],
+    [TileType.LAVA_FLOWS, "lava_flows_ares"],
+    [TileType.CAPITAL, "capital_ares"],
+    [TileType.MOHOLE_AREA, "mohole_area_ares"],
+    [TileType.NATURAL_PRESERVE, "natural_preserve_ares"],
+    [TileType.NUCLEAR_ZONE, "nuclear_zone_ares"],
+    [TileType.RESTRICTED_AREA, "restricted_area_ares"],
+]);
+
 export const BoardSpace = Vue.component("board-space", {
-    props: ["space", "text", "is_selectable"],
+    props: ["space", "text", "is_selectable", "aresExtension"],
     data: function () {
         return {}
     },
@@ -63,6 +75,30 @@ export const BoardSpace = Vue.component("board-space", {
                 ret = "City: 1 VP per adjacent greenery";
             } else if (tileType === TileType.GREENERY) {
                 ret = "Greenery: 1 VP";
+            } else if (tileType === TileType.BIOFERTILIZER_FACILITY) {
+                ret = "Biofertilizer Facility";
+            } else if (tileType === TileType.METALLIC_ASTEROID) {
+                ret = "Metallic Asteroid";
+            } else if (tileType === TileType.SOLAR_FARM) {
+                ret = "Solar Farm";
+            } else if (tileType === TileType.OCEAN_CITY) {
+                ret = "Ocean City";
+            } else if (tileType === TileType.OCEAN_FARM) {
+                ret = "Ocean Farm";
+            } else if (tileType === TileType.OCEAN_SANCTUARY) {
+                ret = "Ocean Sanctuary";
+            } else if (tileType === TileType.DUST_STORM_MILD) {
+                ret = "Mild Dust Storm";
+            } else if (tileType === TileType.DUST_STORM_SEVERE) {
+                ret = "Severe Dust Storm";
+            } else if (tileType === TileType.EROSION_MILD) {
+                ret = "Mild Erosion";
+            } else if (tileType === TileType.EROSION_SEVERE) {
+                ret = "Severe Erosion";
+            } else if (tileType === TileType.MINING_STEEL_BONUS) {
+                ret = "Mining: steel bonus";
+            } else if (tileType === TileType.MINING_TITANIUM_BONUS) {
+                ret = "Mining: titanium bonus";
             }
             return $t(ret);
         },
@@ -71,7 +107,8 @@ export const BoardSpace = Vue.component("board-space", {
             if (this.is_selectable) {
                 css += " board-space-selectable"
             }
-            if (this.space.tileType !== undefined) {
+            const tileType = this.space.tileType;
+            if (tileType !== undefined) {
                 switch (this.space.tileType) {
                     case TileType.OCEAN:
                         css += " board-space-tile--ocean";
@@ -83,7 +120,11 @@ export const BoardSpace = Vue.component("board-space", {
                         css += " board-space-tile--greenery";
                         break;
                     default:
-                        css += " board-space-tile--" + tileTypeToCssClass.get(this.space.tileType);
+                        let cssClass = tileTypeToCssClass.get(tileType);
+                        if (this.aresExtension && tileTypeToCssClassAresOverride.has(tileType)) {
+                            cssClass = tileTypeToCssClassAresOverride.get(tileType)
+                        }
+                        css += " board-space-tile--" + cssClass
                 }
             } else {
                 if (this.space.spaceType === "ocean") {

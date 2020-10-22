@@ -31,8 +31,12 @@ export class PlayerInputFactory {
                 return "select-party-player";
             case PlayerInputTypes.SELECT_COLONY:
                 return "select-colony";
+                case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+                    return "select-production-to-lose";
+                case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+                    return "shift-ares-global-parameters";
             default:
-                throw "Unsupported input type";
+                throw "Unsupported input type: " + inputType;
         }
     }
     public getPlayerInput(createElement: typeof Vue.prototype.$createElement, players: Array<PlayerModel>, player: PlayerModel, playerinput: PlayerInputModel, onsave: (out: Array<Array<string>>) => void, showsave: boolean, showtitle: boolean): VNode {

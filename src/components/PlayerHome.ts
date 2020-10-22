@@ -15,6 +15,7 @@ import { Turmoil } from "./Turmoil";
 import { playerColorClass } from "../utils/utils";
 import { DynamicTitle } from "./common/DynamicTitle";
 import { Button } from "../components/common/Button";
+import { Ares } from "./Ares";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -30,6 +31,7 @@ export const PlayerHome = Vue.component("player-home", {
         "award": Award,
         "preferences": Preferences,
         "colony": Colony,
+        "ares": Ares,
         "log-panel": LogPanel,
         "turmoil": Turmoil,
         "Button": Button,
@@ -129,9 +131,11 @@ export const PlayerHome = Vue.component("player-home", {
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
-                        :shouldNotify="true"></board>
+                        :shouldNotify="true"
+                        :aresExtension="player.aresExtension"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+                    <ares v-if="this.player.aresExtension" :aresData="player.aresData"></ares>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />

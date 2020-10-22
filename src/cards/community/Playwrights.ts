@@ -8,7 +8,6 @@ import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ICard } from "../ICard";
 import { Resources } from "../../Resources";
-import { getProjectCardByName } from "../../Dealer";
 
 export class Playwrights implements CorporationCard {
     public name: CardName =  CardName.PLAYWRIGHTS;
@@ -59,8 +58,7 @@ export class Playwrights implements CorporationCard {
             playedEvents.push(...player.playedCards.filter((card) => card.cardType === CardType.EVENT));
         });
 
-        playedEvents = playedEvents.filter((e) => {
-            const card = getProjectCardByName(e.name)!;
+        playedEvents = playedEvents.filter((card) => {
             const cost = player.getCardCost(game, card);
             const canAffordCard = player.canAfford(cost);
             const canPlayCard = card.canPlay === undefined || card.canPlay(player, game);

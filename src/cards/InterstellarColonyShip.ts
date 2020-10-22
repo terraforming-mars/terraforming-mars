@@ -9,10 +9,10 @@ import { CardRequirements } from "../cards/CardRequirements";
 import { CardRequirement } from "../cards/CardRequirement";
 
 export class InterstellarColonyShip implements IProjectCard {
-    public cost: number = 24;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.INTERSTELLAR_COLONY_SHIP;
+    public cost = 24;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.INTERSTELLAR_COLONY_SHIP;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 5;
     }

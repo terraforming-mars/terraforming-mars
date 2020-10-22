@@ -1,5 +1,4 @@
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -9,8 +8,8 @@ import { CardRequirements } from "../cards/CardRequirements";
 import { CardRequirement } from "../cards/CardRequirement";
 
 export class DustSeals implements IProjectCard {
-    public cost: number = 2;
-    public tags: Array<Tags> = [];
+    public cost = 2;
+    public tags = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.DUST_SEALS;
     public canPlay(player: Player, game: Game): boolean {

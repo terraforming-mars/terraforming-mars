@@ -12,12 +12,12 @@ import { SpaceType } from "../../src/SpaceType";
 // import { Resources } from "../../src/Resources";
 // import { SelectProductionToLoseInterrupt } from "../../src/interrupts/SelectProductionToLoseInterrupt";
 // import { SelectProductionToLose } from "../../src/inputs/SelectProductionToLose";
-import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 // import { IProductionUnits } from "../../src/inputs/IProductionUnits";
 // import { OriginalBoard } from "../../src/OriginalBoard";
 // import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
 import { Phase } from "../../src/Phase";
+// import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -79,25 +79,25 @@ describe("AresHandler", function () {
             {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
    });
 
-    it("Pay Adjacency Costs", function() {
-        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-        firstSpace.adjacency = { bonus: [ ], cost: 2 };
-        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+//     it("Pay Adjacency Costs", function() {
+//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+//         firstSpace.adjacency = { bonus: [ ], cost: 2 };
+//         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
-        player.megaCredits = 2;
-        otherPlayer.megaCredits = 0;
+//         player.megaCredits = 2;
+//         otherPlayer.megaCredits = 0;
 
-        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-       const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-       selectHowToPay.generatePlayerInput();
+//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+//         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+//        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+//        selectHowToPay.generatePlayerInput();
 
-        // player who placed next to Nuclear zone, loses two money.
-        expect(player.megaCredits).is.eq(0);
+//         // player who placed next to Nuclear zone, loses two money.
+//         expect(player.megaCredits).is.eq(0);
 
-        // player who owns Nuclear zone doesn't get an adjacency bonus.
-        expect(otherPlayer.megaCredits).is.eq(0);
-    })
+//         // player who owns Nuclear zone doesn't get an adjacency bonus.
+//         expect(otherPlayer.megaCredits).is.eq(0);
+//     })
 
     it("Can't afford adjacency costs", function() {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
@@ -116,102 +116,62 @@ describe("AresHandler", function () {
         }
     });
 
-    // it("Pay adjacent hazard costs - mild", function() {
-    //     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    //     AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+//     it("Pay adjacent hazard costs - mild", function() {
+//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+//         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
-    //     // No resources available to play the tile.
-    //     player.addProduction(Resources.MEGACREDITS, -5);
+//         // No resources available to play the tile.
+//         player.addProduction(Resources.MEGACREDITS, -5);
 
-    //     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    //     try {
-    //         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    //         fail("should not reach here.");
-    //     } catch(err) {
-    //         expect(err.toString()).includes("Placing here costs 1 units of production");
-    //     }
+//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+//         try {
+//             game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+//             fail("should not reach here.");
+//         } catch(err) {
+//             expect(err.toString()).includes("Placing here costs 1 units of production");
+//         }
 
-    //     player.addProduction(Resources.PLANTS, 7);
-    //     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    //     expect(game.interrupts).has.lengthOf(1);
-    //     expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
+//         player.addProduction(Resources.PLANTS, 7);
+//         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+//         expect(game.interrupts).has.lengthOf(1);
+//         expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
 
-    //     const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
-    //     const input = interrupt.playerInput as SelectProductionToLose;
-    //     expect(input.unitsToLose).eq(1);
-    //     input.cb({ plants: 1 } as IProductionUnits)
-    //     expect(player.getProduction(Resources.PLANTS)).eq(6);
-    // });
+//         const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
+//         const input = interrupt.playerInput as SelectProductionToLose;
+//         expect(input.unitsToLose).eq(1);
+//         input.cb({ plants: 1 } as IProductionUnits)
+//         expect(player.getProduction(Resources.PLANTS)).eq(6);
+//     });
 
-    // it("pay adjacent hazard costs - severe", function() {
-    //     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    //     AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE); 
+//     it("pay adjacent hazard costs - severe", function() {
+//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+//         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE); 
 
-    //     // No resources available to play the tile.
-    //     player.addProduction(Resources.MEGACREDITS, -5);
+//         // No resources available to play the tile.
+//         player.addProduction(Resources.MEGACREDITS, -5);
 
-    //     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    //     try {
-    //         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    //     } catch(err) {
-    //         expect(err.toString()).includes("Placing here costs 2 units of production");
-    //     }
+//         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+//         const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+//         selectHowToPay.generatePlayerInput();
 
-    //     player.addProduction(Resources.PLANTS, 7);
-    //     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    //     expect(game.interrupts).has.lengthOf(1);
-    //     expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
+//         expect(space.tile!.tileType).eq(TileType.GREENERY);
+//         expect(player.megaCredits).is.eq(0);
+//         expect(player.getTerraformRating()).eq(22);
+//     });
 
-    //     const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
-    //     const input = interrupt.playerInput as SelectProductionToLose;
-    //     expect(input.unitsToLose).eq(2);
-    //     input.cb({ plants: 2 } as IProductionUnits)
-    //     expect(player.getProduction(Resources.PLANTS)).eq(5);
-    // });
+//     it("erosion appears after the third ocean", function() {
+//         game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+//         AresTestHelper.addOcean(game, player);
+//         AresTestHelper.addOcean(game, player);
 
-    it("cover mild hazard", function() {
-        const space = game.board.getAvailableSpacesOnLand(player)[0];
-        AresHandler.putHazardAt(space, TileType.EROSION_MILD);
-        player.megaCredits = 8;
-        expect(player.getTerraformRating()).eq(20);
-
-        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-        selectHowToPay.generatePlayerInput();
-
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(21);
-    });
-
-    it("cover severe hazard", function() {
-        const space = game.board.getAvailableSpacesOnLand(player)[0];
-        AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
-        player.megaCredits = 16;
-        expect(player.getTerraformRating()).eq(20);
-
-        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-        selectHowToPay.generatePlayerInput();
-
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(22);
-    });
-
-    // it("erosion appears after the third ocean", function() {
-    //     game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
-    //     AresTestHelper.addOcean(game, player);
-    //     AresTestHelper.addOcean(game, player);
-
-    //     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
-    //     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
+//         let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+//         expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
        
-    //     AresTestHelper.addOcean(game, player);
+//         AresTestHelper.addOcean(game, player);
 
-    //     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
-    //     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
-    // });
+//         tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+//         expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
+//     });
 
 //     it("dust storms disappear after the sixth ocean", function() {
 //         game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);

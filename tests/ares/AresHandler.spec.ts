@@ -15,7 +15,7 @@ import { SpaceType } from "../../src/SpaceType";
 // import { IProductionUnits } from "../../src/inputs/IProductionUnits";
 // import { OriginalBoard } from "../../src/OriginalBoard";
 // import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
-// import { fail } from "assert";
+import { fail } from "assert";
 import { Phase } from "../../src/Phase";
 // import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 
@@ -78,43 +78,42 @@ describe("AresHandler", function () {
 //             {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
 //             {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
 //    });
+//    it("Pay Adjacency Costs", function() {
+//        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+//        firstSpace.adjacency = { bonus: [ ], cost: 2 };
+//        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+//
+//        player.megaCredits = 2;
+//        otherPlayer.megaCredits = 0;
+//
+//        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+//        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+//        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
+//        selectHowToPay.generatePlayerInput();
+//
+//        // player who placed next to Nuclear zone, loses two money.
+//        expect(player.megaCredits).is.eq(0);
+//
+//        // player who owns Nuclear zone doesn't get an adjacency bonus.
+//        expect(otherPlayer.megaCredits).is.eq(0);
+//    })
 
-//     it("Pay Adjacency Costs", function() {
-//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-//         firstSpace.adjacency = { bonus: [ ], cost: 2 };
-//         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+    it("Can't afford adjacency costs", function() {
+        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        firstSpace.adjacency = { bonus: [ ], cost: 2 };
+        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
-//         player.megaCredits = 2;
-//         otherPlayer.megaCredits = 0;
+        otherPlayer.megaCredits = 0;
 
-//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-//         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-//         const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-//         selectHowToPay.generatePlayerInput();
+        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
 
-//         // player who placed next to Nuclear zone, loses two money.
-//         expect(player.megaCredits).is.eq(0);
-
-//         // player who owns Nuclear zone doesn't get an adjacency bonus.
-//         expect(otherPlayer.megaCredits).is.eq(0);
-//     })
-
-//     it("Can't afford adjacency costs", function() {
-//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-//         firstSpace.adjacency = { bonus: [ ], cost: 2 };
-//         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
-
-//         otherPlayer.megaCredits = 0;
-
-//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-
-//         try {
-//             game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-//             fail("should not reach here.");
-//         } catch(err) {
-//             expect(err.toString().includes("Placing here costs 2 M€")).is.true;
-//         }
-//     });
+        try {
+            game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+            fail("should not reach here.");
+        } catch(err) {
+            expect(err.toString().includes("Placing here costs 2 M€")).is.true;
+        }
+    });
 
 //     it("Pay adjacent hazard costs - mild", function() {
 //         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
@@ -359,21 +358,21 @@ describe("AresHandler", function () {
         expect(otherPlayer.cardsInHand).is.length(0);
     });
 
-    // it("No adjacency costs during WGT", function() {
-    //     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    //     firstSpace.adjacency = { bonus: [ ], cost: 2 };
-    //     game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
-    //     game.phase = Phase.SOLAR;
+    it("No adjacency costs during WGT", function() {
+        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        firstSpace.adjacency = { bonus: [ ], cost: 2 };
+        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+        game.phase = Phase.SOLAR;
 
-    //     player.megaCredits = 2;
-    //     otherPlayer.megaCredits = 0;
+        player.megaCredits = 2;
+        otherPlayer.megaCredits = 0;
 
-    //     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    //     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
-    //     // player who placed next to Nuclear zone, loses nothing.
-    //     expect(player.megaCredits).is.eq(2);
-    // });
+        // player who placed next to Nuclear zone, loses nothing.
+        expect(player.megaCredits).is.eq(2);
+    });
 
     // it("No adjacency hazard costs during WGT", function() {
     //     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];

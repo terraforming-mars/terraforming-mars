@@ -1414,7 +1414,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      if (this.gameOptions.aresExtension) {
+        AresHandler.assertCanPay(this, player, space);
+      }
+
       // Part 2. Collect additional fees.
+
+      // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
+      if (this.gameOptions.aresExtension) {
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+      }
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE

@@ -9,14 +9,17 @@ import { Resources } from "../Resources";
 import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { TileType } from "../TileType";
-// import { ITile } from "../ITile";
-// import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
+import { ITile } from "../ITile";
+import { IAresData } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
 // import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 // import { ARES_MILESTONES } from "../milestones/Milestones";
 // import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
 import { Phase } from "../Phase";
+
+export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
+export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
 
 export enum HazardSeverity {
     NONE,
@@ -26,6 +29,22 @@ export enum HazardSeverity {
 
 export class AresHandler {
     private constructor() {}
+
+    public static initialData(active: boolean, includeHazards: boolean, players: Player[]): IAresData {
+        return {
+            active: active,
+            includeHazards: includeHazards,
+            hazardData: {
+                erosionOceanCount: { threshold: 3, available: true }, // oceans: add erosion tiles
+                removeDustStormsOceanCount: { threshold: 6, available: true }, // oceans: remove dust storms
+                severeErosionTemperature: { threshold: -4, available: true }, // temperatore: severe erosion
+                severeDustStormOxygen: { threshold: 5, available: true }, // oxygen: severe dust storms
+            },
+            milestoneResults: players.map(p => {
+                return {id: p.id, count: 0};
+            })
+        };
+    }
 
     public static assertHasAres(game: Game) {
         console.assert(game.gameOptions.aresExtension, "Assertion failure: game.gameOptions.aresExtension is not true");
@@ -129,6 +148,24 @@ export class AresHandler {
         return true;
     }
 
+
+    public static setupHazards(game: Game, playerCount: number) {
+        // The number of dust storms depends on the player count.
+        // I made up that the solo player has 3 dust storms. The rules
+        // don't take solo into account, nor if you played with more than
+        // five players.
+        if (playerCount >= 5) {
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+        } else if (playerCount === 4) {
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+        } else if (playerCount <= 3) {
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+        }
+    }
+
     public static hasHazardTile(space: ISpace): boolean {
         return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
     }
@@ -222,8 +259,56 @@ export class AresHandler {
         }
     }
 
+    // Returns true if |newTile| can cover |boardTile|.
+    public static canCover(space: ISpace, newTile: ITile): boolean {
+        if (space.tile === undefined) {
+            return true;
+        }
+
+        // A hazard protected by the Desperate Measures action can't be covered.
+        if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
+            return true;
+        }
+        if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined) {
+        if (game.phase === Phase.SOLAR) {
+            return;
+        }
+        let steps: number;
+        switch (initialTileType) {
+            case TileType.DUST_STORM_MILD:
+            case TileType.EROSION_MILD:
+                steps = 1;
+                break;
+
+            case TileType.DUST_STORM_SEVERE:
+            case TileType.EROSION_SEVERE:
+                steps = 2;
+                break;
+        
+            default:
+                return;
+        }
+        player.increaseTerraformRatingSteps(steps, game);
+        game.log("${0}'s TR increases ${1} step(s) for removing ${2}", b => b.player(player).number(steps).string(tileTypeAsString(initialTileType)));
+    }
+    
+
+    public static putHazardAt(space: ISpace, tileType: TileType) {
+        space.tile = { tileType: tileType, protectedHazard: false };
+    }    
 }
 
+function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
+    const space = game.getSpaceByOffset(direction, "hazard");
+    AresHandler.putHazardAt(space, tileType);
+    return space;
+}
 
 // TODO(kberg): convert to a log message type
 const tileTypeToStringMap: Map<TileType, string> = new Map([

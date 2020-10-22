@@ -254,6 +254,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.turmoil = new Turmoil(this);
       }
 
+      if (gameOptions.aresExtension) {
+        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+          // this test is because hazard selection isn't actively part of game options, but needs
+          // to be configurable for tests.
+          if (gameOptions.aresHazards !== false) {
+            AresHandler.setupHazards(this, players.length);
+          }
+      }
+
       // Setup custom corporation list
       let corporationCards = this.dealer.corporationCards;
 
@@ -1413,13 +1422,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
+      if (this.gameOptions.aresExtension) {
+        if (!AresHandler.canCover(space, tile)) {
+          throw new Error("Selected space is occupied: " + space.id);
+        }
+      }
 
       if (this.gameOptions.aresExtension) {
         AresHandler.assertCanPay(this, player, space);
       }
 
       // Part 2. Collect additional fees.
-
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       if (this.gameOptions.aresExtension) {
         AresHandler.payAdjacencyAndHazardCosts(this, player, space);
@@ -1439,6 +1452,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 3. Setup for bonuses
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
+      const initialTileTypeForAres = space.tile?.tileType;
 
       // Part 4. Place the tile
       space.tile = tile;
@@ -1489,14 +1503,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
 
-      // Must occur after all other onTilePlaced operations.
       if (this.gameOptions.aresExtension) {
+        AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
         // Erasing the bonus means that overplacing doesn't regrant the bonus, or, for instance, make hazard spaces
         // available for Mining Area or Solar Farm.
         space.bonus = [];
+
+        // Must occur after all other onTilePlaced operations.
         // AresHandler.afterTilePlacement(this, player, startingResources);
       }
-      
     }
 
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {

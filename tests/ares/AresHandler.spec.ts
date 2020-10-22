@@ -1,13 +1,13 @@
 import { expect } from "chai";
-// import { AresHandler } from "../../src/ares/AresHandler";
+import { AresHandler } from "../../src/ares/AresHandler";
 import { SpaceBonus } from "../../src/SpaceBonus";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Color } from "../../src/Color";
 import { ARES_OPTIONS_NO_HAZARDS } from "./AresTestHelper";
-// import { EmptyBoard } from "./EmptyBoard";
+import { EmptyBoard } from "./EmptyBoard";
 import { TileType } from "../../src/TileType";
-// import { ITile } from "../../src/ITile";
+import { ITile } from "../../src/ITile";
 import { SpaceType } from "../../src/SpaceType";
 // import { Resources } from "../../src/Resources";
 // import { SelectProductionToLoseInterrupt } from "../../src/interrupts/SelectProductionToLoseInterrupt";
@@ -26,7 +26,7 @@ describe("AresHandler", function () {
       player = new Player("test", Color.BLUE, false);
       otherPlayer = new Player("other", Color.RED, false);
       game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    //   game.board = new EmptyBoard();
+      game.board = new EmptyBoard();
     });
   
   
@@ -52,51 +52,52 @@ describe("AresHandler", function () {
         expect(otherPlayer.cardsInHand).is.length(0);
     });
 
-//     it("setupHazards", function() {
-//         // front-load the deck with cards of predtermined costs.
-//         // four player game places two dust storms.
+    it("setupHazards", function() {
+        // front-load the deck with cards of predtermined costs.
+        // four player game places two dust storms.
 
-//         // Even though there's already a game, with a board, that laid out hazards, this is going to use a clean set-up.
+        // Even though there's already a game, with a board, that laid out hazards, this is going to use a clean set-up.
 
-//         const deck = game.dealer.deck;
-//         deck[deck.length - 1].cost = 5;
-//         deck[deck.length - 2].cost = 3;
-//         game.board.spaces.forEach(space => { space.tile = undefined; space.player = undefined });
+        const deck = game.dealer.deck;
+        deck[deck.length - 1].cost = 5;
+        deck[deck.length - 2].cost = 3;
+        game.board.spaces.forEach(space => { space.tile = undefined; space.player = undefined });
 
-//         AresHandler.setupHazards(game, 4);
+        AresHandler.setupHazards(game, 4);
 
-//         interface SpaceToTest {
-//             tile: ITile;
-//             x: number;
-//             y: number;
-//         }
-//         const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
-//             .filter(space => space.tile !== undefined)
-//             .map(space => {const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x});
+        interface SpaceToTest {
+            tile: ITile;
+            x: number;
+            y: number;
+        }
+        const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
+            .filter(space => space.tile !== undefined)
+            .map(space => {const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x});
 
-//         expect(spacesWithTiles).to.deep.eq([
-//             {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
-//             {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
-//    });
-//    it("Pay Adjacency Costs", function() {
-//        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-//        firstSpace.adjacency = { bonus: [ ], cost: 2 };
-//        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
-//
-//        player.megaCredits = 2;
-//        otherPlayer.megaCredits = 0;
-//
-//        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-//        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        expect(spacesWithTiles).to.deep.eq([
+            {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
+            {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
+   });
+
+//     it("Pay Adjacency Costs", function() {
+//         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+//         firstSpace.adjacency = { bonus: [ ], cost: 2 };
+//         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+
+//         player.megaCredits = 2;
+//         otherPlayer.megaCredits = 0;
+
+//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+//         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 //        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
 //        selectHowToPay.generatePlayerInput();
-//
-//        // player who placed next to Nuclear zone, loses two money.
-//        expect(player.megaCredits).is.eq(0);
-//
-//        // player who owns Nuclear zone doesn't get an adjacency bonus.
-//        expect(otherPlayer.megaCredits).is.eq(0);
-//    })
+
+//         // player who placed next to Nuclear zone, loses two money.
+//         expect(player.megaCredits).is.eq(0);
+
+//         // player who owns Nuclear zone doesn't get an adjacency bonus.
+//         expect(otherPlayer.megaCredits).is.eq(0);
+//     })
 
     it("Can't afford adjacency costs", function() {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
@@ -148,46 +149,6 @@ describe("AresHandler", function () {
 
 //         // No resources available to play the tile.
 //         player.addProduction(Resources.MEGACREDITS, -5);
-
-//         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-//         try {
-//             game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-//         } catch(err) {
-//             expect(err.toString()).includes("Placing here costs 2 units of production");
-//         }
-
-//         player.addProduction(Resources.PLANTS, 7);
-//         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-//         expect(game.interrupts).has.lengthOf(1);
-//         expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
-
-//         const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
-//         const input = interrupt.playerInput as SelectProductionToLose;
-//         expect(input.unitsToLose).eq(2);
-//         input.cb({ plants: 2 } as IProductionUnits)
-//         expect(player.getProduction(Resources.PLANTS)).eq(5);
-//     });
-
-//     it("cover mild hazard", function() {
-//         const space = game.board.getAvailableSpacesOnLand(player)[0];
-//         AresHandler.putHazardAt(space, TileType.EROSION_MILD);
-//         player.megaCredits = 8;
-//         expect(player.getTerraformRating()).eq(20);
-
-//         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-//         const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-//         selectHowToPay.generatePlayerInput();
-
-//         expect(space.tile!.tileType).eq(TileType.GREENERY);
-//         expect(player.megaCredits).is.eq(0);
-//         expect(player.getTerraformRating()).eq(21);
-//     });
-
-//     it("cover severe hazard", function() {
-//         const space = game.board.getAvailableSpacesOnLand(player)[0];
-//         AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
-//         player.megaCredits = 16;
-//         expect(player.getTerraformRating()).eq(20);
 
 //         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
 //         const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
@@ -386,19 +347,19 @@ describe("AresHandler", function () {
     //     expect(game.interrupts).has.lengthOf(0);
     // });
 
-    // it("No hazard coverage cost or bonus during WGT", function() {
-    //     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    //     AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
-    //     player.megaCredits = 8;
-    //     expect(player.getTerraformRating()).eq(20);
-    //     game.phase = Phase.SOLAR;
+    it("No hazard coverage cost or bonus during WGT", function() {
+        const space = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
+        player.megaCredits = 8;
+        expect(player.getTerraformRating()).eq(20);
+        game.phase = Phase.SOLAR;
 
-    //     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
 
-    //     expect(space.tile!.tileType).eq(TileType.GREENERY);
+        expect(space.tile!.tileType).eq(TileType.GREENERY);
 
-    //     // No costs or benefits
-    //     expect(player.megaCredits).is.eq(8);
-    //     expect(player.getTerraformRating()).eq(20);
-    // });
+        // No costs or benefits
+        expect(player.megaCredits).is.eq(8);
+        expect(player.getTerraformRating()).eq(20);
+    });
 });

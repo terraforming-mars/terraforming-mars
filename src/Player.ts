@@ -53,6 +53,10 @@ import { ColonyName } from "./colonies/ColonyName";
 import { ColonyModel } from "./models/ColonyModel";
 import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
 import { Decks } from "./Deck";
+import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
+import { IProductionUnits } from "./inputs/IProductionUnits";
+import { ShiftAresGlobalParameters } from "./inputs/ShiftAresGlobalParameters";
+import { IAresGlobalParametersResponse } from "./interrupts/ShiftAresGlobalParametersInterrupt";
 
 export type PlayerId = string;
 
@@ -908,9 +912,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Unable to parse input " + err);
         }
         this.runInputCb(game, pi.cb(payMethod));
-      } else {
-        throw new Error("Unsupported waitingFor");
-      }
+      } else if (pi instanceof SelectProductionToLose) {
+          // TODO(kberg): I'm sure there's some input validation required.
+          const parsedInput = JSON.parse(input[0][0]);
+          const units: IProductionUnits = parsedInput;
+          pi.cb(units);
+        } else if (pi instanceof ShiftAresGlobalParameters) {
+          // TODO(kberg): I'm sure there's some input validation required.
+          const parsedInput = JSON.parse(input[0][0]);
+          const response: IAresGlobalParametersResponse = parsedInput;
+          pi.cb(response);
+        } else {
+          throw new Error("Unsupported waitingFor");
+        }
+ 
     }
 
     private getPlayableActionCards(game: Game): Array<ICard> {

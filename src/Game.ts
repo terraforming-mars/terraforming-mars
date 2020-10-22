@@ -1385,12 +1385,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public getCitiesInPlayOnMars(): number {
       return this.board.spaces.filter(
-          (space) => space.tile !== undefined &&
-                   ((space.tile.tileType === TileType.CITY &&
-                   space.spaceType !== SpaceType.COLONY)
-                   || space.tile.tileType === TileType.CAPITAL)
+        (space) => space.tile !== undefined &&
+                 ((space.tile.tileType === TileType.CITY &&
+                 space.spaceType !== SpaceType.COLONY)
+                 || space.tile.tileType === TileType.CAPITAL
+                 || space.tile.tileType === TileType.OCEAN_CITY)
       ).length;
-    }
+  }
     public getCitiesInPlay(): number {
       return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
     }
@@ -1467,8 +1468,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-          if (adjacentSpace.tile &&
-              adjacentSpace.tile.tileType === TileType.OCEAN) {
+          if (Board.isOceanSpace(adjacentSpace)) {
             player.megaCredits += player.oceanBonus;
           }
         });

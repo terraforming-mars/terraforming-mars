@@ -147,3 +147,4 @@ export const GameEnd = Vue.component("game-end", {
         </div>
     `
 });
+

@@ -26,10 +26,12 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
                         new SelectOption(title, "Confirm", () => {
                             colony.increaseTrack();
                             colony.trade(player, game, false);
+                            colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
                             return undefined;
                         }),
                         new SelectOption("Do nothing", "Confirm", () => {
                             colony.trade(player, game, false);
+                            colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
                             return undefined;
                         })
                     )
@@ -37,13 +39,12 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
             } else {
                 colony.increaseTrack();
                 colony.trade(player, game, false);
+                colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
             }
 
             colony.colonies.forEach(playerId => {
                 colony.giveTradeBonus(game.getPlayerById(playerId), game);
             });
-
-            colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
         });
 
         if (game.isSoloMode()) {

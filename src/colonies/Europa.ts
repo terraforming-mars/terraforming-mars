@@ -16,10 +16,10 @@ export class Europa extends Colony implements IColony {
                 player,
                 game,
                 this,
-                () => this.handleTrade(player, game, true)
+                () => this.handleTrade(player, game, usesTradeFleet)
             ));
         } else {
-            this.handleTrade(player, game, false);
+            this.handleTrade(player, game, usesTradeFleet);
         }
     }
 

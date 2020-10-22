@@ -10,9 +10,9 @@ export const CardRequirementsComponent = Vue.component("CardRequirements", {
     },
     methods: {
         getClasses: function (): string {
-            const classes: Array<string> = ["requirements"];
+            const classes: Array<string> = ["card-requirements"];
             if (this.requirements.hasMax()) {
-                classes.push("requirements-max");
+                classes.push("card-requirements-max");
             }
             return classes.join(" ");
         },

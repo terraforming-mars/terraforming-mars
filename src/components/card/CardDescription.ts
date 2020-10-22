@@ -8,6 +8,6 @@ export const CardDescription = Vue.component("CardDescription", {
         },
     },
     template: `
-        <div class="description">({{ text }})</div>
+        <div class="card-description">({{ text }})</div>
     `,
 });

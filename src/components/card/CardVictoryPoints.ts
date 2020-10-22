@@ -1,6 +1,6 @@
 import Vue from "vue";
 //#TODO implement points per tag
-export const CardPoints = Vue.component("CardPoints", {
+export const CardVictoryPoints = Vue.component("CardVictoryPoints", {
     props: {
         amount: {
             type: Number,
@@ -9,7 +9,7 @@ export const CardPoints = Vue.component("CardPoints", {
     },
     methods: {
         getClasses: function (): string {
-            const classes = ["points", "points-big"];
+            const classes = ["card-points", "points-big"];
 
             return classes.join(" ");
         },

@@ -12,7 +12,7 @@ import { TileType } from "../TileType";
 import { ITile } from "../ITile";
 import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
-// import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
+import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
@@ -317,10 +317,10 @@ export class AresHandler {
 
         const cost = this.assertCanPay(game, player, space);
 
-        // if (cost.production > 0) {
-        //     // TODO(kberg): don't send interrupt if total is available.
-        //     game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
-        // }
+        if (cost.production > 0) {
+            // TODO(kberg): don't send interrupt if total is available.
+            game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
+        }
         if (cost.megacredits > 0) {
             game.log("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
 

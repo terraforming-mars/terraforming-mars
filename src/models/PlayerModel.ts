@@ -10,6 +10,7 @@ import { CorporationCard } from "../cards/corporation/CorporationCard";
 import { FundedAwardModel } from "./FundedAwardModel";
 import { Phase } from "../Phase";
 import { PlayerInputModel } from "./PlayerInputModel";
+import { RandomMAOptionType } from "../RandomMAOptionType";
 import { SpaceModel } from "./SpaceModel";
 
 export interface PlayerModel {
@@ -48,7 +49,7 @@ export interface PlayerModel {
     plants: number;
     plantProduction: number;
     players: Array<PlayerModel>;
-    randomMA: boolean;
+    randomMA: RandomMAOptionType;
     spaces: Array<SpaceModel>;
     steel: number;
     steelProduction: number;

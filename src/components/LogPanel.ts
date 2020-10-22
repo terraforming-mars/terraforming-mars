@@ -7,7 +7,7 @@ import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { Card } from "./card/Card";
 import { $t } from "../directives/i18n";
-import { getProjectCardByName } from "./../Dealer";
+import { CardFinder } from "./../CardFinder";
 
 export const LogPanel = Vue.component("log-panel", {
     props: ["id", "players"],
@@ -76,7 +76,7 @@ export const LogPanel = Vue.component("log-panel", {
                             }
                         }
                     }
-                    const card = getProjectCardByName(data.value)
+                    const card = new CardFinder().getProjectCardByName(data.value)
                     if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
                 } else if (translatableMessageDataTypes.includes(data.type)) {
                     return $t(data.value);

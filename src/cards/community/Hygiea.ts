@@ -6,14 +6,32 @@ import { MAX_COLONY_TRACK_POSITION } from '../../constants';
 import { SelectPlayer } from '../../inputs/SelectPlayer';
 import { SelectDiscard } from '../../interrupts/SelectDiscard';
 import { Resources } from '../../Resources';
+import { OrOptions } from '../../inputs/OrOptions';
+import { SelectOption } from '../../inputs/SelectOption';
 
 export class Hygiea extends Colony implements IColony {
     public name = ColonyName.HYGIEA;
     public description: string = "Attack";
 
     public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
-        if (usesTradeFleet) this.beforeTrade(this, player, game);
+        if (player.colonyTradeOffset > 0 && usesTradeFleet) {
+            game.addInterrupt({ player, playerInput: new OrOptions(
+                new SelectOption("Increase colony track", "Confirm", () => {
+                    this.beforeTrade(this, player, game);
+                    this.handleTrade(game, player, usesTradeFleet);
+                    return undefined;
+                }),
+                new SelectOption("Do nothing", "Confirm", () => {
+                    this.handleTrade(game, player, usesTradeFleet);
+                    return undefined;
+                })
+            )});
+        } else {
+            this.handleTrade(game, player, usesTradeFleet);
+        }
+    }
 
+    private handleTrade(game: Game, player: Player, usesTradeFleet: boolean) {
         const isSoloMode = game.isSoloMode();
         let availableTargets = game.getPlayers().filter((p) => p.id !== player.id);
         

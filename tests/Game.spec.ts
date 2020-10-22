@@ -17,7 +17,8 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from "../src/milestones/Ecologist";
-import { Dealer, getProjectCardByName } from "../src/Dealer";
+import { CardFinder } from "../src/CardFinder";
+import { Dealer } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
@@ -50,7 +51,7 @@ describe("Game", function () {
 
         const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
         turmoilPreludes.forEach((preludeName) => {
-            const preludeCard = getProjectCardByName(preludeName)!;
+            const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
             expect(preludeDeck.includes(preludeCard)).to.eq(false)
         });
     });

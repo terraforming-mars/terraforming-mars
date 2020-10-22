@@ -54,6 +54,16 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
             ]
         }
     },
+    methods: {
+        updateColoniesByNames(colonyNames: Array<ColonyName>) {
+            this.selectedColonies = [];
+            for (const colony of this.allColonies) {
+                if (colonyNames.includes(colony.name)) {
+                    this.selectedColonies.push(colony)
+                }
+            }
+        }
+    },
     watch: {
         selectedColonies: function (value) {
             let colonyNames: Array<ColonyName> = [];

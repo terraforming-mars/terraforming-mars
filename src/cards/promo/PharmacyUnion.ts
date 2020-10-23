@@ -12,6 +12,7 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 import { CardType } from "../CardType";
+import { PlayerInterrupt } from "../../interrupts/PlayerInterrupt";
 
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
@@ -55,37 +56,43 @@ export class PharmacyUnion implements CorporationCard {
 
     private runInterrupts(player: Player, game: Game, scienceTags: number): void {
         if (scienceTags <= 0) return;
+        const interrupt = { player, playerInput: undefined } as PlayerInterrupt;
 
-        if (this.resourceCount > 0) {
-            this.resourceCount--;
-            player.increaseTerraformRating(game);
-            game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
-            this.runInterrupts(player, game, scienceTags - 1);
-            return undefined;
-        } else {
-            const availableOptions: OrOptions = new OrOptions();
-            const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+        interrupt.generatePlayerInput = () => {
+            if (this.isDisabled) return;
 
-            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3))) {
+            if (this.resourceCount > 0) {
+                this.resourceCount--;
+                player.increaseTerraformRating(game);
+                game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
+                return;
+            } else {
+                const availableOptions: OrOptions = new OrOptions();
+                const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
+                if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3))) {
+                    availableOptions.options.push(
+                        new SelectOption("Turn this card face down and gain 3 TR",
+                        "Gain TR", () => {
+                            this.isDisabled = true;
+                            player.increaseTerraformRatingSteps(3, game);
+                            game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                            return undefined;
+                        })
+                    );
+                }
+
                 availableOptions.options.push(
-                    new SelectOption("Turn this card face down and gain 3 TR", 
-                    "Gain TR", () => {
-                        this.isDisabled = true;
-                        player.increaseTerraformRatingSteps(3, game);
-                        game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                    new SelectOption("Do nothing", "Confirm", () => {
                         return undefined;
                     })
                 );
+
+                interrupt.playerInput = availableOptions;
             }
-
-            availableOptions.options.push(
-                new SelectOption("Do nothing", "Confirm", () => {
-                    this.runInterrupts(player, game, scienceTags - 1);
-                    return undefined;
-                })
-            );
-
-            game.addInterrupt({ player, playerInput: availableOptions});
         }
-      }
+        
+        game.addInterrupt(interrupt);
+        this.runInterrupts(player, game, scienceTags - 1);
+    }
 }

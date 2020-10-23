@@ -150,6 +150,69 @@ export class AresHandler {
         return true;
     }
 
+    // Returns a map of resources and resource types to track, and the current count
+    // of each of these |player| has. Used with |rewardForPlacement|.
+    //
+    // This feature is part of Ecological Survey and Geological Survey.
+    //
+    public static beforeTilePlacement(player: Player): Multiset<Resources | ResourceType> {
+        const multiset: Multiset<Resources | ResourceType> = new Multiset();
+        if (player.playedCards.find((c) => c.name === CardName.ECOLOGICAL_SURVEY)) {
+            multiset.add(Resources.PLANTS, player.getResource(Resources.PLANTS));
+            multiset.add(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
+            multiset.add(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
+        }
+        if (player.playedCards.find((c) => c.name === CardName.GEOLOGICAL_SURVEY)) {
+            multiset.add(Resources.STEEL, player.getResource(Resources.STEEL));
+            multiset.add(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
+            multiset.add(Resources.HEAT, player.getResource(Resources.HEAT));
+        }
+        return multiset;
+    }
+  
+    // Used with Ecological and Geological Survey
+    public static afterTilePlacement(game: Game, player: Player, startingResources?: Multiset<Resources | ResourceType>): void {
+        if (!startingResources) {
+            return;
+        }
+  
+        function giveBonus(start: number | undefined, current: number): boolean {
+            return start !== undefined && current > start;
+        }
+  
+        // Although this bit of code goes through all six resource types, the expected input map will only contain
+        // the three (or six) resources it is tracking.
+        [Resources.PLANTS, Resources.STEEL, Resources.TITANIUM, Resources.HEAT].forEach((resource) => {
+            if (giveBonus(startingResources.get(resource), player.getResource(resource))) {
+                player.setResource(resource, 1);
+  
+                const cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
+                game.log("${0} gained a bonus ${1} because of ${2}", b => b.player(player).string(resource).cardName(cardName));
+            }
+        });
+        [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
+            if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
+                game.addResourceInterrupt(
+                    player,
+                    resourceType,
+                    1,
+                    undefined,
+                );
+            }
+        });
+    } 
+  
+    private static countResources(player: Player, resourceType: ResourceType): number {
+        let count = player.playedCards
+            .map((c) => resourceType === c.resourceType ? c.resourceCount || 0 : 0)
+            .reduce((prior, current) => prior + current, 0);
+
+        if (resourceType === player.corporationCard?.resourceType) {
+            count += player.corporationCard.resourceCount || 0;
+        }
+        return count;
+    }
+
     public static setupHazards(game: Game, playerCount: number) {
         // The number of dust storms depends on the player count.
         // I made up that the solo player has 3 dust storms. The rules

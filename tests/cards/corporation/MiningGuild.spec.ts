@@ -57,7 +57,7 @@ describe("MiningGuild", function () {
     });
 
     it("Does not give bonus for WGT", function () {
-        const oceanSpaces = game.board.getOceansTiles();
+        const oceanSpaces = game.board.getOceansTiles(true);
 
         oceanSpaces.forEach((space) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN }); 

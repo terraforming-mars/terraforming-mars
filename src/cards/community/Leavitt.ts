@@ -7,6 +7,7 @@ import { SelectCard } from "../../inputs/SelectCard";
 import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
 import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
+import { ScienceTagCard } from './ScienceTagCard';
 
 export class Leavitt extends Colony implements IColony {
     public name = ColonyName.LEAVITT;
@@ -30,6 +31,7 @@ export class Leavitt extends Colony implements IColony {
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
         player.scienceTagCount += 1;
+        player.playCard(game, new ScienceTagCard());
 
         return undefined;
     }

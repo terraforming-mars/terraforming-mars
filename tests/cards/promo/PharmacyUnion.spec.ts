@@ -69,6 +69,7 @@ describe("PharmacyUnion", function () {
         expect(game.deferredActions.length).to.eq(1);
         expect(game.deferredActions[0].execute()).to.eq(undefined);
         game.deferredActions.shift();
+
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
 
@@ -92,6 +93,7 @@ describe("PharmacyUnion", function () {
         game.deferredActions.shift();
         expect(game.deferredActions[0].execute()).to.eq(undefined);
         game.deferredActions.shift();
+
         expect(card.resourceCount).to.eq(0);
         expect(player.getTerraformRating()).to.eq(22);
     });

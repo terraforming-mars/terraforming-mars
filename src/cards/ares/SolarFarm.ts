@@ -16,6 +16,11 @@ export class SolarFarm implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.SOLAR_FARM;
+
+    public canPlay(player: Player, game: Game): boolean {
+        return game.board.getAvailableSpacesOnLand(player).length > 0;
+    }
+
     public play(player: Player, game: Game) {
       return new SelectSpace(
         "Select space for Solar Farm tile",

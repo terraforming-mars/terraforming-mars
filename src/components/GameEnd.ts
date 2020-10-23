@@ -3,6 +3,7 @@ import { PlayerModel } from "../models/PlayerModel";
 import { Board } from "./Board";
 import { LogPanel } from "./LogPanel";
 import { Button } from "../components/common/Button";
+import { playerColorClass } from "../utils/utils";
 
 export const GameEnd = Vue.component("game-end", {
     props: {
@@ -19,8 +20,11 @@ export const GameEnd = Vue.component("game-end", {
         "Button": Button
     },
     methods: {
-        getEndGamePlayerColorClass: function (player: PlayerModel): string {
-            return "player_bg_color_" + player.color;
+        getEndGamePlayerHighlightColorClass: function (color: string): string {
+            return playerColorClass(color.toLowerCase(), "bg");
+        },
+        getEndGamePlayerRowColorClass: function (color: string): string {
+            return playerColorClass(color.toLowerCase(), "bg_transparent");
         },
         getSortedPlayers: function () {
             this.player.players.sort(function (a:PlayerModel, b:PlayerModel){
@@ -31,6 +35,17 @@ export const GameEnd = Vue.component("game-end", {
                 return 0;
             });
             return this.player.players.reverse();
+        },
+        getWinners: function(){
+            const sortedPlayers = this.getSortedPlayers();
+            const firstWinner = sortedPlayers[0];
+            const winners: PlayerModel[] = [firstWinner];
+            for (let i = 1; i < sortedPlayers.length; i++)
+                if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
+                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
+                        winners.push(sortedPlayers[i]);
+                }
+            return winners;
         },
         isSoloGame: function (): boolean {
             return this.player.players.length === 1;
@@ -79,6 +94,9 @@ export const GameEnd = Vue.component("game-end", {
                         Go to main page
                     </a>
                 </div>
+                <div class="game-end-winer-announcement"> 
+                    <span v-for="p in getWinners()"><log-player :class="getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</log-player></span> is the winner!
+                </div>
                 <div class="game_end_victory_points">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
                     <table class="table game_end_table">
@@ -93,12 +111,12 @@ export const GameEnd = Vue.component("game-end", {
                                 <th>City</th>
                                 <th>VP</th>
                                 <th>MC</th>
-                                <th>Total</th>
+                                <th class="total-column">Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="p in getSortedPlayers()">
-                                <td><a :href="'/player?id='+p.id+'&noredirect'" :class="getEndGamePlayerColorClass(p)">{{ p.name }}</a></td>
+                            <tr v-for="p in getSortedPlayers()" :class="getEndGamePlayerRowColorClass(p.color)">
+                                <td><a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a></td>
                                 <td v-i18n>{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -112,21 +130,26 @@ export const GameEnd = Vue.component("game-end", {
                         </tbody>
                     </table>
                     <br/>
-                    <div v-for="p in getSortedPlayers()">
-                        <h2 v-i18n>Victory points details for <span> {{p.name}}</span></h2>
-                        <div v-for="v in p.victoryPointsBreakdown.detailsCards">
-                            {{v}}
+                    <h2 v-i18n>Victory points details</h2>
+                    <div class="game-end-flexrow">
+                        <div v-for="p in getSortedPlayers()" class="game-end-column">
+                            <div class="game-end-winer-scorebreak-player-title">
+                                <log-player :class="getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></log-player>
+                            </div>
+                            <div v-for="v in p.victoryPointsBreakdown.detailsCards">
+                                {{v}}
+                            </div>
+                            <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
+                                {{v}}
+                            </div>
+                            <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
+                                {{v}}
+                            </div>
                         </div>
-                        <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
-                            {{v}}
-                        </div>
-                        <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
-                            {{v}}
-                        </div>
-                        <br/>
                     </div>
                 </div>
-                <div class="game_end_block--board">
+                <div class="game-end-flexrow">
+                <div class="game_end_block--board game-end-column">
                     <h2 v-i18n>Final situation on the board</h2>
                     <board 
                         :spaces="player.spaces" 
@@ -138,10 +161,10 @@ export const GameEnd = Vue.component("game-end", {
                         :temperature="player.temperature"
                         :shouldNotify="false"></board>
                 </div>
-                <br/>
-                <div class="game_end_block--log">
+                <div class="game_end_block--log game-end-column">
                     <h2 v-i18n>Final game log</h2>
                     <log-panel :id="player.id" :players="player.players"></log-panel>
+                </div>
                 </div>
             </div>
         </div>

@@ -66,6 +66,10 @@ describe("PharmacyUnion", function () {
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
+
+        expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
+
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
 
@@ -83,6 +87,11 @@ describe("PharmacyUnion", function () {
         const research = new Research();
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
+
+        expect(game.interrupts.length).to.eq(2);
+        game.interrupts[0].generatePlayerInput?.();
+        game.interrupts[1].generatePlayerInput?.();
+        
         expect(card.resourceCount).to.eq(0);
         expect(player.getTerraformRating()).to.eq(22);
     });
@@ -94,6 +103,7 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
         expect(game.interrupts.length).to.eq(1);
+        game.interrupts[0].generatePlayerInput?.();
         
         const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
         game.interrupts.splice(0, 1);
@@ -117,6 +127,7 @@ describe("PharmacyUnion", function () {
         
         card.resourceCount = 0;
         card.onCardPlayed(player, game, new SearchForLife());
+        game.interrupts[0].generatePlayerInput?.();
         
         (game.interrupts[0].playerInput as OrOptions).options[0].cb();
         expect(card.isDisabled).to.eq(true);

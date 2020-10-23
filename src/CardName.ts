@@ -459,6 +459,9 @@ export enum CardName {
     POLITICAL_UPRISING = "Political Uprising",
     BY_ELECTION = "By-Election",
 
+    // Community colonies
+    SCIENCE_TAG_BLANK_CARD = "",
+
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = "Bioengineering Enclosure",
     BIOFERTILIZER_FACILITY = "Bio-Fertilizer Facility",

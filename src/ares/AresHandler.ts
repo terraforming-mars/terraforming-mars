@@ -10,11 +10,11 @@ import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { TileType } from "../TileType";
 import { ITile } from "../ITile";
-import { IAresData, IHazardConstraint } from "./IAresData";
+import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
 // import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
-// import { ARES_MILESTONES } from "../milestones/Milestones";
-// import { ARES_AWARDS } from "../awards/Awards";
+import { ARES_MILESTONES } from "../milestones/Milestones";
+import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
 import { Phase } from "../Phase";
 
@@ -46,6 +46,11 @@ export class AresHandler {
         };
     }
 
+    public static setupMilestonesAwards(game: Game) {
+        game.milestones.push(...ARES_MILESTONES);
+        game.awards.push(...ARES_AWARDS)
+    }
+
     public static assertHasAres(game: Game) : boolean {
         console.assert(game.gameOptions.aresExtension, "Assertion failure: game.gameOptions.aresExtension is not true");
         console.assert(game.aresData !== undefined, "Assertion failure: game.aresData is undefined");
@@ -56,21 +61,21 @@ export class AresHandler {
     public static earnAdjacencyBonuses(game: Game, player: Player, space: ISpace) {
         if (!AresHandler.assertHasAres(game)) { return; }
 
-        // let incrementMilestone = false;
+        let incrementMilestone = false;
 
         game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
             if (this.earnAdacencyBonus(game, adjacentSpace, player)) {
-        //     incrementMilestone = true;
+            incrementMilestone = true;
             }
         });
-        // if (incrementMilestone) {
-        //     const milestoneResults = game.aresData!.milestoneResults;
-        //     const entry : IMilestoneCount | undefined = milestoneResults.find(e => e.id === player.id);
-        //     if (entry === undefined) {
-        //         throw new Error("Player ID not in the Ares milestone results map: " + player.id);
-        //     }
-        //     entry.count++;
-        // }
+        if (incrementMilestone) {
+            const milestoneResults = game.aresData!.milestoneResults;
+            const entry : IMilestoneCount | undefined = milestoneResults.find(e => e.id === player.id);
+            if (entry === undefined) {
+                throw new Error("Player ID not in the Ares milestone results map: " + player.id);
+            }
+            entry.count++;
+        }
     }
 
     // |player| placed a tile next to |adjacentSpace|.

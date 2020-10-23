@@ -196,7 +196,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA, gameOptions.aresExtension);
 
       this.activePlayer = first.id;
 
@@ -386,34 +386,28 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName, randomMA: RandomMAOptionType, hasVenus: boolean): Board {
-      const requiredQty = 5;
-      if (boardName === BoardName.ELYSIUM) {
+    public boardConstructor(boardName: BoardName, randomMA: RandomMAOptionType, hasVenus: boolean, hasAres: boolean): Board {
+      const chooseMilestonesAndAwards = function(game: Game, milestones: Array<IMilestone>, awards: Array<IAward>) {
+        const requiredQty = 5;
         if (randomMA !== RandomMAOptionType.NONE) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMA);
+          game.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMA);
         } else {
-          this.milestones.push(...ELYSIUM_MILESTONES);
-          this.awards.push(...ELYSIUM_AWARDS);
+          game.milestones.push(...milestones);
+          game.awards.push(...awards);
         }
+        if (hasAres) {
+          AresHandler.setupMilestonesAwards(game);
+        }
+      }
 
+      if (boardName === BoardName.ELYSIUM) {
+        chooseMilestonesAndAwards(this, ELYSIUM_MILESTONES, ELYSIUM_AWARDS)
         return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
-        if (randomMA !== RandomMAOptionType.NONE) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMA);
-        } else {
-          this.milestones.push(...HELLAS_MILESTONES);
-          this.awards.push(...HELLAS_AWARDS);
-        }
-
+        chooseMilestonesAndAwards(this, HELLAS_MILESTONES, HELLAS_AWARDS)
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
-        if (randomMA !== RandomMAOptionType.NONE) {
-          this.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMA);
-        } else {
-          this.milestones.push(...ORIGINAL_MILESTONES);
-          this.awards.push(...ORIGINAL_AWARDS);
-        }
-
+        chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
         return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
       }
     }

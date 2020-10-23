@@ -35,6 +35,16 @@ export class PharmacyUnion implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
+        this.deferActions(player, game, card);
+        return undefined;
+    }
+
+
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
+        return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    }
+
+    public deferActions(player: Player, game: Game, card: IProjectCard): void {
         if (this.isDisabled) return undefined;
 
         if (card.tags.includes(Tags.MICROBES)) {
@@ -86,11 +96,6 @@ export class PharmacyUnion implements CorporationCard {
                 ));
             }
         }
-        return undefined;
-    }
-
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-        return this.onCardPlayed(player,game,card as ICard as IProjectCard);
     }
 
 }

@@ -54,6 +54,7 @@ const styles = fs.readFileSync("styles.css");
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
+const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -83,10 +84,12 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                 apiGetWaitingFor(req, res);
             } else if (req.url.startsWith("/assets/translations.json")) {
                 res.setHeader("Content-Type", "application/json");
+                res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
                 res.write(fs.readFileSync("assets/translations.json"));
                 res.end();
             } else if (req.url === "/styles.css") {
                 res.setHeader("Content-Type", "text/css");
+                res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
                 serveResource(res, styles);
             } else if (
                 req.url.startsWith("/assets/") ||
@@ -1027,6 +1030,9 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         file = reqFile;
     } else {
         return route.notFound(req, res);
+    }
+    if (req.url !== "/main.js" && req.url !== "/main.js.map") {
+        res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
     }
     fs.readFile(file, function (err, data) {
         if (err) {

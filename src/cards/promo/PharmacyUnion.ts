@@ -35,16 +35,6 @@ export class PharmacyUnion implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
-        this.deferActions(player, game, card);
-        return undefined;
-    }
-
-
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-        return this.onCardPlayed(player, game, card as ICard as IProjectCard);
-    }
-
-    public deferActions(player: Player, game: Game, card: IProjectCard): void {
         if (this.isDisabled) return undefined;
 
         if (card.tags.includes(Tags.MICROBES)) {
@@ -55,46 +45,56 @@ export class PharmacyUnion implements CorporationCard {
         }
             
         if (player.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
-            const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
-            for (let i = 0; i < scienceTags; i++) {
-                game.defer(new SimpleDeferredAction(
-                    player,
-                    () => {
-                        if (this.isDisabled) return undefined;
+            this.deferActions(player, game, card);
+        }
+        return undefined;
+    }
 
-                        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-                        if (this.resourceCount > 0) {
-                            if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST) === false) {
-                                // TODO (Lynesth): Remove this when #1670 is fixed
-                                game.log("${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
-                            } else {
-                                this.resourceCount--;
-                                player.increaseTerraformRating(game);
-                                game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
-                            }
-                            return undefined;
-                        }
 
-                        if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === false) {
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
+        return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    }
+
+    public deferActions(player: Player, game: Game, card: IProjectCard): void {
+        const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+        for (let i = 0; i < scienceTags; i++) {
+            game.defer(new SimpleDeferredAction(
+                player,
+                () => {
+                    if (this.isDisabled) return undefined;
+
+                    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+                    if (this.resourceCount > 0) {
+                        if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST) === false) {
                             // TODO (Lynesth): Remove this when #1670 is fixed
-                            game.log("${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
-                            return undefined;
+                            game.log("${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
+                        } else {
+                            this.resourceCount--;
+                            player.increaseTerraformRating(game);
+                            game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
                         }
-
-                        return new OrOptions(
-                            new SelectOption("Turn this card face down and gain 3 TR", "Gain TR", () => {
-                                this.isDisabled = true;
-                                player.increaseTerraformRatingSteps(3, game);
-                                game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
-                                return undefined;
-                            }),
-                            new SelectOption("Do nothing", "Confirm", () => {
-                                return undefined;
-                            })
-                        );
+                        return undefined;
                     }
-                ));
-            }
+
+                    if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === false) {
+                        // TODO (Lynesth): Remove this when #1670 is fixed
+                        game.log("${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
+                        return undefined;
+                    }
+
+                    return new OrOptions(
+                        new SelectOption("Turn this card face down and gain 3 TR", "Gain TR", () => {
+                            this.isDisabled = true;
+                            player.increaseTerraformRatingSteps(3, game);
+                            game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                            return undefined;
+                        }),
+                        new SelectOption("Do nothing", "Confirm", () => {
+                            return undefined;
+                        })
+                    );
+                }
+            ));
         }
     }
 

@@ -37,6 +37,7 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * KEY_PATH: Your TLS private key path (=> `privkey.pem` created by certbot)
 * MAX_GAME_DAYS: How many days to keep unfinished games before deleting them
 * WAITING_FOR_TIMEOUT: (default 5000) How many milliseconds to check for game update on multi-player games
+* ASSET_CACHE_MAX_AGE: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
 
 ### Deployment
 

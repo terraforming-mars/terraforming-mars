@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "declaration": true,
         "module": "commonjs",
         "lib": ["dom"],
+        "noEmit": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
@@ -12,15 +12,14 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "skipLibCheck": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "target": "es5",
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true
     },
+    "exclude": [],
     "include": [
-        "src/**/*.ts",
-        "script.ts",
-        "server.ts"
+        "dist/src/components/*Vue.ts"
     ]
 }

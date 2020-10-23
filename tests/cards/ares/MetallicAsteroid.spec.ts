@@ -1,5 +1,4 @@
 import { expect } from "chai";
-
 import { MetallicAsteroid } from "../../../src/cards/ares/MetallicAsteroid";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
@@ -23,7 +22,7 @@ describe("MetallicAsteroid", function () {
 
         expect(player.titanium).eq(0);
         expect(game.getTemperature()).eq(-30);
-        expect(game.interrupts).is.length(0);
+        expect(game.deferredActions).is.empty;
 
         const action = card.play(player, game);
         expect(player.titanium).eq(1);
@@ -31,7 +30,7 @@ describe("MetallicAsteroid", function () {
         // This interrupt is for removing four plants. Not going to do further
         // testing on this because it's beyond the scope of this test without
         // exposing more from the source method.
-        expect(game.interrupts).is.length(1);
+        expect(game.deferredActions).is.length(1);
 
         const space = game.board.getAvailableSpacesOnLand(player)[0];
         action.cb(space);

@@ -21,8 +21,8 @@ describe("DeimosDownPromo", function () {
         expect(action instanceof SelectSpace).to.eq(true);
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
     });
 
     it("Can remove plants", function(){
@@ -33,11 +33,11 @@ describe("DeimosDownPromo", function () {
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
 
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
         // Choose Remove 5 plants option
-        game.interrupts[0].generatePlayerInput?.();
-        (game.interrupts[0].playerInput as OrOptions).options[0].cb([player2]);
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        orOptions.options[0].cb([player2]);
 
         expect(player2.plants).to.eq(0);
     });

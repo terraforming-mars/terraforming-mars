@@ -11,6 +11,7 @@ import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { CardName } from "../../CardName";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 8;
@@ -57,7 +58,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
     }
 
     private addResource(player: Player, game: Game) {
-        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for action");
+        game.defer(new SelectHowToPayDeferred(player, 2, false, false, "Select how to pay for action"));
         this.resourceCount++;
         return undefined;
     }

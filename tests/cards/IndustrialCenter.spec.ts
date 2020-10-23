@@ -23,7 +23,7 @@ describe("IndustrialCenter", function () {
     it("Should action", function () {
         player.megaCredits = 7;
         card.action(player, game);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });

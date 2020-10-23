@@ -2,9 +2,9 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { Game } from "../../Game";
-import { SelectParty } from "../../interrupts/SelectParty";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
+import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 
 export class Incite implements CorporationCard {
@@ -21,7 +21,7 @@ export class Incite implements CorporationCard {
     public initialAction(player: Player, game: Game) {
         if (game.turmoil) {
             const title = "Incite first action - Select where to send two delegates";
-            game.addInterrupt(new SelectParty(player, game, title, 2, undefined, undefined, false));
+            game.defer(new SendDelegateToArea(player, game, title, 2, undefined, undefined, false));
         }
 
         return undefined;

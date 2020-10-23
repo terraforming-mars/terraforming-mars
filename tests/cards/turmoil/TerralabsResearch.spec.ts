@@ -31,7 +31,7 @@ describe("TerralabsResearch", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(player.megaCredits).to.eq(11);
         expect(player.cardsInHand.length).to.eq(3);
     });

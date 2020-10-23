@@ -1,9 +1,9 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Turmoil } from '../Turmoil';
-import { SelectRemoveFloaters } from '../../interrupts/SelectRemoveFloaters';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Turmoil } from "../Turmoil";
+import { CorrosiveRainDeferredAction } from "../../deferredActions/CorrosiveRainDeferredAction";
 
 export class CorrosiveRain implements IGlobalEvent {
     public name = GlobalEventName.CORROSIVE_RAIN;
@@ -15,7 +15,7 @@ export class CorrosiveRain implements IGlobalEvent {
             for (let i = 0; i < turmoil.getPlayerInfluence(player); i++) {
                 player.cardsInHand.push(game.dealer.dealCard());
             }
-            game.addInterrupt(new SelectRemoveFloaters(player, game));
+            game.defer(new CorrosiveRainDeferredAction(player, game));
         });    
     }
 }    

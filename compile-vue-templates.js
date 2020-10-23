@@ -1,5 +1,4 @@
 
-
 /**
  * Provide a mock vue so we can interact with
  * the components from node
@@ -23,11 +22,20 @@ require.cache[vue] = {
 };
 
 checkComponent(
+    "src/components/Award",
+    require("./dist/src/components/Award").Award
+);
+checkComponent(
     "src/components/GameEnd",
     require("./dist/src/components/GameEnd").GameEnd
 );
+checkComponent(
+    "src/components/Milestone",
+    require("./dist/src/components/Milestone").Milestone
+);
 
 function checkComponent(name, component) {
+
     const methodNames = Object.keys(component.methods);
 
     if (methodNames.length === 0) {
@@ -56,6 +64,9 @@ function checkComponent(name, component) {
     }
 
     result = result.render;
+
+    // provide type information for $event argument
+    result = result.replace(/function\(\$event\)/g, "function($event: Event)");
 
     // strip 'with' lacking typescript support
     result = result.substring("with(this){".length);

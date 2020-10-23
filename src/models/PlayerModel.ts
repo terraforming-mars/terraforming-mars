@@ -5,16 +5,26 @@ import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from "../ITagCount";
 import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from "../cards/IProjectCard";
+import { ClaimedMilestoneModel } from "./ClaimedMilestoneModel";
 import { CorporationCard } from "../cards/corporation/CorporationCard";
+import { FundedAwardModel } from "./FundedAwardModel";
+import { Phase } from "../Phase";
+import { PlayerInputModel } from "./PlayerInputModel";
+import { RandomMAOptionType } from "../RandomMAOptionType";
+import { SpaceModel } from "./SpaceModel";
 
 export interface PlayerModel {
+    awards: Array<FundedAwardModel>;
     boardName: string;
-    corporationCard: CardModel;
+    corporationCard: CardModel | undefined;
     playedCards: Array<CardModel>;
     cardCost: number;
+    cardsInHand: Array<CardModel>;
     cardsInHandNbr: number;
     citiesCount: number;
     coloniesCount: number;
+    corporateEra: boolean;
+    draftedCards: Array<CardModel>;
     noTagsCount: number;
     influence: number;
     colonies: Array<ColonyModel>;
@@ -23,6 +33,7 @@ export interface PlayerModel {
     energy: number;
     energyProduction: number;
     gameAge: number;
+    generation: number;
     heat: number;
     heatProduction: number;
     id: string;
@@ -30,12 +41,20 @@ export interface PlayerModel {
     isSoloModeWin: boolean;
     megaCredits: number;
     megaCreditProduction: number;
+    milestones: Array<ClaimedMilestoneModel>;
     name: string;
+    oceans: number;
+    oxygenLevel: number;
+    phase: Phase;
     plants: number;
     plantProduction: number;
+    players: Array<PlayerModel>;
+    randomMA: RandomMAOptionType;
+    spaces: Array<SpaceModel>;
     steel: number;
     steelProduction: number;
     steelValue: number;
+    temperature: number;
     terraformRating: number;
     titanium: number;
     titaniumProduction: number;
@@ -59,4 +78,5 @@ export interface PlayerModel {
     actionsTakenThisRound: number;
     deckSize: number;
     preludeExtension: boolean;
+    waitingFor: PlayerInputModel | undefined;
 }

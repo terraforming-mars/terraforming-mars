@@ -537,7 +537,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getPlayer(player: Player, game: Game): string {
     const turmoil = getTurmoil(game);
 
-    const output = {
+    const output: PlayerModel = {
         cardsInHand: getCards(player, player.cardsInHand, game, false),
         draftedCards: getCards(player, player.draftedCards, game, false),
         milestones: getMilestones(game),
@@ -603,7 +603,7 @@ function getPlayer(player: Player, game: Game): string {
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: game.getPassedPlayers(),
         preludeExtension: game.gameOptions.preludeExtension,
-    } as PlayerModel;
+    };
     return JSON.stringify(output);
 }
 

@@ -183,15 +183,6 @@ export const Board = Vue.component("board", {
                     <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                 </g>
                 
-                <g v-if="boardName === 'tharsis'" id="noctis_city" transform="translate(85, 320)">
-                    <text class="board-caption">
-                        <tspan dy="15">Noctis</tspan>
-                        <tspan x="7" dy="12">City</tspan>
-                    </text>
-                    <line x1="30" y1="20" x2="140" y2="-20" class="board-line"></line>
-                    <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
-                </g>
-
                 <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(110, 190)">
                     <text class="board-caption">
                         <tspan dy="15">Elysium</tspan>

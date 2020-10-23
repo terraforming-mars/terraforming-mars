@@ -104,10 +104,11 @@ export const SelectProductionToLose = Vue.component("select-production-to-lose",
         }
     },
 
+    // TODO(chosta): consolidate repetition into a reusable component.
     template: `<div class="wf-component wf-component--select-production-to-lose">
         <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{playerinput.title}}</div>
 
-        <h3 class="payments_title">Which resource production will you lose?</h3>
+        <h3 class="payments_title">Which resource production would you prefer to decrease?</h3>
 
         <div class="payments_type input-group" v-if="canDeductMegaCredits()">
           <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>

@@ -22,6 +22,11 @@ export class IncreaseColonyTrack implements DeferredAction {
 
         const maxSteps = Math.min(this.player.colonyTradeOffset, MAX_COLONY_TRACK_POSITION - this.colony.trackPosition);
 
+        if (maxSteps <= 0) {
+            this.cb();
+            return undefined;
+        }
+
         const options = new OrOptions();
         for (let steps = maxSteps; steps > 0; steps--) {
             options.options.push(

@@ -12,8 +12,11 @@ import { Phase } from "../Phase";
 import { PlayerInputModel } from "./PlayerInputModel";
 import { RandomMAOptionType } from "../RandomMAOptionType";
 import { SpaceModel } from "./SpaceModel";
+import { IAresData } from "../ares/IAresData";
 
 export interface PlayerModel {
+    aresExtension: boolean;
+    aresData: IAresData | undefined;
     awards: Array<FundedAwardModel>;
     boardName: string;
     corporationCard: CardModel | undefined;

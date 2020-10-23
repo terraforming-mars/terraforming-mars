@@ -1,4 +1,3 @@
-// TODO(kberg): uncomment before completion
 import { expect } from "chai";
 import { SpaceBonus } from "../../src/SpaceBonus";
 import { Game } from "../../src/Game";
@@ -8,7 +7,7 @@ import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
 import { setCustomGameOptions } from "../TestingUtils";
-// import { AresHandler } from "../../src/ares/AresHandler";
+import { AresHandler } from "../../src/ares/AresHandler";
 
 export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
     aresExtension: true,
@@ -59,9 +58,9 @@ export class AresTestHelper {
       return space;
     }
 
-    // public static getHazards(game: Game): Array<ISpace> {
-    //   return game.board.getSpaces(SpaceType.LAND).filter(space => AresHandler.hasHazardTile(space));
-    // }
+    public static getHazards(game: Game): Array<ISpace> {
+      return game.board.getSpaces(SpaceType.LAND).filter(space => AresHandler.hasHazardTile(space));
+    }
 
     public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {
       // Got a better way to initialize this? LMK.

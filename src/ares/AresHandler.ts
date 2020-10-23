@@ -10,7 +10,7 @@ import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { TileType } from "../TileType";
 import { ITile } from "../ITile";
-import { IAresData } from "./IAresData";
+import { IAresData, IHazardConstraint } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
 // import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 // import { ARES_MILESTONES } from "../milestones/Milestones";
@@ -46,13 +46,15 @@ export class AresHandler {
         };
     }
 
-    public static assertHasAres(game: Game) {
+    public static assertHasAres(game: Game) : boolean {
         console.assert(game.gameOptions.aresExtension, "Assertion failure: game.gameOptions.aresExtension is not true");
         console.assert(game.aresData !== undefined, "Assertion failure: game.aresData is undefined");
+        // I wish console.assert returned a boolean value.
+        return game.gameOptions.aresExtension && game.aresData !== undefined;
     }
 
     public static earnAdjacencyBonuses(game: Game, player: Player, space: ISpace) {
-        this.assertHasAres(game);
+        if (!AresHandler.assertHasAres(game)) { return; }
 
         // let incrementMilestone = false;
 
@@ -74,7 +76,7 @@ export class AresHandler {
     // |player| placed a tile next to |adjacentSpace|.
     // Returns true if the adjacent space contains a bonus for adjacency.
     private static earnAdacencyBonus(game: Game, adjacentSpace: ISpace, player: Player): boolean {
-        this.assertHasAres(game);
+        if (!AresHandler.assertHasAres(game)) { return false; }
 
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
             return false;
@@ -148,7 +150,6 @@ export class AresHandler {
         return true;
     }
 
-
     public static setupHazards(game: Game, playerCount: number) {
         // The number of dust storms depends on the player count.
         // I made up that the solo player has 3 dust storms. The rules
@@ -218,7 +219,7 @@ export class AresHandler {
     }
 
     public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
-        this.assertHasAres(game);
+        if (!AresHandler.assertHasAres(game)) { return { megacredits: 0, production: 0}; }
         if (game.phase === Phase.SOLAR) {
             return {megacredits: 0, production: 0 };
         }
@@ -244,7 +245,7 @@ export class AresHandler {
     }
 
     public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
-        this.assertHasAres(game);
+        if (!AresHandler.assertHasAres(game)) { return; }
 
         const cost = this.assertCanPay(game, player, space);
 
@@ -273,6 +274,30 @@ export class AresHandler {
             return true;
         }
         return false;
+    }
+
+    public static onTemperatureChange(game: Game) {
+        if (!AresHandler.assertHasAres(game)) { return; }
+        // This will have no effect if the erosions don't exist, but that's OK --
+        // the check for placing erosions will take this into account.
+        testConstraint(
+            game.aresData!.hazardData.severeErosionTemperature,
+            game.getTemperature(),
+            () => { makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE); }
+        );
+    }
+
+    public static onOceanPlaced(game: Game, player: Player) {
+        if (!AresHandler.assertHasAres(game)) { return; }
+        testToPlaceErosionTiles(game, player);
+        testToRemoveDustStorms(game, player);
+    }
+
+    public static onOxygenChange(game: Game) {
+        AresHandler.assertHasAres(game);
+        testConstraint(game.aresData!.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
+            makeSevere( game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
+            });
     }
 
     public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined) {
@@ -308,6 +333,67 @@ function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) 
     const space = game.getSpaceByOffset(direction, "hazard");
     AresHandler.putHazardAt(space, tileType);
     return space;
+}
+
+
+function makeSevere(game: Game, from: TileType, to: TileType) {
+    game.board.spaces
+        .filter((s) => s.tile?.tileType === from)
+        .forEach((s) => {
+            AresHandler.putHazardAt(s, to);
+        });
+
+    game.log("${0} have upgraded to ${1}", b => b.string(tileTypeAsString(from)).string(tileTypeAsString(to)));
+}
+
+function testConstraint(constraint: IHazardConstraint, testValue: number, cb: () => void) {
+    if (!constraint.available) {
+        return;
+    }
+    if (testValue >= constraint.threshold) {
+        cb();
+        constraint.available = false;
+    }
+}
+
+function testToRemoveDustStorms(game: Game, player: Player) {
+    testConstraint(
+        game.aresData!.hazardData.removeDustStormsOceanCount,
+        game.board.getOceansOnBoard(),
+        () => {
+            game.board.spaces.forEach((space) => {
+                if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
+                    if (space.tile.protectedHazard !== true) {
+                        space.tile = undefined;
+                    }
+                }
+            });
+
+            if (game.phase !== Phase.SOLAR) {
+                player.increaseTerraformRating(game);
+                game.log("${0}'s TR increases 1 step for eliminating dust storms.", b => b.player(player));
+            }
+        }
+    );
+}
+
+function testToPlaceErosionTiles(game: Game, player: Player) {
+    testConstraint(
+        game.aresData!.hazardData.erosionOceanCount,
+        game.board.getOceansOnBoard(),
+        () => {
+            let type = TileType.EROSION_MILD;
+            if (game.aresData!.hazardData.severeErosionTemperature.available !== true) {
+                type = TileType.EROSION_SEVERE;
+            }
+
+            const space1 = randomlyPlaceHazard(game, type, 1);
+            const space2 = randomlyPlaceHazard(game, type, -1);
+            [space1, space2].forEach((space) => {
+                LogHelper.logTilePlacement(game, player, space, type);
+            });
+        }
+    );
 }
 
 // TODO(kberg): convert to a log message type

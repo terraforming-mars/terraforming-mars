@@ -1,62 +1,64 @@
-import {IProjectCard} from "./cards/IProjectCard";
-import {CorporationCard} from "./cards/corporation/CorporationCard";
-import {Tags} from "./cards/Tags";
-import {PlayerInput} from "./PlayerInput";
-import {CardType} from "./cards/CardType";
-import {Color} from "./Color";
-import {SelectCard} from "./inputs/SelectCard";
-import {AndOptions} from "./inputs/AndOptions";
-import { ICard } from "./cards/ICard";
-import { OrOptions } from "./inputs/OrOptions";
-import {Game} from "./Game";
-import {HowToPay} from "./inputs/HowToPay";
-import {SelectSpace} from "./inputs/SelectSpace";
-import {ISpace} from "./ISpace";
-import {SelectHowToPayForCard} from "./inputs/SelectHowToPayForCard";
-import {SelectHowToPay} from "./inputs/SelectHowToPay";
-import { SelectAmount } from "./inputs/SelectAmount";
-import {SelectOption} from "./inputs/SelectOption";
-import {SelectPlayer} from "./inputs/SelectPlayer";
-import {IMilestone} from "./milestones/IMilestone";
-import {StandardProjectType} from "./StandardProjectType";
 import * as constants from "./constants";
-import {IAward} from "./awards/IAward";
-import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
-import {Resources} from "./Resources";
-import { ResourceType } from "./ResourceType";
-import {CardName} from "./CardName";
-import {IColony} from "./colonies/Colony";
-import {SelectGreenery} from "./interrupts/SelectGreenery";
-import {SelectCity} from "./interrupts/SelectCity";
-import {SpaceType} from "./SpaceType";
-import {ITagCount} from "./ITagCount";
-import {TileType} from "./TileType";
-import {CardFinder} from "./CardFinder";
-import {ILoadable} from "./ILoadable";
-import {Database} from "./database/Database";
-import {SerializedPlayer} from "./SerializedPlayer";
-import { SelectParty } from "./interrupts/SelectParty";
-import { PartyName } from "./turmoil/parties/PartyName";
-import { SelectDelegate } from "./inputs/SelectDelegate";
-import { Phase } from "./Phase";
-import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
+import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
+import { AndOptions } from "./inputs/AndOptions";
 import { Aridor } from "./cards/colonies/Aridor";
+import { Board } from "./Board";
+import { CardFinder } from "./CardFinder";
+import { CardModel } from "./models/CardModel";
+import { CardName } from "./CardName";
+import { CardType } from "./cards/CardType";
+import { ColonyModel } from "./models/ColonyModel";
+import { ColonyName } from "./colonies/ColonyName";
+import { Color } from "./Color";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
+import { Database } from "./database/Database";
+import { Decks } from "./Deck";
+import { Game } from "./Game";
+import { HowToPay } from "./inputs/HowToPay";
+import { IAward } from "./awards/IAward";
+import { ICard } from "./cards/ICard";
+import { IColony } from "./colonies/Colony";
+import { ILoadable } from "./ILoadable";
+import { IMilestone } from "./milestones/IMilestone";
+import { IProjectCard } from "./cards/IProjectCard";
+import { ISpace } from "./ISpace";
+import { ITagCount } from "./ITagCount";
+import { MAX_FLEET_SIZE, REDS_RULING_POLICY_COST } from "./constants";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
-import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
-import { Board } from "./Board";
+import { OrOptions } from "./inputs/OrOptions";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
-import { MAX_FLEET_SIZE, REDS_RULING_POLICY_COST } from "./constants";
-import { CardModel } from "./models/CardModel";
+import { PartyName } from "./turmoil/parties/PartyName";
+import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
+import { Phase } from "./Phase";
+import { PlayerInput } from "./PlayerInput";
+import { ResourceType } from "./ResourceType";
+import { Resources } from "./Resources";
+import { SelectAmount } from "./inputs/SelectAmount";
+import { SelectCard } from "./inputs/SelectCard";
+import { PlaceCityTile } from "./deferredActions/PlaceCityTile";
+import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
+import { PlaceGreeneryTile } from "./deferredActions/PlaceGreeneryTile";
+import { SendDelegateToArea } from "./deferredActions/SendDelegateToArea";
+import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
+import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { SelectColony } from "./inputs/SelectColony";
-import { ColonyName } from "./colonies/ColonyName";
-import { ColonyModel } from "./models/ColonyModel";
-import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
-import { Decks } from "./Deck";
-import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
+import { SelectDelegate } from "./inputs/SelectDelegate";
+import { SelectHowToPay } from "./inputs/SelectHowToPay";
+import { SelectHowToPayForCard } from "./inputs/SelectHowToPayForCard";
+import { SelectOption } from "./inputs/SelectOption";
+import { SelectPlayer } from "./inputs/SelectPlayer";
+import { SelectSpace } from "./inputs/SelectSpace";
+import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
+import { SerializedPlayer } from "./SerializedPlayer";
+import { SpaceType } from "./SpaceType";
+import { StandardProjectType } from "./StandardProjectType";
+import { Tags } from "./cards/Tags";
+import { TileType } from "./TileType";
+import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
 import { IProductionUnits } from "./inputs/IProductionUnits";
-import { ShiftAresGlobalParameters } from "./inputs/ShiftAresGlobalParameters";
-import { IAresGlobalParametersResponse } from "./interrupts/ShiftAresGlobalParametersInterrupt";
+import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
+import { ShiftAresGlobalParameters, IAresGlobalParametersResponse } from "./inputs/ShiftAresGlobalParameters";
 
 export type PlayerId = string;
 
@@ -181,7 +183,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Turmoil Reds capacity
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
         if (this.canAfford(REDS_RULING_POLICY_COST)) {
-          game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase");
+          game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase"));
         } else {
           // Cannot pay Reds, will not increase TR
           return;
@@ -544,17 +546,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return result;      
     }
 
-    public getResourceCards(resource: ResourceType): Array<ICard> {
-      const result: Array<ICard> = [];
-        this.playedCards.forEach((card) => {
-          if (card.resourceType !== undefined && card.resourceType === resource) {
-            result.push(card);
-          }
-        });
+    public getResourceCards(resource: ResourceType | undefined): Array<ICard> {
+        let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
-        if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
-          result.push(this.corporationCard);
-        }  
+        if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
+            result.push(this.corporationCard);
+        }
+
+        if (resource !== undefined) {
+            result = result.filter((card) => card.resourceType === resource)
+        }
 
         return result;
     }  
@@ -679,11 +680,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
     private runInputCb(game: Game, result: PlayerInput | undefined): void {
         if (result !== undefined) {
-            game.interrupts.push({
-                player: this,
-                playerInput: result
-            });
-        }    
+            game.defer(new SimpleDeferredAction(
+                this,
+                () => result
+            ));
+        }
     }
     private runInput(
         game: Game,
@@ -970,11 +971,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private doneWorldGovernmentTerraforming(game: Game): void {
-      if (this.hasInterrupt(game)) {
-        this.runOwnNextInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
-      } else {
+        const action = game.getNextDeferredActionForPlayer(this.id);
+        if (action !== undefined) {
+            game.runDeferredAction(action, () => this.doneWorldGovernmentTerraforming(game));
+            return;
+        }
         game.doneWorldGovernmentTerraforming();
-      }
     }
 
     public worldGovernmentTerraforming(game: Game): void {
@@ -1071,7 +1073,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       const payForCards = () => {
         const purchasedCardsCost = this.cardCost * selectedCards.length;
         if (selectedCards.length > 0) {
-          game.addSelectHowToPayInterrupt(this, purchasedCardsCost, false, false, "Select how to pay " + purchasedCardsCost + " for purchasing " + selectedCards.length + " card(s)");
+          game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, false, false, "Select how to pay " + purchasedCardsCost + " for purchasing " + selectedCards.length + " card(s)"));
         }
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
@@ -1300,10 +1302,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         // Play the card
         const action = selectedCard.play(this, game);
         if (action !== undefined) {
-            game.interrupts.push({
-                player: this,
-                playerInput: action
-            });
+            game.defer(new SimpleDeferredAction(
+                this,
+                () => action
+            ));
         }
 
         // Remove card from hand
@@ -1334,10 +1336,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             if (playedCard.onCardPlayed !== undefined) {
                 const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
                 if (actionFromPlayedCard !== undefined) {
-                    game.interrupts.push({
-                        player: this,
-                        playerInput: actionFromPlayedCard
-                    });
+                    game.defer(new SimpleDeferredAction(
+                        this,
+                        () => actionFromPlayedCard
+                    ));
                 }
             }
         }
@@ -1346,16 +1348,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
                 const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
                 if (actionFromPlayedCard !== undefined) {
-                    game.interrupts.push({
-                        player: this,
-                        playerInput: actionFromPlayedCard
-                    });
+                    game.defer(new SimpleDeferredAction(
+                        this,
+                        () => actionFromPlayedCard
+                    ));
                 }
             }
         }
 
-        if (selectedCard.addPlayCardInterrupt !== undefined) {
-            selectedCard.addPlayCardInterrupt(this, game);
+        if (selectedCard.addPlayCardDeferredAction !== undefined) {
+            selectedCard.addPlayCardDeferredAction(this, game);
         }
 
         return undefined;
@@ -1370,10 +1372,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             const foundCard = foundCards[0];
             const action = foundCard.action!(this, game);
             if (action !== undefined) {
-                game.interrupts.push({
-                    player: this,
-                    playerInput: action
-                });
+                game.defer(new SimpleDeferredAction(
+                    this,
+                    () => action
+                ));
             }
             this.actionsThisGeneration.add(foundCard.name);
             game.log("${0} used ${1} action", b => b.player(this).card(foundCard));
@@ -1425,7 +1427,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return new SelectColony("Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
-            game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
+            game.defer(new SelectHowToPayDeferred(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project"));
             colony.onColonyPlaced(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
             return undefined;
@@ -1441,7 +1443,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
+          game.defer(new SelectHowToPayDeferred(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project"));
           game.increaseVenusScaleLevel(this, 1);
           this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Air Scrapping"));
@@ -1455,7 +1457,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
+          game.defer(new SelectHowToPayDeferred(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project"));
           this.increaseTerraformRatingSteps(1, game);
           this.onStandardProject(StandardProjectType.BUFFER_GAS);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Buffer Gas"));
@@ -1469,7 +1471,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Power plant (" + this.powerPlantCost + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
+          game.defer(new SelectHowToPayDeferred(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project"));
           this.addProduction(Resources.ENERGY);
           this.onStandardProject(StandardProjectType.POWER_PLANT);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Power plant"));
@@ -1483,7 +1485,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Asteroid (" + constants.ASTEROID_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
+          game.defer(new SelectHowToPayDeferred(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project"));
           game.increaseTemperature(this, 1);
           this.onStandardProject(StandardProjectType.ASTEROID);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Asteroid"));
@@ -1497,8 +1499,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Aquifer (" + constants.AQUIFER_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
-          game.addOceanInterrupt(this, "Select space for ocean");
+          game.defer(new SelectHowToPayDeferred(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project"));
+          game.defer(new PlaceOceanTile(this, game, "Select space for ocean"));
           this.onStandardProject(StandardProjectType.AQUIFER);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Aquifer"));
           return undefined;
@@ -1511,8 +1513,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Greenery (" + constants.GREENERY_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
-          game.addInterrupt(new SelectGreenery(this, game));
+          game.defer(new SelectHowToPayDeferred(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project"));
+          game.defer(new PlaceGreeneryTile(this, game));
           this.onStandardProject(StandardProjectType.GREENERY);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Greenery"));
           return undefined;
@@ -1525,8 +1527,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "City (" + constants.CITY_COST + " MC)", 
         "Confirm",
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
-          game.addInterrupt(new SelectCity(this, game));
+          game.defer(new SelectHowToPayDeferred(this, constants.CITY_COST, false, false, "Select how to pay for City project"));
+          game.defer(new PlaceCityTile(this, game));
           this.onStandardProject(StandardProjectType.CITY);
           this.addProduction(Resources.MEGACREDITS);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("City"));
@@ -1544,7 +1546,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (colony.name === colonyName) {
             game.log("${0} traded with ${1}", b => b.player(this).colony(colony));
             if (payWith === Resources.MEGACREDITS) {
-              game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
+              game.defer(new SelectHowToPayDeferred(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade"));
             } else if (payWith === Resources.ENERGY) {
               this.energy -= (3 - this.colonyTradeDiscount);
             } else if (payWith === Resources.TITANIUM) {
@@ -1613,7 +1615,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
         "Pay",
         () => {
-          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
+          game.defer(new SelectHowToPayDeferred(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action"));
           this.addProduction(Resources.ENERGY);
           this.addProduction(Resources.HEAT);
           game.log("${0} used Turmoil Kelvinists action", b => b.player(this));
@@ -1627,7 +1629,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Pay 10 MC to draw 3 cards (Turmoil Scientists)", 
         "Pay",
         () => {
-          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Scientists draw");
+          game.defer(new SelectHowToPayDeferred(this, 10, false, false, "Select how to pay for Turmoil Scientists draw"));
           this.turmoilScientistsActionUsed = true;
           this.cardsInHand.push(
             game.dealer.dealCard(),
@@ -1689,7 +1691,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           player: this,
           milestone: milestone
         });
-        game.addSelectHowToPayInterrupt(this, 8, false, false, "Select how to pay for milestone");
+        game.defer(new SelectHowToPayDeferred(this, 8, false, false, "Select how to pay for milestone"));
         game.log("${0} claimed ${1} milestone", b => b.player(this).milestone(milestone));
         return undefined;
       });
@@ -1697,7 +1699,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private fundAward(award: IAward, game: Game): PlayerInput {
       return new SelectOption(award.name, "Fund - " + "(" + award.name + ")",() => {
-        game.addSelectHowToPayInterrupt(this, game.getAwardFundingCost(), false, false, "Select how to pay for award");
+        game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), false, false, "Select how to pay for award"));
         game.fundAward(this, award);
         return undefined;
       });
@@ -1798,8 +1800,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   this.plants -= this.plantsNeededForGreenery;
                   this.takeActionForFinalGreenery(game);
                   
-                  // Resolve Philares interrupts
-                  if (game.interrupts.length > 0) this.resolveFinalGreeneryInterrupts(game);
+                  // Resolve Philares deferred actions
+                  if (game.deferredActions.length > 0) this.resolveFinalGreeneryDeferredActions(game);
 
                   return undefined;
                 }
@@ -1815,20 +1817,22 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return;
       }
 
-      if (game.interrupts.length > 0) {
-        this.resolveFinalGreeneryInterrupts(game);
+      if (game.deferredActions.length > 0) {
+        this.resolveFinalGreeneryDeferredActions(game);
       } else {
         game.playerIsDoneWithGame(this);
       }
     }
 
-    private resolveFinalGreeneryInterrupts(game: Game) {
-      if (game.runNextInterrupt(() => { this.resolveFinalGreeneryInterrupts(game) })) {
-        return;
-      }
+    private resolveFinalGreeneryDeferredActions(game: Game) {
+        const action = game.getNextDeferredAction();
+        if (action !== undefined) {
+            game.runDeferredAction(action, () => this.resolveFinalGreeneryDeferredActions(game));
+            return;
+        }
 
-      // All final greenery interrupts have been resolved, continue game flow
-      this.takeActionForFinalGreenery(game);
+        // All final greenery deferred actions have been resolved, continue game flow
+        this.takeActionForFinalGreenery(game);
     }
 
     public getPlayableCards(game: Game): Array<IProjectCard> {
@@ -1994,24 +1998,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return standardProjects;
     }
 
-    private hasInterrupt(game: Game): boolean {
-      return game.interrupts.find(interrupt => interrupt.player === this) !== undefined;
-    }
-
-    private runOwnNextInterrupt(game: Game, cb: () => void): void {
-      //Interrupt action
-      if (game.runNextInterrupt(() => { cb() }, this) === false) {
-        cb();
-      }
-    }
-
     private getPreludeMcBonus(preludeCards: IProjectCard[]) {
       return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
     }
 
     public takeAction(game: Game): void {
-      if (this.hasInterrupt(game)) {
-        this.runOwnNextInterrupt(game, () => this.takeAction(game));
+      const deferredAction = game.getNextDeferredActionForPlayer(this.id);
+      if (deferredAction !== undefined) {
+        game.runDeferredAction(deferredAction, () => this.takeAction(game));
         return;
       }
  
@@ -2048,10 +2042,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       ) {
         const input = this.corporationCard.initialAction(this, game);
         if (input !== undefined) {
-          game.interrupts.push({
-            player: this,
-            playerInput: input
-          });
+          game.defer(new SimpleDeferredAction(
+            this,
+            () => input
+          ));
         }
         this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
         this.actionsTakenThisRound++;
@@ -2153,18 +2147,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // If you can pay to send some in the Ara
       if (game.gameOptions.turmoilExtension) {
-        let selectParty;
+        let sendDelegate;
         if (game.turmoil?.lobby.has(this.id)) {
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (from lobby)");
         } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
         } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
+          sendDelegate = new SendDelegateToArea(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
         }
-        if (selectParty) {
-          selectParty.generatePlayerInput?.();
-          if (selectParty.playerInput !== undefined) {
-            action.options.push(selectParty.playerInput);
+        if (sendDelegate) {
+          const input = sendDelegate.execute();
+          if (input !== undefined) {
+            action.options.push(input);
           }
         }
       }

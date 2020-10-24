@@ -1,12 +1,12 @@
-import {IProjectCard} from "./cards/IProjectCard";
-import {Phase} from "./Phase";
-import {ClaimedMilestone} from "./ClaimedMilestone";
-import {FundedAward} from "./FundedAward";
-import {IMilestone} from "./milestones/IMilestone";
-import {IAward} from "./awards/IAward";
-import {ColonyDealer} from "./colonies/ColonyDealer";
-import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
-import {Board} from "./Board";
+import { IProjectCard } from "./cards/IProjectCard";
+import { Phase } from "./Phase";
+import { ClaimedMilestone } from "./ClaimedMilestone";
+import { FundedAward } from "./FundedAward";
+import { IMilestone } from "./milestones/IMilestone";
+import { IAward } from "./awards/IAward";
+import { ColonyDealer } from "./colonies/ColonyDealer";
+import { DeferredAction } from "./deferredActions/DeferredAction";
+import { Board } from "./Board";
 import { CardName } from "./CardName";
 import { BoardName } from "./BoardName";
 import { SerializedColony } from "./SerializedColony";
@@ -22,7 +22,7 @@ export interface SerializedGame {
 
     lastSaveId: number;
     seed: number
-    interrupts: Array<PlayerInterrupt>;
+    deferredActions: Array<DeferredAction>;
     gameLog: Array<String>;
     gameAge: number;
     

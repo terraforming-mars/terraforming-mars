@@ -21,8 +21,8 @@ describe("NitrogenFromTitan", function () {
         const tr = player.getTerraformRating();
         card.play(player, game);
         expect(player.getTerraformRating()).to.eq(tr + 2);
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
     });
 
     it("Can play with single Jovian floater card", function () {
@@ -30,7 +30,7 @@ describe("NitrogenFromTitan", function () {
         player.playedCards.push(jovianLanterns);
 
         card.play(player, game);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(jovianLanterns.resourceCount).to.eq(2);
     });
 
@@ -39,11 +39,10 @@ describe("NitrogenFromTitan", function () {
         player.playedCards.push(jovianLanterns, new TitanFloatingLaunchPad());
 
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as SelectCard<ICard>;
-        orOptions.cb([jovianLanterns]);
+        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        selectCard.cb([jovianLanterns]);
         expect(jovianLanterns.resourceCount).to.eq(2);
     });
 });

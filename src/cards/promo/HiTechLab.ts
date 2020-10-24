@@ -6,7 +6,7 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 import { Game } from "../../Game";
 import { SelectAmount } from "../../inputs/SelectAmount";
-import { SelectFromCards } from "../../interrupts/SelectFromCards";
+import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
 
 export class HiTechLab implements IProjectCard {
 
@@ -34,7 +34,7 @@ export class HiTechLab implements IProjectCard {
             for (let counter = 0; counter < amount; counter++) {
                 cardsDrawn.push(game.dealer.dealCard());
             };
-            game.addInterrupt(new SelectFromCards(player, game, "Select card to take into hand", cardsDrawn));
+            game.defer(new SelectCardToKeep(player, game, "Select card to take into hand", cardsDrawn));
             return undefined;
         }, player.getResource(Resources.ENERGY));
     }

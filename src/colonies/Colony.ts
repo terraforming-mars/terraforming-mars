@@ -50,12 +50,18 @@ export abstract class Colony {
         return this.colonies.length >= 3;
     }
 
-    public beforeTrade(colony: IColony, player: Player, game: Game): void {
-        if (player.colonyTradeOffset > 0) {
-            LogHelper.logColonyTrackIncrease(game, player, colony);
-            colony.increaseTrack(player.colonyTradeOffset);
+    public beforeTrade(colony: IColony, player: Player, game: Game, steps?: number): void {
+        if (steps === undefined) {
+            steps = player.colonyTradeOffset;
         }
-    }    
+        steps = Math.min(steps, MAX_COLONY_TRACK_POSITION - colony.trackPosition);
+        if (steps <= 0) {
+            return;
+        }
+
+        LogHelper.logColonyTrackIncrease(game, player, colony, steps);
+        colony.increaseTrack(steps);
+    }
 
     public afterTrade(colony: IColony, player: Player, game: Game): void {
         colony.trackPosition = this.colonies.length;

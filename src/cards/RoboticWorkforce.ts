@@ -7,6 +7,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { CardName } from "../CardName";
 import { Resources } from "../Resources";
 import { ICard } from "./ICard";
+import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -200,12 +201,12 @@ export class RoboticWorkforce implements IProjectCard {
                 // this cards require additional user input
                 if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {
                     player.addProduction(Resources.ENERGY,2);
-                    game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
+                    game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
                     return undefined;
                 }
                 if (foundCard.name === CardName.HEAT_TRAPPERS) {
                     player.addProduction(Resources.ENERGY,1);
-                    game.addResourceProductionDecreaseInterrupt(player, Resources.HEAT, 2);
+                    game.defer(new DecreaseAnyProduction(player, game, Resources.HEAT, 2));
                     return undefined;
                 }
 

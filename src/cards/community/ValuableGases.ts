@@ -6,6 +6,8 @@ import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ResourceType } from "../../ResourceType";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
+import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.VENUS];
@@ -16,13 +18,13 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         return undefined;
     }
 
-    public addPlayCardInterrupt(player: Player, game: Game) {
+    public addPlayCardDeferredAction(player: Player, game: Game) {
         const playableCards = player.getPlayableCards(game).filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
-
+            
         if (playableCards.length > 0) {
-            game.interrupts.push({
-                player: player,
-                playerInput: new SelectCard(
+            game.defer(new SimpleDeferredAction(
+                player,
+                () => new SelectCard(
                     "Select Venus floater card to play and add 4 floaters",
                     "Save",
                     playableCards,
@@ -31,13 +33,13 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
                         const canUseTitanium = cards[0].tags.indexOf(Tags.SPACE) !== -1;
                         const cardCost = player.getCardCost(game, cards[0]);
 
-                        game.addSelectHowToPayInterrupt(player, cardCost, canUseSteel, canUseTitanium, "Select how to pay for card");
+                        game.defer(new SelectHowToPayDeferred(player, cardCost, canUseSteel, canUseTitanium, "Select how to pay for card"));
                         player.playCard(game, cards[0]);
                         player.addResourceTo(cards[0], 4);
                         return undefined;
                     }
                 )
-            });
+            ));
         }
     }
 }

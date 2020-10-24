@@ -1,7 +1,6 @@
 import { PlayerInput } from "../PlayerInput";
 import { PlayerInputTypes } from "../PlayerInputTypes";
 import { Player } from "../Player";
-import { IAresGlobalParametersResponse } from "../interrupts/ShiftAresGlobalParametersInterrupt";
 import { IAresData } from "../ares/IAresData";
 
 export class ShiftAresGlobalParameters implements PlayerInput {
@@ -15,3 +14,10 @@ export class ShiftAresGlobalParameters implements PlayerInput {
         public cb: (units: IAresGlobalParametersResponse) => undefined) {}
 
 }
+
+export interface IAresGlobalParametersResponse {
+    lowOceanDelta: -1 | 0 | 1;
+    highOceanDelta:  -1 | 0 | 1;
+    temperatureDelta:  -1 | 0 | 1;
+    oxygenDelta:  -1 | 0 | 1;
+  }

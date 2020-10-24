@@ -135,4 +135,37 @@ describe("PharmacyUnion", function () {
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
         expect(advancedEcosystems.canPlay(player)).to.eq(false);
     });
+
+    it("Edge Case - Let player pick the tag resolution order", function() {
+        // Edge case, let player pick order of resolution
+        // see https://github.com/bafolts/terraforming-mars/issues/1286
+
+        player.megaCredits = 12;
+        const viralEnhancers = new ViralEnhancers();
+
+        // Another player playing a Science/Microbes card and Pharmacy Union has no resource
+        card.resourceCount = 0;
+        player2.playedCards.push(viralEnhancers);
+        card.onCardPlayed(player2, game, viralEnhancers);
+        expect(card.resourceCount).to.eq(1);
+        expect(player.megaCredits).to.eq(8);
+        expect(game.deferredActions.length).to.eq(0);
+
+
+        // PU player playing a Science/Microbes card and Pharmacy Union has no resource
+        card.resourceCount = 0;
+        player.playedCards.push(viralEnhancers);
+        card.onCardPlayed(player, game, viralEnhancers);
+        expect(game.deferredActions.length).to.eq(1);
+
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        orOptions.options[1].cb(); // Add disease then remove it
+        expect(card.resourceCount).to.eq(0);
+        expect(player.megaCredits).to.eq(4);
+
+        orOptions.options[0].cb(); // Turn face down then lose 4MC
+        expect(card.isDisabled).to.eq(true);
+        expect(card.resourceCount).to.eq(0);
+        expect(player.megaCredits).to.eq(0);
+    });
 });

@@ -526,8 +526,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
     }
 
-    public defer(action: DeferredAction): void {
-        this.deferredActions.push(action);
+    public defer(action: DeferredAction, unshift: boolean = false): void {
+        if (unshift) {
+            this.deferredActions.unshift(action);
+        } else {
+            this.deferredActions.push(action);
+        }
     }
 
     public getNextDeferredAction(): DeferredAction | undefined {

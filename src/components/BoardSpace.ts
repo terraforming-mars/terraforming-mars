@@ -18,7 +18,6 @@ const tileTypeToCssClass = new Map<TileType, string>([
     [TileType.DEIMOS_DOWN, "deimos_down"],
     [TileType.GREAT_DAM, "great_dam"],
     [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"],
-    [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"],
     [TileType.BIOFERTILIZER_FACILITY, "biofertilizer_facility"],
     [TileType.METALLIC_ASTEROID, "metallic_asteroid"],
     [TileType.SOLAR_FARM, "solar_farm"],

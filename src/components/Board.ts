@@ -150,11 +150,13 @@ export const Board = Vue.component("board", {
             </div>
 
             <div v-if="aresExtension">
-                <div class="global-numbers-ares-erosions" v-if="aresData.hazardData.removeDustStormsOceanCount.available">
-                    <!-- <div class="global-ares-erosions"> {{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div> -->
-                </div>
                 <div v-if="aresData.hazardData.erosionOceanCount.available">
-                <!-- <div class="global-numbers-ares-remove-dust-storms">{{aresData.hazardData.erosionOceanCount.threshold}}</div> -->
+                    <div class="global-ares-erosions-icon"></div>
+                    <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.removeDustStormsOceanCount.available">
+                    <div class="global-ares-remove-dust-storms-icon"></div>
+                    <div class="global-ares-remove-dust-storms-val">{{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div>
                 </div>
                 <div v-if="aresData.hazardData.severeErosionTemperature.available">
                     <div class="global-ares-severe-erosions"

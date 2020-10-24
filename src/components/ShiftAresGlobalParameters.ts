@@ -1,7 +1,6 @@
 
 import Vue from "vue";
-
-import { IAresGlobalParametersResponse } from "../interrupts/ShiftAresGlobalParametersInterrupt";
+import { IAresGlobalParametersResponse } from "../inputs/ShiftAresGlobalParameters";
 
 // @ts-ignorets-ignore - used in the template.
 const ADJUSTMENT_RANGE = [-1, 0, 1];

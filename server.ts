@@ -48,6 +48,8 @@ import {
 } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
 import { SelectColony } from "./src/inputs/SelectColony";
+import { SelectProductionToLose } from "./src/inputs/SelectProductionToLose";
+import { ShiftAresGlobalParameters } from "./src/inputs/ShiftAresGlobalParameters";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
@@ -255,11 +257,11 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         try {
             const gameReq = JSON.parse(body);
 
-            let game_id = gameReq.game_id;
+            const game_id = gameReq.game_id;
 
             const player = new Player("test", Color.BLUE, false, 0);
             const player2 = new Player("test2", Color.RED, false, 0);
-            let gameToRebuild = new Game(game_id, [player, player2], player);
+            const gameToRebuild = new Game(game_id, [player, player2], player);
             Database.getInstance().restoreGameLastSave(
                 game_id,
                 gameToRebuild,
@@ -323,7 +325,7 @@ function apiGetWaitingFor(
     res: http.ServerResponse
 ): void {
     const qs: string = req.url!.substring("/api/waitingfor?".length);
-    let queryParams = querystring.parse(qs);
+    const queryParams = querystring.parse(qs);
     const playerId = (queryParams as any)["id"];
     const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
     gameLoader.getGameByPlayerId(playerId, (game) => {
@@ -466,13 +468,13 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
     const allMilestones = game.milestones;
     const claimedMilestones = game.claimedMilestones;
-    let milestoneModels: Array<ClaimedMilestoneModel> = [];
+    const milestoneModels: Array<ClaimedMilestoneModel> = [];
 
-    for (let idx in allMilestones) {
-        let claimed = claimedMilestones.find(
+    for (const idx in allMilestones) {
+        const claimed = claimedMilestones.find(
             (m) => m.milestone.name === allMilestones[idx].name
         );
-        let scores: Array<IMilestoneScore> = [];
+        const scores: Array<IMilestoneScore> = [];
         if (claimed === undefined && claimedMilestones.length < 3) {
             game.getPlayers().forEach((player) => {
                 scores.push({
@@ -496,13 +498,13 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
 function getAwards(game: Game): Array<FundedAwardModel> {
     const allAwards = game.awards;
     const fundedAwards = game.fundedAwards;
-    let awardModels: Array<FundedAwardModel> = [];
+    const awardModels: Array<FundedAwardModel> = [];
 
-    for (let idx in allAwards) {
-        let funded = fundedAwards.find(
+    for (const idx in allAwards) {
+        const funded = fundedAwards.find(
             (a) => a.award.name === allAwards[idx].name
         );
-        let scores: Array<IAwardScore> = [];
+        const scores: Array<IAwardScore> = [];
         if (fundedAwards.length < 3 || funded !== undefined) {
             game.getPlayers().forEach((player) => {
                 scores.push({
@@ -611,7 +613,7 @@ function getCardsAsCardModel(
     cards: Array<ICard>,
     showResouces: boolean = true
 ): Array<CardModel> {
-    let result: Array<CardModel> = [];
+    const result: Array<CardModel> = [];
     cards.forEach((card) => {
         result.push({
             name: card.name,
@@ -652,7 +654,9 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
-        coloniesModel: undefined
+        coloniesModel: undefined,
+        payProduction: undefined,
+        aresData: undefined,
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -719,6 +723,24 @@ function getWaitingFor(
                 }
             );
             break;
+        case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+            const _player = (waitingFor as SelectProductionToLose).player;
+            result.payProduction = {
+                cost: (waitingFor as SelectProductionToLose).unitsToLose,
+                units: {
+                    megacredits: _player.getProduction(Resources.MEGACREDITS),
+                    steel: _player.getProduction(Resources.STEEL),
+                    titanium: _player.getProduction(Resources.TITANIUM),
+                    plants: _player.getProduction(Resources.PLANTS),
+                    energy: _player.getProduction(Resources.ENERGY),
+                    heat: _player.getProduction(Resources.HEAT)
+                }
+            };
+            break;
+        case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+            result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData
+            break;
+    
     }
     return result;
 }
@@ -896,7 +918,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
 function getParties(game: Game): Array<PartyModel> | undefined {
     if (game.gameOptions.turmoilExtension && game.turmoil) {
         return game.turmoil.parties.map(function (party) {
-            let delegates = new Array<DelegatesModel>();
+            const delegates = new Array<DelegatesModel>();
             party.getPresentPlayers().forEach((player) => {
                 const number = party.getDelegates(player);
                 if (player !== "NEUTRAL") {

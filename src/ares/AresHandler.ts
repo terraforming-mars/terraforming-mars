@@ -12,7 +12,6 @@ import { TileType } from "../TileType";
 import { ITile } from "../ITile";
 import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
-// import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
@@ -20,6 +19,7 @@ import { Phase } from "../Phase";
 import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
 import { AddResourcesToCard } from "../deferredActions/AddResourcesToCard";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
+import { SelectProductionToLoseDeferred } from "../deferredActions/SelectProductionToLoseDeferred";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -320,10 +320,10 @@ export class AresHandler {
 
         const cost = this.assertCanPay(game, player, space);
 
-        // if (cost.production > 0) {
-        //     // TODO(kberg): don't send interrupt if total is available.
-        //     game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
-        // }
+        if (cost.production > 0) {
+            // TODO(kberg): don't send interrupt if total is available.
+            game.defer(new SelectProductionToLoseDeferred(player, cost.production));
+        }
         if (cost.megacredits > 0) {
             game.log("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
 

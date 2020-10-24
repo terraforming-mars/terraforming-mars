@@ -94,7 +94,7 @@ export const GameEnd = Vue.component("game-end", {
                         Go to main page
                     </a>
                 </div>
-                <div v-if="!isSoloGame() || (isSoloGame() && player.isSoloModeWin)" class="game-end-winer-announcement"> 
+                <div v-if="!isSoloGame() || player.isSoloModeWin" class="game-end-winer-announcement">
                     <span v-for="p in getWinners()"><log-player :class="getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</log-player></span> won!
                 </div>
                 <div class="game_end_victory_points">

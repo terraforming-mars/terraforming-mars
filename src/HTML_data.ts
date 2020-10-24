@@ -497,7 +497,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="production-box">
         <div class="money production">1</div>
       </div>
-      <div class="tile special-tile" style="font-size:30px;margin-left:20px;">&#x2642;</div>*
+      <div class="tile special-tile"><div class="special-tile-symbol special-tile--natural_preserve"></div></div>*
       <div class="description">
         (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.)
       </div>
@@ -731,7 +731,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MINING_AREA,` 
       <div class="content">
-        <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+      <div class="tile special-tile"><div class="special-tile-symbol special-tile--mining-area"></div></div>*<br>
         <div class="production-box production-box-size3">
           <div class="steel production"></div> OR <div class="titanium production"></div>
         </div> *
@@ -759,7 +759,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MINING_RIGHTS,` 
       <div class="content">
-        <div class="tile special-tile">&#x2692;</div>*<br>
+      <div class="tile special-tile"><div class="special-tile-symbol special-tile--mining-area"></div></div>*<br>
         <div class="production-box production-box-size3">
           <div class="steel production"></div> OR <div class="titanium production"></div>
         </div> *
@@ -954,7 +954,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="description" style="margin-top:-5px">
           (Decrease your energy production 1 step and increase your MC production 4 steps.)
           </div>
-          <div class="tile special-tile">&#x20ac;</div>
+          <div class="tile special-tile"><div class="special-tile-symbol special-tile--commerical-district"></div></div>
           <div class="description" style="text-align:left; width: 140px;">
           (Place this tile. 1 VP PER ADJACENT CITY TILE.)
           </div>
@@ -1083,7 +1083,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.NUCLEAR_ZONE,` 
       <div class="content">
         <div class="points points-big">-2</div>
-          <div class="tile special-tile">&#x2622;</div><br>
+        <div class="tile special-tile"><div class="special-tile-symbol special-tile--nuclear-zone"></div></div><br>
           <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
         <div class="description">
           (Place this tile and raise temperature 2 steps.)
@@ -1346,7 +1346,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Action: Spend 7 MC to increase your steel production 1 step.)
             </div><br>
-            <div class="tile special-tile">&#x1f3ed;</div>*
+            <div class="tile special-tile"><div class="special-tile-symbol special-tile--industrial-center"></div></div>*
             <div class="description ">
                 (Place this tile adjacent to a city tile.)
             </div>
@@ -1399,8 +1399,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="description">
           (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
         </div>
-        <div class="tile special-tile" style="margin-left:143px;">&#x1F43e;&#xFE0E;</div>
-        <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
+        <div class="tile special-tile"><div class="special-tile-symbol special-tile--ecological-zone"></div></div>*
+        <div class="description description-tile">
           (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.)
         </div>
       </div>
@@ -1533,7 +1533,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.LAVA_FLOWS,` 
                 <div class="content ">
                     <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
-                    <div class="tile special-tile ">&#x1f30b;</div>*
+                    <div class="tile special-tile"><div class="special-tile-symbol special-tile--lava-flows"></div></div>*
                     <div class="description ">
                       (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.)
                     </div>
@@ -1553,7 +1553,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box production-box-size1a">
           4 <div class="heat production"></div>
         </div><br>
-          <div class="tile special-tile " style="font-size:40px;">&#x2668;</div>*
+          <div class="tile special-tile"><div class="special-tile-symbol special-tile--mohole-area"></div></div>*
         <div class="description">
           (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.)
         </div>
@@ -2171,7 +2171,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="description ">
                   (Action: Spend 2 MC to draw a card.)
               </div><br>
-              <div class="tile special-tile"><div class="restricted-area-tile"></div></div>
+              <div class="tile special-tile"><div class="special-tile-symbol special-tile--restricted-area"></div></div>
               <div class="description ">
                 (Place this tile.)
               </div>
@@ -5186,7 +5186,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tile temperature-tile"></div>
       <div class="tile temperature-tile"></div>
       <div class="tile temperature-tile"></div><br>
-      <div class="tile special-tile">&#x274B;</div>*&nbsp;
+      <div class="tile special-tile"><div class="special-tile-symbol special-tile--deimos-promo"></div></div>*&nbsp;
       4 <div class=" steel resource"></div>&nbsp;
       -6 <div class="resource plant red-outline"></div>
       <div class="description">
@@ -5201,7 +5201,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box production-box-size2">
           <div class="energy production"></div><div class="energy production"></div>
         </div>
-        <div class="tile special-tile">&#x23DA;</div><span>*</span>
+        <div class="tile special-tile"><div class="special-tile-symbol special-tile--great-dam-promo"></div></div><span>*</span>
         <div class="description">
           (Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.)
         </div>
@@ -5213,7 +5213,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix minus"></div> 4 <div class="energy production"></div><br>
             <div class="production-prefix plus"></div><div class="plant production"></div><div class="plant production"></div>
           </div> <br>
-           3 <div class="tile rating"></div>&nbsp;&nbsp;<div class="tile special-tile"><span class="tile-icon">&#x25C9;</span></div><span>*</span>
+           3 <div class="tile rating"></div>&nbsp;&nbsp;<div class="tile special-tile"><div class="special-tile-symbol special-tile--magnetic-field-gen-promo"></div></div><span>*</span>
           <div class="description">
             (Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.)
           </div>

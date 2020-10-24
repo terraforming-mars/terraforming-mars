@@ -1,28 +1,26 @@
 import { Player } from "../Player";
-import { PlayerInput } from "../PlayerInput";
-import { PlayerInterrupt } from "./PlayerInterrupt";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { HowToPay } from "../inputs/HowToPay";
+import { DeferredAction } from "./DeferredAction";
 
-export class SelectHowToPayInterrupt implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class SelectHowToPayDeferred implements DeferredAction {
     constructor(
         public player: Player,
         public amount: number,
-        public title: string = "Select how to pay for " + amount + " MCs",
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
+        public title: string = "Select how to pay for " + amount + " MCs"
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         if ((!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
             (!this.canUseSteel || this.player.steel === 0) &&
             (!this.canUseTitanium || this.player.titanium === 0)) {
-                this.player.megaCredits -= this.amount;
-                this.playerInput = undefined;
-                return;
+            this.player.megaCredits -= this.amount;
+            return undefined;
         }
-        this.playerInput = new SelectHowToPay(
+
+        return new SelectHowToPay(
             this.title, 
             this.canUseSteel, this.canUseTitanium, this.player.canUseHeatAsMegaCredits, this.amount, (howToPay: HowToPay) => {
                 this.player.steel -= howToPay.steel;

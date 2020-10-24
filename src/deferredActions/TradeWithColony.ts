@@ -1,13 +1,11 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
-import { PlayerInterrupt } from "./PlayerInterrupt";
 import { OrOptions } from "../inputs/OrOptions";
 import { IColony } from "../colonies/Colony";
 import { SelectOption } from "../inputs/SelectOption";
+import { DeferredAction } from "./DeferredAction";
 
-export class SelectTradeColony implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class TradeWithColony implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
@@ -15,7 +13,7 @@ export class SelectTradeColony implements PlayerInterrupt {
         public title = "Select colony to trade with"
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         const selectColony = new OrOptions();
         selectColony.options = this.openColonies.map(colony => new SelectOption(
             colony.name + " - (" + colony.description + ")", 
@@ -26,6 +24,7 @@ export class SelectTradeColony implements PlayerInterrupt {
                 return undefined;
             }
         ));
-       this.playerInput = selectColony;
+
+        return selectColony;
     };
 }    

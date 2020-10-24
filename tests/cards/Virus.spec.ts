@@ -32,19 +32,18 @@ describe("Virus", function () {
         expect(player.getResourcesOnCard(birds)).to.eq(0);
 
         orOptions.options[1].cb();
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
         
-        game.interrupts[0].generatePlayerInput?.();
-        const action = game.interrupts[0].playerInput as OrOptions;
-        action.options[0].cb();
+        const orOptions2 = game.deferredActions[0].execute() as OrOptions;
+        orOptions2.options[0].cb();
         expect(player.plants).to.eq(0);
     });
 
     it("Can play when no other player has resources", function () {
         player.plants = 5;
         expect(card.play(player, game)).to.eq(undefined)
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
         expect(player.plants).to.eq(5);
     });
 

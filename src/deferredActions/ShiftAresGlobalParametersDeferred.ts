@@ -1,17 +1,26 @@
-import { PlayerInterrupt } from "./PlayerInterrupt";
-import { PlayerInput } from "../PlayerInput";
+import { DeferredAction } from "./DeferredAction";
 import { Player } from "../Player";
-import { ShiftAresGlobalParameters } from "../inputs/ShiftAresGlobalParameters";
+import { IAresGlobalParametersResponse, ShiftAresGlobalParameters } from "../inputs/ShiftAresGlobalParameters";
 import { Game } from "../Game";
 import { AresHandler } from "../ares/AresHandler";
+import { PlayerInput } from "../PlayerInput";
 
-export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
-    public playerInput: PlayerInput;
-    constructor(public game: Game, public player: Player) {
-        let pi : PlayerInput | undefined = undefined;
-        AresHandler.ifAres(game, aresData => {
+        // AresHandler.ifAres(game, aresData => {
+        //     pi = new ShiftAresGlobalParameters(
+        //         player,
+        //         aresData,
+        //         (response: IAresGlobalParametersResponse) => {
+        //             const hazardData = aresData.hazardData;
+    
+export class ShiftAresGlobalParametersDeferred implements DeferredAction {
+    constructor(
+        private game: Game,
+        public player: Player){ }
+    public execute() {
+        let pi: PlayerInput | undefined = undefined;
+        AresHandler.ifAres(this.game, aresData => {
             pi = new ShiftAresGlobalParameters(
-                player,
+                this.player,
                 aresData,
                 (response: IAresGlobalParametersResponse) => {
                     const hazardData = aresData.hazardData;
@@ -27,32 +36,25 @@ export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
                     if (hazardData.severeDustStormOxygen.available) {
                         hazardData.severeDustStormOxygen.threshold += response.oxygenDelta;
                     }
-    
+
                     // Basically the order is irrelevant, but evaluating the severe erosions
                     // first reduces the visual impact on players when this action simultaneously
                     // reveals erosions and makes them severe.
                     if (response.temperatureDelta !== 0) {
-                        AresHandler.onTemperatureChange(game, aresData);
+                        AresHandler.onTemperatureChange(this.game, aresData);
                     }
                     if (response.oxygenDelta !== 0) {
-                        AresHandler.onOxygenChange(game, aresData);
+                        AresHandler.onOxygenChange(this.game, aresData);
                     }
                     if (response.lowOceanDelta !== 0 || response.highOceanDelta !== 0) {
-                        AresHandler.onOceanPlaced(game, aresData, player);
+                        AresHandler.onOceanPlaced(this.game, aresData, this.player);
                     }
                     return undefined;
                 });
-        });
+            });
         if (pi === undefined) {
             throw new Error("Should not reach.");
         }
-        this.playerInput = pi;
+        return pi;
     };
-}
-
-export interface IAresGlobalParametersResponse {
-  lowOceanDelta: -1 | 0 | 1;
-  highOceanDelta:  -1 | 0 | 1;
-  temperatureDelta:  -1 | 0 | 1;
-  oxygenDelta:  -1 | 0 | 1;
 }

@@ -24,10 +24,9 @@ describe("ImpactorSwarm", function () {
     it("Should be able to remove plants from other player", function () {
         player2.plants = 2;
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player2.plants).to.eq(0);
         expect(player.heat).to.eq(12);

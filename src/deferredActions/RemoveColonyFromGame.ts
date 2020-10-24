@@ -1,19 +1,17 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
-import { PlayerInterrupt } from "./PlayerInterrupt";
 import { ColonyName } from "../colonies/ColonyName";
 import { SelectColony } from "../inputs/SelectColony";
 import { ColonyModel } from "../models/ColonyModel";
+import { DeferredAction } from "./DeferredAction";
 
-export class SelectRemoveColony implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class RemoveColonyFromGame implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         let coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(this.game.colonies);
         let removeColony = new SelectColony("Select colony to remove", "Remove colony", coloniesModel, (colonyName: ColonyName) => {
             this.game.colonies.forEach(colony => {
@@ -27,6 +25,6 @@ export class SelectRemoveColony implements PlayerInterrupt {
             return undefined;
         });
 
-        this.playerInput = removeColony;
+        return removeColony;
     }
 }    

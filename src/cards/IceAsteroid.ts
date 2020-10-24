@@ -7,6 +7,7 @@ import { CardName } from '../CardName';
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class IceAsteroid implements IProjectCard {
     public cost: number = 23;
@@ -27,8 +28,8 @@ export class IceAsteroid implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addOceanInterrupt(player, "Select space for first ocean");
-        game.addOceanInterrupt(player, "Select space for second ocean");
+        game.defer(new PlaceOceanTile(player, game, "Select space for first ocean"));
+        game.defer(new PlaceOceanTile(player, game, "Select space for second ocean"));
         return undefined;
     }
 }

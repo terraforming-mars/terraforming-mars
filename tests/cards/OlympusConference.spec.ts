@@ -1,5 +1,7 @@
 import { expect } from "chai";
 import { OlympusConference } from "../../src/cards/OlympusConference";
+import { MarsUniversity } from "../../src/cards/MarsUniversity";
+import { ScienceTagCard } from "../../src/cards/community/ScienceTagCard";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
@@ -68,5 +70,50 @@ describe("OlympusConference", function () {
         expect(player.cardsInHand.length).to.eq(1);
 
         expect(game.deferredActions.length).to.eq(0);
+    });
+
+    it("Triggers before Mars University", function() {
+        const marsUniversity = new MarsUniversity();
+        const scienceTagCard = new ScienceTagCard();
+
+        // Olypus Conference played before Mars University
+        player.playedCards.push(card);
+        player.playedCards.push(marsUniversity);
+        card.resourceCount = 1;
+
+        // Play a 1 science tag card
+        player.playCard(game, scienceTagCard);
+
+        // OC asking to draw & MU asking to discard
+        expect(game.deferredActions.length).to.eq(2);
+
+        // OC's trigger should be the first one
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        game.deferredActions.shift();
+        orOptions.options[1].cb();
+        expect(card.resourceCount).to.eq(2);
+
+
+        // Reset the state
+        game.deferredActions = [];
+        player.playedCards = [];
+
+
+        // Mars University played before Olympus Conference
+        player.playedCards.push(marsUniversity);
+        player.playedCards.push(card);
+        card.resourceCount = 1;
+
+        // Play a 1 science tag card
+        player.playCard(game, scienceTagCard);
+
+        // OC asking to draw & MU asking to discard
+        expect(game.deferredActions.length).to.eq(2);
+
+        // OC's trigger should be the first one
+        const orOptions2 = game.deferredActions[0].execute() as OrOptions;
+        game.deferredActions.shift();
+        orOptions2.options[1].cb();
+        expect(card.resourceCount).to.eq(2);
     });
 });

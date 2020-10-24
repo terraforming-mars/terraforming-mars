@@ -50,16 +50,19 @@ export class PharmacyUnion implements CorporationCard {
                     player,
                     () => {
                         const orOptions = new OrOptions(
-                            new SelectOption("Turn it face down, gain 3 TR and lose 4 MC", "Confirm", () => {
+                            new SelectOption("Turn it face down to gain 3 TR and lose up to 4 MC", "Confirm", () => {
+                                const megaCreditsLost = player.megaCredits > 4 ? 4 : player.megaCredits;
                                 this.isDisabled = true;
                                 player.increaseTerraformRatingSteps(3, game);
-                                player.megaCredits = Math.max(player.megaCredits - 4, 0)
-                                game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                                player.megaCredits -= megaCreditsLost;
+                                game.log("${0} turned ${1} face down to gain 3 TR and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
                                 return undefined;
                             }),
-                            new SelectOption("Add a disease to it and lose 4 MC, then remove it to gain 1 TR", "Confirm", () => {
+                            new SelectOption("Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR", "Confirm", () => {
+                                const megaCreditsLost = player.megaCredits > 4 ? 4 : player.megaCredits;
                                 player.increaseTerraformRating(game);
-                                player.megaCredits = Math.max(player.megaCredits - 4, 0)
+                                player.megaCredits -= megaCreditsLost;
+                                game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
                                 game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
                                 return undefined;
                             })
@@ -76,8 +79,10 @@ export class PharmacyUnion implements CorporationCard {
         if (hasMicrobesTag) {
             const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
             const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
+            const megaCreditsLost = player.megaCredits > microbeTagCount * 4 ? microbeTagCount * 4 : player.megaCredits;
             player.addResourceTo(this, microbeTagCount);
-            player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
+            player.megaCredits -= megaCreditsLost;
+            game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
         }
             
         if (isPharmacyUnion && hasScienceTag) {

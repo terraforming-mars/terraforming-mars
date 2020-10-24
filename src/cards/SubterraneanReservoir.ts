@@ -3,10 +3,11 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class SubterraneanReservoir implements IProjectCard {
     public cost: number = 11;
@@ -26,7 +27,7 @@ export class SubterraneanReservoir implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addOceanInterrupt(player);
+        game.defer(new PlaceOceanTile(player, game));
         return undefined;
     }
 }

@@ -1,10 +1,10 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
+import { RemoveAnyPlants } from "../../deferredActions/RemoveAnyPlants";
 
 export class ImpactorSwarm implements IProjectCard {
     public cost: number = 11;
@@ -17,7 +17,7 @@ export class ImpactorSwarm implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
+        game.defer(new RemoveAnyPlants(player, game, 2));
         player.heat += 12;
         return undefined;
     }

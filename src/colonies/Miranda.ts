@@ -3,6 +3,7 @@ import { Player } from "../Player";
 import { ColonyName } from "./ColonyName";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
+import { AddResourcesToCard } from "../deferredActions/AddResourcesToCard";
 
 export class Miranda extends Colony implements IColony {
     public name = ColonyName.MIRANDA;
@@ -21,12 +22,12 @@ export class Miranda extends Colony implements IColony {
             animals = 3;
         }
 
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, animals);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, animals));
         if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, 1));
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {

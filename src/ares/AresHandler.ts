@@ -12,11 +12,14 @@ import { TileType } from "../TileType";
 import { ITile } from "../ITile";
 import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
-import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
 import { Phase } from "../Phase";
+import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { AddResourcesToCard } from "../deferredActions/AddResourcesToCard";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
+import { SelectProductionToLoseDeferred } from "../deferredActions/SelectProductionToLoseDeferred";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -97,19 +100,19 @@ export class AresHandler {
             } else if (availableCards.length === 1) {
                 player.addResourceTo(availableCards[0]);
             } else if (availableCards.length > 1) {
-                game.addInterrupt({
-                player: player,
-                playerInput:
-                    new SelectCard(
-                    "Select a card to add an " + resourceAsText,
-                    "Add " + resourceAsText + "s",
-                    availableCards,
-                    (selected: ICard[]) => {
-                        player.addResourceTo(selected[0]);
-                        LogHelper.logAddResource(game, player, selected[0], 1);
-                        return undefined;
-                    })
-                });
+                game.defer(new SimpleDeferredAction(
+                    player,
+                    () => new SelectCard(
+                        "Select a card to add an " + resourceAsText,
+                        "Add " + resourceAsText + "s",
+                        availableCards,
+                        (selected: ICard[]) => {
+                            player.addResourceTo(selected[0]);
+                            LogHelper.logAddResource(game, player, selected[0], 1);
+                            return undefined;
+                        }
+                    )
+                ));
             }
         };
     
@@ -197,12 +200,12 @@ export class AresHandler {
         });
         [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
             if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
-                game.addResourceInterrupt(
+                game.defer(new AddResourcesToCard(
                     player,
+                    game,
                     resourceType,
-                    1,
-                    undefined,
-                );
+                    1
+                ));
             }
         });
     } 
@@ -319,12 +322,12 @@ export class AresHandler {
 
         if (cost.production > 0) {
             // TODO(kberg): don't send interrupt if total is available.
-            game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
+            game.defer(new SelectProductionToLoseDeferred(player, cost.production));
         }
         if (cost.megacredits > 0) {
             game.log("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
 
-            game.addSelectHowToPayInterrupt(player, cost.megacredits, false, false, "Select how to pay additional placement costs.");
+            game.defer(new SelectHowToPayDeferred(player, cost.megacredits, false, false, "Select how to pay additional placement costs."));
         }
     }
 

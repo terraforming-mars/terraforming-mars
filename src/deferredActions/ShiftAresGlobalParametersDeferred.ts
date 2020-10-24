@@ -1,18 +1,20 @@
-import { PlayerInterrupt } from "./PlayerInterrupt";
-import { PlayerInput } from "../PlayerInput";
+import { DeferredAction } from "./DeferredAction";
 import { Player } from "../Player";
-import { ShiftAresGlobalParameters } from "../inputs/ShiftAresGlobalParameters";
+import { IAresGlobalParametersResponse, ShiftAresGlobalParameters } from "../inputs/ShiftAresGlobalParameters";
 import { Game } from "../Game";
 import { AresHandler } from "../ares/AresHandler";
 
-export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
-    public playerInput: PlayerInput;
-    constructor(public game: Game, public player: Player){
-        this.playerInput = new ShiftAresGlobalParameters(
-            player,
-            game.aresData!,
+export class ShiftAresGlobalParametersDeferred implements DeferredAction {
+    constructor(
+        private game: Game,
+        public player: Player){ }
+    public execute() {
+        return new ShiftAresGlobalParameters(
+            this.player,
+            // TODO(kberg): drop this aresData!
+            this.game.aresData!,
             (response: IAresGlobalParametersResponse) => {
-                const hazardData = game.aresData!.hazardData;
+                const hazardData = this.game.aresData!.hazardData;
                 if (hazardData.erosionOceanCount.available) {
                     hazardData.erosionOceanCount.threshold += response.lowOceanDelta;
                 }
@@ -30,22 +32,15 @@ export class ShiftAresGlobalParametersInterrupt implements PlayerInterrupt {
                 // first reduces the visual impact on players when this action simultaneously
                 // reveals erosions and makes them severe.
                 if (response.temperatureDelta !== 0) {
-                    AresHandler.onTemperatureChange(game);
+                    AresHandler.onTemperatureChange(this.game);
                 }
                 if (response.oxygenDelta !== 0) {
-                    AresHandler.onOxygenChange(game);
+                    AresHandler.onOxygenChange(this.game);
                 }
                 if (response.lowOceanDelta !== 0 || response.highOceanDelta !== 0) {
-                    AresHandler.onOceanPlaced(game, player);
+                    AresHandler.onOceanPlaced(this.game, this.player);
                 }
                 return undefined;
             });
     };
-}
-
-export interface IAresGlobalParametersResponse {
-  lowOceanDelta: -1 | 0 | 1;
-  highOceanDelta:  -1 | 0 | 1;
-  temperatureDelta:  -1 | 0 | 1;
-  oxygenDelta:  -1 | 0 | 1;
 }

@@ -27,8 +27,8 @@ describe("CrashSiteCleanup", function () {
         const smallAsteroid = new SmallAsteroid();
         smallAsteroid.play(player, game);
         // Choose Remove 1 plant option
-        game.interrupts[0].generatePlayerInput?.();
-        (game.interrupts[0].playerInput as OrOptions).options[0].cb([player2]);
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        orOptions.options[0].cb([player2]);
 
         expect(card.canPlay(player, game)).to.eq(true);
         expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
@@ -44,6 +44,10 @@ describe("CrashSiteCleanup", function () {
         game = new Game("foobar", [player], player);
         const smallAsteroid = new SmallAsteroid();
         smallAsteroid.play(player, game);
+
+        // Trigger plants removal
+        expect(game.deferredActions.length).to.eq(1);
+        game.deferredActions[0].execute();
 
         expect(card.canPlay(player, game)).to.eq(true);
         expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);

@@ -1,4 +1,3 @@
-
 import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -9,6 +8,7 @@ import { TileType } from "../TileType";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { CardName } from "../CardName";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class RestrictedArea implements IActionCard, IProjectCard {
@@ -21,8 +21,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getAvailableSpacesOnLand(player).length > 0;
-      }
-
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.RESTRICTED_AREA });
@@ -34,7 +33,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
         return player.canAfford(2);
     }
     public action(player: Player, game: Game) {
-        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for action");
+        game.defer(new SelectHowToPayDeferred(player, 2, false, false, "Select how to pay for action"));
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }

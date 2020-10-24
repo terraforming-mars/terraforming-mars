@@ -3,8 +3,8 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { ButterflyEffect } from "../../../src/cards/ares/ButterflyEffect";
 import { expect } from "chai";
-import { ShiftAresGlobalParametersInterrupt } from "../../../src/interrupts/ShiftAresGlobalParametersInterrupt";
 import { ARES_OPTIONS_WITH_HAZARDS } from "../../ares/AresTestHelper";
+import { ShiftAresGlobalParameters } from "../../../src/inputs/ShiftAresGlobalParameters";
 
 describe("ButterflyEffect", function () {
     let card: ButterflyEffect, player: Player, game: Game;
@@ -19,8 +19,6 @@ describe("ButterflyEffect", function () {
         const priorTerraformingRating = player.getTerraformRating();
         card.play(player, game);
         expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
-        const interrupt = game.interrupts[0];
-        expect(interrupt).instanceOf(ShiftAresGlobalParametersInterrupt);
 
         const originalHazardData = game.aresData!.hazardData;
         expect(originalHazardData.erosionOceanCount.threshold).eq(3);
@@ -28,7 +26,8 @@ describe("ButterflyEffect", function () {
         expect(originalHazardData.severeErosionTemperature.threshold).eq(-4);
         expect(originalHazardData.severeDustStormOxygen.threshold).eq(5);
 
-        (interrupt as ShiftAresGlobalParametersInterrupt).playerInput.cb(
+        const input = game.deferredActions[0].execute() as ShiftAresGlobalParameters;
+        input.cb(
             {
                 lowOceanDelta: -1,
                 highOceanDelta: 1,

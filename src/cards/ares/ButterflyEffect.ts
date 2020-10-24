@@ -1,10 +1,10 @@
 import { CardName } from "../../CardName";
+import { ShiftAresGlobalParametersDeferred } from "../../deferredActions/ShiftAresGlobalParametersDeferred";
 import { Game } from "../../Game";
 import { Player } from "../../Player";
 import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { ShiftAresGlobalParametersInterrupt } from "../../interrupts/ShiftAresGlobalParametersInterrupt";
 
 export class ButterflyEffect implements IProjectCard {
     public cost: number = 8;
@@ -13,7 +13,7 @@ export class ButterflyEffect implements IProjectCard {
     public name: CardName = CardName.BUTTERFLY_EFFECT;
     public play(player: Player, game: Game) {
       player.increaseTerraformRating(game);
-      game.addInterrupt(new ShiftAresGlobalParametersInterrupt(game, player));
+      game.defer(new ShiftAresGlobalParametersDeferred(game, player));
       return undefined;
     }
 }

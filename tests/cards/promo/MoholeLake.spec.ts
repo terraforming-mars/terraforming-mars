@@ -21,9 +21,8 @@ describe("MoholeLake", function () {
     it("Can play", function () {
         card.play(player, game);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        let selectSpace = game.interrupts[0].playerInput as SelectSpace;
+        expect(game.deferredActions.length).to.eq(1);
+        const selectSpace = game.deferredActions[0].execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         
         expect(game.getTemperature()).to.eq(-28);

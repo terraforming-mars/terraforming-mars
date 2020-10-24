@@ -1,11 +1,11 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Hackers implements IProjectCard {
     public cost: number = 3;
@@ -19,7 +19,7 @@ export class Hackers implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addResourceProductionDecreaseInterrupt(player, Resources.MEGACREDITS, 2);
+        game.defer(new DecreaseAnyProduction(player, game, Resources.MEGACREDITS, 2));
         player.addProduction(Resources.MEGACREDITS,2);
         player.addProduction(Resources.ENERGY,-1);
         return undefined;

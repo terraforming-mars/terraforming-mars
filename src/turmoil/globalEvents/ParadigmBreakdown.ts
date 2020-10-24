@@ -1,10 +1,10 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { Turmoil } from '../Turmoil';
-import { SelectDiscard } from '../../interrupts/SelectDiscard';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Resources } from "../../Resources";
+import { Turmoil } from "../Turmoil";
+import { DiscardCards } from "../../deferredActions/DiscardCards";
 
 export class ParadigmBreakdown implements IGlobalEvent {
     public name = GlobalEventName.PARADIGM_BREAKDOWN;
@@ -14,10 +14,9 @@ export class ParadigmBreakdown implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
             if (player.cardsInHand.length >= 2) {
-                game.addInterrupt(new SelectDiscard(player, game, 'Global Event - Select a card to discard'));
-                game.addInterrupt(new SelectDiscard(player, game, 'Global Event - Select a card to discard'));
-            } else if (player.cardsInHand.length >= 1) {
-                game.addInterrupt(new SelectDiscard(player, game, 'Global Event - Select a card to discard'));
+                game.defer(new DiscardCards(player, game, 2, "Global Event - Select 2 cards to discard"));
+            } else if (player.cardsInHand.length == 1) {
+                game.defer(new DiscardCards(player, game, 1, "Global Event - Select a card to discard"));
             }
             player.setResource(Resources.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), game, undefined, true);
         });    

@@ -2,11 +2,12 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { ALL_PARTIES } from "../../turmoil/Turmoil";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
+import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
 
 export class ByElection extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.WILDCARD];
@@ -30,7 +31,10 @@ export class ByElection extends PreludeCard implements IProjectCard {
             })
         )];
 
-        game.addInterrupt({ player, playerInput: setRulingParty });
+        game.defer(new SimpleDeferredAction(
+            player,
+            () => setRulingParty
+        ));
 
         return undefined;
     }

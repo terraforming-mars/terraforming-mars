@@ -3,10 +3,11 @@ import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class IceCapMelting implements IProjectCard {
     public cost: number = 5;
@@ -18,13 +19,13 @@ export class IceCapMelting implements IProjectCard {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
+            return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
         }
     
         return meetsTemperatureRequirements;
     }
     public play(player: Player, game: Game) {
-        game.addOceanInterrupt(player);
+        game.defer(new PlaceOceanTile(player, game));
         return undefined;
     }
 }

@@ -11,6 +11,7 @@ import { TileType } from "../../TileType";
 import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class BiofertilizerFacility implements IProjectCard {
     public cost: number = 12;
@@ -25,11 +26,7 @@ export class BiofertilizerFacility implements IProjectCard {
     public play(player: Player, game: Game) {
         player.addProduction(Resources.PLANTS, 1);
 
-        game.addResourceInterrupt(
-            player,
-            ResourceType.MICROBE,
-            2,
-            undefined);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, 2));
 
         return new SelectSpace(
             "Select space for Biofertilizer Facility tile",

@@ -37,14 +37,50 @@ export class PharmacyUnion implements CorporationCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
         if (this.isDisabled) return undefined;
 
-        if (card.tags.includes(Tags.MICROBES)) {
+        const hasScienceTag = card.tags.includes(Tags.SCIENCE);
+        const hasMicrobesTag = card.tags.includes(Tags.MICROBES);
+        const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
+        // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
+        if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
+            // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
+            if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === true) {
+                game.defer(new SimpleDeferredAction(
+                    player,
+                    () => {
+                        const orOptions = new OrOptions(
+                            new SelectOption("Turn it face down, gain 3 TR and lose 4 MC", "Confirm", () => {
+                                this.isDisabled = true;
+                                player.increaseTerraformRatingSteps(3, game);
+                                player.megaCredits = Math.max(player.megaCredits - 4, 0)
+                                game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                                return undefined;
+                            }),
+                            new SelectOption("Add a disease to it and lose 4 MC, then remove it to gain 1 TR", "Confirm", () => {
+                                player.increaseTerraformRating(game);
+                                player.megaCredits = Math.max(player.megaCredits - 4, 0)
+                                game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
+                                return undefined;
+                            })
+                        );
+                        orOptions.title = "Choose the order of tag resolution for Pharmacy Union";
+                        return orOptions;
+                    }
+                ));
+                return undefined;
+            }
+        }
+
+
+        if (hasMicrobesTag) {
             const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
             const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
             player.addResourceTo(this, microbeTagCount);
             player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
         }
             
-        if (player.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
+        if (isPharmacyUnion && hasScienceTag) {
             const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
             for (let i = 0; i < scienceTags; i++) {
                 game.defer(new SimpleDeferredAction(
@@ -52,7 +88,6 @@ export class PharmacyUnion implements CorporationCard {
                     () => {
                         if (this.isDisabled) return undefined;
 
-                        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
                         if (this.resourceCount > 0) {
                             if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST) === false) {
                                 // TODO (Lynesth): Remove this when #1670 is fixed

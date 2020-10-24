@@ -6,6 +6,7 @@ import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class Airliners implements IProjectCard {
     public cost: number = 11;
@@ -18,9 +19,9 @@ export class Airliners implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      player.addProduction(Resources.MEGACREDITS, 2);
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
-      return undefined;
+        player.addProduction(Resources.MEGACREDITS, 2);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        return undefined;
     }
     public getVictoryPoints() {
         return 1;

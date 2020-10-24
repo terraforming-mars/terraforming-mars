@@ -33,7 +33,7 @@ describe("Astrodrill", function () {
         const spendAsteroidOption = action.options[0];
         spendAsteroidOption.cb();
         expect(player.titanium).to.eq(3);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions.length).to.eq(0);
     });
 
     it("Should play - can add asteroid resource to self", function () {

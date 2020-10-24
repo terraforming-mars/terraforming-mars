@@ -10,14 +10,12 @@ import { TileType } from "../../src/TileType";
 import { ITile } from "../../src/ITile";
 import { SpaceType } from "../../src/SpaceType";
 import { Resources } from "../../src/Resources";
-import { SelectProductionToLoseInterrupt } from "../../src/interrupts/SelectProductionToLoseInterrupt";
 import { SelectProductionToLose } from "../../src/inputs/SelectProductionToLose";
 import { IProductionUnits } from "../../src/inputs/IProductionUnits";
 import { OriginalBoard } from "../../src/OriginalBoard";
 import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
 import { Phase } from "../../src/Phase";
-import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -89,8 +87,7 @@ describe("AresHandler", function () {
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-        selectHowToPay.generatePlayerInput();
+        game.deferredActions[0].execute();
 
         // player who placed next to Nuclear zone, loses two money.
         expect(player.megaCredits).is.eq(0);
@@ -133,11 +130,7 @@ describe("AresHandler", function () {
 
         player.addProduction(Resources.PLANTS, 7);
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        expect(game.interrupts).has.lengthOf(1);
-        expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
-
-        const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
-        const input = interrupt.playerInput as SelectProductionToLose;
+        const input = game.deferredActions[0].execute() as SelectProductionToLose;
         expect(input.unitsToLose).eq(1);
         input.cb({ plants: 1 } as IProductionUnits)
         expect(player.getProduction(Resources.PLANTS)).eq(6);
@@ -159,11 +152,8 @@ describe("AresHandler", function () {
 
         player.addProduction(Resources.PLANTS, 7);
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        expect(game.interrupts).has.lengthOf(1);
-        expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
 
-        const interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
-        const input = interrupt.playerInput as SelectProductionToLose;
+        const input = game.deferredActions[0].execute() as SelectProductionToLose;
         expect(input.unitsToLose).eq(2);
         input.cb({ plants: 2 } as IProductionUnits)
         expect(player.getProduction(Resources.PLANTS)).eq(5);
@@ -176,8 +166,7 @@ describe("AresHandler", function () {
         expect(player.getTerraformRating()).eq(20);
 
         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-        selectHowToPay.generatePlayerInput();
+        game.deferredActions[0].execute();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);
@@ -191,8 +180,7 @@ describe("AresHandler", function () {
         expect(player.getTerraformRating()).eq(20);
 
         game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
-        selectHowToPay.generatePlayerInput();
+        game.deferredActions[0].execute();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);
@@ -384,7 +372,7 @@ describe("AresHandler", function () {
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
         // Not asking you which production to lose.
-        expect(game.interrupts).has.lengthOf(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("No hazard coverage cost or bonus during WGT", function() {

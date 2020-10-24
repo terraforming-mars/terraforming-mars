@@ -2,13 +2,14 @@ import { expect } from "chai";
 import { EcologyResearch } from "../../../src/cards/colonies/EcologyResearch";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
-import { Luna } from '../../../src/colonies/Luna';
+import { Game, GameOptions } from "../../../src/Game";
+import { Luna } from "../../../src/colonies/Luna";
 import { Resources } from "../../../src/Resources";
 import { Tardigrades } from "../../../src/cards/Tardigrades";
 import { Fish } from "../../../src/cards/Fish";
 import { Ants } from "../../../src/cards/Ants";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { ICard } from "../../../src/cards/ICard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("EcologyResearch", function () {
@@ -38,6 +39,14 @@ describe("EcologyResearch", function () {
         player.playedCards.push(tardigrades, fish);
 
         card.play(player, game);
+        expect(game.deferredActions.length).to.eq(2);
+        const input = game.deferredActions[0].execute();
+        game.deferredActions.shift();
+        expect(input).to.eq(undefined);
+        const input2 = game.deferredActions[0].execute();
+        game.deferredActions.shift();
+        expect(input2).to.eq(undefined);
+
         expect(tardigrades.resourceCount).to.eq(2);
         expect(fish.resourceCount).to.eq(1);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
@@ -49,12 +58,11 @@ describe("EcologyResearch", function () {
         player.playedCards.push(tardigrades, ants);
 
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
         // add two microbes to Ants
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.generatePlayerInput?.();
-        selectResourceInterrupt.playerInput?.cb([ants]);
+        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        selectCard.cb([ants]);
         
         expect(ants.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);

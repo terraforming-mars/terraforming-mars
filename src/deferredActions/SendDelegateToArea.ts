@@ -1,12 +1,11 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player, PlayerId } from "../Player";
-import { PlayerInterrupt } from "./PlayerInterrupt";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
+import { DeferredAction } from "./DeferredAction";
+import { SelectHowToPayDeferred } from "./SelectHowToPayDeferred";
 
-export class SelectParty implements PlayerInterrupt {
-    public playerInput?: PlayerInput;
+export class SendDelegateToArea implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
@@ -17,7 +16,7 @@ export class SelectParty implements PlayerInterrupt {
         public fromLobby: boolean = true
     ){}
 
-    public generatePlayerInput() {
+    public execute() {
         const sendDelegate = new OrOptions();
         // Change the default title
         sendDelegate.title = this.title;
@@ -40,11 +39,10 @@ export class SelectParty implements PlayerInterrupt {
 
         sendDelegate.options = parties.map(party => new SelectOption(
             party.name + " - (" + party.description + ")",
-
             "Send delegate",
             () => {
                 if (this.price) {
-                    this.game.addSelectHowToPayInterrupt(this.player, this.price, false, false, "Select how to pay for send delegate action");
+                    this.game.defer(new SelectHowToPayDeferred(this.player, this.price, false, false, "Select how to pay for send delegate action"));
                 }
 
                 if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis
@@ -66,6 +64,6 @@ export class SelectParty implements PlayerInterrupt {
             }
         ));
 
-        this.playerInput = sendDelegate;
+        return sendDelegate;
     }
 }    

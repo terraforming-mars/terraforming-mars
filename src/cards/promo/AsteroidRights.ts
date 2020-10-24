@@ -11,6 +11,7 @@ import { LogHelper } from '../../components/LogHelper';
 import { SelectCard } from '../../inputs/SelectCard';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.ASTEROID_RIGHTS;
@@ -60,7 +61,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
         });
 
         const addAsteroidToSelf = new SelectOption("Add 1 asteroid to this card", "Add asteroid", () => {
-            game.addSelectHowToPayInterrupt(player, 1, false, false, "Select how to pay for asteroid");
+            game.defer(new SelectHowToPayDeferred(player, 1, false, false, "Select how to pay for asteroid"));
             player.addResourceTo(this);
             LogHelper.logAddResource(game, player, this);
 
@@ -72,7 +73,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
             "Add asteroid",
             asteroidCards,
             (foundCards: Array<ICard>) => {
-                game.addSelectHowToPayInterrupt(player, 1, false, false, "Select how to pay for asteroid");
+                game.defer(new SelectHowToPayDeferred(player, 1, false, false, "Select how to pay for asteroid"));
                 player.addResourceTo(foundCards[0], 1);
                 LogHelper.logAddResource(game, player, foundCards[0]);
 

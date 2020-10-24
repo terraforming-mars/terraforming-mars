@@ -604,6 +604,8 @@ function getPlayer(player: Player, game: Game): string {
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: game.getPassedPlayers(),
+        aresExtension: game.gameOptions.aresExtension,
+        aresData: game.aresData,
         preludeExtension: game.gameOptions.preludeExtension,
     };
     return JSON.stringify(output);
@@ -958,6 +960,9 @@ function getColor(space: ISpace): Color | undefined {
         space.player !== undefined
     ) {
         return space.player.color;
+    }
+    if (space.tile?.protectedHazard === true) {
+        return Color.BRONZE;
     }
     return undefined;
 }

@@ -58,6 +58,7 @@ import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { RandomMAOptionType } from "./RandomMAOptionType";
 import { AresHandler } from "./ares/AresHandler";
 import { IAresData } from "./ares/IAresData";
+import { Multiset } from "./utils/Multiset";
 
 export interface Score {
   corporation: String;
@@ -192,7 +193,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA, gameOptions.aresExtension);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
 
@@ -382,7 +383,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName, randomMA: RandomMAOptionType, hasVenus: boolean, hasAres: boolean): Board {
+    public boardConstructor(boardName: BoardName, randomMA: RandomMAOptionType, hasVenus: boolean): Board {
       const chooseMilestonesAndAwards = function(game: Game, milestones: Array<IMilestone>, awards: Array<IAward>) {
         const requiredQty = 5;
         if (randomMA !== RandomMAOptionType.NONE) {
@@ -391,9 +392,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.milestones.push(...milestones);
           game.awards.push(...awards);
         }
-        if (hasAres) {
+        AresHandler.ifAres(game, () => {
           AresHandler.setupMilestonesAwards(game);
-        }
+        });
       }
 
       if (boardName === BoardName.ELYSIUM) {
@@ -1213,9 +1214,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
         return this.increaseTemperature(player, 1);
       }
-      if (this.gameOptions.aresExtension) {
-        AresHandler.onOxygenChange(this);
-      }
+      AresHandler.ifAres(this, (aresData) => {
+        AresHandler.onOxygenChange(this, aresData);
+      });
       return undefined;
     }
 
@@ -1314,9 +1315,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       ) {
         this.defer(new PlaceOceanTile(player, this, "Select space for ocean from temperature increase"));
       }
-      if (this.gameOptions.aresExtension) {
-        AresHandler.onTemperatureChange(this);
-      }
+      AresHandler.ifAres(this, (aresData) => {
+        AresHandler.onTemperatureChange(this, aresData);
+      });
 
       return undefined;
     }
@@ -1392,21 +1393,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
-      if (this.gameOptions.aresExtension) {
+      AresHandler.ifAres(this, () => {
         if (!AresHandler.canCover(space, tile)) {
           throw new Error("Selected space is occupied: " + space.id);
         }
-      }
+      });
 
-      if (this.gameOptions.aresExtension) {
+      AresHandler.ifAres(this, () => {
         AresHandler.assertCanPay(this, player, space);
-      }
+      });
 
       // Part 2. Collect additional fees.
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
-      if (this.gameOptions.aresExtension) {
+      AresHandler.ifAres(this, () => {
         AresHandler.payAdjacencyAndHazardCosts(this, player, space);
-      }
+      });
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE
@@ -1422,7 +1423,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 3. Setup for bonuses
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
-      const startingResources = this.gameOptions.aresExtension ? AresHandler.beforeTilePlacement(player) : undefined;
+      let startingResources: Multiset<Resources | ResourceType> | undefined = undefined;
+      AresHandler.ifAres(this, () => {
+        startingResources = AresHandler.beforeTilePlacement(player);
+      });
       const initialTileTypeForAres = space.tile?.tileType;
       const coveringExistingTile = space.tile !== undefined;
 
@@ -1446,9 +1450,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
 
-        if (this.gameOptions.aresExtension) {
-          AresHandler.earnAdjacencyBonuses(this, player, space);
-        }
+        AresHandler.ifAres(this, (aresData) => {
+          AresHandler.earnAdjacencyBonuses(this, aresData, player, space);
+        });
 
         PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
 
@@ -1476,12 +1480,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
 
-      if (this.gameOptions.aresExtension) {
+      AresHandler.ifAres(this, () => {
         AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
 
         // Must occur after all other onTilePlaced operations.
         AresHandler.afterTilePlacement(this, player, startingResources);
-      }
+      });
     }
 
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
@@ -1532,9 +1536,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRating(this);
       }
-      if (this.gameOptions.aresExtension) {
-        AresHandler.onOceanPlaced(this, player);
-      }
+      AresHandler.ifAres(this, (aresData) => {
+        AresHandler.onOceanPlaced(this, aresData, player);
+      });
     }
 
     public removeTile(spaceId: string): void {

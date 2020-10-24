@@ -19,7 +19,7 @@ class AlertDialog {
 }
 
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify", "aresExtension"],
+    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify", "aresExtension", "aresData"],
     components: {
         "board-space": BoardSpace
     },
@@ -147,6 +147,15 @@ export const Board = Vue.component("board", {
             </div>
 
             <div class="global-numbers-oceans" v-html="oceansValue()">
+            </div>
+
+            <div v-if="aresExtension">
+                <div class="global-numbers-ares-erosions" v-if="aresData.hazardData.removeDustStormsOceanCount.available">
+                    <div class="global-ares-erosions"> {{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.erosionOceanCount.available">
+                    <div class="global-numbers-ares-remove-dust-storms">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
+                </div>
             </div>
         </div>
 

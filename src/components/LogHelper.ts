@@ -5,7 +5,6 @@ import { Resources } from "../Resources";
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
 import { IColony } from "../colonies/Colony";
-import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
 export class LogHelper {
     static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {
@@ -80,11 +79,9 @@ export class LogHelper {
             b.player(player).string(action).string(description).number(row).number(position));
     }
 
-    static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {
-        const stepsIncreased = Math.min(player.colonyTradeOffset, MAX_COLONY_TRACK_POSITION - colony.trackPosition);
-        
+    static logColonyTrackIncrease(game: Game, player: Player, colony: IColony, steps: number = 1) {
         game.log("${0} increased ${1} colony track ${2} step(s)", b =>
-            b.player(player).colony(colony).number(stepsIncreased));
+            b.player(player).colony(colony).number(steps));
     }
 
     static logTRIncrease(game: Game, player: Player, steps: number) {

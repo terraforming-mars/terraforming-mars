@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -9,6 +8,7 @@ import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { IResourceCard } from "./ICard";
+import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
 
 export class OlympusConference implements IProjectCard, IResourceCard {
     public cost: number = 10;
@@ -18,36 +18,31 @@ export class OlympusConference implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
-    private runInterrupts(player: Player, game: Game, scienceTags: number): void {
-
-      // No science tags
-      if (scienceTags <= 0) {
-        return;
-      }
-
-      // Can't remove a resource
-      if (this.resourceCount === 0) {
-        this.resourceCount++;
-        this.runInterrupts(player, game, scienceTags - 1);
-        return;
-      }
-
-      game.addInterrupt({ player, playerInput: new OrOptions(
-        new SelectOption("Remove a science resource from this card to draw a card", "Remove resource", () => {
-          player.removeResourceFrom(this);
-          player.cardsInHand.push(game.dealer.dealCard());
-          this.runInterrupts(player, game, scienceTags - 1);
-          return undefined;
-        }),
-        new SelectOption("Add a science resource to this card", "Add resource", () => {
-          this.resourceCount++;
-          this.runInterrupts(player, game, scienceTags - 1);
-          return undefined;
-        })
-      ) });
-    }
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
+        const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+        for (let i = 0; i < scienceTags; i++) {
+            game.defer(new SimpleDeferredAction(
+                player,
+                () => {
+                    // Can't remove a resource
+                    if (this.resourceCount === 0) {
+                        this.resourceCount++;
+                        return undefined;
+                    }
+                    return new OrOptions(
+                        new SelectOption("Remove a science resource from this card to draw a card", "Remove resource", () => {
+                            player.removeResourceFrom(this);
+                            player.cardsInHand.push(game.dealer.dealCard());
+                            return undefined;
+                        }),
+                        new SelectOption("Add a science resource to this card", "Add resource", () => {
+                            this.resourceCount++;
+                            return undefined;
+                        })
+                    );
+                }
+            ), true); // Unshift that deferred action
+        }
         return undefined;
     }
     public play() {

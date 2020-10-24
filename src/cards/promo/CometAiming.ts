@@ -13,6 +13,7 @@ import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../../constants";
 import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.COMET_AIMING;
@@ -62,7 +63,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         const spendAsteroidResource = () => {
             this.resourceCount--;
             LogHelper.logRemoveResource(game, player, this, 1, "place an ocean");
-            game.addOceanInterrupt(player);
+            game.defer(new PlaceOceanTile(player, game));
             return undefined;
         }
 

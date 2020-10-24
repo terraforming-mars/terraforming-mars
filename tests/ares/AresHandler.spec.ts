@@ -17,7 +17,6 @@ import { OriginalBoard } from "../../src/OriginalBoard";
 import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
 import { Phase } from "../../src/Phase";
-import { SelectHowToPayInterrupt } from "../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -89,8 +88,12 @@ describe("AresHandler", function () {
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+<<<<<<< HEAD
         const selectHowToPay = game.interrupts.pop()! as SelectHowToPayInterrupt;
         selectHowToPay.generatePlayerInput();
+=======
+        game.deferredActions[0].execute();
+>>>>>>> main
 
         // player who placed next to Nuclear zone, loses two money.
         expect(player.megaCredits).is.eq(0);
@@ -384,7 +387,7 @@ describe("AresHandler", function () {
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
         // Not asking you which production to lose.
-        expect(game.interrupts).has.lengthOf(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("No hazard coverage cost or bonus during WGT", function() {

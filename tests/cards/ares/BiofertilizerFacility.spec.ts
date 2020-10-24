@@ -1,5 +1,4 @@
 import { expect } from "chai";
-
 import { CardName } from "../../../src/CardName";
 import { BiofertilizerFacility } from "../../../src/cards/ares/BiofertilizerFacility";
 import { CardType } from "../../../src/cards/CardType";
@@ -7,7 +6,6 @@ import { IProjectCard } from "../../../src/cards/IProjectCard";
 import { Tags } from "../../../src/cards/Tags";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 import { ResourceType } from "../../../src/ResourceType";
@@ -55,7 +53,7 @@ describe("BiofertilizerFacility", function () {
     // Initial expectations that will change after playing the card.
     expect(player.getProduction(Resources.PLANTS)).is.eq(0);
     expect(microbeHost.resourceCount || 0).is.eq(0);
-    expect(game.interrupts).is.empty;
+    expect(game.deferredActions).is.empty;
 
     expect(card.canPlay(player, game)).to.eq(true);
     const action = card.play(player, game);
@@ -68,8 +66,7 @@ describe("BiofertilizerFacility", function () {
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZER_FACILITY);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]});
 
-    const selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
-    selectResourceCard.generatePlayerInput();
+    game.deferredActions[0].execute();
 
     expect(microbeHost.resourceCount).is.eq(2);
   });

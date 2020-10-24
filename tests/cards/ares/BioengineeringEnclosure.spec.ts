@@ -9,7 +9,6 @@ import { CardType } from "../../../src/cards/CardType";
 import { ResourceType } from "../../../src/ResourceType";
 import { expect } from "chai";
 import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 
 describe("BioengineeringEnclosure", function () {
   let card : BioengineeringEnclosure, player : Player, game : Game;
@@ -71,12 +70,11 @@ describe("BioengineeringEnclosure", function () {
     expect(card.canAct(player)).is.true;
     expect(card.resourceCount).eq(2);
     expect(animalHost.resourceCount).eq(0);
-    expect(game.interrupts).is.empty;
+    expect(game.deferredActions).is.empty;
 
     card.action(player, game);
 
-    const selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
-    selectResourceCard.generatePlayerInput();
+    game.deferredActions[0].execute();
 
     expect(card.resourceCount).eq(1);
     expect(animalHost.resourceCount).eq(1);

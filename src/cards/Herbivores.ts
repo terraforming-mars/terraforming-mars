@@ -9,6 +9,7 @@ import { TileType } from "../TileType";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { IResourceCard } from './ICard';
+import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Herbivores implements IProjectCard, IResourceCard {
     public cost: number = 12;
@@ -33,7 +34,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
     }
     public play(player: Player, game: Game) {
         player.addResourceTo(this);
-        game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
+        game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
         return undefined;
     }
 }

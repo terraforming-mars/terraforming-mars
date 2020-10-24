@@ -3,6 +3,7 @@ import { Player } from "../Player";
 import { ColonyName } from "./ColonyName";
 import { ResourceType } from "../ResourceType";
 import { Game } from "../Game";
+import { AddResourcesToCard } from "../deferredActions/AddResourcesToCard";
 
 export class Titan extends Colony implements IColony {
     public name = ColonyName.TITAN;
@@ -19,15 +20,15 @@ export class Titan extends Colony implements IColony {
             floaters = this.trackPosition - 2;
         }
 
-        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, floaters));
         if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 3);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 3));
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 1);
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1));
     }    
 }

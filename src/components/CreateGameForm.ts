@@ -12,7 +12,7 @@ import { Button } from "../components/common/Button";
 import { playerColorClass } from "../utils/utils";
 import { RandomMAOptionType } from "../RandomMAOptionType";
 
-interface CreateGameModel {
+export interface CreateGameModel {
     firstIndex: number;
     playersCount: number;
     players: Array<NewPlayerModel>;
@@ -51,7 +51,7 @@ interface CreateGameModel {
     seededGame: boolean;
 }
 
-interface NewPlayerModel {
+export interface NewPlayerModel {
     index: number;
     name: string;
     color: Color;

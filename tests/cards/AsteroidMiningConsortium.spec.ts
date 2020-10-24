@@ -28,8 +28,8 @@ describe("AsteroidMiningConsortium", function () {
     it("Should play - auto select if single target", function () {
         player.addProduction(Resources.TITANIUM);
         card.play(player, game); // can decrease own production
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).to.eq(undefined);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });
 
@@ -39,9 +39,8 @@ describe("AsteroidMiningConsortium", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
+        expect(game.deferredActions.length).to.eq(1);
+        const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
     });

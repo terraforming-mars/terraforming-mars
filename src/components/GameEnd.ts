@@ -5,7 +5,11 @@ import { LogPanel } from "./LogPanel";
 import { Button } from "../components/common/Button";
 
 export const GameEnd = Vue.component("game-end", {
-    props: ["player", "game"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        }
+    },
     data: function () {
         return {}
     },
@@ -15,9 +19,6 @@ export const GameEnd = Vue.component("game-end", {
         "Button": Button
     },
     methods: {
-        isSoloGame: function (): boolean {
-            return this.player.players.length === 1;
-        },
         getEndGamePlayerColorClass: function (player: PlayerModel): string {
             return "player_bg_color_" + player.color;
         },
@@ -30,7 +31,10 @@ export const GameEnd = Vue.component("game-end", {
                 return 0;
             });
             return this.player.players.reverse();
-        } 
+        },
+        isSoloGame: function (): boolean {
+            return this.player.players.length === 1;
+        }
     },
     template: `
         <div id="game-end" class="game_end_cont">
@@ -95,7 +99,7 @@ export const GameEnd = Vue.component("game-end", {
                         <tbody>
                             <tr v-for="p in getSortedPlayers()">
                                 <td><a :href="'/player?id='+p.id+'&noredirect'" :class="getEndGamePlayerColorClass(p)">{{ p.name }}</a></td>
-                                <td v-i18n>{{ p.corporationCard.name }}</td>
+                                <td v-i18n>{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
                                 <td>{{ p.victoryPointsBreakdown.awards }}</td>
@@ -143,3 +147,4 @@ export const GameEnd = Vue.component("game-end", {
         </div>
     `
 });
+

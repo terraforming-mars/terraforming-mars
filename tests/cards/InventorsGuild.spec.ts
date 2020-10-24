@@ -31,18 +31,17 @@ describe("InventorsGuild", function () {
         player.megaCredits = 3;
 
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
     });
 
     it("Cannot buy card if cannot pay", function () {
         player.megaCredits = 2;
-        const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
-        
-        (action! as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runNextInterrupt(() => {});
+        const selectCard = card.action(player, game) as SelectCard<IProjectCard>;
+        expect(selectCard.title).to.eq("You cannot pay for this card");
+        selectCard.cb([selectCard.cards[0]]);
+        expect(game.deferredActions.length).to.eq(0);
         expect(game.dealer.discarded.length).to.eq(1);
         expect(player.cardsInHand.length).to.eq(0);
         expect(player.megaCredits).to.eq(2);

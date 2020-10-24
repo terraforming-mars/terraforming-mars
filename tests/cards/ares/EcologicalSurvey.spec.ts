@@ -8,7 +8,6 @@ import { TileType } from "../../../src/TileType";
 import { Ants } from "../../../src/cards/Ants";
 import { Pets } from "../../../src/cards/Pets";
 import { EmptyBoard } from "../../ares/EmptyBoard";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("EcologicalSurvey", function () {
@@ -71,10 +70,10 @@ describe("EcologicalSurvey", function () {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    let selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
-    selectResourceCard.generatePlayerInput();
-    selectResourceCard = game.interrupts.pop()! as SelectResourceCard;
-    selectResourceCard.generatePlayerInput();
+    game.deferredActions[0].execute();
+    game.deferredActions.shift();
+    game.deferredActions[0].execute();
+    game.deferredActions.shift();
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);

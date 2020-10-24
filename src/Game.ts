@@ -526,8 +526,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
     }
 
-    public defer(action: DeferredAction): void {
-        this.deferredActions.push(action);
+    public defer(action: DeferredAction, priority: boolean = false): void {
+        if (priority) {
+            this.deferredActions.unshift(action);
+        } else {
+            this.deferredActions.push(action);
+        }
     }
 
     public getNextDeferredAction(): DeferredAction | undefined {
@@ -1420,6 +1424,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
       const startingResources = this.gameOptions.aresExtension ? AresHandler.beforeTilePlacement(player) : undefined;
       const initialTileTypeForAres = space.tile?.tileType;
+      const coveringExistingTile = space.tile !== undefined;
 
       // Part 4. Place the tile
       space.tile = tile;
@@ -1429,9 +1434,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Part 5. Collect the bonuses
 
       if (this.phase !== Phase.SOLAR) {
-        space.bonus.forEach((spaceBonus) => {
-          this.grantSpaceBonus(player, spaceBonus);
-        });
+        if (!coveringExistingTile) {
+            space.bonus.forEach((spaceBonus) => {
+                this.grantSpaceBonus(player, spaceBonus);
+            });
+        }
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
           if (Board.isOceanSpace(adjacentSpace)) {
@@ -1471,9 +1478,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (this.gameOptions.aresExtension) {
         AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
-        // Erasing the bonus means that overplacing doesn't regrant the bonus, or, for instance, make hazard spaces
-        // available for Mining Area or Solar Farm.
-        space.bonus = [];
 
         // Must occur after all other onTilePlaced operations.
         AresHandler.afterTilePlacement(this, player, startingResources);
@@ -1798,13 +1802,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (this.gameOptions.aresExtension) {
         this.aresData = d.aresData;
-        // Spaces with tiles no longer have the underlying bonuses. If there's overplacement, erasing them
-        // won't regrant them, nor will they be avialable for options like Mining Area.
-        this.board.spaces.forEach(space => {
-          if (space.tile !== undefined) {
-            space.bonus = [];
-          }
-        });
       }
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {

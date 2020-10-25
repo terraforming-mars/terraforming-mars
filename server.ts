@@ -436,6 +436,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 coloniesExtension: gameReq.colonies,
                 preludeExtension: gameReq.prelude,
                 turmoilExtension: gameReq.turmoil,
+                aresExtension: gameReq.aresExtension,
+                aresHazards: true, // Not a runtime option.
                 promoCardsOption: gameReq.promoCardsOption,
                 communityCardsOption: gameReq.communityCardsOption,
                 solarPhaseOption: gameReq.solarPhaseOption,

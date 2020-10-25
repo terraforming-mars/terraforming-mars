@@ -8,6 +8,7 @@ import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "./cards/StandardCard
 import { TURMOIL_CARD_MANIFEST } from "./cards/turmoil/TurmoilCardManifest";
 import { VENUS_CARD_MANIFEST } from "./cards/venusNext/VenusCardManifest";
 import { COMMUNITY_CARD_MANIFEST } from "./cards/community/CommunityCardManifest";
+import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -21,6 +22,7 @@ export class CardFinder {
                 COLONIES_CARD_MANIFEST,
                 PRELUDE_CARD_MANIFEST,
                 TURMOIL_CARD_MANIFEST,
+                ARES_CARD_MANIFEST,
                 COMMUNITY_CARD_MANIFEST
             ];
         }

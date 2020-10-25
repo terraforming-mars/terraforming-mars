@@ -29,8 +29,8 @@ import { ITile } from "./ITile";
 import { LogBuilder } from "./LogBuilder";
 import { LogHelper } from "./components/LogHelper";
 import { LogMessage } from "./LogMessage";
-import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from "./awards/Awards";
-import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from "./milestones/Milestones";
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ARES_MILESTONES } from "./milestones/Milestones";
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ARES_AWARDS } from "./awards/Awards";
 import { OriginalBoard } from "./OriginalBoard";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { Phase } from "./Phase";
@@ -204,6 +204,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.coloniesExtension,
         gameOptions.promoCardsOption,
         gameOptions.turmoilExtension,
+        gameOptions.aresExtension,
         gameOptions.communityCardsOption,
         gameOptions.cardsBlackList
       );
@@ -1756,7 +1757,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.milestones = [];
       this.awards = [];
 
-      const allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+      const allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES, ARES_MILESTONES);
 
       d.milestones.forEach((element: IMilestone) => {
         allMilestones.forEach((ms: IMilestone) => {
@@ -1766,7 +1767,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
 
-      const allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+      const allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS, ARES_AWARDS);
 
       d.awards.forEach((element: IAward) => {
         allAwards.forEach((award: IAward) => {
@@ -1786,6 +1787,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if(element.tile) {
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
+          const protectedHazard = element.tile.protectedHazard;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
             // Prevent loss of "neutral" player tile ownership across reloads
@@ -1793,7 +1795,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
           space.tile = {
             tileType: tileType,
-            card: tileCard
+            card: tileCard,
+            protectedHazard: protectedHazard,
           };
         }
         // Correct Land Claim

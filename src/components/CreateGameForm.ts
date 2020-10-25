@@ -40,6 +40,7 @@ export interface CreateGameModel {
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
     communityCardsOption: boolean;
+    aresExtension: boolean;
     undoOption: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
@@ -104,6 +105,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             shuffleMapOption: false,
             promoCardsOption: false,
             communityCardsOption: false,
+            aresExtension: false,
             undoOption: false,
             fastModeOption: false,
             removeNegativeGlobalEventsOption: false,
@@ -325,6 +327,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const communityCardsOption = component.communityCardsOption;
+            const aresExtension = component.aresExtension;
             const undoOption = component.undoOption;
             const fastModeOption = component.fastModeOption;
             const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
@@ -378,6 +381,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 communityCardsOption,
+                aresExtension: aresExtension,
                 undoOption,
                 fastModeOption,
                 removeNegativeGlobalEventsOption,
@@ -501,6 +505,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <div class="create-game-subsection-label">Fan-made</div>
+
+                            <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
+                            <label for="ares-checkbox">
+                                <div class="create-game-expansion-icon ares-icon"></div>
+                                <span v-i18n>Ares</span>&nbsp;<a href="https://boardgamegeek.com/thread/2218211/tm-ares-fan-expansion-more-interaction-map-mars" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
 
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
                             <label for="communityCards-checkbox">

@@ -19,7 +19,7 @@ class AlertDialog {
 }
 
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify", "aresExtension"],
+    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify", "aresExtension", "aresData"],
     components: {
         "board-space": BoardSpace
     },
@@ -147,6 +147,25 @@ export const Board = Vue.component("board", {
             </div>
 
             <div class="global-numbers-oceans" v-html="oceansValue()">
+            </div>
+
+            <div v-if="aresExtension">
+                <div v-if="aresData.hazardData.erosionOceanCount.available">
+                    <div class="global-ares-erosions-icon"></div>
+                    <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.removeDustStormsOceanCount.available">
+                    <div class="global-ares-remove-dust-storms-icon"></div>
+                    <div class="global-ares-remove-dust-storms-val">{{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.severeErosionTemperature.available">
+                    <div class="global-ares-severe-erosions"
+                    :class="'global-ares-severe-erosions-'+aresData.hazardData.severeErosionTemperature.threshold"></div>
+                </div>
+                <div v-if="aresData.hazardData.severeDustStormOxygen.available">
+                    <div class="global-ares-severe-dust-storms"
+                    :class="'global-ares-severe-dust-storms-'+aresData.hazardData.severeDustStormOxygen.threshold"></div>
+                </div>
             </div>
         </div>
 

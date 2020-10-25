@@ -125,6 +125,9 @@ export const Card = Vue.component("card", {
         getResourceAmount: function (card: CardModel): number {
             return card.resources !== undefined ? card.resources : 0;
         },
+        isCorporationCard: function () : boolean {
+            return getCorporationCardByName(this.card.name) !== undefined;
+        }
     },
     template: `
         <div :class="getCardClasses(card)">
@@ -136,7 +139,7 @@ export const Card = Vue.component("card", {
                 <CardTitle :title="card.name" :type="getCardType()"/>
                 <div class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
-            <CardExpansion :expansion="getCardExpansion()" />
+            <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

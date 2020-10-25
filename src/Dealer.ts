@@ -15,6 +15,7 @@ import { ICardFactory } from "./cards/ICardFactory";
 import { CardTypes, Deck } from "./Deck";
 import { Expansion } from "./Expansion";
 import { CardFinder} from "./CardFinder";
+import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 
 export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
@@ -27,6 +28,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+    private useAresExtension: boolean = false;
 
     constructor(
             useCorporateEra: boolean,
@@ -35,6 +37,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
+            useAresExtension: boolean,
             useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
@@ -44,6 +47,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
+        this.useAresExtension = useAresExtension
 
         const deck:Array<IProjectCard> = [];
         const preludeDeck:Array<IProjectCard> = [];
@@ -92,6 +96,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.useTurmoilExtension) {
             addToDecks(TURMOIL_CARD_MANIFEST);
+        }
+        if (this.useAresExtension) {
+            addToDecks(ARES_CARD_MANIFEST);
         }
         if (this.usePromoCards) {
             addToDecks(PROMO_CARD_MANIFEST);

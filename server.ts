@@ -436,6 +436,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 coloniesExtension: gameReq.colonies,
                 preludeExtension: gameReq.prelude,
                 turmoilExtension: gameReq.turmoil,
+                aresExtension: gameReq.aresExtension,
+                aresHazards: true, // Not a runtime option.
                 promoCardsOption: gameReq.promoCardsOption,
                 communityCardsOption: gameReq.communityCardsOption,
                 solarPhaseOption: gameReq.solarPhaseOption,
@@ -604,6 +606,8 @@ function getPlayer(player: Player, game: Game): string {
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: game.getPassedPlayers(),
+        aresExtension: game.gameOptions.aresExtension,
+        aresData: game.aresData,
         preludeExtension: game.gameOptions.preludeExtension,
     };
     return JSON.stringify(output);

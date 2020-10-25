@@ -5,13 +5,6 @@ import { Game } from "../Game";
 import { AresHandler } from "../ares/AresHandler";
 import { PlayerInput } from "../PlayerInput";
 
-        // AresHandler.ifAres(game, aresData => {
-        //     pi = new ShiftAresGlobalParameters(
-        //         player,
-        //         aresData,
-        //         (response: IAresGlobalParametersResponse) => {
-        //             const hazardData = aresData.hazardData;
-    
 export class ShiftAresGlobalParametersDeferred implements DeferredAction {
     constructor(
         private game: Game,

@@ -33,6 +33,18 @@ checkComponent(
     "src/components/Milestone",
     require("./dist/src/components/Milestone").Milestone
 );
+checkComponent(
+    "src/components/OtherPlayer",
+    require("./dist/src/components/OtherPlayer").OtherPlayer
+);
+checkComponent(
+    "src/components/Tag",
+    require("./dist/src/components/Tag").Tag
+);
+checkComponent(
+    "src/components/TagCount",
+    require("./dist/src/components/TagCount").TagCount
+);
 
 function checkComponent(name, component) {
 
@@ -80,6 +92,16 @@ function checkComponent(name, component) {
     methodNames.forEach(function (methodName) {
         scope += `const ${methodName} = this.${methodName};\n`;
     });
+
+    // add mix-ins
+    if (Array.isArray(component.mixins)) {
+        for (const mixin of component.mixins) {
+            const methods = Object.keys(mixin.methods);
+            for (const method of methods) {
+                scope += `const ${method} = ${mixin.name}.methods.${method};\n`;
+            }
+        }
+    }
 
     result = scope + result;
 

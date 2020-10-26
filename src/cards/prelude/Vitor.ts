@@ -1,4 +1,3 @@
-
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
@@ -10,13 +9,11 @@ import { IAward } from "../../awards/IAward";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
-
 export class Vitor implements CorporationCard {
     public name: CardName = CardName.VITOR;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
     public cardType: CardType = CardType.CORPORATION;
-
 
     private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
         return new SelectOption("Fund " + award.name + " award", "Confirm", () => {
@@ -38,7 +35,7 @@ export class Vitor implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
+        if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
             player.megaCredits += 3;
         }
     }

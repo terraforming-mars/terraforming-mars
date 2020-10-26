@@ -3,7 +3,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class HugeAsteroid extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
@@ -17,4 +17,3 @@ export class HugeAsteroid extends PreludeCard implements IProjectCard {
         return game.increaseTemperature(player, 3);
     }
 }
-

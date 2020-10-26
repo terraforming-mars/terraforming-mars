@@ -514,6 +514,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
                             <label for="communityCards-checkbox">
+                                <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>

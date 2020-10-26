@@ -16,17 +16,30 @@ export class DrawCards implements DeferredAction {
         const drawnCards: Array<IProjectCard> = [];
 
         if (this.tag !== undefined) {
-            for (const foundCard of this.game.drawCardsByTag(this.tag, 2)) {
+            // Reveal cards from the deck until |this.count| of a specific tag have be drawn
+            for (const foundCard of this.game.drawCardsByTag(this.tag, this.count)) {
                 drawnCards.push(foundCard);
             }
-            this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]));
+            switch (this.count) {
+                case 1:
+                    this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]));
+                    break;
+                case 2:
+                    this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]));
+                    break;
+                case 3:
+                default:
+                    this.game.log("${0} drew ${1}, ${2} and ${3}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
+            }
         } else {
+            // Draw |this.count| cards from the deck
             for (let i = 0; i < this.count; i++) {
                 drawnCards.push(this.game.dealer.dealCard());
             }
             this.game.log("${0} drew ${1} card(s)", b => b.player(this.player).number(this.count));
         }
 
+        // Add the cards to the player's hand
         this.player.cardsInHand.push(...drawnCards);
         return undefined;
     }

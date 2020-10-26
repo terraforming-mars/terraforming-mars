@@ -45,7 +45,7 @@ describe("CloudSeeding", function () {
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
 
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player2.getProduction(Resources.HEAT)).to.eq(0);
     });
 

@@ -41,7 +41,7 @@ describe("Comet", function () {
 
         card.play(player, game);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
 
         expect(player.plants).to.eq(8); // self plants are not removed
         expect(game.getTemperature()).to.eq(-28);
@@ -52,7 +52,7 @@ describe("Comet", function () {
         player.plants = 8;
 
         var action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.plants).to.eq(8);
     });
 });

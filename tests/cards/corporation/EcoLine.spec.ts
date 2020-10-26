@@ -10,7 +10,7 @@ describe("EcoLine", function () {
         const card = new EcoLine();
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
         expect(player.plants).to.eq(3);
         expect(player.plantsNeededForGreenery).to.eq(7);

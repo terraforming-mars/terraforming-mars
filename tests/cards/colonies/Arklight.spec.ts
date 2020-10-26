@@ -12,7 +12,7 @@ describe("Arklight", function () {
         const player2 = new Player("test2", Color.RED, false);        
         const game = new Game("foobar", [player,player2], player);
         const play = card.play(player);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(card.resourceCount).to.eq(1);
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Predators());

@@ -20,7 +20,7 @@ describe("Inventrix", function () {
     
     it("Should take initial action", function () {
         const action = card.initialAction(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.cardsInHand.length).to.eq(3);
     });
 });

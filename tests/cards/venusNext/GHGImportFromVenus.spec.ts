@@ -12,7 +12,7 @@ describe("GHGImportFromVenus", function () {
         const game = new Game("foobar", [player,player], player);
 
         const action = card.play(player,game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });

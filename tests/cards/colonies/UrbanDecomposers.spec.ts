@@ -56,7 +56,7 @@ describe("UrbanDecomposers", function () {
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(decomposers.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });

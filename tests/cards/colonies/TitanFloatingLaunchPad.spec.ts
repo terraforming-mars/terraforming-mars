@@ -33,7 +33,7 @@ describe("TitanFloatingLaunchPad", function () {
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // No open colonies and no other card to add to
@@ -41,7 +41,7 @@ describe("TitanFloatingLaunchPad", function () {
         expect(game.deferredActions.length).to.eq(1);
         const input2 = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input2).to.eq(undefined);
+        expect(input2).is.undefined;
         expect(card.resourceCount).to.eq(2);
     });
 

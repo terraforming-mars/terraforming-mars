@@ -14,7 +14,7 @@ describe("MediaArchives", function () {
         const game = new Game("foobar", [player,player2], player);
         player.playedCards.push(card, new Virus());
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.megaCredits).to.eq(1);
     });
 });

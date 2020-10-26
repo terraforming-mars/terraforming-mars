@@ -21,6 +21,6 @@ describe("EccentricSponsor", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 });

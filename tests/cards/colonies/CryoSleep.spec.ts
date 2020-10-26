@@ -12,7 +12,7 @@ describe("CryoSleep", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         const ceres = new Ceres();
         ceres.trade(player, game);
         expect(player.steel).to.eq(2);

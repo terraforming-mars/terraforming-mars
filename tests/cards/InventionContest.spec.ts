@@ -11,7 +11,7 @@ describe("InventionContest", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb([action.cards[0]]);
         expect(game.dealer.discarded.length).to.eq(2);
         expect(game.dealer.discarded.indexOf(action.cards[0])).to.eq(-1);

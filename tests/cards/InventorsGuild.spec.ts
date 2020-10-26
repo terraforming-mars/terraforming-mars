@@ -17,7 +17,7 @@ describe("InventorsGuild", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {

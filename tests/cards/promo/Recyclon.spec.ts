@@ -9,7 +9,7 @@ describe("Recyclon", function () {
         const card = new Recyclon();
         const player = new Player("test", Color.BLUE, false);
         const play = card.play(player);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
         expect(card.resourceCount).to.eq(1);       
     });

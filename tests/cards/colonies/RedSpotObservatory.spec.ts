@@ -23,7 +23,7 @@ describe("RedSpotObservatory", function () {
         expect(card.canPlay(player)).to.eq(true);
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {

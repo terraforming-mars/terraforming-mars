@@ -23,7 +23,7 @@ describe("IndustrialCenterAres", function () {
         const action = card.play(player, game);
         const space = action!.availableSpaces[0];
         action!.cb(space);
-        expect(space.tile).not.to.eq(undefined);
+        expect(space.tile).is.not.undefined;
         expect(space.tile && space.tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
         expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
     });

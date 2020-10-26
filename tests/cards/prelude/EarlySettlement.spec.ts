@@ -14,11 +14,11 @@ describe("EarlySettlement", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game) as SelectSpace;
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-        expect(action.cb(action.availableSpaces[0])).to.eq(undefined);
+        expect(action.cb(action.availableSpaces[0])).is.undefined;
         expect(action.availableSpaces[0].player).to.eq(player);
-        expect(action.availableSpaces[0].tile).not.to.eq(undefined);
+        expect(action.availableSpaces[0].tile).is.not.undefined;
         expect(action.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
     });
 });

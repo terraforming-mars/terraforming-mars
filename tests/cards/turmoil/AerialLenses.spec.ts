@@ -32,7 +32,7 @@ describe("AerialLenses", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
     });
 
     it("Should play with plants", function () {

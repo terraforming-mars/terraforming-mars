@@ -23,7 +23,7 @@ describe("UndergroundCity", function () {
         player.addProduction(Resources.ENERGY, 2);
         expect(card.canPlay(player,game)).to.eq(true);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         action.cb(action.availableSpaces[0]);
         expect(game.getCitiesInPlay()).to.eq(1);

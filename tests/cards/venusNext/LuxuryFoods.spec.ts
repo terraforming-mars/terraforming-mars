@@ -9,7 +9,7 @@ describe("LuxuryFoods", function () {
         const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });

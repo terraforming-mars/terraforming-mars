@@ -53,6 +53,6 @@ describe("ArtificialLake", function () {
 
         // ...but an action to place ocean is not unavailable
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 });

@@ -37,7 +37,7 @@ describe("LocalHeatTrapping", function () {
         player.playedCards.push(card, pets);
 
         const orOptions = card.play(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
+        expect(orOptions).is.not.undefined;
         expect(orOptions instanceof OrOptions).to.eq(true);
         
         orOptions.options[0].cb();

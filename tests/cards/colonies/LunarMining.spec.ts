@@ -14,7 +14,7 @@ describe("LunarMining", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card2, card3);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
     });
 });

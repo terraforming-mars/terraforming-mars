@@ -11,7 +11,7 @@ describe("NeutralizerFactory", function () {
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
 });

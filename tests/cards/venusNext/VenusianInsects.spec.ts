@@ -24,7 +24,7 @@ describe("VenusianInsects", function () {
         player.playedCards.push(card);
 
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Gives victory points", function () {

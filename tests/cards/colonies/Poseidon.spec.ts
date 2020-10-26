@@ -13,7 +13,7 @@ describe("Poseidon", function () {
         const player2 = new Player("test2", Color.RED, false);        
         const game = new Game("foobar", [player,player2], player);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.corporationCard = card;
         const ceres = new Ceres();
         ceres.onColonyPlaced(player, game);

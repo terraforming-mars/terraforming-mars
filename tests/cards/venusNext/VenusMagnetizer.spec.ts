@@ -22,7 +22,7 @@ describe("VenusMagnetizer", function () {
     it("Should play", function () {
         (game as any).venusScaleLevel = 10;
         expect(card.canPlay(player, game)).to.eq(true);
-        expect(card.play()).to.eq(undefined);
+        expect(card.play()).is.undefined;
     });
 
     it("Should act", function () {

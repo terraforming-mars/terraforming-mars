@@ -193,6 +193,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
+
+      // Initialize Ares data
+      if (gameOptions.aresExtension) {
+        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+      }
+
       this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
@@ -252,13 +258,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.turmoil = new Turmoil(this);
       }
 
-      if (gameOptions.aresExtension) {
-        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
-          // this test is because hazard selection isn't actively part of game options, but needs
-          // to be configurable for tests.
-          if (gameOptions.aresHazards !== false) {
-            AresHandler.setupHazards(this, players.length);
-          }
+      // Setup Ares hazards
+      if (gameOptions.aresExtension && gameOptions.aresHazards !== false) {
+        AresHandler.setupHazards(this, players.length);
       }
 
       // Setup custom corporation list

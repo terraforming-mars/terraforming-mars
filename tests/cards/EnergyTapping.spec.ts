@@ -29,7 +29,7 @@ describe("EnergyTapping", function () {
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         
         const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);

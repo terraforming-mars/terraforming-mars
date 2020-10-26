@@ -12,6 +12,6 @@ describe("IoSulphurResearch", function () {
 
         const action = card.play(player,game);
         expect(action).is.undefined;
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

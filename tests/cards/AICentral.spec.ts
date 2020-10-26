@@ -35,6 +35,6 @@ describe("AICentral", function () {
 
     it("Should take action", function () {
         card.action(player, game);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
     });
 });

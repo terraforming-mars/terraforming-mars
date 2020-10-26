@@ -20,7 +20,7 @@ describe("ByElection", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         const subOptions = orOptions.options[0] as OrOptions;

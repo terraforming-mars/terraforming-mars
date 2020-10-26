@@ -39,7 +39,7 @@ describe("NitrogenFromTitan", function () {
         player.playedCards.push(jovianLanterns, new TitanFloatingLaunchPad());
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
         selectCard.cb([jovianLanterns]);

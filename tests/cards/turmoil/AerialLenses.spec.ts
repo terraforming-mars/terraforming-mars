@@ -39,7 +39,7 @@ describe("AerialLenses", function () {
         player2.plants = 5;
         card.play(player, game);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();

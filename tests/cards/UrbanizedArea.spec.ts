@@ -39,7 +39,7 @@ describe("UrbanizedArea", function () {
 
         const action = card.play(player, game);
         expect(action).is.not.undefined;
-        expect(action.availableSpaces.length).to.eq(1);
+        expect(action.availableSpaces).has.lengthOf(1);
 
         action.cb(action.availableSpaces[0]);
         expect(game.getCitiesInPlay()).to.eq(3);

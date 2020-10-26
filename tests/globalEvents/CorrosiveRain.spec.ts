@@ -30,8 +30,8 @@ describe("CorrosiveRain", function () {
                 game.runDeferredAction(action, () => {});
             }
         }
-        expect(player2.cardsInHand.length).to.eq(3);
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(player2.cardsInHand).has.lengthOf(3);
+        expect(player.cardsInHand).has.lengthOf(0);
         expect(player.megaCredits).to.eq(5);
         expect(player2.megaCredits).to.eq(5);
     });

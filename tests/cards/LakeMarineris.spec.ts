@@ -23,7 +23,7 @@ describe("LakeMarineris", function () {
         expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
         const firstOcean = game.deferredActions[0].execute() as SelectSpace;
         firstOcean.cb(firstOcean.availableSpaces[0]);
         const secondOcean = game.deferredActions[1].execute() as SelectSpace;

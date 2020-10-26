@@ -53,7 +53,7 @@ describe("UrbanDecomposers", function () {
         player.playedCards.push(decomposers);
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
@@ -67,7 +67,7 @@ describe("UrbanDecomposers", function () {
         player.playedCards.push(decomposers, ants);
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // add two microbes to Ants
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;

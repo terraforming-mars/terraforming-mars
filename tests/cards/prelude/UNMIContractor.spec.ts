@@ -10,12 +10,12 @@ describe("UNMIContractor", function () {
         const game = new Game("bar", [player], player);
         const card = new UNMIContractor();
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // Draw cards
         game.runDeferredAction(game.deferredActions[0], () => {});
 
         expect(player.getTerraformRating()).to.eq(17);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

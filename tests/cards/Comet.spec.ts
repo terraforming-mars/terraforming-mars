@@ -24,7 +24,7 @@ describe("Comet", function () {
         
         card.play(player, game);
         expect(game.getTemperature()).to.eq(-28);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);

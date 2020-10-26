@@ -32,7 +32,7 @@ describe("Virus", function () {
         expect(player.getResourcesOnCard(birds)).to.eq(0);
 
         orOptions.options[1].cb();
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         
         const orOptions2 = game.deferredActions[0].execute() as OrOptions;
         orOptions2.options[0].cb();

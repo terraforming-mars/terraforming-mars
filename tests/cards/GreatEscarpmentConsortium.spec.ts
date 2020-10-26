@@ -39,7 +39,7 @@ describe("GreatEscarpmentConsortium", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.STEEL)).to.eq(0);

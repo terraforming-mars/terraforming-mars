@@ -15,7 +15,7 @@ describe("SolarProbe", function () {
         player.playedCards.push(card2);
         const action = card.play(player, game);
         expect(action).is.undefined;
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });

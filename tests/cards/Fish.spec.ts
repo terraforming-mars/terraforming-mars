@@ -45,7 +45,7 @@ describe("Fish", function () {
         expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);

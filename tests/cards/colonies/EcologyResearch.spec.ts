@@ -39,7 +39,7 @@ describe("EcologyResearch", function () {
         player.playedCards.push(tardigrades, fish);
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
@@ -58,7 +58,7 @@ describe("EcologyResearch", function () {
         player.playedCards.push(tardigrades, ants);
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // add two microbes to Ants
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;

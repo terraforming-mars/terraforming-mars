@@ -22,6 +22,6 @@ describe("IceCapMelting", function () {
         expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
     });
 });

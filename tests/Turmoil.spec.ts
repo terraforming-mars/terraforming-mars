@@ -46,7 +46,7 @@ describe("Turmoil", function () {
         greens.delegates = [];
         
         turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-        expect(greens.delegates.length).to.eq(1);
+        expect(greens.delegates).has.lengthOf(1);
         expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
     });
 
@@ -55,7 +55,7 @@ describe("Turmoil", function () {
 
         const greens = turmoil.getPartyByName(PartyName.GREENS)!;
         turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-        expect(greens.delegates.length).to.eq(1);
+        expect(greens.delegates).has.lengthOf(1);
 
         // 1 influence: Leader of dominant party
         const greensPartyLeader = game.getPlayerById(greens.partyLeader!);
@@ -64,7 +64,7 @@ describe("Turmoil", function () {
 
         // 2 influence: Leader of dominant party + at least 1 non-leader delegate in party
         turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-        expect(greens.delegates.length).to.eq(2);
+        expect(greens.delegates).has.lengthOf(2);
         expect(turmoil.getPlayerInfluence(player)).to.eq(2);
     });
 
@@ -151,18 +151,18 @@ describe("Turmoil", function () {
         const availableStandardProjects = player.getAvailableStandardProjects(game);
         
         // can only use Power Plant as cannot pay 3 for Reds ruling policy
-        expect(availableStandardProjects.options.length).to.eq(1); 
+        expect(availableStandardProjects.options).has.lengthOf(1); 
     });
 
     it("Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed", function () {
         turmoil.rulingParty = new Reds();
         player.megaCredits = 23;
         let availableStandardProjects = player.getAvailableStandardProjects(game);
-        expect(availableStandardProjects.options.length).to.eq(4);
+        expect(availableStandardProjects.options).has.lengthOf(4);
 
         (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
         availableStandardProjects = player.getAvailableStandardProjects(game);
-        expect(availableStandardProjects.options.length).to.eq(5);
+        expect(availableStandardProjects.options).has.lengthOf(5);
     });
 
     it("Can't play cards to raise TR directly if Reds are ruling and player cannot pay", function () {

@@ -26,7 +26,7 @@ describe("BlackPolarDust", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);

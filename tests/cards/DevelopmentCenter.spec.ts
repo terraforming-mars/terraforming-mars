@@ -23,7 +23,7 @@ describe("DevelopmentCenter", function () {
 
         card.action(player, game);
         expect(player.energy).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });
 

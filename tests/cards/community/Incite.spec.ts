@@ -34,12 +34,12 @@ describe("Incite", function () {
 
     it("Can perform initial action", function () {
         card.initialAction(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();
 
         const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
-        expect(marsFirst!.delegates.filter((d) => d === player.id).length).to.eq(2);
+        expect(marsFirst!.delegates.filter((d) => d === player.id)).has.lengthOf(2);
     });
 });

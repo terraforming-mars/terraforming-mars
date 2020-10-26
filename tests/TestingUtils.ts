@@ -3,6 +3,7 @@ import { Game, GameOptions } from "../src/Game";
 import * as constants from "../src/constants"
 import { SpaceType } from "../src/SpaceType";
 import { BoardName } from "../src/BoardName";
+import { RandomMAOptionType } from "../src/RandomMAOptionType";
 
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): void {
     if (toValue < 1) {
@@ -28,7 +29,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         draftVariant: false,
         initialDraftVariant: false,
         corporateEra: true,
-        randomMA: false,
+        randomMA: RandomMAOptionType.NONE,
         preludeExtension: false,
         venusNextExtension: true,
         coloniesExtension: false,
@@ -45,7 +46,12 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         includeVenusMA: true,
         soloTR: false,
         clonedGamedId: undefined,
-        cardsBlackList: []
+        cardsBlackList: [],
+        aresExtension: false,
+        aresHazards: undefined,
+        fastModeOption: false,
+        removeNegativeGlobalEventsOption: false,
+        customColoniesList: [],
       };
 
     return Object.assign(defaultOptions, options) as GameOptions;

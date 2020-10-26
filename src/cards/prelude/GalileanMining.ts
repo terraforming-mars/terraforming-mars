@@ -5,17 +5,17 @@ import { IProjectCard } from "../IProjectCard";
 import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 import { Game } from "../../Game";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class GalileanMining extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
     public name: CardName = CardName.GALILEAN_MINING;
-    public canPlay(player: Player, _game: Game, bonusMc?: number) {
-        let requiredPayment = 5 - (bonusMc || 0);
-        return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
+    public canPlay(player: Player, _game: Game) {
+        return player.canAfford(5);
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         player.addProduction(Resources.TITANIUM, 2);
-        player.megaCredits -= 5;
+        game.defer(new SelectHowToPayDeferred(player, 5, false, false));
         return undefined;
     }
 }

@@ -21,6 +21,10 @@ describe("MartianSurvey", function () {
     it("Should play", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         card.play(player, game);
+        expect(game.deferredActions.length).to.eq(1);
+
+        // Draw cards
+        game.runDeferredAction(game.deferredActions[0], () => {});
 
         expect(card.getVictoryPoints()).to.eq(1);
         expect(player.cardsInHand.length).to.eq(2);

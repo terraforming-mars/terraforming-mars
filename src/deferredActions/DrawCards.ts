@@ -22,7 +22,7 @@ export class DrawCards implements DeferredAction {
             }
             switch (this.count) {
                 case 1:
-                    this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]));
+                    this.game.log("${0} drew ${1}", b => b.player(this.player).card(drawnCards[0]));
                     break;
                 case 2:
                     this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]));

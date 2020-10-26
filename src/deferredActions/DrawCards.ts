@@ -20,17 +20,10 @@ export class DrawCards implements DeferredAction {
             for (const foundCard of this.game.drawCardsByTag(this.tag, this.count)) {
                 drawnCards.push(foundCard);
             }
-            switch (this.count) {
-                case 1:
-                    this.game.log("${0} drew ${1}", b => b.player(this.player).card(drawnCards[0]));
-                    break;
-                case 2:
-                    this.game.log("${0} drew ${1} and ${2}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]));
-                    break;
-                case 3:
-                default:
-                    this.game.log("${0} drew ${1}, ${2} and ${3}", b => b.player(this.player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
-            }
+            // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
+            const nCards = Array.from(Array(this.count - 1).keys());
+            const message = "${0} drew " + (nCards.map(n => "${" + (n + 1) + "}").join(", ")) + (this.count > 1 ? " and " : "") + "${" + this.count + "}";
+            this.game.log(message, b => { b.player(this.player); drawnCards.forEach(c => b.card(c)) });
         } else {
             // Draw |this.count| cards from the deck
             for (let i = 0; i < this.count; i++) {

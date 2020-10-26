@@ -1,4 +1,3 @@
-
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";

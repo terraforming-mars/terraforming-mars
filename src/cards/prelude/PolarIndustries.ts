@@ -12,8 +12,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
     public name: CardName = CardName.POLAR_INDUSTRIES;
     public play(player: Player, game: Game) {
         game.defer(new PlaceOceanTile(player, game));
-        player.addProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT, 2);
         return undefined;
     }
 }
-

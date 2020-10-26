@@ -15,7 +15,7 @@ export class AquiferTurbines extends PreludeCard implements IProjectCard {
         return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
     }
     public play(player: Player, game: Game) {
-        player.addProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY, 2);
         player.megaCredits -= 3;
         game.defer(new PlaceOceanTile(player, game));
         return undefined;

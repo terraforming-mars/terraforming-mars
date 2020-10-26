@@ -21,10 +21,10 @@ describe("TradeAdvance", function () {
         card.play(player, game);
         expect(player.megaCredits).not.to.eq(0);
 
-        if (game.interrupts.length > 0) {
-            const orOptions = game.interrupts.pop()!.playerInput as OrOptions;
-            const options = orOptions.options[0] as OrOptions;
-            options.cb();
+        while (game.deferredActions.length) {
+            const orOptions = game.deferredActions[0].execute() as OrOptions;
+            orOptions.options[0].cb();
+            game.deferredActions.shift();
         }
 
         game.colonies.forEach((colony) => expect(colony.trackPosition <= 1).to.eq(true));

@@ -4,6 +4,7 @@ import { Game } from "../../Game";
 import { CardName } from "../../CardName";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
+import { PlayProjectCard } from "../../deferredActions/PlayProjectCard";
 
 export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
@@ -16,17 +17,8 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
         return 0;
     }
 
-    public play() {
+    public play(player: Player, game: Game) {  
+        game.defer(new PlayProjectCard(player, game));
         return undefined;
     }
-
-    public addPlayCardInterrupt(player: Player, game: Game) {
-        if (player.getPlayableCards(game).length > 0) {
-            game.interrupts.push({
-                player: player,
-                playerInput: player.playProjectCard(game)
-            });
-        }
-    }
 }
-

@@ -4,13 +4,16 @@ import { CardType } from "../CardType";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { Resources } from "../../Resources";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE } from "../../constants";
+<<<<<<< HEAD
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRow } from "../../cards/CardRow";
 import { CardBonus } from "../../cards/CardBonus";
+=======
+import { RemoveAnyPlants } from "../../deferredActions/RemoveAnyPlants";
+>>>>>>> master
 
 export class SmallAsteroid implements IProjectCard {
     public cost: number = 10;
@@ -35,9 +38,10 @@ export class SmallAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
         game.increaseTemperature(player, 1);
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
+        game.defer(new RemoveAnyPlants(player, game, 2));
         return undefined;
     }
+<<<<<<< HEAD
     public metadata: CardMetadata = {
         description: "Increase temperature 1 step. Remove up to 2 plants from any player.",
         cardNumber: "209",
@@ -46,4 +50,7 @@ export class SmallAsteroid implements IProjectCard {
             CardRow.add([CardBonus.plants(-2).any()]),
         ],
     };
+=======
+
+>>>>>>> master
 }

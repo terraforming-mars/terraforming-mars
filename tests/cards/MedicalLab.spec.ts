@@ -11,7 +11,7 @@ describe("MedicalLab", function () {
         const card = new MedicalLab();
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
         player.playedCards.push(new Capital());
         card.play(player);

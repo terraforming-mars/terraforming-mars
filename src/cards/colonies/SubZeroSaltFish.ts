@@ -1,12 +1,13 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { IResourceCard } from '../ICard';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { Resources } from "../../Resources";
+import { IResourceCard } from "../ICard";
+import { DecreaseAnyProduction } from "../../deferredActions/DecreaseAnyProduction";
 
 export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     public cost: number = 5;
@@ -21,17 +22,17 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     }
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS,1);
+        return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS,1);
     }
 
     public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
+        player.addResourceTo(this);
+        return undefined;
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
-      return undefined;
+        game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+        return undefined;
     }
 
     public getVictoryPoints(): number {

@@ -2,8 +2,8 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 
 export class GalileanMining extends PreludeCard implements IProjectCard {
@@ -14,7 +14,7 @@ export class GalileanMining extends PreludeCard implements IProjectCard {
         return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
     }
     public play(player: Player) {
-        player.addProduction(Resources.TITANIUM,2);
+        player.addProduction(Resources.TITANIUM, 2);
         player.megaCredits -= 5;
         return undefined;
     }

@@ -16,7 +16,8 @@
     "spectre.css": "^0.5.8",
     "sqlite3": "^4.2.0",
     "typescript": "^3.8.3",
-    "vue": "^2.6.10",
+    "vue": "2.6.10",
+    "vue-template-compiler": "2.6.10",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.0"
   },
@@ -36,9 +37,10 @@
   },
   "scripts": {
     "clean": "rm -r ./dist/ ./styles.css || true",
-    "build": "node make_static_json.js && eslint src/*.ts src/database/**/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
+    "build": "node make_static_json.js && eslint src/*.ts src/database/**/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && npm run templates && webpack --config webpack.config.js",
     "start": "node make_static_json.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
+    "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
     "test": "mocha --recursive dist/tests",
     "testgiven": "tsc --build tsconfig.json && webpack --config webpack.config.js && tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",

@@ -15,14 +15,14 @@ describe("AquiferPumping", function () {
     });
 
     it("Should play", function () {
-        expect(card.play()).to.eq(undefined);
+        expect(card.play()).is.undefined;
     });
 
     it("Should act", function () {
         player.megaCredits = 8;
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
-        game.runNextInterrupt(() => {});
+        expect(action).is.undefined;
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(player.megaCredits).to.eq(0);
     });
 

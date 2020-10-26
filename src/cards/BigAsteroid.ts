@@ -3,14 +3,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from "../CardName";
-import { Resources } from "../Resources";
-import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
-import { PartyHooks } from "../turmoil/parties/PartyHooks";
-import { PartyName } from "../turmoil/parties/PartyName";
+import { CardName } from "../CardName";  
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRow } from "../cards/CardRow";
 import { CardBonus } from "../cards/CardBonus";
+import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class BigAsteroid implements IProjectCard {
     public cost = 27;
@@ -36,10 +36,10 @@ export class BigAsteroid implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.increaseTemperature(player, 2);
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 4);
-        player.titanium += 4;
-        return undefined;
+      game.increaseTemperature(player, 2);
+      game.defer(new RemoveAnyPlants(player, game, 4));
+      player.titanium += 4;
+      return undefined;
     }
 
     public metadata: CardMetadata = {

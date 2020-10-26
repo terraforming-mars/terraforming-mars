@@ -23,7 +23,7 @@ describe("MonsInsurance", function () {
 
     it("Should play", function () {
         const play = card.play(player, game);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(-2);

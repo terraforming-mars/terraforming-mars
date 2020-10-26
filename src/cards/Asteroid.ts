@@ -3,7 +3,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
@@ -11,6 +10,7 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRow } from "../cards/CardRow";
 import { CardBonus } from "../cards/CardBonus";
+import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class Asteroid implements IProjectCard {
     public cost: number = 14;
@@ -35,7 +35,7 @@ export class Asteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
         game.increaseTemperature(player, 1);
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 3);
+        game.defer(new RemoveAnyPlants(player, game, 3));
         player.titanium += 2;
         return undefined;
     }

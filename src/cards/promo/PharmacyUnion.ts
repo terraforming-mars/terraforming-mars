@@ -12,6 +12,7 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 import { CardType } from "../CardType";
+import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
 
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
@@ -36,56 +37,102 @@ export class PharmacyUnion implements CorporationCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
         if (this.isDisabled) return undefined;
 
-        if (card.tags.includes(Tags.MICROBES)) {
+        const hasScienceTag = card.tags.includes(Tags.SCIENCE);
+        const hasMicrobesTag = card.tags.includes(Tags.MICROBES);
+        const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
+        // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
+        if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
+            // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
+            if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === true) {
+                game.defer(new SimpleDeferredAction(
+                    player,
+                    () => {
+                        const orOptions = new OrOptions(
+                            new SelectOption("Turn it face down to gain 3 TR and lose up to 4 MC", "Confirm", () => {
+                                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                                this.isDisabled = true;
+                                player.increaseTerraformRatingSteps(3, game);
+                                player.megaCredits -= megaCreditsLost;
+                                game.log("${0} turned ${1} face down to gain 3 TR and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
+                                return undefined;
+                            }),
+                            new SelectOption("Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR", "Confirm", () => {
+                                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                                player.increaseTerraformRating(game);
+                                player.megaCredits -= megaCreditsLost;
+                                game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
+                                game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
+                                return undefined;
+                            })
+                        );
+                        orOptions.title = "Choose the order of tag resolution for Pharmacy Union";
+                        return orOptions;
+                    }
+                ));
+                return undefined;
+            }
+        }
+
+
+        if (hasMicrobesTag) {
             const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
             const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
+            const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
             player.addResourceTo(this, microbeTagCount);
-            player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
+            player.megaCredits -= megaCreditsLost;
+            game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
         }
             
-        if (player.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
-            this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
-            return undefined;
+        if (isPharmacyUnion && hasScienceTag) {
+            const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+            for (let i = 0; i < scienceTags; i++) {
+                game.defer(new SimpleDeferredAction(
+                    player,
+                    () => {
+                        if (this.isDisabled) return undefined;
+
+                        if (this.resourceCount > 0) {
+                            if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST) === false) {
+                                // TODO (Lynesth): Remove this when #1670 is fixed
+                                game.log("${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
+                            } else {
+                                this.resourceCount--;
+                                player.increaseTerraformRating(game);
+                                game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
+                            }
+                            return undefined;
+                        }
+
+                        if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === false) {
+                            // TODO (Lynesth): Remove this when #1670 is fixed
+                            game.log("${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost", b => b.player(player).card(this));
+                            return undefined;
+                        }
+
+                        return new OrOptions(
+                            new SelectOption("Turn this card face down and gain 3 TR", "Gain TR", () => {
+                                this.isDisabled = true;
+                                player.increaseTerraformRatingSteps(3, game);
+                                game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                                return undefined;
+                            }),
+                            new SelectOption("Do nothing", "Confirm", () => {
+                                return undefined;
+                            })
+                        );
+                    }
+                ));
+            }
         }
+
+        return undefined;
     }
+
 
     public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-        return this.onCardPlayed(player,game,card as ICard as IProjectCard);
+        return this.onCardPlayed(player, game, card as ICard as IProjectCard);
     }
 
-    private runInterrupts(player: Player, game: Game, scienceTags: number): void {
-        if (scienceTags <= 0) return;
-
-        if (this.resourceCount > 0) {
-            this.resourceCount--;
-            player.increaseTerraformRating(game);
-            game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
-            this.runInterrupts(player, game, scienceTags - 1);
-            return undefined;
-        } else {
-            const availableOptions: OrOptions = new OrOptions();
-            const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-
-            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3))) {
-                availableOptions.options.push(
-                    new SelectOption("Turn this card face down and gain 3 TR", 
-                    "Gain TR", () => {
-                        this.isDisabled = true;
-                        player.increaseTerraformRatingSteps(3, game);
-                        game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
-                        return undefined;
-                    })
-                );
-            }
-
-            availableOptions.options.push(
-                new SelectOption("Do nothing", "Confirm", () => {
-                    this.runInterrupts(player, game, scienceTags - 1);
-                    return undefined;
-                })
-            );
-
-            game.addInterrupt({ player, playerInput: availableOptions});
-        }
-      }
 }

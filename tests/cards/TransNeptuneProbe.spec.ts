@@ -9,7 +9,7 @@ describe("TransNeptuneProbe", function () {
         const card = new TransNeptuneProbe();
         const player = new Player("test", Color.BLUE, false);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });

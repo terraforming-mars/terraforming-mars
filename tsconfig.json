@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "declaration": true,
         "module": "commonjs",
         "lib": ["dom"],
         "noImplicitAny": true,
@@ -13,13 +14,13 @@
         "skipLibCheck": true,
         "sourceMap": true,
         "target": "es5",
-        "types": ["node", "mocha", "chai"],
+        "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true
     },
     "include": [
         "src/**/*.ts",
         "script.ts",
-        "server.ts",
+        "server.ts"
     ]
 }

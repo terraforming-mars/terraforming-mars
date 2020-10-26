@@ -1493,6 +1493,13 @@ input[type="radio"]:checked + .filterDiv::after {
     text-align:center;
 }
 
+.card-utopia-invest {
+    .production.wild {
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+}
+
 .factorum {
     color: #ee792b;
     text-shadow: 0 0 1px black, 0 1px black, 1px 0px black, -1px 0px black,
@@ -1959,18 +1966,6 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
-.card-deimos-down-promo {
-    .tile.special-tile {
-        font-size: 30px;
-        transform: scale(0.8, 0.8);
-    }
-}
-
-.card-great-dam-promo {
-    .tile.special-tile {
-        font-size: 30px;
-    }
-}
 
 .card-magnetic-field-generators-promo {
     .tile-icon {
@@ -1981,13 +1976,6 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-red-spot-observatory {
     .description.bottom {
         text-align: left;
-    }
-}
-
-.card-nuclear-zone {
-    .tile.special-tile {
-        font-size:28px;
-        line-height:50px;
     }
 }
 
@@ -2104,14 +2092,6 @@ input[type="radio"]:checked + .filterDiv::after {
         text-align: center;
         padding: 0 25px;
     }
-}
-
-.restricted-area-tile {
-    width: 38px;
-    height: 38px;
-    background: url(assets/cancel38x38.png) 0 0 no-repeat;
-    transform: scale(0.6);
-    margin: 4px 0 0 1px;
 }
 
 .little-green-men {
@@ -2356,6 +2336,87 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
+.card-asteroid-rights {
+    .effect {
+        margin-left: -5px;
+        width: 230px;
+    }
+
+    .effect2 {
+        margin-left: -10px;
+        margin-top: 10px;
+    }
+}
+
+.card-ecological-zone{
+    .description-tile{
+        text-align: left;
+        margin-top: -50px;
+        width: 135px;
+    }
+    .tile{
+        margin-left: 130px;
+        margin-top: 10px;
+    }
+}
+
+/*********** Special Tile Styles ************/
+
+.special-tile-symbol{
+    background-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin: 2px 0px;
+}
+
+.special-tile--mohole-area{
+    background-image: url(./assets/tiles/special_tile_icons/mohole_area.png);
+}
+
+.special-tile--commerical-district{
+    background-image: url(./assets/tiles/special_tile_icons/commerical_district.png);
+}
+
+.special-tile--deimos-promo{
+    background-image: url(./assets/tiles/special_tile_icons/deimos.png);
+}
+
+.special-tile--ecological-zone{
+    background-image: url(./assets/tiles/special_tile_icons/ecological_zone.png);
+}
+
+.special-tile--great-dam-promo{
+    background-image: url(./assets/tiles/special_tile_icons/great_dam.png);
+}
+
+.special-tile--industrial-center{
+    background-image: url(./assets/tiles/special_tile_icons/industrial_center.png);
+}
+
+.special-tile--lava-flows{
+    background-image: url(./assets/tiles/special_tile_icons/lava_flows.png);
+}
+
+.special-tile--magnetic-field-gen-promo{
+    background-image: url(./assets/tiles/special_tile_icons/magnetic_field_gen.png);
+}
+
+.special-tile--mining-area{
+    background-image: url(./assets/tiles/special_tile_icons/mining_area.png);
+}
+
+.special-tile--natural_preserve{
+    background-image: url(./assets/tiles/special_tile_icons/natural_preserve.png);
+}
+
+.special-tile--nuclear-zone{
+    background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+}
+
+.special-tile--restricted-area{
+    background-image: url(./assets/tiles/special_tile_icons/restricted_area.png);
+}
+
 /*********** Prelude Styles ************/
 
 .prelude-ecology-experts-requirement-box {
@@ -2410,3 +2471,197 @@ input[type="radio"]:checked + .filterDiv::after {
 .expansion-icon-promo {
     background-image: url(./assets/expansion_icons/expansion_icon_promo.png);
 }
+<<<<<<< HEAD
+=======
+
+.expansion-icon-community {
+    background-image: url(./assets/expansion_icons/expansion_icon_community.png);
+}
+
+/* refactored */
+.card-container {
+    .project-icon:after,
+    .preludeCard-icon:after {
+        bottom: 8px;
+        left: 8px;
+        margin: 0px;
+    }
+    .card-content-wrapper {
+        position: relative;
+        .temporary-content-wrapper {
+            position: relative;
+            .corporation-icon {
+                position: absolute;
+                top: 9px;
+                right: 26px;
+            }
+        }
+        .card-cost-and-tags {
+            display: flex;
+            align-items: center;
+            margin-left: -10px;
+            margin-top: -10px;
+            justify-content: space-between;
+            .card-cost {
+                float: left;
+                font-family: Prototype;
+                font-size: 26px;
+                width: 50px;
+                height: 50px;
+                line-height: 48px;
+                border-radius: 10px;
+                text-align: center;
+                background-image: url(./assets/resources/megacredit.png);
+                background-size: 50px;
+                filter: drop-shadow(0px 0px 1px black);
+                font-family: Prototype;
+                color: #000;
+            }
+            .card-tags {
+                display: flex;
+                flex-flow: row;
+                justify-content: flex-end;
+                margin-right: -6px;
+                .card-tag {
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                        0 0 0 2px rgba(0, 0, 0, 0.3);
+                    margin-left: 4px;
+                    width: 40px;
+                    height: 40px;
+                    background-size: 50px;
+                    background-position: -5px;
+                    text-align: center;
+                    border-radius: 50%;
+                    border-top: 2px solid rgb(221, 221, 221);
+                    border-left: 2px solid rgb(221, 221, 221);
+                    border-bottom: 2px solid rgb(137, 137, 137);
+                    border-right: 2px solid rgb(137, 137, 137);
+                    background-color: white;
+                    /* margin-top: -6px; */
+                    filter: brightness(0.9);
+                }
+            }
+        }
+        .card-title {
+            font-family: "Ubuntu";
+            color: #020202;
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 0 0 30% 30%;
+            line-height: 30px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: -6px;
+            padding-top: 3px;
+            .corporation-label {
+                text-transform: uppercase;
+                float: left;
+                top: 8px;
+                position: absolute;
+                color: #020202;
+                width: 115px;
+                height: 14px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 13px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: #cccccc;
+                background-color: rgb(255, 204, 100);
+                background: linear-gradient(
+                    to right,
+                    #e28c22,
+                    rgb(255, 204, 100),
+                    rgb(255, 204, 100),
+                    #e28c22
+                );
+                border-radius: 7px 7px 2px 2px;
+                text-transform: uppercase;
+            }
+            .prelude-label {
+                position: absolute;
+                text-transform: uppercase;
+                top: 15px;
+                left: 4px;
+                margin: 0px;
+                width: 80px;
+                height: 20px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-color: rgb(235, 118, 171);
+                border-radius: 14px 2px 2px 2px;
+                border-top: 2px solid rgb(221, 221, 221);
+                border-left: 2px solid rgb(221, 221, 221);
+                border-bottom: 2px solid rgb(137, 137, 137);
+                border-right: 2px solid rgb(137, 137, 137);
+            }
+        }
+        .card-expansion {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 10px;
+            background-size: 24px 24px;
+            background-position: center;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+        }
+        .contentCorporation {
+            color: #020202;
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 8px;
+            top: -40px;
+            color: #020202;
+        }
+    }
+}
+.celestic-fix {
+    position: absolute;
+    top: 18px;
+}
+.luna-fix {
+    position: absolute;
+    font-size: 22px;
+    font-family: Prototype;
+    font-weight: normal;
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    margin-left: 40px;
+    -webkit-transform: scale(1.5, 1); /* Safari and Chrome */
+    -moz-transform: scale(1.5, 1); /* Firefox */
+    -ms-transform: scale(1.5, 1); /* IE 9 */
+    -o-transform: scale(1.5, 1); /* Opera */
+    transform: scale(1.5, 1); /* W3C */
+}
+
+.recyclon-fix {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    padding: 10px;
+    font-weight: bold;
+    background: red;
+    color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3),
+        3px 3px 3px #444;
+    font-family: Prototype;
+    font-weight: normal;
+    text-shadow: 0 0 1px black;
+}
+.recyclon-fix-2 {
+    position: absolute;
+    top: 48px;
+    left: 8px;
+}
+>>>>>>> master

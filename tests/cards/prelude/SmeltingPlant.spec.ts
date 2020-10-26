@@ -11,7 +11,7 @@ describe("SmeltingPlant", function () {
         const game = new Game("bar", [player], player);
         const card = new SmeltingPlant();
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.steel).to.eq(5);
         expect(game.getOxygenLevel()).to.eq(2);
     });

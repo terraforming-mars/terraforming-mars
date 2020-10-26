@@ -1,12 +1,12 @@
-import {IProjectCard} from "./cards/IProjectCard";
-import {Phase} from "./Phase";
-import {ClaimedMilestone} from "./ClaimedMilestone";
-import {FundedAward} from "./FundedAward";
-import {IMilestone} from "./milestones/IMilestone";
-import {IAward} from "./awards/IAward";
-import {ColonyDealer} from "./colonies/ColonyDealer";
-import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
-import {Board} from "./Board";
+import { IProjectCard } from "./cards/IProjectCard";
+import { Phase } from "./Phase";
+import { ClaimedMilestone } from "./ClaimedMilestone";
+import { FundedAward } from "./FundedAward";
+import { IMilestone } from "./milestones/IMilestone";
+import { IAward } from "./awards/IAward";
+import { ColonyDealer } from "./colonies/ColonyDealer";
+import { DeferredAction } from "./deferredActions/DeferredAction";
+import { Board } from "./Board";
 import { CardName } from "./CardName";
 import { BoardName } from "./BoardName";
 import { SerializedColony } from "./SerializedColony";
@@ -15,13 +15,14 @@ import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
 import { PlayerId } from "./Player";
 import { GameOptions } from "./Game";
+import { IAresData } from "./ares/IAresData";
 
 export interface SerializedGame {
     id: string;
 
     lastSaveId: number;
     seed: number
-    interrupts: Array<PlayerInterrupt>;
+    deferredActions: Array<DeferredAction>;
     gameLog: Array<String>;
     gameAge: number;
     
@@ -59,6 +60,7 @@ export interface SerializedGame {
     colonyDealer: ColonyDealer | undefined;
     preludeExtension: boolean;
     turmoil: SerializedTurmoil;
+    aresData: IAresData;
 
     monsInsuranceOwner: PlayerId | undefined;
     someoneHasRemovedOtherPlayersPlants: boolean;

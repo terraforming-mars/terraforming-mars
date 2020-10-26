@@ -17,7 +17,8 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from "../src/milestones/Ecologist";
-import { Dealer, getProjectCardByName } from "../src/Dealer";
+import { CardFinder } from "../src/CardFinder";
+import { Dealer } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
@@ -36,21 +37,21 @@ describe("Game", function () {
 
     it("correctly separates 71 corporate era cards", function() {
         // include corporate era
-        const dealer = new Dealer(true, false, false, false, false, false);
+        const dealer = new Dealer(true, false, false, false, false, false, false);
         expect(dealer.getDeckSize()).to.eq(208);
 
         // exclude corporate era
-        const dealer2 = new Dealer(false, false, false, false, false, false);
+        const dealer2 = new Dealer(false, false, false, false, false,  false, false);
         expect(dealer2.getDeckSize()).to.eq(137);
     });
 
     it("excludes expansion-specific preludes if those expansions are not selected ", function() {
-        const dealer = new Dealer(true, false, false, false, false, false, true);
+        const dealer = new Dealer(true, false, false, false, false, false,  false, true);
         const preludeDeck = dealer.preludeDeck;
 
         const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
         turmoilPreludes.forEach((preludeName) => {
-            const preludeCard = getProjectCardByName(preludeName)!;
+            const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
             expect(preludeDeck.includes(preludeCard)).to.eq(false)
         });
     });
@@ -311,7 +312,7 @@ describe("Game", function () {
         game.addOceanTile(player1, spaceId);
 
         const space: ISpace = game.getSpace(spaceId);
-        expect(space.player).to.eq(undefined);
+        expect(space.player).is.undefined;
     });
 
     it("Check Ecologist Milestone", function() {
@@ -342,14 +343,14 @@ describe("Game", function () {
         // Cannot afford
         player.megaCredits = 5;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits = 6;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
@@ -372,14 +373,14 @@ describe("Game", function () {
         player.heat = 2;
         player.megaCredits = 3;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits += 1;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });

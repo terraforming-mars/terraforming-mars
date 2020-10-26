@@ -12,7 +12,7 @@ import { Button } from "../components/common/Button";
 import { playerColorClass } from "../utils/utils";
 import { RandomMAOptionType } from "../RandomMAOptionType";
 
-interface CreateGameModel {
+export interface CreateGameModel {
     firstIndex: number;
     playersCount: number;
     players: Array<NewPlayerModel>;
@@ -40,6 +40,7 @@ interface CreateGameModel {
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
     communityCardsOption: boolean;
+    aresExtension: boolean;
     undoOption: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
@@ -51,7 +52,7 @@ interface CreateGameModel {
     seededGame: boolean;
 }
 
-interface NewPlayerModel {
+export interface NewPlayerModel {
     index: number;
     name: string;
     color: Color;
@@ -104,6 +105,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             shuffleMapOption: false,
             promoCardsOption: false,
             communityCardsOption: false,
+            aresExtension: false,
             undoOption: false,
             fastModeOption: false,
             removeNegativeGlobalEventsOption: false,
@@ -147,21 +149,43 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
         },
         handleSettingsUpload: function () {
-            let file = (this.$refs.file as any).files[0];
-            let reader  = new FileReader();
-            let results = undefined;
+            const refs  = this.$refs;
+            const file = (refs.file as any).files[0];
+            const reader  = new FileReader();
             const component = (this as any) as CreateGameModel;
+
             reader.addEventListener("load", function () {
-                results = reader.result;
-                if (typeof(results) == "string") {
-                    results = JSON.parse(results);
-                    for (let k in results) {
-                        component.playersCount = results["players"].length;
+                const readerResults = reader.result;
+                if (typeof(readerResults) == "string") {
+                    const results = JSON.parse(readerResults);
+
+                    component.playersCount = results["players"].length;
+                    component.showCorporationList = results["customCorporationsList"].length > 0;
+                    component.showColoniesList = results["customColoniesList"].length > 0;
+                    component.showCardsBlackList = results["cardsBlackList"].length > 0;
+
+                    for (const k in results) {
+                        if (["customCorporationsList", "customColoniesList", "cardsBlackList"].includes(k)) continue;
                         (component as any)[k] = results[k];
                     }
+
+                    Vue.nextTick(() => {
+                        if (component.showColoniesList) {
+                            (refs.coloniesFilter as any).updateColoniesByNames(results["customColoniesList"]);
+                        }
+
+                        if (component.showCorporationList) {
+                            (refs.corporationsFilter as any).selectedCorporations = results["customCorporationsList"];
+                        }
+
+                        if (component.showCardsBlackList) {
+                            (refs.cardsFilter as any).selectedCardNames = results["cardsBlackList"];
+                        }
+                    });
                 }
             }.bind(this), false);
             if (file) {
+
               if (/\.json$/i.test(file.name)) {
                 reader.readAsText(file);
               }
@@ -303,12 +327,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const communityCardsOption = component.communityCardsOption;
+            const aresExtension = component.aresExtension;
             const undoOption = component.undoOption;
             const fastModeOption = component.fastModeOption;
             const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
             const includeVenusMA = component.includeVenusMA;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
+            const beginnerOption = component.beginnerOption;
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
@@ -355,6 +381,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 communityCardsOption,
+                aresExtension: aresExtension,
                 undoOption,
                 fastModeOption,
                 removeNegativeGlobalEventsOption,
@@ -365,6 +392,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 initialDraft,
                 randomMA,
                 shuffleMapOption,
+                beginnerOption,
             }, undefined, 4);
 
             return dataToSend;
@@ -478,8 +506,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <div class="create-game-subsection-label">Fan-made</div>
 
+                            <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
+                            <label for="ares-checkbox">
+                                <div class="create-game-expansion-icon ares-icon"></div>
+                                <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Ares" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
                             <label for="communityCards-checkbox">
+                                <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
@@ -695,6 +730,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
 
             <corporations-filter
+                ref="corporationsFilter"
                 v-if="showCorporationList"
                 v-on:corporation-list-changed="updateCustomCorporationsList"
                 v-bind:corporateEra="corporateEra"
@@ -707,12 +743,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ></corporations-filter>
 
             <colonies-filter
+                ref="coloniesFilter"
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
                 v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 
             <cards-filter
+                ref="cardsFilter"
                 v-if="showCardsBlackList"
                 v-on:cards-list-changed="updateCardsBlackList"
             ></cards-filter>

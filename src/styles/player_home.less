@@ -391,7 +391,6 @@
 }
 
 .milestones_cont, .awards_cont {
-    display: inline-block;
     vertical-align: top;
 }
 
@@ -415,6 +414,9 @@
         display: inline-block;
         text-align: center;
     }
+    .ma-clickable:focus {
+        box-shadow: none;
+    }
 
     .ma-block {
         display: inline-block;
@@ -423,6 +425,7 @@
         border-radius: 10px;
         margin: 5px;
         vertical-align: top;
+        cursor: pointer;
 
         .award-block {
             border-radius: 10px !important;
@@ -607,17 +610,12 @@
             text-align: center;
             
         }
-
-        .ma-description-hidden {
-            display: none;
-        }
     }
 
     .pwned-item {
         .ma-name,
         .ma-description {
-            filter: grayscale(100%);
-            opacity: 0.5;
+            opacity: 1;
         }
     }
 }
@@ -636,11 +634,12 @@
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: linear-gradient(to right, #e28c22, #ffcc64, #ffcc64, #e28c22);
+    background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
     padding: 1px 33px 1px 10px;
-    width: 140px;
+    width: 190px;
+    letter-spacing: 1px;
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 23px;
     font-weight: bold;
     margin: 0 5px 0 5px;
@@ -651,11 +650,12 @@
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #e28c22, #ffcc64, #ffcc64, #e28c22);
+    background: linear-gradient(135deg, #e28c22, #ffcc64, #e28c22);
     padding: 1px 33px 1px 10px;
-    width: 140px;
+    width: 190px;
+    letter-spacing: 1px;
     text-align: center;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 23px;
     font-weight: bold;
     margin: 0 5px 0 5px;

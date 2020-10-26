@@ -38,7 +38,7 @@ describe("StratosphericBirds", function () {
         player.playedCards.push(card);
 
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {

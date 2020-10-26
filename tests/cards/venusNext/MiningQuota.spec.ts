@@ -15,7 +15,7 @@ describe("MiningQuota", function () {
         player.playedCards.push(new ResearchNetwork());
         expect(card.canPlay(player)).to.eq(true);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
     });
 });

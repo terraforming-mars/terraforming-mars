@@ -13,7 +13,7 @@ describe("TollStation", function () {
         const anotherPlayer = new Player("foo", Color.RED, false);
         const game = new Game("foobar", [player, anotherPlayer], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         anotherPlayer.playedCards.push(card);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
         card.play(player, game);

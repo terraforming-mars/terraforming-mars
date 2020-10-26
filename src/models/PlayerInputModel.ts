@@ -1,7 +1,9 @@
 
 import { PlayerInputTypes } from "../PlayerInputTypes";
-import { CardModel } from './CardModel';
+import { CardModel } from "./CardModel";
 import { ColonyModel } from "./ColonyModel";
+import { IPayProductionModel } from "./IPayProductionUnitsModel";
+import { IAresData } from "../ares/IAresData";
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -21,5 +23,7 @@ export interface PlayerInputModel {
     title: string;
     buttonLabel: string;
     coloniesModel : Array<ColonyModel> | undefined;
+    payProduction : IPayProductionModel | undefined;
+    aresData: IAresData | undefined;
 }
 

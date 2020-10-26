@@ -2,7 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class Donation extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];

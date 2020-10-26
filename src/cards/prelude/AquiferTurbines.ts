@@ -3,8 +3,9 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
+import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
@@ -14,9 +15,9 @@ export class AquiferTurbines extends PreludeCard implements IProjectCard {
         return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
     }
     public play(player: Player, game: Game) {
-        player.addProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY, 2);
         player.megaCredits -= 3;
-        game.addOceanInterrupt(player);
+        game.defer(new PlaceOceanTile(player, game));
         return undefined;
     }
 }

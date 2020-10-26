@@ -2,9 +2,9 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
 
 export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
@@ -18,4 +18,3 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
         return undefined;
     }
 }
-

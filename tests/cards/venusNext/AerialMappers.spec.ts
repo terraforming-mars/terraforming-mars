@@ -20,7 +20,7 @@ describe("AerialMappers", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - multiple targets", function () {

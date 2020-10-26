@@ -40,7 +40,7 @@ describe("Predators", function () {
         player.addResourceTo(fish);
         player.addResourceTo(smallAnimals);
         const action = card.action(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         action!.cb(action!.cards);
         expect(card.resourceCount).to.eq(1);
@@ -59,7 +59,7 @@ describe("Predators", function () {
         expect(card.canAct(player, game)).to.eq(true);
         
         const action = card.action(player, game);
-        expect(action).to.eq(undefined); // No option to choose Pets card provided
+        expect(action).is.undefined; // No option to choose Pets card provided
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);
@@ -78,7 +78,7 @@ describe("Predators", function () {
         expect(card.canAct(player, game)).to.eq(true);
         
         const action = card.action(player, game);
-        expect(action).to.eq(undefined); // No option to choose BioEngineering Enclosure card provided
+        expect(action).is.undefined; // No option to choose BioEngineering Enclosure card provided
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);

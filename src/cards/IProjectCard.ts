@@ -7,7 +7,7 @@ import { Resources } from "../Resources";
 // import { CardMetadata } from "../cards/CardMetadata";
 
 export interface IProjectCard extends ICard {
-    addPlayCardInterrupt?: (player: Player, game: Game) => void;
+    addPlayCardDeferredAction?: (player: Player, game: Game) => void;
     canPlay?: (player: Player, game: Game, bonusMc?: number) => boolean;
     cardType: CardType;
     cost: number;

@@ -25,7 +25,7 @@ describe("Thermophiles", function () {
         (game as any).venusScaleLevel = 6;
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - multiple targets", function () {
@@ -40,7 +40,7 @@ describe("Thermophiles", function () {
         player.addResourceTo(card);
 
         const orOptions = card.action(player,game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
+        expect(orOptions).is.not.undefined;
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);

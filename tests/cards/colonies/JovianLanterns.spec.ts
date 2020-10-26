@@ -28,7 +28,7 @@ describe("JovianLanterns", function () {
         expect(card.canAct(player)).to.eq(true);
 
         const action = card.action(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(2);
         expect(player.titanium).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(1);

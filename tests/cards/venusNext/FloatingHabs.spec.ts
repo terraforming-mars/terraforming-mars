@@ -25,7 +25,7 @@ describe("FloatingHabs", function () {
         player.playedCards.push(new Research());
         expect(card.canPlay(player)).to.eq(true);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - single target", function () {
@@ -33,7 +33,7 @@ describe("FloatingHabs", function () {
         player.megaCredits = 10;
 
         card.action(player, game);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });
@@ -45,7 +45,7 @@ describe("FloatingHabs", function () {
         expect(action instanceof SelectCard).to.eq(true);
         
         (action as SelectCard<ICard>).cb([card]);
-        game.runNextInterrupt(() => {});
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });

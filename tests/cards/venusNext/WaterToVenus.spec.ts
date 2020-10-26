@@ -11,7 +11,7 @@ describe("WaterToVenus", function () {
         const game = new Game("foobar", [player,player], player);
 
         const play = card.play(player, game);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
 });

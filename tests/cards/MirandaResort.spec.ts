@@ -12,7 +12,7 @@ describe("MirandaResort", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new BusinessNetwork());
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

@@ -4,7 +4,6 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game, GameOptions } from '../../../src/Game';
 import { setCustomGameOptions } from "../../TestingUtils";
-import { SelectParty } from "../../../src/interrupts/SelectParty";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { EventAnalysts } from "../../../src/cards/turmoil/EventAnalysts";
@@ -35,11 +34,10 @@ describe("Incite", function () {
 
     it("Can perform initial action", function () {
         card.initialAction(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions.length).to.eq(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const selectParty = game.interrupts[0] as SelectParty;
-        (selectParty.playerInput as OrOptions).options[0].cb();
+        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        orOptions.options[0].cb();
 
         const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
         expect(marsFirst!.delegates.filter((d) => d === player.id).length).to.eq(2);

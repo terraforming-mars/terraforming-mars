@@ -28,8 +28,8 @@ describe("GreatEscarpmentConsortium", function () {
     it("Should play - auto select if single target", function () {
         player.addProduction(Resources.STEEL);
         card.play(player, game); // can decrease own production
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions[0].execute();
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
 
@@ -39,10 +39,21 @@ describe("GreatEscarpmentConsortium", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
+        expect(game.deferredActions.length).to.eq(1);
+        const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.STEEL)).to.eq(0);
+    });
+
+    it("Can play in solo - won't reduce own production", function () {
+        game = new Game("foobar", [player], player);
+        player.addProduction(Resources.STEEL);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
+        
+        card.play(player, game);
+
+        const input = game.deferredActions[0].execute();
+        expect(input).is.undefined;
+        expect(player.getProduction(Resources.STEEL)).to.eq(2); // should increase
     });
 });

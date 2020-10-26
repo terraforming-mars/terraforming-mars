@@ -7,10 +7,10 @@ import { SelectCard } from "../inputs/SelectCard";
 import { OrOptions } from "../inputs/OrOptions";
 import { PlayerInput } from "../PlayerInput";
 import { CardName } from "../CardName";
-import { Resources } from "../Resources";
 import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
 import { ICard } from "./ICard";
+import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class Virus implements IProjectCard {
     public cost: number = 1;
@@ -44,7 +44,7 @@ export class Virus implements IProjectCard {
         const remove5Plants = () => {
             return new SelectOption("Remove up to 5 plants from a player", "Remove plants", () =>
             {
-                game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 5);
+                game.defer(new RemoveAnyPlants(player, game, 5));
                 return undefined;
             })
         };
@@ -68,7 +68,7 @@ export class Virus implements IProjectCard {
 
         // Another player has plants to remove
         if (cards.length === 0 && playersWithPlants > 0) {
-            game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 5);
+            game.defer(new RemoveAnyPlants(player, game, 5));
             return undefined;
         }
 

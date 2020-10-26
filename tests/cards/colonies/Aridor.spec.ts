@@ -14,7 +14,7 @@ describe("Aridor", function () {
         const player2 = new Player("test2", Color.RED, false);        
         const game = new Game("foobar", [player,player2], player);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Predators());
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

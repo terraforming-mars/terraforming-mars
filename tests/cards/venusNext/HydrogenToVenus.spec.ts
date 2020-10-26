@@ -44,7 +44,7 @@ describe("HydrogenToVenus", function () {
 
     it("Should play with no venus cards", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
 });

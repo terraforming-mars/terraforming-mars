@@ -15,7 +15,7 @@ describe("AsteroidHollowing", function () {
     });
 
     it("Should play", function () {
-        expect(card.play()).to.eq(undefined);
+        expect(card.play()).is.undefined;
     });
 
     it("Can't act", function () {

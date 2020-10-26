@@ -10,6 +10,7 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRow } from "../cards/CardRow";
 import { CardBonus } from "../cards/CardBonus";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class IceAsteroid implements IProjectCard {
     public cost: number = 23;
@@ -35,8 +36,8 @@ export class IceAsteroid implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addOceanInterrupt(player, "Select space for first ocean");
-        game.addOceanInterrupt(player, "Select space for second ocean");
+        game.defer(new PlaceOceanTile(player, game, "Select space for first ocean"));
+        game.defer(new PlaceOceanTile(player, game, "Select space for second ocean"));
         return undefined;
     }
     public metadata: CardMetadata = {

@@ -33,7 +33,7 @@ describe("Astrodrill", function () {
         const spendAsteroidOption = action.options[0];
         spendAsteroidOption.cb();
         expect(player.titanium).to.eq(3);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions.length).to.eq(0);
     });
 
     it("Should play - can add asteroid resource to self", function () {
@@ -45,7 +45,7 @@ describe("Astrodrill", function () {
         const addAsteroidOption = action.options[1] as OrOptions;
         const result = addAsteroidOption.cb();
         expect(card.resourceCount).to.eq(4);
-        expect(result).to.eq(undefined);
+        expect(result).is.undefined;
     });
 
     it("Should play - can add asteroid resource to other card", function () {
@@ -58,7 +58,7 @@ describe("Astrodrill", function () {
 
         const result = addAsteroidOption.cb([cometAiming]);
         expect(cometAiming.resourceCount).to.eq(1);
-        expect(result).to.eq(undefined);
+        expect(result).is.undefined;
     });
 
     it("Should play - can gain a standard resource", function () {

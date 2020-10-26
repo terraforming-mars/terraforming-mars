@@ -8,12 +8,12 @@ describe("StormCraftIncorporated", function () {
         const card = new StormCraftIncorporated();
         const player = new Player("test", Color.BLUE, false);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
 
         player.corporationCard = card;
 
         const action = card.action(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
     });
 });

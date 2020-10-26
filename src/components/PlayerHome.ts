@@ -129,7 +129,9 @@ export const PlayerHome = Vue.component("player-home", {
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
-                        :shouldNotify="true"></board>
+                        :shouldNotify="true"
+                        :aresExtension="player.aresExtension"
+                        :aresData="player.aresData"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 

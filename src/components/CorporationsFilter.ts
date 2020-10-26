@@ -28,6 +28,7 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             cardsByModuleMap: cardsByModuleMap,
             customCorporationsList: false,
             selectedCorporations: [
+                ...cardsByModuleMap.get(GameModule.Base)!,
                 ...this.corporateEra ? cardsByModuleMap.get(GameModule.CorpEra)! : [],
                 ...this.prelude ? cardsByModuleMap.get(GameModule.Prelude)! : [],
                 ...this.venusNext ? cardsByModuleMap.get(GameModule.Venus)! : [],

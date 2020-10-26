@@ -1,8 +1,7 @@
-
 import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class ResearchCoordination implements IProjectCard {
     public cost: number = 4;

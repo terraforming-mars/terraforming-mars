@@ -11,7 +11,7 @@ describe("Pristar", function () {
         const game = new Game("foobar", [player,player], player);
         const play = card.play(player);
         player.corporationCard = card;
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.megaCredits = 10;
         game.increaseTemperature(player,1);
         if (player.corporationCard.onProductionPhase !== undefined) {

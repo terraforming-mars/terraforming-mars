@@ -9,6 +9,8 @@ import { ICard } from "../../../src/cards/ICard";
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Luna } from "../../../src/colonies/Luna";
 import { Triton } from "../../../src/colonies/Triton";
+import { SelectColony } from "../../../src/inputs/SelectColony";
+import { ColonyName } from "../../../src/colonies/ColonyName";
 
 describe("TitanFloatingLaunchPad", function () {
     let card : TitanFloatingLaunchPad, player : Player, game : Game;
@@ -79,8 +81,8 @@ describe("TitanFloatingLaunchPad", function () {
 
         orOptions.options[1].cb(); // Trade for free
         expect(game.deferredActions.length).to.eq(1);
-        const selectTrade = game.deferredActions[0].execute() as OrOptions;
-        selectTrade.options[0].cb();
+        const selectColony = game.deferredActions[0].execute() as SelectColony;
+        selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
         expect(card.resourceCount).to.eq(7);
         expect(player.megaCredits).to.eq(2);
     });

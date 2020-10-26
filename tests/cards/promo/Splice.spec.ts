@@ -28,7 +28,7 @@ describe("Splice", function () {
 
         player2.playedCards.push(card2);
         const action = card.onCardPlayed(player2, game, card2);
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
         if ( ! (action instanceof OrOptions)) return;
 
         expect(action.options.length).to.eq(2);

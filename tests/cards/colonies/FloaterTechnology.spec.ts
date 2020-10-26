@@ -23,7 +23,7 @@ describe("FloaterTechnology", function () {
     });
 
     it("Cannot act without targets", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
     
     it("Acts automatically with single targets", function () {

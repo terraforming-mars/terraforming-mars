@@ -25,7 +25,7 @@ describe("TitanShuttles", function () {
     });
 
     it("Can act", function () {
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
     });
 
     it("Gives VP", function () {
@@ -58,7 +58,7 @@ describe("TitanShuttles", function () {
         player.addResourceTo(card, 7);
 
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         expect(orOptions.options.length).to.eq(2);
 
         // spend floaters to gain titanium

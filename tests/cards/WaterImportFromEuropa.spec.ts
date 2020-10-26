@@ -16,7 +16,7 @@ describe("WaterImportFromEuropa", function () {
     });
 
     it("Can't act", function () {
-        expect(card.canAct(player,game)).to.eq(false);
+        expect(card.canAct(player,game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -44,6 +44,6 @@ describe("WaterImportFromEuropa", function () {
         maxOutOceans(player, game);
         player.megaCredits = 12;
         
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
     });
 });

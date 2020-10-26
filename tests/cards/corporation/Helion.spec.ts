@@ -12,6 +12,6 @@ describe("Helion", function () {
         const action = card.play(player);
         expect(action).is.undefined;
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
-        expect(player.canUseHeatAsMegaCredits).to.eq(true);
+        expect(player.canUseHeatAsMegaCredits).is.true;
     });
 });

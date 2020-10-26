@@ -25,7 +25,7 @@ describe("LavaTubeSettlement", function () {
     });
 
     it("Can't play without energy production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play if no volcanic spaces left", function () {
@@ -37,12 +37,12 @@ describe("LavaTubeSettlement", function () {
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
         
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;

@@ -18,10 +18,10 @@ describe("NaturalPreserveAres", function () {
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const action = card.play(player, game);
         expect(action).is.not.undefined;
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         const space = action.availableSpaces[0];
         action.cb(space);

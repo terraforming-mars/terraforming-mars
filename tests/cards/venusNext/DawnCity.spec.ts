@@ -14,7 +14,7 @@ describe("DawnCity", function () {
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
         
         const action = card.play(player,game);
         expect(action).is.undefined;

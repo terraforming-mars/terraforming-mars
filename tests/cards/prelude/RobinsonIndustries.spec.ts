@@ -18,12 +18,12 @@ describe("RobinsonIndustries", function () {
 
     it("Can't act", function () {
         player.megaCredits = 3;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Can act", function () {
         player.megaCredits = 4;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         const result = card.action(player, game) as OrOptions;
         expect(result.options.length).to.eq(6);

@@ -14,7 +14,7 @@ describe("MorningStarInc", function () {
         const game = new Game("foobar", [player,player], player);
         player.corporationCard = corp;
         game.increaseVenusScaleLevel(player, 3);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         expect(game.getVenusScaleLevel()).to.eq(6);
     });
 });

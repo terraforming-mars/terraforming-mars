@@ -12,10 +12,10 @@ describe("IshtarMining", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         game.increaseVenusScaleLevel(player, 3);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         game.increaseVenusScaleLevel(player, 3);
         expect(game.getVenusScaleLevel()).to.eq(12);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const action = card.play(player);
         expect(action).is.undefined;
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

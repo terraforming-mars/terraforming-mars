@@ -13,12 +13,12 @@ describe("Meltworks", function () {
 
     it("Can't act", function () {
         player.heat = 4;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.heat = 5;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         
         card.action(player);
         expect(player.heat).to.eq(0);

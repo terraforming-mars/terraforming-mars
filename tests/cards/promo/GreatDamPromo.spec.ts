@@ -17,14 +17,14 @@ describe("GreatDamPromo", function () {
     });
 
     it("Can't play without meeting requirements", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         maxOutOceans(player, game, 4);
 
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(1);
     });

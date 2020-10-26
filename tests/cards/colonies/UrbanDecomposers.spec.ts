@@ -24,14 +24,14 @@ describe("UrbanDecomposers", function () {
         let colony = new Luna();
         colony.colonies.push(player.id);
         game.colonies.push(colony);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play if player has no colony", function () {
         const lands = game.board.getAvailableSpacesOnLand(player);
         lands[0].player = player;
         lands[0].tile = { tileType: TileType.CITY };
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play without targets", function () {
@@ -43,7 +43,7 @@ describe("UrbanDecomposers", function () {
         colony.colonies.push(player.id);
         game.colonies.push(colony);
         
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });

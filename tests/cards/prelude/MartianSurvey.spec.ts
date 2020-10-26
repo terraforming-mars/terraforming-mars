@@ -15,11 +15,11 @@ describe("MartianSurvey", function () {
 
     it("Can't play", function () {
         (game as any).oxygenLevel = 5;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
         expect(game.deferredActions.length).to.eq(1);
 

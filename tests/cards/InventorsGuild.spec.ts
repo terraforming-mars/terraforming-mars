@@ -23,7 +23,7 @@ describe("InventorsGuild", function () {
     it("Should act", function () {
         player.megaCredits = 3;
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         (action! as SelectCard<IProjectCard>).cb([]);
 
         expect(game.dealer.discarded.length).to.eq(1);

@@ -14,13 +14,13 @@ describe("PhysicsComplex", function () {
     it("Can't act", function () {
         card.play();
         player.energy = 5;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
         player.energy = 6;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         card.action(player);
         expect(player.energy).to.eq(0);

@@ -22,11 +22,11 @@ describe("RefugeeCamps", function () {
 
     it("Can't act", function () {
         player.addProduction(Resources.MEGACREDITS, -5);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player);
         expect(card.resourceCount).to.eq(1);
     });

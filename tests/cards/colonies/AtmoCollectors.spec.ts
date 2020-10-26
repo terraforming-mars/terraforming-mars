@@ -27,7 +27,7 @@ describe("AtmoCollectors", function () {
 
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions).is.not.undefined;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);

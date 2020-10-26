@@ -18,12 +18,12 @@ describe("LocalHeatTrapping", function () {
     });
 
     it("Can't play without 5 heat", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play - no animal targets", function () {
         player.heat = 5;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         
         card.play(player, game);
         player.playedCards.push(card);
@@ -38,7 +38,7 @@ describe("LocalHeatTrapping", function () {
 
         const orOptions = card.play(player, game) as OrOptions;
         expect(orOptions).is.not.undefined;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb();
         expect(player.plants).to.eq(4);
@@ -67,6 +67,6 @@ describe("LocalHeatTrapping", function () {
 
         player.megaCredits = 0;
         player.heat = 5; // have to pay for card with 1 heat
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 });

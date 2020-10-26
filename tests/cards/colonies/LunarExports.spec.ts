@@ -11,7 +11,7 @@ describe("LunarExports", function () {
         const player = new Player("test", Color.BLUE, false);
         const orOptions = card.play(player) as OrOptions;
         expect(orOptions).is.not.undefined;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions.options[0].cb();
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });

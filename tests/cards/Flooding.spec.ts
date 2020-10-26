@@ -22,7 +22,7 @@ describe("Flooding", function () {
     it("Should play", function () {
         const oceans = game.board.getAvailableSpacesForOcean(player);
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         expect(action!.cb(oceans[0])).is.undefined;
         const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);
@@ -35,7 +35,7 @@ describe("Flooding", function () {
         }
 
         const subAction: OrOptions = action!.cb(oceans[0]) as OrOptions;
-        expect(subAction instanceof OrOptions).to.eq(true);
+        expect(subAction instanceof OrOptions).is.true;
         expect(subAction!.options.length).to.eq(2);
         expect(subAction!.options[1].cb()).is.undefined;
         const subActionSelectPlayer: SelectPlayer = subAction!.options[0] as SelectPlayer;
@@ -57,7 +57,7 @@ describe("Flooding", function () {
         game.addGreenery(player, "03");
         game.addGreenery(player2, "05");
 
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         const subActions: OrOptions = action!.cb(oceanSpaces[0]) as OrOptions;
         expect(subActions.options.length).to.eq(2);
 

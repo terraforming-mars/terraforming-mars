@@ -681,6 +681,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.megaCredits -= cardsToPayFor * cardCost;
       }
       corporationCard.play(player, this);
+      this.log("${0} played ${1}", b => b.player(player).card(corporationCard));
 
       // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
       for (const somePlayer of this.getPlayers()) {

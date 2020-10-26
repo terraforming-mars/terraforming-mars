@@ -22,10 +22,10 @@ describe("SponsoredAcademies", function () {
         expect(action instanceof SelectCard).is.true;
 
         // No SponsoredAcademies itself suggested to discard
-        expect(action.cards.filter((c) => c.name === card.name).length).to.eq(0);
+        expect(action.cards.filter((c) => c.name === card.name)).has.lengthOf(0);
 
         action.cb([card2]);
-        expect(player.cardsInHand.length).to.eq(4);
-        expect(player2.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(4);
+        expect(player2.cardsInHand).has.lengthOf(1);
     });
 });

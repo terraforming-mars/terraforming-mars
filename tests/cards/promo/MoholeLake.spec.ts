@@ -21,7 +21,7 @@ describe("MoholeLake", function () {
     it("Can play", function () {
         card.play(player, game);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         

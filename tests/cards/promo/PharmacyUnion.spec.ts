@@ -37,7 +37,7 @@ describe("PharmacyUnion", function () {
         expect(card.resourceCount).to.eq(2);
         // Should not pay for the free Science card
         expect(player.megaCredits).to.eq(46);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.cardsInHand[0].tags.includes(Tags.SCIENCE)).is.true;
     });
 
@@ -66,7 +66,7 @@ describe("PharmacyUnion", function () {
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         expect(game.deferredActions[0].execute()).is.undefined;
         game.deferredActions.shift();
 
@@ -76,7 +76,7 @@ describe("PharmacyUnion", function () {
         const lagrangeObservatory = new LagrangeObservatory();
         player2.playedCards.push(lagrangeObservatory);
         card.onCardPlayed(player2, game, lagrangeObservatory);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
     });
@@ -88,7 +88,7 @@ describe("PharmacyUnion", function () {
         const research = new Research();
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
         expect(game.deferredActions[0].execute()).is.undefined;
         game.deferredActions.shift();
         expect(game.deferredActions[0].execute()).is.undefined;
@@ -104,7 +104,7 @@ describe("PharmacyUnion", function () {
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         game.deferredActions.splice(0, 1);
@@ -115,7 +115,7 @@ describe("PharmacyUnion", function () {
         
         // Cannot trigger once per game effect a second time
         card.onCardPlayed(player, game, searchForLife);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
         expect(player.getTerraformRating()).to.eq(23);
     });
 
@@ -149,14 +149,14 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player2, game, viralEnhancers);
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
 
 
         // PU player playing a Science/Microbes card and Pharmacy Union has no resource
         card.resourceCount = 0;
         player.playedCards.push(viralEnhancers);
         card.onCardPlayed(player, game, viralEnhancers);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[1].cb(); // Add disease then remove it

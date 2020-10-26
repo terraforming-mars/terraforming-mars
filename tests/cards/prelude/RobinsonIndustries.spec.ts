@@ -26,7 +26,7 @@ describe("RobinsonIndustries", function () {
         expect(card.canAct(player)).is.true;
 
         const result = card.action(player, game) as OrOptions;
-        expect(result.options.length).to.eq(6);
+        expect(result.options).has.lengthOf(6);
 
         result.options[1].cb();
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
@@ -36,13 +36,13 @@ describe("RobinsonIndustries", function () {
     it("Only allows to choose from lowest production(s)", function () {
         player.addProduction(Resources.MEGACREDITS, -1);
         let result = card.action(player, game) as OrOptions;
-        expect(result.options.length).to.eq(1);
+        expect(result.options).has.lengthOf(1);
 
         player.addProduction(Resources.MEGACREDITS, 5);
         player.addProduction(Resources.TITANIUM, 1);
         player.addProduction(Resources.PLANTS, 2);
 
         result = card.action(player, game) as OrOptions;
-        expect(result.options.length).to.eq(3);
+        expect(result.options).has.lengthOf(3);
     });
 });

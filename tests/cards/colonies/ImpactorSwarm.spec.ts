@@ -24,7 +24,7 @@ describe("ImpactorSwarm", function () {
     it("Should be able to remove plants from other player", function () {
         player2.plants = 2;
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();

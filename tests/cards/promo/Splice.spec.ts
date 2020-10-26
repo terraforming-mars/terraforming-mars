@@ -31,7 +31,7 @@ describe("Splice", function () {
         expect(action instanceof OrOptions).is.true;
         if ( ! (action instanceof OrOptions)) return;
 
-        expect(action.options.length).to.eq(2);
+        expect(action.options).has.lengthOf(2);
         const orOptions = action.options[0] as OrOptions;
 
         orOptions.cb();
@@ -73,7 +73,7 @@ describe("Splice", function () {
 
         // Player 2 should have the option to pick a microbe or 2 MC
         const pi3 = player2.getWaitingFor() as OrOptions;
-        expect(pi3.options.length).to.eq(2);
+        expect(pi3.options).has.lengthOf(2);
         expect(pi3.options[0].title).to.eq("Add a microbe resource to this card");
         expect(pi3.options[1].title).to.eq("Gain 2 MC");
 

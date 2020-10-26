@@ -32,7 +32,7 @@ describe("TitanFloatingLaunchPad", function () {
 
         // No resource and no other card to add to
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
@@ -40,7 +40,7 @@ describe("TitanFloatingLaunchPad", function () {
 
         // No open colonies and no other card to add to
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const input2 = game.deferredActions[0].execute();
         game.deferredActions.shift();
         expect(input2).is.undefined;
@@ -53,7 +53,7 @@ describe("TitanFloatingLaunchPad", function () {
         player.playedCards.push(card2);
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
         selectCard.cb([card]);
         expect(card.resourceCount).to.eq(1);
@@ -73,14 +73,14 @@ describe("TitanFloatingLaunchPad", function () {
         const orOptions = card.action(player, game) as OrOptions;
 
         orOptions.options[0].cb(); // Add resource
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
         game.deferredActions.shift();
         selectCard.cb([card]);
         expect(card.resourceCount).to.eq(8);
 
         orOptions.options[1].cb(); // Trade for free
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectColony = game.deferredActions[0].execute() as SelectColony;
         selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
         expect(card.resourceCount).to.eq(7);

@@ -20,7 +20,7 @@ describe("AerospaceMission", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         const selectColony = game.deferredActions[0].execute() as SelectColony;
         game.deferredActions.shift();

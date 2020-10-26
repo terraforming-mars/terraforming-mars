@@ -35,7 +35,7 @@ describe("Atmoscoop", function () {
         const action = card.play(player, game) as OrOptions;
         expect(action instanceof OrOptions).is.true;
 
-        expect(action.options.length).to.eq(2);
+        expect(action.options).has.lengthOf(2);
         const orOptions = action.options[1] as OrOptions;
 
         orOptions.cb();

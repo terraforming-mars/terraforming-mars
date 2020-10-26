@@ -35,7 +35,7 @@ describe("RedSpotObservatory", function () {
         expect(orOptions instanceof OrOptions).is.true;
         orOptions!.options[0].cb();
 
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.getResourcesOnCard(card)).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(2);
     });

@@ -46,8 +46,8 @@ describe("Playwrights", function () {
         selectCard.cb([event]);
         expect(player.getTerraformRating()).to.eq(tr + 4);
         expect(player.megaCredits).eq(0);
-        expect(player.playedCards.length).to.eq(0);
-        expect(player.removedFromPlayCards.length).to.eq(1);
+        expect(player.playedCards).has.lengthOf(0);
+        expect(player.removedFromPlayCards).has.lengthOf(1);
     });
 
     it("Can replay other player's event", function () {
@@ -62,8 +62,8 @@ describe("Playwrights", function () {
         selectCard.cb([event]);
         expect(player.getTerraformRating()).to.eq(tr + 2);
         expect(player.megaCredits).eq(0);
-        expect(player2.playedCards.length).to.eq(0);
-        expect(player.removedFromPlayCards.length).to.eq(1);
+        expect(player2.playedCards).has.lengthOf(0);
+        expect(player.removedFromPlayCards).has.lengthOf(1);
     });
 
     it("Cannot act without any playable events", function () {

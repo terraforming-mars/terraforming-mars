@@ -34,7 +34,7 @@ describe("TitanShuttles", function () {
 
     it("Auto add floaters if only 1 option and 1 target available", function () {
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const input = game.deferredActions[0].execute();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(2);
@@ -45,7 +45,7 @@ describe("TitanShuttles", function () {
         player.playedCards.push(card2);
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
         selectCard.cb([card]);
@@ -59,7 +59,7 @@ describe("TitanShuttles", function () {
 
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions instanceof OrOptions).is.true;
-        expect(orOptions.options.length).to.eq(2);
+        expect(orOptions.options).has.lengthOf(2);
 
         // spend floaters to gain titanium
         orOptions.options[1].cb(6);
@@ -68,7 +68,7 @@ describe("TitanShuttles", function () {
 
         // add 2 floaters to Jovian card
         orOptions.options[0].cb();
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
         selectCard.cb([card2]);

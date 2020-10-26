@@ -11,12 +11,12 @@ describe("IoResearchOutpost", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // Draw cards
         game.runDeferredAction(game.deferredActions[0], () => {});
 
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

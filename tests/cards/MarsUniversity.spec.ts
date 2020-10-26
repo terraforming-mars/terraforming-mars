@@ -21,20 +21,20 @@ describe("MarsUniversity", function () {
         expect(action).is.undefined;
 
         expect(card.onCardPlayed(player, game, new Pets())).is.undefined;
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
 
         player.cardsInHand.push(card);
         card.onCardPlayed(player, game, card);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[0].cb([card]);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.cardsInHand[0]).not.to.eq(card);
-        expect(game.dealer.discarded.length).to.eq(1);
+        expect(game.dealer.discarded).has.lengthOf(1);
         expect(game.dealer.discarded[0]).to.eq(card);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Gives victory point", function () {
@@ -46,7 +46,7 @@ describe("MarsUniversity", function () {
     it("Runs twice for multiple science tags", function () {
         player.cardsInHand.push(card, card);
         card.onCardPlayed(player, game, new Research());
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         game.deferredActions.shift();
@@ -56,6 +56,6 @@ describe("MarsUniversity", function () {
         game.deferredActions.shift();
         orOptions2.options[1].cb();
 
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 });

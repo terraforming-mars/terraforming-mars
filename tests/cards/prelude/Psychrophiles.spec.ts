@@ -33,7 +33,7 @@ describe("Psychrophiles", function () {
         player.playedCards.push(card);
         
         card.action(player);
-        expect(player.getCardsWithResources().length).to.eq(1);
+        expect(player.getCardsWithResources()).has.lengthOf(1);
         expect(player.getMicrobesCanSpend()).to.eq(1);
     });
 });

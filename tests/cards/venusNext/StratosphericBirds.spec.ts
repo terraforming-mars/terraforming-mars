@@ -60,7 +60,7 @@ describe("StratosphericBirds", function () {
 
         const action = card.play(player);
         expect(action instanceof SelectCard).is.true;
-        expect(action!.cards.length).to.eq(2);
+        expect(action!.cards).has.lengthOf(2);
 
         action!.cb([deuteriumExport]);
         expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);

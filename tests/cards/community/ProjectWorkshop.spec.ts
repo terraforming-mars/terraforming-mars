@@ -30,7 +30,7 @@ describe("ProjectWorkshop", function () {
         expect(player.titanium).to.eq(1);
 
         card.initialAction(player, game);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
     });
 
@@ -44,7 +44,7 @@ describe("ProjectWorkshop", function () {
 
         expect(card.canAct(player)).is.true;
         card.action(player, game).cb();
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
     });
 
@@ -53,9 +53,9 @@ describe("ProjectWorkshop", function () {
         player.megaCredits = 0;
 
         card.action(player, game).cb();
-        expect(player.playedCards.length).to.eq(0);
+        expect(player.playedCards).has.lengthOf(0);
         expect(game.dealer.discarded.includes(earthOffice)).is.true;
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
     });
 
     it("Converts VP to TR correctly", function () {
@@ -75,11 +75,11 @@ describe("ProjectWorkshop", function () {
         
         selectCard.cb([smallAnimals]);
         expect(player.getTerraformRating()).to.eq(originalTR + 2);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
 
         selectCard.cb([extremophiles]);
         expect(player.getTerraformRating()).to.eq(originalTR + 5);
-        expect(player.cardsInHand.length).to.eq(4);
+        expect(player.cardsInHand).has.lengthOf(4);
     });
 
     it("Can select option if able to do both actions", function () {

@@ -27,8 +27,8 @@ describe("SubCrustMeasurements", function () {
     });
 
     it("Should take action", function () {
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(0);
         card.action(player, game);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

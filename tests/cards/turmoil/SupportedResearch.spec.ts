@@ -20,6 +20,6 @@ describe("SupportedResearch", function () {
         expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
     });
 });

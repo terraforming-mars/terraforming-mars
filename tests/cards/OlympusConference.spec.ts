@@ -26,11 +26,11 @@ describe("OlympusConference", function () {
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
         card.onCardPlayed(player, game, new Bushes()); 
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
 
         // No resource
         card.onCardPlayed(player, game, card);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
@@ -38,7 +38,7 @@ describe("OlympusConference", function () {
 
         // Resource available
         card.onCardPlayed(player, game, card);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         game.deferredActions.shift();
@@ -47,14 +47,14 @@ describe("OlympusConference", function () {
 
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(1);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(1);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Plays twice for Research", function () {
         player.playedCards.push(card);
         card.onCardPlayed(player, game, new Research());
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // No resource, can't draw, resource automatically added
         const input = game.deferredActions[0].execute();
@@ -67,9 +67,9 @@ describe("OlympusConference", function () {
         game.deferredActions.shift();
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
 
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Triggers before Mars University", function() {
@@ -85,7 +85,7 @@ describe("OlympusConference", function () {
         player.playCard(game, scienceTagCard);
 
         // OC asking to draw & MU asking to discard
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
         const orOptions = game.deferredActions[0].execute() as OrOptions;
@@ -108,7 +108,7 @@ describe("OlympusConference", function () {
         player.playCard(game, scienceTagCard);
 
         // OC asking to draw & MU asking to discard
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
         const orOptions2 = game.deferredActions[0].execute() as OrOptions;

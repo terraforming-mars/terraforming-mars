@@ -36,7 +36,7 @@ describe("CometAiming", function () {
         expect(card.resourceCount).to.eq(1);
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
@@ -65,7 +65,7 @@ describe("CometAiming", function () {
         expect(card.canAct(player, game)).is.true;
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
         expect(player.titanium).to.eq(0);
         expect(card.resourceCount).to.eq(2);
     });

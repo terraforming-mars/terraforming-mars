@@ -17,7 +17,7 @@ describe("Board", function () {
 
     it("Can have greenery placed on any available land when player has no tile placed", function () {
         const availableSpaces = board.getAvailableSpacesForGreenery(player);
-        expect(availableSpaces.length).to.eq(board.getAvailableSpacesOnLand(player).length);
+        expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
     });
 
     it("Can have greenery placed on any available land when player has a tile placed that is land locked", function () {
@@ -28,7 +28,7 @@ describe("Board", function () {
         board.spaces[8].player = player2;
         board.spaces[8].tile = { tileType: TileType.GREENERY };
         const availableSpaces = board.getAvailableSpacesForGreenery(player);
-        expect(availableSpaces.length).to.eq(board.getAvailableSpacesOnLand(player).length);
+        expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
     });
 
     it("Can only place greenery adjacent to a tile a player owns", function () {
@@ -37,7 +37,7 @@ describe("Board", function () {
         board.spaces[7].player = player2;
         board.spaces[7].tile = { tileType: TileType.GREENERY };
         const availableSpaces = board.getAvailableSpacesForGreenery(player);
-        expect(availableSpaces.length).to.eq(1);
+        expect(availableSpaces).has.lengthOf(1);
     });
     it("getNthAvailableLandSpace", function() {
         // board spaces start at 03, and the top of the map looks like this

@@ -46,6 +46,6 @@ describe("Banned Delegate", function () {
             orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
         }
 
-        expect(greens.delegates.length).to.eq(initialDelegatesCount - 1);
+        expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);
     });
 });

@@ -21,7 +21,7 @@ describe("GiantIceAsteroid", function () {
         player2.plants = 4;
         player3.plants = 6;
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(3);
+        expect(game.deferredActions).has.lengthOf(3);
 
         const firstOcean = game.deferredActions[0].execute() as SelectSpace;
         firstOcean.cb(firstOcean.availableSpaces[0]);
@@ -29,7 +29,7 @@ describe("GiantIceAsteroid", function () {
         secondOcean.cb(secondOcean.availableSpaces[1]);
 
         const orOptions = game.deferredActions[2].execute() as OrOptions;
-        expect(orOptions.options.length).to.eq(3);
+        expect(orOptions.options).has.lengthOf(3);
 
         orOptions.options[0].cb();
         expect(player2.plants).to.eq(0);

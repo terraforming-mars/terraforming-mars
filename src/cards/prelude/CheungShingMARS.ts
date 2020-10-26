@@ -1,4 +1,3 @@
-
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
@@ -14,13 +13,12 @@ export class CheungShingMARS implements CorporationCard {
     public startingMegaCredits: number = 44;
     public cardType: CardType = CardType.CORPORATION;
 
-
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         return card.tags.filter(tag => tag === Tags.STEEL).length * 2;
     }
 	    
     public play(player: Player) {
-        player.addProduction(Resources.MEGACREDITS,3);
+        player.addProduction(Resources.MEGACREDITS, 3);
         return undefined;
     }
 }

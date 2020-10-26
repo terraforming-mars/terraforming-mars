@@ -1185,7 +1185,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return new SelectCard(
         "Select prelude card to play",
         "Play",
-        this.preludeCardsInHand,
+        this.getPlayablePreludeCards(game),
         (foundCards: Array<IProjectCard>) => {
             return this.playCard(game, foundCards[0]);
         },
@@ -1835,6 +1835,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.takeActionForFinalGreenery(game);
     }
 
+    private getPlayablePreludeCards(game: Game): Array<IProjectCard> {
+      return this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game));
+    }
+
     public getPlayableCards(game: Game): Array<IProjectCard> {
       const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
       // Self Replicating robots check
@@ -1998,10 +2002,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return standardProjects;
     }
 
-    private getPreludeMcBonus(preludeCards: IProjectCard[]) {
-      return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
-    }
-
     public takeAction(game: Game): void {
       const deferredAction = game.getNextDeferredActionForPlayer(this.id);
       if (deferredAction !== undefined) {
@@ -2012,13 +2012,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         game.phase = Phase.PRELUDES;
-        const preludeMcBonus = this.getPreludeMcBonus(this.preludeCardsInHand);
 
-        // Remove unplayable prelude cards
-        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game, preludeMcBonus));
-        if (this.preludeCardsInHand.length === 0) {
-          game.playerIsFinishedTakingActions();
-          return;
+        // If no playable prelude card in hand, end player turn
+        if (this.getPlayablePreludeCards(game).length === 0) {
+            this.preludeCardsInHand = [];
+            game.playerIsFinishedTakingActions();
+            return;
         }
         
         this.setWaitingFor(this.playPreludeCard(game), () => {

@@ -128,6 +128,17 @@ export const Turmoil = Vue.component("turmoil", {
                 <div v-if="turmoil.reserve.length >= n" :class="'player-token '+turmoil.reserve[n-1].color">{{ turmoil.reserve[n-1].number }}</div>
               </div>
           </div>
+          <div class="policies">
+            <div class="policies-title">
+                <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
+            </div>
+            <div v-show="isVisible()" class='policies-global'>
+              <div v-for="party in turmoil.parties" class='policy-block'>
+                <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+                <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="grid-leaders">
@@ -149,17 +160,6 @@ export const Turmoil = Vue.component("turmoil", {
             <div class="party-bonus">
               <span v-html="getBonus(party.name)"></span>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="policies">
-        <div class="policies-title">
-            <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
-        </div>
-        <div v-show="isVisible()" class='policies-global'>
-          <div v-for="party in turmoil.parties" class='policy-block'>
-            <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-            <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { PlayerModel } from "../models/PlayerModel";
 // Common code for player layouts
 
 export const PlayerMixin = {
+    "name": "PlayerMixin",
     "methods": {
         getCardsByType: function (
             inCards: Array<CardModel>,

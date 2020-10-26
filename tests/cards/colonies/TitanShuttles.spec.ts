@@ -21,7 +21,7 @@ describe("TitanShuttles", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Can act", function () {
@@ -36,7 +36,7 @@ describe("TitanShuttles", function () {
         card.action(player, game);
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(2);
     });
 

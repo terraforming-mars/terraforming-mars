@@ -11,7 +11,7 @@ describe("AtalantaPlanitiaLab", function () {
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play(player,game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.cardsInHand.length).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(2);
     });

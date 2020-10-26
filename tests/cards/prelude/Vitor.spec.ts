@@ -18,7 +18,7 @@ describe("Vitor", function () {
 
     it("Should play", function () {
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.megaCredits).to.eq(0);
     });
 
@@ -32,7 +32,7 @@ describe("Vitor", function () {
     it("No initial action for solo games", function () {
         const game = new Game("foobar", [player], player);
         const action = card.initialAction(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
     
     it("Give mega credits when card played", function () {

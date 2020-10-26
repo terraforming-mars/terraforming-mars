@@ -25,7 +25,7 @@ describe("MartianZoo", function () {
         expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Can't act", function () {

@@ -12,7 +12,7 @@ describe("BusinessContacts", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         expect(action instanceof SelectCard).to.eq(true);
         const card1 = action.cards[0];
         const card2 = action.cards[1];

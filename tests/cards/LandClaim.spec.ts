@@ -11,10 +11,10 @@ describe("LandClaim", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
         action.cb(landSpace);
         expect(landSpace.player).to.eq(player);
-        expect(landSpace.tile).to.eq(undefined);
+        expect(landSpace.tile).is.undefined;
     });
 });

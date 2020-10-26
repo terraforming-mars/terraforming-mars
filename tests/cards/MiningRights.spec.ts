@@ -31,7 +31,7 @@ describe("MiningRights", function () {
         expect(action instanceof SelectSpace).to.eq(true);
 
         const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
-        expect(titaniumSpace).not.to.eq(undefined);
+        expect(titaniumSpace).is.not.undefined;
         expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
         action.cb(titaniumSpace!);
@@ -41,7 +41,7 @@ describe("MiningRights", function () {
         expect(titaniumSpace!.adjacency?.bonus).eq(undefined);
 
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
-        expect(steelSpace).not.to.eq(undefined);
+        expect(steelSpace).is.not.undefined;
         expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
         action.cb(steelSpace!);

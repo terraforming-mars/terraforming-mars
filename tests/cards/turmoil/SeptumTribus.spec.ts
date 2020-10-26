@@ -20,7 +20,7 @@ describe("SeptumTribus", function () {
         player.megaCredits = 0;
 
         let turmoil = game.turmoil;
-        expect(game.turmoil).not.to.eq(undefined);
+        expect(game.turmoil).is.not.undefined;
 
         if (turmoil) {
             turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);

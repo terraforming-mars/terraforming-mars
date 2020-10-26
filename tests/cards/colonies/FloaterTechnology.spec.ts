@@ -19,7 +19,7 @@ describe("FloaterTechnology", function () {
 
     it("Can play", function () {
         const result = card.play();
-        expect(result).to.eq(undefined);
+        expect(result).is.undefined;
     });
 
     it("Cannot act without targets", function () {
@@ -33,7 +33,7 @@ describe("FloaterTechnology", function () {
         card.action(player, game);
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(dirigibles.resourceCount).to.eq(1);
     });
 

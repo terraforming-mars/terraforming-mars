@@ -36,6 +36,6 @@ describe("BlackPolarDust", function () {
         maxOutOceans(player, game);
         card.play(player, game);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
     })
 });

@@ -22,7 +22,7 @@ describe("EcologyExperts", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

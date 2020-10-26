@@ -38,7 +38,7 @@ describe("BiomassCombustors", function () {
 
         card.play(player, game);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
 

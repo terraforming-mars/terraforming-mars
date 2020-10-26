@@ -18,9 +18,9 @@ describe("MarsUniversity", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
 
-        expect(card.onCardPlayed(player, game, new Pets())).to.eq(undefined);
+        expect(card.onCardPlayed(player, game, new Pets())).is.undefined;
         expect(game.deferredActions.length).to.eq(0);
 
         player.cardsInHand.push(card);

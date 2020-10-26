@@ -10,7 +10,7 @@ describe("DomeFarming", function () {
         const card = new DomeFarming();
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });

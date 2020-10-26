@@ -14,7 +14,7 @@ describe("RefugeeCamps", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         
         player.addResourceTo(card, 5);
         expect(card.getVictoryPoints()).to.eq(5);

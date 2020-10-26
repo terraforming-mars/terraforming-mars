@@ -67,7 +67,7 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
         expect(game.deferredActions.length).to.eq(1);
-        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        expect(game.deferredActions[0].execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(1);
@@ -89,9 +89,9 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
         expect(game.deferredActions.length).to.eq(2);
-        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        expect(game.deferredActions[0].execute()).is.undefined;
         game.deferredActions.shift();
-        expect(game.deferredActions[0].execute()).to.eq(undefined);
+        expect(game.deferredActions[0].execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(0);

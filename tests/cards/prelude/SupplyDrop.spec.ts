@@ -9,7 +9,7 @@ describe("SupplyDrop", function () {
         const player = new Player("foo", Color.BLUE, false);
         const card = new SupplyDrop();
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.steel).to.eq(8);
         expect(player.titanium).to.eq(3);
         expect(player.plants).to.eq(3);

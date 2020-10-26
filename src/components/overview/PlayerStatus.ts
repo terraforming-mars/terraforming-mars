@@ -2,7 +2,7 @@ import Vue from "vue";
 import { ActionLabel } from "./ActionLabel";
 import { range } from "../../utils/utils"; 
 import { Button } from "../common/Button";
-
+import { mainAppSettings } from "../App";
 
 const isPinned = (root: any, playerIndex: string): boolean => {
     return (root as any).getVisibilityState("pinned_player_" + playerIndex);
@@ -10,8 +10,8 @@ const isPinned = (root: any, playerIndex: string): boolean => {
 const showPlayerData = (root: any, playerIndex: string) => {
     (root as any).setVisibilityState("pinned_player_" + playerIndex, true);
 };
-export const hidePlayerData = (root: any, playerIndex: string) => {
-    (root as any).setVisibilityState("pinned_player_" + playerIndex, false);
+export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
+    root.setVisibilityState("pinned_player_" + playerIndex, false);
 };
 
 export const PlayerStatus = Vue.component("player-status", {
@@ -79,7 +79,7 @@ export const PlayerStatus = Vue.component("player-status", {
             }
             for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
                 if (hiddenPlayersIndexes.includes(i)) {
-                    hidePlayerData(this.$root, i.toString());
+                    hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
                 }
             }
         },

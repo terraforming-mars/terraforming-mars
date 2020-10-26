@@ -16,11 +16,10 @@ describe("EarlySettlement", function () {
         card.play(player, game);
         const selectSpace = game.deferredActions[0].execute() as SelectSpace;
 
-        expect(selectSpace).not.to.eq(undefined);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-        expect(selectSpace.cb(selectSpace.availableSpaces[0])).to.eq(undefined);
+        expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
         expect(selectSpace.availableSpaces[0].player).to.eq(player);
-        expect(selectSpace.availableSpaces[0].tile).not.to.eq(undefined);
+        expect(selectSpace.availableSpaces[0].tile).is.not.undefined;
         expect(selectSpace.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
     });
 });

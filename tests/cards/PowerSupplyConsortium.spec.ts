@@ -28,7 +28,7 @@ describe("PowerSupplyConsortium", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });
 

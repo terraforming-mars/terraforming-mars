@@ -23,7 +23,7 @@ describe("Manutech", function () {
 
     it("Should add energy resources by Power Plant standard project", function () {
         const action = (player as any).buildPowerPlant(game);
-        expect(action).to.not.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb();
         expect(player.getResource(Resources.ENERGY)).to.eq(1);
     });

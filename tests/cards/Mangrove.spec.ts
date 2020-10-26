@@ -20,7 +20,7 @@ describe("Mangrove", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.GREENERY);

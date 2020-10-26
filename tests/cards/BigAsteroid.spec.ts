@@ -36,7 +36,7 @@ describe("BigAsteroid", function () {
         card.play(player, game);
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
 
         expect(player.plants).to.eq(5);
         expect(game.getTemperature()).to.eq(-26);

@@ -41,9 +41,9 @@ describe("Virus", function () {
 
     it("Can play when no other player has resources", function () {
         player.plants = 5;
-        expect(card.play(player, game)).to.eq(undefined)
+        expect(card.play(player, game)).is.undefined
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.plants).to.eq(5);
     });
 

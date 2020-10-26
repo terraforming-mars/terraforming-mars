@@ -29,7 +29,7 @@ describe("AsteroidMiningConsortium", function () {
         player.addProduction(Resources.TITANIUM);
         card.play(player, game); // can decrease own production
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });
 

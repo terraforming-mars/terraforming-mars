@@ -36,7 +36,7 @@ describe("HeatTrappers", function () {
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player2.getProduction(Resources.HEAT)).to.eq(5);
     });
 

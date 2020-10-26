@@ -22,7 +22,7 @@ describe("DeimosDownPromo", function () {
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
     });
 
     it("Can remove plants", function(){

@@ -22,7 +22,7 @@ describe("Splice", function () {
     it("Should play", function () {
         const card2 = new Tardigrades();
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
 
         player.corporationCard = card;
 
@@ -45,11 +45,11 @@ describe("Splice", function () {
         player.corporationCard = card;
         const play2 = card2.play(player, game);
         player2.corporationCard = card2;
-        expect(play).to.eq(undefined);
-        expect(play2).to.eq(undefined);
+        expect(play).is.undefined;
+        expect(play2).is.undefined;
 
         const action = card.onCardPlayed(player2, game, card2);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.megaCredits).to.eq(4);
         expect(player2.megaCredits).to.eq(4);
     });

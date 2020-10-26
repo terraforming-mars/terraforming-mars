@@ -12,7 +12,7 @@ describe("LakefrontResorts", function () {
         const player2 = new Player("test", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const play = card2.play(player);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.corporationCard = card2;
         game.addOceanTile(player, '06');
         game.addOceanTile(player, '07');

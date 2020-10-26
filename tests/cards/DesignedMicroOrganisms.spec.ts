@@ -16,12 +16,12 @@ describe("DesignedMicroOrganisms", function () {
 
     it("Can't play", function () {
         (game as any).temperature = -12;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = -14;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player);
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });

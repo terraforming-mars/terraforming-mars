@@ -16,8 +16,8 @@ describe("IndustrialCenter", function () {
     });
 
     it("Can't play or act", function () {
-        expect(card.canAct(player)).to.eq(false);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should action", function () {

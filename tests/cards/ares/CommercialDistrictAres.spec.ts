@@ -19,7 +19,7 @@ describe("CommercialDistrictAres", function () {
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
         expect(action instanceof SelectSpace);

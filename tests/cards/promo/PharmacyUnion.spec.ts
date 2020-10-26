@@ -38,7 +38,7 @@ describe("PharmacyUnion", function () {
         // Should not pay for the free Science card
         expect(player.megaCredits).to.eq(46);
         expect(player.cardsInHand.length).to.eq(1);
-        expect(player.cardsInHand[0].tags.includes(Tags.SCIENCE)).to.eq(true);
+        expect(player.cardsInHand[0].tags.includes(Tags.SCIENCE)).is.true;
     });
 
     it("Gains diseases and removes MC when ANY player plays microbe cards", function () {
@@ -111,7 +111,7 @@ describe("PharmacyUnion", function () {
         orOptions.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(23);
-        expect(card.isDisabled).to.eq(true);
+        expect(card.isDisabled).is.true;
         
         // Cannot trigger once per game effect a second time
         card.onCardPlayed(player, game, searchForLife);
@@ -124,16 +124,16 @@ describe("PharmacyUnion", function () {
         const advancedEcosystems = new AdvancedEcosystems();
         player.playedCards.push(new Fish());
         player.playedCards.push(new Lichen());
-        expect(advancedEcosystems.canPlay(player)).to.eq(true);
+        expect(advancedEcosystems.canPlay(player)).is.true;
         
         card.resourceCount = 0;
         card.onCardPlayed(player, game, new SearchForLife());
         
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb();
-        expect(card.isDisabled).to.eq(true);
+        expect(card.isDisabled).is.true;
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
-        expect(advancedEcosystems.canPlay(player)).to.eq(false);
+        expect(advancedEcosystems.canPlay(player)).is.not.true;
     });
 
     it("Edge Case - Let player pick the tag resolution order", function() {
@@ -164,7 +164,7 @@ describe("PharmacyUnion", function () {
         expect(player.megaCredits).to.eq(4);
 
         orOptions.options[0].cb(); // Turn face down then lose 4MC
-        expect(card.isDisabled).to.eq(true);
+        expect(card.isDisabled).is.true;
         expect(card.resourceCount).to.eq(0);
         expect(player.megaCredits).to.eq(0);
     });

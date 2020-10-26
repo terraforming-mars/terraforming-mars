@@ -23,13 +23,13 @@ describe("CometAiming", function () {
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should act - single action choice, single target", function () {
         player.playedCards.push(card);
         player.titanium = 1;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         card.action(player, game);
         expect(player.titanium).to.eq(0);
@@ -59,10 +59,10 @@ describe("CometAiming", function () {
         player.playedCards.push(card);
         card.resourceCount = 1;
         maxOutOceans(player, game);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player.titanium = 1;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         card.action(player, game);
         expect(game.deferredActions.length).to.eq(0);

@@ -21,7 +21,7 @@ describe("TitanFloatingLaunchPad", function () {
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
         expect(card.getVictoryPoints()).to.eq(1);
     });
 

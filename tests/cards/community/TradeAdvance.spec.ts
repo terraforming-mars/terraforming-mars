@@ -27,6 +27,6 @@ describe("TradeAdvance", function () {
             game.deferredActions.shift();
         }
 
-        game.colonies.forEach((colony) => expect(colony.trackPosition <= 1).to.eq(true));
+        game.colonies.forEach((colony) => expect(colony.trackPosition <= 1).is.true);
     });
 });

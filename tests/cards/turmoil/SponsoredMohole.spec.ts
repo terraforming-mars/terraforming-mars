@@ -14,11 +14,11 @@ describe("SponsoredMohole", function () {
 
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
 
         let kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;            
         kelvinists.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
 
         card.play(player);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);

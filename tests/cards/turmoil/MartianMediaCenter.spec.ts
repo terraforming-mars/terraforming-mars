@@ -14,11 +14,11 @@ describe("MartianMediaCenter", function () {
         
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         
         let mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
         mars.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
         
         card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

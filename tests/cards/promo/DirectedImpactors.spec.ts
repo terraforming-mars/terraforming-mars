@@ -24,11 +24,11 @@ describe("DirectedImpactors", function () {
 
     it("Should act - single action choice, single target", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player.megaCredits = 3;
         player.titanium = 1;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         // can add resource to itself
         card.action(player,game);
@@ -80,6 +80,6 @@ describe("DirectedImpactors", function () {
         card.resourceCount = 1;
         (game as any).temperature = MAX_TEMPERATURE;
 
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
     });
 });

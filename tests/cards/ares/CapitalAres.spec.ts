@@ -25,10 +25,10 @@ describe("CapitalAres", function () {
         oceanSpaces[i].tile = { tileType: TileType.OCEAN };
     }
     player.addProduction(Resources.ENERGY,2);
-    expect(card.canPlay(player, game)).to.eq(true);
+    expect(card.canPlay(player, game)).is.true;
 
     const action = card.play(player, game);
-    expect(action instanceof SelectSpace).to.eq(true);
+    expect(action instanceof SelectSpace).is.true;
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 

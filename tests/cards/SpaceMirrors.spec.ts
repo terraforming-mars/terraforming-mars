@@ -16,12 +16,12 @@ describe("SpaceMirrors", function () {
 
     it("Can't act", function () {
         player.megaCredits = 6;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.megaCredits = 7;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         card.action(player, game);
         game.runDeferredAction(game.deferredActions[0], () => {});

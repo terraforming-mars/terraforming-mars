@@ -14,7 +14,7 @@ describe("ExperimentalForest", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game) as SelectSpace;
         expect(action).is.not.undefined;
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         expect(action.cb(action.availableSpaces[0])).is.undefined;
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.PLANT) !== -1).length).to.eq(2);

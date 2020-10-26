@@ -20,7 +20,7 @@ describe("HeatTrappers", function () {
         game = new Game("foobar", [player], player);
         player.addProduction(Resources.HEAT);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
         expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
@@ -31,7 +31,7 @@ describe("HeatTrappers", function () {
 
     it("Should play - auto select if single target", function () {
         player2.addProduction(Resources.HEAT, 7);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
@@ -54,7 +54,7 @@ describe("HeatTrappers", function () {
     });
 
     it("Can't play if nobody has heat production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Gives victory points", function () {

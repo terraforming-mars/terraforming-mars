@@ -34,20 +34,20 @@ describe("Award", function () {
     });
     it("shouldShow", function () {
         const scope = { showDescription: { test: true } };
-        expect((Award as any).methods.shouldShow.call(scope, mockAward)).to.eq(true);
+        expect((Award as any).methods.shouldShow.call(scope, mockAward)).is.true;
     });
     it("shouldShowList", function () {
         const scope = { showList: true };
-        expect((Award as any).methods.shouldShowList.call(scope)).to.eq(true);
+        expect((Award as any).methods.shouldShowList.call(scope)).is.true;
     });
     it("toggle", function () {
         const scope = { showDescription: { test: false } };
         (Award as any).methods.toggle.call(scope, mockAward);
-        expect(scope.showDescription.test).to.eq(true);
+        expect(scope.showDescription.test).is.true;
     });
     it("toggleList", function () {
         const scope = { showList: false };
         (Award as any).methods.toggleList.call(scope);
-        expect(scope.showList).to.eq(true);
+        expect(scope.showList).is.true;
     });
 });

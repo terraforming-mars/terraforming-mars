@@ -16,7 +16,7 @@ describe("MoholeAreaAres", function () {
         const action = card.play(player, game);
 
         expect(action).is.not.undefined;
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         const space = action.availableSpaces[0];
         action.cb(space);

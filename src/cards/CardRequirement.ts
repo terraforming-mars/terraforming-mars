@@ -29,7 +29,8 @@ export class CardRequirement {
             RequirementType.FORESTS,
             RequirementType.CITIES,
             RequirementType.COLONIES,
-            RequirementType.RESOURCE_TYPES
+            RequirementType.RESOURCE_TYPES,
+            RequirementType.PARTY_LEADERS
         ];
 
         if (this.amount > 1 && withPlural.includes(this.type)) {

@@ -27,7 +27,7 @@ describe("Playwrights", function () {
 
     it("Cannot act without any played events", function () {
         expect(player.getProduction(Resources.ENERGY)).eq(1);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Can replay own event", function () {
@@ -37,10 +37,10 @@ describe("Playwrights", function () {
         player.playedCards.push(event);
 
         expect(player.getTerraformRating()).to.eq(tr + 2);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player.megaCredits = event.cost;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
@@ -57,7 +57,7 @@ describe("Playwrights", function () {
         player2.playedCards.push(event);
 
         player.megaCredits = event.cost;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
         expect(player.getTerraformRating()).to.eq(tr + 2);
@@ -72,7 +72,7 @@ describe("Playwrights", function () {
         (game as any).oxygenLevel = 5;
         player.heat = 4;
         player.megaCredits =  30;
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Acts correctly for event cards that give one time discount", function () {

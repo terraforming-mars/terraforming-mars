@@ -9,7 +9,7 @@ describe("Omnicourt", function () {
         const card = new Omnicourt();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         const action = card.play(player, game);
         expect(action).is.undefined;
         expect(player.getTerraformRating()).to.eq(22);

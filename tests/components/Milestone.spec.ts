@@ -35,20 +35,20 @@ describe("Milestone", function () {
     });
     it("shouldShow", function () {
         const scope = { showDescription: { test: true } };
-        expect((Milestone as any).methods.shouldShow.call(scope, mockMilestone)).to.eq(true);
+        expect((Milestone as any).methods.shouldShow.call(scope, mockMilestone)).is.true;
     });
     it("shouldShowList", function () {
         const scope = { showList: true };
-        expect((Milestone as any).methods.shouldShowList.call(scope)).to.eq(true);
+        expect((Milestone as any).methods.shouldShowList.call(scope)).is.true;
     });
     it("toggle", function () {
         const scope = { showDescription: { test: false } };
         (Milestone as any).methods.toggle.call(scope, mockMilestone);
-        expect(scope.showDescription.test).to.eq(true);
+        expect(scope.showDescription.test).is.true;
     });
     it("toggleList", function () {
         const scope = { showList: false };
         (Milestone as any).methods.toggleList.call(scope);
-        expect(scope.showList).to.eq(true);
+        expect(scope.showList).is.true;
     });
 });

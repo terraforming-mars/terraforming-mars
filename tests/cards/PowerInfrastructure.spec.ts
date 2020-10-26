@@ -15,12 +15,12 @@ describe("PowerInfrastructure", function () {
 
     it("Can't act", function () {
         card.play(player, game);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.energy = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         const action = card.action(player, game);
         action.cb(1);
 

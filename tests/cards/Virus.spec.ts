@@ -26,7 +26,7 @@ describe("Virus", function () {
         player.plants = 5;
 
         const orOptions = card.play(player2, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(birds)).to.eq(0);
@@ -48,6 +48,6 @@ describe("Virus", function () {
     });
 
     it("Should play", function () {
-        expect(card.canPlay()).to.eq(true);
+        expect(card.canPlay()).is.true;
     });
 });

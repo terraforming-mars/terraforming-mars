@@ -20,12 +20,12 @@ describe("JovianLanterns", function () {
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.titanium = 3;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         const action = card.action(player);
         expect(action).is.undefined;

@@ -17,7 +17,7 @@ describe("Fish", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should act", function () {
@@ -29,7 +29,7 @@ describe("Fish", function () {
         (game as any).temperature = 2;
         player2.addProduction(Resources.PLANTS);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
         const input = game.deferredActions[0].execute();
@@ -42,7 +42,7 @@ describe("Fish", function () {
         player.addProduction(Resources.PLANTS);
         player2.addProduction(Resources.PLANTS);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
         expect(game.deferredActions.length).to.eq(1);

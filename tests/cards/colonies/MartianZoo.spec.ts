@@ -15,14 +15,14 @@ describe("MartianZoo", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const lands = game.board.getAvailableSpacesOnLand(player);
         game.addCityTile(player, lands[0].id);
         game.addCityTile(player, lands[1].id);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play();
         expect(action).is.undefined;
@@ -30,12 +30,12 @@ describe("MartianZoo", function () {
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(false);
+        expect(card.canAct()).is.not.true;
     });
 
     it("Should act", function () {
         card.onCardPlayed(player, game, new LunaGovernor());
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
 
         card.action(player, game);
         expect(player.megaCredits).to.eq(2);

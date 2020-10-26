@@ -14,12 +14,12 @@ describe("SponsoredAcademies", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);       
         const game = new Game("foobar", [player,player2], player);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
         player.cardsInHand.push(card2, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         const action = card.play(player, game) as SelectCard<IProjectCard>;
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         // No SponsoredAcademies itself suggested to discard
         expect(action.cards.filter((c) => c.name === card.name).length).to.eq(0);

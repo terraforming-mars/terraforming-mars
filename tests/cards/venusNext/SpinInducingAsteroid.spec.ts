@@ -16,11 +16,11 @@ describe("SpinInducingAsteroid", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 12;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player,game)).to.eq(true);
+        expect(card.canPlay(player,game)).is.true;
         card.play(player, game);
         expect(game.getVenusScaleLevel()).to.eq(4);
     });
@@ -28,7 +28,7 @@ describe("SpinInducingAsteroid", function () {
     it("Should play with Morning Star", function () {
         player.corporationCard = new MorningStarInc();
         (game as any).venusScaleLevel = 12;
-        expect(card.canPlay(player,game)).to.eq(true);
+        expect(card.canPlay(player,game)).is.true;
 
         card.play(player, game);
         expect(game.getVenusScaleLevel()).to.eq(16);

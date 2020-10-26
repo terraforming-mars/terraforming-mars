@@ -23,12 +23,12 @@ describe("MiningRights", function () {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.MINING_RIGHTS });
             }
         }
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
         expect(titaniumSpace).is.not.undefined;

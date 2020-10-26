@@ -16,17 +16,17 @@ describe("Penguins", function () {
 
     it("Can't play", function () {
         maxOutOceans(player, game, 7);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         maxOutOceans(player, game, 8);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
         card.action(player);
         expect(card.resourceCount).to.eq(1);
     });

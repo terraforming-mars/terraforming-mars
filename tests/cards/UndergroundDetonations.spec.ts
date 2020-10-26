@@ -16,12 +16,12 @@ describe("UndergroundDetonations", function () {
 
     it("Can't act", function () {
         player.megaCredits = 9;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.megaCredits = 10;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         
         card.action(player, game);
         game.runDeferredAction(game.deferredActions[0], () => {});

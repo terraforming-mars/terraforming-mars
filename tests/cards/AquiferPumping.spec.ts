@@ -27,13 +27,13 @@ describe("AquiferPumping", function () {
     });
 
     it("Cannot act if not enough to pay", function () {
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Can act if can pay even after oceans are maxed", function () {
         maxOutOceans(player, game);
         player.megaCredits = 8;
         
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
     });
 });

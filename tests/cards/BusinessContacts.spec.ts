@@ -13,7 +13,7 @@ describe("BusinessContacts", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).is.not.undefined;
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         const card1 = action.cards[0];
         const card2 = action.cards[1];
         const card3 = action.cards[2];

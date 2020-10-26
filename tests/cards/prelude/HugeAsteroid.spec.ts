@@ -25,6 +25,10 @@ describe("HugeAsteroid", function () {
         const initialTR = player.getTerraformRating();
 
         card.play(player, game);
+
+        // SelectHowToPayDeferred
+        game.runDeferredAction(game.deferredActions[0], () => {});
+
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.HEAT)).to.eq(1);
         expect(player.getTerraformRating()).to.eq(initialTR + 3);

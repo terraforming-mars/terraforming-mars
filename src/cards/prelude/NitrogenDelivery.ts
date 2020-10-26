@@ -9,10 +9,9 @@ import { Game } from "../../Game";
 export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.NITROGEN_SHIPMENT;
-    public bonusMc: number = 5;
 
     public play(player: Player, game: Game) {     
-        player.megaCredits += this.bonusMc;
+        player.megaCredits += 5;
         player.increaseTerraformRating(game);
         player.addProduction(Resources.PLANTS);
         return undefined;

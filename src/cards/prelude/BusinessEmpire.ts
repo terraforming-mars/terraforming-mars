@@ -5,19 +5,18 @@ import { IProjectCard } from "../IProjectCard";
 import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 import { Game } from "../../Game";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.BUSINESS_EMPIRE;
-    public canPlay(player: Player, _game: Game, bonusMc?: number) {
+    public canPlay(player: Player, _game: Game) {
         if (player.isCorporation(CardName.MANUTECH)) return true;
-
-        const requiredPayment = 6 - (bonusMc || 0);
-        return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
+        return player.canAfford(6);
     }
-    public play(player: Player) {
-	    player.megaCredits -= 6;
+    public play(player: Player, game: Game) {
         player.addProduction(Resources.MEGACREDITS, 6);
+        game.defer(new SelectHowToPayDeferred(player, 6, false, false));
         return undefined;
     }
 }

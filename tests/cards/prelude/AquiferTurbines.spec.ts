@@ -22,6 +22,13 @@ describe("AquiferTurbines", function () {
     it("Should play", function () {
         player.megaCredits = 3;
         card.play(player, game);
+
+        // PlaceOceanTile
+        game.deferredActions.shift();
+
+        // SelectHowToPayDeferred
+        game.runDeferredAction(game.deferredActions[0], () => {});
+
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(player.megaCredits).to.eq(0);
     });

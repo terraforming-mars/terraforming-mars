@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { ExperimentalForest } from "../../../src/cards/prelude/ExperimentalForest";
 import { Color } from "../../../src/Color";
@@ -12,10 +11,18 @@ describe("ExperimentalForest", function () {
         const card = new ExperimentalForest();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game) as SelectSpace;
-        expect(action).is.not.undefined;
-        expect(action instanceof SelectSpace).to.eq(true);
-        expect(action.cb(action.availableSpaces[0])).is.undefined;
+        card.play(player, game);
+        expect(game.deferredActions.length).to.eq(2);
+
+        // Draw cards
+        game.runDeferredAction(game.deferredActions[0], () => {});
+
+        // Select Greenery space
+        const selectSpace = game.deferredActions[0].execute() as SelectSpace;
+
+        expect(selectSpace).is.not.undefined;
+        expect(selectSpace instanceof SelectSpace).to.eq(true);
+        expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.PLANT) !== -1).length).to.eq(2);
     });

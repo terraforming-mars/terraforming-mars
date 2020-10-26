@@ -20,7 +20,7 @@ describe("EccentricSponsor", function () {
     });
 
     it("Should play", function () {
-        const action = card.play();
+        const action = card.play(player, game);
         expect(action).is.undefined;
     });
 });

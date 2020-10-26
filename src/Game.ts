@@ -17,6 +17,7 @@ import { Dealer } from "./Dealer";
 import { Decks } from "./Deck";
 import { ElysiumBoard } from "./ElysiumBoard";
 import { FundedAward } from "./FundedAward";
+import { GiveTradeBonus } from "./deferredActions/GiveTradeBonus";
 import { HellasBoard } from "./HellasBoard";
 import { IAward } from "./awards/IAward";
 import { IColony } from "./colonies/Colony";
@@ -549,6 +550,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public runDeferredAction(action: DeferredAction, cb: () => void): void {
+        // Special hook for trade bonus deferred actions
+        // So that they happen for all players at the same time
+        if (action instanceof GiveTradeBonus) {
+            this.removeDeferredAction(action);
+            (action as GiveTradeBonus).cb = cb;
+            action.execute();
+            return;
+        }
+
         const input = action.execute();
         if (input !== undefined) {
             action.player.setWaitingFor(input, () => {

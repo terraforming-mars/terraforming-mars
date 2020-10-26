@@ -1,5 +1,6 @@
 import { Colony, IColony } from './Colony';
 import { Player } from '../Player';
+import { PlayerInput } from '../PlayerInput';
 import { ColonyName } from './ColonyName';
 import { Resources } from '../Resources';
 import { Game } from '../Game';
@@ -22,7 +23,8 @@ export class Luna extends Colony implements IColony {
         player.addProduction(Resources.MEGACREDITS, 2);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.megaCredits += 2;
+        return undefined;
     }    
 }

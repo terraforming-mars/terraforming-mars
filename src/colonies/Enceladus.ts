@@ -1,5 +1,6 @@
 import { Colony, IColony } from "./Colony";
 import { Player } from "../Player";
+import { PlayerInput } from '../PlayerInput';
 import { ColonyName } from "./ColonyName";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
@@ -26,7 +27,7 @@ export class Enceladus extends Colony implements IColony {
         game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, 3));
         return undefined;
     }
-    public giveTradeBonus(player: Player, game: Game): void {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, 1));
+    public giveTradeBonus(player: Player, game: Game): undefined | PlayerInput {
+        return (new AddResourcesToCard(player, game, ResourceType.MICROBE, 1)).execute();
     }    
 }

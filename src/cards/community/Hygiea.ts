@@ -1,5 +1,6 @@
 import { Colony, IColony } from "../../colonies/Colony";
 import { Player } from "../../Player";
+import { PlayerInput } from '../../PlayerInput';
 import { Game } from "../../Game";
 import { ColonyName } from "../../colonies/ColonyName";
 import { MAX_COLONY_TRACK_POSITION } from "../../constants";
@@ -71,7 +72,8 @@ export class Hygiea extends Colony implements IColony {
         return undefined;
     }
     
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.megaCredits += 3;
+        return undefined;
     }   
 }

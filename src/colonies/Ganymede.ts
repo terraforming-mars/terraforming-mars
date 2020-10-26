@@ -1,5 +1,6 @@
 import { Colony, IColony } from './Colony';
 import { Player } from '../Player';
+import { PlayerInput } from '../PlayerInput';
 import { Resources } from '../Resources';
 import { ColonyName } from './ColonyName';
 import { Game } from '../Game';
@@ -22,7 +23,8 @@ export class Ganymede extends Colony implements IColony {
         player.addProduction(Resources.PLANTS);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.plants++;
+        return undefined;
     }    
 }

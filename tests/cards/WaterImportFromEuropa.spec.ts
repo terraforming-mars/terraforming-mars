@@ -29,7 +29,7 @@ describe("WaterImportFromEuropa", function () {
         player.megaCredits = 13;
 
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
 
         game.runDeferredAction(game.deferredActions[0], () => {}); // HowToPay
         expect(player.megaCredits).to.eq(1);

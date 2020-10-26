@@ -16,17 +16,17 @@ describe("AtmoCollectors", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
+        expect(orOptions).is.not.undefined;
         expect(orOptions instanceof OrOptions).to.eq(true);
         
         orOptions.options[0].cb();

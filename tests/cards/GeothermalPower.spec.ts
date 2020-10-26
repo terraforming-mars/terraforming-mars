@@ -10,7 +10,7 @@ describe("GeothermalPower", function () {
         const card = new GeothermalPower();
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });
 });

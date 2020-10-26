@@ -13,7 +13,7 @@ describe("EnergySaving", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
         game.addCityTile(player, landSpace.id);
         card.play(player, game);

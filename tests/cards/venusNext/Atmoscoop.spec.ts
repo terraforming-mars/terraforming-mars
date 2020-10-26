@@ -70,7 +70,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(4);
         expect(dirigibles.resourceCount).to.eq(2);
     });
@@ -81,7 +81,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(dirigibles.resourceCount).to.eq(2);
     });
 

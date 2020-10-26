@@ -312,7 +312,7 @@ describe("Game", function () {
         game.addOceanTile(player1, spaceId);
 
         const space: ISpace = game.getSpace(spaceId);
-        expect(space.player).to.eq(undefined);
+        expect(space.player).is.undefined;
     });
 
     it("Check Ecologist Milestone", function() {
@@ -343,14 +343,14 @@ describe("Game", function () {
         // Cannot afford
         player.megaCredits = 5;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits = 6;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
@@ -373,14 +373,14 @@ describe("Game", function () {
         player.heat = 2;
         player.megaCredits = 3;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits += 1;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });

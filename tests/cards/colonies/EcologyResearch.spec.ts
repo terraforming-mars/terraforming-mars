@@ -28,7 +28,7 @@ describe("EcologyResearch", function () {
 
     it("Should play without targets", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(card.getVictoryPoints()).to.eq(1);
     });
@@ -42,10 +42,10 @@ describe("EcologyResearch", function () {
         expect(game.deferredActions.length).to.eq(2);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         const input2 = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input2).to.eq(undefined);
+        expect(input2).is.undefined;
 
         expect(tardigrades.resourceCount).to.eq(2);
         expect(fish.resourceCount).to.eq(1);

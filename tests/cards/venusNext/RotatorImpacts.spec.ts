@@ -23,7 +23,7 @@ describe("RotatorImpacts", function () {
     it("Should play", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
@@ -58,7 +58,7 @@ describe("RotatorImpacts", function () {
         expect(card.canAct(player, game)).to.eq(true);
 
         const action = card.action(player,game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });

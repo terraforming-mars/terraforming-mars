@@ -56,7 +56,7 @@ describe("EnergyMarket", function () {
     it("Should act when energy production available", function () {
         player.addProduction(Resources.ENERGY, 1);
         const result = card.action(player, game);
-        expect(result).to.eq(undefined);
+        expect(result).is.undefined;
         
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);

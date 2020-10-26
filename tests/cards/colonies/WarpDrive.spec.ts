@@ -13,7 +13,7 @@ describe("WarpDrive", function () {
         const game = new Game("foobar", [player,player2], player);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.getCardDiscount(player, game, new TollStation())).to.eq(4);
     });
 });

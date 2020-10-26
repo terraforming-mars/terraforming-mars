@@ -25,7 +25,7 @@ describe("FloatingHabs", function () {
         player.playedCards.push(new Research());
         expect(card.canPlay(player)).to.eq(true);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - single target", function () {

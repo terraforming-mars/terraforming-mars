@@ -37,7 +37,7 @@ describe("SymbioticFungus", function () {
     it("Should act - multiple targets", function () {
         player.playedCards.push(new Ants(), new Decomposers());
         const action = card.action(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         
         action!.cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);

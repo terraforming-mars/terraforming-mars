@@ -12,7 +12,7 @@ describe("Biolab", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(player.cardsInHand.length).to.eq(3);
     });

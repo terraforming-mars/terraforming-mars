@@ -10,11 +10,11 @@ describe("UtopiaInvest", function () {
         const card = new UtopiaInvest();
         const player = new Player("test", Color.BLUE, false);
         const play = card.play(player);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
         const action = card.action(player);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         expect(action instanceof OrOptions).to.eq(true);
         action.options[2].cb();
         expect(player.titanium).to.eq(4);

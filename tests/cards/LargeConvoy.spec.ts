@@ -47,7 +47,7 @@ describe("LargeConvoy", function () {
         player.playedCards.push(pets, fish);
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
@@ -66,7 +66,7 @@ describe("LargeConvoy", function () {
         const cardsInHand = player.cardsInHand.length;
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);

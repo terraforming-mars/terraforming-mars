@@ -21,7 +21,7 @@ describe("Psychrophiles", function () {
     it("Should play", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Can act", function () {

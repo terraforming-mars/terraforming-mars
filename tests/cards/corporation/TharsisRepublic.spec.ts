@@ -21,7 +21,7 @@ describe("TharsisRepublic", function () {
 
     it("Should take initial action", function () {
         const action = card.initialAction(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb(action.availableSpaces[0]);
 
         expect(game.getCitiesInPlayOnMars()).to.eq(1);

@@ -25,7 +25,7 @@ describe("WildlifeDome", function () {
         expect(card.canPlay(player, game)).to.eq(true); 
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb(action.availableSpaces[0]);
         expect(game.getOxygenLevel()).to.eq(1);
     });

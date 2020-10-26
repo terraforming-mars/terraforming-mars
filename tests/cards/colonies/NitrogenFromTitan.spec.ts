@@ -22,7 +22,7 @@ describe("NitrogenFromTitan", function () {
         card.play(player, game);
         expect(player.getTerraformRating()).to.eq(tr + 2);
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
     });
 
     it("Can play with single Jovian floater card", function () {

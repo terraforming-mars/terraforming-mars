@@ -11,7 +11,7 @@ describe("RimFreighters", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         const ceres = new Ceres();
         ceres.trade(player, game);
         expect(player.steel).to.eq(2);

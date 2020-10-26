@@ -39,7 +39,7 @@ describe("MaxwellBase", function () {
         expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play(player,game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });
 

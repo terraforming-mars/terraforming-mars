@@ -13,7 +13,7 @@ describe("Conscription", function () {
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
         expect(card.getCardDiscount(player, game)).to.eq(0);

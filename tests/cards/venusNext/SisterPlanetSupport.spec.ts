@@ -10,7 +10,7 @@ describe("SisterPlanetSupport", function () {
         const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     });
 });

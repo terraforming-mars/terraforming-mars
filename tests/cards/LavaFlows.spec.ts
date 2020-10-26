@@ -30,7 +30,7 @@ describe("LavaFlows", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         
         const space = action.availableSpaces[0];
         action.cb(space);

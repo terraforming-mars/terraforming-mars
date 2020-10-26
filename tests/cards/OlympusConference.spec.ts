@@ -33,7 +33,7 @@ describe("OlympusConference", function () {
         expect(game.deferredActions.length).to.eq(1);
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // Resource available
@@ -59,7 +59,7 @@ describe("OlympusConference", function () {
         // No resource, can't draw, resource automatically added
         const input = game.deferredActions[0].execute();
         game.deferredActions.shift();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // Resource on card, can draw

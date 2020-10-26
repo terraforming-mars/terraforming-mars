@@ -29,7 +29,7 @@ describe("GreatEscarpmentConsortium", function () {
         player.addProduction(Resources.STEEL);
         card.play(player, game); // can decrease own production
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
 
@@ -53,7 +53,7 @@ describe("GreatEscarpmentConsortium", function () {
         card.play(player, game);
 
         const input = game.deferredActions[0].execute();
-        expect(input).to.eq(undefined);
+        expect(input).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(2); // should increase
     });
 });

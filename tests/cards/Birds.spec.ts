@@ -17,7 +17,7 @@ describe("Birds", function () {
     });
 
     it("Cannot play without oxygen", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -27,7 +27,7 @@ describe("Birds", function () {
         player2.addProduction(Resources.PLANTS,2);
         player3.addProduction(Resources.PLANTS,7);
         (game as any).oxygenLevel = 13;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
         expect(game.deferredActions.length).to.eq(1);

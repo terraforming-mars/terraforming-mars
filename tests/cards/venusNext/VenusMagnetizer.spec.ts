@@ -16,12 +16,12 @@ describe("VenusMagnetizer", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 8;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).venusScaleLevel = 10;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         expect(card.play()).is.undefined;
     });
 

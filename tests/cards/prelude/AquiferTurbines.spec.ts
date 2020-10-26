@@ -16,7 +16,7 @@ describe("AquiferTurbines", function () {
 
     it("Can play", function () {
         player.megaCredits = 3;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
     
     it("Should play", function () {

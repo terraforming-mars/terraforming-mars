@@ -36,13 +36,13 @@ describe("ProjectWorkshop", function () {
 
     it("Can't act", function () {
         player.megaCredits = 2;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Can spend 3 MC to draw a blue card", function () {
         player.megaCredits = 3;
 
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player, game).cb();
         expect(player.cardsInHand.length).to.eq(1);
         expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
@@ -54,7 +54,7 @@ describe("ProjectWorkshop", function () {
 
         card.action(player, game).cb();
         expect(player.playedCards.length).to.eq(0);
-        expect(game.dealer.discarded.includes(earthOffice)).to.eq(true);
+        expect(game.dealer.discarded.includes(earthOffice)).is.true;
         expect(player.cardsInHand.length).to.eq(2);
     });
 
@@ -69,7 +69,7 @@ describe("ProjectWorkshop", function () {
         player.playedCards.push(smallAnimals, extremophiles);
 
         const selectOption = card.action(player, game);
-        expect(selectOption instanceof SelectOption).to.eq(true);
+        expect(selectOption instanceof SelectOption).is.true;
 
         const selectCard = selectOption.cb() as SelectCard<ICard>;
         
@@ -86,6 +86,6 @@ describe("ProjectWorkshop", function () {
         player.playedCards.push(earthOffice);
         player.megaCredits = 3;
         const result = card.action(player, game);
-        expect(result instanceof OrOptions).to.eq(true);
+        expect(result instanceof OrOptions).is.true;
     });
 });

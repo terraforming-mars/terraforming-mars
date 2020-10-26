@@ -18,7 +18,7 @@ describe("BlackPolarDust", function () {
 
     it("Can't play", function () {
         player.addProduction(Resources.MEGACREDITS,-4);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {

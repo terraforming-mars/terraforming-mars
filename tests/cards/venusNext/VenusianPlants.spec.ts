@@ -18,19 +18,19 @@ describe("VenusianPlants", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 14;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play - multiple targets", function () {
         (game as any).venusScaleLevel = 16;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const card2 = new Thermophiles();
         const card3 = new VenusianAnimals();
         player.playedCards.push(card2, card3);
 
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(1);

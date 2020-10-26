@@ -41,7 +41,7 @@ describe("BiofertilizerFacility", function () {
   });
 
   it("Can't play without a science tag", function () {
-    expect(card.canPlay(player, game)).to.eq(false);
+    expect(card.canPlay(player, game)).is.not.true;
   });
 
   it("Play", function () {
@@ -55,7 +55,7 @@ describe("BiofertilizerFacility", function () {
     expect(microbeHost.resourceCount || 0).is.eq(0);
     expect(game.deferredActions).is.empty;
 
-    expect(card.canPlay(player, game)).to.eq(true);
+    expect(card.canPlay(player, game)).is.true;
     const action = card.play(player, game);
     expect(player.getProduction(Resources.PLANTS)).is.eq(1);
 

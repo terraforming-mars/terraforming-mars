@@ -12,7 +12,7 @@ describe("ArtificialPhotosynthesis", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).is.not.undefined;
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
         expect(action.options.length).to.eq(2);
         action.options[0].cb();
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);

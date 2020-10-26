@@ -31,7 +31,7 @@ describe("Game", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        expect(game.gameOptions.corporateEra).to.eq(true);
+        expect(game.gameOptions.corporateEra).is.true;
         expect(game.getGeneration()).to.eq(1);
     });
 
@@ -52,7 +52,7 @@ describe("Game", function () {
         const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
         turmoilPreludes.forEach((preludeName) => {
             const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
-            expect(preludeDeck.includes(preludeCard)).to.eq(false)
+            expect(preludeDeck.includes(preludeCard)).is.not.true
         });
     });
 
@@ -209,7 +209,7 @@ describe("Game", function () {
         // Now game should be in finished state
         expect(game.phase).to.eq(Phase.END);
 
-        expect(game.isSoloModeWin()).to.eq(false);
+        expect(game.isSoloModeWin()).is.not.true;
     });
 
     it("Should not finish solo game before last generation if Mars is already terraformed", function() {
@@ -261,7 +261,7 @@ describe("Game", function () {
         game.playerHasPassed(player);
         game.playerIsDoneWithGame(player);
         expect(game.phase).to.eq(Phase.END);
-        expect(game.isSoloModeWin()).to.eq(false);
+        expect(game.isSoloModeWin()).is.not.true;
 
         // Don't give TR or raise oxygen for final greenery placements
         expect(player.getTerraformRating()).to.eq(20);
@@ -323,9 +323,9 @@ describe("Game", function () {
         const ecologist = new Ecologist();
 
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player)).to.eq(false);
+        expect(ecologist.canClaim(player)).is.not.true;
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player)).to.eq(true);
+        expect(ecologist.canClaim(player)).is.true;
     });
 
     it("Removes Hellas bonus ocean space if player cannot pay", function () {

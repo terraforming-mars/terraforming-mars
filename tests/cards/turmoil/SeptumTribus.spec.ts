@@ -45,6 +45,6 @@ describe("SeptumTribus", function () {
         card.play();
         
         player.corporationCard = card;
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 });

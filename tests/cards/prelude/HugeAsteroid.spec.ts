@@ -16,12 +16,12 @@ describe("HugeAsteroid", function () {
 
     it("Can't play", function () {
         player.megaCredits = 4;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.megaCredits = 5;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const initialTR = player.getTerraformRating();
 
         card.play(player, game);

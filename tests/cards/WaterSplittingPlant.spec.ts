@@ -15,22 +15,22 @@ describe("WaterSplittingPlant", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can play", function () {
         maxOutOceans(player, game, 2);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 
     it("Can't act", function () {
         player.energy = 2;
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should act", function () {
         player.energy = 3;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
         
         card.action(player, game);
         expect(player.energy).to.eq(0);

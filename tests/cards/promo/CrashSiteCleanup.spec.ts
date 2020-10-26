@@ -16,7 +16,7 @@ describe("CrashSiteCleanup", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can play if removed plants from another player this generation", function () {
@@ -30,8 +30,8 @@ describe("CrashSiteCleanup", function () {
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[0].cb([player2]);
 
-        expect(card.canPlay(player, game)).to.eq(true);
-        expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
+        expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
 
         const action = card.play(player, game) as OrOptions;
         action.options[0].cb();
@@ -49,7 +49,7 @@ describe("CrashSiteCleanup", function () {
         expect(game.deferredActions.length).to.eq(1);
         game.deferredActions[0].execute();
 
-        expect(card.canPlay(player, game)).to.eq(true);
-        expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
+        expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
     });
 });

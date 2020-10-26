@@ -18,12 +18,12 @@ describe("PowerSupplyConsortium", function () {
 
     it("Can't play without power tags", function () {
         player.addProduction(Resources.ENERGY, 3);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Can play - single target", function () {
         player.playedCards.push(card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
@@ -48,7 +48,7 @@ describe("PowerSupplyConsortium", function () {
     it("Can play in solo mode if have enough power tags", function () {
         const game = new Game("foobar2", [player], player);
         player.playedCards.push(card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented

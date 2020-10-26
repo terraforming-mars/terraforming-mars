@@ -29,7 +29,7 @@ describe("AsteroidRights", function () {
     it("Can't act", function () {
         player.megaCredits = 0;
         card.resourceCount = 0;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act - can auto spend asteroid resource", function () {
@@ -72,8 +72,8 @@ describe("AsteroidRights", function () {
         player.playedCards.push(cometAiming);
 
         const action = card.action(player, game) as OrOptions;
-        expect(action instanceof OrOptions).to.eq(true);
-        expect(action.options[0] instanceof SelectOption).to.eq(true);
-        expect(action.options[1] instanceof SelectCard).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
+        expect(action.options[0] instanceof SelectOption).is.true;
+        expect(action.options[1] instanceof SelectCard).is.true;
     });
 });

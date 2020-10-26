@@ -9,7 +9,10 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { IResourceCard } from "../ICard";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
-import { TradeWithColony } from "../../deferredActions/TradeWithColony";
+import { ColonyName } from "../../colonies/ColonyName";
+import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { SelectColony } from "../../inputs/SelectColony";
+import { ColonyModel } from "../../models/ColonyModel";
 
 export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     public cost: number = 18;
@@ -24,7 +27,7 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     }
 
     public action(player: Player, game: Game) {
-        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
+        const openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
 
         if (this.resourceCount === 0 || openColonies.length === 0 || player.fleetSize <= player.tradesThisTurn) {
             game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, "Add 1 floater to a Jovian card"));
@@ -37,8 +40,26 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
                 return undefined;
             }),
             new SelectOption("Remove 1 floater on this card to trade for free", "Remove floater", () => {
-                this.resourceCount--;
-                game.defer(new TradeWithColony(player, game, openColonies, "Select colony to trade with for free")); 
+                const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+
+                game.defer(new SimpleDeferredAction(
+                    player,
+                    () => new SelectColony("Select colony to trade with for free", "Select", coloniesModel, (colonyName: ColonyName) => {
+                        openColonies.forEach((colony) => {
+                            if (colony.name === colonyName) {
+                                this.resourceCount--;
+                                game.log("${0} traded with ${1}", b => b.player(player).colony(colony));
+                                colony.trade(player, game);
+                                return undefined;
+                            }
+
+                            return undefined;
+                        });
+
+                        return undefined;
+                    })
+                ));
+
                 return undefined;
             })
         );

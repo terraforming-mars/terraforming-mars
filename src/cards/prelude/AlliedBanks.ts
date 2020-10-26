@@ -8,11 +8,10 @@ import { CardName } from "../../CardName";
 export class AlliedBanks extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.ALLIED_BANKS;
-    public bonusMc: number = 3;
 
     public play(player: Player) {
         player.addProduction(Resources.MEGACREDITS, 4);
-	    player.megaCredits += this.bonusMc; 
+	    player.megaCredits += 3;
 	    return undefined;   
     }
 }

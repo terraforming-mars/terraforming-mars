@@ -2,7 +2,8 @@ import { RequirementType } from "./RequirementType";
 import { Tags } from "./Tags";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { Resources } from "../Resources";
-import { firstLetterUpperCase } from "../utils/utils"; 
+
+const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
     protected constructor(

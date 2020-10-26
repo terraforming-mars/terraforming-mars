@@ -4,7 +4,6 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { Resources } from "../Resources";
-// import { CardMetadata } from "../cards/CardMetadata";
 
 export interface IProjectCard extends ICard {
     addPlayCardDeferredAction?: (player: Player, game: Game) => void;

@@ -4,7 +4,7 @@ export enum RequirementType {
     OCEANS = "Ocean",
     VENUS = "Venus",
     TR = "TR",
-    RESOURCE_TYPES = "Resource type",
+    RESOURCE_TYPES = "Resource types",
     FORESTS = "Forest",
     CITIES = "City",
     COLONIES = "Colony",

@@ -59,11 +59,11 @@ export const Button = Vue.component("Button", {
             }
             //type
             if (this.type === "max") {
-                classes.push("btn-max"); //#TODO max_button?
+                classes.push("btn-max");
             } else if (this.type === "success") {
                 classes.push("btn-success");
             } else if (this.type === "error") {
-                classes.push("btn-error"); //#TODO this is never red since .btn is always on top, needs discussion
+                classes.push("btn-error"); //TODO(chosta): this is never red since .btn is always on top, needs discussion
             } else if (this.type === "action") {
                 classes.push("btn-action");
             } else if (this.type === "submit") {

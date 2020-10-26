@@ -1,5 +1,5 @@
 import Vue from "vue";
-//#TODO implement points per tag
+//TODO(chosta): implement points per tag
 export const CardDescription = Vue.component("CardDescription", {
     props: {
         text: {

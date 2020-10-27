@@ -1,6 +1,8 @@
 export enum CardBonusType {
     GLOBAL = "global",
     RESOURCE = "resource",
-    PRODUCTION = "production",
+    RESOURCE_ADDITIONAL = "resource additional",
+    TAG = "tag",
+    CARD = "card",
     TILE = "tile",
 }

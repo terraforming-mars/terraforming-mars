@@ -174,7 +174,6 @@
                 font-size: @font_size_big;
             }
             .card-asterix {
-                margin-left: 8px;
                 position: relative;
                 top: 3px;
             }
@@ -185,12 +184,45 @@
                 width: 15px;
                 height: 10px;
                 background-repeat: no-repeat;
-                margin-left: -18px;
                 margin-right: 3px;
+            }
+            .card-plus {
+                background-image: url(/assets/misc/plus.png);
+                background-size: 15px;
+                min-height: 15px;
+                width: 15px;
+                vertical-align: middle;
+                display: inline-block;
+                margin: 0;
+                margin-right: 3px;
+                background-repeat: no-repeat;
+            }
+            .card-or {
+                font-size: @font_size_big;
             }
             .card-res-amount {
                 font-size: @font_size_big;
                 margin-right: 4px;
+            }
+            .card-card {
+                background: url("./assets/resources/card.png");
+                height: 40px;
+                width: 30px;
+                background-size: 30px 40px;
+                vertical-align: middle;
+            }
+            .card-icon {
+                position: absolute;
+                right: -3px;
+                top: -8px;
+                margin: 0;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 10px;
+                background-size: 24px 24px;
+                background-position: center;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
             }
             /*production*/
             .card-production-box {

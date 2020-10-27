@@ -1,11 +1,25 @@
 import Vue from "vue";
 import { Button } from "../components/common/Button";
+import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export const SelectAmount = Vue.component("select-amount", {
     components: {
         "Button": Button
     },
-    props: ["playerinput", "onsave", "showsave", "showtitle"],
+    props: {
+        playerinput: {
+            type: Object as () => PlayerInputModel
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             amount: 0,
@@ -13,7 +27,7 @@ export const SelectAmount = Vue.component("select-amount", {
     },
     methods: {
         saveData: function () {
-            this.onsave([[parseInt(this.$data.amount)]]);
+            this.onsave([[String(parseInt(this.$data.amount))]]);
         },
         setMaxValue: function () {
             this.$data.amount = this.playerinput.max;

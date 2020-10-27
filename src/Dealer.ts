@@ -13,7 +13,7 @@ import { SerializedDealer } from "./SerializedDealer";
 import { CardManifest } from "./cards/CardManifest";
 import { ICardFactory } from "./cards/ICardFactory";
 import { CardTypes, Deck } from "./Deck";
-import { Expansion } from "./Expansion";
+import { GameModule } from "./GameModule";
 import { CardFinder} from "./CardFinder";
 import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 
@@ -59,11 +59,11 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             switch(expansion) {
                 case undefined:
                     return true;
-                case Expansion.Venus:
+                case GameModule.Venus:
                     return useVenusNextExtension;
-                case Expansion.Colonies:
+                case GameModule.Colonies:
                     return useColoniesNextExtension;
-                case Expansion.Turmoil:
+                case GameModule.Turmoil:
                     return useTurmoilExtension;
                 default:
                     throw("Unhandled expansion type: " + expansion);                    

@@ -9,7 +9,7 @@ import { SelectAmount } from "../../inputs/SelectAmount";
 import { AndOptions } from "../../inputs/AndOptions";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class Philares implements CorporationCard {
     public name: CardName = CardName.PHILARES;
@@ -81,7 +81,7 @@ export class Philares implements CorporationCard {
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
         selectResources.title = "Philares effect: select " + resourceCount + " resource(s)";
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => selectResources
         ));

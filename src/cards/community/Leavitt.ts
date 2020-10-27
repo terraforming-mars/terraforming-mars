@@ -5,7 +5,7 @@ import { ColonyName } from "../../colonies/ColonyName";
 import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 import { ScienceTagCard } from './ScienceTagCard';
 
@@ -40,7 +40,7 @@ export class Leavitt extends Colony implements IColony {
         const dealtCard = game.dealer.dealCard();
         const canSelectCard = player.canAfford(player.cardCost);
 
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => new SelectCard(
                 canSelectCard ? "Select card to buy or none to discard" : "You cannot pay for this card" ,

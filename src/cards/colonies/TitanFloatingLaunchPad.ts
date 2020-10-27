@@ -10,7 +10,7 @@ import { Game } from "../../Game";
 import { IResourceCard } from "../ICard";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 import { ColonyName } from "../../colonies/ColonyName";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyModel } from "../../models/ColonyModel";
 
@@ -42,7 +42,7 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
             new SelectOption("Remove 1 floater on this card to trade for free", "Remove floater", () => {
                 const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
 
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => new SelectColony("Select colony to trade with for free", "Select", coloniesModel, (colonyName: ColonyName) => {
                         openColonies.forEach((colony) => {

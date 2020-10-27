@@ -16,7 +16,7 @@ import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
 import { Multiset } from "../utils/Multiset";
 import { Phase } from "../Phase";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 import { AddResourcesToCard } from "../deferredActions/AddResourcesToCard";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 import { SelectProductionToLoseDeferred } from "../deferredActions/SelectProductionToLoseDeferred";
@@ -100,7 +100,7 @@ export class AresHandler {
             } else if (availableCards.length === 1) {
                 player.addResourceTo(availableCards[0]);
             } else if (availableCards.length > 1) {
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => new SelectCard(
                         "Select a card to add an " + resourceAsText,

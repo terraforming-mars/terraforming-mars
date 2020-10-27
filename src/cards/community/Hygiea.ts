@@ -5,7 +5,7 @@ import { ColonyName } from "../../colonies/ColonyName";
 import { MAX_COLONY_TRACK_POSITION } from "../../constants";
 import { SelectPlayer } from "../../inputs/SelectPlayer";
 import { Resources } from "../../Resources";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 import { DiscardCards } from "../../deferredActions/DiscardCards";
 import { StealResources } from "../../deferredActions/StealResources";
 import { IncreaseColonyTrack } from "../../deferredActions/IncreaseColonyTrack";
@@ -50,7 +50,7 @@ export class Hygiea extends Colony implements IColony {
         
         if (game.isSoloMode()) return undefined;
         
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => {
                 const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);

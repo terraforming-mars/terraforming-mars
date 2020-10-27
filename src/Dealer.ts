@@ -15,7 +15,7 @@ import { ICardFactory } from "./cards/ICardFactory";
 import { CardTypes, Deck } from "./Deck";
 import { Expansion } from "./Expansion";
 import { CardFinder} from "./CardFinder";
-import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
+import { Random } from "./Random";
 
 export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
@@ -28,16 +28,16 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
-    private useAresExtension: boolean = false;
+    private deckRng: Random;
 
     constructor(
+            gameId: string,
             useCorporateEra: boolean,
             usePreludeExtension: boolean,
             useVenusNextExtension: boolean,
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
-            useAresExtension: boolean,
             useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
@@ -47,7 +47,6 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
-        this.useAresExtension = useAresExtension
 
         const deck:Array<IProjectCard> = [];
         const preludeDeck:Array<IProjectCard> = [];
@@ -97,9 +96,6 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         if (this.useTurmoilExtension) {
             addToDecks(TURMOIL_CARD_MANIFEST);
         }
-        if (this.useAresExtension) {
-            addToDecks(ARES_CARD_MANIFEST);
-        }
         if (this.usePromoCards) {
             addToDecks(PROMO_CARD_MANIFEST);
         }
@@ -110,18 +106,20 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             projectCardsToRemove.push(...cardsBlackList);
         }
         const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
-        this.deck = this.shuffleCards(filteredDeck);
+        const shuffleSeed = parseInt(gameId, 16) / Math.pow(16, 12);
+        this.deckRng = new Random( shuffleSeed);
+        this.deck = this.shuffleCards(filteredDeck, this.deckRng);
         if (this.usePreludeExtension) {
-            this.preludeDeck = this.shuffleCards(preludeDeck);
+            this.preludeDeck = this.shuffleCards(preludeDeck, new Random(shuffleSeed));
         }
         this.corporationCards = corporationCards;
     }
 
-    public shuffleCards<T>(cards: Array<T>): Array<T> {
+    public shuffleCards<T>(cards: Array<T>, rng: Random): Array<T> {
         const deck: Array<T> = [];
         const copy = cards.slice();
         while (copy.length) {
-            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+            deck.push(copy.splice(Math.floor(rng.next() * copy.length), 1)[0]);
         }
         return deck;
     }
@@ -130,7 +128,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     }
     public dealCard(isResearchPhase: boolean = false): IProjectCard {
         if (this.deck.length === 0) {
-            this.deck = this.shuffleCards(this.discarded);
+            this.deck = this.shuffleCards(this.discarded, this.deckRng);
             this.discarded = [];
         }
         let result: IProjectCard | undefined;

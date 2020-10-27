@@ -116,14 +116,14 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getCallisto()" class="resource energy"></div>
       <div v-if="colony.name === getCallisto()" class="resource energy"></div>
       <div v-if="colony.name === getTriton()" class="resource titanium"></div>
-      <div v-if="colony.name === getMiranda()" style="transform:scale(0.8)" class="resource card"></div>
+      <div v-if="colony.name === getMiranda()" style="transform:scale(0.8)" class="resource card card-with-border"></div>
       <div v-if="colony.name === getCeres()" class="resource steel"></div>
       <div v-if="colony.name === getCeres()" class="resource steel"></div>
       <div v-if="colony.name === getIo()" class="resource heat"></div>
       <div v-if="colony.name === getIo()" class="resource heat"></div>      
       <div v-if="colony.name === getLuna()" class="resource money">2</div>
 
-      <div v-if="colony.name === getIapetus()" class="resource card" style="transform: scale(0.8);"></div>
+      <div v-if="colony.name === getIapetus()" class="resource card card-with-border" style="transform: scale(0.8);"></div>
       <span v-if="colony.name === getIapetus()" class="white-char">:</span>
       <div v-if="colony.name === getIapetus()" class="resource money">-1</div>
 
@@ -137,9 +137,9 @@ export const Colony = Vue.component("colony", {
       <span v-if="colony.name === getLeavitt()" style="font-size: 14px; margin-left: 10px;">BUY OR DISCARD IT.</span>
 
       <span v-if="colony.name === getPluto()" class="white-char" style="margin-left:5px;">+</span>
-      <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
+      <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="transform: scale(0.8);margin-left:-2px;"></div>
       <span v-if="colony.name === getPluto()" class="white-char">-</span>
-      <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
+      <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="transform: scale(0.8);margin-left:-2px;"></div>
       
       <span v-if="colony.name !== getTitania()" class="colony-background-color">
         Colony Bonus
@@ -158,7 +158,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIapetus()" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
-      <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
+      <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
       <div v-if="colony.name === getEuropa()" style="height: 20px; visibility: hidden;display: block;" />
       <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
@@ -222,16 +222,16 @@ export const Colony = Vue.component("colony", {
 
     <div v-if="colony.name === getPluto()" class="colony-grid-container">
       <div>
-        <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div>
-        <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div>
-        <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
+        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div></div>
       <div></div>

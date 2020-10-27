@@ -20,7 +20,7 @@ describe("VenusFirst", function () {
     it("Should play", function () {
         card.play(player, game);
         expect(game.getVenusScaleLevel()).to.eq(4);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
 
         player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1));
     });

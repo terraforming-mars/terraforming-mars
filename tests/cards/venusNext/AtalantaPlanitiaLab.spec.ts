@@ -12,7 +12,7 @@ describe("AtalantaPlanitiaLab", function () {
         expect(card.canPlay(player)).is.not.true;
         const action = card.play(player,game);
         expect(action).is.undefined;
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(card.getVictoryPoints()).to.eq(2);
     });
 });

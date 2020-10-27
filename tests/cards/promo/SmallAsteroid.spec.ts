@@ -19,7 +19,7 @@ describe("SmallAsteroid", function () {
     it("Should play", function () {
         player2.setResource(Resources.PLANTS, 3);
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
         orOptions.options[1].cb(); // do nothing
@@ -44,10 +44,10 @@ describe("SmallAsteroid", function () {
         player3.setResource(Resources.PLANTS, 5);
 
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         const orOptions = game.deferredActions[0].execute() as OrOptions;
-        expect(orOptions.options.length).to.eq(3);
+        expect(orOptions.options).has.lengthOf(3);
 
         orOptions.options[2].cb(); // do nothing
         expect(player2.plants).to.eq(3);

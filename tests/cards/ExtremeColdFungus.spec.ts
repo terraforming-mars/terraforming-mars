@@ -33,7 +33,7 @@ describe("ExtremeColdFungus", function () {
         
         const action = card.action(player, game);
         expect(action instanceof OrOptions).is.true;
-        expect(action!.options.length).to.eq(2);
+        expect(action!.options).has.lengthOf(2);
         
         action!.options[0].cb();
         expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
@@ -49,7 +49,7 @@ describe("ExtremeColdFungus", function () {
 
         const action = card.action(player, game);
         expect(action instanceof OrOptions).is.true;
-        expect(action!.options.length).to.eq(2);
+        expect(action!.options).has.lengthOf(2);
 
         action!.options[0].cb([tardigrades]);
         expect(player.getResourcesOnCard(tardigrades)).to.eq(2);

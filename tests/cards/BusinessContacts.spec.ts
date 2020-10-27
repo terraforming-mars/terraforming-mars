@@ -21,8 +21,8 @@ describe("BusinessContacts", function () {
         action.cb([card1, card2]);
         expect(player.cardsInHand.indexOf(card1)).to.eq(0);
         expect(player.cardsInHand.indexOf(card2)).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(2);
-        expect(game.dealer.discarded.length).to.eq(2); 
+        expect(player.cardsInHand).has.lengthOf(2);
+        expect(game.dealer.discarded).has.lengthOf(2); 
         expect(game.dealer.discarded.indexOf(card3)).to.eq(0);
         expect(game.dealer.discarded.indexOf(card4)).to.eq(1);
     });

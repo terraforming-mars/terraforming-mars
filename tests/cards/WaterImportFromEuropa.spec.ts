@@ -34,7 +34,7 @@ describe("WaterImportFromEuropa", function () {
         game.runDeferredAction(game.deferredActions[0], () => {}); // HowToPay
         expect(player.megaCredits).to.eq(1);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectOcean = game.deferredActions[0].execute() as SelectSpace;
         selectOcean.cb(selectOcean.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);

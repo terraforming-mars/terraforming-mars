@@ -27,7 +27,7 @@ describe("ImportedHydrogen", function () {
 
         const action = card.play(player, game);
         expect(action instanceof OrOptions).is.true;
-        expect((action as OrOptions).options.length).to.eq(3);
+        expect((action as OrOptions).options).has.lengthOf(3);
 
         (action as OrOptions).options[0].cb();
         expect(player.plants).to.eq(3);
@@ -35,7 +35,7 @@ describe("ImportedHydrogen", function () {
         const selectAnimal = (action as OrOptions).options[2] as SelectOption;
         const selectMicrobe = (action as OrOptions).options[1] as SelectCard<any>;
 
-        expect(selectMicrobe.cards.length).to.eq(2);
+        expect(selectMicrobe.cards).has.lengthOf(2);
         expect(selectMicrobe.cards[0]).to.eq(tardigrades);
         selectMicrobe.cb([tardigrades]);
         

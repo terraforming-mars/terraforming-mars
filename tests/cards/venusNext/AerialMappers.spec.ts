@@ -37,7 +37,7 @@ describe("AerialMappers", function () {
         
         orOptions.options[0].cb([card]);
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 
     it("Should act - single target", function () {
@@ -48,6 +48,6 @@ describe("AerialMappers", function () {
         expect(orOptions instanceof OrOptions).is.true;
         orOptions.options[0].cb([card]);
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

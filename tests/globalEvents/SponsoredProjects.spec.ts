@@ -37,6 +37,6 @@ describe("SponsoredProjects", function () {
         expect(player.playedCards[0].resourceCount).to.eq(2);
         expect(player2.playedCards[0].resourceCount).to.eq(2);
         expect(player2.playedCards[1].resourceCount).to.eq(0);
-        expect(player2.cardsInHand.length).to.eq(3);
+        expect(player2.cardsInHand).has.lengthOf(3);
     });
 });

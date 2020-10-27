@@ -33,7 +33,7 @@ describe("DeimosDownPromo", function () {
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // Choose Remove 5 plants option
         const orOptions = game.deferredActions[0].execute() as OrOptions;

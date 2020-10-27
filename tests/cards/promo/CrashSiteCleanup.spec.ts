@@ -46,7 +46,7 @@ describe("CrashSiteCleanup", function () {
         smallAsteroid.play(player, game);
 
         // Trigger plants removal
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         game.deferredActions[0].execute();
 
         expect(card.canPlay(player, game)).is.true;

@@ -47,7 +47,7 @@ describe("Herbivores", function () {
         card.play(player, game);
         expect(card.resourceCount).to.eq(1);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);

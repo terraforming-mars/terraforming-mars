@@ -22,7 +22,7 @@ describe("LargeConvoy", function () {
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.plants).to.eq(5);
     });
 
@@ -36,7 +36,7 @@ describe("LargeConvoy", function () {
         player.getVictoryPoints(game);
         
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(4);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.getResourcesOnCard(pets)).to.eq(4);
         expect(player.plants).to.eq(0);
     });
@@ -51,7 +51,7 @@ describe("LargeConvoy", function () {
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.plants).to.eq(0);
 
         (action as OrOptions).options[1].cb([pets])
@@ -70,7 +70,7 @@ describe("LargeConvoy", function () {
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
-        expect(player.cardsInHand.length).to.eq(cardsInHand + 2);
+        expect(player.cardsInHand).has.lengthOf(cardsInHand + 2);
 
         (action as OrOptions).options[0].cb()
         expect(player.plants).to.eq(plantsCount + 5);

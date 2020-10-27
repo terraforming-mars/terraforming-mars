@@ -50,7 +50,7 @@ describe("Ants", function () {
         const action = card.action(player, game);
         expect(action instanceof SelectCard).is.true;
 
-        expect(action!.cards.length).to.eq(2);
+        expect(action!.cards).has.lengthOf(2);
         expect(action!.cards[0]).to.eq(tardigrades);
         action!.cb([action!.cards[0]]);
         expect(card.resourceCount).to.eq(1);

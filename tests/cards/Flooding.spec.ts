@@ -36,10 +36,10 @@ describe("Flooding", function () {
 
         const subAction: OrOptions = action!.cb(oceans[0]) as OrOptions;
         expect(subAction instanceof OrOptions).is.true;
-        expect(subAction!.options.length).to.eq(2);
+        expect(subAction!.options).has.lengthOf(2);
         expect(subAction!.options[1].cb()).is.undefined;
         const subActionSelectPlayer: SelectPlayer = subAction!.options[0] as SelectPlayer;
-        expect(subActionSelectPlayer.players.length).to.eq(1);
+        expect(subActionSelectPlayer.players).has.lengthOf(1);
         expect(subActionSelectPlayer.players[0]).to.eq(player2);
 
         player2.megaCredits = 4;
@@ -59,10 +59,10 @@ describe("Flooding", function () {
 
         expect(action instanceof SelectSpace).is.true;
         const subActions: OrOptions = action!.cb(oceanSpaces[0]) as OrOptions;
-        expect(subActions.options.length).to.eq(2);
+        expect(subActions.options).has.lengthOf(2);
 
         const subActionSelectPlayer: SelectPlayer = subActions.options[0] as SelectPlayer;
-        expect(subActionSelectPlayer.players.length).to.eq(1);
+        expect(subActionSelectPlayer.players).has.lengthOf(1);
         expect(subActionSelectPlayer.players[0]).to.eq(player2);
     });
 

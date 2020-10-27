@@ -1607,15 +1607,15 @@ export const HTML_DATA: Map<string, string> =
         <div class="content hover-hide-res">
             <div class="points ">1/2<div class="animal resource "></div></div>
             <div class="requirements">8% O2</div>
-            <div class="tile greenery-tile" style="margin-top:-3px;"></div> : <div class="animal resource "></div>
-            <div class="description " style="margin-top:-8px;">
+            <div class="tile greenery-tile"></div> : <div class="animal resource "></div>
+            <div class="description">
               (Effect: When you place a greenery tile, add an Animal to this card.)
             </div>
-            <div class="animal resource " style="margin-left:105px;"></div>
-            <div class="production-box production-box-size1a" style="margin-top:2px;">
+            <div class="animal resource herbivores-starting-animal"></div>
+            <div class="production-box production-box-size1a">
                 <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
             </div>
-            <div class="description" style="position:absolute;text-align:left;margin-top:-25px; width: 130px;">
+            <div class="description herbivores-requirement">
               (Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
             </div>
         </div>
@@ -2648,8 +2648,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="content hover-hide-res">
                 <div class="requirements requirements-max">max 14% Venus</div>
                 <div class=" money resource ">6</div> (<span class="resource titanium"></span>)
-                <span class="red-arrow "></span> <div class="resource" style="background:black;color:#bbb;">A</div> <br>
-                OR <div class="resource" style="background:black;color:#bbb;">A</div> <span class="red-arrow "></span> <div class="tile venus-tile">V</div>
+                <span class="red-arrow "></span><div class="asteroid resource"></div><br>
+                OR <div class="asteroid resource"></div> <span class="red-arrow "></span> <div class="tile venus-tile">V</div>
                 <div class="description ">
                   (Action: spend 6 MC to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step)
                   <br>(Venus must be 14% or lower)

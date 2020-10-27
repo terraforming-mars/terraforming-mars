@@ -420,7 +420,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
             if (gameReq.board === "random") {
                 const boards = Object.values(BoardName);
-                boards[Math.floor(parseInt(gameId, 16) / Math.pow(16, 12) * boards.length)];
+                gameReq.board = boards[Math.floor(parseInt(gameId, 16) / Math.pow(16, 12) * boards.length)];
             }
 
             const gameOptions = {

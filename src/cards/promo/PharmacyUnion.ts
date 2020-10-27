@@ -70,20 +70,11 @@ export class PharmacyUnion implements CorporationCard {
                         orOptions.title = "Choose the order of tag resolution for Pharmacy Union";
                         return orOptions;
                     }
-                ));
+                ), true); // Make it a priority
                 return undefined;
             }
         }
 
-
-        if (hasMicrobesTag) {
-            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
-            const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
-            const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
-            player.addResourceTo(this, microbeTagCount);
-            player.megaCredits -= megaCreditsLost;
-            game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
-        }
             
         if (isPharmacyUnion && hasScienceTag) {
             const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
@@ -123,8 +114,24 @@ export class PharmacyUnion implements CorporationCard {
                             })
                         );
                     }
-                ));
+                ), true); // Make it a priority
             }
+        }
+
+
+        if (hasMicrobesTag) {
+            game.defer(new SimpleDeferredAction(
+                player,
+                () => {
+                    const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+                    const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
+                    const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
+                    player.addResourceTo(this, microbeTagCount);
+                    player.megaCredits -= megaCreditsLost;
+                    game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
+                    return undefined;
+                }
+            ), true); // Make it a priority
         }
 
         return undefined;

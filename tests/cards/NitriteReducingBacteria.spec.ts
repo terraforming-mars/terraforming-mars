@@ -16,7 +16,8 @@ describe("NitriteReducingBacteria", function () {
 
     it("Should play", function () {
         player.playedCards.push(card);
-        card.play(player);
+        card.play(player, game);
+        game.runDeferredAction(game.deferredActions[0], () => {});
         expect(card.resourceCount).to.eq(3);
     });
 

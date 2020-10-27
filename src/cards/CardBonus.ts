@@ -1,5 +1,8 @@
 import { CardBonusType } from "../cards/CardBonusType";
 import { Resources } from "../Resources";
+import { Tags } from "./Tags";
+import { TileType } from "../TileType";
+import { ResourceType } from "../ResourceType";
 import { RequirementType } from "./RequirementType";
 
 export class CardBonus {
@@ -53,30 +56,26 @@ export class CardBonus {
     public static megacredits(amount: number): CardBonusResource {
         return new CardBonusResource(amount, Resources.MEGACREDITS, true);
     }
+    public static microbes(amount: number): CardBonusResourceAdditional {
+        return new CardBonusResourceAdditional(amount, ResourceType.MICROBE);
+    }
+    public static animals(amount: number): CardBonusResourceAdditional {
+        return new CardBonusResourceAdditional(amount, ResourceType.ANIMAL);
+    }
+    public static floaters(amount: number): CardBonusResourceAdditional {
+        return new CardBonusResourceAdditional(amount, ResourceType.FLOATER);
+    }
+    public static cards(amount: number): CardBonusCard {
+        return new CardBonusCard(amount);
+    }
     public any(): CardBonus {
         this.anyPlayer = true;
         return this;
     }
 }
-
-export class CardBonusResource extends CardBonus {
-    constructor(
-        amount: number,
-        private resource: Resources,
-        private amountInside: boolean = false
-    ) {
-        super(CardBonusType.RESOURCE, amount);
-        this.resource = resource;
-    }
-    public getResourceType(): Resources {
-        return this.resource;
-    }
-    public inside(): CardBonusResource {
-        this.amountInside = true;
-        return this;
-    }
-    public getIsAmountInside(): boolean {
-        return this.amountInside;
+export class CardBonusCard extends CardBonus {
+    constructor(amount: number) {
+        super(CardBonusType.CARD, amount);
     }
 }
 
@@ -87,5 +86,74 @@ export class CardBonusGlobal extends CardBonus {
     }
     public getGlobalRequirementType() {
         return this.globalRequirement;
+    }
+}
+
+interface ITagDependency {
+    tagDependency?: Tags
+}
+
+interface ICardBonusWithResourceType extends CardBonus {
+    resourceType: ResourceType | Resources | TileType | Tags;
+    getResourceType(): ResourceType | Resources | TileType | Tags;
+}
+
+export class CardBonusResource extends CardBonus implements ICardBonusWithResourceType {
+    constructor(
+        amount: number,
+        public resourceType: Resources,
+        private amountInside: boolean = false,
+    ) {
+        super(CardBonusType.RESOURCE, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): Resources {
+        return this.resourceType;
+    }
+    public inside(): CardBonusResource {
+        this.amountInside = true;
+        return this;
+    }
+    public getIsAmountInside(): boolean {
+        return this.amountInside;
+    }
+}
+
+export class CardBonusResourceAdditional extends CardBonus implements ICardBonusWithResourceType, ITagDependency {
+    public tagDependency: Tags | undefined;
+
+    constructor(amount: number, public resourceType: ResourceType) {
+        super(CardBonusType.RESOURCE_ADDITIONAL, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): ResourceType {
+        return this.resourceType;
+    }
+    public getTagDependency(): Tags | undefined {
+        return this.tagDependency;
+    }
+    public depends(tagDependency: Tags): CardBonusResourceAdditional {
+        this.tagDependency = tagDependency;
+        return this;
+    }
+}
+
+export class CardBonusTag extends CardBonus implements ICardBonusWithResourceType {
+    constructor(amount: number, public resourceType: Tags) {
+        super(CardBonusType.TAG, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): Tags {
+        return this.resourceType;
+    }
+}
+
+export class CardBonusTile extends CardBonus implements ICardBonusWithResourceType {
+    constructor(amount: number, public resourceType: TileType) {
+        super(CardBonusType.TILE, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): TileType {
+        return this.resourceType;
     }
 }

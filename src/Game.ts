@@ -40,7 +40,6 @@ import { ResourceType } from "./ResourceType";
 import { Resources } from "./Resources";
 import { SelectCard } from "./inputs/SelectCard";
 import { DeferredAction } from "./deferredActions/DeferredAction";
-import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
 import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
 import { RemoveColonyFromGame } from "./deferredActions/RemoveColonyFromGame";
@@ -686,7 +685,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-            this.defer(new SimpleDeferredAction(
+            this.defer(new DeferredAction(
                 player,
                 () => {
                     if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {

@@ -8,7 +8,7 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { ICard } from "../../cards/ICard";
 import { SelectCard } from "../../inputs/SelectCard";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
     public cost: number = 7;
@@ -34,7 +34,7 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
     }
 
     public action(player: Player, game: Game) {
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => {
                 const resourceCards = player.getResourceCards(this.resourceType).filter(card => card.name !== CardName.BIOENGINEERING_ENCLOSURE);

@@ -1,5 +1,4 @@
-import { CardRequirement } from "./CardRequirement";
-
+import { CardRequirement, PartyCardRequirement } from "./CardRequirement";
 export class CardRequirements {
     constructor(private requirements: Array<CardRequirement>) {
     }
@@ -10,5 +9,8 @@ export class CardRequirements {
     }
     public hasMax(): boolean {
         return this.requirements.some((req) => req.getIsMax());
+    }
+    public hasParty(): boolean {
+        return this.requirements.some((req) => req instanceof PartyCardRequirement);
     }
 }

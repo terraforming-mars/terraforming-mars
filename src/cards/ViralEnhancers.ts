@@ -7,7 +7,7 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from "../CardName";
 import { ResourceType } from "../ResourceType";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class ViralEnhancers implements IProjectCard {
     public cost: number = 9;
@@ -27,7 +27,7 @@ export class ViralEnhancers implements IProjectCard {
         }
 
         for (let i = 0; i < resourceCount; i++) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => new OrOptions(
                     new SelectOption("Add resource to card " + card.name, "Add resource", () => {

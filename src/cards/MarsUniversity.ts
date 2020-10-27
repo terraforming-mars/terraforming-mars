@@ -7,7 +7,7 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from "../CardName";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
@@ -18,7 +18,7 @@ export class MarsUniversity implements IProjectCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
         for (let i = 0; i < scienceTags; i++) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => {
                     // No card to discard

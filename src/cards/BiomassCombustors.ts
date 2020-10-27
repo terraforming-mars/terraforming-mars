@@ -40,7 +40,7 @@ export class BiomassCombustors implements IProjectCard {
         onPlay: [
             CardRow.add([
                 CardProductionBox.add([
-                    [CardSpecial.minus(), CardBonus.plants(-1).any()],
+                    [CardBonus.plants(-1).any()],
                     [CardSpecial.plus(), CardBonus.energy(2)],
                 ]),
             ]),

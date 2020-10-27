@@ -3,13 +3,18 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRequirements } from "../../cards/CardRequirements";
+import { CardRequirement } from "../../cards/CardRequirement";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
 
 export class AtalantaPlanitiaLab implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SCIENCE];
-    public name: CardName = CardName.ATALANTA_PLANITIA_LAB;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.VENUS, Tags.SCIENCE];
+    public name = CardName.ATALANTA_PLANITIA_LAB;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3;
     }
@@ -22,4 +27,12 @@ export class AtalantaPlanitiaLab implements IProjectCard {
     public getVictoryPoints() {
         return 2;
     }
+
+    public metadata: CardMetadata = {
+        description: "Requires 3 science tags. Draw 2 cards.",
+        cardNumber: "216",
+        requirements: new CardRequirements([CardRequirement.tag(Tags.SCIENCE, 3)]),
+        onPlay: [CardRow.add([CardBonus.cards(2)])],
+        victoryPoints: 2,
+    };
 }

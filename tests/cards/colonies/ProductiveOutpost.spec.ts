@@ -21,8 +21,11 @@ describe("ProductiveOutpost", function () {
         game.colonies.push(colony1);
         game.colonies.push(colony2);
 
-        const action = card.play(player, game);
-        expect(action).is.undefined;
+        card.play(player, game);
+        while (game.deferredActions.length) {
+            game.deferredActions[0].execute();
+            game.deferredActions.shift();
+        }
         expect(player.megaCredits).to.eq(2);
         expect(player.titanium).to.eq(1);
     });

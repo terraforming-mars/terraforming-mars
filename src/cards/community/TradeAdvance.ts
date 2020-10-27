@@ -9,6 +9,7 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { MAX_COLONY_TRACK_POSITION } from "../../constants";
 import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { GiveTradeBonus } from "../../deferredActions/GiveTradeBonus";
 
 export class TradeAdvance extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
@@ -42,9 +43,9 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
                 colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
             }
 
-            colony.colonies.forEach(playerId => {
-                colony.giveTradeBonus(game.getPlayerById(playerId), game);
-            });
+            if (colony.colonies.length > 0) {
+                game.defer(new GiveTradeBonus(player, game, colony));
+            }
         });
 
         if (game.isSoloMode()) {

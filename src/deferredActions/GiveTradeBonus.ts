@@ -2,10 +2,11 @@ import { Player, PlayerId } from "../Player";
 import { Game } from "../Game";
 import { IColony } from "../colonies/Colony";
 import { DeferredAction } from "./DeferredAction";
+import { Multiset } from "../utils/Multiset";
 
 export class GiveTradeBonus implements DeferredAction {
     public cb: () => void = () => {};
-    private waitingFor: Record<PlayerId,number> = {};
+    private waitingFor: Multiset<PlayerId> = new Multiset<PlayerId>();
     constructor(
         public player: Player,
         public game: Game,
@@ -13,11 +14,16 @@ export class GiveTradeBonus implements DeferredAction {
     ){}
 
     public execute() {
-        for (let playerId of this.colony.colonies) {
-            this.waitingFor[playerId] = this.waitingFor[playerId] + 1 || 1;
+        if (this.colony.colonies.length === 0) {
+            this.cb();
+            return undefined;
         }
 
-        for (let playerId in this.waitingFor) {
+        for (const playerId of this.colony.colonies) {
+            this.waitingFor.add(playerId);
+        }
+
+        for (const playerId in this.waitingFor.entries()) {
             const player = this.game.getPlayerById(playerId);
             this.giveTradeBonus(player, this.game);
         }
@@ -26,8 +32,8 @@ export class GiveTradeBonus implements DeferredAction {
     }
 
     public giveTradeBonus(player: Player, game: Game): void {
-        if (this.waitingFor[player.id] > 0) {
-            this.waitingFor[player.id]--;
+        if (this.waitingFor.get(player.id)) {
+            this.waitingFor.remove(player.id);
             const input = this.colony.giveTradeBonus(player, game);
             if (input !== undefined) {
                 player.setWaitingFor(input, () => this.giveTradeBonus(player, game));
@@ -35,13 +41,12 @@ export class GiveTradeBonus implements DeferredAction {
                 this.giveTradeBonus(player, game);
             }
         } else {
-            delete this.waitingFor[player.id];
             this.doneGettingBonus();
         }
     }
 
     private doneGettingBonus(): void {
-        if (Object.keys(this.waitingFor).length === 0) {
+        if (this.waitingFor.entries().length === 0) {
             this.cb();
         }
     }

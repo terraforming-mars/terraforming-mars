@@ -1,5 +1,10 @@
 import Vue from "vue";
-import { CardBonusGlobal, CardBonusResource } from "../../cards/CardBonus";
+import {
+    CardBonusGlobal,
+    CardBonusResource,
+    CardBonusCard,
+    CardBonusResourceAdditional,
+} from "../../cards/CardBonus";
 import { CardSpecial } from "../../cards/CardSpecial";
 import { CardProductionBox } from "../../cards/CardProductionBox";
 import { CardProductionBoxComponent } from "./CardProductionBoxComponent";
@@ -28,7 +33,11 @@ export const CardRowComponent = Vue.component("CardRowComponent", {
             return this.data instanceof CardSpecial;
         },
         isResource: function (): boolean {
-            return this.data instanceof CardBonusResource;
+            return (
+                this.data instanceof CardBonusResource ||
+                this.data instanceof CardBonusResourceAdditional ||
+                this.data instanceof CardBonusCard
+            );
         },
         isProduction: function (): boolean {
             return this.data instanceof CardProductionBox;
@@ -37,7 +46,7 @@ export const CardRowComponent = Vue.component("CardRowComponent", {
     template: `
         <CardBonusGlobalComponent v-if="isGlobal()" :item="data"/>
         <CardBonusResourceComponent v-else-if="isResource()" :item="data"/>
-        <CardSpecialComponent v-else-if="isSpecial()" :type="data.getType()" />
+        <CardSpecialComponent v-else-if="isSpecial()" :item="data" />
         <CardProductionBoxComponent v-else-if="isProduction()" :data="data.getData()" />
         <div v-else>n/a</div>
     `,

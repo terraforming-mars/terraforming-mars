@@ -38,7 +38,7 @@ export const CardProductionBoxComponent = Vue.component("CardProductionBoxCompon
             <div class="card-production-box-row" v-for="(rowData, index) in data" :key="index">
                 <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
                     <CardBonusResourceComponent v-if="getComponentType(rowItem) === 'resource'" :item="rowItem"/>
-                    <CardSpecialComponent v-else-if="getComponentType(rowItem) === 'special'" :type="rowItem.getType()" />
+                    <CardSpecialComponent v-else-if="getComponentType(rowItem) === 'special'" :item="rowItem" />
                     <div v-else>n/a</div>
                 </div>
             </div>

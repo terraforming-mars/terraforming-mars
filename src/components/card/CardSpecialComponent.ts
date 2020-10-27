@@ -1,29 +1,38 @@
 import Vue from "vue";
 import { CardSpecialType } from "../../cards/CardSpecialType";
+import { CardSpecial } from "../../cards/CardSpecial";
 
 export const CardSpecialComponent = Vue.component("CardSpecialComponent", {
     props: {
-        type: {
-            type: String,
+        item: {
+            type: Object as () => CardSpecial,
             required: true,
         },
     },
     methods: {
         getClasses: function (): string {
-            const classes: Array<String> = ["card-special"];
-            if (this.type === CardSpecialType.ASTERIX) {
+            const type: CardSpecialType = this.item.getType();
+            const classes: Array<string> = ["card-special"];
+            if (type === CardSpecialType.ASTERIX) {
                 classes.push("card-asterix");
-            } else if (this.type === CardSpecialType.MINUS) {
+            } else if (type === CardSpecialType.MINUS) {
                 classes.push("card-minus");
+            } else if (type === CardSpecialType.PLUS) {
+                classes.push("card-plus");
+            } else if (type === CardSpecialType.OR) {
+                classes.push("card-or");
             }
             return classes.join(" ");
         },
-        isIcon: function (): boolean {
-            return this.type !== CardSpecialType.ASTERIX;
+        getContent: function (): string {
+            if (this.item.getIsIcon()) {
+                return "";
+            } else {
+                return this.item.getType();
+            }
         },
     },
     template: `
-        <div v-if="isIcon()" :class="getClasses()"/>
-        <div v-else :class="getClasses()">{{ type }}</div>
+        <div v-html="getContent()" :class="getClasses()" />
     `,
 });

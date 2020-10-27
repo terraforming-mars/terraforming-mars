@@ -29,8 +29,8 @@ import { ITile } from "./ITile";
 import { LogBuilder } from "./LogBuilder";
 import { LogHelper } from "./components/LogHelper";
 import { LogMessage } from "./LogMessage";
-import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from "./awards/Awards";
-import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from "./milestones/Milestones";
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ARES_MILESTONES } from "./milestones/Milestones";
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ARES_AWARDS } from "./awards/Awards";
 import { OriginalBoard } from "./OriginalBoard";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { Phase } from "./Phase";
@@ -40,7 +40,6 @@ import { ResourceType } from "./ResourceType";
 import { Resources } from "./Resources";
 import { SelectCard } from "./inputs/SelectCard";
 import { DeferredAction } from "./deferredActions/DeferredAction";
-import { SimpleDeferredAction } from "./deferredActions/SimpleDeferredAction";
 import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
 import { RemoveColonyFromGame } from "./deferredActions/RemoveColonyFromGame";
@@ -194,6 +193,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
+
+      // Initialize Ares data
+      if (gameOptions.aresExtension) {
+        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+      }
+
       this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
@@ -206,6 +211,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.coloniesExtension,
         gameOptions.promoCardsOption,
         gameOptions.turmoilExtension,
+        gameOptions.aresExtension,
         gameOptions.communityCardsOption,
         gameOptions.cardsBlackList
       );
@@ -253,13 +259,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.turmoil = new Turmoil(this);
       }
 
-      if (gameOptions.aresExtension) {
-        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
-          // this test is because hazard selection isn't actively part of game options, but needs
-          // to be configurable for tests.
-          if (gameOptions.aresHazards !== false) {
-            AresHandler.setupHazards(this, players.length);
-          }
+      // Setup Ares hazards
+      if (gameOptions.aresExtension && gameOptions.aresHazards !== false) {
+        AresHandler.setupHazards(this, players.length);
       }
 
       // Setup custom corporation list
@@ -680,11 +682,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.megaCredits -= cardsToPayFor * cardCost;
       }
       corporationCard.play(player, this);
+      this.log("${0} played ${1}", b => b.player(player).card(corporationCard));
 
       // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-            this.defer(new SimpleDeferredAction(
+            this.defer(new DeferredAction(
                 player,
                 () => {
                     if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
@@ -1758,7 +1761,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.milestones = [];
       this.awards = [];
 
-      const allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+      const allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES, ARES_MILESTONES);
 
       d.milestones.forEach((element: IMilestone) => {
         allMilestones.forEach((ms: IMilestone) => {
@@ -1768,7 +1771,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
 
-      const allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+      const allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS, ARES_AWARDS);
 
       d.awards.forEach((element: IAward) => {
         allAwards.forEach((award: IAward) => {
@@ -1788,6 +1791,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if(element.tile) {
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
+          const protectedHazard = element.tile.protectedHazard;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
             // Prevent loss of "neutral" player tile ownership across reloads
@@ -1795,7 +1799,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
           space.tile = {
             tileType: tileType,
-            card: tileCard
+            card: tileCard,
+            protectedHazard: protectedHazard,
           };
         }
         // Correct Land Claim

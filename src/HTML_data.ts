@@ -2,19 +2,6 @@ import { CardName } from "./CardName";
 
 export const HTML_DATA: Map<string, string> =
   new Map ([
-[CardName.ASTEROID_MINING_CONSORTIUM,` 
-        <div class="content ">
-            <div class="points points-big ">1</div>
-            <div class="requirements ">Titanium production</div>
-            <div class="production-box production-box-size1a ">
-                <div class="production-prefix minus"></div><div class="titanium production red-outline "></div><br>
-                <div class="production-prefix plus"></div><div class="titanium production "></div>
-            </div>
-            <div class="description " style="margin-top:0px;">
-                (Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.)
-            </div>
-        </div>
-`],
 [CardName.DEEP_WELL_HEATING,` 
         <div class="content">
             <div class="production-box ">
@@ -409,17 +396,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-[CardName.ASTEROID_MINING,` 
-    <div class="content">
-      <div class="points points-big">2</div>
-      <div class="production-box production-box-size2">
-        <div class="production titanium"></div><div class="production titanium"></div>
-      </div>
-      <div class="description">
-        (Increase your titanium production 2 steps.)
-      </div>
-    </div>
-`],
 [CardName.FOOD_FACTORY,` 
     <div class="content">
       <div class="points points-big">1</div>
@@ -429,17 +405,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <div class="description">
         (Decrease your Plant production 1 step and increase your MC production 4 steps.)
-      </div>
-    </div>
-`],
-[CardName.ARCHAEBACTERIA,` 
-    <div class="content">
-      <div class="requirements requirements-max">max -18 C</div>
-      <div class="production-box">
-        <div class="plant production"></div>
-      </div>
-      <div class="description">
-        (It must be -18 C or colder. Increase your Plant production 1 step.)
       </div>
     </div>
 `],
@@ -487,28 +452,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <div class="description">
         (Requires 3 Science tags. Increase your Energy production and your MC production up one step each.)
-      </div>
-    </div>
-`],
-[CardName.ALGAE,` 
-    <div class="content">
-      <div class="requirements">5 Oceans</div>
-      <div class="production-box production-box-size2">
-        <div class="plant production"></div><div class="plant production"></div>
-      </div>
-      <div class="plant resource" style="margin-left:20px"></div>
-      <div class="description">
-        (Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.)
-      </div>
-    </div>
-`],
-[CardName.ADAPTED_LICHEN,` 
-    <div class="content">
-      <div class="production-box">
-        <div class="plant production"></div>
-      </div>
-      <div class="description">
-        (Increase your Plant production 1 step.)
       </div>
     </div>
 `],
@@ -660,18 +603,6 @@ export const HTML_DATA: Map<string, string> =
         <div class="plant resource" style="margin-left:20px"></div>
         <div class="description">
           (Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.)
-        </div>
-      </div>
-`],
-[CardName.GREAT_ESCARPMENT_CONSORTIUM,` 
-      <div class="content">
-        <div class="requirements">Steel production</div>
-        <div class="production-box production-box-size1a">
-          <div class="production-prefix minus"></div><div class="production steel red-outline"></div><br>
-          <div class="production-prefix plus"></div><div class="production steel"></div>
-        </div>
-        <div class="description">
-          (Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.)
         </div>
       </div>
 `],
@@ -1179,16 +1110,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.ARTIFICIAL_PHOTOSYNTHESIS,` 
-        <div class="content ">
-          <div class="production-box production-box-size4">
-            <div class="production plant"></div> OR <div class="production energy"></div><div class="production energy"></div>
-          </div>
-            <div class="description ">
-                (Increase your plant production 1 step or your energy production 2 steps.)
-            </div>
-        </div>
-`],
 [CardName.GEOTHERMAL_POWER,` 
         <div class="content ">
             <div class="production-box production-box-size2">
@@ -1618,29 +1539,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.LICHEN,` 
-      <div class="content">
-        <div class="requirements">-24 C</div>
-        <div class="production-box">
-          <div class="plant production"></div>
-        </div>
-        <div class="description">
-          (Requires -24 C or warmer. Increase your Plant production 1 step.)
-        </div>
-      </div>
-`],
-[CardName.POWER_SUPPLY_CONSORTIUM,` 
-        <div class="content">
-          <div class="requirements">2 Power</div>
-          <div class="production-box production-box-size1a">
-              <div class="production-prefix minus"></div><div class="energy production red-outline"></div>
-              <div class="production-prefix plus"></div><div class="energy production"></div>
-          </div>
-          <div class="description">
-            (Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.)
-          </div>
-        </div>
-`],
 [CardName.CONVOY_FROM_EUROPA,`  
           <div class="content ">
               <div class="tile ocean-tile "></div> <div class="resource card " style="margin-left:20px;"></div>
@@ -1743,18 +1641,6 @@ export const HTML_DATA: Map<string, string> =
             (Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.)
           </div>
         </div>
-`],
-[CardName.AEROBRAKED_AMMONIA_ASTEROID,` 
-          <div class="content ">
-            <div class="production-box production-box-size3">
-                <div class="heat production"></div><div class="heat production"></div><div class="heat production"></div>
-                <div class="plant production"></div>
-            </div><br>
-             <div class="microbe resource"></div><div class="microbe resource"></div>*
-              <div class="description ">
-                (Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.)
-              </div>
-          </div>
 `],
 [CardName.MAGNETIC_FIELD_DOME,` 
         <div class="content">
@@ -2202,41 +2088,6 @@ export const HTML_DATA: Map<string, string> =
                 <div class="description">
                   (Requires that you have 5 Floaters. Gain 1 MC per each City tile in play)
                 </div>
-            </div>
-`],
-[CardName.AIR_SCRAPPING_EXPEDITION,` 
-            <div class="content ">
-              <div class="tile venus-tile">V</div> &nbsp;&nbsp;
-                <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                  <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                    <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                <div class="description">
-                  (Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD)
-                </div>
-            </div>
-`],
-[CardName.ATALANTA_PLANITIA_LAB,` 
-            <div class="content ">
-              <div class="points points-big">2</div>
-              <div class="requirements">3 Science</div>
-              <div class="resource card"></div> <div class="resource card"></div>
-              <div class="description">
-              (Requires 3 science tags. Draw 2 cards.)
-              </div>
-            </div>
-`],
-[CardName.ATMOSCOOP,` 
-            <div class="content ">
-              <div class="points points-big">1</div>
-              <div class="requirements">3 Science</div>
-              <div class="nowrap">
-                <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div> OR
-                <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
-              </div>
-              <div class="resource floater"></div><div class="resource floater"></div><span>*</span>
-              <div class="description" style="text-align:left;position:absolute;margin-top:-8px;">
-                (Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card)
-              </div>
             </div>
 `],
 [CardName.COMET_FOR_VENUS,` 
@@ -2795,19 +2646,6 @@ export const HTML_DATA: Map<string, string> =
                   (Requires 2 Earth tags. Increase MC production 4 steps.)
                 </div>
               </div>
-`],
-[CardName.AIRLINERS,` 
-            <div class="content ">
-              <div class="points points-big ">1</div>
-              <div class="requirements ">3 Floaters</div>
-              <div class="production-box">
-                <div class="money production">2</div>
-              </div><br>
-              <div class="floater resource "></div><div class="floater resource "></div>*
-              <div class="description">
-                (Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.)
-              </div>
-            </div>
 `],
 [CardName.AIR_RAID,` 
             <div class="content">
@@ -5120,20 +4958,6 @@ export const HTML_DATA: Map<string, string> =
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>
     </div>
-`],
-[CardName.AERIAL_LENSES, ` 
-  <div class="content ">
-    <div class="points points-big">-1</div>
-    <div class="requirements"><span class="party">Kelvinists</span></div>
-      - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
-
-      <div class="production-box production-box-size2">
-        <div class="heat production"></div><div class="heat production"></div>
-      </div>
-      <div class="description ">
-        (Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.)
-      </div>
-  </div>
 `],
 [CardName.BANNED_DELEGATE, ` 
   <div class="content ">

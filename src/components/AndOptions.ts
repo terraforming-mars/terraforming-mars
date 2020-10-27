@@ -1,17 +1,30 @@
 import Vue, { VNode } from "vue";
 import { PlayerInputFactory } from "./PlayerInputFactory";
+import { PlayerModel } from "../models/PlayerModel";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 import { Button } from "../components/common/Button";
 
 export const AndOptions = Vue.component("and-options", {
-    props: [
-        "player",
-        "players",
-        "playerinput",
-        "onsave",
-        "showsave",
-        "showtitle",
-    ],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        players: {
+            type: Object as () => Array<PlayerModel>
+        },
+        playerinput: {
+            type: Object as () => PlayerInputModel
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {};
     },
@@ -29,16 +42,16 @@ export const AndOptions = Vue.component("and-options", {
                 }
             }
             const res: Array<Array<string>> = [];
-            for (let i = 0; i < this.playerinput.options.length; i++) {
-                res.push(this.$data.responded["" + i]);
+            if (this.playerinput.options !== undefined) {
+               for (let i = 0; i < this.playerinput.options.length; i++) {
+                   res.push(this.$data.responded["" + i]);
+               }
             }
             this.onsave(res);
         },
     },
     render: function (createElement) {
-        const playerInput: PlayerInputModel = this
-            .playerinput as PlayerInputModel;
-
+        const playerInput = this.playerinput;
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
         this.$data.responded = [];

@@ -420,7 +420,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
             if (gameReq.board === "random") {
                 const boards = Object.values(BoardName);
-                gameReq.board = boards[Math.floor(parseInt(gameId, 16) / Math.pow(16, 12) * boards.length)];
+                boards[Math.floor(parseInt(gameId, 16) / Math.pow(16, 12) * boards.length)];
             }
 
             const gameOptions = {
@@ -436,6 +436,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 coloniesExtension: gameReq.colonies,
                 preludeExtension: gameReq.prelude,
                 turmoilExtension: gameReq.turmoil,
+                aresExtension: gameReq.aresExtension,
+                aresHazards: true, // Not a runtime option.
                 promoCardsOption: gameReq.promoCardsOption,
                 communityCardsOption: gameReq.communityCardsOption,
                 solarPhaseOption: gameReq.solarPhaseOption,

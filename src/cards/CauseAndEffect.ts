@@ -5,8 +5,8 @@ import { CardProductionBox } from "./CardProductionBox";
 abstract class CauseAndEffect {
     protected constructor(
         protected cause: Array<CardBonus | CardSpecial> | undefined,
-        protected effect: Array<CardBonus | CardSpecial | CardProductionBox>,
-        protected description: string,
+        protected effect: Array<CardBonus | CardSpecial | CardProductionBox> | undefined,
+        protected description: string | undefined,
         protected delimiter: CardSpecial | undefined
     ) {
         this.cause = cause;
@@ -14,22 +14,20 @@ abstract class CauseAndEffect {
         this.description = description;
         this.delimiter = delimiter;
     }
- 
+
     public getCause(): Array<CardBonus | CardSpecial> | undefined {
         return this.cause;
     }
-    public getInput(): Array<CardBonus | CardSpecial | CardProductionBox | undefined> {
+    public getEffect(): Array<CardBonus | CardSpecial | CardProductionBox | undefined> | undefined {
         return this.effect;
     }
-    public getDesrcription(): string {
+    public getDescription(): string | undefined {
         return this.description;
-    }
-    public getDescriptionParsed(): string {
-        return `Effect: ${this.getDesrcription()}.`;
     }
     public getDelimiter(): CardSpecial | undefined {
         return this.delimiter;
     }
+    public abstract getDescriptionParsed(): string;
 }
 
 export class CardEffect extends CauseAndEffect {
@@ -47,8 +45,22 @@ export class CardEffect extends CauseAndEffect {
             cause === undefined ? undefined : delimiter || CardSpecial.colon()
         );
     }
-};
+    public getDescriptionParsed(): string {
+        return `Effect: ${this.getDescription()}.`;
+    }
+}
 
 export class CardAction extends CauseAndEffect {
-    
+    public static add(
+        cause: Array<CardBonus | CardSpecial> | undefined,
+        effect: Array<CardBonus | CardSpecial | CardProductionBox> | undefined,
+        description: string | undefined = undefined,
+        delimiter: CardSpecial | undefined = CardSpecial.arrow()
+    ): CardAction {
+        return new CardAction(cause, effect, description, delimiter);
+    }
+
+    public getDescriptionParsed(): string {
+        return `Action: ${this.getDescription()}.`;
+    }
 }

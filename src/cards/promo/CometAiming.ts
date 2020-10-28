@@ -29,7 +29,8 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
     public canAct(player: Player, game: Game): boolean {
         const hasTitanium = player.titanium > 0;
-        const canPlaceOcean = this.resourceCount > 0 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
+        const canPlaceOcean =
+            this.resourceCount > 0 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
             return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && canPlaceOcean);
@@ -41,18 +42,18 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
         const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
 
-        const addAsteroidToSelf = function() {
+        const addAsteroidToSelf = function () {
             player.titanium--;
             player.addResourceTo(asteroidCards[0]);
             LogHelper.logAddResource(game, player, asteroidCards[0]);
             return undefined;
-        }
+        };
 
         const addAsteroidToCard = new SelectCard(
-            "Select card to add 1 asteroid", 
+            "Select card to add 1 asteroid",
             "Add asteroid",
-            asteroidCards, 
-            (foundCards: Array<ICard>) => { 
+            asteroidCards,
+            (foundCards: Array<ICard>) => {
                 player.titanium--;
                 player.addResourceTo(foundCards[0]);
                 LogHelper.logAddResource(game, player, foundCards[0]);
@@ -65,7 +66,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
             LogHelper.logRemoveResource(game, player, this, 1, "place an ocean");
             game.defer(new PlaceOceanTile(player, game));
             return undefined;
-        }
+        };
 
         if (this.resourceCount === 0) {
             if (asteroidCards.length === 1) return addAsteroidToSelf();
@@ -74,16 +75,31 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
         if (player.titanium === 0) return spendAsteroidResource();
 
-        let availableActions = new Array<SelectOption | SelectCard<ICard>>();
+        const availableActions = new Array<SelectOption | SelectCard<ICard>>();
         const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
         const canPlaceOcean = game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
-        
-        if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
-            availableActions.push(new SelectOption("Remove an asteroid resource to place an ocean", "Remove asteroid", spendAsteroidResource));
-        } 
+
+        if (
+            (canPlaceOcean && !redsAreRuling) ||
+            (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))
+        ) {
+            availableActions.push(
+                new SelectOption(
+                    "Remove an asteroid resource to place an ocean",
+                    "Remove asteroid",
+                    spendAsteroidResource
+                )
+            );
+        }
 
         if (asteroidCards.length === 1) {
-            availableActions.push(new SelectOption("Spend 1 titanium to gain 1 asteroid resource", "Spend titanium", addAsteroidToSelf));
+            availableActions.push(
+                new SelectOption(
+                    "Spend 1 titanium to gain 1 asteroid resource",
+                    "Spend titanium",
+                    addAsteroidToSelf
+                )
+            );
         } else {
             availableActions.push(addAsteroidToCard);
         }
@@ -94,7 +110,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
             if (action instanceof SelectOption) return (availableActions[0] as SelectOption).cb();
             return availableActions[0]; // SelectCard
         }
-        
+
         return new OrOptions(...availableActions);
     }
 }

@@ -23,7 +23,8 @@ export class GiveTradeBonus implements DeferredAction {
             this.waitingFor.add(playerId);
         }
 
-        for (const playerId in this.waitingFor.entries()) {
+        for (const entry of this.waitingFor.entries()) {
+            const playerId = entry[0];
             const player = this.game.getPlayerById(playerId);
             this.giveTradeBonus(player, this.game);
         }

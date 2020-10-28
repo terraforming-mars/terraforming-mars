@@ -7,12 +7,17 @@ import {
     CardBonusResource,
     CardBonusResourceAdditional,
     CardBonusCard,
+    CardBonusTag,
 } from "../../cards/CardBonus";
 
 export const CardBonusResourceComponent = Vue.component("CardBonusResourceComponent", {
     props: {
         item: {
-            type: Object as () => CardBonusResource | CardBonusResourceAdditional | CardBonusCard,
+            type: Object as () =>
+                | CardBonusResource
+                | CardBonusResourceAdditional
+                | CardBonusCard
+                | CardBonusTag,
         },
     },
     methods: {
@@ -48,7 +53,19 @@ export const CardBonusResourceComponent = Vue.component("CardBonusResourceCompon
                 classes.push("card-resource-floater");
             } else if (type === ResourceType.ASTEROID) {
                 classes.push("card-resource-asteroid");
+            } else if (type === Tags.EVENT) {
+                classes.push("card-tag-event");
             }
+            // round tags
+            if (
+                (this.item instanceof CardBonusResource ||
+                    this.item instanceof CardBonusResourceAdditional ||
+                    this.item instanceof CardBonusTag) &&
+                this.item.getIsPlayed()
+            ) {
+                classes.push("card-resource-tag");
+            }
+            // affecting any player (red border)
             if (this.item.getAnyPlayer() === true) {
                 classes.push("red-outline");
             }
@@ -67,11 +84,8 @@ export const CardBonusResourceComponent = Vue.component("CardBonusResourceCompon
                 !this.item.getIsAmountInside()
             );
         },
-        showNumber: function (): boolean {
-            return this.getAmountAbs() > 5;
-        },
         itemsToShow: function (): number {
-            if (this.showNumber()) return 1;
+            if (this.item.getShowDigit()) return 1;
             if (this.item instanceof CardBonusResource && this.item.getIsAmountInside()) return 1;
 
             return this.getAmountAbs();
@@ -96,7 +110,7 @@ export const CardBonusResourceComponent = Vue.component("CardBonusResourceCompon
     template: `
         <div class="card-bonus-container">
             <CardSpecialComponent v-if="isSubtract()" :item="getMinus()" />
-            <div class="card-res-amount" v-if="showNumber()">{{ getAmountAbs() }}</div>
+            <div class="card-res-amount" v-if="item.getShowDigit()">{{ getAmountAbs() }}</div>
             <div v-html="itemHtmlContent()" v-for="index in itemsToShow()" :class="getComponentClasses()" />
         </div>
     `,

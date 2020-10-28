@@ -5,6 +5,13 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { CardMetadata } from "../CardMetadata";
+import { CardRow } from "../CardRow";
+import { CardBonus } from "../CardBonus";
+import { CardEffect } from "../../cards/CardEffect";
+import { CardSpecial } from "../../cards/CardSpecial";
+import { CardRequirements } from "../CardRequirements";
+import { CardRequirement } from "../CardRequirement";
 import { Resources } from "../../Resources";
 
 export class GMOContract implements IProjectCard {
@@ -32,4 +39,24 @@ export class GMOContract implements IProjectCard {
     public play() {
         return undefined;
     }
+    public metadata: CardMetadata = {
+        description: "Requires that Greens are ruling or that you have 2 delegates there.",
+        cardNumber: "T06",
+        requirements: new CardRequirements([CardRequirement.party(PartyName.GREENS)]),
+        onPlay: [
+            CardRow.add([
+                CardEffect.add(
+                    [
+                        CardBonus.animals(1).played(),
+                        CardSpecial.slash(),
+                        CardBonus.plants(1).played(),
+                        CardSpecial.slash(),
+                        CardBonus.microbes(1).played(),
+                    ],
+                    [CardBonus.megacredits(2)],
+                    "Each time you play a plant, animal or microbe tag, including this, gain 2MC"
+                ),
+            ]),
+        ],
+    };
 }

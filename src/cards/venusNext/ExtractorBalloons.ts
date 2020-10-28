@@ -12,7 +12,7 @@ import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
-export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCard {
+export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.EXTRACTOR_BALLOONS;
@@ -26,21 +26,26 @@ export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCar
     }
     public canAct(): boolean {
         return true;
-    }   
+    }
     public action(player: Player, game: Game) {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-        const cannotAffordRed = PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+        const cannotAffordRed =
+            PartyHooks.shouldApplyPolicy(game, PartyName.REDS) &&
+            !player.canAfford(REDS_RULING_POLICY_COST);
         if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
             this.resourceCount++;
             return undefined;
         }
         return new OrOptions(
-            new SelectOption("Remove 2 floaters to raise Venus scale 1 step", 
-            "Remove floaters", () => {
-                this.resourceCount -= 2;
-                game.increaseVenusScaleLevel(player,1);
-                return undefined;
-            }),
+            new SelectOption(
+                "Remove 2 floaters to raise Venus scale 1 step",
+                "Remove floaters",
+                () => {
+                    this.resourceCount -= 2;
+                    game.increaseVenusScaleLevel(player, 1);
+                    return undefined;
+                }
+            ),
             new SelectOption("Add 1 floater to this card", "Add floater", () => {
                 this.resourceCount++;
                 return undefined;

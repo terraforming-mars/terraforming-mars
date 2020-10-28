@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { CardEffect } from "../../cards/CauseAndEffect";
+import { CardEffect, CardAction } from "../../cards/CauseAndEffect";
 import { CardBonusResourceComponent } from "./CardBonusResourceComponent";
 import { CardSpecialComponent } from "./CardSpecialComponent";
 import { CardBonusGlobalComponent } from "./CardBonusGlobalComponent";
@@ -18,10 +18,10 @@ import {
     CardBonusTurmoilSpecial,
 } from "../../cards/CardBonus";
 
-export const CardEffectComponent = Vue.component("CardEffectComponent", {
+export const CardCauseAndEffectComponent = Vue.component("CardCauseAndEffectComponent", {
     props: {
         data: {
-            type: Object as () => CardEffect,
+            type: Object as () => CardEffect | CardAction,
             required: true,
         },
     },
@@ -96,7 +96,7 @@ export const CardEffectComponent = Vue.component("CardEffectComponent", {
                     </div>
                 </div>
             </div>
-            <CardDescription :text="data.getDescriptionParsed()" />
+            <CardDescription v-if="data.getDescription() !== undefined" :text="data.getDescriptionParsed()" />
         </div>
     `,
 });

@@ -9,14 +9,14 @@ import {
     CardBonusTurmoilSpecial,
 } from "../../cards/CardBonus";
 import { CardSpecial } from "../../cards/CardSpecial";
-import { CardEffect } from "../../cards/CauseAndEffect";
+import { CardEffect, CardAction } from "../../cards/CauseAndEffect";
 import { CardProductionBox } from "../../cards/CardProductionBox";
 import { CardProductionBoxComponent } from "./CardProductionBoxComponent";
 import { CardBonusGlobalComponent } from "./CardBonusGlobalComponent";
 import { CardSpecialComponent } from "./CardSpecialComponent";
 import { CardBonusResourceComponent } from "./CardBonusResourceComponent";
 import { CardTurmoilSpecialComponent } from "./CardTurmoilSpecialComponent";
-import { CardEffectComponent } from "./CardEffectComponent";
+import { CardCauseAndEffectComponent } from "./CardCauseAndEffectComponent";
 
 export const CardRowComponent = Vue.component("CardRowComponent", {
     props: {
@@ -30,7 +30,7 @@ export const CardRowComponent = Vue.component("CardRowComponent", {
         CardBonusResourceComponent,
         CardSpecialComponent,
         CardProductionBoxComponent,
-        CardEffectComponent,
+        CardCauseAndEffectComponent,
         CardTurmoilSpecialComponent,
     },
     methods: {
@@ -57,8 +57,8 @@ export const CardRowComponent = Vue.component("CardRowComponent", {
         isProduction: function (): boolean {
             return this.data instanceof CardProductionBox;
         },
-        isEffect: function (): boolean {
-            return this.data instanceof CardEffect;
+        isCauseAndEffect: function (): boolean {
+            return this.data instanceof CardEffect || this.data instanceof CardAction;
         },
     },
     template: `
@@ -66,7 +66,7 @@ export const CardRowComponent = Vue.component("CardRowComponent", {
         <CardBonusResourceComponent v-else-if="isResource()" :item="data"/>
         <CardSpecialComponent v-else-if="isSpecial()" :item="data" />
         <CardProductionBoxComponent v-else-if="isProduction()" :data="data.getData()" />
-        <CardEffectComponent v-else-if="isEffect()" :data="data" />
+        <CardCauseAndEffectComponent v-else-if="isCauseAndEffect()" :data="data" />
         <CardColonySpecialComponent v-else-if="isColonySpecial()" :item="data" />
         <CardTurmoilSpecialComponent v-else-if="isTurmoilSpecial()" :item="data" />
         <div v-else>n/a</div>

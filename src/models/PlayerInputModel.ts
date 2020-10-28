@@ -26,4 +26,3 @@ export interface PlayerInputModel {
     payProduction : IPayProductionModel | undefined;
     aresData: IAresData | undefined;
 }
-

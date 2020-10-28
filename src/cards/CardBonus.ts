@@ -99,6 +99,9 @@ export class CardBonus {
     public static chairman(): CardBonusTurmoilSpecial {
         return new CardBonusTurmoilSpecial(1, RequirementType.CHAIRMAN);
     }
+    public static asteroids(amount: number): CardBonusResourceAdditional {
+        return new CardBonusResourceAdditional(amount, ResourceType.ASTEROID);
+    }
     public any(): CardBonus {
         this.anyPlayer = true;
         return this;

@@ -107,14 +107,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.DEVELOPMENT_CENTER,` 
-        <div class="content ">
-            <span class="energy resource "></span> <span class="red-arrow "></span> <span class="card resource "></span>
-            <div class="description ">
-                (Action: Spend 1 Energy to draw a card.)
-            </div>
-        </div>
-`],
 [CardName.EQUATORIAL_MAGNETIZER,` 
         <div class="content ">
             <div class="production-box production-box-size1a ">
@@ -1244,18 +1236,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.EXTREME_COLD_FUNGUS,` 
-        <div class="content ">
-            <div class="requirements requirements-max">max -10 C</div>
-            <div class="red-arrow " style="margin-left:-9px"></div> <div class="plant resource " ></div><br>
-            OR <div class="red-arrow "></div> <div class="microbe resource "></div><div class="microbe resource "></div>*
-            <div class="description ">
-                (Action: Gain 1 plant or add 2 microbes to ANOTHER card.)
-                <br><br>
-                (It must be -10 C or colder.)
-            </div>
-        </div>
-`],
 [CardName.GREAT_DAM,` 
       <div class="content">
         <div class="points points-big">1</div>
@@ -2092,20 +2072,6 @@ export const HTML_DATA: Map<string, string> =
                 <div class="description ">
                   (Action: add 1 Floater to ANY card.)<br><br>
                   (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each)
-                </div>
-            </div>
-`],
-[CardName.EXTRACTOR_BALLOONS,` 
-            <div class="content hover-hide-res">
-                <div class="red-arrow " style="margin-left:95px"></div> <div class="floater resource "></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-              OR <div class="floater resource "></div><div class="floater resource "></div> <div class="red-arrow "></div> <div class="tile venus-tile ">V</div>
-                <div class="description ">
-                  (Action: add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step)
-                </div>
-                <br>
-                <div class="floater resource "></div><div class="floater resource "></div><div class="floater resource "></div>
-                <div class="description ">
-                  (Add 3 Floaters to this card)
                 </div>
             </div>
 `],
@@ -4598,21 +4564,6 @@ export const HTML_DATA: Map<string, string> =
     </div>
 
 `],
-[CardName.COMET_AIMING, ` 
-    <div class="content ">
-        <div class="resource titanium"></div>
-        <span class="red-arrow"></span>
-        <div class="asteroid resource">A</div><span>*</span>
-        <br>
-        OR <div class="asteroid resource">A</div>
-        <span class="red-arrow"></span>
-        <div class="tile ocean-tile"></div>
-        <div class="description">
-            (Action: Spend 1 titanium to add 1 asteroid resource to ANY card, or remove 1 asteroid resource here to place an ocean tile.)
-        </div>
-      </div>
-    </div>
-`],
 [CardName.CUTTING_EDGE_TECHNOLOGY,` 
             <div class="content">
                 <div class="points points-big">1</div>
@@ -5272,19 +5223,6 @@ export const HTML_DATA: Map<string, string> =
           Set the ruling party to one of your choice. Gain +1 influence.
         </div>
       </div>
-`],
-[CardName.BIOENGINEERING_ENCLOSURE,`
-    <div class="card-number">A01</div>
-    <div class="content ">
-        <div class="requirements ">1 Science</div>
-        <div class="description " style="text-align:left;">
-            <div class="resource animal "></div><div class="resource animal "></div><br/>
-            <div class="resource animal "></div><span class="red-arrow"></span><div class="resource animal"></div><br/>
-            (Action: Remove 1 animal from this card to add 1 animal to another card.
-            Requires 1 science tag. Add 2 animals to this card.
-            OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.)<br>
-        </div>
-    </div>
 `],
 [CardName.BIOFERTILIZER_FACILITY,`
     <div class="card-number">A02</div>

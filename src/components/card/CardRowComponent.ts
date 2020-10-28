@@ -9,7 +9,7 @@ import {
     CardBonusTurmoilSpecial,
 } from "../../cards/CardBonus";
 import { CardSpecial } from "../../cards/CardSpecial";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../../cards/CauseAndEffect";
 import { CardProductionBox } from "../../cards/CardProductionBox";
 import { CardProductionBoxComponent } from "./CardProductionBoxComponent";
 import { CardBonusGlobalComponent } from "./CardBonusGlobalComponent";

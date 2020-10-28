@@ -8,7 +8,7 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { CardMetadata } from "../CardMetadata";
 import { CardRow } from "../CardRow";
 import { CardBonus } from "../CardBonus";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../CauseAndEffect";
 import { CardSpecial } from "../../cards/CardSpecial";
 import { CardRequirements } from "../CardRequirements";
 import { CardRequirement } from "../CardRequirement";

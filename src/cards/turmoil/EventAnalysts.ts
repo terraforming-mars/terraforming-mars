@@ -9,7 +9,7 @@ import { CardSpecial } from "../../cards/CardSpecial";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRow } from "../../cards/CardRow";
 import { CardBonus } from "../../cards/CardBonus";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../CauseAndEffect";
 import { CardRequirements } from "../../cards/CardRequirements";
 import { CardRequirement } from "../../cards/CardRequirement";
 

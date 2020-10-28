@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../../cards/CauseAndEffect";
 import { CardBonusResourceComponent } from "./CardBonusResourceComponent";
 import { CardSpecialComponent } from "./CardSpecialComponent";
 import { CardBonusGlobalComponent } from "./CardBonusGlobalComponent";
@@ -75,7 +75,7 @@ export const CardEffectComponent = Vue.component("CardEffectComponent", {
         <div :class="getClasses()">
             <div class="card-effect-box-row">
                 <div v-if="data.getDelimiter() !== undefined" class="card-effect-box-content">
-                    <div v-for="(rowItem, rowIndex) in data.condition" class="card-effect-box-item" :key="rowIndex">
+                    <div v-for="(rowItem, rowIndex) in data.cause" class="card-effect-box-item" :key="rowIndex">
                         <CardBonusResourceComponent v-if="getComponentType(rowItem) === 'resource'" :item="rowItem"/>
                         <CardBonusGlobalComponent v-else-if="getComponentType(rowItem) === 'global'" :item="rowItem"/>
                         <CardSpecialComponent v-else-if="getComponentType(rowItem) === 'special'" :item="rowItem" />

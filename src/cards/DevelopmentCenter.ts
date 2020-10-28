@@ -5,12 +5,16 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from "../CardName";
+import { CardMetadata } from "./CardMetadata";
+import { CardRow } from "./CardRow";
+import { CardBonus } from "./CardBonus";
+import { CardAction } from "./CauseAndEffect";
 
 export class DevelopmentCenter implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: CardName = CardName.DEVELOPMENT_CENTER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public name = CardName.DEVELOPMENT_CENTER;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;
@@ -23,4 +27,16 @@ export class DevelopmentCenter implements IActionCard, IProjectCard {
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }
+    public metadata: CardMetadata = {
+        cardNumber: "014",
+        onPlay: [
+            CardRow.add([
+                CardAction.add(
+                    [CardBonus.energy(1)],
+                    [CardBonus.cards(1)],
+                    "Spend 1 Energy to draw a card."
+                ),
+            ]),
+        ],
+    };
 }

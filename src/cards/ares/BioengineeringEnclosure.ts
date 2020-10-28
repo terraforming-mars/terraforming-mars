@@ -9,12 +9,19 @@ import { Tags } from "../Tags";
 import { ICard } from "../../cards/ICard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
+import { CardAction } from "../../cards/CauseAndEffect";
+import { CardSpecial } from "../../cards/CardSpecial";
+import { CardRequirement } from "../../cards/CardRequirement";
+import { CardRequirements } from "../../cards/CardRequirements";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.BIOENGINEERING_ENCLOSURE;
+    public cost = 7;
+    public tags = [Tags.ANIMAL];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.BIOENGINEERING_ENCLOSURE;
     public resourceType = ResourceType.ANIMAL;
     public resourceCount = 0;
 
@@ -65,4 +72,24 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
         ));
         return undefined;
     }
+
+    public metadata: CardMetadata = {
+        description: "Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.",
+        cardNumber: "A01",
+        requirements: new CardRequirements([
+            CardRequirement.tag(Tags.SCIENCE, -1)
+        ]),
+        onPlay: [
+            CardRow.add([
+                CardBonus.animals(2)
+            ]),
+            CardRow.add([
+                CardAction.add(
+                    [CardBonus.animals(1)],
+                    [CardBonus.animals(1), CardSpecial.asterix()],
+                    "Remove 1 animal from this card to add 1 animal to ANOTHER card."
+                ),
+            ]),
+        ],
+    };
 }

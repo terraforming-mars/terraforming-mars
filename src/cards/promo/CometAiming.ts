@@ -13,15 +13,20 @@ import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../../constants";
 import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
+import { CardAction } from "../../cards/CauseAndEffect";
+import { CardSpecial } from "../../cards/CardSpecial";
 import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.COMET_AIMING;
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public resourceType: ResourceType = ResourceType.ASTEROID;
-    public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.COMET_AIMING;
+    public cost = 17;
+    public tags = [Tags.SPACE];
+    public resourceType = ResourceType.ASTEROID;
+    public resourceCount = 0;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;
@@ -113,4 +118,22 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
         return new OrOptions(...availableActions);
     }
+    public metadata: CardMetadata = {
+        cardNumber: "X15",
+        onPlay: [
+            CardRow.add([
+                CardAction.add(
+                    [CardBonus.titanium(1)],
+                    [CardBonus.asteroids(1), CardSpecial.asterix()]
+                ),
+            ]),
+            CardRow.add([
+                CardAction.add(
+                    [CardSpecial.or().small(), CardBonus.asteroids(1)],
+                    [CardBonus.oceans(1)],
+                    "Spend 1 titanium to add 1 asteroid resource to ANY card, OR remove 1 asteroid resource here to place an ocean tile."
+                ),
+            ]),
+        ],
+    };
 }

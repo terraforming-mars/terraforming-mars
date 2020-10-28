@@ -5,8 +5,8 @@ import { CardBonusGlobal } from "../../cards/CardBonus";
 export const CardBonusGlobalComponent = Vue.component("CardBonusGlobalComponent", {
     props: {
         item: {
-            type: Object as () => CardBonusGlobal
-        }
+            type: Object as () => CardBonusGlobal,
+        },
     },
     methods: {
         getComponentClasses: function (): string {
@@ -18,6 +18,9 @@ export const CardBonusGlobalComponent = Vue.component("CardBonusGlobalComponent"
                 classes.push("card-temperature-global-requirement");
             } else if (type === RequirementType.VENUS) {
                 classes.push("card-venus-global-requirement");
+            }
+            if (this.item.getAnyPlayer() === true) {
+                classes.push("red-outline");
             }
             return classes.join(" ");
         },

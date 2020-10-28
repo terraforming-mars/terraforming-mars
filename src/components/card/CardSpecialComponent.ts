@@ -26,8 +26,13 @@ export const CardSpecialComponent = Vue.component("CardSpecialComponent", {
                 }
             } else if (type === CardSpecialType.OR) {
                 classes.push("card-or");
+                if (size === ComponentSize.SMALL) {
+                    classes.push("card-or--small");
+                }
             } else if (type === CardSpecialType.COLON) {
                 classes.push("card-colon");
+            } else if (type === CardSpecialType.ARROW) {
+                classes.push("card-red-arrow");
             }
 
             return classes.join(" ");

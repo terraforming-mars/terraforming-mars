@@ -9,4 +9,5 @@ export enum CardSpecialType {
     COLON = ":",
     EMPTY = " ",
     SLASH = "/",
+    ARROW = "->"
 }

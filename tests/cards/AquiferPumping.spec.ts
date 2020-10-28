@@ -22,7 +22,7 @@ describe("AquiferPumping", function () {
         player.megaCredits = 8;
         const action = card.action(player, game);
         expect(action).is.undefined;
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
     });
 

@@ -70,11 +70,11 @@ describe("BioengineeringEnclosure", function () {
     expect(card.canAct(player)).is.true;
     expect(card.resourceCount).eq(2);
     expect(animalHost.resourceCount).eq(0);
-    expect(game.deferredActions).is.empty;
+    expect(game.deferredActions).has.lengthOf(0);
 
     card.action(player, game);
 
-    game.deferredActions[0].execute();
+    game.deferredActions.next()!.execute();
 
     expect(card.resourceCount).eq(1);
     expect(animalHost.resourceCount).eq(1);

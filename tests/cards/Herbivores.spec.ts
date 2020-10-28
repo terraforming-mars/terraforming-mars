@@ -35,7 +35,7 @@ describe("Herbivores", function () {
         card.play(player, game);
         expect(card.resourceCount).to.eq(1);
 
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
     });
@@ -48,7 +48,7 @@ describe("Herbivores", function () {
         expect(card.resourceCount).to.eq(1);
 
         expect(game.deferredActions).has.lengthOf(1);
-        const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
+        const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
     });

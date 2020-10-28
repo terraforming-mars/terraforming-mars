@@ -53,7 +53,7 @@ describe("BiofertilizerFacility", function () {
     // Initial expectations that will change after playing the card.
     expect(player.getProduction(Resources.PLANTS)).is.eq(0);
     expect(microbeHost.resourceCount || 0).is.eq(0);
-    expect(game.deferredActions).is.empty;
+    expect(game.deferredActions).has.lengthOf(0);
 
     expect(card.canPlay(player, game)).is.true;
     const action = card.play(player, game);
@@ -66,7 +66,7 @@ describe("BiofertilizerFacility", function () {
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZER_FACILITY);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]});
 
-    game.deferredActions[0].execute();
+    game.deferredActions.next()!.execute();
 
     expect(microbeHost.resourceCount).is.eq(2);
   });

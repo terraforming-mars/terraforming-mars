@@ -24,7 +24,7 @@ describe("ForcedPrecipitation", function () {
         player.megaCredits = 10;
 
         const action = card.action(player,game);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);

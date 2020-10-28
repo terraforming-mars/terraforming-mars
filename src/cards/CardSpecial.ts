@@ -37,6 +37,9 @@ export class CardSpecial {
     public static colon(): CardSpecial {
         return new CardSpecial(CardSpecialType.COLON);
     }
+    public static arrow(): CardSpecial {
+        return new CardSpecial(CardSpecialType.ARROW, true);
+    }
     public small(): CardSpecial {
         this.size = ComponentSize.SMALL;
         return this;

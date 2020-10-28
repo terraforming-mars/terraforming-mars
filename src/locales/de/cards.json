@@ -23,7 +23,7 @@
 
     "Capital": "Hauptstadt",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "Benötigt 4 oder mehr Ozeanplättchen im Spiel. Platziere dieses Stadtplättchen. Senke deine Energie-Produktion um 2 und erhöhe deine M€-Produktion um 5.",
-    "1 ADDITIONAL VP FOR EACH <br>OCEAN TILE ADJACENT <br> TO THIS CITY TILE.": "1 SP je Ozeanplättchen, das an dieses Stadtplättchen angrenzt.",
+    "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "1 SP je Ozeanplättchen, das an dieses Stadtplättchen angrenzt.",
 
     "Asteroid": "Asteroideneinschlag",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Erhöhe die Temperatur um 2 °C und erhalte 2 Titan. Entferne bis zu 3 Pflanzen eines Spielers.",
@@ -34,7 +34,7 @@
     "Big Asteroid": "Riesen-Asteroid",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Erhöhe die Temperatur um 4 °C und erhalte 4 Titan. Entferne bis zu 4 Pflanzen eines Spielers.",
 
-    "Water Import from Europa": "Wasserimport von Europa",
+    "Water Import From Europa": "Wasserimport von Europa",
     "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "AKTION: Bezahle 12 M€, um 1 Ozeanplättchen zu platzieren. Titan darf benutzt werden wie beim Ausspielen einer Weltraumkarte.",
     "1 VP for each Jovian tag you have.": "1 SP je eigenes Jupitersymbol.",
 
@@ -49,7 +49,7 @@
     "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.": "AKTION: Senke deine Energie-Produktion um 1 ,um deinen Terraformwert um 1 zu erhöhen",
 
     "Domed Crater": "Überkuppelter Krater",
-    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease<br>your Energy production 1 <br>step and increase your <br>MC production 3 steps.": "Sauerstoffgehalt muss 7% oder weniger sein. Erhalte 3 Pflanzen. Platziere ein Stadtplättchen. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3.",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Sauerstoffgehalt muss 7% oder weniger sein. Erhalte 3 Pflanzen. Platziere ein Stadtplättchen. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3.",
 
     "Noctis City": "Stadt Noctis",
     "Decrease your Energy production 1 step and increase your MC production 3 steps.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3.",
@@ -166,7 +166,7 @@
 
     "Fish": "Raubfische",
     "Action: Add 1 Animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
-    "Requires +2 C or warmer. Decrease any Plant production 1 step. 1 VP for each Animal on this card.": "Benötigt eine Temperatur von +2 °C oder wärmer. Senke eine beliebige Pflanzen-Produktion um 1. 1 SP je Tier auf dieer Karte.",
+    "Requires +2 C or warmer. Decrease any Plant production 1 step. 1 VP for each Animal on this card.": "Benötigt eine Temperatur von +2 °C oder wärmer. Senke eine beliebige Pflanzen-Produktion um 1. 1 SP je Tier auf dieser Karte.",
 
     "Lake Marineris": "Marineris See",
     "Requires 0 C or warmer. Place 2 ocean tiles.": "Benötigt eine Temperatur von 0 °C oder wärmer. Platziere 2 Ozeanplättchen.",
@@ -207,7 +207,7 @@
     "Building Industries": "Baugewerbe",
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Senke deine Energie-Produktion um 1 und erhöhe deine Stahl-Produktion um 2.",
 
-    "Land Claim": "landnahme",
+    "Land Claim": "Landnahme",
     "PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE.": "Lege einen deiner Marker auf ein nicht reserviertes Gebiet. Nur du darfst hier ein Plättchen platzieren.",
 
     "Mining Rights": "Schürfrechte",
@@ -414,7 +414,7 @@
     "Fusion Power": "Fusionsenergie",
     "Requires 2 Power tags. Increase your Energy production 3 steps.": "Benötigt 2 eigene Energiesymbole. Erhöhe deine Energie-Produktion um 3.",
 
-    "Symbiotic Fungus": "ГрибыMykorrhizapilze",
+    "Symbiotic Fungus": "Mykorrhizapilze",
     "Action: Add a microbe to ANOTHER card.": "AKTION: Füge einer anderen Karte 1 Mikrobe hinzu.",
     "Requires -14 C or warmer.": "Benötigt eine Temperatur von -14 °C oder wärmer.",
 
@@ -648,8 +648,23 @@
     "Medical Lab": "Medizinisches Labor",
     "Increase your MC production 1 step for every 2 Building tags you have, including this.": "Erhöhe deine M€-Produktion um 1 je 2 eigene Gebäudesymbole (einschließlich dieses).",
 
-    "AI Central": "Центр ИИ",
+    "AI Central": "KI-Zentrale",
     "Action: Draw 2 cards.": "AKTION: Ziehe 2 Karten.",
-    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1."
+    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1.",
 
+    "Penguins": "Pinguine",
+    "Action: Add 1 Animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
+    "Requires 8 oceans. 1 VP for each animal on this card.": "Benötigt 8 Ozeane. 1 SP je Tier auf dieser Karte.",
+    
+    "3 Oceans": "3 Ozeane",
+    "4 Oceans": "4 Ozeane",
+    "8 Oceans": "8 Ozeane",
+    
+    "2 Cities": "2 Städte",
+    
+    "2 Science": "2 Wissenschaft",
+    "3 Science": "3 Wissenschaft",
+    "4 Science": "4 Wissenschaft",
+    "5 Science": "5 Wissenschaft",
+    "7 Science": "7 Wissenschaft"
 }

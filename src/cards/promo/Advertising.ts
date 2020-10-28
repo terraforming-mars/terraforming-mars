@@ -9,7 +9,7 @@ import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRow } from "../../cards/CardRow";
 import { CardSpecial } from "../../cards/CardSpecial";
 import { CardBonus } from "../../cards/CardBonus";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../CauseAndEffect";
 import { CardProductionBox } from "../../cards/CardProductionBox";
 
 export class Advertising implements IProjectCard {

@@ -6,7 +6,7 @@ import { CardName } from "../../CardName";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRow } from "../../cards/CardRow";
 import { CardBonus } from "../../cards/CardBonus";
-import { CardEffect } from "../../cards/CardEffect";
+import { CardEffect } from "../CauseAndEffect";
 
 export class CryoSleep implements IProjectCard {
     public cost = 10;

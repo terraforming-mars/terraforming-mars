@@ -1,5 +1,5 @@
 import { CardBonus } from "./CardBonus";
-import { CardEffect } from "./CardEffect";
+import { CardEffect } from "./CauseAndEffect";
 import { CardAction } from "./CardAction";
 import { CardSpecial } from "./CardSpecial";
 

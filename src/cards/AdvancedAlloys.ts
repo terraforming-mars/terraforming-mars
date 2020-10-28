@@ -7,7 +7,7 @@ import { CardMetadata } from "./CardMetadata";
 import { CardRow } from "./CardRow";
 import { CardSpecial } from "./CardSpecial";
 import { CardBonus } from "./CardBonus";
-import { CardEffect } from "./CardEffect";
+import { CardEffect } from "./CauseAndEffect";
 
 export class AdvancedAlloys implements IProjectCard {
     public cost = 9;

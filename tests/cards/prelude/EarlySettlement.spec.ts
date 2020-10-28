@@ -14,7 +14,7 @@ describe("EarlySettlement", function () {
         const game = new Game("foobar", [player], player);
 
         card.play(player, game);
-        const selectSpace = game.deferredActions[0].execute() as SelectSpace;
+        const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
 
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;

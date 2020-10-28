@@ -67,7 +67,7 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
         expect(game.deferredActions).has.lengthOf(1);
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(1);
@@ -89,9 +89,9 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
         expect(game.deferredActions).has.lengthOf(2);
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(0);
@@ -106,8 +106,8 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player, game, searchForLife);
         expect(game.deferredActions).has.lengthOf(1);
         
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
-        game.deferredActions.splice(0, 1);
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(23);
@@ -129,7 +129,7 @@ describe("PharmacyUnion", function () {
         card.resourceCount = 0;
         card.onCardPlayed(player, game, new SearchForLife());
         
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(card.isDisabled).is.true;
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
@@ -158,7 +158,7 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player, game, viralEnhancers);
         expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[1].cb(); // Add disease then remove it
         expect(card.resourceCount).to.eq(0);
         expect(player.megaCredits).to.eq(4);

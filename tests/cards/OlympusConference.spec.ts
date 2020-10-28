@@ -8,6 +8,7 @@ import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { OrOptions } from "../../src/inputs/OrOptions";
 import { Research } from "../../src/cards/Research";
+import { DeferredActionsQueue } from "../../src/deferredActions/DeferredActionsQueue";
 
 describe("OlympusConference", function () {
     let card : OlympusConference, player : Player, game : Game;
@@ -31,7 +32,7 @@ describe("OlympusConference", function () {
         // No resource
         card.onCardPlayed(player, game, card);
         expect(game.deferredActions).has.lengthOf(1);
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
@@ -40,7 +41,7 @@ describe("OlympusConference", function () {
         card.onCardPlayed(player, game, card);
         expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
@@ -57,13 +58,13 @@ describe("OlympusConference", function () {
         expect(game.deferredActions).has.lengthOf(2);
 
         // No resource, can't draw, resource automatically added
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // Resource on card, can draw
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);
@@ -88,14 +89,14 @@ describe("OlympusConference", function () {
         expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
 
 
         // Reset the state
-        game.deferredActions = [];
+        game.deferredActions = new DeferredActionsQueue();
         player.playedCards = [];
 
 
@@ -111,7 +112,7 @@ describe("OlympusConference", function () {
         expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
-        const orOptions2 = game.deferredActions[0].execute() as OrOptions;
+        const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions2.options[1].cb();
         expect(card.resourceCount).to.eq(2);

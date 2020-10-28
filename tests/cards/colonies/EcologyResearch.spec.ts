@@ -40,10 +40,10 @@ describe("EcologyResearch", function () {
 
         card.play(player, game);
         expect(game.deferredActions).has.lengthOf(2);
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
-        const input2 = game.deferredActions[0].execute();
+        const input2 = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input2).is.undefined;
 
@@ -61,7 +61,7 @@ describe("EcologyResearch", function () {
         expect(game.deferredActions).has.lengthOf(1);
 
         // add two microbes to Ants
-        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
         selectCard.cb([ants]);
         
         expect(ants.resourceCount).to.eq(2);

@@ -36,7 +36,7 @@ describe("Incite", function () {
         card.initialAction(player, game);
         expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
 
         const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

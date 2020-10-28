@@ -27,7 +27,7 @@ describe("AquiferTurbines", function () {
         game.deferredActions.shift();
 
         // SelectHowToPayDeferred
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
 
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(player.megaCredits).to.eq(0);

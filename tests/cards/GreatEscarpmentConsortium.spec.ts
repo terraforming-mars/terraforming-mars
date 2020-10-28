@@ -17,18 +17,18 @@ describe("GreatEscarpmentConsortium", function () {
     });
 
     it("Cannot play without steel production", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Can play if player has steel production", function () {
         player.addProduction(Resources.STEEL);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
     });
     
     it("Should play - auto select if single target", function () {
         player.addProduction(Resources.STEEL);
         card.play(player, game); // can decrease own production
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
@@ -39,8 +39,8 @@ describe("GreatEscarpmentConsortium", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
-        expect(game.deferredActions.length).to.eq(1);
-        const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.STEEL)).to.eq(0);
     });
@@ -52,7 +52,7 @@ describe("GreatEscarpmentConsortium", function () {
         
         card.play(player, game);
 
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(2); // should increase
     });

@@ -19,8 +19,8 @@ describe("DeimosDown", function () {
         player2.plants = 8;
         card.play(player, game);
 
-        expect(game.deferredActions.length).to.eq(1);
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        expect(game.deferredActions).has.lengthOf(1);
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
 
         expect(game.getTemperature()).to.eq(-24);

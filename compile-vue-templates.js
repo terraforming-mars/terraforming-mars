@@ -38,6 +38,10 @@ checkComponent(
     require("./dist/src/components/OtherPlayer").OtherPlayer
 );
 checkComponent(
+    "src/components/SelectOption",
+    require("./dist/src/components/SelectOption").SelectOption
+);
+checkComponent(
     "src/components/Tag",
     require("./dist/src/components/Tag").Tag
 );

@@ -80,10 +80,16 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>nwai90</b></sub><br />Helps with the things</a>
-    </td>    
+    </td>
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>Pocc</b></sub><br />He did that one thing one time</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>Robert Konigsberg</b></sub><br />Ares expansion!!!!!</a>
     </td>    
   </tr>
 </table>

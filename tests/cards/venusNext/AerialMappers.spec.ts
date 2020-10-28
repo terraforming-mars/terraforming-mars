@@ -27,17 +27,17 @@ describe("AerialMappers", function () {
         const card2 = new Dirigibles();
         player.playedCards.push(card2);
         const action = card.action(player,game) as SelectCard<ICard>;
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         action.cb([card]);
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player,game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb([card]);
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 
     it("Should act - single target", function () {
@@ -45,9 +45,9 @@ describe("AerialMappers", function () {
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player,game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions.options[0].cb([card]);
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

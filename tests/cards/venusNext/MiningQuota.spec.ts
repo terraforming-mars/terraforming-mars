@@ -11,9 +11,9 @@ describe("MiningQuota", function () {
         const card = new MiningQuota();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new SisterPlanetSupport);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
         player.playedCards.push(new ResearchNetwork());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         const action = card.play(player);
         expect(action).is.undefined;
         expect(player.getProduction(Resources.STEEL)).to.eq(2);

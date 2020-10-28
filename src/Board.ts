@@ -148,9 +148,9 @@ export abstract class Board {
             const hasPlayerMarker = space.player !== undefined;
             // A space is available if it doesn't have a player marker on it or it belongs to |player|
             const safeForPlayer = !hasPlayerMarker || space.player === player;
-            // And also, if it doesn't have a tile. Unless it's a hazard tile. And if it does have a
+            // And also, if it doesn't have a tile. Unless it's a hazard tile. 
             const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space) 
-            // hazard tile, a player marker on it means it's protected by Desperate Measures.
+            // If it does have a hazard tile, make sure it's not a protected one.
             const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
             return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
         });

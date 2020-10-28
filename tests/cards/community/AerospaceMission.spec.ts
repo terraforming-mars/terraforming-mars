@@ -20,13 +20,13 @@ describe("AerospaceMission", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
-        const selectColony = game.deferredActions[0].execute() as SelectColony;
+        const selectColony = game.deferredActions.next()!.execute() as SelectColony;
         game.deferredActions.shift();
         selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
-        const selectColony2 = game.deferredActions[0].execute() as SelectColony;
+        const selectColony2 = game.deferredActions.next()!.execute() as SelectColony;
         game.deferredActions.shift();
         selectColony2.cb((<any>ColonyName)[selectColony2.coloniesModel[0].name.toUpperCase()]);
 

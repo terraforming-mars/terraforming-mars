@@ -18,9 +18,9 @@ describe("BigAsteroid", function () {
     it("Should play", function () {
         player2.plants = 5;
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[1].cb(); // do nothing
         expect(player2.plants).to.eq(5);
 
@@ -34,8 +34,8 @@ describe("BigAsteroid", function () {
         game = new Game("foobar", [player], player);
         player.plants = 5;
         card.play(player, game);
-        expect(game.deferredActions.length).to.eq(1);
-        const input = game.deferredActions[0].execute();
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
 
         expect(player.plants).to.eq(5);

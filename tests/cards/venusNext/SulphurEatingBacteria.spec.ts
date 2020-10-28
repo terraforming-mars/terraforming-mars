@@ -16,12 +16,12 @@ describe("SulphurEatingBacteria", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
     
     it("Should play", function () {
         (game as any).venusScaleLevel = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         expect(card.play()).is.undefined;
     });
 

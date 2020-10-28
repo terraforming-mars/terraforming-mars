@@ -24,12 +24,12 @@ describe("Banned Delegate", function () {
 
     it("Can't play", function () {
         turmoil.chairman = player2.id;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         turmoil.chairman = player.id;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const greens = turmoil.getPartyByName(PartyName.GREENS)!;
         turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
@@ -46,6 +46,6 @@ describe("Banned Delegate", function () {
             orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
         }
 
-        expect(greens.delegates.length).to.eq(initialDelegatesCount - 1);
+        expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);
     });
 });

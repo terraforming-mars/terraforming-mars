@@ -23,17 +23,17 @@ describe("InventorsGuild", function () {
     it("Should act", function () {
         player.megaCredits = 3;
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         (action! as SelectCard<IProjectCard>).cb([]);
 
-        expect(game.dealer.discarded.length).to.eq(1);
+        expect(game.dealer.discarded).has.lengthOf(1);
         expect(player.megaCredits).to.eq(3);
         player.megaCredits = 3;
 
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 
     it("Cannot buy card if cannot pay", function () {
@@ -41,9 +41,9 @@ describe("InventorsGuild", function () {
         const selectCard = card.action(player, game) as SelectCard<IProjectCard>;
         expect(selectCard.title).to.eq("You cannot pay for this card");
         selectCard.cb([selectCard.cards[0]]);
-        expect(game.deferredActions.length).to.eq(0);
-        expect(game.dealer.discarded.length).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
+        expect(game.dealer.discarded).has.lengthOf(1);
+        expect(player.cardsInHand).has.lengthOf(0);
         expect(player.megaCredits).to.eq(2);
     });
 });

@@ -12,7 +12,7 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 import { CardType } from "../CardType";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
@@ -46,7 +46,7 @@ export class PharmacyUnion implements CorporationCard {
         if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
             // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
             if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === true) {
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => {
                         const orOptions = new OrOptions(
@@ -88,7 +88,7 @@ export class PharmacyUnion implements CorporationCard {
         if (isPharmacyUnion && hasScienceTag) {
             const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
             for (let i = 0; i < scienceTags; i++) {
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => {
                         if (this.isDisabled) return undefined;

@@ -19,30 +19,30 @@ describe("SelfReplicatingRobots", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
     });
     
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
 
         player.cardsInHand.push(new HousePrinting());
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         const action = card.action(player, game);
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
         (action as OrOptions).options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
         expect(card.targetCards[0].resourceCount).to.eq(2);
-        expect(player.cardsInHand.length).to.eq(0);
-        expect(card.targetCards.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(0);
+        expect(card.targetCards).has.lengthOf(1);
         
         const action2 = card.action(player, game);
-        expect(action2 instanceof OrOptions).to.eq(true);
+        expect(action2 instanceof OrOptions).is.true;
         (action2 as OrOptions).options[0].cb([(action2.options[0] as SelectCard<IProjectCard>).cards[0]]);
         expect(card.targetCards[0].resourceCount).to.eq(4);
     });

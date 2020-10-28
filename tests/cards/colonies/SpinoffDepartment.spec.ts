@@ -17,6 +17,6 @@ describe("SpinoffDepartment", function () {
         expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         card.onCardPlayed(player, game, card2);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

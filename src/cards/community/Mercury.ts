@@ -7,7 +7,7 @@ import { Resources } from "../../Resources";
 import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyModel } from "../../models/ColonyModel";
 import { IncreaseColonyTrack } from "../../deferredActions/IncreaseColonyTrack";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class Mercury extends Colony implements IColony {
     public name = ColonyName.MERCURY;
@@ -51,7 +51,7 @@ export class Mercury extends Colony implements IColony {
         if (openColonies.length > 0) {
             const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
 
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => new SelectColony("Select colony to gain trade income from", "Select", coloniesModel, (colonyName: ColonyName) => {
                     openColonies.forEach((colony) => {

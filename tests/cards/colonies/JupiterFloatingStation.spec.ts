@@ -21,11 +21,11 @@ describe("JupiterFloatingStation", function () {
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
 
         player.addResourceTo(card, 7);
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions!.options[1].cb();
         expect(player.megaCredits).to.eq(4);
     });

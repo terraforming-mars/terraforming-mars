@@ -24,7 +24,7 @@ describe("ForcedPrecipitation", function () {
         player.megaCredits = 10;
 
         const action = card.action(player,game);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
@@ -33,7 +33,7 @@ describe("ForcedPrecipitation", function () {
         expect(card.resourceCount).to.eq(2);
 
         const orOptions2 = card.action(player,game) as OrOptions;
-        expect(orOptions2 instanceof OrOptions).to.eq(true);
+        expect(orOptions2 instanceof OrOptions).is.true;
         orOptions2.options[0].cb();
         expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);

@@ -18,17 +18,17 @@ describe("MiningRights", function () {
     });
 
     it("Can't play if no available spaces", function () {
-        for (let land of game.board.getAvailableSpacesOnLand(player)) {
+        for (const land of game.board.getAvailableSpacesOnLand(player)) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.MINING_RIGHTS });
             }
         }
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
         expect(titaniumSpace).is.not.undefined;

@@ -52,7 +52,7 @@ export class GiantIceAsteroid implements IProjectCard {
         onPlay: [
             CardRow.add([CardBonus.temperature(2)]),
             CardRow.add([CardBonus.oceans(2)]),
-            CardRow.add([CardBonus.plants(-6).any()]),
+            CardRow.add([CardBonus.plants(-6).digit().any()]),
         ],
     };
 }

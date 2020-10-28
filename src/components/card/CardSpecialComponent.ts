@@ -1,6 +1,7 @@
 import Vue from "vue";
 import { CardSpecialType } from "../../cards/CardSpecialType";
 import { CardSpecial } from "../../cards/CardSpecial";
+import { ComponentSize } from "./ComponentSize";
 
 export const CardSpecialComponent = Vue.component("CardSpecialComponent", {
     props: {
@@ -12,6 +13,7 @@ export const CardSpecialComponent = Vue.component("CardSpecialComponent", {
     methods: {
         getClasses: function (): string {
             const type: CardSpecialType = this.item.getType();
+            const size: ComponentSize = this.item.getSize();
             const classes: Array<string> = ["card-special"];
             if (type === CardSpecialType.ASTERIX) {
                 classes.push("card-asterix");
@@ -19,9 +21,15 @@ export const CardSpecialComponent = Vue.component("CardSpecialComponent", {
                 classes.push("card-minus");
             } else if (type === CardSpecialType.PLUS) {
                 classes.push("card-plus");
+                if (size === ComponentSize.SMALL) {
+                    classes.push("card-plus--small");
+                }
             } else if (type === CardSpecialType.OR) {
                 classes.push("card-or");
+            } else if (type === CardSpecialType.COLON) {
+                classes.push("card-colon");
             }
+
             return classes.join(" ");
         },
         getContent: function (): string {

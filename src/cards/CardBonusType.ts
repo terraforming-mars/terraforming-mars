@@ -5,4 +5,6 @@ export enum CardBonusType {
     TAG = "tag",
     CARD = "card",
     TILE = "tile",
+    COLONY_SPECIAL = "colony special",
+    TURMOIL_SPECIAL = "turmoil special",
 }

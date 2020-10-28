@@ -9,7 +9,8 @@ export class CardBonus {
     protected constructor(
         private type: CardBonusType,
         protected amount: number = 1,
-        protected anyPlayer: boolean = false
+        protected anyPlayer: boolean = false,
+        protected showDigit: boolean = false
     ) {}
     public getAmount(): number {
         return this.amount;
@@ -19,6 +20,9 @@ export class CardBonus {
     }
     public getAnyPlayer(): boolean {
         return this.anyPlayer;
+    }
+    public getShowDigit(): boolean {
+        return this.showDigit;
     }
     public static oceans(amount: number): CardBonus {
         return new CardBonusGlobal(amount, RequirementType.OCEANS);
@@ -68,8 +72,39 @@ export class CardBonus {
     public static cards(amount: number): CardBonusCard {
         return new CardBonusCard(amount);
     }
+    public static trade(): CardBonusColonySpecial {
+        return new CardBonusColonySpecial(1, RequirementType.TRADE);
+    }
+    public static tradeFleet(): CardBonusColonySpecial {
+        return new CardBonusColonySpecial(1, RequirementType.TRADE_FLEET);
+    }
+    public static colony(amount: number): CardBonusColonySpecial {
+        return new CardBonusColonySpecial(amount, RequirementType.COLONIES);
+    }
+    public static tradeDiscount(amount: number): CardBonusColonySpecial {
+        return new CardBonusColonySpecial(amount * -1, RequirementType.TRADE_DISCOUNT);
+    }
+    public static event(amount: number): CardBonusTag {
+        return new CardBonusTag(amount, Tags.EVENT);
+    }
+    public static influence(amount: number): CardBonusTurmoilSpecial {
+        return new CardBonusTurmoilSpecial(amount, RequirementType.INFLUENCE);
+    }
+    public static leader(amount: number): CardBonusTurmoilSpecial {
+        return new CardBonusTurmoilSpecial(amount, RequirementType.PARTY_LEADERS);
+    }
+    public static delegate(amount: number): CardBonusTurmoilSpecial {
+        return new CardBonusTurmoilSpecial(amount, RequirementType.DELEGATES);
+    }
+    public static chairman(): CardBonusTurmoilSpecial {
+        return new CardBonusTurmoilSpecial(1, RequirementType.CHAIRMAN);
+    }
     public any(): CardBonus {
         this.anyPlayer = true;
+        return this;
+    }
+    public digit(): CardBonus {
+        this.showDigit = true;
         return this;
     }
 }
@@ -90,22 +125,30 @@ export class CardBonusGlobal extends CardBonus {
 }
 
 interface ITagDependency {
-    tagDependency?: Tags
+    tagDependency?: Tags;
+}
+interface ICardBonusPlayedItem {
+    isPlayed?: boolean;
+    getIsPlayed(): boolean | undefined;
 }
 
 interface ICardBonusWithResourceType extends CardBonus {
-    resourceType: ResourceType | Resources | TileType | Tags;
-    getResourceType(): ResourceType | Resources | TileType | Tags;
+    resourceType: ResourceType | Resources | TileType | Tags | RequirementType;
+    getResourceType(): ResourceType | Resources | TileType | Tags | RequirementType;
 }
 
-export class CardBonusResource extends CardBonus implements ICardBonusWithResourceType {
+export class CardBonusResource
+    extends CardBonus
+    implements ICardBonusWithResourceType, ICardBonusPlayedItem {
     constructor(
         amount: number,
         public resourceType: Resources,
         private amountInside: boolean = false,
+        public isPlayed: boolean = false
     ) {
         super(CardBonusType.RESOURCE, amount);
         this.resourceType = resourceType;
+        this.isPlayed = isPlayed;
     }
     public getResourceType(): Resources {
         return this.resourceType;
@@ -117,14 +160,28 @@ export class CardBonusResource extends CardBonus implements ICardBonusWithResour
     public getIsAmountInside(): boolean {
         return this.amountInside;
     }
+    public getIsPlayed(): boolean | undefined {
+        return this.isPlayed;
+    }
+    public played(): CardBonus {
+        this.isPlayed = true;
+        return this;
+    }
 }
 
-export class CardBonusResourceAdditional extends CardBonus implements ICardBonusWithResourceType, ITagDependency {
+export class CardBonusResourceAdditional
+    extends CardBonus
+    implements ICardBonusWithResourceType, ITagDependency, ICardBonusPlayedItem {
     public tagDependency: Tags | undefined;
 
-    constructor(amount: number, public resourceType: ResourceType) {
+    constructor(
+        amount: number,
+        public resourceType: ResourceType,
+        public isPlayed: boolean = false
+    ) {
         super(CardBonusType.RESOURCE_ADDITIONAL, amount);
         this.resourceType = resourceType;
+        this.isPlayed = isPlayed;
     }
     public getResourceType(): ResourceType {
         return this.resourceType;
@@ -132,19 +189,36 @@ export class CardBonusResourceAdditional extends CardBonus implements ICardBonus
     public getTagDependency(): Tags | undefined {
         return this.tagDependency;
     }
+    public getIsPlayed(): boolean | undefined {
+        return this.isPlayed;
+    }
     public depends(tagDependency: Tags): CardBonusResourceAdditional {
         this.tagDependency = tagDependency;
         return this;
     }
+    public played(): CardBonus {
+        this.isPlayed = true;
+        return this;
+    }
 }
 
-export class CardBonusTag extends CardBonus implements ICardBonusWithResourceType {
-    constructor(amount: number, public resourceType: Tags) {
+export class CardBonusTag
+    extends CardBonus
+    implements ICardBonusWithResourceType, ICardBonusPlayedItem {
+    constructor(amount: number, public resourceType: Tags, public isPlayed: boolean = false) {
         super(CardBonusType.TAG, amount);
         this.resourceType = resourceType;
+        this.isPlayed = isPlayed;
     }
     public getResourceType(): Tags {
         return this.resourceType;
+    }
+    public getIsPlayed(): boolean | undefined {
+        return this.isPlayed;
+    }
+    public played(): CardBonus {
+        this.isPlayed = true;
+        return this;
     }
 }
 
@@ -154,6 +228,26 @@ export class CardBonusTile extends CardBonus implements ICardBonusWithResourceTy
         this.resourceType = resourceType;
     }
     public getResourceType(): TileType {
+        return this.resourceType;
+    }
+}
+
+export class CardBonusColonySpecial extends CardBonus implements ICardBonusWithResourceType {
+    constructor(amount: number, public resourceType: RequirementType) {
+        super(CardBonusType.GLOBAL, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): RequirementType {
+        return this.resourceType;
+    }
+}
+
+export class CardBonusTurmoilSpecial extends CardBonus implements ICardBonusWithResourceType {
+    constructor(amount: number, public resourceType: RequirementType) {
+        super(CardBonusType.TURMOIL_SPECIAL, amount);
+        this.resourceType = resourceType;
+    }
+    public getResourceType(): RequirementType {
         return this.resourceType;
     }
 }

@@ -18,7 +18,7 @@ describe("MiningRights", function () {
     });
 
     it("Can't play if no available spaces", function () {
-        for (let land of game.board.getAvailableSpacesOnLand(player)) {
+        for (const land of game.board.getAvailableSpacesOnLand(player)) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.MINING_RIGHTS });
             }

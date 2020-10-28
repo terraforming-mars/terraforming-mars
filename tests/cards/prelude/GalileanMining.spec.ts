@@ -26,7 +26,7 @@ describe("GalileanMining", function () {
         card.play(player, game);
 
         // SelectHowToPayDeferred
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
 
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(2);

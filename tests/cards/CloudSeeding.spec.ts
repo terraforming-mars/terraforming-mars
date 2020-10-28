@@ -44,7 +44,7 @@ describe("CloudSeeding", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
 
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
         expect(player2.getProduction(Resources.HEAT)).to.eq(0);
     });
@@ -58,7 +58,7 @@ describe("CloudSeeding", function () {
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
 
         expect(game.deferredActions).has.lengthOf(1);
-        const selectPlayer = game.deferredActions[0].execute() as SelectPlayer;
+        const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.HEAT)).to.eq(0);
     });

@@ -38,7 +38,7 @@ describe("ParadigmBreakdown", function () {
         
         card.resolve(game, turmoil);
         while (game.deferredActions.length) {
-            const action = game.deferredActions[0];
+            const action = game.deferredActions.next()!;
             const input = action.execute();
             if (input !== undefined && input instanceof SelectCard) {
                 // Only |player| should be asked which cards to discard

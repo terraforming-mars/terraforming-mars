@@ -14,7 +14,7 @@ describe("AcquiredSpaceAgency", function () {
         expect(game.deferredActions).has.lengthOf(1);
 
         // Draw cards
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
 
         expect(player.titanium).to.eq(6);
         expect(player.cardsInHand).has.lengthOf(2);

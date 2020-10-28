@@ -14,7 +14,7 @@ describe("Biolab", function () {
         expect(game.deferredActions).has.lengthOf(1);
 
         // Draw cards
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
 
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(player.cardsInHand).has.lengthOf(3);

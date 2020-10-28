@@ -70,9 +70,6 @@ export const CardEffectComponent = Vue.component("CardEffectComponent", {
             return "";
         },
     },
-    mounted: function () {
-        console.log(this.data, "DELIMITER");
-    },
     //TODO (chosta): refactor card-effect-box to be a reusable Vue component
     template: `
         <div :class="getClasses()">

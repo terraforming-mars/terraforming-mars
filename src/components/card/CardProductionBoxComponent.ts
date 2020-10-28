@@ -30,9 +30,6 @@ export const CardProductionBoxComponent = Vue.component("CardProductionBoxCompon
             return "";
         },
     },
-    mounted: function () {
-        console.log(this.data);
-    },
     template: `
         <div :class="getClasses()">
             <div class="card-production-box-row" v-for="(rowData, index) in data" :key="index">

@@ -6,4 +6,7 @@ export enum CardSpecialType {
     TEXT = "text",
     SPECIAL_TEXT = "special text",
     CONDITIONS = "+/- 2",
+    COLON = ":",
+    EMPTY = " ",
+    SLASH = "/",
 }

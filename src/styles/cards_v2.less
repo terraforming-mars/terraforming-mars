@@ -50,12 +50,36 @@
             line-height: 20px;
             font-weight: bold;
             text-align: center;
+            .card-effect-box {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                .card-bonus-container {
+                    margin: 0;
+                }
+                .card-effect-box-row {
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    .card-effect-box-content {
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        margin: 0 4px;
+                        .card-effect-box-item {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+
             .card-bonus-container {
                 display: flex;
                 flex-flow: row;
                 align-items: center;
                 margin: 0 4px;
             }
+
             /*requirements*/
             .card-global-requirement {
                 position: relative;
@@ -113,10 +137,9 @@
                 background-size: 30px;
                 filter: drop-shadow(0px 0px 1px black);
                 vertical-align: middle;
-
-                &.resource--white {
-                    background: white;
-                }
+            }
+            .card-resource-trade-discount {
+                background: white;
             }
             .card-resource-money {
                 font-family: Prototype;
@@ -197,7 +220,13 @@
                 margin-right: 3px;
                 background-repeat: no-repeat;
             }
-            .card-or {
+            .card-plus--small {
+                background-size: 10px;
+                min-height: 10px;
+                width: 10px;
+            }
+            .card-or,
+            .card-colon {
                 font-size: @font_size_big;
             }
             .card-res-amount {
@@ -223,6 +252,81 @@
                 background-size: 24px 24px;
                 background-position: center;
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+            }
+            /*colony special*/
+            .card-resource-trade {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+            }
+            /*turmoil special*/
+            .card-influence {
+                display: inline-block;
+                background-image: url(./assets/misc/influence.png);
+                width: 40px;
+                height: 40px;
+                background-size: 40px 40px;
+                vertical-align: middle;
+            }
+            /*tags*/
+            .card-resource-tag {
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                background-size: 34px 34px;
+                background-position: -2px -2px;
+                line-height: 28px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                vertical-align: middle;
+                filter: brightness(0.9);
+            }
+            .card-tag-wild {
+                background-image: url("../assets/tags/wild.png");
+            }
+            .card-tag-building {
+                background-image: url("./assets/tags/building.png");
+            }
+            .card-tag-space {
+                background-image: url("./assets/tags/space.png");
+            }
+            .card-tag-power {
+                background-image: url("./assets/tags/power.png");
+            }
+            .card-tag-jovian {
+                background-image: url("./assets/tags/jovian.png");
+            }
+            .card-tag-venus {
+                background-image: url("./assets/tags/venus.png");
+            }
+            .card-tag-earth {
+                background-image: url("./assets/tags/earth.png");
+            }
+            .card-tag-city {
+                background-image: url("./assets/tags/city.png");
+            }
+            .card-tag-microbe {
+                background-image: url("./assets/tags/microbe.png");
+            }
+            .card-tag-plant {
+                background-image: url("./assets/tags/plant.png");
+            }
+            .card-tag-animal {
+                background-image: url("./assets/tags/animal.png");
+            }
+            .card-tag-event {
+                background-image: url("./assets/tags/event.png");
+            }
+            .card-tag-science {
+                background-image: url("./assets/tags/science.png");
+                background-size: 46px;
+                background-position: -3px;
+            }
+            .card-tag-none {
+                background-image: url("./assets/tags/tag-none.png");
             }
             /*production*/
             .card-production-box {

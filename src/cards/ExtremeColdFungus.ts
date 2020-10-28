@@ -11,12 +11,19 @@ import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
+import { CardSpecial } from "./CardSpecial";
+import { CardMetadata } from "./CardMetadata";
+import { CardRow } from "./CardRow";
+import { CardBonus } from "./CardBonus";
+import { CardAction } from "./CauseAndEffect";
+import { CardRequirements } from "./CardRequirements";
+import { CardRequirement } from "./CardRequirement";
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.EXTREME_COLD_FUNGUS;
+    public cost = 13;
+    public tags = [Tags.MICROBES];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -10 + 2 * player.getRequirementsBonus(game);
     }
@@ -68,4 +75,26 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
             gainPlantOption
         );
     }
+    public metadata: CardMetadata = {
+      cardNumber: "134",
+      description: "It must be -10 C or colder.",
+      requirements: new CardRequirements([
+          CardRequirement.temperature(-10).max()
+      ]),
+      onPlay: [
+          CardRow.add([
+              CardAction.add(
+                  undefined,
+                  [CardBonus.plants(1)]
+              ),
+          ]),
+          CardRow.add([
+              CardAction.add(
+                  [CardSpecial.or().small()],
+                  [CardBonus.microbes(2), CardSpecial.asterix()],
+                  "Gain 1 plant or add 2 microbes to ANOTHER card."
+              ),
+          ])
+      ],
+  };
 }

@@ -11,14 +11,19 @@ import { CardName } from "../../CardName";
 import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { CardSpecial } from "../../cards/CardSpecial";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
+import { CardAction } from "../../cards/CauseAndEffect";
 
 export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.EXTRACTOR_BALLOONS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+    public cost = 21;
+    public tags = [Tags.VENUS];
+    public name = CardName.EXTRACTOR_BALLOONS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
+    public resourceCount = 0;
 
     public play() {
         this.resourceCount += 3;
@@ -52,4 +57,26 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
             })
         );
     }
+    public metadata: CardMetadata = {
+        cardNumber: "223",
+        description: "Add 3 Floaters to this card.",
+        onPlay: [
+            CardRow.add([
+                CardAction.add(
+                    undefined,
+                    [CardBonus.floaters(1)]
+                ),
+            ]),
+            CardRow.add([
+                CardAction.add(
+                    [CardSpecial.or().small(), CardBonus.floaters(2)],
+                    [CardBonus.venus(1)],
+                    "Add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step."
+                ),
+            ]),
+            CardRow.add([
+                CardBonus.floaters(3)
+            ])
+        ],
+    };
 }

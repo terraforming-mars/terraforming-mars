@@ -88,7 +88,7 @@ export const HTML_DATA: Map<string, string> =
                 ">
             </div>
             <div class="description " style="text-align:left;">
-                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.)<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
                     1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
                 </div>

@@ -13,6 +13,12 @@ import { LogHelper } from "../../components/LogHelper";
 import * as constants from "./../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { CardRequirements } from "../../cards/CardRequirements";
+import { CardRequirement } from "../../cards/CardRequirement";
+import { CardSpecial } from "../../cards/CardSpecial";
+import { CardMetadata } from "./../CardMetadata";
+import { CardRow } from "./../CardRow";
+import { CardBonus } from "./../CardBonus";
 
 export class Atmoscoop implements IProjectCard {
     public cost = 22;
@@ -181,4 +187,21 @@ export class Atmoscoop implements IProjectCard {
     private venusIsMaxed(game: Game) {
         return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
     }
+
+    public metadata: CardMetadata = {
+        description:
+            "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.",
+        cardNumber: "217",
+        requirements: new CardRequirements([
+            CardRequirement.tag(Tags.SCIENCE, 3)
+        ]),
+        onPlay: [
+            CardRow.add([
+                CardBonus.temperature(2), CardSpecial.or(), CardBonus.venus(2)
+            ]),
+            CardRow.add([
+                CardBonus.floaters(2), CardSpecial.asterix()
+            ])
+        ],
+    };
 }

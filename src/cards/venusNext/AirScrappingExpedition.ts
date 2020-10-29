@@ -9,6 +9,9 @@ import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
 import { REDS_RULING_POLICY_COST, MAX_VENUS_SCALE } from "../../constants";
 
 export class AirScrappingExpedition implements IProjectCard {
@@ -53,4 +56,15 @@ export class AirScrappingExpedition implements IProjectCard {
             }
         );
     }
+
+    public metadata: CardMetadata = {
+        description:
+            "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.",
+        cardNumber: "215",
+        onPlay: [
+            CardRow.add([
+                CardBonus.venus(1), CardBonus.floaters(3).depends(Tags.VENUS)
+            ]),
+        ],
+    };
 }

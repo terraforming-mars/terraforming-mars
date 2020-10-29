@@ -5,6 +5,10 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
+import { CardMetadata } from "./CardMetadata";
+import { CardRow } from "./CardRow";
+import { CardBonus } from "./CardBonus";
+import { CardProductionBox } from "./CardProductionBox";
 
 export class ArchaeBacteria implements IProjectCard {
     public cost = 6;
@@ -18,4 +22,16 @@ export class ArchaeBacteria implements IProjectCard {
         player.addProduction(Resources.PLANTS);
         return undefined;
     }
+    public metadata: CardMetadata = {
+        description:
+            "It must be -18 C or colder. Increase your Plant production 1 step.",
+        cardNumber: "042",
+        onPlay: [
+            CardRow.add([
+                CardProductionBox.add([
+                    [CardBonus.plants(1)]
+                ])
+            ]),
+        ],
+    };
 }

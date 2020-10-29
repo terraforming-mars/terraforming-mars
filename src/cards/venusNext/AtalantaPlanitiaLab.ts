@@ -4,6 +4,12 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardName } from "../../CardName";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRequirements } from "../../cards/CardRequirements";
+import { CardRequirement } from "../../cards/CardRequirement";
+import { CardRow } from "../../cards/CardRow";
+import { CardBonus } from "../../cards/CardBonus";
+
 
 export class AtalantaPlanitiaLab implements IProjectCard {
     public cost = 10;
@@ -22,4 +28,11 @@ export class AtalantaPlanitiaLab implements IProjectCard {
     public getVictoryPoints() {
         return 2;
     }
+    public metadata: CardMetadata = {
+        description: "Requires 3 science tags. Draw 2 cards.",
+        cardNumber: "216",
+        requirements: new CardRequirements([CardRequirement.tag(Tags.SCIENCE, 3)]),
+        onPlay: [CardRow.add([CardBonus.cards(2)])],
+        victoryPoints: 2,
+    };
 }

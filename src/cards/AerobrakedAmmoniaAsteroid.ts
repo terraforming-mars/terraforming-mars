@@ -9,6 +9,11 @@ import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { Game } from "../Game";
 import { LogHelper } from "../components/LogHelper";
+import { CardMetadata } from "../cards/CardMetadata";
+import { CardProductionBox } from "../cards/CardProductionBox";
+import { CardSpecial } from "../cards/CardSpecial";
+import { CardRow } from "../cards/CardRow";
+import { CardBonus } from "../cards/CardBonus";
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost = 26;
@@ -40,4 +45,13 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
             }
         );
     }
+    public metadata: CardMetadata = {
+        description:
+            "Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.",
+        cardNumber: "170",
+        onPlay: [
+            CardRow.add([CardProductionBox.add([[CardBonus.heat(3)]])]),
+            CardRow.add([CardBonus.microbes(2), CardSpecial.asterix()]),
+        ],
+    };
 }

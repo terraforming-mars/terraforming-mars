@@ -4,6 +4,10 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
+import { CardMetadata } from "./CardMetadata";
+import { CardRow } from "./CardRow";
+import { CardBonus } from "./CardBonus";
+import { CardProductionBox } from "./CardProductionBox";
 
 export class AsteroidMining implements IProjectCard {
     public cost = 30;
@@ -18,4 +22,17 @@ export class AsteroidMining implements IProjectCard {
     public getVictoryPoints() {
         return 2;
     }
+    public metadata: CardMetadata = {
+        description:
+            "Increase your titanium production 2 steps.",
+        cardNumber: "040",
+        onPlay: [
+            CardRow.add([
+                CardProductionBox.add([
+                    [CardBonus.titanium(2)]
+                ])
+            ]),
+        ],
+        victoryPoints: 2
+    };
 }

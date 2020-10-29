@@ -21,7 +21,7 @@ describe("BusinessEmpire", function () {
 
     it("Should play", function () {
         player.megaCredits = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
         // SelectHowToPayDeferred

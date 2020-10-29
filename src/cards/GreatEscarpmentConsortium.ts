@@ -40,6 +40,6 @@ export class GreatEscarpmentConsortium implements IProjectCard {
                     [CardSpecial.plus(), CardBonus.steel(1)]
                 ])
             ]),
-        ],
+        ], 
     };
 }

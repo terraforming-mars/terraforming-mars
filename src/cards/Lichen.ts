@@ -12,7 +12,6 @@ import { CardProductionBox } from "./CardProductionBox";
 import { CardRow } from "./CardRow";
 import { CardBonus } from "./CardBonus";
 
-
 export class Lichen implements IProjectCard {
     public cost = 7;
     public tags = [Tags.PLANT];

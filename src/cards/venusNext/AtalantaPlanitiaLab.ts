@@ -10,7 +10,6 @@ import { CardRequirement } from "../../cards/CardRequirement";
 import { CardRow } from "../../cards/CardRow";
 import { CardBonus } from "../../cards/CardBonus";
 
-
 export class AtalantaPlanitiaLab implements IProjectCard {
     public cost = 10;
     public tags = [Tags.VENUS, Tags.SCIENCE];

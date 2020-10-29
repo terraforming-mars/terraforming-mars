@@ -8,7 +8,6 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { ICard } from "../../cards/ICard";
 import { SelectCard } from "../../inputs/SelectCard";
-import { DeferredAction } from "../../deferredActions/DeferredAction";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRow } from "../../cards/CardRow";
 import { CardBonus } from "../../cards/CardBonus";
@@ -16,6 +15,7 @@ import { CardAction } from "../../cards/CauseAndEffect";
 import { CardSpecial } from "../../cards/CardSpecial";
 import { CardRequirement } from "../../cards/CardRequirement";
 import { CardRequirements } from "../../cards/CardRequirements";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
     public cost = 7;

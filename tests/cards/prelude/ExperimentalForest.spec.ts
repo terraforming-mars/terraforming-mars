@@ -21,7 +21,7 @@ describe("ExperimentalForest", function () {
         const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
 
         expect(selectSpace).is.not.undefined;
-        expect(selectSpace instanceof SelectSpace).to.eq(true);
+        expect(selectSpace instanceof SelectSpace).is.true;
         expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
         expect(player.cardsInHand).has.lengthOf(2);
         expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.PLANT) !== -1)).has.lengthOf(2);

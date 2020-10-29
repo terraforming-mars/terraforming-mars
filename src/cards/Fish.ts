@@ -10,12 +10,12 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Fish implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: CardName = CardName.FISH;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public cost = 9;
+    public tags = [Tags.ANIMAL];
+    public name = CardName.FISH;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS,1);

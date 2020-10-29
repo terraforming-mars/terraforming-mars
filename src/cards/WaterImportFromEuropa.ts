@@ -12,10 +12,10 @@ import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
-    public cost: number = 25;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.WATER_IMPORT_FROM_EUROPA;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 25;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.WATER_IMPORT_FROM_EUROPA;
+    public cardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN, false, false);

@@ -15,11 +15,11 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: CardName = CardName.THERMOPHILES;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 9;
+    public tags = [Tags.VENUS, Tags.MICROBES];
+    public name = CardName.THERMOPHILES;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));

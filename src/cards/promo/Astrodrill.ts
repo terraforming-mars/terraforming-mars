@@ -14,11 +14,11 @@ import { CardType } from "../CardType";
 
 
 export class Astrodrill implements IActionCard, CorporationCard {
-    public name: CardName = CardName.ASTRODRILL;
-    public tags: Array<Tags> = [Tags.SPACE];
+    public name = CardName.ASTRODRILL;
+    public tags = [Tags.SPACE];
     public startingMegaCredits: number = 38;
-    public cardType: CardType = CardType.CORPORATION; 
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public cardType = CardType.CORPORATION; 
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
 
     public canAct(): boolean {

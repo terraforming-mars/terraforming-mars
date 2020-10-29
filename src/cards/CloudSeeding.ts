@@ -1,5 +1,4 @@
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -8,10 +7,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class CloudSeeding implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.CLOUD_SEEDING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 11;
+    public tags = [];
+    public name = CardName.CLOUD_SEEDING;
+    public cardType = CardType.AUTOMATED;
     
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.MEGACREDITS) > -5 &&

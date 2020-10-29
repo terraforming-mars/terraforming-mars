@@ -12,10 +12,10 @@ import { BoardName } from '../BoardName';
 import { CardName } from '../CardName';
 
 export class NoctisCity implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.NOCTIS_CITY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 18;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.NOCTIS_CITY;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         if (game.gameOptions.boardName === BoardName.ORIGINAL) {

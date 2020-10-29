@@ -9,10 +9,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class WaterSplittingPlant implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.WATER_SPLITTING_PLANT;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 12;
+    public tags = [Tags.STEEL];
+    public name = CardName.WATER_SPLITTING_PLANT;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 2 - player.getRequirementsBonus(game);
     }

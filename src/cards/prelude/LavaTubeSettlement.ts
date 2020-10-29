@@ -10,10 +10,10 @@ import { BoardName } from "../../BoardName";
 import { PlaceCityTile } from "../../deferredActions/PlaceCityTile";
 
 export class LavaTubeSettlement implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: CardName = CardName.LAVA_TUBE_SETTLEMENT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 15;
+    public tags = [Tags.STEEL, Tags.CITY];
+    public name = CardName.LAVA_TUBE_SETTLEMENT;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     private getSpacesForCity(player: Player, game: Game) {

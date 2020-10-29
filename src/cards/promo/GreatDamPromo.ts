@@ -10,10 +10,10 @@ import { TileType } from "../../TileType";
 import { ISpace } from "../../ISpace";
 
 export class GreatDamPromo implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.GREAT_DAM_PROMO;
+    public cost = 15;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.GREAT_DAM_PROMO;
     public canPlay(player: Player, game: Game): boolean {
         const meetsOceanRequirements = game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
         const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;

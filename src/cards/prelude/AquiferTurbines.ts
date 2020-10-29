@@ -9,8 +9,8 @@ import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public name: CardName = CardName.AQUIFER_TURBINES;
+    public tags = [Tags.ENERGY];
+    public name = CardName.AQUIFER_TURBINES;
     public canPlay(player: Player, _game: Game) {
         return player.canAfford(3);
     }

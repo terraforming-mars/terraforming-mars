@@ -7,10 +7,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class FuelFactory implements IProjectCard {
-  public cost: number = 6;
-  public name: CardName = CardName.FUEL_FACTORY;
-  public tags: Array<Tags> = [Tags.STEEL];
-  public cardType: CardType = CardType.AUTOMATED;
+  public cost = 6;
+  public name = CardName.FUEL_FACTORY;
+  public tags = [Tags.STEEL];
+  public cardType = CardType.AUTOMATED;
   public hasRequirements = false;
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;

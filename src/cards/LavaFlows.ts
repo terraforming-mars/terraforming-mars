@@ -5,7 +5,6 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
 import { TileType } from "../TileType";
-import { Tags } from "./Tags";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { BoardName } from "../BoardName";
@@ -16,11 +15,11 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class LavaFlows implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.LAVA_FLOWS;
+    public cost = 18;
+    public tags = [];
+    public name = CardName.LAVA_FLOWS;
     public hasRequirements = false;
-    public cardType: CardType = CardType.EVENT;
+    public cardType = CardType.EVENT;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {

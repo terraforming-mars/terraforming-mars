@@ -7,10 +7,10 @@ import { Game } from "../Game";
 import { CardName } from '../CardName';
 
 export class MediaGroup implements IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.MEDIA_GROUP;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 6;
+    public tags = [Tags.EARTH];
+    public name = CardName.MEDIA_GROUP;
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.cardType === CardType.EVENT) {

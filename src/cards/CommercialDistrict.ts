@@ -12,10 +12,10 @@ import { Board } from '../Board';
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class CommercialDistrict implements IProjectCard {
-    public cost: number = 16;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.COMMERCIAL_DISTRICT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 16;
+    public tags = [Tags.STEEL];
+    public name = CardName.COMMERCIAL_DISTRICT;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 

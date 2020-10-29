@@ -8,10 +8,10 @@ import { Resources } from "../../Resources";
 import { BuildColony } from "../../deferredActions/BuildColony";
 
 export class MinorityRefuge implements IProjectCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.MINORITY_REFUGE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 5;
+    public tags = [Tags.SPACE];
+    public name = CardName.MINORITY_REFUGE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player): boolean {

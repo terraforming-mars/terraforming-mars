@@ -11,10 +11,10 @@ import { SelectCard } from "../../inputs/SelectCard";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.BIOENGINEERING_ENCLOSURE;
+    public cost = 7;
+    public tags = [Tags.ANIMAL];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.BIOENGINEERING_ENCLOSURE;
     public resourceType = ResourceType.ANIMAL;
     public resourceCount = 0;
 

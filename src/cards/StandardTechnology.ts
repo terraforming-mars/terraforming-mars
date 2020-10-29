@@ -7,10 +7,10 @@ import { Player } from "../Player";
 import { CardName } from '../CardName';
 
 export class StandardTechnology implements IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.STANDARD_TECHNOLOGY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 6;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.STANDARD_TECHNOLOGY;
+    public cardType = CardType.ACTIVE;
 
     public onStandardProject(player: Player, projectType: StandardProjectType) { 
         if (projectType !== StandardProjectType.SELLING_PATENTS) {

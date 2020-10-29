@@ -10,10 +10,10 @@ import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
 
 export class HiTechLab implements IProjectCard {
 
-    public name: CardName = CardName.HI_TECH_LAB;
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.HI_TECH_LAB;
+    public cost = 17;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

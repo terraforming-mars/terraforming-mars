@@ -14,10 +14,10 @@ import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.EXTREME_COLD_FUNGUS;
+    public cost = 13;
+    public tags = [Tags.MICROBES];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -10 + (
         2 * player.getRequirementsBonus(game)

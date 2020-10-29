@@ -7,10 +7,10 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
 export class GeologicalSurvey implements IProjectCard {
-  public cost: number = 8;
-  public tags: Array<Tags> = [Tags.SCIENCE];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.GEOLOGICAL_SURVEY;
+  public cost = 8;
+  public tags = [Tags.SCIENCE];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.GEOLOGICAL_SURVEY;
 
   private countGreeneryTiles(game: Game): number {
     return game.board.spaces.filter(

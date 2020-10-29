@@ -12,10 +12,10 @@ import { CardName } from "../CardName";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class NaturalPreserve implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.NATURAL_PRESERVE;
+    public cost = 9;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.NATURAL_PRESERVE;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {

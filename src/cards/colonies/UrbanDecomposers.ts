@@ -9,10 +9,10 @@ import { ResourceType } from "../../ResourceType";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class UrbanDecomposers implements IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.URBAN_DECOMPOSERS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 6;
+    public tags = [Tags.MICROBES];
+    public name = CardName.URBAN_DECOMPOSERS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         let coloniesCount: number = 0;

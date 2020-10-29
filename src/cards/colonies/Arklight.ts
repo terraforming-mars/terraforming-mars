@@ -10,12 +10,12 @@ import { CardName } from "../../CardName";
 import { IResourceCard } from "../ICard";
 
 export class Arklight implements CorporationCard, IResourceCard {
-    public name: CardName =  CardName.ARKLIGHT;
-    public tags: Array<Tags> = [Tags.ANIMAL];
+    public name =  CardName.ARKLIGHT;
+    public tags = [Tags.ANIMAL];
     public startingMegaCredits: number = 45;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.addProduction(Resources.MEGACREDITS, 2);

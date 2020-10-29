@@ -9,10 +9,10 @@ import { PartyName } from '../../turmoil/parties/PartyName';
 import { REDS_RULING_POLICY_COST } from '../../constants';
 
 export class MagneticShield implements IProjectCard {
-    public name: CardName = CardName.MAGNETIC_SHIELD;
-    public cost: number = 26;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.AUTOMATED;
+    public name = CardName.MAGNETIC_SHIELD;
+    public cost = 26;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         const hasEnergyTags = player.getTagCount(Tags.ENERGY) >= 2;

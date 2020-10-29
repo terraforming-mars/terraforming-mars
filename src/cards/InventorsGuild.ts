@@ -10,10 +10,10 @@ import { LogHelper } from "../components/LogHelper";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class InventorsGuild implements IActionCard, IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.INVENTORS_GUILD;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 9;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.INVENTORS_GUILD;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

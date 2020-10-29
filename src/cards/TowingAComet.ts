@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class TowingAComet implements IProjectCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.TOWING_A_COMET;
+    public cost = 23;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.TOWING_A_COMET;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

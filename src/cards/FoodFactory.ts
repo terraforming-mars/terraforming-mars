@@ -7,10 +7,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class FoodFactory implements IProjectCard {
-  public cost: number = 12;
-  public tags: Array<Tags> = [Tags.STEEL];
-  public name: CardName = CardName.FOOD_FACTORY;
-  public cardType: CardType = CardType.AUTOMATED;
+  public cost = 12;
+  public tags = [Tags.STEEL];
+  public name = CardName.FOOD_FACTORY;
+  public cardType = CardType.AUTOMATED;
   public hasRequirements = false;
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.PLANTS) >= 1;

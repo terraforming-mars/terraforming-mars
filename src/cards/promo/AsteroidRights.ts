@@ -14,12 +14,12 @@ import { SelectOption } from '../../inputs/SelectOption';
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.ASTEROID_RIGHTS;
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public name = CardName.ASTEROID_RIGHTS;
+    public cost = 10;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         this.resourceCount = 2;

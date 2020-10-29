@@ -8,10 +8,10 @@ import {TileType} from '../TileType';
 import { CardName } from '../CardName';
 
 export class ArcticAlgae implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.ARCTIC_ALGAE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 12;
+    public tags = [Tags.PLANT];
+    public name = CardName.ARCTIC_ALGAE;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -12 + (
         player.getRequirementsBonus(game) * 2

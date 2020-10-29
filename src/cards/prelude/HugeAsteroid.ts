@@ -1,4 +1,3 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
@@ -7,8 +6,8 @@ import { CardName } from "../../CardName";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class HugeAsteroid extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.HUGE_ASTEROID;
+    public tags = [];
+    public name = CardName.HUGE_ASTEROID;
     public canPlay(player: Player, _game: Game) {
         return player.canAfford(5);
     }

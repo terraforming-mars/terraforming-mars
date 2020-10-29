@@ -9,10 +9,10 @@ import { CardName } from '../CardName';
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class UndergroundDetonations implements IActionCard, IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.UNDERGROUND_DETONATIONS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 6;
+    public tags = [Tags.STEEL];
+    public name = CardName.UNDERGROUND_DETONATIONS;
+    public cardType = CardType.ACTIVE;
 
     public canAct(player: Player): boolean {
         return player.canAfford(10);

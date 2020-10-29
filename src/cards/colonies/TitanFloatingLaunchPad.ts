@@ -15,11 +15,11 @@ import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyModel } from "../../models/ColonyModel";
 
 export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.TITAN_FLOATER_LAUNCHPAD;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 18;
+    public tags = [Tags.JOVIAN];
+    public name = CardName.TITAN_FLOATER_LAUNCHPAD;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canAct(): boolean {

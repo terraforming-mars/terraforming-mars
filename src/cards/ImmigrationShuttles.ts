@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class ImmigrationShuttles implements IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.IMMIGRATION_SHUTTLES;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 31;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.IMMIGRATION_SHUTTLES;
+    public cardType = CardType.AUTOMATED;
 
     public getVictoryPoints(_player: Player, game: Game) {
         return Math.floor(game.getCitiesInPlay() / 3);

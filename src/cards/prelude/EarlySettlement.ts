@@ -8,8 +8,8 @@ import { CardName } from "../../CardName";
 import { PlaceCityTile } from "../../deferredActions/PlaceCityTile";
 
 export class EarlySettlement extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: CardName = CardName.EARLY_SETTLEMENT;
+    public tags = [Tags.STEEL, Tags.CITY];
+    public name = CardName.EARLY_SETTLEMENT;
     public play(player: Player, game: Game) {  
         player.addProduction(Resources.PLANTS);  	
         game.defer(new PlaceCityTile(player, game));

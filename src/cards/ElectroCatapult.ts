@@ -10,10 +10,10 @@ import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.ELECTRO_CATAPULT;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 17;
+    public tags = [Tags.STEEL];
+    public name = CardName.ELECTRO_CATAPULT;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
         game.getOxygenLevel() <= 8 + player.getRequirementsBonus(game);

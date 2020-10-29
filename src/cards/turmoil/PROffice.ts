@@ -10,10 +10,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class PROffice implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.PR_OFFICE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 7;
+    public tags = [Tags.EARTH];
+    public name = CardName.PR_OFFICE;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

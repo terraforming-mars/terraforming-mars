@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class IceAsteroid implements IProjectCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.ICE_ASTEROID;
+    public cost = 23;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.ICE_ASTEROID;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

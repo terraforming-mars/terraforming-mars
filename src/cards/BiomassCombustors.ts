@@ -8,10 +8,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class BiomassCombustors implements IProjectCard {
-    public cost: number = 4;
-    public cardType: CardType = CardType.AUTOMATED;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: CardName = CardName.BIOMASS_COMBUSTORS;
+    public cost = 4;
+    public cardType = CardType.AUTOMATED;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public name = CardName.BIOMASS_COMBUSTORS;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS,1);
     }

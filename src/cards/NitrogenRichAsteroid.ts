@@ -10,10 +10,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class NitrogenRichAsteroid implements IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.NITROGEN_RICH_ASTEROID;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 31;
+    public tags = [Tags.SPACE];
+    public name = CardName.NITROGEN_RICH_ASTEROID;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

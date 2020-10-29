@@ -8,10 +8,10 @@ import { Resources } from "../../Resources";
 import { BuildColony } from "../../deferredActions/BuildColony";
 
 export class PioneerSettlement implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.PIONEER_SETTLEMENT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 13;
+    public tags = [Tags.SPACE];
+    public name = CardName.PIONEER_SETTLEMENT;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         let coloniesCount: number = 0;

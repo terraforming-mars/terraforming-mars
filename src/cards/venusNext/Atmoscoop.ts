@@ -15,10 +15,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class Atmoscoop implements IProjectCard {
-    public cost: number = 22;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.ATMOSCOOP;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 22;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.ATMOSCOOP;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 3;

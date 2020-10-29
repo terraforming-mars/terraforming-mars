@@ -7,12 +7,12 @@ import { IResourceCard } from './ICard';
 import { Player } from "../Player";
 
 export class Tardigrades implements IProjectCard, IResourceCard {
-    public cost: number = 4;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 4;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.TARDIGRADES;
-    public cardType: CardType = CardType.ACTIVE;
+    public tags = [Tags.MICROBES];
+    public name = CardName.TARDIGRADES;
+    public cardType = CardType.ACTIVE;
 
     public getVictoryPoints(): number {
         return Math.floor(this.resourceCount / 4);

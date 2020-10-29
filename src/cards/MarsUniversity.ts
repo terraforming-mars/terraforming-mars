@@ -10,10 +10,10 @@ import { CardName } from "../CardName";
 import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class MarsUniversity implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: CardName = CardName.MARS_UNIVERSITY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 8;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public name = CardName.MARS_UNIVERSITY;
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;

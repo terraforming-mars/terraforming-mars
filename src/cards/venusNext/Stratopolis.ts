@@ -13,11 +13,11 @@ import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 22;
-    public tags: Array<Tags> = [Tags.CITY, Tags.VENUS];
-    public name: CardName = CardName.STRATOPOLIS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 22;
+    public tags = [Tags.CITY, Tags.VENUS];
+    public name = CardName.STRATOPOLIS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 ;

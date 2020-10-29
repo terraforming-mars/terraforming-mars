@@ -8,8 +8,8 @@ import { DrawCards } from "../../deferredActions/DrawCards";
 import { PlaceGreeneryTile } from "../../deferredActions/PlaceGreeneryTile";
 
 export class ExperimentalForest extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.EXPERIMENTAL_FOREST
+    public tags = [Tags.PLANT];
+    public name = CardName.EXPERIMENTAL_FOREST
 
     public play(player: Player, game: Game) {
         game.defer(new DrawCards(player, game, 2, Tags.PLANT));

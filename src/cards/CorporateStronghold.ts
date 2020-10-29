@@ -10,10 +10,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class CorporateStronghold implements IProjectCard {
-    public cost: number = 11;
-    public cardType: CardType = CardType.AUTOMATED;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.CORPORATE_STRONGHOLD;
+    public cost = 11;
+    public cardType = CardType.AUTOMATED;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.CORPORATE_STRONGHOLD;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&

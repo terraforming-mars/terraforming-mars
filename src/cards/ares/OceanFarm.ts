@@ -11,10 +11,10 @@ import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
 export class OceanFarm implements IProjectCard {
-  public cost: number = 15;
-  public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-  public cardType: CardType = CardType.AUTOMATED;
-  public name: CardName = CardName.OCEAN_FARM;
+  public cost = 15;
+  public tags = [Tags.PLANT, Tags.STEEL];
+  public cardType = CardType.AUTOMATED;
+  public name = CardName.OCEAN_FARM;
 
   public canPlay(player: Player, game: Game): boolean {
     return game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);

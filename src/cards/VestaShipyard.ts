@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class VestaShipyard implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.VESTA_SHIPYARD;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 15;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.VESTA_SHIPYARD;
+    public cardType = CardType.AUTOMATED;
     public getVictoryPoints(): number {
         return 1;
     }

@@ -10,10 +10,10 @@ import { REDS_RULING_POLICY_COST } from "../constants";
 import { LogHelper } from "../components/LogHelper";
 
 export class TerraformingGanymede implements IProjectCard {
-    public cost: number = 33;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.TERRAFORMING_GANYMEDE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 33;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.TERRAFORMING_GANYMEDE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

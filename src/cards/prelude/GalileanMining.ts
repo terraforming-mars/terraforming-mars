@@ -8,8 +8,8 @@ import { Game } from "../../Game";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class GalileanMining extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.GALILEAN_MINING;
+    public tags = [Tags.JOVIAN];
+    public name = CardName.GALILEAN_MINING;
     public canPlay(player: Player, _game: Game) {
         return player.canAfford(5);
     }

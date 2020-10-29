@@ -14,10 +14,10 @@ import { Tags } from "../Tags";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class BiofertilizerFacility implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.BIOFERTILIZER_FACILITY;
+    public cost = 12;
+    public tags = [Tags.MICROBES, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.BIOFERTILIZER_FACILITY;
 
     public canPlay(player: Player, _game: Game): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 1;

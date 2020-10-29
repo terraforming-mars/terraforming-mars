@@ -1,5 +1,4 @@
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -11,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class BlackPolarDust implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.BLACK_POLAR_DUST;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 15;
+    public tags = [];
+    public name = CardName.BLACK_POLAR_DUST;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

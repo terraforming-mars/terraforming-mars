@@ -8,10 +8,10 @@ import { Resources } from "../../Resources";
 import { BuildColony } from "../../deferredActions/BuildColony";
 
 export class MiningColony implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.MINING_COLONY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 20;
+    public tags = [Tags.SPACE];
+    public name = CardName.MINING_COLONY;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         game.defer(new BuildColony(player, game, false, "Select colony for Mining Colony"));

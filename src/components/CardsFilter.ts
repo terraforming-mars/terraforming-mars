@@ -7,17 +7,15 @@ import { ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
 const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.sort();
 
 interface CardsFilterModel {
-    customCorporationsList: boolean;
     selectedCardNames: Array<CardName>;
     foundCardNames: Array<CardName>;
     searchTerm: string;
 }
 
 export const CardsFilter = Vue.component("cards-filter", {
-    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
+    props: {},
     data: function () {
         return {
-            customCorporationsList: false,
             selectedCardNames: [],
             foundCardNames: [],
             searchTerm: ""

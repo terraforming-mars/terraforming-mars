@@ -2,6 +2,7 @@
 import Vue from "vue";
 import * as constants from "../constants";
 import { BoardSpace } from "./BoardSpace";
+import { IAresData } from "../ares/IAresData";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
 import { PreferencesManager } from "./PreferencesManager";
@@ -19,7 +20,38 @@ class AlertDialog {
 }
 
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify", "aresExtension", "aresData"],
+    props: {
+        spaces: {
+            type: Object as () => Array<SpaceModel>
+        },
+        venusNextExtension: {
+            type: Boolean
+        },
+        venusScaleLevel: {
+            type: Number
+        },
+        boardName: {
+            type: String
+        },
+        oceans_count: {
+            type: Number
+        },
+        oxygen_level: {
+            type: Number
+        },
+        temperature: {
+            type: Number
+        },
+        shouldNotify: {
+            type: Boolean
+        },
+        aresExtension: {
+            type: Boolean
+        },
+        aresData: {
+            type: Object as () => IAresData | undefined
+        }
+    },
     components: {
         "board-space": BoardSpace
     },
@@ -149,7 +181,7 @@ export const Board = Vue.component("board", {
             <div class="global-numbers-oceans" v-html="oceansValue()">
             </div>
 
-            <div v-if="aresExtension">
+            <div v-if="aresExtension && aresData !== undefined">
                 <div v-if="aresData.hazardData.erosionOceanCount.available">
                     <div class="global-ares-erosions-icon"></div>
                     <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>

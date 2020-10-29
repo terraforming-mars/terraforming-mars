@@ -38,6 +38,10 @@ checkComponent(
     require("./dist/src/components/OtherPlayer").OtherPlayer
 );
 checkComponent(
+    "src/components/SelectAmount",
+    require("./dist/src/components/SelectAmount").SelectAmount
+);
+checkComponent(
     "src/components/SelectOption",
     require("./dist/src/components/SelectOption").SelectOption
 );
@@ -82,7 +86,7 @@ function checkComponent(name, component) {
     result = result.render;
 
     // provide type information for $event argument
-    result = result.replace(/function\(\$event\)/g, "function($event: Event)");
+    result = result.replace(/function\(\$event\)/g, "function($event: VueDomEvent)");
 
     // strip 'with' lacking typescript support
     result = result.substring("with(this){".length);
@@ -130,6 +134,9 @@ function checkComponent(name, component) {
     lines.unshift("declare const _m: any;");
     lines.unshift("declare const _s: any;");
     lines.unshift("declare const _v: any;");
+    lines.unshift("interface VueDomEventTarget { composing: boolean, value: string };");
+    lines.unshift("interface VueDomEvent { preventDefault: () => void; target: VueDomEventTarget; };");
+    lines.unshift("declare function $set(arg1: any, key: string, value: string): void;");
     // iterating function needs to pass along type information
     lines.unshift("declare function _l<T>(arg1: Array<T>, arg2: (item2: T) => any): any;");
     file = lines.join("\n");

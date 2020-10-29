@@ -120,7 +120,7 @@ export class PharmacyUnion implements CorporationCard {
 
 
         if (hasMicrobesTag) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => {
                     const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;

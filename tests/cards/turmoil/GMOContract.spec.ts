@@ -23,6 +23,7 @@ describe("GMOContract", function () {
             }
             card.play();
             card.onCardPlayed(player,game,card);
+            game.deferredActions.runNext();
             expect(player.megaCredits).to.eq(2);
         } 
     });

@@ -66,7 +66,7 @@ export const HTML_DATA: Map<string, string> =
                 ">
             </div>
             <div class="description " style="text-align:left;">
-                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.)<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
                     1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
                 </div>
@@ -1141,7 +1141,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix plus"></div><div class="money production ">2</div>
             </div>
             <div class="description ">
-                (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.
+                (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.)
             </div>
         </div>
 `],
@@ -1726,7 +1726,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix plus"></div><div class="money production">2</div>
           </div>
           <div class="description" style="position:absolute;margin-top:-85px;text-align:left;margin-left:80px;font-size:10px;">
-            (Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.
+            (Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.)
           </div>
         </div>
 `],

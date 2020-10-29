@@ -13,6 +13,7 @@ import { CardSpecial } from "../../cards/CardSpecial";
 import { CardRequirements } from "../CardRequirements";
 import { CardRequirement } from "../CardRequirement";
 import { Resources } from "../../Resources";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class GMOContract implements IProjectCard {
     public cost = 3;
@@ -27,12 +28,16 @@ export class GMOContract implements IProjectCard {
         return false;
     }
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-        const amount = card.tags.filter(
-            (tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES
-        ).length;
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
+        const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
         if (amount > 0) {
-            player.setResource(Resources.MEGACREDITS, amount * 2);
+            game.defer(new DeferredAction(
+                player,
+                () => {
+                    player.setResource(Resources.MEGACREDITS, amount * 2);
+                    return undefined;
+                }
+            ));
         }
     }
 

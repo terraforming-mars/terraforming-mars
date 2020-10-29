@@ -12,7 +12,7 @@ import { LogHelper } from "../components/LogHelper";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 11;
@@ -23,7 +23,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;
 
     public play(player: Player, game: Game) {
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => {
                 player.addResourceTo(this,3);

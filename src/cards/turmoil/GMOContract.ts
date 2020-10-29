@@ -6,8 +6,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
-
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class GMOContract implements IProjectCard {
     public cost: number = 3;
@@ -25,7 +24,7 @@ export class GMOContract implements IProjectCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
         let amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
         if (amount > 0) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => {
                     player.setResource(Resources.MEGACREDITS, amount * 2);

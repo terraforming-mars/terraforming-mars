@@ -71,7 +71,6 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
     },
     watch: {
         selectedColonies: function (value) {
-            console.log(this.selectedColonies);
             let colonyNames: Array<ColonyName> = [];
             value.forEach(function (el: any) { colonyNames.push(el.name)} );
             this.$emit("colonies-list-changed", colonyNames);

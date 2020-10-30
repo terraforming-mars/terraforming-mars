@@ -37,7 +37,7 @@ export const SelectAmount = Vue.component("select-amount", {
     <div>
         <div v-if="showtitle === true">{{playerinput.title}}</div>
         <div class="flex">
-            <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="this.amount" />
+            <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="amount" />
             <Button size="big" type="max" :onClick="setMaxValue" title="MAX" />
             <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
         </div>

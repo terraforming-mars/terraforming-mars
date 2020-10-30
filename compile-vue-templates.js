@@ -38,10 +38,6 @@ checkComponent(
     require("./dist/src/components/OtherPlayer").OtherPlayer
 );
 checkComponent(
-    "src/components/SelectAmount",
-    require("./dist/src/components/SelectAmount").SelectAmount
-);
-checkComponent(
     "src/components/SelectOption",
     require("./dist/src/components/SelectOption").SelectOption
 );

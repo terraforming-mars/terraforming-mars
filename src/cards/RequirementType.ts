@@ -10,7 +10,7 @@ export enum RequirementType {
     COLONIES = "Colony",
     FLOATERS = "Floater",
     CHAIRMAN = "Chairman",
-    PARTY_LEADERS = "Party leaders",
+    PARTY_LEADERS = "Party leader",
     TAG = "tag",
     PRODUCTION = "production",
     PARTY = "party",

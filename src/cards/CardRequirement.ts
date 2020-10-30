@@ -2,7 +2,8 @@ import { RequirementType } from "./RequirementType";
 import { Tags } from "./Tags";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { Resources } from "../Resources";
-import { firstLetterUpperCase } from "../utils/utils";
+
+const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
     constructor(
@@ -29,6 +30,7 @@ export class CardRequirement {
             RequirementType.CITIES,
             RequirementType.COLONIES,
             RequirementType.RESOURCE_TYPES,
+            RequirementType.PARTY_LEADERS,
         ];
 
         if (this._amount > 1 && withPlural.includes(this._type)) {

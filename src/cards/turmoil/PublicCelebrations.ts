@@ -2,7 +2,10 @@ import { IProjectCard } from "../IProjectCard";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
+import { CardMetadata } from "../../cards/CardMetadata";
+import { CardRequirements } from "../../cards/CardRequirements";
+import { CardRequirement } from "../../cards/CardRequirement";
 
 export class PublicCelebrations implements IProjectCard {
     public cost = 8;
@@ -24,4 +27,13 @@ export class PublicCelebrations implements IProjectCard {
     public getVictoryPoints() {
         return 2;
     }
+
+    public metadata: CardMetadata = {
+        description: "Requires that you are Chairman.",
+        cardNumber: "T10",
+        requirements: new CardRequirements([
+            CardRequirement.chairman(),
+        ]),
+        victoryPoints: 2,
+    };
 }

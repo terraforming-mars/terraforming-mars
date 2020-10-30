@@ -6,18 +6,18 @@ import { firstLetterUpperCase } from "../utils/utils";
 
 export class CardRequirement {
     constructor(
-        private type: RequirementType,
-        protected amount: number,
-        private isMax: boolean = false
+        private _type: RequirementType,
+        protected _amount: number,
+        private _isMax: boolean = false
     ) {}
 
     private amountToString(): string {
-        if (this.type === RequirementType.OXYGEN || this.type === RequirementType.VENUS) {
-            return `${this.amount}%`;
-        } else if (this.type === RequirementType.TEMPERATURE) {
-            return `${this.amount}°`;
+        if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
+            return `${this._amount}%`;
+        } else if (this._type === RequirementType.TEMPERATURE) {
+            return `${this._amount}°`;
         } else {
-            return this.amount !== -1 ? this.amount.toString() : "";
+            return this._amount !== -1 ? this._amount.toString() : "";
         }
     }
 
@@ -31,26 +31,26 @@ export class CardRequirement {
             RequirementType.RESOURCE_TYPES,
         ];
 
-        if (this.amount > 1 && withPlural.includes(this.type)) {
+        if (this._amount > 1 && withPlural.includes(this._type)) {
             return this.getTypePlural();
         }
 
-        return this.type;
+        return this._type;
     }
 
     //TODO (chosta): add to a top level class - preferrably translatable
     public getTypePlural(): string {
-        if (this.type === RequirementType.CITIES) {
+        if (this._type === RequirementType.CITIES) {
             return "Cities";
-        } else if (this.type === RequirementType.COLONIES) {
+        } else if (this._type === RequirementType.COLONIES) {
             return "Colonies";
         } else {
-            return `${this.type}s`;
+            return `${this._type}s`;
         }
     }
 
     public getLabel(): string {
-        let result: string = this.isMax ? "max " : "";
+        let result: string = this._isMax ? "max " : "";
         const amount = this.amountToString();
         if (amount !== "") {
             result += amount;
@@ -62,12 +62,18 @@ export class CardRequirement {
     }
 
     public max(): CardRequirement {
-        this.isMax = true;
+        this._isMax = true;
         return this;
     }
 
-    public getIsMax(): boolean {
-        return this.isMax;
+    public get isMax(): boolean {
+        return this._isMax;
+    }
+    public get type(): RequirementType {
+        return this._type;
+    }
+    public get amount(): number {
+        return this._amount;
     }
 }
 

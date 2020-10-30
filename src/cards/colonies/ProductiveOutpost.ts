@@ -1,15 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from '../CardType';
 import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { Game } from '../../Game';
 
 export class ProductiveOutpost implements IProjectCard {
-    public cost: number = 0;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.PRODUCTIVE_OUTPOST;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 0;
+    public tags = [];
+    public name = CardName.PRODUCTIVE_OUTPOST;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
       game.colonies.forEach(colony => {

@@ -7,10 +7,10 @@ import { Resources } from "../Resources";
 import { CardName } from '../CardName';
 
 export class LunarBeam implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.ENERGY];
-    public name: CardName = CardName.LUNAR_BEAM;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 13;
+    public tags = [Tags.EARTH, Tags.ENERGY];
+    public name = CardName.LUNAR_BEAM;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -3;

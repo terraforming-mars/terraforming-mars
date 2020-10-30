@@ -10,10 +10,10 @@ import { ICard } from "./ICard";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class RoboticWorkforce implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.ROBOTIC_WORKFORCE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 9;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.ROBOTIC_WORKFORCE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableCards(player, game).length > 0;

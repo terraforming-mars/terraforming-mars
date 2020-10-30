@@ -10,11 +10,11 @@ import { Game } from "../../Game";
 import { IResourceCard } from "../ICard";
 
 export class RedSpotObservatory implements IProjectCard, IResourceCard {
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
-    public name: CardName = CardName.RED_SPOT_OBSERVATORY;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 17;
+    public tags = [Tags.JOVIAN, Tags.SCIENCE];
+    public name = CardName.RED_SPOT_OBSERVATORY;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canAct(): boolean {

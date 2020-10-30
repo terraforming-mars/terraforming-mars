@@ -8,8 +8,8 @@ import { CardName } from "../../CardName";
 import { DrawCards } from "../../deferredActions/DrawCards";
 
 export class IoResearchOutpost extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
-    public name: CardName = CardName.IO_RESEARCH_OUTPOST;
+    public tags = [Tags.JOVIAN, Tags.SCIENCE];
+    public name = CardName.IO_RESEARCH_OUTPOST;
     public play(player: Player, game: Game) {     
         player.addProduction(Resources.TITANIUM);
         game.defer(new DrawCards(player, game, 1));

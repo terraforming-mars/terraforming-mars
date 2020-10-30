@@ -18,10 +18,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class LargeConvoy implements IProjectCard {
-    public cost: number = 36;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.LARGE_CONVOY;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 36;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.LARGE_CONVOY;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

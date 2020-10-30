@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class GeneRepair implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.GENE_REPAIR;
+    public cost = 12;
+    public tags = [Tags.SCIENCE];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.GENE_REPAIR;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3;
     }

@@ -9,10 +9,10 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class SpinInducingAsteroid implements IProjectCard {
-    public cost: number = 16;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.SPIN_INDUCING_ASTEROID;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 16;
+    public tags = [Tags.SPACE];
+    public name = CardName.SPIN_INDUCING_ASTEROID;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsVenusRequirements = game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 10;

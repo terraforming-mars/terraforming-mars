@@ -8,10 +8,10 @@ import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 
 export class AICentral implements IActionCard, IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.AI_CENTRAL;
+    public cost = 21;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.AI_CENTRAL;
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 3 &&
       player.getProduction(Resources.ENERGY) >= 1;

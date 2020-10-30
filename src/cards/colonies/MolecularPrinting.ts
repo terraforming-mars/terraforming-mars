@@ -7,10 +7,10 @@ import { Game } from '../../Game';
 
 
 export class MolecularPrinting implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.MOLECULAR_PRINTING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 11;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.MOLECULAR_PRINTING;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         let coloniesCount: number = 0;

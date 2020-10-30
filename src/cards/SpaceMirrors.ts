@@ -9,10 +9,10 @@ import { Game } from "../Game";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class SpaceMirrors implements IActionCard, IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
-    public name: CardName = CardName.SPACE_MIRRORS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 3;
+    public tags = [Tags.ENERGY, Tags.SPACE];
+    public name = CardName.SPACE_MIRRORS;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

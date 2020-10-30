@@ -11,10 +11,10 @@ import { CardType } from "../CardType";
 
 
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
-    public name: CardName = CardName.UNITED_NATIONS_MARS_INITIATIVE;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name = CardName.UNITED_NATIONS_MARS_INITIATIVE;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 40;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play() {
         return undefined;

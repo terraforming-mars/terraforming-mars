@@ -11,12 +11,12 @@ import { IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 
 export class OceanSanctuary implements IResourceCard {
-  public cost: number = 9;
-  public resourceType: ResourceType = ResourceType.ANIMAL;
+  public cost = 9;
+  public resourceType = ResourceType.ANIMAL;
   public resourceCount: number = 0;
-  public tags: Array<Tags> = [Tags.ANIMAL];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.OCEAN_SANCTUARY;
+  public tags = [Tags.ANIMAL];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.OCEAN_SANCTUARY;
   
   public canPlay(player: Player, game: Game): boolean {
     return game.board.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);

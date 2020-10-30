@@ -7,10 +7,10 @@ import {IActionCard} from './../ICard';
 import { CardName } from '../../CardName';
 
 export class SubCrustMeasurements implements IActionCard, IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL, Tags.EARTH];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.SUB_CRUST_MEASUREMENTS;
+    public cost = 20;
+    public tags = [Tags.SCIENCE, Tags.STEEL, Tags.EARTH];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.SUB_CRUST_MEASUREMENTS;
 
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 2;

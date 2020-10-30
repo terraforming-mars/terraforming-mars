@@ -7,10 +7,10 @@ import { CardName } from '../CardName';
 import { Board } from "../Board";
 
 export class RoverConstruction implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.ROVER_CONSTRUCTION;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 8;
+    public tags = [Tags.STEEL];
+    public name = CardName.ROVER_CONSTRUCTION;
+    public cardType = CardType.ACTIVE;
 
     public onTilePlaced(player: Player, space: ISpace) {
         if (Board.isCitySpace(space)) {

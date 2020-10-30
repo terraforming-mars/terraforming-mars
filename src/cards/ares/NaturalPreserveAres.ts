@@ -4,6 +4,6 @@ import { CardName } from "../../CardName";
 import { NaturalPreserve } from "../NaturalPreserve";
 
 export class NaturalPreserveAres extends NaturalPreserve {
-  public name: CardName = CardName.NATURAL_PRESERVE_ARES;
+  public name = CardName.NATURAL_PRESERVE_ARES;
   public adjacencyBonus: IAdjacencyBonus =  {bonus: [SpaceBonus.MEGACREDITS]};
 }

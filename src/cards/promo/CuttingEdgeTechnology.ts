@@ -6,10 +6,10 @@ import { Game } from '../../Game';
 import { CardName } from '../../CardName';
 
 export class CuttingEdgeTechnology implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.CUTTING_EDGE_TECHNOLOGY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.CUTTING_EDGE_TECHNOLOGY;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

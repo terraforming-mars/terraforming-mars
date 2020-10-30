@@ -5,10 +5,10 @@ import {Player} from '../Player';
 import { CardName } from '../CardName';
 
 export class AdvancedAlloys implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.ADVANCED_ALLOYS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 9;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.ADVANCED_ALLOYS;
+    public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
       player.increaseTitaniumValue();

@@ -7,10 +7,10 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
 export class MarketingExperts implements IProjectCard {
-  public cost: number = 5;
-  public tags: Array<Tags> = [Tags.EARTH];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.MARKETING_EXPERTS;
+  public cost = 5;
+  public tags = [Tags.EARTH];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.MARKETING_EXPERTS;
 
   public play(player: Player, _game: Game) {
     player.addProduction(Resources.MEGACREDITS, 1)

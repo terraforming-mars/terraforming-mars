@@ -8,10 +8,10 @@ import {SelectCard} from "../inputs/SelectCard";
 import { CardName } from "../CardName";
 
 export class BusinessContacts implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.BUSINESS_CONTACTS;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 7;
+    public tags = [Tags.EARTH];
+    public name = CardName.BUSINESS_CONTACTS;
+    public cardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
       const cards: Array<IProjectCard> = [

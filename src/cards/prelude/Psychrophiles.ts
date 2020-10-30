@@ -8,12 +8,12 @@ import { ResourceType } from "../../ResourceType";
 import { CardName } from "../../CardName";
 
 export class Psychrophiles implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 2;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 2;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.PSYCHROPHILES;
-    public cardType: CardType = CardType.ACTIVE;
+    public tags = [Tags.MICROBES];
+    public name = CardName.PSYCHROPHILES;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);

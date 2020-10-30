@@ -7,10 +7,10 @@ import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 
 export class QuantumCommunications implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.QUANTUM_COMMUNICATIONS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 8;
+    public tags = [];
+    public name = CardName.QUANTUM_COMMUNICATIONS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 4;

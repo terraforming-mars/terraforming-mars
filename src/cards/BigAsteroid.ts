@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class BigAsteroid implements IProjectCard {
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.BIG_ASTEROID;
+    public cost = 27;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.BIG_ASTEROID;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

@@ -7,10 +7,10 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
 export class ButterflyEffect implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.EVENT];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.BUTTERFLY_EFFECT;
+    public cost = 8;
+    public tags = [Tags.EVENT];
+    public cardType = CardType.EVENT;
+    public name = CardName.BUTTERFLY_EFFECT;
     public play(player: Player, game: Game) {
       player.increaseTerraformRating(game);
       game.defer(new ShiftAresGlobalParametersDeferred(game, player));

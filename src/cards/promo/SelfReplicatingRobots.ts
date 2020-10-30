@@ -14,10 +14,10 @@ export interface RobotCard {
 
 export class SelfReplicatingRobots implements IProjectCard {
 
-    public name: CardName = CardName.SELF_REPLICATING_ROBOTS;
-    public cost: number = 7;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.SELF_REPLICATING_ROBOTS;
+    public cost = 7;
+    public tags = [];
+    public cardType = CardType.ACTIVE;
     public targetCards: Array<RobotCard> = [];
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard): number {

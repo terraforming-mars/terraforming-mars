@@ -5,10 +5,10 @@ import { Player } from '../../Player';
 import { CardName } from '../../CardName';
 
 export class LuxuryFoods implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.LUXURY_FOODS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 8;
+    public tags = [];
+    public name = CardName.LUXURY_FOODS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
       return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);

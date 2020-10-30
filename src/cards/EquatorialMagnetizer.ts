@@ -11,10 +11,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.EQUATORIAL_MAGNETIZER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.STEEL];
+    public name = CardName.EQUATORIAL_MAGNETIZER;
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
 
     public play() {

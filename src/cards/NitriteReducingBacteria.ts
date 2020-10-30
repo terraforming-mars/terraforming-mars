@@ -15,12 +15,12 @@ import { REDS_RULING_POLICY_COST } from "../constants";
 import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 11;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 11;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;
+    public tags = [Tags.MICROBES];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.NITRITE_REDUCING_BACTERIA;
 
     public play(player: Player, game: Game) {
         game.defer(new DeferredAction(

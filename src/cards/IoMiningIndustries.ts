@@ -7,10 +7,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class IoMiningIndustries implements IProjectCard {
-    public cost: number = 41;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.IO_MINING_INDUSTRIES;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 41;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.IO_MINING_INDUSTRIES;
+    public cardType = CardType.AUTOMATED;
 
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN, false, false);

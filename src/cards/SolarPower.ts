@@ -7,10 +7,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class SolarPower implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.SOLAR_POWER;
+    public cost = 11;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.SOLAR_POWER;
 
     public play(player: Player) {
         player.addProduction(Resources.ENERGY);

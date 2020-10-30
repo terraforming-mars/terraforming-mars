@@ -8,10 +8,10 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class LawSuit implements IProjectCard {    
-    public cost: number = 2;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.LAW_SUIT;
+    public cost = 2;
+    public tags = [Tags.EARTH];
+    public cardType = CardType.EVENT;
+    public name = CardName.LAW_SUIT;
     public hasRequirements = false;
     
     public canPlay(player: Player) {

@@ -1,4 +1,3 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "../corporation/CorporationCard";
@@ -10,10 +9,10 @@ import { CardType } from "../CardType";
 
 
 export class ArcadianCommunities implements IActionCard, CorporationCard {
-    public name: CardName = CardName.ARCADIAN_COMMUNITIES;
-    public tags: Array<Tags> = [];
+    public name = CardName.ARCADIAN_COMMUNITIES;
+    public tags = [];
     public startingMegaCredits: number = 40; 
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace(

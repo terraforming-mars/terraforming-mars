@@ -10,10 +10,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class OrbitalReflectors  implements IProjectCard {
-    public cost: number = 26;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.ORBITAL_REFLECTORS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 26;
+    public tags = [Tags.VENUS, Tags.SPACE];
+    public name = CardName.ORBITAL_REFLECTORS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

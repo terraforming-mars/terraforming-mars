@@ -10,10 +10,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class UndergroundCity implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.UNDERGROUND_CITY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 18;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.UNDERGROUND_CITY;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 2 && game.board.getAvailableSpacesForCity(player).length > 0;

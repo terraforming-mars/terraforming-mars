@@ -8,11 +8,11 @@ import { ResourceType } from "../ResourceType";
 import { CardName } from '../CardName';
 
 export class PhysicsComplex implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: CardName = CardName.PHYSICS_COMPLEX;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.SCIENCE;
+    public cost = 12;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public name = CardName.PHYSICS_COMPLEX;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.SCIENCE;
     public resourceCount: number = 0;
 
     public getVictoryPoints(): number {

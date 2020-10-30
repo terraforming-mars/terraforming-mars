@@ -9,10 +9,10 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class Thorgate implements CorporationCard {
-    public name: CardName = CardName.THORGATE;
-    public tags: Array<Tags> = [Tags.ENERGY];
+    public name = CardName.THORGATE;
+    public tags = [Tags.ENERGY];
     public startingMegaCredits: number = 48;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.ENERGY) !== -1) {

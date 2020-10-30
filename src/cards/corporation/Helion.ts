@@ -8,10 +8,10 @@ import { CardType } from "../CardType";
 
 
 export class Helion implements CorporationCard {
-    public name: CardName = CardName.HELION;
-    public tags: Array<Tags> = [Tags.SPACE];
+    public name = CardName.HELION;
+    public tags = [Tags.SPACE];
     public startingMegaCredits: number = 42;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.canUseHeatAsMegaCredits = true;

@@ -8,10 +8,10 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
 export class LunarExports implements IProjectCard {
-    public cost: number = 19;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.LUNAR_EXPORTS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 19;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.LUNAR_EXPORTS;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
         return new OrOptions(

@@ -5,10 +5,10 @@ import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 
 export class RimFreighters implements IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.RIM_FREIGHTERS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 4;
+    public tags = [Tags.SPACE];
+    public name = CardName.RIM_FREIGHTERS;
+    public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
         player.colonyTradeDiscount++;

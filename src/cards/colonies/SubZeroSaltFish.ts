@@ -10,11 +10,11 @@ import { IResourceCard } from "../ICard";
 import { DecreaseAnyProduction } from "../../deferredActions/DecreaseAnyProduction";
 
 export class SubZeroSaltFish implements IProjectCard, IResourceCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: CardName = CardName.SUBZERO_SALT_FISH;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public cost = 5;
+    public tags = [Tags.ANIMAL];
+    public name = CardName.SUBZERO_SALT_FISH;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
 
     public canAct(): boolean {

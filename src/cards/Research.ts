@@ -7,10 +7,10 @@ import { Game } from "../Game";
 import { CardName } from '../CardName';
 
 export class Research implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
-    public name: CardName = CardName.RESEARCH;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 11;
+    public tags = [Tags.SCIENCE, Tags.SCIENCE];
+    public name = CardName.RESEARCH;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         for (let i = 0; i < 2; i++) {

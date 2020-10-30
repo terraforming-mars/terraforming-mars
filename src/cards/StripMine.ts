@@ -10,10 +10,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class StripMine implements IProjectCard {
-    public cost: number = 25;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.STRIP_MINE;
+    public cost = 25;
+    public tags = [Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.STRIP_MINE;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;

@@ -2,17 +2,16 @@ import { Game } from "../Game";
 import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
-import { Tags } from "./Tags";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 
 export class HiredRaiders implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.HIRED_RAIDERS;
+    public cost = 1;
+    public tags = [];
+    public cardType = CardType.EVENT;
+    public name = CardName.HIRED_RAIDERS;
 
     public play(player: Player, game: Game) {
         if (game.isSoloMode()) {

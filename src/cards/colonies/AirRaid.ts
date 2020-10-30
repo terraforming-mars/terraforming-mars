@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { CardName } from "../../CardName";
@@ -14,10 +13,10 @@ import { SelectOption } from "../../inputs/SelectOption";
 
 
 export class AirRaid implements IProjectCard {
-    public cost: number = 0;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.AIR_RAID;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 0;
+    public tags = [];
+    public name = CardName.AIR_RAID;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player): boolean {

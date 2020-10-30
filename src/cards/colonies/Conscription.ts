@@ -7,10 +7,10 @@ import { CardName } from '../../CardName';
 
 
 export class Conscription implements IProjectCard {
-    public cardType: CardType = CardType.EVENT;
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.CONSCRIPTION;
+    public cardType = CardType.EVENT;
+    public cost = 5;
+    public tags = [Tags.EARTH];
+    public name = CardName.CONSCRIPTION;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.EARTH) >= 2;

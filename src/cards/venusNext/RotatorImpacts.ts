@@ -14,11 +14,11 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.ROTATOR_IMPACTS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public cost = 6;
+    public tags = [Tags.SPACE];
+    public name = CardName.ROTATOR_IMPACTS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;

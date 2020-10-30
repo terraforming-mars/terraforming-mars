@@ -11,10 +11,10 @@ import { LogHelper } from "../../components/LogHelper";
 import { Game } from "../../Game";
 
 export class CorroderSuits implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.CORRODER_SUITS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 8;
+    public tags = [Tags.VENUS];
+    public name = CardName.CORRODER_SUITS;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         player.addProduction(Resources.MEGACREDITS,2);

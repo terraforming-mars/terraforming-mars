@@ -10,8 +10,8 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ByElection extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.BY_ELECTION;
+    public tags = [Tags.WILDCARD];
+    public name = CardName.BY_ELECTION;
     public canPlay(__player: Player, game: Game) {
         return game.turmoil !== undefined;
     }

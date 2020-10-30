@@ -11,10 +11,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class VenusMagnetizer implements IActionCard,IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.VENUS_MAGNETIZER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 7;
+    public tags = [Tags.VENUS];
+    public name = CardName.VENUS_MAGNETIZER;
+    public cardType = CardType.ACTIVE;
     
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));

@@ -8,8 +8,8 @@ import { CardName } from "../../CardName";
 import { DrawCards } from "../../deferredActions/DrawCards";
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.RESEARCH_NETWORK;
+    public tags = [Tags.WILDCARD];
+    public name = CardName.RESEARCH_NETWORK;
     public play(player: Player, game: Game) {     
         player.addProduction(Resources.MEGACREDITS);
         game.defer(new DrawCards(player, game, 3));

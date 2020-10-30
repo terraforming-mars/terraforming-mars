@@ -10,10 +10,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class DomedCrater implements IProjectCard {
-    public cost: number = 24;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.DOMED_CRATER;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 24;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.DOMED_CRATER;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
         game.getOxygenLevel() <= 7 + player.getRequirementsBonus(game) &&

@@ -9,10 +9,10 @@ import { AndOptions } from "../../inputs/AndOptions";
 import { SelectAmount } from "../../inputs/SelectAmount";
 
 export class Meltworks implements IActionCard, IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MELTWORKS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 4;
+    public tags = [Tags.STEEL];
+    public name = CardName.MELTWORKS;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

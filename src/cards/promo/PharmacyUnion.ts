@@ -15,11 +15,11 @@ import { CardType } from "../CardType";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class PharmacyUnion implements CorporationCard {
-    public name: CardName = CardName.PHARMACY_UNION;
-    public tags: Array<Tags> = [Tags.MICROBES, Tags.MICROBES];
+    public name = CardName.PHARMACY_UNION;
+    public tags = [Tags.MICROBES, Tags.MICROBES];
     public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
-    public resourceType: ResourceType = ResourceType.DISEASE;
-    public cardType: CardType = CardType.CORPORATION;
+    public resourceType = ResourceType.DISEASE;
+    public cardType = CardType.CORPORATION;
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
 

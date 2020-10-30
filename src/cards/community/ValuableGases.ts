@@ -10,8 +10,8 @@ import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDefe
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.VENUS];
-    public name: CardName = CardName.VALUABLE_GASES;
+    public tags = [Tags.JOVIAN, Tags.VENUS];
+    public name = CardName.VALUABLE_GASES;
 
     public play(player: Player) {     
         player.megaCredits += 6;

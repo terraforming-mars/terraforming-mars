@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class Worms implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.WORMS;
+    public cost = 8;
+    public tags = [Tags.MICROBES];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.WORMS;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }

@@ -13,10 +13,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class ProtectedValley implements IProjectCard {
-    public cost: number = 23;
-    public cardType: CardType = CardType.AUTOMATED;
-    public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-    public name: CardName = CardName.PROTECTED_VALLEY;
+    public cost = 23;
+    public cardType = CardType.AUTOMATED;
+    public tags = [Tags.PLANT, Tags.STEEL];
+    public name = CardName.PROTECTED_VALLEY;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

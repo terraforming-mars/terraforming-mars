@@ -5,7 +5,7 @@ import { Resources } from "../Resources";
 import { firstLetterUpperCase } from "../utils/utils";
 
 export class CardRequirement {
-    protected constructor(
+    constructor(
         private type: RequirementType,
         protected amount: number,
         private isMax: boolean = false
@@ -64,66 +64,6 @@ export class CardRequirement {
     public max(): CardRequirement {
         this.isMax = true;
         return this;
-    }
-
-    public static oceans(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.OCEANS, amount);
-    }
-
-    public static oxygen(amount: number): CardRequirement {
-        return new CardRequirement(RequirementType.OXYGEN, amount);
-    }
-
-    public static temperature(amount: number): CardRequirement {
-        return new CardRequirement(RequirementType.TEMPERATURE, amount);
-    }
-
-    public static venus(amount: number): CardRequirement {
-        return new CardRequirement(RequirementType.VENUS, amount);
-    }
-
-    public static tr(amount: number): CardRequirement {
-        return new CardRequirement(RequirementType.TR, amount);
-    }
-
-    public static chairman(): CardRequirement {
-        return new CardRequirement(RequirementType.CHAIRMAN, -1);
-    }
-
-    public static resourceTypes(amount: number): CardRequirement {
-        return new CardRequirement(RequirementType.RESOURCE_TYPES, amount);
-    }
-
-    public static forests(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.FORESTS, amount);
-    }
-
-    public static cities(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.CITIES, amount);
-    }
-
-    public static colonies(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.COLONIES, amount);
-    }
-
-    public static floaters(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.FLOATERS, amount);
-    }
-
-    public static partyLeaders(amount: number = -1): CardRequirement {
-        return new CardRequirement(RequirementType.PARTY_LEADERS, amount);
-    }
-
-    public static tag(tag: Tags, amount: number = -1): CardRequirement {
-        return new TagCardRequirement(tag, amount);
-    }
-
-    public static production(resource: Resources, amount: number = -1): CardRequirement {
-        return new ProductionCardRequirement(resource, amount);
-    }
-
-    public static party(party: PartyName): CardRequirement {
-        return new PartyCardRequirement(party);
     }
 
     public getIsMax(): boolean {

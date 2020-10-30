@@ -112,5 +112,5 @@ describe("CardRequirement", function () {
     });
     it("Party-reds: success", function(){
         expect(CardRequirement.partyLeaders(2).getLabel()).to.equal("2 Party leaders")
-    });    
+    });
 });

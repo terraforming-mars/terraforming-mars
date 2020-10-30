@@ -4,10 +4,10 @@ export const CardNumber = Vue.component("CardNumber", {
     props: {
         number: {
             type: String,
-            required: true       
-        }
+            required: true,
+        },
     },
     template: `
         <div class="card-nr">#{{ number }}</div>
-    `
-})
+    `,
+});

@@ -2,14 +2,14 @@ import { RequirementType } from "./RequirementType";
 import { Tags } from "./Tags";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { Resources } from "../Resources";
-import { firstLetterUpperCase } from "../utils/utils"; 
+import { firstLetterUpperCase } from "../utils/utils";
 
 export class CardRequirement {
     protected constructor(
-        private type: RequirementType, 
-        protected amount: number, 
-        private isMax: boolean = false) {
-    }
+        private type: RequirementType,
+        protected amount: number,
+        private isMax: boolean = false
+    ) {}
 
     private amountToString(): string {
         if (this.type === RequirementType.OXYGEN || this.type === RequirementType.VENUS) {
@@ -17,7 +17,7 @@ export class CardRequirement {
         } else if (this.type === RequirementType.TEMPERATURE) {
             return `${this.amount}°`;
         } else {
-            return this.amount !== -1 ? this.amount.toString(): "";
+            return this.amount !== -1 ? this.amount.toString() : "";
         }
     }
 
@@ -28,7 +28,7 @@ export class CardRequirement {
             RequirementType.FORESTS,
             RequirementType.CITIES,
             RequirementType.COLONIES,
-            RequirementType.RESOURCE_TYPES
+            RequirementType.RESOURCE_TYPES,
         ];
 
         if (this.amount > 1 && withPlural.includes(this.type)) {
@@ -37,25 +37,25 @@ export class CardRequirement {
 
         return this.type;
     }
-
+    
     public getTypePlural(): string {
-        if(this.type === RequirementType.CITIES) {
+        if (this.type === RequirementType.CITIES) {
             return "Cities";
-        } else if(this.type === RequirementType.COLONIES) {
+        } else if (this.type === RequirementType.COLONIES) {
             return "Colonies";
         } else {
             return `${this.type}s`;
         }
     }
-     
+
     public getLabel(): string {
         const parts: Array<string> = [];
         const prefix = this.isMax ? "max" : "";
         const amount = this.amountToString();
-        if(prefix !== "") {
+        if (prefix !== "") {
             parts.push(prefix);
         }
-        if(amount !== "") {
+        if (amount !== "") {
             parts.push(amount);
         }
         parts.push(this.parseType());
@@ -99,7 +99,7 @@ export class CardRequirement {
     public static forests(amount: number): CardRequirement {
         return new CardRequirement(RequirementType.FORESTS, amount);
     }
-    
+
     public static cities(amount: number): CardRequirement {
         return new CardRequirement(RequirementType.CITIES, amount);
     }
@@ -115,7 +115,7 @@ export class CardRequirement {
     public static partyLeaders(amount: number): CardRequirement {
         return new CardRequirement(RequirementType.PARTY_LEADERS, amount);
     }
-    
+
     public static tag(tag: Tags, amount: number): CardRequirement {
         return new TagCardRequirement(tag, amount);
     }
@@ -130,7 +130,7 @@ export class CardRequirement {
 
     public getIsMax(): boolean {
         return this.isMax;
-    }  
+    }
 }
 
 export class TagCardRequirement extends CardRequirement {
@@ -150,7 +150,7 @@ export class ProductionCardRequirement extends CardRequirement {
 
     protected parseType(): string {
         return `${firstLetterUpperCase(this.resource)} production`;
-    }    
+    }
 }
 
 export class PartyCardRequirement extends CardRequirement {
@@ -159,5 +159,5 @@ export class PartyCardRequirement extends CardRequirement {
     }
     protected parseType(): string {
         return this.party.toLowerCase();
-    }  
+    }
 }

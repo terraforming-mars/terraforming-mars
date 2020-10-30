@@ -26,9 +26,9 @@ export class AdvancedEcosystems implements IProjectCard {
         description: "Requires a Plant tag, a Microbe tag, and an Animal tag.",
         cardNumber: "135",
         requirements: new CardRequirements([
-            CardRequirement.tag(Tags.PLANT, -1),
-            CardRequirement.tag(Tags.MICROBES, -1),
-            CardRequirement.tag(Tags.ANIMAL, -1),
+            CardRequirement.tag(Tags.PLANT),
+            CardRequirement.tag(Tags.MICROBES),
+            CardRequirement.tag(Tags.ANIMAL),
         ]),
         victoryPoints: 3,
     };

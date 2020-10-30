@@ -52,7 +52,7 @@ export class CardRequirement {
     public getLabel(): string {
         let result: string = this.isMax ? "max " : "";
         const amount = this.amountToString();
-        if(amount !== ""){
+        if (amount !== "") {
             result += amount;
             result += " ";
         }
@@ -66,7 +66,7 @@ export class CardRequirement {
         return this;
     }
 
-    public static oceans(amount: number): CardRequirement {
+    public static oceans(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.OCEANS, amount);
     }
 
@@ -94,31 +94,31 @@ export class CardRequirement {
         return new CardRequirement(RequirementType.RESOURCE_TYPES, amount);
     }
 
-    public static forests(amount: number): CardRequirement {
+    public static forests(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.FORESTS, amount);
     }
 
-    public static cities(amount: number): CardRequirement {
+    public static cities(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.CITIES, amount);
     }
 
-    public static colonies(amount: number): CardRequirement {
+    public static colonies(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.COLONIES, amount);
     }
 
-    public static floaters(amount: number): CardRequirement {
+    public static floaters(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.FLOATERS, amount);
     }
 
-    public static partyLeaders(amount: number): CardRequirement {
+    public static partyLeaders(amount: number = -1): CardRequirement {
         return new CardRequirement(RequirementType.PARTY_LEADERS, amount);
     }
 
-    public static tag(tag: Tags, amount: number): CardRequirement {
+    public static tag(tag: Tags, amount: number = -1): CardRequirement {
         return new TagCardRequirement(tag, amount);
     }
 
-    public static production(resource: Resources, amount: number): CardRequirement {
+    public static production(resource: Resources, amount: number = -1): CardRequirement {
         return new ProductionCardRequirement(resource, amount);
     }
 

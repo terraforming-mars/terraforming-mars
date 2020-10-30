@@ -8,6 +8,9 @@ describe("CardRequirement", function () {
     it("ocean: success", function () {
         expect(CardRequirement.oceans(-1).getLabel()).to.equal("Ocean");
     });
+    it("ocean: success - default", function () {
+        expect(CardRequirement.oceans().getLabel()).to.equal("Ocean");
+    });
     it("oceans: success", function () {
         expect(CardRequirement.oceans(3).getLabel()).to.equal("3 Oceans");
     });
@@ -68,6 +71,9 @@ describe("CardRequirement", function () {
     it("Forest: success", function(){
         expect(CardRequirement.forests(-1).getLabel()).to.equal("Forest")
     });
+    it("Forest: success - default", function(){
+        expect(CardRequirement.forests().getLabel()).to.equal("Forest")
+    });
     it("Forest-max: success", function(){
         expect(CardRequirement.forests(1).max().getLabel()).to.equal("max 1 Forest")
     });
@@ -76,6 +82,9 @@ describe("CardRequirement", function () {
     });
     it("Floater: success", function(){
         expect(CardRequirement.floaters(-1).getLabel()).to.equal("Floater")
+    });
+    it("Floater: success - default", function(){
+        expect(CardRequirement.floaters().getLabel()).to.equal("Floater")
     });
     it("Floater-max: success", function(){
         expect(CardRequirement.floaters(1).max().getLabel()).to.equal("max 1 Floater")
@@ -95,11 +104,17 @@ describe("CardRequirement", function () {
     it("Tag-science: success", function(){
         expect(CardRequirement.tag(Tags.SCIENCE, -1).getLabel()).to.equal("Science")
     });
+    it("Tag-science: default value", function(){
+        expect(CardRequirement.tag(Tags.SCIENCE).getLabel()).to.equal("Science")
+    });
     it("Production-steel: success", function(){
         expect(CardRequirement.production(Resources.STEEL, -1).getLabel()).to.equal("Steel production")
     });
     it("Production-titanium: success", function(){
         expect(CardRequirement.production(Resources.TITANIUM, -1).getLabel()).to.equal("Titanium production")
+    });
+    it("Production-titanium: success - default", function(){
+        expect(CardRequirement.production(Resources.TITANIUM).getLabel()).to.equal("Titanium production")
     });
     it("Production-energy(2): success", function(){
         expect(CardRequirement.production(Resources.ENERGY, 2).getLabel()).to.equal("2 Energy production")

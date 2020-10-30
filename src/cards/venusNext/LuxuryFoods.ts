@@ -29,9 +29,9 @@ export class LuxuryFoods implements IProjectCard {
         description: "Requires that you have a Varth tag, an Earth tag and a Jovian tag.",
         cardNumber: "T10",
         requirements: new CardRequirements([
-            CardRequirement.tag(Tags.VENUS, -1),
-            CardRequirement.tag(Tags.EARTH, -1),
-            CardRequirement.tag(Tags.JOVIAN, -1),
+            CardRequirement.tag(Tags.VENUS),
+            CardRequirement.tag(Tags.EARTH),
+            CardRequirement.tag(Tags.JOVIAN),
         ]),
         victoryPoints: 2,
     };

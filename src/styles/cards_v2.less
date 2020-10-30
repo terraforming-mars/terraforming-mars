@@ -10,6 +10,70 @@
     }
     .card-content-wrapper {
         position: relative;
+        .card-requirements {
+            width: 70%;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            font-weight: normal;
+            font-size: 15px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(
+                90deg,
+                rgba(243, 161, 14, 1) 0%,
+                rgba(253, 234, 37, 1) 45%,
+                rgba(253, 234, 37, 1) 55%,
+                rgba(243, 161, 14, 1) 100%
+            );
+            font-family: Ubuntu;
+            font-weight: bold;
+        }
+        .card-requirements-max {
+            background-image: url(./assets/requisites/max_big.png);
+            background-size: 164px 34px;
+            background-position: -4px -4px;
+            filter: grayscale(0.2);
+        }
+        .card-content {
+            // background: grey;
+            color: black;
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            width: 220px;
+            height: 226px;
+            padding: 10px;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: bold;
+            text-align: center;
+            .card-description {
+                margin-top: 8px;
+                color: #020202;
+                font-size: 11px;
+                line-height: 13px;
+                font-weight: normal;
+            }
+            .card-points {
+                position: absolute;
+                font-family: Prototype;
+                font-weight: normal;
+                bottom: 8px;
+                right: 8px;
+                width: 80px;
+                height: 42px;
+                text-align: center;
+                border-radius: 12px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                background-color: #cda282;
+                background: linear-gradient(#cc8b00, #805700, #805700);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            }
+        }
         .temporary-content-wrapper {
             position: relative;
             .corporation-icon {
@@ -45,8 +109,7 @@
                 justify-content: flex-end;
                 margin-right: -6px;
                 .card-tag {
-                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
-                        0 0 0 2px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                     margin-left: 4px;
                     width: 40px;
                     height: 40px;
@@ -89,8 +152,7 @@
                 line-height: 15px;
                 text-align: center;
                 font-size: 13px;
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
-                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 background: #cccccc;
                 background-color: rgb(255, 204, 100);
                 background: linear-gradient(
@@ -114,8 +176,7 @@
                 line-height: 22px;
                 text-align: center;
                 font-size: 12px;
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
-                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 background-color: rgb(235, 118, 171);
                 border-radius: 14px 2px 2px 2px;
                 border-top: 2px solid rgb(221, 221, 221);
@@ -175,8 +236,7 @@
     font-weight: bold;
     background: red;
     color: white;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3),
-        3px 3px 3px #444;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3), 3px 3px 3px #444;
     font-family: Prototype;
     font-weight: normal;
     text-shadow: 0 0 1px black;

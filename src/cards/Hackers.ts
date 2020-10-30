@@ -2,16 +2,15 @@ import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { Tags } from "./Tags";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Hackers implements IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.HACKERS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 3;
+    public tags = [];
+    public name = CardName.HACKERS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player): boolean {

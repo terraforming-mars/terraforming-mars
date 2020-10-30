@@ -12,10 +12,10 @@ import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferre
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class RestrictedArea implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.RESTRICTED_AREA;
+    public cost = 11;
+    public tags = [Tags.SCIENCE];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.RESTRICTED_AREA;
     public hasRequirements = false;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 

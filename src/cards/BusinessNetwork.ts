@@ -11,10 +11,10 @@ import { LogHelper } from "../components/LogHelper";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.BUSINESS_NETWORK;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 4;
+    public tags = [Tags.EARTH];
+    public name = CardName.BUSINESS_NETWORK;
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
 
     public canPlay(player: Player): boolean {

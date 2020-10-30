@@ -22,12 +22,12 @@ describe("Ants", function () {
     
     it("Can't play without oxygen", function () {
         (game as any).oxygenLevel = 3;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play();
         card.resourceCount += 5;
@@ -39,18 +39,18 @@ describe("Ants", function () {
         const nitriteReducingBacteria = new NitriteReducingBacteria();
 
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player2.playedCards.push(tardigrades, nitriteReducingBacteria);
         tardigrades.resourceCount++;
         nitriteReducingBacteria.resourceCount++;
         
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
-        expect(action!.cards.length).to.eq(2);
+        expect(action!.cards).has.lengthOf(2);
         expect(action!.cards[0]).to.eq(tardigrades);
         action!.cb([action!.cards[0]]);
         expect(card.resourceCount).to.eq(1);
@@ -64,10 +64,10 @@ describe("Ants", function () {
         player.playedCards.push(card);
         player2.playedCards.push(tardigrades);
         tardigrades.resourceCount += 2;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         player2.playedCards.push(protectedHabitats);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Only microbes are available to steal", function () {

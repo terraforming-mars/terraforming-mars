@@ -8,10 +8,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class EnergyTapping implements IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public name: CardName = CardName.ENERGY_TAPPING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 3;
+    public tags = [Tags.ENERGY];
+    public name = CardName.ENERGY_TAPPING;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public play(player: Player, game: Game) {

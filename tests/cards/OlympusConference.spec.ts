@@ -8,6 +8,7 @@ import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { OrOptions } from "../../src/inputs/OrOptions";
 import { Research } from "../../src/cards/Research";
+import { DeferredActionsQueue } from "../../src/deferredActions/DeferredActionsQueue";
 
 describe("OlympusConference", function () {
     let card : OlympusConference, player : Player, game : Game;
@@ -26,50 +27,50 @@ describe("OlympusConference", function () {
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
         card.onCardPlayed(player, game, new Bushes()); 
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
 
         // No resource
         card.onCardPlayed(player, game, card);
-        expect(game.deferredActions.length).to.eq(1);
-        const input = game.deferredActions[0].execute();
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // Resource available
         card.onCardPlayed(player, game, card);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
 
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(1);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(1);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Plays twice for Research", function () {
         player.playedCards.push(card);
         card.onCardPlayed(player, game, new Research());
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // No resource, can't draw, resource automatically added
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         // Resource on card, can draw
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
 
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Triggers before Mars University", function() {
@@ -85,17 +86,17 @@ describe("OlympusConference", function () {
         player.playCard(game, scienceTagCard);
 
         // OC asking to draw & MU asking to discard
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
 
 
         // Reset the state
-        game.deferredActions = [];
+        game.deferredActions = new DeferredActionsQueue();
         player.playedCards = [];
 
 
@@ -108,10 +109,10 @@ describe("OlympusConference", function () {
         player.playCard(game, scienceTagCard);
 
         // OC asking to draw & MU asking to discard
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
         // OC's trigger should be the first one
-        const orOptions2 = game.deferredActions[0].execute() as OrOptions;
+        const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
         game.deferredActions.shift();
         orOptions2.options[1].cb();
         expect(card.resourceCount).to.eq(2);

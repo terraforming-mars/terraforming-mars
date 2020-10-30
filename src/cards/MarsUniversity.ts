@@ -7,18 +7,18 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from "../CardName";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class MarsUniversity implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: CardName = CardName.MARS_UNIVERSITY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 8;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public name = CardName.MARS_UNIVERSITY;
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
         for (let i = 0; i < scienceTags; i++) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => {
                     // No card to discard

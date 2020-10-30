@@ -9,10 +9,10 @@ import { PartyName } from '../../turmoil/parties/PartyName';
 
 
 export class DiasporaMovement implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.DIASPORA_MOVEMENT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 7;
+    public tags = [Tags.JOVIAN];
+    public name = CardName.DIASPORA_MOVEMENT;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

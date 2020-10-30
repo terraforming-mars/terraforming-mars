@@ -12,10 +12,10 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
 export class ProjectWorkshop implements CorporationCard {
-    public name: CardName =  CardName.PROJECT_WORKSHOP;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name =  CardName.PROJECT_WORKSHOP;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 39;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.steel = 1;

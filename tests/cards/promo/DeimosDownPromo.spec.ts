@@ -18,10 +18,10 @@ describe("DeimosDownPromo", function () {
 
     it("Should play without plants", function () {
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
     });
 
@@ -29,14 +29,14 @@ describe("DeimosDownPromo", function () {
         player2.plants = 5;
 
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
 
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
         // Choose Remove 5 plants option
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb([player2]);
 
         expect(player2.plants).to.eq(0);
@@ -47,7 +47,7 @@ describe("DeimosDownPromo", function () {
 
         player.plants = 15;
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);

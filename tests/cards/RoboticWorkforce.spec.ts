@@ -19,12 +19,12 @@ describe("RoboticWorkforce", function () {
     });
 
     it("Can't play if no building cards to copy", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should throw", function () {
         player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
-        expect(card.canPlay(player,game)).to.eq(false);
+        expect(card.canPlay(player,game)).is.not.true;
         const action = card.play(player, game);
         expect(action).is.undefined;
     });

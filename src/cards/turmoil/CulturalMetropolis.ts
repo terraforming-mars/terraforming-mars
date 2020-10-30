@@ -10,10 +10,10 @@ import { PlaceCityTile } from "../../deferredActions/PlaceCityTile";
 import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 export class CulturalMetropolis implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.CULTURAL_METROPOLIS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 20;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.CULTURAL_METROPOLIS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

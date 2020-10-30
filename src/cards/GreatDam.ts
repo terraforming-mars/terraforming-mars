@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class GreatDam implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.GREAT_DAM;
+    public cost = 12;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.GREAT_DAM;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
     }

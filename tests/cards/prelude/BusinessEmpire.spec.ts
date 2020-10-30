@@ -16,13 +16,17 @@ describe("BusinessEmpire", function () {
 
     it("Can't play", function () {
         player.megaCredits = 5;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.megaCredits = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
-        card.play(player);
+        expect(card.canPlay(player, game)).is.true;
+        card.play(player, game);
+
+        // SelectHowToPayDeferred
+        game.deferredActions.runNext();
+
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
     });

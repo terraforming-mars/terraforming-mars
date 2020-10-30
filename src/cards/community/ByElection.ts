@@ -7,11 +7,11 @@ import { Game } from "../../Game";
 import { ALL_PARTIES } from "../../turmoil/Turmoil";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ByElection extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.BY_ELECTION;
+    public tags = [Tags.WILDCARD];
+    public name = CardName.BY_ELECTION;
     public canPlay(__player: Player, game: Game) {
         return game.turmoil !== undefined;
     }
@@ -31,7 +31,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
             })
         )];
 
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => setRulingParty
         ));

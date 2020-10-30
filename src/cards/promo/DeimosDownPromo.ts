@@ -13,10 +13,10 @@ import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE } from "../../constants";
 import { RemoveAnyPlants } from "../../deferredActions/RemoveAnyPlants";
 
 export class DeimosDownPromo implements IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.DEIMOS_DOWN_PROMO;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 31;
+    public tags = [Tags.SPACE];
+    public name = CardName.DEIMOS_DOWN_PROMO;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

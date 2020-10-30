@@ -12,11 +12,11 @@ import { IResourceCard } from './ICard';
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Herbivores implements IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.HERBIVORES;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public cost = 12;
+    public tags = [Tags.ANIMAL];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.HERBIVORES;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {

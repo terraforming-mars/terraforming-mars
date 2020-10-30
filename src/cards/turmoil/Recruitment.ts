@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -7,10 +6,10 @@ import { Game } from "../../Game";
 import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 export class Recruitment implements IProjectCard {
-    public cost: number = 2;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.RECRUITMENT;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 2;
+    public tags = [];
+    public name = CardName.RECRUITMENT;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

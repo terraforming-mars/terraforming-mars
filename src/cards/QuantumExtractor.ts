@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class QuantumExtractor implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.ENERGY];
-    public name: CardName = CardName.QUANTUM_EXTRACTOR;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 13;
+    public tags = [Tags.SCIENCE, Tags.ENERGY];
+    public name = CardName.QUANTUM_EXTRACTOR;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 4;
     }

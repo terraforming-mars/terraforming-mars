@@ -9,10 +9,10 @@ import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class Greenhouses implements IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-    public name: CardName = CardName.GREENHOUSES;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 6;
+    public tags = [Tags.PLANT, Tags.STEEL];
+    public name = CardName.GREENHOUSES;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         const qty = game.getCitiesInPlay();

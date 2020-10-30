@@ -12,14 +12,14 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 import { CardType } from "../CardType";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class PharmacyUnion implements CorporationCard {
-    public name: CardName = CardName.PHARMACY_UNION;
-    public tags: Array<Tags> = [Tags.MICROBES, Tags.MICROBES];
+    public name = CardName.PHARMACY_UNION;
+    public tags = [Tags.MICROBES, Tags.MICROBES];
     public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
-    public resourceType: ResourceType = ResourceType.DISEASE;
-    public cardType: CardType = CardType.CORPORATION;
+    public resourceType = ResourceType.DISEASE;
+    public cardType = CardType.CORPORATION;
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
 
@@ -46,7 +46,7 @@ export class PharmacyUnion implements CorporationCard {
         if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
             // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
             if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === true) {
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => {
                         const orOptions = new OrOptions(
@@ -70,25 +70,16 @@ export class PharmacyUnion implements CorporationCard {
                         orOptions.title = "Choose the order of tag resolution for Pharmacy Union";
                         return orOptions;
                     }
-                ));
+                ), true); // Make it a priority
                 return undefined;
             }
         }
 
-
-        if (hasMicrobesTag) {
-            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
-            const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
-            const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
-            player.addResourceTo(this, microbeTagCount);
-            player.megaCredits -= megaCreditsLost;
-            game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
-        }
             
         if (isPharmacyUnion && hasScienceTag) {
             const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
             for (let i = 0; i < scienceTags; i++) {
-                game.defer(new SimpleDeferredAction(
+                game.defer(new DeferredAction(
                     player,
                     () => {
                         if (this.isDisabled) return undefined;
@@ -123,8 +114,24 @@ export class PharmacyUnion implements CorporationCard {
                             })
                         );
                     }
-                ));
+                ), true); // Make it a priority
             }
+        }
+
+
+        if (hasMicrobesTag) {
+            game.defer(new DeferredAction(
+                player,
+                () => {
+                    const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+                    const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
+                    const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
+                    player.addResourceTo(this, microbeTagCount);
+                    player.megaCredits -= megaCreditsLost;
+                    game.log("${0} added a disease to ${1} and lost ${2} MC", b => b.player(player).card(this).number(megaCreditsLost));
+                    return undefined;
+                }
+            ), true); // Make it a priority
         }
 
         return undefined;

@@ -7,10 +7,10 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class SeptumTribus implements IActionCard, CorporationCard {
-    public name: CardName = CardName.SEPTUM_TRIBUS;
-    public tags: Array<Tags> = [Tags.WILDCARD];
+    public name = CardName.SEPTUM_TRIBUS;
+    public tags = [Tags.WILDCARD];
     public startingMegaCredits: number = 36;
-    public cardType: CardType = CardType.CORPORATION; 
+    public cardType = CardType.CORPORATION; 
     public play() {
         return undefined;
     }

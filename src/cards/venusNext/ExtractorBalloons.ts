@@ -13,11 +13,11 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.EXTRACTOR_BALLOONS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 21;
+    public tags = [Tags.VENUS];
+    public name = CardName.EXTRACTOR_BALLOONS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public play() {

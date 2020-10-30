@@ -23,7 +23,7 @@ describe("FloaterTechnology", function () {
     });
 
     it("Cannot act without targets", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
     
     it("Acts automatically with single targets", function () {
@@ -31,8 +31,8 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles);
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
-        const input = game.deferredActions[0].execute();
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
         expect(input).is.undefined;
         expect(dirigibles.resourceCount).to.eq(1);
     });
@@ -43,9 +43,9 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles, floatingHabs);
 
         card.action(player, game);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
         selectCard.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(1);
         expect(dirigibles.resourceCount).to.eq(0);

@@ -10,10 +10,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class OreProcessor implements IActionCard, IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.ORE_PROCESSOR;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 13;
+    public tags = [Tags.STEEL];
+    public name = CardName.ORE_PROCESSOR;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

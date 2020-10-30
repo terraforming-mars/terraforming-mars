@@ -15,14 +15,15 @@ describe("GMOContract", function () {
 
         if (game.turmoil !== undefined) {
             game.turmoil.rulingParty = game.turmoil.getPartyByName(PartyName.REDS);
-            expect(card.canPlay(player, game)).to.eq(false);
+            expect(card.canPlay(player, game)).is.not.true;
             let greens = game.turmoil.getPartyByName(PartyName.GREENS);
             if (greens !== undefined) {
                 greens.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
+                expect(card.canPlay(player, game)).is.true; 
             }
             card.play();
             card.onCardPlayed(player,game,card);
+            game.deferredActions.runNext();
             expect(player.megaCredits).to.eq(2);
         } 
     });

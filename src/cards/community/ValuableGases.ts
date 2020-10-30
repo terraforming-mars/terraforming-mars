@@ -7,11 +7,11 @@ import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ResourceType } from "../../ResourceType";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.VENUS];
-    public name: CardName = CardName.VALUABLE_GASES;
+    public tags = [Tags.JOVIAN, Tags.VENUS];
+    public name = CardName.VALUABLE_GASES;
 
     public play(player: Player) {     
         player.megaCredits += 6;
@@ -22,7 +22,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         const playableCards = player.getPlayableCards(game).filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
             
         if (playableCards.length > 0) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => new SelectCard(
                     "Select Venus floater card to play and add 4 floaters",

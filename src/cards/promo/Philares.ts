@@ -9,13 +9,13 @@ import { SelectAmount } from "../../inputs/SelectAmount";
 import { AndOptions } from "../../inputs/AndOptions";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
-import { SimpleDeferredAction } from "../../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class Philares implements CorporationCard {
-    public name: CardName = CardName.PHILARES;
-    public tags: Array<Tags> = [Tags.STEEL];
+    public name = CardName.PHILARES;
+    public tags = [Tags.STEEL];
     public startingMegaCredits: number = 47;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 
@@ -81,7 +81,7 @@ export class Philares implements CorporationCard {
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
         selectResources.title = "Philares effect: select " + resourceCount + " resource(s)";
-        game.defer(new SimpleDeferredAction(
+        game.defer(new DeferredAction(
             player,
             () => selectResources
         ));

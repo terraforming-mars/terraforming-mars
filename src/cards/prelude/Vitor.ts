@@ -10,10 +10,10 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class Vitor implements CorporationCard {
-    public name: CardName = CardName.VITOR;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name = CardName.VITOR;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
         return new SelectOption("Fund " + award.name + " award", "Confirm", () => {

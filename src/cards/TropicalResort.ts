@@ -7,10 +7,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class TropicalResort implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.TROPICAL_RESORT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 13;
+    public tags = [Tags.STEEL];
+    public name = CardName.TROPICAL_RESORT;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.HEAT) >= 2;

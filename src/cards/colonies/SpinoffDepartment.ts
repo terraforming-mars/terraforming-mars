@@ -7,10 +7,10 @@ import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 
 export class SpinoffDepartment implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.SPINOFF_DEPARTMENT
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 10;
+    public tags = [Tags.STEEL];
+    public name = CardName.SPINOFF_DEPARTMENT
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (card.cost >= 20) {

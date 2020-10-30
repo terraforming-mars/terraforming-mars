@@ -7,10 +7,10 @@ import { Game } from "../../Game";
 import { RemoveAnyPlants } from "../../deferredActions/RemoveAnyPlants";
 
 export class ImpactorSwarm implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.IMPACTOR_SWARM;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 11;
+    public tags = [Tags.SPACE];
+    public name = CardName.IMPACTOR_SWARM;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.JOVIAN) >= 2;

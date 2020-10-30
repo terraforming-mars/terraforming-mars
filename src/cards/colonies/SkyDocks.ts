@@ -5,10 +5,10 @@ import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 
 export class SkyDocks implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: CardName = CardName.SKY_DOCKS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 18;
+    public tags = [Tags.SPACE, Tags.EARTH];
+    public name = CardName.SKY_DOCKS;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.EARTH) >= 2;

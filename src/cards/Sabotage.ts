@@ -1,6 +1,5 @@
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
-import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
@@ -9,10 +8,10 @@ import { CardName } from "../CardName";
 import { SelectOption } from "../inputs/SelectOption";
 
 export class Sabotage implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.SABOTAGE;
+    public cost = 1;
+    public tags = [];
+    public cardType = CardType.EVENT;
+    public name = CardName.SABOTAGE;
 
     public play(player: Player, game: Game) {
         if (game.isSoloMode()) return undefined;

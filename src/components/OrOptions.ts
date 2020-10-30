@@ -2,18 +2,32 @@ import Vue, { VNode } from "vue";
 import { PlayerInputFactory } from "./PlayerInputFactory";
 import { $t } from "../directives/i18n";
 import { Button } from "../components/common/Button";
+import { PlayerModel } from "../models/PlayerModel";
+import { PlayerInputModel } from "../models/PlayerInputModel";
 
 let unique: number = 0;
 
 export const OrOptions = Vue.component("or-options", {
-    props: [
-        "player",
-        "players",
-        "playerinput",
-        "onsave",
-        "showsave",
-        "showtitle",
-    ],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        players: {
+            type: Object as () => Array<PlayerModel>
+        },
+        playerinput: {
+            type: Object as () => PlayerInputModel
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             selectedOption: 0,
@@ -45,6 +59,9 @@ export const OrOptions = Vue.component("or-options", {
             );
         }
         const optionElements: Array<VNode> = [];
+        if (this.playerinput.options === undefined) {
+            throw new Error("no options provided for OrOptions");
+        }
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: { [key: string]: any } = {
                 name: "selectOption" + unique,

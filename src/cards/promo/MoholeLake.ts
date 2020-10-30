@@ -14,10 +14,10 @@ import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES } from "../..
 import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class MoholeLake implements IActionCard, IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MOHOLE_LAKE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 31;
+    public tags = [Tags.STEEL];
+    public name = CardName.MOHOLE_LAKE;
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

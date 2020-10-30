@@ -9,11 +9,11 @@ import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 
 export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.ANIMAL];
-    public name: CardName = CardName.STRATOSPHERIC_BIRDS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public cost = 12;
+    public tags = [Tags.VENUS, Tags.ANIMAL];
+    public name = CardName.STRATOSPHERIC_BIRDS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);

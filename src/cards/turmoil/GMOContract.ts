@@ -6,13 +6,13 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
-
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class GMOContract implements IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.MICROBES, Tags.SCIENCE];
-    public name: CardName = CardName.GMO_CONTRACT;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 3;
+    public tags = [Tags.MICROBES, Tags.SCIENCE];
+    public name = CardName.GMO_CONTRACT;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
@@ -21,10 +21,16 @@ export class GMOContract implements IProjectCard {
         return false;
     }
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
         let amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
         if (amount > 0) {
-            player.setResource(Resources.MEGACREDITS, amount * 2);
+            game.defer(new DeferredAction(
+                player,
+                () => {
+                    player.setResource(Resources.MEGACREDITS, amount * 2);
+                    return undefined;
+                }
+            ));
         }
     }
 

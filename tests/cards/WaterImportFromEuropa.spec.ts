@@ -16,7 +16,7 @@ describe("WaterImportFromEuropa", function () {
     });
 
     it("Can't act", function () {
-        expect(card.canAct(player,game)).to.eq(false);
+        expect(card.canAct(player,game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -31,11 +31,11 @@ describe("WaterImportFromEuropa", function () {
         const action = card.action(player, game);
         expect(action).is.undefined;
 
-        game.runDeferredAction(game.deferredActions[0], () => {}); // HowToPay
+        game.deferredActions.runNext(); // HowToPay
         expect(player.megaCredits).to.eq(1);
 
-        expect(game.deferredActions.length).to.eq(1);
-        const selectOcean = game.deferredActions[0].execute() as SelectSpace;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectOcean = game.deferredActions.next()!.execute() as SelectSpace;
         selectOcean.cb(selectOcean.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
     });
@@ -44,6 +44,6 @@ describe("WaterImportFromEuropa", function () {
         maxOutOceans(player, game);
         player.megaCredits = 12;
         
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
     });
 });

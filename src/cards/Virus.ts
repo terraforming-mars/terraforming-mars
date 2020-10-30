@@ -13,10 +13,10 @@ import { ICard } from "./ICard";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class Virus implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.VIRUS;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 1;
+    public tags = [Tags.MICROBES];
+    public name = CardName.VIRUS;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
     public canPlay(): boolean {
         return true;

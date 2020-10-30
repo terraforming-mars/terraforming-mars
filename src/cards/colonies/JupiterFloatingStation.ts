@@ -13,11 +13,11 @@ import { Resources } from "../../Resources";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class JupiterFloatingStation implements IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.JUPITER_FLOATING_STATION;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 9;
+    public tags = [Tags.JOVIAN];
+    public name = CardName.JUPITER_FLOATING_STATION;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canPlay(player: Player): boolean {

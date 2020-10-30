@@ -16,14 +16,14 @@ describe("IndustrialCenter", function () {
     });
 
     it("Can't play or act", function () {
-        expect(card.canAct(player)).to.eq(false);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should action", function () {
         player.megaCredits = 7;
         card.action(player, game);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });

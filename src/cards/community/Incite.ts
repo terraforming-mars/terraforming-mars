@@ -8,10 +8,10 @@ import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 
 export class Incite implements CorporationCard {
-    public name: CardName =  CardName.INCITE;
-    public tags: Array<Tags> = [Tags.SCIENCE];
+    public name =  CardName.INCITE;
+    public tags = [Tags.SCIENCE];
     public startingMegaCredits: number = 32;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player, game: Game) {
         if (game.turmoil) game.turmoil.addInfluenceBonus(player);

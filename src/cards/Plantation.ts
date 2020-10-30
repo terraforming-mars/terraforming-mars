@@ -11,10 +11,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class Plantation implements IProjectCard {
-    public cost: number = 15;
-    public cardType: CardType = CardType.AUTOMATED;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.PLANTATION;
+    public cost = 15;
+    public cardType = CardType.AUTOMATED;
+    public tags = [Tags.PLANT];
+    public name = CardName.PLANTATION;
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 2;

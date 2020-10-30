@@ -29,6 +29,6 @@ describe("ResearchOutpost", function () {
             game.addGreenery(player, lands[i].id);
         }
         
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 });

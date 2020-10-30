@@ -20,12 +20,12 @@ describe("Predators", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 11;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         player.playedCards.push(card);
         card.play();
         
@@ -56,7 +56,7 @@ describe("Predators", function () {
         player2.addResourceTo(pets);
         player2.addResourceTo(fish);
 
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
         
         const action = card.action(player, game);
         expect(action).is.undefined; // No option to choose Pets card provided
@@ -75,7 +75,7 @@ describe("Predators", function () {
         player2.addResourceTo(bioengineeringEnclosure);
         player2.addResourceTo(fish);
 
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
         
         const action = card.action(player, game);
         expect(action).is.undefined; // No option to choose BioEngineering Enclosure card provided
@@ -94,6 +94,6 @@ describe("Predators", function () {
         player2.addResourceTo(animals);
         player2.addResourceTo(fish);
 
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 });

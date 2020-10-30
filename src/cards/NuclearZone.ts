@@ -13,10 +13,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class NuclearZone implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.NUCLEAR_ZONE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.EARTH];
+    public name = CardName.NUCLEAR_ZONE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
     

@@ -21,12 +21,12 @@ describe("Capital", function () {
 
     it("Can't play without energy production", function () {
         maxOutOceans(player, game);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play if oceans requirement not met", function () {
         player.addProduction(Resources.ENERGY, 2);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -35,10 +35,10 @@ describe("Capital", function () {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }
         player.addProduction(Resources.ENERGY,2);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 
@@ -62,7 +62,7 @@ describe("Capital", function () {
         });
 
         // cover main functions
-        expect(Board.isCitySpace(space)).to.eq(true);
+        expect(Board.isCitySpace(space)).is.true;
         expect(game.getCitiesInPlayOnMars()).to.eq(1);
         expect(game.getCitiesInPlay()).to.eq(1);
 

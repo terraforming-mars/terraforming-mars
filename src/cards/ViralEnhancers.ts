@@ -7,13 +7,13 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from "../CardName";
 import { ResourceType } from "../ResourceType";
-import { SimpleDeferredAction } from "../deferredActions/SimpleDeferredAction";
+import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class ViralEnhancers implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: CardName = CardName.VIRAL_ENHANCERS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 9;
+    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public name = CardName.VIRAL_ENHANCERS;
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
@@ -27,7 +27,7 @@ export class ViralEnhancers implements IProjectCard {
         }
 
         for (let i = 0; i < resourceCount; i++) {
-            game.defer(new SimpleDeferredAction(
+            game.defer(new DeferredAction(
                 player,
                 () => new OrOptions(
                     new SelectOption("Add resource to card " + card.name, "Add resource", () => {

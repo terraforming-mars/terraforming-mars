@@ -8,10 +8,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class PowerSupplyConsortium implements IProjectCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public name: CardName = CardName.POWER_SUPPLY_CONSORTIUM;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 5;
+    public tags = [Tags.ENERGY];
+    public name = CardName.POWER_SUPPLY_CONSORTIUM;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.ENERGY) >= 2;

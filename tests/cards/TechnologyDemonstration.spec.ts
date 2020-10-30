@@ -12,7 +12,7 @@ describe("TechnologyDemonstration", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).is.undefined;
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.cardsInHand[0]).not.to.eq(player.cardsInHand[1]);
     });
 });

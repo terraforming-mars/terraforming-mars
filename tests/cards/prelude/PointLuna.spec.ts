@@ -19,15 +19,15 @@ describe("PointLuna", function () {
 
     it("Gets card when earth tag played", function () {
         card.onCardPlayed(player, game, new Ants());
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(0);
 
         card.onCardPlayed(player, game, new EarthCatapult());
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 
     it("Should play", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

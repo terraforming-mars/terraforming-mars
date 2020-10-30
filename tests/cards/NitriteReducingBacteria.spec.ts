@@ -16,7 +16,8 @@ describe("NitriteReducingBacteria", function () {
 
     it("Should play", function () {
         player.playedCards.push(card);
-        card.play(player);
+        card.play(player, game);
+        game.deferredActions.runNext();
         expect(card.resourceCount).to.eq(3);
     });
 
@@ -27,7 +28,7 @@ describe("NitriteReducingBacteria", function () {
 
         player.addResourceTo(card, 3);
         let orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
 
         orOptions!.options[1].cb();
         expect(card.resourceCount).to.eq(5);

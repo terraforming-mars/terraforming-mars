@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class RadChemFactory implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.RAD_CHEM_FACTORY;
+    public cost = 8;
+    public tags = [Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.RAD_CHEM_FACTORY;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

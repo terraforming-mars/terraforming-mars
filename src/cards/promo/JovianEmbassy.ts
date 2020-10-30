@@ -9,10 +9,10 @@ import { PartyName } from '../../turmoil/parties/PartyName';
 import { REDS_RULING_POLICY_COST } from '../../constants';
 
 export class JovianEmbassy implements IProjectCard {
-    public cost: number = 14;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.STEEL];
-    public name: CardName = CardName.JOVIAN_EMBASSY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 14;
+    public tags = [Tags.JOVIAN, Tags.STEEL];
+    public name = CardName.JOVIAN_EMBASSY;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

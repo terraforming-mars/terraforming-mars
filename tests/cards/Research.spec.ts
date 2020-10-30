@@ -14,7 +14,7 @@ describe("Research", function () {
         expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.cardsInHand[0]).not.to.eq(player.cardsInHand[1]);
     });
 });

@@ -10,10 +10,10 @@ import { CardName } from '../CardName';
 import { Board } from "../Board";
 
 export class UrbanizedArea implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.URBANIZED_AREA;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.URBANIZED_AREA;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)

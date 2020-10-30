@@ -351,6 +351,23 @@ input[type="radio"]:checked + .filterDiv::after {
   content: "\2666";
 }
 
+.ares-icon:after {
+    position: absolute;
+    color:#EFEF64;
+    border: 1px solid black;
+    background: #953316;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "A";
+  }
+
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -969,6 +986,12 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 30px;
     background-size: 30px 40px;
     vertical-align: middle;
+    border: none;
+}
+
+.card-with-border {
+    border: .05rem solid #dadee4;
+    border-radius: .1rem;
 }
 
 .card-icon {
@@ -2360,6 +2383,35 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
+.card-herbivores{
+    .description{
+        margin-top:-8px;
+    }
+    .description-tile{
+        text-align: left;
+        margin-top: -50px;
+        width: 135px;
+    }
+    .production-box{
+        margin-top:2px;
+    }
+    .herbivores-requirement{
+        position: absolute;
+        text-align: left;
+        margin-top: 42px; 
+        width: 130px;
+    }
+    .production-box{
+        margin-left: 35px;
+        margin-top: 10px;
+        position: absolute;
+    }
+    .herbivores-starting-animal{
+        margin-left: -60px;
+        position: absolute;
+    }
+}
+
 /*********** Special Tile Styles ************/
 
 .special-tile-symbol{
@@ -2461,7 +2513,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .expansion-icon-colony {
-    background-image: url(./assets/expansion_icons/expansion_icon_colony.png);
+    background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
 }
 
 .expansion-icon-turmoil {
@@ -2474,6 +2526,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .expansion-icon-community {
     background-image: url(./assets/expansion_icons/expansion_icon_community.png);
+}
+
+.expansion-icon-ares {
+    background-image: url(./assets/expansion_icons/expansion_icon_ares.png);
 }
 
 /* refactored */

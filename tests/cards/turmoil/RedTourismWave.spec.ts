@@ -16,11 +16,11 @@ describe("RedTourismWave", function () {
 
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         
         let reds = game.turmoil!.getPartyByName(PartyName.REDS)!;
         reds.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const tharsis = game.getSpace(SpaceName.THARSIS_THOLUS);
         const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);

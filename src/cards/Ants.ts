@@ -9,12 +9,12 @@ import {ResourceType} from "../ResourceType";
 import { CardName } from "../CardName";
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.ANTS;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 9;
+    public tags = [Tags.MICROBES];
+    public name = CardName.ANTS;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }

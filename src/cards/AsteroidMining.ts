@@ -6,10 +6,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class AsteroidMining implements IProjectCard {
-    public cost: number = 30;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.ASTEROID_MINING;
+    public cost = 30;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.ASTEROID_MINING;
 
     public play(player: Player) {
       player.addProduction(Resources.TITANIUM,2);

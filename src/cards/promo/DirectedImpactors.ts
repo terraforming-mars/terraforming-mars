@@ -16,12 +16,12 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.DIRECTED_IMPACTORS;
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public name = CardName.DIRECTED_IMPACTORS;
+    public cost = 8;
+    public tags = [Tags.SPACE];
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

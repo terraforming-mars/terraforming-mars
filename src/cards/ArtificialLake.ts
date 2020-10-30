@@ -12,10 +12,10 @@ import { PartyName } from '../turmoil/parties/PartyName';
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
 
 export class ArtificialLake implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.ARTIFICIAL_LAKE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 15;
+    public tags = [Tags.STEEL];
+    public name = CardName.ARTIFICIAL_LAKE;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       const meetsTemperatureRequirements = game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

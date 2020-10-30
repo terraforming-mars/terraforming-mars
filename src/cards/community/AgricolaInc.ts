@@ -8,10 +8,10 @@ import { Game } from "../../Game";
 import { CardType } from "../CardType";
 
 export class AgricolaInc implements CorporationCard {
-    public name: CardName =  CardName.AGRICOLA_INC;
-    public tags: Array<Tags> = [Tags.PLANT];
+    public name =  CardName.AGRICOLA_INC;
+    public tags = [Tags.PLANT];
     public startingMegaCredits: number = 40;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.addProduction(Resources.MEGACREDITS, 1);

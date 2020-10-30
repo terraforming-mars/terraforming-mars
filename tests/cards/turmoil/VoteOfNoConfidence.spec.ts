@@ -13,14 +13,14 @@ describe("VoteOfNoConfidence", function () {
 
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
 
         game.turmoil!.chairman = "NEUTRAL";
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
 
         let greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
         greens.partyLeader = player.id;
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
 
         card.play(player, game);
         expect(game.getPlayerById(game.turmoil!.chairman)).to.eq(player);           

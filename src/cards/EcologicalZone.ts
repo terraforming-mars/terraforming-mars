@@ -14,12 +14,12 @@ import { IResourceCard } from './ICard';
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class EcologicalZone implements IProjectCard, IResourceCard {
-  public cost: number = 12;
-  public resourceType: ResourceType = ResourceType.ANIMAL;
+  public cost = 12;
+  public resourceType = ResourceType.ANIMAL;
   public resourceCount: number = 0;
-  public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.ECOLOGICAL_ZONE;
+  public tags = [Tags.ANIMAL, Tags.PLANT];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.ECOLOGICAL_ZONE;
   public adjacencyBonus?: IAdjacencyBonus = undefined;
 
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {

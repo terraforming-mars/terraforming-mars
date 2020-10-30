@@ -16,7 +16,7 @@ describe("RestrictedArea", function () {
 
     it("Can't act if not enough MC", function () {
         player.megaCredits = 1;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should play", function () {
@@ -32,11 +32,11 @@ describe("RestrictedArea", function () {
 
     it("Should act", function () {
         player.megaCredits = 2;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player, game);
 
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class Farming implements IProjectCard {
-  public cost: number = 16;
-  public tags: Array<Tags> = [Tags.PLANT];
-  public name: CardName = CardName.FARMING;
-  public cardType: CardType = CardType.AUTOMATED;
+  public cost = 16;
+  public tags = [Tags.PLANT];
+  public name = CardName.FARMING;
+  public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {
     return game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));
   }

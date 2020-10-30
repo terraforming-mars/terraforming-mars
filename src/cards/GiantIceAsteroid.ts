@@ -11,10 +11,10 @@ import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class GiantIceAsteroid implements IProjectCard {
-    public cost: number = 36;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.GIANT_ICE_ASTEROID;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 36;
+    public tags = [Tags.SPACE];
+    public name = CardName.GIANT_ICE_ASTEROID;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

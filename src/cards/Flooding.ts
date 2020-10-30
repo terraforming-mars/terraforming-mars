@@ -1,5 +1,4 @@
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
@@ -16,10 +15,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class Flooding implements IProjectCard {
-    public cardType: CardType = CardType.EVENT;
-    public cost: number = 7;
-    public name: CardName = CardName.FLOODING;
-    public tags: Array<Tags> = [];
+    public cardType = CardType.EVENT;
+    public cost = 7;
+    public name = CardName.FLOODING;
+    public tags = [];
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

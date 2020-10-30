@@ -4,10 +4,10 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 
 export class ResearchCoordination implements IProjectCard {
-    public cost: number = 4;
-    public cardType: CardType = CardType.AUTOMATED;
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.RESEARCH_COORDINATION;
+    public cost = 4;
+    public cardType = CardType.AUTOMATED;
+    public tags = [Tags.WILDCARD];
+    public name = CardName.RESEARCH_COORDINATION;
 
     public play() {
         return undefined;

@@ -10,10 +10,10 @@ import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDefe
 import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 export class MartianMediaCenter implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_MEDIA_CENTER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 7;
+    public tags = [Tags.STEEL];
+    public name = CardName.MARTIAN_MEDIA_CENTER;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

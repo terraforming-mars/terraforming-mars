@@ -24,14 +24,11 @@ describe("CorrosiveRain", function () {
         player2.megaCredits = 15;
         
         card.resolve(game, turmoil);
-        while (game.deferredActions.length) {
-            const action = game.getNextDeferredAction();
-            if (action !== undefined) {
-                game.runDeferredAction(action, () => {});
-            }
-        }
-        expect(player2.cardsInHand.length).to.eq(3);
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(2);
+        game.deferredActions.runAll(() => {});
+        expect(game.deferredActions).has.lengthOf(0);
+        expect(player2.cardsInHand).has.lengthOf(3);
+        expect(player.cardsInHand).has.lengthOf(0);
         expect(player.megaCredits).to.eq(5);
         expect(player2.megaCredits).to.eq(5);
     });

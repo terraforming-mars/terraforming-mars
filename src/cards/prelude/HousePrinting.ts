@@ -6,10 +6,10 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class HousePrinting implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.HOUSE_PRINTING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.STEEL];
+    public name = CardName.HOUSE_PRINTING;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
         player.addProduction(Resources.STEEL);

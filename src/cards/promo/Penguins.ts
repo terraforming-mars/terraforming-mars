@@ -9,12 +9,12 @@ import { Game } from '../../Game';
 
 export class Penguins implements IActionCard, IProjectCard, IResourceCard {
 
-    public name: CardName = CardName.PENGUINS;
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.ANIMAL];
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public name = CardName.PENGUINS;
+    public cost = 7;
+    public tags = [Tags.ANIMAL];
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 8 - player.getRequirementsBonus(game);

@@ -7,10 +7,10 @@ import { Game } from "../../Game";
 import { BuildColony } from "../../deferredActions/BuildColony";
 
 export class SpacePortColony implements IProjectCard {
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.SPACE_PORT_COLONY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 27;
+    public tags = [Tags.SPACE];
+    public name = CardName.SPACE_PORT_COLONY;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         let coloniesCount: number = 0;

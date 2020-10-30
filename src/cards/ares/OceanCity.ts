@@ -10,10 +10,10 @@ import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
 export class OceanCity implements IProjectCard {
-  public cost: number = 18;
-  public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-  public cardType: CardType = CardType.AUTOMATED;
-  public name: CardName = CardName.OCEAN_CITY;
+  public cost = 18;
+  public tags = [Tags.CITY, Tags.STEEL];
+  public cardType = CardType.AUTOMATED;
+  public name = CardName.OCEAN_CITY;
 
   public canPlay(player: Player, game: Game): boolean {
     return (player.getProduction(Resources.ENERGY) > 0)

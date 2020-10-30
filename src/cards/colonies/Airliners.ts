@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { CardName } from "../../CardName";
@@ -9,10 +8,10 @@ import { Game } from "../../Game";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class Airliners implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.AIRLINERS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 11;
+    public tags = [];
+    public name = CardName.AIRLINERS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
         return player.getResourceCount(ResourceType.FLOATER) >= 3;

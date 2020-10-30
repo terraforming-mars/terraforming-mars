@@ -27,18 +27,18 @@ describe("ViralEnhancers", function () {
         player.playedCards.push(ants, birds, moss);
 
         card.onCardPlayed(player, game, birds);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player.getResourcesOnCard(birds)).to.eq(1);
         orOptions.options[1].cb();
         expect(player.plants).to.eq(1);
 
         card.onCardPlayed(player, game, ants);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions2 = game.deferredActions[1].execute() as OrOptions;
+        const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions2.options[0].cb();
         expect(player.getResourcesOnCard(ants)).to.eq(1);
         orOptions2.options[1].cb();
@@ -50,18 +50,16 @@ describe("ViralEnhancers", function () {
 
         const ecologicalZone = new EcologicalZone();
         card.onCardPlayed(player, game, ecologicalZone);
-        expect(game.deferredActions.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(2);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
-        game.deferredActions.shift();
+        const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player.getResourcesOnCard(ecologicalZone)).to.eq(1);
-        expect(game.deferredActions.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         
-        const orOptions2 = game.deferredActions[0].execute() as OrOptions;
-        game.deferredActions.shift();
+        const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions2.options[1].cb();
         expect(player.plants).to.eq(1);
-        expect(game.deferredActions.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 });

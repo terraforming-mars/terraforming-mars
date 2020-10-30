@@ -1,16 +1,15 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
-import { Tags } from "../Tags";
 import { Game } from "../../Game";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { BuildColony } from "../../deferredActions/BuildColony";
 
 export class Poseidon implements CorporationCard {
-    public name: CardName =  CardName.POSEIDON;
-    public tags: Array<Tags> = [];
+    public name =  CardName.POSEIDON;
+    public tags = [];
     public startingMegaCredits: number = 45;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         if (game.gameOptions.coloniesExtension) {

@@ -8,10 +8,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class AsteroidMiningConsortium implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.ASTEROID_MINING_CONSORTIUM;
+    public cost = 13;
+    public tags = [Tags.JOVIAN];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.ASTEROID_MINING_CONSORTIUM;
 
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.TITANIUM) >= 1 ;

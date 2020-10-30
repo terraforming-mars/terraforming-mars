@@ -10,10 +10,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class Ironworks implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.IRONWORKS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.STEEL];
+    public name = CardName.IRONWORKS;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

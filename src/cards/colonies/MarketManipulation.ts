@@ -8,10 +8,10 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
 export class MarketManipulation implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.MARKET_MANIPULATION;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 1;
+    public tags = [Tags.EARTH];
+    public name = CardName.MARKET_MANIPULATION;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(_player: Player, game: Game): boolean {

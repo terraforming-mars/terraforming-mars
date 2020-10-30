@@ -40,9 +40,9 @@ describe("MarketManipulation", function () {
         
         game.colonies.push(enceladus, miranda, luna);
         game.gameOptions.coloniesExtension = true;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
 
         player.playCard(game, new Pets());
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 });

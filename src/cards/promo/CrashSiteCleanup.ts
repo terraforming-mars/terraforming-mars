@@ -1,7 +1,6 @@
 import { Player } from "../../Player";
 import { IProjectCard } from "../IProjectCard";
 import { CardType } from "../CardType";
-import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
@@ -10,10 +9,10 @@ import { LogHelper } from "../../components/LogHelper";
 import { Resources } from "../../Resources";
 
 export class CrashSiteCleanup implements IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.CRASH_SITE_CLEANUP;
+    public cost = 4;
+    public tags = [];
+    public cardType = CardType.EVENT;
+    public name = CardName.CRASH_SITE_CLEANUP;
 
     public canPlay(_player: Player, game: Game) {
         return game.someoneHasRemovedOtherPlayersPlants;

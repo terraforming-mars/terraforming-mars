@@ -23,7 +23,7 @@ export class DustSeals implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires 3 or less ocean tiles.",
         cardNumber: "119",
-        requirements: CardRequirements.builder((b) => b.oceans(3)),
+        requirements: CardRequirements.builder((b) => b.oceans(3).max()),
         victoryPoints: 1,
     };
 }

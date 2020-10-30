@@ -24,7 +24,7 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Oxygen must be 5% or less.",
         cardNumber: "001",
-        requirements: CardRequirements.builder((b) => b.oxygen(5)),
+        requirements: CardRequirements.builder((b) => b.oxygen(5).max()),
         victoryPoints: 2,
     };
 }

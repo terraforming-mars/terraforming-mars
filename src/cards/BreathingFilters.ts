@@ -6,7 +6,6 @@ import { Game } from "../Game";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
-import { CardRequirement } from "../cards/CardRequirement";
 
 export class BreathingFilters implements IProjectCard {
     public cost = 11;
@@ -25,7 +24,7 @@ export class BreathingFilters implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires 7% oxygen.",
         cardNumber: "114",
-        requirements: new CardRequirements([CardRequirement.oxygen(7)]),
+        requirements: CardRequirements.builder((b) => b.oxygen(7)),
         victoryPoints: 2,
     };
 }

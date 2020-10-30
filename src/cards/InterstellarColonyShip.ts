@@ -6,7 +6,6 @@ import { Game } from "../Game";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
-import { CardRequirement } from "../cards/CardRequirement";
 
 export class InterstellarColonyShip implements IProjectCard {
     public cost = 24;
@@ -29,9 +28,7 @@ export class InterstellarColonyShip implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires that you have 5 Science tags.",
         cardNumber: "027",
-        requirements: new CardRequirements([
-            CardRequirement.tag(Tags.SCIENCE, 5),
-        ]),
+        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
         victoryPoints: 4,
     };
 }

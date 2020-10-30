@@ -5,7 +5,6 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRequirements } from "../../cards/CardRequirements";
-import { CardRequirement } from "../../cards/CardRequirement";
 
 export class PublicCelebrations implements IProjectCard {
     public cost = 8;
@@ -31,9 +30,7 @@ export class PublicCelebrations implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires that you are Chairman.",
         cardNumber: "T10",
-        requirements: new CardRequirements([
-            CardRequirement.chairman(),
-        ]),
+        requirements: CardRequirements.builder((b) => b.chairman()),
         victoryPoints: 2,
     };
 }

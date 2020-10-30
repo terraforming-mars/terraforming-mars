@@ -6,7 +6,6 @@ import { Game } from "../Game";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
-import { CardRequirement } from "../cards/CardRequirement";
 
 export class ColonizerTrainingCamp implements IProjectCard {
     public cost = 8;
@@ -25,9 +24,7 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Oxygen must be 5% or less.",
         cardNumber: "001",
-        requirements: new CardRequirements([
-          CardRequirement.oxygen(5).max()
-        ]),
+        requirements: CardRequirements.builder((b) => b.oxygen(5)),
         victoryPoints: 2,
     };
 }

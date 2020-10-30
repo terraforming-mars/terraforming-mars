@@ -5,7 +5,6 @@ import { Player } from "../Player";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
 import { CardRequirements } from "../cards/CardRequirements";
-import { CardRequirement } from "../cards/CardRequirement";
 
 export class AdvancedEcosystems implements IProjectCard {
     public cost = 11;
@@ -25,11 +24,9 @@ export class AdvancedEcosystems implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires a Plant tag, a Microbe tag, and an Animal tag.",
         cardNumber: "135",
-        requirements: new CardRequirements([
-            CardRequirement.tag(Tags.PLANT),
-            CardRequirement.tag(Tags.MICROBES),
-            CardRequirement.tag(Tags.ANIMAL),
-        ]),
+        requirements: CardRequirements.builder((b) =>
+            b.tag(Tags.PLANT).tag(Tags.ANIMAL).tag(Tags.MICROBES)
+        ),
         victoryPoints: 3,
     };
 }

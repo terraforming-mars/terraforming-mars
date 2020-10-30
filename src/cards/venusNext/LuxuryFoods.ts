@@ -5,7 +5,6 @@ import { Player } from "../../Player";
 import { CardName } from "../../CardName";
 import { CardMetadata } from "../../cards/CardMetadata";
 import { CardRequirements } from "../../cards/CardRequirements";
-import { CardRequirement } from "../../cards/CardRequirement";
 
 export class LuxuryFoods implements IProjectCard {
     public cost = 8;
@@ -28,11 +27,9 @@ export class LuxuryFoods implements IProjectCard {
     public metadata: CardMetadata = {
         description: "Requires that you have a Varth tag, an Earth tag and a Jovian tag.",
         cardNumber: "T10",
-        requirements: new CardRequirements([
-            CardRequirement.tag(Tags.VENUS),
-            CardRequirement.tag(Tags.EARTH),
-            CardRequirement.tag(Tags.JOVIAN),
-        ]),
+        requirements: CardRequirements.builder((b) =>
+            b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)
+        ),
         victoryPoints: 2,
     };
 }

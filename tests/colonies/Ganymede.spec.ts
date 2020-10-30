@@ -33,6 +33,8 @@ describe("Ganymede", function() {
         ganymede.onColonyPlaced(player, game);
 
         ganymede.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.plants).to.eq(1);

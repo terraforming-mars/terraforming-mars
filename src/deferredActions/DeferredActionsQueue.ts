@@ -1,5 +1,6 @@
 import { PlayerId } from "../Player";
 import { DeferredAction } from "./DeferredAction";
+import { GiveTradeBonus } from "./GiveTradeBonus";
 
 export class DeferredActionsQueue {
     private queue: Array<DeferredAction> = [];

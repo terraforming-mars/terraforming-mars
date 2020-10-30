@@ -3,7 +3,7 @@ import { CardType } from '../CardType';
 import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { Game } from '../../Game';
-import { SimpleDeferredAction } from '../../deferredActions/SimpleDeferredAction';
+import { DeferredAction } from '../../deferredActions/DeferredAction';
 
 export class ProductiveOutpost implements IProjectCard {
     public cost = 0;
@@ -15,7 +15,7 @@ export class ProductiveOutpost implements IProjectCard {
       game.colonies.forEach(colony => {
           colony.colonies.filter(owner => owner === player.id).forEach(owner => {
             // Not using GiveTradeBonus deferred action because it's only for the active player
-            game.defer(new SimpleDeferredAction(player, () => colony.giveTradeBonus(game.getPlayerById(owner), game)));
+            game.defer(new DeferredAction(player, () => colony.giveTradeBonus(game.getPlayerById(owner), game)));
           });
       }); 
       return undefined;

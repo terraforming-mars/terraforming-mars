@@ -33,6 +33,8 @@ describe("Callisto", function() {
         callisto.onColonyPlaced(player, game);
 
         callisto.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.energy).to.eq(3);

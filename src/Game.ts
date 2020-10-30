@@ -17,7 +17,6 @@ import { Dealer } from "./Dealer";
 import { Decks } from "./Deck";
 import { ElysiumBoard } from "./ElysiumBoard";
 import { FundedAward } from "./FundedAward";
-import { GiveTradeBonus } from "./deferredActions/GiveTradeBonus";
 import { HellasBoard } from "./HellasBoard";
 import { IAward } from "./awards/IAward";
 import { IColony } from "./colonies/Colony";

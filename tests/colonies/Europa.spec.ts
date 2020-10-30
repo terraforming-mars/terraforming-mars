@@ -37,6 +37,8 @@ describe("Europa", function() {
         game.deferredActions.shift();
 
         europa.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(1);
         expect(player.megaCredits).to.eq(1);

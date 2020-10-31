@@ -4,8 +4,11 @@ import * as constants from "../src/constants"
 import { SpaceType } from "../src/SpaceType";
 import { BoardName } from "../src/BoardName";
 import { RandomMAOptionType } from "../src/RandomMAOptionType";
+import { ISpace } from "../src/ISpace";
 
-export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): void {
+// Returns the oceans created during this operation which may not reflect all oceans.
+export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {
+    const oceans = []
     if (toValue < 1) {
         toValue = constants.MAX_OCEAN_TILES;
     }
@@ -14,7 +17,9 @@ export const maxOutOceans = function(player: Player, game: Game, toValue: number
         if (space.tile !== undefined) continue;
         if (game.board.getOceansOnBoard() >= toValue) break;
         game.addOceanTile(player, space.id)
+        oceans.push(space);
     }
+    return oceans;
 };
 
 export const resetBoard = function(game: Game): void {

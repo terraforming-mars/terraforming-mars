@@ -8,6 +8,7 @@ import { CardName } from '../../CardName';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { TileType } from "../../TileType";
 import { ISpace } from "../../ISpace";
+import { Board } from "../../Board";
 
 export class GreatDamPromo implements IProjectCard {
     public cost = 15;
@@ -38,8 +39,7 @@ export class GreatDamPromo implements IProjectCard {
         return game.board.getAvailableSpacesOnLand(player)
             .filter(
                 (space) => game.board.getAdjacentSpaces(space).filter(
-                    (adjacentSpace) => adjacentSpace.tile !== undefined &&
-                  adjacentSpace.tile.tileType === TileType.OCEAN
+                    (adjacentSpace) => Board.isOceanSpace(adjacentSpace)
                 ).length > 0
             );
       }

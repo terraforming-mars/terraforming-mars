@@ -7,12 +7,13 @@ import { Game } from '../Game';
 import { LogHelper } from '../components/LogHelper';
 
 export class Luna extends Colony implements IColony {
+    public tradeIncome = [ 1, 2, 4, 7, 10, 13, 17 ];
     public name = ColonyName.LUNA;
     public description: string = "MegaCredits";
     public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
         if (usesTradeFleet) this.beforeTrade(this, player, game);
         
-        const qty = this.trackPosition * 2 + Math.max(this.trackPosition - 2, 0) + Math.max(this.trackPosition - 5, 0);
+        const qty = this.tradeIncome[this.trackPosition];
         player.megaCredits += qty;
         LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, qty);
 

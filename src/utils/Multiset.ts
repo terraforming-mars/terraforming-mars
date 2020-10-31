@@ -11,16 +11,14 @@ export class Multiset<T> {
         return val;
     }
 
-    remove(key: T, count: number = 1): void {
+    subtract(key: T, count: number = 1): void {
         let val = this.get(key);
         if (val === undefined) return;
+        this.map.set(key, val - count);
+    }
 
-        val -= count;
-        if (val <= 0) {
-            this.map.delete(key);
-        } else {
-            this.map.set(key, val);
-        }
+    remove(key: T): void {
+        this.map.delete(key);
     }
 
     get(key: T): number | undefined {

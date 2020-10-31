@@ -33,8 +33,8 @@ export class GiveTradeBonus implements DeferredAction {
     }
 
     public giveTradeBonus(player: Player, game: Game): void {
-        if (this.waitingFor.get(player.id)) {
-            this.waitingFor.remove(player.id);
+        if (this.waitingFor.get(player.id) !== undefined && this.waitingFor.get(player.id)! > 0) {
+            this.waitingFor.subtract(player.id);
             const input = this.colony.giveTradeBonus(player, game);
             if (input !== undefined) {
                 player.setWaitingFor(input, () => this.giveTradeBonus(player, game));
@@ -42,6 +42,7 @@ export class GiveTradeBonus implements DeferredAction {
                 this.giveTradeBonus(player, game);
             }
         } else {
+            this.waitingFor.remove(player.id);
             this.doneGettingBonus();
         }
     }

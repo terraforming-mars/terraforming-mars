@@ -18,8 +18,17 @@ import { Button } from "../components/common/Button";
 
 const dialogPolyfill = require("dialog-polyfill");
 
+import * as raw_settings from "../../assets/settings.json";
+
 export const PlayerHome = Vue.component("player-home", {
-    props: ["player", "settings"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        settings: {
+            type: Object as () => typeof raw_settings
+        }
+    },
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,

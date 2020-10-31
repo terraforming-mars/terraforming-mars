@@ -6,9 +6,15 @@
 const fs = require("fs");
 const compiler = require("vue-template-compiler")
 const vue = require.resolve("vue");
+const dialogPolyfill = require.resolve("dialog-polyfill");
 global.window = {
     navigator: {
         userAgent: ""
+    }
+};
+require.cache[dialogPolyfill] = {
+    exports: {
+        default: {}
     }
 };
 require.cache[vue] = {
@@ -47,6 +53,21 @@ checkComponent(
     ["allColonies", "officialColonies", "communityColonies", "selectedColonies"]
 );
 checkComponent(
+    "src/components/Colony",
+    require("./dist/src/components/Colony").Colony,
+    ["PLUTO", "GANYMEDE"]
+);
+checkComponent(
+    "src/components/CorporationsFilter",
+    require("./dist/src/components/CorporationsFilter").CorporationsFilter,
+    ["cardsByModuleMap", "customCorporationsList", "selectedCorporations", "corpsByModule"]
+);
+checkComponent(
+    "src/components/DebugUI",
+    require("./dist/src/components/DebugUI").DebugUI,
+    ["filterText"]
+);
+checkComponent(
     "src/components/GameEnd",
     require("./dist/src/components/GameEnd").GameEnd,
     []
@@ -59,6 +80,11 @@ checkComponent(
 checkComponent(
     "src/components/OtherPlayer",
     require("./dist/src/components/OtherPlayer").OtherPlayer,
+    []
+);
+checkComponent(
+    "src/components/PlayerHome",
+    require("./dist/src/components/PlayerHome").PlayerHome,
     []
 );
 checkComponent(
@@ -104,7 +130,7 @@ function checkComponent(name, component, dataProperties) {
         throw new Error(`props must define types for component ${name}`);
     }
 
-    const propertyNames = Object.keys(component.props);
+    const propertyNames = component.props === undefined ? [] : Object.keys(component.props);
     const template = component.template;
 
     if (component.template === undefined) {
@@ -190,7 +216,7 @@ function checkComponent(name, component, dataProperties) {
     lines.unshift("declare function $forceUpdate(): void");
     lines.unshift("declare function $set(arg1: any, key: string, value: string): void;");
     // seems to be array looper iterating function needs to pass along type information
-    lines.unshift("declare function _l<T>(arg1: Array<T>, arg2: (item2: T) => any): any;");
+    lines.unshift("declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;");
     file = lines.join("\n");
 
     fs.writeFileSync(`./dist/${name}Vue.ts`, file);

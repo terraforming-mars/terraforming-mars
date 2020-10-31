@@ -25,7 +25,7 @@ export class LuxuryFoods implements IProjectCard {
     }
 
     public metadata: CardMetadata = {
-        description: "Requires that you have a Varth tag, an Earth tag and a Jovian tag.",
+        description: "Requires that you have a Venus tag, an Earth tag and a Jovian tag.",
         cardNumber: "T10",
         requirements: CardRequirements.builder((b) =>
             b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)

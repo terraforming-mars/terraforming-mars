@@ -29,6 +29,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-vue": "^6.2.2",
+    "js-beautify": "^1.13.0",
     "mocha": "^6.2.3",
     "nyc": "^14.1.1"
   },

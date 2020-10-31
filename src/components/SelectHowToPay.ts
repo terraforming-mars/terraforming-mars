@@ -2,10 +2,13 @@
 import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
+import { PlayerInputModel } from "../models/PlayerInputModel";
+import { PlayerModel } from "../models/PlayerModel";
 import { PreferencesManager } from "./PreferencesManager";
 import { Button } from "../components/common/Button";
 
 interface SelectHowToPayModel {
+    cost: number;
     heat: number;
     megaCredits: number;
     steel: number;
@@ -16,10 +19,26 @@ interface SelectHowToPayModel {
 }
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        playerinput: {
+            type: Object as () => PlayerInputModel
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     components: {
        "Button": Button    
     },
-    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             cost: 0,
@@ -154,7 +173,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 return;
             }
 
-            const requiredAmt =  this.playerinput.amount;
+            const requiredAmt =  this.playerinput.amount || 0;
             const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
 
             if (requiredAmt > 0 && totalSpentAmt < requiredAmt && !htp.isResearchPhase) {

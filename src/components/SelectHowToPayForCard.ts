@@ -71,7 +71,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         const app = this;
         Vue.nextTick(function () {
             app.$data.cost = app.getCardCost();
-            app.$data.megaCredits = (app as any).getMegaCreditsMax();
+            app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
             app.setDefaultMicrobesValue();
             app.setDefaultFloatersValue();
@@ -246,7 +246,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         cardChanged: function () {
             this.cost = this.getCardCost();
-            this.megaCredits = (this as any).getMegaCreditsMax();
+            this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
             this.setDefaultMicrobesValue();
             this.setDefaultFloatersValue();
@@ -351,9 +351,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{playerinput.title}}</div>
+  <div v-if="showtitle === true">{{ playerinput.title }}</div>
 
-  <label v-for="availableCard in playerinput.cards" class="payments_cards">
+  <label v-for="availableCard in (playerinput.cards === undefined ? [] : playerinput.cards)" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>

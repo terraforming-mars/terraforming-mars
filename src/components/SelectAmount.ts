@@ -22,15 +22,15 @@ export const SelectAmount = Vue.component("select-amount", {
     },
     data: function () {
         return {
-            amount: 0,
+            amount: "0",
         };
     },
     methods: {
         saveData: function () {
-            this.onsave([[String(parseInt(this.$data.amount))]]);
+            this.onsave([[String(parseInt(this.amount))]]);
         },
         setMaxValue: function () {
-            this.$data.amount = this.playerinput.max;
+            this.amount = String(this.playerinput.max);
         },
     },
     template: `

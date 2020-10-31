@@ -13,7 +13,16 @@ import { HelpIconology } from "./HelpIconology";
 import * as raw_settings from "../../assets/settings.json";
 
 interface MainAppData {
-    screen: string;
+    screen: "create-game-form" |
+            "debug-ui" |
+            "empty" |
+            "game-home" |
+            "games-overview" |
+            "help-iconology" |
+            "load" |
+            "player-home" |
+            "start-screen" |
+            "the-end";
     /**
      * We set player once the app component has loaded. Vue only
      * watches properties that exist initially. When we

@@ -120,6 +120,16 @@ checkComponent(
     []
 );
 checkComponent(
+    "src/components/StackedCards",
+    require("./dist/src/components/StackedCards").StackedCards,
+    []
+);
+checkComponent(
+    "src/components/StartScreen",
+    require("./dist/src/components/StartScreen").StartScreen,
+    []
+);
+checkComponent(
     "src/components/Tag",
     require("./dist/src/components/Tag").Tag,
     []

@@ -13,5 +13,5 @@ export interface IProjectCard extends ICard {
     resourceType?: ResourceType;
     hasRequirements?: boolean;
     bonusResource?: Resources | undefined;
-    bonusMc?: number | undefined;
+    bonusMc?: number | undefined; 
 }

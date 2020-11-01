@@ -4,9 +4,11 @@
  * the components from node
  */
 const fs = require("fs");
-const compiler = require("vue-template-compiler")
+const beautify = require("js-beautify").js;
+const compiler = require("vue-template-compiler");
 const vue = require.resolve("vue");
 const dialogPolyfill = require.resolve("dialog-polyfill");
+
 global.window = {
     navigator: {
         userAgent: ""
@@ -68,9 +70,19 @@ checkComponent(
     ["filterText"]
 );
 checkComponent(
+    "src/components/GameHome",
+    require("./dist/src/components/GameHome").GameHome,
+    []
+);
+checkComponent(
     "src/components/GameEnd",
     require("./dist/src/components/GameEnd").GameEnd,
     []
+);
+checkComponent(
+    "src/components/LoadGameForm",
+    require("./dist/src/components/LoadGameForm").LoadGameForm,
+    ["gameId"]
 );
 checkComponent(
     "src/components/Milestone",
@@ -108,6 +120,16 @@ checkComponent(
     []
 );
 checkComponent(
+    "src/components/StackedCards",
+    require("./dist/src/components/StackedCards").StackedCards,
+    []
+);
+checkComponent(
+    "src/components/StartScreen",
+    require("./dist/src/components/StartScreen").StartScreen,
+    []
+);
+checkComponent(
     "src/components/Tag",
     require("./dist/src/components/Tag").Tag,
     []
@@ -120,11 +142,7 @@ checkComponent(
 
 function checkComponent(name, component, dataProperties) {
 
-    const methodNames = Object.keys(component.methods);
-
-    if (methodNames.length === 0) {
-        throw new Error(`must provide methods for component ${name}`);
-    }
+    const methodNames = component.methods === undefined ? [] : Object.keys(component.methods);
 
     if (Array.isArray(component.props)) {
         throw new Error(`props must define types for component ${name}`);
@@ -155,6 +173,9 @@ function checkComponent(name, component, dataProperties) {
     // strip 'with' lacking typescript support
     result = result.substring("with(this){".length);
     result = result.substring(0, result.length - 1);
+
+    // make easier to read and debug
+    result = beautify(result);
 
     if (result.indexOf("this") !== -1) {
         throw new Error(`don't use this inside template string for ${name}`);

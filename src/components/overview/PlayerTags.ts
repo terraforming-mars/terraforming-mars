@@ -19,7 +19,7 @@ export const PlayerTags = Vue.component("player-tags", {
             return this.player.turmoil;
         },
         getTagsPlaceholders: function () {
-            let tags = { ...Tags, ...SpecialTags };
+            const tags = { ...Tags, ...SpecialTags };
             if (!this.showColonyCount()) {
                 delete tags.COLONY_COUNT;
             }

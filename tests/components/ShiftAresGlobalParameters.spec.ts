@@ -7,7 +7,7 @@ import { ShiftAresGlobalParameters } from "../../src/components/ShiftAresGlobalP
 import { PlayerInputModel } from "../../src/models/PlayerInputModel";
 import { PlayerInputTypes } from "../../src/PlayerInputTypes";
 
-describe("Milestone", function () {
+describe("ShiftAresGlobalParameters", function () {
     const mockPlayerModel: PlayerInputModel = {
         title: "Testing, baby!",
         buttonLabel: "Click me!",

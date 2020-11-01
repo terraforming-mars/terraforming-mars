@@ -21,7 +21,11 @@ export const getCurrentPlayerIndex = (
 };
 
 export const PlayersOverview = Vue.component("players-overview", {
-    props: ["player"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        }
+    },
     components: {
         "player-info": PlayerInfo,
         "overview-settings": OverviewSettings,

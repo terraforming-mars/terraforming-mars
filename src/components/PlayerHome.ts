@@ -114,7 +114,6 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <preferences v-trim-whitespace
-              :player_name="player.name"
               :player_color="player.color"
               :generation="player.generation"
               :coloniesCount="player.colonies.length"

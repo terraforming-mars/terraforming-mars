@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { Color } from "../Color";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } from "../constants";
@@ -6,30 +7,55 @@ import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } f
 import { $t } from "../directives/i18n";
 
 export const Preferences = Vue.component("preferences", {
-    props: ["player_name", "player_color", "generation", "coloniesCount", "temperature", "oxygen", "oceans", "venus", "venusNextExtension"],
+    props: {
+        player_color: {
+            type: Object as () => Color
+        },
+        generation: {
+            type: Number
+        },
+        coloniesCount: {
+            type: Number
+        },
+        temperature: {
+            type: Number
+        },
+        oxygen: {
+            type: Number
+        },
+        oceans: {
+            type: Number
+        },
+        venus: {
+            type: Number
+        },
+        venusNextExtension: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             "ui": {
                 "preferences_panel_open": false,
             },
-            "hide_corporation": false,
-            "hide_hand": false,
-            "hide_cards": false,
-            "hide_awards_and_milestones": false,
-            "hide_tag_overview": false,
-            "hide_turnorder": false,
-            "hide_corporation_names": false,
-            "small_cards": false,
-            "remove_background": false,
-            "magnify_cards": true,
-            "magnify_card_descriptions": true,
-            "show_alerts": true,
-            "hide_ma_scores": false,
-            "hide_non_blue_cards": false,
-            "hide_log": false,
+            "hide_corporation": false as boolean | unknown[],
+            "hide_hand": false as boolean | unknown[],
+            "hide_cards": false as boolean | unknown[],
+            "hide_awards_and_milestones": false as boolean | unknown[],
+            "hide_tag_overview": false as boolean | unknown[],
+            "hide_turnorder": false as boolean | unknown[],
+            "hide_corporation_names": false as boolean | unknown[],
+            "small_cards": false as boolean | unknown[],
+            "remove_background": false as boolean | unknown[],
+            "magnify_cards": true as boolean | unknown[],
+            "magnify_card_descriptions": true as boolean | unknown[],
+            "show_alerts": true as boolean | unknown[],
+            "hide_ma_scores": false as boolean | unknown[],
+            "hide_non_blue_cards": false as boolean | unknown[],
+            "hide_log": false as boolean | unknown[],
             "lang": "en",
             "langs": LANGUAGES,
-            "enable_sounds": false
+            "enable_sounds": false as boolean | unknown[]
         };
     },
     methods: {

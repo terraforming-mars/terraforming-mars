@@ -85,6 +85,11 @@ checkComponent(
     ["gameId"]
 );
 checkComponent(
+    "src/components/LogPanel",
+    require("./dist/src/components/LogPanel").LogPanel,
+    ["cards", "messages"]
+);
+checkComponent(
     "src/components/Milestone",
     require("./dist/src/components/Milestone").Milestone,
     []
@@ -98,6 +103,16 @@ checkComponent(
     "src/components/PlayerHome",
     require("./dist/src/components/PlayerHome").PlayerHome,
     []
+);
+checkComponent(
+    "src/components/Preferences",
+    require("./dist/src/components/Preferences").Preferences,
+    [
+        "ui", "hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "hide_tag_overview",
+        "hide_turnorder", "hide_corporation_names", "small_cards", "remove_background", "magnify_cards",
+        "magnify_card_descriptions", "show_alerts", "hide_ma_scores", "hide_non_blue_cards", "hide_log",
+        "lang", "langs", "enable_sounds"
+    ]
 );
 checkComponent(
     "src/components/SelectAmount",
@@ -137,6 +152,26 @@ checkComponent(
 checkComponent(
     "src/components/TagCount",
     require("./dist/src/components/TagCount").TagCount,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerResource",
+    require("./dist/src/components/overview/PlayerResource").PlayerResource,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerResources",
+    require("./dist/src/components/overview/PlayerResources").PlayerResources,
+    ["resources"]
+);
+checkComponent(
+    "src/components/overview/PlayersOverview",
+    require("./dist/src/components/overview/PlayersOverview").PlayersOverview,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerTags",
+    require("./dist/src/components/overview/PlayerTags").PlayerTags,
     []
 );
 
@@ -231,7 +266,8 @@ function checkComponent(name, component, dataProperties) {
     lines.unshift("declare function _n(arg: string): number;");
     lines.unshift("declare function _q<T>(arg1: T, arg2: T): string;");
     lines.unshift("declare function _s(arg: number | string | undefined): string;");
-    lines.unshift("declare function _v(arg: string): any;");
+    lines.unshift("declare function _t(arg: string): unknown;");
+    lines.unshift("declare function _v(arg: string): unknown;");
     lines.unshift("interface VueDomEventTarget { checked: boolean, composing: boolean, value: string };");
     lines.unshift("interface VueDomEvent { preventDefault: () => void; target: VueDomEventTarget; };");
     lines.unshift("declare function $forceUpdate(): void");

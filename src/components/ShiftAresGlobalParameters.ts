@@ -2,9 +2,6 @@
 import Vue from "vue";
 import { IAresGlobalParametersResponse } from "../inputs/ShiftAresGlobalParameters";
 
-// @ts-ignorets-ignore - used in the template.
-const ADJUSTMENT_RANGE = [-1, 0, 1];
-
 export const ShiftAresGlobalParameters = Vue.component("shift-ares-global-parameters", {
     props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
@@ -15,6 +12,7 @@ export const ShiftAresGlobalParameters = Vue.component("shift-ares-global-parame
             highOceanDelta: 0,
             temperatureDelta: 0,
             oxygenDelta: 0,
+            ADJUSTMENT_RANGE: [-1, 0, 1]
         };
     },
     methods: {

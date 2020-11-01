@@ -1,11 +1,11 @@
 
 import Vue from "vue";
-import { GameModel } from "../models/GameModel";
+import { GameHomeModel } from "../models/GameHomeModel";
 
 export const GameHome = Vue.component("game-home", {
     props: {
         game: {
-            type: Object as () => GameModel | undefined
+            type: Object as () => GameHomeModel | undefined
         }
     },
     data: function () {

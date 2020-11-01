@@ -7,7 +7,7 @@ import { PlayerModel } from "../models/PlayerModel";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
 import { DebugUI } from "./DebugUI";
-import { GameModel } from "../models/GameModel";
+import { GameHomeModel } from "../models/GameHomeModel";
 import { HelpIconology } from "./HelpIconology";
 
 import * as raw_settings from "../../assets/settings.json";
@@ -34,7 +34,7 @@ interface MainAppData {
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
-    game: GameModel | undefined;
+    game: GameHomeModel | undefined;
 }
 
 export const mainAppSettings = {
@@ -55,7 +55,7 @@ export const mainAppSettings = {
             "pinned_player_4": false,
             "turmoil_parties": false,
         } as {[x: string]: boolean},
-        game: undefined as GameModel | undefined
+        game: undefined as GameHomeModel | undefined
     } as MainAppData,
     "components": {
         "start-screen": StartScreen,
@@ -141,7 +141,7 @@ export const mainAppSettings = {
                         "Teraforming Mars - Game",
                         "/game?id=" + xhr.response.id
                     );
-                    app.game = xhr.response as GameModel;
+                    app.game = xhr.response as GameHomeModel;
                 } else {
                     alert("Unexpected server response");
                 }

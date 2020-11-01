@@ -1,7 +1,7 @@
 
 import Vue from "vue";
 import { Button } from "../components/common/Button";
-import { GameModel } from "../models/GameModel";
+import { GameHomeModel } from "../models/GameHomeModel";
 import { mainAppSettings } from "./App";
 
 export const LoadGameForm = Vue.component("load-game-form", {
@@ -23,7 +23,7 @@ export const LoadGameForm = Vue.component("load-game-form", {
             }
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    const response = xhr.response as GameModel;
+                    const response = xhr.response as GameHomeModel;
                     if (response.players.length === 1) {
                         window.location.href = "/player?id=" + response.players[0].id;
                         return;

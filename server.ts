@@ -14,7 +14,7 @@ import { Color } from "./src/Color";
 import { Game, GameOptions } from "./src/Game";
 import { GameLoader } from "./src/database/GameLoader";
 import { GameLogs } from "./src/routes/GameLogs";
-import { GameModel } from "./src/models/GameModel";
+import { GameHomeModel } from "./src/models/GameHomeModel";
 import { Route } from "./src/routes/Route";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
@@ -985,7 +985,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 }
 
 function getGame(game: Game): string {
-    const output: GameModel = {
+    const output: GameHomeModel = {
         activePlayer: game.getPlayerById(game.activePlayer).color,
         id: game.id,
         phase: game.phase,

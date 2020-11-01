@@ -55,25 +55,21 @@ describe("Colony", function() {
 
     it("Should build and give placement bonus", function() {
         expect(luna.colonies).has.lengthOf(0);
-        expect(luna.isColonyFull()).to.be.false;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
 
         luna.onColonyPlaced(player, game);
         expect(luna.colonies).has.lengthOf(1);
         expect(luna.colonies[0]).to.eq(player.id);
-        expect(luna.isColonyFull()).to.be.false;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
         luna.onColonyPlaced(player2, game);
         expect(luna.colonies).has.lengthOf(2);
         expect(luna.colonies[1]).to.eq(player2.id);
-        expect(luna.isColonyFull()).to.be.false;
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
         luna.onColonyPlaced(player3, game);
         expect(luna.colonies).has.lengthOf(3);
         expect(luna.colonies[2]).to.eq(player3.id);
-        expect(luna.isColonyFull()).to.be.true;
         expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });
 
@@ -131,6 +127,7 @@ describe("Colony", function() {
     });
 
     it("Should trade", function() {
+        // TODO (Lynesth): Do this better with next colony refactor PR
         const income = [ 1, 2, 4, 7, 10, 13, 17 ];
         for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
             player.megaCredits = 0;
@@ -200,44 +197,68 @@ describe("Colony", function() {
         expect(player4.megaCredits).to.eq(0);
     });
 
-    it("Shouldn't let players build a colony via Standard Project", function() {
-        player.megaCredits = 17; // To be able to pay for a colony
+    it("Should let player build a colony only if they can afford it", function() {
+        expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+
+        player.megaCredits = 17;
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    });
+
+    it("Shouldn't let players build a colony if they already have one", function() {
+        player.megaCredits = 17;
 
         luna.onColonyPlaced(player2, game);
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
-
-        luna.onColonyPlaced(player, game);
-        expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
 
         luna.onColonyPlaced(player, game);
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
     });
 
-    it("Shouldn't let players build if colony is full", function() {
-        expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
-
-        player.megaCredits = 17; // To be able to pay for a colony
-        expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    it("Shouldn't let players build a colony if colony tile is full", function() {
+        player.megaCredits = 17;
+        expect(luna.isColonyFull()).to.be.false;
 
         luna.onColonyPlaced(player2, game);
+        expect(luna.isColonyFull()).to.be.false;
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
 
         luna.onColonyPlaced(player3, game);
+        expect(luna.isColonyFull()).to.be.false;
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
 
         luna.onColonyPlaced(player4, game);
+        expect(luna.isColonyFull()).to.be.true;
         expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
     });
 
-    it("Shouldn't let players trade if they have no fleet", function() {
+    it("Should let players trade only if they can afford it", function() {
         expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
 
-        player.titanium = 3; // To be able to trade with a colony
+        player.megaCredits = 9;
         expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+
+        player.megaCredits = 0;
+        player.energy = 3;
+        expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+
+        player.energy = 0;
+        player.titanium = 3;
+        expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    });
+
+    it("Shouldn't let players trade if they have no fleet", function() {
+        player.titanium = 3;
 
         luna.trade(player, game);
         expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
+    });
+
+    it ("Shouldn't let players trade with colonies that have already been traded with", function() {
+        player.titanium = 3;
+        player2.titanium = 3;
+
+        luna.trade(player, game);
+        expect(isTradeWithColonyActionAvailable(player2, game)).to.be.false;
     });
 
     it("Testing GiveTradeBonus Deferred Action", function() {

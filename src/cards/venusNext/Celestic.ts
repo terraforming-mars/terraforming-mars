@@ -33,6 +33,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         CardName.STRATOSPHERIC_BIRDS
     ]);
 
+    public initialActionText: string = "Draw 2 cards with a floater icon on it";
     public initialAction(player: Player, game: Game) {
         const requiredCardsCount = 2;
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {

@@ -11,6 +11,7 @@ export class Poseidon implements CorporationCard {
     public startingMegaCredits: number = 45;
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Place a colony";
     public initialAction(player: Player, game: Game) {
         if (game.gameOptions.coloniesExtension) {
             game.defer(new BuildColony(player, game, false, "Poseidon first action - Select where to build colony"));

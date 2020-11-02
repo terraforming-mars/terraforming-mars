@@ -17,6 +17,7 @@ export class Philares implements CorporationCard {
     public startingMegaCredits: number = 47;
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Place a greenery tile and raise the oxygen 1 step";
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 
         game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {

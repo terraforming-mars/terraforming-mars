@@ -18,6 +18,7 @@ export class ValleyTrust implements CorporationCard {
         return card.tags.filter(tag => tag === Tags.SCIENCE).length * 2;
     }
 
+    public initialActionText: string = "Draw 3 Prelude cards, and play one of them";
     public initialAction(player: Player, game: Game) {
         if (game.gameOptions.preludeExtension) {
             const cardsDrawn: Array<IProjectCard> = [

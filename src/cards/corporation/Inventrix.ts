@@ -12,6 +12,7 @@ export class Inventrix implements CorporationCard {
     public startingMegaCredits: number = 45;
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw 3 cards";
     public initialAction(player: Player, game: Game) {
         player.cardsInHand.push(
             game.dealer.dealCard(),

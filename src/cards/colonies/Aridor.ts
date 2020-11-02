@@ -18,7 +18,7 @@ export class Aridor implements CorporationCard {
     public allTags = new Set();
     public cardType = CardType.CORPORATION;
 
-
+    public initialActionText: string = "Add a colony tile";
     public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
         

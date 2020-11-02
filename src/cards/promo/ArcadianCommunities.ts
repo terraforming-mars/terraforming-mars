@@ -14,6 +14,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
     public startingMegaCredits: number = 40; 
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Place a community (player marker) on a non-reserved area";
     public initialAction(player: Player, game: Game) {
         return new SelectSpace(
             "Select space for claim", 

@@ -12,6 +12,7 @@ export class MorningStarInc implements CorporationCard {
     public startingMegaCredits: number = 50;
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw 3 Venus-tag cards";
     public initialAction(player: Player, game: Game) {
         if (game.hasCardsWithTag(Tags.VENUS, 3)) {
             for (const foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {

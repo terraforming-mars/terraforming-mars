@@ -11,6 +11,7 @@ import { SelectSpace } from "../../inputs/SelectSpace";
 import { CardType } from "../CardType";
 
 export interface CorporationCard extends ICard {
+    initialActionText?: string;
     initialAction?: (player: Player, game: Game) => PlayerInput | undefined;
     startingMegaCredits: number;
     play: (

@@ -21,7 +21,7 @@ export class AerialLenses implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.addProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT, 2);
         game.defer(new RemoveAnyPlants(player, game, 2));
         return undefined;
     }

@@ -5,8 +5,8 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
-import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
+import { RemoveResourcesFromCard } from "../../deferredActions/RemoveResourcesFromCard";
 
 export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCard {
     public cost = 12;
@@ -31,23 +31,9 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
             return canPayForFloater && meetsVenusRequirements;
         }
     }
-    public play(player: Player) {
-        const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
-
-        if (cardsWithFloater.length === 1) {
-            player.removeResourceFrom(cardsWithFloater[0], 1);
-            return undefined;
-        }
-
-        return new SelectCard(
-            "Select card to remove 1 floater from", 
-            "Remove floater",
-            cardsWithFloater,
-            (foundCards) => {
-                player.removeResourceFrom(foundCards[0], 1)
-                return undefined;
-            }
-        );
+    public play(player: Player, game: Game) {
+        game.defer(new RemoveResourcesFromCard(player, game, ResourceType.FLOATER, 1, true));
+        return undefined;
     }
     public canAct(): boolean {
         return true;

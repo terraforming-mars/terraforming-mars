@@ -5523,7 +5523,7 @@ export const HTML_DATA: Map<string, string> =
           <br>
           <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
           <div class="description effect">
-            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.)
+            (Effect: You have influence +1. When you send a delegate using the lobbying action, you pay 2 MC less for it.)
           </div>
         </div>
       </div>
@@ -5576,12 +5576,14 @@ export const HTML_DATA: Map<string, string> =
 [CardName.VALUABLE_GASES,`
       <div class="content">
         <div class="resource money">6</div>
-        <div class="resource card" style="margin-left:10px">
+        <br>
+        PLAY
+        <div class="resource card">
           <div class="card-icon tag-venus"></div>
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 6 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
+          Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.
         </div>
       </div>
 `],
@@ -5624,7 +5626,7 @@ export const HTML_DATA: Map<string, string> =
         <div>Trade all colonies with</div>
         <div class="tile trade"></div> : <span class="card-sign">+1</span>
         <div class="description">
-          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
+          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.
           <br><br>Gain 2 MC (SOLO: Gain 10 MC).
         </div>
       </div>

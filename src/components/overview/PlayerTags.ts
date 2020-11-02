@@ -1,12 +1,20 @@
 import Vue from "vue";
 import { TagCount } from "../TagCount";
 import { ITagCount } from "../../ITagCount";
+import { PlayerModel } from "../../models/PlayerModel";
 import { Tags } from "../../cards/Tags";
 import { SpecialTags } from "../../cards/SpecialTags";
 import { isTagsViewConcise } from "./OverviewSettings";
 
 export const PlayerTags = Vue.component("player-tags", {
-    props: ["player", "isActivePlayer"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        isActivePlayer: {
+            type: Boolean
+        }
+    },
     components: {
         "tag-count": TagCount,
     },
@@ -16,7 +24,7 @@ export const PlayerTags = Vue.component("player-tags", {
             return this.player.coloniesExtension;
         },
         showInfluence: function (): boolean {
-            return this.player.turmoil;
+            return this.player.turmoil !== undefined;
         },
         getTagsPlaceholders: function () {
             const tags = { ...Tags, ...SpecialTags };

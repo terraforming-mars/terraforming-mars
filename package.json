@@ -26,10 +26,13 @@
     "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "@vue/server-test-utils": "^1.1.1",
+    "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-vue": "^6.2.2",
     "js-beautify": "^1.13.0",
+    "jsdom": "^16.4.0",
     "mocha": "^6.2.3",
     "nyc": "^14.1.1"
   },

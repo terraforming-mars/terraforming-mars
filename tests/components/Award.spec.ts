@@ -2,12 +2,16 @@
 import { setup } from "../utils/Vue";
 
 setup();
+// import Vue from "vue";
+
+import { createLocalVue, mount } from "@vue/test-utils";
 
 import { expect } from "chai";
 import { Award } from "../../src/components/Award";
 import { FundedAwardModel } from "../../src/models/FundedAwardModel";
 
-describe("Award", function () {
+
+describe.only("Award", function () {
     const mockAward: FundedAwardModel = {
         award: {
             name: "test",
@@ -18,7 +22,20 @@ describe("Award", function () {
         player_color: "blue",
         scores: []
     };
-    it("getNameCss", function () {
+    it.only("getNameCss", function () {
+        const localVue = createLocalVue();
+        console.log(mount({
+            template: '<p>{{ msg }}</p>',
+            props: ['msg']
+        }, { localVue: localVue, attachTo: document.body, propsData: { msg: "Hello World" } }));
+
+        const d = mount(Award, {
+            localVue: localVue,
+            propsData: {
+                awards_list: []
+            }
+        });
+        console.log(d);
         expect((Award as any).methods.getNameCss("foo Bar foO")).to.eq("ma-name ma-name--foo-bar-foo");
     });
     it("sets up data", function () {

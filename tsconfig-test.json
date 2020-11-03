@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "moduleResolution": "node",
         "lib": ["dom"],
         "noImplicitAny": true,
         "noImplicitReturns": true,

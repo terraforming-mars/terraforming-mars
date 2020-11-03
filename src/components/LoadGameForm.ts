@@ -11,7 +11,7 @@ export const LoadGameForm = Vue.component("load-game-form", {
     data: function () {
         return {
             gameId: "",
-            nbrSavesToDelete: 0
+            nbrSavesToDelete: "0"
         }
     },
     methods: {
@@ -55,7 +55,7 @@ export const LoadGameForm = Vue.component("load-game-form", {
                         <label for="gameId">Game Id to reload:</label><br/>
                         <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
                         <label for="nbrSavesToDelete">Number of saves to delete before loading:</label><br/>
-                        <input class="form-input form-inline load-game-id" :value="0" v-model="nbrSavesToDelete" /><br/>
+                        <input class="form-input form-inline load-game-id" value="0" v-model="nbrSavesToDelete" /><br/>
                         <Button title="Load Game" size="big" type="success" :onClick="loadGame" /> 
                     </div>
                 </div>

@@ -498,7 +498,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
-              game.log("${0} removed ${1} resource" + (count > 1 ? "(s)" : "") + " from ${2}'s ${3}", b =>
+              game.log("${0} removed ${1} resource" + (count > 1 ? "s" : "") + " from ${2}'s ${3}", b =>
               b.player(removingPlayer)
               .number(count)
               .player(this)

@@ -9,7 +9,8 @@ export class SelectHowToPayDeferred implements DeferredAction {
         public amount: number,
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
-        public title: string = "Select how to pay for " + amount + " MCs"
+        public title: string = "Select how to pay for " + amount + " MCs",
+        public afterPay?: () => void
     ){}
 
     public execute() {
@@ -17,6 +18,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
             (!this.canUseSteel || this.player.steel === 0) &&
             (!this.canUseTitanium || this.player.titanium === 0)) {
             this.player.megaCredits -= this.amount;
+            if (this.afterPay !== undefined) {
+                this.afterPay();
+            }
             return undefined;
         }
 
@@ -27,6 +31,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
                 this.player.titanium -= howToPay.titanium;
                 this.player.megaCredits -= howToPay.megaCredits;
                 this.player.heat -= howToPay.heat;
+                if (this.afterPay !== undefined) {
+                    this.afterPay();
+                }
                 return undefined;
             }
         );

@@ -32,14 +32,19 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
                         const canUseSteel = cards[0].tags.indexOf(Tags.STEEL) !== -1;
                         const canUseTitanium = cards[0].tags.indexOf(Tags.SPACE) !== -1;
                         const cardCost = player.getCardCost(game, cards[0]);
-
-                        game.defer(new SelectHowToPayDeferred(player, cardCost, canUseSteel, canUseTitanium, "Select how to pay for card"));
-                        player.playCard(game, cards[0]);
-
-                        if (cards[0].resourceType === ResourceType.FLOATER) {
-                            player.addResourceTo(cards[0], 4);
-                        }
-
+                        game.defer(new SelectHowToPayDeferred(
+                            player,
+                            cardCost,
+                            canUseSteel,
+                            canUseTitanium,
+                            "Select how to pay for card",
+                            () => {
+                                player.playCard(game, cards[0]);
+                                if (cards[0].resourceType === ResourceType.FLOATER) {
+                                    player.addResourceTo(cards[0], 4);
+                                }
+                            }
+                        ));
                         return undefined;
                     }
                 )

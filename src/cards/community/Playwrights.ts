@@ -8,6 +8,7 @@ import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ICard } from "../ICard";
 import { Resources } from "../../Resources";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class Playwrights implements CorporationCard {
     public name =  CardName.PLAYWRIGHTS;
@@ -40,11 +41,18 @@ export class Playwrights implements CorporationCard {
                 });
 
                 const cost = player.getCardCost(game, selectedCard);
-                player.playCard(game, selectedCard);
-                player.megaCredits -= cost;
-
-                const removedCard = player.playedCards.pop() as IProjectCard;
-                player.removedFromPlayCards.push(removedCard); // Remove card from play
+                game.defer(new SelectHowToPayDeferred(
+                    player,
+                    cost,
+                    false,
+                    false,
+                    "Select how to pay to replay the event",
+                    () => {
+                        player.playCard(game, selectedCard);
+                        player.playedCards.pop();
+                        player.removedFromPlayCards.push(selectedCard); // Remove card from play
+                    }
+                ));
                 return undefined;
             }
         );

@@ -25,6 +25,7 @@ describe("Manutech", function () {
         const action = (player as any).buildPowerPlant(game);
         expect(action).is.not.undefined;
         action.cb();
+        game.deferredActions.shift()!.execute();
         expect(player.getResource(Resources.ENERGY)).to.eq(1);
     });
 });

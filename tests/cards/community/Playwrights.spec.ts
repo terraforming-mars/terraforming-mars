@@ -45,7 +45,7 @@ describe("Playwrights", function () {
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
         // SelectHowToPay
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.shift()!.execute();
 
         expect(player.getTerraformRating()).to.eq(tr + 4);
         expect(player.megaCredits).eq(0);
@@ -64,7 +64,7 @@ describe("Playwrights", function () {
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
         // SelectHowToPay
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.shift()!.execute();
 
         expect(player.getTerraformRating()).to.eq(tr + 2);
         expect(player.megaCredits).eq(0);
@@ -88,7 +88,7 @@ describe("Playwrights", function () {
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([indenturedWorkers]);
         // SelectHowToPay
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.shift()!.execute();
 
         const deimosDown = new DeimosDown();
         expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost - 8);

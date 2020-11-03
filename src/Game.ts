@@ -1366,14 +1366,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
+      // Oceans are not subject to Ares adjacency production penalties.
+      const subjectToHazardAdjacency = (tile.tileType === TileType.OCEAN) ? false : true;
+
       AresHandler.ifAres(this, () => {
-        AresHandler.assertCanPay(this, player, space);
+        AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
       });
 
       // Part 2. Collect additional fees.
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       AresHandler.ifAres(this, () => {
-        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
       });
 
       // Hellas special requirements ocean tile

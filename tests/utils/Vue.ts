@@ -1,47 +1,31 @@
 
-console.log(require.resolve("vue"));
-
+/**
+ * The vue unit test tool requires a virtual DOM to run within.
+ * This script sets up that virtual DOM
+ */
 const jsdom = require("jsdom");
 
 const dom = new jsdom.JSDOM("<!doctype html><html><body></body></html>");
+
+// Attach major properties to global to mimic browser
 (global as any).window = dom.window;
 (global as any).document = (global as any).window.document;
 (global as any).navigator = (global as any).window.navigator;
 
+// Attach subsequent properties to global
 Object.getOwnPropertyNames((global as any).window).forEach(function (k) {
-    if (k === "undefined") {
+    // don't override a property which exists
+    if (global.hasOwnProperty(k) === true) {
         return;
     }
-    // console.log(k, typeof (global as any)[k]);
-    if (typeof (global as any)[k] !== "undefined") {
+    if (k === "localStorage" || k === "sessionStorage") {
         return;
     }
-    if (k !== "localStorage" && k !== "sessionStorage") {
-        (global as any)[k] = (global as any).window[k];
-    }
+    (global as any)[k] = (global as any).window[k];
 });
 
-// i(global as any).Element = (global as any).window.Element;
-// (global as any).HTMLBodyElement = (global as any).window.HTMLBodyElement;
-
-// console.log(Object.getOwnPropertyNames((global as any).window));
-
-// console.log("Clearing the cache");
-// delete require.cache[require.resolve("vue")];
-// console.log(require.cache)
-
 const Vue = require("vue");
-Vue.default = Vue;
 
-export function setup() {
-//    console.log(Vue);
-//    const vue = require.resolve("vue");
-//    require.cache[vue] = {
-//        exports: {
-//            default: {
-//                component: Vue.component
-//            }
-//        }
-//    };
-}
+// setup for default exports
+Vue.default = Vue;
 

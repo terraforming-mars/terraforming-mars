@@ -7,6 +7,7 @@ import { CardFinder } from "./CardFinder";
 import { CardModel } from "./models/CardModel";
 import { CardName } from "./CardName";
 import { CardType } from "./cards/CardType";
+import { Colony } from "./colonies/Colony";
 import { ColonyModel } from "./models/ColonyModel";
 import { ColonyName } from "./colonies/ColonyName";
 import { Color } from "./Color";
@@ -17,7 +18,6 @@ import { Game } from "./Game";
 import { HowToPay } from "./inputs/HowToPay";
 import { IAward } from "./awards/IAward";
 import { ICard } from "./cards/ICard";
-import { IColony } from "./colonies/Colony";
 import { ILoadable } from "./ILoadable";
 import { IMilestone } from "./milestones/IMilestone";
 import { IProjectCard } from "./cards/IProjectCard";
@@ -1417,13 +1417,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return result;
     }
 
-    private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
+    private buildColony(game: Game, openColonies: Array<Colony>): PlayerInput {
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
       return new SelectColony("Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
             game.defer(new SelectHowToPayDeferred(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project"));
-            colony.onColonyPlaced(this, game);
+            colony.addColony(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
             return undefined;
           }
@@ -1532,7 +1532,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     } 
 
-    private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+    private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
       const opts: Array<OrOptions | SelectColony> = [];
       let payWith: Resources | undefined = undefined; 
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);

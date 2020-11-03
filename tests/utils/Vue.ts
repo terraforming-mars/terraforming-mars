@@ -1,19 +1,18 @@
 
-const Vue = require("vue");
+console.log(require.resolve("vue"));
+
 const jsdom = require("jsdom");
 
 const dom = new jsdom.JSDOM("<!doctype html><html><body></body></html>");
 (global as any).window = dom.window;
 (global as any).document = (global as any).window.document;
 (global as any).navigator = (global as any).window.navigator;
-// (global as any).window.navigator = navigator;
-// (global as any).navigator = navigator;
 
 Object.getOwnPropertyNames((global as any).window).forEach(function (k) {
     if (k === "undefined") {
         return;
     }
-    console.log(k, typeof (global as any)[k]);
+    // console.log(k, typeof (global as any)[k]);
     if (typeof (global as any)[k] !== "undefined") {
         return;
     }
@@ -27,6 +26,11 @@ Object.getOwnPropertyNames((global as any).window).forEach(function (k) {
 
 // console.log(Object.getOwnPropertyNames((global as any).window));
 
+// console.log("Clearing the cache");
+// delete require.cache[require.resolve("vue")];
+// console.log(require.cache)
+
+const Vue = require("vue");
 Vue.default = Vue;
 
 export function setup() {

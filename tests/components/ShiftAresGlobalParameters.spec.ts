@@ -1,6 +1,4 @@
-import { setup } from "../utils/Vue";
-
-setup();
+import { createLocalVue, mount } from "@vue/test-utils";
 
 import { expect } from "chai";
 import { ShiftAresGlobalParameters } from "../../src/components/ShiftAresGlobalParameters";
@@ -51,12 +49,20 @@ describe("ShiftAresGlobalParameters", function () {
             milestoneResults: [],
         },
     };
+    function getLocalVue() {
+        const localVue = createLocalVue();
+        return localVue;
+    }
     it("sets up data", function () {
-        const playerinput: PlayerInputModel = mockPlayerModel;
+        const playerinput = mockPlayerModel;
+        const ares = mount(ShiftAresGlobalParameters, {
+            localVue: getLocalVue(),
+            propsData: {
+                playerinput
+            }
+        });
         expect(
-            (ShiftAresGlobalParameters as any).data.call({
-                playerinput,
-            })
+            ares.vm.$data
         ).to.deep.eq({
             hazardData: {
                 erosionOceanCount: { threshold: 3, available: true },

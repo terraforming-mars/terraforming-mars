@@ -4,7 +4,7 @@ import { ClaimedMilestoneModel } from "../models/ClaimedMilestoneModel";
 export const Milestone = Vue.component("milestone", {
     props: {
         milestones_list: {
-            type: Object as () => Array<ClaimedMilestoneModel>
+            type: Array as () => Array<ClaimedMilestoneModel>
         }
     },
     data: function () {

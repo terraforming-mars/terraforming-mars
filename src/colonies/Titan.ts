@@ -1,5 +1,6 @@
 import { Colony, IColony } from "./Colony";
 import { Player } from "../Player";
+import { PlayerInput } from '../PlayerInput';
 import { ColonyName } from "./ColonyName";
 import { ResourceType } from "../ResourceType";
 import { Game } from "../Game";
@@ -28,7 +29,7 @@ export class Titan extends Colony implements IColony {
         game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 3));
         return undefined;
     }
-    public giveTradeBonus(player: Player, game: Game): void {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1));
+    public giveTradeBonus(player: Player, game: Game): undefined | PlayerInput {
+        return (new AddResourcesToCard(player, game, ResourceType.FLOATER, 1)).execute();
     }    
 }

@@ -1,5 +1,6 @@
 import { PlayerId } from "../Player";
 import { DeferredAction } from "./DeferredAction";
+import { GiveTradeBonus } from "./GiveTradeBonus";
 
 export class DeferredActionsQueue {
     private queue: Array<DeferredAction> = [];
@@ -29,6 +30,15 @@ export class DeferredActionsQueue {
     }
 
     public run(action: DeferredAction, cb: () => void): void {
+        // Special hook for trade bonus deferred actions
+        // So that they happen for all players at the same time
+        if (action instanceof GiveTradeBonus) {
+            this.remove(action);
+            (action as GiveTradeBonus).cb = cb;
+            action.execute();
+            return;
+        }
+
         const input = action.execute();
         if (input !== undefined) {
             action.player.setWaitingFor(input, () => {

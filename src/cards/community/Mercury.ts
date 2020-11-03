@@ -1,5 +1,6 @@
 import { Colony, IColony } from "../../colonies/Colony";
 import { Player } from "../../Player";
+import { PlayerInput } from '../../PlayerInput';
 import { Game } from "../../Game";
 import { ColonyName } from "../../colonies/ColonyName";
 import { LogHelper } from "../../components/LogHelper";
@@ -75,7 +76,8 @@ export class Mercury extends Colony implements IColony {
         return undefined;
     }
     
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.megaCredits += 2;
+        return undefined;
     }
 }

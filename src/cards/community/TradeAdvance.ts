@@ -8,6 +8,7 @@ import { ColonyName } from "../../colonies/ColonyName";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { MAX_COLONY_TRACK_POSITION } from "../../constants";
+import { GiveTradeBonus } from "../../deferredActions/GiveTradeBonus";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class TradeAdvance extends PreludeCard implements IProjectCard {
@@ -42,9 +43,9 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
                 colony.decreaseTrack(MAX_COLONY_TRACK_POSITION);
             }
 
-            colony.colonies.forEach(playerId => {
-                colony.giveTradeBonus(game.getPlayerById(playerId), game);
-            });
+            if (colony.colonies.length > 0) {
+                game.defer(new GiveTradeBonus(player, game, colony));
+            }
         });
 
         if (game.isSoloMode()) {

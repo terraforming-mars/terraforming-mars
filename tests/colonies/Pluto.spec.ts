@@ -33,12 +33,11 @@ describe("Pluto", function() {
 
         pluto.trade(player2, game);
 
-        while (game.deferredActions.length) {
-            const input = game.deferredActions.shift()!.execute() as SelectCard<IProjectCard>;
-            if (input !== undefined) {
-                input.cb([input.cards[0]]); // Discard a card
-            }
-        }
+        game.deferredActions.runAll(() => {});
+
+        const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
+        expect(input).to.be.an.instanceof(SelectCard);
+        input.cb([input.cards[0]]); // Discard a card
 
         expect(player.cardsInHand).has.lengthOf(2);
         expect(player2.cardsInHand).has.lengthOf(1);

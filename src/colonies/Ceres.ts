@@ -1,5 +1,6 @@
 import { Colony, IColony } from './Colony';
 import { Player } from '../Player';
+import { PlayerInput } from '../PlayerInput';
 import { ColonyName } from './ColonyName';
 import { Resources } from '../Resources';
 import { Game } from '../Game';
@@ -26,7 +27,8 @@ export class Ceres extends Colony implements IColony {
         player.addProduction(Resources.STEEL);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.steel += 2;
+        return undefined;
     }    
 }

@@ -6,8 +6,8 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class Supplier extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public name: CardName = CardName.SUPPLIER;
+    public tags = [Tags.ENERGY];
+    public name = CardName.SUPPLIER;
 
     public play(player: Player) {
         player.addProduction(Resources.ENERGY,2);

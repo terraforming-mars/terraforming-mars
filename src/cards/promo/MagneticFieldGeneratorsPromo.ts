@@ -13,10 +13,10 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class MagneticFieldGeneratorsPromo implements IProjectCard {
-    public cost: number = 22;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MAGNETIC_FIELD_GENERATORS_PROMO;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 22;
+    public tags = [Tags.STEEL];
+    public name = CardName.MAGNETIC_FIELD_GENERATORS_PROMO;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;

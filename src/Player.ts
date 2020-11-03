@@ -971,12 +971,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private doneWorldGovernmentTerraforming(game: Game): void {
-        const action = game.getNextDeferredActionForPlayer(this.id);
-        if (action !== undefined) {
-            game.runDeferredAction(action, () => this.doneWorldGovernmentTerraforming(game));
-            return;
-        }
-        game.doneWorldGovernmentTerraforming();
+        game.deferredActions.runAllForPlayer(this.id, () => game.doneWorldGovernmentTerraforming());
     }
 
     public worldGovernmentTerraforming(game: Game): void {
@@ -1900,14 +1895,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private resolveFinalGreeneryDeferredActions(game: Game) {
-        const action = game.getNextDeferredAction();
-        if (action !== undefined) {
-            game.runDeferredAction(action, () => this.resolveFinalGreeneryDeferredActions(game));
-            return;
-        }
-
-        // All final greenery deferred actions have been resolved, continue game flow
-        this.takeActionForFinalGreenery(game);
+        game.deferredActions.runAll(() => this.takeActionForFinalGreenery(game));
     }
 
     private getPlayablePreludeCards(game: Game): Array<IProjectCard> {
@@ -2078,9 +2066,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public takeAction(game: Game): void {
-      const deferredAction = game.getNextDeferredActionForPlayer(this.id);
-      if (deferredAction !== undefined) {
-        game.runDeferredAction(deferredAction, () => this.takeAction(game));
+      if (game.deferredActions.nextForPlayer(this.id) !== undefined) {
+        game.deferredActions.runAllForPlayer(this.id, () => { this.takeAction(game) });
         return;
       }
  

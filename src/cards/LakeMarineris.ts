@@ -1,5 +1,4 @@
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -10,10 +9,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class LakeMarineris implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.LAKE_MARINERIS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 18;
+    public tags = [];
+    public name = CardName.LAKE_MARINERIS;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         const meetsTemperatureRequirements = game.getTemperature() >= 0 - (2 * player.getRequirementsBonus(game));
         const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();

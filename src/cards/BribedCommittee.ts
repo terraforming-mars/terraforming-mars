@@ -9,10 +9,10 @@ import { PartyName } from '../turmoil/parties/PartyName';
 import { REDS_RULING_POLICY_COST } from '../constants';
 
 export class BribedCommittee implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.BRIBED_COMMITTEE;
+    public cost = 7;
+    public tags = [Tags.EARTH];
+    public cardType = CardType.EVENT;
+    public name = CardName.BRIBED_COMMITTEE;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

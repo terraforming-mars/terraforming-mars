@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class MethaneFromTitan implements IProjectCard {
-    public cost: number = 28;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.METHANE_FROM_TITAN;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 28;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.METHANE_FROM_TITAN;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 2 - player.getRequirementsBonus(game);
     }

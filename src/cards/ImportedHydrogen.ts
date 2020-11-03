@@ -18,10 +18,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class ImportedHydrogen implements IProjectCard {
-    public cost: number = 16;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.IMPORTED_HYDROGEN;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 16;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.IMPORTED_HYDROGEN;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

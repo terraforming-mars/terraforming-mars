@@ -10,10 +10,10 @@ import { CardType } from "../CardType";
 
 
 export class MiningGuild implements CorporationCard {
-    public name: CardName = CardName.MINING_GUILD;
-    public tags: Array<Tags> = [Tags.STEEL, Tags.STEEL];
+    public name = CardName.MINING_GUILD;
+    public tags = [Tags.STEEL, Tags.STEEL];
     public startingMegaCredits: number = 30;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public onTilePlaced(player: Player, space: ISpace) {
         if (

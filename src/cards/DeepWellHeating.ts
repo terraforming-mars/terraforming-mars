@@ -10,10 +10,10 @@ import { PartyHooks } from '../turmoil/parties/PartyHooks';
 import { PartyName } from '../turmoil/parties/PartyName';
 
 export class DeepWellHeating implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: CardName = CardName.DEEP_WELL_HEATING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 13;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public name = CardName.DEEP_WELL_HEATING;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

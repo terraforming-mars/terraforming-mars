@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
@@ -10,10 +9,10 @@ import { LogHelper } from "../../components/LogHelper";
 
 
 export class AerosportTournament implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.AEROSPORT_TOURNAMENT;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 7;
+    public tags = [];
+    public name = CardName.AEROSPORT_TOURNAMENT;
+    public cardType = CardType.EVENT;
     public canPlay(player: Player): boolean {
         return player.getResourceCount(ResourceType.FLOATER) >= 5;
     }

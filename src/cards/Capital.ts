@@ -13,10 +13,10 @@ import { IAdjacencyBonus } from '../ares/IAdjacencyBonus';
 import { Board } from "../Board";
 
 export class Capital implements IProjectCard {
-    public cost: number = 26;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.CAPITAL;
+    public cost = 26;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.CAPITAL;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     public canPlay(player: Player, game: Game): boolean {

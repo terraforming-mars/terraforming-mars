@@ -1,5 +1,6 @@
 import { Colony, IColony } from "./Colony";
 import { Player } from "../Player";
+import { PlayerInput } from '../PlayerInput';
 import { ColonyName } from "./ColonyName";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
@@ -30,8 +31,8 @@ export class Miranda extends Colony implements IColony {
         game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, 1));
         return undefined;
     }
-    public giveTradeBonus(player: Player, game: Game): void {
-        player.cardsInHand.push(
-            game.dealer.dealCard());
+    public giveTradeBonus(player: Player, game: Game): undefined | PlayerInput {
+        player.cardsInHand.push(game.dealer.dealCard());
+        return undefined;
     }    
 }

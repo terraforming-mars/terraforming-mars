@@ -9,10 +9,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class GiantSolarShade implements IProjectCard {
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS];
-    public name: CardName = CardName.GIANT_SOLAR_SHADE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 27;
+    public tags = [Tags.SPACE, Tags.VENUS];
+    public name = CardName.GIANT_SOLAR_SHADE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

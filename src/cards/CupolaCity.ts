@@ -10,10 +10,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class CupolaCity implements IProjectCard {
-    public cost: number = 16;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.CUPOLA_CITY;
+    public cost = 16;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.CUPOLA_CITY;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() <= 9 + player.getRequirementsBonus(game) &&
         player.getProduction(Resources.ENERGY) >= 1 &&

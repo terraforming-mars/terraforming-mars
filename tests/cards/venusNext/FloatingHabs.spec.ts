@@ -33,7 +33,7 @@ describe("FloatingHabs", function () {
         player.megaCredits = 10;
 
         card.action(player, game);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });
@@ -45,7 +45,7 @@ describe("FloatingHabs", function () {
         expect(action instanceof SelectCard).is.true;
         
         (action as SelectCard<ICard>).cb([card]);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });

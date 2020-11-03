@@ -8,8 +8,8 @@ import { Game } from "../../Game";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.BUSINESS_EMPIRE;
+    public tags = [Tags.EARTH];
+    public name = CardName.BUSINESS_EMPIRE;
     public canPlay(player: Player, _game: Game) {
         if (player.isCorporation(CardName.MANUTECH)) return true;
         return player.canAfford(6);

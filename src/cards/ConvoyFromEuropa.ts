@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class ConvoyFromEuropa implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.CONVOY_FROM_EUROPA;
+    public cost = 15;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.CONVOY_FROM_EUROPA;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

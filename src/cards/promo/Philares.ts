@@ -12,10 +12,10 @@ import { CardType } from "../CardType";
 import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class Philares implements CorporationCard {
-    public name: CardName = CardName.PHILARES;
-    public tags: Array<Tags> = [Tags.STEEL];
+    public name = CardName.PHILARES;
+    public tags = [Tags.STEEL];
     public startingMegaCredits: number = 47;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 

@@ -6,10 +6,10 @@ import { Game } from '../../Game';
 import { CardName } from '../../CardName';
 
 export class Solarnet implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.SOLARNET;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 7;
+    public tags = [];
+    public name = CardName.SOLARNET;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
       }

@@ -10,11 +10,11 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.LOCAL_SHADING;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 4;
+    public tags = [Tags.VENUS];
+    public name = CardName.LOCAL_SHADING;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public play() {

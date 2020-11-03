@@ -54,9 +54,9 @@ export const Turmoil = Vue.component("turmoil", {
         else if (party === PartyName.SCIENTISTS) {
           return `<span class="money resource">10</span>
           <span class="red-arrow"></span>
-          <span class="card resource party-resource"></span>
-          <span class="card resource party-resource"></span>
-          <span class="card resource party-resource"></span>`;
+          <span class="card card-with-border resource party-resource"></span>
+          <span class="card card-with-border resource party-resource"></span>
+          <span class="card card-with-border resource party-resource"></span>`;
         }
         else if (party === PartyName.UNITY) {
           return `<div class="resource titanium"></div> : 

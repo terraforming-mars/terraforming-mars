@@ -1,4 +1,3 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardName } from "../../CardName";
@@ -7,8 +6,8 @@ import { IProjectCard } from "../IProjectCard";
 import { PlayProjectCard } from "../../deferredActions/PlayProjectCard";
 
 export class EccentricSponsor extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.ECCENTRIC_SPONSOR;
+    public tags = [];
+    public name = CardName.ECCENTRIC_SPONSOR;
 
     public getCardDiscount(player: Player, _game: Game) {
         if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {

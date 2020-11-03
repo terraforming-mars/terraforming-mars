@@ -11,10 +11,10 @@ import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class Comet implements IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.COMET;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 21;
+    public tags = [Tags.SPACE];
+    public name = CardName.COMET;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

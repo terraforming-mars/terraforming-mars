@@ -23,7 +23,7 @@ describe("PoliticalUprising", function () {
         expect(game.deferredActions).has.lengthOf(4);
 
         while (game.deferredActions.length) {
-            const orOptions = game.deferredActions[0].execute() as OrOptions;
+            const orOptions = game.deferredActions.next()!.execute() as OrOptions;
             orOptions.options[0].cb();
             game.deferredActions.shift();
         }

@@ -38,4 +38,19 @@ describe("MiningRightsAres", function () {
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
     });
+
+    it("Candidate spaces can't include hazards", function() {
+        const land = game.board.getAvailableSpacesOnLand(player)
+            .find(land => land.bonus.indexOf(SpaceBonus.STEEL) !== -1)!;
+
+        let action = card.play(player, game) as SelectSpace;
+        const size = action.availableSpaces.length;
+        expect(action.availableSpaces).contains(land);
+
+        land.tile = { tileType: TileType.MINING_RIGHTS };
+        action = card.play(player, game) as SelectSpace;
+        expect(action.availableSpaces).has.length(size - 1);
+        expect(action.availableSpaces).does.not.contain(land);
+    })
+
 });

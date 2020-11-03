@@ -11,10 +11,10 @@ import { SelectAmount } from "../../inputs/SelectAmount";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class EnergyMarket implements IProjectCard {
-    public name: CardName = CardName.ENERGY_MARKET;
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.ENERGY_MARKET;
+    public cost = 3;
+    public tags = [Tags.ENERGY];
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

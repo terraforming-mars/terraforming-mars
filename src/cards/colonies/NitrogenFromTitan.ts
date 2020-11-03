@@ -11,10 +11,10 @@ import { REDS_RULING_POLICY_COST } from "../../constants";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class NitrogenFromTitan implements IProjectCard {
-    public cost: number = 25;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.NITROGEN_FROM_TITAN;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 25;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.NITROGEN_FROM_TITAN;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) : boolean {

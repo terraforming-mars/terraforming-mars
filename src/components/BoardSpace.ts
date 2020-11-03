@@ -1,5 +1,6 @@
 import Vue from "vue";
 import {Bonus} from "./Bonus";
+import { SpaceModel } from "../models/SpaceModel";
 import { TileType } from "../TileType";
 import { $t } from "../directives/i18n";
 
@@ -45,7 +46,20 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
 ]);
 
 export const BoardSpace = Vue.component("board-space", {
-    props: ["space", "text", "is_selectable", "aresExtension"],
+    props: {
+        space: {
+            type: Object as () => SpaceModel
+        },
+        text: {
+            type: String
+        },
+        is_selectable: {
+            type: Boolean
+        },
+        aresExtension: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {}
     },
@@ -53,7 +67,7 @@ export const BoardSpace = Vue.component("board-space", {
         "bonus": Bonus
     },
     methods: {
-        getVerboseTitle: function (tileType: TileType): string {
+        getVerboseTitle: function (tileType: TileType | undefined): string {
             let ret: string = ""; 
             if (tileType === TileType.MOHOLE_AREA) {
                 ret = "Mohole Area"

@@ -49,12 +49,14 @@ describe("PharmacyUnion", function () {
         const ants = new Ants();
         player.playedCards.push(ants);
         card.onCardPlayed(player, game, ants);
+        game.deferredActions.runNext(); // Add microbe and lose 4 MC
         expect(card.resourceCount).to.eq(3);
         expect(player.megaCredits).to.eq(4);
 
         const viralEnhancers = new ViralEnhancers();
         player2.playedCards.push(viralEnhancers);
         card.onCardPlayed(player2, game, viralEnhancers);
+        game.deferredActions.runNext(); // Add microbe and lose 4 MC
         expect(player2.megaCredits).to.eq(8); // should not change
         expect(card.resourceCount).to.eq(4);
         expect(player.megaCredits).to.eq(0);
@@ -67,7 +69,7 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(searchForLife);
         card.onCardPlayed(player, game, searchForLife);
         expect(game.deferredActions).has.lengthOf(1);
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(1);
@@ -89,9 +91,9 @@ describe("PharmacyUnion", function () {
         player.playedCards.push(research);
         card.onCardPlayed(player, game, research);
         expect(game.deferredActions).has.lengthOf(2);
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
-        expect(game.deferredActions[0].execute()).is.undefined;
+        expect(game.deferredActions.next()!.execute()).is.undefined;
         game.deferredActions.shift();
 
         expect(card.resourceCount).to.eq(0);
@@ -106,8 +108,8 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player, game, searchForLife);
         expect(game.deferredActions).has.lengthOf(1);
         
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
-        game.deferredActions.splice(0, 1);
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(23);
@@ -129,7 +131,7 @@ describe("PharmacyUnion", function () {
         card.resourceCount = 0;
         card.onCardPlayed(player, game, new SearchForLife());
         
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(card.isDisabled).is.true;
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
@@ -147,6 +149,7 @@ describe("PharmacyUnion", function () {
         card.resourceCount = 0;
         player2.playedCards.push(viralEnhancers);
         card.onCardPlayed(player2, game, viralEnhancers);
+        game.deferredActions.runNext(); // Add microbe and lose 4 MC
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
         expect(game.deferredActions).has.lengthOf(0);
@@ -158,7 +161,7 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player, game, viralEnhancers);
         expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[1].cb(); // Add disease then remove it
         expect(card.resourceCount).to.eq(0);
         expect(player.megaCredits).to.eq(4);

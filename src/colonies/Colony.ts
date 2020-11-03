@@ -1,4 +1,5 @@
 import { Player, PlayerId } from "../Player";
+import { PlayerInput } from "../PlayerInput";
 import { SelectSpace } from '../inputs/SelectSpace';
 import { SerializedColony } from "../SerializedColony";
 import { Game } from '../Game';
@@ -6,11 +7,12 @@ import { Resources } from '../Resources';
 import { LogHelper } from "../components/LogHelper";
 import { MAX_COLONY_TRACK_POSITION } from "../constants";
 import { CardName } from "../CardName";
+import { GiveTradeBonus } from "../deferredActions/GiveTradeBonus";
 
 export interface IColony extends SerializedColony {
     trade: (player: Player, game: Game, usesTradeFleet?: boolean) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
-    giveTradeBonus: (player: Player, game: Game) => void;
+    giveTradeBonus: (player: Player, game: Game) => undefined | PlayerInput;
     endGeneration: () => void;
     increaseTrack(value?: number): void;
     decreaseTrack(value?: number): void;
@@ -67,13 +69,10 @@ export abstract class Colony {
         colony.trackPosition = this.colonies.length;
         colony.visitor = player.id;
         player.tradesThisTurn++;
-        // Trigger current player interrupts first
-        colony.colonies.filter(colonyPlayerId => colonyPlayerId === player.id).forEach(playerId => {
-            colony.giveTradeBonus(game.getPlayerById(playerId), game);
-        });
-        colony.colonies.filter(colonyPlayerId => colonyPlayerId !== player.id).forEach(playerId => {
-            colony.giveTradeBonus(game.getPlayerById(playerId), game);
-        });
+        if (colony.colonies.length > 0) {
+            // Special deferred action that gets triggered for all players at the same time
+            game.defer(new GiveTradeBonus(player, game, colony));
+        }
     }
     public addColony(colony: IColony, player: Player, game: Game): void {
         colony.colonies.push(player.id);

@@ -1,5 +1,4 @@
 import { IActionCard } from "../ICard";
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
@@ -11,10 +10,10 @@ import { Game } from "../../Game";
 import { CardType } from "../CardType"
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
-    public name: CardName = CardName.ROBINSON_INDUSTRIES;
-    public tags: Array<Tags> = [];
+    public name = CardName.ROBINSON_INDUSTRIES;
+    public tags = [];
     public startingMegaCredits: number = 47;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
     public play() {
         return undefined;
     }

@@ -12,10 +12,10 @@ import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferre
 import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class AquiferPumping implements IActionCard, IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.AQUIFER_PUMPING;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 18;
+    public tags = [Tags.STEEL];
+    public name = CardName.AQUIFER_PUMPING;
+    public cardType = CardType.ACTIVE;
 
     public play() {
       return undefined;

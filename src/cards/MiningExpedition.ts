@@ -1,6 +1,5 @@
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
-import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
@@ -10,10 +9,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class MiningExpedition implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.MINING_EXPEDITION;
+    public cost = 12;
+    public tags = [];
+    public cardType = CardType.EVENT;
+    public name = CardName.MINING_EXPEDITION;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

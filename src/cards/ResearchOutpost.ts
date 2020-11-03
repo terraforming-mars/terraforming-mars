@@ -10,10 +10,10 @@ import { PlayerInput } from "../PlayerInput";
 import { CardName } from '../CardName';
 
 export class ResearchOutpost implements IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.RESEARCH_OUTPOST;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 18;
+    public tags = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
+    public name = CardName.RESEARCH_OUTPOST;
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)

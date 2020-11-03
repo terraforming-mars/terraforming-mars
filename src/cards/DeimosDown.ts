@@ -10,10 +10,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
 
 export class DeimosDown implements IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.DEIMOS_DOWN;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 31;
+    public tags = [Tags.SPACE];
+    public name = CardName.DEIMOS_DOWN;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

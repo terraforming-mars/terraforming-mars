@@ -5,8 +5,8 @@ import { IProjectCard } from "../IProjectCard";
 import { CardName } from "../../CardName";
 
 export class ResearchGrant extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
-    public name: CardName = CardName.RESEARCH_GRANT;
+    public tags = [Tags.SCIENCE, Tags.SCIENCE];
+    public name = CardName.RESEARCH_GRANT;
 
     public play(player: Player) {
         player.megaCredits += 8;

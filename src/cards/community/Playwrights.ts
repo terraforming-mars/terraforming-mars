@@ -11,10 +11,10 @@ import { Resources } from "../../Resources";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class Playwrights implements CorporationCard {
-    public name: CardName =  CardName.PLAYWRIGHTS;
-    public tags: Array<Tags> = [Tags.ENERGY];
+    public name =  CardName.PLAYWRIGHTS;
+    public tags = [Tags.ENERGY];
     public startingMegaCredits: number = 38;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
     
     public play(player: Player) {
         player.addProduction(Resources.ENERGY);

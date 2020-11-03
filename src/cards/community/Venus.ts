@@ -1,5 +1,6 @@
 import { Colony, IColony } from "../../colonies/Colony";
 import { Player } from "../../Player";
+import { PlayerInput } from '../../PlayerInput';
 import { Game } from "../../Game";
 import { ColonyName } from "../../colonies/ColonyName";
 import { Tags } from "../Tags";
@@ -31,7 +32,7 @@ export class Venus extends Colony implements IColony {
         return undefined;
     }
     
-    public giveTradeBonus(player: Player, game: Game): void {
-        game.defer(new AddResourcesToCard(player, game, undefined, 1, Tags.VENUS, "Select Venus card to add 1 resource"));
+    public giveTradeBonus(player: Player, game: Game): undefined | PlayerInput {
+        return (new AddResourcesToCard(player, game, undefined, 1, Tags.VENUS, "Select Venus card to add 1 resource")).execute();
     }   
 }

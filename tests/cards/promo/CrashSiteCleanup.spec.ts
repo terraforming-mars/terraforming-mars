@@ -27,7 +27,7 @@ describe("CrashSiteCleanup", function () {
         const smallAsteroid = new SmallAsteroid();
         smallAsteroid.play(player, game);
         // Choose Remove 1 plant option
-        const orOptions = game.deferredActions[0].execute() as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb([player2]);
 
         expect(card.canPlay(player, game)).is.true;
@@ -47,7 +47,7 @@ describe("CrashSiteCleanup", function () {
 
         // Trigger plants removal
         expect(game.deferredActions).has.lengthOf(1);
-        game.deferredActions[0].execute();
+        game.deferredActions.next()!.execute();
 
         expect(card.canPlay(player, game)).is.true;
         expect(game.someoneHasRemovedOtherPlayersPlants).is.true;

@@ -7,10 +7,10 @@ import { Tags } from "../Tags";
 import { TileType } from "../../TileType";
 
 export class EcologicalSurvey implements IProjectCard {
-  public cost: number = 9;
-  public tags: Array<Tags> = [Tags.SCIENCE];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.ECOLOGICAL_SURVEY;
+  public cost = 9;
+  public tags = [Tags.SCIENCE];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.ECOLOGICAL_SURVEY;
 
   private countGreeneryTiles(game: Game): number {
     return game.board.spaces.filter(

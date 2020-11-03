@@ -40,6 +40,7 @@ import { ResourceType } from "./ResourceType";
 import { Resources } from "./Resources";
 import { SelectCard } from "./inputs/SelectCard";
 import { DeferredAction } from "./deferredActions/DeferredAction";
+import { DeferredActionsQueue } from "./deferredActions/DeferredActionsQueue";
 import { SelectHowToPayDeferred } from "./deferredActions/SelectHowToPayDeferred";
 import { PlaceOceanTile } from "./deferredActions/PlaceOceanTile";
 import { RemoveColonyFromGame } from "./deferredActions/RemoveColonyFromGame";
@@ -104,7 +105,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public lastSaveId: number = 0;
     private clonedGamedId: string | undefined;
     public seed: number = Math.random();
-    public deferredActions: Array<DeferredAction> = [];
+    public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
     public gameAge: number = 0; // Each log event increases it
     public gameLog: Array<LogMessage> = [];
     
@@ -277,7 +278,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
-      // Give each player their corporation cards and other cards
+      // Initialize each player:
+      // Give them their corporation cards, other cards, starting production,
+      // handicaps.
       for (let i = 0; i < players.length; i++) {
         const player = players[i];
         const remainingPlayers = this.players.length - i;
@@ -534,31 +537,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
             this.deferredActions.unshift(action);
         } else {
             this.deferredActions.push(action);
-        }
-    }
-
-    public getNextDeferredAction(): DeferredAction | undefined {
-        return this.deferredActions[0];
-    }
-
-    public getNextDeferredActionForPlayer(playerId: string): DeferredAction | undefined {
-        return this.deferredActions.find(action => action.player.id === playerId);
-    }
-
-    private removeDeferredAction(action: DeferredAction): void {
-        this.deferredActions.splice(this.deferredActions.indexOf(action), 1);
-    }
-
-    public runDeferredAction(action: DeferredAction, cb: () => void): void {
-        const input = action.execute();
-        if (input !== undefined) {
-            action.player.setWaitingFor(input, () => {
-                this.removeDeferredAction(action);
-                cb();
-            });
-        } else {
-            this.removeDeferredAction(action);
-            cb();
         }
     }
 
@@ -875,13 +853,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private resolveTurmoilDeferredActions() {
-        const action = this.getNextDeferredAction();
-        if (action !== undefined) {
-            this.runDeferredAction(action, () => this.resolveTurmoilDeferredActions());
-            return;
-        }
-        // All turmoil deferred actions have been resolved, continue game flow
-        this.goToDraftOrResearch();
+        this.deferredActions.runAll(() => this.goToDraftOrResearch());
     }
 
     private goToDraftOrResearch() {
@@ -953,12 +925,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
         this.researchedPlayers.add(player.id);
         if (this.allPlayersHaveFinishedResearch()) {
-            const action = this.getNextDeferredAction();
-            if (action !== undefined) {
-                this.runDeferredAction(action, () => this.playerIsFinishedWithResearchPhase(player));
-                return;
-            }
-            this.gotoActionPhase();
+            this.deferredActions.runAll(() => this.gotoActionPhase());
         }
     }
 
@@ -1096,11 +1063,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Deferred actions hook
       if (this.deferredActions.length > 0) {
-        const action = this.getNextDeferredAction();
-        if (action !== undefined) {
-          this.runDeferredAction(action, () => this.playerIsFinishedTakingActions());
-          return;
-        }
+          this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
+        return;
       }
 
       if (this.allPlayersHavePassed()) {
@@ -1402,14 +1366,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
+      // Oceans are not subject to Ares adjacency production penalties.
+      const subjectToHazardAdjacency = (tile.tileType === TileType.OCEAN) ? false : true;
+
       AresHandler.ifAres(this, () => {
-        AresHandler.assertCanPay(this, player, space);
+        AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
       });
 
       // Part 2. Collect additional fees.
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       AresHandler.ifAres(this, () => {
-        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
       });
 
       // Hellas special requirements ocean tile
@@ -1735,6 +1702,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
       const o = Object.assign(this, d);
+
+      // Brand new deferred actions queue
+      this.deferredActions = new DeferredActionsQueue();
 
       // Rebuild dealer object to be sure that we will have cards in the same order
       const dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension, this.gameOptions.communityCardsOption);

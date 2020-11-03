@@ -3,12 +3,39 @@ import { CreateGameForm } from "./CreateGameForm";
 import { GameHome } from "./GameHome";
 import { GamesOverview } from "./GamesOverview";
 import { PlayerHome } from "./PlayerHome";
+import { PlayerModel } from "../models/PlayerModel";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
 import { DebugUI } from "./DebugUI";
+import { GameHomeModel } from "../models/GameHomeModel";
 import { HelpIconology } from "./HelpIconology";
 
 import * as raw_settings from "../../assets/settings.json";
+
+interface MainAppData {
+    screen: "create-game-form" |
+            "debug-ui" |
+            "empty" |
+            "game-home" |
+            "games-overview" |
+            "help-iconology" |
+            "load" |
+            "player-home" |
+            "start-screen" |
+            "the-end";
+    /**
+     * We set player once the app component has loaded. Vue only
+     * watches properties that exist initially. When we
+     * use this property we can't trigger vue state without
+     * a refactor.
+     */
+    player?: PlayerModel;
+    playerkey: number;
+    settings: typeof raw_settings;
+    isServerSideRequestInProgress: boolean;
+    componentsVisibility: {[x: string]: boolean};
+    game: GameHomeModel | undefined;
+}
 
 export const mainAppSettings = {
     "el": "#app",
@@ -27,11 +54,9 @@ export const mainAppSettings = {
             "pinned_player_3": false,
             "pinned_player_4": false,
             "turmoil_parties": false,
-        },
-        game: {
-            players: [],
-        },
-    },
+        } as {[x: string]: boolean},
+        game: undefined as GameHomeModel | undefined
+    } as MainAppData,
     "components": {
         "start-screen": StartScreen,
         "create-game-form": CreateGameForm,
@@ -46,15 +71,15 @@ export const mainAppSettings = {
     "methods": {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
             if (isVisible === this.getVisibilityState(targetVar)) return;
-            (this as any).componentsVisibility[targetVar] = isVisible;
+            (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
         },
         getVisibilityState: function (targetVar: string): boolean {
-            return (this as any).componentsVisibility[targetVar] ? true : false;
+            return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
         },
         updatePlayer: function () {
             const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();
-            const app = this as any;
+            const app = this as unknown as typeof mainAppSettings.data;
             xhr.open(
                 "GET",
                 "/api/player" +
@@ -65,7 +90,7 @@ export const mainAppSettings = {
             };
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    app.player = xhr.response;
+                    app.player = xhr.response as PlayerModel;
                     app.playerkey++;
                     if (
                         app.player.phase === "end" &&
@@ -76,7 +101,7 @@ export const mainAppSettings = {
                             window.history.replaceState(
                                 xhr.response,
                                 "Teraforming Mars - Player",
-                                "/the-end?id=" + xhr.response.id
+                                "/the-end?id=" + app.player.id
                             );
                         }
                     } else {
@@ -85,7 +110,7 @@ export const mainAppSettings = {
                             window.history.replaceState(
                                 xhr.response,
                                 "Teraforming Mars - Game",
-                                "/player?id=" + xhr.response.id
+                                "/player?id=" + app.player.id
                             );
                         }
                     }
@@ -99,7 +124,7 @@ export const mainAppSettings = {
     },
     "mounted": function () {
         const currentPathname: string = window.location.pathname;
-        const app = this as any;
+        const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
         if (currentPathname === "/player" || currentPathname === "/the-end") {
             app.updatePlayer();
         } else if (currentPathname === "/game") {
@@ -116,7 +141,7 @@ export const mainAppSettings = {
                         "Teraforming Mars - Game",
                         "/game?id=" + xhr.response.id
                     );
-                    app.game = xhr.response;
+                    app.game = xhr.response as GameHomeModel;
                 } else {
                     alert("Unexpected server response");
                 }

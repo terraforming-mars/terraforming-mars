@@ -2,15 +2,6 @@ import { CardName } from "./CardName";
 
 export const HTML_DATA: Map<string, string> =
   new Map ([
-    [CardName.COLONIZER_TRAINING_CAMP,` 
-        <div class="content ">
-            <div class="points points-big ">2</div>
-            <div class="requirements requirements-max ">max 5% O2</div>
-            <div class="description ">
-                (Oxygen must be 5% or less.)
-            </div>
-        </div>
-`],
 [CardName.ASTEROID_MINING_CONSORTIUM,` 
         <div class="content ">
             <div class="points points-big ">1</div>
@@ -88,7 +79,7 @@ export const HTML_DATA: Map<string, string> =
                 ">
             </div>
             <div class="description " style="text-align:left;">
-                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.)<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
                     1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
                 </div>
@@ -303,12 +294,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.)
             </div>
-        </div>
-`],
-[CardName.INTERSTELLAR_COLONY_SHIP,` 
-        <div class="content ">
-            <div class="points points-big ">4</div>
-            <div class="requirements ">5 Science</div>
         </div>
 `],
 [CardName.SECURITY_FLEET,` 
@@ -1244,15 +1229,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.BREATHING_FILTERS,` 
-        <div class="content ">
-            <div class="points points-big ">2</div>
-            <div class="requirements">7% O2</div>
-            <div class="description ">
-                (Requires 7% oxygen.)
-            </div>
-        </div>
-`],
 [CardName.ARTIFICIAL_PHOTOSYNTHESIS,` 
         <div class="content ">
           <div class="production-box production-box-size4">
@@ -1297,15 +1273,6 @@ export const HTML_DATA: Map<string, string> =
           (Requires +4 C or warmer. Increase your MC production 2 steps and your plant production 2 steps. Gain 2 Plants.)
         </div>
       </div>
-`],
-[CardName.DUST_SEALS,` 
-        <div class="content ">
-            <div class="points points-big ">1</div>
-            <div class="requirements requirements-max ">max 3 Oceans</div>
-            <div class="description ">
-                (Requires 3 or less ocean tiles.)
-            </div>
-        </div>
 `],
 [CardName.URBANIZED_AREA,` 
         <div class="content ">
@@ -1368,7 +1335,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix plus"></div><div class="money production ">2</div>
             </div>
             <div class="description ">
-                (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.
+                (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.)
             </div>
         </div>
 `],
@@ -1474,15 +1441,6 @@ export const HTML_DATA: Map<string, string> =
                 (It must be -10 C or colder.)
             </div>
         </div>
-`],
-[CardName.ADVANCED_ECOSYSTEMS,` 
-      <div class="content">
-        <div class="points points-big">3</div>
-        <div class="requirements">Plant Microbe Animal</div>
-        <div class="description">
-          (Requires a Plant tag, a Microbe tag, and an Animal tag.)
-        </div>
-      </div>
 `],
 [CardName.GREAT_DAM,` 
       <div class="content">
@@ -2035,7 +1993,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix plus"></div><div class="money production">2</div>
           </div>
           <div class="description" style="position:absolute;margin-top:-85px;text-align:left;margin-left:80px;font-size:10px;">
-            (Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.
+            (Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.)
           </div>
         </div>
 `],
@@ -2577,12 +2535,6 @@ export const HTML_DATA: Map<string, string> =
                  (Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA)
             </div>
           </div>
-`],
-[CardName.LUXURY_FOODS,` 
-            <div class="content ">
-              <div class="points points-big">2</div>
-              <div class="requirements"> Venus Earth Jovian</div>
-            </div>
 `],
 [CardName.MAXWELL_BASE,` 
             <div class="content ">
@@ -5407,15 +5359,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
   </div>
 `],
-[CardName.PUBLIC_CELEBRATIONS, ` 
-  <div class="content ">
-    <div class="points points-big">2</div>
-    <div class="requirements">Chairman</div>
-      <div class="description ">
-        (Requires that you are Chairman.)
-      </div>
-  </div>
-`],
 [CardName.RECRUITMENT, ` 
   <div class="content ">
     <div class="minus"></div> <div class="delegate delegate-red"></div>* &nbsp;&nbsp; <div class="plus"></div> <div class="delegate"></div>
@@ -5580,7 +5523,7 @@ export const HTML_DATA: Map<string, string> =
           <br>
           <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
           <div class="description effect">
-            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.)
+            (Effect: You have influence +1. When you send a delegate using the lobbying action, you pay 2 MC less for it.)
           </div>
         </div>
       </div>
@@ -5633,12 +5576,14 @@ export const HTML_DATA: Map<string, string> =
 [CardName.VALUABLE_GASES,`
       <div class="content">
         <div class="resource money">6</div>
-        <div class="resource card" style="margin-left:10px">
+        <br>
+        PLAY
+        <div class="resource card">
           <div class="card-icon tag-venus"></div>
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 6 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
+          Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.
         </div>
       </div>
 `],
@@ -5681,7 +5626,7 @@ export const HTML_DATA: Map<string, string> =
         <div>Trade all colonies with</div>
         <div class="tile trade"></div> : <span class="card-sign">+1</span>
         <div class="description">
-          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
+          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.
           <br><br>Gain 2 MC (SOLO: Gain 10 MC).
         </div>
       </div>

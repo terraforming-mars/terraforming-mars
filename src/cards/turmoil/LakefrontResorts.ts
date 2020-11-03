@@ -8,10 +8,10 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class LakefrontResorts implements CorporationCard {
-    public name: CardName = CardName.LAKEFRONT_RESORTS;
-    public tags: Array<Tags> = [Tags.STEEL];
+    public name = CardName.LAKEFRONT_RESORTS;
+    public tags = [Tags.STEEL];
     public startingMegaCredits: number = 54;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.oceanBonus = 3;

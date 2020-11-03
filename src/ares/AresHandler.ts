@@ -259,21 +259,23 @@ export class AresHandler {
         }
     }
 
-    private static computeAdjacencyCosts(game: Game, space: ISpace): IAdjacencyCost {
+    private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
         // Summing up production cost isn't really the way to do it, because each tile could
         // reduce different production costs. Oh well.
         let megaCreditCost = 0;
         let productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach(adjacentSpace => {
           megaCreditCost += adjacentSpace.adjacency?.cost || 0;
-          const severity = this.hazardSeverity(adjacentSpace);
-          switch(severity) {
-            case HazardSeverity.MILD:
-                productionCost += 1;
-                break;
-            case HazardSeverity.SEVERE:                  
-                productionCost += 2;
-                break;
+          if (subjectToHazardAdjacency === true) {
+            const severity = this.hazardSeverity(adjacentSpace);
+            switch(severity) {
+                case HazardSeverity.MILD:
+                    productionCost += 1;
+                    break;
+                case HazardSeverity.SEVERE:                  
+                    productionCost += 2;
+                    break;
+            }
         }});
 
         const severity = this.hazardSeverity(space);
@@ -289,22 +291,22 @@ export class AresHandler {
         return { megacredits: megaCreditCost, production: productionCost };
     }
 
-    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+    public static assertCanPay(game: Game, player: Player, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
         if (game.phase === Phase.SOLAR) {
             return {megacredits: 0, production: 0 };
         }
-        const cost = AresHandler.computeAdjacencyCosts(game, space);
+        const cost = AresHandler.computeAdjacencyCosts(game, space, subjectToHazardAdjacency);
 
         // Make this more sophisticated, a player can pay for different adjacencies
         // with different production units, and, a severe hazard can't split payments.
-        const avaialbleProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
+        const availableProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
             + player.getProduction(Resources.STEEL)
             + player.getProduction(Resources.TITANIUM)
             + player.getProduction(Resources.PLANTS)
             + player.getProduction(Resources.ENERGY)
             + player.getProduction(Resources.HEAT);
 
-        if (avaialbleProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+        if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
            return cost;
         } 
         if (cost.production > 0) {
@@ -314,8 +316,8 @@ export class AresHandler {
         }
     }
 
-    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
-        const cost = this.assertCanPay(game, player, space);
+    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
+        const cost = this.assertCanPay(game, player, space, subjectToHazardAdjacency);
 
         if (cost.production > 0) {
             // TODO(kberg): don't send interrupt if total is available.

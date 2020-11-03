@@ -5,10 +5,10 @@ import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 
 export class CryoSleep implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.CRYO_SLEEP;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 10;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.CRYO_SLEEP;
+    public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
         player.colonyTradeDiscount++;

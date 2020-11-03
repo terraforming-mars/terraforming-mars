@@ -9,10 +9,10 @@ import { CardType } from "../CardType";
 
 
 export class ValleyTrust implements CorporationCard {
-    public name: CardName = CardName.VALLEY_TRUST;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name = CardName.VALLEY_TRUST;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 37;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         return card.tags.filter(tag => tag === Tags.SCIENCE).length * 2;

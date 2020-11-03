@@ -10,10 +10,10 @@ import { TileType } from "../../TileType";
 import { AresHandler } from "../../ares/AresHandler";
 
 export class DesperateMeasures implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [Tags.EVENT];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.DESPERATE_MEASURES;
+    public cost = 1;
+    public tags = [Tags.EVENT];
+    public cardType = CardType.EVENT;
+    public name = CardName.DESPERATE_MEASURES;
 
     private getHazardTiles(game: Game) {
       return game.board.spaces.filter(space => AresHandler.hasHazardTile(space));

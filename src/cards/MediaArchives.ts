@@ -9,10 +9,10 @@ import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class MediaArchives implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.MEDIA_ARCHIVES;
+    public cost = 8;
+    public tags = [Tags.EARTH];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.MEDIA_ARCHIVES;
 
     public play(player: Player, game: Game) {
         let allPlayedEvents = 0;

@@ -12,10 +12,10 @@ import { Tags } from "../Tags";
 import { RemoveAnyPlants } from "../../deferredActions/RemoveAnyPlants";
 
 export class MetallicAsteroid implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.EVENT];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.METALLIC_ASTEROID;
+    public cost = 13;
+    public tags = [Tags.SPACE, Tags.EVENT];
+    public cardType = CardType.EVENT;
+    public name = CardName.METALLIC_ASTEROID;
     public play(player: Player, game: Game) {
         player.titanium++;
         game.increaseTemperature(player, 1);

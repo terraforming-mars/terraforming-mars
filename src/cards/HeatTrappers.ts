@@ -8,10 +8,10 @@ import { CardName } from "../CardName";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class HeatTrappers implements IProjectCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: CardName = CardName.HEAT_TRAPPERS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 6;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public name = CardName.HEAT_TRAPPERS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(_player: Player, game: Game): boolean {

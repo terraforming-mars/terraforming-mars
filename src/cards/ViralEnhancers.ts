@@ -10,10 +10,10 @@ import { ResourceType } from "../ResourceType";
 import { DeferredAction } from "../deferredActions/DeferredAction";
 
 export class ViralEnhancers implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: CardName = CardName.VIRAL_ENHANCERS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 9;
+    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public name = CardName.VIRAL_ENHANCERS;
+    public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;

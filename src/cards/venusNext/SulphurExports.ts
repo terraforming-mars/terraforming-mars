@@ -10,10 +10,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class SulphurExports implements IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.SULPHUR_EXPORTS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 21;
+    public tags = [Tags.VENUS, Tags.SPACE];
+    public name = CardName.SULPHUR_EXPORTS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

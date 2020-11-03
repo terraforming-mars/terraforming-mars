@@ -8,10 +8,10 @@ import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
 export class Soletta implements IProjectCard {
-    public cost: number = 35;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.SOLETTA;
+    public cost = 35;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.SOLETTA;
 
     public play(player: Player, _game: Game) {
         player.addProduction(Resources.HEAT,7);

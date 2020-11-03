@@ -33,7 +33,7 @@ describe("TitanFloatingLaunchPad", function () {
         // No resource and no other card to add to
         card.action(player, game);
         expect(game.deferredActions).has.lengthOf(1);
-        const input = game.deferredActions[0].execute();
+        const input = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
@@ -41,7 +41,7 @@ describe("TitanFloatingLaunchPad", function () {
         // No open colonies and no other card to add to
         card.action(player, game);
         expect(game.deferredActions).has.lengthOf(1);
-        const input2 = game.deferredActions[0].execute();
+        const input2 = game.deferredActions.next()!.execute();
         game.deferredActions.shift();
         expect(input2).is.undefined;
         expect(card.resourceCount).to.eq(2);
@@ -54,7 +54,7 @@ describe("TitanFloatingLaunchPad", function () {
 
         card.action(player, game);
         expect(game.deferredActions).has.lengthOf(1);
-        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
         selectCard.cb([card]);
         expect(card.resourceCount).to.eq(1);
     });
@@ -74,14 +74,14 @@ describe("TitanFloatingLaunchPad", function () {
 
         orOptions.options[0].cb(); // Add resource
         expect(game.deferredActions).has.lengthOf(1);
-        const selectCard = game.deferredActions[0].execute() as SelectCard<ICard>;
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
         game.deferredActions.shift();
         selectCard.cb([card]);
         expect(card.resourceCount).to.eq(8);
 
         orOptions.options[1].cb(); // Trade for free
         expect(game.deferredActions).has.lengthOf(1);
-        const selectColony = game.deferredActions[0].execute() as SelectColony;
+        const selectColony = game.deferredActions.next()!.execute() as SelectColony;
         selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
         expect(card.resourceCount).to.eq(7);
         expect(player.megaCredits).to.eq(2);

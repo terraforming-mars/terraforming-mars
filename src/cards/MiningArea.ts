@@ -6,7 +6,7 @@ import { CardName } from "../CardName";
 import { MiningCard } from "./MiningCard";
 
 export class MiningArea extends MiningCard {
-    public cost: number = 4;
+    public cost = 4;
     public name = CardName.MINING_AREA;
     protected getAvailableSpaces(player: Player, game: Game) {
         return super.getAvailableSpaces(player, game)

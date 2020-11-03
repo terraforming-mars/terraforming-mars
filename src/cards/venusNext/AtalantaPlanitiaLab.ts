@@ -6,10 +6,10 @@ import { Game } from "../../Game";
 import { CardName } from '../../CardName';
 
 export class AtalantaPlanitiaLab implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SCIENCE];
-    public name: CardName = CardName.ATALANTA_PLANITIA_LAB;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.VENUS, Tags.SCIENCE];
+    public name = CardName.ATALANTA_PLANITIA_LAB;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3;
     }

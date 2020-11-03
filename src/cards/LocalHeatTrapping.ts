@@ -2,7 +2,6 @@
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Tags } from "./Tags";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { SelectCard } from "../inputs/SelectCard";
@@ -16,10 +15,10 @@ import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class LocalHeatTrapping implements IProjectCard {
-    public cardType: CardType = CardType.EVENT;
-    public cost: number = 1;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.LOCAL_HEAT_TRAPPING;
+    public cardType = CardType.EVENT;
+    public cost = 1;
+    public tags = [];
+    public name = CardName.LOCAL_HEAT_TRAPPING;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         const requiredHeatAmt = 5;

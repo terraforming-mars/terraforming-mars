@@ -8,12 +8,12 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
-    public name: CardName =  CardName.STORMCRAFT_INCORPORATED;
-    public tags: Array<Tags> = [Tags.JOVIAN];
+    public name =  CardName.STORMCRAFT_INCORPORATED;
+    public tags = [Tags.JOVIAN];
     public startingMegaCredits: number = 48;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play() {
         return undefined;

@@ -9,10 +9,10 @@ import { ResourceType } from "../../ResourceType";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class EcologyResearch implements IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBES];
-    public name: CardName = CardName.ECOLOGY_RESEARCH;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 21;
+    public tags = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBES];
+    public name = CardName.ECOLOGY_RESEARCH;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         const coloniesCount = player.getColoniesCount(game); 

@@ -8,11 +8,11 @@ import { Game } from '../../Game';
 import { IResourceCard } from '../ICard';
 
 export class MartianZoo implements IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.ANIMAL, Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_ZOO;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public cost = 12;
+    public tags = [Tags.ANIMAL, Tags.STEEL];
+    public name = CardName.MARTIAN_ZOO;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {

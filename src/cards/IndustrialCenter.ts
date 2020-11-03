@@ -14,10 +14,10 @@ import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferre
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.INDUSTRIAL_CENTER;
+    public cost = 4;
+    public tags = [Tags.STEEL];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.INDUSTRIAL_CENTER;
     public hasRequirements = false;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
 

@@ -15,10 +15,10 @@ describe("ExperimentalForest", function () {
         expect(game.deferredActions).has.lengthOf(2);
 
         // Draw cards
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
 
         // Select Greenery space
-        const selectSpace = game.deferredActions[0].execute() as SelectSpace;
+        const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
 
         expect(selectSpace).is.not.undefined;
         expect(selectSpace instanceof SelectSpace).is.true;

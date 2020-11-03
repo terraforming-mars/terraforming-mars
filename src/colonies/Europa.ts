@@ -1,5 +1,6 @@
 import { Colony, IColony } from "./Colony";
 import { Player } from "../Player";
+import { PlayerInput } from '../PlayerInput';
 import { Resources } from "../Resources";
 import { Game } from "../Game";
 import { ColonyName } from "./ColonyName";
@@ -43,7 +44,8 @@ export class Europa extends Colony implements IColony {
         game.defer(new PlaceOceanTile(player, game, 'Select ocean for Europa colony'));
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.megaCredits++;
+        return undefined;
     }    
 }

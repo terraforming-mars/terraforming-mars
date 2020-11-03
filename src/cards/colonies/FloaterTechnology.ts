@@ -8,10 +8,10 @@ import { Game } from "../../Game";
 import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class FloaterTechnology implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.FLOATER_TECHNOLOGY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 7;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.FLOATER_TECHNOLOGY;
+    public cardType = CardType.ACTIVE;
 
     public canAct(player: Player): boolean {
         return player.getResourceCards(ResourceType.FLOATER).length > 0;

@@ -6,8 +6,8 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class AlliedBanks extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.ALLIED_BANKS;
+    public tags = [Tags.EARTH];
+    public name = CardName.ALLIED_BANKS;
 
     public play(player: Player) {
         player.addProduction(Resources.MEGACREDITS, 4);

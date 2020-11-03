@@ -1,6 +1,5 @@
 import { CardType } from "./CardType";
 import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
@@ -11,10 +10,10 @@ import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class PermafrostExtraction implements IProjectCard {
-    public cardType: CardType = CardType.EVENT;
-    public tags: Array<Tags> = [];
-    public cost: number = 8;
-    public name: CardName = CardName.PERMAFROST_EXTRACTION;
+    public cardType = CardType.EVENT;
+    public tags = [];
+    public cost = 8;
+    public name = CardName.PERMAFROST_EXTRACTION;
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsTemperatureRequirements = game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));

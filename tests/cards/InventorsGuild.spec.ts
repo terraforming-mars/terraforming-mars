@@ -31,7 +31,7 @@ describe("InventorsGuild", function () {
         player.megaCredits = 3;
 
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runDeferredAction(game.deferredActions[0], () => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand).has.lengthOf(1);
     });

@@ -82,7 +82,7 @@ checkComponent(
 checkComponent(
     "src/components/LoadGameForm",
     require("./dist/src/components/LoadGameForm").LoadGameForm,
-    ["gameId"]
+    ["gameId", "nbrSavesToDelete"]
 );
 checkComponent(
     "src/components/LogPanel",

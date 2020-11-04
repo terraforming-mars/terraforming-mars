@@ -18,6 +18,6 @@ describe("Tag", function () {
                 type: "main"
             }
         });
-        expect(tag.find("div[class=\"tag-count tag-vp tag-size-big tag-type-main\"]").exists()).to.eq(true);
+        expect(tag.find("div[class=\"tag-count tag-vp tag-size-big tag-type-main\"]").exists()).is.true;
     });
 });

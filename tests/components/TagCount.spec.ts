@@ -16,8 +16,8 @@ describe("TagCount", function () {
                 count: 0
             }
         });
-        expect(tagCount.find("div[class=\"tag-display tag-no-show\"]").exists()).to.eq(true);
-        expect(tagCount.find("span[class=\"tag-count-display tag-count-no-show\"]").exists()).to.eq(true);
+        expect(tagCount.find("div[class=\"tag-display tag-no-show\"]").exists()).is.true;
+        expect(tagCount.find("span[class=\"tag-count-display tag-count-no-show\"]").exists()).is.true;
     });
     it("renders with count", function () {
         const tagCount = mount(TagCount, {
@@ -26,7 +26,7 @@ describe("TagCount", function () {
                 count: 2
             }
         });
-        expect(tagCount.find("div[class=\"tag-display\"]").exists()).to.eq(true);
-        expect(tagCount.find("span[class=\"tag-count-display\"]").exists()).to.eq(true);
+        expect(tagCount.find("div[class=\"tag-display\"]").exists()).is.true;
+        expect(tagCount.find("span[class=\"tag-count-display\"]").exists()).is.true;
     });
 });

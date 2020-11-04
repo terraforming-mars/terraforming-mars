@@ -3794,8 +3794,10 @@ export const HTML_DATA: Map<string, string> =
     </div>
     </div>
     <div class="corporation-logo">APHRODITE</div><br>
-    <div class="production-box"><div class="production plant"></div></div>
-    <div class="resource money">47</div>
+    <div class="starting-resources">
+        <div class="production-box"><div class="production plant"></div></div>
+        <div class="resource money">47</div>
+    </div>
     <div class="description description-starting-resource">(You start with 1 plant production and 47 MC)</div>
     </div>
 `],

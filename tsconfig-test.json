@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "moduleResolution": "node",
         "lib": ["dom"],
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -17,6 +17,7 @@
         "types": ["node", "mocha", "chai"]
     },
     "include": [
+        "tests/utils/Vue.ts",
         "tests/**/*.spec.ts"
     ]
 }

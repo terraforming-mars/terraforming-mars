@@ -4,7 +4,7 @@ import { FundedAwardModel } from "../models/FundedAwardModel";
 export const Award = Vue.component("award", {
     props: {
         awards_list: {
-            type: Object as () => Array<FundedAwardModel>
+            type: Array as () => Array<FundedAwardModel>
         }
     },
     data: function () {

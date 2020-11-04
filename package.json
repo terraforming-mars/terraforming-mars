@@ -26,10 +26,12 @@
     "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-vue": "^6.2.2",
     "js-beautify": "^1.13.0",
+    "jsdom": "^16.4.0",
     "mocha": "^6.2.3",
     "nyc": "^14.1.1"
   },
@@ -42,10 +44,10 @@
     "start": "node make_static_json.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
-    "test": "mocha --recursive dist/tests",
+    "test": "mocha --file dist/tests/utils/Vue.js --recursive dist/tests",
     "testgiven": "tsc --build tsconfig.json && webpack --config webpack.config.js && tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",
-    "cover": "nyc mocha --recursive dist/tests"
+    "cover": "nyc mocha --file dist/tests/utils/Vue.js --recursive dist/tests"
   },
   "repository": {
     "type": "git",

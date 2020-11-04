@@ -10,6 +10,7 @@ import { IColony } from "../../colonies/Colony";
 import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyName } from "../../colonies/ColonyName";
 import { ColonyModel } from "../../models/ColonyModel";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class Aridor implements CorporationCard {
     public name =  CardName.ARIDOR;
@@ -17,8 +18,8 @@ export class Aridor implements CorporationCard {
     public startingMegaCredits: number = 40;
     public allTags = new Set();
     public cardType = CardType.CORPORATION;
-
     public initialActionText: string = "Add a colony tile";
+    
     public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
         
@@ -30,10 +31,17 @@ export class Aridor implements CorporationCard {
             if (game.colonyDealer !== undefined) {
                 availableColonies.forEach(colony => {
                     if (colony.name === colonyName) {
-                      game.colonies.push(colony);
-                      game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
-                      game.log("${0} added a new Colony tile: ${1}", b => b.player(player).colony(colony));
-                      this.checkActivation(colony, game);
+                        game.defer(new DeferredAction(
+                            player,
+                            () => {
+                                game.colonies.push(colony);
+                                game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
+                                game.log("${0} added a new Colony tile: ${1}", b => b.player(player).colony(colony));
+                                this.checkActivation(colony, game);
+                                return undefined;
+                            }
+                        ));
+                      
                       return undefined;
                     }
                     return undefined;

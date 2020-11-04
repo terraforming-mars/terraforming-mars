@@ -2107,9 +2107,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             corporationCard.initialActionText !== undefined &&
             this.corporationInitialActionDone === false
         ) {
-            const initialAction = corporationCard.initialAction;
             const initialActionOption = new SelectOption("Take " + corporationCard.name + "'s first action", corporationCard.initialActionText, () => {
-                game.defer(new DeferredAction(this, () => initialAction(this, game)));
+                game.defer(new DeferredAction(this, () => {
+                    if (corporationCard.initialAction) {
+                        return corporationCard.initialAction(this, game);
+                    } else {
+                        return undefined;
+                    }
+                }));
                 this.corporationInitialActionDone = true;
                 return undefined;
             })

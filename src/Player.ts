@@ -101,6 +101,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public actionsTakenThisRound: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
+    private corporationInitialActionDone: boolean = false;
 
     // Cards
     public dealtCorporationCards: Array<CorporationCard> = [];
@@ -2094,31 +2095,34 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         game.phase = Phase.ACTION;
       }
 
-      if (
-        game.getGeneration() === 1 &&
-            this.corporationCard !== undefined &&
-            this.corporationCard.initialAction !== undefined &&
-            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
-            this.actionsTakenThisRound === 0
-      ) {
-        const input = this.corporationCard.initialAction(this, game);
-        if (input !== undefined) {
-          game.defer(new DeferredAction(
-            this,
-            () => input
-          ));
+        if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
+            this.actionsTakenThisRound = 0;
+            game.playerIsFinishedTakingActions();
+            return;
         }
-        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
-        return;
-      }
 
-      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
-        this.actionsTakenThisRound = 0;
-        game.playerIsFinishedTakingActions();
-        return;
-      }         
+        const corporationCard = this.corporationCard;
+        if (corporationCard !== undefined &&
+            corporationCard.initialAction !== undefined &&
+            corporationCard.initialActionText !== undefined &&
+            this.corporationInitialActionDone === false
+        ) {
+            const initialAction = corporationCard.initialAction;
+            const initialActionOption = new SelectOption("Take " + corporationCard.name + "'s first action", corporationCard.initialActionText, () => {
+                game.defer(new DeferredAction(this, () => initialAction(this, game)));
+                this.corporationInitialActionDone = true;
+                return undefined;
+            })
+            const initialActionOrPass = new OrOptions(
+                initialActionOption,
+                this.passOption(game)
+            );
+            this.setWaitingFor(initialActionOrPass, () => {
+                this.actionsTakenThisRound++;
+                this.takeAction(game);
+            });
+            return;
+        }
 
       const action: OrOptions = new OrOptions();
       action.title = "Take action for action phase, select one " +

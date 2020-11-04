@@ -16,6 +16,7 @@ export class Splice implements CorporationCard {
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
     public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw a card with a microbe tag";
     public initialAction(player: Player, game: Game) { 
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
         

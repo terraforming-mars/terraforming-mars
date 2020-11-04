@@ -23,6 +23,7 @@ export class ProjectWorkshop implements CorporationCard {
         return undefined;
     }
 
+    public initialActionText: string = "Draw a blue card";
     public initialAction(player: Player, game: Game) {
         const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
         player.cardsInHand.push(drawnCard);

@@ -22,6 +22,7 @@ export class Vitor implements CorporationCard {
         });
     }
 
+    public initialActionText: string = "Fund an award for free";
     public initialAction(player: Player, game: Game) {
         // Awards are disabled for 1 player games
         if (game.isSoloMode()) {

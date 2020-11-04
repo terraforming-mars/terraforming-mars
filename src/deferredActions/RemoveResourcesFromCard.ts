@@ -8,44 +8,19 @@ import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
 import { DeferredAction } from "./DeferredAction";
 
+// TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [ CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE ];
 
 export class RemoveResourcesFromCard implements DeferredAction {
     constructor(
         public player: Player,
         public game: Game,
-        public resourceType: ResourceType | undefined,
+        public resourceType: ResourceType,
         public count: number = 1,
         public ownCardsOnly: boolean = false,
-        public mandatory: boolean = true,
+        public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
         public title: string = "Select card to remove " + count + " " + resourceType + "(s)"
     ){}
-
-    public static getAvailableTargetCards(player: Player, game: Game, resourceType: ResourceType | undefined, ownCardsOnly: boolean = false): Array<ICard> {
-        let resourceCards: Array<ICard>;
-        if (ownCardsOnly) {
-            if (resourceType === ResourceType.ANIMAL) {
-                resourceCards = player.getCardsWithResources(resourceType).filter(card => animalsProtectedCards.indexOf(card.name) === -1);
-            } else {
-                resourceCards = player.getCardsWithResources(resourceType);
-            }
-        } else {
-            resourceCards = [];
-            game.getPlayers().forEach(p => {
-                switch (resourceType) {
-                    case ResourceType.ANIMAL:
-                        if (p.hasProtectedHabitats() && player.id !== p.id) return;
-                        resourceCards.push(...p.getCardsWithResources(resourceType).filter(card => animalsProtectedCards.indexOf(card.name) === -1));
-                        break;
-                    case ResourceType.MICROBE:
-                        if (p.hasProtectedHabitats() && player.id !== p.id) return;
-                    default:
-                        resourceCards.push(...p.getCardsWithResources(resourceType));
-                }
-            });
-        }
-        return resourceCards;
-    }
 
     public execute() {
         if (this.ownCardsOnly === false && this.game.isSoloMode()) {
@@ -85,5 +60,31 @@ export class RemoveResourcesFromCard implements DeferredAction {
             new SelectOption("Do not remove", "Confirm", () => { return undefined; })
         );
 
+    }
+
+    public static getAvailableTargetCards(player: Player, game: Game, resourceType: ResourceType | undefined, ownCardsOnly: boolean = false): Array<ICard> {
+        let resourceCards: Array<ICard>;
+        if (ownCardsOnly) {
+            if (resourceType === ResourceType.ANIMAL) {
+                resourceCards = player.getCardsWithResources(resourceType).filter(card => animalsProtectedCards.indexOf(card.name) === -1);
+            } else {
+                resourceCards = player.getCardsWithResources(resourceType);
+            }
+        } else {
+            resourceCards = [];
+            game.getPlayers().forEach(p => {
+                switch (resourceType) {
+                    case ResourceType.ANIMAL:
+                        if (p.hasProtectedHabitats() && player.id !== p.id) return;
+                        resourceCards.push(...p.getCardsWithResources(resourceType).filter(card => animalsProtectedCards.indexOf(card.name) === -1));
+                        break;
+                    case ResourceType.MICROBE:
+                        if (p.hasProtectedHabitats() && player.id !== p.id) return;
+                    default:
+                        resourceCards.push(...p.getCardsWithResources(resourceType));
+                }
+            });
+        }
+        return resourceCards;
     }
 }    

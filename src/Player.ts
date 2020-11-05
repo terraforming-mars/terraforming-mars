@@ -1600,8 +1600,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
       const opts: Array<OrOptions | SelectColony> = [];
-      let payWith: Resources | undefined = undefined; 
+      let payWith: Resources | ResourceType | undefined = undefined;
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+      const titanFloatingLaunchPad = this.playedCards.find(card => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
+
       const selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
@@ -1623,6 +1625,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             } else if (payWith === Resources.TITANIUM) {
               this.titanium -= (3 - this.colonyTradeDiscount);
               colony.trade(this, game);
+            } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad && titanFloatingLaunchPad.resourceCount) {
+                titanFloatingLaunchPad.resourceCount--;
+                this.actionsThisGeneration.add(titanFloatingLaunchPad.name);
+                colony.trade(this, game);
             }
             return undefined;
           }
@@ -1647,6 +1653,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         payWith = Resources.TITANIUM;
         return undefined;
       });
+
+      if (titanFloatingLaunchPad && titanFloatingLaunchPad.resourceCount && titanFloatingLaunchPad.resourceCount > 0) {
+        howToPayForTrade.options.push(new SelectOption("Pay 1 Floater (use Titan Floating Launch-pad action)", "", () => {
+            payWith = ResourceType.FLOATER;
+            return undefined;
+          }));
+      }
 
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);

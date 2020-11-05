@@ -10,11 +10,8 @@ export class AerospaceMission extends PreludeCard implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.AEROSPACE_MISSION;
 
-    public canPlay(player: Player, _game: Game, bonusMc?: number) {
-        const requiredPayment = 14 - (bonusMc || 0);
-      
-        if (requiredPayment <= 0) return true;
-        return player.canAfford(requiredPayment);
+    public canPlay(player: Player, _game: Game) {
+        return player.canAfford(14);
     }
 
     public play(player: Player, game: Game) {

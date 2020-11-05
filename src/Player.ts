@@ -1625,7 +1625,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             } else if (payWith === Resources.TITANIUM) {
               this.titanium -= (3 - this.colonyTradeDiscount);
               colony.trade(this, game);
-            } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad && titanFloatingLaunchPad.resourceCount) {
+            } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount) {
                 titanFloatingLaunchPad.resourceCount--;
                 this.actionsThisGeneration.add(titanFloatingLaunchPad.name);
                 colony.trade(this, game);
@@ -1654,7 +1654,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return undefined;
       });
 
-      if (titanFloatingLaunchPad && titanFloatingLaunchPad.resourceCount && titanFloatingLaunchPad.resourceCount > 0) {
+      if (titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount !== undefined && titanFloatingLaunchPad.resourceCount > 0) {
         howToPayForTrade.options.push(new SelectOption("Pay 1 Floater (use Titan Floating Launch-pad action)", "", () => {
             payWith = ResourceType.FLOATER;
             return undefined;

@@ -3786,28 +3786,20 @@ export const HTML_DATA: Map<string, string> =
     
     <div class="venus-icon corporation-icon"></div>
     <div class="contentCorporation">
-      <div class="corporationEffectBox">
+    <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
-        <div class="tile venus-tile">V</div> : <div class="resource money">2</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
+        <div class="tile venus-tile red-outline">V</div> : <div class="resource money">2</div>
+        <div class="description description-effect">
           (Effect: Whenever Venus is terraformed 1 step, you gain 2MC.)
-        </div>
-      </div>
-      <div style="font-size:23px;
-                    color: orange;
-                    font-weight:bold;
-                    margin-top:10px;
-                    text-shadow:  6px 6px 6px  grey;
-                    text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;">
-                APHRODITE</div>
-                <br><div class="production-box " style="margin-top:5px;margin-left:50px; ">
-                <div class="production plant "></div>
-            </div>
-            <div class="resource money " style="margin-left:20px; ">47</div>
-            <div class="description " style="text-align:center; ">
-                (You start with 1 plant production and 47 MC)
-            </div>
-        </div>
+    </div>
+    </div>
+    <div class="corporation-logo">APHRODITE</div><br>
+    <div class="starting-resources">
+        <div class="production-box"><div class="production plant"></div></div>
+        <div class="resource money">47</div>
+    </div>
+    <div class="description description-starting-resource">(You start with 1 plant production and 47 MC)</div>
+    </div>
 `],
 [CardName.CELESTIC,` 
       

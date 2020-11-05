@@ -822,9 +822,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
         return;
       }
+      
       // solar Phase Option
+      this.phase = Phase.SOLAR;
       if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {
-        this.phase = Phase.SOLAR;
         this.gotoWorldGovernmentTerraforming();
         return;
       }
@@ -832,7 +833,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoEndGeneration() {
-      this.phase = Phase.INTERGENERATION
       if (this.gameOptions.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -848,7 +848,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.resolveTurmoilDeferredActions();
         return;
       }
-      
+     
+      this.phase = Phase.INTERGENERATION;
       this.goToDraftOrResearch();
     }
 

@@ -7,11 +7,10 @@ import { Resources } from "../Resources";
 
 export interface IProjectCard extends ICard {
     addPlayCardDeferredAction?: (player: Player, game: Game) => void;
-    canPlay?: (player: Player, game: Game, bonusMc?: number) => boolean;
+    canPlay?: (player: Player, game: Game) => boolean;
     cardType: CardType;
     cost: number;
     resourceType?: ResourceType;
     hasRequirements?: boolean;
     bonusResource?: Resources | undefined;
-    bonusMc?: number | undefined; 
 }

@@ -12,7 +12,7 @@ import { DeferredAction } from "../../deferredActions/DeferredAction";
 export class ByElection extends PreludeCard implements IProjectCard {
     public tags = [Tags.WILDCARD];
     public name = CardName.BY_ELECTION;
-    public canPlay(__player: Player, game: Game) {
+    public canPlay(_player: Player, game: Game) {
         return game.turmoil !== undefined;
     }
     public play(player: Player, game: Game) {
@@ -26,8 +26,8 @@ export class ByElection extends PreludeCard implements IProjectCard {
         setRulingParty.title = "Select new ruling party";
         setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
             p.partyName, "Select", () => {
-            turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
-            return undefined;
+                turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+                return undefined;
             })
         )];
 

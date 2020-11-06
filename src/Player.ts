@@ -1187,8 +1187,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
-    public playProjectCard(game: Game): PlayerInput {
-      const cb = (selectedCard: IProjectCard, howToPay: HowToPay) => {
+    public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, game: Game) {
         const cardCost: number = this.getCardCost(game, selectedCard);
         let totalToPay: number = 0;
 
@@ -1237,9 +1236,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Did not spend enough to pay for card");
         }
         return this.playCard(game, selectedCard, howToPay);
-      };
+    }
 
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.getFloatersCanSpend(), this.canUseHeatAsMegaCredits, cb);
+    public playProjectCard(game: Game): PlayerInput {
+        return new SelectHowToPayForCard(
+            this.getPlayableCards(game),
+            this.getMicrobesCanSpend(),
+            this.getFloatersCanSpend(),
+            this.canUseHeatAsMegaCredits,
+            (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, game)
+        );
     }
 
     public getMicrobesCanSpend(): number {

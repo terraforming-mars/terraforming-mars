@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { VenusianPlants } from "../../../src/cards/venusNext/VenusianPlants";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { Thermophiles } from '../../../src/cards/venusNext/Thermophiles';
-import { Game } from '../../../src/Game';
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { Thermophiles } from "../../../src/cards/venusNext/Thermophiles";
+import { Game } from "../../../src/Game";
 import { VenusianAnimals } from "../../../src/cards/venusNext/VenusianAnimals";
 
 describe("VenusianPlants", function () {

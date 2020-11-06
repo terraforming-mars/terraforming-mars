@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { TundraFarming } from "../../src/cards/TundraFarming";
 import { ResearchCoordination } from "../../src/cards/prelude/ResearchCoordination";
-import { ResearchNetwork } from '../../src/cards/prelude/ResearchNetwork';
+import { ResearchNetwork } from "../../src/cards/prelude/ResearchNetwork";
 
 describe("AdvancedEcosystems", function () {
     let card : AdvancedEcosystems, player : Player

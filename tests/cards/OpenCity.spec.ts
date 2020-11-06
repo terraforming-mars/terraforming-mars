@@ -3,7 +3,7 @@ import { OpenCity } from "../../src/cards/OpenCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("OpenCity", function () {
     let card : OpenCity, player : Player, game : Game;

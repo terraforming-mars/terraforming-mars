@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { MoholeExcavation } from "../../../src/cards/prelude/MoholeExcavation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("MoholeExcavation", function () {
     it("Should play", function () {

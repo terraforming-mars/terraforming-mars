@@ -3,7 +3,7 @@ import { Farming } from "../../src/cards/Farming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Farming", function () {
     let card : Farming, player : Player, game : Game;

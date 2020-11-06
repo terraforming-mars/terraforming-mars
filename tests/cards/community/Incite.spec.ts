@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Incite } from "../../../src/cards/community/Incite";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { setCustomGameOptions } from "../../TestingUtils";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";

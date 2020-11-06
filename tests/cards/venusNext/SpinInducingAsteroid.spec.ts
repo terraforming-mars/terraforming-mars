@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { SpinInducingAsteroid } from "../../../src/cards/venusNext/SpinInducingAsteroid";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { MorningStarInc } from '../../../src/cards/venusNext/MorningStarInc';
+import { Game } from "../../../src/Game";
+import { MorningStarInc } from "../../../src/cards/venusNext/MorningStarInc";
 
 describe("SpinInducingAsteroid", function () {
     let card : SpinInducingAsteroid, player : Player, game : Game;

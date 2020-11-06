@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { BeamFromAThoriumAsteroid } from "../../src/cards/BeamFromAThoriumAsteroid";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("BeamFromAThoriumAsteroid", function () {
     let card : BeamFromAThoriumAsteroid, player : Player;

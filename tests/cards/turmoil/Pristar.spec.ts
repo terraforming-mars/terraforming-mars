@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Pristar } from "../../../src/cards/turmoil/Pristar";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("Pristar", function () {
     it("Should play", function () {

@@ -5,7 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("ProtectedValley", function () {
     it("Should play", function () {

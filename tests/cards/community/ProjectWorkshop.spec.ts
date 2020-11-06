@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ProjectWorkshop } from "../../../src/cards/community/ProjectWorkshop";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { CardType } from "../../../src/cards/CardType";
 import { EarthOffice } from "../../../src/cards/EarthOffice";
 import { OrOptions } from "../../../src/inputs/OrOptions";

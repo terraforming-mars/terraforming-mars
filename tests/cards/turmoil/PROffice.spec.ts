@@ -3,7 +3,7 @@ import { PROffice } from "../../../src/cards/turmoil/PROffice";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Sponsors } from "../../../src/cards/Sponsors";
 import { AcquiredCompany } from "../../../src/cards/AcquiredCompany";

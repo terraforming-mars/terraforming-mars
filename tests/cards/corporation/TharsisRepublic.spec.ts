@@ -5,7 +5,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("TharsisRepublic", function () {
     let card : TharsisRepublic, player : Player, player2 : Player, game : Game;

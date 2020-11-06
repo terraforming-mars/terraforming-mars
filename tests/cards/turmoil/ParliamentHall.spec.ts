@@ -3,7 +3,7 @@ import { ParliamentHall } from "../../../src/cards/turmoil/ParliamentHall";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { DeepWellHeating } from "../../../src/cards/DeepWellHeating";
 import { MartianRails } from "../../../src/cards/MartianRails";

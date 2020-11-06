@@ -3,7 +3,7 @@ import { TitanAirScrapping } from "../../../src/cards/colonies/TitanAirScrapping
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("TitanAirScrapping", function () {
     let card : TitanAirScrapping, player : Player, game : Game;

@@ -3,8 +3,8 @@ import { LunarMining } from "../../../src/cards/colonies/LunarMining";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { SpaceHotels } from '../../../src/cards/prelude/SpaceHotels';
-import { LunaGovernor } from '../../../src/cards/colonies/LunaGovernor';
+import { SpaceHotels } from "../../../src/cards/prelude/SpaceHotels";
+import { LunaGovernor } from "../../../src/cards/colonies/LunaGovernor";
 
 describe("LunarMining", function () {
     it("Should play", function () {

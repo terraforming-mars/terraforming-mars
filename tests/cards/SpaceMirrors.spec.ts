@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { SpaceMirrors } from "../../src/cards/SpaceMirrors";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
-import { Game } from '../../src/Game';
+import { Resources } from "../../src/Resources";
+import { Game } from "../../src/Game";
 
 describe("SpaceMirrors", function () {
     let card : SpaceMirrors, player : Player, game : Game;

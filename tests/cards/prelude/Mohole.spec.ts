@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { Mohole } from "../../../src/cards/prelude/Mohole";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Mohole", function () {
     it("Should play", function () {

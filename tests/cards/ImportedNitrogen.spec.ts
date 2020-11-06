@@ -6,8 +6,8 @@ import { AndOptions } from "../../src/inputs/AndOptions";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { Pets } from "../../src/cards/Pets";
-import { ICard } from '../../src/cards/ICard';
-import { Game } from '../../src/Game';
+import { ICard } from "../../src/cards/ICard";
+import { Game } from "../../src/Game";
 
 describe("ImportedNitrogen", function () {
     let card : ImportedNitrogen, player : Player, game : Game;

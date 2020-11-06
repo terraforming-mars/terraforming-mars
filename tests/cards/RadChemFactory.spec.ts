@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { RadChemFactory } from "../../src/cards/RadChemFactory";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
-import { Game } from '../../src/Game';
+import { Resources } from "../../src/Resources";
+import { Game } from "../../src/Game";
 
 describe("RadChemFactory", function () {
     let card : RadChemFactory, player : Player, game : Game;

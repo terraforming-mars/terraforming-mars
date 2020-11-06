@@ -3,7 +3,7 @@ import { Lichen } from "../../src/cards/Lichen";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Lichen", function () {
     let card : Lichen, player : Player, game : Game;

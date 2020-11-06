@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { SolarWindPower } from "../../src/cards/SolarWindPower";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("SolarWindPower", function () {
     it("Should play", function () {

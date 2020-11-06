@@ -3,7 +3,7 @@ import { SpaceElevator } from "../../src/cards/SpaceElevator";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("SpaceElevator", function () {
     let card : SpaceElevator, player : Player, game : Game;

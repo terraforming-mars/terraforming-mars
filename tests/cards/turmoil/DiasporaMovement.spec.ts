@@ -3,7 +3,7 @@ import { DiasporaMovement } from "../../../src/cards/turmoil/DiasporaMovement";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { ColonizerTrainingCamp } from "../../../src/cards/ColonizerTrainingCamp";
 import { MethaneFromTitan } from "../../../src/cards/MethaneFromTitan";

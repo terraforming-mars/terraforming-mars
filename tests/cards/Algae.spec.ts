@@ -3,7 +3,7 @@ import { Algae } from "../../src/cards/Algae";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { TileType } from "../../src/TileType";
 
 describe("Algae", function () {

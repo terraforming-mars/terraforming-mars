@@ -2,10 +2,10 @@ import { expect } from "chai";
 import { AirScrappingExpedition } from "../../../src/cards/venusNext/AirScrappingExpedition";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Celestic } from '../../../src/cards/venusNext/Celestic';
+import { Celestic } from "../../../src/cards/venusNext/Celestic";
 import { SelectCard } from "../../../src/inputs/SelectCard";
-import { ICard } from '../../../src/cards/ICard';
-import { Game } from '../../../src/Game';
+import { ICard } from "../../../src/cards/ICard";
+import { Game } from "../../../src/Game";
 
 describe("AirScrappingExpedition", function () {
     it("Should play", function () {

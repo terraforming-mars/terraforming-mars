@@ -3,7 +3,7 @@ import { KelpFarming } from "../../src/cards/KelpFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { maxOutOceans } from "../TestingUtils";
 
 describe("KelpFarming", function () {

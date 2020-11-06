@@ -6,7 +6,7 @@ import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
-import * as constants from '../../src/constants';
+import * as constants from "../../src/constants";
 
 describe("ArtificialLake", function () {
     let card : ArtificialLake, player : Player, game : Game;

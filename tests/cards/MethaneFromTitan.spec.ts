@@ -3,7 +3,7 @@ import { MethaneFromTitan } from "../../src/cards/MethaneFromTitan";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("MethaneFromTitan", function () {
     let card : MethaneFromTitan, player : Player, game : Game;

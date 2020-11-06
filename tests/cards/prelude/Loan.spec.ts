@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Loan } from "../../../src/cards/prelude/Loan";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Loan", function () {
     let card : Loan, player : Player;

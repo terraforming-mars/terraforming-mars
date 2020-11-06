@@ -3,10 +3,10 @@ import { AsteroidMining } from "../../src/turmoil/globalEvents/AsteroidMining";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { MethaneFromTitan } from '../../src/cards/MethaneFromTitan';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { MethaneFromTitan } from "../../src/cards/MethaneFromTitan";
 
 describe("AsteroidMining", function () {
     it("resolve play", function () {

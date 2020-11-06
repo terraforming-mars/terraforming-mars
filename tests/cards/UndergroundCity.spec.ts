@@ -3,7 +3,7 @@ import { UndergroundCity } from "../../src/cards/UndergroundCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("UndergroundCity", function () {
     let card : UndergroundCity, player : Player, game : Game;

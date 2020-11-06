@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { UtopiaInvest } from "../../../src/cards/turmoil/UtopiaInvest";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
-import { OrOptions } from '../../../src/inputs/OrOptions';
+import { Resources } from "../../../src/Resources";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("UtopiaInvest", function () {
     it("Should play", function () {

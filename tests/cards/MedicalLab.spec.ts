@@ -4,7 +4,7 @@ import { MedicalLab } from "../../src/cards/MedicalLab";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Capital } from "../../src/cards/Capital";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("MedicalLab", function () {
     it("Should play", function () {

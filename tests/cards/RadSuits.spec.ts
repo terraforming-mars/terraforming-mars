@@ -3,7 +3,7 @@ import { RadSuits } from "../../src/cards/RadSuits";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("RadSuits", function () {
     let card : RadSuits, player : Player, game : Game;

@@ -4,7 +4,7 @@ import { Soletta } from "../../src/cards/Soletta";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Soletta", function () {
     it("Should play", function () {

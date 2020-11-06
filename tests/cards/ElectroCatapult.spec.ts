@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { OrOptions } from "../../src/inputs/OrOptions";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("ElectroCatapult", function () {
     let card : ElectroCatapult, player : Player, game : Game;

@@ -3,7 +3,7 @@ import { SponsoredMohole } from "../../../src/cards/turmoil/SponsoredMohole";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 

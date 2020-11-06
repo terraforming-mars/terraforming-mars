@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { BiosphereSupport } from "../../../src/cards/prelude/BiosphereSupport";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("BiosphereSupport", function () {
     let card : BiosphereSupport, player : Player;

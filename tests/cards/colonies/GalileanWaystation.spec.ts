@@ -3,9 +3,9 @@ import { GalileanWaystation } from "../../../src/cards/colonies/GalileanWaystati
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { ColonizerTrainingCamp } from "../../../src/cards/ColonizerTrainingCamp";
-import { MethaneFromTitan } from '../../../src/cards/MethaneFromTitan';
+import { MethaneFromTitan } from "../../../src/cards/MethaneFromTitan";
 import { ResearchCoordination } from "../../../src/cards/prelude/ResearchCoordination";
 import { ResearchNetwork } from "../../../src/cards/prelude/ResearchNetwork";
 

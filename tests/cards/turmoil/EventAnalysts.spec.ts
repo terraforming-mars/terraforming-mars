@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { EventAnalysts } from "../../../src/cards/turmoil/EventAnalysts";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 

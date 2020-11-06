@@ -4,7 +4,7 @@ import { MicroMills } from "../../src/cards/MicroMills";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("MicroMills", function () {
     it("Should play", function () {

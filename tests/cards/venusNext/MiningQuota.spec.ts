@@ -3,8 +3,8 @@ import { MiningQuota } from "../../../src/cards/venusNext/MiningQuota";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { SisterPlanetSupport } from '../../../src/cards/venusNext/SisterPlanetSupport';
-import { ResearchNetwork } from '../../../src/cards/prelude/ResearchNetwork';
+import { SisterPlanetSupport } from "../../../src/cards/venusNext/SisterPlanetSupport";
+import { ResearchNetwork } from "../../../src/cards/prelude/ResearchNetwork";
 
 describe("MiningQuota", function () {
     it("Should play", function () {

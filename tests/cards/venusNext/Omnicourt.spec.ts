@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Omnicourt } from "../../../src/cards/venusNext/Omnicourt";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("Omnicourt", function () {
     it("Should play", function () {

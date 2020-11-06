@@ -3,7 +3,7 @@ import { SulphurExports } from "../../../src/cards/venusNext/SulphurExports";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("SulphurExports", function () {
     it("Should play", function () {

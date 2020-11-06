@@ -4,10 +4,10 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { SelectSpace } from '../../../src/inputs/SelectSpace';
-import { TileType } from '../../../src/TileType';
-import { ResearchNetwork } from '../../../src/cards/prelude/ResearchNetwork';
-import { LunaGovernor } from '../../../src/cards/colonies/LunaGovernor';
+import { SelectSpace } from "../../../src/inputs/SelectSpace";
+import { TileType } from "../../../src/TileType";
+import { ResearchNetwork } from "../../../src/cards/prelude/ResearchNetwork";
+import { LunaGovernor } from "../../../src/cards/colonies/LunaGovernor";
 
 describe("Gyropolis", function () {
     it("Should play", function () {

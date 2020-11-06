@@ -4,7 +4,7 @@ import { DeepWellHeating } from "../../src/cards/DeepWellHeating";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("DeepWellHeating", function () {
     it("Should play", function () {

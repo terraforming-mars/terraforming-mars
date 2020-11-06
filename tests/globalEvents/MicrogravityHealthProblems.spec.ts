@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { MicrogravityHealthProblems } from "../../src/turmoil/globalEvents/MicrogravityHealthProblems";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { Luna } from "../../src/colonies/Luna";
 import { Triton } from "../../src/colonies/Triton";
 

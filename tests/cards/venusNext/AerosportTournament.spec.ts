@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { AerosportTournament } from "../../../src/cards/venusNext/AerosportTournament";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { Celestic } from '../../../src/cards/venusNext/Celestic';
+import { Game } from "../../../src/Game";
+import { Celestic } from "../../../src/cards/venusNext/Celestic";
 
 describe("AerosportTournament", function () {
     it("Should play", function () {

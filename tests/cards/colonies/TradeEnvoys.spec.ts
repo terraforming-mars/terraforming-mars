@@ -3,7 +3,7 @@ import { TradeEnvoys } from "../../../src/cards/colonies/TradeEnvoys";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { Ceres } from '../../../src/colonies/Ceres';
+import { Ceres } from "../../../src/colonies/Ceres";
 
 describe("TradeEnvoys", function () {
     it("Should play", function () {

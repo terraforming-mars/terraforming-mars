@@ -1,4 +1,4 @@
-import { Colony } from '../../colonies/Colony';
+import { Colony, ShouldIncreaseTrack } from '../../colonies/Colony';
 import { Resources } from '../../Resources';
 import { ColonyName } from '../../colonies/ColonyName';
 import { ColonyBenefitType } from "../../colonies/ColonyBenefitType";
@@ -13,4 +13,5 @@ export class Titania extends Colony {
     public colonyBonusType = ColonyBenefitType.LOSE_RESOURCES;
     public colonyBonusQuantity = 3;
     public colonyBonusResource = Resources.MEGACREDITS;
+    public shouldIncreaseTrack = ShouldIncreaseTrack.NO;
 }

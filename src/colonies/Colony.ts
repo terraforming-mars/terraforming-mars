@@ -10,7 +10,7 @@ import { Player, PlayerId } from "../Player";
 import { PlayerInput } from "../PlayerInput";
 import { ResourceType } from "../ResourceType";
 import { Resources } from "../Resources";
-import { ScienceTagCard } from '../cards/community/ScienceTagCard';
+import { ScienceTagCard } from "../cards/community/ScienceTagCard";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectColony } from "../inputs/SelectColony";
 import { SelectPlayer } from "../inputs/SelectPlayer";
@@ -27,6 +27,8 @@ import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 import { SelectCardToKeep } from "../deferredActions/SelectCardToKeep";
 import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
 import { StealResources } from "../deferredActions/StealResources";
+
+export enum ShouldIncreaseTrack { YES, NO, ASK }
 
 export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
@@ -47,6 +49,7 @@ export abstract class Colony implements SerializedColony {
     public abstract colonyBonusType: ColonyBenefitType;
     public colonyBonusQuantity: number = 1;
     public colonyBonusResource?: Resources;
+    public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
 
     public endGeneration(): void {
@@ -90,14 +93,13 @@ export abstract class Colony implements SerializedColony {
         const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
         const steps = maxTrackPosition - this.trackPosition;
 
-        if (steps === 0 || this.tradeType === ColonyBenefitType.GAIN_VP) {
+        if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
             // Don't increase
             this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade);
             return;
         }
 
-        if ((this.tradeType !== ColonyBenefitType.GAIN_PRODUCTION && this.tradeType !== ColonyBenefitType.STEAL_RESOURCES)
-            || (this.tradeResource !== undefined && this.tradeResource[this.trackPosition] === this.tradeResource[maxTrackPosition])) {
+        if (this.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.tradeResource !== undefined && this.tradeResource[this.trackPosition] === this.tradeResource[maxTrackPosition])) {
             // No point in asking the player, just increase it
             this.increaseTrack(steps);
             LogHelper.logColonyTrackIncrease(game, player, this, steps);
@@ -204,7 +206,7 @@ export abstract class Colony implements SerializedColony {
 
             case ColonyBenefitType.DRAW_CARDS_AND_DISCARD_ONE:
                 player.cardsInHand.push(game.dealer.dealCard());
-                action = new DiscardCards(player, game, 1, 'Pluto colony bonus. Select a card to discard');
+                action = new DiscardCards(player, game, 1, this.name + " colony bonus. Select a card to discard");
                 break;
 
             case ColonyBenefitType.DRAW_CARDS_AND_KEEP_ONE:
@@ -217,21 +219,25 @@ export abstract class Colony implements SerializedColony {
 
             case ColonyBenefitType.GAIN_CARD_DISCOUNT:
                 player.cardDiscount += 1;
+                game.log("Cards played by ${0} cost 1 MC less this generation", b => b.player(player));
                 break;
 
             case ColonyBenefitType.GAIN_PRODUCTION:
-                player.addProduction(resource!, quantity);
-                LogHelper.logGainProduction(game, player, resource!, quantity);
+                if (resource === undefined) throw new Error("Resource cannot be undefined");
+                player.addProduction(resource, quantity);
+                LogHelper.logGainProduction(game, player, resource, quantity);
                 break;
 
             case ColonyBenefitType.GAIN_RESOURCES:
-                player.setResource(resource!, quantity);
-                LogHelper.logGainStandardResource(game, player, resource!, quantity);
+                if (resource === undefined) throw new Error("Resource cannot be undefined");
+                player.setResource(resource, quantity);
+                LogHelper.logGainStandardResource(game, player, resource, quantity);
                 break;
 
             case ColonyBenefitType.GAIN_SCIENCE_TAG:
                 player.scienceTagCount += 1;
                 player.playCard(game, new ScienceTagCard());
+                game.log("${0} gained 1 Science tag", b => b.player(player));
                 break;
 
             case ColonyBenefitType.GAIN_TR:
@@ -242,15 +248,20 @@ export abstract class Colony implements SerializedColony {
                 break;
 
             case ColonyBenefitType.GAIN_VP:
-                player.colonyVictoryPoints += quantity;
+                if (quantity > 0) {
+                    player.colonyVictoryPoints += quantity;
+                    game.log("${0} gained ${1} VP", b => b.player(player).number(quantity));
+                }
                 break;
 
             case ColonyBenefitType.INCREASE_VENUS_SCALE:
                 game.increaseVenusScaleLevel(player, quantity as 3|2|1);
+                game.log("${0} increased Venus scale ${1} step(s)", b => b.player(player).number(quantity));
                 break;
 
             case ColonyBenefitType.LOSE_RESOURCES:
-                player.setResource(resource!, Math.max(player.getResource(resource!) - quantity, 0));
+                if (resource === undefined) throw new Error("Resource cannot be undefined");
+                player.setResource(resource, Math.max(player.getResource(resource) - quantity, 0));
                 break;
 
             case ColonyBenefitType.OPPONENT_DISCARD:
@@ -265,7 +276,7 @@ export abstract class Colony implements SerializedColony {
                             "Select player to discard a card",
                             "Select",
                             (selectedPlayer: Player) => {
-                                game.defer(new DiscardCards(selectedPlayer, game, 1, "Hygiea colony effect. Select a card to discard"));
+                                game.defer(new DiscardCards(selectedPlayer, game, 1, this.name + " colony effect. Select a card to discard"));
                                 return undefined;
                             }
                         );
@@ -274,15 +285,16 @@ export abstract class Colony implements SerializedColony {
                 break;
 
             case ColonyBenefitType.PLACE_OCEAN_TILE:
-                action = new PlaceOceanTile(player, game, 'Select ocean space for colony');
+                action = new PlaceOceanTile(player, game, "Select ocean space for " + this.name + " colony");
                 break
 
             case ColonyBenefitType.STEAL_RESOURCES:
-                action = new StealResources(player, game, resource!, quantity);
+                if (resource === undefined) throw new Error("Resource cannot be undefined");
+                action = new StealResources(player, game, resource, quantity);
                 break;
 
             default:
-                throw new Error("Unsupported trade type");
+                throw new Error("Unsupported benefit type");
         }
 
         if (action !== undefined) {

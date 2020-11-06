@@ -1,4 +1,4 @@
-import { Colony } from "../../colonies/Colony";
+import { Colony, ShouldIncreaseTrack } from "../../colonies/Colony";
 import { ColonyName } from "../../colonies/ColonyName";
 import { ColonyBenefitType } from "../../colonies/ColonyBenefitType";
 import { Resources } from "../../Resources";
@@ -15,4 +15,5 @@ export class Mercury extends Colony {
     ];
     public colonyBonusType = ColonyBenefitType.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;
+    public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
 }

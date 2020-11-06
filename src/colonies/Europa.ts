@@ -1,4 +1,4 @@
-import { Colony } from "./Colony";
+import { Colony, ShouldIncreaseTrack } from "./Colony";
 import { Resources } from "../Resources";
 import { ColonyName } from "./ColonyName";
 import { ColonyBenefitType } from "./ColonyBenefitType";
@@ -15,4 +15,5 @@ export class Europa extends Colony {
     ];
     public colonyBonusType = ColonyBenefitType.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;
+    public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
 }

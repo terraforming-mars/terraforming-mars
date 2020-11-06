@@ -167,9 +167,9 @@ export abstract class Board {
             // c) the space has a hazard tile.
             if (AresHandler.hasHazardTile(space)) {
                 // Hazard tiles can be covered if they're not protected ... 
-                const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
+                const blockedByDesperateMeasures = space.tile.protectedHazard === true;
                 // and the player can pay the coverage cost
-                const canAfford = (checkAffordability && 
+                const canAfford = (!checkAffordability ||
                     (player === undefined || player.canAfford(AresHandler.hazardCost(space))));
                 return canAfford && !blockedByDesperateMeasures;
             } else {

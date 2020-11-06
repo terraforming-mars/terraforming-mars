@@ -2,6 +2,7 @@
 import { PlayerInputTypes } from "../PlayerInputTypes";
 import { CardModel } from "./CardModel";
 import { ColonyModel } from "./ColonyModel";
+import { Color } from "../Color";
 import { IPayProductionModel } from "./IPayProductionUnitsModel";
 import { IAresData } from "../ares/IAresData";
 
@@ -19,7 +20,7 @@ export interface PlayerInputModel {
     microbes: number | undefined;
     floaters: number | undefined;
     minCardsToSelect: number | undefined;
-    players: Array<string> | undefined;
+    players: Array<Color | "NEUTRAL"> | undefined;
     title: string;
     buttonLabel: string;
     coloniesModel : Array<ColonyModel> | undefined;

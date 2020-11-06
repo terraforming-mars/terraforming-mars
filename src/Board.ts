@@ -143,16 +143,53 @@ export abstract class Board {
             );
     }
 
-    public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
+    public getAvailableSpacesOnLand(player?: Player, checkAffordability = true): Array<ISpace> {
         const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(space => {
             const hasPlayerMarker = space.player !== undefined;
             // A space is available if it doesn't have a player marker on it or it belongs to |player|
             const safeForPlayer = !hasPlayerMarker || space.player === player;
-            // And also, if it doesn't have a tile. Unless it's a hazard tile. 
-            const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space) 
-            // If it does have a hazard tile, make sure it's not a protected one.
-            const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-            return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+            if (safeForPlayer === false) {
+                return false;
+            }
+
+            // The space either a) has no tile, b) has a regualar tile, or c) has a hazard tile.
+
+            // a) the space has no tile.
+            if (space.tile === undefined) {
+                return true;
+            }
+
+            // b) the space has a regular tile.
+            if (!AresHandler.hasHazardTile(space)) {
+                return false;
+            }
+
+            // c) the space has a hazard tile.
+            if (AresHandler.hasHazardTile(space)) {
+                // Hazard tiles can be covered if they're not protected ... 
+                const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
+                // and the player can pay the coverage cost
+                const canAfford = (checkAffordability && 
+                    (player === undefined || player.canAfford(AresHandler.hazardCost(space))));
+                return canAfford && !blockedByDesperateMeasures;
+            } else {
+                return false;
+            }
+
+            // A note about paying additional costs to place a tile. The test for canAfford could actually get much
+            // more complicated.
+            //
+            // As an example, having 0 MC and placing a tile next to Nuclear Zone (which has a 2MC adjacency cost).
+            // Things you would have to consider:
+            // * Are you also placing next to an ocean?
+            // * Are you placing next to Natural Preserve, which only grants one MC? But if you own
+            //   the Natural Preserve, then you get an additional MC.
+            // * Or placing next to another adjacency tile like Mining Area, but you own the space,
+            //   and have Marketing Experts. Then you get 2MC for the placement.
+            //
+            // Can those offset the cost for placing on top of a hazard, or just be additional adjacency costs?
+            //
+            // I don't think it gets more complicated than that ... for now.
         });
 
         return landSpaces;

@@ -143,4 +143,6 @@ describe("Board", function () {
         expect(board.getOceansOnBoard(true)).eq(2);
         expect(board.getOceansOnBoard(false)).eq(1);
     });
+
+    // TODO(kberg) add tests for the canAfford parameter in getAvailableSpacesOnLand
 });

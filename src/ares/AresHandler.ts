@@ -259,6 +259,18 @@ export class AresHandler {
         }
     }
 
+    public static hazardCost(space: ISpace): number {
+        const severity = this.hazardSeverity(space);
+        switch(severity) {
+            case HazardSeverity.MILD:
+                return 8;
+            case HazardSeverity.SEVERE:                  
+                return 16;
+            default:
+                return 0;
+        }        
+    }
+
     private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
         // Summing up production cost isn't really the way to do it, because each tile could
         // reduce different production costs. Oh well.
@@ -278,15 +290,7 @@ export class AresHandler {
             }
         }});
 
-        const severity = this.hazardSeverity(space);
-        switch(severity) {
-            case HazardSeverity.MILD:
-                megaCreditCost += 8;
-                break;
-            case HazardSeverity.SEVERE:                  
-                megaCreditCost += 16;
-                break;
-        }
+        megaCreditCost += this.hazardCost(space);
 
         return { megacredits: megaCreditCost, production: productionCost };
     }

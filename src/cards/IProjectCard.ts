@@ -6,7 +6,6 @@ import { ResourceType } from "../ResourceType";
 import { Resources } from "../Resources";
 
 export interface IProjectCard extends ICard {
-    addPlayCardDeferredAction?: (player: Player, game: Game) => void;
     canPlay?: (player: Player, game: Game) => boolean;
     cardType: CardType;
     cost: number;

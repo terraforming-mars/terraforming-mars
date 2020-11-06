@@ -12,6 +12,10 @@ export class InterplanetaryColonyShip implements IProjectCard {
     public name = CardName.INTERPLANETARY_COLONY_SHIP;
     public cardType = CardType.EVENT;
 
+    public canPlay(player: Player, game: Game): boolean {
+        return player.canPlayColonyPlacementCard(game);
+    }
+
     public play(player: Player, game: Game) {
         game.defer(new BuildColony(player, game, false, "Select colony for Interplanetary Colony Ship"));
         return undefined;

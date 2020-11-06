@@ -2430,5 +2430,15 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public increaseFleetSize() {
       if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
     }
+
+    public canPlayColonyPlacementCard(game: Game): boolean {
+        let colonyTilesAlreadyBuiltOn: number = 0;
+
+        game.colonies.forEach(colony => {
+            if (colony.colonies.includes(this.id)) colonyTilesAlreadyBuiltOn++;
+        });
+
+        return colonyTilesAlreadyBuiltOn < game.colonies.length;
+    }
 }
 

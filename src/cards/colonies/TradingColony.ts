@@ -12,6 +12,10 @@ export class TradingColony implements IProjectCard {
     public name = CardName.TRADING_COLONY;
     public cardType = CardType.ACTIVE;
 
+    public canPlay(player: Player, game: Game): boolean {
+        return player.canPlayColonyPlacementCard(game);
+    }
+
     public play(player: Player, game: Game) {
         game.defer(new BuildColony(player, game, false, "Select colony for Trading Colony"));
         player.colonyTradeOffset++; 

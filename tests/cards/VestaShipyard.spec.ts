@@ -3,7 +3,7 @@ import { VestaShipyard } from "../../src/cards/VestaShipyard";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("VestaShipyard", function () {
     it("Should play", function () {

@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { SulphurEatingBacteria } from "../../../src/cards/venusNext/SulphurEatingBacteria";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { OrOptions } from '../../../src/inputs/OrOptions';
-import { Game } from '../../../src/Game';
+import { OrOptions } from "../../../src/inputs/OrOptions";
+import { Game } from "../../../src/Game";
 
 describe("SulphurEatingBacteria", function () {
     let card : SulphurEatingBacteria, player : Player, game : Game;

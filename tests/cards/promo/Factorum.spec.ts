@@ -3,8 +3,8 @@ import { Factorum } from "../../../src/cards/promo/Factorum";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { Game } from '../../../src/Game';
-import { OrOptions } from '../../../src/inputs/OrOptions';
+import { Game } from "../../../src/Game";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("Factorum", function () {
     it("Should play", function () {

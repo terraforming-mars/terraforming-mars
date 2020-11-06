@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { MiningOperations } from "../../../src/cards/prelude/MiningOperations";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("MiningOperations", function () {
     it("Should play", function () {

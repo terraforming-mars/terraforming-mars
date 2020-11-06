@@ -3,7 +3,7 @@ import { GeneRepair } from "../../src/cards/GeneRepair";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("GeneRepair", function () {
     let card : GeneRepair, player : Player, game : Game;

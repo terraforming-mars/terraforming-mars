@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { GiantSpaceMirror } from "../../src/cards/GiantSpaceMirror";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("GiantSpaceMirror", function () {
     it("Should play", function () {

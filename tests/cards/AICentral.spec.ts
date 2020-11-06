@@ -3,7 +3,7 @@ import { AICentral } from "../../src/cards/AICentral";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("AICentral", function () {
     let card : AICentral, player : Player, game : Game;

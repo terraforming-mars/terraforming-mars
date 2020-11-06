@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { GeothermalPower } from "../../src/cards/GeothermalPower";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("GeothermalPower", function () {
     it("Should play", function () {

@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { Helion } from "../../../src/cards/corporation/Helion";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Helion", function () {
     it("Should play", function () {

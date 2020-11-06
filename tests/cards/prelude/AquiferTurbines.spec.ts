@@ -3,7 +3,7 @@ import { AquiferTurbines } from "../../../src/cards/prelude/AquiferTurbines";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("AquiferTurbines", function () {
     let card : AquiferTurbines, player : Player, game : Game;

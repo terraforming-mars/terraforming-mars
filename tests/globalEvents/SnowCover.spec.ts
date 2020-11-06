@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { SnowCover } from "../../src/turmoil/globalEvents/SnowCover";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { MAX_TEMPERATURE } from "../../src/constants";
 
 describe("SnowCover", function () {

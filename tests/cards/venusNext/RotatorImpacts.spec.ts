@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { RotatorImpacts } from "../../../src/cards/venusNext/RotatorImpacts";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { OrOptions } from '../../../src/inputs/OrOptions';
+import { Game } from "../../../src/Game";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 import { MAX_VENUS_SCALE } from "../../../src/constants";
 
 describe("RotatorImpacts", function () {

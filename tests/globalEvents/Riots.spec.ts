@@ -3,8 +3,8 @@ import { Riots } from "../../src/turmoil/globalEvents/Riots";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
 
 describe("Riots", function () {
     it("resolve play", function () {

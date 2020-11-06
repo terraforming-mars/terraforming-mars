@@ -3,7 +3,7 @@ import { AtmoCollectors } from "../../../src/cards/colonies/AtmoCollectors";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("AtmoCollectors", function () {
     let card : AtmoCollectors, player : Player, game : Game;

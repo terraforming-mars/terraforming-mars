@@ -1,12 +1,12 @@
-import {ICard} from '../../../src/cards/ICard';
+import { ICard } from "../../../src/cards/ICard";
 import { expect } from "chai";
 import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from "../../../src/Game";
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { Dirigibles } from '../../../src/cards/venusNext/Dirigibles';
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 
 describe("AerialMappers", function () {
     let card : AerialMappers, player : Player, game : Game;

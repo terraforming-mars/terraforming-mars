@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { Poseidon } from "../../../src/cards/colonies/Poseidon";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { Ceres } from '../../../src/colonies/Ceres';
+import { Ceres } from "../../../src/colonies/Ceres";
 
 describe("Poseidon", function () {
     it("Should play", function () {

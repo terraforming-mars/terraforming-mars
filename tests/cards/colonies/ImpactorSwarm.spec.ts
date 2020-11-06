@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ImpactorSwarm } from "../../../src/cards/colonies/ImpactorSwarm";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("ImpactorSwarm", function () {

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { PoliticalAlliance } from "../../../src/cards/turmoil/PoliticalAlliance";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { setCustomGameOptions } from "../../TestingUtils";

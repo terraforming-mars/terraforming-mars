@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { ICard } from "../../../src/cards/ICard";
 import { Game } from "../../../src/Game";

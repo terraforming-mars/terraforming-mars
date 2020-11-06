@@ -3,12 +3,12 @@ import { Diversity } from "../../src/turmoil/globalEvents/Diversity";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { AdvancedEcosystems } from '../../src/cards/AdvancedEcosystems';
-import { SolarWindPower } from '../../src/cards/SolarWindPower';
-import { EarlySettlement } from '../../src/cards/prelude/EarlySettlement';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { AdvancedEcosystems } from "../../src/cards/AdvancedEcosystems";
+import { SolarWindPower } from "../../src/cards/SolarWindPower";
+import { EarlySettlement } from "../../src/cards/prelude/EarlySettlement";
 
 describe("Diversity", function () {
     it("resolve play", function () {

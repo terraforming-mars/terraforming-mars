@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { EcoLine } from "../../../src/cards/corporation/EcoLine";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("EcoLine", function () {
     it("Should play", function () {

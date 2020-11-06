@@ -3,7 +3,7 @@ import { CryoSleep } from "../../../src/cards/colonies/CryoSleep";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { Ceres } from '../../../src/colonies/Ceres';
+import { Ceres } from "../../../src/colonies/Ceres";
 
 describe("CryoSleep", function () {
     it("Should play", function () {

@@ -2,10 +2,10 @@ import { expect } from "chai";
 import { Stratopolis } from "../../../src/cards/venusNext/Stratopolis";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Research } from "../../../src/cards/Research";
 import { setCustomGameOptions } from "../../TestingUtils";
 

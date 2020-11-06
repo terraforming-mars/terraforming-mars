@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { TollStation } from "../../src/cards/TollStation";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Shuttles", function () {
     let card : Shuttles, player : Player, game : Game;

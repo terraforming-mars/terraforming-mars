@@ -5,7 +5,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { Ants } from "../../../src/cards/Ants";
 import { BuildingIndustries } from "../../../src/cards/BuildingIndustries";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("CheungShingMARS", function () {
     let card : CheungShingMARS, player : Player, game : Game;

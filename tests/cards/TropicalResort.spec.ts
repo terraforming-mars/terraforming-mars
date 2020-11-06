@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { TropicalResort } from "../../src/cards/TropicalResort";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("TropicalResort", function () {
     it("Should play", function () {

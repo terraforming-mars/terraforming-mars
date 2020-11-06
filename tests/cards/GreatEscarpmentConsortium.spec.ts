@@ -3,7 +3,7 @@ import { GreatEscarpmentConsortium } from "../../src/cards/GreatEscarpmentConsor
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 
 describe("GreatEscarpmentConsortium", function () {

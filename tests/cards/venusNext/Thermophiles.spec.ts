@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from "../../../src/Game";
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { VenusianInsects } from "../../../src/cards/venusNext/VenusianInsects";
 
 describe("Thermophiles", function () {

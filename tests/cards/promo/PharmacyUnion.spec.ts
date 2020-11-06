@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { PharmacyUnion } from "../../../src/cards/promo/PharmacyUnion";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Tags } from "../../../src/cards/Tags";
 import { Ants } from "../../../src/cards/Ants";
 import { ViralEnhancers } from "../../../src/cards/ViralEnhancers";

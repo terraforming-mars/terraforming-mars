@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { MagneticFieldGeneratorsPromo } from "../../../src/cards/promo/MagneticFieldGeneratorsPromo";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
-import { Game } from '../../../src/Game';
+import { Resources } from "../../../src/Resources";
+import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 
 describe("MagneticFieldGeneratorsPromo", function () {

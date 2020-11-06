@@ -3,7 +3,7 @@ import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { expect } from "chai";
-import { Conscription } from '../../../src/cards/colonies/Conscription';
+import { Conscription } from "../../../src/cards/colonies/Conscription";
 
 
 describe("Conscription", function () {

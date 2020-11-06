@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { MagneticFieldGenerators } from "../../src/cards/MagneticFieldGenerators";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
-import { Game } from '../../src/Game';
+import { Resources } from "../../src/Resources";
+import { Game } from "../../src/Game";
 
 describe("MagneticFieldGenerators", function () {
     let card : MagneticFieldGenerators, player : Player, game : Game;

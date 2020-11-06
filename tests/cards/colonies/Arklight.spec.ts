@@ -3,7 +3,7 @@ import { Arklight } from "../../../src/cards/colonies/Arklight";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Predators } from "../../../src/cards/Predators";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("Arklight", function () {
     it("Should play", function () {

@@ -3,7 +3,7 @@ import { StripMine } from "../../src/cards/StripMine";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("StripMine", function () {
     let card : StripMine, player : Player, game : Game;

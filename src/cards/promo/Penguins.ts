@@ -1,11 +1,11 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, IResourceCard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Game } from '../../Game';
+import { IProjectCard } from "../IProjectCard";
+import { IActionCard, IResourceCard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { ResourceType } from "../../ResourceType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Game } from "../../Game";
 
 export class Penguins implements IActionCard, IProjectCard, IResourceCard {
 

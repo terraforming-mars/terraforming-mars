@@ -1,11 +1,11 @@
-import {ICard} from "./ICard";
+import { ICard } from "./ICard";
 
-import {IProjectCard} from "./IProjectCard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {SelectCard} from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { SelectCard } from "../inputs/SelectCard";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 import { ResourceType } from "../ResourceType";

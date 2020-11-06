@@ -3,9 +3,9 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
-import { IResourceCard } from '../ICard';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
+import { IResourceCard } from "../ICard";
 
 export class VenusianAnimals implements IProjectCard, IResourceCard {
     public cost = 15;

@@ -4,7 +4,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
-import {SelectCard} from "../../inputs/SelectCard";
+import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 

@@ -5,11 +5,11 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
-import { Resources } from '../Resources';
-import { SelectSpace } from '../inputs/SelectSpace';
-import { ISpace } from '../ISpace';
-import { BoardName } from '../BoardName';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { BoardName } from "../BoardName";
+import { CardName } from "../CardName";
 
 export class NoctisCity implements IProjectCard {
     public cost = 18;

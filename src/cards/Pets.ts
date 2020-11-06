@@ -5,7 +5,7 @@ import { Player } from "../Player";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
 import { CardName} from "../CardName";
-import { IResourceCard } from './ICard';
+import { IResourceCard } from "./ICard";
 import { Board } from "../Board";
 
 export class Pets implements IProjectCard, IResourceCard {

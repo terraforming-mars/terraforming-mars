@@ -1,13 +1,13 @@
 
-import { IActionCard, IResourceCard } from './ICard';
+import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class Livestock implements IActionCard, IProjectCard, IResourceCard {
     public cost = 13;

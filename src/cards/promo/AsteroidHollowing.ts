@@ -1,13 +1,13 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, IResourceCard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Resources } from '../../Resources';
-import { Game } from '../../Game';
-import { LogHelper } from '../../components/LogHelper';
+import { IProjectCard } from "../IProjectCard";
+import { IActionCard, IResourceCard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { ResourceType } from "../../ResourceType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Resources } from "../../Resources";
+import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.ASTEROID_HOLLOWING;

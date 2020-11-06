@@ -5,7 +5,7 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Game } from "../Game";
 import { Resources } from "../Resources";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class ImportOfAdvancedGHG implements IProjectCard {
     public cardType = CardType.EVENT;

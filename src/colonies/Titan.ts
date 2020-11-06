@@ -1,6 +1,6 @@
 import { Colony, IColony } from "./Colony";
 import { Player } from "../Player";
-import { PlayerInput } from '../PlayerInput';
+import { PlayerInput } from "../PlayerInput";
 import { ColonyName } from "./ColonyName";
 import { ResourceType } from "../ResourceType";
 import { Game } from "../Game";

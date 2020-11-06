@@ -1,10 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { PlayerInput } from '../PlayerInput';
-import { ColonyName } from './ColonyName';
-import { Resources } from '../Resources';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { ColonyName } from "./ColonyName";
+import { Resources } from "../Resources";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class Luna extends Colony implements IColony {
     public tradeIncome = [ 1, 2, 4, 7, 10, 13, 17 ];

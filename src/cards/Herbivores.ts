@@ -6,9 +6,9 @@ import { Game } from "../Game";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
 import { TileType } from "../TileType";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { IResourceCard } from './ICard';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { IResourceCard } from "./ICard";
 import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
 
 export class Herbivores implements IProjectCard, IResourceCard {

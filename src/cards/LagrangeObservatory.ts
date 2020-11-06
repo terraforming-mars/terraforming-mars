@@ -4,7 +4,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class LagrangeObservatory implements IProjectCard {
     public cardType = CardType.AUTOMATED;

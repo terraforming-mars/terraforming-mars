@@ -1,8 +1,8 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Turmoil } from '../Turmoil';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Turmoil } from "../Turmoil";
 
 export class WarOnEarth implements IGlobalEvent {
     public name = GlobalEventName.WAR_ON_EARTH;

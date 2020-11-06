@@ -1,5 +1,5 @@
 import Vue from "vue";
-import {Bonus} from "./Bonus";
+import { Bonus } from "./Bonus";
 import { SpaceModel } from "../models/SpaceModel";
 import { TileType } from "../TileType";
 import { $t } from "../directives/i18n";

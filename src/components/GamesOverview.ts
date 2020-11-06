@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import {Phase} from "../Phase";
+import { Phase } from "../Phase";
 
 export const GamesOverview = Vue.component("games-overview", {
     data: function () {

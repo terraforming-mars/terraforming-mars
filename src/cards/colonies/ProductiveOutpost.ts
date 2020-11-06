@@ -1,9 +1,9 @@
 import { IProjectCard } from "../IProjectCard";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
-import { DeferredAction } from '../../deferredActions/DeferredAction';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ProductiveOutpost implements IProjectCard {
     public cost = 0;

@@ -1,9 +1,9 @@
 import { Player, PlayerId } from "../Player";
 import { PlayerInput } from "../PlayerInput";
-import { SelectSpace } from '../inputs/SelectSpace';
+import { SelectSpace } from "../inputs/SelectSpace";
 import { SerializedColony } from "../SerializedColony";
-import { Game } from '../Game';
-import { Resources } from '../Resources';
+import { Game } from "../Game";
+import { Resources } from "../Resources";
 import { LogHelper } from "../components/LogHelper";
 import { MAX_COLONY_TRACK_POSITION } from "../constants";
 import { CardName } from "../CardName";

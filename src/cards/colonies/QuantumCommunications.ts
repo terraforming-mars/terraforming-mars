@@ -1,10 +1,10 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 
 export class QuantumCommunications implements IProjectCard {
     public cost = 8;

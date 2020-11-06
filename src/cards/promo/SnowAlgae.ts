@@ -1,10 +1,10 @@
-import { IProjectCard } from '../IProjectCard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
+import { IProjectCard } from "../IProjectCard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Game } from "../../Game";
+import { Resources } from "../../Resources";
 
 export class SnowAlgae implements IProjectCard {
     public name = CardName.SNOW_ALGAE;

@@ -1,13 +1,13 @@
 import { Colony, IColony } from "../../colonies/Colony";
 import { Player } from "../../Player";
-import { PlayerInput } from '../../PlayerInput';
+import { PlayerInput } from "../../PlayerInput";
 import { Game } from "../../Game";
 import { ColonyName } from "../../colonies/ColonyName";
 import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
-import { ScienceTagCard } from './ScienceTagCard';
+import { ScienceTagCard } from "./ScienceTagCard";
 
 export class Leavitt extends Colony implements IColony {
     public name = ColonyName.LEAVITT;

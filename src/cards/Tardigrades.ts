@@ -2,8 +2,8 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { ResourceType } from "../ResourceType";
-import { CardName } from '../CardName';
-import { IResourceCard } from './ICard';
+import { CardName } from "../CardName";
+import { IResourceCard } from "./ICard";
 import { Player } from "../Player";
 
 export class Tardigrades implements IProjectCard, IResourceCard {

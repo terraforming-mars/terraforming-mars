@@ -1,7 +1,7 @@
 import { IAward } from "./IAward";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardType } from '../cards/CardType';
+import { CardType } from "../cards/CardType";
 
 export class Celebrity implements IAward {
     public name: string = "Celebrity";

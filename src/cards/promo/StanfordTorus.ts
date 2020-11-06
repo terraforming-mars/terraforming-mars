@@ -6,7 +6,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class StanfordTorus implements IProjectCard {
     public name = CardName.STANFORD_TORUS;

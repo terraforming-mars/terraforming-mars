@@ -1,16 +1,16 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, ICard, IResourceCard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Resources } from '../../Resources';
-import { Game } from '../../Game';
-import { LogHelper } from '../../components/LogHelper';
-import { SelectCard } from '../../inputs/SelectCard';
-import { OrOptions } from '../../inputs/OrOptions';
-import { SelectOption } from '../../inputs/SelectOption';
+import { IProjectCard } from "../IProjectCard";
+import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { ResourceType } from "../../ResourceType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Resources } from "../../Resources";
+import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
+import { SelectCard } from "../../inputs/SelectCard";
+import { OrOptions } from "../../inputs/OrOptions";
+import { SelectOption } from "../../inputs/SelectOption";
 import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard {

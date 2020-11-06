@@ -1,10 +1,10 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Turmoil } from '../Turmoil';
-import { Tags } from '../../cards/Tags';
-import { Player } from '../../Player';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Turmoil } from "../Turmoil";
+import { Tags } from "../../cards/Tags";
+import { Player } from "../../Player";
 
 export class Revolution implements IGlobalEvent {
     public name = GlobalEventName.REVOLUTION;

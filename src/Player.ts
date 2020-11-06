@@ -1653,7 +1653,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return undefined;
       });
 
-      if (titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount !== undefined && titanFloatingLaunchPad.resourceCount > 0) {
+      if (titanFloatingLaunchPad !== undefined
+        && titanFloatingLaunchPad.resourceCount !== undefined
+        && titanFloatingLaunchPad.resourceCount > 0
+        && !this.actionsThisGeneration.has(titanFloatingLaunchPad.name)) {
         howToPayForTrade.options.push(new SelectOption("Pay 1 Floater (use Titan Floating Launch-pad action)", "", () => {
             payWith = ResourceType.FLOATER;
             return undefined;

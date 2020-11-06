@@ -4,7 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class SpaceStation implements IProjectCard {
     public cost = 10;

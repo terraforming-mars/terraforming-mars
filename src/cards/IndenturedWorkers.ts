@@ -3,7 +3,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class IndenturedWorkers implements IProjectCard {
     public cardType = CardType.EVENT;

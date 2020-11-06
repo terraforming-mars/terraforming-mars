@@ -4,7 +4,7 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Resources } from "../../Resources";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class IshtarMining implements IProjectCard {
     public cost = 5;

@@ -7,7 +7,7 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { PlayerInput } from "../PlayerInput";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class ResearchOutpost implements IProjectCard {
     public cost = 18;

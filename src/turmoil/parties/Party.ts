@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 
 export abstract class Party  {
     public partyLeader: undefined | PlayerId | "NEUTRAL" = undefined;

@@ -5,8 +5,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 import { Board } from "../Board";
 
 export class UrbanizedArea implements IProjectCard {

@@ -4,8 +4,8 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 
 export class SponsoredMohole implements IProjectCard {

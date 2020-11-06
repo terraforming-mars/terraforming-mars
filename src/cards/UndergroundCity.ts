@@ -6,8 +6,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class UndergroundCity implements IProjectCard {
     public cost = 18;

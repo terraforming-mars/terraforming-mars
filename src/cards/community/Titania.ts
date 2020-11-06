@@ -1,8 +1,8 @@
-import { Colony, IColony } from '../../colonies/Colony';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Game } from '../../Game';
-import { ColonyName } from '../../colonies/ColonyName';
+import { Colony, IColony } from "../../colonies/Colony";
+import { Player } from "../../Player";
+import { PlayerInput } from "../../PlayerInput";
+import { Game } from "../../Game";
+import { ColonyName } from "../../colonies/ColonyName";
 
 export class Titania extends Colony implements IColony {
     public name = ColonyName.TITANIA;

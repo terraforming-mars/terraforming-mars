@@ -1,10 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { PlayerInput } from '../PlayerInput';
-import { ColonyName } from './ColonyName';
-import { Resources } from '../Resources';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { ColonyName } from "./ColonyName";
+import { Resources } from "../Resources";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class Ceres extends Colony implements IColony {
     public name = ColonyName.CERES;

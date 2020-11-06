@@ -1,5 +1,5 @@
 import Vue from "vue";
-import {LanguageSwitcher} from "./LanguageSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 import * as raw_settings from "../../assets/settings.json";
 

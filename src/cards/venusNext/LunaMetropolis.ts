@@ -5,8 +5,8 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 
 export class LunaMetropolis implements IProjectCard {
     public cost = 21;

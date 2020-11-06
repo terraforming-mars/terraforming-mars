@@ -1,10 +1,10 @@
-import { IProjectCard } from '../IProjectCard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Resources } from '../../Resources';
-import { Game } from '../../Game';
+import { IProjectCard } from "../IProjectCard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Resources } from "../../Resources";
+import { Game } from "../../Game";
 
 export class Advertising implements IProjectCard {
     public name = CardName.ADVERTISING;

@@ -4,7 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { CardType } from "./CardType";
 import { Resources } from "../Resources";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 
 export class GHGFactories implements IProjectCard {

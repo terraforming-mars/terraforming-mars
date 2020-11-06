@@ -1,10 +1,10 @@
 
-import {IProjectCard} from "./IProjectCard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {SelectCard} from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { SelectCard } from "../inputs/SelectCard";
 import { CardName } from "../CardName";
 
 export class BusinessContacts implements IProjectCard {

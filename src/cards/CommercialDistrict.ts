@@ -1,14 +1,14 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {TileType} from '../TileType';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { Board } from '../Board';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { Board } from "../Board";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class CommercialDistrict implements IProjectCard {

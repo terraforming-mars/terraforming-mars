@@ -3,7 +3,7 @@ import { ISpace } from "../ISpace";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { Board } from "../Board";
 
 export class RoverConstruction implements IProjectCard {

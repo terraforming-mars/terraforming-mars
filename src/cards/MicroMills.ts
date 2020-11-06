@@ -4,7 +4,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
 import { Resources } from "../Resources";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class MicroMills implements IProjectCard {
     public cost = 3;

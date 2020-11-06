@@ -1,11 +1,11 @@
 
-import { IActionCard, IResourceCard } from './ICard';
+import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class SecurityFleet implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;

@@ -3,7 +3,7 @@ import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class MineralDeposit implements IProjectCard {
     public cost = 5;

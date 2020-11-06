@@ -4,7 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class SpecialDesign implements IProjectCard {
     public cost = 4;

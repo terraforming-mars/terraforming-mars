@@ -1,14 +1,14 @@
-import { IActionCard, ICard } from './ICard';
-import {IProjectCard} from './IProjectCard';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { AndOptions } from '../inputs/AndOptions';
-import { SelectAmount } from '../inputs/SelectAmount';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { REDS_RULING_POLICY_COST } from '../constants';
+import { IActionCard, ICard } from "./ICard";
+import { IProjectCard } from "./IProjectCard";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { AndOptions } from "../inputs/AndOptions";
+import { SelectAmount } from "../inputs/SelectAmount";
+import { CardName } from "../CardName";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost = 3;

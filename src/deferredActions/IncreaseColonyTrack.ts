@@ -1,6 +1,6 @@
 import { Game } from "../Game";
 import { Player } from "../Player";
-import { Colony, IColony } from '../colonies/Colony';
+import { Colony, IColony } from "../colonies/Colony";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { DeferredAction } from "./DeferredAction";

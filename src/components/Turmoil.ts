@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { PartyName } from '../turmoil/parties/PartyName';
+import { PartyName } from "../turmoil/parties/PartyName";
 import { $t } from "../directives/i18n";
 
 export const Turmoil = Vue.component("turmoil", {

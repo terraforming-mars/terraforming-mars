@@ -1,12 +1,12 @@
 
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {ResourceType} from '../ResourceType';
-import { CardName } from '../CardName';
-import { IResourceCard } from './ICard';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
+import { CardName } from "../CardName";
+import { IResourceCard } from "./ICard";
 
 export class Decomposers implements IProjectCard, IResourceCard {
     public cost = 5;

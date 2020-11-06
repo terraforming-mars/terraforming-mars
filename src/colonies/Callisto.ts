@@ -1,10 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { PlayerInput } from '../PlayerInput';
-import { Resources } from '../Resources';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { Resources } from "../Resources";
+import { ColonyName } from "./ColonyName";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class Callisto extends Colony implements IColony {
     public name = ColonyName.CALLISTO;

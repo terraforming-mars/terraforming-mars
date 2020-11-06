@@ -1,11 +1,11 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Tags } from '../../cards/Tags';
-import { Turmoil } from '../Turmoil';
-import { Player } from '../../Player';
-import { Board } from '../../Board';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Tags } from "../../cards/Tags";
+import { Turmoil } from "../Turmoil";
+import { Player } from "../../Player";
+import { Board } from "../../Board";
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;

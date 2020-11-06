@@ -4,10 +4,10 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { Resources } from '../../Resources';
-import { SelectSpace } from '../../inputs/SelectSpace';
-import { ISpace } from '../../ISpace';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { SelectSpace } from "../../inputs/SelectSpace";
+import { ISpace } from "../../ISpace";
+import { CardName } from "../../CardName";
 
 export class Gyropolis implements IProjectCard {
     public cost = 20;

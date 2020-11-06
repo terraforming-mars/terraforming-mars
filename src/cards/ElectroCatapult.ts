@@ -1,11 +1,11 @@
-import {IActionCard} from "./ICard";
-import {IProjectCard} from "./IProjectCard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {OrOptions} from "../inputs/OrOptions";
-import {SelectOption} from "../inputs/SelectOption";
+import { IActionCard } from "./ICard";
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
 

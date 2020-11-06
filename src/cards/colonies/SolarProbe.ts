@@ -1,9 +1,9 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
 
 export class SolarProbe implements IProjectCard {
     public cost = 9;

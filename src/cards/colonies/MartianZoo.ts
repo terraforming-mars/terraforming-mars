@@ -1,11 +1,11 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { IResourceCard } from "../ICard";
 
 export class MartianZoo implements IProjectCard, IResourceCard {
     public cost = 12;

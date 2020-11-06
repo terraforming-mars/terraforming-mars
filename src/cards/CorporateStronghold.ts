@@ -1,13 +1,13 @@
 
-import {IProjectCard} from './IProjectCard';
-import {Game} from '../Game';
-import {Player} from '../Player';
-import {CardType} from './CardType';
-import {Tags} from './Tags';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { IProjectCard } from "./IProjectCard";
+import { Game } from "../Game";
+import { Player } from "../Player";
+import { CardType } from "./CardType";
+import { Tags } from "./Tags";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class CorporateStronghold implements IProjectCard {
     public cost = 11;

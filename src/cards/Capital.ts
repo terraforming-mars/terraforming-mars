@@ -1,15 +1,15 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {TileType} from '../TileType';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceType} from '../SpaceType';
-import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { IAdjacencyBonus } from '../ares/IAdjacencyBonus';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { SpaceType } from "../SpaceType";
+import { ISpace } from "../ISpace";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 import { Board } from "../Board";
 
 export class Capital implements IProjectCard {

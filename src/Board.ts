@@ -186,6 +186,8 @@ export abstract class Board {
             //   the Natural Preserve, then you get an additional MC.
             // * Or placing next to another adjacency tile like Mining Area, but you own the space,
             //   and have Marketing Experts. Then you get 2MC for the placement.
+            // * Even if any of these are appropriate, can you get the adjacency bonuses before paying the
+            //   adjacency costs? The current addTile algorithm doesn't support this.
             //
             // Can those offset the cost for placing on top of a hazard, or just be additional adjacency costs?
             //

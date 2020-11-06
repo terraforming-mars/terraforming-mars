@@ -499,11 +499,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
-            game.log("${0} loses ${1} resource(s) on ${2} by ${3}", b =>
-                  b.player(this)
-                  .number(count)
-                  .card(card)
-                  .player(removingPlayer));
+              game.log("${0} removed ${1} resource(s) from ${2}'s ${3}", b =>
+              b.player(removingPlayer)
+              .number(count)
+              .player(this)
+              .card(card));
           }
         }
         // Lawsuit hook
@@ -528,23 +528,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public getCardsWithResources(): Array<ICard> {
-      const result: Array<ICard> = [];
-
-      this.playedCards.forEach((card) => {
-        if (card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0) {
-          result.push(card);
+    public getCardsWithResources(resource?: ResourceType): Array<ICard> {
+        let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
+        if (this.corporationCard !== undefined 
+            && this.corporationCard.resourceType !== undefined 
+            && this.corporationCard.resourceCount !== undefined 
+            && this.corporationCard.resourceCount > 0) {
+                result.push(this.corporationCard);
         }
-      });
 
-      if (this.corporationCard !== undefined 
-          && this.corporationCard.resourceType !== undefined 
-          && this.corporationCard.resourceCount !== undefined 
-          && this.corporationCard.resourceCount > 0) {
-        result.push(this.corporationCard);
-      }
-      
-      return result;      
+        if (resource !== undefined) {
+            result = result.filter((card) => card.resourceType === resource)
+        }
+
+        return result;      
     }
 
     public getResourceCards(resource: ResourceType | undefined): Array<ICard> {
@@ -562,11 +559,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }  
 
     public getResourceCount(resource: ResourceType): number {
-      let count: number = 0;
-      this.getCardsWithResources().filter(card => card.resourceType === resource).forEach((card) => {
-        count += this.getResourcesOnCard(card)!;
-      });
-      return count;
+        let count: number = 0;
+        this.getCardsWithResources(resource).forEach((card) => {
+            count += this.getResourcesOnCard(card)!;
+        });
+        return count;
     }
 
     public getCardsByCardType(cardType: CardType) {
@@ -1222,7 +1219,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
         if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
           if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-            const cardsWithFloater = this.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+            const cardsWithFloater = this.getCardsWithResources(ResourceType.FLOATER);
             if (cardsWithFloater.length === 1) {
               throw new Error("Cannot spend all floaters to play Stratospheric Birds");
             }

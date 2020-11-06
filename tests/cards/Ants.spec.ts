@@ -4,6 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
+import { ICard } from "../../src/cards/ICard";
 import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { NitriteReducingBacteria } from "../../src/cards/NitriteReducingBacteria";
@@ -47,12 +48,12 @@ describe("Ants", function () {
         
         expect(card.canAct(player, game)).is.true;
 
-        const action = card.action(player, game);
-        expect(action instanceof SelectCard).is.true;
+        card.action(player, game);
+        const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+        expect(selectCard.cards).has.lengthOf(2);
+        selectCard.cb([selectCard.cards[0]]);
+        game.deferredActions.shift()!.execute(); // Add microbe to ants
 
-        expect(action!.cards).has.lengthOf(2);
-        expect(action!.cards[0]).to.eq(tardigrades);
-        action!.cb([action!.cards[0]]);
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);
     });
@@ -82,6 +83,10 @@ describe("Ants", function () {
         player2.addResourceTo(securityFleet);
 
         card.action(player, game);
+        const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+        expect(selectCard).is.undefined; // Only one option: Tardigrades
+        game.deferredActions.shift()!.execute(); // Add microbe to ants
+
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);
     });

@@ -9,3 +9,5 @@ export enum Color {
     NEUTRAL = "neutral",
     BRONZE = "bronze",
 }
+
+export type ColorWithNeutral = Color | "NEUTRAL";

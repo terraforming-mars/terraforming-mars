@@ -120,6 +120,16 @@ checkComponent(
     ["amount"]
 );
 checkComponent(
+    "src/components/SelectCard",
+    require("./dist/src/components/SelectCard").SelectCard,
+    ["cards"]
+);
+checkComponent(
+    "src/components/SelectColony",
+    require("./dist/src/components/SelectColony").SelectColony,
+    ["selectedColony"]
+);
+checkComponent(
     "src/components/SelectHowToPay",
     require("./dist/src/components/SelectHowToPay").SelectHowToPay,
     ["cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
@@ -132,6 +142,21 @@ checkComponent(
 checkComponent(
     "src/components/SelectOption",
     require("./dist/src/components/SelectOption").SelectOption,
+    []
+);
+checkComponent(
+    "src/components/SelectPartyPlayer",
+    require("./dist/src/components/SelectPartyPlayer").SelectPartyPlayer,
+    ["selectedPlayer"]
+);
+checkComponent(
+    "src/components/SelectPlayer",
+    require("./dist/src/components/SelectPlayer").SelectPlayer,
+    ["selectedPlayer"]
+);
+checkComponent(
+    "src/components/SelectPlayerRow",
+    require("./dist/src/components/SelectPlayerRow").SelectPlayerRow,
     []
 );
 checkComponent(

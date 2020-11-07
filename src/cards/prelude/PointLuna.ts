@@ -10,7 +10,7 @@ import { CardType } from "../CardType"
 export class PointLuna implements CorporationCard {
     public name = CardName.POINT_LUNA;
     public tags = [Tags.SPACE, Tags.EARTH];
-    public startingMegaCredits: number = 41; //Should be 38 but the drawed card when played is payed 3 MC
+    public startingMegaCredits: number = 38;
     public cardType = CardType.CORPORATION;
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const tagCount = card.tags.filter(tag => tag === Tags.EARTH).length;

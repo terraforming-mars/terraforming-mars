@@ -1,9 +1,10 @@
 
 import Vue from "vue";
 import { Button } from "../components/common/Button";
+import { VueModelCheckbox, VueModelRadio } from "./VueTypes";
 
 interface SelectCardModel {
-    cards: Array<CardModel> | CardModel | boolean;
+    cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
 }
 
 import { Card } from "./card/Card";

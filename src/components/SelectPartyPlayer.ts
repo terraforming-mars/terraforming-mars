@@ -1,7 +1,7 @@
 
 import Vue from "vue";
 import { Button } from "../components/common/Button";
-import { Color } from "../Color";
+import { ColorWithNeutral } from "../Color";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 import { PlayerModel } from "../models/PlayerModel";
 import { SelectPlayerRow } from "./SelectPlayerRow";
@@ -26,7 +26,7 @@ export const SelectPartyPlayer = Vue.component("select-party-player", {
     },
     data: function () {
         return {
-            selectedPlayer: undefined as Color | "NEUTRAL" | undefined
+            selectedPlayer: undefined as ColorWithNeutral | undefined
         };
     },
     components: {

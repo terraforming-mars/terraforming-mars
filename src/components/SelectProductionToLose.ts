@@ -13,10 +13,28 @@ interface SelectProductionToLoseModel {
 
 import { IProductionUnits } from "../inputs/IProductionUnits";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
+import { PlayerInputModel } from "../models/PlayerInputModel";
+import { PlayerModel } from "../models/PlayerModel";
 import { IPayProductionModel } from "../models/IPayProductionUnitsModel";
 
 export const SelectProductionToLose = Vue.component("select-production-to-lose", {
-    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        playerinput: {
+            type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             megacredits: 0,

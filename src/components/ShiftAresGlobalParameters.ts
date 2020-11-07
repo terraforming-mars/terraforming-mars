@@ -1,9 +1,23 @@
 
 import Vue from "vue";
 import { IAresGlobalParametersResponse } from "../inputs/ShiftAresGlobalParameters";
+import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export const ShiftAresGlobalParameters = Vue.component("shift-ares-global-parameters", {
-    props: ["playerinput", "onsave", "showsave", "showtitle"],
+    props: {
+        playerinput: {
+            type: Object as () => Required<Pick<PlayerInputModel, 'aresData' | 'buttonLabel'>>
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         const hazardData = this.playerinput.aresData.hazardData;
         return {

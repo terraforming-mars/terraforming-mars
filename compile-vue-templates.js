@@ -160,6 +160,16 @@ checkComponent(
     []
 );
 checkComponent(
+    "src/components/SelectProductionToLose",
+    require("./dist/src/components/SelectProductionToLose").SelectProductionToLose,
+    ["megacredits", "steel", "titanium", "plants", "energy", "heat", "warning"]
+);
+checkComponent(
+    "src/components/ShiftAresGlobalParameters",
+    require("./dist/src/components/ShiftAresGlobalParameters").ShiftAresGlobalParameters,
+    ["hazardData", "lowOceanDelta", "highOceanDelta", "temperatureDelta", "oxygenDelta", "ADJUSTMENT_RANGE"]
+);
+checkComponent(
     "src/components/StackedCards",
     require("./dist/src/components/StackedCards").StackedCards,
     []
@@ -180,6 +190,16 @@ checkComponent(
     []
 );
 checkComponent(
+    "src/components/Turmoil",
+    require("./dist/src/components/Turmoil").Turmoil,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerInfo",
+    require("./dist/src/components/overview/PlayerInfo").PlayerInfo,
+    []
+);
+checkComponent(
     "src/components/overview/PlayerResource",
     require("./dist/src/components/overview/PlayerResource").PlayerResource,
     []
@@ -192,6 +212,11 @@ checkComponent(
 checkComponent(
     "src/components/overview/PlayersOverview",
     require("./dist/src/components/overview/PlayersOverview").PlayersOverview,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerStatus",
+    require("./dist/src/components/overview/PlayerStatus").PlayerStatus,
     []
 );
 checkComponent(
@@ -298,6 +323,7 @@ function checkComponent(name, component, dataProperties) {
     lines.unshift("declare function $forceUpdate(): void");
     lines.unshift("declare function $set(arg1: any, key: string, value: string): void;");
     // seems to be array looper iterating function needs to pass along type information
+    lines.unshift("declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;");
     lines.unshift("declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;");
     file = lines.join("\n");
 

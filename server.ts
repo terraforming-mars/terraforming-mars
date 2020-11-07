@@ -920,7 +920,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 }
 
-function getParties(game: Game): Array<PartyModel> | undefined {
+function getParties(game: Game): Array<PartyModel> {
     if (game.gameOptions.turmoilExtension && game.turmoil) {
         return game.turmoil.parties.map(function (party) {
             const delegates = new Array<DelegatesModel>();
@@ -950,9 +950,8 @@ function getParties(game: Game): Array<PartyModel> | undefined {
                 delegates: delegates,
             };
         });
-    } else {
-        return undefined;
     }
+    return [];
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

@@ -168,8 +168,10 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public decreaseTitaniumValue(): void {
-        this.titaniumValue--;
-      }
+        if (this.titaniumValue > constants.DEFAULT_TITANIUM_VALUE) {
+            this.titaniumValue--;
+        }
+    }
 
     public getSteelValue(): number {
         return this.steelValue;
@@ -180,7 +182,9 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public decreaseSteelValue(): void {
-        this.steelValue--;
+        if (this.steelValue > constants.DEFAULT_STEEL_VALUE) {
+            this.steelValue--;
+        }
     }
 
     public getTerraformRating(): number {

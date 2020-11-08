@@ -24,6 +24,6 @@ export interface PlayerInputModel {
     title: string;
     buttonLabel: string;
     coloniesModel : Array<ColonyModel> | undefined;
-    payProduction : IPayProductionModel | undefined;
-    aresData: IAresData | undefined;
+    payProduction?: IPayProductionModel;
+    aresData?: IAresData;
 }

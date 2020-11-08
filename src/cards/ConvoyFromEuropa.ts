@@ -1,18 +1,19 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { CardName } from '../CardName';
-import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { CardName } from "../CardName";
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class ConvoyFromEuropa implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.CONVOY_FROM_EUROPA;
+    public cost = 15;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.CONVOY_FROM_EUROPA;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
@@ -27,7 +28,7 @@ export class ConvoyFromEuropa implements IProjectCard {
 
     public play(player: Player, game: Game) {
       player.cardsInHand.push(game.dealer.dealCard());
-      game.addOceanInterrupt(player);
+      game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
 }

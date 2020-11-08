@@ -3,7 +3,7 @@ import { OpenCity } from "../../src/cards/OpenCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("OpenCity", function () {
     let card : OpenCity, player : Player, game : Game;
@@ -15,22 +15,22 @@ describe("OpenCity", function () {
     });
 
     it("Can't play without energy production", function () {
-        expect(card.canPlay(player,game)).to.eq(false);
+        expect(card.canPlay(player,game)).is.not.true;
     });
 
     it("Can't play if oxygen level too low", function () {
         player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 11;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 12;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb(action.availableSpaces[0]);
         expect(game.getCitiesInPlayOnMars()).to.eq(1); 
 

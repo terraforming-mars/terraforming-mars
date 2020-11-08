@@ -1,18 +1,18 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {Game} from '../../Game';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { IProjectCard } from "../IProjectCard";
+import { Tags } from "../Tags";
+import { CardType } from "../CardType";
+import { Player } from "../../Player";
+import { Game } from "../../Game";
+import { SelectSpace } from "../../inputs/SelectSpace";
+import { ISpace } from "../../ISpace";
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 
 export class FieldCappedCity implements IProjectCard {
-    public cost: number = 29;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL, Tags.ENERGY];
-    public name: CardName = CardName.FIELD_CAPPED_CITY;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 29;
+    public tags = [Tags.CITY, Tags.STEEL, Tags.ENERGY];
+    public name = CardName.FIELD_CAPPED_CITY;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

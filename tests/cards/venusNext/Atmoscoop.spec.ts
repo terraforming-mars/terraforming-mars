@@ -2,8 +2,9 @@ import { expect } from "chai";
 import { Atmoscoop } from "../../../src/cards/venusNext/Atmoscoop";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { OrOptions } from '../../../src/inputs/OrOptions';
+import { Game } from "../../../src/Game";
+import { AndOptions } from "../../../src/inputs/AndOptions";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
 import { SelectCard } from "../../../src/inputs/SelectCard";
@@ -25,17 +26,17 @@ describe("Atmoscoop", function () {
 
     it("Can't play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play - no targets", function () {
         player.playedCards.push(new Research(), new SearchForLife());
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game) as OrOptions;
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
 
-        expect(action.options.length).to.eq(2);
+        expect(action.options).has.lengthOf(2);
         const orOptions = action.options[1] as OrOptions;
 
         orOptions.cb();
@@ -46,7 +47,7 @@ describe("Atmoscoop", function () {
         player.playedCards.push(dirigibles);
 
         const action = card.play(player, game) as OrOptions;
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
 
         const orOptions = action.options[1] as OrOptions;
         orOptions.cb();
@@ -57,11 +58,18 @@ describe("Atmoscoop", function () {
     it("Should play - multiple targets", function () {
         player.playedCards.push(dirigibles, floatingHabs);
 
-        const action = card.play(player, game) as OrOptions;
-        const orOptions = action.options[0] as SelectCard<ICard>;
-        
-        orOptions.cb([floatingHabs]);
+        const action = card.play(player, game) as AndOptions;
+        const orOptions = action.options[0] as OrOptions;
+        const selectCard = action.options[1] as SelectCard<ICard>;
+
+        orOptions.options[0].cb();
         expect(game.getTemperature()).to.eq(-26);
+        orOptions.options[1].cb();
+        expect(game.getVenusScaleLevel()).to.eq(4);
+
+        selectCard.cb([dirigibles]);
+        expect(dirigibles.resourceCount).to.eq(2);
+        selectCard.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(2);
     });
 
@@ -70,7 +78,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(4);
         expect(dirigibles.resourceCount).to.eq(2);
     });
@@ -81,7 +89,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(dirigibles.resourceCount).to.eq(2);
     });
 
@@ -90,7 +98,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game) as SelectCard<ICard>;
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         action.cb([dirigibles]);
         expect(game.getVenusScaleLevel()).to.eq(4);
@@ -103,7 +111,7 @@ describe("Atmoscoop", function () {
         (game as any).temperature = constants.MAX_TEMPERATURE;
 
         const action = card.play(player, game) as SelectCard<ICard>;
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         action.cb([dirigibles]);
         expect(dirigibles.resourceCount).to.eq(2);
     });

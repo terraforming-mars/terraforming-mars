@@ -1,15 +1,15 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 
 export class EarthElevator implements IProjectCard {
-    public cost: number = 43;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: CardName = CardName.EARTH_ELEVATOR;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 43;
+    public tags = [Tags.SPACE, Tags.EARTH];
+    public name = CardName.EARTH_ELEVATOR;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
       player.addProduction(Resources.TITANIUM, 3);  

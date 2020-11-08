@@ -11,7 +11,7 @@ describe("Metal-RichAsteroid", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.titanium).to.eq(4);
         expect(player.steel).to.eq(4);
         expect(game.getTemperature()).to.equal(-28);

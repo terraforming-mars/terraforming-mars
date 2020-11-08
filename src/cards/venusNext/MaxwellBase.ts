@@ -14,10 +14,10 @@ import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class MaxwellBase implements IActionCard, IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.CITY, Tags.VENUS];
-    public name: CardName = CardName.MAXWELL_BASE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 18;
+    public tags = [Tags.CITY, Tags.VENUS];
+    public name = CardName.MAXWELL_BASE;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
     }

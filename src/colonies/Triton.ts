@@ -1,9 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
-import { Resources } from '../Resources';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { ColonyName } from "./ColonyName";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
+import { Resources } from "../Resources";
 
 export class Triton extends Colony implements IColony {
     public name = ColonyName.TRITON;
@@ -22,7 +23,8 @@ export class Triton extends Colony implements IColony {
         player.titanium += 3;
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.titanium++;
+        return undefined;
     }    
 }

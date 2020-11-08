@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FusionPower } from "../../src/cards/FusionPower";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("FusionPower", function () {
     let card : FusionPower, player : Player;
@@ -13,12 +13,12 @@ describe("FusionPower", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(3);

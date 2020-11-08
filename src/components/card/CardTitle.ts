@@ -10,8 +10,7 @@ export const CardTitle = Vue.component("CardTitle", {
         type: {
             type: String,
             required: true,
-            validator: (card: CardType) =>
-                Object.values(CardType).includes(card),
+            validator: (card: CardType) => Object.values(CardType).includes(card),
         },
     },
     methods: {
@@ -46,7 +45,7 @@ export const CardTitle = Vue.component("CardTitle", {
         },
         getCardTitleWithoutSuffix(title: string): string {
             return title.split(":")[0];
-        }
+        },
     },
     template: `
         <div class="card-title">

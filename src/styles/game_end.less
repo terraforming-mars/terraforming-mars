@@ -28,13 +28,39 @@
 
 .game_end_table {
     border: 2px solid #7b7b7b;
+    width: auto;
 
     td, th {
         text-align: center !important;
         border-bottom: .05rem solid #7b7b7b !important;
+        padding: 10px 20px;
+        text-shadow: 2px 2px 4px #000000;
     }
 
     a {
         text-decoration: underline;
     }
+}
+.game-end-flexrow {
+    display: flex;
+    flex-flow: row wrap;
+
+    .game-end-column {
+        min-width: 400px;
+        padding-right: 20px;
+        padding-bottom: 40px;
+    }
+}
+
+.game-end-winer-scorebreak-player-title{
+    font-size: 32px
+}
+
+.game-end-total-column{
+    padding: 5px 30px;
+}
+
+.game-end-winer-announcement{
+    text-align: center;
+    font-size: 40px;
 }

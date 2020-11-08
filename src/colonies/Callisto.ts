@@ -1,9 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { Resources } from '../Resources';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { Resources } from "../Resources";
+import { ColonyName } from "./ColonyName";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class Callisto extends Colony implements IColony {
     public name = ColonyName.CALLISTO;
@@ -22,7 +23,8 @@ export class Callisto extends Colony implements IColony {
         player.addProduction(Resources.ENERGY);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.energy += 3;
+        return undefined;
     }    
 }

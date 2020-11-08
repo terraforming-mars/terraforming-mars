@@ -4,16 +4,16 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class Steelworks implements IProjectCard, IActionCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.STEELWORKS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 15;
+    public tags = [Tags.STEEL];
+    public name = CardName.STEELWORKS;
+    public cardType = CardType.ACTIVE;
 
     public canAct(player: Player, game: Game): boolean {
         const hasEnoughEnergy = player.energy >= 4;

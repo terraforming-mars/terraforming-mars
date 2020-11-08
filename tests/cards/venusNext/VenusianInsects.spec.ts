@@ -15,16 +15,16 @@ describe("VenusianInsects", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 10;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).venusScaleLevel = 12;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         player.playedCards.push(card);
 
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Gives victory points", function () {

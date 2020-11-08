@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { Poseidon } from "../../../src/cards/colonies/Poseidon";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { Ceres } from '../../../src/colonies/Ceres';
+import { Ceres } from "../../../src/colonies/Ceres";
 
 describe("Poseidon", function () {
     it("Should play", function () {
@@ -13,7 +13,7 @@ describe("Poseidon", function () {
         const player2 = new Player("test2", Color.RED, false);        
         const game = new Game("foobar", [player,player2], player);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.corporationCard = card;
         const ceres = new Ceres();
         ceres.onColonyPlaced(player, game);

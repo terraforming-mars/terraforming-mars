@@ -1,6 +1,7 @@
 import Vue from "vue";
 import { Callisto } from "../colonies/Callisto";
 import { Ceres } from "../colonies/Ceres";
+import { IColony } from "../colonies/Colony";
 import { Europa } from "../colonies/Europa";
 import { Ganymede } from "../colonies/Ganymede";
 import { Io } from "../colonies/Io";
@@ -18,7 +19,7 @@ import { Titania } from "../cards/community/Titania";
 import { Venus } from "../cards/community/Venus";
 import { Leavitt } from "../cards/community/Leavitt";
 
-const officialColonies = [
+const officialColonies: Array<IColony> = [
     new Callisto(),
     new Ceres(),
     new Enceladus(),
@@ -32,7 +33,7 @@ const officialColonies = [
     new Triton(),
 ];
 
-const communityColonies = [
+const communityColonies: Array<IColony> = [
     new Iapetus(),
     new Mercury(),
     new Hygiea(),
@@ -42,7 +43,11 @@ const communityColonies = [
 ];
 
 export const ColoniesFilter = Vue.component("colonies-filter", {
-    props: ["communityCardsOption"],
+    props: {
+        communityCardsOption: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             allColonies: officialColonies.concat(communityColonies),
@@ -51,7 +56,17 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
             selectedColonies: [
                 ...officialColonies,
                 ...this.communityCardsOption ? communityColonies: []
-            ]
+            ] as Array<IColony> | boolean
+        }
+    },
+    methods: {
+        updateColoniesByNames(colonyNames: Array<ColonyName>) {
+            this.selectedColonies = [];
+            for (const colony of this.allColonies) {
+                if (colonyNames.includes(colony.name)) {
+                    this.selectedColonies.push(colony)
+                }
+            }
         }
     },
     watch: {

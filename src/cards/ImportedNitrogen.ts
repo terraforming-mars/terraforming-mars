@@ -1,4 +1,4 @@
-import {ICard} from "./ICard";
+import { ICard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -14,10 +14,10 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class ImportedNitrogen implements IProjectCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.IMPORTED_NITROGEN;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 23;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.IMPORTED_NITROGEN;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

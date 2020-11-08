@@ -11,8 +11,8 @@ describe("TechnologyDemonstration", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(action).is.undefined;
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(player.cardsInHand[0]).not.to.eq(player.cardsInHand[1]);
     });
 });

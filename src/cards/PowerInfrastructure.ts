@@ -10,10 +10,10 @@ import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
-    public name: CardName = CardName.POWER_INFRASTRUCTURE;
-    public cardType: CardType = CardType.ACTIVE;
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
+    public name = CardName.POWER_INFRASTRUCTURE;
+    public cardType = CardType.ACTIVE;
+    public cost = 4;
+    public tags = [Tags.ENERGY, Tags.STEEL];
 
     public play(_player: Player, _game: Game) {
         return undefined;

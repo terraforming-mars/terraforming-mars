@@ -6,7 +6,7 @@ import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
-import * as constants from '../../src/constants';
+import * as constants from "../../src/constants";
 
 describe("ArtificialLake", function () {
     let card : ArtificialLake, player : Player, game : Game;
@@ -18,12 +18,12 @@ describe("ArtificialLake", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         action!.availableSpaces.forEach((space) => {
             expect(space.spaceType).to.eq(SpaceType.LAND);
@@ -49,10 +49,10 @@ describe("ArtificialLake", function () {
         }
 
         // Card is still playable to get VPs...
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         // ...but an action to place ocean is not unavailable
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 });

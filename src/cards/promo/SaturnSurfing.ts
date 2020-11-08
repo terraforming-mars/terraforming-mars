@@ -1,18 +1,18 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 
 export class SaturnSurfing implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.SATURN_SURFING;
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.EARTH];
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public name = CardName.SATURN_SURFING;
+    public cost = 13;
+    public tags = [Tags.JOVIAN, Tags.EARTH];
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public play(player: Player) {

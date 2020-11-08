@@ -3,7 +3,7 @@ import { OrbitalReflectors } from "../../../src/cards/venusNext/OrbitalReflector
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("OrbitalReflectors", function () {
     it("Should play", function () {
@@ -12,7 +12,7 @@ describe("OrbitalReflectors", function () {
         const game = new Game("foobar", [player,player], player);
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(4);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });

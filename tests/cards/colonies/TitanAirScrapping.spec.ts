@@ -3,7 +3,7 @@ import { TitanAirScrapping } from "../../../src/cards/colonies/TitanAirScrapping
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("TitanAirScrapping", function () {
     let card : TitanAirScrapping, player : Player, game : Game;
@@ -16,17 +16,17 @@ describe("TitanAirScrapping", function () {
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should act - both actions possible", function () {
         player.playedCards.push(card);
         player.titanium = 3;
         player.addResourceTo(card, 7);
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions!.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(21);
@@ -37,7 +37,7 @@ describe("TitanAirScrapping", function () {
     it("Should act automatically when only one action possible", function () {
         player.playedCards.push(card);
         player.addResourceTo(card, 2);
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
         
         card.action(player, game)
         expect(player.getTerraformRating()).to.eq(21);

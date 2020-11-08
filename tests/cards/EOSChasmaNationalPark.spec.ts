@@ -6,7 +6,7 @@ import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Birds } from "../../src/cards/Birds";
 import { Fish } from "../../src/cards/Fish";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("EosChasmaNationalPark", function () {
     let card : EosChasmaNationalPark, player : Player, game : Game;
@@ -18,7 +18,7 @@ describe("EosChasmaNationalPark", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -27,9 +27,9 @@ describe("EosChasmaNationalPark", function () {
         const fish = new Fish();
         player.playedCards.push(birds, fish);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         player.playedCards.push(card);
         action!.cb([birds]);
         
@@ -46,7 +46,7 @@ describe("EosChasmaNationalPark", function () {
         const birds = new Birds();
         player.playedCards.push(birds);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
         player.playedCards.push(card);
 

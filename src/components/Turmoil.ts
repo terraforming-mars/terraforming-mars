@@ -1,13 +1,20 @@
 import Vue from "vue";
-import { PartyName } from '../turmoil/parties/PartyName';
+import { PartyName } from "../turmoil/parties/PartyName";
 import { $t } from "../directives/i18n";
+import { TurmoilModel } from "../models/TurmoilModel";
 
 export const Turmoil = Vue.component("turmoil", {
-    props: [
-      "turmoil"
-    ],
+    props: {
+      turmoil: {
+        type: Object as () => TurmoilModel
+      }
+    },
     methods: {
-      partyNameToCss: function (party: PartyName): string {
+      partyNameToCss: function (party: PartyName | undefined): string {
+        if (party === undefined) {
+            console.warn("no party provided");
+            return "";
+        }
         return party.toLowerCase().split(" ").join("_");
       },
       getBonus: function (party: PartyName) {
@@ -46,23 +53,23 @@ export const Turmoil = Vue.component("turmoil", {
           return `<p>Error</p>`;
         }
       },
-      getPolicy: function (party: PartyName) {
+      getPolicy: function (party: PartyName | undefined) {
         if (party === PartyName.MARS) {
           return `<div class="tile empty-tile-small"></div> : 
           <span class="steel resource"></span>`;
         }
-        else if (party === PartyName.SCIENTISTS) {
+        if (party === PartyName.SCIENTISTS) {
           return `<span class="money resource">10</span>
           <span class="red-arrow"></span>
-          <span class="card resource party-resource"></span>
-          <span class="card resource party-resource"></span>
-          <span class="card resource party-resource"></span>`;
+          <span class="card card-with-border resource party-resource"></span>
+          <span class="card card-with-border resource party-resource"></span>
+          <span class="card card-with-border resource party-resource"></span>`;
         }
-        else if (party === PartyName.UNITY) {
+        if (party === PartyName.UNITY) {
           return `<div class="resource titanium"></div> : 
           + <div class="resource money">1</div>`;
         }
-        else if (party === PartyName.KELVINISTS) {
+        if (party === PartyName.KELVINISTS) {
           return `<span class="money resource">10</span>
           <span class="red-arrow"></span>
           <div class="production-box production-box-size2">
@@ -70,18 +77,16 @@ export const Turmoil = Vue.component("turmoil", {
             <div class="heat production"></div>
           </div>`;
         }
-        else if (party === PartyName.REDS) {
+        if (party === PartyName.REDS) {
           return `
           <div class="rating tile"></div> : 
           <div class="resource money">-3</div>`;
         }
-        else if (party === PartyName.GREENS) {
+        if (party === PartyName.GREENS) {
           return `<div class="tile greenery-tile"></div> : 
           <div class="resource money">4</div>`;
         }
-        else {
-          return "<p>" + $t("No ruling Policy") + "</p>";
-        }
+        return "<p>" + $t("No ruling Policy") + "</p>";
       },
       toggleMe: function () {
         let currentState: boolean = this.isVisible();
@@ -128,6 +133,17 @@ export const Turmoil = Vue.component("turmoil", {
                 <div v-if="turmoil.reserve.length >= n" :class="'player-token '+turmoil.reserve[n-1].color">{{ turmoil.reserve[n-1].number }}</div>
               </div>
           </div>
+          <div class="policies">
+            <div class="policies-title">
+                <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
+            </div>
+            <div v-show="isVisible()" class='policies-global'>
+              <div v-for="party in turmoil.parties" class='policy-block'>
+                <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+                <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="grid-leaders">
@@ -149,17 +165,6 @@ export const Turmoil = Vue.component("turmoil", {
             <div class="party-bonus">
               <span v-html="getBonus(party.name)"></span>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="policies">
-        <div class="policies-title">
-            <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
-        </div>
-        <div v-show="isVisible()" class='policies-global'>
-          <div v-for="party in turmoil.parties" class='policy-block'>
-            <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-            <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
 
 export class VenusWaystation implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.VENUS_WAYSTATION;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 9;
+    public tags = [Tags.VENUS, Tags.SPACE];
+    public name = CardName.VENUS_WAYSTATION;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

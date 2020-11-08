@@ -14,7 +14,7 @@ describe("GiantSolarShade", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(6);
         expect(player.getTerraformRating()).to.eq(23);
     });
@@ -26,10 +26,10 @@ describe("GiantSolarShade", function () {
         game.turmoil!.rulingParty = new Reds();
         const card = new GiantSolarShade();
         player.megaCredits = 27;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         player.playedCards.push(new Dirigibles());
         player.addResourceTo(player.playedCards[0], 3);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });   
 
 });

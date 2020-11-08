@@ -19,20 +19,20 @@ describe("RoboticWorkforce", function () {
     });
 
     it("Can't play if no building cards to copy", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should throw", function () {
         player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
-        expect(card.canPlay(player,game)).to.eq(false);
+        expect(card.canPlay(player,game)).is.not.true;
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should play", function () {
         player.playedCards.push(new NoctisFarming());
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action!.cb([new NoctisFarming()]);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
@@ -42,7 +42,7 @@ describe("RoboticWorkforce", function () {
         player.corporationCard = corporationCard;
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
 
         expect(player.getProduction(Resources.STEEL)).to.eq(0);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(0);

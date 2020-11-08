@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { TollStation } from "../../src/cards/TollStation";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Shuttles", function () {
     let card : Shuttles, player : Player, game : Game;
@@ -18,19 +18,19 @@ describe("Shuttles", function () {
 
     it("Can't play without energy production", function () {
         (game as any).oxygenLevel = 5;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play if oxygen level too low", function () {
         player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 5;
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { MartianMediaCenter } from "../../../src/cards/turmoil/MartianMediaCenter";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Resources } from "../../../src/Resources";
 import { setCustomGameOptions } from "../../TestingUtils";
@@ -14,11 +14,11 @@ describe("MartianMediaCenter", function () {
         
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         
         let mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
         mars.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
         
         card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

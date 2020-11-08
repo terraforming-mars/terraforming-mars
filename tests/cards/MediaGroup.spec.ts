@@ -12,7 +12,7 @@ describe("MediaGroup", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         card.onCardPlayed(player, game, new Virus());        
         expect(player.megaCredits).to.eq(3);
         card.onCardPlayed(player, game, card);

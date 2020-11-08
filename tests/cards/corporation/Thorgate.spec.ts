@@ -6,7 +6,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { Pets } from "../../../src/cards/Pets";
 import { EnergySaving } from "../../../src/cards/EnergySaving";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Thorgate", function () {
     it("Should play", function () {
@@ -14,7 +14,7 @@ describe("Thorgate", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.powerPlantCost).to.eq(8);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         expect(card.getCardDiscount(player, game, new EnergySaving())).to.eq(3);

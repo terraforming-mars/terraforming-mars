@@ -14,6 +14,6 @@ describe("StandardTechnology", function () {
         expect(player.megaCredits).to.eq(0);
         card.onStandardProject(player, StandardProjectType.ASTEROID);
         expect(player.megaCredits).to.eq(3);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 });

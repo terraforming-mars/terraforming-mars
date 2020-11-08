@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
@@ -9,10 +8,10 @@ import { SelectCard } from "../../inputs/SelectCard";
 
 export class ProjectInspection implements IProjectCard {
 
-    public name: CardName = CardName.PROJECT_INSPECTION;
-    public cost: number = 0;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.EVENT;
+    public name = CardName.PROJECT_INSPECTION;
+    public cost = 0;
+    public tags = [];
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
     private getActionCards(player: Player, game: Game): Array<ICard> {
         let result: Array<ICard> = [];

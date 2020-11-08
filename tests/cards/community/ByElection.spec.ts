@@ -20,11 +20,11 @@ describe("ByElection", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
-        const options = orOptions.options[0] as OrOptions;
-        options.cb();
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        const subOptions = orOptions.options[0] as OrOptions;
+        subOptions.cb();
 
         const turmoil = game.turmoil!;
         expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);

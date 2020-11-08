@@ -18,24 +18,23 @@ describe("MarsUniversity", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
 
-        expect(card.onCardPlayed(player, game, new Pets())).to.eq(undefined);
-        expect(game.interrupts.length).to.eq(0);
+        expect(card.onCardPlayed(player, game, new Pets())).is.undefined;
+        expect(game.deferredActions).has.lengthOf(0);
 
         player.cardsInHand.push(card);
         card.onCardPlayed(player, game, card);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        let orOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.splice(0, 1);
-
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[0].cb([card]);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.cardsInHand[0]).not.to.eq(card);
-        expect(game.dealer.discarded.length).to.eq(1);
+        expect(game.dealer.discarded).has.lengthOf(1);
         expect(game.dealer.discarded[0]).to.eq(card);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Gives victory point", function () {
@@ -47,16 +46,16 @@ describe("MarsUniversity", function () {
     it("Runs twice for multiple science tags", function () {
         player.cardsInHand.push(card, card);
         card.onCardPlayed(player, game, new Research());
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(2);
 
-        let orOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.splice(0, 1);
-        
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[1].cb();
-        expect(game.interrupts.length).to.eq(1);
-        orOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.splice(0, 1);
-        orOptions.options[1].cb();
-        expect(game.interrupts.length).to.eq(0);
+
+        const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
+        orOptions2.options[1].cb();
+
+        expect(game.deferredActions).has.lengthOf(0);
     });
 });

@@ -13,14 +13,15 @@ import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../../constants";
 import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.DIRECTED_IMPACTORS;
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public name = CardName.DIRECTED_IMPACTORS;
+    public cost = 8;
+    public tags = [Tags.SPACE];
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;
@@ -67,7 +68,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     }
 
     private addResource(player: Player, game: Game, asteroidCards: ICard[]) {
-        game.addSelectHowToPayInterrupt(player, 6, false, true, "Select how to pay for Directed Impactors action");
+        game.defer(new SelectHowToPayDeferred(player, 6, false, true, "Select how to pay for Directed Impactors action"));
 
         if (asteroidCards.length === 1) {
             player.addResourceTo(this);

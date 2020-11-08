@@ -12,13 +12,13 @@ describe("SecurityFleet", function () {
     });
 
     it("Can't act if no titanium", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
         player.titanium = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         card.action(player);
         expect(player.titanium).to.eq(0);

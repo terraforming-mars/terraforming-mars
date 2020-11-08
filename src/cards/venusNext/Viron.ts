@@ -4,15 +4,15 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
-import {SelectCard} from "../../inputs/SelectCard";
+import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class Viron implements ICard, CorporationCard {
-    public name: CardName = CardName.VIRON;
-    public tags: Array<Tags> = [Tags.MICROBES];
+    public name = CardName.VIRON;
+    public tags = [Tags.MICROBES];
     public startingMegaCredits: number = 48;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     private getActionCards(player: Player, game: Game):Array<ICard> {
         const result: Array<ICard> = [];

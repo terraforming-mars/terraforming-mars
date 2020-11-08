@@ -14,7 +14,7 @@ describe("RefugeeCamps", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         
         player.addResourceTo(card, 5);
         expect(card.getVictoryPoints()).to.eq(5);
@@ -22,11 +22,11 @@ describe("RefugeeCamps", function () {
 
     it("Can't act", function () {
         player.addProduction(Resources.MEGACREDITS, -5);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player);
         expect(card.resourceCount).to.eq(1);
     });

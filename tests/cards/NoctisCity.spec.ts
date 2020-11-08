@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SpaceName } from "../../src/SpaceName";
 import { TileType } from "../../src/TileType";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NoctisCity", function () {
     let card : NoctisCity, player : Player, game : Game;
@@ -17,12 +17,12 @@ describe("NoctisCity", function () {
     });
 
     it("Can't play without energy production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

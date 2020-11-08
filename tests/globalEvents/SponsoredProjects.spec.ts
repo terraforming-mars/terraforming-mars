@@ -2,12 +2,12 @@ import { expect } from "chai";
 import { SponsoredProjects } from "../../src/turmoil/globalEvents/SponsoredProjects";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { Ants } from '../../src/cards/Ants';
-import { SecurityFleet } from '../../src/cards/SecurityFleet';
-import { Fish } from '../../src/cards/Fish';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { Ants } from "../../src/cards/Ants";
+import { SecurityFleet } from "../../src/cards/SecurityFleet";
+import { Fish } from "../../src/cards/Fish";
 
 describe("SponsoredProjects", function () {
     it("resolve play", function () {
@@ -37,6 +37,6 @@ describe("SponsoredProjects", function () {
         expect(player.playedCards[0].resourceCount).to.eq(2);
         expect(player2.playedCards[0].resourceCount).to.eq(2);
         expect(player2.playedCards[1].resourceCount).to.eq(0);
-        expect(player2.cardsInHand.length).to.eq(3);
+        expect(player2.cardsInHand).has.lengthOf(3);
     });
 });

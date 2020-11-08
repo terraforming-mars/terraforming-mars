@@ -1,17 +1,17 @@
 
-import {IActionCard} from './ICard';
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { CardName } from '../CardName';
+import { IActionCard } from "./ICard";
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { CardName } from "../CardName";
 
 export class DevelopmentCenter implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: CardName = CardName.DEVELOPMENT_CENTER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public name = CardName.DEVELOPMENT_CENTER;
+    public cardType = CardType.ACTIVE;
 
     public play() {
       return undefined;

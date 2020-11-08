@@ -11,11 +11,12 @@ import { ICard } from "../ICard";
 import { CardType } from "../CardType";
 
 export class Splice implements CorporationCard {
-    public name: CardName = CardName.SPLICE;
-    public tags: Array<Tags> = [Tags.MICROBES];
+    public name = CardName.SPLICE;
+    public tags = [Tags.MICROBES];
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw a card with a microbe tag";
     public initialAction(player: Player, game: Game) { 
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
         

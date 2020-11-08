@@ -14,12 +14,12 @@ describe("PermafrostExtraction", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = -8;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);        
         action!.cb(action!.availableSpaces[0]);

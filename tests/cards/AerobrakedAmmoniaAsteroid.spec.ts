@@ -3,7 +3,7 @@ import { AerobrakedAmmoniaAsteroid } from "../../src/cards/AerobrakedAmmoniaAste
 import { Ants } from "../../src/cards/Ants";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { Decomposers } from "../../src/cards/Decomposers";
 import { Game } from "../../src/Game";
 
@@ -23,7 +23,7 @@ describe("AerobrakedAmmoniaAsteroid", function () {
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
          // It's okay to not have a card to collect Microbes on
-        expect(action).to.eq(undefined); 
+        expect(action).is.undefined; 
     });
 
     it("Adds microbes automatically if only 1 target", function () {
@@ -50,7 +50,7 @@ describe("AerobrakedAmmoniaAsteroid", function () {
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
-        expect(action).not.to.eq(undefined); 
+        expect(action).is.not.undefined; 
         action!.cb([selectedCard]);
 
         expect(player.getResourcesOnCard(selectedCard)).to.eq(2);

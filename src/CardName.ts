@@ -375,6 +375,7 @@ export enum CardName {
     ARCADIAN_COMMUNITIES = "Arcadian Communities",
     ASTRODRILL = "Astrodrill",
     ASTEROID_HOLLOWING = "Asteroid Hollowing",
+    ASTEROID_RIGHTS = "Asteroid Rights",
     ADVERTISING = "Advertising",
     PHARMACY_UNION = "Pharmacy Union",
     COMET_AIMING = "Comet Aiming",
@@ -457,6 +458,9 @@ export enum CardName {
     TRADE_ADVANCE = "Trade Advance",
     POLITICAL_UPRISING = "Political Uprising",
     BY_ELECTION = "By-Election",
+
+    // Community colonies
+    SCIENCE_TAG_BLANK_CARD = "",
 
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = "Bioengineering Enclosure",

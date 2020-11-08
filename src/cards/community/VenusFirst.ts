@@ -6,8 +6,8 @@ import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 
 export class VenusFirst extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.VENUS_FIRST;
+    public tags = [Tags.VENUS];
+    public name = CardName.VENUS_FIRST;
 
     public play(player: Player, game: Game) {     
         game.increaseVenusScaleLevel(player, 2);

@@ -11,14 +11,14 @@ import { LogHelper } from "../../components/LogHelper";
 import { Game } from "../../Game";
 
 export class CorroderSuits implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.CORRODER_SUITS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 8;
+    public tags = [Tags.VENUS];
+    public name = CardName.CORRODER_SUITS;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         player.addProduction(Resources.MEGACREDITS,2);
-        const cards = this.getResCards(player);
+        const cards = CorroderSuits.getVenusResCards(player);
 
         if (cards.length === 0) return undefined;
 
@@ -31,7 +31,7 @@ export class CorroderSuits implements IProjectCard {
         return new SelectCard(
             "Select card to add 1 resource",
             "Add resource",
-            this.getResCards(player),
+            CorroderSuits.getVenusResCards(player),
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               LogHelper.logAddResource(game, player, foundCards[0]);
@@ -39,7 +39,7 @@ export class CorroderSuits implements IProjectCard {
             }
         );
     }
-    public getResCards(player: Player): ICard[] {
+    public static getVenusResCards(player: Player): ICard[] {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));

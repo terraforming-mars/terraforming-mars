@@ -1,7 +1,7 @@
 import { IAward } from "./IAward";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { Resources } from '../Resources';
+import { Resources } from "../Resources";
 
 export class Banker implements IAward {
     public name: string = "Banker";

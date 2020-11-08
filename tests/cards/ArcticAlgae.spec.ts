@@ -16,7 +16,7 @@ describe("ArcticAlgae", function () {
 
     it("Can't play", function () {
         (game as any).temperature = -10;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {

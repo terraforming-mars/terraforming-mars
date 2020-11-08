@@ -15,17 +15,17 @@ describe("Psychrophiles", function () {
 
     it("Can't play", function () {
         (game as any).temperature = -18;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Can act", function () {
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
     });
 
     it("Should act", function () {
@@ -33,7 +33,7 @@ describe("Psychrophiles", function () {
         player.playedCards.push(card);
         
         card.action(player);
-        expect(player.getCardsWithResources().length).to.eq(1);
+        expect(player.getCardsWithResources()).has.lengthOf(1);
         expect(player.getMicrobesCanSpend()).to.eq(1);
     });
 });

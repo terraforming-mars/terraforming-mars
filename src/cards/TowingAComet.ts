@@ -3,16 +3,17 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OXYGEN_LEVEL, MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class TowingAComet implements IProjectCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.TOWING_A_COMET;
+    public cost = 23;
+    public tags = [Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.TOWING_A_COMET;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
@@ -21,14 +22,14 @@ export class TowingAComet implements IProjectCard {
         const totalSteps = oxygenStep + oceanStep;
   
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
+            return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
         }
   
         return true;
-      }
+    }
 
     public play(player: Player, game: Game) {
-        game.addOceanInterrupt(player);
+        game.defer(new PlaceOceanTile(player, game));
         player.plants += 2;
         return game.increaseOxygenLevel(player, 1);
     }

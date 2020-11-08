@@ -3,7 +3,7 @@ import { HeatTrappers } from "../../src/cards/HeatTrappers";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 
 describe("HeatTrappers", function () {
@@ -20,7 +20,7 @@ describe("HeatTrappers", function () {
         game = new Game("foobar", [player], player);
         player.addProduction(Resources.HEAT);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
         expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
@@ -31,12 +31,12 @@ describe("HeatTrappers", function () {
 
     it("Should play - auto select if single target", function () {
         player2.addProduction(Resources.HEAT, 7);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
         expect(player2.getProduction(Resources.HEAT)).to.eq(5);
     });
 
@@ -47,15 +47,14 @@ describe("HeatTrappers", function () {
 
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.HEAT)).to.eq(5);
     });
 
     it("Can't play if nobody has heat production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Gives victory points", function () {

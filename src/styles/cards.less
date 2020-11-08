@@ -351,6 +351,23 @@ input[type="radio"]:checked + .filterDiv::after {
   content: "\2666";
 }
 
+.ares-icon:after {
+    position: absolute;
+    color:#EFEF64;
+    border: 1px solid black;
+    background: #953316;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "A";
+  }
+
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -969,6 +986,12 @@ input[type="radio"]:checked + .filterDiv::after {
     width: 30px;
     background-size: 30px 40px;
     vertical-align: middle;
+    border: none;
+}
+
+.card-with-border {
+    border: .05rem solid #dadee4;
+    border-radius: .1rem;
 }
 
 .card-icon {
@@ -1442,7 +1465,7 @@ input[type="radio"]:checked + .filterDiv::after {
     margin-left: 90px;
 }
 
-.utopia {
+.utopia-corp-name {
     background: green;
     color: white;
     box-shadow: 3px 3px 3px 0px #444;
@@ -1457,17 +1480,47 @@ input[type="radio"]:checked + .filterDiv::after {
     border-bottom: 3px solid #005100;
 }
 
-.utopia1 {
+.utopia-corp-name-1 {
     font-size: 20px;
     transform: scaleX(1.5);
     letter-spacing: 5px;
     margin-left: 5px;
 }
 
-.utopia2 {
+.utopia-corp-name-2 {
     font-size: 10px;
     letter-spacing: 16px;
     margin-left: 13px;
+}
+
+
+.utopia-starting-resources{
+    margin-left: 35px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.utopia-production-box{
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.utopia-ability-description{
+    text-align:center;
+    margin-top:0px;
+}
+
+.utopia-description-box{
+    margin-top:-5px;
+    text-align:center;
+}
+
+.card-utopia-invest {
+    .production.wild {
+        vertical-align: middle;
+        margin-left: 5px;
+    }
 }
 
 .factorum {
@@ -1870,6 +1923,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-crash-site-cleanup {
     .requirements {
         margin-top: 10px;
+        height: 40px;
         .crash-site-minus-plant{
             margin-top: -10px;
         }
@@ -1935,18 +1989,6 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
-.card-deimos-down-promo {
-    .tile.special-tile {
-        font-size: 30px;
-        transform: scale(0.8, 0.8);
-    }
-}
-
-.card-great-dam-promo {
-    .tile.special-tile {
-        font-size: 30px;
-    }
-}
 
 .card-magnetic-field-generators-promo {
     .tile-icon {
@@ -1960,10 +2002,9 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
-.card-nuclear-zone {
-    .tile.special-tile {
-        font-size:28px;
-        line-height:50px;
+.card-valuable-gases {
+    .resource.card {
+        margin-top: 10px;
     }
 }
 
@@ -2082,14 +2123,6 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
-.restricted-area-tile {
-    width: 38px;
-    height: 38px;
-    background: url(assets/cancel38x38.png) 0 0 no-repeat;
-    transform: scale(0.6);
-    margin: 4px 0 0 1px;
-}
-
 .little-green-men {
     position: absolute;
     z-index: 1000;
@@ -2175,7 +2208,6 @@ input[type="radio"]:checked + .filterDiv::after {
             margin-right: 25px;
         }
     }
-
     .corporationEffectBox {
         width: 227px;
         margin-left: -5px;
@@ -2183,6 +2215,33 @@ input[type="radio"]:checked + .filterDiv::after {
         .corporation-action-icons {
             font-size: 12px;
         }
+    }
+}
+
+.card-aphrodite {
+    .corporation-logo{
+        font-size: 23px;
+        color: orange;
+        font-weight: bold;
+        margin-top:10px;
+        text-shadow:  6px 6px 6px  grey;
+        text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;
+    }
+    .starting-resources {
+        .production-box{
+            margin-top: 5px;
+            margin-left: 50px;
+        }
+        .resource.money {
+            margin-left:20px;
+        }
+    }
+    .description-starting-resource{
+        text-align: center; 
+    }
+    .description-effect {
+        text-align: center;
+        margin-top: 0px;
     }
 }
 
@@ -2226,6 +2285,24 @@ input[type="radio"]:checked + .filterDiv::after {
 
         &.description--2 {
             width: 120px;
+        }
+    }
+}
+
+.card-quantum-communications {
+    .production-box-size2a {
+        white-space: nowrap;
+        width: 130px;
+
+        .colony-icon-small {
+          margin-bottom: -3px;
+          margin-top: 3px;
+          vertical-align: text-bottom;
+        }
+
+        .money.production {
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
     }
 }
@@ -2314,6 +2391,116 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
+.card-asteroid-rights {
+    .effect {
+        margin-left: -5px;
+        width: 230px;
+    }
+
+    .effect2 {
+        margin-left: -10px;
+        margin-top: 10px;
+    }
+}
+
+.card-ecological-zone{
+    .description-tile{
+        text-align: left;
+        margin-top: -50px;
+        width: 135px;
+    }
+    .tile{
+        margin-left: 130px;
+        margin-top: 10px;
+    }
+}
+
+.card-herbivores{
+    .description{
+        margin-top:-8px;
+    }
+    .description-tile{
+        text-align: left;
+        margin-top: -50px;
+        width: 135px;
+    }
+    .production-box{
+        margin-top:2px;
+    }
+    .herbivores-requirement{
+        position: absolute;
+        text-align: left;
+        margin-top: 42px; 
+        width: 130px;
+    }
+    .production-box{
+        margin-left: 35px;
+        margin-top: 10px;
+        position: absolute;
+    }
+    .herbivores-starting-animal{
+        margin-left: -60px;
+        position: absolute;
+    }
+}
+
+/*********** Special Tile Styles ************/
+
+.special-tile-symbol{
+    background-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin: 2px 0px;
+}
+
+.special-tile--mohole-area{
+    background-image: url(./assets/tiles/special_tile_icons/mohole_area.png);
+}
+
+.special-tile--commerical-district{
+    background-image: url(./assets/tiles/special_tile_icons/commerical_district.png);
+}
+
+.special-tile--deimos-promo{
+    background-image: url(./assets/tiles/special_tile_icons/deimos.png);
+}
+
+.special-tile--ecological-zone{
+    background-image: url(./assets/tiles/special_tile_icons/ecological_zone.png);
+}
+
+.special-tile--great-dam-promo{
+    background-image: url(./assets/tiles/special_tile_icons/great_dam.png);
+}
+
+.special-tile--industrial-center{
+    background-image: url(./assets/tiles/special_tile_icons/industrial_center.png);
+}
+
+.special-tile--lava-flows{
+    background-image: url(./assets/tiles/special_tile_icons/lava_flows.png);
+}
+
+.special-tile--magnetic-field-gen-promo{
+    background-image: url(./assets/tiles/special_tile_icons/magnetic_field_gen.png);
+}
+
+.special-tile--mining-area{
+    background-image: url(./assets/tiles/special_tile_icons/mining_area.png);
+}
+
+.special-tile--natural_preserve{
+    background-image: url(./assets/tiles/special_tile_icons/natural_preserve.png);
+}
+
+.special-tile--nuclear-zone{
+    background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+}
+
+.special-tile--restricted-area{
+    background-image: url(./assets/tiles/special_tile_icons/restricted_area.png);
+}
+
 /*********** Prelude Styles ************/
 
 .prelude-ecology-experts-requirement-box {
@@ -2358,7 +2545,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .expansion-icon-colony {
-    background-image: url(./assets/expansion_icons/expansion_icon_colony.png);
+    background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
 }
 
 .expansion-icon-turmoil {
@@ -2367,6 +2554,14 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .expansion-icon-promo {
     background-image: url(./assets/expansion_icons/expansion_icon_promo.png);
+}
+
+.expansion-icon-community {
+    background-image: url(./assets/expansion_icons/expansion_icon_community.png);
+}
+
+.expansion-icon-ares {
+    background-image: url(./assets/expansion_icons/expansion_icon_ares.png);
 }
 
 /* refactored */

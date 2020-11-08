@@ -2,16 +2,17 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { ALL_PARTIES } from "../../turmoil/Turmoil";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
+import { DeferredAction } from "../../deferredActions/DeferredAction";
 
 export class ByElection extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.BY_ELECTION;
-    public canPlay(__player: Player, game: Game) {
+    public tags = [Tags.WILDCARD];
+    public name = CardName.BY_ELECTION;
+    public canPlay(_player: Player, game: Game) {
         return game.turmoil !== undefined;
     }
     public play(player: Player, game: Game) {
@@ -25,12 +26,15 @@ export class ByElection extends PreludeCard implements IProjectCard {
         setRulingParty.title = "Select new ruling party";
         setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
             p.partyName, "Select", () => {
-            turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
-            return undefined;
+                turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+                return undefined;
             })
         )];
 
-        game.addInterrupt({ player, playerInput: setRulingParty });
+        game.defer(new DeferredAction(
+            player,
+            () => setRulingParty
+        ));
 
         return undefined;
     }

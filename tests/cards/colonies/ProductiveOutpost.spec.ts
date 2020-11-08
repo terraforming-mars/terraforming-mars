@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { ProductiveOutpost } from "../../../src/cards/colonies/ProductiveOutpost";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { Luna } from '../../../src/colonies/Luna';
-import { Triton } from '../../../src/colonies/Triton';
+import { Game } from "../../../src/Game";
+import { Luna } from "../../../src/colonies/Luna";
+import { Triton } from "../../../src/colonies/Triton";
 
 describe("ProductiveOutpost", function () {
     it("Should play", function () {
@@ -21,8 +21,8 @@ describe("ProductiveOutpost", function () {
         game.colonies.push(colony1);
         game.colonies.push(colony2);
 
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        card.play(player, game);
+        game.deferredActions.runAll(() => {});
         expect(player.megaCredits).to.eq(2);
         expect(player.titanium).to.eq(1);
     });

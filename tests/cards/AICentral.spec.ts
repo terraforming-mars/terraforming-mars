@@ -3,7 +3,7 @@ import { AICentral } from "../../src/cards/AICentral";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("AICentral", function () {
     let card : AICentral, player : Player, game : Game;
@@ -15,12 +15,12 @@ describe("AICentral", function () {
     });
 
     it("Can't play if not enough science tags to play", function () {
-        expect(card.canPlay(player)).to.eq(false); 
+        expect(card.canPlay(player)).is.not.true; 
     });
 
     it("Can't play if no energy production", function () {
         player.playedCards.push(card, card, card);
-        expect(card.canPlay(player)).to.eq(false); 
+        expect(card.canPlay(player)).is.not.true; 
     });
 
     it("Should play", function () {
@@ -35,6 +35,6 @@ describe("AICentral", function () {
 
     it("Should take action", function () {
         card.action(player, game);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
     });
 });

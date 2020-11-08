@@ -12,7 +12,7 @@ describe("TerraformingGanymede", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
         player.playedCards.push(card);

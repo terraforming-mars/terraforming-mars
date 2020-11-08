@@ -3,7 +3,7 @@ import { SpaceElevator } from "../../src/cards/SpaceElevator";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("SpaceElevator", function () {
     let card : SpaceElevator, player : Player, game : Game;
@@ -15,7 +15,7 @@ describe("SpaceElevator", function () {
     });
 
     it("Can't act if no steel", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should play", function () {
@@ -27,7 +27,7 @@ describe("SpaceElevator", function () {
 
     it("Should act", function () {
         player.steel = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         
         card.action(player, game);
         expect(player.steel).to.eq(0);

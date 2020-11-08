@@ -1,4 +1,4 @@
-import {ICard} from "./../ICard";
+import { ICard } from "./../ICard";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 import { CardType } from "./../CardType";
@@ -8,10 +8,10 @@ import { ResourceType } from "../../ResourceType";
 import { CardName } from "../../CardName";
 
 export class ImportedNutrients implements IProjectCard {
-    public cost: number = 14;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: CardName = CardName.IMPORTED_NUTRIENTS;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 14;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.IMPORTED_NUTRIENTS;
+    public cardType = CardType.EVENT;
 
     public play(player: Player) {
         player.plants += 4;

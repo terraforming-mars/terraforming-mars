@@ -16,15 +16,15 @@ describe("HiTechLab", function () {
     });
 
     it("Can't act if no energy resources available", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.setResource(Resources.ENERGY, 5);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         const amount = card.action(player, game) as SelectAmount;
-        expect(amount instanceof SelectAmount).to.eq(true);
+        expect(amount instanceof SelectAmount).is.true;
         
         amount!.cb(3);
         expect(player.getResource(Resources.ENERGY)).to.eq(2);

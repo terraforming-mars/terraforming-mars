@@ -11,10 +11,10 @@ import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class FreyjaBiodomes implements IProjectCard {
-    public cost: number = 14;
-    public tags: Array<Tags> = [Tags.PLANT, Tags.VENUS];
-    public name: CardName = CardName.FREYJA_BIODOMES;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 14;
+    public tags = [Tags.PLANT, Tags.VENUS];
+    public name = CardName.FREYJA_BIODOMES;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));
     }

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ImpactorSwarm } from "../../../src/cards/colonies/ImpactorSwarm";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("ImpactorSwarm", function () {
@@ -17,17 +17,16 @@ describe("ImpactorSwarm", function () {
 
     it("Should play when no other player has plants", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.heat).to.eq(12);
     });
 
     it("Should be able to remove plants from other player", function () {
         player2.plants = 2;
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player2.plants).to.eq(0);
         expect(player.heat).to.eq(12);

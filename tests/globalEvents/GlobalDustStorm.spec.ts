@@ -3,10 +3,10 @@ import { GlobalDustStorm } from "../../src/turmoil/globalEvents/GlobalDustStorm"
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { StripMine } from '../../src/cards/StripMine';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { StripMine } from "../../src/cards/StripMine";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 
 describe("GlobalDustStorm", function () {
     it("resolve play", function () {

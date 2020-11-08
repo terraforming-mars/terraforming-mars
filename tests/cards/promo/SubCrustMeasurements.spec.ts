@@ -15,20 +15,20 @@ describe("SubCrustMeasurements", function () {
     });
 
     it("Can't play if not enough science tags", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play();
         expect(card.getVictoryPoints()).to.eq(2);
     });
 
     it("Should take action", function () {
-        expect(player.cardsInHand.length).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(0);
         card.action(player, game);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

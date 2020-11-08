@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Trees } from "../../src/cards/Trees";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Insects", function () {
     let card : Insects, player : Player, game : Game;
@@ -16,12 +16,12 @@ describe("Insects", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.PLANTS)).to.eq(0);

@@ -22,9 +22,9 @@ describe("Flooding", function () {
     it("Should play", function () {
         const oceans = game.board.getAvailableSpacesForOcean(player);
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
-        expect(action!.cb(oceans[0])).to.eq(undefined);
+        expect(action!.cb(oceans[0])).is.undefined;
         const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);
         oceans[0].tile = undefined;
         for (let i = 0; i < adjacentSpaces.length; i++) {
@@ -35,11 +35,11 @@ describe("Flooding", function () {
         }
 
         const subAction: OrOptions = action!.cb(oceans[0]) as OrOptions;
-        expect(subAction instanceof OrOptions).to.eq(true);
-        expect(subAction!.options.length).to.eq(2);
-        expect(subAction!.options[1].cb()).to.eq(undefined);
+        expect(subAction instanceof OrOptions).is.true;
+        expect(subAction!.options).has.lengthOf(2);
+        expect(subAction!.options[1].cb()).is.undefined;
         const subActionSelectPlayer: SelectPlayer = subAction!.options[0] as SelectPlayer;
-        expect(subActionSelectPlayer.players.length).to.eq(1);
+        expect(subActionSelectPlayer.players).has.lengthOf(1);
         expect(subActionSelectPlayer.players[0]).to.eq(player2);
 
         player2.megaCredits = 4;
@@ -57,12 +57,12 @@ describe("Flooding", function () {
         game.addGreenery(player, "03");
         game.addGreenery(player2, "05");
 
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
         const subActions: OrOptions = action!.cb(oceanSpaces[0]) as OrOptions;
-        expect(subActions.options.length).to.eq(2);
+        expect(subActions.options).has.lengthOf(2);
 
         const subActionSelectPlayer: SelectPlayer = subActions.options[0] as SelectPlayer;
-        expect(subActionSelectPlayer.players.length).to.eq(1);
+        expect(subActionSelectPlayer.players).has.lengthOf(1);
         expect(subActionSelectPlayer.players[0]).to.eq(player2);
     });
 
@@ -73,10 +73,10 @@ describe("Flooding", function () {
 
         landClaimAction.cb(adjacentSpace);
         expect(adjacentSpace.player).to.eq(player2);
-        expect(adjacentSpace.tile).to.eq(undefined);
+        expect(adjacentSpace.tile).is.undefined;
 
         const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
         const action = card.play(player, game) as SelectSpace;
-        expect(action.cb(oceanSpaces[0])).to.eq(undefined);
+        expect(action.cb(oceanSpaces[0])).is.undefined;
     });
 });

@@ -3,7 +3,7 @@ import { AtmoCollectors } from "../../../src/cards/colonies/AtmoCollectors";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("AtmoCollectors", function () {
     let card : AtmoCollectors, player : Player, game : Game;
@@ -16,18 +16,18 @@ describe("AtmoCollectors", function () {
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions).is.not.undefined;
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);

@@ -4,15 +4,15 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { Resources } from "../Resources";
 import { LogHelper } from "../components/LogHelper";
 
 export class MartianRails implements IActionCard, IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_RAILS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 13;
+    public tags = [Tags.STEEL];
+    public name = CardName.MARTIAN_RAILS;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

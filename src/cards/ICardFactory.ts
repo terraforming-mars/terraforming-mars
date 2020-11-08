@@ -1,8 +1,8 @@
 import { CardName } from "../CardName";
-import { Expansion } from "../Expansion";
+import { GameModule } from "../GameModule";
 
 export interface ICardFactory<T> {
     cardName: CardName;
     factory: new () => T;
-    compatibility ?: Expansion ;
+    compatibility ?: GameModule ;
 }

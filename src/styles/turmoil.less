@@ -73,6 +73,8 @@
     width: 1010px;
     display: inline-block;
     vertical-align: top;
+    transform: scale(0.88);
+    margin: -50px 0 0px -56px;
 }
 
 .events-board {
@@ -81,7 +83,7 @@
     width: 1025px;
     box-sizing: initial;
     text-align: left;
-    margin: 0 0 0 10px;
+    margin: -10px 0 -10px 10px;
 }
   
 .global-event {
@@ -445,11 +447,13 @@
     font-size: 16px;
     color: #303030;
     text-transform: uppercase;
-    background: lightblue;
     padding: 3px 26px 3px 26px;
     border-radius: 0 0 20px 20px;
     text-decoration: none;
     cursor: pointer;
+    position: absolute;
+    margin: 138px 0 0 370px;
+    font-weight: bold;
 }
 
 .policies-clickable:link {
@@ -465,7 +469,7 @@
     background-color: #313131;
     display: inline-block;
     vertical-align: top;
-    padding: 20px;
+    padding: 5px;
     min-width: 233px;
     min-height: 104px;
     margin: 10px;
@@ -476,7 +480,11 @@
 }
 
 .policies-global {
-    margin-top:5px;
+    margin-top: 175px;
+    position: absolute;
+    z-index: 3;
+    background-color: #303030;
+    border-radius: 10px;
 }
 
 .policy-bonus {

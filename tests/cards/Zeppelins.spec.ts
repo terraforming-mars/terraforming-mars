@@ -3,7 +3,7 @@ import { Zeppelins } from "../../src/cards/Zeppelins";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Zeppelins", function () {
     let card : Zeppelins, player : Player, game : Game;
@@ -16,11 +16,11 @@ describe("Zeppelins", function () {
 
     it("Can't play", function () {
         (game as any).oxygenLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
     it("Should play", function () {
         (game as any).oxygenLevel = 5;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const lands = game.board.getAvailableSpacesOnLand(player);
         game.addCityTile(player, lands[0].id);

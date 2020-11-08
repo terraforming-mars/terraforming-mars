@@ -1,4 +1,4 @@
-import {ICard} from "../ICard";
+import { ICard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
@@ -13,10 +13,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class HydrogenToVenus implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.HYDROGEN_TO_VENUS;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 11;
+    public tags = [Tags.SPACE];
+    public name = CardName.HYDROGEN_TO_VENUS;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
     private static readonly venusCardsWithFloaters: Set<CardName> = new Set<CardName>([
         CardName.AERIAL_MAPPERS,

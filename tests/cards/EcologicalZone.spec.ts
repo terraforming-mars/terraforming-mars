@@ -16,16 +16,16 @@ describe("EcologicalZone", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
         game.addGreenery(player, landSpace.id);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action instanceof SelectSpace).is.true;
 
         const adjacentSpace = action.availableSpaces[0];
         action.cb(adjacentSpace);
@@ -34,6 +34,7 @@ describe("EcologicalZone", function () {
         card.onCardPlayed(player, game, card);
         expect(card.resourceCount).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(1);
+        expect(adjacentSpace.adjacency?.bonus).eq(undefined);
     });
 });
 

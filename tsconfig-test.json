@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "lib": [], 
+        "moduleResolution": "node",
+        "lib": ["dom"],
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "strict": true,
         "removeComments": true,
+        "resolveJsonModule": true,
         "preserveConstEnums": true,
         "outDir": "dist",
         "skipLibCheck": true,
@@ -16,6 +17,7 @@
         "types": ["node", "mocha", "chai"]
     },
     "include": [
-        "tests/**/*.spec.ts",
-    ],
+        "tests/utils/Vue.ts",
+        "tests/**/*.spec.ts"
+    ]
 }

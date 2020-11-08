@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player, PlayerId } from "../../Player";
@@ -9,10 +8,10 @@ import { SelectDelegate } from "../../inputs/SelectDelegate";
 import { IParty } from "../../turmoil/parties/IParty";
 
 export class BannedDelegate implements IProjectCard {
-    public cost: number = 0;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.BANNED_DELEGATE;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 0;
+    public tags = [];
+    public name = CardName.BANNED_DELEGATE;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

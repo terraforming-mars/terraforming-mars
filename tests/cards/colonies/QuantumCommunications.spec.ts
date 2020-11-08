@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { QuantumCommunications } from "../../../src/cards/colonies/QuantumCommunications";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { Luna } from '../../../src/colonies/Luna';
-import { Triton } from '../../../src/colonies/Triton';
+import { Game } from "../../../src/Game";
+import { Luna } from "../../../src/colonies/Luna";
+import { Triton } from "../../../src/colonies/Triton";
 import { Resources } from "../../../src/Resources";
 
 describe("QuantumCommunications", function () {
@@ -23,7 +23,7 @@ describe("QuantumCommunications", function () {
         game.colonies.push(colony2);
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

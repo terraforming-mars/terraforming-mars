@@ -15,17 +15,17 @@ describe("AsteroidHollowing", function () {
     });
 
     it("Should play", function () {
-        expect(card.play()).to.eq(undefined);
+        expect(card.play()).is.undefined;
     });
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.titanium = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         card.action(player, game);
         expect(player.titanium).to.eq(0);

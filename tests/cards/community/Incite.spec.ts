@@ -2,11 +2,11 @@ import { expect } from "chai";
 import { Incite } from "../../../src/cards/community/Incite";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { setCustomGameOptions } from "../../TestingUtils";
-import { SelectParty } from "../../../src/interrupts/SelectParty";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { EventAnalysts } from "../../../src/cards/turmoil/EventAnalysts";
 
 describe("Incite", function () {
     let card : Incite, player : Player, game : Game;
@@ -26,15 +26,20 @@ describe("Incite", function () {
         expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
     });
 
+    it("Works with Event Analysts", function () {
+        const eventAnalysts = new EventAnalysts();
+        eventAnalysts.play(player, game);
+        expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
+    });
+
     it("Can perform initial action", function () {
         card.initialAction(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const selectParty = game.interrupts[0] as SelectParty;
-        (selectParty.playerInput as OrOptions).options[0].cb();
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        orOptions.options[0].cb();
 
         const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
-        expect(marsFirst!.delegates.filter((d) => d === player.id).length).to.eq(2);
+        expect(marsFirst!.delegates.filter((d) => d === player.id)).has.lengthOf(2);
     });
 });

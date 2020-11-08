@@ -18,10 +18,9 @@ describe("MiningExpedition", function () {
     it("Should play", function () {
         player2.plants = 8;
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player2.plants).to.eq(6);
 

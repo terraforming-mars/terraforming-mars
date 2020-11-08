@@ -3,7 +3,7 @@ import { ImmigrantCity } from "../../src/cards/ImmigrantCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { TharsisRepublic } from "../../src/cards/corporation/TharsisRepublic";
 
 describe("ImmigrantCity", function () {
@@ -17,7 +17,7 @@ describe("ImmigrantCity", function () {
     });
     
     it("Can't play without energy production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
     
     it("Should play", function () {
@@ -36,7 +36,7 @@ describe("ImmigrantCity", function () {
     it("Can play at -4 MC production", function () {
         player.addProduction(Resources.ENERGY);
         player.addProduction(Resources.MEGACREDITS, -4);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
         action.cb(action.availableSpaces[0]);
@@ -54,7 +54,7 @@ describe("ImmigrantCity", function () {
         player.corporationCard = new TharsisRepublic();
         player.addProduction(Resources.ENERGY);
         player.addProduction(Resources.MEGACREDITS, -5);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
         action.cb(action.availableSpaces[0]);

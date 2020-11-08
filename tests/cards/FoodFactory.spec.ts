@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FoodFactory } from "../../src/cards/FoodFactory";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("FoodFactory", function () {
     let card : FoodFactory, player : Player;
@@ -13,12 +13,12 @@ describe("FoodFactory", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.PLANTS);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.PLANTS)).to.eq(0);

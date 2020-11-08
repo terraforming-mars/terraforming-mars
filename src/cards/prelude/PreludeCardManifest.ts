@@ -105,4 +105,5 @@ export const PRELUDE_CARD_MANIFEST = new CardManifest({
         { cardName: CardName.ECCENTRIC_SPONSOR, factory: EccentricSponsor },
         { cardName: CardName.ECOLOGY_EXPERTS, factory: EcologyExperts },
         { cardName: CardName.EXPERIMENTAL_FOREST, factory: ExperimentalForest }
-    ]});
+    ]
+});

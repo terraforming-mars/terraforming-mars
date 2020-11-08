@@ -2,8 +2,9 @@ import { expect } from "chai";
 import { FloaterTechnology } from "../../../src/cards/colonies/FloaterTechnology";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { Game } from "../../../src/Game";
+import { ICard } from "../../../src/cards/ICard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
 
@@ -18,11 +19,11 @@ describe("FloaterTechnology", function () {
 
     it("Can play", function () {
         const result = card.play();
-        expect(result).to.eq(undefined);
+        expect(result).is.undefined;
     });
 
     it("Cannot act without targets", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
     
     it("Acts automatically with single targets", function () {
@@ -30,6 +31,9 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles);
 
         card.action(player, game);
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
         expect(dirigibles.resourceCount).to.eq(1);
     });
 
@@ -39,11 +43,10 @@ describe("FloaterTechnology", function () {
         player.playedCards.push(dirigibles, floatingHabs);
 
         card.action(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.generatePlayerInput?.();
-        selectResourceInterrupt.playerInput?.cb([floatingHabs]);
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+        selectCard.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(1);
         expect(dirigibles.resourceCount).to.eq(0);
     });

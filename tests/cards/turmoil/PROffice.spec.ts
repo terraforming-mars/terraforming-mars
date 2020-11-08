@@ -3,7 +3,7 @@ import { PROffice } from "../../../src/cards/turmoil/PROffice";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Sponsors } from "../../../src/cards/Sponsors";
 import { AcquiredCompany } from "../../../src/cards/AcquiredCompany";
@@ -18,11 +18,11 @@ describe("PROffice", function () {
 
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         
         let unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;
         unity.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         player.playedCards.push(card2, card3);
         card.play(player, game);

@@ -14,6 +14,7 @@ import { Color } from "./src/Color";
 import { Game, GameOptions } from "./src/Game";
 import { GameLoader } from "./src/database/GameLoader";
 import { GameLogs } from "./src/routes/GameLogs";
+import { GameHomeModel } from "./src/models/GameHomeModel";
 import { Route } from "./src/routes/Route";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
@@ -48,12 +49,15 @@ import {
 } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
 import { SelectColony } from "./src/inputs/SelectColony";
+import { SelectProductionToLose } from "./src/inputs/SelectProductionToLose";
+import { ShiftAresGlobalParameters } from "./src/inputs/ShiftAresGlobalParameters";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
+const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -83,10 +87,12 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                 apiGetWaitingFor(req, res);
             } else if (req.url.startsWith("/assets/translations.json")) {
                 res.setHeader("Content-Type", "application/json");
+                res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
                 res.write(fs.readFileSync("assets/translations.json"));
                 res.end();
             } else if (req.url === "/styles.css") {
                 res.setHeader("Content-Type", "text/css");
+                res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
                 serveResource(res, styles);
             } else if (
                 req.url.startsWith("/assets/") ||
@@ -252,11 +258,11 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         try {
             const gameReq = JSON.parse(body);
 
-            let game_id = gameReq.game_id;
+            const game_id = gameReq.game_id;
 
             const player = new Player("test", Color.BLUE, false, 0);
             const player2 = new Player("test2", Color.RED, false, 0);
-            let gameToRebuild = new Game(game_id, [player, player2], player);
+            const gameToRebuild = new Game(game_id, [player, player2], player);
             Database.getInstance().restoreGameLastSave(
                 game_id,
                 gameToRebuild,
@@ -320,7 +326,7 @@ function apiGetWaitingFor(
     res: http.ServerResponse
 ): void {
     const qs: string = req.url!.substring("/api/waitingfor?".length);
-    let queryParams = querystring.parse(qs);
+    const queryParams = querystring.parse(qs);
     const playerId = (queryParams as any)["id"];
     const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
     gameLoader.getGameByPlayerId(playerId, (game) => {
@@ -431,6 +437,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 coloniesExtension: gameReq.colonies,
                 preludeExtension: gameReq.prelude,
                 turmoilExtension: gameReq.turmoil,
+                aresExtension: gameReq.aresExtension,
+                aresHazards: true, // Not a runtime option.
                 promoCardsOption: gameReq.promoCardsOption,
                 communityCardsOption: gameReq.communityCardsOption,
                 solarPhaseOption: gameReq.solarPhaseOption,
@@ -463,13 +471,13 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
     const allMilestones = game.milestones;
     const claimedMilestones = game.claimedMilestones;
-    let milestoneModels: Array<ClaimedMilestoneModel> = [];
+    const milestoneModels: Array<ClaimedMilestoneModel> = [];
 
-    for (let idx in allMilestones) {
-        let claimed = claimedMilestones.find(
+    for (const idx in allMilestones) {
+        const claimed = claimedMilestones.find(
             (m) => m.milestone.name === allMilestones[idx].name
         );
-        let scores: Array<IMilestoneScore> = [];
+        const scores: Array<IMilestoneScore> = [];
         if (claimed === undefined && claimedMilestones.length < 3) {
             game.getPlayers().forEach((player) => {
                 scores.push({
@@ -493,13 +501,13 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
 function getAwards(game: Game): Array<FundedAwardModel> {
     const allAwards = game.awards;
     const fundedAwards = game.fundedAwards;
-    let awardModels: Array<FundedAwardModel> = [];
+    const awardModels: Array<FundedAwardModel> = [];
 
-    for (let idx in allAwards) {
-        let funded = fundedAwards.find(
+    for (const idx in allAwards) {
+        const funded = fundedAwards.find(
             (a) => a.award.name === allAwards[idx].name
         );
-        let scores: Array<IAwardScore> = [];
+        const scores: Array<IAwardScore> = [];
         if (fundedAwards.length < 3 || funded !== undefined) {
             game.getPlayers().forEach((player) => {
                 scores.push({
@@ -534,7 +542,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getPlayer(player: Player, game: Game): string {
     const turmoil = getTurmoil(game);
 
-    const output = {
+    const output: PlayerModel = {
         cardsInHand: getCards(player, player.cardsInHand, game, false),
         draftedCards: getCards(player, player.draftedCards, game, false),
         milestones: getMilestones(game),
@@ -599,8 +607,10 @@ function getPlayer(player: Player, game: Game): string {
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: game.getPassedPlayers(),
+        aresExtension: game.gameOptions.aresExtension,
+        aresData: game.aresData,
         preludeExtension: game.gameOptions.preludeExtension,
-    } as PlayerModel;
+    };
     return JSON.stringify(output);
 }
 
@@ -608,7 +618,7 @@ function getCardsAsCardModel(
     cards: Array<ICard>,
     showResouces: boolean = true
 ): Array<CardModel> {
-    let result: Array<CardModel> = [];
+    const result: Array<CardModel> = [];
     cards.forEach((card) => {
         result.push({
             name: card.name,
@@ -649,7 +659,9 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
-        coloniesModel: undefined
+        coloniesModel: undefined,
+        payProduction: undefined,
+        aresData: undefined,
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -716,6 +728,24 @@ function getWaitingFor(
                 }
             );
             break;
+        case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+            const _player = (waitingFor as SelectProductionToLose).player;
+            result.payProduction = {
+                cost: (waitingFor as SelectProductionToLose).unitsToLose,
+                units: {
+                    megacredits: _player.getProduction(Resources.MEGACREDITS),
+                    steel: _player.getProduction(Resources.STEEL),
+                    titanium: _player.getProduction(Resources.TITANIUM),
+                    plants: _player.getProduction(Resources.PLANTS),
+                    energy: _player.getProduction(Resources.ENERGY),
+                    heat: _player.getProduction(Resources.HEAT)
+                }
+            };
+            break;
+        case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+            result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData
+            break;
+    
     }
     return result;
 }
@@ -747,7 +777,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             energyProduction: player.getProduction(Resources.ENERGY),
             heat: player.heat,
             heatProduction: player.getProduction(Resources.HEAT),
-            id: player.color,
+            id: game.phase === Phase.END ? player.id : player.color,
             megaCredits: player.megaCredits,
             megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
             name: player.name,
@@ -890,10 +920,10 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 }
 
-function getParties(game: Game): Array<PartyModel> | undefined {
+function getParties(game: Game): Array<PartyModel> {
     if (game.gameOptions.turmoilExtension && game.turmoil) {
         return game.turmoil.parties.map(function (party) {
-            let delegates = new Array<DelegatesModel>();
+            const delegates = new Array<DelegatesModel>();
             party.getPresentPlayers().forEach((player) => {
                 const number = party.getDelegates(player);
                 if (player !== "NEUTRAL") {
@@ -920,9 +950,8 @@ function getParties(game: Game): Array<PartyModel> | undefined {
                 delegates: delegates,
             };
         });
-    } else {
-        return undefined;
     }
+    return [];
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them
@@ -933,6 +962,9 @@ function getColor(space: ISpace): Color | undefined {
         space.player !== undefined
     ) {
         return space.player.color;
+    }
+    if (space.tile?.protectedHazard === true) {
+        return Color.BRONZE;
     }
     return undefined;
 }
@@ -952,11 +984,15 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 }
 
 function getGame(game: Game): string {
-    const output = {
+    const output: GameHomeModel = {
         activePlayer: game.getPlayerById(game.activePlayer).color,
         id: game.id,
         phase: game.phase,
-        players: game.getPlayers(),
+        players: game.getPlayers().map((player) => ({
+            color: player.color,
+            id: player.id,
+            name: player.name
+        }))
     };
     return JSON.stringify(output);
 }
@@ -1027,6 +1063,9 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         file = reqFile;
     } else {
         return route.notFound(req, res);
+    }
+    if (req.url !== "/main.js" && req.url !== "/main.js.map") {
+        res.setHeader("Cache-Control", "max-age=" + assetCacheMaxAge);
     }
     fs.readFile(file, function (err, data) {
         if (err) {

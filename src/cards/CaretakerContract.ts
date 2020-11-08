@@ -1,21 +1,20 @@
-import { IActionCard, ICard } from './ICard';
-import {IProjectCard} from './IProjectCard';
-import {CardType} from './CardType';
-import {Tags} from './Tags';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { AndOptions } from '../inputs/AndOptions';
-import { SelectAmount } from '../inputs/SelectAmount';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { REDS_RULING_POLICY_COST } from '../constants';
+import { IActionCard, ICard } from "./ICard";
+import { IProjectCard } from "./IProjectCard";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { AndOptions } from "../inputs/AndOptions";
+import { SelectAmount } from "../inputs/SelectAmount";
+import { CardName } from "../CardName";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class CaretakerContract implements IActionCard, IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.CARETAKER_CONTRACT;
+    public cost = 3;
+    public tags = [];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.CARETAKER_CONTRACT;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= 0 - (
         2 * player.getRequirementsBonus(game)

@@ -6,14 +6,14 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 import { Game } from "../../Game";
 import { SelectAmount } from "../../inputs/SelectAmount";
-import { SelectFromCards } from "../../interrupts/SelectFromCards";
+import { SelectCardToKeep } from "../../deferredActions/SelectCardToKeep";
 
 export class HiTechLab implements IProjectCard {
 
-    public name: CardName = CardName.HI_TECH_LAB;
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.HI_TECH_LAB;
+    public cost = 17;
+    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;
@@ -34,7 +34,7 @@ export class HiTechLab implements IProjectCard {
             for (let counter = 0; counter < amount; counter++) {
                 cardsDrawn.push(game.dealer.dealCard());
             };
-            game.addInterrupt(new SelectFromCards(player, game, "Select card to take into hand", cardsDrawn));
+            game.defer(new SelectCardToKeep(player, game, "Select card to take into hand", cardsDrawn));
             return undefined;
         }, player.getResource(Resources.ENERGY));
     }

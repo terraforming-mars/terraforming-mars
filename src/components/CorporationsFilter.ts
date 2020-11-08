@@ -20,7 +20,29 @@ const allItems: Array<CardName> =
         .reduce((accumulator, cards) => accumulator.concat(cards));
 
 export const CorporationsFilter = Vue.component("corporations-filter", {
-    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
+    props: {
+        corporateEra: {
+            type: Boolean
+        },
+        prelude: {
+            type: Boolean
+        },
+        venusNext: {
+            type: Boolean
+        },
+        colonies: {
+            type: Boolean
+        },
+        turmoil: {
+            type: Boolean
+        },
+        promoCardsOption: {
+            type: Boolean
+        },
+        communityCardsOption: {
+            type: Boolean
+        }
+    },
     data: function () {
         const cardsByModuleMap: Map<GameModule, Array<CardName>> =
             new Map(ALL_CARD_MANIFESTS.map(m => [m.module, corpCardNames(m.module)]));
@@ -28,17 +50,25 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             cardsByModuleMap: cardsByModuleMap,
             customCorporationsList: false,
             selectedCorporations: [
+                ...cardsByModuleMap.get(GameModule.Base)!,
                 ...this.corporateEra ? cardsByModuleMap.get(GameModule.CorpEra)! : [],
                 ...this.prelude ? cardsByModuleMap.get(GameModule.Prelude)! : [],
                 ...this.venusNext ? cardsByModuleMap.get(GameModule.Venus)! : [],
                 ...this.colonies ? cardsByModuleMap.get(GameModule.Colonies)! : [],
                 ...this.turmoil ? cardsByModuleMap.get(GameModule.Turmoil)! : [],
                 ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
-            ],
+            ] as Array<CardName> | boolean /* v-model thinks this can be boolean */,
             corpsByModule: Array.from(cardsByModuleMap)
         }
     },
     methods: {
+        getSelected: function (): Array<CardName> {
+            if (Array.isArray(this.selectedCorporations)) {
+                return this.selectedCorporations;
+            }
+            console.warn("unexpectedly got boolean for selectedCorporations");
+            return [];
+        },
         getItemsByGroup: function (group: string): Array<CardName> {
             if (group === "All") return allItems.slice();
 
@@ -53,15 +83,15 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
         selectAll: function (group: string) {
             const items = this.getItemsByGroup(group);
             for (const idx in items) {
-                if ( ! this.selectedCorporations.includes(items[idx])) {
-                    this.selectedCorporations.push(items[idx]);
+                if (this.getSelected().includes(items[idx]) === false) {
+                    this.getSelected().push(items[idx]);
                 }
             }
         },
         removeFromSelection: function (cardName: CardName) {
-            const itemIdx = this.selectedCorporations.indexOf(cardName)
+            const itemIdx = this.getSelected().indexOf(cardName)
             if (itemIdx !== -1) {
-                this.selectedCorporations.splice(itemIdx, 1)
+                this.getSelected().splice(itemIdx, 1)
             }
         },
         selectNone: function (group: string) {
@@ -74,10 +104,10 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             const items = this.getItemsByGroup(group);
 
             for (const idx in items) {
-                if (this.selectedCorporations.includes(items[idx])) {
+                if (this.getSelected().includes(items[idx])) {
                     this.removeFromSelection(items[idx]);
                 } else {
-                    this.selectedCorporations.push(items[idx]);
+                    this.getSelected().push(items[idx]);
                 }
             }
         }

@@ -26,7 +26,7 @@ describe("SaturnSurfing", function () {
         expect(card.resourceCount).to.eq(1);
 
         card.resourceCount = 0;
-        expect(card.canAct()).to.eq(false);
+        expect(card.canAct()).is.not.true;
     });
 
     it("Can act", function () {
@@ -35,7 +35,7 @@ describe("SaturnSurfing", function () {
         card.play(player);
         expect(card.resourceCount).to.eq(3);
 
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
         card.action(player);
         expect(card.resourceCount).to.eq(2);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);

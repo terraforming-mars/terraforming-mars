@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { PoliticalAlliance } from "../../../src/cards/turmoil/PoliticalAlliance";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { setCustomGameOptions } from "../../TestingUtils";
@@ -22,7 +22,7 @@ describe("PoliticalAlliance", function () {
     it("Can't play", function () {
         let greens = turmoil.getPartyByName(PartyName.GREENS)!;
         greens.partyLeader = player.id;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -30,7 +30,7 @@ describe("PoliticalAlliance", function () {
         let reds = turmoil.getPartyByName(PartyName.REDS)!;
         greens.partyLeader = player.id;
         reds.partyLeader = player.id;
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
 
         card.play(player, game);
         expect(player.getTerraformRating()).to.eq(21);

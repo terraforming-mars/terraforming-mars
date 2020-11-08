@@ -4,6 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
+import { ICard } from "../../src/cards/ICard";
 import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { NitriteReducingBacteria } from "../../src/cards/NitriteReducingBacteria";
@@ -22,12 +23,12 @@ describe("Ants", function () {
     
     it("Can't play without oxygen", function () {
         (game as any).oxygenLevel = 3;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play();
         card.resourceCount += 5;
@@ -39,20 +40,20 @@ describe("Ants", function () {
         const nitriteReducingBacteria = new NitriteReducingBacteria();
 
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player2.playedCards.push(tardigrades, nitriteReducingBacteria);
         tardigrades.resourceCount++;
         nitriteReducingBacteria.resourceCount++;
         
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
-        const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        card.action(player, game);
+        const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+        expect(selectCard.cards).has.lengthOf(2);
+        selectCard.cb([selectCard.cards[0]]);
+        game.deferredActions.shift()!.execute(); // Add microbe to ants
 
-        expect(action!.cards.length).to.eq(2);
-        expect(action!.cards[0]).to.eq(tardigrades);
-        action!.cb([action!.cards[0]]);
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);
     });
@@ -64,10 +65,10 @@ describe("Ants", function () {
         player.playedCards.push(card);
         player2.playedCards.push(tardigrades);
         tardigrades.resourceCount += 2;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         player2.playedCards.push(protectedHabitats);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Only microbes are available to steal", function () {
@@ -82,6 +83,10 @@ describe("Ants", function () {
         player2.addResourceTo(securityFleet);
 
         card.action(player, game);
+        const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+        expect(selectCard).is.undefined; // Only one option: Tardigrades
+        game.deferredActions.shift()!.execute(); // Add microbe to ants
+
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);
     });

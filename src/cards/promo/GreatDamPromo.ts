@@ -3,17 +3,18 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardType } from "../CardType";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { TileType } from "../../TileType";
 import { ISpace } from "../../ISpace";
+import { Board } from "../../Board";
 
 export class GreatDamPromo implements IProjectCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.GREAT_DAM_PROMO;
+    public cost = 15;
+    public tags = [Tags.ENERGY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.GREAT_DAM_PROMO;
     public canPlay(player: Player, game: Game): boolean {
         const meetsOceanRequirements = game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
         const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;
@@ -38,8 +39,7 @@ export class GreatDamPromo implements IProjectCard {
         return game.board.getAvailableSpacesOnLand(player)
             .filter(
                 (space) => game.board.getAdjacentSpaces(space).filter(
-                    (adjacentSpace) => adjacentSpace.tile !== undefined &&
-                  adjacentSpace.tile.tileType === TileType.OCEAN
+                    (adjacentSpace) => Board.isOceanSpace(adjacentSpace)
                 ).length > 0
             );
       }

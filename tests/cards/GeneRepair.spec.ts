@@ -3,7 +3,7 @@ import { GeneRepair } from "../../src/cards/GeneRepair";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("GeneRepair", function () {
     let card : GeneRepair, player : Player, game : Game;
@@ -15,12 +15,12 @@ describe("GeneRepair", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(card, card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         card.play(player, game);
         
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

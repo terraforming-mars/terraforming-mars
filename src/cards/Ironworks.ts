@@ -4,16 +4,16 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class Ironworks implements IActionCard, IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.IRONWORKS;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 11;
+    public tags = [Tags.STEEL];
+    public name = CardName.IRONWORKS;
+    public cardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {
         return undefined;

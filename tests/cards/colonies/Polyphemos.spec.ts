@@ -28,11 +28,11 @@ describe("Polyphemos", function () {
 
         player.playedCards.push(card3);
         const action = card3.action(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action).is.not.undefined;
+        expect(action instanceof SelectCard).is.true;
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(35);
-        expect(player.cardsInHand.length).to.eq(3);
+        expect(player.cardsInHand).has.lengthOf(3);
     });
 });

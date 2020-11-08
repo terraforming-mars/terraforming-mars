@@ -18,14 +18,13 @@ describe("BigAsteroid", function () {
     it("Should play", function () {
         player2.plants = 5;
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        game.interrupts[0].generatePlayerInput?.();
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
         orOptions.options[1].cb(); // do nothing
         expect(player2.plants).to.eq(5);
 
-        orOptions.options[0].cb();
+        orOptions.options[0].cb(); // remove plants
         expect(player2.plants).to.eq(1);
         expect(game.getTemperature()).to.eq(-26);
         expect(player.titanium).to.eq(4);
@@ -35,7 +34,9 @@ describe("BigAsteroid", function () {
         game = new Game("foobar", [player], player);
         player.plants = 5;
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
 
         expect(player.plants).to.eq(5);
         expect(game.getTemperature()).to.eq(-26);

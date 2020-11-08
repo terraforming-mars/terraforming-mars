@@ -14,10 +14,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class VenusSoils implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
-    public name: CardName = CardName.VENUS_SOILS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 20;
+    public tags = [Tags.VENUS, Tags.PLANT];
+    public name = CardName.VENUS_SOILS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

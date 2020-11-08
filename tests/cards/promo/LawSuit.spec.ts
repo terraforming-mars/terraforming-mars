@@ -17,17 +17,17 @@ describe("LawSuit", function () {
     });
 
     it("Can't play if no resources or production reduced this turn", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Can play if resources removed this turn by other player", function () {
         player.setResource(Resources.MEGACREDITS, -1, game, player2);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
     });
 
     it("Can play if production decreased this turn by other player", function () {
         player.addProduction(Resources.MEGACREDITS, -1, game, player2);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
     })
 
     it("Should play", function () {
@@ -35,6 +35,6 @@ describe("LawSuit", function () {
         player.addProduction(Resources.MEGACREDITS, -1, game, player2);
         
         const play = card.play(player, game);
-        expect(play instanceof SelectPlayer).to.eq(true);
+        expect(play instanceof SelectPlayer).is.true;
     });
 });

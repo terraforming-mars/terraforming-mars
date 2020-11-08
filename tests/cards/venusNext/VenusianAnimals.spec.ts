@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { VenusianAnimals } from "../../../src/cards/venusNext/VenusianAnimals";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Research } from "../../../src/cards/Research";
 
 describe("VenusianAnimals", function () {
@@ -16,12 +16,12 @@ describe("VenusianAnimals", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 16;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).venusScaleLevel = 18;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         player.playedCards.push(card);
         card.play();
 

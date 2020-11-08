@@ -3,7 +3,7 @@ import { Algae } from "../../src/cards/Algae";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { TileType } from "../../src/TileType";
 
 describe("Algae", function () {
@@ -16,7 +16,7 @@ describe("Algae", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -25,7 +25,7 @@ describe("Algae", function () {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         
         card.play(player);
         expect(player.plants).to.eq(1);

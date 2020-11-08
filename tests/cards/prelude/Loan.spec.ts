@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Loan } from "../../../src/cards/prelude/Loan";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Loan", function () {
     let card : Loan, player : Player;
@@ -14,11 +14,11 @@ describe("Loan", function () {
 
     it("Can't play", function () {
         player.addProduction(Resources.MEGACREDITS,-4);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         card.play(player);
 
         expect(player.megaCredits).to.eq(30);

@@ -7,11 +7,12 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class MorningStarInc implements CorporationCard {
-    public name: CardName = CardName.MORNING_STAR_INC;
-    public tags: Array<Tags> = [Tags.VENUS];
+    public name = CardName.MORNING_STAR_INC;
+    public tags = [Tags.VENUS];
     public startingMegaCredits: number = 50;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw 3 Venus-tag cards";
     public initialAction(player: Player, game: Game) {
         if (game.hasCardsWithTag(Tags.VENUS, 3)) {
             for (const foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {

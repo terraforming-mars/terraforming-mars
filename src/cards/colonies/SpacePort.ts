@@ -1,18 +1,18 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { SelectSpace } from "../../inputs/SelectSpace";
-import { ISpace } from '../../ISpace';
+import { ISpace } from "../../ISpace";
 
 export class SpacePort implements IProjectCard {
-    public cost: number = 22;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.SPACE_PORT;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 22;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.SPACE_PORT;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.board.getAvailableSpacesForCity(player).length === 0) return false;

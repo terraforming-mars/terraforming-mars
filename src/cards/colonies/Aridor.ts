@@ -12,13 +12,13 @@ import { ColonyName } from "../../colonies/ColonyName";
 import { ColonyModel } from "../../models/ColonyModel";
 
 export class Aridor implements CorporationCard {
-    public name: CardName =  CardName.ARIDOR;
-    public tags: Array<Tags> = [];
+    public name =  CardName.ARIDOR;
+    public tags = [];
     public startingMegaCredits: number = 40;
     public allTags = new Set();
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
-
+    public initialActionText: string = "Add a colony tile";
     public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
         

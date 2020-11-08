@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { MonsInsurance } from "../../../src/cards/promo/MonsInsurance";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { Sabotage } from '../../../src/cards/Sabotage';
+import { Sabotage } from "../../../src/cards/Sabotage";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Ants } from "../../../src/cards/Ants";
 import { Tardigrades } from "../../../src/cards/Tardigrades";
@@ -23,7 +23,7 @@ describe("MonsInsurance", function () {
 
     it("Should play", function () {
         const play = card.play(player, game);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(-2);

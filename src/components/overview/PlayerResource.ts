@@ -1,7 +1,18 @@
 import Vue from "vue";
+import { Resources } from "../../Resources";
 
 export const PlayerResource = Vue.component("player-resource", {
-    props: ["type", "prod_label", "count", "production"],
+    props: {
+        type: {
+            type: Object as () => Resources
+        },
+        count: {
+            type: Number
+        },
+        production: {
+            type: Number
+        }
+    },
     data: function () {
         return {};
     },
@@ -24,7 +35,7 @@ export const PlayerResource = Vue.component("player-resource", {
                 <div class="resource_item_stock_count">{{ count }}</div>
             </div>
             <div class="resource_item_prod">
-                {{ prod_label }}<span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
+                <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
             </div>
         </div>
     `,

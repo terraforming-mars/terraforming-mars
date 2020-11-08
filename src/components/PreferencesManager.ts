@@ -11,7 +11,7 @@ export class PreferencesManager {
         "remove_background", 
         "magnify_cards",
         "magnify_card_descriptions",
-        "alert_mars_terraformed",
+        "show_alerts",
         "hide_ma_scores",
         "hide_non_blue_cards",
         "hide_log",

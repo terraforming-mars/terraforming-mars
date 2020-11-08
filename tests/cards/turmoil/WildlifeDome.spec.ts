@@ -15,17 +15,17 @@ describe("WildlifeDome", function () {
         const game = new Game("foobar", [player,player], player, gameOptions);  
 
         game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
         
         let greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
         greens.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(false); 
+        expect(card.canPlay(player, game)).is.not.true; 
 
         player.megaCredits = 18;
-        expect(card.canPlay(player, game)).to.eq(true); 
+        expect(card.canPlay(player, game)).is.true; 
 
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb(action.availableSpaces[0]);
         expect(game.getOxygenLevel()).to.eq(1);
     });

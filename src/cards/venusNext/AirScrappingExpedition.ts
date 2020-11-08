@@ -1,4 +1,4 @@
-import {ICard} from "../ICard";
+import { ICard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
@@ -12,10 +12,10 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST, MAX_VENUS_SCALE } from "../../constants";
 
 export class AirScrappingExpedition implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.AIR_SCRAPPING_EXPEDITION;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 13;
+    public tags = [Tags.VENUS];
+    public name = CardName.AIR_SCRAPPING_EXPEDITION;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

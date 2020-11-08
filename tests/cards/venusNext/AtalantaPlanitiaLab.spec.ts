@@ -9,10 +9,10 @@ describe("AtalantaPlanitiaLab", function () {
         const card = new AtalantaPlanitiaLab();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
         const action = card.play(player,game);
-        expect(action).to.eq(undefined);
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(action).is.undefined;
+        expect(player.cardsInHand).has.lengthOf(2);
         expect(card.getVictoryPoints()).to.eq(2);
     });
 });

@@ -3,16 +3,17 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
-import { SelectParty } from "../../interrupts/SelectParty";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
+import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 export class MartianMediaCenter implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_MEDIA_CENTER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 7;
+    public tags = [Tags.STEEL];
+    public name = CardName.MARTIAN_MEDIA_CENTER;
+    public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
@@ -31,8 +32,8 @@ export class MartianMediaCenter implements IProjectCard {
     }
 
     public action(player: Player, game: Game) {
-        game.addSelectHowToPayInterrupt(player, 3, false, false, "Select how to pay for Martian Media Center action");
-        game.addInterrupt(new SelectParty(player, game, "Select where to send a delegate", 1, undefined, undefined, false));
+        game.defer(new SelectHowToPayDeferred(player, 3, false, false, "Select how to pay for Martian Media Center action"));
+        game.defer(new SendDelegateToArea(player, game, "Select where to send a delegate", 1, undefined, undefined, false));
         return undefined;
     }
 }

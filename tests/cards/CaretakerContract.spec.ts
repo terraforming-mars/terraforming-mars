@@ -14,13 +14,13 @@ describe("CaretakerContract", function () {
     });
 
     it("Can't play or act", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = 0;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 
     it("Should act", function () {

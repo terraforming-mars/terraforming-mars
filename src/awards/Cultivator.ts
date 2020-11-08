@@ -1,7 +1,7 @@
 import { IAward } from "./IAward";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { TileType } from '../TileType';
+import { TileType } from "../TileType";
 
 export class Cultivator implements IAward {
     public name: string = "Cultivator";

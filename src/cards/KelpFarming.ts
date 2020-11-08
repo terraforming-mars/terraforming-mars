@@ -4,14 +4,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class KelpFarming implements IProjectCard {
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.KELP_FARMING;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 17;
+    public tags = [Tags.PLANT];
+    public name = CardName.KELP_FARMING;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game);
     }

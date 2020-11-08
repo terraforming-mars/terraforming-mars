@@ -5,7 +5,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("TharsisRepublic", function () {
     let card : TharsisRepublic, player : Player, player2 : Player, game : Game;
@@ -21,7 +21,7 @@ describe("TharsisRepublic", function () {
 
     it("Should take initial action", function () {
         const action = card.initialAction(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb(action.availableSpaces[0]);
 
         expect(game.getCitiesInPlayOnMars()).to.eq(1);

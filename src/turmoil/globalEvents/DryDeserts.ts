@@ -3,8 +3,8 @@ import { GlobalEventName } from "./GlobalEventName";
 import { PartyName } from "../parties/PartyName";
 import { Game } from "../../Game";
 import { Turmoil } from "../Turmoil";
-import { RemoveOcean } from "../../interrupts/RemoveOcean";
-import { SelectResources } from "../../interrupts/SelectResources";
+import { RemoveOceanTile } from "../../deferredActions/RemoveOceanTile";
+import { DryDesertsDeferredAction } from "../../deferredActions/DryDesertsDeferredAction";
 import { MAX_OCEAN_TILES } from "../../constants";
 
 export class DryDeserts implements IGlobalEvent {
@@ -17,13 +17,16 @@ export class DryDeserts implements IGlobalEvent {
         const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
         
         if (canRemoveOcean) {
-            game.addInterrupt(new RemoveOcean(game.getPlayers()[0], game, "Dry Deserts Global Event - Remove an Ocean tile from the board"));
+            game.defer(new RemoveOceanTile(game.getPlayers()[0], game, "Dry Deserts Global Event - Remove an Ocean tile from the board"));
         }
 
         game.getPlayers().forEach(player => {
             if (turmoil.getPlayerInfluence(player) > 0) {
-                let selectResources = new SelectResources(player, game, turmoil.getPlayerInfluence(player), "Dry Deserts Global Event - Gain " +  turmoil.getPlayerInfluence(player) + " resource(s) for influence");
-                game.addInterrupt(selectResources);
+                game.defer(new DryDesertsDeferredAction(
+                    player,
+                    game,
+                    turmoil.getPlayerInfluence(player)
+                ));
             }            
         });    
     }

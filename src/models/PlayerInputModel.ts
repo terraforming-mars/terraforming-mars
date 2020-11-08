@@ -1,7 +1,10 @@
 
 import { PlayerInputTypes } from "../PlayerInputTypes";
-import { CardModel } from './CardModel';
+import { CardModel } from "./CardModel";
 import { ColonyModel } from "./ColonyModel";
+import { ColorWithNeutral } from "../Color";
+import { IPayProductionModel } from "./IPayProductionUnitsModel";
+import { IAresData } from "../ares/IAresData";
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -17,9 +20,10 @@ export interface PlayerInputModel {
     microbes: number | undefined;
     floaters: number | undefined;
     minCardsToSelect: number | undefined;
-    players: Array<string> | undefined;
+    players: Array<ColorWithNeutral> | undefined;
     title: string;
     buttonLabel: string;
     coloniesModel : Array<ColonyModel> | undefined;
+    payProduction?: IPayProductionModel;
+    aresData?: IAresData;
 }
-

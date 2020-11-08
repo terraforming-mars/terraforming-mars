@@ -3,13 +3,13 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class IoSulphurResearch implements IProjectCard {
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.JOVIAN];
-    public name: CardName = CardName.IO_SULPHUR_RESEARCH;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 17;
+    public tags = [Tags.SCIENCE, Tags.JOVIAN];
+    public name = CardName.IO_SULPHUR_RESEARCH;
+    public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
         if (player.getTagCount(Tags.VENUS) >= 3) {

@@ -16,7 +16,7 @@ describe("ImportedNutrients", function () {
     it("Can play without microbe cards", function () {
         const action = card.play(player);
         expect(player.plants).to.eq(4);
-        expect(action).to.eq(undefined); 
+        expect(action).is.undefined; 
     });
 
     it("Adds microbes automatically if only 1 target", function () {
@@ -36,7 +36,7 @@ describe("ImportedNutrients", function () {
         const action = card.play(player);
         expect(player.plants).to.eq(4);
 
-        expect(action).not.to.eq(undefined); 
+        expect(action).is.not.undefined; 
         action!.cb([decomposers]);
         expect(player.getResourcesOnCard(decomposers)).to.eq(4);
     });

@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("CommercialDistrict", function () {
     let card : CommercialDistrict, player : Player, game : Game;
@@ -17,12 +17,12 @@ describe("CommercialDistrict", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const action = card.play(player, game);
         expect(action instanceof SelectSpace);
@@ -35,5 +35,6 @@ describe("CommercialDistrict", function () {
         adjacent[0].tile = { tileType: TileType.CITY, card: card.name };
         adjacent[0].player = player;
         expect(card.getVictoryPoints(player, game)).to.eq(1);
+        expect(action.availableSpaces[0].adjacency?.bonus).eq(undefined);
     });
 });

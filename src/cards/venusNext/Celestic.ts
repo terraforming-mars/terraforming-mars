@@ -12,11 +12,11 @@ import { LogHelper } from "../../components/LogHelper";
 import { CardType } from "../CardType";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
-    public name: CardName = CardName.CELESTIC;
-    public tags: Array<Tags> = [Tags.VENUS];
+    public name = CardName.CELESTIC;
+    public tags = [Tags.VENUS];
     public startingMegaCredits: number = 42;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public cardType: CardType = CardType.CORPORATION;
+    public resourceType = ResourceType.FLOATER;
+    public cardType = CardType.CORPORATION;
     public resourceCount: number = 0;
 
     private static readonly floaterCards: Set<CardName> = new Set<CardName>([
@@ -33,6 +33,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         CardName.STRATOSPHERIC_BIRDS
     ]);
 
+    public initialActionText: string = "Draw 2 cards with a floater icon on it";
     public initialAction(player: Player, game: Game) {
         const requiredCardsCount = 2;
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {

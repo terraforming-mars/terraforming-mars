@@ -9,15 +9,16 @@ import { CardType } from "../CardType";
 
 
 export class ValleyTrust implements CorporationCard {
-    public name: CardName = CardName.VALLEY_TRUST;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name = CardName.VALLEY_TRUST;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 37;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         return card.tags.filter(tag => tag === Tags.SCIENCE).length * 2;
     }
 
+    public initialActionText: string = "Draw 3 Prelude cards, and play one of them";
     public initialAction(player: Player, game: Game) {
         if (game.gameOptions.preludeExtension) {
             const cardsDrawn: Array<IProjectCard> = [
@@ -25,8 +26,13 @@ export class ValleyTrust implements CorporationCard {
                 game.dealer.dealPreludeCard(),
                 game.dealer.dealPreludeCard()
             ];
+
             return new SelectCard("Choose prelude card to play", "Play", cardsDrawn, (foundCards: Array<IProjectCard>) => {
-                return player.playCard(game, foundCards[0]);
+                if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player, game)) {
+                    return player.playCard(game, foundCards[0]);
+                } else {
+                    throw new Error("You cannot pay for this card");
+                }
             }, 1, 1);
         }
         else {

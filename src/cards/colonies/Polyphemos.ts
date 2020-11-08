@@ -1,15 +1,14 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
-import { Tags } from "../Tags";
 import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class Polyphemos implements CorporationCard {
-    public name: CardName = CardName.POLYPHEMOS;
-    public tags: Array<Tags> = [];
+    public name = CardName.POLYPHEMOS;
+    public tags = [];
     public startingMegaCredits: number = 50;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
     
 
     public play(player: Player) {

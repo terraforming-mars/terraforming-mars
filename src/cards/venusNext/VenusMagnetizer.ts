@@ -1,20 +1,20 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { Resources } from "../../Resources";
-import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
-import { CardName } from '../../CardName';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { CardName } from "../../CardName";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class VenusMagnetizer implements IActionCard,IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.VENUS_MAGNETIZER;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 7;
+    public tags = [Tags.VENUS];
+    public name = CardName.VENUS_MAGNETIZER;
+    public cardType = CardType.ACTIVE;
     
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));

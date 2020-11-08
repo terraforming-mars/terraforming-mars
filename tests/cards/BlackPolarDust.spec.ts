@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { maxOutOceans } from "../TestingUtils";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("BlackPolarDust", function () {
@@ -18,7 +18,7 @@ describe("BlackPolarDust", function () {
 
     it("Can't play", function () {
         player.addProduction(Resources.MEGACREDITS,-4);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -26,9 +26,8 @@ describe("BlackPolarDust", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        const selectSpace = game.interrupts[0].playerInput as SelectSpace;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
     });
@@ -36,7 +35,7 @@ describe("BlackPolarDust", function () {
     it("Cannot place ocean if no oceans left", function () {
         maxOutOceans(player, game);
         card.play(player, game);
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
     })
 });

@@ -1,19 +1,21 @@
-import {IActionCard} from './ICard';
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
+import { IActionCard } from "./ICard";
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { CardName } from "../CardName";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../constants";
+import { SelectHowToPayDeferred } from "../deferredActions/SelectHowToPayDeferred";
+import { PlaceOceanTile } from "../deferredActions/PlaceOceanTile";
 
 export class AquiferPumping implements IActionCard, IProjectCard {
-    public cost: number = 18;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.AQUIFER_PUMPING;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 18;
+    public tags = [Tags.STEEL];
+    public name = CardName.AQUIFER_PUMPING;
+    public cardType = CardType.ACTIVE;
 
     public play() {
       return undefined;
@@ -31,8 +33,8 @@ export class AquiferPumping implements IActionCard, IProjectCard {
       return player.canAfford(oceanCost, game, true, false);
     }
     public action(player: Player, game: Game) {
-      game.addSelectHowToPayInterrupt(player, 8, true, false, "Select how to pay for action");
-      game.addOceanInterrupt(player);
+      game.defer(new SelectHowToPayDeferred(player, 8, true, false, "Select how to pay for action"));
+      game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
 }

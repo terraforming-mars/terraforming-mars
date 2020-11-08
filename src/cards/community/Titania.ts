@@ -1,7 +1,8 @@
-import { Colony, IColony } from '../../colonies/Colony';
-import { Player } from '../../Player';
-import { Game } from '../../Game';
-import { ColonyName } from '../../colonies/ColonyName';
+import { Colony, IColony } from "../../colonies/Colony";
+import { Player } from "../../Player";
+import { PlayerInput } from "../../PlayerInput";
+import { Game } from "../../Game";
+import { ColonyName } from "../../colonies/ColonyName";
 
 export class Titania extends Colony implements IColony {
     public name = ColonyName.TITANIA;
@@ -31,7 +32,8 @@ export class Titania extends Colony implements IColony {
         return undefined;
     }
     
-    public giveTradeBonus(player: Player): void {
+    public giveTradeBonus(player: Player): undefined | PlayerInput {
         player.megaCredits = Math.max(player.megaCredits - 3, 0);
+        return undefined;
     }   
 }

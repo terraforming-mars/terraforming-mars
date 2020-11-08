@@ -8,12 +8,13 @@ import { Game } from "../../Game";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectAmount } from "../../inputs/SelectAmount";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class EnergyMarket implements IProjectCard {
-    public name: CardName = CardName.ENERGY_MARKET;
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.ENERGY];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.ENERGY_MARKET;
+    public cost = 3;
+    public tags = [Tags.ENERGY];
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;
@@ -28,7 +29,7 @@ export class EnergyMarket implements IProjectCard {
         return new SelectAmount("Select amount of energy to gain", "Gain energy", (amount: number) => {
             if (player.canUseHeatAsMegaCredits) {
                 player.setResource(Resources.ENERGY, amount);
-                game.addSelectHowToPayInterrupt(player, (amount * 2), false, false);
+                game.defer(new SelectHowToPayDeferred(player, (amount * 2), false, false));
             } else {
                 player.setResource(Resources.ENERGY, amount);
                 player.setResource(Resources.MEGACREDITS, -(amount * 2));

@@ -3,8 +3,8 @@ import { CorroderSuits } from "../../../src/cards/venusNext/CorroderSuits";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { Game } from "../../../src/Game";
 
@@ -37,7 +37,7 @@ describe("CorroderSuits", function () {
         player.playedCards.push(card2, card3);
 
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(1);

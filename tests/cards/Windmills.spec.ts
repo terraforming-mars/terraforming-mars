@@ -3,7 +3,7 @@ import { Windmills } from "../../src/cards/Windmills";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Windmills", function () {
     let card : Windmills, player : Player, game : Game;
@@ -16,11 +16,11 @@ describe("Windmills", function () {
 
     it("Can't play", function () {
         (game as any).oxygenLevel = 6;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
     it("Should play", function () {
         (game as any).oxygenLevel = 7;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);

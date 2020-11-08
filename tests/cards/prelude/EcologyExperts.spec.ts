@@ -2,14 +2,16 @@ import { expect } from "chai";
 import { EcologyExperts } from "../../../src/cards/prelude/EcologyExperts";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Game } from "../../../src/Game";
+import { Resources } from "../../../src/Resources";
 
 describe("EcologyExperts", function () {
-    let card : EcologyExperts, player : Player;
+    let card : EcologyExperts, player : Player, game: Game;
 
     beforeEach(function() {
         card = new EcologyExperts();
         player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player], player);
     });
 
     it("Gets requirement bonus", function () {
@@ -19,8 +21,8 @@ describe("EcologyExperts", function () {
     });
 
     it("Should play", function () {
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
+        const action = card.play(player, game);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

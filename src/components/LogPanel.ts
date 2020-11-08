@@ -5,12 +5,20 @@ import { LogMessage } from "../LogMessage";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { PlayerModel } from "../models/PlayerModel";
 import { Card } from "./card/Card";
 import { $t } from "../directives/i18n";
-import { getProjectCardByName } from "./../Dealer";
+import { CardFinder } from "./../CardFinder";
 
 export const LogPanel = Vue.component("log-panel", {
-    props: ["id", "players"],
+    props: {
+        id: {
+            type: String
+        },
+        players: {
+            type: Object as () => Array<PlayerModel>
+        }
+    },
     data: function () {
         return {
             cards: new Array<string>(),
@@ -30,15 +38,15 @@ export const LogPanel = Vue.component("log-panel", {
         parseCardType: function(cardType: CardType, cardName: string) {
             cardName = $t(cardName);
             const suffixFreeCardName = cardName.split(":")[0];
-            let className = undefined;
+            let className: string | undefined;
             if (cardType === CardType.EVENT) {
-                className="background-color-events";
+                className = "background-color-events";
             } else if (cardType === CardType.ACTIVE) {
-                className="background-color-active";
+                className = "background-color-active";
             } else if (cardType === CardType.AUTOMATED) {
-                className="background-color-automated";
+                className = "background-color-automated";
             } else if (cardType === CardType.PRELUDE) {
-                className="background-color-prelude";
+                className = "background-color-prelude";
             }
 
             if (className === undefined) {
@@ -76,7 +84,7 @@ export const LogPanel = Vue.component("log-panel", {
                             }
                         }
                     }
-                    const card = getProjectCardByName(data.value)
+                    const card = new CardFinder().getProjectCardByName(data.value)
                     if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
                 } else if (translatableMessageDataTypes.includes(data.type)) {
                     return $t(data.value);

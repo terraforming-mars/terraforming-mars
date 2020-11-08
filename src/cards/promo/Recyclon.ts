@@ -13,12 +13,12 @@ import { CardType } from "../CardType";
 
 
 export class Recyclon implements CorporationCard, IResourceCard {
-    public name: CardName = CardName.RECYCLON;
-    public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
+    public name = CardName.RECYCLON;
+    public tags = [Tags.MICROBES, Tags.STEEL];
     public startingMegaCredits: number = 38;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.addProduction(Resources.STEEL);

@@ -16,12 +16,12 @@ describe("AsteroidDeflectionSystem", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.addProduction(Resources.ENERGY);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
@@ -29,7 +29,7 @@ describe("AsteroidDeflectionSystem", function () {
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
 
         while (game.dealer.discarded.find((card) => card.tags.includes(Tags.SPACE)) === undefined) {
             card.action(player, game);

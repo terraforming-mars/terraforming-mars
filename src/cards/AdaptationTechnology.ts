@@ -1,13 +1,13 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import { CardName } from '../CardName';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { CardName } from "../CardName";
 
 export class AdaptationTechnology implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.ADAPTATION_TECHNOLOGY;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 12;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.ADAPTATION_TECHNOLOGY;
+    public cardType = CardType.ACTIVE;
 
     public getRequirementBonus(): number {
       return 2;

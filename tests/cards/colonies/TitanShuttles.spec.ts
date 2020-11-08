@@ -3,9 +3,10 @@ import { TitanShuttles } from "../../../src/cards/colonies/TitanShuttles";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { TitanFloatingLaunchPad } from "../../../src/cards/colonies/TitanFloatingLaunchPad";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { ICard } from "../../../src/cards/ICard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 
 describe("TitanShuttles", function () {
     let card : TitanShuttles, player : Player, game : Game;
@@ -20,11 +21,11 @@ describe("TitanShuttles", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Can act", function () {
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
     });
 
     it("Gives VP", function () {
@@ -32,8 +33,10 @@ describe("TitanShuttles", function () {
     });
 
     it("Auto add floaters if only 1 option and 1 target available", function () {
-        const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        card.action(player, game);
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(2);
     });
 
@@ -42,11 +45,10 @@ describe("TitanShuttles", function () {
         player.playedCards.push(card2);
 
         card.action(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.generatePlayerInput?.();
-        selectResourceInterrupt.playerInput?.cb([card]);
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+        selectCard.cb([card]);
         expect(card.resourceCount).to.eq(2);
     });
 
@@ -56,21 +58,20 @@ describe("TitanShuttles", function () {
         player.addResourceTo(card, 7);
 
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
-        expect(orOptions.options.length).to.eq(2);
+        expect(orOptions instanceof OrOptions).is.true;
+        expect(orOptions.options).has.lengthOf(2);
 
         // spend floaters to gain titanium
-        orOptions!.options[0].cb(6);
+        orOptions.options[1].cb(6);
         expect(card.resourceCount).to.eq(1);
         expect(player.titanium).to.eq(6);
 
         // add 2 floaters to Jovian card
-        orOptions!.options[1].cb();
-        expect(game.interrupts.length).to.eq(1);
+        orOptions.options[0].cb();
+        expect(game.deferredActions).has.lengthOf(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.generatePlayerInput?.();
-        selectResourceInterrupt.playerInput?.cb([card2]);
+        const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+        selectCard.cb([card2]);
         expect(card2.resourceCount).to.eq(2);
     });
 });

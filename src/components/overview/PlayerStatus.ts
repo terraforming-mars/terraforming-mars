@@ -2,28 +2,39 @@ import Vue from "vue";
 import { ActionLabel } from "./ActionLabel";
 import { range } from "../../utils/utils"; 
 import { Button } from "../common/Button";
+import { mainAppSettings } from "../App";
+import { PlayerModel } from "../../models/PlayerModel";
 
-
-const isPinned = (root: any, playerIndex: string): boolean => {
+const isPinned = (root: any, playerIndex: number): boolean => {
     return (root as any).getVisibilityState("pinned_player_" + playerIndex);
 };
-const showPlayerData = (root: any, playerIndex: string) => {
+const showPlayerData = (root: any, playerIndex: number) => {
     (root as any).setVisibilityState("pinned_player_" + playerIndex, true);
 };
-export const hidePlayerData = (root: any, playerIndex: string) => {
-    (root as any).setVisibilityState("pinned_player_" + playerIndex, false);
+export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
+    root.setVisibilityState("pinned_player_" + playerIndex, false);
 };
 
 export const PlayerStatus = Vue.component("player-status", {
-    props: [
-        "player",
-        "activePlayer",
-        "firstForGen",
-        "actionLabel",
-        "playerIndex",
-    ],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        activePlayer: {
+            type: Object as () => PlayerModel
+        },
+        firstForGen: {
+            type: Boolean
+        },
+        actionLabel: {
+            type: String
+        },
+        playerIndex: {
+            type: Number
+        }
+    },
     components: {
-        "Button": Button
+        Button
     },
     methods: {
         togglePlayerDetails: function () {
@@ -79,7 +90,7 @@ export const PlayerStatus = Vue.component("player-status", {
             }
             for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
                 if (hiddenPlayersIndexes.includes(i)) {
-                    hidePlayerData(this.$root, i.toString());
+                    hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
                 }
             }
         },

@@ -1,6 +1,6 @@
 import { IMilestone } from "./IMilestone";
 import { Player } from "../Player";
-import { ResourceType } from '../ResourceType';
+import { ResourceType } from "../ResourceType";
 
 export class Hoverlord implements IMilestone {
     public name: string = "Hoverlord";

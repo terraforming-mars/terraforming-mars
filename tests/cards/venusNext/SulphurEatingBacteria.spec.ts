@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { SulphurEatingBacteria } from "../../../src/cards/venusNext/SulphurEatingBacteria";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { OrOptions } from '../../../src/inputs/OrOptions';
-import { Game } from '../../../src/Game';
+import { OrOptions } from "../../../src/inputs/OrOptions";
+import { Game } from "../../../src/Game";
 
 describe("SulphurEatingBacteria", function () {
     let card : SulphurEatingBacteria, player : Player, game : Game;
@@ -16,13 +16,13 @@ describe("SulphurEatingBacteria", function () {
 
     it("Can't play", function () {
         (game as any).venusScaleLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
     
     it("Should play", function () {
         (game as any).venusScaleLevel = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
-        expect(card.play()).to.eq(undefined);
+        expect(card.canPlay(player, game)).is.true;
+        expect(card.play()).is.undefined;
     });
 
     it("Should act - both actions available", function () {

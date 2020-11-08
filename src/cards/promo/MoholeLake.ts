@@ -11,29 +11,30 @@ import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES } from "../../constants";
+import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class MoholeLake implements IActionCard, IProjectCard {
-    public cost: number = 31;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MOHOLE_LAKE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 31;
+    public tags = [Tags.STEEL];
+    public name = CardName.MOHOLE_LAKE;
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-      const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
-      const totalSteps = temperatureStep + oceanStep;
+        const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
+        const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+        const totalSteps = temperatureStep + oceanStep;
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, game, true);
-      }
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, game, true);
+        }
 
-      return true;
+        return true;
     }
 
     public play(player: Player, game: Game) {
         game.increaseTemperature(player, 1);
-        game.addOceanInterrupt(player);
+        game.defer(new PlaceOceanTile(player, game));
         player.plants += 3;
         return undefined;
     }
@@ -47,15 +48,15 @@ export class MoholeLake implements IActionCard, IProjectCard {
     public action(player: Player, game: Game) {
         const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
         if (availableCards.length === 1) {
-          player.addResourceTo(availableCards[0]);
-          LogHelper.logAddResource(game, player, availableCards[0], 1);
-          return undefined;
+            player.addResourceTo(availableCards[0]);
+            LogHelper.logAddResource(game, player, availableCards[0], 1);
+            return undefined;
         }
         
         return new SelectCard("Select card to add microbe or animal", "Add resource(s)", availableCards, (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(game, player, foundCards[0], 1);
-          return undefined;
+            player.addResourceTo(foundCards[0]);
+            LogHelper.logAddResource(game, player, foundCards[0], 1);
+            return undefined;
         });
     }
 }

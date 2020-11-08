@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { CulturalMetropolis } from "../../../src/cards/turmoil/CulturalMetropolis";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
@@ -23,7 +23,7 @@ describe("Cultural Metropolis", function () {
     });
 
     it("Can't play without energy production", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play without 2 delegates available", function () {
@@ -33,7 +33,7 @@ describe("Cultural Metropolis", function () {
             reds.sendDelegate(player.id, game);
         }
         
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
@@ -41,7 +41,7 @@ describe("Cultural Metropolis", function () {
         const unity = turmoil.getPartyByName(PartyName.UNITY)!;
         unity.sendDelegate(player.id, game);
         unity.sendDelegate(player.id, game);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

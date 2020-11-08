@@ -15,13 +15,13 @@ describe("GHGProducingBacteria", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 4;
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
@@ -34,7 +34,7 @@ describe("GHGProducingBacteria", function () {
         expect(card.resourceCount).to.eq(2);
 
         const orAction = card.action(player, game) as OrOptions;
-        expect(orAction instanceof OrOptions).to.eq(true);
+        expect(orAction instanceof OrOptions).is.true;
 
         orAction!.options[1].cb();
         expect(card.resourceCount).to.eq(3);

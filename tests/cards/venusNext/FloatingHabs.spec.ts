@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { ICard } from "../../../src/cards/ICard";
 import { Game } from "../../../src/Game";
@@ -18,14 +18,14 @@ describe("FloatingHabs", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - single target", function () {
@@ -33,7 +33,7 @@ describe("FloatingHabs", function () {
         player.megaCredits = 10;
 
         card.action(player, game);
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });
@@ -42,10 +42,10 @@ describe("FloatingHabs", function () {
         player.playedCards.push(card, new Dirigibles());
         player.megaCredits = 10;
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         
         (action as SelectCard<ICard>).cb([card]);
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });

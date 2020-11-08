@@ -7,10 +7,10 @@ import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 
 export class PhoboLog implements CorporationCard {
-    public name: CardName = CardName.PHOBOLOG;
-    public tags: Array<Tags> = [Tags.SPACE];
+    public name = CardName.PHOBOLOG;
+    public tags = [Tags.SPACE];
     public startingMegaCredits: number = 23;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player, _game: Game) {
         player.titanium = 10;

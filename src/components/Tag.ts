@@ -1,10 +1,20 @@
 import Vue from "vue";
 
 export const Tag = Vue.component("tag", {
-    props: ["tag", "size", "type"],
+    props: {
+        tag: {
+            type: String,
+        },
+        size: {
+            type: String
+        },
+        type: {
+            type: String
+        }
+    },
     methods: {
         getClasses: function (): string {
-            let classes = ["tag-count"];
+            const classes = ["tag-count"];
             classes.push(`tag-${this.tag}`);
             if (this.size !== undefined) {
                 classes.push(`tag-size-${this.size}`);
@@ -16,7 +26,5 @@ export const Tag = Vue.component("tag", {
             return classes.join(" ");
         },
     },
-    template: `
-        <div :class="getClasses()" />
-    `,
+    template: `<div :class="getClasses()" />`,
 });

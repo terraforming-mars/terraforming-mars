@@ -3,7 +3,7 @@ import { Aphrodite } from "../../../src/cards/venusNext/Aphrodite";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Aphrodite", function () {
     it("Should play", function () {
@@ -12,7 +12,7 @@ describe("Aphrodite", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         player.corporationCard = card;
         expect(player.megaCredits).to.eq(0);

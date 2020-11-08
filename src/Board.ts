@@ -3,6 +3,7 @@ import { Player } from "./Player";
 import { SpaceType } from "./SpaceType";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
+import { AresHandler } from "./ares/AresHandler";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -82,14 +83,18 @@ export abstract class Board {
         );
     }
 
-    public getOceansOnBoard(): number {
-        return this.getOceansTiles().length;
+    public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
+        return this.getOceansTiles(countUpgradedOceans).length;
     }
 
-    public getOceansTiles(): Array<ISpace> {
-        return this.spaces.filter((space) => space.tile !== undefined &&
-                    space.tile.tileType === TileType.OCEAN
-        );
+    public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
+        if (!countUpgradedOceans) {
+            return this.spaces.filter((space) => space.tile !== undefined &&
+                        space.tile.tileType === TileType.OCEAN
+            );
+        } else {
+            return this.spaces.filter((space) => Board.isOceanSpace(space));
+        }
     }    
 
     public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {
@@ -138,10 +143,17 @@ export abstract class Board {
             );
     }
 
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-        const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
-            (space) => space.tile === undefined && (space.player === undefined || space.player === player)
-        );
+    public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
+        const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(space => {
+            const hasPlayerMarker = space.player !== undefined;
+            // A space is available if it doesn't have a player marker on it or it belongs to |player|
+            const safeForPlayer = !hasPlayerMarker || space.player === player;
+            // And also, if it doesn't have a tile. Unless it's a hazard tile. 
+            const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space) 
+            // If it does have a hazard tile, make sure it's not a protected one.
+            const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
+            return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+        });
 
         return landSpaces;
     }
@@ -155,7 +167,11 @@ export abstract class Board {
         return out;
     }
 
-    // If direction is 1, count from the top left. If -1, count from the other end of the map.
+    // |distance| represents the number of eligible spaces from the top left (or bottom right)
+    // to count. So distance 0 means the first available space.
+    // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
+    // |player| will be an additional space filter (which basically supports Land Claim)
+    // |predicate| allows callers to provide additional filtering of eligible spaces.
     public getNthAvailableLandSpace(
         distance: number, 
         direction: -1 | 1,
@@ -183,12 +199,12 @@ export abstract class Board {
     }
 
     public static isCitySpace(space: ISpace): boolean {
-        const cityTileTypes = [TileType.CITY, TileType.CAPITAL];
+        const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
         return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
     }
 
     public static isOceanSpace(space: ISpace): boolean {
-        const oceanTileTypes = [TileType.OCEAN];
+        const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
         return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
     }
 }  

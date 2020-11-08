@@ -4,6 +4,7 @@ import { PartyName } from "../parties/PartyName";
 import { Game } from "../../Game";
 import { Resources } from "../../Resources";
 import { Turmoil } from "../Turmoil";
+import { PlaceOceanTile } from "../../deferredActions/PlaceOceanTile";
 
 export class AquiferReleasedByPublicCouncil implements IGlobalEvent {
     public name = GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL;
@@ -11,7 +12,7 @@ export class AquiferReleasedByPublicCouncil implements IGlobalEvent {
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
-        game.addOceanInterrupt(game.getPlayers()[0],"Select Ocean for Global Event");
+        game.defer(new PlaceOceanTile(game.getPlayers()[0], game, "Select Ocean for Global Event"));
         game.getPlayers().forEach(player => {
             player.setResource(Resources.PLANTS, turmoil.getPlayerInfluence(player), game, undefined, true);
             player.setResource(Resources.STEEL, turmoil.getPlayerInfluence(player), game, undefined, true);

@@ -1,17 +1,17 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {ISpace} from '../ISpace';
-import {TileType} from '../TileType';
-import { CardName } from '../CardName';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { ISpace } from "../ISpace";
+import { TileType } from "../TileType";
+import { CardName } from "../CardName";
 
 export class ArcticAlgae implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.ARCTIC_ALGAE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 12;
+    public tags = [Tags.PLANT];
+    public name = CardName.ARCTIC_ALGAE;
+    public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -12 + (
         player.getRequirementsBonus(game) * 2

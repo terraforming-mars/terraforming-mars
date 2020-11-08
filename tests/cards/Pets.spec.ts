@@ -12,7 +12,7 @@ describe("Pets", function () {
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints()).to.eq(2);
         game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);

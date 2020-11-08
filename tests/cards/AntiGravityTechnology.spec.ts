@@ -12,12 +12,12 @@ describe("AntiGravityTechnology", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(card, card, card, card, card, card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play();
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

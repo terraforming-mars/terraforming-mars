@@ -3,9 +3,9 @@ import { Aridor } from "../../../src/cards/colonies/Aridor";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Predators } from "../../../src/cards/Predators";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { ResearchOutpost } from '../../../src/cards/ResearchOutpost';
+import { ResearchOutpost } from "../../../src/cards/ResearchOutpost";
 
 describe("Aridor", function () {
     it("Should play", function () {
@@ -14,7 +14,7 @@ describe("Aridor", function () {
         const player2 = new Player("test2", Color.RED, false);        
         const game = new Game("foobar", [player,player2], player);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Predators());
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

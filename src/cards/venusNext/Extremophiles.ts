@@ -10,11 +10,11 @@ import { Game } from "../../Game";
 import { LogHelper } from "../../components/LogHelper";
 
 export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: CardName = CardName.EXTREMOPHILES;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 3;
+    public tags = [Tags.VENUS, Tags.MICROBES];
+    public name = CardName.EXTREMOPHILES;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 ;

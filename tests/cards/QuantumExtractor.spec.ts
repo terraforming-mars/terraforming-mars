@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
-import { TollStation } from '../../src/cards/TollStation';
+import { TollStation } from "../../src/cards/TollStation";
 
 describe("QuantumExtractor", function () {
     let card : QuantumExtractor, player : Player, game : Game;
@@ -16,7 +16,7 @@ describe("QuantumExtractor", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {

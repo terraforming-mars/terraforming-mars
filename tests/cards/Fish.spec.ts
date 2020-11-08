@@ -3,7 +3,7 @@ import { Fish } from "../../src/cards/Fish";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 
 describe("Fish", function () {
@@ -17,7 +17,7 @@ describe("Fish", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should act", function () {
@@ -29,11 +29,11 @@ describe("Fish", function () {
         (game as any).temperature = 2;
         player2.addProduction(Resources.PLANTS);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        const input = game.deferredActions.next()!.execute();
+        expect(input).is.undefined;
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
     });
 
@@ -42,12 +42,11 @@ describe("Fish", function () {
         player.addProduction(Resources.PLANTS);
         player2.addProduction(Resources.PLANTS);
 
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
     });

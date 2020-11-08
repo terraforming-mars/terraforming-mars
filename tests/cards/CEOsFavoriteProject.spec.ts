@@ -19,7 +19,7 @@ describe("CEOsFavoriteProject", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
@@ -35,7 +35,7 @@ describe("CEOsFavoriteProject", function () {
         player.addResourceTo(birds);
 
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         action.cb([searchForLife]);
         expect(player.getResourcesOnCard(searchForLife)).to.eq(2);

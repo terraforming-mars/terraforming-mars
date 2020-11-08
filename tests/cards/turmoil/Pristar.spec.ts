@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Pristar } from "../../../src/cards/turmoil/Pristar";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("Pristar", function () {
     it("Should play", function () {
@@ -11,7 +11,7 @@ describe("Pristar", function () {
         const game = new Game("foobar", [player,player], player);
         const play = card.play(player);
         player.corporationCard = card;
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         player.megaCredits = 10;
         game.increaseTemperature(player,1);
         if (player.corporationCard.onProductionPhase !== undefined) {

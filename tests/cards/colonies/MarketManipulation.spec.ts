@@ -26,7 +26,7 @@ describe("MarketManipulation", function () {
         game.colonies.push(luna, triton);
 
         const action = card.play(player, game) as OrOptions;
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         expect(action.options[0].title).to.eq("Increase Luna (MegaCredits) and decrease Triton (Titanium)")
         action.options[0].cb();
 
@@ -40,9 +40,9 @@ describe("MarketManipulation", function () {
         
         game.colonies.push(enceladus, miranda, luna);
         game.gameOptions.coloniesExtension = true;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
 
         player.playCard(game, new Pets());
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 });

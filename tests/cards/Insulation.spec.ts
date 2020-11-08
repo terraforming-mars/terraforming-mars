@@ -4,7 +4,7 @@ import { Insulation } from "../../src/cards/Insulation";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Insulation", function () {
     it("Should play", function () {
@@ -13,7 +13,7 @@ describe("Insulation", function () {
         const game = new Game("foobar", [player,player], player);
         player.addProduction(Resources.HEAT);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         if (action === undefined) return;
         action.cb(1);
         expect(player.getProduction(Resources.HEAT)).to.eq(0);

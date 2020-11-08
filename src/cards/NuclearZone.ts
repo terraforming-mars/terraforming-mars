@@ -10,13 +10,15 @@ import { CardName } from "../CardName";
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class NuclearZone implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.NUCLEAR_ZONE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.EARTH];
+    public name = CardName.NUCLEAR_ZONE;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
+    public adjacencyBonus?: IAdjacencyBonus = undefined;
     
     public canPlay(player: Player, game: Game): boolean {
         const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
@@ -33,9 +35,11 @@ export class NuclearZone implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for special tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NUCLEAR_ZONE });
+            foundSpace.adjacency = this.adjacencyBonus;
             return game.increaseTemperature(player, 2);
         });
     }
+
     public getVictoryPoints() {
         return -2;
     }

@@ -3,18 +3,16 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
+import { DrawCards } from "../../deferredActions/DrawCards";
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: CardName = CardName.RESEARCH_NETWORK;
+    public tags = [Tags.WILDCARD];
+    public name = CardName.RESEARCH_NETWORK;
     public play(player: Player, game: Game) {     
         player.addProduction(Resources.MEGACREDITS);
-        for (let i = 0; i < 3; i++) {
-            player.cardsInHand.push(game.dealer.dealCard());
-        }
+        game.defer(new DrawCards(player, game, 3));
         return undefined;
     }
 }
-

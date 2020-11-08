@@ -3,17 +3,17 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
 import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class SulphurExports implements IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.SULPHUR_EXPORTS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 21;
+    public tags = [Tags.VENUS, Tags.SPACE];
+    public name = CardName.SULPHUR_EXPORTS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {

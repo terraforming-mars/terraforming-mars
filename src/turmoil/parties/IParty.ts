@@ -1,6 +1,6 @@
 import { PartyName } from "./PartyName";
 import { PlayerId } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 
 
 export interface IParty {

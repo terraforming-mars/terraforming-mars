@@ -1,17 +1,17 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
 import { Resources } from "../../Resources";
-import { IResourceCard } from '../ICard';
+import { IResourceCard } from "../ICard";
 
 export class RefugeeCamps implements IProjectCard, IResourceCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.REFUGEE_CAMP;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 10;
+    public tags = [Tags.EARTH];
+    public name = CardName.REFUGEE_CAMP;
+    public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.CAMP;
     public resourceCount: number = 0;
 

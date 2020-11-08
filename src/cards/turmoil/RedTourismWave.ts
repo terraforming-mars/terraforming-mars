@@ -3,15 +3,15 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
 
 export class RedTourismWave implements IProjectCard {
-    public cost: number = 3;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.RED_TOURISM_WAVE;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 3;
+    public tags = [Tags.EARTH];
+    public name = CardName.RED_TOURISM_WAVE;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

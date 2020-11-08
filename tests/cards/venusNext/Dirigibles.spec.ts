@@ -18,19 +18,19 @@ describe("Dirigibles", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act - single target", function () {
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
     });
 
     it("Should act - multiple targets", function () {
         player.playedCards.push(new FloatingHabs());
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
         
         action!.cb([card]);
         expect(card.resourceCount).to.eq(1);

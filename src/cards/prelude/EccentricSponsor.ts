@@ -1,13 +1,13 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardName } from "../../CardName";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
+import { PlayProjectCard } from "../../deferredActions/PlayProjectCard";
 
 export class EccentricSponsor extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.ECCENTRIC_SPONSOR;
+    public tags = [];
+    public name = CardName.ECCENTRIC_SPONSOR;
 
     public getCardDiscount(player: Player, _game: Game) {
         if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
@@ -16,17 +16,8 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
         return 0;
     }
 
-    public play() {
+    public play(player: Player, game: Game) {  
+        game.defer(new PlayProjectCard(player, game));
         return undefined;
     }
-
-    public addPlayCardInterrupt(player: Player, game: Game) {
-        if (player.getPlayableCards(game).length > 0) {
-            game.interrupts.push({
-                player: player,
-                playerInput: player.playProjectCard(game)
-            });
-        }
-    }
 }
-

@@ -3,8 +3,8 @@ import { VenusWaystation } from "../../../src/cards/venusNext/VenusWaystation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { LocalShading } from '../../../src/cards/venusNext/LocalShading';
-import { VenusGovernor } from '../../../src/cards/venusNext/VenusGovernor';
+import { LocalShading } from "../../../src/cards/venusNext/LocalShading";
+import { VenusGovernor } from "../../../src/cards/venusNext/VenusGovernor";
 
 describe("VenusWaystation", function () {
     it("Should play", function () {
@@ -15,7 +15,7 @@ describe("VenusWaystation", function () {
         const game = new Game("foobar", [player,player], player);
 
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(card.getCardDiscount(player, game, card2)).to.eq(2);

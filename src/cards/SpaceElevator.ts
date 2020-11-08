@@ -5,14 +5,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class SpaceElevator implements IActionCard, IProjectCard {
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
-    public name: CardName = CardName.SPACE_ELEVATOR;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 27;
+    public tags = [Tags.SPACE, Tags.STEEL];
+    public name = CardName.SPACE_ELEVATOR;
+    public cardType = CardType.ACTIVE;
 
     public play(player: Player, _game: Game) {
         player.addProduction(Resources.TITANIUM);

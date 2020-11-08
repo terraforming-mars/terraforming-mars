@@ -10,10 +10,10 @@ import { ICard } from "../ICard";
 import { CardType } from "../CardType";
 
 export class SaturnSystems implements CorporationCard {
-    public name: CardName = CardName.SATURN_SYSTEMS;
-    public tags: Array<Tags> = [Tags.JOVIAN];
+    public name = CardName.SATURN_SYSTEMS;
+    public tags = [Tags.JOVIAN];
     public startingMegaCredits: number = 42;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
         for (const tag of card.tags) {

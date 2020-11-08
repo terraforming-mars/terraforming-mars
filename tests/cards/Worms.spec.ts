@@ -3,7 +3,7 @@ import { Worms } from "../../src/cards/Worms";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Worms", function () {
     let card : Worms, player : Player, game : Game;
@@ -16,12 +16,12 @@ describe("Worms", function () {
 
     it("Can't play", function () {
         (game as any).oxygenLevel = 3;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 4;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         player.playedCards.push(card);
 
         card.play(player);

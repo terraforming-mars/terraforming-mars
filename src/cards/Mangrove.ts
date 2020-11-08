@@ -6,16 +6,16 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SpaceType } from "../SpaceType";
 import { ISpace } from "../ISpace";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 
 export class Mangrove implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.MANGROVE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 12;
+    public tags = [Tags.PLANT];
+    public name = CardName.MANGROVE;
+    public cardType = CardType.AUTOMATED;
     
     public canPlay(player: Player, game: Game): boolean {
         const meetsTemperatureRequirements = game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));

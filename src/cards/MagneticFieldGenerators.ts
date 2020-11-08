@@ -2,18 +2,18 @@ import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { Game } from '../Game';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { Game } from "../Game";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class MagneticFieldGenerators implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MAGNETIC_FIELD_GENERATORS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 20;
+    public tags = [Tags.STEEL];
+    public name = CardName.MAGNETIC_FIELD_GENERATORS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     
     public canPlay(player: Player, game: Game): boolean {

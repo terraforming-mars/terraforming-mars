@@ -11,7 +11,7 @@ describe("PhoboLog", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.titanium).to.eq(10);
         expect(player.getTitaniumValue(game)).to.eq(4);
     });

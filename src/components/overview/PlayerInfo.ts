@@ -1,17 +1,28 @@
 import Vue from "vue";
+import { PlayerModel } from "../../models/PlayerModel";
 import { PlayerResources } from "./PlayerResources";
 import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
 import { playerColorClass } from "../../utils/utils";
 
 export const PlayerInfo = Vue.component("player-info", {
-    props: [
-        "player",
-        "activePlayer",
-        "firstForGen",
-        "actionLabel",
-        "playerIndex",
-    ],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        activePlayer: {
+            type: Object as () => PlayerModel
+        },
+        firstForGen: {
+            type: Boolean
+        },
+        actionLabel: {
+            type: String
+        },
+        playerIndex: {
+            type: Number
+        }
+    },
     components: {
         "player-resources": PlayerResources,
         "player-tags": PlayerTags,

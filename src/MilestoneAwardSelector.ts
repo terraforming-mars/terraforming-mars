@@ -165,37 +165,7 @@ function getNumbersRange(start: number, end: number): Array<number> {
     return Array.from(Array(end + 1 - start).keys()).map(n => n + start)
 }
 
-// Selects |count| milestones and |count| awards from all available awards and milestones (optionally including
-// Venusian.) It does this by way of a weighting algorithm, avoiding high-synergy combinations (such as Gardener
-// and Cultivator, both of which are about placing forest tiles.)
-//
-export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number, maxSynergyAllowed: number = 1): IDrawnMilestonesAndAwards {
-    let maxSynergyDetected = 1000;
-    let candidateIdxs: Array<number> = [];
-    while(maxSynergyDetected > maxSynergyAllowed) {
-        // selects indexes of |count| random milestones and |count| random awards.
-        // For example, if count is 3, output looks like this [m1, m2, m3, a1, a2, a3]
-        // where the first three entries are milestone indexes, and the next three are
-        // award indexes.
-        const rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
-        const cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
-        candidateIdxs = [...rows.slice(0, count), ...cols.slice(0, count)];
-
-        // Search through all pairs of [m1, m2, m3, a1, a2, a3], reading the synergy of
-        // each. In this way the maximum synergy is computed between the n*(n-1) pairs.
-        maxSynergyDetected = computeSynergy(candidateIdxs);
-
-        // After this, the while loop kicks in again. maxSynergyAllowed is 1. So, if any pairs of
-        // [m1, m2, m3, a1, a2, a3] have synergy > 1, the option is rejected and the loop restarts.
-    }
-    const finalItems = candidateIdxs.map(n => MA_ITEMS[n]);
-    return {
-        milestones: finalItems.slice(0, count) as Array<IMilestone>,
-        awards: finalItems.slice(count) as Array<IAward>,
-    }
-}
-
-// Visible for testing.
+// Function to compute max synergy of a given set of milestones and awards.
 export function computeSynergy(indexes: Array<number>) : number {
     let max = 0;
     for (let i = 0; i<indexes.length - 1; i++) {
@@ -205,4 +175,150 @@ export function computeSynergy(indexes: Array<number>) : number {
         }
     }
     return max;
+}
+
+// Limited Synergy Constants
+const MAX_RANDOM_ATTEMPTS: number = 5;
+export const MAX_SYNERGY_ALLOWED_RULE: number= 6;
+export const TOTAL_SYNERGY_ALLOWED_RULE: number= 20;
+export const NUM_HIGH_ALLOWED_RULE: number= 20;
+export const HIGH_THRESHOLD_RULE: number= 4;
+
+// Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
+// Venusian.) It does this by following these rules:
+// 1) No pair with synergy above |maxSynergyAllowed|.
+// 2) Total synergy is |totalSynergyAllowed| or below.
+// 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
+export function getRandomMilestonesAndAwards(withVenusian: boolean = true, 
+    numberMARequested: number, 
+    maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE, 
+    totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
+    numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
+    highThreshold: number = HIGH_THRESHOLD_RULE,
+    attempt: number = 1): IDrawnMilestonesAndAwards {
+    
+    if (attempt > MAX_RANDOM_ATTEMPTS){
+        throw new Error("No limited synergy milestones and awards set was generated after " + MAX_RANDOM_ATTEMPTS + " attempts. Please try again.");
+    }
+
+    // Shuffled arrays on milestones and awards once
+    const shuffled_milestones = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+    const shuffled_awards = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
+
+    const pickedMA = new MASynergyArray(maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold);
+    let milestoneCount = 0;
+    let awardCount = 0;
+
+    // Keep adding milestone or award until there are enough as requested
+    while (milestoneCount + awardCount < numberMARequested*2) {
+
+        // If there is enough award, add a milestone. And vice versa. If still need both, flip a coin to decide which to add.
+        if (awardCount === numberMARequested || (milestoneCount !== numberMARequested && Math.round(Math.random()))) {
+            const newMilestone = shuffled_milestones.splice(0, 1)[0];
+            // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
+            if (newMilestone === undefined) {
+                return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
+            }
+            const milestoneAddSuccess = pickedMA.addNewMA(newMilestone);
+            if (milestoneAddSuccess) milestoneCount++;
+        } else {
+            const newAward = shuffled_awards.splice(0, 1)[0];
+            // If need to add more award, but not enough award left, restart the function with a recursive call.
+            if (newAward === undefined) {
+                return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
+            }
+            const awardAddSuccess = pickedMA.addNewMA(newAward);
+            if (awardAddSuccess) awardCount++;
+        }
+    }
+    
+    if (!verifySynergyRules(pickedMA.currentMA, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold)){
+        throw new Error("The randomized milestones and awards set does not satisfy the given synergy rules.");
+    }
+
+    const finalItems = pickedMA.currentMA.map(n => MA_ITEMS[n]);
+    return {
+        milestones: finalItems.slice(0, numberMARequested) as Array<IMilestone>,
+        awards: finalItems.slice(numberMARequested) as Array<IAward>,
+    }
+}
+
+// Verify whether a given array of |milestoneAwardArray| satisfies the following these rules:
+// 1) No pair with synergy above |maxSynergyAllowed|.
+// 2) Total synergy is |totalSynergyAllowed| or below.
+// 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
+export function verifySynergyRules(
+    milestoneAwardArray: Array<number>,
+    maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE, 
+    totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
+    numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
+    highThreshold: number = HIGH_THRESHOLD_RULE): Boolean {
+
+    let max = 0;
+    let totalSynergy = 0;
+    let numberOfHigh = 0;
+    for (let i = 0; i < milestoneAwardArray.length - 1; i++) {
+        for (let j = i + 1; j < milestoneAwardArray.length; j++) {
+            const synergy = SYNERGIES[milestoneAwardArray[i]][milestoneAwardArray[j]];
+            max = Math.max(synergy, max);
+            totalSynergy += synergy;
+            if (synergy >= highThreshold) numberOfHigh++;
+        }
+    }
+    return (max <= maxSynergyAllowed && totalSynergy <= totalSynergyAllowed && numberOfHigh <= numberOfHighAllowed);
+}
+
+class MASynergyArray {
+    currentMA: Array<number>;
+    maxSynergyAllowed: number;
+    totalSynergyAllowed: number;
+    numberOfHighAllowed: number;
+    highThreshold: number;
+
+    currentNumberOfHigh: number;
+    currentTotalSynergy: number;
+  
+    constructor(maxSynergyAllowed: number, totalSynergyAllowed: number, numberOfHighAllowed: number, highThreshold:number) {
+        this.currentMA = [];
+        this.maxSynergyAllowed = maxSynergyAllowed;
+        this.totalSynergyAllowed = totalSynergyAllowed;
+        this.numberOfHighAllowed = numberOfHighAllowed;
+        this.highThreshold = highThreshold;
+        this.currentNumberOfHigh = 0;
+        this.currentTotalSynergy = 0;
+    }
+  
+    // A class function for adding a new milestone or award index
+    // Return true if adding successfully without violating any rule.
+    addNewMA(newMAIndex: number): boolean {
+        let tempTotalSynergy = this.currentTotalSynergy;
+        let tempNumberOfHigh = this.currentNumberOfHigh;
+        let max = 0;
+        
+        // Find synergy of this new item with all previous ones
+        for (const indexPicked of this.currentMA) {
+            const synergy = SYNERGIES[indexPicked][newMAIndex];
+            tempTotalSynergy += synergy;
+            if (synergy >= this.highThreshold) {
+                tempNumberOfHigh++;
+            }
+            max = Math.max(synergy, max);
+        }
+        // Check whether the addition violate any rule.
+        if (max <= this.maxSynergyAllowed && tempNumberOfHigh <= this.numberOfHighAllowed && tempTotalSynergy <= this.totalSynergyAllowed) {
+            // If it is an award, push to the end of the array.
+            if (newMAIndex > 15) {
+                this.currentMA.push(newMAIndex);
+            } else { 
+            // If it is a milestone, add to the front of the array
+                this.currentMA.unshift(newMAIndex);
+            }
+            // Update the stats
+            this.currentNumberOfHigh = tempNumberOfHigh;
+            this.currentTotalSynergy = tempTotalSynergy;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

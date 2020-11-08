@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { AcquiredSpaceAgency } from "../../../src/cards/prelude/AcquiredSpaceAgency";
 import { Color } from "../../../src/Color";
@@ -11,10 +10,14 @@ describe("AcquiredSpaceAgency", function () {
         const card = new AcquiredSpaceAgency();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        card.play(player, game);
+        expect(game.deferredActions).has.lengthOf(1);
+
+        // Draw cards
+        game.deferredActions.runNext();
+
         expect(player.titanium).to.eq(6);
-        expect(player.cardsInHand.length).to.eq(2);
-        expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.SPACE) !== -1).length).to.eq(2);
+        expect(player.cardsInHand).has.lengthOf(2);
+        expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.SPACE) !== -1)).has.lengthOf(2);
     });
 });

@@ -13,10 +13,10 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class VenusianPlants implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
-    public name: CardName = CardName.VENUSIAN_PLANTS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 13;
+    public tags = [Tags.VENUS, Tags.PLANT];
+    public name = CardName.VENUSIAN_PLANTS;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsVenusRequirements = game.getVenusScaleLevel() >= 16 - (2 * player.getRequirementsBonus(game, true));

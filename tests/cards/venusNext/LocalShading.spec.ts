@@ -15,18 +15,18 @@ describe("LocalShading", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
         card.action(player);
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions).is.not.undefined;
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

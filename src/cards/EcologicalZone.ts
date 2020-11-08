@@ -1,24 +1,27 @@
 
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
-import {ResourceType} from '../ResourceType';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
-import { CardName } from '../CardName';
-import { IResourceCard } from './ICard';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { SpaceType } from "../SpaceType";
+import { TileType } from "../TileType";
+import { ResourceType } from "../ResourceType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { CardName } from "../CardName";
+import { IResourceCard } from "./ICard";
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class EcologicalZone implements IProjectCard, IResourceCard {
-  public cost: number = 12;
-  public resourceType: ResourceType = ResourceType.ANIMAL;
+  public cost = 12;
+  public resourceType = ResourceType.ANIMAL;
   public resourceCount: number = 0;
-  public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
-  public cardType: CardType = CardType.ACTIVE;
-  public name: CardName = CardName.ECOLOGICAL_ZONE;
+  public tags = [Tags.ANIMAL, Tags.PLANT];
+  public cardType = CardType.ACTIVE;
+  public name = CardName.ECOLOGICAL_ZONE;
+  public adjacencyBonus?: IAdjacencyBonus = undefined;
+
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
         .filter(
@@ -57,6 +60,7 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
           game.addTile(player, requestedSpace.spaceType, requestedSpace, {
             tileType: TileType.ECOLOGICAL_ZONE
           });
+          requestedSpace.adjacency = this.adjacencyBonus;
           return undefined;
         }
     );

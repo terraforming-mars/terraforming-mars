@@ -13,10 +13,12 @@ describe("NuclearZone", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         if (action !== undefined) {
-          action.cb(action.availableSpaces[0]);
-          expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
+          const space = action.availableSpaces[0]; 
+          action.cb(space);
+          expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
           player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
           expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
+          expect(space.adjacency?.cost).eq(undefined);
         }  
         expect(game.getTemperature()).to.eq(-26);
     });

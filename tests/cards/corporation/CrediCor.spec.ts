@@ -18,7 +18,7 @@ describe("CrediCor", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
 
         card.onStandardProject(player, StandardProjectType.SELLING_PATENTS);
         card.onStandardProject(player, StandardProjectType.GREENERY);

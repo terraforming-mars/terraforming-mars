@@ -25,16 +25,18 @@ describe("LavaFlows", function () {
 
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         
-        action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.LAVA_FLOWS);
-        expect(action.availableSpaces[0].player).to.eq(player);
+        const space = action.availableSpaces[0];
+        action.cb(space);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
+        expect(space.player).to.eq(player);
         expect(game.getTemperature()).to.eq(-26);
+        expect(space.adjacency?.bonus).eq(undefined);
     });
 });

@@ -2,18 +2,17 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 
 export class MartianIndustries extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_INDUSTRIES;
-    public bonusMc: number = 6;
+    public tags = [Tags.STEEL];
+    public name = CardName.MARTIAN_INDUSTRIES;
 
     public play(player: Player) {
         player.addProduction(Resources.ENERGY);
         player.addProduction(Resources.STEEL);
-        player.megaCredits += this.bonusMc;
+        player.megaCredits += 6;
         return undefined;
     }
 }

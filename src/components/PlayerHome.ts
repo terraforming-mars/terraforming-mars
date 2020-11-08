@@ -18,8 +18,17 @@ import { Button } from "../components/common/Button";
 
 const dialogPolyfill = require("dialog-polyfill");
 
+import * as raw_settings from "../../assets/settings.json";
+
 export const PlayerHome = Vue.component("player-home", {
-    props: ["player", "settings"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        settings: {
+            type: Object as () => typeof raw_settings
+        }
+    },
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,
@@ -105,7 +114,6 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <preferences v-trim-whitespace
-              :player_name="player.name"
               :player_color="player.color"
               :generation="player.generation"
               :coloniesCount="player.colonies.length"
@@ -129,7 +137,9 @@ export const PlayerHome = Vue.component("player-home", {
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
-                        :shouldNotify="true"></board>
+                        :shouldNotify="true"
+                        :aresExtension="player.aresExtension"
+                        :aresData="player.aresData"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
@@ -142,7 +152,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
+                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation" />
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
                         <span class="label-additional" v-html="getGenerationText()"></span>

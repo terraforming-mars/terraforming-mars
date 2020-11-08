@@ -1,16 +1,15 @@
 import { IProjectCard } from "./../IProjectCard";
-import { Tags } from "./../Tags";
 import { CardType } from "./../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 
 export class DiversitySupport implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.DIVERSITY_SUPPORT;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 1;
+    public tags = [];
+    public name = CardName.DIVERSITY_SUPPORT;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player) {
         const count = this.getStandardResourceCount(player) + this.getNonStandardResourceCount(player);

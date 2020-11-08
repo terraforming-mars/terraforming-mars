@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { MercurianAlloys } from "../../../src/cards/promo/MercurianAlloys";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Research } from "../../../src/cards/Research";
 
 describe("MercurianAlloys", function () {
@@ -15,12 +15,12 @@ describe("MercurianAlloys", function () {
     });
 
     it("Can't play if not enough science tags available", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         
         card.play(player);
         expect(player.getTitaniumValue(game)).to.eq(4);

@@ -1,11 +1,14 @@
 import { expect } from "chai";
 import { OlympusConference } from "../../src/cards/OlympusConference";
+import { MarsUniversity } from "../../src/cards/MarsUniversity";
+import { ScienceTagCard } from "../../src/cards/community/ScienceTagCard";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { OrOptions } from "../../src/inputs/OrOptions";
 import { Research } from "../../src/cards/Research";
+import { DeferredActionsQueue } from "../../src/deferredActions/DeferredActionsQueue";
 
 describe("OlympusConference", function () {
     let card : OlympusConference, player : Player, game : Game;
@@ -23,33 +26,95 @@ describe("OlympusConference", function () {
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
-        expect(card.onCardPlayed(player, game, new Bushes())).to.eq(undefined) 
+        card.onCardPlayed(player, game, new Bushes()); 
+        expect(game.deferredActions).has.lengthOf(0);
+
+        // No resource
         card.onCardPlayed(player, game, card);
+        expect(game.deferredActions).has.lengthOf(1);
+        const input = game.deferredActions.next()!.execute();
+        game.deferredActions.shift();
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
 
+        // Resource available
         card.onCardPlayed(player, game, card);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
 
         orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(1);
-        expect(player.cardsInHand.length).to.eq(1);
-        expect(game.interrupts.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 
     it("Plays twice for Research", function () {
         player.playedCards.push(card);
         card.onCardPlayed(player, game, new Research());
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(2);
+
+        // No resource, can't draw, resource automatically added
+        const input = game.deferredActions.next()!.execute();
+        game.deferredActions.shift();
+        expect(input).is.undefined;
         expect(card.resourceCount).to.eq(1);
-        
-        const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.splice(0, 1);
+
+        // Resource on card, can draw
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
+        orOptions.options[0].cb();
+        expect(card.resourceCount).to.eq(0);
+        expect(player.cardsInHand).has.lengthOf(1);
+
+        expect(game.deferredActions).has.lengthOf(0);
+    });
+
+    it("Triggers before Mars University", function() {
+        const marsUniversity = new MarsUniversity();
+        const scienceTagCard = new ScienceTagCard();
+
+        // Olypus Conference played before Mars University
+        player.playedCards.push(card);
+        player.playedCards.push(marsUniversity);
+        card.resourceCount = 1;
+
+        // Play a 1 science tag card
+        player.playCard(game, scienceTagCard);
+
+        // OC asking to draw & MU asking to discard
+        expect(game.deferredActions).has.lengthOf(2);
+
+        // OC's trigger should be the first one
+        const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
         orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
-        expect(game.interrupts.length).to.eq(0);
+
+
+        // Reset the state
+        game.deferredActions = new DeferredActionsQueue();
+        player.playedCards = [];
+
+
+        // Mars University played before Olympus Conference
+        player.playedCards.push(marsUniversity);
+        player.playedCards.push(card);
+        card.resourceCount = 1;
+
+        // Play a 1 science tag card
+        player.playCard(game, scienceTagCard);
+
+        // OC asking to draw & MU asking to discard
+        expect(game.deferredActions).has.lengthOf(2);
+
+        // OC's trigger should be the first one
+        const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
+        game.deferredActions.shift();
+        orOptions2.options[1].cb();
+        expect(card.resourceCount).to.eq(2);
     });
 });

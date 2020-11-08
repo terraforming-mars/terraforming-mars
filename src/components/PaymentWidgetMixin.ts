@@ -4,6 +4,7 @@ import { CardModel } from "../models/CardModel"
 import { ResourceType } from "../ResourceType";
 
 export const PaymentWidgetMixin = {
+    name: "PaymentWidgetMixin",
     "methods": {
         getMegaCreditsMax: function (): number {
             return Math.min((this as any).player.megaCredits, (this as any).$data.cost);

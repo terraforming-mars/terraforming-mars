@@ -4,7 +4,8 @@ import { Player } from "../../../src/Player";
 import { AerospaceMission } from "../../../src/cards/community/AerospaceMission";
 import { setCustomGameOptions } from "../../TestingUtils";
 import { Game, GameOptions } from "../../../src/Game";
-import { OrOptions } from "../../../src/inputs/OrOptions";
+import { ColonyName } from "../../../src/colonies/ColonyName";
+import { SelectColony } from "../../../src/inputs/SelectColony";
 
 describe("AerospaceMission", function () {
     let card : AerospaceMission, player : Player, game : Game;
@@ -19,11 +20,15 @@ describe("AerospaceMission", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(2);
 
-        const orOptions = game.interrupts[0].playerInput as OrOptions;
-        const options = orOptions.options[0] as OrOptions;
-        options.cb();
+        const selectColony = game.deferredActions.next()!.execute() as SelectColony;
+        game.deferredActions.shift();
+        selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+
+        const selectColony2 = game.deferredActions.next()!.execute() as SelectColony;
+        game.deferredActions.shift();
+        selectColony2.cb((<any>ColonyName)[selectColony2.coloniesModel[0].name.toUpperCase()]);
 
         const openColonies = game.colonies.filter(colony => colony.isActive);
         expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;

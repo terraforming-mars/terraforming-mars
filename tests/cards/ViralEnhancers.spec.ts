@@ -27,21 +27,21 @@ describe("ViralEnhancers", function () {
         player.playedCards.push(ants, birds, moss);
 
         card.onCardPlayed(player, game, birds);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        let orOptions = game.interrupts[0].playerInput as OrOptions;
+        const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player.getResourcesOnCard(birds)).to.eq(1);
         orOptions.options[1].cb();
         expect(player.plants).to.eq(1);
 
         card.onCardPlayed(player, game, ants);
-        expect(game.interrupts.length).to.eq(2);
+        expect(game.deferredActions).has.lengthOf(1);
 
-        orOptions = game.interrupts[1].playerInput as OrOptions;
-        orOptions.options[0].cb();
+        const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
+        orOptions2.options[0].cb();
         expect(player.getResourcesOnCard(ants)).to.eq(1);
-        orOptions.options[1].cb();
+        orOptions2.options[1].cb();
         expect(player.plants).to.eq(2);
     });
 
@@ -50,18 +50,16 @@ describe("ViralEnhancers", function () {
 
         const ecologicalZone = new EcologicalZone();
         card.onCardPlayed(player, game, ecologicalZone);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(2);
 
-        let orOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.pop();
+        const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
         orOptions.options[0].cb();
         expect(player.getResourcesOnCard(ecologicalZone)).to.eq(1);
-        expect(game.interrupts.length).to.eq(1);
+        expect(game.deferredActions).has.lengthOf(1);
         
-        orOptions = game.interrupts[0].playerInput as OrOptions;
-        game.interrupts.pop();
-        orOptions.options[1].cb();
+        const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
+        orOptions2.options[1].cb();
         expect(player.plants).to.eq(1);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
     });
 });

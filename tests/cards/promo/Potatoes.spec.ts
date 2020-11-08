@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Potatoes } from "../../../src/cards/promo/Potatoes";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 import { ViralEnhancers } from "../../../src/cards/ViralEnhancers";
 
 describe("Potatoes", function () {
@@ -15,18 +15,18 @@ describe("Potatoes", function () {
 
     it("Can't play", function () {
         player.plants = 1;
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Can play with 1 plant if have Viral Enhancers", function () {
         player.plants = 1;
         player.playedCards.push(new ViralEnhancers());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
     });
 
     it("Should play", function () {
         player.plants = 2;
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
         
         card.play(player);
         expect(player.plants).to.eq(0);

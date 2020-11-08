@@ -14,11 +14,11 @@ import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: CardName = CardName.GHG_PRODUCING_BACTERIA;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.MICROBE;
+    public cost = 8;
+    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public name = CardName.GHG_PRODUCING_BACTERIA;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);

@@ -13,38 +13,9 @@ import { SerializedDealer } from "./SerializedDealer";
 import { CardManifest } from "./cards/CardManifest";
 import { ICardFactory } from "./cards/ICardFactory";
 import { CardTypes, Deck } from "./Deck";
-import { Expansion } from "./Expansion";
-
-
-export const decks: Array<CardManifest> = [
-    BASE_CARD_MANIFEST,
-    CORP_ERA_CARD_MANIFEST,
-    PROMO_CARD_MANIFEST,
-    VENUS_CARD_MANIFEST,
-    COLONIES_CARD_MANIFEST,
-    PRELUDE_CARD_MANIFEST,
-    TURMOIL_CARD_MANIFEST,
-    COMMUNITY_CARD_MANIFEST,
-];
-
-// Function to return a card object by its name
-// NOTE(kberg): This replaces a larger function which searched for both Prelude cards amidst project cards
-// TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
-//              another function, perhaps?
-export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    let found : (ICardFactory<IProjectCard> | undefined);
-    decks.forEach(deck => {
-        // Short circuit
-        if (found) {
-            return;
-        }
-        found = deck.projectCards.findByCardName(cardName);
-        if (!found) {
-            found = deck.preludeCards.findByCardName(cardName);
-        };
-    });
-    return found ? new found.factory() : undefined;
-}
+import { GameModule } from "./GameModule";
+import { CardFinder} from "./CardFinder";
+import { ARES_CARD_MANIFEST } from "./cards/ares/AresCardManifest";
 
 export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
@@ -57,6 +28,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+    private useAresExtension: boolean = false;
 
     constructor(
             useCorporateEra: boolean,
@@ -65,6 +37,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
+            useAresExtension: boolean,
             useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
@@ -74,6 +47,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
+        this.useAresExtension = useAresExtension
 
         const deck:Array<IProjectCard> = [];
         const preludeDeck:Array<IProjectCard> = [];
@@ -85,11 +59,11 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             switch(expansion) {
                 case undefined:
                     return true;
-                case Expansion.Venus:
+                case GameModule.Venus:
                     return useVenusNextExtension;
-                case Expansion.Colonies:
+                case GameModule.Colonies:
                     return useColoniesNextExtension;
-                case Expansion.Turmoil:
+                case GameModule.Turmoil:
                     return useTurmoilExtension;
                 default:
                     throw("Unhandled expansion type: " + expansion);                    
@@ -122,6 +96,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.useTurmoilExtension) {
             addToDecks(TURMOIL_CARD_MANIFEST);
+        }
+        if (this.useAresExtension) {
+            addToDecks(ARES_CARD_MANIFEST);
         }
         if (this.usePromoCards) {
             addToDecks(PROMO_CARD_MANIFEST);
@@ -182,20 +159,20 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public loadFromJSON(d: SerializedDealer): Dealer {
         // Assign each attributes
         const o = Object.assign(this, d);
-
+        const cardFinder = new CardFinder();
         // Rebuild deck
         this.deck = d.deck.map((element: IProjectCard)  => {
-            return getProjectCardByName(element.name)!;
+            return cardFinder.getProjectCardByName(element.name)!;
         });
 
         // Rebuild prelude deck
         this.preludeDeck = d.preludeDeck.map((element: IProjectCard)  => {
-            return getProjectCardByName(element.name)!;
+            return cardFinder.getProjectCardByName(element.name)!;
         });
 
         // Rebuild the discard
         this.discarded = d.discarded.map((element: IProjectCard)  => {
-            return getProjectCardByName(element.name)!;
+            return cardFinder.getProjectCardByName(element.name)!;
         });
         
         return o;

@@ -1,0 +1,248 @@
+.card-container {
+    .card-nr {
+        display: none;
+    }
+    .project-icon:after,
+    .preludeCard-icon:after {
+        bottom: 8px;
+        left: 8px;
+        margin: 0px;
+    }
+    .card-content-wrapper {
+        position: relative;
+        .card-requirements {
+            width: 70%;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            font-weight: normal;
+            font-size: 15px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(
+                90deg,
+                rgba(243, 161, 14, 1) 0%,
+                rgba(253, 234, 37, 1) 45%,
+                rgba(253, 234, 37, 1) 55%,
+                rgba(243, 161, 14, 1) 100%
+            );
+            font-family: Ubuntu;
+            font-weight: bold;
+        }
+        .card-requirements-max {
+            background-image: url(./assets/requisites/max_big.png);
+            background-size: 164px 34px;
+            background-position: -4px -4px;
+            filter: grayscale(0.2);
+        }
+        .card-content {
+            // background: grey;
+            color: black;
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            width: 220px;
+            height: 226px;
+            padding: 10px;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: bold;
+            text-align: center;
+            .card-description {
+                margin-top: 8px;
+                color: #020202;
+                font-size: 11px;
+                line-height: 13px;
+                font-weight: normal;
+            }
+            .card-points {
+                position: absolute;
+                font-family: Prototype;
+                font-weight: normal;
+                bottom: 8px;
+                right: 8px;
+                width: 80px;
+                height: 42px;
+                text-align: center;
+                border-radius: 12px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                background-color: #cda282;
+                background: linear-gradient(#cc8b00, #805700, #805700);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            }
+        }
+        .temporary-content-wrapper {
+            position: relative;
+            .corporation-icon {
+                position: absolute;
+                top: 9px;
+                right: 26px;
+            }
+        }
+        .card-cost-and-tags {
+            display: flex;
+            align-items: center;
+            margin-left: -10px;
+            margin-top: -10px;
+            justify-content: space-between;
+            .card-cost {
+                float: left;
+                font-family: Prototype;
+                font-size: 26px;
+                width: 50px;
+                height: 50px;
+                line-height: 48px;
+                border-radius: 10px;
+                text-align: center;
+                background-image: url(./assets/resources/megacredit.png);
+                background-size: 50px;
+                filter: drop-shadow(0px 0px 1px black);
+                font-family: Prototype;
+                color: #000;
+            }
+            .card-tags {
+                display: flex;
+                flex-flow: row;
+                justify-content: flex-end;
+                margin-right: -6px;
+                .card-tag {
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                    margin-left: 4px;
+                    width: 40px;
+                    height: 40px;
+                    background-size: 50px;
+                    background-position: -5px;
+                    text-align: center;
+                    border-radius: 50%;
+                    border-top: 2px solid rgb(221, 221, 221);
+                    border-left: 2px solid rgb(221, 221, 221);
+                    border-bottom: 2px solid rgb(137, 137, 137);
+                    border-right: 2px solid rgb(137, 137, 137);
+                    background-color: white;
+                    /* margin-top: -6px; */
+                    filter: brightness(0.9);
+                }
+            }
+        }
+        .card-title {
+            font-family: "Ubuntu";
+            color: #020202;
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 0 0 30% 30%;
+            line-height: 30px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: -6px;
+            padding-top: 3px;
+            .corporation-label {
+                text-transform: uppercase;
+                float: left;
+                top: 8px;
+                position: absolute;
+                color: #020202;
+                width: 115px;
+                height: 14px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 13px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: #cccccc;
+                background-color: rgb(255, 204, 100);
+                background: linear-gradient(
+                    to right,
+                    #e28c22,
+                    rgb(255, 204, 100),
+                    rgb(255, 204, 100),
+                    #e28c22
+                );
+                border-radius: 7px 7px 2px 2px;
+                text-transform: uppercase;
+            }
+            .prelude-label {
+                position: absolute;
+                text-transform: uppercase;
+                top: 15px;
+                left: 4px;
+                margin: 0px;
+                width: 80px;
+                height: 20px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-color: rgb(235, 118, 171);
+                border-radius: 14px 2px 2px 2px;
+                border-top: 2px solid rgb(221, 221, 221);
+                border-left: 2px solid rgb(221, 221, 221);
+                border-bottom: 2px solid rgb(137, 137, 137);
+                border-right: 2px solid rgb(137, 137, 137);
+            }
+        }
+        .card-expansion {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 10px;
+            background-size: 24px 24px;
+            background-position: center;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+        }
+        .contentCorporation {
+            color: #020202;
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 8px;
+            top: -40px;
+            color: #020202;
+        }
+    }
+}
+.celestic-fix {
+    position: absolute;
+    top: 18px;
+}
+.luna-fix {
+    position: absolute;
+    font-size: 22px;
+    font-family: Prototype;
+    font-weight: normal;
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    margin-left: 40px;
+    -webkit-transform: scale(1.5, 1); /* Safari and Chrome */
+    -moz-transform: scale(1.5, 1); /* Firefox */
+    -ms-transform: scale(1.5, 1); /* IE 9 */
+    -o-transform: scale(1.5, 1); /* Opera */
+    transform: scale(1.5, 1); /* W3C */
+}
+
+.recyclon-fix {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    padding: 10px;
+    font-weight: bold;
+    background: red;
+    color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3), 3px 3px 3px #444;
+    font-family: Prototype;
+    font-weight: normal;
+    text-shadow: 0 0 1px black;
+}
+.recyclon-fix-2 {
+    position: absolute;
+    top: 48px;
+    left: 8px;
+}

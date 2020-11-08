@@ -4,16 +4,16 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { Resources } from '../../Resources';
-import { SelectSpace } from '../../inputs/SelectSpace';
-import { ISpace } from '../../ISpace';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { SelectSpace } from "../../inputs/SelectSpace";
+import { ISpace } from "../../ISpace";
+import { CardName } from "../../CardName";
 
 export class Gyropolis implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: CardName = CardName.GYROPOLIS;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 20;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public name = CardName.GYROPOLIS;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         if (game.board.getAvailableSpacesForCity(player).length === 0) return false;

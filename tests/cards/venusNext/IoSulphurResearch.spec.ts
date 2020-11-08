@@ -11,7 +11,7 @@ describe("IoSulphurResearch", function () {
         const game = new Game("foobar", [player,player], player);
 
         const action = card.play(player,game);
-        expect(action).to.eq(undefined);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(action).is.undefined;
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

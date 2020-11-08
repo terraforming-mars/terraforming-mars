@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { SpaceType } from "../../../src/SpaceType";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 import { maxOutOceans } from "../../TestingUtils";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
@@ -57,7 +57,7 @@ describe("MiningGuild", function () {
     });
 
     it("Does not give bonus for WGT", function () {
-        const oceanSpaces = game.board.getOceansTiles();
+        const oceanSpaces = game.board.getOceansTiles(true);
 
         oceanSpaces.forEach((space) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN }); 

@@ -16,23 +16,27 @@ describe("RestrictedArea", function () {
 
     it("Can't act if not enough MC", function () {
         player.megaCredits = 1;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should play", function () {
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.RESTRICTED_AREA);
+        expect(action).is.not.undefined;
+
+        const space = action.availableSpaces[0];
+
+        action.cb(space);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
+        expect(space.adjacency?.bonus).eq(undefined);
     });
 
     it("Should act", function () {
         player.megaCredits = 2;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player, game);
 
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

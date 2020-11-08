@@ -37,6 +37,7 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * KEY_PATH: Your TLS private key path (=> `privkey.pem` created by certbot)
 * MAX_GAME_DAYS: How many days to keep unfinished games before deleting them
 * WAITING_FOR_TIMEOUT: (default 5000) How many milliseconds to check for game update on multi-player games
+* ASSET_CACHE_MAX_AGE: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
 
 ### Deployment
 
@@ -79,10 +80,16 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>nwai90</b></sub><br />Helps with the things</a>
-    </td>    
+    </td>
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>Pocc</b></sub><br />He did that one thing one time</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>Robert Konigsberg</b></sub><br />Ares expansion!!!!!</a>
     </td>    
   </tr>
 </table>

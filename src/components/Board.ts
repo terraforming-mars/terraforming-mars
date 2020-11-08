@@ -2,6 +2,7 @@
 import Vue from "vue";
 import * as constants from "../constants";
 import { BoardSpace } from "./BoardSpace";
+import { IAresData } from "../ares/IAresData";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
 import { PreferencesManager } from "./PreferencesManager";
@@ -19,7 +20,38 @@ class AlertDialog {
 }
 
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify"],
+    props: {
+        spaces: {
+            type: Object as () => Array<SpaceModel>
+        },
+        venusNextExtension: {
+            type: Boolean
+        },
+        venusScaleLevel: {
+            type: Number
+        },
+        boardName: {
+            type: String
+        },
+        oceans_count: {
+            type: Number
+        },
+        oxygen_level: {
+            type: Number
+        },
+        temperature: {
+            type: Number
+        },
+        shouldNotify: {
+            type: Boolean
+        },
+        aresExtension: {
+            type: Boolean
+        },
+        aresData: {
+            type: Object as () => IAresData | undefined
+        }
+    },
     components: {
         "board-space": BoardSpace
     },
@@ -43,7 +75,7 @@ export const Board = Vue.component("board", {
             return boardSpaces.filter((s: SpaceModel) => {return s.spaceType !== SpaceType.COLONY})
         },
         getSpaceById: function (spaceId: string) {
-            for (let space of this.spaces) {
+            for (const space of this.spaces) {
                 if (space.id === spaceId) {
                     return space
                 }
@@ -51,12 +83,12 @@ export const Board = Vue.component("board", {
             throw "Board space not found by id '" + spaceId + "'"
         },
         getValuesForParameter: function (targetParameter: string): Array<GlobalParamLevel> {
-            let values: Array<GlobalParamLevel> = [];
-            var startValue: number;
-            var endValue: number;
-            var step: number;
-            var curValue: number;
-            var strValue: string;
+            const values: Array<GlobalParamLevel> = [];
+            let startValue: number;
+            let endValue: number;
+            let step: number;
+            let curValue: number;
+            let strValue: string;
 
             switch (targetParameter) {
                 case "oxygen":
@@ -148,10 +180,29 @@ export const Board = Vue.component("board", {
 
             <div class="global-numbers-oceans" v-html="oceansValue()">
             </div>
+
+            <div v-if="aresExtension && aresData !== undefined">
+                <div v-if="aresData.hazardData.erosionOceanCount.available">
+                    <div class="global-ares-erosions-icon"></div>
+                    <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.removeDustStormsOceanCount.available">
+                    <div class="global-ares-remove-dust-storms-icon"></div>
+                    <div class="global-ares-remove-dust-storms-val">{{aresData.hazardData.removeDustStormsOceanCount.threshold}}</div>
+                </div>
+                <div v-if="aresData.hazardData.severeErosionTemperature.available">
+                    <div class="global-ares-severe-erosions"
+                    :class="'global-ares-severe-erosions-'+aresData.hazardData.severeErosionTemperature.threshold"></div>
+                </div>
+                <div v-if="aresData.hazardData.severeDustStormOxygen.available">
+                    <div class="global-ares-severe-dust-storms"
+                    :class="'global-ares-severe-dust-storms-'+aresData.hazardData.severeDustStormOxygen.threshold"></div>
+                </div>
+            </div>
         </div>
 
         <div class="board" id="main_board">
-            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" v-for="curSpace in getAllSpacesOnMars()"></board-space>
+            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" :aresExtension="aresExtension" v-for="curSpace in getAllSpacesOnMars()"></board-space>
             <svg id="board_legend" height="550" width="630" class="board-legend">
                 <g v-if="boardName === 'tharsis'" id="ascraeus_mons" transform="translate(95, 192)">
                     <text class="board-caption">

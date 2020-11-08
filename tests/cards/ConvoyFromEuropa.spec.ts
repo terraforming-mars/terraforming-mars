@@ -11,6 +11,6 @@ describe("ConvoyFromEuropa", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         card.play(player, game);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

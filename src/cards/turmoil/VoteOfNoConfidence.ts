@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,10 +8,10 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class VoteOfNoConfidence implements IProjectCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.VOTE_OF_NO_CONFIDENCE;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 5;
+    public tags = [];
+    public name = CardName.VOTE_OF_NO_CONFIDENCE;
+    public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

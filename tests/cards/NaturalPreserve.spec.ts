@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NaturalPreserve", function () {
     let card : NaturalPreserve, player : Player, game : Game;
@@ -22,23 +22,25 @@ describe("NaturalPreserve", function () {
             game.addTile(player, land.spaceType, land, { tileType: TileType.NATURAL_PRESERVE });
         }
 
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Can't play if oxygen level too high", function () {
         (game as any).oxygenLevel = 5;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectSpace).to.eq(true);
+        expect(action).is.not.undefined;
+        expect(action instanceof SelectSpace).is.true;
 
-        action.cb(action.availableSpaces[0]);
+        const space = action.availableSpaces[0];
+        action.cb(space);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+        expect(space.adjacency?.bonus).eq(undefined);
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

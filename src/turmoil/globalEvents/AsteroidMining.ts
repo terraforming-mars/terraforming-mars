@@ -1,10 +1,10 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { Tags } from '../../cards/Tags';
-import { Turmoil } from '../Turmoil';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Resources } from "../../Resources";
+import { Tags } from "../../cards/Tags";
+import { Turmoil } from "../Turmoil";
 
 export class AsteroidMining implements IGlobalEvent {
     public name = GlobalEventName.ASTEROID_MINING;

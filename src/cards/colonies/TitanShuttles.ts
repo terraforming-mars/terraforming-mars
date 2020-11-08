@@ -9,14 +9,14 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { SelectAmount } from "../../inputs/SelectAmount";
 import { IResourceCard } from "../ICard";
-import { LogHelper } from "../../components/LogHelper";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class TitanShuttles implements IProjectCard, IResourceCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.TITAN_SHUTTLES;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 23;
+    public tags = [Tags.JOVIAN, Tags.SPACE];
+    public name = CardName.TITAN_SHUTTLES;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canAct(): boolean {
@@ -24,42 +24,26 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
     }
 
     public action(player: Player, game: Game) {
-        var opts: Array<SelectOption | SelectAmount> = [];
-
-        const floaterCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => card.tags.indexOf(Tags.JOVIAN) !== -1);
-
-        if (floaterCards.length === 1 && this.resourceCount === 0) {
-            player.addResourceTo(floaterCards[0], 2);
-            LogHelper.logAddResource(game, player, floaterCards[0], 2);
+        if (this.resourceCount === 0) {
+            game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN, "Add 2 floaters to a Jovian card"));
             return undefined;
         }
 
-        const addResource = new SelectOption("Add 2 floaters to a Jovian card", "Add floaters", () => {
-            if (floaterCards.length === 1) {
-                player.addResourceTo(floaterCards[0], 2);
-                LogHelper.logAddResource(game, player, floaterCards[0], 2);
-            } else if (floaterCards.length > 1) {
-                game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
-            }
-
-            return undefined;
-        });
-
-        const spendResource = new SelectAmount("Remove X floaters on this card to gain X titanium", "Remove floaters", (amount: number) => {
-            player.removeResourceFrom(this, amount);
-            player.titanium += amount; 
-            return undefined;
-        }, this.resourceCount);
-
-        if (this.resourceCount > 0) opts.push(spendResource);
-        opts.push(addResource);
-
-        if (opts.length === 1) return (opts[0] as SelectOption).cb();
-        return new OrOptions(...opts);
+        return new OrOptions(
+            new SelectOption("Add 2 floaters to a Jovian card", "Add floaters", () => {
+                game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN));
+                return undefined;
+            }),
+            new SelectAmount("Remove X floaters on this card to gain X titanium", "Remove floaters", (amount: number) => {
+                player.removeResourceFrom(this, amount);
+                player.titanium += amount; 
+                return undefined;
+            }, this.resourceCount)
+        );
     }
 
     public play() {
-      return undefined;
+        return undefined;
     }
 
     public getVictoryPoints(): number {

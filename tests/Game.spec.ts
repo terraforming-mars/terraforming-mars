@@ -17,7 +17,8 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from "../src/milestones/Ecologist";
-import { Dealer, getProjectCardByName } from "../src/Dealer";
+import { CardFinder } from "../src/CardFinder";
+import { Dealer } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
@@ -30,28 +31,29 @@ describe("Game", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        expect(game.gameOptions.corporateEra).to.eq(true);
+        expect(game.gameOptions.corporateEra).is.true;
         expect(game.getGeneration()).to.eq(1);
     });
 
     it("correctly separates 71 corporate era cards", function() {
         // include corporate era
-        const dealer = new Dealer(true, false, false, false, false, false);
+        const dealer = new Dealer(true, false, false, false, false, false, false);
         expect(dealer.getDeckSize()).to.eq(208);
 
         // exclude corporate era
-        const dealer2 = new Dealer(false, false, false, false, false, false);
+        const dealer2 = new Dealer(false, false, false, false, false,  false, false);
         expect(dealer2.getDeckSize()).to.eq(137);
     });
 
     it("excludes expansion-specific preludes if those expansions are not selected ", function() {
-        const dealer = new Dealer(true, false, false, false, false, false, true);
+        const dealer = new Dealer(true, false, false, false, false, false,  
+            false, true);
         const preludeDeck = dealer.preludeDeck;
 
         const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
         turmoilPreludes.forEach((preludeName) => {
-            const preludeCard = getProjectCardByName(preludeName)!;
-            expect(preludeDeck.includes(preludeCard)).to.eq(false)
+            const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
+            expect(preludeDeck.includes(preludeCard)).is.not.true
         });
     });
 
@@ -78,7 +80,7 @@ describe("Game", function () {
         game.addGreenery(player, SpaceName.PAVONIS_MONS);
    
         // Claim milestone
-        let milestone = new Mayor();
+        const milestone = new Mayor();
 
         game.claimedMilestones.push({
             player: player,
@@ -137,7 +139,7 @@ describe("Game", function () {
         const game = new Game("vp_game", [player,player2], player);
 
         (game as any).temperature = 6;
-        var initialTR = player.getTerraformRating();
+        let initialTR = player.getTerraformRating();
         game.increaseTemperature(player, 2);
 
         expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
@@ -208,7 +210,7 @@ describe("Game", function () {
         // Now game should be in finished state
         expect(game.phase).to.eq(Phase.END);
 
-        expect(game.isSoloModeWin()).to.eq(false);
+        expect(game.isSoloModeWin()).is.not.true;
     });
 
     it("Should not finish solo game before last generation if Mars is already terraformed", function() {
@@ -260,7 +262,7 @@ describe("Game", function () {
         game.playerHasPassed(player);
         game.playerIsDoneWithGame(player);
         expect(game.phase).to.eq(Phase.END);
-        expect(game.isSoloModeWin()).to.eq(false);
+        expect(game.isSoloModeWin()).is.not.true;
 
         // Don't give TR or raise oxygen for final greenery placements
         expect(player.getTerraformRating()).to.eq(20);
@@ -274,7 +276,7 @@ describe("Game", function () {
         const player4 = new Player("p4", Color.RED, false);
         const game = new Game("gto", [player1, player2, player3, player4], player3);
 
-        var players = game.getPlayers();
+        let players = game.getPlayers();
         expect(players[0].name).to.eq("p3");
         expect(players[1].name).to.eq("p4");
         expect(players[2].name).to.eq("p1");
@@ -311,7 +313,7 @@ describe("Game", function () {
         game.addOceanTile(player1, spaceId);
 
         const space: ISpace = game.getSpace(spaceId);
-        expect(space.player).to.eq(undefined);
+        expect(space.player).is.undefined;
     });
 
     it("Check Ecologist Milestone", function() {
@@ -322,9 +324,9 @@ describe("Game", function () {
         const ecologist = new Ecologist();
 
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player)).to.eq(false);
+        expect(ecologist.canClaim(player)).is.not.true;
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player)).to.eq(true);
+        expect(ecologist.canClaim(player)).is.true;
     });
 
     it("Removes Hellas bonus ocean space if player cannot pay", function () {
@@ -342,14 +344,14 @@ describe("Game", function () {
         // Cannot afford
         player.megaCredits = 5;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits = 6;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
@@ -372,14 +374,14 @@ describe("Game", function () {
         player.heat = 2;
         player.megaCredits = 3;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits += 1;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
@@ -390,13 +392,13 @@ describe("Game", function () {
         const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true}) as GameOptions;
         const game = new Game("foobar", [player, player2], player, gameOptions);
 
-        let prevMilestones = game.milestones.map(m => m.name).sort();
-        let prevAwards = game.awards.map(a => a.name).sort();
+        const prevMilestones = game.milestones.map(m => m.name).sort();
+        const prevAwards = game.awards.map(a => a.name).sort();
 
         const game2 = new Game("foobar2", [player, player2], player, gameOptions);
 
-        let milestones = game2.milestones.map(m => m.name).sort();
-        let awards = game2.awards.map(a => a.name).sort();
+        const milestones = game2.milestones.map(m => m.name).sort();
+        const awards = game2.awards.map(a => a.name).sort();
 
         expect(prevMilestones).to.not.eq(milestones)
         expect(prevAwards).to.not.eq(awards)

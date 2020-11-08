@@ -6,13 +6,13 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
 import { SpaceType } from "../SpaceType";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class GanymedeColony implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.GANYMEDE_COLONY;
+    public cost = 20;
+    public tags = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.GANYMEDE_COLONY;
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN, false, false);
     }

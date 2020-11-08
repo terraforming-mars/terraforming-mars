@@ -20,18 +20,17 @@ describe("PoliticalUprising", function () {
 
     it("Should play", function () {
         card.play(player, game);
-        expect(game.interrupts.length).to.eq(4);
+        expect(game.deferredActions).has.lengthOf(4);
 
-        while (game.interrupts.length) {
-            game.interrupts[0].generatePlayerInput?.();
-            const orOptions = game.interrupts[0].playerInput as OrOptions;
+        while (game.deferredActions.length) {
+            const orOptions = game.deferredActions.next()!.execute() as OrOptions;
             orOptions.options[0].cb();
-            game.interrupts.shift();
+            game.deferredActions.shift();
         }
 
         const turmoil = game.turmoil!;
         const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-        expect(marsFirst.delegates.filter((d) => d === player.id).length).to.eq(4);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(4);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });

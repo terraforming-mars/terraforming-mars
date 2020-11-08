@@ -14,13 +14,13 @@ describe("MartianRails", function () {
     });
 
     it("Can't act without energy", function () {
-        expect(card.play(player, game)).to.eq(undefined);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.play(player, game)).is.undefined;
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.energy = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         
         card.action(player, game);

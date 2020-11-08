@@ -1,16 +1,17 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
+import { CardMetadata } from "../cards/CardMetadata";
+import { CardRequirements } from "../cards/CardRequirements";
 
 export class InterstellarColonyShip implements IProjectCard {
-    public cost: number = 24;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
-    public name: CardName = CardName.INTERSTELLAR_COLONY_SHIP;
+    public cost = 24;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public cardType = CardType.EVENT;
+    public name = CardName.INTERSTELLAR_COLONY_SHIP;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 5;
     }
@@ -23,4 +24,11 @@ export class InterstellarColonyShip implements IProjectCard {
     public getVictoryPoints() {
         return 4;
     }
+
+    public metadata: CardMetadata = {
+        description: "Requires that you have 5 Science tags.",
+        cardNumber: "027",
+        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
+        victoryPoints: 4,
+    };
 }

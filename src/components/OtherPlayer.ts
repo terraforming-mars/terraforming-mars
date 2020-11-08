@@ -2,11 +2,20 @@ import Vue from "vue";
 
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
+import { PlayerModel } from "../models/PlayerModel";
 import { hidePlayerData } from "./overview/PlayerStatus";
+import { mainAppSettings } from "./App";
 import { Card } from "./card/Card";
 
 export const OtherPlayer = Vue.component("other-player", {
-    props: ["player", "playerIndex"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel,
+        },
+        playerIndex: {
+            type: Number
+        }
+    },
     components: {
         "stacked-cards": StackedCards,
         Card
@@ -14,16 +23,15 @@ export const OtherPlayer = Vue.component("other-player", {
     mixins: [PlayerMixin],
     methods: {
         hideMe: function () {
-            hidePlayerData(this.$root, this.playerIndex);
+            hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, this.playerIndex);
         },
         isVisible: function () {
-            return (this.$root as any).getVisibilityState(
+            return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
                 "pinned_player_" + this.playerIndex
             );
         }
     },
-    template: `
-        <div> 
+    template: `<div>
             <div v-show="isVisible()" class="other_player_cont menu">
                 <Button size="big" type="close" :onClick="hideMe" :disableOnServerBusy="false" align="right" />
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
@@ -40,7 +48,6 @@ export const OtherPlayer = Vue.component("other-player", {
                         <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" :player="player"></stacked-cards>
                     </div>
                 </div>
-
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
                     <span> Self-Replicating Robots cards </span>
                     <div>
@@ -48,9 +55,7 @@ export const OtherPlayer = Vue.component("other-player", {
                             <Card :card="card" />
                         </div>
                     </div>
-                </div>                
-
+                </div>
             </div>
-        </div>
-    `,
+        </div>`
 });

@@ -1,5 +1,4 @@
 
-import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
@@ -10,10 +9,10 @@ import { CardName } from "../CardName";
 import { LogHelper } from "../components/LogHelper";
 
 export class LandClaim implements IProjectCard {
-    public cost: number = 1;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.LAND_CLAIM;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 1;
+    public tags = [];
+    public name = CardName.LAND_CLAIM;
+    public cardType = CardType.EVENT;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getAvailableSpacesOnLand(player).length > 0;
@@ -24,7 +23,7 @@ export class LandClaim implements IProjectCard {
             game.board.getAvailableSpacesOnLand(player), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
-                LogHelper.logBoardPlacement(game, player, foundSpace, "land claim");
+                LogHelper.logBoardTileAction(game, player, foundSpace, "land claim");
                 return undefined;
             }
         );

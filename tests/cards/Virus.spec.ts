@@ -26,29 +26,22 @@ describe("Virus", function () {
         player.plants = 5;
 
         const orOptions = card.play(player2, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(birds)).to.eq(0);
 
         orOptions.options[1].cb();
-        expect(game.interrupts.length).to.eq(1);
-        
-        game.interrupts[0].generatePlayerInput?.();
-        const action = game.interrupts[0].playerInput as OrOptions;
-        action.options[0].cb();
         expect(player.plants).to.eq(0);
     });
 
     it("Can play when no other player has resources", function () {
         player.plants = 5;
-        expect(card.play(player, game)).to.eq(undefined)
-        game.interrupts[0].generatePlayerInput?.();
-        expect(game.interrupts[0].playerInput).to.eq(undefined);
+        expect(card.play(player, game)).is.undefined
         expect(player.plants).to.eq(5);
     });
 
     it("Should play", function () {
-        expect(card.canPlay()).to.eq(true);
+        expect(card.canPlay()).is.true;
     });
 });

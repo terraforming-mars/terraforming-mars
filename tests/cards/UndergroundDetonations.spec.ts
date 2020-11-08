@@ -3,7 +3,7 @@ import { UndergroundDetonations } from "../../src/cards/UndergroundDetonations";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("UndergroundDetonations", function () {
     let card : UndergroundDetonations, player : Player, game : Game;
@@ -16,15 +16,15 @@ describe("UndergroundDetonations", function () {
 
     it("Can't act", function () {
         player.megaCredits = 9;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.megaCredits = 10;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         
         card.action(player, game);
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });

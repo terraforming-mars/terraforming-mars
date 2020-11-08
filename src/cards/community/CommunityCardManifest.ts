@@ -13,7 +13,6 @@ import { TradeAdvance } from "./TradeAdvance";
 import { PoliticalUprising } from "./PoliticalUprising";
 import { ByElection } from "./ByElection";
 import { Midas } from "./Midas";
-import { Expansion } from "../../Expansion";
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     module: GameModule.Community,
@@ -30,32 +29,32 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
         {
             cardName: CardName.VALUABLE_GASES,
             factory: ValuableGases,
-            compatibility: Expansion.Venus,
+            compatibility: GameModule.Venus,
         },
         {
             cardName: CardName.VENUS_FIRST,
             factory: VenusFirst,
-            compatibility: Expansion.Venus,
+            compatibility: GameModule.Venus,
         },
         {
             cardName: CardName.AEROSPACE_MISSION,
             factory: AerospaceMission,
-            compatibility: Expansion.Colonies,
+            compatibility: GameModule.Colonies,
         },
         {
             cardName: CardName.TRADE_ADVANCE,
             factory: TradeAdvance,
-            compatibility: Expansion.Colonies,
+            compatibility: GameModule.Colonies,
         },
         {
             cardName: CardName.POLITICAL_UPRISING,
             factory: PoliticalUprising,
-            compatibility: Expansion.Turmoil,
+            compatibility: GameModule.Turmoil,
         },
         {
             cardName: CardName.BY_ELECTION,
             factory: ByElection,
-            compatibility: Expansion.Turmoil,
+            compatibility: GameModule.Turmoil,
         },
     ],
 });

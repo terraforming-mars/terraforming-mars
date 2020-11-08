@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { SeptumTribus } from "../../../src/cards/turmoil/SeptumTribus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 
@@ -20,7 +20,7 @@ describe("SeptumTribus", function () {
         player.megaCredits = 0;
 
         let turmoil = game.turmoil;
-        expect(game.turmoil).not.to.eq(undefined);
+        expect(game.turmoil).is.not.undefined;
 
         if (turmoil) {
             turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
@@ -45,6 +45,6 @@ describe("SeptumTribus", function () {
         card.play();
         
         player.corporationCard = card;
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 });

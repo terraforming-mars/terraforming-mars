@@ -16,7 +16,7 @@ describe("ExtractorBalloons", function () {
 
     it("Should play", function () {
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
@@ -24,7 +24,7 @@ describe("ExtractorBalloons", function () {
         expect(card.resourceCount).to.eq(3);
 
         const orOptions = card.action(player,game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions!.options[0].cb();
         expect(card.resourceCount).to.eq(1);

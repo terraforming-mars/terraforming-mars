@@ -1,21 +1,21 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, IResourceCard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Resources } from '../../Resources';
-import { Game } from '../../Game';
-import { LogHelper } from '../../components/LogHelper';
+import { IProjectCard } from "../IProjectCard";
+import { IActionCard, IResourceCard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { ResourceType } from "../../ResourceType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Resources } from "../../Resources";
+import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {
-    public name: CardName = CardName.ASTEROID_HOLLOWING;
-    public cost: number = 16;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public resourceType: ResourceType = ResourceType.ASTEROID;
+    public name = CardName.ASTEROID_HOLLOWING;
+    public cost = 16;
+    public tags = [Tags.SPACE];
+    public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
-    public cardType: CardType = CardType.ACTIVE;
+    public cardType = CardType.ACTIVE;
 
     public play() {
         return undefined;

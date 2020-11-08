@@ -1,21 +1,20 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { CardName } from "../../CardName";
 import { Game } from "../../Game";
-import { SelectParty } from "../../interrupts/SelectParty";
 import { TURMOIL_CARD_MANIFEST } from "../turmoil/TurmoilCardManifest";
+import { SendDelegateToArea } from "../../deferredActions/SendDelegateToArea";
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.POLITICAL_UPRISING;
+    public tags = [];
+    public name = CardName.POLITICAL_UPRISING;
 
     public play(player: Player, game: Game) {
         this.drawTurmoilCard(player, game);
 
         for (let i = 0; i < 4; i++) {
-            game.addInterrupt(new SelectParty(player, game, "Select where to send delegate", 1, undefined, undefined, false));
+            game.defer(new SendDelegateToArea(player, game, "Select where to send delegate", 1, undefined, undefined, false));
         }
 
         return undefined;

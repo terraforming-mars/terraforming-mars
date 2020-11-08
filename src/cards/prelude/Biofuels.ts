@@ -2,12 +2,12 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 
 export class Biofuels extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public name: CardName = CardName.BIOFUELS;
+    public tags = [Tags.MICROBES];
+    public name = CardName.BIOFUELS;
     public play(player: Player) {     
         player.addProduction(Resources.ENERGY);
         player.addProduction(Resources.PLANTS);

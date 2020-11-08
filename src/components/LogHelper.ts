@@ -5,7 +5,6 @@ import { Resources } from "../Resources";
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
 import { IColony } from "../colonies/Colony";
-import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
 export class LogHelper {
     static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {
@@ -63,10 +62,10 @@ export class LogHelper {
                 break;
         }
 
-        this.logBoardPlacement(game, player, space, type);
+        this.logBoardTileAction(game, player, space, type);
     }
 
-    static logBoardPlacement(game: Game, player: Player, space: ISpace, description: string) {
+    static logBoardTileAction(game: Game, player: Player, space: ISpace, description: string, action: string = "placed") {
         // Skip off-grid tiles
         if (space.x === -1 && space.y === -1) return
         // Skip solo play random tiles
@@ -76,15 +75,13 @@ export class LogHelper {
         const row: number = space.y + 1;
         const position: number = space.x - offset + 1;
 
-        game.log("${0} placed ${1} on row ${2} position ${3}", b =>
-            b.player(player).string(description).number(row).number(position));
+        game.log("${0} ${1} ${2} on row ${3} position ${4}", b =>
+            b.player(player).string(action).string(description).number(row).number(position));
     }
 
-    static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {
-        const stepsIncreased = Math.min(player.colonyTradeOffset, MAX_COLONY_TRACK_POSITION - colony.trackPosition);
-        
+    static logColonyTrackIncrease(game: Game, player: Player, colony: IColony, steps: number = 1) {
         game.log("${0} increased ${1} colony track ${2} step(s)", b =>
-            b.player(player).colony(colony).number(stepsIncreased));
+            b.player(player).colony(colony).number(steps));
     }
 
     static logTRIncrease(game: Game, player: Player, steps: number) {

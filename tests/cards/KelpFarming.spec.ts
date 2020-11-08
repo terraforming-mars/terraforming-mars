@@ -3,7 +3,7 @@ import { KelpFarming } from "../../src/cards/KelpFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { maxOutOceans } from "../TestingUtils";
 
 describe("KelpFarming", function () {
@@ -16,12 +16,12 @@ describe("KelpFarming", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         maxOutOceans(player, game, 6);
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         const plantsCount = player.plants;
         card.play(player);

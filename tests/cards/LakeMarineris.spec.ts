@@ -15,20 +15,18 @@ describe("LakeMarineris", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = -0;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         card.play(player, game);
 
-        expect(game.interrupts.length).to.eq(2);
-        game.interrupts[0].generatePlayerInput?.();
-        const firstOcean = game.interrupts[0].playerInput as SelectSpace;
+        expect(game.deferredActions).has.lengthOf(2);
+        const firstOcean = game.deferredActions.shift()!.execute() as SelectSpace;
         firstOcean.cb(firstOcean.availableSpaces[0]);
-        game.interrupts[1].generatePlayerInput?.();
-        const secondOcean = game.interrupts[1].playerInput as SelectSpace;
+        const secondOcean = game.deferredActions.shift()!.execute() as SelectSpace;
         secondOcean.cb(secondOcean.availableSpaces[1]);
         expect(player.getTerraformRating()).to.eq(22);
         

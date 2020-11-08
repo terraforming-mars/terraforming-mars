@@ -4,7 +4,20 @@ import { PlayerInputModel } from "../models/PlayerInputModel";
 import { $t } from "../directives/i18n";
 
 export const SelectSpace = Vue.component("select-space", {
-    props: ["playerinput", "onsave", "showsave", "showtitle"],
+    props: {
+        playerinput: {
+            type: Object as () => PlayerInputModel
+        },
+        onsave: {
+            type: Object as () => (out: Array<Array<string>>) => void
+        },
+        showsave: {
+            type: Boolean
+        },
+        showtitle: {
+            type: Boolean
+        }
+    },
     data: function () {
         return {
             spaceId: undefined,

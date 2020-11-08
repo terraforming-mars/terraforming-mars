@@ -13,11 +13,11 @@ import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class TitanAirScrapping implements IProjectCard, IResourceCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.TITAN_AIRSCRAPPING;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 21;
+    public tags = [Tags.JOVIAN];
+    public name = CardName.TITAN_AIRSCRAPPING;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canAct(player: Player, game: Game): boolean {

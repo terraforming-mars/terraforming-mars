@@ -7,11 +7,12 @@ import { LogHelper } from "../../components/LogHelper";
 import { CardType } from "../CardType";
 
 export class Inventrix implements CorporationCard {
-    public name: CardName = CardName.INVENTRIX;
-    public tags: Array<Tags> = [Tags.SCIENCE];
+    public name = CardName.INVENTRIX;
+    public tags = [Tags.SCIENCE];
     public startingMegaCredits: number = 45;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
+    public initialActionText: string = "Draw 3 cards";
     public initialAction(player: Player, game: Game) {
         player.cardsInHand.push(
             game.dealer.dealCard(),

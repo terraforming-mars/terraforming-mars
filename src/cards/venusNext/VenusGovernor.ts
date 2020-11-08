@@ -3,13 +3,13 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class VenusGovernor implements IProjectCard {
-    public cost: number = 4;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.VENUS];
-    public name: CardName = CardName.VENUS_GOVERNOR;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 4;
+    public tags = [Tags.VENUS, Tags.VENUS];
+    public name = CardName.VENUS_GOVERNOR;
+    public cardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.VENUS) >= 2 ;
       }

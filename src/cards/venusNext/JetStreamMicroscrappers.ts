@@ -13,11 +13,11 @@ import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.JET_STREAM_MICROSCRAPPERS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 12;
+    public tags = [Tags.VENUS];
+    public name = CardName.JET_STREAM_MICROSCRAPPERS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public play() {

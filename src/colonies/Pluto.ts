@@ -1,9 +1,10 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { SelectDiscard } from '../interrupts/SelectDiscard';
-import { LogHelper } from '../components/LogHelper';
+import { Colony, IColony } from "./Colony";
+import { Player } from "../Player";
+import { PlayerInput } from "../PlayerInput";
+import { ColonyName } from "./ColonyName";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
+import { DiscardCards } from "../deferredActions/DiscardCards";
 
 export class Pluto extends Colony implements IColony {
     public name = ColonyName.PLUTO;
@@ -32,7 +33,8 @@ export class Pluto extends Colony implements IColony {
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }
-    public giveTradeBonus(player: Player, game: Game): void {
-        game.addInterrupt(new SelectDiscard(player, game, 'Pluto colony bonus. Select a card to discard', true));
-    }    
+    public giveTradeBonus(player: Player, game: Game): undefined | PlayerInput {
+        player.cardsInHand.push(game.dealer.dealCard());
+        return (new DiscardCards(player, game, 1, 'Pluto colony bonus. Select a card to discard')).execute();
+    }
 }

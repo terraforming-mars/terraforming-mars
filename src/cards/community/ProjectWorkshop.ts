@@ -12,10 +12,10 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
 export class ProjectWorkshop implements CorporationCard {
-    public name: CardName =  CardName.PROJECT_WORKSHOP;
-    public tags: Array<Tags> = [Tags.EARTH];
+    public name =  CardName.PROJECT_WORKSHOP;
+    public tags = [Tags.EARTH];
     public startingMegaCredits: number = 39;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.steel = 1;
@@ -23,6 +23,7 @@ export class ProjectWorkshop implements CorporationCard {
         return undefined;
     }
 
+    public initialActionText: string = "Draw a blue card";
     public initialAction(player: Player, game: Game) {
         const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
         player.cardsInHand.push(drawnCard);
@@ -96,6 +97,7 @@ export class ProjectWorkshop implements CorporationCard {
         const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
         player.playedCards.splice(cardIndex, 1);
         game.dealer.discard(card as IProjectCard);
+        game.log("${0} flipped and discarded ${1}", b => b.player(player).card(card));
     }
 
     private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {

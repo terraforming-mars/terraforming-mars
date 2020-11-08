@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { GeneRepair } from "../../src/cards/GeneRepair";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("LightningHarvest", function () {
     let card : LightningHarvest, player : Player, game : Game;
@@ -16,12 +16,12 @@ describe("LightningHarvest", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);

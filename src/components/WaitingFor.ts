@@ -1,6 +1,7 @@
 import Vue from "vue";
 
 import { AndOptions } from "./AndOptions";
+import { mainAppSettings } from "./App";
 import { OrOptions } from "./OrOptions";
 import { PlayerInputFactory } from "./PlayerInputFactory";
 import { SelectAmount } from "./SelectAmount";
@@ -12,17 +13,36 @@ import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 import { $t } from "../directives/i18n";
 import { SelectPartyPlayer } from "./SelectPartyPlayer";
+import { PlayerInputModel } from "../models/PlayerInputModel";
+import { PlayerModel } from "../models/PlayerModel";
 import { PreferencesManager } from "./PreferencesManager";
 import { playActivePlayerSound } from "../SoundManager";
 import { SelectColony } from "./SelectColony";
+import { SelectProductionToLose } from "./SelectProductionToLose";
+import { ShiftAresGlobalParameters } from "./ShiftAresGlobalParameters";
 
-var ui_update_timeout_id: number | undefined = undefined;
+import * as raw_settings from "../../assets/settings.json";
+
+let ui_update_timeout_id: number | undefined = undefined;
 
 export const WaitingFor = Vue.component("waiting-for", {
-    props: ["player", "players", "settings", "waitingfor"],
+    props: {
+        player: {
+            type: Object as () => PlayerModel
+        },
+        players: {
+            type: Array as () => Array<PlayerModel>
+        },
+        settings: {
+            type: Object as () => typeof raw_settings
+        },
+        waitingfor: {
+            type: Object as () => PlayerInputModel | undefined
+        }
+    },
     data: function () {
         return {
-            waitingForTimeout: this.settings.waitingForTimeout
+            waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout
         }
     },
     components: {
@@ -36,11 +56,14 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-player": SelectPlayer,
         "select-space": SelectSpace,
         "select-party-player": SelectPartyPlayer,
-        "select-colony": SelectColony
+        "select-colony": SelectColony,
+        "select-production-to-lose": SelectProductionToLose,
+        "shift-ares-global-parameters": ShiftAresGlobalParameters,
     },
     methods: {
         waitForUpdate: function () {
             const vueApp = this;
+            const root = this.$root as unknown as typeof mainAppSettings.methods;
             clearTimeout(ui_update_timeout_id);
             const askForUpdate = () => {
                 const xhr = new XMLHttpRequest();
@@ -52,7 +75,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                     if (xhr.status === 200) {
                         const result = xhr.response;
                         if (result["result"] === "GO") {
-                            (vueApp as any).$root.updatePlayer();
+                            root.updatePlayer();
 
                             if (Notification.permission !== "granted") {
                                 Notification.requestPermission();
@@ -70,10 +93,10 @@ export const WaitingFor = Vue.component("waiting-for", {
                             return;
                         } else if (result["result"] === "REFRESH") {
                             // Something changed, let's refresh UI
-                            (vueApp as any).$root.updatePlayer();
+                            root.updatePlayer();
                             return;
                         }
-                        (vueApp as any).waitForUpdate();
+                        (vueApp).waitForUpdate();
                     } else {
                         alert("Unexpected server response");
                     }
@@ -81,24 +104,24 @@ export const WaitingFor = Vue.component("waiting-for", {
                 xhr.responseType = "json";
                 xhr.send();
             }
-            ui_update_timeout_id = (setTimeout(askForUpdate, this.waitingForTimeout) as any);
+            ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
         }
     },
     render: function (createElement) {
         if (this.waitingfor === undefined) {
-            (this as any).waitForUpdate();
+            this.waitForUpdate();
             return createElement("div", $t("Not your turn to take any actions"));
         }
         const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
-            const root = (this.$root as any);
+            const root = this.$root as unknown as typeof mainAppSettings.data;
             if (root.isServerSideRequestInProgress) {
                 console.warn("Server request in progress");
                 return;
             }
            
             root.isServerSideRequestInProgress = true;
-            xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
+            xhr.open("POST", "/player/input?id=" + this.player.id);
             xhr.responseType = "json";
             xhr.onload = () => {
                 if (xhr.status === 200) {
@@ -106,8 +129,8 @@ export const WaitingFor = Vue.component("waiting-for", {
                     root.player = xhr.response;
                     root.playerkey++;
                     root.screen = "player-home";
-                    if (root.player.phase === "end" && window.location.pathname !== "/the-end") {
-                        (window as any).location = (window as any).location;
+                    if (this.player.phase === "end" && window.location.pathname !== "/the-end") {
+                        (window).location = (window).location;
                     }
 
                 } else if (xhr.status === 400 && xhr.responseType === "json") {

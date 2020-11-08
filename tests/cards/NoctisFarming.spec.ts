@@ -3,7 +3,7 @@ import { NoctisFarming } from "../../src/cards/NoctisFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NoctisFarming", function () {
     let card : NoctisFarming, player : Player, game : Game;
@@ -15,12 +15,12 @@ describe("NoctisFarming", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = -20;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
 
         card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

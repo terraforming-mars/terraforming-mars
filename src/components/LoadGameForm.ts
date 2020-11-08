@@ -1,6 +1,8 @@
 
 import Vue from "vue";
 import { Button } from "../components/common/Button";
+import { GameHomeModel } from "../models/GameHomeModel";
+import { mainAppSettings } from "./App";
 
 export const LoadGameForm = Vue.component("load-game-form", {
     components: {
@@ -21,13 +23,14 @@ export const LoadGameForm = Vue.component("load-game-form", {
             }
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    if (xhr.response.players.length === 1) {
-                        window.location.href = "/player?id=" + xhr.response.players[0].id;
+                    const response = xhr.response as GameHomeModel;
+                    if (response.players.length === 1) {
+                        window.location.href = "/player?id=" + response.players[0].id;
                         return;
                     } else {
-                        window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
-                        this.$root.$data.game = xhr.response;
-                        this.$root.$data.screen = "game-home";
+                        window.history.replaceState(response, "Teraforming Mars - Game", "/game?id=" + response.id);
+                        (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
+                        (this.$root.$data as unknown as typeof mainAppSettings.data).screen = "game-home";
                     }
                 } else {
                     alert("Unexpected server response");

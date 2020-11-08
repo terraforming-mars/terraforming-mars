@@ -8,9 +8,9 @@ describe("VenusGovernor", function () {
     it("Should play", function () {
         const card = new VenusGovernor();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
         const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });
 });

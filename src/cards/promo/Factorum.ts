@@ -11,10 +11,10 @@ import { CardType } from "../CardType";
 
 
 export class Factorum implements IActionCard, CorporationCard {
-    public name: CardName = CardName.FACTORUM;
-    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
+    public name = CardName.FACTORUM;
+    public tags = [Tags.ENERGY, Tags.STEEL];
     public startingMegaCredits: number = 37;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
 
 
     public play(player: Player) {

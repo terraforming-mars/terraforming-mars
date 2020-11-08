@@ -1,6 +1,6 @@
 import { IMilestone } from "./IMilestone";
 import { Player } from "../Player";
-import { CardType } from '../cards/CardType';
+import { CardType } from "../cards/CardType";
 
 export class Legend implements IMilestone {
     public name: string = "Legend";

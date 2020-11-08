@@ -5,16 +5,17 @@ import { Player } from "../../Player";
 import { CardName } from "../../CardName";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class FloaterPrototypes implements IProjectCard {
-    public cost: number = 2;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.FLOATER_PROTOTYPES;
-    public cardType: CardType = CardType.EVENT;
+    public cost = 2;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.FLOATER_PROTOTYPES;
+    public cardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
-      return undefined;
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        return undefined;
     }
 }
 

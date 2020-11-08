@@ -1,15 +1,15 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
 
 export class WarpDrive implements IProjectCard {
-    public cost: number = 14;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.WARP_DRIVE;
-    public cardType: CardType = CardType.ACTIVE;
+    public cost = 14;
+    public tags = [Tags.SCIENCE];
+    public name = CardName.WARP_DRIVE;
+    public cardType = CardType.ACTIVE;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.SPACE) !== -1) {

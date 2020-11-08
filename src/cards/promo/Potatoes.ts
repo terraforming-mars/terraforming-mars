@@ -6,10 +6,10 @@ import { Resources } from "../../Resources";
 import { CardName } from "../../CardName";
 
 export class Potatoes implements IProjectCard {
-    public cost: number = 2;
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.POTATOES;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 2;
+    public tags = [Tags.PLANT];
+    public name = CardName.POTATOES;
+    public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
     public canPlay(player: Player): boolean {

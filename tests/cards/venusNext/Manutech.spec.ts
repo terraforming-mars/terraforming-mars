@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Manutech } from "../../../src/cards/venusNext/Manutech";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 import { Game } from "../../../src/Game";
 
 describe("Manutech", function () {
@@ -23,8 +23,9 @@ describe("Manutech", function () {
 
     it("Should add energy resources by Power Plant standard project", function () {
         const action = (player as any).buildPowerPlant(game);
-        expect(action).to.not.eq(undefined);
+        expect(action).is.not.undefined;
         action.cb();
+        game.deferredActions.shift()!.execute();
         expect(player.getResource(Resources.ENERGY)).to.eq(1);
     });
 });

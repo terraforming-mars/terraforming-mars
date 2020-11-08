@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { CloudSocieties } from "../../src/turmoil/globalEvents/CloudSocieties";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { FloatingHabs } from "../../src/cards/venusNext/FloatingHabs";
 
 describe("CloudSocieties", function () {
@@ -19,7 +19,7 @@ describe("CloudSocieties", function () {
         turmoil.dominantParty.partyLeader = player.id;
         turmoil.dominantParty.delegates.push(player.id);
         card.resolve(game, turmoil);
-        game.runNextInterrupt(() => {});
+        game.deferredActions.runNext();
         expect(player.playedCards[0].resourceCount).to.eq(3);
     });
 });

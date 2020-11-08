@@ -22,16 +22,16 @@ describe("Splice", function () {
     it("Should play", function () {
         const card2 = new Tardigrades();
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
 
         player.corporationCard = card;
 
         player2.playedCards.push(card2);
         const action = card.onCardPlayed(player2, game, card2);
-        expect(action instanceof OrOptions).to.eq(true);
+        expect(action instanceof OrOptions).is.true;
         if ( ! (action instanceof OrOptions)) return;
 
-        expect(action.options.length).to.eq(2);
+        expect(action.options).has.lengthOf(2);
         const orOptions = action.options[0] as OrOptions;
 
         orOptions.cb();
@@ -45,11 +45,11 @@ describe("Splice", function () {
         player.corporationCard = card;
         const play2 = card2.play(player, game);
         player2.corporationCard = card2;
-        expect(play).to.eq(undefined);
-        expect(play2).to.eq(undefined);
+        expect(play).is.undefined;
+        expect(play2).is.undefined;
 
         const action = card.onCardPlayed(player2, game, card2);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.megaCredits).to.eq(4);
         expect(player2.megaCredits).to.eq(4);
     });
@@ -73,7 +73,7 @@ describe("Splice", function () {
 
         // Player 2 should have the option to pick a microbe or 2 MC
         const pi3 = player2.getWaitingFor() as OrOptions;
-        expect(pi3.options.length).to.eq(2);
+        expect(pi3.options).has.lengthOf(2);
         expect(pi3.options[0].title).to.eq("Add a microbe resource to this card");
         expect(pi3.options[1].title).to.eq("Gain 2 MC");
 

@@ -1,5 +1,4 @@
 import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { CardName } from "../../CardName";
@@ -10,13 +9,14 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { IResourceCard } from "../ICard";
 import { LogHelper } from "../../components/LogHelper";
 import { Resources } from "../../Resources";
+import { AddResourcesToCard } from "../../deferredActions/AddResourcesToCard";
 
 export class AtmoCollectors implements IProjectCard, IResourceCard {
-    public cost: number = 15;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.ATMO_COLLECTORS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public cost = 15;
+    public tags = [];
+    public name = CardName.ATMO_COLLECTORS;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public canAct(): boolean {
@@ -56,8 +56,8 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
-      return undefined;
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+        return undefined;
     }
 }
 

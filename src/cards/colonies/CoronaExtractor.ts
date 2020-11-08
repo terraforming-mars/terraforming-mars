@@ -1,15 +1,15 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 
 export class CoronaExtractor implements IProjectCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.ENERGY];
-    public name: CardName = CardName.CORONA_EXTRACTOR;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cost = 10;
+    public tags = [Tags.SPACE, Tags.ENERGY];
+    public name = CardName.CORONA_EXTRACTOR;
+    public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 4;

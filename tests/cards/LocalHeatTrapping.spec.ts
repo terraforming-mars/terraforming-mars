@@ -3,7 +3,7 @@ import { LocalHeatTrapping } from "../../src/cards/LocalHeatTrapping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Pets } from "../../src/cards/Pets";
-import { OrOptions } from '../../src/inputs/OrOptions';
+import { OrOptions } from "../../src/inputs/OrOptions";
 import { Helion } from "../../src/cards/corporation/Helion";
 import { Game } from "../../src/Game";
 import { Fish } from "../../src/cards/Fish";
@@ -18,12 +18,12 @@ describe("LocalHeatTrapping", function () {
     });
 
     it("Can't play without 5 heat", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play - no animal targets", function () {
         player.heat = 5;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         
         card.play(player, game);
         player.playedCards.push(card);
@@ -37,8 +37,8 @@ describe("LocalHeatTrapping", function () {
         player.playedCards.push(card, pets);
 
         const orOptions = card.play(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions).is.not.undefined;
+        expect(orOptions instanceof OrOptions).is.true;
         
         orOptions.options[0].cb();
         expect(player.plants).to.eq(4);
@@ -67,6 +67,6 @@ describe("LocalHeatTrapping", function () {
 
         player.megaCredits = 0;
         player.heat = 5; // have to pay for card with 1 heat
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 });

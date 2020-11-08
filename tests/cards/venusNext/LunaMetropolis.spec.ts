@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { LunaMetropolis } from "../../../src/cards/venusNext/LunaMetropolis";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 import { setCustomGameOptions } from "../../TestingUtils";
 
@@ -14,7 +14,7 @@ describe("LunaMetropolis", function () {
         const game = new Game("foobar", [player,player], player, gameOptions);
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

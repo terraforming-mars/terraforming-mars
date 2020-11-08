@@ -47,7 +47,7 @@ describe("Tactician", function () {
         player.playedCards.push(new LawSuit());
       }
       
-      expect(milestone.canClaim(player)).to.eq(false);
+      expect(milestone.canClaim(player)).is.not.true;
     });
 
     it("Excludes event cards with requirements", function () {
@@ -59,7 +59,7 @@ describe("Tactician", function () {
       player.playedCards.push(new BannedDelegate());
       player.playedCards.push(new CrashSiteCleanup());
 
-      expect(milestone.canClaim(player)).to.eq(false);
+      expect(milestone.canClaim(player)).is.not.true;
     });
 
     it("Can claim", function () {
@@ -69,6 +69,6 @@ describe("Tactician", function () {
       player.playedCards.push(new PioneerSettlement());
       player.playedCards.push(new GMOContract());
 
-      expect(milestone.canClaim(player)).to.eq(true);
+      expect(milestone.canClaim(player)).is.true;
     });
 });

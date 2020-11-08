@@ -3,7 +3,7 @@ import { RedSpotObservatory } from "../../../src/cards/colonies/RedSpotObservato
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("RedSpotObservatory", function () {
     let card : RedSpotObservatory, player : Player, game : Game;
@@ -15,27 +15,27 @@ describe("RedSpotObservatory", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player)).is.not.true;
     });
 
     it("Should play", function () {
         player.playedCards.push(card, card, card);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player)).is.true;
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should act", function () {
         player.playedCards.push(card);
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
 
         player.addResourceTo(card, 3);
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions instanceof OrOptions).to.eq(true);
+        expect(orOptions instanceof OrOptions).is.true;
         orOptions!.options[0].cb();
 
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
         expect(player.getResourcesOnCard(card)).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(2);
     });

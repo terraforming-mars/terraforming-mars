@@ -8,10 +8,10 @@ import { CardType } from "../CardType";
 
 
 export class EcoLine implements CorporationCard {
-    public name: CardName = CardName.ECOLINE;
-    public tags: Array<Tags> = [Tags.PLANT];
+    public name = CardName.ECOLINE;
+    public tags = [Tags.PLANT];
     public startingMegaCredits: number = 36;
-    public cardType: CardType = CardType.CORPORATION;
+    public cardType = CardType.CORPORATION;
     public play(player: Player) {
         player.addProduction(Resources.PLANTS,2);
         player.plants = 3;

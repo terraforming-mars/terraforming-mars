@@ -21,9 +21,8 @@ describe("MoholeLake", function () {
     it("Can play", function () {
         card.play(player, game);
 
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        let selectSpace = game.interrupts[0].playerInput as SelectSpace;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         
         expect(game.getTemperature()).to.eq(-28);
@@ -34,7 +33,7 @@ describe("MoholeLake", function () {
 
     it("Can't act", function () {
         card.play(player, game);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Can act - single target", function () {
@@ -42,7 +41,7 @@ describe("MoholeLake", function () {
         player.playedCards.push(fish);
 
         card.play(player, game);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         card.action(player, game);
         expect(fish.resourceCount).to.eq(1);
     });
@@ -53,7 +52,7 @@ describe("MoholeLake", function () {
         player.playedCards.push(fish, ants);
 
         card.play(player, game);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
         const action = card.action(player, game) as SelectCard<ICard>;
         
         action.cb([ants]);

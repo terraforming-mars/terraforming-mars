@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { MolecularPrinting } from "../../../src/cards/colonies/MolecularPrinting";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { Luna } from '../../../src/colonies/Luna';
-import { Triton } from '../../../src/colonies/Triton';
+import { Game } from "../../../src/Game";
+import { Luna } from "../../../src/colonies/Luna";
+import { Triton } from "../../../src/colonies/Triton";
 import { Resources } from "../../../src/Resources";
 
 describe("MolecularPrinting", function () {
@@ -24,7 +24,7 @@ describe("MolecularPrinting", function () {
         game.addCityTile(player, '03');
 
         const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

@@ -10,12 +10,12 @@ describe("Celestic", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const play = card.play();
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
 
         player.corporationCard = card;
 
         const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
         expect(card.resourceCount).to.eq(1);
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints()).to.eq(1);

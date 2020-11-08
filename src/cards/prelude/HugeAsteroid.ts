@@ -1,20 +1,19 @@
-import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
+import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
 
 export class HugeAsteroid extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.HUGE_ASTEROID;
-    public canPlay(player: Player, _game: Game, bonusMc?: number) {
-        let requiredPayment = 5 - (bonusMc || 0);
-        return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
+    public tags = [];
+    public name = CardName.HUGE_ASTEROID;
+    public canPlay(player: Player, _game: Game) {
+        return player.canAfford(5);
     }
     public play(player: Player, game: Game) {
-        player.megaCredits -= 5;
-        return game.increaseTemperature(player, 3);
+        game.increaseTemperature(player, 3);
+        game.defer(new SelectHowToPayDeferred(player, 5, false, false));
+        return undefined;
     }
 }
-

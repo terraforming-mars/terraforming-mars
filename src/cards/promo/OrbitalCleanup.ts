@@ -6,10 +6,10 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 
 export class OrbitalCleanup implements IProjectCard {
-    public name: CardName = CardName.ORBITAL_CLEANUP;
-    public cost: number = 14;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public cardType: CardType = CardType.ACTIVE;
+    public name = CardName.ORBITAL_CLEANUP;
+    public cost = 14;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public cardType = CardType.ACTIVE;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -3;

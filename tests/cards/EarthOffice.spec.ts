@@ -15,7 +15,7 @@ describe("EarthOffice", function () {
         game = new Game("foobar", [player, player], player);
         
         const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(action).is.undefined;
     });
 
     it("Should play", function () {

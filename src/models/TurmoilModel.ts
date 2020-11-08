@@ -7,16 +7,16 @@ export interface TurmoilModel {
     dominant: PartyName | undefined;
     ruling: PartyName | undefined;
     chairman: Color | undefined;
-    parties: Array<PartyModel> | undefined;
+    parties: Array<PartyModel>;
     lobby: Array<Color>;
-    reserve: Array<DelegatesModel> | undefined;
+    reserve: Array<DelegatesModel>;
     distant: GlobalEventModel | undefined;
     comming: GlobalEventModel | undefined;
     current: GlobalEventModel | undefined;
 }
 
 export interface PartyModel {
-    name: string;
+    name: PartyName;
     description: string;
     partyLeader: Color | undefined;
     delegates: Array<DelegatesModel>;

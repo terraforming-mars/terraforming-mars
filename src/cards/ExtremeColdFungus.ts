@@ -1,23 +1,23 @@
 
 import {ICard, IActionCard} from "./ICard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {OrOptions} from "../inputs/OrOptions";
-import {SelectOption} from "../inputs/SelectOption";
-import {SelectCard} from "../inputs/SelectCard";
-import {IProjectCard} from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
+import { SelectCard } from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { LogHelper } from "../components/LogHelper";
 import { Resources } from "../Resources";
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.MICROBES];
-    public cardType: CardType = CardType.ACTIVE;
-    public name: CardName = CardName.EXTREME_COLD_FUNGUS;
+    public cost = 13;
+    public tags = [Tags.MICROBES];
+    public cardType = CardType.ACTIVE;
+    public name = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -10 + (
         2 * player.getRequirementsBonus(game)

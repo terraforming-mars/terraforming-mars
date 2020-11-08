@@ -6,8 +6,8 @@ import { AndOptions } from "../../src/inputs/AndOptions";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { Pets } from "../../src/cards/Pets";
-import { ICard } from '../../src/cards/ICard';
-import { Game } from '../../src/Game';
+import { ICard } from "../../src/cards/ICard";
+import { Game } from "../../src/Game";
 
 describe("ImportedNitrogen", function () {
     let card : ImportedNitrogen, player : Player, game : Game;
@@ -28,7 +28,7 @@ describe("ImportedNitrogen", function () {
         const pets = new Pets();
         player.playedCards.push(pets);
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         const andAction = action as SelectCard<ICard>;
         andAction.cb([pets]);
@@ -41,7 +41,7 @@ describe("ImportedNitrogen", function () {
         const tardigrades = new Tardigrades();
         player.playedCards.push(tardigrades);
         const action = card.play(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
+        expect(action instanceof SelectCard).is.true;
 
         const andAction = action as SelectCard<ICard>;
         andAction.cb([tardigrades]);
@@ -55,7 +55,7 @@ describe("ImportedNitrogen", function () {
         const tardigrades = new Tardigrades();
         player.playedCards.push(pets, tardigrades);
         const action = card.play(player, game);
-        expect(action instanceof AndOptions).to.eq(true);
+        expect(action instanceof AndOptions).is.true;
 
         const andAction = action as AndOptions;
         andAction.cb();

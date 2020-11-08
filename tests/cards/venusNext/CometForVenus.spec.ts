@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { CometForVenus } from "../../../src/cards/venusNext/CometForVenus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
+import { Game } from "../../../src/Game";
+import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
 
 describe("CometForVenus", function () {
     it("Should play", function () {
@@ -17,7 +17,7 @@ describe("CometForVenus", function () {
         player2.playedCards.push(card2);
 
         const play = card.play(player, game);
-        expect(play).to.eq(undefined);
+        expect(play).is.undefined;
         expect(game.getVenusScaleLevel()).to.eq(2);
         expect(player2.megaCredits).to.eq(6);
     });

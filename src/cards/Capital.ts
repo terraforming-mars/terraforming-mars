@@ -1,20 +1,24 @@
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {TileType} from '../TileType';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceType} from '../SpaceType';
-import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { IProjectCard } from "./IProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { SpaceType } from "../SpaceType";
+import { ISpace } from "../ISpace";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
+import { Board } from "../Board";
 
 export class Capital implements IProjectCard {
-    public cost: number = 26;
-    public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public cardType: CardType = CardType.AUTOMATED;
-    public name: CardName = CardName.CAPITAL;
+    public cost = 26;
+    public tags = [Tags.CITY, Tags.STEEL];
+    public cardType = CardType.AUTOMATED;
+    public name = CardName.CAPITAL;
+    public adjacencyBonus?: IAdjacencyBonus = undefined;
+
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
         game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
@@ -24,10 +28,7 @@ export class Capital implements IProjectCard {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
         return game.board.getAdjacentSpaces(usedSpace)
-            .filter(
-                (s) => s.tile !== undefined &&
-                s.tile.tileType === TileType.OCEAN
-            ).length;
+            .filter((s) => Board.isOceanSpace(s)).length;
       }
       return 0;
     }
@@ -42,6 +43,7 @@ export class Capital implements IProjectCard {
               tileType: TileType.CAPITAL,
               card: this.name
             });
+            space.adjacency = this.adjacencyBonus;
             return undefined;
           }
       );

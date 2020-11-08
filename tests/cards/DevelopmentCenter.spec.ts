@@ -14,16 +14,16 @@ describe("DevelopmentCenter", function () {
     });
 
     it("Can't act", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
 
     it("Should act", function () {
         player.energy = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player)).is.true;
 
         card.action(player, game);
         expect(player.energy).to.eq(0);
-        expect(player.cardsInHand.length).to.eq(1);
+        expect(player.cardsInHand).has.lengthOf(1);
     });
 });
 

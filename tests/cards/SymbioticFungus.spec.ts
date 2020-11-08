@@ -16,16 +16,16 @@ describe("SymbioticFungus", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
 
     it("Should play", function () {
         (game as any).temperature = -14;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
     });
 
     it("Can act without targets", function () {
-        expect(card.canAct()).to.eq(true);
+        expect(card.canAct()).is.true;
     });
 
     it("Should act - single target", function () {
@@ -37,7 +37,7 @@ describe("SymbioticFungus", function () {
     it("Should act - multiple targets", function () {
         player.playedCards.push(new Ants(), new Decomposers());
         const action = card.action(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action).is.not.undefined;
         
         action!.cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);

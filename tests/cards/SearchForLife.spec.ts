@@ -15,17 +15,17 @@ describe("SearchForLife", function () {
     });
 
     it("Can't act if no MC", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player)).is.not.true;
     });
  
     it("Can't play if oxygen level too high", function () {
         (game as any).oxygenLevel = 7;
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player, game)).is.not.true;
     });
   
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
-        expect(card.canPlay(player, game)).to.eq(true);
+        expect(card.canPlay(player, game)).is.true;
         player.playedCards.push(card);
         card.play();
         
@@ -42,10 +42,10 @@ describe("SearchForLife", function () {
                game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBES) === undefined) {
             player.megaCredits = 1;
             card.action(player, game);
-            game.runNextInterrupt(() => {});
+            game.deferredActions.runNext();
             expect(player.megaCredits).to.eq(0);
         }
         
-        expect(card.resourceCount >= 1).to.eq(true); 
+        expect(card.resourceCount >= 1).is.true; 
     });
 });

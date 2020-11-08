@@ -18,27 +18,26 @@ describe("CometAiming", function () {
     });
 
     it("Should play", function () {
-        expect(card.play()).to.eq(undefined);
+        expect(card.play()).is.undefined;
     });
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
     });
 
     it("Should act - single action choice, single target", function () {
         player.playedCards.push(card);
         player.titanium = 1;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         card.action(player, game);
         expect(player.titanium).to.eq(0);
         expect(card.resourceCount).to.eq(1);
 
         card.action(player, game);
-        expect(game.interrupts.length).to.eq(1);
-        game.interrupts[0].generatePlayerInput?.();
-        let selectSpace = game.interrupts[0].playerInput as SelectSpace;
+        expect(game.deferredActions).has.lengthOf(1);
+        const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
     });
@@ -60,13 +59,13 @@ describe("CometAiming", function () {
         player.playedCards.push(card);
         card.resourceCount = 1;
         maxOutOceans(player, game);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).is.not.true;
 
         player.titanium = 1;
-        expect(card.canAct(player, game)).to.eq(true);
+        expect(card.canAct(player, game)).is.true;
 
         card.action(player, game);
-        expect(game.interrupts.length).to.eq(0);
+        expect(game.deferredActions).has.lengthOf(0);
         expect(player.titanium).to.eq(0);
         expect(card.resourceCount).to.eq(2);
     });

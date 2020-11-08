@@ -11,12 +11,12 @@ import { LogHelper } from "../../components/LogHelper";
 
 
 export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.VENUS];
+    public cost = 11;
+    public tags = [Tags.VENUS];
 
-    public name: CardName = CardName.DIRIGIBLES;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
+    public name = CardName.DIRIGIBLES;
+    public cardType = CardType.ACTIVE;
+    public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
     public play() {

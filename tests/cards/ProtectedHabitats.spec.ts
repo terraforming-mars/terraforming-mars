@@ -10,6 +10,6 @@ describe("ProtectedHabitats", function () {
         const card = new ProtectedHabitats();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.play(player, game)).to.eq(undefined);
+        expect(card.play(player, game)).is.undefined;
     });
 });

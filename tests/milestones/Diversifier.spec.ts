@@ -9,10 +9,10 @@ describe("Diversifier", function () {
     it("Counts wildcard tags as unique tags", function () {
         const milestone = new Diversifier();
         const player = new Player("test", Color.BLUE, false);
-        expect(milestone.canClaim(player)).to.eq(false);
+        expect(milestone.canClaim(player)).is.not.true;
         for (let i = 0; i < 8; i++) {
           player.playedCards.push(new ResearchNetwork());
         }
-        expect(milestone.canClaim(player)).to.eq(true);
+        expect(milestone.canClaim(player)).is.true;
     });
 });

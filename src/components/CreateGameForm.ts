@@ -660,7 +660,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <label for="venusMA-checkbox">
                                     <span v-i18n>Venus Milestone/Award</span>
                                 </label>
-                                <input type="checkbox" v-model="includevenusTR" id="venusTR-checkbox">
+                                <input type="checkbox" v-model="venusTR" id="venusTR-checkbox">
                                 <label for="venusTR-checkbox">
                                     <span v-i18n>Venus at 30% for win</span>
                                 </label>

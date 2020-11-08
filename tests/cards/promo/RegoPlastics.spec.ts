@@ -13,7 +13,7 @@ describe('RegoPlastics', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.steelValue).to.eq(3);
+    expect(player.getSteelValue()).to.eq(3);
   });
 
   it('Should give victory points', function() {

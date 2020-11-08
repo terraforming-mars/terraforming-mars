@@ -47,6 +47,7 @@ export class ProjectWorkshop implements CorporationCard {
             if (activeCards.length === 1) {
               this.convertCardPointsToTR(player, game, activeCards[0]);
               this.discardPlayedCard(player, game, activeCards[0]);
+              this.checkForCardEffectsToRemove(player, activeCards[0]);
               player.cardsInHand.push(game.dealer.dealCard());
               player.cardsInHand.push(game.dealer.dealCard());
 
@@ -60,6 +61,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
+                      this.checkForCardEffectsToRemove(player, foundCards[0]);
                       player.cardsInHand.push(game.dealer.dealCard());
                       player.cardsInHand.push(game.dealer.dealCard());
 
@@ -102,5 +104,34 @@ export class ProjectWorkshop implements CorporationCard {
 
     private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
       game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+    }
+
+    private checkForCardEffectsToRemove(player: Player, card: ICard): void {
+        switch (card.name) {
+            case CardName.ADVANCED_ALLOYS:
+                player.decreaseTitaniumValue();
+                player.decreaseSteelValue();
+                break;
+            case CardName.MERCURIAN_ALLOYS:
+                player.decreaseTitaniumValue();
+                break;
+            case CardName.REGO_PLASTICS:
+                player.decreaseSteelValue();
+                break;
+            case CardName.TRADE_ENVOYS:
+            case CardName.TRADING_COLONY:
+                player.colonyTradeOffset--;
+                break;
+            case CardName.CRYO_SLEEP:
+            case CardName.RIM_FREIGHTERS:
+                player.colonyTradeDiscount--;
+                break;
+            case CardName.SKY_DOCKS:
+                player.decreaseFleetSize();
+                break;
+
+            default:
+                break;
+        }
     }
 }

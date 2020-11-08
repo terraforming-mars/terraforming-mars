@@ -10,7 +10,7 @@ describe('SkyDocks', function() {
     expect(card.canPlay(player)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.fleetSize).to.eq(2);
+    expect(player.getFleetSize()).to.eq(2);
     expect(card.getCardDiscount()).to.eq(1);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);

@@ -11,7 +11,7 @@ export class RegoPlastics implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
-      player.steelValue++;
+      player.increaseSteelValue();
       return undefined;
     }
 

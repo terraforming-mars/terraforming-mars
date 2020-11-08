@@ -94,7 +94,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     // Resource values
     private titaniumValue: number = 3;
-    public steelValue: number = 2;
+    private steelValue: number = 2;
     // Helion
     public canUseHeatAsMegaCredits: boolean = false;
 
@@ -120,7 +120,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     public cardDiscount: number = 0;
 
     // Colonies
-    public fleetSize: number = 1;
+    private fleetSize: number = 1;
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
@@ -163,8 +163,24 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       return this.titaniumValue;
     }
 
-    public increaseTitaniumValue() {
+    public increaseTitaniumValue(): void {
       this.titaniumValue++;
+    }
+
+    public decreaseTitaniumValue(): void {
+        this.titaniumValue--;
+      }
+
+    public getSteelValue(): number {
+        return this.steelValue;
+    }
+  
+    public increaseSteelValue(): void {
+        this.steelValue++;
+    }
+
+    public decreaseSteelValue(): void {
+        this.steelValue--;
     }
 
     public getTerraformRating(): number {
@@ -2383,8 +2399,16 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       return o;
     }
 
-    public increaseFleetSize() {
-      if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+    public getFleetSize(): number {
+        return this.fleetSize;
+    }
+
+    public increaseFleetSize(): void {
+        if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+    }
+
+    public decreaseFleetSize(): void {
+        if (this.fleetSize > 0) this.fleetSize--;
     }
 
     public canPlayColonyPlacementCard(game: Game): boolean {

@@ -9,10 +9,10 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { BoardName } from "../BoardName";
 import { CardName } from "../CardName";
-import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
+import { RedsPolicy, HowToAffordRedsPolicy, ActionDetails } from "../turmoil/RedsPolicy";
 
 export class LavaFlows implements IProjectCard {
     public cost = 18;
@@ -21,43 +21,41 @@ export class LavaFlows implements IProjectCard {
     public hasRequirements = false;
     public cardType = CardType.EVENT;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
+    private howToAffordReds?: HowToAffordRedsPolicy;
 
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
         if (game.gameOptions.boardName === BoardName.ORIGINAL) {
-        return game.board.getSpaces(SpaceType.LAND, player)
-                .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-                .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
-                                   space.id === SpaceName.ASCRAEUS_MONS ||
-                                   space.id === SpaceName.ARSIA_MONS ||
-                                   space.id === SpaceName.PAVONIS_MONS);
+            const volcanicSpaces = [ SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS ];
+            return game.board.getAvailableSpacesOnLand(player).filter((space) => volcanicSpaces.includes(space.id as SpaceName));
         } else if (game.gameOptions.boardName === BoardName.ELYSIUM) {
-            return game.board.getSpaces(SpaceType.LAND, player)
-            .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-            .filter((space) => space.id === SpaceName.HECATES_THOLUS ||
-                               space.id === SpaceName.ELYSIUM_MONS ||
-                               space.id === SpaceName.ARSIA_MONS_ELYSIUM ||
-                               space.id === SpaceName.OLYMPUS_MONS);        
+            const volcanicSpaces = [ SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS ];
+            return game.board.getAvailableSpacesOnLand(player).filter((space) => volcanicSpaces.includes(space.id as SpaceName));
         } else {
-            return game.board.getSpaces(SpaceType.LAND, player)
-            .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+            return game.board.getAvailableSpacesOnLand(player);
         }    
     }
+
     public canPlay(player: Player, game: Game): boolean {
-        const canPlaceTile = LavaFlows.getVolcanicSpaces(player, game).length > 0;
-        const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
-        const stepsRaised = Math.min(remainingTemperatureSteps, 2);
-
+        const volcanicSpaces = LavaFlows.getVolcanicSpaces(player, game);
+        const canPlaceTile = volcanicSpaces.length > 0;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+            const actionDetails = new ActionDetails({ card: this, temperatureIncrease: 2, nonOceanToPlace: TileType.LAVA_FLOWS, nonOceanAvailableSpaces: volcanicSpaces })
+            this.howToAffordReds = RedsPolicy.canAffordRedsPolicy(player, game, actionDetails);
+            return canPlaceTile && this.howToAffordReds.canAfford;
+        } else {
+            return canPlaceTile;
         }
-
-      return canPlaceTile;
     }
+
     public play(player: Player, game: Game) {
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            player.howToAffordReds = this.howToAffordReds;
+        }
+        game.increaseTemperature(player, 2);
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, { tileType: TileType.LAVA_FLOWS });
             space.adjacency = this.adjacencyBonus;
-            return game.increaseTemperature(player, 2);
+            return undefined;
         });
     }
 }

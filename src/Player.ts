@@ -59,6 +59,7 @@ import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
 import { IProductionUnits } from "./inputs/IProductionUnits";
 import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
 import { ShiftAresGlobalParameters, IAresGlobalParametersResponse } from "./inputs/ShiftAresGlobalParameters";
+import { HowToAffordRedsPolicy } from "./turmoil/RedsPolicy";
 
 export type PlayerId = string;
 
@@ -92,7 +93,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private heatProduction: number = 0;
 
     // Resource values
-    private titaniumValue: number = 3;
+    public titaniumValue: number = 3;
     public steelValue: number = 2;
     // Helion
     public canUseHeatAsMegaCredits: boolean = false;
@@ -127,6 +128,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     
     // Turmoil
     private turmoilScientistsActionUsed: boolean = false;
+    public howToAffordReds?: HowToAffordRedsPolicy;
 
     // Controlled by cards with effects that might be called a second time recursively, I think.
     // They set this to false in order to prevent card effects from triggering twice.
@@ -819,6 +821,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
         if (foundSpace === undefined) {
           throw new Error("Space not available");
+        }
+        // If there's more spaces down that branch, set them up as the next ones
+        if (this.howToAffordReds !== undefined && this.howToAffordReds.spaces !== undefined) {
+          this.howToAffordReds.spaces = this.howToAffordReds.spaces.get(foundSpace);
         }
         this.runInputCb(game, pi.cb(foundSpace));
       } else if (pi instanceof SelectPlayer) {
@@ -2086,6 +2092,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         game.deferredActions.runAllForPlayer(this.id, () => { this.takeAction(game) });
         return;
       }
+
+      this.howToAffordReds = undefined;
  
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
@@ -2328,8 +2336,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public setWaitingFor(input: PlayerInput, cb: () => void): void {
-      this.waitingFor = input;
-      this.waitingForCb = cb;
+        // If availables spaces are restricted to be able to afford Reds policy
+        if (input instanceof SelectSpace && this.howToAffordReds !== undefined && this.howToAffordReds.spaces !== undefined) {
+            const availableSpaces = Array.from(this.howToAffordReds.spaces.keys());
+            // Check that it's a subset of defaults spaces
+            if (availableSpaces.every(space => input.availableSpaces.includes(space))) {
+                input.title += " (Adjusted for Reds policy)";
+                input.availableSpaces = availableSpaces;
+            } else {
+                // This is not supposed to happen let's simply reset it to prevent game breaking errors
+                this.howToAffordReds = undefined;
+            }
+        }
+        this.waitingFor = input;
+        this.waitingForCb = cb;
     }
 
     private getCorporationCardByName(name: string) {

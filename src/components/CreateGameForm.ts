@@ -49,6 +49,7 @@ export interface CreateGameModel {
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
     cloneGameData: Array<IGameData>;
+    venusTR: boolean;
     seededGame: boolean;
 }
 
@@ -114,7 +115,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             soloTR: false,
             clonedGameData: undefined,
             cloneGameData: [],
-            allOfficialExpansions: false
+            allOfficialExpansions: false,
+            venusTR: false
         } as CreateGameModel
     },
     components: {
@@ -337,6 +339,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const soloTR = component.soloTR;
             const beginnerOption = component.beginnerOption;
             const randomFirstPlayer = component.randomFirstPlayer;
+            const venusTR = component.venusTR;
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
@@ -395,7 +398,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 randomMA,
                 shuffleMapOption,
                 beginnerOption,
-                randomFirstPlayer
+                randomFirstPlayer,
+                venusTR
             }, undefined, 4);
 
             return dataToSend;
@@ -655,6 +659,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
                                 <label for="venusMA-checkbox">
                                     <span v-i18n>Venus Milestone/Award</span>
+                                </label>
+                                <input type="checkbox" v-model="includevenusTR" id="venusTR-checkbox">
+                                <label for="venusTR-checkbox">
+                                    <span v-i18n>Venus at 30% for win</span>
                                 </label>
                             </template>
 

@@ -98,6 +98,7 @@ export interface GameOptions {
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  venusTR: boolean; // Venus must be completed for win
 }
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -190,6 +191,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           customCorporationsList: [],
           cardsBlackList: [],
           customColoniesList: [],
+          venusTR: false,
         } as GameOptions
       }
       this.gameOptions = gameOptions;
@@ -573,6 +575,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
                 this.temperature >= constants.MAX_TEMPERATURE &&
                 this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
                 this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+      }
+      if (this.gameOptions.venusTR) {
+        return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
+               this.temperature >= constants.MAX_TEMPERATURE &&
+               this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
+               this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
       }
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&

@@ -61,3 +61,11 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
 
     return Object.assign(defaultOptions, options) as GameOptions;
 }
+
+export const getSpaceById = function(game: Game, id: string): ISpace {
+    const space = game.board.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+        throw new Error("Could not find space " + id);
+    }
+    return space;
+}

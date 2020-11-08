@@ -11,7 +11,7 @@ import { BoardName } from "./src/BoardName";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
-import { Game, GameOptions } from "./src/Game";
+import { Game } from "./src/Game";
 import { GameLoader } from "./src/database/GameLoader";
 import { GameLogs } from "./src/routes/GameLogs";
 import { GameHomeModel } from "./src/models/GameHomeModel";
@@ -455,7 +455,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 customCorporationsList: gameReq.customCorporationsList,
                 cardsBlackList: gameReq.cardsBlackList,
                 customColoniesList: gameReq.customColoniesList,
-            } as GameOptions;
+            };
 
             const game = new Game(gameId, players, firstPlayer, gameOptions);
             gameLoader.addGame(game);

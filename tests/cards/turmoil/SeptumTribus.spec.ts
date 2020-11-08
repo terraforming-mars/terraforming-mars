@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { SeptumTribus } from "../../../src/cards/turmoil/SeptumTribus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 
@@ -12,7 +12,7 @@ describe("SeptumTribus", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test", Color.RED, false);
 
-        const gameOptions = setCustomGameOptions() as GameOptions;
+        const gameOptions = setCustomGameOptions();
         const game = new Game("foobar", [player,player2], player, gameOptions);
         card.play();
 
@@ -40,7 +40,7 @@ describe("SeptumTribus", function () {
         const card = new SeptumTribus();        
         const player = new Player("test", Color.BLUE, false);
 
-        const gameOptions = setCustomGameOptions({turmoilExtension: false}) as GameOptions;
+        const gameOptions = setCustomGameOptions({turmoilExtension: false});
         const game = new Game("foobar", [player], player, gameOptions);
         card.play();
         

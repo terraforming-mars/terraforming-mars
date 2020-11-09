@@ -37,14 +37,18 @@ export class LavaFlows implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         const volcanicSpaces = LavaFlows.getVolcanicSpaces(player, game);
-        const canPlaceTile = volcanicSpaces.length > 0;
+
+        if (volcanicSpaces.length === 0) {
+            return false;
+        }
+
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
             const actionDetails = new ActionDetails({ card: this, temperatureIncrease: 2, nonOceanToPlace: TileType.LAVA_FLOWS, nonOceanAvailableSpaces: volcanicSpaces })
             this.howToAffordReds = RedsPolicy.canAffordRedsPolicy(player, game, actionDetails);
-            return canPlaceTile && this.howToAffordReds.canAfford;
-        } else {
-            return canPlaceTile;
+            return this.howToAffordReds.canAfford;
         }
+
+        return true;
     }
 
     public play(player: Player, game: Game) {

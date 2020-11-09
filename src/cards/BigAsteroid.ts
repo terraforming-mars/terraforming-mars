@@ -4,10 +4,10 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from "../CardName";
-import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { RemoveAnyPlants } from "../deferredActions/RemoveAnyPlants";
+import { RedsPolicy, HowToAffordRedsPolicy, ActionDetails } from "../turmoil/RedsPolicy";
 
 export class BigAsteroid implements IProjectCard {
     public cost = 27;
@@ -15,19 +15,20 @@ export class BigAsteroid implements IProjectCard {
     public cardType = CardType.EVENT;
     public name = CardName.BIG_ASTEROID;
     public hasRequirements = false;
+    public howToAffordReds?: HowToAffordRedsPolicy;
 
     public canPlay(player: Player, game: Game): boolean {
-      const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
-      const stepsRaised = Math.min(remainingTemperatureSteps, 2);
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            const actionDetails = new ActionDetails({ card: this, temperatureIncrease: 2 })
+            this.howToAffordReds = RedsPolicy.canAffordRedsPolicy(player, game, actionDetails, false, true);
+            return this.howToAffordReds.canAfford;
+        }
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
-    }
-
-      return true;
+        return true;
     }
 
     public play(player: Player, game: Game) {
+      player.howToAffordReds = this.howToAffordReds;
       game.increaseTemperature(player, 2);
       game.defer(new RemoveAnyPlants(player, game, 4));
       player.titanium += 4;

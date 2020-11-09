@@ -66,7 +66,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
     },
     itemHtmlContent: function(): string {
       // in case of symbols inside
-      if (this.item instanceof CardRenderItem && this.item.amountInside()) return this.item.amount.toString();
+      if (this.item instanceof CardRenderItem && this.item.amountInside) return this.item.amount.toString();
 
       return '';
     },

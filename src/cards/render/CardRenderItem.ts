@@ -3,6 +3,7 @@ import {CardRenderItemType} from './CardRenderItemType';
 export class CardRenderItem {
   private _anyPlayer: boolean = false;
   private _showDigit: boolean = false;
+  private _amountInside: boolean = false;
   constructor(protected _cardRenderItemType: CardRenderItemType, protected _amount: number = -1) {
     if (Math.abs(this._amount) > 5) {
       this._showDigit = true;
@@ -23,6 +24,10 @@ export class CardRenderItem {
 
   public get showDigit() {
     return this._showDigit;
+  }
+
+  public get amountInside() {
+    return this._amountInside;
   }
 
   public any(): CardRenderItem {

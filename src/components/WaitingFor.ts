@@ -1,159 +1,158 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import { AndOptions } from "./AndOptions";
-import { mainAppSettings } from "./App";
-import { OrOptions } from "./OrOptions";
-import { PlayerInputFactory } from "./PlayerInputFactory";
-import { SelectAmount } from "./SelectAmount";
-import { SelectCard } from "./SelectCard";
-import { SelectHowToPay } from "./SelectHowToPay";
-import { SelectHowToPayForCard } from "./SelectHowToPayForCard";
-import { SelectOption } from "./SelectOption";
-import { SelectPlayer } from "./SelectPlayer";
-import { SelectSpace } from "./SelectSpace";
-import { $t } from "../directives/i18n";
-import { SelectPartyPlayer } from "./SelectPartyPlayer";
-import { PlayerInputModel } from "../models/PlayerInputModel";
-import { PlayerModel } from "../models/PlayerModel";
-import { PreferencesManager } from "./PreferencesManager";
-import { playActivePlayerSound } from "../SoundManager";
-import { SelectColony } from "./SelectColony";
-import { SelectProductionToLose } from "./SelectProductionToLose";
-import { ShiftAresGlobalParameters } from "./ShiftAresGlobalParameters";
+import {AndOptions} from './AndOptions';
+import {mainAppSettings} from './App';
+import {OrOptions} from './OrOptions';
+import {PlayerInputFactory} from './PlayerInputFactory';
+import {SelectAmount} from './SelectAmount';
+import {SelectCard} from './SelectCard';
+import {SelectHowToPay} from './SelectHowToPay';
+import {SelectHowToPayForCard} from './SelectHowToPayForCard';
+import {SelectOption} from './SelectOption';
+import {SelectPlayer} from './SelectPlayer';
+import {SelectSpace} from './SelectSpace';
+import {$t} from '../directives/i18n';
+import {SelectPartyPlayer} from './SelectPartyPlayer';
+import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PlayerModel} from '../models/PlayerModel';
+import {PreferencesManager} from './PreferencesManager';
+import {playActivePlayerSound} from '../SoundManager';
+import {SelectColony} from './SelectColony';
+import {SelectProductionToLose} from './SelectProductionToLose';
+import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
 
-import * as raw_settings from "../../assets/settings.json";
+import * as raw_settings from '../../assets/settings.json';
 
 let ui_update_timeout_id: number | undefined = undefined;
 
-export const WaitingFor = Vue.component("waiting-for", {
-    props: {
-        player: {
-            type: Object as () => PlayerModel
-        },
-        players: {
-            type: Array as () => Array<PlayerModel>
-        },
-        settings: {
-            type: Object as () => typeof raw_settings
-        },
-        waitingfor: {
-            type: Object as () => PlayerInputModel | undefined
-        }
+export const WaitingFor = Vue.component('waiting-for', {
+  props: {
+    player: {
+      type: Object as () => PlayerModel,
     },
-    data: function () {
-        return {
-            waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout
-        }
+    players: {
+      type: Array as () => Array<PlayerModel>,
     },
-    components: {
-        "and-options": AndOptions,
-        "or-options": OrOptions,
-        "select-amount": SelectAmount,
-        "select-card": SelectCard,
-        "select-option": SelectOption,
-        "select-how-to-pay": SelectHowToPay,
-        "select-how-to-pay-for-card": SelectHowToPayForCard,
-        "select-player": SelectPlayer,
-        "select-space": SelectSpace,
-        "select-party-player": SelectPartyPlayer,
-        "select-colony": SelectColony,
-        "select-production-to-lose": SelectProductionToLose,
-        "shift-ares-global-parameters": ShiftAresGlobalParameters,
+    settings: {
+      type: Object as () => typeof raw_settings,
     },
-    methods: {
-        waitForUpdate: function () {
-            const vueApp = this;
-            const root = this.$root as unknown as typeof mainAppSettings.methods;
-            clearTimeout(ui_update_timeout_id);
-            const askForUpdate = () => {
-                const xhr = new XMLHttpRequest();
-                xhr.open("GET", "/api/waitingfor" + window.location.search + "&prev-game-age=" + this.player.gameAge.toString());
-                xhr.onerror = function () {
-                    alert("Error getting waitingfor data");
-                };
-                xhr.onload = () => {
-                    if (xhr.status === 200) {
-                        const result = xhr.response;
-                        if (result["result"] === "GO") {
-                            root.updatePlayer();
+    waitingfor: {
+      type: Object as () => PlayerInputModel | undefined,
+    },
+  },
+  data: function() {
+    return {
+      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
+    };
+  },
+  components: {
+    'and-options': AndOptions,
+    'or-options': OrOptions,
+    'select-amount': SelectAmount,
+    'select-card': SelectCard,
+    'select-option': SelectOption,
+    'select-how-to-pay': SelectHowToPay,
+    'select-how-to-pay-for-card': SelectHowToPayForCard,
+    'select-player': SelectPlayer,
+    'select-space': SelectSpace,
+    'select-party-player': SelectPartyPlayer,
+    'select-colony': SelectColony,
+    'select-production-to-lose': SelectProductionToLose,
+    'shift-ares-global-parameters': ShiftAresGlobalParameters,
+  },
+  methods: {
+    waitForUpdate: function() {
+      const vueApp = this;
+      const root = this.$root as unknown as typeof mainAppSettings.methods;
+      clearTimeout(ui_update_timeout_id);
+      const askForUpdate = () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/api/waitingfor' + window.location.search + '&prev-game-age=' + this.player.gameAge.toString());
+        xhr.onerror = function() {
+          alert('Error getting waitingfor data');
+        };
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const result = xhr.response;
+            if (result['result'] === 'GO') {
+              root.updatePlayer();
 
-                            if (Notification.permission !== "granted") {
-                                Notification.requestPermission();
-                            }
-                            if (Notification.permission === "granted") {
-                                new Notification("Terraforming Mars Online", {
-                                    icon: "/favicon.ico",
-                                    body: "It's your turn!",
-                                });
-                            }
-                            const soundsEnabled = PreferencesManager.loadValue("enable_sounds") === "1";
-                            if (soundsEnabled) playActivePlayerSound();
+              if (Notification.permission !== 'granted') {
+                Notification.requestPermission();
+              }
+              if (Notification.permission === 'granted') {
+                new Notification('Terraforming Mars Online', {
+                  icon: '/favicon.ico',
+                  body: 'It\'s your turn!',
+                });
+              }
+              const soundsEnabled = PreferencesManager.loadValue('enable_sounds') === '1';
+              if (soundsEnabled) playActivePlayerSound();
 
-                            // We don't need to wait anymore - it's our turn
-                            return;
-                        } else if (result["result"] === "REFRESH") {
-                            // Something changed, let's refresh UI
-                            root.updatePlayer();
-                            return;
-                        }
-                        (vueApp).waitForUpdate();
-                    } else {
-                        alert("Unexpected server response");
-                    }
-                }
-                xhr.responseType = "json";
-                xhr.send();
+              // We don't need to wait anymore - it's our turn
+              return;
+            } else if (result['result'] === 'REFRESH') {
+              // Something changed, let's refresh UI
+              root.updatePlayer();
+              return;
             }
-            ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
-        }
+            (vueApp).waitForUpdate();
+          } else {
+            alert('Unexpected server response');
+          }
+        };
+        xhr.responseType = 'json';
+        xhr.send();
+      };
+      ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
-    render: function (createElement) {
-        if (this.waitingfor === undefined) {
-            this.waitForUpdate();
-            return createElement("div", $t("Not your turn to take any actions"));
-        }
-        const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
-            const xhr = new XMLHttpRequest();
-            const root = this.$root as unknown as typeof mainAppSettings.data;
-            if (root.isServerSideRequestInProgress) {
-                console.warn("Server request in progress");
-                return;
-            }
-           
-            root.isServerSideRequestInProgress = true;
-            xhr.open("POST", "/player/input?id=" + this.player.id);
-            xhr.responseType = "json";
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    root.screen = "empty";
-                    root.player = xhr.response;
-                    root.playerkey++;
-                    root.screen = "player-home";
-                    if (this.player.phase === "end" && window.location.pathname !== "/the-end") {
-                        (window).location = (window).location;
-                    }
-
-                } else if (xhr.status === 400 && xhr.responseType === "json") {
-                    const element: HTMLElement | null = document.getElementById("dialog-default");
-                    const message: HTMLElement | null = document.getElementById("dialog-default-message");
-                    if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
-                        message.innerHTML = xhr.response.message;
-                        (element as HTMLDialogElement).showModal();
-                    } else {
-                        alert(xhr.response.message);
-                    }
-                } else {
-                    alert("Error sending input");
-                }
-                root.isServerSideRequestInProgress = false;
-            }
-            xhr.send(JSON.stringify(out));
-            xhr.onerror = function () {
-                root.isServerSideRequestInProgress = false;
-            };
-        }, true, true);
-
-        return createElement("div", {"class": "wf-root"}, [input])
+  },
+  render: function(createElement) {
+    if (this.waitingfor === undefined) {
+      this.waitForUpdate();
+      return createElement('div', $t('Not your turn to take any actions'));
     }
+    const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
+      const xhr = new XMLHttpRequest();
+      const root = this.$root as unknown as typeof mainAppSettings.data;
+      if (root.isServerSideRequestInProgress) {
+        console.warn('Server request in progress');
+        return;
+      }
+
+      root.isServerSideRequestInProgress = true;
+      xhr.open('POST', '/player/input?id=' + this.player.id);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          root.screen = 'empty';
+          root.player = xhr.response;
+          root.playerkey++;
+          root.screen = 'player-home';
+          if (this.player.phase === 'end' && window.location.pathname !== '/the-end') {
+            (window).location = (window).location;
+          }
+        } else if (xhr.status === 400 && xhr.responseType === 'json') {
+          const element: HTMLElement | null = document.getElementById('dialog-default');
+          const message: HTMLElement | null = document.getElementById('dialog-default-message');
+          if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
+            message.innerHTML = xhr.response.message;
+            (element as HTMLDialogElement).showModal();
+          } else {
+            alert(xhr.response.message);
+          }
+        } else {
+          alert('Error sending input');
+        }
+        root.isServerSideRequestInProgress = false;
+      };
+      xhr.send(JSON.stringify(out));
+      xhr.onerror = function() {
+        root.isServerSideRequestInProgress = false;
+      };
+    }, true, true);
+
+    return createElement('div', {'class': 'wf-root'}, [input]);
+  },
 });
 

@@ -1,10 +1,10 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { Player } from "../Player";
-import { CardType } from "./CardType";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {Player} from '../Player';
+import {CardType} from './CardType';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 
 export class GHGFactories implements IProjectCard {
@@ -14,12 +14,12 @@ export class GHGFactories implements IProjectCard {
     public name = CardName.GHG_FACTORIES;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
-        return player.getProduction(Resources.ENERGY) >= 1;
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-        player.addProduction(Resources.ENERGY,-1);
-        player.addProduction(Resources.HEAT,4);
-        return undefined;
+      player.addProduction(Resources.ENERGY, -1);
+      player.addProduction(Resources.HEAT, 4);
+      return undefined;
     }
 }
 

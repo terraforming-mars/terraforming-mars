@@ -1,156 +1,156 @@
-import Vue from "vue";
-import { Color } from "../Color";
-import { PreferencesManager } from "./PreferencesManager";
-import { LANGUAGES } from "../constants";
-import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } from "../constants";
+import Vue from 'vue';
+import {Color} from '../Color';
+import {PreferencesManager} from './PreferencesManager';
+import {LANGUAGES} from '../constants';
+import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 // @ts-ignore
-import { $t } from "../directives/i18n";
+import {$t} from '../directives/i18n';
 
-export const Preferences = Vue.component("preferences", {
-    props: {
-        player_color: {
-            type: Object as () => Color
-        },
-        generation: {
-            type: Number
-        },
-        coloniesCount: {
-            type: Number
-        },
-        temperature: {
-            type: Number
-        },
-        oxygen: {
-            type: Number
-        },
-        oceans: {
-            type: Number
-        },
-        venus: {
-            type: Number
-        },
-        venusNextExtension: {
-            type: Boolean
-        }
+export const Preferences = Vue.component('preferences', {
+  props: {
+    player_color: {
+      type: Object as () => Color,
     },
-    data: function () {
-        return {
-            "ui": {
-                "preferences_panel_open": false,
-            },
-            "hide_corporation": false as boolean | unknown[],
-            "hide_hand": false as boolean | unknown[],
-            "hide_cards": false as boolean | unknown[],
-            "hide_awards_and_milestones": false as boolean | unknown[],
-            "hide_tag_overview": false as boolean | unknown[],
-            "hide_turnorder": false as boolean | unknown[],
-            "hide_corporation_names": false as boolean | unknown[],
-            "small_cards": false as boolean | unknown[],
-            "remove_background": false as boolean | unknown[],
-            "magnify_cards": true as boolean | unknown[],
-            "magnify_card_descriptions": true as boolean | unknown[],
-            "show_alerts": true as boolean | unknown[],
-            "hide_ma_scores": false as boolean | unknown[],
-            "hide_non_blue_cards": false as boolean | unknown[],
-            "hide_log": false as boolean | unknown[],
-            "lang": "en",
-            "langs": LANGUAGES,
-            "enable_sounds": false as boolean | unknown[]
-        };
+    generation: {
+      type: Number,
     },
-    methods: {
-        setPreferencesCSS: function (
-            val: boolean | undefined,
-            cssClassSuffix: string
-        ): void {
-            let target = document.getElementById("ts-preferences-target");
-            if (!target) return;
-            if (val) {
-                target.classList.add("preferences_" + cssClassSuffix);
-            } else {
-                target.classList.remove("preferences_" + cssClassSuffix);
-            }
+    coloniesCount: {
+      type: Number,
+    },
+    temperature: {
+      type: Number,
+    },
+    oxygen: {
+      type: Number,
+    },
+    oceans: {
+      type: Number,
+    },
+    venus: {
+      type: Number,
+    },
+    venusNextExtension: {
+      type: Boolean,
+    },
+  },
+  data: function() {
+    return {
+      'ui': {
+        'preferences_panel_open': false,
+      },
+      'hide_corporation': false as boolean | unknown[],
+      'hide_hand': false as boolean | unknown[],
+      'hide_cards': false as boolean | unknown[],
+      'hide_awards_and_milestones': false as boolean | unknown[],
+      'hide_tag_overview': false as boolean | unknown[],
+      'hide_turnorder': false as boolean | unknown[],
+      'hide_corporation_names': false as boolean | unknown[],
+      'small_cards': false as boolean | unknown[],
+      'remove_background': false as boolean | unknown[],
+      'magnify_cards': true as boolean | unknown[],
+      'magnify_card_descriptions': true as boolean | unknown[],
+      'show_alerts': true as boolean | unknown[],
+      'hide_ma_scores': false as boolean | unknown[],
+      'hide_non_blue_cards': false as boolean | unknown[],
+      'hide_log': false as boolean | unknown[],
+      'lang': 'en',
+      'langs': LANGUAGES,
+      'enable_sounds': false as boolean | unknown[],
+    };
+  },
+  methods: {
+    setPreferencesCSS: function(
+        val: boolean | undefined,
+        cssClassSuffix: string,
+    ): void {
+      const target = document.getElementById('ts-preferences-target');
+      if (!target) return;
+      if (val) {
+        target.classList.add('preferences_' + cssClassSuffix);
+      } else {
+        target.classList.remove('preferences_' + cssClassSuffix);
+      }
 
-            if (!target.classList.contains("language-" + this.lang)) {
-                target.classList.add("language-" + this.lang);
-            }
-        },
-        updatePreferencesFromStorage: function (): Map<
+      if (!target.classList.contains('language-' + this.lang)) {
+        target.classList.add('language-' + this.lang);
+      }
+    },
+    updatePreferencesFromStorage: function(): Map<
             string,
             boolean | string
-        > {
-            for (let k of PreferencesManager.keys) {
-                let val = PreferencesManager.loadValue(k);
-                if (k === "lang") {
-                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
-                    this[k] = val || "en";
-                    PreferencesManager.preferencesValues.set(k, val || "en");
-                } else {
-                    let boolVal = val !== "" ? val === "1" : this.$data[k];
-                    PreferencesManager.preferencesValues.set(k, val === "1");
-                    this.$data[k] = boolVal;
-                }
-            }
-            return PreferencesManager.preferencesValues;
-        },
-        updatePreferences: function (_evt: any): void {
-            var strVal: string = "";
-            for (let k of PreferencesManager.keys) {
-                let val = PreferencesManager.preferencesValues.get(k);
-                if (val !== this.$data[k]) {
-                    if (k === "lang") {
-                        strVal = this.$data[k];
-                    } else {
-                        strVal = this.$data[k] ? "1" : "0";
-                    }
-                    PreferencesManager.saveValue(k, strVal);
-                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
-                    this.setPreferencesCSS(this.$data[k], k);
-                }
-            }
-        },
-        syncPreferences: function (): void {
-            for (let k of PreferencesManager.keys) {
-                this.$data[k] = PreferencesManager.preferencesValues.get(k);
-                this.setPreferencesCSS(this.$data[k], k);
-            }
-        },
-        getGenMarker: function (): string {
-            return `${this.generation}`;
-        },
-        getOceanCount: function(): string{
-            if (this.oceans === MAX_OCEAN_TILES){
-                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
-            } else {
-                return `${this.oceans}`;
-            } 
-        },
-        getTemperatureCount: function(): string{
-            if (this.temperature === MAX_TEMPERATURE){
-                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
-            } else {
-                return `${this.temperature}`;
-            } 
-        },
-        getOxygenCount: function(): string{
-            if (this.oxygen === MAX_OXYGEN_LEVEL){
-                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
-            } else {
-                return `${this.oxygen}`;
-            } 
-        },
-        getVenusCount: function(): string{
-            if (this.venus === MAX_VENUS_SCALE){
-                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
-            } else {
-                return `${this.venus}`;
-            } 
+            > {
+      for (const k of PreferencesManager.keys) {
+        const val = PreferencesManager.loadValue(k);
+        if (k === 'lang') {
+          PreferencesManager.preferencesValues.set(k, this.$data[k]);
+          this[k] = val || 'en';
+          PreferencesManager.preferencesValues.set(k, val || 'en');
+        } else {
+          const boolVal = val !== '' ? val === '1' : this.$data[k];
+          PreferencesManager.preferencesValues.set(k, val === '1');
+          this.$data[k] = boolVal;
         }
+      }
+      return PreferencesManager.preferencesValues;
     },
-    mounted: function () {
-        this.updatePreferencesFromStorage();
+    updatePreferences: function(_evt: any): void {
+      let strVal: string = '';
+      for (const k of PreferencesManager.keys) {
+        const val = PreferencesManager.preferencesValues.get(k);
+        if (val !== this.$data[k]) {
+          if (k === 'lang') {
+            strVal = this.$data[k];
+          } else {
+            strVal = this.$data[k] ? '1' : '0';
+          }
+          PreferencesManager.saveValue(k, strVal);
+          PreferencesManager.preferencesValues.set(k, this.$data[k]);
+          this.setPreferencesCSS(this.$data[k], k);
+        }
+      }
     },
-    template: `
+    syncPreferences: function(): void {
+      for (const k of PreferencesManager.keys) {
+        this.$data[k] = PreferencesManager.preferencesValues.get(k);
+        this.setPreferencesCSS(this.$data[k], k);
+      }
+    },
+    getGenMarker: function(): string {
+      return `${this.generation}`;
+    },
+    getOceanCount: function(): string {
+      if (this.oceans === MAX_OCEAN_TILES) {
+        return '<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t(\'Completed!\')">';
+      } else {
+        return `${this.oceans}`;
+      }
+    },
+    getTemperatureCount: function(): string {
+      if (this.temperature === MAX_TEMPERATURE) {
+        return '<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t(\'Completed!\')">';
+      } else {
+        return `${this.temperature}`;
+      }
+    },
+    getOxygenCount: function(): string {
+      if (this.oxygen === MAX_OXYGEN_LEVEL) {
+        return '<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t(\'Completed!\')">';
+      } else {
+        return `${this.oxygen}`;
+      }
+    },
+    getVenusCount: function(): string {
+      if (this.venus === MAX_VENUS_SCALE) {
+        return '<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t(\'Completed!\')">';
+      } else {
+        return `${this.venus}`;
+      }
+    },
+  },
+  mounted: function() {
+    this.updatePreferencesFromStorage();
+  },
+  template: `
         <div class="preferences_cont" :data="syncPreferences()">
                 <div class="preferences_tm">
                     <div class="preferences-gen-text">GEN</div>

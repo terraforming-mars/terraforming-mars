@@ -15,7 +15,7 @@
     "pg": "^8.2.1",
     "spectre.css": "^0.5.8",
     "sqlite3": "^4.2.0",
-    "typescript": "^3.8.3",
+    "typescript": "^4.0.5",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",
     "webpack": "^4.43.0",
@@ -24,11 +24,12 @@
   "devDependencies": {
     "@types/node": "^10.17.32",
     "@types/sqlite3": "^3.1.6",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
     "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
     "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^6.2.2",
     "js-beautify": "^1.13.0",
     "jsdom": "^16.4.0",
@@ -39,15 +40,18 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
-    "clean": "rm -r ./dist/ ./styles.css || true",
-    "build": "node make_static_json.js && eslint src/*.ts src/components/**/*.ts src/database/**/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && npm run templates && webpack --config webpack.config.js",
-    "start": "node make_static_json.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
+    "clean": "rm -r ./build/ ./styles.css || true",
+    "compile": "tsc",
+    "prep": "node make_static_json.js && lessc src/styles/common.less styles.css",
+    "build": "npm run prep && npm run compile && npm run lint && npm run templates && webpack --config webpack.config.js",
+    "start": "npm run prep && npm run compile && webpack --config webpack.config.js && node build/server.js",
+    "lint": "eslint src server.ts script.ts --ext ts",
     "pretest": "tsc --build tsconfig-test.json",
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
-    "test": "mocha --file dist/tests/utils/Vue.js --recursive dist/tests",
+    "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "testgiven": "tsc --build tsconfig.json && webpack --config webpack.config.js && tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",
-    "cover": "nyc mocha --file dist/tests/utils/Vue.js --recursive dist/tests"
+    "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests"
   },
   "repository": {
     "type": "git",

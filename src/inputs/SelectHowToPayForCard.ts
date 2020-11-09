@@ -1,13 +1,13 @@
 
-import { PlayerInput } from "../PlayerInput";
-import { PlayerInputTypes } from "../PlayerInputTypes";
-import { HowToPay } from "./HowToPay";
-import { IProjectCard } from "../cards/IProjectCard";
+import {PlayerInput} from '../PlayerInput';
+import {PlayerInputTypes} from '../PlayerInputTypes';
+import {HowToPay} from './HowToPay';
+import {IProjectCard} from '../cards/IProjectCard';
 
 export class SelectHowToPayForCard implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD;
-    public title: string = "Play project card";
-    public buttonLabel: string = "Play card";
+    public title: string = 'Play project card';
+    public buttonLabel: string = 'Play card';
     constructor(
         public cards: Array<IProjectCard>,
         public microbes: number,

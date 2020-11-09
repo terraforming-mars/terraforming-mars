@@ -1,6 +1,6 @@
 export enum ActionLabel {
-    ACTIVE = "active",
-    PASSED = "passed",
-    NEXT = "next",
-    NONE = "",
+    ACTIVE = 'active',
+    PASSED = 'passed',
+    NEXT = 'next',
+    NONE = '',
 }

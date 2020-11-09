@@ -28,11 +28,11 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
                 + player.getProduction(Resources.HEAT) > -5;
     }
     private log(player: Player, game: Game, type: string) {
-        game.log("{0} used {1} to adjust {2} production by 1, and gain 4 resources", b => b.player(player).card(this).string(type));
+        game.log("${0} decreased ${1} production 1 step to gain 4 ${2}", b => b.player(player).string(type).string(type));
     }
     public action(player: Player, game: Game) {
         const result = new OrOptions();
-        result.title = "Select production to decrease one step and gain 4 resources of it";
+        result.title = "Select production to decrease one step and gain 4 resources";
 
         const options: Array<SelectOption> = [];
 

@@ -1,16 +1,16 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { TileType } from "../TileType";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { SpaceType } from "../SpaceType";
-import { ISpace } from "../ISpace";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
-import { Board } from "../Board";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {TileType} from '../TileType';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {SpaceType} from '../SpaceType';
+import {ISpace} from '../ISpace';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
+import {Board} from '../Board';
 
 export class Capital implements IProjectCard {
     public cost = 26;
@@ -33,19 +33,19 @@ export class Capital implements IProjectCard {
       return 0;
     }
     public play(player: Player, game: Game) {
-      player.addProduction(Resources.ENERGY,-2);
-      player.addProduction(Resources.MEGACREDITS,5);
+      player.addProduction(Resources.ENERGY, -2);
+      player.addProduction(Resources.MEGACREDITS, 5);
       return new SelectSpace(
           'Select space for special city tile',
           game.board.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, {
               tileType: TileType.CAPITAL,
-              card: this.name
+              card: this.name,
             });
             space.adjacency = this.adjacencyBonus;
             return undefined;
-          }
+          },
       );
     }
 }

@@ -1,104 +1,105 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import { ColonyModel } from "../models/ColonyModel";
-import { ColonyName } from "../colonies/ColonyName";
+import {ColonyModel} from '../models/ColonyModel';
+import {ColonyName} from '../colonies/ColonyName';
 
-export const Colony = Vue.component("colony", {
-    props: {
-        colony: {
-            type: Object as () => ColonyModel
-        }
+export const Colony = Vue.component('colony', {
+  props: {
+    colony: {
+      type: Object as () => ColonyModel,
     },
-    data: function () {
-        return {
-            PLUTO: ColonyName.PLUTO,
-            GANYMEDE: ColonyName.GANYMEDE,
-        };
+  },
+  data: function() {
+    return {
+      PLUTO: ColonyName.PLUTO,
+      GANYMEDE: ColonyName.GANYMEDE,
+    };
+  },
+  methods: {
+    getCubeXPosition: (colony: ColonyModel): number => {
+      return colony.trackPosition * 56 + 27;
     },
-    methods: {
-        getCubeXPosition: (colony: ColonyModel): number => {
-            return colony.trackPosition * 56 + 27;
-        },
-        getColonyXPosition: (index: number): number => {
-            let offset: number = 5;
-            return index * 56 + 27 + offset;
-        },
-        getCubeYPosition: (
-            colony: ColonyModel,
-            isColonyCube = false
-        ): number => {
-            if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
-            if (colony.name === ColonyName.VENUS) return 190;
-            if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
+    getColonyXPosition: (index: number): number => {
+      const offset: number = 5;
+      return index * 56 + 27 + offset;
+    },
+    getCubeYPosition: (
+        colony: ColonyModel,
+        isColonyCube = false,
+    ): number => {
+      if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
+      if (colony.name === ColonyName.VENUS) return 190;
+      if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
 
-            let offset: number = 0;
-            if (isColonyCube !== true) offset = 7;
-            if (colony.name === ColonyName.EUROPA) return 170 + offset;
-            if (colony.name === ColonyName.PLUTO) return 169 + offset;
-            if (colony.name === ColonyName.MIRANDA) return 180 + offset;
-            return 168 + offset;
-        },
-        getGanymede: (): string => {
-            return ColonyName.GANYMEDE;
-        },
-        getEuropa: (): string => {
-            return ColonyName.EUROPA;
-        },
-        getCeres: (): string => {
-            return ColonyName.CERES;
-        },
-        getPluto: (): string => {
-            return ColonyName.PLUTO;
-        },
-        getEnceladus: (): string => {
-            return ColonyName.ENCELADUS;
-        },
-        getIo: (): string => {
-            return ColonyName.IO;
-        },
-        getTriton: (): string => {
-            return ColonyName.TRITON;
-        },
-        getTitan: (): string => {
-            return ColonyName.TITAN;
-        },
-        getLuna: (): string => {
-            return ColonyName.LUNA;
-        },
-        getMiranda: (): string => {
-            return ColonyName.MIRANDA;
-        },
-        getCallisto: (): string => {
-            return ColonyName.CALLISTO;
-        },
-        getColonyContentOffset: (colony: ColonyModel): number => {
-            if (
-                colony.name === ColonyName.PLUTO ||
+      let offset: number = 0;
+      if (isColonyCube !== true) offset = 7;
+      if (colony.name === ColonyName.EUROPA) return 170 + offset;
+      if (colony.name === ColonyName.PLUTO) return 169 + offset;
+      if (colony.name === ColonyName.MIRANDA) return 180 + offset;
+      return 168 + offset;
+    },
+    getGanymede: (): string => {
+      return ColonyName.GANYMEDE;
+    },
+    getEuropa: (): string => {
+      return ColonyName.EUROPA;
+    },
+    getCeres: (): string => {
+      return ColonyName.CERES;
+    },
+    getPluto: (): string => {
+      return ColonyName.PLUTO;
+    },
+    getEnceladus: (): string => {
+      return ColonyName.ENCELADUS;
+    },
+    getIo: (): string => {
+      return ColonyName.IO;
+    },
+    getTriton: (): string => {
+      return ColonyName.TRITON;
+    },
+    getTitan: (): string => {
+      return ColonyName.TITAN;
+    },
+    getLuna: (): string => {
+      return ColonyName.LUNA;
+    },
+    getMiranda: (): string => {
+      return ColonyName.MIRANDA;
+    },
+    getCallisto: (): string => {
+      return ColonyName.CALLISTO;
+    },
+    getColonyContentOffset: (colony: ColonyModel): number => {
+      if (
+        colony.name === ColonyName.PLUTO ||
                 colony.name === ColonyName.MIRANDA
-            )
-                return -12;
-            return 0;
-        },
-        getIapetus:(): string => {
-          return ColonyName.IAPETUS;
-        },
-        getMercury:(): string => {
-          return ColonyName.MERCURY;
-        },
-        getHygiea:(): string => {
-          return ColonyName.HYGIEA;
-        },
-        getTitania:(): string => {
-          return ColonyName.TITANIA;
-        },
-        getVenus:(): string => {
-          return ColonyName.VENUS;
-        },
-        getLeavitt:(): string => {
-          return ColonyName.LEAVITT;
-        }
+      ) {
+        return -12;
+      }
+      return 0;
     },
-    template: `
+    getIapetus: (): string => {
+      return ColonyName.IAPETUS;
+    },
+    getMercury: (): string => {
+      return ColonyName.MERCURY;
+    },
+    getHygiea: (): string => {
+      return ColonyName.HYGIEA;
+    },
+    getTitania: (): string => {
+      return ColonyName.TITANIA;
+    },
+    getVenus: (): string => {
+      return ColonyName.VENUS;
+    },
+    getLeavitt: (): string => {
+      return ColonyName.LEAVITT;
+    },
+  },
+  template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>

@@ -1,6 +1,6 @@
 
-import { Color } from "../Color";
-import { Phase } from "../Phase";
+import {Color} from '../Color';
+import {Phase} from '../Phase';
 
 export interface GameHomeModel {
     activePlayer: Color;

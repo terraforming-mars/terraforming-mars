@@ -1,8 +1,8 @@
-import { IProjectCard } from "./cards/IProjectCard";
-import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { PlayerInput } from "./PlayerInput";
-import { Color } from "./Color";
-import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
+import {IProjectCard} from './cards/IProjectCard';
+import {CorporationCard} from './cards/corporation/CorporationCard';
+import {PlayerInput} from './PlayerInput';
+import {Color} from './Color';
+import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export interface SerializedPlayer {
     id: string;
@@ -15,10 +15,10 @@ export interface SerializedPlayer {
 
     corporationCard: CorporationCard | undefined;
     pickedCorporationCard: CorporationCard | undefined;
-    
+
     terraformRating: number;
     terraformRatingAtGenerationStart: number;
-    
+
     megaCredits: number;
     megaCreditProduction: number;
     steel: number;
@@ -35,7 +35,7 @@ export interface SerializedPlayer {
     titaniumValue: number;
     steelValue: number;
     canUseHeatAsMegaCredits: boolean;
-    
+
     actionsTakenThisRound: number;
     actionsThisGeneration: Set<string>;
     lastCardPlayed: IProjectCard | undefined;
@@ -52,7 +52,7 @@ export interface SerializedPlayer {
     generationPlayed: Map<string, number>;
     cardCost: number;
     needsToDraft: boolean | undefined;
-    
+
     fleetSize: number;
     tradesThisTurn: number;
     colonyTradeOffset: number;

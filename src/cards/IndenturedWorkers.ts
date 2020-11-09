@@ -1,9 +1,9 @@
 
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { IProjectCard } from "./IProjectCard";
-import { Game } from "../Game";
-import { CardName } from "../CardName";
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {IProjectCard} from './IProjectCard';
+import {Game} from '../Game';
+import {CardName} from '../CardName';
 
 export class IndenturedWorkers implements IProjectCard {
     public cardType = CardType.EVENT;
@@ -12,15 +12,15 @@ export class IndenturedWorkers implements IProjectCard {
     public name = CardName.INDENTURED_WORKERS;
 
     public getCardDiscount(player: Player, _game: Game) {
-        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
-            return 8;
-        }
-        return 0;
+      if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+        return 8;
+      }
+      return 0;
     }
     public play() {
-        return undefined;
-    } 
+      return undefined;
+    }
     public getVictoryPoints() {
-        return -1;
+      return -1;
     }
 }

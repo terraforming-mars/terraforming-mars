@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Color } from "../src/Color";
 import { Player } from "../src/Player";
 import { PartyName } from "../src/turmoil/parties/PartyName";
-import { Game, GameOptions } from "../src/Game";
+import { Game } from "../src/Game";
 import { Unity } from "../src/turmoil/parties/Unity";
 import { Greens } from "../src/turmoil/parties/Greens";
 import { MarsFirst } from "../src/turmoil/parties/MarsFirst";
@@ -30,7 +30,7 @@ describe("Turmoil", function () {
 
     beforeEach(function() {
         player = new Player("test", Color.BLUE, false);
-        const gameOptions = setCustomGameOptions() as GameOptions;
+        const gameOptions = setCustomGameOptions();
         
         game = new Game("foobar", [player], player, gameOptions);
         turmoil = game.turmoil!;

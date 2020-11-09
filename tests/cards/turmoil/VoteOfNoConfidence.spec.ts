@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { VoteOfNoConfidence } from "../../../src/cards/turmoil/VoteOfNoConfidence";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 
@@ -11,7 +11,7 @@ describe("VoteOfNoConfidence", function () {
         const card = new VoteOfNoConfidence();
         const player = new Player("test", Color.BLUE, false);
 
-        const gameOptions = setCustomGameOptions() as GameOptions;
+        const gameOptions = setCustomGameOptions();
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).is.not.true;
 

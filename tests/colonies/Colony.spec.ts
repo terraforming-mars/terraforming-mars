@@ -4,7 +4,7 @@ import { Pluto } from "../../src/colonies/Pluto";
 import { DustSeals } from "../../src/cards/DustSeals";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Game,GameOptions } from "../../src/Game";
+import { Game } from "../../src/Game";
 import { Resources } from "../../src/Resources";
 import { OrOptions } from "../../src/inputs/OrOptions";
 import { AndOptions } from "../../src/inputs/AndOptions";
@@ -14,7 +14,7 @@ import { IProjectCard } from "../../src/cards/IProjectCard";
 import { MAX_COLONY_TRACK_POSITION } from "../../src/constants";
 import { setCustomGameOptions } from "../TestingUtils";
 
-const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
 function isBuildColonyStandardProjectAvailable(player: Player, game: Game) {
     let buildColonyIsAvailable = false;

@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { GiantSolarShade } from "../../../src/cards/venusNext/GiantSolarShade";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { setCustomGameOptions } from "../../TestingUtils";
 import { Reds } from "../../../src/turmoil/parties/Reds";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
@@ -21,7 +21,7 @@ describe("GiantSolarShade", function () {
 
     it("Should play with Reds and Dirigibles", function () {
         const player = new Player("test", Color.BLUE, false);
-        const gameOptions = setCustomGameOptions() as GameOptions;
+        const gameOptions = setCustomGameOptions();
         const game = new Game("foobar", [player], player, gameOptions);
         game.turmoil!.rulingParty = new Reds();
         const card = new GiantSolarShade();

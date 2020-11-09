@@ -189,7 +189,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           customCorporationsList: [],
           cardsBlackList: [],
           customColoniesList: [],
-        } as GameOptions;
+        };
       }
       this.gameOptions = gameOptions;
 

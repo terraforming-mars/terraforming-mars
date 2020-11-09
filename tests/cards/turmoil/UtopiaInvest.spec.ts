@@ -22,6 +22,5 @@ describe("UtopiaInvest", function () {
         action.options[2].cb();
         expect(player.titanium).to.eq(4);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
-
     });
 });

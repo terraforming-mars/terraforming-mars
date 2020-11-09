@@ -59,5 +59,5 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         customColoniesList: [],
       };
 
-    return Object.assign(defaultOptions, options) as GameOptions;
+    return Object.assign(defaultOptions, options);
 }

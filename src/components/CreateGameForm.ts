@@ -662,7 +662,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 </label>
                                 <input type="checkbox" v-model="venusTR" id="venusTR-checkbox">
                                 <label for="venusTR-checkbox">
-                                    <span v-i18n>Venus at 30% for win</span>
+                                    <span v-i18n>Venus Terraforming</span>
                                 </label>
                             </template>
 
@@ -768,4 +768,3 @@ export const CreateGameForm = Vue.component("create-game-form", {
         </div>
     `
 });
-

@@ -3,7 +3,7 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {CardRequirementsComponent} from './CardRequirementsComponent';
 import {CardVictoryPoints} from './CardVictoryPoints';
 import {CardDescription} from './CardDescription';
-import {CardRenderData} from "./CardRenderData";
+import {CardRenderData} from './CardRenderData';
 
 export const CardContent = Vue.component('CardContent', {
   props: {
@@ -16,7 +16,7 @@ export const CardContent = Vue.component('CardContent', {
     CardRequirementsComponent,
     CardVictoryPoints,
     CardDescription,
-    CardRenderData
+    CardRenderData,
   },
   methods: {
     getClasses: function(): string {

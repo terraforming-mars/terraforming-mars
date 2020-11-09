@@ -1,10 +1,10 @@
 export enum CardRenderSymbolType {
-    ASTERIX = "*",
-    OR = "OR",
-    MINUS = "-",
-    PLUS = "+",
-    COLON = ":",
-    EMPTY = " ",
-    SLASH = "/",
-    ARROW = "->",
+  ASTERIX = '*',
+  OR = 'OR',
+  MINUS = '-',
+  PLUS = '+',
+  COLON = ':',
+  EMPTY = ' ',
+  SLASH = '/',
+  ARROW = '->',
 }

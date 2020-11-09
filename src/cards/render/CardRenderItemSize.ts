@@ -1,5 +1,5 @@
 export enum CardRenderItemSize {
-    SMALL = "S",
-    MEDIUM = "M",
-    LARGE = "L",
+  SMALL = 'S',
+  MEDIUM = 'M',
+  LARGE = 'L',
 }

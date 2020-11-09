@@ -1,7 +1,7 @@
-import { CardType } from "../CardType";
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
+import {CardType} from '../CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardName} from '../../CardName';
 
 export class ResearchCoordination implements IProjectCard {
     public cost = 4;
@@ -10,6 +10,6 @@ export class ResearchCoordination implements IProjectCard {
     public name = CardName.RESEARCH_COORDINATION;
 
     public play() {
-        return undefined;
+      return undefined;
     }
 }

@@ -1,19 +1,19 @@
 
-import Vue from "vue";
-import { GameHomeModel } from "../models/GameHomeModel";
+import Vue from 'vue';
+import {GameHomeModel} from '../models/GameHomeModel';
 
-export const GameHome = Vue.component("game-home", {
-    props: {
-        game: {
-            type: Object as () => GameHomeModel | undefined
-        }
+export const GameHome = Vue.component('game-home', {
+  props: {
+    game: {
+      type: Object as () => GameHomeModel | undefined,
     },
-    data: function () {
-        return {}
-    },
-    methods: {
-    },
-    template: `
+  },
+  data: function() {
+    return {};
+  },
+  methods: {
+  },
+  template: `
         <div id="game-home">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Game Home</span></h1>
             <p v-i18n>Send players their links below. As game administrator pick your link to use.</p>
@@ -25,6 +25,6 @@ export const GameHome = Vue.component("game-home", {
                 </li>
             </ul>
         </div>
-    `
+    `,
 });
 

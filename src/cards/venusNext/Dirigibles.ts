@@ -1,16 +1,16 @@
-import { IProjectCard } from "../IProjectCard";
-import { ICard, IActionCard, IResourceCard } from "../ICard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectCard } from "../../inputs/SelectCard";
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { LogHelper } from "../../components/LogHelper";
+import {IProjectCard} from '../IProjectCard';
+import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {ResourceType} from '../../ResourceType';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
+import {LogHelper} from '../../components/LogHelper';
 
 
-export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
+export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 11;
     public tags = [Tags.VENUS];
 
@@ -20,28 +20,28 @@ export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
     public resourceCount: number = 0;
 
     public play() {
-        return undefined;
+      return undefined;
     }
     public canAct(): boolean {
-        return true;
-    }         
+      return true;
+    }
     public action(player: Player, game: Game) {
-        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        if (floaterCards.length === 1) {
-            this.resourceCount++;
-            LogHelper.logAddResource(game, player, floaterCards[0]);
-            return undefined;
-        }
+      const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+      if (floaterCards.length === 1) {
+        this.resourceCount++;
+        LogHelper.logAddResource(game, player, floaterCards[0]);
+        return undefined;
+      }
 
-        return new SelectCard(
-            "Select card to add 1 floater",
-            "Add floater",
-            floaterCards,
-            (foundCards: Array<ICard>) => {
-                player.addResourceTo(foundCards[0], 1);
-                LogHelper.logAddResource(game, player, foundCards[0]);
-                return undefined;
-            }
-        );
+      return new SelectCard(
+          'Select card to add 1 floater',
+          'Add floater',
+          floaterCards,
+          (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 1);
+            LogHelper.logAddResource(game, player, foundCards[0]);
+            return undefined;
+          },
+      );
     }
 }

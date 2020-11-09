@@ -1,14 +1,14 @@
-import Vue from "vue";
-import { Card } from "./card/Card";
+import Vue from 'vue';
+import {Card} from './card/Card';
 
-export const HelpIconology = Vue.component("help-iconology", {
-    components: {
-        Card
-    },
-    methods: {
-        
-    },
-    template: `
+export const HelpIconology = Vue.component('help-iconology', {
+  components: {
+    Card,
+  },
+  methods: {
+
+  },
+  template: `
     <div class="help-page-container">
         <div class="help-page-column">
             <div>
@@ -208,5 +208,5 @@ export const HelpIconology = Vue.component("help-iconology", {
             </div>
         </div>
     </div>
-    `
-})
+    `,
+});

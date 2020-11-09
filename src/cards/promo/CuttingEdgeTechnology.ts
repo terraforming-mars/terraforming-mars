@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CardName } from "../../CardName";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {Game} from '../../Game';
+import {CardName} from '../../CardName';
 
 export class CuttingEdgeTechnology implements IProjectCard {
     public cost = 11;
@@ -12,15 +12,15 @@ export class CuttingEdgeTechnology implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play() {
-        return undefined;
+      return undefined;
     }
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.canPlay && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
-        return 0;
+      if (card.canPlay && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
+      return 0;
     }
 
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
-}    
+}

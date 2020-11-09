@@ -1,12 +1,12 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { ResourceType } from "../ResourceType";
-import { CardName } from "../CardName";
-import { IResourceCard } from "./ICard";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {ResourceType} from '../ResourceType';
+import {CardName} from '../CardName';
+import {IResourceCard} from './ICard';
 
 export class Decomposers implements IProjectCard, IResourceCard {
     public cost = 5;
@@ -19,7 +19,7 @@ export class Decomposers implements IProjectCard, IResourceCard {
       return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT ||  tag === Tags.MICROBES).length);
+      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length);
     }
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 3);

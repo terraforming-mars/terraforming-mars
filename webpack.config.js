@@ -6,7 +6,7 @@ module.exports = {
   devtool: "source-map",
   mode: 'production',
   entry: [
-    './dist/script.js'
+    './build/script.js'
   ],
   plugins: [new CompressionPlugin()],
   resolve: {

@@ -1,11 +1,11 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { CardMetadata } from "./CardMetadata";
-import { CardRenderer } from "../cards/render/CardRenderer";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {CardMetadata} from "./CardMetadata";
+import {CardRenderer} from "../cards/render/CardRenderer";
 
 export class AsteroidMining implements IProjectCard {
     public cost = 30;
@@ -14,8 +14,8 @@ export class AsteroidMining implements IProjectCard {
     public name = CardName.ASTEROID_MINING;
 
     public play(player: Player) {
-        player.addProduction(Resources.TITANIUM, 2);
-        return undefined;
+      player.addProduction(Resources.TITANIUM, 2);
+      return undefined;
     }
     public getVictoryPoints() {
         return 2;

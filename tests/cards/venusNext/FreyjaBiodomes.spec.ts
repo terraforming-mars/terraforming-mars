@@ -1,13 +1,13 @@
-import {ICard} from '../../../src/cards/ICard';
+import { ICard } from "../../../src/cards/ICard";
 import { expect } from "chai";
 import { FreyjaBiodomes } from "../../../src/cards/venusNext/FreyjaBiodomes";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { Extremophiles } from '../../../src/cards/venusNext/Extremophiles';
-import { VenusianAnimals } from '../../../src/cards/venusNext/VenusianAnimals';
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { Extremophiles } from "../../../src/cards/venusNext/Extremophiles";
+import { VenusianAnimals } from "../../../src/cards/venusNext/VenusianAnimals";
 
 describe("FreyjaBiodomes", function () {
     let card : FreyjaBiodomes, player : Player, game : Game;

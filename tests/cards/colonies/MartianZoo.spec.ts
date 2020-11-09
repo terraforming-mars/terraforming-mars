@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { MartianZoo } from "../../../src/cards/colonies/MartianZoo";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { LunaGovernor } from '../../../src/cards/colonies/LunaGovernor';
+import { Game } from "../../../src/Game";
+import { LunaGovernor } from "../../../src/cards/colonies/LunaGovernor";
 
 describe("MartianZoo", function () {
     let card : MartianZoo, player : Player, game : Game;

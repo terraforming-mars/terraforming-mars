@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { LunaMetropolis } from "../../../src/cards/venusNext/LunaMetropolis";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 import { setCustomGameOptions } from "../../TestingUtils";
 

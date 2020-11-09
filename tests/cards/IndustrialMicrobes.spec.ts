@@ -4,7 +4,7 @@ import { IndustrialMicrobes } from "../../src/cards/IndustrialMicrobes";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("IndustrialMicrobes", function () {
     it("Should play", function () {

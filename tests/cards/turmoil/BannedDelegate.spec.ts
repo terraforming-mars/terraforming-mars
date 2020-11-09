@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { BannedDelegate } from "../../../src/cards/turmoil/BannedDelegate";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { SelectDelegate } from "../../../src/inputs/SelectDelegate";

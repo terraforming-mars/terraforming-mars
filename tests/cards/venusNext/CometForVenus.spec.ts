@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { CometForVenus } from "../../../src/cards/venusNext/CometForVenus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
+import { Game } from "../../../src/Game";
+import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
 
 describe("CometForVenus", function () {
     it("Should play", function () {

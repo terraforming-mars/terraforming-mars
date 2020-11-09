@@ -1,13 +1,13 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-export const CardNumber = Vue.component("CardNumber", {
-    props: {
-        number: {
-            type: String,
-            required: true,
-        },
+export const CardNumber = Vue.component('CardNumber', {
+  props: {
+    number: {
+      type: String,
+      required: true,
     },
-    template: `
+  },
+  template: `
         <div class="card-nr">#{{ number }}</div>
     `,
 });

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { CarbonateProcessing } from "../../src/cards/CarbonateProcessing";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("CarbonateProcessing", function () {
     let card : CarbonateProcessing, player : Player;

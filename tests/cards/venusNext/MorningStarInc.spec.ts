@@ -4,7 +4,7 @@ import { MorningStarInc } from "../../../src/cards/venusNext/MorningStarInc";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { IshtarMining } from '../../../src/cards/venusNext/IshtarMining';
+import { IshtarMining } from "../../../src/cards/venusNext/IshtarMining";
 
 describe("MorningStarInc", function () {
     it("Should play", function () {

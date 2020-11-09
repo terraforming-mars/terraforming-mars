@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { WarOnEarth } from "../../src/turmoil/globalEvents/WarOnEarth";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 
 describe("WarOnEarth", function () {
     it("resolve play", function () {

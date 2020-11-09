@@ -3,7 +3,7 @@ import { BiomassCombustors } from "../../src/cards/BiomassCombustors";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("BiomassCombustors", function () {
     let card : BiomassCombustors, player : Player, player2 : Player, game : Game;

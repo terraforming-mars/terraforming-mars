@@ -159,6 +159,20 @@ describe("AresHandler", function () {
         expect(player.getProduction(Resources.PLANTS)).eq(5);
     });
 
+    it("Adjacenct hazard costs do not apply to oceans", function() {
+        const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+
+        const before = getProduction(player);
+
+        const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.OCEAN});
+        expect(game.deferredActions.next()).is.undefined;
+
+        const after = getProduction(player);
+        expect(before).to.deep.eq(after);
+    });
+
     it("cover mild hazard", function() {
         const space = game.board.getAvailableSpacesOnLand(player)[0];
         AresHandler.putHazardAt(space, TileType.EROSION_MILD);
@@ -390,4 +404,13 @@ describe("AresHandler", function () {
         expect(player.megaCredits).is.eq(8);
         expect(player.getTerraformRating()).eq(20);
     });
+
 });
+
+function getProduction(player: Player): Map<Resources, number> {
+    const map: Map<Resources, number> = new Map();
+    [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.TITANIUM, Resources.STEEL].forEach(
+        r => map.set(r, player.getProduction(r))
+    )
+    return map;
+}

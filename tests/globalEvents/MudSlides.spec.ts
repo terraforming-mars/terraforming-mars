@@ -3,8 +3,8 @@ import { MudSlides } from "../../src/turmoil/globalEvents/MudSlides";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
 
 describe("MudSlides", function () {
     it("resolve play", function () {

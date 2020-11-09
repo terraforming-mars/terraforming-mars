@@ -1,5 +1,5 @@
-import { CardRequirements } from "./CardRequirements";
-import { CardRenderer } from "../cards/render/CardRenderer";
+import {CardRenderer} from "../cards/render/CardRenderer";
+import {CardRequirements} from './CardRequirements';
 
 export interface CardMetadata {
     cardNumber: string;

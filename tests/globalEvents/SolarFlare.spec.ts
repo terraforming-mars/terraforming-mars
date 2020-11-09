@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { SolarFlare } from "../../src/turmoil/globalEvents/SolarFlare";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { Resources } from "../../src/Resources";
 import { SpaceStation } from "../../src/cards/SpaceStation";
 

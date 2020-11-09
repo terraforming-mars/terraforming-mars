@@ -1,13 +1,13 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { CardMetadata } from "./CardMetadata";
-import { CardRequirements } from "./CardRequirements";
-import { CardRenderer } from "./render/CardRenderer";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {CardMetadata} from "./CardMetadata";
+import {CardRequirements} from "./CardRequirements";
+import {CardRenderer} from "./render/CardRenderer";
 
 export class Algae implements IProjectCard {
     public cost = 10;
@@ -18,9 +18,9 @@ export class Algae implements IProjectCard {
         return game.board.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.plants++;
-        player.addProduction(Resources.PLANTS, 2);
-        return undefined;
+      player.plants++;
+      player.addProduction(Resources.PLANTS, 2);
+      return undefined;
     }
 
     public metadata: CardMetadata = {

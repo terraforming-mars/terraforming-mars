@@ -33,6 +33,8 @@ describe("Ceres", function() {
         ceres.onColonyPlaced(player, game);
 
         ceres.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
         expect(player2.getProduction(Resources.STEEL)).to.eq(0);
         expect(player.steel).to.eq(2);

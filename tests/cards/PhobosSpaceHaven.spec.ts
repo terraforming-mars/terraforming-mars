@@ -4,7 +4,7 @@ import { PhobosSpaceHaven } from "../../src/cards/PhobosSpaceHaven";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("PhobosSpaceHaven", function () {
     it("Should play", function () {

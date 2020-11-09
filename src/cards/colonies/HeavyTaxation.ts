@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
 
 export class HeavyTaxation implements IProjectCard {
     public cost = 3;
@@ -12,7 +12,7 @@ export class HeavyTaxation implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.EARTH) >= 2;
+      return player.getTagCount(Tags.EARTH) >= 2;
     }
 
     public play(player: Player) {
@@ -22,6 +22,6 @@ export class HeavyTaxation implements IProjectCard {
     }
 
     public getVictoryPoints() {
-        return -1;
+      return -1;
     }
 }

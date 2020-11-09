@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("CommercialDistrict", function () {
     let card : CommercialDistrict, player : Player, game : Game;

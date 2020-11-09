@@ -1,18 +1,20 @@
-import Vue from "vue";
-import { LANGUAGES } from "../constants";
-import { PreferencesManager } from "./PreferencesManager";
+import Vue from 'vue';
+import {LANGUAGES} from '../constants';
+import {PreferencesManager} from './PreferencesManager';
 
-export const LanguageSwitcher = Vue.component("language-switcher", {
-    data: function () { return {
-        "languages": LANGUAGES
-    }},
-    methods: {
-        switchLanguageTo: function (langId: string, reloadThePage: boolean = false) {
-            PreferencesManager.saveValue("lang", langId);
-            if (reloadThePage) window.location = window.location;
-        }
+export const LanguageSwitcher = Vue.component('language-switcher', {
+  data: function() {
+    return {
+      'languages': LANGUAGES,
+    };
+  },
+  methods: {
+    switchLanguageTo: function(langId: string, reloadThePage: boolean = false) {
+      PreferencesManager.saveValue('lang', langId);
+      if (reloadThePage) window.location = window.location;
     },
-    template: `
+  },
+  template: `
         <div class="language-switcher">
             <div 
                 v-for="lang in languages" 
@@ -20,5 +22,5 @@ export const LanguageSwitcher = Vue.component("language-switcher", {
                 :title="lang.title" 
                 v-on:click="switchLanguageTo(lang.id, true)"></div>
         </div>
-    `
+    `,
 });

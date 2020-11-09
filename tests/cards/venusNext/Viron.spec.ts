@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SelectCard } from "../../../src/inputs/SelectCard";
-import { RestrictedArea } from '../../../src/cards/RestrictedArea';
+import { RestrictedArea } from "../../../src/cards/RestrictedArea";
 
 describe("Viron", function () {
     it("Should act", function () {

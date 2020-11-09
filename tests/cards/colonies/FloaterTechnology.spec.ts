@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FloaterTechnology } from "../../../src/cards/colonies/FloaterTechnology";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { ICard } from "../../../src/cards/ICard";
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";

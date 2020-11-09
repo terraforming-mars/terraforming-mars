@@ -1,13 +1,13 @@
-import {ICard} from '../../../src/cards/ICard';
+import { ICard } from "../../../src/cards/ICard";
 import { expect } from "chai";
 import { HydrogenToVenus } from "../../../src/cards/venusNext/HydrogenToVenus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { ColonizerTrainingCamp } from '../../../src/cards/ColonizerTrainingCamp';
-import { DeuteriumExport } from '../../../src/cards/venusNext/DeuteriumExport';
-import { Dirigibles } from '../../../src/cards/venusNext/Dirigibles';
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { ColonizerTrainingCamp } from "../../../src/cards/ColonizerTrainingCamp";
+import { DeuteriumExport } from "../../../src/cards/venusNext/DeuteriumExport";
+import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 
 describe("HydrogenToVenus", function () {
     let card : HydrogenToVenus, player : Player, game : Game;

@@ -1,7 +1,7 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { CardName } from '../../CardName';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {CardName} from '../../CardName';
 
 export class ScienceTagCard implements IProjectCard {
     public cost = 0;

@@ -1,10 +1,10 @@
-import { CardName } from "../../CardName";
-import { ShiftAresGlobalParametersDeferred } from "../../deferredActions/ShiftAresGlobalParametersDeferred";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
-import { CardType } from "../CardType";
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
+import {CardName} from '../../CardName';
+import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
+import {Game} from '../../Game';
+import {Player} from '../../Player';
+import {CardType} from '../CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
 
 export class ButterflyEffect implements IProjectCard {
     public cost = 8;

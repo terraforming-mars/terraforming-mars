@@ -4,7 +4,7 @@ import { ImportOfAdvancedGHG } from "../../src/cards/ImportOfAdvancedGHG";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("ImportOfAdvancedGHG", function () {
     it("Should play", function () {

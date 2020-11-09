@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { VenusianAnimals } from "../../../src/cards/venusNext/VenusianAnimals";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Research } from "../../../src/cards/Research";
 
 describe("VenusianAnimals", function () {

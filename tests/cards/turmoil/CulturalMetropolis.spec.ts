@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { CulturalMetropolis } from "../../../src/cards/turmoil/CulturalMetropolis";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";

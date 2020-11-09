@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { MartianMediaCenter } from "../../../src/cards/turmoil/MartianMediaCenter";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Resources } from "../../../src/Resources";
 import { setCustomGameOptions } from "../../TestingUtils";

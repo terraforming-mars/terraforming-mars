@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { GeneRepair } from "../../src/cards/GeneRepair";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("LightningHarvest", function () {
     let card : LightningHarvest, player : Player, game : Game;

@@ -1,8 +1,8 @@
-import { CorporationCard } from "../corporation/CorporationCard";
-import { Player } from "../../Player";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
+import {CorporationCard} from '../corporation/CorporationCard';
+import {Player} from '../../Player';
+import {Tags} from '../Tags';
+import {CardName} from '../../CardName';
+import {CardType} from '../CardType';
 
 export class TerralabsResearch implements CorporationCard {
     public name = CardName.TERRALABS_RESEARCH;
@@ -11,8 +11,8 @@ export class TerralabsResearch implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public play(player: Player) {
-        player.decreaseTerraformRating();
-        player.cardCost = 1;
-        return undefined;
+      player.decreaseTerraformRating();
+      player.cardCost = 1;
+      return undefined;
     }
 }

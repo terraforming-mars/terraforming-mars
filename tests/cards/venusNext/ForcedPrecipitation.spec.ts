@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { ForcedPrecipitation } from "../../../src/cards/venusNext/ForcedPrecipitation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { OrOptions } from '../../../src/inputs/OrOptions';
+import { Game } from "../../../src/Game";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("ForcedPrecipitation", function () {
     let card : ForcedPrecipitation, player : Player, game : Game;

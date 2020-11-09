@@ -5,8 +5,8 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import {Resources} from '../../Resources';
+import {CardName} from '../../CardName';
 
 export class FieldCappedCity implements IProjectCard {
     public cost = 29;
@@ -26,10 +26,10 @@ export class FieldCappedCity implements IProjectCard {
           (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.plants += 3;
-            player.addProduction(Resources.ENERGY,1);
-            player.addProduction(Resources.MEGACREDITS,2);
+            player.addProduction(Resources.ENERGY, 1);
+            player.addProduction(Resources.MEGACREDITS, 2);
             return undefined;
-          }
+          },
       );
     }
 }

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { JupiterFloatingStation } from "../../../src/cards/colonies/JupiterFloatingStation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("JupiterFloatingStation", function () {

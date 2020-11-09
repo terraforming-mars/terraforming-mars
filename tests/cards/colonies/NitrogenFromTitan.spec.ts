@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { NitrogenFromTitan } from "../../../src/cards/colonies/NitrogenFromTitan";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { JovianLanterns } from "../../../src/cards/colonies/JovianLanterns";
 import { TitanFloatingLaunchPad } from "../../../src/cards/colonies/TitanFloatingLaunchPad";
 import { SelectCard } from "../../../src/inputs/SelectCard";

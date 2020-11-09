@@ -6,7 +6,7 @@ import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Birds } from "../../src/cards/Birds";
 import { Fish } from "../../src/cards/Fish";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("EosChasmaNationalPark", function () {
     let card : EosChasmaNationalPark, player : Player, game : Game;

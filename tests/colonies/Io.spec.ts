@@ -33,6 +33,8 @@ describe("Io", function() {
         io.onColonyPlaced(player, game);
 
         io.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.HEAT)).to.eq(1);
         expect(player2.getProduction(Resources.HEAT)).to.eq(0);
         expect(player.heat).to.eq(2);

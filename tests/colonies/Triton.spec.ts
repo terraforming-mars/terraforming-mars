@@ -31,6 +31,8 @@ describe("Triton", function() {
         triton.onColonyPlaced(player, game);
 
         triton.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.titanium).to.eq(4);
         expect(player2.titanium).to.eq(1);
     });

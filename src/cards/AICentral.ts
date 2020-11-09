@@ -1,11 +1,11 @@
-import {IProjectCard} from "./IProjectCard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {IActionCard} from "./ICard";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {IActionCard} from './ICard';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 export class AICentral implements IActionCard, IProjectCard {
     public cost = 21;
@@ -17,7 +17,7 @@ export class AICentral implements IActionCard, IProjectCard {
       player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.addProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.ENERGY, -1);
       return undefined;
     }
     public canAct(): boolean {
@@ -29,7 +29,7 @@ export class AICentral implements IActionCard, IProjectCard {
     public action(player: Player, game: Game) {
       player.cardsInHand.push(
           game.dealer.dealCard(),
-          game.dealer.dealCard()
+          game.dealer.dealCard(),
       );
       return undefined;
     }

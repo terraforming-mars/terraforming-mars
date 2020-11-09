@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { PublicCelebrations } from "../../../src/cards/turmoil/PublicCelebrations";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { GameOptions, Game } from '../../../src/Game';
+import { GameOptions, Game } from "../../../src/Game";
 import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("PublicCelebrations", function () {

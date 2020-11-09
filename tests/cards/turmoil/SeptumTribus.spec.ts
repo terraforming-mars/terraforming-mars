@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { SeptumTribus } from "../../../src/cards/turmoil/SeptumTribus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
+import { Game, GameOptions } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { setCustomGameOptions } from "../../TestingUtils";
 

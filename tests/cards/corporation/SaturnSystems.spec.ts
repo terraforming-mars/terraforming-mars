@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { MirandaResort } from "../../../src/cards/MirandaResort";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("SaturnSystems", function () {
     let card : SaturnSystems, player : Player, game : Game;

@@ -1,14 +1,14 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { CardType } from "./CardType";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { CardMetadata } from "../cards/CardMetadata";
-import { CardRenderer } from "../cards/render/CardRenderer";
-import { CardRequirements } from "../cards/CardRequirements";
-import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {CardType} from './CardType';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from "../cards/CardMetadata";
+import {CardRenderer} from "../cards/render/CardRenderer";
+import {CardRequirements} from "../cards/CardRequirements";
 
 export class BiomassCombustors implements IProjectCard {
     public cost = 4;
@@ -16,19 +16,16 @@ export class BiomassCombustors implements IProjectCard {
     public tags = [Tags.ENERGY, Tags.STEEL];
     public name = CardName.BIOMASS_COMBUSTORS;
     public canPlay(player: Player, game: Game): boolean {
-        return (
-            game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) &&
-            game.someoneHasResourceProduction(Resources.PLANTS, 1)
-        );
+      return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public play(player: Player, game: Game) {
-        player.addProduction(Resources.ENERGY, 2);
-        game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
-        return undefined;
+      player.addProduction(Resources.ENERGY, 2);
+      game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+      return undefined;
     }
     public getVictoryPoints() {
-        return -1;
+      return -1;
     }
     public metadata: CardMetadata = {
         description:

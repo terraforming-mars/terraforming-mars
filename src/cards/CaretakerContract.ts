@@ -1,14 +1,14 @@
-import { IActionCard, ICard } from './ICard';
+import {IActionCard, ICard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
-import { AndOptions } from '../inputs/AndOptions';
-import { SelectAmount } from '../inputs/SelectAmount';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { REDS_RULING_POLICY_COST } from '../constants';
+import {AndOptions} from '../inputs/AndOptions';
+import {SelectAmount} from '../inputs/SelectAmount';
+import {CardName} from '../CardName';
+import {PartyHooks} from '../turmoil/parties/PartyHooks';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../constants';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost = 3;
@@ -25,7 +25,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
     }
     public canAct(player: Player, game: Game): boolean {
       const hasEnoughHeat = player.heat >= 8 || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8);
-      
+
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
         return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughHeat;
       }
@@ -42,21 +42,21 @@ export class CaretakerContract implements IActionCard, IProjectCard {
                 heatAmount +
                 (floaterAmount * 2) < 8
               ) {
-                throw new Error("Need to pay 8 heat");
+                throw new Error('Need to pay 8 heat');
               }
               player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
               player.heat -= heatAmount;
               player.increaseTerraformRating(game);
               return undefined;
             },
-            new SelectAmount("Select amount of heat to spend", "Spend heat", (amount: number) => {
+            new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
               heatAmount = amount;
               return undefined;
             }, player.heat),
-            new SelectAmount("Select amount of floaters on corporation to spend", "Spend floaters", (amount: number) => {
+            new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
               floaterAmount = amount;
               return undefined;
-            }, player.getResourcesOnCorporation())
+            }, player.getResourcesOnCorporation()),
         );
       }
       player.heat -= 8;

@@ -3,7 +3,7 @@ import { ArchaeBacteria } from "../../src/cards/ArchaeBacteria";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("ArchaeBacteria", function () {
     let card : ArchaeBacteria, player : Player, game : Game;

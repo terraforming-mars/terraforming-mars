@@ -33,6 +33,8 @@ describe("Luna", function() {
         luna.onColonyPlaced(player, game);
 
         luna.trade(player2, game);
+        game.deferredActions.runAll(() => {});
+
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
         expect(player.megaCredits).to.eq(2);

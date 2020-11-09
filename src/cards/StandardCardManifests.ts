@@ -1,460 +1,460 @@
-import { CardName } from "../CardName";
-import { GameModule } from "../GameModule";
-import { AcquiredCompany } from "./AcquiredCompany";
-import { AdaptationTechnology } from "./AdaptationTechnology";
-import { AdaptedLichen } from "./AdaptedLichen";
-import { AdvancedAlloys } from "./AdvancedAlloys";
-import { AdvancedEcosystems } from "./AdvancedEcosystems";
-import { AerobrakedAmmoniaAsteroid } from "./AerobrakedAmmoniaAsteroid";
-import { AICentral } from "./AICentral";
-import { Algae } from "./Algae";
-import { AntiGravityTechnology } from "./AntiGravityTechnology";
-import { Ants } from "./Ants";
-import { AquiferPumping } from "./AquiferPumping";
-import { ArchaeBacteria } from "./ArchaeBacteria";
-import { ArcticAlgae } from "./ArcticAlgae";
-import { ArtificialLake } from "./ArtificialLake";
-import { ArtificialPhotosynthesis } from "./ArtificialPhotosynthesis";
-import { Asteroid } from "./Asteroid";
-import { AsteroidMining } from "./AsteroidMining";
-import { AsteroidMiningConsortium } from "./AsteroidMiningConsortium";
-import { BeamFromAThoriumAsteroid } from "./BeamFromAThoriumAsteroid";
-import { BigAsteroid } from "./BigAsteroid";
-import { BiomassCombustors } from "./BiomassCombustors";
-import { Birds } from "./Birds";
-import { BlackPolarDust } from "./BlackPolarDust";
-import { BreathingFilters } from "./BreathingFilters";
-import { BribedCommittee } from "./BribedCommittee";
-import { BuildingIndustries } from "./BuildingIndustries";
-import { Bushes } from "./Bushes";
-import { BusinessContacts } from "./BusinessContacts";
-import { BusinessNetwork } from "./BusinessNetwork";
-import { CallistoPenalMines } from "./CallistoPenalMines";
-import { Capital } from "./Capital";
-import { CarbonateProcessing } from "./CarbonateProcessing";
-import { CardManifest } from "./CardManifest";
-import { CaretakerContract } from "./CaretakerContract";
-import { Cartel } from "./Cartel";
-import { CEOsFavoriteProject } from "./CEOsFavoriteProject";
-import { CloudSeeding } from "./CloudSeeding";
-import { ColonizerTrainingCamp } from "./ColonizerTrainingCamp";
-import { Comet } from "./Comet";
-import { CommercialDistrict } from "./CommercialDistrict";
-import { ConvoyFromEuropa } from "./ConvoyFromEuropa";
-import { CorporateStronghold } from "./CorporateStronghold";
-import { CrediCor } from "./corporation/CrediCor";
-import { EcoLine } from "./corporation/EcoLine";
-import { Helion } from "./corporation/Helion";
-import { InterplanetaryCinematics } from "./corporation/InterplanetaryCinematics";
-import { Inventrix } from "./corporation/Inventrix";
-import { MiningGuild } from "./corporation/MiningGuild";
-import { PhoboLog } from "./corporation/PhoboLog";
-import { SaturnSystems } from "./corporation/SaturnSystems";
-import { Teractor } from "./corporation/Teractor";
-import { TharsisRepublic } from "./corporation/TharsisRepublic";
-import { Thorgate } from "./corporation/Thorgate";
-import { UnitedNationsMarsInitiative } from "./corporation/UnitedNationsMarsInitiative";
-import { CupolaCity } from "./CupolaCity";
-import { Decomposers } from "./Decomposers";
-import { DeepWellHeating } from "./DeepWellHeating";
-import { DeimosDown } from "./DeimosDown";
-import { DesignedMicroOrganisms } from "./DesignedMicroOrganisms";
-import { DevelopmentCenter } from "./DevelopmentCenter";
-import { DomedCrater } from "./DomedCrater";
-import { DustSeals } from "./DustSeals";
-import { EarthCatapult } from "./EarthCatapult";
-import { EarthOffice } from "./EarthOffice";
-import { EcologicalZone } from "./EcologicalZone";
-import { ElectroCatapult } from "./ElectroCatapult";
-import { EnergySaving } from "./EnergySaving";
-import { EnergyTapping } from "./EnergyTapping";
-import { EosChasmaNationalPark } from "./EOSChasmaNationalPark";
-import { EquatorialMagnetizer } from "./EquatorialMagnetizer";
-import { ExtremeColdFungus } from "./ExtremeColdFungus";
-import { Farming } from "./Farming";
-import { Fish } from "./Fish";
-import { Flooding } from "./Flooding";
-import { FoodFactory } from "./FoodFactory";
-import { FueledGenerators } from "./FueledGenerators";
-import { FuelFactory } from "./FuelFactory";
-import { FusionPower } from "./FusionPower";
-import { GanymedeColony } from "./GanymedeColony";
-import { GeneRepair } from "./GeneRepair";
-import { GeothermalPower } from "./GeothermalPower";
-import { GHGFactories } from "./GHGFactories";
-import { GHGProducingBacteria } from "./GHGProducingBacteria";
-import { GiantIceAsteroid } from "./GiantIceAsteroid";
-import { GiantSpaceMirror } from "./GiantSpaceMirror";
-import { Grass } from "./Grass";
-import { GreatDam } from "./GreatDam";
-import { GreatEscarpmentConsortium } from "./GreatEscarpmentConsortium";
-import { Greenhouses } from "./Greenhouses";
-import { Hackers } from "./Hackers";
-import { Heather } from "./Heather";
-import { HeatTrappers } from "./HeatTrappers";
-import { Herbivores } from "./Herbivores";
-import { HiredRaiders } from "./HiredRaiders";
-import { IceAsteroid } from "./IceAsteroid";
-import { IceCapMelting } from "./IceCapMelting";
-import { ImmigrantCity } from "./ImmigrantCity";
-import { ImmigrationShuttles } from "./ImmigrationShuttles";
-import { ImportedGHG } from "./ImportedGHG";
-import { ImportedHydrogen } from "./ImportedHydrogen";
-import { ImportedNitrogen } from "./ImportedNitrogen";
-import { ImportOfAdvancedGHG } from "./ImportOfAdvancedGHG";
-import { IndenturedWorkers } from "./IndenturedWorkers";
-import { IndustrialCenter } from "./IndustrialCenter";
-import { IndustrialMicrobes } from "./IndustrialMicrobes";
-import { Insects } from "./Insects";
-import { Insulation } from "./Insulation";
-import { InterstellarColonyShip } from "./InterstellarColonyShip";
-import { InventionContest } from "./InventionContest";
-import { InventorsGuild } from "./InventorsGuild";
-import { InvestmentLoan } from "./InvestmentLoan";
-import { IoMiningIndustries } from "./IoMiningIndustries";
-import { Ironworks } from "./Ironworks";
-import { KelpFarming } from "./KelpFarming";
-import { LagrangeObservatory } from "./LagrangeObservatory";
-import { LakeMarineris } from "./LakeMarineris";
-import { LandClaim } from "./LandClaim";
-import { LargeConvoy } from "./LargeConvoy";
-import { LavaFlows } from "./LavaFlows";
-import { Lichen } from "./Lichen";
-import { LightningHarvest } from "./LightningHarvest";
-import { Livestock } from "./Livestock";
-import { LocalHeatTrapping } from "./LocalHeatTrapping";
-import { LunarBeam } from "./LunarBeam";
-import { MagneticFieldDome } from "./MagneticFieldDome";
-import { MagneticFieldGenerators } from "./MagneticFieldGenerators";
-import { Mangrove } from "./Mangrove";
-import { MarsUniversity } from "./MarsUniversity";
-import { MartianRails } from "./MartianRails";
-import { MassConverter } from "./MassConverter";
-import { MediaArchives } from "./MediaArchives";
-import { MediaGroup } from "./MediaGroup";
-import { MedicalLab } from "./MedicalLab";
-import { MethaneFromTitan } from "./MethaneFromTitan";
-import { MicroMills } from "./MicroMills";
-import { Mine } from "./Mine";
-import { MineralDeposit } from "./MineralDeposit";
-import { MiningArea } from "./MiningArea";
-import { MiningExpedition } from "./MiningExpedition";
-import { MiningRights } from "./MiningRights";
-import { MirandaResort } from "./MirandaResort";
-import { MoholeArea } from "./MoholeArea";
-import { Moss } from "./Moss";
-import { NaturalPreserve } from "./NaturalPreserve";
-import { NitriteReducingBacteria } from "./NitriteReducingBacteria";
-import { NitrogenRichAsteroid } from "./NitrogenRichAsteroid";
-import { NitrophilicMoss } from "./NitrophilicMoss";
-import { NoctisCity } from "./NoctisCity";
-import { NoctisFarming } from "./NoctisFarming";
-import { NuclearPower } from "./NuclearPower";
-import { NuclearZone } from "./NuclearZone";
-import { OlympusConference } from "./OlympusConference";
-import { OpenCity } from "./OpenCity";
-import { OptimalAerobraking } from "./OptimalAerobraking";
-import { OreProcessor } from "./OreProcessor";
-import { PermafrostExtraction } from "./PermafrostExtraction";
-import { PeroxidePower } from "./PeroxidePower";
-import { Pets } from "./Pets";
-import { PhobosSpaceHaven } from "./PhobosSpaceHaven";
-import { PhysicsComplex } from "./PhysicsComplex";
-import { Plantation } from "./Plantation";
-import { PowerGrid } from "./PowerGrid";
-import { PowerInfrastructure } from "./PowerInfrastructure";
-import { PowerPlant } from "./PowerPlant";
-import { PowerSupplyConsortium } from "./PowerSupplyConsortium";
-import { Predators } from "./Predators";
-import { ProtectedHabitats } from "./ProtectedHabitats";
-import { ProtectedValley } from "./ProtectedValley";
-import { QuantumExtractor } from "./QuantumExtractor";
-import { RadChemFactory } from "./RadChemFactory";
-import { RadSuits } from "./RadSuits";
-import { RegolithEaters } from "./RegolithEaters";
-import { ReleaseOfInertGases } from "./ReleaseOfInertGases";
-import { Research } from "./Research";
-import { ResearchOutpost } from "./ResearchOutpost";
-import { RestrictedArea } from "./RestrictedArea";
-import { RoboticWorkforce } from "./RoboticWorkforce";
-import { RoverConstruction } from "./RoverConstruction";
-import { Sabotage } from "./Sabotage";
-import { Satellites } from "./Satellites";
-import { SearchForLife } from "./SearchForLife";
-import { SecurityFleet } from "./SecurityFleet";
-import { Shuttles } from "./Shuttles";
-import { SmallAnimals } from "./SmallAnimals";
-import { SoilFactory } from "./SoilFactory";
-import { SolarPower } from "./SolarPower";
-import { SolarWindPower } from "./SolarWindPower";
-import { Soletta } from "./Soletta";
-import { SpaceElevator } from "./SpaceElevator";
-import { SpaceMirrors } from "./SpaceMirrors";
-import { SpaceStation } from "./SpaceStation";
-import { SpecialDesign } from "./SpecialDesign";
-import { Sponsors } from "./Sponsors";
-import { StandardTechnology } from "./StandardTechnology";
-import { Steelworks } from "./Steelworks";
-import { StripMine } from "./StripMine";
-import { SubterraneanReservoir } from "./SubterraneanReservoir";
-import { SymbioticFungus } from "./SymbioticFungus";
-import { Tardigrades } from "./Tardigrades";
-import { TechnologyDemonstration } from "./TechnologyDemonstration";
-import { TectonicStressPower } from "./TectonicStressPower";
-import { TerraformingGanymede } from "./TerraformingGanymede";
-import { TitaniumMine } from "./TitaniumMine";
-import { TollStation } from "./TollStation";
-import { TowingAComet } from "./TowingAComet";
-import { TransNeptuneProbe } from "./TransNeptuneProbe";
-import { Trees } from "./Trees";
-import { TropicalResort } from "./TropicalResort";
-import { TundraFarming } from "./TundraFarming";
-import { UndergroundCity } from "./UndergroundCity";
-import { UndergroundDetonations } from "./UndergroundDetonations";
-import { UrbanizedArea } from "./UrbanizedArea";
-import { VestaShipyard } from "./VestaShipyard";
-import { ViralEnhancers } from "./ViralEnhancers";
-import { Virus } from "./Virus";
-import { WaterImportFromEuropa } from "./WaterImportFromEuropa";
-import { WaterSplittingPlant } from "./WaterSplittingPlant";
-import { WavePower } from "./WavePower";
-import { Windmills } from "./Windmills";
-import { Worms } from "./Worms";
-import { Zeppelins } from "./Zeppelins";
+import {CardName} from '../CardName';
+import {GameModule} from '../GameModule';
+import {AcquiredCompany} from './AcquiredCompany';
+import {AdaptationTechnology} from './AdaptationTechnology';
+import {AdaptedLichen} from './AdaptedLichen';
+import {AdvancedAlloys} from './AdvancedAlloys';
+import {AdvancedEcosystems} from './AdvancedEcosystems';
+import {AerobrakedAmmoniaAsteroid} from './AerobrakedAmmoniaAsteroid';
+import {AICentral} from './AICentral';
+import {Algae} from './Algae';
+import {AntiGravityTechnology} from './AntiGravityTechnology';
+import {Ants} from './Ants';
+import {AquiferPumping} from './AquiferPumping';
+import {ArchaeBacteria} from './ArchaeBacteria';
+import {ArcticAlgae} from './ArcticAlgae';
+import {ArtificialLake} from './ArtificialLake';
+import {ArtificialPhotosynthesis} from './ArtificialPhotosynthesis';
+import {Asteroid} from './Asteroid';
+import {AsteroidMining} from './AsteroidMining';
+import {AsteroidMiningConsortium} from './AsteroidMiningConsortium';
+import {BeamFromAThoriumAsteroid} from './BeamFromAThoriumAsteroid';
+import {BigAsteroid} from './BigAsteroid';
+import {BiomassCombustors} from './BiomassCombustors';
+import {Birds} from './Birds';
+import {BlackPolarDust} from './BlackPolarDust';
+import {BreathingFilters} from './BreathingFilters';
+import {BribedCommittee} from './BribedCommittee';
+import {BuildingIndustries} from './BuildingIndustries';
+import {Bushes} from './Bushes';
+import {BusinessContacts} from './BusinessContacts';
+import {BusinessNetwork} from './BusinessNetwork';
+import {CallistoPenalMines} from './CallistoPenalMines';
+import {Capital} from './Capital';
+import {CarbonateProcessing} from './CarbonateProcessing';
+import {CardManifest} from './CardManifest';
+import {CaretakerContract} from './CaretakerContract';
+import {Cartel} from './Cartel';
+import {CEOsFavoriteProject} from './CEOsFavoriteProject';
+import {CloudSeeding} from './CloudSeeding';
+import {ColonizerTrainingCamp} from './ColonizerTrainingCamp';
+import {Comet} from './Comet';
+import {CommercialDistrict} from './CommercialDistrict';
+import {ConvoyFromEuropa} from './ConvoyFromEuropa';
+import {CorporateStronghold} from './CorporateStronghold';
+import {CrediCor} from './corporation/CrediCor';
+import {EcoLine} from './corporation/EcoLine';
+import {Helion} from './corporation/Helion';
+import {InterplanetaryCinematics} from './corporation/InterplanetaryCinematics';
+import {Inventrix} from './corporation/Inventrix';
+import {MiningGuild} from './corporation/MiningGuild';
+import {PhoboLog} from './corporation/PhoboLog';
+import {SaturnSystems} from './corporation/SaturnSystems';
+import {Teractor} from './corporation/Teractor';
+import {TharsisRepublic} from './corporation/TharsisRepublic';
+import {Thorgate} from './corporation/Thorgate';
+import {UnitedNationsMarsInitiative} from './corporation/UnitedNationsMarsInitiative';
+import {CupolaCity} from './CupolaCity';
+import {Decomposers} from './Decomposers';
+import {DeepWellHeating} from './DeepWellHeating';
+import {DeimosDown} from './DeimosDown';
+import {DesignedMicroOrganisms} from './DesignedMicroOrganisms';
+import {DevelopmentCenter} from './DevelopmentCenter';
+import {DomedCrater} from './DomedCrater';
+import {DustSeals} from './DustSeals';
+import {EarthCatapult} from './EarthCatapult';
+import {EarthOffice} from './EarthOffice';
+import {EcologicalZone} from './EcologicalZone';
+import {ElectroCatapult} from './ElectroCatapult';
+import {EnergySaving} from './EnergySaving';
+import {EnergyTapping} from './EnergyTapping';
+import {EosChasmaNationalPark} from './EOSChasmaNationalPark';
+import {EquatorialMagnetizer} from './EquatorialMagnetizer';
+import {ExtremeColdFungus} from './ExtremeColdFungus';
+import {Farming} from './Farming';
+import {Fish} from './Fish';
+import {Flooding} from './Flooding';
+import {FoodFactory} from './FoodFactory';
+import {FueledGenerators} from './FueledGenerators';
+import {FuelFactory} from './FuelFactory';
+import {FusionPower} from './FusionPower';
+import {GanymedeColony} from './GanymedeColony';
+import {GeneRepair} from './GeneRepair';
+import {GeothermalPower} from './GeothermalPower';
+import {GHGFactories} from './GHGFactories';
+import {GHGProducingBacteria} from './GHGProducingBacteria';
+import {GiantIceAsteroid} from './GiantIceAsteroid';
+import {GiantSpaceMirror} from './GiantSpaceMirror';
+import {Grass} from './Grass';
+import {GreatDam} from './GreatDam';
+import {GreatEscarpmentConsortium} from './GreatEscarpmentConsortium';
+import {Greenhouses} from './Greenhouses';
+import {Hackers} from './Hackers';
+import {Heather} from './Heather';
+import {HeatTrappers} from './HeatTrappers';
+import {Herbivores} from './Herbivores';
+import {HiredRaiders} from './HiredRaiders';
+import {IceAsteroid} from './IceAsteroid';
+import {IceCapMelting} from './IceCapMelting';
+import {ImmigrantCity} from './ImmigrantCity';
+import {ImmigrationShuttles} from './ImmigrationShuttles';
+import {ImportedGHG} from './ImportedGHG';
+import {ImportedHydrogen} from './ImportedHydrogen';
+import {ImportedNitrogen} from './ImportedNitrogen';
+import {ImportOfAdvancedGHG} from './ImportOfAdvancedGHG';
+import {IndenturedWorkers} from './IndenturedWorkers';
+import {IndustrialCenter} from './IndustrialCenter';
+import {IndustrialMicrobes} from './IndustrialMicrobes';
+import {Insects} from './Insects';
+import {Insulation} from './Insulation';
+import {InterstellarColonyShip} from './InterstellarColonyShip';
+import {InventionContest} from './InventionContest';
+import {InventorsGuild} from './InventorsGuild';
+import {InvestmentLoan} from './InvestmentLoan';
+import {IoMiningIndustries} from './IoMiningIndustries';
+import {Ironworks} from './Ironworks';
+import {KelpFarming} from './KelpFarming';
+import {LagrangeObservatory} from './LagrangeObservatory';
+import {LakeMarineris} from './LakeMarineris';
+import {LandClaim} from './LandClaim';
+import {LargeConvoy} from './LargeConvoy';
+import {LavaFlows} from './LavaFlows';
+import {Lichen} from './Lichen';
+import {LightningHarvest} from './LightningHarvest';
+import {Livestock} from './Livestock';
+import {LocalHeatTrapping} from './LocalHeatTrapping';
+import {LunarBeam} from './LunarBeam';
+import {MagneticFieldDome} from './MagneticFieldDome';
+import {MagneticFieldGenerators} from './MagneticFieldGenerators';
+import {Mangrove} from './Mangrove';
+import {MarsUniversity} from './MarsUniversity';
+import {MartianRails} from './MartianRails';
+import {MassConverter} from './MassConverter';
+import {MediaArchives} from './MediaArchives';
+import {MediaGroup} from './MediaGroup';
+import {MedicalLab} from './MedicalLab';
+import {MethaneFromTitan} from './MethaneFromTitan';
+import {MicroMills} from './MicroMills';
+import {Mine} from './Mine';
+import {MineralDeposit} from './MineralDeposit';
+import {MiningArea} from './MiningArea';
+import {MiningExpedition} from './MiningExpedition';
+import {MiningRights} from './MiningRights';
+import {MirandaResort} from './MirandaResort';
+import {MoholeArea} from './MoholeArea';
+import {Moss} from './Moss';
+import {NaturalPreserve} from './NaturalPreserve';
+import {NitriteReducingBacteria} from './NitriteReducingBacteria';
+import {NitrogenRichAsteroid} from './NitrogenRichAsteroid';
+import {NitrophilicMoss} from './NitrophilicMoss';
+import {NoctisCity} from './NoctisCity';
+import {NoctisFarming} from './NoctisFarming';
+import {NuclearPower} from './NuclearPower';
+import {NuclearZone} from './NuclearZone';
+import {OlympusConference} from './OlympusConference';
+import {OpenCity} from './OpenCity';
+import {OptimalAerobraking} from './OptimalAerobraking';
+import {OreProcessor} from './OreProcessor';
+import {PermafrostExtraction} from './PermafrostExtraction';
+import {PeroxidePower} from './PeroxidePower';
+import {Pets} from './Pets';
+import {PhobosSpaceHaven} from './PhobosSpaceHaven';
+import {PhysicsComplex} from './PhysicsComplex';
+import {Plantation} from './Plantation';
+import {PowerGrid} from './PowerGrid';
+import {PowerInfrastructure} from './PowerInfrastructure';
+import {PowerPlant} from './PowerPlant';
+import {PowerSupplyConsortium} from './PowerSupplyConsortium';
+import {Predators} from './Predators';
+import {ProtectedHabitats} from './ProtectedHabitats';
+import {ProtectedValley} from './ProtectedValley';
+import {QuantumExtractor} from './QuantumExtractor';
+import {RadChemFactory} from './RadChemFactory';
+import {RadSuits} from './RadSuits';
+import {RegolithEaters} from './RegolithEaters';
+import {ReleaseOfInertGases} from './ReleaseOfInertGases';
+import {Research} from './Research';
+import {ResearchOutpost} from './ResearchOutpost';
+import {RestrictedArea} from './RestrictedArea';
+import {RoboticWorkforce} from './RoboticWorkforce';
+import {RoverConstruction} from './RoverConstruction';
+import {Sabotage} from './Sabotage';
+import {Satellites} from './Satellites';
+import {SearchForLife} from './SearchForLife';
+import {SecurityFleet} from './SecurityFleet';
+import {Shuttles} from './Shuttles';
+import {SmallAnimals} from './SmallAnimals';
+import {SoilFactory} from './SoilFactory';
+import {SolarPower} from './SolarPower';
+import {SolarWindPower} from './SolarWindPower';
+import {Soletta} from './Soletta';
+import {SpaceElevator} from './SpaceElevator';
+import {SpaceMirrors} from './SpaceMirrors';
+import {SpaceStation} from './SpaceStation';
+import {SpecialDesign} from './SpecialDesign';
+import {Sponsors} from './Sponsors';
+import {StandardTechnology} from './StandardTechnology';
+import {Steelworks} from './Steelworks';
+import {StripMine} from './StripMine';
+import {SubterraneanReservoir} from './SubterraneanReservoir';
+import {SymbioticFungus} from './SymbioticFungus';
+import {Tardigrades} from './Tardigrades';
+import {TechnologyDemonstration} from './TechnologyDemonstration';
+import {TectonicStressPower} from './TectonicStressPower';
+import {TerraformingGanymede} from './TerraformingGanymede';
+import {TitaniumMine} from './TitaniumMine';
+import {TollStation} from './TollStation';
+import {TowingAComet} from './TowingAComet';
+import {TransNeptuneProbe} from './TransNeptuneProbe';
+import {Trees} from './Trees';
+import {TropicalResort} from './TropicalResort';
+import {TundraFarming} from './TundraFarming';
+import {UndergroundCity} from './UndergroundCity';
+import {UndergroundDetonations} from './UndergroundDetonations';
+import {UrbanizedArea} from './UrbanizedArea';
+import {VestaShipyard} from './VestaShipyard';
+import {ViralEnhancers} from './ViralEnhancers';
+import {Virus} from './Virus';
+import {WaterImportFromEuropa} from './WaterImportFromEuropa';
+import {WaterSplittingPlant} from './WaterSplittingPlant';
+import {WavePower} from './WavePower';
+import {Windmills} from './Windmills';
+import {Worms} from './Worms';
+import {Zeppelins} from './Zeppelins';
 
-export const BASE_CARD_MANIFEST = new CardManifest ({
-    module: GameModule.Base,
-    projectCards: [
-        { cardName: CardName.ADAPTATION_TECHNOLOGY , factory: AdaptationTechnology },
-        { cardName: CardName.ADAPTED_LICHEN , factory: AdaptedLichen },
-        { cardName: CardName.ADVANCED_ECOSYSTEMS, factory: AdvancedEcosystems },
-        { cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID, factory: AerobrakedAmmoniaAsteroid },
-        { cardName: CardName.ANTS, factory: Ants },
-        { cardName: CardName.AQUIFER_PUMPING, factory: AquiferPumping },
-        { cardName: CardName.ALGAE, factory: Algae },
-        { cardName: CardName.ARCHAEBACTERIA, factory: ArchaeBacteria },
-        { cardName: CardName.ARCTIC_ALGAE, factory: ArcticAlgae },
-        { cardName: CardName.ARTIFICIAL_LAKE, factory: ArtificialLake },
-        { cardName: CardName.ARTIFICIAL_PHOTOSYNTHESIS, factory: ArtificialPhotosynthesis },
-        { cardName: CardName.ASTEROID, factory: Asteroid },
-        { cardName: CardName.ASTEROID_MINING, factory: AsteroidMining },
-        { cardName: CardName.BEAM_FROM_A_THORIUM_ASTEROID, factory: BeamFromAThoriumAsteroid },
-        { cardName: CardName.BIG_ASTEROID, factory: BigAsteroid },
-        { cardName: CardName.BIOMASS_COMBUSTORS, factory: BiomassCombustors },
-        { cardName: CardName.BIRDS, factory: Birds },
-        { cardName: CardName.BLACK_POLAR_DUST, factory: BlackPolarDust },
-        { cardName: CardName.BREATHING_FILTERS, factory: BreathingFilters },
-        { cardName: CardName.BUSHES, factory: Bushes },
-        { cardName: CardName.CAPITAL, factory: Capital },
-        { cardName: CardName.CARBONATE_PROCESSING, factory: CarbonateProcessing },
-        { cardName: CardName.CLOUD_SEEDING, factory: CloudSeeding },
-        { cardName: CardName.COLONIZER_TRAINING_CAMP, factory: ColonizerTrainingCamp },
-        { cardName: CardName.COMET, factory: Comet },
-        { cardName: CardName.CONVOY_FROM_EUROPA, factory: ConvoyFromEuropa },
-        { cardName: CardName.CUPOLA_CITY , factory: CupolaCity },
-        { cardName: CardName.DECOMPOSERS, factory: Decomposers },
-        { cardName: CardName.DEEP_WELL_HEATING, factory: DeepWellHeating },
-        { cardName: CardName.DEIMOS_DOWN, factory: DeimosDown },
-        { cardName: CardName.DESIGNED_MICRO_ORGANISMS, factory: DesignedMicroOrganisms },
-        { cardName: CardName.DOMED_CRATER, factory: DomedCrater },
-        { cardName: CardName.DUST_SEALS, factory: DustSeals },
-        { cardName: CardName.ECOLOGICAL_ZONE, factory: EcologicalZone },
-        { cardName: CardName.ENERGY_SAVING, factory: EnergySaving },
-        { cardName: CardName.EOS_CHASMA_NATIONAL_PARK, factory: EosChasmaNationalPark },
-        { cardName: CardName.EQUATORIAL_MAGNETIZER, factory: EquatorialMagnetizer },
-        { cardName: CardName.EXTREME_COLD_FUNGUS, factory: ExtremeColdFungus },
-        { cardName: CardName.FARMING, factory: Farming },
-        { cardName: CardName.FISH, factory: Fish },
-        { cardName: CardName.FLOODING, factory: Flooding },
-        { cardName: CardName.FOOD_FACTORY, factory: FoodFactory },
-        { cardName: CardName.FUSION_POWER, factory: FusionPower },
-        { cardName: CardName.FUELED_GENERATORS, factory: FueledGenerators },
-        { cardName: CardName.GANYMEDE_COLONY, factory: GanymedeColony },
-        { cardName: CardName.GEOTHERMAL_POWER, factory: GeothermalPower },
-        { cardName: CardName.GHG_FACTORIES, factory: GHGFactories },
-        { cardName: CardName.GHG_PRODUCING_BACTERIA, factory: GHGProducingBacteria },
-        { cardName: CardName.GIANT_ICE_ASTEROID, factory: GiantIceAsteroid },
-        { cardName: CardName.GIANT_SPACE_MIRROR, factory: GiantSpaceMirror },
-        { cardName: CardName.GRASS, factory: Grass },
-        { cardName: CardName.GREAT_DAM, factory: GreatDam },
-        { cardName: CardName.GREENHOUSES, factory: Greenhouses },
-        { cardName: CardName.HEATHER, factory: Heather },
-        { cardName: CardName.HEAT_TRAPPERS, factory: HeatTrappers },
-        { cardName: CardName.HERBIVORES, factory: Herbivores },
-        { cardName: CardName.ICE_ASTEROID, factory: IceAsteroid },
-        { cardName: CardName.ICE_CAP_MELTING, factory: IceCapMelting },
-        { cardName: CardName.IMMIGRANT_CITY, factory: ImmigrantCity },
-        { cardName: CardName.IMMIGRATION_SHUTTLES, factory: ImmigrationShuttles },
-        { cardName: CardName.IMPORTED_GHG, factory: ImportedGHG },
-        { cardName: CardName.IMPORTED_HYDROGEN, factory: ImportedHydrogen },
-        { cardName: CardName.IMPORTED_NITROGEN, factory: ImportedNitrogen },
-        { cardName: CardName.IMPORT_OF_ADVANCED_GHG, factory: ImportOfAdvancedGHG },
-        { cardName: CardName.INDUSTRIAL_MICROBES, factory: IndustrialMicrobes },
-        { cardName: CardName.INSECTS, factory: Insects },
-        { cardName: CardName.INSULATION, factory: Insulation },
-        { cardName: CardName.IRONWORKS, factory: Ironworks },
-        { cardName: CardName.KELP_FARMING, factory: KelpFarming },
-        { cardName: CardName.LAKE_MARINERIS, factory: LakeMarineris },
-        { cardName: CardName.LARGE_CONVOY, factory: LargeConvoy },
-        { cardName: CardName.LAVA_FLOWS, factory: LavaFlows },
-        { cardName: CardName.LICHEN, factory: Lichen },
-        { cardName: CardName.LIVESTOCK, factory: Livestock },
-        { cardName: CardName.LOCAL_HEAT_TRAPPING, factory: LocalHeatTrapping },
-        { cardName: CardName.LUNAR_BEAM, factory: LunarBeam },
-        { cardName: CardName.MAGNETIC_FIELD_DOME , factory: MagneticFieldDome },
-        { cardName: CardName.MAGNETIC_FIELD_GENERATORS, factory: MagneticFieldGenerators },
-        { cardName: CardName.MANGROVE, factory: Mangrove },
-        { cardName: CardName.MARTIAN_RAILS, factory: MartianRails },
-        { cardName: CardName.METHANE_FROM_TITAN, factory: MethaneFromTitan },
-        { cardName: CardName.MICRO_MILLS, factory: MicroMills },
-        { cardName: CardName.MINING_EXPEDITION, factory: MiningExpedition },
-        { cardName: CardName.MINING_RIGHTS, factory: MiningRights },
-        { cardName: CardName.MOHOLE_AREA, factory: MoholeArea },
-        { cardName: CardName.MOSS, factory: Moss },
-        { cardName: CardName.NATURAL_PRESERVE, factory: NaturalPreserve },
-        { cardName: CardName.NITRITE_REDUCING_BACTERIA, factory: NitriteReducingBacteria },
-        { cardName: CardName.NITROGEN_RICH_ASTEROID, factory: NitrogenRichAsteroid },
-        { cardName: CardName.NITROPHILIC_MOSS, factory: NitrophilicMoss },
-        { cardName: CardName.NOCTIS_CITY, factory: NoctisCity },
-        { cardName: CardName.NOCTIS_FARMING, factory: NoctisFarming },
-        { cardName: CardName.NUCLEAR_POWER, factory: NuclearPower },
-        { cardName: CardName.NUCLEAR_ZONE, factory: NuclearZone },
-        { cardName: CardName.OPEN_CITY, factory: OpenCity },
-        { cardName: CardName.OPTIMAL_AEROBRAKING, factory: OptimalAerobraking },
-        { cardName: CardName.ORE_PROCESSOR, factory: OreProcessor },
-        { cardName: CardName.PERMAFROST_EXTRACTION, factory: PermafrostExtraction },
-        { cardName: CardName.PEROXIDE_POWER, factory: PeroxidePower },
-        { cardName: CardName.PETS, factory: Pets },
-        { cardName: CardName.PHOBOS_SPACE_HAVEN, factory: PhobosSpaceHaven },
-        { cardName: CardName.PLANTATION , factory: Plantation },
-        { cardName: CardName.POWER_GRID , factory: PowerGrid },
-        { cardName: CardName.POWER_PLANT , factory: PowerPlant },
-        { cardName: CardName.PREDATORS, factory: Predators },
-        { cardName: CardName.PROTECTED_VALLEY, factory: ProtectedValley },
-        { cardName: CardName.RAD_CHEM_FACTORY, factory: RadChemFactory },
-        { cardName: CardName.REGOLITH_EATERS, factory: RegolithEaters },
-        { cardName: CardName.RELEASE_OF_INERT_GASES, factory: ReleaseOfInertGases },
-        { cardName: CardName.RESEARCH_OUTPOST, factory: ResearchOutpost },
-        { cardName: CardName.ROVER_CONSTRUCTION, factory: RoverConstruction },
-        { cardName: CardName.SEARCH_FOR_LIFE, factory: SearchForLife },
-        { cardName: CardName.SHUTTLES, factory: Shuttles },
-        { cardName: CardName.SMALL_ANIMALS, factory: SmallAnimals },
-        { cardName: CardName.SOIL_FACTORY, factory: SoilFactory },
-        { cardName: CardName.SOLAR_POWER, factory: SolarPower },
-        { cardName: CardName.SOLAR_WIND_POWER, factory: SolarWindPower },
-        { cardName: CardName.SOLETTA, factory: Soletta },
-        { cardName: CardName.SPACE_MIRRORS, factory: SpaceMirrors },
-        { cardName: CardName.SPECIAL_DESIGN, factory: SpecialDesign },
-        { cardName: CardName.STEELWORKS, factory: Steelworks },
-        { cardName: CardName.STRIP_MINE, factory: StripMine },
-        { cardName: CardName.SUBTERRANEAN_RESERVOIR, factory: SubterraneanReservoir },
-        { cardName: CardName.SYMBIOTIC_FUNGUS, factory: SymbioticFungus },
-        { cardName: CardName.TECTONIC_STRESS_POWER, factory: TectonicStressPower },
-        { cardName: CardName.TOWING_A_COMET, factory: TowingAComet },
-        { cardName: CardName.TREES, factory: Trees },
-        { cardName: CardName.TUNDRA_FARMING, factory: TundraFarming },
-        { cardName: CardName.UNDERGROUND_CITY, factory: UndergroundCity },
-        { cardName: CardName.UNDERGROUND_DETONATIONS, factory: UndergroundDetonations },
-        { cardName: CardName.URBANIZED_AREA, factory: UrbanizedArea },
-        { cardName: CardName.WATER_IMPORT_FROM_EUROPA, factory: WaterImportFromEuropa },
-        { cardName: CardName.WATER_SPLITTING_PLANT, factory: WaterSplittingPlant },
-        { cardName: CardName.WAVE_POWER, factory: WavePower },
-        { cardName: CardName.WINDMILLS, factory: Windmills },
-        { cardName: CardName.WORMS, factory: Worms },
-        { cardName: CardName.ZEPPELINS, factory: Zeppelins }
-        ],
+export const BASE_CARD_MANIFEST = new CardManifest({
+  module: GameModule.Base,
+  projectCards: [
+    {cardName: CardName.ADAPTATION_TECHNOLOGY, Factory: AdaptationTechnology},
+    {cardName: CardName.ADAPTED_LICHEN, Factory: AdaptedLichen},
+    {cardName: CardName.ADVANCED_ECOSYSTEMS, Factory: AdvancedEcosystems},
+    {cardName: CardName.AEROBRAKED_AMMONIA_ASTEROID, Factory: AerobrakedAmmoniaAsteroid},
+    {cardName: CardName.ANTS, Factory: Ants},
+    {cardName: CardName.AQUIFER_PUMPING, Factory: AquiferPumping},
+    {cardName: CardName.ALGAE, Factory: Algae},
+    {cardName: CardName.ARCHAEBACTERIA, Factory: ArchaeBacteria},
+    {cardName: CardName.ARCTIC_ALGAE, Factory: ArcticAlgae},
+    {cardName: CardName.ARTIFICIAL_LAKE, Factory: ArtificialLake},
+    {cardName: CardName.ARTIFICIAL_PHOTOSYNTHESIS, Factory: ArtificialPhotosynthesis},
+    {cardName: CardName.ASTEROID, Factory: Asteroid},
+    {cardName: CardName.ASTEROID_MINING, Factory: AsteroidMining},
+    {cardName: CardName.BEAM_FROM_A_THORIUM_ASTEROID, Factory: BeamFromAThoriumAsteroid},
+    {cardName: CardName.BIG_ASTEROID, Factory: BigAsteroid},
+    {cardName: CardName.BIOMASS_COMBUSTORS, Factory: BiomassCombustors},
+    {cardName: CardName.BIRDS, Factory: Birds},
+    {cardName: CardName.BLACK_POLAR_DUST, Factory: BlackPolarDust},
+    {cardName: CardName.BREATHING_FILTERS, Factory: BreathingFilters},
+    {cardName: CardName.BUSHES, Factory: Bushes},
+    {cardName: CardName.CAPITAL, Factory: Capital},
+    {cardName: CardName.CARBONATE_PROCESSING, Factory: CarbonateProcessing},
+    {cardName: CardName.CLOUD_SEEDING, Factory: CloudSeeding},
+    {cardName: CardName.COLONIZER_TRAINING_CAMP, Factory: ColonizerTrainingCamp},
+    {cardName: CardName.COMET, Factory: Comet},
+    {cardName: CardName.CONVOY_FROM_EUROPA, Factory: ConvoyFromEuropa},
+    {cardName: CardName.CUPOLA_CITY, Factory: CupolaCity},
+    {cardName: CardName.DECOMPOSERS, Factory: Decomposers},
+    {cardName: CardName.DEEP_WELL_HEATING, Factory: DeepWellHeating},
+    {cardName: CardName.DEIMOS_DOWN, Factory: DeimosDown},
+    {cardName: CardName.DESIGNED_MICRO_ORGANISMS, Factory: DesignedMicroOrganisms},
+    {cardName: CardName.DOMED_CRATER, Factory: DomedCrater},
+    {cardName: CardName.DUST_SEALS, Factory: DustSeals},
+    {cardName: CardName.ECOLOGICAL_ZONE, Factory: EcologicalZone},
+    {cardName: CardName.ENERGY_SAVING, Factory: EnergySaving},
+    {cardName: CardName.EOS_CHASMA_NATIONAL_PARK, Factory: EosChasmaNationalPark},
+    {cardName: CardName.EQUATORIAL_MAGNETIZER, Factory: EquatorialMagnetizer},
+    {cardName: CardName.EXTREME_COLD_FUNGUS, Factory: ExtremeColdFungus},
+    {cardName: CardName.FARMING, Factory: Farming},
+    {cardName: CardName.FISH, Factory: Fish},
+    {cardName: CardName.FLOODING, Factory: Flooding},
+    {cardName: CardName.FOOD_FACTORY, Factory: FoodFactory},
+    {cardName: CardName.FUSION_POWER, Factory: FusionPower},
+    {cardName: CardName.FUELED_GENERATORS, Factory: FueledGenerators},
+    {cardName: CardName.GANYMEDE_COLONY, Factory: GanymedeColony},
+    {cardName: CardName.GEOTHERMAL_POWER, Factory: GeothermalPower},
+    {cardName: CardName.GHG_FACTORIES, Factory: GHGFactories},
+    {cardName: CardName.GHG_PRODUCING_BACTERIA, Factory: GHGProducingBacteria},
+    {cardName: CardName.GIANT_ICE_ASTEROID, Factory: GiantIceAsteroid},
+    {cardName: CardName.GIANT_SPACE_MIRROR, Factory: GiantSpaceMirror},
+    {cardName: CardName.GRASS, Factory: Grass},
+    {cardName: CardName.GREAT_DAM, Factory: GreatDam},
+    {cardName: CardName.GREENHOUSES, Factory: Greenhouses},
+    {cardName: CardName.HEATHER, Factory: Heather},
+    {cardName: CardName.HEAT_TRAPPERS, Factory: HeatTrappers},
+    {cardName: CardName.HERBIVORES, Factory: Herbivores},
+    {cardName: CardName.ICE_ASTEROID, Factory: IceAsteroid},
+    {cardName: CardName.ICE_CAP_MELTING, Factory: IceCapMelting},
+    {cardName: CardName.IMMIGRANT_CITY, Factory: ImmigrantCity},
+    {cardName: CardName.IMMIGRATION_SHUTTLES, Factory: ImmigrationShuttles},
+    {cardName: CardName.IMPORTED_GHG, Factory: ImportedGHG},
+    {cardName: CardName.IMPORTED_HYDROGEN, Factory: ImportedHydrogen},
+    {cardName: CardName.IMPORTED_NITROGEN, Factory: ImportedNitrogen},
+    {cardName: CardName.IMPORT_OF_ADVANCED_GHG, Factory: ImportOfAdvancedGHG},
+    {cardName: CardName.INDUSTRIAL_MICROBES, Factory: IndustrialMicrobes},
+    {cardName: CardName.INSECTS, Factory: Insects},
+    {cardName: CardName.INSULATION, Factory: Insulation},
+    {cardName: CardName.IRONWORKS, Factory: Ironworks},
+    {cardName: CardName.KELP_FARMING, Factory: KelpFarming},
+    {cardName: CardName.LAKE_MARINERIS, Factory: LakeMarineris},
+    {cardName: CardName.LARGE_CONVOY, Factory: LargeConvoy},
+    {cardName: CardName.LAVA_FLOWS, Factory: LavaFlows},
+    {cardName: CardName.LICHEN, Factory: Lichen},
+    {cardName: CardName.LIVESTOCK, Factory: Livestock},
+    {cardName: CardName.LOCAL_HEAT_TRAPPING, Factory: LocalHeatTrapping},
+    {cardName: CardName.LUNAR_BEAM, Factory: LunarBeam},
+    {cardName: CardName.MAGNETIC_FIELD_DOME, Factory: MagneticFieldDome},
+    {cardName: CardName.MAGNETIC_FIELD_GENERATORS, Factory: MagneticFieldGenerators},
+    {cardName: CardName.MANGROVE, Factory: Mangrove},
+    {cardName: CardName.MARTIAN_RAILS, Factory: MartianRails},
+    {cardName: CardName.METHANE_FROM_TITAN, Factory: MethaneFromTitan},
+    {cardName: CardName.MICRO_MILLS, Factory: MicroMills},
+    {cardName: CardName.MINING_EXPEDITION, Factory: MiningExpedition},
+    {cardName: CardName.MINING_RIGHTS, Factory: MiningRights},
+    {cardName: CardName.MOHOLE_AREA, Factory: MoholeArea},
+    {cardName: CardName.MOSS, Factory: Moss},
+    {cardName: CardName.NATURAL_PRESERVE, Factory: NaturalPreserve},
+    {cardName: CardName.NITRITE_REDUCING_BACTERIA, Factory: NitriteReducingBacteria},
+    {cardName: CardName.NITROGEN_RICH_ASTEROID, Factory: NitrogenRichAsteroid},
+    {cardName: CardName.NITROPHILIC_MOSS, Factory: NitrophilicMoss},
+    {cardName: CardName.NOCTIS_CITY, Factory: NoctisCity},
+    {cardName: CardName.NOCTIS_FARMING, Factory: NoctisFarming},
+    {cardName: CardName.NUCLEAR_POWER, Factory: NuclearPower},
+    {cardName: CardName.NUCLEAR_ZONE, Factory: NuclearZone},
+    {cardName: CardName.OPEN_CITY, Factory: OpenCity},
+    {cardName: CardName.OPTIMAL_AEROBRAKING, Factory: OptimalAerobraking},
+    {cardName: CardName.ORE_PROCESSOR, Factory: OreProcessor},
+    {cardName: CardName.PERMAFROST_EXTRACTION, Factory: PermafrostExtraction},
+    {cardName: CardName.PEROXIDE_POWER, Factory: PeroxidePower},
+    {cardName: CardName.PETS, Factory: Pets},
+    {cardName: CardName.PHOBOS_SPACE_HAVEN, Factory: PhobosSpaceHaven},
+    {cardName: CardName.PLANTATION, Factory: Plantation},
+    {cardName: CardName.POWER_GRID, Factory: PowerGrid},
+    {cardName: CardName.POWER_PLANT, Factory: PowerPlant},
+    {cardName: CardName.PREDATORS, Factory: Predators},
+    {cardName: CardName.PROTECTED_VALLEY, Factory: ProtectedValley},
+    {cardName: CardName.RAD_CHEM_FACTORY, Factory: RadChemFactory},
+    {cardName: CardName.REGOLITH_EATERS, Factory: RegolithEaters},
+    {cardName: CardName.RELEASE_OF_INERT_GASES, Factory: ReleaseOfInertGases},
+    {cardName: CardName.RESEARCH_OUTPOST, Factory: ResearchOutpost},
+    {cardName: CardName.ROVER_CONSTRUCTION, Factory: RoverConstruction},
+    {cardName: CardName.SEARCH_FOR_LIFE, Factory: SearchForLife},
+    {cardName: CardName.SHUTTLES, Factory: Shuttles},
+    {cardName: CardName.SMALL_ANIMALS, Factory: SmallAnimals},
+    {cardName: CardName.SOIL_FACTORY, Factory: SoilFactory},
+    {cardName: CardName.SOLAR_POWER, Factory: SolarPower},
+    {cardName: CardName.SOLAR_WIND_POWER, Factory: SolarWindPower},
+    {cardName: CardName.SOLETTA, Factory: Soletta},
+    {cardName: CardName.SPACE_MIRRORS, Factory: SpaceMirrors},
+    {cardName: CardName.SPECIAL_DESIGN, Factory: SpecialDesign},
+    {cardName: CardName.STEELWORKS, Factory: Steelworks},
+    {cardName: CardName.STRIP_MINE, Factory: StripMine},
+    {cardName: CardName.SUBTERRANEAN_RESERVOIR, Factory: SubterraneanReservoir},
+    {cardName: CardName.SYMBIOTIC_FUNGUS, Factory: SymbioticFungus},
+    {cardName: CardName.TECTONIC_STRESS_POWER, Factory: TectonicStressPower},
+    {cardName: CardName.TOWING_A_COMET, Factory: TowingAComet},
+    {cardName: CardName.TREES, Factory: Trees},
+    {cardName: CardName.TUNDRA_FARMING, Factory: TundraFarming},
+    {cardName: CardName.UNDERGROUND_CITY, Factory: UndergroundCity},
+    {cardName: CardName.UNDERGROUND_DETONATIONS, Factory: UndergroundDetonations},
+    {cardName: CardName.URBANIZED_AREA, Factory: UrbanizedArea},
+    {cardName: CardName.WATER_IMPORT_FROM_EUROPA, Factory: WaterImportFromEuropa},
+    {cardName: CardName.WATER_SPLITTING_PLANT, Factory: WaterSplittingPlant},
+    {cardName: CardName.WAVE_POWER, Factory: WavePower},
+    {cardName: CardName.WINDMILLS, Factory: Windmills},
+    {cardName: CardName.WORMS, Factory: Worms},
+    {cardName: CardName.ZEPPELINS, Factory: Zeppelins},
+  ],
 
-    corporationCards: [
-        { cardName: CardName.CREDICOR, factory: CrediCor },
-        { cardName: CardName.ECOLINE, factory: EcoLine },
-        { cardName: CardName.HELION, factory: Helion },
-        { cardName: CardName.INTERPLANETARY_CINEMATICS, factory: InterplanetaryCinematics },
-        { cardName: CardName.INVENTRIX, factory: Inventrix },
-        { cardName: CardName.MINING_GUILD, factory: MiningGuild },
-        { cardName: CardName.PHOBOLOG, factory: PhoboLog },
-        { cardName: CardName.THARSIS_REPUBLIC, factory: TharsisRepublic },
-        { cardName: CardName.THORGATE, factory: Thorgate },
-        { cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, factory: UnitedNationsMarsInitiative }
-    ]});
+  corporationCards: [
+    {cardName: CardName.CREDICOR, Factory: CrediCor},
+    {cardName: CardName.ECOLINE, Factory: EcoLine},
+    {cardName: CardName.HELION, Factory: Helion},
+    {cardName: CardName.INTERPLANETARY_CINEMATICS, Factory: InterplanetaryCinematics},
+    {cardName: CardName.INVENTRIX, Factory: Inventrix},
+    {cardName: CardName.MINING_GUILD, Factory: MiningGuild},
+    {cardName: CardName.PHOBOLOG, Factory: PhoboLog},
+    {cardName: CardName.THARSIS_REPUBLIC, Factory: TharsisRepublic},
+    {cardName: CardName.THORGATE, Factory: Thorgate},
+    {cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, Factory: UnitedNationsMarsInitiative},
+  ]});
 
 
 export const CORP_ERA_CARD_MANIFEST = new CardManifest({
-    module: GameModule.CorpEra,
-    projectCards: [
-        { cardName: CardName.ACQUIRED_COMPANY , factory: AcquiredCompany },
-        { cardName: CardName.ADVANCED_ALLOYS, factory: AdvancedAlloys },
-        { cardName: CardName.AI_CENTRAL, factory: AICentral },
-        { cardName: CardName.ANTI_GRAVITY_TECHNOLOGY, factory: AntiGravityTechnology },
-        { cardName: CardName.ASTEROID_MINING_CONSORTIUM, factory: AsteroidMiningConsortium },
-        { cardName: CardName.BRIBED_COMMITTEE, factory: BribedCommittee },
-        { cardName: CardName.BUILDING_INDUSTRIES, factory: BuildingIndustries },
-        { cardName: CardName.BUSINESS_CONTACTS, factory: BusinessContacts },
-        { cardName: CardName.BUSINESS_NETWORK, factory: BusinessNetwork },
-        { cardName: CardName.CALLISTO_PENAL_MINES, factory: CallistoPenalMines },
-        { cardName: CardName.CARETAKER_CONTRACT, factory: CaretakerContract },
-        { cardName: CardName.CARTEL, factory: Cartel },
-        { cardName: CardName.CEOS_FAVORITE_PROJECT, factory: CEOsFavoriteProject },
-        { cardName: CardName.COMMERCIAL_DISTRICT, factory: CommercialDistrict },
-        { cardName: CardName.CORPORATE_STRONGHOLD, factory: CorporateStronghold },
-        { cardName: CardName.DEVELOPMENT_CENTER, factory: DevelopmentCenter },
-        { cardName: CardName.EARTH_CATAPULT, factory: EarthCatapult },
-        { cardName: CardName.EARTH_OFFICE, factory: EarthOffice },
-        { cardName: CardName.ELECTRO_CATAPULT, factory: ElectroCatapult },
-        { cardName: CardName.ENERGY_TAPPING, factory: EnergyTapping },
-        { cardName: CardName.FUEL_FACTORY, factory: FuelFactory },
-        { cardName: CardName.GENE_REPAIR, factory: GeneRepair },
-        { cardName: CardName.GREAT_ESCARPMENT_CONSORTIUM, factory: GreatEscarpmentConsortium },
-        { cardName: CardName.HACKERS, factory: Hackers },
-        { cardName: CardName.HIRED_RAIDERS, factory: HiredRaiders },
-        { cardName: CardName.INDENTURED_WORKERS, factory: IndenturedWorkers },
-        { cardName: CardName.INDUSTRIAL_CENTER, factory: IndustrialCenter },
-        { cardName: CardName.INTERSTELLAR_COLONY_SHIP, factory: InterstellarColonyShip },
-        { cardName: CardName.INVENTION_CONTEST, factory: InventionContest },
-        { cardName: CardName.INVENTORS_GUILD, factory: InventorsGuild },
-        { cardName: CardName.INVESTMENT_LOAN, factory: InvestmentLoan },
-        { cardName: CardName.IO_MINING_INDUSTRIES, factory: IoMiningIndustries },
-        { cardName: CardName.LAGRANGE_OBSERVATORY, factory: LagrangeObservatory },
-        { cardName: CardName.LAND_CLAIM, factory: LandClaim },
-        { cardName: CardName.LIGHTNING_HARVEST, factory: LightningHarvest },
-        { cardName: CardName.MARS_UNIVERSITY, factory: MarsUniversity },
-        { cardName: CardName.MASS_CONVERTER, factory: MassConverter },
-        { cardName: CardName.MEDIA_ARCHIVES, factory: MediaArchives },
-        { cardName: CardName.MEDIA_GROUP, factory: MediaGroup },
-        { cardName: CardName.MEDICAL_LAB, factory: MedicalLab },
-        { cardName: CardName.MINE, factory: Mine },
-        { cardName: CardName.MINERAL_DEPOSIT, factory: MineralDeposit },
-        { cardName: CardName.MINING_AREA, factory: MiningArea },
-        { cardName: CardName.MIRANDA_RESORT, factory: MirandaResort },
-        { cardName: CardName.OLYMPUS_CONFERENCE, factory: OlympusConference },
-        { cardName: CardName.PHYSICS_COMPLEX, factory: PhysicsComplex },
-        { cardName: CardName.POWER_INFRASTRUCTURE , factory: PowerInfrastructure },
-        { cardName: CardName.POWER_SUPPLY_CONSORTIUM, factory: PowerSupplyConsortium },
-        { cardName: CardName.PROTECTED_HABITATS, factory: ProtectedHabitats },
-        { cardName: CardName.QUANTUM_EXTRACTOR, factory: QuantumExtractor },
-        { cardName: CardName.RAD_SUITS, factory: RadSuits },
-        { cardName: CardName.RESEARCH, factory: Research },
-        { cardName: CardName.RESTRICTED_AREA, factory: RestrictedArea },
-        { cardName: CardName.ROBOTIC_WORKFORCE, factory: RoboticWorkforce },
-        { cardName: CardName.SABOTAGE, factory: Sabotage },
-        { cardName: CardName.SATELLITES, factory: Satellites },
-        { cardName: CardName.SECURITY_FLEET, factory: SecurityFleet },
-        { cardName: CardName.SPACE_ELEVATOR, factory: SpaceElevator },
-        { cardName: CardName.SPACE_STATION, factory: SpaceStation },
-        { cardName: CardName.SPONSORS, factory: Sponsors },
-        { cardName: CardName.STANDARD_TECHNOLOGY, factory: StandardTechnology },
-        { cardName: CardName.TARDIGRADES, factory: Tardigrades },
-        { cardName: CardName.TECHNOLOGY_DEMONSTRATION, factory: TechnologyDemonstration },
-        { cardName: CardName.TERRAFORMING_GANYMEDE, factory: TerraformingGanymede },
-        { cardName: CardName.TITANIUM_MINE, factory: TitaniumMine },
-        { cardName: CardName.TOLL_STATION, factory: TollStation },
-        { cardName: CardName.TRANS_NEPTUNE_PROBE, factory: TransNeptuneProbe },
-        { cardName: CardName.TROPICAL_RESORT, factory: TropicalResort },
-        { cardName: CardName.VESTA_SHIPYARD, factory: VestaShipyard },
-        { cardName: CardName.VIRAL_ENHANCERS, factory: ViralEnhancers },
-        { cardName: CardName.VIRUS, factory: Virus },
-        ],
+  module: GameModule.CorpEra,
+  projectCards: [
+    {cardName: CardName.ACQUIRED_COMPANY, Factory: AcquiredCompany},
+    {cardName: CardName.ADVANCED_ALLOYS, Factory: AdvancedAlloys},
+    {cardName: CardName.AI_CENTRAL, Factory: AICentral},
+    {cardName: CardName.ANTI_GRAVITY_TECHNOLOGY, Factory: AntiGravityTechnology},
+    {cardName: CardName.ASTEROID_MINING_CONSORTIUM, Factory: AsteroidMiningConsortium},
+    {cardName: CardName.BRIBED_COMMITTEE, Factory: BribedCommittee},
+    {cardName: CardName.BUILDING_INDUSTRIES, Factory: BuildingIndustries},
+    {cardName: CardName.BUSINESS_CONTACTS, Factory: BusinessContacts},
+    {cardName: CardName.BUSINESS_NETWORK, Factory: BusinessNetwork},
+    {cardName: CardName.CALLISTO_PENAL_MINES, Factory: CallistoPenalMines},
+    {cardName: CardName.CARETAKER_CONTRACT, Factory: CaretakerContract},
+    {cardName: CardName.CARTEL, Factory: Cartel},
+    {cardName: CardName.CEOS_FAVORITE_PROJECT, Factory: CEOsFavoriteProject},
+    {cardName: CardName.COMMERCIAL_DISTRICT, Factory: CommercialDistrict},
+    {cardName: CardName.CORPORATE_STRONGHOLD, Factory: CorporateStronghold},
+    {cardName: CardName.DEVELOPMENT_CENTER, Factory: DevelopmentCenter},
+    {cardName: CardName.EARTH_CATAPULT, Factory: EarthCatapult},
+    {cardName: CardName.EARTH_OFFICE, Factory: EarthOffice},
+    {cardName: CardName.ELECTRO_CATAPULT, Factory: ElectroCatapult},
+    {cardName: CardName.ENERGY_TAPPING, Factory: EnergyTapping},
+    {cardName: CardName.FUEL_FACTORY, Factory: FuelFactory},
+    {cardName: CardName.GENE_REPAIR, Factory: GeneRepair},
+    {cardName: CardName.GREAT_ESCARPMENT_CONSORTIUM, Factory: GreatEscarpmentConsortium},
+    {cardName: CardName.HACKERS, Factory: Hackers},
+    {cardName: CardName.HIRED_RAIDERS, Factory: HiredRaiders},
+    {cardName: CardName.INDENTURED_WORKERS, Factory: IndenturedWorkers},
+    {cardName: CardName.INDUSTRIAL_CENTER, Factory: IndustrialCenter},
+    {cardName: CardName.INTERSTELLAR_COLONY_SHIP, Factory: InterstellarColonyShip},
+    {cardName: CardName.INVENTION_CONTEST, Factory: InventionContest},
+    {cardName: CardName.INVENTORS_GUILD, Factory: InventorsGuild},
+    {cardName: CardName.INVESTMENT_LOAN, Factory: InvestmentLoan},
+    {cardName: CardName.IO_MINING_INDUSTRIES, Factory: IoMiningIndustries},
+    {cardName: CardName.LAGRANGE_OBSERVATORY, Factory: LagrangeObservatory},
+    {cardName: CardName.LAND_CLAIM, Factory: LandClaim},
+    {cardName: CardName.LIGHTNING_HARVEST, Factory: LightningHarvest},
+    {cardName: CardName.MARS_UNIVERSITY, Factory: MarsUniversity},
+    {cardName: CardName.MASS_CONVERTER, Factory: MassConverter},
+    {cardName: CardName.MEDIA_ARCHIVES, Factory: MediaArchives},
+    {cardName: CardName.MEDIA_GROUP, Factory: MediaGroup},
+    {cardName: CardName.MEDICAL_LAB, Factory: MedicalLab},
+    {cardName: CardName.MINE, Factory: Mine},
+    {cardName: CardName.MINERAL_DEPOSIT, Factory: MineralDeposit},
+    {cardName: CardName.MINING_AREA, Factory: MiningArea},
+    {cardName: CardName.MIRANDA_RESORT, Factory: MirandaResort},
+    {cardName: CardName.OLYMPUS_CONFERENCE, Factory: OlympusConference},
+    {cardName: CardName.PHYSICS_COMPLEX, Factory: PhysicsComplex},
+    {cardName: CardName.POWER_INFRASTRUCTURE, Factory: PowerInfrastructure},
+    {cardName: CardName.POWER_SUPPLY_CONSORTIUM, Factory: PowerSupplyConsortium},
+    {cardName: CardName.PROTECTED_HABITATS, Factory: ProtectedHabitats},
+    {cardName: CardName.QUANTUM_EXTRACTOR, Factory: QuantumExtractor},
+    {cardName: CardName.RAD_SUITS, Factory: RadSuits},
+    {cardName: CardName.RESEARCH, Factory: Research},
+    {cardName: CardName.RESTRICTED_AREA, Factory: RestrictedArea},
+    {cardName: CardName.ROBOTIC_WORKFORCE, Factory: RoboticWorkforce},
+    {cardName: CardName.SABOTAGE, Factory: Sabotage},
+    {cardName: CardName.SATELLITES, Factory: Satellites},
+    {cardName: CardName.SECURITY_FLEET, Factory: SecurityFleet},
+    {cardName: CardName.SPACE_ELEVATOR, Factory: SpaceElevator},
+    {cardName: CardName.SPACE_STATION, Factory: SpaceStation},
+    {cardName: CardName.SPONSORS, Factory: Sponsors},
+    {cardName: CardName.STANDARD_TECHNOLOGY, Factory: StandardTechnology},
+    {cardName: CardName.TARDIGRADES, Factory: Tardigrades},
+    {cardName: CardName.TECHNOLOGY_DEMONSTRATION, Factory: TechnologyDemonstration},
+    {cardName: CardName.TERRAFORMING_GANYMEDE, Factory: TerraformingGanymede},
+    {cardName: CardName.TITANIUM_MINE, Factory: TitaniumMine},
+    {cardName: CardName.TOLL_STATION, Factory: TollStation},
+    {cardName: CardName.TRANS_NEPTUNE_PROBE, Factory: TransNeptuneProbe},
+    {cardName: CardName.TROPICAL_RESORT, Factory: TropicalResort},
+    {cardName: CardName.VESTA_SHIPYARD, Factory: VestaShipyard},
+    {cardName: CardName.VIRAL_ENHANCERS, Factory: ViralEnhancers},
+    {cardName: CardName.VIRUS, Factory: Virus},
+  ],
 
-    corporationCards: [
-        { cardName: CardName.SATURN_SYSTEMS, factory: SaturnSystems },
-        { cardName: CardName.TERACTOR, factory: Teractor }
-    ]});
+  corporationCards: [
+    {cardName: CardName.SATURN_SYSTEMS, Factory: SaturnSystems},
+    {cardName: CardName.TERACTOR, Factory: Teractor},
+  ]});

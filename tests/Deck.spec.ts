@@ -13,16 +13,16 @@ import { FuelFactory } from "../src/cards/FuelFactory";
 
 describe("Deck", function () {
     const cards: Array<ICardFactory<IProjectCard>> = [
-        { cardName: CardName.ACQUIRED_COMPANY, factory: AcquiredCompany },
-        { cardName: CardName.BANNED_DELEGATE, factory: BannedDelegate },
-        { cardName: CardName.CALLISTO_PENAL_MINES, factory: CallistoPenalMines },
+        { cardName: CardName.ACQUIRED_COMPANY, Factory: AcquiredCompany },
+        { cardName: CardName.BANNED_DELEGATE, Factory: BannedDelegate },
+        { cardName: CardName.CALLISTO_PENAL_MINES, Factory: CallistoPenalMines },
     ];
     const deck: Deck<IProjectCard> = new Deck(cards);
 
     const secondCards: Array<ICardFactory<IProjectCard>> = [
-        { cardName: CardName.DECOMPOSERS, factory: Decomposers },
-        { cardName: CardName.ECOLOGICAL_ZONE, factory: EcologicalZone },
-        { cardName: CardName.FUEL_FACTORY, factory: FuelFactory },
+        { cardName: CardName.DECOMPOSERS, Factory: Decomposers },
+        { cardName: CardName.ECOLOGICAL_ZONE, Factory: EcologicalZone },
+        { cardName: CardName.FUEL_FACTORY, Factory: FuelFactory },
     ];
     const secondDeck: Deck<IProjectCard> = new Deck(secondCards);
 

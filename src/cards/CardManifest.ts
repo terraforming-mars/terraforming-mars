@@ -1,8 +1,8 @@
-import { Deck } from "../Deck";
-import { GameModule } from "../GameModule";
-import { CorporationCard } from "./corporation/CorporationCard";
-import { ICardFactory } from "./ICardFactory";
-import { IProjectCard } from "./IProjectCard";
+import {Deck} from '../Deck';
+import {GameModule} from '../GameModule';
+import {CorporationCard} from './corporation/CorporationCard';
+import {ICardFactory} from './ICardFactory';
+import {IProjectCard} from './IProjectCard';
 
 export class CardManifest {
     module: GameModule;
@@ -17,10 +17,10 @@ export class CardManifest {
          corporationCards?: Array<ICardFactory<CorporationCard>>,
          preludeCards?: Array<ICardFactory<IProjectCard>>,
          }) {
-        this.module = arg.module;
-        this.projectCards = new Deck<IProjectCard>(arg.projectCards || []);
-        this.projectCardsToRemove = arg.projectCardsToRemove || [];
-        this.corporationCards = new Deck<CorporationCard>(arg.corporationCards || []);
-        this.preludeCards = new Deck<IProjectCard>(arg.preludeCards || []);
+      this.module = arg.module;
+      this.projectCards = new Deck<IProjectCard>(arg.projectCards || []);
+      this.projectCardsToRemove = arg.projectCardsToRemove || [];
+      this.corporationCards = new Deck<CorporationCard>(arg.corporationCards || []);
+      this.preludeCards = new Deck<IProjectCard>(arg.preludeCards || []);
     }
 }

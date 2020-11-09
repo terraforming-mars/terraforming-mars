@@ -1,10 +1,10 @@
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
-import { CardType } from "../CardType";
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { TileType } from "../../TileType";
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
+import {Player} from '../../Player';
+import {CardType} from '../CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {TileType} from '../../TileType';
 
 export class EcologicalSurvey implements IProjectCard {
   public cost = 9;
@@ -14,7 +14,7 @@ export class EcologicalSurvey implements IProjectCard {
 
   private countGreeneryTiles(game: Game): number {
     return game.board.spaces.filter(
-            (space) => space.tile?.tileType === TileType.GREENERY).length;
+        (space) => space.tile?.tileType === TileType.GREENERY).length;
   }
 
   public canPlay(_player: Player, game: Game): boolean {

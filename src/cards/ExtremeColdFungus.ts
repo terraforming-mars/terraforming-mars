@@ -1,17 +1,17 @@
 
-import {ICard, IActionCard} from "./ICard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { OrOptions } from "../inputs/OrOptions";
-import { SelectOption } from "../inputs/SelectOption";
-import { SelectCard } from "../inputs/SelectCard";
-import { IProjectCard } from "./IProjectCard";
-import { ResourceType } from "../ResourceType";
-import { CardName } from "../CardName";
-import { LogHelper } from "../components/LogHelper";
-import { Resources } from "../Resources";
+import {ICard, IActionCard} from './ICard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {SelectCard} from '../inputs/SelectCard';
+import {IProjectCard} from './IProjectCard';
+import {ResourceType} from '../ResourceType';
+import {CardName} from '../CardName';
+import {LogHelper} from '../components/LogHelper';
+import {Resources} from '../Resources';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost = 13;
@@ -38,37 +38,37 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         return undefined;
       }
 
-      const gainPlantOption = new SelectOption("Gain 1 plant", "Gain plant",() => {
+      const gainPlantOption = new SelectOption('Gain 1 plant', 'Gain plant', () => {
         player.plants++;
         LogHelper.logGainStandardResource(game, player, Resources.PLANTS);
         return undefined;
-      })
+      });
 
       if (otherMicrobeCards.length === 1) {
         const targetCard = otherMicrobeCards[0];
 
         return new OrOptions(
-          new SelectOption("Add 2 microbes to " + targetCard.name, "Add microbes", () => {
-            player.addResourceTo(targetCard, 2);
-            LogHelper.logAddResource(game, player, targetCard, 2);
-            return undefined;
-          }),
-          gainPlantOption
+            new SelectOption('Add 2 microbes to ' + targetCard.name, 'Add microbes', () => {
+              player.addResourceTo(targetCard, 2);
+              LogHelper.logAddResource(game, player, targetCard, 2);
+              return undefined;
+            }),
+            gainPlantOption,
         );
       }
 
       return new OrOptions(
-        new SelectCard(
-          "Select card to add 2 microbes",
-          "Add microbes",
-          otherMicrobeCards,
-          (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 2);
-              LogHelper.logAddResource(game, player, foundCards[0], 2);
-              return undefined;
-          }
-        ),
-        gainPlantOption
+          new SelectCard(
+              'Select card to add 2 microbes',
+              'Add microbes',
+              otherMicrobeCards,
+              (foundCards: Array<ICard>) => {
+                player.addResourceTo(foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
+                return undefined;
+              },
+          ),
+          gainPlantOption,
       );
     }
 }

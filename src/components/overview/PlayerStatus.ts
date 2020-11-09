@@ -1,93 +1,104 @@
-import Vue from "vue";
-import { ActionLabel } from "./ActionLabel";
-import { range } from "../../utils/utils"; 
-import { Button } from "../common/Button";
-import { mainAppSettings } from "../App";
+import Vue from 'vue';
+import {ActionLabel} from './ActionLabel';
+import {range} from '../../utils/utils';
+import {Button} from '../common/Button';
+import {mainAppSettings} from '../App';
+import {PlayerModel} from '../../models/PlayerModel';
 
-const isPinned = (root: any, playerIndex: string): boolean => {
-    return (root as any).getVisibilityState("pinned_player_" + playerIndex);
+const isPinned = (root: any, playerIndex: number): boolean => {
+  return (root as any).getVisibilityState('pinned_player_' + playerIndex);
 };
-const showPlayerData = (root: any, playerIndex: string) => {
-    (root as any).setVisibilityState("pinned_player_" + playerIndex, true);
+const showPlayerData = (root: any, playerIndex: number) => {
+  (root as any).setVisibilityState('pinned_player_' + playerIndex, true);
 };
 export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
-    root.setVisibilityState("pinned_player_" + playerIndex, false);
+  root.setVisibilityState('pinned_player_' + playerIndex, false);
 };
 
-export const PlayerStatus = Vue.component("player-status", {
-    props: [
-        "player",
-        "activePlayer",
-        "firstForGen",
-        "actionLabel",
-        "playerIndex",
-    ],
-    components: {
-        "Button": Button
+export const PlayerStatus = Vue.component('player-status', {
+  props: {
+    player: {
+      type: Object as () => PlayerModel,
     },
-    methods: {
-        togglePlayerDetails: function () {
-            // for active player => scroll to cards UI
-            if (this.player.color === this.activePlayer.color) {
-                const el: HTMLElement = document.getElementsByClassName(
-                    "preferences_icon--cards"
-                )[0] as HTMLElement;
-                el.click();
-
-                return;
-            }
-            // any other player show cards container and hide all other
-            this.pinPlayer();
-        },
-        showLabel: function (): boolean {
-            return this.actionLabel !== ActionLabel.NONE;
-        },
-        getLabelClasses: function (): string {
-            const classes = [];
-            const baseClass = "player-action-status";
-            classes.push(baseClass);
-            if (this.actionLabel === ActionLabel.PASSED) {
-                classes.push(`${baseClass}--passed`);
-            } else if (this.actionLabel === ActionLabel.ACTIVE) {
-                classes.push(`${baseClass}--active`);
-            }
-            return classes.join(" ");
-        },
-        getPlayerNameClasses: function (): string {
-            const classes = [];
-            const baseClass = "player-name";
-            classes.push(baseClass);
-            if (this.player.id === this.activePlayer.id) {
-                classes.push(`${baseClass}--inactive`);
-            }
-            return classes.join(" ");
-        },
-        getNrPlayedCards: function (): number {
-            return this.player.playedCards.length;
-        },
-        pinPlayer: function () {
-            let hiddenPlayersIndexes: Array<Number> = [];
-            const playerPinned = isPinned(this.$root, this.playerIndex);
-
-            // if player is already pinned, add to hidden players (toggle)
-            hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
-            if (!playerPinned) {
-                showPlayerData(this.$root, this.playerIndex);
-                hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
-                    (index) => index !== this.playerIndex
-                );
-            }
-            for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
-                if (hiddenPlayersIndexes.includes(i)) {
-                    hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
-                }
-            }
-        },
-        buttonLabel: function (): string {
-            return isPinned(this.$root, this.playerIndex) ? "hide" : "show";
-        },
+    activePlayer: {
+      type: Object as () => PlayerModel,
     },
-    template: `
+    firstForGen: {
+      type: Boolean,
+    },
+    actionLabel: {
+      type: String,
+    },
+    playerIndex: {
+      type: Number,
+    },
+  },
+  components: {
+    Button,
+  },
+  methods: {
+    togglePlayerDetails: function() {
+      // for active player => scroll to cards UI
+      if (this.player.color === this.activePlayer.color) {
+        const el: HTMLElement = document.getElementsByClassName(
+            'preferences_icon--cards',
+        )[0] as HTMLElement;
+        el.click();
+
+        return;
+      }
+      // any other player show cards container and hide all other
+      this.pinPlayer();
+    },
+    showLabel: function(): boolean {
+      return this.actionLabel !== ActionLabel.NONE;
+    },
+    getLabelClasses: function(): string {
+      const classes = [];
+      const baseClass = 'player-action-status';
+      classes.push(baseClass);
+      if (this.actionLabel === ActionLabel.PASSED) {
+        classes.push(`${baseClass}--passed`);
+      } else if (this.actionLabel === ActionLabel.ACTIVE) {
+        classes.push(`${baseClass}--active`);
+      }
+      return classes.join(' ');
+    },
+    getPlayerNameClasses: function(): string {
+      const classes = [];
+      const baseClass = 'player-name';
+      classes.push(baseClass);
+      if (this.player.id === this.activePlayer.id) {
+        classes.push(`${baseClass}--inactive`);
+      }
+      return classes.join(' ');
+    },
+    getNrPlayedCards: function(): number {
+      return this.player.playedCards.length;
+    },
+    pinPlayer: function() {
+      let hiddenPlayersIndexes: Array<Number> = [];
+      const playerPinned = isPinned(this.$root, this.playerIndex);
+
+      // if player is already pinned, add to hidden players (toggle)
+      hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
+      if (!playerPinned) {
+        showPlayerData(this.$root, this.playerIndex);
+        hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
+            (index) => index !== this.playerIndex,
+        );
+      }
+      for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
+        if (hiddenPlayersIndexes.includes(i)) {
+          hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
+        }
+      }
+    },
+    buttonLabel: function(): string {
+      return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
+    },
+  },
+  template: `
         <div class="player-status">
             <div class="player-status-left">
                 <div class="top-row">

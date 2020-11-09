@@ -1,10 +1,10 @@
-import { IProjectCard } from "./../IProjectCard";
-import { Tags } from "./../Tags";
-import { CardType } from "./../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { IActionCard } from "./../ICard";
-import { CardName } from "../../CardName";
+import {IProjectCard} from './../IProjectCard';
+import {Tags} from './../Tags';
+import {CardType} from './../CardType';
+import {Player} from '../../Player';
+import {Game} from '../../Game';
+import {IActionCard} from './../ICard';
+import {CardName} from '../../CardName';
 
 export class SubCrustMeasurements implements IActionCard, IProjectCard {
     public cost = 20;

@@ -1,10 +1,10 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 export class BeamFromAThoriumAsteroid implements IProjectCard {
     public cost = 32;
@@ -15,8 +15,8 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
       return player.getTagCount(Tags.JOVIAN) >= 1;
     }
     public play(player: Player) {
-      player.addProduction(Resources.HEAT,3);
-      player.addProduction(Resources.ENERGY,3);
+      player.addProduction(Resources.HEAT, 3);
+      player.addProduction(Resources.ENERGY, 3);
       return undefined;
     }
     public getVictoryPoints() {

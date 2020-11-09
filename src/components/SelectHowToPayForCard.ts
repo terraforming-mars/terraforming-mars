@@ -7,6 +7,7 @@ interface SelectHowToPayForCardModel {
     cost: number;
     heat: number;
     megaCredits: number;
+    mustSpendAtMost: number;
     steel: number;
     titanium: number;
     microbes: number;
@@ -55,6 +56,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             cost: 0,
             heat: 0,
             megaCredits: 0,
+            mustSpendAtMost: 0,
             steel: 0,
             titanium: 0,
             microbes: 0,
@@ -71,7 +73,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         const app = this;
         Vue.nextTick(function () {
             app.$data.cost = app.getCardCost();
-            app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+            app.$data.mustSpendAtMost = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+            app.$data.megaCredits = app.$data.mustSpendAtMost;
 
             app.setDefaultMicrobesValue();
             app.setDefaultFloatersValue();
@@ -93,7 +96,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultMicrobesValue: function() {
             // automatically use available microbes to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-                const remainingCostToPay = this.cost - this.player.megaCredits;
+                const remainingCostToPay = this.cost - this.mustSpendAtMost;
                 const requiredMicrobes = Math.ceil(remainingCostToPay / 2);
 
                 if (this.playerinput.microbes !== undefined && requiredMicrobes > this.playerinput.microbes) {
@@ -111,7 +114,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultFloatersValue: function() {
             // automatically use available floaters to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-                const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2);
+                const remainingCostToPay = this.cost - this.mustSpendAtMost - (this.microbes * 2);
                 const requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3)
 
                 if (this.playerinput.floaters !== undefined && requiredFloaters > this.playerinput.floaters) {
@@ -129,7 +132,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultSteelValue: function() {
             // automatically use available steel to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-                const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3);
+                const remainingCostToPay = this.cost - this.mustSpendAtMost - (this.microbes * 2) - (this.floaters * 3);
                 let requiredSteelQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.steelValue);
                 
                 if (requiredSteelQty > this.player.steel) {
@@ -137,7 +140,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 } else {
                     // use as much steel as possible without overpaying by default
                     let currentSteelValue = requiredSteelQty * this.player.steelValue;
-                    while (currentSteelValue <= remainingCostToPay + this.player.megaCredits - this.player.steelValue && requiredSteelQty < this.player.steel) {
+                    while (currentSteelValue <= remainingCostToPay + this.mustSpendAtMost - this.player.steelValue && requiredSteelQty < this.player.steel) {
                         requiredSteelQty++;
                         currentSteelValue = requiredSteelQty * this.player.steelValue;
                     }
@@ -154,7 +157,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultTitaniumValue: function() {
             // automatically use available titanium to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-                const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
+                const remainingCostToPay = this.cost - this.mustSpendAtMost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
                 let requiredTitaniumQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.titaniumValue);
                 
                 if (requiredTitaniumQty > this.player.titanium) {
@@ -162,7 +165,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 } else {
                     // use as much titanium as possible without overpaying by default
                     let currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-                    while (currentTitaniumValue <= remainingCostToPay + this.player.megaCredits - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
+                    while (currentTitaniumValue <= remainingCostToPay + this.mustSpendAtMost - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
                         requiredTitaniumQty++;
                         currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
                     }
@@ -179,7 +182,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultHeatValue: function() {
             // automatically use available heat for Helion if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-                const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
+                const remainingCostToPay = this.cost - this.mustSpendAtMost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
                 const requiredHeat = Math.max(remainingCostToPay, 0);
                 
                 if (requiredHeat > this.player.heat) {
@@ -195,7 +198,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
         },
         canAffordWithMcOnly: function() {
-            return this.player.megaCredits >= this.cost;
+            return this.mustSpendAtMost >= this.cost;
         },
         canUseHeat: function () {
             return this.playerinput.canUseHeat && this.player.heat > 0;
@@ -246,7 +249,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         cardChanged: function () {
             this.cost = this.getCardCost();
-            this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+            this.mustSpendAtMost = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+            this.megaCredits = this.mustSpendAtMost;
 
             this.setDefaultMicrobesValue();
             this.setDefaultFloatersValue();
@@ -269,6 +273,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.warning = "You don't have that many mega credits";
+                return;
+            }
+            if (htp.megaCredits > this.mustSpendAtMost) {
+                this.warning = "You can't spend that many mega credits because of Reds policy";
                 return;
             }
             if (this.playerinput.microbes !== undefined && htp.microbes > this.playerinput.microbes) {

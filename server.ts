@@ -628,6 +628,10 @@ function getCardsAsCardModel(
                     : undefined,
             resourceType: card.resourceType,
             calculatedCost: 0,
+            mustSpendAtMost:
+                card.howToAffordReds !== undefined && card.howToAffordReds.mustSpendAtMost !== undefined
+                    ? card.howToAffordReds.mustSpendAtMost
+                    : undefined,
             cardType: CardType.AUTOMATED,
             isDisabled: false
         });

@@ -6,6 +6,7 @@ export interface CardModel {
     resources: number | undefined;
     resourceType: ResourceType | undefined;
     calculatedCost: number;
+    mustSpendAtMost?: number;
     cardType: CardType;
     isDisabled: boolean;
 }

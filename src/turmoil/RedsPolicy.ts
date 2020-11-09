@@ -14,6 +14,8 @@ import { TileType } from "../TileType";
 
 /*
  * TODO: Most of the members of that class could be inferred from card metadata once it's usable
+ * Constructor is expecting an object with properties from the class and will defaults the others
+ * Usage: new ActionDetails({ card: new LavaFlows(), temperatureIncrease: 2, nonOceanToPlace: TileType.LAVA_FLOWS, nonOceanAvailableSpaces: LavaFlows.getVolcanicSpaces(player, game) });
  */
 export class ActionDetails {
     public card?: IProjectCard;
@@ -42,9 +44,9 @@ type ISpaceTree = Map<ISpace, ISpaceBranch>;
 type ISpaceBranch = ISpaceTree | undefined;
 
 export interface HowToAffordRedsPolicy {
-    canAfford: boolean,
-    mustSpendAtMost?: number,
-    spaces?: ISpaceTree
+    canAfford: boolean,         // true if the player can afford everything, false if not
+    mustSpendAtMost?: number,   // if set, how much the player can spend on the card/action itself in MC
+    spaces?: ISpaceTree         // A tree limiting available spaces for tile placements, if needed
 }
 
 export class RedsPolicy {
@@ -298,7 +300,7 @@ export class RedsPolicy {
     }
 
 
-    public static getBoardSpacesBonusMC(player: Player, game: Game, isHelion: boolean = false) {
+    public static getBoardSpacesBonusMC(player: Player, game: Game, isHelion: boolean = false): Array<number> {
         return game.board.spaces.map((space) => {
             let bonus = game.board.getAdjacentSpaces(space).filter(
                 (adjacentSpace) => Board.isOceanSpace(adjacentSpace)).length * player.oceanBonus;

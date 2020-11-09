@@ -21,7 +21,7 @@ export class LavaFlows implements IProjectCard {
     public hasRequirements = false;
     public cardType = CardType.EVENT;
     public adjacencyBonus?: IAdjacencyBonus = undefined;
-    private howToAffordReds?: HowToAffordRedsPolicy;
+    public howToAffordReds?: HowToAffordRedsPolicy;
 
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
         if (game.gameOptions.boardName === BoardName.ORIGINAL) {

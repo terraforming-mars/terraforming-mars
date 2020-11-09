@@ -17,6 +17,7 @@ import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 import { CardMetadata } from "../cards/CardMetadata";
+import { HowToAffordRedsPolicy } from "../turmoil/RedsPolicy";
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -45,4 +46,5 @@ export interface ICard {
     cost?: number;
     cardType: CardType;
     metadata?: CardMetadata;
+    howToAffordReds?: HowToAffordRedsPolicy;
 }

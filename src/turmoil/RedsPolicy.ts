@@ -240,7 +240,7 @@ export class RedsPolicy {
             missingMC -= Math.min(player.steel, Math.ceil(missingMC / player.steelValue)) * player.steelValue;
         }
         if (canUseTitanium) {
-            missingMC -= Math.min(player.titanium, Math.ceil(missingMC / player.titaniumValue)) * player.titaniumValue;
+            missingMC -= Math.min(player.titanium, Math.ceil(missingMC / player.getTitaniumValue(game))) * player.getTitaniumValue(game);
         }
         if (canUseMicrobes) {
             missingMC -= Math.min(player.getMicrobesCanSpend(), Math.ceil(missingMC / 2)) * 2;

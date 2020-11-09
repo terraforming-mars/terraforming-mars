@@ -93,7 +93,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private heatProduction: number = 0;
 
     // Resource values
-    public titaniumValue: number = 3;
+    private titaniumValue: number = 3;
     public steelValue: number = 2;
     // Helion
     public canUseHeatAsMegaCredits: boolean = false;

@@ -53,6 +53,7 @@ import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StandardProjectType} from './StandardProjectType';
+import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
@@ -1723,44 +1724,18 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       );
     }
 
-
     private convertHeatIntoTemperature(game: Game): PlayerInput {
-      let heatAmount: number;
-      let floaterAmount: number;
       if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
-        const raiseTempOptions = new AndOptions(
-            () => {
-              if (heatAmount + (floaterAmount * 2) < 8) {
-                throw new Error('Need to pay 8 heat');
-              }
-              this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
-              this.heat -= heatAmount;
-              game.increaseTemperature(this, 1);
-              game.log('${0} converted heat into temperature', (b) => b.player(this));
-              return undefined;
-            },
-            new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
-              heatAmount = amount;
-              return undefined;
-            }, this.heat),
-            new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
-              floaterAmount = amount;
-              return undefined;
-            }, this.getResourcesOnCorporation()),
+        return (this.corporationCard as StormCraftIncorporated).convertHeatIntoTemperature(
+            game, this,
         );
-        raiseTempOptions.title = 'Select resource amounts to raise temp';
-
-        return new SelectOption('Convert 8 heat into temperature', 'Convert heat', () => {
-          return raiseTempOptions;
-        });
-      } else {
-        return new SelectOption('Convert 8 heat into temperature', 'Convert heat', () => {
-          game.increaseTemperature(this, 1);
-          this.heat -= 8;
-          game.log('${0} converted heat into temperature', (b) => b.player(this));
-          return undefined;
-        });
       }
+      return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+        game.increaseTemperature(this, 1);
+        this.heat -= constants.HEAT_FOR_TEMPERATURE;
+        game.log('${0} converted heat into temperature', (b) => b.player(this));
+        return undefined;
+      });
     }
 
     private claimMilestone(milestone: IMilestone, game: Game): SelectOption {

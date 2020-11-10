@@ -16,7 +16,8 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
 
       const playableCards = player.getPlayableCards(game).filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
 
-      return new SelectHowToPayForCard(
+      if (playableCards.length > 0) {
+        return new SelectHowToPayForCard(
           playableCards,
           player.getMicrobesCanSpend(),
           player.getFloatersCanSpend(),
@@ -28,7 +29,10 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
             }
             return result;
           },
-      );
+        );
+      }
+
+      return undefined;
     }
 }
 

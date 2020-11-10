@@ -1694,7 +1694,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
                   return undefined;
                 },
             );
-          }
+          },
       );
     }
 

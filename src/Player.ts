@@ -1681,20 +1681,20 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
       return new SelectOption(
-        `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-        'Convert plants',
-        () => {
-          return new SelectSpace(
-            'Select space for greenery',
-            game.board.getAvailableSpacesForGreenery(this),
-            (space: ISpace) => {
-              game.addGreenery(this, space.id);
-              this.plants -= this.plantsNeededForGreenery;
-              game.log("${0} converted plants into a greenery", b => b.player(this));
-              return undefined;
-            }
-          );
-        }
+          `Convert ${this.plantsNeededForGreenery} plants into greenery`,
+          'Convert plants',
+          () => {
+            return new SelectSpace(
+              'Select space for greenery',
+              game.board.getAvailableSpacesForGreenery(this),
+              (space: ISpace) => {
+                game.addGreenery(this, space.id);
+                this.plants -= this.plantsNeededForGreenery;
+                game.log('${0} converted plants into a greenery', b => b.player(this));
+                return undefined;
+              }
+            );
+          }
       );
     }
 

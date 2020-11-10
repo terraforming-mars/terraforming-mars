@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { AgricolaInc } from "../../../src/cards/community/AgricolaInc";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 import { SolarWindPower } from "../../../src/cards/SolarWindPower";
 import { Research } from "../../../src/cards/Research";

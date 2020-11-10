@@ -3,7 +3,7 @@ import { MagneticFieldDome } from "../../src/cards/MagneticFieldDome";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("MagneticFieldDome", function () {
     let card : MagneticFieldDome, player : Player, game : Game;

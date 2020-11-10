@@ -3,7 +3,7 @@ import { RedSpotObservatory } from "../../../src/cards/colonies/RedSpotObservato
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("RedSpotObservatory", function () {
     let card : RedSpotObservatory, player : Player, game : Game;

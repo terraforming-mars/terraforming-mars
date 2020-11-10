@@ -1,7 +1,7 @@
-import { CardName } from "../../CardName";
-import { EcologicalZone } from "../EcologicalZone";
-import { IAdjacencyBonus } from "../../ares/IAdjacencyBonus";
-import { SpaceBonus } from "../../SpaceBonus";
+import {CardName} from '../../CardName';
+import {EcologicalZone} from '../EcologicalZone';
+import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {SpaceBonus} from '../../SpaceBonus';
 
 export class EcologicalZoneAres extends EcologicalZone {
   public cost = 11;

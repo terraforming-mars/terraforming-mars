@@ -1,12 +1,12 @@
 
-import { IActionCard } from "./ICard";
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import {IActionCard} from './ICard';
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 export class SpaceElevator implements IActionCard, IProjectCard {
     public cost = 27;
@@ -15,19 +15,19 @@ export class SpaceElevator implements IActionCard, IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play(player: Player, _game: Game) {
-        player.addProduction(Resources.TITANIUM);
-        return undefined;
+      player.addProduction(Resources.TITANIUM);
+      return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.steel > 0;
+      return player.steel > 0;
     }
     public action(player: Player, _game: Game) {
-        player.steel--;
-        player.megaCredits += 5;
-        return undefined;
+      player.steel--;
+      player.megaCredits += 5;
+      return undefined;
     }
     public getVictoryPoints() {
-        return 2;
+      return 2;
     }
 }
 

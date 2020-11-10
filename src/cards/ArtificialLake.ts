@@ -6,10 +6,10 @@ import {Game} from '../Game';
 import {ISpace} from '../ISpace';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../SpaceType';
-import { CardName } from '../CardName';
-import { PartyHooks } from '../turmoil/parties/PartyHooks';
-import { PartyName } from '../turmoil/parties/PartyName';
-import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
+import {CardName} from '../CardName';
+import {PartyHooks} from '../turmoil/parties/PartyHooks';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../constants';
 
 export class ArtificialLake implements IProjectCard {
     public cost = 15;
@@ -35,7 +35,7 @@ export class ArtificialLake implements IProjectCard {
           (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
             return undefined;
-          }
+          },
       );
     }
     public getVictoryPoints() {

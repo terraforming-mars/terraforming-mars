@@ -7,7 +7,7 @@
         "noImplicitReturns": true,
         "noUnusedLocals": false,
         "noUnusedParameters":false,
-        "outDir": "dist",
+        "outDir": "build",
         "strict": true,
         "removeComments": true,
         "preserveConstEnums": true,
@@ -20,6 +20,6 @@
     },
     "exclude": [],
     "include": [
-        "dist/src/components/*Vue.ts"
+        "build/src/components/*Vue.ts"
     ]
 }

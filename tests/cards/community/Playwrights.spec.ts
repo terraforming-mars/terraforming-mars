@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Playwrights } from "../../../src/cards/community/Playwrights";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { ReleaseOfInertGases} from "../../../src/cards/ReleaseOfInertGases";
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Resources } from "../../../src/Resources";

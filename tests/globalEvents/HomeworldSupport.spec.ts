@@ -3,9 +3,9 @@ import { HomeworldSupport } from "../../src/turmoil/globalEvents/HomeworldSuppor
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { Sponsors } from "../../src/cards/Sponsors";
 
 describe("HomeworldSupport", function () {

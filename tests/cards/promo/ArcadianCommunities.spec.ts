@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { ArcadianCommunities } from "../../../src/cards/promo/ArcadianCommunities";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 
 

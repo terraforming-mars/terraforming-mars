@@ -1,15 +1,15 @@
-import {ICard} from "./ICard";
+import {ICard} from './ICard';
 
-import {IProjectCard} from "./IProjectCard";
-import {Tags} from "./Tags";
-import {CardType} from "./CardType";
-import {Player} from "../Player";
-import {Game} from "../Game";
-import {SelectCard} from "../inputs/SelectCard";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { ResourceType } from "../ResourceType";
-import { LogHelper } from "../components/LogHelper";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {SelectCard} from '../inputs/SelectCard';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {ResourceType} from '../ResourceType';
+import {LogHelper} from '../components/LogHelper';
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost = 16;
@@ -27,7 +27,7 @@ export class EosChasmaNationalPark implements IProjectCard {
   public play(player: Player, game: Game) {
     const cards = player.getResourceCards(ResourceType.ANIMAL);
     player.plants += 3;
-    player.addProduction(Resources.MEGACREDITS,2);
+    player.addProduction(Resources.MEGACREDITS, 2);
 
     if ( cards.length < 1 ) return undefined;
 
@@ -36,11 +36,11 @@ export class EosChasmaNationalPark implements IProjectCard {
       LogHelper.logAddResource(game, player, cards[0]);
       return undefined;
     }
-   
-    return new SelectCard("Add 1 animal to a card", "Add animal", cards, (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(game, player, foundCards[0]);
-        return undefined;
+
+    return new SelectCard('Add 1 animal to a card', 'Add animal', cards, (foundCards: Array<ICard>) => {
+      player.addResourceTo(foundCards[0], 1);
+      LogHelper.logAddResource(game, player, foundCards[0]);
+      return undefined;
     });
   }
 

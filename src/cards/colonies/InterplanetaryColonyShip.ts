@@ -1,10 +1,10 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { BuildColony } from "../../deferredActions/BuildColony";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
+import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class InterplanetaryColonyShip implements IProjectCard {
     public cost = 12;
@@ -12,8 +12,12 @@ export class InterplanetaryColonyShip implements IProjectCard {
     public name = CardName.INTERPLANETARY_COLONY_SHIP;
     public cardType = CardType.EVENT;
 
+    public canPlay(player: Player, game: Game): boolean {
+      return player.canPlayColonyPlacementCard(game);
+    }
+
     public play(player: Player, game: Game) {
-        game.defer(new BuildColony(player, game, false, "Select colony for Interplanetary Colony Ship"));
-        return undefined;
+      game.defer(new BuildColony(player, game, false, 'Select colony for Interplanetary Colony Ship'));
+      return undefined;
     }
 }

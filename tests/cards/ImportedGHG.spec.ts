@@ -4,7 +4,7 @@ import { ImportedGHG } from "../../src/cards/ImportedGHG";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("ImportedGHG", function () {
     it("Should play", function () {

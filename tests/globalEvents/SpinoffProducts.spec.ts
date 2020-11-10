@@ -3,10 +3,10 @@ import { SpinoffProducts } from "../../src/turmoil/globalEvents/SpinoffProducts"
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { Research } from '../../src/cards/Research';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { Research } from "../../src/cards/Research";
 
 describe("SpinoffProducts", function () {
     it("resolve play", function () {

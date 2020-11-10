@@ -3,7 +3,7 @@ import { TitanShuttles } from "../../../src/cards/colonies/TitanShuttles";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { TitanFloatingLaunchPad } from "../../../src/cards/colonies/TitanFloatingLaunchPad";
 import { ICard } from "../../../src/cards/ICard";
 import { SelectCard } from "../../../src/inputs/SelectCard";

@@ -1,12 +1,11 @@
-import { CardType } from "./CardType";
-import { ICard } from "./ICard";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { ResourceType } from "../ResourceType";
-import { Resources } from "../Resources";
+import {CardType} from './CardType';
+import {ICard} from './ICard';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {ResourceType} from '../ResourceType';
+import {Resources} from '../Resources';
 
 export interface IProjectCard extends ICard {
-    addPlayCardDeferredAction?: (player: Player, game: Game) => void;
     canPlay?: (player: Player, game: Game) => boolean;
     cardType: CardType;
     cost: number;

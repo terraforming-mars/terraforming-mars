@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { DomeFarming } from "../../../src/cards/prelude/DomeFarming";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("DomeFarming", function () {
     it("Should play", function () {

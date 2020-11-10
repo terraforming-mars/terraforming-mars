@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { GalileanMining } from "../../../src/cards/prelude/GalileanMining";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 import { Game } from "../../../src/Game";
 
 describe("GalileanMining", function () {

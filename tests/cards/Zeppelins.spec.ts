@@ -3,7 +3,7 @@ import { Zeppelins } from "../../src/cards/Zeppelins";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Zeppelins", function () {
     let card : Zeppelins, player : Player, game : Game;

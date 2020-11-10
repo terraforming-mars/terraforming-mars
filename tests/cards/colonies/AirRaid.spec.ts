@@ -3,10 +3,10 @@ import { AirRaid } from "../../../src/cards/colonies/AirRaid";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { StormCraftIncorporated } from '../../../src/cards/colonies/StormCraftIncorporated';
-import { Game } from '../../../src/Game';
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { ICard } from '../../../src/cards/ICard';
+import { StormCraftIncorporated } from "../../../src/cards/colonies/StormCraftIncorporated";
+import { Game } from "../../../src/Game";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { ICard } from "../../../src/cards/ICard";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("AirRaid", function () {

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { SoilFactory } from "../../src/cards/SoilFactory";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("SoilFactory", function () {
     let card : SoilFactory, player : Player;

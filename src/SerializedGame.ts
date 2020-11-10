@@ -1,21 +1,21 @@
-import { IProjectCard } from "./cards/IProjectCard";
-import { Phase } from "./Phase";
-import { ClaimedMilestone } from "./ClaimedMilestone";
-import { FundedAward } from "./FundedAward";
-import { IMilestone } from "./milestones/IMilestone";
-import { IAward } from "./awards/IAward";
-import { ColonyDealer } from "./colonies/ColonyDealer";
-import { DeferredAction } from "./deferredActions/DeferredAction";
-import { Board } from "./Board";
-import { CardName } from "./CardName";
-import { BoardName } from "./BoardName";
-import { SerializedColony } from "./SerializedColony";
-import { SerializedPlayer } from "./SerializedPlayer";
-import { SerializedDealer } from "./SerializedDealer";
-import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
-import { PlayerId } from "./Player";
-import { GameOptions } from "./Game";
-import { IAresData } from "./ares/IAresData";
+import {IProjectCard} from './cards/IProjectCard';
+import {Phase} from './Phase';
+import {ClaimedMilestone} from './ClaimedMilestone';
+import {FundedAward} from './FundedAward';
+import {IMilestone} from './milestones/IMilestone';
+import {IAward} from './awards/IAward';
+import {ColonyDealer} from './colonies/ColonyDealer';
+import {DeferredAction} from './deferredActions/DeferredAction';
+import {Board} from './Board';
+import {CardName} from './CardName';
+import {BoardName} from './BoardName';
+import {SerializedColony} from './SerializedColony';
+import {SerializedPlayer} from './SerializedPlayer';
+import {SerializedDealer} from './SerializedDealer';
+import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
+import {PlayerId} from './Player';
+import {GameOptions} from './Game';
+import {IAresData} from './ares/IAresData';
 
 export interface SerializedGame {
     id: string;
@@ -25,14 +25,14 @@ export interface SerializedGame {
     deferredActions: Array<DeferredAction>;
     gameLog: Array<String>;
     gameAge: number;
-    
+
     generation: number;
     phase: Phase;
     dealer: SerializedDealer;
     boardName: BoardName;
     board: Board;
     gameOptions: GameOptions;
-    
+
     oxygenLevel: number;
     temperature: number;
     venusScaleLevel: number;

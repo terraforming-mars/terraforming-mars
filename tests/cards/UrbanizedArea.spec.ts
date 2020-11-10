@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SpaceName } from "../../src/SpaceName";
 import { SpaceType } from "../../src/SpaceType";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { ISpace } from "../../src/ISpace";
 
 describe("UrbanizedArea", function () {

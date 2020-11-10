@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { ImportedHydrogen } from "../../src/cards/ImportedHydrogen";
 import { InterstellarColonyShip } from "../../src/cards/InterstellarColonyShip";
 import { LunarBeam } from "../../src/cards/LunarBeam";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Cartel", function () {
     let card : Cartel, player : Player;

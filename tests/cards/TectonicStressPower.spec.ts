@@ -3,7 +3,7 @@ import { TectonicStressPower } from "../../src/cards/TectonicStressPower";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { SearchForLife } from "../../src/cards/SearchForLife";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("TectonicStressPower", function () {
     let card : TectonicStressPower, player : Player;

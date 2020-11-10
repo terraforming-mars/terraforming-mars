@@ -4,7 +4,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Trees } from "../../src/cards/Trees";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Insects", function () {
     let card : Insects, player : Player, game : Game;

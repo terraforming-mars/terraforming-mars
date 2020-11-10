@@ -3,8 +3,8 @@ import { VenusWaystation } from "../../../src/cards/venusNext/VenusWaystation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { LocalShading } from '../../../src/cards/venusNext/LocalShading';
-import { VenusGovernor } from '../../../src/cards/venusNext/VenusGovernor';
+import { LocalShading } from "../../../src/cards/venusNext/LocalShading";
+import { VenusGovernor } from "../../../src/cards/venusNext/VenusGovernor";
 
 describe("VenusWaystation", function () {
     it("Should play", function () {

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { StratosphericBirds } from "../../../src/cards/venusNext/StratosphericBirds";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { DeuteriumExport } from "../../../src/cards/venusNext/DeuteriumExport";
 import { ExtractorBalloons } from "../../../src/cards/venusNext/ExtractorBalloons";
 import { SelectCard } from "../../../src/inputs/SelectCard";

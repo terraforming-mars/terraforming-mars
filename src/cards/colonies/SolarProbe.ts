@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
 
 export class SolarProbe implements IProjectCard {
     public cost = 9;
@@ -12,7 +12,7 @@ export class SolarProbe implements IProjectCard {
     public cardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-      let cardsToDraw = Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3);
+      const cardsToDraw = Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3);
       for (let i = 0; i < cardsToDraw; i++) {
         player.cardsInHand.push(game.dealer.dealCard());
       }
@@ -20,6 +20,6 @@ export class SolarProbe implements IProjectCard {
     }
 
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

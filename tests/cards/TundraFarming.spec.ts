@@ -3,7 +3,7 @@ import { TundraFarming } from "../../src/cards/TundraFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("TundraFarming", function () {
     let card : TundraFarming, player : Player, game : Game;

@@ -1,10 +1,10 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { BuildColony } from "../../deferredActions/BuildColony";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
+import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class TradingColony implements IProjectCard {
     public cost = 18;
@@ -12,9 +12,13 @@ export class TradingColony implements IProjectCard {
     public name = CardName.TRADING_COLONY;
     public cardType = CardType.ACTIVE;
 
+    public canPlay(player: Player, game: Game): boolean {
+      return player.canPlayColonyPlacementCard(game);
+    }
+
     public play(player: Player, game: Game) {
-        game.defer(new BuildColony(player, game, false, "Select colony for Trading Colony"));
-        player.colonyTradeOffset++; 
-        return undefined;
+      game.defer(new BuildColony(player, game, false, 'Select colony for Trading Colony'));
+      player.colonyTradeOffset++;
+      return undefined;
     }
 }

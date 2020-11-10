@@ -1,13 +1,13 @@
-import { IActionCard } from "../ICard";
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CorporationCard } from "./CorporationCard";
-import { CardName } from "../../CardName";
-import { PartyHooks } from "../../turmoil/parties/PartyHooks";
-import { PartyName } from "../../turmoil/parties/PartyName";
-import { REDS_RULING_POLICY_COST } from "../../constants";
-import { CardType } from "../CardType";
+import {IActionCard} from '../ICard';
+import {Tags} from '../Tags';
+import {Player} from '../../Player';
+import {Game} from '../../Game';
+import {CorporationCard} from './CorporationCard';
+import {CardName} from '../../CardName';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardType} from '../CardType';
 
 
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
@@ -17,21 +17,21 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
     public cardType = CardType.CORPORATION;
 
     public play() {
-        return undefined;
+      return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-        const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
-        const actionCost = 3;
+      const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
+      const actionCost = 3;
 
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
-        }
-        
-        return hasIncreasedTR && player.canAfford(actionCost); 
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
+      }
+
+      return hasIncreasedTR && player.canAfford(actionCost);
     }
     public action(player: Player, game: Game) {
-        player.megaCredits -= 3;
-        player.increaseTerraformRating(game);
-        return undefined;
+      player.megaCredits -= 3;
+      player.increaseTerraformRating(game);
+      return undefined;
     }
 }

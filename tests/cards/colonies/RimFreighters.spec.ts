@@ -3,7 +3,7 @@ import { RimFreighters } from "../../../src/cards/colonies/RimFreighters";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { Ceres } from '../../../src/colonies/Ceres';
+import { Ceres } from "../../../src/colonies/Ceres";
 
 describe("RimFreighters", function () {
     it("Should play", function () {

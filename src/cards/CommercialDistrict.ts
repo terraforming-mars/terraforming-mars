@@ -6,10 +6,10 @@ import {Game} from '../Game';
 import {TileType} from '../TileType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { Board } from '../Board';
-import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {Board} from '../Board';
+import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 
 export class CommercialDistrict implements IProjectCard {
     public cost = 16;
@@ -27,7 +27,7 @@ export class CommercialDistrict implements IProjectCard {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
         return game.board.getAdjacentSpaces(usedSpace).filter(
-            (adjacentSpace) => Board.isCitySpace(adjacentSpace)
+            (adjacentSpace) => Board.isCitySpace(adjacentSpace),
         ).length;
       }
       return 0;
@@ -39,13 +39,13 @@ export class CommercialDistrict implements IProjectCard {
           (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, {
               tileType: TileType.COMMERCIAL_DISTRICT,
-              card: this.name
+              card: this.name,
             });
             foundSpace.adjacency = this.adjacencyBonus;
-            player.addProduction(Resources.ENERGY,-1);
-            player.addProduction(Resources.MEGACREDITS,4);
+            player.addProduction(Resources.ENERGY, -1);
+            player.addProduction(Resources.MEGACREDITS, 4);
             return undefined;
-          }
+          },
       );
     }
 }

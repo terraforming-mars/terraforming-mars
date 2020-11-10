@@ -1,8 +1,8 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
 
 export class CommunityServices implements IProjectCard {
     public cost = 13;
@@ -11,11 +11,11 @@ export class CommunityServices implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1);
-        return undefined;
+      player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1);
+      return undefined;
     }
 
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

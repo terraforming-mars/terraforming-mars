@@ -6,7 +6,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { Pets } from "../../../src/cards/Pets";
 import { EnergySaving } from "../../../src/cards/EnergySaving";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("Thorgate", function () {
     it("Should play", function () {

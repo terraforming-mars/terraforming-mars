@@ -4,7 +4,7 @@ import { MirandaResort } from "../../src/cards/MirandaResort";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { BusinessNetwork } from "../../src/cards/BusinessNetwork";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("MirandaResort", function () {
     it("Should play", function () {

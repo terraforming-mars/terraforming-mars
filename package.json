@@ -8,6 +8,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.6",
     "@types/pg": "^7.14.3",
+    "@types/sqlite3": "^3.1.6",
     "compression-webpack-plugin": "^6.0.3",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
@@ -23,7 +24,6 @@
   },
   "devDependencies": {
     "@types/node": "^10.17.32",
-    "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "@vue/test-utils": "^1.1.1",

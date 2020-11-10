@@ -4,9 +4,7 @@
   "description": "Terraforming Mars Game",
   "private": true,
   "dependencies": {
-    "@istanbuljs/nyc-config-typescript": "^0.1.3",
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.17.32",
     "@types/pg": "^7.14.3",
     "@types/sqlite3": "^3.1.6",
     "compression-webpack-plugin": "^6.0.3",
@@ -18,12 +16,13 @@
     "sqlite3": "^4.2.0",
     "typescript": "^4.0.5",
     "vue": "2.6.10",
-    "vue-template-compiler": "2.6.10",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.0"
   },
   "devDependencies": {
-    "@types/node": "^10.17.32",
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^5.2.6",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "@vue/test-utils": "^1.1.1",
@@ -34,7 +33,8 @@
     "js-beautify": "^1.13.0",
     "jsdom": "^16.4.0",
     "mocha": "^6.2.3",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "vue-template-compiler": "2.6.10"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript"

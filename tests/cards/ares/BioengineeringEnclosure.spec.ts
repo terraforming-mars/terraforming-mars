@@ -1,24 +1,24 @@
-import { BioengineeringEnclosure } from "../../../src/cards/ares/BioengineeringEnclosure";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { Player } from "../../../src/Player";
-import { IProjectCard } from "../../../src/cards/IProjectCard";
-import { CardName } from "../../../src/CardName";
-import { Tags } from "../../../src/cards/Tags";
-import { CardType } from "../../../src/cards/CardType";
-import { ResourceType } from "../../../src/ResourceType";
-import { expect } from "chai";
-import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
+import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {CardName} from '../../../src/CardName';
+import {Tags} from '../../../src/cards/Tags';
+import {CardType} from '../../../src/cards/CardType';
+import {ResourceType} from '../../../src/ResourceType';
+import {expect} from 'chai';
+import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
-describe("BioengineeringEnclosure", function () {
-  let card : BioengineeringEnclosure, player : Player, game : Game;
+describe('BioengineeringEnclosure', function() {
+  let card : BioengineeringEnclosure; let player : Player; let game : Game;
 
   const scienceTagCard: IProjectCard = {
     name: CardName.ACQUIRED_COMPANY,
     cardType: CardType.ACTIVE,
     cost: 0,
     tags: [Tags.SCIENCE],
-    play: () => undefined
+    play: () => undefined,
   };
 
   const animalHost: IProjectCard = {
@@ -28,40 +28,40 @@ describe("BioengineeringEnclosure", function () {
     tags: [],
     resourceType: ResourceType.ANIMAL,
     resourceCount: 0,
-    play: () => undefined
-  }
+    play: () => undefined,
+  };
 
   beforeEach(function() {
     card = new BioengineeringEnclosure();
-    player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
-  it("Can't play without a science tag", () => {
+  it('Can\'t play without a science tag', () => {
     expect(card.canPlay(player, game)).is.false;
     player.playCard(game, scienceTagCard);
     expect(card.canPlay(player, game)).is.true;
   });
 
-  it("Play", () => {
+  it('Play', () => {
     expect(card.resourceCount).eq(0);
     card.play(player, game);
     expect(card.resourceCount).eq(2);
   });
 
-  it("Can't move animal if it's empty", () => {
+  it('Can\'t move animal if it\'s empty', () => {
     card.play(player, game);
     player.playCard(game, animalHost);
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
-  it("Can't move animal if theres not another card", () => {
+  it('Can\'t move animal if theres not another card', () => {
     card.play(player, game);
     expect(card.canAct(player)).is.false;
   });
 
-  it("Move animal", () => {
+  it('Move animal', () => {
     // Set up the cards.
     player.playCard(game, animalHost);
     player.playCard(game, card);

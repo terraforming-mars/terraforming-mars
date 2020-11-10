@@ -1,30 +1,30 @@
-import { expect } from "chai";
-import { OreProcessor } from "../../src/cards/OreProcessor";
-import { Color } from "../../src/Color";
-import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
+import {expect} from 'chai';
+import {OreProcessor} from '../../src/cards/OreProcessor';
+import {Color} from '../../src/Color';
+import {Player} from '../../src/Player';
+import {Game} from '../../src/Game';
 
-describe("OreProcessor", function () {
-    let card : OreProcessor, player : Player, game : Game;
+describe('OreProcessor', function() {
+  let card : OreProcessor; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new OreProcessor();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
-    });
+  beforeEach(function() {
+    card = new OreProcessor();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player);
+  });
 
-    it("Can't act", function () {
-        player.energy = 3;
-        expect(card.canAct(player, game)).is.not.true;
-    });
+  it('Can\'t act', function() {
+    player.energy = 3;
+    expect(card.canAct(player, game)).is.not.true;
+  });
 
-    it("Should act", function () {
-        player.energy = 4;
-        expect(card.canAct(player, game)).is.true;
-        card.action(player, game);
+  it('Should act', function() {
+    player.energy = 4;
+    expect(card.canAct(player, game)).is.true;
+    card.action(player, game);
 
-        expect(player.energy).to.eq(0);
-        expect(player.titanium).to.eq(1);
-        expect(game.getOxygenLevel()).to.eq(1);
-    });
- });
+    expect(player.energy).to.eq(0);
+    expect(player.titanium).to.eq(1);
+    expect(game.getOxygenLevel()).to.eq(1);
+  });
+});

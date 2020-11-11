@@ -198,9 +198,9 @@ export class PostgreSQL implements IDatabase {
         });
     }
 
-    deleteGameNbrSaves(game_id: string, NbrSavesToDelete: number): void {
-        if (NbrSavesToDelete > 0) {
-            this.client.query("DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESCLIMIT $2)", [game_id, NbrSavesToDelete], (err) => {
+    deleteGameNbrSaves(game_id: string, rollbackCount: number): void {
+        if (rollbackCount > 0) {
+            this.client.query("DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)", [game_id, rollbackCount], (err) => {
                 if (err) {
                     return console.warn(err.message);  
                 }

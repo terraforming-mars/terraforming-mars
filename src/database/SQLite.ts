@@ -145,11 +145,13 @@ export class SQLite implements IDatabase {
         });
     }
 
-    deleteGameNbrSaves(game_id: string, NbrSavesToDelete: number): void {
-        this.db.run("DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)", [game_id, NbrSavesToDelete], function(err: { message: any; }) {
-            if (err) {
-            return console.warn(err.message);  
-            }
-        });
+    deleteGameNbrSaves(game_id: string, rollbackCount: number): void {
+        if (rollbackCount > 0) {
+            this.db.run("DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)", [game_id, rollbackCount], function(err: { message: any; }) {
+                if (err) {
+                    return console.warn(err.message);  
+                }
+            });
+        }
     }
 }

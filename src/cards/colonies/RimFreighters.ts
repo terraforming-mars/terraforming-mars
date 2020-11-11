@@ -14,4 +14,8 @@ export class RimFreighters implements IProjectCard {
       player.colonyTradeDiscount++;
       return undefined;
     }
+
+    public onDiscard(player: Player): void {
+      player.colonyTradeDiscount--;
+    }
 }

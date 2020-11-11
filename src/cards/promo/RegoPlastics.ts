@@ -18,4 +18,8 @@ export class RegoPlastics implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+
+    public onDiscard(player: Player): void {
+      player.decreaseSteelValue();
+    }
 }

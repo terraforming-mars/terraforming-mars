@@ -63,7 +63,7 @@ export const SortableCards = Vue.component('sorted-cards', {
   },
   template: `
   <div>
-<div v-for="card in getSortedCards()" :key="card.name" class="cardbox" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)" v-on:dragover="onDragOver(card.name)">
+<div ref="cardbox" v-for="card in getSortedCards()" :key="card.name" class="cardbox" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)" v-on:dragover="onDragOver(card.name)">
     <Card :card="card"/>
 </div></div>`,
 });

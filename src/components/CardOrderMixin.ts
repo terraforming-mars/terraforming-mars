@@ -1,12 +1,14 @@
 
 import {CardModel} from '../models/CardModel';
 
+const STORAGE_PREFIX = 'cardOrder';
+
 export const CardOrderMixin = {
   name: 'CardOrderMixin',
   methods: {
     getCardOrder: function(playerId: string) {
       try {
-        const order = localStorage.getItem(`cardOrder${playerId}`);
+        const order = localStorage.getItem(`${STORAGE_PREFIX}${playerId}`);
         if (order === null) {
           return {};
         }
@@ -26,7 +28,7 @@ export const CardOrderMixin = {
     },
     updateCardOrder: function(playerId: string, order: {[x: string]: number}) {
       try {
-        localStorage.setItem(`cardOrder${playerId}`, JSON.stringify(order));
+        localStorage.setItem(`${STORAGE_PREFIX}${playerId}`, JSON.stringify(order));
       } catch (err) {
         console.warn('unable to update card order with local storage', err);
       }

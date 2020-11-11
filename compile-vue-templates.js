@@ -137,7 +137,7 @@ checkComponent(
 checkComponent(
     "src/components/SelectHowToPayForCard",
     require("./build/src/components/SelectHowToPayForCard").SelectHowToPayForCard,
-    ["card", "cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
+    ["card", "cards", "cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
 );
 checkComponent(
     "src/components/SelectOption",
@@ -168,6 +168,11 @@ checkComponent(
     "src/components/ShiftAresGlobalParameters",
     require("./build/src/components/ShiftAresGlobalParameters").ShiftAresGlobalParameters,
     ["hazardData", "lowOceanDelta", "highOceanDelta", "temperatureDelta", "oxygenDelta", "ADJUSTMENT_RANGE"]
+);
+checkComponent(
+    "src/components/SortableCards",
+    require("./build/src/components/SortableCards").SortableCards,
+    []
 );
 checkComponent(
     "src/components/StackedCards",

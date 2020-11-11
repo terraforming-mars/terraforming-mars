@@ -576,10 +576,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
                 this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
                 this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
       }
-      return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
+			if (this.gameOptions.venusNextExtension) {
+        return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
                this.temperature >= constants.MAX_TEMPERATURE &&
                this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
-               (this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE || this.gameOptions.venusTR !== true);
+               (this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE || this.gameOptions.requiresVenusTrackCompletion !== true);
+			}
+      return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
+             this.temperature >= constants.MAX_TEMPERATURE &&
+             this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
 
     public isSoloModeWin(): boolean {

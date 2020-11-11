@@ -168,23 +168,23 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public decreaseTitaniumValue(): void {
-        if (this.titaniumValue > constants.DEFAULT_TITANIUM_VALUE) {
-            this.titaniumValue--;
-        }
+      if (this.titaniumValue > constants.DEFAULT_TITANIUM_VALUE) {
+        this.titaniumValue--;
+      }
     }
 
     public getSteelValue(): number {
-        return this.steelValue;
+      return this.steelValue;
     }
-  
+
     public increaseSteelValue(): void {
-        this.steelValue++;
+      this.steelValue++;
     }
 
     public decreaseSteelValue(): void {
-        if (this.steelValue > constants.DEFAULT_STEEL_VALUE) {
-            this.steelValue--;
-        }
+      if (this.steelValue > constants.DEFAULT_STEEL_VALUE) {
+        this.steelValue--;
+      }
     }
 
     public getTerraformRating(): number {
@@ -2404,15 +2404,15 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public getFleetSize(): number {
-        return this.fleetSize;
+      return this.fleetSize;
     }
 
     public increaseFleetSize(): void {
-        if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+      if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
     }
 
     public decreaseFleetSize(): void {
-        if (this.fleetSize > 0) this.fleetSize--;
+      if (this.fleetSize > 0) this.fleetSize--;
     }
 
     public canPlayColonyPlacementCard(game: Game): boolean {

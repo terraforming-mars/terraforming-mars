@@ -1,27 +1,27 @@
-import { expect } from "chai";
-import { CardName } from "../../../src/CardName";
-import { BiofertilizerFacility } from "../../../src/cards/ares/BiofertilizerFacility";
-import { CardType } from "../../../src/cards/CardType";
-import { IProjectCard } from "../../../src/cards/IProjectCard";
-import { Tags } from "../../../src/cards/Tags";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { Player } from "../../../src/Player";
-import { Resources } from "../../../src/Resources";
-import { ResourceType } from "../../../src/ResourceType";
-import { SpaceBonus } from "../../../src/SpaceBonus";
-import { TileType } from "../../../src/TileType";
-import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
+import {expect} from 'chai';
+import {CardName} from '../../../src/CardName';
+import {BiofertilizerFacility} from '../../../src/cards/ares/BiofertilizerFacility';
+import {CardType} from '../../../src/cards/CardType';
+import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {Tags} from '../../../src/cards/Tags';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {ResourceType} from '../../../src/ResourceType';
+import {SpaceBonus} from '../../../src/SpaceBonus';
+import {TileType} from '../../../src/TileType';
+import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
-describe("BiofertilizerFacility", function () {
-  let card : BiofertilizerFacility, player : Player, game : Game;
+describe('BiofertilizerFacility', function() {
+  let card : BiofertilizerFacility; let player : Player; let game : Game;
 
   const scienceTagCard: IProjectCard = {
     name: CardName.ACQUIRED_COMPANY,
     cardType: CardType.ACTIVE,
     cost: 0,
     tags: [Tags.SCIENCE],
-    play: () => undefined
+    play: () => undefined,
   };
 
   const microbeHost: IProjectCard = {
@@ -31,20 +31,20 @@ describe("BiofertilizerFacility", function () {
     tags: [],
     resourceType: ResourceType.MICROBE,
     resourceCount: 0,
-    play: () => undefined
-  }
+    play: () => undefined,
+  };
 
   beforeEach(function() {
     card = new BiofertilizerFacility();
-    player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
-  it("Can't play without a science tag", function () {
+  it('Can\'t play without a science tag', function() {
     expect(card.canPlay(player, game)).is.not.true;
   });
 
-  it("Play", function () {
+  it('Play', function() {
     // Set up the cards.
     // Adds the necessary Science tag.
     player.playCard(game, scienceTagCard);
@@ -70,5 +70,4 @@ describe("BiofertilizerFacility", function () {
 
     expect(microbeHost.resourceCount).is.eq(2);
   });
-
 });

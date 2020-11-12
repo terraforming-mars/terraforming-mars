@@ -88,6 +88,10 @@ export class LogHelper {
     game.log('${0} gained ${1} TR', (b) => b.player(player).number(steps));
   }
 
+  static logVenusIncrease(game: Game, player: Player, steps: number) {
+    game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
+  }
+
   static logDiscardedCards(game: Game, discardedCards: Array<ICard>) {
     game.log(discardedCards.length + ' card(s) were discarded', (b) => {
       discardedCards.forEach((card) => b.card(card));

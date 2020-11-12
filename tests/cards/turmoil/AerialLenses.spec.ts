@@ -3,7 +3,7 @@ import { AerialLenses } from "../../../src/cards/turmoil/AerialLenses";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { GameOptions, Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { setCustomGameOptions } from "../../TestingUtils";
@@ -16,7 +16,7 @@ describe("AerialLenses", function () {
         player = new Player("test", Color.BLUE, false);
         player2 = new Player("test2", Color.RED, false);
 
-        const gameOptions = setCustomGameOptions() as GameOptions;
+        const gameOptions = setCustomGameOptions();
         game = new Game("foobar", [player, player2], player, gameOptions);  
     });
 

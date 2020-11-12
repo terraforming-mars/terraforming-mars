@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 import { EarthCatapult } from "../../../src/cards/EarthCatapult";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("SpinoffDepartment", function () {
     it("Should play", function () {

@@ -3,8 +3,8 @@ import { CorroderSuits } from "../../../src/cards/venusNext/CorroderSuits";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
-import { SelectCard } from '../../../src/inputs/SelectCard';
+import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { Game } from "../../../src/Game";
 

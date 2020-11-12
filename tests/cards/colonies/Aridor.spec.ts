@@ -3,9 +3,9 @@ import { Aridor } from "../../../src/cards/colonies/Aridor";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Predators } from "../../../src/cards/Predators";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
-import { ResearchOutpost } from '../../../src/cards/ResearchOutpost';
+import { ResearchOutpost } from "../../../src/cards/ResearchOutpost";
 
 describe("Aridor", function () {
     it("Should play", function () {

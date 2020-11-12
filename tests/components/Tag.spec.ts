@@ -1,24 +1,23 @@
 
-import { setup } from "../utils/Vue";
-
-setup();
+import { createLocalVue, mount } from "@vue/test-utils";
 
 import { expect } from "chai";
 import { Tag } from "../../src/components/Tag";
 
 describe("Tag", function () {
-    it("getClasses", function () {
-        expect((Tag as any).methods.getClasses.call({
-            tag: "vp"
-        })).to.eq("tag-count tag-vp");
-        expect((Tag as any).methods.getClasses.call({
-            tag: "vp",
-            size: "big"
-        })).to.eq("tag-count tag-vp tag-size-big");
-        expect((Tag as any).methods.getClasses.call({
-            tag: "vp",
-            size: "big",
-            type: "main"
-        })).to.eq("tag-count tag-vp tag-size-big tag-type-main");
+    function getLocalVue() {
+        const localVue = createLocalVue();
+        return localVue;
+    }
+    it("getClasses with only tag", function () {
+        const tag = mount(Tag, {
+            localVue: getLocalVue(),
+            propsData: {
+                tag: "vp",
+                size: "big",
+                type: "main"
+            }
+        });
+        expect(tag.find("div[class=\"tag-count tag-vp tag-size-big tag-type-main\"]").exists()).is.true;
     });
 });

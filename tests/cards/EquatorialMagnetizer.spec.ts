@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { EquatorialMagnetizer } from "../../src/cards/EquatorialMagnetizer";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
-import { Game } from '../../src/Game';
+import { Resources } from "../../src/Resources";
+import { Game } from "../../src/Game";
 
 describe("EquatorialMagnetizer", function () {
     let card : EquatorialMagnetizer, player : Player, game : Game;

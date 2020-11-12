@@ -1,42 +1,42 @@
-import Vue from "vue";
-import { FundedAwardModel } from "../models/FundedAwardModel";
+import Vue from 'vue';
+import {FundedAwardModel} from '../models/FundedAwardModel';
 
-export const Award = Vue.component("award", {
-    props: {
-        awards_list: {
-            type: Object as () => Array<FundedAwardModel>
-        }
+export const Award = Vue.component('award', {
+  props: {
+    awards_list: {
+      type: Array as () => Array<FundedAwardModel>,
     },
-    data: function () {
-        const showDescription: {[x: string]: boolean}  = {};
-        for (const award of this.awards_list) {
-            showDescription[award.award.name] = false;
-        }
-        return {
-            showDescription,
-            showList: true
-        }
+  },
+  data: function() {
+    const showDescription: {[x: string]: boolean} = {};
+    for (const award of this.awards_list) {
+      showDescription[award.award.name] = false;
+    }
+    return {
+      showDescription,
+      showList: true,
+    };
+  },
+  methods: {
+    getNameCss: function(awardName: string): string {
+      return (
+        'ma-name ma-name--' + awardName.replace(/ /g, '-').toLowerCase()
+      );
     },
-    methods: {
-        getNameCss: function (awardName: string): string {
-            return (
-                "ma-name ma-name--" + awardName.replace(/ /g, "-").toLowerCase()
-            );
-        },
-        shouldShow: function (award: FundedAwardModel): boolean {
-            return this.showDescription[award.award.name] === true;
-        },
-        shouldShowList: function (): boolean {
-            return this.showList;
-        },
-        toggle: function (award: FundedAwardModel) {
-            this.showDescription[award.award.name] = !this.showDescription[award.award.name];
-        },
-        toggleList: function () {
-            this.showList = !this.showList;
-        }
+    shouldShow: function(award: FundedAwardModel): boolean {
+      return this.showDescription[award.award.name] === true;
     },
-    template: `
+    shouldShowList: function(): boolean {
+      return this.showList;
+    },
+    toggle: function(award: FundedAwardModel) {
+      this.showDescription[award.award.name] = !this.showDescription[award.award.name];
+    },
+    toggleList: function() {
+      this.showList = !this.showList;
+    },
+  },
+  template: `
     <div class="awards_cont" v-trim-whitespace>
         <div class="awards">
             <div class="ma-title">

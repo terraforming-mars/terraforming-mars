@@ -3,7 +3,7 @@ import { GreatDam } from "../../src/cards/GreatDam";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { maxOutOceans } from "../TestingUtils"
 
 describe("GreatDam", function () {

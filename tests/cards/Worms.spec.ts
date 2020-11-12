@@ -3,7 +3,7 @@ import { Worms } from "../../src/cards/Worms";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Worms", function () {
     let card : Worms, player : Player, game : Game;

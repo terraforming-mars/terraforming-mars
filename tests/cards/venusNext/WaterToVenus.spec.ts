@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { WaterToVenus } from "../../../src/cards/venusNext/WaterToVenus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 
 describe("WaterToVenus", function () {
     it("Should play", function () {

@@ -5,7 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NitrogenRichAsteroid", function () {
     it("Should play", function () {

@@ -1,13 +1,13 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, IResourceCard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { Resources } from '../../Resources';
-import { Game } from '../../Game';
-import { LogHelper } from '../../components/LogHelper';
+import {IProjectCard} from '../IProjectCard';
+import {IActionCard, IResourceCard} from '../ICard';
+import {CardName} from '../../CardName';
+import {CardType} from '../CardType';
+import {ResourceType} from '../../ResourceType';
+import {Tags} from '../Tags';
+import {Player} from '../../Player';
+import {Resources} from '../../Resources';
+import {Game} from '../../Game';
+import {LogHelper} from '../../components/LogHelper';
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.ASTEROID_HOLLOWING;
@@ -18,24 +18,23 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
     public cardType = CardType.ACTIVE;
 
     public play() {
-        return undefined;
+      return undefined;
     }
 
     public canAct(player: Player): boolean {
-        return player.titanium > 0;
+      return player.titanium > 0;
     }
 
     public action(player: Player, game: Game) {
-        player.titanium -= 1;
-        player.addProduction(Resources.MEGACREDITS);
-        player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+      player.titanium -= 1;
+      player.addProduction(Resources.MEGACREDITS);
+      player.addResourceTo(this);
+      LogHelper.logAddResource(game, player, this);
 
-        return undefined;
+      return undefined;
     }
 
     public getVictoryPoints(): number {
-        return Math.floor(this.resourceCount / 2);
+      return Math.floor(this.resourceCount / 2);
     }
-
 }

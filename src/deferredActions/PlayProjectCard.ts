@@ -1,17 +1,17 @@
-import { Game } from "../Game";
-import { Player } from "../Player";
-import { DeferredAction } from "./DeferredAction";
+import {Game} from '../Game';
+import {Player} from '../Player';
+import {DeferredAction} from './DeferredAction';
 
 export class PlayProjectCard implements DeferredAction {
-    constructor(
+  constructor(
         public player: Player,
-        public game: Game
-    ){}
+        public game: Game,
+  ) {}
 
-    public execute() {
-        if (this.player.getPlayableCards(this.game).length === 0) {
-            return undefined;
-        }
-        return this.player.playProjectCard(this.game);
+  public execute() {
+    if (this.player.getPlayableCards(this.game).length === 0) {
+      return undefined;
     }
-}    
+    return this.player.playProjectCard(this.game);
+  }
+}

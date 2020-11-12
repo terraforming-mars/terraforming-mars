@@ -1,8 +1,8 @@
 
-import Vue from "vue";
-import { Button } from "../components/common/Button";
-import { GameHomeModel } from "../models/GameHomeModel";
-import { mainAppSettings } from "./App";
+import Vue from 'vue';
+import {Button} from '../components/common/Button';
+import {GameHomeModel} from '../models/GameHomeModel';
+import {mainAppSettings} from './App';
 
 export const LoadGameForm = Vue.component("load-game-form", {
     components: {
@@ -44,8 +44,14 @@ export const LoadGameForm = Vue.component("load-game-form", {
                 rollbackCount: rollbackCount
             }));
         }
+      };
+      xhr.responseType = 'json';
+      xhr.send(JSON.stringify({
+        game_id: gameId,
+      }));
     },
-    template: `
+  },
+  template: `
         <div id="load-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Load Game</span></h1>
 
@@ -61,6 +67,6 @@ export const LoadGameForm = Vue.component("load-game-form", {
                 </div>
             </div>
         </div>
-    `
+    `,
 });
 

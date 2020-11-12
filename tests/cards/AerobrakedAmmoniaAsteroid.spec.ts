@@ -3,7 +3,7 @@ import { AerobrakedAmmoniaAsteroid } from "../../src/cards/AerobrakedAmmoniaAste
 import { Ants } from "../../src/cards/Ants";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { Decomposers } from "../../src/cards/Decomposers";
 import { Game } from "../../src/Game";
 

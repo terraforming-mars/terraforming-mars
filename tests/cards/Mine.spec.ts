@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { Mine } from "../../src/cards/Mine";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("Mine", function () {
     it("Should play", function () {

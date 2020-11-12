@@ -5,7 +5,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NaturalPreserve", function () {
     let card : NaturalPreserve, player : Player, game : Game;

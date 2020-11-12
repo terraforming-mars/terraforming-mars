@@ -3,7 +3,7 @@ import { Moss } from "../../src/cards/Moss";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { ViralEnhancers } from "../../src/cards/ViralEnhancers";
 import { maxOutOceans } from "../TestingUtils";
 

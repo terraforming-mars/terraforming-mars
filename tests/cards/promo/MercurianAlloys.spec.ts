@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { MercurianAlloys } from "../../../src/cards/promo/MercurianAlloys";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Research } from "../../../src/cards/Research";
 
 describe("MercurianAlloys", function () {

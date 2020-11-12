@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { LakefrontResorts } from "../../../src/cards/turmoil/LakefrontResorts";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { Resources } from "../../../src/Resources";
 
 describe("LakefrontResorts", function () {

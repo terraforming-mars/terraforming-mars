@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { MolecularPrinting } from "../../../src/cards/colonies/MolecularPrinting";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
-import { Luna } from '../../../src/colonies/Luna';
-import { Triton } from '../../../src/colonies/Triton';
+import { Game } from "../../../src/Game";
+import { Luna } from "../../../src/colonies/Luna";
+import { Triton } from "../../../src/colonies/Triton";
 import { Resources } from "../../../src/Resources";
 
 describe("MolecularPrinting", function () {

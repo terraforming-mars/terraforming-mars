@@ -4,7 +4,7 @@ import { InvestmentLoan } from "../../src/cards/InvestmentLoan";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("InvestmentLoan", function () {
     it("Should play", function () {

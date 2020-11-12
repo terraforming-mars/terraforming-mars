@@ -1,5 +1,5 @@
 
-import { PlayerInputTypes } from "./PlayerInputTypes";
+import {PlayerInputTypes} from './PlayerInputTypes';
 
 export interface PlayerInput {
     inputType: PlayerInputTypes;

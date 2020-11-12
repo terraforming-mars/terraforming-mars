@@ -3,9 +3,9 @@ import { SponsoredAcademies } from "../../../src/cards/venusNext/SponsoredAcadem
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { HousePrinting } from '../../../src/cards/prelude/HousePrinting';
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { IProjectCard } from '../../../src/cards/IProjectCard';
+import { HousePrinting } from "../../../src/cards/prelude/HousePrinting";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { IProjectCard } from "../../../src/cards/IProjectCard";
 
 describe("SponsoredAcademies", function () {
     it("Should play", function () {

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { BuildingIndustries } from "../../src/cards/BuildingIndustries";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("BuildingIndustries", function () {
     let card : BuildingIndustries, player : Player;

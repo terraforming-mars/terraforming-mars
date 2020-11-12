@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { HousePrinting } from "../../../src/cards/prelude/HousePrinting";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 
 describe("HousePrinting", function () {
     it("Should play", function () {

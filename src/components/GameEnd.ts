@@ -1,57 +1,58 @@
-import Vue from "vue";
-import { PlayerModel } from "../models/PlayerModel";
-import { Board } from "./Board";
-import { LogPanel } from "./LogPanel";
-import { Button } from "../components/common/Button";
-import { playerColorClass } from "../utils/utils";
+import Vue from 'vue';
+import {PlayerModel} from '../models/PlayerModel';
+import {Board} from './Board';
+import {LogPanel} from './LogPanel';
+import {Button} from '../components/common/Button';
+import {playerColorClass} from '../utils/utils';
 
-export const GameEnd = Vue.component("game-end", {
-    props: {
-        player: {
-            type: Object as () => PlayerModel
-        }
+export const GameEnd = Vue.component('game-end', {
+  props: {
+    player: {
+      type: Object as () => PlayerModel,
     },
-    data: function () {
-        return {}
+  },
+  data: function() {
+    return {};
+  },
+  components: {
+    'board': Board,
+    'log-panel': LogPanel,
+    'Button': Button,
+  },
+  methods: {
+    getEndGamePlayerHighlightColorClass: function(color: string): string {
+      return playerColorClass(color.toLowerCase(), 'bg');
     },
-    components: {
-        "board": Board,
-        "log-panel": LogPanel,
-        "Button": Button
+    getEndGamePlayerRowColorClass: function(color: string): string {
+      return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    methods: {
-        getEndGamePlayerHighlightColorClass: function (color: string): string {
-            return playerColorClass(color.toLowerCase(), "bg");
-        },
-        getEndGamePlayerRowColorClass: function (color: string): string {
-            return playerColorClass(color.toLowerCase(), "bg_transparent");
-        },
-        getSortedPlayers: function () {
-            this.player.players.sort(function (a:PlayerModel, b:PlayerModel){
-                if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
-                if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-                if (a.megaCredits < b.megaCredits) return -1;
-                if (a.megaCredits > b.megaCredits) return 1;
-                return 0;
-            });
-            return this.player.players.reverse();
-        },
-        getWinners: function(){
-            const sortedPlayers = this.getSortedPlayers();
-            const firstWinner = sortedPlayers[0];
-            const winners: PlayerModel[] = [firstWinner];
-            for (let i = 1; i < sortedPlayers.length; i++)
-                if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
+    getSortedPlayers: function() {
+      this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {
+        if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
+        if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
+        if (a.megaCredits < b.megaCredits) return -1;
+        if (a.megaCredits > b.megaCredits) return 1;
+        return 0;
+      });
+      return this.player.players.reverse();
+    },
+    getWinners: function() {
+      const sortedPlayers = this.getSortedPlayers();
+      const firstWinner = sortedPlayers[0];
+      const winners: PlayerModel[] = [firstWinner];
+      for (let i = 1; i < sortedPlayers.length; i++) {
+        if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
                     sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
-                        winners.push(sortedPlayers[i]);
-                }
-            return winners;
-        },
-        isSoloGame: function (): boolean {
-            return this.player.players.length === 1;
+          winners.push(sortedPlayers[i]);
         }
+      }
+      return winners;
     },
-    template: `
+    isSoloGame: function(): boolean {
+      return this.player.players.length === 1;
+    },
+  },
+  template: `
         <div id="game-end" class="game_end_cont">
             <h1>Terraforming Mars - Game finished!</h1>
             <div class="game_end">
@@ -168,6 +169,6 @@ export const GameEnd = Vue.component("game-end", {
                 </div>
             </div>
         </div>
-    `
+    `,
 });
 

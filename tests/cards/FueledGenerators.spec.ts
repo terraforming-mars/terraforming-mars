@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { FueledGenerators } from "../../src/cards/FueledGenerators";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("FueledGenerators", function () {
     it("Should play", function () {

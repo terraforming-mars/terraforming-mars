@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { TradeAdvance } from "../../../src/cards/community/TradeAdvance";
-import { Game, GameOptions } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { setCustomGameOptions } from "../../TestingUtils";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
@@ -13,7 +13,7 @@ describe("TradeAdvance", function () {
         card = new TradeAdvance();
         player = new Player("test", Color.BLUE, false);
         
-        const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+        const gameOptions = setCustomGameOptions({coloniesExtension: true});
         game = new Game("foobar", [player, player], player, gameOptions);
     });
 

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Playwrights } from "../../../src/cards/community/Playwrights";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { ReleaseOfInertGases} from "../../../src/cards/ReleaseOfInertGases";
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Resources } from "../../../src/Resources";
@@ -44,6 +44,9 @@ describe("Playwrights", function () {
 
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
+        // SelectHowToPay
+        game.deferredActions.shift()!.execute();
+
         expect(player.getTerraformRating()).to.eq(tr + 4);
         expect(player.megaCredits).eq(0);
         expect(player.playedCards).has.lengthOf(0);
@@ -60,6 +63,9 @@ describe("Playwrights", function () {
         expect(card.canAct(player, game)).is.true;
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([event]);
+        // SelectHowToPay
+        game.deferredActions.shift()!.execute();
+
         expect(player.getTerraformRating()).to.eq(tr + 2);
         expect(player.megaCredits).eq(0);
         expect(player2.playedCards).has.lengthOf(0);
@@ -81,6 +87,8 @@ describe("Playwrights", function () {
 
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([indenturedWorkers]);
+        // SelectHowToPay
+        game.deferredActions.shift()!.execute();
 
         const deimosDown = new DeimosDown();
         expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost - 8);

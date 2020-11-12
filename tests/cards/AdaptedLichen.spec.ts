@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { AdaptedLichen } from "../../src/cards/AdaptedLichen";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("AdaptedLichen", function () {
     it("Should play", function () {

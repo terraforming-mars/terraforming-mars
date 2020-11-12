@@ -3,7 +3,7 @@ import { NoctisFarming } from "../../src/cards/NoctisFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("NoctisFarming", function () {
     let card : NoctisFarming, player : Player, game : Game;

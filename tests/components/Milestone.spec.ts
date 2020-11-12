@@ -1,7 +1,5 @@
 
-import { setup } from "../utils/Vue";
-
-setup();
+import { createLocalVue, mount } from "@vue/test-utils";
 
 import { expect } from "chai";
 import { Milestone } from "../../src/components/Milestone";
@@ -19,36 +17,25 @@ describe("Milestone", function () {
         player_color: "blue",
         scores: []
     };
-    it("getNameCss", function () {
-        expect((Milestone as any).methods.getNameCss("foo Bar foO")).to.eq("ma-name ma-name--foo-bar-foo");
-    });
-    it("sets up data", function () {
-        const milestones_list: Array<ClaimedMilestoneModel> = [mockMilestone];
-        expect((Milestone as any).data.call({
-            milestones_list
-        })).to.deep.eq({
-            showList: true,
-            showDescription: {
-                test: false
+    function getLocalVue() {
+        const localVue = createLocalVue();
+        localVue.directive("trim-whitespace", {});
+        localVue.directive("i18n", {});
+        return localVue;
+    }
+    it("shows list and milestones", async function () {
+        const milestone = mount(Milestone, {
+            localVue: getLocalVue(),
+            propsData: {
+                milestones_list: [
+                    mockMilestone
+                ]
             }
         });
-    });
-    it("shouldShow", function () {
-        const scope = { showDescription: { test: true } };
-        expect((Milestone as any).methods.shouldShow.call(scope, mockMilestone)).is.true;
-    });
-    it("shouldShowList", function () {
-        const scope = { showList: true };
-        expect((Milestone as any).methods.shouldShowList.call(scope)).is.true;
-    });
-    it("toggle", function () {
-        const scope = { showDescription: { test: false } };
-        (Milestone as any).methods.toggle.call(scope, mockMilestone);
-        expect(scope.showDescription.test).is.true;
-    });
-    it("toggleList", function () {
-        const scope = { showList: false };
-        (Milestone as any).methods.toggleList.call(scope);
-        expect(scope.showList).is.true;
+        const toggler = milestone.find("a[class=\"ma-clickable\"]");
+        await toggler.trigger("click");
+        const test = milestone.find("div[class*=\"ma-name--milestones");
+        expect(test.classes()).to.contain("ma-name");
+        expect(test.classes()).to.contain("ma-name--test");
     });
 });

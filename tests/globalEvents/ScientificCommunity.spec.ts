@@ -2,11 +2,11 @@ import { expect } from "chai";
 import { ScientificCommunity } from "../../src/turmoil/globalEvents/ScientificCommunity";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { Ants } from '../../src/cards/Ants';
-import { SecurityFleet } from '../../src/cards/SecurityFleet';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { Ants } from "../../src/cards/Ants";
+import { SecurityFleet } from "../../src/cards/SecurityFleet";
 import { Resources } from "../../src/Resources";
 
 describe("ScientificCommunity", function () {

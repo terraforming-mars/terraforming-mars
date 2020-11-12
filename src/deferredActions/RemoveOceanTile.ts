@@ -1,30 +1,30 @@
-import { Game } from "../Game";
-import { Player } from "../Player";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { ISpace } from "../ISpace";
-import { DeferredAction } from "./DeferredAction";
-import { LogHelper } from "../components/LogHelper";
+import {Game} from '../Game';
+import {Player} from '../Player';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {ISpace} from '../ISpace';
+import {DeferredAction} from './DeferredAction';
+import {LogHelper} from '../components/LogHelper';
 
 export class RemoveOceanTile implements DeferredAction {
-    constructor(
+  constructor(
         public player: Player,
         public game: Game,
-        public title: string = "Select an Ocean tile to remove from board"
-    ){}
+        public title: string = 'Select an Ocean tile to remove from board',
+  ) {}
 
-    public execute() {
-        if (this.game.board.getOceansOnBoard() === 0) {
-            return undefined;
-        }
-        return new SelectSpace(
-            this.title,
-            // false: don't include upgraded oceans.
-            this.game.board.getOceansTiles(false),
-            (space: ISpace) => {
-                this.game.removeTile(space.id);
-                LogHelper.logBoardTileAction(this.game, this.player, space, "ocean tile", "removed");
-                return undefined;
-            }
-        );
+  public execute() {
+    if (this.game.board.getOceansOnBoard() === 0) {
+      return undefined;
     }
+    return new SelectSpace(
+        this.title,
+        // false: don't include upgraded oceans.
+        this.game.board.getOceansTiles(false),
+        (space: ISpace) => {
+          this.game.removeTile(space.id);
+          LogHelper.logBoardTileAction(this.game, this.player, space, 'ocean tile', 'removed');
+          return undefined;
+        },
+    );
+  }
 }

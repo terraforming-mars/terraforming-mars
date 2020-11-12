@@ -1,16 +1,16 @@
-import { IProjectCard } from "../IProjectCard";
-import { ICard, IActionCard, IResourceCard } from "../ICard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectCard } from "../../inputs/SelectCard";
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { LogHelper } from "../../components/LogHelper";
-import { SelectHowToPayDeferred } from "../../deferredActions/SelectHowToPayDeferred";
+import {IProjectCard} from '../IProjectCard';
+import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {ResourceType} from '../../ResourceType';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
+import {LogHelper} from '../../components/LogHelper';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 
-export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
+export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
     public cost = 5;
     public tags = [Tags.VENUS];
     public name = CardName.FLOATING_HABS;
@@ -18,40 +18,40 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 2 ;
+      return player.getTagCount(Tags.SCIENCE) >= 2;
     }
     public play() {
-        return undefined;
+      return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.canAfford(2);
-    }  
+      return player.canAfford(2);
+    }
 
     public getVictoryPoints(): number {
-        return Math.floor(this.resourceCount / 2);
+      return Math.floor(this.resourceCount / 2);
     }
-    
+
     public action(player: Player, game: Game) {
-        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+      const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
-        // add to itself if no other available target
-        if (floaterCards.length === 1) {
-            game.defer(new SelectHowToPayDeferred(player, 2, false, false, "Select how to pay for Floating Habs action"));
-            LogHelper.logAddResource(game, player, floaterCards[0]);
-            player.addResourceTo(floaterCards[0], 1);
+      // add to itself if no other available target
+      if (floaterCards.length === 1) {
+        game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+        LogHelper.logAddResource(game, player, floaterCards[0]);
+        player.addResourceTo(floaterCards[0], 1);
+        return undefined;
+      }
+
+      return new SelectCard(
+          'Spend 2 MC and select card to add 1 floater',
+          'Add floater',
+          floaterCards,
+          (foundCards: Array<ICard>) => {
+            game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+            LogHelper.logAddResource(game, player, foundCards[0]);
+            player.addResourceTo(foundCards[0], 1);
             return undefined;
-        }
-
-        return new SelectCard(
-            "Spend 2 MC and select card to add 1 floater",
-            "Add floater",
-            floaterCards,
-            (foundCards: Array<ICard>) => {
-                game.defer(new SelectHowToPayDeferred(player, 2, false, false, "Select how to pay for Floating Habs action"));
-                LogHelper.logAddResource(game, player, foundCards[0]);
-                player.addResourceTo(foundCards[0], 1);
-                return undefined;
-            }
-        );
+          },
+      );
     }
 }

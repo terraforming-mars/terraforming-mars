@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { FoodFactory } from "../../src/cards/FoodFactory";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("FoodFactory", function () {
     let card : FoodFactory, player : Player;

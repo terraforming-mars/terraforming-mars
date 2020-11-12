@@ -1,8 +1,8 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { CardName } from '../CardName';
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {CardName} from '../CardName';
 
 export class TransNeptuneProbe implements IProjectCard {
     public cost = 6;
@@ -11,9 +11,9 @@ export class TransNeptuneProbe implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play() {
-        return undefined;
+      return undefined;
     }
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

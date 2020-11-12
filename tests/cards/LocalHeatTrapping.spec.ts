@@ -3,7 +3,7 @@ import { LocalHeatTrapping } from "../../src/cards/LocalHeatTrapping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Pets } from "../../src/cards/Pets";
-import { OrOptions } from '../../src/inputs/OrOptions';
+import { OrOptions } from "../../src/inputs/OrOptions";
 import { Helion } from "../../src/cards/corporation/Helion";
 import { Game } from "../../src/Game";
 import { Fish } from "../../src/cards/Fish";

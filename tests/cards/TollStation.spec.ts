@@ -4,7 +4,7 @@ import { TollStation } from "../../src/cards/TollStation";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 
 describe("TollStation", function () {
     it("Should play", function () {

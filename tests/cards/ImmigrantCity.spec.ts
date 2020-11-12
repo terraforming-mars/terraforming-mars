@@ -3,7 +3,7 @@ import { ImmigrantCity } from "../../src/cards/ImmigrantCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { TharsisRepublic } from "../../src/cards/corporation/TharsisRepublic";
 
 describe("ImmigrantCity", function () {

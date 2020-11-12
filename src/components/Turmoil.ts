@@ -1,97 +1,96 @@
-import Vue from "vue";
-import { PartyName } from '../turmoil/parties/PartyName';
-import { $t } from "../directives/i18n";
+import Vue from 'vue';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {$t} from '../directives/i18n';
+import {TurmoilModel} from '../models/TurmoilModel';
 
-export const Turmoil = Vue.component("turmoil", {
-    props: [
-      "turmoil"
-    ],
-    methods: {
-      partyNameToCss: function (party: PartyName): string {
-        return party.toLowerCase().split(" ").join("_");
-      },
-      getBonus: function (party: PartyName) {
-        if (party === PartyName.MARS) {
-          return `<div class="resource money party-resource">1</div> / 
+export const Turmoil = Vue.component('turmoil', {
+  props: {
+    turmoil: {
+      type: Object as () => TurmoilModel,
+    },
+  },
+  methods: {
+    partyNameToCss: function(party: PartyName | undefined): string {
+      if (party === undefined) {
+        console.warn('no party provided');
+        return '';
+      }
+      return party.toLowerCase().split(' ').join('_');
+    },
+    getBonus: function(party: PartyName) {
+      if (party === PartyName.MARS) {
+        return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-building party-resource-tag"></div>`;
-        }
-        else if (party === PartyName.SCIENTISTS) {
-          return `<div class="resource money party-resource">1</div> / 
+      } else if (party === PartyName.SCIENTISTS) {
+        return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-science party-resource-tag"></div>`;
-        }
-        else if (party === PartyName.UNITY) {
-          return `<div class="resource money party-resource">1</div> / 
+      } else if (party === PartyName.UNITY) {
+        return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-venus party-resource-tag"></div>
           <div class="resource-tag tag-earth party-resource-tag"></div>
           <div class="resource-tag tag-jovian party-resource-tag"></div>`;
-        }
-        else if (party === PartyName.KELVINISTS) {
-          return `<div class="resource money party-resource">1</div> / 
+      } else if (party === PartyName.KELVINISTS) {
+        return `<div class="resource money party-resource">1</div> / 
           <div class="production-box party-production-box">
             <div class="heat production"></div>
           </div>`;
-        }
-        else if (party === PartyName.REDS) {
-          return `
+      } else if (party === PartyName.REDS) {
+        return `
           <div class="party-inferior-rating tile party-rating party-tile">&lt;</div> : 
           <div class="rating tile party-rating party-tile"></div>`;
-        }
-        else if (party === PartyName.GREENS) {
-          return `<div class="resource money party-resource">1</div> / 
+      } else if (party === PartyName.GREENS) {
+        return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-plant party-resource-tag"></div>
           <div class="resource-tag tag-microbe party-resource-tag"></div>
           <div class="resource-tag tag-animal party-resource-tag"></div>`;
-        }
-        else {
-          return `<p>Error</p>`;
-        }
-      },
-      getPolicy: function (party: PartyName) {
-        if (party === PartyName.MARS) {
-          return `<div class="tile empty-tile-small"></div> : 
+      } else {
+        return '<p>Error</p>';
+      }
+    },
+    getPolicy: function(party: PartyName | undefined) {
+      if (party === PartyName.MARS) {
+        return `<div class="tile empty-tile-small"></div> : 
           <span class="steel resource"></span>`;
-        }
-        else if (party === PartyName.SCIENTISTS) {
-          return `<span class="money resource">10</span>
+      }
+      if (party === PartyName.SCIENTISTS) {
+        return `<span class="money resource">10</span>
           <span class="red-arrow"></span>
           <span class="card card-with-border resource party-resource"></span>
           <span class="card card-with-border resource party-resource"></span>
           <span class="card card-with-border resource party-resource"></span>`;
-        }
-        else if (party === PartyName.UNITY) {
-          return `<div class="resource titanium"></div> : 
+      }
+      if (party === PartyName.UNITY) {
+        return `<div class="resource titanium"></div> : 
           + <div class="resource money">1</div>`;
-        }
-        else if (party === PartyName.KELVINISTS) {
-          return `<span class="money resource">10</span>
+      }
+      if (party === PartyName.KELVINISTS) {
+        return `<span class="money resource">10</span>
           <span class="red-arrow"></span>
           <div class="production-box production-box-size2">
             <div class="energy production"></div>
             <div class="heat production"></div>
           </div>`;
-        }
-        else if (party === PartyName.REDS) {
-          return `
+      }
+      if (party === PartyName.REDS) {
+        return `
           <div class="rating tile"></div> : 
           <div class="resource money">-3</div>`;
-        }
-        else if (party === PartyName.GREENS) {
-          return `<div class="tile greenery-tile"></div> : 
-          <div class="resource money">4</div>`;
-        }
-        else {
-          return "<p>" + $t("No ruling Policy") + "</p>";
-        }
-      },
-      toggleMe: function () {
-        let currentState: boolean = this.isVisible();
-        (this.$root as any).setVisibilityState("turmoil_parties", ! currentState);
-      },
-      isVisible: function () {
-          return (this.$root as any).getVisibilityState("turmoil_parties");
       }
+      if (party === PartyName.GREENS) {
+        return `<div class="tile greenery-tile"></div> : 
+          <div class="resource money">4</div>`;
+      }
+      return '<p>' + $t('No ruling Policy') + '</p>';
     },
-    template: `
+    toggleMe: function() {
+      const currentState: boolean = this.isVisible();
+      (this.$root as any).setVisibilityState('turmoil_parties', ! currentState);
+    },
+    isVisible: function() {
+      return (this.$root as any).getVisibilityState('turmoil_parties');
+    },
+  },
+  template: `
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
           <div v-if="turmoil.distant" class="global-event">
@@ -164,5 +163,5 @@ export const Turmoil = Vue.component("turmoil", {
         </div>
       </div>
     </div>
-    `
+    `,
 });

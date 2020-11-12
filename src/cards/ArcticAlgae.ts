@@ -5,7 +5,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {ISpace} from '../ISpace';
 import {TileType} from '../TileType';
-import { CardName } from '../CardName';
+import {CardName} from '../CardName';
 
 export class ArcticAlgae implements IProjectCard {
     public cost = 12;

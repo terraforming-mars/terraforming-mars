@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Potatoes } from "../../../src/cards/promo/Potatoes";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import { Resources } from "../../../src/Resources";
 import { ViralEnhancers } from "../../../src/cards/ViralEnhancers";
 
 describe("Potatoes", function () {

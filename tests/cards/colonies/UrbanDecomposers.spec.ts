@@ -3,7 +3,7 @@ import { UrbanDecomposers } from "../../../src/cards/colonies/UrbanDecomposers";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
-import { Game } from '../../../src/Game';
+import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { Luna } from "../../../src/colonies/Luna";
 import { Decomposers } from "../../../src/cards/Decomposers";

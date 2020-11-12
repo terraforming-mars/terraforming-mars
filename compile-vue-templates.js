@@ -81,7 +81,7 @@ checkComponent(
 );
 checkComponent(
     "src/components/LoadGameForm",
-    require("./dist/src/components/LoadGameForm").LoadGameForm,
+    require("./build/src/components/LoadGameForm").LoadGameForm,
     ["gameId", "rollbackCount"]
 );
 checkComponent(

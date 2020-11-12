@@ -6,51 +6,51 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
 
-import {AndOptions} from './src/inputs/AndOptions';
-import {BoardName} from './src/BoardName';
-import {CardModel} from './src/models/CardModel';
-import {ColonyModel} from './src/models/ColonyModel';
-import {Color} from './src/Color';
-import {Game} from './src/Game';
-import {GameLoader} from './src/database/GameLoader';
-import {GameLogs} from './src/routes/GameLogs';
-import {GameHomeModel} from './src/models/GameHomeModel';
-import {Route} from './src/routes/Route';
-import {ICard} from './src/cards/ICard';
-import {IProjectCard} from './src/cards/IProjectCard';
-import {ISpace} from './src/ISpace';
-import {OrOptions} from './src/inputs/OrOptions';
-import {Player} from './src/Player';
-import {PlayerInput} from './src/PlayerInput';
-import {PlayerInputModel} from './src/models/PlayerInputModel';
-import {PlayerInputTypes} from './src/PlayerInputTypes';
-import {PlayerModel} from './src/models/PlayerModel';
-import {SelectAmount} from './src/inputs/SelectAmount';
-import {SelectCard} from './src/inputs/SelectCard';
-import {SelectHowToPay} from './src/inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './src/inputs/SelectHowToPayForCard';
-import {SelectPlayer} from './src/inputs/SelectPlayer';
-import {SelectSpace} from './src/inputs/SelectSpace';
-import {SpaceModel} from './src/models/SpaceModel';
-import {TileType} from './src/TileType';
-import {Phase} from './src/Phase';
-import {Resources} from './src/Resources';
-import {CardType} from './src/cards/CardType';
+import { AndOptions } from './src/inputs/AndOptions';
+import { BoardName } from './src/BoardName';
+import { CardModel } from './src/models/CardModel';
+import { ColonyModel } from './src/models/ColonyModel';
+import { Color } from './src/Color';
+import { Game } from './src/Game';
+import { GameLoader } from './src/database/GameLoader';
+import { GameLogs } from './src/routes/GameLogs';
+import { GameHomeModel } from './src/models/GameHomeModel';
+import { Route } from './src/routes/Route';
+import { ICard } from './src/cards/ICard';
+import { IProjectCard } from './src/cards/IProjectCard';
+import { ISpace } from './src/ISpace';
+import { OrOptions } from './src/inputs/OrOptions';
+import { Player } from './src/Player';
+import { PlayerInput } from './src/PlayerInput';
+import { PlayerInputModel } from './src/models/PlayerInputModel';
+import { PlayerInputTypes } from './src/PlayerInputTypes';
+import { PlayerModel } from './src/models/PlayerModel';
+import { SelectAmount } from './src/inputs/SelectAmount';
+import { SelectCard } from './src/inputs/SelectCard';
+import { SelectHowToPay } from './src/inputs/SelectHowToPay';
+import { SelectHowToPayForCard } from './src/inputs/SelectHowToPayForCard';
+import { SelectPlayer } from './src/inputs/SelectPlayer';
+import { SelectSpace } from './src/inputs/SelectSpace';
+import { SpaceModel } from './src/models/SpaceModel';
+import { TileType } from './src/TileType';
+import { Phase } from './src/Phase';
+import { Resources } from './src/Resources';
+import { CardType } from './src/cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,
 } from './src/models/ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from './src/models/FundedAwardModel';
-import {Database} from './src/database/Database';
+import { FundedAwardModel, IAwardScore } from './src/models/FundedAwardModel';
+import { Database } from './src/database/Database';
 import {
   PartyModel,
   DelegatesModel,
   TurmoilModel,
 } from './src/models/TurmoilModel';
-import {SelectDelegate} from './src/inputs/SelectDelegate';
-import {SelectColony} from './src/inputs/SelectColony';
-import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
+import { SelectDelegate } from './src/inputs/SelectDelegate';
+import { SelectColony } from './src/inputs/SelectColony';
+import { SelectProductionToLose } from './src/inputs/SelectProductionToLose';
+import { ShiftAresGlobalParameters } from './src/inputs/ShiftAresGlobalParameters';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -71,14 +71,14 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         }
       } else if (
         req.url === '/' ||
-                req.url.startsWith('/new-game') ||
-                req.url.startsWith('/solo') ||
-                req.url.startsWith('/game?id=') ||
-                req.url.startsWith('/player?id=') ||
-                req.url.startsWith('/the-end?id=') ||
-                req.url.startsWith('/load') ||
-                req.url.startsWith('/debug-ui') ||
-                req.url.startsWith('/help-iconology')
+        req.url.startsWith('/new-game') ||
+        req.url.startsWith('/solo') ||
+        req.url.startsWith('/game?id=') ||
+        req.url.startsWith('/player?id=') ||
+        req.url.startsWith('/the-end?id=') ||
+        req.url.startsWith('/load') ||
+        req.url.startsWith('/debug-ui') ||
+        req.url.startsWith('/help-iconology')
       ) {
         serveApp(req, res);
       } else if (req.url.startsWith('/api/player?id=')) {
@@ -96,9 +96,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         serveResource(res, styles);
       } else if (
         req.url.startsWith('/assets/') ||
-                req.url === '/favicon.ico' ||
-                req.url === '/main.js' ||
-                req.url === '/main.js.map'
+        req.url === '/favicon.ico' ||
+        req.url === '/main.js' ||
+        req.url === '/main.js.map'
       ) {
         serveAsset(req, res);
       } else if (req.url.startsWith('/api/games')) {
@@ -118,10 +118,10 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       loadGame(req, res);
     } else if (
       req.method === 'POST' &&
-            req.url.indexOf('/player/input?id=') === 0
+      req.url.indexOf('/player/input?id=') === 0
     ) {
       const playerId: string = req.url.substring(
-          '/player/input?id='.length,
+        '/player/input?id='.length,
       );
       gameLoader.getGameByPlayerId(playerId, (game) => {
         if (game === undefined) {
@@ -149,8 +149,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 }
 
 function requestHandler(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   try {
     processRequest(req, res);
@@ -164,16 +164,16 @@ let server: http.Server | https.Server;
 // If they've set up https
 if (process.env.KEY_PATH && process.env.CERT_PATH) {
   const httpsHowto =
-        'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
+    'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
   if (!fs.existsSync(process.env.KEY_PATH)) {
     console.error(
-        'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
-                httpsHowto,
+      'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
+      httpsHowto,
     );
   } else if (!fs.existsSync(process.env.CERT_PATH)) {
     console.error(
-        'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
-                httpsHowto,
+      'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
+      httpsHowto,
     );
   }
   const options = {
@@ -194,16 +194,16 @@ function generateRandomServerId(): string {
 }
 
 function processInput(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
-    player: Player,
-    game: Game,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  player: Player,
+  game: Game,
 ): void {
   let body = '';
-  req.on('data', function(data) {
+  req.on('data', function (data) {
     body += data.toString();
   });
-  req.once('end', function() {
+  req.once('end', function () {
     try {
       const entity = JSON.parse(body);
       player.process(game, entity);
@@ -216,9 +216,9 @@ function processInput(
       });
       console.warn('Error processing input from player', err);
       res.write(
-          JSON.stringify({
-            message: err.message,
-          }),
+        JSON.stringify({
+          message: err.message,
+        }),
       );
       res.end();
     }
@@ -226,7 +226,7 @@ function processInput(
 }
 
 function getClonableGames(res: http.ServerResponse): void {
-  Database.getInstance().getClonableGames(function(err, allGames) {
+  Database.getInstance().getClonableGames(function (err, allGames) {
     if (err) {
       return;
     }
@@ -237,8 +237,8 @@ function getClonableGames(res: http.ServerResponse): void {
 }
 
 function apiGetGames(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   if (!isServerIdValid(req)) {
     route.notAuthorized(req, res);
@@ -250,41 +250,41 @@ function apiGetGames(
 }
 
 function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-    let body = "";
-    req.on("data", function (data) {
-        body += data.toString();
-    });
-    req.once("end", function () {
-        try {
-            const gameReq = JSON.parse(body);
+  let body = '';
+  req.on('data', function (data) {
+    body += data.toString();
+  });
+  req.once('end', function () {
+    try {
+      const gameReq = JSON.parse(body);
 
-            const game_id = gameReq.game_id;
-            const nbrSavesToDelete = gameReq.nbrSavesToDelete;
+      const game_id = gameReq.game_id;
+      const nbrSavesToDelete = gameReq.nbrSavesToDelete;
 
-            if (nbrSavesToDelete > 0) {
-                Database.getInstance().deleteGameNbrSaves(game_id, nbrSavesToDelete);
-            }
+      if (nbrSavesToDelete > 0) {
+        Database.getInstance().deleteGameNbrSaves(game_id, nbrSavesToDelete);
+      }
 
-            const player = new Player("test", Color.BLUE, false, 0);
-            const player2 = new Player("test2", Color.RED, false, 0);
-            const gameToRebuild = new Game(game_id, [player, player2], player);
-            Database.getInstance().restoreGameLastSave(
-                game_id,
-                gameToRebuild,
-                function (err) {
-                    if (err) {
-                        return;
-                    }
-                    gameLoader.addGame(gameToRebuild);
-                }
-            );
-            res.setHeader("Content-Type", "application/json");
-            res.write(getGame(gameToRebuild));
-            res.end();
-        } catch (error) {
-            route.internalServerError(req, res, error);
+      const player = new Player('test', Color.BLUE, false, 0);
+      const player2 = new Player('test2', Color.RED, false, 0);
+      const gameToRebuild = new Game(game_id, [player, player2], player);
+      Database.getInstance().restoreGameLastSave(
+        game_id,
+        gameToRebuild,
+        function (err) {
+          if (err) {
+            return;
+          }
+          gameLoader.addGame(gameToRebuild);
         }
-    });
+      );
+      res.setHeader('Content-Type', 'application/json');
+      res.write(getGame(gameToRebuild));
+      res.end();
+    } catch (error) {
+      route.internalServerError(req, res, error);
+    }
+  });
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -326,8 +326,8 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function apiGetWaitingFor(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   const qs: string = req.url!.substring('/api/waitingfor?'.length);
   const queryParams = querystring.parse(qs);
@@ -365,8 +365,8 @@ function apiGetWaitingFor(
 }
 
 function apiGetPlayer(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   const qs = req.url!.substring('/api/player?'.length);
   const queryParams = querystring.parse(qs);
@@ -400,19 +400,19 @@ function apiGetPlayer(
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   let body = '';
-  req.on('data', function(data) {
+  req.on('data', function (data) {
     body += data.toString();
   });
-  req.once('end', function() {
+  req.once('end', function () {
     try {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomGameId();
       const players = gameReq.players.map((obj: any) => {
         return new Player(
-            obj.name,
-            obj.color,
-            obj.beginner,
-            obj.handicap,
+          obj.name,
+          obj.color,
+          obj.beginner,
+          obj.handicap,
         );
       });
       let firstPlayer = players[0];
@@ -447,7 +447,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
         removeNegativeGlobalEventsOption:
-                    gameReq.removeNegativeGlobalEventsOption,
+          gameReq.removeNegativeGlobalEventsOption,
         includeVenusMA: gameReq.includeVenusMA,
 
         draftVariant: gameReq.draftVariant,
@@ -479,7 +479,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
 
   for (const milestone of allMilestones) {
     const claimed = claimedMilestones.find(
-        (m) => m.milestone.name === milestone.name,
+      (m) => m.milestone.name === milestone.name,
     );
     const scores: Array<IMilestoneScore> = [];
     if (claimed === undefined && claimedMilestones.length < 3) {
@@ -509,7 +509,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 
   for (const award of allAwards) {
     const funded = fundedAwards.find(
-        (a) => a.award.name === award.name,
+      (a) => a.award.name === award.name,
     );
     const scores: Array<IAwardScore> = [];
     if (fundedAwards.length < 3 || funded !== undefined) {
@@ -619,17 +619,17 @@ function getPlayer(player: Player, game: Game): string {
 }
 
 function getCardsAsCardModel(
-    cards: Array<ICard>,
-    showResouces: boolean = true,
+  cards: Array<ICard>,
+  showResouces: boolean = true,
 ): Array<CardModel> {
   const result: Array<CardModel> = [];
   cards.forEach((card) => {
     result.push({
       name: card.name,
       resources:
-                card.resourceCount !== undefined && showResouces ?
-                    card.resourceCount :
-                    undefined,
+        card.resourceCount !== undefined && showResouces ?
+          card.resourceCount :
+          undefined,
       resourceType: card.resourceType,
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
@@ -641,7 +641,7 @@ function getCardsAsCardModel(
 }
 
 function getWaitingFor(
-    waitingFor: PlayerInput | undefined,
+  waitingFor: PlayerInput | undefined,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
     return undefined;
@@ -672,7 +672,7 @@ function getWaitingFor(
     case PlayerInputTypes.OR_OPTIONS:
       result.options = [];
       for (const option of (waitingFor as AndOptions | OrOptions)
-          .options) {
+        .options) {
         const subOption = getWaitingFor(option);
         if (subOption !== undefined) {
           result.options.push(subOption);
@@ -681,8 +681,8 @@ function getWaitingFor(
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
       result.cards = getCardsAsCardModel(
-          (waitingFor as SelectHowToPayForCard).cards,
-          false,
+        (waitingFor as SelectHowToPayForCard).cards,
+        false,
       );
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
@@ -690,14 +690,14 @@ function getWaitingFor(
       break;
     case PlayerInputTypes.SELECT_CARD:
       result.cards = getCardsAsCardModel(
-          (waitingFor as SelectCard<ICard>).cards,
+        (waitingFor as SelectCard<ICard>).cards,
       );
       result.maxCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).maxCardsToSelect;
+        ICard
+      >).maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).minCardsToSelect;
+        ICard
+      >).minCardsToSelect;
       break;
     case PlayerInputTypes.SELECT_COLONY:
       result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
@@ -710,12 +710,12 @@ function getWaitingFor(
       break;
     case PlayerInputTypes.SELECT_PLAYER:
       result.players = (waitingFor as SelectPlayer).players.map(
-          (player) => player.color,
+        (player) => player.color,
       );
       break;
     case PlayerInputTypes.SELECT_SPACE:
       result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
-          (space) => space.id,
+        (space) => space.id,
       );
       break;
     case PlayerInputTypes.SELECT_AMOUNT:
@@ -723,13 +723,13 @@ function getWaitingFor(
       break;
     case PlayerInputTypes.SELECT_DELEGATE:
       result.players = (waitingFor as SelectDelegate).players.map(
-          (player) => {
-            if (player === 'NEUTRAL') {
-              return 'NEUTRAL';
-            } else {
-              return player.color;
-            }
-          },
+        (player) => {
+          if (player === 'NEUTRAL') {
+            return 'NEUTRAL';
+          } else {
+            return player.color;
+          }
+        },
       );
       break;
     case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
@@ -754,10 +754,10 @@ function getWaitingFor(
 }
 
 function getCards(
-    player: Player,
-    cards: Array<IProjectCard>,
-    game: Game,
-    showResouces: boolean = true,
+  player: Player,
+  cards: Array<IProjectCard>,
+  game: Game,
+  showResouces: boolean = true,
 ): Array<CardModel> {
   return cards.map((card) => ({
     resources: showResouces ? player.getResourcesOnCard(card) : undefined,
@@ -809,13 +809,13 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
       actionsThisGeneration: Array.from(
-          player.getActionsThisGeneration(),
+        player.getActionsThisGeneration(),
       ),
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(
-          game,
+        game,
       ),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
@@ -827,18 +827,18 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
 
 function getColonies(game: Game): Array<ColonyModel> {
   return game.colonies.map(
-      (colony): ColonyModel => ({
-        colonies: colony.colonies.map(
-            (playerId): Color => game.getPlayerById(playerId).color,
-        ),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor:
-                colony.visitor === undefined ?
-                    undefined :
-                    game.getPlayerById(colony.visitor).color,
-      }),
+    (colony): ColonyModel => ({
+      colonies: colony.colonies.map(
+        (playerId): Color => game.getPlayerById(playerId).color,
+      ),
+      isActive: colony.isActive,
+      name: colony.name,
+      trackPosition: colony.trackPosition,
+      visitor:
+        colony.visitor === undefined ?
+          undefined :
+          game.getPlayerById(colony.visitor).color,
+    }),
   );
 }
 
@@ -861,8 +861,8 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 
     const lobby = Array.from(
-        game.turmoil.lobby,
-        (player) => game.getPlayerById(player).color,
+      game.turmoil.lobby,
+      (player) => game.getPlayerById(player).color,
     );
 
     const reserve = game.turmoil.getPresentPlayers().map((player) => {
@@ -873,7 +873,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
           number: number,
         };
       } else {
-        return {color: Color.NEUTRAL, number: number};
+        return { color: Color.NEUTRAL, number: number };
       }
     });
 
@@ -925,7 +925,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
 
 function getParties(game: Game): Array<PartyModel> {
   if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
+    return game.turmoil.parties.map(function (party) {
       const delegates: Array<DelegatesModel> = [];
       party.getPresentPlayers().forEach((player) => {
         const number = party.getDelegates(player);
@@ -935,7 +935,7 @@ function getParties(game: Game): Array<PartyModel> {
             number: number,
           });
         } else {
-          delegates.push({color: Color.NEUTRAL, number: number});
+          delegates.push({ color: Color.NEUTRAL, number: number });
         }
       });
       let partyLeader;
@@ -962,7 +962,7 @@ function getParties(game: Game): Array<PartyModel> {
 function getColor(space: ISpace): Color | undefined {
   if (
     (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
-        space.player !== undefined
+    space.player !== undefined
   ) {
     return space.player.color;
   }
@@ -1004,7 +1004,7 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
   const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
   if (
     queryParams.serverId === undefined ||
-        queryParams.serverId !== serverId
+    queryParams.serverId !== serverId
   ) {
     console.warn('No or invalid serverId given');
     return false;
@@ -1013,7 +1013,7 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
-  fs.readFile('index.html', function(err, data) {
+  fs.readFile('index.html', function (err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
@@ -1070,7 +1070,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== '/main.js' && req.url !== '/main.js.map') {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
-  fs.readFile(file, function(err, data) {
+  fs.readFile(file, function (err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
@@ -1092,11 +1092,11 @@ console.log('version 0.X');
 server.listen(process.env.PORT || 8080);
 
 console.log(
-    '\nThe secret serverId for this server is \x1b[1m' +
-        serverId +
-        '\x1b[0m. Use it to access the following administrative routes:\n',
+  '\nThe secret serverId for this server is \x1b[1m' +
+  serverId +
+  '\x1b[0m. Use it to access the following administrative routes:\n',
 );
 console.log(
-    '* Overview of existing games: /games-overview?serverId=' + serverId,
+  '* Overview of existing games: /games-overview?serverId=' + serverId,
 );
 console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');

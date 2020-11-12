@@ -1,6 +1,6 @@
-import { IDatabase } from './IDatabase';
-import { Game, GameOptions, Score } from '../Game';
-import { IGameData } from './IDatabase';
+import {IDatabase} from './IDatabase';
+import {Game, GameOptions, Score} from '../Game';
+import {IGameData} from './IDatabase';
 
 import sqlite3 = require('sqlite3');
 const path = require('path');
@@ -98,20 +98,20 @@ export class SQLite implements IDatabase {
 
   cleanSaves(game_id: string, save_id: number): void {
     // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function (err: { message: any; }) {
+    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: { message: any; }) {
       if (err) {
         return console.warn(err.message);
       }
     });
     // Flag game as finished
-    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function (err: { message: any; }) {
+    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: { message: any; }) {
       if (err) {
         return console.warn(err.message);
       }
     });
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
-      this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-? day\')) and status = \'running\'', [process.env.MAX_GAME_DAYS], function (err: { message: any; }) {
+      this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-? day\')) and status = \'running\'', [process.env.MAX_GAME_DAYS], function(err: { message: any; }) {
         if (err) {
           return console.warn(err.message);
         }
@@ -137,7 +137,7 @@ export class SQLite implements IDatabase {
 
   saveGameState(game_id: string, save_id: number, game: string, players: number): void {
     // Insert
-    this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function (err: { message: any; }) {
+    this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function(err: { message: any; }) {
       if (err) {
         // Should be a duplicate, does not matter
         return;
@@ -147,7 +147,7 @@ export class SQLite implements IDatabase {
 
   deleteGameNbrSaves(game_id: string, rollbackCount: number): void {
     if (rollbackCount > 0) {
-      this.db.run('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount], function (err: { message: any; }) {
+      this.db.run('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount], function(err: { message: any; }) {
         if (err) {
           return console.warn(err.message);
         }

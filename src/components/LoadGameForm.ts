@@ -1,28 +1,28 @@
 
 import Vue from 'vue';
-import { Button } from '../components/common/Button';
-import { GameHomeModel } from '../models/GameHomeModel';
-import { mainAppSettings } from './App';
+import {Button} from '../components/common/Button';
+import {GameHomeModel} from '../models/GameHomeModel';
+import {mainAppSettings} from './App';
 
 export const LoadGameForm = Vue.component('load-game-form', {
   components: {
-    'Button': Button
+    'Button': Button,
   },
-  data: function () {
+  data: function() {
     return {
       gameId: '',
-      rollbackCount: '0'
-    }
+      rollbackCount: '0',
+    };
   },
   methods: {
-    loadGame: function () {
+    loadGame: function() {
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', '/load_game');
-      xhr.onerror = function () {
+      xhr.onerror = function() {
         alert('Error loading game');
-      }
+      };
       xhr.onload = () => {
         if (xhr.status === 200) {
           const response = xhr.response as GameHomeModel;
@@ -41,7 +41,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
       xhr.responseType = 'json';
       xhr.send(JSON.stringify({
         game_id: gameId,
-        rollbackCount: rollbackCount
+        rollbackCount: rollbackCount,
       }));
     },
   },

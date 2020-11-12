@@ -12,6 +12,7 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {LogHelper} from '../../components/LogHelper';
 
 export class ForcedPrecipitation implements IActionCard, IProjectCard, IResourceCard {
     public cost = 8;
@@ -59,13 +60,15 @@ export class ForcedPrecipitation implements IActionCard, IProjectCard, IResource
 
     private addResource(player: Player, game: Game) {
       game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for action'));
-      this.resourceCount++;
+      player.addResourceTo(this);
+      LogHelper.logAddResource(game, player, this);
       return undefined;
     }
 
     private spendResource(player: Player, game: Game) {
       player.removeResourceFrom(this, 2);
       game.increaseVenusScaleLevel(player, 1);
+      LogHelper.logVenusIncrease(game, player, 1);
       return undefined;
     }
 }

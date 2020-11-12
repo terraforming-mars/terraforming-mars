@@ -11,6 +11,7 @@ import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {LogHelper} from '../../components/LogHelper';
 
 export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;
@@ -38,13 +39,13 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
     public action(player: Player, game: Game) {
       const opts: Array<SelectOption> = [];
 
-      const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium', () => this.addResource(player));
+      const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium', () => this.addResource(player, game));
       const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player, game));
 
       if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
         opts.push(spendResource);
       } else {
-        return this.addResource(player);
+        return this.addResource(player, game);
       }
 
       if (player.titanium > 0) {
@@ -56,8 +57,9 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
       return new OrOptions(...opts);
     }
 
-    private addResource(player: Player) {
-      this.resourceCount += 2;
+    private addResource(player: Player, game: Game) {
+      player.addResourceTo(this, 2);
+      LogHelper.logAddResource(game, player, this, 2);
       player.titanium--;
       return undefined;
     }
@@ -65,6 +67,7 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
     private spendResource(player: Player, game: Game) {
       this.resourceCount -= 2;
       game.increaseVenusScaleLevel(player, 1);
+      LogHelper.logVenusIncrease(game, player, 1);
       return undefined;
     }
 }

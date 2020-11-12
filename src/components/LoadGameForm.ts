@@ -44,14 +44,8 @@ export const LoadGameForm = Vue.component("load-game-form", {
                 rollbackCount: rollbackCount
             }));
         }
-      };
-      xhr.responseType = 'json';
-      xhr.send(JSON.stringify({
-        game_id: gameId,
-      }));
     },
-  },
-  template: `
+    template: `
         <div id="load-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Load Game</span></h1>
 

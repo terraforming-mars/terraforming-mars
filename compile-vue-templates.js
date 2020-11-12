@@ -82,7 +82,7 @@ checkComponent(
 checkComponent(
     "src/components/LoadGameForm",
     require("./build/src/components/LoadGameForm").LoadGameForm,
-    ["gameId"]
+    ["gameId", "rollbackCount"]
 );
 checkComponent(
     "src/components/LogPanel",

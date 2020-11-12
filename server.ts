@@ -167,7 +167,7 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
     'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
   if (!fs.existsSync(process.env.KEY_PATH)) {
     console.error(
-      'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
+        'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
       httpsHowto,
     );
   } else if (!fs.existsSync(process.env.CERT_PATH)) {
@@ -815,7 +815,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(
-         game,
+          game,
       ),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
@@ -829,7 +829,7 @@ function getColonies(game: Game): Array<ColonyModel> {
   return game.colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
-          (playerId): Color => game.getPlayerById(playerId).color,
+            (playerId): Color => game.getPlayerById(playerId).color,
         ),
         isActive: colony.isActive,
         name: colony.name,

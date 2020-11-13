@@ -177,8 +177,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     public increaseTerraformRating(game: Game) {
       if (!game.gameOptions.turmoilExtension) {
-        this.terraformRating++;
-        this.hasIncreasedTerraformRatingThisGeneration = true;
+        this.increaseTerraformRatingExecute();
         return;
       }
 
@@ -190,16 +189,16 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           // Cannot pay Reds, will not increase TR
           return;
         }
-
-        this.terraformRating++;
-        this.hasIncreasedTerraformRatingThisGeneration = true;
-        return;
       }
 
-      this.terraformRating++;
-      this.hasIncreasedTerraformRatingThisGeneration = true;
+      this.increaseTerraformRatingExecute();
     }
 
+    private increaseTerraformRatingExecute() {
+      this.terraformRating++;
+      this.hasIncreasedTerraformRatingThisGeneration = true;  
+    }
+    
     public increaseTerraformRatingSteps(value: number, game: Game) {
       for (let i = 0; i < value; i++) {
         this.increaseTerraformRating(game);

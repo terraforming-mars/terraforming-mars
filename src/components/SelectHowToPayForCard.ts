@@ -4,6 +4,7 @@ import {Button} from '../components/common/Button';
 
 interface SelectHowToPayForCardModel {
     card: string;
+    cards: Array<CardModel>;
     cost: number;
     heat: number;
     megaCredits: number;
@@ -17,6 +18,8 @@ interface SelectHowToPayForCardModel {
 import {HowToPay} from '../inputs/HowToPay';
 import {getProjectCardByName, Card} from './card/Card';
 import {Tags} from '../cards/Tags';
+import {CardModel} from '../models/CardModel';
+import {CardOrderStorage} from './CardOrderStorage';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
@@ -41,17 +44,23 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
   },
   data: function(): SelectHowToPayForCardModel {
+    let cards: Array<CardModel> = [];
     let card: string | undefined;
     if (this.playerinput !== undefined &&
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
-      card = this.playerinput.cards[0].name;
+      cards = CardOrderStorage.getOrdered(
+          CardOrderStorage.getCardOrder(this.player.id),
+          this.playerinput.cards,
+      );
+      card = cards[0].name;
     }
     if (card === undefined) {
       throw new Error('no card provided in player input');
     }
     return {
       card,
+      cards,
       cost: 0,
       heat: 0,
       megaCredits: 0,
@@ -64,7 +73,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   },
   components: {
     Card,
-    'Button': Button,
+    Button,
   },
   mixins: [PaymentWidgetMixin],
   mounted: function() {
@@ -353,7 +362,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
 
   <div v-if="showtitle === true">{{ playerinput.title }}</div>
 
-  <label v-for="availableCard in (playerinput.cards === undefined ? [] : playerinput.cards)" class="payments_cards">
+  <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>

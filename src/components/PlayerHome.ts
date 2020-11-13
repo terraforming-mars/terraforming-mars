@@ -14,7 +14,8 @@ import {PlayerMixin} from './PlayerMixin';
 import {Turmoil} from './Turmoil';
 import {playerColorClass} from '../utils/utils';
 import {DynamicTitle} from './common/DynamicTitle';
-import {Button} from '../components/common/Button';
+import {Button} from './common/Button';
+import {SortableCards} from './SortableCards';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -42,6 +43,7 @@ export const PlayerHome = Vue.component('player-home', {
     'log-panel': LogPanel,
     'turmoil': Turmoil,
     'Button': Button,
+    'sortable-cards': SortableCards,
   },
   mixins: [PlayerMixin],
   methods: {
@@ -176,9 +178,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
-                    <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
-                        <Card :card="card"/>
-                    </div>
+                    <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
                 </div>
 
                 <div class="player_home_block player_home_block--cards">

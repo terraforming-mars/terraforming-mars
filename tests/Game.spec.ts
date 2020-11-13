@@ -201,6 +201,70 @@ describe('Game', function() {
     expect(game.getGeneration()).to.eq(2);
   });
 
+  it('Should not finish game before Venus is terraformed, if chosen', function() {
+    const player = new Player('test', Color.BLUE, false);
+    const player2 = new Player('test2', Color.RED, false);
+    const game = new Game('venusterraform', [player, player2], player);
+    game.gameOptions.venusNextExtension = true;
+    game.gameOptions.requiresVenusTrackCompletion = true;
+    (game as any).temperature = constants.MAX_TEMPERATURE;
+    (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
+    // (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
+    (game as any).venusScaleLevel = 6;
+    maxOutOceans(player, game);
+    // Skip final greenery Phase
+    player.plants = 0;
+    player2.plants = 0;
+    // Pass last turn
+    game.playerHasPassed(player);
+    game.playerHasPassed(player2);
+    game.playerIsFinishedTakingActions();
+    // Now game should be in research state
+    expect(game.phase).to.eq(Phase.RESEARCH)
+  });
+
+  it('Should finish game if Mars and Venus is terraformed, if chosen', function() {
+    const player = new Player('test', Color.BLUE, false);
+    const player2 = new Player('test2', Color.RED, false);
+    const game = new Game('venusterraform', [player, player2], player);
+    game.gameOptions.venusNextExtension = true;
+    game.gameOptions.requiresVenusTrackCompletion = true;
+    (game as any).temperature = constants.MAX_TEMPERATURE;
+    (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
+    (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
+    maxOutOceans(player, game);
+    // Skip final greenery Phase
+    player.plants = 0;
+    player2.plants = 0;
+    // Pass last turn
+    game.playerHasPassed(player);
+    game.playerHasPassed(player2);
+    game.playerIsFinishedTakingActions();
+    // Now game should be in end state
+    expect(game.phase).to.eq(Phase.END)
+  });
+ 
+  it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', function() {
+    const player = new Player('test', Color.BLUE, false);
+    const player2 = new Player('test2', Color.RED, false);
+    const game = new Game('venusterraform', [player, player2], player);
+    game.gameOptions.venusNextExtension = true;
+    game.gameOptions.requiresVenusTrackCompletion = true;
+    (game as any).temperature = 2;
+    (game as any).oxygenLevel = 2;
+    (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
+    maxOutOceans(player, game);
+    // Skip final greenery Phase
+    player.plants = 0;
+    player2.plants = 0;
+    // Pass last turn
+    game.playerHasPassed(player);
+    game.playerHasPassed(player2);
+    game.playerIsFinishedTakingActions();
+    // Now game should be in research state
+    expect(game.phase).to.eq(Phase.RESEARCH)
+  });
+ 
   it('Should finish solo game in the end of last generation', function() {
     const player = new Player('temp_test', Color.BLUE, false);
     const game = new Game('solo1', [player], player);
@@ -227,7 +291,7 @@ describe('Game', function() {
     // Pass last turn
     game.playerHasPassed(player);
 
-    // Now game should be in finished state
+    // Now game should be in research state
     expect(game.phase).to.eq(Phase.RESEARCH);
   });
 

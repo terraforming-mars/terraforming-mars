@@ -4,7 +4,7 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {CardType} from '../../../src/cards/CardType';
-import {AdvancedAlloys} from "../../../src/cards/AdvancedAlloys";
+import {AdvancedAlloys} from '../../../src/cards/AdvancedAlloys';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {SmallAnimals} from '../../../src/cards/SmallAnimals';
@@ -48,7 +48,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 
-  it("Can flip a played blue card and remove its ongoing effects", function () {
+  it('Can flip a played blue card and remove its ongoing effects', function() {
     player.playedCards.push(advancedAlloys);
     advancedAlloys.play(player);
     player.megaCredits = 0;

@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
-import {CardOrderMixin} from './CardOrderMixin';
+import {CardOrderStorage} from './CardOrderStorage';
 
 export const SortableCards = Vue.component('sorted-cards', {
   components: {
     Card,
   },
-  mixins: [CardOrderMixin],
   props: {
     cards: {
       type: Array as () => Array<CardModel>,
@@ -17,7 +16,7 @@ export const SortableCards = Vue.component('sorted-cards', {
     },
   },
   data: function() {
-    const cache = (this as unknown as typeof CardOrderMixin.methods).getCardOrder(this.playerId);
+    const cache = CardOrderStorage.getCardOrder(this.playerId);
     const cardOrder: {[x: string]: number} = {};
     const keys = Object.keys(cache);
     let max = 0;
@@ -40,11 +39,10 @@ export const SortableCards = Vue.component('sorted-cards', {
   },
   methods: {
     getSortedCards: function() {
-      const copy = this.cards.slice();
-      copy.sort((a, b) => {
-        return this.cardOrder[a.name] - this.cardOrder[b.name];
-      });
-      return copy;
+      return CardOrderStorage.getOrdered(
+          this.cardOrder,
+          this.cards,
+      );
     },
     onDragStart: function(source: string): void {
       this.dragCard = source;
@@ -57,7 +55,7 @@ export const SortableCards = Vue.component('sorted-cards', {
         const temp = this.cardOrder[source];
         this.cardOrder[source] = this.cardOrder[this.dragCard];
         this.cardOrder[this.dragCard] = temp;
-        (this as unknown as typeof CardOrderMixin.methods).updateCardOrder(this.playerId, this.cardOrder);
+        CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
       }
     },
   },

@@ -19,7 +19,7 @@ import {HowToPay} from '../inputs/HowToPay';
 import {getProjectCardByName, Card} from './card/Card';
 import {Tags} from '../cards/Tags';
 import {CardModel} from '../models/CardModel';
-import {CardOrderMixin} from './CardOrderMixin';
+import {CardOrderStorage} from './CardOrderStorage';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
@@ -49,7 +49,10 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     if (this.playerinput !== undefined &&
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
-      cards = (this as unknown as typeof CardOrderMixin.methods).getOrdered(this.player.id, this.playerinput.cards);
+      cards = CardOrderStorage.getOrdered(
+          CardOrderStorage.getCardOrder(this.player.id),
+          this.playerinput.cards,
+      );
       card = cards[0].name;
     }
     if (card === undefined) {
@@ -70,9 +73,9 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   },
   components: {
     Card,
-    'Button': Button,
+    Button,
   },
-  mixins: [CardOrderMixin, PaymentWidgetMixin],
+  mixins: [PaymentWidgetMixin],
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {

@@ -11,11 +11,13 @@ export const LoadGameForm = Vue.component('load-game-form', {
   data: function() {
     return {
       gameId: '',
+      rollbackCount: '0',
     };
   },
   methods: {
     loadGame: function() {
       const gameId = this.$data.gameId;
+      const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', '/load_game');
       xhr.onerror = function() {
@@ -39,6 +41,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
       xhr.responseType = 'json';
       xhr.send(JSON.stringify({
         game_id: gameId,
+        rollbackCount: rollbackCount,
       }));
     },
   },
@@ -48,8 +51,11 @@ export const LoadGameForm = Vue.component('load-game-form', {
 
             <div class="load-game-form load-game--block">
                 <div class="container load-game-options">
-                    <div>
-                        <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" />
+                    <div >
+                        <label for="gameId">Game Id to reload:</label><br/>
+                        <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
+                        <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
+                        <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
                         <Button title="Load Game" size="big" type="success" :onClick="loadGame" /> 
                     </div>
                 </div>

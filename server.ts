@@ -71,14 +71,14 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         }
       } else if (
         req.url === '/' ||
-                req.url.startsWith('/new-game') ||
-                req.url.startsWith('/solo') ||
-                req.url.startsWith('/game?id=') ||
-                req.url.startsWith('/player?id=') ||
-                req.url.startsWith('/the-end?id=') ||
-                req.url.startsWith('/load') ||
-                req.url.startsWith('/debug-ui') ||
-                req.url.startsWith('/help-iconology')
+        req.url.startsWith('/new-game') ||
+        req.url.startsWith('/solo') ||
+        req.url.startsWith('/game?id=') ||
+        req.url.startsWith('/player?id=') ||
+        req.url.startsWith('/the-end?id=') ||
+        req.url.startsWith('/load') ||
+        req.url.startsWith('/debug-ui') ||
+        req.url.startsWith('/help-iconology')
       ) {
         serveApp(req, res);
       } else if (req.url.startsWith('/api/player?id=')) {
@@ -96,9 +96,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         serveResource(res, styles);
       } else if (
         req.url.startsWith('/assets/') ||
-                req.url === '/favicon.ico' ||
-                req.url === '/main.js' ||
-                req.url === '/main.js.map'
+        req.url === '/favicon.ico' ||
+        req.url === '/main.js' ||
+        req.url === '/main.js.map'
       ) {
         serveAsset(req, res);
       } else if (req.url.startsWith('/api/games')) {
@@ -118,7 +118,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       loadGame(req, res);
     } else if (
       req.method === 'POST' &&
-            req.url.indexOf('/player/input?id=') === 0
+      req.url.indexOf('/player/input?id=') === 0
     ) {
       const playerId: string = req.url.substring(
           '/player/input?id='.length,
@@ -164,16 +164,16 @@ let server: http.Server | https.Server;
 // If they've set up https
 if (process.env.KEY_PATH && process.env.CERT_PATH) {
   const httpsHowto =
-        'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
+    'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
   if (!fs.existsSync(process.env.KEY_PATH)) {
     console.error(
         'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
-                httpsHowto,
+      httpsHowto,
     );
   } else if (!fs.existsSync(process.env.CERT_PATH)) {
     console.error(
         'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
-                httpsHowto,
+      httpsHowto,
     );
   }
   const options = {
@@ -259,6 +259,10 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameReq = JSON.parse(body);
 
       const game_id = gameReq.game_id;
+      const rollbackCount = gameReq.rollbackCount;
+      if (rollbackCount > 0) {
+        Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
+      }
 
       const player = new Player('test', Color.BLUE, false, 0);
       const player2 = new Player('test2', Color.RED, false, 0);
@@ -442,7 +446,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
         removeNegativeGlobalEventsOption:
-                    gameReq.removeNegativeGlobalEventsOption,
+          gameReq.removeNegativeGlobalEventsOption,
         includeVenusMA: gameReq.includeVenusMA,
 
         draftVariant: gameReq.draftVariant,
@@ -622,9 +626,9 @@ function getCardsAsCardModel(
     result.push({
       name: card.name,
       resources:
-                card.resourceCount !== undefined && showResouces ?
-                    card.resourceCount :
-                    undefined,
+        card.resourceCount !== undefined && showResouces ?
+          card.resourceCount :
+          undefined,
       resourceType: card.resourceType,
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
@@ -688,11 +692,11 @@ function getWaitingFor(
           (waitingFor as SelectCard<ICard>).cards,
       );
       result.maxCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).maxCardsToSelect;
+        ICard
+      >).maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).minCardsToSelect;
+        ICard
+      >).minCardsToSelect;
       break;
     case PlayerInputTypes.SELECT_COLONY:
       result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
@@ -830,9 +834,9 @@ function getColonies(game: Game): Array<ColonyModel> {
         name: colony.name,
         trackPosition: colony.trackPosition,
         visitor:
-                colony.visitor === undefined ?
-                    undefined :
-                    game.getPlayerById(colony.visitor).color,
+          colony.visitor === undefined ?
+            undefined :
+            game.getPlayerById(colony.visitor).color,
       }),
   );
 }
@@ -957,7 +961,7 @@ function getParties(game: Game): Array<PartyModel> {
 function getColor(space: ISpace): Color | undefined {
   if (
     (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
-        space.player !== undefined
+    space.player !== undefined
   ) {
     return space.player.color;
   }
@@ -999,7 +1003,7 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
   const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
   if (
     queryParams.serverId === undefined ||
-        queryParams.serverId !== serverId
+    queryParams.serverId !== serverId
   ) {
     console.warn('No or invalid serverId given');
     return false;
@@ -1088,8 +1092,8 @@ server.listen(process.env.PORT || 8080);
 
 console.log(
     '\nThe secret serverId for this server is \x1b[1m' +
-        serverId +
-        '\x1b[0m. Use it to access the following administrative routes:\n',
+  serverId +
+  '\x1b[0m. Use it to access the following administrative routes:\n',
 );
 console.log(
     '* Overview of existing games: /games-overview?serverId=' + serverId,

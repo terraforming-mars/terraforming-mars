@@ -416,7 +416,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
           window.location.href = '/player?id=' + response.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, 'Teraforming Mars - Game', '/game?id=' + response.id);
+          window.history.replaceState(response, 'Terraforming Mars - Game', '/game?id=' + response.id);
           (this as any).$root.$data.game = response;
           (this as any).$root.$data.screen = 'game-home';
         }

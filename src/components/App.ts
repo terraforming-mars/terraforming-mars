@@ -100,7 +100,7 @@ export const mainAppSettings = {
             if (currentPathname !== '/the-end') {
               window.history.replaceState(
                   xhr.response,
-                  'Teraforming Mars - Player',
+                  'Terraforming Mars - Player',
                   '/the-end?id=' + app.player.id,
               );
             }
@@ -109,7 +109,7 @@ export const mainAppSettings = {
             if (currentPathname !== '/player') {
               window.history.replaceState(
                   xhr.response,
-                  'Teraforming Mars - Game',
+                  'Terraforming Mars - Game',
                   '/player?id=' + app.player.id,
               );
             }
@@ -138,7 +138,7 @@ export const mainAppSettings = {
         if (xhr.status === 200) {
           window.history.replaceState(
               xhr.response,
-              'Teraforming Mars - Game',
+              'Terraforming Mars - Game',
               '/game?id=' + xhr.response.id,
           );
           app.game = xhr.response as GameHomeModel;

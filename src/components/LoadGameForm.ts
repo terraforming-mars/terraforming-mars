@@ -30,7 +30,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
             window.location.href = '/player?id=' + response.players[0].id;
             return;
           } else {
-            window.history.replaceState(response, 'Teraforming Mars - Game', '/game?id=' + response.id);
+            window.history.replaceState(response, 'Terraforming Mars - Game', '/game?id=' + response.id);
             (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
             (this.$root.$data as unknown as typeof mainAppSettings.data).screen = 'game-home';
           }

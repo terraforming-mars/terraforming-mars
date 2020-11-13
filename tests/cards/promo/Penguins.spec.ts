@@ -1,40 +1,40 @@
-import { expect } from "chai";
-import { Penguins } from "../../../src/cards/promo/Penguins";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
-import { maxOutOceans } from "../../TestingUtils";
+import {expect} from 'chai';
+import {Penguins} from '../../../src/cards/promo/Penguins';
+import {Color} from '../../../src/Color';
+import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
+import {maxOutOceans} from '../../TestingUtils';
 
-describe("Penguins", function () {
-    let card : Penguins, player : Player, game : Game;
+describe('Penguins', function() {
+  let card : Penguins; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new Penguins();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player], player);
-    });
+  beforeEach(function() {
+    card = new Penguins();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player], player);
+  });
 
-    it("Can't play", function () {
-        maxOutOceans(player, game, 7);
-        expect(card.canPlay(player, game)).is.not.true;
-    });
+  it('Can\'t play', function() {
+    maxOutOceans(player, game, 7);
+    expect(card.canPlay(player, game)).is.not.true;
+  });
 
-    it("Should play", function () {
-        maxOutOceans(player, game, 8);
-        expect(card.canPlay(player, game)).is.true;
-    });
+  it('Should play', function() {
+    maxOutOceans(player, game, 8);
+    expect(card.canPlay(player, game)).is.true;
+  });
 
-    it("Should act", function () {
-        player.playedCards.push(card);
-        expect(card.canAct()).is.true;
-        card.action(player);
-        expect(card.resourceCount).to.eq(1);
-    });
+  it('Should act', function() {
+    player.playedCards.push(card);
+    expect(card.canAct()).is.true;
+    card.action(player);
+    expect(card.resourceCount).to.eq(1);
+  });
 
-    it("Should give victory points", function () {
-        player.playedCards.push(card);
-        card.action(player);
-        card.action(player);
-        expect(card.getVictoryPoints()).to.eq(2);
-    });
+  it('Should give victory points', function() {
+    player.playedCards.push(card);
+    card.action(player);
+    card.action(player);
+    expect(card.getVictoryPoints()).to.eq(2);
+  });
 });

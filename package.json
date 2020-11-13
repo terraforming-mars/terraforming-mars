@@ -45,7 +45,7 @@
     "prep": "node make_static_json.js && lessc src/styles/common.less styles.css",
     "build": "npm run prep && npm run compile && npm run lint && npm run templates && webpack --config webpack.config.js",
     "start": "node build/server.js",
-    "lint": "eslint src server.ts script.ts --ext ts",
+    "lint": "eslint src server.ts script.ts tests --ext ts",
     "pretest": "tsc --build tsconfig-test.json",
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
     "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",

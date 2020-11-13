@@ -8,6 +8,8 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../constants';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
+import {CardMetadata} from '../cards/CardMetadata';
+import {CardRenderer} from '../cards/render/CardRenderer';
 
 export class BigAsteroid implements IProjectCard {
   public cost = 27;
@@ -33,4 +35,10 @@ export class BigAsteroid implements IProjectCard {
     player.titanium += 4;
     return undefined;
   }
+
+  public metadata: CardMetadata = {
+    description: 'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
+    cardNumber: '011',
+    renderData: CardRenderer.builder((b) => b.temperature(2).br.titanium(2).br.plants(-4).any),
+  };
 }

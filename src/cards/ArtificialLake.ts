@@ -10,6 +10,9 @@ import {CardName} from '../CardName';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../constants';
+import {CardMetadata} from '../cards/CardMetadata';
+import {CardRequirements} from '../cards/CardRequirements';
+import {CardRenderer} from '../cards/render/CardRenderer';
 
 export class ArtificialLake implements IProjectCard {
   public cost = 15;
@@ -37,4 +40,12 @@ export class ArtificialLake implements IProjectCard {
   public getVictoryPoints() {
     return 1;
   }
+
+  public metadata: CardMetadata = {
+    description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN',
+    cardNumber: '116',
+    requirements: CardRequirements.builder((b) => b.temperature(-6)),
+    renderData: CardRenderer.builder((b) => b.oceans(1).asterix()),
+    victoryPoints: 1,
+  };
 }

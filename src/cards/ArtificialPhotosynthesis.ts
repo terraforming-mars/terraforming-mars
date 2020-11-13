@@ -6,6 +6,9 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
+import {CardMetadata} from '../cards/CardMetadata';
+import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardRenderItemSize} from '../cards/render/CardRenderItemSize';
 
 export class ArtificialPhotosynthesis implements IProjectCard {
   public cost = 12;
@@ -25,4 +28,10 @@ export class ArtificialPhotosynthesis implements IProjectCard {
         }),
     );
   }
+
+  public metadata: CardMetadata = {
+    description: 'Increase your plant production 1 step or your energy production 2 steps.',
+    cardNumber: '115',
+    renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(1).or(CardRenderItemSize.SMALL).energy(2))),
+  };
 }

@@ -220,7 +220,7 @@ describe('Game', function() {
     game.playerHasPassed(player2);
     game.playerIsFinishedTakingActions();
     // Now game should be in research state
-    expect(game.phase).to.eq(Phase.RESEARCH)
+    expect(game.phase).to.eq(Phase.RESEARCH);
   });
 
   it('Should finish game if Mars and Venus is terraformed, if chosen', function() {
@@ -241,9 +241,9 @@ describe('Game', function() {
     game.playerHasPassed(player2);
     game.playerIsFinishedTakingActions();
     // Now game should be in end state
-    expect(game.phase).to.eq(Phase.END)
+    expect(game.phase).to.eq(Phase.END);
   });
- 
+
   it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
@@ -262,9 +262,9 @@ describe('Game', function() {
     game.playerHasPassed(player2);
     game.playerIsFinishedTakingActions();
     // Now game should be in research state
-    expect(game.phase).to.eq(Phase.RESEARCH)
+    expect(game.phase).to.eq(Phase.RESEARCH);
   });
- 
+
   it('Should finish solo game in the end of last generation', function() {
     const player = new Player('temp_test', Color.BLUE, false);
     const game = new Game('solo1', [player], player);

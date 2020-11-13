@@ -1,4 +1,4 @@
-import { Game, GameOptions, Score } from "../Game";
+import {Game, GameOptions, Score} from '../Game';
 
 export interface IGameData {
     gameId: string;
@@ -14,4 +14,5 @@ export interface IDatabase {
     restoreReferenceGame(game_id:string, game: Game, cb:(err: any) => void): void;
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) : void;
     saveGameResults(game_id: string, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
+    deleteGameNbrSaves(game_id: string, rollbackCount: number): void;
 }

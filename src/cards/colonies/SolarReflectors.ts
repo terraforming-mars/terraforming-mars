@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
 
 export class SolarReflectors implements IProjectCard {
     public cost = 23;
@@ -12,7 +12,7 @@ export class SolarReflectors implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.addProduction(Resources.HEAT, 5);  
+      player.addProduction(Resources.HEAT, 5);
       return undefined;
     }
 }

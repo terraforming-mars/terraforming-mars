@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Resources } from "../../Resources";
-import { ResourceType } from "../../ResourceType";
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
+import {ResourceType} from '../../ResourceType';
 
 export class FloaterLeasing implements IProjectCard {
     public cost = 3;

@@ -1,8 +1,8 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardName} from '../../CardName';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
 
 export class TopsoilContract implements IProjectCard {
     public cost = 8;
@@ -11,7 +11,7 @@ export class TopsoilContract implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
-        player.plants += 3;
-        return undefined;
+      player.plants += 3;
+      return undefined;
     }
 }

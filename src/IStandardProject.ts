@@ -1,5 +1,5 @@
 
-import { StandardProjectType } from "./StandardProjectType";
+import {StandardProjectType} from './StandardProjectType';
 
 export interface IStandardProject {
     projectType: StandardProjectType

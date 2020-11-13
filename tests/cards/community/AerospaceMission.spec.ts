@@ -3,7 +3,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { AerospaceMission } from "../../../src/cards/community/AerospaceMission";
 import { setCustomGameOptions } from "../../TestingUtils";
-import { Game, GameOptions } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { ColonyName } from "../../../src/colonies/ColonyName";
 import { SelectColony } from "../../../src/inputs/SelectColony";
 
@@ -14,7 +14,7 @@ describe("AerospaceMission", function () {
         card = new AerospaceMission();
         player = new Player("test", Color.BLUE, false);
         
-        const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+        const gameOptions = setCustomGameOptions({coloniesExtension: true});
         game = new Game("foobar", [player, player], player, gameOptions);
     });
 

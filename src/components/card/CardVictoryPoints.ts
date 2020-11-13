@@ -1,20 +1,20 @@
-import Vue from "vue";
-//TODO (chosta): implement points per tag
-export const CardVictoryPoints = Vue.component("CardPoints", {
-    props: {
-        amount: {
-            type: Number,
-            required: true,
-        },
+import Vue from 'vue';
+// TODO (chosta): implement points per tag
+export const CardVictoryPoints = Vue.component('CardPoints', {
+  props: {
+    amount: {
+      type: Number,
+      required: true,
     },
-    methods: {
-        getClasses: function (): string {
-            const classes = ["card-points", "points-big"];
+  },
+  methods: {
+    getClasses: function(): string {
+      const classes = ['card-points', 'points-big'];
 
-            return classes.join(" ");
-        },
+      return classes.join(' ');
     },
-    template: `
+  },
+  template: `
         <div :class="getClasses()">{{ amount }}</div>
     `,
 });

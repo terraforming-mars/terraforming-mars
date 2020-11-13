@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
-import { Game } from "../../Game";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Game} from '../../Game';
 
 
 export class MolecularPrinting implements IProjectCard {
@@ -13,15 +13,15 @@ export class MolecularPrinting implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-        let coloniesCount: number = 0;
-        game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.length;
-        }); 
-         player.megaCredits += game.getCitiesInPlay() +coloniesCount
-        return undefined;
+      let coloniesCount: number = 0;
+      game.colonies.forEach((colony) => {
+        coloniesCount += colony.colonies.length;
+      });
+      player.megaCredits += game.getCitiesInPlay() +coloniesCount;
+      return undefined;
     }
 
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

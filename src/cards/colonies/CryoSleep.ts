@@ -1,8 +1,8 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
 
 export class CryoSleep implements IProjectCard {
     public cost = 10;
@@ -11,11 +11,11 @@ export class CryoSleep implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
-        player.colonyTradeDiscount++;
-        return undefined;
+      player.colonyTradeDiscount++;
+      return undefined;
     }
 
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

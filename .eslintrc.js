@@ -4,6 +4,7 @@ module.exports = {
     'es6': true,
   },
   'extends': [
+    'google',
     'plugin:vue/essential'
   ],
   'parserOptions': {
@@ -16,9 +17,13 @@ module.exports = {
     '@typescript-eslint',
   ],
   'rules': {
+    'camelcase': 'off',
     'eqeqeq': ['error', 'always'],
-    'quotes': ['error', 'double'],
+    'max-len': 'off',
+    'no-throw-literal': 'off',
+    'no-unused-vars': 'off',
     'no-var': 'error',
-    'prefer-const': 'error'
+    'prefer-const': 'error',
+    'require-jsdoc': 'off'
   },
 };

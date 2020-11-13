@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { EcologyResearch } from "../../../src/cards/colonies/EcologyResearch";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game, GameOptions } from "../../../src/Game";
+import { Game } from "../../../src/Game";
 import { Luna } from "../../../src/colonies/Luna";
 import { Resources } from "../../../src/Resources";
 import { Tardigrades } from "../../../src/cards/Tardigrades";
@@ -18,7 +18,7 @@ describe("EcologyResearch", function () {
     beforeEach(function() {
         card = new EcologyResearch();
         player = new Player("test", Color.BLUE, false);
-        const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+        const gameOptions = setCustomGameOptions({coloniesExtension: true});
         game = new Game("foobar", [player, player], player, gameOptions);
 
         colony1 = new Luna();

@@ -1,14 +1,14 @@
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { IActionCard } from "./ICard";
-import { IProjectCard } from "./IProjectCard";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { Game } from "../Game";
-import { PartyHooks } from "../turmoil/parties/PartyHooks";
-import { PartyName } from "../turmoil/parties/PartyName";
-import { REDS_RULING_POLICY_COST } from "../constants";
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {IActionCard} from './ICard';
+import {IProjectCard} from './IProjectCard';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {Game} from '../Game';
+import {PartyHooks} from '../turmoil/parties/PartyHooks';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../constants';
 
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost = 11;
@@ -30,7 +30,7 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
       return hasEnergyProduction;
     }
     public action(player: Player, game: Game) {
-      player.addProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.ENERGY, -1);
       player.increaseTerraformRating(game);
       return undefined;
     }

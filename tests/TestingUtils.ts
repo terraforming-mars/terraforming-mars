@@ -53,12 +53,12 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         clonedGamedId: undefined,
         cardsBlackList: [],
         aresExtension: false,
-        aresHazards: undefined,
+        aresHazards: false,
         fastModeOption: false,
         removeNegativeGlobalEventsOption: false,
         customColoniesList: [],
-        venusTR: false,
+        requiresVenusTrackCompletion: false,
       };
 
-    return Object.assign(defaultOptions, options) as GameOptions;
+    return Object.assign(defaultOptions, options);
 }

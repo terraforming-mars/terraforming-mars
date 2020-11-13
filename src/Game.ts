@@ -123,15 +123,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     // Player data
     public activePlayer: PlayerId;
-    private donePlayers: Set<Player> = new Set<Player>();
-    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private donePlayers = new Set<PlayerId>();
+    private passedPlayers = new Set<PlayerId>();
+    private researchedPlayers = new Set<PlayerId>();
+    private draftedPlayers = new Set<PlayerId>();
 
     // Drafting
     private draftRound: number = 1;
     private initialDraftIteration: number = 1;
-    private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map();
+    private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 
     // Milestones and awards
     public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -330,7 +330,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Save initial game state
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, JSON.stringify(this, this.replacer), this.players.length);
+      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -344,6 +344,50 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.runDraftRound(true);
         return;
       }
+    }
+
+    public toJSON(): string {
+      return JSON.stringify(this.serialize());
+    }
+
+    public serialize(): SerializedGame {
+      return {
+        activePlayer: this.activePlayer,
+        aresData: this.aresData,
+        awards: this.awards,
+        board: this.board,
+        claimedMilestones: this.claimedMilestones,
+        clonedGamedId: this.clonedGamedId,
+        colonies: this.colonies,
+        colonyDealer: this.colonyDealer,
+        dealer: this.dealer.serialize(),
+        deferredActions: [],
+        donePlayers: Array.from(this.donePlayers),
+        draftedPlayers: Array.from(this.draftedPlayers),
+        draftRound: this.draftRound,
+        first: this.first.id,
+        fundedAwards: this.fundedAwards,
+        gameAge: this.gameAge,
+        gameLog: this.gameLog,
+        gameOptions: this.gameOptions,
+        generation: this.generation,
+        id: this.id,
+        initialDraftIteration: this.initialDraftIteration,
+        lastSaveId: this.lastSaveId,
+        milestones: this.milestones,
+        monsInsuranceOwner: this.monsInsuranceOwner,
+        oxygenLevel: this.oxygenLevel,
+        passedPlayers: Array.from(this.passedPlayers),
+        phase: this.phase,
+        players: this.players.map((p) => p.serialize()),
+        researchedPlayers: Array.from(this.researchedPlayers),
+        seed: this.seed,
+        someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+        temperature: this.temperature,
+        turmoil: this.turmoil,
+        unDraftedCards: Array.from(this.unDraftedCards.entries()),
+        venusScaleLevel: this.venusScaleLevel,
+      };
     }
 
     public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
@@ -947,7 +991,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
       this.draftedPlayers.add(player.id);
-      this.unDraftedCards.set(player, cards);
+      this.unDraftedCards.set(player.id, cards);
 
       player.needsToDraft = false;
       if (!this.allPlayersHaveFinishedDraft()) {
@@ -1005,7 +1049,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public getDraftCardsFrom(player: Player): Player {
+    private getDraftCardsFrom(player: Player): PlayerId {
       let nextPlayer = this.getPreviousPlayer(this.players, player);
       if (this.generation%2 === 1) {
         nextPlayer = this.getNextPlayer(this.players, player);
@@ -1016,12 +1060,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (nextPlayer !== undefined) {
-        return nextPlayer;
+        return nextPlayer.id;
       }
-      return player;
+      return player.id;
     }
 
-    public getNextDraft(player: Player): Player {
+    private getNextDraft(player: Player): Player {
       let nextPlayer = this.getNextPlayer(this.players, player);
       if (this.generation%2 === 1) {
         nextPlayer = this.getPreviousPlayer(this.players, player);
@@ -1118,13 +1162,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public canPlaceGreenery(player: Player): boolean {
-      return !this.donePlayers.has(player) &&
+      return !this.donePlayers.has(player.id) &&
              player.plants >= player.plantsNeededForGreenery &&
              this.board.getAvailableSpacesForGreenery(player).length > 0;
     }
 
     public playerIsDoneWithGame(player: Player): void {
-      this.donePlayers.add(player);
+      this.donePlayers.add(player.id);
       this.gotoFinalGreeneryPlacement();
     }
 
@@ -1167,7 +1211,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Save the game state after changing the current player
       // Increment the save id
       this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, JSON.stringify(this, this.replacer), this.players.length);
+      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
 
       player.takeAction(this);
     }
@@ -1669,21 +1713,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return space;
     }
 
-    // Custom replacer to transform Map and Set to Array
-    public replacer(key: any, value: any) {
-      // Prevent infinite loop because deferredActions contains game object.
-      if (key === 'deferredActions') {
-        return [];
-      } else if (value instanceof Set) {
-        return Array.from(value);
-      } else if (value instanceof Map) {
-        return Array.from(value.entries());
-      }
-      return value;
-    }
-
-    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
-      const result: Array<Colony> = [];
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+      const result: Array<IColony> = [];
       for (const serialized of colonies) {
         const colony = getColonyByName(serialized.name);
         if (colony !== undefined) {
@@ -1795,7 +1826,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Reload turmoil elements if needed
-      if (this.gameOptions.turmoilExtension) {
+      if (d.turmoil && this.gameOptions.turmoilExtension) {
         const turmoil = new Turmoil(this);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
 
@@ -1858,44 +1889,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
-      // Rebuild passed players set
-      this.passedPlayers = new Set<PlayerId>();
-      d.passedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.passedPlayers.add(player.id);
-        }
-      });
-
-      // Rebuild done players set
-      this.donePlayers = new Set<Player>();
-      d.donePlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.donePlayers.add(player);
-        }
-      });
-
-      // Rebuild researched players set
-      this.researchedPlayers = new Set<PlayerId>();
-      d.researchedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.researchedPlayers.add(player.id);
-        }
-      });
-
-      // Rebuild drafted players set
-      this.draftedPlayers = new Set<PlayerId>();
-      d.draftedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.draftedPlayers.add(player.id);
-        }
-      });
+      this.passedPlayers = new Set<PlayerId>(d.passedPlayers);
+      this.donePlayers = new Set<PlayerId>(d.donePlayers);
+      this.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
+      this.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
       // Reinit undrafted cards map
-      this.unDraftedCards = new Map<Player, IProjectCard[]>();
+      this.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
 
       // Define who is the active player and init the take action phase
       const active = this.players.find((player) => player.id === d.activePlayer);
@@ -1908,7 +1908,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Define who was the first player for this generation
-      const first = this.players.find((player) => player.id === d.first.id);
+      const first = this.players.find((player) => {
+        if (typeof d.first === 'string') {
+          return player.id === d.first;
+        }
+        return player.id === d.first.id;
+      });
       if (first) {
         this.first = first;
       } else {

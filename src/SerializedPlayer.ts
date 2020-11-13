@@ -1,7 +1,10 @@
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
+import {PlayerId} from './Player';
 import {PlayerInput} from './PlayerInput';
+import {CardName} from './CardName';
 import {Color} from './Color';
+import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export interface SerializedPlayer {
@@ -13,8 +16,10 @@ export interface SerializedPlayer {
     waitingFor?: PlayerInput;
     waitingForCb?: () => void;
 
-    corporationCard: CorporationCard | undefined;
-    pickedCorporationCard: CorporationCard | undefined;
+    corporationCard: SerializedCard | undefined;
+    corporationInitialActionDone: boolean;
+    hasIncreasedTerraformRatingThisGeneration: boolean;
+    pickedCorporationCard: CardName | CorporationCard | undefined;
 
     terraformRating: number;
     terraformRatingAtGenerationStart: number;
@@ -37,20 +42,25 @@ export interface SerializedPlayer {
     canUseHeatAsMegaCredits: boolean;
 
     actionsTakenThisRound: number;
-    actionsThisGeneration: Set<string>;
-    lastCardPlayed: IProjectCard | undefined;
+    actionsThisGeneration: Array<string>;
+    lastCardPlayed: CardName | IProjectCard | undefined;
 
-    dealtCorporationCards: Array<CorporationCard>;
-    dealtPreludeCards: Array<IProjectCard>;
-    dealtProjectCards: Array<IProjectCard>;
+    dealtCorporationCards: Array<CardName> | Array<CorporationCard>;
+    dealtPreludeCards: Array<CardName> | Array<IProjectCard>;
+    dealtProjectCards: Array<CardName> | Array<IProjectCard>;
 
-    cardsInHand: Array<IProjectCard>;
-    preludeCardsInHand: Array<IProjectCard>;
-    playedCards: Array<IProjectCard>;
-    draftedCards: Array<IProjectCard>;
+    cardsInHand: Array<CardName> | Array<IProjectCard>;
+    preludeCardsInHand: Array<CardName> | Array<IProjectCard>;
+    playedCards: Array<SerializedCard>;
+    draftedCards: Array<CardName> | Array<IProjectCard>;
+    removedFromPlayCards: Array<CardName> | Array<IProjectCard>;
 
-    generationPlayed: Map<string, number>;
+    generationPlayed: Array<[string, number]>;
     cardCost: number;
+    cardDiscount: number;
+    colonyVictoryPoints: number;
+    shouldTriggerCardEffect: boolean;
+    scienceTagCount: number;
     needsToDraft: boolean | undefined;
 
     fleetSize: number;
@@ -65,5 +75,5 @@ export interface SerializedPlayer {
     oceanBonus: number;
 
     plantsNeededForGreenery: number;
-    removingPlayers: Array<string>;
+    removingPlayers: Array<PlayerId>;
 }

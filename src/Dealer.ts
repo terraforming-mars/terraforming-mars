@@ -155,30 +155,40 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer> {
       return result;
     }
 
-    // Function used to rebuild each objects
     public loadFromJSON(d: SerializedDealer): Dealer {
-      // Assign each attributes
-      const o = Object.assign(this, d);
       const cardFinder = new CardFinder();
-      // Rebuild deck
-      this.deck = d.deck.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
 
-      // Rebuild prelude deck
-      this.preludeDeck = d.preludeDeck.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
-
-      // Rebuild the discard
-      this.discarded = d.discarded.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
-
-      return o;
+      this.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
+      this.deck = cardFinder.cardsFromJSON(d.deck);
+      this.discarded = cardFinder.cardsFromJSON(d.discarded);
+      this.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      this.useAresExtension = d.useAresExtension;
+      this.useColoniesNextExtension = d.useColoniesNextExtension;
+      this.useCorporateEra = d.useCorporateEra;
+      this.usePreludeExtension = d.usePreludeExtension;
+      this.usePromoCards = d.usePromoCards;
+      this.useTurmoilExtension = d.useTurmoilExtension;
+      this.useVenusNextExtension = d.useVenusNextExtension;
+      return this;
     }
 
     public getDeckSize(): number {
       return this.deck.length;
+    }
+
+    public serialize(): SerializedDealer {
+      return {
+        corporationCards: this.corporationCards.map((c) => c.name),
+        deck: this.deck.map((c) => c.name),
+        discarded: this.discarded.map((c) => c.name),
+        preludeDeck: this.preludeDeck.map((c) => c.name),
+        useAresExtension: this.useAresExtension,
+        useColoniesNextExtension: this.useColoniesNextExtension,
+        useCorporateEra: this.useCorporateEra,
+        usePreludeExtension: this.usePreludeExtension,
+        usePromoCards: this.usePromoCards,
+        useVenusNextExtension: this.useVenusNextExtension,
+        useTurmoilExtension: this.useTurmoilExtension,
+      };
     }
 }

@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './Board';
@@ -12,7 +11,6 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
-import {Decks} from './Deck';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -24,8 +22,6 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
-import {MiningArea} from './cards/MiningArea';
-import {MiningRights} from './cards/MiningRights';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
@@ -50,6 +46,7 @@ import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StandardProjectType} from './StandardProjectType';
@@ -2308,8 +2305,86 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       this.waitingForCb = cb;
     }
 
-    private getCorporationCardByName(name: string) {
-      return Decks.findByName(ALL_CORPORATION_DECKS, name);
+    public serialize(): SerializedPlayer {
+      return {
+        id: this.id,
+        waitingFor: this.waitingFor,
+        // private waitingForCb?: () => void;
+        corporationCard: this.corporationCard,
+        // Used only during set-up
+        pickedCorporationCard: this.pickedCorporationCard,
+        // Terraforming Rating
+        terraformRating: this.terraformRating,
+        hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
+        terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
+        // Resources
+        megaCredits: this.megaCredits,
+        megaCreditProduction: this.megaCreditProduction,
+        steel: this.steel,
+        steelProduction: this.steelProduction,
+        titanium: this.titanium,
+        titaniumProduction: this.titaniumProduction,
+        plants: this.plants,
+        plantProduction: this.plantProduction,
+        energy: this.energy,
+        energyProduction: this.energyProduction,
+        heat: this.heat,
+        heatProduction: this.heatProduction,
+        // Resource values
+        titaniumValue: this.titaniumValue,
+        steelValue: this.steelValue,
+        // Helion
+        canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
+        // This generation / this round
+        actionsTakenThisRound: this.actionsTakenThisRound,
+        actionsThisGeneration: Array.from(this.actionsThisGeneration),
+        lastCardPlayed: this.lastCardPlayed === undefined ? undefined : this.lastCardPlayed.name,
+        corporationInitialActionDone: this.corporationInitialActionDone,
+        // Cards
+        dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
+        dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
+        dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
+        cardsInHand: this.cardsInHand.map((c) => c.name),
+        preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
+        playedCards: this.playedCards.map((c) => ({
+          name: c.name,
+          resourceCount: c.resourceCount,
+          targetCards: c.targetCards,
+        })),
+        draftedCards: this.draftedCards.map((c) => c.name),
+        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
+        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
+        generationPlayed: Array.from(this.generationPlayed),
+        cardCost: this.cardCost,
+        needsToDraft: this.needsToDraft,
+        cardDiscount: this.cardDiscount,
+        // Colonies
+        fleetSize: this.fleetSize,
+        tradesThisTurn: this.tradesThisTurn,
+        colonyTradeOffset: this.colonyTradeOffset,
+        colonyTradeDiscount: this.colonyTradeDiscount,
+        colonyVictoryPoints: this.colonyVictoryPoints,
+        // Turmoil
+        turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
+        // Controlled by cards with effects that might be called a second time recursively, I think.
+        // They set this to false in order to prevent card effects from triggering twice.
+        // Not sure this is clear.
+        shouldTriggerCardEffect: this.shouldTriggerCardEffect,
+        powerPlantCost: this.powerPlantCost,
+        victoryPointsBreakdown: this.victoryPointsBreakdown,
+        oceanBonus: this.oceanBonus,
+        // Custom cards
+        // Leavitt Station.
+        scienceTagCount: this.scienceTagCount,
+        // Ecoline
+        plantsNeededForGreenery: this.plantsNeededForGreenery,
+        // Lawsuit
+        removingPlayers: this.removingPlayers,
+        name: this.name,
+        color: this.color,
+        beginner: this.beginner,
+        handicap: this.handicap,
+      };
     }
 
     // Function used to rebuild each objects
@@ -2324,22 +2399,26 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
-        this.pickedCorporationCard = this.getCorporationCardByName(d.pickedCorporationCard.name);
+        this.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
       }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
-        this.corporationCard = this.getCorporationCardByName(d.corporationCard.name);
+        this.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
         if (d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
           this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
         }
-        if (d.corporationCard.name === CardName.ARIDOR) {
-          (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
+        if (this.corporationCard instanceof Aridor) {
+          if (d.corporationCard.allTags !== undefined) {
+            this.corporationCard.allTags = new Set(d.corporationCard.allTags);
+          } else {
+            console.warn('did not find allTags for ARIDOR');
+          }
         }
-        if (d.corporationCard.name === CardName.PHARMACY_UNION) {
-          if ((d.corporationCard as PharmacyUnion).isDisabled) {
-            (this.corporationCard as PharmacyUnion).tags = [];
-            (this.corporationCard as PharmacyUnion).isDisabled = true;
+        if (this.corporationCard instanceof PharmacyUnion) {
+          if (d.corporationCard.isDisabled === true) {
+            this.corporationCard.tags = [];
+            this.corporationCard.isDisabled = true;
           }
         }
       } else {
@@ -2347,58 +2426,45 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       // Rebuild dealt corporation array
-      this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard) => {
-        return this.getCorporationCardByName(element.name)!;
-      });
+      this.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
 
       // Rebuild dealt prelude array
-      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
 
       // Rebuild dealt cards array
-      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
 
       // Rebuild each cards in hand
-      this.cardsInHand = d.cardsInHand.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
 
       // Rebuild each prelude in hand
-      this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
 
       // Rebuild each played card
-      this.playedCards = d.playedCards.map((element: IProjectCard) => {
+      this.playedCards = d.playedCards.map((element: SerializedCard) => {
         const card = cardFinder.getProjectCardByName(element.name)!;
-        if (element.resourceCount && element.resourceCount > 0) {
+        if (element.resourceCount !== undefined) {
           card.resourceCount = element.resourceCount;
         }
-
-        if (card instanceof SelfReplicatingRobots) {
-          const targetCards = (element as SelfReplicatingRobots).targetCards;
-          if (targetCards !== undefined) {
-            card.targetCards = targetCards;
-            card.targetCards.forEach((robotCard) => robotCard.card = cardFinder.getProjectCardByName(robotCard.card.name)!);
-          }
+        if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
+          card.targetCards = [];
+          element.targetCards.forEach((targetCard) => {
+            const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
+            if (foundTargetCard !== undefined) {
+              card.targetCards.push({
+                card: foundTargetCard,
+                resourceCount: targetCard.resourceCount,
+              });
+            } else {
+              console.warn('did not find card for SelfReplicatingRobots', targetCard);
+            }
+          });
         }
-        if (card instanceof MiningArea || card instanceof MiningRights) {
-          const bonusResource = (element as MiningArea).bonusResource;
-          if (bonusResource !== undefined) {
-            card.bonusResource = bonusResource;
-          }
-        }
-
         return card;
       });
 
       // Rebuild each drafted cards
-      this.draftedCards = d.draftedCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
       return o;
     }

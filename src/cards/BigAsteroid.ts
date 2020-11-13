@@ -10,27 +10,27 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
 
 export class BigAsteroid implements IProjectCard {
-    public cost = 27;
-    public tags = [Tags.SPACE];
-    public cardType = CardType.EVENT;
-    public name = CardName.BIG_ASTEROID;
-    public hasRequirements = false;
+  public cost = 27;
+  public tags = [Tags.SPACE];
+  public cardType = CardType.EVENT;
+  public name = CardName.BIG_ASTEROID;
+  public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game): boolean {
-      const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
-      const stepsRaised = Math.min(remainingTemperatureSteps, 2);
+  public canPlay(player: Player, game: Game): boolean {
+    const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
+    const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
-      }
-
-      return true;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
     }
 
-    public play(player: Player, game: Game) {
-      game.increaseTemperature(player, 2);
-      game.defer(new RemoveAnyPlants(player, game, 4));
-      player.titanium += 4;
-      return undefined;
-    }
+    return true;
+  }
+
+  public play(player: Player, game: Game) {
+    game.increaseTemperature(player, 2);
+    game.defer(new RemoveAnyPlants(player, game, 4));
+    player.titanium += 4;
+    return undefined;
+  }
 }

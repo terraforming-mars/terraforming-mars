@@ -92,13 +92,13 @@ class Builder {
     return this;
   }
 
-  public br(): Builder {
+  public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);
     return this;
   }
 
-  public any(): Builder {
+  public get any(): Builder {
     // #TODO (chosta): functions to validate data
     if (this._data.length === 0) {
       throw new Error('No items in builder data to call any()');
@@ -115,8 +115,8 @@ class Builder {
       if (item === undefined) {
         throw new Error('Called any() without a CardRenderItem.');
       }
-
-      row?.push(item.any());
+      item.anyPlayer = true;
+      row?.push(item);
       this._data.push(row);
     }
 

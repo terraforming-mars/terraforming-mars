@@ -1,17 +1,13 @@
+/*
+  Used to describe any distinct symbol on a card and prepare it for rendering in Vue
+  e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
+ */
 import {CardRenderSymbolType} from './CardRenderSymbolType';
 import {CardRenderItemSize} from './CardRenderItemSize';
 
 export class CardRenderSymbol {
-  private constructor(private type: CardRenderSymbolType, private isIcon: boolean = false, private size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {}
-  public getType(): CardRenderSymbolType {
-    return this.type;
-  }
-  public getIsIcon(): boolean {
-    return this.isIcon;
-  }
-  public getSize(): CardRenderItemSize {
-    return this.size;
-  }
+  private constructor(public type: CardRenderSymbolType, public isIcon: boolean = false, public size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {}
+
   public static asterix(): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ASTERIX);
   }
@@ -35,17 +31,5 @@ export class CardRenderSymbol {
   }
   public static arrow(): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ARROW, true);
-  }
-  public small(): CardRenderSymbol {
-    this.size = CardRenderItemSize.SMALL;
-    return this;
-  }
-  public medium(): CardRenderSymbol {
-    this.size = CardRenderItemSize.MEDIUM;
-    return this;
-  }
-  public large(): CardRenderSymbol {
-    this.size = CardRenderItemSize.LARGE;
-    return this;
   }
 }

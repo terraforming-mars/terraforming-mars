@@ -42,6 +42,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (this.item.type === CardRenderItemType.PLANTS) {
         classes.push('card-resource');
         classes.push('card-resource-plant');
+      } else if (this.item.type === CardRenderItemType.MEGACREDITS) {
+        classes.push('card-resource');
+        classes.push('card-resource-money');
+      } else if (this.item.type === CardRenderItemType.MICROBES) {
+        classes.push('card-resource');
+        classes.push('card-resource-microbe');
       }
 
       // act upon any player
@@ -52,6 +58,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       return classes.join(' ');
     },
     getAmountAbs: function(): number {
+      if (this.item.amountInside) return 1;
       return Math.abs(this.item.amount);
     },
     getMinus: function(): CardRenderSymbol {

@@ -4,7 +4,7 @@ import {Resources} from '../../Resources';
 export const PlayerResource = Vue.component('player-resource', {
   props: {
     type: {
-      type: Object as () => Resources,
+      type: String as () => Resources,
     },
     count: {
       type: Number,

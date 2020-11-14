@@ -96,7 +96,7 @@ export const GameEnd = Vue.component('game-end', {
                     </a>
                 </div>
                 <div v-if="!isSoloGame() || player.isSoloModeWin" class="game-end-winer-announcement">
-                    <span v-for="p in getWinners()"><log-player :class="getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</log-player></span> won!
+                    <span v-for="p in getWinners()"><span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
                 <div class="game_end_victory_points">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
@@ -135,7 +135,7 @@ export const GameEnd = Vue.component('game-end', {
                     <div class="game-end-flexrow">
                         <div v-for="p in getSortedPlayers()" class="game-end-column">
                             <div class="game-end-winer-scorebreak-player-title">
-                                <log-player :class="getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></log-player>
+                                <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
                                 {{v}}

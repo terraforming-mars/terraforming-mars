@@ -5,7 +5,7 @@ import {CardModel} from '../models/CardModel';
 export const StackedCards = Vue.component('stacked-cards', {
   props: {
     cards: {
-      type: Object as () => Array<CardModel>,
+      type: Array as () => Array<CardModel>,
     },
   },
   components: {

@@ -19,6 +19,9 @@ export class CardRequirements {
   public hasMax(): boolean {
     return this.requirements.some((req) => req.isMax);
   }
+  public hasParty(): boolean {
+    return this.requirements.some((req) => req instanceof PartyCardRequirement);
+  }
 }
 
 class Builder {

@@ -13,7 +13,7 @@ import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 
 export class MetallicAsteroid implements IProjectCard {
   public cost = 13;
-  public tags = [Tags.SPACE, Tags.EVENT];
+  public tags = [Tags.SPACE];
   public cardType = CardType.EVENT;
   public name = CardName.METALLIC_ASTEROID;
   public play(player: Player, game: Game) {

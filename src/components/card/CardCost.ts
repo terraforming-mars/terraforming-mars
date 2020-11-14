@@ -3,8 +3,7 @@ import Vue from 'vue';
 export const CardCost = Vue.component('CardCost', {
   props: {
     amount: {
-      type: Number,
-      required: true,
+      type: Number as () => number | undefined,
     },
   },
   methods: {

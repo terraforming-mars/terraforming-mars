@@ -22,7 +22,7 @@ class AlertDialog {
 export const Board = Vue.component('board', {
   props: {
     spaces: {
-      type: Object as () => Array<SpaceModel>,
+      type: Array as () => Array<SpaceModel>,
     },
     venusNextExtension: {
       type: Boolean,

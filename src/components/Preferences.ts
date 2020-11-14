@@ -9,7 +9,7 @@ import {$t} from '../directives/i18n';
 export const Preferences = Vue.component('preferences', {
   props: {
     player_color: {
-      type: Object as () => Color,
+      type: String as () => Color,
     },
     generation: {
       type: Number,

@@ -26,7 +26,7 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
       type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
     },
     onsave: {
-      type: Object as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: Array<Array<string>>) => void,
     },
     showsave: {
       type: Boolean,

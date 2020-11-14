@@ -9,7 +9,7 @@ export const ShiftAresGlobalParameters = Vue.component('shift-ares-global-parame
       type: Object as () => Required<Pick<PlayerInputModel, 'aresData' | 'buttonLabel'>>,
     },
     onsave: {
-      type: Object as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: Array<Array<string>>) => void,
     },
     showsave: {
       type: Boolean,

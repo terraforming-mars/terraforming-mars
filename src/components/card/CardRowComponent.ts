@@ -26,7 +26,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
   },
   template: ` 
         <CardRenderItemComponent v-if="isItem()" :item="data"/>
-        <CardProductionBoxComponent v-else-if="isProduction()" :data="data.rows" />
+        <CardProductionBoxComponent v-else-if="isProduction()" :rows="data.rows" />
         <div v-else>n/a</div>
     `,
 });

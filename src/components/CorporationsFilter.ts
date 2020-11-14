@@ -150,7 +150,6 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
         </div>
         <div class="corporations-filter-group" v-for="entry in corpsByModule">
             <div class="corporations-filter-toolbox-cont">
-                <h2>{{ name }}</h2>
                 <div class="corporations-filter-toolbox">
                     <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> | 
                     <a href="#" v-on:click.prevent="selectNone(entry[0])">None</a> | 

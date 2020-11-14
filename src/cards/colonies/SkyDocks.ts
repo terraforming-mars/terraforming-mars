@@ -26,4 +26,8 @@ export class SkyDocks implements IProjectCard {
     public getVictoryPoints() {
       return 2;
     }
+
+    public onDiscard(player: Player): void {
+      player.decreaseFleetSize();
+    }
 }

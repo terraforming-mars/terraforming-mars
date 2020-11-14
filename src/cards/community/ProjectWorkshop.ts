@@ -97,6 +97,11 @@ export class ProjectWorkshop implements CorporationCard {
       const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
       player.playedCards.splice(cardIndex, 1);
       game.dealer.discard(card as IProjectCard);
+
+      if (card.onDiscard) {
+        card.onDiscard(player);
+      }
+
       game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
     }
 

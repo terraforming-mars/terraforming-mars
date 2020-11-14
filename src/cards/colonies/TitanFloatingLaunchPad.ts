@@ -29,7 +29,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
-      if (this.resourceCount === 0 || openColonies.length === 0 || player.fleetSize <= player.tradesThisTurn) {
+      if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisTurn) {
         game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, 'Add 1 floater to a Jovian card'));
         return undefined;
       }

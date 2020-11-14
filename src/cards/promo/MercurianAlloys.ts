@@ -18,4 +18,8 @@ export class MercurianAlloys implements IProjectCard {
       player.increaseTitaniumValue();
       return undefined;
     }
+
+    public onDiscard(player: Player): void {
+      player.decreaseTitaniumValue();
+    }
 }

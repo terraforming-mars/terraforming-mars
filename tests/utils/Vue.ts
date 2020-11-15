@@ -4,6 +4,7 @@
  * This script sets up that virtual DOM
  */
 const jsdom = require('jsdom');
+import {Database} from '../../src/database/Database';
 
 const dom = new jsdom.JSDOM('<!doctype html><html><body></body></html>');
 
@@ -28,4 +29,19 @@ const Vue = require('vue');
 
 // setup for default exports
 Vue.default = Vue;
+
+// don't save to database during tests
+Database.getInstance = function() {
+  return {
+    cleanSaves: () => {},
+    deleteGameNbrSaves: () => {},
+    getClonableGames: () => {},
+    getGames: () => {},
+    restoreGame: () => {},
+    restoreGameLastSave: () => {},
+    restoreReferenceGame: () => {},
+    saveGameResults: () => {},
+    saveGameState: () => {},
+  };
+};
 

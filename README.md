@@ -16,7 +16,7 @@ You can run the game server locally if you have `npm` and `node`. To start the g
 
 ```
 npm install
-npm build
+npm run build
 npm run start
 ```
 

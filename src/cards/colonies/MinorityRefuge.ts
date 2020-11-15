@@ -15,7 +15,7 @@ export class MinorityRefuge implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      return player.canPlayColonyPlacementCard(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
+      return player.hasAvailableColonyTileToBuildOn(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
     }
 
     public play(player: Player, game: Game) {

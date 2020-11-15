@@ -458,6 +458,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         cardsBlackList: gameReq.cardsBlackList,
         customColoniesList: gameReq.customColoniesList,
+        requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
       };
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);

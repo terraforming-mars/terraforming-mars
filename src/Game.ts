@@ -98,7 +98,7 @@ export interface GameOptions {
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
-  requiresVenusTrackCompletion: boolean; // Venus must be completed for win
+  requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
 }
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -568,6 +568,25 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private marsIsTerraformed(): boolean {
+      const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
+      const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
+      const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+      const globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
+      const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+
+      // Solo games with Venus needs Venus maxed to end the game.
+      if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
+        return globalParametersMaxed && venusMaxed;
+      }
+      // new option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
+      if (this.gameOptions.venusNextExtension && this.gameOptions.requiresVenusTrackCompletion) {
+        return globalParametersMaxed && venusMaxed;
+      }
+      return globalParametersMaxed;
+    }
+
+    /*
+    private marsIsTerraformed(): boolean {
       if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
         return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
                 this.temperature >= constants.MAX_TEMPERATURE &&
@@ -584,6 +603,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
              this.temperature >= constants.MAX_TEMPERATURE &&
              this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
+    */
 
     public isSoloModeWin(): boolean {
       // Solo TR

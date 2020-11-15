@@ -24,7 +24,8 @@ describe('LandClaim', function() {
   it('can claim south pole on hellas board', function() {
     const card = new LandClaim();
     const player = new Player('test', Color.BLUE, false);
-    const game = new Game('foobar', [player], player, setCustomGameOptions({
+    const player2= new Player('text2', Color.RED, false);
+    const game = new Game('foobar', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));
     const action = card.play(player, game) as SelectSpace;

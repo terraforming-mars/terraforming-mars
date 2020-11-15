@@ -13,13 +13,15 @@ import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
 import {SerializedParty, SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
+import {AgendaStyle, PoliticalAgendasData} from './PoliticalAgendasData';
+import {Bonus} from './Bonus';
 
-export interface IPartyFactory<T> {
+export interface IPartyFactory {
     partyName: PartyName;
-    Factory: new () => T
+    Factory: new () => IParty
 }
 
-export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
+export const ALL_PARTIES: Array<IPartyFactory> = [
   {partyName: PartyName.MARS, Factory: MarsFirst},
   {partyName: PartyName.SCIENTISTS, Factory: Scientists},
   {partyName: PartyName.UNITY, Factory: Unity},
@@ -27,6 +29,14 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
   {partyName: PartyName.REDS, Factory: Reds},
   {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
 ];
+
+const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
+  thisAgenda: {
+    bonusId: 'none',
+    policyId: 'none',
+  },
+  staticAgendas: undefined,
+};
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
@@ -40,6 +50,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public distantGlobalEvent: IGlobalEvent | undefined;
     public comingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
+    public politicalAgendasData: PoliticalAgendasData = UNINITIALIZED_POLITICAL_AGENDAS_DATA;
 
     private constructor(
       rulingPartyName: PartyName,
@@ -50,9 +61,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.globalEventDealer = globalEventDealer;
     }
 
-    public static newInstance(game: Game): Turmoil {
-      const dealer = GlobalEventDealer.newInstance(game);
-      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
+    public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
+        const dealer = GlobalEventDealer.newInstance(game);
+        const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -71,9 +82,30 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve.push('NEUTRAL');
       }
 
+      // Setup party bonuses and policies
+      turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties, turmoil.rulingParty);
+
       // Init the global event dealer
       turmoil.initGlobalEvent(game);
       return turmoil;
+    }
+
+    private getBonus(partyName: PartyName, agendaStyle: AgendaStyle = AgendaStyle.RANDOM) : Bonus {
+      const pf = ALL_PARTIES.find(pf => partyName === pf.partyName);
+      
+      if (pf === undefined) {
+        throw new Error("Undefined party " + partyName);
+      }
+
+      const bonuses = new pf.Factory().bonuses;
+      switch(agendaStyle) {
+        case AgendaStyle.STANDARD:
+          return bonuses[0];
+        case AgendaStyle.RANDOM:
+          return bonuses[Math.floor(Math.random() * bonuses.length)];
+        default:
+          throw new Error("Agenda style not yet suppoorted: " + agendaStyle);
+      }
     }
 
     public initGlobalEvent(game: Game) {
@@ -241,9 +273,17 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // Ruling Party changes
     public setRulingParty(game: Game): void {
-      if (this.rulingParty) {
+      if (this.rulingParty !== undefined) {
+        const rulingParty = this.rulingParty;
+
         // Resolve Ruling Bonus
-        this.rulingParty.rulingBonus(game);
+        const agenda = this.politicalAgendasData.agendas.find(agenda => agenda.partyName === rulingParty.name);
+
+        if (agenda === undefined) {
+          throw new Error("agenda not found for party " + rulingParty.name);
+        } else {
+          agenda.definedBonus.grant(game);
+        }
 
         // Change the chairman
         if (this.chairman) {
@@ -370,6 +410,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         distantGlobalEvent: this.distantGlobalEvent?.name,
         commingGlobalEvent: this.comingGlobalEvent,
         comingGlobalEvent: this.comingGlobalEvent?.name,
+        politicalAgendasData: this.politicalAgendasData,
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;

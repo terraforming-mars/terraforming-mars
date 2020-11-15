@@ -9,9 +9,9 @@ export class Mercury extends Colony {
     public buildType = ColonyBenefitType.COPY_TRADE;
     public tradeType = ColonyBenefitType.GAIN_PRODUCTION;
     public tradeResource = [
-        Resources.HEAT, Resources.HEAT, Resources.HEAT,
-        Resources.STEEL, Resources.STEEL,
-        Resources.TITANIUM, Resources.TITANIUM
+      Resources.HEAT, Resources.HEAT, Resources.HEAT,
+      Resources.STEEL, Resources.STEEL,
+      Resources.TITANIUM, Resources.TITANIUM,
     ];
     public colonyBonusType = ColonyBenefitType.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;

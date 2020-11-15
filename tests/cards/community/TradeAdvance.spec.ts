@@ -9,32 +9,32 @@ import {setCustomGameOptions} from '../../TestingUtils';
 describe('TradeAdvance', function() {
   let card : TradeAdvance; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new TradeAdvance();
-        player = new Player("test", Color.BLUE, false);
-        
-        const gameOptions = setCustomGameOptions({
-            coloniesExtension: true,
-            customColoniesList: [ ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN ]
-        });
-        game = new Game("foobar", [player, player], player, gameOptions);
+  beforeEach(function() {
+    card = new TradeAdvance();
+    player = new Player('test', Color.BLUE, false);
+
+    const gameOptions = setCustomGameOptions({
+      coloniesExtension: true,
+      customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
+    game = new Game('foobar', [player, player], player, gameOptions);
+  });
 
-    it("Should play", function () {
-        card.play(player, game);
+  it('Should play', function() {
+    card.play(player, game);
 
-        game.deferredActions.runAll(() => {});
+    game.deferredActions.runAll(() => {});
 
-        expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
-        expect(player.energy).to.eq(3);
-        expect(player.steel).to.eq(3);
-        expect(player.heat).to.eq(4);
-        game.colonies.forEach((colony) => {
-            if (colony.isActive) {
-                expect(colony.trackPosition).to.eq(0);
-            } else {
-                expect(colony.trackPosition).to.eq(1);
-            }
-        });
+    expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
+    expect(player.energy).to.eq(3);
+    expect(player.steel).to.eq(3);
+    expect(player.heat).to.eq(4);
+    game.colonies.forEach((colony) => {
+      if (colony.isActive) {
+        expect(colony.trackPosition).to.eq(0);
+      } else {
+        expect(colony.trackPosition).to.eq(1);
+      }
     });
+  });
 });

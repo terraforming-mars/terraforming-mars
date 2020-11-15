@@ -14,12 +14,12 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
       game.defer(new DeferredAction(
           player,
           () => {
-            const openColonies = game.colonies.filter(colony => colony.isActive);
+            const openColonies = game.colonies.filter((colony) => colony.isActive);
             openColonies.forEach((colony) => {
               colony.trade(player, game, 1, false);
             });
             return undefined;
-          }
+          },
       ));
 
       if (game.isSoloMode()) {

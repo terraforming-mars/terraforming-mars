@@ -13,6 +13,7 @@ import {playerColorClass} from '../utils/utils';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 
 export interface CreateGameModel {
+    allOfficialExpansions: boolean;
     firstIndex: number;
     playersCount: number;
     players: Array<NewPlayerModel>;
@@ -35,6 +36,7 @@ export interface CreateGameModel {
     showCardsBlackList: boolean;
     isSoloModePage: boolean;
     board: BoardName | 'random';
+    boards: Array<BoardName | 'random'>;
     seed: number;
     solarPhaseOption: boolean;
     shuffleMapOption: boolean;
@@ -63,7 +65,7 @@ export interface NewPlayerModel {
 }
 
 export const CreateGameForm = Vue.component('create-game-form', {
-  data: function() {
+  data: function(): CreateGameModel {
     return {
       firstIndex: 1,
       playersCount: 1,
@@ -117,7 +119,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       cloneGameData: [],
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
-    } as CreateGameModel;
+    };
   },
   components: {
     'corporations-filter': CorporationsFilter,
@@ -246,10 +248,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
       this.promoCardsOption = this.$data.allOfficialExpansions;
       this.solarPhaseOption = this.$data.allOfficialExpansions;
     },
-    selectWGTwhenVenus: function() {
+    toggleVenusNext: function() {
       this.solarPhaseOption = this.$data.venusNext;
-    },
-    deselectVenusCompletion: function() {
       if (this.$data.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
@@ -489,7 +489,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Prelude</span>
                             </label>
 
-                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="selectWGTwhenVenus()" v-on:change="deselectVenusCompletion()">
+                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="toggleVenusNext()">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
                                 <span v-i18n>Venus Next</span>

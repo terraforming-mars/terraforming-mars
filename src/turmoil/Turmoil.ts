@@ -91,20 +91,20 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     private getBonus(partyName: PartyName, agendaStyle: AgendaStyle = AgendaStyle.RANDOM) : Bonus {
-      const pf = ALL_PARTIES.find(pf => partyName === pf.partyName);
-      
+      const pf = ALL_PARTIES.find((pf) => partyName === pf.partyName);
+
       if (pf === undefined) {
-        throw new Error("Undefined party " + partyName);
+        throw new Error('Undefined party ' + partyName);
       }
 
       const bonuses = new pf.Factory().bonuses;
-      switch(agendaStyle) {
+      switch (agendaStyle) {
         case AgendaStyle.STANDARD:
           return bonuses[0];
         case AgendaStyle.RANDOM:
           return bonuses[Math.floor(Math.random() * bonuses.length)];
         default:
-          throw new Error("Agenda style not yet suppoorted: " + agendaStyle);
+          throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
       }
     }
 
@@ -277,10 +277,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         const rulingParty = this.rulingParty;
 
         // Resolve Ruling Bonus
-        const agenda = this.politicalAgendasData.agendas.find(agenda => agenda.partyName === rulingParty.name);
+        const agenda = this.politicalAgendasData.agendas.find((agenda) => agenda.partyName === rulingParty.name);
 
         if (agenda === undefined) {
-          throw new Error("agenda not found for party " + rulingParty.name);
+          throw new Error('agenda not found for party ' + rulingParty.name);
         } else {
           agenda.definedBonus.grant(game);
         }

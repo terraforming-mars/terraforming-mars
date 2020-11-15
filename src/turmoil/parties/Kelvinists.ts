@@ -17,7 +17,7 @@ export class KelvinistsBonus01 implements Bonus {
   description = 'Gain receive 1 MC for each Heat production you have.';
 
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
       player.setResource(Resources.MEGACREDITS, heatProduction);
     });
@@ -27,9 +27,9 @@ export class KelvinistsBonus01 implements Bonus {
 export class KelvinistsBonus02 implements Bonus {
   id = 'kb02';
   description = 'Gain 1 heat for each Heat production you have.';
-  
+
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
       player.setResource(Resources.HEAT, heatProduction);
     });

@@ -1871,7 +1871,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
         (canUseSteel ? this.steel * this.getSteelValue(game) : 0) +
         extraResource +
-          this.megaCredits >= cost;        
+          this.megaCredits >= cost;
       }
 
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +

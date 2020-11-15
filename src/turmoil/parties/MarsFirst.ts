@@ -16,7 +16,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
   description = 'Focused on Martian development and independence.';
-  bonuses = [ new MarsFirstBonus01(), new MarsFirstBonus02() ];
+  bonuses = [new MarsFirstBonus01(), new MarsFirstBonus02()];
 }
 
 export class MarsFirstBonus01 implements Bonus {
@@ -25,7 +25,7 @@ export class MarsFirstBonus01 implements Bonus {
   isDefault = true;
 
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.STEEL, false, false);
       player.setResource(Resources.MEGACREDITS, tagCount);
     });
@@ -37,9 +37,9 @@ export class MarsFirstBonus02 implements Bonus {
   description = 'Gain receive 1 MC for each tile you have on Mars.';
 
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const tileCount = game.board.spaces.filter((space) => {
-        space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY
+        space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
       }).length;
 
       player.setResource(Resources.MEGACREDITS, tileCount);
@@ -87,16 +87,16 @@ export class MarsFirstPolicy04 implements Policy {
 
   action(player: Player, game: Game) {
     game.defer(new SelectHowToPayDeferred(
-      player,
-      4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
-        const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
-        game.log('${0} drew ${1}', b => b.player(player).card(drawnCard));
-      }
+        player,
+        4,
+        false,
+        false,
+        'Select how to pay for action',
+        () => {
+          player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
+          const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
+          game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+        },
     ));
 
     return undefined;

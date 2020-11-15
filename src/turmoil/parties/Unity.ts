@@ -16,9 +16,9 @@ export class UnityBonus01 implements Bonus {
   id = 'ub01';
   description = 'Gain 1 MC for each Venus tag, Earth tag, and Jovian tag you have.';
   isDefault = true;
-  
+
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
       const tagCount = tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
 
@@ -32,7 +32,7 @@ export class UnityBonus02 implements Bonus {
   description = 'Gain 1 MC for each space tag you have, including events.';
 
   grant(game: Game) {
-    game.getPlayers().forEach(player => {
+    game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.SPACE, true, false);
       player.setResource(Resources.MEGACREDITS, tagCount);
     });

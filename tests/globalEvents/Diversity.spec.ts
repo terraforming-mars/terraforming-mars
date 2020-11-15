@@ -16,7 +16,7 @@ describe('Diversity', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
     turmoil.initGlobalEvent(game);
     player2.playedCards.push(new AdvancedEcosystems());
     player2.playedCards.push(new EarlySettlement());

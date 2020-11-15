@@ -15,7 +15,7 @@ describe('ScientificCommunity', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     player.cardsInHand.push(new Ants());
     player2.cardsInHand.push(new SecurityFleet(), new Ants());

@@ -12,7 +12,7 @@ describe('MudSlides', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
     turmoil.initGlobalEvent(game);
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
     game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0].id);

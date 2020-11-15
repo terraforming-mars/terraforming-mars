@@ -16,7 +16,7 @@ describe('SnowCover', function() {
     player2 = new Player('test2', Color.RED, false);
     game = new Game('foobar', [player, player2], player);
 
-    turmoil = new Turmoil(game);
+    turmoil = new Turmoil(game, false);
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;

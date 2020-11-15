@@ -58,6 +58,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     removeNegativeGlobalEventsOption: false,
     customColoniesList: [],
     requiresVenusTrackCompletion: false,
+    politicalAgendasExtension: false,
   };
 
   return Object.assign(defaultOptions, options);

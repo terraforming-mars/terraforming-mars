@@ -13,7 +13,7 @@ describe('AquiferReleasedByPublicCouncil', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2.id;

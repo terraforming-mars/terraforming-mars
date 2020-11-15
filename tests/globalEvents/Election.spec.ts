@@ -14,7 +14,7 @@ describe('Election', function() {
     const player2 = new Player('test2', Color.RED, false);
     const player3 = new Player('test3', Color.GREEN, false);
     const game = new Game('foobar', [player, player2, player3], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());

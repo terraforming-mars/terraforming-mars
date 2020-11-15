@@ -1,11 +1,11 @@
-import { Colony, ShouldIncreaseTrack } from "../../colonies/Colony";
-import { ColonyName } from "../../colonies/ColonyName";
-import { ColonyBenefitType } from "../../colonies/ColonyBenefitType";
-import { Resources } from "../../Resources";
+import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
+import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyBenefitType} from '../../colonies/ColonyBenefitType';
+import {Resources} from '../../Resources';
 
 export class Hygiea extends Colony {
     public name = ColonyName.HYGIEA;
-    public description = "Attack";
+    public description = 'Attack';
     public buildType = ColonyBenefitType.OPPONENT_DISCARD;
     public tradeType = ColonyBenefitType.STEAL_RESOURCES;
     public tradeQuantity = [ 3, 3, 3, 3, 3, 3, 3 ];

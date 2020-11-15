@@ -1,11 +1,11 @@
-import { Colony, ShouldIncreaseTrack } from '../../colonies/Colony';
-import { Resources } from '../../Resources';
-import { ColonyName } from '../../colonies/ColonyName';
-import { ColonyBenefitType } from "../../colonies/ColonyBenefitType";
+import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
+import {Resources} from '../../Resources';
+import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyBenefitType} from '../../colonies/ColonyBenefitType';
 
 export class Titania extends Colony {
     public name = ColonyName.TITANIA;
-    public description = "VP";
+    public description = 'VP';
     public buildType = ColonyBenefitType.GAIN_VP;
     public buildQuantity = [ 5, 3, 2 ];
     public tradeType = ColonyBenefitType.GAIN_VP;

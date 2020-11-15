@@ -1,11 +1,11 @@
-import { Colony, ShouldIncreaseTrack } from "./Colony";
-import { Resources } from "../Resources";
-import { ColonyName } from "./ColonyName";
-import { ColonyBenefitType } from "./ColonyBenefitType";
+import {Colony, ShouldIncreaseTrack} from './Colony';
+import {Resources} from '../Resources';
+import {ColonyName} from './ColonyName';
+import {ColonyBenefitType} from './ColonyBenefitType';
 
 export class Europa extends Colony {
     public name = ColonyName.EUROPA;
-    public description = "Production";
+    public description = 'Production';
     public buildType = ColonyBenefitType.PLACE_OCEAN_TILE;
     public tradeType = ColonyBenefitType.GAIN_PRODUCTION;
     public tradeResource = [

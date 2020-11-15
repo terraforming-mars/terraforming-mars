@@ -6,8 +6,8 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 export class CupolaCity implements IProjectCard {
     public cost = 16;
@@ -25,10 +25,10 @@ export class CupolaCity implements IProjectCard {
           game.board.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.addProduction(Resources.ENERGY,-1);
-            player.addProduction(Resources.MEGACREDITS,3);
+            player.addProduction(Resources.ENERGY, -1);
+            player.addProduction(Resources.MEGACREDITS, 3);
             return undefined;
-          }
+          },
       );
     }
 }

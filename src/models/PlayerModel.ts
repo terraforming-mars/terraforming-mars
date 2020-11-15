@@ -1,18 +1,18 @@
-import { CardModel } from "./CardModel";
-import { ColonyModel } from "./ColonyModel";
-import { Color } from "../Color";
-import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
-import { ITagCount } from "../ITagCount";
-import { TurmoilModel } from "./TurmoilModel";
-import { IProjectCard } from "../cards/IProjectCard";
-import { ClaimedMilestoneModel } from "./ClaimedMilestoneModel";
-import { CorporationCard } from "../cards/corporation/CorporationCard";
-import { FundedAwardModel } from "./FundedAwardModel";
-import { Phase } from "../Phase";
-import { PlayerInputModel } from "./PlayerInputModel";
-import { RandomMAOptionType } from "../RandomMAOptionType";
-import { SpaceModel } from "./SpaceModel";
-import { IAresData } from "../ares/IAresData";
+import {CardModel} from './CardModel';
+import {ColonyModel} from './ColonyModel';
+import {Color} from '../Color';
+import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {ITagCount} from '../ITagCount';
+import {TurmoilModel} from './TurmoilModel';
+import {IProjectCard} from '../cards/IProjectCard';
+import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
+import {CorporationCard} from '../cards/corporation/CorporationCard';
+import {FundedAwardModel} from './FundedAwardModel';
+import {Phase} from '../Phase';
+import {PlayerInputModel} from './PlayerInputModel';
+import {RandomMAOptionType} from '../RandomMAOptionType';
+import {SpaceModel} from './SpaceModel';
+import {IAresData} from '../ares/IAresData';
 
 export interface PlayerModel {
     aresExtension: boolean;

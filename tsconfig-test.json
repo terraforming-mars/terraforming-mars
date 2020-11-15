@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "moduleResolution": "node",
         "lib": ["dom"],
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -10,13 +10,14 @@
         "removeComments": true,
         "resolveJsonModule": true,
         "preserveConstEnums": true,
-        "outDir": "dist",
+        "outDir": "build",
         "skipLibCheck": true,
         "sourceMap": true,
         "target": "es5",
         "types": ["node", "mocha", "chai"]
     },
     "include": [
+        "tests/utils/Vue.ts",
         "tests/**/*.spec.ts"
     ]
 }

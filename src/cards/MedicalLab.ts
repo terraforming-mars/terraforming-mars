@@ -1,10 +1,10 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
 
 export class MedicalLab implements IProjectCard {
     public cost = 13;
@@ -13,10 +13,10 @@ export class MedicalLab implements IProjectCard {
     public name = CardName.MEDICAL_LAB;
 
     public play(player: Player) {
-        player.addProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2));
-        return undefined;
+      player.addProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2));
+      return undefined;
     }
     public getVictoryPoints() {
-        return 1;
+      return 1;
     }
 }

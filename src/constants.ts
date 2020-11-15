@@ -21,11 +21,13 @@ export const PLAYER_DELEGATES_COUNT: number = 7;
 export const REDS_RULING_POLICY_COST: number = 3;
 export const HELLAS_BONUS_OCEAN_COST: number = 6;
 export const MAX_FLEET_SIZE: number = 4;
+export const DEFAULT_STEEL_VALUE: number = 2;
+export const DEFAULT_TITANIUM_VALUE: number = 3;
 
 export const LANGUAGES = [
-    {"id": "en", "title": "English"},
-    {"id": "de", "title": "German"},
-    {"id": "fr", "title": "French"},
-    {"id": "ru", "title": "Russian"},
-    {"id": "cn", "title": "Chinese"}
+  {'id': 'en', 'title': 'English'},
+  {'id': 'de', 'title': 'German'},
+  {'id': 'fr', 'title': 'French'},
+  {'id': 'ru', 'title': 'Russian'},
+  {'id': 'cn', 'title': 'Chinese'},
 ];

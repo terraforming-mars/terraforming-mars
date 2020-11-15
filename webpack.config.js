@@ -1,12 +1,13 @@
 'use strict'
 
+const process = require("process");
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   devtool: "source-map",
-  mode: 'production',
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   entry: [
-    './dist/script.js'
+    './build/script.js'
   ],
   plugins: [new CompressionPlugin()],
   resolve: {

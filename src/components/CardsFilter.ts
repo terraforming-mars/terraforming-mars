@@ -1,8 +1,8 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import { CardName } from "../CardName";
-import { $t } from "../directives/i18n";
-import { ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
+import {CardName} from '../CardName';
+import {$t} from '../directives/i18n';
+import {ALL_PROJECT_CARD_NAMES} from '../cards/AllCards';
 
 const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.sort();
 
@@ -12,47 +12,45 @@ interface CardsFilterModel {
     searchTerm: string;
 }
 
-export const CardsFilter = Vue.component("cards-filter", {
-    props: {},
-    data: function () {
-        return {
-            selectedCardNames: [],
-            foundCardNames: [],
-            searchTerm: ""
-        } as CardsFilterModel
+export const CardsFilter = Vue.component('cards-filter', {
+  props: {},
+  data: function() {
+    return {
+      selectedCardNames: [],
+      foundCardNames: [],
+      searchTerm: '',
+    } as CardsFilterModel;
+  },
+  methods: {
+    removeCard: function(cardNameToRemove: CardName) {
+      this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
     },
-    methods: {
-        removeCard: function (cardNameToRemove: CardName) { 
-            this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
-            
-        },
-        addCard: function (cardNameToAdd: CardName) {
-            if (this.selectedCardNames.includes(cardNameToAdd)) return;
-            this.selectedCardNames.push(cardNameToAdd);
-            this.selectedCardNames = this.selectedCardNames.sort();
-            this.searchTerm = "";
-        },
-        getCardsInputPlaceholder: function() {
-            return $t("Start typing the card name to exclude");
-        }   
+    addCard: function(cardNameToAdd: CardName) {
+      if (this.selectedCardNames.includes(cardNameToAdd)) return;
+      this.selectedCardNames.push(cardNameToAdd);
+      this.selectedCardNames = this.selectedCardNames.sort();
+      this.searchTerm = '';
     },
-    watch: {
-        selectedCardNames: function (value) {
-            this.$emit("cards-list-changed", value);
-        },
-        searchTerm: function (value) {
-            if (value === "") {
-                this.foundCardNames = [];
-                return;
-            }
-            const newCardNames = allItems.filter(
-                (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
-            ).sort();
-            this.foundCardNames = newCardNames.slice(0, 5)
-             
-        } 
+    getCardsInputPlaceholder: function() {
+      return $t('Start typing the card name to exclude');
     },
-    template: `
+  },
+  watch: {
+    selectedCardNames: function(value) {
+      this.$emit('cards-list-changed', value);
+    },
+    searchTerm: function(value) {
+      if (value === '') {
+        this.foundCardNames = [];
+        return;
+      }
+      const newCardNames = allItems.filter(
+          (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+      ).sort();
+      this.foundCardNames = newCardNames.slice(0, 5);
+    },
+  },
+  template: `
     <div class="cards-filter">
         <h2 v-i18n>Cards to exclude from the game</h2>
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
@@ -72,5 +70,5 @@ export const CardsFilter = Vue.component("cards-filter", {
             </div>
         </div>
     </div>
-    `
+    `,
 });

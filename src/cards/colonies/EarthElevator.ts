@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
 
 export class EarthElevator implements IProjectCard {
     public cost = 43;
@@ -12,10 +12,10 @@ export class EarthElevator implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.addProduction(Resources.TITANIUM, 3);  
+      player.addProduction(Resources.TITANIUM, 3);
       return undefined;
     }
     public getVictoryPoints() {
-        return 4;
+      return 4;
     }
 }

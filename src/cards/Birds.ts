@@ -1,13 +1,13 @@
-import { IActionCard, IResourceCard } from "./ICard";
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { ResourceType } from "../ResourceType";
-import { Resources } from "../Resources";
-import { CardName } from "../CardName";
-import { DecreaseAnyProduction } from "../deferredActions/DecreaseAnyProduction";
+import {IActionCard, IResourceCard} from './ICard';
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {ResourceType} from '../ResourceType';
+import {Resources} from '../Resources';
+import {CardName} from '../CardName';
+import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 
 export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public cost = 10;
@@ -18,7 +18,7 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS,2);
+      return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 2);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

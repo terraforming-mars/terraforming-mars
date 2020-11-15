@@ -1,11 +1,11 @@
-import { Colony } from "./Colony";
-import { ColonyName } from "./ColonyName";
-import { ColonyBenefitType } from "./ColonyBenefitType";
-import { ResourceType } from "../ResourceType";
+import {Colony} from './Colony';
+import {ColonyName} from './ColonyName';
+import {ColonyBenefitType} from './ColonyBenefitType';
+import {ResourceType} from '../ResourceType';
 
 export class Enceladus extends Colony {
     public name = ColonyName.ENCELADUS;
-    public description = "Microbes";
+    public description = 'Microbes';
     public isActive = false;
     public resourceType = ResourceType.MICROBE;
     public buildType = ColonyBenefitType.ADD_RESOURCES_TO_CARD;

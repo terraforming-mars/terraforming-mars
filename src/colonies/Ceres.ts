@@ -1,11 +1,11 @@
-import { Colony } from './Colony';
-import { ColonyName } from './ColonyName';
-import { ColonyBenefitType } from './ColonyBenefitType';
-import { Resources } from '../Resources';
+import {Colony} from './Colony';
+import {ColonyName} from './ColonyName';
+import {ColonyBenefitType} from './ColonyBenefitType';
+import {Resources} from '../Resources';
 
 export class Ceres extends Colony {
     public name = ColonyName.CERES;
-    public description = "Steel";
+    public description = 'Steel';
     public buildType = ColonyBenefitType.GAIN_PRODUCTION;
     public buildResource = Resources.STEEL;
     public tradeType = ColonyBenefitType.GAIN_RESOURCES;

@@ -1,35 +1,32 @@
 
-import { setup } from "../utils/Vue";
+import {createLocalVue, mount} from '@vue/test-utils';
 
-setup();
+import {expect} from 'chai';
+import {TagCount} from '../../src/components/TagCount';
 
-import { expect } from "chai";
-import { TagCount } from "../../src/components/TagCount";
-
-describe("TagCount", function () {
-    it("getClasses", function () {
-        expect((TagCount as any).methods.getClasses.call({
-            count: 0
-        })).to.eq("tag-display tag-no-show");
-        expect((TagCount as any).methods.getClasses.call({
-            count: 1
-        })).to.eq("tag-display");
+describe('TagCount', function() {
+  function getLocalVue() {
+    const localVue = createLocalVue();
+    return localVue;
+  }
+  it('renders with no count', function() {
+    const tagCount = mount(TagCount, {
+      localVue: getLocalVue(),
+      propsData: {
+        count: 0,
+      },
     });
-    it("getCountClasses", function () {
-        expect((TagCount as any).methods.getCountClasses.call({
-            count: 0
-        })).to.eq("tag-count-display tag-count-no-show");
-        expect((TagCount as any).methods.getCountClasses.call({
-            count: 1
-        })).to.eq("tag-count-display");
+    expect(tagCount.find('div[class="tag-display tag-no-show"]').exists()).is.true;
+    expect(tagCount.find('span[class="tag-count-display tag-count-no-show"]').exists()).is.true;
+  });
+  it('renders with count', function() {
+    const tagCount = mount(TagCount, {
+      localVue: getLocalVue(),
+      propsData: {
+        count: 2,
+      },
     });
-    it("getCount", function () {
-        expect((TagCount as any).methods.getCount.call({
-            count: 1,
-            hideCount: true
-        })).to.eq("?");
-        expect((TagCount as any).methods.getCount.call({
-            count: 1
-        })).to.eq(1);
-    });
+    expect(tagCount.find('div[class="tag-display"]').exists()).is.true;
+    expect(tagCount.find('span[class="tag-count-display"]').exists()).is.true;
+  });
 });

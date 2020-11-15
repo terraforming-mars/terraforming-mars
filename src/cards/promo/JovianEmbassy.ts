@@ -3,10 +3,10 @@ import {Tags} from './../Tags';
 import {CardType} from './../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import { CardName } from '../../CardName';
-import { PartyHooks } from '../../turmoil/parties/PartyHooks';
-import { PartyName } from '../../turmoil/parties/PartyName';
-import { REDS_RULING_POLICY_COST } from '../../constants';
+import {CardName} from '../../CardName';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class JovianEmbassy implements IProjectCard {
     public cost = 14;
@@ -27,7 +27,7 @@ export class JovianEmbassy implements IProjectCard {
       player.increaseTerraformRating(game);
       return undefined;
     }
-    
+
     public getVictoryPoints() {
       return 1;
     }

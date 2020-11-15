@@ -1,32 +1,57 @@
 
-import Vue from "vue";
-import { SelectPlayerRow } from "./SelectPlayerRow";
-import { Button } from "../components/common/Button";
+import Vue from 'vue';
+import {Button} from './common/Button';
+import {ColorWithNeutral} from '../Color';
+import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PlayerModel} from '../models/PlayerModel';
+import {SelectPlayerRow} from './SelectPlayerRow';
+import {VueModelRadio} from './VueTypes';
 
-export const SelectPlayer = Vue.component("select-player", {
-    props: ["players", "playerinput", "onsave", "showsave", "showtitle"],
-    data: function () {
-        return {
-            selectedPlayer: undefined
-        };
+export const SelectPlayer = Vue.component('select-player', {
+  props: {
+    players: {
+      type: Array as () => Array<PlayerModel>,
     },
-    components: {
-        "select-player-row": SelectPlayerRow,
-        "Button": Button
+    playerinput: {
+      type: Object as () => PlayerInputModel,
     },
-    methods: {
-        saveData: function () {
-            this.onsave([[this.$data.selectedPlayer]]);
-        }
+    onsave: {
+      type: Function as unknown as () => (out: Array<Array<string>>) => void,
     },
-    template: `<div>
+    showsave: {
+      type: Boolean,
+    },
+    showtitle: {
+      type: Boolean,
+    },
+  },
+  data: function() {
+    return {
+      selectedPlayer: undefined as VueModelRadio<ColorWithNeutral>,
+    };
+  },
+  components: {
+    'select-player-row': SelectPlayerRow,
+    Button,
+  },
+  methods: {
+    saveData: function() {
+      const result: string[][] = [];
+      result.push([]);
+      if (this.selectedPlayer !== undefined) {
+        result[0].push(this.selectedPlayer);
+      }
+      this.onsave(result);
+    },
+  },
+  template: `<div>
   <div v-if="showtitle === true">{{playerinput.title}}</div>
-  <label v-for="player in playerinput.players" :key="player" class="form-radio form-inline">
+  <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
     <input type="radio" v-model="selectedPlayer" :value="player" />
     <i class="form-icon"></i>
-    <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
+    <select-player-row :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
   </label>
   <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
-</div>`
+</div>`,
 });
 

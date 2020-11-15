@@ -1,9 +1,9 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
 
 export class LunarMining implements IProjectCard {
     public cost = 11;
@@ -12,7 +12,7 @@ export class LunarMining implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));  
+      player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));
       return undefined;
     }
 }

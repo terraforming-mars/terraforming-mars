@@ -1,5 +1,5 @@
-import { CardType } from "../cards/CardType";
-import { ResourceType } from "../ResourceType";
+import {CardType} from '../cards/CardType';
+import {ResourceType} from '../ResourceType';
 
 export interface CardModel {
     name: string;

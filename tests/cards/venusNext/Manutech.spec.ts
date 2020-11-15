@@ -1,30 +1,31 @@
-import { expect } from "chai";
-import { Manutech } from "../../../src/cards/venusNext/Manutech";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
-import { Game } from "../../../src/Game";
+import {expect} from 'chai';
+import {Manutech} from '../../../src/cards/venusNext/Manutech';
+import {Color} from '../../../src/Color';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {Game} from '../../../src/Game';
 
-describe("Manutech", function () {
-    let card : Manutech, player : Player, game : Game;
+describe('Manutech', function() {
+  let card : Manutech; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new Manutech();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
-        player.corporationCard = card;
-    });
+  beforeEach(function() {
+    card = new Manutech();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player);
+    player.corporationCard = card;
+  });
 
-    it("Should play", function () {
-        card.play(player);
-        expect(player.getProduction(Resources.STEEL)).to.eq(1);
-        expect(player.steel).to.eq(1);
-    });
+  it('Should play', function() {
+    card.play(player);
+    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.steel).to.eq(1);
+  });
 
-    it("Should add energy resources by Power Plant standard project", function () {
-        const action = (player as any).buildPowerPlant(game);
-        expect(action).is.not.undefined;
-        action.cb();
+  it('Should add energy resources by Power Plant standard project', function() {
+    const action = (player as any).buildPowerPlant(game);
+    expect(action).is.not.undefined;
+    action.cb();
+        game.deferredActions.shift()!.execute();
         expect(player.getResource(Resources.ENERGY)).to.eq(1);
-    });
+  });
 });

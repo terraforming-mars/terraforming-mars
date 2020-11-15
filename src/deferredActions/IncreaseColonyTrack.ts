@@ -1,13 +1,13 @@
-import { Game } from "../Game";
-import { Player } from "../Player";
-import { Colony } from '../colonies/Colony';
-import { OrOptions } from "../inputs/OrOptions";
-import { SelectOption } from "../inputs/SelectOption";
-import { DeferredAction } from "./DeferredAction";
-import { LogHelper } from "../components/LogHelper";
+import {Game} from '../Game';
+import {Player} from '../Player';
+import {Colony} from '../colonies/Colony';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {DeferredAction} from './DeferredAction';
+import {LogHelper} from '../components/LogHelper';
 
 export class IncreaseColonyTrack implements DeferredAction {
-    constructor(
+  constructor(
         public player: Player,
         public game: Game,
         public colony: Colony,

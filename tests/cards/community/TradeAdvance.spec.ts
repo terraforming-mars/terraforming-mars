@@ -1,13 +1,13 @@
-import { expect } from "chai";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { TradeAdvance } from "../../../src/cards/community/TradeAdvance";
-import { Game, GameOptions } from "../../../src/Game";
-import { ColonyName } from "../../../src/colonies/ColonyName";
-import { setCustomGameOptions } from "../../TestingUtils";
+import {expect} from 'chai';
+import {Color} from '../../../src/Color';
+import {Player} from '../../../src/Player';
+import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
+import {Game} from '../../../src/Game';
+import {ColonyName} from '../../../src/colonies/ColonyName';
+import {setCustomGameOptions} from '../../TestingUtils';
 
-describe("TradeAdvance", function () {
-    let card : TradeAdvance, player : Player, game : Game;
+describe('TradeAdvance', function() {
+  let card : TradeAdvance; let player : Player; let game : Game;
 
     beforeEach(function() {
         card = new TradeAdvance();
@@ -16,7 +16,7 @@ describe("TradeAdvance", function () {
         const gameOptions = setCustomGameOptions({
             coloniesExtension: true,
             customColoniesList: [ ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN ]
-        }) as GameOptions;
+        });
         game = new Game("foobar", [player, player], player, gameOptions);
     });
 

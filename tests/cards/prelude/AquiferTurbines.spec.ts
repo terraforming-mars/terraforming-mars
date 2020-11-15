@@ -1,35 +1,35 @@
-import { expect } from "chai";
-import { AquiferTurbines } from "../../../src/cards/prelude/AquiferTurbines";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+import {expect} from 'chai';
+import {AquiferTurbines} from '../../../src/cards/prelude/AquiferTurbines';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 
-describe("AquiferTurbines", function () {
-    let card : AquiferTurbines, player : Player, game : Game;
+describe('AquiferTurbines', function() {
+  let card : AquiferTurbines; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new AquiferTurbines();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player], player);
-    });
+  beforeEach(function() {
+    card = new AquiferTurbines();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player], player);
+  });
 
-    it("Can play", function () {
-        player.megaCredits = 3;
-        expect(card.canPlay(player, game)).is.true;
-    });
-    
-    it("Should play", function () {
-        player.megaCredits = 3;
-        card.play(player, game);
+  it('Can play', function() {
+    player.megaCredits = 3;
+    expect(card.canPlay(player, game)).is.true;
+  });
 
-        // PlaceOceanTile
-        game.deferredActions.shift();
+  it('Should play', function() {
+    player.megaCredits = 3;
+    card.play(player, game);
 
-        // SelectHowToPayDeferred
-        game.deferredActions.runNext();
+    // PlaceOceanTile
+    game.deferredActions.shift();
 
-        expect(player.getProduction(Resources.ENERGY)).to.eq(2);
-        expect(player.megaCredits).to.eq(0);
-    });
+    // SelectHowToPayDeferred
+    game.deferredActions.runNext();
+
+    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.megaCredits).to.eq(0);
+  });
 });

@@ -1,85 +1,87 @@
-import Vue from "vue";
-import { Colony } from "../colonies/Colony";
-import { Callisto } from "../colonies/Callisto";
-import { Ceres } from "../colonies/Ceres";
-import { Europa } from "../colonies/Europa";
-import { Ganymede } from "../colonies/Ganymede";
-import { Io } from "../colonies/Io";
-import { Luna } from "../colonies/Luna";
-import { Miranda } from "../colonies/Miranda";
-import { Pluto } from "../colonies/Pluto";
-import { Titan } from "../colonies/Titan";
-import { Triton } from "../colonies/Triton";
-import { Enceladus } from "../colonies/Enceladus";
-import { ColonyName } from "../colonies/ColonyName";
-import { Iapetus } from "../cards/community/Iapetus";
-import { Mercury } from "../cards/community/Mercury";
-import { Hygiea } from "../cards/community/Hygiea";
-import { Titania } from "../cards/community/Titania";
-import { Venus } from "../cards/community/Venus";
-import { Leavitt } from "../cards/community/Leavitt";
+import Vue from 'vue';
+import {Callisto} from '../colonies/Callisto';
+import {Ceres} from '../colonies/Ceres';
+import {Colony} from '../colonies/Colony';
+import {Europa} from '../colonies/Europa';
+import {Ganymede} from '../colonies/Ganymede';
+import {Io} from '../colonies/Io';
+import {Luna} from '../colonies/Luna';
+import {Miranda} from '../colonies/Miranda';
+import {Pluto} from '../colonies/Pluto';
+import {Titan} from '../colonies/Titan';
+import {Triton} from '../colonies/Triton';
+import {Enceladus} from '../colonies/Enceladus';
+import {ColonyName} from '../colonies/ColonyName';
+import {Iapetus} from '../cards/community/Iapetus';
+import {Mercury} from '../cards/community/Mercury';
+import {Hygiea} from '../cards/community/Hygiea';
+import {Titania} from '../cards/community/Titania';
+import {Venus} from '../cards/community/Venus';
+import {Leavitt} from '../cards/community/Leavitt';
 
 const officialColonies: Array<Colony> = [
-    new Callisto(),
-    new Ceres(),
-    new Enceladus(),
-    new Europa(),
-    new Ganymede(),
-    new Io(),
-    new Luna(),
-    new Miranda(),
-    new Pluto(),
-    new Titan(),
-    new Triton(),
+  new Callisto(),
+  new Ceres(),
+  new Enceladus(),
+  new Europa(),
+  new Ganymede(),
+  new Io(),
+  new Luna(),
+  new Miranda(),
+  new Pluto(),
+  new Titan(),
+  new Triton(),
 ];
 
 const communityColonies: Array<Colony> = [
-    new Iapetus(),
-    new Mercury(),
-    new Hygiea(),
-    new Titania(),
-    new Venus(),
-    new Leavitt()
+  new Iapetus(),
+  new Mercury(),
+  new Hygiea(),
+  new Titania(),
+  new Venus(),
+  new Leavitt(),
 ];
 
-export const ColoniesFilter = Vue.component("colonies-filter", {
-    props: {
-        communityCardsOption: {
-            type: Boolean
-        }
+export const ColoniesFilter = Vue.component('colonies-filter', {
+  props: {
+    communityCardsOption: {
+      type: Boolean,
     },
-    data: function () {
-        return {
-            allColonies: officialColonies.concat(communityColonies),
-            officialColonies: officialColonies,
-            communityColonies: communityColonies,
-            selectedColonies: [
-                ...officialColonies,
-                ...this.communityCardsOption ? communityColonies: []
-            ] as Array<Colony> | boolean
+  },
+  data: function() {
+    return {
+      allColonies: officialColonies.concat(communityColonies),
+      officialColonies: officialColonies,
+      communityColonies: communityColonies,
+      selectedColonies: [
+        ...officialColonies,
+        ...this.communityCardsOption ? communityColonies: [],
+      ] as Array<Colony> | boolean,
+    };
+  },
+  methods: {
+    updateColoniesByNames(colonyNames: Array<ColonyName>) {
+      this.selectedColonies = [];
+      for (const colony of this.allColonies) {
+        if (colonyNames.includes(colony.name)) {
+          this.selectedColonies.push(colony);
         }
+      }
     },
-    methods: {
-        updateColoniesByNames(colonyNames: Array<ColonyName>) {
-            this.selectedColonies = [];
-            for (const colony of this.allColonies) {
-                if (colonyNames.includes(colony.name)) {
-                    this.selectedColonies.push(colony)
-                }
-            }
-        }
+  },
+  watch: {
+    selectedColonies: function(value) {
+      const colonyNames: Array<ColonyName> = [];
+      value.forEach(function(el: any) {
+        colonyNames.push(el.name);
+      } );
+      this.$emit('colonies-list-changed', colonyNames);
     },
-    watch: {
-        selectedColonies: function (value) {
-            let colonyNames: Array<ColonyName> = [];
-            value.forEach(function (el: any) { colonyNames.push(el.name)} );
-            this.$emit("colonies-list-changed", colonyNames);
-        },
-        communityCardsOption: function (enabled) {
-            this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
-        }
+    communityCardsOption: function(enabled) {
+      this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
     },
-    template: `
+  },
+  template: `
     <div class="colonies-filter">
         <div>
             <h2 v-i18n>Colonies</h2>
@@ -99,5 +101,5 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
             </label> 
         </div>
     </div>
-    `
-})
+    `,
+});

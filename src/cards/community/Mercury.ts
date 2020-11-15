@@ -1,11 +1,11 @@
-import { Colony, ShouldIncreaseTrack } from "../../colonies/Colony";
-import { ColonyName } from "../../colonies/ColonyName";
-import { ColonyBenefitType } from "../../colonies/ColonyBenefitType";
-import { Resources } from "../../Resources";
+import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
+import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyBenefitType} from '../../colonies/ColonyBenefitType';
+import {Resources} from '../../Resources';
 
 export class Mercury extends Colony {
     public name = ColonyName.MERCURY;
-    public description = "Production";
+    public description = 'Production';
     public buildType = ColonyBenefitType.COPY_TRADE;
     public tradeType = ColonyBenefitType.GAIN_PRODUCTION;
     public tradeResource = [

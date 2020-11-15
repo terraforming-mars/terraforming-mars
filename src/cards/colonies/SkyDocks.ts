@@ -1,8 +1,8 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
 
 export class SkyDocks implements IProjectCard {
     public cost = 18;
@@ -11,19 +11,23 @@ export class SkyDocks implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.EARTH) >= 2;
+      return player.getTagCount(Tags.EARTH) >= 2;
     }
 
     public play(player: Player) {
-        player.increaseFleetSize();
-        return undefined;
+      player.increaseFleetSize();
+      return undefined;
     }
 
     public getCardDiscount() {
-        return 1;
+      return 1;
     }
 
     public getVictoryPoints() {
-        return 2;
+      return 2;
+    }
+
+    public onDiscard(player: Player): void {
+      player.decreaseFleetSize();
     }
 }

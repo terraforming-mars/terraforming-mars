@@ -1,3 +1,6 @@
-printWidth: 100
-tabWidth: 4
-quoteProps: "preserve"
+tabWidth: 2
+quoteProps: 'preserve'
+bracketSpacing: false
+singleQuote: true
+trailingComma: 'es5'
+printWidth: 1000

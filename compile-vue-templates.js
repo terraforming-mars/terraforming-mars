@@ -45,6 +45,16 @@ checkComponent(
     []
 );
 checkComponent(
+    "src/components/card/CardCost",
+    require("./build/src/components/card/CardCost").CardCost,
+    []
+);
+checkComponent(
+    "src/components/card/CardProductionBoxComponent",
+    require("./build/src/components/card/CardProductionBoxComponent").CardProductionBoxComponent,
+    []
+);
+checkComponent(
     "src/components/CardsFilter",
     require("./build/src/components/CardsFilter").CardsFilter,
     ["selectedCardNames", "foundCardNames", "searchTerm"]
@@ -245,7 +255,9 @@ function checkComponent(name, component, dataProperties) {
         throw new Error(`no template for component ${name}`);
     }
 
-    let result = compiler.compile(template);
+    let result = compiler.compile(template, {
+        warn: true
+    });
 
     if (result.errors.length > 0) {
         throw new Error(`errors found while parsing template for ${name}`, result.errors);

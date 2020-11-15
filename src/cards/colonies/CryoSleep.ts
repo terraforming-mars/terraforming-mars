@@ -18,4 +18,8 @@ export class CryoSleep implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+
+    public onDiscard(player: Player): void {
+      player.colonyTradeDiscount--;
+    }
 }

@@ -458,6 +458,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         cardsBlackList: gameReq.cardsBlackList,
         customColoniesList: gameReq.customColoniesList,
+        requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
       };
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);
@@ -578,7 +579,7 @@ function getPlayer(player: Player, game: Game): string {
     spaces: getSpaces(game.board.spaces),
     steel: player.steel,
     steelProduction: player.getProduction(Resources.STEEL),
-    steelValue: player.steelValue,
+    steelValue: player.getSteelValue(),
     temperature: game.getTemperature(),
     terraformRating: player.getTerraformRating(),
     titanium: player.titanium,
@@ -597,7 +598,7 @@ function getPlayer(player: Player, game: Game): string {
     tags: player.getAllTags(),
     showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-    fleetSize: player.fleetSize,
+    fleetSize: player.getFleetSize(),
     tradesThisTurn: player.tradesThisTurn,
     turmoil: turmoil,
     selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
@@ -794,7 +795,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.steelValue,
+      steelValue: player.getSteelValue(),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -810,7 +811,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       actionsThisGeneration: Array.from(
           player.getActionsThisGeneration(),
       ),
-      fleetSize: player.fleetSize,
+      fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(

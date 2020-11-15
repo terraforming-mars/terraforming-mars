@@ -16,7 +16,7 @@ export const LogPanel = Vue.component('log-panel', {
       type: String,
     },
     players: {
-      type: Object as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerModel>,
     },
   },
   data: function() {
@@ -51,9 +51,8 @@ export const LogPanel = Vue.component('log-panel', {
 
       if (className === undefined) {
         return suffixFreeCardName;
-      } else {
-        return '<log-card class="'+ className + '">' + suffixFreeCardName + '</log-card>';
       }
+      return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
     },
     parseData: function(data: LogMessageData) {
       const translatableMessageDataTypes = [
@@ -68,13 +67,13 @@ export const LogPanel = Vue.component('log-panel', {
         if (data.type === LogMessageDataType.PLAYER) {
           for (const player of this.players) {
             if (data.value === player.color || data.value === player.id) {
-              return '<log-player class="player_bg_color_'+player.color+'">'+player.name+'</log-player>';
+              return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
             }
           }
         } else if (data.type === LogMessageDataType.CARD) {
           for (const player of this.players) {
             if (player.corporationCard !== undefined && data.value === player.corporationCard.name) {
-              return '<log-card class="background-color-corporation">' + $t(data.value) + '</log-card>';
+              return '<span class="log-card background-color-corporation">' + $t(data.value) + '</span>';
             } else {
               const cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
               for (const card of cards) {

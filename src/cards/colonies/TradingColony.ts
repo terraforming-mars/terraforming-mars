@@ -21,4 +21,8 @@ export class TradingColony implements IProjectCard {
       player.colonyTradeOffset++;
       return undefined;
     }
+
+    public onDiscard(player: Player): void {
+      player.colonyTradeOffset--;
+    }
 }

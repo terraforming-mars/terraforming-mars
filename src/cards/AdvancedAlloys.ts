@@ -12,7 +12,12 @@ export class AdvancedAlloys implements IProjectCard {
 
     public play(player: Player) {
       player.increaseTitaniumValue();
-      player.steelValue++;
+      player.increaseSteelValue();
       return undefined;
+    }
+
+    public onDiscard(player: Player): void {
+      player.decreaseTitaniumValue();
+      player.decreaseSteelValue();
     }
 }

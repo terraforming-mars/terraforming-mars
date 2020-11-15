@@ -6,11 +6,7 @@ import {Resources} from '../Resources';
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(
-        private _type: RequirementType,
-        protected _amount: number,
-        private _isMax: boolean = false,
-  ) {}
+  constructor(private _type: RequirementType, protected _amount: number, private _isMax: boolean = false) {}
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -23,15 +19,7 @@ export class CardRequirement {
   }
 
   protected parseType(): string {
-    const withPlural: Array<string> = [
-      RequirementType.OCEANS,
-      RequirementType.FLOATERS,
-      RequirementType.FORESTS,
-      RequirementType.CITIES,
-      RequirementType.COLONIES,
-      RequirementType.RESOURCE_TYPES,
-      RequirementType.PARTY_LEADERS,
-    ];
+    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.FORESTS, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
 
     if (this._amount > 1 && withPlural.includes(this._type)) {
       return this.getTypePlural();

@@ -4,7 +4,7 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {CardType} from '../../../src/cards/CardType';
-import {EarthOffice} from '../../../src/cards/EarthOffice';
+import {AdvancedAlloys} from '../../../src/cards/AdvancedAlloys';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {SmallAnimals} from '../../../src/cards/SmallAnimals';
@@ -13,13 +13,13 @@ import {ICard} from '../../../src/cards/ICard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('ProjectWorkshop', function() {
-  let card : ProjectWorkshop; let player : Player; let game : Game; let earthOffice : EarthOffice;
+  let card : ProjectWorkshop; let player : Player; let game : Game; let advancedAlloys : AdvancedAlloys;
 
   beforeEach(function() {
     card = new ProjectWorkshop();
     player = new Player('test', Color.BLUE, false);
     game = new Game('foobar', [player, player], player);
-    earthOffice = new EarthOffice();
+    advancedAlloys = new AdvancedAlloys();
 
     card.play(player);
     player.corporationCard = card;
@@ -48,14 +48,20 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 
-  it('Can flip a played blue card', function() {
-    player.playedCards.push(earthOffice);
+  it('Can flip a played blue card and remove its ongoing effects', function() {
+    player.playedCards.push(advancedAlloys);
+    advancedAlloys.play(player);
     player.megaCredits = 0;
+
+    expect(player.getSteelValue()).to.eq(3);
+    expect(player.getTitaniumValue(game)).to.eq(4);
 
     card.action(player, game).cb();
     expect(player.playedCards).has.lengthOf(0);
-    expect(game.dealer.discarded.includes(earthOffice)).is.true;
+    expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
+    expect(player.getSteelValue()).to.eq(2);
+    expect(player.getTitaniumValue(game)).to.eq(3);
   });
 
   it('Converts VP to TR correctly', function() {
@@ -83,7 +89,7 @@ describe('ProjectWorkshop', function() {
   });
 
   it('Can select option if able to do both actions', function() {
-    player.playedCards.push(earthOffice);
+    player.playedCards.push(advancedAlloys);
     player.megaCredits = 3;
     const result = card.action(player, game);
     expect(result instanceof OrOptions).is.true;

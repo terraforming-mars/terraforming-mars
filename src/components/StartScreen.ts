@@ -6,7 +6,7 @@ import * as raw_settings from '../../assets/settings.json';
 export const StartScreen = Vue.component('start-screen', {
   props: {
     version: {
-      type: Object as () => typeof raw_settings.version,
+      type: String as () => typeof raw_settings.version,
     },
   },
   components: {

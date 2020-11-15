@@ -40,6 +40,7 @@ export interface ICard {
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
     onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
+    onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;
     cost?: number;

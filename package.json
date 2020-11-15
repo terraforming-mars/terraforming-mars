@@ -43,15 +43,16 @@
     "clean": "rm -r ./build/ ./styles.css || true",
     "compile": "tsc",
     "prep": "node make_static_json.js && lessc src/styles/common.less styles.css",
-    "build": "npm run prep && npm run compile && npm run lint && npm run templates && webpack --config webpack.config.js",
+    "build": "npm run prep && npm run compile && npm run lint && npm run templates && npm run webpack",
     "start": "node build/server.js",
     "lint": "eslint src server.ts script.ts tests --ext ts",
     "pretest": "tsc --build tsconfig-test.json",
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
     "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
-    "testgiven": "tsc --build tsconfig.json && webpack --config webpack.config.js && tsc --build tsconfig-test.json && mocha",
+    "testgiven": "tsc --build tsconfig.json && npm run webpack && tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",
-    "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests"
+    "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests",
+    "webpack": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",

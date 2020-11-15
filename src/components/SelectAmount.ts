@@ -11,7 +11,7 @@ export const SelectAmount = Vue.component('select-amount', {
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Object as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: Array<Array<string>>) => void,
     },
     showsave: {
       type: Boolean,

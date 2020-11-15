@@ -4,7 +4,7 @@ import {SpaceBonus} from '../SpaceBonus';
 export const Bonus = Vue.component('bonus', {
   props: {
     bonus: {
-      type: Object as () => Array<SpaceBonus>,
+      type: Array as () => Array<SpaceBonus>,
     },
   },
   data: function() {

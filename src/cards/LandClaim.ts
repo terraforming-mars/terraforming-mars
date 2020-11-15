@@ -1,4 +1,3 @@
-
 import {CardType} from './CardType';
 import {IProjectCard} from './IProjectCard';
 import {Player} from '../Player';
@@ -14,13 +13,13 @@ export class LandClaim implements IProjectCard {
     public name = CardName.LAND_CLAIM;
     public cardType = CardType.EVENT;
     public hasRequirements = false;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.board.getAvailableSpacesOnLand(player).length > 0;
+    public canPlay(_player: Player, game: Game): boolean {
+      return game.board.getNonReservedLandSpaces().length > 0;
     }
     public play(player: Player, game: Game) {
       return new SelectSpace(
           'Select space for claim',
-          game.board.getAvailableSpacesOnLand(player),
+          game.board.getNonReservedLandSpaces(),
           (foundSpace: ISpace) => {
             foundSpace.player = player;
             LogHelper.logBoardTileAction(game, player, foundSpace, 'land claim');

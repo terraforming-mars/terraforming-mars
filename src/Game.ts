@@ -585,26 +585,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return globalParametersMaxed;
     }
 
-    /*
-    private marsIsTerraformed(): boolean {
-      if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
-        return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
-                this.temperature >= constants.MAX_TEMPERATURE &&
-                this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
-                this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
-      }
-      if (this.gameOptions.venusNextExtension && this.gameOptions.requiresVenusTrackCompletion) {
-        return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
-               this.temperature >= constants.MAX_TEMPERATURE &&
-               this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
-               this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
-      }
-      return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
-             this.temperature >= constants.MAX_TEMPERATURE &&
-             this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
-    }
-    */
-
     public isSoloModeWin(): boolean {
       // Solo TR
       if (this.gameOptions.soloTR) {

@@ -1,51 +1,35 @@
+/*
+  Used to describe any distinct symbol on a card and prepare it for rendering in Vue
+  e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
+ */
 import {CardRenderSymbolType} from './CardRenderSymbolType';
 import {CardRenderItemSize} from './CardRenderItemSize';
 
 export class CardRenderSymbol {
-  private constructor(private type: CardRenderSymbolType, private isIcon: boolean = false, private size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {}
-  public getType(): CardRenderSymbolType {
-    return this.type;
+  private constructor(public type: CardRenderSymbolType, public size: CardRenderItemSize, public isIcon: boolean = false) {}
+
+  public static asterix(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.ASTERIX, size);
   }
-  public getIsIcon(): boolean {
-    return this.isIcon;
+  public static or(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.OR, size);
   }
-  public getSize(): CardRenderItemSize {
-    return this.size;
+  public static plus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.PLUS, size, true);
   }
-  public static asterix(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.ASTERIX);
+  public static minus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.MINUS, size, true);
   }
-  public static or(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.OR);
+  public static empty(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.EMPTY, size);
   }
-  public static plus(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.PLUS, true);
+  public static slash(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.SLASH, size);
   }
-  public static minus(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.MINUS, true);
+  public static colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.COLON, size);
   }
-  public static empty(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.EMPTY);
-  }
-  public static slash(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.SLASH);
-  }
-  public static colon(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.COLON);
-  }
-  public static arrow(): CardRenderSymbol {
-    return new CardRenderSymbol(CardRenderSymbolType.ARROW, true);
-  }
-  public small(): CardRenderSymbol {
-    this.size = CardRenderItemSize.SMALL;
-    return this;
-  }
-  public medium(): CardRenderSymbol {
-    this.size = CardRenderItemSize.MEDIUM;
-    return this;
-  }
-  public large(): CardRenderSymbol {
-    this.size = CardRenderItemSize.LARGE;
-    return this;
+  public static arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.ARROW, size, true);
   }
 }

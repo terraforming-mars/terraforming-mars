@@ -12,8 +12,8 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
   },
   methods: {
     getClasses: function(): string {
-      const type: CardRenderSymbolType = this.item.getType();
-      const size: CardRenderItemSize = this.item.getSize();
+      const type: CardRenderSymbolType = this.item.type;
+      const size: CardRenderItemSize = this.item.size;
       const classes: Array<string> = ['card-special'];
       if (type === CardRenderSymbolType.ASTERIX) {
         classes.push('card-asterix');
@@ -38,10 +38,10 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
       return classes.join(' ');
     },
     getContent: function(): string {
-      if (this.item.getIsIcon()) {
+      if (this.item.isIcon) {
         return '';
       } else {
-        return this.item.getType();
+        return this.item.type;
       }
     },
   },

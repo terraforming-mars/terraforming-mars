@@ -1,7 +1,9 @@
 import {CardRenderItem} from './CardRenderItem';
+import {CardRenderSymbol} from './CardRenderSymbol';
+import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
 
-type ItemType = CardRenderItem | CardRenderProductionBox | undefined;
+type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | undefined;
 
 export class CardRenderer {
   constructor(protected _rows: Array<Array<ItemType>> = [[]]) {}
@@ -18,7 +20,7 @@ export class CardRenderer {
 }
 
 export class CardRenderProductionBox extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderItem>>) {
+  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol>>) {
     super(rows);
   }
   public static builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
@@ -72,6 +74,11 @@ class Builder {
     return this;
   }
 
+  public microbes(amount: number): Builder {
+    this.addRowItem(new CardRenderItem(CardRenderItemType.MICROBES, amount));
+    return this;
+  }
+
   public productionBox(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this.addRowItem(CardRenderProductionBox.builder(pb));
     return this;
@@ -92,19 +99,57 @@ class Builder {
     return this;
   }
 
-  public br(): Builder {
+  public megacredits(amount: number): Builder {
+    const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount);
+    item.amountInside = true;
+    this.addRowItem(item);
+    return this;
+  }
+
+  public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);
     return this;
   }
 
-  public any(): Builder {
-    // #TODO (chosta): functions to validate data
+  protected _checkExistingItem(): void {
     if (this._data.length === 0) {
-      throw new Error('No items in builder data to call any()');
+      throw new Error('No items in builder data!');
     }
+  }
 
-    // #TODO (chosta): this could be possibly improved
+  protected _addSymbol(Symbol: CardRenderSymbol): void {
+    const row = this.getCurrentRow();
+    if (row !== undefined) {
+      row.push(Symbol);
+      this._data.push(row);
+    }
+  }
+
+  public or(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.asterix(size));
+
+    return this;
+  }
+
+  public asterix(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.asterix(size));
+
+    return this;
+  }
+
+  public plus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.plus(size));
+
+    return this;
+  }
+
+  public get any(): Builder {
+    this._checkExistingItem();
+
     const row = this.getCurrentRow();
     if (row !== undefined) {
       const item = row?.pop();
@@ -115,8 +160,8 @@ class Builder {
       if (item === undefined) {
         throw new Error('Called any() without a CardRenderItem.');
       }
-
-      row?.push(item.any());
+      item.anyPlayer = true;
+      row?.push(item);
       this._data.push(row);
     }
 
@@ -125,7 +170,7 @@ class Builder {
 }
 
 class ProductionBoxBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem>> = [[]];
+  protected _data: Array<Array<CardRenderItem | CardRenderSymbol>> = [[]];
 
   public build(): CardRenderProductionBox {
     return new CardRenderProductionBox(this._data);

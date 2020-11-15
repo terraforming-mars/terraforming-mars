@@ -3,19 +3,6 @@ import {CardName} from './CardName';
 /* eslint-disable no-irregular-whitespace */
 export const HTML_DATA: Map<string, string> =
   new Map([
-    [CardName.ASTEROID_MINING_CONSORTIUM, ` 
-        <div class="content ">
-            <div class="points points-big ">1</div>
-            <div class="requirements ">Titanium production</div>
-            <div class="production-box production-box-size1a ">
-                <div class="production-prefix minus"></div><div class="titanium production red-outline "></div><br>
-                <div class="production-prefix plus"></div><div class="titanium production "></div>
-            </div>
-            <div class="description " style="margin-top:0px;">
-                (Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.)
-            </div>
-        </div>
-`],
     [CardName.DEEP_WELL_HEATING, ` 
         <div class="content">
             <div class="production-box ">
@@ -87,16 +74,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ASTEROID, ` 
-        <div class="content ">
-            <div class="tile temperature-tile "></div><br>
-            <div class=" titanium resource "></div><div class=" titanium resource "></div><br>
-            - <div class="resource plant red-outline "></div><div class="plant resource red-outline "></div><div class="plant resource red-outline "></div>
-            <div class="description ">
-                (Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.)
-            </div>
-        </div>
-`],
     [CardName.COMET, ` 
         <div class="content ">
             <div class="tile temperature-tile "></div><div class="tile ocean-tile "></div>
@@ -104,17 +81,6 @@ export const HTML_DATA: Map<string, string> =
           - <div class="plant resource red-outline "></div><div class="plant resource red-outline "></div><div class="plant resource red-outline "></div>
             <div class="description ">
                 (Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.)
-            </div>
-        </div>
-`],
-    [CardName.BIG_ASTEROID, ` 
-        <div class="content ">
-            <div class="tile temperature-tile "></div>
-            <div class="tile temperature-tile "></div><br>
-            <div class="titanium resource "></div><div class="titanium resource "></div><div class="titanium resource "></div><div class="titanium resource "></div> <br>
-          - <div class="plant resource red-outline "></div><div class="plant resource red-outline "></div><div class="plant resource red-outline "></div><div class="plant resource red-outline "></div>
-            <div class="description ">
-                (Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.)
             </div>
         </div>
 `],
@@ -443,17 +409,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.ARCHAEBACTERIA, ` 
-    <div class="content">
-      <div class="requirements requirements-max">max -18 C</div>
-      <div class="production-box">
-        <div class="plant production"></div>
-      </div>
-      <div class="description">
-        (It must be -18 C or colder. Increase your Plant production 1 step.)
-      </div>
-    </div>
-`],
     [CardName.CARBONATE_PROCESSING, ` 
     <div class="content">
       <div class="production-box production-box-size3a">
@@ -498,16 +453,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <div class="description">
         (Requires 3 Science tags. Increase your Energy production and your MC production up one step each.)
-      </div>
-    </div>
-`],
-    [CardName.ADAPTED_LICHEN, ` 
-    <div class="content">
-      <div class="production-box">
-        <div class="plant production"></div>
-      </div>
-      <div class="description">
-        (Increase your Plant production 1 step.)
       </div>
     </div>
 `],
@@ -1120,16 +1065,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ACQUIRED_COMPANY, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="money production">3</div>
-        </div>
-        <div class="description">
-          (Increase your MC production 3 steps.)
-        </div>
-      </div>
-`],
     [CardName.MEDIA_ARCHIVES, ` 
       <div class="content">
           <div class="money resource">1</div> / &nbsp;<div class="resource-tag tag-event red-outline"></div>
@@ -1195,26 +1130,6 @@ export const HTML_DATA: Map<string, string> =
                 (Increase your energy production 1 step.)
             </div>
         </div>
-`],
-    [CardName.ARTIFICIAL_PHOTOSYNTHESIS, ` 
-        <div class="content ">
-          <div class="production-box production-box-size4">
-            <div class="production plant"></div> OR <div class="production energy"></div><div class="production energy"></div>
-          </div>
-            <div class="description ">
-                (Increase your plant production 1 step or your energy production 2 steps.)
-            </div>
-        </div>
-`],
-    [CardName.ARTIFICIAL_LAKE, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">-6 C</div>
-        <div class="tile ocean-tile"></div>*
-        <div class="description">
-          (Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.)
-        </div>
-      </div>
 `],
     [CardName.GEOTHERMAL_POWER, ` 
         <div class="content ">
@@ -1785,18 +1700,6 @@ export const HTML_DATA: Map<string, string> =
             (Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.)
           </div>
         </div>
-`],
-    [CardName.AEROBRAKED_AMMONIA_ASTEROID, ` 
-          <div class="content ">
-            <div class="production-box production-box-size3">
-                <div class="heat production"></div><div class="heat production"></div><div class="heat production"></div>
-                <div class="plant production"></div>
-            </div><br>
-             <div class="microbe resource"></div><div class="microbe resource"></div>*
-              <div class="description ">
-                (Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.)
-              </div>
-          </div>
 `],
     [CardName.MAGNETIC_FIELD_DOME, ` 
         <div class="content">

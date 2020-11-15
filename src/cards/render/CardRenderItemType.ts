@@ -7,5 +7,7 @@ export enum CardRenderItemType {
   HEAT = 'heat',
   ENERGY = 'energy',
   TITANIUM = 'titanium',
+  MEGACREDITS = 'megacredits',
+  MICROBES = 'microbes',
   // more to come...
 }

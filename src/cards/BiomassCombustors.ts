@@ -31,7 +31,7 @@ export class BiomassCombustors implements IProjectCard {
     description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
     cardNumber: '183',
     requirements: CardRequirements.builder((b) => b.oxygen(6)),
-    renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(-1).any().br().energy(2))),
+    renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(-1).any.br.energy(2))),
     victoryPoints: -1,
   };
 }

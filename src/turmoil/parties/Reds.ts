@@ -44,7 +44,7 @@ export class RedsBonus02 implements Bonus {
     } else {
       players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
       const max = players[0].getTerraformRating();
-      
+
       while (players.length > 0 && players[0].getTerraformRating() === max) {
         players[0].decreaseTerraformRating();
         players.shift();

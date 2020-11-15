@@ -1,6 +1,7 @@
 import {ISpace} from './ISpace';
 import {Player} from './Player';
 import {SpaceType} from './SpaceType';
+import {SpaceName} from './SpaceName';
 import {SpaceBonus} from './SpaceBonus';
 import {TileType} from './TileType';
 import {AresHandler} from './ares/AresHandler';
@@ -188,6 +189,16 @@ export abstract class Board {
         idx -= spaces.length;
       }
       return spaces[idx];
+    }
+
+    public getNonReservedLandSpaces(): Array<ISpace> {
+      return this.spaces.filter((space) => {
+        return space.spaceType === SpaceType.LAND && (
+          space.tile === undefined ||
+            AresHandler.hasHazardTile(space)
+        ) && space.player === undefined &&
+             space.id !== SpaceName.NOCTIS_CITY;
+      });
     }
 
     public canPlaceTile(space: ISpace): boolean {

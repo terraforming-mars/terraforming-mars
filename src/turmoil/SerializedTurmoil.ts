@@ -5,6 +5,7 @@ import {PlayerId} from '../Player';
 import {GlobalEventName} from './globalEvents/GlobalEventName';
 import {PartyName} from './parties/PartyName';
 import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
+import {PoliticalAgendasData} from './PoliticalAgendasData';
 
 export interface SerializedParty {
     name: PartyName;
@@ -28,4 +29,5 @@ export interface SerializedTurmoil {
     commingGlobalEvent: IGlobalEvent | undefined;
     comingGlobalEvent: GlobalEventName | undefined;
     currentGlobalEvent?: IGlobalEvent | GlobalEventName;
+    politicalAgendasData: PoliticalAgendasData;
 }

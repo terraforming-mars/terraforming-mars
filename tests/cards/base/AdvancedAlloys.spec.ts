@@ -10,6 +10,6 @@ describe('AdvancedAlloys', function() {
     const game = new Game('foobar', [player, player], player);
     card.play(player);
     expect(player.getTitaniumValue(game)).to.eq(4);
-    expect(player.getSteelValue()).to.eq(3);
+    expect(player.getSteelValue(game)).to.eq(3);
   });
 });

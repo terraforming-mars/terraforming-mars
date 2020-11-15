@@ -16,7 +16,7 @@ describe('Revolution', function() {
     player2 = TestPlayers.RED.newPlayer();
 
     game = new Game('foobar', [player, player2], player);
-    turmoil = new Turmoil(game);
+    turmoil = new Turmoil(game, false);
 
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2.id;

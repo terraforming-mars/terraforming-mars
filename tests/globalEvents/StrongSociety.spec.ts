@@ -12,7 +12,7 @@ describe('StrongSociety', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     turmoil.chairman = player2.id;

@@ -12,7 +12,7 @@ describe('RedInfluence', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     player.setTerraformRating(23);
     player.megaCredits = 10;

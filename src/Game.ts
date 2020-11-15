@@ -83,6 +83,7 @@ export interface GameOptions {
   turmoilExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
+  politicalAgendasExtension: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
   solarPhaseOption: boolean;
@@ -170,6 +171,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         fastModeOption: false,
         includeVenusMA: true,
         initialDraftVariant: false,
+        politicalAgendasExtension: false,
         preludeExtension: false,
         promoCardsOption: false,
         randomMA: RandomMAOptionType.NONE,
@@ -245,7 +247,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
-        this.turmoil = new Turmoil(this);
+        this.turmoil = new Turmoil(this, gameOptions.politicalAgendasExtension);
       }
 
       // Setup Ares hazards
@@ -1796,7 +1798,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
-        const turmoil = new Turmoil(this);
+        const turmoil = new Turmoil(this, , this.gameOptions.politicalAgendasExtension);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
 
         // Rebuild lobby

@@ -17,6 +17,7 @@ import {IAresData} from '../ares/IAresData';
 export interface PlayerModel {
     aresExtension: boolean;
     aresData: IAresData | undefined;
+    politicalAgendasExtension: boolean;
     awards: Array<FundedAwardModel>;
     boardName: string;
     corporationCard: CardModel | undefined;

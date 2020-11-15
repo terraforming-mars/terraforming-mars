@@ -13,7 +13,7 @@ describe('VenusInfrastructure', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     player.playedCards.push(new CorroderSuits());
     player2.playedCards.push(new CorroderSuits(), new CorroderSuits(), new CorroderSuits());

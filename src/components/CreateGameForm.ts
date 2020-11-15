@@ -44,6 +44,7 @@ export interface CreateGameModel {
     promoCardsOption: boolean;
     communityCardsOption: boolean;
     aresExtension: boolean;
+    politicalAgendasExtension: boolean;
     undoOption: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
@@ -110,6 +111,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
+      politicalAgendasExtension: false,
       undoOption: false,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
@@ -342,6 +344,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const promoCardsOption = component.promoCardsOption;
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
+      const politicalAgendasExtension = component.politicalAgendasExtension;
       const undoOption = component.undoOption;
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
@@ -398,6 +401,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         promoCardsOption,
         communityCardsOption,
         aresExtension: aresExtension,
+        politicalAgendasExtension: politicalAgendasExtension,
         undoOption,
         fastModeOption,
         removeNegativeGlobalEventsOption,
@@ -532,6 +536,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <label for="communityCards-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-model="politicalAgendasExtension">
+                            <label for="politicalAgendas-checkbox">
+                                <div class="create-game-expansion-icon"></div>
+                                <span v-i18n>Political Agendas</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#political-agendas" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 

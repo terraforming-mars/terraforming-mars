@@ -471,6 +471,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         turmoilExtension: gameReq.turmoil,
         aresExtension: gameReq.aresExtension,
         aresHazards: true, // Not a runtime option.
+        politicalAgendasExtension: gameReq.politicalAgendasExtension,
         promoCardsOption: gameReq.promoCardsOption,
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
@@ -608,7 +609,7 @@ function getPlayer(player: Player, game: Game): string {
     spaces: getSpaces(game.board.spaces),
     steel: player.steel,
     steelProduction: player.getProduction(Resources.STEEL),
-    steelValue: player.getSteelValue(),
+    steelValue: player.getSteelValue(game),
     temperature: game.getTemperature(),
     terraformRating: player.getTerraformRating(),
     titanium: player.titanium,
@@ -643,6 +644,7 @@ function getPlayer(player: Player, game: Game): string {
     aresExtension: game.gameOptions.aresExtension,
     aresData: game.aresData,
     preludeExtension: game.gameOptions.preludeExtension,
+    politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
   };
   return JSON.stringify(output);
 }
@@ -824,7 +826,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
+      steelValue: player.getSteelValue(game),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -850,6 +852,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       preludeExtension: game.gameOptions.preludeExtension,
+      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
     } as PlayerModel;
   });
 }

@@ -13,7 +13,7 @@ describe('SolarFlare', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = new Turmoil(game, false);
 
     player.playedCards.push(new SpaceStation());
     player2.playedCards.push(new SpaceStation(), new SpaceStation(), new SpaceStation());

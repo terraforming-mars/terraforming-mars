@@ -5,6 +5,10 @@ import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
 import {Resources} from '../../Resources';
 import {Bonus} from '../Bonus';
+import {Policy} from '../Policy';
+import { SelectHowToPayDeferred } from '../../deferredActions/SelectHowToPayDeferred';
+import { Player } from '../../Player';
+import { BuildColony } from '../../deferredActions/BuildColony';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -37,4 +41,65 @@ export class UnityBonus02 implements Bonus {
       player.setResource(Resources.MEGACREDITS, tagCount);
     });
   }
+}
+
+export class UnityPolicy01 implements Policy {
+  isDefault = true;
+  id = 'up01';
+  description: string = 'Your titanium resources are worth 1 MC extra.';
+}
+
+export class UnityPolicy02 implements Policy {
+  id = 'up02';
+  description: string = 'Spend 15 MC to build a colony (titanium may be used).';
+
+  canAct(player: Player, game: Game) {
+    return player.canAfford(15, game, false, true) && player.hasAvailableColonyTileToBuildOn(game);
+  }
+
+  action(player: Player, game: Game) {
+    game.defer(new SelectHowToPayDeferred(
+        player,
+        15,
+        false,
+        true,
+        'Select how to pay for colony',
+        () => {
+          game.defer(new BuildColony(player, game, false, 'Select where to build colony'));
+        },
+    ));
+
+    return undefined;
+  }
+}
+
+export class UnityPolicy03 implements Policy {
+  id = 'up03';
+  description: string = 'Spend 4 MC to draw a space card';
+  
+  canAct(player: Player) {
+    return player.canAfford(4);
+  }
+  
+  action(player: Player, game: Game) {
+    game.defer(new SelectHowToPayDeferred(
+        player,
+        4,
+        false,
+        false,
+        'Select how to pay for action',
+        () => {
+          player.cardsInHand.push(game.drawCardsByTag(Tags.SPACE, 1)[0]);
+          const drawnCard = game.getCardsInHandByTag(player, Tags.SPACE).slice(-1)[0];
+          game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+        },
+    ));
+  
+    return undefined;
+  }
+}
+
+export class UnityPolicy04 implements Policy {
+  id = 'up04';
+  description: string = 'Cards with space tags cost 2 MC less to play.';
 }

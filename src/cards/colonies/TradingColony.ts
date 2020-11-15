@@ -14,7 +14,7 @@ export class TradingColony implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      return player.canPlayColonyPlacementCard(game);
+      return player.hasAvailableColonyTileToBuildOn(game);
     }
 
     public play(player: Player, game: Game) {

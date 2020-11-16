@@ -14,7 +14,7 @@ describe('SponsoredProjects', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game, false);
+    const turmoil = new Turmoil(game);
 
     player.playedCards.push(new Ants());
     if (player.playedCards[0].resourceCount !== undefined) {

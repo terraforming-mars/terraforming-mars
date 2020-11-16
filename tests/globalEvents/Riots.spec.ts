@@ -10,7 +10,7 @@ describe('Riots', function() {
     const card = new Riots();
     const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
-    const turmoil = new Turmoil(game, false);
+    const turmoil = new Turmoil(game);
     turmoil.initGlobalEvent(game);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     player.setResource(Resources.MEGACREDITS, 10);

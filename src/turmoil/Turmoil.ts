@@ -44,7 +44,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
     public currentGlobalEvent: IGlobalEvent | undefined;
     public politicalAgendasData: PoliticalAgendasData;
 
-    constructor(game: Game, politicalAgendas: boolean) {
+    constructor(game: Game, politicalAgendas: boolean = false) {
       // Init parties
       this.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 

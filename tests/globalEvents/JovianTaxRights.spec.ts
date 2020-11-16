@@ -14,7 +14,7 @@ describe('JovianTaxRights', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game, false);
+    const turmoil = new Turmoil(game);
 
     const colony1 = new Luna();
     const colony2 = new Triton();

@@ -13,7 +13,7 @@ describe('EcoSabotage', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game, false);
+    const turmoil = new Turmoil(game);
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();

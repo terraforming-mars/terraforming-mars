@@ -12,7 +12,7 @@ describe('CloudSocieties', function() {
     const card = new CloudSocieties();
     const player = new Player('test', Color.BLUE, false);
     const game = new Game('foobar', [player], player);
-    const turmoil = new Turmoil(game, false);
+    const turmoil = new Turmoil(game);
     player.playedCards.push(new FloatingHabs());
     turmoil.chairman = player.id;
     turmoil.dominantParty = new Kelvinists();

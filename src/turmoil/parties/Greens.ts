@@ -68,7 +68,7 @@ export class GreensPolicy02 implements Policy {
   id = 'gp02';
   description: string = 'Whenever you place a tile, gain 1 plant.';
 
-  onTilePlaced(player: Player, _space: ISpace) {
+  onTilePlaced(player: Player) {
     player.setResource(Resources.PLANTS);
   }
 }

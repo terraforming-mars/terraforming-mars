@@ -12,7 +12,7 @@ export class GameLoader {
     private readonly pendingPlayer = new Map<string, Array<(game: Game | undefined) => void>>();
     private readonly playerToGame = new Map<string, Game>();
 
-    public start(cb: () => void): void {
+    public start(cb = () => {}): void {
       if (this.loadedGames === true) {
         console.warn('already loaded, ignoring');
         return;
@@ -99,7 +99,7 @@ export class GameLoader {
       this.pendingPlayer.clear();
     }
 
-    private loadAllGames(cb: () => void): void {
+    private loadAllGames(cb = () => {}): void {
       Database.getInstance().getGames((err, allGames) => {
         if (err) {
           console.error('error loading all games', err);

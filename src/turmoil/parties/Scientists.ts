@@ -61,9 +61,9 @@ export class ScientistsPolicy01 implements Policy {
         'Select how to pay for action',
         () => {
           player.cardsInHand.push(
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
+              game.dealer.dealCard(),
+              game.dealer.dealCard(),
+              game.dealer.dealCard(),
           );
           game.log('${0} drew 3 cards', (b) => b.player(player));
         },

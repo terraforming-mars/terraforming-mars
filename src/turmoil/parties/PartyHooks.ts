@@ -20,7 +20,7 @@ export class PartyHooks {
     }
   }
 
-  static shouldApplyPolicy(game: Game, partyName: PartyName, policyID?: string) {
+  static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: string) {
     if (!game.gameOptions.turmoilExtension) return false;
 
     const turmoil = game.turmoil!;
@@ -29,8 +29,8 @@ export class PartyHooks {
     const rulingParty = turmoil.rulingParty!;
     if (!rulingParty) return false;
 
-    if (policyID !== undefined && rulingParty.activePolicy !== undefined) {
-      return rulingParty.name === partyName && rulingParty.activePolicy.id === policyID;
+    if (policyId !== undefined && rulingParty.activePolicy !== undefined) {
+      return rulingParty.name === partyName && rulingParty.activePolicy.id === policyId;
     }
 
     return rulingParty.name === partyName;

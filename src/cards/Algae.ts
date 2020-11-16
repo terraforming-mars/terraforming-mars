@@ -28,6 +28,5 @@ export class Algae implements IProjectCard {
     cardNumber: '047',
     requirements: CardRequirements.builder((b) => b.oceans(5)),
     renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(2)).plants(1)),
-    victoryPoints: 1,
   };
 }

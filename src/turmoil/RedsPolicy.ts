@@ -13,7 +13,7 @@ import {Tags} from '../cards/Tags';
 import {TileType} from '../TileType';
 
 /*
- * TODO: Most of the members of that class could be inferred from card metadata once it's usable
+ * TODO(Lynesth): Most of the members of that class could be inferred from card metadata once it's usable
  * Constructor is expecting an object with properties from the class and will defaults the others
  * Usage: new ActionDetails({ card: new LavaFlows(), temperatureIncrease: 2, nonOceanToPlace: TileType.LAVA_FLOWS, nonOceanAvailableSpaces: LavaFlows.getVolcanicSpaces(player, game) });
  */

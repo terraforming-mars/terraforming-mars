@@ -3,9 +3,9 @@ import {PartyName} from './parties/PartyName';
 import {Policy} from './Policy';
 
 export enum AgendaStyle {
-  STANDARD,
-  RANDOM, // TODO: Implement
-  CHAIRMAN // TODO: Implement
+  STANDARD = 'Standard',
+  RANDOM = 'Random', // TODO: Implement
+  CHAIRMAN = 'Chairman' // TODO: Implement
 }
 
 export interface Agenda {

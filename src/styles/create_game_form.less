@@ -298,6 +298,34 @@
     content: " ";
     background-color: rgb(199, 199, 199);
 }
+
+.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle {
+    position: relative;
+}
+.create-game-page-column input[type="radio"]:checked + label.label-agendaStyle::after {
+    position: absolute;
+    width: 40px;
+    height: 12px;
+    top: -10px;
+    left: 50%;
+    margin-left: -20px;
+    content: " ";
+    background-color: rgb(199, 199, 199);
+}
+
+.agendaStyle-random {
+    width: 105px;
+    min-width: 105px !important;
+}
+
+.agendaStyle-chairman {
+    width: 115px;
+    min-width: 115px !important;
+}
+
+.agendas-text {
+    font-size: 22px;
+}
   
 .create-game-colorbox {
     width: 24px;

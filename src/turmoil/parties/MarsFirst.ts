@@ -10,8 +10,8 @@ import {ISpace} from '../../ISpace';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 import {Phase} from '../../Phase';
-import {TileType} from '../../TileType';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {IProjectCard} from '../../cards/IProjectCard';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -61,14 +61,10 @@ export class MarsFirstPolicy01 implements Policy {
 
 export class MarsFirstPolicy02 implements Policy {
   id = 'mfp02';
-  description: string = 'Whenever you place a special tile ON MARS, gain 3 MC.';
+  description: string = 'After you play a building card, gain 1 MC.';
 
-  onTilePlaced(player: Player, space: ISpace) {
-    const normalTileTypes = [TileType.GREENERY, TileType.OCEAN, TileType.CITY];
-
-    if (space.tile && !normalTileTypes.includes(space.tile.tileType)) {
-      player.setResource(Resources.MEGACREDITS, 3);
-    }
+  onCardPlayed(player: Player, card: IProjectCard) {
+    if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS);
   }
 }
 

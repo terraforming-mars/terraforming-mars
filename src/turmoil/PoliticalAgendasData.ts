@@ -4,8 +4,8 @@ import {Policy} from './Policy';
 
 export enum AgendaStyle {
   STANDARD,
-  RANDOM,
-  CHAIRMAN
+  RANDOM, // TODO: Implement
+  CHAIRMAN // TODO: Implement
 }
 
 export interface Agenda {

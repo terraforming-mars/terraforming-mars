@@ -84,9 +84,9 @@ export interface GameOptions {
   turmoilExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
-  politicalAgendasExtension: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  politicalAgendasExtension: boolean;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;

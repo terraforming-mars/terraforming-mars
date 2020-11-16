@@ -6,9 +6,9 @@ import {Tags} from '../../cards/Tags';
 import {Resources} from '../../Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import { SelectHowToPayDeferred } from '../../deferredActions/SelectHowToPayDeferred';
-import { Player } from '../../Player';
-import { BuildColony } from '../../deferredActions/BuildColony';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {Player} from '../../Player';
+import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -76,11 +76,11 @@ export class UnityPolicy02 implements Policy {
 export class UnityPolicy03 implements Policy {
   id = 'up03';
   description: string = 'Spend 4 MC to draw a space card';
-  
+
   canAct(player: Player) {
     return player.canAfford(4);
   }
-  
+
   action(player: Player, game: Game) {
     game.defer(new SelectHowToPayDeferred(
         player,
@@ -94,7 +94,7 @@ export class UnityPolicy03 implements Policy {
           game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
         },
     ));
-  
+
     return undefined;
   }
 }

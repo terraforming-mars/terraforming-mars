@@ -1,11 +1,11 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { ISpace } from "../ISpace";
-import { TileType } from "../TileType";
-import { CardName } from "../CardName";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {ISpace} from '../ISpace';
+import {TileType} from '../TileType';
+import {CardName} from '../CardName';
 
 export class ArcticAlgae implements IProjectCard {
     public cost = 12;

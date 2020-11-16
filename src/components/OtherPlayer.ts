@@ -1,37 +1,37 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import { StackedCards } from "./StackedCards";
-import { PlayerMixin } from "./PlayerMixin";
-import { PlayerModel } from "../models/PlayerModel";
-import { hidePlayerData } from "./overview/PlayerStatus";
-import { mainAppSettings } from "./App";
-import { Card } from "./card/Card";
+import {StackedCards} from './StackedCards';
+import {PlayerMixin} from './PlayerMixin';
+import {PlayerModel} from '../models/PlayerModel';
+import {hidePlayerData} from './overview/PlayerStatus';
+import {mainAppSettings} from './App';
+import {Card} from './card/Card';
 
-export const OtherPlayer = Vue.component("other-player", {
-    props: {
-        player: {
-            type: Object as () => PlayerModel,
-        },
-        playerIndex: {
-            type: Number
-        }
+export const OtherPlayer = Vue.component('other-player', {
+  props: {
+    player: {
+      type: Object as () => PlayerModel,
     },
-    components: {
-        "stacked-cards": StackedCards,
-        Card
+    playerIndex: {
+      type: Number,
     },
-    mixins: [PlayerMixin],
-    methods: {
-        hideMe: function () {
-            hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, this.playerIndex);
-        },
-        isVisible: function () {
-            return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
-                "pinned_player_" + this.playerIndex
-            );
-        }
+  },
+  components: {
+    'stacked-cards': StackedCards,
+    Card,
+  },
+  mixins: [PlayerMixin],
+  methods: {
+    hideMe: function() {
+      hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, this.playerIndex);
     },
-    template: `<div>
+    isVisible: function() {
+      return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
+          'pinned_player_' + this.playerIndex,
+      );
+    },
+  },
+  template: `<div>
             <div v-show="isVisible()" class="other_player_cont menu">
                 <Button size="big" type="close" :onClick="hideMe" :disableOnServerBusy="false" align="right" />
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
@@ -57,5 +57,5 @@ export const OtherPlayer = Vue.component("other-player", {
                     </div>
                 </div>
             </div>
-        </div>`
+        </div>`,
 });

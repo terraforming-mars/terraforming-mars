@@ -1,6 +1,6 @@
 
-import {IAward  } from "../awards/IAward";
-import { Color } from "../Color";
+import {IAward} from '../awards/IAward';
+import {Color} from '../Color';
 
 export interface IAwardScore {
     playerColor: Color;

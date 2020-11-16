@@ -1,8 +1,8 @@
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { CardName } from "../CardName";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {CardName} from '../CardName';
 
 export class AdvancedAlloys implements IProjectCard {
     public cost = 9;
@@ -12,7 +12,12 @@ export class AdvancedAlloys implements IProjectCard {
 
     public play(player: Player) {
       player.increaseTitaniumValue();
-      player.steelValue++;
+      player.increaseSteelValue();
       return undefined;
+    }
+
+    public onDiscard(player: Player): void {
+      player.decreaseTitaniumValue();
+      player.decreaseSteelValue();
     }
 }

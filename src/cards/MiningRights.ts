@@ -1,5 +1,5 @@
-import { CardName } from "../CardName";
-import { MiningCard } from "./MiningCard";
+import {CardName} from '../CardName';
+import {MiningCard} from './MiningCard';
 
 export class MiningRights extends MiningCard {
     public cost = 9;

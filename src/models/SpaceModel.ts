@@ -1,8 +1,8 @@
 
-import { Color } from "../Color";
-import { TileType } from "../TileType";
-import { SpaceBonus } from "../SpaceBonus";
-import { SpaceType } from "../SpaceType";
+import {Color} from '../Color';
+import {TileType} from '../TileType';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceType} from '../SpaceType';
 
 export interface SpaceModel {
     id: string;

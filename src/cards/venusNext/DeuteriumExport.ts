@@ -1,15 +1,15 @@
-import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from "../ICard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from "../../inputs/SelectOption";
-import { Resources } from "../../Resources";
-import { CardName } from "../../CardName";
+import {IProjectCard} from '../IProjectCard';
+import {IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {ResourceType} from '../../ResourceType';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Resources} from '../../Resources';
+import {CardName} from '../../CardName';
 
-export class DeuteriumExport implements IActionCard,IProjectCard, IResourceCard {
+export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard {
     public cost = 11;
     public tags = [Tags.SPACE, Tags.VENUS, Tags.ENERGY];
     public name = CardName.DEUTERIUM_EXPORT;
@@ -18,26 +18,26 @@ export class DeuteriumExport implements IActionCard,IProjectCard, IResourceCard 
     public resourceCount: number = 0;
 
     public play() {
-        return undefined;
+      return undefined;
     }
     public canAct(): boolean {
-        return true;
-    }    
+      return true;
+    }
     public action(player: Player) {
-        if (this.resourceCount < 1) {
+      if (this.resourceCount < 1) {
+        this.resourceCount++;
+        return undefined;
+      }
+      return new OrOptions(
+          new SelectOption('Remove 1 floater to raise energy production 1 step', 'Remove floater', () => {
+            this.resourceCount--;
+            player.addProduction(Resources.ENERGY);
+            return undefined;
+          }),
+          new SelectOption('Add 1 floater to this card', 'Add floater', () => {
             this.resourceCount++;
             return undefined;
-        }
-        return new OrOptions(
-            new SelectOption("Remove 1 floater to raise energy production 1 step", "Remove floater", () => {
-                this.resourceCount--;
-                player.addProduction(Resources.ENERGY);
-                return undefined;
-            }),
-            new SelectOption("Add 1 floater to this card", "Add floater", () => {
-                this.resourceCount++;
-                return undefined;
-            })
-        );
+          }),
+      );
     }
 }

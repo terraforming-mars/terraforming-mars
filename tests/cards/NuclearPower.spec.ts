@@ -1,28 +1,28 @@
-import { expect } from "chai";
-import { NuclearPower } from "../../src/cards/NuclearPower";
-import { Color } from "../../src/Color";
-import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
-import { Resources } from "../../src/Resources";
+import {expect} from 'chai';
+import {NuclearPower} from '../../src/cards/NuclearPower';
+import {Color} from '../../src/Color';
+import {Player} from '../../src/Player';
+import {Game} from '../../src/Game';
+import {Resources} from '../../src/Resources';
 
-describe("NuclearPower", function () {
-    let card : NuclearPower, player : Player, game : Game;
+describe('NuclearPower', function() {
+  let card : NuclearPower; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new NuclearPower();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
-    });
+  beforeEach(function() {
+    card = new NuclearPower();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player);
+  });
 
-    it("Can't play", function () {
-        player.addProduction(Resources.MEGACREDITS,-4);
-        expect(card.canPlay(player)).is.not.true;
-    });
+  it('Can\'t play', function() {
+    player.addProduction(Resources.MEGACREDITS, -4);
+    expect(card.canPlay(player)).is.not.true;
+  });
 
-    it("Should play", function () {
-        expect(card.canPlay(player)).is.true;
-        card.play(player, game);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-        expect(player.getProduction(Resources.ENERGY)).to.eq(3);
-    });
+  it('Should play', function() {
+    expect(card.canPlay(player)).is.true;
+    card.play(player, game);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
+    expect(player.getProduction(Resources.ENERGY)).to.eq(3);
+  });
 });

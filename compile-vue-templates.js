@@ -31,82 +31,92 @@ require.cache[vue] = {
 
 checkComponent(
     "src/components/Award",
-    require("./dist/src/components/Award").Award,
+    require("./build/src/components/Award").Award,
     []
 );
 checkComponent(
     "src/components/Board",
-    require("./dist/src/components/Board").Board,
+    require("./build/src/components/Board").Board,
     ["constants"]
 );
 checkComponent(
     "src/components/BoardSpace",
-    require("./dist/src/components/BoardSpace").BoardSpace,
+    require("./build/src/components/BoardSpace").BoardSpace,
+    []
+);
+checkComponent(
+    "src/components/card/CardCost",
+    require("./build/src/components/card/CardCost").CardCost,
+    []
+);
+checkComponent(
+    "src/components/card/CardProductionBoxComponent",
+    require("./build/src/components/card/CardProductionBoxComponent").CardProductionBoxComponent,
     []
 );
 checkComponent(
     "src/components/CardsFilter",
-    require("./dist/src/components/CardsFilter").CardsFilter,
+    require("./build/src/components/CardsFilter").CardsFilter,
     ["selectedCardNames", "foundCardNames", "searchTerm"]
 );
 checkComponent(
     "src/components/ColoniesFilter",
-    require("./dist/src/components/ColoniesFilter").ColoniesFilter,
+    require("./build/src/components/ColoniesFilter").ColoniesFilter,
     ["allColonies", "officialColonies", "communityColonies", "selectedColonies"]
 );
 checkComponent(
     "src/components/Colony",
-    require("./dist/src/components/Colony").Colony,
+    require("./build/src/components/Colony").Colony,
     ["PLUTO", "GANYMEDE"]
 );
 checkComponent(
     "src/components/CorporationsFilter",
-    require("./dist/src/components/CorporationsFilter").CorporationsFilter,
+    require("./build/src/components/CorporationsFilter").CorporationsFilter,
     ["cardsByModuleMap", "customCorporationsList", "selectedCorporations", "corpsByModule"]
 );
 checkComponent(
     "src/components/DebugUI",
-    require("./dist/src/components/DebugUI").DebugUI,
+    require("./build/src/components/DebugUI").DebugUI,
     ["filterText"]
 );
 checkComponent(
     "src/components/GameHome",
-    require("./dist/src/components/GameHome").GameHome,
+    require("./build/src/components/GameHome").GameHome,
     []
 );
 checkComponent(
     "src/components/GameEnd",
-    require("./dist/src/components/GameEnd").GameEnd,
+    require("./build/src/components/GameEnd").GameEnd,
     []
 );
 checkComponent(
     "src/components/LoadGameForm",
-    require("./dist/src/components/LoadGameForm").LoadGameForm,
-    ["gameId"]
+    require("./build/src/components/LoadGameForm").LoadGameForm,
+    ["gameId", "rollbackCount"]
 );
 checkComponent(
     "src/components/LogPanel",
-    require("./dist/src/components/LogPanel").LogPanel,
+    require("./build/src/components/LogPanel").LogPanel,
     ["cards", "messages"]
 );
 checkComponent(
     "src/components/Milestone",
-    require("./dist/src/components/Milestone").Milestone,
+    require("./build/src/components/Milestone").Milestone,
     []
 );
 checkComponent(
     "src/components/OtherPlayer",
-    require("./dist/src/components/OtherPlayer").OtherPlayer,
+    require("./build/src/components/OtherPlayer").OtherPlayer,
     []
 );
 checkComponent(
     "src/components/PlayerHome",
-    require("./dist/src/components/PlayerHome").PlayerHome,
+    require("./build/src/components/PlayerHome").PlayerHome,
     []
 );
 checkComponent(
     "src/components/Preferences",
-    require("./dist/src/components/Preferences").Preferences,
+    require("./build/src/components/Preferences").Preferences,
     [
         "ui", "hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "hide_tag_overview",
         "hide_turnorder", "hide_corporation_names", "small_cards", "remove_background", "magnify_cards",
@@ -116,62 +126,117 @@ checkComponent(
 );
 checkComponent(
     "src/components/SelectAmount",
-    require("./dist/src/components/SelectAmount").SelectAmount,
+    require("./build/src/components/SelectAmount").SelectAmount,
     ["amount"]
 );
 checkComponent(
+    "src/components/SelectCard",
+    require("./build/src/components/SelectCard").SelectCard,
+    ["cards"]
+);
+checkComponent(
+    "src/components/SelectColony",
+    require("./build/src/components/SelectColony").SelectColony,
+    ["selectedColony"]
+);
+checkComponent(
     "src/components/SelectHowToPay",
-    require("./dist/src/components/SelectHowToPay").SelectHowToPay,
+    require("./build/src/components/SelectHowToPay").SelectHowToPay,
     ["cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
 );
 checkComponent(
     "src/components/SelectHowToPayForCard",
-    require("./dist/src/components/SelectHowToPayForCard").SelectHowToPayForCard,
-    ["card", "cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
+    require("./build/src/components/SelectHowToPayForCard").SelectHowToPayForCard,
+    ["card", "cards", "cost", "heat", "megaCredits", "steel", "titanium", "microbes", "floaters", "warning"]
 );
 checkComponent(
     "src/components/SelectOption",
-    require("./dist/src/components/SelectOption").SelectOption,
+    require("./build/src/components/SelectOption").SelectOption,
+    []
+);
+checkComponent(
+    "src/components/SelectPartyPlayer",
+    require("./build/src/components/SelectPartyPlayer").SelectPartyPlayer,
+    ["selectedPlayer"]
+);
+checkComponent(
+    "src/components/SelectPlayer",
+    require("./build/src/components/SelectPlayer").SelectPlayer,
+    ["selectedPlayer"]
+);
+checkComponent(
+    "src/components/SelectPlayerRow",
+    require("./build/src/components/SelectPlayerRow").SelectPlayerRow,
+    []
+);
+checkComponent(
+    "src/components/SelectProductionToLose",
+    require("./build/src/components/SelectProductionToLose").SelectProductionToLose,
+    ["megacredits", "steel", "titanium", "plants", "energy", "heat", "warning"]
+);
+checkComponent(
+    "src/components/ShiftAresGlobalParameters",
+    require("./build/src/components/ShiftAresGlobalParameters").ShiftAresGlobalParameters,
+    ["hazardData", "lowOceanDelta", "highOceanDelta", "temperatureDelta", "oxygenDelta", "ADJUSTMENT_RANGE"]
+);
+checkComponent(
+    "src/components/SortableCards",
+    require("./build/src/components/SortableCards").SortableCards,
     []
 );
 checkComponent(
     "src/components/StackedCards",
-    require("./dist/src/components/StackedCards").StackedCards,
+    require("./build/src/components/StackedCards").StackedCards,
     []
 );
 checkComponent(
     "src/components/StartScreen",
-    require("./dist/src/components/StartScreen").StartScreen,
+    require("./build/src/components/StartScreen").StartScreen,
     []
 );
 checkComponent(
     "src/components/Tag",
-    require("./dist/src/components/Tag").Tag,
+    require("./build/src/components/Tag").Tag,
     []
 );
 checkComponent(
     "src/components/TagCount",
-    require("./dist/src/components/TagCount").TagCount,
+    require("./build/src/components/TagCount").TagCount,
+    []
+);
+checkComponent(
+    "src/components/Turmoil",
+    require("./build/src/components/Turmoil").Turmoil,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerInfo",
+    require("./build/src/components/overview/PlayerInfo").PlayerInfo,
     []
 );
 checkComponent(
     "src/components/overview/PlayerResource",
-    require("./dist/src/components/overview/PlayerResource").PlayerResource,
+    require("./build/src/components/overview/PlayerResource").PlayerResource,
     []
 );
 checkComponent(
     "src/components/overview/PlayerResources",
-    require("./dist/src/components/overview/PlayerResources").PlayerResources,
+    require("./build/src/components/overview/PlayerResources").PlayerResources,
     ["resources"]
 );
 checkComponent(
     "src/components/overview/PlayersOverview",
-    require("./dist/src/components/overview/PlayersOverview").PlayersOverview,
+    require("./build/src/components/overview/PlayersOverview").PlayersOverview,
+    []
+);
+checkComponent(
+    "src/components/overview/PlayerStatus",
+    require("./build/src/components/overview/PlayerStatus").PlayerStatus,
     []
 );
 checkComponent(
     "src/components/overview/PlayerTags",
-    require("./dist/src/components/overview/PlayerTags").PlayerTags,
+    require("./build/src/components/overview/PlayerTags").PlayerTags,
     []
 );
 
@@ -190,7 +255,9 @@ function checkComponent(name, component, dataProperties) {
         throw new Error(`no template for component ${name}`);
     }
 
-    let result = compiler.compile(template);
+    let result = compiler.compile(template, {
+        warn: true
+    });
 
     if (result.errors.length > 0) {
         throw new Error(`errors found while parsing template for ${name}`, result.errors);
@@ -273,10 +340,11 @@ function checkComponent(name, component, dataProperties) {
     lines.unshift("declare function $forceUpdate(): void");
     lines.unshift("declare function $set(arg1: any, key: string, value: string): void;");
     // seems to be array looper iterating function needs to pass along type information
+    lines.unshift("declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;");
     lines.unshift("declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;");
     file = lines.join("\n");
 
-    fs.writeFileSync(`./dist/${name}Vue.ts`, file);
+    fs.writeFileSync(`./build/${name}Vue.ts`, file);
     console.log(`generated Vue typed template file for ${name}`);
 }
 

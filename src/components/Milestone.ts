@@ -1,42 +1,42 @@
-import Vue from "vue";
-import { ClaimedMilestoneModel } from "../models/ClaimedMilestoneModel";
+import Vue from 'vue';
+import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
 
-export const Milestone = Vue.component("milestone", {
-    props: {
-        milestones_list: {
-            type: Array as () => Array<ClaimedMilestoneModel>
-        }
+export const Milestone = Vue.component('milestone', {
+  props: {
+    milestones_list: {
+      type: Array as () => Array<ClaimedMilestoneModel>,
     },
-    data: function () {
-        const showDescription: {[x: string]: boolean} = {};
-        for (const milestone of this.milestones_list) {
-            showDescription[milestone.milestone.name] = false;
-        }
-        return {
-            showList: true,
-            showDescription
-        };
+  },
+  data: function() {
+    const showDescription: {[x: string]: boolean} = {};
+    for (const milestone of this.milestones_list) {
+      showDescription[milestone.milestone.name] = false;
+    }
+    return {
+      showList: true,
+      showDescription,
+    };
+  },
+  methods: {
+    getNameCss: function(milestoneName: string): string {
+      return (
+        'ma-name ma-name--' + milestoneName.replace(/ /g, '-').toLowerCase()
+      );
     },
-    methods: {
-        getNameCss: function (milestoneName: string): string {
-            return (
-                "ma-name ma-name--" + milestoneName.replace(/ /g, "-").toLowerCase()
-            );
-        },
-        shouldShow: function (milestone: ClaimedMilestoneModel): boolean {
-            return this.showDescription[milestone.milestone.name] === true;
-        },
-        shouldShowList: function (): boolean {
-            return this.showList;
-        },
-        toggle: function (milestone: ClaimedMilestoneModel) {
-            this.showDescription[milestone.milestone.name] = !this.showDescription[milestone.milestone.name];
-        },
-        toggleList: function () {
-            this.showList = !this.showList;
-        }
+    shouldShow: function(milestone: ClaimedMilestoneModel): boolean {
+      return this.showDescription[milestone.milestone.name] === true;
     },
-    template: `
+    shouldShowList: function(): boolean {
+      return this.showList;
+    },
+    toggle: function(milestone: ClaimedMilestoneModel) {
+      this.showDescription[milestone.milestone.name] = !this.showDescription[milestone.milestone.name];
+    },
+    toggleList: function() {
+      this.showList = !this.showList;
+    },
+  },
+  template: `
     <div class="milestones_cont" v-trim-whitespace>
         <div class="milestones">
             <div class="ma-title">

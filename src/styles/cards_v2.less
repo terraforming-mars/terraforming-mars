@@ -1,3 +1,4 @@
+@import "./variables.less";
 .card-container {
     .card-nr {
         display: none;
@@ -48,6 +49,348 @@
             line-height: 20px;
             font-weight: bold;
             text-align: center;
+            .card-effect-box {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                .card-item-container {
+                    margin: 0;
+                }
+                .card-effect-box-row {
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    .card-effect-box-content {
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        margin: 0 4px;
+                        .card-effect-box-item {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+
+            .card-item-container {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                margin: 0 4px;
+            }
+
+            /*requirements*/
+            .card-global-requirement {
+                position: relative;
+                vertical-align: middle;
+                display: inline-block;
+                width: 40px;
+                height: 46px;
+                margin-right: 4px;
+                margin-left: 4px;
+                background-size: 40px 46px;
+                line-height: 16px;
+                text-align: center;
+                filter: drop-shadow(0px 0px 1px black);
+                background-image: url(./assets/tiles/empty.png);
+            }
+            .card-temperature-global-requirement {
+                background-image: url(./assets/global-parameters/temperature.png);
+                width: 14px;
+                background-size: 14px 46px;
+            }
+            .card-greenery-global-requirement {
+                background-image: url(./assets/tiles/greenery.png);
+                background-size: 50px 46px;
+                width: 50px;
+            }
+            .card-greenery-no-O2-global-requirement {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+            }
+            .card-ocean-global-requirement {
+                background-image: url(./assets/tiles/ocean.png);
+            }
+            .card-oxygen-global-requirement {
+                background-image: url(./assets/global-parameters/oxygen.png);
+                width: 46px;
+                background-size: 46px;
+            }
+            .card-venus-global-requirement {
+                background-image: url(./assets/global-parameters/venus.png);
+                width: 60px;
+                height: 40px;
+                background-size: 60px 40px;
+                color: #0000;
+            }
+            /*resources*/
+            .card-resource {
+                font-family: Prototype;
+                position: relative;
+                display: inline-block;
+                margin-left: 3px;
+                margin-right: 3px;
+                width: 30px;
+                height: 30px;
+                font-size: 22px;
+                line-height: 30px;
+                background-size: 30px;
+                filter: drop-shadow(0px 0px 1px black);
+                vertical-align: middle;
+            }
+            .card-resource-trade-discount {
+                background: white;
+            }
+            .card-resource-money {
+                font-family: Prototype;
+                color: black;
+                background-image: url(./assets/resources/megacredit.png);
+                font-weight: normal;
+                font-size: 18px;
+                text-align: center;
+            }
+            .card-resource-steel {
+                background-image: url(./assets/resources/steel.png);
+            }
+            .card-resource-titanium {
+                background-image: url(./assets/resources/titanium.png);
+            }
+            .card-resource-plant {
+                background-image: url(./assets/resources/plant.png);
+            }
+            .card-resource-energy {
+                background-image: url(./assets/resources/power.png);
+            }
+            .card-resource-heat {
+                background-image: url(./assets/resources/heat.png);
+            }
+            .card-resource-microbe {
+                background-image: url(./assets/resources/microbe.png);
+            }
+            .card-resource-animal {
+                background-image: url(./assets/resources/animal.png);
+            }
+            .card-resource-science {
+                background-image: url(./assets/resources/science.png);
+            }
+            .card-resource-floater {
+                background-image: url(./assets/resources/floater.png);
+            }
+            .card-resource-wild {
+                background-image: url(./assets/resources/wild.png);
+            }
+            .card-resource-fighter {
+                background-image: url(./assets/resources/fighter.png);
+            }
+            .card-resource-camp {
+                background-image: url(./assets/resources/camp.png);
+            }
+            .card-resource-asteroid {
+                color: #0000 !important;
+                background-image: url(./assets/resources/asteroid.png);
+            }
+            .card-resource-pristar {
+                background-image: url(./assets/resources/pristar.png);
+            }
+            /*special*/
+            .card-special {
+                font-size: @font_size_big;
+            }
+            .card-asterix {
+                position: relative;
+                top: 3px;
+            }
+            .card-minus {
+                background-image: url(/assets/misc/minus.png);
+                background-size: 15px;
+                margin: 0;
+                width: 15px;
+                height: 10px;
+                background-repeat: no-repeat;
+                margin-right: 3px;
+            }
+            .card-plus {
+                background-image: url(/assets/misc/plus.png);
+                background-size: 15px;
+                min-height: 15px;
+                width: 15px;
+                vertical-align: middle;
+                display: inline-block;
+                margin: 0;
+                margin-right: 3px;
+                background-repeat: no-repeat;
+            }
+            .card-plus--small {
+                background-size: 10px;
+                min-height: 10px;
+                width: 10px;
+            }
+            .card-or,
+            .card-colon {
+                font-size: @font_size_big;
+            }
+            .card-or--small {
+                font-size: @font_size_normal;
+            }
+            .card-res-amount {
+                font-size: @font_size_big;
+                margin-right: 4px;
+            }
+            .card-card {
+                background: url("./assets/resources/card.png");
+                height: 40px;
+                width: 30px;
+                background-size: 30px 40px;
+                vertical-align: middle;
+            }
+            .card-icon {
+                position: absolute;
+                right: -3px;
+                top: -8px;
+                margin: 0;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 10px;
+                background-size: 24px 24px;
+                background-position: center;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+            }
+            .card-red-arrow {
+                background-image: url(./assets/misc/arrow.png);
+                background-size: 30px;
+                width: 30px;
+                height: 30px;
+                vertical-align: middle;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: 0px;
+            }
+            /*colony special*/
+            .card-resource-trade {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+            }
+            /*turmoil special*/
+            .card-influence {
+                display: inline-block;
+                background-image: url(./assets/misc/influence.png);
+                width: 40px;
+                height: 40px;
+                background-size: 40px 40px;
+                vertical-align: middle;
+            }
+            /*tags*/
+            .card-resource-tag {
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                background-size: 34px 34px;
+                background-position: -2px -2px;
+                line-height: 28px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                vertical-align: middle;
+                filter: brightness(0.9);
+            }
+            .card-tag-wild {
+                background-image: url("../assets/tags/wild.png");
+            }
+            .card-tag-building {
+                background-image: url("./assets/tags/building.png");
+            }
+            .card-tag-space {
+                background-image: url("./assets/tags/space.png");
+            }
+            .card-tag-power {
+                background-image: url("./assets/tags/power.png");
+            }
+            .card-tag-jovian {
+                background-image: url("./assets/tags/jovian.png");
+            }
+            .card-tag-venus {
+                background-image: url("./assets/tags/venus.png");
+            }
+            .card-tag-earth {
+                background-image: url("./assets/tags/earth.png");
+            }
+            .card-tag-city {
+                background-image: url("./assets/tags/city.png");
+            }
+            .card-tag-microbe {
+                background-image: url("./assets/tags/microbe.png");
+            }
+            .card-tag-plant {
+                background-image: url("./assets/tags/plant.png");
+            }
+            .card-tag-animal {
+                background-image: url("./assets/tags/animal.png");
+            }
+            .card-tag-event {
+                background-image: url("./assets/tags/event.png");
+            }
+            .card-tag-science {
+                background-image: url("./assets/tags/science.png");
+                background-size: 46px;
+                background-position: -3px;
+            }
+            .card-tag-none {
+                background-image: url("./assets/tags/tag-none.png");
+            }
+            /*production*/
+            .card-production-box {
+                font-family: Prototype;
+                font-weight: normal;
+                text-shadow: none;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                padding: 4px;
+                margin: 0 4px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-image: url(./assets/misc/production.png);
+                background-size: cover;
+                .card-production-box-row {
+                    display: flex;
+                    flex-flow: row;
+                    margin-top: 2px;
+                    margin-bottom: 2px;
+                    .card-production-box-row-item {
+                        align-self: center;
+                        .card-item-container {
+                            margin: 0 !important;
+                        }
+                    }
+                }
+
+                // div {
+                //     display: inline-block;
+                // }
+
+                // .resource-tag {
+                //     margin-bottom: 2px !important;
+                // }
+            }
+            .card-rows {
+                display: flex;
+                flex-flow: column;
+                margin-top: 8px;
+                align-items: center;
+                .card-row {
+                    // background: gold;
+                    margin: 4px 0px;
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                }
+            }
             .card-description {
                 margin-top: 8px;
                 color: #020202;

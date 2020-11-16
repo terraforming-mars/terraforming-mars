@@ -3,9 +3,10 @@
  * The vue unit test tool requires a virtual DOM to run within.
  * This script sets up that virtual DOM
  */
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
+import {Database} from '../../src/database/Database';
 
-const dom = new jsdom.JSDOM("<!doctype html><html><body></body></html>");
+const dom = new jsdom.JSDOM('<!doctype html><html><body></body></html>');
 
 // Attach major properties to global to mimic browser
 (global as any).window = dom.window;
@@ -13,19 +14,34 @@ const dom = new jsdom.JSDOM("<!doctype html><html><body></body></html>");
 (global as any).navigator = (global as any).window.navigator;
 
 // Attach subsequent properties to global
-Object.getOwnPropertyNames((global as any).window).forEach(function (k) {
-    // don't override a property which exists
-    if (global.hasOwnProperty(k) === true) {
-        return;
-    }
-    if (k === "localStorage" || k === "sessionStorage") {
-        return;
-    }
-    (global as any)[k] = (global as any).window[k];
+Object.getOwnPropertyNames((global as any).window).forEach(function(k) {
+  // don't override a property which exists
+  if (global.hasOwnProperty(k) === true) {
+    return;
+  }
+  if (k === 'localStorage' || k === 'sessionStorage') {
+    return;
+  }
+  (global as any)[k] = (global as any).window[k];
 });
 
-const Vue = require("vue");
+const Vue = require('vue');
 
 // setup for default exports
 Vue.default = Vue;
+
+// don't save to database during tests
+Database.getInstance = function() {
+  return {
+    cleanSaves: () => {},
+    deleteGameNbrSaves: () => {},
+    getClonableGames: () => {},
+    getGames: () => {},
+    restoreGame: () => {},
+    restoreGameLastSave: () => {},
+    restoreReferenceGame: () => {},
+    saveGameResults: () => {},
+    saveGameState: () => {},
+  };
+};
 

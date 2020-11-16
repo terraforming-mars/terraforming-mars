@@ -1,48 +1,48 @@
-import { expect } from "chai";
-import { RobinsonIndustries } from "../../../src/cards/prelude/RobinsonIndustries";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Player } from "../../../src/Player";
-import { Resources } from "../../../src/Resources";
+import {expect} from 'chai';
+import {RobinsonIndustries} from '../../../src/cards/prelude/RobinsonIndustries';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 
-describe("RobinsonIndustries", function () {
-    let card : RobinsonIndustries, player : Player, game : Game;
+describe('RobinsonIndustries', function() {
+  let card : RobinsonIndustries; let player : Player; let game : Game;
 
-    beforeEach(function() {
-        card = new RobinsonIndustries();
-        player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player], player);
-        player.corporationCard = card;
-    });
+  beforeEach(function() {
+    card = new RobinsonIndustries();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player], player);
+    player.corporationCard = card;
+  });
 
-    it("Can't act", function () {
-        player.megaCredits = 3;
-        expect(card.canAct(player)).is.not.true;
-    });
+  it('Can\'t act', function() {
+    player.megaCredits = 3;
+    expect(card.canAct(player)).is.not.true;
+  });
 
-    it("Can act", function () {
-        player.megaCredits = 4;
-        expect(card.canAct(player)).is.true;
+  it('Can act', function() {
+    player.megaCredits = 4;
+    expect(card.canAct(player)).is.true;
 
-        const result = card.action(player, game) as OrOptions;
-        expect(result.options).has.lengthOf(6);
+    const result = card.action(player, game) as OrOptions;
+    expect(result.options).has.lengthOf(6);
 
-        result.options[1].cb();
-        expect(player.getProduction(Resources.STEEL)).to.eq(1);
-        expect(player.megaCredits).to.eq(0);
-    });
+    result.options[1].cb();
+    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+  });
 
-    it("Only allows to choose from lowest production(s)", function () {
-        player.addProduction(Resources.MEGACREDITS, -1);
-        let result = card.action(player, game) as OrOptions;
-        expect(result.options).has.lengthOf(1);
+  it('Only allows to choose from lowest production(s)', function() {
+    player.addProduction(Resources.MEGACREDITS, -1);
+    let result = card.action(player, game) as OrOptions;
+    expect(result.options).has.lengthOf(1);
 
-        player.addProduction(Resources.MEGACREDITS, 5);
-        player.addProduction(Resources.TITANIUM, 1);
-        player.addProduction(Resources.PLANTS, 2);
+    player.addProduction(Resources.MEGACREDITS, 5);
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.PLANTS, 2);
 
-        result = card.action(player, game) as OrOptions;
-        expect(result.options).has.lengthOf(3);
-    });
+    result = card.action(player, game) as OrOptions;
+    expect(result.options).has.lengthOf(3);
+  });
 });

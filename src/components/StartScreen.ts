@@ -1,20 +1,20 @@
-import Vue from "vue";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import Vue from 'vue';
+import {LanguageSwitcher} from './LanguageSwitcher';
 
-import * as raw_settings from "../../assets/settings.json";
+import * as raw_settings from '../../assets/settings.json';
 
-export const StartScreen = Vue.component("start-screen", {
-    props: {
-        version: {
-            type: Object as () => typeof raw_settings.version
-        }
+export const StartScreen = Vue.component('start-screen', {
+  props: {
+    version: {
+      type: String as () => typeof raw_settings.version,
     },
-    components: {
-        LanguageSwitcher
-    },
-    methods: {
-    },
-    template: `
+  },
+  components: {
+    LanguageSwitcher,
+  },
+  methods: {
+  },
+  template: `
 <div class="start-screen">
   <div v-i18n class="start-screen-links">
     <div class="start-screen-header start-screen-link--title">
@@ -33,5 +33,5 @@ export const StartScreen = Vue.component("start-screen", {
       <div class="start-version">version: {{version}}</div>
     </div>
   </div>
-</div>`
+</div>`,
 });

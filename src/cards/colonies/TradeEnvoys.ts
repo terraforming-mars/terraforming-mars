@@ -1,7 +1,7 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { CardName } from "../../CardName";
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
 
 export class TradeEnvoys implements IProjectCard {
     public cost = 6;
@@ -10,7 +10,11 @@ export class TradeEnvoys implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public play(player: Player) {
-        player.colonyTradeOffset++;
+      player.colonyTradeOffset++;
       return undefined;
+    }
+
+    public onDiscard(player: Player): void {
+      player.colonyTradeOffset--;
     }
 }

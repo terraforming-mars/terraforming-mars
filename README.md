@@ -46,7 +46,7 @@ If you are looking for a dead simple deployment, use Heroku, instructions are ar
 
 #### Docker
 
-Additional information on how to setup the game with Docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
+Additional information on how to setup the game with Docker can be found [here](DOCKER.md).
 
 #### HTTPS
 

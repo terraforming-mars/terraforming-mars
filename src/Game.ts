@@ -59,6 +59,7 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {PartyName} from './turmoil/parties/PartyName';
 
 export type GameId = string;
 
@@ -1296,6 +1297,10 @@ export class Game implements ISerializable<SerializedGame> {
         }
         if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
           player.addProduction(Resources.HEAT);
+        }
+
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp02')) {
+          player.setResource(Resources.MEGACREDITS, steps * 2);
         }
 
         player.increaseTerraformRatingSteps(steps, this);

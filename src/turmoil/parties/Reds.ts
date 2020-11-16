@@ -12,7 +12,7 @@ export class Reds extends Party implements IParty {
 
 export class RedsBonus01 implements Bonus {
   id = 'rb01';
-  description = 'The player with the lowest TR gains 1 TR. Ties are friendly.';
+  description = 'The player with the lowest TR gains 1 TR (ties are friendly)';
   isDefault = true;
 
   grant(game: Game) {
@@ -34,7 +34,7 @@ export class RedsBonus01 implements Bonus {
 
 export class RedsBonus02 implements Bonus {
   id = 'rb02';
-  description = 'The player with the highest TR loses 1 TR. Ties are friendly.';
+  description = 'The player with the highest TR loses 1 TR (ties are friendly)';
 
   grant(game: Game) {
     const players = game.getPlayers();

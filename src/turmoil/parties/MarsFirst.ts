@@ -21,7 +21,7 @@ export class MarsFirst extends Party implements IParty {
 
 export class MarsFirstBonus01 implements Bonus {
   id = 'mb01';
-  description = 'Gain receive 1 MC for each Building tag you have.';
+  description = 'Gain 1 MC for each Building tag you have';
   isDefault = true;
 
   grant(game: Game) {
@@ -34,7 +34,7 @@ export class MarsFirstBonus01 implements Bonus {
 
 export class MarsFirstBonus02 implements Bonus {
   id = 'mb02';
-  description = 'Gain receive 1 MC for each tile you have on Mars.';
+  description = 'Gain 1 MC for each tile you have ON MARS';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -50,7 +50,7 @@ export class MarsFirstBonus02 implements Bonus {
 export class MarsFirstPolicy01 implements Policy {
   isDefault = true;
   id = 'mfp01';
-  description: string = 'Whenever you place a tile ON MARS, gain 1 steel.';
+  description: string = 'Whenever you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && game.phase === Phase.ACTION) {
@@ -61,7 +61,7 @@ export class MarsFirstPolicy01 implements Policy {
 
 export class MarsFirstPolicy02 implements Policy {
   id = 'mfp02';
-  description: string = 'After you play a building card, gain 1 MC.';
+  description: string = 'After you play a Building card, gain 1 MC';
 
   onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS);
@@ -70,18 +70,19 @@ export class MarsFirstPolicy02 implements Policy {
 
 export class MarsFirstPolicy03 implements Policy {
   id = 'mfp03';
-  description: string = 'Your steel resources are worth 1 MC extra.';
+  description: string = 'Your steel resources are worth 1 MC extra';
 }
 
 export class MarsFirstPolicy04 implements Policy {
   id = 'mfp04';
-  description: string = 'Spend 4 MC to draw a building card';
+  description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
 
   canAct(player: Player) {
     return player.canAfford(4);
   }
 
   action(player: Player, game: Game) {
+    game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
         player,
         4,

@@ -513,6 +513,12 @@ export class Player implements ISerializable<SerializedPlayer> {
           requirementsBonus += playedCard.getRequirementBonus(this, game);
         }
       }
+
+      // PoliticalAgendas Scientists P2 hook
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, 'sp02')) {
+        requirementsBonus += 2;
+      }
+
       return requirementsBonus;
     }
 

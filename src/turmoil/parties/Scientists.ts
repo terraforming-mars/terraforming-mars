@@ -112,4 +112,11 @@ export class ScientistsPolicy03 implements Policy {
 export class ScientistsPolicy04 implements Policy {
   id = 'sp04';
   description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
+
+  apply(game: Game) {
+    game.getPlayers().forEach((player) => {
+      // TODO: Reset to false during Turmoil cleanup and party changeover
+      player.hasTurmoilScienceTagBonus = true;
+    });
+  }
 }

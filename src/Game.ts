@@ -60,6 +60,7 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {PartyName} from './turmoil/parties/PartyName';
+import {AgendaStyle} from './turmoil/PoliticalAgendasData';
 
 export type GameId = string;
 
@@ -87,7 +88,7 @@ export interface GameOptions {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
-  politicalAgendasExtension: boolean;
+  politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -120,7 +121,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
-  politicalAgendasExtension: false,
+  politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,

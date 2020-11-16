@@ -27,7 +27,7 @@ export class Greens extends Party implements IParty {
 export class GreensBonus01 implements Bonus {
   isDefault = true;
   id = 'gb01';
-  description: string = 'Gain 1 MC for each Plant tag, Microbe tag, and Animal tag you have.';
+  description: string = 'Gain 1 MC for each Plant, Microbe and Animal tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -39,7 +39,7 @@ export class GreensBonus01 implements Bonus {
 
 export class GreensBonus02 implements Bonus {
   id = 'gb02';
-  description: string = 'Gain 2 MC for each greenery tile you have.';
+  description: string = 'Gain 2 MC for each greenery tile you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -55,7 +55,7 @@ export class GreensBonus02 implements Bonus {
 export class GreensPolicy01 implements Policy {
   isDefault = true;
   id = 'gp01';
-  description: string = 'Whenever you place a greenery tile, gain 4 MC.';
+  description: string = 'Whenever you place a greenery tile, gain 4 MC';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
     if (space.tile?.tileType === TileType.GREENERY && game.phase === Phase.ACTION) {
@@ -66,7 +66,7 @@ export class GreensPolicy01 implements Policy {
 
 export class GreensPolicy02 implements Policy {
   id = 'gp02';
-  description: string = 'Whenever you place a tile, gain 1 plant.';
+  description: string = 'Whenever you place a tile, gain 1 plant';
 
   onTilePlaced(player: Player) {
     player.setResource(Resources.PLANTS);
@@ -75,7 +75,7 @@ export class GreensPolicy02 implements Policy {
 
 export class GreensPolicy03 implements Policy {
   id = 'gp03';
-  description: string = 'Whenever you play an animal, plant or microbe tag, gain 2 MC.';
+  description: string = 'Whenever you play an animal, plant or microbe tag, gain 2 MC';
 
   onCardPlayed(player: Player, card: IProjectCard) {
     const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBES];
@@ -87,7 +87,7 @@ export class GreensPolicy03 implements Policy {
 
 export class GreensPolicy04 implements Policy {
   id = 'gp04';
-  description: string = 'Spend 3 plants to add 2 microbes or 1 animal to any card.';
+  description: string = 'Spend 3 plants to add 2 microbes or 1 animal to any card (Turmoil Greens)';
 
   canAct(player: Player) {
     return player.plants >= 3;
@@ -95,6 +95,7 @@ export class GreensPolicy04 implements Policy {
 
   action(player: Player, game: Game) {
     player.plants -= 3;
+    game.log('${0} used Turmoil Greens action', (b) => b.player(player));
 
     const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);

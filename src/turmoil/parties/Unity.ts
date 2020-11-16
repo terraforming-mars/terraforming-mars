@@ -18,7 +18,7 @@ export class Unity extends Party implements IParty {
 
 export class UnityBonus01 implements Bonus {
   id = 'ub01';
-  description = 'Gain 1 MC for each Venus tag, Earth tag, and Jovian tag you have.';
+  description = 'Gain 1 MC for each Venus, Earth and Jovian tag you have';
   isDefault = true;
 
   grant(game: Game) {
@@ -33,7 +33,7 @@ export class UnityBonus01 implements Bonus {
 
 export class UnityBonus02 implements Bonus {
   id = 'ub02';
-  description = 'Gain 1 MC for each space tag you have, including events.';
+  description = 'Gain 1 MC for each Space tag you have, including events';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -46,18 +46,19 @@ export class UnityBonus02 implements Bonus {
 export class UnityPolicy01 implements Policy {
   isDefault = true;
   id = 'up01';
-  description: string = 'Your titanium resources are worth 1 MC extra.';
+  description: string = 'Your titanium resources are worth 1 MC extra';
 }
 
 export class UnityPolicy02 implements Policy {
   id = 'up02';
-  description: string = 'Spend 15 MC to build a colony (titanium may be used).';
+  description: string = 'Spend 15 MC (titanium may be used) to build a Colony (Turmoil Unity)';
 
   canAct(player: Player, game: Game) {
     return player.canAfford(15, game, false, true) && player.hasAvailableColonyTileToBuildOn(game);
   }
 
   action(player: Player, game: Game) {
+    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
         player,
         15,
@@ -75,13 +76,14 @@ export class UnityPolicy02 implements Policy {
 
 export class UnityPolicy03 implements Policy {
   id = 'up03';
-  description: string = 'Spend 4 MC to draw a space card';
+  description: string = 'Spend 4 MC to draw a Space card (Turmoil Unity)';
 
   canAct(player: Player) {
     return player.canAfford(4);
   }
 
   action(player: Player, game: Game) {
+    game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
         player,
         4,
@@ -101,5 +103,5 @@ export class UnityPolicy03 implements Policy {
 
 export class UnityPolicy04 implements Policy {
   id = 'up04';
-  description: string = 'Cards with space tags cost 2 MC less to play.';
+  description: string = 'Cards with Space tags cost 2 MC less to play';
 }

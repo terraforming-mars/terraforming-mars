@@ -58,6 +58,7 @@ import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
+import {DiscardCards} from './deferredActions/DiscardCards';
 
 export type PlayerId = string;
 
@@ -1414,7 +1415,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       );
     }
 
-    private onStandardProject(projectType: StandardProjectType): void {
+    private onStandardProject(projectType: StandardProjectType, game: Game): void {
       if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
         this.corporationCard.onStandardProject(this, projectType);
       }
@@ -1424,6 +1425,11 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           playedCard.onStandardProject(this, projectType);
         }
       }
+
+      // PoliticalAgendas Reds P3 hook
+      if (projectType !== StandardProjectType.SELLING_PATENTS && PartyHooks.shouldApplyPolicy(game, PartyName.REDS, 'rp03')) {
+        game.defer(new DiscardCards(this, game, 1, 'Turmoil Reds - Select a card to discard'));
+      }
     }
 
     private sellPatents(game: Game): PlayerInput {
@@ -1432,7 +1438,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         'Sell',
         this.cardsInHand,
         (foundCards: Array<IProjectCard>) => {
-          this.onStandardProject(StandardProjectType.SELLING_PATENTS);
+          this.onStandardProject(StandardProjectType.SELLING_PATENTS, game);
           this.megaCredits += foundCards.length;
           foundCards.forEach((card) => {
             for (let i = 0; i < this.cardsInHand.length; i++) {
@@ -1465,7 +1471,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
               () => {
                 game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Build Colony'));
                 colony.addColony(this, game);
-                this.onStandardProject(StandardProjectType.BUILD_COLONY);
+                this.onStandardProject(StandardProjectType.BUILD_COLONY, game);
               },
             ));
             return undefined;
@@ -1490,7 +1496,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Air Scrapping'));
               game.increaseVenusScaleLevel(this, 1);
-              this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
+              this.onStandardProject(StandardProjectType.AIR_SCRAPPING, game);
             },
           ));
           return undefined;
@@ -1512,7 +1518,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Buffer Gas'));
               this.increaseTerraformRatingSteps(1, game);
-              this.onStandardProject(StandardProjectType.BUFFER_GAS);
+              this.onStandardProject(StandardProjectType.BUFFER_GAS, game);
             },
           ));
           return undefined;
@@ -1534,7 +1540,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Power plant'));
               this.addProduction(Resources.ENERGY);
-              this.onStandardProject(StandardProjectType.POWER_PLANT);
+              this.onStandardProject(StandardProjectType.POWER_PLANT, game);
             },
           ));
           return undefined;
@@ -1556,7 +1562,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Asteroid'));
               game.increaseTemperature(this, 1);
-              this.onStandardProject(StandardProjectType.ASTEROID);
+              this.onStandardProject(StandardProjectType.ASTEROID, game);
             },
           ));
           return undefined;
@@ -1578,7 +1584,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Aquifer'));
               game.defer(new PlaceOceanTile(this, game, 'Select space for ocean'));
-              this.onStandardProject(StandardProjectType.AQUIFER);
+              this.onStandardProject(StandardProjectType.AQUIFER, game);
             },
           ));
           return undefined;
@@ -1600,7 +1606,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Greenery'));
               game.defer(new PlaceGreeneryTile(this, game));
-              this.onStandardProject(StandardProjectType.GREENERY);
+              this.onStandardProject(StandardProjectType.GREENERY, game);
             },
           ));
           return undefined;
@@ -1622,7 +1628,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             () => {
               game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('City'));
               game.defer(new PlaceCityTile(this, game));
-              this.onStandardProject(StandardProjectType.CITY);
+              this.onStandardProject(StandardProjectType.CITY, game);
               this.addProduction(Resources.MEGACREDITS);
             },
           ));

@@ -1225,6 +1225,10 @@ export class Game implements ISerializable<SerializedGame> {
       const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
       if (this.phase !== Phase.SOLAR) {
+        // PoliticalAgendas Reds P4 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+          player.addProduction(Resources.MEGACREDITS, -1 * steps);
+        }
         player.increaseTerraformRatingSteps(steps, this);
       }
       if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1258,6 +1262,10 @@ export class Game implements ISerializable<SerializedGame> {
         }
         if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
           player.increaseTerraformRating(this);
+        }
+        // PoliticalAgendas Reds P4 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+          player.addProduction(Resources.MEGACREDITS, -1 * steps);
         }
         player.increaseTerraformRatingSteps(steps, this);
       }
@@ -1299,8 +1307,13 @@ export class Game implements ISerializable<SerializedGame> {
           player.addProduction(Resources.HEAT);
         }
 
+        // PoliticalAgendas Kelvinists P2 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp02')) {
           player.setResource(Resources.MEGACREDITS, steps * 2);
+        }
+        // PoliticalAgendas Reds P4 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+          player.addProduction(Resources.MEGACREDITS, -1 * steps);
         }
 
         player.increaseTerraformRatingSteps(steps, this);
@@ -1533,6 +1546,10 @@ export class Game implements ISerializable<SerializedGame> {
         tileType: TileType.OCEAN,
       });
       if (this.phase !== Phase.SOLAR) {
+        // PoliticalAgendas Reds P4 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+          player.addProduction(Resources.MEGACREDITS, -1);
+        }
         player.increaseTerraformRating(this);
       }
       AresHandler.ifAres(this, (aresData) => {

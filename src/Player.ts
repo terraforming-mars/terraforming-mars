@@ -140,6 +140,8 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     // Custom cards
     // Leavitt Station.
     public scienceTagCount: number = 0;
+    // PoliticalAgendas Scientists P4
+    public hasTurmoilScienceTagBonus: boolean = false;
     // Ecoline
     public plantsNeededForGreenery: number = 8;
     // Lawsuit
@@ -633,6 +635,11 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       // Leavitt Station hook
       if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
         tagCount += this.scienceTagCount;
+      }
+
+      // PoliticalAgendas Scientists P4 hook
+      if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
+        tagCount += 1;
       }
 
       if (tag === Tags.WILDCARD) {

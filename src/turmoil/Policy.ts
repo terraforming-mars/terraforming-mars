@@ -12,4 +12,5 @@ export interface Policy {
   onCardPlayed?: (player: Player, card: IProjectCard) => void;
   action?: (player: Player, game: Game) => OrOptions | undefined;
   canAct?: (player: Player, game: Game) => boolean;
+  apply?: (game: Game) => void;
 }

@@ -9,7 +9,6 @@ services:
     security_opt:
       - no-new-privileges:true
     volumes:
-      - ./:/home/node/app
       - tm-db:/usr/src/app/db
 volumes:
   tm-db:

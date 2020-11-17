@@ -5,6 +5,8 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Advertising implements IProjectCard {
   public name = CardName.ADVERTISING;
@@ -21,4 +23,8 @@ export class Advertising implements IProjectCard {
   public play() {
     return undefined;
   }
+  public metadata: CardMetadata = {
+    cardNumber: 'X14',
+    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.megacredits(20).asterix().startEffect.productionBox((pb) => pb.megacredits(1)).description('When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step'))),
+  };
 }

@@ -6,6 +6,9 @@ import {Game} from '../Game';
 import {ISpace} from '../ISpace';
 import {TileType} from '../TileType';
 import {CardName} from '../CardName';
+import {CardMetadata} from '../cards/CardMetadata';
+import {CardRequirements} from '../cards/CardRequirements';
+import {CardRenderer} from '../cards/render/CardRenderer';
 
 export class ArcticAlgae implements IProjectCard {
   public cost = 12;
@@ -24,4 +27,11 @@ export class ArcticAlgae implements IProjectCard {
     player.plants++;
     return undefined;
   }
+
+  public metadata: CardMetadata = {
+    description: 'It must be -12 C or colder to play. Gain 1 plant',
+    cardNumber: '023',
+    requirements: CardRequirements.builder((b) => b.temperature(-12).max()),
+    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.oceans(1).any.startEffect.plants(2).description('When anyone places an ocean tile, gain 2 plants')).br.plants(1)),
+  };
 }

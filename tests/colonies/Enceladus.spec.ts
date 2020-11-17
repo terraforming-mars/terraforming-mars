@@ -28,7 +28,7 @@ describe('Enceladus', function() {
 
   it('Should build', function() {
     player.playCard(game, tardigrades);
-    enceladus.onColonyPlaced(player, game);
+    enceladus.addColony(player, game);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -44,7 +44,8 @@ describe('Enceladus', function() {
     player.playCard(game, tardigrades);
     enceladus.trade(player, game);
 
-    expect(game.deferredActions).has.lengthOf(1);
+    // Should have AddResourcesToCard, GiveColontBonus and decrease track
+    expect(game.deferredActions).has.lengthOf(3);
     const action = game.deferredActions.shift()!;
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
@@ -59,15 +60,15 @@ describe('Enceladus', function() {
     player.playCard(game, tardigrades);
     player2.playCard(game, regolithEaters);
 
-    enceladus.onColonyPlaced(player, game);
-        game.deferredActions.shift()!.execute(); // Gain placement microbes
+    enceladus.addColony(player, game);
+    game.deferredActions.shift()!.execute(); // Gain placement microbes
 
-        enceladus.trade(player2, game);
-        game.deferredActions.shift()!.execute(); // Gain trade microbes
+    enceladus.trade(player2, game);
+    game.deferredActions.shift()!.execute(); // Gain trade microbes
 
-        game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Trade bonus
 
-        expect(tardigrades.resourceCount).to.eq(4);
-        expect(regolithEaters.resourceCount).to.eq(1);
+    expect(tardigrades.resourceCount).to.eq(4);
+    expect(regolithEaters.resourceCount).to.eq(1);
   });
 });

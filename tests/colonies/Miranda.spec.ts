@@ -28,7 +28,7 @@ describe('Miranda', function() {
 
   it('Should build', function() {
     player.playCard(game, pets);
-    miranda.onColonyPlaced(player, game);
+    miranda.addColony(player, game);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -44,7 +44,8 @@ describe('Miranda', function() {
     player.playCard(game, pets);
     miranda.trade(player, game);
 
-    expect(game.deferredActions).has.lengthOf(1);
+    // Should have AddResourcesToCard, GiveColonyBonus and decrease track
+    expect(game.deferredActions).has.lengthOf(3);
     const action = game.deferredActions.shift()!;
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
@@ -59,16 +60,16 @@ describe('Miranda', function() {
     player.playCard(game, pets);
     player2.playCard(game, predators);
 
-    miranda.onColonyPlaced(player, game);
-        game.deferredActions.shift()!.execute(); // Gain placement animals
+    miranda.addColony(player, game);
+    game.deferredActions.shift()!.execute(); // Gain placement animals
 
-        miranda.trade(player2, game);
-        game.deferredActions.shift()!.execute(); // Gain trade animals
+    miranda.trade(player2, game);
+    game.deferredActions.shift()!.execute(); // Gain trade animals
 
-        game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Trade bonus
 
-        expect(pets.resourceCount).to.eq(2);
-        expect(predators.resourceCount).to.eq(1);
-        expect(player.cardsInHand).has.lengthOf(1);
+    expect(pets.resourceCount).to.eq(2);
+    expect(predators.resourceCount).to.eq(1);
+    expect(player.cardsInHand).has.lengthOf(1);
   });
 });

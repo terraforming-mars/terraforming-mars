@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
-import {IColony} from '../../colonies/Colony';
+import {Colony} from '../../colonies/Colony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyName} from '../../colonies/ColonyName';
 import {ColonyModel} from '../../models/ColonyModel';
@@ -22,7 +22,7 @@ export class Aridor implements CorporationCard {
     public initialAction(player: Player, game: Game) {
       if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
 
-      const availableColonies: IColony[] = game.colonyDealer.discardedColonies;
+      const availableColonies: Colony[] = game.colonyDealer.discardedColonies;
       if (availableColonies.length === 0) return undefined;
 
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(availableColonies);
@@ -45,7 +45,7 @@ export class Aridor implements CorporationCard {
       return selectColony;
     }
 
-    private checkActivation(colony: IColony, game: Game): void {
+    private checkActivation(colony: Colony, game: Game): void {
       if (colony.resourceType === undefined) return;
       game.getPlayers().forEach((player) => {
         if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {

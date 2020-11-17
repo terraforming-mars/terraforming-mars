@@ -1,30 +1,17 @@
-import {Colony, IColony} from './Colony';
-import {Player} from '../Player';
-import {PlayerInput} from '../PlayerInput';
+import {Colony} from './Colony';
 import {Resources} from '../Resources';
 import {ColonyName} from './ColonyName';
-import {Game} from '../Game';
-import {LogHelper} from '../components/LogHelper';
+import {ColonyBenefit} from './ColonyBenefit';
 
-export class Callisto extends Colony implements IColony {
+export class Callisto extends Colony {
     public name = ColonyName.CALLISTO;
-    public description: string = 'Energy';
-    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
-      if (usesTradeFleet) this.beforeTrade(this, player, game);
-
-      const qty = Math.max(2, (2 * this.trackPosition) -1 + Math.max(this.trackPosition - 4, 0));
-      player.energy += qty;
-      LogHelper.logGainStandardResource(game, player, Resources.ENERGY, qty);
-
-      if (usesTradeFleet) this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-      super.addColony(this, player, game);
-      player.addProduction(Resources.ENERGY);
-      return undefined;
-    }
-    public giveTradeBonus(player: Player): undefined | PlayerInput {
-      player.energy += 3;
-      return undefined;
-    }
+    public description = 'Energy';
+    public buildType = ColonyBenefit.GAIN_PRODUCTION;
+    public buildResource = Resources.ENERGY;
+    public tradeType = ColonyBenefit.GAIN_RESOURCES;
+    public tradeQuantity = [0, 2, 3, 5, 7, 10, 13];
+    public tradeResource = Resources.ENERGY;
+    public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
+    public colonyBonusQuantity = 3;
+    public colonyBonusResource = Resources.ENERGY;
 }

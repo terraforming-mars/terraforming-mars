@@ -17,7 +17,7 @@ import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard} from './cards/ICard';
-import {IColony} from './colonies/Colony';
+import {Colony} from './colonies/Colony';
 import {ILoadable} from './ILoadable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
@@ -1433,7 +1433,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       return result;
     }
 
-    private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
+    private buildColony(game: Game, openColonies: Array<Colony>): PlayerInput {
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
       return new SelectColony('Build colony (' + constants.BUILD_COLONY_COST + ' MC)', 'Build', coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach((colony) => {
@@ -1446,7 +1446,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
                 'Select how to pay for Colony project',
                 () => {
                   game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Build Colony'));
-                  colony.onColonyPlaced(this, game);
+                  colony.addColony(this, game);
                   this.onStandardProject(StandardProjectType.BUILD_COLONY);
                 },
             ));
@@ -1613,7 +1613,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       );
     }
 
-    private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+    private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
       const opts: Array<OrOptions | SelectColony> = [];
       let payWith: Resources | ResourceType | undefined = undefined;
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);

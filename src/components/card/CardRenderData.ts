@@ -4,7 +4,7 @@ import {CardRowData} from './CardRowData';
 
 export const CardRenderData = Vue.component('CardRenderData', {
   props: {
-    data: {
+    renderData: {
       type: Object as () => CardRenderer,
       required: true,
     },
@@ -14,7 +14,7 @@ export const CardRenderData = Vue.component('CardRenderData', {
   },
   template: `
         <div class="card-rows">
-            <CardRowData v-for="(cardData, i) in data.rows" :data="cardData" :key="i" />
+            <CardRowData v-for="(cardData, i) in renderData.rows" :rowData="cardData" :key="i" />
         </div>
     `,
 });

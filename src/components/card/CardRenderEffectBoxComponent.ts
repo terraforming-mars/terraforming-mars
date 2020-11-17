@@ -9,7 +9,7 @@ import {CardDescription} from './CardDescription';
 
 export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxComponent', {
   props: {
-    data: {
+    effectData: {
       type: Object as () => CardRenderEffect,
       required: true,
     },
@@ -39,22 +39,22 @@ export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxCo
   template: `
       <div :class="getClasses()">
         <div class="card-effect-box-row">
-            <div v-if="data.delimiter !== undefined" class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in data.cause" class="card-effect-box-item" :key="rowIndex">
+            <div v-if="effectData.delimiter !== undefined" class="card-effect-box-content">
+                <div v-for="(rowItem, rowIndex) in effectData.cause" class="card-effect-box-item" :key="rowIndex">
                   <CardRenderItemComponent v-if="getComponentType(rowItem) === 'item'" :item="rowItem"/>
                   <CardRenderSymbolComponent v-else-if="getComponentType(rowItem) === 'symbol'" :item="rowItem" />
                 </div>
             </div>
-            <CardRenderSymbolComponent v-if="data.delimiter !== undefined" :item="data.delimiter" />
+            <CardRenderSymbolComponent v-if="effectData.delimiter !== undefined" :item="effectData.delimiter" />
             <div class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in data.effect" class="card-effect-box-item" :key="rowIndex">
+                <div v-for="(rowItem, rowIndex) in effectData.effect" class="card-effect-box-item" :key="rowIndex">
                     <CardRenderItemComponent v-if="getComponentType(rowItem) === 'item'" :item="rowItem"/>
                     <CardRenderSymbolComponent v-else-if="getComponentType(rowItem) === 'symbol'" :item="rowItem" />
                     <CardProductionBoxComponent v-else-if="getComponentType(rowItem) === 'production'" :rows="rowItem.rows" />
                 </div>
             </div>
         </div>
-        <CardDescription :text="data.description" />
+        <CardDescription :text="effectData.description" />
       </div>
     `,
 });

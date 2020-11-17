@@ -78,7 +78,7 @@ export class CardRenderEffect extends CardRenderer {
   public get description(): ItemType {
     this._validate();
     // TODO (chosta): validate builder method to make sure it's the last element
-    return `Effect: ${this.rows[2].slice(-1)[0]}`;
+    return `Effect: ${this.rows[2].pop()}`;
   }
 }
 

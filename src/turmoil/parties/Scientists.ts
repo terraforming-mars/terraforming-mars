@@ -45,7 +45,7 @@ export class ScientistsBonus02 implements Bonus {
 export class ScientistsPolicy01 implements Policy {
   isDefault = true;
   id = 'sp01';
-  description: string = 'Pay 10 MC to draw 3 cards';
+  description: string = 'Pay 10 MC to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player) {
     return player.canAfford(10);
@@ -80,7 +80,7 @@ export class ScientistsPolicy02 implements Policy {
 
 export class ScientistsPolicy03 implements Policy {
   id = 'sp03';
-  description: string = 'Pay 4 MC to discard a card and draw a card';
+  description: string = 'Pay 4 MC to discard a card and draw a card (Turmoil Scientists)';
 
   canAct(player: Player) {
     return player.canAfford(4);

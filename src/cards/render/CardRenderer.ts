@@ -78,7 +78,7 @@ export class CardRenderEffect extends CardRenderer {
   public get description(): ItemType {
     this._validate();
     // TODO (chosta): validate builder method to make sure it's the last element
-    return `Effect: ${this.rows[2].pop()}`;
+    return `Effect: ${this.rows[2].slice(-1)[0]}`;
   }
 }
 
@@ -268,16 +268,16 @@ class Builder {
 
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      const item = row?.pop();
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "any" without a CardRenderItem.');
+      }
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"any" could be called on CardRenderItem only');
       }
 
-      if (item === undefined) {
-        throw new Error('Called "any" without a CardRenderItem.');
-      }
       item.anyPlayer = true;
-      row?.push(item);
+      row.push(item);
       this._data.push(row);
     }
 
@@ -293,7 +293,7 @@ class Builder {
 
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      const item = row?.pop();
+      const item = row.pop();
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"played" could be called on CardRenderItem only');
       }
@@ -302,7 +302,7 @@ class Builder {
         throw new Error('Called "played" without a CardRenderItem.');
       }
       item.isPlayed = true;
-      row?.push(item);
+      row.push(item);
       this._data.push(row);
     }
 

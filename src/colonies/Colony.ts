@@ -1,6 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../CardName';
-import {ColonyBenefitType} from './ColonyBenefitType';
+import {ColonyBenefit} from './ColonyBenefit';
 import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
@@ -39,13 +39,13 @@ export abstract class Colony implements SerializedColony {
     public trackPosition: number = 1;
     public resourceType?: ResourceType;
 
-    public abstract buildType: ColonyBenefitType;
+    public abstract buildType: ColonyBenefit;
     public buildQuantity: Array<number> = [1, 1, 1];
     public buildResource?: Resources;
-    public abstract tradeType: ColonyBenefitType;
+    public abstract tradeType: ColonyBenefit;
     public tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
     public tradeResource?: Resources | Array<Resources>;
-    public abstract colonyBonusType: ColonyBenefitType;
+    public abstract colonyBonusType: ColonyBenefit;
     public colonyBonusQuantity: number = 1;
     public colonyBonusResource?: Resources;
     public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
@@ -141,19 +141,19 @@ export abstract class Colony implements SerializedColony {
     }
 
 
-    private giveBonus(player: Player, game: Game, bonusType: ColonyBenefitType, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    private giveBonus(player: Player, game: Game, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
-        case ColonyBenefitType.ADD_RESOURCES_TO_CARD:
+        case ColonyBenefit.ADD_RESOURCES_TO_CARD:
           const resourceType = this.resourceType!;
           action = new AddResourcesToCard(player, game, resourceType, quantity);
           break;
 
-        case ColonyBenefitType.ADD_RESOURCES_TO_VENUS_CARD:
+        case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
           action = new AddResourcesToCard(player, game, undefined, quantity, Tags.VENUS, 'Select Venus card to add ' + quantity + ' resource(s)');
           break;
 
-        case ColonyBenefitType.COPY_TRADE:
+        case ColonyBenefit.COPY_TRADE:
           const openColonies = game.colonies.filter((colony) => colony.isActive);
           const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
           action = new DeferredAction(
@@ -171,11 +171,11 @@ export abstract class Colony implements SerializedColony {
           );
           break;
 
-        case ColonyBenefitType.DRAW_CARDS:
+        case ColonyBenefit.DRAW_CARDS:
           action = new DrawCards(player, game, quantity);
           break;
 
-        case ColonyBenefitType.DRAW_CARDS_AND_BUY_ONE:
+        case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
           // TODO (Lynesth): Make a deferred action for that and cards that behave the same (ie. Business Network)
           const dealtCard = game.dealer.dealCard();
           const canSelectCard = player.canAfford(player.cardCost);
@@ -203,12 +203,12 @@ export abstract class Colony implements SerializedColony {
           );
           break;
 
-        case ColonyBenefitType.DRAW_CARDS_AND_DISCARD_ONE:
+        case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
           player.cardsInHand.push(game.dealer.dealCard());
           action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
           break;
 
-        case ColonyBenefitType.DRAW_CARDS_AND_KEEP_ONE:
+        case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
           const cardsDrawn: Array<IProjectCard> = [];
           for (let counter = 0; counter < quantity; counter++) {
             cardsDrawn.push(game.dealer.dealCard());
@@ -216,54 +216,54 @@ export abstract class Colony implements SerializedColony {
           action = new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn);
           break;
 
-        case ColonyBenefitType.GAIN_CARD_DISCOUNT:
+        case ColonyBenefit.GAIN_CARD_DISCOUNT:
           player.cardDiscount += 1;
           game.log('Cards played by ${0} cost 1 MC less this generation', (b) => b.player(player));
           break;
 
-        case ColonyBenefitType.GAIN_PRODUCTION:
+        case ColonyBenefit.GAIN_PRODUCTION:
           if (resource === undefined) throw new Error('Resource cannot be undefined');
           player.addProduction(resource, quantity);
           LogHelper.logGainProduction(game, player, resource, quantity);
           break;
 
-        case ColonyBenefitType.GAIN_RESOURCES:
+        case ColonyBenefit.GAIN_RESOURCES:
           if (resource === undefined) throw new Error('Resource cannot be undefined');
           player.setResource(resource, quantity);
           LogHelper.logGainStandardResource(game, player, resource, quantity);
           break;
 
-        case ColonyBenefitType.GAIN_SCIENCE_TAG:
+        case ColonyBenefit.GAIN_SCIENCE_TAG:
           player.scienceTagCount += 1;
           player.playCard(game, new ScienceTagCard());
           game.log('${0} gained 1 Science tag', (b) => b.player(player));
           break;
 
-        case ColonyBenefitType.GAIN_TR:
+        case ColonyBenefit.GAIN_TR:
           if (quantity > 0) {
             player.increaseTerraformRatingSteps(quantity, game);
             LogHelper.logTRIncrease(game, player, quantity);
           };
           break;
 
-        case ColonyBenefitType.GAIN_VP:
+        case ColonyBenefit.GAIN_VP:
           if (quantity > 0) {
             player.colonyVictoryPoints += quantity;
             game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
           }
           break;
 
-        case ColonyBenefitType.INCREASE_VENUS_SCALE:
+        case ColonyBenefit.INCREASE_VENUS_SCALE:
           game.increaseVenusScaleLevel(player, quantity as 3|2|1);
           game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
           break;
 
-        case ColonyBenefitType.LOSE_RESOURCES:
+        case ColonyBenefit.LOSE_RESOURCES:
           if (resource === undefined) throw new Error('Resource cannot be undefined');
           player.setResource(resource, Math.max(player.getResource(resource) - quantity, 0));
           break;
 
-        case ColonyBenefitType.OPPONENT_DISCARD:
+        case ColonyBenefit.OPPONENT_DISCARD:
           if (game.isSoloMode()) break;
           action = new DeferredAction(
               player,
@@ -283,11 +283,11 @@ export abstract class Colony implements SerializedColony {
           );
           break;
 
-        case ColonyBenefitType.PLACE_OCEAN_TILE:
+        case ColonyBenefit.PLACE_OCEAN_TILE:
           action = new PlaceOceanTile(player, game, 'Select ocean space for ' + this.name + ' colony');
           break;
 
-        case ColonyBenefitType.STEAL_RESOURCES:
+        case ColonyBenefit.STEAL_RESOURCES:
           if (resource === undefined) throw new Error('Resource cannot be undefined');
           action = new StealResources(player, game, resource, quantity);
           break;
@@ -298,6 +298,10 @@ export abstract class Colony implements SerializedColony {
 
       if (action !== undefined) {
         if (isGiveColonyBonus) {
+          /*
+           * When this method is called from within the GiveColonyBonus deferred action
+           * we return the player input directly instead of deferring it
+           */
           return action.execute(); // undefined | PlayerInput
         } else {
           game.defer(action);

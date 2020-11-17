@@ -1,4 +1,4 @@
-export enum ColonyBenefitType {
+export enum ColonyBenefit {
     ADD_RESOURCES_TO_CARD,
     ADD_RESOURCES_TO_VENUS_CARD,
     COPY_TRADE,

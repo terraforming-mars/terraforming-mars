@@ -12,6 +12,7 @@ export interface IParty {
     sendDelegate: (playerId: PlayerId | 'NEUTRAL', game: Game) => void;
     removeDelegate: (playerId: PlayerId | 'NEUTRAL', game: Game) => void;
     bonuses: Array<Bonus>;
+    policies: Array<Policy>;
     getPresentPlayers(): Array<PlayerId | 'NEUTRAL'>;
     getDelegates:(player: PlayerId | 'NEUTRAL') => number;
     activeBonus?: Bonus;

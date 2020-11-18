@@ -17,6 +17,7 @@ export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
   description = 'Focused on Martian development and independence.';
   bonuses = [new MarsFirstBonus01(), new MarsFirstBonus02()];
+  policies = [new MarsFirstPolicy01(), new MarsFirstPolicy02(), new MarsFirstPolicy03(), new MarsFirstPolicy04()];
 }
 
 export class MarsFirstBonus01 implements Bonus {

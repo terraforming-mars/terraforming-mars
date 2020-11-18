@@ -12,6 +12,7 @@ export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
   description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
   bonuses = [new KelvinistsBonus01(), new KelvinistsBonus02()];
+  policies = [new KelvinistsPolicy01(), new KelvinistsPolicy02(), new KelvinistsPolicy03(), new KelvinistsPolicy04()];
 }
 
 export class KelvinistsBonus01 implements Bonus {

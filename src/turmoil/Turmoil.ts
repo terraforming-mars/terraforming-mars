@@ -79,6 +79,19 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
         }),
       };
 
+      if (politicalAgendas === AgendaStyle.STANDARD) {
+        this.parties.forEach((party) => {
+          party.activeBonus = party.bonuses.find((bonus) => bonus.isDefault === true);
+          party.activePolicy = party.policies.find((policy) => policy.isDefault === true);
+        });
+      } else {
+        // Initialize random bonuses and policies if AgendaStyle is RANDOM or CHAIRMAN
+        this.parties.forEach((party) => {
+          party.activeBonus = party.bonuses[Math.floor(Math.random() * party.bonuses.length)];
+          party.activePolicy = party.policies[Math.floor(Math.random() * party.policies.length)];
+        });
+      }
+
       // Init the global event dealer
       this.globalEventDealer = new GlobalEventDealer();
       this.globalEventDealer.initGlobalEvents(game);

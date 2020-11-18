@@ -15,6 +15,7 @@ export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
   description: string = 'Tech is the door to the future, and Scientists will do anything to open it.';
   bonuses = [new ScientistsBonus01(), new ScientistsBonus02()];
+  policies = [new ScientistsPolicy01(), new ScientistsPolicy02(), new ScientistsPolicy03(), new ScientistsPolicy04()];
 }
 
 export class ScientistsBonus01 implements Bonus {

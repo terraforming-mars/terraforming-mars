@@ -25,6 +25,6 @@ export class OptimalAerobraking implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: '031',
-    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.space().played.event().played.startEffect.megacredits(3).heat(3).description('When you play a Space Event, you gain 3 MC and 3 heat'))),
+    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.space().played.event().played.startEffect.megacredits(3).heat(3).description('Effect: When you play a Space Event, you gain 3 MC and 3 heat'))),
   };
 }

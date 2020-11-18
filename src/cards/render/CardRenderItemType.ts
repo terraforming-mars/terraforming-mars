@@ -9,6 +9,8 @@ export enum CardRenderItemType {
   TITANIUM = 'titanium',
   STEEL = 'steel',
   MEGACREDITS = 'megacredits',
+  CARDS = 'cards',
+  FLOATERS = 'flaters',
   MICROBES = 'microbes',
   ANIMALS = 'animals',
   EVENT = 'event',

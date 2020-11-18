@@ -4,6 +4,7 @@ import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {BoardColony, Board} from './Board';
 import {BoardName} from './BoardName';
+import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ClaimedMilestone} from './ClaimedMilestone';
@@ -385,7 +386,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
         temperature: this.temperature,
         turmoil: this.turmoil,
-        unDraftedCards: Array.from(this.unDraftedCards.entries()),
+        unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
+          return [
+            a[0],
+            a[1].map((c) => c.name),
+          ];
+        }),
         venusScaleLevel: this.venusScaleLevel,
       };
     }
@@ -1735,6 +1741,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
       const o = Object.assign(this, d);
+      const cardFinder = new CardFinder();
 
       // Brand new deferred actions queue
       this.deferredActions = new DeferredActionsQueue();
@@ -1896,6 +1903,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Reinit undrafted cards map
       this.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
+      d.unDraftedCards.forEach((unDraftedCard) => {
+        this.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
+      });
 
       // Define who is the active player and init the take action phase
       const active = this.players.find((player) => player.id === d.activePlayer);

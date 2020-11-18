@@ -1,6 +1,7 @@
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {IProjectCard} from './cards/IProjectCard';
+import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {CardManifest} from './cards/CardManifest';
 import {CardName} from './CardName';
 import {CorporationCard} from './cards/corporation/CorporationCard';
@@ -33,6 +34,9 @@ export class CardFinder {
     }
 
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
+      if (cardName === CardName.BEGINNER_CORPORATION) {
+        return new BeginnerCorporation();
+      }
       let found : (ICardFactory<CorporationCard> | undefined);
       CardFinder.getDecks().forEach((deck) => {
         // Short circuit
@@ -44,7 +48,7 @@ export class CardFinder {
       if (found !== undefined) {
         return new found.Factory();
       }
-      console.warn(`card not found ${cardName}`);
+      console.warn(`corporation card not found ${cardName}`);
       return undefined;
     }
 

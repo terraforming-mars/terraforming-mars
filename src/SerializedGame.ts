@@ -1,5 +1,5 @@
-import {IProjectCard} from './cards/IProjectCard';
 import {Phase} from './Phase';
+import {CardName} from './CardName';
 import {ClaimedMilestone} from './ClaimedMilestone';
 import {FundedAward} from './FundedAward';
 import {IMilestone} from './milestones/IMilestone';
@@ -50,7 +50,7 @@ export interface SerializedGame {
     someoneHasRemovedOtherPlayersPlants: boolean;
     temperature: number;
     turmoil: SerializedTurmoil | undefined;
-    unDraftedCards: Array<[PlayerId, Array<IProjectCard>]>;
+    unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }
 

@@ -13,11 +13,12 @@ export class Reds extends Party implements IParty {
   name = PartyName.REDS;
   description = 'Wishes to preserve the red planet.';
   bonuses = [new RedsBonus01(), new RedsBonus02()];
+  policies = [new RedsPolicy01(), new RedsPolicy02(), new RedsPolicy03(), new RedsPolicy04()];
 }
 
 export class RedsBonus01 implements Bonus {
   id = 'rb01';
-  description = 'The player with the lowest TR gains 1 TR (ties are friendly)';
+  description = 'The player(s) with the lowest TR gains 1 TR';
   isDefault = true;
 
   grant(game: Game) {
@@ -39,7 +40,7 @@ export class RedsBonus01 implements Bonus {
 
 export class RedsBonus02 implements Bonus {
   id = 'rb02';
-  description = 'The player with the highest TR loses 1 TR (ties are friendly)';
+  description = 'The player(s) with the highest TR loses 1 TR';
 
   grant(game: Game) {
     const players = game.getPlayers();

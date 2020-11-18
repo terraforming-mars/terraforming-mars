@@ -14,6 +14,7 @@ export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
   description: string = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [new UnityBonus01(), new UnityBonus02()];
+  policies = [new UnityPolicy01(), new UnityPolicy02(), new UnityPolicy03(), new UnityPolicy04()];
 }
 
 export class UnityBonus01 implements Bonus {

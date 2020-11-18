@@ -38,7 +38,7 @@ export class SendDelegateToArea implements DeferredAction {
     }
 
     sendDelegate.options = parties.map((party) => new SelectOption(
-      party.name + ' - (' + party.description + ')',
+      party.name + ' (' + party.activeBonus?.description + ')',
       'Send delegate',
       () => {
         if (this.price) {

@@ -22,6 +22,7 @@ export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
   description = 'Want to see a new Earth as soon as possible.';
   bonuses = [new GreensBonus01(), new GreensBonus02()];
+  policies = [new GreensPolicy01(), new GreensPolicy02(), new GreensPolicy03(), new GreensPolicy04()];
 }
 
 export class GreensBonus01 implements Bonus {

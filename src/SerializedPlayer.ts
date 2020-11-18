@@ -1,7 +1,6 @@
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {PlayerId} from './Player';
-import {PlayerInput} from './PlayerInput';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
@@ -13,8 +12,6 @@ export interface SerializedPlayer {
     color: Color;
     beginner: boolean;
     handicap: number;
-    waitingFor?: PlayerInput;
-    waitingForCb?: () => void;
 
     corporationCard: SerializedCard | undefined;
     corporationInitialActionDone: boolean;

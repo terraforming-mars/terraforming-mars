@@ -22,6 +22,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
+import {MiningCard} from './cards/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
@@ -2308,9 +2309,12 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     public serialize(): SerializedPlayer {
       return {
         id: this.id,
-        waitingFor: this.waitingFor,
-        // private waitingForCb?: () => void;
-        corporationCard: this.corporationCard,
+        corporationCard: this.corporationCard === undefined ? undefined : {
+            name: this.corporationCard.name,
+            resourceCount: this.corporationCard.resourceCount,
+            allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
+            isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
+        },
         // Used only during set-up
         pickedCorporationCard: this.pickedCorporationCard,
         // Terraforming Rating
@@ -2405,8 +2409,10 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
         this.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
-        if (d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
-          this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        if (this.corporationCard !== undefined) {
+          if (d.corporationCard.resourceCount !== undefined) {
+            this.corporationCard.resourceCount = d.corporationCard.resourceCount;
+          }
         }
         if (this.corporationCard instanceof Aridor) {
           if (d.corporationCard.allTags !== undefined) {
@@ -2459,6 +2465,9 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
               console.warn('did not find card for SelfReplicatingRobots', targetCard);
             }
           });
+        }
+        if (card instanceof MiningCard && element.bonusResource !== undefined) {
+          card.bonusResource = element.bonusResource;
         }
         return card;
       });

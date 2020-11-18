@@ -1,4 +1,5 @@
 import {CardName} from './CardName';
+import {Resources} from './Resources';
 import {Tags} from './cards/Tags';
 
 export interface SerializedCard {
@@ -7,6 +8,7 @@ export interface SerializedCard {
   allTags?: Array<Tags>;
   targetCards?: Array<SerializedRobotCard>;
   isDisabled?: boolean;
+  bonusResource?: Resources;
 }
 
 export interface SerializedRobotCard {

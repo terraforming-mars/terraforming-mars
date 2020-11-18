@@ -3,7 +3,7 @@ import {CardRowComponent} from './CardRowComponent';
 
 export const CardRowData = Vue.component('CardRowData', {
   props: {
-    data: {
+    rowData: {
       type: Array,
       required: true,
     },
@@ -13,7 +13,7 @@ export const CardRowData = Vue.component('CardRowData', {
   },
   template: `
         <div class="card-row">
-            <CardRowComponent v-for="(componentData, i) in data" :data="componentData" :key="i" />
+            <CardRowComponent v-for="(componentData, i) in rowData" :componentData="componentData" :key="i" />
         </div>
     `,
 });

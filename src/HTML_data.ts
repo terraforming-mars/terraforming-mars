@@ -1828,15 +1828,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
 `],
-    [CardName.AQUIFER_PUMPING, ` 
-          <div class="content ">
-              <div class=" money resource ">8</div> (<span class="steel resource"></span>)
-              <span class="red-arrow "></span> <div class="ocean-tile tile "></div>
-              <div class="description ">
-                (Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.)
-              </div>
-          </div>
-`],
     [CardName.FLOODING, ` 
           <div class="content ">
             <div class="points points-big">-1</div>
@@ -2036,22 +2027,6 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-    [CardName.AI_CENTRAL, ` 
-          <div class="content ">
-            <div class="points points-big">1</div>
-              <div class="requirements">3 Science</div>
-              <span class="red-arrow "></span> <span class="card resource "></span><span class="card resource "></span>
-              <div class="description ">
-                  (Action: Draw 2 cards.)
-              </div>
-              <div class="production-box production-box-size1a" style="margin-right:135px;margin-top:10px;">
-                  <div class="production-prefix minus"></div><div class="energy production"></div>
-              </div>
-              <div class="description" style="position:absolute;text-align:left;margin-top:-53px;margin-left:85px;">
-                (Requires 3 Science tags to play. Decrease your Energy production 1 step.)
-              </div>
-          </div>
-`],
     [CardName.SELF_REPLICATING_ROBOTS, ` 
           <div class="content ">
             <div class="requirements">2 Science</div>
@@ -2081,18 +2056,6 @@ export const HTML_DATA: Map<string, string> =
                     (Requires 8 oceans. 1 VP for each animal on this card.)
                 </div>
             </div>
-`],
-    [CardName.AERIAL_MAPPERS, ` 
-          <div class="content">
-            <div class="points points-big">1</div>
-            <div class="nowrap">
-              <div class="red-arrow"></div>
-              <div class="floater resource"></div>* OR <div class="floater resource"></div> <div class="red-arrow"></div> <div class="card resource"></div>
-            </div>
-            <div class="description">
-              (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card)
-            </div>
-          </div>
 `],
     [CardName.AEROSPORT_TOURNAMENT, ` 
             <div class="content ">
@@ -2170,15 +2133,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-    [CardName.DEUTERIUM_EXPORT, ` 
-            <div class="content ">
-                <div class="red-arrow " style="margin-left:53px;"></div> <div class="floater resource "></div> <br> OR
-                <div class="floater resource "></div> <div class="red-arrow "></div>   <div class="production-box "><div class="energy production "></div></div>
-                <div class="description ">
-                  (Action: add 1 Floater to this card OR spend 1 Floater here to increase your energy production 1 step)
-                </div>
-            </div>
-`],
     [CardName.DIRIGIBLES, ` 
             <div class="content ">
                 <div class="red-arrow "></div> <div class="floater resource "></div>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -2186,20 +2140,6 @@ export const HTML_DATA: Map<string, string> =
                 <div class="description ">
                   (Action: add 1 Floater to ANY card.)<br><br>
                   (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each)
-                </div>
-            </div>
-`],
-    [CardName.EXTRACTOR_BALLOONS, ` 
-            <div class="content hover-hide-res">
-                <div class="red-arrow " style="margin-left:95px"></div> <div class="floater resource "></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-              OR <div class="floater resource "></div><div class="floater resource "></div> <div class="red-arrow "></div> <div class="tile venus-tile ">V</div>
-                <div class="description ">
-                  (Action: add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step)
-                </div>
-                <br>
-                <div class="floater resource "></div><div class="floater resource "></div><div class="floater resource "></div>
-                <div class="description ">
-                  (Add 3 Floaters to this card)
                 </div>
             </div>
 `],
@@ -2724,22 +2664,6 @@ export const HTML_DATA: Map<string, string> =
               STEAL <div class="resource money red-outline">5</div>
               <div class="description">
                 (Requires that you lose 1 floater. Steal 5 MC from any player.)
-              </div>
-            </div>
-`],
-    [CardName.ATMO_COLLECTORS, ` 
-            <div class="content ">
-              <div class="red-arrow "></div> <div class="floater resource "></div> OR
-              <div class="card-effect-line nowrap">
-                <div class="floater resource "></div> <div class="red-arrow "></div> 2<div class="titanium resource "></div> / 3<div class="energy resource "></div> / 4<div class="heat resource "></div>
-              </div>
-              <div class="description ">
-                (Action: Add 1 floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.)
-              </div>
-              <div class="resource floater"></div><div class="resource floater"></div><span>*</span>
-              <br>
-              <div class="description ">
-                (Add 2 floaters to ANY card.)
               </div>
             </div>
 `],
@@ -5402,19 +5326,6 @@ export const HTML_DATA: Map<string, string> =
           Set the ruling party to one of your choice. Gain +1 influence.
         </div>
       </div>
-`],
-    [CardName.BIOENGINEERING_ENCLOSURE, `
-    <div class="card-number">A01</div>
-    <div class="content ">
-        <div class="requirements ">1 Science</div>
-        <div class="description " style="text-align:left;">
-            <div class="resource animal "></div><div class="resource animal "></div><br/>
-            <div class="resource animal "></div><span class="red-arrow"></span><div class="resource animal"></div><br/>
-            (Action: Remove 1 animal from this card to add 1 animal to another card.
-            Requires 1 science tag. Add 2 animals to this card.
-            OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.)<br>
-        </div>
-    </div>
 `],
     [CardName.BIOFERTILIZER_FACILITY, `
     <div class="card-number">A02</div>

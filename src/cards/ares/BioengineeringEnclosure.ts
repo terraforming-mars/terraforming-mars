@@ -9,6 +9,9 @@ import {Tags} from '../Tags';
 import {ICard} from '../../cards/ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from './../CardMetadata';
+import {CardRequirements} from './../CardRequirements';
+import {CardRenderer} from './../render/CardRenderer';
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
   public cost = 7;
@@ -65,4 +68,10 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
     ));
     return undefined;
   }
+  public metadata: CardMetadata = {
+    description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD',
+    cardNumber: 'A01',
+    requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
+    renderData: CardRenderer.builder((b) => b.effectBox((ab) => ab.animals(1).asterix().startAction.animals(1).asterix().description('Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card')).br.animals(2)),
+  };
 }

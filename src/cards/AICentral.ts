@@ -6,6 +6,9 @@ import {Game} from '../Game';
 import {IActionCard} from './ICard';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class AICentral implements IActionCard, IProjectCard {
   public cost = 21;
@@ -29,4 +32,10 @@ export class AICentral implements IActionCard, IProjectCard {
     player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
     return undefined;
   }
+  public metadata: CardMetadata = {
+    description: 'Requires 3 Science tags to play. Decrease your Energy production 1 step',
+    cardNumber: '208',
+    requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+    renderData: CardRenderer.builder((b) => b.effectBox((ab) => ab.empty().startAction.cards(2).description('Action: Draw 2 cards')).br.productionBox((pb) => pb.minus().energy(1))),
+  };
 }

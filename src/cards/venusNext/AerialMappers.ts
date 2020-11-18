@@ -10,6 +10,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from './../CardMetadata';
+import {CardRenderer} from './../render/CardRenderer';
+import {CardRenderItemSize} from './../render/CardRenderItemSize';
 
 export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;
@@ -67,4 +70,8 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
 
     return new OrOptions(...opts);
   }
+  public metadata: CardMetadata = {
+    cardNumber: '213',
+    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.empty().startAction.floaters(1).asterix().description('Action: Add floater to ANY card')).br.or(CardRenderItemSize.SMALL).br.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'))),
+  };
 }

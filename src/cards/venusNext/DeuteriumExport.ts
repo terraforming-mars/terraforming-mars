@@ -8,6 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from './../CardMetadata';
+import {CardRenderer} from './../render/CardRenderer';
+import {CardRenderItemSize} from './../render/CardRenderItemSize';
 
 export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;
@@ -39,5 +42,9 @@ export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard
           return undefined;
         }),
     );
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '221',
+    renderData: CardRenderer.builder((b) => b.effectBox((eb) => eb.empty().startAction.floaters(1).description('Action: Add 1 Floater to this card')).br.or(CardRenderItemSize.SMALL).br.effectBox((be) => be.floaters(1).startAction.productionBox((pb) => pb.energy(1)).description('Action: spend 1 Floater here to increase your energy production 1 step'))),
   }
 }

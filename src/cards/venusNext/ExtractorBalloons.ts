@@ -12,6 +12,9 @@ import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from './../CardMetadata';
+import {CardRenderer} from './../render/CardRenderer';
+import {CardRenderItemSize} from './../render/CardRenderItemSize';
 
 export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCard {
   public cost = 21;
@@ -50,5 +53,10 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
           return undefined;
         }),
     );
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '223',
+    description: 'Add 3 Floaters to this card',
+    renderData: CardRenderer.builder((b) => b.effectBox((eb) => eb.empty().startAction.floaters(1).description('Action: Add 1 Floater to this card')).br.effectBox((be) => be.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1).description('Action: Spend one floater here to draw 1 card')).br.floaters(3)),
   }
 }

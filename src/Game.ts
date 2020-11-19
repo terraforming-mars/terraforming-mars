@@ -1197,41 +1197,31 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+    public increaseVenusScaleLevel(player: Player, _steps: 1 | 2 | 3): SelectSpace | undefined {
       if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
         return undefined;
       }
-      if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        return this.increaseVenusScaleLevel(player, steps);
-      }
-      this.venusScaleLevel += 2 * steps;
+
+      const steps = Math.min(_steps, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
+
       if (this.phase !== Phase.SOLAR) {
+        if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
+          player.cardsInHand.push(this.dealer.dealCard());
+        }
+        if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
+          player.increaseTerraformRating(this);
+        }
         player.increaseTerraformRatingSteps(steps, this);
       }
 
       // Check for Aphrodite corporation
-      this.players.forEach((player) => {
-        if (player.isCorporation(CardName.APHRODITE)) {
-          player.megaCredits += 2 * steps;
-        }
-      });
-
-      if (this.phase !== Phase.SOLAR) {
-        if (this.venusScaleLevel === 8 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) ||
-            (steps === 3 && this.venusScaleLevel === 12)
-        ) {
-          player.cardsInHand.push(this.dealer.dealCard());
-        }
-
-        if (this.venusScaleLevel === 16 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) ||
-            (steps === 3 && this.venusScaleLevel === 20)
-        ) {
-          player.increaseTerraformRating(this);
-        }
+      const aphrodite = this.players.find((player) => player.isCorporation(CardName.APHRODITE));
+      if (aphrodite !== undefined) {
+        aphrodite.megaCredits += steps * 2;
       }
+
+      this.venusScaleLevel += steps * 2;
+
       return undefined;
     }
 

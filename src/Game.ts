@@ -1172,24 +1172,26 @@ export class Game implements ILoadable<SerializedGame, Game> {
       player.takeAction(this);
     }
 
-    public increaseOxygenLevel(
-        player: Player, steps: 1 | 2): undefined {
+    public increaseOxygenLevel(player: Player, _steps: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
-      if (steps === 2 && this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
-        return this.increaseOxygenLevel(player, 1);
-      }
-      this.oxygenLevel += steps;
+
+      const steps = Math.min(_steps, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
+
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
-      if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1);
+      if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
+        this.increaseTemperature(player, 1);
       }
+
+      this.oxygenLevel += steps;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onOxygenChange(this, aresData);
       });
+
       return undefined;
     }
 

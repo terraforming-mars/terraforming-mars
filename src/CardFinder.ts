@@ -76,6 +76,10 @@ export class CardFinder {
     }
 
     public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {
+      if (cards === undefined) {
+        console.warn('missing cards calling cardsFromJSON');
+        return [];
+      }
       const result: Array<IProjectCard> = [];
       cards.forEach((element: ICard | CardName) => {
         if (typeof element !== 'string') {
@@ -92,6 +96,10 @@ export class CardFinder {
     }
 
     public corporationCardsFromJSON(cards: Array<ICard | CardName>): Array<CorporationCard> {
+      if (cards === undefined) {
+        console.warn('missing cards calling corporationCardsFromJSON');
+        return [];
+      }
       const result: Array<CorporationCard> = [];
       cards.forEach((element: ICard | CardName) => {
         if (typeof element !== 'string') {

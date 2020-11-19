@@ -2307,7 +2307,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public serialize(): SerializedPlayer {
-      return {
+      const result: SerializedPlayer = {
         id: this.id,
         corporationCard: this.corporationCard === undefined ? undefined : {
           name: this.corporationCard.name,
@@ -2342,7 +2342,6 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         // This generation / this round
         actionsTakenThisRound: this.actionsTakenThisRound,
         actionsThisGeneration: Array.from(this.actionsThisGeneration),
-        lastCardPlayed: this.lastCardPlayed === undefined ? undefined : this.lastCardPlayed.name,
         corporationInitialActionDone: this.corporationInitialActionDone,
         // Cards
         dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
@@ -2389,6 +2388,10 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         beginner: this.beginner,
         handicap: this.handicap,
       };
+      if (this.lastCardPlayed !== undefined) {
+        result.lastCardPlayed = this.lastCardPlayed.name;
+      }
+      return result;
     }
 
     // Function used to rebuild each objects

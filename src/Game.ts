@@ -352,13 +352,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public serialize(): SerializedGame {
-      return {
+      const result: SerializedGame = {
         activePlayer: this.activePlayer,
-        aresData: this.aresData,
         awards: this.awards,
         board: this.board,
         claimedMilestones: this.claimedMilestones,
-        clonedGamedId: this.clonedGamedId,
         colonies: this.colonies,
         colonyDealer: this.colonyDealer,
         dealer: this.dealer.serialize(),
@@ -385,7 +383,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         seed: this.seed,
         someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
         temperature: this.temperature,
-        turmoil: this.turmoil,
         unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
           return [
             a[0],
@@ -394,6 +391,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }),
         venusScaleLevel: this.venusScaleLevel,
       };
+      if (this.aresData !== undefined) {
+        result.aresData = this.aresData;
+      }
+      if (this.clonedGamedId !== undefined) {
+        result.clonedGamedId = this.clonedGamedId;
+      }
+      if (this.turmoil !== undefined) {
+        result.turmoil = this.turmoil.serialize();
+      }
+      return result;
     }
 
     public checkForCommunityColonies(gameOptions: GameOptions) : boolean {

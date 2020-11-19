@@ -18,11 +18,11 @@ import {LogMessage} from './LogMessage';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
-    aresData: IAresData | undefined;
+    aresData?: IAresData;
     awards: Array<IAward>;
     board: Board;
     claimedMilestones: Array<ClaimedMilestone>;
-    clonedGamedId: string | undefined;
+    clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;
     dealer: SerializedDealer;
@@ -49,7 +49,7 @@ export interface SerializedGame {
     seed: number
     someoneHasRemovedOtherPlayersPlants: boolean;
     temperature: number;
-    turmoil: SerializedTurmoil | undefined;
+    turmoil?: SerializedTurmoil;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }

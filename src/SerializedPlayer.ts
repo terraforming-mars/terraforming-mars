@@ -40,7 +40,7 @@ export interface SerializedPlayer {
 
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
-    lastCardPlayed: CardName | IProjectCard | undefined;
+    lastCardPlayed?: CardName | IProjectCard;
 
     dealtCorporationCards: Array<CardName> | Array<CorporationCard>;
     dealtPreludeCards: Array<CardName> | Array<IProjectCard>;

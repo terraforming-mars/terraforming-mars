@@ -60,6 +60,7 @@ export class UnityPolicy02 implements Policy {
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    player.turmoilPolicyActionUsed = true;
     game.defer(new SelectHowToPayDeferred(
         player,
         15,

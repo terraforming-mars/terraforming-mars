@@ -260,7 +260,7 @@ export abstract class Colony implements SerializedColony {
 
         case ColonyBenefit.LOSE_RESOURCES:
           if (resource === undefined) throw new Error('Resource cannot be undefined');
-          player.setResource(resource, Math.max(player.getResource(resource) - quantity, 0));
+          player.setResource(resource, -quantity);
           break;
 
         case ColonyBenefit.OPPONENT_DISCARD:

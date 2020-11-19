@@ -66,6 +66,7 @@ export class ScientistsPolicy01 implements Policy {
               game.dealer.dealCard(),
               game.dealer.dealCard(),
           );
+          player.turmoilPolicyActionUsed = true;
           game.log('${0} drew 3 cards', (b) => b.player(player));
         },
     ));
@@ -100,6 +101,7 @@ export class ScientistsPolicy03 implements Policy {
             player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
             game.dealer.discard(foundCards[0]);
             player.cardsInHand.push(game.dealer.dealCard());
+            player.turmoilPolicyActionUsed = true;
             game.log('${0} discarded a card to draw a card', (b) => b.player(player));
             return undefined;
           });

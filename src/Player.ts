@@ -2310,10 +2310,10 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       return {
         id: this.id,
         corporationCard: this.corporationCard === undefined ? undefined : {
-            name: this.corporationCard.name,
-            resourceCount: this.corporationCard.resourceCount,
-            allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
-            isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
+          name: this.corporationCard.name,
+          resourceCount: this.corporationCard.resourceCount,
+          allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
+          isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
         },
         // Used only during set-up
         pickedCorporationCard: this.pickedCorporationCard,

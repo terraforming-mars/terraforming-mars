@@ -8,6 +8,7 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ClaimedMilestone} from './ClaimedMilestone';
+import {Colony} from './colonies/Colony';
 import {ColonyDealer, getColonyByName} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
@@ -20,7 +21,6 @@ import {ElysiumBoard} from './ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
-import {Colony} from './colonies/Colony';
 import {ILoadable} from './ILoadable';
 import {IMilestone} from './milestones/IMilestone';
 import {IParty} from './turmoil/parties/IParty';
@@ -1719,8 +1719,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return space;
     }
 
-    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
-      const result: Array<IColony> = [];
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
+      const result: Array<Colony> = [];
       for (const serialized of colonies) {
         const colony = getColonyByName(serialized.name);
         if (colony !== undefined) {

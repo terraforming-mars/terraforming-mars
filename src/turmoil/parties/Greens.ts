@@ -97,6 +97,7 @@ export class GreensPolicy04 implements Policy {
   action(player: Player, game: Game) {
     player.plants -= 3;
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
+    player.turmoilPolicyActionUsed = true;
 
     const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);

@@ -60,6 +60,8 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
 import {DiscardCards} from './deferredActions/DiscardCards';
+import {KelvinistsPolicy01} from './turmoil/parties/Kelvinists';
+import {ScientistsPolicy01} from './turmoil/parties/Scientists';
 
 export type PlayerId = string;
 
@@ -127,7 +129,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     public colonyVictoryPoints: number = 0;
 
     // Turmoil
-    private turmoilScientistsActionUsed: boolean = false;
+    public turmoilPolicyActionUsed: boolean = false;
 
     // Controlled by cards with effects that might be called a second time recursively, I think.
     // They set this to false in order to prevent card effects from triggering twice.
@@ -885,7 +887,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       this.actionsThisGeneration.clear();
       this.removingPlayers = [];
       this.tradesThisTurn = 0;
-      this.turmoilScientistsActionUsed = false;
+      this.turmoilPolicyActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -1644,34 +1646,22 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     }
 
     private turmoilKelvinistsAction(game: Game): PlayerInput {
+      const policy = new KelvinistsPolicy01();
+
       return new SelectOption(
-        'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
+        policy.description,
         'Pay',
-        () => {
-          game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
-          this.addProduction(Resources.ENERGY);
-          this.addProduction(Resources.HEAT);
-          game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
-          return undefined;
-        },
+        () => policy.action(this, game),
       );
     }
 
     private turmoilScientistsAction(game: Game): PlayerInput {
+      const policy = new ScientistsPolicy01();
+
       return new SelectOption(
-        'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
+        policy.description,
         'Pay',
-        () => {
-          game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
-          this.turmoilScientistsActionUsed = true;
-          this.cardsInHand.push(
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
-          );
-          game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
-          return undefined;
-        },
+        () => policy.action(this, game),
       );
     }
 
@@ -2121,7 +2111,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       // Turmoil Scientists capacity
       if (this.canAfford(10) &&
         PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS) &&
-        !this.turmoilScientistsActionUsed) {
+        !this.turmoilPolicyActionUsed) {
         action.options.push(this.turmoilScientistsAction(game));
       }
 

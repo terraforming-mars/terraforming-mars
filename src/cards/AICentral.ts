@@ -36,6 +36,9 @@ export class AICentral implements IActionCard, IProjectCard {
     description: 'Requires 3 Science tags to play. Decrease your Energy production 1 step',
     cardNumber: '208',
     requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
-    renderData: CardRenderer.builder((b) => b.effectBox((ab) => ab.empty().startAction.cards(2).description('Action: Draw 2 cards')).br.productionBox((pb) => pb.minus().energy(1))),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((ab) => ab.empty().startAction.cards(2).description('Action: Draw 2 cards')).br;
+      b.productionBox((pb) => pb.minus().energy(1));
+    }),
   };
 }

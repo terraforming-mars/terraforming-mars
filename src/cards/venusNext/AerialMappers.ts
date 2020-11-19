@@ -72,6 +72,10 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   }
   public metadata: CardMetadata = {
     cardNumber: '213',
-    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.empty().startAction.floaters(1).asterix().description('Action: Add floater to ANY card')).br.or(CardRenderItemSize.SMALL).br.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'))),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((be) => be.empty().startAction.floaters(1).asterix().description('Action: Add floater to ANY card')).br;
+      b.or(CardRenderItemSize.SMALL).br;
+      b.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'));
+    }),
   };
 }

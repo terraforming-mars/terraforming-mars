@@ -72,6 +72,9 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
     description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD',
     cardNumber: 'A01',
     requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
-    renderData: CardRenderer.builder((b) => b.effectBox((ab) => ab.animals(1).asterix().startAction.animals(1).asterix().description('Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card')).br.animals(2)),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => eb.animals(1).asterix().startAction.animals(1).asterix().description('Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card')).br;
+      b.animals(2);
+    }),
   };
 }

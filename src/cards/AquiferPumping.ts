@@ -41,6 +41,8 @@ export class AquiferPumping implements IActionCard, IProjectCard {
   }
   public metadata: CardMetadata = {
     cardNumber: '187',
-    renderData: CardRenderer.builder((b) => b.effectBox((eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1).description('Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card'))),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1).description('Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card'));
+    }),
   };
 }

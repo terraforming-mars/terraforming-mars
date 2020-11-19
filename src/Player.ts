@@ -255,16 +255,17 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     private resolveMonsInsurance(game: Game) {
-      if (game.monsInsuranceOwner !== undefined) {
-        const retribution: number = Math.min(game.getPlayerById(game.monsInsuranceOwner).megaCredits, 3);
+      if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
+        const monsInsuranceOwner: Player = game.getPlayerById(game.monsInsuranceOwner);
+        const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
         this.megaCredits += retribution;
-        game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS, -3);
+        monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
         if (retribution > 0) {
           game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
             b.player(this)
                 .number(retribution)
                 .cardName(CardName.MONS_INSURANCE)
-                .player(game.getPlayerById(game.monsInsuranceOwner!)));
+                .player(monsInsuranceOwner));
         }
       }
     }
@@ -307,7 +308,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       // Mons Insurance hook
-      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
+      if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
         this.resolveMonsInsurance(game);
       }
     }
@@ -354,7 +355,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       // Mons Insurance hook
-      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
+      if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
         this.resolveMonsInsurance(game);
       }
     };

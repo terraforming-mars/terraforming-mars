@@ -1231,55 +1231,37 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.venusScaleLevel;
     }
 
-    public increaseTemperature(
-        player: Player, steps: -2 | 1 | 2 | 3): undefined {
-      if (steps === -2) {
-        if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
-          this.temperature -= 4;
-          return;
-        } else if (this.temperature >= constants.MIN_TEMPERATURE + 2) {
-          this.temperature -= 2;
-          return;
-        } else {
-          return;
-        }
+    public increaseTemperature(player: Player, _steps: -2 | 1 | 2 | 3): undefined {
+      if (_steps === -2) {
+        this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + _steps * 2);
+        return undefined;
       }
 
       if (this.temperature >= constants.MAX_TEMPERATURE) {
-        return;
+        return undefined;
       }
-      if (steps > 1 && this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        this.increaseTemperature(player, steps);
-        return;
-      }
-      this.temperature += 2 * steps;
+
+      const steps = Math.min(_steps, (constants.MAX_TEMPERATURE - this.temperature) / 2);
+
       if (this.phase !== Phase.SOLAR) {
-        player.increaseTerraformRatingSteps(steps, this);
-      }
-      // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (this.phase !== Phase.SOLAR) {
-        if (steps === 3 && this.temperature === -20) {
-          player.addProduction(Resources.HEAT, 2);
-        } else if (this.temperature === -24 || this.temperature === -20 ||
-              (
-                (steps === 2 || steps === 3) &&
-                (this.temperature === -22 || this.temperature === -18)
-              ) ||
-              (steps === 3 && this.temperature === -16)
-        ) {
-          player.addProduction(Resources.HEAT); ;
+        // BONUS FOR HEAT PRODUCTION AT -20 and -24
+        if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
+          player.addProduction(Resources.HEAT);
         }
+        if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
+          player.addProduction(Resources.HEAT);
+        }
+
+        player.increaseTerraformRatingSteps(steps, this);
       }
 
       // BONUS FOR OCEAN TILE AT 0
-      if (
-        this.temperature === 0 ||
-          ((steps === 2 || steps === 3) && this.temperature === 2) ||
-          (steps === 3 && this.temperature === 4)
-      ) {
+      if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from temperature increase'));
       }
+
+      this.temperature += steps * 2;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onTemperatureChange(this, aresData);
       });

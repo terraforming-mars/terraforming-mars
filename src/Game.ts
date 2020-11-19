@@ -1172,12 +1172,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       player.takeAction(this);
     }
 
-    public increaseOxygenLevel(player: Player, _steps: 1 | 2): undefined {
+    public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
 
-      const steps = Math.min(_steps, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
@@ -1199,12 +1200,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(player: Player, _steps: 1 | 2 | 3): SelectSpace | undefined {
+    public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
       if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
         return undefined;
       }
 
-      const steps = Math.min(_steps, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
 
       if (this.phase !== Phase.SOLAR) {
         if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
@@ -1231,9 +1233,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.venusScaleLevel;
     }
 
-    public increaseTemperature(player: Player, _steps: -2 | 1 | 2 | 3): undefined {
-      if (_steps === -2) {
-        this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + _steps * 2);
+    public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
+      if (increments === -2) {
+        this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
         return undefined;
       }
 
@@ -1241,7 +1243,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return undefined;
       }
 
-      const steps = Math.min(_steps, (constants.MAX_TEMPERATURE - this.temperature) / 2);
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_TEMPERATURE - this.temperature) / 2);
 
       if (this.phase !== Phase.SOLAR) {
         // BONUS FOR HEAT PRODUCTION AT -20 and -24

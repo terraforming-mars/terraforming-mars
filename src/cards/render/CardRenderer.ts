@@ -188,6 +188,10 @@ class Builder {
     return this;
   }
 
+  public asteroids(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.ASTEROIDS, amount));
+    return this;
+  }
 
   public event(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.EVENT));

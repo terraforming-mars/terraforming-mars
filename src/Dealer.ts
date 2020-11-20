@@ -8,7 +8,7 @@ import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardMa
 import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
-import {ILoadable} from './ILoadable';
+import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
 import {CardManifest} from './cards/CardManifest';
 import {ICardFactory} from './cards/ICardFactory';
@@ -17,7 +17,7 @@ import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 
-export class Dealer implements ILoadable<SerializedDealer, Dealer> {
+export class Dealer implements ISerializable<SerializedDealer, Dealer> {
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];

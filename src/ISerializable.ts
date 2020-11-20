@@ -1,4 +1,4 @@
-export interface ILoadable<T, T2> {
+export interface ISerializable<T, T2> {
   loadFromJSON(d: T): T2;
   serialize(): T;
 }

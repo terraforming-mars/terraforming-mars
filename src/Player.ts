@@ -16,7 +16,7 @@ import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard} from './cards/ICard';
 import {Colony} from './colonies/Colony';
-import {ILoadable} from './ILoadable';
+import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
@@ -61,7 +61,7 @@ import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs
 
 export type PlayerId = string;
 
-export class Player implements ILoadable<SerializedPlayer, Player> {
+export class Player implements ISerializable<SerializedPlayer, Player> {
     public id: PlayerId;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;

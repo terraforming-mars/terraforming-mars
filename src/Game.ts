@@ -21,7 +21,7 @@ import {ElysiumBoard} from './ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
-import {ILoadable} from './ILoadable';
+import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IParty} from './turmoil/parties/IParty';
 import {IProjectCard} from './cards/IProjectCard';
@@ -102,7 +102,7 @@ export interface GameOptions {
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
 }
 
-export class Game implements ILoadable<SerializedGame, Game> {
+export class Game implements ISerializable<SerializedGame, Game> {
     // Game-level data
     public lastSaveId: number = 0;
     private clonedGamedId: string | undefined;

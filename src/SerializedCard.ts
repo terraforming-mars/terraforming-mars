@@ -3,12 +3,12 @@ import {Resources} from './Resources';
 import {Tags} from './cards/Tags';
 
 export interface SerializedCard {
+  allTags?: Array<Tags>;
+  bonusResource?: Resources;
+  isDisabled?: boolean;
   name: CardName;
   resourceCount?: number;
-  allTags?: Array<Tags>;
   targetCards?: Array<SerializedRobotCard>;
-  isDisabled?: boolean;
-  bonusResource?: Resources;
 }
 
 export interface SerializedRobotCard {

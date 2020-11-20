@@ -10,7 +10,7 @@ import {Player, PlayerId} from '../Player';
 import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
-import {ILoadable} from '../ILoadable';
+import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 
@@ -28,7 +28,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
   {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
 ];
 
-export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
+export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;

@@ -23,6 +23,7 @@ export enum CardRenderItemType {
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
   INFLUENCE = 'influence',
+  CITY = 'city',
   PLATE = 'plate',
   TEXT = 'text',
   // more to come...

@@ -6,6 +6,11 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../../cards/CardMetadata';
+import {CardRequirements} from '../../cards/CardRequirements';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+
 
 export class AerosportTournament implements IProjectCard {
   public cost = 7;
@@ -24,5 +29,15 @@ export class AerosportTournament implements IProjectCard {
 
   public getVictoryPoints() {
     return 1;
+  }
+
+  public metadata: CardMetadata = {
+    cardNumber: '214',
+    description: 'Requires that you have 5 Floaters. Gain 1 MC per each City tile in play',
+    requirements: CardRequirements.builder((b) => b.floaters(5)),
+    renderData: CardRenderer.builder((b) => {
+      b.megacredits(1).slash().city(CardRenderItemSize.SMALL).any;
+    }),
+    victoryPoints: 1,
   }
 }

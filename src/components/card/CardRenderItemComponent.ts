@@ -78,6 +78,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-delegate');
       } else if (type === CardRenderItemType.INFLUENCE) {
         classes.push('card-influence');
+      } else if (type === CardRenderItemType.CITY) {
+        classes.push('card-tile');
+        classes.push(`city-tile--${this.item.size}`);
       } else if (type === CardRenderItemType.EVENT) {
         classes.push('card-tag-event');
       } else if (type === CardRenderItemType.SPACE) {
@@ -101,6 +104,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       // size and text
       if (this.item.text !== undefined) {
         classes.push(`card-text-size--${this.item.size}`);
+        if (this.item.isUppercase) {
+          classes.push('card-text-uppercase');
+        }
       }
 
       return generateClassString(classes);

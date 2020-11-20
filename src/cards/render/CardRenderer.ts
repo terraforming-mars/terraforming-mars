@@ -220,6 +220,13 @@ class Builder {
     return this;
   }
 
+  public city(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+    const item = new CardRenderItem(CardRenderItemType.CITY);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
   public description(description: string): Builder {
     this._checkExistingItem();
     this._addRowItem(description);

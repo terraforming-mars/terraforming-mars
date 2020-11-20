@@ -2034,16 +2034,6 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.AEROSPORT_TOURNAMENT, ` 
-            <div class="content ">
-                <div class="points points-big ">1</div>
-                <div class="requirements ">5 Floaters</div>
-                <div class="resource money">1</div> / <div class="tile city-tile-small red-outline"></div>
-                <div class="description">
-                  (Requires that you have 5 Floaters. Gain 1 MC per each City tile in play)
-                </div>
-            </div>
-`],
     [CardName.AIR_SCRAPPING_EXPEDITION, ` 
             <div class="content ">
               <div class="tile venus-tile">V</div> &nbsp;&nbsp;
@@ -2632,15 +2622,6 @@ export const HTML_DATA: Map<string, string> =
               <div class="floater resource "></div><div class="floater resource "></div>*
               <div class="description">
                 (Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.)
-              </div>
-            </div>
-`],
-    [CardName.AIR_RAID, ` 
-            <div class="content">
-              - <div class="resource floater" style="margin-right:20px;"></div>
-              STEAL <div class="resource money red-outline">5</div>
-              <div class="description">
-                (Requires that you lose 1 floater. Steal 5 MC from any player.)
               </div>
             </div>
 `],

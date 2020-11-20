@@ -9,4 +9,4 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
 };
 
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
-export const generateClassString = (classes: Array<string>): string => (classes.length > 1 ? classes.join(' ') : classes[0]);
+export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();

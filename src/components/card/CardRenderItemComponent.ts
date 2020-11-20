@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {generateClassString} from '../../utils/utils';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
@@ -92,7 +93,17 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('red-outline');
       }
 
-      return classes.join(' ');
+      // golden background
+      if (this.item.isPlate) {
+        classes.push('card-plate');
+      }
+
+      // size and text
+      if (this.item.text !== undefined) {
+        classes.push(`card-text-size--${this.item.size}`);
+      }
+
+      return generateClassString(classes);
     },
     getAmountAbs: function(): number {
       if (this.item.amountInside) return 1;
@@ -108,6 +119,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
     itemHtmlContent: function(): string {
       // in case of symbols inside
       if (this.item instanceof CardRenderItem && this.item.amountInside) return this.item.amount.toString();
+      if (this.item.isPlate || this.item.text !== undefined) return this.item.text || 'n/a';
       return '';
     },
   },

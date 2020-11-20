@@ -1450,17 +1450,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ADAPTATION_TECHNOLOGY, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="card-content-requirements">
-          <div class="globals-box">Global requirements</div>: +/- 2
-        </div>
-        <div class="description">
-          (Effect: Your global requirements are +2 or -2 steps, your choice in each case.)
-        </div>
-      </div>
-`],
     [CardName.CARETAKER_CONTRACT, ` 
         <div class="content ">
           <div class="requirements">0 C</div>

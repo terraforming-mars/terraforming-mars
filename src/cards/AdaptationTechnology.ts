@@ -2,6 +2,8 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {CardName} from '../CardName';
+import {CardMetadata} from './../cards/CardMetadata';
+import {CardRenderer} from './../cards/render/CardRenderer';
 
 export class AdaptationTechnology implements IProjectCard {
   public cost = 12;
@@ -17,5 +19,15 @@ export class AdaptationTechnology implements IProjectCard {
   }
   public getVictoryPoints() {
     return 1;
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '153',
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.plate('Global requirements').startEffect.text('+/- 2');
+        eb.description('Effect: Your global requirements are +2 or -2 steps, your choice in each case.');
+      });
+    }),
+    victoryPoints: 1,
   }
 }

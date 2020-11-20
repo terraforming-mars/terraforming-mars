@@ -272,6 +272,23 @@ class Builder {
     return this;
   }
 
+  public plate(text: string): Builder {
+    const item = new CardRenderItem(CardRenderItemType.PLATE);
+    item.text = text;
+    item.isPlate = true;
+    this._addRowItem(item);
+    return this;
+  }
+
+  public text(text: string, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, uppercase: boolean = false): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TEXT);
+    item.text = text;
+    item.size = size;
+    item.isUppercase = uppercase;
+    this._addRowItem(item);
+    return this;
+  }
+
   public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);

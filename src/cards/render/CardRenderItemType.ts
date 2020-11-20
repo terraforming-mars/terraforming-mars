@@ -26,5 +26,6 @@ export enum CardRenderItemType {
   CITY = 'city',
   PLATE = 'plate',
   TEXT = 'text',
+  NBSP = 'nbsp',
   // more to come...
 }

@@ -244,7 +244,7 @@ class Builder {
     return this;
   }
 
-  public or(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.or(size));
     return this;
@@ -274,6 +274,12 @@ class Builder {
     return this;
   }
 
+  public colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.colon(size));
+    return this;
+  }
+
   public empty(): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.empty());
@@ -300,6 +306,15 @@ class Builder {
   public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);
+    return this;
+  }
+
+  /**
+   * add non breakable space or simply empty space between items
+   */
+  public get nbsp(): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.nbsp());
     return this;
   }
 

@@ -33,6 +33,9 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         classes.push('card-colon');
       } else if (type === CardRenderSymbolType.ARROW) {
         classes.push('card-red-arrow');
+      } else if (type === CardRenderSymbolType.NBSP) {
+        // TODO (chosta): add size
+        classes.push('card-nbsp');
       }
 
       return classes.join(' ');

@@ -23,6 +23,7 @@ import {
   ALL_PROJECT_DECKS,
 } from '../../cards/AllCards';
 import {CardTypes, Deck, Decks} from '../../Deck';
+import {GameModule} from '../../GameModule';
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
   if (cardName === new BeginnerCorporation().name) {
@@ -35,7 +36,7 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
   return Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), cardName);
 }
 
-export function getCardExpansionByName(cardName: string): string {
+export function getCardExpansionByName(cardName: string): GameModule {
   const manifest = ALL_CARD_MANIFESTS.find((manifest) => {
     const decks: Array<Deck<CardTypes>> = [
       manifest.corporationCards,

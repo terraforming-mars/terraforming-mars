@@ -24,17 +24,6 @@ export const CardVictoryPoints = Vue.component('CardPoints', {
     isObject: function(): boolean {
       return this.victoryPoints instanceof CardRenderVictoryPoints;
     },
-    // getHtml: function(): string {
-    //   let result: string = '';
-    //   if (this.victoryPoints instanceof CardRenderVictoryPoints) {
-    //     result += this.victoryPoints.getPointsHtml();
-    //     result += '';
-    //   } else {
-    //     // assert type number
-    //     result = (<number> this.victoryPoints).toString();
-    //   }
-    //   return result;
-    // },
   },
   template: `
       <div v-if="isObject()" :class="getClasses()"><div>{{ this.victoryPoints.getPointsHtml() }}</div><CardRenderItemComponent :item="this.victoryPoints.item" /></div>

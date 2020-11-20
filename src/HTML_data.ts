@@ -319,18 +319,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ANTS, ` 
-        <div class="content ">
-            <div class="points ">1/2<div class="resource microbe "></div></div>
-            <div class="requirements ">4% O2</div>
-            <div class="microbe resource red-outline "></div> <div class="red-arrow "></div> <div class="microbe resource "></div>
-            <div class="description ">
-                (Action: Remove 1 Microbe from any card to add 1 to this card.)
-                <br><br>
-                (Requires 4% oxygen. 1 VP per 2 Microbes on this card.)
-            </div>
-        </div>
-`],
     [CardName.RELEASE_OF_INERT_GASES, ` 
         <div class="content ">
             <div class="tile rating "></div>  <div class="tile rating "></div>
@@ -4580,20 +4568,6 @@ export const HTML_DATA: Map<string, string> =
             Decrease your energy production 1 step, and increase your titanium production 1 step.
             Gain 4 titanium.)
         </div>
-    </div>
-`],
-    [CardName.ASTEROID_HOLLOWING, ` 
-    <div class="content ">
-        <div class="points" style="line-height:45px;vertical-align:middle">1/2<div class="asteroid resource" style="vertical-align:middle;margin-left:5px">A</div></div>
-        <div class="resource titanium"></div>
-        <span class="red-arrow"></span>
-        <div class="asteroid resource" style="margin-right:5px">A</div>
-        <div class="production-box"><div  class="production money">1</div></div>
-        <div class="description">
-            (Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.)
-            <br><br>(1 VP per 2 asteroid resources on this card.)
-        </div>
-      </div>
     </div>
 `],
     [CardName.ASTEROID_RIGHTS, ` 

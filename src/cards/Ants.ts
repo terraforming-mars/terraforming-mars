@@ -8,6 +8,10 @@ import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
+import {CardMetadata} from '../cards/CardMetadata';
+import {CardRequirements} from '../cards/CardRequirements';
+import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardRenderVictoryPoints} from './render/CardRenderVictoryPoints';
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public cost = 9;
@@ -43,5 +47,18 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
         }),
     );
     return undefined;
+  }
+
+  public metadata: CardMetadata = {
+    cardNumber: '035',
+    description: 'Requires 4% oxygen. 1 VP per 2 Microbes on this card.',
+    requirements: CardRequirements.builder((b) => b.oxygen(4)),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.microbes(1).any.startAction.microbes(1);
+        eb.description('Action: Remove 1 Microbe from any card to add 1 to this card');
+      });
+    }),
+    victoryPoints: CardRenderVictoryPoints.microbes(1, 2),
   }
 }

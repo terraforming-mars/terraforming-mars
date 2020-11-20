@@ -128,7 +128,7 @@ export const DebugUI = Vue.component('debug-ui', {
               <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares"></input>
               <label for="ares-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-ares"></div>
-                  <span v-i18n>Ares</span><
+                  <span v-i18n>Ares</span>
               </label>
 
               <input type="checkbox" name="community" id="community-checkbox" v-model="community"></input>

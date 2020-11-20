@@ -15,5 +15,6 @@ export class Mercury extends Colony {
     ];
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;
+    public colonyBonusQuantity = 2;
     public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
 }

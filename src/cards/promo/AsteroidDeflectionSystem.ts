@@ -7,6 +7,10 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
+import {CardMetadata} from '../../cards/CardMetadata';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderVictoryPoints} from '../../cards/render/CardRenderVictoryPoints';
+import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
 
 export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IResourceCard {
   public name = CardName.ASTEROID_DEFLECTION_SYSTEM;
@@ -40,5 +44,17 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
 
   public getVictoryPoints(): number {
     return this.resourceCount;
+  }
+  public metadata: CardMetadata = {
+    cardNumber: 'X27',
+    // description: 'Add 2 asteroids to this card',
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.empty().startAction.cards(1).asterix().nbsp.space().played.colon().asteroids(1);
+        eb.description('Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.');
+      }).br;
+      b.productionBox((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', CardRenderItemSize.SMALL, true);
+    }),
+    victoryPoints: CardRenderVictoryPoints.asteroids(1, 1),
   }
 }

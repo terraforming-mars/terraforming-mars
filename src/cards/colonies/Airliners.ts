@@ -6,6 +6,9 @@ import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../../cards/CardMetadata';
+import {CardRequirements} from '../../cards/CardRequirements';
+import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class Airliners implements IProjectCard {
   public cost = 11;
@@ -24,5 +27,15 @@ export class Airliners implements IProjectCard {
   }
   public getVictoryPoints() {
     return 1;
+  }
+  public metadata: CardMetadata = {
+    cardNumber: 'C01',
+    description: 'Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card',
+    requirements: CardRequirements.builder((b) => b.floaters(3)),
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => pb.megacredits(1)).br;
+      b.floaters(2).asterix();
+    }),
+    victoryPoints: 1,
   }
 }

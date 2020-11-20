@@ -2034,30 +2034,6 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.ATALANTA_PLANITIA_LAB, ` 
-            <div class="content ">
-              <div class="points points-big">2</div>
-              <div class="requirements">3 Science</div>
-              <div class="resource card"></div> <div class="resource card"></div>
-              <div class="description">
-              (Requires 3 science tags. Draw 2 cards.)
-              </div>
-            </div>
-`],
-    [CardName.ATMOSCOOP, ` 
-            <div class="content ">
-              <div class="points points-big">1</div>
-              <div class="requirements">3 Science</div>
-              <div class="nowrap">
-                <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div> OR
-                <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
-              </div>
-              <div class="resource floater"></div><div class="resource floater"></div><span>*</span>
-              <div class="description" style="text-align:left;position:absolute;margin-top:-8px;">
-                (Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card)
-              </div>
-            </div>
-`],
     [CardName.COMET_FOR_VENUS, ` 
             <div class="content ">
             <div class="tile venus-tile"></div> &nbsp;&nbsp;
@@ -2600,19 +2576,6 @@ export const HTML_DATA: Map<string, string> =
                   (Requires 2 Earth tags. Increase MC production 4 steps.)
                 </div>
               </div>
-`],
-    [CardName.AIRLINERS, ` 
-            <div class="content ">
-              <div class="points points-big ">1</div>
-              <div class="requirements ">3 Floaters</div>
-              <div class="production-box">
-                <div class="money production">2</div>
-              </div><br>
-              <div class="floater resource "></div><div class="floater resource "></div>*
-              <div class="description">
-                (Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.)
-              </div>
-            </div>
 `],
     [CardName.COMMUNITY_SERVICES, ` 
             <div class="content ">
@@ -4529,32 +4492,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.ASTEROID_RIGHTS, ` 
-    <div class="content">
-        <div>
-            <span class="money resource">1</span>
-            <span class="red-arrow"></span>
-            <span class="asteroid resource"></span>*
-        </div>
-        <div class="effect">
-            <span class="asteroid resource"></span>
-            <span class="red-arrow"></span>
-            <div class="production-box">
-                <div class="money production">1</div>
-            </div>
-             OR <div class="resource titanium"></div><div class="resource titanium"></div>
-        </div>
-        <div class="description">
-            (Action: Spend 1 MC to add 1 asteroid to ANY card, or spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.)
-        </div>
-        <div class="effect2">
-            <span class="asteroid resource"></span>
-            <span class="asteroid resource"></span>
-            <span class="description">(Add 2 asteroids to this card.)</span>
-        </div>
-      </div>
-    </div>
-`],
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -4710,27 +4647,6 @@ export const HTML_DATA: Map<string, string> =
       4 <div class="plant resource"></div> 4 <div class="microbe resource"></div>*
       <div class="description">
         (Gain 4 Plants and add 4 Microbes to ANOTHER card.)
-      </div>
-    </div>
-`],
-    [CardName.ASTEROID_DEFLECTION_SYSTEM, ` 
-    <div class="content">
-      <div class="points">1/<div class="asteroid resource">A</div></div>
-      <span class="red-arrow"></span><div class="resource card"></div>*
-      <div class="resource-tag tag-space"></div> : <div class="asteroid resource">A</div>
-      <div class="description">
-        (Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid resource here.)
-      </div>
-      <br>
-      <div class="description effect">
-        OPPONENTS MAY NOT REMOVE YOUR PLANTS
-      </div>
-      <br>
-      <div class="production-box production-box-size1a">
-        <div class="production-prefix minus"></div><div class="energy production"></div><br>
-      </div>
-      <div class="description bottom" >
-        (Decrease your energy production 1 step. 1 VP per asteroid on this card.)
       </div>
     </div>
 `],

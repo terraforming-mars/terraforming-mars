@@ -1,6 +1,10 @@
+import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {IProjectCard} from './cards/IProjectCard';
+import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {CardManifest} from './cards/CardManifest';
+import {CardName} from './CardName';
+import {CorporationCard} from './cards/corporation/CorporationCard';
 import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
@@ -29,6 +33,25 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
+    public getCorporationCardByName(cardName: string): CorporationCard | undefined {
+      if (cardName === CardName.BEGINNER_CORPORATION) {
+        return new BeginnerCorporation();
+      }
+      let found : (ICardFactory<CorporationCard> | undefined);
+      CardFinder.getDecks().forEach((deck) => {
+        // Short circuit
+        if (found !== undefined) {
+          return;
+        }
+        found = deck.corporationCards.findByCardName(cardName);
+      });
+      if (found !== undefined) {
+        return new found.Factory();
+      }
+      console.warn(`corporation card not found ${cardName}`);
+      return undefined;
+    }
+
     // Function to return a card object by its name
     // NOTE(kberg): This replaces a larger function which searched for both Prelude cards amidst project cards
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
@@ -50,5 +73,45 @@ export class CardFinder {
       }
       console.warn(`card not found ${cardName}`);
       return undefined;
+    }
+
+    public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {
+      if (cards === undefined) {
+        console.warn('missing cards calling cardsFromJSON');
+        return [];
+      }
+      const result: Array<IProjectCard> = [];
+      cards.forEach((element: ICard | CardName) => {
+        if (typeof element !== 'string') {
+          element = element.name;
+        }
+        const card = this.getProjectCardByName(element);
+        if (card !== undefined) {
+          result.push(card);
+        } else {
+          console.warn(`card ${card} not found for deck`);
+        }
+      });
+      return result;
+    }
+
+    public corporationCardsFromJSON(cards: Array<ICard | CardName>): Array<CorporationCard> {
+      if (cards === undefined) {
+        console.warn('missing cards calling corporationCardsFromJSON');
+        return [];
+      }
+      const result: Array<CorporationCard> = [];
+      cards.forEach((element: ICard | CardName) => {
+        if (typeof element !== 'string') {
+          element = element.name;
+        }
+        const card = this.getCorporationCardByName(element);
+        if (card !== undefined) {
+          result.push(card);
+        } else {
+          console.warn(`corporation card ${card} not found for deck`);
+        }
+      });
+      return result;
     }
 }

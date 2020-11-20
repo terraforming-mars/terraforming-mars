@@ -467,7 +467,6 @@ describe('Game', function() {
     expect(prevAwards).to.not.eq(awards);
   });
 
-
   it('specifically-requested corps override expansion corps', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
@@ -484,5 +483,21 @@ describe('Game', function() {
             [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map((c) => c.name);
 
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
+  });
+
+  /**
+   * ensure as we modify properties we consider
+   * serialization. if this fails update SerializedGame
+   * to match
+   */
+  it('serializes every property', function() {
+    const player = new Player('test', Color.BLUE, false);
+    const game = new Game('foobar', [player], player);
+    const serialized = game.serialize();
+    const serializedKeys = Object.keys(serialized);
+    const gameKeys = Object.keys(game);
+    serializedKeys.sort();
+    gameKeys.sort();
+    expect(serializedKeys).to.deep.eq(gameKeys);
   });
 });

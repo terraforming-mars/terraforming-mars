@@ -77,7 +77,7 @@ checkComponent(
 checkComponent(
     'src/components/DebugUI',
     require('./build/src/components/DebugUI').DebugUI,
-    ['filterText'],
+    ['filterText', 'base', 'corporateEra', 'prelude', 'venusNext', 'colonies', 'turmoil', 'community', 'ares', 'promo'],
 );
 checkComponent(
     'src/components/GameHome',

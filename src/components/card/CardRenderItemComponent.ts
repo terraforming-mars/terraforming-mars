@@ -126,6 +126,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       // in case of symbols inside
       if (this.item instanceof CardRenderItem && this.item.amountInside) return this.item.amount.toString();
       if (this.item.isPlate || this.item.text !== undefined) return this.item.text || 'n/a';
+      if (this.item.secondaryTag !== undefined) {
+        const classes: string[] = ['card-icon'];
+        classes.push(`tag-${this.item.secondaryTag}`);
+        return '<div class="' + generateClassString(classes) + '"/>';
+      }
       return '';
     },
   },

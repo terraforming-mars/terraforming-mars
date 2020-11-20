@@ -2,6 +2,7 @@ import {CardRenderItem} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
+import {Tags} from '../Tags';
 
 type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | string | undefined;
 
@@ -333,13 +334,13 @@ class Builder {
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "played" without a CardRenderItem.');
+      }
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"played" could be called on CardRenderItem only');
       }
 
-      if (item === undefined) {
-        throw new Error('Called "played" without a CardRenderItem.');
-      }
       item.isPlayed = true;
       row.push(item);
       this._data.push(row);
@@ -354,14 +355,36 @@ class Builder {
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "digit" without a CardRenderItem.');
+      }
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"digit" could be called on CardRenderItem only');
       }
 
-      if (item === undefined) {
-        throw new Error('Called "digit" without a CardRenderItem.');
-      }
       item.showDigit = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public secondaryTag(tag: Tags): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "secondaryTag" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"secondaryTag" could be called on CardRenderItem only');
+      }
+
+      item.secondaryTag = tag;
       row.push(item);
 
       this._data.push(row);

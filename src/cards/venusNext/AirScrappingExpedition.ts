@@ -10,6 +10,8 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_VENUS_SCALE} from '../../constants';
+import {CardMetadata} from '../../cards/CardMetadata';
+import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class AirScrappingExpedition implements IProjectCard {
   public cost = 13;
@@ -39,5 +41,13 @@ export class AirScrappingExpedition implements IProjectCard {
       player.addResourceTo(foundCards[0], 3);
       return undefined;
     });
+  }
+
+  public metadata: CardMetadata = {
+    cardNumber: '215',
+    description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD',
+    renderData: CardRenderer.builder((b) => {
+      b.venus(1).floaters(3).secondaryTag(Tags.VENUS);
+    }),
   }
 }

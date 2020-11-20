@@ -2034,17 +2034,6 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.AIR_SCRAPPING_EXPEDITION, ` 
-            <div class="content ">
-              <div class="tile venus-tile">V</div> &nbsp;&nbsp;
-                <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                  <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                    <div class="resource floater"><div class="card-icon tag-venus"></div></div>
-                <div class="description">
-                  (Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD)
-                </div>
-            </div>
-`],
     [CardName.ATALANTA_PLANITIA_LAB, ` 
             <div class="content ">
               <div class="points points-big">2</div>

@@ -132,10 +132,10 @@ export const DebugUI = Vue.component('debug-ui', {
               </label>
 
               <input type="checkbox" name="community" id="community-checkbox" v-model="community"></input>
-              <label for="communityCards-checkbox" class="expansion-button">
+              <label for="community-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-community"></div>
                   <span v-i18n>Community</span>
-              </label>
+              </label><span/>
             </div>
             <div class="cardbox"" v-for="card in getAllProjectCards()"></div>
             <section class="debug-ui-cards-list">

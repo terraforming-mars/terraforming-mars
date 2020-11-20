@@ -1172,24 +1172,27 @@ export class Game implements ILoadable<SerializedGame, Game> {
       player.takeAction(this);
     }
 
-    public increaseOxygenLevel(
-        player: Player, steps: 1 | 2): undefined {
+    public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
-      if (steps === 2 && this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
-        return this.increaseOxygenLevel(player, 1);
-      }
-      this.oxygenLevel += steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
+
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
-      if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1);
+      if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
+        this.increaseTemperature(player, 1);
       }
+
+      this.oxygenLevel += steps;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onOxygenChange(this, aresData);
       });
+
       return undefined;
     }
 
@@ -1197,41 +1200,32 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+    public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
       if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
         return undefined;
       }
-      if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        return this.increaseVenusScaleLevel(player, steps);
-      }
-      this.venusScaleLevel += 2 * steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
+
       if (this.phase !== Phase.SOLAR) {
+        if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
+          player.cardsInHand.push(this.dealer.dealCard());
+        }
+        if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
+          player.increaseTerraformRating(this);
+        }
         player.increaseTerraformRatingSteps(steps, this);
       }
 
       // Check for Aphrodite corporation
-      this.players.forEach((player) => {
-        if (player.isCorporation(CardName.APHRODITE)) {
-          player.megaCredits += 2 * steps;
-        }
-      });
-
-      if (this.phase !== Phase.SOLAR) {
-        if (this.venusScaleLevel === 8 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) ||
-            (steps === 3 && this.venusScaleLevel === 12)
-        ) {
-          player.cardsInHand.push(this.dealer.dealCard());
-        }
-
-        if (this.venusScaleLevel === 16 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) ||
-            (steps === 3 && this.venusScaleLevel === 20)
-        ) {
-          player.increaseTerraformRating(this);
-        }
+      const aphrodite = this.players.find((player) => player.isCorporation(CardName.APHRODITE));
+      if (aphrodite !== undefined) {
+        aphrodite.megaCredits += steps * 2;
       }
+
+      this.venusScaleLevel += steps * 2;
+
       return undefined;
     }
 
@@ -1239,55 +1233,38 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.venusScaleLevel;
     }
 
-    public increaseTemperature(
-        player: Player, steps: -2 | 1 | 2 | 3): undefined {
-      if (steps === -2) {
-        if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
-          this.temperature -= 4;
-          return;
-        } else if (this.temperature >= constants.MIN_TEMPERATURE + 2) {
-          this.temperature -= 2;
-          return;
-        } else {
-          return;
-        }
+    public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
+      if (increments === -2) {
+        this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
+        return undefined;
       }
 
       if (this.temperature >= constants.MAX_TEMPERATURE) {
-        return;
+        return undefined;
       }
-      if (steps > 1 && this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        this.increaseTemperature(player, steps);
-        return;
-      }
-      this.temperature += 2 * steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_TEMPERATURE - this.temperature) / 2);
+
       if (this.phase !== Phase.SOLAR) {
-        player.increaseTerraformRatingSteps(steps, this);
-      }
-      // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (this.phase !== Phase.SOLAR) {
-        if (steps === 3 && this.temperature === -20) {
-          player.addProduction(Resources.HEAT, 2);
-        } else if (this.temperature === -24 || this.temperature === -20 ||
-              (
-                (steps === 2 || steps === 3) &&
-                (this.temperature === -22 || this.temperature === -18)
-              ) ||
-              (steps === 3 && this.temperature === -16)
-        ) {
-          player.addProduction(Resources.HEAT); ;
+        // BONUS FOR HEAT PRODUCTION AT -20 and -24
+        if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
+          player.addProduction(Resources.HEAT);
         }
+        if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
+          player.addProduction(Resources.HEAT);
+        }
+
+        player.increaseTerraformRatingSteps(steps, this);
       }
 
       // BONUS FOR OCEAN TILE AT 0
-      if (
-        this.temperature === 0 ||
-          ((steps === 2 || steps === 3) && this.temperature === 2) ||
-          (steps === 3 && this.temperature === 4)
-      ) {
+      if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from temperature increase'));
       }
+
+      this.temperature += steps * 2;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onTemperatureChange(this, aresData);
       });

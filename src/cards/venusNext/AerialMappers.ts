@@ -10,66 +10,72 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from './../CardMetadata';
+import {CardRenderer} from './../render/CardRenderer';
+import {CardRenderItemSize} from './../render/CardRenderItemSize';
 
 export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
-    public cost = 11;
-    public tags = [Tags.VENUS];
-    public name = CardName.AERIAL_MAPPERS;
-    public cardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+  public cost = 11;
+  public tags = [Tags.VENUS];
+  public name = CardName.AERIAL_MAPPERS;
+  public cardType = CardType.ACTIVE;
+  public resourceType = ResourceType.FLOATER;
+  public resourceCount: number = 0;
 
-    public play() {
+  public play() {
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public getVictoryPoints() {
+    return 1;
+  }
+  public action(player: Player, game: Game) {
+    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+
+    // only one valid target - itself
+    if (floaterCards.length === 1 && this.resourceCount === 0) {
+      this.resourceCount++;
+      LogHelper.logAddResource(game, player, floaterCards[0]);
       return undefined;
     }
-    public canAct(): boolean {
-      return true;
+
+    const addResourceToSelf = new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+      this.resourceCount++;
+      LogHelper.logAddResource(game, player, floaterCards[0]);
+      return undefined;
+    });
+
+    const addResource = new SelectCard('Select card to add 1 floater', 'Add floater', floaterCards, (foundCards: Array<ICard>) => {
+      player.addResourceTo(foundCards[0], 1);
+      LogHelper.logAddResource(game, player, foundCards[0]);
+      return undefined;
+    });
+
+    const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
+      this.resourceCount--;
+      player.cardsInHand.push(game.dealer.dealCard());
+      LogHelper.logRemoveResource(game, player, this, 1, 'draw a card');
+      return undefined;
+    });
+
+    if (this.resourceCount > 0) {
+      opts.push(spendResource);
+      floaterCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
+    } else {
+      return addResource;
     }
-    public getVictoryPoints() {
-      return 1;
-    }
-    public action(player: Player, game: Game) {
-      const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-      const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
-      // only one valid target - itself
-      if (floaterCards.length === 1 && this.resourceCount === 0) {
-        this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
-        return undefined;
-      }
-
-      const addResourceToSelf = new SelectOption('Add 1 floater to this card', 'Add floater', () => {
-        this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
-        return undefined;
-      });
-
-      const addResource = new SelectCard(
-          'Select card to add 1 floater',
-          'Add floater',
-          floaterCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 1);
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            return undefined;
-          },
-      );
-
-      const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
-        this.resourceCount--;
-        player.cardsInHand.push(game.dealer.dealCard());
-        LogHelper.logRemoveResource(game, player, this, 1, 'draw a card');
-        return undefined;
-      });
-
-      if (this.resourceCount > 0) {
-        opts.push(spendResource);
-             floaterCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
-      } else {
-        return addResource;
-      };
-
-      return new OrOptions(...opts);
-    }
+    return new OrOptions(...opts);
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '213',
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((be) => be.empty().startAction.floaters(1).asterix().description('Action: Add floater to ANY card')).br;
+      b.or(CardRenderItemSize.SMALL).br;
+      b.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'));
+    }),
+  };
 }

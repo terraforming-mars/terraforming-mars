@@ -78,7 +78,7 @@ export class CardRenderEffect extends CardRenderer {
   public get description(): ItemType {
     this._validate();
     // TODO (chosta): validate builder method to make sure it's the last element
-    return `Effect: ${this.rows[2].slice(-1)[0]}`;
+    return `${this.rows[2].slice(-1)[0]}`;
   }
 }
 
@@ -178,6 +178,17 @@ class Builder {
     return this;
   }
 
+  public cards(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CARDS, amount));
+    return this;
+  }
+
+  public floaters(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.FLOATERS, amount));
+    return this;
+  }
+
+
   public event(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.EVENT));
     return this;
@@ -194,7 +205,7 @@ class Builder {
   }
 
   public tradeDiscount(amount: number): Builder {
-    const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * (-1));
+    const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
     item.amountInside = true;
     this._addRowItem(item);
     return this;
@@ -309,12 +320,64 @@ class Builder {
     return this;
   }
 
+  public get digit(): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"digit" could be called on CardRenderItem only');
+      }
+
+      if (item === undefined) {
+        throw new Error('Called "digit" without a CardRenderItem.');
+      }
+      item.showDigit = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public get brackets(): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"brackets" could be called on CardRenderItem only');
+      }
+
+      if (item === undefined) {
+        throw new Error('Called "brackets" without a CardRenderItem.');
+      }
+      row.push(CardRenderSymbol.bracketOpen());
+      row.push(item);
+      row.push(CardRenderSymbol.bracketClose());
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
   /**
    * Used to start the effect for effectBox and actionBox, also adds a delimiter symbol
    */
   public get startEffect(): Builder {
     this.br;
     this._addSymbol(CardRenderSymbol.colon());
+    this.br;
+    return this;
+  }
+
+  public get startAction(): Builder {
+    this.br;
+    this._addSymbol(CardRenderSymbol.arrow());
     this.br;
     return this;
   }

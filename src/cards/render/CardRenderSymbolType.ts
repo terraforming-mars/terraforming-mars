@@ -7,4 +7,6 @@ export enum CardRenderSymbolType {
   EMPTY = ' ',
   SLASH = '/',
   ARROW = '->',
+  BRACKET_OPEN = '(',
+  BRACKET_CLOSE = ')',
 }

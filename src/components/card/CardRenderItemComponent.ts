@@ -47,6 +47,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.MEGACREDITS) {
         classes.push('card-resource');
         classes.push('card-resource-money');
+      } else if (type === CardRenderItemType.CARDS) {
+        classes.push('card-resource');
+        classes.push('card-card');
+      } else if (type === CardRenderItemType.FLOATERS) {
+        classes.push('card-resource');
+        classes.push('card-resource-floater');
       } else if (type === CardRenderItemType.MICROBES) {
         classes.push('card-resource');
         classes.push('card-resource-microbe');

@@ -1124,7 +1124,6 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       );
     }
 
-
     public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
       const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
       const cards : Array<CardModel> = [];
@@ -2307,6 +2306,19 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       this.waitingForCb = cb;
     }
 
+    private serializePlayedCards(): Array<SerializedCard> {
+      return this.playedCards.map((c) => {
+        const result: SerializedCard = {
+          name: c.name,
+          resourceCount: c.resourceCount,
+        };
+        if (c instanceof SelfReplicatingRobots) {
+          result.targetCards = c.targetCards;
+        }
+        return result;
+      });
+    }
+
     public serialize(): SerializedPlayer {
       const result: SerializedPlayer = {
         id: this.id,
@@ -2350,11 +2362,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
         cardsInHand: this.cardsInHand.map((c) => c.name),
         preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
-        playedCards: this.playedCards.map((c) => ({
-          name: c.name,
-          resourceCount: c.resourceCount,
-          targetCards: c.targetCards,
-        })),
+        playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
         removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
         // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.

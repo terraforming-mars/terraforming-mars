@@ -16,7 +16,7 @@ describe('Poseidon', function() {
     expect(play).is.undefined;
     player.corporationCard = card;
     const ceres = new Ceres();
-    ceres.onColonyPlaced(player, game);
+    ceres.addColony(player, game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
   });

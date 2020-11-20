@@ -1,30 +1,17 @@
-import {Colony, IColony} from './Colony';
-import {Player} from '../Player';
-import {PlayerInput} from '../PlayerInput';
+import {Colony} from './Colony';
 import {ColonyName} from './ColonyName';
-import {Game} from '../Game';
-import {LogHelper} from '../components/LogHelper';
+import {ColonyBenefit} from './ColonyBenefit';
 import {Resources} from '../Resources';
 
-export class Triton extends Colony implements IColony {
+export class Triton extends Colony {
     public name = ColonyName.TRITON;
-    public description: string = 'Titanium';
-    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
-      if (usesTradeFleet) this.beforeTrade(this, player, game);
-
-      const qty = Math.max(this.trackPosition - 1, 1);
-      player.titanium += qty;
-      LogHelper.logGainStandardResource(game, player, Resources.TITANIUM, qty);
-
-      if (usesTradeFleet) this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-      super.addColony(this, player, game);
-      player.titanium += 3;
-      return undefined;
-    }
-    public giveTradeBonus(player: Player): undefined | PlayerInput {
-      player.titanium++;
-      return undefined;
-    }
+    public description = 'Titanium';
+    public buildType = ColonyBenefit.GAIN_RESOURCES;
+    public buildQuantity = [3, 3, 3];
+    public buildResource = Resources.TITANIUM;
+    public tradeType = ColonyBenefit.GAIN_RESOURCES;
+    public tradeQuantity = [0, 1, 1, 2, 3, 4, 5];
+    public tradeResource = Resources.TITANIUM;
+    public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
+    public colonyBonusResource = Resources.TITANIUM;
 }

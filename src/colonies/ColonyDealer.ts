@@ -1,4 +1,4 @@
-import {IColony} from './Colony';
+import {Colony} from './Colony';
 import {Europa} from './Europa';
 import {Ganymede} from './Ganymede';
 import {Titan} from './Titan';
@@ -24,7 +24,7 @@ export interface IColonyFactory<T> {
 }
 
 // ALL COLONIES TILES is now a const not and attribute of Colony Dealer
-export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
+export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.CERES, Factory: Ceres},
   {colonyName: ColonyName.ENCELADUS, Factory: Enceladus},
   {colonyName: ColonyName.EUROPA, Factory: Europa},
@@ -38,7 +38,7 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
   {colonyName: ColonyName.TRITON, Factory: Triton},
 ];
 
-export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
+export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.IAPETUS, Factory: Iapetus},
   {colonyName: ColonyName.MERCURY, Factory: Mercury},
   {colonyName: ColonyName.HYGIEA, Factory: Hygiea},
@@ -48,7 +48,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
 ];
 
 // Function to return a card object by its name
-export function getColonyByName(colonyName: string): IColony | undefined {
+export function getColonyByName(colonyName: string): Colony | undefined {
   const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES);
   const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
   if (colonyFactory !== undefined) {
@@ -58,21 +58,21 @@ export function getColonyByName(colonyName: string): IColony | undefined {
 }
 
 export class ColonyDealer {
-    public coloniesDeck: Array<IColony> = [];
-    public discardedColonies: Array<IColony> = [];
+    public coloniesDeck: Array<Colony> = [];
+    public discardedColonies: Array<Colony> = [];
 
-    public shuffle(cards: Array<IColony>): Array<IColony> {
-      const deck: Array<IColony> = [];
+    public shuffle(cards: Array<Colony>): Array<Colony> {
+      const deck: Array<Colony> = [];
       const copy = cards.slice();
       while (copy.length) {
         deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
       }
       return deck;
     }
-    public discard(card: IColony): void {
+    public discard(card: Colony): void {
       this.discardedColonies.push(card);
     }
-    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, addCommunityColonies: boolean = false): Array<IColony> {
+    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
       let count: number = players + 2;
       let colonyTiles = ALL_COLONIES_TILES;
       if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);

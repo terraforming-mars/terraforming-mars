@@ -18,7 +18,7 @@ describe('Io', function() {
   });
 
   it('Should build', function() {
-    io.onColonyPlaced(player, game);
+    io.addColony(player, game);
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
     expect(player2.getProduction(Resources.HEAT)).to.eq(0);
   });
@@ -30,7 +30,7 @@ describe('Io', function() {
   });
 
   it('Should give trade bonus', function() {
-    io.onColonyPlaced(player, game);
+    io.addColony(player, game);
 
     io.trade(player2, game);
     game.deferredActions.runAll(() => {});

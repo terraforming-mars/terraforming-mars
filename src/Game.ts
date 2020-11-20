@@ -19,7 +19,7 @@ import {ElysiumBoard} from './ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
-import {IColony} from './colonies/Colony';
+import {Colony} from './colonies/Colony';
 import {ILoadable} from './ILoadable';
 import {IMilestone} from './milestones/IMilestone';
 import {IParty} from './turmoil/parties/IParty';
@@ -140,7 +140,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public awards: Array<IAward> = [];
 
     // Expansion-specific data
-    public colonies: Array<IColony> = [];
+    public colonies: Array<Colony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public turmoil: Turmoil | undefined;
     public aresData: IAresData | undefined;
@@ -540,7 +540,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public getColoniesModel(colonies: Array<IColony>) : Array<ColonyModel> {
+    public getColoniesModel(colonies: Array<Colony>) : Array<ColonyModel> {
       return colonies.map(
           (colony): ColonyModel => ({
             colonies: colony.colonies.map(
@@ -1682,8 +1682,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return value;
     }
 
-    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
-      const result: Array<IColony> = [];
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
+      const result: Array<Colony> = [];
       for (const serialized of colonies) {
         const colony = getColonyByName(serialized.name);
         if (colony !== undefined) {

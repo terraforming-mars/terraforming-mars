@@ -25,7 +25,7 @@ export class BuildColony implements DeferredAction {
     return new SelectColony(this.title, 'Build', coloniesModel, (colonyName: ColonyName) => {
       openColonies.forEach((colony) => {
         if (colony.name === colonyName) {
-          colony.onColonyPlaced(this.player, this.game);
+          colony.addColony(this.player, this.game);
         }
         return undefined;
       });

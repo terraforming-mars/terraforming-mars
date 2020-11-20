@@ -215,19 +215,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ARCTIC_ALGAE, ` 
-        <div class="content ">
-            <div class="requirements requirements-max ">max -12 C </div>
-            <div class="tile ocean-tile red-outline "></div> : <div class="resource plant "></div><div class="resource plant "></div><br>
-            <div class="description ">
-                (Effect: When anyone places an ocean tile, gain 2 Plants.)
-            </div>
-            <div class="resource plant "></div>
-            <div class="description ">
-                (It must be -12 C or colder to play. Gain 1 Plant.)
-            </div>
-        </div>
-`],
     [CardName.PREDATORS, ` 
         <div class="content ">
             <div class="points ">1/<div class="animal resource "></div></div>
@@ -297,16 +284,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="description ">
                 (Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.)
-            </div>
-        </div>
-`],
-    [CardName.OPTIMAL_AEROBRAKING, ` 
-        <div class="content ">
-            <div class="nowrap">
-              <div class="resource-tag tag-space "></div> <div class="resource-tag tag-event "></div> : <div class="resource money ">3</div><div class="resource heat "></div><div class="resource heat "></div><div class="resource heat "></div>
-            </div>
-            <div class="description ">
-                (Effect: When you play a Space Event, you gain 3 MC and 3 heat.)
             </div>
         </div>
 `],
@@ -709,15 +686,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Effect: When you play a card, you pay 2 MC less for it.)
             </div>
-        </div>
-`],
-    [CardName.ADVANCED_ALLOYS, ` 
-        <div class="content ">
-          <div class="resource titanium"></div> : +<div class="resource money">1</div><br>
-          <div class="resource steel"></div> : +<div class="resource money">1</div>
-          <div class="description">
-            (Effect: Each titanium you have is worth 1 MC extra. Each steel you have is worth 1 MC extra. )
-          </div>
         </div>
 `],
     [CardName.BIRDS, ` 
@@ -1474,19 +1442,6 @@ export const HTML_DATA: Map<string, string> =
     [CardName.CEOS_FAVORITE_PROJECT, ` 
         <div class="content " style="font-size:14px;">
           ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT
-        </div>
-`],
-    [CardName.ANTI_GRAVITY_TECHNOLOGY, ` 
-        <div class="content ">
-          <div class="points points-big">3</div>
-          <div class="requirements">7 Science</div>
-            : <span class="money resource ">-2</span>
-            <div class="description ">
-                (Effect: When you play a card, you pay 2 MC less for it.)
-            </div><br><br>
-            <div class="description ">
-                (Requires 7 science tags.)
-            </div>
         </div>
 `],
     [CardName.INVESTMENT_LOAN, ` 
@@ -2817,15 +2772,6 @@ export const HTML_DATA: Map<string, string> =
                   </div>
                   <div class="description ">
                       (Requires 4 science tags. Increase your energy production 4 steps.)
-                  </div>
-              </div>
-`],
-    [CardName.CRYO_SLEEP, ` 
-              <div class="content ">
-                <div class="points points-big ">1</div>
-                  <div class="tile trade"></div> : <div class="resource resource--white">-1</div>
-                  <div class="description ">
-                      (Effect: When you trade, you pay 1 less resource for it.)
                   </div>
               </div>
 `],
@@ -4752,14 +4698,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.ADVERTISING, ` 
-      <div class="content ">
-        <div class="resource money">20</div>* : <div class="production-box"><div class="production money">1</div></div></div>
-        <div class="description" style="text-align:center;margin:0px 10px;">
-          (Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.)
-        </div>
-      </div>
-`],
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -5118,31 +5056,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="description" style="margin-top:5px;">
         (Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play.)
       </div>
-  </div>
-`],
-    [CardName.EVENT_ANALYSTS, ` 
-  <div class="content ">
-    <div class="requirements"><span class="party">Scientists</span></div>
-    <div class="plus"></div> <div class="influence"></div><br>
-    <div class="description" style="margin-top:5px;">
-      (Effect: You have influence +1.)
-    </div>
-    <br>
-    <div class="description">
-      (Requires that Scientists are ruling or that you have 2 delegates there.)
-    </div>
-  </div>
-`],
-    [CardName.GMO_CONTRACT, ` 
-  <div class="content">
-    <div class="requirements"><span class="party">Greens</span></div>
-    <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> / <div class="tag-microbe resource-tag"></div> : <div class="money resource">2</div>
-    <div class="description">
-      (Effect: Each time you play a plant, animal, or microbe tag, including this, gain 2MC.)
-    </div>
-    <div class="description" style="margin-top:10px;">
-      (Requires that Greens are ruling or that you have 2 delegates there.)
-    </div>
   </div>
 `],
     [CardName.MARTIAN_MEDIA_CENTER, ` 

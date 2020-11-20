@@ -18,7 +18,7 @@ describe('Ganymede', function() {
   });
 
   it('Should build', function() {
-    ganymede.onColonyPlaced(player, game);
+    ganymede.addColony(player, game);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
@@ -30,7 +30,7 @@ describe('Ganymede', function() {
   });
 
   it('Should give trade bonus', function() {
-    ganymede.onColonyPlaced(player, game);
+    ganymede.addColony(player, game);
 
     ganymede.trade(player2, game);
     game.deferredActions.runAll(() => {});

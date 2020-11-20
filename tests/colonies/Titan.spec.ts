@@ -28,7 +28,7 @@ describe('Titan', function() {
 
   it('Should build', function() {
     player.playCard(game, aerialMappers);
-    titan.onColonyPlaced(player, game);
+    titan.addColony(player, game);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -44,7 +44,8 @@ describe('Titan', function() {
     player.playCard(game, aerialMappers);
     titan.trade(player, game);
 
-    expect(game.deferredActions).has.lengthOf(1);
+    // Should have AddResourcesToCard, GiveColonyBonus and decrease track
+    expect(game.deferredActions).has.lengthOf(3);
     const action = game.deferredActions.shift()!;
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
@@ -59,15 +60,15 @@ describe('Titan', function() {
     player.playCard(game, aerialMappers);
     player2.playCard(game, dirigibles);
 
-    titan.onColonyPlaced(player, game);
-        game.deferredActions.shift()!.execute(); // Gain placement floaters
+    titan.addColony(player, game);
+    game.deferredActions.shift()!.execute(); // Gain placement floaters
 
-        titan.trade(player2, game);
-        game.deferredActions.shift()!.execute(); // Gain trade floaters
+    titan.trade(player2, game);
+    game.deferredActions.shift()!.execute(); // Gain trade floaters
 
-        game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Trade bonus
 
-        expect(aerialMappers.resourceCount).to.eq(4);
-        expect(dirigibles.resourceCount).to.eq(1);
+    expect(aerialMappers.resourceCount).to.eq(4);
+    expect(dirigibles.resourceCount).to.eq(1);
   });
 });

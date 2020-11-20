@@ -18,7 +18,7 @@ describe('Luna', function() {
   });
 
   it('Should build', function() {
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
   });
@@ -30,7 +30,7 @@ describe('Luna', function() {
   });
 
   it('Should give trade bonus', function() {
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
 
     luna.trade(player2, game);
     game.deferredActions.runAll(() => {});

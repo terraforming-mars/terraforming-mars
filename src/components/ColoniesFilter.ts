@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {Callisto} from '../colonies/Callisto';
 import {Ceres} from '../colonies/Ceres';
-import {IColony} from '../colonies/Colony';
+import {Colony} from '../colonies/Colony';
 import {Europa} from '../colonies/Europa';
 import {Ganymede} from '../colonies/Ganymede';
 import {Io} from '../colonies/Io';
@@ -19,7 +19,7 @@ import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 
-const officialColonies: Array<IColony> = [
+const officialColonies: Array<Colony> = [
   new Callisto(),
   new Ceres(),
   new Enceladus(),
@@ -33,7 +33,7 @@ const officialColonies: Array<IColony> = [
   new Triton(),
 ];
 
-const communityColonies: Array<IColony> = [
+const communityColonies: Array<Colony> = [
   new Iapetus(),
   new Mercury(),
   new Hygiea(),
@@ -56,7 +56,7 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       selectedColonies: [
         ...officialColonies,
         ...this.communityCardsOption ? communityColonies: [],
-      ] as Array<IColony> | boolean,
+      ] as Array<Colony> | boolean,
     };
   },
   methods: {

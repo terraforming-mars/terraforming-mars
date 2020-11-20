@@ -18,7 +18,7 @@ describe('Callisto', function() {
   });
 
   it('Should build', function() {
-    callisto.onColonyPlaced(player, game);
+    callisto.addColony(player, game);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
   });
@@ -30,7 +30,7 @@ describe('Callisto', function() {
   });
 
   it('Should give trade bonus', function() {
-    callisto.onColonyPlaced(player, game);
+    callisto.addColony(player, game);
 
     callisto.trade(player2, game);
     game.deferredActions.runAll(() => {});

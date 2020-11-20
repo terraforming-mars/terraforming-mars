@@ -7,7 +7,18 @@ export enum CardRenderItemType {
   HEAT = 'heat',
   ENERGY = 'energy',
   TITANIUM = 'titanium',
+  STEEL = 'steel',
   MEGACREDITS = 'megacredits',
   MICROBES = 'microbes',
+  ANIMALS = 'animals',
+  EVENT = 'event',
+  SPACE = 'space',
+  TRADE = 'trade',
+  TRADE_DISCOUNT = 'trade_discount',
+  TRADE_FLEET = 'trade_fleet',
+  CHAIRMAN = 'chairman',
+  PARTY_LEADERS = 'party_leaders',
+  DELEGATES = 'delegates',
+  INFLUENCE = 'influence',
   // more to come...
 }

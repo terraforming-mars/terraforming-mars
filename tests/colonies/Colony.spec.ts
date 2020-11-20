@@ -57,17 +57,17 @@ describe('Colony', function() {
     expect(luna.colonies).has.lengthOf(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
 
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
     expect(luna.colonies).has.lengthOf(1);
     expect(luna.colonies[0]).to.eq(player.id);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player2, game);
     expect(luna.colonies).has.lengthOf(2);
     expect(luna.colonies[1]).to.eq(player2.id);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    luna.onColonyPlaced(player3, game);
+    luna.addColony(player3, game);
     expect(luna.colonies).has.lengthOf(3);
     expect(luna.colonies[2]).to.eq(player3.id);
     expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(2);
@@ -94,11 +94,11 @@ describe('Colony', function() {
 
   it('Should push the trackPosition if a colony is built on it', function() {
     expect(luna.trackPosition).to.eq(1);
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
     expect(luna.trackPosition).to.eq(1);
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player2, game);
     expect(luna.trackPosition).to.eq(2);
-    luna.onColonyPlaced(player3, game);
+    luna.addColony(player3, game);
     expect(luna.trackPosition).to.eq(3);
   });
 
@@ -108,8 +108,8 @@ describe('Colony', function() {
     game.deferredActions.runAll(() => {});
     expect(luna.trackPosition).to.eq(0);
 
-    luna.onColonyPlaced(player, game);
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player, game);
+    luna.addColony(player2, game);
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player, game);
     game.deferredActions.runAll(() => {});
@@ -151,7 +151,7 @@ describe('Colony', function() {
     // 1 colony
     player.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
     luna.trade(player, game);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(9);
@@ -162,7 +162,7 @@ describe('Colony', function() {
     // 2 colonies
     player.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player2, game);
     luna.trade(player2, game);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(2);
@@ -174,7 +174,7 @@ describe('Colony', function() {
     player.megaCredits = 0;
     player2.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.onColonyPlaced(player3, game);
+    luna.addColony(player3, game);
     luna.trade(player4, game);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(2);
@@ -185,9 +185,9 @@ describe('Colony', function() {
 
   it('Should give trade bonus for each colony a player has', function() {
     luna.trackPosition = 3; // 7 MC
-    luna.onColonyPlaced(player, game);
-    luna.onColonyPlaced(player, game);
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
+    luna.addColony(player, game);
+    luna.addColony(player, game);
 
     luna.trade(player2, game);
     game.deferredActions.runAll(() => {});
@@ -207,10 +207,10 @@ describe('Colony', function() {
   it('Shouldn\'t let players build a colony if they already have one', function() {
     player.megaCredits = 17;
 
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player2, game);
     expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
 
-    luna.onColonyPlaced(player, game);
+    luna.addColony(player, game);
     expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
   });
 
@@ -218,15 +218,15 @@ describe('Colony', function() {
     player.megaCredits = 17;
     expect(luna.isColonyFull()).to.be.false;
 
-    luna.onColonyPlaced(player2, game);
+    luna.addColony(player2, game);
     expect(luna.isColonyFull()).to.be.false;
     expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
 
-    luna.onColonyPlaced(player3, game);
+    luna.addColony(player3, game);
     expect(luna.isColonyFull()).to.be.false;
     expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
 
-    luna.onColonyPlaced(player4, game);
+    luna.addColony(player4, game);
     expect(luna.isColonyFull()).to.be.true;
     expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
   });
@@ -268,9 +268,9 @@ describe('Colony', function() {
     player3.cardsInHand.push(card);
 
     const pluto = new Pluto();
-    pluto.onColonyPlaced(player, game);
-    pluto.onColonyPlaced(player2, game);
-    pluto.onColonyPlaced(player3, game);
+    pluto.addColony(player, game);
+    pluto.addColony(player2, game);
+    pluto.addColony(player3, game);
     pluto.trade(player4, game);
 
     let callbackWasCalled = false;

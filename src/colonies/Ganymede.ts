@@ -1,30 +1,16 @@
-import {Colony, IColony} from './Colony';
-import {Player} from '../Player';
-import {PlayerInput} from '../PlayerInput';
+import {Colony} from './Colony';
 import {Resources} from '../Resources';
 import {ColonyName} from './ColonyName';
-import {Game} from '../Game';
-import {LogHelper} from '../components/LogHelper';
+import {ColonyBenefit} from './ColonyBenefit';
 
-export class Ganymede extends Colony implements IColony {
+export class Ganymede extends Colony {
     public name = ColonyName.GANYMEDE;
-    public description: string = 'Plants';
-    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
-      if (usesTradeFleet) this.beforeTrade(this, player, game);
-
-      const qty = this.trackPosition;
-      player.plants += qty;
-      LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
-
-      if (usesTradeFleet) this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-      super.addColony(this, player, game);
-      player.addProduction(Resources.PLANTS);
-      return undefined;
-    }
-    public giveTradeBonus(player: Player): undefined | PlayerInput {
-      player.plants++;
-      return undefined;
-    }
+    public description = 'Plants';
+    public buildType = ColonyBenefit.GAIN_PRODUCTION;
+    public buildResource = Resources.PLANTS;
+    public tradeType = ColonyBenefit.GAIN_RESOURCES;
+    public tradeQuantity = [0, 1, 2, 3, 4, 5, 6];
+    public tradeResource = Resources.PLANTS;
+    public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
+    public colonyBonusResource = Resources.PLANTS;
 }

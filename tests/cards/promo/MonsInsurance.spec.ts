@@ -58,4 +58,21 @@ describe('MonsInsurance', function() {
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
   });
+
+  it('Doesn\'t trigger effect when player should pay itself', function() {
+    card.play(player, game);
+    player.corporationCard = card;
+    player.megaCredits = 2;
+
+    const tardigrades = new Tardigrades();
+    player.playedCards.push(tardigrades);
+    tardigrades.resourceCount = 3;
+
+    const ants = new Ants();
+    player2.playedCards.push(ants);
+
+    ants.action(player2, game); // remove resource from Mons' card
+    expect(player2.megaCredits).to.eq(0);
+    expect(player.megaCredits).to.eq(2);
+  });
 });

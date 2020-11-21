@@ -32,14 +32,17 @@ export const HTML_DATA: Map<string, string> =
             <div class="requirements requirements-max ">max 6% O2</div>
             <div class=" "><span class=" money resource ">1</span> <span class="red-arrow "></span> <span class="microbe resource "></span>*  :  <div class="resource science"></div> </div>
             <div class="description ">
-                (Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.)<br><br>
+                (Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.)
+                <br><br>
                 (3 VPs if you have one or more Science resources here.)
             </div>
         </div>
 `],
     [CardName.INVENTORS_GUILD, ` 
         <div class="content ">
-            <span class="red-arrow "></span> <span style="font-size:14px; ">ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT</span>
+            <span class="red-arrow "></span> <span style="font-size:14px; ">
+                ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT
+            </span>
         </div>
 `],
     [CardName.MARTIAN_RAILS, ` 
@@ -67,7 +70,8 @@ export const HTML_DATA: Map<string, string> =
                 ">
             </div>
             <div class="description " style="text-align:left;">
-                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.)<br>
+                (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.)
+                <br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
                     1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
                 </div>
@@ -90,7 +94,8 @@ export const HTML_DATA: Map<string, string> =
             <div class=" money resource ">12</div> (<span class="titanium resource"></span>)
             <span class="red-arrow "></span> <div class="ocean-tile tile "></div>
             <div class="description ">
-                (Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.)<br><br>
+                (Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.)
+                <br><br>
                 (1 VP for each Jovian tag you have.)
             </div>
         </div>
@@ -141,8 +146,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
             </div>
             <div class="description">
-                <div>Oxygen must be 7% or less.</div>
-                <div>Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
+                Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.
             </div>
         </div>
 `],
@@ -154,8 +158,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div><br>
             <div class="description ">
-                (Decrease your Energy production 1 step and increase your MC production 3 steps.
-                Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.)
+                (Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.)
             </div>
         </div>
 `],
@@ -258,7 +261,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Spend 1 titanium to add 1 fighter resource to this card.)
             </div>
             <div class="description ">
-                (1 VP for each fighter resource on this card.) <br>
+                (1 VP for each fighter resource on this card.)
             </div>
         </div>
 `],
@@ -314,7 +317,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile temperature-tile "></div>
             <div class="description ">
-                (Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.)<br><br>
+                (Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.)
+                <br><br>
                 (Requires 4% oxygen.)
             </div>
         </div>
@@ -441,7 +445,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="microbe resource"></div><br>
         <div class="description">
           (Action: Add 1 Microbe to this card.)
-          <br><br> (1 VP per 4 Microbes on this card.)
+          <br><br>
+          (1 VP per 4 Microbes on this card.)
         </div>
       </div>
 `],
@@ -507,8 +512,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
         </div>
         <div class="description" style="text-align:left;">
-          <div>Requires 6% oxygen.</div>
-          <div style="width: 135px;">Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.</div>
+          (Requires 6% oxygen. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
         </div>
       </div>
 `],
@@ -1132,8 +1136,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div>*<br>
             <div class="description ">
-                (Decrease your energy production 1 step and increase your MC production 2 steps.
-                Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)
+                (Decrease your energy production 1 step and increase your MC production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)
             </div>
         </div>
 `],
@@ -1511,8 +1514,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR 3 <div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile rating "></div>
             <div class="description ">
-              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.<br>
-            </div><br>
+              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.)
+            </div><br><br>
             <div class="microbe resource "></div><div class="microbe resource "></div><div class="microbe resource "></div>
             <div class="description ">
               (Add 3 Microbes to this card.)
@@ -2063,8 +2066,10 @@ export const HTML_DATA: Map<string, string> =
               <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
             </div>
             <div class="description">
-              (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
-              (Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
+              (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.)
+              <br>
+              (Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.)
+              <br>
               (Requires 2 Science tags.)
             </div>
           </div>
@@ -2184,8 +2189,9 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow "></div> <div class="floater resource "></div>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
               <div class="resource-tag tag-venus"></div>  : <div class="floater resource "></div> = <div class="money resource ">3</div>
                 <div class="description ">
-                  (Action: add 1 Floater to ANY card.)<br><br>
-                  (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each)
+                  (Action: add 1 Floater to ANY card.)
+                  <br><br>
+                  (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3 MC each)
                 </div>
             </div>
 `],
@@ -3049,7 +3055,8 @@ export const HTML_DATA: Map<string, string> =
                   <span class="red-arrow " style="margin-left:5px; "></span>
                   <div class="resource camp"></div>
                   <div class="description ">
-                      (Action: Decrease your MC production 1 step to add a camp resource to this card.)<br><br>
+                      (Action: Decrease your MC production 1 step to add a camp resource to this card.)
+                      <br><br>
                       (1 VP for each camp resource on this card.)
                   </div>
               </div>
@@ -3270,8 +3277,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
-        7
-        <div class="resource plant"></div> <span class="red-arrow"></span>
+        7<div class="resource plant"></div> <span class="red-arrow"></span>
         <div class="greenery-tile tile"></div><br>
         <div class="description" style="text-align:center;margin-top:0px;">
           (Effect: You may always pay 7 plants, instead of 8, to place greenery.)
@@ -3301,7 +3307,7 @@ export const HTML_DATA: Map<string, string> =
         X<div class="resource heat"></div> :
         <div class="resource money">X</div>
         <div class="description helion-effect">
-          (Effect: Your may use heat as MC. You may not use MC as heat.)
+          (Effect: You may use heat as MC. You may not use MC as heat.)
         </div>
       </div>
       <div class="helion">helion</div><br>
@@ -3373,7 +3379,6 @@ export const HTML_DATA: Map<string, string> =
           -ms-transform:scale(0.5,1); /* IE 9 */
           -o-transform:scale(0.5,1); /* Opera */
           transform:scale(1,0.5); /* W3C */
-          ;
           margin-bottom:15px;">CINEMATICS
         </div><br>
           <div class="resource money " style="margin-left:40px;">30</div>&nbsp;&nbsp;&nbsp;&nbsp; 20<div class="resource steel"></div>
@@ -3613,10 +3618,12 @@ export const HTML_DATA: Map<string, string> =
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div class="red-arrow"></div> <div class="resource floater"></div>*
           <div class="description" style="text-align:center;margin-top:0px;">
-            (Action: Add a floater to ANY card.) <br>
-          </div>
+            (Action: Add a floater to ANY card.)
+          </div><br>
           <div class="description" style="margin-top:17px;margin-left:17px; width: 120px; text-align:left;">
-          (1 VP per 3 floaters <br> on this card.)
+          (1 VP per 3 floaters
+          <br>
+          on this card.)
           </div>
         </div>
         <div class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;margin-bottom:2px">
@@ -3818,8 +3825,7 @@ export const HTML_DATA: Map<string, string> =
                 background-color: rgb(205,162,130);
                 background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
                 box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-                "
-                >?</div> : <div class="resource money">3</div>
+                ">?</div> : <div class="resource money">3</div>
                 <div class="description " style="text-align:center;margin-top:0px; ">
                     (Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.)
                 </div>
@@ -3881,8 +3887,7 @@ export const HTML_DATA: Map<string, string> =
           OR - <div class="resource wild red-outline"></div>:
           PAY<div class="resource money" style="margin-right:-2px">3</div>
           <div class="description" style="text-align:center;margin-top:-2px;">
-            (Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim,
-            or as much as possible.)
+            (Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.)
           </div>
         </div>
         <div class="mons" style="margin-top:18px">
@@ -3901,8 +3906,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="production money">4</div> <div class="production money red-outline">-2</div>*
         </div>
         <div class="description" style="margin-top:11px;text-align:center;">
-          (You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS.
-          THIS DOES NOT TRIGGER THE EFFECT BELOW.)
+          (You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.)
         </div>
       </div>
 `],
@@ -3959,7 +3963,8 @@ export const HTML_DATA: Map<string, string> =
                   </div>
                 <div class="resource money " style="margin-left:10px;margin-right:20px;">53</div> - <div class="tile rating"></div><div class="tile rating"></div>
                 <div class="description " style="text-align:center;">
-                    (You start with 53 MC. Decrease your TR 2 steps.<br>
+                    (You start with 53 MC. Decrease your TR 2 steps.
+                    <br>
                     1 VP per preservation resource here.)
                 </div>
             </div>
@@ -4038,8 +4043,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="red-arrow"></div> <div class="resource floater" style="margin-bottom:5px;"></div>* <br>
           <div class="resource floater"></div> = <div class="resource heat"></div><div class="resource heat"></div>
           <div class="description" style="text-align:center;margin-top:-5px;">
-            (Action: Add a floater to ANY card.<br> Effect: Floaters on this card may be used as 2 heat each.) <br>
-          </div>
+            (Action: Add a floater to ANY card.<br> Effect: Floaters on this card may be used as 2 heat each.)
+          </div><br>
         </div>
         <div class="stormcraft1">STORM</div><div class="stormcraft2">CRAFT</div>
         <div class="stormcraft3">INCOR</div><div class="stormcraft4">PORATED</div>
@@ -4222,8 +4227,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="corporationEffectBoxLabel" style="margin-bottom:15px;" >ACTION</div>
           <div class="red-arrow"></div> <div class="resource money">2</div> / <div class="delegate"></div> *
           <div class="description" style="text-align:center;margin-top:5px;">
-            (Action: Gain 2 MC for each party where you have at least 1 delegate.)<br>
-          </div>
+            (Action: Gain 2 MC for each party where you have at least 1 delegate.)
+          </div><br>
         </div>
         <div class="septem">Septem Tribus</div>
         <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
@@ -4240,8 +4245,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource wild"></div> OR <br>
           <div class="asteroid resource"></div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
-            (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
-          </div>
+            (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)
+          </div><br>
         </div>
         <div class="astrodrill">Astrodrill</div>
         <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
@@ -4652,9 +4657,7 @@ export const HTML_DATA: Map<string, string> =
           <span>4</span> <div class="resource titanium"></div>
         </div>
         <div class="description">
-            (Requires 2 Science tags.
-            Decrease your energy production 1 step, and increase your titanium production 1 step.
-            Gain 4 titanium.)
+            (Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.)
         </div>
     </div>
 `],
@@ -5169,8 +5172,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="points points-big red-outline">-1</div>
         STEAL <div class="production money red-outline">3</div> *
         <div class="description ">
-            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation.
-            Place this card face down in THAT PLAYER'S EVENT PILE.)
+            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.)
         </div>
     </div>
 `],
@@ -5258,7 +5260,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="resource card card-medium"><div class="card-icon card-icon-blue"></div></div>
       
       <div class="description">
-        (You start with 39 MC, 1 steel and 1 titanium.<br>
+        (You start with 39 MC, 1 steel and 1 titanium.
+        <br>
         As your first action, draw a blue card.)
       </div>
 `],
@@ -5410,9 +5413,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description " style="text-align:left;">
             <div class="resource animal "></div><div class="resource animal "></div><br/>
             <div class="resource animal "></div><span class="red-arrow"></span><div class="resource animal"></div><br/>
-            (Action: Remove 1 animal from this card to add 1 animal to another card.
-            Requires 1 science tag. Add 2 animals to this card.
-            OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.)<br>
+            (Action: Remove 1 animal from this card to add 1 animal to another card. Requires 1 science tag. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.)
         </div>
     </div>
 `],
@@ -5426,8 +5427,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="microbe resource "></div><div class="microbe resource "></div>
         <div class="ares-tile board-space-tile--biofertilizer_facility"></div>
         <div class="description " style="text-align:left;">
-            (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)<br>
-        </div>
+            (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)
+        </div><br>
     </div>
 `],
     [CardName.BUTTERFLY_EFFECT, `
@@ -5438,7 +5439,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="globals-box">All four hazard markers</div>: -1 / 0 / +1
         </div>
         <div class="description " style="text-align:left;">
-            (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)<br>
+            (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)
         </div>
     </div>
 `],
@@ -5448,9 +5449,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="points ">-2</span></div>
         <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
         <div class="description " style="text-align:left;">
-            (Effect: Place a bronze cube on a dust storm tile and raise oxygen
-              1 step, or place a bronze cube on an erosion tile and raise the
-              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
+            (Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
         </div>
     </div>
 `],
@@ -5461,9 +5460,7 @@ export const HTML_DATA: Map<string, string> =
         <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource plant "></div><div class="resource animal "></div><div class="resource microbe "></div><br/>
         </div><br/>
         <div class="description " style="text-align:left;">
-            (Effect: When placing a tile grants you any plants, animals or microbes,
-              you gain one additional of each of those resources that you gain.
-            Requires 3 greeneries on Mars.)<br>
+            (Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain. Requires 3 greeneries on Mars.)
         </div>
     </div>
 `],
@@ -5474,9 +5471,7 @@ export const HTML_DATA: Map<string, string> =
         <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource steel "></div><div class="resource titanium "></div><div class="resource heat "></div><br/>
         </div><br/>
         <div class="description " style="text-align:left;">
-            (Effect: When placing a tile grants you any steel, titanium, or heat,
-              you gain one additional of each of those resources that you gain.
-            Requires 5 or fewer greeneries on Mars.)<br>
+            (Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain. Requires 5 or fewer greeneries on Mars.)
         </div>
     </div>
 `],
@@ -5490,7 +5485,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div><br/>
         <div class="description " style="text-align:left;">
-            (Effect: When an <b>adjacency bonus</b> is collected from a tile you own, you gain 1M€. Increase your M€ production 1 step.)<br>
+            (Effect: When an <b>adjacency bonus</b> is collected from a tile you own, you gain 1M€. Increase your M€ production 1 step.)
         </div>
     </div>
 `],
@@ -5502,7 +5497,7 @@ export const HTML_DATA: Map<string, string> =
         -4<div class="resource plant red-outline"></div>
         <div class="ares-tile board-space-tile--metallic_asteroid"></div>
         <div class="description " style="text-align:left;">
-            (Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an <b>adjacency bonus</b> of 1 titanium.)<br>
+            (Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an <b>adjacency bonus</b> of 1 titanium.)
         </div>
     </div>
 `],
@@ -5518,9 +5513,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 
         <div class="description " style="text-align:left;">
-          (Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps.<br>
-            Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES.
-            The tile counts as a city as well as an ocean.)
+          (Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)
      </div>
     </div>
 `],
@@ -5534,9 +5527,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix plus"></div><div class="plant production "></div>
         </div>
         <div class="description " style="text-align:left;">
-            (Requires 4 ocean tiles. Increase your heat production 1 step and increase your
-            plant production 1 step.<br>Place this tile on top of an existing ocean tile.
-            The tile grants an <b>adjacency bonus</b> of 1 plant.)
+            (Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile.  The tile grants an <b>adjacency bonus</b> of 1 plant.)
         </div>
     </div>
 `],
@@ -5551,7 +5542,8 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="ares-tile board-space-tile--capital_ares"></div>
         <div class="description " style="text-align:left;">
-            (Requires 4 ocean tiles. Place this tile which grants an <b>adjacency bonus</b> of 2M€. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+            (Requires 4 ocean tiles. Place this tile which grants an <b>adjacency bonus</b> of 2M€. Decrease your Energy production 2 steps and increase your MC production 5 steps.
+            <br>
             <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
                 1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
             </div>
@@ -5582,9 +5574,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="ares-tile board-space-tile--ocean_sanctuary"></div>
         <div class="resource animal "></div>
         <div class="description " style="text-align:left;">
-            (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
-              The tile grants an <b>adjacency bonus</b> of 1 animal.<br/>
-              Add 1 animal to this card. 1 VP per animal on this card.)
+            (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an <b>adjacency bonus</b> of 1 animal.
+            <br/>
+            Add 1 animal to this card. 1 VP per animal on this card.)
         </div>
     </div>
 `],
@@ -5596,7 +5588,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="ares-tile board-space-tile--solar_farm"></div>
         <div class="description " style="text-align:left;">
-            Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.<br>
+            Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.
         </div>
     </div>
 `],
@@ -5608,7 +5600,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
       <div class="ares-tile board-space-tile--ecological_zone_ares"></div>
       <div class="description">
-        (Effect: When you play an animal or plant tag (including these), add an animal to this card.<br/><br/>
+        (Effect: When you play an animal or plant tag (including these), add an animal to this card.
+        <br/><br/>
         Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
       </div>
     </div>
@@ -5632,8 +5625,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
         <div class="ares-tile board-space-tile--lava_flows_ares"></div>
         <div class="description ">
-          (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. 
-          This tile grants an <b>adjacency bonus</b> of 2 heat.)
+          (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an <b>adjacency bonus</b> of 2 heat.)
         </div>
     </div>
 `],
@@ -5645,9 +5637,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="steel production"></div> OR <div class="titanium production"></div>
       </div> *
       <div class="description">
-        (Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES.
-          This tile provides an <b>adjacency bonus</b> of the same resource as the area.
-          Increase your production of that resource 1 step.)
+        (Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an <b>adjacency bonus</b> of the same resource as the area. Increase your production of that resource 1 step.)
       </div>
     </div>
 `],
@@ -5659,9 +5649,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="steel production"></div> OR <div class="titanium production"></div>
       </div> *
       <div class="description">
-        (Place one of these tiles on an area with a steel or titanium placement bonus.
-        This tile provides an <b>adjacency bonus</b> of the same resource as the area.
-        Increase your production of that resource 1 step.)      
+        (Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an <b>adjacency bonus</b> of the same resource as the area. Increase your production of that resource 1 step.)      
       </div>
     </div>
 `],
@@ -5673,8 +5661,7 @@ export const HTML_DATA: Map<string, string> =
       </div><br>
       <div class="ares-tile board-space-tile--mohole_area_ares"></div>
       <div class="description">
-        (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.
-          The tile grants an <b>adjacency bonus</b> of 2 heat.)
+        (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an <b>adjacency bonus</b> of 2 heat.)
       </div>
     </div>
 `],
@@ -5688,8 +5675,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <div class="ares-tile board-space-tile--natural_preserve_ares"></div>
       <div class="description">
-        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. 
-          The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
+        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
       </div>
     </div>
 `],
@@ -5700,8 +5686,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="ares-tile board-space-tile--nuclear_zone_ares"></div>
       <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
       <div class="description">
-        (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€
-          when they place a tile with their player marker on it adjacent to the Nuclear Zone.)
+        (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it adjacent to the Nuclear Zone.)
       </div>
     </div>
 `],

@@ -196,26 +196,14 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     }
 
     public increaseTerraformRating(game: Game) {
-      if (!game.gameOptions.turmoilExtension) {
-        this.terraformRating++;
-        this.hasIncreasedTerraformRatingThisGeneration = true;
-        return;
-      }
-
-      // Turmoil Reds capacity
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
+      if (game.phase === Phase.ACTION && PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
         if (this.canAfford(REDS_RULING_POLICY_COST)) {
           game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, false, false, 'Select how to pay for TR increase'));
         } else {
           // Cannot pay Reds, will not increase TR
           return;
         }
-
-        this.terraformRating++;
-        this.hasIncreasedTerraformRatingThisGeneration = true;
-        return;
       }
-
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;
     }

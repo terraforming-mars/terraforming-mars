@@ -1,14 +1,31 @@
 import Vue from 'vue';
-import {Card, getCardExpansionByName} from './card/Card';
+import {Card} from './card/Card';
 import {
+  ALL_CARD_MANIFESTS,
   ALL_CORPORATION_CARD_NAMES,
   ALL_PRELUDE_CARD_NAMES,
   ALL_PROJECT_CARD_NAMES,
 } from '../cards/AllCards';
 import {GameModule} from '../GameModule';
+import {ICard} from '../cards/ICard';
+
+interface Entry {
+  card: ICard,
+  module: GameModule
+}
+const cards: Map<string, Entry> = new Map();
+ALL_CARD_MANIFESTS.forEach((manifest) => {
+  manifest.projectCards.cards.forEach((card) =>
+    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+  manifest.projectCards.cards.forEach((card) =>
+    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+  manifest.projectCards.cards.forEach((card) =>
+    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+});
 
 export interface DebugUIModel {
   filterText: string,
+  filterDescription: boolean | unknown[],
   base: boolean | unknown[],
   corporateEra: boolean | unknown[],
   prelude: boolean | unknown[],
@@ -48,15 +65,22 @@ export const DebugUI = Vue.component('debug-ui', {
       return ALL_PRELUDE_CARD_NAMES.sort();
     },
     filtered: function(cardName: string): boolean {
-      const nameMatches = this.$data.filterText.length === 0 ||
-        cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
-
-      if (!nameMatches) {
-        return false;
+      const card = cards.get(cardName);
+      const filterText = this.$data.filterText.toUpperCase();
+      if (this.$data.filterText.length > 0) {
+        if (cardName.toUpperCase().indexOf(filterText) === -1) {
+          return false;
+        }
+        if (this.$data.filterDescription) {
+          const desc = card?.card.metadata?.description;
+          // TODO(kberg): optimize by having all the descriptions in upper case.
+          if (desc !== undefined && desc.toUpperCase().indexOf(filterText) === -1) {
+            return false;
+          }
+        }
       }
 
-      const gameModule: GameModule = getCardExpansionByName(cardName);
-      switch (gameModule) {
+      switch (card?.module) {
         case GameModule.Base:
           return this.base === true;
         case GameModule.CorpEra:
@@ -83,6 +107,10 @@ export const DebugUI = Vue.component('debug-ui', {
   template: `
         <div class="debug-ui-container">
             <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
+            <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
+            <label for="filterDescription-checkbox">
+                <span v-i18n>Filter description</span>
+            </label>
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
               <input type="checkbox" name="base" id="base-checkbox" v-model="base"></input>
               <label for="base-checkbox" class="expansion-button">

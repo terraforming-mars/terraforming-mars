@@ -10,7 +10,7 @@ import {Player, PlayerId} from '../Player';
 import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
-import {ILoadable} from '../ILoadable';
+import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 
@@ -28,7 +28,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
   {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
 ];
 
-export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
+export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
@@ -344,11 +344,31 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
       return victory;
     }
 
+    public serialize(): SerializedTurmoil {
+      const result: SerializedTurmoil = {
+        chairman: this.chairman,
+        rulingParty: this.rulingParty,
+        dominantParty: this.dominantParty,
+        lobby: Array.from(this.lobby),
+        delegate_reserve: this.delegate_reserve,
+        parties: this.parties,
+        playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
+        globalEventDealer: this.globalEventDealer,
+        distantGlobalEvent: this.distantGlobalEvent,
+        commingGlobalEvent: this.commingGlobalEvent,
+      };
+      if (this.currentGlobalEvent !== undefined) {
+        result.currentGlobalEvent = this.currentGlobalEvent;
+      }
+      return result;
+    }
+
     // Function used to rebuild each objects
-    loadFromJSON(d: SerializedTurmoil): Turmoil {
+    public loadFromJSON(d: SerializedTurmoil): Turmoil {
       // Assign each attributes
       const o = Object.assign(this, d);
 
+      this.lobby = new Set(d.lobby);
       this.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
       if (d.rulingParty) {

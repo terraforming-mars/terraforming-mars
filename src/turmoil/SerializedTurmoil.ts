@@ -7,12 +7,12 @@ export interface SerializedTurmoil {
     chairman: undefined | PlayerId | 'NEUTRAL';
     rulingParty: undefined | IParty;
     dominantParty: undefined | IParty;
-    lobby: Set<string>;
+    lobby: Array<string>;
     delegate_reserve: Array<PlayerId | 'NEUTRAL'>; // eslint-disable-line camelcase
     parties: Array<IParty>;
-    playersInfluenceBonus: Map<string, number>;
+    playersInfluenceBonus: Array<[string, number]>;
     globalEventDealer: GlobalEventDealer;
     distantGlobalEvent: IGlobalEvent | undefined;
     commingGlobalEvent: IGlobalEvent | undefined;
-    currentGlobalEvent: IGlobalEvent | undefined;
+    currentGlobalEvent?: IGlobalEvent;
 }

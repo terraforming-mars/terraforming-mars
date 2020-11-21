@@ -1821,7 +1821,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
-        const turmoil = new Turmoil(this, , this.gameOptions.politicalAgendasExtension);
+        const turmoil = new Turmoil(this, this.gameOptions.politicalAgendasExtension);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
 
         // Rebuild lobby

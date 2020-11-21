@@ -2347,7 +2347,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         colonyTradeDiscount: this.colonyTradeDiscount,
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
-        turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
+        turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
         powerPlantCost: this.powerPlantCost,
         victoryPointsBreakdown: this.victoryPointsBreakdown,
         oceanBonus: this.oceanBonus,
@@ -2415,7 +2415,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.titaniumProduction = d.titaniumProduction;
         player.titaniumValue = d.titaniumValue;
         player.tradesThisTurn = d.tradesThisTurn;
-        player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+        player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
         player.victoryPointsBreakdown = d.victoryPointsBreakdown;
       }
 

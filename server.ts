@@ -5,6 +5,7 @@ import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
+import * as zlib from 'zlib';
 
 import {AndOptions} from './src/inputs/AndOptions';
 import {BoardName} from './src/BoardName';
@@ -54,10 +55,38 @@ import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters'
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
+let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
+const fileCache = new Map<string, Buffer>();
+const isProduction = process.env.NODE_ENV === 'production';
+
+// compress styles.css
+zlib.gzip(styles, function(err, compressed) {
+  if (err !== null) {
+    console.warn('error compressing styles', err);
+    return;
+  }
+  compressedStyles = compressed;
+});
+
+function readFile(path: string, cb: (err: Error | null, data: Buffer) => void): void {
+  const result = fileCache.get(path);
+  if (isProduction === false || result === undefined) {
+    fs.readFile(path, (err1, data1) => {
+      if (err1) {
+        cb(err1, Buffer.alloc(0));
+        return;
+      }
+      fileCache.set(path, data1);
+      cb(null, data1);
+    });
+  } else {
+    cb(null, result);
+  }
+}
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== undefined) {
@@ -93,7 +122,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        serveResource(res, styles);
+        serveStyles(req, res);
       } else if (
         req.url.startsWith('/assets/') ||
         req.url === '/favicon.ico' ||
@@ -1013,13 +1042,13 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
-  fs.readFile('index.html', function(err, data) {
+  readFile('index.html', function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
+    res.setHeader('Content-Length', data.length);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.write(data);
-    res.end();
+    res.end(data);
   });
 }
 
@@ -1033,9 +1062,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     file = 'favicon.ico';
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     res.setHeader('Content-Type', 'text/javascript');
-    const acceptEncoding = req.headers['accept-encoding'];
     let suffix = '';
-    if (acceptEncoding !== undefined && acceptEncoding.includes('gzip')) {
+    if (supportsGzip(req)) {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
@@ -1070,18 +1098,28 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== '/main.js' && req.url !== '/main.js.map') {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
-  fs.readFile(file, function(err, data) {
+  readFile(file, function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
-    res.write(data);
-    res.end();
+    res.setHeader('Content-Length', data.length);
+    res.end(data);
   });
 }
 
-function serveResource(res: http.ServerResponse, s: Buffer): void {
-  res.write(s);
-  res.end();
+function supportsGzip(req: http.IncomingMessage): boolean {
+  return req.headers['accept-encoding'] !== undefined &&
+         req.headers['accept-encoding'].includes('gzip');
+}
+
+function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let buffer = styles;
+  if (compressedStyles !== undefined && supportsGzip(req)) {
+    res.setHeader('Content-Encoding', 'gzip');
+    buffer = compressedStyles;
+  }
+  res.setHeader('Content-Length', buffer.length);
+  res.end(buffer);
 }
 
 gameLoader.start(() => {

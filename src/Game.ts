@@ -115,7 +115,6 @@ export class Game implements ISerializable<SerializedGame, Game> {
     public phase: Phase = Phase.RESEARCH;
     public dealer: Dealer;
     public board: Board;
-    public gameOptions: GameOptions;
 
     // Global parameters
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -156,46 +155,35 @@ export class Game implements ISerializable<SerializedGame, Game> {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      gameOptions?: GameOptions,
-    ) {
-      Database.getInstance();
-
-      if (gameOptions === undefined) {
-        gameOptions = {
-          boardName: BoardName.ORIGINAL,
-          clonedGamedId: undefined,
-
-          undoOption: false,
-          fastModeOption: false,
-          showOtherPlayersVP: false,
-
-          corporateEra: true,
-          venusNextExtension: false,
-          coloniesExtension: false,
-          preludeExtension: false,
-          turmoilExtension: false,
-          promoCardsOption: false,
-          communityCardsOption: false,
-          aresExtension: false,
-          aresHazards: true,
-          solarPhaseOption: false,
-          removeNegativeGlobalEventsOption: false,
-          includeVenusMA: true,
-
-          draftVariant: false,
-          initialDraftVariant: false,
-          startingCorporations: 2,
-          shuffleMapOption: false,
-          randomMA: RandomMAOptionType.NONE,
-          soloTR: false,
-          customCorporationsList: [],
-          cardsBlackList: [],
-          customColoniesList: [],
-          requiresVenusTrackCompletion: false,
-        };
-      }
-      this.gameOptions = gameOptions;
-
+      public gameOptions: GameOptions = {
+        aresExtension: false,
+        aresHazards: true,
+        boardName: BoardName.ORIGINAL,
+        cardsBlackList: [],
+        clonedGamedId: undefined,
+        coloniesExtension: false,
+        communityCardsOption: false,
+        corporateEra: true,
+        customColoniesList: [],
+        customCorporationsList: [],
+        draftVariant: false,
+        fastModeOption: false,
+        includeVenusMA: true,
+        initialDraftVariant: false,
+        preludeExtension: false,
+        promoCardsOption: false,
+        randomMA: RandomMAOptionType.NONE,
+        removeNegativeGlobalEventsOption: false,
+        requiresVenusTrackCompletion: false,
+        showOtherPlayersVP: false,
+        shuffleMapOption: false,
+        solarPhaseOption: false,
+        soloTR: false,
+        startingCorporations: 2,
+        turmoilExtension: false,
+        undoOption: false,
+        venusNextExtension: false,
+      }) {
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
@@ -280,13 +268,15 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
+      // Failsafe for exceding corporation pool
+      if (gameOptions.startingCorporations * players.length > corporationCards.length) {
+        gameOptions.startingCorporations = 2;
+      }
+
       // Initialize each player:
       // Give them their corporation cards, other cards, starting production,
       // handicaps.
-      for (let i = 0; i < players.length; i++) {
-        const player = players[i];
-        const remainingPlayers = this.players.length - i;
-
+      for (const player of this.getPlayers()) {
         player.increaseTerraformRatingSteps(player.handicap, this);
 
         if (!player.beginner ||
@@ -296,12 +286,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
               gameOptions.coloniesExtension ||
               gameOptions.turmoilExtension ||
               gameOptions.initialDraftVariant) {
-          // Failsafe for exceding corporation pool
-          if (gameOptions.startingCorporations * remainingPlayers > corporationCards.length) {
-            gameOptions.startingCorporations = 2;
-          }
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
-            const corpCard : CorporationCard | undefined = corporationCards.pop();
+            const corpCard = corporationCards.pop();
             if (corpCard !== undefined) {
               player.dealtCorporationCards.push(corpCard);
             } else {

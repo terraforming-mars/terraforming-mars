@@ -41,7 +41,7 @@ export const PlayerStatus = Vue.component('player-status', {
       // for active player => scroll to cards UI
       if (this.player.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
-            'preferences_icon--cards',
+          'preferences_icon--cards',
         )[0] as HTMLElement;
         el.click();
 
@@ -85,7 +85,7 @@ export const PlayerStatus = Vue.component('player-status', {
       if (!playerPinned) {
         showPlayerData(this.$root, this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
-            (index) => index !== this.playerIndex,
+          (index) => index !== this.playerIndex,
         );
       }
       for (let i = 0; i < hiddenPlayersIndexes.length; i++) {

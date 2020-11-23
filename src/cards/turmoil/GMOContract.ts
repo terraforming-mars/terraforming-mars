@@ -28,10 +28,10 @@ export class GMOContract implements IProjectCard {
     const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
     if (amount > 0) {
       game.defer(
-          new DeferredAction(player, () => {
-            player.setResource(Resources.MEGACREDITS, amount * 2);
-            return undefined;
-          }),
+        new DeferredAction(player, () => {
+          player.setResource(Resources.MEGACREDITS, amount * 2);
+          return undefined;
+        }),
       );
     }
   }

@@ -47,14 +47,14 @@ export class MarketManipulation implements IProjectCard {
           if (c1.name !== c2.name) {
             const description = 'Increase ' + c1.name + ' (' + c1.description + ') and decrease ' + c2.name + ' (' + c2.description + ')';
             const colonySelect = new SelectOption(
-                description,
-                'Select',
-                () => {
-                  c1.increaseTrack();
-                  c2.decreaseTrack();
-                  game.log('${0} increased ${1} track and decreased ${2} track', (b) => b.player(player).string(c1.name).string(c2.name));
-                  return undefined;
-                },
+              description,
+              'Select',
+              () => {
+                c1.increaseTrack();
+                c2.decreaseTrack();
+                game.log('${0} increased ${1} track and decreased ${2} track', (b) => b.player(player).string(c1.name).string(c2.name));
+                return undefined;
+              },
             );
 
             selectColonies.options.push(colonySelect);

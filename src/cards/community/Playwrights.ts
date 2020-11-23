@@ -31,30 +31,30 @@ export class Playwrights implements CorporationCard {
       const replayableEvents = this.getReplayableEvents(player, game);
 
       return new SelectCard<ICard>(
-          'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
-          (foundCards: Array<ICard>) => {
-            const selectedCard = foundCards[0] as IProjectCard;
+        'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
+        (foundCards: Array<ICard>) => {
+          const selectedCard = foundCards[0] as IProjectCard;
 
-            players.forEach((player) => {
-              const cardIndex = player.playedCards.findIndex((c) => c.name === selectedCard.name);
-              if (cardIndex !== -1) player.playedCards.splice(cardIndex, 1);
-            });
+          players.forEach((player) => {
+            const cardIndex = player.playedCards.findIndex((c) => c.name === selectedCard.name);
+            if (cardIndex !== -1) player.playedCards.splice(cardIndex, 1);
+          });
 
-            const cost = player.getCardCost(game, selectedCard);
-            game.defer(new SelectHowToPayDeferred(
-                player,
-                cost,
-                false,
-                false,
-                'Select how to pay to replay the event',
-                () => {
-                  player.playCard(game, selectedCard);
-                  player.playedCards.pop();
-                  player.removedFromPlayCards.push(selectedCard); // Remove card from play
-                },
-            ));
-            return undefined;
-          },
+          const cost = player.getCardCost(game, selectedCard);
+          game.defer(new SelectHowToPayDeferred(
+            player,
+            cost,
+            false,
+            false,
+            'Select how to pay to replay the event',
+            () => {
+              player.playCard(game, selectedCard);
+              player.playedCards.pop();
+              player.removedFromPlayCards.push(selectedCard); // Remove card from play
+            },
+          ));
+          return undefined;
+        },
       );
     }
 

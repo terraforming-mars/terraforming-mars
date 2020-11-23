@@ -23,19 +23,19 @@ export class SolarFarm implements IProjectCard {
 
     public play(player: Player, game: Game) {
       return new SelectSpace(
-          'Select space for Solar Farm tile',
-          game.board.getAvailableSpacesOnLand(player),
-          (space: ISpace) => {
-            const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-            player.addProduction(Resources.ENERGY, plantsOnSpace, game);
+        'Select space for Solar Farm tile',
+        game.board.getAvailableSpacesOnLand(player),
+        (space: ISpace) => {
+          const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
+          player.addProduction(Resources.ENERGY, plantsOnSpace, game);
 
-            game.addTile(player, SpaceType.LAND, space, {
-              tileType: TileType.SOLAR_FARM,
-              card: this.name,
-            });
-            space.adjacency = {bonus: [SpaceBonus.POWER, SpaceBonus.POWER]};
-            return undefined;
-          },
+          game.addTile(player, SpaceType.LAND, space, {
+            tileType: TileType.SOLAR_FARM,
+            card: this.name,
+          });
+          space.adjacency = {bonus: [SpaceBonus.POWER, SpaceBonus.POWER]};
+          return undefined;
+        },
       );
     }
 }

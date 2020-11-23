@@ -14,7 +14,7 @@ export class GeologicalSurvey implements IProjectCard {
 
   private countGreeneryTiles(game: Game): number {
     return game.board.spaces.filter(
-        (space) => space.tile?.tileType === TileType.GREENERY).length;
+      (space) => space.tile?.tileType === TileType.GREENERY).length;
   }
 
   public canPlay(_player: Player, game: Game): boolean {

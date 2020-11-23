@@ -12,7 +12,7 @@ export class Reds extends Party implements IParty {
       if (game.getPlayers().length > 1) {
         const players: Array<Player> = game.getPlayers();
         players.sort(
-            (p1, p2) => p1.getTerraformRating() - p2.getTerraformRating(),
+          (p1, p2) => p1.getTerraformRating() - p2.getTerraformRating(),
         );
         const min = players[0].getTerraformRating();
         while (players.length > 0 && players[0].getTerraformRating() === min) {

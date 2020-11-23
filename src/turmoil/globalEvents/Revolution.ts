@@ -19,7 +19,7 @@ export class Revolution implements IGlobalEvent {
         }
       } else {
         const players = [...game.getPlayers()].sort(
-            (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
+          (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
         );
 
         // We have one rank 1 player

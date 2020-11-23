@@ -136,21 +136,21 @@ export const BoardSpace = Vue.component('board-space', {
       const tileType = this.space.tileType;
       if (tileType !== undefined) {
         switch (this.space.tileType) {
-          case TileType.OCEAN:
-            css += ' board-space-tile--ocean';
-            break;
-          case TileType.CITY:
-            css += ' board-space-tile--city';
-            break;
-          case TileType.GREENERY:
-            css += ' board-space-tile--greenery';
-            break;
-          default:
-            let cssClass = tileTypeToCssClass.get(tileType);
-            if (this.aresExtension && tileTypeToCssClassAresOverride.has(tileType)) {
-              cssClass = tileTypeToCssClassAresOverride.get(tileType);
-            }
-            css += ' board-space-tile--' + cssClass;
+        case TileType.OCEAN:
+          css += ' board-space-tile--ocean';
+          break;
+        case TileType.CITY:
+          css += ' board-space-tile--city';
+          break;
+        case TileType.GREENERY:
+          css += ' board-space-tile--greenery';
+          break;
+        default:
+          let cssClass = tileTypeToCssClass.get(tileType);
+          if (this.aresExtension && tileTypeToCssClassAresOverride.has(tileType)) {
+            cssClass = tileTypeToCssClassAresOverride.get(tileType);
+          }
+          css += ' board-space-tile--' + cssClass;
         }
       } else {
         if (this.space.spaceType === 'ocean') {

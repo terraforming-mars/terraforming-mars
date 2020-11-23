@@ -22,7 +22,7 @@ export class Deck<T extends CardTypes> {
       const copy = this.cards.slice();
       while (copy.length) {
         shuffled.push(
-            copy.splice(Math.floor(Math.random() * copy.length), 1)[0],
+          copy.splice(Math.floor(Math.random() * copy.length), 1)[0],
         );
       }
       return new Deck(shuffled);

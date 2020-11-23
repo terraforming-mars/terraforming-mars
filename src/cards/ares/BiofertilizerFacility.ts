@@ -29,18 +29,18 @@ export class BiofertilizerFacility implements IProjectCard {
       game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, 2));
 
       return new SelectSpace(
-          'Select space for Biofertilizer Facility tile',
-          game.board.getAvailableSpacesOnLand(player),
-          (space: ISpace) => {
-            game.addTile(player, SpaceType.LAND, space, {
-              tileType: TileType.BIOFERTILIZER_FACILITY,
-              card: this.name,
-            });
-            space.adjacency = {
-              bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
-            };
-            return undefined;
-          },
+        'Select space for Biofertilizer Facility tile',
+        game.board.getAvailableSpacesOnLand(player),
+        (space: ISpace) => {
+          game.addTile(player, SpaceType.LAND, space, {
+            tileType: TileType.BIOFERTILIZER_FACILITY,
+            card: this.name,
+          });
+          space.adjacency = {
+            bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
+          };
+          return undefined;
+        },
       );
     }
 }

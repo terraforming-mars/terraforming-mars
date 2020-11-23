@@ -18,12 +18,12 @@ export class PlaceGreeneryTile implements DeferredAction {
     }
 
     return new SelectSpace(
-        this.title,
-        availableSpaces,
-        (space: ISpace) => {
-          this.game.addGreenery(this.player, space.id);
-          return undefined;
-        },
+      this.title,
+      availableSpaces,
+      (space: ISpace) => {
+        this.game.addGreenery(this.player, space.id);
+        return undefined;
+      },
     );
   }
 }

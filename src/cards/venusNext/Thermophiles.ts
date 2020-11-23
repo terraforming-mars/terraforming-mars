@@ -50,14 +50,14 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
       });
 
       const addResource = new SelectCard(
-          'Select a Venus card to add 1 microbe',
-          'Add microbe',
-          venusMicrobeCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 1);
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            return undefined;
-          },
+        'Select a Venus card to add 1 microbe',
+        'Add microbe',
+        venusMicrobeCards,
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 1);
+          LogHelper.logAddResource(game, player, foundCards[0]);
+          return undefined;
+        },
       );
 
       const addResourceToSelf = new SelectOption('Add a microbe to this card', 'Add microbe', () => {
@@ -77,8 +77,8 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
         return addResource;
       }
 
-        venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
+      venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
 
-        return new OrOptions(...opts);
+      return new OrOptions(...opts);
     }
 }

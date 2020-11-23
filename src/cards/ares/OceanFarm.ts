@@ -25,17 +25,17 @@ export class OceanFarm implements IProjectCard {
     player.addProduction(Resources.PLANTS, 1);
 
     return new SelectSpace(
-        'Select space for Ocean Farm',
-        game.board.getOceansTiles(false),
-        (space: ISpace) => {
-          game.removeTile(space.id);
-          game.addTile(player, space.spaceType, space, {
-            tileType: TileType.OCEAN_FARM,
-            card: this.name,
-          });
-          space.adjacency = {bonus: [SpaceBonus.PLANT]};
-          return undefined;
-        },
+      'Select space for Ocean Farm',
+      game.board.getOceansTiles(false),
+      (space: ISpace) => {
+        game.removeTile(space.id);
+        game.addTile(player, space.spaceType, space, {
+          tileType: TileType.OCEAN_FARM,
+          card: this.name,
+        });
+        space.adjacency = {bonus: [SpaceBonus.PLANT]};
+        return undefined;
+      },
     );
   }
 }

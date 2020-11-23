@@ -40,8 +40,8 @@ export const SortableCards = Vue.component('sorted-cards', {
   methods: {
     getSortedCards: function() {
       return CardOrderStorage.getOrdered(
-          this.cardOrder,
-          this.cards,
+        this.cardOrder,
+        this.cards,
       );
     },
     onDragStart: function(source: string): void {

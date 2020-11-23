@@ -33,13 +33,13 @@ export class DecreaseAnyProduction implements DeferredAction {
     }
 
     return new SelectPlayer(
-        candidates,
-        this.title,
-        'Decrease',
-        (found: Player) => {
-          found.addProduction(this.resource, -this.count, this.game, this.player);
-          return undefined;
-        },
+      candidates,
+      this.title,
+      'Decrease',
+      (found: Player) => {
+        found.addProduction(this.resource, -this.count, this.game, this.player);
+        return undefined;
+      },
     );
   }
 }

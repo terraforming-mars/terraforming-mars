@@ -36,13 +36,13 @@ export class AirScrappingExpedition implements IProjectCard {
       }
 
       return new SelectCard(
-          'Select card to add 3 floaters',
-          'Add floaters',
-          floaterCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 3);
-            return undefined;
-          },
+        'Select card to add 3 floaters',
+        'Add floaters',
+        floaterCards,
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 3);
+          return undefined;
+        },
       );
     }
 }

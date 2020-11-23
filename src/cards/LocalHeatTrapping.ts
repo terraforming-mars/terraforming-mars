@@ -44,20 +44,20 @@ export class LocalHeatTrapping implements IProjectCard {
       } else if (animalCards.length === 1) {
         const targetCard = animalCards[0];
         availableActions.options.push(
-            new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
-            new SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals', () => {
-              player.addResourceTo(targetCard, 2);
-              LogHelper.logAddResource(game, player, targetCard, 2);
-              return undefined;
-            }));
+          new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
+          new SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals', () => {
+            player.addResourceTo(targetCard, 2);
+            LogHelper.logAddResource(game, player, targetCard, 2);
+            return undefined;
+          }));
       } else {
         availableActions.options.push(
-            new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
-            new SelectCard('Select card to add 2 animals', 'Add animals', animalCards, (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 2);
-              LogHelper.logAddResource(game, player, foundCards[0], 2);
-              return undefined;
-            }));
+          new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
+          new SelectCard('Select card to add 2 animals', 'Add animals', animalCards, (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 2);
+            LogHelper.logAddResource(game, player, foundCards[0], 2);
+            return undefined;
+          }));
       };
 
       if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
@@ -65,27 +65,27 @@ export class LocalHeatTrapping implements IProjectCard {
         let heatAmount: number;
         let floaterAmount: number;
         return new AndOptions(
-            () => {
-              if (
-                heatAmount +
+          () => {
+            if (
+              heatAmount +
                     (floaterAmount * 2) < 5
-              ) {
-                throw new Error('Need to pay 5 heat');
-              }
-              player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
-              player.heat -= heatAmount;
+            ) {
+              throw new Error('Need to pay 5 heat');
+            }
+            player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
+            player.heat -= heatAmount;
 
-              if (availableActions.options.length === 1) return availableActions.options[0].cb();
-              return availableActions;
-            },
-            new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
-              heatAmount = amount;
-              return undefined;
-            }, player.heat),
-            new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
-              floaterAmount = amount;
-              return undefined;
-            }, player.getResourcesOnCorporation()),
+            if (availableActions.options.length === 1) return availableActions.options[0].cb();
+            return availableActions;
+          },
+          new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
+            heatAmount = amount;
+            return undefined;
+          }, player.heat),
+          new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
+            floaterAmount = amount;
+            return undefined;
+          }, player.getResourcesOnCorporation()),
 
         );
       }

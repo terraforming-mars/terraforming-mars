@@ -24,8 +24,8 @@ export const Colony = Vue.component('colony', {
       return index * 56 + 27 + offset;
     },
     getCubeYPosition: (
-        colony: ColonyModel,
-        isColonyCube = false,
+      colony: ColonyModel,
+      isColonyCube = false,
     ): number => {
       if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
       if (colony.name === ColonyName.VENUS) return 190;

@@ -41,7 +41,7 @@ describe('MiningRightsAres', function() {
 
   it('Candidate spaces can\'t include hazards', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
-        .find((land) => land.bonus.indexOf(SpaceBonus.STEEL) !== -1)!;
+      .find((land) => land.bonus.indexOf(SpaceBonus.STEEL) !== -1)!;
 
     let action = card.play(player, game) as SelectSpace;
     const size = action.availableSpaces.length;

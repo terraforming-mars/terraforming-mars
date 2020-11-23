@@ -81,26 +81,26 @@ export const DebugUI = Vue.component('debug-ui', {
       }
 
       switch (card?.module) {
-        case GameModule.Base:
-          return this.base === true;
-        case GameModule.CorpEra:
-          return this.corporateEra === true;
-        case GameModule.Promo:
-          return this.promo === true;
-        case GameModule.Venus:
-          return this.venusNext === true;
-        case GameModule.Colonies:
-          return this.colonies === true;
-        case GameModule.Prelude:
-          return this.prelude === true;
-        case GameModule.Turmoil:
-          return this.turmoil === true;
-        case GameModule.Community:
-          return this.community === true;
-        case GameModule.Ares:
-          return this.ares === true;
-        default:
-          return true;
+      case GameModule.Base:
+        return this.base === true;
+      case GameModule.CorpEra:
+        return this.corporateEra === true;
+      case GameModule.Promo:
+        return this.promo === true;
+      case GameModule.Venus:
+        return this.venusNext === true;
+      case GameModule.Colonies:
+        return this.colonies === true;
+      case GameModule.Prelude:
+        return this.prelude === true;
+      case GameModule.Turmoil:
+        return this.turmoil === true;
+      case GameModule.Community:
+        return this.community === true;
+      case GameModule.Ares:
+        return this.ares === true;
+      default:
+        return true;
       }
     },
   },

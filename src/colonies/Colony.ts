@@ -108,11 +108,11 @@ export abstract class Colony implements SerializedColony {
 
       // Ask the player if they want to increase the track
       game.defer(new IncreaseColonyTrack(
-          player,
-          game,
-          this,
-          steps,
-          () => this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade),
+        player,
+        game,
+        this,
+        steps,
+        () => this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade),
       ));
     }
 
@@ -144,156 +144,156 @@ export abstract class Colony implements SerializedColony {
     private giveBonus(player: Player, game: Game, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
-        case ColonyBenefit.ADD_RESOURCES_TO_CARD:
-          const resourceType = this.resourceType!;
-          action = new AddResourcesToCard(player, game, resourceType, quantity);
-          break;
+      case ColonyBenefit.ADD_RESOURCES_TO_CARD:
+        const resourceType = this.resourceType!;
+        action = new AddResourcesToCard(player, game, resourceType, quantity);
+        break;
 
-        case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-          action = new AddResourcesToCard(player, game, undefined, quantity, Tags.VENUS, 'Select Venus card to add ' + quantity + ' resource(s)');
-          break;
+      case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
+        action = new AddResourcesToCard(player, game, undefined, quantity, Tags.VENUS, 'Select Venus card to add ' + quantity + ' resource(s)');
+        break;
 
-        case ColonyBenefit.COPY_TRADE:
-          const openColonies = game.colonies.filter((colony) => colony.isActive);
-          const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
-          action = new DeferredAction(
-              player,
-              () => new SelectColony('Select colony to gain trade income from', 'Select', coloniesModel, (colonyName: ColonyName) => {
-                openColonies.forEach((colony) => {
-                  if (colony.name === colonyName) {
-                    game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                    colony.trade(player, game, 0, false, false);
-                  }
-                  return undefined;
-                });
+      case ColonyBenefit.COPY_TRADE:
+        const openColonies = game.colonies.filter((colony) => colony.isActive);
+        const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+        action = new DeferredAction(
+          player,
+          () => new SelectColony('Select colony to gain trade income from', 'Select', coloniesModel, (colonyName: ColonyName) => {
+            openColonies.forEach((colony) => {
+              if (colony.name === colonyName) {
+                game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+                colony.trade(player, game, 0, false, false);
+              }
+              return undefined;
+            });
+            return undefined;
+          }),
+        );
+        break;
+
+      case ColonyBenefit.DRAW_CARDS:
+        action = new DrawCards(player, game, quantity);
+        break;
+
+      case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
+        // TODO (Lynesth): Make a deferred action for that and cards that behave the same (ie. Business Network)
+        const dealtCard = game.dealer.dealCard();
+        const canSelectCard = player.canAfford(player.cardCost);
+        action = new DeferredAction(
+          player,
+          () => new SelectCard(
+            canSelectCard ? 'Select card to buy or none to discard' : 'You cannot pay for this card',
+            'Save',
+            [dealtCard],
+            (cards: Array<IProjectCard>) => {
+              if (cards.length === 0 || !canSelectCard) {
+                game.dealer.discard(dealtCard);
+                game.log('${0} discarded ${1}', (b) => b.player(player).card(dealtCard));
                 return undefined;
-              }),
-          );
-          break;
+              }
 
-        case ColonyBenefit.DRAW_CARDS:
-          action = new DrawCards(player, game, quantity);
-          break;
+              player.cardsInHand.push(dealtCard);
+              game.log('${0} bought ${1}', (b) => b.player(player).card(dealtCard));
+              game.defer(new SelectHowToPayDeferred(player, player.cardCost, false, false, 'Select how to pay for action'));
+              return undefined;
+            },
+            canSelectCard ? 1 : 0,
+            0,
+          ),
+        );
+        break;
 
-        case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-          // TODO (Lynesth): Make a deferred action for that and cards that behave the same (ie. Business Network)
-          const dealtCard = game.dealer.dealCard();
-          const canSelectCard = player.canAfford(player.cardCost);
-          action = new DeferredAction(
-              player,
-              () => new SelectCard(
-                        canSelectCard ? 'Select card to buy or none to discard' : 'You cannot pay for this card',
-                        'Save',
-                        [dealtCard],
-                        (cards: Array<IProjectCard>) => {
-                          if (cards.length === 0 || !canSelectCard) {
-                            game.dealer.discard(dealtCard);
-                            game.log('${0} discarded ${1}', (b) => b.player(player).card(dealtCard));
-                            return undefined;
-                          }
+      case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
+        player.cardsInHand.push(game.dealer.dealCard());
+        action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
+        break;
 
-                          player.cardsInHand.push(dealtCard);
-                          game.log('${0} bought ${1}', (b) => b.player(player).card(dealtCard));
-                          game.defer(new SelectHowToPayDeferred(player, player.cardCost, false, false, 'Select how to pay for action'));
-                          return undefined;
-                        },
-                        canSelectCard ? 1 : 0,
-                        0,
-              ),
-          );
-          break;
+      case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
+        const cardsDrawn: Array<IProjectCard> = [];
+        for (let counter = 0; counter < quantity; counter++) {
+          cardsDrawn.push(game.dealer.dealCard());
+        };
+        action = new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn);
+        break;
 
-        case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-          player.cardsInHand.push(game.dealer.dealCard());
-          action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
-          break;
+      case ColonyBenefit.GAIN_CARD_DISCOUNT:
+        player.cardDiscount += 1;
+        game.log('Cards played by ${0} cost 1 MC less this generation', (b) => b.player(player));
+        break;
 
-        case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
-          const cardsDrawn: Array<IProjectCard> = [];
-          for (let counter = 0; counter < quantity; counter++) {
-            cardsDrawn.push(game.dealer.dealCard());
-          };
-          action = new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn);
-          break;
+      case ColonyBenefit.GAIN_PRODUCTION:
+        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        player.addProduction(resource, quantity);
+        LogHelper.logGainProduction(game, player, resource, quantity);
+        break;
 
-        case ColonyBenefit.GAIN_CARD_DISCOUNT:
-          player.cardDiscount += 1;
-          game.log('Cards played by ${0} cost 1 MC less this generation', (b) => b.player(player));
-          break;
+      case ColonyBenefit.GAIN_RESOURCES:
+        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        player.setResource(resource, quantity);
+        LogHelper.logGainStandardResource(game, player, resource, quantity);
+        break;
 
-        case ColonyBenefit.GAIN_PRODUCTION:
-          if (resource === undefined) throw new Error('Resource cannot be undefined');
-          player.addProduction(resource, quantity);
-          LogHelper.logGainProduction(game, player, resource, quantity);
-          break;
+      case ColonyBenefit.GAIN_SCIENCE_TAG:
+        player.scienceTagCount += 1;
+        player.playCard(game, new ScienceTagCard());
+        game.log('${0} gained 1 Science tag', (b) => b.player(player));
+        break;
 
-        case ColonyBenefit.GAIN_RESOURCES:
-          if (resource === undefined) throw new Error('Resource cannot be undefined');
-          player.setResource(resource, quantity);
-          LogHelper.logGainStandardResource(game, player, resource, quantity);
-          break;
+      case ColonyBenefit.GAIN_TR:
+        if (quantity > 0) {
+          player.increaseTerraformRatingSteps(quantity, game);
+          LogHelper.logTRIncrease(game, player, quantity);
+        };
+        break;
 
-        case ColonyBenefit.GAIN_SCIENCE_TAG:
-          player.scienceTagCount += 1;
-          player.playCard(game, new ScienceTagCard());
-          game.log('${0} gained 1 Science tag', (b) => b.player(player));
-          break;
+      case ColonyBenefit.GAIN_VP:
+        if (quantity > 0) {
+          player.colonyVictoryPoints += quantity;
+          game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
+        }
+        break;
 
-        case ColonyBenefit.GAIN_TR:
-          if (quantity > 0) {
-            player.increaseTerraformRatingSteps(quantity, game);
-            LogHelper.logTRIncrease(game, player, quantity);
-          };
-          break;
+      case ColonyBenefit.INCREASE_VENUS_SCALE:
+        game.increaseVenusScaleLevel(player, quantity as 3|2|1);
+        game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
+        break;
 
-        case ColonyBenefit.GAIN_VP:
-          if (quantity > 0) {
-            player.colonyVictoryPoints += quantity;
-            game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
-          }
-          break;
+      case ColonyBenefit.LOSE_RESOURCES:
+        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        player.setResource(resource, -quantity);
+        break;
 
-        case ColonyBenefit.INCREASE_VENUS_SCALE:
-          game.increaseVenusScaleLevel(player, quantity as 3|2|1);
-          game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
-          break;
-
-        case ColonyBenefit.LOSE_RESOURCES:
-          if (resource === undefined) throw new Error('Resource cannot be undefined');
-          player.setResource(resource, -quantity);
-          break;
-
-        case ColonyBenefit.OPPONENT_DISCARD:
-          if (game.isSoloMode()) break;
-          action = new DeferredAction(
-              player,
-              () => {
-                const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
-                if (playersWithCards.length === 0) return undefined;
-                return new SelectPlayer(
-                    playersWithCards,
-                    'Select player to discard a card',
-                    'Select',
-                    (selectedPlayer: Player) => {
-                      game.defer(new DiscardCards(selectedPlayer, game, 1, this.name + ' colony effect. Select a card to discard'));
-                      return undefined;
-                    },
-                );
+      case ColonyBenefit.OPPONENT_DISCARD:
+        if (game.isSoloMode()) break;
+        action = new DeferredAction(
+          player,
+          () => {
+            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
+            if (playersWithCards.length === 0) return undefined;
+            return new SelectPlayer(
+              playersWithCards,
+              'Select player to discard a card',
+              'Select',
+              (selectedPlayer: Player) => {
+                game.defer(new DiscardCards(selectedPlayer, game, 1, this.name + ' colony effect. Select a card to discard'));
+                return undefined;
               },
-          );
-          break;
+            );
+          },
+        );
+        break;
 
-        case ColonyBenefit.PLACE_OCEAN_TILE:
-          action = new PlaceOceanTile(player, game, 'Select ocean space for ' + this.name + ' colony');
-          break;
+      case ColonyBenefit.PLACE_OCEAN_TILE:
+        action = new PlaceOceanTile(player, game, 'Select ocean space for ' + this.name + ' colony');
+        break;
 
-        case ColonyBenefit.STEAL_RESOURCES:
-          if (resource === undefined) throw new Error('Resource cannot be undefined');
-          action = new StealResources(player, game, resource, quantity);
-          break;
+      case ColonyBenefit.STEAL_RESOURCES:
+        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        action = new StealResources(player, game, resource, quantity);
+        break;
 
-        default:
-          throw new Error('Unsupported benefit type');
+      default:
+        throw new Error('Unsupported benefit type');
       }
 
       if (action !== undefined) {

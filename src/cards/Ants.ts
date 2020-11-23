@@ -11,7 +11,7 @@ import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCar
 import {CardMetadata} from './CardMetadata';
 import {CardRequirements} from './CardRequirements';
 import {CardRenderer} from './render/CardRenderer';
-import {CardRenderVictoryPoints} from './render/CardRenderVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public cost = 9;
@@ -59,6 +59,6 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
         eb.description('Action: Remove 1 Microbe from any card to add 1 to this card');
       });
     }),
-    victoryPoints: CardRenderVictoryPoints.microbes(1, 2),
+    victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
   };
 }

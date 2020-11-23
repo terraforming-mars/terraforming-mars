@@ -9,7 +9,7 @@ import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderVictoryPoints} from '../render/CardRenderVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IResourceCard {
@@ -47,7 +47,6 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
   }
   public metadata: CardMetadata = {
     cardNumber: 'X27',
-    // description: 'Add 2 asteroids to this card',
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.empty().startAction.cards(1).asterix().nbsp.space().played.colon().asteroids(1);
@@ -55,6 +54,6 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
       }).br;
       b.productionBox((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', CardRenderItemSize.SMALL, true);
     }),
-    victoryPoints: CardRenderVictoryPoints.asteroids(1, 1),
+    victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 1),
   }
 }

@@ -10,7 +10,7 @@ import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderVictoryPoints} from '../render/CardRenderVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {
   public name = CardName.ASTEROID_HOLLOWING;
@@ -50,6 +50,6 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
         eb.description('Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step');
       });
     }),
-    victoryPoints: CardRenderVictoryPoints.asteroids(1, 2),
+    victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 2),
   }
 }

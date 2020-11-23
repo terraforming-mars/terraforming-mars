@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {CardRenderVictoryPoints} from '../../cards/render/CardRenderVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '../../cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemComponent} from './CardRenderItemComponent';
 
 export const CardVictoryPoints = Vue.component('CardPoints', {
@@ -22,7 +22,7 @@ export const CardVictoryPoints = Vue.component('CardPoints', {
       return classes.join(' ');
     },
     isObject: function(): boolean {
-      return this.victoryPoints instanceof CardRenderVictoryPoints;
+      return this.victoryPoints instanceof CardRenderDynamicVictoryPoints;
     },
   },
   template: `

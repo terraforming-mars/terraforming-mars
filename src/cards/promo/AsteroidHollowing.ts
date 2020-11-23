@@ -42,7 +42,7 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
   }
 
   public metadata: CardMetadata = {
-    cardNumber: 'x13',
+    cardNumber: 'X13',
     description: '1VP for each 2 asteroids on this card',
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {

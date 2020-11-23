@@ -484,20 +484,4 @@ describe('Game', function() {
 
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
   });
-
-  /**
-   * ensure as we modify properties we consider
-   * serialization. if this fails update SerializedGame
-   * to match
-   */
-  it('serializes every property', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const game = new Game('foobar', [player], player);
-    const serialized = game.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const gameKeys = Object.keys(game);
-    serializedKeys.sort();
-    gameKeys.sort();
-    expect(serializedKeys).to.deep.eq(gameKeys);
-  });
 });

@@ -209,13 +209,4 @@ describe('Turmoil', function() {
     player.megaCredits = 25;
     expect(nitrogenFromTitan.canPlay(player, game)).is.true; // 25 + 6 - 6
   });
-
-  it('serializes all properties', function() {
-    const serialized = turmoil.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const turmoilKeys = Object.keys(turmoil);
-    serializedKeys.sort();
-    turmoilKeys.sort();
-    expect(serializedKeys).to.deep.eq(turmoilKeys);
-  });
 });

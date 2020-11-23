@@ -117,13 +117,4 @@ describe('Player', function() {
     player.process(game, [['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
-  it('serializes every property', function() {
-    const player = new Player('p1', Color.BLUE, false);
-    const serialized = player.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const playerKeys = Object.keys(player);
-    serializedKeys.sort();
-    playerKeys.sort();
-    expect(serializedKeys).to.deep.eq(playerKeys);
-  });
 });

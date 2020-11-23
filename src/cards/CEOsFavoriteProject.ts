@@ -19,14 +19,14 @@ export class CEOsFavoriteProject implements IProjectCard {
 
     public play(player: Player, game: Game) {
       return new SelectCard(
-          'Select card to add resource',
-          'Add resource',
-          player.getCardsWithResources(),
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0]);
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            return undefined;
-          },
+        'Select card to add resource',
+        'Add resource',
+        player.getCardsWithResources(),
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0]);
+          LogHelper.logAddResource(game, player, foundCards[0]);
+          return undefined;
+        },
       );
     }
 }

@@ -6,9 +6,9 @@ import {Game} from '../Game';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class AsteroidMiningConsortium implements IProjectCard {
   public cost = 13;

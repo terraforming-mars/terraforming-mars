@@ -72,7 +72,7 @@ export const PlayerTags = Vue.component('player-tags', {
         return this.player.noTagsCount || 0;
       }
       const basicTagFound = this.player.tags.find(
-          (tag: ITagCount) => tag.tag === tagName,
+        (tag: ITagCount) => tag.tag === tagName,
       );
 
       if (basicTagFound !== undefined) {

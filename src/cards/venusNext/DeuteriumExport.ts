@@ -8,9 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {CardMetadata} from './../CardMetadata';
-import {CardRenderer} from './../render/CardRenderer';
-import {CardRenderItemSize} from './../render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;
@@ -32,15 +32,15 @@ export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard
       return undefined;
     }
     return new OrOptions(
-        new SelectOption('Remove 1 floater to raise energy production 1 step', 'Remove floater', () => {
-          this.resourceCount--;
-          player.addProduction(Resources.ENERGY);
-          return undefined;
-        }),
-        new SelectOption('Add 1 floater to this card', 'Add floater', () => {
-          this.resourceCount++;
-          return undefined;
-        }),
+      new SelectOption('Remove 1 floater to raise energy production 1 step', 'Remove floater', () => {
+        this.resourceCount--;
+        player.addProduction(Resources.ENERGY);
+        return undefined;
+      }),
+      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        this.resourceCount++;
+        return undefined;
+      }),
     );
   }
   public metadata: CardMetadata = {

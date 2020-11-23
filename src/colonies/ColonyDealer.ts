@@ -88,11 +88,11 @@ export class ColonyDealer {
       }
 
       const tempDeck = this.shuffle(
-          colonyTiles.filter(
-              (el) => allowList.includes(el.colonyName),
-          ).map(
-              (cf) => new cf.Factory(),
-          ),
+        colonyTiles.filter(
+          (el) => allowList.includes(el.colonyName),
+        ).map(
+          (cf) => new cf.Factory(),
+        ),
       );
       for (let i = 0; i < count; i++) {
         this.coloniesDeck.push(tempDeck.pop()!);

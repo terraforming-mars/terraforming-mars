@@ -25,15 +25,15 @@ export class ByElection extends PreludeCard implements IProjectCard {
 
       setRulingParty.title = 'Select new ruling party';
       setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
-          p.partyName, 'Select', () => {
-            turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
-            return undefined;
-          }),
+        p.partyName, 'Select', () => {
+          turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+          return undefined;
+        }),
       )];
 
       game.defer(new DeferredAction(
-          player,
-          () => setRulingParty,
+        player,
+        () => setRulingParty,
       ));
 
       return undefined;

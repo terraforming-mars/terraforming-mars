@@ -72,18 +72,18 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
     delta: function(type: string, direction: number) {
       const expendableProductionQuantity = function(type: string, model: IPayProductionModel): number {
         switch (type) {
-          case 'megacredits':
-            return model.units.megacredits + 5;
-          case 'steel':
-            return model.units.steel;
-          case 'titanium':
-            return model.units.titanium;
-          case 'plants':
-            return model.units.plants;
-          case 'energy':
-            return model.units.energy;
-          case 'heat':
-            return model.units.heat;
+        case 'megacredits':
+          return model.units.megacredits + 5;
+        case 'steel':
+          return model.units.steel;
+        case 'titanium':
+          return model.units.titanium;
+        case 'plants':
+          return model.units.plants;
+        case 'energy':
+          return model.units.energy;
+        case 'heat':
+          return model.units.heat;
         }
         return -1;
       };

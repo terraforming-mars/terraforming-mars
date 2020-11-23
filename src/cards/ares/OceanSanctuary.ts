@@ -29,15 +29,15 @@ export class OceanSanctuary implements IResourceCard {
   public play(player: Player, game: Game) {
     this.resourceCount++;
     return new SelectSpace(
-        'Select space for Ocean Sanctuary',
-        game.board.getOceansTiles(false),
-        (space: ISpace) => {
-          game.removeTile(space.id);
-          game.addTile(player, space.spaceType, space, {
-            tileType: TileType.OCEAN_SANCTUARY,
-          });
-          space.adjacency = {bonus: [SpaceBonus.ANIMAL]};
-          return undefined;
+      'Select space for Ocean Sanctuary',
+      game.board.getOceansTiles(false),
+      (space: ISpace) => {
+        game.removeTile(space.id);
+        game.addTile(player, space.spaceType, space, {
+          tileType: TileType.OCEAN_SANCTUARY,
         });
+        space.adjacency = {bonus: [SpaceBonus.ANIMAL]};
+        return undefined;
+      });
   }
 }

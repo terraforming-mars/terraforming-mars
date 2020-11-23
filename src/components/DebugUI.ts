@@ -43,6 +43,7 @@ export const DebugUI = Vue.component('debug-ui', {
   data: function() {
     return {
       filterText: '',
+      filterDescription: false,
       base: true,
       corporateEra: true,
       prelude: true,
@@ -69,38 +70,39 @@ export const DebugUI = Vue.component('debug-ui', {
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().indexOf(filterText) === -1) {
-          return false;
-        }
-        if (this.$data.filterDescription) {
-          const desc = card?.card.metadata?.description;
-          // TODO(kberg): optimize by having all the descriptions in upper case.
-          if (desc !== undefined && desc.toUpperCase().indexOf(filterText) === -1) {
+          if (this.$data.filterDescription) {
+            const desc = card?.card.metadata?.description;
+            // TODO(kberg): optimize by having all the descriptions in upper case.
+            if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
+              return false;
+            }
+          } else {
             return false;
           }
         }
       }
 
       switch (card?.module) {
-        case GameModule.Base:
-          return this.base === true;
-        case GameModule.CorpEra:
-          return this.corporateEra === true;
-        case GameModule.Promo:
-          return this.promo === true;
-        case GameModule.Venus:
-          return this.venusNext === true;
-        case GameModule.Colonies:
-          return this.colonies === true;
-        case GameModule.Prelude:
-          return this.prelude === true;
-        case GameModule.Turmoil:
-          return this.turmoil === true;
-        case GameModule.Community:
-          return this.community === true;
-        case GameModule.Ares:
-          return this.ares === true;
-        default:
-          return true;
+      case GameModule.Base:
+        return this.base === true;
+      case GameModule.CorpEra:
+        return this.corporateEra === true;
+      case GameModule.Promo:
+        return this.promo === true;
+      case GameModule.Venus:
+        return this.venusNext === true;
+      case GameModule.Colonies:
+        return this.colonies === true;
+      case GameModule.Prelude:
+        return this.prelude === true;
+      case GameModule.Turmoil:
+        return this.turmoil === true;
+      case GameModule.Community:
+        return this.community === true;
+      case GameModule.Ares:
+        return this.ares === true;
+      default:
+        return true;
       }
     },
   },

@@ -28,17 +28,17 @@ export class ViralEnhancers implements IProjectCard {
 
       for (let i = 0; i < resourceCount; i++) {
         game.defer(new DeferredAction(
-            player,
-            () => new OrOptions(
-                new SelectOption('Add resource to card ' + card.name, 'Add resource', () => {
-                  player.addResourceTo(card);
-                  return undefined;
-                }),
-                new SelectOption('Gain plant', 'Save', () => {
-                  player.plants++;
-                  return undefined;
-                }),
-            ),
+          player,
+          () => new OrOptions(
+            new SelectOption('Add resource to card ' + card.name, 'Add resource', () => {
+              player.addResourceTo(card);
+              return undefined;
+            }),
+            new SelectOption('Gain plant', 'Save', () => {
+              player.plants++;
+              return undefined;
+            }),
+          ),
         ));
       }
       return undefined;

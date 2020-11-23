@@ -37,38 +37,38 @@ export class Flooding implements IProjectCard {
         return undefined;
       }
       return new SelectSpace(
-          'Select space for ocean tile',
-          game.board.getAvailableSpacesForOcean(player),
-          (space: ISpace) => {
-            const adjacentPlayers: Set<Player> = new Set<Player>();
-            game.addOceanTile(player, space.id);
-            game.board.getAdjacentSpaces(space).forEach((space) => {
-              if (space.player && space.player !== player && space.tile) {
-                adjacentPlayers.add(space.player);
-              }
-            });
-            if (adjacentPlayers.size > 0) {
-              return new OrOptions(
-                  new SelectPlayer(
-                      Array.from(adjacentPlayers),
-                      'Select adjacent player to remove 4 mega credits from',
-                      'Remove credits',
-                      (selectedPlayer: Player) => {
-                        selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
-                        return undefined;
-                      },
-                  ),
-                  new SelectOption(
-                      'Don\'t remove mega credits from adjacent player',
-                      'Confirm',
-                      () => {
-                        return undefined;
-                      },
-                  ),
-              );
+        'Select space for ocean tile',
+        game.board.getAvailableSpacesForOcean(player),
+        (space: ISpace) => {
+          const adjacentPlayers: Set<Player> = new Set<Player>();
+          game.addOceanTile(player, space.id);
+          game.board.getAdjacentSpaces(space).forEach((space) => {
+            if (space.player && space.player !== player && space.tile) {
+              adjacentPlayers.add(space.player);
             }
-            return undefined;
-          },
+          });
+          if (adjacentPlayers.size > 0) {
+            return new OrOptions(
+              new SelectPlayer(
+                Array.from(adjacentPlayers),
+                'Select adjacent player to remove 4 mega credits from',
+                'Remove credits',
+                (selectedPlayer: Player) => {
+                  selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
+                  return undefined;
+                },
+              ),
+              new SelectOption(
+                'Don\'t remove mega credits from adjacent player',
+                'Confirm',
+                () => {
+                  return undefined;
+                },
+              ),
+            );
+          }
+          return undefined;
+        },
       );
     }
     public getVictoryPoints() {

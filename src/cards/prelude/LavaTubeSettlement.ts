@@ -33,10 +33,10 @@ export class LavaTubeSettlement implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, 2);
       player.addProduction(Resources.ENERGY, -1);
       game.defer(new PlaceCityTile(
-          player,
-          game,
-          'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
-          this.getSpacesForCity(player, game),
+        player,
+        game,
+        'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
+        this.getSpacesForCity(player, game),
       ));
       return undefined;
     }

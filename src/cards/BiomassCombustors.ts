@@ -6,9 +6,9 @@ import {CardType} from './CardType';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRenderer} from '../cards/render/CardRenderer';
-import {CardRequirements} from '../cards/CardRequirements';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
+import {CardRequirements} from './CardRequirements';
 
 export class BiomassCombustors implements IProjectCard {
   public cost = 4;

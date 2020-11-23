@@ -190,12 +190,12 @@ export const HIGH_THRESHOLD_RULE: number= 4;
 // 2) Total synergy is |totalSynergyAllowed| or below.
 // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
 export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
-    numberMARequested: number,
-    maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE,
-    totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
-    numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
-    highThreshold: number = HIGH_THRESHOLD_RULE,
-    attempt: number = 1): IDrawnMilestonesAndAwards {
+  numberMARequested: number,
+  maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE,
+  totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
+  numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
+  highThreshold: number = HIGH_THRESHOLD_RULE,
+  attempt: number = 1): IDrawnMilestonesAndAwards {
   if (attempt > MAX_RANDOM_ATTEMPTS) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + MAX_RANDOM_ATTEMPTS + ' attempts. Please try again.');
   }
@@ -246,11 +246,11 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
 // 2) Total synergy is |totalSynergyAllowed| or below.
 // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
 export function verifySynergyRules(
-    milestoneAwardArray: Array<number>,
-    maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE,
-    totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
-    numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
-    highThreshold: number = HIGH_THRESHOLD_RULE): Boolean {
+  milestoneAwardArray: Array<number>,
+  maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE,
+  totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
+  numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
+  highThreshold: number = HIGH_THRESHOLD_RULE): Boolean {
   let max = 0;
   let totalSynergy = 0;
   let numberOfHigh = 0;

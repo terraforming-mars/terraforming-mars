@@ -31,15 +31,15 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
     private useAresExtension: boolean = false;
 
     constructor(
-        useCorporateEra: boolean,
-        usePreludeExtension: boolean,
-        useVenusNextExtension: boolean,
-        useColoniesNextExtension : boolean,
-        usePromoCards: boolean,
-        useTurmoilExtension: boolean,
-        useAresExtension: boolean,
-        useCommunityCards: boolean = false,
-        cardsBlackList?: Array<CardName>,
+      useCorporateEra: boolean,
+      usePreludeExtension: boolean,
+      useVenusNextExtension: boolean,
+      useColoniesNextExtension : boolean,
+      usePromoCards: boolean,
+      useTurmoilExtension: boolean,
+      useAresExtension: boolean,
+      useCommunityCards: boolean = false,
+      cardsBlackList?: Array<CardName>,
     ) {
       this.useCorporateEra = useCorporateEra;
       this.usePreludeExtension = usePreludeExtension;
@@ -57,22 +57,22 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
       function include(cf: ICardFactory<CardTypes>) : boolean {
         const expansion = cf.compatibility;
         switch (expansion) {
-          case undefined:
-            return true;
-          case GameModule.Venus:
-            return useVenusNextExtension;
-          case GameModule.Colonies:
-            return useColoniesNextExtension;
-          case GameModule.Turmoil:
-            return useTurmoilExtension;
-          default:
-            throw ('Unhandled expansion type: ' + expansion);
+        case undefined:
+          return true;
+        case GameModule.Venus:
+          return useVenusNextExtension;
+        case GameModule.Colonies:
+          return useColoniesNextExtension;
+        case GameModule.Turmoil:
+          return useTurmoilExtension;
+        default:
+          throw ('Unhandled expansion type: ' + expansion);
         }
       }
       function addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
         const cardInstances = cards.cards
-            .filter((cf) => include(cf))
-            .map((cf) => new cf.Factory());
+          .filter((cf) => include(cf))
+          .map((cf) => new cf.Factory());
         deck.push(...cardInstances);
       }
       function addToDecks(manifest: CardManifest) {

@@ -27,7 +27,7 @@ export const OtherPlayer = Vue.component('other-player', {
     },
     isVisible: function() {
       return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
-          'pinned_player_' + this.playerIndex,
+        'pinned_player_' + this.playerIndex,
       );
     },
   },

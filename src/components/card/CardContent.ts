@@ -29,7 +29,7 @@ export const CardContent = Vue.component('CardContent', {
             <CardRequirementsComponent v-if="metadata.requirements !== undefined" :requirements="metadata.requirements"/>
             <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
             <CardDescription v-if="metadata.description !== undefined" :text="metadata.description" />
-            <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :amount="metadata.victoryPoints" />
+            <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
         </div>
     `,
 });

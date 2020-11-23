@@ -29,14 +29,14 @@ export class CorroderSuits implements IProjectCard {
       }
 
       return new SelectCard(
-          'Select card to add 1 resource',
-          'Add resource',
-          CorroderSuits.getVenusResCards(player),
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 1);
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            return undefined;
-          },
+        'Select card to add 1 resource',
+        'Add resource',
+        CorroderSuits.getVenusResCards(player),
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 1);
+          LogHelper.logAddResource(game, player, foundCards[0]);
+          return undefined;
+        },
       );
     }
     public static getVenusResCards(player: Player): ICard[] {

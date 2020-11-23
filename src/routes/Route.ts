@@ -17,9 +17,9 @@ export class Route {
     res.end();
   }
   public internalServerError(
-      req: http.IncomingMessage,
-      res: http.ServerResponse,
-      err: unknown): void {
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    err: unknown): void {
     console.warn('internal server error', req.url, err);
     res.writeHead(500);
     res.write('Internal server error ' + err);

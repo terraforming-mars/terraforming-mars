@@ -21,14 +21,14 @@ export class CorporateStronghold implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       return new SelectSpace(
-          'Select space for city tile',
-          game.board.getAvailableSpacesForCity(player),
-          (space: ISpace) => {
-            game.addCityTile(player, space.id);
-            player.addProduction(Resources.ENERGY, -1);
-            player.addProduction(Resources.MEGACREDITS, 3);
-            return undefined;
-          },
+        'Select space for city tile',
+        game.board.getAvailableSpacesForCity(player),
+        (space: ISpace) => {
+          game.addCityTile(player, space.id);
+          player.addProduction(Resources.ENERGY, -1);
+          player.addProduction(Resources.MEGACREDITS, 3);
+          return undefined;
+        },
       );
     }
     public getVictoryPoints() {

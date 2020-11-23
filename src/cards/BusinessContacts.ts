@@ -21,18 +21,18 @@ export class BusinessContacts implements IProjectCard {
         game.dealer.dealCard(),
       ];
       return new SelectCard(
-          'Select cards to keep of top 4 cards from deck',
-          'Keep',
-          cards,
-          (found: Array<IProjectCard>) => {
-            player.cardsInHand.push(found[0], found[1]);
-            cards.forEach((card) => {
-              if (found.find((f) => f.name === card.name) === undefined) {
-                game.dealer.discard(card);
-              }
-            });
-            return undefined;
-          }, 2, 2,
+        'Select cards to keep of top 4 cards from deck',
+        'Keep',
+        cards,
+        (found: Array<IProjectCard>) => {
+          player.cardsInHand.push(found[0], found[1]);
+          cards.forEach((card) => {
+            if (found.find((f) => f.name === card.name) === undefined) {
+              game.dealer.discard(card);
+            }
+          });
+          return undefined;
+        }, 2, 2,
       );
     }
 }

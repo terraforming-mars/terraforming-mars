@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {generateClassString} from '../../utils/utils';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
@@ -53,6 +54,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.FLOATERS) {
         classes.push('card-resource');
         classes.push('card-resource-floater');
+      } else if (type === CardRenderItemType.ASTEROIDS) {
+        classes.push('card-resource');
+        classes.push('card-resource-asteroid');
       } else if (type === CardRenderItemType.MICROBES) {
         classes.push('card-resource');
         classes.push('card-resource-microbe');
@@ -74,6 +78,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-delegate');
       } else if (type === CardRenderItemType.INFLUENCE) {
         classes.push('card-influence');
+      } else if (type === CardRenderItemType.CITY) {
+        classes.push('card-tile');
+        classes.push(`city-tile--${this.item.size}`);
       } else if (type === CardRenderItemType.EVENT) {
         classes.push('card-tag-event');
       } else if (type === CardRenderItemType.SPACE) {
@@ -89,7 +96,20 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('red-outline');
       }
 
-      return classes.join(' ');
+      // golden background
+      if (this.item.isPlate) {
+        classes.push('card-plate');
+      }
+
+      // size and text
+      if (this.item.text !== undefined) {
+        classes.push(`card-text-size--${this.item.size}`);
+        if (this.item.isUppercase) {
+          classes.push('card-text-uppercase');
+        }
+      }
+
+      return generateClassString(classes);
     },
     getAmountAbs: function(): number {
       if (this.item.amountInside) return 1;
@@ -105,6 +125,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
     itemHtmlContent: function(): string {
       // in case of symbols inside
       if (this.item instanceof CardRenderItem && this.item.amountInside) return this.item.amount.toString();
+      if (this.item.isPlate || this.item.text !== undefined) return this.item.text || 'n/a';
+      if (this.item.secondaryTag !== undefined) {
+        const classes: string[] = ['card-icon'];
+        classes.push(`tag-${this.item.secondaryTag}`);
+        return '<div class="' + generateClassString(classes) + '"/>';
+      }
       return '';
     },
   },

@@ -38,30 +38,30 @@ export class SendDelegateToArea implements DeferredAction {
     }
 
     sendDelegate.options = parties.map((party) => new SelectOption(
-        party.name + ' - (' + party.description + ')',
-        'Send delegate',
-        () => {
-          if (this.price) {
-            this.game.defer(new SelectHowToPayDeferred(this.player, this.price, false, false, 'Select how to pay for send delegate action'));
-          }
+      party.name + ' - (' + party.description + ')',
+      'Send delegate',
+      () => {
+        if (this.price) {
+          this.game.defer(new SelectHowToPayDeferred(this.player, this.price, false, false, 'Select how to pay for send delegate action'));
+        }
 
-          if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis
+        if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis
                     this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, true);
                     for (let i = 0; i < this.nbr - 1; i++) {
                         this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, false);
                     }
-          } else {
-            for (let i = 0; i < this.nbr; i++) {
-              if (this.replace) {
+        } else {
+          for (let i = 0; i < this.nbr; i++) {
+            if (this.replace) {
                             this.game.turmoil?.removeDelegateFromParty(this.replace, party.name, this.game);
-              }
-                        this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, this.fromLobby);
             }
+                        this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, this.fromLobby);
           }
+        }
 
-          this.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(this.nbr).party(party));
-          return undefined;
-        },
+        this.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(this.nbr).party(party));
+        return undefined;
+      },
     ));
 
     return sendDelegate;

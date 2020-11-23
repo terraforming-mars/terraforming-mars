@@ -37,26 +37,26 @@ export class CaretakerContract implements IActionCard, IProjectCard {
         let heatAmount: number;
         let floaterAmount: number;
         return new AndOptions(
-            () => {
-              if (
-                heatAmount +
+          () => {
+            if (
+              heatAmount +
                 (floaterAmount * 2) < 8
-              ) {
-                throw new Error('Need to pay 8 heat');
-              }
-              player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
-              player.heat -= heatAmount;
-              player.increaseTerraformRating(game);
-              return undefined;
-            },
-            new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
-              heatAmount = amount;
-              return undefined;
-            }, player.heat),
-            new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
-              floaterAmount = amount;
-              return undefined;
-            }, player.getResourcesOnCorporation()),
+            ) {
+              throw new Error('Need to pay 8 heat');
+            }
+            player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
+            player.heat -= heatAmount;
+            player.increaseTerraformRating(game);
+            return undefined;
+          },
+          new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
+            heatAmount = amount;
+            return undefined;
+          }, player.heat),
+          new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
+            floaterAmount = amount;
+            return undefined;
+          }, player.getResourcesOnCorporation()),
         );
       }
       player.heat -= 8;

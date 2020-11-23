@@ -28,7 +28,7 @@ export class Capital implements IProjectCard {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
         return game.board.getAdjacentSpaces(usedSpace)
-            .filter((s) => Board.isOceanSpace(s)).length;
+          .filter((s) => Board.isOceanSpace(s)).length;
       }
       return 0;
     }
@@ -36,16 +36,16 @@ export class Capital implements IProjectCard {
       player.addProduction(Resources.ENERGY, -2);
       player.addProduction(Resources.MEGACREDITS, 5);
       return new SelectSpace(
-          'Select space for special city tile',
-          game.board.getAvailableSpacesForCity(player),
-          (space: ISpace) => {
-            game.addTile(player, SpaceType.LAND, space, {
-              tileType: TileType.CAPITAL,
-              card: this.name,
-            });
-            space.adjacency = this.adjacencyBonus;
-            return undefined;
-          },
+        'Select space for special city tile',
+        game.board.getAvailableSpacesForCity(player),
+        (space: ISpace) => {
+          game.addTile(player, SpaceType.LAND, space, {
+            tileType: TileType.CAPITAL,
+            card: this.name,
+          });
+          space.adjacency = this.adjacencyBonus;
+          return undefined;
+        },
       );
     }
 }

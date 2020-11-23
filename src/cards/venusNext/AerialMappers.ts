@@ -10,9 +10,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
-import {CardMetadata} from './../CardMetadata';
-import {CardRenderer} from './../render/CardRenderer';
-import {CardRenderItemSize} from './../render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;

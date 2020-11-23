@@ -90,10 +90,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
 
     // Use to send a delegate to a specific party
     public sendDelegateToParty(
-        playerId: PlayerId | 'NEUTRAL',
-        partyName: PartyName,
-        game: Game,
-        fromLobby: boolean = true): void {
+      playerId: PlayerId | 'NEUTRAL',
+      partyName: PartyName,
+      game: Game,
+      fromLobby: boolean = true): void {
       const party = this.getPartyByName(partyName);
       if (party) {
         if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && fromLobby) {
@@ -128,7 +128,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
       // If there is a dominant party
       if (this.dominantParty) {
         const sortParties = [...this.parties].sort(
-            (p1, p2) => p2.delegates.length - p1.delegates.length,
+          (p1, p2) => p2.delegates.length - p1.delegates.length,
         );
         const max = sortParties[0].delegates.length;
         if (this.dominantParty.delegates.length !== max) {
@@ -142,7 +142,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
     // Function to get next dominant party taking into account the clockwise order
     public setNextPartyAsDominant(currentDominantParty: IParty) {
       const sortParties = [...this.parties].sort(
-          (p1, p2) => p2.delegates.length - p1.delegates.length,
+        (p1, p2) => p2.delegates.length - p1.delegates.length,
       );
       const max = sortParties[0].delegates.length;
 

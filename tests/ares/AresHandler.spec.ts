@@ -71,10 +71,10 @@ describe('AresHandler', function() {
             y: number;
         }
         const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
-            .filter((space) => space.tile !== undefined)
-            .map((space) => {
-              const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x;
-            });
+          .filter((space) => space.tile !== undefined)
+          .map((space) => {
+            const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x;
+          });
 
         expect(spacesWithTiles).to.deep.eq([
           {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
@@ -413,7 +413,7 @@ describe('AresHandler', function() {
 function getProduction(player: Player): Map<Resources, number> {
   const map: Map<Resources, number> = new Map();
   [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.TITANIUM, Resources.STEEL].forEach(
-      (r) => map.set(r, player.getProduction(r)),
+    (r) => map.set(r, player.getProduction(r)),
   );
   return map;
 }

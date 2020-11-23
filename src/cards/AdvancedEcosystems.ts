@@ -3,8 +3,8 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {CardName} from '../CardName';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
 
 export class AdvancedEcosystems implements IProjectCard {
   public cost = 11;

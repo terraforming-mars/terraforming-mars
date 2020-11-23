@@ -17,15 +17,15 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
     public initialActionText: string = 'Place a community (player marker) on a non-reserved area';
     public initialAction(player: Player, game: Game) {
       return new SelectSpace(
-          'Select space for claim',
-          game.board.getAvailableSpacesOnLand(player),
-          (foundSpace: ISpace) => {
-            foundSpace.player = player;
+        'Select space for claim',
+        game.board.getAvailableSpacesOnLand(player),
+        (foundSpace: ISpace) => {
+          foundSpace.player = player;
 
-            game.log('${0} placed a Community (player marker)', (b) => b.player(player));
+          game.log('${0} placed a Community (player marker)', (b) => b.player(player));
 
-            return undefined;
-          },
+          return undefined;
+        },
       );
     }
 
@@ -35,12 +35,12 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
 
     public action(player: Player, game: Game) {
       return new SelectSpace(
-          'Select space for claim',
-          game.board.getAvailableSpacesForMarker(player),
-          (foundSpace: ISpace) => {
-            foundSpace.player = player;
-            return undefined;
-          },
+        'Select space for claim',
+        game.board.getAvailableSpacesForMarker(player),
+        (foundSpace: ISpace) => {
+          foundSpace.player = player;
+          return undefined;
+        },
       );
     }
 

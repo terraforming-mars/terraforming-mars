@@ -94,12 +94,12 @@ export class RoboticWorkforce implements IProjectCard {
       ];
 
       const corporationCardNames = (new Set())
-          .add(CardName.MINING_GUILD)
-          .add(CardName.MANUTECH)
-          .add(CardName.CHEUNG_SHING_MARS)
-          .add(CardName.UTOPIA_INVEST)
-          .add(CardName.FACTORUM)
-          .add(CardName.RECYCLON);
+        .add(CardName.MINING_GUILD)
+        .add(CardName.MANUTECH)
+        .add(CardName.CHEUNG_SHING_MARS)
+        .add(CardName.UTOPIA_INVEST)
+        .add(CardName.FACTORUM)
+        .add(CardName.RECYCLON);
 
       const availableCards: Array<ICard> = player.playedCards.filter((card) => {
         for (let i = 0; i < builderCardsNames.length; i++) {

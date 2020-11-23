@@ -11,6 +11,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {LogHelper} from '../../components/LogHelper';
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
   public name = CardName.STORMCRAFT_INCORPORATED;
@@ -28,10 +29,11 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     return true;
   }
 
-  public action(player: Player) {
+  public action(player: Player, game: Game) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     if (floaterCards.length === 1) {
       this.resourceCount++;
+      LogHelper.logAddResource(game, player, this);
       return undefined;
     }
 
@@ -41,6 +43,7 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       floaterCards,
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
+        LogHelper.logAddResource(game, player, foundCards[0]);
         return undefined;
       },
     );

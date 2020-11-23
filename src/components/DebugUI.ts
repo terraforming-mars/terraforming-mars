@@ -43,6 +43,7 @@ export const DebugUI = Vue.component('debug-ui', {
   data: function() {
     return {
       filterText: '',
+      filterDescription: false,
       base: true,
       corporateEra: true,
       prelude: true,
@@ -69,12 +70,13 @@ export const DebugUI = Vue.component('debug-ui', {
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().indexOf(filterText) === -1) {
-          return false;
-        }
-        if (this.$data.filterDescription) {
-          const desc = card?.card.metadata?.description;
-          // TODO(kberg): optimize by having all the descriptions in upper case.
-          if (desc !== undefined && desc.toUpperCase().indexOf(filterText) === -1) {
+          if (this.$data.filterDescription) {
+            const desc = card?.card.metadata?.description;
+            // TODO(kberg): optimize by having all the descriptions in upper case.
+            if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
+              return false;
+            }
+          } else {
             return false;
           }
         }

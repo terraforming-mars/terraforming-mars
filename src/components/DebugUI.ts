@@ -73,7 +73,7 @@ export const DebugUI = Vue.component('debug-ui', {
           if (this.$data.filterDescription) {
             const desc = card?.card.metadata?.description;
             // TODO(kberg): optimize by having all the descriptions in upper case.
-            if (desc !== undefined && desc.toUpperCase().indexOf(filterText) === -1) {
+            if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
               return false;
             }
           } else {

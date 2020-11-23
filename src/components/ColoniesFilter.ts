@@ -18,6 +18,8 @@ import {Hygiea} from '../cards/community/Hygiea';
 import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
+import {Pallas} from '../cards/community/Pallas';
+import {Deimos} from '../cards/community/Deimos';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -33,13 +35,15 @@ const officialColonies: Array<Colony> = [
   new Triton(),
 ];
 
-const communityColonies: Array<Colony> = [
+let communityColonies: Array<Colony> = [
   new Iapetus(),
   new Mercury(),
   new Hygiea(),
   new Titania(),
   new Venus(),
   new Leavitt(),
+  new Pallas(),
+  new Deimos(),
 ];
 
 export const ColoniesFilter = Vue.component('colonies-filter', {
@@ -47,8 +51,21 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     communityCardsOption: {
       type: Boolean,
     },
+    venusNext: {
+      type: Boolean,
+    },
+    turmoil: {
+      type: Boolean,
+    },
+    aresExtension: {
+      type: Boolean,
+    },
   },
   data: function() {
+    if (!this.venusNext) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.VENUS);
+    if (!this.turmoil) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.PALLAS);
+    if (!this.aresExtension) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.DEIMOS);
+
     return {
       allColonies: officialColonies.concat(communityColonies),
       officialColonies: officialColonies,
@@ -79,6 +96,33 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     },
     communityCardsOption: function(enabled) {
       this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
+    },
+    venusNext: function(enabled) {
+      const index = communityColonies.findIndex((c) => c.name === ColonyName.VENUS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Venus());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
+    },
+    turmoil: function(enabled) {
+      const index = communityColonies.findIndex((c) => c.name === ColonyName.PALLAS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Pallas());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
+    },
+    aresExtension: function(enabled) {
+      const index = communityColonies.findIndex((c) => c.name === ColonyName.DEIMOS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Deimos());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
     },
   },
   template: `

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Color} from '../src/Color';
-import {Game} from '../src/Game';
+import {Game, GameOptions} from '../src/Game';
 import {Player} from '../src/Player';
 import {SpaceName} from '../src/SpaceName';
 import {Mayor} from '../src/milestones/Mayor';
@@ -59,7 +59,7 @@ describe('Game', function() {
 
   it('sets starting production if corporate era not selected', function() {
     const player = new Player('test', Color.BLUE, false);
-    const gameOptions = setCustomGameOptions({corporateEra: false});
+    const gameOptions = setCustomGameOptions({corporateEra: false}) as GameOptions;
 
     new Game('foobar', [player], player, gameOptions);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -398,7 +398,7 @@ describe('Game', function() {
     // chance.
     const player = new Player('test', Color.BLUE, false);
     const secondPlayer = new Player('vestigial', Color.RED, false);
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
@@ -425,7 +425,7 @@ describe('Game', function() {
     // chance.
     const player = new Player('test', Color.BLUE, false);
     const secondPlayer = new Player('vestigial', Color.RED, false);
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
     player.corporationCard = new Helion();
     player.canUseHeatAsMegaCredits = true;
@@ -452,7 +452,7 @@ describe('Game', function() {
   it('Generates random milestones and awards', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true}) as GameOptions;
     const game = new Game('foobar', [player, player2], player, gameOptions);
 
     const prevMilestones = game.milestones.map((m) => m.name).sort();
@@ -467,7 +467,6 @@ describe('Game', function() {
     expect(prevAwards).to.not.eq(awards);
   });
 
-
   it('specifically-requested corps override expansion corps', function() {
     const player = new Player('test', Color.BLUE, false);
     const player2 = new Player('test2', Color.RED, false);
@@ -477,12 +476,28 @@ describe('Game', function() {
       CardName.TERRALABS_RESEARCH,
       CardName.UTOPIA_INVEST,
     ];
-    const gameOptions = setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
+    const gameOptions = setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false}) as GameOptions;
     new Game('foobar', [player, player2], player, gameOptions);
 
     const corpsAssignedToPlayers =
             [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map((c) => c.name);
 
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
+  });
+
+  /**
+   * ensure as we modify properties we consider
+   * serialization. if this fails update SerializedGame
+   * to match
+   */
+  it('serializes every property', function() {
+    const player = new Player('test', Color.BLUE, false);
+    const game = new Game('foobar', [player], player);
+    const serialized = game.serialize();
+    const serializedKeys = Object.keys(serialized);
+    const gameKeys = Object.keys(game);
+    serializedKeys.sort();
+    gameKeys.sort();
+    expect(serializedKeys).to.deep.eq(gameKeys);
   });
 });

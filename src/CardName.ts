@@ -449,6 +449,8 @@ export enum CardName {
     INCITE = 'Incite',
     PLAYWRIGHTS = 'Playwrights',
     MIDAS = 'Midas',
+    COLONIAL_ONE = 'Colonial One',
+    ERIS = 'Eris',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',
@@ -458,6 +460,17 @@ export enum CardName {
     TRADE_ADVANCE = 'Trade Advance',
     POLITICAL_UPRISING = 'Political Uprising',
     BY_ELECTION = 'By-Election',
+    HYDROGEN_BOMBARDMENT = 'Hydrogen Bombardment',
+    VITAL_COLONY = 'Vital Colony',
+    STRATEGIC_BASE_PLANNING = 'Strategic Base Planning',
+    NITRATE_REDUCERS = 'Nitrate Reducers',
+    EXPERIENCED_MARTIANS = 'Experienced Martians',
+    TRADE_INFRASTRUCTURE = 'Trade Infrastructure',
+    GEOTHERMAL_VENT = 'Geothermal Vent',
+    ACCUMULATED_KNOWLEDGE = 'Accumulated Knowledge',
+    BOTANICAL_HARVEST = 'Botanical Harvest',
+    MARTIAN_LUMBER_YARD = 'Martian Lumber Yard',
+    FORTIFIED_OUTPOST = 'Fortified Outpost',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

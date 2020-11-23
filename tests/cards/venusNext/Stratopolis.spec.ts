@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {Game, GameOptions} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {SelectCard} from '../../../src/inputs/SelectCard';
@@ -16,7 +16,7 @@ describe('Stratopolis', function() {
     card = new Stratopolis();
     player = new Player('test', Color.BLUE, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);
   });
 
@@ -44,7 +44,7 @@ describe('Stratopolis', function() {
 
     const action = card.action(player, game);
     expect(action instanceof SelectCard).is.true;
-        action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(2);
+    action!.cb([card2]);
+    expect(player.getResourcesOnCard(card2)).to.eq(2);
   });
 });

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {Game, GameOptions} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {SelectCard} from '../../../src/inputs/SelectCard';
@@ -18,7 +18,7 @@ describe('MaxwellBase', function() {
     card = new MaxwellBase();
     player = new Player('test', Color.BLUE, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);
   });
 

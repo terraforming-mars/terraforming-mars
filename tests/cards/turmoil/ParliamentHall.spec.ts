@@ -3,7 +3,7 @@ import {ParliamentHall} from '../../../src/cards/turmoil/ParliamentHall';
 import {Player} from '../../../src/Player';
 import {Color} from '../../../src/Color';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {GameOptions, Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {DeepWellHeating} from '../../../src/cards/DeepWellHeating';
 import {MartianRails} from '../../../src/cards/MartianRails';
@@ -16,7 +16,7 @@ describe('ParliamentHall', function() {
     const card3 = new MartianRails();
     const player = new Player('test', Color.BLUE, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     const game = new Game('foobar', [player], player, gameOptions);
     expect(card.canPlay(player, game)).is.not.true;
 

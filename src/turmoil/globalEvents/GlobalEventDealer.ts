@@ -37,6 +37,7 @@ import {SolarFlare} from './SolarFlare';
 import {VenusInfrastructure} from './VenusInfrastructure';
 import {CloudSocieties} from './CloudSocieties';
 import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
+import {LeadershipSummit} from './LeadershipSummit';
 
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
@@ -102,6 +103,10 @@ export const NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = 
   {globalEventName: GlobalEventName.SOLAR_FLARE, Factory: SolarFlare},
 ];
 
+export const COMMUNITY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+  {globalEventName: GlobalEventName.LEADERSHIP_SUMMIT, Factory: LeadershipSummit},
+];
+
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
   const allEvents = [
@@ -112,6 +117,7 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
     ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
     ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS,
     ...VENUS_POSITIVE_GLOBAL_EVENTS,
+    ...COMMUNITY_GLOBAL_EVENTS,
   ];
 
   const globalEventFactory = allEvents.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
@@ -126,23 +132,25 @@ export class GlobalEventDealer {
 
     public initGlobalEvents(game: Game) {
       const events = [...POSITIVE_GLOBAL_EVENTS];
+      events.push(...NEGATIVE_GLOBAL_EVENTS);
 
-      if (!game.gameOptions.removeNegativeGlobalEventsOption) {
-        events.push(...NEGATIVE_GLOBAL_EVENTS);
-        if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
+      if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
 
-        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-          events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
-        };
+      if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+        events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
+      };
+
+      if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+        events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
       }
-
-      if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
 
       if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
 
       if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
         events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
       }
+
+      if (game.gameOptions.communityCardsOption) events.push(...COMMUNITY_GLOBAL_EVENTS);
 
       this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.Factory()));
     };

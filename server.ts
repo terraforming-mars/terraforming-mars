@@ -423,7 +423,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       }
 
       if (gameReq.board === 'random') {
-        const boards = Object.values(BoardName);
+        let boards = Object.values(BoardName);
+        const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA];
+        if (!gameReq.communityCardsOption) boards = boards.filter((b) => !communityBoards.includes(b));
+
         gameReq.board = boards[Math.floor(Math.random() * boards.length)];
       }
 

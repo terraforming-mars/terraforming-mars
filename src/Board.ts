@@ -141,6 +141,8 @@ export abstract class Board {
           .filter(
               (space) => space.tile === undefined &&
                         (space.player === undefined || space.player === player),
+          ).concat(
+              this.getSpaces(SpaceType.LAND, player).filter((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.COVE)),
           );
     }
 
@@ -153,7 +155,10 @@ export abstract class Board {
         const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
         // If it does have a hazard tile, make sure it's not a protected one.
         const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-        return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+        // tiles are not placeable on restricted spaces at all
+        const isPlaceableSpace = !space.bonus.includes(SpaceBonus.RESTRICTED);
+
+        return isPlaceableSpace && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
       });
 
       return landSpaces;

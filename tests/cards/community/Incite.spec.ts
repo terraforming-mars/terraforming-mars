@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Incite} from '../../../src/cards/community/Incite';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
@@ -15,7 +15,7 @@ describe('Incite', function() {
     card = new Incite();
     player = new Player('test', Color.BLUE, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player], player, gameOptions);
 
     card.play(player, game);

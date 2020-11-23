@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GMOContract} from '../../../src/cards/turmoil/GMOContract';
 import {Player} from '../../../src/Player';
 import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
+import {GameOptions, Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
 
@@ -10,7 +10,7 @@ describe('GMOContract', function() {
   it('Should play', function() {
     const card = new GMOContract();
     const player = new Player('test', Color.BLUE, false);
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     const game = new Game('foobar', [player], player, gameOptions);
 
     if (game.turmoil !== undefined) {

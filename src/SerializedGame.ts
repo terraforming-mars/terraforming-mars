@@ -61,6 +61,7 @@ export interface SerializedGame {
     preludeExtension: boolean;
     turmoil: SerializedTurmoil;
     aresData: IAresData;
+    erodedSpaces: Array<string>;
 
     monsInsuranceOwner: PlayerId | undefined;
     someoneHasRemovedOtherPlayersPlants: boolean;

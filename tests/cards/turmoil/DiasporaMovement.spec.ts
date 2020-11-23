@@ -3,7 +3,7 @@ import {DiasporaMovement} from '../../../src/cards/turmoil/DiasporaMovement';
 import {Player} from '../../../src/Player';
 import {Color} from '../../../src/Color';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {GameOptions, Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {ColonizerTrainingCamp} from '../../../src/cards/ColonizerTrainingCamp';
 import {MethaneFromTitan} from '../../../src/cards/MethaneFromTitan';
@@ -19,7 +19,7 @@ describe('DiasporaMovement', function() {
     player = new Player('test', Color.BLUE, false);
     player2 = new Player('test2', Color.RED, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS)!;

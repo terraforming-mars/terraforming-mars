@@ -534,6 +534,9 @@ input[type="radio"]:checked + .filterDiv::after {
 .tag-none {
     background-image: url("./assets/tags/tag-none.png");
 }
+.icon-ares {
+    background-image: url("./assets/expansion_icons/expansion_icon_ares.png");
+}
 
 /************** Style the Content ************/
 .content {
@@ -1682,6 +1685,41 @@ input[type="radio"]:checked + .filterDiv::after {
     }
 }
 
+@font-face {
+    font-family: BattleStar;
+    src: url(./assets/BattleStar.ttf);
+}
+
+.colonial-one {
+    color: black;
+    font-family: BattleStar;
+    text-align: center;
+    text-shadow: 0 0 1px black, 0 2px 2px rgb(61, 54, 54);
+    font-size: 36px;
+    margin: -50px 0 0 -35px;
+}
+
+.card-colonial-one {
+    .start-resources { text-align: center; }
+    .description { text-align: center; }
+    .tile.fleet { margin-left: 0px; }
+    .tile.colony { transform: scale(0.8); margin: 5px -5px; }
+    .action2 {
+        margin-top: -10px;
+        margin-bottom: -5px;
+
+        .resource.fighter { transform: scale(0.8); }
+        .tile.trade { transform: scale(0.8); margin-left: -8px; }
+    }
+
+    .corporationEffectBox {
+        height: 140px;
+        margin-top: 150px;
+    }
+
+    .corporationEffectBoxLabel { margin-bottom: -3px; }
+}
+
 .incite {
     color: ghostwhite;
     font-family: Impact, sans-serif;
@@ -1722,6 +1760,50 @@ input[type="radio"]:checked + .filterDiv::after {
     .corporationEffectBox {
         height: 150px;
         margin-top: 140px;
+    }
+}
+
+.eris {
+    color: darkred;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 6px;
+    text-align: center;
+    margin: -60px 0 0 -25px;
+    text-shadow: 0 0 1px black, 0 2px 2px darkred;
+    font-size: 40px;
+}
+
+.card-eris {
+    .description { text-align: center; }
+
+    .resource.money {
+        margin-left: 70px;
+        margin-top: -5px;
+    }
+
+    .resource.card { margin-bottom: 18px; }
+
+    .start-text { margin-top: -10px; }
+
+    .corporationEffectBox {
+        height: 150px;
+        margin-top: 140px;
+    }
+
+    .corporationEffectBoxLabel { margin-bottom: 20px; }
+
+    .hazard {
+        background-image: url(./assets/tiles/hazard.png);
+        width: 40px;
+        height: 40px;
+        background-size: 40px;
+        transform: scale(0.9);
+        margin: 5px 2px;
+    }
+
+    .rating {
+        transform: scale(0.7);
+        margin: 5px -5px;
     }
 }
 

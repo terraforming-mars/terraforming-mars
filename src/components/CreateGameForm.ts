@@ -100,6 +100,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         BoardName.ORIGINAL,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
+        BoardName.AMAZONIS,
+        BoardName.ARABIA_TERRA,
         'random',
       ],
       seed: Math.random(),
@@ -261,6 +263,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.AMAZONIS) {
+        return 'create-game-board-hexagon create-game-amazonis';
+      } else if (boardName === BoardName.ARABIA_TERRA) {
+        return 'create-game-board-hexagon create-game-arabia_terra';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }
@@ -759,6 +765,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
                 ref="coloniesFilter"
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:venusNext="venusNext"
+                v-bind:turmoil="turmoil"
+                v-bind:aresExtension="aresExtension"
                 v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 

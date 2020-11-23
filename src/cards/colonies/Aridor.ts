@@ -15,7 +15,7 @@ export class Aridor implements CorporationCard {
     public name = CardName.ARIDOR;
     public tags = [];
     public startingMegaCredits: number = 40;
-    public allTags = new Set();
+    public allTags = new Set<Tags>();
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Add a colony tile';

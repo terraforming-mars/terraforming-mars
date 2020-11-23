@@ -7,6 +7,7 @@ import {BoardName} from './BoardName';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ClaimedMilestone} from './ClaimedMilestone';
+import {Colony} from './colonies/Colony';
 import {ColonyDealer, getColonyByName} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
@@ -19,7 +20,6 @@ import {ElysiumBoard} from './ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
-import {Colony} from './colonies/Colony';
 import {ILoadable} from './ILoadable';
 import {IMilestone} from './milestones/IMilestone';
 import {IParty} from './turmoil/parties/IParty';
@@ -59,6 +59,9 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {AmazonisBoard} from './AmazonisBoard';
+import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
+import {ArabiaTerraBoard} from './ArabiaTerraBoard';
 
 export interface Score {
   corporation: String;
@@ -123,10 +126,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     // Player data
     public activePlayer: PlayerId;
-    private donePlayers: Set<Player> = new Set<Player>();
-    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private donePlayers = new Set<PlayerId>();
+    private passedPlayers = new Set<PlayerId>();
+    private researchedPlayers = new Set<PlayerId>();
+    private draftedPlayers = new Set<PlayerId>();
 
     // Drafting
     private draftRound: number = 1;
@@ -144,6 +147,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonyDealer: ColonyDealer | undefined = undefined;
     public turmoil: Turmoil | undefined;
     public aresData: IAresData | undefined;
+    public erodedSpaces: Array<string> = [];
 
     // Card-specific data
     // Mons Insurance promo corp
@@ -247,7 +251,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions, allowCommunityColonies);
         if (this.players.length === 1) {
           players[0].addProduction(Resources.MEGACREDITS, -2);
           this.defer(new RemoveColonyFromGame(players[0], this));
@@ -279,13 +283,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
+      // Failsafe for exceding corporation pool
+      if (gameOptions.startingCorporations * players.length > corporationCards.length) {
+        gameOptions.startingCorporations = 2;
+      }
+
       // Initialize each player:
       // Give them their corporation cards, other cards, starting production,
       // handicaps.
-      for (let i = 0; i < players.length; i++) {
-        const player = players[i];
-        const remainingPlayers = this.players.length - i;
-
+      for (const player of this.getPlayers()) {
         player.increaseTerraformRatingSteps(player.handicap, this);
 
         if (!player.beginner ||
@@ -295,10 +301,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
               gameOptions.coloniesExtension ||
               gameOptions.turmoilExtension ||
               gameOptions.initialDraftVariant) {
-          // Failsafe for exceding corporation pool
-          if (gameOptions.startingCorporations * remainingPlayers > corporationCards.length) {
-            gameOptions.startingCorporations = 2;
-          }
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
             const corpCard : CorporationCard | undefined = corporationCards.pop();
             if (corpCard !== undefined) {
@@ -354,6 +356,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.DEIMOS)) return true;
 
       return false;
     }
@@ -405,13 +409,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (boardName === BoardName.ELYSIUM) {
         chooseMilestonesAndAwards(this, ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
-        return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       } else if (boardName === BoardName.HELLAS) {
         chooseMilestonesAndAwards(this, HELLAS_MILESTONES, HELLAS_AWARDS);
-        return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
+      } else if (boardName === BoardName.AMAZONIS) {
+        chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
+        return new AmazonisBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
+      } else if (boardName === BoardName.ARABIA_TERRA) {
+        chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
+        return new ArabiaTerraBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       } else {
         chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
-        return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       }
     }
 
@@ -1118,13 +1128,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public canPlaceGreenery(player: Player): boolean {
-      return !this.donePlayers.has(player) &&
+      return !this.donePlayers.has(player.id) &&
              player.plants >= player.plantsNeededForGreenery &&
              this.board.getAvailableSpacesForGreenery(player).length > 0;
     }
 
     public playerIsDoneWithGame(player: Player): void {
-      this.donePlayers.add(player);
+      this.donePlayers.add(player.id);
       this.gotoFinalGreeneryPlacement();
     }
 
@@ -1172,24 +1182,27 @@ export class Game implements ILoadable<SerializedGame, Game> {
       player.takeAction(this);
     }
 
-    public increaseOxygenLevel(
-        player: Player, steps: 1 | 2): undefined {
+    public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
-      if (steps === 2 && this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
-        return this.increaseOxygenLevel(player, 1);
-      }
-      this.oxygenLevel += steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
+
       if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
-      if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1);
+      if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
+        this.increaseTemperature(player, 1);
       }
+
+      this.oxygenLevel += steps;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onOxygenChange(this, aresData);
       });
+
       return undefined;
     }
 
@@ -1197,41 +1210,32 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+    public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
       if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
         return undefined;
       }
-      if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        return this.increaseVenusScaleLevel(player, steps);
-      }
-      this.venusScaleLevel += 2 * steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_VENUS_SCALE - this.venusScaleLevel) / 2);
+
       if (this.phase !== Phase.SOLAR) {
+        if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
+          player.cardsInHand.push(this.dealer.dealCard());
+        }
+        if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
+          player.increaseTerraformRating(this);
+        }
         player.increaseTerraformRatingSteps(steps, this);
       }
 
       // Check for Aphrodite corporation
-      this.players.forEach((player) => {
-        if (player.isCorporation(CardName.APHRODITE)) {
-          player.megaCredits += 2 * steps;
-        }
-      });
-
-      if (this.phase !== Phase.SOLAR) {
-        if (this.venusScaleLevel === 8 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) ||
-            (steps === 3 && this.venusScaleLevel === 12)
-        ) {
-          player.cardsInHand.push(this.dealer.dealCard());
-        }
-
-        if (this.venusScaleLevel === 16 ||
-            ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) ||
-            (steps === 3 && this.venusScaleLevel === 20)
-        ) {
-          player.increaseTerraformRating(this);
-        }
+      const aphrodite = this.players.find((player) => player.isCorporation(CardName.APHRODITE));
+      if (aphrodite !== undefined) {
+        aphrodite.megaCredits += steps * 2;
       }
+
+      this.venusScaleLevel += steps * 2;
+
       return undefined;
     }
 
@@ -1239,55 +1243,38 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.venusScaleLevel;
     }
 
-    public increaseTemperature(
-        player: Player, steps: -2 | 1 | 2 | 3): undefined {
-      if (steps === -2) {
-        if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
-          this.temperature -= 4;
-          return;
-        } else if (this.temperature >= constants.MIN_TEMPERATURE + 2) {
-          this.temperature -= 2;
-          return;
-        } else {
-          return;
-        }
+    public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
+      if (increments === -2) {
+        this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
+        return undefined;
       }
 
       if (this.temperature >= constants.MAX_TEMPERATURE) {
-        return;
+        return undefined;
       }
-      if (steps > 1 && this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
-        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-        this.increaseTemperature(player, steps);
-        return;
-      }
-      this.temperature += 2 * steps;
+
+      // Literal typing makes |increments| a const
+      const steps = Math.min(increments, (constants.MAX_TEMPERATURE - this.temperature) / 2);
+
       if (this.phase !== Phase.SOLAR) {
-        player.increaseTerraformRatingSteps(steps, this);
-      }
-      // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (this.phase !== Phase.SOLAR) {
-        if (steps === 3 && this.temperature === -20) {
-          player.addProduction(Resources.HEAT, 2);
-        } else if (this.temperature === -24 || this.temperature === -20 ||
-              (
-                (steps === 2 || steps === 3) &&
-                (this.temperature === -22 || this.temperature === -18)
-              ) ||
-              (steps === 3 && this.temperature === -16)
-        ) {
-          player.addProduction(Resources.HEAT); ;
+        // BONUS FOR HEAT PRODUCTION AT -20 and -24
+        if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
+          player.addProduction(Resources.HEAT);
         }
+        if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
+          player.addProduction(Resources.HEAT);
+        }
+
+        player.increaseTerraformRatingSteps(steps, this);
       }
 
       // BONUS FOR OCEAN TILE AT 0
-      if (
-        this.temperature === 0 ||
-          ((steps === 2 || steps === 3) && this.temperature === 2) ||
-          (steps === 3 && this.temperature === 4)
-      ) {
+      if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from temperature increase'));
       }
+
+      this.temperature += steps * 2;
+
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.onTemperatureChange(this, aresData);
       });
@@ -1360,7 +1347,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         throw new Error('This space is land claimed by ' + space.player.name);
       }
 
-      if (space.spaceType !== spaceType) {
+      if (space.spaceType !== spaceType && !space.bonus.includes(SpaceBonus.COVE)) {
         throw new Error(
             `Select a valid location ${space.spaceType} is not ${spaceType}`,
         );
@@ -1473,6 +1460,24 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.titanium++;
       } else if (spaceBonus === SpaceBonus.HEAT) {
         player.heat++;
+      } else if (spaceBonus === SpaceBonus.ANIMAL) {
+        const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+
+        if (animalCards.length === 1) {
+          player.addResourceTo(animalCards[0], 1);
+          LogHelper.logAddResource(this, player, animalCards[0]);
+        } else if (animalCards.length > 1) {
+          this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL, 1));
+        }
+      } else if (spaceBonus === SpaceBonus.MICROBE) {
+        const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+
+        if (microbeCards.length === 1) {
+          player.addResourceTo(microbeCards[0], 1);
+          LogHelper.logAddResource(this, player, microbeCards[0]);
+        } else if (microbeCards.length > 1) {
+          this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE, 1));
+        }
       }
     }
 
@@ -1718,14 +1723,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return player.loadFromJSON(element);
       });
 
+      // Setup Ares
+      if (this.gameOptions.aresExtension) {
+        this.aresData = d.aresData;
+        this.erodedSpaces = d.erodedSpaces;
+      }
 
       // Rebuild milestones, awards and board elements
       if (this.gameOptions.boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       } else if (this.gameOptions.boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
+      } else if (this.gameOptions.boardName === BoardName.AMAZONIS) {
+        this.board = new AmazonisBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
+      } else if (this.gameOptions.boardName === BoardName.ARABIA_TERRA) {
+        this.board = new ArabiaTerraBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       } else {
-        this.board = new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed, this.erodedSpaces);
       }
 
       this.milestones = [];
@@ -1780,9 +1794,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.adjacency = element.adjacency;
       });
 
-      if (this.gameOptions.aresExtension) {
-        this.aresData = d.aresData;
-      }
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();
@@ -1858,41 +1869,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
-      // Rebuild passed players set
-      this.passedPlayers = new Set<PlayerId>();
-      d.passedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.passedPlayers.add(player.id);
-        }
-      });
-
-      // Rebuild done players set
-      this.donePlayers = new Set<Player>();
-      d.donePlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.donePlayers.add(player);
-        }
-      });
-
-      // Rebuild researched players set
-      this.researchedPlayers = new Set<PlayerId>();
-      d.researchedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.researchedPlayers.add(player.id);
-        }
-      });
-
-      // Rebuild drafted players set
-      this.draftedPlayers = new Set<PlayerId>();
-      d.draftedPlayers.forEach((element: PlayerId) => {
-        const player = this.players.find((player) => player.id === element);
-        if (player) {
-          this.draftedPlayers.add(player.id);
-        }
-      });
+      this.passedPlayers = new Set<PlayerId>(d.passedPlayers);
+      this.donePlayers = new Set<PlayerId>(d.donePlayers);
+      this.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
+      this.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
       // Reinit undrafted cards map
       this.unDraftedCards = new Map<Player, IProjectCard[]>();

@@ -208,36 +208,6 @@ export const Board = Vue.component('board', {
         <div class="board" id="main_board">
             <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" :aresExtension="aresExtension" v-for="curSpace in getAllSpacesOnMars()"></board-space>
             <svg id="board_legend" height="550" width="630" class="board-legend">
-                <g v-if="boardName === 'tharsis'" id="ascraeus_mons" transform="translate(95, 192)">
-                    <text class="board-caption">
-                        <tspan dy="15">Ascraeus</tspan>
-                        <tspan x="12" dy="12">Mons</tspan>
-                    </text>
-                </g>
-                
-                <g v-if="boardName === 'tharsis'" id="pavonis_mons" transform="translate(90, 230)">
-                    <text class="board-caption">
-                        <tspan dy="15">Pavonis</tspan>
-                        <tspan x="4" dy="12">Mons</tspan>
-                    </text>
-                </g>
-                
-                <g v-if="boardName === 'tharsis'" id="arsia_mons" transform="translate(77, 275)">
-                    <text class="board-caption">
-                        <tspan dy="15">Arsia</tspan>
-                        <tspan x="-2" dy="12">Mons</tspan>
-                    </text>
-                </g>
-
-                <g v-if="boardName === 'tharsis'" id="tharsis_tholus" transform="translate(85, 175)">
-                    <text class="board-caption" dx="47">
-                        <tspan dy="-7">Tharsis</tspan>
-                        <tspan dy="12" x="48">Tholus</tspan>
-                    </text>
-                    <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
-                    <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
-                </g>
-                
                 <g v-if="boardName === 'tharsis'" id="noctis_city" transform="translate(85, 320)">
                     <text class="board-caption">
                         <tspan dy="15">Noctis</tspan>
@@ -245,34 +215,6 @@ export const Board = Vue.component('board', {
                     </text>
                     <line x1="30" y1="20" x2="140" y2="-20" class="board-line"></line>
                     <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
-                </g>
-
-                <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(110, 190)">
-                    <text class="board-caption">
-                        <tspan dy="15">Elysium</tspan>
-                        <tspan x="8" dy="12">Mons</tspan>
-                    </text>
-                </g>
-
-                <g v-if="boardName === 'elysium'" id="hecatus_tholus"  transform="translate(130, 150)">
-                    <text class="board-caption">
-                        <tspan dy="15">Hecatus</tspan>
-                        <tspan x="3" dy="12">Tholus</tspan>
-                    </text>
-                </g>
-
-                <g v-if="boardName === 'elysium'" id="arsia_mons" transform="translate(545, 272)">
-                    <text class="board-caption">
-                        <tspan dy="15">Arsia</tspan>
-                        <tspan x="0" dy="12">Mons</tspan>
-                    </text>
-                </g>
-
-                <g v-if="boardName === 'elysium'" id="olympus_mons" transform="translate(505, 190)">
-                    <text class="board-caption">
-                        <tspan x="-5" dy="15">Olympus</tspan>
-                        <tspan x="4" dy="12">Mons</tspan>
-                    </text>
                 </g>
             </svg>
         </div>

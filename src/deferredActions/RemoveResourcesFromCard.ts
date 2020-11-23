@@ -79,9 +79,8 @@ export class RemoveResourcesFromCard implements DeferredAction {
             if (p.hasProtectedHabitats() && player.id !== p.id) return;
             resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1));
             break;
-          case ResourceType.MICROBE:
-            if (p.hasProtectedHabitats() && player.id !== p.id) return;
           default:
+            if (p.hasProtectedHabitats() && player.id !== p.id) return;
             resourceCards.push(...p.getCardsWithResources(resourceType));
         }
       });

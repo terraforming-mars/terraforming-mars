@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../src/Color';
 import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
-import {Game} from '../src/Game';
+import {Game, GameOptions} from '../src/Game';
 import {Unity} from '../src/turmoil/parties/Unity';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {MarsFirst} from '../src/turmoil/parties/MarsFirst';
@@ -30,7 +30,7 @@ describe('Turmoil', function() {
 
   beforeEach(function() {
     player = new Player('test', Color.BLUE, false);
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
 
     game = new Game('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
@@ -208,5 +208,14 @@ describe('Turmoil', function() {
     player.playedCards.push(new EarthCatapult(), new QuantumExtractor());
     player.megaCredits = 25;
     expect(nitrogenFromTitan.canPlay(player, game)).is.true; // 25 + 6 - 6
+  });
+
+  it('serializes all properties', function() {
+    const serialized = turmoil.serialize();
+    const serializedKeys = Object.keys(serialized);
+    const turmoilKeys = Object.keys(turmoil);
+    serializedKeys.sort();
+    turmoilKeys.sort();
+    expect(serializedKeys).to.deep.eq(turmoilKeys);
   });
 });

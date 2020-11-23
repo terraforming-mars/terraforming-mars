@@ -1,4 +1,3 @@
-
 import {CardName} from '../CardName';
 import {CardType} from '../cards/CardType';
 import {Game} from '../Game';
@@ -12,6 +11,9 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceBonus} from '../SpaceBonus';
 import {Tags} from '../cards/Tags';
 import {TileType} from '../TileType';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {DeferredAction} from '../deferredActions/DeferredAction';
 
 export abstract class MiningCard implements IProjectCard {
     public abstract cost: number;
@@ -59,16 +61,52 @@ export abstract class MiningCard implements IProjectCard {
       return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
         let bonus = SpaceBonus.STEEL;
         let resource = Resources.STEEL;
+
         if (foundSpace.bonus.includes(SpaceBonus.TITANIUM) === true) {
-          bonus = SpaceBonus.TITANIUM;
-          resource = Resources.TITANIUM;
+          if (foundSpace.bonus.includes(SpaceBonus.STEEL) === false) {
+            bonus = SpaceBonus.TITANIUM;
+            resource = Resources.TITANIUM;
+            this.increaseProduction(foundSpace, game, player, bonus, resource);
+          } else {
+            game.defer(new DeferredAction(
+                player,
+                () => {
+                  return new OrOptions(
+                      new SelectOption('Increase titanium production 1 step', 'Select', () => {
+                        bonus = SpaceBonus.TITANIUM;
+                        resource = Resources.TITANIUM;
+                        this.increaseProduction(foundSpace, game, player, bonus, resource);
+                        return undefined;
+                      }),
+                      new SelectOption('Increase steel production 1 step', 'Select', () => {
+                        bonus = SpaceBonus.STEEL;
+                        resource = Resources.STEEL;
+                        this.increaseProduction(foundSpace, game, player, bonus, resource);
+                        return undefined;
+                      }),
+                  );
+                },
+            ));
+          }
+        } else {
+          this.increaseProduction(foundSpace, game, player, bonus, resource);
         }
-        game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
-        foundSpace.adjacency = this.getAdjacencyBonus(bonus);
-        player.addProduction(resource);
-        this.bonusResource = resource;
-        LogHelper.logGainProduction(game, player, resource);
+
         return undefined;
       });
+    }
+
+    private increaseProduction(
+        foundSpace: ISpace,
+        game: Game,
+        player: Player,
+        bonus: SpaceBonus.STEEL | SpaceBonus.TITANIUM,
+        resource: Resources,
+    ): void {
+      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
+      foundSpace.adjacency = this.getAdjacencyBonus(bonus);
+      player.addProduction(resource);
+      this.bonusResource = resource;
+      LogHelper.logGainProduction(game, player, resource);
     }
 }

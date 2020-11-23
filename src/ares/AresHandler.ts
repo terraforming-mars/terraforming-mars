@@ -20,6 +20,7 @@ import {DeferredAction} from '../deferredActions/DeferredAction';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
+import {SpaceType} from '../SpaceType';
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -396,6 +397,16 @@ export class AresHandler {
 
   public static putHazardAt(space: ISpace, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
+  }
+
+  public static getAllLandSpacesAdjacentToHazards(game: Game): ISpace[] {
+    const hazardTiles = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.includes(space.tile.tileType));
+    const landSpacesAdjacentToHazards = hazardTiles.map((tile) => game.board.getAdjacentSpaces(tile).filter((space) => space.spaceType === SpaceType.LAND && space.tile === undefined));
+    return landSpacesAdjacentToHazards.reduce((s1, s2) => s1.concat(s2)).filter((value, index, space) => space.indexOf(value) === index);
+  }
+
+  public static getHazardsCount(game: Game): number {
+    return game.board.spaces.filter((space) => space.tile && HAZARD_TILES.includes(space.tile.tileType)).length;
   }
 }
 

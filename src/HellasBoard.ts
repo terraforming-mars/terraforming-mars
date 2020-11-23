@@ -8,7 +8,7 @@ import {SpaceType} from './SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 
 export class HellasBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  constructor(shuffleMapOption: boolean = false, seed: number = 0, erodedSpaces: Array<string> = []) {
     super();
 
     const builder = new BoardBuilder(seed);
@@ -43,7 +43,7 @@ export class HellasBoard extends Board {
       builder.shuffle();
     }
 
-    this.spaces = builder.build();
+    this.spaces = builder.build(erodedSpaces);
   }
 
   private filterHellas(player: Player, spaces: Array<ISpace>) {

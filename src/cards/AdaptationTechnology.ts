@@ -2,8 +2,8 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {CardName} from '../CardName';
-import {CardMetadata} from './../cards/CardMetadata';
-import {CardRenderer} from './../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
 
 export class AdaptationTechnology implements IProjectCard {
   public cost = 12;

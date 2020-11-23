@@ -6,9 +6,9 @@ import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRequirements} from '../../cards/CardRequirements';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Airliners implements IProjectCard {
   public cost = 11;

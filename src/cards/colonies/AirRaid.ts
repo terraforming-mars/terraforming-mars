@@ -7,9 +7,9 @@ import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {StealResources} from '../../deferredActions/StealResources';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AirRaid implements IProjectCard {
   public cost = 0;

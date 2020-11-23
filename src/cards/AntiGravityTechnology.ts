@@ -3,9 +3,9 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {CardName} from '../CardName';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRenderer} from '../cards/render/CardRenderer';
-import {CardRequirements} from '../cards/CardRequirements';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
+import {CardRequirements} from './CardRequirements';
 
 export class AntiGravityTechnology implements IProjectCard {
   public cost = 14;

@@ -8,8 +8,8 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderVictoryPoints} from '../render/CardRenderVictoryPoints';
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {

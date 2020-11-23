@@ -9,9 +9,9 @@ import {Tags} from '../Tags';
 import {ICard} from '../../cards/ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardMetadata} from './../CardMetadata';
-import {CardRequirements} from './../CardRequirements';
-import {CardRenderer} from './../render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
   public cost = 7;

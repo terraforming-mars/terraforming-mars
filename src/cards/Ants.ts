@@ -8,9 +8,9 @@ import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 import {CardRenderVictoryPoints} from './render/CardRenderVictoryPoints';
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {

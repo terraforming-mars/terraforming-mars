@@ -7,10 +7,10 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {CardRenderVictoryPoints} from '../../cards/render/CardRenderVictoryPoints';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderVictoryPoints} from '../render/CardRenderVictoryPoints';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IResourceCard {
   public name = CardName.ASTEROID_DEFLECTION_SYSTEM;

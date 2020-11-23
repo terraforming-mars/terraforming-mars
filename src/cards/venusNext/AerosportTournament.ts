@@ -6,10 +6,10 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {LogHelper} from '../../components/LogHelper';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRequirements} from '../../cards/CardRequirements';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 
 export class AerosportTournament implements IProjectCard {

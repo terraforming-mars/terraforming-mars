@@ -12,8 +12,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard {
   public name = CardName.ASTEROID_RIGHTS;

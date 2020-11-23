@@ -10,8 +10,8 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_VENUS_SCALE} from '../../constants';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class AirScrappingExpedition implements IProjectCard {
   public cost = 13;

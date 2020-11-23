@@ -4,9 +4,9 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRequirements} from '../../cards/CardRequirements';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class AtalantaPlanitiaLab implements IProjectCard {
   public cost = 10;

@@ -15,16 +15,16 @@ export class SelectCardToKeep implements DeferredAction {
 
   public execute() {
     return new SelectCard(
-        this.title,
-        'Select',
-        this.cards,
-        (foundCards: Array<IProjectCard>) => {
-          this.player.cardsInHand.push(foundCards[0]);
-          this.cards.filter((c) => c !== foundCards[0]).forEach((c) => this.game.dealer.discard(c));
-          return undefined;
-        },
-        this.count,
-        this.count,
+      this.title,
+      'Select',
+      this.cards,
+      (foundCards: Array<IProjectCard>) => {
+        this.player.cardsInHand.push(foundCards[0]);
+        this.cards.filter((c) => c !== foundCards[0]).forEach((c) => this.game.dealer.discard(c));
+        return undefined;
+      },
+      this.count,
+      this.count,
     );
   }
 }

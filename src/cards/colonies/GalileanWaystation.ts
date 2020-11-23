@@ -14,8 +14,8 @@ export class GalileanWaystation implements IProjectCard {
 
     public play(player: Player, game: Game) {
       const amount = game.getPlayers()
-          .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, false, player.id === aplayer.id))
-          .reduce((a, c) => a + c, 0);
+        .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, false, player.id === aplayer.id))
+        .reduce((a, c) => a + c, 0);
       player.addProduction(Resources.MEGACREDITS, amount);
       return undefined;
     }

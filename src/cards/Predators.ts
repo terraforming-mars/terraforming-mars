@@ -37,11 +37,11 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public action(player: Player, game: Game) {
       game.defer(new RemoveResourcesFromCard(player, game, this.resourceType));
       game.defer(new DeferredAction(
-          player,
-          () => {
-            player.addResourceTo(this);
-            return undefined;
-          },
+        player,
+        () => {
+          player.addResourceTo(this);
+          return undefined;
+        },
       ));
       return undefined;
     }

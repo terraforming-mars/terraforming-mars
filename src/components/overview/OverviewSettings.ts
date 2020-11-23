@@ -8,8 +8,8 @@ export const OverviewSettings = Vue.component('overview-settings', {
   methods: {
     toggleTagsView: function() {
       (this.$root as any).setVisibilityState(
-          'tags_concise',
-          !(this.$root as any).getVisibilityState('tags_concise'),
+        'tags_concise',
+        !(this.$root as any).getVisibilityState('tags_concise'),
       );
     },
     getTagToggleLabel: function(): string {

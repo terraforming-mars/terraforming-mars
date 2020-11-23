@@ -22,25 +22,25 @@ export class OlympusConference implements IProjectCard, IResourceCard {
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
       for (let i = 0; i < scienceTags; i++) {
         game.defer(new DeferredAction(
-            player,
-            () => {
-              // Can't remove a resource
-              if (this.resourceCount === 0) {
+          player,
+          () => {
+            // Can't remove a resource
+            if (this.resourceCount === 0) {
+              this.resourceCount++;
+              return undefined;
+            }
+            return new OrOptions(
+              new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
+                player.removeResourceFrom(this);
+                player.cardsInHand.push(game.dealer.dealCard());
+                return undefined;
+              }),
+              new SelectOption('Add a science resource to this card', 'Add resource', () => {
                 this.resourceCount++;
                 return undefined;
-              }
-              return new OrOptions(
-                  new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
-                    player.removeResourceFrom(this);
-                    player.cardsInHand.push(game.dealer.dealCard());
-                    return undefined;
-                  }),
-                  new SelectOption('Add a science resource to this card', 'Add resource', () => {
-                    this.resourceCount++;
-                    return undefined;
-                  }),
-              );
-            },
+              }),
+            );
+          },
         ), true); // Unshift that deferred action
       }
       return undefined;

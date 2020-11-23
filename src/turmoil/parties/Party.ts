@@ -23,7 +23,7 @@ export abstract class Party {
       if (this.partyLeader) {
         if (game) {
           const sortedPlayers = [...this.getPresentPlayers()].sort(
-              (p1, p2) => this.getDelegates(p2) - this.getDelegates(p1),
+            (p1, p2) => this.getDelegates(p2) - this.getDelegates(p1),
           );
           const max = this.getDelegates(sortedPlayers[0]);
 

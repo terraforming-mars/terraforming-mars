@@ -46,8 +46,8 @@ export const SelectCard = Vue.component('select-card', {
         return [];
       }
       return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.player.id),
-          this.playerinput.cards,
+        CardOrderStorage.getCardOrder(this.player.id),
+        this.playerinput.cards,
       );
     },
     saveData: function() {

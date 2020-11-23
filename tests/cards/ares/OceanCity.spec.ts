@@ -70,12 +70,12 @@ describe('OceanCity', function() {
     action.cb(oceanSpace);
 
     const adjacentSpaces = game.board
-        .getAdjacentSpaces(oceanSpace)
-        .filter((space) => space.spaceType === SpaceType.LAND)
-        .map((space) => space.id);
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)
+      .map((space) => space.id);
     const citySpaces = game.board
-        .getAvailableSpacesForCity(player)
-        .map((space) => space.id);
+      .getAvailableSpacesForCity(player)
+      .map((space) => space.id);
     expect(citySpaces).to.not.include.any.members(adjacentSpaces);
   });
 
@@ -84,8 +84,8 @@ describe('OceanCity', function() {
     player.addProduction(Resources.ENERGY, 1);
 
     const citySpace = game.board
-        .getAdjacentSpaces(oceanSpace)
-        .filter((space) => space.spaceType === SpaceType.LAND)[0];
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)[0];
     game.addCityTile(player, citySpace.id);
 
     const action = card.play(player, game);
@@ -103,8 +103,8 @@ describe('OceanCity', function() {
     const action = card.play(player, game);
     action.cb(oceanSpace);
     const greenery = game.board
-        .getAdjacentSpaces(oceanSpace)
-        .filter((space) => space.spaceType === SpaceType.LAND)[0];
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
     expect(player.megaCredits).eq(0);
 
@@ -118,8 +118,8 @@ describe('OceanCity', function() {
     const action = card.play(player, game);
     action.cb(oceanSpace);
     const greenery = game.board
-        .getAdjacentSpaces(oceanSpace)
-        .filter((space) => space.spaceType === SpaceType.LAND)[0];
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
     expect(player.getVictoryPoints(game).city).eq(0);
 
@@ -136,8 +136,8 @@ describe('OceanCity', function() {
     player.playedCards = [capital];
 
     const capitalSpace = game.board
-        .getAdjacentSpaces(oceanSpace)
-        .filter((space) => space.spaceType === SpaceType.LAND)[0];
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)[0];
     capitalAction.cb(capitalSpace);
 
     // In a real game Capital couldn't be placed without an ocean on the board, but this test

@@ -24,11 +24,11 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
 
     public play(player: Player, game: Game) {
       game.defer(new DeferredAction(
-          player,
-          () => {
-            player.addResourceTo(this, 3);
-            return undefined;
-          },
+        player,
+        () => {
+          player.addResourceTo(this, 3);
+          return undefined;
+        },
       ));
       return undefined;
     }

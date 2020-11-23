@@ -22,7 +22,7 @@ export class Election implements IGlobalEvent {
         }
       } else {
         const players = [...game.getPlayers()].sort(
-            (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
+          (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
         );
 
         // We have one rank 1 player
@@ -60,7 +60,7 @@ export class Election implements IGlobalEvent {
       const score = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player);
 
       const cities = game.board.spaces.filter(
-          (space) => Board.isCitySpace(space) && space.player === player,
+        (space) => Board.isCitySpace(space) && space.player === player,
       ).length;
 
       return score + cities;

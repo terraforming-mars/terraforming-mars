@@ -35,10 +35,10 @@ export class RemoveAnyPlants implements DeferredAction {
     });
 
     return new OrOptions(
-        ...removalOptions,
-        new SelectOption('Skip removing plants', 'Confirm', () => {
-          return undefined;
-        }),
+      ...removalOptions,
+      new SelectOption('Skip removing plants', 'Confirm', () => {
+        return undefined;
+      }),
     );
   }
 }

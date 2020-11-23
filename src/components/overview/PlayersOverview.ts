@@ -8,8 +8,8 @@ import {ActionLabel} from './ActionLabel';
 const SHOW_NEXT_LABEL_MIN = 2;
 
 export const getCurrentPlayerIndex = (
-    player: PlayerModel,
-    players: Array<PlayerModel>,
+  player: PlayerModel,
+  players: Array<PlayerModel>,
 ): number => {
   let currentPlayerIndex: number = 0;
   players.forEach((p: PlayerModel, index: number) => {
@@ -40,7 +40,7 @@ export const PlayersOverview = Vue.component('players-overview', {
     },
     getPlayerOnFocus: function(): PlayerModel {
       return this.player.players.filter(
-          (p: PlayerModel) => p.color === this.player.color,
+        (p: PlayerModel) => p.color === this.player.color,
       )[0];
     },
     getIsFirstForGen: function(player: PlayerModel): boolean {
@@ -51,15 +51,15 @@ export const PlayersOverview = Vue.component('players-overview', {
       let result: Array<PlayerModel> = [];
       let currentPlayerOffset: number = 0;
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-          this.player,
-          this.player.players,
+        this.player,
+        this.player.players,
       );
 
       // shift the array by putting the player on focus at the tail
       currentPlayerOffset = currentPlayerIndex + 1;
       result = players
-          .slice(currentPlayerOffset)
-          .concat(players.slice(0, currentPlayerOffset));
+        .slice(currentPlayerOffset)
+        .concat(players.slice(0, currentPlayerOffset));
       // return all but the focused user
       return result.slice(0, -1);
     },
@@ -69,17 +69,17 @@ export const PlayersOverview = Vue.component('players-overview', {
       }
       if (player.isActive) return ActionLabel.ACTIVE;
       const notPassedPlayers = this.player.players.filter(
-          (p: PlayerModel) => !this.player.passedPlayers.includes(p.color),
+        (p: PlayerModel) => !this.player.passedPlayers.includes(p.color),
       );
 
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-          player,
-          notPassedPlayers,
+        player,
+        notPassedPlayers,
       );
       const prevPlayerIndex =
                 currentPlayerIndex === 0 ?
-                    notPassedPlayers.length - 1 :
-                    currentPlayerIndex - 1;
+                  notPassedPlayers.length - 1 :
+                  currentPlayerIndex - 1;
       const isNext = notPassedPlayers[prevPlayerIndex].isActive;
 
       if (isNext && this.player.players.length > SHOW_NEXT_LABEL_MIN) {

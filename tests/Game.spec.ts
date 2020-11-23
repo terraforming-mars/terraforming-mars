@@ -47,7 +47,7 @@ describe('Game', function() {
 
   it('excludes expansion-specific preludes if those expansions are not selected ', function() {
     const dealer = new Dealer(true, false, false, false, false, false,
-        false, true);
+      false, true);
     const preludeDeck = dealer.preludeDeck;
 
     const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);

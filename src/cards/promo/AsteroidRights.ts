@@ -39,24 +39,24 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
         this.resourceCount--;
 
         return new OrOptions(
-            new SelectOption(
-                'Increase MC production 1 step',
-                'Select',
-                () => {
-                  player.addProduction(Resources.MEGACREDITS);
-                  LogHelper.logRemoveResource(game, player, this, 1, 'increase MC production 1 step');
-                  return undefined;
-                },
-            ),
-            new SelectOption(
-                'Gain 2 titanium',
-                'Select',
-                () => {
-                  player.titanium += 2;
-                  LogHelper.logRemoveResource(game, player, this, 1, 'gain 2 titanium');
-                  return undefined;
-                },
-            ),
+          new SelectOption(
+            'Increase MC production 1 step',
+            'Select',
+            () => {
+              player.addProduction(Resources.MEGACREDITS);
+              LogHelper.logRemoveResource(game, player, this, 1, 'increase MC production 1 step');
+              return undefined;
+            },
+          ),
+          new SelectOption(
+            'Gain 2 titanium',
+            'Select',
+            () => {
+              player.titanium += 2;
+              LogHelper.logRemoveResource(game, player, this, 1, 'gain 2 titanium');
+              return undefined;
+            },
+          ),
         );
       });
 
@@ -69,16 +69,16 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
       });
 
       const addAsteroidOption = new SelectCard(
-          'Select card to add 1 asteroid',
-          'Add asteroid',
-          asteroidCards,
-          (foundCards: Array<ICard>) => {
-            game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for asteroid'));
-            player.addResourceTo(foundCards[0], 1);
-            LogHelper.logAddResource(game, player, foundCards[0]);
+        'Select card to add 1 asteroid',
+        'Add asteroid',
+        asteroidCards,
+        (foundCards: Array<ICard>) => {
+          game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for asteroid'));
+          player.addResourceTo(foundCards[0], 1);
+          LogHelper.logAddResource(game, player, foundCards[0]);
 
-            return undefined;
-          },
+          return undefined;
+        },
       );
 
       // Spend asteroid
@@ -92,8 +92,8 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
 
       const opts: Array<SelectOption | SelectCard<ICard>> = [];
       opts.push(spendAsteroidOption);
-        asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);
+      asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);
 
-        return new OrOptions(...opts);
+      return new OrOptions(...opts);
     }
 }

@@ -60,8 +60,8 @@ export const Preferences = Vue.component('preferences', {
   },
   methods: {
     setPreferencesCSS: function(
-        val: boolean | undefined,
-        cssClassSuffix: string,
+      val: boolean | undefined,
+      cssClassSuffix: string,
     ): void {
       const target = document.getElementById('ts-preferences-target');
       if (!target) return;

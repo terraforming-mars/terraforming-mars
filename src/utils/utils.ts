@@ -1,6 +1,6 @@
 export const playerColorClass = (
-    color: string,
-    type: 'shadow' | 'bg' | 'bg_transparent',
+  color: string,
+  type: 'shadow' | 'bg' | 'bg_transparent',
 ): string => {
   const prefix = {
     shadow: 'player_shadow_color_',

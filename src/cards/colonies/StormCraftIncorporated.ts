@@ -36,13 +36,13 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     }
 
     return new SelectCard(
-        'Select card to add 1 floater',
-        'Add floater',
-        floaterCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 1);
-          return undefined;
-        },
+      'Select card to add 1 floater',
+      'Add floater',
+      floaterCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], 1);
+        return undefined;
+      },
     );
   }
 
@@ -51,28 +51,28 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     let heatAmount: number;
     let floaterAmount: number;
     const raiseTempOptions = new AndOptions(
-        () => {
-          const total = heatAmount + (floaterAmount * floatersToHeat);
-          if (total < constants.HEAT_FOR_TEMPERATURE) {
-            throw new Error(`Need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
-          }
-          if (total > constants.HEAT_FOR_TEMPERATURE) {
-            throw new Error(`Only need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
-          }
-          player.removeResourceFrom(this, floaterAmount);
-          player.heat -= heatAmount;
-          game.increaseTemperature(player, 1);
-          game.log('${0} converted heat into temperature', (b) => b.player(player));
-          return undefined;
-        },
-        new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
-          heatAmount = amount;
-          return undefined;
-        }, Math.min(player.heat, constants.HEAT_FOR_TEMPERATURE)),
-        new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
-          floaterAmount = amount;
-          return undefined;
-        }, Math.min(this.resourceCount, constants.HEAT_FOR_TEMPERATURE / floatersToHeat)),
+      () => {
+        const total = heatAmount + (floaterAmount * floatersToHeat);
+        if (total < constants.HEAT_FOR_TEMPERATURE) {
+          throw new Error(`Need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
+        }
+        if (total > constants.HEAT_FOR_TEMPERATURE) {
+          throw new Error(`Only need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
+        }
+        player.removeResourceFrom(this, floaterAmount);
+        player.heat -= heatAmount;
+        game.increaseTemperature(player, 1);
+        game.log('${0} converted heat into temperature', (b) => b.player(player));
+        return undefined;
+      },
+      new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
+        heatAmount = amount;
+        return undefined;
+      }, Math.min(player.heat, constants.HEAT_FOR_TEMPERATURE)),
+      new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
+        floaterAmount = amount;
+        return undefined;
+      }, Math.min(this.resourceCount, constants.HEAT_FOR_TEMPERATURE / floatersToHeat)),
     );
     raiseTempOptions.title = 'Select resource amounts to raise temp';
 

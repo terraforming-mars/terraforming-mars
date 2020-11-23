@@ -119,25 +119,25 @@ export class GameLoader {
           const player2 = new Player('test2', Color.RED, false, 0);
           const gameToRebuild = new Game(game_id, [player, player2], player);
           Database.getInstance().restoreGameLastSave(
-              game_id,
-              gameToRebuild,
-              (err) => {
-                loaded++;
-                if (err) {
-                  console.error(`unable to load game ${game_id}`, err);
-                } else {
-                  console.log(`load game ${game_id}`);
-                  this.games.set(gameToRebuild.id, gameToRebuild);
-                  for (const player of gameToRebuild.getPlayers()) {
-                    this.playerToGame.set(player.id, gameToRebuild);
-                    this.onGameLoaded(gameToRebuild.id, player.id);
-                  }
+            game_id,
+            gameToRebuild,
+            (err) => {
+              loaded++;
+              if (err) {
+                console.error(`unable to load game ${game_id}`, err);
+              } else {
+                console.log(`load game ${game_id}`);
+                this.games.set(gameToRebuild.id, gameToRebuild);
+                for (const player of gameToRebuild.getPlayers()) {
+                  this.playerToGame.set(player.id, gameToRebuild);
+                  this.onGameLoaded(gameToRebuild.id, player.id);
                 }
-                if (loaded === allGames.length) {
-                  this.onAllGamesLoaded();
-                  cb();
-                }
-              },
+              }
+              if (loaded === allGames.length) {
+                this.onAllGamesLoaded();
+                cb();
+              }
+            },
           );
         });
       });

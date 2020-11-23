@@ -25,17 +25,17 @@ export class SelectHowToPayDeferred implements DeferredAction {
     }
 
     return new SelectHowToPay(
-        this.title,
-        this.canUseSteel, this.canUseTitanium, this.player.canUseHeatAsMegaCredits, this.amount, (howToPay: HowToPay) => {
-          this.player.steel -= howToPay.steel;
-          this.player.titanium -= howToPay.titanium;
-          this.player.megaCredits -= howToPay.megaCredits;
-          this.player.heat -= howToPay.heat;
-          if (this.afterPay !== undefined) {
-            this.afterPay();
-          }
-          return undefined;
-        },
+      this.title,
+      this.canUseSteel, this.canUseTitanium, this.player.canUseHeatAsMegaCredits, this.amount, (howToPay: HowToPay) => {
+        this.player.steel -= howToPay.steel;
+        this.player.titanium -= howToPay.titanium;
+        this.player.megaCredits -= howToPay.megaCredits;
+        this.player.heat -= howToPay.heat;
+        if (this.afterPay !== undefined) {
+          this.afterPay();
+        }
+        return undefined;
+      },
     );
   }
 }

@@ -28,13 +28,13 @@ export class Virus implements IProjectCard {
 
       const orOptionsAnimals = (new RemoveResourcesFromCard(player, game, ResourceType.ANIMAL, 2, false, false)).execute() as OrOptions;
       const removeAnimals = orOptionsAnimals !== undefined ?
-            orOptionsAnimals.options[0] :
-            undefined;
+        orOptionsAnimals.options[0] :
+        undefined;
 
       const orOptionsPlants = (new RemoveAnyPlants(player, game, 5)).execute() as OrOptions;
       const removePlants = orOptionsPlants !== undefined ?
-            orOptionsPlants.options.slice(0, -1) :
-            undefined;
+        orOptionsPlants.options.slice(0, -1) :
+        undefined;
 
       // If no other player has resources to remove
       // assume player will remove nothing from themselves

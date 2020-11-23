@@ -40,18 +40,18 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
       return undefined;
     }
     return new OrOptions(
-        new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
-            'Remove floaters', () => {
-              this.resourceCount -= 2;
-              game.increaseVenusScaleLevel(player, 1);
-              LogHelper.logVenusIncrease(game, player, 1);
-              return undefined;
-            }),
-        new SelectOption('Add 1 floater to this card', 'Add floater', () => {
-          player.addResourceTo(this);
-          LogHelper.logAddResource(game, player, this);
+      new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
+        'Remove floaters', () => {
+          this.resourceCount -= 2;
+          game.increaseVenusScaleLevel(player, 1);
+          LogHelper.logVenusIncrease(game, player, 1);
           return undefined;
         }),
+      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        player.addResourceTo(this);
+        LogHelper.logAddResource(game, player, this);
+        return undefined;
+      }),
     );
   }
   public metadata: CardMetadata = {

@@ -19,12 +19,12 @@ export class PlaceOceanTile implements DeferredAction {
     }
 
     return new SelectSpace(
-        this.title,
-        this.game.board.getAvailableSpacesForOcean(this.player),
-        (space: ISpace) => {
-          this.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
-          return undefined;
-        },
+      this.title,
+      this.game.board.getAvailableSpacesForOcean(this.player),
+      (space: ISpace) => {
+        this.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
+        return undefined;
+      },
     );
   }
 }

@@ -14,7 +14,7 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
   },
   template: `
   <div class="tile special-tile">
-    <div :class="getClasses()></div>
+    <div :class="getClasses()"></div>
   </div>
     `,
 });

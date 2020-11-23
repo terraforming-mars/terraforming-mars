@@ -288,7 +288,6 @@ class Builder {
   }
 
   public tile(selector: string): Builder {
-    this._checkExistingItem();
     this._addTile(selector);
     return this;
   }

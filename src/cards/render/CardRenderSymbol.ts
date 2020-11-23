@@ -38,4 +38,7 @@ export class CardRenderSymbol {
   public static bracketClose(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.BRACKET_CLOSE, size);
   }
+  public static nbsp(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.NBSP, size, true);
+  }
 }

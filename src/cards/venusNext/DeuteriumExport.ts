@@ -8,9 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {CardMetadata} from './../CardMetadata';
-import {CardRenderer} from './../render/CardRenderer';
-import {CardRenderItemSize} from './../render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;

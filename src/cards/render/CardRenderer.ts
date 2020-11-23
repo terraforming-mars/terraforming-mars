@@ -2,6 +2,7 @@ import {CardRenderItem} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
+import {Tags} from '../Tags';
 
 type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | string | undefined;
 
@@ -188,6 +189,10 @@ class Builder {
     return this;
   }
 
+  public asteroids(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.ASTEROIDS, amount));
+    return this;
+  }
 
   public event(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.EVENT));
@@ -216,6 +221,13 @@ class Builder {
     return this;
   }
 
+  public city(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+    const item = new CardRenderItem(CardRenderItemType.CITY);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
   public description(description: string): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
@@ -232,7 +244,7 @@ class Builder {
     return this;
   }
 
-  public or(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.or(size));
     return this;
@@ -262,15 +274,47 @@ class Builder {
     return this;
   }
 
+  public colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.colon(size));
+    return this;
+  }
+
   public empty(): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.empty());
     return this;
   }
 
+  public plate(text: string): Builder {
+    const item = new CardRenderItem(CardRenderItemType.PLATE);
+    item.text = text;
+    item.isPlate = true;
+    this._addRowItem(item);
+    return this;
+  }
+
+  public text(text: string, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, uppercase: boolean = false): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TEXT);
+    item.text = text;
+    item.size = size;
+    item.isUppercase = uppercase;
+    this._addRowItem(item);
+    return this;
+  }
+
   public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);
+    return this;
+  }
+
+  /**
+   * add non breakable space or simply empty space between items
+   */
+  public get nbsp(): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.nbsp());
     return this;
   }
 
@@ -305,13 +349,13 @@ class Builder {
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "played" without a CardRenderItem.');
+      }
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"played" could be called on CardRenderItem only');
       }
 
-      if (item === undefined) {
-        throw new Error('Called "played" without a CardRenderItem.');
-      }
       item.isPlayed = true;
       row.push(item);
       this._data.push(row);
@@ -326,14 +370,36 @@ class Builder {
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "digit" without a CardRenderItem.');
+      }
       if (!(item instanceof CardRenderItem)) {
         throw new Error('"digit" could be called on CardRenderItem only');
       }
 
-      if (item === undefined) {
-        throw new Error('Called "digit" without a CardRenderItem.');
-      }
       item.showDigit = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public secondaryTag(tag: Tags): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "secondaryTag" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"secondaryTag" could be called on CardRenderItem only');
+      }
+
+      item.secondaryTag = tag;
       row.push(item);
 
       this._data.push(row);

@@ -11,6 +11,7 @@ export enum CardRenderItemType {
   MEGACREDITS = 'megacredits',
   CARDS = 'cards',
   FLOATERS = 'flaters',
+  ASTEROIDS = 'asteroids',
   MICROBES = 'microbes',
   ANIMALS = 'animals',
   EVENT = 'event',
@@ -22,5 +23,9 @@ export enum CardRenderItemType {
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
   INFLUENCE = 'influence',
+  CITY = 'city',
+  PLATE = 'plate',
+  TEXT = 'text',
+  NBSP = 'nbsp',
   // more to come...
 }

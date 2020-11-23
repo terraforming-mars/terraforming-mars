@@ -5176,20 +5176,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.BIOFERTILIZER_FACILITY, `
-    <div class="card-number">A02</div>
-    <div class="content ">
-        <div class="requirements ">1 Science</div>
-        <div class="production-box production-box-size1a ">
-            <div class="production-prefix plus"></div><div class="plant production "></div>
-        </div>
-        <div class="microbe resource "></div><div class="microbe resource "></div>
-        <div class="ares-tile board-space-tile--biofertilizer_facility"></div>
-        <div class="description " style="text-align:left;">
-            (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)<br>
-        </div>
-    </div>
-`],
     [CardName.BUTTERFLY_EFFECT, `
     <div class="card-number">A03</div>
     <div class="content ">

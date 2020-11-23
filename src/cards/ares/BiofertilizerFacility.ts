@@ -12,6 +12,9 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BiofertilizerFacility implements IProjectCard {
     public cost = 12;
@@ -19,6 +22,19 @@ export class BiofertilizerFacility implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.BIOFERTILIZER_FACILITY;
 
+    public metadata: CardMetadata = {
+      description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
+          'Add up to 2 microbes to any card. ' +
+          'Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.',
+      cardNumber: 'A02',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.plants(1));
+        b.microbes(2);
+        b.br;
+        b.tile('board-space-tile--biofertilizer_facility');
+      }),
+    };
     public canPlay(player: Player, _game: Game): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 1;
     }

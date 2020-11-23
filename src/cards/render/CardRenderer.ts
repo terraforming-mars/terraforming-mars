@@ -4,7 +4,7 @@ import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
 import {Tags} from '../Tags';
 
-type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | string | undefined;
+type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
 export class CardRenderer {
   constructor(protected _rows: Array<Array<ItemType>> = [[]]) {}
@@ -32,8 +32,12 @@ export class CardRenderProductionBox extends CardRenderer {
   }
 }
 
+export class CardRenderTile {
+  constructor(public selector: string) { };
+}
+
 export class CardRenderEffect extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox | string>>) {
+  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox | CardRenderTile | string>>) {
     super(rows);
   }
 
@@ -108,13 +112,22 @@ class Builder {
     }
   }
 
-  protected _addSymbol(Symbol: CardRenderSymbol): void {
+  protected _addSymbol(symbol: CardRenderSymbol): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(Symbol);
+      row.push(symbol);
       this._data.push(row);
     }
   }
+
+  protected _addTile(selector: string): void {
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      row.push(new CardRenderTile(selector));
+      this._data.push(row);
+    }
+  }
+
 
   public temperature(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
@@ -306,6 +319,11 @@ class Builder {
   public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);
+    return this;
+  }
+
+  public tile(selector: string): Builder {
+    this._addTile(selector);
     return this;
   }
 

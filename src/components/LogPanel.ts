@@ -104,8 +104,8 @@ export const LogPanel = Vue.component('log-panel', {
         }
         const data = message.data.map((datum) => {
           return (datum === undefined) ?
-                        'undefined' :
-                        ('(' + datum.type + ') ' + datum.value);
+            'undefined' :
+            ('(' + datum.type + ') ' + datum.value);
         });
         return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
       } catch (err) {
@@ -154,15 +154,15 @@ export const LogPanel = Vue.component('log-panel', {
   },
   mounted: function() {
     fetch(`/api/game/logs?id=${this.id}&limit=50`)
-        .then((response) => response.json())
-        .then((messages) => {
-          this.messages.splice(0, this.messages.length);
-          this.messages.push(...messages);
-          this.$nextTick(this.scrollToEnd);
-        })
-        .catch((error) => {
-          console.error('error updating messages', error);
-        });
+      .then((response) => response.json())
+      .then((messages) => {
+        this.messages.splice(0, this.messages.length);
+        this.messages.push(...messages);
+        this.$nextTick(this.scrollToEnd);
+      })
+      .catch((error) => {
+        console.error('error updating messages', error);
+      });
   },
   template: `
     <div>

@@ -17,12 +17,12 @@ export class PlaceCityTile implements DeferredAction {
       return undefined;
     }
     return new SelectSpace(
-        this.title,
-        this.spaces,
-        (space: ISpace) => {
-          this.game.addCityTile(this.player, space.id);
-          return undefined;
-        },
+      this.title,
+      this.spaces,
+      (space: ISpace) => {
+        this.game.addCityTile(this.player, space.id);
+        return undefined;
+      },
     );
   }
 }

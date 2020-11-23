@@ -19,18 +19,18 @@ export class DiscardCards implements DeferredAction {
       return undefined;
     }
     return new SelectCard(
-        this.title,
-        'Discard',
-        this.player.cardsInHand,
-        (foundCards: Array<IProjectCard>) => {
-          for (const card of foundCards) {
-            this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
-            this.game.dealer.discard(card);
-          }
-          return undefined;
-        },
-        this.count,
-        this.count,
+      this.title,
+      'Discard',
+      this.player.cardsInHand,
+      (foundCards: Array<IProjectCard>) => {
+        for (const card of foundCards) {
+          this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
+          this.game.dealer.discard(card);
+        }
+        return undefined;
+      },
+      this.count,
+      this.count,
     );
   }
 }

@@ -43,15 +43,15 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
       }
 
       return new SelectCard(
-          'Spend 2 MC and select card to add 1 floater',
-          'Add floater',
-          floaterCards,
-          (foundCards: Array<ICard>) => {
-            game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            player.addResourceTo(foundCards[0], 1);
-            return undefined;
-          },
+        'Spend 2 MC and select card to add 1 floater',
+        'Add floater',
+        floaterCards,
+        (foundCards: Array<ICard>) => {
+          game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+          LogHelper.logAddResource(game, player, foundCards[0]);
+          player.addResourceTo(foundCards[0], 1);
+          return undefined;
+        },
       );
     }
 }

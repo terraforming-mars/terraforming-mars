@@ -41,21 +41,21 @@ export class ProjectWorkshop implements CorporationCard {
       const activeCards = player.getCardsByCardType(CardType.ACTIVE);
 
       const flipBlueCard = new SelectOption(
-          'Flip and discard a played blue card',
-          'Select',
-          () => {
-            if (activeCards.length === 1) {
-              this.convertCardPointsToTR(player, game, activeCards[0]);
-              this.discardPlayedCard(player, game, activeCards[0]);
-              player.cardsInHand.push(game.dealer.dealCard());
-              player.cardsInHand.push(game.dealer.dealCard());
+        'Flip and discard a played blue card',
+        'Select',
+        () => {
+          if (activeCards.length === 1) {
+            this.convertCardPointsToTR(player, game, activeCards[0]);
+            this.discardPlayedCard(player, game, activeCards[0]);
+            player.cardsInHand.push(game.dealer.dealCard());
+            player.cardsInHand.push(game.dealer.dealCard());
 
-              return undefined;
-            }
+            return undefined;
+          }
 
-            return new SelectCard(
-                'Select active card to discard',
-                'Discard',
+          return new SelectCard(
+            'Select active card to discard',
+            'Discard',
                     activeCards as Array<ICard>,
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
@@ -65,8 +65,8 @@ export class ProjectWorkshop implements CorporationCard {
 
                       return undefined;
                     },
-            );
-          },
+          );
+        },
       );
 
       const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {

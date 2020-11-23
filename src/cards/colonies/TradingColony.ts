@@ -11,6 +11,7 @@ export class TradingColony implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.TRADING_COLONY;
     public cardType = CardType.ACTIVE;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.canPlayColonyPlacementCard(game);

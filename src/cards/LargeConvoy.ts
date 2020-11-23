@@ -63,17 +63,17 @@ export class LargeConvoy implements IProjectCard {
         }));
       } else {
         availableActions.push(
-            new SelectCard(
-                'Select card to add 4 animals',
-                'Add animals',
-                animalCards,
-                (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], 4);
-                  LogHelper.logAddResource(game, player, foundCards[0], 4);
-                  game.defer(new PlaceOceanTile(player, game));
-                  return undefined;
-                },
-            ),
+          new SelectCard(
+            'Select card to add 4 animals',
+            'Add animals',
+            animalCards,
+            (foundCards: Array<ICard>) => {
+              player.addResourceTo(foundCards[0], 4);
+              LogHelper.logAddResource(game, player, foundCards[0], 4);
+              game.defer(new PlaceOceanTile(player, game));
+              return undefined;
+            },
+          ),
         );
       }
 

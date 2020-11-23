@@ -41,10 +41,10 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public action(player: Player, game: Game) {
     game.defer(new RemoveResourcesFromCard(player, game, this.resourceType));
     game.defer(
-        new DeferredAction(player, () => {
-          player.addResourceTo(this);
-          return undefined;
-        }),
+      new DeferredAction(player, () => {
+        player.addResourceTo(this);
+        return undefined;
+      }),
     );
     return undefined;
   }
@@ -60,5 +60,5 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       });
     }),
     victoryPoints: CardRenderVictoryPoints.microbes(1, 2),
-  }
+  };
 }

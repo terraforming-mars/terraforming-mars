@@ -25,16 +25,16 @@ export class OceanCity implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 3);
 
     return new SelectSpace(
-        'Select space for Ocean City',
-        game.board.getOceansTiles(false),
-        (space: ISpace) => {
-          game.removeTile(space.id);
-          game.addTile(player, space.spaceType, space, {
-            tileType: TileType.OCEAN_CITY,
-            card: this.name,
-          });
-          return undefined;
-        },
+      'Select space for Ocean City',
+      game.board.getOceansTiles(false),
+      (space: ISpace) => {
+        game.removeTile(space.id);
+        game.addTile(player, space.spaceType, space, {
+          tileType: TileType.OCEAN_CITY,
+          card: this.name,
+        });
+        return undefined;
+      },
     );
   }
 }

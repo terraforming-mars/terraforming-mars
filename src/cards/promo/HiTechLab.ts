@@ -29,6 +29,8 @@ export class HiTechLab implements IProjectCard {
           return undefined;
         }
         player.setResource(Resources.ENERGY, -amount);
+        game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
+
         const cardsDrawn: Array<IProjectCard> = [];
         for (let counter = 0; counter < amount; counter++) {
           cardsDrawn.push(game.dealer.dealCard());

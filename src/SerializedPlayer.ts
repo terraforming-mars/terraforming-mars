@@ -1,69 +1,64 @@
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {PlayerInput} from './PlayerInput';
+import {PlayerId} from './Player';
+import {CardName} from './CardName';
 import {Color} from './Color';
+import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export interface SerializedPlayer {
-    id: string;
-    name: string;
-    color: Color;
+    actionsTakenThisRound: number;
+    actionsThisGeneration: Array<string>;
     beginner: boolean;
-    handicap: number;
-    waitingFor?: PlayerInput;
-    waitingForCb?: () => void;
-
-    corporationCard: CorporationCard | undefined;
-    pickedCorporationCard: CorporationCard | undefined;
-
-    terraformRating: number;
-    terraformRatingAtGenerationStart: number;
-
-    megaCredits: number;
-    megaCreditProduction: number;
-    steel: number;
-    steelProduction: number;
-    titanium: number;
-    titaniumProduction: number;
-    plants: number;
-    plantProduction: number;
+    canUseHeatAsMegaCredits: boolean;
+    cardCost: number;
+    cardDiscount: number;
+    cardsInHand: Array<CardName> | Array<IProjectCard>;
+    colonyTradeDiscount: number;
+    colonyTradeOffset: number;
+    colonyVictoryPoints: number;
+    color: Color;
+    corporationCard: SerializedCard | undefined;
+    corporationInitialActionDone: boolean;
+    dealtCorporationCards: Array<CardName> | Array<CorporationCard>;
+    dealtPreludeCards: Array<CardName> | Array<IProjectCard>;
+    dealtProjectCards: Array<CardName> | Array<IProjectCard>;
+    draftedCards: Array<CardName> | Array<IProjectCard>;
     energy: number;
     energyProduction: number;
+    fleetSize: number;
+    generationPlayed: Array<[string, number]>;
+    handicap: number;
+    hasIncreasedTerraformRatingThisGeneration: boolean;
     heat: number;
     heatProduction: number;
-
-    titaniumValue: number;
-    steelValue: number;
-    canUseHeatAsMegaCredits: boolean;
-
-    actionsTakenThisRound: number;
-    actionsThisGeneration: Set<string>;
-    lastCardPlayed: IProjectCard | undefined;
-
-    dealtCorporationCards: Array<CorporationCard>;
-    dealtPreludeCards: Array<IProjectCard>;
-    dealtProjectCards: Array<IProjectCard>;
-
-    cardsInHand: Array<IProjectCard>;
-    preludeCardsInHand: Array<IProjectCard>;
-    playedCards: Array<IProjectCard>;
-    draftedCards: Array<IProjectCard>;
-
-    generationPlayed: Map<string, number>;
-    cardCost: number;
+    id: string;
+    lastCardPlayed?: CardName | IProjectCard;
+    megaCreditProduction: number;
+    megaCredits: number;
+    name: string;
     needsToDraft: boolean | undefined;
-
-    fleetSize: number;
-    tradesThisTurn: number;
-    colonyTradeOffset: number;
-    colonyTradeDiscount: number;
-
-    turmoilScientistsActionUsed: boolean;
-
-    powerPlantCost: number;
-    victoryPointsBreakdown: VictoryPointsBreakdown;
     oceanBonus: number;
-
+    pickedCorporationCard: CardName | CorporationCard | undefined;
+    plantProduction: number;
+    plants: number;
     plantsNeededForGreenery: number;
-    removingPlayers: Array<string>;
+    playedCards: Array<SerializedCard>;
+    powerPlantCost: number;
+    preludeCardsInHand: Array<CardName> | Array<IProjectCard>;
+    removedFromPlayCards: Array<CardName> | Array<IProjectCard>;
+    removingPlayers: Array<PlayerId>;
+    scienceTagCount: number;
+    shouldTriggerCardEffect: boolean;
+    steel: number;
+    steelProduction: number;
+    steelValue: number;
+    terraformRating: number;
+    terraformRatingAtGenerationStart: number;
+    titanium: number;
+    titaniumProduction: number;
+    titaniumValue: number;
+    tradesThisTurn: number;
+    turmoilScientistsActionUsed: boolean;
+    victoryPointsBreakdown: VictoryPointsBreakdown;
 }

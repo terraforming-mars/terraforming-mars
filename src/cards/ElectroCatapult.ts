@@ -24,18 +24,18 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     public action(player: Player, game: Game) {
       if (player.plants > 0 && player.steel > 0) {
         return new OrOptions(
-            new SelectOption('Spend 1 plant to gain 7 mega credit', 'Spend plant', () => {
-              player.plants--;
-              player.megaCredits += 7;
-              this.log(game, player, Resources.PLANTS);
-              return undefined;
-            }),
-            new SelectOption('Spend 1 steel to gain 7 mega credit', 'Spend steel', () => {
-              player.steel--;
-              player.megaCredits += 7;
-              this.log(game, player, Resources.STEEL);
-              return undefined;
-            }),
+          new SelectOption('Spend 1 plant to gain 7 mega credit', 'Spend plant', () => {
+            player.plants--;
+            player.megaCredits += 7;
+            this.log(game, player, Resources.PLANTS);
+            return undefined;
+          }),
+          new SelectOption('Spend 1 steel to gain 7 mega credit', 'Spend steel', () => {
+            player.steel--;
+            player.megaCredits += 7;
+            this.log(game, player, Resources.STEEL);
+            return undefined;
+          }),
         );
       } else if (player.plants > 0) {
         player.plants--;

@@ -28,12 +28,12 @@ describe('ButterflyEffect', function() {
 
     const input = game.deferredActions.next()!.execute() as ShiftAresGlobalParameters;
     input.cb(
-        {
-          lowOceanDelta: -1,
-          highOceanDelta: 1,
-          temperatureDelta: -1,
-          oxygenDelta: 1,
-        },
+      {
+        lowOceanDelta: -1,
+        highOceanDelta: 1,
+        temperatureDelta: -1,
+        oxygenDelta: 1,
+      },
     );
 
     const revisedHazardData = game.aresData!.hazardData;

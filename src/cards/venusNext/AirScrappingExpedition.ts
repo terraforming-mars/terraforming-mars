@@ -49,5 +49,5 @@ export class AirScrappingExpedition implements IProjectCard {
     renderData: CardRenderer.builder((b) => {
       b.venus(1).floaters(3).secondaryTag(Tags.VENUS);
     }),
-  }
+  };
 }

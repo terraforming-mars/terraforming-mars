@@ -37,11 +37,11 @@ export class GreatDamPromo implements IProjectCard {
     }
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
       return game.board.getAvailableSpacesOnLand(player)
-          .filter(
-              (space) => game.board.getAdjacentSpaces(space).filter(
-                  (adjacentSpace) => Board.isOceanSpace(adjacentSpace),
-              ).length > 0,
-          );
+        .filter(
+          (space) => game.board.getAdjacentSpaces(space).filter(
+            (adjacentSpace) => Board.isOceanSpace(adjacentSpace),
+          ).length > 0,
+        );
     }
 }
 

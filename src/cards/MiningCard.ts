@@ -36,8 +36,8 @@ export abstract class MiningCard implements IProjectCard {
     protected getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
       return game.board.getAvailableSpacesOnLand(player)
       // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
-          .filter((space) => space.tile === undefined)
-          .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
+        .filter((space) => space.tile === undefined)
+        .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
     private getSelectTitle(): string {
       let result = 'Select a space with a steel or titanium bonus';

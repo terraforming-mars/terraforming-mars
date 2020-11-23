@@ -20,7 +20,7 @@ export class NaturalPreserve implements IProjectCard {
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
       return game.board.getAvailableSpacesOnLand(player)
-          .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
+        .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
     }
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() <= 4 + player.getRequirementsBonus(game) && this.getAvailableSpaces(player, game).length > 0;

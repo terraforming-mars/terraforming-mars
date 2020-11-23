@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './Board';
@@ -12,20 +11,18 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
-import {Decks} from './Deck';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard} from './cards/ICard';
 import {Colony} from './colonies/Colony';
-import {ILoadable} from './ILoadable';
+import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
-import {MiningArea} from './cards/MiningArea';
-import {MiningRights} from './cards/MiningRights';
+import {MiningCard} from './cards/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
@@ -50,6 +47,7 @@ import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StandardProjectType} from './StandardProjectType';
@@ -63,7 +61,7 @@ import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs
 
 export type PlayerId = string;
 
-export class Player implements ILoadable<SerializedPlayer, Player> {
+export class Player implements ISerializable<SerializedPlayer, Player> {
     public id: PlayerId;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
@@ -263,9 +261,9 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         if (retribution > 0) {
           game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
             b.player(this)
-                .number(retribution)
-                .cardName(CardName.MONS_INSURANCE)
-                .player(monsInsuranceOwner));
+              .number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .player(monsInsuranceOwner));
         }
       }
     }
@@ -292,19 +290,19 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
         game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
           b.player(this)
-              .string(resource)
-              .string(modifier)
-              .number(Math.abs(amount))
-              .player(fromPlayer));
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(fromPlayer));
       }
 
       // Global event logging
       if (game !== undefined && globalEvent && amount !== 0) {
         game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
           b.player(this)
-              .string(resource)
-              .string(modifier)
-              .number(Math.abs(amount)));
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
 
       // Mons Insurance hook
@@ -329,19 +327,19 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         }
         game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
           b.player(this)
-              .string(resource)
-              .string(modifier)
-              .number(Math.abs(amount))
-              .player(fromPlayer));
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(fromPlayer));
       }
 
       // Global event logging
       if (game !== undefined && globalEvent && amount !== 0) {
         game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
           b.player(this)
-              .string(resource)
-              .string(modifier)
-              .number(Math.abs(amount)));
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
 
       // Manutech hook
@@ -434,7 +432,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
-          (playedCard) => playedCard.name === cardName) !== undefined;
+        (playedCard) => playedCard.name === cardName) !== undefined;
     }
 
     public hasProtectedHabitats(): boolean {
@@ -519,9 +517,9 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           if (shouldLogAction) {
             game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
               b.player(removingPlayer)
-                  .number(count)
-                  .player(this)
-                  .card(card));
+                .number(count)
+                .player(this)
+                .card(card));
           }
         }
         // Lawsuit hook
@@ -617,7 +615,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
         tagCount += this.corporationCard.tags.filter(
-            (cardTag) => cardTag === tag,
+          (cardTag) => cardTag === tag,
         ).length;
       }
 
@@ -655,11 +653,11 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
       this.playedCards.filter((card) => card.cardType !== CardType.EVENT)
-          .forEach((card) => {
-            card.tags.forEach((tag) => {
-              allTags.push(tag);
-            });
+        .forEach((card) => {
+          card.tags.forEach((tag) => {
+            allTags.push(tag);
           });
+        });
       for (const tags of allTags) {
         if (tags === Tags.WILDCARD) {
           wildcardCount++;
@@ -697,15 +695,15 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
     private runInputCb(game: Game, result: PlayerInput | undefined): void {
       if (result !== undefined) {
         game.defer(new DeferredAction(
-            this,
-            () => result,
+          this,
+          () => result,
         ));
       }
     }
     private runInput(
-        game: Game,
-        input: Array<Array<string>>,
-        pi: PlayerInput): void {
+      game: Game,
+      input: Array<Array<string>>,
+      pi: PlayerInput): void {
       if (pi instanceof AndOptions) {
         const waiting: AndOptions = pi;
         if (input.length !== waiting.options.length) {
@@ -832,7 +830,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           throw new Error('Too many spaces provided');
         }
         const foundSpace = pi.availableSpaces.find(
-            (space) => space.id === input[0][0],
+          (space) => space.id === input[0][0],
         );
         if (foundSpace === undefined) {
           throw new Error('Space not available');
@@ -846,7 +844,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           throw new Error('Invalid players array provided');
         }
         const foundPlayer = pi.players.find(
-            (player) => player.color === input[0][0] || player.id === input[0][0],
+          (player) => player.color === input[0][0] || player.id === input[0][0],
         );
         if (foundPlayer === undefined) {
           throw new Error('Player not available');
@@ -993,41 +991,41 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       action.buttonLabel = 'Confirm';
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
-            new SelectOption('Increase temperature', 'Increase', () => {
-              game.increaseTemperature(this, 1);
-              game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
-              return undefined;
-            }),
+          new SelectOption('Increase temperature', 'Increase', () => {
+            game.increaseTemperature(this, 1);
+            game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
+            return undefined;
+          }),
         );
       }
       if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
         action.options.push(
-            new SelectOption('Increase oxygen', 'Increase', () => {
-              game.increaseOxygenLevel(this, 1);
-              game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
-              return undefined;
-            }),
+          new SelectOption('Increase oxygen', 'Increase', () => {
+            game.increaseOxygenLevel(this, 1);
+            game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
+            return undefined;
+          }),
         );
       }
       if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         action.options.push(
-            new SelectSpace(
-                'Add an ocean',
-                game.board.getAvailableSpacesForOcean(this), (space) => {
-                  game.addOceanTile(this, space.id, SpaceType.OCEAN);
-                  game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
-                  return undefined;
-                },
-            ),
+          new SelectSpace(
+            'Add an ocean',
+            game.board.getAvailableSpacesForOcean(this), (space) => {
+              game.addOceanTile(this, space.id, SpaceType.OCEAN);
+              game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
+              return undefined;
+            },
+          ),
         );
       }
       if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
         action.options.push(
-            new SelectOption('Increase Venus scale', 'Increase', () => {
-              game.increaseVenusScaleLevel(this, 1);
-              game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
-              return undefined;
-            }),
+          new SelectOption('Increase Venus scale', 'Increase', () => {
+            game.increaseVenusScaleLevel(this, 1);
+            game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
+            return undefined;
+          }),
         );
       }
 
@@ -1055,17 +1053,17 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       this.setWaitingFor(
-          new SelectCard(
-              'Select a card to keep and pass the rest to ' + playerName,
-              'Keep',
-              cards,
-              (foundCards: Array<IProjectCard>) => {
-                this.draftedCards.push(foundCards[0]);
-                cards = cards.filter((card) => card !== foundCards[0]);
-                game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-                return undefined;
-              }, 1, 1,
-          ), () => { },
+        new SelectCard(
+          'Select a card to keep and pass the rest to ' + playerName,
+          'Keep',
+          cards,
+          (foundCards: Array<IProjectCard>) => {
+            this.draftedCards.push(foundCards[0]);
+            cards = cards.filter((card) => card !== foundCards[0]);
+            game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+            return undefined;
+          }, 1, 1,
+        ), () => { },
       );
     }
 
@@ -1090,15 +1088,15 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         });
         // Discard the cards which were not purchased.
         dealtCards
-            .filter(
-                (card) => selectedCards
-                    .find(
-                        (foundCard) => foundCard.name === card.name,
-                    ) === undefined,
-            )
-            .forEach((card) => {
-              game.dealer.discard(card);
-            });
+          .filter(
+            (card) => selectedCards
+              .find(
+                (foundCard) => foundCard.name === card.name,
+              ) === undefined,
+          )
+          .forEach((card) => {
+            game.dealer.discard(card);
+          });
         game.log('${0} bought ${1} card(s)', (b) => b.player(this).number(selectedCards.length));
         game.playerIsFinishedWithResearchPhase(this);
       };
@@ -1112,20 +1110,19 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       this.setWaitingFor(
-          new SelectCard(
-              'Select which cards to take into hand',
-              'Buy',
-              dealtCards,
-              (foundCards: Array<IProjectCard>) => {
-                selectedCards = foundCards;
-                return undefined;
-              }, maxPurchaseQty, 0,
-          ), () => {
-            payForCards();
-          },
+        new SelectCard(
+          'Select which cards to take into hand',
+          'Buy',
+          dealtCards,
+          (foundCards: Array<IProjectCard>) => {
+            selectedCards = foundCards;
+            return undefined;
+          }, maxPurchaseQty, 0,
+        ), () => {
+          payForCards();
+        },
       );
     }
-
 
     public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
       const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
@@ -1134,14 +1131,14 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         if (card.targetCards.length > 0) {
           for (const targetCard of card.targetCards) {
             cards.push(
-                {
-                  resources: targetCard.resourceCount,
-                  resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
-                  name: targetCard.card.name,
-                  calculatedCost: this.getCardCost(game, targetCard.card),
-                  cardType: card.cardType,
-                  isDisabled: false,
-                },
+              {
+                resources: targetCard.resourceCount,
+                resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
+                name: targetCard.card.name,
+                calculatedCost: this.getCardCost(game, targetCard.card),
+                cardType: card.cardType,
+                isDisabled: false,
+              },
             );
           }
           return cards;
@@ -1195,14 +1192,14 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private playPreludeCard(game: Game): PlayerInput {
       return new SelectCard(
-          'Select prelude card to play',
-          'Play',
-          this.getPlayablePreludeCards(game),
-          (foundCards: Array<IProjectCard>) => {
-            return this.playCard(game, foundCards[0]);
-          },
-          1,
-          1,
+        'Select prelude card to play',
+        'Play',
+        this.getPlayablePreludeCards(game),
+        (foundCards: Array<IProjectCard>) => {
+          return this.playCard(game, foundCards[0]);
+        },
+        1,
+        1,
       );
     }
 
@@ -1259,11 +1256,11 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     public playProjectCard(game: Game): PlayerInput {
       return new SelectHowToPayForCard(
-          this.getPlayableCards(game),
-          this.getMicrobesCanSpend(),
-          this.getFloatersCanSpend(),
-          this.canUseHeatAsMegaCredits,
-          (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, game),
+        this.getPlayableCards(game),
+        this.getMicrobesCanSpend(),
+        this.getFloatersCanSpend(),
+        this.canUseHeatAsMegaCredits,
+        (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, game),
       );
     }
 
@@ -1320,8 +1317,8 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       const action = selectedCard.play(this, game);
       if (action !== undefined) {
         game.defer(new DeferredAction(
-            this,
-            () => action,
+          this,
+          () => action,
         ));
       }
 
@@ -1354,8 +1351,8 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
           if (actionFromPlayedCard !== undefined) {
             game.defer(new DeferredAction(
-                this,
-                () => actionFromPlayedCard,
+              this,
+              () => actionFromPlayedCard,
             ));
           }
         }
@@ -1366,8 +1363,8 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
           if (actionFromPlayedCard !== undefined) {
             game.defer(new DeferredAction(
-                this,
-                () => actionFromPlayedCard,
+              this,
+              () => actionFromPlayedCard,
             ));
           }
         }
@@ -1378,22 +1375,22 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private playActionCard(game: Game): PlayerInput {
       return new SelectCard(
-          'Perform an action from a played card',
-          'Take action',
-          this.getPlayableActionCards(game),
-          (foundCards: Array<ICard>) => {
-            const foundCard = foundCards[0];
-            const action = foundCard.action!(this, game);
-            if (action !== undefined) {
-              game.defer(new DeferredAction(
-                  this,
-                  () => action,
-              ));
-            }
-            this.actionsThisGeneration.add(foundCard.name);
-            game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
-            return undefined;
-          },
+        'Perform an action from a played card',
+        'Take action',
+        this.getPlayableActionCards(game),
+        (foundCards: Array<ICard>) => {
+          const foundCard = foundCards[0];
+          const action = foundCard.action!(this, game);
+          if (action !== undefined) {
+            game.defer(new DeferredAction(
+              this,
+              () => action,
+            ));
+          }
+          this.actionsThisGeneration.add(foundCard.name);
+          game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
+          return undefined;
+        },
       );
     }
 
@@ -1411,24 +1408,24 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private sellPatents(game: Game): PlayerInput {
       const result = new SelectCard(
-          'Sell patents',
-          'Sell',
-          this.cardsInHand,
-          (foundCards: Array<IProjectCard>) => {
-            this.onStandardProject(StandardProjectType.SELLING_PATENTS);
-            this.megaCredits += foundCards.length;
-            foundCards.forEach((card) => {
-              for (let i = 0; i < this.cardsInHand.length; i++) {
-                if (this.cardsInHand[i].name === card.name) {
-                  this.cardsInHand.splice(i, 1);
-                  break;
-                }
+        'Sell patents',
+        'Sell',
+        this.cardsInHand,
+        (foundCards: Array<IProjectCard>) => {
+          this.onStandardProject(StandardProjectType.SELLING_PATENTS);
+          this.megaCredits += foundCards.length;
+          foundCards.forEach((card) => {
+            for (let i = 0; i < this.cardsInHand.length; i++) {
+              if (this.cardsInHand[i].name === card.name) {
+                this.cardsInHand.splice(i, 1);
+                break;
               }
-              game.dealer.discard(card);
-            });
-            game.log('${0} sold ${1} patents', (b) => b.player(this).number(foundCards.length));
-            return undefined;
-          }, this.cardsInHand.length,
+            }
+            game.dealer.discard(card);
+          });
+          game.log('${0} sold ${1} patents', (b) => b.player(this).number(foundCards.length));
+          return undefined;
+        }, this.cardsInHand.length,
       );
 
       return result;
@@ -1440,16 +1437,16 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         openColonies.forEach((colony) => {
           if (colony.name === colonyName) {
             game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.BUILD_COLONY_COST,
-                false,
-                false,
-                'Select how to pay for Colony project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Build Colony'));
-                  colony.addColony(this, game);
-                  this.onStandardProject(StandardProjectType.BUILD_COLONY);
-                },
+              this,
+              constants.BUILD_COLONY_COST,
+              false,
+              false,
+              'Select how to pay for Colony project',
+              () => {
+                game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Build Colony'));
+                colony.addColony(this, game);
+                this.onStandardProject(StandardProjectType.BUILD_COLONY);
+              },
             ));
             return undefined;
           }
@@ -1461,156 +1458,156 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
-          'Air scrapping (' + constants.AIR_SCRAPPING_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.AIR_SCRAPPING_COST,
-                false,
-                false,
-                'Select how to pay for Air Scrapping project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Air Scrapping'));
-                  game.increaseVenusScaleLevel(this, 1);
-                  this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
-                },
-            ));
-            return undefined;
-          },
+        'Air scrapping (' + constants.AIR_SCRAPPING_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.AIR_SCRAPPING_COST,
+            false,
+            false,
+            'Select how to pay for Air Scrapping project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Air Scrapping'));
+              game.increaseVenusScaleLevel(this, 1);
+              this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private bufferGas(game: Game): PlayerInput {
       return new SelectOption(
-          'Buffer Gas (' + constants.BUFFER_GAS_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.BUFFER_GAS_COST,
-                false,
-                false,
-                'Select how to pay for Buffer Gas project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Buffer Gas'));
-                  this.increaseTerraformRatingSteps(1, game);
-                  this.onStandardProject(StandardProjectType.BUFFER_GAS);
-                },
-            ));
-            return undefined;
-          },
+        'Buffer Gas (' + constants.BUFFER_GAS_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.BUFFER_GAS_COST,
+            false,
+            false,
+            'Select how to pay for Buffer Gas project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Buffer Gas'));
+              this.increaseTerraformRatingSteps(1, game);
+              this.onStandardProject(StandardProjectType.BUFFER_GAS);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
-          'Power plant (' + this.powerPlantCost + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                this.powerPlantCost,
-                false,
-                false,
-                'Select how to pay for Power Plant project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Power plant'));
-                  this.addProduction(Resources.ENERGY);
-                  this.onStandardProject(StandardProjectType.POWER_PLANT);
-                },
-            ));
-            return undefined;
-          },
+        'Power plant (' + this.powerPlantCost + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            this.powerPlantCost,
+            false,
+            false,
+            'Select how to pay for Power Plant project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Power plant'));
+              this.addProduction(Resources.ENERGY);
+              this.onStandardProject(StandardProjectType.POWER_PLANT);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private asteroid(game: Game): PlayerInput {
       return new SelectOption(
-          'Asteroid (' + constants.ASTEROID_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.ASTEROID_COST,
-                false,
-                false,
-                'Select how to pay for Asteroid project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Asteroid'));
-                  game.increaseTemperature(this, 1);
-                  this.onStandardProject(StandardProjectType.ASTEROID);
-                },
-            ));
-            return undefined;
-          },
+        'Asteroid (' + constants.ASTEROID_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.ASTEROID_COST,
+            false,
+            false,
+            'Select how to pay for Asteroid project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Asteroid'));
+              game.increaseTemperature(this, 1);
+              this.onStandardProject(StandardProjectType.ASTEROID);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private aquifer(game: Game): PlayerInput {
       return new SelectOption(
-          'Aquifer (' + constants.AQUIFER_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.AQUIFER_COST,
-                false,
-                false,
-                'Select how to pay for Aquifer project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Aquifer'));
-                  game.defer(new PlaceOceanTile(this, game, 'Select space for ocean'));
-                  this.onStandardProject(StandardProjectType.AQUIFER);
-                },
-            ));
-            return undefined;
-          },
+        'Aquifer (' + constants.AQUIFER_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.AQUIFER_COST,
+            false,
+            false,
+            'Select how to pay for Aquifer project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Aquifer'));
+              game.defer(new PlaceOceanTile(this, game, 'Select space for ocean'));
+              this.onStandardProject(StandardProjectType.AQUIFER);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private addGreenery(game: Game): PlayerInput {
       return new SelectOption(
-          'Greenery (' + constants.GREENERY_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.GREENERY_COST,
-                false,
-                false,
-                'Select how to pay for Greenery project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Greenery'));
-                  game.defer(new PlaceGreeneryTile(this, game));
-                  this.onStandardProject(StandardProjectType.GREENERY);
-                },
-            ));
-            return undefined;
-          },
+        'Greenery (' + constants.GREENERY_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.GREENERY_COST,
+            false,
+            false,
+            'Select how to pay for Greenery project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Greenery'));
+              game.defer(new PlaceGreeneryTile(this, game));
+              this.onStandardProject(StandardProjectType.GREENERY);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
     private addCity(game: Game): PlayerInput {
       return new SelectOption(
-          'City (' + constants.CITY_COST + ' MC)',
-          'Confirm',
-          () => {
-            game.defer(new SelectHowToPayDeferred(
-                this,
-                constants.CITY_COST,
-                false,
-                false,
-                'Select how to pay for City project',
-                () => {
-                  game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('City'));
-                  game.defer(new PlaceCityTile(this, game));
-                  this.onStandardProject(StandardProjectType.CITY);
-                  this.addProduction(Resources.MEGACREDITS);
-                },
-            ));
-            return undefined;
-          },
+        'City (' + constants.CITY_COST + ' MC)',
+        'Confirm',
+        () => {
+          game.defer(new SelectHowToPayDeferred(
+            this,
+            constants.CITY_COST,
+            false,
+            false,
+            'Select how to pay for City project',
+            () => {
+              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('City'));
+              game.defer(new PlaceCityTile(this, game));
+              this.onStandardProject(StandardProjectType.CITY);
+              this.addProduction(Resources.MEGACREDITS);
+            },
+          ));
+          return undefined;
+        },
       );
     }
 
@@ -1626,14 +1623,14 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
             game.log('${0} traded with ${1}', (b) => b.player(this).colony(colony));
             if (payWith === Resources.MEGACREDITS) {
               game.defer(new SelectHowToPayDeferred(
-                  this,
-                  9 - this.colonyTradeDiscount,
-                  false,
-                  false,
-                  'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
-                  () => {
-                    colony.trade(this, game);
-                  },
+                this,
+                9 - this.colonyTradeDiscount,
+                false,
+                false,
+                'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
+                () => {
+                  colony.trade(this, game);
+                },
               ));
             } else if (payWith === Resources.ENERGY) {
               this.energy -= (3 - this.colonyTradeDiscount);
@@ -1688,10 +1685,10 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       opts.push(selectColony);
 
       const trade = new AndOptions(
-          () => {
-            return undefined;
-          },
-          ...opts,
+        () => {
+          return undefined;
+        },
+        ...opts,
       );
 
       trade.title = 'Trade with a colony';
@@ -1702,53 +1699,53 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
       return new SelectSpace(
-          `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-          game.board.getAvailableSpacesForGreenery(this),
-          (space: ISpace) => {
-            game.addGreenery(this, space.id);
-            this.plants -= this.plantsNeededForGreenery;
-            game.log('${0} converted plants into a greenery', (b) => b.player(this));
-            return undefined;
-          },
+        `Convert ${this.plantsNeededForGreenery} plants into greenery`,
+        game.board.getAvailableSpacesForGreenery(this),
+        (space: ISpace) => {
+          game.addGreenery(this, space.id);
+          this.plants -= this.plantsNeededForGreenery;
+          game.log('${0} converted plants into a greenery', (b) => b.player(this));
+          return undefined;
+        },
       );
     }
 
     private turmoilKelvinistsAction(game: Game): PlayerInput {
       return new SelectOption(
-          'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
-          'Pay',
-          () => {
-            game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
-            this.addProduction(Resources.ENERGY);
-            this.addProduction(Resources.HEAT);
-            game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
-            return undefined;
-          },
+        'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
+        'Pay',
+        () => {
+          game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
+          this.addProduction(Resources.ENERGY);
+          this.addProduction(Resources.HEAT);
+          game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
+          return undefined;
+        },
       );
     }
 
     private turmoilScientistsAction(game: Game): PlayerInput {
       return new SelectOption(
-          'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
-          'Pay',
-          () => {
-            game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
-            this.turmoilScientistsActionUsed = true;
-            this.cardsInHand.push(
-                game.dealer.dealCard(),
-                game.dealer.dealCard(),
-                game.dealer.dealCard(),
-            );
-            game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
-            return undefined;
-          },
+        'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
+        'Pay',
+        () => {
+          game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
+          this.turmoilScientistsActionUsed = true;
+          this.cardsInHand.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+          );
+          game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
+          return undefined;
+        },
       );
     }
 
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         return (this.corporationCard as StormCraftIncorporated).convertHeatIntoTemperature(
-            game, this,
+          game, this,
         );
       }
       return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
@@ -1786,7 +1783,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
         const players: Array<Player> = game.getPlayers().slice();
         players.sort(
-            (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game),
+          (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game),
         );
 
         // We have one rank 1 player
@@ -1855,26 +1852,26 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         action.title = 'Place any final greenery from plants';
         action.buttonLabel = 'Confirm';
         action.options.push(
-            new SelectSpace(
-                'Select space for greenery',
-                game.board.getAvailableSpacesForGreenery(this), (space) => {
-                  // Do not raise oxygen or award TR for final greenery placements
-                  game.addGreenery(this, space.id, SpaceType.LAND, false);
-                  this.plants -= this.plantsNeededForGreenery;
-                  this.takeActionForFinalGreenery(game);
+          new SelectSpace(
+            'Select space for greenery',
+            game.board.getAvailableSpacesForGreenery(this), (space) => {
+              // Do not raise oxygen or award TR for final greenery placements
+              game.addGreenery(this, space.id, SpaceType.LAND, false);
+              this.plants -= this.plantsNeededForGreenery;
+              this.takeActionForFinalGreenery(game);
 
-                  // Resolve Philares deferred actions
-                  if (game.deferredActions.length > 0) this.resolveFinalGreeneryDeferredActions(game);
+              // Resolve Philares deferred actions
+              if (game.deferredActions.length > 0) this.resolveFinalGreeneryDeferredActions(game);
 
-                  return undefined;
-                },
-            ),
+              return undefined;
+            },
+          ),
         );
         action.options.push(
-            new SelectOption('Don\'t place a greenery', 'Confirm', () => {
-              game.playerIsDoneWithGame(this);
-              return undefined;
-            }),
+          new SelectOption('Don\'t place a greenery', 'Confirm', () => {
+            game.playerIsDoneWithGame(this);
+            return undefined;
+          }),
         );
         this.setWaitingFor(action, () => {});
         return;
@@ -1920,7 +1917,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         }
 
         const psychrophiles = this.playedCards.find(
-            (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+          (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
 
         if (psychrophiles !== undefined &&
            psychrophiles.resourceCount &&
@@ -1929,7 +1926,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         }
 
         const dirigibles = this.playedCards.find(
-            (playedCard) => playedCard.name === CardName.DIRIGIBLES);
+          (playedCard) => playedCard.name === CardName.DIRIGIBLES);
 
         if (dirigibles !== undefined &&
            dirigibles.resourceCount &&
@@ -1977,7 +1974,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
-            this.buildPowerPlant(game),
+          this.buildPowerPlant(game),
         );
       }
 
@@ -1986,7 +1983,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE) {
         standardProjects.options.push(
-            this.asteroid(game),
+          this.asteroid(game),
         );
       }
 
@@ -1995,7 +1992,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.canAfford(aquiferCost) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         standardProjects.options.push(
-            this.aquifer(game),
+          this.aquifer(game),
         );
       }
 
@@ -2005,7 +2002,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(
-            this.addGreenery(game),
+          this.addGreenery(game),
         );
       }
 
@@ -2013,7 +2010,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         this.canAfford(constants.CITY_COST) &&
             game.board.getAvailableSpacesForCity(this).length > 0) {
         standardProjects.options.push(
-            this.addCity(game),
+          this.addCity(game),
         );
       }
 
@@ -2024,7 +2021,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         this.canAfford(airScrappingCost) &&
         game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
-            this.airScrapping(game),
+          this.airScrapping(game),
         );
       }
 
@@ -2040,7 +2037,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
         if (openColonies.length > 0) {
           standardProjects.options.push(
-              this.buildColony(game, openColonies),
+            this.buildColony(game, openColonies),
           );
         }
       }
@@ -2050,7 +2047,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (game.gameOptions.soloTR && this.canAfford(bufferGasCost)) {
         standardProjects.options.push(
-            this.bufferGas(game),
+          this.bufferGas(game),
         );
       }
 
@@ -2112,8 +2109,8 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
           return undefined;
         });
         const initialActionOrPass = new OrOptions(
-            initialActionOption,
-            this.passOption(game),
+          initialActionOption,
+          this.passOption(game),
         );
         this.setWaitingFor(initialActionOrPass, () => {
           this.actionsTakenThisRound++;
@@ -2129,13 +2126,13 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (this.getPlayableCards(game).length > 0) {
         action.options.push(
-            this.playProjectCard(game),
+          this.playProjectCard(game),
         );
       }
 
       if (this.getPlayableActionCards(game).length > 0) {
         action.options.push(
-            this.playActionCard(game),
+          this.playActionCard(game),
         );
       }
 
@@ -2148,7 +2145,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
             this.titanium >= (3 - this.colonyTradeDiscount))
         ) {
           action.options.push(
-              this.tradeWithColony(openColonies, game),
+            this.tradeWithColony(openColonies, game),
           );
         }
       }
@@ -2162,7 +2159,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
         action.options.push(
-            this.convertPlantsIntoGreenery(game),
+          this.convertPlantsIntoGreenery(game),
         );
       }
 
@@ -2177,7 +2174,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
         action.options.push(
-            this.convertHeatIntoTemperature(game),
+          this.convertHeatIntoTemperature(game),
         );
       }
 
@@ -2197,13 +2194,13 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = 'Claim a milestone';
         remainingMilestones.options = game.milestones
-            .filter(
-                (milestone: IMilestone) =>
-                  !game.milestoneClaimed(milestone) &&
+          .filter(
+            (milestone: IMilestone) =>
+              !game.milestoneClaimed(milestone) &&
                         milestone.canClaim(this, game))
-            .map(
-                (milestone: IMilestone) =>
-                  this.claimMilestone(milestone, game));
+          .map(
+            (milestone: IMilestone) =>
+              this.claimMilestone(milestone, game));
 
         if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
       }
@@ -2237,7 +2234,7 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
 
       if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption) {
         action.options.push(
-            this.endTurnOption(game),
+          this.endTurnOption(game),
         );
       }
 
@@ -2248,8 +2245,8 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
         remainingAwards.title = 'Fund an award';
         remainingAwards.buttonLabel = 'Confirm';
         remainingAwards.options = game.awards
-            .filter((award: IAward) => game.hasBeenFunded(award) === false)
-            .map((award: IAward) => this.fundAward(award, game));
+          .filter((award: IAward) => game.hasBeenFunded(award) === false)
+          .map((award: IAward) => this.fundAward(award, game));
         action.options.push(remainingAwards);
       }
 
@@ -2262,12 +2259,12 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       action.options.push(
-          this.passOption(game),
+        this.passOption(game),
       );
 
       if (this.cardsInHand.length > 0) {
         action.options.push(
-            this.sellPatents(game),
+          this.sellPatents(game),
         );
       }
 
@@ -2309,8 +2306,101 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       this.waitingForCb = cb;
     }
 
-    private getCorporationCardByName(name: string) {
-      return Decks.findByName(ALL_CORPORATION_DECKS, name);
+    private serializePlayedCards(): Array<SerializedCard> {
+      return this.playedCards.map((c) => {
+        const result: SerializedCard = {
+          name: c.name,
+          resourceCount: c.resourceCount,
+        };
+        if (c instanceof SelfReplicatingRobots) {
+          result.targetCards = c.targetCards;
+        }
+        return result;
+      });
+    }
+
+    public serialize(): SerializedPlayer {
+      const result: SerializedPlayer = {
+        id: this.id,
+        corporationCard: this.corporationCard === undefined ? undefined : {
+          name: this.corporationCard.name,
+          resourceCount: this.corporationCard.resourceCount,
+          allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
+          isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
+        },
+        // Used only during set-up
+        pickedCorporationCard: this.pickedCorporationCard,
+        // Terraforming Rating
+        terraformRating: this.terraformRating,
+        hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
+        terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
+        // Resources
+        megaCredits: this.megaCredits,
+        megaCreditProduction: this.megaCreditProduction,
+        steel: this.steel,
+        steelProduction: this.steelProduction,
+        titanium: this.titanium,
+        titaniumProduction: this.titaniumProduction,
+        plants: this.plants,
+        plantProduction: this.plantProduction,
+        energy: this.energy,
+        energyProduction: this.energyProduction,
+        heat: this.heat,
+        heatProduction: this.heatProduction,
+        // Resource values
+        titaniumValue: this.titaniumValue,
+        steelValue: this.steelValue,
+        // Helion
+        canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
+        // This generation / this round
+        actionsTakenThisRound: this.actionsTakenThisRound,
+        actionsThisGeneration: Array.from(this.actionsThisGeneration),
+        corporationInitialActionDone: this.corporationInitialActionDone,
+        // Cards
+        dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
+        dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
+        dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
+        cardsInHand: this.cardsInHand.map((c) => c.name),
+        preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
+        playedCards: this.serializePlayedCards(),
+        draftedCards: this.draftedCards.map((c) => c.name),
+        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
+        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
+        generationPlayed: Array.from(this.generationPlayed),
+        cardCost: this.cardCost,
+        needsToDraft: this.needsToDraft,
+        cardDiscount: this.cardDiscount,
+        // Colonies
+        fleetSize: this.fleetSize,
+        tradesThisTurn: this.tradesThisTurn,
+        colonyTradeOffset: this.colonyTradeOffset,
+        colonyTradeDiscount: this.colonyTradeDiscount,
+        colonyVictoryPoints: this.colonyVictoryPoints,
+        // Turmoil
+        turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
+        // Controlled by cards with effects that might be called a second time recursively, I think.
+        // They set this to false in order to prevent card effects from triggering twice.
+        // Not sure this is clear.
+        shouldTriggerCardEffect: this.shouldTriggerCardEffect,
+        powerPlantCost: this.powerPlantCost,
+        victoryPointsBreakdown: this.victoryPointsBreakdown,
+        oceanBonus: this.oceanBonus,
+        // Custom cards
+        // Leavitt Station.
+        scienceTagCount: this.scienceTagCount,
+        // Ecoline
+        plantsNeededForGreenery: this.plantsNeededForGreenery,
+        // Lawsuit
+        removingPlayers: this.removingPlayers,
+        name: this.name,
+        color: this.color,
+        beginner: this.beginner,
+        handicap: this.handicap,
+      };
+      if (this.lastCardPlayed !== undefined) {
+        result.lastCardPlayed = this.lastCardPlayed.name;
+      }
+      return result;
     }
 
     // Function used to rebuild each objects
@@ -2325,22 +2415,28 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
-        this.pickedCorporationCard = this.getCorporationCardByName(d.pickedCorporationCard.name);
+        this.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
       }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
-        this.corporationCard = this.getCorporationCardByName(d.corporationCard.name);
-        if (d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
-          this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        this.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
+        if (this.corporationCard !== undefined) {
+          if (d.corporationCard.resourceCount !== undefined) {
+            this.corporationCard.resourceCount = d.corporationCard.resourceCount;
+          }
         }
-        if (d.corporationCard.name === CardName.ARIDOR) {
-          (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
+        if (this.corporationCard instanceof Aridor) {
+          if (d.corporationCard.allTags !== undefined) {
+            this.corporationCard.allTags = new Set(d.corporationCard.allTags);
+          } else {
+            console.warn('did not find allTags for ARIDOR');
+          }
         }
-        if (d.corporationCard.name === CardName.PHARMACY_UNION) {
-          if ((d.corporationCard as PharmacyUnion).isDisabled) {
-            (this.corporationCard as PharmacyUnion).tags = [];
-            (this.corporationCard as PharmacyUnion).isDisabled = true;
+        if (this.corporationCard instanceof PharmacyUnion) {
+          if (d.corporationCard.isDisabled === true) {
+            this.corporationCard.tags = [];
+            this.corporationCard.isDisabled = true;
           }
         }
       } else {
@@ -2348,58 +2444,48 @@ export class Player implements ILoadable<SerializedPlayer, Player> {
       }
 
       // Rebuild dealt corporation array
-      this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard) => {
-        return this.getCorporationCardByName(element.name)!;
-      });
+      this.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
 
       // Rebuild dealt prelude array
-      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
 
       // Rebuild dealt cards array
-      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
 
       // Rebuild each cards in hand
-      this.cardsInHand = d.cardsInHand.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
 
       // Rebuild each prelude in hand
-      this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
 
       // Rebuild each played card
-      this.playedCards = d.playedCards.map((element: IProjectCard) => {
+      this.playedCards = d.playedCards.map((element: SerializedCard) => {
         const card = cardFinder.getProjectCardByName(element.name)!;
-        if (element.resourceCount && element.resourceCount > 0) {
+        if (element.resourceCount !== undefined) {
           card.resourceCount = element.resourceCount;
         }
-
-        if (card instanceof SelfReplicatingRobots) {
-          const targetCards = (element as SelfReplicatingRobots).targetCards;
-          if (targetCards !== undefined) {
-            card.targetCards = targetCards;
-            card.targetCards.forEach((robotCard) => robotCard.card = cardFinder.getProjectCardByName(robotCard.card.name)!);
-          }
+        if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
+          card.targetCards = [];
+          element.targetCards.forEach((targetCard) => {
+            const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
+            if (foundTargetCard !== undefined) {
+              card.targetCards.push({
+                card: foundTargetCard,
+                resourceCount: targetCard.resourceCount,
+              });
+            } else {
+              console.warn('did not find card for SelfReplicatingRobots', targetCard);
+            }
+          });
         }
-        if (card instanceof MiningArea || card instanceof MiningRights) {
-          const bonusResource = (element as MiningArea).bonusResource;
-          if (bonusResource !== undefined) {
-            card.bonusResource = bonusResource;
-          }
+        if (card instanceof MiningCard && element.bonusResource !== undefined) {
+          card.bonusResource = element.bonusResource;
         }
-
         return card;
       });
 
       // Rebuild each drafted cards
-      this.draftedCards = d.draftedCards.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
+      this.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
       return o;
     }

@@ -29,16 +29,16 @@ export class FreyjaBiodomes implements IProjectCard {
 
       if (cards.length > 1) {
         return new SelectCard(
-            'Select card to add 2 resources',
-            'Add resources',
-            cards,
-            (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 2);
-              player.addProduction(Resources.ENERGY, -1);
-              player.addProduction(Resources.MEGACREDITS, 2);
-              LogHelper.logAddResource(game, player, foundCards[0], 2);
-              return undefined;
-            },
+          'Select card to add 2 resources',
+          'Add resources',
+          cards,
+          (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 2);
+            player.addProduction(Resources.ENERGY, -1);
+            player.addProduction(Resources.MEGACREDITS, 2);
+            LogHelper.logAddResource(game, player, foundCards[0], 2);
+            return undefined;
+          },
         );
       }
 

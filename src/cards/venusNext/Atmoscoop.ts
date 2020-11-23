@@ -53,11 +53,16 @@ export class Atmoscoop implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
-    const addFloaters = new SelectCard('Select card to add 2 floaters', 'Add floaters', floaterCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], 2);
-      LogHelper.logAddResource(game, player, foundCards[0], 2);
-      return undefined;
-    });
+    const addFloaters = new SelectCard(
+      'Select card to add 2 floaters',
+      'Add floaters',
+      floaterCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], 2);
+        LogHelper.logAddResource(game, player, foundCards[0], 2);
+        return undefined;
+      },
+    );
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       game.increaseTemperature(player, 2);
@@ -66,21 +71,25 @@ export class Atmoscoop implements IProjectCard {
     }
 
     switch (floaterCards.length) {
-      case 1:
-        player.addResourceTo(floaterCards[0], 2);
-        LogHelper.logAddResource(game, player, floaterCards[0], 2);
+    case 1:
+      player.addResourceTo(floaterCards[0], 2);
+      LogHelper.logAddResource(game, player, floaterCards[0], 2);
 
-      case 0:
-        if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-          return new OrOptions(increaseTemp, increaseVenus);
-        }
-        return undefined;
+    case 0:
+      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
+        return new OrOptions(increaseTemp, increaseVenus);
+      }
+      return undefined;
 
-      default:
-        if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-          return new AndOptions(() => undefined, new OrOptions(increaseTemp, increaseVenus), addFloaters);
-        }
-        return addFloaters;
+    default:
+      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
+        return new AndOptions(
+          () => undefined,
+          new OrOptions(increaseTemp, increaseVenus),
+          addFloaters,
+        );
+      }
+      return addFloaters;
     }
   }
 
@@ -95,6 +104,7 @@ export class Atmoscoop implements IProjectCard {
   private venusIsMaxed(game: Game) {
     return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
+
   public metadata: CardMetadata = {
     cardNumber: '217',
     description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card',
@@ -104,5 +114,5 @@ export class Atmoscoop implements IProjectCard {
       b.floaters(2).asterix();
     }),
     victoryPoints: 1,
-  }
+  };
 }

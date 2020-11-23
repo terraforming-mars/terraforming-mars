@@ -14,7 +14,7 @@ export class Riots implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const city = game.board.spaces.filter(
-            (space) => Board.isCitySpace(space) &&
+          (space) => Board.isCitySpace(space) &&
                          space.player === player,
         ).length;
         const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);

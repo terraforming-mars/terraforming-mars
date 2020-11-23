@@ -36,7 +36,7 @@ export const Bonus = Vue.component('bonus', {
     for (const bonus of this.bonus) {
       idx += 1;
       bonuses.push(
-          createElement('i', {'class': build_css_class(idx, bonus)}),
+        createElement('i', {'class': build_css_class(idx, bonus)}),
       );
     }
     return createElement('div', {'class': 'board-space-bonuses'}, bonuses);

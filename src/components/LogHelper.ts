@@ -45,21 +45,21 @@ export class LogHelper {
     let type : string;
 
     switch (tileType) {
-      case TileType.GREENERY:
-        type = 'greenery tile';
-        break;
+    case TileType.GREENERY:
+      type = 'greenery tile';
+      break;
 
-      case TileType.CITY:
-        type = 'city tile';
-        break;
+    case TileType.CITY:
+      type = 'city tile';
+      break;
 
-      case TileType.OCEAN:
-        type = 'ocean tile';
-        break;
+    case TileType.OCEAN:
+      type = 'ocean tile';
+      break;
 
-      default:
-        type = 'special tile';
-        break;
+    default:
+      type = 'special tile';
+      break;
     }
 
     this.logBoardTileAction(game, player, space, type);

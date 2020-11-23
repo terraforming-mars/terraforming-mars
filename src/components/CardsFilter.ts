@@ -45,7 +45,7 @@ export const CardsFilter = Vue.component('cards-filter', {
         return;
       }
       const newCardNames = allItems.filter(
-          (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+        (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1,
       ).sort();
       this.foundCardNames = newCardNames.slice(0, 5);
     },

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PoliticalAlliance} from '../../../src/cards/turmoil/PoliticalAlliance';
 import {Player} from '../../../src/Player';
 import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
+import {GameOptions, Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
@@ -14,7 +14,7 @@ describe('PoliticalAlliance', function() {
     card = new PoliticalAlliance();
     player = new Player('test', Color.BLUE, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);
     turmoil = game.turmoil!;
   });

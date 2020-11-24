@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Playwrights} from '../../../src/cards/community/Playwrights';
+import {Playwrights} from '../../../src/cards/community/corporations/Playwrights';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';

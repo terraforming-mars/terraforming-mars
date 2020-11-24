@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
+import {AgricolaInc} from '../../../src/cards/community/corporations/AgricolaInc';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';

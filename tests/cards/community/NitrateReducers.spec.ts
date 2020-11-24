@@ -1,16 +1,17 @@
 import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {VenusFirst} from '../../../src/cards/community/preludes/VenusFirst';
 import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
+import {NitrateReducers} from '../../../src/cards/community/preludes/NitrateReducers';
+import {Resources} from '../../../src/Resources';
 
-describe('VenusFirst', function() {
-  let card : VenusFirst; let player : Player; let game : Game;
+describe('NitrateReducers', function() {
+  let card : NitrateReducers; let player : Player; let game : Game;
 
   beforeEach(function() {
-    card = new VenusFirst();
+    card = new NitrateReducers();
     player = new Player('test', Color.BLUE, false);
 
     const gameOptions = setCustomGameOptions() as GameOptions;
@@ -19,9 +20,10 @@ describe('VenusFirst', function() {
 
   it('Should play', function() {
     card.play(player, game);
-    expect(game.getVenusScaleLevel()).to.eq(4);
+
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(2);
 
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1));
+    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.MICROBES)).not.to.eq(-1));
   });
 });

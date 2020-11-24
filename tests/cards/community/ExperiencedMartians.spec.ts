@@ -1,17 +1,18 @@
 import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {PoliticalUprising} from '../../../src/cards/community/preludes/PoliticalUprising';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {ExperiencedMartians} from '../../../src/cards/community/preludes/ExperiencedMartians';
+import {Resources} from '../../../src/Resources';
 
-describe('PoliticalUprising', function() {
-  let card : PoliticalUprising; let player : Player; let game : Game;
+describe('ExperiencedMartians', function() {
+  let card : ExperiencedMartians; let player : Player; let game : Game;
 
   beforeEach(function() {
-    card = new PoliticalUprising();
+    card = new ExperiencedMartians();
     player = new Player('test', Color.BLUE, false);
 
     const gameOptions = setCustomGameOptions() as GameOptions;
@@ -20,17 +21,16 @@ describe('PoliticalUprising', function() {
 
   it('Should play', function() {
     card.play(player, game);
-    expect(game.deferredActions).has.lengthOf(4);
+    expect(game.deferredActions).has.lengthOf(1);
 
-    while (game.deferredActions.length) {
-      const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-      orOptions.options[0].cb();
-      game.deferredActions.shift();
-    }
+    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    orOptions.options[0].cb();
+    game.deferredActions.shift();
 
     const turmoil = game.turmoil!;
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-    expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(4);
-    expect(player.cardsInHand).has.lengthOf(1);
+    expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(2);
+    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.getProduction(Resources.HEAT)).to.eq(1);
   });
 });

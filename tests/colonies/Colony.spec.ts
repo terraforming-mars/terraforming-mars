@@ -74,14 +74,14 @@ describe('Colony', function() {
   });
 
   it('Should start with a trackPosition at 1', function() {
-    game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
+    game.colonies = game.colonyDealer!.drawColonies(4, game.gameOptions, true);
     game.colonies.forEach((colony) => {
       expect(colony.trackPosition).to.eq(1);
     });
   });
 
   it('Should increase by 1 at the end of a generation', function() {
-    game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
+    game.colonies = game.colonyDealer!.drawColonies(4, game.gameOptions, true);
     game.colonies.forEach((colony) => {
       colony.endGeneration();
       if (colony.isActive) {

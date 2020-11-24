@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
-import {Game} from '../../../src/Game';
+import {TradeAdvance} from '../../../src/cards/community/preludes/TradeAdvance';
 import {ColonyName} from '../../../src/colonies/ColonyName';
+import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('TradeAdvance', function() {
@@ -16,7 +16,7 @@ describe('TradeAdvance', function() {
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
-    });
+    }) as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);
   });
 

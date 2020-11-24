@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {ResearchGrant} from '../../../src/cards/community/ResearchGrant';
+import {ResearchGrant} from '../../../src/cards/community/preludes/ResearchGrant';
 
 describe('ResearchGrant', function() {
   let card : ResearchGrant; let player : Player;

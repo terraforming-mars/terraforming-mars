@@ -60,5 +60,5 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     requiresVenusTrackCompletion: false,
   };
 
-  return Object.assign(defaultOptions, options);
+  return Object.assign(defaultOptions, options) as GameOptions;
 };

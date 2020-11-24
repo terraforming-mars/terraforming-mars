@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {VenusFirst} from '../../../src/cards/community/preludes/VenusFirst';
 import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {Tags} from '../../../src/cards/Tags';
+import {HydrogenBombardment} from '../../../src/cards/community/preludes/HydrogenBombardment';
+import {Resources} from '../../../src/Resources';
 
-describe('VenusFirst', function() {
-  let card : VenusFirst; let player : Player; let game : Game;
+describe('HydrogenBombardment', function() {
+  let card : HydrogenBombardment; let player : Player; let game : Game;
 
   beforeEach(function() {
-    card = new VenusFirst();
+    card = new HydrogenBombardment();
     player = new Player('test', Color.BLUE, false);
 
     const gameOptions = setCustomGameOptions() as GameOptions;
@@ -19,9 +19,7 @@ describe('VenusFirst', function() {
 
   it('Should play', function() {
     card.play(player, game);
-    expect(game.getVenusScaleLevel()).to.eq(4);
-    expect(player.cardsInHand).has.lengthOf(2);
-
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1));
+    expect(game.getVenusScaleLevel()).to.eq(2);
+    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
   });
 });

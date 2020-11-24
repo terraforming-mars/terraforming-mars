@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ProjectWorkshop} from '../../../src/cards/community/ProjectWorkshop';
+import {ProjectWorkshop} from '../../../src/cards/community/corporations/ProjectWorkshop';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';

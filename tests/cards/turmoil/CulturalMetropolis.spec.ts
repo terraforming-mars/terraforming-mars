@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/cards/turmoil/CulturalMetropolis';
 import {Player} from '../../../src/Player';
 import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
+import {Game, GameOptions} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
@@ -17,7 +17,7 @@ describe('Cultural Metropolis', function() {
     player = new Player('test', Color.BLUE, false);
     player2 = new Player('test2', Color.RED, false);
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
   });

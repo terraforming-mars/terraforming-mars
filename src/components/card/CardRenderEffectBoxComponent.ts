@@ -35,6 +35,9 @@ export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxCo
       }
       return '';
     },
+    hasDescription: function(): boolean {
+      return this.effectData.description !== undefined;
+    },
   },
   template: `
       <div :class="getClasses()">
@@ -54,7 +57,7 @@ export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxCo
                 </div>
             </div>
         </div>
-        <CardDescription :text="effectData.description" />
+        <CardDescription v-if="hasDescription()" :text="effectData.description" />
       </div>
     `,
 });

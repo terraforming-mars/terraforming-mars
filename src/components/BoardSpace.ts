@@ -3,6 +3,7 @@ import {Bonus} from './Bonus';
 import {SpaceModel} from '../models/SpaceModel';
 import {TileType} from '../TileType';
 import {$t} from '../directives/i18n';
+import {SpaceBonus} from '../SpaceBonus';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
@@ -155,7 +156,11 @@ export const BoardSpace = Vue.component('board-space', {
       } else {
         if (this.space.spaceType === 'ocean') {
           css += ' board-space-type-ocean';
-        } else {
+        } else if (this.space.bonus.includes(SpaceBonus.VOLCANIC)) {
+          css += ' board-space-type-volcanic';
+        } else if (this.space.bonus.includes(SpaceBonus.COVE)) {
+          css += ' board-space-type-cove';
+        } else if (!this.space.bonus.includes(SpaceBonus.RESTRICTED)) {
           css += ' board-space-type-land';
         }
       }

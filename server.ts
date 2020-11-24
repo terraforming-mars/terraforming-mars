@@ -316,7 +316,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
+  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9a-z_]+)$/i;
 
   if (req.url === undefined) {
     console.warn('url not defined');

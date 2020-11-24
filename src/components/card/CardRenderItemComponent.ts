@@ -30,6 +30,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.VENUS) {
         classes.push('card-global-requirement');
         classes.push('card-venus-global-requirement');
+      } else if (type === CardRenderItemType.TR) {
+        classes.push('card-tile');
+        classes.push('card-tr');
       } else if (type === CardRenderItemType.TITANIUM) {
         classes.push('card-resource');
         classes.push('card-resource-titanium');
@@ -93,7 +96,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
 
       // act upon any player
       if (this.item.anyPlayer === true) {
-        classes.push('red-outline');
+        if (type === CardRenderItemType.DELEGATES) {
+          classes.push('card-delegate-red');
+        } else {
+          classes.push('red-outline');
+        }
       }
 
       // golden background

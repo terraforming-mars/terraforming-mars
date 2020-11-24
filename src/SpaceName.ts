@@ -1,4 +1,3 @@
-
 export enum SpaceName {
     ARSIA_MONS = '29',
     ASCRAEUS_MONS = '14',
@@ -16,5 +15,10 @@ export enum SpaceName {
     ELYSIUM_MONS = '14',
     OLYMPUS_MONS = '20',
     HELLAS_OCEAN_TILE = '61',
-    STANFORD_TORUS = '69'
+    STANFORD_TORUS = '69',
+    MEDUSAE_FOSSAE = '33',
+    ALBOR_THOLUS = '09',
+    ANSERIS_MONS = '35',
+    PINDUS_MONS = '43',
+    ULYSSES_THOLUS = '49',
 }

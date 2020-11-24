@@ -6,7 +6,7 @@ import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 
 export class OriginalBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  constructor(shuffleMapOption: boolean = false, seed: number = 0, erodedSpaces: Array<string> = []) {
     super();
 
     const builder = new BoardBuilder(seed);
@@ -40,7 +40,7 @@ export class OriginalBoard extends Board {
     if (shuffleMapOption) {
       builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
-    this.spaces = builder.build();
+    this.spaces = builder.build(erodedSpaces);
   }
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);

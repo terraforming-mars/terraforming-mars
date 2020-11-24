@@ -40,6 +40,7 @@ export interface SerializedGame {
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<IMilestone>;
+    erodedSpaces: Array<string>;
     monsInsuranceOwner: PlayerId | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;

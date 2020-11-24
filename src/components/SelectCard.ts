@@ -41,6 +41,15 @@ export const SelectCard = Vue.component('select-card', {
     Button,
   },
   methods: {
+    getButtonLabel: function() {
+      let result = this.playerinput.buttonLabel;
+      if (this.playerinput.maxCardsToSelect !== undefined &&
+          this.playerinput.maxCardsToSelect > 1 && this.playerinput.minCardsToSelect === 0 &&
+          Array.isArray(this.cards)) {
+        result += ` ${this.cards.length} cards`;
+      }
+      return result;
+    },
     getOrderedCards: function() {
       if (this.playerinput.cards === undefined) {
         return [];
@@ -62,7 +71,7 @@ export const SelectCard = Vue.component('select-card', {
             <Card :card="card" />
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <Button type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button type="submit" :onClick="saveData" :title="getButtonLabel()" />
         </div>
     </div>`,
 });

@@ -1,14 +1,14 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {Game} from '../../Game';
-import {IProjectCard} from '../IProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
-import {Resources} from '../../Resources';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {Game} from '../../../Game';
+import {IProjectCard} from '../../IProjectCard';
+import {SelectCard} from '../../../inputs/SelectCard';
+import {ICard} from '../../ICard';
+import {Resources} from '../../../Resources';
+import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 
 export class Playwrights implements CorporationCard {
     public name = CardName.PLAYWRIGHTS;

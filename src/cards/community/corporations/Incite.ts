@@ -1,10 +1,10 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {Game} from '../../Game';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {Game} from '../../../Game';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 
 
 export class Incite implements CorporationCard {

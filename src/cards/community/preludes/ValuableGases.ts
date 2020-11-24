@@ -1,11 +1,11 @@
-import {Tags} from '../Tags';
-import {Player} from '../../Player';
-import {PreludeCard} from './../prelude/PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../CardName';
-import {Game} from '../../Game';
-import {ResourceType} from '../../ResourceType';
-import {SelectHowToPayForCard} from '../../inputs/SelectHowToPayForCard';
+import {Tags} from '../../Tags';
+import {Player} from '../../../Player';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {IProjectCard} from '../../IProjectCard';
+import {CardName} from '../../../CardName';
+import {Game} from '../../../Game';
+import {ResourceType} from '../../../ResourceType';
+import {SelectHowToPayForCard} from '../../../inputs/SelectHowToPayForCard';
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
     public tags = [Tags.JOVIAN, Tags.VENUS];

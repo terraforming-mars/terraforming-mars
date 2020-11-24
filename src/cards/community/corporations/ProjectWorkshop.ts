@@ -1,15 +1,15 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
-import {IProjectCard} from '../IProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
+import {Game} from '../../../Game';
+import {LogHelper} from '../../../components/LogHelper';
+import {IProjectCard} from '../../IProjectCard';
+import {SelectCard} from '../../../inputs/SelectCard';
+import {ICard} from '../../ICard';
+import {OrOptions} from '../../../inputs/OrOptions';
+import {SelectOption} from '../../../inputs/SelectOption';
 
 export class ProjectWorkshop implements CorporationCard {
     public name = CardName.PROJECT_WORKSHOP;

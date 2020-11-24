@@ -1,10 +1,10 @@
-import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../CardName';
-import {Game} from '../../Game';
-import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {Player} from '../../../Player';
+import {PreludeCard} from '../../prelude/PreludeCard';
+import {IProjectCard} from '../../IProjectCard';
+import {CardName} from '../../../CardName';
+import {Game} from '../../../Game';
+import {TURMOIL_CARD_MANIFEST} from '../../turmoil/TurmoilCardManifest';
+import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
     public tags = [];

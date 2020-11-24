@@ -1,11 +1,11 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
-import {CardName} from '../../CardName';
-import {ITagCount} from '../../ITagCount';
-import {Game} from '../../Game';
-import {CardType} from '../CardType';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {Tags} from '../../Tags';
+import {Resources} from '../../../Resources';
+import {CardName} from '../../../CardName';
+import {ITagCount} from '../../../ITagCount';
+import {Game} from '../../../Game';
+import {CardType} from '../../CardType';
 
 export class AgricolaInc implements CorporationCard {
     public name = CardName.AGRICOLA_INC;

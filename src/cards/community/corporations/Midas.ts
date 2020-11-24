@@ -1,7 +1,7 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CorporationCard} from '../../corporation/CorporationCard';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardType} from '../../CardType';
 
 export class Midas implements CorporationCard {
     public name = CardName.MIDAS;

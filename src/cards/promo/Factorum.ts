@@ -8,14 +8,13 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-
+import {LogHelper} from '../../components/LogHelper';
 
 export class Factorum implements IActionCard, CorporationCard {
     public name = CardName.FACTORUM;
     public tags = [Tags.ENERGY, Tags.STEEL];
     public startingMegaCredits: number = 37;
     public cardType = CardType.CORPORATION;
-
 
     public play(player: Player) {
       player.addProduction(Resources.STEEL);
@@ -32,6 +31,7 @@ export class Factorum implements IActionCard, CorporationCard {
         'Increase production',
         () => {
           player.addProduction(Resources.ENERGY);
+          LogHelper.logGainProduction(game, player, Resources.ENERGY);
           return undefined;
         },
       );

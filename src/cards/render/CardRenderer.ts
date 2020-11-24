@@ -184,6 +184,11 @@ class Builder {
     return this;
   }
 
+  public tr(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TR, amount));
+    return this;
+  }
+
   public megacredits(amount: number): Builder {
     const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount);
     item.amountInside = true;

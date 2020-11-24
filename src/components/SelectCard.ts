@@ -41,14 +41,13 @@ export const SelectCard = Vue.component('select-card', {
     Button,
   },
   methods: {
-    getButtonLabel: function() {
-      let result = this.playerinput.buttonLabel;
-      if (this.playerinput.maxCardsToSelect !== undefined &&
-          this.playerinput.maxCardsToSelect > 1 && this.playerinput.minCardsToSelect === 0 &&
-          Array.isArray(this.cards)) {
-        result += ` ${this.cards.length} cards`;
+    cardsSelected: function(): number {
+      if (Array.isArray(this.cards)) {
+        return this.cards.length;
+      } else if (this.cards === false || this.cards === undefined) {
+        return 0;
       }
-      return result;
+      return 1;
     },
     getOrderedCards: function() {
       if (this.playerinput.cards === undefined) {
@@ -58,6 +57,11 @@ export const SelectCard = Vue.component('select-card', {
         CardOrderStorage.getCardOrder(this.player.id),
         this.playerinput.cards,
       );
+    },
+    noneOrMany: function(): boolean {
+      return this.playerinput.maxCardsToSelect !== undefined &&
+             this.playerinput.maxCardsToSelect > 1 &&
+             this.playerinput.minCardsToSelect === 0;
     },
     saveData: function() {
       this.onsave([Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name]]);
@@ -71,7 +75,8 @@ export const SelectCard = Vue.component('select-card', {
             <Card :card="card" />
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <Button type="submit" :onClick="saveData" :title="getButtonLabel()" />
+            <Button :disabled="noneOrMany() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button :disabled="noneOrMany() && cardsSelected() > 0" v-if="noneOrMany()" :onClick="saveData" type="submit" :title="'Skip this action'" />
         </div>
     </div>`,
 });

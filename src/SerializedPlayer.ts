@@ -59,5 +59,6 @@ export interface SerializedPlayer {
     tradesThisTurn: number;
     usedUndo: boolean;
     turmoilPolicyActionUsed: boolean;
+    hasTurmoilScienceTagBonus: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

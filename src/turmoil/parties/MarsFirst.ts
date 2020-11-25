@@ -85,16 +85,16 @@ export class MarsFirstPolicy04 implements Policy {
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
-        player,
-        4,
-        false,
-        false,
-        'Select how to pay for action',
-        () => {
-          player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
-          const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
-          game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
-        },
+      player,
+      4,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
+        const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
+        game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+      },
     ));
 
     return undefined;

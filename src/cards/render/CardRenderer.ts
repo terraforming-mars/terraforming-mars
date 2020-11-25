@@ -33,7 +33,7 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public selector: string) { };
+  constructor(public selector: string, public isAresTile: boolean) { };
 }
 
 export class CardRenderEffect extends CardRenderer {
@@ -120,10 +120,10 @@ class Builder {
     }
   }
 
-  protected _addTile(selector: string): void {
+  protected _addTile(selector: string, isAresTile: boolean): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(new CardRenderTile(selector));
+      row.push(new CardRenderTile(selector, isAresTile));
       this._data.push(row);
     }
   }
@@ -322,8 +322,8 @@ class Builder {
     return this;
   }
 
-  public tile(selector: string): Builder {
-    this._addTile(selector);
+  public tile(selector: string, isAresTile = true): Builder {
+    this._addTile(selector, isAresTile);
     return this;
   }
 

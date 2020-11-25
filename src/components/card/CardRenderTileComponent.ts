@@ -8,13 +8,16 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
     },
   },
   methods: {
-    getClasses: function(): string {
-      return this.item.selector + ' tile';
+    getOuterClasses: function(): string {
+      return this.item.isAresTile ? '' : 'tile special-tile';
+    },
+    getInnerClasses: function(): string {
+      return this.item.selector + (this.item.isAresTile ? ' ares-tile' : ' tile');
     },
   },
   template: `
-  <div class="tile special-tile">
-    <div :class="getClasses()"></div>
+  <div :class="getOuterClasses()">
+    <div :class="getInnerClasses()"></div>
   </div>
     `,
 });

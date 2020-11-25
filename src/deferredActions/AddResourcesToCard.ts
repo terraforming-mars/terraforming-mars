@@ -35,14 +35,14 @@ export class AddResourcesToCard implements DeferredAction {
     }
 
     return new SelectCard(
-        this.title,
-        'Add resource(s)',
-        resourceCards,
-        (foundCards: Array<ICard>) => {
-          this.player.addResourceTo(foundCards[0], this.count);
-          LogHelper.logAddResource(this.game, this.player, foundCards[0], this.count);
-          return undefined;
-        },
+      this.title,
+      'Add resource(s)',
+      resourceCards,
+      (foundCards: Array<ICard>) => {
+        this.player.addResourceTo(foundCards[0], this.count);
+        LogHelper.logAddResource(this.game, this.player, foundCards[0], this.count);
+        return undefined;
+      },
     );
   }
 }

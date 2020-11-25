@@ -12,7 +12,7 @@ export class GameLoader {
     private readonly pendingPlayer = new Map<string, Array<(game: Game | undefined) => void>>();
     private readonly playerToGame = new Map<string, Game>();
 
-    public start(): void {
+    public start(cb = () => {}): void {
       if (this.loadedGames === true) {
         console.warn('already loaded, ignoring');
         return;
@@ -21,7 +21,7 @@ export class GameLoader {
         return;
       }
       this.loadingGames = true;
-      this.loadAllGames();
+      this.loadAllGames(cb);
     }
 
     public addGame(game: Game): void {
@@ -99,37 +99,45 @@ export class GameLoader {
       this.pendingPlayer.clear();
     }
 
-    private loadAllGames(): void {
+    private loadAllGames(cb = () => {}): void {
       Database.getInstance().getGames((err, allGames) => {
         if (err) {
           console.error('error loading all games', err);
           this.onAllGamesLoaded();
+          cb();
           return;
         }
+
+        if (allGames.length === 0) {
+          this.onAllGamesLoaded();
+          cb();
+        };
+
         let loaded = 0;
         allGames.forEach((game_id) => {
           const player = new Player('test', Color.BLUE, false, 0);
           const player2 = new Player('test2', Color.RED, false, 0);
           const gameToRebuild = new Game(game_id, [player, player2], player);
           Database.getInstance().restoreGameLastSave(
-              game_id,
-              gameToRebuild,
-              (err) => {
-                loaded++;
-                if (err) {
-                  console.error(`unable to load game ${game_id}`, err);
-                } else {
-                  console.log(`load game ${game_id}`);
-                  this.games.set(gameToRebuild.id, gameToRebuild);
-                  for (const player of gameToRebuild.getPlayers()) {
-                    this.playerToGame.set(player.id, gameToRebuild);
-                    this.onGameLoaded(gameToRebuild.id, player.id);
-                  }
+            game_id,
+            gameToRebuild,
+            (err) => {
+              loaded++;
+              if (err) {
+                console.error(`unable to load game ${game_id}`, err);
+              } else {
+                console.log(`load game ${game_id}`);
+                this.games.set(gameToRebuild.id, gameToRebuild);
+                for (const player of gameToRebuild.getPlayers()) {
+                  this.playerToGame.set(player.id, gameToRebuild);
+                  this.onGameLoaded(gameToRebuild.id, player.id);
                 }
-                if (loaded === allGames.length) {
-                  this.onAllGamesLoaded();
-                }
-              },
+              }
+              if (loaded === allGames.length) {
+                this.onAllGamesLoaded();
+                cb();
+              }
+            },
           );
         });
       });

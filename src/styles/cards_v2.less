@@ -206,7 +206,7 @@
                 width: 15px;
                 height: 10px;
                 background-repeat: no-repeat;
-                margin-right: 3px;
+                margin-right: 2px;
             }
             .card-plus {
                 background-image: url(/assets/misc/plus.png);
@@ -216,7 +216,7 @@
                 vertical-align: middle;
                 display: inline-block;
                 margin: 0;
-                margin-right: 3px;
+                margin-right: 2px;
                 background-repeat: no-repeat;
             }
             .card-plus--small {
@@ -228,12 +228,13 @@
             .card-colon {
                 font-size: @font_size_big;
             }
-            .card-or--small {
+            .card-or--small, .card-slash--small {
                 font-size: @font_size_normal;
             }
+
             .card-res-amount {
-                font-size: @font_size_big;
-                margin-right: 4px;
+                font-size: 21px;
+                margin-right: 1px;
             }
             .card-card {
                 background: url("./assets/resources/card.png");
@@ -287,6 +288,8 @@
                 display: inline-block;
                 text-align: center;
                 border-radius: 50%;
+                margin-left: 3px;
+                margin-right: 3px;
                 width: 30px;
                 height: 30px;
                 background-size: 34px 34px;
@@ -406,6 +409,7 @@
                 right: 8px;
                 width: 80px;
                 height: 42px;
+                line-height: 42px;
                 text-align: center;
                 border-radius: 12px;
                 border-top: 2px solid #dddddd;
@@ -415,6 +419,71 @@
                 background-color: #cda282;
                 background: linear-gradient(#cc8b00, #805700, #805700);
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                .card-item-container{
+                    margin: 0px;
+                }
+            }
+            .card-points-big {
+                font-size: 36px;
+                text-shadow: 0 0 5px darkorange;
+            }
+            .card-points-normal {
+                display: flex;
+                justify-content: center;
+                font-size: 28px;
+                text-shadow: 0 0 2px darkorange;
+                >div{
+                    margin-left: 4px;
+                }
+            }
+            .card-plate {
+                width: 130px;
+                text-shadow: none;
+                font-size: 12px;
+                font-weight: bold;
+                line-height: 17px;
+                display: inline-block;
+                vertical-align: middle;
+                padding-top: 5px;
+                margin-right: 5px;
+                border-radius: 5px;
+                height: 20px;
+                background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+                filter: drop-shadow(0px 0px 1px black);
+            }
+            .card-text-size--XS {
+                font-size: @font_size_tiny;
+            }
+            .card-text-size--S {
+                font-size: @font_size_small;
+            }
+            .card-text-size--M {
+                font-size: @font_size_normal;
+            }
+            .card-text-size--L {
+                font-size: @font_size_big;
+            }
+            .card-text-uppercase {
+                text-transform: uppercase;
+            }
+            .card-nbsp {
+                visibility: hidden;
+                width: 10px;
+            }
+            /* tiles */
+            .card-tile {
+                margin-left: 4px;
+            }
+            .city-tile--M {
+                background-image: url(./assets/tiles/city.png);
+                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+            }
+            .city-tile--S {
+                background-image: url(./assets/tiles/city.png);
+                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                width: 30px;
+                height: 32px;
+                background-size: 30px 32px;
             }
         }
         .temporary-content-wrapper {

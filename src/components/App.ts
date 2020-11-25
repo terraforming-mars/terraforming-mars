@@ -81,8 +81,8 @@ export const mainAppSettings = {
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
       xhr.open(
-          'GET',
-          '/api/player' +
+        'GET',
+        '/api/player' +
                     window.location.search.replace('&noredirect', ''),
       );
       xhr.onerror = function() {
@@ -99,18 +99,18 @@ export const mainAppSettings = {
             app.screen = 'the-end';
             if (currentPathname !== '/the-end') {
               window.history.replaceState(
-                  xhr.response,
-                  'Teraforming Mars - Player',
-                  '/the-end?id=' + app.player.id,
+                xhr.response,
+                'Teraforming Mars - Player',
+                '/the-end?id=' + app.player.id,
               );
             }
           } else {
             app.screen = 'player-home';
             if (currentPathname !== '/player') {
               window.history.replaceState(
-                  xhr.response,
-                  'Teraforming Mars - Game',
-                  '/player?id=' + app.player.id,
+                xhr.response,
+                'Teraforming Mars - Game',
+                '/player?id=' + app.player.id,
               );
             }
           }
@@ -137,9 +137,9 @@ export const mainAppSettings = {
       xhr.onload = () => {
         if (xhr.status === 200) {
           window.history.replaceState(
-              xhr.response,
-              'Teraforming Mars - Game',
-              '/game?id=' + xhr.response.id,
+            xhr.response,
+            'Teraforming Mars - Game',
+            '/game?id=' + xhr.response.id,
           );
           app.game = xhr.response as GameHomeModel;
         } else {

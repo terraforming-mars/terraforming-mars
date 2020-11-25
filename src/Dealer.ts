@@ -8,7 +8,7 @@ import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardMa
 import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
-import {ILoadable} from './ILoadable';
+import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
 import {CardManifest} from './cards/CardManifest';
 import {ICardFactory} from './cards/ICardFactory';
@@ -17,7 +17,7 @@ import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 
-export class Dealer implements ILoadable<SerializedDealer, Dealer> {
+export class Dealer implements ISerializable<SerializedDealer, Dealer> {
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
@@ -31,15 +31,15 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer> {
     private useAresExtension: boolean = false;
 
     constructor(
-        useCorporateEra: boolean,
-        usePreludeExtension: boolean,
-        useVenusNextExtension: boolean,
-        useColoniesNextExtension : boolean,
-        usePromoCards: boolean,
-        useTurmoilExtension: boolean,
-        useAresExtension: boolean,
-        useCommunityCards: boolean = false,
-        cardsBlackList?: Array<CardName>,
+      useCorporateEra: boolean,
+      usePreludeExtension: boolean,
+      useVenusNextExtension: boolean,
+      useColoniesNextExtension : boolean,
+      usePromoCards: boolean,
+      useTurmoilExtension: boolean,
+      useAresExtension: boolean,
+      useCommunityCards: boolean = false,
+      cardsBlackList?: Array<CardName>,
     ) {
       this.useCorporateEra = useCorporateEra;
       this.usePreludeExtension = usePreludeExtension;
@@ -57,22 +57,22 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer> {
       function include(cf: ICardFactory<CardTypes>) : boolean {
         const expansion = cf.compatibility;
         switch (expansion) {
-          case undefined:
-            return true;
-          case GameModule.Venus:
-            return useVenusNextExtension;
-          case GameModule.Colonies:
-            return useColoniesNextExtension;
-          case GameModule.Turmoil:
-            return useTurmoilExtension;
-          default:
-            throw ('Unhandled expansion type: ' + expansion);
+        case undefined:
+          return true;
+        case GameModule.Venus:
+          return useVenusNextExtension;
+        case GameModule.Colonies:
+          return useColoniesNextExtension;
+        case GameModule.Turmoil:
+          return useTurmoilExtension;
+        default:
+          throw ('Unhandled expansion type: ' + expansion);
         }
       }
       function addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
         const cardInstances = cards.cards
-            .filter((cf) => include(cf))
-            .map((cf) => new cf.Factory());
+          .filter((cf) => include(cf))
+          .map((cf) => new cf.Factory());
         deck.push(...cardInstances);
       }
       function addToDecks(manifest: CardManifest) {
@@ -155,30 +155,40 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer> {
       return result;
     }
 
-    // Function used to rebuild each objects
     public loadFromJSON(d: SerializedDealer): Dealer {
-      // Assign each attributes
-      const o = Object.assign(this, d);
       const cardFinder = new CardFinder();
-      // Rebuild deck
-      this.deck = d.deck.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
 
-      // Rebuild prelude deck
-      this.preludeDeck = d.preludeDeck.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
-
-      // Rebuild the discard
-      this.discarded = d.discarded.map((element: IProjectCard) => {
-        return cardFinder.getProjectCardByName(element.name)!;
-      });
-
-      return o;
+      this.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
+      this.deck = cardFinder.cardsFromJSON(d.deck);
+      this.discarded = cardFinder.cardsFromJSON(d.discarded);
+      this.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      this.useAresExtension = d.useAresExtension;
+      this.useColoniesNextExtension = d.useColoniesNextExtension;
+      this.useCorporateEra = d.useCorporateEra;
+      this.usePreludeExtension = d.usePreludeExtension;
+      this.usePromoCards = d.usePromoCards;
+      this.useTurmoilExtension = d.useTurmoilExtension;
+      this.useVenusNextExtension = d.useVenusNextExtension;
+      return this;
     }
 
     public getDeckSize(): number {
       return this.deck.length;
+    }
+
+    public serialize(): SerializedDealer {
+      return {
+        corporationCards: this.corporationCards.map((c) => c.name),
+        deck: this.deck.map((c) => c.name),
+        discarded: this.discarded.map((c) => c.name),
+        preludeDeck: this.preludeDeck.map((c) => c.name),
+        useAresExtension: this.useAresExtension,
+        useColoniesNextExtension: this.useColoniesNextExtension,
+        useCorporateEra: this.useCorporateEra,
+        usePreludeExtension: this.usePreludeExtension,
+        usePromoCards: this.usePromoCards,
+        useVenusNextExtension: this.useVenusNextExtension,
+        useTurmoilExtension: this.useTurmoilExtension,
+      };
     }
 }

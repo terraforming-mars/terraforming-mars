@@ -32,4 +32,13 @@ export class CardRenderSymbol {
   public static arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ARROW, size, true);
   }
+  public static bracketOpen(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.BRACKET_OPEN, size);
+  }
+  public static bracketClose(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.BRACKET_CLOSE, size);
+  }
+  public static nbsp(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.NBSP, size, true);
+  }
 }

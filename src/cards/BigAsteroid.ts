@@ -40,6 +40,10 @@ export class BigAsteroid implements IProjectCard {
   public metadata: CardMetadata = {
     description: 'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
     cardNumber: '011',
-    renderData: CardRenderer.builder((b) => b.temperature(2).br.titanium(2).br.plants(-4).any),
+    renderData: CardRenderer.builder((b) => {
+      b.temperature(2).br;
+      b.titanium(4).br;
+      b.minus().plants(-4).any;
+    }),
   };
 }

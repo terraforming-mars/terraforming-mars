@@ -34,15 +34,15 @@ export class RemoveResourcesFromCard implements DeferredAction {
     }
 
     const selectCard = new SelectCard(
-        this.title,
-        'Remove resource(s)',
-        resourceCards,
-        (foundCards: Array<ICard>) => {
-          const card = foundCards[0];
-          const owner = this.game.getCardPlayer(card.name);
-          owner.removeResourceFrom(card, this.count, this.game, this.player);
-          return undefined;
-        },
+      this.title,
+      'Remove resource(s)',
+      resourceCards,
+      (foundCards: Array<ICard>) => {
+        const card = foundCards[0];
+        const owner = this.game.getCardPlayer(card.name);
+        owner.removeResourceFrom(card, this.count, this.game, this.player);
+        return undefined;
+      },
     );
 
     if (this.mandatory) {
@@ -56,10 +56,10 @@ export class RemoveResourcesFromCard implements DeferredAction {
     }
 
     return new OrOptions(
-        selectCard,
-        new SelectOption('Do not remove', 'Confirm', () => {
-          return undefined;
-        }),
+      selectCard,
+      new SelectOption('Do not remove', 'Confirm', () => {
+        return undefined;
+      }),
     );
   }
 
@@ -75,14 +75,14 @@ export class RemoveResourcesFromCard implements DeferredAction {
       resourceCards = [];
       game.getPlayers().forEach((p) => {
         switch (resourceType) {
-          case ResourceType.ANIMAL:
-            if (p.hasProtectedHabitats() && player.id !== p.id) return;
-            resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1));
-            break;
-          case ResourceType.MICROBE:
-            if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          default:
-            resourceCards.push(...p.getCardsWithResources(resourceType));
+        case ResourceType.ANIMAL:
+          if (p.hasProtectedHabitats() && player.id !== p.id) return;
+          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1));
+          break;
+        case ResourceType.MICROBE:
+          if (p.hasProtectedHabitats() && player.id !== p.id) return;
+        default:
+          resourceCards.push(...p.getCardsWithResources(resourceType));
         }
       });
     }

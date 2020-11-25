@@ -29,17 +29,17 @@ export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> =
     new Map(ALL_CARD_MANIFESTS.map((manifest) => [manifest.module, manifest]));
 
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
-    (deck) => deck.projectCards,
+  (deck) => deck.projectCards,
 );
 export const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(
-    (deck) => deck.corporationCards,
+  (deck) => deck.corporationCards,
 );
 export const ALL_PRELUDE_DECKS = ALL_CARD_MANIFESTS.map(
-    (deck) => deck.preludeCards,
+  (deck) => deck.preludeCards,
 );
 
 export const ALL_PROJECT_CARD_NAMES = Decks.allCardNames(ALL_PROJECT_DECKS);
 export const ALL_CORPORATION_CARD_NAMES = Decks.allCardNames(
-    ALL_CORPORATION_DECKS,
+  ALL_CORPORATION_DECKS,
 );
 export const ALL_PRELUDE_CARD_NAMES = Decks.allCardNames(ALL_PRELUDE_DECKS);

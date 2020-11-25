@@ -40,6 +40,12 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
   public metadata: CardMetadata = {
     description: 'Increase your heat production 3 steps and your Plant productions 1 step. Add 2 Microbes to ANOTHER card.',
     cardNumber: '170',
-    renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.heat(3).br.plants(1)).br.microbes(2).asterix()),
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => {
+        pb.heat(3).br;
+        pb.plants(1);
+      }).br;
+      b.microbes(2).asterix();
+    }),
   };
 }

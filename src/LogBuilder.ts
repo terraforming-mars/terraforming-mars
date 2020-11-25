@@ -6,7 +6,7 @@ import {CardName} from './CardName';
 import {ICard} from './cards/ICard';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
-import {IColony} from './colonies/Colony';
+import {Colony} from './colonies/Colony';
 import {IParty} from './turmoil/parties/IParty';
 import {LogMessage} from './LogMessage';
 
@@ -69,7 +69,7 @@ export class LogBuilder {
       return this;
     }
 
-    public colony(value: IColony): LogBuilder {
+    public colony(value: Colony): LogBuilder {
       this.parameters.push(new LogMessageData(LogMessageDataType.COLONY, value.name));
       return this;
     }

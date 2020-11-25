@@ -5,6 +5,7 @@ import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
+import * as zlib from 'zlib';
 
 import {AndOptions} from './src/inputs/AndOptions';
 import {BoardName} from './src/BoardName';
@@ -54,10 +55,38 @@ import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters'
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
+let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();
 const route = new Route();
 const gameLogs = new GameLogs(gameLoader);
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
+const fileCache = new Map<string, Buffer>();
+const isProduction = process.env.NODE_ENV === 'production';
+
+// compress styles.css
+zlib.gzip(styles, function(err, compressed) {
+  if (err !== null) {
+    console.warn('error compressing styles', err);
+    return;
+  }
+  compressedStyles = compressed;
+});
+
+function readFile(path: string, cb: (err: Error | null, data: Buffer) => void): void {
+  const result = fileCache.get(path);
+  if (isProduction === false || result === undefined) {
+    fs.readFile(path, (err1, data1) => {
+      if (err1) {
+        cb(err1, Buffer.alloc(0));
+        return;
+      }
+      fileCache.set(path, data1);
+      cb(null, data1);
+    });
+  } else {
+    cb(null, result);
+  }
+}
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== undefined) {
@@ -93,7 +122,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        serveResource(res, styles);
+        serveStyles(req, res);
       } else if (
         req.url.startsWith('/assets/') ||
         req.url === '/favicon.ico' ||
@@ -121,7 +150,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       req.url.indexOf('/player/input?id=') === 0
     ) {
       const playerId: string = req.url.substring(
-          '/player/input?id='.length,
+        '/player/input?id='.length,
       );
       gameLoader.getGameByPlayerId(playerId, (game) => {
         if (game === undefined) {
@@ -149,8 +178,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 }
 
 function requestHandler(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   try {
     processRequest(req, res);
@@ -167,12 +196,12 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
     'https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/';
   if (!fs.existsSync(process.env.KEY_PATH)) {
     console.error(
-        'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
+      'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
       httpsHowto,
     );
   } else if (!fs.existsSync(process.env.CERT_PATH)) {
     console.error(
-        'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
+      'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
       httpsHowto,
     );
   }
@@ -194,10 +223,10 @@ function generateRandomServerId(): string {
 }
 
 function processInput(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
-    player: Player,
-    game: Game,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  player: Player,
+  game: Game,
 ): void {
   let body = '';
   req.on('data', function(data) {
@@ -216,9 +245,9 @@ function processInput(
       });
       console.warn('Error processing input from player', err);
       res.write(
-          JSON.stringify({
-            message: err.message,
-          }),
+        JSON.stringify({
+          message: err.message,
+        }),
       );
       res.end();
     }
@@ -237,8 +266,8 @@ function getClonableGames(res: http.ServerResponse): void {
 }
 
 function apiGetGames(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   if (!isServerIdValid(req)) {
     route.notAuthorized(req, res);
@@ -268,14 +297,14 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const player2 = new Player('test2', Color.RED, false, 0);
       const gameToRebuild = new Game(game_id, [player, player2], player);
       Database.getInstance().restoreGameLastSave(
-          game_id,
-          gameToRebuild,
-          function(err) {
-            if (err) {
-              return;
-            }
-            gameLoader.addGame(gameToRebuild);
-          },
+        game_id,
+        gameToRebuild,
+        function(err) {
+          if (err) {
+            return;
+          }
+          gameLoader.addGame(gameToRebuild);
+        },
       );
       res.setHeader('Content-Type', 'application/json');
       res.write(getGame(gameToRebuild));
@@ -287,7 +316,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
+  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9a-z_]+)$/i;
 
   if (req.url === undefined) {
     console.warn('url not defined');
@@ -325,8 +354,8 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function apiGetWaitingFor(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   const qs: string = req.url!.substring('/api/waitingfor?'.length);
   const queryParams = querystring.parse(qs);
@@ -364,8 +393,8 @@ function apiGetWaitingFor(
 }
 
 function apiGetPlayer(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
 ): void {
   const qs = req.url!.substring('/api/player?'.length);
   const queryParams = querystring.parse(qs);
@@ -408,10 +437,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameId = generateRandomGameId();
       const players = gameReq.players.map((obj: any) => {
         return new Player(
-            obj.name,
-            obj.color,
-            obj.beginner,
-            obj.handicap,
+          obj.name,
+          obj.color,
+          obj.beginner,
+          obj.handicap,
         );
       });
       let firstPlayer = players[0];
@@ -479,7 +508,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
 
   for (const milestone of allMilestones) {
     const claimed = claimedMilestones.find(
-        (m) => m.milestone.name === milestone.name,
+      (m) => m.milestone.name === milestone.name,
     );
     const scores: Array<IMilestoneScore> = [];
     if (claimed === undefined && claimedMilestones.length < 3) {
@@ -509,7 +538,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 
   for (const award of allAwards) {
     const funded = fundedAwards.find(
-        (a) => a.award.name === award.name,
+      (a) => a.award.name === award.name,
     );
     const scores: Array<IAwardScore> = [];
     if (fundedAwards.length < 3 || funded !== undefined) {
@@ -619,8 +648,8 @@ function getPlayer(player: Player, game: Game): string {
 }
 
 function getCardsAsCardModel(
-    cards: Array<ICard>,
-    showResouces: boolean = true,
+  cards: Array<ICard>,
+  showResouces: boolean = true,
 ): Array<CardModel> {
   const result: Array<CardModel> = [];
   cards.forEach((card) => {
@@ -645,7 +674,7 @@ function getCardsAsCardModel(
 }
 
 function getWaitingFor(
-    waitingFor: PlayerInput | undefined,
+  waitingFor: PlayerInput | undefined,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
     return undefined;
@@ -672,96 +701,96 @@ function getWaitingFor(
     aresData: undefined,
   };
   switch (waitingFor.inputType) {
-    case PlayerInputTypes.AND_OPTIONS:
-    case PlayerInputTypes.OR_OPTIONS:
-      result.options = [];
-      for (const option of (waitingFor as AndOptions | OrOptions)
-          .options) {
-        const subOption = getWaitingFor(option);
-        if (subOption !== undefined) {
-          result.options.push(subOption);
-        }
+  case PlayerInputTypes.AND_OPTIONS:
+  case PlayerInputTypes.OR_OPTIONS:
+    result.options = [];
+    for (const option of (waitingFor as AndOptions | OrOptions)
+      .options) {
+      const subOption = getWaitingFor(option);
+      if (subOption !== undefined) {
+        result.options.push(subOption);
       }
-      break;
-    case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = getCardsAsCardModel(
-          (waitingFor as SelectHowToPayForCard).cards,
-          false,
-      );
-      result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
-      result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
-      result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
-      break;
-    case PlayerInputTypes.SELECT_CARD:
-      result.cards = getCardsAsCardModel(
-          (waitingFor as SelectCard<ICard>).cards,
-      );
-      result.maxCardsToSelect = (waitingFor as SelectCard<
+    }
+    break;
+  case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
+    result.cards = getCardsAsCardModel(
+      (waitingFor as SelectHowToPayForCard).cards,
+      false,
+    );
+    result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
+    result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
+    result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
+    break;
+  case PlayerInputTypes.SELECT_CARD:
+    result.cards = getCardsAsCardModel(
+      (waitingFor as SelectCard<ICard>).cards,
+    );
+    result.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).maxCardsToSelect;
-      result.minCardsToSelect = (waitingFor as SelectCard<
+    result.minCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).minCardsToSelect;
-      break;
-    case PlayerInputTypes.SELECT_COLONY:
-      result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
-      break;
-    case PlayerInputTypes.SELECT_HOW_TO_PAY:
-      result.amount = (waitingFor as SelectHowToPay).amount;
-      result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
-      result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
-      result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
-      break;
-    case PlayerInputTypes.SELECT_PLAYER:
-      result.players = (waitingFor as SelectPlayer).players.map(
-          (player) => player.color,
-      );
-      break;
-    case PlayerInputTypes.SELECT_SPACE:
-      result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
-          (space) => space.id,
-      );
-      break;
-    case PlayerInputTypes.SELECT_AMOUNT:
-      result.max = (waitingFor as SelectAmount).max;
-      break;
-    case PlayerInputTypes.SELECT_DELEGATE:
-      result.players = (waitingFor as SelectDelegate).players.map(
-          (player) => {
-            if (player === 'NEUTRAL') {
-              return 'NEUTRAL';
-            } else {
-              return player.color;
-            }
-          },
-      );
-      break;
-    case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
-      const _player = (waitingFor as SelectProductionToLose).player;
-      result.payProduction = {
-        cost: (waitingFor as SelectProductionToLose).unitsToLose,
-        units: {
-          megacredits: _player.getProduction(Resources.MEGACREDITS),
-          steel: _player.getProduction(Resources.STEEL),
-          titanium: _player.getProduction(Resources.TITANIUM),
-          plants: _player.getProduction(Resources.PLANTS),
-          energy: _player.getProduction(Resources.ENERGY),
-          heat: _player.getProduction(Resources.HEAT),
-        },
-      };
-      break;
-    case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
-      result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
-      break;
+    break;
+  case PlayerInputTypes.SELECT_COLONY:
+    result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+    break;
+  case PlayerInputTypes.SELECT_HOW_TO_PAY:
+    result.amount = (waitingFor as SelectHowToPay).amount;
+    result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
+    result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
+    result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+    break;
+  case PlayerInputTypes.SELECT_PLAYER:
+    result.players = (waitingFor as SelectPlayer).players.map(
+      (player) => player.color,
+    );
+    break;
+  case PlayerInputTypes.SELECT_SPACE:
+    result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
+      (space) => space.id,
+    );
+    break;
+  case PlayerInputTypes.SELECT_AMOUNT:
+    result.max = (waitingFor as SelectAmount).max;
+    break;
+  case PlayerInputTypes.SELECT_DELEGATE:
+    result.players = (waitingFor as SelectDelegate).players.map(
+      (player) => {
+        if (player === 'NEUTRAL') {
+          return 'NEUTRAL';
+        } else {
+          return player.color;
+        }
+      },
+    );
+    break;
+  case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+    const _player = (waitingFor as SelectProductionToLose).player;
+    result.payProduction = {
+      cost: (waitingFor as SelectProductionToLose).unitsToLose,
+      units: {
+        megacredits: _player.getProduction(Resources.MEGACREDITS),
+        steel: _player.getProduction(Resources.STEEL),
+        titanium: _player.getProduction(Resources.TITANIUM),
+        plants: _player.getProduction(Resources.PLANTS),
+        energy: _player.getProduction(Resources.ENERGY),
+        heat: _player.getProduction(Resources.HEAT),
+      },
+    };
+    break;
+  case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+    result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
+    break;
   }
   return result;
 }
 
 function getCards(
-    player: Player,
-    cards: Array<IProjectCard>,
-    game: Game,
-    showResouces: boolean = true,
+  player: Player,
+  cards: Array<IProjectCard>,
+  game: Game,
+  showResouces: boolean = true,
 ): Array<CardModel> {
   return cards.map((card) => ({
     resources: showResouces ? player.getResourcesOnCard(card) : undefined,
@@ -813,13 +842,13 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
       actionsThisGeneration: Array.from(
-          player.getActionsThisGeneration(),
+        player.getActionsThisGeneration(),
       ),
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(
-          game,
+        game,
       ),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
@@ -831,18 +860,18 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
 
 function getColonies(game: Game): Array<ColonyModel> {
   return game.colonies.map(
-      (colony): ColonyModel => ({
-        colonies: colony.colonies.map(
-            (playerId): Color => game.getPlayerById(playerId).color,
-        ),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor:
+    (colony): ColonyModel => ({
+      colonies: colony.colonies.map(
+        (playerId): Color => game.getPlayerById(playerId).color,
+      ),
+      isActive: colony.isActive,
+      name: colony.name,
+      trackPosition: colony.trackPosition,
+      visitor:
           colony.visitor === undefined ?
             undefined :
             game.getPlayerById(colony.visitor).color,
-      }),
+    }),
   );
 }
 
@@ -865,8 +894,8 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 
     const lobby = Array.from(
-        game.turmoil.lobby,
-        (player) => game.getPlayerById(player).color,
+      game.turmoil.lobby,
+      (player) => game.getPlayerById(player).color,
     );
 
     const reserve = game.turmoil.getPresentPlayers().map((player) => {
@@ -1017,13 +1046,13 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
-  fs.readFile('index.html', function(err, data) {
+  readFile('index.html', function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
+    res.setHeader('Content-Length', data.length);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.write(data);
-    res.end();
+    res.end(data);
   });
 }
 
@@ -1037,9 +1066,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     file = 'favicon.ico';
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     res.setHeader('Content-Type', 'text/javascript');
-    const acceptEncoding = req.headers['accept-encoding'];
     let suffix = '';
-    if (acceptEncoding !== undefined && acceptEncoding.includes('gzip')) {
+    if (supportsGzip(req)) {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
@@ -1074,33 +1102,43 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== '/main.js' && req.url !== '/main.js.map') {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
-  fs.readFile(file, function(err, data) {
+  readFile(file, function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
-    res.write(data);
-    res.end();
+    res.setHeader('Content-Length', data.length);
+    res.end(data);
   });
 }
 
-function serveResource(res: http.ServerResponse, s: Buffer): void {
-  res.write(s);
-  res.end();
+function supportsGzip(req: http.IncomingMessage): boolean {
+  return req.headers['accept-encoding'] !== undefined &&
+         req.headers['accept-encoding'].includes('gzip');
 }
 
-gameLoader.start();
+function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let buffer = styles;
+  if (compressedStyles !== undefined && supportsGzip(req)) {
+    res.setHeader('Content-Encoding', 'gzip');
+    buffer = compressedStyles;
+  }
+  res.setHeader('Content-Length', buffer.length);
+  res.end(buffer);
+}
 
-console.log('Starting server on port ' + (process.env.PORT || 8080));
-console.log('version 0.X');
+gameLoader.start(() => {
+  console.log('Starting server on port ' + (process.env.PORT || 8080));
+  console.log('version 0.X');
 
-server.listen(process.env.PORT || 8080);
+  server.listen(process.env.PORT || 8080);
 
-console.log(
+  console.log(
     '\nThe secret serverId for this server is \x1b[1m' +
-  serverId +
-  '\x1b[0m. Use it to access the following administrative routes:\n',
-);
-console.log(
+    serverId +
+    '\x1b[0m. Use it to access the following administrative routes:\n',
+  );
+  console.log(
     '* Overview of existing games: /games-overview?serverId=' + serverId,
-);
-console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+  );
+  console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+});

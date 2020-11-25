@@ -17,7 +17,7 @@ function corpCardNames(module: GameModule): Array<CardName> {
 // TODO(kberg): no need for both ALL_CORPORATION_DECKS and MANIFEST_BY_MODULE
 const allItems: Array<CardName> =
     ALL_CORPORATION_DECKS.map((deck) => deck.cards.map((cf) => cf.cardName))
-        .reduce((accumulator, cards) => accumulator.concat(cards));
+      .reduce((accumulator, cards) => accumulator.concat(cards));
 
 export const CorporationsFilter = Vue.component('corporations-filter', {
   props: {
@@ -117,25 +117,25 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
       this.$emit('corporation-list-changed', value);
     },
     corporateEra: function(enabled) {
-            enabled ? this.selectAll(GameModule.CorpEra) : this.selectNone(GameModule.CorpEra);
+      enabled ? this.selectAll(GameModule.CorpEra) : this.selectNone(GameModule.CorpEra);
     },
     prelude: function(enabled) {
-            enabled ? this.selectAll(GameModule.Prelude) : this.selectNone(GameModule.Prelude);
+      enabled ? this.selectAll(GameModule.Prelude) : this.selectNone(GameModule.Prelude);
     },
     venusNext: function(enabled) {
-            enabled ? this.selectAll(GameModule.Venus) : this.selectNone(GameModule.Venus);
+      enabled ? this.selectAll(GameModule.Venus) : this.selectNone(GameModule.Venus);
     },
     colonies: function(enabled) {
-            enabled ? this.selectAll(GameModule.Colonies) : this.selectNone(GameModule.Colonies);
+      enabled ? this.selectAll(GameModule.Colonies) : this.selectNone(GameModule.Colonies);
     },
     turmoil: function(enabled) {
-            enabled ? this.selectAll(GameModule.Turmoil) : this.selectNone(GameModule.Turmoil);
+      enabled ? this.selectAll(GameModule.Turmoil) : this.selectNone(GameModule.Turmoil);
     },
     promoCardsOption: function(enabled) {
-            enabled ? this.selectAll(GameModule.Promo) : this.selectNone(GameModule.Promo);
+      enabled ? this.selectAll(GameModule.Promo) : this.selectNone(GameModule.Promo);
     },
     communityCardsOption: function(enabled) {
-            enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
+      enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
     },
   },
   template: `

@@ -8,8 +8,8 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../constants';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
 
 export class Asteroid implements IProjectCard {
   public cost = 14;
@@ -37,6 +37,10 @@ export class Asteroid implements IProjectCard {
   public metadata: CardMetadata = {
     description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',
     cardNumber: '009',
-    renderData: CardRenderer.builder((b) => b.temperature(1).br.titanium(2).br.plants(-3).any),
+    renderData: CardRenderer.builder((b) => {
+      b.temperature(1).br;
+      b.titanium(2).br;
+      b.minus().plants(-3).any;
+    }),
   };
 }

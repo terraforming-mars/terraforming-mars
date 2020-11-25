@@ -46,31 +46,31 @@ export class DryDesertsDeferredAction implements DeferredAction {
     }, this.count);
 
     const selectResources = new AndOptions(
-        () => {
-          if (
-            megacreditsAmount +
+      () => {
+        if (
+          megacreditsAmount +
                     steelAmount +
                     titaniumAmount +
                     plantsAmount +
                     energyAmount +
                     heatAmount > this.count
-          ) {
-            throw new Error('Need to select ' + this.count + ' resource(s)');
-          }
-          this.player.megaCredits += megacreditsAmount;
-          this.player.steel += steelAmount;
-          this.player.titanium += titaniumAmount;
-          this.player.plants += plantsAmount;
-          this.player.energy += energyAmount;
-          this.player.heat += heatAmount;
-          return undefined;
-        },
-        selectMegacredit,
-        selectSteel,
-        selectTitanium,
-        selectPlants,
-        selectEnergy,
-        selectHeat,
+        ) {
+          throw new Error('Need to select ' + this.count + ' resource(s)');
+        }
+        this.player.megaCredits += megacreditsAmount;
+        this.player.steel += steelAmount;
+        this.player.titanium += titaniumAmount;
+        this.player.plants += plantsAmount;
+        this.player.energy += energyAmount;
+        this.player.heat += heatAmount;
+        return undefined;
+      },
+      selectMegacredit,
+      selectSteel,
+      selectTitanium,
+      selectPlants,
+      selectEnergy,
+      selectHeat,
     );
     selectResources.title = this.title;
 

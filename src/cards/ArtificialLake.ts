@@ -10,9 +10,9 @@ import {CardName} from '../CardName';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../constants';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class ArtificialLake implements IProjectCard {
   public cost = 15;

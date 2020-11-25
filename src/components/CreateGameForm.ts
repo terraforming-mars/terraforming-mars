@@ -137,9 +137,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
     };
 
     fetch('/api/clonablegames')
-        .then((response) => response.json())
-        .then(onSucces)
-        .catch((_) => alert('Unexpected server response'));
+      .then((response) => response.json())
+      .then(onSucces)
+      .catch((_) => alert('Unexpected server response'));
   },
   methods: {
     downloadCurrentSettings: function() {
@@ -279,8 +279,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
       if (component.randomFirstPlayer) {
         // Shuffle players array to assign each player a random seat around the table
         players = players.map((a) => ({sort: Math.random(), value: a}))
-            .sort((a, b) => a.sort - b.sort)
-            .map((a) => a.value);
+          .sort((a, b) => a.sort - b.sort)
+          .map((a) => a.value);
         component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
       }
 
@@ -423,9 +423,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
       };
 
       fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
-          .then((response) => response.json())
-          .then(onSucces)
-          .catch((_) => alert('Unexpected server response'));
+        .then((response) => response.json())
+        .then(onSucces)
+        .catch((_) => alert('Unexpected server response'));
     },
   },
 
@@ -664,7 +664,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 </label>
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">
-                                    <span v-i18n>Venus Terraforming</span>
+                                    <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
 

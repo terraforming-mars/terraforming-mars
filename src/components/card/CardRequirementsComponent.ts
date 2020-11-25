@@ -19,7 +19,7 @@ export const CardRequirementsComponent = Vue.component('CardRequirements', {
   },
   template: `
         <div v-if="requirements.hasParty()" :class="getClasses()">
-            <span class="party">{{ requirements.getRequirementsText() }}<span/>
+            <span class="party">{{ requirements.getRequirementsText() }}</span>
         </div>
         <div v-else :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
     `,

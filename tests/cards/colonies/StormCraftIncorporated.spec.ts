@@ -8,22 +8,26 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 
 describe('StormCraftIncorporated', function() {
+  let card : StormCraftIncorporated; let player : Player; let game : Game;
+
+  beforeEach(function() {
+    card = new StormCraftIncorporated();
+    player = new Player('test', Color.BLUE, false);
+    game = new Game('foobar', [player, player], player);
+
+    player.corporationCard = card;
+  });
+
   it('Should play', function() {
-    const card = new StormCraftIncorporated();
-    const player = new Player('test', Color.BLUE, false);
     const play = card.play();
     expect(play).is.undefined;
 
-    player.corporationCard = card;
-
-    const action = card.action(player);
+    const action = card.action(player, game);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
   });
+
   it('Restricts amounts when converting heat', function() {
-    const card = new StormCraftIncorporated();
-    const player = new Player('test', Color.BLUE, false);
-    const game = new Game('solo1', [player], player);
     player.heat = 10;
     card.resourceCount = 10;
     const action = card.convertHeatIntoTemperature(game, player);
@@ -34,10 +38,8 @@ describe('StormCraftIncorporated', function() {
     const floaterOption = options.options[1] as SelectAmount;
     expect(floaterOption.max).to.eq(constants.HEAT_FOR_TEMPERATURE / 2);
   });
+
   it('Validates inputs', function() {
-    const card = new StormCraftIncorporated();
-    const player = new Player('test', Color.BLUE, false);
-    const game = new Game('solo1', [player], player);
     player.heat = 10;
     card.resourceCount = 10;
     const action = card.convertHeatIntoTemperature(game, player);
@@ -54,10 +56,8 @@ describe('StormCraftIncorporated', function() {
       options.cb();
     }).to.throw(`Only need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
   });
+
   it('Converts heat with floaters and heat', function() {
-    const card = new StormCraftIncorporated();
-    const player = new Player('test', Color.BLUE, false);
-    const game = new Game('solo1', [player], player);
     player.heat = 10;
     card.resourceCount = 10;
     const action = card.convertHeatIntoTemperature(game, player);

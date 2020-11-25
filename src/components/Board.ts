@@ -70,9 +70,9 @@ export const Board = Vue.component('board', {
     getAllSpacesOnMars: function(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
       boardSpaces.sort(
-          (space1: SpaceModel, space2: SpaceModel) => {
-            return parseInt(space1.id) - parseInt(space2.id);
-          },
+        (space1: SpaceModel, space2: SpaceModel) => {
+          return parseInt(space1.id) - parseInt(space2.id);
+        },
       );
       return boardSpaces.filter((s: SpaceModel) => {
         return s.spaceType !== SpaceType.COLONY;
@@ -95,32 +95,32 @@ export const Board = Vue.component('board', {
       let strValue: string;
 
       switch (targetParameter) {
-        case 'oxygen':
-          startValue = constants.MIN_OXYGEN_LEVEL;
-          endValue = constants.MAX_OXYGEN_LEVEL;
-          step = 1;
-          curValue = this.oxygen_level;
-          break;
-        case 'temperature':
-          startValue = constants.MIN_TEMPERATURE;
-          endValue = constants.MAX_TEMPERATURE;
-          step = 2;
-          curValue = this.temperature;
-          break;
-        case 'venus':
-          startValue = constants.MIN_VENUS_SCALE;
-          endValue = constants.MAX_VENUS_SCALE;
-          step = 2;
-          curValue = this.venusScaleLevel;
-          break;
-        default:
-          throw 'Wrong parameter to get values from';
+      case 'oxygen':
+        startValue = constants.MIN_OXYGEN_LEVEL;
+        endValue = constants.MAX_OXYGEN_LEVEL;
+        step = 1;
+        curValue = this.oxygen_level;
+        break;
+      case 'temperature':
+        startValue = constants.MIN_TEMPERATURE;
+        endValue = constants.MAX_TEMPERATURE;
+        step = 2;
+        curValue = this.temperature;
+        break;
+      case 'venus':
+        startValue = constants.MIN_VENUS_SCALE;
+        endValue = constants.MAX_VENUS_SCALE;
+        step = 2;
+        curValue = this.venusScaleLevel;
+        break;
+      default:
+        throw 'Wrong parameter to get values from';
       }
 
       for (let value: number = endValue; value >= startValue; value -= step) {
         strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
         values.push(
-            new GlobalParamLevel(value, value === curValue, strValue),
+          new GlobalParamLevel(value, value === curValue, strValue),
         );
       }
       return values;

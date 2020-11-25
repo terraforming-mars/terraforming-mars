@@ -15,9 +15,9 @@ export class Inventrix implements CorporationCard {
     public initialActionText: string = 'Draw 3 cards';
     public initialAction(player: Player, game: Game) {
       player.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
+        game.dealer.dealCard(),
+        game.dealer.dealCard(),
+        game.dealer.dealCard(),
       );
 
       LogHelper.logCardChange(game, player, 'drew', 3);

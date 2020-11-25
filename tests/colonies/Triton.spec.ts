@@ -17,7 +17,7 @@ describe('Triton', function() {
   });
 
   it('Should build', function() {
-    triton.onColonyPlaced(player, game);
+    triton.addColony(player, game);
     expect(player.titanium).to.eq(3);
   });
 
@@ -28,7 +28,7 @@ describe('Triton', function() {
   });
 
   it('Should give trade bonus', function() {
-    triton.onColonyPlaced(player, game);
+    triton.addColony(player, game);
 
     triton.trade(player2, game);
     game.deferredActions.runAll(() => {});

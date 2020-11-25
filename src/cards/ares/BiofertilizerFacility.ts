@@ -32,7 +32,7 @@ export class BiofertilizerFacility implements IProjectCard {
         b.productionBox((pb) => pb.plants(1));
         b.microbes(2);
         b.br;
-        b.tile('board-space-tile--biofertilizer_facility');
+        b.tile('board-space-tile--biofertilizer_facility', true);
       }),
     };
     public canPlay(player: Player, _game: Game): boolean {

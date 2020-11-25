@@ -1955,16 +1955,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-    [CardName.DIRIGIBLES, ` 
-            <div class="content ">
-                <div class="red-arrow "></div> <div class="floater resource "></div>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-              <div class="resource-tag tag-venus"></div>  : <div class="floater resource "></div> = <div class="money resource ">3</div>
-                <div class="description ">
-                  (Action: add 1 Floater to ANY card.)<br><br>
-                  (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each)
-                </div>
-            </div>
-`],
     [CardName.EXTREMOPHILES, ` 
             <div class="content ">
               <div class="points">1/3<div class="resource microbe"></div></div>
@@ -2475,17 +2465,6 @@ export const HTML_DATA: Map<string, string> =
               </div>  / <div class="resource-tag" style="font-size: 42px; vertical-align: middle;background:white">X</div> *
               <div class="description">
                 (Increase your MC production 1 step per CARD WITH NO TAGS, including this.)
-              </div>
-            </div>
-`],
-    [CardName.EARTH_ELEVATOR, ` 
-            <div class="content">
-              <div class="points points-big">4</div>
-              <div class="production-box production-box-size3">
-                <div class="production titanium"></div><div class="production titanium"></div><div class="production titanium"></div>
-              </div>
-              <div class="description">
-                (Increase your titanium production 3 steps.)
               </div>
             </div>
 `],
@@ -4344,23 +4323,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.DUSK_LASER_MINING, ` 
-    <div class="content">
-        <div class="requirements">2 Science</div>
-        <div class="production-box production-box-size1a">
-            <div class="production-prefix minus"></div><div class="production energy"></div><br/>
-            <div class="production-prefix plus"></div><div class="production titanium"></div>
-        </div>
-        <div class="res-count-wrapper">
-          <span>4</span> <div class="resource titanium"></div>
-        </div>
-        <div class="description">
-            (Requires 2 Science tags.
-            Decrease your energy production 1 step, and increase your titanium production 1 step.
-            Gain 4 titanium.)
-        </div>
-    </div>
-`],
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -4412,21 +4374,6 @@ export const HTML_DATA: Map<string, string> =
         <div class="description">
             (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
         </div>
-    </div>
-`],
-    [CardName.DIRECTED_IMPACTORS, ` 
-    <div class="content">
-        <div class=" money resource">6</div> (<span class="titanium resource"></span>)
-        <span class="red-arrow"></span>
-        <div class="asteroid resource">A</div>*
-        <br>
-        OR <div class="asteroid resource">A</div>
-        <span class="red-arrow"></span>
-        <div class="tile temperature-tile"></div>
-        <div class="description">
-            (Action: Spend 6 MC to add 1 asteroid resource to ANY card (titanium may be used), or remove 1 asteroid resource here to raise temperature 1 step.)
-        </div>
-      </div>
     </div>
 `],
     [CardName.FIELD_CAPPED_CITY, ` 
@@ -4672,16 +4619,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="delegate"></div><div class="delegate"></div>
       <div class="description ">
         (Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.)
-      </div>
-  </div>
-`],
-    [CardName.DIASPORA_MOVEMENT, ` 
-  <div class="content ">
-      <div class="points points-big">1</div>
-      <div class="requirements"><span class="party">Reds</span></div>
-      <div class="money production">1</div> / &nbsp;&nbsp;<div class="resource-tag tag-jovian red-outline"></div>
-      <div class="description" style="margin-top:5px;">
-        (Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play.)
       </div>
   </div>
 `],

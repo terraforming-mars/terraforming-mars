@@ -18,54 +18,54 @@ import {TileType} from '../TileType';
  * Usage: new ActionDetails({ card: new LavaFlows(), temperatureIncrease: 2, nonOceanToPlace: TileType.LAVA_FLOWS, nonOceanAvailableSpaces: LavaFlows.getVolcanicSpaces(player, game) });
  */
 export class ActionDetails {
-    public card?: IProjectCard;
-    public standardProject?: StandardProjectType;
-    public isPlantsConversion: boolean = false;
-    public cost: number = 0; // Cost of the action in MC
-    public TRIncrease: number = 0; // If action increases TR
-    public oxygenIncrease: number = 0; // If action increases oxygen
-    public temperatureIncrease: number = 0; // If action increases temperature
-    public venusIncrease: number = 0; // If action increases Venus scale
-    public oceansToPlace: number = 0; // If action places an ocean tile
-    public oceansAvailableSpaces: Array<ISpace> = []; // Default spaces where the ocean tile can be placed
-    public nonOceanToPlace?: TileType; // If action places a non ocean tile (City, Greenery, Special, etc)
-    public nonOceanAvailableSpaces: Array<ISpace> = []; // Default spaces where non ocean tile can be placed
-    public animals: number = 0; // If action adds animals to a card
-    public microbes: number = 0; // If action adds microbes to a card
-    public megaCreditsProduction: number = 0; // If action increases MC production - for Manutech
-    public reservedHeat: number = 0; // If action requires heat - for Helion
+  public card?: IProjectCard;
+  public standardProject?: StandardProjectType;
+  public isPlantsConversion: boolean = false;
+  public cost: number = 0; // Cost of the action in MC
+  public TRIncrease: number = 0; // If action increases TR
+  public oxygenIncrease: number = 0; // If action increases oxygen
+  public temperatureIncrease: number = 0; // If action increases temperature
+  public venusIncrease: number = 0; // If action increases Venus scale
+  public oceansToPlace: number = 0; // If action places an ocean tile
+  public oceansAvailableSpaces: Array<ISpace> = []; // Default spaces where the ocean tile can be placed
+  public nonOceanToPlace?: TileType; // If action places a non ocean tile (City, Greenery, Special, etc)
+  public nonOceanAvailableSpaces: Array<ISpace> = []; // Default spaces where non ocean tile can be placed
+  public animals: number = 0; // If action adds animals to a card
+  public microbes: number = 0; // If action adds microbes to a card
+  public megaCreditsProduction: number = 0; // If action increases MC production - for Manutech
+  public reservedHeat: number = 0; // If action requires heat - for Helion
 
-    constructor(action: Partial<ActionDetails>) {
-      Object.assign(this, action);
-    }
+  constructor(action: Partial<ActionDetails>) {
+    Object.assign(this, action);
+  }
 }
 
 type ISpaceTree = Map<ISpace, ISpaceBranch>;
 type ISpaceBranch = ISpaceTree | undefined;
 
 export interface HowToAffordRedsPolicy {
-    canAfford: boolean, // true if the player can afford everything, false if not
-    mustSpendAtMost?: number, // if set, how much the player can spend on the card/action itself in MC
-    spaces?: ISpaceTree // A tree limiting available spaces for tile placements, if needed
+  canAfford: boolean, // true if the player can afford everything, false if not
+  mustSpendAtMost?: number, // if set, how much the player can spend on the card/action itself in MC
+  spaces?: ISpaceTree // A tree limiting available spaces for tile placements, if needed
 }
 
 export class RedsPolicy {
   /*
-     * Check if the player will be able to afford all Reds taxes after playing the card
-     * by checking every possible tile placement, etc
-     *
-     * Returns true if the card is playable no matter what
-     * Returns false if the card is not playable
-     * Otherwise, returns an array of ISpace where tiles must be placed in order to afford the taxes
-     */
+   * Check if the player will be able to afford all Reds taxes after playing the card
+   * by checking every possible tile placement, etc
+   *
+   * Returns true if the card is playable no matter what
+   * Returns false if the card is not playable
+   * Otherwise, returns an array of ISpace where tiles must be placed in order to afford the taxes
+   */
   public static canAffordRedsPolicy(
-      player: Player,
-      game: Game,
-      action: ActionDetails,
-      canUseSteel: boolean = false,
-      canUseTitanium: boolean = false,
-      canUseFloaters: boolean = false,
-      canUseMicrobes: boolean = false,
+    player: Player,
+    game: Game,
+    action: ActionDetails,
+    canUseSteel: boolean = false,
+    canUseTitanium: boolean = false,
+    canUseFloaters: boolean = false,
+    canUseMicrobes: boolean = false,
   ): HowToAffordRedsPolicy {
     // If oxygen increase will increase temperature
     if (game.getOxygenLevel() < 8 && game.getOxygenLevel() + action.oxygenIncrease >= 8) {
@@ -97,10 +97,10 @@ export class RedsPolicy {
 
 
     /*
-         * This could probably be saved on the player directly when said card is played
-         * Also one loop would be faster but then they wouldn't be consts and it'll be a bigger chunk.
-         * Anyway, this is a list of cards that can make the player get money from playing a TR-increasing card/action
-         */
+     * This could probably be saved on the player directly when said card is played
+     * Also one loop would be faster but then they wouldn't be consts and it'll be a bigger chunk.
+     * Anyway, this is a list of cards that can make the player get money from playing a TR-increasing card/action
+     */
     // Animals
     const hasEcologicalZone = player.playedCards.filter((c) => c.name === CardName.ECOLOGICAL_ZONE).length > 0;
     const hasHerbivores = player.playedCards.filter((c) => c.name === CardName.HERBIVORES).length > 0;
@@ -259,26 +259,26 @@ export class RedsPolicy {
 
 
     /*
-         * Ok so if we arrived here that means we have tiles to place
-         * Let's see if we can manage to pay Reds using the bonus placement from those tiles
-         *
-         * TODO: Include Ares adjacency bonus/malus/hazards
-         * TODO: Improve calculation for placement on HELIAS special ocean tile
-         */
+     * Ok so if we arrived here that means we have tiles to place
+     * Let's see if we can manage to pay Reds using the bonus placement from those tiles
+     *
+     * TODO: Include Ares adjacency bonus/malus/hazards
+     * TODO: Improve calculation for placement on HELIAS special ocean tile
+     */
 
     // Let's compute bonus MC from each board space
     const spacesBonusMC = RedsPolicy.getBoardSpacesBonusMC(player, game, isHelion);
 
     // And generate a tree of tile placements that provide at least |missingMC|
     const spacesTree: ISpaceTree = RedsPolicy.makeISpaceTree(
-        player,
-        game,
-        spacesBonusMC,
-        action.oceansToPlace,
-        action.oceansAvailableSpaces,
-            action.nonOceanToPlace !== undefined ? 1 : 0,
-            action.nonOceanAvailableSpaces,
-            missingMC,
+      player,
+      game,
+      spacesBonusMC,
+      action.oceansToPlace,
+      action.oceansAvailableSpaces,
+      action.nonOceanToPlace !== undefined ? 1 : 0,
+      action.nonOceanAvailableSpaces,
+      missingMC,
     );
 
 
@@ -296,7 +296,7 @@ export class RedsPolicy {
   public static getBoardSpacesBonusMC(player: Player, game: Game, isHelion: boolean = false): Array<number> {
     return game.board.spaces.map((space) => {
       let bonus = game.board.getAdjacentSpaces(space).filter(
-          (adjacentSpace) => Board.isOceanSpace(adjacentSpace)).length * player.oceanBonus;
+        (adjacentSpace) => Board.isOceanSpace(adjacentSpace)).length * player.oceanBonus;
 
       if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
         bonus -= 6;
@@ -320,16 +320,16 @@ export class RedsPolicy {
           tempBonusMC[game.board.spaces.indexOf(s)] += player.oceanBonus;
         });
         const tree = RedsPolicy.makeISpaceTree(
-            player,
-            game,
-            tempBonusMC,
-            oceans,
-            oceansSpaces.filter((s) => s.id !== space.id),
-            nonOcean,
-            nonOceanSpaces.filter((s) => s.id !== space.id),
-            target,
-            iteration + 1,
-            totalBonus + tempBonusMC[game.board.spaces.indexOf(space)],
+          player,
+          game,
+          tempBonusMC,
+          oceans,
+          oceansSpaces.filter((s) => s.id !== space.id),
+          nonOcean,
+          nonOceanSpaces.filter((s) => s.id !== space.id),
+          target,
+          iteration + 1,
+          totalBonus + tempBonusMC[game.board.spaces.indexOf(space)],
         );
         if (tree.size > 0) {
           spacesTree.set(space, tree);

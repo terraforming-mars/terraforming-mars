@@ -105,33 +105,33 @@ export class GreensPolicy04 implements Policy {
 
     if (availableMicrobeCards.length === 1) {
       orOptions.options.push(
-          new SelectOption('Add 2 microbes to' + availableMicrobeCards[0].name, 'Confirm', () => {
-            player.addResourceTo(availableMicrobeCards[0], 2);
-            LogHelper.logAddResource(game, player, availableMicrobeCards[0], 2);
+        new SelectOption('Add 2 microbes to' + availableMicrobeCards[0].name, 'Confirm', () => {
+          player.addResourceTo(availableMicrobeCards[0], 2);
+          LogHelper.logAddResource(game, player, availableMicrobeCards[0], 2);
 
-            return undefined;
-          }),
+          return undefined;
+        }),
       );
     } else if (availableMicrobeCards.length > 1) {
       orOptions.options.push(
-          new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
-            return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 2);
-              LogHelper.logAddResource(game, player, foundCards[0], 2);
-              return undefined;
-            });
-          }),
+        new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
+          return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 2);
+            LogHelper.logAddResource(game, player, foundCards[0], 2);
+            return undefined;
+          });
+        }),
       );
     }
 
     if (availableAnimalCards.length === 1) {
       orOptions.options.push(
-          new SelectOption('Add 1 animal to' + availableAnimalCards[0].name, 'Confirm', () => {
-            player.addResourceTo(availableAnimalCards[0]);
-            LogHelper.logAddResource(game, player, availableAnimalCards[0]);
+        new SelectOption('Add 1 animal to' + availableAnimalCards[0].name, 'Confirm', () => {
+          player.addResourceTo(availableAnimalCards[0]);
+          LogHelper.logAddResource(game, player, availableAnimalCards[0]);
 
-            return undefined;
-          }),
+          return undefined;
+        }),
       );
     } else if (availableAnimalCards.length > 1) {
       orOptions.options.push(new SelectOption('Add 1 animal to a card', 'Confirm', () => {

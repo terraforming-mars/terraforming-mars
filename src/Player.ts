@@ -2348,6 +2348,10 @@ export class Player implements ISerializable<SerializedPlayer> {
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
         turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
+        hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
+        // Controlled by cards with effects that might be called a second time recursively, I think.
+        // They set this to false in order to prevent card effects from triggering twice.
+        // Not sure this is clear.
         powerPlantCost: this.powerPlantCost,
         victoryPointsBreakdown: this.victoryPointsBreakdown,
         oceanBonus: this.oceanBonus,

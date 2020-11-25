@@ -112,12 +112,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       const bonuses = new pf.Factory().bonuses;
       switch (agendaStyle) {
-        case AgendaStyle.STANDARD:
-          return bonuses[0];
-        case AgendaStyle.RANDOM:
-          return bonuses[Math.floor(Math.random() * bonuses.length)];
-        default:
-          throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
+      case AgendaStyle.STANDARD:
+        return bonuses[0];
+      case AgendaStyle.RANDOM:
+        return bonuses[Math.floor(Math.random() * bonuses.length)];
+      default:
+        throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
       }
     }
 

@@ -62,14 +62,14 @@ export class UnityPolicy02 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.turmoilPolicyActionUsed = true;
     game.defer(new SelectHowToPayDeferred(
-        player,
-        15,
-        false,
-        true,
-        'Select how to pay for colony',
-        () => {
-          game.defer(new BuildColony(player, game, false, 'Select where to build colony'));
-        },
+      player,
+      15,
+      false,
+      true,
+      'Select how to pay for colony',
+      () => {
+        game.defer(new BuildColony(player, game, false, 'Select where to build colony'));
+      },
     ));
 
     return undefined;
@@ -87,16 +87,16 @@ export class UnityPolicy03 implements Policy {
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
-        player,
-        4,
-        false,
-        false,
-        'Select how to pay for action',
-        () => {
-          player.cardsInHand.push(game.drawCardsByTag(Tags.SPACE, 1)[0]);
-          const drawnCard = game.getCardsInHandByTag(player, Tags.SPACE).slice(-1)[0];
-          game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
-        },
+      player,
+      4,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        player.cardsInHand.push(game.drawCardsByTag(Tags.SPACE, 1)[0]);
+        const drawnCard = game.getCardsInHandByTag(player, Tags.SPACE).slice(-1)[0];
+        game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+      },
     ));
 
     return undefined;

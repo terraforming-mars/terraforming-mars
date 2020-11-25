@@ -55,20 +55,20 @@ export class ScientistsPolicy01 implements Policy {
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
-        player,
-        10,
-        false,
-        false,
-        'Select how to pay for action',
-        () => {
-          player.cardsInHand.push(
-              game.dealer.dealCard(),
-              game.dealer.dealCard(),
-              game.dealer.dealCard(),
-          );
-          player.turmoilPolicyActionUsed = true;
-          game.log('${0} drew 3 cards', (b) => b.player(player));
-        },
+      player,
+      10,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        player.cardsInHand.push(
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+        );
+        player.turmoilPolicyActionUsed = true;
+        game.log('${0} drew 3 cards', (b) => b.player(player));
+      },
     ));
 
     return undefined;
@@ -91,21 +91,21 @@ export class ScientistsPolicy03 implements Policy {
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
-        player,
-        4,
-        false,
-        false,
-        'Select how to pay for action',
-        () => {
-          return new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-            player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-            game.dealer.discard(foundCards[0]);
-            player.cardsInHand.push(game.dealer.dealCard());
-            player.turmoilPolicyActionUsed = true;
-            game.log('${0} discarded a card to draw a card', (b) => b.player(player));
-            return undefined;
-          });
-        },
+      player,
+      4,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        return new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+          player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
+          game.dealer.discard(foundCards[0]);
+          player.cardsInHand.push(game.dealer.dealCard());
+          player.turmoilPolicyActionUsed = true;
+          game.log('${0} discarded a card to draw a card', (b) => b.player(player));
+          return undefined;
+        });
+      },
     ));
 
     return undefined;

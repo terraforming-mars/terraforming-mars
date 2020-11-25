@@ -107,12 +107,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
 
       const bonuses = new pf.Factory().bonuses;
       switch (agendaStyle) {
-        case AgendaStyle.STANDARD:
-          return bonuses[0];
-        case AgendaStyle.RANDOM:
-          return bonuses[Math.floor(Math.random() * bonuses.length)];
-        default:
-          throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
+      case AgendaStyle.STANDARD:
+        return bonuses[0];
+      case AgendaStyle.RANDOM:
+        return bonuses[Math.floor(Math.random() * bonuses.length)];
+      default:
+        throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
       }
     }
 
@@ -409,6 +409,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
         globalEventDealer: this.globalEventDealer,
         distantGlobalEvent: this.distantGlobalEvent,
         commingGlobalEvent: this.commingGlobalEvent,
+        politicalAgendasData: this.politicalAgendasData,
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;

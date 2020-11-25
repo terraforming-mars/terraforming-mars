@@ -2,6 +2,7 @@ import {IParty} from './parties/IParty';
 import {GlobalEventDealer} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {PlayerId} from '../Player';
+import {PoliticalAgendasData} from './PoliticalAgendasData';
 
 export interface SerializedTurmoil {
     chairman: undefined | PlayerId | 'NEUTRAL';
@@ -15,4 +16,5 @@ export interface SerializedTurmoil {
     distantGlobalEvent: IGlobalEvent | undefined;
     commingGlobalEvent: IGlobalEvent | undefined;
     currentGlobalEvent?: IGlobalEvent;
+    politicalAgendasData: PoliticalAgendasData;
 }

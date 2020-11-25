@@ -6,6 +6,9 @@ import {SelectCard} from '../inputs/SelectCard';
 import {CardName} from '../CardName';
 import {Game} from '../Game';
 import {LogHelper} from '../components/LogHelper';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
+import {CardRenderItemSize} from './render/CardRenderItemSize';
 
 export class CEOsFavoriteProject implements IProjectCard {
     public cost = 1;
@@ -28,6 +31,10 @@ export class CEOsFavoriteProject implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '149',
+      renderData: CardRenderer.builder((b) => b.text('Add 1 resource to a card with at least 1 resource on it', CardRenderItemSize.SMALL, true)),
     }
 }
 

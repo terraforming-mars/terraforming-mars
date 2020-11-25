@@ -1872,6 +1872,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
+<<<<<<< HEAD
     [CardName.DIRIGIBLES, ` 
             <div class="content ">
                 <div class="red-arrow "></div> <div class="floater resource "></div>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -1883,6 +1884,8 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
+=======
+>>>>>>> 5 more
     [CardName.EXTREMOPHILES, ` 
             <div class="content ">
               <div class="points">1/3<div class="resource microbe"></div></div>
@@ -2393,17 +2396,6 @@ export const HTML_DATA: Map<string, string> =
               </div>  / <div class="resource-tag" style="font-size: 42px; vertical-align: middle;background:white">X</div> *
               <div class="description">
                 (Increase your MC production 1 step per CARD WITH NO TAGS, including this.)
-              </div>
-            </div>
-`],
-    [CardName.EARTH_ELEVATOR, ` 
-            <div class="content">
-              <div class="points points-big">4</div>
-              <div class="production-box production-box-size3">
-                <div class="production titanium"></div><div class="production titanium"></div><div class="production titanium"></div>
-              </div>
-              <div class="description">
-                (Increase your titanium production 3 steps.)
               </div>
             </div>
 `],
@@ -4261,6 +4253,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+<<<<<<< HEAD
     [CardName.DUSK_LASER_MINING, ` 
     <div class="content">
         <div class="requirements">2 Science</div>
@@ -4276,6 +4269,8 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+=======
+>>>>>>> 5 more
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -4327,21 +4322,6 @@ export const HTML_DATA: Map<string, string> =
         <div class="description">
             (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
         </div>
-    </div>
-`],
-    [CardName.DIRECTED_IMPACTORS, ` 
-    <div class="content">
-        <div class=" money resource">6</div> (<span class="titanium resource"></span>)
-        <span class="red-arrow"></span>
-        <div class="asteroid resource">A</div>*
-        <br>
-        OR <div class="asteroid resource">A</div>
-        <span class="red-arrow"></span>
-        <div class="tile temperature-tile"></div>
-        <div class="description">
-            (Action: Spend 6 MC to add 1 asteroid resource to ANY card (titanium may be used), or remove 1 asteroid resource here to raise temperature 1 step.)
-        </div>
-      </div>
     </div>
 `],
     [CardName.FIELD_CAPPED_CITY, ` 
@@ -4578,16 +4558,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="delegate"></div><div class="delegate"></div>
       <div class="description ">
         (Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.)
-      </div>
-  </div>
-`],
-    [CardName.DIASPORA_MOVEMENT, ` 
-  <div class="content ">
-      <div class="points points-big">1</div>
-      <div class="requirements"><span class="party">Reds</span></div>
-      <div class="money production">1</div> / &nbsp;&nbsp;<div class="resource-tag tag-jovian red-outline"></div>
-      <div class="description" style="margin-top:5px;">
-        (Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play.)
       </div>
   </div>
 `],
@@ -4973,19 +4943,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-<<<<<<< HEAD
-    [CardName.DESPERATE_MEASURES, `
-    <div class="card-number">A04</div>
-    <div class="content ">
-        <div class="points ">-2</span></div>
-        <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
-        <div class="description " style="text-align:left;">
-            (Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
-        </div>
-    </div>
-`],
-=======
->>>>>>> 10 more
     [CardName.ECOLOGICAL_SURVEY, `
     <div class="card-number">A05</div>
     <div class="content ">

@@ -22,6 +22,7 @@ describe('CardMetadata', function() {
           if (vp !== 0) {
             expect(card.metadata.victoryPoints, card.name + ' has invalid VP metadata').to.eq(vp);
           }
+          // If vp === 0 that means it's a variable VP card, so we can't check the actual value
         }
       });
     });

@@ -57,7 +57,7 @@ export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxCo
                 </div>
             </div>
         </div>
-        <CardDescription v-if="hasDescription()" :text="effectData.description" />
+        <CardDescription v-if="hasDescription()" :item="effectData.description" />
       </div>
     `,
 });

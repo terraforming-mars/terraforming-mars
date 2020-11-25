@@ -8,6 +8,7 @@ import {
 } from '../cards/AllCards';
 import {GameModule} from '../GameModule';
 import {ICard} from '../cards/ICard';
+import {ICardRenderDescription, isIDescription} from '../cards/render/ICardRenderDescription';
 
 interface Entry {
   card: ICard,
@@ -71,7 +72,10 @@ export const DebugUI = Vue.component('debug-ui', {
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().indexOf(filterText) === -1) {
           if (this.$data.filterDescription) {
-            const desc = card?.card.metadata?.description;
+            let desc: string | ICardRenderDescription | undefined = card?.card.metadata?.description;
+            if (isIDescription(desc)) {
+              desc = desc.text;
+            }
             // TODO(kberg): optimize by having all the descriptions in upper case.
             if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
               return false;

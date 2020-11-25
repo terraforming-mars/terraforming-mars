@@ -217,6 +217,16 @@ class Builder {
     return this;
   }
 
+  public jovian(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.JOVIAN));
+    return this;
+  }
+
+  public venusTag(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.VENUS_TAG));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
     return this;
@@ -290,6 +300,12 @@ class Builder {
   public colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.colon(size));
+    return this;
+  }
+
+  public equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.equals(size));
     return this;
   }
 

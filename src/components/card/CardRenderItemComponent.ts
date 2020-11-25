@@ -85,6 +85,10 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-tag-event');
       } else if (type === CardRenderItemType.SPACE) {
         classes.push('card-tag-space');
+      } else if (type === CardRenderItemType.JOVIAN) {
+        classes.push('card-tag-jovian');
+      } else if (type === CardRenderItemType.VENUS_TAG) {
+        classes.push('card-tag-venus');
       }
       // round tags
       if (this.item.isPlayed) {

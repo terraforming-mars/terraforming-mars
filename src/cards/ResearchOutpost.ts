@@ -17,10 +17,10 @@ export class ResearchOutpost implements IProjectCard {
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
       return game.board.getAvailableSpacesOnLand(player)
-          .filter((space) => {
-            const adjacentSpaces = game.board.getAdjacentSpaces(space);
-            return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
-          });
+        .filter((space) => {
+          const adjacentSpaces = game.board.getAdjacentSpaces(space);
+          return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
+        });
     }
     public canPlay(player: Player, game: Game): boolean {
       return this.getAvailableSpaces(player, game).length > 0;

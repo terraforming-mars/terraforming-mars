@@ -31,11 +31,11 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
       return undefined;
     });
     const removeFloaters = new SelectCard(
-        'Select card to remove 2 floaters from', 'Remove floaters', floaterCards,
-        (foundCards: Array<ICard>) => {
-          this.player.removeResourceFrom(foundCards[0], 2);
-          return undefined;
-        },
+      'Select card to remove 2 floaters from', 'Remove floaters', floaterCards,
+      (foundCards: Array<ICard>) => {
+        this.player.removeResourceFrom(foundCards[0], 2);
+        return undefined;
+      },
     );
     selectAction.options.push(payMC, removeFloaters);
 

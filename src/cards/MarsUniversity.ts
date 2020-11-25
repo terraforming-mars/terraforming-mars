@@ -19,24 +19,24 @@ export class MarsUniversity implements IProjectCard {
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
       for (let i = 0; i < scienceTags; i++) {
         game.defer(new DeferredAction(
-            player,
-            () => {
-              // No card to discard
-              if (player.cardsInHand.length === 0) {
+          player,
+          () => {
+            // No card to discard
+            if (player.cardsInHand.length === 0) {
+              return undefined;
+            }
+            return new OrOptions(
+              new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
+                game.dealer.discard(foundCards[0]);
+                player.cardsInHand.push(game.dealer.dealCard());
                 return undefined;
-              }
-              return new OrOptions(
-                  new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-                    player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-                    game.dealer.discard(foundCards[0]);
-                    player.cardsInHand.push(game.dealer.dealCard());
-                    return undefined;
-                  }),
-                  new SelectOption('Do nothing', 'Confirm', () => {
-                    return undefined;
-                  }),
-              );
-            },
+              }),
+              new SelectOption('Do nothing', 'Confirm', () => {
+                return undefined;
+              }),
+            );
+          },
         ));
       }
       return undefined;

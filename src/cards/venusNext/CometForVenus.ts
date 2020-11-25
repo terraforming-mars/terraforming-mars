@@ -41,14 +41,14 @@ export class CometForVenus implements IProjectCard {
       }
 
       return new SelectPlayer(
-          venusTagPlayers,
-          'Select player to remove up to 4 mega credits from',
-          'Remove MC',
-          (selectedPlayer: Player) => {
-            selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
-            game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-          },
+        venusTagPlayers,
+        'Select player to remove up to 4 mega credits from',
+        'Remove MC',
+        (selectedPlayer: Player) => {
+          selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
+          game.increaseVenusScaleLevel(player, 1);
+          return undefined;
+        },
       );
     }
 }

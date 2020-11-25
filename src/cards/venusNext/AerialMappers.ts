@@ -10,9 +10,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
-import {CardMetadata} from './../CardMetadata';
-import {CardRenderer} from './../render/CardRenderer';
-import {CardRenderItemSize} from './../render/CardRenderItemSize';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public cost = 11;
@@ -77,5 +77,6 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
       b.or(CardRenderItemSize.SMALL).br;
       b.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'));
     }),
+    victoryPoints: 1,
   };
 }

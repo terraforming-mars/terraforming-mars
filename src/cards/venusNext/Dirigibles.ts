@@ -34,14 +34,14 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
       }
 
       return new SelectCard(
-          'Select card to add 1 floater',
-          'Add floater',
-          floaterCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 1);
-            LogHelper.logAddResource(game, player, foundCards[0]);
-            return undefined;
-          },
+        'Select card to add 1 floater',
+        'Add floater',
+        floaterCards,
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 1);
+          LogHelper.logAddResource(game, player, foundCards[0]);
+          return undefined;
+        },
       );
     }
 }

@@ -14,9 +14,9 @@ export class IoSulphurResearch implements IProjectCard {
     public play(player: Player, game: Game) {
       if (player.getTagCount(Tags.VENUS) >= 3) {
         player.cardsInHand.push(
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
-            game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
         );
         return undefined;
       }

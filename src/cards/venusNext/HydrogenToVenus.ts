@@ -52,15 +52,15 @@ export class HydrogenToVenus implements IProjectCard {
         }
         if (floatersCards.length > 1) {
           return new SelectCard(
-              'Select card to add ' + jovianTags + ' floater(s)',
-              'Add floater(s)',
-              floatersCards,
-              (foundCards: Array<ICard>) => {
-                player.addResourceTo(foundCards[0], jovianTags);
-                LogHelper.logAddResource(game, player, foundCards[0], jovianTags);
-                game.increaseVenusScaleLevel(player, 1);
-                return undefined;
-              },
+            'Select card to add ' + jovianTags + ' floater(s)',
+            'Add floater(s)',
+            floatersCards,
+            (foundCards: Array<ICard>) => {
+              player.addResourceTo(foundCards[0], jovianTags);
+              LogHelper.logAddResource(game, player, foundCards[0], jovianTags);
+              game.increaseVenusScaleLevel(player, 1);
+              return undefined;
+            },
           );
         }
       }

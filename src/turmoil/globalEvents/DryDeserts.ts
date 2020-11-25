@@ -23,9 +23,9 @@ export class DryDeserts implements IGlobalEvent {
       game.getPlayers().forEach((player) => {
         if (turmoil.getPlayerInfluence(player) > 0) {
           game.defer(new DryDesertsDeferredAction(
-              player,
-              game,
-              turmoil.getPlayerInfluence(player),
+            player,
+            game,
+            turmoil.getPlayerInfluence(player),
           ));
         }
       });

@@ -115,7 +115,6 @@ export class Game implements ISerializable<SerializedGame, Game> {
     public phase: Phase = Phase.RESEARCH;
     public dealer: Dealer;
     public board: Board;
-    public gameOptions: GameOptions;
 
     // Global parameters
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -156,46 +155,35 @@ export class Game implements ISerializable<SerializedGame, Game> {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      gameOptions?: GameOptions,
-    ) {
-      Database.getInstance();
-
-      if (gameOptions === undefined) {
-        gameOptions = {
-          boardName: BoardName.ORIGINAL,
-          clonedGamedId: undefined,
-
-          undoOption: false,
-          fastModeOption: false,
-          showOtherPlayersVP: false,
-
-          corporateEra: true,
-          venusNextExtension: false,
-          coloniesExtension: false,
-          preludeExtension: false,
-          turmoilExtension: false,
-          promoCardsOption: false,
-          communityCardsOption: false,
-          aresExtension: false,
-          aresHazards: true,
-          solarPhaseOption: false,
-          removeNegativeGlobalEventsOption: false,
-          includeVenusMA: true,
-
-          draftVariant: false,
-          initialDraftVariant: false,
-          startingCorporations: 2,
-          shuffleMapOption: false,
-          randomMA: RandomMAOptionType.NONE,
-          soloTR: false,
-          customCorporationsList: [],
-          cardsBlackList: [],
-          customColoniesList: [],
-          requiresVenusTrackCompletion: false,
-        };
-      }
-      this.gameOptions = gameOptions;
-
+      public gameOptions: GameOptions = {
+        aresExtension: false,
+        aresHazards: true,
+        boardName: BoardName.ORIGINAL,
+        cardsBlackList: [],
+        clonedGamedId: undefined,
+        coloniesExtension: false,
+        communityCardsOption: false,
+        corporateEra: true,
+        customColoniesList: [],
+        customCorporationsList: [],
+        draftVariant: false,
+        fastModeOption: false,
+        includeVenusMA: true,
+        initialDraftVariant: false,
+        preludeExtension: false,
+        promoCardsOption: false,
+        randomMA: RandomMAOptionType.NONE,
+        removeNegativeGlobalEventsOption: false,
+        requiresVenusTrackCompletion: false,
+        showOtherPlayersVP: false,
+        shuffleMapOption: false,
+        solarPhaseOption: false,
+        soloTR: false,
+        startingCorporations: 2,
+        turmoilExtension: false,
+        undoOption: false,
+        venusNextExtension: false,
+      }) {
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
@@ -206,15 +194,15 @@ export class Game implements ISerializable<SerializedGame, Game> {
       this.activePlayer = first.id;
 
       this.dealer = new Dealer(
-          gameOptions.corporateEra,
-          gameOptions.preludeExtension,
-          gameOptions.venusNextExtension,
-          gameOptions.coloniesExtension,
-          gameOptions.promoCardsOption,
-          gameOptions.turmoilExtension,
-          gameOptions.aresExtension,
-          gameOptions.communityCardsOption,
-          gameOptions.cardsBlackList,
+        gameOptions.corporateEra,
+        gameOptions.preludeExtension,
+        gameOptions.venusNextExtension,
+        gameOptions.coloniesExtension,
+        gameOptions.promoCardsOption,
+        gameOptions.turmoilExtension,
+        gameOptions.aresExtension,
+        gameOptions.communityCardsOption,
+        gameOptions.cardsBlackList,
       );
 
       // Clone game
@@ -280,13 +268,15 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
+      // Failsafe for exceding corporation pool
+      if (gameOptions.startingCorporations * players.length > corporationCards.length) {
+        gameOptions.startingCorporations = 2;
+      }
+
       // Initialize each player:
       // Give them their corporation cards, other cards, starting production,
       // handicaps.
-      for (let i = 0; i < players.length; i++) {
-        const player = players[i];
-        const remainingPlayers = this.players.length - i;
-
+      for (const player of this.getPlayers()) {
         player.increaseTerraformRatingSteps(player.handicap, this);
 
         if (!player.beginner ||
@@ -296,12 +286,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
               gameOptions.coloniesExtension ||
               gameOptions.turmoilExtension ||
               gameOptions.initialDraftVariant) {
-          // Failsafe for exceding corporation pool
-          if (gameOptions.startingCorporations * remainingPlayers > corporationCards.length) {
-            gameOptions.startingCorporations = 2;
-          }
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
-            const corpCard : CorporationCard | undefined = corporationCards.pop();
+            const corpCard = corporationCards.pop();
             if (corpCard !== undefined) {
               player.dealtCorporationCards.push(corpCard);
             } else {
@@ -499,10 +485,10 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
     private addVenusBoardSpaces() {
       this.board.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS),
+        new BoardColony(SpaceName.DAWN_CITY),
+        new BoardColony(SpaceName.LUNA_METROPOLIS),
+        new BoardColony(SpaceName.MAXWELL_BASE),
+        new BoardColony(SpaceName.STRATOPOLIS),
       );
     }
 
@@ -599,24 +585,24 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
     public getColoniesModel(colonies: Array<Colony>) : Array<ColonyModel> {
       return colonies.map(
-          (colony): ColonyModel => ({
-            colonies: colony.colonies.map(
-                (playerId): Color => this.getPlayerById(playerId).color,
-            ),
-            isActive: colony.isActive,
-            name: colony.name,
-            trackPosition: colony.trackPosition,
-            visitor:
+        (colony): ColonyModel => ({
+          colonies: colony.colonies.map(
+            (playerId): Color => this.getPlayerById(playerId).color,
+          ),
+          isActive: colony.isActive,
+          name: colony.name,
+          trackPosition: colony.trackPosition,
+          visitor:
                 colony.visitor === undefined ?
-                    undefined :
-                    this.getPlayerById(colony.visitor).color,
-          }),
+                  undefined :
+                  this.getPlayerById(colony.visitor).color,
+        }),
       );
     }
 
     public milestoneClaimed(milestone: IMilestone): boolean {
       return this.claimedMilestones.find(
-          (claimedMilestone) => claimedMilestone.milestone === milestone,
+        (claimedMilestone) => claimedMilestone.milestone === milestone,
       ) !== undefined;
     }
 
@@ -660,7 +646,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         throw new Error('All awards already funded');
       }
       this.log('${0} funded ${1} award',
-          (b) => b.player(player).award(award));
+        (b) => b.player(player).award(award));
 
       this.fundedAwards.push({
         award: award,
@@ -670,7 +656,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
     public hasBeenFunded(award: IAward): boolean {
       return this.fundedAwards.find(
-          (fundedAward) => fundedAward.award === award,
+        (fundedAward) => fundedAward.award === award,
       ) !== undefined;
     }
 
@@ -699,7 +685,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     private playCorporationCard(
-        player: Player, corporationCard: CorporationCard,
+      player: Player, corporationCard: CorporationCard,
     ): void {
       // Check for negative M€
       let cardCost = player.cardCost;
@@ -727,13 +713,13 @@ export class Game implements ISerializable<SerializedGame, Game> {
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
           this.defer(new DeferredAction(
-              player,
-              () => {
-                if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-                  return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard) || undefined;
-                }
-                return undefined;
-              },
+            player,
+            () => {
+              if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
+                return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard) || undefined;
+              }
+              return undefined;
+            },
           ));
         }
       }
@@ -764,45 +750,45 @@ export class Game implements ISerializable<SerializedGame, Game> {
       result.buttonLabel = 'Start';
 
       result.options.push(
-          new SelectCard<CorporationCard>(
-              'Select corporation', undefined, player.dealtCorporationCards,
-              (foundCards: Array<CorporationCard>) => {
-                corporation = foundCards[0];
-                return undefined;
-              },
-          ),
+        new SelectCard<CorporationCard>(
+          'Select corporation', undefined, player.dealtCorporationCards,
+          (foundCards: Array<CorporationCard>) => {
+            corporation = foundCards[0];
+            return undefined;
+          },
+        ),
       );
 
       if (this.gameOptions.preludeExtension) {
         result.options.push(
-            new SelectCard(
-                'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
-                (preludeCards: Array<IProjectCard>) => {
-                  player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
-                  return undefined;
-                }, 2, 2,
-            ),
+          new SelectCard(
+            'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
+            (preludeCards: Array<IProjectCard>) => {
+              player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
+              return undefined;
+            }, 2, 2,
+          ),
         );
       }
 
       result.options.push(
-          new SelectCard(
-              'Select initial cards to buy', undefined, player.dealtProjectCards,
-              (foundCards: Array<IProjectCard>) => {
-                for (const dealt of foundCards) {
-                  if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
-                    player.cardsInHand.push(dealt);
-                  }
-                }
+        new SelectCard(
+          'Select initial cards to buy', undefined, player.dealtProjectCards,
+          (foundCards: Array<IProjectCard>) => {
+            for (const dealt of foundCards) {
+              if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
+                player.cardsInHand.push(dealt);
+              }
+            }
 
-                // discard all unpurchased cards
-                player.dealtProjectCards
-                    .filter((card) => !foundCards.includes(card))
-                    .forEach((card) => this.dealer.discard(card));
+            // discard all unpurchased cards
+            player.dealtProjectCards
+              .filter((card) => !foundCards.includes(card))
+              .forEach((card) => this.dealer.discard(card));
 
-                return undefined;
-              }, 10, 0,
-          ),
+            return undefined;
+          }, 10, 0,
+        ),
       );
       return result;
     }
@@ -1095,7 +1081,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     private getPreviousPlayer(
-        players: Array<Player>, player: Player,
+      players: Array<Player>, player: Player,
     ): Player | undefined {
       const playerIndex: number = players.indexOf(player);
 
@@ -1109,7 +1095,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     private getNextPlayer(
-        players: Array<Player>, player: Player,
+      players: Array<Player>, player: Player,
     ): Player | undefined {
       const playerIndex: number = players.indexOf(player);
 
@@ -1187,7 +1173,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
     private gotoFinalGreeneryPlacement(): void {
       const players = this.players.filter(
-          (player) => this.canPlaceGreenery(player),
+        (player) => this.canPlaceGreenery(player),
       );
       // If no players can place greeneries we are done
       if (players.length === 0) {
@@ -1362,7 +1348,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
     public getCitiesInPlayOnMars(): number {
       return this.board.spaces.filter(
-          (space) => space.tile !== undefined &&
+        (space) => space.tile !== undefined &&
                  ((space.tile.tileType === TileType.CITY &&
                  space.spaceType !== SpaceType.COLONY) ||
                  space.tile.tileType === TileType.CAPITAL ||
@@ -1374,15 +1360,15 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
     public getSpaceCount(tileType: TileType, player: Player): number {
       return this.board.spaces.filter(
-          (space) => space.tile !== undefined &&
+        (space) => space.tile !== undefined &&
                    space.tile.tileType === tileType &&
                    space.player !== undefined &&
                    space.player === player,
       ).length;
     }
     public addTile(
-        player: Player, spaceType: SpaceType,
-        space: ISpace, tile: ITile): void {
+      player: Player, spaceType: SpaceType,
+      space: ISpace, tile: ITile): void {
       // Part 1, basic validation checks.
 
       if (space.tile !== undefined && !this.gameOptions.aresExtension) {
@@ -1396,7 +1382,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       if (space.spaceType !== spaceType) {
         throw new Error(
-            `Select a valid location ${space.spaceType} is not ${spaceType}`,
+          `Select a valid location ${space.spaceType} is not ${spaceType}`,
         );
       }
       AresHandler.ifAres(this, () => {
@@ -1511,9 +1497,9 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     public addGreenery(
-        player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.LAND,
-        shouldRaiseOxygen: boolean = true): undefined {
+      player: Player, spaceId: string,
+      spaceType: SpaceType = SpaceType.LAND,
+      shouldRaiseOxygen: boolean = true): undefined {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY,
       });
@@ -1524,8 +1510,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
       return undefined;
     }
     public addCityTile(
-        player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
-        cardName: string | undefined = undefined): void {
+      player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
+      cardName: string | undefined = undefined): void {
       const space = this.getSpace(spaceId);
       this.addTile(player, spaceType, space, {
         tileType: TileType.CITY,
@@ -1533,8 +1519,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
       });
     }
     public addOceanTile(
-        player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.OCEAN): void {
+      player: Player, spaceId: string,
+      spaceType: SpaceType = SpaceType.OCEAN): void {
       if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
@@ -1673,7 +1659,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         const space1 = game.getSpaceByOffset(direction);
         game.addCityTile(neutral, space1.id, SpaceType.LAND);
         const fspace1 = game.board.getForestSpace(
-            game.board.getAdjacentSpaces(space1),
+          game.board.getAdjacentSpaces(space1),
         );
         game.addTile(neutral, SpaceType.LAND, fspace1, {
           tileType: TileType.GREENERY,
@@ -1692,11 +1678,11 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       const distance = Math.max(card.cost-1, 0); // Some cards cost zero.
       const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
-          (space) => {
-            const adjacentSpaces = this.board.getAdjacentSpaces(space);
-            return adjacentSpaces.filter((sp) => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby
+        (space) => {
+          const adjacentSpaces = this.board.getAdjacentSpaces(space);
+          return adjacentSpaces.filter((sp) => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby
              adjacentSpaces.find((sp) => this.board.canPlaceTile(sp)) !== undefined; // can place forest nearby
-          });
+        });
       if (space === undefined) {
         throw new Error('Couldn\'t find space when card cost is ' + card.cost);
       }

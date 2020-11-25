@@ -34,21 +34,21 @@ export class StealResources implements DeferredAction {
     const stealOptions = candidates.map((candidate) => {
       const qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
       return new SelectOption(
-          'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
-          'Steal',
-          () => {
-            candidate.setResource(this.resource, -qtyToSteal, this.game, this.player);
-            this.player.setResource(this.resource, qtyToSteal);
-            return undefined;
-          },
+        'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
+        'Steal',
+        () => {
+          candidate.setResource(this.resource, -qtyToSteal, this.game, this.player);
+          this.player.setResource(this.resource, qtyToSteal);
+          return undefined;
+        },
       );
     });
 
     return new OrOptions(
-        ...stealOptions,
-        new SelectOption('Do not steal', 'Confirm', () => {
-          return undefined;
-        }),
+      ...stealOptions,
+      new SelectOption('Do not steal', 'Confirm', () => {
+        return undefined;
+      }),
     );
   }
 }

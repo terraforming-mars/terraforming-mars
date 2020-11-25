@@ -16,14 +16,14 @@ export class HiredRaiders implements IProjectCard {
     public play(player: Player, game: Game) {
       if (game.isSoloMode()) {
         return new OrOptions(
-            new SelectOption('Steal 2 steel', 'Steal steel', () => {
-              player.steel += 2;
-              return undefined;
-            }),
-            new SelectOption('Steal 3 mega credit', 'Steal MC', () => {
-              player.megaCredits += 3;
-              return undefined;
-            }),
+          new SelectOption('Steal 2 steel', 'Steal steel', () => {
+            player.steel += 2;
+            return undefined;
+          }),
+          new SelectOption('Steal 3 mega credit', 'Steal MC', () => {
+            player.megaCredits += 3;
+            return undefined;
+          }),
         );
       }
 

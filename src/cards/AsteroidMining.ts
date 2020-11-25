@@ -5,7 +5,7 @@ import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardRenderer} from './render/CardRenderer';
 
 export class AsteroidMining implements IProjectCard {
   public cost = 30;

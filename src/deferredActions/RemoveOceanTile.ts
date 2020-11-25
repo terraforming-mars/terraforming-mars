@@ -17,14 +17,14 @@ export class RemoveOceanTile implements DeferredAction {
       return undefined;
     }
     return new SelectSpace(
-        this.title,
-        // false: don't include upgraded oceans.
-        this.game.board.getOceansTiles(false),
-        (space: ISpace) => {
-          this.game.removeTile(space.id);
-          LogHelper.logBoardTileAction(this.game, this.player, space, 'ocean tile', 'removed');
-          return undefined;
-        },
+      this.title,
+      // false: don't include upgraded oceans.
+      this.game.board.getOceansTiles(false),
+      (space: ISpace) => {
+        this.game.removeTile(space.id);
+        LogHelper.logBoardTileAction(this.game, this.player, space, 'ocean tile', 'removed');
+        return undefined;
+      },
     );
   }
 }

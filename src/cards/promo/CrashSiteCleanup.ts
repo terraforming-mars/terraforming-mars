@@ -20,23 +20,23 @@ export class CrashSiteCleanup implements IProjectCard {
 
     public play(player: Player, game: Game) {
       const gainTitanium = new SelectOption(
-          'Gain 1 titanium',
-          'Gain titanium',
-          () => {
-            player.titanium++;
-            LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
-            return undefined;
-          },
+        'Gain 1 titanium',
+        'Gain titanium',
+        () => {
+          player.titanium++;
+          LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
+          return undefined;
+        },
       );
 
       const gain2Steel = new SelectOption(
-          'Gain 2 steel',
-          'Gain steel',
-          () => {
-            player.steel += 2;
-            LogHelper.logGainStandardResource(game, player, Resources.STEEL, 2);
-            return undefined;
-          },
+        'Gain 2 steel',
+        'Gain steel',
+        () => {
+          player.steel += 2;
+          LogHelper.logGainStandardResource(game, player, Resources.STEEL, 2);
+          return undefined;
+        },
       );
 
       return new OrOptions(gainTitanium, gain2Steel);

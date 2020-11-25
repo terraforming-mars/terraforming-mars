@@ -36,7 +36,7 @@ export const OrOptions = Vue.component('or-options', {
   methods: {
     saveData: function() {
       const componentInstance = this.$data.childComponents[
-          this.$data.selectedOption
+        this.$data.selectedOption
       ].componentInstance;
       if (componentInstance !== undefined) {
         if ((componentInstance as any).saveData instanceof Function) {
@@ -53,9 +53,9 @@ export const OrOptions = Vue.component('or-options', {
     const children: Array<VNode> = [];
     if (this.showtitle) {
       children.push(
-          createElement('label', [
-            createElement('div', $t(this.playerinput.title)),
-          ]),
+        createElement('label', [
+          createElement('div', $t(this.playerinput.title)),
+        ]),
       );
     }
     const optionElements: Array<VNode> = [];
@@ -75,72 +75,72 @@ export const OrOptions = Vue.component('or-options', {
         domProps.checked = true;
       }
       subchildren.push(
-          createElement('label', {'class': 'form-radio'}, [
-            createElement('input', {
-              domProps,
-              on: {
-                change: (event: any) => {
-                  this.selectedOption = Number(
-                      event.target.value,
-                  );
-                },
+        createElement('label', {'class': 'form-radio'}, [
+          createElement('input', {
+            domProps,
+            on: {
+              change: (event: any) => {
+                this.selectedOption = Number(
+                  event.target.value,
+                );
               },
-            }),
-            createElement('i', {'class': 'form-icon'}),
-            createElement('span', $t(option.title)),
-          ]),
+            },
+          }),
+          createElement('i', {'class': 'form-icon'}),
+          createElement('span', $t(option.title)),
+        ]),
       );
       this.$data.childComponents.push(
-          new PlayerInputFactory().getPlayerInput(
-              createElement,
-              this.players,
-              this.player,
-              option,
-              (out: Array<Array<string>>) => {
-                const copy = [[String(idx)]];
-                for (let i = 0; i < out.length; i++) {
-                  copy.push(out[i].slice());
-                }
-                this.onsave(copy);
-              },
-              false,
-              false,
-          ),
+        new PlayerInputFactory().getPlayerInput(
+          createElement,
+          this.players,
+          this.player,
+          option,
+          (out: Array<Array<string>>) => {
+            const copy = [[String(idx)]];
+            for (let i = 0; i < out.length; i++) {
+              copy.push(out[i].slice());
+            }
+            this.onsave(copy);
+          },
+          false,
+          false,
+        ),
       );
       subchildren.push(
-          createElement(
-              'div',
-              {style: {display: displayStyle, marginLeft: '30px'}},
-              [
-                this.$data.childComponents[
-                    this.$data.childComponents.length - 1
-                ],
-              ],
-          ),
+        createElement(
+          'div',
+          {style: {display: displayStyle, marginLeft: '30px'}},
+          [
+            this.$data.childComponents[
+              this.$data.childComponents.length - 1
+            ],
+          ],
+        ),
       );
       optionElements.push(subchildren[subchildren.length - 1]);
       children.push(createElement('div', subchildren));
       if (this.showsave && this.$data.selectedOption === idx) {
         children.push(
-            createElement(
-                'div',
-                {
-                  'style': {'margin': '5px 30px 10px'},
-                  'class': 'wf-action',
+          createElement(
+            'div',
+            {
+              'style': {'margin': '5px 30px 10px'},
+              'class': 'wf-action',
+            },
+            [
+              createElement(Button, {
+                props: {
+                  title: $t(option.buttonLabel),
+                  type: 'submit',
+                  size: 'normal',
+                  onClick: () => {
+                    this.saveData();
+                  },
                 },
-                [
-                  createElement(Button, {
-                    props: {
-                      title: $t(option.buttonLabel),
-                      type: 'submit',
-                      size: 'normal',
-                      onClick: () => {
-                        this.saveData();
-                      },
-                    },
-                  }),
-                ],
-            ),
+              }),
+            ],
+          ),
         );
       }
     });

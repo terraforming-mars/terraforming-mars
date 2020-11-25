@@ -65,13 +65,13 @@ export class ImportedHydrogen implements IProjectCard {
         }));
       } else if (availableMicrobeCards.length > 1) {
         availableActions.push(new SelectCard('Add 3 microbes to a card',
-            'Add microbes',
-            availableMicrobeCards, (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 3);
-              LogHelper.logAddResource(game, player, foundCards[0], 3);
-              game.defer(new PlaceOceanTile(player, game));
-              return undefined;
-            }));
+          'Add microbes',
+          availableMicrobeCards, (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 3);
+            LogHelper.logAddResource(game, player, foundCards[0], 3);
+            game.defer(new PlaceOceanTile(player, game));
+            return undefined;
+          }));
       }
 
       if (availableAnimalCards.length === 1) {

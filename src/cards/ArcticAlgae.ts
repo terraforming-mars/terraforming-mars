@@ -6,9 +6,9 @@ import {Game} from '../Game';
 import {ISpace} from '../ISpace';
 import {TileType} from '../TileType';
 import {CardName} from '../CardName';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class ArcticAlgae implements IProjectCard {
   public cost = 12;

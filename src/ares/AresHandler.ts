@@ -101,17 +101,17 @@ export class AresHandler {
         player.addResourceTo(availableCards[0]);
       } else if (availableCards.length > 1) {
         game.defer(new DeferredAction(
-            player,
-            () => new SelectCard(
-                'Select a card to add an ' + resourceAsText,
-                'Add ' + resourceAsText + 's',
-                availableCards,
-                (selected: ICard[]) => {
-                  player.addResourceTo(selected[0]);
-                  LogHelper.logAddResource(game, player, selected[0], 1);
-                  return undefined;
-                },
-            ),
+          player,
+          () => new SelectCard(
+            'Select a card to add an ' + resourceAsText,
+            'Add ' + resourceAsText + 's',
+            availableCards,
+            (selected: ICard[]) => {
+              player.addResourceTo(selected[0]);
+              LogHelper.logAddResource(game, player, selected[0], 1);
+              return undefined;
+            },
+          ),
         ));
       }
     };
@@ -121,25 +121,25 @@ export class AresHandler {
     adjacentSpace.adjacency.bonus.forEach((bonus) => {
       bonuses.add(bonus);
       switch (bonus) {
-        case SpaceBonus.ANIMAL:
-          addResourceToCard(game, player, ResourceType.ANIMAL, 'animal');
-          break;
+      case SpaceBonus.ANIMAL:
+        addResourceToCard(game, player, ResourceType.ANIMAL, 'animal');
+        break;
 
-        case SpaceBonus.MEGACREDITS:
-          player.megaCredits++;
-          break;
+      case SpaceBonus.MEGACREDITS:
+        player.megaCredits++;
+        break;
 
-        case SpaceBonus.POWER:
-          player.energy++;
-          break;
+      case SpaceBonus.POWER:
+        player.energy++;
+        break;
 
-        case SpaceBonus.MICROBE:
-          addResourceToCard(game, player, ResourceType.MICROBE, 'microbe');
-          break;
+      case SpaceBonus.MICROBE:
+        addResourceToCard(game, player, ResourceType.MICROBE, 'microbe');
+        break;
 
-        default:
-          game.grantSpaceBonus(player, bonus);
-          break;
+      default:
+        game.grantSpaceBonus(player, bonus);
+        break;
       }
     });
 
@@ -201,10 +201,10 @@ export class AresHandler {
     [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
       if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
         game.defer(new AddResourcesToCard(
-            player,
-            game,
-            resourceType,
-            1,
+          player,
+          game,
+          resourceType,
+          1,
         ));
       }
     });
@@ -212,8 +212,8 @@ export class AresHandler {
 
   private static countResources(player: Player, resourceType: ResourceType): number {
     let count = player.playedCards
-        .map((c) => resourceType === c.resourceType ? c.resourceCount || 0 : 0)
-        .reduce((prior, current) => prior + current, 0);
+      .map((c) => resourceType === c.resourceType ? c.resourceCount || 0 : 0)
+      .reduce((prior, current) => prior + current, 0);
 
     if (resourceType === player.corporationCard?.resourceType) {
       count += player.corporationCard.resourceCount || 0;
@@ -246,16 +246,16 @@ export class AresHandler {
     const type = space.tile?.tileType;
 
     switch (type) {
-      case TileType.DUST_STORM_MILD:
-      case TileType.EROSION_MILD:
-        return HazardSeverity.MILD;
+    case TileType.DUST_STORM_MILD:
+    case TileType.EROSION_MILD:
+      return HazardSeverity.MILD;
 
-      case TileType.DUST_STORM_SEVERE:
-      case TileType.EROSION_SEVERE:
-        return HazardSeverity.SEVERE;
+    case TileType.DUST_STORM_SEVERE:
+    case TileType.EROSION_SEVERE:
+      return HazardSeverity.SEVERE;
 
-      default:
-        return HazardSeverity.NONE;
+    default:
+      return HazardSeverity.NONE;
     }
   }
 
@@ -269,24 +269,24 @@ export class AresHandler {
       if (subjectToHazardAdjacency === true) {
         const severity = this.hazardSeverity(adjacentSpace);
         switch (severity) {
-          case HazardSeverity.MILD:
-            productionCost += 1;
-            break;
-          case HazardSeverity.SEVERE:
-            productionCost += 2;
-            break;
+        case HazardSeverity.MILD:
+          productionCost += 1;
+          break;
+        case HazardSeverity.SEVERE:
+          productionCost += 2;
+          break;
         }
       }
     });
 
     const severity = this.hazardSeverity(space);
     switch (severity) {
-      case HazardSeverity.MILD:
-        megaCreditCost += 8;
-        break;
-      case HazardSeverity.SEVERE:
-        megaCreditCost += 16;
-        break;
+    case HazardSeverity.MILD:
+      megaCreditCost += 8;
+      break;
+    case HazardSeverity.SEVERE:
+      megaCreditCost += 16;
+      break;
     }
 
     return {megacredits: megaCreditCost, production: productionCost};
@@ -351,11 +351,11 @@ export class AresHandler {
     // This will have no effect if the erosions don't exist, but that's OK --
     // the check for placing erosions will take this into account.
     testConstraint(
-        aresData.hazardData.severeErosionTemperature,
-        game.getTemperature(),
-        () => {
-          makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE);
-        },
+      aresData.hazardData.severeErosionTemperature,
+      game.getTemperature(),
+      () => {
+        makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE);
+      },
     );
   }
 
@@ -376,18 +376,18 @@ export class AresHandler {
     }
     let steps: number;
     switch (initialTileType) {
-      case TileType.DUST_STORM_MILD:
-      case TileType.EROSION_MILD:
-        steps = 1;
-        break;
+    case TileType.DUST_STORM_MILD:
+    case TileType.EROSION_MILD:
+      steps = 1;
+      break;
 
-      case TileType.DUST_STORM_SEVERE:
-      case TileType.EROSION_SEVERE:
-        steps = 2;
-        break;
+    case TileType.DUST_STORM_SEVERE:
+    case TileType.EROSION_SEVERE:
+      steps = 2;
+      break;
 
-      default:
-        return;
+    default:
+      return;
     }
     player.increaseTerraformRatingSteps(steps, game);
     game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(tileTypeAsString(initialTileType)));
@@ -408,10 +408,10 @@ function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) 
 
 function makeSevere(game: Game, from: TileType, to: TileType) {
   game.board.spaces
-      .filter((s) => s.tile?.tileType === from)
-      .forEach((s) => {
-        AresHandler.putHazardAt(s, to);
-      });
+    .filter((s) => s.tile?.tileType === from)
+    .forEach((s) => {
+      AresHandler.putHazardAt(s, to);
+    });
 
   game.log('${0} have upgraded to ${1}', (b) => b.string(tileTypeAsString(from)).string(tileTypeAsString(to)));
 }
@@ -428,41 +428,41 @@ function testConstraint(constraint: IHazardConstraint, testValue: number, cb: ()
 
 function testToRemoveDustStorms(game: Game, aresData: IAresData, player: Player) {
   testConstraint(
-      aresData.hazardData.removeDustStormsOceanCount,
-      game.board.getOceansOnBoard(),
-      () => {
-        game.board.spaces.forEach((space) => {
-          if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
-            if (space.tile.protectedHazard !== true) {
-              space.tile = undefined;
-            }
+    aresData.hazardData.removeDustStormsOceanCount,
+    game.board.getOceansOnBoard(),
+    () => {
+      game.board.spaces.forEach((space) => {
+        if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
+          if (space.tile.protectedHazard !== true) {
+            space.tile = undefined;
           }
-        });
-
-        if (game.phase !== Phase.SOLAR) {
-          player.increaseTerraformRating(game);
-          game.log('${0}\'s TR increases 1 step for eliminating dust storms.', (b) => b.player(player));
         }
-      },
+      });
+
+      if (game.phase !== Phase.SOLAR) {
+        player.increaseTerraformRating(game);
+        game.log('${0}\'s TR increases 1 step for eliminating dust storms.', (b) => b.player(player));
+      }
+    },
   );
 }
 
 function testToPlaceErosionTiles(game: Game, aresData: IAresData, player: Player) {
   testConstraint(
-      aresData.hazardData.erosionOceanCount,
-      game.board.getOceansOnBoard(),
-      () => {
-        let type = TileType.EROSION_MILD;
-        if (aresData.hazardData.severeErosionTemperature.available !== true) {
-          type = TileType.EROSION_SEVERE;
-        }
+    aresData.hazardData.erosionOceanCount,
+    game.board.getOceansOnBoard(),
+    () => {
+      let type = TileType.EROSION_MILD;
+      if (aresData.hazardData.severeErosionTemperature.available !== true) {
+        type = TileType.EROSION_SEVERE;
+      }
 
-        const space1 = randomlyPlaceHazard(game, type, 1);
-        const space2 = randomlyPlaceHazard(game, type, -1);
-        [space1, space2].forEach((space) => {
-          LogHelper.logTilePlacement(game, player, space, type);
-        });
-      },
+      const space1 = randomlyPlaceHazard(game, type, 1);
+      const space2 = randomlyPlaceHazard(game, type, -1);
+      [space1, space2].forEach((space) => {
+        LogHelper.logTilePlacement(game, player, space, type);
+      });
+    },
   );
 }
 

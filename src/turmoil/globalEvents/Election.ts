@@ -6,6 +6,7 @@ import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../Board';
+import {LogHelper} from '../../components/LogHelper';
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;
@@ -22,25 +23,29 @@ export class Election implements IGlobalEvent {
         }
       } else {
         const players = [...game.getPlayers()].sort(
-            (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
+          (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
         );
 
         // We have one rank 1 player
         if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
           players[0].increaseTerraformRatingSteps(2, game);
+          LogHelper.logTRIncrease(game, players[0], 2);
           players.shift();
 
           if (players.length === 1) {
             players[0].increaseTerraformRatingSteps(1, game);
+            LogHelper.logTRIncrease(game, players[0], 1);
           } else if (players.length > 1) {
             // We have one rank 2 player
             if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
               players[0].increaseTerraformRatingSteps(1, game);
+              LogHelper.logTRIncrease(game, players[0], 1);
               // We have at least two rank 2 players
             } else {
               const score = this.getScore(players[0], turmoil, game);
               while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
                 players[0].increaseTerraformRatingSteps(1, game);
+                LogHelper.logTRIncrease(game, players[0], 1);
                 players.shift();
               }
             }
@@ -50,6 +55,7 @@ export class Election implements IGlobalEvent {
           const score = this.getScore(players[0], turmoil, game);
           while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
             players[0].increaseTerraformRatingSteps(2, game);
+            LogHelper.logTRIncrease(game, players[0], 2);
             players.shift();
           }
         }
@@ -60,7 +66,7 @@ export class Election implements IGlobalEvent {
       const score = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player);
 
       const cities = game.board.spaces.filter(
-          (space) => Board.isCitySpace(space) && space.player === player,
+        (space) => Board.isCitySpace(space) && space.player === player,
       ).length;
 
       return score + cities;

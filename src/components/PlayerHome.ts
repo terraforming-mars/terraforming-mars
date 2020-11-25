@@ -48,8 +48,8 @@ export const PlayerHome = Vue.component('player-home', {
   mixins: [PlayerMixin],
   methods: {
     getPlayerCssForTurnOrder: (
-        player: PlayerModel,
-        highlightActive: boolean,
+      player: PlayerModel,
+      highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
 
@@ -91,7 +91,7 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mounted: function() {
     dialogPolyfill.default.registerDialog(
-        document.getElementById('dialog-default'),
+      document.getElementById('dialog-default'),
     );
   },
   template: `

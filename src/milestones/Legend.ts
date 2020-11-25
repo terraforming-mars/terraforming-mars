@@ -7,7 +7,7 @@ export class Legend implements IMilestone {
     public description: string = 'Requires that you have played 5 events'
     public getScore(player: Player): number {
       return player.playedCards
-          .filter((card) => card.cardType === CardType.EVENT).length;
+        .filter((card) => card.cardType === CardType.EVENT).length;
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) > 4;

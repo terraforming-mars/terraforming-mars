@@ -25,21 +25,21 @@ export class LavaFlows implements IProjectCard {
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
       if (game.gameOptions.boardName === BoardName.ORIGINAL) {
         return game.board.getSpaces(SpaceType.LAND, player)
-            .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-            .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
+          .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
+          .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
                                    space.id === SpaceName.ASCRAEUS_MONS ||
                                    space.id === SpaceName.ARSIA_MONS ||
                                    space.id === SpaceName.PAVONIS_MONS);
       } else if (game.gameOptions.boardName === BoardName.ELYSIUM) {
         return game.board.getSpaces(SpaceType.LAND, player)
-            .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-            .filter((space) => space.id === SpaceName.HECATES_THOLUS ||
+          .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
+          .filter((space) => space.id === SpaceName.HECATES_THOLUS ||
                                space.id === SpaceName.ELYSIUM_MONS ||
                                space.id === SpaceName.ARSIA_MONS_ELYSIUM ||
                                space.id === SpaceName.OLYMPUS_MONS);
       } else {
         return game.board.getSpaces(SpaceType.LAND, player)
-            .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+          .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
       }
     }
     public canPlay(player: Player, game: Game): boolean {

@@ -7,7 +7,7 @@ export class PolarExplorer implements IMilestone {
     public description: string = 'Requires that you have 3 tiles on the two bottom rows'
     public getScore(player: Player, game: Game): number {
       return game.board.spaces
-          .filter((space) => space.player !== undefined &&
+        .filter((space) => space.player !== undefined &&
         space.player === player &&
         space.tile !== undefined &&
         space.y >= 7 && space.y <= 8).length;

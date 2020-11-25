@@ -3,7 +3,6 @@ import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {TileType} from '../../TileType';
@@ -11,7 +10,7 @@ import {AresHandler} from '../../ares/AresHandler';
 
 export class DesperateMeasures implements IProjectCard {
     public cost = 1;
-    public tags = [Tags.EVENT];
+    public tags = [];
     public cardType = CardType.EVENT;
     public name = CardName.DESPERATE_MEASURES;
 

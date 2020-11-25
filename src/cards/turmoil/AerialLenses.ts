@@ -8,7 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class AerialLenses implements IProjectCard {
   public cost = 2;

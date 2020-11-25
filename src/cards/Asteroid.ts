@@ -8,8 +8,8 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../constants';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
 
 export class Asteroid implements IProjectCard {
   public cost = 14;

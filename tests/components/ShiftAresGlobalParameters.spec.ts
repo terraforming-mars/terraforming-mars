@@ -62,7 +62,7 @@ describe('ShiftAresGlobalParameters', function() {
       },
     });
     expect(
-        ares.vm.$data,
+      ares.vm.$data,
     ).to.deep.eq({
       hazardData: {
         erosionOceanCount: {threshold: 3, available: true},

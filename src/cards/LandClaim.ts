@@ -18,13 +18,13 @@ export class LandClaim implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       return new SelectSpace(
-          'Select space for claim',
-          game.board.getNonReservedLandSpaces(),
-          (foundSpace: ISpace) => {
-            foundSpace.player = player;
-            LogHelper.logBoardTileAction(game, player, foundSpace, 'land claim');
-            return undefined;
-          },
+        'Select space for claim',
+        game.board.getNonReservedLandSpaces(),
+        (foundSpace: ISpace) => {
+          foundSpace.player = player;
+          LogHelper.logBoardTileAction(game, player, foundSpace, 'land claim');
+          return undefined;
+        },
       );
     }
 }

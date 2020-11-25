@@ -3,8 +3,8 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {CardName} from '../CardName';
-import {CardMetadata} from '../cards/CardMetadata';
-import {CardRequirements} from '../cards/CardRequirements';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
 
 export class DustSeals implements IProjectCard {
     public cost = 2;

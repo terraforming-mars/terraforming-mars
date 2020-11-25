@@ -3,17 +3,6 @@ import {CardName} from './CardName';
 /* eslint-disable no-irregular-whitespace */
 export const HTML_DATA: Map<string, string> =
   new Map([
-    [CardName.DEEP_WELL_HEATING, ` 
-        <div class="content">
-            <div class="production-box ">
-                <div class="energy production "></div>
-            </div>
-            <div class="tile temperature-tile " style="margin-left:20px "></div>
-            <div class="description ">
-                (Increase your Energy production 1 step. Increase temperature 1 step.)
-            </div>
-        </div>
-`],
     [CardName.SEARCH_FOR_LIFE, ` 
         <div class="content ">
             <div class="points points-big"><div class="resource science"></div>*:3</div>
@@ -83,14 +72,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-box "><div class="titanium production "></div></div>
             <div class="description ">
                 (Increase your titanium production 1 step.)
-            </div>
-        </div>
-`],
-    [CardName.DEVELOPMENT_CENTER, ` 
-        <div class="content ">
-            <span class="energy resource "></span> <span class="red-arrow "></span> <span class="card resource "></span>
-            <div class="description ">
-                (Action: Spend 1 Energy to draw a card.)
             </div>
         </div>
 `],
@@ -325,18 +306,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="money resource">2</div>
       <div class="description">
         (Effect: When any City tile is placed, gain 2 MC.)
-      </div>
-    </div>
-`],
-    [CardName.DEIMOS_DOWN, ` 
-    <div class="content">
-      <div class="tile temperature-tile"></div>
-      <div class="tile temperature-tile"></div>
-      <div class="tile temperature-tile"></div><br>
-      <div class=" steel resource"></div><div class=" steel resource"></div><div class=" steel resource"></div><div class=" steel resource"></div><br>
-      -8 <div class="resource plant red-outline"></div>
-      <div class="description">
-        (Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.)
       </div>
     </div>
 `],
@@ -1191,19 +1160,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.DECOMPOSERS, ` 
-      <div class="content">
-        <div class="points">1/3<div class="resource microbe"></div></div>
-        <div class="requirements">3% O2</div>
-        <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> / <div class="tag-microbe resource-tag"></div> : <div class="microbe resource"></div>
-        <div class="description">
-          (Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.)
-        </div>
-        <div class="description">
-          (Requires 3% oxygen. 1 VP per 3 Microbes on this card.)
-        </div>
-      </div>
-`],
     [CardName.FUSION_POWER, ` 
       <div class="content">
         <div class="requirements">2 Power</div>
@@ -1415,17 +1371,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.DESIGNED_MICRO_ORGANISMS, ` 
-        <div class="content ">
-            <div class="requirements requirements-max">max -14 C</div>
-            <div class="production-box production-box-size2 ">
-                <div class="plant production "></div><div class="plant production "></div>
-            </div>
-            <div class="description ">
-              (It must be -14 C or colder. Increase your Plant production 2 steps.)
-            </div>
-        </div>
-`],
     [CardName.STANDARD_TECHNOLOGY, ` 
       <div class="content">
         <div class="card-content-requirements">
@@ -1482,14 +1427,6 @@ export const HTML_DATA: Map<string, string> =
             (Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.)
           </div>
         </div>
-`],
-    [CardName.CONVOY_FROM_EUROPA, `  
-          <div class="content ">
-              <div class="tile ocean-tile "></div> <div class="resource card " style="margin-left:20px;"></div>
-              <div class="description ">
-                (Place 1 ocean tile and draw 1 card.)
-              </div>
-          </div>
 `],
     [CardName.IMPORTED_GHG, ` 
           <div class="content ">
@@ -2540,27 +2477,6 @@ export const HTML_DATA: Map<string, string> =
                 (Increase your MC production 1 step per CARD WITH NO TAGS, including this.)
               </div>
             </div>
-`],
-    [CardName.CONSCRIPTION, ` 
-              <div class="content ">
-                <div class="points points-big">-1</div>
-                <div class="requirements">2 Earth</div>
-                <span style="font-size:14px;">NEXT CARD: </span> <div class="resource money">-16</div>
-                  <div class="description ">
-                    (Requires 2 Earth tags. The next card you play this generation costs 16 MC less.)
-                  </div>
-              </div>
-`],
-    [CardName.CORONA_EXTRACTOR, ` 
-              <div class="content ">
-                <div class="requirements">4 Science</div>
-                  <div class="production-box production-box-size1a">
-                      4 <div class="energy production"></div>
-                  </div>
-                  <div class="description ">
-                      (Requires 4 science tags. Increase your energy production 4 steps.)
-                  </div>
-              </div>
 `],
     [CardName.EARTH_ELEVATOR, ` 
             <div class="content">
@@ -4473,21 +4389,6 @@ export const HTML_DATA: Map<string, string> =
     </div>
 
 `],
-    [CardName.COMET_AIMING, ` 
-    <div class="content ">
-        <div class="resource titanium"></div>
-        <span class="red-arrow"></span>
-        <div class="asteroid resource">A</div><span>*</span>
-        <br>
-        OR <div class="asteroid resource">A</div>
-        <span class="red-arrow"></span>
-        <div class="tile ocean-tile"></div>
-        <div class="description">
-            (Action: Spend 1 titanium to add 1 asteroid resource to ANY card, or remove 1 asteroid resource here to place an ocean tile.)
-        </div>
-      </div>
-    </div>
-`],
     [CardName.CUTTING_EDGE_TECHNOLOGY, ` 
             <div class="content">
                 <div class="points points-big">1</div>
@@ -5138,18 +5039,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="description " style="text-align:left;">
             (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)<br>
-        </div>
-    </div>
-`],
-    [CardName.DESPERATE_MEASURES, `
-    <div class="card-number">A04</div>
-    <div class="content ">
-        <div class="points ">-2</span></div>
-        <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
-        <div class="description " style="text-align:left;">
-            (Effect: Place a bronze cube on a dust storm tile and raise oxygen
-              1 step, or place a bronze cube on an erosion tile and raise the
-              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
         </div>
     </div>
 `],

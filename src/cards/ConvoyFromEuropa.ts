@@ -8,6 +8,8 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../constants';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
 
 export class ConvoyFromEuropa implements IProjectCard {
     public cost = 15;
@@ -30,5 +32,10 @@ export class ConvoyFromEuropa implements IProjectCard {
       player.cardsInHand.push(game.dealer.dealCard());
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '161',
+      description: 'Place 1 ocean tile and draw 1 card',
+      renderData: CardRenderer.builder((b) => b.oceans(1).cards(1)),
     }
 }

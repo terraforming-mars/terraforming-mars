@@ -40,5 +40,6 @@ export class AICentral implements IActionCard, IProjectCard {
       b.effectBox((ab) => ab.empty().startAction.cards(2).description('Action: Draw 2 cards')).br;
       b.productionBox((pb) => pb.minus().energy(1));
     }),
+    victoryPoints: 1,
   };
 }

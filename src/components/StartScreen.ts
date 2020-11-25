@@ -13,6 +13,17 @@ export const StartScreen = Vue.component('start-screen', {
     LanguageSwitcher,
   },
   methods: {
+    getAppVersion(): string {
+      const versionParts = this.version.split(' ');
+      return versionParts[0];
+    },
+    getAppDate(): string {
+      const versionParts = this.version.split(' ');
+      if (versionParts.length > 1) {
+        return versionParts.slice(1).join(' ');
+      }
+      return '';
+    },
   },
   template: `
 <div class="start-screen">
@@ -30,7 +41,10 @@ export const StartScreen = Vue.component('start-screen', {
     <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/fWXE53K" target="_blank" v-i18n>Join us on Discord</a>
     <div class="start-screen-header start-screen-link--languages">
       <language-switcher />
-      <div class="start-version">version: {{version}}</div>
+      <div class="start-screen-version-cont">
+        <div class="nowrap start-screen-date">deployed: {{getAppDate()}}</div>
+        <div class="nowrap start-screen-version">version: {{getAppVersion()}}</div>
+      </div>
     </div>
   </div>
 </div>`,

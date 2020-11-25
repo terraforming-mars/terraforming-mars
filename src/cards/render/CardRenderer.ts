@@ -121,10 +121,10 @@ class Builder {
     }
   }
 
-  protected _addTile(selector: TileType): void {
+  protected _addTile(tile: TileType): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(new CardRenderTile(selector));
+      row.push(new CardRenderTile(tile));
       this._data.push(row);
     }
   }

@@ -75,7 +75,7 @@ export const Card = Vue.component('card', {
       required: true,
     },
     'actionUsed': {
-      type: Function,
+      type: Boolean,
     },
   },
   methods: {

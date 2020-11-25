@@ -5,8 +5,8 @@ import {Color} from '../../../src/Color';
 import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {Sponsors} from '../../../src/cards/Sponsors';
-import {AcquiredCompany} from '../../../src/cards/AcquiredCompany';
+import {Sponsors} from '../../../src/cards/base/Sponsors';
+import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
 import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('PROffice', function() {

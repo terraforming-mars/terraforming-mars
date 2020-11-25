@@ -5,8 +5,8 @@ import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Ants} from '../../src/cards/Ants';
-import {SecurityFleet} from '../../src/cards/SecurityFleet';
+import {Ants} from '../../src/cards/base/Ants';
+import {SecurityFleet} from '../../src/cards/base/SecurityFleet';
 import {Resources} from '../../src/Resources';
 
 describe('ScientificCommunity', function() {

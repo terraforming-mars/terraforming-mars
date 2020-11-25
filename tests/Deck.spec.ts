@@ -4,12 +4,12 @@ import {IProjectCard} from '../src/cards/IProjectCard';
 import {ICardFactory} from '../src/cards/ICardFactory';
 import {CardName} from '../src/CardName';
 import {expect} from 'chai';
-import {AcquiredCompany} from '../src/cards/AcquiredCompany';
+import {AcquiredCompany} from '../src/cards/base/AcquiredCompany';
 import {BannedDelegate} from '../src/cards/turmoil/BannedDelegate';
-import {CallistoPenalMines} from '../src/cards/CallistoPenalMines';
-import {Decomposers} from '../src/cards/Decomposers';
-import {EcologicalZone} from '../src/cards/EcologicalZone';
-import {FuelFactory} from '../src/cards/FuelFactory';
+import {CallistoPenalMines} from '../src/cards/base/CallistoPenalMines';
+import {Decomposers} from '../src/cards/base/Decomposers';
+import {EcologicalZone} from '../src/cards/base/EcologicalZone';
+import {FuelFactory} from '../src/cards/base/FuelFactory';
 
 describe('Deck', function() {
   const cards: Array<ICardFactory<IProjectCard>> = [

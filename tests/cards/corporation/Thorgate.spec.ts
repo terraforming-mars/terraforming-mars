@@ -4,8 +4,8 @@ import {Thorgate} from '../../../src/cards/corporation/Thorgate';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Pets} from '../../../src/cards/Pets';
-import {EnergySaving} from '../../../src/cards/EnergySaving';
+import {Pets} from '../../../src/cards/base/Pets';
+import {EnergySaving} from '../../../src/cards/base/EnergySaving';
 import {Resources} from '../../../src/Resources';
 
 describe('Thorgate', function() {

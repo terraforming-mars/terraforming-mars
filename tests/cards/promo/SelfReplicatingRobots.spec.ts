@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SelfReplicatingRobots} from '../../../src/cards/promo/SelfReplicatingRobots';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Research} from '../../../src/cards/Research';
+import {Research} from '../../../src/cards/base/Research';
 import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';

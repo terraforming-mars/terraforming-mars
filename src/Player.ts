@@ -22,7 +22,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
-import {MiningCard} from './cards/MiningCard';
+import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';

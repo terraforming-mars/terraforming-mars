@@ -4,15 +4,15 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Tags} from '../../../src/cards/Tags';
-import {Ants} from '../../../src/cards/Ants';
-import {ViralEnhancers} from '../../../src/cards/ViralEnhancers';
-import {SearchForLife} from '../../../src/cards/SearchForLife';
-import {LagrangeObservatory} from '../../../src/cards/LagrangeObservatory';
+import {Ants} from '../../../src/cards/base/Ants';
+import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {AdvancedEcosystems} from '../../../src/cards/AdvancedEcosystems';
-import {Fish} from '../../../src/cards/Fish';
-import {Lichen} from '../../../src/cards/Lichen';
-import {Research} from '../../../src/cards/Research';
+import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Lichen} from '../../../src/cards/base/Lichen';
+import {Research} from '../../../src/cards/base/Research';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 
 describe('PharmacyUnion', function() {

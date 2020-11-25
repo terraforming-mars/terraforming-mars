@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {EcologicalZone} from '../EcologicalZone';
+import {EcologicalZone} from '../base/EcologicalZone';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {SpaceBonus} from '../../SpaceBonus';
 

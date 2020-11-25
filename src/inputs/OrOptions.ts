@@ -12,7 +12,7 @@ import {SelectDelegate} from './SelectDelegate';
 import {SelectColony} from './SelectColony';
 
 export class OrOptions implements PlayerInput {
-  public cb(): undefined {
+  public cb(): PlayerInput | undefined {
     return undefined;
   }
     public title: string = 'Select one option';

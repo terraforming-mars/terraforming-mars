@@ -766,6 +766,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           remainingInput.push(input[i].slice());
         }
         this.runInput(game, remainingInput, waiting.options[optionIndex]);
+        this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error('Incorrect options provided');

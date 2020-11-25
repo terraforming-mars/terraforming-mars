@@ -1,10 +1,11 @@
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
 
 export class CallistoPenalMines implements IProjectCard {
     public cost = 24;
@@ -18,5 +19,13 @@ export class CallistoPenalMines implements IProjectCard {
     }
     public getVictoryPoints() {
       return 2;
+    }
+    public metadata: CardMetadata = {
+      description: 'Increase your MC production 3 steps',
+      cardNumber: '082',
+      renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
+        pb.megacredits(3);
+      })),
+      victoryPoints: 2,
     }
 }

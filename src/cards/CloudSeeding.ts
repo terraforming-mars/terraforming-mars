@@ -5,6 +5,9 @@ import {Game} from '../Game';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class CloudSeeding implements IProjectCard {
     public cost = 11;
@@ -23,5 +26,14 @@ export class CloudSeeding implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, -1);
       player.addProduction(Resources.PLANTS, 2);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '004',
+      description: 'Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps',
+      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
+        pb.minus().megacredits(1).heat(1).any.br;
+        pb.plus().plants(2);
+      })),
     }
 }

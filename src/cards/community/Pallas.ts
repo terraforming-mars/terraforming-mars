@@ -1,6 +1,6 @@
-import { Colony } from '../../colonies/Colony';
-import { ColonyName } from '../../colonies/ColonyName';
-import { ColonyBenefit } from '../../colonies/ColonyBenefit';
+import {Colony} from '../../colonies/Colony';
+import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyBenefit} from '../../colonies/ColonyBenefit';
 
 export class Pallas extends Colony {
     public name = ColonyName.PALLAS;

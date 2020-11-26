@@ -246,7 +246,7 @@ export abstract class Colony implements SerializedColony {
           game.log('${0} gained 1 influence', (b) => b.player(player));
         }
         break;
-  
+
       case ColonyBenefit.PLACE_DELEGATES:
         if (game.turmoil) {
           const qty = Math.min(quantity, game.turmoil.getDelegates(player.id));
@@ -256,12 +256,12 @@ export abstract class Colony implements SerializedColony {
           }
         }
         break;
-          
+
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         if (game.turmoil) {
           let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
-              
+
           player.megaCredits += partyDelegateCount;
           return undefined;
         }

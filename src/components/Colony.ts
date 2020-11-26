@@ -20,7 +20,7 @@ export const Colony = Vue.component('colony', {
       return colony.trackPosition * 56 + 27;
     },
     getColonyXPosition: (index: number): number => {
-      let offset: number = 5;
+      const offset: number = 5;
       return index * 56 + 27 + offset;
     },
     getCubeYPosition: (
@@ -76,25 +76,25 @@ export const Colony = Vue.component('colony', {
       if (colony.name === ColonyName.PLUTO || colony.name === ColonyName.MIRANDA) return -12;
       return 0;
     },
-    getIapetus:(): string => {
+    getIapetus: (): string => {
       return ColonyName.IAPETUS;
     },
-    getMercury:(): string => {
+    getMercury: (): string => {
       return ColonyName.MERCURY;
     },
-    getHygiea:(): string => {
+    getHygiea: (): string => {
       return ColonyName.HYGIEA;
     },
-    getTitania:(): string => {
+    getTitania: (): string => {
       return ColonyName.TITANIA;
     },
-    getVenus:(): string => {
+    getVenus: (): string => {
       return ColonyName.VENUS;
     },
-    getLeavitt:(): string => {
+    getLeavitt: (): string => {
       return ColonyName.LEAVITT;
     },
-    getPallas:(): string => {
+    getPallas: (): string => {
       return ColonyName.PALLAS;
     },
   },

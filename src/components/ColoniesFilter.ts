@@ -18,7 +18,7 @@ import {Hygiea} from '../cards/community/Hygiea';
 import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
-import { Pallas } from '../cards/community/Pallas';
+import {Pallas} from '../cards/community/Pallas';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -41,22 +41,22 @@ let communityColonies: Array<Colony> = [
   new Titania(),
   new Venus(),
   new Leavitt(),
-  new Pallas()
+  new Pallas(),
 ];
 
-export const ColoniesFilter = Vue.component("colonies-filter", {
+export const ColoniesFilter = Vue.component('colonies-filter', {
   props: {
     communityCardsOption: {
-      type: Boolean
+      type: Boolean,
     },
     venusNext: {
-      type: Boolean
+      type: Boolean,
     },
     turmoil: {
-      type: Boolean
+      type: Boolean,
     },
   },
-  data: function () {
+  data: function() {
     if (!this.venusNext) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.VENUS);
     if (!this.turmoil) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.PALLAS);
 
@@ -91,8 +91,8 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
     communityCardsOption: function(enabled) {
       this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
     },
-    venusNext: function (enabled) {
-      const index = communityColonies.findIndex(c => c.name === ColonyName.VENUS);
+    venusNext: function(enabled) {
+      const index = communityColonies.findIndex((c) => c.name === ColonyName.VENUS);
 
       if (enabled && index === -1) {
         communityColonies.push(new Venus());
@@ -100,15 +100,15 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
         communityColonies.splice(index, 1);
       }
     },
-    turmoil: function (enabled) {
-      const index = communityColonies.findIndex(c => c.name === ColonyName.PALLAS);
+    turmoil: function(enabled) {
+      const index = communityColonies.findIndex((c) => c.name === ColonyName.PALLAS);
 
       if (enabled && index === -1) {
         communityColonies.push(new Pallas());
       } else if (!enabled && index !== -1) {
         communityColonies.splice(index, 1);
       }
-    }
+    },
   },
   template: `
     <div class="colonies-filter">

@@ -5,6 +5,9 @@ import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 
+// microbe, animal and plant tag could be used both as a resource and played tag
+const RESOURCE_AND_TAG_TYPES = [CardRenderItemType.ANIMALS, CardRenderItemType.PLANTS, CardRenderItemType.MICROBES];
+
 export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', {
   props: {
     item: {
@@ -16,7 +19,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
   },
   methods: {
     getComponentClasses: function(): string {
-      const classes: Array<string> = [''];
+      let classes: Array<string> = [];
       const type: CardRenderItemType = this.item.type;
       if (type === CardRenderItemType.TEMPERATURE) {
         classes.push('card-global-requirement');
@@ -27,6 +30,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.OCEANS) {
         classes.push('card-global-requirement');
         classes.push('card-ocean-global-requirement');
+        if (this.item.size !== undefined) {
+          classes.push(`card-ocean--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.VENUS) {
         classes.push('card-global-requirement');
         classes.push('card-venus-global-requirement');
@@ -66,6 +72,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.ANIMALS) {
         classes.push('card-resource');
         classes.push('card-resource-animal');
+      } else if (type === CardRenderItemType.WILD) {
+        classes.push('card-resource');
+        classes.push('card-resource-wild');
       } else if (type === CardRenderItemType.TRADE) {
         classes.push('card-resource-trade');
       } else if (type === CardRenderItemType.TRADE_DISCOUNT) {
@@ -81,21 +90,32 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-delegate');
       } else if (type === CardRenderItemType.INFLUENCE) {
         classes.push('card-influence');
+      } else if (type === CardRenderItemType.NO_TAGS) {
+        classes.push('card-resource-tag');
+        classes.push('card-community-services');
       } else if (type === CardRenderItemType.CITY) {
         classes.push('card-tile');
         classes.push(`city-tile--${this.item.size}`);
-      } else if (type === CardRenderItemType.EVENT) {
-        classes.push('card-tag-event');
-      } else if (type === CardRenderItemType.SPACE) {
-        classes.push('card-tag-space');
-      } else if (type === CardRenderItemType.JOVIAN) {
-        classes.push('card-tag-jovian');
-      } else if (type === CardRenderItemType.VENUS_TAG) {
-        classes.push('card-tag-venus');
       }
+
       // round tags
       if (this.item.isPlayed) {
+        // override resource behavior
+        if (RESOURCE_AND_TAG_TYPES.includes(type)) {
+          classes = classes.filter((c) => c !== 'card-resource');
+        }
         classes.push('card-resource-tag');
+        if (type === CardRenderItemType.EVENT) {
+          classes.push('card-tag-event');
+        } else if (type === CardRenderItemType.SPACE) {
+          classes.push('card-tag-space');
+        } else if (type === CardRenderItemType.JOVIAN) {
+          classes.push('card-tag-jovian');
+        } else if (type === CardRenderItemType.VENUS) {
+          classes.push('card-tag-venus');
+        } else if (type === CardRenderItemType.EARTH) {
+          classes.push('card-tag-earth');
+        }
       }
 
       // act upon any player
@@ -134,15 +154,23 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       return this.getAmountAbs();
     },
     itemHtmlContent: function(): string {
+      let result: string = '';
       // in case of symbols inside
-      if (this.item instanceof CardRenderItem && this.item.amountInside) return this.item.amount.toString();
-      if (this.item.isPlate || this.item.text !== undefined) return this.item.text || 'n/a';
+      if (this.item instanceof CardRenderItem && this.item.amountInside) {
+        result += this.item.amount.toString();
+      }
       if (this.item.secondaryTag !== undefined) {
         const classes: string[] = ['card-icon'];
         classes.push(`tag-${this.item.secondaryTag}`);
-        return '<div class="' + generateClassString(classes) + '"/>';
+        result += '<div class="' + generateClassString(classes) + '"></div>';
       }
-      return '';
+      if (this.item.isPlate || this.item.text !== undefined) {
+        result += this.item.text || 'n/a';
+      }
+      if (this.item.type === CardRenderItemType.NO_TAGS) {
+        result = 'X';
+      }
+      return result;
     },
   },
   template: `

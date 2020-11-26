@@ -14,6 +14,7 @@ export interface CorporationCard extends ICard {
     initialActionText?: string;
     initialAction?: (player: Player, game: Game) => PlayerInput | undefined;
     startingMegaCredits: number;
+    cardCost?: number;
     play: (
         player: Player,
         game: Game

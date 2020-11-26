@@ -746,7 +746,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         }
         // discard all unpurchased cards
         player.dealtProjectCards
-          .filter((card) => player.cardsInHand.includes(card))
+          .filter((card) => player.cardsInHand.includes(card) === false)
           .forEach((card) => this.dealer.discard(card));
 
         this.playerHasPickedCorporationCard(player, corporation); return undefined;

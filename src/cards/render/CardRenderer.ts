@@ -3,6 +3,7 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
 import {Tags} from '../Tags';
+import {TileType} from '../../TileType';
 
 type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
@@ -33,7 +34,7 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public selector: string, public isAresTile: boolean) { };
+  constructor(public tile: TileType) { };
 }
 
 export class CardRenderEffect extends CardRenderer {
@@ -83,7 +84,7 @@ export class CardRenderEffect extends CardRenderer {
   public get description(): ItemType {
     this._validate();
     // TODO (chosta): validate builder method to make sure it's the last element
-    return `${this.rows[2].slice(-1)[0]}`;
+    return this.rows[2].slice(-1)[0];
   }
 }
 
@@ -120,10 +121,10 @@ class Builder {
     }
   }
 
-  protected _addTile(selector: string, isAresTile: boolean): void {
+  protected _addTile(tile: TileType): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(new CardRenderTile(selector, isAresTile));
+      row.push(new CardRenderTile(tile));
       this._data.push(row);
     }
   }
@@ -184,6 +185,11 @@ class Builder {
     return this;
   }
 
+  public tr(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TR, amount));
+    return this;
+  }
+
   public megacredits(amount: number): Builder {
     const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount);
     item.amountInside = true;
@@ -241,7 +247,12 @@ class Builder {
     return this;
   }
 
-  public description(description: string): Builder {
+  public delegate(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
+    return this;
+  }
+
+  public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
     return this;
@@ -322,8 +333,8 @@ class Builder {
     return this;
   }
 
-  public tile(selector: string, isAresTile = true): Builder {
-    this._addTile(selector, isAresTile);
+  public tile(tile: TileType): Builder {
+    this._addTile(tile);
     return this;
   }
 

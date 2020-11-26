@@ -6,6 +6,9 @@ import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
 import {IParty} from '../../turmoil/parties/IParty';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BannedDelegate implements IProjectCard {
     public cost = 0;
@@ -68,4 +71,12 @@ export class BannedDelegate implements IProjectCard {
     private log(game: Game, player: Player, party: IParty) {
       game.log('${0} removed a delegate from ${1}', (b) => b.player(player).party(party));
     }
+    public metadata: CardMetadata = {
+      cardNumber: 'T02',
+      description: 'Requires that you are Chairman. Remove any NON-LEADER delegate',
+      requirements: CardRequirements.builder((b) => b.chairman()),
+      renderData: CardRenderer.builder((b) => {
+        b.minus().delegate(1).any;
+      }),
+    };
 }

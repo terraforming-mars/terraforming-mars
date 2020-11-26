@@ -401,6 +401,15 @@
                 line-height: 13px;
                 font-weight: normal;
             }
+            .card-description-aligned {
+                width: 60%;
+            }
+            .card-description-align--left {
+                align-self: flex-start;
+            }
+            .card-description-align--rigth {
+                align-self: flex-end;
+            }
             .card-points {
                 position: absolute;
                 font-family: Prototype;
@@ -473,6 +482,17 @@
             /* tiles */
             .card-tile {
                 margin-left: 4px;
+                margin-right: 4px;
+            }
+            .card-special-tile--M {
+                background-size: 40px;
+                width: 40px;
+                height: 40px;
+            }
+            .card-biofertilizer_facility--M {
+                background: url(assets/board_icons_ares.png) -342px -83px no-repeat;
+                width: 47px;
+                height: 47px;
             }
             .city-tile--M {
                 background-image: url(./assets/tiles/city.png);
@@ -484,6 +504,25 @@
                 width: 30px;
                 height: 32px;
                 background-size: 30px 32px;
+            }
+            .card-tr {
+                background-image: url(./assets/resources/tr.png);
+                width: 55px;
+                height: 40px;
+                background-size: 55px 40px;
+            }
+            .card-delegate {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                margin-bottom: 6px;
+            }
+            .card-delegate-red {
+                filter: drop-shadow(0px 1px 1px darkred) drop-shadow(0px -1px 1px red) drop-shadow(0px 0px 2px black);
             }
         }
         .temporary-content-wrapper {

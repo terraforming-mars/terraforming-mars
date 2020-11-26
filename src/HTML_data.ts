@@ -162,18 +162,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.BLACK_POLAR_DUST, ` 
-        <div class="content ">
-            <div class="production-box production-box-size3a ">
-                <div class="production-prefix minus"></div><div class="money production ">2</div><br>
-                <div class="production-prefix plus"></div><div class="heat production "></div><div class="heat production "></div><div class="heat production "></div>
-            </div>
-            <div class="tile ocean-tile "></div>
-            <div class="description ">
-                (Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps.)
-            </div>
-        </div>
-`],
     [CardName.PREDATORS, ` 
         <div class="content ">
             <div class="points ">1/<div class="animal resource "></div></div>
@@ -472,19 +460,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.BEAM_FROM_A_THORIUM_ASTEROID, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">Jovian</div>
-        <div class="production-box production-box-size3">
-          <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div><br>
-          <div class="production energy"></div><div class="production energy"></div><div class="production energy"></div>
-        </div>
-        <div class="description">
-          (Requires a Jovian tag. Increase your heat production and Energy production 3 steps each.)
-        </div>
-      </div>
-`],
     [CardName.MANGROVE, ` 
       <div class="content">
         <div class="points points-big">1</div>
@@ -549,17 +524,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.BUILDING_INDUSTRIES, ` 
-      <div class="content">
-        <div class="production-box production-box-size2a">
-          <div class="production-prefix minus"></div><div class="energy production"></div><br>
-          <div class="production-prefix plus"></div><div class="steel production"></div><div class="steel production"></div>
-        </div>
-        <div class="description">
-          (Decrease your Energy production 1 step and increase your steel production 2 steps.)
-        </div>
-      </div>
-`],
     [CardName.LAND_CLAIM, ` 
       <div class="card-number">066</div>
         <div class="content " style="font-size:14px;">
@@ -609,22 +573,6 @@ export const HTML_DATA: Map<string, string> =
             : <span class="money resource ">-2</span>
             <div class="description ">
                 (Effect: When you play a card, you pay 2 MC less for it.)
-            </div>
-        </div>
-`],
-    [CardName.BIRDS, ` 
-        <div class="content ">
-            <div class="points ">1/<div class="animal resource "></div></div>
-            <div class="requirements" style="margin-bottom:5px;">13% O2</div>
-            <span class="red-arrow "></span> <div class="animal resource "></div>
-            <div class="description " style="margin-top:-5px;margin-bottom:5px;">
-                (Action: Add an animal to this card.)
-            </div>
-            <div class="production-box production-box-size2a">
-              <div class="production-prefix minus"></div><div class="plant production red-outline"></div><div class="plant production red-outline"></div>
-            </div>
-            <div class="description"  style="margin-top:-5px;">
-                (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)
             </div>
         </div>
 `],
@@ -813,18 +761,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.BUSHES, ` 
-      <div class="content">
-        <div class="requirements">-10 C</div>
-        <div class="production-box production-box-size2">
-          <div class="plant production"></div><div class="plant production"></div>
-        </div>
-        <div class="plant resource" style="margin-left:20px;"></div><div class="plant resource"></div>
-        <div class="description">
-          (Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.)
-        </div>
-      </div>
-`],
     [CardName.MASS_CONVERTER, ` 
         <div class="content ">
           <div class="requirements">5 Science</div>
@@ -977,30 +913,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Effect: After you play an event card, you gain 3MC.)
             </div>
-        </div>
-`],
-    [CardName.BUSINESS_NETWORK, ` 
-        <div class="content ">
-            <span class="red-arrow "></span> <span style="font-size:14px; ">ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT</span>
-            <br><br>
-            <div class="production-box"><div class="production money">-1</div></div>
-            <div class="description " >
-                (Decrease your MC production 1 step.)
-            </div>
-        </div>
-`],
-    [CardName.BUSINESS_CONTACTS, ` 
-        <div class="content ">
-            <span style="font-size:14px; ">LOOK AT THE TOP 4 CARDS FROM THE DECK. TAKE 2 OF THEM INTO HAND AND DISCARD THE OTHER 2</span>
-        </div>
-`],
-    [CardName.BRIBED_COMMITTEE, ` 
-        <div class="content ">
-          <div class="points points-big">-2</div>
-          <div class="tile rating"></div> <div class="tile rating"></div>
-          <div class="description ">
-              (Raise your TR 2 steps.)
-          </div>
         </div>
 `],
     [CardName.SOLAR_POWER, ` 
@@ -4599,15 +4511,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.BANNED_DELEGATE, ` 
-  <div class="content ">
-    <div class="requirements">Chairman</div>
-      - <div class="delegate delegate-red"></div>
-      <div class="description ">
-          (Requires that you are Chairman. Remove any NON-LEADER delegate.)
-      </div>
-  </div>
-`],
     [CardName.CULTURAL_METROPOLIS, ` 
   <div class="content ">
       <div class="requirements"><span class="party">Unity</span></div>
@@ -4966,18 +4869,6 @@ export const HTML_DATA: Map<string, string> =
           Set the ruling party to one of your choice. Gain +1 influence.
         </div>
       </div>
-`],
-    [CardName.BUTTERFLY_EFFECT, `
-    <div class="card-number">A03</div>
-    <div class="content ">
-        <div class="tile rating"></div><br/>
-        <div class="card-content-requirements">
-          <div class="globals-box">All four hazard markers</div>: -1 / 0 / +1
-        </div>
-        <div class="description " style="text-align:left;">
-            (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)<br>
-        </div>
-    </div>
 `],
     [CardName.ECOLOGICAL_SURVEY, `
     <div class="card-number">A05</div>

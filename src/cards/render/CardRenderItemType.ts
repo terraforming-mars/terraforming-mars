@@ -4,6 +4,7 @@ export enum CardRenderItemType {
   OCEANS = 'oceans',
   VENUS = 'venus',
   PLANTS = 'plants',
+  TR = 'tr',
   HEAT = 'heat',
   ENERGY = 'energy',
   TITANIUM = 'titanium',

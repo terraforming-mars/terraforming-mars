@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
+import {isIDescription} from '../../cards/render/ICardRenderDescription';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderProductionBox} from '../../cards/render/CardRenderer';
 import {CardRenderTile} from '../../cards/render/CardRenderer';
@@ -40,7 +41,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
       return this.componentData instanceof CardRenderEffect;
     },
     isDescription: function(): boolean {
-      return typeof this.componentData === 'string' || this.componentData instanceof String;
+      return typeof this.componentData === 'string' || this.componentData instanceof String || isIDescription(this.componentData);
     },
     isTile: function(): boolean {
       return this.componentData instanceof CardRenderTile;
@@ -53,7 +54,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
         <CardProductionBoxComponent v-else-if="isProduction()" :rows="componentData.rows" />
         <CardRenderEffectBoxComponent v-else-if="isEffect()" :effectData="componentData" />
         <CardRenderTileComponent v-else-if="isTile()" :item="componentData" />
-        <CardDescription v-else-if="isDescription()" :text="componentData" />
+        <CardDescription v-else-if="isDescription()" :item="componentData" />
         <div v-else>n/a</div>
     `,
 });

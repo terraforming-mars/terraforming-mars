@@ -32,7 +32,7 @@ export class DuskLaserMining implements IProjectCard {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;
           pb.plus().titanium(1);
-        }).titanium(4).digit;
+        }).nbsp.titanium(4).digit;
       }),
     }
 }

@@ -11,6 +11,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../constants';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class DeimosDownPromo implements IProjectCard {
     public cost = 31;
@@ -42,5 +44,14 @@ export class DeimosDownPromo implements IProjectCard {
         game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.DEIMOS_DOWN});
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '039',
+      description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player',
+      renderData: CardRenderer.builder((b) => {
+        b.temperature(3).br;
+        b.tile(TileType.DEIMOS_DOWN, true).asterix().br;
+        b.steel(4).digit.nbsp.minus().plants(-6).any;
+      }),
     }
 }

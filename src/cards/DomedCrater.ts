@@ -1,4 +1,3 @@
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -8,6 +7,9 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class DomedCrater implements IProjectCard {
     public cost = 24;
@@ -34,5 +36,20 @@ export class DomedCrater implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'T03',
+      requirements: CardRequirements.builder((b) => b.oxygen(7).max()),
+      description: {
+        text: 'Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps',
+        align: 'left',
+      },
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(3);
+        }).nbsp.city().plants(3).digit.br;
+      }),
+      victoryPoints: 1,
     }
 }

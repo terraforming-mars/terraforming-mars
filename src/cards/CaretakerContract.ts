@@ -9,6 +9,9 @@ import {CardName} from '../CardName';
 import {PartyHooks} from '../turmoil/parties/PartyHooks';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../constants';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost = 3;
@@ -62,5 +65,15 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       player.heat -= 8;
       player.increaseTerraformRating(game);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '154',
+      description: 'Requires 0 C or warmer',
+      requirements: CardRequirements.builder((b) => b.temperature(0)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.heat(8).startAction.tr(1);
+        });
+      }),
     }
 }

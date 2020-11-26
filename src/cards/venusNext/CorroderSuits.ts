@@ -9,6 +9,8 @@ import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {Game} from '../../Game';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CorroderSuits implements IProjectCard {
     public cost = 8;
@@ -44,5 +46,14 @@ export class CorroderSuits implements IProjectCard {
       resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
       resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
       return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '219',
+      description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.megacredits(2);
+        }).wild(1).secondaryTag(Tags.VENUS);
+      }),
     }
 }

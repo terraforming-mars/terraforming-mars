@@ -4250,7 +4250,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-<<<<<<< HEAD
     [CardName.DUSK_LASER_MINING, ` 
     <div class="content">
         <div class="requirements">2 Science</div>
@@ -4266,8 +4265,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-=======
->>>>>>> a116f2f91e6936d6d8b5ca7c1530611500177cc4
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -4903,7 +4900,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-<<<<<<< HEAD
     [CardName.BIOENGINEERING_ENCLOSURE, `
     <div class="card-number">A01</div>
     <div class="content ">
@@ -4951,8 +4947,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-=======
->>>>>>> a116f2f91e6936d6d8b5ca7c1530611500177cc4
     [CardName.ECOLOGICAL_SURVEY, `
     <div class="card-number">A05</div>
     <div class="content ">

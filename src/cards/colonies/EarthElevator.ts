@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EarthElevator implements IProjectCard {
     public cost = 43;
@@ -18,4 +20,12 @@ export class EarthElevator implements IProjectCard {
     public getVictoryPoints() {
       return 4;
     }
+    public metadata: CardMetadata = {
+      description: 'Increase your titanium production 3 steps',
+      cardNumber: 'C08',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.titanium(3));
+      }),
+      victoryPoints: 4,
+    };
 }

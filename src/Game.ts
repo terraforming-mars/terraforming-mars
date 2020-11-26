@@ -312,7 +312,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
           }
         } else {
           this.setStartingProductions(player);
-          this.playerHasPickedCorporationCard(player, new BeginnerCorporation() );
+          this.playerHasPickedCorporationCard(player, new BeginnerCorporation());
         }
       }
 
@@ -687,24 +687,14 @@ export class Game implements ISerializable<SerializedGame, Game> {
     private playCorporationCard(
       player: Player, corporationCard: CorporationCard,
     ): void {
-      // Check for negative M€
-      let cardCost = player.cardCost;
-      if (corporationCard.name === CardName.TERRALABS_RESEARCH) {
-        cardCost = 1;
-      } else if (corporationCard.name === CardName.POLYPHEMOS) {
-        cardCost = 5;
-      }
-      if (corporationCard.name !== new BeginnerCorporation().name && player.cardsInHand.length * cardCost > corporationCard.startingMegaCredits) {
-        player.cardsInHand = [];
-        player.preludeCardsInHand = [];
-        throw new Error('Too many cards selected');
-      }
-
       player.corporationCard = corporationCard;
       player.megaCredits = corporationCard.startingMegaCredits;
-      if (corporationCard.name !== new BeginnerCorporation().name) {
-        const cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * cardCost;
+      if (corporationCard.cardCost !== undefined) {
+        player.cardCost = corporationCard.cardCost;
+      }
+
+      if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+        player.megaCredits -= player.cardsInHand.length * player.cardCost;
       }
       corporationCard.play(player, this);
       this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
@@ -743,6 +733,18 @@ export class Game implements ISerializable<SerializedGame, Game> {
     private pickCorporationCard(player: Player): PlayerInput {
       let corporation: CorporationCard;
       const result: AndOptions = new AndOptions(() => {
+        // Check for negative M€
+        const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
+        if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
+          player.cardsInHand = [];
+          player.preludeCardsInHand = [];
+          throw new Error('Too many cards selected');
+        }
+        // discard all unpurchased cards
+        player.dealtProjectCards
+          .filter((card) => player.cardsInHand.includes(card) === false)
+          .forEach((card) => this.dealer.discard(card));
+
         this.playerHasPickedCorporationCard(player, corporation); return undefined;
       });
 
@@ -764,7 +766,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
           new SelectCard(
             'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
             (preludeCards: Array<IProjectCard>) => {
-              player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
+              player.preludeCardsInHand.push(...preludeCards);
               return undefined;
             }, 2, 2,
           ),
@@ -775,17 +777,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         new SelectCard(
           'Select initial cards to buy', undefined, player.dealtProjectCards,
           (foundCards: Array<IProjectCard>) => {
-            for (const dealt of foundCards) {
-              if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
-                player.cardsInHand.push(dealt);
-              }
-            }
-
-            // discard all unpurchased cards
-            player.dealtProjectCards
-              .filter((card) => !foundCards.includes(card))
-              .forEach((card) => this.dealer.discard(card));
-
+            player.cardsInHand.push(...foundCards);
             return undefined;
           }, 10, 0,
         ),

@@ -6,7 +6,9 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class DiasporaMovement implements IProjectCard {
     public cost = 7;
@@ -31,5 +33,14 @@ export class DiasporaMovement implements IProjectCard {
 
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'TO4',
+      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(1).slash().jovian().played.any;
+      }),
+      victoryPoints: 1,
     }
 }

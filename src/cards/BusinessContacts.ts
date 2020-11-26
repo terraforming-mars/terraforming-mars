@@ -1,4 +1,3 @@
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -6,6 +5,9 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {CardName} from '../CardName';
+import {CardMetadata} from './CardMetadata';
+import {CardRenderer} from './render/CardRenderer';
+import {CardRenderItemSize} from './render/CardRenderItemSize';
 
 export class BusinessContacts implements IProjectCard {
     public cost = 7;
@@ -35,4 +37,8 @@ export class BusinessContacts implements IProjectCard {
         }, 2, 2,
       );
     }
+    public metadata: CardMetadata = {
+      cardNumber: '111',
+      renderData: CardRenderer.builder((b) => b.text('Look at the top 4 cards from the deck. take 2 of them into hand and discard the other 2', CardRenderItemSize.SMALL, true)),
+    };
 }

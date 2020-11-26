@@ -8,6 +8,10 @@ import {ResourceType} from '../ResourceType';
 import {Resources} from '../Resources';
 import {CardName} from '../CardName';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from './CardMetadata';
+import {CardRequirements} from './CardRequirements';
+import {CardRenderer} from './render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 
 export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public cost = 10;
@@ -34,4 +38,19 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
       player.addResourceTo(this);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '072',
+      description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card',
+      requirements: CardRequirements.builder((b) => b.oxygen(13)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.animals(1);
+          eb.description('Action: Add an animal to this card');
+        }).br;
+        b.productionBox((pb) => {
+          pb.minus().plants(-2).any;
+        });
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
+    };
 }

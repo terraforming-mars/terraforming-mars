@@ -17,7 +17,7 @@ export enum CardRenderItemType {
   EVENT = 'event',
   SPACE = 'space',
   JOVIAN = 'jovian',
-  VENUS_TAG = 'venus tag',
+  VENUS_TAG = 'venus_tag',
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
   TRADE_FLEET = 'trade_fleet',

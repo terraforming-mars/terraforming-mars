@@ -1872,20 +1872,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-<<<<<<< HEAD
-    [CardName.DIRIGIBLES, ` 
-            <div class="content ">
-                <div class="red-arrow "></div> <div class="floater resource "></div>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-              <div class="resource-tag tag-venus"></div>  : <div class="floater resource "></div> = <div class="money resource ">3</div>
-                <div class="description ">
-                  (Action: add 1 Floater to ANY card.)
-                  <br><br>
-                  (Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3 MC each)
-                </div>
-            </div>
-`],
-=======
->>>>>>> 5 more
     [CardName.EXTREMOPHILES, ` 
             <div class="content ">
               <div class="points">1/3<div class="resource microbe"></div></div>
@@ -4253,7 +4239,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-<<<<<<< HEAD
     [CardName.DUSK_LASER_MINING, ` 
     <div class="content">
         <div class="requirements">2 Science</div>
@@ -4269,8 +4254,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-=======
->>>>>>> 5 more
     [CardName.PHARMACY_UNION, `
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
@@ -4940,6 +4923,16 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="description " style="text-align:left;">
             (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)
+        </div>
+    </div>
+`],
+    [CardName.DESPERATE_MEASURES, `
+    <div class="card-number">A04</div>
+    <div class="content ">
+        <div class="points ">-2</span></div>
+        <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
+        <div class="description " style="text-align:left;">
+            (Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.)
         </div>
     </div>
 `],

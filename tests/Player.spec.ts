@@ -74,7 +74,7 @@ describe('Player', function() {
     expect(player.getWaitingFor()).is.not.undefined;
     expect(function() {
       player.process(game, [[]]);
-    }).to.throw('Incorrect number of amounts provided');
+    }).to.throw('Incorrect options provided');
     expect(function() {
       player.process(game, []);
     }).to.throw('Incorrect options provided');

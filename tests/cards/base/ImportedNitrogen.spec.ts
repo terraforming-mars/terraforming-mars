@@ -4,9 +4,9 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Ants} from '../../src/cards/base/Ants';
+import {Ants} from '../../../src/cards/base/Ants';
 import {Pets} from '../../../src/cards/base/Pets';
-import {Birds} from '../../src/cards/base/Birds';
+import {Birds} from '../../../src/cards/base/Birds';
 import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 

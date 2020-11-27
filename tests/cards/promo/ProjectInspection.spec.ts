@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ProjectInspection} from '../../../src/cards/promo/ProjectInspection';
-import {RestrictedArea} from '../../../src/cards/RestrictedArea';
+import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';

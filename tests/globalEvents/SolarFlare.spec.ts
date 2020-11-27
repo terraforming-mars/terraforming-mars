@@ -6,7 +6,7 @@ import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Resources} from '../../src/Resources';
-import {SpaceStation} from '../../src/cards/SpaceStation';
+import {SpaceStation} from '../../src/cards/base/SpaceStation';
 
 describe('SolarFlare', function() {
   it('resolve play', function() {

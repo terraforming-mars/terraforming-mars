@@ -3,8 +3,8 @@ import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Research} from '../../../src/cards/Research';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
+import {Research} from '../../../src/cards/base/Research';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('Extremophiles', function() {

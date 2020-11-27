@@ -6,8 +6,8 @@ import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
 import {Luna} from '../../../src/colonies/Luna';
-import {Decomposers} from '../../../src/cards/Decomposers';
-import {Ants} from '../../../src/cards/Ants';
+import {Decomposers} from '../../../src/cards/base/Decomposers';
+import {Ants} from '../../../src/cards/base/Ants';
 import {ICard} from '../../../src/cards/ICard';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 

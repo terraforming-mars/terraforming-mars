@@ -41,4 +41,7 @@ export class CardRenderSymbol {
   public static nbsp(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.NBSP, size, true);
   }
+  public static equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.EQUALS, size);
+  }
 }

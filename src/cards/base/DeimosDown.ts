@@ -8,6 +8,8 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class DeimosDown implements IProjectCard {
     public cost = 31;
@@ -32,5 +34,14 @@ export class DeimosDown implements IProjectCard {
       game.defer(new RemoveAnyPlants(player, game, 8));
       player.steel += 4;
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '039',
+      description: 'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player',
+      renderData: CardRenderer.builder((b) => {
+        b.temperature(3).br;
+        b.steel(4).br;
+        b.minus().plants(-8).any;
+      }),
     }
 }

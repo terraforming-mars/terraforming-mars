@@ -9,10 +9,10 @@ export class TerralabsResearch implements CorporationCard {
     public tags = [Tags.SCIENCE, Tags.EARTH];
     public startingMegaCredits: number = 14;
     public cardType = CardType.CORPORATION;
+    public cardCost = 1;
 
     public play(player: Player) {
       player.decreaseTerraformRating();
-      player.cardCost = 1;
       return undefined;
     }
 }

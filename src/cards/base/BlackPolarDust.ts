@@ -8,6 +8,8 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BlackPolarDust implements IProjectCard {
     public cost = 15;
@@ -32,4 +34,14 @@ export class BlackPolarDust implements IProjectCard {
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '022',
+      description: 'Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().megacredits(2).br;
+          pb.plus().heat(3);
+        }).oceans(1);
+      }),
+    };
 }

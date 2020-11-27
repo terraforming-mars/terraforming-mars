@@ -5,6 +5,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BuildingIndustries implements IProjectCard {
     public cost = 6;
@@ -20,4 +22,14 @@ export class BuildingIndustries implements IProjectCard {
       player.addProduction(Resources.STEEL, 2);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '065',
+      description: 'Decrease your Energy production 1 step and increase your steel production 2 steps',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().steel(2);
+        });
+      }),
+    };
 }

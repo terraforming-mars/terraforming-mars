@@ -7,6 +7,8 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BribedCommittee implements IProjectCard {
     public cost = 7;
@@ -31,4 +33,10 @@ export class BribedCommittee implements IProjectCard {
     public getVictoryPoints() {
       return -2;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '112',
+      description: 'Raise your TR 2 steps',
+      renderData: CardRenderer.builder((b) => b.tr(2)),
+      victoryPoints: -2,
+    };
 }

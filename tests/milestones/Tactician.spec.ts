@@ -24,6 +24,7 @@ import {VenusianAnimals} from '../../src/cards/venusNext/VenusianAnimals';
 import {SpaceHotels} from '../../src/cards/prelude/SpaceHotels';
 import {GMOContract} from '../../src/cards/turmoil/GMOContract';
 import {PioneerSettlement} from '../../src/cards/colonies/PioneerSettlement';
+import {Algae} from '../../src/cards/base/Algae';
 
 describe('Tactician', function() {
   let milestone : Tactician; let player : Player;
@@ -62,12 +63,24 @@ describe('Tactician', function() {
     expect(milestone.canClaim(player)).is.not.true;
   });
 
-  it('Can claim', function() {
+  it('Can claim with 5 cards with requirements', function() {
     player.playedCards.push(new CupolaCity());
     player.playedCards.push(new VenusianAnimals());
     player.playedCards.push(new SpaceHotels());
     player.playedCards.push(new PioneerSettlement());
     player.playedCards.push(new GMOContract());
+
+    expect(milestone.canClaim(player)).is.true;
+  });
+
+
+  it('Can claim with >5 cards (here: 6) with requirements', function() {
+    player.playedCards.push(new CupolaCity());
+    player.playedCards.push(new VenusianAnimals());
+    player.playedCards.push(new SpaceHotels());
+    player.playedCards.push(new PioneerSettlement());
+    player.playedCards.push(new GMOContract());
+    player.playedCards.push(new Algae());
 
     expect(milestone.canClaim(player)).is.true;
   });

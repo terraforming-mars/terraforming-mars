@@ -5,7 +5,7 @@ import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Sponsors} from '../../src/cards/Sponsors';
+import {Sponsors} from '../../src/cards/base/Sponsors';
 
 describe('Revolution', function() {
   let card : Revolution; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;

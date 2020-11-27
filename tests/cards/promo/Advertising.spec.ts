@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Advertising} from '../../../src/cards/promo/Advertising';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {EarthCatapult} from '../../../src/cards/EarthCatapult';
+import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 

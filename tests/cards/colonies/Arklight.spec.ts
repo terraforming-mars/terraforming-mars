@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Arklight} from '../../../src/cards/colonies/Arklight';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Predators} from '../../../src/cards/Predators';
+import {Predators} from '../../../src/cards/base/Predators';
 import {Game} from '../../../src/Game';
 
 describe('Arklight', function() {

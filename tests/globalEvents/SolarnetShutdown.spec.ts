@@ -6,8 +6,8 @@ import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Resources} from '../../src/Resources';
-import {InventorsGuild} from '../../src/cards/InventorsGuild';
-import {ColonizerTrainingCamp} from '../../src/cards/ColonizerTrainingCamp';
+import {InventorsGuild} from '../../src/cards/base/InventorsGuild';
+import {ColonizerTrainingCamp} from '../../src/cards/base/ColonizerTrainingCamp';
 
 describe('SolarnetShutdown', function() {
   it('resolve play', function() {

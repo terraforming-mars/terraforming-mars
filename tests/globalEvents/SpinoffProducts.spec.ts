@@ -6,7 +6,7 @@ import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Research} from '../../src/cards/Research';
+import {Research} from '../../src/cards/base/Research';
 
 describe('SpinoffProducts', function() {
   it('resolve play', function() {

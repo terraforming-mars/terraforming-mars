@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PowerPlant} from '../../../src/cards/PowerPlant';
+import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {MagneticShield} from '../../../src/cards/promo/MagneticShield';

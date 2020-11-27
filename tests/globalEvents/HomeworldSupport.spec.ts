@@ -6,7 +6,7 @@ import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Sponsors} from '../../src/cards/Sponsors';
+import {Sponsors} from '../../src/cards/base/Sponsors';
 
 describe('HomeworldSupport', function() {
   it('resolve play', function() {

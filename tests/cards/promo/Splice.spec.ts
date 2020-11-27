@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {AndOptions} from '../../../src/inputs/AndOptions';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
 import {Recyclon} from '../../../src/cards/promo/Recyclon';
 

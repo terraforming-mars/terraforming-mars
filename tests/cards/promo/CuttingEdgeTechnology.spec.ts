@@ -3,8 +3,8 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {CuttingEdgeTechnology} from '../../../src/cards/promo/CuttingEdgeTechnology';
-import {DustSeals} from '../../../src/cards/DustSeals';
-import {HeatTrappers} from '../../../src/cards/HeatTrappers';
+import {DustSeals} from '../../../src/cards/base/DustSeals';
+import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
 
 describe('CuttingEdgeTechnology', function() {

@@ -5,8 +5,8 @@ import {Color} from '../../../src/Color';
 import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {DeepWellHeating} from '../../../src/cards/DeepWellHeating';
-import {MartianRails} from '../../../src/cards/MartianRails';
+import {DeepWellHeating} from '../../../src/cards/base/DeepWellHeating';
+import {MartianRails} from '../../../src/cards/base/MartianRails';
 import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('ParliamentHall', function() {

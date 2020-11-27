@@ -3,8 +3,8 @@ import {CheungShingMARS} from '../../../src/cards/prelude/CheungShingMARS';
 import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Ants} from '../../../src/cards/Ants';
-import {BuildingIndustries} from '../../../src/cards/BuildingIndustries';
+import {Ants} from '../../../src/cards/base/Ants';
+import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
 import {Resources} from '../../../src/Resources';
 
 describe('CheungShingMARS', function() {

@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Fish} from '../../../src/cards/Fish';
-import {Predators} from '../../../src/cards/Predators';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Predators} from '../../../src/cards/base/Predators';
 import {Game} from '../../../src/Game';
-import {EosChasmaNationalPark} from '../../../src/cards/EOSChasmaNationalPark';
+import {EosChasmaNationalPark} from '../../../src/cards/base/EOSChasmaNationalPark';
 
 describe('MeatIndustry', function() {
   it('Gives 2 MC whenever player gains an animal', function() {

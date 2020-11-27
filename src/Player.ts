@@ -686,46 +686,42 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     }
 
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
-      const foundCards = cards.filter((card) => card.name === cardName);
-      if (foundCards.length === 0) {
+      const foundCard = cards.find((card) => card.name === cardName);
+      if (foundCard === undefined) {
         throw new Error('Card not found');
       }
-      return foundCards[0];
+      return foundCard;
     }
+
     private runInputCb(game: Game, result: PlayerInput | undefined): void {
       if (result !== undefined) {
-        game.defer(new DeferredAction(
-          this,
-          () => result,
-        ));
+        game.defer(new DeferredAction(this, () => result));
       }
     }
-    private runInput(
-      game: Game,
-      input: Array<Array<string>>,
-      pi: PlayerInput): void {
+
+    private checkInputLength(input: Array<Array<string>>, length: number, firstOptionLength?: number) {
+      if (input.length !== length) {
+        throw new Error('Incorrect options provided');
+      }
+      if (firstOptionLength !== undefined && input[0].length !== firstOptionLength) {
+        throw new Error('Incorrect options provided (nested)');
+      }
+    }
+
+    private runInput(game: Game, input: Array<Array<string>>, pi: PlayerInput): void {
       if (pi instanceof AndOptions) {
-        const waiting: AndOptions = pi;
-        if (input.length !== waiting.options.length) {
-          throw new Error('Not all options provided');
-        }
+        this.checkInputLength(input, pi.options.length);
         for (let i = 0; i < input.length; i++) {
-          this.runInput(game, [input[i]], waiting.options[i]);
+          this.runInput(game, [input[i]], pi.options[i]);
         }
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectAmount) {
-        const waiting: SelectAmount = pi;
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Incorrect number of amounts provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const amount: number = parseInt(input[0][0]);
         if (isNaN(amount)) {
           throw new Error('Number not provided for amount');
         }
-        if (amount > waiting.max) {
+        if (amount > pi.max) {
           throw new Error('Amount provided too high');
         }
         if (amount < 0) {
@@ -735,24 +731,23 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       } else if (pi instanceof SelectOption) {
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectColony) {
+        this.checkInputLength(input, 1, 1);
         const colony: ColonyName = (input[0][0]) as ColonyName;
         if (colony === undefined) {
           throw new Error('No colony selected');
         }
         this.runInputCb(game, pi.cb(colony));
       } else if (pi instanceof OrOptions) {
-        const waiting: OrOptions = pi;
-        const optionIndex = parseInt(input[0][0]);
-        const remainingInput = [];
-        for (let i = 1; i < input.length; i++) {
-          remainingInput.push(input[i].slice());
-        }
-        this.runInput(game, remainingInput, waiting.options[optionIndex]);
-        this.runInputCb(game, pi.cb());
-      } else if (pi instanceof SelectHowToPayForCard) {
-        if (input.length !== 1 || input[0].length !== 2) {
+        // input length is variable, can't test it with checkInputLength
+        if (input.length === 0 || input[0].length !== 1) {
           throw new Error('Incorrect options provided');
         }
+        const optionIndex = parseInt(input[0][0]);
+        const selectedOptionInput = input.slice(1);
+        this.runInput(game, selectedOptionInput, pi.options[optionIndex]);
+        this.runInputCb(game, pi.cb());
+      } else if (pi instanceof SelectHowToPayForCard) {
+        this.checkInputLength(input, 1, 2);
         const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
         const payMethod: HowToPay = {
           steel: 0,
@@ -764,72 +759,37 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           isResearchPhase: false,
         };
         try {
-          const parsedInput: {[x: string]: number} =
-                    JSON.parse(input[0][1]);
-          if (
-            this.canUseSteel(foundCard) &&
-                    parsedInput.steel !== undefined) {
-            payMethod.steel = parsedInput.steel;
+          const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
+          if (Object.keys(parsedInput).every((key) => key in payMethod) === false) {
+            throw new Error('Incorrect amount provided');
           }
-          if (
-            this.canUseTitanium(foundCard) &&
-                    parsedInput.titanium !== undefined) {
-            payMethod.titanium = parsedInput.titanium;
-          }
-          if (parsedInput.megaCredits !== undefined) {
-            payMethod.megaCredits = parsedInput.megaCredits;
-          }
-          if (this.canUseHeatAsMegaCredits) {
-            if (parsedInput.heat !== undefined) {
-              payMethod.heat = parsedInput.heat;
-            }
-          }
-          if (parsedInput.microbes !== undefined) {
-            payMethod.microbes = parsedInput.microbes;
-          }
-          if (parsedInput.floaters !== undefined) {
-            payMethod.floaters = parsedInput.floaters;
-          }
+          Object.assign(payMethod, parsedInput);
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }
         this.runInputCb(game, pi.cb(foundCard, payMethod));
       } else if (pi instanceof SelectCard) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        const mappedCards: Array<ICard> = [];
-        for (const cardName of input[0]) {
-          mappedCards.push(this.getCard(pi.cards, cardName));
-        }
+        this.checkInputLength(input, 1);
         if (input[0].length < pi.minCardsToSelect) {
           throw new Error('Not enough cards selected');
         }
         if (input[0].length > pi.maxCardsToSelect) {
           throw new Error('Too many cards selected');
         }
-        if (mappedCards.length !== input[0].length) {
-          throw new Error('Not all cards found');
+        const mappedCards: Array<ICard> = [];
+        for (const cardName of input[0]) {
+          mappedCards.push(this.getCard(pi.cards, cardName));
         }
         this.runInputCb(game, pi.cb(mappedCards));
       } else if (pi instanceof SelectAmount) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Too many amounts provided');
-        }
-        if (isNaN(parseInt(input[0][0]))) {
+        this.checkInputLength(input, 1, 1);
+        const amount = parseInt(input[0][0]);
+        if (isNaN(amount)) {
           throw new Error('Amount is not a number');
         }
-        this.runInputCb(game, pi.cb(parseInt(input[0][0])));
+        this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectSpace) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Too many spaces provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const foundSpace = pi.availableSpaces.find(
           (space) => space.id === input[0][0],
         );
@@ -838,12 +798,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         }
         this.runInputCb(game, pi.cb(foundSpace));
       } else if (pi instanceof SelectPlayer) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Invalid players array provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const foundPlayer = pi.players.find(
           (player) => player.color === input[0][0] || player.id === input[0][0],
         );
@@ -852,34 +807,17 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         }
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectDelegate) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Invalid players array provided');
-        }
-        let foundPlayer: Player | 'NEUTRAL' | undefined = undefined;
-        if (input[0][0] === 'NEUTRAL') {
-          foundPlayer = 'NEUTRAL';
-        } else {
-          pi.players.forEach((player) => {
-            if (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])) {
-              foundPlayer = player;
-            }
-          });
-        }
+        this.checkInputLength(input, 1, 1);
+        const foundPlayer = pi.players.find((player) =>
+          player === input[0][0] ||
+          (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])),
+        );
         if (foundPlayer === undefined) {
           throw new Error('Player not available');
         }
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0] === null) throw new Error('Invalid/no input provided');
-        if (input[0].length !== 1) {
-          throw new Error('Incorrect input provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const payMethod: HowToPay = {
           steel: 0,
           heat: 0,
@@ -889,39 +827,12 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           floaters: 0,
           isResearchPhase: false,
         };
-        if (!this.canUseHeatAsMegaCredits) payMethod.heat = 0;
-
         try {
-          const parsedInput: {[x: string]: number} =
-                    JSON.parse(input[0][0]);
-          if (parsedInput.steel !== undefined) {
-            payMethod.steel = parsedInput.steel;
-          } else {
-            throw new Error('Steel not provided, bad input');
+          const parsedInput: {[x: string]: number} = JSON.parse(input[0][0]);
+          if (Object.keys(parsedInput).every((key) => key in payMethod) === false) {
+            throw new Error('Incorrect amount provided');
           }
-          if (parsedInput.titanium !== undefined) {
-            payMethod.titanium = parsedInput.titanium;
-          } else {
-            throw new Error('Titanium not provided, bad input');
-          }
-          if (parsedInput.megaCredits !== undefined) {
-            payMethod.megaCredits = parsedInput.megaCredits;
-          } else {
-            throw new Error('Mega credits not provided, bad input');
-          }
-          if (this.canUseHeatAsMegaCredits) {
-            if (parsedInput.heat !== undefined) {
-              payMethod.heat = parsedInput.heat;
-            } else {
-              throw new Error('Heat not provided, bad input');
-            }
-          }
-          if (parsedInput.microbes !== undefined) {
-            payMethod.microbes = parsedInput.microbes;
-          }
-          if (parsedInput.isResearchPhase !== undefined) {
-            payMethod.isResearchPhase = (parsedInput.isResearchPhase) as any;
-          }
+          Object.assign(payMethod, parsedInput);
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }

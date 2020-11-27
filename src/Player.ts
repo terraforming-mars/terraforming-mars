@@ -1618,7 +1618,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
       const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
 
-      const selectColony = new SelectColony('Select colony for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
+      const selectColony = new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach((colony) => {
           if (colony.name === colonyName) {
             game.log('${0} traded with ${1}', (b) => b.player(this).colony(colony));
@@ -1692,7 +1692,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         ...opts,
       );
 
-      trade.title = 'Trade with a colony';
+      trade.title = 'Trade with a colony tile';
       trade.buttonLabel = 'Trade';
 
       return trade;

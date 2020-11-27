@@ -13,7 +13,7 @@ export class RemoveColonyFromGame implements DeferredAction {
 
   public execute() {
     const coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(this.game.colonies);
-    const removeColony = new SelectColony('Select colony to remove', 'Remove colony', coloniesModel, (colonyName: ColonyName) => {
+    const removeColony = new SelectColony('Select colony tile to remove', 'Remove colony', coloniesModel, (colonyName: ColonyName) => {
       this.game.colonies.forEach((colony) => {
         if (colony.name === colonyName) {
           this.game.colonies.splice(this.game.colonies.indexOf(colony), 1);

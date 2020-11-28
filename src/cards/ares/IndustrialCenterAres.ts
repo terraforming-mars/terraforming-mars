@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
-import {IndustrialCenter} from '../IndustrialCenter';
+import {IndustrialCenter} from '../base/IndustrialCenter';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 
 export class IndustrialCenterAres extends IndustrialCenter {

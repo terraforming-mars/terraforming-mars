@@ -6,7 +6,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
-import {Research} from '../../../src/cards/Research';
+import {Research} from '../../../src/cards/base/Research';
 
 describe('FloatingHabs', function() {
   let card : FloatingHabs; let player : Player; let game : Game;

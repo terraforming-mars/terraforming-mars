@@ -8,8 +8,8 @@ import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
-import {Research} from '../../../src/cards/Research';
-import {SearchForLife} from '../../../src/cards/SearchForLife';
+import {Research} from '../../../src/cards/base/Research';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import * as constants from '../../../src/constants';
 
 describe('Atmoscoop', function() {

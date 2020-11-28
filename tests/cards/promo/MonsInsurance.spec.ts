@@ -4,10 +4,10 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {Sabotage} from '../../../src/cards/Sabotage';
+import {Sabotage} from '../../../src/cards/base/Sabotage';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Ants} from '../../../src/cards/Ants';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
+import {Ants} from '../../../src/cards/base/Ants';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 
 describe('MonsInsurance', function() {
   let card : MonsInsurance; let player : Player; let player2: Player; let player3: Player; let game: Game;

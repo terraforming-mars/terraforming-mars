@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
-import {LavaFlows} from '../LavaFlows';
+import {LavaFlows} from '../base/LavaFlows';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 
 export class LavaFlowsAres extends LavaFlows {

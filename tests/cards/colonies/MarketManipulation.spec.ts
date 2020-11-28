@@ -8,7 +8,7 @@ import {Triton} from '../../../src/colonies/Triton';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Miranda} from '../../../src/colonies/Miranda';
 import {Enceladus} from '../../../src/colonies/Enceladus';
-import {Pets} from '../../../src/cards/Pets';
+import {Pets} from '../../../src/cards/base/Pets';
 
 describe('MarketManipulation', function() {
   let card : MarketManipulation; let player : Player; let player2: Player; let game : Game; let luna: Luna;

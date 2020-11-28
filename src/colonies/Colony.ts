@@ -241,14 +241,14 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.GAIN_INFLUENCE:
-        if (game.turmoil) {
+        if (game.turmoil !== undefined) {
           game.turmoil.addInfluenceBonus(player);
           game.log('${0} gained 1 influence', (b) => b.player(player));
         }
         break;
 
       case ColonyBenefit.PLACE_DELEGATES:
-        if (game.turmoil) {
+        if (game.turmoil !== undefined) {
           const qty = Math.min(quantity, game.turmoil.getDelegates(player.id));
 
           for (let i = 0; i < qty; i++) {
@@ -258,13 +258,13 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
-        if (game.turmoil) {
+        if (game.turmoil !== undefined) {
           let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
           if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
 
-          player.megaCredits += partyDelegateCount;
-          return undefined;
+          player.setResource(Resources.MEGACREDITS, partyDelegateCount);
+          LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, partyDelegateCount);
         }
         break;
 

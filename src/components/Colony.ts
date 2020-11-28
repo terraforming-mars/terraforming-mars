@@ -447,10 +447,10 @@ export const Colony = Vue.component('colony', {
     <div></div>
   </div>
     <div v-if="colony.name === getPallas()" class="colony-grid-container2">
-    <div>0</div>
-    <div>0</div>
     <div>1</div>
     <div>1</div>
+    <div>1</div>
+    <div>2</div>
     <div>2</div>
     <div>2</div>
     <div>3</div>

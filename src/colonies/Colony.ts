@@ -260,6 +260,7 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         if (game.turmoil) {
           let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
+          if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
 
           player.megaCredits += partyDelegateCount;

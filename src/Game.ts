@@ -60,6 +60,8 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {AmazonisBoard} from './AmazonisBoard';
+import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 
 export interface Score {
   corporation: String;
@@ -452,6 +454,9 @@ export class Game implements ISerializable<SerializedGame, Game> {
       } else if (boardName === BoardName.HELLAS) {
         chooseMilestonesAndAwards(this, HELLAS_MILESTONES, HELLAS_AWARDS);
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+      } else if (boardName === BoardName.AMAZONIS) {
+        this.setRandomMilestonesAndAwards(hasVenus, 5, randomMA);
+        return new AmazonisBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
         return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
@@ -1485,6 +1490,24 @@ export class Game implements ISerializable<SerializedGame, Game> {
         player.titanium++;
       } else if (spaceBonus === SpaceBonus.HEAT) {
         player.heat++;
+      } else if (spaceBonus === SpaceBonus.ANIMAL) {
+        const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+
+        if (animalCards.length === 1) {
+          player.addResourceTo(animalCards[0], 1);
+          LogHelper.logAddResource(this, player, animalCards[0]);
+        } else if (animalCards.length > 1) {
+          this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL, 1));
+        }
+      } else if (spaceBonus === SpaceBonus.MICROBE) {
+        const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+
+        if (microbeCards.length === 1) {
+          player.addResourceTo(microbeCards[0], 1);
+          LogHelper.logAddResource(this, player, microbeCards[0]);
+        } else if (microbeCards.length > 1) {
+          this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE, 1));
+        }
       }
     }
 
@@ -1724,6 +1747,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
         this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (this.gameOptions.boardName === BoardName.HELLAS) {
         this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+      } else if (this.gameOptions.boardName === BoardName.AMAZONIS) {
+        this.board = new AmazonisBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         this.board = new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
       }

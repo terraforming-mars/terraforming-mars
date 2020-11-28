@@ -1160,7 +1160,7 @@ export const HTML_DATA: Map<string, string> =
                     <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
                     <div class="tile special-tile"><div class="special-tile-symbol special-tile--lava-flows"></div></div>*
                     <div class="description ">
-                      (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.)
+                    (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS OR VOLCANIC AREA.)
                     </div>
                 </div>
 `],
@@ -5119,7 +5119,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
         <div class="ares-tile board-space-tile--lava_flows_ares"></div>
         <div class="description ">
-          (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an <b>adjacency bonus</b> of 2 heat.)
+          (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS OR VOLCANIC AREA. This tile grants an <b>adjacency bonus</b> of 2 heat.)
         </div>
     </div>
 `],

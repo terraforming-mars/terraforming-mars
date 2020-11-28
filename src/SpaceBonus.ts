@@ -14,5 +14,6 @@ export enum SpaceBonus {
     POWER,
 
     // Custom maps / special tiles
+    RESTRICTED,
     VOLCANIC,
 }

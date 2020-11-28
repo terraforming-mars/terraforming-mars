@@ -200,12 +200,13 @@ export abstract class Board {
           space.tile === undefined ||
             AresHandler.hasHazardTile(space)
         ) && space.player === undefined &&
-             space.id !== SpaceName.NOCTIS_CITY;
+             space.id !== SpaceName.NOCTIS_CITY &&
+             space.bonus.includes(SpaceBonus.RESTRICTED) === false;
       });
     }
 
     public canPlaceTile(space: ISpace): boolean {
-      return space !== undefined && space.tile === undefined && space instanceof Land;
+      return space !== undefined && space.tile === undefined && space instanceof Land && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
     }
 
     public getForestSpace(spaces: Array<ISpace>): ISpace {

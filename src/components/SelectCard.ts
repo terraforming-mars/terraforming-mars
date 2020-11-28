@@ -58,7 +58,7 @@ export const SelectCard = Vue.component('select-card', {
         this.playerinput.cards,
       );
     },
-    noneOrMany: function(): boolean {
+    isOptionalToManyCards: function(): boolean {
       return this.playerinput.maxCardsToSelect !== undefined &&
              this.playerinput.maxCardsToSelect > 1 &&
              this.playerinput.minCardsToSelect === 0;
@@ -75,8 +75,8 @@ export const SelectCard = Vue.component('select-card', {
             <Card :card="card" />
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="noneOrMany() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
-            <Button :disabled="noneOrMany() && cardsSelected() > 0" v-if="noneOrMany()" :onClick="saveData" type="submit" :title="'Skip this action'" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="'Skip this action'" />
         </div>
     </div>`,
 });

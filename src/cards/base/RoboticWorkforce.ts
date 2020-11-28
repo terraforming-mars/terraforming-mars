@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {ICard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {SpaceBonus} from '../../SpaceBonus';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost = 9;
@@ -20,13 +21,16 @@ export class RoboticWorkforce implements IProjectCard {
     }
     private miningSteelProduction: number = 0;
     private miningTitaniumProduction: number = 0;
+    private solarFarmEnergyProduction: number = 0;
 
     private getAvailableCards(player: Player, game: Game): Array<ICard> {
       const builderCardsNames: Array<CardName> = [
         CardName.AI_CENTRAL,
+        CardName.BIOFERTILIZER_FACILITY,
         CardName.BIOMASS_COMBUSTORS,
         CardName.BUILDING_INDUSTRIES,
         CardName.CAPITAL,
+        CardName.CAPITAL_ARES,
         CardName.DOME_FARMING,
         CardName.EARLY_SETTLEMENT,
         CardName.MARTIAN_INDUSTRIES,
@@ -37,6 +41,7 @@ export class RoboticWorkforce implements IProjectCard {
         CardName.SELF_SUFFICIENT_SETTLEMENT,
         CardName.CARBONATE_PROCESSING,
         CardName.COMMERCIAL_DISTRICT,
+        CardName.COMMERCIAL_DISTRICT_ARES,
         CardName.CORPORATE_STRONGHOLD,
         CardName.CUPOLA_CITY,
         CardName.DEEP_WELL_HEATING,
@@ -61,19 +66,26 @@ export class RoboticWorkforce implements IProjectCard {
         CardName.MEDICAL_LAB,
         CardName.MINE,
         CardName.MINING_AREA,
+        CardName.MINING_AREA_ARES,
         CardName.MINING_QUOTA,
         CardName.MINING_RIGHTS,
+        CardName.MINING_RIGHTS_ARES,
         CardName.MOHOLE_AREA,
+        CardName.MOHOLE_AREA_ARES,
         CardName.NATURAL_PRESERVE,
+        CardName.NATURAL_PRESERVE_ARES,
         CardName.NOCTIS_CITY,
         CardName.NOCTIS_FARMING,
         CardName.NUCLEAR_POWER,
+        CardName.OCEAN_CITY,
+        CardName.OCEAN_FARM,
         CardName.OPEN_CITY,
         CardName.PEROXIDE_POWER,
         CardName.POWER_PLANT,
         CardName.PROTECTED_VALLEY,
         CardName.RAD_CHEM_FACTORY,
         CardName.SOIL_FACTORY,
+        CardName.SOLAR_FARM,
         CardName.SOLAR_POWER,
         CardName.SPACE_ELEVATOR,
         CardName.STRIP_MINE,
@@ -121,6 +133,7 @@ export class RoboticWorkforce implements IProjectCard {
                     (card.name === CardName.GYROPOLIS ||
                         card.name === CardName.STRIP_MINE ||
                         card.name === CardName.CAPITAL ||
+                        card.name === CardName.CAPITAL_ARES ||
                         card.name === CardName.MAGNETIC_FIELD_DOME ||
                         card.name === CardName.UNDERGROUND_CITY
                     )
@@ -133,6 +146,7 @@ export class RoboticWorkforce implements IProjectCard {
                         card.name === CardName.BUILDING_INDUSTRIES ||
                         card.name === CardName.CARBONATE_PROCESSING ||
                         card.name === CardName.COMMERCIAL_DISTRICT ||
+                        card.name === CardName.COMMERCIAL_DISTRICT_ARES ||
                         card.name === CardName.CORPORATE_STRONGHOLD ||
                         card.name === CardName.DOMED_CRATER ||
                         card.name === CardName.ELECTRO_CATAPULT ||
@@ -140,6 +154,7 @@ export class RoboticWorkforce implements IProjectCard {
                         card.name === CardName.GHG_FACTORIES ||
                         card.name === CardName.IMMIGRANT_CITY ||
                         card.name === CardName.NOCTIS_CITY ||
+                        card.name === CardName.OCEAN_CITY ||
                         card.name === CardName.OPEN_CITY ||
                         card.name === CardName.RAD_CHEM_FACTORY ||
                         card.name === CardName.SOIL_FACTORY ||
@@ -196,20 +211,25 @@ export class RoboticWorkforce implements IProjectCard {
 
       return new SelectCard('Select builder card to copy', 'Copy', availableCards, (selectedCards: Array<ICard>) => {
         const foundCard: ICard = selectedCards[0];
-        // this cards require additional user input
-        if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {
+
+        switch (foundCard.name) {
+        // this card require additional user input
+        case CardName.BIOMASS_COMBUSTORS:
           player.addProduction(Resources.ENERGY, 2);
           game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
           return undefined;
-        }
-        if (foundCard.name === CardName.HEAT_TRAPPERS) {
+
+        // this card require additional user input
+        case CardName.HEAT_TRAPPERS:
           player.addProduction(Resources.ENERGY, 1);
           game.defer(new DecreaseAnyProduction(player, game, Resources.HEAT, 2));
           return undefined;
-        }
 
         // Mining resource definition
-        if (foundCard.name === CardName.MINING_AREA || foundCard.name === CardName.MINING_RIGHTS) {
+        case CardName.MINING_AREA:
+        case CardName.MINING_AREA_ARES:
+        case CardName.MINING_RIGHTS:
+        case CardName.MINING_RIGHTS_ARES:
           const bonusResource = (foundCard as IProjectCard).bonusResource;
           if (bonusResource !== undefined && bonusResource === Resources.STEEL) {
             this.miningSteelProduction++;
@@ -217,6 +237,14 @@ export class RoboticWorkforce implements IProjectCard {
           if (bonusResource !== undefined && bonusResource === Resources.TITANIUM) {
             this.miningTitaniumProduction++;
           }
+          break;
+
+        case CardName.SOLAR_FARM:
+          const solarFarmSpace = game.board.getSpaceByTileCard(CardName.SOLAR_FARM);
+          if (solarFarmSpace !== undefined) {
+            this.solarFarmEnergyProduction = solarFarmSpace.bonus.filter((bonus) => bonus === SpaceBonus.PLANT).length;
+          }
+          break;
         }
 
         class Updater {
@@ -303,6 +331,16 @@ export class RoboticWorkforce implements IProjectCard {
           new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0),
           new Updater(CardName.CULTURAL_METROPOLIS, -1, 3, 0, 0, 0, 0),
           new Updater(CardName.PARLIAMENT_HALL, 0, Math.floor(player.getTagCount(Tags.STEEL) / 3), 0, 0, 0, 0),
+          new Updater(CardName.BIOFERTILIZER_FACILITY, 0, 0, 0, 0, 1, 0),
+          new Updater(CardName.CAPITAL_ARES, -2, 5, 0, 0, 0, 0),
+          new Updater(CardName.COMMERCIAL_DISTRICT_ARES, -1, 4, 0, 0, 0, 0),
+          new Updater(CardName.MINING_AREA_ARES, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
+          new Updater(CardName.MINING_RIGHTS_ARES, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
+          new Updater(CardName.MOHOLE_AREA_ARES, 0, 0, 0, 0, 0, 4),
+          new Updater(CardName.NATURAL_PRESERVE_ARES, 1, 0, 0, 0, 0, 0),
+          new Updater(CardName.OCEAN_CITY, -1, 3, 0, 0, 0, 0),
+          new Updater(CardName.OCEAN_FARM, 0, 0, 0, 0, 1, 1),
+          new Updater(CardName.SOLAR_FARM, this.solarFarmEnergyProduction, 0, 0, 0, 0, 0),
         ];
 
         const result:Updater = updaters.filter((u) => u.name === foundCard.name)[0];

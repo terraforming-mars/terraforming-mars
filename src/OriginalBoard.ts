@@ -40,6 +40,7 @@ export class OriginalBoard extends Board {
     if (shuffleMapOption) {
       builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
+    builder.setVolcanic(SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     this.spaces = builder.build();
   }
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {

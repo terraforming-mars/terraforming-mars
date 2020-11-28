@@ -11,5 +11,8 @@ export enum SpaceBonus {
     MEGACREDITS,
     ANIMAL,
     MICROBE,
-    POWER
+    POWER,
+
+    // Custom maps / special tiles
+    VOLCANIC,
 }

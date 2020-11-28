@@ -37,6 +37,13 @@ export class BoardBuilder {
       return this;
     }
 
+    setVolcanic(...lands: Array<SpaceName>) {
+      lands.forEach((land) => {
+        const land_id = Number(land) - 3;
+        this.bonuses[land_id].push(SpaceBonus.VOLCANIC);
+      });
+    }
+
     doNotShuffleLastSpace() {
       this.unshufflableSpaces.push(this.oceans.length - 1);
       return this;

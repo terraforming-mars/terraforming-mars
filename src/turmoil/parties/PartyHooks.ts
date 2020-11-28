@@ -3,6 +3,7 @@ import {Game} from '../../Game';
 import {PartyName} from './PartyName';
 import {SpaceType} from '../../SpaceType';
 import {Phase} from '../../Phase';
+import {PolicyId} from '../Policy';
 import {Resources} from '../../Resources';
 
 export class PartyHooks {
@@ -20,7 +21,7 @@ export class PartyHooks {
     }
   }
 
-  static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: string) {
+  static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: PolicyId) {
     if (!game.gameOptions.turmoilExtension) return false;
 
     const turmoil = game.turmoil!;
@@ -29,8 +30,9 @@ export class PartyHooks {
     const rulingParty = turmoil.rulingParty!;
     if (!rulingParty) return false;
 
-    if (policyId !== undefined && rulingParty.activePolicy !== undefined) {
-      return rulingParty.name === partyName && rulingParty.activePolicy.id === policyId;
+    const activePolicyId = turmoil.politicalAgendasData.thisAgenda.policyId;
+    if (policyId !== undefined && activePolicyId !== undefined) {
+      return rulingParty.name === partyName && activePolicyId === policyId;
     }
 
     return rulingParty.name === partyName;

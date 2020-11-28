@@ -11,7 +11,7 @@ import {CardsFilter} from './CardsFilter';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {RandomMAOptionType} from '../RandomMAOptionType';
-import {AgendaStyle} from '../turmoil/PoliticalAgendasData';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 export interface CreateGameModel {
     allOfficialExpansions: boolean;
@@ -252,11 +252,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
       }
     },
-    getPoliticalAgendasExtensionAgendaStyle: function(type: 'random' | 'chairman'): AgendaStyle {
+    getPoliticalAgendasExtensionAgendaStyle: function(type: 'random' | 'dynamic'): AgendaStyle {
       if (type === 'random') {
         return AgendaStyle.RANDOM;
-      } else if (type === 'chairman') {
-        return AgendaStyle.CHAIRMAN;
+      } else if (type === 'dynamic') {
+        return AgendaStyle.DYNAMIC;
       } else {
         return AgendaStyle.STANDARD;
       }

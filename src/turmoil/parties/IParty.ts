@@ -15,6 +15,4 @@ export interface IParty {
     policies: Array<Policy>;
     getPresentPlayers(): Array<PlayerId | 'NEUTRAL'>;
     getDelegates:(player: PlayerId | 'NEUTRAL') => number;
-    activeBonus?: Bonus;
-    activePolicy?: Policy;
 }

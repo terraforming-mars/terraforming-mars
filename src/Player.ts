@@ -699,7 +699,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     }
 
-    private checkInputLength(input: Array<Array<string>>, length: number, firstOptionLength?: number) {
+    private checkInputLength(input: ReadonlyArray<ReadonlyArray<string>>, length: number, firstOptionLength?: number) {
       if (input.length !== length) {
         throw new Error('Incorrect options provided');
       }
@@ -708,7 +708,28 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     }
 
-    private runInput(game: Game, input: Array<Array<string>>, pi: PlayerInput): void {
+    private parseHowToPayJSON(json: string): HowToPay {
+      const defaults: HowToPay = {
+        steel: 0,
+        heat: 0,
+        titanium: 0,
+        megaCredits: 0,
+        microbes: 0,
+        floaters: 0,
+        isResearchPhase: false,
+      };
+      try {
+        const howToPay: HowToPay = JSON.parse(json);
+        if (Object.keys(howToPay).every((key) => key in defaults) === false) {
+          throw new Error('Input contains unauthorized keys');
+        }
+        return howToPay;
+      } catch (err) {
+        throw new Error('Unable to parse HowToPay input ' + err);
+      }
+    }
+
+    private runInput(game: Game, input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
       if (pi instanceof AndOptions) {
         this.checkInputLength(input, pi.options.length);
         for (let i = 0; i < input.length; i++) {
@@ -749,25 +770,8 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       } else if (pi instanceof SelectHowToPayForCard) {
         this.checkInputLength(input, 1, 2);
         const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
-        const payMethod: HowToPay = {
-          steel: 0,
-          heat: 0,
-          titanium: 0,
-          megaCredits: 0,
-          microbes: 0,
-          floaters: 0,
-          isResearchPhase: false,
-        };
-        try {
-          const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
-          if (Object.keys(parsedInput).every((key) => key in payMethod) === false) {
-            throw new Error('Incorrect amount provided');
-          }
-          Object.assign(payMethod, parsedInput);
-        } catch (err) {
-          throw new Error('Unable to parse input ' + err);
-        }
-        this.runInputCb(game, pi.cb(foundCard, payMethod));
+        const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
+        this.runInputCb(game, pi.cb(foundCard, howToPay));
       } else if (pi instanceof SelectCard) {
         this.checkInputLength(input, 1);
         if (input[0].length < pi.minCardsToSelect) {
@@ -818,25 +822,8 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
         this.checkInputLength(input, 1, 1);
-        const payMethod: HowToPay = {
-          steel: 0,
-          heat: 0,
-          titanium: 0,
-          megaCredits: 0,
-          microbes: 0,
-          floaters: 0,
-          isResearchPhase: false,
-        };
-        try {
-          const parsedInput: {[x: string]: number} = JSON.parse(input[0][0]);
-          if (Object.keys(parsedInput).every((key) => key in payMethod) === false) {
-            throw new Error('Incorrect amount provided');
-          }
-          Object.assign(payMethod, parsedInput);
-        } catch (err) {
-          throw new Error('Unable to parse input ' + err);
-        }
-        this.runInputCb(game, pi.cb(payMethod));
+        const howToPay: HowToPay = this.parseHowToPayJSON(input[0][0]);
+        this.runInputCb(game, pi.cb(howToPay));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
         const parsedInput = JSON.parse(input[0][0]);

@@ -41,6 +41,14 @@ export const SelectCard = Vue.component('select-card', {
     Button,
   },
   methods: {
+    cardsSelected: function(): number {
+      if (Array.isArray(this.cards)) {
+        return this.cards.length;
+      } else if (this.cards === false || this.cards === undefined) {
+        return 0;
+      }
+      return 1;
+    },
     getOrderedCards: function() {
       if (this.playerinput.cards === undefined) {
         return [];
@@ -49,6 +57,11 @@ export const SelectCard = Vue.component('select-card', {
         CardOrderStorage.getCardOrder(this.player.id),
         this.playerinput.cards,
       );
+    },
+    isOptionalToManyCards: function(): boolean {
+      return this.playerinput.maxCardsToSelect !== undefined &&
+             this.playerinput.maxCardsToSelect > 1 &&
+             this.playerinput.minCardsToSelect === 0;
     },
     saveData: function() {
       this.onsave([Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name]]);
@@ -62,7 +75,8 @@ export const SelectCard = Vue.component('select-card', {
             <Card :card="card" />
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <Button type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="'Skip this action'" />
         </div>
     </div>`,
 });

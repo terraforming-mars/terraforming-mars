@@ -261,6 +261,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.AMAZONIS) {
+        return 'create-game-board-hexagon create-game-amazonis';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }

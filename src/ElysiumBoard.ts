@@ -35,6 +35,7 @@ export class ElysiumBoard extends Board {
     if (shuffleMapOption) {
       builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     }
+    builder.setVolcanic(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     this.spaces = builder.build();
   }
 }

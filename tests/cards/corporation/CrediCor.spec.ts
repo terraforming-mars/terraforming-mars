@@ -4,8 +4,8 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {StandardProjectType} from '../../../src/StandardProjectType';
-import {Bushes} from '../../../src/cards/Bushes';
-import {GiantIceAsteroid} from '../../../src/cards/GiantIceAsteroid';
+import {Bushes} from '../../../src/cards/base/Bushes';
+import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
 
 describe('CrediCor', function() {
   let card : CrediCor; let player : Player; let game : Game;

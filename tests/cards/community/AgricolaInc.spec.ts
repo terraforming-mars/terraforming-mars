@@ -4,8 +4,8 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {SolarWindPower} from '../../../src/cards/SolarWindPower';
-import {Research} from '../../../src/cards/Research';
+import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
+import {Research} from '../../../src/cards/base/Research';
 import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
 
 describe('AgricolaInc', function() {

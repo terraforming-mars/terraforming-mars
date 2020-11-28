@@ -3,14 +3,13 @@ import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
-import {Research} from '../../../src/cards/Research';
-import {SearchForLife} from '../../../src/cards/SearchForLife';
+import {Research} from '../../../src/cards/base/Research';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import * as constants from '../../../src/constants';
 
 describe('Atmoscoop', function() {
@@ -58,15 +57,16 @@ describe('Atmoscoop', function() {
   it('Should play - multiple targets', function() {
     player.playedCards.push(dirigibles, floatingHabs);
 
-    const action = card.play(player, game) as AndOptions;
-    const orOptions = action.options[0] as OrOptions;
-    const selectCard = action.options[1] as SelectCard<ICard>;
+    const orOptions = card.play(player, game) as OrOptions;
 
+    // First the global parameter
     orOptions.options[0].cb();
     expect(game.getTemperature()).to.eq(-26);
     orOptions.options[1].cb();
     expect(game.getVenusScaleLevel()).to.eq(4);
 
+    // Then the floaters
+    const selectCard = orOptions.cb() as SelectCard<ICard>;
     selectCard.cb([dirigibles]);
     expect(dirigibles.resourceCount).to.eq(2);
     selectCard.cb([floatingHabs]);

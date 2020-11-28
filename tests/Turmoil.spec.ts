@@ -13,16 +13,16 @@ import {SpaceBonus} from '../src/SpaceBonus';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {resetBoard, maxOutOceans, setCustomGameOptions} from './TestingUtils';
 import {Reds} from '../src/turmoil/parties/Reds';
-import {ReleaseOfInertGases} from '../src/cards/ReleaseOfInertGases';
+import {ReleaseOfInertGases} from '../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../src/cards/promo/JovianEmbassy';
-import {IceAsteroid} from '../src/cards/IceAsteroid';
-import {ProtectedValley} from '../src/cards/ProtectedValley';
+import {IceAsteroid} from '../src/cards/base/IceAsteroid';
+import {ProtectedValley} from '../src/cards/base/ProtectedValley';
 import {MagneticFieldGeneratorsPromo} from '../src/cards/promo/MagneticFieldGeneratorsPromo';
 import {Resources} from '../src/Resources';
 import {NitrogenFromTitan} from '../src/cards/colonies/NitrogenFromTitan';
-import {SpaceStation} from '../src/cards/SpaceStation';
-import {EarthCatapult} from '../src/cards/EarthCatapult';
-import {QuantumExtractor} from '../src/cards/QuantumExtractor';
+import {SpaceStation} from '../src/cards/base/SpaceStation';
+import {EarthCatapult} from '../src/cards/base/EarthCatapult';
+import {QuantumExtractor} from '../src/cards/base/QuantumExtractor';
 import * as constants from '../src/constants';
 
 describe('Turmoil', function() {

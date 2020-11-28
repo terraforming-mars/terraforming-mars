@@ -1,6 +1,6 @@
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardName} from '../../CardName';
-import {NuclearZone} from '../NuclearZone';
+import {NuclearZone} from '../base/NuclearZone';
 
 export class NuclearZoneAres extends NuclearZone {
   public cost = 11;

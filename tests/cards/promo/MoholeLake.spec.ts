@@ -4,8 +4,8 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Fish} from '../../../src/cards/Fish';
-import {Ants} from '../../../src/cards/Ants';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Ants} from '../../../src/cards/base/Ants';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 

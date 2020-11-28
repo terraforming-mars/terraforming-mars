@@ -77,5 +77,6 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
       b.or(CardRenderItemSize.SMALL).br;
       b.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card'));
     }),
+    victoryPoints: 1,
   };
 }

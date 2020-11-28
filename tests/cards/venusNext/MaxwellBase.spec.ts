@@ -6,7 +6,7 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Birds} from '../../../src/cards/Birds';
+import {Birds} from '../../../src/cards/base/Birds';
 import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
 import {ICard} from '../../../src/cards/ICard';
 import {setCustomGameOptions} from '../../TestingUtils';

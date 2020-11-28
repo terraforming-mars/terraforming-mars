@@ -4,7 +4,7 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 

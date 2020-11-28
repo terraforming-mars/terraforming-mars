@@ -3,8 +3,8 @@ import {Teractor} from '../../../src/cards/corporation/Teractor';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Cartel} from '../../../src/cards/Cartel';
-import {Birds} from '../../../src/cards/Birds';
+import {Cartel} from '../../../src/cards/base/Cartel';
+import {Birds} from '../../../src/cards/base/Birds';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 
 describe('Teractor', function() {

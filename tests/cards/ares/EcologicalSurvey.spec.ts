@@ -5,8 +5,8 @@ import {Player} from '../../../src/Player';
 import {expect} from 'chai';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper} from '../../ares/AresTestHelper';
 import {TileType} from '../../../src/TileType';
-import {Ants} from '../../../src/cards/Ants';
-import {Pets} from '../../../src/cards/Pets';
+import {Ants} from '../../../src/cards/base/Ants';
+import {Pets} from '../../../src/cards/base/Pets';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 

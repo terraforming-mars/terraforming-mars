@@ -3,13 +3,13 @@ import {Playwrights} from '../../../src/cards/community/Playwrights';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {ReleaseOfInertGases} from '../../../src/cards/ReleaseOfInertGases';
+import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/Resources';
-import {IndenturedWorkers} from '../../../src/cards/IndenturedWorkers';
-import {DeimosDown} from '../../../src/cards/DeimosDown';
+import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
+import {DeimosDown} from '../../../src/cards/base/DeimosDown';
 import {ICard} from '../../../src/cards/ICard';
-import {LocalHeatTrapping} from '../../../src/cards/LocalHeatTrapping';
+import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
 
 describe('Playwrights', function() {

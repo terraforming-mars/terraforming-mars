@@ -4,7 +4,7 @@ import {Player} from '../../src/Player';
 import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {StripMine} from '../../src/cards/StripMine';
+import {StripMine} from '../../src/cards/base/StripMine';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 
 describe('Election', function() {

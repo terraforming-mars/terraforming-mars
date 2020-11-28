@@ -3,7 +3,7 @@ import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {MirandaResort} from '../../../src/cards/MirandaResort';
+import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {Resources} from '../../../src/Resources';
 
 describe('SaturnSystems', function() {

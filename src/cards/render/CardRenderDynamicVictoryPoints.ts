@@ -16,4 +16,8 @@ export class CardRenderDynamicVictoryPoints {
   public static microbes(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MICROBES), points, target);
   }
+
+  public static animals(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ANIMALS), points, target);
+  }
 }

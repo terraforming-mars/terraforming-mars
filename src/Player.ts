@@ -148,8 +148,9 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         public name: string,
         public color: Color,
         public beginner: boolean,
-        public handicap: number = 0) {
-      this.id = this.generateId();
+        public handicap: number = 0,
+        id: PlayerId | undefined = undefined) {
+      this.id = id === undefined ? this.generateId() : id;
     }
 
     public isCorporation(corporationName: CardName): boolean {

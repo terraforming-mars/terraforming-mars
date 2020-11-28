@@ -5,6 +5,7 @@ import {SpaceType} from '../src/SpaceType';
 import {BoardName} from '../src/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/ISpace';
+import {Color} from '../src/Color';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {
@@ -62,3 +63,18 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
 
   return Object.assign(defaultOptions, options);
 };
+
+// Prefer these players when testing, as their IDs are easy to recognize in output.
+export class TestPlayers {
+  public BLUE: Player = TestPlayers.newTestPlayer(Color.BLUE);
+  public RED: Player = TestPlayers.newTestPlayer(Color.RED);
+  public YELLOW: Player = TestPlayers.newTestPlayer(Color.YELLOW);
+  public GREEN: Player = TestPlayers.newTestPlayer(Color.GREEN);
+  public BLACK: Player = TestPlayers.newTestPlayer(Color.BLACK);
+  public PURPLE: Player = TestPlayers.newTestPlayer(Color.PURPLE);
+
+  static newTestPlayer(color: Color): Player {
+    const player = new Player('player-' + color, color, false, 0, color + '-id');
+    return player;
+  }
+}

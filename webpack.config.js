@@ -15,6 +15,9 @@ module.exports = {
         'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
     }
   },
+  output: {
+    path: __dirname + '/build',
+  },
   stats: {
     warnings: false
   }

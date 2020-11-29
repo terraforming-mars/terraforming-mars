@@ -6,7 +6,7 @@ import {Policy, PolicyId} from './Policy';
 export enum AgendaStyle {
   STANDARD = 'Standard',
   RANDOM = 'Random', // TODO: Implement
-  DYNAMIC = 'Dynamic' // TODO: Implement
+  CHAIRMAN = 'Chairman' // TODO: Implement
 }
 
 export interface Agenda {
@@ -17,7 +17,7 @@ export interface Agenda {
 export interface PoliticalAgendasData {
   // The agenda for this generation.
   thisAgenda: Agenda;
-  // Standard and Random agendas are static through the game. DYNAMIC changes
+  // Standard and Random agendas are static through the game. CHAIRMAN changes
   // by the will of the chairperson.
   staticAgendas: Map<PartyName, Agenda> | undefined;
 }
@@ -35,7 +35,7 @@ export class PoliticalAgendas {
   }
 
   private static selectStaticAgendas(agendaStyle: AgendaStyle, parties: Array<IParty>): Map<PartyName, Agenda> | undefined {
-    if (agendaStyle === AgendaStyle.DYNAMIC) {
+    if (agendaStyle === AgendaStyle.CHAIRMAN) {
       return undefined;
     }
 

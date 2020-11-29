@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
@@ -9,13 +8,14 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CapitalAres', function() {
   let card : CapitalAres; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CapitalAres();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

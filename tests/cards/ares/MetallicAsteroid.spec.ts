@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {MetallicAsteroid} from '../../../src/cards/ares/MetallicAsteroid';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid; let player: Player; let otherPlayer: Player; let game: Game;
 
   beforeEach(function() {
     card = new MetallicAsteroid();
-    player = new Player('test', Color.BLUE, false);
-    otherPlayer = new Player('other', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

@@ -1,5 +1,4 @@
 import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
@@ -9,6 +8,7 @@ import {CardType} from '../../../src/cards/CardType';
 import {ResourceType} from '../../../src/ResourceType';
 import {expect} from 'chai';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BioengineeringEnclosure', function() {
   let card : BioengineeringEnclosure; let player : Player; let game : Game;
@@ -33,7 +33,7 @@ describe('BioengineeringEnclosure', function() {
 
   beforeEach(function() {
     card = new BioengineeringEnclosure();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

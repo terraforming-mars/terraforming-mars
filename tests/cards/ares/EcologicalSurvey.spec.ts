@@ -1,5 +1,4 @@
 import {EcologicalSurvey} from '../../../src/cards/ares/EcologicalSurvey';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {expect} from 'chai';
@@ -9,13 +8,14 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {Pets} from '../../../src/cards/base/Pets';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/SpaceBonus';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('EcologicalSurvey', function() {
   let card : EcologicalSurvey; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new EcologicalSurvey();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });

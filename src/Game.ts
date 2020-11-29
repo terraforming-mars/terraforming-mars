@@ -1645,7 +1645,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
       this.players[0].terraformRatingAtGenerationStart = 14;
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
-      const neutral = new Player('neutral', Color.NEUTRAL, true, 0);
+      const neutral = new Player('neutral', Color.NEUTRAL, true, 0, this.id + '-neutral');
 
       function placeCityAndForest(game: Game, direction: -1 | 1) {
         const space1 = game.getSpaceByOffset(direction);

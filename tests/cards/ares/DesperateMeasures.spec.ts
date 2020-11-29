@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {DesperateMeasures} from '../../../src/cards/ares/DesperateMeasures';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DesperateMeasures', function() {
   let card : DesperateMeasures; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new DesperateMeasures();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 

@@ -1067,7 +1067,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
-    file = `dist${req.url}${suffix}`;
+    file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
   } else if (req.url === '/assets/futureforces.ttf') {

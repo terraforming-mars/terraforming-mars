@@ -1,5 +1,4 @@
 import {MarketingExperts} from '../../../src/cards/ares/MarketingExperts';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -9,14 +8,15 @@ import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MarketingExperts', function() {
   let card : MarketingExperts; let player : Player; let otherPlayer: Player; let game : Game;
 
   beforeEach(function() {
     card = new MarketingExperts();
-    player = new Player('test', Color.BLUE, false);
-    otherPlayer = new Player('other', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });

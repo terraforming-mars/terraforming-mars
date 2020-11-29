@@ -1,17 +1,17 @@
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {ButterflyEffect} from '../../../src/cards/ares/ButterflyEffect';
 import {expect} from 'chai';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {ShiftAresGlobalParameters} from '../../../src/inputs/ShiftAresGlobalParameters';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ButterflyEffect', function() {
   let card: ButterflyEffect; let player: Player; let game: Game;
 
   beforeEach(function() {
     card = new ButterflyEffect();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 

@@ -4,7 +4,6 @@ import {BiofertilizerFacility} from '../../../src/cards/ares/BiofertilizerFacili
 import {CardType} from '../../../src/cards/CardType';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Tags} from '../../../src/cards/Tags';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -12,6 +11,7 @@ import {ResourceType} from '../../../src/ResourceType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BiofertilizerFacility', function() {
   let card : BiofertilizerFacility; let player : Player; let game : Game;
@@ -36,7 +36,7 @@ describe('BiofertilizerFacility', function() {
 
   beforeEach(function() {
     card = new BiofertilizerFacility();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

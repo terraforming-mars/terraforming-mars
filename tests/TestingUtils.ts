@@ -64,17 +64,19 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
   return Object.assign(defaultOptions, options);
 };
 
+class TestPlayerFactory {
+  constructor(private color: Color) {}
+  newPlayer() {
+    return new Player('player-' + this.color, this.color, false, 0, this.color + '-id');
+  }
+}
+
 // Prefer these players when testing, as their IDs are easy to recognize in output.
 export class TestPlayers {
-  public BLUE: Player = TestPlayers.newTestPlayer(Color.BLUE);
-  public RED: Player = TestPlayers.newTestPlayer(Color.RED);
-  public YELLOW: Player = TestPlayers.newTestPlayer(Color.YELLOW);
-  public GREEN: Player = TestPlayers.newTestPlayer(Color.GREEN);
-  public BLACK: Player = TestPlayers.newTestPlayer(Color.BLACK);
-  public PURPLE: Player = TestPlayers.newTestPlayer(Color.PURPLE);
-
-  static newTestPlayer(color: Color): Player {
-    const player = new Player('player-' + color, color, false, 0, color + '-id');
-    return player;
-  }
+  public static BLUE: TestPlayerFactory = new TestPlayerFactory(Color.BLUE);
+  public static RED: TestPlayerFactory = new TestPlayerFactory(Color.RED);
+  public static YELLOW: TestPlayerFactory = new TestPlayerFactory(Color.YELLOW);
+  public static GREEN: TestPlayerFactory = new TestPlayerFactory(Color.GREEN);
+  public static BLACK: TestPlayerFactory = new TestPlayerFactory(Color.BLACK);
+  public static PURPLE: TestPlayerFactory = new TestPlayerFactory(Color.PURPLE);
 }

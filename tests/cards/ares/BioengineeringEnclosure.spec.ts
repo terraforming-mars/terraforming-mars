@@ -33,8 +33,7 @@ describe('BioengineeringEnclosure', function() {
 
   beforeEach(function() {
     card = new BioengineeringEnclosure();
-    const players = new TestPlayers();
-    blue = players.BLUE;
+    blue = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [blue, blue], blue, ARES_OPTIONS_NO_HAZARDS);
   });
 

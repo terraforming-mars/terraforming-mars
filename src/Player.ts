@@ -62,7 +62,7 @@ import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs
 export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer, Player> {
-    public id: PlayerId;
+    public readonly id: PlayerId;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
 
@@ -150,6 +150,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         public beginner: boolean,
         public handicap: number = 0,
         id: PlayerId | undefined = undefined) {
+      // TODO(kberg): Take ID generation outside of this constructor, and leave it up to callers.
       this.id = id === undefined ? this.generateId() : id;
     }
 

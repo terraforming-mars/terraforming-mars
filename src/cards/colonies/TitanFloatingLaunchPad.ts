@@ -44,7 +44,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
 
           game.defer(new DeferredAction(
             player,
-            () => new SelectColony('Select colony to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
+            () => new SelectColony('Select colony tile to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
               openColonies.forEach((colony) => {
                 if (colony.name === colonyName) {
                   this.resourceCount--;

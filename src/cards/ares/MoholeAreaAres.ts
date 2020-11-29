@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
-import {MoholeArea} from '../MoholeArea';
+import {MoholeArea} from '../base/MoholeArea';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 
 export class MoholeAreaAres extends MoholeArea {

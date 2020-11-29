@@ -6,8 +6,8 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {SpaceType} from '../../../src/SpaceType';
-import {Capital} from '../../../src/cards/Capital';
 import {TestPlayers} from '../../TestingUtils';
+import {Capital} from '../../../src/cards/base/Capital';
 
 describe('OceanCity', function() {
   let card: OceanCity; let player: Player; let game: Game;

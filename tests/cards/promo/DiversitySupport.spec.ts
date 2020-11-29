@@ -3,8 +3,8 @@ import {DiversitySupport} from '../../../src/cards/promo/DiversitySupport';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Ants} from '../../../src/cards/Ants';
-import {Fish} from '../../../src/cards/Fish';
+import {Ants} from '../../../src/cards/base/Ants';
+import {Fish} from '../../../src/cards/base/Fish';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 
 describe('DiversitySupport', function() {

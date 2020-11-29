@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Sponsors} from '../../../src/cards/Sponsors';
-import {EarthOffice} from '../../../src/cards/EarthOffice';
+import {Sponsors} from '../../../src/cards/base/Sponsors';
+import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {Resources} from '../../../src/Resources';
 
 describe('SaturnSurfing', function() {

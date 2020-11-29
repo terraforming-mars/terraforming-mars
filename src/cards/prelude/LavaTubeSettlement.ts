@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {LavaFlows} from '../LavaFlows';
+import {LavaFlows} from '../base/LavaFlows';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {BoardName} from '../../BoardName';

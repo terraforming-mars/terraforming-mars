@@ -6,9 +6,9 @@ import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {DustSeals} from '../../src/cards/DustSeals';
-import {PowerPlant} from '../../src/cards/PowerPlant';
-import {Asteroid} from '../../src/cards/Asteroid';
+import {DustSeals} from '../../src/cards/base/DustSeals';
+import {PowerPlant} from '../../src/cards/base/PowerPlant';
+import {Asteroid} from '../../src/cards/base/Asteroid';
 import {SelectCard} from '../../src/inputs/SelectCard';
 
 describe('ParadigmBreakdown', function() {

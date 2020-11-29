@@ -3,8 +3,8 @@ import {InterplanetaryCinematics} from '../../../src/cards/corporation/Interplan
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Bushes} from '../../../src/cards/Bushes';
-import {Virus} from '../../../src/cards/Virus';
+import {Bushes} from '../../../src/cards/base/Bushes';
+import {Virus} from '../../../src/cards/base/Virus';
 
 describe('InterplanetaryCinematics', function() {
   let card : InterplanetaryCinematics; let player : Player; let game : Game;

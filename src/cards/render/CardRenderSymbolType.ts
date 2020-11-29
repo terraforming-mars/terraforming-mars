@@ -10,4 +10,5 @@ export enum CardRenderSymbolType {
   BRACKET_OPEN = '(',
   BRACKET_CLOSE = ')',
   NBSP = 'nbsp',
+  EQUALS = '=',
 }

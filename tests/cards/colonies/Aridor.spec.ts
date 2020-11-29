@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Aridor} from '../../../src/cards/colonies/Aridor';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Predators} from '../../../src/cards/Predators';
+import {Predators} from '../../../src/cards/base/Predators';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {ResearchOutpost} from '../../../src/cards/ResearchOutpost';
+import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 
 describe('Aridor', function() {
   it('Should play', function() {

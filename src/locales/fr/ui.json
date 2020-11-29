@@ -117,7 +117,7 @@
 	"Convert 8 plants into greenery": "Convertir 8 plantes en Forêt",
 	"Perform an action from a played card": "Utiliser l'action d'une carte Action (bleue)",
 	"Play project card": "Jouer une carte de votre main",
-	"Trade with a colony": "Commercez avec une colonie",
+	"Trade with a colony tile": "Commercez avec une colonie",
 	"Pay 9 MC": "Payer 9 M€",
 	"Pay 3 Titanium": "Payer 3 titanes",
 	"End Turn": "Terminer le tour",
@@ -146,7 +146,7 @@
 	"Select which cards to take into hand": "Sélectionnez les cartes à ajouter à votre main",
 
 	"Colonies": "Colonies",
-	"Select colony to remove": "Sélectionnez la colonie à retirer",
+	"Select colony tile to remove": "Sélectionnez la colonie à retirer",
 
 	"Select space on mars for city tile": "Sélectionnez un emplacement sur Mars pour la tuile Cité",
 	"Select space for ocean": "Sélectionnez un emplacement pour la tuile Océan",

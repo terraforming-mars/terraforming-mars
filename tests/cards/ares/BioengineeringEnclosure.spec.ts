@@ -11,7 +11,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('BioengineeringEnclosure', function() {
-  let card : BioengineeringEnclosure; let blue : Player; let game : Game;
+  let card : BioengineeringEnclosure; let player : Player; let game : Game;
 
   const scienceTagCard: IProjectCard = {
     name: CardName.ACQUIRED_COMPANY,
@@ -33,46 +33,46 @@ describe('BioengineeringEnclosure', function() {
 
   beforeEach(function() {
     card = new BioengineeringEnclosure();
-    blue = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [blue, blue], blue, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can\'t play without a science tag', () => {
-    expect(card.canPlay(blue, game)).is.false;
-    blue.playCard(game, scienceTagCard);
-    expect(card.canPlay(blue, game)).is.true;
+    expect(card.canPlay(player, game)).is.false;
+    player.playCard(game, scienceTagCard);
+    expect(card.canPlay(player, game)).is.true;
   });
 
   it('Play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(blue, game);
+    card.play(player, game);
     expect(card.resourceCount).eq(2);
   });
 
   it('Can\'t move animal if it\'s empty', () => {
-    card.play(blue, game);
-    blue.playCard(game, animalHost);
+    card.play(player, game);
+    player.playCard(game, animalHost);
     card.resourceCount = 0;
-    expect(card.canAct(blue)).is.false;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Can\'t move animal if theres not another card', () => {
-    card.play(blue, game);
-    expect(card.canAct(blue)).is.false;
+    card.play(player, game);
+    expect(card.canAct(player)).is.false;
   });
 
   it('Move animal', () => {
     // Set up the cards.
-    blue.playCard(game, animalHost);
-    blue.playCard(game, card);
+    player.playCard(game, animalHost);
+    player.playCard(game, card);
 
     // Initial expectations that will change after playing the card.
-    expect(card.canAct(blue)).is.true;
+    expect(card.canAct(player)).is.true;
     expect(card.resourceCount).eq(2);
     expect(animalHost.resourceCount).eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
-    card.action(blue, game);
+    card.action(player, game);
 
     game.deferredActions.next()!.execute();
 

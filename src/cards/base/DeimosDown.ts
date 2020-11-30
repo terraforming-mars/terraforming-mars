@@ -37,7 +37,7 @@ export class DeimosDown implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '039',
-      description: 'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player',
+      description: 'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.',
       renderData: CardRenderer.builder((b) => {
         b.temperature(3).br;
         b.steel(4).br;

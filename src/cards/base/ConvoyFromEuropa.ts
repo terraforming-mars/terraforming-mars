@@ -35,7 +35,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '161',
-      description: 'Place 1 ocean tile and draw 1 card',
+      description: 'Place 1 ocean tile and draw 1 card.',
       renderData: CardRenderer.builder((b) => b.oceans(1).cards(1)),
     }
 }

@@ -104,12 +104,12 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.titanium(1).startAction.asteroids(1).asterix();
-          eb.description('Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD');
+          eb.description('Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.');
         }).br;
         b.or().br;
         b.effectBox((eb) => {
           eb.asteroids(1).startAction.oceans(1);
-          eb.description('Action: Remove 1 asteroid here to place an ocean');
+          eb.description('Action: Remove 1 asteroid here to place an ocean.');
         });
       }),
     }

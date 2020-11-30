@@ -9,6 +9,8 @@ import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CometForVenus implements IProjectCard {
     public cost = 11;
@@ -51,4 +53,11 @@ export class CometForVenus implements IProjectCard {
         },
       );
     }
+    public metadata: CardMetadata = {
+      description: 'Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.',
+      cardNumber: '218',
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1).nbsp.nbsp.minus().megacredits(4).secondaryTag(Tags.VENUS).any;
+      }),
+    };
 }

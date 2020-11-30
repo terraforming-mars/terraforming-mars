@@ -30,7 +30,7 @@ export class DevelopmentCenter implements IActionCard, IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.energy(1).startAction.cards(1);
-          eb.description('Action: Spend 1 Energy to draw a card');
+          eb.description('Action: Spend 1 Energy to draw a card.');
         });
       }),
     }

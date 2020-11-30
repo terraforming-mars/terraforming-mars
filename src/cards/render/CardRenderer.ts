@@ -34,7 +34,7 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public tile: TileType) { };
+  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { };
 }
 
 export class CardRenderEffect extends CardRenderer {
@@ -121,10 +121,10 @@ class Builder {
     }
   }
 
-  protected _addTile(tile: TileType): void {
+  protected _addTile(tile: TileType, hasSymbol: boolean, isAres: boolean): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(new CardRenderTile(tile));
+      row.push(new CardRenderTile(tile, hasSymbol, isAres));
       this._data.push(row);
     }
   }
@@ -223,13 +223,13 @@ class Builder {
     return this;
   }
 
-  public jovian(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.JOVIAN));
+  public earth(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH));
     return this;
   }
 
-  public venusTag(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.VENUS_TAG));
+  public jovian(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.JOVIAN));
     return this;
   }
 
@@ -259,6 +259,16 @@ class Builder {
 
   public delegate(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
+    return this;
+  }
+
+  public noTags() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
+    return this;
+  }
+
+  public wild(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
     return this;
   }
 
@@ -349,8 +359,8 @@ class Builder {
     return this;
   }
 
-  public tile(tile: TileType): Builder {
-    this._addTile(tile);
+  public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
+    this._addTile(tile, hasSymbol, isAres);
     return this;
   }
 
@@ -433,7 +443,6 @@ class Builder {
 
   public secondaryTag(tag: Tags): Builder {
     this._checkExistingItem();
-
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();

@@ -35,7 +35,7 @@ export class BribedCommittee implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '112',
-      description: 'Raise your TR 2 steps',
+      description: 'Raise your TR 2 steps.',
       renderData: CardRenderer.builder((b) => b.tr(2)),
       victoryPoints: -2,
     };

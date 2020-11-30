@@ -36,7 +36,7 @@ export class BlackPolarDust implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '022',
-      description: 'Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps',
+      description: 'Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().megacredits(2).br;

@@ -6,6 +6,8 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EnergyTapping implements IProjectCard {
     public cost = 3;
@@ -23,4 +25,15 @@ export class EnergyTapping implements IProjectCard {
     public getVictoryPoints() {
       return -1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '201',
+      description: 'Decrease any Energy production 1 step and increase your own 1 step.',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().energy(1).any;
+        });
+      }),
+      victoryPoints: -1,
+    };
 }

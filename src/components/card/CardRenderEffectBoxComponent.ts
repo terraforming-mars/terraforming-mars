@@ -52,6 +52,7 @@ export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxCo
                 <div v-for="(rowItem, rowIndex) in effectData.cause" class="card-effect-box-item" :key="rowIndex"> 
                   <CardRenderItemComponent v-if="getComponentType(rowItem) === 'item'" :item="rowItem"/>
                   <CardRenderSymbolComponent v-else-if="getComponentType(rowItem) === 'symbol'" :item="rowItem" />
+                  <CardProductionBoxComponent v-else-if="getComponentType(rowItem) === 'production'" :rows="rowItem.rows" />
                   <CardRenderTileComponent v-if="getComponentType(rowItem) === 'tile'" :item="rowItem"/>
                 </div>
             </div>

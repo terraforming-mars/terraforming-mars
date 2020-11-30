@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EarthOffice implements IProjectCard {
     public cost = 1;
@@ -18,4 +20,13 @@ export class EarthOffice implements IProjectCard {
     public play() {
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '105',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.earth().played.startEffect.megacredits(-3);
+          eb.description('Effect: When you play an Earth card, you pay 3 MC less for it.');
+        });
+      }),
+    };
 }

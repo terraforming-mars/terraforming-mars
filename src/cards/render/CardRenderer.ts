@@ -238,6 +238,13 @@ class Builder {
     return this;
   }
 
+  public colonies(amount: number = 1, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
   public tradeDiscount(amount: number): Builder {
     const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
     item.amountInside = true;

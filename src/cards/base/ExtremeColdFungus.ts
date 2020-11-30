@@ -1,4 +1,3 @@
-
 import {ICard, IActionCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -12,6 +11,9 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost = 13;
@@ -71,4 +73,20 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         gainPlantOption,
       );
     }
+    public metadata: CardMetadata = {
+      cardNumber: '134',
+      description: 'It must be -10 C or colder.',
+      requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.plants(1);
+          eb.description('Action: Gain 1 plant.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(2).asterix();
+          eb.description('Action: Add 2 microbes to ANOTHER card.');
+        });
+      }),
+    };
 }

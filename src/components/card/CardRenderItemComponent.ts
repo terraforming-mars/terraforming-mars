@@ -3,6 +3,7 @@ import {generateClassString} from '../../utils/utils';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
+import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
@@ -77,6 +78,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-resource-wild');
       } else if (type === CardRenderItemType.TRADE) {
         classes.push('card-resource-trade');
+      } else if (type === CardRenderItemType.COLONIES) {
+        classes.push('card-resource-colony');
+        // TODO (chosta): think about an abstraction for item size
+        if (this.item.size === CardRenderItemSize.SMALL) {
+          classes.push('card-resource-colony-S');
+        }
       } else if (type === CardRenderItemType.TRADE_DISCOUNT) {
         classes.push('card-resource');
         classes.push('card-resource-trade-discount');

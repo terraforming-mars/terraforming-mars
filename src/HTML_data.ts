@@ -4146,20 +4146,6 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.CRASH_SITE_CLEANUP, ` 
-    <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">
-            <div class="crash-site-minus-plant">
-                <div class="production-prefix minus"></div><div class="resource plant red-outline"></div>
-            </div>
-        </div>
-        <div class="resource titanium"></div> OR 2 <div class="resource steel"></div>
-        <div class="description">
-            (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
-        </div>
-    </div>
-`],
     [CardName.FIELD_CAPPED_CITY, ` 
         <div class="content">
             <div class="production-box production-box-size1a">

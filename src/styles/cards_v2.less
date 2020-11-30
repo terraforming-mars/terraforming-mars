@@ -13,9 +13,8 @@
         position: relative;
         .card-requirements {
             width: 70%;
-            height: 25px;
+            min-height: 25px;
             line-height: 25px;
-            text-align: center;
             font-weight: normal;
             font-size: 15px;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
@@ -28,6 +27,19 @@
             );
             font-family: Ubuntu;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            flex-flow: row;
+            align-items: center;
+            .party {
+                background: #ddd;
+                padding: 0px 10px 0px 10px;
+                border: 1px solid #666;
+                border-radius: 20px;
+                text-transform: uppercase;
+                height: 18px;
+                line-height: 18px;
+            }
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);

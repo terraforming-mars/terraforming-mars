@@ -56,7 +56,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.microbes(1).any.startAction.microbes(1);
-        eb.description('Action: Remove 1 Microbe from any card to add 1 to this card');
+        eb.description('Action: Remove 1 Microbe from any card to add 1 to this card.');
       });
     }),
     victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),

@@ -56,7 +56,7 @@ export class Capital implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '008',
       description: {
-        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps',
+        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.',
         align: 'left',
       },
       requirements: CardRequirements.builder((b) => b.oceans(4)),

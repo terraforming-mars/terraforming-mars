@@ -30,7 +30,7 @@ export class Airliners implements IProjectCard {
   }
   public metadata: CardMetadata = {
     cardNumber: 'C01',
-    description: 'Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card',
+    description: 'Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.',
     requirements: CardRequirements.builder((b) => b.floaters(3)),
     renderData: CardRenderer.builder((b) => {
       b.productionBox((pb) => pb.megacredits(2)).br;

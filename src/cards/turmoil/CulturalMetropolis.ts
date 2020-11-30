@@ -42,7 +42,7 @@ export class CulturalMetropolis implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'T03',
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
-      description: 'Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party',
+      description: 'Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;

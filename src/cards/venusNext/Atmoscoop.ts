@@ -106,7 +106,7 @@ export class Atmoscoop implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: '217',
-    description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card',
+    description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
     requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
     renderData: CardRenderer.builder((b) => {
       b.temperature(2).or(CardRenderItemSize.SMALL).venus(2).br;

@@ -54,7 +54,7 @@ export class CometForVenus implements IProjectCard {
       );
     }
     public metadata: CardMetadata = {
-      description: 'Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY',
+      description: 'Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.',
       cardNumber: '218',
       renderData: CardRenderer.builder((b) => {
         b.venus(1).nbsp.nbsp.minus().megacredits(4).secondaryTag(Tags.VENUS).any;

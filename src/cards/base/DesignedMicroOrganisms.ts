@@ -25,7 +25,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '155',
-      description: 'It must be -14 C or colder. Increase your Plant production 2 steps',
+      description: 'It must be -14 C or colder. Increase your Plant production 2 steps.',
       requirements: CardRequirements.builder((b) => b.temperature(-14).max()),
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.plants(2));

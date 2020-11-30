@@ -21,7 +21,7 @@ export class EarthElevator implements IProjectCard {
       return 4;
     }
     public metadata: CardMetadata = {
-      description: 'Increase your titanium production 3 steps',
+      description: 'Increase your titanium production 3 steps.',
       cardNumber: 'C08',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.titanium(3));

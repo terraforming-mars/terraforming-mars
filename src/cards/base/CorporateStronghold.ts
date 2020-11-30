@@ -38,7 +38,7 @@ export class CorporateStronghold implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '182',
-      description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile',
+      description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;

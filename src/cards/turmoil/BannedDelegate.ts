@@ -73,7 +73,7 @@ export class BannedDelegate implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: 'T02',
-      description: 'Requires that you are Chairman. Remove any NON-LEADER delegate',
+      description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',
       requirements: CardRequirements.builder((b) => b.chairman()),
       renderData: CardRenderer.builder((b) => {
         b.minus().delegate(1).any;

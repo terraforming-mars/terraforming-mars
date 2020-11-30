@@ -40,12 +40,12 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '072',
-      description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card',
+      description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.',
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.empty().startAction.animals(1);
-          eb.description('Action: Add an animal to this card');
+          eb.description('Action: Add an animal to this card.');
         }).br;
         b.productionBox((pb) => {
           pb.minus().plants(-2).any;

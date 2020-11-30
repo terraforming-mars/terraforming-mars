@@ -15,7 +15,7 @@ export class CapitalAres extends Capital {
   public metadata: CardMetadata = {
     cardNumber: 'A05',
     description: {
-      text: 'Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5',
+      text: 'Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5.',
       align: 'left',
     },
     requirements: CardRequirements.builder((b) => b.oceans(4)),

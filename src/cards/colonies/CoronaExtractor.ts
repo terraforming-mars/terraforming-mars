@@ -25,7 +25,7 @@ export class CoronaExtractor implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C06',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
-      description: 'Requires 4 science tags. Increase your energy production 4 steps',
+      description: 'Requires 4 science tags. Increase your energy production 4 steps.',
       renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.energy(4))),
     }
 }

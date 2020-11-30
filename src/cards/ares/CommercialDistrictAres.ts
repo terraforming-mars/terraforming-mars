@@ -14,7 +14,7 @@ export class CommercialDistrictAres extends CommercialDistrict {
   public adjacencyBonus: IAdjacencyBonus = {bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]};
   public metadata: CardMetadata = {
     cardNumber: 'A06',
-    description: 'Decrease your energy production 1 step and increase your MC production 4 steps',
+    description: 'Decrease your energy production 1 step and increase your MC production 4 steps.',
     renderData: CardRenderer.builder((b) => {
       b.productionBox((pb) => {
         pb.minus().energy(1).br;

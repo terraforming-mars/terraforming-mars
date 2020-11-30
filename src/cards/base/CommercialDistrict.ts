@@ -54,7 +54,7 @@ export class CommercialDistrict implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '085',
-      description: 'Decrease your energy production 1 step and increase your MC production 4 steps',
+      description: 'Decrease your energy production 1 step and increase your MC production 4 steps.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;

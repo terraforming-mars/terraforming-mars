@@ -441,7 +441,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags): Builder {
+  public secondaryTag(tag: Tags | 'req'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
@@ -461,7 +461,6 @@ class Builder {
 
     return this;
   }
-
   public get brackets(): Builder {
     this._checkExistingItem();
 

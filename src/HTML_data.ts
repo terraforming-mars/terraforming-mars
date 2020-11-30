@@ -4135,17 +4135,6 @@ export const HTML_DATA: Map<string, string> =
     </div>
 
 `],
-    [CardName.CUTTING_EDGE_TECHNOLOGY, ` 
-            <div class="content">
-                <div class="points points-big">1</div>
-                <div class="resource card">
-                <div class="card-icon requirements"></div></div>
-                 : <div class="money resource">-2</div>
-                <div class="description">
-                    (Effect: When playing a card with a requirement, you pay 2 MC less for it.)
-                </div>
-            </div>
-`],
     [CardName.FIELD_CAPPED_CITY, ` 
         <div class="content">
             <div class="production-box production-box-size1a">

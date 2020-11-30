@@ -9,12 +9,12 @@ export class Polyphemos implements CorporationCard {
     public tags = [];
     public startingMegaCredits: number = 50;
     public cardType = CardType.CORPORATION;
+    public cardCost = 5;
 
 
     public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 5);
       player.titanium = 5;
-      player.cardCost = 5;
       return undefined;
     }
 }

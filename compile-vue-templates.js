@@ -259,6 +259,7 @@ function checkComponent(name, component, dataProperties) {
   });
 
   if (result.errors.length > 0) {
+    console.error(result.errors);
     throw new Error(`errors found while parsing template for ${name}`, result.errors);
   }
 
@@ -277,10 +278,6 @@ function checkComponent(name, component, dataProperties) {
 
   // make easier to read and debug
   result = beautify(result);
-
-  if (result.indexOf('this') !== -1) {
-    throw new Error(`don't use this inside template string for ${name}`);
-  }
 
   // append scope since we stripped 'with'
   let scope = '';

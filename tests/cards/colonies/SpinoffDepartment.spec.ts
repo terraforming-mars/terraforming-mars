@@ -3,7 +3,7 @@ import {SpinoffDepartment} from '../../../src/cards/colonies/SpinoffDepartment';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {EarthCatapult} from '../../../src/cards/EarthCatapult';
+import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {Game} from '../../../src/Game';
 
 describe('SpinoffDepartment', function() {

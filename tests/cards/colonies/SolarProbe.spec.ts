@@ -3,7 +3,7 @@ import {SolarProbe} from '../../../src/cards/colonies/SolarProbe';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Research} from '../../../src/cards/Research';
+import {Research} from '../../../src/cards/base/Research';
 
 describe('SolarProbe', function() {
   it('Should play', function() {

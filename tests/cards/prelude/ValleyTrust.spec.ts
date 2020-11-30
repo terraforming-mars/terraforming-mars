@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/Ants';
+import {Ants} from '../../../src/cards/base/Ants';
 import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
-import {MedicalLab} from '../../../src/cards/MedicalLab';
+import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Player} from '../../../src/Player';
 import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
-import {Research} from '../../../src/cards/Research';
+import {Research} from '../../../src/cards/base/Research';
 
 describe('ValleyTrust', function() {
   let card : ValleyTrust; let player : Player; let game : Game;

@@ -2,11 +2,11 @@
 import {expect} from 'chai';
 import {Color} from '../src/Color';
 import {Player} from '../src/Player';
-import {LunarBeam} from '../src/cards/LunarBeam';
+import {LunarBeam} from '../src/cards/base/LunarBeam';
 import {Game} from '../src/Game';
-import {Insulation} from '../src/cards/Insulation';
-import {IoMiningIndustries} from '../src/cards/IoMiningIndustries';
-import {PowerSupplyConsortium} from '../src/cards/PowerSupplyConsortium';
+import {Insulation} from '../src/cards/base/Insulation';
+import {IoMiningIndustries} from '../src/cards/base/IoMiningIndustries';
+import {PowerSupplyConsortium} from '../src/cards/base/PowerSupplyConsortium';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
@@ -74,7 +74,7 @@ describe('Player', function() {
     expect(player.getWaitingFor()).is.not.undefined;
     expect(function() {
       player.process(game, [[]]);
-    }).to.throw('Incorrect number of amounts provided');
+    }).to.throw('Incorrect options provided');
     expect(function() {
       player.process(game, []);
     }).to.throw('Incorrect options provided');

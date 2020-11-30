@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {TopsoilContract} from '../../../src/cards/promo/TopsoilContract';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
-import {Ants} from '../../../src/cards/Ants';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Ants} from '../../../src/cards/base/Ants';
 import {Game} from '../../../src/Game';
-import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/AerobrakedAmmoniaAsteroid';
+import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
 
 describe('TopsoilContract', function() {
   let card : TopsoilContract; let player : Player; let player2 : Player; let game : Game;

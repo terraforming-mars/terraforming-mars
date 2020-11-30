@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
-import {Ants} from '../../../src/cards/Ants';
+import {Ants} from '../../../src/cards/base/Ants';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {Decomposers} from '../../../src/cards/Decomposers';
+import {Decomposers} from '../../../src/cards/base/Decomposers';
 
 describe('ImportedNutrients', function() {
   let card : ImportedNutrients; let player : Player;

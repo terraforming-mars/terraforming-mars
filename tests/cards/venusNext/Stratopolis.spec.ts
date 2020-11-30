@@ -6,7 +6,7 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Research} from '../../../src/cards/Research';
+import {Research} from '../../../src/cards/base/Research';
 import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('Stratopolis', function() {

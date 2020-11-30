@@ -1,4 +1,3 @@
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
@@ -7,14 +6,15 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {SpaceType} from '../../../src/SpaceType';
-import {Capital} from '../../../src/cards/Capital';
+import {TestPlayers} from '../../TestingUtils';
+import {Capital} from '../../../src/cards/base/Capital';
 
 describe('OceanCity', function() {
   let card: OceanCity; let player: Player; let game: Game;
 
   beforeEach(function() {
     card = new OceanCity();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

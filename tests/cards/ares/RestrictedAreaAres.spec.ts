@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
 import {RestrictedAreaAres} from '../../../src/cards/ares/RestrictedAreaAres';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('RestrictedAreaAres', function() {
   let card : RestrictedAreaAres; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new RestrictedAreaAres();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

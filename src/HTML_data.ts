@@ -968,20 +968,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.ECOLOGICAL_ZONE, ` 
-      <div class="content">
-        <div class="points">1/2<div class="resource animal"></div></div>
-        <div class="requirements">Forest</div>
-        <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
-        <div class="description">
-          (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
-        </div>
-        <div class="tile special-tile"><div class="special-tile-symbol special-tile--ecological-zone"></div></div>*
-        <div class="description description-tile">
-          (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.)
-        </div>
-      </div>
-`],
     [CardName.ZEPPELINS, ` 
         <div class="content ">
           <div class="points points-big">1</div>
@@ -4728,17 +4714,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.ECOLOGICAL_SURVEY, `
-    <div class="card-number">A05</div>
-    <div class="content ">
-        <div class="requirements ">3 Forests</div>
-        <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource plant "></div><div class="resource animal "></div><div class="resource microbe "></div><br/>
-        </div><br/>
-        <div class="description " style="text-align:left;">
-            (Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain. Requires 3 greeneries on Mars.)
-        </div>
-    </div>
-`],
     [CardName.GEOLOGICAL_SURVEY, `
     <div class="card-number">A06</div>
     <div class="content ">
@@ -4830,20 +4805,6 @@ export const HTML_DATA: Map<string, string> =
         <div class="description " style="text-align:left;">
             Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.
         </div>
-    </div>
-`],
-    [CardName.ECOLOGICAL_ZONE_ARES, `
-    <div class="card-number">A15</div>
-    <div class="content">
-      <div class="points">1/2<div class="resource animal"></div></div>
-      <div class="requirements">Forest</div>
-      <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
-      <div class="ares-tile board-space-tile--ecological_zone_ares"></div>
-      <div class="description">
-        (Effect: When you play an animal or plant tag (including these), add an animal to this card.
-        <br/><br/>
-        Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
-      </div>
     </div>
 `],
     [CardName.INDUSTRIAL_CENTER_ARES, `

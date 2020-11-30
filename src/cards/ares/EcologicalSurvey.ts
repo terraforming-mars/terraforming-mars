@@ -5,6 +5,9 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {TileType} from '../../TileType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EcologicalSurvey implements IProjectCard {
   public cost = 9;
@@ -24,4 +27,17 @@ export class EcologicalSurvey implements IProjectCard {
   public play(_player: Player, _game: Game) {
     return undefined;
   }
+
+  public metadata: CardMetadata = {
+    description: 'Requires 3 greeneries on Mars.',
+    cardNumber: 'A07',
+    requirements: CardRequirements.builder((b) => b.forests(3)),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.tile(TileType.EMPTY_TILE, false, true).startEffect;
+        eb.plus().plants(1).animals(1).microbes(1);
+        eb.description('Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.');
+      });
+    }),
+  };
 }

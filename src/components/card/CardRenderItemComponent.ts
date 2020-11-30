@@ -115,6 +115,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-event');
         } else if (type === CardRenderItemType.SPACE) {
           classes.push('card-tag-space');
+        } else if (type === CardRenderItemType.SCIENCE) {
+          classes.push('card-tag-science');
         } else if (type === CardRenderItemType.JOVIAN) {
           classes.push('card-tag-jovian');
         } else if (type === CardRenderItemType.VENUS) {

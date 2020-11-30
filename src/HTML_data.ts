@@ -356,16 +356,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.MINE, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="steel production"></div>
-        </div>
-        <div class="description">
-          (Increase your steel production 1 step.)
-        </div>
-      </div>
-`],
     [CardName.VESTA_SHIPYARD, ` 
       <div class="content">
         <div class="points points-big">1</div>
@@ -401,24 +391,6 @@ export const HTML_DATA: Map<string, string> =
           (Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.)
         </div>
       </div>
-`],
-    [CardName.MINERAL_DEPOSIT, ` 
-        <div class="content ">
-            5<div class="resource steel"></div>
-            <div class="description ">
-                (Gain 5 steel.)
-            </div>
-        </div>
-`],
-    [CardName.MINING_EXPEDITION, ` 
-        <div class="content ">
-          <div class="tile oxygen-tile"></div><br>
-          - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
-          <div class="resource steel"></div><div class="resource steel"></div>
-            <div class="description ">
-                (Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.)
-            </div>
-        </div>
 `],
     [CardName.MINING_AREA, ` 
       <div class="content">
@@ -480,15 +452,6 @@ export const HTML_DATA: Map<string, string> =
             : <span class="money resource ">-2</span>
             <div class="description ">
                 (Effect: When you play a card, you pay 2 MC less for it.)
-            </div>
-        </div>
-`],
-    [CardName.MARS_UNIVERSITY, ` 
-        <div class="content ">
-          <div class="points points-big">1</div>
-            <div class="resource-tag tag-science"></div> : - <span class="card resource "></span> + <span class="card resource "></span>
-            <div class="description ">
-                (Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.)
             </div>
         </div>
 `],

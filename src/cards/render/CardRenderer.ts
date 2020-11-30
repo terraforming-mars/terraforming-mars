@@ -233,6 +233,11 @@ class Builder {
     return this;
   }
 
+  public science(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
     return this;

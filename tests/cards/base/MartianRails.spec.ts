@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {MartianRails} from '../../../src/cards/base/MartianRails';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MartianRails', function() {
   let card : MartianRails; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new MartianRails();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

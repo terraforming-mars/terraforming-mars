@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Pets} from '../../../src/cards/base/Pets';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {maxOutOceans} from '../../TestingUtils';
 import {Fish} from '../../../src/cards/base/Fish';
+import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
+import {Pets} from '../../../src/cards/base/Pets';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('LargeConvoy', function() {
   let card : LargeConvoy; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new LargeConvoy();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

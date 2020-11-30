@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {LavaFlows} from '../../../src/cards/base/LavaFlows';
 import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TileType} from '../../../src/TileType';
+import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
-import {resetBoard} from '../../TestingUtils';
+import {TileType} from '../../../src/TileType';
+import {resetBoard, TestPlayers} from '../../TestingUtils';
 
 describe('LavaFlows', function() {
   let card : LavaFlows; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new LavaFlows();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
     resetBoard(game);
   });

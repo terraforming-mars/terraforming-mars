@@ -1,24 +1,24 @@
 import {expect} from 'chai';
-import {Playwrights} from '../../../src/cards/community/Playwrights';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Resources} from '../../../src/Resources';
-import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {DeimosDown} from '../../../src/cards/base/DeimosDown';
-import {ICard} from '../../../src/cards/ICard';
+import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
+import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
+import {Playwrights} from '../../../src/cards/community/Playwrights';
+import {ICard} from '../../../src/cards/ICard';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Playwrights', function() {
   let card : Playwrights; let player : Player; let player2: Player; let game : Game;
 
   beforeEach(function() {
     card = new Playwrights();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
     card.play(player);

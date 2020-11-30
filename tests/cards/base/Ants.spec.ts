@@ -1,23 +1,23 @@
 import {expect} from 'chai';
 import {Ants} from '../../../src/cards/base/Ants';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {Fish} from '../../../src/cards/base/Fish';
+import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBacteria';
+import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
+import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {ICard} from '../../../src/cards/ICard';
-import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBacteria';
-import {Fish} from '../../../src/cards/base/Fish';
-import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Ants', function() {
   let card : Ants; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Ants();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

@@ -8,14 +8,15 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AirRaid', function() {
   let card : AirRaid; let player : Player; let player2 : Player; let game : Game; let corpo: StormCraftIncorporated;
 
   beforeEach(function() {
     card = new AirRaid();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
     corpo = new StormCraftIncorporated();

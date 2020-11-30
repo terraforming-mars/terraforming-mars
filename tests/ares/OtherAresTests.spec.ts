@@ -5,6 +5,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
+import {TestPlayers} from '../TestingUtils';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 
 describe('OtherAresTests', function() {
@@ -13,7 +14,7 @@ describe('OtherAresTests', function() {
   let game : Game;
 
   it('Desert settler counts upgraded oceans', function() {
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     otherPlayer = new Player('other', Color.RED, false);
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 

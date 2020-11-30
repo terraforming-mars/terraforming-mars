@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Color} from '../src/Color';
 import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Game} from '../src/Game';
@@ -11,7 +10,7 @@ import {OrOptions} from '../src/inputs/OrOptions';
 import {SelectSpace} from '../src/inputs/SelectSpace';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {Turmoil} from '../src/turmoil/Turmoil';
-import {resetBoard, maxOutOceans, setCustomGameOptions} from './TestingUtils';
+import {resetBoard, maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../src/cards/promo/JovianEmbassy';
@@ -29,7 +28,7 @@ describe('Turmoil', function() {
   let player : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
 
     game = new Game('foobar', [player], player, gameOptions);

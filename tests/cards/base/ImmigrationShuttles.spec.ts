@@ -1,15 +1,13 @@
-
 import {expect} from 'chai';
 import {ImmigrationShuttles} from '../../../src/cards/base/ImmigrationShuttles';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ImmigrationShuttles', function() {
   it('Should play', function() {
     const card = new ImmigrationShuttles();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player);
     expect(action).is.undefined;

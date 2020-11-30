@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SisterPlanetSupport', function() {
   it('Should play', function() {
     const card = new SisterPlanetSupport();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     expect(card.canPlay(player)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;

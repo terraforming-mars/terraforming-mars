@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {LightningHarvest} from '../../../src/cards/base/LightningHarvest';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
+import {LightningHarvest} from '../../../src/cards/base/LightningHarvest';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('LightningHarvest', function() {
   let card : LightningHarvest; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new LightningHarvest();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

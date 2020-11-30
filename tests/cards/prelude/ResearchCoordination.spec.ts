@@ -1,4 +1,3 @@
-
 import {expect} from 'chai';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 

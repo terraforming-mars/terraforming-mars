@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {CometAiming} from '../../../src/cards/promo/CometAiming';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 import {maxOutOceans} from './../../TestingUtils';
 
 describe('CometAiming', function() {
@@ -13,7 +13,7 @@ describe('CometAiming', function() {
 
   beforeEach(function() {
     card = new CometAiming();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

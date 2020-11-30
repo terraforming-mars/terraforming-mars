@@ -1,3 +1,4 @@
+import {TestPlayers} from '../TestingUtils';
 import {expect} from 'chai';
 import {Luna} from '../../src/colonies/Luna';
 import {Pluto} from '../../src/colonies/Pluto';
@@ -45,8 +46,8 @@ describe('Colony', function() {
 
   beforeEach(function() {
     luna = new Luna();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     player3 = new Player('test3', Color.YELLOW, false);
     player4 = new Player('test4', Color.GREEN, false);
     game = new Game('foobar', [player, player2, player3, player4], player, gameOptions);

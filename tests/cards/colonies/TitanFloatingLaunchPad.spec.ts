@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
 import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatingStation';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Game} from '../../../src/Game';
+import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
 import {ICard} from '../../../src/cards/ICard';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

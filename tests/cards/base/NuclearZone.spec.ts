@@ -1,15 +1,13 @@
-
 import {expect} from 'chai';
 import {NuclearZone} from '../../../src/cards/base/NuclearZone';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('NuclearZone', function() {
   it('Should play', function() {
     const card = new NuclearZone();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player, game);
     if (action !== undefined) {

@@ -1,21 +1,20 @@
 import {expect} from 'chai';
-import {Polyphemos} from '../../../src/cards/colonies/Polyphemos';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {PowerPlant} from '../../../src/cards/base/PowerPlant';
+import {Polyphemos} from '../../../src/cards/colonies/Polyphemos';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Polyphemos', function() {
   it('Should play', function() {
     const card = new Polyphemos();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);

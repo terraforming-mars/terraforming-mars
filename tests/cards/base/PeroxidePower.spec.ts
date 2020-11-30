@@ -1,14 +1,12 @@
-
 import {expect} from 'chai';
 import {PeroxidePower} from '../../../src/cards/base/PeroxidePower';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('PeroxidePower', function() {
   it('Should play', function() {
     const card = new PeroxidePower();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);

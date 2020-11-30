@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {Bushes} from '../../../src/cards/base/Bushes';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Bushes', function() {
   let card : Bushes; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Bushes();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

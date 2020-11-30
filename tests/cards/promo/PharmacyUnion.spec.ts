@@ -1,26 +1,27 @@
 import {expect} from 'chai';
-import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Tags} from '../../../src/cards/Tags';
-import {Ants} from '../../../src/cards/base/Ants';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
+import {Ants} from '../../../src/cards/base/Ants';
 import {Fish} from '../../../src/cards/base/Fish';
+import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
 import {Lichen} from '../../../src/cards/base/Lichen';
 import {Research} from '../../../src/cards/base/Research';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
+import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
+import {Tags} from '../../../src/cards/Tags';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card : PharmacyUnion; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new PharmacyUnion();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     player2 = new Player('test', Color.RED, false);
     game = new Game('foobar', [player, player2], player);
 

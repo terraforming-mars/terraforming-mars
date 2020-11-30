@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('PhysicsComplex', function() {
   let card : PhysicsComplex; let player : Player;
 
   beforeEach(function() {
     card = new PhysicsComplex();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t act', function() {

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import * as constants from '../../../src/constants';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
   let card : ArtificialLake; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

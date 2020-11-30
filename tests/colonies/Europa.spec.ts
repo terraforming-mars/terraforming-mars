@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {Europa} from '../../src/colonies/Europa';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
 import {PlaceOceanTile} from '../../src/deferredActions/PlaceOceanTile';
+import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {Resources} from '../../src/Resources';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Europa', function() {
   let europa: Europa; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(function() {
     europa = new Europa();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(europa);

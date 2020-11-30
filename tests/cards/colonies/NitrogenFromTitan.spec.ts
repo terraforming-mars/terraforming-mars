@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {NitrogenFromTitan} from '../../../src/cards/colonies/NitrogenFromTitan';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
+import {NitrogenFromTitan} from '../../../src/cards/colonies/NitrogenFromTitan';
 import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
-import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('NitrogenFromTitan', function() {
   let card : NitrogenFromTitan; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NitrogenFromTitan();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

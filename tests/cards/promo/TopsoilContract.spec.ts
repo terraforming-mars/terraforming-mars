@@ -6,13 +6,14 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Game} from '../../../src/Game';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TopsoilContract', function() {
   let card : TopsoilContract; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new TopsoilContract();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     player2 = new Player('test', Color.RED, false);
     game = new Game('foobar', [player, player2], player);
   });

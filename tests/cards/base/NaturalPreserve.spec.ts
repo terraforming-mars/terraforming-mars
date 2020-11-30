@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {NaturalPreserve} from '../../../src/cards/base/NaturalPreserve';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('NaturalPreserve', function() {
   let card : NaturalPreserve; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NaturalPreserve();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

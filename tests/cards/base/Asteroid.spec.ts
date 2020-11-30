@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {Asteroid} from '../../../src/cards/base/Asteroid';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Asteroid', function() {
   let card : Asteroid; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Asteroid();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

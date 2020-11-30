@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
 import {Ants} from '../../../src/cards/base/Ants';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
+import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ImportedNutrients', function() {
   let card : ImportedNutrients; let player : Player;
 
   beforeEach(function() {
     card = new ImportedNutrients();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can play without microbe cards', function() {

@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {NuclearPower} from '../../../src/cards/base/NuclearPower';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('NuclearPower', function() {
   let card : NuclearPower; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NuclearPower();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

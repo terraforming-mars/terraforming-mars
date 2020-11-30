@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Titan} from '../../src/colonies/Titan';
 import {AerialMappers} from '../../src/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../src/cards/venusNext/Dirigibles';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
+import {Titan} from '../../src/colonies/Titan';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Titan', function() {
   let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;
@@ -13,8 +13,8 @@ describe('Titan', function() {
   beforeEach(function() {
     titan = new Titan();
     aerialMappers = new AerialMappers();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(titan);

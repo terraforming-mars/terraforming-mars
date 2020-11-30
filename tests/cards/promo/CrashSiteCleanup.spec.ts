@@ -1,17 +1,18 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {CrashSiteCleanup} from '../../../src/cards/promo/CrashSiteCleanup';
 import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
+import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CrashSiteCleanup', function() {
   let card : CrashSiteCleanup; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

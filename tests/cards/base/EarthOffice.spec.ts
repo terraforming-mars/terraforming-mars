@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {EarthOffice} from '../../../src/cards/base/EarthOffice';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Birds} from '../../../src/cards/base/Birds';
+import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('EarthOffice', function() {
   let card : EarthOffice; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new EarthOffice();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
 
     const action = card.play();

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {ICard} from '../../../src/cards/ICard';
-import {Game} from '../../../src/Game';
 import {Research} from '../../../src/cards/base/Research';
+import {ICard} from '../../../src/cards/ICard';
+import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FloatingHabs', function() {
   let card : FloatingHabs; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new FloatingHabs();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

@@ -1,16 +1,15 @@
 import {expect} from 'chai';
 import {Poseidon} from '../../../src/cards/colonies/Poseidon';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {Ceres} from '../../../src/colonies/Ceres';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Poseidon', function() {
   it('Should play', function() {
     const card = new Poseidon();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     const play = card.play();
     expect(play).is.undefined;

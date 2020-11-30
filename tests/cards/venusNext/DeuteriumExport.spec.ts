@@ -1,17 +1,16 @@
-
 import {expect} from 'chai';
 import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {
   let card : DeuteriumExport; let player : Player;
 
   beforeEach(function() {
     card = new DeuteriumExport();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

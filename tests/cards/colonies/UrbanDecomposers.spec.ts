@@ -1,22 +1,22 @@
 import {expect} from 'chai';
+import {Ants} from '../../../src/cards/base/Ants';
+import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {UrbanDecomposers} from '../../../src/cards/colonies/UrbanDecomposers';
-import {Color} from '../../../src/Color';
+import {ICard} from '../../../src/cards/ICard';
+import {Luna} from '../../../src/colonies/Luna';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
-import {Luna} from '../../../src/colonies/Luna';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {Ants} from '../../../src/cards/base/Ants';
-import {ICard} from '../../../src/cards/ICard';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('UrbanDecomposers', function() {
   let card : UrbanDecomposers; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new UrbanDecomposers();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

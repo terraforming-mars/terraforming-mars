@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {Cartel} from '../../../src/cards/base/Cartel';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {ImportedHydrogen} from '../../../src/cards/base/ImportedHydrogen';
 import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
 import {LunarBeam} from '../../../src/cards/base/LunarBeam';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Cartel', function() {
   let card : Cartel; let player : Player;
 
   beforeEach(function() {
     card = new Cartel();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

@@ -1,9 +1,8 @@
-
 import {expect} from 'chai';
+import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
 
 describe('SocietySupport', function() {
   it('Should play', function() {

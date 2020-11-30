@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Miranda} from '../../src/colonies/Miranda';
 import {Pets} from '../../src/cards/base/Pets';
 import {Predators} from '../../src/cards/base/Predators';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
+import {Miranda} from '../../src/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Miranda', function() {
   let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player; let game: Game;
@@ -13,8 +13,8 @@ describe('Miranda', function() {
   beforeEach(function() {
     miranda = new Miranda();
     pets = new Pets();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);

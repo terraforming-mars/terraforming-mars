@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {ICard} from '../../../src/cards/ICard';
 import {Research} from '../../../src/cards/base/Research';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {ICard} from '../../../src/cards/ICard';
+import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
+import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import * as constants from '../../../src/constants';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Atmoscoop', function() {
   let card : Atmoscoop; let player : Player; let game : Game; let dirigibles: Dirigibles; let floatingHabs: FloatingHabs;
 
   beforeEach(function() {
     card = new Atmoscoop();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();

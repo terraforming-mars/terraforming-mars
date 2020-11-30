@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
+import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Dirigibles', function() {
   let card : Dirigibles; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Dirigibles();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
     player.playedCards.push(card);
   });

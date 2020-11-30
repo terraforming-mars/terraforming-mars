@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {VenusianAnimals} from '../../../src/cards/venusNext/VenusianAnimals';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Research} from '../../../src/cards/base/Research';
+import {VenusianAnimals} from '../../../src/cards/venusNext/VenusianAnimals';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('VenusianAnimals', function() {
   let card : VenusianAnimals; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new VenusianAnimals();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

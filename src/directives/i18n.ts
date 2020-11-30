@@ -4,6 +4,21 @@ import * as raw_translations from '../../assets/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
+function translateThroughRegExp(englishText: string, language: string): string | undefined {
+  for (const translation of Object.keys(TM_translations)) {
+    if (translation.indexOf('{{d}}') !== -1) {
+      const re = new RegExp(translation.replace('{{d}}', '(\\d+)'));
+      if (re.test(englishText)) {
+        const languages = TM_translations[translation];
+        if (languages !== undefined && languages[language] !== undefined) {
+          return englishText.replace(re, languages[language]);
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
 export function translateText(englishText: string): string {
   let translatedText = englishText;
   const lang = PreferencesManager.loadValue('lang') || 'en';
@@ -11,20 +26,26 @@ export function translateText(englishText: string): string {
 
   englishText = normalizeText(englishText);
 
+  // direct match
   const languages = TM_translations[englishText];
-
   if (languages !== undefined && languages[lang] !== undefined) {
-    translatedText = languages[lang];
-  } else {
-    let stripedText = englishText.replace(/^\((.*)\)$/gm, '$1');
-    if (stripedText && stripedText !== englishText) {
-      stripedText = translateText(stripedText);
-      if (stripedText !== englishText) {
-        translatedText = '(' + stripedText + ')';
-      }
-    } else if (stripedText && stripedText.length > 3) {
-      console.log('Please translate "' + stripedText + '"');
+    return languages[lang];
+  }
+
+  // match through RegExp
+  const regMatch = translateThroughRegExp(englishText, lang);
+  if (regMatch !== undefined) {
+    return regMatch;
+  }
+
+  let stripedText = englishText.replace(/^\((.*)\)$/gm, '$1');
+  if (stripedText && stripedText !== englishText) {
+    stripedText = translateText(stripedText);
+    if (stripedText !== englishText) {
+      translatedText = '(' + stripedText + ')';
     }
+  } else if (stripedText && stripedText.length > 3) {
+    console.log('Please translate "' + stripedText + '"');
   }
   return translatedText;
 }

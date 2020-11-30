@@ -37,7 +37,7 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
 
       return generateClassString(classes);
     },
-    // for tiles with symbols, we want to put symbol on top of tile canvass
+    // Symbols for tiles go on top of the tile canvas
     getHtml: function(): string {
       const classes: string[] = [];
       const type: TileType = this.item.tile;

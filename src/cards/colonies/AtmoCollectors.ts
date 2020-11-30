@@ -67,8 +67,7 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.empty().startAction.floaters(1).description('Action: Add one floater here');
-      }).br;
-      b.or(CardRenderItemSize.SMALL).br;
+      }).or(CardRenderItemSize.SMALL).br;
       b.effectBox((eb) => {
         eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit.description('Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat');
       }).br;

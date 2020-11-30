@@ -60,7 +60,7 @@ export class CommercialDistrict implements IProjectCard {
           pb.minus().energy(1).br;
           pb.plus().megacredits(4).br;
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
-        b.text('place this tile. 1 vp per adjacent city tile', CardRenderItemSize.TINY, true);
+        b.text('Place this tile. 1 vp per adjacent city tile', CardRenderItemSize.TINY, true);
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
     };

@@ -29,6 +29,7 @@ export enum CardRenderItemType {
   NO_TAGS ='no_tags',
   WILD = 'wild',
   CITY = 'city',
+  GREENERY = 'greenery',
   PLATE = 'plate',
   TEXT = 'text',
   NBSP = 'nbsp',

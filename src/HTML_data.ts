@@ -22,15 +22,6 @@ export const HTML_DATA: Map<string, string> =
             </span>
         </div>
 `],
-    [CardName.MARTIAN_RAILS, ` 
-        <div class="content ">
-            <span class="energy resource "></span> <span class="red-arrow "></span>
-            <span class=" money resource ">1</span> / <span class="city-tile-small tile red-outline "></span>
-            <div class="description ">
-                (Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.)
-            </div>
-        </div>
-`],
     [CardName.WATER_IMPORT_FROM_EUROPA, ` 
         <div class="content ">
             <div class="points points-big">1/<span class="tag-jovian resource-tag"></span></div>
@@ -77,19 +68,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="tile city-tile " style="margin-left:20px "></div><br>
             <div class="description ">
                 (Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.)
-            </div>
-        </div>
-`],
-    [CardName.METHANE_FROM_TITAN, ` 
-        <div class="content ">
-            <div class="points points-big ">2</div>
-            <div class="requirements ">2% O2</div>
-            <div class="production-box production-box-size2 ">
-                <div class="production heat "></div><div class="production heat "></div>
-                <div class="production plant "></div><div class="production plant "></div>
-            </div>
-            <div class="description ">
-                (Requires 2% oxygen. Increase your heat production 2 steps and your Plant production 2 steps.)
             </div>
         </div>
 `],
@@ -316,17 +294,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.MIRANDA_RESORT, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="production-box production-box-size2a">
-          <div class="production money">1</div> / <div class="resource-tag tag-earth"></div>
-        </div>
-        <div class="description">
-          (Increase your MC production 1 step for each Earth tag you have.)
-        </div>
-      </div>
-`],
     [CardName.FISH, ` 
       <div class="content">
         <div class="points">1/<div class="animal resource"></div>
@@ -407,16 +374,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="description">
           (Increase your titanium production 1 step.)
-        </div>
-      </div>
-`],
-    [CardName.MANGROVE, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">+4 C</div>
-        <div class="tile greenery-tile"></div>
-        <div class="description">
-          (Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.)
         </div>
       </div>
 `],
@@ -1281,18 +1238,6 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-    [CardName.MAGNETIC_FIELD_GENERATORS, ` 
-        <div class="content">
-          <div class="production-box production-box-size2a">
-            <div class="production-prefix minus"></div> 4 <div class="energy production"></div><br>
-            <div class="production-prefix plus"></div><div class="plant production"></div><div class="plant production"></div>
-          </div> <br>
-           <div class="tile rating"></div> <div class="tile rating"></div> <div class="tile rating"></div>
-          <div class="description">
-            (Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.)
-          </div>
-        </div>
-`],
     [CardName.SHUTTLES, ` 
           <div class="content ">
             <div class="points points-big">1</div>
@@ -1343,18 +1288,6 @@ export const HTML_DATA: Map<string, string> =
           <div class="plant resource" style="margin-left:20px"></div>
           <div class="description">
             (Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.)
-          </div>
-        </div>
-`],
-    [CardName.MAGNETIC_FIELD_DOME, ` 
-        <div class="content">
-          <div class="production-box production-box-size2a">
-            <div class="production-prefix minus"></div><div class="energy production"></div><div class="energy production"></div><br>
-            <div class="production-prefix plus"></div><div class="plant production"></div>
-          </div>
-           &nbsp;&nbsp;&nbsp;<div class="tile rating"></div>
-          <div class="description">
-            (Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.)
           </div>
         </div>
 `],

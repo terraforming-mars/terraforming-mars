@@ -257,6 +257,13 @@ class Builder {
     return this;
   }
 
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+    const item = new CardRenderItem(CardRenderItemType.GREENERY);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
   public delegate(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
     return this;

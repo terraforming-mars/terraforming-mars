@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInfo} from './overview/PlayerInfo';
+import {PreferencesManager} from './PreferencesManager';
 
 export const TopBar = Vue.component('top-bar', {
   props: {
@@ -16,12 +17,29 @@ export const TopBar = Vue.component('top-bar', {
   },
   methods: {
     toggleBar() {
-      console.log('Hello!');
+      const newVal = this.isExpanded() ? '1': '';
+      PreferencesManager.saveValue('hide_top_bar', newVal);
+      PreferencesManager.preferencesValues.set('hide_top_bar', this.isExpanded());
+      this.$forceUpdate();
+    },
+    isExpanded(): boolean {
+      const val = PreferencesManager.loadValue('hide_top_bar');
+      return val !== '1';
+    },
+    formatCssClass(): string {
+      const cssClasses = ['top-bar'];
+      if ( ! this.isExpanded()) {
+        cssClasses.push('top-bar-collapsed');
+      }
+      return cssClasses.join(' ');
     },
   },
   template: `
-    <div class="top-bar">
-      <PlayerInfo :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
+    <div :class="formatCssClass()">
+      <PlayerInfo v-show="isExpanded()" :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
+      <div class="top-bar-collapser" v-on:click="toggleBar()">
+        <img src="/assets/arrows_left.png">
+      </div>
     </div>
   `,
 });

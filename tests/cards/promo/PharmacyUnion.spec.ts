@@ -9,7 +9,6 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
 import {Tags} from '../../../src/cards/Tags';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -22,7 +21,7 @@ describe('PharmacyUnion', function() {
   beforeEach(function() {
     card = new PharmacyUnion();
     player = TestPlayers.BLUE.newPlayer();
-    player2 = new Player('test', Color.RED, false);
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
     player.corporationCard = card;

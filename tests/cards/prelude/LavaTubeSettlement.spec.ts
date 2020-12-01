@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/cards/prelude/LavaTubeSettlement';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
@@ -34,7 +33,7 @@ describe('LavaTubeSettlement', function() {
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
-    const anotherPlayer = new Player('test', Color.RED, false);
+    const anotherPlayer = TestPlayers.RED.newPlayer();
     game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
 
     expect(card.canPlay(player, game)).is.not.true;

@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -29,7 +28,7 @@ describe('SaturnSystems', function() {
   });
 
   it('Runs onCardPlayed when other player plays card', function() {
-    const player2 = new Player('test', Color.RED, false);
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     player.corporationCard = card;
 

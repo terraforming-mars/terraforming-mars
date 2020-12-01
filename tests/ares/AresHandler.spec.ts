@@ -3,7 +3,6 @@ import {AresHandler} from '../../src/ares/AresHandler';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
-import {Color} from '../../src/Color';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/TileType';
@@ -23,7 +22,7 @@ describe('AresHandler', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = new Player('other', Color.RED, false);
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });

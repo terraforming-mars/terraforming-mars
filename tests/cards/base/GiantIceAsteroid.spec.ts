@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -14,7 +13,7 @@ describe('GiantIceAsteroid', function() {
     card = new GiantIceAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    player3 = new Player('test3', Color.YELLOW, false);
+    player3 = TestPlayers.YELLOW.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
   });
 

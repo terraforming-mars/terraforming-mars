@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Color} from '../src/Color';
 import {OriginalBoard} from '../src/OriginalBoard';
 import {Player} from '../src/Player';
 import {TileType} from '../src/TileType';
@@ -13,7 +12,7 @@ describe('Board', function() {
   beforeEach(function() {
     board = new OriginalBoard();
     player = TestPlayers.BLUE.newPlayer();
-    player2 = new Player('foo', Color.RED, false);
+    player2 = TestPlayers.RED.newPlayer();
   });
 
   it('Can have greenery placed on any available land when player has no tile placed', function() {

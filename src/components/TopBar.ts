@@ -15,10 +15,13 @@ export const TopBar = Vue.component('top-bar', {
     return {};
   },
   methods: {
+    toggleBar() {
+      console.log('Hello!');
+    },
   },
   template: `
     <div class="top-bar">
-      <PlayerInfo :player="player" :activePlayer="player" actionLabel="ahoy" playerIndex="0" :hideZeroTags="true"/>
+      <PlayerInfo :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
     </div>
   `,
 });

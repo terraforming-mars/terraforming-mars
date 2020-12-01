@@ -53,7 +53,7 @@ import {SelectColony} from './src/inputs/SelectColony';
 import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
 
-const serverId = generateRandomServerId();
+const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();

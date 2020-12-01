@@ -3,7 +3,6 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {Sabotage} from '../../../src/cards/base/Sabotage';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
@@ -18,7 +17,7 @@ describe('MonsInsurance', function() {
 
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    player3 = new Player('test3', Color.GREEN, false);
+    player3 = TestPlayers.GREEN.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
   });
 

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/cards/base/Comet';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {maxOutOceans} from '../../TestingUtils';
@@ -15,7 +14,7 @@ describe('Comet', function() {
     card = new Comet();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    player3 = new Player('test3', Color.YELLOW, false);
+    player3 = TestPlayers.YELLOW.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
   });
 

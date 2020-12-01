@@ -1,11 +1,9 @@
 import {expect} from 'chai';
 import {BoardName} from '../../../src/BoardName';
 import {LandClaim} from '../../../src/cards/base/LandClaim';
-import {Color} from '../../../src/Color';
 import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
@@ -24,7 +22,7 @@ describe('LandClaim', function() {
   it('can claim south pole on hellas board', function() {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
-    const player2= new Player('text2', Color.RED, false);
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));

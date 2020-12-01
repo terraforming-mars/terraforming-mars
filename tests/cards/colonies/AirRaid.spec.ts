@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {AirRaid} from '../../../src/cards/colonies/AirRaid';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
 import {Game} from '../../../src/Game';
@@ -28,7 +27,7 @@ describe('AirRaid', function() {
   });
 
   it('Should play - multiple targets', function() {
-    const player3 = new Player('test3', Color.YELLOW, false);
+    const player3 = TestPlayers.YELLOW.newPlayer();
     const game = new Game('foobar', [player, player2, player3], player);
     player.addResourceTo(corpo);
     expect(card.canPlay(player)).is.true;

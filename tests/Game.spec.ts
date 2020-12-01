@@ -1,7 +1,5 @@
 import {expect} from 'chai';
-import {Color} from '../src/Color';
 import {Game} from '../src/Game';
-import {Player} from '../src/Player';
 import {SpaceName} from '../src/SpaceName';
 import {Mayor} from '../src/milestones/Mayor';
 import {Banker} from '../src/awards/Banker';
@@ -71,9 +69,9 @@ describe('Game', function() {
   });
 
   it('correctly calculates victory points', function() {
-    const player = new Player('vp_test', Color.BLUE, false);
-    const player2 = new Player('vp_test2', Color.RED, false);
-    const player3 = new Player('vp_test3', Color.YELLOW, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const player3 = TestPlayers.YELLOW.newPlayer();
     const game = new Game('vp_game', [player, player2, player3], player);
 
     game.addCityTile(player, SpaceName.ARSIA_MONS);
@@ -133,9 +131,9 @@ describe('Game', function() {
   });
 
   it('Disallows to set temperature more than allowed maximum', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
-    const player2 = new Player('temp_test2', Color.RED, false);
-    const game = new Game('vp_game', [player, player2], player);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = new Game('game-id', [player, player2], player);
 
     (game as any).temperature = 6;
     let initialTR = player.getTerraformRating();
@@ -154,9 +152,9 @@ describe('Game', function() {
   });
 
   it('Disallows to set oxygenLevel more than allowed maximum', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
-    const player2 = new Player('temp_test2', Color.RED, false);
-    const game = new Game('vp_game', [player, player2], player);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = new Game('game-id', [player, player2], player);
 
     (game as any).oxygenLevel = 13;
     const initialTR = player.getTerraformRating();
@@ -167,8 +165,8 @@ describe('Game', function() {
   });
 
   it('Draft round for 2 players', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
-    const player2 = new Player('temp_test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('draft_game', [player, player2], player);
     game.gameOptions.venusNextExtension = false;
     game.generation = 4;
@@ -180,8 +178,8 @@ describe('Game', function() {
   });
 
   it('No draft round for 2 players', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
-    const player2 = new Player('temp_test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('classic_game', [player, player2], player);
     game.gameOptions.venusNextExtension = false;
     game.generation = 2;
@@ -193,8 +191,8 @@ describe('Game', function() {
   });
 
   it('Solo play next generation', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
-    const game = new Game('draft_game', [player], player);
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = new Game('solo game', [player], player);
     game.gameOptions.venusNextExtension = false;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -266,7 +264,7 @@ describe('Game', function() {
   });
 
   it('Should finish solo game in the end of last generation', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('solo1', [player], player);
     game.playerIsDoneWithGame(player);
 
@@ -277,7 +275,7 @@ describe('Game', function() {
   });
 
   it('Should not finish solo game before last generation if Mars is already terraformed', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('solo2', [player], player);
     game.generation = 10;
 
@@ -333,10 +331,10 @@ describe('Game', function() {
   });
 
   it('Should return players in turn order', function() {
-    const player1 = new Player('p1', Color.BLUE, false);
-    const player2 = new Player('p2', Color.GREEN, false);
-    const player3 = new Player('p3', Color.YELLOW, false);
-    const player4 = new Player('p4', Color.RED, false);
+    const player1 = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.GREEN.newPlayer();
+    const player3 = TestPlayers.YELLOW.newPlayer();
+    const player4 = TestPlayers.RED.newPlayer();
     const game = new Game('gto', [player1, player2, player3, player4], player3);
 
     let players = game.getPlayers();
@@ -362,25 +360,25 @@ describe('Game', function() {
   });
 
   it('Gets card player for corporation card', function() {
-    const player1 = new Player('p1', Color.BLUE, false);
-    const game = new Game('gto', [player1], player1);
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = new Game('gto', [player], player);
     const card = new SaturnSystems();
-    player1.corporationCard = card;
-    expect(game.getCardPlayer(card.name)).to.eq(player1);
+    player.corporationCard = card;
+    expect(game.getCardPlayer(card.name)).to.eq(player);
   });
 
   it('Does not assign player to ocean after placement', function() {
-    const player1 = new Player('oc_p1', Color.BLUE, false);
-    const game = new Game('oceanz', [player1], player1);
-    const spaceId: string = game.board.getAvailableSpacesForOcean(player1)[0].id;
-    game.addOceanTile(player1, spaceId);
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = new Game('oceanz', [player], player);
+    const spaceId: string = game.board.getAvailableSpacesForOcean(player)[0].id;
+    game.addOceanTile(player, spaceId);
 
     const space: ISpace = game.getSpace(spaceId);
     expect(space.player).is.undefined;
   });
 
   it('Check Ecologist Milestone', function() {
-    const player = new Player('temp_test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
 
     const card1 = new ResearchNetwork();
     const card2 = new ArcticAlgae();
@@ -393,11 +391,11 @@ describe('Game', function() {
   });
 
   it('Removes Hellas bonus ocean space if player cannot pay', function() {
+    const player = TestPlayers.BLUE.newPlayer();
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
-    const player = TestPlayers.BLUE.newPlayer();
-    const secondPlayer = new Player('vestigial', Color.RED, false);
+    const secondPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
 
@@ -420,11 +418,11 @@ describe('Game', function() {
   });
 
   it('Removes Hellas bonus ocean space if Helion player cannot pay', function() {
+    const player = TestPlayers.BLUE.newPlayer();
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
-    const player = TestPlayers.BLUE.newPlayer();
-    const secondPlayer = new Player('vestigial', Color.RED, false);
+    const secondPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
     player.corporationCard = new Helion();

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {TopsoilContract} from '../../../src/cards/promo/TopsoilContract';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
@@ -14,7 +13,7 @@ describe('TopsoilContract', function() {
   beforeEach(function() {
     card = new TopsoilContract();
     player = TestPlayers.BLUE.newPlayer();
-    player2 = new Player('test', Color.RED, false);
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

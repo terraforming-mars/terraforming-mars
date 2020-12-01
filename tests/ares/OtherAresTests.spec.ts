@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {DesertSettler} from '../../src/awards/DesertSettler';
-import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/SpaceType';
@@ -15,7 +14,7 @@ describe('OtherAresTests', function() {
 
   it('Desert settler counts upgraded oceans', function() {
     player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = new Player('other', Color.RED, false);
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];

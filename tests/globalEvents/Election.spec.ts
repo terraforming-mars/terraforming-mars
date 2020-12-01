@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 import {StripMine} from '../../src/cards/base/StripMine';
-import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
 import {Election} from '../../src/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
@@ -13,7 +11,7 @@ describe('Election', function() {
     const card = new Election();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const player3 = new Player('test3', Color.GREEN, false);
+    const player3 = TestPlayers.GREEN.newPlayer();
     const game = new Game('foobar', [player, player2, player3], player);
     const turmoil = new Turmoil(game);
     turmoil.initGlobalEvent(game);

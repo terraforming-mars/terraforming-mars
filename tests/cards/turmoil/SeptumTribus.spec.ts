@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
@@ -10,7 +8,7 @@ describe('SeptumTribus', function() {
   it('Should play', function() {
     const card = new SeptumTribus();
     const player = TestPlayers.BLUE.newPlayer();
-    const player2 = new Player('test', Color.RED, false);
+    const player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     const game = new Game('foobar', [player, player2], player, gameOptions);

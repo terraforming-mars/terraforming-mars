@@ -21,7 +21,7 @@ export const CardRequirementsComponent = Vue.component('CardRequirements', {
         <div v-if="requirements.hasParty()" :class="getClasses()">
             <span class="party">{{ requirements.getRequirementsText() }}</span>
         </div>
-        <div v-else-if="requirements.hasPlantRemoved()" :class="getClasses()"> 
+        <div v-else-if="requirements.hasPlantsRemoved()" :class="getClasses()"> 
             <div class="card-special card-minus"></div>
             <div class="card-resource card-resource-plant red-outline"></div>
         </div>

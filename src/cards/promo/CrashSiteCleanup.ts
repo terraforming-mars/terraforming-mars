@@ -51,7 +51,7 @@ export class CrashSiteCleanup implements IProjectCard {
     public metadata: CardMetadata = {
       description: 'Requires that a player removed ANOTHER PLAYER\'s plants this generation. Gain 1 titanium or 2 steel.',
       cardNumber: 'X16',
-      requirements: CardRequirements.builder((b) => b.plantRemoved()),
+      requirements: CardRequirements.builder((b) => b.plantsRemoved()),
       renderData: CardRenderer.builder((b) => {
         b.titanium(1).nbsp.or().nbsp.steel(2);
       }),

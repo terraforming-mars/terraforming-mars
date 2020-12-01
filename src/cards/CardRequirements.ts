@@ -22,8 +22,8 @@ export class CardRequirements {
   public hasParty(): boolean {
     return this.requirements.some((req) => req instanceof PartyCardRequirement);
   }
-  public hasPlantRemoved(): boolean {
-    return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANT);
+  public hasPlantsRemoved(): boolean {
+    return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
   }
 }
 
@@ -109,9 +109,8 @@ class Builder {
     return this;
   }
 
-  // No need for painful abstraction on resource removed since this is the only card (for now) and we can handle it as an exception
-  public plantRemoved(): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANT, -1));
+  public plantsRemoved(): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS, -1));
     return this;
   }
 

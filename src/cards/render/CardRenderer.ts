@@ -274,6 +274,7 @@ class Builder {
     return this;
   }
 
+
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
     return this;
@@ -282,6 +283,11 @@ class Builder {
   public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
+    return this;
+  }
+
+  public emptyTile() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
     return this;
   }
 

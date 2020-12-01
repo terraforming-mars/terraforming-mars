@@ -103,6 +103,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.CITY) {
         classes.push('card-tile');
         classes.push(`city-tile--${this.item.size}`);
+      } else if (type === CardRenderItemType.EMPTY_TILE) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--empty-tile');
       }
 
       // round tags

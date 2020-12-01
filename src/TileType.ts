@@ -31,5 +31,4 @@ export enum TileType {
     EROSION_SEVERE,
     MINING_STEEL_BONUS,
     MINING_TITANIUM_BONUS,
-    EMPTY_TILE
 }

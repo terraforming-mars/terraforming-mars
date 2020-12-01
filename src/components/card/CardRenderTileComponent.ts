@@ -39,10 +39,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('board-space-tile--commercial_district_ares');
           // normal commercial district uses symbol (see getHtml)
         }
-      } else if (type === TileType.EMPTY_TILE) {
-        classes.push('card-tile-ares');
-        classes.push('board-space-tile--empty-tile');
       }
+
       return generateClassString(classes);
     },
     // Symbols for tiles go on top of the tile canvas

@@ -4032,15 +4032,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.ENERGY_MARKET, ` 
-    <div class="content ">
-        <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
-        OR <div class="production-box production-box-size1a"><div class="production-prefix minus"></div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
-        <div class="description">
-            (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
-        </div>
-    </div>
-`],
     [CardName.MARTIAN_MEDIA_CENTER, ` 
   <div class="content ">
     <div class="requirements"><span class="party">Mars First</span></div>

@@ -53,7 +53,7 @@ import {SelectColony} from './src/inputs/SelectColony';
 import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
 
-const serverId = generateRandomServerId();
+const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();
@@ -1067,7 +1067,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
-    file = `dist${req.url}${suffix}`;
+    file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
   } else if (req.url === '/assets/futureforces.ttf') {

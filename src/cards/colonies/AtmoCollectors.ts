@@ -62,15 +62,15 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     return undefined;
   }
   public metadata: CardMetadata = {
-    description: 'Add 2 floaters to ANY card',
+    description: 'Add 2 floaters to ANY card.',
     cardNumber: 'C03',
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
-        eb.empty().startAction.floaters(1).description('Action: Add one floater here');
+        eb.empty().startAction.floaters(1).or(CardRenderItemSize.SMALL);
+        eb.description('Action: Add one floater here.');
       }).br;
-      b.or(CardRenderItemSize.SMALL).br;
       b.effectBox((eb) => {
-        eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit.description('Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat');
+        eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit.description('Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.');
       }).br;
       b.floaters(2).asterix();
     }),

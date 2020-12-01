@@ -27,12 +27,12 @@ export class DuskLaserMining implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X01',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
-      description: 'Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium',
+      description: 'Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;
           pb.plus().titanium(1);
-        }).titanium(4).digit;
+        }).nbsp.titanium(4).digit;
       }),
     }
 }

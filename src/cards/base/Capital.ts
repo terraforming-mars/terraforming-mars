@@ -11,6 +11,11 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {Board} from '../../Board';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Capital implements IProjectCard {
     public cost = 26;
@@ -47,5 +52,21 @@ export class Capital implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '008',
+      description: {
+        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.',
+        align: 'left',
+      },
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(2).br;
+          pb.plus().megacredits(5);
+        }).nbsp.tile(TileType.CAPITAL, false).br;
+        b.text('1 additional VP for each ocean tile adjacent to this city tile', CardRenderItemSize.TINY, true);
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.oceans(1, 1),
     }
 }

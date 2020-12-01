@@ -245,8 +245,8 @@
             }
             .card-icon {
                 position: absolute;
-                right: -3px;
-                top: -8px;
+                right: -5px;
+                top: -10px;
                 margin: 0;
                 width: 20px;
                 height: 20px;
@@ -343,6 +343,11 @@
             .card-tag-none {
                 background-image: url("./assets/tags/tag-none.png");
             }
+            .card-community-services {
+                font-size: 42px;
+                vertical-align: middle;
+                background:white;
+            }
             /*production*/
             .card-production-box {
                 font-family: Prototype;
@@ -371,15 +376,7 @@
                             margin: 0 !important;
                         }
                     }
-                }
-
-                // div {
-                //     display: inline-block;
-                // }
-
-                // .resource-tag {
-                //     margin-bottom: 2px !important;
-                // }
+                } 
             }
             .card-rows {
                 display: flex;
@@ -430,7 +427,7 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 .card-item-container{
                     margin: 0px;
-                }
+                } 
             }
             .card-points-big {
                 font-size: 36px;
@@ -474,6 +471,7 @@
             }
             .card-text-uppercase {
                 text-transform: uppercase;
+                line-height: normal;
             }
             .card-nbsp {
                 visibility: hidden;
@@ -482,21 +480,52 @@
             /* tiles */
             .card-tile {
                 margin-left: 4px;
-                margin-right: 4px;
+                margin-right: 4px; 
             }
-            .card-special-tile--M {
-                background-size: 40px;
+            .card-tile-canvass {
+                background-image: url(./assets/tiles/special.png);
                 width: 40px;
-                height: 40px;
-            }
-            .card-biofertilizer_facility--M {
-                background: url(assets/board_icons_ares.png) -342px -83px no-repeat;
-                width: 47px;
                 height: 47px;
+                background-size: 40px;
+            }
+            .card-tile-capital {
+                background-image: url(./assets/tiles/city.png);
+                filter: none;
+                width: 40px;
+                height: 47px;
+                background-size: 40px 47px;
+            }
+            /* symbols for tiles */
+            .card-tile-symbol {
+                background-size: 44px;
+                width: 40px;
+                height: 47px;
+            }
+            .card-tile-symbol-commercial-district {
+                background-image: url(./assets/tiles/special_tile_icons/commerical_district.png);
+                position: relative;
+                left: -2px;
+            }
+            .card-tile-symbol-deimos-down {
+                background-image: url(./assets/tiles/special_tile_icons/deimos.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
             }
             .city-tile--M {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .card-ocean--S {
+                width: 30px !important;
+                height: 32px !important;
+                background-size: 30px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
             }
             .city-tile--S {
                 background-image: url(./assets/tiles/city.png);
@@ -519,7 +548,8 @@
                 background-size: 24px 30px;
                 vertical-align: middle;
                 filter: drop-shadow(0px 0px 1px black);
-                margin-bottom: 6px;
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-delegate-red {
                 filter: drop-shadow(0px 1px 1px darkred) drop-shadow(0px -1px 1px red) drop-shadow(0px 0px 2px black);

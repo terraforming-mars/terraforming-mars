@@ -4,6 +4,9 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class DiversitySupport implements IProjectCard {
     public cost = 1;
@@ -29,5 +32,11 @@ export class DiversitySupport implements IProjectCard {
     private getNonStandardResourceCount(player: Player) {
       const cardsWithResources = player.getCardsWithResources();
       return cardsWithResources.map((card) => card.resourceType).filter((v, i, a) => a.indexOf(v) === i).length;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X23',
+      description: 'Requires that you have 9 different types of resources. Gain 1 TR.',
+      requirements: CardRequirements.builder((b) => b.resourceTypes(9)),
+      renderData: CardRenderer.builder((b) => b.tr(1)),
     }
 }

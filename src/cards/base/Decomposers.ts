@@ -33,14 +33,14 @@ export class Decomposers implements IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: '131',
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
-      description: 'Requires 3% oxygen. 1 VP per 3 Microbes on this card',
+      description: 'Requires 3% oxygen. 1 VP per 3 Microbes on this card.',
       renderData: CardRenderer.builder((b) => {
         b.effectBox((be) => {
           be.animals(1).played.slash();
           be.plants(1).played.slash();
           be.microbes(1).played.slash();
           be.startEffect.microbes(1);
-          be.description('Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card');
+          be.description('Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.');
         });
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),

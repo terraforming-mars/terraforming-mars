@@ -8,6 +8,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CupolaCity implements IProjectCard {
     public cost = 16;
@@ -30,5 +33,16 @@ export class CupolaCity implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '029',
+      requirements: CardRequirements.builder((b) => b.oxygen(9).max()),
+      description: 'Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(3);
+        }).nbsp.nbsp.city();
+      }),
     }
 }

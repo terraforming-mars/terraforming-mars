@@ -1,5 +1,6 @@
 import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderItem} from './CardRenderItem';
+import {CardRenderItemSize} from './CardRenderItemSize';
 
 export class CardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
@@ -12,12 +13,20 @@ export class CardRenderDynamicVictoryPoints {
   public static asteroids(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), points, target);
   }
-
   public static microbes(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MICROBES), points, target);
   }
-
   public static animals(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ANIMALS), points, target);
+  }
+  public static oceans(points: number, target: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.OCEANS);
+    item.size = CardRenderItemSize.SMALL;
+    return new CardRenderDynamicVictoryPoints(item, points, target);
+  }
+  public static cities(points: number, target: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.CITY);
+    item.size = CardRenderItemSize.SMALL;
+    return new CardRenderDynamicVictoryPoints(item, points, target);
   }
 }

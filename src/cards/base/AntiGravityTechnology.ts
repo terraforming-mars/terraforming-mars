@@ -26,11 +26,11 @@ export class AntiGravityTechnology implements IProjectCard {
   }
 
   public metadata: CardMetadata = {
-    description: 'Requires 7 science tags',
+    description: 'Requires 7 science tags.',
     cardNumber: '150',
     requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((be) => be.empty().startEffect.megacredits(-2).description('Effect: When you play a card, you pay 2 MC less for it'));
+      b.effectBox((be) => be.empty().startEffect.megacredits(-2).description('Effect: When you play a card, you pay 2 MC less for it.'));
     }),
     victoryPoints: 3,
   };

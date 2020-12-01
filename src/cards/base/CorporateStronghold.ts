@@ -8,6 +8,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CorporateStronghold implements IProjectCard {
     public cost = 11;
@@ -33,5 +35,16 @@ export class CorporateStronghold implements IProjectCard {
     }
     public getVictoryPoints() {
       return -2;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '182',
+      description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile.',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(3);
+        }).nbsp.nbsp.city();
+      }),
+      victoryPoints: -2,
     }
 }

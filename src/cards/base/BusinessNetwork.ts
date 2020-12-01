@@ -55,7 +55,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '110',
-      description: 'Decrease your MC production 1 step',
+      description: 'Decrease your MC production 1 step.',
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => eb.empty().startAction.empty().description()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true).br;
         b.productionBox((pb) => pb.megacredits(-1));

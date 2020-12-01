@@ -30,7 +30,7 @@ export class AirRaid implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: 'C02',
-    description: 'Requires that you lose 1 floater. Steal 5 MC from any player',
+    description: 'Requires that you lose 1 floater. Steal 5 MC from any player.',
     renderData: CardRenderer.builder((b) => {
       b.minus().floaters(1);
       b.text('steal', CardRenderItemSize.MEDIUM, true).megacredits(5).any;

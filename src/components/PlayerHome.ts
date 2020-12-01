@@ -16,6 +16,7 @@ import {playerColorClass} from '../utils/utils';
 import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
+import {TopBar} from './TopBar';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -44,6 +45,7 @@ export const PlayerHome = Vue.component('player-home', {
     'turmoil': Turmoil,
     'Button': Button,
     'sortable-cards': SortableCards,
+    'top-bar': TopBar,
   },
   mixins: [PlayerMixin],
   methods: {
@@ -107,6 +109,8 @@ export const PlayerHome = Vue.component('player-home', {
                     </form>
                 </dialog>
             </section>
+
+            <top-bar :player="player" />
 
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">

@@ -7,6 +7,7 @@ export class PreferencesManager {
       'hide_tag_overview',
       'hide_turnorder',
       'hide_corporation_names',
+      'hide_top_bar',
       'small_cards',
       'remove_background',
       'magnify_cards',

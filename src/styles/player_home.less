@@ -778,3 +778,25 @@
 .blink-animation {
   animation:smoth-fade-animation 2000ms infinite;
 }
+
+.top-bar {
+    position: sticky;
+    margin: -40px 0 0 auto;
+    z-index: 20;
+    top: -12px;
+
+    .player-status {
+        display: none !important;
+    }
+
+    .player-info {
+        background: #303030 !important;
+        border-radius: 0 !important;
+        border: 1px solid #ffffff2e;
+        filter: drop-shadow(0 0 3px #ffffff2e);
+
+        .player-status-and-res {
+            min-width: 564px !important;
+        }
+    }
+}

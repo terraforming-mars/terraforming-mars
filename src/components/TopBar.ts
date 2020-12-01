@@ -18,7 +18,7 @@ export const TopBar = Vue.component('top-bar', {
   },
   template: `
     <div class="top-bar">
-      <PlayerInfo :player="player" :activePlayer="player" actionLabel="ahoy" playerIndex="0" :hideZeroTags="false"/>
+      <PlayerInfo :player="player" :activePlayer="player" actionLabel="ahoy" playerIndex="0" :hideZeroTags="true"/>
     </div>
   `,
 });

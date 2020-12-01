@@ -23,6 +23,8 @@ import {SpaceType} from '../src/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
 import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
 import {CardName} from '../src/CardName';
+import {Player} from '../src/Player';
+import {Color} from '../src/Color';
 
 describe('Game', function() {
   it('should initialize with right defaults', function() {
@@ -331,10 +333,10 @@ describe('Game', function() {
   });
 
   it('Should return players in turn order', function() {
-    const player1 = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.GREEN.newPlayer();
-    const player3 = TestPlayers.YELLOW.newPlayer();
-    const player4 = TestPlayers.RED.newPlayer();
+    const player1 = new Player('p1', Color.BLUE, false, 0, 'p1-id');
+    const player2 = new Player('p2', Color.GREEN, false, 0, 'p2-id');
+    const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
+    const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = new Game('gto', [player1, player2, player3, player4], player3);
 
     let players = game.getPlayers();

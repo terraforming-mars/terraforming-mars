@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {Inventrix} from '../../../src/cards/corporation/Inventrix';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Inventrix', function() {
   let card : Inventrix; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Inventrix();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

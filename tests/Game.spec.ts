@@ -10,7 +10,7 @@ import * as constants from '../src/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/Phase';
-import {maxOutOceans, setCustomGameOptions} from './TestingUtils';
+import {maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/Resources';
 import {ISpace} from '../src/ISpace';
@@ -28,8 +28,8 @@ import {CardName} from '../src/CardName';
 
 describe('Game', function() {
   it('should initialize with right defaults', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     expect(game.gameOptions.corporateEra).is.true;
     expect(game.getGeneration()).to.eq(1);
@@ -58,7 +58,7 @@ describe('Game', function() {
   });
 
   it('sets starting production if corporate era not selected', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions({corporateEra: false});
 
     new Game('foobar', [player], player, gameOptions);
@@ -202,8 +202,8 @@ describe('Game', function() {
   });
 
   it('Should not finish game before Venus is terraformed, if chosen', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('venusterraform', [player, player2], player);
     game.gameOptions.venusNextExtension = true;
     game.gameOptions.requiresVenusTrackCompletion = true;
@@ -224,8 +224,8 @@ describe('Game', function() {
   });
 
   it('Should finish game if Mars and Venus is terraformed, if chosen', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('venusterraform', [player, player2], player);
     game.gameOptions.venusNextExtension = true;
     game.gameOptions.requiresVenusTrackCompletion = true;
@@ -245,8 +245,8 @@ describe('Game', function() {
   });
 
   it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('venusterraform', [player, player2], player);
     game.gameOptions.venusNextExtension = true;
     game.gameOptions.requiresVenusTrackCompletion = true;
@@ -296,7 +296,7 @@ describe('Game', function() {
   });
 
   it('Should not give TR or raise oxygen for final greenery placements', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     game.generation = 14;
 
@@ -396,7 +396,7 @@ describe('Game', function() {
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const secondPlayer = new Player('vestigial', Color.RED, false);
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
@@ -423,7 +423,7 @@ describe('Game', function() {
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const secondPlayer = new Player('vestigial', Color.RED, false);
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = new Game('foobar', [player, secondPlayer], player, gameOptions);
@@ -450,8 +450,8 @@ describe('Game', function() {
   });
 
   it('Generates random milestones and awards', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true});
     const game = new Game('foobar', [player, player2], player, gameOptions);
 
@@ -468,8 +468,8 @@ describe('Game', function() {
   });
 
   it('specifically-requested corps override expansion corps', function() {
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const corpsFromTurmoil = [
       CardName.LAKEFRONT_RESORTS,
       CardName.PRISTAR,
@@ -491,7 +491,7 @@ describe('Game', function() {
    * to match
    */
   it('serializes every property', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);

@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {EarthOffice} from '../../../src/cards/base/EarthOffice';
+import {Sponsors} from '../../../src/cards/base/Sponsors';
+import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SaturnSurfing', function() {
   let card : SaturnSurfing; let player : Player;
 
   beforeEach(function() {
     card = new SaturnSurfing();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

@@ -1,16 +1,15 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {FieldCappedCity} from '../../../src/cards/promo/FieldCappedCity';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
 import {Resources} from '../../../src/Resources';
-import {FieldCappedCity} from '../../../src/cards/promo/FieldCappedCity';
+import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FieldCappedCity', function() {
   it('Should play', function() {
     const card = new FieldCappedCity();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player, game);
     expect(action).is.not.undefined;

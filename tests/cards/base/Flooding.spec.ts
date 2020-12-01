@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {Flooding} from '../../../src/cards/base/Flooding';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {LandClaim} from '../../../src/cards/base/LandClaim';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
 import {SpaceType} from '../../../src/SpaceType';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {LandClaim} from '../../../src/cards/base/LandClaim';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Flooding', function() {
   let card : Flooding; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Flooding();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

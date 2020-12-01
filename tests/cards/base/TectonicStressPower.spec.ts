@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TectonicStressPower', function() {
   let card : TectonicStressPower; let player : Player;
 
   beforeEach(function() {
     card = new TectonicStressPower();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

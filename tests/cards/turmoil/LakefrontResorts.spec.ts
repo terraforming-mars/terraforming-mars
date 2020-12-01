@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {
     const card2 = new LakefrontResorts();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const player2 = new Player('test', Color.RED, false);
     const game = new Game('foobar', [player, player2], player);
     const play = card2.play(player);

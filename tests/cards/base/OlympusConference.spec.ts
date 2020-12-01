@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {OlympusConference} from '../../../src/cards/base/OlympusConference';
-import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
-import {ScienceTagCard} from '../../../src/cards/community/ScienceTagCard';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Bushes} from '../../../src/cards/base/Bushes';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
+import {OlympusConference} from '../../../src/cards/base/OlympusConference';
 import {Research} from '../../../src/cards/base/Research';
+import {ScienceTagCard} from '../../../src/cards/community/ScienceTagCard';
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new OlympusConference();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

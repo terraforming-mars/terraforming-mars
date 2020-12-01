@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {ResearchGrant} from '../../../src/cards/community/ResearchGrant';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ResearchGrant', function() {
   let card : ResearchGrant; let player : Player;
 
   beforeEach(function() {
     card = new ResearchGrant();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

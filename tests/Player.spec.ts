@@ -10,14 +10,15 @@ import {PowerSupplyConsortium} from '../src/cards/base/PowerSupplyConsortium';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
+import {TestPlayers} from './TestingUtils';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     expect(player.corporationCard).is.undefined;
   });
   it('Should throw error if nothing to process', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
     expect(function() {
@@ -26,8 +27,8 @@ describe('Player', function() {
   });
   it('Should run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const player3 = new Player('test3', Color.YELLOW, false);
     const game = new Game('foobar', [player, player2, player3], player);
     player2.addProduction(Resources.ENERGY, 2);
@@ -43,7 +44,7 @@ describe('Player', function() {
   });
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
@@ -64,7 +65,7 @@ describe('Player', function() {
   });
   it('Should run select amount for Insulation', function() {
     const card = new Insulation();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     player.addProduction(Resources.HEAT, 2);
     const game = new Game('foobar', [player], player);
     const action = card.play(player, new Game('foobar', [player, player], player));

@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/cards/base/Capital';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 import {Board} from '../../../src/Board';
 
 describe('Capital', function() {
@@ -15,7 +14,7 @@ describe('Capital', function() {
 
   beforeEach(function() {
     card = new Capital();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

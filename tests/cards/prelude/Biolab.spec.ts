@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {Biolab} from '../../../src/cards/prelude/Biolab';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Biolab', function() {
   it('Should play', function() {
     const card = new Biolab();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);

@@ -1,15 +1,14 @@
 
 import {expect} from 'chai';
-import {SpaceStation} from '../../../src/cards/base/SpaceStation';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Bushes} from '../../../src/cards/base/Bushes';
+import {SpaceStation} from '../../../src/cards/base/SpaceStation';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SpaceStation', function() {
   it('Should play', function() {
     const card = new SpaceStation();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play();
     expect(action).is.undefined;

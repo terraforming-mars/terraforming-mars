@@ -1,17 +1,15 @@
-
 import {expect} from 'chai';
-import {Thorgate} from '../../../src/cards/corporation/Thorgate';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Pets} from '../../../src/cards/base/Pets';
 import {EnergySaving} from '../../../src/cards/base/EnergySaving';
+import {Pets} from '../../../src/cards/base/Pets';
+import {Thorgate} from '../../../src/cards/corporation/Thorgate';
+import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Thorgate', function() {
   it('Should play', function() {
     const card = new Thorgate();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player, game);
     expect(action).is.undefined;

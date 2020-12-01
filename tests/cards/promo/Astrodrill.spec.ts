@@ -1,19 +1,19 @@
 import {expect} from 'chai';
+import {ICard} from '../../../src/cards/ICard';
 import {Astrodrill} from '../../../src/cards/promo/Astrodrill';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {CometAiming} from '../../../src/cards/promo/CometAiming';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {CometAiming} from '../../../src/cards/promo/CometAiming';
-import {ICard} from '../../../src/cards/ICard';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Astrodrill', function() {
   let card : Astrodrill; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Astrodrill();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
 
     card.play();

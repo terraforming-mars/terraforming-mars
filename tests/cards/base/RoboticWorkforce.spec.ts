@@ -1,25 +1,25 @@
 import {expect} from 'chai';
-import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
-import {NoctisFarming} from '../../../src/cards/base/NoctisFarming';
-import {FoodFactory} from '../../../src/cards/base/FoodFactory';
-import {Resources} from '../../../src/Resources';
-import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
-import {Capital} from '../../../src/cards/base/Capital';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/cards/ares/SolarFarm';
+import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
+import {Capital} from '../../../src/cards/base/Capital';
+import {FoodFactory} from '../../../src/cards/base/FoodFactory';
+import {NoctisFarming} from '../../../src/cards/base/NoctisFarming';
+import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
+import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new RoboticWorkforce();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

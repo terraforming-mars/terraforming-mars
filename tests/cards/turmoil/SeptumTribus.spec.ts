@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
 import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('SeptumTribus', function() {
   it('Should play', function() {
     const card = new SeptumTribus();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const player2 = new Player('test', Color.RED, false);
 
     const gameOptions = setCustomGameOptions();
@@ -38,7 +38,7 @@ describe('SeptumTribus', function() {
 
   it('Cannot act without Turmoil expansion', function() {
     const card = new SeptumTribus();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions({turmoilExtension: false});
     const game = new Game('foobar', [player], player, gameOptions);

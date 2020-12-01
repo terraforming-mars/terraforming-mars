@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AdvancedEcosystems', function() {
   let card : AdvancedEcosystems; let player : Player;
 
   beforeEach(function() {
     card = new AdvancedEcosystems();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     player.playedCards.push(new TundraFarming(), new ResearchNetwork());
   });
 

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {Virus} from '../../../src/cards/base/Virus';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Birds} from '../../../src/cards/base/Birds';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Predators} from '../../../src/cards/base/Predators';
+import {Virus} from '../../../src/cards/base/Virus';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Virus', function() {
   let card : Virus; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Virus();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

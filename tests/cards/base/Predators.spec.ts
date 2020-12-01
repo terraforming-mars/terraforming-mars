@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {Predators} from '../../../src/cards/base/Predators';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/cards/base/Fish';
 import {Pets} from '../../../src/cards/base/Pets';
+import {Predators} from '../../../src/cards/base/Predators';
 import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
-import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
 import {ICard} from '../../../src/cards/ICard';
+import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Predators', function() {
   let card : Predators; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Predators();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

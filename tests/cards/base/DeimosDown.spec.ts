@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {DeimosDown} from '../../../src/cards/base/DeimosDown';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DeimosDown', function() {
   let card : DeimosDown; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new DeimosDown();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Tactician} from '../../src/milestones/Tactician';
-import {Color} from '../../src/Color';
 import {Player} from '../../src/Player';
 import {Virus} from '../../src/cards/base/Virus';
 import {RoboticWorkforce} from '../../src/cards/base/RoboticWorkforce';
@@ -25,13 +24,14 @@ import {SpaceHotels} from '../../src/cards/prelude/SpaceHotels';
 import {GMOContract} from '../../src/cards/turmoil/GMOContract';
 import {PioneerSettlement} from '../../src/cards/colonies/PioneerSettlement';
 import {Algae} from '../../src/cards/base/Algae';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Tactician', function() {
   let milestone : Tactician; let player : Player;
 
   beforeEach(function() {
     milestone = new Tactician();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t claim without 5 cards with requirements', function() {

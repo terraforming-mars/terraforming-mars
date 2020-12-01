@@ -1,16 +1,16 @@
 import {expect} from 'chai';
+import {Research} from '../../../src/cards/base/Research';
 import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Research} from '../../../src/cards/base/Research';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DuskLaserMining', function() {
   let card : DuskLaserMining; let player : Player;
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play if not enough science tags', function() {

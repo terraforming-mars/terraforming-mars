@@ -1,18 +1,18 @@
 import {expect} from 'chai';
+import {IProjectCard} from '../../src/cards/IProjectCard';
 import {Pluto} from '../../src/colonies/Pluto';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {SelectCard} from '../../src/inputs/SelectCard';
-import {IProjectCard} from '../../src/cards/IProjectCard';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Pluto', function() {
   let pluto: Pluto; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(function() {
     pluto = new Pluto();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(pluto);

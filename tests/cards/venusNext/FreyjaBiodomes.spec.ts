@@ -1,20 +1,20 @@
-import {ICard} from '../../../src/cards/ICard';
 import {expect} from 'chai';
-import {FreyjaBiodomes} from '../../../src/cards/venusNext/FreyjaBiodomes';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {ICard} from '../../../src/cards/ICard';
 import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
+import {FreyjaBiodomes} from '../../../src/cards/venusNext/FreyjaBiodomes';
 import {VenusianAnimals} from '../../../src/cards/venusNext/VenusianAnimals';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FreyjaBiodomes', function() {
   let card : FreyjaBiodomes; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new FreyjaBiodomes();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

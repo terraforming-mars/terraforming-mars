@@ -1,13 +1,11 @@
-
 import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('EarthCatapult', function() {
   it('Should play', function() {
     const card = new EarthCatapult();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const action = card.play();
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

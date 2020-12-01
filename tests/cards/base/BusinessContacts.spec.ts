@@ -1,15 +1,14 @@
 
 import {expect} from 'chai';
 import {BusinessContacts} from '../../../src/cards/base/BusinessContacts';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BusinessContacts', function() {
   it('Should play', function() {
     const card = new BusinessContacts();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player, game);
     expect(action).is.not.undefined;

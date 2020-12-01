@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {ScientificCommunity} from '../../src/turmoil/globalEvents/ScientificCommunity';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Ants} from '../../src/cards/base/Ants';
 import {SecurityFleet} from '../../src/cards/base/SecurityFleet';
+import {Game} from '../../src/Game';
 import {Resources} from '../../src/Resources';
+import {ScientificCommunity} from '../../src/turmoil/globalEvents/ScientificCommunity';
+import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('ScientificCommunity', function() {
   it('resolve play', function() {
     const card = new ScientificCommunity();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     const turmoil = new Turmoil(game);
 

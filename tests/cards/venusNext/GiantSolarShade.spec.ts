@@ -1,17 +1,14 @@
-
 import {expect} from 'chai';
-import {GiantSolarShade} from '../../../src/cards/venusNext/GiantSolarShade';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {GiantSolarShade} from '../../../src/cards/venusNext/GiantSolarShade';
+import {Game} from '../../../src/Game';
+import {Reds} from '../../../src/turmoil/parties/Reds';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('GiantSolarShade', function() {
   it('Should play', function() {
     const card = new GiantSolarShade();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play(player, game);
     expect(action).is.undefined;
@@ -20,7 +17,7 @@ describe('GiantSolarShade', function() {
   });
 
   it('Should play with Reds and Dirigibles', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
     const game = new Game('foobar', [player], player, gameOptions);
         game.turmoil!.rulingParty = new Reds();

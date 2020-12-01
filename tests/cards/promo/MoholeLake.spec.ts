@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {MoholeLake} from '../../../src/cards/promo/MoholeLake';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Fish} from '../../../src/cards/base/Fish';
 import {Ants} from '../../../src/cards/base/Ants';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Fish} from '../../../src/cards/base/Fish';
 import {ICard} from '../../../src/cards/ICard';
+import {MoholeLake} from '../../../src/cards/promo/MoholeLake';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MoholeLake', function() {
   let card : MoholeLake; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new MoholeLake();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

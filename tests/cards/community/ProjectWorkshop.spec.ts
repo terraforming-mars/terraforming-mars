@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {ProjectWorkshop} from '../../../src/cards/community/ProjectWorkshop';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {CardType} from '../../../src/cards/CardType';
 import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {CardType} from '../../../src/cards/CardType';
+import {ProjectWorkshop} from '../../../src/cards/community/ProjectWorkshop';
 import {ICard} from '../../../src/cards/ICard';
+import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ProjectWorkshop', function() {
   let card : ProjectWorkshop; let player : Player; let game : Game; let advancedAlloys : AdvancedAlloys;
 
   beforeEach(function() {
     card = new ProjectWorkshop();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
     advancedAlloys = new AdvancedAlloys();
 

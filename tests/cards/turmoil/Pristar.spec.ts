@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Pristar} from '../../../src/cards/turmoil/Pristar';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Pristar', function() {
   it('Should play', function() {
     const card = new Pristar();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const play = card.play(player);
     player.corporationCard = card;

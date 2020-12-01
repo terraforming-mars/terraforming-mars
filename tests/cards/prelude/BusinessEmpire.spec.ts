@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/cards/prelude/BusinessEmpire';
-import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BusinessEmpire', function() {
   let card : BusinessEmpire; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessEmpire();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

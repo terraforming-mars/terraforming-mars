@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {SymbioticFungus} from '../../../src/cards/base/SymbioticFungus';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
+import {SymbioticFungus} from '../../../src/cards/base/SymbioticFungus';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SymbioticFungus', function() {
   let card : SymbioticFungus; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SymbioticFungus();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

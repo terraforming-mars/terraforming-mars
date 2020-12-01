@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('LocalShading', function() {
   let card : LocalShading; let player : Player;
 
   beforeEach(function() {
     card = new LocalShading();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

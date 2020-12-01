@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {CEOsFavoriteProject} from '../../../src/cards/base/CEOsFavoriteProject';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Birds} from '../../../src/cards/base/Birds';
+import {CEOsFavoriteProject} from '../../../src/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CEOsFavoriteProject', function() {
   let card : CEOsFavoriteProject; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

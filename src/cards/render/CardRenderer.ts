@@ -454,6 +454,32 @@ class Builder {
     return this;
   }
 
+  /**
+   * Mark any amount to be a multiplier 'X'
+   */
+  public get multiplier(): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "multiplier" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"multiplier" could be called on CardRenderItem only');
+      }
+
+      item.amountInside = true;
+      item.multiplier = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
   public secondaryTag(tag: Tags | 'req'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();

@@ -9,6 +9,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EnergyMarket implements IProjectCard {
   public name = CardName.ENERGY_MARKET;
@@ -62,4 +64,18 @@ export class EnergyMarket implements IProjectCard {
     }
     return undefined;
   }
+  public metadata: CardMetadata = {
+    cardNumber: 'X03',
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.megacredits(2).multiplier.startAction.text('x').energy(1);
+        eb.description('Action: Spend 2X MC to gain X energy.');
+      }).br;
+      b.or().br;
+      b.effectBox((eb) => {
+        eb.productionBox((pb) => pb.minus().energy(1)).startAction.megacredits(8);
+        eb.description('Action: Decrease energy production 1 step to gain 8 MC.');
+      });
+    }),
+  };
 }

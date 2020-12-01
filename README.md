@@ -39,6 +39,7 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * MAX_GAME_DAYS: How many days to keep unfinished games before deleting them
 * WAITING_FOR_TIMEOUT: (default 5000) How many milliseconds to check for game update on multi-player games
 * ASSET_CACHE_MAX_AGE: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
+* SERVER_ID: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
 
 ### Deployment
 

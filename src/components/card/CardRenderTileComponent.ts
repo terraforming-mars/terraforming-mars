@@ -47,6 +47,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-commercial-district');
         } else if (type === TileType.DEIMOS_DOWN) {
           classes.push('card-tile-symbol-deimos-down');
+        } else if (type === TileType.GREAT_DAM) {
+          classes.push('card-tile-symbol-great-dam');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

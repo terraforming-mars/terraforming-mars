@@ -589,18 +589,6 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-    [CardName.HEATHER, ` 
-      <div class="content">
-        <div class="requirements">-14 C</div>
-        <div class="production-box">
-          <div class="plant production"></div>
-        </div>
-        <div class="plant resource" style="margin-left:20px;"></div>
-        <div class="description">
-          (Requires -14 C or warmer. Increase your plant production 1 step. Gain 1 plant.)
-        </div>
-      </div>
-`],
     [CardName.PEROXIDE_POWER, ` 
       <div class="content">
         <div class="production-box production-box-size2a">
@@ -845,26 +833,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="tile special-tile"><div class="special-tile-symbol special-tile--industrial-center"></div></div>*
             <div class="description ">
                 (Place this tile adjacent to a city tile.)
-            </div>
-        </div>
-`],
-    [CardName.HIRED_RAIDERS, ` 
-      <div class="content">
-        STEAL 2 <div class="resource steel red-outline"></div> <br>OR STEAL <div class="resource money red-outline">3</div>
-        <div class="description">
-          (Steal up to 2 steel, or 3 MC from any player.)
-        </div>
-      </div>
-`],
-    [CardName.HACKERS, ` 
-        <div class="content ">
-          <div class="points points-big">-1</div>
-            <div class="production-box production-box-size2a ">
-                <div class="production-prefix minus"></div><div class="energy production "></div><div class="money production red-outline">2</div>
-                <div class="production-prefix plus"></div><div class="money production ">2</div>
-            </div>
-            <div class="description ">
-                (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.)
             </div>
         </div>
 `],
@@ -1319,18 +1287,6 @@ export const HTML_DATA: Map<string, string> =
                </div>
           </div>
 `],
-    [CardName.HEAT_TRAPPERS, ` 
-          <div class="content ">
-            <div class="points points-big">-1</div>
-              <div class="production-box production-box-size2a">
-                <div class="production-prefix minus"></div><div class="heat production red-outline "></div><div class="heat production red-outline "></div>
-                  <div class="production-prefix plus"></div><div class="energy production "></div>
-              </div>
-              <div class="description ">
-                (Decrease any heat production 2 steps and increase your Energy production 1 step.)
-              </div>
-          </div>
-`],
     [CardName.SOIL_FACTORY, ` 
           <div class="content ">
             <div class="points points-big ">1</div>
@@ -1683,15 +1639,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-    [CardName.HYDROGEN_TO_VENUS, ` 
-            <div class="content ">
-              <div class="tile venus-tile"></div><br><br>
-              <div class="resource floater"><div class="card-icon tag-venus"></div></div> / <div class="resource-tag tag-jovian"></div><br><br>
-                <div class="description">
-                  (Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have)
-                </div>
-            </div>
-`],
     [CardName.IO_SULPHUR_RESEARCH, ` 
             <div class="content ">
               <div class="points points-big">2</div>
@@ -2033,17 +1980,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-    [CardName.HOUSE_PRINTING, ` 
-            <div class="content ">
-              <div class="points points-big">1</div>
-              <div class="production-box">
-                <div class="production steel"></div>
-              </div><br>
-              <div class="description">
-                (Increase your steel production 1 step.)
-              </div>
-            </div>
-`],
     [CardName.LAVA_TUBE_SETTLEMENT, ` 
             <div class="content ">
               <div class="production-box production-box-size1a">
@@ -2139,16 +2075,6 @@ export const HTML_DATA: Map<string, string> =
                   <div class="red-arrow "></div> <div class="floater resource "></div>*
                   <div class="description ">
                     (Action: Add 1 floater to ANOTHER card.)
-                  </div>
-              </div>
-`],
-    [CardName.HEAVY_TAXATION, ` 
-              <div class="content ">
-                <div class="points points-big">-1</div>
-                <div class="requirements">2 Earth</div>
-                <div class="production-box"><div class="production money">2</div></div> <div style="margin-left:20px;" class="resource money">4</div>
-                  <div class="description ">
-                    (Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.)
                   </div>
               </div>
 `],
@@ -4171,15 +4097,6 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box"><div class="money production ">-2</div></div>
         <div class="description">
             (Decrease your MC production 2 steps.)
-        </div>
-    </div>
-`],
-    [CardName.HI_TECH_LAB, ` 
-    <div class="content">
-        <div class="points points-big">1</div>
-        X <div class="energy resource "></div> <div class="red-arrow"></div> X <div class="card resource "></div>*
-        <div class="description">
-            (Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.)
         </div>
     </div>
 `],

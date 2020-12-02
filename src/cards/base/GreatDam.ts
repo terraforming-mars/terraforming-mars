@@ -30,7 +30,7 @@ export class GreatDam implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.energy(2));
       }),
-      description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps.)',
+      description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps.',
       victoryPoints: 1,
     };
 }

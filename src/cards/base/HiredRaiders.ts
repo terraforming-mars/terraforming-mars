@@ -6,6 +6,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class HiredRaiders implements IProjectCard {
     public cost = 1;
@@ -57,5 +60,14 @@ export class HiredRaiders implements IProjectCard {
       if (availableActions.options.length > 0) return availableActions;
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '124',
+      renderData: CardRenderer.builder((b) => {
+        b.text('steal', CardRenderItemSize.SMALL, true).steel(2).any.br;
+        b.or().br;
+        b.text('steal', CardRenderItemSize.SMALL, true).megacredits(3).any;
+      }),
+      description: 'Steal up to 2 steel, or 3 MC from any player.',
+    };
 }
 

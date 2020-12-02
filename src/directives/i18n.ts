@@ -1,10 +1,15 @@
 
+import {DynamicTranslatableStringModel} from '../models/DynamicTranslatableStringModel';
 import {PreferencesManager} from '../components/PreferencesManager';
 import * as raw_translations from '../../assets/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
-export function translateText(englishText: string): string {
+export function translateText(englishText: string | DynamicTranslatableStringModel): string {
+  if (typeof englishText !== "string") {
+    englishText = translateText(englishText.message);
+    // TODO replace array values with englishText.values
+  }
   let translatedText = englishText;
   const lang = PreferencesManager.loadValue('lang') || 'en';
   if (lang === 'en') return englishText;

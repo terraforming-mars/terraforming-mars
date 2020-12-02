@@ -14,7 +14,7 @@ import {SelectColony} from './SelectColony';
 
 export class AndOptions implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.AND_OPTIONS;
-    public title: string = '';
+    public title = '';
     public buttonLabel: string = 'Save';
     public options: Array<PlayerInput>;
     constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectColony | SelectCard<CorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {

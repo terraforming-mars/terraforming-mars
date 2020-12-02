@@ -1,4 +1,5 @@
 
+import {DynamicTranslatableStringModel} from '../models/DynamicTranslatableStringModel';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {HowToPay} from './HowToPay';
@@ -10,7 +11,7 @@ export class SelectHowToPay implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
     public buttonLabel: string = 'Pay'; // no input button
     constructor(
-        public title: string,
+        public title: string | DynamicTranslatableStringModel,
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
         public canUseHeat: boolean,

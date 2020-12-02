@@ -917,12 +917,12 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 
     let coming;
-    if (game.turmoil.commingGlobalEvent) {
+    if (game.turmoil.comingGlobalEvent) {
       coming = {
-        name: game.turmoil.commingGlobalEvent.name,
-        description: game.turmoil.commingGlobalEvent.description,
-        revealed: game.turmoil.commingGlobalEvent.revealedDelegate,
-        current: game.turmoil.commingGlobalEvent.currentDelegate,
+        name: game.turmoil.comingGlobalEvent.name,
+        description: game.turmoil.comingGlobalEvent.description,
+        revealed: game.turmoil.comingGlobalEvent.revealedDelegate,
+        current: game.turmoil.comingGlobalEvent.currentDelegate,
       };
     }
 

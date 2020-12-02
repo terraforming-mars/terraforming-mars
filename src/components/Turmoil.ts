@@ -98,10 +98,10 @@ export const Turmoil = Vue.component('turmoil', {
             <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.distant.current)" v-i18n>{{ turmoil.distant.current }}</div>
             <div class="event-content"><div class="event-text" v-i18n>{{ turmoil.distant.description }}</div></div>
           </div>
-          <div v-if="turmoil.comming" class="global-event global-event--comming">
-            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.comming.revealed)" v-i18n>{{ turmoil.comming.revealed }}</div>
-            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.comming.current)" v-i18n>{{ turmoil.comming.current }}</div>
-            <div class="event-content" v-i18n>{{ turmoil.comming.description }}</div>
+          <div v-if="turmoil.coming" class="global-event global-event--coming">
+            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.coming.revealed)" v-i18n>{{ turmoil.coming.revealed }}</div>
+            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.coming.current)" v-i18n>{{ turmoil.coming.current }}</div>
+            <div class="event-content" v-i18n>{{ turmoil.coming.description }}</div>
           </div>
           <div v-if="turmoil.current" class="global-event global-event--current">
             <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.current.revealed)" v-i18n>{{ turmoil.current.revealed }}</div>

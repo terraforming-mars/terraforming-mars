@@ -13,14 +13,19 @@ export const TopBar = Vue.component('top-bar', {
     PlayerInfo,
   },
   data: function() {
-    return {};
+    return {
+      componentKey: 0,
+    };
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     toggleBar() {
       const newVal = this.isExpanded() ? '1': '';
       PreferencesManager.saveValue('hide_top_bar', newVal);
       PreferencesManager.preferencesValues.set('hide_top_bar', this.isExpanded());
-      this.$forceUpdate();
+      this.forceRerender();
     },
     isExpanded(): boolean {
       const val = PreferencesManager.loadValue('hide_top_bar');
@@ -35,7 +40,7 @@ export const TopBar = Vue.component('top-bar', {
     },
   },
   template: `
-    <div :class="formatCssClass()">
+    <div :class="formatCssClass()" :key="componentKey">
       <PlayerInfo v-show="isExpanded()" :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
       <div class="top-bar-collapser" v-on:click="toggleBar()">
         <img src="/assets/arrows_left.png">

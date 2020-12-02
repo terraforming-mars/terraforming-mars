@@ -242,7 +242,7 @@ checkComponent(
 checkComponent(
   'src/components/TopBar',
   require('./build/src/components/TopBar').TopBar,
-  [],
+  ['componentKey'],
 );
 
 function checkComponent(name, component, dataProperties) {

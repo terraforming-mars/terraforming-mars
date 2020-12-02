@@ -33,9 +33,9 @@ export class VoteOfNoConfidence implements IProjectCard {
     public play(player: Player, game: Game) {
       if (game.turmoil !== undefined) {
             game.turmoil.chairman! = player.id;
-            const index = game.turmoil.delegate_reserve.indexOf(player.id);
+            const index = game.turmoil.delegateReserve.indexOf(player.id);
             if (index > -1) {
-              game.turmoil.delegate_reserve.splice(index, 1);
+              game.turmoil.delegateReserve.splice(index, 1);
             }
             player.increaseTerraformRating(game);
       }

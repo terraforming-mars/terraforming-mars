@@ -211,10 +211,9 @@ describe('Turmoil', function() {
 
   it('serializes all properties', function() {
     const serialized = turmoil.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const turmoilKeys = Object.keys(turmoil);
-    serializedKeys.sort();
-    turmoilKeys.sort();
-    expect(serializedKeys).to.deep.eq(turmoilKeys);
+    const turmoil2 = new Turmoil();
+    turmoil2.loadFromJSON(serialized);
+    const serialized2 = turmoil2.serialize();
+    expect(serialized2).to.deep.eq(serialized);
   });
 });

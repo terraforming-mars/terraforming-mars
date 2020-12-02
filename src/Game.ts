@@ -245,7 +245,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
-        this.turmoil = new Turmoil(this);
+        this.turmoil = new Turmoil();
+        this.turmoil.loadFromGame(this);
       }
 
       // Setup Ares hazards
@@ -535,17 +536,17 @@ export class Game implements ISerializable<SerializedGame, Game> {
         // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
         if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
           game.turmoil.lobby.clear();
-          game.turmoil.delegate_reserve = [];
+          game.turmoil.delegateReserve = [];
           game.getPlayers().forEach((player) => {
             if (game.turmoil !== undefined) {
               game.turmoil.lobby.add(player.id);
               for (let i = 0; i < 6; i++) {
-                game.turmoil.delegate_reserve.push(player.id);
+                game.turmoil.delegateReserve.push(player.id);
               }
             }
           });
           for (let i = 0; i < 13; i++) {
-            game.turmoil.delegate_reserve.push('NEUTRAL');
+            game.turmoil.delegateReserve.push('NEUTRAL');
           }
         }
 
@@ -1796,7 +1797,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
-        const turmoil = new Turmoil(this);
+        const turmoil = new Turmoil();
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
 
         // Rebuild lobby

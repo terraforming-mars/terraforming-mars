@@ -916,9 +916,9 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       };
     }
 
-    let comming;
+    let coming;
     if (game.turmoil.commingGlobalEvent) {
-      comming = {
+      coming = {
         name: game.turmoil.commingGlobalEvent.name,
         description: game.turmoil.commingGlobalEvent.description,
         revealed: game.turmoil.commingGlobalEvent.revealedDelegate,
@@ -944,7 +944,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       lobby: lobby,
       reserve: reserve,
       distant: distant,
-      comming: comming,
+      coming: coming,
       current: current,
     };
   } else {

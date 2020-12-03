@@ -932,23 +932,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.HERBIVORES, ` 
-        <div class="content hover-hide-res">
-            <div class="points ">1/2<div class="animal resource "></div></div>
-            <div class="requirements">8% O2</div>
-            <div class="tile greenery-tile"></div> : <div class="animal resource "></div>
-            <div class="description">
-              (Effect: When you place a greenery tile, add an Animal to this card.)
-            </div>
-            <div class="animal resource herbivores-starting-animal"></div>
-            <div class="production-box production-box-size1a">
-                <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
-            </div>
-            <div class="description herbivores-requirement">
-              (Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
-            </div>
-        </div>
-`],
     [CardName.INSECTS, ` 
         <div class="content ">
             <div class="requirements ">6% O2</div>

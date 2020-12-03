@@ -955,17 +955,17 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
 
       this.setWaitingFor(
         new SelectCard({
-            message: 'Select a card to keep and pass the rest to ${0}',
-            values: [playerName]
-          },
-          'Keep',
-          cards,
-          (foundCards: Array<IProjectCard>) => {
-            this.draftedCards.push(foundCards[0]);
-            cards = cards.filter((card) => card !== foundCards[0]);
-            game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-            return undefined;
-          }, 1, 1,
+          message: 'Select a card to keep and pass the rest to ${0}',
+          values: [playerName],
+        },
+        'Keep',
+        cards,
+        (foundCards: Array<IProjectCard>) => {
+          this.draftedCards.push(foundCards[0]);
+          cards = cards.filter((card) => card !== foundCards[0]);
+          game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          return undefined;
+        }, 1, 1,
         ), () => { },
       );
     }

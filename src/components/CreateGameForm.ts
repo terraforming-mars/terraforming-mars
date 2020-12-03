@@ -196,7 +196,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
     },
     getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
-      return $t('Player ' + player.index + ' name');
+      return $t({
+        message: 'Player {0} name',
+        values: [String(player.index)],
+      });
     },
     updateCustomCorporationsList: function(newCustomCorporationsList: Array<CardName>) {
       const component = (this as any) as CreateGameModel;

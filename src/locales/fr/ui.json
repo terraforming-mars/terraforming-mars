@@ -42,12 +42,7 @@
 	"Create Game": "Créer la Partie",
 
 	"Players": "Joueurs",
-	"Player 1 name": "Nom du joueur 1",
-	"Player 2 name": "Nom du joueur 2",
-	"Player 3 name": "Nom du joueur 3",
-	"Player 4 name": "Nom du joueur 4",
-	"Player 5 name": "Nom du joueur 5",
-	"Player 6 name": "Nom du joueur 6",
+	"Player {0} name": "Nom du joueur {0}",
 	"Color:": "Couleur:",
 	"Red": "Rouge",
 	"Green": "Vert",

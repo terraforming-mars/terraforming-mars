@@ -29,7 +29,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     player.addResourceTo(card, 5);
 
-    const action = card.action(player) as OrOptions;
+    const action = card.action(player, game) as OrOptions;
     action.options[0].cb(3);
     expect(player.megaCredits).to.eq(9);
     expect(card.resourceCount).to.eq(2);
@@ -39,7 +39,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     expect(card.resourceCount).to.eq(0);
 
-    card.action(player);
+    card.action(player, game);
     expect(card.resourceCount).to.eq(1);
   });
 });

@@ -33,6 +33,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         if (this.item.size !== undefined) {
           classes.push(`card-ocean--${this.item.size}`);
         }
+      } else if (type === CardRenderItemType.GREENERY) {
+        classes.push('card-global-requirement');
+        classes.push('card-greenery-global-requirement');
+        if (this.item.size !== undefined) {
+          classes.push(`card-greenery--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.VENUS) {
         classes.push('card-global-requirement');
         classes.push('card-venus-global-requirement');
@@ -109,6 +115,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-event');
         } else if (type === CardRenderItemType.SPACE) {
           classes.push('card-tag-space');
+        } else if (type === CardRenderItemType.SCIENCE) {
+          classes.push('card-tag-science');
         } else if (type === CardRenderItemType.JOVIAN) {
           classes.push('card-tag-jovian');
         } else if (type === CardRenderItemType.VENUS) {

@@ -778,3 +778,55 @@
 .blink-animation {
   animation:smoth-fade-animation 2000ms infinite;
 }
+
+.top-bar {
+    position: sticky;
+    margin: -40px 0 0 auto;
+    z-index: 20;
+    top: -12px;
+
+    .top-bar-collapser {
+        background: #303030;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 8px 14px 8px 11px;
+        border-radius: 0 10px 10px 0;
+        margin: -43px 0 0 -5px;
+        cursor: pointer;
+
+        img {
+            width: 20px;
+        }
+    }
+
+    .player-status {
+        display: none !important;
+    }
+
+    .player-info {
+        background: #303030 !important;
+        border-radius: 0 !important;
+        border: 1px solid #ffffff2e;
+        filter: drop-shadow(0 0 3px #ffffff2e);
+
+        .player-status-and-res {
+            min-width: 564px !important;
+        }
+    }
+}
+
+.top-bar-collapsed {
+    margin: -32px 0 0 -20px;
+
+    .player-info {
+        display: none;
+    }
+
+    .top-bar-collapser {
+        margin: 11px 0 0 auto;
+
+        img {
+            transform: scaleX(-1);
+        }
+    }
+}

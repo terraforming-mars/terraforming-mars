@@ -14,6 +14,9 @@ export const PlayerTags = Vue.component('player-tags', {
     isActivePlayer: {
       type: Boolean,
     },
+    hideZeroTags: {
+      type: Boolean,
+    },
   },
   components: {
     'tag-count': TagCount,
@@ -53,10 +56,8 @@ export const PlayerTags = Vue.component('player-tags', {
       return !this.player.showOtherPlayersVP && !this.isActivePlayer;
     },
     showShortTags: function(): boolean {
+      if (this.hideZeroTags === true) return true;
       return isTagsViewConcise(this.$root);
-    },
-    showLongTags: function(): boolean {
-      return !isTagsViewConcise(this.$root);
     },
     getTagCount(tagName: Tags | SpecialTags): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
@@ -91,7 +92,7 @@ export const PlayerTags = Vue.component('player-tags', {
             </div>
             <div class="player-tags-secondary">
                 <tag-count v-if="showShortTags()" v-for="tag in player.tags" :key="tag.tag" :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
-                <tag-count v-if="showLongTags()" v-for="tagName in getTagsPlaceholders()" :key="tagName" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
+                <tag-count v-if="! showShortTags()" v-for="tagName in getTagsPlaceholders()" :key="tagName" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
             </div>
         </div>
     `,

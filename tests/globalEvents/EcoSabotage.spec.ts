@@ -1,17 +1,16 @@
 import {expect} from 'chai';
-import {EcoSabotage} from '../../src/turmoil/globalEvents/EcoSabotage';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Resources} from '../../src/Resources';
+import {EcoSabotage} from '../../src/turmoil/globalEvents/EcoSabotage';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('EcoSabotage', function() {
   it('resolve play', function() {
     const card = new EcoSabotage();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     const turmoil = new Turmoil(game);
     turmoil.initGlobalEvent(game);

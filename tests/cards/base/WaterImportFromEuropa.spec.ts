@@ -1,17 +1,16 @@
 import {expect} from 'chai';
 import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuropa';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {maxOutOceans} from '../../TestingUtils';
+import {Player} from '../../../src/Player';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WaterImportFromEuropa();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

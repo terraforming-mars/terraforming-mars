@@ -1,21 +1,21 @@
 import {expect} from 'chai';
+import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {ImportedHydrogen} from '../../../src/cards/base/ImportedHydrogen';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {Pets} from '../../../src/cards/base/Pets';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Pets} from '../../../src/cards/base/Pets';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {SelectOption} from '../../../src/inputs/SelectOption';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ImportedHydrogen', function() {
   let card : ImportedHydrogen; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ImportedHydrogen();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

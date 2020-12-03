@@ -1,18 +1,17 @@
 import {expect} from 'chai';
 import {PoliticalAlliance} from '../../../src/cards/turmoil/PoliticalAlliance';
-import {Player} from '../../../src/Player';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('PoliticalAlliance', function() {
   let card : PoliticalAlliance; let player : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new PoliticalAlliance();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player, player], player, gameOptions);

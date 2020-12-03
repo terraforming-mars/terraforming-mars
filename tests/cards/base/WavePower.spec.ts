@@ -1,17 +1,16 @@
 import {expect} from 'chai';
 import {WavePower} from '../../../src/cards/base/WavePower';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('WavePower', function() {
   let card : WavePower; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WavePower();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

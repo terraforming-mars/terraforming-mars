@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BuildingIndustries', function() {
   let card : BuildingIndustries; let player : Player;
 
   beforeEach(function() {
     card = new BuildingIndustries();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

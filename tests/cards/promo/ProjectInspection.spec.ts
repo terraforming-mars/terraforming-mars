@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {ProjectInspection} from '../../../src/cards/promo/ProjectInspection';
 import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {ProjectInspection} from '../../../src/cards/promo/ProjectInspection';
 import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ProjectInspection', function() {
   let card : ProjectInspection; let player : Player; let game : Game; let actionCard: RestrictedArea;
 
   beforeEach(function() {
     card = new ProjectInspection();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
     actionCard = new RestrictedArea();
     player.playedCards.push(actionCard);

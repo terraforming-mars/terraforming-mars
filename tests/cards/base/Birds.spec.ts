@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/cards/base/Birds';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Birds', function() {
   let card : Birds; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Birds();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 
@@ -21,7 +21,7 @@ describe('Birds', function() {
   });
 
   it('Should play', function() {
-    const player3 = new Player('safe', Color.RED, false);
+    const player3 = TestPlayers.GREEN.newPlayer();
     const game = new Game('foobar', [player, player2, player3], player);
 
     player2.addProduction(Resources.PLANTS, 2);

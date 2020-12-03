@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/cards/prelude/Psychrophiles';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Psychrophiles', function() {
   let card : Psychrophiles; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Psychrophiles();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

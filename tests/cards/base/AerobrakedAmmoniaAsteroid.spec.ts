@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
 import {Ants} from '../../../src/cards/base/Ants';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AerobrakedAmmoniaAsteroid', function() {
   let card : AerobrakedAmmoniaAsteroid; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AerobrakedAmmoniaAsteroid();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

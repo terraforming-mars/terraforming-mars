@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {ExtremeColdFungus} from '../../../src/cards/base/ExtremeColdFungus';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Ants} from '../../../src/cards/base/Ants';
+import {ExtremeColdFungus} from '../../../src/cards/base/ExtremeColdFungus';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ExtremeColdFungus', function() {
   let card : ExtremeColdFungus; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new ExtremeColdFungus();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {Triton} from '../../src/colonies/Triton';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Triton', function() {
   let triton: Triton; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(function() {
     triton = new Triton();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(triton);

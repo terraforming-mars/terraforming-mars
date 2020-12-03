@@ -1,17 +1,16 @@
 import {expect} from 'chai';
 import {KelpFarming} from '../../../src/cards/base/KelpFarming';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('KelpFarming', function() {
   let card : KelpFarming; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new KelpFarming();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

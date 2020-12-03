@@ -1,14 +1,13 @@
 
 import {expect} from 'chai';
 import {TropicalResort} from '../../../src/cards/base/TropicalResort';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TropicalResort', function() {
   it('Should play', function() {
     const card = new TropicalResort();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     player.addProduction(Resources.HEAT, 2);
     const action = card.play(player);
     expect(action).is.undefined;

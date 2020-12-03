@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {AcquiredSpaceAgency} from '../../../src/cards/prelude/AcquiredSpaceAgency';
-import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Tags} from '../../../src/cards/Tags';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AcquiredSpaceAgency', function() {
   it('Should play', function() {
     const card = new AcquiredSpaceAgency();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);

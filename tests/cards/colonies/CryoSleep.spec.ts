@@ -1,15 +1,14 @@
 import {expect} from 'chai';
 import {CryoSleep} from '../../../src/cards/colonies/CryoSleep';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Ceres} from '../../../src/colonies/Ceres';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CryoSleep', function() {
   it('Should play', function() {
     const card = new CryoSleep();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;

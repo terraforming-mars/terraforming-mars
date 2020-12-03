@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {AtmoCollectors} from '../../../src/cards/colonies/AtmoCollectors';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AtmoCollectors', function() {
   let card : AtmoCollectors; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AtmoCollectors();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

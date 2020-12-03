@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {Research} from '../../../src/cards/base/Research';
+import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
+import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AgricolaInc', function() {
   let card : AgricolaInc; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AgricolaInc();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
 
     card.play(player);

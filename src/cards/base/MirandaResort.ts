@@ -5,6 +5,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MirandaResort implements IProjectCard {
     public cost = 12;
@@ -19,4 +21,14 @@ export class MirandaResort implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '051',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.megacredits(1).slash().earth().played;
+        });
+      }),
+      description: 'Increase your MC production 1 step for each Earth tag you have.',
+      victoryPoints: 1,
+    };
 }

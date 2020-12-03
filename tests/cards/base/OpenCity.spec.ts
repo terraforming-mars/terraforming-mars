@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {OpenCity} from '../../../src/cards/base/OpenCity';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('OpenCity', function() {
   let card : OpenCity; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new OpenCity();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

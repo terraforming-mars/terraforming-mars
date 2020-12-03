@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBacteria';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('NitriteReducingBacteria', function() {
   let card : NitriteReducingBacteria; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NitriteReducingBacteria();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

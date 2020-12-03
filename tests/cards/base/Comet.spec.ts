@@ -1,20 +1,20 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/cards/base/Comet';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Comet', function() {
   let card : Comet; let player : Player; let player2 : Player; let player3: Player; let game : Game;
 
   beforeEach(function() {
     card = new Comet();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
-    player3 = new Player('test3', Color.YELLOW, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    player3 = TestPlayers.YELLOW.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
   });
 

@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {TitanAirScrapping} from '../../../src/cards/colonies/TitanAirScrapping';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TitanAirScrapping', function() {
   let card : TitanAirScrapping; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new TitanAirScrapping();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

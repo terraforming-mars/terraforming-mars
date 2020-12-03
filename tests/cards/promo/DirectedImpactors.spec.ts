@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
 import {DirectedImpactors} from '../../../src/cards/promo/DirectedImpactors';
+import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
 import {MAX_TEMPERATURE} from '../../../src/constants';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {Game} from '../../../src/Game';
 import {HowToPay} from '../../../src/inputs/HowToPay';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DirectedImpactors', function() {
   let card : DirectedImpactors; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new DirectedImpactors();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

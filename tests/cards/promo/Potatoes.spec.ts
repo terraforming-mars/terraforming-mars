@@ -1,16 +1,16 @@
 import {expect} from 'chai';
+import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/cards/promo/Potatoes';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Potatoes', function() {
   let card : Potatoes; let player : Player;
 
   beforeEach(function() {
     card = new Potatoes();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

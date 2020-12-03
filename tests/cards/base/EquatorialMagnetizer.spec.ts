@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {EquatorialMagnetizer} from '../../../src/cards/base/EquatorialMagnetizer';
-import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('EquatorialMagnetizer', function() {
   let card : EquatorialMagnetizer; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new EquatorialMagnetizer();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

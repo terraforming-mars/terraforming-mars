@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {SoilFactory} from '../../../src/cards/base/SoilFactory';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SoilFactory', function() {
   let card : SoilFactory; let player : Player;
 
   beforeEach(function() {
     card = new SoilFactory();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

@@ -233,6 +233,11 @@ class Builder {
     return this;
   }
 
+  public science(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
     return this;
@@ -259,6 +264,13 @@ class Builder {
 
   public city(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
     const item = new CardRenderItem(CardRenderItemType.CITY);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+    const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     this._addRowItem(item);
     return this;

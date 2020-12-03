@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {Sabotage} from '../../../src/cards/base/Sabotage';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Ants} from '../../../src/cards/base/Ants';
+import {Sabotage} from '../../../src/cards/base/Sabotage';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MonsInsurance', function() {
   let card : MonsInsurance; let player : Player; let player2: Player; let player3: Player; let game: Game;
@@ -15,9 +15,9 @@ describe('MonsInsurance', function() {
   beforeEach(function() {
     card = new MonsInsurance();
 
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
-    player3 = new Player('test3', Color.GREEN, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    player3 = TestPlayers.GREEN.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
   });
 

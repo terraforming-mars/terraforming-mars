@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {AerospaceMission} from '../../../src/cards/community/AerospaceMission';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {Game} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
+import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
+import {Player} from '../../../src/Player';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('AerospaceMission', function() {
   let card : AerospaceMission; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AerospaceMission();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
     game = new Game('foobar', [player, player], player, gameOptions);

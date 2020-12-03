@@ -1,15 +1,13 @@
-
 import {expect} from 'chai';
-import {MedicalLab} from '../../../src/cards/base/MedicalLab';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Capital} from '../../../src/cards/base/Capital';
+import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MedicalLab', function() {
   it('Should play', function() {
     const card = new MedicalLab();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);

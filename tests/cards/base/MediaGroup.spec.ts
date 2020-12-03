@@ -1,15 +1,13 @@
-
 import {expect} from 'chai';
 import {MediaGroup} from '../../../src/cards/base/MediaGroup';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Virus} from '../../../src/cards/base/Virus';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MediaGroup', function() {
   it('Should play', function() {
     const card = new MediaGroup();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const action = card.play();
     expect(action).is.undefined;

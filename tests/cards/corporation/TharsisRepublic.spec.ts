@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TharsisRepublic', function() {
   let card : TharsisRepublic; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new TharsisRepublic();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
     player.corporationCard = card;
@@ -57,7 +57,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Gives 2 MC production in solo mode', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     card.play(player, game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

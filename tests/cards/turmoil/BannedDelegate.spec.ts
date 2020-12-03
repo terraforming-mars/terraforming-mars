@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {BannedDelegate} from '../../../src/cards/turmoil/BannedDelegate';
-import {Player} from '../../../src/Player';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectDelegate} from '../../../src/inputs/SelectDelegate';
+import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {SelectDelegate} from '../../../src/inputs/SelectDelegate';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('Banned Delegate', function() {
   let card : BannedDelegate; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new BannedDelegate();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player, player2], player, gameOptions);

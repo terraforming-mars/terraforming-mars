@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/cards/base/CarbonateProcessing';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CarbonateProcessing', function() {
   let card : CarbonateProcessing; let player : Player;
 
   beforeEach(function() {
     card = new CarbonateProcessing();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

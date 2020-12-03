@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {InterplanetaryTrade} from '../../../src/cards/promo/InterplanetaryTrade';
-import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
-import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
-import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
-import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
-import {LunarBeam} from '../../../src/cards/base/LunarBeam';
 import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
-import {Color} from '../../../src/Color';
+import {LunarBeam} from '../../../src/cards/base/LunarBeam';
+import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
+import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
+import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
+import {InterplanetaryTrade} from '../../../src/cards/promo/InterplanetaryTrade';
+import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('InterplanetaryTrade', function() {
   let card : InterplanetaryTrade; let player : Player;
 
   beforeEach(function() {
     card = new InterplanetaryTrade();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

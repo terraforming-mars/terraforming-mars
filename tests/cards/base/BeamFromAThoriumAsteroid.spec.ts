@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {BeamFromAThoriumAsteroid} from '../../../src/cards/base/BeamFromAThoriumAsteroid';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BeamFromAThoriumAsteroid', function() {
   let card : BeamFromAThoriumAsteroid; let player : Player;
 
   beforeEach(function() {
     card = new BeamFromAThoriumAsteroid();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Cannot play without a Jovian tag', function() {

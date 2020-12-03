@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {HomeworldSupport} from '../../src/turmoil/globalEvents/HomeworldSupport';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Sponsors} from '../../src/cards/base/Sponsors';
+import {Game} from '../../src/Game';
+import {Resources} from '../../src/Resources';
+import {HomeworldSupport} from '../../src/turmoil/globalEvents/HomeworldSupport';
+import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('HomeworldSupport', function() {
   it('resolve play', function() {
     const card = new HomeworldSupport();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     const turmoil = new Turmoil(game);
 

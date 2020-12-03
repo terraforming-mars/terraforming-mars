@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {LunarBeam} from '../../../src/cards/base/LunarBeam';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('LunarBeam', function() {
   let card : LunarBeam; let player : Player;
 
   beforeEach(function() {
     card = new LunarBeam();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can play', function() {

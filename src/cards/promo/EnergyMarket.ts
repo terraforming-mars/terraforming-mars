@@ -36,13 +36,16 @@ export class EnergyMarket implements IProjectCard {
         player.setResource(Resources.ENERGY, amount);
         player.setResource(Resources.MEGACREDITS, -(amount * 2));
       }
+
+      game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
       return undefined;
     }, Math.floor(availableMC / 2));
   }
 
-  private getMegacreditsOption(player: Player) {
+  private getMegacreditsOption(player: Player, game: Game) {
     player.addProduction(Resources.ENERGY, -1);
     player.setResource(Resources.MEGACREDITS, 8);
+    game.log('${0} decreased energy production 1 step to gain 8 MC', (b) => b.player(player));
     return undefined;
   }
 
@@ -54,13 +57,13 @@ export class EnergyMarket implements IProjectCard {
           return this.getEnergyOption(player, game, availableMC);
         }),
         new SelectOption('Decrease energy production 1 step to gain 8 MC', 'Decrease energy', () => {
-          return this.getMegacreditsOption(player);
+          return this.getMegacreditsOption(player, game);
         }),
       );
     } else if (availableMC >= 2) {
       return this.getEnergyOption(player, game, availableMC);
     } else if (player.getProduction(Resources.ENERGY) >= 1) {
-      return this.getMegacreditsOption(player);
+      return this.getMegacreditsOption(player, game);
     }
     return undefined;
   }

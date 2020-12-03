@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MartianZoo', function() {
   let card : MartianZoo; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new MartianZoo();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

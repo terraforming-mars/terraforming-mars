@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Birds} from '../../../src/cards/base/Birds';
-import {Moss} from '../../../src/cards/base/Moss';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {EcologicalZone} from '../../../src/cards/base/EcologicalZone';
+import {Moss} from '../../../src/cards/base/Moss';
+import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ViralEnhancers', function() {
   let card : ViralEnhancers; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ViralEnhancers();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

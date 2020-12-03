@@ -262,9 +262,13 @@ class Builder {
     return this;
   }
 
-  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
+    // TODO (chosta): add this once #1985 is merged
+    if (withO2) {
+      // item.secondaryTag = 'oxygen';
+    }
     this._addRowItem(item);
     return this;
   }

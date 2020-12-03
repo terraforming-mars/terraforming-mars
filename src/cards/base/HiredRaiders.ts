@@ -63,9 +63,9 @@ export class HiredRaiders implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '124',
       renderData: CardRenderer.builder((b) => {
-        b.text('steal', CardRenderItemSize.SMALL, true).steel(2).any.br;
+        b.text('steal', CardRenderItemSize.MEDIUM, true).steel(2).any.br;
         b.or().br;
-        b.text('steal', CardRenderItemSize.SMALL, true).megacredits(3).any;
+        b.text('steal', CardRenderItemSize.MEDIUM, true).megacredits(3).any;
       }),
       description: 'Steal up to 2 steel, or 3 MC from any player.',
     };

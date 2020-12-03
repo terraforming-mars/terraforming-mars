@@ -38,7 +38,8 @@ export class MagneticFieldDome implements IProjectCard {
       cardNumber: '171',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.minus().energy(2).plants(1);
+          pb.minus().energy(2).br;
+          pb.plus().plants(1);
         });
         b.tr(1);
       }),

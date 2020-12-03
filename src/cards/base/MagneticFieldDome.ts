@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MagneticFieldDome implements IProjectCard {
     public cost = 5;
@@ -31,4 +33,15 @@ export class MagneticFieldDome implements IProjectCard {
       player.increaseTerraformRating(game);
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '171',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(2).plants(1);
+        });
+        b.tr(1);
+      }),
+      description: 'Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
+    };
 }

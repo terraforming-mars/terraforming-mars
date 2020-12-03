@@ -30,8 +30,8 @@ export class MethaneFromTitan implements IProjectCard {
       cardNumber: '018',
       requirements: CardRequirements.builder((b) => b.oxygen(2)),
       renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
-        pb.plus().heat(2).br;
-        pb.plus().plants(2);
+        pb.heat(2).br;
+        pb.plants(2);
       })),
       victoryPoints: 2,
     };

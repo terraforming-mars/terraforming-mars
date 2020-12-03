@@ -25,7 +25,7 @@ export class MirandaResort implements IProjectCard {
       cardNumber: '051',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.megacredits(1).slash().earth();
+          pb.megacredits(1).slash().earth().played;
         });
       }),
       description: 'Increase your MC production 1 step for each Earth tag you have.',

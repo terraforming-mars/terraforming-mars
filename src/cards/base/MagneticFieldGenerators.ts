@@ -39,8 +39,9 @@ export class MagneticFieldGenerators implements IProjectCard {
       cardNumber: '165',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.minus().energy(4).plants(2);
-        });
+          pb.minus().energy(4).digit.br;
+          pb.plus().plants(2);
+        }).br;
         b.tr(3);
       }),
       description: 'Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.',

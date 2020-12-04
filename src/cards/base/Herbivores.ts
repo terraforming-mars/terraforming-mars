@@ -10,6 +10,10 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Herbivores implements IProjectCard, IResourceCard {
     public cost = 12;
@@ -37,4 +41,20 @@ export class Herbivores implements IProjectCard, IResourceCard {
       game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '147',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.greenery().startEffect.animals(1);
+          eb.description('Effect: When you place a greenery tile, add an Animal to this card.');
+        }).br;
+        b.animals(1).productionBox((pb) => pb.minus().plants(1).any).br;
+        b.text('1 VP per 2 Animals on this card', CardRenderItemSize.TINY, true);
+      }),
+      description: {
+        text: 'Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step.',
+        align: 'left',
+      },
+      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
+    };
 }

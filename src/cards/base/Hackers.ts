@@ -5,6 +5,8 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Hackers implements IProjectCard {
     public cost = 3;
@@ -27,5 +29,16 @@ export class Hackers implements IProjectCard {
     public getVictoryPoints() {
       return -1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '125',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).megacredits(2).any.br;
+          pb.plus().megacredits(2);
+        });
+      }),
+      description: 'Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.',
+      victoryPoints: -1,
+    };
 }
 

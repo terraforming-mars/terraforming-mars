@@ -6,6 +6,8 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class FloaterTechnology implements IProjectCard {
     public cost = 7;
@@ -29,6 +31,16 @@ export class FloaterTechnology implements IProjectCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C12',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(1).asterix();
+          eb.description('Action: Add 1 floater to ANOTHER card.');
+        });
+      }),
     }
 }
 

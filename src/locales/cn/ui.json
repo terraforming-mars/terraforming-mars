@@ -171,5 +171,42 @@
     "My Games": "我的对局",
     "Donate": "捐助本站",
     "LoginOut": "登出",
-    "Help Translation": "帮助翻译"
+    "Help Translation": "帮助翻译",
+    
+    
+    "All": "全选",   
+    "Corporate Era": "公司时代",
+    "Randomize board tiles": "随机打乱版图",
+    "Set Predefined Game": "读取未完成游戏",
+    "Ares": "Ares玩家扩",
+    "Fan-made": "玩家自制扩展",
+    "Community": "玩家DIY扩",
+    "Exclude some cards": "禁止使用卡牌",
+    "Custom Colonies list": "自定义殖民地",
+    "Remove negative Global Events": "移除负面动荡事件",
+    "Fast mode": "快速模式",
+    "Beginner Options": "新手选项",
+    "Random Milestones/Awards": "随机里程碑/奖励",
+    "Limited synergy": "随机synergy",
+    "Full random": "完全随机",
+    "Venus Milestone/Award": "金星里程碑/奖励",
+    "Mandatory Venus Terraforming": "必须完成金星改造",
+    "63 TR solo mode": "63 TR获胜模式",
+    "Cards to exclude from the game": "游戏中禁用的卡牌",
+    "Start typing the card name to exclude": "输入卡牌名称（英文）",
+    "Filter": "游戏过滤器",
+    "TR Boost": "TR先给玩家",
+    "Player 1 name": "输入玩家1名字",
+    "Player 2 name": "输入玩家2名字",
+    "Player 3 name": "输入玩家3名字",
+    "Player 4 name": "输入玩家4名字",
+    "Player 5 name": "输入玩家5名字",
+    "Player 6 name": "输入玩家6名字",
+    "Multiplayer Options": "多人玩家游戏选项",
+    "Community": "玩家DIY扩"
+    
+    
+    
+    
+    
 }

@@ -2,6 +2,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EarthCatapult implements IProjectCard {
   public cost = 23;
@@ -17,4 +19,14 @@ export class EarthCatapult implements IProjectCard {
   public getVictoryPoints() {
     return 2;
   }
+  public metadata: CardMetadata = {
+    cardNumber: '070',
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((eb) => {
+        eb.empty().startEffect.megacredits(-2);
+        eb.description('Effect: When you play a card, you pay 2 MC less for it.');
+      });
+    }),
+    victoryPoints: 2,
+  };
 }

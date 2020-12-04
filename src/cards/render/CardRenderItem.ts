@@ -17,7 +17,7 @@ export class CardRenderItem {
   public isPlate?: boolean; // used to mark plate a.k.a. text with golden background
   public size?: CardRenderItemSize;
   // adding tag dependency (top right bubble)
-  // 'req' => used for cutting edge's discount on cards with requirements
+  // 'req' => used for Cutting Edge Technology's discount on cards with requirements
   // TODO (chosta): if we have more than one non Tags secondary tag, add an enum
   public secondaryTag?: Tags | 'req';
   // use this for amount labels like 2x, x, etc.

@@ -4050,17 +4050,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-    [CardName.GEOLOGICAL_SURVEY, `
-    <div class="card-number">A06</div>
-    <div class="content ">
-        <div class="requirements requirements-max">Max 5 Forests</div>
-        <div><div class="ares-tile board-space-tile--empty-tile "></div>: +<div class="resource steel "></div><div class="resource titanium "></div><div class="resource heat "></div><br/>
-        </div><br/>
-        <div class="description " style="text-align:left;">
-            (Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain. Requires 5 or fewer greeneries on Mars.)
-        </div>
-    </div>
-`],
     [CardName.MARKETING_EXPERTS, `
     <div class="card-number">A07</div>
     <div class="content ">

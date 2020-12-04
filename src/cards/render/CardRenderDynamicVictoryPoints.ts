@@ -35,4 +35,7 @@ export class CardRenderDynamicVictoryPoints {
 
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
+  public static floaters(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.FLOATERS), points, target);
+  }
 }

@@ -8,6 +8,10 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Fish implements IActionCard, IProjectCard, IResourceCard {
     public cost = 9;
@@ -33,5 +37,21 @@ export class Fish implements IActionCard, IProjectCard, IResourceCard {
     public action(player: Player) {
       player.addResourceTo(this);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '052',
+      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.animals(1);
+          eb.description('Action: Add 1 Animal to this card.');
+        }).br;
+        b.productionBox((pb) => pb.minus().plants(1).any);
+      }),
+      description: {
+        text: 'Requires +2 C or warmer. Decrease any Plant production 1 step.',
+        align: 'left',
+      },
+      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
     }
 }

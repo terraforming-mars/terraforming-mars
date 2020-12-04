@@ -16,7 +16,12 @@ export class CardRenderItem {
   public isUppercase?: boolean; // if we have text and it's uppercase
   public isPlate?: boolean; // used to mark plate a.k.a. text with golden background
   public size?: CardRenderItemSize;
-  public secondaryTag?: Tags; // adding tag dependency (top right bubble)
+  // adding tag dependency (top right bubble)
+  // 'req' => used for Cutting Edge Technology's discount on cards with requirements
+  // TODO (chosta): if we have more than one non Tags secondary tag, add an enum
+  public secondaryTag?: Tags | 'req';
+  // use this for amount labels like 2x, x, etc.
+  public multiplier?: boolean = false;
   constructor(public type: CardRenderItemType, public amount: number = -1) {
     if (Math.abs(this.amount) > 5) {
       this.showDigit = true;

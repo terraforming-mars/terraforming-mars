@@ -1,5 +1,4 @@
 import {ICard} from '../ICard';
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -10,6 +9,9 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost = 16;
@@ -47,4 +49,14 @@ export class EosChasmaNationalPark implements IProjectCard {
   public getVictoryPoints() {
     return 1;
   }
+  public metadata: CardMetadata = {
+    cardNumber: '026',
+    requirements: CardRequirements.builder((b) => b.temperature(-12)),
+    description: 'Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.',
+    renderData: CardRenderer.builder((b) => {
+      b.animals(1).asterix().plants(3).br;
+      b.productionBox((pb) => pb.megacredits(2));
+    }),
+    victoryPoints: 1,
+  };
 }

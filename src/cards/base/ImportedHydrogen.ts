@@ -16,6 +16,9 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost = 16;
@@ -92,5 +95,16 @@ export class ImportedHydrogen implements IProjectCard {
       }
 
       return new OrOptions(...availableActions);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '019',
+      renderData: CardRenderer.builder((b) => {
+        b.plants(3).br;
+        b.or(CardRenderItemSize.MEDIUM).br;
+        b.microbes(3).digit.asterix().nbsp.or().nbsp;
+        b.animals(2).digit.asterix().br;
+        b.oceans(1);
+      }),
+      description: 'Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.',
     }
 }

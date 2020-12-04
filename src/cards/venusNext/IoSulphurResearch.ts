@@ -33,7 +33,7 @@ export class IoSulphurResearch implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.cards(1).br;
         b.or().br;
-        b.venus(3).played.colon().cards(3).digit;
+        b.venus(3).played.digit.colon().cards(3);
       }),
       description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
       victoryPoints: 2,

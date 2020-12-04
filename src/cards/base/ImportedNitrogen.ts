@@ -39,7 +39,7 @@ export class ImportedNitrogen implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.tr(1).br;
         b.plants(4).br;
-        b.microbes(3).digit.asterix().nbsp.or().nbsp;
+        b.microbes(3).digit.asterix().nbsp;
         b.animals(2).digit.asterix().br;
       }),
       description: 'Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.',

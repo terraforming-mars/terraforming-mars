@@ -196,6 +196,9 @@
             .card-resource-pristar {
                 background-image: url(./assets/resources/pristar.png);
             }
+            .card-resource-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
+            }
             /*special*/
             .card-special {
                 font-size: @font_size_big;
@@ -232,6 +235,7 @@
             .card-or,
             .card-colon {
                 font-size: @font_size_normal;
+                line-height: normal;
             }
             .card-or--small, .card-slash--small {
                 font-size: @font_size_small;
@@ -545,6 +549,12 @@
                 left: -2px;
                 top: 1px;
             }
+            .card-tile-symbol-industrial-center {
+                background-image: url(./assets/tiles/special_tile_icons/industrial_center.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
             .city-tile--M {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
@@ -567,8 +577,8 @@
             }
             .greenery-tile-oxygen--M {
                 background-image: url(./assets/tiles/greenery.png);
-                background-size: 40px;
-                width: 40px;
+                background-size: 47px;
+                width: 47px;
                 height: 47px;
             }
             .card-ocean--S {

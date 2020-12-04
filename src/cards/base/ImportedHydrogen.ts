@@ -18,7 +18,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost = 16;
@@ -100,7 +99,7 @@ export class ImportedHydrogen implements IProjectCard {
       cardNumber: '019',
       renderData: CardRenderer.builder((b) => {
         b.plants(3).br;
-        b.or(CardRenderItemSize.MEDIUM).br;
+        b.or().br;
         b.microbes(3).digit.asterix().nbsp.or().nbsp;
         b.animals(2).digit.asterix().br;
         b.oceans(1);

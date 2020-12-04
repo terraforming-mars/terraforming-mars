@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IoSulphurResearch implements IProjectCard {
     public cost = 17;
@@ -26,4 +28,14 @@ export class IoSulphurResearch implements IProjectCard {
     public getVictoryPoints() {
       return 2;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '232',
+      renderData: CardRenderer.builder((b) => {
+        b.cards(1).br;
+        b.or().br;
+        b.venus(3).played.colon().cards(3).digit;
+      }),
+      description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
+      victoryPoints: 2,
+    };
 }

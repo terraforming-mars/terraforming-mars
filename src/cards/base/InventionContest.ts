@@ -1,4 +1,3 @@
-
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
@@ -6,6 +5,9 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class InventionContest implements IProjectCard {
     public cardType = CardType.EVENT;
@@ -26,5 +28,11 @@ export class InventionContest implements IProjectCard {
           .forEach((c) => game.dealer.discard(c));
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '192',
+      renderData: CardRenderer.builder((b) => {
+        b.text('look at the top 3 cards from the deck. take 1 of them into hand and discard the other two', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

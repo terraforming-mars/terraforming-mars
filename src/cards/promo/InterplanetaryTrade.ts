@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../../cards/CardMetadata';
+import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class InterplanetaryTrade implements IProjectCard {
     public name = CardName.INTERPLANETARY_TRADE;
@@ -22,5 +24,14 @@ export class InterplanetaryTrade implements IProjectCard {
 
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X05',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1));
+        b.slash().diverseTag();
+      }),
+      description: 'Increase your MC production 1 step per different tag you have in play, including this.',
+      victoryPoints: 1,
     }
 }

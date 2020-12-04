@@ -19,7 +19,7 @@ export class CardRenderItem {
   // adding tag dependency (top right bubble)
   // 'req' => used for Cutting Edge Technology's discount on cards with requirements
   // 'oxygen' => used for Greenery tile that increases oxygen on placement
-  // TODO (chosta): if we have more than two (lol) non Tags secondary tag, add an enum
+  // TODO (chosta): if we have more than two non Tags secondary tag, add an enum
   public secondaryTag?: Tags | 'req' | 'oxygen';
   // use this for amount labels like 2x, x, etc.
   public multiplier?: boolean = false;

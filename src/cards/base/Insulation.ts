@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -6,7 +5,8 @@ import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Insulation implements IProjectCard {
     public cost = 2;
@@ -21,5 +21,14 @@ export class Insulation implements IProjectCard {
         player.addProduction(Resources.MEGACREDITS, amount);
         return undefined;
       }, player.getProduction(Resources.HEAT));
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '152',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.text('-X').heat(1).nbsp.text('+').megacredits(0).multiplier;
+        });
+      }),
+      description: 'Decrease your heat production any number of steps and increase your MC production the same number of steps.',
     }
 }

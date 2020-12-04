@@ -21,6 +21,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
+import {LogMessageDataType} from './LogMessageDataType';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
@@ -956,7 +957,10 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       this.setWaitingFor(
         new SelectCard({
           message: 'Select a card to keep and pass the rest to ${0}',
-          values: [playerName],
+          data: [{
+            type: LogMessageDataType.RAW_STRING,
+            value: playerName,
+          }],
         },
         'Keep',
         cards,

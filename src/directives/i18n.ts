@@ -1,16 +1,21 @@
 
-import {DynamicTranslatableStringModel} from '../models/DynamicTranslatableStringModel';
+import {LogMessageDataType} from '../LogMessageDataType';
+import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
 import * as raw_translations from '../../assets/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
-export function translateText(englishText: string | DynamicTranslatableStringModel): string {
-  if (typeof englishText !== 'string') {
-    const values = englishText.values;
-    return translateText(englishText.message)
-      .replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => values[idx]);
-  }
+export function translateMessage(message: Message): string {
+  return translateText(message.message).replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+    if (message.data[idx] !== undefined && message.data[idx].type === LogMessageDataType.RAW_STRING) {
+      return message.data[idx].value;
+    }
+    return '';
+  });
+}
+
+export function translateText(englishText: string): string {
   let translatedText = englishText;
   const lang = PreferencesManager.loadValue('lang') || 'en';
   if (lang === 'en') return englishText;
@@ -58,4 +63,9 @@ export function translateTextNode(el: HTMLElement) {
   translateChildren(el);
 }
 
-export const $t = translateText;
+export const $t = function(msg: string | Message) {
+  if (typeof msg === 'string') {
+    return translateText(msg);
+  }
+  return translateMessage(msg);
+};

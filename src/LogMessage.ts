@@ -1,16 +1,8 @@
 import {LogMessageType} from './LogMessageType';
 import {LogMessageData} from './LogMessageData';
+import {Message} from './Message';
 
-export class LogMessage {
-    public type: LogMessageType;
-    public timestamp: number;
-    public message: string;
-    public data: Array<LogMessageData>;
-
-    constructor(type: LogMessageType, message: string, data: Array<LogMessageData>) {
-      this.type = type;
-      this.timestamp = Date.now();
-      this.message = message;
-      this.data = data;
-    }
+export class LogMessage implements Message {
+    public timestamp = Date.now();
+    constructor(public type: LogMessageType, public message: string, public data: Array<LogMessageData>) {}
 }

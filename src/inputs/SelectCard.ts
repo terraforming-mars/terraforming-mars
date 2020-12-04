@@ -1,5 +1,5 @@
 
-import {DynamicTranslatableStringModel} from '../models/DynamicTranslatableStringModel';
+import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 
@@ -7,7 +7,7 @@ export class SelectCard<T> implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
 
     constructor(
-        public title: string | DynamicTranslatableStringModel,
+        public title: string | Message,
         public buttonLabel: string = 'Save',
         public cards: Array<T>,
         public cb: (cards: Array<T>) => PlayerInput | undefined,

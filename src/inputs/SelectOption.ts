@@ -1,4 +1,4 @@
-import {DynamicTranslatableStringModel} from '../models/DynamicTranslatableStringModel';
+import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {SelectSpace} from './SelectSpace';
@@ -11,7 +11,7 @@ import {ICard} from '../cards/ICard';
 export class SelectOption implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_OPTION;
     constructor(
-        public title: string | DynamicTranslatableStringModel,
+        public title: string | Message,
         public buttonLabel: string = 'Select',
         public cb: () => SelectSpace | SelectHowToPay | AndOptions | SelectOption | SelectAmount | SelectCard<ICard> | undefined) {
       this.buttonLabel = buttonLabel;

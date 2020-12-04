@@ -19,6 +19,7 @@ export enum CardRenderItemType {
   SPACE = 'space',
   EARTH = 'earth',
   JOVIAN = 'jovian',
+  COLONIES = 'colonies',
   SCIENCE = 'science',
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
@@ -34,5 +35,6 @@ export enum CardRenderItemType {
   PLATE = 'plate',
   TEXT = 'text',
   NBSP = 'nbsp',
+  EMPTY_TILE = 'empty_tile',
   // more to come...
 }

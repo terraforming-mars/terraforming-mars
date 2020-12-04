@@ -243,6 +243,13 @@ class Builder {
     return this;
   }
 
+  public colonies(amount: number = 1, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
+    item.size = size;
+    this._addRowItem(item);
+    return this;
+  }
+
   public tradeDiscount(amount: number): Builder {
     const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
     item.amountInside = true;
@@ -279,6 +286,7 @@ class Builder {
     return this;
   }
 
+
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
     return this;
@@ -287,6 +295,11 @@ class Builder {
   public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
+    return this;
+  }
+
+  public emptyTile() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
     return this;
   }
 
@@ -453,7 +466,33 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags): Builder {
+  /**
+   * Mark any amount to be a multiplier 'X'
+   */
+  public get multiplier(): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "multiplier" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"multiplier" could be called on CardRenderItem only');
+      }
+
+      item.amountInside = true;
+      item.multiplier = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public secondaryTag(tag: Tags | 'req'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
@@ -473,7 +512,6 @@ class Builder {
 
     return this;
   }
-
   public get brackets(): Builder {
     this._checkExistingItem();
 

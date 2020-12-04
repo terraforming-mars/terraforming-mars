@@ -27,12 +27,18 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
         } else {
           classes.push('card-tile-capital');
         }
+      } else if (type === TileType.ECOLOGICAL_ZONE) {
+        if (this.item.isAres) {
+          classes.push('card-tile-ares');
+          classes.push('board-space-tile--ecological_zone_ares');
+          // normal eco zone uses symbol (see getHtml)
+        }
       } else if (type === TileType.COMMERCIAL_DISTRICT) {
         if (this.item.isAres) {
           classes.push('card-tile-ares');
           classes.push('board-space-tile--commercial_district_ares');
+          // normal commercial district uses symbol (see getHtml)
         }
-        // normal commercial district uses symbol (see getHtml)
       }
 
       return generateClassString(classes);
@@ -47,6 +53,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-commercial-district');
         } else if (type === TileType.DEIMOS_DOWN) {
           classes.push('card-tile-symbol-deimos-down');
+        } else if (type === TileType.ECOLOGICAL_ZONE) {
+          classes.push('card-tile-symbol-ecological-zone');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

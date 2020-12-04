@@ -22,6 +22,9 @@ export class CardRequirements {
   public hasParty(): boolean {
     return this.requirements.some((req) => req instanceof PartyCardRequirement);
   }
+  public hasPlantsRemoved(): boolean {
+    return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
+  }
 }
 
 class Builder {
@@ -103,6 +106,11 @@ class Builder {
 
   public party(party: PartyName): Builder {
     this.reqs.push(new PartyCardRequirement(party));
+    return this;
+  }
+
+  public plantsRemoved(): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS, -1));
     return this;
   }
 

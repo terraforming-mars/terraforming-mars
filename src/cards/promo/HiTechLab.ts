@@ -7,6 +7,8 @@ import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCardToKeep} from '../../deferredActions/SelectCardToKeep';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class HiTechLab implements IProjectCard {
     public name = CardName.HI_TECH_LAB;
@@ -43,4 +45,14 @@ export class HiTechLab implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: 'X04',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.text('X').energy(1).startAction.text('X').cards(1).asterix();
+          eb.description('Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.');
+        });
+      }),
+      victoryPoints: 1,
+    };
 }

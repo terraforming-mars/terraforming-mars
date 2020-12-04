@@ -5,6 +5,7 @@ import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {Timer} from './Timer';
 
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
@@ -55,6 +56,7 @@ export interface SerializedPlayer {
     steelValue: number;
     terraformRating: number;
     terraformRatingAtGenerationStart: number;
+    timer: Timer;
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;

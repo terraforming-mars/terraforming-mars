@@ -58,6 +58,7 @@ import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
+import {Timer} from './Timer';
 
 export type PlayerId = string;
 
@@ -116,6 +117,8 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
+
+    public timer: Timer = new Timer();
 
     // Colonies
     private fleetSize: number = 1;
@@ -2297,6 +2300,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
+        timer: this.timer,
       };
       if (this.lastCardPlayed !== undefined) {
         result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2387,6 +2391,8 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
 
       // Rebuild each drafted cards
       this.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+
+      this.timer = Timer.fromJSON(d.timer);
 
       return o;
     }

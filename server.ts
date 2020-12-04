@@ -643,6 +643,7 @@ function getPlayer(player: Player, game: Game): string {
     aresExtension: game.gameOptions.aresExtension,
     aresData: game.aresData,
     preludeExtension: game.gameOptions.preludeExtension,
+    timer: player.timer,
   };
   return JSON.stringify(output);
 }
@@ -850,6 +851,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       preludeExtension: game.gameOptions.preludeExtension,
+      timer: player.timer,
     } as PlayerModel;
   });
 }

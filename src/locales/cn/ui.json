@@ -196,17 +196,7 @@
     "Start typing the card name to exclude": "输入卡牌名称（英文）",
     "Filter": "游戏过滤器",
     "TR Boost": "TR先给玩家",
-    "Player 1 name": "输入玩家1名字",
-    "Player 2 name": "输入玩家2名字",
-    "Player 3 name": "输入玩家3名字",
-    "Player 4 name": "输入玩家4名字",
-    "Player 5 name": "输入玩家5名字",
-    "Player 6 name": "输入玩家6名字",
+    "Player ${0} name": "输入玩家${0}名字",
     "Multiplayer Options": "多人玩家游戏选项",
     "Community": "玩家DIY扩"
-    
-    
-    
-    
-    
 }

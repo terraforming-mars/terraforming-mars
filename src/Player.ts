@@ -21,6 +21,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
+import {LogMessageDataType} from './LogMessageDataType';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
@@ -941,7 +942,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     }
 
-    public runDraftPhase(initialDraft: boolean, game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
+    public runDraftPhase(initialDraft: boolean, game: Game, playerName: string, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
         if (!initialDraft) {
@@ -954,16 +955,21 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
 
       this.setWaitingFor(
-        new SelectCard(
-          'Select a card to keep and pass the rest to ' + playerName,
-          'Keep',
-          cards,
-          (foundCards: Array<IProjectCard>) => {
-            this.draftedCards.push(foundCards[0]);
-            cards = cards.filter((card) => card !== foundCards[0]);
-            game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-            return undefined;
-          }, 1, 1,
+        new SelectCard({
+          message: 'Select a card to keep and pass the rest to ${0}',
+          data: [{
+            type: LogMessageDataType.RAW_STRING,
+            value: playerName,
+          }],
+        },
+        'Keep',
+        cards,
+        (foundCards: Array<IProjectCard>) => {
+          this.draftedCards.push(foundCards[0]);
+          cards = cards.filter((card) => card !== foundCards[0]);
+          game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          return undefined;
+        }, 1, 1,
         ), () => { },
       );
     }

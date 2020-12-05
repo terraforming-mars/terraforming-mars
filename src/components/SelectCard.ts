@@ -1,5 +1,6 @@
 
 import Vue from 'vue';
+import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PlayerModel} from '../models/PlayerModel';
@@ -58,6 +59,9 @@ export const SelectCard = Vue.component('select-card', {
         this.playerinput.cards,
       );
     },
+    getTitle: function() {
+      return $t(this.playerinput.title);
+    },
     isOptionalToManyCards: function(): boolean {
       return this.playerinput.maxCardsToSelect !== undefined &&
              this.playerinput.maxCardsToSelect > 1 &&
@@ -68,7 +72,7 @@ export const SelectCard = Vue.component('select-card', {
     },
   },
   template: `<div class="wf-component wf-component--select-card">
-        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{playerinput.title}}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title">{{getTitle()}}</div>
         <label v-for="card in getOrderedCards()" class="cardbox">
             <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
             <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />

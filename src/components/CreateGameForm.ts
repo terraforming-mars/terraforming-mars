@@ -198,9 +198,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
     },
     getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
       return translateMessage({
-        message: 'Player {0} name',
+        message: 'Player ${0} name',
         data: [{
-          type: LogMessageDataType.STRING,
+          type: LogMessageDataType.RAW_STRING,
           value: String(player.index),
         }],
       });

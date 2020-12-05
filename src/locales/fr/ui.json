@@ -42,7 +42,7 @@
 	"Create Game": "Créer la Partie",
 
 	"Players": "Joueurs",
-	"Player {0} name": "Nom du joueur {0}",
+	"Player ${0} name": "Nom du joueur ${0}",
 	"Color:": "Couleur:",
 	"Red": "Rouge",
 	"Green": "Vert",
@@ -58,7 +58,7 @@
 
 
 	"Select initial cards:": "Sélectionnez vos cartes initiales:",
-	"Select a card to keep and pass the rest to": "Sélectionnez la carte à conserver et passez le reste à",
+	"Select a card to keep and pass the rest to ${0}": "Sélectionnez la carte à conserver et passez le reste à ${0}",
 	"Select corporation": "Sélectionnez votre Corporation",
 	"Select 2 Prelude cards": "Sélectionner 2 cartes Prélude",
 	"Select initial cards to buy": "Sélectionnez les cartes initiales à acheter",

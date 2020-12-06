@@ -10,7 +10,11 @@ describe('Insulation', function() {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
+
+    expect(card.canPlay(player)).is.false;
     player.addProduction(Resources.HEAT);
+    expect(card.canPlay(player)).is.true;
+
     const action = card.play(player, game);
     expect(action).is.not.undefined;
     if (action === undefined) return;

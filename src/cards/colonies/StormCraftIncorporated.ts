@@ -71,11 +71,11 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
         heatAmount = amount;
         return undefined;
-      }, Math.min(player.heat, constants.HEAT_FOR_TEMPERATURE)),
+      }, 0, Math.min(player.heat, constants.HEAT_FOR_TEMPERATURE)),
       new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
-      }, Math.min(this.resourceCount, constants.HEAT_FOR_TEMPERATURE / floatersToHeat)),
+      }, 0, Math.min(this.resourceCount, constants.HEAT_FOR_TEMPERATURE / floatersToHeat)),
     );
     raiseTempOptions.title = 'Select resource amounts to raise temp';
 

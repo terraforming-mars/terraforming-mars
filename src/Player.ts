@@ -746,10 +746,10 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           throw new Error('Number not provided for amount');
         }
         if (amount > pi.max) {
-          throw new Error('Amount provided too high');
+          throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
         }
-        if (amount < 0) {
-          throw new Error('Amount provided too low');
+        if (amount < pi.min) {
+          throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
         }
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {

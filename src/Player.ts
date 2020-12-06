@@ -2206,8 +2206,12 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     }
 
     public setWaitingFor(input: PlayerInput, cb: () => void): void {
+      this.timer.start();
       this.waitingFor = input;
-      this.waitingForCb = cb;
+      this.waitingForCb = () => {
+        this.timer.stop();
+        cb();
+      };
     }
 
     private serializePlayedCards(): Array<SerializedCard> {

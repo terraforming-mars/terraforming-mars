@@ -1102,8 +1102,6 @@ export class Game implements ISerializable<SerializedGame, Game> {
 
 
     public playerIsFinishedTakingActions(): void {
-      this.getPlayerById(this.activePlayer).timer.stop();
-
       // Deferred actions hook
       if (this.deferredActions.length > 0) {
         this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
@@ -1198,7 +1196,6 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     private startActionsForPlayer(player: Player) {
-      player.timer.start();
       this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
 

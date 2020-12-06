@@ -1,26 +1,29 @@
-import assert = require('assert');
-
 export class Timer {
   public sum_elapsed: number;
   public started_at: number;
-  public running: boolean;
+  public running: number;
 
-  constructor(sum_elapsed = 0, started_at = new Date().getTime(), running = false) {
+  constructor(sum_elapsed = 0, started_at = new Date().getTime(), running = -1) {
     this.sum_elapsed = sum_elapsed;
     this.started_at = started_at;
     this.running = running;
   }
 
   public start() {
-    assert(!this.running);
-    this.running = true;
-    this.started_at = new Date().getTime();
+    if (this.running === 0) {
+      this.started_at = new Date().getTime();
+    }
+    this.running++;
   }
 
   public stop() {
-    if (this.running) {
-      this.running = false;
-      this.sum_elapsed += new Date().getTime() - this.started_at;
+    const date = new Date().getTime();
+    if (this.running === 0) {
+      return; // skipping timer for first move in game
+    }
+    this.running--;
+    if (this.running === 0) {
+      this.sum_elapsed += date - this.started_at;
     }
   }
 

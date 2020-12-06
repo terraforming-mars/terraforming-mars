@@ -8,6 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost = 17;
@@ -59,4 +62,20 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     private log(game: Game, player: Player, resource: Resources) {
       game.log('${0} spent 1 ${1} to gain 7 MC', (b) => b.player(player).string(resource));
     }
+    public metadata: CardMetadata = {
+      cardNumber: '069',
+      description: {
+        text: 'Oxygen must be 8% or less. Decrease your energy production 1 step.',
+        align: 'left',
+      },
+      requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.plants(1).slash().steel(1).startAction.megacredits(7);
+          eb.description('Action: Spend 1 plant or 1 steel to gain 7MC.');
+        }).br;
+        b.productionBox((pb) => pb.minus().energy(1));
+      }),
+      victoryPoints: 1,
+    };
 }

@@ -5,6 +5,8 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class GalileanWaystation implements IProjectCard {
     public cost = 15;
@@ -23,4 +25,12 @@ export class GalileanWaystation implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+      description: 'Increase your MC production 1 step for every Jovian tag in play.',
+      cardNumber: 'C13',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1).slash().jovian().played.any);
+      }),
+      victoryPoints: 1,
+    };
 }

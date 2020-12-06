@@ -159,11 +159,7 @@
     "Place any final greenery from plants": "Выполнить финальное озеленение",
     "Don't place a greenery": "Не выполнять финального озеленения",
     "Select space for greenery": "Выбрать место для озеленения",
-    "Player 1 name": "Имя игрока 1",
-    "Player 2 name": "Имя игрока 2",
-    "Player 3 name": "Имя игрока 3",
-    "Player 4 name": "Имя игрока 4",
-    "Player 5 name": "Имя игрока 5",
+    "Player ${0} name": "Имя игрока ${0}",
 
     "Select corporation": "Выбрать корпорацию",
     "Select initial cards to buy": "Выбрать стартовые карты для покупки",

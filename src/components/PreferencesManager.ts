@@ -22,7 +22,7 @@ export class PreferencesManager {
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();
     private static localStorageSupported(): boolean {
-      return typeof window['localStorage'] !== undefined && window['localStorage'] !== null;
+      return typeof localStorage !== 'undefined';
     }
 
     static saveValue(name: string, val: string): void {

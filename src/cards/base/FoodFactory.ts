@@ -1,10 +1,11 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class FoodFactory implements IProjectCard {
   public cost = 12;
@@ -22,5 +23,16 @@ export class FoodFactory implements IProjectCard {
   }
   public getVictoryPoints() {
     return 1;
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '041',
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => {
+        pb.minus().plants(1).br;
+        pb.plus().megacredits(4);
+      });
+    }),
+    description: 'Decrease your Plant production 1 step and increase your MC production 4 steps',
+    victoryPoints: 1,
   }
 }

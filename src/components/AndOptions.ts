@@ -3,6 +3,7 @@ import {PlayerInputFactory} from './PlayerInputFactory';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {Button} from '../components/common/Button';
+import {$t} from '../directives/i18n';
 
 export const AndOptions = Vue.component('and-options', {
   props: {
@@ -57,7 +58,7 @@ export const AndOptions = Vue.component('and-options', {
     this.$data.responded = [];
     if (this.showtitle) {
       children.push(
-        createElement('div', {'class': 'wf-title'}, playerInput.title),
+        createElement('div', {'class': 'wf-title'}, $t(playerInput.title)),
       );
     }
     if (playerInput.options !== undefined) {

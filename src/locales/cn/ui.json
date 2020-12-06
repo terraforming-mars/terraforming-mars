@@ -174,6 +174,40 @@
     "Help Translation": "帮助翻译",
     
     
+    
+    
+    
+    
+    "Game Home": "游戏主页",
+    "Send players their links below. As game administrator pick your link to use.": "请将名字上的链接复制给其他小伙伴进行游戏，如果你是游戏创建者请选择你的名字进行游戏",
+    "Drafted Cards": "已选择卡牌",
+    "Select space for ocean tile": "在地图上为你的海洋板块选择一个地方放置",
+    "Select space for first ocean": "在地图上为你的第一片海洋板块选择一个地方放置",
+    "Select space for second ocean": "在地图上为你的第二片海洋板块选择一个地方放置",
+    "Select space for city tile": "在地图上为你的城市板块选择一个地方放置",
+    "Select space for greenery tile": "在地图上为你的绿化板块选择一个地方放置",
+    "show": "看牌",
+    "hide": "隐藏",
+    "Game log": "游戏记录",
+    "Select prelude card to play": "选择需要打出的前序卡牌",
+    "Pay trade fee": "支付贸易费用",
+    "Select colony tile for trade": "选择需要交易的殖民地",
+    "Pass for this generation": "跳过本时代",
+    "Confirm": "确认",
+    "Increase": "提升",
+    "Buy": "购买",
+    "Skip this action": "跳过这个行动",
+    "Keep": "保留",
+    "Start": "开始游戏",
+    "Play": "打出",
+    "Trade": "进行贸易",
+    "Send delegate": "派出代表",
+    "Play card": "打出卡牌",
+    "Build": "建造",
+    "End": "结束",
+    "Sell": "卖出",
+    "Undo": "反悔",
+        
     "All": "全选",   
     "Corporate Era": "公司时代",
     "Randomize board tiles": "随机打乱版图",
@@ -196,17 +230,7 @@
     "Start typing the card name to exclude": "输入卡牌名称（英文）",
     "Filter": "游戏过滤器",
     "TR Boost": "TR先给玩家",
-    "Player 1 name": "输入玩家1名字",
-    "Player 2 name": "输入玩家2名字",
-    "Player 3 name": "输入玩家3名字",
-    "Player 4 name": "输入玩家4名字",
-    "Player 5 name": "输入玩家5名字",
-    "Player 6 name": "输入玩家6名字",
+    "Player ${0} name": "输入玩家${0}名字",
     "Multiplayer Options": "多人玩家游戏选项",
     "Community": "玩家DIY扩"
-    
-    
-    
-    
-    
 }

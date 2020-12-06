@@ -3,13 +3,14 @@ import {Color} from '../Color';
 import {BoardName} from '../BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
-import {$t} from '../directives/i18n';
+import {translateMessage} from '../directives/i18n';
 import {IGameData} from '../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
 import {ColonyName} from '../colonies/ColonyName';
 import {CardsFilter} from './CardsFilter';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
+import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 
 export interface CreateGameModel {
@@ -196,7 +197,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
     },
     getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
-      return $t('Player ' + player.index + ' name');
+      return translateMessage({
+        message: 'Player ${0} name',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(player.index),
+        }],
+      });
     },
     updateCustomCorporationsList: function(newCustomCorporationsList: Array<CardName>) {
       const component = (this as any) as CreateGameModel;

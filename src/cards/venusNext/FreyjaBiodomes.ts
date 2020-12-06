@@ -9,6 +9,9 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class FreyjaBiodomes implements IProjectCard {
     public cost = 14;
@@ -54,5 +57,18 @@ export class FreyjaBiodomes implements IProjectCard {
 
     public getVictoryPoints() {
       return 2;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '227',
+      requirements: CardRequirements.builder((b) => b.venus(10)),
+      renderData: CardRenderer.builder((b) => {
+        b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
+        b.productionBox((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
+      }),
+      description: {
+        text: 'Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, MC +2.',
+        align: 'left',
+      },
+      victoryPoints: 2,
     }
 }

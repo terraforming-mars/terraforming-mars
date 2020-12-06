@@ -6,6 +6,8 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class HeatTrappers implements IProjectCard {
     public cost = 6;
@@ -26,4 +28,15 @@ export class HeatTrappers implements IProjectCard {
     public getVictoryPoints() {
       return -1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '178',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().heat(2).any.br;
+          pb.plus().energy(1);
+        });
+      }),
+      description: 'Decrease any heat production 2 steps and increase your Energy production 1 step.',
+      victoryPoints: -1,
+    };
 }

@@ -13,9 +13,8 @@
         position: relative;
         .card-requirements {
             width: 70%;
-            height: 25px;
+            min-height: 25px;
             line-height: 25px;
-            text-align: center;
             font-weight: normal;
             font-size: 15px;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
@@ -28,6 +27,19 @@
             );
             font-family: Ubuntu;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            flex-flow: row;
+            align-items: center;
+            .party {
+                background: #ddd;
+                padding: 0px 10px 0px 10px;
+                border: 1px solid #666;
+                border-radius: 20px;
+                text-transform: uppercase;
+                height: 18px;
+                line-height: 18px;
+            }
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);
@@ -35,6 +47,7 @@
             background-position: -4px -4px;
             filter: grayscale(0.2);
         }
+        
         .card-content {
             // background: grey;
             color: black;
@@ -98,14 +111,6 @@
                 background-image: url(./assets/global-parameters/temperature.png);
                 width: 14px;
                 background-size: 14px 46px;
-            }
-            .card-greenery-global-requirement {
-                background-image: url(./assets/tiles/greenery.png);
-                background-size: 50px 46px;
-                width: 50px;
-            }
-            .card-greenery-no-O2-global-requirement {
-                background-image: url(./assets/tiles/greenery_no_O2.png);
             }
             .card-ocean-global-requirement {
                 background-image: url(./assets/tiles/ocean.png);
@@ -229,7 +234,7 @@
                 font-size: @font_size_big;
             }
             .card-or--small, .card-slash--small {
-                font-size: @font_size_normal;
+                font-size: @font_size_small;
             }
 
             .card-res-amount {
@@ -245,8 +250,8 @@
             }
             .card-icon {
                 position: absolute;
-                right: -5px;
-                top: -10px;
+                right: -4px;
+                top: -8px;
                 margin: 0;
                 width: 20px;
                 height: 20px;
@@ -272,6 +277,17 @@
                 height: 40px;
                 width: 48px;
                 background-size: 48px;
+            }
+            .card-resource-colony {
+                background-image: url(./assets/tiles/colony.png);
+                height: 40px;
+                width: 46px;
+                background-size: 46px;
+            }
+            .card-resource-colony-S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
             }
             /*turmoil special*/
             .card-influence {
@@ -345,6 +361,13 @@
                 font-size: 42px;
                 vertical-align: middle;
                 background:white;
+            }
+            /* secondary tags */
+            .tag-req {
+                border-radius: 0px;
+                height: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
             }
             /*production*/
             .card-production-box {
@@ -510,9 +533,40 @@
                 left: -2px;
                 top: 1px;
             }
+            .card-tile-symbol-great-dam {
+                background-image: url(./assets/tiles/special_tile_icons/great_dam.png);
+                position: relative;
+                left: -2px;
+                top: -1px;
+            }
+            .card-tile-symbol-ecological-zone {
+                background-image: url(./assets/tiles/special_tile_icons/ecological_zone.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
             .city-tile--M {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .city-tile--S {
+                background-image: url(./assets/tiles/city.png);
+                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                width: 30px;
+                height: 32px;
+                background-size: 30px 32px;
+            }
+            .greenery-tile--M {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .greenery-tile-oxygen--M {
+                background-image: url(./assets/tiles/greenery.png);
                 background-size: 40px;
                 width: 40px;
                 height: 47px;
@@ -524,13 +578,6 @@
                 vertical-align: middle !important;
                 box-shadow: none !important;
                 background-repeat: no-repeat;
-            }
-            .city-tile--S {
-                background-image: url(./assets/tiles/city.png);
-                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-                width: 30px;
-                height: 32px;
-                background-size: 30px 32px;
             }
             .card-tr {
                 background-image: url(./assets/resources/tr.png);

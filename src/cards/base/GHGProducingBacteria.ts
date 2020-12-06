@@ -11,6 +11,9 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
@@ -56,4 +59,20 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
       if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
     }
+    public metadata: CardMetadata = {
+      description: 'Requires 4% oxygen.',
+      cardNumber: '034',
+      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: Add 1 Microbe to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.microbes(2).startAction.temperature(1);
+          eb.description('Action: Remove 2 Microbes to raise temperature 1 step.');
+        });
+      }),
+    };
 }

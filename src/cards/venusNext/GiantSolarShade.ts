@@ -7,6 +7,8 @@ import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class GiantSolarShade implements IProjectCard {
     public cost = 27;
@@ -29,4 +31,10 @@ export class GiantSolarShade implements IProjectCard {
     public play(player: Player, game: Game) {
       return game.increaseVenusScaleLevel(player, 3);
     }
+    public metadata: CardMetadata = {
+      cardNumber: '229',
+      renderData: CardRenderer.builder((b) => b.venus(3)),
+      description: 'Raise Venus 3 steps.',
+    };
 }
+

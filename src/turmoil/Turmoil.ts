@@ -28,7 +28,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
   {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
 ];
 
-export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
+export class Turmoil implements ISerializable<SerializedTurmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;

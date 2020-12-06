@@ -13,7 +13,7 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
-import {AgendaStyle} from '../turmoil/PoliticalAgendasData';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 export interface PlayerModel {
     aresExtension: boolean;

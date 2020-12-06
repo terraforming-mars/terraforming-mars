@@ -13,7 +13,7 @@ import {playerColorClass} from '../utils/utils';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {GameId} from '../Game';
-import {AgendaStyle} from '../turmoil/PoliticalAgendasData';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 export interface CreateGameModel {
     allOfficialExpansions: boolean;

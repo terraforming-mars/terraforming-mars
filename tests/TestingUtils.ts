@@ -6,7 +6,7 @@ import {BoardName} from '../src/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/ISpace';
 import {Color} from '../src/Color';
-import {AgendaStyle} from '../src/turmoil/PoliticalAgendasData';
+import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {

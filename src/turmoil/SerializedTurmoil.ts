@@ -5,7 +5,7 @@ import {PlayerId} from '../Player';
 import {GlobalEventName} from './globalEvents/GlobalEventName';
 import {PartyName} from './parties/PartyName';
 import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
-import {PoliticalAgendasData} from './PoliticalAgendasData';
+import {PoliticalAgendasData} from './PoliticalAgendas';
 
 export interface SerializedParty {
     name: PartyName;

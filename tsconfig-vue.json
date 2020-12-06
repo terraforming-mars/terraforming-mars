@@ -20,6 +20,6 @@
     },
     "exclude": [],
     "include": [
-        "build/src/components/*Vue.ts"
+        "build/src/components/**/*Vue.ts"
     ]
 }

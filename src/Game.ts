@@ -61,7 +61,7 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {PartyName} from './turmoil/parties/PartyName';
-import {AgendaStyle} from './turmoil/PoliticalAgendasData';
+import {AgendaStyle} from './turmoil/PoliticalAgendas';
 
 export interface Score {
   corporation: String;

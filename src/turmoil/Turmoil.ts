@@ -13,8 +13,7 @@ import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
-import {AgendaStyle, Agenda, PoliticalAgendasData} from './PoliticalAgendasData';
-import {Bonus} from './Bonus';
+import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 
 export interface IPartyFactory {
     partyName: PartyName;
@@ -44,7 +43,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
     public currentGlobalEvent: IGlobalEvent | undefined;
     public politicalAgendasData: PoliticalAgendasData;
 
-    constructor(game: Game, politicalAgendas: AgendaStyle = AgendaStyle.STANDARD) {
+    constructor(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD) {
       // Init parties
       this.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
@@ -69,51 +68,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
       }
 
       // Setup party bonuses and policies
-      this.politicalAgendasData = {
-        agendas: ALL_PARTIES.map((p) => {
-          return {
-            partyName: p.partyName,
-            definedBonus: this.getBonus(p.partyName, politicalAgendas ? AgendaStyle.RANDOM : AgendaStyle.STANDARD),
-            definedPolicy: undefined,
-          } as Agenda;
-        }),
-      };
-
-      if (politicalAgendas === AgendaStyle.STANDARD) {
-        this.parties.forEach((party) => {
-          party.activeBonus = party.bonuses.find((bonus) => bonus.isDefault === true);
-          party.activePolicy = party.policies.find((policy) => policy.isDefault === true);
-        });
-      } else {
-        // Initialize random bonuses and policies if AgendaStyle is RANDOM or CHAIRMAN
-        this.parties.forEach((party) => {
-          party.activeBonus = party.bonuses[Math.floor(Math.random() * party.bonuses.length)];
-          party.activePolicy = party.policies[Math.floor(Math.random() * party.policies.length)];
-        });
-      }
+      this.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, this.parties, this.rulingParty);
 
       // Init the global event dealer
       this.globalEventDealer = new GlobalEventDealer();
       this.globalEventDealer.initGlobalEvents(game);
       this.initGlobalEvent(game);
-    }
-
-    private getBonus(partyName: PartyName, agendaStyle: AgendaStyle = AgendaStyle.RANDOM) : Bonus {
-      const pf = ALL_PARTIES.find((pf) => partyName === pf.partyName);
-
-      if (pf === undefined) {
-        throw new Error('Undefined party ' + partyName);
-      }
-
-      const bonuses = new pf.Factory().bonuses;
-      switch (agendaStyle) {
-      case AgendaStyle.STANDARD:
-        return bonuses[0];
-      case AgendaStyle.RANDOM:
-        return bonuses[Math.floor(Math.random() * bonuses.length)];
-      default:
-        throw new Error('Agenda style not yet suppoorted: ' + agendaStyle);
-      }
     }
 
     public initGlobalEvent(game: Game) {
@@ -282,13 +242,16 @@ export class Turmoil implements ISerializable<SerializedTurmoil, Turmoil> {
         const rulingParty = this.rulingParty;
 
         // Resolve Ruling Bonus
-        const agenda = this.politicalAgendasData.agendas.find((agenda) => agenda.partyName === rulingParty.name);
+        PoliticalAgendas.setAgenda(rulingParty, this.politicalAgendasData);
 
-        if (agenda === undefined) {
-          throw new Error('agenda not found for party ' + rulingParty.name);
-        } else {
-          agenda.definedBonus.grant(game);
+        // This will have to move below chairman selection if they get to choose it once per
+        // generation.
+        const bonusId = this.politicalAgendasData.thisAgenda.bonusId;
+        const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
+        if (bonus === undefined) {
+          throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
         }
+        bonus.grant(game);
 
         // Change the chairman
         if (this.chairman) {

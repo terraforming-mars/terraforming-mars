@@ -4,8 +4,10 @@ import {OrOptions} from '../inputs/OrOptions';
 import {ISpace} from '../ISpace';
 import {Player} from '../Player';
 
+export type PolicyId = string;
+
 export interface Policy {
-  id: string;
+  id: PolicyId;
   description: string;
   isDefault?: boolean;
   onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;

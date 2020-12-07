@@ -2,7 +2,7 @@ FROM node:lts-alpine
 
 LABEL maintainer="bafolts" \
       name="terraforming mars" \
-      Version="1.0"
+      Version="0.99"
 
 EXPOSE 8080
 

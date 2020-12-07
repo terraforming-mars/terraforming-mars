@@ -7,6 +7,9 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IceCapMelting implements IProjectCard {
     public cost = 5;
@@ -26,5 +29,11 @@ export class IceCapMelting implements IProjectCard {
     public play(player: Player, game: Game) {
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '181',
+      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      renderData: CardRenderer.builder((b) => b.oceans(1)),
+      description: 'Requires +2 C or warmer. Place 1 ocean tile.',
     }
 }

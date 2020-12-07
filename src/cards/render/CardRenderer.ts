@@ -272,9 +272,8 @@ class Builder {
   public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
-    // TODO (chosta): add this once #1985 is merged
     if (withO2) {
-      // item.secondaryTag = 'oxygen';
+      item.secondaryTag = 'oxygen';
     }
     this._addRowItem(item);
     return this;
@@ -293,6 +292,13 @@ class Builder {
 
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
+    return this;
+  }
+
+  public diverseTag(amount: number = 1) {
+    const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
+    item.isPlayed = true;
+    this._addRowItem(item);
     return this;
   }
 
@@ -496,7 +502,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {

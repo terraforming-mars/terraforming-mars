@@ -2,8 +2,8 @@ FROM node:lts-alpine
 
 EXPOSE 8080
 
-LABEL maintainer="bafolts"
-      name="terraforming mars"
+LABEL maintainer="bafolts" \
+      name="terraforming-mars" \
       Version="1.0"
 
 RUN mkdir -p /usr/src/app/db \

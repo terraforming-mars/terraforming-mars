@@ -2144,7 +2144,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         remainingAwards.title = 'Fund an award';
         remainingAwards.buttonLabel = 'Confirm';
         remainingAwards.options = game.awards
-          .filter((award: IAward) => !game.hasBeenFunded(award))
+          .filter((award: IAward) => game.hasBeenFunded(award) === false)
           .map((award: IAward) => this.fundAward(award, game));
         action.options.push(remainingAwards);
       }

@@ -1744,7 +1744,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
-      return new SelectOption('Undo Turn', 'Undo', () => {
+      return new SelectOption('Undo last action', 'Undo', () => {
         try {
           Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
           Database.getInstance().deleteGameNbrSaves(game.id, 1);
@@ -2325,6 +2325,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
+        // Used when undoing action
+        usedUndo: this.usedUndo,
       };
       if (this.lastCardPlayed !== undefined) {
         result.lastCardPlayed = this.lastCardPlayed.name;

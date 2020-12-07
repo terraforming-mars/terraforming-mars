@@ -1,8 +1,19 @@
 
+import {LogMessageDataType} from '../LogMessageDataType';
+import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
 import * as raw_translations from '../../assets/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
+
+export function translateMessage(message: Message): string {
+  return translateText(message.message).replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+    if (message.data[idx] !== undefined && message.data[idx].type === LogMessageDataType.RAW_STRING) {
+      return message.data[idx].value;
+    }
+    return '';
+  });
+}
 
 export function translateText(englishText: string): string {
   let translatedText = englishText;
@@ -52,4 +63,9 @@ export function translateTextNode(el: HTMLElement) {
   translateChildren(el);
 }
 
-export const $t = translateText;
+export const $t = function(msg: string | Message) {
+  if (typeof msg === 'string') {
+    return translateText(msg);
+  }
+  return translateMessage(msg);
+};

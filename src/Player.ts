@@ -21,6 +21,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
+import {LogMessageDataType} from './LogMessageDataType';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
@@ -61,7 +62,7 @@ import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs
 
 export type PlayerId = string;
 
-export class Player implements ISerializable<SerializedPlayer, Player> {
+export class Player implements ISerializable<SerializedPlayer> {
     public readonly id: PlayerId;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
@@ -745,10 +746,10 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           throw new Error('Number not provided for amount');
         }
         if (amount > pi.max) {
-          throw new Error('Amount provided too high');
+          throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
         }
-        if (amount < 0) {
-          throw new Error('Amount provided too low');
+        if (amount < pi.min) {
+          throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
         }
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
@@ -941,7 +942,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     }
 
-    public runDraftPhase(initialDraft: boolean, game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
+    public runDraftPhase(initialDraft: boolean, game: Game, playerName: string, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
         if (!initialDraft) {
@@ -954,16 +955,21 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
 
       this.setWaitingFor(
-        new SelectCard(
-          'Select a card to keep and pass the rest to ' + playerName,
-          'Keep',
-          cards,
-          (foundCards: Array<IProjectCard>) => {
-            this.draftedCards.push(foundCards[0]);
-            cards = cards.filter((card) => card !== foundCards[0]);
-            game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-            return undefined;
-          }, 1, 1,
+        new SelectCard({
+          message: 'Select a card to keep and pass the rest to ${0}',
+          data: [{
+            type: LogMessageDataType.RAW_STRING,
+            value: playerName,
+          }],
+        },
+        'Keep',
+        cards,
+        (foundCards: Array<IProjectCard>) => {
+          this.draftedCards.push(foundCards[0]);
+          cards = cards.filter((card) => card !== foundCards[0]);
+          game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          return undefined;
+        }, 1, 1,
         ), () => { },
       );
     }

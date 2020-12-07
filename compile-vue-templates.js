@@ -342,6 +342,7 @@ function checkComponent(name, component, dataProperties) {
   lines.unshift('declare function $set(arg1: any, key: string, value: string): void;');
   // seems to be array looper iterating function needs to pass along type information
   lines.unshift('declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;');
+  lines.unshift('declare function _l<T>(arg1: {[x: string]: T}, args: (item2: T, idx: number) => any): any;');
   lines.unshift('declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;');
   file = lines.join('\n');
 

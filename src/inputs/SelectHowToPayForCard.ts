@@ -6,7 +6,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 
 export class SelectHowToPayForCard implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD;
-    public title: string = 'Play project card';
+    public title = 'Play project card';
     public buttonLabel: string = 'Play card';
     constructor(
         public cards: Array<IProjectCard>,

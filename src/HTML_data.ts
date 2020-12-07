@@ -850,7 +850,7 @@ export const HTML_DATA: Map<string, string> =
                   <div class="money production ">2</div>
               </div> <div class="tile greenery-tile" style="margin-left:30px;"></div>*
               <div class="description ">
-                (Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)
+                (Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)
               </div>
           </div>
 `],

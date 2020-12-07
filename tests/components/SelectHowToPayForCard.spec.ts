@@ -52,6 +52,7 @@ describe('SelectHowToPayForCard', function() {
           selfReplicatingRobotCards: [],
         },
         playerinput: {
+          title: 'foo',
           cards: [{
             name: CardName.ANTS,
           }, {

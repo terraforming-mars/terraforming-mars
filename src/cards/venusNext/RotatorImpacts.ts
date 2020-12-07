@@ -12,6 +12,7 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {LogHelper} from '../../components/LogHelper';
 
 export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -60,13 +61,15 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
 
     private addResource(player: Player, game: Game) {
       game.defer(new SelectHowToPayDeferred(player, 6, false, true, 'Select how to pay for action'));
-      this.resourceCount++;
+      player.addResourceTo(this);
+      LogHelper.logAddResource(game, player, this);
       return undefined;
     }
 
     private spendResource(player: Player, game: Game) {
       player.removeResourceFrom(this);
       game.increaseVenusScaleLevel(player, 1);
+      game.log('${0} removed an asteroid resource to increase Venus scale 1 step', (b) => b.player(player));
       return undefined;
     }
 }

@@ -102,6 +102,36 @@ export interface GameOptions {
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
 }
 
+const DEFAULT_GAME_OPTIONS: GameOptions = {
+  aresExtension: false,
+  aresHazards: true,
+  boardName: BoardName.ORIGINAL,
+  cardsBlackList: [],
+  clonedGamedId: undefined,
+  coloniesExtension: false,
+  communityCardsOption: false,
+  corporateEra: true,
+  customColoniesList: [],
+  customCorporationsList: [],
+  draftVariant: false,
+  fastModeOption: false,
+  includeVenusMA: true,
+  initialDraftVariant: false,
+  preludeExtension: false,
+  promoCardsOption: false,
+  randomMA: RandomMAOptionType.NONE,
+  removeNegativeGlobalEventsOption: false,
+  requiresVenusTrackCompletion: false,
+  showOtherPlayersVP: false,
+  shuffleMapOption: false,
+  solarPhaseOption: false,
+  soloTR: false,
+  startingCorporations: 2,
+  turmoilExtension: false,
+  undoOption: false,
+  venusNextExtension: false,
+};
+
 export class Game implements ISerializable<SerializedGame> {
     // Game-level data
     public lastSaveId: number = 0;
@@ -155,35 +185,8 @@ export class Game implements ISerializable<SerializedGame> {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      public gameOptions: GameOptions = {
-        aresExtension: false,
-        aresHazards: true,
-        boardName: BoardName.ORIGINAL,
-        cardsBlackList: [],
-        clonedGamedId: undefined,
-        coloniesExtension: false,
-        communityCardsOption: false,
-        corporateEra: true,
-        customColoniesList: [],
-        customCorporationsList: [],
-        draftVariant: false,
-        fastModeOption: false,
-        includeVenusMA: true,
-        initialDraftVariant: false,
-        preludeExtension: false,
-        promoCardsOption: false,
-        randomMA: RandomMAOptionType.NONE,
-        removeNegativeGlobalEventsOption: false,
-        requiresVenusTrackCompletion: false,
-        showOtherPlayersVP: false,
-        shuffleMapOption: false,
-        solarPhaseOption: false,
-        soloTR: false,
-        startingCorporations: 2,
-        turmoilExtension: false,
-        undoOption: false,
-        venusNextExtension: false,
-      }) {
+      // ... creates a shallow copy.
+      public gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}) {
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);

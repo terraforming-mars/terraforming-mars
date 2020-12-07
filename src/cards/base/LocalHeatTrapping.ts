@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -13,6 +12,8 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType = CardType.EVENT;
@@ -95,4 +96,13 @@ export class LocalHeatTrapping implements IProjectCard {
       if (availableActions.options.length === 1) return availableActions.options[0].cb();
       return availableActions;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '190',
+      renderData: CardRenderer.builder((b) => {
+        b.heat(-5).digit.nbsp;
+        b.plus().plants(4).digit;
+        b.or().animals(2).digit.asterix();
+      }),
+      description: 'Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.',
+    };
 }

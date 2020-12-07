@@ -7,6 +7,10 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+
 
 export class LakeMarineris implements IProjectCard {
     public cost = 18;
@@ -32,5 +36,12 @@ export class LakeMarineris implements IProjectCard {
     }
     public getVictoryPoints() {
       return 2;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '053',
+      requirements: CardRequirements.builder((b) => b.temperature(0)),
+      renderData: CardRenderer.builder((b) => b.oceans(2)),
+      description: 'Requires 0° C or warmer. Place 2 ocean tiles.',
+      victoryPoints: 2,
     }
 }

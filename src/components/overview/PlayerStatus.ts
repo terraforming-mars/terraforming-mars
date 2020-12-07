@@ -55,6 +55,9 @@ export const PlayerStatus = Vue.component('player-status', {
     showLabel: function(): boolean {
       return this.actionLabel !== ActionLabel.NONE;
     },
+    showTimers: function(): boolean {
+      return this.player.timer.visible;
+    },
     getLabelClasses: function(): string {
       const classes = [];
       const baseClass = 'player-action-status';
@@ -109,7 +112,7 @@ export const PlayerStatus = Vue.component('player-status', {
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
                 <div :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
-                <player-timer :player="player"/>
+                <div v-if="showTimers()"><player-timer :timer="player.timer"/></div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
             </div>
             <div class="player-status-right">

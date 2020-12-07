@@ -55,6 +55,9 @@ export const GameEnd = Vue.component('game-end', {
     isSoloGame: function(): boolean {
       return this.player.players.length === 1;
     },
+    visibleTimers: function(): boolean {
+      return this.player.players[0].timer.visible;
+    },
   },
   template: `
         <div id="game-end" class="game_end_cont">
@@ -116,7 +119,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <th>City</th>
                                 <th>VP</th>
                                 <th>MC</th>
-                                <th>Timer</th>
+                                <th v-if="visibleTimers()">Timer</th>
                                 <th><div class="game-end-total-column">Total</div></th>
                             </tr>
                         </thead>
@@ -131,7 +134,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td>{{ p.megaCredits }}</td>
-                                <td>{{ getTimer(p) }}</td>
+                                <td v-if="visibleTimers()">{{ getTimer(p) }}</td>
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>

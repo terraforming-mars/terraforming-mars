@@ -44,6 +44,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     undoOption: boolean;
+    showTimers: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
     includeVenusMA: boolean;
@@ -110,6 +111,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       undoOption: false,
+      showTimers: false,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
@@ -336,6 +338,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const undoOption = component.undoOption;
+      const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
@@ -392,6 +395,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         undoOption,
+        showTimers,
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
@@ -562,6 +566,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="showTimers" id="timer-checkbox">
+                            <label for="timer-checkbox">
+                                <span v-i18n>Show timers</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">

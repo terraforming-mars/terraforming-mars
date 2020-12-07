@@ -461,6 +461,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         clonedGamedId: gameReq.clonedGamedId,
 
         undoOption: gameReq.undoOption,
+        showTimers: gameReq.showTimers,
         fastModeOption: gameReq.fastModeOption,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
 

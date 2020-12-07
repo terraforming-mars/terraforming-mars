@@ -2,11 +2,13 @@ export class Timer {
   public sum_elapsed: number;
   public started_at: number;
   public running: number;
+  public visible: boolean;
 
-  constructor(sum_elapsed = 0, started_at = new Date().getTime(), running = -1) {
+  constructor(sum_elapsed = 0, started_at = new Date().getTime(), running = -1, visible = false) {
     this.sum_elapsed = sum_elapsed;
     this.started_at = started_at;
     this.running = running;
+    this.visible = visible;
   }
 
   public start() {
@@ -38,7 +40,7 @@ export class Timer {
   }
 
   static fromJSON(d: Timer) {
-    return new Timer(d.sum_elapsed, d.started_at, d.running);
+    return new Timer(d.sum_elapsed, d.started_at, d.running, d.visible);
   }
 }
 

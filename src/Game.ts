@@ -72,6 +72,7 @@ export interface GameOptions {
 
   // Configuration
   undoOption: boolean;
+  showTimers: boolean;
   fastModeOption: boolean;
   showOtherPlayersVP: boolean;
 
@@ -176,6 +177,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         removeNegativeGlobalEventsOption: false,
         requiresVenusTrackCompletion: false,
         showOtherPlayersVP: false,
+        showTimers: false,
         shuffleMapOption: false,
         solarPhaseOption: false,
         soloTR: false,
@@ -314,6 +316,9 @@ export class Game implements ISerializable<SerializedGame, Game> {
           this.setStartingProductions(player);
           this.playerHasPickedCorporationCard(player, new BeginnerCorporation());
         }
+
+        // Setup timers
+        player.timer.visible = gameOptions.showTimers;
       }
 
       // Save initial game state

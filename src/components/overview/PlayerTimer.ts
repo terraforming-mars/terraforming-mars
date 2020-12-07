@@ -1,23 +1,22 @@
 import Vue from 'vue';
-import {PlayerModel} from '../../models/PlayerModel';
 import {Timer} from '../../Timer';
 
 export const PlayerTimer = Vue.component('player-timer', {
   props: {
-    player: {
-      type: Object as () => PlayerModel,
+    timer: {
+      type: Object as () => Timer,
     },
   },
   data() {
     return {
-      timer: '',
+      timer_text: '',
     };
   },
   mounted() {
     this.updateTimer();
   },
   watch: {
-    timer: {
+    timer_text: {
       handler() {
         setTimeout(() => {
           this.updateTimer();
@@ -27,10 +26,8 @@ export const PlayerTimer = Vue.component('player-timer', {
   },
   methods: {
     updateTimer: function() {
-      this.timer = Timer.fromJSON(this.player.timer).toString();
+      this.timer_text = Timer.fromJSON(this.timer).toString();
     },
   },
-  template: `
-        <div class="player-timer"> {{timer}} </div>
-    `,
+  template: `<div class="player-timer" > {{timer_text}} </div>`,
 });

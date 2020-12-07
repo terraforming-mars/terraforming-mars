@@ -23,27 +23,27 @@ export class DryDesertsDeferredAction implements DeferredAction {
     const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
       megacreditsAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
     const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
       steelAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
     const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
       titaniumAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
     const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
       plantsAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
     const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
       energyAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
     const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
       heatAmount = amount;
       return undefined;
-    }, this.count);
+    }, 0, this.count);
 
     const selectResources = new AndOptions(
       () => {

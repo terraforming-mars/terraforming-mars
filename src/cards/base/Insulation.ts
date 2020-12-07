@@ -13,13 +13,23 @@ export class Insulation implements IProjectCard {
     public tags = [];
     public name = CardName.INSULATION;
     public cardType = CardType.AUTOMATED;
+    public hasRequirements = false;
+
+    public canPlay(player: Player) {
+      return player.getProduction(Resources.HEAT) >= 1;
+    }
 
     public play(player: Player, _game: Game) {
-      if (player.getProduction(Resources.HEAT) < 1) return undefined;
-      return new SelectAmount('Select amount of heat production to decrease', 'Decrease', (amount: number) => {
-        player.addProduction(Resources.HEAT, -amount);
-        player.addProduction(Resources.MEGACREDITS, amount);
-        return undefined;
-      }, player.getProduction(Resources.HEAT));
+      return new SelectAmount(
+        'Select amount of heat production to decrease',
+        'Decrease',
+        (amount: number) => {
+          player.addProduction(Resources.HEAT, -amount);
+          player.addProduction(Resources.MEGACREDITS, amount);
+          return undefined;
+        },
+        1,
+        player.getProduction(Resources.HEAT),
+      );
     }
 }

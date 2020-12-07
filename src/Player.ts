@@ -1994,7 +1994,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       if (corporationCard !== undefined &&
             corporationCard.initialAction !== undefined &&
             corporationCard.initialActionText !== undefined &&
-            !this.corporationInitialActionDone
+            this.corporationInitialActionDone === false
       ) {
         const initialActionOption = new SelectOption('Take ' + corporationCard.name + '\'s first action', corporationCard.initialActionText, () => {
           game.defer(new DeferredAction(this, () => {
@@ -2411,4 +2411,3 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       return colonyTilesAlreadyBuiltOn < game.colonies.length;
     }
 }
-

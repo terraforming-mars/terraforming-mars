@@ -37,18 +37,33 @@ export class SelfReplicatingRobots implements IProjectCard {
     }
 
     public canAct(player: Player): boolean {
-      if (this.targetCards.length > 0) {
-        return true;
-      }
-      if (player.cardsInHand.filter((card) => card.tags.filter((tag) => tag === Tags.SPACE || tag === Tags.STEEL).length > 0).length > 0) {
-        return true;
-      }
-      return false;
+      return this.targetCards.length > 0 ||
+             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
     }
 
     public action(player: Player, game: Game) {
       const orOptions = new OrOptions();
-      const selectableCards = player.cardsInHand.filter((card) => card.tags.filter((tag) => tag === Tags.SPACE || tag === Tags.STEEL).length > 0);
+      const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
+
+      if (this.targetCards.length > 0) {
+        const robotCards = this.targetCards.map((targetCard) => targetCard.card);
+        orOptions.options.push(new SelectCard(
+          'Select card to double robots resource', 'Double resource', robotCards,
+          (foundCards: Array<IProjectCard>) => {
+            let resourceCount = 0;
+            for (const targetCard of this.targetCards) {
+              if (targetCard.card.name === foundCards[0].name) {
+                resourceCount = targetCard.resourceCount;
+                targetCard.resourceCount *= 2;
+              }
+            }
+            game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
+              b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
+            });
+            return undefined;
+          },
+        ));
+      }
 
       if (selectableCards.length > 0) {
         orOptions.options.push(new SelectCard(
@@ -64,29 +79,6 @@ export class SelfReplicatingRobots implements IProjectCard {
               },
             );
             game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(foundCards[0]).card(this));
-            return undefined;
-          },
-        ));
-      }
-
-      if (this.targetCards.length > 0) {
-        const robotCards: Array<IProjectCard> = [];
-        for (const targetCard of this.targetCards) {
-          robotCards.push(targetCard.card);
-        }
-        orOptions.options.push(new SelectCard(
-          'Select card to double robots resource', 'Double resource', robotCards,
-          (foundCards: Array<IProjectCard>) => {
-            let resourceCount = 0;
-            for (const targetCard of this.targetCards) {
-              if (targetCard.card.name === foundCards[0].name) {
-                resourceCount = targetCard.resourceCount;
-                targetCard.resourceCount = targetCard.resourceCount * 2;
-              }
-            }
-            game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-              b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
-            });
             return undefined;
           },
         ));

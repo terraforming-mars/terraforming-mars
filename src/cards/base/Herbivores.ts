@@ -54,7 +54,8 @@ export class Herbivores implements IProjectCard, IResourceCard {
         b.animals(1).productionBox((pb) => pb.minus().plants(1).any);
       }),
       description: {
-        text: 'Requires 8% oxygen. +1 animal to this card. -1 plant production',
+        // TODO (chosta): revert the original description once a solution for description space is found
+        text: 'Requires 8% oxygen. +1 animal to this card. -1 any plant production',
         align: 'left',
       },
       victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),

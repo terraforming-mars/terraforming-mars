@@ -206,9 +206,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
       );
 
       // Clone game
-      if (gameOptions !== undefined &&
-        gameOptions.clonedGamedId !== undefined &&
-        !gameOptions.clonedGamedId.startsWith('#')) {
+      if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
         this.cloneGame(gameOptions.clonedGamedId, this);
         this.clonedGamedId = '#' + gameOptions.clonedGamedId;
         return;
@@ -249,7 +247,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
       }
 
       // Setup Ares hazards
-      if (gameOptions.aresExtension && gameOptions.aresHazards !== false) {
+      if (gameOptions.aresExtension && gameOptions.aresHazards) {
         AresHandler.setupHazards(this, players.length);
       }
 
@@ -402,8 +400,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     public isSoloMode() :boolean {
-      if (this.players.length === 1) return true;
-      return false;
+      return this.players.length === 1;
     }
 
     private setStartingProductions(player: Player) {
@@ -838,10 +835,8 @@ export class Game implements ISerializable<SerializedGame, Game> {
     public gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
       if (this.isSoloMode()) {
-        if (this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension)) {
-          return true;
-        }
-        return false; // Solo mode must go on untill 14 or 12 generation even if Mars is already terraformed
+        // Solo mode must go on until 14 or 12 generation even if Mars is already terraformed
+        return this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension);
       }
       return this.marsIsTerraformed();
     }
@@ -975,9 +970,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     private isLastActiveRoundOfDraft(initialDraft: boolean, preludeDraft: boolean = false): boolean {
       if (initialDraft && !preludeDraft && this.draftRound === 4) return true;
 
-      if ( (!initialDraft || preludeDraft) && this.draftRound === 3) return true;
-
-      return false;
+      return (!initialDraft || preludeDraft) && this.draftRound === 3;
     }
 
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
@@ -989,7 +982,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
         return;
       }
 
-      if ( ! this.isLastActiveRoundOfDraft(initialDraft, this.initialDraftIteration === 3 ? true : false)) {
+      if ( ! this.isLastActiveRoundOfDraft(initialDraft, this.initialDraftIteration === 3)) {
         this.draftRound++;
         this.runDraftRound(initialDraft);
       } else {
@@ -1384,7 +1377,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
       });
 
       // Oceans are not subject to Ares adjacency production penalties.
-      const subjectToHazardAdjacency = (tile.tileType === TileType.OCEAN) ? false : true;
+      const subjectToHazardAdjacency = tile.tileType !== TileType.OCEAN;
 
       AresHandler.ifAres(this, () => {
         AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
@@ -1628,7 +1621,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
     }
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
-      // in soloMode you don'thave to decrease resources
+      // in soloMode you don't have to decrease resources
       return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode();
     }
 
@@ -1774,8 +1767,7 @@ export class Game implements ISerializable<SerializedGame, Game> {
           };
         } else if (element.player) {
           // Correct Land Claim
-          const player = this.players.find((player) => player.id === element.player!.id);
-          space.player = player;
+          space.player = this.players.find((player) => player.id === element.player!.id);
         }
         space.adjacency = element.adjacency;
       });

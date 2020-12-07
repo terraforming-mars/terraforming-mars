@@ -628,7 +628,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
 
       if (tag === Tags.WILDCARD) {
         return tagCount;
-      };
+      }
       if (includeWildcardTags) {
         return tagCount + this.getTagCount(Tags.WILDCARD);
       } else {
@@ -828,13 +828,11 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         this.runInputCb(game, pi.cb(howToPay));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const units: IProductionUnits = parsedInput;
+        const units: IProductionUnits = JSON.parse(input[0][0]);
         pi.cb(units);
       } else if (pi instanceof ShiftAresGlobalParameters) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const response: IAresGlobalParametersResponse = parsedInput;
+        const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
         pi.cb(response);
       } else {
         throw new Error('Unsupported waitingFor');
@@ -1996,7 +1994,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       if (corporationCard !== undefined &&
             corporationCard.initialAction !== undefined &&
             corporationCard.initialActionText !== undefined &&
-            this.corporationInitialActionDone === false
+            !this.corporationInitialActionDone
       ) {
         const initialActionOption = new SelectOption('Take ' + corporationCard.name + '\'s first action', corporationCard.initialActionText, () => {
           game.defer(new DeferredAction(this, () => {
@@ -2146,7 +2144,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         remainingAwards.title = 'Fund an award';
         remainingAwards.buttonLabel = 'Confirm';
         remainingAwards.options = game.awards
-          .filter((award: IAward) => game.hasBeenFunded(award) === false)
+          .filter((award: IAward) => !game.hasBeenFunded(award))
           .map((award: IAward) => this.fundAward(award, game));
         action.options.push(remainingAwards);
       }

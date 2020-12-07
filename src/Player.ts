@@ -2004,17 +2004,26 @@ export class Player implements ISerializable<SerializedPlayer> {
             corporationCard.initialActionText !== undefined &&
             this.corporationInitialActionDone === false
       ) {
-        const initialActionOption = new SelectOption('Take ' + corporationCard.name + '\'s first action', corporationCard.initialActionText, () => {
-          game.defer(new DeferredAction(this, () => {
-            if (corporationCard.initialAction) {
-              return corporationCard.initialAction(this, game);
-            } else {
-              return undefined;
-            }
-          }));
-          this.corporationInitialActionDone = true;
-          return undefined;
-        });
+        const initialActionOption = new SelectOption(
+          {
+            message: 'Take first action of ${0} corporation',
+            data: [{
+              type: LogMessageDataType.RAW_STRING,
+              value: corporationCard.name,
+            }],
+          },
+          corporationCard.initialActionText, () => {
+            game.defer(new DeferredAction(this, () => {
+              if (corporationCard.initialAction) {
+                return corporationCard.initialAction(this, game);
+              } else {
+                return undefined;
+              }
+            }));
+            this.corporationInitialActionDone = true;
+            return undefined;
+          },
+        );
         const initialActionOrPass = new OrOptions(
           initialActionOption,
           this.passOption(game),

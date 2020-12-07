@@ -132,7 +132,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   venusNextExtension: false,
 };
 
-export class Game implements ISerializable<SerializedGame, Game> {
+export class Game implements ISerializable<SerializedGame> {
     // Game-level data
     public lastSaveId: number = 0;
     private clonedGamedId: string | undefined;

@@ -1202,11 +1202,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
 
-      // Save the game state after changing the current player
-      // Increment the save id
-      this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-
       player.takeAction(this);
     }
 

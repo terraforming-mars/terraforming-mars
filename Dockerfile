@@ -1,5 +1,9 @@
 FROM node:lts-alpine
 
+LABEL maintainer="bafolts" \
+      name"terraforming-mars"
+      Version="1.0"
+
 EXPOSE 8080
 
 RUN mkdir -p /usr/src/app/db \

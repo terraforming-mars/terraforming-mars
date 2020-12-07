@@ -1,7 +1,7 @@
 FROM node:lts-alpine
 
 LABEL maintainer="bafolts and some guys" \
-      name"Terraforming-mars"
+      name="Terraforming-mars"
       build-date="2020-12-06"
       Version="1.0"
 

@@ -21,7 +21,7 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
     public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;
+      return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 14;
     }
     public play() {
       return undefined;

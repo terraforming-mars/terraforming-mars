@@ -4,9 +4,11 @@ import {CardRenderItemSize} from './CardRenderItemSize';
 
 export class CardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
-  constructor(public item: CardRenderItem, public points: number, public target: number) {}
+  public anyPlayer: boolean = false; // Law Suit
+  constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
   public getPointsHtml(): string {
+    if (this.item === undefined) return `${this.points}`;
     if (this.target === this.points) return `${this.target}/`;
     return `${this.points}/${this.target}`;
   }
@@ -38,5 +40,10 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static floaters(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.FLOATERS), points, target);
+  }
+  public static any(points: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
+    item.anyPlayer = true;
+    return item;
   }
 }

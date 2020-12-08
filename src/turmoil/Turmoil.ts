@@ -36,16 +36,18 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public delegate_reserve: Array<PlayerId | 'NEUTRAL'> = []; // eslint-disable-line camelcase
     public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
-    public readonly globalEventDealer: GlobalEventDealer = new GlobalEventDealer();
+    public readonly globalEventDealer: GlobalEventDealer;
     public distantGlobalEvent: IGlobalEvent | undefined;
     public commingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
 
-    private constructor() {
+    private constructor(globalEventDealer: GlobalEventDealer) {
+      this.globalEventDealer = globalEventDealer;
     }
 
     public static newInstance(game: Game): Turmoil {
-      const turmoil = new Turmoil();
+      const dealer = GlobalEventDealer.newInstance(game);
+      const turmoil = new Turmoil(dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -68,7 +70,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       // Init the global event dealer
-      turmoil.globalEventDealer.initGlobalEvents(game);
       turmoil.initGlobalEvent(game);
       return turmoil;
     }
@@ -355,7 +356,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         delegate_reserve: this.delegate_reserve,
         parties: this.parties,
         playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
-        globalEventDealer: this.globalEventDealer,
+        globalEventDealer: this.globalEventDealer.serialize(),
         distantGlobalEvent: this.distantGlobalEvent,
         commingGlobalEvent: this.commingGlobalEvent,
       };
@@ -367,7 +368,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // Function used to rebuild each objects
     public static deserialize(d: SerializedTurmoil): Turmoil {
-      const turmoil = new Turmoil();
+      const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
+      const turmoil = new Turmoil(dealer);
       // Assign each attributes
       const o = Object.assign(turmoil, d);
 
@@ -381,15 +383,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
-
-      // Rebuild Global Event Dealer
-      turmoil.globalEventDealer.globalEventsDeck = d.globalEventDealer.globalEventsDeck.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
-
-      turmoil.globalEventDealer.discardedGlobalEvents = d.globalEventDealer.discardedGlobalEvents.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
 
       if (d.distantGlobalEvent) {
         turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent.name);

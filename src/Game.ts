@@ -246,7 +246,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
-        this.turmoil = new Turmoil(this);
+        this.turmoil = Turmoil.newInstance(this);
       }
 
       // Setup Ares hazards
@@ -1791,8 +1791,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
-        const turmoil = new Turmoil(this);
-        this.turmoil = turmoil.loadFromJSON(d.turmoil);
+        this.turmoil = Turmoil.deserialize(d.turmoil);
 
         // Rebuild lobby
         this.turmoil.lobby = new Set<string>(d.turmoil.lobby);

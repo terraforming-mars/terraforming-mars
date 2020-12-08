@@ -15,13 +15,10 @@ import {ISpace} from '../src/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
-import {CardFinder} from '../src/CardFinder';
-import {Dealer} from '../src/Dealer';
 import {OrOptions} from '../src/inputs/OrOptions';
 import {BoardName} from '../src/BoardName';
 import {SpaceType} from '../src/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
-import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
 import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
@@ -33,28 +30,6 @@ describe('Game', function() {
     const game = new Game('foobar', [player, player2], player);
     expect(game.gameOptions.corporateEra).is.true;
     expect(game.getGeneration()).to.eq(1);
-  });
-
-  it('correctly separates 71 corporate era cards', function() {
-    // include corporate era
-    const dealer = new Dealer(true, false, false, false, false, false, false);
-    expect(dealer.getDeckSize()).to.eq(208);
-
-    // exclude corporate era
-    const dealer2 = new Dealer(false, false, false, false, false, false, false);
-    expect(dealer2.getDeckSize()).to.eq(137);
-  });
-
-  it('excludes expansion-specific preludes if those expansions are not selected ', function() {
-    const dealer = new Dealer(true, false, false, false, false, false,
-      false, true);
-    const preludeDeck = dealer.preludeDeck;
-
-    const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
-    turmoilPreludes.forEach((preludeName) => {
-      const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
-      expect(preludeDeck.includes(preludeCard)).is.not.true;
-    });
   });
 
   it('sets starting production if corporate era not selected', function() {

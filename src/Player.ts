@@ -629,7 +629,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       if (tag === Tags.WILDCARD) {
         return tagCount;
-      };
+      }
       if (includeWildcardTags) {
         return tagCount + this.getTagCount(Tags.WILDCARD);
       } else {
@@ -829,13 +829,11 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.runInputCb(game, pi.cb(howToPay));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const units: IProductionUnits = parsedInput;
+        const units: IProductionUnits = JSON.parse(input[0][0]);
         pi.cb(units);
       } else if (pi instanceof ShiftAresGlobalParameters) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const response: IAresGlobalParametersResponse = parsedInput;
+        const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
         pi.cb(response);
       } else {
         throw new Error('Unsupported waitingFor');
@@ -2428,4 +2426,3 @@ export class Player implements ISerializable<SerializedPlayer> {
       return colonyTilesAlreadyBuiltOn < game.colonies.length;
     }
 }
-

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
-import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints'
+import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
 import {TestPlayers} from '../TestingUtils';
 
 describe('CardMetadata', function() {

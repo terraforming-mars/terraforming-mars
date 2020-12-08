@@ -1709,8 +1709,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Rebuild every player objects
       this.players = d.players.map((element: SerializedPlayer) => {
-        const player = new Player(element.name, element.color, element.beginner, element.handicap);
-        return player.loadFromJSON(element);
+        return Player.deserialize(element);
       });
 
 

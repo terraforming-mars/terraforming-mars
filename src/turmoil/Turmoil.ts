@@ -30,7 +30,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
-    public rulingParty: undefined | IParty = undefined;
+    public rulingParty: IParty;
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
     public delegate_reserve: Array<PlayerId | 'NEUTRAL'> = []; // eslint-disable-line camelcase
@@ -41,11 +41,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public commingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
 
-    private constructor() {
+    private constructor(rulingPartyName: PartyName) {
+      this.rulingParty = this.getPartyByName(rulingPartyName);
     }
 
     public static newInstance(game: Game): Turmoil {
-      const turmoil = new Turmoil();
+      const turmoil = new Turmoil(PartyName.GREENS);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -58,9 +59,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // The game begins with a Neutral chairman
       turmoil.chairman = 'NEUTRAL';
-
-      // First ruling party is green
-      turmoil.rulingParty = turmoil.getPartyByName(PartyName.GREENS);
 
       // Begin with 13 neutral delegates in the reserve
       for (let i = 0; i < 13; i++) {
@@ -85,9 +83,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
     }
 
-    // Function to return a party by name
-    public getPartyByName(partyName: PartyName): IParty | undefined {
-      return this.parties.find((party) => party.name === partyName);
+    public getPartyByName(name: PartyName): IParty {
+      const party = this.parties.find((party) => party.name === name);
+      if (party === undefined) {
+        throw new Error(`Cannot find party with name {${name}}`);
+      }
+      return party;
     }
 
     // Use to send a delegate to a specific party
@@ -188,7 +189,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       // 3 - New Gouvernment
-      this.rulingParty = this.dominantParty;
+      if (this.dominantParty !== undefined) {
+        this.rulingParty = this.dominantParty;
+      }
 
       // 3.a - Ruling Policy change
       if (this.rulingParty) {
@@ -367,15 +370,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // Function used to rebuild each objects
     public static deserialize(d: SerializedTurmoil): Turmoil {
-      const turmoil = new Turmoil();
+      const turmoil = new Turmoil(d.rulingParty.name);
       // Assign each attributes
       const o = Object.assign(turmoil, d);
 
       turmoil.lobby = new Set(d.lobby);
 
-      if (d.rulingParty) {
-        turmoil.rulingParty = turmoil.getPartyByName(d.rulingParty.name);
-      }
       if (d.dominantParty) {
         turmoil.dominantParty = turmoil.getPartyByName(d.dominantParty.name);
       }

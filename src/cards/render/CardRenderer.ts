@@ -228,6 +228,11 @@ class Builder {
     return this;
   }
 
+  public building(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.BUILDING, amount));
+    return this;
+  }
+
   public jovian(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.JOVIAN));
     return this;

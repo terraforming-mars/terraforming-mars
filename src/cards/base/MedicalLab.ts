@@ -24,7 +24,7 @@ export class MedicalLab implements IProjectCard {
       cardNumber: '207',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.megacredits(1).slash().steel(2).played;
+          pb.megacredits(1).slash().building(2).played;
         });
       }),
       description: 'Increase your MC production 1 step for every 2 Building tags you have, including this.',

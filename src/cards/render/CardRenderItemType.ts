@@ -19,6 +19,7 @@ export enum CardRenderItemType {
   SPACE = 'space',
   EARTH = 'earth',
   JOVIAN = 'jovian',
+  BUILDING = 'building',
   COLONIES = 'colonies',
   SCIENCE = 'science',
   TRADE = 'trade',

@@ -12,6 +12,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeLake implements IActionCard, IProjectCard {
     public cost = 31;
@@ -58,5 +60,17 @@ export class MoholeLake implements IActionCard, IProjectCard {
         LogHelper.logAddResource(game, player, foundCards[0], 1);
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X22',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1).asterix();
+          eb.nbsp.or().nbsp.animals(1).asterix();
+          eb.description('Action: Add a microbe or animal to ANOTHER card.');
+        }).br;
+        b.plants(3).temperature(1).oceans(1);
+      }),
+      description: 'Gain 3 plant. Raise temperature 1 step, and place 1 ocean tile.',
     }
 }

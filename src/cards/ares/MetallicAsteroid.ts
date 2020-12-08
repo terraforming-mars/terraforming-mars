@@ -11,7 +11,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardMetadata} from '../CardMetadata';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MetallicAsteroid implements IProjectCard {
@@ -35,7 +34,6 @@ export class MetallicAsteroid implements IProjectCard {
   }
   public metadata: CardMetadata = {
     cardNumber: 'A13',
-    requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
     renderData: CardRenderer.builder((b) => {
       b.temperature(1).titanium(1).br;
       b.minus().plants(4).digit.any;

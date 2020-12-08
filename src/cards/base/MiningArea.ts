@@ -18,7 +18,7 @@ export class MiningArea extends MiningCard {
       renderData: CardRenderer.builder((b) => {
         b.tile(TileType.MINING_AREA, true).asterix().br;
         b.productionBox((pb) => {
-          pb.titanium(1).or().steel(1);
+          pb.steel(1).or().titanium(1);
         }).asterix();
       }),
       description: 'Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.',

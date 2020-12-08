@@ -3,12 +3,19 @@ export class Timer {
   public started_at: number;
   public running: number;
   public visible: boolean;
+  public after_first_action: boolean;
 
-  constructor(sum_elapsed = 0, started_at = new Date().getTime(), running = -1, visible = false) {
+  constructor(
+    sum_elapsed = 0,
+    started_at = new Date().getTime(),
+    running = 0,
+    visible = false,
+    after_first_action = false) {
     this.sum_elapsed = sum_elapsed;
     this.started_at = started_at;
     this.running = running;
     this.visible = visible;
+    this.after_first_action = after_first_action;
   }
 
   public start() {
@@ -19,13 +26,14 @@ export class Timer {
   }
 
   public stop() {
-    const date = new Date().getTime();
-    if (this.running === 0) {
+    if (!this.after_first_action) {
+      this.started_at = new Date().getTime();
+      this.after_first_action = true;
       return; // skipping timer for first move in game
     }
     this.running--;
     if (this.running === 0) {
-      this.sum_elapsed += date - this.started_at;
+      this.sum_elapsed += new Date().getTime() - this.started_at;
     }
   }
 
@@ -40,7 +48,7 @@ export class Timer {
   }
 
   static fromJSON(d: Timer) {
-    return new Timer(d.sum_elapsed, d.started_at, d.running, d.visible);
+    return new Timer(d.sum_elapsed, d.started_at, d.running, d.visible, d.after_first_action);
   }
 }
 

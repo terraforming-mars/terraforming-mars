@@ -37,5 +37,5 @@ export enum CardRenderItemType {
   TEXT = 'text',
   NBSP = 'nbsp',
   EMPTY_TILE = 'empty_tile',
-  // more to come...
+  EMPTY_TILE_GOLDEN = 'empty_tile_golden',
 }

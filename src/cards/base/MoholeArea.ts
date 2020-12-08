@@ -1,4 +1,3 @@
-
 import {TileType} from '../../TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';

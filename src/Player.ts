@@ -639,7 +639,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       if (tag === Tags.WILDCARD) {
         return tagCount;
-      };
+      }
       if (includeWildcardTags) {
         return tagCount + this.getTagCount(Tags.WILDCARD);
       } else {
@@ -756,10 +756,10 @@ export class Player implements ISerializable<SerializedPlayer> {
           throw new Error('Number not provided for amount');
         }
         if (amount > pi.max) {
-          throw new Error('Amount provided too high');
+          throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
         }
-        if (amount < 0) {
-          throw new Error('Amount provided too low');
+        if (amount < pi.min) {
+          throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
         }
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
@@ -839,13 +839,11 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.runInputCb(game, pi.cb(howToPay));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const units: IProductionUnits = parsedInput;
+        const units: IProductionUnits = JSON.parse(input[0][0]);
         pi.cb(units);
       } else if (pi instanceof ShiftAresGlobalParameters) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const response: IAresGlobalParametersResponse = parsedInput;
+        const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
         pi.cb(response);
       } else {
         throw new Error('Unsupported waitingFor');
@@ -2014,17 +2012,26 @@ export class Player implements ISerializable<SerializedPlayer> {
             corporationCard.initialActionText !== undefined &&
             this.corporationInitialActionDone === false
       ) {
-        const initialActionOption = new SelectOption('Take ' + corporationCard.name + '\'s first action', corporationCard.initialActionText, () => {
-          game.defer(new DeferredAction(this, () => {
-            if (corporationCard.initialAction) {
-              return corporationCard.initialAction(this, game);
-            } else {
-              return undefined;
-            }
-          }));
-          this.corporationInitialActionDone = true;
-          return undefined;
-        });
+        const initialActionOption = new SelectOption(
+          {
+            message: 'Take first action of ${0} corporation',
+            data: [{
+              type: LogMessageDataType.RAW_STRING,
+              value: corporationCard.name,
+            }],
+          },
+          corporationCard.initialActionText, () => {
+            game.defer(new DeferredAction(this, () => {
+              if (corporationCard.initialAction) {
+                return corporationCard.initialAction(this, game);
+              } else {
+                return undefined;
+              }
+            }));
+            this.corporationInitialActionDone = true;
+            return undefined;
+          },
+        );
         const initialActionOrPass = new OrOptions(
           initialActionOption,
           this.passOption(game),

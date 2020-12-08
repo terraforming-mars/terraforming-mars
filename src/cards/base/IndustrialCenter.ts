@@ -12,6 +12,8 @@ import {CardName} from '../../CardName';
 import {Board} from '../../Board';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost = 4;
@@ -42,5 +44,16 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
       game.defer(new SelectHowToPayDeferred(player, 7, false, false, 'Select how to pay for action'));
       player.addProduction(Resources.STEEL);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '123',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(7).startAction.productionBox((pb) => pb.steel(1));
+          eb.description('Action: Spend 7 MC to increase your steel production 1 step.');
+        }).br;
+        b.tile(TileType.INDUSTRIAL_CENTER, true, false).asterix();
+      }),
+      description: 'Place this tile adjacent to a city tile.',
     }
 }

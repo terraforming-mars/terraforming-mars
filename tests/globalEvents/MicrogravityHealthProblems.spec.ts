@@ -13,7 +13,7 @@ describe('MicrogravityHealthProblems', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
     const colony1 = new Luna();
     const colony2 = new Triton();
     colony1.colonies.push(player.id);

@@ -24,9 +24,10 @@ export class CardRenderDynamicVictoryPoints {
     item.size = CardRenderItemSize.SMALL;
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
-  public static cities(points: number, target: number): CardRenderDynamicVictoryPoints {
+  public static cities(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.CITY);
     item.size = CardRenderItemSize.SMALL;
+    item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
   public static jovians(points: number, target: number): CardRenderDynamicVictoryPoints {

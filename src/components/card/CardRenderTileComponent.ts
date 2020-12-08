@@ -45,6 +45,9 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('board-space-tile--industrial_center_ares');
           // normal industrial uses symbol (see getHtml)
         }
+      } else if (type === TileType.METALLIC_ASTEROID) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--metallic_asteroid');
       }
 
       return generateClassString(classes);
@@ -65,6 +68,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-ecological-zone');
         } else if (type === TileType.INDUSTRIAL_CENTER) {
           classes.push('card-tile-symbol-industrial-center');
+        } else if (type === TileType.MAGNETIC_FIELD_GENERATORS) {
+          classes.push('card-tile-symbol-magnetic-field-generators');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

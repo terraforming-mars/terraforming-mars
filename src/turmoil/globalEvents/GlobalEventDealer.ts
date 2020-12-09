@@ -124,8 +124,7 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
 export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDealer> {
   constructor(
     public readonly globalEventsDeck: Array<IGlobalEvent>,
-    public readonly discardedGlobalEvents: Array<IGlobalEvent>,
-  ) {}
+    public readonly discardedGlobalEvents: Array<IGlobalEvent>) {}
 
   public static newInstance(game: Game): GlobalEventDealer {
     const events = [...POSITIVE_GLOBAL_EVENTS];

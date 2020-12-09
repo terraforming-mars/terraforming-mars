@@ -16,8 +16,8 @@ export interface SerializedParty {
 // of IParty, GlobalEventDealer, and IGlobalEvent.
 export interface SerializedTurmoil {
     chairman: undefined | PlayerId | 'NEUTRAL';
-    rulingParty: undefined | IParty | PartyName;
-    dominantParty: undefined | IParty | PartyName;
+    rulingParty: IParty | PartyName;
+    dominantParty: IParty | PartyName;
     lobby: Array<string>;
     delegate_reserve: Array<PlayerId | 'NEUTRAL'>; // eslint-disable-line camelcase
     delegateReserve: Array<PlayerId | 'NEUTRAL'> | undefined;

@@ -6,6 +6,8 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MinorityRefuge implements IProjectCard {
     public cost = 5;
@@ -22,5 +24,12 @@ export class MinorityRefuge implements IProjectCard {
       game.defer(new BuildColony(player, game, false, 'Select colony for Minority Refuge'));
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C26',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(-2)).colonies(1);
+      }),
+      description: 'Decrease your MC production 2 steps. Place a colony.',
     }
 }

@@ -5,6 +5,9 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MassConverter implements IProjectCard {
     public cost = 8;
@@ -24,4 +27,16 @@ export class MassConverter implements IProjectCard {
       player.addProduction(Resources.ENERGY, 6);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '094',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.space().played.startEffect.megacredits(-2);
+          eb.description('Effect: When you play a Space card, you pay 2 MC less for it.');
+        }).br;
+        b.productionBox((pb) => pb.energy(6));
+      }),
+      description: 'Requires 5 science tags. Increase your energy production 6 steps.',
+    };
 }

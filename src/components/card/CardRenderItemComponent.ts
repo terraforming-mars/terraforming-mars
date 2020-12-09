@@ -116,6 +116,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.EMPTY_TILE) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--empty-tile');
+      } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--adjacency-tile');
       }
 
       // round tags
@@ -137,6 +140,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-venus');
         } else if (type === CardRenderItemType.EARTH) {
           classes.push('card-tag-earth');
+        } else if (type === CardRenderItemType.BUILDING) {
+          classes.push('card-tag-building');
         }
       }
 
@@ -186,7 +191,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           result += 'X';
         }
       }
-      if (this.item.secondaryTag !== undefined) {
+
+      if (this.item.secondaryTag !== undefined && this.item.secondaryTag !== 'oxygen') {
         const classes: string[] = ['card-icon'];
         classes.push(`tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';

@@ -61,6 +61,9 @@ import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {PartyName} from './turmoil/parties/PartyName';
 import {AgendaStyle} from './turmoil/PoliticalAgendas';
+import {RedsPolicy02} from './turmoil/parties/Reds';
+import {GreensPolicy02} from './turmoil/parties/Greens';
+import {KelvinistsPolicy04} from './turmoil/parties/Kelvinists';
 
 export type GameId = string;
 
@@ -1434,6 +1437,11 @@ export class Game implements ISerializable<SerializedGame> {
         }
       }
 
+      // PoliticalAgendas Reds P2 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp02') && this.phase === Phase.ACTION) {
+        const redsPolicy = new RedsPolicy02();
+        redsPolicy.onTilePlaced(player, space, this);
+      }
 
       // Part 3. Setup for bonuses
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1469,6 +1477,18 @@ export class Game implements ISerializable<SerializedGame> {
         });
 
         PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
+
+        // PoliticalAgendas Greens P2 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, 'gp02') && this.phase === Phase.ACTION) {
+          const greensPolicy = new GreensPolicy02();
+          greensPolicy.onTilePlaced(player);
+        }
+
+        // PoliticalAgendas Kelvinists P4 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp04') && this.phase === Phase.ACTION) {
+          const kelvinistsPolicy = new KelvinistsPolicy04();
+          kelvinistsPolicy.onTilePlaced(player);
+        }
 
         if (arcadianCommunityBonus) {
           player.megaCredits += 3;
@@ -1520,11 +1540,12 @@ export class Game implements ISerializable<SerializedGame> {
       player: Player, spaceId: string,
       spaceType: SpaceType = SpaceType.LAND,
       shouldRaiseOxygen: boolean = true): undefined {
-      this.addTile(player, spaceType, this.getSpace(spaceId), {
+      const space: ISpace = this.getSpace(spaceId);
+      this.addTile(player, spaceType, space, {
         tileType: TileType.GREENERY,
       });
       // Turmoil Greens ruling policy
-      PartyHooks.applyGreensRulingPolicy(this, player);
+      PartyHooks.applyGreensRulingPolicy(this, player, space);
 
       if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
       return undefined;

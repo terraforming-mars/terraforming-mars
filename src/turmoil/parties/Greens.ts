@@ -91,7 +91,7 @@ export class GreensPolicy04 implements Policy {
   description: string = 'Spend 3 plants to add 2 microbes or 1 animal to any card (Turmoil Greens)';
 
   canAct(player: Player) {
-    return player.plants >= 3;
+    return player.plants >= 3 && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {

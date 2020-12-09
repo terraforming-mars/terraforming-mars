@@ -61,8 +61,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
-        const dealer = GlobalEventDealer.newInstance(game);
-        const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
+      const dealer = GlobalEventDealer.newInstance(game);
+      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
+
+      // Init parties
+      turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -255,6 +258,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Ruling Party changes
     public setRulingParty(game: Game): void {
       if (this.rulingParty !== undefined) {
+        // Cleanup previous party effects
+        game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+
         const rulingParty = this.rulingParty;
 
         // Resolve Ruling Bonus
@@ -268,6 +274,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
         }
         bonus.grant(game);
+
+        // Resolve Ruling Policy for Scientists P4
+        const policyId = this.politicalAgendasData.thisAgenda.policyId;
+        const policy = rulingParty.policies.find((p) => p.id === policyId);
+        if (policy !== undefined && policy.apply !== undefined) {
+          policy.apply(game);
+        }
 
         // Change the chairman
         if (this.chairman) {

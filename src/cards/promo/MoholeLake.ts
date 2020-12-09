@@ -71,6 +71,6 @@ export class MoholeLake implements IActionCard, IProjectCard {
         }).br;
         b.plants(3).temperature(1).oceans(1);
       }),
-      description: 'Gain 3 plant. Raise temperature 1 step, and place 1 ocean tile.',
+      description: 'Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.',
     }
 }

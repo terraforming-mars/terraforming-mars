@@ -49,7 +49,7 @@ export class ScientistsPolicy01 implements Policy {
   description: string = 'Pay 10 MC to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player) {
-    return player.canAfford(10);
+    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {
@@ -85,7 +85,7 @@ export class ScientistsPolicy03 implements Policy {
   description: string = 'Pay 4 MC to discard a card and draw a card (Turmoil Scientists)';
 
   canAct(player: Player) {
-    return player.canAfford(4);
+    return player.canAfford(4) && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {
@@ -118,7 +118,6 @@ export class ScientistsPolicy04 implements Policy {
 
   apply(game: Game) {
     game.getPlayers().forEach((player) => {
-      // TODO: Reset to false during Turmoil cleanup and party changeover
       player.hasTurmoilScienceTagBonus = true;
     });
   }

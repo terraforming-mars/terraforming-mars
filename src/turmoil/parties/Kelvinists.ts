@@ -78,7 +78,7 @@ export class KelvinistsPolicy03 implements Policy {
   description: string = 'Decrease your heat production 2 steps to gain 1 TR (Turmoil Kelvinists)';
 
   canAct(player: Player) {
-    return player.getProduction(Resources.HEAT) >= 2;
+    return player.getProduction(Resources.HEAT) >= 2 && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {
@@ -87,6 +87,7 @@ export class KelvinistsPolicy03 implements Policy {
 
     player.addProduction(Resources.HEAT, -2);
     player.increaseTerraformRating(game);
+    player.turmoilPolicyActionUsed = true;
     return undefined;
   }
 }

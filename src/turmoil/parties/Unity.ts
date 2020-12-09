@@ -55,7 +55,9 @@ export class UnityPolicy02 implements Policy {
   description: string = 'Spend 15 MC (titanium may be used) to build a Colony (Turmoil Unity)';
 
   canAct(player: Player, game: Game) {
-    return player.canAfford(15, game, false, true) && player.hasAvailableColonyTileToBuildOn(game);
+    return player.canAfford(15, game, false, true) &&
+      player.hasAvailableColonyTileToBuildOn(game) &&
+      player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {

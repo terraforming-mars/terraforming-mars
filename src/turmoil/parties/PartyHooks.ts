@@ -5,19 +5,23 @@ import {SpaceType} from '../../SpaceType';
 import {Phase} from '../../Phase';
 import {PolicyId} from '../Policy';
 import {Resources} from '../../Resources';
+import {Agenda} from '../PoliticalAgendas';
+import {ISpace} from '../../ISpace';
+import {GreensPolicy01} from './Greens';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(game: Game, player: Player, spaceType: SpaceType) {
-    if (this.shouldApplyPolicy(game, PartyName.MARS) &&
+    if (this.shouldApplyPolicy(game, PartyName.MARS, 'mfp01') &&
         spaceType !== SpaceType.COLONY &&
         game.phase === Phase.ACTION) {
       player.setResource(Resources.STEEL, 1);
     }
   }
 
-  static applyGreensRulingPolicy(game: Game, player: Player) {
-    if (this.shouldApplyPolicy(game, PartyName.GREENS) && game.phase === Phase.ACTION) {
-      player.setResource(Resources.MEGACREDITS, 4);
+  static applyGreensRulingPolicy(game: Game, player: Player, space: ISpace) {
+    if (this.shouldApplyPolicy(game, PartyName.GREENS, 'gp01')) {
+      const greensPolicy = new GreensPolicy01();
+      greensPolicy.onTilePlaced(player, space, game);
     }
   }
 
@@ -30,11 +34,13 @@ export class PartyHooks {
     const rulingParty = turmoil.rulingParty!;
     if (!rulingParty) return false;
 
-    const activePolicyId = turmoil.politicalAgendasData.thisAgenda.policyId;
-    if (policyId !== undefined && activePolicyId !== undefined) {
-      return rulingParty.name === partyName && activePolicyId === policyId;
-    }
+    // Set the default policy if not given
+    if (policyId === undefined) policyId = rulingParty.policies[0].id;
 
-    return rulingParty.name === partyName;
+    // Apply the chosen policy
+    const staticAgendas: Map<PartyName, Agenda> = turmoil.politicalAgendasData.staticAgendas as Map<PartyName, Agenda>;
+    const partyAgenda = staticAgendas.get(partyName) as Agenda;
+
+    return rulingParty.name === partyName && partyAgenda.policyId === policyId;
   }
 }

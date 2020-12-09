@@ -5,7 +5,7 @@ import {Policy, PolicyId} from './Policy';
 
 export enum AgendaStyle {
   STANDARD = 'Standard',
-  RANDOM = 'Random', // TODO: Implement
+  RANDOM = 'Random',
   CHAIRMAN = 'Chairman' // TODO: Implement
 }
 
@@ -48,6 +48,7 @@ export class PoliticalAgendas {
       const policy: Policy = agendaStyle === AgendaStyle.STANDARD ? policies[0] : policies[Math.floor(Math.random() * policies.length)];
       staticAgendas.set(p.name, {bonusId: bonus.id, policyId: policy.id} as Agenda);
     });
+
     return staticAgendas;
   }
 

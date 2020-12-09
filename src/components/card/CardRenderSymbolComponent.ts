@@ -36,6 +36,10 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
       } else if (type === CardRenderSymbolType.NBSP) {
         // TODO (chosta): add size
         classes.push('card-nbsp');
+      } else if (type === CardRenderSymbolType.SLASH) {
+        classes.push('card-slash');
+      } else if (type === CardRenderSymbolType.EQUALS) {
+        classes.push('card-equals');
       }
 
       return classes.join(' ');

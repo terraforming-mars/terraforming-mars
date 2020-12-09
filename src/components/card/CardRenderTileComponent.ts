@@ -45,6 +45,25 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('board-space-tile--industrial_center_ares');
           // normal industrial uses symbol (see getHtml)
         }
+      } else if (type === TileType.METALLIC_ASTEROID) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--metallic_asteroid');
+      } else if (type === TileType.MINING_STEEL_BONUS) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--mining_steel');
+      } else if (type === TileType.MINING_TITANIUM_BONUS) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--mining_titanium');
+      } else if (type === TileType.MOHOLE_AREA) {
+        if (this.item.isAres) {
+          classes.push('card-tile-ares');
+          classes.push('board-space-tile--mohole_area_ares');
+        }
+      } else if (type === TileType.LAVA_FLOWS) {
+        if (this.item.isAres) {
+          classes.push('card-tile-ares');
+          classes.push('board-space-tile--lava_flows_ares');
+        }
       }
 
       return generateClassString(classes);
@@ -65,6 +84,14 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-ecological-zone');
         } else if (type === TileType.INDUSTRIAL_CENTER) {
           classes.push('card-tile-symbol-industrial-center');
+        } else if (type === TileType.MAGNETIC_FIELD_GENERATORS) {
+          classes.push('card-tile-symbol-magnetic-field-generators');
+        } else if (type === TileType.MINING_AREA || type === TileType.MINING_RIGHTS) {
+          classes.push('card-tile-symbol-mining');
+        } else if (type === TileType.MOHOLE_AREA) {
+          classes.push('card-tile-symbol-mohole-area');
+        } else if (type === TileType.LAVA_FLOWS) {
+          classes.push('card-tile-symbol-lava-flows');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

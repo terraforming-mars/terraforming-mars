@@ -36,7 +36,7 @@ export class MiningExpedition implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '063',
       renderData: CardRenderer.builder((b) => {
-        b.oxygen(1);
+        b.oxygen(1).br;
         b.minus().plants(-2).any;
         b.steel(2);
       }),

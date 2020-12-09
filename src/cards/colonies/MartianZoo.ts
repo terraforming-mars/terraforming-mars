@@ -6,6 +6,9 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {IResourceCard} from '../ICard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MartianZoo implements IProjectCard, IResourceCard {
     public cost = 12;
@@ -40,5 +43,25 @@ export class MartianZoo implements IProjectCard, IResourceCard {
 
     public getVictoryPoints(): number {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C24',
+      requirements: CardRequirements.builder((b) => b.cities(2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.earth().played.startEffect.animals(1);
+          eb.description('Effect: When you play an Earth tag, place an animal here.');
+        }).br;
+        b.effectBox((eb) => {
+          eb.empty().startAction.megacredits(1).slash().animals(1);
+          eb.description('Action: Gain 1MC per animal here.');
+        });
+      }),
+      description: {
+        text: 'Requires 2 city tiles in play.',
+        align: 'left',
+      },
+      victoryPoints: 1,
     }
 }

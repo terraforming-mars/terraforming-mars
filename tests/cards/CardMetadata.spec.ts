@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
+import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
 import {TestPlayers} from '../TestingUtils';
 
 describe('CardMetadata', function() {
@@ -20,7 +21,11 @@ describe('CardMetadata', function() {
           expect(card.metadata.victoryPoints, card.name + ' is missing VP metadata').is.not.undefined;
           const vp = card.getVictoryPoints(player, game);
           if (vp !== 0) {
-            expect(card.metadata.victoryPoints, card.name + ' has invalid VP metadata').to.eq(vp);
+            if (card.metadata.victoryPoints instanceof CardRenderDynamicVictoryPoints && card.metadata.victoryPoints.anyPlayer === true) {
+              expect(card.metadata.victoryPoints.points, card.name + ' has invalid VP metadata').to.eq(vp);
+            } else {
+              expect(card.metadata.victoryPoints, card.name + ' has invalid VP metadata').to.eq(vp);
+            }
           }
           // If vp === 0 that means it's a variable VP card, so we can't check the actual value
         }

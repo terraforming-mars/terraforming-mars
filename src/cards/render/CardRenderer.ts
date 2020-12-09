@@ -223,8 +223,8 @@ class Builder {
     return this;
   }
 
-  public earth(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH));
+  public earth(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH, amount));
     return this;
   }
 

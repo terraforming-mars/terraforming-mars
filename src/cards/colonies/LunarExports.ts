@@ -6,6 +6,9 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LunarExports implements IProjectCard {
     public cost = 19;
@@ -25,4 +28,13 @@ export class LunarExports implements IProjectCard {
         }),
       );
     }
+    public metadata: CardMetadata = {
+      cardNumber: 'C21',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.plants(2).or(CardRenderItemSize.SMALL).megacredits(5);
+        });
+      }),
+      description: 'Increase your plant production 2 steps, or your MC production 5 steps.',
+    };
 }

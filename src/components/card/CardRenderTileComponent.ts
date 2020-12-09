@@ -59,6 +59,11 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-ares');
           classes.push('board-space-tile--mohole_area_ares');
         }
+      } else if (type === TileType.LAVA_FLOWS) {
+        if (this.item.isAres) {
+          classes.push('card-tile-ares');
+          classes.push('board-space-tile--lava_flows_ares');
+        }
       }
 
       return generateClassString(classes);
@@ -85,6 +90,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-mining');
         } else if (type === TileType.MOHOLE_AREA) {
           classes.push('card-tile-symbol-mohole-area');
+        } else if (type === TileType.LAVA_FLOWS) {
+          classes.push('card-tile-symbol-lava-flows');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

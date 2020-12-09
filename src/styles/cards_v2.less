@@ -237,6 +237,10 @@
                 font-size: @font_size_normal;
                 line-height: normal;
             }
+            .card-slash, .card-equals {
+                margin-left: 2px;
+                margin-right: 2px;
+            }
             .card-or--small, .card-slash--small {
                 font-size: @font_size_small;
                 margin-left: 2px;
@@ -422,7 +426,7 @@
                 margin-top: 8px;
                 color: #020202;
                 font-size: 11px;
-                line-height: 13px;
+                line-height: 12px;
                 font-weight: normal;
             }
             .card-description-aligned {
@@ -571,6 +575,12 @@
             }
             .card-tile-symbol-mohole-area {
                 background-image: url(./assets/tiles/special_tile_icons/mohole_area.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-lava-flows{
+                background-image: url(./assets/tiles/special_tile_icons/lava_flows.png);
                 position: relative;
                 left: -2px;
                 top: 1px;

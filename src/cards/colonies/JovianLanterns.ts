@@ -10,6 +10,12 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+
 
 export class JovianLanterns implements IProjectCard, IResourceCard {
     public cost = 20;
@@ -48,4 +54,22 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 2);
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C18',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.titanium(1).startAction.floaters(2);
+          eb.description('Action: Spend 1 titanium to add 2 floaters here.');
+        }).br;
+        b.tr(1).floaters(2).asterix().br;
+        b.text('1VP per 2 floaters.', CardRenderItemSize.TINY, true);
+      }),
+      description: {
+        text: 'Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.',
+        align: 'left',
+      },
+      victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),
+    };
 }

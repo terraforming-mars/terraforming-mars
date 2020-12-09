@@ -7,6 +7,9 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MartianRails implements IActionCard, IProjectCard {
     public cost = 13;
@@ -28,4 +31,13 @@ export class MartianRails implements IActionCard, IProjectCard {
 
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '007',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.energy(1).startAction.megacredits(1).slash().city(CardRenderItemSize.SMALL);
+          eb.description('Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.');
+        }).br;
+      }),
+    };
 }

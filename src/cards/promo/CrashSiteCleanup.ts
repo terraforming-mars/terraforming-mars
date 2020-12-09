@@ -7,6 +7,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CrashSiteCleanup implements IProjectCard {
     public cost = 4;
@@ -45,5 +48,14 @@ export class CrashSiteCleanup implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+      description: 'Requires that a player removed ANOTHER PLAYER\'s plants this generation. Gain 1 titanium or 2 steel.',
+      cardNumber: 'X16',
+      requirements: CardRequirements.builder((b) => b.plantsRemoved()),
+      renderData: CardRenderer.builder((b) => {
+        b.titanium(1).nbsp.or().nbsp.steel(2);
+      }),
+      victoryPoints: 1,
+    };
 }
 

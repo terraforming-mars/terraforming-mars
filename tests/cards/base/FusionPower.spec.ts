@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {FusionPower} from '../../../src/cards/base/FusionPower';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FusionPower', function() {
   let card : FusionPower; let player : Player;
 
   beforeEach(function() {
     card = new FusionPower();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

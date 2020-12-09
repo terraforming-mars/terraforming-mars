@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {SpaceMirrors} from '../../../src/cards/base/SpaceMirrors';
-import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SpaceMirrors', function() {
   let card : SpaceMirrors; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SpaceMirrors();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

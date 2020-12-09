@@ -59,7 +59,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return this.player.timer.visible;
     },
     getLabelClasses: function(): string {
-      const classes = [];
+      const classes: Array<string> = [];
       const baseClass = 'player-action-status';
       classes.push(baseClass);
       if (this.actionLabel === ActionLabel.PASSED) {
@@ -70,7 +70,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return classes.join(' ');
     },
     getPlayerNameClasses: function(): string {
-      const classes = [];
+      const classes: Array<string> = [];
       const baseClass = 'player-name';
       classes.push(baseClass);
       if (this.player.id === this.activePlayer.id) {
@@ -111,7 +111,7 @@ export const PlayerStatus = Vue.component('player-status', {
                     <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
-                <div :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
+                <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
             </div>
             <div class="player-status-right">

@@ -33,11 +33,7 @@
 
     "Players": "Spieler",
 
-    "Player 1 name": "Name Spieler 1",
-    "Player 2 name": "Name Spieler 2",
-    "Player 3 name": "Name Spieler 3",
-    "Player 4 name": "Name Spieler 4",
-    "Player 5 name": "Name Spieler 5",
+    "Player ${0} name": "Name Spieler ${0}",
 
     "Beginner?": "Anfänger?",
     "Goes First?": "Startspieler?",

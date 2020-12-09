@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {BiosphereSupport} from '../../../src/cards/prelude/BiosphereSupport';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BiosphereSupport', function() {
   let card : BiosphereSupport; let player : Player;
 
   beforeEach(function() {
     card = new BiosphereSupport();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

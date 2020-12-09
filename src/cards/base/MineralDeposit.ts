@@ -1,9 +1,10 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MineralDeposit implements IProjectCard {
     public cost = 5;
@@ -14,5 +15,11 @@ export class MineralDeposit implements IProjectCard {
     public play(player: Player, _game: Game) {
       player.steel += 5;
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '062',
+      renderData: CardRenderer.builder((b) => b.steel(5)),
+      description: 'Gain 5 steel.',
     }
 }

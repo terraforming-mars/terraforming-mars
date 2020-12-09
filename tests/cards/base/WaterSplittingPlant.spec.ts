@@ -1,16 +1,15 @@
 import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {Player} from '../../../src/Player';
+import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('WaterSplittingPlant', function() {
   let card : WaterSplittingPlant; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WaterSplittingPlant();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

@@ -3,7 +3,6 @@ import {AresHandler} from '../../src/ares/AresHandler';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
-import {Color} from '../../src/Color';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/TileType';
@@ -16,13 +15,14 @@ import {OriginalBoard} from '../../src/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
 import {Phase} from '../../src/Phase';
+import {TestPlayers} from '../TestingUtils';
 
 describe('AresHandler', function() {
   let player : Player; let otherPlayer: Player; let game : Game;
 
   beforeEach(function() {
-    player = new Player('test', Color.BLUE, false);
-    otherPlayer = new Player('other', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });

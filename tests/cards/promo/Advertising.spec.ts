@@ -1,15 +1,14 @@
 import {expect} from 'chai';
-import {Advertising} from '../../../src/cards/promo/Advertising';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {Resources} from '../../../src/Resources';
+import {Advertising} from '../../../src/cards/promo/Advertising';
 import {Game} from '../../../src/Game';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
 
     player.playedCards.push(advertising);

@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {FoodFactory} from '../../../src/cards/base/FoodFactory';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FoodFactory', function() {
   let card : FoodFactory; let player : Player;
 
   beforeEach(function() {
     card = new FoodFactory();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

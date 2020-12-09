@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Research} from '../../../src/cards/base/Research';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
+import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Extremophiles', function() {
   let card : Extremophiles; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Extremophiles();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

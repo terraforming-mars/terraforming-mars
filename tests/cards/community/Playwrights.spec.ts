@@ -1,24 +1,26 @@
 import {expect} from 'chai';
-import {Playwrights} from '../../../src/cards/community/Playwrights';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Resources} from '../../../src/Resources';
-import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {DeimosDown} from '../../../src/cards/base/DeimosDown';
-import {ICard} from '../../../src/cards/ICard';
+import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
+import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
+import {Playwrights} from '../../../src/cards/community/Playwrights';
+import {ICard} from '../../../src/cards/ICard';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
+import {LawSuit} from '../../../src/cards/promo/LawSuit';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Playwrights', function() {
   let card : Playwrights; let player : Player; let player2: Player; let game : Game;
 
   beforeEach(function() {
     card = new Playwrights();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
     card.play(player);
@@ -44,13 +46,14 @@ describe('Playwrights', function() {
 
     const selectCard = card.action(player, game) as SelectCard<ICard>;
     selectCard.cb([event]);
-        // SelectHowToPay
-        game.deferredActions.shift()!.execute();
 
-        expect(player.getTerraformRating()).to.eq(tr + 4);
-        expect(player.megaCredits).eq(0);
-        expect(player.playedCards).has.lengthOf(0);
-        expect(player.removedFromPlayCards).has.lengthOf(1);
+    game.deferredActions.shift()!.execute(); // SelectHowToPay
+    game.deferredActions.runAll(() => {});
+
+    expect(player.getTerraformRating()).to.eq(tr + 4);
+    expect(player.megaCredits).eq(0);
+    expect(player.playedCards).has.lengthOf(0);
+    expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
   it('Can replay other player\'s event', function() {
@@ -63,13 +66,14 @@ describe('Playwrights', function() {
     expect(card.canAct(player, game)).is.true;
     const selectCard = card.action(player, game) as SelectCard<ICard>;
     selectCard.cb([event]);
-        // SelectHowToPay
-        game.deferredActions.shift()!.execute();
 
-        expect(player.getTerraformRating()).to.eq(tr + 2);
-        expect(player.megaCredits).eq(0);
-        expect(player2.playedCards).has.lengthOf(0);
-        expect(player.removedFromPlayCards).has.lengthOf(1);
+    game.deferredActions.shift()!.execute(); // SelectHowToPay
+    game.deferredActions.runAll(() => {});
+
+    expect(player.getTerraformRating()).to.eq(tr + 2);
+    expect(player.megaCredits).eq(0);
+    expect(player2.playedCards).has.lengthOf(0);
+    expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
   it('Cannot act without any playable events', function() {
@@ -95,5 +99,27 @@ describe('Playwrights', function() {
 
         player.playCard(game, deimosDown);
         expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost); // no more discount
+  });
+
+  it('Works with Law Suit', function() {
+    const event = new LawSuit();
+    player2.playedCards.push(event);
+
+    player.megaCredits = event.cost;
+    player.removingPlayers = [player2.id];
+    expect(card.canAct(player, game)).is.true;
+
+    const selectCard = card.action(player, game) as SelectCard<ICard>;
+    selectCard.cb([event]);
+
+    game.deferredActions.shift()!.execute(); // SelectHowToPay
+    const selectPlayer = game.deferredActions.shift()!.execute() as SelectPlayer;
+    selectPlayer.cb(player2);
+
+    game.deferredActions.runAll(() => {});
+
+    expect(player.playedCards).has.lengthOf(0);
+    expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player
+    expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 });

@@ -1,5 +1,6 @@
 
 import Vue from 'vue';
+import {$t} from '../directives/i18n';
 import {HowToPay} from '../inputs/HowToPay';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
@@ -65,6 +66,9 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     });
   },
   methods: {
+    getTitle: function() {
+      return $t(this.playerinput.title);
+    },
     hasWarning: function() {
       return this.$data.warning !== undefined;
     },
@@ -225,7 +229,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   template: `<div class="payments_cont">
   <section v-trim-whitespace>
 
-    <h3 class="payments_title">{{playerinput.title}}</h3>
+    <h3 class="payments_title">{{getTitle()}}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
 import {Incite} from '../../../src/cards/community/Incite';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Incite', function() {
   let card : Incite; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Incite();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player], player, gameOptions);

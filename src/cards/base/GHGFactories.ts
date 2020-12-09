@@ -4,6 +4,8 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class GHGFactories implements IProjectCard {
   public cost = 11;
@@ -19,4 +21,14 @@ export class GHGFactories implements IProjectCard {
     player.addProduction(Resources.HEAT, 4);
     return undefined;
   }
+  public metadata: CardMetadata = {
+    cardNumber: '126',
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => {
+        pb.minus().energy(1).br;
+        pb.plus().heat(4).digit;
+      });
+    }),
+    description: 'Decrease your Energy production 1 step and increase your heat production 4 steps.',
+  };
 }

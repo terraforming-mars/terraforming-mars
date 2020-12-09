@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {Pets} from '../../../src/cards/base/Pets';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Pets', function() {
   it('Should play', function() {
     const card = new Pets();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     player.playedCards.push(card);
     const game = new Game('foobar', [player, player2], player);
     const action = card.play(player);

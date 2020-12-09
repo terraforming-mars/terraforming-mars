@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {ByElection} from '../../../src/cards/community/ByElection';
-import {setCustomGameOptions} from '../../TestingUtils';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ByElection', function() {
   let card : ByElection; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ByElection();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player, player], player, gameOptions);

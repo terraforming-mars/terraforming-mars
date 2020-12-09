@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Color} from '../src/Color';
 import {OriginalBoard} from '../src/OriginalBoard';
 import {Player} from '../src/Player';
 import {TileType} from '../src/TileType';
 import {ISpace} from '../src/ISpace';
 import {SpaceType} from '../src/SpaceType';
+import {TestPlayers} from './TestingUtils';
 
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
     board = new OriginalBoard();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('foo', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
   });
 
   it('Can have greenery placed on any available land when player has no tile placed', function() {

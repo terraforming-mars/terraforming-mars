@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('BusinessNetwork', function() {
   let card : BusinessNetwork; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

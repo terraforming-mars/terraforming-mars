@@ -53,7 +53,7 @@ import {SelectColony} from './src/inputs/SelectColony';
 import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
 
-const serverId = generateRandomServerId();
+const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();
@@ -691,6 +691,7 @@ function getWaitingFor(
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    min: undefined,
     max: undefined,
     microbes: undefined,
     floaters: undefined,
@@ -750,6 +751,7 @@ function getWaitingFor(
     );
     break;
   case PlayerInputTypes.SELECT_AMOUNT:
+    result.min = (waitingFor as SelectAmount).min;
     result.max = (waitingFor as SelectAmount).max;
     break;
   case PlayerInputTypes.SELECT_DELEGATE:

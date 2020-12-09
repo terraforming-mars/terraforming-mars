@@ -1,7 +1,5 @@
 
 import {expect} from 'chai';
-import {Color} from '../src/Color';
-import {Player} from '../src/Player';
 import {LunarBeam} from '../src/cards/base/LunarBeam';
 import {Game} from '../src/Game';
 import {Insulation} from '../src/cards/base/Insulation';
@@ -10,14 +8,15 @@ import {PowerSupplyConsortium} from '../src/cards/base/PowerSupplyConsortium';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
+import {TestPlayers} from './TestingUtils';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     expect(player.corporationCard).is.undefined;
   });
   it('Should throw error if nothing to process', function() {
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
     expect(function() {
@@ -26,9 +25,9 @@ describe('Player', function() {
   });
   it('Should run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
-    const player3 = new Player('test3', Color.YELLOW, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const player3 = TestPlayers.YELLOW.newPlayer();
     const game = new Game('foobar', [player, player2, player3], player);
     player2.addProduction(Resources.ENERGY, 2);
     player3.addProduction(Resources.ENERGY, 2);
@@ -43,7 +42,7 @@ describe('Player', function() {
   });
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
@@ -64,7 +63,7 @@ describe('Player', function() {
   });
   it('Should run select amount for Insulation', function() {
     const card = new Insulation();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     player.addProduction(Resources.HEAT, 2);
     const game = new Game('foobar', [player], player);
     const action = card.play(player, new Game('foobar', [player, player], player));
@@ -87,8 +86,8 @@ describe('Player', function() {
     expect(player.getWaitingFor()).is.undefined;
   });
   it('Runs SaturnSystems when other player plays card', function() {
-    const player1 = new Player('p1', Color.BLUE, false);
-    const player2 = new Player('p2', Color.RED, false);
+    const player1 = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('gto', [player1, player2], player1);
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
@@ -98,7 +97,7 @@ describe('Player', function() {
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
   it('Chains onend functions from player inputs', function(done) {
-    const player = new Player('p1', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     const mockOption3 = new SelectOption('Mock select option 3', 'Save', () => {
       return undefined;
@@ -118,7 +117,7 @@ describe('Player', function() {
     expect(player.getWaitingFor()).to.be.undefined;
   });
   it('serializes every property', function() {
-    const player = new Player('p1', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const serialized = player.serialize();
     const serializedKeys = Object.keys(serialized);
     const playerKeys = Object.keys(player);

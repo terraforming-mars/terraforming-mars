@@ -1,20 +1,20 @@
-import {ICard} from '../../../src/cards/ICard';
 import {expect} from 'chai';
-import {HydrogenToVenus} from '../../../src/cards/venusNext/HydrogenToVenus';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
+import {ICard} from '../../../src/cards/ICard';
 import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {HydrogenToVenus} from '../../../src/cards/venusNext/HydrogenToVenus';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('HydrogenToVenus', function() {
   let card : HydrogenToVenus; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new HydrogenToVenus();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

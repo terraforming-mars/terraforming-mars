@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {ImportedNitrogen} from '../../../src/cards/base/ImportedNitrogen';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
-import {Pets} from '../../../src/cards/base/Pets';
 import {Birds} from '../../../src/cards/base/Birds';
+import {ImportedNitrogen} from '../../../src/cards/base/ImportedNitrogen';
+import {Pets} from '../../../src/cards/base/Pets';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ImportedNitrogen', function() {
   let card : ImportedNitrogen; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ImportedNitrogen();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

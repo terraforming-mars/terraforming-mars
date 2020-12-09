@@ -49,7 +49,7 @@ export class CorroderSuits implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '219',
-      description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD',
+      description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.megacredits(2);

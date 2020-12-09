@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {GHGFactories} from '../../../src/cards/base/GHGFactories';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('GHGFactories', function() {
   let card : GHGFactories; let player : Player;
 
   beforeEach(function() {
     card = new GHGFactories();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

@@ -1,13 +1,12 @@
 
 import {expect} from 'chai';
 import {AdaptationTechnology} from '../../../src/cards/base/AdaptationTechnology';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AdaptationTechnology', function() {
   it('Should play', function() {
     const card = new AdaptationTechnology();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     card.play();
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

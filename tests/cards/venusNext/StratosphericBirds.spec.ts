@@ -1,20 +1,20 @@
 import {expect} from 'chai';
-import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
-import {ExtractorBalloons} from '../../../src/cards/venusNext/ExtractorBalloons';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {ICard} from '../../../src/cards/ICard';
+import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
+import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {ExtractorBalloons} from '../../../src/cards/venusNext/ExtractorBalloons';
+import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('StratosphericBirds', function() {
   let card : StratosphericBirds; let player : Player; let game : Game; let deuteriumExport: DeuteriumExport;
 
   beforeEach(function() {
     card = new StratosphericBirds();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
     deuteriumExport = new DeuteriumExport();
   });

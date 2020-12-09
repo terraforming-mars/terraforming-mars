@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnology';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AntiGravityTechnology', function() {
   let card : AntiGravityTechnology; let player : Player;
 
   beforeEach(function() {
     card = new AntiGravityTechnology();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

@@ -1,21 +1,20 @@
 import {expect} from 'chai';
-import {JovianTaxRights} from '../../src/turmoil/globalEvents/JovianTaxRights';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Resources} from '../../src/Resources';
 import {Luna} from '../../src/colonies/Luna';
 import {Triton} from '../../src/colonies/Triton';
+import {Game} from '../../src/Game';
+import {Resources} from '../../src/Resources';
+import {JovianTaxRights} from '../../src/turmoil/globalEvents/JovianTaxRights';
+import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('JovianTaxRights', function() {
   it('resolve play', function() {
     const card = new JovianTaxRights();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
 
     const colony1 = new Luna();
     const colony2 = new Triton();

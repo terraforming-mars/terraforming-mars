@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/cards/turmoil/CulturalMetropolis';
-import {Player} from '../../../src/Player';
-import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {PLAYER_DELEGATES_COUNT} from '../../../src/constants';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('Cultural Metropolis', function() {
   let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; ;
 
   beforeEach(function() {
     card = new CulturalMetropolis();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player, player2], player, gameOptions);

@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Ironworks implements IActionCard, IProjectCard {
     public cost = 11;
@@ -33,4 +35,13 @@ export class Ironworks implements IActionCard, IProjectCard {
       player.steel++;
       return game.increaseOxygenLevel(player, 1);
     }
+    public metadata: CardMetadata = {
+      cardNumber: '101',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.energy(4).digit.startAction.steel(1).oxygen(1);
+          eb.description('Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.');
+        });
+      }),
+    };
 }

@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('RefugeeCamps', function() {
   let card : RefugeeCamps; let player : Player;
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

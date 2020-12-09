@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -7,6 +6,9 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Greenhouses implements IProjectCard {
     public cost = 6;
@@ -20,4 +22,11 @@ export class Greenhouses implements IProjectCard {
       LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '096',
+      renderData: CardRenderer.builder((b) => {
+        b.plants(1).slash().city(CardRenderItemSize.SMALL).any;
+      }),
+      description: 'Gain 1 plant for each city tile in play.',
+    };
 }

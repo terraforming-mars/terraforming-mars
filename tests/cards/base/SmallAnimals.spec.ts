@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SmallAnimals', function() {
   let card : SmallAnimals; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new SmallAnimals();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

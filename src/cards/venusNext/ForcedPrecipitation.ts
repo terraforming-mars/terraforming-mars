@@ -13,6 +13,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ForcedPrecipitation implements IActionCard, IProjectCard, IResourceCard {
     public cost = 8;
@@ -70,5 +72,19 @@ export class ForcedPrecipitation implements IActionCard, IProjectCard, IResource
       game.increaseVenusScaleLevel(player, 1);
       LogHelper.logVenusIncrease(game, player, 1);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '226',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(2).startAction.floaters(1).asterix;
+          eb.description('Action: Spend 2 MC to add 1 Floater to THIS card');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.floaters(2).startAction.venus(1);
+          eb.description('Action: Spend 2 Floaters here to increase Venus 1 step');
+        });
+      }),
     }
 }

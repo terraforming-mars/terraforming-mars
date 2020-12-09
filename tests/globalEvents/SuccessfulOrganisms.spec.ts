@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {SuccessfulOrganisms} from '../../src/turmoil/globalEvents/SuccessfulOrganisms';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Resources} from '../../src/Resources';
+import {SuccessfulOrganisms} from '../../src/turmoil/globalEvents/SuccessfulOrganisms';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('SuccessfulOrganisms', function() {
   it('resolve play', function() {
     const card = new SuccessfulOrganisms();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
     turmoil.chairman = player2.id;

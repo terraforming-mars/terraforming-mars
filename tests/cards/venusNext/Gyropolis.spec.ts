@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
-import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
+import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
+import {Game} from '../../../src/Game';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Resources} from '../../../src/Resources';
+import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Gyropolis', function() {
   it('Should play', function() {
     const card = new Gyropolis();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player, player], player);
     const card1 = new ResearchNetwork();
     const card2 = new LunaGovernor();

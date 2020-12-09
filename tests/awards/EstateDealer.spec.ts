@@ -1,17 +1,15 @@
-
 import {expect} from 'chai';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {EstateDealer} from '../../src/awards/EstateDealer';
 import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
+import {TestPlayers} from '../TestingUtils';
 
 describe('EstateDealer', function() {
   it('Correctly counts ocean tiles', function() {
     const award = new EstateDealer();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
 
     game.addOceanTile(player2, '34'); // Normal ocean tile
@@ -31,8 +29,8 @@ describe('EstateDealer', function() {
 
   it('Correctly counts Ares upgraded oceans', function() {
     const award = new EstateDealer();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
 
     game.addOceanTile(player2, '34');

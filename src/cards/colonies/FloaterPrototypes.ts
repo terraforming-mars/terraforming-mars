@@ -6,6 +6,8 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class FloaterPrototypes implements IProjectCard {
     public cost = 2;
@@ -16,6 +18,11 @@ export class FloaterPrototypes implements IProjectCard {
     public play(player: Player, game: Game) {
       game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C11',
+      renderData: CardRenderer.builder((b) => b.floaters(2).asterix()),
+      description: 'Add two floaters to ANOTHER card.',
     }
 }
 

@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Game} from '../../../src/Game';
 import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
+import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {ICard} from '../../../src/cards/ICard';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TitanShuttles', function() {
   let card : TitanShuttles; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new TitanShuttles();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
 
     player.playedCards.push(card);

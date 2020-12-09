@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {CrediCor} from '../../../src/cards/corporation/CrediCor';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {StandardProjectType} from '../../../src/StandardProjectType';
 import {Bushes} from '../../../src/cards/base/Bushes';
 import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
+import {CrediCor} from '../../../src/cards/corporation/CrediCor';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {StandardProjectType} from '../../../src/StandardProjectType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CrediCor', function() {
   let card : CrediCor; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CrediCor();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

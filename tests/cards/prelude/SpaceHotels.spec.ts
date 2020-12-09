@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
+import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SpaceHotels', function() {
   let card : SpaceHotels; let player : Player;
 
   beforeEach(function() {
     card = new SpaceHotels();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t play', function() {

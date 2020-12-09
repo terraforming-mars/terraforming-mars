@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/cards/base/CorporateStronghold';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CorporateStronghold', function() {
   let card : CorporateStronghold; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

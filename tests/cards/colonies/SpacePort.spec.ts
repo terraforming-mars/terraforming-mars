@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {SpacePort} from '../../../src/cards/colonies/SpacePort';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
 import {Ceres} from '../../../src/colonies/Ceres';
+import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SpacePort', function() {
   let card : SpacePort; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SpacePort();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

@@ -8,6 +8,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MarsUniversity implements IProjectCard {
     public cost = 8;
@@ -46,5 +48,16 @@ export class MarsUniversity implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '073',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.science().played.startEffect.minus().cards(1).nbsp.plus().cards(1)
+            .description('Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.');
+        });
+      }),
+      victoryPoints: 1,
     }
 }

@@ -223,8 +223,13 @@ class Builder {
     return this;
   }
 
-  public earth(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH));
+  public earth(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH, amount));
+    return this;
+  }
+
+  public building(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.BUILDING, amount));
     return this;
   }
 
@@ -233,8 +238,20 @@ class Builder {
     return this;
   }
 
+  public science(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
+    return this;
+  }
+
+  public colonies(amount: number = 1, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
+    item.size = size;
+    this._addRowItem(item);
     return this;
   }
 
@@ -257,6 +274,16 @@ class Builder {
     return this;
   }
 
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
+    const item = new CardRenderItem(CardRenderItemType.GREENERY);
+    item.size = size;
+    if (withO2) {
+      item.secondaryTag = 'oxygen';
+    }
+    this._addRowItem(item);
+    return this;
+  }
+
   public delegate(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
     return this;
@@ -267,14 +294,31 @@ class Builder {
     return this;
   }
 
+
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
+    return this;
+  }
+
+  public diverseTag(amount: number = 1) {
+    const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
+    item.isPlayed = true;
+    this._addRowItem(item);
     return this;
   }
 
   public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
+    return this;
+  }
+
+  public emptyTile(type: 'normal' | 'golden' = 'normal') {
+    if (type === 'normal') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+    } else if (type === 'golden') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1));
+    }
     return this;
   }
 
@@ -441,7 +485,33 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags): Builder {
+  /**
+   * Mark any amount to be a multiplier 'X'
+   */
+  public get multiplier(): Builder {
+    this._checkExistingItem();
+
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "multiplier" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"multiplier" could be called on CardRenderItem only');
+      }
+
+      item.amountInside = true;
+      item.multiplier = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public secondaryTag(tag: Tags | 'req' | 'oxygen'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
@@ -461,7 +531,6 @@ class Builder {
 
     return this;
   }
-
   public get brackets(): Builder {
     this._checkExistingItem();
 

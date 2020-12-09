@@ -1,17 +1,16 @@
 import {expect} from 'chai';
-import {Riots} from '../../src/turmoil/globalEvents/Riots';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
+import {Resources} from '../../src/Resources';
+import {Riots} from '../../src/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Riots', function() {
   it('resolve play', function() {
     const card = new Riots();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     player.setResource(Resources.MEGACREDITS, 10);

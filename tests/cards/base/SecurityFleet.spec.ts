@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SecurityFleet', function() {
   let card : SecurityFleet; let player : Player;
 
   beforeEach(function() {
     card = new SecurityFleet();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Can\'t act if no titanium', function() {

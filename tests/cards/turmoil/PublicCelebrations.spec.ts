@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {PublicCelebrations} from '../../../src/cards/turmoil/PublicCelebrations';
-import {Player} from '../../../src/Player';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('PublicCelebrations', function() {
   it('Should play', function() {
     const card = new PublicCelebrations();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     const game = new Game('foobar', [player], player, gameOptions);

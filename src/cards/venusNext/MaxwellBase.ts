@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -12,6 +11,9 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MaxwellBase implements IActionCard, IProjectCard {
     public cost = 18;
@@ -61,4 +63,20 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         },
       );
     }
+    public metadata: CardMetadata = {
+      cardNumber: '238',
+      requirements: CardRequirements.builder((b) => b.venus(12)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
+          eb.description('Action: Add 1 resource to ANOTHER VENUS CARD.');
+        }).br;
+        b.productionBox((pb) => pb.minus().energy(1)).nbsp.city().asterix();
+      }),
+      description: {
+        text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',
+        align: 'left',
+      },
+      victoryPoints: 3,
+    };
 }

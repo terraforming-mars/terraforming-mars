@@ -1,20 +1,19 @@
 import {expect} from 'chai';
-import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
-import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Research} from '../../../src/cards/base/Research';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
+import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('Stratopolis', function() {
   let card : Stratopolis; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Stratopolis();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = new Game('foobar', [player, player], player, gameOptions);

@@ -15,6 +15,6 @@ export class LavaFlowsAres extends LavaFlows {
       b.temperature(2).br;
       b.tile(TileType.LAVA_FLOWS, false, true);
     }),
-    description: 'Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an adjacency bonus of 2 heat.',
+    description: 'Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.',
   }
 }

@@ -34,7 +34,7 @@ export class LightningHarvest implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.energy(1).megacredits(1));
       }),
-      description: 'Requires 3 Science tags. Increase your Energy production and your MC production up one step each.',
+      description: 'Requires 3 Science tags. Increase your Energy production and your MC production one step each.',
       victoryPoints: 1,
     }
 }

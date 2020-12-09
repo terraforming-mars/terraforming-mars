@@ -82,7 +82,7 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
         b.or().br;
         b.effectBox((eb) => {
           eb.floaters(2).startAction.venus(1);
-          eb.description('Action: spend 2 Floaters here to raise Venus 1 step');
+          eb.description('Action: Spend 2 Floaters here to raise Venus 1 step');
         });
       }),
     };

@@ -284,6 +284,16 @@ class Builder {
     return this;
   }
 
+  public partyLeaders(amount: number = -1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount));
+    return this;
+  }
+
+  public chairman() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CHAIRMAN));
+    return this;
+  }
+
   public noTags() {
     this._addRowItem(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
     return this;

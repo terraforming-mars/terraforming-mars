@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class VenusWaystation implements IProjectCard {
     public cost = 9;
@@ -19,5 +21,15 @@ export class VenusWaystation implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '258',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb)=> {
+          eb.venus(1).played.startEffect.megacredits(-2);
+          eb.description('Effect: When you play a Venus tag, you pay 2 MC less for it.');
+        });
+      }),
+      victoryPoints: 1,
     }
 }

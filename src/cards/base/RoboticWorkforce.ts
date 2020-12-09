@@ -23,179 +23,173 @@ export class RoboticWorkforce implements IProjectCard {
   private miningTitaniumProduction: number = 0;
   private solarFarmEnergyProduction: number = 0;
 
+  // Made public for availability in tests
+  public builderCardsNames: ReadonlyArray<CardName> = [
+    CardName.AI_CENTRAL,
+    CardName.ASTEROID_DEFLECTION_SYSTEM,
+    CardName.BIOFERTILIZER_FACILITY,
+    CardName.BIOMASS_COMBUSTORS,
+    CardName.BUILDING_INDUSTRIES,
+    CardName.CAPITAL,
+    CardName.CAPITAL_ARES,
+    CardName.CARBONATE_PROCESSING,
+    CardName.COMMERCIAL_DISTRICT,
+    CardName.COMMERCIAL_DISTRICT_ARES,
+    CardName.CORPORATE_STRONGHOLD,
+    CardName.CULTURAL_METROPOLIS,
+    CardName.CUPOLA_CITY,
+    CardName.DEEP_WELL_HEATING,
+    CardName.DOMED_CRATER,
+    CardName.DOME_FARMING,
+    CardName.EARLY_SETTLEMENT,
+    CardName.ELECTRO_CATAPULT,
+    CardName.EOS_CHASMA_NATIONAL_PARK,
+    CardName.FIELD_CAPPED_CITY,
+    CardName.FOOD_FACTORY,
+    CardName.FUELED_GENERATORS,
+    CardName.FUEL_FACTORY,
+    CardName.FUSION_POWER,
+    CardName.GEOTHERMAL_POWER,
+    CardName.GHG_FACTORIES,
+    CardName.GREAT_DAM,
+    CardName.GREAT_DAM_PROMO,
+    CardName.GYROPOLIS,
+    CardName.HEAT_TRAPPERS,
+    CardName.HOUSE_PRINTING,
+    CardName.IMMIGRANT_CITY,
+    CardName.INDUSTRIAL_MICROBES,
+    CardName.LAVA_TUBE_SETTLEMENT,
+    CardName.MAGNETIC_FIELD_DOME,
+    CardName.MAGNETIC_FIELD_GENERATORS,
+    CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
+    CardName.MARTIAN_INDUSTRIES,
+    CardName.MARTIAN_MEDIA_CENTER,
+    CardName.MEDICAL_LAB,
+    CardName.MINE,
+    CardName.MINING_AREA,
+    CardName.MINING_AREA_ARES,
+    CardName.MINING_OPERATIONS,
+    CardName.MINING_QUOTA,
+    CardName.MINING_RIGHTS,
+    CardName.MINING_RIGHTS_ARES,
+    CardName.MOHOLE,
+    CardName.MOHOLE_AREA,
+    CardName.MOHOLE_AREA_ARES,
+    CardName.MOHOLE_EXCAVATION,
+    CardName.NATURAL_PRESERVE,
+    CardName.NATURAL_PRESERVE_ARES,
+    CardName.NOCTIS_CITY,
+    CardName.NOCTIS_FARMING,
+    CardName.NUCLEAR_POWER,
+    CardName.OCEAN_CITY,
+    CardName.OCEAN_FARM,
+    CardName.OPEN_CITY,
+    CardName.PARLIAMENT_HALL,
+    CardName.PEROXIDE_POWER,
+    CardName.POLAR_INDUSTRIES,
+    CardName.POWER_PLANT,
+    CardName.PROTECTED_VALLEY,
+    CardName.RAD_CHEM_FACTORY,
+    CardName.SELF_SUFFICIENT_SETTLEMENT,
+    CardName.SOIL_FACTORY,
+    CardName.SOLAR_FARM,
+    CardName.SOLAR_POWER,
+    CardName.SPACE_ELEVATOR,
+    CardName.SPACE_PORT,
+    CardName.SPINOFF_DEPARTMENT,
+    CardName.SPONSORED_MOHOLE,
+    CardName.STRIP_MINE,
+    CardName.TECTONIC_STRESS_POWER,
+    CardName.TITANIUM_MINE,
+    CardName.TROPICAL_RESORT,
+    CardName.UNDERGROUND_CITY,
+    CardName.URBANIZED_AREA,
+    CardName.WINDMILLS,
+  ];
+
+  // Made public for availability in tests
+  public corporationCardsNames: ReadonlyArray<CardName> = [
+    CardName.CHEUNG_SHING_MARS,
+    CardName.FACTORUM,
+    CardName.MANUTECH,
+    CardName.MINING_GUILD,
+    CardName.RECYCLON,
+    CardName.UTOPIA_INVEST,
+  ];
+
   private getAvailableCards(player: Player, game: Game): Array<ICard> {
-    const builderCardsNames: Array<CardName> = [
-      CardName.AI_CENTRAL,
-      CardName.BIOFERTILIZER_FACILITY,
-      CardName.BIOMASS_COMBUSTORS,
-      CardName.BUILDING_INDUSTRIES,
-      CardName.CAPITAL,
-      CardName.CAPITAL_ARES,
-      CardName.CARBONATE_PROCESSING,
-      CardName.COMMERCIAL_DISTRICT,
-      CardName.COMMERCIAL_DISTRICT_ARES,
-      CardName.CORPORATE_STRONGHOLD,
-      CardName.CULTURAL_METROPOLIS,
-      CardName.CUPOLA_CITY,
-      CardName.DEEP_WELL_HEATING,
-      CardName.DOMED_CRATER,
-      CardName.DOME_FARMING,
-      CardName.EARLY_SETTLEMENT,
-      CardName.ELECTRO_CATAPULT,
-      CardName.EOS_CHASMA_NATIONAL_PARK,
-      CardName.FIELD_CAPPED_CITY,
-      CardName.FOOD_FACTORY,
-      CardName.FUELED_GENERATORS,
-      CardName.FUEL_FACTORY,
-      CardName.FUSION_POWER,
-      CardName.GEOTHERMAL_POWER,
-      CardName.GHG_FACTORIES,
-      CardName.GREAT_DAM,
-      CardName.GREAT_DAM_PROMO,
-      CardName.GYROPOLIS,
-      CardName.HEAT_TRAPPERS,
-      CardName.HOUSE_PRINTING,
-      CardName.IMMIGRANT_CITY,
-      CardName.INDUSTRIAL_MICROBES,
-      CardName.LAVA_TUBE_SETTLEMENT,
-      CardName.MAGNETIC_FIELD_DOME,
-      CardName.MAGNETIC_FIELD_GENERATORS,
-      CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
-      CardName.MARTIAN_INDUSTRIES,
-      CardName.MARTIAN_MEDIA_CENTER,
-      CardName.MEDICAL_LAB,
-      CardName.MINE,
-      CardName.MINING_AREA,
-      CardName.MINING_AREA_ARES,
-      CardName.MINING_OPERATIONS,
-      CardName.MINING_QUOTA,
-      CardName.MINING_RIGHTS,
-      CardName.MINING_RIGHTS_ARES,
-      CardName.MOHOLE,
-      CardName.MOHOLE_AREA,
-      CardName.MOHOLE_AREA_ARES,
-      CardName.MOHOLE_EXCAVATION,
-      CardName.NATURAL_PRESERVE,
-      CardName.NATURAL_PRESERVE_ARES,
-      CardName.NOCTIS_CITY,
-      CardName.NOCTIS_FARMING,
-      CardName.NUCLEAR_POWER,
-      CardName.OCEAN_CITY,
-      CardName.OCEAN_FARM,
-      CardName.OPEN_CITY,
-      CardName.PARLIAMENT_HALL,
-      CardName.PEROXIDE_POWER,
-      CardName.POLAR_INDUSTRIES,
-      CardName.POWER_PLANT,
-      CardName.PROTECTED_VALLEY,
-      CardName.RAD_CHEM_FACTORY,
-      CardName.SELF_SUFFICIENT_SETTLEMENT,
-      CardName.SOIL_FACTORY,
-      CardName.SOLAR_FARM,
-      CardName.SOLAR_POWER,
-      CardName.SPACE_ELEVATOR,
-      CardName.SPACE_PORT,
-      CardName.SPINOFF_DEPARTMENT,
-      CardName.STRIP_MINE,
-      CardName.TECTONIC_STRESS_POWER,
-      CardName.TITANIUM_MINE,
-      CardName.TROPICAL_RESORT,
-      CardName.UNDERGROUND_CITY,
-      CardName.URBANIZED_AREA,
-      CardName.WINDMILLS,
-    ];
-
-    const corporationCardNames = (new Set())
-      .add(CardName.CHEUNG_SHING_MARS)
-      .add(CardName.FACTORUM)
-      .add(CardName.MANUTECH)
-      .add(CardName.MINING_GUILD)
-      .add(CardName.RECYCLON)
-      .add(CardName.UTOPIA_INVEST);
-
     const availableCards: Array<ICard> = player.playedCards.filter((card) => {
-      for (let i = 0; i < builderCardsNames.length; i++) {
-        if (builderCardsNames[i] === card.name && card.name === CardName.BIOMASS_COMBUSTORS) {
-          if (game.someoneHasResourceProduction(Resources.PLANTS, 1)) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name &&
-          (card.name === CardName.MAGNETIC_FIELD_GENERATORS ||
-            card.name === CardName.MAGNETIC_FIELD_GENERATORS_PROMO)) {
-          if (player.getProduction(Resources.ENERGY) >= 4) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name && card.name === CardName.TROPICAL_RESORT) {
-          if (player.getProduction(Resources.HEAT) >= 2) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name &&
-          (card.name === CardName.CAPITAL ||
-            card.name === CardName.CAPITAL_ARES ||
-            card.name === CardName.GYROPOLIS ||
-            card.name === CardName.MAGNETIC_FIELD_DOME ||
-            card.name === CardName.STRIP_MINE ||
-            card.name === CardName.UNDERGROUND_CITY
-          )
-        ) {
-          if (player.getProduction(Resources.ENERGY) >= 2) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name &&
-          (card.name === CardName.AI_CENTRAL ||
-            card.name === CardName.BUILDING_INDUSTRIES ||
-            card.name === CardName.CARBONATE_PROCESSING ||
-            card.name === CardName.COMMERCIAL_DISTRICT ||
-            card.name === CardName.COMMERCIAL_DISTRICT_ARES ||
-            card.name === CardName.CORPORATE_STRONGHOLD ||
-            card.name === CardName.CULTURAL_METROPOLIS ||
-            card.name === CardName.CUPOLA_CITY ||
-            card.name === CardName.DOMED_CRATER ||
-            card.name === CardName.ELECTRO_CATAPULT ||
-            card.name === CardName.FUEL_FACTORY ||
-            card.name === CardName.GHG_FACTORIES ||
-            card.name === CardName.IMMIGRANT_CITY ||
-            card.name === CardName.LAVA_TUBE_SETTLEMENT ||
-            card.name === CardName.NOCTIS_CITY ||
-            card.name === CardName.OCEAN_CITY ||
-            card.name === CardName.OPEN_CITY ||
-            card.name === CardName.RAD_CHEM_FACTORY ||
-            card.name === CardName.SOIL_FACTORY ||
-            card.name === CardName.SPACE_PORT ||
-            card.name === CardName.UNDERGROUND_CITY ||
-            card.name === CardName.URBANIZED_AREA
-          )
-        ) {
-          if (player.getProduction(Resources.ENERGY) >= 1) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name && card.name === CardName.HEAT_TRAPPERS) {
-          if (game.someoneHasResourceProduction(Resources.HEAT, 2)) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name && (card.name === CardName.PEROXIDE_POWER ||
-          card.name === CardName.FUELED_GENERATORS
-        )
-        ) {
-          if (player.getProduction(Resources.MEGACREDITS) >= -4) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name && card.name === CardName.NUCLEAR_POWER) {
-          if (player.getProduction(Resources.MEGACREDITS) >= -3) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name && card.name === CardName.FOOD_FACTORY) {
-          if (player.getProduction(Resources.PLANTS) >= 1) {
-            return true;
-          }
-        } else if (builderCardsNames[i] === card.name) {
+      if (card.name === CardName.BIOMASS_COMBUSTORS) {
+        if (game.someoneHasResourceProduction(Resources.PLANTS, 1)) {
           return true;
         }
+      } else if (card.name === CardName.MAGNETIC_FIELD_GENERATORS || card.name === CardName.MAGNETIC_FIELD_GENERATORS_PROMO) {
+        if (player.getProduction(Resources.ENERGY) >= 4) {
+          return true;
+        }
+      } else if (card.name === CardName.TROPICAL_RESORT) {
+        if (player.getProduction(Resources.HEAT) >= 2) {
+          return true;
+        }
+      } else if (card.name === CardName.CAPITAL ||
+        card.name === CardName.CAPITAL_ARES ||
+        card.name === CardName.GYROPOLIS ||
+        card.name === CardName.MAGNETIC_FIELD_DOME ||
+        card.name === CardName.STRIP_MINE ||
+        card.name === CardName.UNDERGROUND_CITY
+      ) {
+        if (player.getProduction(Resources.ENERGY) >= 2) {
+          return true;
+        }
+      } else if (card.name === CardName.AI_CENTRAL ||
+        card.name === CardName.ASTEROID_DEFLECTION_SYSTEM ||
+        card.name === CardName.BUILDING_INDUSTRIES ||
+        card.name === CardName.CARBONATE_PROCESSING ||
+        card.name === CardName.COMMERCIAL_DISTRICT ||
+        card.name === CardName.COMMERCIAL_DISTRICT_ARES ||
+        card.name === CardName.CORPORATE_STRONGHOLD ||
+        card.name === CardName.CULTURAL_METROPOLIS ||
+        card.name === CardName.CUPOLA_CITY ||
+        card.name === CardName.DOMED_CRATER ||
+        card.name === CardName.ELECTRO_CATAPULT ||
+        card.name === CardName.FUEL_FACTORY ||
+        card.name === CardName.GHG_FACTORIES ||
+        card.name === CardName.IMMIGRANT_CITY ||
+        card.name === CardName.LAVA_TUBE_SETTLEMENT ||
+        card.name === CardName.NOCTIS_CITY ||
+        card.name === CardName.OCEAN_CITY ||
+        card.name === CardName.OPEN_CITY ||
+        card.name === CardName.RAD_CHEM_FACTORY ||
+        card.name === CardName.SOIL_FACTORY ||
+        card.name === CardName.SPACE_PORT ||
+        card.name === CardName.URBANIZED_AREA
+      ) {
+        if (player.getProduction(Resources.ENERGY) >= 1) {
+          return true;
+        }
+      } else if (card.name === CardName.HEAT_TRAPPERS) {
+        if (game.someoneHasResourceProduction(Resources.HEAT, 2)) {
+          return true;
+        }
+      } else if (card.name === CardName.PEROXIDE_POWER || card.name === CardName.FUELED_GENERATORS) {
+        if (player.getProduction(Resources.MEGACREDITS) >= -4) {
+          return true;
+        }
+      } else if (card.name === CardName.NUCLEAR_POWER) {
+        if (player.getProduction(Resources.MEGACREDITS) >= -3) {
+          return true;
+        }
+      } else if (card.name === CardName.FOOD_FACTORY) {
+        if (player.getProduction(Resources.PLANTS) >= 1) {
+          return true;
+        }
+      } else if (this.builderCardsNames.includes(card.name)) {
+        return true;
       }
       return false;
     });
 
-    if (player.corporationCard !== undefined && corporationCardNames.has(player.corporationCard.name)) {
+    if (player.corporationCard !== undefined && this.corporationCardsNames.includes(player.corporationCard.name)) {
       availableCards.push(player.corporationCard);
     }
 
@@ -260,6 +254,7 @@ export class RoboticWorkforce implements IProjectCard {
 
       const updaters: Array<Updater> = [
         new Updater(CardName.AI_CENTRAL, -1, 0, 0, 0, 0, 0),
+        new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, -1, 0, 0, 0, 0, 0),
         new Updater(CardName.BIOFERTILIZER_FACILITY, 0, 0, 0, 0, 1, 0),
         new Updater(CardName.BUILDING_INDUSTRIES, -1, 0, 2, 0, 0, 0),
         new Updater(CardName.CAPITAL, -2, 5, 0, 0, 0, 0),
@@ -333,6 +328,7 @@ export class RoboticWorkforce implements IProjectCard {
         new Updater(CardName.SPACE_ELEVATOR, 0, 0, 0, 1, 0, 0),
         new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0),
         new Updater(CardName.SPINOFF_DEPARTMENT, 0, 2, 0, 0, 0, 0),
+        new Updater(CardName.SPONSORED_MOHOLE, 0, 0, 0, 0, 0, 2),
         new Updater(CardName.STRIP_MINE, -2, 0, 2, 1, 0, 0),
         new Updater(CardName.TECTONIC_STRESS_POWER, 3, 0, 0, 0, 0, 0),
         new Updater(CardName.TITANIUM_MINE, 0, 0, 0, 1, 0, 0),

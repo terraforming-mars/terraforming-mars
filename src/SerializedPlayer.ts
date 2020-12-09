@@ -30,6 +30,7 @@ export interface SerializedPlayer {
     generationPlayed: Array<[string, number]>;
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
+    hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;
     id: string;
@@ -60,6 +61,5 @@ export interface SerializedPlayer {
     titaniumValue: number;
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;
-    hasTurmoilScienceTagBonus: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

@@ -208,5 +208,20 @@
     "Create game": "Создать игру",
     "Remove negative Global Events": "Убрать негативные события Кризиса",
     "All": "Все",
-    "Filter": "Фильтры"
+    "Filter": "Фильтры",
+
+    "Take first action of ${0} corporation": "Выполнить начальное действие корпорации «${0}»",
+    "Draw 3 cards": "Добрать 3 карты",
+
+    "Game log": "Лог игры",
+    "Select a card to keep and pass the rest to ${0}": "Выберите карту и передайте остальные игроку ${0}",
+    "Keep": "Взять",
+    "Drafted cards": "Карты драфта",
+    "Buy": "Купить",
+    "Skip this action": "Пропустить это действие",
+    "Select which cards to take into hand": "Выберите карты, которые оставите в руке",
+    "End": "Завершить",
+    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} в координатах: ${3}, ${4}",
+    "placed": "разместил",
+    "greenery tile": "тайл озеленения"
 }

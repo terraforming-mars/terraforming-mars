@@ -691,6 +691,7 @@ function getWaitingFor(
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    min: undefined,
     max: undefined,
     microbes: undefined,
     floaters: undefined,
@@ -750,6 +751,7 @@ function getWaitingFor(
     );
     break;
   case PlayerInputTypes.SELECT_AMOUNT:
+    result.min = (waitingFor as SelectAmount).min;
     result.max = (waitingFor as SelectAmount).max;
     break;
   case PlayerInputTypes.SELECT_DELEGATE:

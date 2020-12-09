@@ -8,6 +8,9 @@ import {IActionCard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost = 9;
@@ -40,5 +43,12 @@ export class InventorsGuild implements IActionCard, IProjectCard {
           return undefined;
         }, canSelectCard ? 1 : 0, 0,
       );
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '006',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => eb.empty().startAction.empty().description()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

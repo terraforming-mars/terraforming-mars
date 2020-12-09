@@ -8,6 +8,8 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IceAsteroid implements IProjectCard {
     public cost = 23;
@@ -31,5 +33,10 @@ export class IceAsteroid implements IProjectCard {
       game.defer(new PlaceOceanTile(player, game, 'Select space for first ocean'));
       game.defer(new PlaceOceanTile(player, game, 'Select space for second ocean'));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '078',
+      renderData: CardRenderer.builder((b) => b.oceans(2)),
+      description: 'Place 2 ocean tiles.',
     }
 }

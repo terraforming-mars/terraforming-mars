@@ -17,37 +17,26 @@ import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 
-export class Dealer implements ISerializable<SerializedDealer, Dealer> {
+export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
     public corporationCards: Array<CorporationCard> = [];
-    private useCorporateEra: boolean = true;
-    private usePreludeExtension: boolean = false;
-    private useVenusNextExtension: boolean = false;
-    private useColoniesNextExtension: boolean = false;
-    private usePromoCards: boolean = false;
-    private useTurmoilExtension: boolean = false;
-    private useAresExtension: boolean = false;
 
-    constructor(
-      useCorporateEra: boolean,
-      usePreludeExtension: boolean,
-      useVenusNextExtension: boolean,
-      useColoniesNextExtension : boolean,
-      usePromoCards: boolean,
-      useTurmoilExtension: boolean,
-      useAresExtension: boolean,
-      useCommunityCards: boolean = false,
+    private constructor() { }
+
+    public static newInstance(
+      corporateEra: boolean,
+      prelude: boolean,
+      venusNext: boolean,
+      colonies : boolean,
+      promoCards: boolean,
+      turmoil: boolean,
+      ares: boolean,
+      communityCards: boolean = false,
       cardsBlackList?: Array<CardName>,
-    ) {
-      this.useCorporateEra = useCorporateEra;
-      this.usePreludeExtension = usePreludeExtension;
-      this.useVenusNextExtension = useVenusNextExtension;
-      this.useColoniesNextExtension = useColoniesNextExtension;
-      this.usePromoCards = usePromoCards;
-      this.useTurmoilExtension = useTurmoilExtension;
-      this.useAresExtension = useAresExtension;
+    ): Dealer {
+      const dealer = new Dealer();
 
       const deck:Array<IProjectCard> = [];
       const preludeDeck:Array<IProjectCard> = [];
@@ -60,11 +49,11 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
         case undefined:
           return true;
         case GameModule.Venus:
-          return useVenusNextExtension;
+          return venusNext;
         case GameModule.Colonies:
-          return useColoniesNextExtension;
+          return colonies;
         case GameModule.Turmoil:
-          return useTurmoilExtension;
+          return turmoil;
         default:
           throw ('Unhandled expansion type: ' + expansion);
         }
@@ -82,39 +71,40 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
         projectCardsToRemove.push(...manifest.projectCardsToRemove);
       }
       addToDecks(BASE_CARD_MANIFEST);
-      if (this.useCorporateEra) {
+      if (corporateEra) {
         addToDecks(CORP_ERA_CARD_MANIFEST);
       }
-      if (this.usePreludeExtension) {
+      if (prelude) {
         addToDecks(PRELUDE_CARD_MANIFEST);
       }
-      if (this.useVenusNextExtension) {
+      if (venusNext) {
         addToDecks(VENUS_CARD_MANIFEST);
       }
-      if (this.useColoniesNextExtension) {
+      if (colonies) {
         addToDecks(COLONIES_CARD_MANIFEST);
       }
-      if (this.useTurmoilExtension) {
+      if (turmoil) {
         addToDecks(TURMOIL_CARD_MANIFEST);
       }
-      if (this.useAresExtension) {
+      if (ares) {
         addToDecks(ARES_CARD_MANIFEST);
       }
-      if (this.usePromoCards) {
+      if (promoCards) {
         addToDecks(PROMO_CARD_MANIFEST);
       }
-      if (useCommunityCards) {
+      if (communityCards) {
         addToDecks(COMMUNITY_CARD_MANIFEST);
       }
       if (cardsBlackList) {
         projectCardsToRemove.push(...cardsBlackList);
       }
       const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
-      this.deck = this.shuffleCards(filteredDeck);
-      if (this.usePreludeExtension) {
-        this.preludeDeck = this.shuffleCards(preludeDeck);
+      dealer.deck = dealer.shuffleCards(filteredDeck);
+      if (prelude) {
+        dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
       }
-      this.corporationCards = corporationCards;
+      dealer.corporationCards = corporationCards;
+      return dealer;
     }
 
     public shuffleCards<T>(cards: Array<T>): Array<T> {
@@ -155,25 +145,19 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
       return result;
     }
 
-    public loadFromJSON(d: SerializedDealer): Dealer {
-      const cardFinder = new CardFinder();
-
-      this.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
-      this.deck = cardFinder.cardsFromJSON(d.deck);
-      this.discarded = cardFinder.cardsFromJSON(d.discarded);
-      this.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
-      this.useAresExtension = d.useAresExtension;
-      this.useColoniesNextExtension = d.useColoniesNextExtension;
-      this.useCorporateEra = d.useCorporateEra;
-      this.usePreludeExtension = d.usePreludeExtension;
-      this.usePromoCards = d.usePromoCards;
-      this.useTurmoilExtension = d.useTurmoilExtension;
-      this.useVenusNextExtension = d.useVenusNextExtension;
-      return this;
-    }
-
     public getDeckSize(): number {
       return this.deck.length;
+    }
+
+    public static deserialize(d: SerializedDealer): Dealer {
+      const dealer = new Dealer();
+      const cardFinder = new CardFinder();
+
+      dealer.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
+      dealer.deck = cardFinder.cardsFromJSON(d.deck);
+      dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
+      dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      return dealer;
     }
 
     public serialize(): SerializedDealer {
@@ -182,13 +166,6 @@ export class Dealer implements ISerializable<SerializedDealer, Dealer> {
         deck: this.deck.map((c) => c.name),
         discarded: this.discarded.map((c) => c.name),
         preludeDeck: this.preludeDeck.map((c) => c.name),
-        useAresExtension: this.useAresExtension,
-        useColoniesNextExtension: this.useColoniesNextExtension,
-        useCorporateEra: this.useCorporateEra,
-        usePreludeExtension: this.usePreludeExtension,
-        usePromoCards: this.usePromoCards,
-        useVenusNextExtension: this.useVenusNextExtension,
-        useTurmoilExtension: this.useTurmoilExtension,
       };
     }
 }

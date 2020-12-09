@@ -112,7 +112,6 @@ export const PlayerStatus = Vue.component('player-status', {
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
                 <div :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
-                <div v-if="showTimers()"><player-timer :timer="player.timer"/></div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
             </div>
             <div class="player-status-right">
@@ -125,6 +124,7 @@ export const PlayerStatus = Vue.component('player-status', {
                 </div> 
                 <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
+            <div class="player-status-timer" v-if="showTimers()"><player-timer :timer="player.timer"/></div>
         </div>
     `,
 });

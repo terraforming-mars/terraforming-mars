@@ -30,8 +30,8 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
     public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
-    public rulingParty: undefined | IParty = undefined;
-    public dominantParty: undefined | IParty = undefined;
+    public rulingParty: IParty;
+    public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
     public delegate_reserve: Array<PlayerId | 'NEUTRAL'> = []; // eslint-disable-line camelcase
     public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
@@ -41,13 +41,15 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public commingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
 
-    private constructor(globalEventDealer: GlobalEventDealer) {
+    private constructor(rulingPartyName: PartyName, dominantPartyName: PartyName, globalEventDealer: GlobalEventDealer) {
+      this.rulingParty = this.getPartyByName(rulingPartyName);
+      this.dominantParty = this.getPartyByName(dominantPartyName);
       this.globalEventDealer = globalEventDealer;
     }
 
     public static newInstance(game: Game): Turmoil {
       const dealer = GlobalEventDealer.newInstance(game);
-      const turmoil = new Turmoil(dealer);
+      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -60,9 +62,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // The game begins with a Neutral chairman
       turmoil.chairman = 'NEUTRAL';
-
-      // First ruling party is green
-      turmoil.rulingParty = turmoil.getPartyByName(PartyName.GREENS);
 
       // Begin with 13 neutral delegates in the reserve
       for (let i = 0; i < 13; i++) {
@@ -86,9 +85,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
     }
 
-    // Function to return a party by name
-    public getPartyByName(partyName: PartyName): IParty | undefined {
-      return this.parties.find((party) => party.name === partyName);
+    public getPartyByName(name: PartyName): IParty {
+      const party = this.parties.find((party) => party.name === name);
+      if (party === undefined) {
+        throw new Error(`Cannot find party with name {${name}}`);
+      }
+      return party;
     }
 
     // Use to send a delegate to a specific party
@@ -188,7 +190,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.currentGlobalEvent.resolve(game, this);
       }
 
-      // 3 - New Gouvernment
+      // 3 - New Government
       this.rulingParty = this.dominantParty;
 
       // 3.a - Ruling Policy change
@@ -272,17 +274,15 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       let influence: number = 0;
       if (this.chairman !== undefined && this.chairman === player.id) influence++;
 
-      if (this.dominantParty !== undefined) {
-        const dominantParty : IParty = this.dominantParty;
-        const isPartyLeader = dominantParty.partyLeader === player.id;
-        const delegateCount = dominantParty.delegates.filter((delegate) => delegate === player.id).length;
+      const dominantParty : IParty = this.dominantParty;
+      const isPartyLeader = dominantParty.partyLeader === player.id;
+      const delegateCount = dominantParty.delegates.filter((delegate) => delegate === player.id).length;
 
-        if (isPartyLeader) {
-          influence++;
-          if (delegateCount > 1) influence++; // at least 1 non-leader delegate
-        } else {
-          if (delegateCount > 0) influence++;
-        }
+      if (isPartyLeader) {
+        influence++;
+        if (delegateCount > 1) influence++; // at least 1 non-leader delegate
+      } else {
+        if (delegateCount > 0) influence++;
       }
 
       if (this.playersInfluenceBonus.has(player.id)) {
@@ -369,18 +369,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Function used to rebuild each objects
     public static deserialize(d: SerializedTurmoil): Turmoil {
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil = new Turmoil(dealer);
+      const turmoil = new Turmoil(d.rulingParty.name, d.dominantParty.name, dealer);
       // Assign each attributes
       const o = Object.assign(turmoil, d);
 
       turmoil.lobby = new Set(d.lobby);
-
-      if (d.rulingParty) {
-        turmoil.rulingParty = turmoil.getPartyByName(d.rulingParty.name);
-      }
-      if (d.dominantParty) {
-        turmoil.dominantParty = turmoil.getPartyByName(d.dominantParty.name);
-      }
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 

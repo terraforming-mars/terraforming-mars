@@ -196,7 +196,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       this.activePlayer = first.id;
 
-      this.dealer = new Dealer(
+      this.dealer = Dealer.newInstance(
         gameOptions.corporateEra,
         gameOptions.preludeExtension,
         gameOptions.venusNextExtension,
@@ -1705,13 +1705,11 @@ export class Game implements ISerializable<SerializedGame> {
       this.deferredActions = new DeferredActionsQueue();
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      const dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension, this.gameOptions.communityCardsOption);
-      this.dealer = dealer.loadFromJSON(d.dealer);
+      this.dealer = Dealer.deserialize(d.dealer);
 
       // Rebuild every player objects
       this.players = d.players.map((element: SerializedPlayer) => {
-        const player = new Player(element.name, element.color, element.beginner, element.handicap);
-        return player.loadFromJSON(element);
+        return Player.deserialize(element);
       });
 
 

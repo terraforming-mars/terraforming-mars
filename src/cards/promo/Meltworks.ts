@@ -7,6 +7,8 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Meltworks implements IActionCard, IProjectCard {
     public cost = 4;
@@ -49,5 +51,15 @@ export class Meltworks implements IActionCard, IProjectCard {
       player.heat -= 5;
       player.steel += 3;
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X21',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.heat(5).digit.startAction.steel(3);
+          eb.description('Action: Spend 5 heat to gain 3 steel.');
+        });
+      }),
     }
 }

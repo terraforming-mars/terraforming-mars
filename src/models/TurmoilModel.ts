@@ -11,6 +11,7 @@ export interface TurmoilModel {
     lobby: Array<Color>;
     reserve: Array<DelegatesModel>;
     distant: GlobalEventModel | undefined;
+    // TODO(kberg): rename to coming.
     comming: GlobalEventModel | undefined;
     current: GlobalEventModel | undefined;
 }

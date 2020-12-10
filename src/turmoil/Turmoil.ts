@@ -368,10 +368,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Function used to rebuild each objects
     public static deserialize(d: SerializedTurmoil): Turmoil {
       const turmoil = new Turmoil(d.rulingParty.name, d.dominantParty.name);
-      // Assign each attributes
-      const o = Object.assign(turmoil, d);
 
+      turmoil.chairman = d.chairman;
+      turmoil.rulingParty = d.rulingParty;
+      turmoil.dominantParty = d.dominantParty;
       turmoil.lobby = new Set(d.lobby);
+      turmoil.delegate_reserve = d.delegate_reserve;
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
@@ -394,6 +396,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.currentGlobalEvent = getGlobalEventByName(d.currentGlobalEvent.name);
       }
 
-      return o;
+      return turmoil;
     }
 }

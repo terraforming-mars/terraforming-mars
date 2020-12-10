@@ -58,7 +58,7 @@ export class ViralEnhancers implements IProjectCard {
         b.effectBox((eb) => {
           eb.empty().startEffect;
           eb.plants(1).slash().microbes(1).asterix().slash().animals(1).asterix();
-          eb.description('Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.');
+          eb.description('Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.');
         });
       }),
     }

@@ -33,11 +33,11 @@ export class ScientistsBonus01 implements Bonus {
 
 export class ScientistsBonus02 implements Bonus {
   id = 'sb02';
-  description: string = 'Gain 1 MC for every 2 cards in hand';
+  description: string = 'Gain 1 MC for every 3 cards in hand';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = Math.floor(player.cardsInHand.length / 2);
+      const amount = Math.floor(player.cardsInHand.length / 3);
       player.setResource(Resources.MEGACREDITS, amount);
     });
   }

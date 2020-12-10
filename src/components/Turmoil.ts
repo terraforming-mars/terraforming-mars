@@ -28,7 +28,7 @@ export const Turmoil = Vue.component('turmoil', {
         }
       } else if (party === PartyName.SCIENTISTS) {
         if (staticAgendas !== undefined && staticAgendas.scientistsBonus === 'sb02') {
-          return `<div class="resource money party-resource">1</div> / 2
+          return `<div class="resource money party-resource">1</div> / 3
           <div class="resource card card-small"></div>`;
         } else {
           return `<div class="resource money party-resource">1</div> / 

@@ -274,10 +274,12 @@ describe('Turmoil', function() {
   });
 
   it('serializes and deserializes keeping players', function() {
+    // Party delegates have to be explicitly set since game set-up draws a global event which
+    // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
+    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'fancy-pants'];
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
     const deserialized = Turmoil.deserialize(serialized);
-    expect(deserialized.parties[0].getPresentPlayers().length).to.eq(0);
-    expect(deserialized.parties[0].getPresentPlayers()).deep.eq([]);
+    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'fancy-pants']);
   });
 
   it('forward compatible deserialization', () => {

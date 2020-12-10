@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {$t} from '../directives/i18n';
-import {TurmoilModel} from '../models/TurmoilModel';
+import {PoliticalAgendasModel, TurmoilModel} from '../models/TurmoilModel';
 
 export const Turmoil = Vue.component('turmoil', {
   props: {
@@ -17,32 +17,67 @@ export const Turmoil = Vue.component('turmoil', {
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getBonus: function(party: PartyName) {
+    getBonus: function(party: PartyName, staticAgendas: PoliticalAgendasModel | undefined) {
       if (party === PartyName.MARS) {
-        return `<div class="resource money party-resource">1</div> / 
+        if (staticAgendas !== undefined && staticAgendas.marsFirstBonus === 'mb02') {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="tile empty-tile-small"></div>ON MARS`;
+        } else {
+          return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-building party-resource-tag"></div>`;
+        }
       } else if (party === PartyName.SCIENTISTS) {
-        return `<div class="resource money party-resource">1</div> / 
+        if (staticAgendas !== undefined && staticAgendas.scientistsBonus === 'sb02') {
+          return `<div class="resource money party-resource">1</div> / 2
+          <div class="resource card card-small"></div>`;
+        } else {
+          return `<div class="resource money party-resource">1</div> / 
           <div class="resource-tag tag-science party-resource-tag"></div>`;
+        }
       } else if (party === PartyName.UNITY) {
-        return `<div class="resource money party-resource">1</div> / 
-          <div class="resource-tag tag-venus party-resource-tag"></div>
-          <div class="resource-tag tag-earth party-resource-tag"></div>
-          <div class="resource-tag tag-jovian party-resource-tag"></div>`;
+        if (staticAgendas !== undefined && staticAgendas.unityBonus === 'ub02') {
+          return `<div class="resource money party-resource">1</div> / 
+            <div class="resource-tag tag-space party-resource-tag"></div> + 
+            <div class="resource-tag tag-space party-resource-tag"></div>
+            <div class="resource-tag tag-event party-resource-tag"></div>`;
+        } else {
+          return `<div class="resource money party-resource">1</div> / 
+            <div class="resource-tag tag-venus party-resource-tag"></div>
+            <div class="resource-tag tag-earth party-resource-tag"></div>
+            <div class="resource-tag tag-jovian party-resource-tag"></div>`;
+        }
       } else if (party === PartyName.KELVINISTS) {
-        return `<div class="resource money party-resource">1</div> / 
-          <div class="production-box party-production-box">
-            <div class="heat production"></div>
-          </div>`;
+        if (staticAgendas !== undefined && staticAgendas.kelvinistsBonus === 'kb02') {
+          return `<div class="resource heat party-resource"></div> / 
+            <div class="production-box party-production-box">
+              <div class="heat production"></div>
+            </div>`;
+        } else {
+          return `<div class="resource money party-resource">1</div> / 
+            <div class="production-box party-production-box">
+              <div class="heat production"></div>
+            </div>`;
+        }
       } else if (party === PartyName.REDS) {
-        return `
-          <div class="party-inferior-rating tile party-rating party-tile">&lt;</div> : 
-          <div class="rating tile party-rating party-tile"></div>`;
+        if (staticAgendas !== undefined && staticAgendas.redsBonus === 'rb02') {
+          return `
+            <div class="party-inferior-rating tile party-rating party-tile">&gt;</div> : 
+            <div class="rating tile party-rating party-tile red-outline "></div>`;
+        } else {
+          return `
+            <div class="party-inferior-rating tile party-rating party-tile">&lt;</div> : 
+            <div class="rating tile party-rating party-tile"></div>`;
+        }
       } else if (party === PartyName.GREENS) {
-        return `<div class="resource money party-resource">1</div> / 
-          <div class="resource-tag tag-plant party-resource-tag"></div>
-          <div class="resource-tag tag-microbe party-resource-tag"></div>
-          <div class="resource-tag tag-animal party-resource-tag"></div>`;
+        if (staticAgendas !== undefined && staticAgendas.greensBonus === 'gb02') {
+          return `<div class="resource money party-resource">2</div> / 
+            <div class="tile greenery-tile greenery-tile-small"></div>`;
+        } else {
+          return `<div class="resource money party-resource">1</div> / 
+            <div class="resource-tag tag-plant party-resource-tag"></div>
+            <div class="resource-tag tag-microbe party-resource-tag"></div>
+            <div class="resource-tag tag-animal party-resource-tag"></div>`;
+        }
       } else {
         return '<p>Error</p>';
       }
@@ -157,7 +192,7 @@ export const Turmoil = Vue.component('turmoil', {
             </div>
             <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
             <div class="party-bonus">
-              <span v-html="getBonus(party.name)"></span>
+              <span v-html="getBonus(party.name, turmoil.staticAgendas)"></span>
             </div>
           </div>
         </div>

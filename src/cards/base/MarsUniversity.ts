@@ -54,7 +54,7 @@ export class MarsUniversity implements IProjectCard {
       cardNumber: '073',
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
-          eb.science().played.startEffect.minus().cards(1).plus().cards(1)
+          eb.science().played.startEffect.minus().cards(1).nbsp.plus().cards(1)
             .description('Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.');
         });
       }),

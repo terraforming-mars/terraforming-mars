@@ -223,8 +223,13 @@ class Builder {
     return this;
   }
 
-  public earth(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH));
+  public earth(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH, amount));
+    return this;
+  }
+
+  public building(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.BUILDING, amount));
     return this;
   }
 
@@ -308,8 +313,12 @@ class Builder {
     return this;
   }
 
-  public emptyTile() {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+  public emptyTile(type: 'normal' | 'golden' = 'normal') {
+    if (type === 'normal') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+    } else if (type === 'golden') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1));
+    }
     return this;
   }
 

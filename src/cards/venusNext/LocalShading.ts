@@ -8,6 +8,8 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class LocalShading implements IActionCard, IProjectCard, IResourceCard {
     public cost = 4;
@@ -50,4 +52,19 @@ export class LocalShading implements IActionCard, IProjectCard, IResourceCard {
       player.addProduction(Resources.MEGACREDITS);
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '235',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(1);
+          eb.description('Action: Add 1 Floater to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.floaters(1).startAction.productionBox((pb) => pb.megacredits(1));
+          eb.description('Action: Spend 1 Floater here to raise your MC production 1 step.');
+        });
+      }),
+    };
 }

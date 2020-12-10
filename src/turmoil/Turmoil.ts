@@ -397,7 +397,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.chairman = d.chairman;
 
+      turmoil.chairman = d.chairman;
       turmoil.lobby = new Set(d.lobby);
+      turmoil.delegateReserve = d.delegate_reserve;
 
       if (d.delegateReserve !== undefined) {
         turmoil.delegateReserve = d.delegateReserve;
@@ -413,36 +415,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         tp.delegates = sp.delegates;
         tp.partyLeader = sp.partyLeader;
       });
-
-      /*
-        // Rebuild parties
-        d.turmoil.parties.forEach((element: IParty) => {
-          const party = this.turmoil?.getPartyByName(element.name);
-          if (element.partyLeader) {
-            if (element.partyLeader === 'NEUTRAL') {
-              party!.partyLeader = 'NEUTRAL';
-            } else {
-              const partyLeaderId = element.partyLeader;
-              const player = this.players.find((player) => player.id === partyLeaderId);
-              party!.partyLeader = player!.id;
-            }
-          }
-
-          // Rebuild parties delegates
-          party!.delegates = [];
-          element.delegates.forEach((element: PlayerId | 'NEUTRAL') => {
-            if (element === 'NEUTRAL') {
-              party!.delegates.push('NEUTRAL');
-            } else {
-              const player = this.players.find((player) => player.id === element);
-              if (player) {
-                party!.delegates.push(player.id);
-              }
-            }
-          });
-        });
-      */
-
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 

@@ -12,7 +12,7 @@ export interface SerializedParty {
     partyLeader: undefined | PlayerId | 'NEUTRAL';
 }
 
-// TODO(kberg): By Jan 15, remove delegeate_reserve, commingGlobalEvent, and uses
+// TODO(kberg): By 2021-01-15, remove delegeate_reserve, commingGlobalEvent, and uses
 // of IParty, GlobalEventDealer, and IGlobalEvent.
 export interface SerializedTurmoil {
     chairman: undefined | PlayerId | 'NEUTRAL';

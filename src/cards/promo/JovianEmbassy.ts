@@ -7,6 +7,8 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianEmbassy implements IProjectCard {
     public cost = 14;
@@ -31,4 +33,13 @@ export class JovianEmbassy implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X24',
+      renderData: CardRenderer.builder((b) => {
+        b.tr(1);
+      }),
+      description: 'Raise your TR 1 step.',
+      victoryPoints: 1,
+    };
 }

@@ -272,43 +272,50 @@ describe('Turmoil', function() {
     expect(t.comingGlobalEvent!.name).eq('Solar Flare');
     expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
   });
-});
 
-it('forward compatible deserialization', () => {
-  const originalJson = {
-    'chairman': 'NEUTRAL',
-    'rulingParty': 'Greens',
-    'dominantParty': 'Unity',
-    'lobby': ['blue-id'],
-    'delegate_reserve': ['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL'],
-    'parties': [
-      {'name': 'Mars First', 'delegates': []},
-      {'name': 'Scientists', 'delegates': []},
-      {'name': 'Unity', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
-      {'name': 'Greens', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
-      {'name': 'Reds', 'delegates': []},
-      {'name': 'Kelvinists', 'delegates': []},
-    ],
-    'playersInfluenceBonus': [],
-    'globalEventDealer': {
-      'deck': [
-        'Solar Flare',
-        'Spin-Off Products',
-        'Dry Deserts',
-        'Mud Slides',
-        'Productivity'],
-      'discarded': ['Pandemic']},
-    'distantGlobalEvent': 'Eco Sabotage',
-    'comingGlobalEvent': 'Celebrity Leaders',
-  };
-  const s: SerializedTurmoil = JSON.parse(JSON.stringify(originalJson)) as SerializedTurmoil;
-  const t = Turmoil.deserialize(s);
+  it('serializes and deserializes keeping players', function() {
+    const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
+    const deserialized = Turmoil.deserialize(serialized);
+    expect(deserialized.parties[0].getPresentPlayers().length).to.eq(0);
+    expect(deserialized.parties[0].getPresentPlayers()).deep.eq([]);
+  });
 
-  expect(t.distantGlobalEvent!.name).eq('Eco Sabotage');
-  expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
-  expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
-  expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
-  expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
-  expect(t.rulingParty!.description).eq('All players receive 1 MC for each Plant tag, Microbe tag, and Animal tag they have.');
-  expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('All players receive 1 MC for each Heat production they have.');
+  it('forward compatible deserialization', () => {
+    const originalJson = {
+      'chairman': 'NEUTRAL',
+      'rulingParty': 'Greens',
+      'dominantParty': 'Unity',
+      'lobby': ['blue-id'],
+      'delegate_reserve': ['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL'],
+      'parties': [
+        {'name': 'Mars First', 'delegates': []},
+        {'name': 'Scientists', 'delegates': []},
+        {'name': 'Unity', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
+        {'name': 'Greens', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
+        {'name': 'Reds', 'delegates': []},
+        {'name': 'Kelvinists', 'delegates': []},
+      ],
+      'playersInfluenceBonus': [],
+      'globalEventDealer': {
+        'deck': [
+          'Solar Flare',
+          'Spin-Off Products',
+          'Dry Deserts',
+          'Mud Slides',
+          'Productivity'],
+        'discarded': ['Pandemic']},
+      'distantGlobalEvent': 'Eco Sabotage',
+      'comingGlobalEvent': 'Celebrity Leaders',
+    };
+    const s: SerializedTurmoil = JSON.parse(JSON.stringify(originalJson)) as SerializedTurmoil;
+    const t = Turmoil.deserialize(s);
+
+    expect(t.distantGlobalEvent!.name).eq('Eco Sabotage');
+    expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
+    expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
+    expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
+    expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
+    expect(t.rulingParty!.description).eq('All players receive 1 MC for each Plant tag, Microbe tag, and Animal tag they have.');
+    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('All players receive 1 MC for each Heat production they have.');
+  });
 });

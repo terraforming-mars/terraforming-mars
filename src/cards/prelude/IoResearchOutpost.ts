@@ -6,6 +6,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DrawCards} from '../../deferredActions/DrawCards';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IoResearchOutpost extends PreludeCard implements IProjectCard {
     public tags = [Tags.JOVIAN, Tags.SCIENCE];
@@ -14,5 +16,13 @@ export class IoResearchOutpost extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.TITANIUM);
       game.defer(new DrawCards(player, game, 1));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P16',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.titanium(1)).br;
+        b.cards(1);
+      }),
+      description: 'Increase your titanium production 1 step. Draw a card.',
     }
 }

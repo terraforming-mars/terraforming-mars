@@ -8,6 +8,9 @@ import {ALL_PARTIES} from '../../turmoil/Turmoil';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ByElection extends PreludeCard implements IProjectCard {
     public tags = [Tags.WILDCARD];
@@ -37,5 +40,13 @@ export class ByElection extends PreludeCard implements IProjectCard {
       ));
 
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'Y02',
+      renderData: CardRenderer.builder((b) => {
+        b.text('set ruling party', CardRenderItemSize.SMALL, true).br;
+        b.plus().influence(1);
+      }),
+      description: 'Set the ruling party to one of your choice. Gain +1 influence.',
     }
 }

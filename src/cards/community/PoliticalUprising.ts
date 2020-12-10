@@ -5,6 +5,8 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -33,5 +35,13 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
       }
 
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'Y03',
+      renderData: CardRenderer.builder((b) => {
+        b.delegates(4).br.br;
+        b.cards(1).secondaryTag('turmoil');
+      }),
+      description: 'Place 4 delegates. Draw a Turmoil card.',
     }
 }

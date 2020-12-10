@@ -2,6 +2,8 @@
 import {Color} from '../Color';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {PolicyId} from '../turmoil/Policy';
+import {BonusId} from '../turmoil/Bonus';
 
 export interface TurmoilModel {
     dominant: PartyName | undefined;
@@ -14,6 +16,7 @@ export interface TurmoilModel {
     // TODO(kberg): rename to coming.
     comming: GlobalEventModel | undefined;
     current: GlobalEventModel | undefined;
+    staticAgendas: PoliticalAgendasModel | undefined;
 }
 
 export interface PartyModel {
@@ -33,4 +36,19 @@ export interface GlobalEventModel {
     description: string;
     revealed: PartyName;
     current: PartyName;
+}
+
+export interface PoliticalAgendasModel {
+    marsFirstPolicy: PolicyId;
+    marsFirstBonus: BonusId;
+    scientistsPolicy: PolicyId;
+    scientistsBonus: BonusId;
+    unityPolicy: PolicyId;
+    unityBonus: BonusId;
+    greensPolicy: PolicyId;
+    greensBonus: BonusId;
+    redsPolicy: PolicyId;
+    redsBonus: BonusId;
+    kelvinistsPolicy: PolicyId;
+    kelvinistsBonus: BonusId;
 }

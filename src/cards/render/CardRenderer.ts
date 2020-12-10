@@ -175,8 +175,14 @@ class Builder {
     return this;
   }
 
-  public titanium(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TITANIUM, amount));
+  public titanium(amount: number, bigAmountShowDigit: boolean = true): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount);
+    // override default showing a digit for items with amount > 5
+    // Done as an exception for 'Acquired Space Agency'
+    if (amount > 5 && bigAmountShowDigit === false) {
+      item.showDigit = false;
+    }
+    this._addRowItem(item);
     return this;
   }
 
@@ -284,7 +290,7 @@ class Builder {
     return this;
   }
 
-  public delegate(amount: number) {
+  public delegates(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
     return this;
   }
@@ -418,6 +424,14 @@ class Builder {
     return this;
   }
 
+  /*
+   * A one off function to handle Project Requirements prelude card
+   */
+  public projectRequirements(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
+    return this;
+  }
+
   /**
    * add non breakable space or simply empty space between items
    */
@@ -521,7 +535,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {

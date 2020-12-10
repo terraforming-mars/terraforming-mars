@@ -6,6 +6,9 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class VoteOfNoConfidence implements IProjectCard {
     public cost = 5;
@@ -33,12 +36,21 @@ export class VoteOfNoConfidence implements IProjectCard {
     public play(player: Player, game: Game) {
       if (game.turmoil !== undefined) {
             game.turmoil.chairman! = player.id;
-            const index = game.turmoil.delegate_reserve.indexOf(player.id);
+            const index = game.turmoil.delegateReserve.indexOf(player.id);
             if (index > -1) {
-              game.turmoil.delegate_reserve.splice(index, 1);
+              game.turmoil.delegateReserve.splice(index, 1);
             }
             player.increaseTerraformRating(game);
       }
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'T16',
+      requirements: CardRequirements.builder((b) => b.partyLeaders()),
+      renderData: CardRenderer.builder((b) => {
+        b.chairman().any.asterix().nbsp.partyLeaders().br;
+        b.tr(1);
+      }),
+      description: 'Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.',
     }
 }

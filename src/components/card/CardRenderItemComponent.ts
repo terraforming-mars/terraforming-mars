@@ -149,6 +149,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.anyPlayer === true) {
         if (type === CardRenderItemType.DELEGATES) {
           classes.push('card-delegate-red');
+        } else if (type === CardRenderItemType.CHAIRMAN) {
+          classes.push('card-chairman-red');
         } else {
           classes.push('red-outline');
         }

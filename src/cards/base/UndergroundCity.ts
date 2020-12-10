@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -8,6 +7,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class UndergroundCity implements IProjectCard {
     public cost = 18;
@@ -25,5 +26,15 @@ export class UndergroundCity implements IProjectCard {
         player.addProduction(Resources.STEEL, 2);
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '032',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(2).br;
+          pb.plus().steel(2);
+        }).nbsp.city();
+      }),
+      description: 'Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.',
     }
 }

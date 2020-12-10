@@ -217,4 +217,10 @@ describe('Turmoil', function() {
     turmoilKeys.sort();
     expect(serializedKeys).to.deep.eq(turmoilKeys);
   });
+
+  it('serializes and deserializes keeping players', function() {
+    const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
+    const deserialized = Turmoil.deserialize(serialized);
+    expect(deserialized.parties[0].getPresentPlayers().length).to.eq(0);
+  });
 });

@@ -121,44 +121,44 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
 }
 
 export class GlobalEventDealer {
-    public globalEventsDeck: Array<IGlobalEvent> = [];
-    public discardedGlobalEvents: Array<IGlobalEvent> = [];
+  public globalEventsDeck: Array<IGlobalEvent> = [];
+  public discardedGlobalEvents: Array<IGlobalEvent> = [];
 
-    public initGlobalEvents(game: Game) {
-      const events = [...POSITIVE_GLOBAL_EVENTS];
+  public initGlobalEvents(game: Game) {
+    const events = [...POSITIVE_GLOBAL_EVENTS];
 
-      if (!game.gameOptions.removeNegativeGlobalEventsOption) {
-        events.push(...NEGATIVE_GLOBAL_EVENTS);
-        if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
-
-        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-          events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
-        };
-      }
-
-      if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
-
-      if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
+    if (!game.gameOptions.removeNegativeGlobalEventsOption) {
+      events.push(...NEGATIVE_GLOBAL_EVENTS);
+      if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
 
       if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-        events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
-      }
-
-      this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.Factory()));
-    };
-
-    private shuffle(cards: Array<IGlobalEvent>): Array<IGlobalEvent> {
-      const deck: Array<IGlobalEvent> = [];
-      const copy = cards.slice();
-      while (copy.length) {
-        deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
-      }
-      return deck;
+        events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
+      };
     }
 
-    public draw(): IGlobalEvent | undefined {
-      const globalEvent = this.globalEventsDeck.pop();
-      if (globalEvent) return globalEvent;
-      return undefined;
+    if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
+
+    if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
+
+    if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+      events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
     }
+
+    this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.Factory()));
+  };
+
+  private shuffle(cards: Array<IGlobalEvent>): Array<IGlobalEvent> {
+    const deck: Array<IGlobalEvent> = [];
+    const copy = cards.slice();
+    while (copy.length) {
+      deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+    }
+    return deck;
+  }
+
+  public draw(): IGlobalEvent | undefined {
+    const globalEvent = this.globalEventsDeck.pop();
+    if (globalEvent) return globalEvent;
+    return undefined;
+  }
 }

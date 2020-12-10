@@ -1,4 +1,3 @@
-
 import {TileType} from '../../TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -11,6 +10,8 @@ import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeArea implements IProjectCard {
     public cost = 20;
@@ -26,5 +27,13 @@ export class MoholeArea implements IProjectCard {
         player.addProduction(Resources.HEAT, 4);
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '142',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.heat(4)).br;
+        b.tile(TileType.MOHOLE_AREA, true);
+      }),
+      description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',
     }
 }

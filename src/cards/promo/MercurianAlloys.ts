@@ -3,6 +3,10 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MercurianAlloys implements IProjectCard {
     public name = CardName.MERCURIAN_ALLOYS;
@@ -21,5 +25,16 @@ export class MercurianAlloys implements IProjectCard {
 
     public onDiscard(player: Player): void {
       player.decreaseTitaniumValue();
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X07',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          eb.description('Effect: Your titanium resources are worth 1 MC extra.');
+        });
+      }),
+      description: 'Requires 2 Science tags.',
     }
 }

@@ -6,6 +6,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LandClaim implements IProjectCard {
     public cost = 1;
@@ -26,5 +29,11 @@ export class LandClaim implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '066',
+      renderData: CardRenderer.builder((b) => {
+        b.text('Place your marker on a non-reserved area. Only you may place a tile there.', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

@@ -8,6 +8,8 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {BoardName} from '../../BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaTubeSettlement implements IProjectCard {
     public cost = 15;
@@ -39,5 +41,17 @@ export class LavaTubeSettlement implements IProjectCard {
         this.getSpacesForCity(player, game),
       ));
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'P37',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(2);
+        }).br;
+        b.city().asterix();
+      }),
+      description: 'Decrease your Energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.',
     }
 }

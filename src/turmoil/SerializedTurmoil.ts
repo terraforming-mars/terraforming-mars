@@ -5,8 +5,8 @@ import {PlayerId} from '../Player';
 
 export interface SerializedTurmoil {
     chairman: undefined | PlayerId | 'NEUTRAL';
-    rulingParty: undefined | IParty;
-    dominantParty: undefined | IParty;
+    rulingParty: IParty;
+    dominantParty: IParty;
     lobby: Array<string>;
     delegate_reserve: Array<PlayerId | 'NEUTRAL'>; // eslint-disable-line camelcase
     parties: Array<IParty>;

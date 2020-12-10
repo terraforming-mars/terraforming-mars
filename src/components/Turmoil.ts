@@ -82,10 +82,22 @@ export const Turmoil = Vue.component('turmoil', {
         return '<p>Error</p>';
       }
     },
-    getPolicy: function(party: PartyName | undefined) {
+    getPolicy: function(party: PartyName | undefined, staticAgendas: PoliticalAgendasModel | undefined) {
       if (party === PartyName.MARS) {
-        return `<div class="tile empty-tile-small"></div> : 
-          <span class="steel resource"></span>`;
+        if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp02') {
+          return `<div class="resource card policy-building-card"><div class="card-icon tag-building"></div></div> : 
+            <div class="resource money party-resource">1</div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
+          return `<div class="resource steel"></div> : 
+            + <div class="resource money">1</div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp04') {
+          return `<span class="money resource">4</span>
+            <span class="red-arrow"></span>
+            <div class="resource card policy-building-card"><div class="card-icon tag-building"></div></div>`;
+        } else {
+          return `<div class="tile empty-tile-small"></div> : 
+            <span class="steel resource"></span>`;
+        }
       }
       if (party === PartyName.SCIENTISTS) {
         return `<span class="money resource">10</span>
@@ -155,7 +167,7 @@ export const Turmoil = Vue.component('turmoil', {
           <div class="dominant-party-name">
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
-          <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling)"></div>
+          <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling, turmoil.staticAgendas)"></div>
           <div class="chairman-spot"><div v-if="turmoil.chairman" :class="'player-token '+turmoil.chairman"></div></div>
           <div class="turmoil-reserve">
               <div class="lobby-spot" v-for="n in turmoil.reserve.length" :key="n">
@@ -169,7 +181,7 @@ export const Turmoil = Vue.component('turmoil', {
             <div v-show="isVisible()" class='policies-global'>
               <div v-for="party in turmoil.parties" class='policy-block'>
                 <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-                <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
+                <div class="policy-bonus" v-html="getPolicy(party.name, turmoil.staticAgendas)"></div>
               </div>
             </div>
           </div>

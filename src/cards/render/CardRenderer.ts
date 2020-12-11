@@ -238,13 +238,17 @@ class Builder {
     return this;
   }
 
-  public science(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+  public science(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE, amount));
     return this;
   }
 
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
+    return this;
+  }
+  public tradeFleet(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
     return this;
   }
 
@@ -304,7 +308,6 @@ class Builder {
     return this;
   }
 
-
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
     return this;
@@ -314,6 +317,21 @@ class Builder {
     const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
     item.isPlayed = true;
     this._addRowItem(item);
+    return this;
+  }
+
+  public fighter(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+    return this;
+  }
+
+  public selfReplicatingRobots() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SELF_REPLICATING));
+    return this;
+  }
+
+  public multiplierWhite() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
     return this;
   }
 
@@ -375,6 +393,12 @@ class Builder {
   public colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.colon(size));
+    return this;
+  }
+
+  public arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.arrow(size));
     return this;
   }
 

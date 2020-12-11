@@ -209,18 +209,20 @@
             }
             .card-minus {
                 background-image: url(/assets/misc/minus.png);
-                background-size: 15px;
+                background-size: 12px;
                 margin: 0;
-                width: 15px;
-                height: 10px;
+                width: 12px;
+                height: 8px;
                 background-repeat: no-repeat;
                 margin-right: 2px;
+                position: relative;
+                top: -2px;
             }
             .card-plus {
                 background-image: url(/assets/misc/plus.png);
-                background-size: 15px;
-                min-height: 15px;
-                width: 15px;
+                background-size: 12px;
+                min-height: 12px;
+                width: 12px;
                 vertical-align: middle;
                 display: inline-block;
                 margin: 0;
@@ -257,6 +259,30 @@
                 width: 30px;
                 background-size: 30px 40px;
                 vertical-align: middle;
+                .cards-count {
+                    position: absolute;
+                    background: #ffffffb3;
+                    color: black;
+                    margin-left: 3px;
+                    width: 24px;
+                    height: 20px;
+                    line-height: 20px;
+                    margin-top: 16px;
+                    border-radius: 5px;
+                    font-size: 17px;
+                }
+                .card-icon-space {
+                    background: black;
+                    color: yellow;
+                    font-size: 14px;
+                }
+                .card-icon-building {
+                    background: linear-gradient(#a27147, #593e27);
+                    color: #493628;
+                    font-size: 12px;
+                    left: -3px;
+                    text-shadow: 0 0 1px black;
+                }
             }
             .card-icon {
                 position: absolute;
@@ -287,6 +313,13 @@
                 height: 40px;
                 width: 48px;
                 background-size: 48px;
+            }
+            .card-resource-trade-fleet {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+                filter: invert(1) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.5));
             }
             .card-resource-colony {
                 background-image: url(./assets/tiles/colony.png);
@@ -458,6 +491,9 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 .card-item-container{
                     margin: 0px;
+                }
+                .card-points-item-first {
+                    display: flex;
                 }
             }
             .card-points-big {

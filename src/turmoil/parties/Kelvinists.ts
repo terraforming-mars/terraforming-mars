@@ -70,7 +70,7 @@ export class KelvinistsPolicy01 implements Policy {
 
 export class KelvinistsPolicy02 implements Policy {
   id = 'kp02';
-  description: string = 'Whenever you raise temperature, gain 2 MC';
+  description: string = 'Whenever you raise temperature, gain 3 MC';
 }
 
 export class KelvinistsPolicy03 implements Policy {

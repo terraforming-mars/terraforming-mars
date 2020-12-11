@@ -136,12 +136,28 @@ export const Turmoil = Vue.component('turmoil', {
         }
       }
       if (party === PartyName.KELVINISTS) {
-        return `<span class="money resource">10</span>
-          <span class="red-arrow"></span>
-          <div class="production-box production-box-size2">
-            <div class="energy production"></div>
-            <div class="heat production"></div>
-          </div>`;
+        if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp02') {
+          return `<div class="tile temperature-tile req-tile-small" style="margin-right:5px;"></div> : <span class="money resource">3</span>`;
+        } else if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp03') {
+          return `<div class="policy-top-margin">
+            <div class="production-box production-box-size3">
+              <div class="production-prefix minus"></div>
+              <div class="heat production"></div>
+              <div class="heat production"></div>
+            </div>
+            <span class="red-arrow"></span>
+            <div class="rating tile"></div></div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp04') {
+          return `<div class="tile empty-tile-small"></div> : 
+            <span class="heat resource"></span><span class="heat resource"></span>`;
+        } else {
+          return `<span class="money resource">10</span>
+            <span class="red-arrow"></span>
+            <div class="production-box production-box-size2">
+              <div class="energy production"></div>
+              <div class="heat production"></div>
+            </div>`;
+        }
       }
       if (party === PartyName.REDS) {
         return `

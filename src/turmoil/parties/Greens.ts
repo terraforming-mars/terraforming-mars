@@ -17,6 +17,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../ResourceType';
 import {Phase} from '../../Phase';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -88,62 +90,59 @@ export class GreensPolicy03 implements Policy {
 
 export class GreensPolicy04 implements Policy {
   id = 'gp04';
-  description: string = 'Spend 3 plants to add 2 microbes or 1 animal to any card (Turmoil Greens)';
+  description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to another card (Turmoil Greens)';
 
   canAct(player: Player) {
-    return player.plants >= 3 && player.turmoilPolicyActionUsed === false;
+    return player.canAfford(5) && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {
-    player.plants -= 3;
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
     player.turmoilPolicyActionUsed = true;
 
-    const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
-    const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
-    const orOptions = new OrOptions();
+    game.defer(new SelectHowToPayDeferred(
+      player,
+      5,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+        const orOptions = new OrOptions();
 
-    if (availableMicrobeCards.length === 1) {
-      orOptions.options.push(
-        new SelectOption('Add 2 microbes to' + availableMicrobeCards[0].name, 'Confirm', () => {
-          player.addResourceTo(availableMicrobeCards[0], 2);
-          LogHelper.logAddResource(game, player, availableMicrobeCards[0], 2);
+        if (availableMicrobeCards.length === 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
+              player.addResourceTo(availableMicrobeCards[0], 2);
+              LogHelper.logAddResource(game, player, availableMicrobeCards[0], 2);
 
+              return undefined;
+            }),
+          );
+        } else if (availableMicrobeCards.length > 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
+              return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
+                player.addResourceTo(foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
+                return undefined;
+              });
+            }),
+          );
+        }
+
+        orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
+          player.setResource(Resources.PLANTS, 3);
           return undefined;
-        }),
-      );
-    } else if (availableMicrobeCards.length > 1) {
-      orOptions.options.push(
-        new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
-          return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 2);
-            LogHelper.logAddResource(game, player, foundCards[0], 2);
-            return undefined;
-          });
-        }),
-      );
-    }
+        }));
 
-    if (availableAnimalCards.length === 1) {
-      orOptions.options.push(
-        new SelectOption('Add 1 animal to' + availableAnimalCards[0].name, 'Confirm', () => {
-          player.addResourceTo(availableAnimalCards[0]);
-          LogHelper.logAddResource(game, player, availableAnimalCards[0]);
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          return undefined;
-        }),
-      );
-    } else if (availableAnimalCards.length > 1) {
-      orOptions.options.push(new SelectOption('Add 1 animal to a card', 'Confirm', () => {
-        return new SelectCard('Select card to add 1 animal', 'Add animal', availableAnimalCards, (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(game, player, foundCards[0]);
-          return undefined;
-        });
-      }));
-    }
+        game.defer(new DeferredAction(player, () => orOptions));
+        return undefined;
+      },
+    ));
 
-    if (orOptions.options.length === 0) return undefined;
-    return orOptions;
+    return undefined;
   }
 }

@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Solarnet implements IProjectCard {
     public cost = 7;
@@ -20,5 +22,13 @@ export class Solarnet implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '245',
+      renderData: CardRenderer.builder((b) => {
+        b.cards(2);
+      }),
+      description: 'Requires Venus, Earth and Jovian tags. Draw 2 cards.',
+      victoryPoints: 1,
     }
 }

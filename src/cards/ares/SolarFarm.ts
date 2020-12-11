@@ -10,6 +10,8 @@ import {TileType} from '../../TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm implements IProjectCard {
     public cost = 12;
@@ -37,5 +39,14 @@ export class SolarFarm implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'A17',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.energy(1).slash().plants(1).played;
+        }).nbsp.tile(TileType.SOLAR_FARM, false, true);
+      }),
+      description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant tag on the area where you place the tile.',
     }
 }

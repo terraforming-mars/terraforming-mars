@@ -8,6 +8,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../constants';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SmallAsteroid implements IProjectCard {
     public cost = 10;
@@ -29,5 +31,13 @@ export class SmallAsteroid implements IProjectCard {
       game.increaseTemperature(player, 1);
       game.defer(new RemoveAnyPlants(player, game, 2));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '209',
+      renderData: CardRenderer.builder((b) => {
+        b.temperature(1).br;
+        b.minus().plants(2).any;
+      }),
+      description: 'Increase temperature 1 step. Remove up to 2 plants from any player.',
     }
 }

@@ -85,7 +85,7 @@ export const Turmoil = Vue.component('turmoil', {
     getPolicy: function(party: PartyName | undefined, staticAgendas: PoliticalAgendasModel | undefined) {
       if (party === PartyName.MARS) {
         if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp02') {
-          return `<div class="resource card policy-building-card"><div class="card-icon tag-building"></div></div> : 
+          return `<div class="resource card card-with-border policy-building-card"><div class="card-icon tag-building"></div></div> : 
             <div class="resource money party-resource">1</div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
           return `<div class="resource steel"></div> : 
@@ -100,11 +100,25 @@ export const Turmoil = Vue.component('turmoil', {
         }
       }
       if (party === PartyName.SCIENTISTS) {
-        return `<span class="money resource">10</span>
-          <span class="red-arrow"></span>
-          <span class="card card-with-border resource party-resource"></span>
-          <span class="card card-with-border resource party-resource"></span>
-          <span class="card card-with-border resource party-resource"></span>`;
+        if (staticAgendas !== undefined && staticAgendas.scientistsPolicy === 'sp02') {
+          return `<span>
+          <div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
+          <div class="tile ocean-tile req-tile-small"></div>
+          <div class="tile temperature-tile req-tile-small"></div>
+          : ± 2</span>`;
+        } else if (staticAgendas !== undefined && staticAgendas.scientistsPolicy === 'sp03') {
+          return `<div class="policy-top-margin"><span class="money resource">4</span>
+            <span class="red-arrow"></span>
+            <div class="resource card red-outline"></div> : <div class="resource card card-with-border"></div></div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.scientistsPolicy === 'sp04') {
+          return `<div class="scientists-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`;
+        } else {
+          return `<span class="money resource">10</span>
+            <span class="red-arrow"></span>
+            <span class="card card-with-border resource party-resource"></span>
+            <span class="card card-with-border resource party-resource"></span>
+            <span class="card card-with-border resource party-resource"></span>`;
+        }
       }
       if (party === PartyName.UNITY) {
         return `<div class="resource titanium"></div> : 

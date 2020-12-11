@@ -8,7 +8,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -52,12 +51,10 @@ export class UnityPolicy01 implements Policy {
 
 export class UnityPolicy02 implements Policy {
   id = 'up02';
-  description: string = 'Spend 15 MC (titanium may be used) to build a Colony (Turmoil Unity)';
+  description: string = 'Spend 10 MC to gain 4 titanium';
 
-  canAct(player: Player, game: Game) {
-    return player.canAfford(15, game, false, true) &&
-      player.hasAvailableColonyTileToBuildOn(game) &&
-      player.turmoilPolicyActionUsed === false;
+  canAct(player: Player) {
+    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player, game: Game) {
@@ -65,12 +62,13 @@ export class UnityPolicy02 implements Policy {
     player.turmoilPolicyActionUsed = true;
     game.defer(new SelectHowToPayDeferred(
       player,
-      15,
+      10,
       false,
-      true,
-      'Select how to pay for colony',
+      false,
+      'Select how to pay for action',
       () => {
-        game.defer(new BuildColony(player, game, false, 'Select where to build colony'));
+        player.setResource(Resources.TITANIUM, 4);
+        game.log('${0} gained 4 titanium', (b) => b.player(player));
       },
     ));
 

@@ -2233,11 +2233,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, 'up02')) {
         const unityPolicy = new UnityPolicy02();
 
-        if (unityPolicy.canAct(this, game)) {
+        if (unityPolicy.canAct(this)) {
           action.options.push(
             new SelectOption(
               unityPolicy.description,
-              'Build colony',
+              'Pay',
               () => unityPolicy.action(this, game),
             ),
           );

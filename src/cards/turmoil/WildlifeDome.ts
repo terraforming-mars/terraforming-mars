@@ -9,6 +9,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {REDS_RULING_POLICY_COST, MAX_OXYGEN_LEVEL} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class WildlifeDome implements IProjectCard {
     public cost = 15;
@@ -35,5 +38,13 @@ export class WildlifeDome implements IProjectCard {
       return new SelectSpace('Select space for greenery tile', game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
         return game.addGreenery(player, space.id);
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'T15',
+      requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
+      renderData: CardRenderer.builder((b) => {
+        b.greenery().secondaryTag('oxygen');
+      }),
+      description: 'Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.',
     }
 }

@@ -6,6 +6,11 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard {
     public cost = 5;
@@ -29,5 +34,18 @@ export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard
     }
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 2);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '260',
+      requirements: CardRequirements.builder((b) => b.venus(12)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb)=> {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: add 1 Microbe to this card.');
+        }).br;
+        b.text('1 VP for every 2nd Microbe on this card.', CardRenderItemSize.TINY, true);
+      }),
+      description: 'Requires Venus 12%.',
+      victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
     }
 }

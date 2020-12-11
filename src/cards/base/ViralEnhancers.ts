@@ -8,6 +8,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ViralEnhancers implements IProjectCard {
     public cost = 9;
@@ -46,5 +48,18 @@ export class ViralEnhancers implements IProjectCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '074',
+      renderData: CardRenderer.builder((b) => {
+        // TODO (chosta): find a way to have an effect on two rows
+        b.plants(1).played.slash().microbes(1).played.slash().animals(1).played.br;
+        b.effectBox((eb) => {
+          eb.empty().startEffect;
+          eb.plants(1).slash().microbes(1).asterix().slash().animals(1).asterix();
+          eb.description('Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.');
+        });
+      }),
     }
 }

@@ -8,6 +8,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../Board';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanizedArea implements IProjectCard {
     public cost = 10;
@@ -29,5 +31,15 @@ export class UrbanizedArea implements IProjectCard {
         player.addProduction(Resources.MEGACREDITS, 2);
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '120',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(2);
+        }).city().asterix();
+      }),
+      description: 'Decrease your Energy production 1 step and increase your MC production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.',
     }
 }

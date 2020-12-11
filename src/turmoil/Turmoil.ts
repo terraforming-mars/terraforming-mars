@@ -11,7 +11,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
-import {SerializedTurmoil} from './SerializedTurmoil';
+import {SerializedParty, SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 
 export interface IPartyFactory<T> {
@@ -33,28 +33,33 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public rulingParty: IParty;
     public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
-    public delegate_reserve: Array<PlayerId | 'NEUTRAL'> = []; // eslint-disable-line camelcase
+    public delegateReserve: Array<PlayerId | 'NEUTRAL'> = [];
     public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
-    public readonly globalEventDealer: GlobalEventDealer = new GlobalEventDealer();
+    public readonly globalEventDealer: GlobalEventDealer;
     public distantGlobalEvent: IGlobalEvent | undefined;
-    public commingGlobalEvent: IGlobalEvent | undefined;
+    public comingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
 
-    private constructor(rulingPartyName: PartyName, dominantPartyName: PartyName) {
+    private constructor(
+      rulingPartyName: PartyName,
+      dominantPartyName: PartyName,
+      globalEventDealer: GlobalEventDealer) {
       this.rulingParty = this.getPartyByName(rulingPartyName);
       this.dominantParty = this.getPartyByName(dominantPartyName);
+      this.globalEventDealer = globalEventDealer;
     }
 
     public static newInstance(game: Game): Turmoil {
-      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS);
+      const dealer = GlobalEventDealer.newInstance(game);
+      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
         turmoil.lobby.add(player.id);
         // Begin with six delegates in the delegate reserve
         for (let i = 0; i < PLAYER_DELEGATES_COUNT - 1; i++) {
-          turmoil.delegate_reserve.push(player.id);
+          turmoil.delegateReserve.push(player.id);
         }
       });
 
@@ -63,20 +68,19 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // Begin with 13 neutral delegates in the reserve
       for (let i = 0; i < 13; i++) {
-        turmoil.delegate_reserve.push('NEUTRAL');
+        turmoil.delegateReserve.push('NEUTRAL');
       }
 
       // Init the global event dealer
-      turmoil.globalEventDealer.initGlobalEvents(game);
       turmoil.initGlobalEvent(game);
       return turmoil;
     }
 
     public initGlobalEvent(game: Game) {
       // Draw the first global event to setup the game
-      this.commingGlobalEvent = this.globalEventDealer.draw();
-      if (this.commingGlobalEvent !== undefined) {
-        this.sendDelegateToParty('NEUTRAL', this.commingGlobalEvent.revealedDelegate, game);
+      this.comingGlobalEvent = this.globalEventDealer.draw();
+      if (this.comingGlobalEvent !== undefined) {
+        this.sendDelegateToParty('NEUTRAL', this.comingGlobalEvent.revealedDelegate, game);
       }
       this.distantGlobalEvent = this.globalEventDealer.draw();
       if (this.distantGlobalEvent !== undefined) {
@@ -103,9 +107,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && fromLobby) {
           this.lobby.delete(playerId);
         } else {
-          const index = this.delegate_reserve.indexOf(playerId);
+          const index = this.delegateReserve.indexOf(playerId);
           if (index > -1) {
-            this.delegate_reserve.splice(index, 1);
+            this.delegateReserve.splice(index, 1);
           }
         }
         party.sendDelegate(playerId, game);
@@ -119,7 +123,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public removeDelegateFromParty(playerId: PlayerId | 'NEUTRAL', partyName: PartyName, game: Game): void {
       const party = this.getPartyByName(partyName);
       if (party) {
-        this.delegate_reserve.push(playerId);
+        this.delegateReserve.push(playerId);
         party.removeDelegate(playerId, game);
         this.checkDominantParty(party);
       } else {
@@ -202,15 +206,15 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // 3.c - Fill the lobby
       this.lobby.forEach((playerId) => {
-        this.delegate_reserve.push(playerId);
+        this.delegateReserve.push(playerId);
       });
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
         if (this.getDelegates(player.id) > 0) {
-          const index = this.delegate_reserve.indexOf(player.id);
+          const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
-            this.delegate_reserve.splice(index, 1);
+            this.delegateReserve.splice(index, 1);
           }
           this.lobby.add(player.id);
         }
@@ -221,12 +225,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.globalEventDealer.discardedGlobalEvents.push(this.currentGlobalEvent);
       }
       // 4.a - Coming Event is now Current event. Add neutral delegate.
-      this.currentGlobalEvent = this.commingGlobalEvent;
+      this.currentGlobalEvent = this.comingGlobalEvent;
       if (this.currentGlobalEvent) {
         this.sendDelegateToParty('NEUTRAL', this.currentGlobalEvent.currentDelegate, game);
       }
       // 4.b - Distant Event is now Coming Event
-      this.commingGlobalEvent = this.distantGlobalEvent;
+      this.comingGlobalEvent = this.distantGlobalEvent;
       // 4.c - Draw the new distant event and add neutral delegate
       this.distantGlobalEvent = this.globalEventDealer.draw();
       if (this.distantGlobalEvent) {
@@ -243,7 +247,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
         // Change the chairman
         if (this.chairman) {
-          this.delegate_reserve.push(this.chairman);
+          this.delegateReserve.push(this.chairman);
         }
 
         this.chairman = this.rulingParty.partyLeader;
@@ -261,7 +265,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         // Remove the party leader from the delegates array
         this.rulingParty.delegates.splice(index, 1);
         // Fill the delegate reserve
-        this.delegate_reserve = this.delegate_reserve.concat(this.rulingParty.delegates);
+        this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
 
         // Clean the party
         this.rulingParty.partyLeader = undefined;
@@ -320,12 +324,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // List players present in the reserve
     public getPresentPlayers(): Array<PlayerId | 'NEUTRAL'> {
-      return Array.from(new Set(this.delegate_reserve));
+      return Array.from(new Set(this.delegateReserve));
     }
 
     // Return number of delegate
     public getDelegates(playerId: PlayerId | 'NEUTRAL'): number {
-      const delegates = this.delegate_reserve.filter((p) => p === playerId).length;
+      const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;
     }
 
@@ -349,15 +353,23 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public serialize(): SerializedTurmoil {
       const result: SerializedTurmoil = {
         chairman: this.chairman,
-        rulingParty: this.rulingParty,
-        dominantParty: this.dominantParty,
+        rulingParty: this.rulingParty.name,
+        dominantParty: this.dominantParty.name,
         lobby: Array.from(this.lobby),
-        delegate_reserve: this.delegate_reserve,
-        parties: this.parties,
+        delegate_reserve: this.delegateReserve,
+        delegateReserve: this.delegateReserve,
+        parties: this.parties.map((p) => {
+          return {
+            name: p.name,
+            delegates: p.delegates,
+            partyLeader: p.partyLeader,
+          } as SerializedParty;
+        }),
         playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
-        globalEventDealer: this.globalEventDealer,
-        distantGlobalEvent: this.distantGlobalEvent,
-        commingGlobalEvent: this.commingGlobalEvent,
+        globalEventDealer: this.globalEventDealer.serialize(),
+        distantGlobalEvent: this.distantGlobalEvent?.name,
+        commingGlobalEvent: this.comingGlobalEvent,
+        comingGlobalEvent: this.comingGlobalEvent?.name,
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;
@@ -365,35 +377,74 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return result;
     }
 
-    // Function used to rebuild each objects
     public static deserialize(d: SerializedTurmoil): Turmoil {
-      const turmoil = new Turmoil(d.rulingParty.name, d.dominantParty.name);
+      function partyName(object: any): PartyName {
+        function instanceOfIParty(object: any): object is IParty {
+          try {
+            return 'delegates' in object;
+          } catch (typeError) {
+            return false;
+          }
+        }
+        if (instanceOfIParty(object)) {
+          return object.name;
+        } else {
+          return object;
+        }
+      }
+      const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
+      const turmoil = new Turmoil(partyName(d.rulingParty), partyName(d.dominantParty), dealer);
 
       turmoil.chairman = d.chairman;
-      turmoil.rulingParty = d.rulingParty;
-      turmoil.dominantParty = d.dominantParty;
+
+      turmoil.chairman = d.chairman;
       turmoil.lobby = new Set(d.lobby);
-      turmoil.delegate_reserve = d.delegate_reserve;
+      turmoil.delegateReserve = d.delegate_reserve;
+
+      if (d.delegateReserve !== undefined) {
+        turmoil.delegateReserve = d.delegateReserve;
+      } else {
+        turmoil.delegateReserve = d.delegate_reserve;
+      }
+
+      d.parties.forEach((sp) => {
+        const tp = turmoil.getPartyByName(sp.name);
+        if (tp === undefined) {
+          throw new Error('huh? unknown party: ' + sp.name);
+        }
+        tp.delegates = sp.delegates;
+        tp.partyLeader = sp.partyLeader;
+      });
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
-      // Rebuild Global Event Dealer
-      turmoil.globalEventDealer.globalEventsDeck = d.globalEventDealer.globalEventsDeck.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
+      function globalEventName(object: any): string {
+        function instanceOfIGlobalEvent(object: any): object is IGlobalEvent {
+          try {
+            return 'revealedDelegate' in object;
+          } catch (typeError) {
+            return false;
+          }
+        }
+        if (instanceOfIGlobalEvent(object)) {
+          return object.name;
+        } else {
+          return object;
+        }
+      }
 
-      turmoil.globalEventDealer.discardedGlobalEvents = d.globalEventDealer.discardedGlobalEvents.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
+      turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       if (d.distantGlobalEvent) {
-        turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent.name);
+        turmoil.distantGlobalEvent = getGlobalEventByName(globalEventName(d.distantGlobalEvent));
       }
-      if (d.commingGlobalEvent) {
-        turmoil.commingGlobalEvent = getGlobalEventByName(d.commingGlobalEvent.name);
+      if (d.comingGlobalEvent) {
+        turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent);
+      } else if (d.commingGlobalEvent) {
+        turmoil.comingGlobalEvent = getGlobalEventByName(d.commingGlobalEvent.name);
       }
       if (d.currentGlobalEvent) {
-        turmoil.currentGlobalEvent = getGlobalEventByName(d.currentGlobalEvent.name);
+        turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent));
       }
 
       return turmoil;

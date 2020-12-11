@@ -1314,7 +1314,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         // PoliticalAgendas Kelvinists P2 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp02')) {
-          player.setResource(Resources.MEGACREDITS, steps * 2);
+          player.setResource(Resources.MEGACREDITS, steps * 3);
         }
         // PoliticalAgendas Reds P4 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {

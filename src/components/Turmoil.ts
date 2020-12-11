@@ -88,15 +88,15 @@ export const Turmoil = Vue.component('turmoil', {
           return `<div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div> : 
             <div class="resource money party-resource">1</div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
-          return `<div class="resource steel"></div> : 
-            + <div class="resource money">1</div>`;
+          return `<div class="policy-top-margin"><div class="resource steel"></div> : 
+            + <div class="resource money">1</div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp04') {
           return `<span class="money resource">4</span>
             <span class="red-arrow"></span>
             <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div>`;
         } else {
-          return `<div class="tile empty-tile-small"></div> : 
-            <span class="steel resource"></span>`;
+          return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+            <span class="steel resource"></span></div>`;
         }
       }
       if (party === PartyName.SCIENTISTS) {
@@ -122,8 +122,10 @@ export const Turmoil = Vue.component('turmoil', {
       }
       if (party === PartyName.UNITY) {
         if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up02') {
-          return `<span class="money resource">10</span>
-            <span class="red-arrow"></span> 4 <span class="titanium resource"></span>`;
+          return `<div class="policy-top-margin">
+            <span class="money resource">10</span>
+            <span class="red-arrow"></span> 4 <span class="titanium resource"></span>
+            </div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up03') {
           return `<span class="money resource">4</span>
             <span class="red-arrow"></span>
@@ -131,8 +133,8 @@ export const Turmoil = Vue.component('turmoil', {
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up04') {
           return `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource ">-2</div></div>`;
         } else {
-          return `<div class="resource titanium"></div> : 
-            + <div class="resource money">1</div>`;
+          return `<div class="policy-top-margin"><div class="resource titanium"></div> : 
+            + <div class="resource money">1</div></div>`;
         }
       }
       if (party === PartyName.KELVINISTS) {
@@ -161,9 +163,9 @@ export const Turmoil = Vue.component('turmoil', {
       }
       if (party === PartyName.REDS) {
         if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp02') {
-          return `<div class="tile empty-tile-small"></div> : <span class="money resource">-3</span>`;
+          return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="money resource">-3</span></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp03') {
-          return `<div class="standard-projects"></div> : <div class="resource card card-small red-outline"></div>`;
+          return `<div class="policy-top-margin"><div class="standard-projects"></div> : <div class="resource card red-outline"></div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp04') {
           return `<div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
           <div class="tile ocean-tile req-tile-small"></div>
@@ -172,14 +174,31 @@ export const Turmoil = Vue.component('turmoil', {
               <div class="production-prefix minus"></div><div class="money production">1</div>
             </div>`;
         } else {
-          return `
+          return `<div class="policy-top-margin">
             <div class="rating tile"></div> : 
-            <div class="resource money">-3</div>`;
+            <div class="resource money">-3</div>
+            </div>`;
         }
       }
       if (party === PartyName.GREENS) {
-        return `<div class="tile greenery-tile"></div> : 
-          <div class="resource money">4</div>`;
+        if (staticAgendas !== undefined && staticAgendas.greensPolicy === 'gp02') {
+          return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+            <span class="plant resource"></span></div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.greensPolicy === 'gp03') {
+          return `<div class="policy-top-margin">
+          <div class="resource-tag tag-plant party-resource-tag"></div>
+          <div class="resource-tag tag-microbe party-resource-tag"></div>
+          <div class="resource-tag tag-animal party-resource-tag"></div> : <div class="resource money">2</div>
+          </div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.greensPolicy === 'gp04') {
+          return `<div class="policy-top-margin">
+          <span class="money resource">5</span>
+          <span class="red-arrow"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
+          </div>`;
+        } else {
+          return `<div class="tile greenery-tile"></div> : 
+            <div class="resource money">4</div>`;
+        }
       }
       return '<p>' + $t('No ruling Policy') + '</p>';
     },

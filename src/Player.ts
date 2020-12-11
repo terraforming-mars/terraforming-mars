@@ -2207,7 +2207,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           action.options.push(
             new SelectOption(
               greensPolicy.description,
-              'Spend plants',
+              'Pay',
               () => greensPolicy.action(this, game),
             ),
           );

@@ -10,6 +10,9 @@ import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -60,4 +63,21 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
       LogHelper.logRemoveResource(game, player, this, amount, logText);
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '251',
+      requirements: CardRequirements.builder((b) => b.venus(6)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: Add 1 Microbe to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
+          eb.description('Action: Spend any number of Microbes here to gain triple amount of MC.');
+        });
+      }),
+      description: 'Requires Venus 6%',
+    };
 }

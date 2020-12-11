@@ -11,6 +11,11 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
     public cost = 22;
@@ -60,4 +65,22 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
         },
       );
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '248',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);
+          eb.description('Action: Add 2 floaters to ANY VENUS CARD.');
+        }).br;
+        b.productionBox((pb) => pb.megacredits(2)).city().asterix();
+        b.text('1 VP for every 3rd Floater on this card.', CardRenderItemSize.TINY, true);
+      }),
+      description: {
+        text: 'Requires 2 science tags. Increase your MC production 2 steps. Place a City tile ON THE RESERVED AREA',
+        align: 'left',
+      },
+      victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),
+    };
 }

@@ -85,7 +85,7 @@ export const Turmoil = Vue.component('turmoil', {
     getPolicy: function(party: PartyName | undefined, staticAgendas: PoliticalAgendasModel | undefined) {
       if (party === PartyName.MARS) {
         if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp02') {
-          return `<div class="resource card card-with-border policy-card-wtih-tag"><div class="card-icon tag-building"></div></div> : 
+          return `<div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div> : 
             <div class="resource money party-resource">1</div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
           return `<div class="resource steel"></div> : 
@@ -93,7 +93,7 @@ export const Turmoil = Vue.component('turmoil', {
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp04') {
           return `<span class="money resource">4</span>
             <span class="red-arrow"></span>
-            <div class="resource card card-with-border policy-card-wtih-tag"><div class="card-icon tag-building"></div></div>`;
+            <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div>`;
         } else {
           return `<div class="tile empty-tile-small"></div> : 
             <span class="steel resource"></span>`;
@@ -127,7 +127,7 @@ export const Turmoil = Vue.component('turmoil', {
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up03') {
           return `<span class="money resource">4</span>
             <span class="red-arrow"></span>
-            <div class="resource card card-with-border policy-card-wtih-tag"><div class="card-icon tag-space"></div></div>`;
+            <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-space"></div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up04') {
           return `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource ">-2</div></div>`;
         } else {
@@ -160,9 +160,22 @@ export const Turmoil = Vue.component('turmoil', {
         }
       }
       if (party === PartyName.REDS) {
-        return `
-          <div class="rating tile"></div> : 
-          <div class="resource money">-3</div>`;
+        if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp02') {
+          return `<div class="tile empty-tile-small"></div> : <span class="money resource">-3</span>`;
+        } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp03') {
+          return `<div class="standard-projects"></div> : <div class="resource card card-small red-outline"></div>`;
+        } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp04') {
+          return `<div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
+          <div class="tile ocean-tile req-tile-small"></div>
+          <div class="tile temperature-tile req-tile-small"></div>
+          : <div class="production-box production-box-size2" style="margin-left:5px;">
+              <div class="production-prefix minus"></div><div class="money production">1</div>
+            </div>`;
+        } else {
+          return `
+            <div class="rating tile"></div> : 
+            <div class="resource money">-3</div>`;
+        }
       }
       if (party === PartyName.GREENS) {
         return `<div class="tile greenery-tile"></div> : 

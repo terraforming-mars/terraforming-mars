@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -7,6 +6,8 @@ import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class StanfordTorus implements IProjectCard {
     public name = CardName.STANFORD_TORUS;
@@ -22,4 +23,13 @@ export class StanfordTorus implements IProjectCard {
     public getVictoryPoints() {
       return 2;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X12',
+      renderData: CardRenderer.builder((b) => {
+        b.city().asterix();
+      }),
+      description: 'Place a city tile IN SPACE, outside and separate from the planet.',
+      victoryPoints: 2,
+    };
 }

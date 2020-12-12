@@ -11,6 +11,8 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class TitanAirScrapping implements IProjectCard, IResourceCard {
     public cost = 21;
@@ -70,5 +72,21 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
 
     public getVictoryPoints(): number {
       return 2;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C43',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.titanium(1).startAction.floaters(2);
+          eb.description('Action: Spend 1 titanium to add 2 floaters here.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.floaters(2).startAction.tr(1);
+          eb.description('Action: Spend 2 floaters here to increase your TR 1 step.');
+        });
+      }),
+      victoryPoints: 2,
     }
 }

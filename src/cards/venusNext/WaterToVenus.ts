@@ -7,6 +7,8 @@ import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class WaterToVenus implements IProjectCard {
     public cost = 9;
@@ -27,5 +29,10 @@ export class WaterToVenus implements IProjectCard {
     public play(player: Player, game: Game) {
       game.increaseVenusScaleLevel(player, 1);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '254',
+      renderData: CardRenderer.builder((b) => b.venus(1)),
+      description: 'Raise Venus 1 step.',
     }
 }

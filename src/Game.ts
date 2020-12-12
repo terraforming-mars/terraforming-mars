@@ -23,7 +23,6 @@ import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
-import {IParty} from './turmoil/parties/IParty';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITile} from './ITile';
@@ -539,17 +538,17 @@ export class Game implements ISerializable<SerializedGame> {
         // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
         if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
           game.turmoil.lobby.clear();
-          game.turmoil.delegate_reserve = [];
+          game.turmoil.delegateReserve = [];
           game.getPlayers().forEach((player) => {
             if (game.turmoil !== undefined) {
               game.turmoil.lobby.add(player.id);
               for (let i = 0; i < 6; i++) {
-                game.turmoil.delegate_reserve.push(player.id);
+                game.turmoil.delegateReserve.push(player.id);
               }
             }
           });
           for (let i = 0; i < 13; i++) {
-            game.turmoil.delegate_reserve.push('NEUTRAL');
+            game.turmoil.delegateReserve.push('NEUTRAL');
           }
         }
 
@@ -1794,36 +1793,6 @@ export class Game implements ISerializable<SerializedGame> {
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
         this.turmoil = Turmoil.deserialize(d.turmoil);
-
-        // Rebuild lobby
-        this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
-
-        // Rebuild parties
-        d.turmoil.parties.forEach((element: IParty) => {
-          const party = this.turmoil?.getPartyByName(element.name);
-          if (element.partyLeader) {
-            if (element.partyLeader === 'NEUTRAL') {
-              party!.partyLeader = 'NEUTRAL';
-            } else {
-              const partyLeaderId = element.partyLeader;
-              const player = this.players.find((player) => player.id === partyLeaderId);
-              party!.partyLeader = player!.id;
-            }
-          }
-
-          // Rebuild parties delegates
-          party!.delegates = [];
-          element.delegates.forEach((element: PlayerId | 'NEUTRAL') => {
-            if (element === 'NEUTRAL') {
-              party!.delegates.push('NEUTRAL');
-            } else {
-              const player = this.players.find((player) => player.id === element);
-              if (player) {
-                party!.delegates.push(player.id);
-              }
-            }
-          });
-        });
       }
 
       // Rebuild claimed milestones

@@ -9,6 +9,9 @@ import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class VenusMagnetizer implements IActionCard, IProjectCard {
     public cost = 7;
@@ -36,5 +39,16 @@ export class VenusMagnetizer implements IActionCard, IProjectCard {
       player.addProduction(Resources.ENERGY, -1);
       game.increaseVenusScaleLevel(player, 1);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '256',
+      requirements: CardRequirements.builder((b) => b.venus(10)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.productionBox((pb) => pb.energy(1)).startAction.venus(1);
+          eb.description('Action: Decrease your Energy production 1 step to raise Venus 1 step.');
+        });
+      }),
+      description: 'Requires Venus 10%.',
     }
 }

@@ -1,10 +1,11 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SoilFactory implements IProjectCard {
     public cost = 9;
@@ -22,5 +23,16 @@ export class SoilFactory implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '179',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().plants(1);
+        });
+      }),
+      description: 'Decrease your Energy production 1 step and increase your Plant production 1 step.',
+      victoryPoints: 1,
     }
 }

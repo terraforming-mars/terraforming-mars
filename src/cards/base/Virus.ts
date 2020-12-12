@@ -10,6 +10,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../ResourceType';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Virus implements IProjectCard {
     public cost = 1;
@@ -54,5 +56,13 @@ export class Virus implements IProjectCard {
       }));
 
       return orOptions;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '050',
+      renderData: CardRenderer.builder((b) => {
+        b.minus().animals(2).any.digit.nbsp;
+        b.or().nbsp.minus().plants(5).any.digit;
+      }),
+      description: 'Remove up to 2 Animals or 5 Plants from any player.',
     }
 }

@@ -6,6 +6,8 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SaturnSurfing implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.SATURN_SURFING;
@@ -31,5 +33,19 @@ export class SaturnSurfing implements IActionCard, IProjectCard, IResourceCard {
 
     public getVictoryPoints() {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X11',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
+          eb.asterix().text('max 5');
+          eb.description('Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.');
+        }).br;
+        b.floaters(1).slash().earth().played;
+      }),
+      description: 'Add 1 floater here for every Earth tag you have, including this.',
+      victoryPoints: 1,
     }
 }

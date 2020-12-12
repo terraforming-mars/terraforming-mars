@@ -2260,7 +2260,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
         },
         // Used only during set-up
-        pickedCorporationCard: this.pickedCorporationCard,
+        pickedCorporationCard: this.pickedCorporationCard?.name,
         // Terraforming Rating
         terraformRating: this.terraformRating,
         hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,

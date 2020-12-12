@@ -21,7 +21,7 @@ export class GreatAquifer extends PreludeCard implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.oceans(2);
       }),
-      description: 'Place 2 Ocean tiles.)',
+      description: 'Place 2 Ocean tiles.',
     }
 }
 

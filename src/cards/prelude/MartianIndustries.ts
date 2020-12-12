@@ -20,7 +20,8 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P18',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(1).steel(1));
+        b.productionBox((pb) => pb.energy(1).steel(1)).br;
+        b.megacredits(6);
       }),
       description: 'Increase your energy and steel production 1 step. Gain 6 MC.',
     }

@@ -47,6 +47,6 @@ export class ByElection extends PreludeCard implements IProjectCard {
         b.text('set ruling party', CardRenderItemSize.SMALL, true).br;
         b.plus().influence(1);
       }),
-      description: 'Set the ruling party to one of your choice. Gain +1 influence.',
+      description: 'Set the ruling party to one of your choice. Gain 1 influence.',
     }
 }

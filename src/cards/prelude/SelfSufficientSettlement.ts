@@ -22,6 +22,6 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.megacredits(2)).city();
       }),
-      description: 'Increase your money production 2 step. Place a City tile.',
+      description: 'Increase your money production 2 steps. Place a City tile.',
     }
 }

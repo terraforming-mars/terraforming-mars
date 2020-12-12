@@ -1,10 +1,11 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class TropicalResort implements IProjectCard {
     public cost = 13;
@@ -22,5 +23,16 @@ export class TropicalResort implements IProjectCard {
     }
     public getVictoryPoints() {
       return 2;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '098',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) =>{
+          pb.minus().heat(2).br;
+          pb.plus().megacredits(3);
+        });
+      }),
+      description: 'Reduce your heat production 2 steps and increase your MC production 3 steps.',
+      victoryPoints: 2,
     }
 }

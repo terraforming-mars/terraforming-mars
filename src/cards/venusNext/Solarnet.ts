@@ -5,6 +5,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Solarnet implements IProjectCard {
@@ -25,6 +26,7 @@ export class Solarnet implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '245',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       renderData: CardRenderer.builder((b) => {
         b.cards(2);
       }),

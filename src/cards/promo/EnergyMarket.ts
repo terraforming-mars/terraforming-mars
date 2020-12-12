@@ -28,18 +28,24 @@ export class EnergyMarket implements IProjectCard {
   }
 
   private getEnergyOption(player: Player, game: Game, availableMC: number): SelectAmount {
-    return new SelectAmount('Select amount of energy to gain', 'Gain energy', (amount: number) => {
-      if (player.canUseHeatAsMegaCredits) {
-        player.setResource(Resources.ENERGY, amount);
-        game.defer(new SelectHowToPayDeferred(player, (amount * 2), false, false));
-      } else {
-        player.setResource(Resources.ENERGY, amount);
-        player.setResource(Resources.MEGACREDITS, -(amount * 2));
-      }
+    return new SelectAmount(
+      'Select amount of energy to gain',
+      'Gain energy',
+      (amount: number) => {
+        if (player.canUseHeatAsMegaCredits) {
+          player.setResource(Resources.ENERGY, amount);
+          game.defer(new SelectHowToPayDeferred(player, (amount * 2), false, false));
+        } else {
+          player.setResource(Resources.ENERGY, amount);
+          player.setResource(Resources.MEGACREDITS, -(amount * 2));
+        }
 
-      game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
-      return undefined;
-    }, Math.floor(availableMC / 2));
+        game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
+        return undefined;
+      },
+      1,
+      Math.floor(availableMC / 2),
+    );
   }
 
   private getMegacreditsOption(player: Player, game: Game) {
@@ -67,6 +73,7 @@ export class EnergyMarket implements IProjectCard {
     }
     return undefined;
   }
+
   public metadata: CardMetadata = {
     cardNumber: 'X03',
     renderData: CardRenderer.builder((b) => {

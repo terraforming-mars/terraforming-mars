@@ -3,6 +3,8 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SocietySupport extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -13,5 +15,15 @@ export class SocietySupport extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.ENERGY);
       player.addProduction(Resources.HEAT);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P31',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.megacredits(-1).plants(1).br;
+          pb.energy(1).heat(1);
+        });
+      }),
+      description: 'Increase your plant, energy and heat production 1 step. Decrease money production 1 step.',
     }
 }

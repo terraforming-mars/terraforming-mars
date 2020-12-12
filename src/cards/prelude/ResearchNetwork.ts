@@ -6,6 +6,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DrawCards} from '../../deferredActions/DrawCards';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
     public tags = [Tags.WILDCARD];
@@ -14,5 +16,13 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS);
       game.defer(new DrawCards(player, game, 3));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P28',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1)).br;
+        b.cards(3);
+      }),
+      description: 'Increase your MC production 1 step. Draw 3 cards.',
     }
 }

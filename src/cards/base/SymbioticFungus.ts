@@ -8,6 +8,9 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SymbioticFungus implements IActionCard, IProjectCard {
     public cost = 4;
@@ -39,5 +42,16 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
         return undefined;
       });
     }
+    public metadata: CardMetadata = {
+      cardNumber: '133',
+      requirements: CardRequirements.builder((b) => b.temperature(-14)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1).asterix();
+          eb.description('Action: Add a microbe to ANOTHER card.');
+        });
+      }),
+      description: 'Requires -14 C° or warmer.',
+    };
 }
 

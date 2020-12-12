@@ -13,7 +13,7 @@ describe('SpinoffProducts', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new Research());

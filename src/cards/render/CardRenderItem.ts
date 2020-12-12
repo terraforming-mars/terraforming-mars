@@ -18,10 +18,13 @@ export class CardRenderItem {
   public size?: CardRenderItemSize;
   // adding tag dependency (top right bubble)
   // 'req' => used for Cutting Edge Technology's discount on cards with requirements
-  // TODO (chosta): if we have more than one non Tags secondary tag, add an enum
-  public secondaryTag?: Tags | 'req';
+  // 'oxygen' => used for Greenery tile that increases oxygen on placement
+  // 'turmoil' => used in Political Uprising community prelude
+  // TODO (chosta): if we have more than three non Tags secondary tag, add an enum
+  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil';
   // use this for amount labels like 2x, x, etc.
   public multiplier?: boolean = false;
+  // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown
   constructor(public type: CardRenderItemType, public amount: number = -1) {
     if (Math.abs(this.amount) > 5) {
       this.showDigit = true;

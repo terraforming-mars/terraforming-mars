@@ -12,6 +12,8 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;
@@ -70,4 +72,18 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
       LogHelper.logVenusIncrease(game, player, 1);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '234',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.titanium(1).startAction.floaters(2);
+          eb.description('Action: Spend 1 titanium to add 2 Floaters here');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.floaters(2).startAction.venus(1);
+          eb.description('Action: Spend 2 Floaters here to raise Venus 1 step');
+        });
+      }),
+    };
 }

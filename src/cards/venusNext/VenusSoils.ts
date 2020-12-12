@@ -12,6 +12,8 @@ import {LogHelper} from '../../components/LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class VenusSoils implements IProjectCard {
     public cost = 20;
@@ -53,5 +55,13 @@ export class VenusSoils implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '257',
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1).br;
+        b.productionBox((pb) => pb.plants(1)).microbes(2).asterix();
+      }),
+      description: 'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
     }
 }

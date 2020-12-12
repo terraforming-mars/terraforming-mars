@@ -11,8 +11,9 @@ import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Mangrove implements IProjectCard {
     public cost = 12;
@@ -43,7 +44,7 @@ export class Mangrove implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '059',
       requirements: CardRequirements.builder((b) => b.temperature(4)),
-      renderData: CardRenderer.builder((b) => b.greenery().asterix()),
+      renderData: CardRenderer.builder((b) => b.greenery(CardRenderItemSize.MEDIUM, true).asterix()),
       description: 'Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.',
       victoryPoints: 1,
     };

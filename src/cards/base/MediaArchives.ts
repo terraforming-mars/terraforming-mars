@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -7,6 +6,8 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MediaArchives implements IProjectCard {
     public cost = 8;
@@ -26,5 +27,12 @@ export class MediaArchives implements IProjectCard {
       player.megaCredits += allPlayedEvents;
       LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, allPlayedEvents);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '107',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(1).slash().event().played.any;
+      }),
+      description: 'Gain 1 MC for each event EVER PLAYED by all players.',
     }
 }

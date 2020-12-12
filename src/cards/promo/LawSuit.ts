@@ -6,6 +6,10 @@ import {Tags} from '../Tags';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class LawSuit implements IProjectCard {
     public cost = 2;
@@ -31,6 +35,14 @@ export class LawSuit implements IProjectCard {
 
     public getVictoryPoints() {
       return -1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X06',
+      renderData: CardRenderer.builder((b) => {
+        b.text('steal', CardRenderItemSize.SMALL, true).megacredits(3).any.asterix();
+      }),
+      description: 'Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
+      victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
     }
 }
 

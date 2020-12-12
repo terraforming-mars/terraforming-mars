@@ -55,11 +55,11 @@ export class CaretakerContract implements IActionCard, IProjectCard {
           new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
             heatAmount = amount;
             return undefined;
-          }, player.heat),
+          }, 0, player.heat),
           new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
             floaterAmount = amount;
             return undefined;
-          }, player.getResourcesOnCorporation()),
+          }, 0, player.getResourcesOnCorporation()),
         );
       }
       player.heat -= 8;

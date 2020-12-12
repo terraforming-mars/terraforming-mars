@@ -25,21 +25,23 @@ export class HiTechLab implements IProjectCard {
     }
 
     public action(player: Player, game: Game) {
-      return new SelectAmount('Select amount of energy to spend', 'Spend energy', (amount: number) => {
-        // 0 amount failsafe
-        if (amount === 0 ) {
-          return undefined;
-        }
-        player.setResource(Resources.ENERGY, -amount);
-        game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
+      return new SelectAmount(
+        'Select amount of energy to spend',
+        'Spend energy',
+        (amount: number) => {
+          player.setResource(Resources.ENERGY, -amount);
+          game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
 
-        const cardsDrawn: Array<IProjectCard> = [];
-        for (let counter = 0; counter < amount; counter++) {
-          cardsDrawn.push(game.dealer.dealCard());
-        };
-        game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
-        return undefined;
-      }, player.getResource(Resources.ENERGY));
+          const cardsDrawn: Array<IProjectCard> = [];
+          for (let counter = 0; counter < amount; counter++) {
+            cardsDrawn.push(game.dealer.dealCard());
+          };
+          game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
+          return undefined;
+        },
+        1,
+        player.getResource(Resources.ENERGY),
+      );
     }
 
     public getVictoryPoints() {

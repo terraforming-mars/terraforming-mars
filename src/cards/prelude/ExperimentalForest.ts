@@ -6,6 +6,8 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ExperimentalForest extends PreludeCard implements IProjectCard {
     public tags = [Tags.PLANT];
@@ -15,6 +17,13 @@ export class ExperimentalForest extends PreludeCard implements IProjectCard {
       game.defer(new DrawCards(player, game, 2, Tags.PLANT));
       game.defer(new PlaceGreeneryTile(player, game));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P12',
+      renderData: CardRenderer.builder((b) => {
+        b.greenery().secondaryTag('oxygen').cards(2).secondaryTag(Tags.PLANT);
+      }),
+      description: 'Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
     }
 }
 

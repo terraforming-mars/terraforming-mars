@@ -16,6 +16,7 @@ export interface PlayerInputModel {
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
+    min: number | undefined;
     max: number | undefined;
     maxCardsToSelect: number | undefined;
     microbes: number | undefined;

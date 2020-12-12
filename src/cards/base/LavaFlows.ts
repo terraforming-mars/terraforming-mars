@@ -13,6 +13,9 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+
 
 export class LavaFlows implements IProjectCard {
     public cost = 18;
@@ -59,5 +62,13 @@ export class LavaFlows implements IProjectCard {
         space.adjacency = this.adjacencyBonus;
         return game.increaseTemperature(player, 2);
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '140',
+      renderData: CardRenderer.builder((b) => {
+        b.temperature(2).br;
+        b.tile(TileType.LAVA_FLOWS, true, false).asterix();
+      }),
+      description: 'Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.',
     }
 }

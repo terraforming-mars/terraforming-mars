@@ -5,6 +5,11 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class SpacePortColony implements IProjectCard {
     public cost = 27;
@@ -32,5 +37,16 @@ export class SpacePortColony implements IProjectCard {
         coloniesCount += colony.colonies.length;
       });
       return Math.floor(coloniesCount / 2);
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C39',
+      requirements: CardRequirements.builder((b) => b.colonies()),
+      renderData: CardRenderer.builder((b) => {
+        b.colonies(1).asterix().nbsp.tradeFleet().br;
+        b.text('1VP per 2 colonies in play.', CardRenderItemSize.TINY, true);
+      }),
+      description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
+      victoryPoints: CardRenderDynamicVictoryPoints.colonies(1, 2, true),
     }
 }

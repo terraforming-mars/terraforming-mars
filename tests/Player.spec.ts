@@ -1,4 +1,3 @@
-
 import {expect} from 'chai';
 import {LunarBeam} from '../src/cards/base/LunarBeam';
 import {Game} from '../src/Game';
@@ -9,6 +8,8 @@ import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
+import {SerializedPlayer} from '../src/SerializedPlayer';
+import {Player} from '../src/Player';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -124,5 +125,20 @@ describe('Player', function() {
     serializedKeys.sort();
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);
+  });
+  it('backward compatible deserialization for pickedCorporationCard', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const json = player.serialize();
+    json.pickedCorporationCard = new SaturnSystems();
+    const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
+    expect(s.pickedCorporationCard).to.deep.eq({'name': 'Saturn Systems', 'tags': ['jovian'], 'startingMegaCredits': 42, 'cardType': 'brown'});
+    const p = Player.deserialize(s);
+    expect(p.pickedCorporationCard?.name).eq('Saturn Systems');
+  });
+  it('forward serialization for pickedCorporationCard', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    player.pickedCorporationCard = new SaturnSystems();
+    const json = player.serialize();
+    expect(json.pickedCorporationCard).eq('Saturn Systems');
   });
 });

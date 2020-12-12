@@ -530,29 +530,6 @@ export const HTML_DATA: Map<string, string> =
                   </div>
               </div>
 `],
-    [CardName.SPACE_PORT, ` 
-              <div class="content ">
-                <div class="requirements">Colony</div>
-                  <div class="production-box production-box-size1a ">
-                      <div class="production-prefix minus"></div><div class="energy production "></div>
-                      <div class="production-prefix plus"></div><div class="money production ">4</div>
-                  </div>
-                  <div class="tile city-tile "></div> <div class="tile fleet"></div>
-                  <div class="description mt-10">
-                      (Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.)
-                  </div>
-              </div>
-`],
-    [CardName.SPACE_PORT_COLONY, ` 
-              <div class="content ">
-                <div class="points">1/2<div class="tile colony red-outline"></div></div>
-                <div class="requirements">Colony</div>
-                  <div class="tile colony"></div>* <div class="tile fleet"></div>
-                  <div class="description mt-10">
-                      (Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.)
-                  </div>
-              </div>
-`],
     [CardName.CREDICOR, `
       
       <div class="contentCorporation ">

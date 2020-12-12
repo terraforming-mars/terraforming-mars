@@ -49,6 +49,12 @@ export class CardRenderDynamicVictoryPoints {
   public static fighter(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.FIGHTER), points, target);
   }
+  public static colonies(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES);
+    item.size = CardRenderItemSize.SMALL;
+    item.anyPlayer = any;
+    return new CardRenderDynamicVictoryPoints(item, points, target);
+  }
   public static any(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
     item.anyPlayer = true;

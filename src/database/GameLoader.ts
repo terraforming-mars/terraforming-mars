@@ -4,12 +4,14 @@ import {Database} from './Database';
 import {Game} from '../Game';
 import {Player} from '../Player';
 
+type LoadCallback = (game: Game | undefined) => void;
+
 export class GameLoader {
     private loadedGames = false;
     private loadingGames = false;
     private readonly games = new Map<string, Game>();
-    private readonly pendingGame = new Map<string, Array<(game: Game | undefined) => void>>();
-    private readonly pendingPlayer = new Map<string, Array<(game: Game | undefined) => void>>();
+    private readonly pendingGame = new Map<string, Array<LoadCallback>>();
+    private readonly pendingPlayer = new Map<string, Array<LoadCallback>>();
     private readonly playerToGame = new Map<string, Game>();
 
     public start(cb = () => {}): void {
@@ -35,7 +37,7 @@ export class GameLoader {
       return Array.from(this.games.keys());
     }
 
-    public getGameByGameId(gameId: string, cb: (game: Game | undefined) => void): void {
+    public getGameByGameId(gameId: string, cb: LoadCallback): void {
       if (this.loadedGames === true || this.games.has(gameId)) {
         cb(this.games.get(gameId));
         return;
@@ -48,7 +50,7 @@ export class GameLoader {
       }
     }
 
-    public getGameByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
+    public getGameByPlayerId(playerId: string, cb: LoadCallback): void {
       if (this.loadedGames === true || this.playerToGame.has(playerId)) {
         cb(this.playerToGame.get(playerId));
         return;

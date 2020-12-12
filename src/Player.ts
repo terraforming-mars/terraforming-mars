@@ -1978,16 +1978,13 @@ export class Player implements ISerializable<SerializedPlayer> {
         return;
       }
 
-      if (game.deferredActions.nextForPlayer(this.id) !== undefined) {
-        game.deferredActions.runAllForPlayer(this.id, () => {
-          this.takeAction(game);
-        });
+      if (game.deferredActions.length > 0) {
+        game.deferredActions.runAll(() => this.takeAction(game));
         return;
       }
 
       const players = game.getPlayers();
-      const passedPlayers = game.getPassedPlayers();
-      const allOtherPlayersHavePassed: boolean = passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
+      const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
 
       if (game.lastSaveId === 0) {
         /*
@@ -1996,8 +1993,11 @@ export class Player implements ISerializable<SerializedPlayer> {
          */
         game.lastSaveId = 1;
       }
-      Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
-      game.lastSaveId += 1;
+
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
+        game.lastSaveId += 1;
+      }
 
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
@@ -2223,6 +2223,13 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+    }
+
+    public allOtherPlayersHavePassed(game: Game): boolean {
+      if (game.isSoloMode()) return true;
+      const players = game.getPlayers();
+      const passedPlayers = game.getPassedPlayers();
+      return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
     }
 
     public process(game: Game, input: Array<Array<string>>): void {

@@ -39,6 +39,6 @@ export class SulphurExports implements IProjectCard {
         b.venus(1).br;
         b.productionBox((pb) => pb.megacredits(1).slash().venus(1).played);
       }),
-      description: 'Increase Venus 1 step. Increase your MC production1 step for each Venus tag you have, including this.',
+      description: 'Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.',
     };
 }

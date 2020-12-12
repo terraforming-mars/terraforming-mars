@@ -25,7 +25,7 @@ export class StandardTechnology implements IProjectCard {
       cardNumber: '156',
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
-          eb.plate('Standart projects').startEffect.megacredits(3);
+          eb.plate('Standard projects').startEffect.megacredits(3);
           eb.description('Effect: After you pay for a standard project, except selling patents, you gain 3 MC.');
         });
       }),

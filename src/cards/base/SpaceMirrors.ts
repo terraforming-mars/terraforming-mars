@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardMetadata} from '../CardMetadata';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SpaceMirrors implements IActionCard, IProjectCard {
@@ -30,7 +29,6 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '076',
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.megacredits(7).startAction.productionBox((pb) => pb.energy(1));

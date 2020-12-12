@@ -12,7 +12,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId} from './Player';
-import {GameOptions} from './Game';
+import {GameId, GameOptions} from './Game';
 import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
 
@@ -36,7 +36,7 @@ export interface SerializedGame {
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;
     generation: number;
-    id: string;
+    id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<IMilestone>;

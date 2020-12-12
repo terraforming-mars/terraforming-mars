@@ -8,7 +8,6 @@ import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
 import {BoardName} from './src/BoardName';
-import {Color} from './src/Color';
 import {Game, GameId} from './src/Game';
 import {GameLoader} from './src/database/GameLoader';
 import {GameLogs} from './src/routes/GameLogs';
@@ -258,22 +257,15 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
       }
 
-      const player = new Player('test', Color.BLUE, false, 0);
-      const player2 = new Player('test2', Color.RED, false, 0);
-      const gameToRebuild = new Game(game_id, [player, player2], player);
-      Database.getInstance().restoreGameLastSave(
-        game_id,
-        gameToRebuild,
-        function(err) {
-          if (err) {
-            return;
-          }
-          gameLoader.addGame(gameToRebuild);
-        },
-      );
-      res.setHeader('Content-Type', 'application/json');
-      res.write(getGameModelJSON(gameToRebuild));
-      res.end();
+      gameLoader.getGameByGameId(game_id, (game) => {
+        if (game === undefined) {
+          // game was not found!
+          return;
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.write(getGameModelJSON(game));
+        res.end();
+      });
     } catch (error) {
       route.internalServerError(req, res, error);
     }
@@ -456,7 +448,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       };
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);
-      gameLoader.addGame(game);
+      gameLoader.add(game);
       res.setHeader('Content-Type', 'application/json');
       res.write(getGameModelJSON(game));
       res.end();
@@ -569,19 +561,18 @@ function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void 
   res.end(buffer);
 }
 
-gameLoader.start(() => {
-  console.log('Starting server on port ' + (process.env.PORT || 8080));
-  console.log('version 0.X');
+console.log('Starting server on port ' + (process.env.PORT || 8080));
+console.log('version 0.X');
 
-  server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 8080);
 
-  console.log(
-    '\nThe secret serverId for this server is \x1b[1m' +
-    serverId +
-    '\x1b[0m. Use it to access the following administrative routes:\n',
-  );
-  console.log(
-    '* Overview of existing games: /games-overview?serverId=' + serverId,
-  );
-  console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-});
+console.log(
+  '\nThe secret serverId for this server is \x1b[1m' +
+  serverId +
+  '\x1b[0m. Use it to access the following administrative routes:\n',
+);
+console.log(
+  '* Overview of existing games: /games-overview?serverId=' + serverId,
+);
+console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+

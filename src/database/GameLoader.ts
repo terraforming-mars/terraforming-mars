@@ -2,149 +2,201 @@
 import {Color} from '../Color';
 import {Database} from './Database';
 import {Game, GameId} from '../Game';
-import {Player} from '../Player';
+import {Player, PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
-enum State { WAITING, LOADING, READY }
 
+enum State {
+  /**
+   * No game id or player id has shown up which
+   * has required looking in the database.
+   */
+  WAITING,
+  /**
+   * Running query and populating knownGameIds and knownPlayerIds
+   */
+  LOADING,
+  /**
+   * knownGameIds and knownPlayerIds populated from database
+   */
+  READY
+}
+
+/**
+ * Loads games from javascript memory or database
+ * Loads games from database sequentially as needed
+ */
 export class GameLoader {
-    private state: State = State.WAITING;
-    private readonly games = new Map<GameId, Game>();
-    private readonly pendingGame = new Map<GameId, Array<LoadCallback>>();
-    private readonly pendingPlayer = new Map<string, Array<LoadCallback>>();
-    private readonly playerToGame = new Map<string, Game>();
+  private state = State.WAITING;
 
-    public start(cb = () => {}): void {
-      switch (this.state) {
-      case State.READY:
-        console.warn('already loaded, ignoring');
-        return;
-      case State.LOADING:
-        console.warn('already loading, ignoring');
-        return;
-      case State.WAITING:
-        this.loadAllGames(cb);
-      }
+  // indicates if game is being loaded from database
+  private loadingGame = false;
+
+  // games available in javascript memory
+  private readonly games = new Map<GameId, Game>();
+
+  // players available in javascript memory
+  private readonly playerToGame = new Map<PlayerId, Game>();
+
+  // game ids which we know exist
+  private readonly knownGameIds = new Set<GameId>();
+
+  // player ids which we know exist mapped to game id
+  private readonly knownPlayerIds = new Map<PlayerId, GameId>();
+
+  // requests for game that are waiting to load
+  private readonly pendingGame: Array<[GameId, LoadCallback]> = [];
+
+  // requests for player that are waiting to load
+  private readonly pendingPlayer: Array<[PlayerId, LoadCallback]> = [];
+
+  public add(game: Game): void {
+    this.games.set(game.id, game);
+    this.knownGameIds.add(game.id);
+    for (const player of game.getPlayers()) {
+      this.playerToGame.set(player.id, game);
+      this.knownPlayerIds.set(player.id, game.id);
     }
+  }
 
-    public addGame(game: Game): void {
-      this.games.set(game.id, game);
-      for (const player of game.getPlayers()) {
-        this.playerToGame.set(player.id, game);
-      }
+  public getLoadedGameIds(): Array<string> {
+    return Array.from(this.knownGameIds.keys());
+  }
+
+  public getGameByGameId(gameId: string, cb: LoadCallback): void {
+    this.loadAllGames();
+    if (this.games.has(gameId)) {
+      cb(this.games.get(gameId));
+    } else if (this.knownGameIds.has(gameId) || this.state !== State.READY) {
+      this.pendingGame.push([gameId, cb]);
+      this.loadNextGame();
+    } else {
+      cb(undefined);
     }
+  }
 
-    public getLoadedGameIds(): Array<GameId> {
-      return Array.from(this.games.keys());
+  public getGameByPlayerId(playerId: string, cb: LoadCallback): void {
+    this.loadAllGames();
+    if (this.playerToGame.has(playerId)) {
+      cb(this.playerToGame.get(playerId));
+    } else if (this.knownPlayerIds.has(playerId) || this.state !== State.READY) {
+      this.pendingPlayer.push([playerId, cb]);
+      this.loadNextGame();
+    } else {
+      cb(undefined);
     }
+  }
 
-    public getGameByGameId(gameId: GameId, cb: LoadCallback): void {
-      if (this.state === State.READY || this.games.has(gameId)) {
-        cb(this.games.get(gameId));
-        return;
-      }
-      const pendingGame = this.pendingGame.get(gameId);
-      if (pendingGame !== undefined) {
-        pendingGame.push(cb);
-      } else {
-        this.pendingGame.set(gameId, [cb]);
-      }
-    }
-
-    public getGameByPlayerId(playerId: string, cb: LoadCallback): void {
-      if (this.state === State.READY || this.playerToGame.has(playerId)) {
-        cb(this.playerToGame.get(playerId));
-        return;
-      }
-      const pendingPlayer = this.pendingPlayer.get(playerId);
-      if (pendingPlayer !== undefined) {
-        pendingPlayer.push(cb);
-      } else {
-        this.pendingPlayer.set(playerId, [cb]);
-      }
-    }
-
-    private onGameLoaded(gameId: GameId, playerId: string): void {
-      const pendingGames = this.pendingGame.get(gameId);
-      if (pendingGames !== undefined) {
-        for (const pendingGame of pendingGames) {
-          pendingGame(this.games.get(gameId));
-        }
-        this.pendingGame.delete(gameId);
-      }
-      const pendingPlayers = this.pendingPlayer.get(playerId);
-      if (pendingPlayers !== undefined) {
-        for (const pendingPlayer of pendingPlayers) {
-          pendingPlayer(this.playerToGame.get(playerId));
-        }
-        this.pendingPlayer.delete(playerId);
-      }
-    }
-
-    private onAllGamesLoaded(): void {
-      this.state = State.READY;
-
-      // any pendingPlayer or pendingGame callbacks
-      // are waiting for a train that is never coming
-      // send them packing. call their callbacks with
-      // undefined and remove from pending
-      for (const pendingGame of Array.from(this.pendingGame.values())) {
-        for (const cb of pendingGame) {
+  private loadGame(gameId: string, cb: LoadCallback): void {
+    if (this.games.has(gameId)) {
+      cb(this.games.get(gameId));
+    } else if (this.knownGameIds.has(gameId) === false) {
+      console.warn(`GameLoader:game id not found ${gameId}`);
+      cb(undefined);
+    } else {
+      const player = new Player('test', Color.BLUE, false, 0);
+      const player2 = new Player('test2', Color.RED, false, 0);
+      const gameToRebuild = new Game(gameId, [player, player2], player);
+      Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
+        if (err || serializedGame === undefined) {
+          console.error('GameLoader:loadGame', err);
           cb(undefined);
-        }
-      }
-      this.pendingGame.clear();
-      for (const pendingPlayer of Array.from(this.pendingPlayer.values())) {
-        for (const cb of pendingPlayer) {
-          cb(undefined);
-        }
-      }
-      this.pendingPlayer.clear();
-    }
-
-    private loadAllGames(cb = () => {}): void {
-      this.state = State.LOADING;
-
-      Database.getInstance().getGames((err, allGames) => {
-        if (err) {
-          console.error('error loading all games', err);
-          this.onAllGamesLoaded();
-          cb();
           return;
         }
-
-        if (allGames.length === 0) {
-          this.onAllGamesLoaded();
-          cb();
-        };
-
-        let loaded = 0;
-        allGames.forEach((game_id) => {
-          const player = new Player('test', Color.BLUE, false, 0);
-          const player2 = new Player('test2', Color.RED, false, 0);
-          const gameToRebuild = new Game(game_id, [player, player2], player);
-          Database.getInstance().restoreGameLastSave(
-            game_id,
-            gameToRebuild,
-            (err) => {
-              loaded++;
-              if (err) {
-                console.error(`unable to load game ${game_id}`, err);
-              } else {
-                console.log(`load game ${game_id}`);
-                this.games.set(gameToRebuild.id, gameToRebuild);
-                for (const player of gameToRebuild.getPlayers()) {
-                  this.playerToGame.set(player.id, gameToRebuild);
-                  this.onGameLoaded(gameToRebuild.id, player.id);
-                }
-              }
-              if (loaded === allGames.length) {
-                this.onAllGamesLoaded();
-                cb();
-              }
-            },
-          );
-        });
+        try {
+          gameToRebuild.loadFromJSON(serializedGame);
+          this.add(gameToRebuild);
+          console.log(`GameLoader loaded game ${gameId} into memory from database`);
+          cb(gameToRebuild);
+        } catch (e) {
+          console.error('GameLoader:loadGame', err);
+          cb(undefined);
+        }
       });
     }
+  }
+
+  private loadPlayer(playerId: string, cb: LoadCallback): void {
+    if (this.playerToGame.has(playerId)) {
+      cb(this.playerToGame.get(playerId));
+      return;
+    }
+    const gameId = this.knownPlayerIds.get(playerId);
+    if (gameId !== undefined) {
+      this.loadGame(gameId, cb);
+    } else {
+      console.warn(`GameLoader:player id not found ${playerId}`);
+      cb(undefined);
+    }
+  }
+
+  private onGameLoaded(cb: LoadCallback) {
+    return (game: Game | undefined) => {
+      cb(game);
+      this.loadingGame = false;
+      this.loadNextGame();
+    };
+  }
+
+  private loadNextGame(): void {
+    if (this.state === State.READY && this.loadingGame === false) {
+      const gameToLoad = this.pendingGame.shift();
+      if (gameToLoad !== undefined) {
+        this.loadingGame = true;
+        this.loadGame(gameToLoad[0], this.onGameLoaded(gameToLoad[1]));
+        return;
+      }
+      const playerToLoad = this.pendingPlayer.shift();
+      if (playerToLoad !== undefined) {
+        this.loadingGame = true;
+        this.loadPlayer(playerToLoad[0], this.onGameLoaded(playerToLoad[1]));
+        return;
+      }
+    }
+  }
+
+  private allGamesLoaded(): void {
+    this.state = State.READY;
+    this.loadNextGame();
+  }
+
+  private loadAllGames(): void {
+    if (this.state !== State.WAITING) {
+      return;
+    }
+    this.state = State.LOADING;
+    Database.getInstance().getGames((err, allGames) => {
+      if (err) {
+        console.error('error loading all games', err);
+        this.allGamesLoaded();
+        return;
+      }
+
+      if (allGames.length === 0) {
+        this.allGamesLoaded();
+        return;
+      }
+
+      let loaded = 0;
+      allGames.forEach((gameId) => {
+        Database.getInstance().getGame(
+          gameId,
+          (err, game) => {
+            loaded++;
+            if (err || game === undefined) {
+              console.error(`unable to load game ${gameId}`, err);
+            } else {
+              console.log(`load game ${gameId}`);
+              this.knownGameIds.add(gameId);
+              for (const player of game.players) {
+                this.knownPlayerIds.set(player.id, gameId);
+              }
+            }
+            if (loaded === allGames.length) {
+              this.allGamesLoaded();
+            }
+          });
+      });
+    });
+  }
 }

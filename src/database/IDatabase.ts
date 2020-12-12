@@ -1,4 +1,5 @@
 import {Game, GameId, GameOptions, Score} from '../Game';
+import {SerializedGame} from '../SerializedGame';
 
 export interface IGameData {
     gameId: GameId;
@@ -37,6 +38,14 @@ export interface IGameData {
  * in the game. Why, I have no idea, says kberg.
  */
 export interface IDatabase {
+
+    /**
+     * Pulls most recent version of game
+     * @param game_id the game id to load
+     * @param cb called with game if exists
+     */
+    getGame(game_id: string, cb: (err: any, game?: SerializedGame) => void): void;
+
     /**
      * Return a list of all `game_id`s.
      *
@@ -89,12 +98,6 @@ export interface IDatabase {
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
     restoreGame(game_id: GameId, save_id: number, game: Game): void;
-
-    /**
-     * Load a game at its most recent save point.
-     * Overrites all data in `game`
-     */
-    restoreGameLastSave(game_id: GameId, game: Game, cb:(err: any) => void): void;
 
     /**
      * The meat behind cloning a game. Load a game at save point 0,

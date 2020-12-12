@@ -16,11 +16,11 @@ describe('GameLoader', function() {
     };
     (Database as any).getInstance = function() {
       return {
+        getGame: function(__gameId: string, theCb: (err: unknown) => void) {
+          theCb(undefined);
+        },
         getGames: function(getInstanceCb: (err: unknown, allGames: Array<string>) => void) {
           getInstanceCb(undefined, expectedGameIds);
-        },
-        restoreGameLastSave: function(__gameId: string, __gameToRebuild: Game, theCb: (err: unknown) => void) {
-          theCb(undefined);
         },
         saveGameState: function() {},
       };

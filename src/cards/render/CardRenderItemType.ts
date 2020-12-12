@@ -39,4 +39,5 @@ export enum CardRenderItemType {
   NBSP = 'nbsp',
   EMPTY_TILE = 'empty_tile',
   EMPTY_TILE_GOLDEN = 'empty_tile_golden',
+  PROJECT_REQUIREMENTS = 'project_requirements',
 }

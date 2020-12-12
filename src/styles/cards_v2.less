@@ -379,6 +379,40 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
             }
+            .tag-turmoil:after {
+                position: absolute;
+                color: #222;
+                border: 1px solid black;
+                left: -1px;
+                background: darkorange;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 16px;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+                content: "\25b2";
+                transform: rotate(180deg);
+            }
+            /* special case Project requirements */
+            .card-project-requirements {
+                position: relative;
+                align-self: center;
+                justify-content: center;
+                .card-red-x {
+                    position: absolute;
+                    color: rgb(0, 0, 0);
+                    font-size: 63px;
+                    left: 61px;
+                    top: -2px;
+                }
+                .card-requirements {
+                    width: 95%;
+                    padding: 0px 4px;
+                }
+            }
             /*production*/
             .card-production-box {
                 font-family: Prototype;

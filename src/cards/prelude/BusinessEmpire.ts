@@ -6,6 +6,8 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
     public tags = [Tags.EARTH];
@@ -18,6 +20,14 @@ export class BusinessEmpire extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, 6);
       game.defer(new SelectHowToPayDeferred(player, 6, false, false));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P06',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(6)).br;
+        b.minus().megacredits(6);
+      }),
+      description: 'Increase your MC production 6 steps. Pay 6 MC.',
     }
 }
 

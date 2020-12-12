@@ -9,7 +9,7 @@ import * as zlib from 'zlib';
 
 import {BoardName} from './src/BoardName';
 import {Color} from './src/Color';
-import {Game} from './src/Game';
+import {Game, GameId} from './src/Game';
 import {GameLoader} from './src/database/GameLoader';
 import {GameLogs} from './src/routes/GameLogs';
 import {Route} from './src/routes/Route';
@@ -179,7 +179,7 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = http.createServer(requestHandler);
 }
 
-function generateRandomGameId(): string {
+function generateRandomGameId(): GameId {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
@@ -303,7 +303,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     return;
   }
 
-  const gameId: string = matches[1];
+  const gameId: GameId = matches[1];
 
   gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
     if (game === undefined) {

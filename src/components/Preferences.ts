@@ -192,7 +192,7 @@ export const Preferences = Vue.component('preferences', {
                         <i class="preferences_icon preferences_icon--colonies"></i>
                     </div>
                 </a>
-                <a href="/help-iconology">
+                <a href="/help-iconology" target="_blank">
                     <div class="preferences_item preferences_item--help">
                         <i class="preferences_icon preferences_icon--help"></i>
                     </div>

@@ -210,6 +210,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       }
       if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
+      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
+        result += '<div class="card-project-requirements">';
+        result += '<div class="card-red-x">x</div>';
+        result += '<div class="card-requirements">Project Requirements</div>';
+        result += '</div>';
       }
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';

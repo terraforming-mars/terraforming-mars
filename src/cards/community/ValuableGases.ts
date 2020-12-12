@@ -6,6 +6,9 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {SelectHowToPayForCard} from '../../inputs/SelectHowToPayForCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
     public tags = [Tags.JOVIAN, Tags.VENUS];
@@ -33,6 +36,15 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       }
 
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'Y06',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(6).br.br;
+        b.text('play', CardRenderItemSize.MEDIUM, true).cards(1).secondaryTag(Tags.VENUS).colon();
+        b.floaters(4).digit;
+      }),
+      description: 'Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.',
     }
 }
 

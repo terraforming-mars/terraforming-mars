@@ -123,32 +123,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.TARDIGRADES, ` 
-      <div class="content">
-        <div class="points">1/4<div class="resource microbe"></div>
-        </div>
-        <div class="red-arrow"></div>
-        <div class="microbe resource"></div><br>
-        <div class="description">
-          (Action: Add 1 Microbe to this card.)
-          <br><br>
-          (1 VP per 4 Microbes on this card.)
-        </div>
-      </div>
-`],
-    [CardName.TREES, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">-4 C</div>
-        <div class="production-box production-box-size3">
-          <div class="plant production"></div><div class="plant production"></div><div class="plant production"></div>
-        </div>
-        <div class="plant resource" style="margin-left:20px"></div>
-        <div class="description">
-          (Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.)
-        </div>
-      </div>
-`],
     [CardName.SPONSORS, ` 
       <div class="content">
         <div class="production-box">
@@ -158,16 +132,6 @@ export const HTML_DATA: Map<string, string> =
           (Increase your MC production 2 steps.)
         </div>
       </div>
-`],
-    [CardName.TOWING_A_COMET, ` 
-        <div class="content ">
-            <div class="tile oxygen-tile "></div><div class="tile ocean-tile "></div>
-            <br>
-            <div class="plant resource"></div><div class="plant resource"></div>
-            <div class="description ">
-                (Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.)
-            </div>
-        </div>
 `],
     [CardName.SPACE_MIRRORS, ` 
         <div class="content ">
@@ -194,11 +158,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Requires 4 science tags. Increase your energy production 4 steps.)
             </div>
-        </div>
-`],
-    [CardName.TRANS_NEPTUNE_PROBE, ` 
-        <div class="content ">
-          <div class="points points-big">1</div>
         </div>
 `],
     [CardName.ROBOTIC_WORKFORCE, ` 
@@ -248,28 +207,6 @@ export const HTML_DATA: Map<string, string> =
           <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
         <div class="description">
           (Place this tile and raise temperature 2 steps.)
-        </div>
-      </div>
-`],
-    [CardName.TROPICAL_RESORT, ` 
-      <div class="content">
-        <div class="points points-big">2</div>
-        <div class="production-box production-box-size2a">
-          <div class="production-prefix minus"></div><div class="heat production"></div><div class="heat production"></div><br>
-          <div class="production-prefix plus"></div><div class="money production">3</div>
-        </div>
-        <div class="description">
-          (Reduce your heat production 2 steps and increase your MC production 3 steps.)
-        </div>
-      </div>
-`],
-    [CardName.TOLL_STATION, ` 
-      <div class="content">
-        <div class="production-box production-box-size2a">
-          <div class="production money">1</div> / <div class="resource-tag tag-space red-outline"></div>
-        </div>
-        <div class="description">
-          (Increase your MC production 1 step for each space tag your OPPONENTS have.)
         </div>
       </div>
 `],
@@ -356,28 +293,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.TITANIUM_MINE, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="titanium production"></div>
-        </div>
-        <div class="description">
-          (Increase your titanium production 1 step.)
-        </div>
-      </div>
-`],
-    [CardName.TECTONIC_STRESS_POWER, ` 
-      <div class="content">
-        <div class="points points-big">1</div>
-        <div class="requirements">2 Science</div>
-        <div class="production-box production-box-size3">
-          <div class="energy production"></div><div class="energy production"></div><div class="energy production"></div>
-        </div>
-        <div class="description">
-          (Requires 2 Science tags. Increase your Energy production 3 steps.)
-        </div>
-      </div>
-`],
     [CardName.NITROPHILIC_MOSS, ` 
       <div class="content">
         <div class="requirements">3 Oceans</div>
@@ -422,19 +337,6 @@ export const HTML_DATA: Map<string, string> =
           </div>
           <div class="description">
             (Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.)
-          </div>
-        </div>
-`],
-    [CardName.TUNDRA_FARMING, ` 
-        <div class="content">
-          <div class="points points-big">2</div>
-          <div class="requirements">-6 C</div>
-          <div class="production-box production-box-size2">
-            <div class="plant production"></div><div class="money production">2</div><br>
-          </div>
-          <div class="plant resource" style="margin-left:20px"></div>
-          <div class="description">
-            (Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.)
           </div>
         </div>
 `],
@@ -526,15 +428,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-    [CardName.TERRAFORMING_GANYMEDE, ` 
-          <div class="content ">
-              <div class="points points-big">2</div>
-              <div class="tile rating"></div> / &nbsp;<div class="resource-tag tag-jovian"></div>
-              <div class="description ">
-                (Raise your TR 1 step for each Jovian tag you have, including this.)
-              </div>
-          </div>
-`],
     [CardName.RESTRICTED_AREA, ` 
           <div class="content ">
               <div class="money resource ">2</div> <div class="red-arrow "></div> <div class="card resource "></div>
@@ -544,14 +437,6 @@ export const HTML_DATA: Map<string, string> =
               <div class="tile special-tile"><div class="special-tile-symbol special-tile--restricted-area"></div></div>
               <div class="description ">
                 (Place this tile.)
-              </div>
-          </div>
-`],
-    [CardName.TECHNOLOGY_DEMONSTRATION, ` 
-          <div class="content ">
-              <div class="resource card"></div> <div class="resource card"></div>
-              <div class="description ">
-                  (Draw two cards.)
               </div>
           </div>
 `],
@@ -706,30 +591,6 @@ export const HTML_DATA: Map<string, string> =
               OR X<div class="microbe resource "></div> <div class="red-arrow "></div> <div class="resource money ">3X</div>
                 <div class="description ">
                   (Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of MC)
-                  <br><br>
-                  (Requires Venus 6%)
-                </div>
-            </div>
-`],
-    [CardName.TERRAFORMING_CONTRACT, ` 
-            <div class="content ">
-              <div class="requirements">25 TR</div>
-              <div class="production-box">
-                  <div class="money production">4</div>
-              </div>
-              <div class="description">
-                (Requires that you have at least 25 TR. Increase your MC production 4 steps.)
-              </div>
-            </div>
-`],
-    [CardName.THERMOPHILES, ` 
-            <div class="content hover-hide-res">
-              <div class="requirements">6% Venus</div>
-                <div class="red-arrow " style="margin-left:76px;"></div> <div class="resource microbe"><div class="card-icon tag-venus"></div></div>
-                <br>
-              OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile venus-tile">V</div>
-                <div class="description ">
-                  (Action: add 1 Microbe to ANY Venus CARD or spend 2 Microbes here to raise Venus 1 step)
                   <br><br>
                   (Requires Venus 6%)
                 </div>
@@ -890,68 +751,6 @@ export const HTML_DATA: Map<string, string> =
               <div class="description" style="text-align:left;">
                 (Requires -6 C. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
               </div>
-            </div>
-`],
-    [CardName.TITAN_AIRSCRAPPING, ` 
-            <div class="content ">
-                <div class="points points-big">2</div>
-                <div class="resource titanium"></div> <div class="red-arrow "></div> <div class="resource floater"></div><div class="resource floater"></div> <br>
-                OR <div class="resource floater"></div><div class="resource floater"></div> <div class="red-arrow "></div> <div class="tile rating"></div>
-                <div class="description ">
-                  (Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.)
-                </div>
-              </div>
-`],
-    [CardName.TITAN_FLOATER_LAUNCHPAD, ` 
-            <div class="content ">
-                <div class="points points-big">1</div>
-                <div class="red-arrow "></div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                <div class="nowrap second-line">
-                  OR <div class="resource floater"></div> <div class="red-arrow "></div> <div class="tile trade"></div>
-                </div>
-                <div class="description ">
-                  (Action: Add 1 floater to ANY JOVIAN CARD, or spend 1 floater here to trade for free.)
-                </div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                <div class="description description--2">
-                  (Add two floaters to ANY JOVIAN CARD.)
-                </div>
-              </div>
-`],
-    [CardName.TITAN_SHUTTLES, ` 
-            <div class="content ">
-                <div class="points points-big">1</div>
-                <div class="red-arrow "></div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div> <br>
-                OR X<div class="resource floater"></div> <div class="red-arrow "></div> X<div class="resource titanium"></div>
-                <div class="description ">
-                  (Action: Add 2 floaters to ANY JOVIAN CARD, or spend any number of floaters here to gain the same number of titanium.)
-                </div>
-              </div>
-`],
-    [CardName.TRADE_ENVOYS, ` 
-            <div class="content ">
-                <div class="tile trade"></div> : <span class="card-sign">+1</span>
-                <div class="description mt-10">
-                    (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
-                </div>
-            </div>
-`],
-    [CardName.TRADING_COLONY, ` 
-            <div class="content ">
-                <div class="tile trade"></div> : <span class="card-sign">+1</span>
-                <div class="description mt-10">
-                  (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
-                </div>
-                <div class="mt-10">
-                  <div class="tile colony mt-10"></div>
-                </div>
-                <div class="description mt-10">
-                    (Place a colony.)
-                </div>
             </div>
 `],
     [CardName.CREDICOR, `
@@ -1959,352 +1758,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.ALLIED_BANKS, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="production money">4</div>
-        </div><br>
-        <div class="resource money">3</div>
-        <div class="description">
-          Increase your MC production 4 steps. Gain 3 MC.
-        </div>
-      </div>
-`],
-    [CardName.AQUIFER_TURBINES, ` 
-      <div class="content">
-        <div class="tile ocean-tile"></div>
-        <div class="production-box production-box-size2">
-          <div class="production energy"></div><div class="production energy"></div>
-        </div><br>
-        - <div class="resource money">3</div>
-        <div class="description">
-          Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.
-        </div>
-      </div>
-`],
-    [CardName.BIOFUELS, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production energy"></div><div class="production plant"></div>
-        </div><br>
-        <div class="resource plant"></div><div class="resource plant"></div>
-        <div class="description">
-          Increase your energy and plant production 1 step. Gain 2 plants.
-        </div>
-      </div>
-`],
-    [CardName.BIOLAB, ` 
-      <div class="content">
-        <div class="production-box ">
-          <div class="production plant"></div>
-        </div><br>
-        <div class="resource card"></div><div class="resource card"></div><div class="resource card"></div>
-        <div class="description">
-          Increase your plant production 1 step. Draw 3 cards.
-        </div>
-      </div>
-`],
-    [CardName.BIOSPHERE_SUPPORT, ` 
-      <div class="content">
-        <div class="production-box production-box-size2a">
-          <div class="production-prefix minus"></div><div class="production money">1</div><br>
-          <div class="production-prefix plus"></div><div class="production plant"></div><div class="production plant"></div>
-        </div><br>
-        <div class="description">
-          Increase your plant production 2 steps. Decrease your MC production 1 step.
-        </div>
-      </div>
-`],
-    [CardName.BUSINESS_EMPIRE, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="production money">6</div>
-        </div><br>
-        - <div class="resource money">6</div>
-        <div class="description">
-          Increase your MC production 6 steps. Pay 6 MC.
-        </div>
-      </div>
-`],
-    [CardName.DOME_FARMING, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="production money">2</div><div class="production plant"></div>
-        </div><br>
-        <div class="description">
-          Increase your MC production 2 steps and plant production 1 step.
-        </div>
-      </div>
-`],
-    [CardName.DONATION, ` 
-      <div class="content">
-        <div class="resource money">21</div>
-        <div class="description">
-          Gain 21 MC.
-        </div>
-      </div>
-`],
-    [CardName.EARLY_SETTLEMENT, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="production plant"></div>
-        </div> <div class="tile city-tile"></div>
-        <div class="description">
-          Increase your plant production 1 step. Place a city tile.
-        </div>
-      </div>
-`],
-    [CardName.ECOLOGY_EXPERTS, ` 
-      <div class="content">
-        <div class="production-box">
-          <div class="production plant"></div>
-        </div><br>
-        <div class="requirements prelude-ecology-experts-requirement-box">
-          <div class="prelude-ecology-experts-crossout">X</div>
-          <div class="prelude-ecology-experts-requirement-text">Project Requirements</div>
-        </div>
-        <div class="description">
-          Increase your plant production 1 step. Play a card from hand, ignoring global requirements.
-        </div>
-      </div>
-`],
-    [CardName.ECCENTRIC_SPONSOR, ` 
-      <div class="content">
-        <div class="resource card"></div> : <div class="resource money">-25</div>
-        <div class="description">
-          Play 1 card from hand with a 25 MC reduction.
-        </div>
-      </div>
-`],
-    [CardName.EXPERIMENTAL_FOREST, ` 
-      <div class="content">
-        <div class="tile greenery-tile"></div>
-        <div class="resource card"><div class="card-icon tag-plant"></div></div><div class="resource card"><div class="card-icon tag-plant"></div></div>
-        <div class="description">
-          Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.
-        </div>
-      </div>
-`],
-    [CardName.GREAT_AQUIFER, ` 
-      <div class="content">
-        <div class="tile ocean-tile"></div> <div class="tile ocean-tile"></div>
-        <div class="description">
-          Place 2 Ocean tiles.
-        </div>
-      </div>
-`],
-    [CardName.HUGE_ASTEROID, ` 
-      <div class="content">
-        <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div><div class="tile temperature-tile"></div><br>
-        - <div class="resource money">5</div>
-        <div class="description">
-          Increase Temperature 3 steps. Pay 5 MC.
-        </div>
-      </div>
-`],
-    [CardName.IO_RESEARCH_OUTPOST, ` 
-      <div class="content">
-        <div class="production-box"><div class="production titanium"></div></div><br>
-        <div class="resource card"></div>
-        <div class="description">
-          Increase your titanium production 1 step. Draw a card.
-        </div>
-      </div>
-`],
-    [CardName.LOAN, ` 
-      <div class="content">
-        <div class="production-box production-box-size1a">
-          <div class="production-prefix minus"></div><div class="money production">2</div>
-        </div><br>
-        <div class="resource money">30</div>
-        <div class="description">
-          Gain 30 MC. Decrease your MC production 2 steps.
-        </div>
-      </div>
-`],
-    [CardName.MARTIAN_INDUSTRIES, ` 
-      <div class="content">
-        <div class="production-box production-box-size2" style="vertical-align: bottom;">
-          <div class="production energy"></div><div class="production steel"></div>
-        </div><br>
-        <div class="resource money">6</div>
-        <div class="description">
-          Increase your energy and steel production 1 step. Gain 6 MC.
-        </div>
-      </div>
-`],
-    [CardName.METAL_RICH_ASTEROID, ` 
-      <div class="content">
-        <div class="tile temperature-tile"></div>
-        <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><br>
-        <div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div>
-        <div class="description">
-          Increase temperature 1 step. Gain 4 titanium and 4 steel.
-        </div>
-      </div>
-`],
-    [CardName.METALS_COMPANY, ` 
-      <div class="content">
-        <div class="production-box production-box-size3">
-          <div class="production money">1</div><div class="production steel"></div><div class="production titanium"></div>
-        </div><br>
-        <div class="description">
-          Increase your MC, steel and titanium production 1 step.
-        </div>
-      </div>
-`],
-    [CardName.MINING_OPERATIONS, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production steel"></div><div class="production steel"></div>
-        </div><br>
-        <div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div>
-        <div class="description">
-          Increase your steel production 2 steps. Gain 4 steel.
-        </div>
-      </div>
-`],
-    [CardName.MOHOLE, ` 
-      <div class="content">
-        <div class="production-box production-box-size3">
-          <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div>
-        </div><br>
-        <div class="resource heat"></div><div class="resource heat"></div><div class="resource heat"></div>
-        <div class="description">
-          Increase your heat production 3 steps. Gain 3 heat.
-        </div>
-      </div>
-`],
-    [CardName.MOHOLE_EXCAVATION, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production steel"></div><br>
-          <div class="production heat"></div><div class="production heat"></div>
-        </div> &nbsp;&nbsp;
-        <div class="resource heat"></div><div class="resource heat"></div>
-        <div class="description">
-          Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.
-        </div>
-      </div>
-`],
-    [CardName.NITROGEN_SHIPMENT, ` 
-      <div class="content">
-        <div class="production-box ">
-          <div class="production plant"></div>
-        </div> &nbsp; <div class="tile rating"></div><br>
-        <div class="resource money">5</div>
-        <div class="description">
-          Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.
-        </div>
-      </div>
-`],
-    [CardName.ORBITAL_CONSTRUCTION_YARD, ` 
-      <div class="content">
-        <div class="production-box"><div class="production titanium"></div></div><br>
-        <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
-        <div class="description">
-          Increase your titanium production 1 step. Gain 4 titanium.
-        </div>
-      </div>
-`],
-    [CardName.POLAR_INDUSTRIES, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production heat"></div><div class="production heat"></div>
-        </div> &nbsp; <div class="tile ocean-tile"></div><br>
-        <div class="description">
-          Increase your heat production 2 steps. Place an Ocean tile.
-        </div>
-      </div>
-`],
-    [CardName.POWER_GENERATION, ` 
-      <div class="content">
-        <div class="production-box production-box-size3">
-          <div class="production energy"></div><div class="production energy"></div><div class="production energy"></div>
-        </div>
-        <div class="description">
-          Increase your energy production 3 steps.
-        </div>
-      </div>
-`],
-    [CardName.RESEARCH_NETWORK, ` 
-      <div class="content">
-        <div class="production-box ">
-          <div class="production money">1</div>
-        </div><br>
-        <div class="resource card"></div><div class="resource card"></div><div class="resource card"></div>
-        <div class="description">
-          Increase your money production 1 step. Draw 3 cards.
-        </div>
-      </div>
-`],
-    [CardName.SELF_SUFFICIENT_SETTLEMENT, ` 
-      <div class="content">
-        <div class="production-box ">
-          <div class="production money">2</div>
-        </div><br>
-        <div class="tile city-tile"></div>
-        <div class="description">
-          Increase your money production 2 steps. Place a City tile.
-        </div>
-      </div>
-`],
-    [CardName.SMELTING_PLANT, ` 
-      <div class="content">
-        <div class="tile oxygen-tile"></div><div class="tile oxygen-tile"></div><br>
-        <div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div>
-        <div class="description">
-          Raise oxygen 2 steps. Gain 5 steel.
-        </div>
-      </div>
-`],
-    [CardName.SOCIETY_SUPPORT, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production money">-1</div><div class="production plant"></div><br>
-          <div class="production energy"></div><div class="production heat"></div>
-        </div>
-        <div class="description">
-          Increase your plant, energy and heat production 1 step. Decrease money production 1 step.
-        </div>
-      </div>
-`],
-    [CardName.SUPPLIER, ` 
-      <div class="content">
-        <div class="production-box production-box-size2">
-          <div class="production energy"></div><div class="production energy"></div>
-        </div><br>
-        <div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div>
-        <div class="description">
-          Increase your energy production 2 steps. Gain 4 steel.
-        </div>
-      </div>
-`],
-    [CardName.SUPPLY_DROP, ` 
-      <div class="content">
-        3<div class="resource titanium"></div> 8<div class="resource steel"></div> 3<div class="resource plant"></div>
-        <div class="description">
-          Gain 3 titanium, 8 steel and 3 plants.
-        </div>
-      </div>
-`],
-    [CardName.UNMI_CONTRACTOR, ` 
-      <div class="content">
-        <div class="tile rating"></div><div class="tile rating"></div><div class="tile rating"></div> <div class="resource card"></div>
-        <div class="description">
-          Increase your TR 3 steps. Draw a card.
-        </div>
-      </div>
-`],
-    [CardName.ACQUIRED_SPACE_AGENCY, ` 
-      <div class="content">
-        <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
-        <div class="resource card"><div class="card-icon tag-space"></div></div><div class="resource card"><div class="card-icon tag-space"></div></div>
-        <div class="description">
-          Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.
-        </div>
-      </div>
-`],
     [CardName.PENGUINS, ` 
     <div class="content ">
         <div class="points">1/<div class="animal resource"></div></div>
@@ -2345,19 +1798,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 
-`],
-    [CardName.TOPSOIL_CONTRACT, ` 
-    <div class="content">
-      <div class="microbe resource"></div>* : <div class="money resource">1</div>
-      <div class="description">
-        (Effect: When you gain a microbe to ANY CARD, gain 1 MC.)
-      </div>
-      <br><br>
-      <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
-      <div class="description">
-        (Gain 3 plants.)
-      </div>
-    </div>
 `],
     [CardName.SUB_CRUST_MEASUREMENTS, ` 
     <div class="content">
@@ -2615,88 +2055,6 @@ export const HTML_DATA: Map<string, string> =
 
       <div class="description">
         (You start with 120 MC. Lower your TR 7 steps.)
-      </div>
-`],
-    [CardName.VALUABLE_GASES, `
-      <div class="content">
-        <div class="resource money">6</div>
-        <br>
-        PLAY
-        <div class="resource card">
-          <div class="card-icon tag-venus"></div>
-        </div>
-        &nbsp;: +4 <div class="resource floater"></div>
-        <div class="description">
-          Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.
-        </div>
-      </div>
-`],
-    [CardName.VENUS_FIRST, `
-      <div class="content">
-        <div class="tile venus-tile">V</div>
-        <div class="tile venus-tile">V</div>
-        <br>
-        <div class="resource card"><div class="card-icon tag-venus"></div></div>
-        <div class="resource card"><div class="card-icon tag-venus"></div></div>
-        <div class="description">
-          Raise Venus 2 steps. Draw 2 Venus cards from the deck.
-        </div>
-      </div>
-`],
-    [CardName.RESEARCH_GRANT, `
-      <div class="content">
-        <div class="resource money">8</div>
-        <div class="description">
-          Gain 8 MC.
-        </div>
-      </div>
-`],
-    [CardName.AEROSPACE_MISSION, `
-      <div class="content">
-        <div>
-          <div class="tile colony"></div>
-          <div class="tile colony"></div>
-          <br>
-          - <div class="resource money">14</div>
-        </div>
-        <div class="description">
-          Place 2 colonies. Pay 14 MC.
-        </div>
-      </div>
-`],
-    [CardName.TRADE_ADVANCE, `
-      <div class="content">
-        <div class="resource money">2</div> &nbsp;(SOLO: <div class="resource money">10</div>)
-        <div>Trade all colonies with</div>
-        <div class="tile trade"></div> : <span class="card-sign">+1</span>
-        <div class="description">
-          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.
-          <br><br>Gain 2 MC (SOLO: Gain 10 MC).
-        </div>
-      </div>
-`],
-    [CardName.POLITICAL_UPRISING, `
-      <div class="content">
-        <div class="delegate"></div>
-        <div class="delegate"></div>
-        <div class="delegate"></div>
-        <div class="delegate"></div>
-        <br>
-        <div class="resource card">
-          <div class="turmoil-icon"></div>
-        </div>
-        <div class="description">
-          Place 4 delegates. Draw a Turmoil card.
-        </div>
-      </div>
-`],
-    [CardName.BY_ELECTION, `
-      <div class="content">
-        <div class="set-party-text">SET RULING PARTY</div>
-        + <div class="influence"></div>
-        <div class="description">
-          Set the ruling party to one of your choice. Gain +1 influence.
-        </div>
       </div>
 `],
     [CardName.OCEAN_CITY, `

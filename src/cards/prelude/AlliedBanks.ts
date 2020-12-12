@@ -4,6 +4,8 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class AlliedBanks extends PreludeCard implements IProjectCard {
     public tags = [Tags.EARTH];
@@ -13,6 +15,14 @@ export class AlliedBanks extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, 4);
       player.megaCredits += 3;
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P01',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(4)).br;
+        b.megacredits(3);
+      }),
+      description: 'Increase your MC production 4 steps. Gain 3 MC.',
     }
 }
 

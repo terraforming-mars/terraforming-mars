@@ -5,25 +5,26 @@ import {Game} from '../Game';
 import {Player} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
+enum State { WAITING, LOADING, READY }
 
 export class GameLoader {
-    private loadedGames = false;
-    private loadingGames = false;
+    private state: State = State.WAITING;
     private readonly games = new Map<string, Game>();
     private readonly pendingGame = new Map<string, Array<LoadCallback>>();
     private readonly pendingPlayer = new Map<string, Array<LoadCallback>>();
     private readonly playerToGame = new Map<string, Game>();
 
     public start(cb = () => {}): void {
-      if (this.loadedGames === true) {
+      switch (this.state) {
+      case State.READY:
         console.warn('already loaded, ignoring');
         return;
-      } else if (this.loadingGames === true) {
+      case State.LOADING:
         console.warn('already loading, ignoring');
         return;
+      case State.WAITING:
+        this.loadAllGames(cb);
       }
-      this.loadingGames = true;
-      this.loadAllGames(cb);
     }
 
     public addGame(game: Game): void {
@@ -38,7 +39,7 @@ export class GameLoader {
     }
 
     public getGameByGameId(gameId: string, cb: LoadCallback): void {
-      if (this.loadedGames === true || this.games.has(gameId)) {
+      if (this.state === State.READY || this.games.has(gameId)) {
         cb(this.games.get(gameId));
         return;
       }
@@ -51,7 +52,7 @@ export class GameLoader {
     }
 
     public getGameByPlayerId(playerId: string, cb: LoadCallback): void {
-      if (this.loadedGames === true || this.playerToGame.has(playerId)) {
+      if (this.state === State.READY || this.playerToGame.has(playerId)) {
         cb(this.playerToGame.get(playerId));
         return;
       }
@@ -81,8 +82,8 @@ export class GameLoader {
     }
 
     private onAllGamesLoaded(): void {
-      this.loadingGames = false;
-      this.loadedGames = true;
+      this.state = State.READY;
+
       // any pendingPlayer or pendingGame callbacks
       // are waiting for a train that is never coming
       // send them packing. call their callbacks with
@@ -102,6 +103,8 @@ export class GameLoader {
     }
 
     private loadAllGames(cb = () => {}): void {
+      this.state = State.LOADING;
+
       Database.getInstance().getGames((err, allGames) => {
         if (err) {
           console.error('error loading all games', err);

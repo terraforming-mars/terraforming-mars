@@ -7,6 +7,8 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SubterraneanReservoir implements IProjectCard {
     public cost = 11;
@@ -29,5 +31,13 @@ export class SubterraneanReservoir implements IProjectCard {
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '127',
+      renderData: CardRenderer.builder((b) => {
+        b.oceans(1);
+      }),
+      description: 'Place 1 ocean tile.',
+    };
 }
 

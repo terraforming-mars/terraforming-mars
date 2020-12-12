@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class StripMine implements IProjectCard {
     public cost = 25;
@@ -32,4 +34,15 @@ export class StripMine implements IProjectCard {
       player.addProduction(Resources.TITANIUM);
       return game.increaseOxygenLevel(player, 2);
     }
+    public metadata: CardMetadata = {
+      cardNumber: '138',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(2).br;
+          pb.plus().steel(2).titanium(1);
+        }).br;
+        b.oxygen(2);
+      }),
+      description: 'Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.',
+    };
 }

@@ -1,8 +1,8 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
 
 export class TransNeptuneProbe implements IProjectCard {
     public cost = 6;
@@ -15,5 +15,9 @@ export class TransNeptuneProbe implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '084',
+      victoryPoints: 1,
     }
 }

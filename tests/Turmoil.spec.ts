@@ -211,7 +211,7 @@ describe('Turmoil', function() {
   });
 
   it('backward compatible deserialization', () => {
-    const originalJson = {
+    const json = {
       'chairman': 'NEUTRAL',
       'rulingParty': {'delegates': ['blue-id', 'NEUTRAL'], 'name': 'Greens', 'description': 'All players receive 1 MC for each Plant tag, Microbe tag, and Animal tag they have.'},
       'dominantParty': {'partyLeader': 'NEUTRAL', 'delegates': ['NEUTRAL'], 'name': 'Unity', 'description': 'All players receive 1 MC for each Venus tag, Earth tag, and Jovian tag they have.'},
@@ -265,7 +265,7 @@ describe('Turmoil', function() {
       'distantGlobalEvent': {'name': 'Aquifer Released by Public Council', 'description': 'First player places an ocean tile. Gain 1 plant and 1 steel per influence.', 'revealedDelegate': 'Mars First', 'currentDelegate': 'Greens'},
       'commingGlobalEvent': {'name': 'Solar Flare', 'description': 'Lose 3 MC for each space tag (max 5, then reduced by influence).', 'revealedDelegate': 'Unity', 'currentDelegate': 'Kelvinists'},
     };
-    const s: SerializedTurmoil = JSON.parse(JSON.stringify(originalJson)) as SerializedTurmoil;
+    const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
 
     expect(t.distantGlobalEvent!.name).eq('Aquifer Released by Public Council');
@@ -283,7 +283,7 @@ describe('Turmoil', function() {
   });
 
   it('forward compatible deserialization', () => {
-    const originalJson = {
+    const json = {
       'chairman': 'NEUTRAL',
       'rulingParty': 'Greens',
       'dominantParty': 'Unity',
@@ -309,7 +309,7 @@ describe('Turmoil', function() {
       'distantGlobalEvent': 'Eco Sabotage',
       'comingGlobalEvent': 'Celebrity Leaders',
     };
-    const s: SerializedTurmoil = JSON.parse(JSON.stringify(originalJson)) as SerializedTurmoil;
+    const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
 
     expect(t.distantGlobalEvent!.name).eq('Eco Sabotage');

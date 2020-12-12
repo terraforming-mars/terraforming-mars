@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import {AndOptions} from '../inputs/AndOptions';
 import {CardModel} from '../models/CardModel';
 import {ColonyModel} from '../models/ColonyModel';

@@ -9,7 +9,8 @@ describe('Factorum', function() {
   it('Should play', function() {
     const card = new Factorum();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(1);

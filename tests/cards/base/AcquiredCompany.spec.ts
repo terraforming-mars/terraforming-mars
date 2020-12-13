@@ -8,6 +8,7 @@ describe('AcquiredCompany', function() {
   it('Should play', function() {
     const card = new AcquiredCompany();
     const player = TestPlayers.BLUE.newPlayer();
+
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
   });

@@ -1,7 +1,7 @@
 
 import {Color} from '../Color';
 import {Database} from './Database';
-import {Game} from '../Game';
+import {Game, GameId} from '../Game';
 import {Player} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
@@ -9,8 +9,8 @@ enum State { WAITING, LOADING, READY }
 
 export class GameLoader {
     private state: State = State.WAITING;
-    private readonly games = new Map<string, Game>();
-    private readonly pendingGame = new Map<string, Array<LoadCallback>>();
+    private readonly games = new Map<GameId, Game>();
+    private readonly pendingGame = new Map<GameId, Array<LoadCallback>>();
     private readonly pendingPlayer = new Map<string, Array<LoadCallback>>();
     private readonly playerToGame = new Map<string, Game>();
 
@@ -34,11 +34,11 @@ export class GameLoader {
       }
     }
 
-    public getLoadedGameIds(): Array<string> {
+    public getLoadedGameIds(): Array<GameId> {
       return Array.from(this.games.keys());
     }
 
-    public getGameByGameId(gameId: string, cb: LoadCallback): void {
+    public getGameByGameId(gameId: GameId, cb: LoadCallback): void {
       if (this.state === State.READY || this.games.has(gameId)) {
         cb(this.games.get(gameId));
         return;
@@ -64,7 +64,7 @@ export class GameLoader {
       }
     }
 
-    private onGameLoaded(gameId: string, playerId: string): void {
+    private onGameLoaded(gameId: GameId, playerId: string): void {
       const pendingGames = this.pendingGame.get(gameId);
       if (pendingGames !== undefined) {
         for (const pendingGame of pendingGames) {

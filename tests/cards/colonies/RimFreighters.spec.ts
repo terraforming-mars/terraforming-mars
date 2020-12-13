@@ -8,7 +8,8 @@ describe('RimFreighters', function() {
   it('Should play', function() {
     const card = new RimFreighters();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     const ceres = new Ceres();

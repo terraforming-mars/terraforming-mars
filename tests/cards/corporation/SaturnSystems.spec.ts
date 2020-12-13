@@ -12,7 +12,8 @@ describe('SaturnSystems', function() {
   beforeEach(function() {
     card = new SaturnSystems();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

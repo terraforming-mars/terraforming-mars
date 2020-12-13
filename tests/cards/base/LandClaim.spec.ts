@@ -11,7 +11,8 @@ describe('LandClaim', function() {
   it('Should play', function() {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play(player, game);
     expect(action).is.not.undefined;
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];

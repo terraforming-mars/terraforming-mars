@@ -9,7 +9,8 @@ describe('BusinessContacts', function() {
   it('Should play', function() {
     const card = new BusinessContacts();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play(player, game);
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;

@@ -61,6 +61,7 @@ export interface SerializedPlayer {
     titaniumProduction: number;
     titaniumValue: number;
     tradesThisTurn: number;
+    usedUndo: boolean;
     turmoilScientistsActionUsed: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

@@ -65,6 +65,7 @@ export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
     public readonly id: PlayerId;
+    private usedUndo: boolean = false;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
 
@@ -1754,9 +1755,11 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
-      return new SelectOption('Undo Turn', 'Undo', () => {
+      return new SelectOption('Undo last action', 'Undo', () => {
         try {
-          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
+          Database.getInstance().deleteGameNbrSaves(game.id, 1);
+          this.usedUndo = true; // To prevent going back into takeAction()
         } catch (error) {
           console.log(error);
         }
@@ -1973,11 +1976,27 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     public takeAction(game: Game): void {
-      if (game.deferredActions.nextForPlayer(this.id) !== undefined) {
-        game.deferredActions.runAllForPlayer(this.id, () => {
-          this.takeAction(game);
-        });
+      if (this.usedUndo) {
+        this.usedUndo = false;
         return;
+      }
+
+      if (game.deferredActions.length > 0) {
+        game.deferredActions.runAll(() => this.takeAction(game));
+        return;
+      }
+
+      const players = game.getPlayers();
+      const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
+
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        /*
+         * Need to save before increasing lastSaveId so that reloading the game
+         * doesn't create another new save on top of it, like this:
+         * increment -> save -> reload -> increment -> save
+         */
+        Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
+        game.lastSaveId += 1;
       }
 
       // Prelude cards have to be played first
@@ -2003,7 +2022,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.phase = Phase.ACTION;
       }
 
-      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
+      if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
         this.actionsTakenThisRound = 0;
         game.playerIsFinishedTakingActions();
         return;
@@ -2159,7 +2178,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return 0;
       });
 
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption) {
+      if (players.length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption && allOtherPlayersHavePassed === false) {
         action.options.push(
           this.endTurnOption(game),
         );
@@ -2204,6 +2223,13 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+    }
+
+    public allOtherPlayersHavePassed(game: Game): boolean {
+      if (game.isSoloMode()) return true;
+      const players = game.getPlayers();
+      const passedPlayers = game.getPassedPlayers();
+      return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
     }
 
     public process(game: Game, input: Array<Array<string>>): void {
@@ -2328,6 +2354,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         beginner: this.beginner,
         handicap: this.handicap,
         timer: this.timer,
+        // Used when undoing action
+        usedUndo: this.usedUndo,
       };
       if (this.lastCardPlayed !== undefined) {
         result.lastCardPlayed = this.lastCardPlayed.name;

@@ -11,7 +11,8 @@ describe('AICentral', function() {
   beforeEach(function() {
     card = new AICentral();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if not enough science tags to play', function() {

@@ -8,7 +8,8 @@ describe('NuclearZone', function() {
   it('Should play', function() {
     const card = new NuclearZone();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play(player, game);
     if (action !== undefined) {
       const space = action.availableSpaces[0];

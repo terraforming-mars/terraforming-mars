@@ -1986,15 +1986,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       const players = game.getPlayers();
       const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
 
-      if (game.lastSaveId === 0) {
-        /*
-         * This is needed to create the initial save, just before the first player
-         * takes its first action of the game, since saves don't overwrite themselves
-         */
-        game.lastSaveId = 1;
-      }
-
       if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        /*
+         * Need to save before increasing lastSaveId so that reloading the game
+         * doesn't create another new save on top of it, like this:
+         * increment -> save -> reload -> increment -> save
+         */
         Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
         game.lastSaveId += 1;
       }

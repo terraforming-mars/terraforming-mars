@@ -318,6 +318,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
+      this.lastSaveId = 1;
 
       // Print game_id if solo game
       if (players.length === 1) {

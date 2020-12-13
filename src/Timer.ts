@@ -26,12 +26,12 @@ export class Timer {
   }
 
   public stop() {
+    this.running--;
     if (!this.afterFirstAction) {
       this.startedAt = new Date().getTime();
       this.afterFirstAction = true;
       return; // skipping timer for first move in game
     }
-    this.running--;
     if (this.running === 0) {
       this.sumElapsed += new Date().getTime() - this.startedAt;
     }

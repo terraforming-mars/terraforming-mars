@@ -7,7 +7,8 @@ describe('ProtectedHabitats', function() {
   it('Should play', function() {
     const card = new ProtectedHabitats();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     expect(card.play(player, game)).is.undefined;
   });
 });

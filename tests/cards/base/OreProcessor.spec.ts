@@ -10,7 +10,8 @@ describe('OreProcessor', function() {
   beforeEach(function() {
     card = new OreProcessor();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t act', function() {

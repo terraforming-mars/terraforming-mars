@@ -16,7 +16,7 @@ describe('MiningGuild', function() {
     card = new MiningGuild();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    game = new Game('foobar', [player, player2], player);
 
     player.corporationCard = card;
   });
@@ -42,7 +42,12 @@ describe('MiningGuild', function() {
   });
 
   it('Gives steel production bonus when placing ocean tile', function() {
-    maxOutOceans(player, game); // 1 ocean with titanium and 1 with steel
+    game.board.getSpaces(SpaceType.OCEAN, player).forEach((space) => {
+      if (space.bonus.includes(SpaceBonus.TITANIUM) || space.bonus.includes(SpaceBonus.STEEL)) {
+        game.addOceanTile(player, space.id);
+      }
+    });
+    // There are two spaces on the main board that grant titanium or steel.
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
   });
 

@@ -17,8 +17,9 @@ describe('EcologyResearch', function() {
   beforeEach(function() {
     card = new EcologyResearch();
     player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

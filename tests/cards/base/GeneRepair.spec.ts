@@ -11,7 +11,8 @@ describe('GeneRepair', function() {
   beforeEach(function() {
     card = new GeneRepair();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {

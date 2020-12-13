@@ -9,9 +9,9 @@ describe('SponsoredMohole', function() {
   it('Should play', function() {
     const card = new SponsoredMohole();
     const player = TestPlayers.BLUE.newPlayer();
-
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = new Game('foobar', [player, player], player, gameOptions);
+    const game = new Game('foobar', [player, redPlayer], player, gameOptions);
     expect(card.canPlay(player, game)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;

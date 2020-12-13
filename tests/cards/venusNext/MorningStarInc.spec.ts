@@ -9,7 +9,8 @@ describe('MorningStarInc', function() {
     const corp = new MorningStarInc();
     const card = new IshtarMining();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
     game.increaseVenusScaleLevel(player, 3);
     expect(card.canPlay(player, game)).is.true;

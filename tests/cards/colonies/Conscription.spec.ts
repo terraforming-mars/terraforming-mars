@@ -8,7 +8,8 @@ describe('Conscription', function() {
   it('Should apply card discount until next card played', function() {
     const card = new Conscription();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     expect(card.canPlay(player)).is.not.true;
     const action = card.play();
     expect(action).is.undefined;

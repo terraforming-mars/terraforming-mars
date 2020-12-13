@@ -46,7 +46,7 @@ export class SpacePortColony implements IProjectCard {
         b.colonies(1).asterix().nbsp.tradeFleet().br;
         b.text('1VP per 2 colonies in play.', CardRenderItemSize.TINY, true);
       }),
-      description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
+      description: 'Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.',
       victoryPoints: CardRenderDynamicVictoryPoints.colonies(1, 2, true),
     }
 }

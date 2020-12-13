@@ -479,6 +479,14 @@ describe('Game', function() {
       .to.throw(Error, /Cannot find first player/);
   });
 
+  it('fails when the same color appears in two players', () => {
+    const player1 = new Player('name', Color.RED, false, 0, 'id1');
+    const player2 = new Player('name', Color.RED, false, 0, 'id2');
+    expect(
+      () => new Game('id', [player1, player2], player1))
+      .to.throw(Error, /Duplicate color found/);
+  });
+
   /**
    * ensure as we modify properties we consider
    * serialization. if this fails update SerializedGame

@@ -320,6 +320,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
+      this.lastSaveId = 1;
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -1195,11 +1196,6 @@ export class Game implements ISerializable<SerializedGame> {
     private startActionsForPlayer(player: Player) {
       this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
-
-      // Save the game state after changing the current player
-      // Increment the save id
-      this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
 
       player.takeAction(this);
     }

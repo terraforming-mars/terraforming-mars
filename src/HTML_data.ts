@@ -3708,7 +3708,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
-                <div class="resource-tag science"></div> : <div class="resource money">-2</div>
+                <div class="resource-tag tag-science"></div> : <div class="resource money">-2</div>
                 <div class="description " style="text-align:center;margin-top:0px; ">
                     (Effect: When you play an Science tag, you pay 2MC less for it.)
                 </div>
@@ -3912,10 +3912,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="corporationEffectBox">
     <div class="corporationEffectBoxLabel">ACTION</div>
     <div class="production-box">
-      <div class="resource wild"></div>
+      <div class="production wild"></div>
     </div>
     <div class="red-arrow"></div>
-    4<div class="production wild"></div>
+    4<div class="resource wild"></div>
     <div class="description utopia-ability-description">
       (Action: Decrease any production to gain 4 resources of that kind.)
     </div>

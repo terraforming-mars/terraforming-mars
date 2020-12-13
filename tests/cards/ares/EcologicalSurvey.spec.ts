@@ -9,14 +9,21 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TestPlayers} from '../../TestingUtils';
+import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
+import {SpaceType} from '../../../src/SpaceType';
+import {Phase} from '../../../src/Phase';
 
 describe('EcologicalSurvey', function() {
-  let card : EcologicalSurvey; let player : Player; let game : Game;
+  let card : EcologicalSurvey;
+  let player : Player;
+  let redPlayer : Player;
+  let game : Game;
 
   beforeEach(function() {
     card = new EcologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 
@@ -84,5 +91,34 @@ describe('EcologicalSurvey', function() {
     expect(player.cardsInHand).is.length(1);
     expect(microbeCard.resourceCount).eq(2);
     expect(animalCard.resourceCount).eq(2);
+  });
+
+  it('Bonus granted with Arctic Algae', function() {
+    // Player has Arctic Algae, will grants two plants when anyone plays an ocean.
+    player.playedCards.push(new ArcticAlgae());
+    player.playedCards.push(new EcologicalSurvey());
+
+    // Hand-placing an ocean to make things easy, since this test suite relies on an otherwise empty board.
+    game.board.spaces[5].spaceType = SpaceType.OCEAN;
+    game.board.spaces[5].bonus = [];
+
+    player.plants = 0;
+    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    expect(player.plants).eq(3);
+  });
+
+  it('Bonus granted with Arctic Algae not granted during WGT', function() {
+    // Player has Arctic Algae, will grants two plants when anyone plays an ocean.
+    player.playedCards.push(new ArcticAlgae());
+    player.playedCards.push(new EcologicalSurvey());
+
+    // Hand-placing an ocean to make things easy, since this test suite relies on an otherwise empty board.
+    game.board.spaces[5].spaceType = SpaceType.OCEAN;
+    game.board.spaces[5].bonus = [];
+
+    game.phase = Phase.SOLAR;
+    player.plants = 0;
+    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    expect(player.plants).eq(2);
   });
 });

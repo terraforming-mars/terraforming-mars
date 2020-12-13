@@ -180,7 +180,10 @@ export class AresHandler {
 
   // Used with Ecological and Geological Survey
   public static afterTilePlacement(game: Game, player: Player, startingResources?: Multiset<Resources | ResourceType>): void {
-    if (!startingResources) {
+    if (startingResources === undefined) {
+      return;
+    }
+    if (game.phase === Phase.SOLAR) {
       return;
     }
 

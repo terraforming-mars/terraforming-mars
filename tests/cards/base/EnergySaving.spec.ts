@@ -8,7 +8,8 @@ describe('EnergySaving', function() {
   it('Should play', function() {
     const card = new EnergySaving();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play(player, game);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(action).is.undefined;

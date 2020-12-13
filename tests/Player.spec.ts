@@ -44,10 +44,12 @@ describe('Player', function() {
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+
     const game = new Game('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, new Game('foobar', [player, player], player));
+    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;
@@ -65,9 +67,11 @@ describe('Player', function() {
   it('Should run select amount for Insulation', function() {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+
     player.addProduction(Resources.HEAT, 2);
-    const game = new Game('foobar', [player], player);
-    const action = card.play(player, new Game('foobar', [player, player], player));
+    const game = new Game('foobar', [player, redPlayer], player);
+    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);

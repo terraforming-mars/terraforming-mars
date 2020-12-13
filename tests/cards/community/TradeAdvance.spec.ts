@@ -12,12 +12,12 @@ describe('TradeAdvance', function() {
   beforeEach(function() {
     card = new TradeAdvance();
     player = TestPlayers.BLUE.newPlayer();
-
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

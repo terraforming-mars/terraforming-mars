@@ -15,7 +15,8 @@ describe('StratosphericBirds', function() {
   beforeEach(function() {
     card = new StratosphericBirds();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
     deuteriumExport = new DeuteriumExport();
   });
 

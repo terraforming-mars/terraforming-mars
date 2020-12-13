@@ -6,6 +6,7 @@ describe('EarthCatapult', function() {
   it('Should play', function() {
     const card = new EarthCatapult();
     const player = TestPlayers.BLUE.newPlayer();
+
     const action = card.play();
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

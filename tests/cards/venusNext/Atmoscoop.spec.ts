@@ -18,7 +18,8 @@ describe('Atmoscoop', function() {
   beforeEach(function() {
     card = new Atmoscoop();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });

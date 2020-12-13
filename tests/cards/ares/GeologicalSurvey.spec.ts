@@ -17,7 +17,8 @@ describe('GeologicalSurvey', function() {
   beforeEach(function() {
     card = new GeologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 

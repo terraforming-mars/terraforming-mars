@@ -11,7 +11,8 @@ describe('VenusWaystation', function() {
     const card2 = new LocalShading();
     const card3 = new VenusGovernor();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
 
     const action = card.play();
     expect(action).is.undefined;

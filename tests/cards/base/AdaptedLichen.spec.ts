@@ -8,6 +8,7 @@ describe('AdaptedLichen', function() {
   it('Should play', function() {
     const card = new AdaptedLichen();
     const player = TestPlayers.BLUE.newPlayer();
+
     card.play(player);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
   });

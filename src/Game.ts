@@ -184,8 +184,17 @@ export class Game implements ISerializable<SerializedGame> {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      // ... creates a shallow copy.
       public gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}) {
+      {
+        const _playerIds = players.map((p) => p.id);
+        if (_playerIds.find((pid) => pid === first.id) === undefined) {
+          throw new Error('Cannot find first player ' + first + ' in ' + _playerIds);
+        }
+        if (new Set(_playerIds).size !== players.length) {
+          throw new Error('duplicate player found: ' + _playerIds);
+        }
+      }
+
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);

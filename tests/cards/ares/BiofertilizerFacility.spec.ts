@@ -37,7 +37,8 @@ describe('BiofertilizerFacility', function() {
   beforeEach(function() {
     card = new BiofertilizerFacility();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can\'t play without a science tag', function() {

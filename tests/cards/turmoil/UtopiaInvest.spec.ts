@@ -9,7 +9,8 @@ describe('UtopiaInvest', function() {
   it('Should play', function() {
     const card = new UtopiaInvest();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('id', [player, player], player, setCustomGameOptions());
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('id', [player, redPlayer], player, setCustomGameOptions());
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

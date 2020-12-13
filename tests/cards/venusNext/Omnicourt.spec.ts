@@ -7,7 +7,8 @@ describe('Omnicourt', function() {
   it('Should play', function() {
     const card = new Omnicourt();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     expect(card.canPlay(player, game)).is.not.true;
     const action = card.play(player, game);
     expect(action).is.undefined;

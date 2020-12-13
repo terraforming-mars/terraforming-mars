@@ -34,6 +34,7 @@ describe('Game', function() {
 
   it('sets starting production if corporate era not selected', function() {
     const player = TestPlayers.BLUE.newPlayer();
+
     const gameOptions = setCustomGameOptions({corporateEra: false});
 
     new Game('foobar', [player], player, gameOptions);
@@ -253,6 +254,7 @@ describe('Game', function() {
 
   it('Should not finish solo game before last generation if Mars is already terraformed', function() {
     const player = TestPlayers.BLUE.newPlayer();
+
     const game = new Game('solo2', [player], player);
     game.generation = 10;
 
@@ -272,7 +274,9 @@ describe('Game', function() {
 
   it('Should not give TR or raise oxygen for final greenery placements', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+
+    const game = new Game('foobar', [player, redPlayer], player);
     game.generation = 14;
 
     // Terraform
@@ -369,6 +373,7 @@ describe('Game', function() {
 
   it('Removes Hellas bonus ocean space if player cannot pay', function() {
     const player = TestPlayers.BLUE.newPlayer();
+
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.

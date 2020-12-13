@@ -190,10 +190,10 @@ export class Game implements ISerializable<SerializedGame> {
       {
         const _playerIds = players.map((p) => p.id);
         if (_playerIds.find((pid) => pid === first.id) === undefined) {
-          throw new Error('Cannot find first player ' + first + ' in ' + _playerIds);
+          throw new Error('Cannot find first player ' + first.id + ' in ' + _playerIds);
         }
         if (new Set(_playerIds).size !== players.length) {
-          throw new Error('duplicate player found: ' + _playerIds);
+          throw new Error('Duplicate player found: ' + _playerIds);
         }
       }
 

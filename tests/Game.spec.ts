@@ -465,6 +465,20 @@ describe('Game', function() {
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
   });
 
+  it('fails when the same id appears in two players', () => {
+    const player1 = new Player('name', Color.BLUE, false, 0, 'id3');
+    const player2 = new Player('name', Color.RED, false, 0, 'id3');
+    expect(
+      () => new Game('id', [player1, player2], player1))
+      .to.throw(Error, /Duplicate player found: id3,id3/);
+  });
+
+  it('fails when first player is absent from the list of players.', () => {
+    expect(
+      () => new Game('id', [TestPlayers.RED.newPlayer(), TestPlayers.BLUE.newPlayer()], TestPlayers.YELLOW.newPlayer()))
+      .to.throw(Error, /Cannot find first player/);
+  });
+
   /**
    * ensure as we modify properties we consider
    * serialization. if this fails update SerializedGame

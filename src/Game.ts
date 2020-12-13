@@ -190,7 +190,7 @@ export class Game implements ISerializable<SerializedGame> {
       {
         const _playerIds = players.map((p) => p.id);
         const _colors = players.map((p) => p.color);
-        if (_playerIds.find((pid) => pid === first.id) === undefined) {
+        if (_playerIds.includes(first.id) === false) {
           throw new Error('Cannot find first player ' + first.id + ' in ' + _playerIds);
         }
         if (new Set(_playerIds).size !== players.length) {

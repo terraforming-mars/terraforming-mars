@@ -72,7 +72,6 @@ describe('GameLoader', function() {
     });
     expect(actual).to.be.undefined;
     loader.start();
-    console.log(actual!.getPlayers());
     expect(actual).not.to.be.undefined;
     expect(actual?.id).to.eq(expectedGameId);
   });

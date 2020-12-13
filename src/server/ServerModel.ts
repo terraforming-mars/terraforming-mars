@@ -38,6 +38,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -89,7 +90,7 @@ export class Server {
       spaces: getSpaces(game.board.spaces),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
+      steelValue: player.getSteelValue(game),
       temperature: game.getTemperature(),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
@@ -379,7 +380,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
+      steelValue: player.getSteelValue(game),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -492,6 +493,25 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       };
     }
 
+    const staticAgendas = game.turmoil.politicalAgendasData.staticAgendas;
+    let staticAgendasData;
+    if (staticAgendas) {
+      staticAgendasData = {
+        marsFirstPolicy: staticAgendas.get(PartyName.MARS)!.policyId,
+        marsFirstBonus: staticAgendas.get(PartyName.MARS)!.bonusId,
+        scientistsPolicy: staticAgendas.get(PartyName.SCIENTISTS)!.policyId,
+        scientistsBonus: staticAgendas.get(PartyName.SCIENTISTS)!.bonusId,
+        unityPolicy: staticAgendas.get(PartyName.UNITY)!.policyId,
+        unityBonus: staticAgendas.get(PartyName.UNITY)!.bonusId,
+        greensPolicy: staticAgendas.get(PartyName.GREENS)!.policyId,
+        greensBonus: staticAgendas.get(PartyName.GREENS)!.bonusId,
+        redsPolicy: staticAgendas.get(PartyName.REDS)!.policyId,
+        redsBonus: staticAgendas.get(PartyName.REDS)!.bonusId,
+        kelvinistsPolicy: staticAgendas.get(PartyName.KELVINISTS)!.policyId,
+        kelvinistsBonus: staticAgendas.get(PartyName.KELVINISTS)!.bonusId,
+      };
+    }
+
     return {
       chairman: chairman,
       ruling: ruling,
@@ -502,6 +522,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       distant: distant,
       comming: coming,
       current: current,
+      staticAgendas: staticAgendasData,
     };
   } else {
     return undefined;

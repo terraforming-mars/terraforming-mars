@@ -16,20 +16,7 @@ import {Route} from './src/routes/Route';
 import {Phase} from './src/Phase';
 import {Player} from './src/Player';
 import {Database} from './src/database/Database';
-<<<<<<< HEAD
 import {Server} from './src/server/ServerModel';
-=======
-import {
-  PartyModel,
-  DelegatesModel,
-  TurmoilModel,
-} from './src/models/TurmoilModel';
-import {SelectDelegate} from './src/inputs/SelectDelegate';
-import {SelectColony} from './src/inputs/SelectColony';
-import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
-import {PartyName} from './src/turmoil/parties/PartyName';
->>>>>>> CSS for party bonuses
 
 const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');

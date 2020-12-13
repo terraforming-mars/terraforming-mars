@@ -60,6 +60,8 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 
+export type GameId = string;
+
 export interface Score {
   corporation: String;
   playerScore: number;
@@ -67,7 +69,7 @@ export interface Score {
 
 export interface GameOptions {
   boardName: BoardName;
-  clonedGamedId: string | undefined;
+  clonedGamedId: GameId | undefined;
 
   // Configuration
   undoOption: boolean;
@@ -181,7 +183,7 @@ export class Game implements ISerializable<SerializedGame> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
-      public id: string,
+      public id: GameId,
       private players: Array<Player>,
       private first: Player,
       public gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}) {
@@ -327,6 +329,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
+      this.lastSaveId = 1;
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -500,7 +503,7 @@ export class Game implements ISerializable<SerializedGame> {
       );
     }
 
-    private cloneGame(gameId: string, game: Game): void {
+    private cloneGame(gameId: GameId, game: Game): void {
       const player = new Player('test', Color.BLUE, false, 0);
       const player2 = new Player('test2', Color.RED, false, 0);
       const gameToRebuild = new Game(gameId, [player, player2], player);
@@ -1202,11 +1205,6 @@ export class Game implements ISerializable<SerializedGame> {
     private startActionsForPlayer(player: Player) {
       this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
-
-      // Save the game state after changing the current player
-      // Increment the save id
-      this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
 
       player.takeAction(this);
     }

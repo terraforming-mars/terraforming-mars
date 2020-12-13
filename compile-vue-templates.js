@@ -242,7 +242,7 @@ checkComponent(
 checkComponent(
     'src/components/overview/PlayerTimer',
     require('./build/src/components/overview/PlayerTimer').PlayerTimer,
-    ['timer_text'],
+    ['timerText'],
 );
 checkComponent(
   'src/components/TopBar',

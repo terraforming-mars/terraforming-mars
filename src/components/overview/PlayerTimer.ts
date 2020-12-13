@@ -9,14 +9,14 @@ export const PlayerTimer = Vue.component('player-timer', {
   },
   data() {
     return {
-      timer_text: '',
+      timerText: '',
     };
   },
   mounted() {
     this.updateTimer();
   },
   watch: {
-    timer_text: {
+    timerText: {
       handler() {
         setTimeout(() => {
           this.updateTimer();
@@ -26,8 +26,8 @@ export const PlayerTimer = Vue.component('player-timer', {
   },
   methods: {
     updateTimer: function() {
-      this.timer_text = Timer.fromJSON(this.timer).toString();
+      this.timerText = Timer.fromJSON(this.timer).toString();
     },
   },
-  template: `<div class="player-timer" > {{timer_text}} </div>`,
+  template: `<div class="player-timer" > {{timerText}} </div>`,
 });

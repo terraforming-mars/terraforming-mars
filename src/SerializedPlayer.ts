@@ -8,7 +8,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 // TODO(kberg): remove reference to CorporationCard by 2021-01-15
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
-    actionsThisGeneration: Array<string>;
+    actionsThisGeneration: Array<CardName>;
     beginner: boolean;
     canUseHeatAsMegaCredits: boolean;
     cardCost: number;

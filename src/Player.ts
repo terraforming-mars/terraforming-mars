@@ -100,7 +100,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // This generation / this round
     public actionsTakenThisRound: number = 0;
-    private actionsThisGeneration: Set<string> = new Set<string>();
+    private actionsThisGeneration: Set<CardName> = new Set();
     public lastCardPlayed: IProjectCard | undefined;
     private corporationInitialActionDone: boolean = false;
 
@@ -370,11 +370,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     };
 
-    public getActionsThisGeneration(): Set<string> {
+    public getActionsThisGeneration(): Set<CardName> {
       return this.actionsThisGeneration;
     }
 
-    public setActionsThisGeneration(cardName: string): void {
+    public setActionsThisGeneration(cardName: CardName): void {
       this.actionsThisGeneration.add(cardName);
       return;
     }
@@ -660,7 +660,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (extraTag !== undefined) {
         allTags.push(extraTag);
       }
-      const uniqueTags: Set<Tags> = new Set<Tags>();
+      const uniqueTags: Set<Tags> = new Set();
       if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
@@ -2316,7 +2316,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
         removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
-        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2363,7 +2362,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const cardFinder = new CardFinder();
 
       // action this generation set
-      player.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+      player.actionsThisGeneration = new Set(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
         player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);

@@ -27,7 +27,6 @@ export interface SerializedPlayer {
     energy: number;
     energyProduction: number;
     fleetSize: number;
-    generationPlayed: Array<[string, number]>;
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
     heat: number;

@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -8,6 +7,8 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PhobosSpaceHaven implements IProjectCard {
     public cost = 25;
@@ -22,5 +23,13 @@ export class PhobosSpaceHaven implements IProjectCard {
     }
     public getVictoryPoints() {
       return 3;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '021',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.titanium(1)).nbsp.city();
+      }),
+      description: 'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.',
+      victoryPoints: 3,
     }
 }

@@ -8,6 +8,9 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType = CardType.EVENT;
@@ -35,5 +38,14 @@ export class PermafrostExtraction implements IProjectCard {
         game.addOceanTile(player, space.id);
         return undefined;
       });
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '191',
+      requirements: CardRequirements.builder((b) => b.temperature(-8)),
+      renderData: CardRenderer.builder((b) => {
+        b.oceans(1);
+      }),
+      description: 'Requires -8 C or warmer. Place 1 ocean tile.',
     }
 }

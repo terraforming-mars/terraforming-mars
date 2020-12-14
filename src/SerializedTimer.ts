@@ -1,6 +1,6 @@
 export interface SerializedTimer {
   sumElapsed: number;
   startedAt: number;
-  running: number;
+  running: boolean;
   afterFirstAction: boolean;
 }

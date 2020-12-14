@@ -2241,11 +2241,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.waitingFor = undefined;
       this.waitingForCb = undefined;
       try {
+        this.timer.stop();
         this.runInput(game, input, waitingFor);
         waitingForCb();
       } catch (err) {
-        this.waitingFor = waitingFor;
-        this.waitingForCb = waitingForCb;
+        this.setWaitingFor(waitingFor, waitingForCb);
         throw err;
       }
     }
@@ -2257,10 +2257,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     public setWaitingFor(input: PlayerInput, cb: () => void): void {
       this.timer.start();
       this.waitingFor = input;
-      this.waitingForCb = () => {
-        this.timer.stop();
-        cb();
-      };
+      this.waitingForCb = cb;
     }
 
     private serializePlayedCards(): Array<SerializedCard> {

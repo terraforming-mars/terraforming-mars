@@ -1,10 +1,11 @@
 import {ISerializable} from './ISerializable';
 import {SerializedTimer} from './SerializedTimer';
+import assert = require('assert');
 
 export class Timer implements ISerializable<SerializedTimer> {
   public sumElapsed: number = 0;
   public startedAt: number = 0;
-  public running: number = 0;
+  public running: boolean = false;
   public afterFirstAction: boolean = false;
 
   private constructor() { }
@@ -29,22 +30,19 @@ export class Timer implements ISerializable<SerializedTimer> {
   }
 
   public start() {
-    if (this.running === 0) {
-      this.startedAt = Date.now();
-    }
-    this.running++;
+    assert(!this.running);
+    this.running = true;
+    this.startedAt = Date.now();
   }
 
   public stop() {
-    this.running--;
+    assert(this.running);
+    this.running = false;
     if (!this.afterFirstAction) {
-      this.startedAt = Date.now();
       this.afterFirstAction = true;
       return; // skipping timer for first move in game
     }
-    if (this.running === 0) {
-      this.sumElapsed += Date.now() - this.startedAt;
-    }
+    this.sumElapsed += Date.now() - this.startedAt;
   }
 
   public static toString(d: SerializedTimer) {

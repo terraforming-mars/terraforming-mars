@@ -120,7 +120,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
 
-    public timer: Timer = new Timer();
+    public timer: Timer = Timer.newInstance();
 
     // Colonies
     private fleetSize: number = 1;
@@ -2353,7 +2353,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
-        timer: this.timer,
+        timer: this.timer.serialize(),
         // Used when undoing action
         usedUndo: this.usedUndo,
       };
@@ -2448,7 +2448,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Rebuild each drafted cards
       player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
-      player.timer = Timer.fromJSON(d.timer);
+      player.timer = Timer.deserialize(d.timer);
 
       return player;
     }

@@ -1,21 +1,34 @@
-export class Timer {
-  public sumElapsed: number;
-  public startedAt: number;
-  public running: number;
-  public visible: boolean;
-  public afterFirstAction: boolean;
+import {ISerializable} from './ISerializable';
+import {SerializedTimer} from './SerializedTimer';
 
-  constructor(
-    sumElapsed = 0,
-    startedAt = Date.now(),
-    running = 0,
-    visible = false,
-    afterFirstAction = false) {
-    this.sumElapsed = sumElapsed;
-    this.startedAt = startedAt;
-    this.running = running;
-    this.visible = visible;
-    this.afterFirstAction = afterFirstAction;
+export class Timer implements ISerializable<SerializedTimer> {
+  public sumElapsed: number = 0;
+  public startedAt: number = 0;
+  public running: number = 0;
+  public visible: boolean = false;
+  public afterFirstAction: boolean = false;
+
+  private constructor() { }
+
+  public static newInstance(): Timer {
+    const timer = new Timer();
+    return timer;
+  }
+
+  public serialize(): SerializedTimer {
+    return {
+      sumElapsed: this.sumElapsed,
+      startedAt: this.startedAt,
+      running: this.running,
+      visible: this.visible,
+      afterFirstAction: this.afterFirstAction,
+    };
+  }
+
+  public static deserialize(d: SerializedTimer): Timer {
+    const timer = new Timer();
+    Object.assign(timer, d);
+    return timer;
   }
 
   public start() {
@@ -40,10 +53,6 @@ export class Timer {
   public toString() {
     const elapsed = this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0);
     return new Date(elapsed).toISOString().substr(11, 8);
-  }
-
-  static fromJSON(d: Timer) {
-    return new Timer(d.sumElapsed, d.startedAt, d.running, d.visible, d.afterFirstAction);
   }
 }
 

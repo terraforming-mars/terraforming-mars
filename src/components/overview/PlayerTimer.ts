@@ -26,7 +26,7 @@ export const PlayerTimer = Vue.component('player-timer', {
   },
   methods: {
     updateTimer: function() {
-      this.timerText = Timer.fromJSON(this.timer).toString();
+      this.timerText = Timer.deserialize(this.timer).toString();
     },
   },
   template: `<div class="player-timer" > {{timerText}} </div>`,

@@ -133,6 +133,7 @@ export class GreensPolicy04 implements Policy {
 
         orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
           player.setResource(Resources.PLANTS, 3);
+          game.log('${0} gained 3 plants', (b) => b.player(player));
           return undefined;
         }));
 

@@ -8,6 +8,11 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {ISpace} from '../../ISpace';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
+import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE} from '../../constants';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
 
 export class Reds extends Party implements IParty {
   name = PartyName.REDS;
@@ -82,7 +87,92 @@ export class RedsPolicy02 implements Policy {
 
 export class RedsPolicy03 implements Policy {
   id = 'rp03';
-  description: string = 'Whenever you use a Standard Project (except selling patents), discard a card if possible';
+  description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any bonuses)';
+
+  canAct(player: Player, game: Game) {
+    if (game.marsIsTerraformed()) return false;
+
+    const temperature = game.getTemperature();
+    const oceansPlaced = game.board.getOceansOnBoard();
+    const oxygenLevel = game.getOxygenLevel();
+    const venusScaleLevel = game.getVenusScaleLevel();
+
+    if (temperature === MIN_TEMPERATURE && oceansPlaced === 0 && oxygenLevel === MIN_OXYGEN_LEVEL && venusScaleLevel === MIN_VENUS_SCALE) {
+      return false;
+    }
+
+    return player.canAfford(4) && player.turmoilPolicyActionUsed === false;
+  }
+
+  action(player: Player, game: Game) {
+    game.log('${0} used Turmoil Reds action', (b) => b.player(player));
+    player.turmoilPolicyActionUsed = true;
+
+    game.defer(new SelectHowToPayDeferred(
+      player,
+      4,
+      false,
+      false,
+      'Select how to pay for action',
+      () => {
+        const orOptions = new OrOptions();
+
+        // Decrease temperature option
+        const temperature = game.getTemperature();
+        const canDecreaseTemperature = temperature > MIN_TEMPERATURE && temperature !== MAX_TEMPERATURE;
+
+        if (canDecreaseTemperature) {
+          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
+            game.increaseTemperature(player, -1);
+            game.log('${0} decreased temperature 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
+
+        // Remove ocean option
+        const oceansPlaced = game.board.getOceansOnBoard();
+        const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
+
+        if (canRemoveOcean) {
+          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
+            game.defer(new RemoveOceanTile(player, game, 'Turmoil Reds action - Remove an Ocean tile from the board'));
+            return undefined;
+          }));
+        }
+
+        // Decrease oxygen level option
+        const oxygenLevel = game.getOxygenLevel();
+        const canDecreaseOxygen = oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== MAX_OXYGEN_LEVEL;
+
+        if (canDecreaseOxygen) {
+          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
+            game.increaseOxygenLevel(player, -1);
+            game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
+
+        // Decrease Venus scale option
+        const venusScaleLevel = game.getVenusScaleLevel();
+        const canDecreaseVenus = game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
+
+        if (canDecreaseVenus) {
+          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
+            game.increaseVenusScaleLevel(player, -1);
+            game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+        game.defer(new DeferredAction(player, () => orOptions));
+        return undefined;
+      },
+    ));
+
+    return undefined;
+  }
 }
 
 export class RedsPolicy04 implements Policy {

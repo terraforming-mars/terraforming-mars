@@ -1,10 +1,11 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class TechnologyDemonstration implements IProjectCard {
     public cost = 5;
@@ -17,6 +18,13 @@ export class TechnologyDemonstration implements IProjectCard {
         player.cardsInHand.push(game.dealer.dealCard());
       }
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '204',
+      renderData: CardRenderer.builder((b) => {
+        b.cards(2);
+      }),
+      description: 'Draw two cards.',
     }
 }
 

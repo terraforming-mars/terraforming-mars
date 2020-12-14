@@ -1,7 +1,7 @@
-import {Game, GameOptions, Score} from '../Game';
+import {Game, GameId, GameOptions, Score} from '../Game';
 
 export interface IGameData {
-    gameId: string;
+    gameId: GameId;
     playerCount: number;
 }
 
@@ -45,7 +45,7 @@ export interface IDatabase {
      *
      * @param cb a callback either returning either an error or a list of all `game_id`s.
      */
-    getGames(cb:(err: any, allGames:Array<string>) => void): void;
+    getGames(cb:(err: any, allGames:Array<GameId>) => void): void;
 
     /**
      * Load references to all games that can be cloned. Every game is cloneable,
@@ -68,7 +68,7 @@ export interface IDatabase {
      * game to increment its state count.
      */
     // TODO(kberg): why is `players` a useful first-class piece of data?
-    saveGameState(game_id: string, save_id: number, game: string, players: number): void;
+    saveGameState(game_id: GameId, save_id: number, game: string, players: number): void;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
@@ -80,7 +80,7 @@ export interface IDatabase {
      * @param gameOptions the options used for this game.
      * @param scores an array of scores correlated to the player's corporation.
      */
-    saveGameResults(game_id: string, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
+    saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
      * The meat behind player undo. Loads the game at the given save point
@@ -88,26 +88,26 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: string, save_id: number, game: Game): void;
+    restoreGame(game_id: GameId, save_id: number, game: Game): void;
 
     /**
      * Load a game at its most recent save point.
      * Overrites all data in `game`
      */
-    restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void): void;
+    restoreGameLastSave(game_id: GameId, game: Game, cb:(err: any) => void): void;
 
     /**
      * The meat behind cloning a game. Load a game at save point 0,
      * and overrides all data in `game`.
      */
-    restoreReferenceGame(game_id:string, game: Game, cb:(err: any) => void): void;
+    restoreReferenceGame(game_id: GameId, game: Game, cb:(err: any) => void): void;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.
      *
      * Accessible by the administrative API to roll back a broken game.
      */
-    deleteGameNbrSaves(game_id: string, rollbackCount: number): void;
+    deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void;
 
     /**
      * A maintenance task on a single game to close it out upon its completion.
@@ -122,5 +122,5 @@ export interface IDatabase {
     // TODO(kberg): rename to represent that it's closing out
     // this game. Also consider not needing the save_id, and
     // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: string, save_id: number): void;
+    cleanSaves(game_id: GameId, save_id: number): void;
 }

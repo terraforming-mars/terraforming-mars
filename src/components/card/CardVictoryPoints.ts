@@ -32,7 +32,11 @@ export const CardVictoryPoints = Vue.component('CardPoints', {
     },
   },
   template: `
-      <div v-if="isObject()" :class="getClasses()"><div>{{ this.victoryPoints.getPointsHtml() }}</div><CardRenderItemComponent v-if="this.victoryPoints.item !== undefined" :item="this.victoryPoints.item" /></div>
+      <div v-if="isObject() && !this.victoryPoints.targetOneOrMore" :class="getClasses()">
+        <div>{{ this.victoryPoints.getPointsHtml() }}</div><CardRenderItemComponent v-if="this.victoryPoints.item !== undefined" :item="this.victoryPoints.item" /></div>
+      <div v-else-if="isObject() && this.victoryPoints.targetOneOrMore" :class="getClasses()">
+        <div class="card-points-item-first"><CardRenderItemComponent v-if="this.victoryPoints.item !== undefined" :item="this.victoryPoints.item" />*:3</div>
+      </div>
       <div v-else :class="getClasses()">{{ this.victoryPoints }}</div>
     `,
 });

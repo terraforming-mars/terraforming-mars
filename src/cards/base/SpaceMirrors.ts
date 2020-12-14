@@ -7,6 +7,8 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SpaceMirrors implements IActionCard, IProjectCard {
     public cost = 3;
@@ -25,4 +27,13 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
       player.addProduction(Resources.ENERGY);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '076',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(7).startAction.productionBox((pb) => pb.energy(1));
+          eb.description('Action: Spend 7 MC to increase your energy production 1 step.');
+        });
+      }),
+    };
 }

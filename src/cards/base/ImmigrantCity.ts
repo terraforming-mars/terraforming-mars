@@ -48,7 +48,7 @@ export class ImmigrantCity implements IProjectCard {
           eb.city().any.startEffect.productionBox((pb) => pb.megacredits(1));
           eb.description('Effect: When a City tile is placed, including this, increase your MC production 1 step.');
         }).br;
-        b.productionBox((pb) => pb.minus().energy(1).megacredits(2)).city();
+        b.productionBox((pb) => pb.minus().energy(1).megacredits(-2)).city();
       }),
       description: 'Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.',
     }

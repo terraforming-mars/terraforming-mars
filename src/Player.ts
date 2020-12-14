@@ -64,6 +64,7 @@ export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
     public readonly id: PlayerId;
+    private usedUndo: boolean = false;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
 
@@ -99,7 +100,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // This generation / this round
     public actionsTakenThisRound: number = 0;
-    private actionsThisGeneration: Set<string> = new Set<string>();
+    private actionsThisGeneration: Set<CardName> = new Set();
     public lastCardPlayed: IProjectCard | undefined;
     private corporationInitialActionDone: boolean = false;
 
@@ -112,8 +113,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
     public removedFromPlayCards: Array<IProjectCard> = [];
-    // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-    private generationPlayed: Map<string, number> = new Map<string, number>();
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
@@ -371,11 +370,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     };
 
-    public getActionsThisGeneration(): Set<string> {
+    public getActionsThisGeneration(): Set<CardName> {
       return this.actionsThisGeneration;
     }
 
-    public setActionsThisGeneration(cardName: string): void {
+    public setActionsThisGeneration(cardName: CardName): void {
       this.actionsThisGeneration.add(cardName);
       return;
     }
@@ -661,7 +660,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (extraTag !== undefined) {
         allTags.push(extraTag);
       }
-      const uniqueTags: Set<Tags> = new Set<Tags>();
+      const uniqueTags: Set<Tags> = new Set();
       if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
@@ -1091,7 +1090,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.playedCards.push(card);
       game.log('${0} played ${1}', (b) => b.player(this).card(card));
       this.lastCardPlayed = card;
-      this.generationPlayed.set(card.name, game.generation);
 
       // Playwrights hook for Conscription and Indentured Workers
       this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
@@ -1740,20 +1738,26 @@ export class Player implements ISerializable<SerializedPlayer> {
       });
     }
 
+    public pass(game: Game) {
+      game.playerHasPassed(this);
+      this.lastCardPlayed = undefined;
+    }
+
     private passOption(game: Game): PlayerInput {
       return new SelectOption('Pass for this generation', 'Pass', () => {
-        game.playerHasPassed(this);
+        this.pass(game);
         game.log('${0} passed', (b) => b.player(this));
-        this.lastCardPlayed = undefined;
         return undefined;
       });
     }
 
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
-      return new SelectOption('Undo Turn', 'Undo', () => {
+      return new SelectOption('Undo last action', 'Undo', () => {
         try {
-          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
+          Database.getInstance().deleteGameNbrSaves(game.id, 1);
+          this.usedUndo = true; // To prevent going back into takeAction()
         } catch (error) {
           console.log(error);
         }
@@ -1970,11 +1974,27 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     public takeAction(game: Game): void {
-      if (game.deferredActions.nextForPlayer(this.id) !== undefined) {
-        game.deferredActions.runAllForPlayer(this.id, () => {
-          this.takeAction(game);
-        });
+      if (this.usedUndo) {
+        this.usedUndo = false;
         return;
+      }
+
+      if (game.deferredActions.length > 0) {
+        game.deferredActions.runAll(() => this.takeAction(game));
+        return;
+      }
+
+      const players = game.getPlayers();
+      const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
+
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        /*
+         * Need to save before increasing lastSaveId so that reloading the game
+         * doesn't create another new save on top of it, like this:
+         * increment -> save -> reload -> increment -> save
+         */
+        Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
+        game.lastSaveId += 1;
       }
 
       // Prelude cards have to be played first
@@ -2000,7 +2020,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.phase = Phase.ACTION;
       }
 
-      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
+      if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
         this.actionsTakenThisRound = 0;
         game.playerIsFinishedTakingActions();
         return;
@@ -2156,7 +2176,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return 0;
       });
 
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption) {
+      if (players.length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption && allOtherPlayersHavePassed === false) {
         action.options.push(
           this.endTurnOption(game),
         );
@@ -2201,6 +2221,13 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+    }
+
+    public allOtherPlayersHavePassed(game: Game): boolean {
+      if (game.isSoloMode()) return true;
+      const players = game.getPlayers();
+      const passedPlayers = game.getPassedPlayers();
+      return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
     }
 
     public process(game: Game, input: Array<Array<string>>): void {
@@ -2289,8 +2316,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
         removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
-        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-        generationPlayed: Array.from(this.generationPlayed),
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2320,6 +2345,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
+        // Used when undoing action
+        usedUndo: this.usedUndo,
       };
       if (this.lastCardPlayed !== undefined) {
         result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2333,11 +2360,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Assign each attributes
       Object.assign(player, d);
       const cardFinder = new CardFinder();
-      // Rebuild generation played map
-      player.generationPlayed = new Map<string, number>(d.generationPlayed);
 
       // action this generation set
-      player.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+      player.actionsThisGeneration = new Set(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
         player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);

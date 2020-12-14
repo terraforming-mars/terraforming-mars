@@ -64,6 +64,9 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-ares');
           classes.push('board-space-tile--lava_flows_ares');
         }
+      } else if (type === TileType.SOLAR_FARM) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--solar_farm');
       }
 
       return generateClassString(classes);

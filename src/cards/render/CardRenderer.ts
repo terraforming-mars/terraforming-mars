@@ -175,8 +175,14 @@ class Builder {
     return this;
   }
 
-  public titanium(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TITANIUM, amount));
+  public titanium(amount: number, bigAmountShowDigit: boolean = true): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount);
+    // override default showing a digit for items with amount > 5
+    // Done as an exception for 'Acquired Space Agency'
+    if (amount > 5 && bigAmountShowDigit === false) {
+      item.showDigit = false;
+    }
+    this._addRowItem(item);
     return this;
   }
 
@@ -238,13 +244,17 @@ class Builder {
     return this;
   }
 
-  public science(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+  public science(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE, amount));
     return this;
   }
 
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
+    return this;
+  }
+  public tradeFleet(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
     return this;
   }
 
@@ -284,7 +294,7 @@ class Builder {
     return this;
   }
 
-  public delegate(amount: number) {
+  public delegates(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
     return this;
   }
@@ -304,7 +314,6 @@ class Builder {
     return this;
   }
 
-
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
     return this;
@@ -314,6 +323,21 @@ class Builder {
     const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
     item.isPlayed = true;
     this._addRowItem(item);
+    return this;
+  }
+
+  public fighter(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+    return this;
+  }
+
+  public selfReplicatingRobots() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SELF_REPLICATING));
+    return this;
+  }
+
+  public multiplierWhite() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
     return this;
   }
 
@@ -378,6 +402,12 @@ class Builder {
     return this;
   }
 
+  public arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.arrow(size));
+    return this;
+  }
+
   public equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.equals(size));
@@ -415,6 +445,14 @@ class Builder {
 
   public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
     this._addTile(tile, hasSymbol, isAres);
+    return this;
+  }
+
+  /*
+   * A one off function to handle Project Requirements prelude card
+   */
+  public projectRequirements(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
     return this;
   }
 
@@ -521,7 +559,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {

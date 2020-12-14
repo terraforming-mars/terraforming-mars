@@ -7,6 +7,11 @@ import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class StratosphericBirds implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;
@@ -45,4 +50,21 @@ export class StratosphericBirds implements IActionCard, IProjectCard, IResourceC
       player.addResourceTo(this);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '249',
+      requirements: CardRequirements.builder((b) => b.venus(12)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.animals(1);
+          eb.description('Action: Add 1 animal to this card.');
+        }).br;
+        b.minus().floaters(1).br;
+        b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);
+      }),
+      description: {
+        text: 'Requires Venus 12% and that you spend 1 Floater from any card.',
+        align: 'left',
+      },
+      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
+    };
 }

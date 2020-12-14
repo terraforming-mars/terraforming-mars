@@ -9,7 +9,8 @@ describe('Insulation', function() {
   it('Should play', function() {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
 
     expect(card.canPlay(player)).is.false;
     player.addProduction(Resources.HEAT);

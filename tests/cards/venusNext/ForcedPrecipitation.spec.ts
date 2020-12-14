@@ -11,7 +11,8 @@ describe('ForcedPrecipitation', function() {
   beforeEach(function() {
     card = new ForcedPrecipitation();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

@@ -9,7 +9,8 @@ describe('SpaceStation', function() {
   it('Should play', function() {
     const card = new SpaceStation();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     const action = card.play();
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

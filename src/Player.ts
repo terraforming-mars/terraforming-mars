@@ -113,7 +113,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
     public removedFromPlayCards: Array<IProjectCard> = [];
-    private generationPlayed: Map<CardName, number> = new Map();
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
@@ -1091,7 +1090,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.playedCards.push(card);
       game.log('${0} played ${1}', (b) => b.player(this).card(card));
       this.lastCardPlayed = card;
-      this.generationPlayed.set(card.name, game.generation);
 
       // Playwrights hook for Conscription and Indentured Workers
       this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
@@ -1740,11 +1738,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       });
     }
 
+    public pass(game: Game) {
+      game.playerHasPassed(this);
+      this.lastCardPlayed = undefined;
+    }
+
     private passOption(game: Game): PlayerInput {
       return new SelectOption('Pass for this generation', 'Pass', () => {
-        game.playerHasPassed(this);
+        this.pass(game);
         game.log('${0} passed', (b) => b.player(this));
-        this.lastCardPlayed = undefined;
         return undefined;
       });
     }
@@ -2314,7 +2316,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
         removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
-        generationPlayed: Array.from(this.generationPlayed),
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2359,8 +2360,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Assign each attributes
       Object.assign(player, d);
       const cardFinder = new CardFinder();
-      // Rebuild generation played map
-      player.generationPlayed = new Map(d.generationPlayed);
 
       // action this generation set
       player.actionsThisGeneration = new Set(d.actionsThisGeneration);

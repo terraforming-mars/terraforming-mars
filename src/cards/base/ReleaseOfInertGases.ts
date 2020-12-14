@@ -6,6 +6,8 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ReleaseOfInertGases implements IProjectCard {
     public cost = 14;
@@ -25,5 +27,13 @@ export class ReleaseOfInertGases implements IProjectCard {
     public play(player: Player, game: Game) {
       player.increaseTerraformRatingSteps(2, game);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '036',
+      renderData: CardRenderer.builder((b) => {
+        b.tr(2);
+      }),
+      description: 'Raise your terraform rating 2 steps.',
     }
 }

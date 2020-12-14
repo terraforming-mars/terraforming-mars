@@ -2240,7 +2240,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
 
       // Turmoil Unity action
-      if (this.canAfford(4) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, 'up03')) {
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, 'up03')) {
         const unityPolicy = new UnityPolicy03();
 
         if (unityPolicy.canAct(this)) {
@@ -2255,7 +2255,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
 
       // Turmoil Reds action
-      if (this.canAfford(4) && PartyHooks.shouldApplyPolicy(game, PartyName.REDS, 'rp03')) {
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, 'rp03')) {
         const redsPolicy = new RedsPolicy03();
 
         if (redsPolicy.canAct(this, game)) {

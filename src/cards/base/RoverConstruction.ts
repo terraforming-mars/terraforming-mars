@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Board} from '../../Board';
 import {CardMetadata} from '../CardMetadata';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 

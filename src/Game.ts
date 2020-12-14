@@ -632,7 +632,7 @@ export class Game implements ISerializable<SerializedGame> {
       return this.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
     }
 
-    private marsIsTerraformed(): boolean {
+    public marsIsTerraformed(): boolean {
       const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
       const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
       const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
@@ -1220,7 +1220,13 @@ export class Game implements ISerializable<SerializedGame> {
       player.takeAction(this);
     }
 
-    public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
+    public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
+      // PoliticalAgendas Reds P3 hook
+      if (increments === -1) {
+        this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
+        return undefined;
+      }
+
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
@@ -1252,7 +1258,13 @@ export class Game implements ISerializable<SerializedGame> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
+    public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): SelectSpace | undefined {
+      // PoliticalAgendas Reds P3 hook
+      if (increments === -1) {
+        this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
+        return undefined;
+      }
+
       if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
         return undefined;
       }
@@ -1289,8 +1301,8 @@ export class Game implements ISerializable<SerializedGame> {
       return this.venusScaleLevel;
     }
 
-    public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
-      if (increments === -2) {
+    public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+      if (increments === -2 || increments === -1) {
         this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
         return undefined;
       }

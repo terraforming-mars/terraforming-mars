@@ -165,7 +165,11 @@ export const Turmoil = Vue.component('turmoil', {
         if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp02') {
           return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="money resource">-3</span></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp03') {
-          return `<div class="policy-top-margin"><div class="standard-projects"></div> : <div class="resource card red-outline"></div></div>`;
+          return `<span class="money resource">4</span>
+          <span class="red-arrow"></span>
+          <div class="tile oxygen-tile req-tile-small red-outline" style="margin: 10px -5px;"></div> / 
+          <div class="tile ocean-tile req-tile-small red-outline"></div> / 
+          <div class="tile temperature-tile req-tile-small red-outline"></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp04') {
           return `<div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
           <div class="tile ocean-tile req-tile-small"></div>

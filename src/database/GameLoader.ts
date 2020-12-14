@@ -31,11 +31,9 @@ export class GameLoader {
   // indicates if game is being loaded from database
   private loadingGame = false;
 
-  // games available in javascript memory
-  private readonly games = new Map<GameId, Game>();
-
-  // game ids which we know exist
-  private readonly gameIds = new Set<GameId>();
+  // games available in javascript memory, undefined represents game
+  // in database not yet loaded
+  private readonly games = new Map<GameId, Game | undefined>();
 
   // player ids which we know exist mapped to game id
   private readonly playerIds = new Map<PlayerId, GameId>();
@@ -57,21 +55,20 @@ export class GameLoader {
 
   public add(game: Game): void {
     this.games.set(game.id, game);
-    this.gameIds.add(game.id);
     for (const player of game.getPlayers()) {
       this.playerIds.set(player.id, game.id);
     }
   }
 
   public getLoadedGameIds(): Array<string> {
-    return Array.from(this.gameIds.keys());
+    return Array.from(this.games.keys());
   }
 
   public getByGameId(gameId: GameId, cb: LoadCallback): void {
     this.loadAllGames();
-    if (this.games.has(gameId)) {
+    if (this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
-    } else if (this.gameIds.has(gameId) || this.state !== State.READY) {
+    } else if (this.games.has(gameId) || this.state !== State.READY) {
       this.gameRequests.push([gameId, cb]);
       this.loadNextGame();
     } else {
@@ -82,7 +79,8 @@ export class GameLoader {
   public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
     this.loadAllGames();
     const gameId = this.playerIds.get(playerId);
-    if (gameId !== undefined && this.games.has(gameId)) {
+
+    if (gameId !== undefined && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (gameId !== undefined || this.state !== State.READY) {
       this.playerRequests.push([playerId, cb]);
@@ -93,9 +91,9 @@ export class GameLoader {
   }
 
   private loadGame(gameId: GameId, cb: LoadCallback): void {
-    if (this.games.has(gameId)) {
+    if (this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
-    } else if (this.gameIds.has(gameId) === false) {
+    } else if (this.games.has(gameId) === false) {
       console.warn(`GameLoader:game id not found ${gameId}`);
       cb(undefined);
     } else {
@@ -104,7 +102,6 @@ export class GameLoader {
       const gameToRebuild = new Game(gameId, [player, player2], player);
       Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
         if (err || (serializedGame === undefined)) {
-          console.log('this is', serializedGame);
           console.error('GameLoader:loadGame', err);
           cb(undefined);
           return;
@@ -130,7 +127,7 @@ export class GameLoader {
       cb(undefined);
       return;
     }
-    if (this.games.has(gameId)) {
+    if (this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
       return;
     }
@@ -150,7 +147,6 @@ export class GameLoader {
       const gameToLoad = this.gameRequests.shift();
       if (gameToLoad !== undefined) {
         this.loadingGame = true;
-        console.log('Calling to load the game');
         this.loadGame(gameToLoad[0], this.onGameLoaded(gameToLoad[1]));
         return;
       }
@@ -195,9 +191,11 @@ export class GameLoader {
               console.error(`unable to load game ${gameId}`, err);
             } else {
               console.log(`load game ${gameId}`);
-              this.gameIds.add(gameId);
-              for (const player of game.players) {
-                this.playerIds.set(player.id, gameId);
+              if (this.games.get(gameId) === undefined) {
+                this.games.set(gameId, undefined);
+                for (const player of game.players) {
+                  this.playerIds.set(player.id, gameId);
+                }
               }
             }
             if (loaded === allGames.length) {

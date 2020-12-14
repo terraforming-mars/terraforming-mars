@@ -20,9 +20,8 @@ import {Server} from './src/server/ServerModel';
 const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
-const gameLoader = new GameLoader();
 const route = new Route();
-const gameLogs = new GameLogs(gameLoader);
+const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new Map<string, Buffer>();
 const isProduction = process.env.NODE_ENV === 'production';
@@ -116,7 +115,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       const playerId: string = req.url.substring(
         '/player/input?id='.length,
       );
-      gameLoader.getGameByPlayerId(playerId, (game) => {
+      GameLoader.getInstance().getByPlayerId(playerId, (game) => {
         if (game === undefined) {
           route.notFound(req, res);
           return;
@@ -238,7 +237,7 @@ function apiGetGames(
     return;
   }
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(gameLoader.getLoadedGameIds()));
+  res.write(JSON.stringify(GameLoader.getInstance().getLoadedGameIds()));
   res.end();
 }
 
@@ -257,7 +256,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
       }
 
-      gameLoader.getGameByGameId(game_id, (game) => {
+      GameLoader.getInstance().getByGameId(game_id, (game) => {
         if (game === undefined) {
           // game was not found!
           return;
@@ -297,7 +296,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   const gameId: GameId = matches[1];
 
-  gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
+  GameLoader.getInstance().getByGameId(gameId, (game: Game | undefined) => {
     if (game === undefined) {
       console.warn('game is undefined');
       route.notFound(req, res);
@@ -318,7 +317,7 @@ function apiGetWaitingFor(
   const queryParams = querystring.parse(qs);
   const playerId = (queryParams as any)['id'];
   const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
-  gameLoader.getGameByPlayerId(playerId, (game) => {
+  GameLoader.getInstance().getByPlayerId(playerId, (game) => {
     if (game === undefined) {
       route.notFound(req, res);
       return;
@@ -362,7 +361,7 @@ function apiGetPlayer(
   if (playerId === undefined) {
     playerId = '';
   }
-  gameLoader.getGameByPlayerId(playerId as string, (game) => {
+  GameLoader.getInstance().getByPlayerId(playerId as string, (game) => {
     if (game === undefined) {
       route.notFound(req, res);
       return;
@@ -448,7 +447,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       };
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);
-      gameLoader.add(game);
+      GameLoader.getInstance().add(game);
       res.setHeader('Content-Type', 'application/json');
       res.write(getGameModelJSON(game));
       res.end();

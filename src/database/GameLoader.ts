@@ -46,6 +46,15 @@ export class GameLoader {
   // requests for player that are waiting to load
   private readonly playerRequests: Array<[PlayerId, LoadCallback]> = [];
 
+  private static instance?: GameLoader;
+
+  public static getInstance(): GameLoader {
+    if (GameLoader.instance === undefined) {
+      GameLoader.instance = new GameLoader();
+    }
+    return GameLoader.instance;
+  }
+
   public add(game: Game): void {
     this.games.set(game.id, game);
     this.gameIds.add(game.id);
@@ -58,7 +67,7 @@ export class GameLoader {
     return Array.from(this.gameIds.keys());
   }
 
-  public getGameByGameId(gameId: GameId, cb: LoadCallback): void {
+  public getByGameId(gameId: GameId, cb: LoadCallback): void {
     this.loadAllGames();
     if (this.games.has(gameId)) {
       cb(this.games.get(gameId));
@@ -70,7 +79,7 @@ export class GameLoader {
     }
   }
 
-  public getGameByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
+  public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
     this.loadAllGames();
     const gameId = this.playerIds.get(playerId);
     if (gameId !== undefined && this.games.has(gameId)) {
@@ -94,20 +103,22 @@ export class GameLoader {
       const player2 = new Player('test2', Color.RED, false, 0);
       const gameToRebuild = new Game(gameId, [player, player2], player);
       Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
-        if (err || serializedGame === undefined) {
+        if (err || (serializedGame === undefined)) {
+          console.log('this is', serializedGame);
           console.error('GameLoader:loadGame', err);
           cb(undefined);
           return;
         }
         try {
           gameToRebuild.loadFromJSON(serializedGame);
-          this.add(gameToRebuild);
-          console.log(`GameLoader loaded game ${gameId} into memory from database`);
-          cb(gameToRebuild);
         } catch (e) {
-          console.error('GameLoader:loadGame', err);
+          console.error('GameLoader:loadGame', e);
           cb(undefined);
+          return;
         }
+        this.add(gameToRebuild);
+        console.log(`GameLoader loaded game ${gameId} into memory from database`);
+        cb(gameToRebuild);
       });
     }
   }
@@ -120,7 +131,7 @@ export class GameLoader {
       return;
     }
     if (this.games.has(gameId)) {
-      cb(this.games.get(playerId));
+      cb(this.games.get(gameId));
       return;
     }
     this.loadGame(gameId, cb);
@@ -139,6 +150,7 @@ export class GameLoader {
       const gameToLoad = this.gameRequests.shift();
       if (gameToLoad !== undefined) {
         this.loadingGame = true;
+        console.log('Calling to load the game');
         this.loadGame(gameToLoad[0], this.onGameLoaded(gameToLoad[1]));
         return;
       }
@@ -179,7 +191,7 @@ export class GameLoader {
           gameId,
           (err, game) => {
             loaded++;
-            if (err || game === undefined) {
+            if (err || (game === undefined)) {
               console.error(`unable to load game ${gameId}`, err);
             } else {
               console.log(`load game ${gameId}`);

@@ -10,6 +10,7 @@ import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
 import {SerializedPlayer} from '../src/SerializedPlayer';
 import {Player} from '../src/Player';
+import {CardName} from '../src/CardName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -144,5 +145,14 @@ describe('Player', function() {
     player.pickedCorporationCard = new SaturnSystems();
     const json = player.serialize();
     expect(json.pickedCorporationCard).eq('Saturn Systems');
+  });
+  it('backward compatible deserialization for actionsThisGeneration', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const json = player.serialize();
+    json.actionsThisGeneration = ['Food Factory', 'Gene Repair'] as Array<CardName>;
+    const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
+    expect(s.actionsThisGeneration).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
+    const p = Player.deserialize(s);
+    expect(Array.from(p.getActionsThisGeneration())).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
   });
 });

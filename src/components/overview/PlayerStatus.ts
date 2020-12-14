@@ -55,9 +55,6 @@ export const PlayerStatus = Vue.component('player-status', {
     showLabel: function(): boolean {
       return this.actionLabel !== ActionLabel.NONE;
     },
-    showTimers: function(): boolean {
-      return this.player.timer.visible;
-    },
     getLabelClasses: function(): string {
       const classes: Array<string> = [];
       const baseClass = 'player-action-status';
@@ -124,7 +121,7 @@ export const PlayerStatus = Vue.component('player-status', {
                 </div> 
                 <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
-            <div class="player-status-timer" v-if="showTimers()"><player-timer :timer="player.timer"/></div>
+            <div class="player-status-timer" v-if="player.showTimers"><player-timer :timer="player.timer"/></div>
         </div>
     `,
 });

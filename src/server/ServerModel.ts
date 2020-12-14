@@ -107,6 +107,7 @@ export class Server {
       colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
@@ -392,6 +393,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(
         player.getActionsThisGeneration(),
       ),

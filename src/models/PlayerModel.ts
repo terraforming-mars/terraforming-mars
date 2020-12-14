@@ -69,6 +69,7 @@ export interface PlayerModel {
     victoryPointsBreakdown: VictoryPointsBreakdown;
     tags: Array<ITagCount>;
     showOtherPlayersVP: boolean;
+    showTimers: boolean;
     actionsThisGeneration: Array<string>;
     fleetSize: number;
     tradesThisTurn: number;

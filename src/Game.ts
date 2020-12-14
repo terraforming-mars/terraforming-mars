@@ -331,9 +331,6 @@ export class Game implements ISerializable<SerializedGame> {
           this.setStartingProductions(player);
           this.playerHasPickedCorporationCard(player, new BeginnerCorporation());
         }
-
-        // Setup timers
-        player.timer.visible = gameOptions.showTimers;
       }
 
       // Save initial game state

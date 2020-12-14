@@ -5,14 +5,12 @@ export class Timer implements ISerializable<SerializedTimer> {
   public sumElapsed: number = 0;
   public startedAt: number = 0;
   public running: number = 0;
-  public visible: boolean = false;
   public afterFirstAction: boolean = false;
 
   private constructor() { }
 
   public static newInstance(): Timer {
-    const timer = new Timer();
-    return timer;
+    return new Timer();
   }
 
   public serialize(): SerializedTimer {
@@ -20,7 +18,6 @@ export class Timer implements ISerializable<SerializedTimer> {
       sumElapsed: this.sumElapsed,
       startedAt: this.startedAt,
       running: this.running,
-      visible: this.visible,
       afterFirstAction: this.afterFirstAction,
     };
   }

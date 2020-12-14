@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import {Timer} from '../../Timer';
+import {SerializedTimer} from '../../SerializedTimer';
 
 export const PlayerTimer = Vue.component('player-timer', {
   props: {
     timer: {
-      type: Object as () => Timer,
+      type: Object as () => SerializedTimer,
     },
   },
   data() {
@@ -26,7 +27,7 @@ export const PlayerTimer = Vue.component('player-timer', {
   },
   methods: {
     updateTimer: function() {
-      this.timerText = Timer.deserialize(this.timer).toString();
+      this.timerText = Timer.toString(this.timer);
     },
   },
   template: `<div class="player-timer" > {{timerText}} </div>`,

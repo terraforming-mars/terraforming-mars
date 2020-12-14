@@ -50,8 +50,8 @@ export class Timer implements ISerializable<SerializedTimer> {
     }
   }
 
-  public toString() {
-    const elapsed = this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0);
+  public static toString(d: SerializedTimer) {
+    const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);
     return new Date(elapsed).toISOString().substr(11, 8);
   }
 }

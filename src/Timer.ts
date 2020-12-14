@@ -1,6 +1,5 @@
 import {ISerializable} from './ISerializable';
 import {SerializedTimer} from './SerializedTimer';
-import assert = require('assert');
 
 export class Timer implements ISerializable<SerializedTimer> {
   public sumElapsed: number = 0;
@@ -30,13 +29,11 @@ export class Timer implements ISerializable<SerializedTimer> {
   }
 
   public start() {
-    assert(!this.running);
     this.running = true;
     this.startedAt = Date.now();
   }
 
   public stop() {
-    assert(this.running);
     this.running = false;
     if (!this.afterFirstAction) {
       this.afterFirstAction = true;

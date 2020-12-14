@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -6,6 +5,9 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class QuantumExtractor implements IProjectCard {
     public cost = 13;
@@ -24,5 +26,17 @@ export class QuantumExtractor implements IProjectCard {
     public play(player: Player) {
       player.addProduction(Resources.ENERGY, 4);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '079',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.space().played.startEffect.megacredits(-2);
+          eb.description('Effect: When you play a Space card, you pay 2 MC less for it.');
+        }).br;
+        b.productionBox((pb) => pb.energy(4));
+      }),
+      description: 'Requires 4 science tags. Increase your energy production 4 steps.',
     }
 }

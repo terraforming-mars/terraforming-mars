@@ -8,6 +8,8 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RadChemFactory implements IProjectCard {
     public cost = 8;
@@ -29,5 +31,14 @@ export class RadChemFactory implements IProjectCard {
       player.addProduction(Resources.ENERGY, -1);
       player.increaseTerraformRatingSteps(2, game);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '205',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.minus().energy(1)).br;
+        b.tr(2);
+      }),
+      description: 'Decrease your Energy production 1 step. Raise your TR 2 steps.',
     }
 }

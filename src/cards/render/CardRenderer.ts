@@ -347,11 +347,15 @@ class Builder {
     return this;
   }
 
-  public emptyTile(type: 'normal' | 'golden' = 'normal') {
+  public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
     if (type === 'normal') {
-      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+      const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
+      normal.size = size;
+      this._addRowItem(normal);
     } else if (type === 'golden') {
-      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1));
+      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1);
+      golden.size = size;
+      this._addRowItem(golden);
     }
     return this;
   }

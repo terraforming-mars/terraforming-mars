@@ -332,8 +332,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       // Save initial game state
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-      this.lastSaveId = 1;
+      this.save();
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -347,6 +346,11 @@ export class Game implements ISerializable<SerializedGame> {
         this.runDraftRound(true);
         return;
       }
+    }
+
+    public save(): void {
+      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
+      this.lastSaveId++;
     }
 
     public toJSON(): string {
@@ -692,7 +696,7 @@ export class Game implements ISerializable<SerializedGame> {
     private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
       player.pickedCorporationCard = corporationCard;
       // if all players picked corporationCard
-      if (this.players.filter((aplayer) => aplayer.pickedCorporationCard === undefined).length === 0 ) {
+      if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
         for (const somePlayer of this.getPlayers()) {
           this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
         }
@@ -838,6 +842,7 @@ export class Game implements ISerializable<SerializedGame> {
     private gotoResearchPhase(): void {
       this.phase = Phase.RESEARCH;
       this.researchedPlayers.clear();
+      this.save();
       this.players.forEach((player) => {
         player.runResearchPhase(this, this.gameOptions.draftVariant);
       });
@@ -847,6 +852,7 @@ export class Game implements ISerializable<SerializedGame> {
       this.phase = Phase.DRAFTING;
       this.draftedPlayers.clear();
       this.draftRound = 1;
+      this.save();
       this.runDraftRound();
     }
 
@@ -985,79 +991,78 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
-    private isLastActiveRoundOfDraft(initialDraft: boolean, preludeDraft: boolean = false): boolean {
-      if (initialDraft && !preludeDraft && this.draftRound === 4) return true;
-
-      return (!initialDraft || preludeDraft) && this.draftRound === 3;
-    }
-
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
       this.draftedPlayers.add(player.id);
       this.unDraftedCards.set(player.id, cards);
 
       player.needsToDraft = false;
-      if (!this.allPlayersHaveFinishedDraft()) {
+      if (this.allPlayersHaveFinishedDraft() === false) {
         return;
       }
 
-      if ( ! this.isLastActiveRoundOfDraft(initialDraft, this.initialDraftIteration === 3)) {
+      if (cards.length > 1) {
         this.draftRound++;
+        this.save();
         this.runDraftRound(initialDraft);
-      } else {
-        // Push last card for each player
-        this.players.forEach((player) => {
-          const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-          if (lastCards !== undefined) {
-            player.draftedCards.push(...lastCards);
-          }
-          player.needsToDraft = undefined;
+        return;
+      }
 
-          if (initialDraft && this.initialDraftIteration === 2) {
+      // Push last card for each player
+      this.players.forEach((player) => {
+        const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+        if (lastCards !== undefined) {
+          player.draftedCards.push(...lastCards);
+        }
+        player.needsToDraft = undefined;
+
+        if (initialDraft) {
+          if (this.initialDraftIteration === 2) {
+            // After the second pack of 5 cards
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
-          }
-
-          if (initialDraft && this.initialDraftIteration === 2 && !this.gameOptions.preludeExtension) {
-            this.gameOptions.initialDraftVariant = false;
-            player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          }
-
-          if (initialDraft && this.initialDraftIteration === 3) {
+            if (this.gameOptions.preludeExtension === false) {
+              this.gameOptions.initialDraftVariant = false;
+              this.save();
+              player.setWaitingFor(this.pickCorporationCard(player), () => {});
+            }
+          } else if (this.initialDraftIteration === 3) {
+            // After the preludes draft
             player.dealtPreludeCards = player.draftedCards;
             player.draftedCards = [];
             this.gameOptions.initialDraftVariant = false;
+            this.save();
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
-        });
-
-        if (initialDraft && this.initialDraftIteration === 1) {
-          this.initialDraftIteration++;
-          this.draftRound = 1;
-          this.runDraftRound(true);
-          return;
         }
+      });
 
-        if (initialDraft && this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
-          this.initialDraftIteration++;
-          this.draftRound = 1;
-          this.runDraftRound(true, true);
-          return;
-        }
+      if (!initialDraft) {
+        this.gotoResearchPhase();
+        return;
+      }
 
-
-        if ( ! initialDraft) {
-          this.gotoResearchPhase();
-        }
+      if (this.initialDraftIteration === 1) {
+        this.initialDraftIteration++;
+        this.draftRound = 1;
+        this.save();
+        this.runDraftRound(true);
+      } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
+        this.initialDraftIteration++;
+        this.draftRound = 1;
+        this.save();
+        this.runDraftRound(true, true);
       }
     }
 
     private getDraftCardsFrom(player: Player): PlayerId {
-      let nextPlayer = this.getPreviousPlayer(this.players, player);
-      if (this.generation%2 === 1) {
-        nextPlayer = this.getNextPlayer(this.players, player);
-      }
+      let nextPlayer: Player | undefined;
+
       // Change initial draft direction on second iteration
-      if (this.initialDraftIteration === 2 && this.generation === 1) {
+      if (this.generation === 1 && this.initialDraftIteration === 2) {
+        nextPlayer = this.getPreviousPlayer(this.players, player);
+      } else if (this.generation % 2 === 1) {
+        nextPlayer = this.getNextPlayer(this.players, player);
+      } else {
         nextPlayer = this.getPreviousPlayer(this.players, player);
       }
 
@@ -1841,27 +1846,43 @@ export class Game implements ISerializable<SerializedGame> {
         this.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
       });
 
+      // Define who was the first player for this generation
+      const first = this.players.find((player) => player.id === d.first);
+      if (first === undefined) {
+        throw 'No Player found when rebuilding First Player';
+      }
+      this.first = first;
+
       // Define who is the active player and init the take action phase
       const active = this.players.find((player) => player.id === d.activePlayer);
-      if (active) {
-        // We have to switch active player because it's still the one that ended last turn
-        this.activePlayer = active.id;
-        this.getPlayerById(this.activePlayer).takeAction(this);
-      } else {
+      if (active === undefined) {
         throw 'No Player found when rebuilding Active Player';
       }
+      this.activePlayer = active.id;
 
-      // Define who was the first player for this generation
-      const first = this.players.find((player) => {
-        if (typeof d.first === 'string') {
-          return player.id === d.first;
+      // Still in Draft or Research of generation 1
+      if (this.generation === 1 && this.players.some((p) => p.corporationCard === undefined)) {
+        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
+        if (this.gameOptions.initialDraftVariant) {
+          if (this.initialDraftIteration === 3) {
+            this.runDraftRound(true, true);
+          } else {
+            this.runDraftRound(true);
+          }
+        } else {
+          for (const player of this.players) {
+            player.setWaitingFor(this.pickCorporationCard(player), () => {});
+          }
         }
-        return player.id === d.first.id;
-      });
-      if (first) {
-        this.first = first;
+      } else if (this.phase === Phase.DRAFTING) {
+        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
+        this.runDraftRound();
+      } else if (this.phase === Phase.RESEARCH) {
+        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
+        this.gotoResearchPhase();
       } else {
-        throw 'No Player found when rebuilding First Player';
+        // We should be in ACTION phase, let's prompt the active player for actions
+        this.getPlayerById(this.activePlayer).takeAction(this);
       }
 
       return o;

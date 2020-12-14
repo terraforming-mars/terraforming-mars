@@ -60,7 +60,7 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
 import {KelvinistsPolicy01, KelvinistsPolicy03} from './turmoil/parties/Kelvinists';
-import {ScientistsPolicy01, ScientistsPolicy03} from './turmoil/parties/Scientists';
+import {ScientistsPolicy01} from './turmoil/parties/Scientists';
 import {GreensPolicy03, GreensPolicy04} from './turmoil/parties/Greens';
 import {MarsFirstPolicy02, MarsFirstPolicy04} from './turmoil/parties/MarsFirst';
 import {UnityPolicy02, UnityPolicy03} from './turmoil/parties/Unity';
@@ -2137,21 +2137,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Turmoil Scientists action
       if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS)) {
         const scientistsPolicy = new ScientistsPolicy01();
-
-        if (scientistsPolicy.canAct(this)) {
-          action.options.push(
-            new SelectOption(
-              scientistsPolicy.description,
-              'Pay',
-              () => scientistsPolicy.action(this, game),
-            ),
-          );
-        }
-      }
-
-      // Turmoil Scientists action
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, 'sp03')) {
-        const scientistsPolicy = new ScientistsPolicy03();
 
         if (scientistsPolicy.canAct(this)) {
           action.options.push(

@@ -87,7 +87,7 @@ export class RedsPolicy02 implements Policy {
 
 export class RedsPolicy03 implements Policy {
   id = 'rp03';
-  description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any bonuses)';
+  description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
 
   canAct(player: Player, game: Game) {
     if (game.marsIsTerraformed()) return false;

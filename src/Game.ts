@@ -64,6 +64,7 @@ import {AgendaStyle} from './turmoil/PoliticalAgendas';
 import {RedsPolicy02} from './turmoil/parties/Reds';
 import {GreensPolicy02} from './turmoil/parties/Greens';
 import {KelvinistsPolicy04} from './turmoil/parties/Kelvinists';
+import {DrawCards} from './deferredActions/DrawCards';
 
 export type GameId = string;
 
@@ -1239,6 +1240,12 @@ export class Game implements ISerializable<SerializedGame> {
         if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
           player.addProduction(Resources.MEGACREDITS, -1 * steps);
         }
+
+        // PoliticalAgendas Scientists P3 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+          this.defer(new DrawCards(player, this, 1));
+        }
+
         player.increaseTerraformRatingSteps(steps, this);
       }
       if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1279,10 +1286,16 @@ export class Game implements ISerializable<SerializedGame> {
         if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
           player.increaseTerraformRating(this);
         }
+
         // PoliticalAgendas Reds P4 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
           player.addProduction(Resources.MEGACREDITS, -1 * steps);
         }
+        // PoliticalAgendas Scientists P3 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+          this.defer(new DrawCards(player, this, 1));
+        }
+
         player.increaseTerraformRatingSteps(steps, this);
       }
 
@@ -1330,6 +1343,11 @@ export class Game implements ISerializable<SerializedGame> {
         // PoliticalAgendas Reds P4 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
           player.addProduction(Resources.MEGACREDITS, -1 * steps);
+        }
+
+        // PoliticalAgendas Scientists P3 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+          this.defer(new DrawCards(player, this, 1));
         }
 
         player.increaseTerraformRatingSteps(steps, this);
@@ -1584,6 +1602,11 @@ export class Game implements ISerializable<SerializedGame> {
         if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
           player.addProduction(Resources.MEGACREDITS, -1);
         }
+        // PoliticalAgendas Scientists P3 hook
+        if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+          this.defer(new DrawCards(player, this, 1));
+        }
+
         player.increaseTerraformRating(this);
       }
       AresHandler.ifAres(this, (aresData) => {

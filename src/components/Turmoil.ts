@@ -107,9 +107,11 @@ export const Turmoil = Vue.component('turmoil', {
           <div class="tile temperature-tile req-tile-small"></div>
           : ± 2</span>`;
         } else if (staticAgendas !== undefined && staticAgendas.scientistsPolicy === 'sp03') {
-          return `<div class="policy-top-margin"><span class="money resource">4</span>
-            <span class="red-arrow"></span>
-            <div class="resource card red-outline"></div> : <div class="resource card card-with-border"></div></div>`;
+          return `<span>
+          <div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
+          <div class="tile ocean-tile req-tile-small"></div>
+          <div class="tile temperature-tile req-tile-small"></div>
+          : <div class="resource card card-with-border"></div></span>`;
         } else if (staticAgendas !== undefined && staticAgendas.scientistsPolicy === 'sp04') {
           return `<div class="scientists-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`;
         } else {

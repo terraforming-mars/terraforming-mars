@@ -8,8 +8,6 @@ import {Bonus} from '../Bonus';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
-import {IProjectCard} from '../../cards/IProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
 
 export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
@@ -82,34 +80,7 @@ export class ScientistsPolicy02 implements Policy {
 
 export class ScientistsPolicy03 implements Policy {
   id = 'sp03';
-  description: string = 'Pay 4 MC to discard a card and draw a card (Turmoil Scientists)';
-
-  canAct(player: Player) {
-    return player.canAfford(4) && player.turmoilPolicyActionUsed === false;
-  }
-
-  action(player: Player, game: Game) {
-    game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
-    game.defer(new SelectHowToPayDeferred(
-      player,
-      4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        return new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-          player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-          game.dealer.discard(foundCards[0]);
-          player.cardsInHand.push(game.dealer.dealCard());
-          player.turmoilPolicyActionUsed = true;
-          game.log('${0} discarded a card to draw a card', (b) => b.player(player));
-          return undefined;
-        });
-      },
-    ));
-
-    return undefined;
-  }
+  description: string = 'Whenever you raise a global parameter, draw a card';
 }
 
 export class ScientistsPolicy04 implements Policy {

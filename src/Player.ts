@@ -1741,11 +1741,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       });
     }
 
+    public pass(game: Game) {
+      game.playerHasPassed(this);
+      this.lastCardPlayed = undefined;
+    }
+
     private passOption(game: Game): PlayerInput {
       return new SelectOption('Pass for this generation', 'Pass', () => {
-        game.playerHasPassed(this);
+        this.pass(game);
         game.log('${0} passed', (b) => b.player(this));
-        this.lastCardPlayed = undefined;
         return undefined;
       });
     }

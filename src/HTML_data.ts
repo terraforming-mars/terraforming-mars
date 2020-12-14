@@ -3,18 +3,6 @@ import {CardName} from './CardName';
 /* eslint-disable no-irregular-whitespace */
 export const HTML_DATA: Map<string, string> =
   new Map([
-    [CardName.NOCTIS_CITY, ` 
-        <div class="content ">
-            <div class="production-box production-box-size1a ">
-                <div class="production-prefix minus"></div><div class="energy production "></div>
-                <div class="production-prefix plus"></div><div class="money production ">3</div>
-            </div>
-            <div class="tile city-tile " style="margin-left:20px "></div><br>
-            <div class="description ">
-                (Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.)
-            </div>
-        </div>
-`],
     [CardName.RESEARCH_OUTPOST, ` 
         <div class="content ">
             : <span class="money resource ">-1</span>
@@ -67,19 +55,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.NITROGEN_RICH_ASTEROID, ` 
-        <div class="content ">
-            <div class="production-box production-box-size3">
-      <div class="production plant" style="margin-left:37px"></div> OR <br> 3 <div class="tag-plant resource-tag"></div> : 4<div class="plant production"></div>
-    </div><br>
-    <div class="tile rating"></div>
-    <div class="tile rating"></div>
-    <div class="tile temperature-tile"></div><br>
-    <div class="description">
-      (Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.)
-    </div>
-    </div>
-`],
     [CardName.ROVER_CONSTRUCTION, ` 
     <div class="content">
       <div class="points points-big">1</div>
@@ -87,30 +62,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="money resource">2</div>
       <div class="description">
         (Effect: When any City tile is placed, gain 2 MC.)
-      </div>
-    </div>
-`],
-    [CardName.NATURAL_PRESERVE, ` 
-    <div class="content">
-      <div class="points points-big">1</div>
-      <div class="requirements requirements-max">max 4% O2</div>
-      <div class="production-box">
-        <div class="money production">1</div>
-      </div>
-      <div class="tile special-tile"><div class="special-tile-symbol special-tile--natural_preserve"></div></div>*
-      <div class="description">
-        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.)
-      </div>
-    </div>
-`],
-    [CardName.NUCLEAR_POWER, ` 
-    <div class="content">
-      <div class="production-box production-box-size3a">
-        <div class="production-prefix minus"></div><div class="money production">2</div><br>
-        <div class="production-prefix plus"></div><div class="energy production"></div><div class="energy production"></div><div class="energy production"></div>
-      </div>
-      <div class="description">
-        (Decrease your MC production 2 steps and increase your Energy production 3 steps.)
       </div>
     </div>
 `],
@@ -169,16 +120,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-    [CardName.NUCLEAR_ZONE, ` 
-      <div class="content">
-        <div class="points points-big">-2</div>
-        <div class="tile special-tile"><div class="special-tile-symbol special-tile--nuclear-zone"></div></div><br>
-          <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
-        <div class="description">
-          (Place this tile and raise temperature 2 steps.)
-        </div>
-      </div>
-`],
     [CardName.POWER_GRID, ` 
       <div class="content">
         <div class="production-box production-box-size2a">
@@ -189,30 +130,6 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.ORE_PROCESSOR, ` 
-        <div class="content ">
-            4 <span class="energy resource "></span> <span class="red-arrow "></span>
-            <div class="titanium resource "></div><div class="tile oxygen-tile"></div>
-            <div class="description ">
-                (Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.)
-            </div>
-        </div>
-`],
-    [CardName.OPEN_CITY, ` 
-        <div class="content ">
-            <div class="points points-big">1</div>
-            <div class="requirements">12% O2</div>
-            <div class="production-box production-box-size1a">
-                <div class="production-prefix minus"></div><div class="energy production "></div>
-                <div class="production-prefix plus"></div><div class="money production ">4</div>
-            </div>
-            <div class="tile city-tile"></div>
-            <div class="plant resource"></div><div class="plant resource"></div>
-            <div class="description">
-                Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.
-            </div>
-        </div>
-`],
     [CardName.POWER_PLANT, ` 
       <div class="content">
         <div class="production-box "><div class="energy production"></div>
@@ -221,31 +138,6 @@ export const HTML_DATA: Map<string, string> =
           (Increase your Energy production 1 step.)
         </div>
       </div>
-`],
-    [CardName.NITROPHILIC_MOSS, ` 
-      <div class="content">
-        <div class="requirements">3 Oceans</div>
-        <div class="production-box production-box-size2">
-          <div class="plant production"></div><div class="plant production"></div>
-        </div>
-      &nbsp;&nbsp; -  <div class="plant resource"></div><div class="plant resource"></div>
-        <div class="description">
-          (Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.)
-        </div>
-      </div>
-`],
-    [CardName.NITRITE_REDUCING_BACTERIA, ` 
-        <div class="content hover-hide-res">
-            <div class="red-arrow "></div> <div class="microbe resource "></div><br>
-            OR 3 <div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile rating "></div>
-            <div class="description ">
-              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.)
-            </div><br><br>
-            <div class="microbe resource "></div><div class="microbe resource "></div><div class="microbe resource "></div>
-            <div class="description ">
-              (Add 3 Microbes to this card.)
-            </div>
-        </div>
 `],
     [CardName.POWER_SUPPLY_CONSORTIUM, ` 
         <div class="content">
@@ -287,27 +179,6 @@ export const HTML_DATA: Map<string, string> =
               </div> <div class="tile greenery-tile" style="margin-left:30px;"></div>*
               <div class="description ">
                 (Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)
-              </div>
-          </div>
-`],
-    [CardName.NOCTIS_FARMING, ` 
-        <div class="content">
-          <div class="points points-big">1</div>
-          <div class="requirements">-20 C</div>
-          <div class="production-box">
-            <div class="money production">1</div>
-          </div> <div class="resource plant" style="margin-left:20px;"></div><div class="resource plant"></div>
-          <div class="description">
-            (Requires -20 C or warmer. Increase your MC production 1 step and gain 2 Plants.)
-          </div>
-        </div>
-`],
-    [CardName.OLYMPUS_CONFERENCE, ` 
-          <div class="content ">
-            <div class="points points-big">1</div>
-              <div class="resource-tag tag-science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
-              <div class="description ">
-                (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)
               </div>
           </div>
 `],
@@ -385,35 +256,6 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.NEUTRALIZER_FACTORY, ` 
-            <div class="content ">
-              <div class="requirements"> 10% Venus</div>
-              <div class="tile venus-tile">V</div>
-              <div class="description">
-                (Requires Venus 10%. Increase the Venus track 1 step)
-              </div>
-            </div>
-`],
-    [CardName.OMNICOURT, ` 
-            <div class="content ">
-              <div class="requirements">Venus Earth Jovian</div>
-              <div class="tile rating"></div>  <div class="tile rating"></div>
-              <div class="description">
-                (Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.)
-              </div>
-            </div>
-`],
-    [CardName.ORBITAL_REFLECTORS, ` 
-            <div class="content ">
-              <div class="tile venus-tile">V</div>  <div class="tile venus-tile">V</div><br>
-              <div class="production-box production-box-size2">
-                  <div class="heat production"></div><div class="heat production"></div>
-              </div>
-              <div class="description">
-                (Raise Venus 2 steps. Increase your heat production 2 steps)
-              </div>
-            </div>
-`],
     [CardName.ROTATOR_IMPACTS, ` 
             <div class="content hover-hide-res">
                 <div class="requirements requirements-max">max 14% Venus</div>
@@ -442,17 +284,6 @@ export const HTML_DATA: Map<string, string> =
     [CardName.RESEARCH_COORDINATION, ` 
               <div class="content ">
                 After being played, when you perform an action, the wild tag counts as any tag of your choice.
-              </div>
-`],
-    [CardName.NITROGEN_FROM_TITAN, ` 
-              <div class="content ">
-                <div class="points points-big ">1</div>
-                  <div class="tile rating"></div><div class="tile rating"></div>
-                  <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                  <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                  <div class="description ">
-                      (Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.)
-                  </div>
               </div>
 `],
     [CardName.PIONEER_SETTLEMENT, ` 
@@ -1602,19 +1433,6 @@ export const HTML_DATA: Map<string, string> =
         USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION
     </div>
 `],
-    [CardName.ORBITAL_CLEANUP, ` 
-    <div class="content">
-        <div class="points points-big">2</div>
-        <span class="red-arrow"></span> <div class="money resource">1</div> / <div class="resource-tag tag-science"></div>
-        <div class="description " style="margin-bottom:10px;">
-            (Action: Gain 1 MC per Science tag you have.)
-        </div>
-        <div class="production-box"><div class="money production ">-2</div></div>
-        <div class="description">
-            (Decrease your MC production 2 steps.)
-        </div>
-    </div>
-`],
     [CardName.PARLIAMENT_HALL, ` 
   <div class="content ">
     <div class="points points-big">1</div>
@@ -1790,75 +1608,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="description">
         (You start with 120 MC. Lower your TR 7 steps.)
       </div>
-`],
-    [CardName.OCEAN_CITY, `
-    <div class="card-number">A09</div>
-    <div class="content ">
-        <div class="requirements ">6 Oceans</div>
-        <div class="ares-tile board-space-tile--ocean_city"></div>
-        
-        <div class="production-box production-box-size2 ">
-            <div class="production-prefix minus"></div><div class="energy production "></div><br>
-            <div class="production-prefix plus"></div><div class="money production ">3</div>
-        </div>
-
-        <div class="description " style="text-align:left;">
-          (Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)
-     </div>
-    </div>
-`],
-    [CardName.OCEAN_FARM, `
-    <div class="card-number">A10</div>
-    <div class="content ">
-        <div class="ares-tile board-space-tile--ocean_farm"></div>
-        <div class="requirements ">4 Oceans</div>
-        <div class="production-box production-box-size2 ">
-            <div class="production-prefix plus"></div><div class="heat production "></div>
-            <div class="production-prefix plus"></div><div class="plant production "></div>
-        </div>
-        <div class="description " style="text-align:left;">
-            (Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile.  The tile grants an <b>adjacency bonus</b> of 1 plant.)
-        </div>
-    </div>
-`],
-    [CardName.OCEAN_SANCTUARY, `
-    <div class="card-number">A13</div>
-    <div class="content ">
-        <div class="points big">1/<div class="resource animal"></div></div>
-        <div class="requirements ">5 Oceans</div>
-        <div class="ares-tile board-space-tile--ocean_sanctuary"></div>
-        <div class="resource animal "></div>
-        <div class="description " style="text-align:left;">
-            (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an <b>adjacency bonus</b> of 1 animal.
-            <br/>
-            Add 1 animal to this card. 1 VP per animal on this card.)
-        </div>
-    </div>
-`],
-    [CardName.NATURAL_PRESERVE_ARES, `
-    <div class="card-number">A21</div>
-    <div class="content">
-      <div class="points points-big">1</div>
-      <div class="requirements requirements-max">max 4% O2</div>
-      <div class="production-box">
-        <div class="money production">1</div>
-      </div>
-      <div class="ares-tile board-space-tile--natural_preserve_ares"></div>
-      <div class="description">
-        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
-      </div>
-    </div>
-`],
-    [CardName.NUCLEAR_ZONE_ARES, `
-    <div class="card-number">A22</div>
-    <div class="content">
-      <div class="points points-big">-2</div>
-      <div class="ares-tile board-space-tile--nuclear_zone_ares"></div>
-      <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
-      <div class="description">
-        (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it adjacent to the Nuclear Zone.)
-      </div>
-    </div>
 `],
     [CardName.RESTRICTED_AREA_ARES, `
     <div class="card-number">A23</div>

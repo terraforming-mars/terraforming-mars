@@ -258,7 +258,8 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       GameLoader.getInstance().getByGameId(game_id, (game) => {
         if (game === undefined) {
-          // game was not found!
+          console.warn(`unable to find ${game_id} in database`);
+          route.notFound(req, res);
           return;
         }
         res.setHeader('Content-Type', 'application/json');

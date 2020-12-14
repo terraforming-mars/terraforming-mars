@@ -8,9 +8,9 @@ describe('DawnCity', function() {
   it('Should play', function() {
     const card = new DawnCity();
     const player = TestPlayers.BLUE.newPlayer();
-
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = new Game('foobar', [player, player], player, gameOptions);
+    const game = new Game('foobar', [player, redPlayer], player, gameOptions);
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player)).is.not.true;
 

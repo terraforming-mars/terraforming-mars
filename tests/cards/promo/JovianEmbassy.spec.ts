@@ -7,7 +7,9 @@ describe('JovianEmbassy', function() {
   it('Should play', function() {
     const card = new JovianEmbassy();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+
+    const game = new Game('foobar', [player, redPlayer], player);
 
     card.play(player, game);
     expect(player.getTerraformRating()).to.eq(21);

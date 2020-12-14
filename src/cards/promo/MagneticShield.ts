@@ -7,6 +7,9 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MagneticShield implements IProjectCard {
     public name = CardName.MAGNETIC_SHIELD;
@@ -26,5 +29,12 @@ export class MagneticShield implements IProjectCard {
     public play(player: Player, game: Game) {
       player.increaseTerraformRatingSteps(4, game);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X20',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
+      renderData: CardRenderer.builder((b) => b.tr(4).digit),
+      description: 'Requires 2 power tags. Raise your TR 4 steps.',
     }
 }

@@ -175,8 +175,14 @@ class Builder {
     return this;
   }
 
-  public titanium(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TITANIUM, amount));
+  public titanium(amount: number, bigAmountShowDigit: boolean = true): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount);
+    // override default showing a digit for items with amount > 5
+    // Done as an exception for 'Acquired Space Agency'
+    if (amount > 5 && bigAmountShowDigit === false) {
+      item.showDigit = false;
+    }
+    this._addRowItem(item);
     return this;
   }
 
@@ -223,8 +229,13 @@ class Builder {
     return this;
   }
 
-  public earth(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH));
+  public earth(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH, amount));
+    return this;
+  }
+
+  public building(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.BUILDING, amount));
     return this;
   }
 
@@ -233,13 +244,17 @@ class Builder {
     return this;
   }
 
-  public science(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE));
+  public science(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE, amount));
     return this;
   }
 
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
+    return this;
+  }
+  public tradeFleet(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
     return this;
   }
 
@@ -279,8 +294,18 @@ class Builder {
     return this;
   }
 
-  public delegate(amount: number) {
+  public delegates(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
+    return this;
+  }
+
+  public partyLeaders(amount: number = -1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount));
+    return this;
+  }
+
+  public chairman() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CHAIRMAN));
     return this;
   }
 
@@ -288,7 +313,6 @@ class Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
     return this;
   }
-
 
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
@@ -302,14 +326,33 @@ class Builder {
     return this;
   }
 
+  public fighter(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+    return this;
+  }
+
+  public selfReplicatingRobots() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SELF_REPLICATING));
+    return this;
+  }
+
+  public multiplierWhite() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
+    return this;
+  }
+
   public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
     return this;
   }
 
-  public emptyTile() {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+  public emptyTile(type: 'normal' | 'golden' = 'normal') {
+    if (type === 'normal') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+    } else if (type === 'golden') {
+      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1));
+    }
     return this;
   }
 
@@ -359,6 +402,12 @@ class Builder {
     return this;
   }
 
+  public arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.arrow(size));
+    return this;
+  }
+
   public equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.equals(size));
@@ -396,6 +445,14 @@ class Builder {
 
   public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
     this._addTile(tile, hasSymbol, isAres);
+    return this;
+  }
+
+  /*
+   * A one off function to handle Project Requirements prelude card
+   */
+  public projectRequirements(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
     return this;
   }
 
@@ -502,7 +559,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {

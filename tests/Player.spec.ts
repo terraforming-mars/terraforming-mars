@@ -1,4 +1,3 @@
-
 import {expect} from 'chai';
 import {LunarBeam} from '../src/cards/base/LunarBeam';
 import {Game} from '../src/Game';
@@ -9,6 +8,8 @@ import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
+import {SerializedPlayer} from '../src/SerializedPlayer';
+import {Player} from '../src/Player';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -43,10 +44,12 @@ describe('Player', function() {
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+
     const game = new Game('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, new Game('foobar', [player, player], player));
+    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;
@@ -64,9 +67,11 @@ describe('Player', function() {
   it('Should run select amount for Insulation', function() {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+
     player.addProduction(Resources.HEAT, 2);
-    const game = new Game('foobar', [player], player);
-    const action = card.play(player, new Game('foobar', [player, player], player));
+    const game = new Game('foobar', [player, redPlayer], player);
+    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);
@@ -124,5 +129,20 @@ describe('Player', function() {
     serializedKeys.sort();
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);
+  });
+  it('backward compatible deserialization for pickedCorporationCard', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const json = player.serialize();
+    json.pickedCorporationCard = new SaturnSystems();
+    const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
+    expect(s.pickedCorporationCard).to.deep.eq({'name': 'Saturn Systems', 'tags': ['jovian'], 'startingMegaCredits': 42, 'cardType': 'brown'});
+    const p = Player.deserialize(s);
+    expect(p.pickedCorporationCard?.name).eq('Saturn Systems');
+  });
+  it('forward serialization for pickedCorporationCard', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    player.pickedCorporationCard = new SaturnSystems();
+    const json = player.serialize();
+    expect(json.pickedCorporationCard).eq('Saturn Systems');
   });
 });

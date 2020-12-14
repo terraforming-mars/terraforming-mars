@@ -11,7 +11,8 @@ describe('AirScrappingExpedition', function() {
     const card = new AirScrappingExpedition();
     const corp = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
 
 

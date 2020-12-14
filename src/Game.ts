@@ -23,7 +23,6 @@ import {HellasBoard} from './HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
-import {IParty} from './turmoil/parties/IParty';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITile} from './ITile';
@@ -61,6 +60,8 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 
+export type GameId = string;
+
 export interface Score {
   corporation: String;
   playerScore: number;
@@ -68,7 +69,7 @@ export interface Score {
 
 export interface GameOptions {
   boardName: BoardName;
-  clonedGamedId: string | undefined;
+  clonedGamedId: GameId | undefined;
 
   // Configuration
   undoOption: boolean;
@@ -182,11 +183,24 @@ export class Game implements ISerializable<SerializedGame> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
-      public id: string,
+      public id: GameId,
       private players: Array<Player>,
       private first: Player,
-      // ... creates a shallow copy.
       public gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}) {
+      {
+        const _playerIds = players.map((p) => p.id);
+        const _colors = players.map((p) => p.color);
+        if (_playerIds.includes(first.id) === false) {
+          throw new Error('Cannot find first player ' + first.id + ' in ' + _playerIds);
+        }
+        if (new Set(_playerIds).size !== players.length) {
+          throw new Error('Duplicate player found: ' + _playerIds);
+        }
+        if (new Set(_colors).size !== players.length) {
+          throw new Error('Duplicate color found: ' + _colors);
+        }
+      }
+
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
@@ -319,6 +333,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
+      this.lastSaveId = 1;
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -492,7 +507,7 @@ export class Game implements ISerializable<SerializedGame> {
       );
     }
 
-    private cloneGame(gameId: string, game: Game): void {
+    private cloneGame(gameId: GameId, game: Game): void {
       const player = new Player('test', Color.BLUE, false, 0);
       const player2 = new Player('test2', Color.RED, false, 0);
       const gameToRebuild = new Game(gameId, [player, player2], player);
@@ -535,17 +550,17 @@ export class Game implements ISerializable<SerializedGame> {
         // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
         if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
           game.turmoil.lobby.clear();
-          game.turmoil.delegate_reserve = [];
+          game.turmoil.delegateReserve = [];
           game.getPlayers().forEach((player) => {
             if (game.turmoil !== undefined) {
               game.turmoil.lobby.add(player.id);
               for (let i = 0; i < 6; i++) {
-                game.turmoil.delegate_reserve.push(player.id);
+                game.turmoil.delegateReserve.push(player.id);
               }
             }
           });
           for (let i = 0; i < 13; i++) {
-            game.turmoil.delegate_reserve.push('NEUTRAL');
+            game.turmoil.delegateReserve.push('NEUTRAL');
           }
         }
 
@@ -1195,11 +1210,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
 
-      // Save the game state after changing the current player
-      // Increment the save id
-      this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-
       player.takeAction(this);
     }
 
@@ -1790,36 +1800,6 @@ export class Game implements ISerializable<SerializedGame> {
       // Reload turmoil elements if needed
       if (d.turmoil && this.gameOptions.turmoilExtension) {
         this.turmoil = Turmoil.deserialize(d.turmoil);
-
-        // Rebuild lobby
-        this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
-
-        // Rebuild parties
-        d.turmoil.parties.forEach((element: IParty) => {
-          const party = this.turmoil?.getPartyByName(element.name);
-          if (element.partyLeader) {
-            if (element.partyLeader === 'NEUTRAL') {
-              party!.partyLeader = 'NEUTRAL';
-            } else {
-              const partyLeaderId = element.partyLeader;
-              const player = this.players.find((player) => player.id === partyLeaderId);
-              party!.partyLeader = player!.id;
-            }
-          }
-
-          // Rebuild parties delegates
-          party!.delegates = [];
-          element.delegates.forEach((element: PlayerId | 'NEUTRAL') => {
-            if (element === 'NEUTRAL') {
-              party!.delegates.push('NEUTRAL');
-            } else {
-              const player = this.players.find((player) => player.id === element);
-              if (player) {
-                party!.delegates.push(player.id);
-              }
-            }
-          });
-        });
       }
 
       // Rebuild claimed milestones

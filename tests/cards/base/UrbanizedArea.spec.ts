@@ -14,7 +14,8 @@ describe('UrbanizedArea', function() {
   beforeEach(function() {
     card = new UrbanizedArea();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
 
     const tharsisTholus = game.getSpace(SpaceName.THARSIS_THOLUS);
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);

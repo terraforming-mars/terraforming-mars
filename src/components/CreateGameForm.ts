@@ -12,6 +12,7 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
+import {GameId} from '../Game';
 
 export interface CreateGameModel {
     allOfficialExpansions: boolean;
@@ -351,7 +352,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
-      let clonedGamedId: undefined | string = undefined;
+      let clonedGamedId: undefined | GameId = undefined;
 
       if (customColoniesList.length > 0) {
         const playersCount = players.length;

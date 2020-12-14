@@ -7,6 +7,8 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost = 6;
@@ -24,5 +26,14 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     }
     public play() {
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '202',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(10).startAction.productionBox((pb)=>pb.heat(2));
+          eb.description('Action: Spend 10MC to increase your heat production 2 steps.');
+        });
+      }),
     }
 }

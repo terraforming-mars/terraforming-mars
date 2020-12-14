@@ -15,7 +15,8 @@ describe('OceanCity', function() {
   beforeEach(function() {
     card = new OceanCity();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can play', function() {

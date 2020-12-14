@@ -8,10 +8,11 @@ describe('GameLoader', function() {
   let expectedGameIds: Array<string> = [];
   const originalGenerateId = (Player as any).prototype.generateId;
   const originalGetInstance = (Database as any).getInstance;
+  let playerIdIndex = 0;
 
   before(function() {
     (Player as any).prototype.generateId = function() {
-      return 'bar';
+      return 'bar-' + (playerIdIndex++);
     };
     (Database as any).getInstance = function() {
       return {
@@ -62,7 +63,7 @@ describe('GameLoader', function() {
 
   it('loads player after loaded from database', function() {
     const expectedGameId = 'foo';
-    const expectedPlayerId = 'bar';
+    const expectedPlayerId = 'bar-' + playerIdIndex;
     expectedGameIds = [expectedGameId];
     const loader = new GameLoader();
     let actual: Game | undefined;
@@ -77,7 +78,7 @@ describe('GameLoader', function() {
 
   it('loads player already loaded from database', function() {
     const expectedGameId = 'foo';
-    const expectedPlayerId = 'bar';
+    const expectedPlayerId = 'bar-' + playerIdIndex;
     expectedGameIds = [expectedGameId];
     const loader = new GameLoader();
     loader.start();

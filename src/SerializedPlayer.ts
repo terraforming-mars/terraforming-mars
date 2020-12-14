@@ -1,11 +1,11 @@
-import {IProjectCard} from './cards/IProjectCard';
-import {CorporationCard} from './cards/corporation/CorporationCard';
 import {PlayerId} from './Player';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {CorporationCard} from './cards/corporation/CorporationCard';
 
+// TODO(kberg): remove reference to CorporationCard by 2021-01-15
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
@@ -13,17 +13,17 @@ export interface SerializedPlayer {
     canUseHeatAsMegaCredits: boolean;
     cardCost: number;
     cardDiscount: number;
-    cardsInHand: Array<CardName> | Array<IProjectCard>;
+    cardsInHand: Array<CardName>;
     colonyTradeDiscount: number;
     colonyTradeOffset: number;
     colonyVictoryPoints: number;
     color: Color;
     corporationCard: SerializedCard | undefined;
     corporationInitialActionDone: boolean;
-    dealtCorporationCards: Array<CardName> | Array<CorporationCard>;
-    dealtPreludeCards: Array<CardName> | Array<IProjectCard>;
-    dealtProjectCards: Array<CardName> | Array<IProjectCard>;
-    draftedCards: Array<CardName> | Array<IProjectCard>;
+    dealtCorporationCards: Array<CardName>;
+    dealtPreludeCards: Array<CardName>;
+    dealtProjectCards: Array<CardName>;
+    draftedCards: Array<CardName>;
     energy: number;
     energyProduction: number;
     fleetSize: number;
@@ -33,7 +33,7 @@ export interface SerializedPlayer {
     heat: number;
     heatProduction: number;
     id: string;
-    lastCardPlayed?: CardName | IProjectCard;
+    lastCardPlayed?: CardName;
     megaCreditProduction: number;
     megaCredits: number;
     name: string;
@@ -45,8 +45,8 @@ export interface SerializedPlayer {
     plantsNeededForGreenery: number;
     playedCards: Array<SerializedCard>;
     powerPlantCost: number;
-    preludeCardsInHand: Array<CardName> | Array<IProjectCard>;
-    removedFromPlayCards: Array<CardName> | Array<IProjectCard>;
+    preludeCardsInHand: Array<CardName>;
+    removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;
     shouldTriggerCardEffect: boolean;
@@ -59,6 +59,7 @@ export interface SerializedPlayer {
     titaniumProduction: number;
     titaniumValue: number;
     tradesThisTurn: number;
+    usedUndo: boolean;
     turmoilScientistsActionUsed: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

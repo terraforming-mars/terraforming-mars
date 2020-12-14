@@ -12,7 +12,8 @@ describe('Dirigibles', function() {
   beforeEach(function() {
     card = new Dirigibles();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 

@@ -15,7 +15,8 @@ describe('HydrogenToVenus', function() {
   beforeEach(function() {
     card = new HydrogenToVenus();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play with multiple venus cards', function() {

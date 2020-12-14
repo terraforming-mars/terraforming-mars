@@ -7,6 +7,9 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SpinInducingAsteroid implements IProjectCard {
     public cost = 16;
@@ -28,4 +31,12 @@ export class SpinInducingAsteroid implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '246',
+      requirements: CardRequirements.builder((b) => b.venus(10).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.venus(2);
+      }),
+      description: 'Venus must be 10% or lower. Raise Venus 2 steps.',
+    };
 }

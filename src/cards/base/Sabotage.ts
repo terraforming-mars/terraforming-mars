@@ -6,6 +6,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectOption} from '../../inputs/SelectOption';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Sabotage implements IProjectCard {
     public cost = 1;
@@ -53,6 +56,16 @@ export class Sabotage implements IProjectCard {
 
       if (availableActions.options.length > 0) return availableActions;
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '121',
+      renderData: CardRenderer.builder((b) => {
+        b.minus().titanium(3).digit.any.nbsp.or(CardRenderItemSize.SMALL).nbsp;
+        b.minus().titanium(4).digit.any.br.or(CardRenderItemSize.SMALL).nbsp;
+        b.minus().megacredits(7).any;
+      }),
+      description: 'Remove up to 3 titanium from any player, or 4 steel, or 7 MC.',
     }
 }
 

@@ -76,9 +76,15 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+      } else if (type === CardRenderItemType.FIGHTER) {
+        classes.push('card-resource');
+        classes.push('card-resource-fighter');
       } else if (type === CardRenderItemType.DIVERSE_TAG) {
         classes.push('card-resource');
         classes.push('card-resource-diverse');
+      } else if (type === CardRenderItemType.SCIENCE) {
+        classes.push('card-resource');
+        classes.push('card-resource-science');
       } else if (type === CardRenderItemType.TRADE) {
         classes.push('card-resource-trade');
       } else if (type === CardRenderItemType.COLONIES) {
@@ -87,7 +93,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         if (this.item.size === CardRenderItemSize.SMALL) {
           classes.push('card-resource-colony-S');
         }
-      } else if (type === CardRenderItemType.TRADE_DISCOUNT) {
+      } else if (type === CardRenderItemType.TRADE_DISCOUNT || type === CardRenderItemType.MULTIPLIER_WHITE) {
         classes.push('card-resource');
         classes.push('card-resource-trade-discount');
       } else if (type === CardRenderItemType.TRADE_FLEET) {
@@ -116,6 +122,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.EMPTY_TILE) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--empty-tile');
+      } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
+        classes.push('card-tile-ares');
+        classes.push('board-space-tile--adjacency-tile');
       }
 
       // round tags
@@ -137,6 +146,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-venus');
         } else if (type === CardRenderItemType.EARTH) {
           classes.push('card-tag-earth');
+        } else if (type === CardRenderItemType.BUILDING) {
+          classes.push('card-tag-building');
         }
       }
 
@@ -144,6 +155,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.anyPlayer === true) {
         if (type === CardRenderItemType.DELEGATES) {
           classes.push('card-delegate-red');
+        } else if (type === CardRenderItemType.CHAIRMAN) {
+          classes.push('card-chairman-red');
         } else {
           classes.push('red-outline');
         }
@@ -186,7 +199,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           result += 'X';
         }
       }
-      if (this.item.secondaryTag !== undefined) {
+
+      if (this.item.secondaryTag !== undefined && this.item.secondaryTag !== 'oxygen') {
         const classes: string[] = ['card-icon'];
         classes.push(`tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';
@@ -194,9 +208,18 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';
       }
-      if (this.item.type === CardRenderItemType.NO_TAGS) {
+      if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
+      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
+        result += '<div class="card-project-requirements">';
+        result += '<div class="card-red-x">x</div>';
+        result += '<div class="card-requirements">Project Requirements</div>';
+        result += '</div>';
       }
+      if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
+        result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
+      }
+
       return result;
     },
   },

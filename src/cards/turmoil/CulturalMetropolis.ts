@@ -47,7 +47,7 @@ export class CulturalMetropolis implements IProjectCard {
         b.productionBox((pb) => {
           pb.minus().energy(1).br;
           pb.plus().megacredits(3);
-        }).city().delegate(2);
+        }).city().delegates(2);
       }),
     }
 }

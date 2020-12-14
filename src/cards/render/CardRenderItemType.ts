@@ -19,6 +19,7 @@ export enum CardRenderItemType {
   SPACE = 'space',
   EARTH = 'earth',
   JOVIAN = 'jovian',
+  BUILDING = 'building',
   COLONIES = 'colonies',
   SCIENCE = 'science',
   TRADE = 'trade',
@@ -30,6 +31,7 @@ export enum CardRenderItemType {
   INFLUENCE = 'influence',
   NO_TAGS ='no_tags',
   WILD = 'wild',
+  FIGHTER = 'fighter',
   DIVERSE_TAG = 'diverse_tag',
   CITY = 'city',
   GREENERY = 'greenery',
@@ -37,5 +39,8 @@ export enum CardRenderItemType {
   TEXT = 'text',
   NBSP = 'nbsp',
   EMPTY_TILE = 'empty_tile',
-  // more to come...
+  EMPTY_TILE_GOLDEN = 'empty_tile_golden',
+  SELF_REPLICATING = 'self_replicating',
+  MULTIPLIER_WHITE = 'multiplier_white',
+  PROJECT_REQUIREMENTS = 'project_requirements',
 }

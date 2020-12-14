@@ -9,7 +9,8 @@ describe('AerosportTournament', function() {
     const card = new AerosportTournament();
     const corp = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
     corp.action(player, game);
     corp.action(player, game);

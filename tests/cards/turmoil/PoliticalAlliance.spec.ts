@@ -12,9 +12,9 @@ describe('PoliticalAlliance', function() {
   beforeEach(function() {
     card = new PoliticalAlliance();
     player = TestPlayers.BLUE.newPlayer();
-
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
     turmoil = game.turmoil!;
   });
 

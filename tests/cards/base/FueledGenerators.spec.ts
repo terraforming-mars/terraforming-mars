@@ -7,6 +7,7 @@ describe('FueledGenerators', function() {
   it('Should play', function() {
     const card = new FueledGenerators();
     const player = TestPlayers.BLUE.newPlayer();
+
     player.addProduction(Resources.PLANTS);
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);

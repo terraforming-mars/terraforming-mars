@@ -11,7 +11,8 @@ describe('SubCrustMeasurements', function() {
   beforeEach(function() {
     card = new SubCrustMeasurements();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player, player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if not enough science tags', function() {

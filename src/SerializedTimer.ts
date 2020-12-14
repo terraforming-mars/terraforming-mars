@@ -3,4 +3,5 @@ export interface SerializedTimer {
   startedAt: number;
   running: boolean;
   afterFirstAction: boolean;
+  lastStoppedAt: number;
 }

@@ -255,7 +255,9 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       if (rollbackCount > 0) {
         Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
       }
-
+      // remove copy in javascript
+      GameLoader.getInstance().remove(game_id);
+      // pull new value from database
       GameLoader.getInstance().getByGameId(game_id, (game) => {
         if (game === undefined) {
           console.warn(`unable to find ${game_id} in database`);

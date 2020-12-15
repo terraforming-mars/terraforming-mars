@@ -108,6 +108,15 @@ describe('GameLoader', function() {
     Database.getInstance().getGames = workingGetGames;
   });
 
+  it('removes games from js memory', function() {
+    GameLoader.getInstance().remove(game.id);
+    expect(GameLoader.getInstance().has(game.id)).is.false;
+    GameLoader.getInstance().add(game);
+    expect(GameLoader.getInstance().has(game.id)).is.true;
+    GameLoader.getInstance().remove(game.id);
+    expect(GameLoader.getInstance().has(game.id)).is.false;
+  });
+
   it('gets no game when game goes missing from database', function() {
     const originalGetGame = Database.getInstance().getGame;
     GameLoader.getInstance().getByGameId('never', (game1) => {

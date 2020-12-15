@@ -60,6 +60,24 @@ export class GameLoader {
     }
   }
 
+  /**
+   * Determines if game is available in javascript
+   * memory
+   */
+  public has(gameId: GameId): boolean {
+    return this.games.get(gameId) !== undefined;
+  }
+
+  /**
+   * Removes game from javascript memory
+   * if it is of a known id.
+   */
+  public remove(gameId: GameId): void {
+    if (this.games.has(gameId)) {
+      this.games.set(gameId, undefined);
+    }
+  }
+
   public getLoadedGameIds(): Array<string> {
     return Array.from(this.games.keys());
   }

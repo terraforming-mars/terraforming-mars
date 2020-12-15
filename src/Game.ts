@@ -293,6 +293,7 @@ export class Game implements ISerializable<SerializedGame> {
       // handicaps.
       for (const player of this.getPlayers()) {
         player.increaseTerraformRatingSteps(player.handicap, this);
+        this.setStartingProductions(player);
 
         if (!player.beginner ||
         // Bypass beginner choice if any extension is choosen
@@ -309,7 +310,7 @@ export class Game implements ISerializable<SerializedGame> {
               throw new Error('No corporation card dealt for player');
             }
           }
-          if (!gameOptions.initialDraftVariant) {
+          if (gameOptions.initialDraftVariant === false) {
             for (let i = 0; i < 10; i++) {
               player.dealtProjectCards.push(this.dealer.dealCard());
             }
@@ -319,20 +320,10 @@ export class Game implements ISerializable<SerializedGame> {
               player.dealtPreludeCards.push(this.dealer.dealPreludeCard());
             }
           }
-
-          this.setStartingProductions(player);
-
-          if (!gameOptions.initialDraftVariant) {
-            player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          }
         } else {
-          this.setStartingProductions(player);
           this.playerHasPickedCorporationCard(player, new BeginnerCorporation());
         }
       }
-
-      // Save initial game state
-      this.save();
 
       // Print game_id if solo game
       if (players.length === 1) {
@@ -344,11 +335,20 @@ export class Game implements ISerializable<SerializedGame> {
       // Initial Draft
       if (gameOptions.initialDraftVariant) {
         this.runDraftRound(true);
-        return;
+      } else {
+        this.gotoInitialResearchPhase();
       }
     }
 
     public save(): void {
+      /*
+       * Because we save at the start of a player's takeAction, we need to
+       * save the game in the database before increasing lastSaveId so that
+       * reloading it doesn't create another new save on top of it, like this:
+       *
+       * increment -> save -> reload -> increment -> save
+       *
+       */
       Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
       this.lastSaveId++;
     }
@@ -582,14 +582,13 @@ export class Game implements ISerializable<SerializedGame> {
             player.addProduction(Resources.MEGACREDITS, -2);
             game.defer(new RemoveColonyFromGame(player, game));
           }
-          if (!game.gameOptions.initialDraftVariant) {
-            player.setWaitingFor(game.pickCorporationCard(player), () => {});
-          }
         });
+
         // Initial Draft
         if (game.gameOptions.initialDraftVariant) {
           game.runDraftRound(true);
-          return;
+        } else {
+          game.gotoInitialResearchPhase();
         }
       });
     }
@@ -824,6 +823,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
+      this.save();
       this.draftedPlayers.clear();
       this.players.forEach((player) => {
         player.needsToDraft = true;
@@ -839,6 +839,15 @@ export class Game implements ISerializable<SerializedGame> {
       });
     }
 
+    private gotoInitialResearchPhase(): void {
+      this.save();
+      for (const player of this.players) {
+        if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
+          player.setWaitingFor(this.pickCorporationCard(player), () => {});
+        }
+      }
+    }
+
     private gotoResearchPhase(): void {
       this.phase = Phase.RESEARCH;
       this.researchedPlayers.clear();
@@ -850,9 +859,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     private gotoDraftingPhase(): void {
       this.phase = Phase.DRAFTING;
-      this.draftedPlayers.clear();
       this.draftRound = 1;
-      this.save();
       this.runDraftRound();
     }
 
@@ -1000,9 +1007,9 @@ export class Game implements ISerializable<SerializedGame> {
         return;
       }
 
+      // If more than 1 card are to be passed to the next player, that means we're still drafting
       if (cards.length > 1) {
         this.draftRound++;
-        this.save();
         this.runDraftRound(initialDraft);
         return;
       }
@@ -1017,26 +1024,16 @@ export class Game implements ISerializable<SerializedGame> {
 
         if (initialDraft) {
           if (this.initialDraftIteration === 2) {
-            // After the second pack of 5 cards
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
-            if (this.gameOptions.preludeExtension === false) {
-              this.gameOptions.initialDraftVariant = false;
-              this.save();
-              player.setWaitingFor(this.pickCorporationCard(player), () => {});
-            }
           } else if (this.initialDraftIteration === 3) {
-            // After the preludes draft
             player.dealtPreludeCards = player.draftedCards;
             player.draftedCards = [];
-            this.gameOptions.initialDraftVariant = false;
-            this.save();
-            player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         }
       });
 
-      if (!initialDraft) {
+      if (initialDraft === false) {
         this.gotoResearchPhase();
         return;
       }
@@ -1044,13 +1041,14 @@ export class Game implements ISerializable<SerializedGame> {
       if (this.initialDraftIteration === 1) {
         this.initialDraftIteration++;
         this.draftRound = 1;
-        this.save();
         this.runDraftRound(true);
       } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
         this.initialDraftIteration++;
         this.draftRound = 1;
-        this.save();
         this.runDraftRound(true, true);
+      } else {
+        this.gameOptions.initialDraftVariant = false;
+        this.gotoInitialResearchPhase();
       }
     }
 
@@ -1862,7 +1860,6 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Still in Draft or Research of generation 1
       if (this.generation === 1 && this.players.some((p) => p.corporationCard === undefined)) {
-        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
         if (this.gameOptions.initialDraftVariant) {
           if (this.initialDraftIteration === 3) {
             this.runDraftRound(true, true);
@@ -1870,15 +1867,11 @@ export class Game implements ISerializable<SerializedGame> {
             this.runDraftRound(true);
           }
         } else {
-          for (const player of this.players) {
-            player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          }
+          this.gotoInitialResearchPhase();
         }
       } else if (this.phase === Phase.DRAFTING) {
-        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
         this.runDraftRound();
       } else if (this.phase === Phase.RESEARCH) {
-        this.lastSaveId++; // Needed because it's normally incremented after the save() happens
         this.gotoResearchPhase();
       } else {
         // We should be in ACTION phase, let's prompt the active player for actions

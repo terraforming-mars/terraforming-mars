@@ -63,6 +63,8 @@ export class GameLoader {
   /**
    * Determines if game is available in javascript
    * memory
+   * @param {GameId} gameId id to check
+   * @return {boolean} true iff game is available in memory
    */
   public has(gameId: GameId): boolean {
     return this.games.get(gameId) !== undefined;
@@ -71,6 +73,7 @@ export class GameLoader {
   /**
    * Removes game from javascript memory
    * if it is of a known id.
+   * @param {GameId} gameId id to remove
    */
   public remove(gameId: GameId): void {
     if (this.games.has(gameId)) {

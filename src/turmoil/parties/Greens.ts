@@ -58,7 +58,7 @@ export class GreensBonus02 implements Bonus {
 export class GreensPolicy01 implements Policy {
   isDefault = true;
   id = 'gp01';
-  description: string = 'Whenever you place a greenery tile, gain 4 MC';
+  description: string = 'When you place a greenery tile, gain 4 MC';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
     if (space.tile?.tileType === TileType.GREENERY && game.phase === Phase.ACTION) {
@@ -69,7 +69,7 @@ export class GreensPolicy01 implements Policy {
 
 export class GreensPolicy02 implements Policy {
   id = 'gp02';
-  description: string = 'Whenever you place a tile, gain 1 plant';
+  description: string = 'When you place a tile, gain 1 plant';
 
   onTilePlaced(player: Player) {
     player.setResource(Resources.PLANTS);
@@ -78,7 +78,7 @@ export class GreensPolicy02 implements Policy {
 
 export class GreensPolicy03 implements Policy {
   id = 'gp03';
-  description: string = 'Whenever you play an animal, plant or microbe tag, gain 2 MC';
+  description: string = 'When you play an animal, plant or microbe tag, gain 2 MC';
 
   onCardPlayed(player: Player, card: IProjectCard) {
     const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBES];
@@ -90,7 +90,7 @@ export class GreensPolicy03 implements Policy {
 
 export class GreensPolicy04 implements Policy {
   id = 'gp04';
-  description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to another card (Turmoil Greens)';
+  description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
 
   canAct(player: Player) {
     return player.canAfford(5) && player.turmoilPolicyActionUsed === false;

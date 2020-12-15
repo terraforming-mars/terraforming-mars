@@ -51,7 +51,7 @@ export class MarsFirstBonus02 implements Bonus {
 export class MarsFirstPolicy01 implements Policy {
   isDefault = true;
   id = 'mfp01';
-  description: string = 'Whenever you place a tile ON MARS, gain 1 steel';
+  description: string = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && game.phase === Phase.ACTION) {
@@ -62,7 +62,7 @@ export class MarsFirstPolicy01 implements Policy {
 
 export class MarsFirstPolicy02 implements Policy {
   id = 'mfp02';
-  description: string = 'After you play a Building card, gain 1 MC';
+  description: string = 'When you play a Building card, gain 1 MC';
 
   onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS);

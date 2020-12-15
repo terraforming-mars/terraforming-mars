@@ -67,12 +67,12 @@ export class RedsBonus02 implements Bonus {
 export class RedsPolicy01 implements Policy {
   id = 'rp01';
   isDefault = true;
-  description: string = 'Whenever you take an action that raises TR, you MUST pay 3 MC per step raised';
+  description: string = 'When you take an action that raises TR, you MUST pay 3 MC per step raised';
 }
 
 export class RedsPolicy02 implements Policy {
   id = 'rp02';
-  description: string = 'After you place a tile, pay 3 MC or as much as possible';
+  description: string = 'When you place a tile, pay 3 MC or as much as possible';
 
   onTilePlaced(player: Player, _space: ISpace, game: Game) {
     let amountPlayerHas: number = player.megaCredits;
@@ -177,5 +177,5 @@ export class RedsPolicy03 implements Policy {
 
 export class RedsPolicy04 implements Policy {
   id = 'rp04';
-  description: string = 'Whenever you raise a global parameter, decrease your MC production 1 step per step raised if possible';
+  description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
 }

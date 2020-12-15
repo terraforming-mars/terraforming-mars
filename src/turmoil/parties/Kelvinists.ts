@@ -70,7 +70,7 @@ export class KelvinistsPolicy01 implements Policy {
 
 export class KelvinistsPolicy02 implements Policy {
   id = 'kp02';
-  description: string = 'Whenever you raise temperature, gain 3 MC';
+  description: string = 'When you raise temperature, gain 3 MC per step raised';
 }
 
 export class KelvinistsPolicy03 implements Policy {
@@ -94,7 +94,7 @@ export class KelvinistsPolicy03 implements Policy {
 
 export class KelvinistsPolicy04 implements Policy {
   id = 'kp04';
-  description: string = 'Whenever you place a tile, gain 2 heat';
+  description: string = 'When you place a tile, gain 2 heat';
 
   onTilePlaced(player: Player) {
     player.setResource(Resources.HEAT, 2);

@@ -80,7 +80,7 @@ export class ScientistsPolicy02 implements Policy {
 
 export class ScientistsPolicy03 implements Policy {
   id = 'sp03';
-  description: string = 'Whenever you raise a global parameter, draw a card';
+  description: string = 'When you raise a global parameter, draw a card per step raised';
 }
 
 export class ScientistsPolicy04 implements Policy {

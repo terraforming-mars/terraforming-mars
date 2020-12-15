@@ -2382,10 +2382,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
         player.heat = d.heat;
         player.heatProduction = d.heatProduction;
-        player.lastCardPlayed = d.lastCardPlayed !== undefined ?
-          cardFinder.getProjectCardByName(d.lastCardPlayed) :
-          undefined;
-
         player.megaCreditProduction = d.megaCreditProduction;
         player.megaCredits = d.megaCredits;
         player.needsToDraft = d.needsToDraft;
@@ -2394,7 +2390,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.plants = d.plants;
         player.plantsNeededForGreenery = d.plantsNeededForGreenery;
         player.powerPlantCost = d.powerPlantCost;
-        player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
         player.removingPlayers = d.removingPlayers;
         player.scienceTagCount = d.scienceTagCount;
         player.shouldTriggerCardEffect = d.shouldTriggerCardEffect;
@@ -2411,7 +2406,13 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.victoryPointsBreakdown = d.victoryPointsBreakdown;
       }
 
-      // action this generation set
+      player.lastCardPlayed = d.lastCardPlayed !== undefined ?
+        cardFinder.getProjectCardByName(d.lastCardPlayed) :
+        undefined;
+
+      // Rebuild removed from play cards (Playwrights)
+      player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+
       player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {

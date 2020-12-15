@@ -112,7 +112,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     public preludeCardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
-    public removedFromPlayCards: Array<IProjectCard> = [];
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
@@ -143,6 +142,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     public plantsNeededForGreenery: number = 8;
     // Lawsuit
     public removingPlayers: Array<PlayerId> = [];
+    // For Playwrights corp.
+    // removedFromPlayCards is a bit of a misname: it's a temporary storage for
+    // cards that provide 'next card' discounts. This will clear between turns.
+    public removedFromPlayCards: Array<IProjectCard> = [];
 
     constructor(
       public name: string,
@@ -1092,6 +1095,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.lastCardPlayed = card;
 
       // Playwrights hook for Conscription and Indentured Workers
+      // Cards "removed from play" can still have an effect
       this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
     }
 
@@ -2315,7 +2319,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
-        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2341,6 +2344,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         plantsNeededForGreenery: this.plantsNeededForGreenery,
         // Lawsuit
         removingPlayers: this.removingPlayers,
+        // Playwrights
+        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
         name: this.name,
         color: this.color,
         beginner: this.beginner,
@@ -2354,15 +2359,60 @@ export class Player implements ISerializable<SerializedPlayer> {
       return result;
     }
 
-    // Function used to rebuild each objects
-    public static deserialize(d: SerializedPlayer): Player {
+    // Only use useObjectAssign in tests.
+    // TODO(kberg): Remove useObjectAssign by 2020-02-01
+    public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
       const player = new Player(d.name, d.color, d.beginner, d.handicap, d.id);
-      // Assign each attributes
-      Object.assign(player, d);
       const cardFinder = new CardFinder();
 
+      if (useObjectAssign) {
+        Object.assign(player, d);
+      } else {
+        player.actionsTakenThisRound = d.actionsTakenThisRound;
+        player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+        player.cardCost = d.cardCost;
+        player.cardDiscount = d.cardDiscount;
+        player.colonyTradeDiscount = d.colonyTradeDiscount;
+        player.colonyTradeOffset = d.colonyTradeOffset;
+        player.colonyVictoryPoints = d.colonyVictoryPoints;
+        player.corporationInitialActionDone = d.corporationInitialActionDone;
+        player.energy = d.energy;
+        player.energyProduction = d.energyProduction;
+        player.fleetSize = d.fleetSize;
+        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+        player.heat = d.heat;
+        player.heatProduction = d.heatProduction;
+        player.lastCardPlayed = d.lastCardPlayed !== undefined ?
+          cardFinder.getProjectCardByName(d.lastCardPlayed) :
+          undefined;
+
+        player.megaCreditProduction = d.megaCreditProduction;
+        player.megaCredits = d.megaCredits;
+        player.needsToDraft = d.needsToDraft;
+        player.oceanBonus = d.oceanBonus;
+        player.plantProduction = d.plantProduction;
+        player.plants = d.plants;
+        player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+        player.powerPlantCost = d.powerPlantCost;
+        player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+        player.removingPlayers = d.removingPlayers;
+        player.scienceTagCount = d.scienceTagCount;
+        player.shouldTriggerCardEffect = d.shouldTriggerCardEffect;
+        player.steel = d.steel;
+        player.steelProduction = d.steelProduction;
+        player.steelValue = d.steelValue;
+        player.terraformRating = d.terraformRating;
+        player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+        player.titanium = d.titanium;
+        player.titaniumProduction = d.titaniumProduction;
+        player.titaniumValue = d.titaniumValue;
+        player.tradesThisTurn = d.tradesThisTurn;
+        player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+        player.victoryPointsBreakdown = d.victoryPointsBreakdown;
+      }
+
       // action this generation set
-      player.actionsThisGeneration = new Set(d.actionsThisGeneration);
+      player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
         player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);

@@ -2487,6 +2487,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Rebuild each drafted cards
       player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
+      // Rebuild last card played
+      if (d.lastCardPlayed !== undefined) {
+        player.lastCardPlayed = cardFinder.getProjectCardByName(d.lastCardPlayed);
+      }
+
+      // Rebuild removed from play cards (Playwrights)
+      player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+
       return player;
     }
 

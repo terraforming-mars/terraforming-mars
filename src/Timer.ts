@@ -26,13 +26,17 @@ export class Timer implements ISerializable<SerializedTimer> {
 
   public static deserialize(d: SerializedTimer): Timer {
     const timer = new Timer();
-    Object.assign(timer, d);
+    timer.sumElapsed = d.sumElapsed;
+    timer.startedAt = d.startedAt;
+    timer.running = d.running;
+    timer.afterFirstAction = d.afterFirstAction;
+
     Timer.lastStoppedAt = d.lastStoppedAt;
     return timer;
   }
 
-  // start() is always called when player can perform new input action.
-  public start() {
+  // start() is always called when the game is waiting for a player to supply input.
+  public start() : void {
     this.running = true;
     // Timer is starting when previous timer was stopped. Normally it does not make any difference,
     // but this way undoing actions does not undo the timers.
@@ -40,7 +44,7 @@ export class Timer implements ISerializable<SerializedTimer> {
   }
 
   // stop() is called immediately when player performs new input action.
-  public stop() {
+  public stop() : void {
     this.running = false;
     Timer.lastStoppedAt = Date.now();
     if (!this.afterFirstAction) { // Skipping timer for first move in game
@@ -50,7 +54,8 @@ export class Timer implements ISerializable<SerializedTimer> {
     this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
   }
 
-  public static toString(d: SerializedTimer) {
+  // Converts Timer to hh:mm:ss format based on current time. Used to display the timer.
+  public static toString(d: SerializedTimer) : string {
     const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);
     return new Date(elapsed).toISOString().substr(11, 8);
   }

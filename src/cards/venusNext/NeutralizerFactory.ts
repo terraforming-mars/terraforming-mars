@@ -7,6 +7,9 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NeutralizerFactory implements IProjectCard {
     public cost = 7;
@@ -26,5 +29,14 @@ export class NeutralizerFactory implements IProjectCard {
     public play(player: Player, game: Game) {
       game.increaseVenusScaleLevel(player, 1);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '240',
+      requirements: CardRequirements.builder((b) => b.venus(10)),
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1);
+      }),
+      description: 'Requires Venus 10%. Increase the Venus track 1 step.',
     }
 }

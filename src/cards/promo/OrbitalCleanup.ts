@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class OrbitalCleanup implements IProjectCard {
     public name = CardName.ORBITAL_CLEANUP;
@@ -31,5 +33,20 @@ export class OrbitalCleanup implements IProjectCard {
 
     public getVictoryPoints() {
       return 2;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X08',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.megacredits(1).slash().science().played;
+          eb.description('Action: Gain 1 MC per Science tag you have.');
+        }).br;
+        b.productionBox((pb) => {
+          pb.megacredits(-2);
+        });
+      }),
+      description: 'Decrease your MC production 2 steps.',
+      victoryPoints: 2,
     }
 }

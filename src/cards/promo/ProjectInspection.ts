@@ -5,6 +5,9 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ProjectInspection implements IProjectCard {
     public name = CardName.PROJECT_INSPECTION;
@@ -50,5 +53,11 @@ export class ProjectInspection implements IProjectCard {
           return foundCard.action!(player, game);
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X02',
+      renderData: CardRenderer.builder((b) => {
+        b.text('Use a card action that has been used this generation.', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

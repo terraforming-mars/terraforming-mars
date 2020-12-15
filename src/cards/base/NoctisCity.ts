@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -10,6 +9,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {BoardName} from '../../BoardName';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NoctisCity implements IProjectCard {
     public cost = 18;
@@ -38,5 +39,15 @@ export class NoctisCity implements IProjectCard {
           return undefined;
         });
       }
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '017',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(3);
+        }).nbsp.city();
+      }),
+      description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.',
     }
 }

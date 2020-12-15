@@ -8,6 +8,8 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name = CardName.POWER_INFRASTRUCTURE;
@@ -34,5 +36,14 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
         1,
         player.energy,
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '194',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.text('x').energy(1).startAction.megacredits(0).multiplier;
+          eb.description('Action: Spend any amount of Energy and gain that amount of MC.');
+        });
+      }),
     }
 }

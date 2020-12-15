@@ -55,6 +55,9 @@ export class CardRenderDynamicVictoryPoints {
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
+  public static science(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.SCIENCE), points, target);
+  }
   public static any(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
     item.anyPlayer = true;

@@ -9,7 +9,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 // TODO(kberg): remove reference to CorporationCard by 2021-01-15
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
-    actionsThisGeneration: Array<string>;
+    actionsThisGeneration: Array<CardName>;
     beginner: boolean;
     canUseHeatAsMegaCredits: boolean;
     cardCost: number;
@@ -28,7 +28,6 @@ export interface SerializedPlayer {
     energy: number;
     energyProduction: number;
     fleetSize: number;
-    generationPlayed: Array<[string, number]>;
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
     heat: number;
@@ -50,7 +49,6 @@ export interface SerializedPlayer {
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;
-    shouldTriggerCardEffect: boolean;
     steel: number;
     steelProduction: number;
     steelValue: number;

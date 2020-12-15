@@ -26,15 +26,11 @@ export class ImmigrantCity implements IProjectCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
       if (Board.isCitySpace(space)) {
-        if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
-        if (!player.isCorporation(CardName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
+        player.addProduction(Resources.MEGACREDITS);
       }
     }
     public play(player: Player, game: Game) {
       return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-        const mcProductionAfterDecrease = player.getProduction(Resources.MEGACREDITS) - 2;
-        if (mcProductionAfterDecrease < -6) player.shouldTriggerCardEffect = false;
-
         game.addCityTile(player, space.id);
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, -2);
@@ -48,7 +44,7 @@ export class ImmigrantCity implements IProjectCard {
           eb.city().any.startEffect.productionBox((pb) => pb.megacredits(1));
           eb.description('Effect: When a City tile is placed, including this, increase your MC production 1 step.');
         }).br;
-        b.productionBox((pb) => pb.minus().energy(1).megacredits(2)).city();
+        b.productionBox((pb) => pb.minus().energy(1).megacredits(-2)).city();
       }),
       description: 'Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.',
     }

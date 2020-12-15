@@ -9,6 +9,7 @@ import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
 import {SerializedPlayer} from '../src/SerializedPlayer';
+import {SerializedTimer} from '../src/SerializedTimer';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
@@ -222,6 +223,13 @@ describe('Player', function() {
       color: 'purple' as Color,
       beginner: true,
       handicap: 4,
+      timer: {
+        sumElapsed: 0,
+        startedAt: 0,
+        running: false,
+        afterFirstAction: false,
+        lastStoppedAt: 0,
+      } as SerializedTimer,
     };
 
     const legacyPlayer = Player.deserialize(json as SerializedPlayer, false);

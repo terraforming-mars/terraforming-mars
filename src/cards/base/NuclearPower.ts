@@ -6,7 +6,6 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearPower implements IProjectCard {
@@ -28,7 +27,6 @@ export class NuclearPower implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '045',
-      requirements: CardRequirements.builder((b) => b.temperature(-20)),
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
           pb.minus().megacredits(2).br;

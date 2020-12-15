@@ -127,11 +127,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil
     public turmoilScientistsActionUsed: boolean = false;
 
-    // Controlled by cards with effects that might be called a second time recursively, I think.
-    // They set this to false in order to prevent card effects from triggering twice.
-    // Not sure this is clear.
-    public shouldTriggerCardEffect: boolean = true;
-
     public powerPlantCost: number = 11;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     public oceanBonus: number = constants.OCEAN_BONUS;
@@ -2327,10 +2322,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
         turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
-        // Controlled by cards with effects that might be called a second time recursively, I think.
-        // They set this to false in order to prevent card effects from triggering twice.
-        // Not sure this is clear.
-        shouldTriggerCardEffect: this.shouldTriggerCardEffect,
         powerPlantCost: this.powerPlantCost,
         victoryPointsBreakdown: this.victoryPointsBreakdown,
         oceanBonus: this.oceanBonus,

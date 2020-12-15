@@ -56,6 +56,7 @@ import {TileType} from './TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {getRandomMilestonesAndAwards} from './MilestoneAwardSelector';
 import {RandomMAOptionType} from './RandomMAOptionType';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
@@ -94,7 +95,7 @@ export interface GameOptions {
   draftVariant: boolean;
   initialDraftVariant: boolean;
   startingCorporations: number;
-  shuffleMapOption: boolean;
+  randomBoardOption: RandomBoardOptionType;
   randomMA: RandomMAOptionType;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
@@ -124,7 +125,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
-  shuffleMapOption: false,
+  randomBoardOption: RandomBoardOptionType.NONE,
   solarPhaseOption: false,
   soloTR: false,
   startingCorporations: 2,
@@ -463,13 +464,13 @@ export class Game implements ISerializable<SerializedGame> {
 
       if (boardName === BoardName.ELYSIUM) {
         chooseMilestonesAndAwards(this, ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
-        return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new ElysiumBoard(this.gameOptions.randomBoardOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         chooseMilestonesAndAwards(this, HELLAS_MILESTONES, HELLAS_AWARDS);
-        return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new HellasBoard(this.gameOptions.randomBoardOption, this.seed);
       } else {
         chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
-        return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
+        return new OriginalBoard(this.gameOptions.randomBoardOption, this.seed);
       }
     }
 
@@ -1725,11 +1726,11 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Rebuild milestones, awards and board elements
       if (this.gameOptions.boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new ElysiumBoard(this.gameOptions.randomBoardOption, this.seed);
       } else if (this.gameOptions.boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new HellasBoard(this.gameOptions.randomBoardOption, this.seed);
       } else {
-        this.board = new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
+        this.board = new OriginalBoard(this.gameOptions.randomBoardOption, this.seed);
       }
 
       this.milestones = [];

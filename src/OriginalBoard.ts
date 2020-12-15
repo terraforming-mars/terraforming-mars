@@ -4,12 +4,13 @@ import {Board} from './Board';
 import {Player} from './Player';
 import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 
 export class OriginalBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  constructor(randomBoardOption: RandomBoardOptionType = RandomBoardOptionType.NONE, seed: number = 0) {
     super();
 
-    const builder = new BoardBuilder(seed);
+    const builder = new BoardBuilder(randomBoardOption, seed);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -37,9 +38,7 @@ export class OriginalBoard extends Board {
     // y=8
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
-    if (shuffleMapOption) {
-      builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
-    }
+    builder.setMustBeLandSpaces(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     this.spaces = builder.build();
   }
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {

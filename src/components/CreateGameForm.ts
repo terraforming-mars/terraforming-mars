@@ -12,6 +12,7 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
+import {RandomBoardOptionType} from '../RandomBoardOptionType';
 import {GameId} from '../Game';
 
 export interface CreateGameModel {
@@ -41,7 +42,7 @@ export interface CreateGameModel {
     boards: Array<BoardName | 'random'>;
     seed: number;
     solarPhaseOption: boolean;
-    shuffleMapOption: boolean;
+    randomBoardOption: RandomBoardOptionType;
     promoCardsOption: boolean;
     communityCardsOption: boolean;
     aresExtension: boolean;
@@ -107,7 +108,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       seed: Math.random(),
       seededGame: false,
       solarPhaseOption: false,
-      shuffleMapOption: false,
+      randomBoardOption: RandomBoardOptionType.NONE,
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
@@ -222,6 +223,28 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const component = (this as any) as CreateGameModel;
       return component.players.slice(0, component.playersCount);
     },
+    isRandomBoardEnabled: function(): Boolean {
+      return this.randomBoardOption !== RandomBoardOptionType.NONE;
+    },
+    randomBoardToggle: function() {
+      const component = (this as any) as CreateGameModel;
+      if (component.randomBoardOption === RandomBoardOptionType.NONE) {
+        component.randomBoardOption = RandomBoardOptionType.LIMITED;
+        this.randomBoardOption = RandomBoardOptionType.LIMITED;
+      } else {
+        component.randomBoardOption = RandomBoardOptionType.NONE;
+        this.randomBoardOption = RandomBoardOptionType.NONE;
+      }
+    },
+    getRandomBoardOptionType: function(type: 'limited' | 'full'): RandomBoardOptionType {
+      if (type === 'limited') {
+        return RandomBoardOptionType.LIMITED;
+      } else if (type === 'full') {
+        return RandomBoardOptionType.UNLIMITED;
+      } else {
+        return RandomBoardOptionType.NONE;
+      }
+    },
     isRandomMAEnabled: function(): Boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
@@ -334,7 +357,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const colonies = component.colonies;
       const turmoil = component.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
-      const shuffleMapOption = this.shuffleMapOption;
+      const randomBoardOption = this.randomBoardOption;
       const customCorporationsList = component.customCorporationsList;
       const customColoniesList = component.customColoniesList;
       const cardsBlackList = component.cardsBlackList;
@@ -408,7 +431,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         clonedGamedId,
         initialDraft,
         randomMA,
-        shuffleMapOption,
+        randomBoardOption,
         beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
@@ -572,10 +595,26 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
-                            <label for="shuffleMap-checkbox">
-                                    <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
+                            <input type="checkbox" name="randomBoardToggle" id="randomBoard-checkbox" v-on:change="randomBoardToggle()">
+                            <label for="randomBoard-checkbox">
+                                <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div class="create-game-page-column-row" v-if="isRandomBoardEnabled()">
+                                <div>
+                                <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('limited')" id="limitedRandomBoard-radio">
+                                <label class="label-randomBoardOption" for="limitedRandomBoard-radio">
+                                    <span v-i18n>{{ getRandomBoardOptionType('limited') }}</span>
+                                </label>
+                                </div>
+
+                                <div>
+                                <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('full')" id="unlimitedRandomBoard-radio">
+                                <label class="label-randomBoardOption" for="unlimitedRandomBoard-radio">
+                                    <span v-i18n>{{ getRandomBoardOptionType('full') }}</span>
+                                </label>
+                                </div>
+                            </div>
 
                             <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
                             <label for="seeded-checkbox">

@@ -2,11 +2,12 @@ import {SpaceBonus} from './SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 
 export class ElysiumBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  constructor(randomBoardOption: RandomBoardOptionType = RandomBoardOptionType.NONE, seed: number = 0) {
     super();
-    const builder = new BoardBuilder(seed);
+    const builder = new BoardBuilder(randomBoardOption, seed);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -32,9 +33,7 @@ export class ElysiumBoard extends Board {
     // y=8
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
-    if (shuffleMapOption) {
-      builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
-    }
+    builder.setMustBeLandSpaces(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     this.spaces = builder.build();
   }
 }

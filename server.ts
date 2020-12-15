@@ -446,7 +446,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         draftVariant: gameReq.draftVariant,
         initialDraftVariant: gameReq.initialDraft,
         startingCorporations: gameReq.startingCorporations,
-        shuffleMapOption: gameReq.shuffleMapOption,
+        randomBoardOption: gameReq.randomBoardOption,
         randomMA: gameReq.randomMA,
         soloTR: gameReq.soloTR,
         customCorporationsList: gameReq.customCorporationsList,

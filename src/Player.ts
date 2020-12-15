@@ -2383,7 +2383,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.powerPlantCost = d.powerPlantCost;
         player.removingPlayers = d.removingPlayers;
         player.scienceTagCount = d.scienceTagCount;
-        player.shouldTriggerCardEffect = d.shouldTriggerCardEffect;
         player.steel = d.steel;
         player.steelProduction = d.steelProduction;
         player.steelValue = d.steelValue;

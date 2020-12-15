@@ -200,7 +200,6 @@ describe('Player', function() {
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
       turmoilScientistsActionUsed: false,
-      shouldTriggerCardEffect: true,
       powerPlantCost: 11,
       victoryPointsBreakdown: {
         terraformRating: 1,

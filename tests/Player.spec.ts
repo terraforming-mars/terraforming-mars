@@ -10,6 +10,8 @@ import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
 import {SerializedPlayer} from '../src/SerializedPlayer';
 import {Player} from '../src/Player';
+import {Color} from '../src/Color';
+import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
 
 describe('Player', function() {
@@ -154,5 +156,84 @@ describe('Player', function() {
     expect(s.actionsThisGeneration).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
     const p = Player.deserialize(s);
     expect(Array.from(p.getActionsThisGeneration())).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
+  });
+  it('serialization test', () => {
+    const json = {
+      id: 'blue-id',
+      pickedCorporationCard: 'Tharsis Republic',
+      terraformRating: 20,
+      corporationCard: undefined,
+      hasIncreasedTerraformRatingThisGeneration: false,
+      terraformRatingAtGenerationStart: 20,
+      megaCredits: 1,
+      megaCreditProduction: 2,
+      steel: 3,
+      steelProduction: 4,
+      titanium: 5,
+      titaniumProduction: 6,
+      plants: 7,
+      plantProduction: 8,
+      energy: 9,
+      energyProduction: 10,
+      heat: 11,
+      heatProduction: 12,
+      titaniumValue: 13,
+      steelValue: 14,
+      canUseHeatAsMegaCredits: false,
+      actionsTakenThisRound: 15,
+      actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
+      corporationInitialActionDone: false,
+      dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
+      dealtProjectCards: [CardName.FLOATER_LEASING, CardName.BUTTERFLY_EFFECT],
+      dealtPreludeCards: [CardName.MOHOLE_EXCAVATION, CardName.LAVA_TUBE_SETTLEMENT],
+      cardsInHand: [CardName.EARTH_ELEVATOR, CardName.DUST_SEALS],
+      preludeCardsInHand: [CardName.METAL_RICH_ASTEROID, CardName.PSYCHROPHILES],
+      playedCards: [], // TODO(kberg): these are SerializedCard.
+      draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
+      needsToDraft: false,
+      usedUndo: false,
+      cardCost: 3,
+      cardDiscount: 7,
+      fleetSize: 99,
+      tradesThisTurn: 100,
+      colonyTradeOffset: 101,
+      colonyTradeDiscount: 102,
+      colonyVictoryPoints: 104,
+      turmoilScientistsActionUsed: false,
+      shouldTriggerCardEffect: true,
+      powerPlantCost: 11,
+      victoryPointsBreakdown: {
+        terraformRating: 1,
+        milestones: 2,
+        awards: 3,
+        greenery: 4,
+        city: 5,
+        victoryPoints: 6,
+        total: 7,
+        detailsCards: [],
+        detailsMilestones: [],
+        detailsAwards: [],
+      } as unknown as VictoryPointsBreakdown, // needs double-conversion as it expects the VPB methods.
+      oceanBonus: 86,
+      scienceTagCount: 97,
+      plantsNeededForGreenery: 5,
+      removingPlayers: [],
+      removedFromPlayCards: [],
+      name: 'player-blue',
+      color: 'purple' as Color,
+      beginner: true,
+      handicap: 4,
+    };
+
+    const legacyPlayer = Player.deserialize(json as SerializedPlayer, false);
+    const newPlayer = Player.deserialize(json as SerializedPlayer, true);
+
+    expect(legacyPlayer.color).eq(Color.PURPLE);
+    expect(newPlayer.color).eq(Color.PURPLE);
+
+    const legacyPlayerSerialized = legacyPlayer.serialize();
+    const newPlayerSerialized = newPlayer.serialize();
+    expect(legacyPlayerSerialized, 'legacy vs new').to.deep.eq(newPlayerSerialized);
+    expect(legacyPlayerSerialized, 'legacy vs json').to.deep.eq(json);
   });
 });

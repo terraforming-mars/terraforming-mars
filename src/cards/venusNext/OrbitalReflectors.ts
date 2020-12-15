@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class OrbitalReflectors implements IProjectCard {
     public cost = 26;
@@ -31,5 +33,16 @@ export class OrbitalReflectors implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       player.addProduction(Resources.HEAT, 2);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '242',
+      renderData: CardRenderer.builder((b) => {
+        b.venus(2).br;
+        b.productionBox((pb) => {
+          pb.heat(2);
+        });
+      }),
+      description: 'Raise Venus 2 steps. Increase your heat production 2 steps.',
     }
 }

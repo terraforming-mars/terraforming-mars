@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -6,6 +5,9 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearPower implements IProjectCard {
     public cost = 10;
@@ -23,5 +25,16 @@ export class NuclearPower implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, -2);
       player.addProduction(Resources.ENERGY, 3);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '045',
+      requirements: CardRequirements.builder((b) => b.temperature(-20)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().megacredits(2).br;
+          pb.plus().energy(3);
+        });
+      }),
+      description: 'Decrease your MC production 2 steps and increase your Energy production 3 steps.',
     }
 }

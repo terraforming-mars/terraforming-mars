@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -8,6 +7,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class OpenCity implements IProjectCard {
     public cost = 23;
@@ -28,5 +30,20 @@ export class OpenCity implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '108',
+      requirements: CardRequirements.builder((b) => b.oxygen(12)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(4);
+        }).city().plants(2);
+      }),
+      description: {
+        text: 'Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.',
+        align: 'left',
+      },
+      victoryPoints: 1,
     }
 }

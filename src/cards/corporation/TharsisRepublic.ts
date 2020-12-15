@@ -31,8 +31,7 @@ export class TharsisRepublic implements CorporationCard {
           player.megaCredits += 3;
         }
         if (space.spaceType !== SpaceType.COLONY) {
-          if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
-          player.shouldTriggerCardEffect = true; // reset value
+          player.addProduction(Resources.MEGACREDITS);
         }
       }
     }

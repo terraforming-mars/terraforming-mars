@@ -13,6 +13,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 11;
@@ -62,5 +64,22 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
 
       if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '157',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: Add 1 Microbe to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.microbes(3).startAction.tr(1);
+          eb.description('Action: Remove 3 Microbes to increase your TR 1 step.');
+        }).br;
+        b.microbes(3);
+      }),
+      description: 'Add 3 Microbes to this card.',
     }
 }

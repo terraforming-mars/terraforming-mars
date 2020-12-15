@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class OreProcessor implements IActionCard, IProjectCard {
     public cost = 13;
@@ -32,5 +34,14 @@ export class OreProcessor implements IActionCard, IProjectCard {
       player.energy -= 4;
       player.titanium++;
       return game.increaseOxygenLevel(player, 1);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '104',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.energy(4).digit.startAction.titanium(1).oxygen(1);
+          eb.description('Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.');
+        });
+      }),
     }
 }

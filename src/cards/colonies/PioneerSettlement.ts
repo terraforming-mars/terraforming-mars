@@ -6,6 +6,9 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PioneerSettlement implements IProjectCard {
     public cost = 13;
@@ -29,5 +32,16 @@ export class PioneerSettlement implements IProjectCard {
 
     public getVictoryPoints() {
       return 2;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C29',
+      requirements: CardRequirements.builder((b) => b.colonies(1).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(-2));
+        b.nbsp.colonies(1);
+      }),
+      description: 'Requires that you have no more than 1 colony. Decrease your MC production 2 steps. Place a colony.',
+      victoryPoints: 2,
     }
 }

@@ -4,6 +4,9 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ProductiveOutpost implements IProjectCard {
     public cost = 0;
@@ -19,5 +22,12 @@ export class ProductiveOutpost implements IProjectCard {
         });
       });
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C30',
+      renderData: CardRenderer.builder((b) => {
+        b.text('Gain all your colony bonuses.', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

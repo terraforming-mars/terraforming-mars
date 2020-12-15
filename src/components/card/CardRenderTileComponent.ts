@@ -75,7 +75,7 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
       } else if (type === TileType.NUCLEAR_ZONE) {
         if (this.item.isAres) {
           classes.push('card-tile-ares');
-          classes.push('board-space-tile--nuclear_zone');
+          classes.push('board-space-tile--nuclear_zone_ares');
         }
       } else if (type === TileType.OCEAN_CITY) {
         classes.push('card-tile-ares');

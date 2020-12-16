@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {PlayerStatus} from '../../../src/components/overview/Playerstatus';
+import {PlayerStatus} from '../../../src/components/overview/PlayerStatus';
 
 describe('PlayerStatus', function() {
   function getLocalVue() {

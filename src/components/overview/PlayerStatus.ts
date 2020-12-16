@@ -74,7 +74,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return classes.join(' ');
     },
     getNrPlayedCards: function(): number {
-      return this.player.playedCards.length;
+      return (this.player.corporationCard !== undefined ? 1 : 0) + this.player.playedCards.length;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];

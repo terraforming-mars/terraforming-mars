@@ -100,7 +100,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // This generation / this round
     public actionsTakenThisRound: number = 0;
-    private actionsThisGeneration: Set<string> = new Set<string>();
+    private actionsThisGeneration: Set<CardName> = new Set();
     public lastCardPlayed: IProjectCard | undefined;
     private corporationInitialActionDone: boolean = false;
 
@@ -112,9 +112,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     public preludeCardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
-    public removedFromPlayCards: Array<IProjectCard> = [];
-    // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-    private generationPlayed: Map<string, number> = new Map<string, number>();
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
@@ -129,11 +126,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil
     public turmoilScientistsActionUsed: boolean = false;
 
-    // Controlled by cards with effects that might be called a second time recursively, I think.
-    // They set this to false in order to prevent card effects from triggering twice.
-    // Not sure this is clear.
-    public shouldTriggerCardEffect: boolean = true;
-
     public powerPlantCost: number = 11;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     public oceanBonus: number = constants.OCEAN_BONUS;
@@ -145,6 +137,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     public plantsNeededForGreenery: number = 8;
     // Lawsuit
     public removingPlayers: Array<PlayerId> = [];
+    // For Playwrights corp.
+    // removedFromPlayCards is a bit of a misname: it's a temporary storage for
+    // cards that provide 'next card' discounts. This will clear between turns.
+    public removedFromPlayCards: Array<IProjectCard> = [];
 
     constructor(
       public name: string,
@@ -372,11 +368,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     };
 
-    public getActionsThisGeneration(): Set<string> {
+    public getActionsThisGeneration(): Set<CardName> {
       return this.actionsThisGeneration;
     }
 
-    public setActionsThisGeneration(cardName: string): void {
+    public setActionsThisGeneration(cardName: CardName): void {
       this.actionsThisGeneration.add(cardName);
       return;
     }
@@ -662,7 +658,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (extraTag !== undefined) {
         allTags.push(extraTag);
       }
-      const uniqueTags: Set<Tags> = new Set<Tags>();
+      const uniqueTags: Set<Tags> = new Set();
       if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
@@ -1092,9 +1088,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.playedCards.push(card);
       game.log('${0} played ${1}', (b) => b.player(this).card(card));
       this.lastCardPlayed = card;
-      this.generationPlayed.set(card.name, game.generation);
 
       // Playwrights hook for Conscription and Indentured Workers
+      // Cards "removed from play" can still have an effect
       this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
     }
 
@@ -2312,9 +2308,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
-        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
-        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-        generationPlayed: Array.from(this.generationPlayed),
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2326,10 +2319,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
         turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
-        // Controlled by cards with effects that might be called a second time recursively, I think.
-        // They set this to false in order to prevent card effects from triggering twice.
-        // Not sure this is clear.
-        shouldTriggerCardEffect: this.shouldTriggerCardEffect,
         powerPlantCost: this.powerPlantCost,
         victoryPointsBreakdown: this.victoryPointsBreakdown,
         oceanBonus: this.oceanBonus,
@@ -2340,6 +2329,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         plantsNeededForGreenery: this.plantsNeededForGreenery,
         // Lawsuit
         removingPlayers: this.removingPlayers,
+        // Playwrights
+        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
         name: this.name,
         color: this.color,
         beginner: this.beginner,
@@ -2353,17 +2344,60 @@ export class Player implements ISerializable<SerializedPlayer> {
       return result;
     }
 
-    // Function used to rebuild each objects
-    public static deserialize(d: SerializedPlayer): Player {
+    // Only use useObjectAssign in tests.
+    // TODO(kberg): Remove useObjectAssign by 2020-02-01
+    public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
       const player = new Player(d.name, d.color, d.beginner, d.handicap, d.id);
-      // Assign each attributes
-      Object.assign(player, d);
       const cardFinder = new CardFinder();
-      // Rebuild generation played map
-      player.generationPlayed = new Map<string, number>(d.generationPlayed);
 
-      // action this generation set
-      player.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+      if (useObjectAssign) {
+        Object.assign(player, d);
+      } else {
+        player.actionsTakenThisRound = d.actionsTakenThisRound;
+        player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+        player.cardCost = d.cardCost;
+        player.cardDiscount = d.cardDiscount;
+        player.colonyTradeDiscount = d.colonyTradeDiscount;
+        player.colonyTradeOffset = d.colonyTradeOffset;
+        player.colonyVictoryPoints = d.colonyVictoryPoints;
+        player.corporationInitialActionDone = d.corporationInitialActionDone;
+        player.energy = d.energy;
+        player.energyProduction = d.energyProduction;
+        player.fleetSize = d.fleetSize;
+        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+        player.heat = d.heat;
+        player.heatProduction = d.heatProduction;
+        player.megaCreditProduction = d.megaCreditProduction;
+        player.megaCredits = d.megaCredits;
+        player.needsToDraft = d.needsToDraft;
+        player.oceanBonus = d.oceanBonus;
+        player.plantProduction = d.plantProduction;
+        player.plants = d.plants;
+        player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+        player.powerPlantCost = d.powerPlantCost;
+        player.removingPlayers = d.removingPlayers;
+        player.scienceTagCount = d.scienceTagCount;
+        player.steel = d.steel;
+        player.steelProduction = d.steelProduction;
+        player.steelValue = d.steelValue;
+        player.terraformRating = d.terraformRating;
+        player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+        player.titanium = d.titanium;
+        player.titaniumProduction = d.titaniumProduction;
+        player.titaniumValue = d.titaniumValue;
+        player.tradesThisTurn = d.tradesThisTurn;
+        player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+        player.victoryPointsBreakdown = d.victoryPointsBreakdown;
+      }
+
+      player.lastCardPlayed = d.lastCardPlayed !== undefined ?
+        cardFinder.getProjectCardByName(d.lastCardPlayed) :
+        undefined;
+
+      // Rebuild removed from play cards (Playwrights)
+      player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+
+      player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
         player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);

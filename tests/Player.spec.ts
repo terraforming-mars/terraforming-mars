@@ -199,7 +199,8 @@ describe('Player', function() {
       colonyTradeOffset: 101,
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
-      turmoilScientistsActionUsed: false,
+      turmoilPolicyActionUsed: false,
+      hasTurmoilScienceTagBonus: false,
       powerPlantCost: 11,
       victoryPointsBreakdown: {
         terraformRating: 1,

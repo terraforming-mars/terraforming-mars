@@ -34,13 +34,13 @@ const officialColonies: Array<Colony> = [
   new Triton(),
 ];
 
-let communityColonies: Array<Colony> = [
+const communityColonies: Array<Colony> = [
   new Iapetus(),
   new Mercury(),
   new Hygiea(),
   new Titania(),
-  new Venus(),
   new Leavitt(),
+  new Venus(),
   new Pallas(),
 ];
 
@@ -57,9 +57,6 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     },
   },
   data: function() {
-    if (!this.venusNext) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.VENUS);
-    if (!this.turmoil) communityColonies = communityColonies.filter((c) => c.name !== ColonyName.PALLAS);
-
     return {
       allColonies: officialColonies.concat(communityColonies),
       officialColonies: officialColonies,
@@ -89,24 +86,30 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       this.$emit('colonies-list-changed', colonyNames);
     },
     communityCardsOption: function(enabled) {
-      this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
+      if (enabled) {
+        this.selectedColonies = officialColonies.concat(communityColonies).slice();
+        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
+        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+      } else {
+        this.selectedColonies = officialColonies.slice();
+      }
     },
     venusNext: function(enabled) {
-      const index = communityColonies.findIndex((c) => c.name === ColonyName.VENUS);
-
-      if (enabled && index === -1) {
-        communityColonies.push(new Venus());
-      } else if (!enabled && index !== -1) {
-        communityColonies.splice(index, 1);
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.VENUS) === undefined) {
+          this.selectedColonies.push(new Venus());
+        }
       }
     },
     turmoil: function(enabled) {
-      const index = communityColonies.findIndex((c) => c.name === ColonyName.PALLAS);
-
-      if (enabled && index === -1) {
-        communityColonies.push(new Pallas());
-      } else if (!enabled && index !== -1) {
-        communityColonies.splice(index, 1);
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) === undefined) {
+          this.selectedColonies.push(new Pallas());
+        }
       }
     },
   },

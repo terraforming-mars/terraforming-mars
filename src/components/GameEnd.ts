@@ -28,7 +28,7 @@ export const GameEnd = Vue.component('game-end', {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
     getTimer: function(p: PlayerModel): string {
-      return Timer.toString(p.timer.serialize());
+      return Timer.toString(p.timer);
     },
     getSortedPlayers: function() {
       this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {

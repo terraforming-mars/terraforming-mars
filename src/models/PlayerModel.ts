@@ -13,7 +13,7 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
-import {Timer} from '../Timer';
+import {SerializedTimer} from '../SerializedTimer';
 
 export interface PlayerModel {
     aresExtension: boolean;
@@ -84,5 +84,5 @@ export interface PlayerModel {
     deckSize: number;
     preludeExtension: boolean;
     waitingFor: PlayerInputModel | undefined;
-    timer: Timer;
+    timer: SerializedTimer;
 }

@@ -125,7 +125,7 @@ export class Server {
       aresExtension: game.gameOptions.aresExtension,
       aresData: game.aresData,
       preludeExtension: game.gameOptions.preludeExtension,
-      timer: player.timer,
+      timer: player.timer.serialize(),
     };
   }
 }
@@ -407,7 +407,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       preludeExtension: game.gameOptions.preludeExtension,
-      timer: player.timer,
+      timer: player.timer.serialize(),
     } as PlayerModel;
   });
 }

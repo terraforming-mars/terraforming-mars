@@ -44,9 +44,9 @@ export class SolarFarm implements IProjectCard {
       cardNumber: 'A17',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.energy(1).slash().plants(1).played;
-        }).nbsp.tile(TileType.SOLAR_FARM, false, true);
+          pb.energy(1);
+        }).slash().plants(1).asterix().nbsp.tile(TileType.SOLAR_FARM, false, true);
       }),
-      description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant tag on the area where you place the tile.',
+      description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.',
     }
 }

@@ -34,6 +34,6 @@ export class ReleaseOfInertGases implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.tr(2);
       }),
-      description: 'Raise your terraform rating 2 steps.',
+      description: 'Raise your terraforming rating 2 steps.',
     }
 }

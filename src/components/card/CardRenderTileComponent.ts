@@ -15,7 +15,7 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
       const classes: string[] = ['card-tile'];
       const type: TileType = this.item.tile;
       if (this.item.hasSymbol) {
-        classes.push('card-tile-canvass');
+        classes.push('card-tile-canvas');
       }
       if (type === TileType.BIOFERTILIZER_FACILITY) {
         classes.push('card-tile-ares');

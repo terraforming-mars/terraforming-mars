@@ -88,6 +88,31 @@ export class CardRenderEffect extends CardRenderer {
   }
 }
 
+export class CardRenderCorpBoxEffect extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+    const builder = new CorpEffectBuilderEffect();
+    f(builder);
+    return builder.build();
+  }
+}
+
+export class CardRenderCorpBoxAction extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+    const builder = new CorpEffectBuilderAction();
+    f(builder);
+    return builder.build();
+  }
+}
+
+
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
 
@@ -319,6 +344,11 @@ class Builder {
     return this;
   }
 
+  public pristar(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PRISTAR, amount));
+    return this;
+  }
+
   public diverseTag(amount: number = 1) {
     const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
     item.isPlayed = true;
@@ -374,6 +404,17 @@ class Builder {
     this._addRowItem(CardRenderEffect.builder(eb));
     return this;
   }
+
+  public corpBox(type: 'action' | 'effect', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void): Builder {
+    this.br;
+    if (type === 'action') {
+      this._addRowItem(CardRenderCorpBoxAction.builder(eb));
+    } else {
+      this._addRowItem(CardRenderCorpBoxEffect.builder(eb));
+    }
+    return this;
+  }
+
 
   public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
     this._checkExistingItem();
@@ -568,7 +609,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
@@ -642,5 +683,21 @@ class EffectBuilder extends Builder {
 
   public build(): CardRenderEffect {
     return new CardRenderEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderEffect extends Builder {
+  protected _data: Array<Array<CardRenderEffect>> = [[]];
+
+  public build(): CardRenderCorpBoxAction {
+    return new CardRenderCorpBoxEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderAction extends Builder {
+  protected _data: Array<Array<CardRenderEffect>> = [[]];
+
+  public build(): CardRenderCorpBoxEffect {
+    return new CardRenderCorpBoxAction(this._data);
   }
 }

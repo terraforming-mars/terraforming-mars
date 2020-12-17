@@ -3,6 +3,9 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRequirements} from '../CardRequirements';
 
 export class SkyDocks implements IProjectCard {
     public cost = 18;
@@ -29,5 +32,19 @@ export class SkyDocks implements IProjectCard {
 
     public onDiscard(player: Player): void {
       player.decreaseFleetSize();
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C36',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startEffect.megacredits(-1);
+          eb.description('Effect: When you play a card, you pay 1 MC less for it.');
+        }).br;
+        b.tradeFleet();
+      }),
+      description: 'Requires 2 Earth tags. Gain 1 Trade Fleet.',
+      victoryPoints: 2,
     }
 }

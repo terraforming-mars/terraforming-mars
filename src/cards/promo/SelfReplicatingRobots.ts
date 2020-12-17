@@ -6,6 +6,10 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export interface RobotCard {
     card: IProjectCard;
@@ -37,18 +41,33 @@ export class SelfReplicatingRobots implements IProjectCard {
     }
 
     public canAct(player: Player): boolean {
-      if (this.targetCards.length > 0) {
-        return true;
-      }
-      if (player.cardsInHand.filter((card) => card.tags.filter((tag) => tag === Tags.SPACE || tag === Tags.STEEL).length > 0).length > 0) {
-        return true;
-      }
-      return false;
+      return this.targetCards.length > 0 ||
+             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
     }
 
     public action(player: Player, game: Game) {
       const orOptions = new OrOptions();
-      const selectableCards = player.cardsInHand.filter((card) => card.tags.filter((tag) => tag === Tags.SPACE || tag === Tags.STEEL).length > 0);
+      const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
+
+      if (this.targetCards.length > 0) {
+        const robotCards = this.targetCards.map((targetCard) => targetCard.card);
+        orOptions.options.push(new SelectCard(
+          'Select card to double robots resource', 'Double resource', robotCards,
+          (foundCards: Array<IProjectCard>) => {
+            let resourceCount = 0;
+            for (const targetCard of this.targetCards) {
+              if (targetCard.card.name === foundCards[0].name) {
+                resourceCount = targetCard.resourceCount;
+                targetCard.resourceCount *= 2;
+              }
+            }
+            game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
+              b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
+            });
+            return undefined;
+          },
+        ));
+      }
 
       if (selectableCards.length > 0) {
         orOptions.options.push(new SelectCard(
@@ -69,29 +88,19 @@ export class SelfReplicatingRobots implements IProjectCard {
         ));
       }
 
-      if (this.targetCards.length > 0) {
-        const robotCards: Array<IProjectCard> = [];
-        for (const targetCard of this.targetCards) {
-          robotCards.push(targetCard.card);
-        }
-        orOptions.options.push(new SelectCard(
-          'Select card to double robots resource', 'Double resource', robotCards,
-          (foundCards: Array<IProjectCard>) => {
-            let resourceCount = 0;
-            for (const targetCard of this.targetCards) {
-              if (targetCard.card.name === foundCards[0].name) {
-                resourceCount = targetCard.resourceCount;
-                targetCard.resourceCount = targetCard.resourceCount * 2;
-              }
-            }
-            game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-              b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
-            });
-            return undefined;
-          },
-        ));
-      }
-
       return orOptions;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '210',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.selfReplicatingRobots();
+          eb.nbsp.or().nbsp.arrow().multiplierWhite().text('x2');
+          eb.description('Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.');
+        }).br;
+        b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', CardRenderItemSize.TINY, true);
+      }),
+      description: 'Requires 2 Science tags.',
     }
 }

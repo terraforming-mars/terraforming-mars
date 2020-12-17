@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/Ants';
-import {EarthCatapult} from '../../../src/cards/EarthCatapult';
+import {Ants} from '../../../src/cards/base/Ants';
+import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {PointLuna} from '../../../src/cards/prelude/PointLuna';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('PointLuna', function() {
   let card : PointLuna; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new PointLuna();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
     player.corporationCard = card;
   });

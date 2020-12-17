@@ -7,11 +7,4 @@ export interface SerializedDealer {
     deck: Array<IProjectCard | CardName>;
     discarded: Array<IProjectCard | CardName>;
     preludeDeck: Array<IProjectCard | CardName>;
-    useAresExtension: boolean;
-    useColoniesNextExtension: boolean;
-    useCorporateEra: boolean;
-    usePreludeExtension: boolean;
-    usePromoCards: boolean;
-    useTurmoilExtension: boolean;
-    useVenusNextExtension: boolean;
 }

@@ -1,15 +1,14 @@
 import {expect} from 'chai';
-import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
+import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
+import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MiningQuota', function() {
   it('Should play', function() {
     const card = new MiningQuota();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
     player.playedCards.push(new ResearchNetwork());

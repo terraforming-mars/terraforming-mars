@@ -9,6 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {Resources} from '../../Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
 
 export class Playwrights implements CorporationCard {
     public name = CardName.PLAYWRIGHTS;
@@ -49,8 +50,18 @@ export class Playwrights implements CorporationCard {
             'Select how to pay to replay the event',
             () => {
               player.playCard(game, selectedCard);
-              player.playedCards.pop();
-              player.removedFromPlayCards.push(selectedCard); // Remove card from play
+              game.defer(new DeferredAction(player, () => {
+                for (const p of game.getPlayers()) {
+                  const card = p.playedCards[p.playedCards.length - 1];
+
+                  if (card !== undefined && card.name === selectedCard.name) {
+                    p.playedCards.pop();
+                    player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+                    return undefined;
+                  }
+                }
+                return undefined;
+              }));
             },
           ));
           return undefined;

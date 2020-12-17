@@ -1,0 +1,109 @@
+import {ICard} from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {Game} from '../../Game';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectCard} from '../../inputs/SelectCard';
+import {PlayerInput} from '../../PlayerInput';
+import {ResourceType} from '../../ResourceType';
+import {CardName} from '../../CardName';
+import {LogHelper} from '../../components/LogHelper';
+import {Resources} from '../../Resources';
+import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+
+export class ImportedHydrogen implements IProjectCard {
+    public cost = 16;
+    public tags = [Tags.EARTH, Tags.SPACE];
+    public name = CardName.IMPORTED_HYDROGEN;
+    public cardType = CardType.EVENT;
+    public hasRequirements = false;
+
+    public canPlay(player: Player, game: Game): boolean {
+      const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+      }
+
+      return true;
+    }
+
+    public play(player: Player, game: Game): undefined | PlayerInput {
+      const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+      const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
+
+      const gainPlants = function() {
+        const qty = 3;
+        player.plants += qty;
+        LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
+        game.defer(new PlaceOceanTile(player, game));
+        return undefined;
+      };
+
+      if (availableMicrobeCards.length === 0 && availableAnimalCards.length === 0) {
+        return gainPlants();
+      }
+
+      const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+
+      const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants', gainPlants);
+      availableActions.push(gainPlantsOption);
+
+      if (availableMicrobeCards.length === 1) {
+        const targetMicrobeCard = availableMicrobeCards[0];
+        availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
+          player.addResourceTo(targetMicrobeCard, 3);
+          LogHelper.logAddResource(game, player, targetMicrobeCard, 3);
+          game.defer(new PlaceOceanTile(player, game));
+          return undefined;
+        }));
+      } else if (availableMicrobeCards.length > 1) {
+        availableActions.push(new SelectCard('Add 3 microbes to a card',
+          'Add microbes',
+          availableMicrobeCards, (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 3);
+            LogHelper.logAddResource(game, player, foundCards[0], 3);
+            game.defer(new PlaceOceanTile(player, game));
+            return undefined;
+          }));
+      }
+
+      if (availableAnimalCards.length === 1) {
+        const targetAnimalCard = availableAnimalCards[0];
+        availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+          player.addResourceTo(targetAnimalCard, 2);
+          LogHelper.logAddResource(game, player, targetAnimalCard, 2);
+          game.defer(new PlaceOceanTile(player, game));
+          return undefined;
+        }));
+      } else if (availableAnimalCards.length > 1) {
+        availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 2);
+          LogHelper.logAddResource(game, player, foundCards[0], 2);
+          game.defer(new PlaceOceanTile(player, game));
+          return undefined;
+        }));
+      }
+
+      return new OrOptions(...availableActions);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '019',
+      renderData: CardRenderer.builder((b) => {
+        b.plants(3).br;
+        b.or().br;
+        b.microbes(3).digit.asterix().nbsp.or().nbsp;
+        b.animals(2).digit.asterix().br;
+        b.oceans(1);
+      }),
+      description: 'Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.',
+    }
+}

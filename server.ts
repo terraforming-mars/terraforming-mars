@@ -7,53 +7,18 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
-import {AndOptions} from './src/inputs/AndOptions';
 import {BoardName} from './src/BoardName';
-import {CardModel} from './src/models/CardModel';
-import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
-import {Game} from './src/Game';
+import {Game, GameId} from './src/Game';
 import {GameLoader} from './src/database/GameLoader';
 import {GameLogs} from './src/routes/GameLogs';
-import {GameHomeModel} from './src/models/GameHomeModel';
 import {Route} from './src/routes/Route';
-import {ICard} from './src/cards/ICard';
-import {IProjectCard} from './src/cards/IProjectCard';
-import {ISpace} from './src/ISpace';
-import {OrOptions} from './src/inputs/OrOptions';
-import {Player} from './src/Player';
-import {PlayerInput} from './src/PlayerInput';
-import {PlayerInputModel} from './src/models/PlayerInputModel';
-import {PlayerInputTypes} from './src/PlayerInputTypes';
-import {PlayerModel} from './src/models/PlayerModel';
-import {SelectAmount} from './src/inputs/SelectAmount';
-import {SelectCard} from './src/inputs/SelectCard';
-import {SelectHowToPay} from './src/inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './src/inputs/SelectHowToPayForCard';
-import {SelectPlayer} from './src/inputs/SelectPlayer';
-import {SelectSpace} from './src/inputs/SelectSpace';
-import {SpaceModel} from './src/models/SpaceModel';
-import {TileType} from './src/TileType';
 import {Phase} from './src/Phase';
-import {Resources} from './src/Resources';
-import {CardType} from './src/cards/CardType';
-import {
-  ClaimedMilestoneModel,
-  IMilestoneScore,
-} from './src/models/ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from './src/models/FundedAwardModel';
+import {Player} from './src/Player';
 import {Database} from './src/database/Database';
-import {
-  PartyModel,
-  DelegatesModel,
-  TurmoilModel,
-} from './src/models/TurmoilModel';
-import {SelectDelegate} from './src/inputs/SelectDelegate';
-import {SelectColony} from './src/inputs/SelectColony';
-import {SelectProductionToLose} from './src/inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './src/inputs/ShiftAresGlobalParameters';
+import {Server} from './src/server/ServerModel';
 
-const serverId = generateRandomServerId();
+const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const gameLoader = new GameLoader();
@@ -214,7 +179,7 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = http.createServer(requestHandler);
 }
 
-function generateRandomGameId(): string {
+function generateRandomGameId(): GameId {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
@@ -237,7 +202,7 @@ function processInput(
       const entity = JSON.parse(body);
       player.process(game, entity);
       res.setHeader('Content-Type', 'application/json');
-      res.write(getPlayer(player, game));
+      res.write(getPlayerModelJSON(player, game));
       res.end();
     } catch (err) {
       res.writeHead(400, {
@@ -307,7 +272,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         },
       );
       res.setHeader('Content-Type', 'application/json');
-      res.write(getGame(gameToRebuild));
+      res.write(getGameModelJSON(gameToRebuild));
       res.end();
     } catch (error) {
       route.internalServerError(req, res, error);
@@ -338,7 +303,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     return;
   }
 
-  const gameId: string = matches[1];
+  const gameId: GameId = matches[1];
 
   gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
     if (game === undefined) {
@@ -348,7 +313,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     }
 
     res.setHeader('Content-Type', 'application/json');
-    res.write(getGame(game));
+    res.write(getGameModelJSON(game));
     res.end();
   });
 }
@@ -421,7 +386,7 @@ function apiGetPlayer(
       return;
     }
     res.setHeader('Content-Type', 'application/json');
-    res.write(getPlayer(player, game));
+    res.write(getPlayerModelJSON(player, game));
     res.end();
   });
 }
@@ -493,7 +458,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const game = new Game(gameId, players, firstPlayer, gameOptions);
       gameLoader.addGame(game);
       res.setHeader('Content-Type', 'application/json');
-      res.write(getGame(game));
+      res.write(getGameModelJSON(game));
       res.end();
     } catch (error) {
       route.internalServerError(req, res, error);
@@ -501,532 +466,14 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
-function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
-  const allMilestones = game.milestones;
-  const claimedMilestones = game.claimedMilestones;
-  const milestoneModels: Array<ClaimedMilestoneModel> = [];
-
-  for (const milestone of allMilestones) {
-    const claimed = claimedMilestones.find(
-      (m) => m.milestone.name === milestone.name,
-    );
-    const scores: Array<IMilestoneScore> = [];
-    if (claimed === undefined && claimedMilestones.length < 3) {
-      game.getPlayers().forEach((player) => {
-        scores.push({
-          playerColor: player.color,
-          playerScore: milestone.getScore(player, game),
-        });
-      });
-    }
-
-    milestoneModels.push({
-      player_name: claimed === undefined ? '' : claimed.player.name,
-      player_color: claimed === undefined ? '' : claimed.player.color,
-      milestone,
-      scores,
-    });
-  }
-
-  return milestoneModels;
+function getPlayerModelJSON(player: Player, game: Game): string {
+  const model = Server.getPlayerModel(player, game);
+  return JSON.stringify(model);
 }
 
-function getAwards(game: Game): Array<FundedAwardModel> {
-  const allAwards = game.awards;
-  const fundedAwards = game.fundedAwards;
-  const awardModels: Array<FundedAwardModel> = [];
-
-  for (const award of allAwards) {
-    const funded = fundedAwards.find(
-      (a) => a.award.name === award.name,
-    );
-    const scores: Array<IAwardScore> = [];
-    if (fundedAwards.length < 3 || funded !== undefined) {
-      game.getPlayers().forEach((player) => {
-        scores.push({
-          playerColor: player.color,
-          playerScore: award.getScore(player, game),
-        });
-      });
-    }
-
-    awardModels.push({
-      player_name: funded === undefined ? '' : funded.player.name,
-      player_color: funded === undefined ? '' : funded.player.color,
-      award,
-      scores: scores,
-    });
-  }
-
-  return awardModels;
-}
-
-function getCorporationCard(player: Player): CardModel | undefined {
-  if (player.corporationCard === undefined) return undefined;
-  return {
-    name: player.corporationCard.name,
-    resources: player.getResourcesOnCard(player.corporationCard),
-    calculatedCost: 0,
-    cardType: CardType.CORPORATION,
-    isDisabled: player.corporationCard.isDisabled,
-  } as CardModel;
-}
-
-function getPlayer(player: Player, game: Game): string {
-  const turmoil = getTurmoil(game);
-
-  const output: PlayerModel = {
-    cardsInHand: getCards(player, player.cardsInHand, game, false),
-    draftedCards: getCards(player, player.draftedCards, game, false),
-    milestones: getMilestones(game),
-    awards: getAwards(game),
-    cardCost: player.cardCost,
-    color: player.color,
-    corporationCard: getCorporationCard(player),
-    energy: player.energy,
-    energyProduction: player.getProduction(Resources.ENERGY),
-    generation: game.getGeneration(),
-    heat: player.heat,
-    heatProduction: player.getProduction(Resources.HEAT),
-    id: player.id,
-    megaCredits: player.megaCredits,
-    megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
-    name: player.name,
-    oceans: game.board.getOceansOnBoard(),
-    oxygenLevel: game.getOxygenLevel(),
-    phase: game.phase,
-    plants: player.plants,
-    plantProduction: player.getProduction(Resources.PLANTS),
-    playedCards: getCards(player, player.playedCards, game),
-    cardsInHandNbr: player.cardsInHand.length,
-    citiesCount: player.getCitiesCount(game),
-    coloniesCount: player.getColoniesCount(game),
-    noTagsCount: player.getNoTagsCount(),
-    influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
-    coloniesExtension: game.gameOptions.coloniesExtension,
-    players: getPlayers(game.getPlayers(), game),
-    spaces: getSpaces(game.board.spaces),
-    steel: player.steel,
-    steelProduction: player.getProduction(Resources.STEEL),
-    steelValue: player.getSteelValue(),
-    temperature: game.getTemperature(),
-    terraformRating: player.getTerraformRating(),
-    titanium: player.titanium,
-    titaniumProduction: player.getProduction(Resources.TITANIUM),
-    titaniumValue: player.getTitaniumValue(game),
-    victoryPointsBreakdown: player.getVictoryPoints(game),
-    waitingFor: getWaitingFor(player.getWaitingFor()),
-    isSoloModeWin: game.isSoloModeWin(),
-    gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer,
-    corporateEra: game.gameOptions.corporateEra,
-    venusNextExtension: game.gameOptions.venusNextExtension,
-    venusScaleLevel: game.getVenusScaleLevel(),
-    boardName: game.gameOptions.boardName,
-    colonies: getColonies(game),
-    tags: player.getAllTags(),
-    showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
-    actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-    fleetSize: player.getFleetSize(),
-    tradesThisTurn: player.tradesThisTurn,
-    turmoil: turmoil,
-    selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
-    dealtCorporationCards: player.dealtCorporationCards,
-    dealtPreludeCards: player.dealtPreludeCards,
-    dealtProjectCards: player.dealtProjectCards,
-    initialDraft: game.gameOptions.initialDraftVariant,
-    needsToDraft: player.needsToDraft,
-    deckSize: game.dealer.getDeckSize(),
-    randomMA: game.gameOptions.randomMA,
-    actionsTakenThisRound: player.actionsTakenThisRound,
-    passedPlayers: game.getPassedPlayers(),
-    aresExtension: game.gameOptions.aresExtension,
-    aresData: game.aresData,
-    preludeExtension: game.gameOptions.preludeExtension,
-  };
-  return JSON.stringify(output);
-}
-
-function getCardsAsCardModel(
-  cards: Array<ICard>,
-  showResouces: boolean = true,
-): Array<CardModel> {
-  const result: Array<CardModel> = [];
-  cards.forEach((card) => {
-    result.push({
-      name: card.name,
-      resources:
-        card.resourceCount !== undefined && showResouces ?
-          card.resourceCount :
-          undefined,
-      resourceType: card.resourceType,
-      calculatedCost: 0,
-      cardType: CardType.AUTOMATED,
-      isDisabled: false,
-    });
-  });
-
-  return result;
-}
-
-function getWaitingFor(
-  waitingFor: PlayerInput | undefined,
-): PlayerInputModel | undefined {
-  if (waitingFor === undefined) {
-    return undefined;
-  }
-  const result: PlayerInputModel = {
-    title: waitingFor.title,
-    buttonLabel: waitingFor.buttonLabel,
-    inputType: waitingFor.inputType,
-    amount: undefined,
-    options: undefined,
-    cards: undefined,
-    maxCardsToSelect: undefined,
-    minCardsToSelect: undefined,
-    canUseSteel: undefined,
-    canUseTitanium: undefined,
-    canUseHeat: undefined,
-    players: undefined,
-    availableSpaces: undefined,
-    max: undefined,
-    microbes: undefined,
-    floaters: undefined,
-    coloniesModel: undefined,
-    payProduction: undefined,
-    aresData: undefined,
-  };
-  switch (waitingFor.inputType) {
-  case PlayerInputTypes.AND_OPTIONS:
-  case PlayerInputTypes.OR_OPTIONS:
-    result.options = [];
-    for (const option of (waitingFor as AndOptions | OrOptions)
-      .options) {
-      const subOption = getWaitingFor(option);
-      if (subOption !== undefined) {
-        result.options.push(subOption);
-      }
-    }
-    break;
-  case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-    result.cards = getCardsAsCardModel(
-      (waitingFor as SelectHowToPayForCard).cards,
-      false,
-    );
-    result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
-    result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
-    result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
-    break;
-  case PlayerInputTypes.SELECT_CARD:
-    result.cards = getCardsAsCardModel(
-      (waitingFor as SelectCard<ICard>).cards,
-    );
-    result.maxCardsToSelect = (waitingFor as SelectCard<
-        ICard
-      >).maxCardsToSelect;
-    result.minCardsToSelect = (waitingFor as SelectCard<
-        ICard
-      >).minCardsToSelect;
-    break;
-  case PlayerInputTypes.SELECT_COLONY:
-    result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
-    break;
-  case PlayerInputTypes.SELECT_HOW_TO_PAY:
-    result.amount = (waitingFor as SelectHowToPay).amount;
-    result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
-    result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
-    result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
-    break;
-  case PlayerInputTypes.SELECT_PLAYER:
-    result.players = (waitingFor as SelectPlayer).players.map(
-      (player) => player.color,
-    );
-    break;
-  case PlayerInputTypes.SELECT_SPACE:
-    result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
-      (space) => space.id,
-    );
-    break;
-  case PlayerInputTypes.SELECT_AMOUNT:
-    result.max = (waitingFor as SelectAmount).max;
-    break;
-  case PlayerInputTypes.SELECT_DELEGATE:
-    result.players = (waitingFor as SelectDelegate).players.map(
-      (player) => {
-        if (player === 'NEUTRAL') {
-          return 'NEUTRAL';
-        } else {
-          return player.color;
-        }
-      },
-    );
-    break;
-  case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
-    const _player = (waitingFor as SelectProductionToLose).player;
-    result.payProduction = {
-      cost: (waitingFor as SelectProductionToLose).unitsToLose,
-      units: {
-        megacredits: _player.getProduction(Resources.MEGACREDITS),
-        steel: _player.getProduction(Resources.STEEL),
-        titanium: _player.getProduction(Resources.TITANIUM),
-        plants: _player.getProduction(Resources.PLANTS),
-        energy: _player.getProduction(Resources.ENERGY),
-        heat: _player.getProduction(Resources.HEAT),
-      },
-    };
-    break;
-  case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
-    result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
-    break;
-  }
-  return result;
-}
-
-function getCards(
-  player: Player,
-  cards: Array<IProjectCard>,
-  game: Game,
-  showResouces: boolean = true,
-): Array<CardModel> {
-  return cards.map((card) => ({
-    resources: showResouces ? player.getResourcesOnCard(card) : undefined,
-    resourceType: card.resourceType,
-    name: card.name,
-    calculatedCost: player.getCardCost(game, card),
-    cardType: card.cardType,
-    isDisabled: false,
-  }));
-}
-
-function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-  const turmoil = getTurmoil(game);
-
-  return players.map((player) => {
-    return {
-      color: player.color,
-      corporationCard: getCorporationCard(player),
-      energy: player.energy,
-      energyProduction: player.getProduction(Resources.ENERGY),
-      heat: player.heat,
-      heatProduction: player.getProduction(Resources.HEAT),
-      id: game.phase === Phase.END ? player.id : player.color,
-      megaCredits: player.megaCredits,
-      megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
-      name: player.name,
-      plants: player.plants,
-      plantProduction: player.getProduction(Resources.PLANTS),
-      playedCards: getCards(player, player.playedCards, game),
-      cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(game),
-      coloniesCount: player.getColoniesCount(game),
-      noTagsCount: player.getNoTagsCount(),
-      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
-      coloniesExtension: game.gameOptions.coloniesExtension,
-      steel: player.steel,
-      steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
-      terraformRating: player.getTerraformRating(),
-      titanium: player.titanium,
-      titaniumProduction: player.getProduction(Resources.TITANIUM),
-      titaniumValue: player.getTitaniumValue(game),
-      victoryPointsBreakdown: player.getVictoryPoints(game),
-      isActive: player.id === game.activePlayer,
-      venusNextExtension: game.gameOptions.venusNextExtension,
-      venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.gameOptions.boardName,
-      colonies: getColonies(game),
-      tags: player.getAllTags(),
-      showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
-      actionsThisGeneration: Array.from(
-        player.getActionsThisGeneration(),
-      ),
-      fleetSize: player.getFleetSize(),
-      tradesThisTurn: player.tradesThisTurn,
-      turmoil: turmoil,
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(
-        game,
-      ),
-      needsToDraft: player.needsToDraft,
-      deckSize: game.dealer.getDeckSize(),
-      actionsTakenThisRound: player.actionsTakenThisRound,
-      preludeExtension: game.gameOptions.preludeExtension,
-    } as PlayerModel;
-  });
-}
-
-function getColonies(game: Game): Array<ColonyModel> {
-  return game.colonies.map(
-    (colony): ColonyModel => ({
-      colonies: colony.colonies.map(
-        (playerId): Color => game.getPlayerById(playerId).color,
-      ),
-      isActive: colony.isActive,
-      name: colony.name,
-      trackPosition: colony.trackPosition,
-      visitor:
-          colony.visitor === undefined ?
-            undefined :
-            game.getPlayerById(colony.visitor).color,
-    }),
-  );
-}
-
-function getTurmoil(game: Game): TurmoilModel | undefined {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    const parties = getParties(game);
-    let chairman; let dominant; let ruling;
-    if (game.turmoil.chairman) {
-      if (game.turmoil.chairman === 'NEUTRAL') {
-        chairman = Color.NEUTRAL;
-      } else {
-        chairman = game.getPlayerById(game.turmoil.chairman).color;
-      }
-    }
-    if (game.turmoil.dominantParty) {
-      dominant = game.turmoil.dominantParty.name;
-    }
-    if (game.turmoil.rulingParty) {
-      ruling = game.turmoil.rulingParty.name;
-    }
-
-    const lobby = Array.from(
-      game.turmoil.lobby,
-      (player) => game.getPlayerById(player).color,
-    );
-
-    const reserve = game.turmoil.getPresentPlayers().map((player) => {
-      const number = game.turmoil!.getDelegates(player);
-      if (player !== 'NEUTRAL') {
-        return {
-          color: game.getPlayerById(player).color,
-          number: number,
-        };
-      } else {
-        return {color: Color.NEUTRAL, number: number};
-      }
-    });
-
-    let distant;
-    if (game.turmoil.distantGlobalEvent) {
-      distant = {
-        name: game.turmoil.distantGlobalEvent.name,
-        description: game.turmoil.distantGlobalEvent.description,
-        revealed: game.turmoil.distantGlobalEvent.revealedDelegate,
-        current: game.turmoil.distantGlobalEvent.currentDelegate,
-      };
-    }
-
-    let comming;
-    if (game.turmoil.commingGlobalEvent) {
-      comming = {
-        name: game.turmoil.commingGlobalEvent.name,
-        description: game.turmoil.commingGlobalEvent.description,
-        revealed: game.turmoil.commingGlobalEvent.revealedDelegate,
-        current: game.turmoil.commingGlobalEvent.currentDelegate,
-      };
-    }
-
-    let current;
-    if (game.turmoil.currentGlobalEvent) {
-      current = {
-        name: game.turmoil.currentGlobalEvent.name,
-        description: game.turmoil.currentGlobalEvent.description,
-        revealed: game.turmoil.currentGlobalEvent.revealedDelegate,
-        current: game.turmoil.currentGlobalEvent.currentDelegate,
-      };
-    }
-
-    return {
-      chairman: chairman,
-      ruling: ruling,
-      dominant: dominant,
-      parties: parties,
-      lobby: lobby,
-      reserve: reserve,
-      distant: distant,
-      comming: comming,
-      current: current,
-    };
-  } else {
-    return undefined;
-  }
-}
-
-function getParties(game: Game): Array<PartyModel> {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
-      const delegates: Array<DelegatesModel> = [];
-      party.getPresentPlayers().forEach((player) => {
-        const number = party.getDelegates(player);
-        if (player !== 'NEUTRAL') {
-          delegates.push({
-            color: game.getPlayerById(player).color,
-            number: number,
-          });
-        } else {
-          delegates.push({color: Color.NEUTRAL, number: number});
-        }
-      });
-      let partyLeader;
-      if (party.partyLeader) {
-        if (party.partyLeader === 'NEUTRAL') {
-          partyLeader = Color.NEUTRAL;
-        } else {
-          partyLeader = game.getPlayerById(party.partyLeader).color;
-        }
-      }
-      return {
-        name: party.name,
-        description: party.description,
-        partyLeader: partyLeader,
-        delegates: delegates,
-      };
-    });
-  }
-  return [];
-}
-
-// Oceans can't be owned so they shouldn't have a color associated with them
-// Land claim can have a color on a space without a tile
-function getColor(space: ISpace): Color | undefined {
-  if (
-    (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
-    space.player !== undefined
-  ) {
-    return space.player.color;
-  }
-  if (space.tile?.protectedHazard === true) {
-    return Color.BRONZE;
-  }
-  return undefined;
-}
-
-function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
-  return spaces.map((space) => {
-    return {
-      x: space.x,
-      y: space.y,
-      id: space.id,
-      bonus: space.bonus,
-      spaceType: space.spaceType,
-      tileType: space.tile && space.tile.tileType,
-      color: getColor(space),
-    };
-  });
-}
-
-function getGame(game: Game): string {
-  const output: GameHomeModel = {
-    activePlayer: game.getPlayerById(game.activePlayer).color,
-    id: game.id,
-    phase: game.phase,
-    players: game.getPlayers().map((player) => ({
-      color: player.color,
-      id: player.id,
-      name: player.name,
-    })),
-  };
-  return JSON.stringify(output);
+function getGameModelJSON(game: Game): string {
+  const model = Server.getGameModel(game);
+  return JSON.stringify(model);
 }
 
 function isServerIdValid(req: http.IncomingMessage): boolean {
@@ -1067,7 +514,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
-    file = `dist${req.url}${suffix}`;
+    file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
   } else if (req.url === '/assets/futureforces.ttf') {

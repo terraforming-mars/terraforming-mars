@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {Penguins} from '../../../src/cards/promo/Penguins';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {maxOutOceans} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Penguins', function() {
   let card : Penguins; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Penguins();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

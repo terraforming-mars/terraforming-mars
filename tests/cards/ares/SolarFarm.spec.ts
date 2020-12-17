@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 import {AresHandler} from '../../../src/ares/AresHandler';
-
 import {SolarFarm} from '../../../src/cards/ares/SolarFarm';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
@@ -10,14 +8,16 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SolarFarm', function() {
   let card: SolarFarm; let player: Player; let game: Game;
 
   beforeEach(function() {
     card = new SolarFarm();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('Play', function() {

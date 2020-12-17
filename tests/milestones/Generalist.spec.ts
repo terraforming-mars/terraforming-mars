@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {Generalist} from '../../src/milestones/Generalist';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
+import {Generalist} from '../../src/milestones/Generalist';
+import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
-import {setCustomGameOptions} from '../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
 
 describe('Generalist', function() {
   let milestone : Generalist; let player : Player; let player2: Player; let resources: Resources[];
 
   beforeEach(function() {
     milestone = new Generalist();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
 
     resources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
   });

@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MartianSurvey', function() {
   let card : MartianSurvey; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new MartianSurvey();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

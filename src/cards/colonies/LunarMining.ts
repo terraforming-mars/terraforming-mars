@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class LunarMining implements IProjectCard {
     public cost = 11;
@@ -15,4 +17,13 @@ export class LunarMining implements IProjectCard {
       player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: 'C22',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.titanium(1).slash().earth(2).played;
+        });
+      }),
+      description: 'Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.',
+    };
 }

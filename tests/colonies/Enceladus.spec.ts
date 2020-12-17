@@ -1,11 +1,11 @@
 import {expect} from 'chai';
+import {RegolithEaters} from '../../src/cards/base/RegolithEaters';
+import {Tardigrades} from '../../src/cards/base/Tardigrades';
 import {Enceladus} from '../../src/colonies/Enceladus';
-import {Tardigrades} from '../../src/cards/Tardigrades';
-import {RegolithEaters} from '../../src/cards/RegolithEaters';
-import {Color} from '../../src/Color';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestingUtils';
 
 describe('Enceladus', function() {
   let enceladus: Enceladus; let tardigrades: Tardigrades; let player: Player; let player2: Player; let game: Game;
@@ -13,8 +13,8 @@ describe('Enceladus', function() {
   beforeEach(function() {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(enceladus);

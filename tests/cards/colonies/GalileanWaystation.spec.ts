@@ -1,21 +1,21 @@
 import {expect} from 'chai';
+import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
+import {MethaneFromTitan} from '../../../src/cards/base/MethaneFromTitan';
 import {GalileanWaystation} from '../../../src/cards/colonies/GalileanWaystation';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
-import {ColonizerTrainingCamp} from '../../../src/cards/ColonizerTrainingCamp';
-import {MethaneFromTitan} from '../../../src/cards/MethaneFromTitan';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('GalileanWaystation', function() {
   let card : GalileanWaystation; let player : Player; let player2: Player; let game : Game;
 
   beforeEach(function() {
     card = new GalileanWaystation();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

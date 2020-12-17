@@ -1,16 +1,17 @@
 import {expect} from 'chai';
 import {Inventrix} from '../../../src/cards/corporation/Inventrix';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Inventrix', function() {
   let card : Inventrix; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Inventrix();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

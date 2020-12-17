@@ -20,6 +20,7 @@ describe('ShiftAresGlobalParameters', function() {
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    min: undefined,
     max: undefined,
     microbes: undefined,
     floaters: undefined,

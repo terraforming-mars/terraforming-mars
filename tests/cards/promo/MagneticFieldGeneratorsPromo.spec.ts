@@ -1,18 +1,19 @@
 import {expect} from 'chai';
 import {MagneticFieldGeneratorsPromo} from '../../../src/cards/promo/MagneticFieldGeneratorsPromo';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card : MagneticFieldGeneratorsPromo; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Cannot play without enough energy production', function() {

@@ -1,20 +1,21 @@
 import {expect} from 'chai';
 import {GreatDamPromo} from '../../../src/cards/promo/GreatDamPromo';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {maxOutOceans} from '../../TestingUtils';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
+import {maxOutOceans} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('GreatDamPromo', function() {
   let card : GreatDamPromo; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new GreatDamPromo();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play without meeting requirements', function() {

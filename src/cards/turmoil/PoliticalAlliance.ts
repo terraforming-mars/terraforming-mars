@@ -6,6 +6,9 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PoliticalAlliance implements IProjectCard {
     public cost = 4;
@@ -29,5 +32,14 @@ export class PoliticalAlliance implements IProjectCard {
     public play(player: Player, game: Game) {
       player.increaseTerraformRating(game);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X09',
+      requirements: CardRequirements.builder((b) => b.partyLeaders(2)),
+      renderData: CardRenderer.builder((b) => {
+        b.tr(1);
+      }),
+      description: 'Requires that you have 2 party leaders. Gain 1 TR.',
     }
 }

@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {StrongSociety} from '../../src/turmoil/globalEvents/StrongSociety';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Resources} from '../../src/Resources';
+import {StrongSociety} from '../../src/turmoil/globalEvents/StrongSociety';
+import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('StrongSociety', function() {
   it('resolve play', function() {
     const card = new StrongSociety();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
 
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     turmoil.chairman = player2.id;

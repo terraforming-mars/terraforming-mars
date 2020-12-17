@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class HousePrinting implements IProjectCard {
     public cost = 10;
@@ -18,4 +20,12 @@ export class HousePrinting implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+    public metadata: CardMetadata = {
+      cardNumber: 'P36',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.steel(1));
+      }),
+      description: 'Increase your steel production 1 step.',
+      victoryPoints: 1,
+    };
 }

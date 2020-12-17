@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {Splice} from '../../../src/cards/promo/Splice';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
 import {Recyclon} from '../../../src/cards/promo/Recyclon';
+import {Splice} from '../../../src/cards/promo/Splice';
+import {Game} from '../../../src/Game';
+import {AndOptions} from '../../../src/inputs/AndOptions';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('Splice', function() {
   let card : Splice; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Splice();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

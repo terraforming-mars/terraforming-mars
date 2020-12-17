@@ -119,7 +119,7 @@ checkComponent(
     require('./build/src/components/Preferences').Preferences,
     [
       'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
-      'hide_turnorder', 'hide_corporation_names', 'small_cards', 'remove_background', 'magnify_cards',
+      'hide_turnorder', 'hide_corporation_names', ,'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
       'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
       'lang', 'langs', 'enable_sounds',
     ],
@@ -239,6 +239,11 @@ checkComponent(
     require('./build/src/components/overview/PlayerTags').PlayerTags,
     [],
 );
+checkComponent(
+  'src/components/TopBar',
+  require('./build/src/components/TopBar').TopBar,
+  ['componentKey'],
+);
 
 function checkComponent(name, component, dataProperties) {
   const methodNames = component.methods === undefined ? [] : Object.keys(component.methods);
@@ -259,6 +264,7 @@ function checkComponent(name, component, dataProperties) {
   });
 
   if (result.errors.length > 0) {
+    console.error(result.errors);
     throw new Error(`errors found while parsing template for ${name}`, result.errors);
   }
 
@@ -277,10 +283,6 @@ function checkComponent(name, component, dataProperties) {
 
   // make easier to read and debug
   result = beautify(result);
-
-  if (result.indexOf('this') !== -1) {
-    throw new Error(`don't use this inside template string for ${name}`);
-  }
 
   // append scope since we stripped 'with'
   let scope = '';
@@ -340,6 +342,7 @@ function checkComponent(name, component, dataProperties) {
   lines.unshift('declare function $set(arg1: any, key: string, value: string): void;');
   // seems to be array looper iterating function needs to pass along type information
   lines.unshift('declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;');
+  lines.unshift('declare function _l<T>(arg1: {[x: string]: T}, args: (item2: T, idx: number) => any): any;');
   lines.unshift('declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;');
   file = lines.join('\n');
 

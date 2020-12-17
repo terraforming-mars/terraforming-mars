@@ -21,8 +21,9 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './ISpace';
 import {ITagCount} from './ITagCount';
+import {LogMessageDataType} from './LogMessageDataType';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
-import {MiningCard} from './cards/MiningCard';
+import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
@@ -61,8 +62,9 @@ import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs
 
 export type PlayerId = string;
 
-export class Player implements ISerializable<SerializedPlayer, Player> {
-    public id: PlayerId;
+export class Player implements ISerializable<SerializedPlayer> {
+    public readonly id: PlayerId;
+    private usedUndo: boolean = false;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
 
@@ -98,7 +100,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
 
     // This generation / this round
     public actionsTakenThisRound: number = 0;
-    private actionsThisGeneration: Set<string> = new Set<string>();
+    private actionsThisGeneration: Set<CardName> = new Set();
     public lastCardPlayed: IProjectCard | undefined;
     private corporationInitialActionDone: boolean = false;
 
@@ -110,9 +112,6 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     public preludeCardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
-    public removedFromPlayCards: Array<IProjectCard> = [];
-    // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-    private generationPlayed: Map<string, number> = new Map<string, number>();
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
@@ -125,12 +124,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     public colonyVictoryPoints: number = 0;
 
     // Turmoil
-    private turmoilScientistsActionUsed: boolean = false;
-
-    // Controlled by cards with effects that might be called a second time recursively, I think.
-    // They set this to false in order to prevent card effects from triggering twice.
-    // Not sure this is clear.
-    public shouldTriggerCardEffect: boolean = true;
+    public turmoilScientistsActionUsed: boolean = false;
 
     public powerPlantCost: number = 11;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
@@ -143,13 +137,29 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     public plantsNeededForGreenery: number = 8;
     // Lawsuit
     public removingPlayers: Array<PlayerId> = [];
+    // For Playwrights corp.
+    // removedFromPlayCards is a bit of a misname: it's a temporary storage for
+    // cards that provide 'next card' discounts. This will clear between turns.
+    public removedFromPlayCards: Array<IProjectCard> = [];
 
     constructor(
-        public name: string,
-        public color: Color,
-        public beginner: boolean,
-        public handicap: number = 0) {
-      this.id = this.generateId();
+      public name: string,
+      public color: Color,
+      public beginner: boolean,
+      public handicap: number = 0,
+      id: PlayerId | undefined = undefined) {
+      // TODO(kberg): Take ID generation outside of this constructor, and leave it up to callers.
+      this.id = id === undefined ? this.generateId() : id;
+    }
+
+    public static initialize(
+      name: string,
+      color: Color,
+      beginner: boolean,
+      handicap: number = 0,
+      id: PlayerId | undefined = undefined): Player {
+      const player = new Player(name, color, beginner, handicap, id);
+      return player;
     }
 
     public isCorporation(corporationName: CardName): boolean {
@@ -358,11 +368,11 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     };
 
-    public getActionsThisGeneration(): Set<string> {
+    public getActionsThisGeneration(): Set<CardName> {
       return this.actionsThisGeneration;
     }
 
-    public setActionsThisGeneration(cardName: string): void {
+    public setActionsThisGeneration(cardName: CardName): void {
       this.actionsThisGeneration.add(cardName);
       return;
     }
@@ -626,7 +636,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
 
       if (tag === Tags.WILDCARD) {
         return tagCount;
-      };
+      }
       if (includeWildcardTags) {
         return tagCount + this.getTagCount(Tags.WILDCARD);
       } else {
@@ -648,7 +658,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       if (extraTag !== undefined) {
         allTags.push(extraTag);
       }
-      const uniqueTags: Set<Tags> = new Set<Tags>();
+      const uniqueTags: Set<Tags> = new Set();
       if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
@@ -686,150 +696,114 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     }
 
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
-      const foundCards = cards.filter((card) => card.name === cardName);
-      if (foundCards.length === 0) {
+      const foundCard = cards.find((card) => card.name === cardName);
+      if (foundCard === undefined) {
         throw new Error('Card not found');
       }
-      return foundCards[0];
+      return foundCard;
     }
+
     private runInputCb(game: Game, result: PlayerInput | undefined): void {
       if (result !== undefined) {
-        game.defer(new DeferredAction(
-          this,
-          () => result,
-        ));
+        game.defer(new DeferredAction(this, () => result));
       }
     }
-    private runInput(
-      game: Game,
-      input: Array<Array<string>>,
-      pi: PlayerInput): void {
-      if (pi instanceof AndOptions) {
-        const waiting: AndOptions = pi;
-        if (input.length !== waiting.options.length) {
-          throw new Error('Not all options provided');
+
+    private checkInputLength(input: ReadonlyArray<ReadonlyArray<string>>, length: number, firstOptionLength?: number) {
+      if (input.length !== length) {
+        throw new Error('Incorrect options provided');
+      }
+      if (firstOptionLength !== undefined && input[0].length !== firstOptionLength) {
+        throw new Error('Incorrect options provided (nested)');
+      }
+    }
+
+    private parseHowToPayJSON(json: string): HowToPay {
+      const defaults: HowToPay = {
+        steel: 0,
+        heat: 0,
+        titanium: 0,
+        megaCredits: 0,
+        microbes: 0,
+        floaters: 0,
+        isResearchPhase: false,
+      };
+      try {
+        const howToPay: HowToPay = JSON.parse(json);
+        if (Object.keys(howToPay).every((key) => key in defaults) === false) {
+          throw new Error('Input contains unauthorized keys');
         }
+        return howToPay;
+      } catch (err) {
+        throw new Error('Unable to parse HowToPay input ' + err);
+      }
+    }
+
+    private runInput(game: Game, input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+      if (pi instanceof AndOptions) {
+        this.checkInputLength(input, pi.options.length);
         for (let i = 0; i < input.length; i++) {
-          this.runInput(game, [input[i]], waiting.options[i]);
+          this.runInput(game, [input[i]], pi.options[i]);
         }
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectAmount) {
-        const waiting: SelectAmount = pi;
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Incorrect number of amounts provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const amount: number = parseInt(input[0][0]);
         if (isNaN(amount)) {
           throw new Error('Number not provided for amount');
         }
-        if (amount > waiting.max) {
-          throw new Error('Amount provided too high');
+        if (amount > pi.max) {
+          throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
         }
-        if (amount < 0) {
-          throw new Error('Amount provided too low');
+        if (amount < pi.min) {
+          throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
         }
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectColony) {
+        this.checkInputLength(input, 1, 1);
         const colony: ColonyName = (input[0][0]) as ColonyName;
         if (colony === undefined) {
           throw new Error('No colony selected');
         }
         this.runInputCb(game, pi.cb(colony));
       } else if (pi instanceof OrOptions) {
-        const waiting: OrOptions = pi;
-        const optionIndex = parseInt(input[0][0]);
-        const remainingInput = [];
-        for (let i = 1; i < input.length; i++) {
-          remainingInput.push(input[i].slice());
+        // input length is variable, can't test it with checkInputLength
+        if (input.length === 0 || input[0].length !== 1) {
+          throw new Error('Incorrect options provided');
         }
-        this.runInput(game, remainingInput, waiting.options[optionIndex]);
+        const optionIndex = parseInt(input[0][0]);
+        const selectedOptionInput = input.slice(1);
+        this.runInput(game, selectedOptionInput, pi.options[optionIndex]);
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectHowToPayForCard) {
-        if (input.length !== 1 || input[0].length !== 2) {
-          throw new Error('Incorrect options provided');
-        }
+        this.checkInputLength(input, 1, 2);
         const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
-        const payMethod: HowToPay = {
-          steel: 0,
-          heat: 0,
-          titanium: 0,
-          megaCredits: 0,
-          microbes: 0,
-          floaters: 0,
-          isResearchPhase: false,
-        };
-        try {
-          const parsedInput: {[x: string]: number} =
-                    JSON.parse(input[0][1]);
-          if (
-            this.canUseSteel(foundCard) &&
-                    parsedInput.steel !== undefined) {
-            payMethod.steel = parsedInput.steel;
-          }
-          if (
-            this.canUseTitanium(foundCard) &&
-                    parsedInput.titanium !== undefined) {
-            payMethod.titanium = parsedInput.titanium;
-          }
-          if (parsedInput.megaCredits !== undefined) {
-            payMethod.megaCredits = parsedInput.megaCredits;
-          }
-          if (this.canUseHeatAsMegaCredits) {
-            if (parsedInput.heat !== undefined) {
-              payMethod.heat = parsedInput.heat;
-            }
-          }
-          if (parsedInput.microbes !== undefined) {
-            payMethod.microbes = parsedInput.microbes;
-          }
-          if (parsedInput.floaters !== undefined) {
-            payMethod.floaters = parsedInput.floaters;
-          }
-        } catch (err) {
-          throw new Error('Unable to parse input ' + err);
-        }
-        this.runInputCb(game, pi.cb(foundCard, payMethod));
+        const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
+        this.runInputCb(game, pi.cb(foundCard, howToPay));
       } else if (pi instanceof SelectCard) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        const mappedCards: Array<ICard> = [];
-        for (const cardName of input[0]) {
-          mappedCards.push(this.getCard(pi.cards, cardName));
-        }
+        this.checkInputLength(input, 1);
         if (input[0].length < pi.minCardsToSelect) {
           throw new Error('Not enough cards selected');
         }
         if (input[0].length > pi.maxCardsToSelect) {
           throw new Error('Too many cards selected');
         }
-        if (mappedCards.length !== input[0].length) {
-          throw new Error('Not all cards found');
+        const mappedCards: Array<ICard> = [];
+        for (const cardName of input[0]) {
+          mappedCards.push(this.getCard(pi.cards, cardName));
         }
         this.runInputCb(game, pi.cb(mappedCards));
       } else if (pi instanceof SelectAmount) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Too many amounts provided');
-        }
-        if (isNaN(parseInt(input[0][0]))) {
+        this.checkInputLength(input, 1, 1);
+        const amount = parseInt(input[0][0]);
+        if (isNaN(amount)) {
           throw new Error('Amount is not a number');
         }
-        this.runInputCb(game, pi.cb(parseInt(input[0][0])));
+        this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectSpace) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Too many spaces provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const foundSpace = pi.availableSpaces.find(
           (space) => space.id === input[0][0],
         );
@@ -838,12 +812,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         }
         this.runInputCb(game, pi.cb(foundSpace));
       } else if (pi instanceof SelectPlayer) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Invalid players array provided');
-        }
+        this.checkInputLength(input, 1, 1);
         const foundPlayer = pi.players.find(
           (player) => player.color === input[0][0] || player.id === input[0][0],
         );
@@ -852,89 +821,26 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         }
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectDelegate) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0].length !== 1) {
-          throw new Error('Invalid players array provided');
-        }
-        let foundPlayer: Player | 'NEUTRAL' | undefined = undefined;
-        if (input[0][0] === 'NEUTRAL') {
-          foundPlayer = 'NEUTRAL';
-        } else {
-          pi.players.forEach((player) => {
-            if (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])) {
-              foundPlayer = player;
-            }
-          });
-        }
+        this.checkInputLength(input, 1, 1);
+        const foundPlayer = pi.players.find((player) =>
+          player === input[0][0] ||
+          (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])),
+        );
         if (foundPlayer === undefined) {
           throw new Error('Player not available');
         }
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
-        if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
-        }
-        if (input[0] === null) throw new Error('Invalid/no input provided');
-        if (input[0].length !== 1) {
-          throw new Error('Incorrect input provided');
-        }
-        const payMethod: HowToPay = {
-          steel: 0,
-          heat: 0,
-          titanium: 0,
-          megaCredits: 0,
-          microbes: 0,
-          floaters: 0,
-          isResearchPhase: false,
-        };
-        if (!this.canUseHeatAsMegaCredits) payMethod.heat = 0;
-
-        try {
-          const parsedInput: {[x: string]: number} =
-                    JSON.parse(input[0][0]);
-          if (parsedInput.steel !== undefined) {
-            payMethod.steel = parsedInput.steel;
-          } else {
-            throw new Error('Steel not provided, bad input');
-          }
-          if (parsedInput.titanium !== undefined) {
-            payMethod.titanium = parsedInput.titanium;
-          } else {
-            throw new Error('Titanium not provided, bad input');
-          }
-          if (parsedInput.megaCredits !== undefined) {
-            payMethod.megaCredits = parsedInput.megaCredits;
-          } else {
-            throw new Error('Mega credits not provided, bad input');
-          }
-          if (this.canUseHeatAsMegaCredits) {
-            if (parsedInput.heat !== undefined) {
-              payMethod.heat = parsedInput.heat;
-            } else {
-              throw new Error('Heat not provided, bad input');
-            }
-          }
-          if (parsedInput.microbes !== undefined) {
-            payMethod.microbes = parsedInput.microbes;
-          }
-          if (parsedInput.isResearchPhase !== undefined) {
-            payMethod.isResearchPhase = (parsedInput.isResearchPhase) as any;
-          }
-        } catch (err) {
-          throw new Error('Unable to parse input ' + err);
-        }
-        this.runInputCb(game, pi.cb(payMethod));
+        this.checkInputLength(input, 1, 1);
+        const howToPay: HowToPay = this.parseHowToPayJSON(input[0][0]);
+        this.runInputCb(game, pi.cb(howToPay));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const units: IProductionUnits = parsedInput;
+        const units: IProductionUnits = JSON.parse(input[0][0]);
         pi.cb(units);
       } else if (pi instanceof ShiftAresGlobalParameters) {
         // TODO(kberg): I'm sure there's some input validation required.
-        const parsedInput = JSON.parse(input[0][0]);
-        const response: IAresGlobalParametersResponse = parsedInput;
+        const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
         pi.cb(response);
       } else {
         throw new Error('Unsupported waitingFor');
@@ -1041,7 +947,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
     }
 
-    public runDraftPhase(initialDraft: boolean, game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
+    public runDraftPhase(initialDraft: boolean, game: Game, playerName: string, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
         if (!initialDraft) {
@@ -1054,16 +960,21 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       }
 
       this.setWaitingFor(
-        new SelectCard(
-          'Select a card to keep and pass the rest to ' + playerName,
-          'Keep',
-          cards,
-          (foundCards: Array<IProjectCard>) => {
-            this.draftedCards.push(foundCards[0]);
-            cards = cards.filter((card) => card !== foundCards[0]);
-            game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
-            return undefined;
-          }, 1, 1,
+        new SelectCard({
+          message: 'Select a card to keep and pass the rest to ${0}',
+          data: [{
+            type: LogMessageDataType.RAW_STRING,
+            value: playerName,
+          }],
+        },
+        'Keep',
+        cards,
+        (foundCards: Array<IProjectCard>) => {
+          this.draftedCards.push(foundCards[0]);
+          cards = cards.filter((card) => card !== foundCards[0]);
+          game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          return undefined;
+        }, 1, 1,
         ), () => { },
       );
     }
@@ -1177,9 +1088,9 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       this.playedCards.push(card);
       game.log('${0} played ${1}', (b) => b.player(this).card(card));
       this.lastCardPlayed = card;
-      this.generationPlayed.set(card.name, game.generation);
 
       // Playwrights hook for Conscription and Indentured Workers
+      // Cards "removed from play" can still have an effect
       this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
     }
 
@@ -1618,7 +1529,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
       const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
 
-      const selectColony = new SelectColony('Select colony for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
+      const selectColony = new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach((colony) => {
           if (colony.name === colonyName) {
             game.log('${0} traded with ${1}', (b) => b.player(this).colony(colony));
@@ -1692,7 +1603,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         ...opts,
       );
 
-      trade.title = 'Trade with a colony';
+      trade.title = 'Trade with a colony tile';
       trade.buttonLabel = 'Trade';
 
       return trade;
@@ -1826,20 +1737,26 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       });
     }
 
+    public pass(game: Game) {
+      game.playerHasPassed(this);
+      this.lastCardPlayed = undefined;
+    }
+
     private passOption(game: Game): PlayerInput {
       return new SelectOption('Pass for this generation', 'Pass', () => {
-        game.playerHasPassed(this);
+        this.pass(game);
         game.log('${0} passed', (b) => b.player(this));
-        this.lastCardPlayed = undefined;
         return undefined;
       });
     }
 
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
-      return new SelectOption('Undo Turn', 'Undo', () => {
+      return new SelectOption('Undo last action', 'Undo', () => {
         try {
-          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
+          Database.getInstance().deleteGameNbrSaves(game.id, 1);
+          this.usedUndo = true; // To prevent going back into takeAction()
         } catch (error) {
           console.log(error);
         }
@@ -2056,11 +1973,27 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
     }
 
     public takeAction(game: Game): void {
-      if (game.deferredActions.nextForPlayer(this.id) !== undefined) {
-        game.deferredActions.runAllForPlayer(this.id, () => {
-          this.takeAction(game);
-        });
+      if (this.usedUndo) {
+        this.usedUndo = false;
         return;
+      }
+
+      if (game.deferredActions.length > 0) {
+        game.deferredActions.runAll(() => this.takeAction(game));
+        return;
+      }
+
+      const players = game.getPlayers();
+      const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
+
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+        /*
+         * Need to save before increasing lastSaveId so that reloading the game
+         * doesn't create another new save on top of it, like this:
+         * increment -> save -> reload -> increment -> save
+         */
+        Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
+        game.lastSaveId += 1;
       }
 
       // Prelude cards have to be played first
@@ -2086,7 +2019,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         game.phase = Phase.ACTION;
       }
 
-      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
+      if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
         this.actionsTakenThisRound = 0;
         game.playerIsFinishedTakingActions();
         return;
@@ -2098,17 +2031,26 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
             corporationCard.initialActionText !== undefined &&
             this.corporationInitialActionDone === false
       ) {
-        const initialActionOption = new SelectOption('Take ' + corporationCard.name + '\'s first action', corporationCard.initialActionText, () => {
-          game.defer(new DeferredAction(this, () => {
-            if (corporationCard.initialAction) {
-              return corporationCard.initialAction(this, game);
-            } else {
-              return undefined;
-            }
-          }));
-          this.corporationInitialActionDone = true;
-          return undefined;
-        });
+        const initialActionOption = new SelectOption(
+          {
+            message: 'Take first action of ${0} corporation',
+            data: [{
+              type: LogMessageDataType.RAW_STRING,
+              value: corporationCard.name,
+            }],
+          },
+          corporationCard.initialActionText, () => {
+            game.defer(new DeferredAction(this, () => {
+              if (corporationCard.initialAction) {
+                return corporationCard.initialAction(this, game);
+              } else {
+                return undefined;
+              }
+            }));
+            this.corporationInitialActionDone = true;
+            return undefined;
+          },
+        );
         const initialActionOrPass = new OrOptions(
           initialActionOption,
           this.passOption(game),
@@ -2233,7 +2175,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         return 0;
       });
 
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption) {
+      if (players.length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption && allOtherPlayersHavePassed === false) {
         action.options.push(
           this.endTurnOption(game),
         );
@@ -2278,6 +2220,13 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+    }
+
+    public allOtherPlayersHavePassed(game: Game): boolean {
+      if (game.isSoloMode()) return true;
+      const players = game.getPlayers();
+      const passedPlayers = game.getPassedPlayers();
+      return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
     }
 
     public process(game: Game, input: Array<Array<string>>): void {
@@ -2330,7 +2279,7 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
           isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
         },
         // Used only during set-up
-        pickedCorporationCard: this.pickedCorporationCard,
+        pickedCorporationCard: this.pickedCorporationCard?.name,
         // Terraforming Rating
         terraformRating: this.terraformRating,
         hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
@@ -2365,9 +2314,6 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
         playedCards: this.serializePlayedCards(),
         draftedCards: this.draftedCards.map((c) => c.name),
-        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
-        // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
-        generationPlayed: Array.from(this.generationPlayed),
         cardCost: this.cardCost,
         needsToDraft: this.needsToDraft,
         cardDiscount: this.cardDiscount,
@@ -2379,10 +2325,6 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
         turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
-        // Controlled by cards with effects that might be called a second time recursively, I think.
-        // They set this to false in order to prevent card effects from triggering twice.
-        // Not sure this is clear.
-        shouldTriggerCardEffect: this.shouldTriggerCardEffect,
         powerPlantCost: this.powerPlantCost,
         victoryPointsBreakdown: this.victoryPointsBreakdown,
         oceanBonus: this.oceanBonus,
@@ -2393,10 +2335,14 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
         plantsNeededForGreenery: this.plantsNeededForGreenery,
         // Lawsuit
         removingPlayers: this.removingPlayers,
+        // Playwrights
+        removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
         name: this.name,
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
+        // Used when undoing action
+        usedUndo: this.usedUndo,
       };
       if (this.lastCardPlayed !== undefined) {
         result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2404,63 +2350,107 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       return result;
     }
 
-    // Function used to rebuild each objects
-    public loadFromJSON(d: SerializedPlayer): Player {
-      // Assign each attributes
-      const o = Object.assign(this, d);
+    // Only use useObjectAssign in tests.
+    // TODO(kberg): Remove useObjectAssign by 2020-02-01
+    public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
+      const player = new Player(d.name, d.color, d.beginner, d.handicap, d.id);
       const cardFinder = new CardFinder();
-      // Rebuild generation played map
-      this.generationPlayed = new Map<string, number>(d.generationPlayed);
 
-      // action this generation set
-      this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+      if (useObjectAssign) {
+        Object.assign(player, d);
+      } else {
+        player.actionsTakenThisRound = d.actionsTakenThisRound;
+        player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+        player.cardCost = d.cardCost;
+        player.cardDiscount = d.cardDiscount;
+        player.colonyTradeDiscount = d.colonyTradeDiscount;
+        player.colonyTradeOffset = d.colonyTradeOffset;
+        player.colonyVictoryPoints = d.colonyVictoryPoints;
+        player.corporationInitialActionDone = d.corporationInitialActionDone;
+        player.energy = d.energy;
+        player.energyProduction = d.energyProduction;
+        player.fleetSize = d.fleetSize;
+        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+        player.heat = d.heat;
+        player.heatProduction = d.heatProduction;
+        player.megaCreditProduction = d.megaCreditProduction;
+        player.megaCredits = d.megaCredits;
+        player.needsToDraft = d.needsToDraft;
+        player.oceanBonus = d.oceanBonus;
+        player.plantProduction = d.plantProduction;
+        player.plants = d.plants;
+        player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+        player.powerPlantCost = d.powerPlantCost;
+        player.removingPlayers = d.removingPlayers;
+        player.scienceTagCount = d.scienceTagCount;
+        player.steel = d.steel;
+        player.steelProduction = d.steelProduction;
+        player.steelValue = d.steelValue;
+        player.terraformRating = d.terraformRating;
+        player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+        player.titanium = d.titanium;
+        player.titaniumProduction = d.titaniumProduction;
+        player.titaniumValue = d.titaniumValue;
+        player.tradesThisTurn = d.tradesThisTurn;
+        player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+        player.victoryPointsBreakdown = d.victoryPointsBreakdown;
+      }
+
+      player.lastCardPlayed = d.lastCardPlayed !== undefined ?
+        cardFinder.getProjectCardByName(d.lastCardPlayed) :
+        undefined;
+
+      // Rebuild removed from play cards (Playwrights)
+      player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+
+      player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
-        this.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
+        player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
       }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
-        this.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
-        if (this.corporationCard !== undefined) {
+        player.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
+        if (player.corporationCard !== undefined) {
           if (d.corporationCard.resourceCount !== undefined) {
-            this.corporationCard.resourceCount = d.corporationCard.resourceCount;
+            player.corporationCard.resourceCount = d.corporationCard.resourceCount;
           }
         }
-        if (this.corporationCard instanceof Aridor) {
+        if (player.corporationCard instanceof Aridor) {
           if (d.corporationCard.allTags !== undefined) {
-            this.corporationCard.allTags = new Set(d.corporationCard.allTags);
+            player.corporationCard.allTags = new Set(d.corporationCard.allTags);
           } else {
             console.warn('did not find allTags for ARIDOR');
           }
         }
-        if (this.corporationCard instanceof PharmacyUnion) {
+        if (player.corporationCard instanceof PharmacyUnion) {
           if (d.corporationCard.isDisabled === true) {
-            this.corporationCard.tags = [];
-            this.corporationCard.isDisabled = true;
+            player.corporationCard.tags = [];
+            player.corporationCard.isDisabled = true;
           }
         }
       } else {
-        this.corporationCard = undefined;
+        player.corporationCard = undefined;
       }
 
       // Rebuild dealt corporation array
-      this.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
+      player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
 
       // Rebuild dealt prelude array
-      this.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
+      player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
 
       // Rebuild dealt cards array
-      this.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
+      player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
 
       // Rebuild each cards in hand
-      this.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
+      player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
 
       // Rebuild each prelude in hand
-      this.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
+      player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
 
       // Rebuild each played card
-      this.playedCards = d.playedCards.map((element: SerializedCard) => {
+      player.playedCards = d.playedCards.map((element: SerializedCard) => {
         const card = cardFinder.getProjectCardByName(element.name)!;
         if (element.resourceCount !== undefined) {
           card.resourceCount = element.resourceCount;
@@ -2486,9 +2476,9 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       });
 
       // Rebuild each drafted cards
-      this.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+      player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
-      return o;
+      return player;
     }
 
     public getFleetSize(): number {
@@ -2513,4 +2503,3 @@ export class Player implements ISerializable<SerializedPlayer, Player> {
       return colonyTilesAlreadyBuiltOn < game.colonies.length;
     }
 }
-

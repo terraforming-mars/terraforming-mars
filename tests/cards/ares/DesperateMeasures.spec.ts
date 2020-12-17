@@ -1,18 +1,19 @@
 import {expect} from 'chai';
 import {DesperateMeasures} from '../../../src/cards/ares/DesperateMeasures';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('DesperateMeasures', function() {
   let card : DesperateMeasures; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new DesperateMeasures();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('play on top of dust storm', function() {

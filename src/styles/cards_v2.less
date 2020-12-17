@@ -13,9 +13,8 @@
         position: relative;
         .card-requirements {
             width: 70%;
-            height: 25px;
+            min-height: 25px;
             line-height: 25px;
-            text-align: center;
             font-weight: normal;
             font-size: 15px;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
@@ -28,6 +27,19 @@
             );
             font-family: Ubuntu;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            flex-flow: row;
+            align-items: center;
+            .party {
+                background: #ddd;
+                padding: 0px 10px 0px 10px;
+                border: 1px solid #666;
+                border-radius: 20px;
+                text-transform: uppercase;
+                height: 18px;
+                line-height: 18px;
+            }
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);
@@ -35,6 +47,7 @@
             background-position: -4px -4px;
             filter: grayscale(0.2);
         }
+        
         .card-content {
             // background: grey;
             color: black;
@@ -98,14 +111,6 @@
                 background-image: url(./assets/global-parameters/temperature.png);
                 width: 14px;
                 background-size: 14px 46px;
-            }
-            .card-greenery-global-requirement {
-                background-image: url(./assets/tiles/greenery.png);
-                background-size: 50px 46px;
-                width: 50px;
-            }
-            .card-greenery-no-O2-global-requirement {
-                background-image: url(./assets/tiles/greenery_no_O2.png);
             }
             .card-ocean-global-requirement {
                 background-image: url(./assets/tiles/ocean.png);
@@ -191,6 +196,9 @@
             .card-resource-pristar {
                 background-image: url(./assets/resources/pristar.png);
             }
+            .card-resource-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
+            }
             /*special*/
             .card-special {
                 font-size: @font_size_big;
@@ -201,18 +209,20 @@
             }
             .card-minus {
                 background-image: url(/assets/misc/minus.png);
-                background-size: 15px;
+                background-size: 12px;
                 margin: 0;
-                width: 15px;
-                height: 10px;
+                width: 12px;
+                height: 8px;
                 background-repeat: no-repeat;
                 margin-right: 2px;
+                position: relative;
+                top: -2px;
             }
             .card-plus {
                 background-image: url(/assets/misc/plus.png);
-                background-size: 15px;
-                min-height: 15px;
-                width: 15px;
+                background-size: 12px;
+                min-height: 12px;
+                width: 12px;
                 vertical-align: middle;
                 display: inline-block;
                 margin: 0;
@@ -226,10 +236,17 @@
             }
             .card-or,
             .card-colon {
-                font-size: @font_size_big;
+                font-size: @font_size_normal;
+                line-height: normal;
+            }
+            .card-slash, .card-equals {
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-or--small, .card-slash--small {
-                font-size: @font_size_normal;
+                font-size: @font_size_small;
+                margin-left: 2px;
+                margin-right: 2px;
             }
 
             .card-res-amount {
@@ -242,10 +259,34 @@
                 width: 30px;
                 background-size: 30px 40px;
                 vertical-align: middle;
+                .cards-count {
+                    position: absolute;
+                    background: #ffffffb3;
+                    color: black;
+                    margin-left: 3px;
+                    width: 24px;
+                    height: 20px;
+                    line-height: 20px;
+                    margin-top: 16px;
+                    border-radius: 5px;
+                    font-size: 17px;
+                }
+                .card-icon-space {
+                    background: black;
+                    color: yellow;
+                    font-size: 14px;
+                }
+                .card-icon-building {
+                    background: linear-gradient(#a27147, #593e27);
+                    color: #493628;
+                    font-size: 12px;
+                    left: -3px;
+                    text-shadow: 0 0 1px black;
+                }
             }
             .card-icon {
                 position: absolute;
-                right: -3px;
+                right: -4px;
                 top: -8px;
                 margin: 0;
                 width: 20px;
@@ -272,6 +313,24 @@
                 height: 40px;
                 width: 48px;
                 background-size: 48px;
+            }
+            .card-resource-trade-fleet {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+                filter: invert(1) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.5));
+            }
+            .card-resource-colony {
+                background-image: url(./assets/tiles/colony.png);
+                height: 40px;
+                width: 46px;
+                background-size: 46px;
+            }
+            .card-resource-colony-S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
             }
             /*turmoil special*/
             .card-influence {
@@ -337,11 +396,55 @@
             }
             .card-tag-science {
                 background-image: url("./assets/tags/science.png");
-                background-size: 46px;
-                background-position: -3px;
             }
             .card-tag-none {
                 background-image: url("./assets/tags/tag-none.png");
+            }
+            .card-community-services {
+                font-size: 42px;
+                vertical-align: middle;
+                background:white;
+            }
+            /* secondary tags */
+            .tag-req {
+                border-radius: 0px;
+                height: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+            }
+            .tag-turmoil:after {
+                position: absolute;
+                color: #222;
+                border: 1px solid black;
+                left: -1px;
+                background: darkorange;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 16px;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+                content: "\25b2";
+                transform: rotate(180deg);
+            }
+            /* special case Project requirements */
+            .card-project-requirements {
+                position: relative;
+                align-self: center;
+                justify-content: center;
+                .card-red-x {
+                    position: absolute;
+                    color: rgb(0, 0, 0);
+                    font-size: 63px;
+                    left: 61px;
+                    top: -2px;
+                }
+                .card-requirements {
+                    width: 95%;
+                    padding: 0px 4px;
+                }
             }
             /*production*/
             .card-production-box {
@@ -372,14 +475,6 @@
                         }
                     }
                 }
-
-                // div {
-                //     display: inline-block;
-                // }
-
-                // .resource-tag {
-                //     margin-bottom: 2px !important;
-                // }
             }
             .card-rows {
                 display: flex;
@@ -398,7 +493,7 @@
                 margin-top: 8px;
                 color: #020202;
                 font-size: 11px;
-                line-height: 13px;
+                line-height: 12px;
                 font-weight: normal;
             }
             .card-description-aligned {
@@ -430,6 +525,9 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 .card-item-container{
                     margin: 0px;
+                }
+                .card-points-item-first {
+                    display: flex;
                 }
             }
             .card-points-big {
@@ -474,6 +572,7 @@
             }
             .card-text-uppercase {
                 text-transform: uppercase;
+                line-height: normal;
             }
             .card-nbsp {
                 visibility: hidden;
@@ -484,19 +583,96 @@
                 margin-left: 4px;
                 margin-right: 4px;
             }
-            .card-special-tile--M {
-                background-size: 40px;
+            .card-tile-canvass {
+                background-image: url(./assets/tiles/special.png);
                 width: 40px;
-                height: 40px;
-            }
-            .card-biofertilizer_facility--M {
-                background: url(assets/board_icons_ares.png) -342px -83px no-repeat;
-                width: 47px;
                 height: 47px;
+                background-size: 40px;
+            }
+            .card-tile-capital {
+                background-image: url(./assets/tiles/city.png);
+                filter: none;
+                width: 40px;
+                height: 47px;
+                background-size: 40px 47px;
+            }
+            /* symbols for tiles */
+            .card-tile-symbol {
+                background-size: 44px;
+                width: 40px;
+                height: 47px;
+            }
+            .card-tile-symbol-commercial-district {
+                background-image: url(./assets/tiles/special_tile_icons/commerical_district.png);
+                position: relative;
+                left: -2px;
+            }
+            .card-tile-symbol-deimos-down {
+                background-image: url(./assets/tiles/special_tile_icons/deimos.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-great-dam {
+                background-image: url(./assets/tiles/special_tile_icons/great_dam.png);
+                position: relative;
+                left: -2px;
+                top: -1px;
+            }
+            .card-tile-symbol-ecological-zone {
+                background-image: url(./assets/tiles/special_tile_icons/ecological_zone.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-industrial-center {
+                background-image: url(./assets/tiles/special_tile_icons/industrial_center.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-magnetic-field-generators {
+                background-image: url(./assets/tiles/special_tile_icons/magnetic_field_gen.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-mining {
+                background-image: url(./assets/tiles/special_tile_icons/mining_area.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-mohole-area {
+                background-image: url(./assets/tiles/special_tile_icons/mohole_area.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-lava-flows{
+                background-image: url(./assets/tiles/special_tile_icons/lava_flows.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-natural-preserve {
+                background-image: url(./assets/tiles/special_tile_icons/natural_preserve.png);
+                position: relative;
+                left: -3px;
+                top: 0px;
+            }
+            .card-tile-symbol-nuclear-zone {
+                background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+                position: relative;
+                left: -2px;
+                top: 0px;
             }
             .city-tile--M {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
             }
             .city-tile--S {
                 background-image: url(./assets/tiles/city.png);
@@ -504,6 +680,26 @@
                 width: 30px;
                 height: 32px;
                 background-size: 30px 32px;
+            }
+            .greenery-tile--M {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .greenery-tile-oxygen--M {
+                background-image: url(./assets/tiles/greenery.png);
+                background-size: 47px;
+                width: 47px;
+                height: 46px;
+            }
+            .card-ocean--S {
+                width: 30px !important;
+                height: 32px !important;
+                background-size: 30px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
             }
             .card-tr {
                 background-image: url(./assets/resources/tr.png);
@@ -519,10 +715,42 @@
                 background-size: 24px 30px;
                 vertical-align: middle;
                 filter: drop-shadow(0px 0px 1px black);
-                margin-bottom: 6px;
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-delegate-red {
                 filter: drop-shadow(0px 1px 1px darkred) drop-shadow(0px -1px 1px red) drop-shadow(0px 0px 2px black);
+            }
+            .card-party-leader {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman-red {
+                filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
             }
         }
         .temporary-content-wrapper {

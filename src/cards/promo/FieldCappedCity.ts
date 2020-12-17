@@ -7,6 +7,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class FieldCappedCity implements IProjectCard {
     public cost = 29;
@@ -31,5 +33,16 @@ export class FieldCappedCity implements IProjectCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X19',
+      description: 'Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.plus().megacredits(2).br;
+          pb.plus().energy(1);
+        }).nbsp.city().br;
+        b.plants(3);
+      }),
     }
 }

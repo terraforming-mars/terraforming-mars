@@ -53,8 +53,8 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
           eb.description('Action: add 1 Floater to ANY card');
         }).br;
         b.effectBox((eb) => {
-          eb.venusTag().played.startEffect.floaters(1).equals().megacredits(3);
-          eb.description('Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each');
+          eb.venus(1).played.startEffect.floaters(1).equals().megacredits(3);
+          eb.description('Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.');
         });
       }),
     }

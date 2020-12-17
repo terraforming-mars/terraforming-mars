@@ -13,6 +13,8 @@ import {ColonyName} from '../../colonies/ColonyName';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyModel} from '../../models/ColonyModel';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
     public cost = 18;
@@ -44,7 +46,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
 
           game.defer(new DeferredAction(
             player,
-            () => new SelectColony('Select colony to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
+            () => new SelectColony('Select colony tile to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
               openColonies.forEach((colony) => {
                 if (colony.name === colonyName) {
                   this.resourceCount--;
@@ -72,5 +74,25 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
 
     public getVictoryPoints(): number {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C44',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN).nbsp.or();
+          eb.description(undefined);
+        }).br;
+        b.effectBox((eb) => {
+          eb.floaters(1).startAction.trade();
+          eb.description('Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.');
+        }).br.br;
+        b.floaters(2).secondaryTag(Tags.JOVIAN);
+      }),
+      description: {
+        text: 'Add two floaters to ANY JOVIAN CARD.',
+        align: 'left',
+      },
+      victoryPoints: 1,
     }
 }

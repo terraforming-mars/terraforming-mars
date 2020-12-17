@@ -1,18 +1,19 @@
 import {expect} from 'chai';
+import {Bushes} from '../../../src/cards/base/Bushes';
+import {Virus} from '../../../src/cards/base/Virus';
 import {InterplanetaryCinematics} from '../../../src/cards/corporation/InterplanetaryCinematics';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Bushes} from '../../../src/cards/Bushes';
-import {Virus} from '../../../src/cards/Virus';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('InterplanetaryCinematics', function() {
   let card : InterplanetaryCinematics; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new InterplanetaryCinematics();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

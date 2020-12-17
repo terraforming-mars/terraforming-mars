@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Recruitment} from '../../../src/cards/turmoil/Recruitment';
-import {Player} from '../../../src/Player';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('Recruitment', function() {
   it('Should play', function() {
     const card = new Recruitment();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     const game = new Game('foobar', [player], player, gameOptions);

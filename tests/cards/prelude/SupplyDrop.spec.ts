@@ -1,12 +1,10 @@
-
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {SupplyDrop} from '../../../src/cards/prelude/SupplyDrop';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SupplyDrop', function() {
   it('Should play', function() {
-    const player = new Player('foo', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const card = new SupplyDrop();
     const action = card.play(player);
     expect(action).is.undefined;

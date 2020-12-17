@@ -10,6 +10,8 @@ import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class TitanShuttles implements IProjectCard, IResourceCard {
     public cost = 23;
@@ -34,12 +36,18 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
           game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN));
           return undefined;
         }),
-        new SelectAmount('Remove X floaters on this card to gain X titanium', 'Remove floaters', (amount: number) => {
-          player.removeResourceFrom(this, amount);
-          player.titanium += amount;
-          game.log('${0} removed ${1} floaters to gain ${2} titanium', (b) => b.player(player).number(amount).number(amount));
-          return undefined;
-        }, this.resourceCount),
+        new SelectAmount(
+          'Remove X floaters on this card to gain X titanium',
+          'Remove floaters',
+          (amount: number) => {
+            player.removeResourceFrom(this, amount);
+            player.titanium += amount;
+            game.log('${0} removed ${1} floaters to gain ${2} titanium', (b) => b.player(player).number(amount).number(amount));
+            return undefined;
+          },
+          1,
+          this.resourceCount,
+        ),
       );
     }
 
@@ -49,5 +57,21 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
 
     public getVictoryPoints(): number {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C45',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(2).secondaryTag(Tags.JOVIAN);
+          eb.description('Action: Add 2 floaters to ANY JOVIAN CARD.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.text('x').floaters(1).startAction.text('x').titanium(1);
+          eb.description('Action: Spend any number of floaters here to gain the same number of titanium.');
+        }).br;
+      }),
+      victoryPoints: 1,
     }
 }

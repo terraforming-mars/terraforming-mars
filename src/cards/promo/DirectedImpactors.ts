@@ -101,12 +101,12 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
-          eb.description('Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this)');
+          eb.description('Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).');
         }).br;
         b.or().br;
         b.effectBox((eb) => {
           eb.asteroids(1).startAction.temperature(1);
-          eb.description('Action: Remove 1 asteroid here to raise temperature 1 step');
+          eb.description('Action: Remove 1 asteroid here to raise temperature 1 step.');
         });
       }),
     }

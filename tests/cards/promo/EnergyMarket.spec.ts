@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {EnergyMarket} from '../../../src/cards/promo/EnergyMarket';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectAmount} from '../../../src/inputs/SelectAmount';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('EnergyMarket', function() {
   let card : EnergyMarket; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new EnergyMarket();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

@@ -1,17 +1,18 @@
 import {expect} from 'chai';
 import {SulphurEatingBacteria} from '../../../src/cards/venusNext/SulphurEatingBacteria';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SulphurEatingBacteria', function() {
   let card : SulphurEatingBacteria; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SulphurEatingBacteria();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -29,7 +30,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     player.addResourceTo(card, 5);
 
-    const action = card.action(player) as OrOptions;
+    const action = card.action(player, game) as OrOptions;
     action.options[0].cb(3);
     expect(player.megaCredits).to.eq(9);
     expect(card.resourceCount).to.eq(2);
@@ -39,7 +40,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     expect(card.resourceCount).to.eq(0);
 
-    card.action(player);
+    card.action(player, game);
     expect(card.resourceCount).to.eq(1);
   });
 });

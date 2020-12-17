@@ -3,6 +3,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CommunityServices implements IProjectCard {
     public cost = 13;
@@ -17,5 +19,15 @@ export class CommunityServices implements IProjectCard {
 
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C04',
+      description: 'Increase your MC production 1 step per CARD WITH NO TAGS, including this.',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.megacredits(1);
+        }).slash().noTags();
+      }),
+      victoryPoints: 1,
     }
 }

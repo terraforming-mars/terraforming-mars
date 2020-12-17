@@ -1,18 +1,16 @@
 import {expect} from 'chai';
 import {DawnCity} from '../../../src/cards/venusNext/DawnCity';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('DawnCity', function() {
   it('Should play', function() {
     const card = new DawnCity();
-    const player = new Player('test', Color.BLUE, false);
-
+    const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = new Game('foobar', [player, player], player, gameOptions);
+    const game = new Game('foobar', [player, redPlayer], player, gameOptions);
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player)).is.not.true;
 

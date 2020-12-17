@@ -42,12 +42,7 @@
 	"Create Game": "Créer la Partie",
 
 	"Players": "Joueurs",
-	"Player 1 name": "Nom du joueur 1",
-	"Player 2 name": "Nom du joueur 2",
-	"Player 3 name": "Nom du joueur 3",
-	"Player 4 name": "Nom du joueur 4",
-	"Player 5 name": "Nom du joueur 5",
-	"Player 6 name": "Nom du joueur 6",
+	"Player ${0} name": "Nom du joueur ${0}",
 	"Color:": "Couleur:",
 	"Red": "Rouge",
 	"Green": "Vert",
@@ -63,7 +58,7 @@
 
 
 	"Select initial cards:": "Sélectionnez vos cartes initiales:",
-	"Select a card to keep and pass the rest to": "Sélectionnez la carte à conserver et passez le reste à",
+	"Select a card to keep and pass the rest to ${0}": "Sélectionnez la carte à conserver et passez le reste à ${0}",
 	"Select corporation": "Sélectionnez votre Corporation",
 	"Select 2 Prelude cards": "Sélectionner 2 cartes Prélude",
 	"Select initial cards to buy": "Sélectionnez les cartes initiales à acheter",
@@ -117,7 +112,7 @@
 	"Convert 8 plants into greenery": "Convertir 8 plantes en Forêt",
 	"Perform an action from a played card": "Utiliser l'action d'une carte Action (bleue)",
 	"Play project card": "Jouer une carte de votre main",
-	"Trade with a colony": "Commercez avec une colonie",
+	"Trade with a colony tile": "Commercez avec une colonie",
 	"Pay 9 MC": "Payer 9 M€",
 	"Pay 3 Titanium": "Payer 3 titanes",
 	"End Turn": "Terminer le tour",
@@ -138,7 +133,7 @@
 	"Pass for this generation": "Passer pour cette génération",
 	"Sell patents": "Vendre des brevets",
 	"Not your turn to take any actions": "Ce n'est pas votre tour d'effectuer des actions",
-	"Undo Turn": "Annuler le tour",
+	"Undo last action": "Annuler la dernière action",
 
 	"Drafted Cards": "Cartes draftées",
 	"Cards In Hand": "Cartes en Main",
@@ -146,7 +141,7 @@
 	"Select which cards to take into hand": "Sélectionnez les cartes à ajouter à votre main",
 
 	"Colonies": "Colonies",
-	"Select colony to remove": "Sélectionnez la colonie à retirer",
+	"Select colony tile to remove": "Sélectionnez la colonie à retirer",
 
 	"Select space on mars for city tile": "Sélectionnez un emplacement sur Mars pour la tuile Cité",
 	"Select space for ocean": "Sélectionnez un emplacement pour la tuile Océan",

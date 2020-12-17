@@ -4,6 +4,8 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarProbe implements IProjectCard {
     public cost = 9;
@@ -21,5 +23,14 @@ export class SolarProbe implements IProjectCard {
 
     public getVictoryPoints() {
       return 1;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C37',
+      renderData: CardRenderer.builder((b) => {
+        b.cards(1).slash().science(3).digit.played;
+      }),
+      description: 'Draw 1 card for every 3 science tags you have, including this.',
+      victoryPoints: 1,
     }
 }

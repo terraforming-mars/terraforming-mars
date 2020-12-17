@@ -11,6 +11,9 @@ import {LogHelper} from '../../components/LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class VenusianPlants implements IProjectCard {
     public cost = 13;
@@ -58,5 +61,19 @@ export class VenusianPlants implements IProjectCard {
       let resourceCards = player.getResourceCards(ResourceType.MICROBE);
       resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
       return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '261',
+      requirements: CardRequirements.builder((b) => b.venus(16)),
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1).br.br; // intentional double br
+        b.microbes(1).secondaryTag(Tags.VENUS).nbsp;
+        b.or().nbsp.animals(1).secondaryTag(Tags.VENUS);
+      }),
+      description: {
+        text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',
+        align: 'left',
+      },
+      victoryPoints: 1,
     }
 }

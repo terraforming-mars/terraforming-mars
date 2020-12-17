@@ -1,8 +1,8 @@
+import {TestPlayers} from '../TestingUtils';
 import {expect} from 'chai';
 import {Luna} from '../../src/colonies/Luna';
 import {Pluto} from '../../src/colonies/Pluto';
-import {DustSeals} from '../../src/cards/DustSeals';
-import {Color} from '../../src/Color';
+import {DustSeals} from '../../src/cards/base/DustSeals';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Resources} from '../../src/Resources';
@@ -45,10 +45,10 @@ describe('Colony', function() {
 
   beforeEach(function() {
     luna = new Luna();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
-    player3 = new Player('test3', Color.YELLOW, false);
-    player4 = new Player('test4', Color.GREEN, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    player3 = TestPlayers.YELLOW.newPlayer();
+    player4 = TestPlayers.GREEN.newPlayer();
     game = new Game('foobar', [player, player2, player3, player4], player, gameOptions);
     game.colonies = [luna];
   });

@@ -25,8 +25,8 @@ export class DiasporaMovement implements IProjectCard {
 
     public play(player: Player, game: Game) {
       const amount = game.getPlayers()
-        .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, false, false))
-        .reduce((a, c) => a + c, 0);
+        .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
+        .reduce((a, c) => a + c);
       player.setResource(Resources.MEGACREDITS, amount + 1);
       return undefined;
     }
@@ -34,10 +34,11 @@ export class DiasporaMovement implements IProjectCard {
     public getVictoryPoints() {
       return 1;
     }
+
     public metadata: CardMetadata = {
       cardNumber: 'TO4',
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
-      description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play',
+      description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.',
       renderData: CardRenderer.builder((b) => {
         b.megacredits(1).slash().jovian().played.any;
       }),

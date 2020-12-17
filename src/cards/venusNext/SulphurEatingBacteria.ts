@@ -9,6 +9,10 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
+import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -26,16 +30,16 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
       const opts: Array<SelectOption | SelectAmount> = [];
 
-      const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player));
-      const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), this.resourceCount);
+      const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player, game));
+      const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, game, amount), 1, this.resourceCount);
 
       if (this.resourceCount > 0) {
         opts.push(spendResource);
       } else {
-        return this.addResource(player);
+        return this.addResource(player, game);
       }
 
       opts.push(addResource);
@@ -43,14 +47,37 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
       return new OrOptions(...opts);
     }
 
-    private addResource(player: Player) {
+    private addResource(player: Player, game: Game) {
       player.addResourceTo(this);
+      LogHelper.logAddResource(game, player, this);
       return undefined;
     }
 
-    private spendResource(player: Player, amount: number) {
+    private spendResource(player: Player, game: Game, amount: number) {
       player.removeResourceFrom(this, amount);
-      player.megaCredits += 3 * amount;
+
+      const megaCreditsGained = 3 * amount;
+      player.megaCredits += megaCreditsGained;
+
+      const logText: string = 'gain ' + megaCreditsGained + ' MC';
+      LogHelper.logRemoveResource(game, player, this, amount, logText);
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '251',
+      requirements: CardRequirements.builder((b) => b.venus(6)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: Add 1 Microbe to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
+          eb.description('Action: Spend any number of Microbes here to gain triple amount of MC.');
+        });
+      }),
+      description: 'Requires Venus 6%',
+    };
 }

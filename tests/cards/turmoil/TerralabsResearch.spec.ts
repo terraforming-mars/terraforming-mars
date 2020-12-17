@@ -1,20 +1,19 @@
 import {expect} from 'chai';
-import {TerralabsResearch} from '../../../src/cards/turmoil/TerralabsResearch';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {PowerPlant} from '../../../src/cards/PowerPlant';
-import {BusinessNetwork} from '../../../src/cards/BusinessNetwork';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
+import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {TerralabsResearch} from '../../../src/cards/turmoil/TerralabsResearch';
+import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TerralabsResearch', function() {
   it('Should play', function() {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
-    const player = new Player('test', Color.BLUE, false);
+    const player = TestPlayers.BLUE.newPlayer();
     const game = new Game('foobar', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);

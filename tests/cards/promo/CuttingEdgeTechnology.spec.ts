@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {DustSeals} from '../../../src/cards/base/DustSeals';
+import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {CuttingEdgeTechnology} from '../../../src/cards/promo/CuttingEdgeTechnology';
-import {DustSeals} from '../../../src/cards/DustSeals';
-import {HeatTrappers} from '../../../src/cards/HeatTrappers';
 import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CuttingEdgeTechnology', function() {
   it('Should play', function() {
     const card = new CuttingEdgeTechnology();
-    const player = new Player('test', Color.BLUE, false);
-    const game = new Game('foobar', [player, player], player);
+    const player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const game = new Game('foobar', [player, redPlayer], player);
     card.play();
 
     const discountedCard = new DustSeals();

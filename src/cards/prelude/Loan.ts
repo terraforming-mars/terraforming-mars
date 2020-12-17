@@ -3,6 +3,8 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Loan extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -15,6 +17,14 @@ export class Loan extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, -2);
       player.megaCredits += 30;
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'P17',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.minus().megacredits(2)).br;
+        b.megacredits(30);
+      }),
+      description: 'Gain 30 MC. Decrease your MC production 2 steps.',
     }
 }
 

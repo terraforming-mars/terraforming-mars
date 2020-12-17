@@ -1,19 +1,20 @@
-import * as constants from '../../../src/constants';
 import {expect} from 'chai';
+import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
+import * as constants from '../../../src/constants';
+import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
-import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
-import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('StormCraftIncorporated', function() {
   let card : StormCraftIncorporated; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new StormCraftIncorporated();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
 
     player.corporationCard = card;
   });

@@ -11,6 +11,8 @@ import {LogHelper} from '../../components/LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class HydrogenToVenus implements IProjectCard {
     public cost = 11;
@@ -67,4 +69,12 @@ export class HydrogenToVenus implements IProjectCard {
       game.increaseVenusScaleLevel(player, 1);
       return undefined;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '231',
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1).br.br; // double br is intentional for visual appeal
+        b.floaters(1).secondaryTag(Tags.VENUS).slash().jovian().played;
+      }),
+      description: 'Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.',
+    };
 }

@@ -1,17 +1,18 @@
 import {expect} from 'chai';
 import {JetStreamMicroscrappers} from '../../../src/cards/venusNext/JetStreamMicroscrappers';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('JetStreamMicroscrappers', function() {
   let card : JetStreamMicroscrappers; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new JetStreamMicroscrappers();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

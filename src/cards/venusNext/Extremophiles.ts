@@ -8,6 +8,11 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 3;
@@ -49,4 +54,18 @@ export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
         },
       );
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '224',
+      description: 'Requires 2 Science tags.',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1).asterix();
+          eb.description('Action: Add 1 microbe to ANY card.');
+        }).br;
+        b.text('1 VP for every 3rd Microbe on this card', CardRenderItemSize.TINY, true);
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
+    };
 }

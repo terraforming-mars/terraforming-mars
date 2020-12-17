@@ -11,7 +11,7 @@ import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../components/LogHelper';
-import {MAX_COLONY_TRACK_POSITION} from '../constants';
+import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player, PlayerId} from '../Player';
 import {PlayerInput} from '../PlayerInput';
@@ -26,6 +26,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
+import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -237,6 +238,34 @@ export abstract class Colony implements SerializedColony {
         player.scienceTagCount += 1;
         player.playCard(game, new ScienceTagCard());
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
+        break;
+
+      case ColonyBenefit.GAIN_INFLUENCE:
+        if (game.turmoil !== undefined) {
+          game.turmoil.addInfluenceBonus(player);
+          game.log('${0} gained 1 influence', (b) => b.player(player));
+        }
+        break;
+
+      case ColonyBenefit.PLACE_DELEGATES:
+        if (game.turmoil !== undefined) {
+          const qty = Math.min(quantity, game.turmoil.getDelegates(player.id));
+
+          for (let i = 0; i < qty; i++) {
+            game.defer(new SendDelegateToArea(player, game, 'Select where to send delegate', 1, undefined, undefined, false));
+          }
+        }
+        break;
+
+      case ColonyBenefit.GIVE_MC_PER_DELEGATE:
+        if (game.turmoil !== undefined) {
+          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
+          if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
+          if (game.turmoil.chairman === player.id) partyDelegateCount--;
+
+          player.setResource(Resources.MEGACREDITS, partyDelegateCount);
+          LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, partyDelegateCount);
+        }
         break;
 
       case ColonyBenefit.GAIN_TR:

@@ -20,7 +20,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   corporationCards: [
     {cardName: CardName.AGRICOLA_INC, Factory: AgricolaInc},
     {cardName: CardName.PROJECT_WORKSHOP, Factory: ProjectWorkshop},
-    {cardName: CardName.INCITE, Factory: Incite},
+    {cardName: CardName.INCITE, Factory: Incite, compatibility: GameModule.Turmoil},
     {cardName: CardName.PLAYWRIGHTS, Factory: Playwrights},
     {cardName: CardName.MIDAS, Factory: Midas},
   ],

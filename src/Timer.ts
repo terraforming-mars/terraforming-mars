@@ -24,14 +24,17 @@ export class Timer implements ISerializable<SerializedTimer> {
     };
   }
 
-  public static deserialize(d: SerializedTimer): Timer {
+  // TODO(sienmich): Remove undefined (created for backward compatibility).
+  public static deserialize(d: SerializedTimer | undefined): Timer {
     const timer = new Timer();
-    timer.sumElapsed = d.sumElapsed;
-    timer.startedAt = d.startedAt;
-    timer.running = d.running;
-    timer.afterFirstAction = d.afterFirstAction;
+    if (d !== undefined) {
+      timer.sumElapsed = d.sumElapsed;
+      timer.startedAt = d.startedAt;
+      timer.running = d.running;
+      timer.afterFirstAction = d.afterFirstAction;
 
-    Timer.lastStoppedAt = d.lastStoppedAt;
+      Timer.lastStoppedAt = d.lastStoppedAt;
+    }
     return timer;
   }
 

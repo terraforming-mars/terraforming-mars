@@ -14,6 +14,7 @@ import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
+import {Timer} from '../src/Timer';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -157,6 +158,13 @@ describe('Player', function() {
     expect(s.actionsThisGeneration).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
     const p = Player.deserialize(s);
     expect(Array.from(p.getActionsThisGeneration())).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
+  });
+  it('backward compatible deserialization for timer', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const json: any = player.serialize();
+    json.timer = undefined;
+    const p = Player.deserialize(json);
+    expect(p.timer.serialize()).to.deep.eq(Timer.newInstance().serialize());
   });
   it('serialization test', () => {
     const json = {

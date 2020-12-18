@@ -42,7 +42,7 @@ export interface IDatabase {
     /**
      * Pulls most recent version of game
      * @param game_id the game id to load
-     * @param cb called with game if exists
+     * @param cb called with game if exists, if game is undefined err will be truthy
      */
     getGame(game_id: string, cb: (err: any, game?: SerializedGame) => void): void;
 

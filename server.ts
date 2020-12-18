@@ -255,10 +255,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       if (rollbackCount > 0) {
         Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
       }
-      // remove copy in javascript
-      GameLoader.getInstance().remove(game_id);
-      // pull new value from database
-      GameLoader.getInstance().getByGameId(game_id, (game) => {
+      GameLoader.getInstance().getByGameId(game_id, true, (game) => {
         if (game === undefined) {
           console.warn(`unable to find ${game_id} in database`);
           route.notFound(req, res);
@@ -299,7 +296,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   const gameId: GameId = matches[1];
 
-  GameLoader.getInstance().getByGameId(gameId, (game: Game | undefined) => {
+  GameLoader.getInstance().getByGameId(gameId, false, (game: Game | undefined) => {
     if (game === undefined) {
       console.warn('game is undefined');
       route.notFound(req, res);

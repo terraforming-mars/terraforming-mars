@@ -39,7 +39,7 @@ export class GameLoader {
   private readonly playerIds = new Map<PlayerId, GameId>();
 
   // requests for game that are waiting to load
-  private readonly gameRequests: Array<[GameId, LoadCallback]> = [];
+  private readonly gameRequests: Array<[GameId, boolean, LoadCallback]> = [];
 
   // requests for player that are waiting to load
   private readonly playerRequests: Array<[PlayerId, LoadCallback]> = [];
@@ -70,27 +70,22 @@ export class GameLoader {
     return this.games.get(gameId) !== undefined;
   }
 
-  /**
-   * Removes game from javascript memory
-   * if it is of a known id.
-   * @param {GameId} gameId id to remove
-   */
-  public remove(gameId: GameId): void {
-    if (this.games.has(gameId)) {
-      this.games.set(gameId, undefined);
-    }
-  }
-
   public getLoadedGameIds(): Array<string> {
     return Array.from(this.games.keys());
   }
 
-  public getByGameId(gameId: GameId, cb: LoadCallback): void {
+  /**
+   * Gets a game from javascript memory or pulls from database if needed.
+   * @param {GameId} gameId the id of the game to retrieve
+   * @param {boolean} bypassCache always pull from database
+   * @param {LoadCallback} cb called with game when available
+   */
+  public getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
     this.loadAllGames();
-    if (this.games.get(gameId) !== undefined) {
+    if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (this.games.has(gameId) || this.state !== State.READY) {
-      this.gameRequests.push([gameId, cb]);
+      this.gameRequests.push([gameId, bypassCache, cb]);
       this.loadNextGame();
     } else {
       cb(undefined);
@@ -111,8 +106,8 @@ export class GameLoader {
     }
   }
 
-  private loadGame(gameId: GameId, cb: LoadCallback): void {
-    if (this.games.get(gameId) !== undefined) {
+  private loadGame(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
+    if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (this.games.has(gameId) === false) {
       console.warn(`GameLoader:game id not found ${gameId}`);
@@ -152,7 +147,7 @@ export class GameLoader {
       cb(this.games.get(gameId));
       return;
     }
-    this.loadGame(gameId, cb);
+    this.loadGame(gameId, false, cb);
   }
 
   private onGameLoaded(cb: LoadCallback) {
@@ -168,7 +163,7 @@ export class GameLoader {
       const gameToLoad = this.gameRequests.shift();
       if (gameToLoad !== undefined) {
         this.loadingGame = true;
-        this.loadGame(gameToLoad[0], this.onGameLoaded(gameToLoad[1]));
+        this.loadGame(gameToLoad[0], gameToLoad[1], this.onGameLoaded(gameToLoad[2]));
         return;
       }
       const playerToLoad = this.playerRequests.shift();
@@ -180,7 +175,7 @@ export class GameLoader {
     }
   }
 
-  private allGamesLoaded(): void {
+  private allGameIdsLoaded(): void {
     this.state = State.READY;
     this.loadNextGame();
   }
@@ -190,20 +185,20 @@ export class GameLoader {
       return;
     }
     this.state = State.LOADING;
-    Database.getInstance().getGames((err, allGames) => {
+    Database.getInstance().getGames((err, allGameIds) => {
       if (err) {
         console.error('error loading all games', err);
-        this.allGamesLoaded();
+        this.allGameIdsLoaded();
         return;
       }
 
-      if (allGames.length === 0) {
-        this.allGamesLoaded();
+      if (allGameIds.length === 0) {
+        this.allGameIdsLoaded();
         return;
       }
 
       let loaded = 0;
-      allGames.forEach((gameId) => {
+      allGameIds.forEach((gameId) => {
         Database.getInstance().getGame(
           gameId,
           (err, game) => {
@@ -219,8 +214,8 @@ export class GameLoader {
                 }
               }
             }
-            if (loaded === allGames.length) {
-              this.allGamesLoaded();
+            if (loaded === allGameIds.length) {
+              this.allGameIdsLoaded();
             }
           });
       });

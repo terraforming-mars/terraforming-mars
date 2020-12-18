@@ -24,6 +24,8 @@ import {EarthCatapult} from '../src/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../src/cards/base/QuantumExtractor';
 import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
+import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
+import {IParty} from '../src/turmoil/parties/IParty';
 
 describe('Turmoil', function() {
   let player : Player; let game : Game; let turmoil: Turmoil;
@@ -118,22 +120,28 @@ describe('Turmoil', function() {
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
   });
 
-  it('Check ruling policy', function() {
-    turmoil.rulingParty = new Unity();
+  it('Check ruling policy: Unity', function() {
+    setRulingParty(turmoil, game, new Unity());
     game.phase = Phase.ACTION;
     expect(player.getTitaniumValue(game)).to.eq(4);
+  });
 
-    turmoil.rulingParty = new Greens();
+  it('Check ruling policy: Greens', function() {
+    setRulingParty(turmoil, game, new Greens());
+    game.phase = Phase.ACTION;
     game.addGreenery(player, '10');
     expect(player.megaCredits).to.eq(4);
+  });
 
-    turmoil.rulingParty = new MarsFirst();
+  it('Check ruling policy: Mars First', function() {
+    setRulingParty(turmoil, game, new MarsFirst());
+    game.phase = Phase.ACTION;
     game.addGreenery(player, '11');
     expect(player.steel).to.eq(1);
   });
 
   it('Does not give Mars First bonus for World Government terraforming', function() {
-    turmoil.rulingParty = new MarsFirst();
+    setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming(game);
@@ -146,7 +154,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
     const availableStandardProjects = player.getAvailableStandardProjects(game);
 
@@ -155,7 +163,7 @@ describe('Turmoil', function() {
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
     let availableStandardProjects = player.getAvailableStandardProjects(game);
     expect(availableStandardProjects.options).has.lengthOf(4);
@@ -166,7 +174,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
     const jovianEmbassy = new JovianEmbassy();
@@ -181,7 +189,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 25;
     const iceAsteroid = new IceAsteroid();
     const protectedValley = new ProtectedValley();
@@ -196,7 +204,7 @@ describe('Turmoil', function() {
   });
 
   it('Applies card discounts when checking canPlay while Reds are ruling', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     const nitrogenFromTitan = new NitrogenFromTitan();
 
     player.megaCredits = 29;
@@ -320,4 +328,9 @@ describe('Turmoil', function() {
     expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
     expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
+
+  function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {
+    turmoil.rulingParty = party;
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+  }
 });

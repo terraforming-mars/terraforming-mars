@@ -30,7 +30,7 @@ export const ALL_PARTIES: Array<IPartyFactory> = [
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
-  thisAgenda: {
+  currentAgenda: {
     bonusId: 'none',
     policyId: 'none',
   },
@@ -38,7 +38,7 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
-    public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
+    public chairman: PlayerId | 'NEUTRAL';
     public rulingParty: IParty;
     public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
@@ -53,16 +53,20 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     private constructor(
       rulingPartyName: PartyName,
+      chairman: PlayerId | 'NEUTRAL',
       dominantPartyName: PartyName,
       globalEventDealer: GlobalEventDealer) {
       this.rulingParty = this.getPartyByName(rulingPartyName);
+      this.chairman = chairman;
       this.dominantParty = this.getPartyByName(dominantPartyName);
       this.globalEventDealer = globalEventDealer;
     }
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const dealer = GlobalEventDealer.newInstance(game);
-      const turmoil = new Turmoil(PartyName.GREENS, PartyName.GREENS, dealer);
+
+      // The game begins with Greens in power and a Neutral chairman
+      const turmoil = new Turmoil(PartyName.GREENS, 'NEUTRAL', PartyName.GREENS, dealer);
 
       // Init parties
       turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
@@ -76,15 +80,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
       });
 
-      // The game begins with a Neutral chairman
-      turmoil.chairman = 'NEUTRAL';
-
       // Begin with 13 neutral delegates in the reserve
       for (let i = 0; i < 13; i++) {
         turmoil.delegateReserve.push('NEUTRAL');
       }
 
-      // Setup party bonuses and policies
+      // Set up party bonuses and policies
       turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties, turmoil.rulingParty);
 
       // Init the global event dealer
@@ -261,41 +262,16 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         // Cleanup previous party effects
         game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
-        const rulingParty = this.rulingParty;
-
-        // Resolve Ruling Bonus
-        PoliticalAgendas.setAgenda(rulingParty, this.politicalAgendasData);
-
-        // This will have to move below chairman selection if they get to choose it once per
-        // generation.
-        const bonusId = this.politicalAgendasData.thisAgenda.bonusId;
-        const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
-        if (bonus === undefined) {
-          throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
-        }
-        bonus.grant(game);
-
-        // Resolve Ruling Policy for Scientists P4
-        const policyId = this.politicalAgendasData.thisAgenda.policyId;
-        const policy = rulingParty.policies.find((p) => p.id === policyId);
-        if (policy !== undefined && policy.apply !== undefined) {
-          policy.apply(game);
-        }
-
         // Change the chairman
         if (this.chairman) {
           this.delegateReserve.push(this.chairman);
         }
 
-        this.chairman = this.rulingParty.partyLeader;
-        if (this.chairman) {
-          if (this.chairman !== 'NEUTRAL') {
-            const player = game.getPlayerById(this.chairman);
-            player.increaseTerraformRating(game);
-            game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
-          }
-        } else {
-          console.error('No chairman');
+        this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
+        if (this.chairman !== 'NEUTRAL') {
+          const player = game.getPlayerById(this.chairman);
+          player.increaseTerraformRating(game);
+          game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
         }
 
         const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
@@ -307,6 +283,29 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         // Clean the party
         this.rulingParty.partyLeader = undefined;
         this.rulingParty.delegates = [];
+
+        PoliticalAgendas.setNextAgenda(this, game);
+      }
+    }
+
+    // Called either directly during generation change, or after asking chairperson player
+    // to choose an agenda.
+    public onAgendaSelected(game: Game): void {
+      // Resolve Ruling Bonus
+      const rulingParty = this.rulingParty;
+
+      const bonusId = this.politicalAgendasData.currentAgenda.bonusId;
+      const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
+      if (bonus === undefined) {
+        throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
+      }
+      bonus.grant(game);
+
+      // Resolve Ruling Policy for Scientists P4
+      const policyId = this.politicalAgendasData.currentAgenda.policyId;
+      const policy = rulingParty.policies.find((p) => p.id === policyId);
+      if (policy !== undefined && policy.apply !== undefined) {
+        policy.apply(game);
       }
     }
 
@@ -347,7 +346,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     public canPlay(player: Player, partyName : PartyName): boolean {
-      if (this.rulingParty === this.getPartyByName(partyName)) {
+      if (this.rulingParty.name === partyName) {
         return true;
       }
 
@@ -431,11 +430,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
       }
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil = new Turmoil(partyName(d.rulingParty), partyName(d.dominantParty), dealer);
+      const turmoil =
+        new Turmoil(
+          partyName(d.rulingParty),
+          d.chairman || 'NEUTRAL',
+          partyName(d.dominantParty),
+          dealer);
 
-      turmoil.chairman = d.chairman;
-
-      turmoil.chairman = d.chairman;
       turmoil.lobby = new Set(d.lobby);
       turmoil.delegateReserve = d.delegate_reserve;
 

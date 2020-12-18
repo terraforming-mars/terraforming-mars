@@ -27,14 +27,14 @@ export class PoliticalAgendas {
     if (firstRulingParty === undefined) {
       throw new Error('unexpected initialization issue: first ruling party is undefined');
     }
-    const staticAgendas = this.selectStaticAgendas(agendaStyle, parties);
+    const staticAgendas = this.defineStaticAgendas(agendaStyle, parties);
     return {
       thisAgenda: this.getAgenda(firstRulingParty, staticAgendas),
       staticAgendas: staticAgendas,
     };
   }
 
-  private static selectStaticAgendas(agendaStyle: AgendaStyle, parties: Array<IParty>): Map<PartyName, Agenda> | undefined {
+  private static defineStaticAgendas(agendaStyle: AgendaStyle, parties: Array<IParty>): Map<PartyName, Agenda> | undefined {
     if (agendaStyle === AgendaStyle.CHAIRMAN) {
       return undefined;
     }

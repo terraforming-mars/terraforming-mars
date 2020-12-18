@@ -264,6 +264,7 @@ describe('Turmoil', function() {
       },
       'distantGlobalEvent': {'name': 'Aquifer Released by Public Council', 'description': 'First player places an ocean tile. Gain 1 plant and 1 steel per influence.', 'revealedDelegate': 'Mars First', 'currentDelegate': 'Greens'},
       'commingGlobalEvent': {'name': 'Solar Flare', 'description': 'Lose 3 MC for each space tag (max 5, then reduced by influence).', 'revealedDelegate': 'Unity', 'currentDelegate': 'Kelvinists'},
+      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
@@ -308,6 +309,7 @@ describe('Turmoil', function() {
         'discarded': ['Pandemic']},
       'distantGlobalEvent': 'Eco Sabotage',
       'comingGlobalEvent': 'Celebrity Leaders',
+      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);

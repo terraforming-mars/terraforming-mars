@@ -18,7 +18,10 @@ export class ChoosePoliticalAgenda implements DeferredAction {
   ) {}
 
   public execute() : PlayerInput {
-    let agenda: Agenda;
+    const agenda: Agenda = {
+      bonusId: '',
+      policyId: '',
+    };
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => new SelectOption(bonus.description, 'Select', () => {
       agenda.bonusId = bonus.id;
       return undefined;

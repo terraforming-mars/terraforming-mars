@@ -92,7 +92,7 @@ export const Turmoil = Vue.component('turmoil', {
             + <div class="resource money">1</div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp04') {
           return `<span class="money resource">4</span>
-            <span class="red-arrow"></span>
+            <span class="red-arrow-3x"></span>
             <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div>`;
         } else {
           return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
@@ -126,11 +126,11 @@ export const Turmoil = Vue.component('turmoil', {
         if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up02') {
           return `<div class="policy-top-margin">
             <span class="money resource">9</span>
-            <span class="red-arrow"></span> 4 <span class="titanium resource"></span>
+            <span class="red-arrow-3x"></span> 4 <span class="titanium resource"></span>
             </div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up03') {
           return `<span class="money resource">4</span>
-            <span class="red-arrow"></span>
+            <span class="red-arrow-3x"></span>
             <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-space"></div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up04') {
           return `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource ">-2</div></div>`;
@@ -149,14 +149,14 @@ export const Turmoil = Vue.component('turmoil', {
               <div class="heat production"></div>
               <div class="heat production"></div>
             </div>
-            <span class="red-arrow"></span>
+            <span class="red-arrow-3x"></span>
             <div class="rating tile"></div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp04') {
           return `<div class="tile empty-tile-small"></div> : 
             <span class="heat resource"></span><span class="heat resource"></span>`;
         } else {
           return `<span class="money resource">10</span>
-            <span class="red-arrow"></span>
+            <span class="red-arrow-infinity"></span>
             <div class="production-box production-box-size2">
               <div class="energy production"></div>
               <div class="heat production"></div>
@@ -168,7 +168,7 @@ export const Turmoil = Vue.component('turmoil', {
           return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="money resource">-3</span></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.redsPolicy === 'rp03') {
           return `<span class="money resource">4</span>
-          <span class="red-arrow"></span>
+          <span class="red-arrow-3x"></span>
           <div class="tile oxygen-tile req-tile-small red-outline" style="margin: 10px -5px;"></div> / 
           <div class="tile ocean-tile req-tile-small red-outline"></div> / 
           <div class="tile temperature-tile req-tile-small red-outline"></div>`;
@@ -199,7 +199,7 @@ export const Turmoil = Vue.component('turmoil', {
         } else if (staticAgendas !== undefined && staticAgendas.greensPolicy === 'gp04') {
           return `<div class="policy-top-margin">
           <span class="money resource">5</span>
-          <span class="red-arrow"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
+          <span class="red-arrow-3x"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
           </div>`;
         } else {
           return `<div class="tile greenery-tile"></div> : 

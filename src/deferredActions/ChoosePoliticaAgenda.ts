@@ -27,12 +27,14 @@ export class ChoosePoliticalAgenda implements DeferredAction {
       return undefined;
     }));
     const orBonuses = new OrOptions(...bonuses);
+    orBonuses.title = 'Select a ' + this.party.name + ' bonus.';
 
     const policies = this.party.policies.map((policy) => new SelectOption(policy.description, 'Select', () => {
       agenda.policyId = policy.id;
       return undefined;
     }));
     const orPolicies = new OrOptions(...policies);
+    orPolicies.title = 'Select a ' + this.party.name + ' policy.';
 
     const cb = () => {
       this.turmoil.politicalAgendasData.currentAgenda = agenda;

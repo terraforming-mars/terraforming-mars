@@ -1244,7 +1244,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         // PoliticalAgendas Scientists P3 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
-          this.defer(new DrawCards(player, this, 1));
+          this.defer(new DrawCards(player, this, steps));
         }
 
         player.increaseTerraformRatingSteps(steps, this);
@@ -1294,7 +1294,7 @@ export class Game implements ISerializable<SerializedGame> {
         }
         // PoliticalAgendas Scientists P3 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
-          this.defer(new DrawCards(player, this, 1));
+          this.defer(new DrawCards(player, this, steps));
         }
 
         player.increaseTerraformRatingSteps(steps, this);
@@ -1348,7 +1348,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         // PoliticalAgendas Scientists P3 hook
         if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
-          this.defer(new DrawCards(player, this, 1));
+          this.defer(new DrawCards(player, this, steps));
         }
 
         player.increaseTerraformRatingSteps(steps, this);

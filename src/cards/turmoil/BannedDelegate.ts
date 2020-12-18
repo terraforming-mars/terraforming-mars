@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Player} from '../../Player';
+import {Player, PlayerId} from '../../Player';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
@@ -9,7 +9,7 @@ import {IParty} from '../../turmoil/parties/IParty';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {PlayerIdOrNeutral} from '../../turmoil/Turmoil';
+import {NeutralPlayer} from '../../turmoil/Turmoil';
 
 export class BannedDelegate implements IProjectCard {
     public cost = 0;
@@ -32,8 +32,8 @@ export class BannedDelegate implements IProjectCard {
             // Remove the party leader from available choices
             const delegates = party.delegates.slice();
             delegates.splice(party.delegates.indexOf(party.partyLeader!), 1);
-            const playersId = Array.from(new Set<PlayerIdOrNeutral>(delegates));
-            const players: Array<Player | 'NEUTRAL'> = [];
+            const playersId = Array.from(new Set<PlayerId | NeutralPlayer>(delegates));
+            const players: Array<Player | NeutralPlayer> = [];
             playersId.forEach((playerId) => {
               if (playerId === 'NEUTRAL') {
                 players.push('NEUTRAL');
@@ -43,7 +43,7 @@ export class BannedDelegate implements IProjectCard {
             });
 
             if (players.length > 0) {
-              const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | 'NEUTRAL') => {
+              const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
                 let playerToRemove = '';
                 if (selectedPlayer === 'NEUTRAL') {
                   playerToRemove = 'NEUTRAL';

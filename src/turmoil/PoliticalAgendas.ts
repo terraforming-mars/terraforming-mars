@@ -27,6 +27,11 @@ export interface PoliticalAgendasData {
   staticAgendas: Map<PartyName, Agenda> | undefined;
 }
 
+export interface SerializedPoliticalAgendasData {
+  currentAgenda: Agenda;
+  staticAgendas: Array<[PartyName, Agenda]> | undefined;
+}
+
 export class PoliticalAgendas {
   public static newInstance(
     agendaStyle: AgendaStyle,

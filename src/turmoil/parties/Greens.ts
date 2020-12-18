@@ -19,6 +19,7 @@ import {ResourceType} from '../../ResourceType';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -93,12 +94,12 @@ export class GreensPolicy04 implements Policy {
   description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
 
   canAct(player: Player) {
-    return player.canAfford(5) && player.turmoilPolicyActionUsed === false;
+    return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
-    player.turmoilPolicyActionUsed = true;
+    player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectHowToPayDeferred(
       player,

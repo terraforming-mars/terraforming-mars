@@ -35,13 +35,14 @@ export class PartyHooks {
     const rulingParty = turmoil.rulingParty;
     if (rulingParty === undefined) return false;
 
-    const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
-      rulingParty.policies[0].id :
-      turmoil.politicalAgendasData.currentAgenda.policyId;
-
+    // Set the default policy if not given
     if (policyId === undefined) {
       policyId = rulingParty.policies[0].id;
     }
+
+    const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
+      rulingParty.policies[0].id :
+      turmoil.politicalAgendasData.currentAgenda.policyId;
 
     return rulingParty.name === partyName && currentPolicyId === policyId;
   }

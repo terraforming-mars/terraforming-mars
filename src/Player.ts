@@ -131,6 +131,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Turmoil
     public turmoilPolicyActionUsed: boolean = false;
+    public politicalAgendasActionUsedCount: number = 0;
 
     public powerPlantCost: number = 11;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
@@ -896,6 +897,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.removingPlayers = [];
       this.tradesThisTurn = 0;
       this.turmoilPolicyActionUsed = false;
+      this.politicalAgendasActionUsedCount = 0;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -2172,7 +2174,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           action.options.push(
             new SelectOption(
               kelvinistsPolicy.description,
-              'Decrease heat production',
+              'Pay',
               () => kelvinistsPolicy.action(this, game),
             ),
           );
@@ -2446,6 +2448,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         colonyVictoryPoints: this.colonyVictoryPoints,
         // Turmoil
         turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
+        politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
         hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
         // Controlled by cards with effects that might be called a second time recursively, I think.
         // They set this to false in order to prevent card effects from triggering twice.
@@ -2518,6 +2521,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player.titaniumValue = d.titaniumValue;
         player.tradesThisTurn = d.tradesThisTurn;
         player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+        player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
         player.victoryPointsBreakdown = d.victoryPointsBreakdown;
       }
 

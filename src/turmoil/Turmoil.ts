@@ -71,6 +71,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       // Init parties
       turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
+      // Init parties
+      turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
+
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
         turmoil.lobby.add(player.id);
@@ -406,7 +409,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         distantGlobalEvent: this.distantGlobalEvent?.name,
         commingGlobalEvent: this.comingGlobalEvent,
         comingGlobalEvent: this.comingGlobalEvent?.name,
-        politicalAgendasData: this.politicalAgendasData,
+        politicalAgendasData: {
+          currentAgenda: this.politicalAgendasData.currentAgenda,
+          staticAgendas: this.politicalAgendasData.staticAgendas === undefined ? undefined : Array.from(this.politicalAgendasData.staticAgendas.entries()),
+        },
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;
@@ -444,6 +450,18 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve = d.delegateReserve;
       } else {
         turmoil.delegateReserve = d.delegate_reserve;
+      }
+
+      if (d.politicalAgendasData.staticAgendas !== undefined) {
+        turmoil.politicalAgendasData = {
+          currentAgenda: d.politicalAgendasData.currentAgenda,
+          staticAgendas: new Map(d.politicalAgendasData.staticAgendas),
+        };
+      } else {
+        turmoil.politicalAgendasData = {
+          currentAgenda: d.politicalAgendasData.currentAgenda,
+          staticAgendas: undefined,
+        };
       }
 
       d.parties.forEach((sp) => {

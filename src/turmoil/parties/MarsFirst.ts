@@ -12,6 +12,7 @@ import {Policy} from '../Policy';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -79,11 +80,13 @@ export class MarsFirstPolicy04 implements Policy {
   description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
 
   canAct(player: Player) {
-    return player.canAfford(4);
+    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
+    player.politicalAgendasActionUsedCount += 1;
+
     game.defer(new SelectHowToPayDeferred(
       player,
       4,

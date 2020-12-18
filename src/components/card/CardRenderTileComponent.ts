@@ -67,10 +67,15 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
       } else if (type === TileType.SOLAR_FARM) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--solar_farm');
+      } else if (type === TileType.RESTRICTED_AREA) {
+        if (this.item.isAres) {
+          classes.push('card-tile-ares');
+          classes.push('board-space-tile--restricted_area_ares');
+        }
       } else if (type === TileType.NATURAL_PRESERVE) {
         if (this.item.isAres) {
           classes.push('card-tile-ares');
-          classes.push('board-space-tile--natural_preserve');
+          classes.push('board-space-tile--natural_preserve_ares');
         }
       } else if (type === TileType.NUCLEAR_ZONE) {
         if (this.item.isAres) {
@@ -114,6 +119,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-mohole-area');
         } else if (type === TileType.LAVA_FLOWS) {
           classes.push('card-tile-symbol-lava-flows');
+        } else if (type === TileType.RESTRICTED_AREA) {
+          classes.push('card-tile-symbol-restricted-area');
         } else if (type === TileType.NATURAL_PRESERVE) {
           classes.push('card-tile-symbol-natural-preserve');
         } else if (type === TileType.NUCLEAR_ZONE) {

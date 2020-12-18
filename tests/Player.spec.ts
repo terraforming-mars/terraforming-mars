@@ -200,6 +200,7 @@ describe('Player', function() {
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
       turmoilPolicyActionUsed: false,
+      politicalAgendasActionUsedCount: 0,
       hasTurmoilScienceTagBonus: false,
       powerPlantCost: 11,
       victoryPointsBreakdown: {

@@ -5,6 +5,8 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchColony implements IProjectCard {
     public cost = 20;
@@ -19,5 +21,12 @@ export class ResearchColony implements IProjectCard {
         game.dealer.dealCard(),
       );
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C34',
+      renderData: CardRenderer.builder((b) => {
+        b.colonies(1).asterix().nbsp.cards(2);
+      }),
+      description: 'Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.',
     }
 }

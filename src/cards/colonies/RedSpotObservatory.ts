@@ -8,6 +8,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Game} from '../../Game';
 import {IResourceCard} from '../ICard';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RedSpotObservatory implements IProjectCard, IResourceCard {
     public cost = 17;
@@ -61,5 +64,23 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
 
     public getVictoryPoints(): number {
       return 2;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C32',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().arrow().floaters(1).or();
+          eb.floaters(1).startAction.cards(1);
+          eb.description('Action: Add 1 floater to this card, or spend 1 floater here to draw a card.');
+        }).br;
+        b.cards(2);
+      }),
+      description: {
+        text: 'Requires 3 Science tags. Draw 2 cards.',
+        align: 'left',
+      },
+      victoryPoints: 2,
     }
 }

@@ -8,7 +8,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {ISpace} from '../../ISpace';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE} from '../../constants';
+import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -101,12 +101,12 @@ export class RedsPolicy03 implements Policy {
       return false;
     }
 
-    return player.canAfford(4) && player.turmoilPolicyActionUsed === false;
+    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
-    player.turmoilPolicyActionUsed = true;
+    player.politicalAgendasActionUsedCount += 1;
 
     game.defer(new SelectHowToPayDeferred(
       player,

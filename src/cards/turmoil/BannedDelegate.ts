@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Player, PlayerId} from '../../Player';
+import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectDelegate} from '../../inputs/SelectDelegate';
@@ -9,6 +9,7 @@ import {IParty} from '../../turmoil/parties/IParty';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {PlayerIdOrNeutral} from '../../turmoil/Turmoil';
 
 export class BannedDelegate implements IProjectCard {
     public cost = 0;
@@ -31,7 +32,7 @@ export class BannedDelegate implements IProjectCard {
             // Remove the party leader from available choices
             const delegates = party.delegates.slice();
             delegates.splice(party.delegates.indexOf(party.partyLeader!), 1);
-            const playersId = Array.from(new Set<PlayerId | 'NEUTRAL'>(delegates));
+            const playersId = Array.from(new Set<PlayerIdOrNeutral>(delegates));
             const players: Array<Player | 'NEUTRAL'> = [];
             playersId.forEach((playerId) => {
               if (playerId === 'NEUTRAL') {

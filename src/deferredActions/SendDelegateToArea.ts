@@ -1,9 +1,10 @@
 import {Game} from '../Game';
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
+import {PlayerIdOrNeutral} from '../turmoil/Turmoil';
 
 export class SendDelegateToArea implements DeferredAction {
   constructor(
@@ -11,7 +12,7 @@ export class SendDelegateToArea implements DeferredAction {
         public game: Game,
         public title: string = 'Select where to send a delegate',
         public nbr: number = 1,
-        public replace: 'NEUTRAL' | PlayerId | undefined = undefined,
+        public replace: PlayerIdOrNeutral | undefined = undefined,
         public price: number | undefined = undefined,
         public fromLobby: boolean = true,
   ) {}

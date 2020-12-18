@@ -89,7 +89,7 @@ export const Turmoil = Vue.component('turmoil', {
             <div class="resource money party-resource">1</div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
           return `<div class="policy-top-margin"><div class="resource steel"></div> : 
-            + <div class="resource money">1</div></div>`;
+            +<div class="resource money">1</div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp04') {
           return `<span class="money resource">4</span>
             <span class="red-arrow-3x"></span>
@@ -143,17 +143,12 @@ export const Turmoil = Vue.component('turmoil', {
         if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp02') {
           return `<div class="tile temperature-tile req-tile-small" style="margin-right:5px;"></div> : <span class="money resource">3</span>`;
         } else if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp03') {
-          return `<div class="policy-top-margin">
-            <div class="production-box production-box-size3">
-              <div class="production-prefix minus"></div>
-              <div class="heat production"></div>
-              <div class="heat production"></div>
-            </div>
-            <span class="red-arrow-3x"></span>
-            <div class="rating tile"></div></div>`;
+          return `6 <span class="heat resource"></span>
+          <span class="red-arrow-infinity"></span>
+          <div class="tile temperature-tile"></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.kelvinistsPolicy === 'kp04') {
-          return `<div class="tile empty-tile-small"></div> : 
-            <span class="heat resource"></span><span class="heat resource"></span>`;
+          return `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+            <span class="heat resource"></span><span class="heat resource"></span></div>`;
         } else {
           return `<span class="money resource">10</span>
             <span class="red-arrow-infinity"></span>

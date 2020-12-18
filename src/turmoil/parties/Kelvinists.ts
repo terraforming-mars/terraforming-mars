@@ -7,7 +7,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
@@ -76,19 +75,18 @@ export class KelvinistsPolicy02 implements Policy {
 
 export class KelvinistsPolicy03 implements Policy {
   id = 'kp03';
-  description: string = 'Decrease your heat production 2 steps to gain 1 TR (Turmoil Kelvinists)';
+  description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
 
   canAct(player: Player) {
-    return player.getProduction(Resources.HEAT) >= 2 && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.heat >= 6;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
-    game.log('${0} decreased heat production 2 steps to gain 1 TR', (b) => b.player(player));
+    game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 
-    player.addProduction(Resources.HEAT, -2);
-    player.increaseTerraformRating(game);
-    player.politicalAgendasActionUsedCount += 1;
+    player.setResource(Resources.HEAT, -6);
+    game.increaseTemperature(player, 1);
     return undefined;
   }
 }

@@ -2174,7 +2174,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           action.options.push(
             new SelectOption(
               kelvinistsPolicy.description,
-              'Decrease heat production',
+              'Pay',
               () => kelvinistsPolicy.action(this, game),
             ),
           );

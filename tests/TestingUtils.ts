@@ -48,6 +48,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     promoCardsOption: false,
     communityCardsOption: false,
     undoOption: false,
+    showTimers: false,
     startingCorporations: 2,
     includeVenusMA: true,
     soloTR: false,

@@ -12,6 +12,8 @@ import {LogHelper} from '../../components/LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost = 13;
@@ -53,5 +55,20 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
 
       if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '033',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1);
+          eb.description('Action: Add 1 Microbe to this card.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.microbes(2).startAction.oxygen(1);
+          eb.description('Action: Remove 2 Microbes from this card to raise oxygen level 1 step.');
+        }).br;
+      }),
     }
 }

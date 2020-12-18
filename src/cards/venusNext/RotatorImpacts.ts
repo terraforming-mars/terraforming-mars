@@ -13,6 +13,9 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -71,5 +74,20 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
       game.increaseVenusScaleLevel(player, 1);
       game.log('${0} removed an asteroid resource to increase Venus scale 1 step', (b) => b.player(player));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '243',
+      requirements: CardRequirements.builder((b) => b.venus(14).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);
+          eb.description('Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].');
+        }).br;
+        b.effectBox((eb) => {
+          eb.or().asteroids(1).startAction.venus(1);
+          eb.description('Action: Spend 1 resource from this card to increase Venus 1 step.');
+        });
+      }),
+      description: 'Venus must be 14% or lower',
     }
 }

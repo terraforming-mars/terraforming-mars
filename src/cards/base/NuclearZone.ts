@@ -11,6 +11,8 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearZone implements IProjectCard {
     public cost = 10;
@@ -42,5 +44,15 @@ export class NuclearZone implements IProjectCard {
 
     public getVictoryPoints() {
       return -2;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '097',
+      renderData: CardRenderer.builder((b) => {
+        b.tile(TileType.NUCLEAR_ZONE, true).br;
+        b.temperature(2);
+      }),
+      description: 'Place this tile and raise temperature 2 steps.',
+      victoryPoints: -2,
     }
 }

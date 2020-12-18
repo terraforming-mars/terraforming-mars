@@ -71,9 +71,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       // Init parties
       turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
-      // Init parties
-      turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
-
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
         turmoil.lobby.add(player.id);

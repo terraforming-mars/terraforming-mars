@@ -44,8 +44,8 @@ export class PoliticalAgendas {
       const bonuses = p.bonuses;
       const policies = p.policies;
 
-      const bonus: Bonus = agendaStyle === AgendaStyle.STANDARD ? bonuses[0] : bonuses[Math.floor(Math.random() * bonuses.length)];
-      const policy: Policy = agendaStyle === AgendaStyle.STANDARD ? policies[0] : policies[Math.floor(Math.random() * policies.length)];
+      const bonus: Bonus = agendaStyle === AgendaStyle.STANDARD ? bonuses[0] : this.randomElement(bonuses);
+      const policy: Policy = agendaStyle === AgendaStyle.STANDARD ? policies[0] : this.randomElement(policies);
       staticAgendas.set(p.name, {bonusId: bonus.id, policyId: policy.id} as Agenda);
     });
 
@@ -70,5 +70,10 @@ export class PoliticalAgendas {
   static setAgenda(rulingParty: IParty, politicalAgendasData: PoliticalAgendasData): void {
     const newAgenda = this.getAgenda(rulingParty, politicalAgendasData.staticAgendas);
     politicalAgendasData.thisAgenda = newAgenda;
+  }
+
+  private static randomElement<T>(list: Array<T>): T {
+    const rng = Math.floor(Math.random() * list.length);
+    return list[rng];
   }
 }

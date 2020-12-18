@@ -9,6 +9,9 @@ import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Plantation implements IProjectCard {
     public cost = 15;
@@ -32,5 +35,14 @@ export class Plantation implements IProjectCard {
       return new SelectSpace('Select space for greenery tile', game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
         return game.addGreenery(player, space.id);
       });
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: '193',
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      renderData: CardRenderer.builder((b) => {
+        b.greenery().secondaryTag('oxygen');
+      }),
+      description: 'Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.',
     }
 }

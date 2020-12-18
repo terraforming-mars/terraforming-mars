@@ -1,10 +1,12 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RadSuits implements IProjectCard {
     public cost = 6;
@@ -23,5 +25,14 @@ export class RadSuits implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '186',
+      requirements: CardRequirements.builder((b) => b.cities(2)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1));
+      }),
+      description: 'Requires two cities in play. Increase your MC up 1 step.',
+      victoryPoints: 1,
     }
 }

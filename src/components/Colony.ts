@@ -29,6 +29,7 @@ export const Colony = Vue.component('colony', {
     ): number => {
       if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
       if (colony.name === ColonyName.VENUS) return 190;
+      if (colony.name === ColonyName.PALLAS) return 172;
       if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
 
       let offset: number = 0;
@@ -72,12 +73,7 @@ export const Colony = Vue.component('colony', {
       return ColonyName.CALLISTO;
     },
     getColonyContentOffset: (colony: ColonyModel): number => {
-      if (
-        colony.name === ColonyName.PLUTO ||
-                colony.name === ColonyName.MIRANDA
-      ) {
-        return -12;
-      }
+      if (colony.name === ColonyName.PLUTO || colony.name === ColonyName.MIRANDA) return -12;
       return 0;
     },
     getIapetus: (): string => {
@@ -97,6 +93,9 @@ export const Colony = Vue.component('colony', {
     },
     getLeavitt: (): string => {
       return ColonyName.LEAVITT;
+    },
+    getPallas: (): string => {
+      return ColonyName.PALLAS;
     },
   },
   template: `
@@ -137,6 +136,10 @@ export const Colony = Vue.component('colony', {
       <div v-if="colony.name === getTitania()" class="resource money">-3</div>
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
 
+      <div v-if="colony.name === getPallas()" style="display:inline-block">
+        <div class="resource money">1</div> / party <div class="delegate"></div>
+      </div>
+      
       <span v-if="colony.name === getLeavitt()" style="display: inline-block;margin-left: 10px;font-size: 14px;">REVEAL TOP CARD OF DECK.</span>
       <span v-if="colony.name === getLeavitt()"><br></span>
       <span v-if="colony.name === getLeavitt()" style="font-size: 14px; margin-left: 10px;">BUY OR DISCARD IT.</span>
@@ -165,14 +168,16 @@ export const Colony = Vue.component('colony', {
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
       <div v-if="colony.name === getEuropa()" style="height: 20px; visibility: hidden;display: block;" />
-      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt()" class="white-x"></div>
+      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt() && colony.name !== getPallas()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
       <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 10px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
+      <div v-if="colony.name === getPallas()" class="white-x" style="margin-left:52px; margin-right: -30px;"></div>
+      <div v-if="colony.name === getPallas()" class="delegate" style="margin-top:-23px; margin-right:5px"></div>
       <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
       <div v-if="colony.name === getLeavitt()" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
-      <span v-if="colony.name !== getEuropa() && colony.name !== getPluto() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getLeavitt()" class="colony-background-color">
+      <span v-if="colony.name !== getEuropa() && colony.name !== getPluto() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getLeavitt() && colony.name !== getPallas()" class="colony-background-color">
         Trade Income
       </span>
       <span v-if="colony.name === getPluto()" class="colony-background-color" style="position:relative; top:-3px">
@@ -184,7 +189,7 @@ export const Colony = Vue.component('colony', {
       <span v-if="colony.name === getIapetus()" class="colony-background-color" style="position:relative;top:-8px;left:30px">
         Trade Income
       </span>
-      <span v-if="colony.name === getTitania()" class="colony-background-color" style="position:relative;top:-14px;left:12px">
+      <span v-if="colony.name === getTitania() || colony.name === getPallas()" class="colony-background-color" style="position:relative;top:-14px;left:12px">
         Trade Income
       </span>
       <span v-if="colony.name === getMercury()" class="colony-background-color" style="margin-left: 3px;">
@@ -430,6 +435,25 @@ export const Colony = Vue.component('colony', {
     <div><div class="production-box"><div class="production plant"></div></div></div>
     <div><div class="production-box"><div class="production plant"></div></div></div>
     <div><div class="production-box"><div class="production plant"></div></div></div>
+  </div>
+
+  <div v-if="colony.name === getPallas()" class="colony-grid-container">
+    <div><div class="influence" style="margin-top:5px"></div></div>
+    <div><div class="influence" style="margin-top:5px"></div></div>
+    <div><div class="influence" style="margin-top:5px"></div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+    <div v-if="colony.name === getPallas()" class="colony-grid-container2">
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>2</div>
+    <div>2</div>
+    <div>2</div>
+    <div>3</div>
   </div>
 
   <div v-if="colony.name === getMercury()" class="colony-grid-container">

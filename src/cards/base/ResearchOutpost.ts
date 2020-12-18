@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -8,6 +7,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchOutpost implements IProjectCard {
     public cost = 18;
@@ -33,5 +34,16 @@ export class ResearchOutpost implements IProjectCard {
         game.addCityTile(player, foundSpace.id);
         return undefined;
       });
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '020',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startEffect.megacredits(-1);
+          eb.description('Effect: When you play a card, you pay 1 MC less for it.');
+        }).br;
+        b.city();
+      }),
+      description: 'Place a city tile NEXT TO NO OTHER TILE.',
     }
 }

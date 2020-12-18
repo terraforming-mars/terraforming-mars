@@ -73,6 +73,7 @@ export interface GameOptions {
 
   // Configuration
   undoOption: boolean;
+  showTimers: boolean;
   fastModeOption: boolean;
   showOtherPlayersVP: boolean;
 
@@ -124,6 +125,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
+  showTimers: false,
   shuffleMapOption: false,
   solarPhaseOption: false,
   soloTR: false,

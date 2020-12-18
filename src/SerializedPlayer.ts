@@ -3,6 +3,7 @@ import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {SerializedTimer} from './SerializedTimer';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 
 // TODO(kberg): remove reference to CorporationCard by 2021-01-15
@@ -53,6 +54,7 @@ export interface SerializedPlayer {
     steelValue: number;
     terraformRating: number;
     terraformRatingAtGenerationStart: number;
+    timer: SerializedTimer;
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;

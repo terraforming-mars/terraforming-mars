@@ -240,6 +240,11 @@ checkComponent(
     [],
 );
 checkComponent(
+    'src/components/overview/PlayerTimer',
+    require('./build/src/components/overview/PlayerTimer').PlayerTimer,
+    ['timerText'],
+);
+checkComponent(
   'src/components/TopBar',
   require('./build/src/components/TopBar').TopBar,
   ['componentKey'],

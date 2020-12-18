@@ -445,6 +445,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve = d.delegate_reserve;
       }
 
+      turmoil.politicalAgendasData = d.politicalAgendasData;
+
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);
         if (tp === undefined) {

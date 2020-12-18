@@ -125,7 +125,7 @@ export const Turmoil = Vue.component('turmoil', {
       if (party === PartyName.UNITY) {
         if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up02') {
           return `<div class="policy-top-margin">
-            <span class="money resource">10</span>
+            <span class="money resource">9</span>
             <span class="red-arrow"></span> 4 <span class="titanium resource"></span>
             </div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up03') {

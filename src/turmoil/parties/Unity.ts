@@ -8,6 +8,7 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -51,18 +52,18 @@ export class UnityPolicy01 implements Policy {
 
 export class UnityPolicy02 implements Policy {
   id = 'up02';
-  description: string = 'Spend 10 MC to gain 4 titanium';
+  description: string = 'Spend 9 MC to gain 4 titanium';
 
   canAct(player: Player) {
-    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
+    return player.canAfford(9) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
-    player.turmoilPolicyActionUsed = true;
+    player.politicalAgendasActionUsedCount += 1;
     game.defer(new SelectHowToPayDeferred(
       player,
-      10,
+      9,
       false,
       false,
       'Select how to pay for action',
@@ -81,11 +82,13 @@ export class UnityPolicy03 implements Policy {
   description: string = 'Spend 4 MC to draw a Space card (Turmoil Unity)';
 
   canAct(player: Player) {
-    return player.canAfford(4);
+    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
+    player.politicalAgendasActionUsedCount += 1;
+
     game.defer(new SelectHowToPayDeferred(
       player,
       4,

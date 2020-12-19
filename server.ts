@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
-import {BoardName} from './src/BoardName';
+import {BoardName} from './src/boards/BoardName';
 import {Color} from './src/Color';
 import {Game, GameId} from './src/Game';
 import {GameLoader} from './src/database/GameLoader';

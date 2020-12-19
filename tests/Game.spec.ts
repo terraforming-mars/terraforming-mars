@@ -16,7 +16,7 @@ import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
 import {OrOptions} from '../src/inputs/OrOptions';
-import {BoardName} from '../src/BoardName';
+import {BoardName} from '../src/boards/BoardName';
 import {SpaceType} from '../src/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
 import {CardName} from '../src/CardName';

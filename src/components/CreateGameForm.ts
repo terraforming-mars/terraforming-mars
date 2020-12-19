@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {Color} from '../Color';
-import {BoardName} from '../BoardName';
+import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
 import {translateMessage} from '../directives/i18n';

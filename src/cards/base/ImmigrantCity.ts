@@ -7,7 +7,7 @@ import {ISpace} from '../../ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 

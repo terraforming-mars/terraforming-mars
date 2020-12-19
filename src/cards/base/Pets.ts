@@ -6,7 +6,7 @@ import {ISpace} from '../../ISpace';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';

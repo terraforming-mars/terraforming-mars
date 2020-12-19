@@ -1,10 +1,10 @@
-import {ISpace} from './ISpace';
-import {Player} from './Player';
-import {SpaceType} from './SpaceType';
-import {SpaceName} from './SpaceName';
-import {SpaceBonus} from './SpaceBonus';
-import {TileType} from './TileType';
-import {AresHandler} from './ares/AresHandler';
+import {ISpace} from '../ISpace';
+import {Player} from '../Player';
+import {SpaceType} from '../SpaceType';
+import {SpaceName} from '../SpaceName';
+import {SpaceBonus} from '../SpaceBonus';
+import {TileType} from '../TileType';
+import {AresHandler} from '../ares/AresHandler';
 
 export abstract class Space implements ISpace {
   constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {

@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {LogHelper} from '../../components/LogHelper';
 
 export class Election implements IGlobalEvent {

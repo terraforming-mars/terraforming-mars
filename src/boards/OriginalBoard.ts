@@ -1,8 +1,8 @@
-import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
-import {Player} from './Player';
-import {ISpace} from './ISpace';
+import {Player} from '../Player';
+import {ISpace} from '../ISpace';
 import {BoardBuilder} from './BoardBuilder';
 
 export class OriginalBoard extends Board {

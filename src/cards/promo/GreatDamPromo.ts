@@ -8,7 +8,7 @@ import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../ISpace';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

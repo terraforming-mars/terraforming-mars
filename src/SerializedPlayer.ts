@@ -29,6 +29,7 @@ export interface SerializedPlayer {
     fleetSize: number;
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
+    hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;
     id: string;
@@ -43,6 +44,7 @@ export interface SerializedPlayer {
     plants: number;
     plantsNeededForGreenery: number;
     playedCards: Array<SerializedCard>;
+    politicalAgendasActionUsedCount: number;
     powerPlantCost: number;
     preludeCardsInHand: Array<CardName>;
     removedFromPlayCards: Array<CardName>;
@@ -57,9 +59,7 @@ export interface SerializedPlayer {
     titaniumProduction: number;
     titaniumValue: number;
     tradesThisTurn: number;
-    usedUndo: boolean;
     turmoilPolicyActionUsed: boolean;
-    politicalAgendasActionUsedCount: number;
-    hasTurmoilScienceTagBonus: boolean;
+    usedUndo: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

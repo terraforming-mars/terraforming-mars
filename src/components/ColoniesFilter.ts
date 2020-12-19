@@ -18,6 +18,7 @@ import {Hygiea} from '../cards/community/Hygiea';
 import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
+import {Pallas} from '../cards/community/Pallas';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -38,13 +39,20 @@ const communityColonies: Array<Colony> = [
   new Mercury(),
   new Hygiea(),
   new Titania(),
-  new Venus(),
   new Leavitt(),
+  new Venus(),
+  new Pallas(),
 ];
 
 export const ColoniesFilter = Vue.component('colonies-filter', {
   props: {
     communityCardsOption: {
+      type: Boolean,
+    },
+    venusNext: {
+      type: Boolean,
+    },
+    turmoil: {
       type: Boolean,
     },
   },
@@ -78,7 +86,31 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       this.$emit('colonies-list-changed', colonyNames);
     },
     communityCardsOption: function(enabled) {
-      this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
+      if (enabled) {
+        this.selectedColonies = officialColonies.concat(communityColonies).slice();
+        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
+        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+      } else {
+        this.selectedColonies = officialColonies.slice();
+      }
+    },
+    venusNext: function(enabled) {
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.VENUS) === undefined) {
+          this.selectedColonies.push(new Venus());
+        }
+      }
+    },
+    turmoil: function(enabled) {
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) === undefined) {
+          this.selectedColonies.push(new Pallas());
+        }
+      }
     },
   },
   template: `

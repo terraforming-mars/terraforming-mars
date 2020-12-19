@@ -9,6 +9,8 @@ import {Resources} from '../../Resources';
 import {ICard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {SpaceBonus} from '../../SpaceBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RoboticWorkforce implements IProjectCard {
   public cost = 9;
@@ -370,5 +372,12 @@ export class RoboticWorkforce implements IProjectCard {
 
       return undefined;
     });
+  }
+  public metadata: CardMetadata = {
+    cardNumber: '086',
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => pb.building().played);
+    }),
+    description: 'Duplicate only the production box of one of your building cards.',
   }
 }

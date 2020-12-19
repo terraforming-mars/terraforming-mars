@@ -331,6 +331,11 @@ class Builder {
     return this;
   }
 
+  public camps(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CAMPS, amount));
+    return this;
+  }
+
   public selfReplicatingRobots() {
     this._addRowItem(new CardRenderItem(CardRenderItemType.SELF_REPLICATING));
     return this;
@@ -347,11 +352,15 @@ class Builder {
     return this;
   }
 
-  public emptyTile(type: 'normal' | 'golden' = 'normal') {
+  public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
     if (type === 'normal') {
-      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1));
+      const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
+      normal.size = size;
+      this._addRowItem(normal);
     } else if (type === 'golden') {
-      this._addRowItem(new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1));
+      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1);
+      golden.size = size;
+      this._addRowItem(golden);
     }
     return this;
   }

@@ -57,6 +57,7 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
         ...this.colonies ? cardsByModuleMap.get(GameModule.Colonies)! : [],
         ...this.turmoil ? cardsByModuleMap.get(GameModule.Turmoil)! : [],
         ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
+        ...this.communityCardsOption ? cardsByModuleMap.get(GameModule.Community)! : [],
       ] as Array<CardName> | boolean /* v-model thinks this can be boolean */,
       corpsByModule: Array.from(cardsByModuleMap),
     };
@@ -148,7 +149,7 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
                 <a href="#" v-on:click.prevent="invertSelection('All')">Invert</a>
             </div>
         </div>
-        <div class="corporations-filter-group" v-for="entry in corpsByModule">
+        <div class="corporations-filter-group" v-for="entry in corpsByModule" v-if="entry[1].length > 0">
             <div class="corporations-filter-toolbox-cont">
                 <div class="corporations-filter-toolbox">
                     <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> | 

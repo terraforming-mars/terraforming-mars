@@ -3,75 +3,6 @@ import {CardName} from './CardName';
 /* eslint-disable no-irregular-whitespace */
 export const HTML_DATA: Map<string, string> =
   new Map([
-    [CardName.CREDICOR, `
-      
-      <div class="contentCorporation ">
-          <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel ">EFFECT</div>
-              -<div class="resource money ">20</div> : <div class="resource money ">4</div>
-              <div class="description " style="text-align:center;margin-top:0px; ">
-                  (Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.)
-              </div>
-          </div>
-          <span style="font-size:40px; color: white; font-family: 'Times New Roman'; font-weight:normal;line-height:60px; border:2px solid purple; padding-left:5px; padding-bottom:5px; margin-left:10px; box-shadow: 6px 6px 10px grey; text-shadow:
-      -1px 0 purple, 0 1px purple, 1px 0 purple, 0 -1px purple, 6px 6px 10px grey; ">
-              credicor
-          </span><br><br>
-          <div class="description " style="text-align:center ">
-          <div class="resource money" style="margin-top:-10px;">57</div><br>
-              (You start with 57 MC.)
-          </div>
-      </div>
-`],
-    [CardName.ECOLINE, `
-     
-    
-    <div class="contentCorporation">
-      <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        7<div class="resource plant"></div> <span class="red-arrow"></span>
-        <div class="greenery-tile tile"></div><br>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (Effect: You may always pay 7 plants, instead of 8, to place greenery.)
-        </div>
-      </div>
-      <span style="font-size:50px;
-                      font-weight:normal;
-                      color:rgb(0,180,0);
-                      letter-spacing:2px;
-                      margin-left:5px;
-                      text-shadow: -1px 0 #404040, 0 1px #404040, 1px 0 #404040, 0 -1px #404040, 5px 5px 5px grey;
-                      ">
-                  ecoline
-              </span><br>
-      <div class="production-box production-box-size2" style="margin-top:5px;margin-right:10px;">
-        <div class="production plant"></div><div class="production plant"></div>
-      </div>
-       <div class="resource money">36</div> 3<div class="resource plant"></div>
-      <div class="description" style="margin-top:-3px;text-align:center;">(You start with 2 plant production, 3 plants, and 36MC)</div>
-    </div>
-`],
-    [CardName.HELION, ` 
-    
-    <div class="contentCorporation">
-      <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        X<div class="resource heat"></div> :
-        <div class="resource money">X</div>
-        <div class="description helion-effect">
-          (Effect: You may use heat as MC. You may not use MC as heat.)
-        </div>
-      </div>
-      <div class="helion">helion</div><br>
-      <div class="production-box production-box-size3 helion-production">
-        <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div>
-      </div>
-        <div class="resource money helion-mc">42</div>
-      <div class="description helion-resource-description">
-        (You start with 3 heat production and 42 MC.)
-      </div>
-    </div>
-`],
     [CardName.MINING_GUILD, ` 
     
     <div class="contentCorporation">
@@ -109,101 +40,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.INTERPLANETARY_CINEMATICS, ` 
-      
-      <div class="contentCorporation ">
-          <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel ">EFFECT</div>
-              <div class="resource-tag tag-event"></div> : <div class="resource money">2</div>
-              <div class="description " style="text-align:center;margin-top:0px; ">
-                  (Effect: Each time you play an event, you gain 2 MC.)
-              </div>
-          </div>
-          <div class="INTERPLANETARY CINEMATICS" style="color: #020202;font-size:17px">
-            INTERPLANETARY
-          </div>
-          <div style="height:5px;margin-top:-2px;width:143px;background:linear-gradient(to right, yellow,black,yellow,black,yellow);border:5px solid #cc3333;box-shadow:3px 3px 6px grey;">
-          </div>
-          <div class="INTERPLANETARY CINEMATICS" style="color: #020202;font-size:24px;margin-left:3px;margin-top:-5px;
-          display:inline-block;
-          -webkit-transform:scale(0.5,1); /* Safari and Chrome */
-          -moz-transform:scale(0.5,1); /* Firefox */
-          -ms-transform:scale(0.5,1); /* IE 9 */
-          -o-transform:scale(0.5,1); /* Opera */
-          transform:scale(1,0.5); /* W3C */
-          margin-bottom:15px;">CINEMATICS
-        </div><br>
-          <div class="resource money " style="margin-left:40px;">30</div>&nbsp;&nbsp;&nbsp;&nbsp; 20<div class="resource steel"></div>
-          <div class="description " style="text-align:center ">
-              (You start with 20 steel and 30 MC.)
-          </div>
-      </div>
-`],
-    [CardName.INVENTRIX, ` 
-      
-      <div class="contentCorporation ">
-          <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel">EFFECT</div>
-              
-              <div class="corporation-ability">
-                <div class="globals-box">Global requirements</div>: +/- 2
-              </div>
-              
-              <div class="description ">
-                  (Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.)
-              </div>
-          </div>
-          <span style="color: #020202;
-          font-size:24px;
-          padding-left:5px;
-          padding-bottom:5px;
-          text-shadow: 6px 6px 5px grey;
-          ;">
-            <span style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span> INVENTRIX
-          </span>
-          <div class="description " style="text-align:center ">
-            <div class="resource money " style="margin-left:20px;">45</div> <div class="resource card" style="margin-left:20px"></div><div class="resource card"></div><div class="resource card"></div><br>
-              (As you first action in the game, draw 3 cards. Start with 45MC.)
-          </div>
-      </div>
-`],
-    [CardName.PHOBOLOG, ` 
-    
-    <div class="contentCorporation">
-      <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        <div class="resource titanium"></div> : +
-        <div class="resource money">1</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (Effect: Your titanium resources are each worth 1 MC extra.)
-        </div>
-      </div>
-      <span style="font-size:24px;
-                      margin-left:15px;
-                      color:white;
-                      line-height:40px;
-                      background: #32004d;
-                      padding-left:5px;
-                      padding-right:5px;
-                      border:1px solid #444;
-                      border-radius:10px;
-                      font-family: 'Times New Roman';
-                      display:inline-block;
-                      -webkit-transform:scale(1.2,1); /* Safari and Chrome */
-                      -moz-transform:scale(1.2,1); /* Firefox */
-                      -ms-transform:scale(1.2,1); /* IE 9 */
-                      -o-transform:scale(1.2,1); /* Opera */
-                      transform:scale(1.2,1); /* W3C */
-                      box-shadow:  6px 6px 5px  grey;">
-                  PHOBOLOG
-              </span><br><br>
-      <div class="resource money" style="margin-left:45px;">23</div>
-      10<div class="resource titanium"></div>
-      <div class="description" style="text-align:center;">
-        (You start with 10 titanium and 23 MC.)
-      </div>
-    </div>
-`],
     [CardName.THARSIS_REPUBLIC, ` 
       
       <div class="contentCorporation ">
@@ -223,33 +59,6 @@ export const HTML_DATA: Map<string, string> =
               (You start with 40 MC. As your first action in the game,place a city tile.)
           </div>
       </div>
-`],
-    [CardName.THORGATE, ` 
-    
-    <div class="contentCorporation">
-      <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        <div class="resource-tag tag-power"></div> * :
-        <div class="resource money">-3</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.)
-        </div>
-      </div>
-      <span style="color: #020202;
-                      font-size:32px;
-                      font-family: 'Arial Narrow','Verdana';
-                      font-weight:normal;
-                      text-shadow: 6px 3px 5px  grey;">
-                  THORGATE
-              </span><br><br>
-      <div class="production-box" style="margin-left:45px;margin-top:-10px;">
-        <div class="production energy"></div>
-      </div>
-      <div class="resource money" style="margin-left:20px;">48</div>
-      <div class="description" style="text-align:center;">
-        (You start with 1 energy production and 48 MC.)
-      </div>
-    </div>
 `],
     [CardName.UNITED_NATIONS_MARS_INITIATIVE, ` 
     
@@ -283,7 +92,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.TERACTOR, ` 
     
-    <div class="corporate-icon corporation-icon"></div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -305,96 +114,9 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.SATURN_SYSTEMS, ` 
-    
-    <div class="corporate-icon corporation-icon"></div>
-    <div class="contentCorporation">
-      <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        <span class="resource-tag tag-jovian red-outline"></span>&nbsp;:
-        <div class="production-box">
-          <div class="production money">1</div>
-        </div>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.)
-        </div>
-      </div>
-      <span style="font-size:14px;
-                      color:white;
-                      line-height:40px;
-                      background: #32004d;
-                      padding-top:8px;
-                      padding-bottom:8px;
-                      padding-left:20px;
-                      padding-right:20px;
-                      border-radius:50%;
-                      font-weight:normal;
-                      border:2px solid white;
-                      box-shadow:  6px 6px 5px  grey;">
-                  SATURN <span style="font-size:20px;display:inline-block;">&#x25CF;</span> SYSTEMS
-      </span><br><br>
-      <div class="production-box" style="margin-left:45px;margin-top:-10px;">
-        <div class="production titanium"></div>
-      </div>
-      <div class="resource money" style="margin-left:20px;">42</div>
-      <div class="description" style="text-align:center;margin-top:0px;">
-        (You start with 1 titanium production and 42 MC.)
-      </div>
-    </div>
-`],
-    [CardName.APHRODITE, ` 
-    
-    <div class="venus-icon corporation-icon"></div>
-    <div class="contentCorporation">
-    <div class="corporationEffectBox">
-        <div class="corporationEffectBoxLabel">EFFECT</div>
-        <div class="tile venus-tile red-outline">V</div> : <div class="resource money">2</div>
-        <div class="description description-effect">
-          (Effect: Whenever Venus is terraformed 1 step, you gain 2MC.)
-    </div>
-    </div>
-    <div class="corporation-logo">APHRODITE</div><br>
-    <div class="starting-resources">
-        <div class="production-box"><div class="production plant"></div></div>
-        <div class="resource money">47</div>
-    </div>
-    <div class="description description-starting-resource">(You start with 1 plant production and 47 MC)</div>
-    </div>
-`],
-    [CardName.CELESTIC, ` 
-      
-      <div class="venus-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="pointsCorporation">1/3<div class="resource floater"></div></div>
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">ACTION</div>
-          <div class="red-arrow"></div> <div class="resource floater"></div>*
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Action: Add a floater to ANY card.)
-          </div><br>
-          <div class="description" style="margin-top:17px;margin-left:17px; width: 120px; text-align:left;">
-          (1 VP per 3 floaters
-          <br>
-          on this card.)
-          </div>
-        </div>
-        <div class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;margin-bottom:2px">
-          <span style="background:linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left:5px;">CEL</span><span
-          style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span><span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
-        </div>
-      </div><br>
-        <div class="celestic-fix">
-          <div class="resource money" style="margin-left:30px;">42</div>
-          <div class="resource card"><div class="card-icon-box floater"></div></div>
-          <div class="resource card"><div class="card-icon-box floater"></div></div>
-          <div class="description" style="text-align:center;margin-top:-3px;font-size:10px;">
-          (You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.)
-        </div>
-        </div>
-`],
     [CardName.MANUTECH, ` 
       
-      <div class="venus-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -420,103 +142,9 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.MORNING_STAR_INC, ` 
-      
-      <div class="venus-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="tile venus-tile">V</div> : +/- 2
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: Your Venus requirements are +/- 2 steps, your choice in each case.)
-          </div>
-        </div>
-        <div  style="font-size:18px; color:white;margin-top:5px;margin-bottom:-10px;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 6px 3px 5px  grey;
-                        ">
-                    MORNING STAR INC.
-                </div><br>
-        <div class="resource money" style="margin-left:10px;">50</div>
-        <div class="resource card"><div class="card-icon tag-venus"></div></div>
-        <div class="resource card"><div class="card-icon tag-venus"></div></div>
-        <div class="resource card"><div class="card-icon tag-venus"></div></div>
-        <div class="description" style="text-align:center;margin-top:-4px;">
-          (You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.)
-        </div>
-      </div>
-`],
-    [CardName.VIRON, ` 
-      
-      <div class="venus-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">ACTION</div>
-          <div class="red-arrow" style="font-size:30px;"></div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Action: Use a blue card action that has already been used this generation.)
-          </div>
-        </div>
-        <div  style="font-size:50px; font-family: Prototype;margin-left: 15px;
-        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 6px 3px 5px  grey;
-                        ">
-                    VIRON
-                </div>
-        <div class="resource money" style="margin-left:65px;">48</div>
-        <div class="description" style="text-align:center;">
-          (You start with 48 MC.)
-        </div>
-      </div>
-`],
-    [CardName.CHEUNG_SHING_MARS, ` 
-      
-      <div class="prelude-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="resource-tag tag-building"></div> :
-          <div class="resource money">-2</div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: When you play a building tag, you pay 2 MC less for it.)
-          </div>
-        </div>
-        <div style="margin-top:20px;width:50px;display:inline-block;"><span style="color:red;border:4px solid red;border-radius:50%;padding:3px 5px 3px 5px;font-size:30px;line-height:14px;box-shadow: 3px 3px 3px grey, inset 0 0 3px 3px grey;text-shadow: 3px 3px 3px grey;">㨐</span></div>
-        <div style="display: inline-block; width:140px; font-size:19px; line-height: 22px; vertical-align: middle; margin-bottom: 15px;
-                        font-family: 'Prototype';
-                        font-weight:normal;
-                        ">
-                    &nbsp;Cheung Shing <br><div style="margin-left:10px"> ■■MARS■■ </div>
-                </div>
-        <div class="production-box" style="margin-left:45px;margin-top:-10px;">
-          <div class="production money">3</div>
-        </div>
-        <div class="resource money" style="margin-left:20px;">44</div>
-        <div class="description" style="text-align:center;">
-          (You start with 3 MC production and 44 MC.)
-        </div>
-      </div>
-`],
-    [CardName.POINT_LUNA, ` 
-        
-        <div class="prelude-icon corporation-icon"></div>
-        <div class="contentCorporation ">
-            <div class="corporationEffectBox ">
-                <div class="corporationEffectBoxLabel ">EFFECT</div>
-                <div class="resource-tag tag-earth"></div> : <div class="resource card"></div>
-                <div class="description " style="text-align:center;margin-top:0px; ">
-                    (Effect: When you play an Earth tag, including this, draw a card.)
-                </div>
-            </div>
-            <div class="luna-fix">POINT<span>&nbsp;</span>LUNA</div>
-            </div>
-            <div class="description " style="text-align:center;margin-top:0px ">
-            <div class="production-box" style="margin-left:-30px;margin-top:-5px;margin-bottom:-5px;"><div class="production titanium"></div></div>
-            <div class="resource money" style="margin-left:60px;margin-bottom:15px">38</div><br>
-              (You start with 1 titanium production<br> and 38 MC.)
-            </div>
-`],
     [CardName.ROBINSON_INDUSTRIES, `
       
-      <div class="prelude-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -539,7 +167,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.VALLEY_TRUST, ` 
         
-        <div class="prelude-icon corporation-icon"></div>
+        
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
@@ -560,7 +188,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.VITOR, ` 
         
-        <div class="prelude-icon corporation-icon"></div>
+        
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
@@ -607,7 +235,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 `],
     [CardName.ARIDOR, ` 
-      <div class="colonies-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -629,7 +257,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.MONS_INSURANCE, ` 
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -662,85 +290,9 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-    [CardName.ARKLIGHT, ` 
-      
-      <div class="colonies-icon corporation-icon"></div>
-      <div class="contentCorporation">
-         <div class="pointsCorporation">1/2<div class="resource animal"></div></div>
-        <div class="corporationEffectBox" style="margin-top: 143px; height: 144px">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="resource-tag tag-animal"></div> / <div class="resource-tag tag-plant"></div> : <div class="resource animal"></div>
-          <div class="description" style="margin-top:0px;text-align:left;margin-left:10px;">
-            (Effect: When you play an animal or plant tag, including this, add 1 animal to this card.)
-          </div>
-        </div>
-        <div  class= "arklight" style="font-size:19px;
-          font-family: Prototype;
-          margin-left: 74px;
-          letter-spacing: 1px;
-          background: linear-gradient(to right,#000089, dodgerblue, deepskyblue);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          -webkit-transform:scale(2,1); /* Safari and Chrome */
-          -moz-transform:scale(2,1); /* Firefox */
-          -ms-transform:scale(2,1); /* IE 9 */
-          -o-transform:scale(2,1); /* Opera */
-          transform:scale(2,1); /* W3C */
-          margin-top: 3px;
-          margin-bottom: -12px;
-          "> ARKLIGHT
-        </div><br>
-        <div class="resource money" style="margin-right:30px;margin-left:30px;">45</div>
-        <div class="production-box ">
-            <div class="money production ">2</div>
-        </div>
-        <div class="description" style="text-align:center;">
-          (You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.)
-        </div>
-`],
-    [CardName.PRISTAR, ` 
-            <div class="turmoil-icon corporation-icon"></div>
-            <div class="contentCorporation ">
-               <div class="pointsCorporation" >1/<div class="resource pristar"></div></div>
-                <div class="corporationEffectBox hover-hide-res" style="height:140px;margin-top:150px">
-                    <div class="corporationEffectBoxLabel" style="margin-bottom:5px;">EFFECT</div>
-
-                      <div class="tile rating"><div class="left-line"></div><div class="right-line"></div></div> : <div class="resource pristar"></div> <div class="resource money">6</div>
-                    <div class="description " style="text-align:center;margin-top:-3px; text-align:left;">
-                        (Effect: During production phase, if you did not get TR so far this <br> generation, add one <br> preservation resource<br> here and gain 6 MC.)
-                    </div>
-                </div>
-                <div style="color:#ff5d21;text-shadow: 3px 3px 3px black;font-size:30px;transform:scaleX(0.8);letter-spacing:1px;">
-                  PRISTAR
-                  </div>
-                <div class="resource money " style="margin-left:10px;margin-right:20px;">53</div> - <div class="tile rating"></div><div class="tile rating"></div>
-                <div class="description " style="text-align:center;">
-                    (You start with 53 MC. Decrease your TR 2 steps.
-                    <br>
-                    1 VP per preservation resource here.)
-                </div>
-            </div>
-`],
-    [CardName.POLYPHEMOS, ` 
-      <div class="colonies-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="resource card"></div>* &nbsp;: <div class="resource money">5</div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.)
-          </div>
-        </div>
-        <div class="polyphemos"><span class="polyphemos2">POL</span>YPHEMOS</div>
-        <div class="resource money" style="margin-left:20px;">50</div> <div  style="margin-left:15px;margin-right:15px" class="production-box"><div class="production money">5</div></div> 5<div class="resource titanium"></div>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.)
-        </div>
-      </div>
-`],
     [CardName.UTOPIA_INVEST, ` 
 
-<div class="turmoil-icon corporation-icon"></div>
+
 <div class="contentCorporation">
   <div class="corporationEffectBox">
     <div class="corporationEffectBoxLabel">ACTION</div>
@@ -768,27 +320,9 @@ export const HTML_DATA: Map<string, string> =
   </div>
 </div>
 `],
-    [CardName.POSEIDON, `
-      
-      <div class="colonies-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="tile colony red-outline"></div>: <div class="production-box"><div class="production money">1</div></div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: When any colony is placed, including this, raise your MC production 1 step.)
-          </div>
-        </div>
-        <div class="poseidon">POSEIDON</div>
-        <div class="resource money" style="margin-left:70px;">45</div> <div class="tile colony"></div>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (You start with 45MC. As your first action, place a colony.)
-        </div>
-      </div>
-`],
     [CardName.STORMCRAFT_INCORPORATED, ` 
       
-      <div class="colonies-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res" style="margin-top: 136px; height: 149px">
           <div class="corporationEffectBoxLabel" style="margin-bottom:5px;" >ACTION</div>
@@ -808,7 +342,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.ARCADIAN_COMMUNITIES, `
       
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
@@ -838,7 +372,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.PHILARES, ` 
       
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -861,7 +395,7 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.RECYCLON, ` 
       
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res">
           <div class="corporationEffectBoxLabel" style="margin-bottom:10px">EFFECT</div>
@@ -879,7 +413,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.SPLICE, `
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel" style="margin-bottom:2px">EFFECT</div>
@@ -898,7 +432,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.LAKEFRONT_RESORTS, `
-            <div class="turmoil-icon corporation-icon"></div>
+            
             <div class="contentCorporation ">
                 <div class="corporationEffectBox" style="height:140px;margin-top:150px">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:4px;">EFFECT</div>
@@ -921,28 +455,8 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-    [CardName.TERRALABS_RESEARCH, `
-  <div class="turmoil-icon corporation-icon"></div>
-  <div class="contentCorporation ">
-      <div class="corporationEffectBox ">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-            <div class="resource card"></div> : <div class="resource money">1</div>
-          <div class="description " style="text-align:center;margin-top:0px; ">
-              (Effect: Buying cards to hand costs 1MC.)
-          </div>
-      </div>
-      <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
-        TERRALABS
-        </div>
-        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;margin-bottom:10px;transform:scale(2,1)">RESEARCH</div>
-      <div class="resource money " style="margin-left:25px;margin-right:20px;">14</div> - <div class="tile rating"></div>
-      <div class="description " style="text-align:center;">
-          (You start with 14 MC. Lower your TR 1 step.)
-      </div>
-  </div>
-`],
     [CardName.FACTORUM, `
-          <div class="promo-icon corporation-icon"></div>
+          
           <div class="contentCorporation">
             <div class="corporationEffectBox">
               <div class="corporationEffectBoxLabel">ACTION</div>
@@ -972,25 +486,8 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
           `],
-    [CardName.SEPTUM_TRIBUS, `
-      <div class="turmoil-icon corporation-icon"></div>
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel" style="margin-bottom:15px;" >ACTION</div>
-          <div class="red-arrow"></div> <div class="resource money">2</div> / <div class="delegate"></div> *
-          <div class="description" style="text-align:center;margin-top:5px;">
-            (Action: Gain 2 MC for each party where you have at least 1 delegate.)
-          </div><br>
-        </div>
-        <div class="septem">Septem Tribus</div>
-        <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
-        <div class="description" style="text-align:center;margin-top:10px">
-          (You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.)
-        </div>
-      </div>
-`],
     [CardName.ASTRODRILL, `
-      <div class="promo-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
           <div class="corporationEffectBoxLabel" >ACTION</div>
@@ -1009,7 +506,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.PHARMACY_UNION, `
-    <div class="promo-icon corporation-icon"></div>
+    
     <div class="contentCorporation">
 
       <div class="corp-logo">Pharmacy Union</div>
@@ -1037,7 +534,7 @@ export const HTML_DATA: Map<string, string> =
 
 `],
     [CardName.AGRICOLA_INC, ` 
-      <div class="community-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="pointsCorporation">?</div>
         <div class="corporationEffectBox">
@@ -1062,7 +559,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.PROJECT_WORKSHOP, `
-      <div class="community-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
@@ -1100,7 +597,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.INCITE, `
-      <div class="community-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -1122,7 +619,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.PLAYWRIGHTS, `
-      <div class="community-icon corporation-icon"></div>
+      
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
@@ -1147,7 +644,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.MIDAS, `
-      <div class="community-icon corporation-icon"></div>
+      
 
       <div class="midas">Midas</div>
       <div class="resource money">120</div>

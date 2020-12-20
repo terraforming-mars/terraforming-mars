@@ -4,6 +4,7 @@ import {range} from '../../utils/utils';
 import {Button} from '../common/Button';
 import {mainAppSettings} from '../App';
 import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerTimer} from './PlayerTimer';
 
 const isPinned = (root: any, playerIndex: number): boolean => {
   return (root as any).getVisibilityState('pinned_player_' + playerIndex);
@@ -35,6 +36,7 @@ export const PlayerStatus = Vue.component('player-status', {
   },
   components: {
     Button,
+    PlayerTimer,
   },
   methods: {
     togglePlayerDetails: function() {
@@ -119,6 +121,7 @@ export const PlayerStatus = Vue.component('player-status', {
                 </div> 
                 <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
+            <div class="player-status-timer" v-if="player.showTimers"><player-timer :timer="player.timer"/></div>
         </div>
     `,
 });

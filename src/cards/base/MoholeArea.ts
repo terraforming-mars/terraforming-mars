@@ -31,7 +31,7 @@ export class MoholeArea implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '142',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.heat(4)).br;
+        b.productionBox((pb) => pb.heat(4).digit).br;
         b.tile(TileType.MOHOLE_AREA, true);
       }),
       description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',

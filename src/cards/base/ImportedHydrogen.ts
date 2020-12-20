@@ -98,9 +98,9 @@ export class ImportedHydrogen implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '019',
       renderData: CardRenderer.builder((b) => {
-        b.plants(3).br;
-        b.or().br;
-        b.microbes(3).digit.asterix().nbsp.or().nbsp;
+        b.plants(3).digit;
+        b.or();
+        b.microbes(3).digit.asterix().or();
         b.animals(2).digit.asterix().br;
         b.oceans(1);
       }),

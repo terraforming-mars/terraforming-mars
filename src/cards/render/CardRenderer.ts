@@ -344,8 +344,8 @@ class Builder {
     return this;
   }
 
-  public pristar(amount: number) {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.PRISTAR, amount));
+  public preservation(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PRESERVATION, amount));
     return this;
   }
 

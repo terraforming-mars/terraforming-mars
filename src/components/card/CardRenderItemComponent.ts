@@ -76,9 +76,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
-      } else if (type === CardRenderItemType.PRISTAR) {
+      } else if (type === CardRenderItemType.PRESERVATION) {
         classes.push('card-resource');
-        classes.push('card-resource-pristar');
+        classes.push('card-resource-preservation');
       } else if (type === CardRenderItemType.FIGHTER) {
         classes.push('card-resource');
         classes.push('card-resource-fighter');

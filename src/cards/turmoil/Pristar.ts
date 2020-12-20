@@ -40,11 +40,11 @@ export class Pristar implements CorporationCard, IResourceCard {
         b.megacredits(53).minus().tr(2);
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
-            eb.tr(1).startEffect.pristar(1).megacredits(6);
+            eb.tr(1).startEffect.preservation(1).megacredits(6);
             eb.description('Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 MC.');
           });
         });
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.pristar(1, 1),
+      victoryPoints: CardRenderDynamicVictoryPoints.preservation(1, 1),
     }
 }

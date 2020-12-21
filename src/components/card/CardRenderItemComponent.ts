@@ -227,6 +227,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
       }
+      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
+        result = '<span class="card-place-colony">colony</span>';
+      }
 
       return result;
     },

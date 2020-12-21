@@ -10,6 +10,8 @@ import {Colony} from '../../colonies/Colony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyName} from '../../colonies/ColonyName';
 import {ColonyModel} from '../../models/ColonyModel';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Aridor implements CorporationCard {
     public name = CardName.ARIDOR;
@@ -74,5 +76,19 @@ export class Aridor implements CorporationCard {
     }
     public play() {
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R20',
+      description: 'You start with 40MC. As your first action add a colony tile.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(40).nbsp.placeColony();
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.diverseTag().startEffect.productionBox((pb) => pb.megacredits(1));
+            eb.description('When you get a new type of tag in play [event cards do not count], increase your MC production 1 step.');
+          });
+        });
+      }),
     }
 }

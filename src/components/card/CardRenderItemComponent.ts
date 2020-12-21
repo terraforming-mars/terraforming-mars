@@ -76,9 +76,15 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+      } else if (type === CardRenderItemType.PRESERVATION) {
+        classes.push('card-resource');
+        classes.push('card-resource-preservation');
       } else if (type === CardRenderItemType.FIGHTER) {
         classes.push('card-resource');
         classes.push('card-resource-fighter');
+      } else if (type === CardRenderItemType.CAMPS) {
+        classes.push('card-resource');
+        classes.push('card-resource-camp');
       } else if (type === CardRenderItemType.DIVERSE_TAG) {
         classes.push('card-resource');
         classes.push('card-resource-diverse');
@@ -121,7 +127,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         }
       } else if (type === CardRenderItemType.EMPTY_TILE) {
         classes.push('card-tile-ares');
-        classes.push('board-space-tile--empty-tile');
+        if (this.item.size !== undefined) {
+          classes.push(`board-space-tile--empty-tile--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--adjacency-tile');
@@ -202,7 +210,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
 
       if (this.item.secondaryTag !== undefined && this.item.secondaryTag !== 'oxygen') {
         const classes: string[] = ['card-icon'];
-        classes.push(`tag-${this.item.secondaryTag}`);
+        classes.push(`card-tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {

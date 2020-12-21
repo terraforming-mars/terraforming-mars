@@ -11,7 +11,7 @@ import {SpaceType} from '../../src/SpaceType';
 import {Resources} from '../../src/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
 import {IProductionUnits} from '../../src/inputs/IProductionUnits';
-import {OriginalBoard} from '../../src/OriginalBoard';
+import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
 import {Phase} from '../../src/Phase';

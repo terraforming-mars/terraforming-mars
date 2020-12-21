@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {Color} from '../Color';
-import {BoardName} from '../BoardName';
+import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
 import {translateMessage} from '../directives/i18n';
@@ -12,7 +12,7 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
-import {RandomBoardOptionType} from '../RandomBoardOptionType';
+import {RandomBoardOptionType} from '../boards/RandomBoardOptionType';
 import {GameId} from '../Game';
 
 export interface CreateGameModel {
@@ -47,6 +47,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     undoOption: boolean;
+    showTimers: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
     includeVenusMA: boolean;
@@ -113,6 +114,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       undoOption: false,
+      showTimers: false,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
@@ -361,6 +363,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const undoOption = component.undoOption;
+      const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
@@ -417,6 +420,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         undoOption,
+        showTimers,
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
@@ -587,6 +591,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="showTimers" id="timer-checkbox">
+                            <label for="timer-checkbox">
+                                <span v-i18n>Show timers</span>
                             </label>
 
                             <input type="checkbox" name="randomBoardToggle" id="randomBoard-checkbox" v-on:change="randomBoardToggle()">
@@ -800,6 +809,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
                 ref="coloniesFilter"
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:venusNext="venusNext"
+                v-bind:turmoil="turmoil"
                 v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 

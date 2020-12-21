@@ -2,9 +2,9 @@ import {Player} from '../src/Player';
 import {Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
 import {SpaceType} from '../src/SpaceType';
-import {BoardName} from '../src/BoardName';
+import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
-import {RandomBoardOptionType} from '../src/RandomBoardOptionType';
+import {RandomBoardOptionType} from '../src/boards/RandomBoardOptionType';
 import {ISpace} from '../src/ISpace';
 import {Color} from '../src/Color';
 
@@ -49,6 +49,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     promoCardsOption: false,
     communityCardsOption: false,
     undoOption: false,
+    showTimers: false,
     startingCorporations: 2,
     includeVenusMA: true,
     soloTR: false,

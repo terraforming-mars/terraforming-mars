@@ -6,6 +6,8 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class PointLuna implements CorporationCard {
     public name = CardName.POINT_LUNA;
@@ -24,5 +26,19 @@ export class PointLuna implements CorporationCard {
       player.addProduction(Resources.TITANIUM);
       player.cardsInHand.push(game.dealer.dealCard());
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R10',
+      description: 'You start with 1 titanium production and 38 MC.',
+      renderData: CardRenderer.builder((b) => {
+        b.br;
+        b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(38);
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.earth().played.startEffect.cards(1);
+            eb.description('Effect: When you play an Earth tag, including this, draw a card.');
+          });
+        });
+      }),
     }
 }

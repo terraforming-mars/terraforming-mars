@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {TileType} from '../../TileType';
@@ -10,6 +9,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NaturalPreserve implements IProjectCard {
     public cost = 9;
@@ -35,5 +37,14 @@ export class NaturalPreserve implements IProjectCard {
     }
     public getVictoryPoints() {
       return 1;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '044',
+      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, true).asterix();
+      }),
+      description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.',
+      victoryPoints: 1,
     }
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {CardType} from '../../cards/CardType';
+import {CardCorporationLogo} from './CardCorporationLogo';
 
 export const CardTitle = Vue.component('CardTitle', {
   props: {
@@ -12,6 +13,9 @@ export const CardTitle = Vue.component('CardTitle', {
       required: true,
       validator: (card: CardType) => Object.values(CardType).includes(card),
     },
+  },
+  components: {
+    CardCorporationLogo,
   },
   methods: {
     isCorporation: function(): boolean {
@@ -48,10 +52,11 @@ export const CardTitle = Vue.component('CardTitle', {
     },
   },
   template: `
-        <div class="card-title">
-            <div v-if="isPrelude()" class="prelude-label">prelude</div>
-            <div v-if="isCorporation()" class="corporation-label">corporation</div>
-            <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
-        </div>
-    `,
+      <div class="card-title">
+          <div v-if="isPrelude()" class="prelude-label">prelude</div>
+          <div v-if="isCorporation()" class="corporation-label">corporation</div>
+          <CardCorporationLogo v-if="isCorporation()" :title="title"/>
+          <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
+      </div>
+  `,
 });

@@ -1,10 +1,10 @@
 import {Ocean, Land, BoardColony} from './Board';
 import {BoardRandomizer} from './BoardRandomizer';
-import {ISpace} from './ISpace';
+import {ISpace} from '../ISpace';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
-import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
-import {TILES_PER_ROW} from './constants';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
+import {TILES_PER_ROW} from '../constants';
 
 export class BoardBuilder {
     private oceans: Array<boolean> = [];

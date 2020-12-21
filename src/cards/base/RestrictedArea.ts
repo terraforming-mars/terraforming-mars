@@ -10,6 +10,8 @@ import {ISpace} from '../../ISpace';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedArea implements IActionCard, IProjectCard {
     public cost = 11;
@@ -36,5 +38,16 @@ export class RestrictedArea implements IActionCard, IProjectCard {
       game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for action'));
       player.cardsInHand.push(game.dealer.dealCard());
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '199',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(2).startAction.cards(1);
+          eb.description('Action: Spend 2 MC to draw a card.');
+        }).br;
+        b.tile(TileType.RESTRICTED_AREA, true);
+      }),
+      description: 'Place this tile.',
     }
 }

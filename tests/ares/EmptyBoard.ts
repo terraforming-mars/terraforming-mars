@@ -1,6 +1,6 @@
-import {Board} from '../../src/Board';
-import {BoardBuilder} from '../../src/BoardBuilder';
-import {RandomBoardOptionType} from '../../src/RandomBoardOptionType';
+import {Board} from '../../src/boards/Board';
+import {BoardBuilder} from '../../src/boards/BoardBuilder';
+import {RandomBoardOptionType} from '../../src/boards/RandomBoardOptionType';
 
 export class EmptyBoard extends Board {
   constructor() {

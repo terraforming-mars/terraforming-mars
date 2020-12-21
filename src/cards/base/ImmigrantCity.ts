@@ -7,7 +7,7 @@ import {ISpace} from '../../ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -26,15 +26,11 @@ export class ImmigrantCity implements IProjectCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
       if (Board.isCitySpace(space)) {
-        if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
-        if (!player.isCorporation(CardName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
+        player.addProduction(Resources.MEGACREDITS);
       }
     }
     public play(player: Player, game: Game) {
       return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-        const mcProductionAfterDecrease = player.getProduction(Resources.MEGACREDITS) - 2;
-        if (mcProductionAfterDecrease < -6) player.shouldTriggerCardEffect = false;
-
         game.addCityTile(player, space.id);
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, -2);

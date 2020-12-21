@@ -1,8 +1,8 @@
-import {Random} from './Random';
+import {Random} from '../Random';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
-import {SpaceName} from './SpaceName';
-import {SpaceBonus} from './SpaceBonus';
-import {TILES_PER_ROW} from './constants';
+import {SpaceName} from '../SpaceName';
+import {SpaceBonus} from '../SpaceBonus';
+import {TILES_PER_ROW} from '../constants';
 
 export class BoardRandomizer {
     private rng: Random;

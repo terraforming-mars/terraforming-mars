@@ -1,5 +1,5 @@
-import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {RandomBoardOptionType} from './RandomBoardOptionType';

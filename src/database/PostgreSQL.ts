@@ -1,6 +1,7 @@
 import {IDatabase} from './IDatabase';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
+import {SerializedGame} from '../SerializedGame';
 
 import {Client, ClientConfig} from 'pg';
 
@@ -67,7 +68,7 @@ export class PostgreSQL implements IDatabase {
 
   getGames(cb: (err: any, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' AND save_id > 0 GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
+    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
     this.client.query(sql, (err, res) => {
       if (err) {
         console.error('PostgreSQL:getGames', err);
@@ -106,28 +107,17 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreGameLastSave(game_id: GameId, game: Game, cb: (err: any) => void) {
+  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
     // Retrieve last save from database
     this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id], (err, res) => {
       if (err) {
-        console.error('PostgreSQL:restoreGameLastSave', err);
+        console.error('PostgreSQL:getGame', err);
         return cb(err);
       }
       if (res.rows.length === 0) {
         return cb(new Error('Game not found'));
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(res.rows[0].game);
-
-      // Rebuild each objects
-      try {
-        game.loadFromJSON(gameToRestore);
-      } catch (e) {
-        cb(e);
-        return;
-      }
-
-      return cb(err);
+      cb(undefined, JSON.parse(res.rows[0].game));
     });
   }
 

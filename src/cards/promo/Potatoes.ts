@@ -4,6 +4,8 @@ import {CardType} from './../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Potatoes implements IProjectCard {
     public cost = 2;
@@ -23,5 +25,13 @@ export class Potatoes implements IProjectCard {
       player.plants -= 2;
       player.addProduction(Resources.MEGACREDITS, 2);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X29',
+      renderData: CardRenderer.builder((b) => {
+        b.minus().plants(2).nbsp.productionBox((pb) => pb.megacredits(2));
+      }),
+      description: 'Lose 2 plants. Increase your MC production 2 steps.',
     }
 }

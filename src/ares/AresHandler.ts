@@ -20,6 +20,7 @@ import {DeferredAction} from '../deferredActions/DeferredAction';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
+import {IDrawnMilestonesAndAwards} from '../MilestoneAwardSelector';
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -49,9 +50,9 @@ export class AresHandler {
     };
   }
 
-  public static setupMilestonesAwards(game: Game) {
-    game.milestones.push(...ARES_MILESTONES);
-    game.awards.push(...ARES_AWARDS);
+  public static setupMilestonesAwards(drawnMilestonesAndAwards: IDrawnMilestonesAndAwards) {
+    drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
+    drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
   }
 
   public static ifAres(game: Game, cb: (aresData: IAresData) => void) {

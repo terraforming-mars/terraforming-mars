@@ -117,6 +117,7 @@ const ALL_EVENTS = [
   ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
   ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS,
   ...VENUS_POSITIVE_GLOBAL_EVENTS,
+  ...COMMUNITY_GLOBAL_EVENTS,
 ];
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {

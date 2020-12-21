@@ -63,10 +63,10 @@ export class MarsFirstPolicy01 implements Policy {
 
 export class MarsFirstPolicy02 implements Policy {
   id = 'mfp02';
-  description: string = 'When you play a Building card, gain 1 MC';
+  description: string = 'When you play a Building tag, gain 2 MC';
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS);
+    if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS, 2);
   }
 }
 

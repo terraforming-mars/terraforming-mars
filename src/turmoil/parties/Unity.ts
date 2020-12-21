@@ -9,6 +9,13 @@ import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {ICard} from '../../cards/ICard';
+import {LogHelper} from '../../components/LogHelper';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectCard} from '../../inputs/SelectCard';
+import {SelectOption} from '../../inputs/SelectOption';
+import {ResourceType} from '../../ResourceType';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -34,11 +41,11 @@ export class UnityBonus01 implements Bonus {
 
 export class UnityBonus02 implements Bonus {
   id = 'ub02';
-  description = 'Gain 1 MC for each Space tag you have, including events';
+  description = 'Gain 1 MC for each Space tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.SPACE, true, false);
+      const tagCount = player.getTagCount(Tags.SPACE, false, false);
       player.setResource(Resources.MEGACREDITS, tagCount);
     });
   }
@@ -52,24 +59,57 @@ export class UnityPolicy01 implements Policy {
 
 export class UnityPolicy02 implements Policy {
   id = 'up02';
-  description: string = 'Spend 9 MC to gain 4 titanium';
+  description: string = 'Spend 4 MC to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
 
   canAct(player: Player) {
-    return player.canAfford(9) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
   action(player: Player, game: Game) {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
+
     game.defer(new SelectHowToPayDeferred(
       player,
-      9,
+      4,
       false,
       false,
       'Select how to pay for action',
       () => {
-        player.setResource(Resources.TITANIUM, 4);
-        game.log('${0} gained 4 titanium', (b) => b.player(player));
+        const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
+        const orOptions = new OrOptions();
+
+        if (availableFloaterCards.length === 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
+              player.addResourceTo(availableFloaterCards[0], 2);
+              LogHelper.logAddResource(game, player, availableFloaterCards[0], 2);
+
+              return undefined;
+            }),
+          );
+        } else if (availableFloaterCards.length > 1) {
+          orOptions.options.push(
+            new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
+              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
+                player.addResourceTo(foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
+                return undefined;
+              });
+            }),
+          );
+        }
+
+        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
+          player.setResource(Resources.TITANIUM, 2);
+          game.log('${0} gained 2 titanium', (b) => b.player(player));
+          return undefined;
+        }));
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+        game.defer(new DeferredAction(player, () => orOptions));
+        return undefined;
       },
     ));
 

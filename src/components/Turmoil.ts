@@ -37,9 +37,7 @@ export const Turmoil = Vue.component('turmoil', {
       } else if (party === PartyName.UNITY) {
         if (staticAgendas !== undefined && staticAgendas.unityBonus === 'ub02') {
           return `<div class="resource money party-resource">1</div> / 
-            <div class="resource-tag tag-space party-resource-tag"></div> + 
-            <div class="resource-tag tag-space party-resource-tag"></div>
-            <div class="resource-tag tag-event party-resource-tag"></div>`;
+            <div class="resource-tag tag-space party-resource-tag"></div>`;
         } else {
           return `<div class="resource money party-resource">1</div> / 
             <div class="resource-tag tag-venus party-resource-tag"></div>
@@ -85,8 +83,7 @@ export const Turmoil = Vue.component('turmoil', {
     getPolicy: function(party: PartyName | undefined, staticAgendas: PoliticalAgendasModel | undefined) {
       if (party === PartyName.MARS) {
         if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp02') {
-          return `<div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div> : 
-            <div class="resource money party-resource">1</div>`;
+          return `<div class="policy-top-margin"><div class="resource-tag tag-building"></div> : <div class="money resource">2</div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.marsFirstPolicy === 'mfp03') {
           return `<div class="policy-top-margin"><div class="resource steel"></div> : 
             +<div class="resource money">1</div></div>`;
@@ -125,15 +122,15 @@ export const Turmoil = Vue.component('turmoil', {
       if (party === PartyName.UNITY) {
         if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up02') {
           return `<div class="policy-top-margin">
-            <span class="money resource">9</span>
-            <span class="red-arrow-3x"></span> 4 <span class="titanium resource"></span>
-            </div>`;
+          <span class="money resource">4</span>
+          <span class="red-arrow-3x"></span>2<span class="titanium resource"></span> / 2<span class="floater resource"></span>
+          </div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up03') {
           return `<span class="money resource">4</span>
             <span class="red-arrow-3x"></span>
             <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-space"></div></div>`;
         } else if (staticAgendas !== undefined && staticAgendas.unityPolicy === 'up04') {
-          return `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource ">-2</div></div>`;
+          return `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>`;
         } else {
           return `<div class="policy-top-margin"><div class="resource titanium"></div> : 
             + <div class="resource money">1</div></div>`;

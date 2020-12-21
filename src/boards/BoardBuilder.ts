@@ -1,8 +1,8 @@
 import {Ocean, Land, BoardColony} from './Board';
-import {ISpace} from './ISpace';
-import {Random} from './Random';
-import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
+import {ISpace} from '../ISpace';
+import {Random} from '../Random';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
 
 export class BoardBuilder {
     private rng: Random;

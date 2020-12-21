@@ -7,7 +7,7 @@ import {SpaceName} from '../../SpaceName';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {BoardName} from '../../BoardName';
+import {BoardName} from '../../boards/BoardName';
 import {CardName} from '../../CardName';
 import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';

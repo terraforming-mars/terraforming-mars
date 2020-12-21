@@ -1,7 +1,6 @@
-
 import {expect} from 'chai';
-import {OriginalBoard} from '../src/OriginalBoard';
-import {SpaceType} from '../src/SpaceType';
+import {OriginalBoard} from '../../src/boards/OriginalBoard';
+import {SpaceType} from '../../src/SpaceType';
 
 describe('OriginalBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {

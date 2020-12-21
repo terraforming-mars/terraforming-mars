@@ -6,7 +6,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {IAward} from './awards/IAward';
 import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
-import {Board} from './Board';
+import {Board} from './boards/Board';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';

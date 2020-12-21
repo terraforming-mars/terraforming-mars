@@ -2,21 +2,18 @@ import {Random} from './Random';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SpaceName} from './SpaceName';
 import {SpaceBonus} from './SpaceBonus';
+import {TILES_PER_ROW} from './constants';
 
 export class BoardRandomizer {
-    private oceans: Array<boolean> = [];
-    private bonuses: Array<Array<SpaceBonus>> = [];
     private rng: Random;
     private randomBoardOption: RandomBoardOptionType = RandomBoardOptionType.NONE;
-    private tilesPerRow: Array<number> = [];
     private adjacentSpaceMap: Map<number, Array<number>> = new Map();
     private mustBeLandSpaces: Array<SpaceName> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(randomBoardOption: RandomBoardOptionType, seed: number, tilesPerRow: Array<number>) {
+    constructor(randomBoardOption: RandomBoardOptionType, seed: number) {
       this.rng = new Random(seed);
       this.randomBoardOption = randomBoardOption;
-      this.tilesPerRow = tilesPerRow;
       this.mustBeLandSpaces = [];
       this.createAdjacentSpaceMap();
     }
@@ -35,26 +32,21 @@ export class BoardRandomizer {
       if (this.randomBoardOption === RandomBoardOptionType.NONE) {
         return oceans;
       }
-      this.oceans = oceans;
-
-      this.shuffleArray(this.oceans);
+      this.shuffleArray(oceans);
       if (this.randomBoardOption === RandomBoardOptionType.LIMITED) {
-        const idOrder = [];
-        for (let i = 0; i < this.oceans.length; ++i) {
-          idOrder.push(i);
-        }
+        const idOrder = Array.from(Array(oceans.length).keys());
         this.shuffleArray(idOrder);
         idOrder.forEach((i)=>{
-          if (!this.oceans[i]) return;
+          if (!oceans[i]) return;
           if (this.unshufflableSpaces.includes(i)) return;
-          const adjacentOceanCount = this.getNumAdjacentOceanSpaces(i);
+          const adjacentOceanCount = this.getNumAdjacentOceanSpaces(i, oceans);
           if (adjacentOceanCount === undefined) return;
           if (adjacentOceanCount >= 2 ) return;
           if (adjacentOceanCount === 1 && this.rng.next() < 0.7 ) return;
           if (adjacentOceanCount === 0 && this.rng.next() < 0.1 ) return;
-          const landWithTheMostOceanAdjacent = this.getLandWithTheMostOceanAdjacent();
+          const landWithTheMostOceanAdjacent = this.getLandWithTheMostOceanAdjacent(oceans);
           if (landWithTheMostOceanAdjacent === undefined) return;
-          [this.oceans[landWithTheMostOceanAdjacent], this.oceans[i]] = [this.oceans[i], this.oceans[landWithTheMostOceanAdjacent]];
+          [oceans[landWithTheMostOceanAdjacent], oceans[i]] = [oceans[i], oceans[landWithTheMostOceanAdjacent]];
         });
       }
       let safety = 0;
@@ -63,10 +55,10 @@ export class BoardRandomizer {
         this.mustBeLandSpaces.forEach((land) => {
           // Why -3?
           const land_id = Number(land) - 3;
-          while (this.oceans[land_id]) {
+          while (oceans[land_id]) {
             satisfy = false;
-            const idx = Math.floor(this.rng.next() * this.oceans.length);
-            [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
+            const idx = Math.floor(this.rng.next() * oceans.length);
+            [oceans[land_id], oceans[idx]] = [oceans[idx], oceans[land_id]];
           }
         });
         if (satisfy) break;
@@ -75,7 +67,7 @@ export class BoardRandomizer {
       if (safety >= 1000) {
         throw new Error('infinite loop detected');
       }
-      return this.oceans;
+      return oceans;
     }
 
     // Shuffle the bonus spaces.
@@ -83,28 +75,24 @@ export class BoardRandomizer {
       if (this.randomBoardOption === RandomBoardOptionType.NONE) {
         return bonuses;
       }
-      this.bonuses = bonuses;
-      this.shuffleArray(this.bonuses);
+      this.shuffleArray(bonuses);
       if (this.randomBoardOption === RandomBoardOptionType.LIMITED) {
-        const idOrder = [];
-        for (let i = 0; i < this.bonuses.length; ++i) {
-          idOrder.push(i);
-        }
+        const idOrder = Array.from(Array(bonuses.length).keys());
         this.shuffleArray(idOrder);
         idOrder.forEach((i)=>{
           if (this.unshufflableSpaces.includes(i)) return;
-          if (!(this.bonuses[i].includes(SpaceBonus.PLANT))) return;
-          const adjacentPlantBonusSpaceCount = this.getNumAdjacentPlantBonusSpaces(i);
+          if (!(bonuses[i].includes(SpaceBonus.PLANT))) return;
+          const adjacentPlantBonusSpaceCount = this.getNumAdjacentPlantBonusSpaces(i, bonuses);
           if (adjacentPlantBonusSpaceCount === undefined) return;
           if (adjacentPlantBonusSpaceCount >= 2 ) return;
           if (adjacentPlantBonusSpaceCount === 1 && this.rng.next() < 0.7 ) return;
           if (adjacentPlantBonusSpaceCount === 0 && this.rng.next() < 0.1 ) return;
-          const landWithTheMostAdjacentPlantBonus = this.getLandWithTheMostAdjacentPlantBonus();
+          const landWithTheMostAdjacentPlantBonus = this.getLandWithTheMostAdjacentPlantBonus(bonuses);
           if (landWithTheMostAdjacentPlantBonus === undefined) return;
-          [this.bonuses[landWithTheMostAdjacentPlantBonus], this.bonuses[i]] = [this.bonuses[i], this.bonuses[landWithTheMostAdjacentPlantBonus]];
+          [bonuses[landWithTheMostAdjacentPlantBonus], bonuses[i]] = [bonuses[i], bonuses[landWithTheMostAdjacentPlantBonus]];
         });
       }
-      return this.bonuses;
+      return bonuses;
     }
 
     // create adjacentSpaceMap contain connection edge for each id
@@ -116,21 +104,21 @@ export class BoardRandomizer {
     // adjacentSpaceMap[4]=[0,1,3,5,7,8]
     createAdjacentSpaceMap() {
       let idx = 0;
-      for (let row = 0; row < 9; row++) {
-        const tilesInThisRow = this.tilesPerRow[row];
+      for (let row = 0; row < TILES_PER_ROW.length; row++) {
+        const tilesInThisRow = TILES_PER_ROW[row];
         for (let i = 0; i < tilesInThisRow; i++) {
           const adjIds: Array<number> = [];
           if (i > 0) adjIds.push(idx - 1); // left
           if (i + 1 < tilesInThisRow) adjIds.push(idx + 1); // right
           if (row > 0) {
-            const minOffset = Math.min(tilesInThisRow, this.tilesPerRow[row - 1]);
-            const maxOffset = Math.max(tilesInThisRow, this.tilesPerRow[row - 1]);
+            const minOffset = Math.min(tilesInThisRow, TILES_PER_ROW[row - 1]);
+            const maxOffset = Math.max(tilesInThisRow, TILES_PER_ROW[row - 1]);
             if (i - minOffset < 0) adjIds.push(idx - minOffset); // upright
-            if (i - maxOffset + this.tilesPerRow[row - 1] >= 0) adjIds.push(idx - maxOffset); // upleft
+            if (i - maxOffset + TILES_PER_ROW[row - 1] >= 0) adjIds.push(idx - maxOffset); // upleft
           }
-          if (row + 1 < 9) {
-            const minOffset = Math.min(tilesInThisRow, this.tilesPerRow[row + 1]);
-            const maxOffset = Math.max(tilesInThisRow, this.tilesPerRow[row + 1]);
+          if (row + 1 < TILES_PER_ROW.length) {
+            const minOffset = Math.min(tilesInThisRow, TILES_PER_ROW[row + 1]);
+            const maxOffset = Math.max(tilesInThisRow, TILES_PER_ROW[row + 1]);
             if (i + minOffset >= tilesInThisRow) adjIds.push(idx + minOffset); // downleft
             if (i + maxOffset < minOffset + maxOffset) adjIds.push(idx + maxOffset); // downright
           }
@@ -140,25 +128,25 @@ export class BoardRandomizer {
       }
     }
 
-    // calcualte how many tile adjacent to i has plant
-    getNumAdjacentPlantBonusSpaces(i: number): number|undefined {
+    // calculate how many tile adjacent to i has plant
+    getNumAdjacentPlantBonusSpaces(i: number, bonuses: Array<Array<SpaceBonus>>): number|undefined {
       let plantDeg = 0;
       const adjIds = this.adjacentSpaceMap.get(i);
       if (adjIds === undefined) return undefined;
       adjIds.forEach((idx) => {
-        if (this.bonuses[idx].includes(SpaceBonus.PLANT)) plantDeg++;
+        if (bonuses[idx].includes(SpaceBonus.PLANT)) plantDeg++;
       });
       return plantDeg;
     }
 
     // find a tile without plant, and has the most adjacent plant tile
-    getLandWithTheMostAdjacentPlantBonus(): number|undefined {
+    getLandWithTheMostAdjacentPlantBonus(bonuses: Array<Array<SpaceBonus>>): number|undefined {
       let candidates: Array<number> = [];
       let curPlantDegree = -1;
-      for (let i = 0; i < this.bonuses.length; ++i) {
+      for (let i = 0; i < bonuses.length; ++i) {
         if (this.unshufflableSpaces.includes(i)) continue;
-        if (this.bonuses[i].includes(SpaceBonus.PLANT)) continue;
-        const plantDegree = this.getNumAdjacentPlantBonusSpaces(i);
+        if (bonuses[i].includes(SpaceBonus.PLANT)) continue;
+        const plantDegree = this.getNumAdjacentPlantBonusSpaces(i, bonuses);
         if (plantDegree === undefined) continue;
         if (plantDegree > curPlantDegree) {
           curPlantDegree = plantDegree;
@@ -172,25 +160,25 @@ export class BoardRandomizer {
       return candidates[idx];
     }
 
-    // calcualte how many tile adjacent to i is ocean
-    getNumAdjacentOceanSpaces(i: number): number|undefined {
+    // calculate how many tile adjacent to i is ocean
+    getNumAdjacentOceanSpaces(i: number, oceans: Array<boolean>): number|undefined {
       let oceanDeg = 0;
       const adjIds = this.adjacentSpaceMap.get(i);
       if (adjIds === undefined) return undefined;
       adjIds.forEach((idx) => {
-        if (this.oceans[idx]) oceanDeg++;
+        if (oceans[idx]) oceanDeg++;
       });
       return oceanDeg;
     }
 
     // find a land tile, and has the most adjacent ocean
-    getLandWithTheMostOceanAdjacent(): number|undefined {
+    getLandWithTheMostOceanAdjacent(oceans: Array<boolean>): number|undefined {
       let candidates: Array<number> = [];
       let curOceanDegree = -1;
-      for (let i = 0; i < this.oceans.length; ++i) {
+      for (let i = 0; i < oceans.length; ++i) {
         if (this.unshufflableSpaces.includes(i)) continue;
-        if (this.oceans[i]) continue;
-        const oceanDegree = this.getNumAdjacentOceanSpaces(i);
+        if (oceans[i]) continue;
+        const oceanDegree = this.getNumAdjacentOceanSpaces(i, oceans);
         if (oceanDegree === undefined) continue;
         if (oceanDegree > curOceanDegree) {
           curOceanDegree = oceanDegree;

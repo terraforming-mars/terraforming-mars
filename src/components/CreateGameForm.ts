@@ -223,38 +223,32 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const component = (this as any) as CreateGameModel;
       return component.players.slice(0, component.playersCount);
     },
-    isRandomBoardEnabled: function(): Boolean {
+    isRandomBoardEnabled: function(): boolean {
       return this.randomBoardOption !== RandomBoardOptionType.NONE;
     },
     randomBoardToggle: function() {
-      const component = (this as any) as CreateGameModel;
-      if (component.randomBoardOption === RandomBoardOptionType.NONE) {
-        component.randomBoardOption = RandomBoardOptionType.LIMITED;
+      if (this.randomBoardOption === RandomBoardOptionType.NONE) {
         this.randomBoardOption = RandomBoardOptionType.LIMITED;
       } else {
-        component.randomBoardOption = RandomBoardOptionType.NONE;
         this.randomBoardOption = RandomBoardOptionType.NONE;
       }
     },
-    getRandomBoardOptionType: function(type: 'limited' | 'full'): RandomBoardOptionType {
+    getRandomBoardOptionType: function(type: 'limited' | 'unlimited'): RandomBoardOptionType {
       if (type === 'limited') {
         return RandomBoardOptionType.LIMITED;
-      } else if (type === 'full') {
+      } else if (type === 'unlimited') {
         return RandomBoardOptionType.UNLIMITED;
       } else {
         return RandomBoardOptionType.NONE;
       }
     },
-    isRandomMAEnabled: function(): Boolean {
+    isRandomMAEnabled: function(): boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
     randomMAToggle: function() {
-      const component = (this as any) as CreateGameModel;
-      if (component.randomMA === RandomMAOptionType.NONE) {
-        component.randomMA = RandomMAOptionType.LIMITED;
+      if (this.randomMA === RandomMAOptionType.NONE) {
         this.randomMA = RandomMAOptionType.LIMITED;
       } else {
-        component.randomMA = RandomMAOptionType.NONE;
         this.randomMA = RandomMAOptionType.NONE;
       }
     },
@@ -267,7 +261,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return RandomMAOptionType.NONE;
       }
     },
-    isBeginnerToggleEnabled: function(): Boolean {
+    isBeginnerToggleEnabled: function(): boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
     },
     selectAll: function() {
@@ -604,14 +598,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div>
                                 <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('limited')" id="limitedRandomBoard-radio">
                                 <label class="label-randomBoardOption" for="limitedRandomBoard-radio">
-                                    <span v-i18n>{{ getRandomBoardOptionType('limited') }}</span>
+                                    <span v-i18n>'limited'</span>
                                 </label>
                                 </div>
 
                                 <div>
-                                <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('full')" id="unlimitedRandomBoard-radio">
+                                <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('unlimited')" id="unlimitedRandomBoard-radio">
                                 <label class="label-randomBoardOption" for="unlimitedRandomBoard-radio">
-                                    <span v-i18n>{{ getRandomBoardOptionType('full') }}</span>
+                                    <span v-i18n>'unlimited'</span>
                                 </label>
                                 </div>
                             </div>

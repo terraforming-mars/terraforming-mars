@@ -4,12 +4,12 @@ import {ISpace} from './ISpace';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SpaceBonus} from './SpaceBonus';
 import {SpaceName} from './SpaceName';
+import {TILES_PER_ROW} from './constants';
 
 export class BoardBuilder {
     private oceans: Array<boolean> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
-    private tilesPerRow: Array<number> = [5, 6, 7, 8, 9, 8, 7, 6, 5];
     private randomizer: BoardRandomizer;
 
     // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
@@ -22,7 +22,7 @@ export class BoardBuilder {
     constructor(randomBoardOption: RandomBoardOptionType, seed: number) {
       this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
-      this.randomizer = new BoardRandomizer(randomBoardOption, seed, this.tilesPerRow);
+      this.randomizer = new BoardRandomizer(randomBoardOption, seed);
     }
 
     ocean(...bonus: Array<SpaceBonus>) {
@@ -53,8 +53,8 @@ export class BoardBuilder {
       const idOffset = this.spaces.length + 1;
       let idx = 0;
 
-      for (let row = 0; row < this.tilesPerRow.length; row++) {
-        const tilesInThisRow = this.tilesPerRow[row];
+      for (let row = 0; row < TILES_PER_ROW.length; row++) {
+        const tilesInThisRow = TILES_PER_ROW[row];
         const xOffset = 9 - tilesInThisRow;
         for (let i = 0; i < tilesInThisRow; i++) {
           const space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);

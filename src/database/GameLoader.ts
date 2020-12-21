@@ -46,6 +46,8 @@ export class GameLoader {
 
   private static instance?: GameLoader;
 
+  private constructor() {}
+
   public static getInstance(): GameLoader {
     if (GameLoader.instance === undefined) {
       GameLoader.instance = new GameLoader();
@@ -60,16 +62,6 @@ export class GameLoader {
     }
   }
 
-  /**
-   * Determines if game is available in javascript
-   * memory
-   * @param {GameId} gameId id to check
-   * @return {boolean} true iff game is available in memory
-   */
-  public has(gameId: GameId): boolean {
-    return this.games.get(gameId) !== undefined;
-  }
-
   public getLoadedGameIds(): Array<string> {
     return Array.from(this.games.keys());
   }
@@ -81,7 +73,7 @@ export class GameLoader {
    * @param {LoadCallback} cb called with game when available
    */
   public getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
-    this.loadAllGames();
+    this.loadAllGameIds();
     if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (this.games.has(gameId) || this.state !== State.READY) {
@@ -93,7 +85,7 @@ export class GameLoader {
   }
 
   public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
-    this.loadAllGames();
+    this.loadAllGameIds();
     const gameId = this.playerIds.get(playerId);
 
     if (gameId !== undefined && this.games.get(gameId) !== undefined) {
@@ -180,7 +172,7 @@ export class GameLoader {
     this.loadNextGame();
   }
 
-  private loadAllGames(): void {
+  private loadAllGameIds(): void {
     if (this.state !== State.WAITING) {
       return;
     }

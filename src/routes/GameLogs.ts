@@ -6,9 +6,6 @@ import {GameLoader} from '../database/GameLoader';
 import {Route} from './Route';
 
 export class GameLogs extends Route {
-  constructor(private gameLoader: GameLoader) {
-    super();
-  }
   public canHandle(url: string): boolean {
     return url.startsWith('/api/game/logs?');
   }
@@ -29,7 +26,7 @@ export class GameLogs extends Route {
       return;
     }
 
-    this.gameLoader.getGameByPlayerId(id, (game) => {
+    GameLoader.getInstance().getByPlayerId(id, (game) => {
       if (game === undefined) {
         console.warn('game not found');
         this.notFound(req, res);

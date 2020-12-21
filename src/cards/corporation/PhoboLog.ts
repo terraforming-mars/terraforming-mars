@@ -25,7 +25,7 @@ export class PhoboLog implements CorporationCard {
       description: 'You start with 10 titanium and 23 MC.',
       renderData: CardRenderer.builder((b) => {
         b.br.br;
-        b.megacredits(30).nbsp.titanium(10).digit;
+        b.megacredits(23).nbsp.titanium(10).digit;
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
             eb.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);

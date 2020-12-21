@@ -9,7 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';

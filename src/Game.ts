@@ -2,8 +2,8 @@ import * as constants from './constants';
 import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
-import {BoardColony, Board} from './Board';
-import {BoardName} from './BoardName';
+import {BoardColony, Board} from './boards/Board';
+import {BoardName} from './boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
@@ -17,9 +17,9 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
 import {Decks} from './Deck';
-import {ElysiumBoard} from './ElysiumBoard';
+import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward} from './FundedAward';
-import {HellasBoard} from './HellasBoard';
+import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
@@ -31,7 +31,7 @@ import {LogHelper} from './components/LogHelper';
 import {LogMessage} from './LogMessage';
 import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ARES_MILESTONES} from './milestones/Milestones';
 import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ARES_AWARDS} from './awards/Awards';
-import {OriginalBoard} from './OriginalBoard';
+import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
 import {Player, PlayerId} from './Player';
@@ -54,11 +54,11 @@ import {SpaceType} from './SpaceType';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {Turmoil} from './turmoil/Turmoil';
-import {getRandomMilestonesAndAwards} from './MilestoneAwardSelector';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {GameSetup} from './GameSetup';
 
 export type GameId = string;
 
@@ -139,7 +139,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Game-level data
     public lastSaveId: number = 0;
     private clonedGamedId: string | undefined;
-    public seed: number = Math.random();
+    public seed: number;
     public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
     public gameAge: number = 0; // Each log event increases it
     public gameLog: Array<LogMessage> = [];
@@ -203,12 +203,15 @@ export class Game implements ISerializable<SerializedGame> {
         }
       }
 
+      const seed = Math.random();
+      this.seed = seed;
+
+      this.board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed);
+
       // Initialize Ares data
       if (gameOptions.aresExtension) {
         this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
       }
-
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
 
@@ -238,13 +241,16 @@ export class Game implements ISerializable<SerializedGame> {
         gameOptions.draftVariant = false;
         gameOptions.initialDraftVariant = false;
         gameOptions.randomMA = RandomMAOptionType.NONE;
-        gameOptions.draftVariant = false;
         this.setupSolo();
       }
 
+      const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+      this.milestones = milestonesAwards.milestones;
+      this.awards = milestonesAwards.awards;
+
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
+        this.addVenusBoardSpaces();
       }
 
       // Add colonies stuff
@@ -451,58 +457,6 @@ export class Game implements ISerializable<SerializedGame> {
     // Function to return an array of players from an array of player ids
     public getPlayersById(ids: Array<string>): Array<Player> {
       return ids.map((id) => this.getPlayerById(id));
-    }
-
-    // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName, randomMA: RandomMAOptionType, hasVenus: boolean): Board {
-      const chooseMilestonesAndAwards = function(game: Game, milestones: Array<IMilestone>, awards: Array<IAward>) {
-        const requiredQty = 5;
-        if (randomMA !== RandomMAOptionType.NONE) {
-          game.setRandomMilestonesAndAwards(hasVenus, requiredQty, randomMA);
-        } else {
-          game.milestones.push(...milestones);
-          game.awards.push(...awards);
-        }
-        AresHandler.ifAres(game, () => {
-          AresHandler.setupMilestonesAwards(game);
-        });
-      };
-
-      if (boardName === BoardName.ELYSIUM) {
-        chooseMilestonesAndAwards(this, ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
-        return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
-      } else if (boardName === BoardName.HELLAS) {
-        chooseMilestonesAndAwards(this, HELLAS_MILESTONES, HELLAS_AWARDS);
-        return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
-      } else {
-        chooseMilestonesAndAwards(this, ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
-        return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
-      }
-    }
-
-    public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number, randomMA: RandomMAOptionType) {
-      let drawnMilestonesAndAwards;
-      if (randomMA === RandomMAOptionType.LIMITED) {
-        drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty);
-      } else { // Unlimited synergy
-        drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty, 100, 100, 100, 100);
-      }
-      this.milestones.push(...drawnMilestonesAndAwards.milestones);
-      this.awards.push(...drawnMilestonesAndAwards.awards);
-    }
-
-    // Add Venus Next board colonies and milestone / award
-    public setVenusElements(randomMA: RandomMAOptionType, includeVenusMA: boolean) {
-      if ((randomMA !== RandomMAOptionType.NONE) && includeVenusMA) {
-        this.milestones = [];
-        this.awards = [];
-        this.setRandomMilestonesAndAwards(true, 6, randomMA);
-      } else {
-        if (includeVenusMA) this.milestones.push(...VENUS_MILESTONES);
-        if (includeVenusMA) this.awards.push(...VENUS_AWARDS);
-      }
-
-      this.addVenusBoardSpaces();
     }
 
     private addVenusBoardSpaces() {

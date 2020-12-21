@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
-import {Board} from './Board';
+import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardModel} from './models/CardModel';
 import {CardName} from './CardName';

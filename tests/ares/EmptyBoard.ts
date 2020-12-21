@@ -1,5 +1,5 @@
-import {Board} from '../../src/Board';
-import {BoardBuilder} from '../../src/BoardBuilder';
+import {Board} from '../../src/boards/Board';
+import {BoardBuilder} from '../../src/boards/BoardBuilder';
 
 export class EmptyBoard extends Board {
   constructor() {

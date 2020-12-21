@@ -241,7 +241,6 @@ export class Game implements ISerializable<SerializedGame> {
         gameOptions.draftVariant = false;
         gameOptions.initialDraftVariant = false;
         gameOptions.randomMA = RandomMAOptionType.NONE;
-        gameOptions.draftVariant = false;
         this.setupSolo();
       }
 

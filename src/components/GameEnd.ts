@@ -4,6 +4,7 @@ import {Board} from './Board';
 import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
+import {Timer} from '../Timer';
 
 export const GameEnd = Vue.component('game-end', {
   props: {
@@ -25,6 +26,9 @@ export const GameEnd = Vue.component('game-end', {
     },
     getEndGamePlayerRowColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
+    },
+    getTimer: function(p: PlayerModel): string {
+      return Timer.toString(p.timer);
     },
     getSortedPlayers: function() {
       this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {
@@ -112,6 +116,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <th>City</th>
                                 <th>VP</th>
                                 <th>MC</th>
+                                <th v-if="player.showTimers">Timer</th>
                                 <th><div class="game-end-total-column">Total</div></th>
                             </tr>
                         </thead>
@@ -126,6 +131,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td>{{ p.megaCredits }}</td>
+                                <td v-if="player.showTimers">{{ getTimer(p) }}</td>
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>

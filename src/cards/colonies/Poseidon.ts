@@ -4,6 +4,8 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Poseidon implements CorporationCard {
     public name = CardName.POSEIDON;
@@ -24,5 +26,20 @@ export class Poseidon implements CorporationCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R02',
+      description: 'You start with 45MC. As your first action, place a colony.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(45).nbsp.colonies(1);
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.colonies(1).any.startEffect.productionBox((pb) => pb.megacredits(2));
+            eb.description('Effect: When any colony is placed, including this, raise your MC production 1 step.');
+          });
+        });
+      }),
     }
 }

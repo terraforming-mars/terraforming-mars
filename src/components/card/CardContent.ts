@@ -11,6 +11,10 @@ export const CardContent = Vue.component('CardContent', {
       type: Object as () => CardMetadata,
       required: true,
     },
+    isCorporation: {
+      type: Boolean,
+      required: true,
+    },
   },
   components: {
     CardRequirementsComponent,
@@ -21,6 +25,9 @@ export const CardContent = Vue.component('CardContent', {
   methods: {
     getClasses: function(): string {
       const classes: Array<string> = ['card-content'];
+      if (this.isCorporation) {
+        classes.push('card-content-corporation');
+      }
       return classes.join(' ');
     },
   },

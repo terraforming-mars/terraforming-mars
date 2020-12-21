@@ -9,10 +9,12 @@ import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/Resources';
 import {TestPlayers} from './TestingUtils';
 import {SerializedPlayer} from '../src/SerializedPlayer';
+import {SerializedTimer} from '../src/SerializedTimer';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
+import {Timer} from '../src/Timer';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -138,7 +140,7 @@ describe('Player', function() {
     const json = player.serialize();
     json.pickedCorporationCard = new SaturnSystems();
     const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
-    expect(s.pickedCorporationCard).to.deep.eq({'name': 'Saturn Systems', 'tags': ['jovian'], 'startingMegaCredits': 42, 'cardType': 'brown'});
+    expect(s.pickedCorporationCard).to.deep.eq(JSON.parse(JSON.stringify(new SaturnSystems())));
     const p = Player.deserialize(s);
     expect(p.pickedCorporationCard?.name).eq('Saturn Systems');
   });
@@ -156,6 +158,13 @@ describe('Player', function() {
     expect(s.actionsThisGeneration).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
     const p = Player.deserialize(s);
     expect(Array.from(p.getActionsThisGeneration())).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
+  });
+  it('backward compatible deserialization for timer', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const json: any = player.serialize();
+    json.timer = undefined;
+    const p = Player.deserialize(json);
+    expect(p.timer.serialize()).to.deep.eq(Timer.newInstance().serialize());
   });
   it('serialization test', () => {
     const json = {
@@ -222,6 +231,13 @@ describe('Player', function() {
       color: 'purple' as Color,
       beginner: true,
       handicap: 4,
+      timer: {
+        sumElapsed: 0,
+        startedAt: 0,
+        running: false,
+        afterFirstAction: false,
+        lastStoppedAt: 0,
+      } as SerializedTimer,
     };
 
     const legacyPlayer = Player.deserialize(json as SerializedPlayer, false);

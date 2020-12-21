@@ -7,7 +7,7 @@ import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
-import {Board} from '../../../src/Board';
+import {Board} from '../../../src/boards/Board';
 
 describe('Capital', function() {
   let card : Capital; let player : Player; let game : Game;

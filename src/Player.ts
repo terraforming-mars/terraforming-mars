@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
-import {Board} from './Board';
+import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardModel} from './models/CardModel';
 import {CardName} from './CardName';
@@ -59,6 +59,7 @@ import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
+import {Timer} from './Timer';
 
 export type PlayerId = string;
 
@@ -115,6 +116,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     public cardCost: number = constants.CARD_COST;
     public needsToDraft: boolean | undefined = undefined;
     public cardDiscount: number = 0;
+
+    public timer: Timer = Timer.newInstance();
 
     // Colonies
     private fleetSize: number = 1;
@@ -1987,13 +1990,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
 
       if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
-        /*
-         * Need to save before increasing lastSaveId so that reloading the game
-         * doesn't create another new save on top of it, like this:
-         * increment -> save -> reload -> increment -> save
-         */
-        Database.getInstance().saveGameState(game.id, game.lastSaveId, game.toJSON(), players.length);
-        game.lastSaveId += 1;
+        game.save();
       }
 
       // Prelude cards have to be played first
@@ -2238,11 +2235,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.waitingFor = undefined;
       this.waitingForCb = undefined;
       try {
+        this.timer.stop();
         this.runInput(game, input, waitingFor);
         waitingForCb();
       } catch (err) {
-        this.waitingFor = waitingFor;
-        this.waitingForCb = waitingForCb;
+        this.setWaitingFor(waitingFor, waitingForCb);
         throw err;
       }
     }
@@ -2252,6 +2249,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     public setWaitingFor(input: PlayerInput, cb: () => void): void {
+      this.timer.start();
       this.waitingFor = input;
       this.waitingForCb = cb;
     }
@@ -2341,6 +2339,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         color: this.color,
         beginner: this.beginner,
         handicap: this.handicap,
+        timer: this.timer.serialize(),
         // Used when undoing action
         usedUndo: this.usedUndo,
       };
@@ -2477,6 +2476,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // Rebuild each drafted cards
       player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+
+      player.timer = Timer.deserialize(d.timer);
 
       return player;
     }

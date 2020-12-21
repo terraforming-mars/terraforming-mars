@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BoardName} from '../../../src/BoardName';
+import {BoardName} from '../../../src/boards/BoardName';
 import {LandClaim} from '../../../src/cards/base/LandClaim';
 import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';

@@ -7,8 +7,7 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
-import {BoardName} from './src/BoardName';
-import {Color} from './src/Color';
+import {BoardName} from './src/boards/BoardName';
 import {Game, GameId} from './src/Game';
 import {GameLoader} from './src/database/GameLoader';
 import {GameLogs} from './src/routes/GameLogs';
@@ -21,9 +20,8 @@ import {Server} from './src/server/ServerModel';
 const serverId = process.env.SERVER_ID || generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
-const gameLoader = new GameLoader();
 const route = new Route();
-const gameLogs = new GameLogs(gameLoader);
+const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new Map<string, Buffer>();
 const isProduction = process.env.NODE_ENV === 'production';
@@ -117,7 +115,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       const playerId: string = req.url.substring(
         '/player/input?id='.length,
       );
-      gameLoader.getGameByPlayerId(playerId, (game) => {
+      GameLoader.getInstance().getByPlayerId(playerId, (game) => {
         if (game === undefined) {
           route.notFound(req, res);
           return;
@@ -239,7 +237,7 @@ function apiGetGames(
     return;
   }
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(gameLoader.getLoadedGameIds()));
+  res.write(JSON.stringify(GameLoader.getInstance().getLoadedGameIds()));
   res.end();
 }
 
@@ -257,23 +255,16 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       if (rollbackCount > 0) {
         Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
       }
-
-      const player = new Player('test', Color.BLUE, false, 0);
-      const player2 = new Player('test2', Color.RED, false, 0);
-      const gameToRebuild = new Game(game_id, [player, player2], player);
-      Database.getInstance().restoreGameLastSave(
-        game_id,
-        gameToRebuild,
-        function(err) {
-          if (err) {
-            return;
-          }
-          gameLoader.addGame(gameToRebuild);
-        },
-      );
-      res.setHeader('Content-Type', 'application/json');
-      res.write(getGameModelJSON(gameToRebuild));
-      res.end();
+      GameLoader.getInstance().getByGameId(game_id, true, (game) => {
+        if (game === undefined) {
+          console.warn(`unable to find ${game_id} in database`);
+          route.notFound(req, res);
+          return;
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.write(getGameModelJSON(game));
+        res.end();
+      });
     } catch (error) {
       route.internalServerError(req, res, error);
     }
@@ -305,7 +296,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   const gameId: GameId = matches[1];
 
-  gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
+  GameLoader.getInstance().getByGameId(gameId, false, (game: Game | undefined) => {
     if (game === undefined) {
       console.warn('game is undefined');
       route.notFound(req, res);
@@ -326,7 +317,7 @@ function apiGetWaitingFor(
   const queryParams = querystring.parse(qs);
   const playerId = (queryParams as any)['id'];
   const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
-  gameLoader.getGameByPlayerId(playerId, (game) => {
+  GameLoader.getInstance().getByPlayerId(playerId, (game) => {
     if (game === undefined) {
       route.notFound(req, res);
       return;
@@ -370,7 +361,7 @@ function apiGetPlayer(
   if (playerId === undefined) {
     playerId = '';
   }
-  gameLoader.getGameByPlayerId(playerId as string, (game) => {
+  GameLoader.getInstance().getByPlayerId(playerId as string, (game) => {
     if (game === undefined) {
       route.notFound(req, res);
       return;
@@ -426,6 +417,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         clonedGamedId: gameReq.clonedGamedId,
 
         undoOption: gameReq.undoOption,
+        showTimers: gameReq.showTimers,
         fastModeOption: gameReq.fastModeOption,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
 
@@ -456,7 +448,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       };
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);
-      gameLoader.addGame(game);
+      GameLoader.getInstance().add(game);
       res.setHeader('Content-Type', 'application/json');
       res.write(getGameModelJSON(game));
       res.end();
@@ -569,19 +561,18 @@ function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void 
   res.end(buffer);
 }
 
-gameLoader.start(() => {
-  console.log('Starting server on port ' + (process.env.PORT || 8080));
-  console.log('version 0.X');
+console.log('Starting server on port ' + (process.env.PORT || 8080));
+console.log('version 0.X');
 
-  server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 8080);
 
-  console.log(
-    '\nThe secret serverId for this server is \x1b[1m' +
-    serverId +
-    '\x1b[0m. Use it to access the following administrative routes:\n',
-  );
-  console.log(
-    '* Overview of existing games: /games-overview?serverId=' + serverId,
-  );
-  console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-});
+console.log(
+  '\nThe secret serverId for this server is \x1b[1m' +
+  serverId +
+  '\x1b[0m. Use it to access the following administrative routes:\n',
+);
+console.log(
+  '* Overview of existing games: /games-overview?serverId=' + serverId,
+);
+console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+

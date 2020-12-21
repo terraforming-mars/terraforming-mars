@@ -7,15 +7,16 @@ import {CardRenderTile} from '../../cards/render/CardRenderer';
 import {CardRenderItemComponent} from './CardRenderItemComponent';
 import {CardProductionBoxComponent} from './CardProductionBoxComponent';
 import {CardRenderEffectBoxComponent} from './CardRenderEffectBoxComponent';
+import {CardRenderCorpBoxComponent} from './CardRenderCorpBoxComponent';
 import {CardRenderTileComponent} from './CardRenderTileComponent';
 import {CardDescription} from './CardDescription';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
-import {CardRenderEffect} from '../../cards/render/CardRenderer';
+import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '../../cards/render/CardRenderer';
 
 export const CardRowComponent = Vue.component('CardRowComponent', {
   props: {
     componentData: {
-      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile,
+      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | CardRenderCorpBoxEffect | CardRenderCorpBoxAction,
       required: true,
     },
   },
@@ -24,6 +25,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
     CardRenderItemComponent,
     CardProductionBoxComponent,
     CardRenderEffectBoxComponent,
+    CardRenderCorpBoxComponent,
     CardRenderTileComponent,
     CardDescription,
   },
@@ -46,6 +48,17 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
     isTile: function(): boolean {
       return this.componentData instanceof CardRenderTile;
     },
+    isCorpBox: function(): boolean {
+      return this.componentData instanceof CardRenderCorpBoxEffect || this.componentData instanceof CardRenderCorpBoxAction;
+    },
+    corpBoxLabel: function(): string {
+      if (this.componentData instanceof CardRenderCorpBoxEffect) {
+        return 'effect';
+      } else if (this.componentData instanceof CardRenderCorpBoxAction) {
+        return 'action';
+      }
+      return 'n/a';
+    },
 
   },
   template: ` 
@@ -55,6 +68,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
         <CardRenderEffectBoxComponent v-else-if="isEffect()" :effectData="componentData" />
         <CardRenderTileComponent v-else-if="isTile()" :item="componentData" />
         <CardDescription v-else-if="isDescription()" :item="componentData" />
+        <CardRenderCorpBoxComponent v-else-if="isCorpBox()" :rows="componentData.rows" :label="corpBoxLabel()" />
         <div v-else>n/a</div>
     `,
 });

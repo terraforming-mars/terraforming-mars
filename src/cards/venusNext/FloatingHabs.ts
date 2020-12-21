@@ -12,6 +12,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
@@ -65,7 +66,8 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         b.effectBox((eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix();
           eb.description('Action: spend 2 MC to add 1 Floater to ANY card');
-        });
+        }).br;
+        b.text('1 VP for every 2nd Floater on this card', CardRenderItemSize.TINY, true);
       }),
       description: 'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
       victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),

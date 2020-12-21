@@ -39,6 +39,7 @@ import {CloudSocieties} from './CloudSocieties';
 import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
 import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {ISerializable} from '../../ISerializable';
+import {LeadershipSummit} from './LeadershipSummit';
 
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
@@ -104,6 +105,10 @@ export const NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = 
   {globalEventName: GlobalEventName.SOLAR_FLARE, Factory: SolarFlare},
 ];
 
+export const COMMUNITY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+  {globalEventName: GlobalEventName.LEADERSHIP_SUMMIT, Factory: LeadershipSummit},
+];
+
 const ALL_EVENTS = [
   ...POSITIVE_GLOBAL_EVENTS,
   ...NEGATIVE_GLOBAL_EVENTS,
@@ -112,6 +117,7 @@ const ALL_EVENTS = [
   ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
   ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS,
   ...VENUS_POSITIVE_GLOBAL_EVENTS,
+  ...COMMUNITY_GLOBAL_EVENTS,
 ];
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
@@ -145,6 +151,8 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
       events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
     }
+
+    if (game.gameOptions.communityCardsOption) events.push(...COMMUNITY_GLOBAL_EVENTS);
 
     const globalEventsDeck = this.shuffle(events.map((cf) => new cf.Factory()));
     return new GlobalEventDealer(globalEventsDeck, []);

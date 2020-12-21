@@ -34,8 +34,7 @@ export class ImportedNutrients implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X26',
       renderData: CardRenderer.builder((b) => {
-        b.plants(4).br;
-        b.microbes(4);
+        b.plants(4).digit.nbsp.microbes(4).digit.asterix();
       }),
       description: 'Gain 4 plants and add 4 microbes to ANOTHER CARD.',
     }

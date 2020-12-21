@@ -1,4 +1,3 @@
-
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -8,6 +7,8 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ICard} from '../ICard';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SaturnSystems implements CorporationCard {
     public name = CardName.SATURN_SYSTEMS;
@@ -31,5 +32,20 @@ export class SaturnSystems implements CorporationCard {
       player.addProduction(Resources.TITANIUM);
       player.addProduction(Resources.MEGACREDITS);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R03',
+      description: 'You start with 1 titanium production and 42 MC.',
+      renderData: CardRenderer.builder((b) => {
+        b.br;
+        b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(42);
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.jovian().played.any.startEffect.productionBox((pb) => pb.megacredits(1));
+            eb.description('Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.');
+          });
+        });
+      }),
     }
 }

@@ -15,6 +15,7 @@ export class RestrictedAreaAres extends RestrictedArea {
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.megacredits(2).startAction.cards(1);
+        eb.description('Action: Spend 2 MC to draw a card.');
       }).br;
       b.tile(TileType.RESTRICTED_AREA, false, true);
     }),

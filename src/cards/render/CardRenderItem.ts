@@ -21,7 +21,7 @@ export class CardRenderItem {
   // 'oxygen' => used for Greenery tile that increases oxygen on placement
   // 'turmoil' => used in Political Uprising community prelude
   // TODO (chosta): if we have more than three non Tags secondary tag, add an enum
-  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil';
+  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater';
   // use this for amount labels like 2x, x, etc.
   public multiplier?: boolean = false;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown

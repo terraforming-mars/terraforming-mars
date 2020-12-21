@@ -54,6 +54,10 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
       }).br;
       b.productionBox((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', CardRenderItemSize.SMALL, true);
     }),
+    description: {
+      text: 'Decrease your energy production 1 step. 1VP per asteroid on this card.',
+      align: 'left',
+    },
     victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 1),
   }
 }

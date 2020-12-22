@@ -24,7 +24,7 @@ export class LandClaim implements IProjectCard {
         'Select space for claim',
         game.board.getNonReservedLandSpaces(),
         (foundSpace: ISpace) => {
-          foundSpace.player = player;
+          foundSpace.player = player.id;
           LogHelper.logBoardTileAction(game, player, foundSpace, 'land claim');
           return undefined;
         },

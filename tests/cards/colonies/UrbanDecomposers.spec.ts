@@ -30,14 +30,14 @@ describe('UrbanDecomposers', function() {
 
   it('Can\'t play if player has no colony', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    lands[0].player = player;
+    lands[0].player = player.id;
     lands[0].tile = {tileType: TileType.CITY};
     expect(card.canPlay(player, game)).is.not.true;
   });
 
   it('Should play without targets', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    lands[0].player = player;
+    lands[0].player = player.id;
     lands[0].tile = {tileType: TileType.CITY};
 
     const colony = new Luna();

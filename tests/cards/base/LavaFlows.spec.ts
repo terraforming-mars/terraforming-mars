@@ -24,7 +24,7 @@ describe('LavaFlows', function() {
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
     const anotherPlayer = TestPlayers.RED.newPlayer();
-    game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
+    game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer.id; // land claim
     expect(card.canPlay(player, game)).is.not.true;
   });
 
@@ -35,7 +35,7 @@ describe('LavaFlows', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
-    expect(space.player).to.eq(player);
+    expect(space.player).to.eq(player.id);
     expect(game.getTemperature()).to.eq(-26);
     expect(space.adjacency?.bonus).eq(undefined);
   });

@@ -23,7 +23,7 @@ describe('Gyropolis', function() {
     const action = card.play(player, game) as SelectSpace;
     expect(action).is.not.undefined;
     expect(action.cb(action.availableSpaces[0])).is.undefined;
-    expect(action.availableSpaces[0].player).to.eq(player);
+    expect(action.availableSpaces[0].player).to.eq(player.id);
     expect(action.availableSpaces[0].tile).is.not.undefined;
     expect(action.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

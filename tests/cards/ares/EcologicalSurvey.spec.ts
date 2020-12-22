@@ -57,7 +57,7 @@ describe('EcologicalSurvey', function() {
       SpaceBonus.POWER,
     ],
     };
-    firstSpace.player = player;
+    firstSpace.player = player.id;
 
     const microbeCard = new Ants();
     const animalCard = new Pets();

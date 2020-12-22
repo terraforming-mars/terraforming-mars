@@ -17,7 +17,7 @@ describe('EarlySettlement', function() {
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
+    expect(selectSpace.availableSpaces[0].player).to.eq(player.id);
     expect(selectSpace.availableSpaces[0].tile).is.not.undefined;
     expect(selectSpace.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
   });

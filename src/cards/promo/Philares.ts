@@ -1,5 +1,5 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Player} from '../../Player';
+import {Player, PlayerId} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -88,15 +88,21 @@ export class Philares implements CorporationCard {
     }
 
     public onTilePlaced(player: Player, space: ISpace, game: Game): void {
+      function isPhilares(playerId: PlayerId | undefined): boolean {
+        if (playerId === undefined) {
+          return false;
+        }
+        return game.getPlayerById(playerId).isCorporation(CardName.PHILARES);
+      }
       if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
         let bonusResource: number = 0;
-        if (space.player !== undefined && space.player.isCorporation(CardName.PHILARES)) {
+        if (isPhilares(space.player)) {
           bonusResource = game.board.getAdjacentSpaces(space)
-            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
+            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player.id)
             .length;
-        } else if (space.player !== undefined && !space.player.isCorporation(CardName.PHILARES)) {
+        } else if (space.player !== undefined && !isPhilares(space.player)) {
           bonusResource = game.board.getAdjacentSpaces(space)
-            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.isCorporation(CardName.PHILARES))
+            .filter((space) => space.tile !== undefined && isPhilares(space.player))
             .length;
         }
         if (bonusResource > 0) {

@@ -31,7 +31,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives 3 MC and MC production for own city on Mars', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    lands[0].player = player;
+    lands[0].player = player.id;
     lands[0].tile = {tileType: TileType.CITY};
 
     card.onTilePlaced(player, lands[0]);
@@ -41,7 +41,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives MC production only for other player\'s city on Mars', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    lands[0].player = player2;
+    lands[0].player = player2.id;
     lands[0].tile = {tileType: TileType.CITY};
 
     card.onTilePlaced(player, lands[0]);

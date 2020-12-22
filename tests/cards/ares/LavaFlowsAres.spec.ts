@@ -25,7 +25,7 @@ describe('LavaFlowsAres', function() {
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
-    expect(space.player).to.eq(player);
+    expect(space.player).to.eq(player.id);
     expect(game.getTemperature()).to.eq(-26);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT]});
   });

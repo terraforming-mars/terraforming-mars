@@ -33,7 +33,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
     }
 
     public onTilePlaced(cardOwner: Player, space: ISpace) {
-      if (space.player === cardOwner && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
+      if (space.player === cardOwner.id && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
         cardOwner.addResourceTo(this);
       }
     }

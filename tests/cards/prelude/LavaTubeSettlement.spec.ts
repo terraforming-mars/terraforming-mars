@@ -34,7 +34,7 @@ describe('LavaTubeSettlement', function() {
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
     const anotherPlayer = TestPlayers.RED.newPlayer();
-    game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
+    game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer.id; // land claim
 
     expect(card.canPlay(player, game)).is.not.true;
   });
@@ -48,7 +48,7 @@ describe('LavaTubeSettlement', function() {
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
+    expect(selectSpace.availableSpaces[0].player).to.eq(player.id);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
   });
 });

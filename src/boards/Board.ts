@@ -117,7 +117,7 @@ export abstract class Board {
       const spaces = this.getAvailableSpacesOnLand(player)
         .filter(
           (space) => this.getAdjacentSpaces(space).find(
-            (adj) => adj.player === player,
+            (adj) => adj.player === player.id,
           ) !== undefined,
         );
         // Remove duplicates
@@ -126,7 +126,7 @@ export abstract class Board {
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
       const spacesForGreenery = this.getAvailableSpacesOnLand(player)
-        .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
+        .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player.id && adj.tile.tileType !== TileType.OCEAN) !== undefined);
 
       // Spaces next to tiles you own
       if (spacesForGreenery.length > 0) {
@@ -140,7 +140,7 @@ export abstract class Board {
       return this.getSpaces(SpaceType.OCEAN, player)
         .filter(
           (space) => space.tile === undefined &&
-                        (space.player === undefined || space.player === player),
+                        (space.player === undefined || space.player === player.id),
         );
     }
 
@@ -179,7 +179,7 @@ export abstract class Board {
       player: Player | undefined = undefined,
       predicate: (value: ISpace) => boolean = (_x) => true) {
       const spaces = this.spaces.filter((space) => {
-        return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
+        return this.canPlaceTile(space) && (space.player === undefined || space.player === player?.id);
       }).filter(predicate);
       let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
       while (idx < 0) {

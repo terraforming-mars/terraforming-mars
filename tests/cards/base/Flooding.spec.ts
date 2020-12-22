@@ -72,7 +72,7 @@ describe('Flooding', function() {
     const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === '03')[0];
 
     landClaimAction.cb(adjacentSpace);
-    expect(adjacentSpace.player).to.eq(player2);
+    expect(adjacentSpace.player).to.eq(player2.id);
     expect(adjacentSpace.tile).is.undefined;
 
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);

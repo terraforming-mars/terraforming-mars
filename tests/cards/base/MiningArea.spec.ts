@@ -43,7 +43,7 @@ describe('MiningArea', function() {
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
-    expect(titaniumSpace!.player).to.eq(player);
+    expect(titaniumSpace!.player).to.eq(player.id);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(titaniumSpace!.adjacency?.bonus).eq(undefined);
@@ -52,7 +52,7 @@ describe('MiningArea', function() {
     expect(steelSpace).is.not.undefined;
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
     action.cb(steelSpace!);
-    expect(steelSpace!.player).to.eq(player);
+    expect(steelSpace!.player).to.eq(player.id);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(steelSpace!.adjacency?.bonus).eq(undefined);

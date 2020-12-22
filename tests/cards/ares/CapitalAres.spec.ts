@@ -38,7 +38,7 @@ describe('CapitalAres', function() {
     action.cb(citySpace);
 
     expect(citySpace.tile).is.not.undefined;
-    expect(citySpace.player).to.eq(player);
+    expect(citySpace.player).to.eq(player.id);
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
     expect(card.getVictoryPoints(player, game)).to.eq(1);

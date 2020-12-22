@@ -58,7 +58,7 @@ describe('OceanCity', function() {
     expect(game.getCitiesInPlayOnMars()).eq(1);
     expect(player.getCitiesCount(game)).eq(1);
 
-    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.player).to.eq(player.id);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
@@ -92,7 +92,7 @@ describe('OceanCity', function() {
     const action = card.play(player, game);
 
     action.cb(oceanSpace);
-    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.player).to.eq(player.id);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 

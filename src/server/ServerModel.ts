@@ -86,7 +86,7 @@ export class Server {
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       coloniesExtension: game.gameOptions.coloniesExtension,
       players: getPlayers(game.getPlayers(), game),
-      spaces: getSpaces(game.board.spaces),
+      spaces: getSpaces(game.board.spaces, game),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
@@ -546,12 +546,13 @@ function getParties(game: Game): Array<PartyModel> {
 
 // Oceans can't be owned so they shouldn't have a color associated with them
 // Land claim can have a color on a space without a tile
-function getColor(space: ISpace): Color | undefined {
+function getColor(space: ISpace, game: Game): Color | undefined {
   if (
     (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
     space.player !== undefined
   ) {
-    return space.player.color;
+    return game.getPlayerById(space.player).color;
+    // return space.player.color;
   }
   if (space.tile?.protectedHazard === true) {
     return Color.BRONZE;
@@ -559,7 +560,7 @@ function getColor(space: ISpace): Color | undefined {
   return undefined;
 }
 
-function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
+function getSpaces(spaces: Array<ISpace>, game: Game): Array<SpaceModel> {
   return spaces.map((space) => {
     return {
       x: space.x,
@@ -568,7 +569,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
       bonus: space.bonus,
       spaceType: space.spaceType,
       tileType: space.tile && space.tile.tileType,
-      color: getColor(space),
+      color: getColor(space, game),
     };
   });
 }

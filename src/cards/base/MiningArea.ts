@@ -11,7 +11,9 @@ export class MiningArea extends MiningCard {
     public name = CardName.MINING_AREA;
     protected getAvailableSpaces(player: Player, game: Game) {
       return super.getAvailableSpaces(player, game)
-        .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player).length > 0);
+        .filter((space) =>
+          game.board.getAdjacentSpaces(space).filter((adjacentSpace) =>
+            adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player.id).length > 0);
     }
     public metadata: CardMetadata = {
       cardNumber: '064',

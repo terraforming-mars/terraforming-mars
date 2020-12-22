@@ -17,7 +17,7 @@ describe('LandClaim', function() {
     expect(action).is.not.undefined;
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     action.cb(landSpace);
-    expect(landSpace.player).to.eq(player);
+    expect(landSpace.player).to.eq(player.id);
     expect(landSpace.tile).is.undefined;
   });
   it('can claim south pole on hellas board', function() {

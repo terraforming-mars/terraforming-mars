@@ -17,7 +17,7 @@ describe('ArcadianCommunities', function() {
     player.corporationCard = card;
 
     const initLands = game.board.getAvailableSpacesForGreenery(player);
-    initLands[1].player = player;
+    initLands[1].player = player.id;
     const action = card.action(player, game);
     expect(action instanceof SelectSpace).is.true;
     if ( ! (action instanceof SelectSpace)) return;

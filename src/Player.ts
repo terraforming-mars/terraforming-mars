@@ -412,12 +412,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Victory points from board
       game.board.spaces.forEach((space) => {
         // Victory points for greenery tiles
-        if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
+        if (space.tile && space.tile.tileType === TileType.GREENERY && space.player === this.id) {
           this.victoryPointsBreakdown.setVictoryPoints('greenery', 1);
         }
 
         // Victory points for greenery tiles adjacent to cities
-        if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === this.id) {
+        if (Board.isCitySpace(space) && space.player === this.id) {
           const adjacent = game.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {

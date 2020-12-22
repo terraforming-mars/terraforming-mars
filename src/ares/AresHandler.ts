@@ -90,8 +90,8 @@ export class AresHandler {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
-    const adjacentPlayer = adjacentSpace.player;
-    if (adjacentPlayer === undefined) {
+    const adjacentPlayerId = adjacentSpace.player;
+    if (adjacentPlayerId === undefined) {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
@@ -148,6 +148,7 @@ export class AresHandler {
     const tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
     game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
+    const adjacentPlayer = game.getPlayerById(adjacentPlayerId);
     let ownerBonus = 1;
     if (adjacentPlayer.cardIsInEffect(CardName.MARKETING_EXPERTS)) {
       ownerBonus = 2;

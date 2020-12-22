@@ -25,7 +25,7 @@ describe('Mangrove', function() {
 
     action.cb(action.availableSpaces[0]);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.GREENERY);
-    expect(action.availableSpaces[0].player).to.eq(player);
+    expect(action.availableSpaces[0].player).to.eq(player.id);
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

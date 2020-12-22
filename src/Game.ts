@@ -446,7 +446,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     // Function to retrieve a player by it's id
-    public getPlayerById(id: string): Player {
+    public getPlayerById(id: PlayerId): Player {
       const player = this.players.find((p) => p.id === id);
       if (player === undefined) {
         throw new Error(`player ${id} does not exist on game ${this.id}`);
@@ -455,7 +455,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     // Function to return an array of players from an array of player ids
-    public getPlayersById(ids: Array<string>): Array<Player> {
+    public getPlayersById(ids: Array<PlayerId>): Array<Player> {
       return ids.map((id) => this.getPlayerById(id));
     }
 
@@ -1320,8 +1320,7 @@ export class Game implements ISerializable<SerializedGame> {
       return this.board.spaces.filter(
         (space) => space.tile !== undefined &&
                    space.tile.tileType === tileType &&
-                   space.player !== undefined &&
-                   space.player === player,
+                   space.player === player.id,
       ).length;
     }
     public addTile(
@@ -1334,8 +1333,8 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       // Land claim a player can claim land for themselves
-      if (space.player !== undefined && space.player !== player) {
-        throw new Error('This space is land claimed by ' + space.player.name);
+      if (space.player !== undefined && space.player !== player.id) {
+        throw new Error('This space is land claimed by ' + this.getPlayerById(space.player)?.name);
       }
 
       if (space.spaceType !== spaceType) {
@@ -1374,7 +1373,7 @@ export class Game implements ISerializable<SerializedGame> {
 
 
       // Part 3. Setup for bonuses
-      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
+      const arcadianCommunityBonus = space.player === player.id && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
       let startingResources: Multiset<Resources | ResourceType> | undefined = undefined;
       AresHandler.ifAres(this, () => {
         startingResources = AresHandler.beforeTilePlacement(player);
@@ -1384,7 +1383,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // Part 4. Place the tile
       space.tile = tile;
-      space.player = player;
+      space.player = player.id;
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
 
       // Part 5. Collect the bonuses
@@ -1720,25 +1719,29 @@ export class Game implements ISerializable<SerializedGame> {
         this.addVenusBoardSpaces();
       }
 
+      const deserializePlayer = function(player: PlayerId | Player): PlayerId {
+        if (typeof player === 'string') {
+          return player;
+        } else {
+          return player.id;
+        }
+      };
+
       d.board.spaces.forEach((element: ISpace) => {
         const space = this.getSpace(element.id);
         if (element.tile) {
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
           const protectedHazard = element.tile.protectedHazard;
-          if (element.player) {
-            const player = this.players.find((player) => player.id === element.player!.id);
-            // Prevent loss of "neutral" player tile ownership across reloads
-            space.player = player ? player : element.player;
-          }
           space.tile = {
             tileType: tileType,
             card: tileCard,
             protectedHazard: protectedHazard,
           };
-        } else if (element.player) {
+        }
+        if (element.player) {
           // Correct Land Claim
-          space.player = this.players.find((player) => player.id === element.player!.id);
+          space.player = deserializePlayer(element.player);
         }
         space.adjacency = element.adjacency;
       });

@@ -41,7 +41,7 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
       .filter(
         (space) => space.tile !== undefined &&
           space.tile.tileType === TileType.GREENERY &&
-          space.player === player,
+          space.player === player.id,
       ).length > 0;
   }
   public canPlay(player: Player, game: Game): boolean {

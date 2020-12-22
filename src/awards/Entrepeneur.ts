@@ -9,9 +9,8 @@ export class Entrepeneur implements IAward {
     public getScore(player: Player, game: Game): number {
       return game.board.spaces
         .filter((space) => (
-          space.player !== undefined &&
-              space.player === player &&
-              space.adjacency &&
-              space.adjacency.bonus.length > 0)).length;
+          space.player === player.id &&
+          space.adjacency &&
+          space.adjacency.bonus.length > 0)).length;
     }
 }

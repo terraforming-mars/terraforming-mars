@@ -13,7 +13,7 @@ export class MudSlides implements IGlobalEvent {
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const tiles = game.board.spaces.filter((space) => (space.player !== undefined && space.player === player && space.tile !== undefined) &&
+        const tiles = game.board.spaces.filter((space) => (space.player === player.id && space.tile !== undefined) &&
                                game.board.getAdjacentSpaces(space)
                                  .filter((space) => (space.tile !== undefined &&
                                            space.tile.tileType === TileType.OCEAN)).length > 0,

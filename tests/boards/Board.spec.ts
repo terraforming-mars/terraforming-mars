@@ -21,20 +21,20 @@ describe('Board', function() {
   });
 
   it('Can have greenery placed on any available land when player has a tile placed that is land locked', function() {
-    board.spaces[2].player = player;
+    board.spaces[2].player = player.id;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
-    board.spaces[7].player = player2;
+    board.spaces[7].player = player2.id;
     board.spaces[7].tile = {tileType: TileType.GREENERY};
-    board.spaces[8].player = player2;
+    board.spaces[8].player = player2.id;
     board.spaces[8].tile = {tileType: TileType.GREENERY};
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
   });
 
   it('Can only place greenery adjacent to a tile a player owns', function() {
-    board.spaces[2].player = player;
+    board.spaces[2].player = player.id;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
-    board.spaces[7].player = player2;
+    board.spaces[7].player = player2.id;
     board.spaces[7].tile = {tileType: TileType.GREENERY};
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(1);
@@ -52,7 +52,7 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
 
         // Filter player tokens (I'm looking at you, Land Claim)
-        board.spaces.find((s) => s.id === '05')!.player = player;
+        board.spaces.find((s) => s.id === '05')!.player = player.id;
         expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
         expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
 

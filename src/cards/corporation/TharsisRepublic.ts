@@ -27,7 +27,7 @@ export class TharsisRepublic implements CorporationCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
       if (Board.isCitySpace(space)) {
-        if (space.player === player) {
+        if (space.player === player.id) {
           player.megaCredits += 3;
         }
         if (space.spaceType !== SpaceType.COLONY) {

@@ -20,7 +20,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
         'Select space for claim',
         game.board.getAvailableSpacesOnLand(player),
         (foundSpace: ISpace) => {
-          foundSpace.player = player;
+          foundSpace.player = player.id;
 
           game.log('${0} placed a Community (player marker)', (b) => b.player(player));
 
@@ -38,7 +38,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
         'Select space for claim',
         game.board.getAvailableSpacesForMarker(player),
         (foundSpace: ISpace) => {
-          foundSpace.player = player;
+          foundSpace.player = player.id;
           return undefined;
         },
       );

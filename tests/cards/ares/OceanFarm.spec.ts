@@ -45,7 +45,7 @@ describe('OceanFarm', function() {
 
     action.cb(oceanSpace);
 
-    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.player).to.eq(player.id);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_FARM);
     expect(oceanSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT]});
   });

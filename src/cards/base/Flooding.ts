@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {Player, PlayerId} from '../../Player';
 import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
@@ -43,17 +43,17 @@ export class Flooding implements IProjectCard {
         'Select space for ocean tile',
         game.board.getAvailableSpacesForOcean(player),
         (space: ISpace) => {
-          const adjacentPlayers: Set<Player> = new Set<Player>();
+          const adjacentPlayerIds: Set<PlayerId> = new Set();
           game.addOceanTile(player, space.id);
           game.board.getAdjacentSpaces(space).forEach((space) => {
-            if (space.player && space.player !== player && space.tile) {
-              adjacentPlayers.add(space.player);
+            if (space.player !== undefined && space.player !== player.id && space.tile) {
+              adjacentPlayerIds.add(space.player);
             }
           });
-          if (adjacentPlayers.size > 0) {
+          if (adjacentPlayerIds.size > 0) {
             return new OrOptions(
               new SelectPlayer(
-                Array.from(adjacentPlayers),
+                game.getPlayersById(Array.from(adjacentPlayerIds)),
                 'Select adjacent player to remove 4 mega credits from',
                 'Remove credits',
                 (selectedPlayer: Player) => {

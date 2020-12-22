@@ -6,7 +6,7 @@ import {ISpace} from '../ISpace';
 import {BoardBuilder} from './BoardBuilder';
 
 export class OriginalBoard extends Board {
-  constructor(shuffleMapOption: boolean, seed: number, includeVenus: boolean) {
+  constructor(shuffle: boolean, seed: number, includeVenus: boolean) {
     super();
 
     const builder = new BoardBuilder(seed, includeVenus);
@@ -37,7 +37,7 @@ export class OriginalBoard extends Board {
     // y=8
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
-    if (shuffleMapOption) {
+    if (shuffle) {
       builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
     this.spaces = builder.build();

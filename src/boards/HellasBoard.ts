@@ -8,7 +8,7 @@ import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 
 export class HellasBoard extends Board {
-  constructor(shuffleMapOption: boolean, seed: number, includeVenus: boolean) {
+  constructor(shuffle: boolean, seed: number, includeVenus: boolean) {
     super();
 
     const builder = new BoardBuilder(seed, includeVenus);
@@ -39,7 +39,7 @@ export class HellasBoard extends Board {
     // y=8
     builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
 
-    if (shuffleMapOption) {
+    if (shuffle) {
       builder.shuffle();
     }
 

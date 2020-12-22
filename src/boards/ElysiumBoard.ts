@@ -4,7 +4,7 @@ import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 
 export class ElysiumBoard extends Board {
-  constructor(shuffleMapOption: boolean, seed: number, includeVenus: boolean) {
+  constructor(shuffle: boolean, seed: number, includeVenus: boolean) {
     super();
     const builder = new BoardBuilder(seed, includeVenus);
 
@@ -32,7 +32,7 @@ export class ElysiumBoard extends Board {
     // y=8
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
-    if (shuffleMapOption) {
+    if (shuffle) {
       builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     }
     this.spaces = builder.build();

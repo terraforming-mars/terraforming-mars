@@ -25,6 +25,7 @@ export enum CardRenderItemType {
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
   TRADE_FLEET = 'trade_fleet',
+  PLACE_COLONY = 'place_colony',
   CHAIRMAN = 'chairman',
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',

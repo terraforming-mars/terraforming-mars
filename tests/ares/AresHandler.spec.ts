@@ -59,7 +59,7 @@ describe('AresHandler', function() {
 
     const deck = game.dealer.deck;
 
-    deck.push(CardName.HACKERS) // cost of 3
+    deck.push(CardName.HACKERS); // cost of 3
     deck.push(CardName.DECOMPOSERS); // cost of 5
     game.board.spaces.forEach((space) => {
       space.tile = undefined; space.player = undefined;

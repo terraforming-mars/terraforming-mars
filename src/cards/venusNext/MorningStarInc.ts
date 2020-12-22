@@ -16,13 +16,13 @@ export class MorningStarInc implements CorporationCard {
     public initialActionText: string = 'Draw 3 Venus-tag cards';
     public initialAction(player: Player, game: Game) {
       const drawnCards = game.drawCardsByTag(Tags.VENUS, 3);
-      if (drawnCards.length > 0) {      
+      if (drawnCards.length > 0) {
         for (const foundCard of drawnCards) {
           player.cardsInHand.push(foundCard);
         }
 
         game.log('${0} drew ${1}, ${2} and ${3}', (b) =>
-        b.player(player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
+          b.player(player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
       }
 
       return undefined;

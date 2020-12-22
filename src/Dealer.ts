@@ -36,7 +36,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       cardsBlackList?: Array<CardName>,
     ): Dealer {
       const dealer = new Dealer();
-      const projectCardsToRemove = new Array<CardName>();
+      const projectCardsToRemove: Array<CardName> = [];
       function include(cf: ICardFactory<CardTypes>) : boolean {
         const expansion = cf.compatibility;
         switch (expansion) {

@@ -99,7 +99,7 @@ export class LogHelper {
         if (typeof card === 'string') {
           b.cardName(card);
         } else {
-          b.card(card)
+          b.card(card);
         }
       });
     });

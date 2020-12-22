@@ -59,11 +59,11 @@ export class GameSetup {
   // Function to construct the board and milestones/awards list
   public static newBoard(boardName: BoardName, shuffle: boolean, seed: number, includeVenus: boolean): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return new ElysiumBoard(shuffle, seed, includeVenus);
+      return ElysiumBoard.newInstance(shuffle, seed, includeVenus);
     } else if (boardName === BoardName.HELLAS) {
-      return new HellasBoard(shuffle, seed, includeVenus);
+      return HellasBoard.newInstance(shuffle, seed, includeVenus);
     } else {
-      return new OriginalBoard(shuffle, seed, includeVenus);
+      return OriginalBoard.newInstance(shuffle, seed, includeVenus);
     }
   }
 }

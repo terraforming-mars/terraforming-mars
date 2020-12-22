@@ -1,11 +1,17 @@
+import {ISpace} from './ISpace';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
+import {SerializedBoard} from './SerializedBoard';
+import {Player} from '../Player';
 
 export class ElysiumBoard extends Board {
-  constructor(shuffle: boolean, seed: number, includeVenus: boolean) {
+  private constructor(public spaces: Array<ISpace>) {
     super();
+  }
+
+  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): ElysiumBoard {
     const builder = new BoardBuilder(seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
@@ -35,6 +41,11 @@ export class ElysiumBoard extends Board {
     if (shuffle) {
       builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     }
-    this.spaces = builder.build();
+    const spaces = builder.build();
+    return new ElysiumBoard(spaces);
+  }
+
+  public static deserialize(board: SerializedBoard, players: Array<Player>): ElysiumBoard {
+    return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 }

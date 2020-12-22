@@ -1,7 +1,9 @@
 import {Board} from '../../src/boards/Board';
 import {BoardBuilder} from '../../src/boards/BoardBuilder';
+import {ISpace} from '../../src/boards/ISpace';
 
 export class EmptyBoard extends Board {
+  public spaces: Array<ISpace>;
   constructor() {
     super();
 

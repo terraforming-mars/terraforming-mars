@@ -1,12 +1,13 @@
 import {ISpace} from './ISpace';
-import {Player} from '../Player';
+import {Player, PlayerId} from '../Player';
 import {SpaceType} from '../SpaceType';
 import {SpaceName} from '../SpaceName';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
+import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
-  public spaces: Array<ISpace> = [];
+  public abstract spaces: Array<ISpace>;
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {
@@ -188,5 +189,68 @@ export abstract class Board {
   public static isOceanSpace(space: ISpace): boolean {
     const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
     return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
+  }
+
+  public serialize(): SerializedBoard {
+    return {
+      spaces: this.spaces.map((space) => {
+        return {
+          id: space.id,
+          spaceType: space.spaceType,
+          tile: space.tile,
+          player: space.player?.id,
+          bonus: space.bonus,
+          adjacency: space.adjacency,
+          x: space.x,
+          y: space.y,
+        } as SerializedSpace;
+      }),
+    } as SerializedBoard;
+  }
+
+  public static deserializeSpace(space: SerializedSpace, players: Array<Player>): ISpace {
+    // TODO(kberg): Remove Player by 2021-01-15
+    const p : PlayerId | Player | undefined = space.player;
+    const playerId: PlayerId | undefined = (typeof p === 'string') ? p : p?.id;
+    return {
+      id: space.id,
+      spaceType: space.spaceType,
+      tile: space.tile,
+      player: players.find((p) => p.id === playerId),
+      bonus: space.bonus,
+      adjacency: space.adjacency,
+      x: space.x,
+      y: space.y,
+    } as ISpace;
+  }
+
+  /*
+    d.board.spaces.forEach((element: ISpace) => {
+      const space = this.getSpace(element.id);
+      if (element.tile) {
+        const tileType = element.tile.tileType;
+        const tileCard = element.tile.card;
+        const protectedHazard = element.tile.protectedHazard;
+        if (element.player) {
+          const player = this.players.find((player) => player.id === element.player!.id);
+          // Prevent loss of "neutral" player tile ownership across reloads
+          space.player = player ? player : element.player;
+        }
+        space.tile = {
+          tileType: tileType,
+          card: tileCard,
+          protectedHazard: protectedHazard,
+        };
+      } else if (element.player) {
+        // Correct Land Claim
+        space.player = this.players.find((player) => player.id === element.player!.id);
+      }
+      space.adjacency = element.adjacency;
+    });
+
+
+  */
+  public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {
+    return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }

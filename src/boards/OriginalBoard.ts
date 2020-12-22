@@ -4,11 +4,14 @@ import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
+import {SerializedBoard} from './SerializedBoard';
 
 export class OriginalBoard extends Board {
-  constructor(shuffle: boolean, seed: number, includeVenus: boolean) {
+  private constructor(public spaces: Array<ISpace>) {
     super();
+  }
 
+  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): OriginalBoard {
     const builder = new BoardBuilder(seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
@@ -40,11 +43,18 @@ export class OriginalBoard extends Board {
     if (shuffle) {
       builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
-    this.spaces = builder.build();
+    const spaces = builder.build();
+    return new OriginalBoard(spaces);
   }
+
+  public static deserialize(board: SerializedBoard, players: Array<Player>): OriginalBoard {
+    return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
+  }
+
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
+
   public canPlaceTile(space: ISpace): boolean {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }

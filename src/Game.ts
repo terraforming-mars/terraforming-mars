@@ -1670,11 +1670,11 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Rebuild milestones, awards and board elements
     if (this.gameOptions.boardName === BoardName.ELYSIUM) {
-      this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed, this.gameOptions.venusNextExtension);
+      this.board = ElysiumBoard.deserialize(d.board, this.players);
     } else if (this.gameOptions.boardName === BoardName.HELLAS) {
-      this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed, this.gameOptions.venusNextExtension);
+      this.board = HellasBoard.deserialize(d.board, this.players);
     } else {
-      this.board = new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed, this.gameOptions.venusNextExtension);
+      this.board = OriginalBoard.deserialize(d.board, this.players);
     }
 
     this.milestones = [];
@@ -1698,29 +1698,6 @@ export class Game implements ISerializable<SerializedGame> {
           this.awards.push(award);
         }
       });
-    });
-
-    d.board.spaces.forEach((element: ISpace) => {
-      const space = this.getSpace(element.id);
-      if (element.tile) {
-        const tileType = element.tile.tileType;
-        const tileCard = element.tile.card;
-        const protectedHazard = element.tile.protectedHazard;
-        if (element.player) {
-          const player = this.players.find((player) => player.id === element.player!.id);
-          // Prevent loss of "neutral" player tile ownership across reloads
-          space.player = player ? player : element.player;
-        }
-        space.tile = {
-          tileType: tileType,
-          card: tileCard,
-          protectedHazard: protectedHazard,
-        };
-      } else if (element.player) {
-        // Correct Land Claim
-        space.player = this.players.find((player) => player.id === element.player!.id);
-      }
-      space.adjacency = element.adjacency;
     });
 
     if (this.gameOptions.aresExtension) {

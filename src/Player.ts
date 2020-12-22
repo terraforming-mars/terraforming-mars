@@ -2396,7 +2396,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
 
       player.lastCardPlayed = d.lastCardPlayed !== undefined ?
-        cardFinder.getProjectCardByName(d.lastCardPlayed) :
+        CardFinder.getProjectCardByName(d.lastCardPlayed) :
         undefined;
 
       // Rebuild removed from play cards (Playwrights)
@@ -2405,12 +2405,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
       if (d.pickedCorporationCard !== undefined) {
-        player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
+        player.pickedCorporationCard = CardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
       }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
-        player.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
+        player.corporationCard = CardFinder.getCorporationCardByName(d.corporationCard.name);
         if (player.corporationCard !== undefined) {
           if (d.corporationCard.resourceCount !== undefined) {
             player.corporationCard.resourceCount = d.corporationCard.resourceCount;
@@ -2450,14 +2450,14 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // Rebuild each played card
       player.playedCards = d.playedCards.map((element: SerializedCard) => {
-        const card = cardFinder.getProjectCardByName(element.name)!;
+        const card = CardFinder.getProjectCardByName(element.name)!;
         if (element.resourceCount !== undefined) {
           card.resourceCount = element.resourceCount;
         }
         if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
           card.targetCards = [];
           element.targetCards.forEach((targetCard) => {
-            const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
+            const foundTargetCard = CardFinder.getProjectCardByName(targetCard.card.name);
             if (foundTargetCard !== undefined) {
               card.targetCards.push({
                 card: foundTargetCard,

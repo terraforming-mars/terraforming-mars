@@ -23,7 +23,7 @@ describe('BusinessContacts', function() {
     expect(player.cardsInHand.indexOf(card2)).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(game.dealer.discarded).has.lengthOf(2);
-    expect(game.dealer.discarded.indexOf(card3)).to.eq(0);
-    expect(game.dealer.discarded.indexOf(card4)).to.eq(1);
+    expect(game.dealer.discarded.indexOf(card3.name)).to.eq(0);
+    expect(game.dealer.discarded.indexOf(card4.name)).to.eq(1);
   });
 });

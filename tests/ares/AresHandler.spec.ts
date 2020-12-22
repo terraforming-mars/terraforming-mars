@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {AresHandler} from '../../src/ares/AresHandler';
+import {CardName} from '../../src/CardName';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
@@ -51,34 +52,35 @@ describe('AresHandler', function() {
   });
 
   it('setupHazards', function() {
-    // front-load the deck with cards of predtermined costs.
+    // front-load the deck with cards of predetermined costs.
     // four player game places two dust storms.
 
     // Even though there's already a game, with a board, that laid out hazards, this is going to use a clean set-up.
 
     const deck = game.dealer.deck;
-    deck[deck.length - 1].cost = 5;
-    deck[deck.length - 2].cost = 3;
+
+    deck.push(CardName.HACKERS) // cost of 3
+    deck.push(CardName.DECOMPOSERS); // cost of 5
     game.board.spaces.forEach((space) => {
       space.tile = undefined; space.player = undefined;
     });
 
     AresHandler.setupHazards(game, 4);
 
-        interface SpaceToTest {
-            tile: ITile;
-            x: number;
-            y: number;
-        }
-        const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
-          .filter((space) => space.tile !== undefined)
-          .map((space) => {
-            const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x;
-          });
+    interface SpaceToTest {
+      tile: ITile;
+      x: number;
+      y: number;
+    }
+    const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
+      .filter((space) => space.tile !== undefined)
+      .map((space) => {
+        const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x;
+      });
 
-        expect(spacesWithTiles).to.deep.eq([
-          {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
-          {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
+    expect(spacesWithTiles).to.deep.eq([
+      {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
+      {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
   });
 
   it('Pay Adjacency Costs', function() {

@@ -14,12 +14,13 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
     public play(player: Player, game: Game) {
       game.increaseVenusScaleLevel(player, 2);
 
-      if (game.hasCardsWithTag(Tags.VENUS, 2)) {
-        for (const foundCard of game.drawCardsByTag(Tags.VENUS, 2)) {
+      const drawnCards = game.drawCardsByTag(Tags.VENUS, 2);
+
+      if (drawnCards.length > 0) {
+        for (const foundCard of drawnCards) {
           player.cardsInHand.push(foundCard);
         }
 
-        const drawnCards = game.getCardsInHandByTag(player, Tags.VENUS).slice(-2);
         if (drawnCards.length > 1) {
           game.log('${0} drew ${1} and ${2}', (b) => b.player(player).card(drawnCards[0]).card(drawnCards[1]));
         }

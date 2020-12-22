@@ -281,10 +281,10 @@ export class Game implements ISerializable<SerializedGame> {
 
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-        const customCorporationCards: CorporationCard[] = [];
+        const customCorporationCards: CardName[] = [];
         for (const corp of gameOptions.customCorporationsList) {
           const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp);
-          if (customCorp) customCorporationCards.push(customCorp);
+          if (customCorp) customCorporationCards.push(customCorp.name);
         }
         corporationCards = customCorporationCards;
       }
@@ -311,9 +311,13 @@ export class Game implements ISerializable<SerializedGame> {
               gameOptions.turmoilExtension ||
               gameOptions.initialDraftVariant) {
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
-            const corpCard = corporationCards.pop();
-            if (corpCard !== undefined) {
-              player.dealtCorporationCards.push(corpCard);
+            const corporationCardName = corporationCards.pop();
+            if (corporationCardName !== undefined) {
+              const corporationCard = CardFinder.getCorporationCardByName(corporationCardName);
+              if (corporationCard === undefined) {
+                throw new Error('Unable to find corporation card ' + corporationCardName);
+              }
+              player.dealtCorporationCards.push(corporationCard);
             } else {
               throw new Error('No corporation card dealt for player');
             }
@@ -1596,14 +1600,6 @@ export class Game implements ISerializable<SerializedGame> {
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
       // in soloMode you don't have to decrease resources
       return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode();
-    }
-
-    public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
-      return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
-    }
-
-    public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
-      return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
     }
 
     private setupSolo() {

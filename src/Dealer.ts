@@ -1,6 +1,6 @@
+import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
-import {CorporationCard} from './cards/corporation/CorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
@@ -14,14 +14,13 @@ import {CardManifest} from './cards/CardManifest';
 import {ICardFactory} from './cards/ICardFactory';
 import {CardTypes, Deck} from './Deck';
 import {GameModule} from './GameModule';
-import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 
 export class Dealer implements ISerializable<SerializedDealer> {
-    public deck: Array<IProjectCard> = [];
-    public preludeDeck: Array<IProjectCard> = [];
-    public discarded: Array<IProjectCard> = [];
-    public corporationCards: Array<CorporationCard> = [];
+    public deck: Array<CardName> = [];
+    public preludeDeck: Array<CardName> = [];
+    public discarded: Array<CardName> = [];
+    public corporationCards: Array<CardName> = [];
 
     private constructor() { }
 
@@ -37,12 +36,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       cardsBlackList?: Array<CardName>,
     ): Dealer {
       const dealer = new Dealer();
-
-      const deck:Array<IProjectCard> = [];
-      const preludeDeck:Array<IProjectCard> = [];
-      const projectCardsToRemove:Array<String> = [];
-      const corporationCards: Array<CorporationCard> = [];
-
+      const projectCardsToRemove = new Array<CardName>();
       function include(cf: ICardFactory<CardTypes>) : boolean {
         const expansion = cf.compatibility;
         switch (expansion) {
@@ -58,16 +52,16 @@ export class Dealer implements ISerializable<SerializedDealer> {
           throw ('Unhandled expansion type: ' + expansion);
         }
       }
-      function addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
+      function addToDeck<T extends CardTypes>(deck: Array<CardName>, cards: Deck<T>): void {
         const cardInstances = cards.cards
           .filter((cf) => include(cf))
-          .map((cf) => new cf.Factory());
+          .map((cf) => cf.cardName);
         deck.push(...cardInstances);
       }
       function addToDecks(manifest: CardManifest) {
-        addToDeck(deck, manifest.projectCards);
-        addToDeck(corporationCards, manifest.corporationCards);
-        addToDeck(preludeDeck, manifest.preludeCards);
+        addToDeck(dealer.deck, manifest.projectCards);
+        addToDeck(dealer.corporationCards, manifest.corporationCards);
+        addToDeck(dealer.preludeDeck, manifest.preludeCards);
         projectCardsToRemove.push(...manifest.projectCardsToRemove);
       }
       addToDecks(BASE_CARD_MANIFEST);
@@ -98,12 +92,11 @@ export class Dealer implements ISerializable<SerializedDealer> {
       if (cardsBlackList) {
         projectCardsToRemove.push(...cardsBlackList);
       }
-      const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
+      const filteredDeck = dealer.deck.filter((card) => projectCardsToRemove.includes(card) === false);
       dealer.deck = dealer.shuffleCards(filteredDeck);
       if (prelude) {
-        dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
+        dealer.preludeDeck = dealer.shuffleCards(dealer.preludeDeck);
       }
-      dealer.corporationCards = corporationCards;
       return dealer;
     }
 
@@ -116,33 +109,40 @@ export class Dealer implements ISerializable<SerializedDealer> {
       return deck;
     }
     public discard(card: IProjectCard): void {
-      this.discarded.push(card);
+      this.discarded.push(card.name);
     }
     public dealCard(isResearchPhase: boolean = false): IProjectCard {
       if (this.deck.length === 0) {
         this.deck = this.shuffleCards(this.discarded);
         this.discarded = [];
       }
-      let result: IProjectCard | undefined;
+      let result: CardName | undefined;
       if (isResearchPhase) {
         result = this.deck.shift();
       } else {
         result = this.deck.pop();
       }
-
       if (result === undefined) {
         throw 'Unexpected empty deck';
       }
-      return result;
+      const card = CardFinder.getProjectCardByName(result);
+      if (card === undefined) {
+        throw 'Did not find card ' + result;
+      }
+      return card;
     }
     // Prelude deck does not need discard and reshuffle mecanisms
     public dealPreludeCard(): IProjectCard {
-      const result: IProjectCard | undefined = this.preludeDeck.pop();
+      const result = this.preludeDeck.pop();
       if (result === undefined) {
         throw 'Unexpected empty prelude deck';
       }
+      const card = CardFinder.getProjectCardByName(result);
+      if (card === undefined) {
+        throw 'Did not find prelude card ' + result;
+      }
       // All Prelude cards are expected to subclass IProjectCard
-      return result;
+      return card;
     }
 
     public getDeckSize(): number {
@@ -151,21 +151,20 @@ export class Dealer implements ISerializable<SerializedDealer> {
 
     public static deserialize(d: SerializedDealer): Dealer {
       const dealer = new Dealer();
-      const cardFinder = new CardFinder();
 
-      dealer.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
-      dealer.deck = cardFinder.cardsFromJSON(d.deck);
-      dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
-      dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      dealer.corporationCards = d.corporationCards;
+      dealer.deck = d.deck;
+      dealer.discarded = d.discarded;
+      dealer.preludeDeck = d.preludeDeck;
       return dealer;
     }
 
     public serialize(): SerializedDealer {
       return {
-        corporationCards: this.corporationCards.map((c) => c.name),
-        deck: this.deck.map((c) => c.name),
-        discarded: this.discarded.map((c) => c.name),
-        preludeDeck: this.preludeDeck.map((c) => c.name),
+        corporationCards: this.corporationCards,
+        deck: this.deck,
+        discarded: this.discarded,
+        preludeDeck: this.preludeDeck,
       };
     }
 }

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
+import {CardName} from '../../../src/CardName';
 import {CardType} from '../../../src/cards/CardType';
 import {ProjectWorkshop} from '../../../src/cards/community/ProjectWorkshop';
 import {ICard} from '../../../src/cards/ICard';
@@ -59,7 +60,7 @@ describe('ProjectWorkshop', function() {
 
     card.action(player, game).cb();
     expect(player.playedCards).has.lengthOf(0);
-    expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
+    expect(game.dealer.discarded.includes(CardName.ADVANCED_ALLOYS)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.getSteelValue()).to.eq(2);
     expect(player.getTitaniumValue(game)).to.eq(3);

@@ -33,7 +33,7 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getCorporationCardByName(cardName: string): CorporationCard | undefined {
+    public static getCorporationCardByName(cardName: string): CorporationCard | undefined {
       if (cardName === CardName.BEGINNER_CORPORATION) {
         return new BeginnerCorporation();
       }
@@ -56,7 +56,7 @@ export class CardFinder {
     // NOTE(kberg): This replaces a larger function which searched for both Prelude cards amidst project cards
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
     //              another function, perhaps?
-    public getProjectCardByName(cardName: string): IProjectCard | undefined {
+    public static getProjectCardByName(cardName: string): IProjectCard | undefined {
       let found : (ICardFactory<IProjectCard> | undefined);
       CardFinder.getDecks().forEach((deck) => {
         // Short circuit
@@ -85,7 +85,7 @@ export class CardFinder {
         if (typeof element !== 'string') {
           element = element.name;
         }
-        const card = this.getProjectCardByName(element);
+        const card = CardFinder.getProjectCardByName(element);
         if (card !== undefined) {
           result.push(card);
         } else {
@@ -105,7 +105,7 @@ export class CardFinder {
         if (typeof element !== 'string') {
           element = element.name;
         }
-        const card = this.getCorporationCardByName(element);
+        const card = CardFinder.getCorporationCardByName(element);
         if (card !== undefined) {
           result.push(card);
         } else {

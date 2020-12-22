@@ -210,13 +210,15 @@ export abstract class Board {
 
   public static deserializeSpace(space: SerializedSpace, players: Array<Player>): ISpace {
     // TODO(kberg): Remove Player by 2021-01-15
-    const p : PlayerId | Player | undefined = space.player;
-    const playerId: PlayerId | undefined = (typeof p === 'string') ? p : p?.id;
+    const playerSpace : PlayerId | Player | undefined = space.player;
+    const playerId: PlayerId | undefined =
+        (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
+    const player = players.find((p) => p.id === playerId);
     return {
       id: space.id,
       spaceType: space.spaceType,
       tile: space.tile,
-      player: players.find((p) => p.id === playerId),
+      player: player,
       bonus: space.bonus,
       adjacency: space.adjacency,
       x: space.x,

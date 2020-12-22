@@ -5,7 +5,7 @@ export class EmptyBoard extends Board {
   constructor() {
     super();
 
-    const builder = new BoardBuilder(0);
+    const builder = new BoardBuilder(0, false);
 
     // y=0
     builder.land().land().land().land().land();

@@ -8,10 +8,10 @@ import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 
 export class HellasBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  constructor(shuffleMapOption: boolean, seed: number, includeVenus: boolean) {
     super();
 
-    const builder = new BoardBuilder(seed);
+    const builder = new BoardBuilder(seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

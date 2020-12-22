@@ -10,7 +10,7 @@ describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
-    board = new OriginalBoard();
+    board = new OriginalBoard(false, 0, false);
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
   });

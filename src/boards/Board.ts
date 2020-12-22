@@ -2,41 +2,8 @@ import {ISpace} from '../ISpace';
 import {Player} from '../Player';
 import {SpaceType} from '../SpaceType';
 import {SpaceName} from '../SpaceName';
-import {SpaceBonus} from '../SpaceBonus';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
-
-export abstract class Space implements ISpace {
-  constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
-
-  }
-}
-
-export class BoardColony extends Space {
-  constructor(id: string) {
-    super(id, SpaceType.COLONY, [], -1, -1);
-  }
-}
-
-export class Land extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
-    if (id < 10) {
-      str_id = '0'+str_id;
-    }
-    super(str_id, SpaceType.LAND, bonus, x, y);
-  }
-}
-
-export class Ocean extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
-    if (id < 10) {
-      str_id = '0'+str_id;
-    }
-    super(str_id, SpaceType.OCEAN, bonus, x, y);
-  }
-}
 
 export abstract class Board {
   public spaces: Array<ISpace> = [];
@@ -202,7 +169,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space !== undefined && space.tile === undefined && space instanceof Land;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND;
   }
 
   public getForestSpace(spaces: Array<ISpace>): ISpace {

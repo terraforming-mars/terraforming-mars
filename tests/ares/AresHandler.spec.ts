@@ -328,7 +328,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = new OriginalBoard();
+    game.board = new OriginalBoard(false, 0, false);
     const space = game.board.getSpaces(SpaceType.OCEAN).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

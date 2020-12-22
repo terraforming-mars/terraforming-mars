@@ -4,7 +4,7 @@ import {SpaceType} from '../../src/SpaceType';
 
 describe('OriginalBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {
-    const board = new OriginalBoard();
+    const board = new OriginalBoard(false, 0, false);
     expect(function() {
       board.getAdjacentSpaces({
         x: -1,
@@ -25,7 +25,7 @@ describe('OriginalBoard', function() {
     }).to.throw('Unexpected space y value');
   });
   it('has error while calling getForestSpace', function() {
-    const board = new OriginalBoard();
+    const board = new OriginalBoard(false, 0, false);
     expect(function() {
       board.getForestSpace([]);
     }).to.throw('Did not find space for forest');

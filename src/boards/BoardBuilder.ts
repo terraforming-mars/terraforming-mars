@@ -1,8 +1,8 @@
-import {Ocean, Land, BoardColony} from './Board';
 import {ISpace} from '../ISpace';
 import {Random} from '../Random';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
+import {SpaceType} from '../SpaceType';
 
 export class BoardBuilder {
     private rng: Random;
@@ -19,7 +19,7 @@ export class BoardBuilder {
     private spaces: Array<ISpace> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(seed: number) {
+    constructor(seed: number, private includeVenus: boolean) {
       this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
       this.rng = new Random(seed);
@@ -42,6 +42,7 @@ export class BoardBuilder {
       return this;
     }
 
+
     build(): Array<ISpace> {
       const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
       const idOffset = this.spaces.length + 1;
@@ -58,6 +59,14 @@ export class BoardBuilder {
       }
 
       this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
+      if (this.includeVenus) {
+        this.spaces.push(
+          new BoardColony(SpaceName.DAWN_CITY),
+          new BoardColony(SpaceName.LUNA_METROPOLIS),
+          new BoardColony(SpaceName.MAXWELL_BASE),
+          new BoardColony(SpaceName.STRATOPOLIS),
+        );
+      }
 
       return this.spaces;
     }
@@ -106,4 +115,36 @@ export class BoardBuilder {
         return new Land(idx, pos_x, pos_y, bonus);
       }
     }
+}
+
+abstract class Space implements ISpace {
+  constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+
+  }
+}
+
+class BoardColony extends Space {
+  constructor(id: string) {
+    super(id, SpaceType.COLONY, [], -1, -1);
+  }
+}
+
+class Land extends Space {
+  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    let str_id = id.toString();
+    if (id < 10) {
+      str_id = '0'+str_id;
+    }
+    super(str_id, SpaceType.LAND, bonus, x, y);
+  }
+}
+
+class Ocean extends Space {
+  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    let str_id = id.toString();
+    if (id < 10) {
+      str_id = '0'+str_id;
+    }
+    super(str_id, SpaceType.OCEAN, bonus, x, y);
+  }
 }

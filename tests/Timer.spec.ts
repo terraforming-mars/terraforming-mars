@@ -24,13 +24,13 @@ describe('Timer', function() {
     let callCount = 0;
     const originalNow = Date.now;
     const start = originalNow();
-    Date.now = function () {
+    Date.now = function() {
       callCount++;
       if (callCount === 1) {
         return start;
       }
       return start + 1000;
-    }
+    };
     timer.stop();
     timer.start();
     expect(Timer.toString(timer.serialize())).eq('00:00:01');

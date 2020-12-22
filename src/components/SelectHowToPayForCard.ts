@@ -14,6 +14,7 @@ interface SelectHowToPayForCardModel {
     microbes: number;
     floaters: number;
     warning: string | undefined;
+    cardWarning: string | undefined;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -70,6 +71,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
       microbes: 0,
       floaters: 0,
       warning: undefined,
+      cardWarning: undefined,
     } as SelectHowToPayForCardModel;
   },
   components: {
@@ -270,6 +272,19 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     hasWarning: function() {
       return this.warning !== undefined;
     },
+    hasCardWarning: function() {
+      if (this.playerinput === undefined || this.playerinput.cards === undefined) {
+        return false;
+      }
+      const card = this.playerinput.cards.find((c) => c.name === this.card);
+      if (card !== undefined && card.warning !== undefined) {
+        this.cardWarning = card.warning;
+        return true;
+      } else {
+        this.cardWarning = undefined;
+        return false;
+      }
+    },
     saveData: function() {
       const htp: HowToPay = {
         heat: this.heat,
@@ -372,6 +387,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   </label>
 
   <section v-trim-whitespace>
+    <div v-if="hasCardWarning()" class="card-warning">{{ cardWarning }}</div>
 
     <h3 class="payments_title">How to pay?</h3>
 
@@ -432,4 +448,3 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   </section>
 </div>`,
 });
-

@@ -217,6 +217,7 @@ function getCardsAsCardModel(
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
       isDisabled: false,
+      warning: card.warning,
     });
   });
 

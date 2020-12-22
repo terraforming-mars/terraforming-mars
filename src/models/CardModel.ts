@@ -8,4 +8,5 @@ export interface CardModel {
     calculatedCost: number;
     cardType: CardType;
     isDisabled: boolean;
+    warning?: string;
 }

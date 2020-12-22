@@ -147,7 +147,7 @@ checkComponent(
 checkComponent(
     'src/components/SelectHowToPayForCard',
     require('./build/src/components/SelectHowToPayForCard').SelectHowToPayForCard,
-    ['card', 'cards', 'cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
+    ['card', 'cards', 'cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning', 'cardWarning'],
 );
 checkComponent(
     'src/components/SelectOption',

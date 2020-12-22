@@ -46,4 +46,5 @@ export interface ICard {
     cost?: number;
     cardType: CardType;
     metadata?: CardMetadata;
+    warning?: string;
 }

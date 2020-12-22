@@ -1,6 +1,7 @@
 import {IDatabase} from './IDatabase';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
+import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
 const path = require('path');
@@ -42,7 +43,7 @@ export class SQLite implements IDatabase {
 
   getGames(cb: (err: any, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\' and save_id > 0';
+    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
     this.db.all(sql, [], (err, rows) => {
       if (rows) {
         rows.forEach((row) => {
@@ -80,19 +81,13 @@ export class SQLite implements IDatabase {
     return;
   }
 
-  restoreGameLastSave(game_id: GameId, game: Game, cb: (err: any) => void) {
+  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {
         return cb(err);
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(row.game);
-
-      // Rebuild each objects
-      game.loadFromJSON(gameToRestore);
-
-      return cb(err);
+      cb(undefined, JSON.parse(row.game));
     });
   }
 

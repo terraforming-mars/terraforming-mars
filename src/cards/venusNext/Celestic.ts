@@ -1,4 +1,3 @@
-
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
@@ -10,6 +9,9 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name = CardName.CELESTIC;
@@ -91,5 +93,21 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
           return undefined;
         },
       );
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R05',
+      description: 'You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(42).nbsp.cards(2).secondaryTag('floater');
+        b.corpBox('action', (ce) => {
+          ce.effectBox((eb) => {
+            eb.empty().startAction.floaters(1).asterix();
+            eb.description('Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.');
+          });
+          ce.vSpace(); // to offset the description to the top a bit so it can be readable
+        });
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),
     }
 }

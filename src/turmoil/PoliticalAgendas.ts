@@ -83,13 +83,14 @@ export class PoliticalAgendas {
   static setNextAgenda(turmoil: Turmoil, game: Game): void {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
-    const nextAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, turmoil.chairman);
+    const chairman: string = turmoil.chairman as string;
+    const nextAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, chairman);
     if (nextAgenda !== undefined) {
       politicalAgendasData.currentAgenda = nextAgenda;
       turmoil.onAgendaSelected(game);
     } else {
       // Only called when player !== neutral and agenda style === chairman
-      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(turmoil.chairman), rulingParty, game, turmoil));
+      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, game, turmoil));
     }
   }
 

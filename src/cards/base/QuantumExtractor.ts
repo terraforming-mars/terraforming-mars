@@ -35,7 +35,7 @@ export class QuantumExtractor implements IProjectCard {
           eb.space().played.startEffect.megacredits(-2);
           eb.description('Effect: When you play a Space card, you pay 2 MC less for it.');
         }).br;
-        b.productionBox((pb) => pb.energy(4));
+        b.productionBox((pb) => pb.energy(4).digit);
       }),
       description: 'Requires 4 science tags. Increase your energy production 4 steps.',
     }

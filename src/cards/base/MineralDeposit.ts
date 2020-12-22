@@ -19,7 +19,7 @@ export class MineralDeposit implements IProjectCard {
 
     public metadata: CardMetadata = {
       cardNumber: '062',
-      renderData: CardRenderer.builder((b) => b.steel(5)),
+      renderData: CardRenderer.builder((b) => b.steel(5).digit),
       description: 'Gain 5 steel.',
     }
 }

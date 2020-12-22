@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {Color} from '../Color';
-import {BoardName} from '../BoardName';
+import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
 import {translateMessage} from '../directives/i18n';
@@ -48,6 +48,7 @@ export interface CreateGameModel {
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     undoOption: boolean;
+    showTimers: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
     includeVenusMA: boolean;
@@ -115,6 +116,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       undoOption: false,
+      showTimers: false,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
@@ -377,6 +379,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = component.politicalAgendasExtension;
       const undoOption = component.undoOption;
+      const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
@@ -434,6 +437,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         undoOption,
+        showTimers,
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
@@ -628,6 +632,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="showTimers" id="timer-checkbox">
+                            <label for="timer-checkbox">
+                                <span v-i18n>Show timers</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">

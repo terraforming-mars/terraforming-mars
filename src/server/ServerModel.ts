@@ -108,6 +108,7 @@ export class Server {
       colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
@@ -126,6 +127,7 @@ export class Server {
       aresData: game.aresData,
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
+      timer: player.timer.serialize(),
     };
   }
 }
@@ -393,6 +395,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(
         player.getActionsThisGeneration(),
       ),
@@ -407,6 +410,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       actionsTakenThisRound: player.actionsTakenThisRound,
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
+      timer: player.timer.serialize(),
     } as PlayerModel;
   });
 }

@@ -34,5 +34,8 @@ export enum GlobalEventName {
     SOLAR_FLARE = 'Solar Flare',
     VENUS_INFRASTRUCTURE = 'Venus Infrastructure',
     CLOUD_SOCIETIES = 'Cloud Societies',
-    MICROGRAVITY_HEALTH_PROBLEMS = 'Microgravity Health Problems'
+    MICROGRAVITY_HEALTH_PROBLEMS = 'Microgravity Health Problems',
+
+    // Community
+    LEADERSHIP_SUMMIT = 'Leadership Summit',
 }

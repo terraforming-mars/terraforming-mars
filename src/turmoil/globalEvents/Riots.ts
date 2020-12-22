@@ -4,7 +4,7 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 
 export class Riots implements IGlobalEvent {
     public name = GlobalEventName.RIOTS;

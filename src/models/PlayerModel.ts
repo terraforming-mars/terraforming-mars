@@ -14,6 +14,7 @@ import {RandomMAOptionType} from '../RandomMAOptionType';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+import {SerializedTimer} from '../SerializedTimer';
 
 export interface PlayerModel {
     aresExtension: boolean;
@@ -70,6 +71,7 @@ export interface PlayerModel {
     victoryPointsBreakdown: VictoryPointsBreakdown;
     tags: Array<ITagCount>;
     showOtherPlayersVP: boolean;
+    showTimers: boolean;
     actionsThisGeneration: Array<string>;
     fleetSize: number;
     tradesThisTurn: number;
@@ -84,4 +86,5 @@ export interface PlayerModel {
     deckSize: number;
     preludeExtension: boolean;
     waitingFor: PlayerInputModel | undefined;
+    timer: SerializedTimer;
 }

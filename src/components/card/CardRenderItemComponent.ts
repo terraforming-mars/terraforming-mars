@@ -76,6 +76,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+      } else if (type === CardRenderItemType.PRESERVATION) {
+        classes.push('card-resource');
+        classes.push('card-resource-preservation');
       } else if (type === CardRenderItemType.FIGHTER) {
         classes.push('card-resource');
         classes.push('card-resource-fighter');
@@ -207,7 +210,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
 
       if (this.item.secondaryTag !== undefined && this.item.secondaryTag !== 'oxygen') {
         const classes: string[] = ['card-icon'];
-        classes.push(`tag-${this.item.secondaryTag}`);
+        classes.push(`card-tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {
@@ -223,6 +226,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       }
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
+      }
+      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
+        result = '<span class="card-place-colony">colony</span>';
       }
 
       return result;

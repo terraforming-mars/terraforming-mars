@@ -96,9 +96,9 @@ export class BoardRandomizer {
     }
 
     // create adjacentSpaceMap contain connection edge for each id
-    //  0 1 2
-    // 3 4 5 6
-    //  7 8 9
+    //   0 1 2
+    //  3 4 5 6
+    //   7 8 9
     // adjacentSpaceMap[3]=[0,4,7]
     // adjacentSpaceMap[1]=[0,2,4,5]
     // adjacentSpaceMap[4]=[0,1,3,5,7,8]
@@ -108,19 +108,35 @@ export class BoardRandomizer {
         const tilesInThisRow = TILES_PER_ROW[row];
         for (let i = 0; i < tilesInThisRow; i++) {
           const adjIds: Array<number> = [];
+          if (row > 0) {
+            if (tilesInThisRow === TILES_PER_ROW[row - 1] + 1) {
+              //   0 1 2
+              //* 3 4 5 6
+              if (i > 0) adjIds.push(idx - tilesInThisRow); // upleft for 4,5,6
+              if (i < tilesInThisRow - 1) adjIds.push(idx - TILES_PER_ROW[row - 1]); // upright for 3,4,5
+            }
+            if (tilesInThisRow === TILES_PER_ROW[row - 1] - 1) {
+              //  3 4 5 6
+              //*  7 8 9
+              adjIds.push(idx - TILES_PER_ROW[row - 1]); // upleft for 7,8,9
+              adjIds.push(idx - tilesInThisRow); // upright for 7,8,9
+            }
+          }
           if (i > 0) adjIds.push(idx - 1); // left
           if (i + 1 < tilesInThisRow) adjIds.push(idx + 1); // right
-          if (row > 0) {
-            const minOffset = Math.min(tilesInThisRow, TILES_PER_ROW[row - 1]);
-            const maxOffset = Math.max(tilesInThisRow, TILES_PER_ROW[row - 1]);
-            if (i - minOffset < 0) adjIds.push(idx - minOffset); // upright
-            if (i - maxOffset + TILES_PER_ROW[row - 1] >= 0) adjIds.push(idx - maxOffset); // upleft
-          }
           if (row + 1 < TILES_PER_ROW.length) {
-            const minOffset = Math.min(tilesInThisRow, TILES_PER_ROW[row + 1]);
-            const maxOffset = Math.max(tilesInThisRow, TILES_PER_ROW[row + 1]);
-            if (i + minOffset >= tilesInThisRow) adjIds.push(idx + minOffset); // downleft
-            if (i + maxOffset < minOffset + maxOffset) adjIds.push(idx + maxOffset); // downright
+            if (tilesInThisRow === TILES_PER_ROW[row + 1] + 1) {
+              //* 3 4 5 6
+              //   7 8 9
+              if (i > 0) adjIds.push(idx + TILES_PER_ROW[row + 1]); // downleft for 4,5,6
+              if (i < tilesInThisRow - 1) adjIds.push(idx + tilesInThisRow); // downright for 3,4,5
+            }
+            if (tilesInThisRow === TILES_PER_ROW[row + 1] - 1) {
+              //*  0 1 2
+              //  3 4 5 6
+              adjIds.push(idx + tilesInThisRow); // downleft for 0,1,2
+              adjIds.push(idx + TILES_PER_ROW[row + 1]); // downright for 0,1,2
+            }
           }
           this.adjacentSpaceMap.set(idx, adjIds);
           idx++;

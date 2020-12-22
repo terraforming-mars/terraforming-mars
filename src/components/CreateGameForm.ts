@@ -607,14 +607,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div>
                                 <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('limited')" id="limitedRandomBoard-radio">
                                 <label class="label-randomBoardOption" for="limitedRandomBoard-radio">
-                                    <span v-i18n>'limited'</span>
+                                    <span v-i18n>Limited</span>
                                 </label>
                                 </div>
 
                                 <div>
                                 <input type="radio" name="randomBoardOption" v-model="randomBoardOption" :value="getRandomBoardOptionType('unlimited')" id="unlimitedRandomBoard-radio">
                                 <label class="label-randomBoardOption" for="unlimitedRandomBoard-radio">
-                                    <span v-i18n>'unlimited'</span>
+                                    <span v-i18n>Unlimited</span>
                                 </label>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "compression-webpack-plugin": "^6.0.3",
+    "console-stamp": "3.0.0-rc4.2",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
     "eslint": "^6.6.0",

@@ -114,34 +114,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-    [CardName.MANUTECH, ` 
-      
-      
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="production-box">
-          <div class="production wild"></div>
-          </div> :
-          <div class="resource wild"></div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: For each step you increase the production of a resource, including this, you also gain that resource.)
-          </div>
-        </div>
-        <span class="manutech" style="font-size:30px;
-                        color: #e63900;
-                        text-shadow:  6px 3px 5px  grey;">
-                    <span style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH
-                </span><br>
-        <div class="production-box" style="margin-top:15px;margin-left:50px;">
-          <div class="production steel"></div>
-        </div>
-        <div class="resource money" style="margin-left:20px;">35</div>
-        <div class="description" style="text-align:center;">
-          (You start with 1 steel production, and 35 MC)
-        </div>
-      </div>
-`],
     [CardName.ROBINSON_INDUSTRIES, `
       
       
@@ -233,28 +205,6 @@ export const HTML_DATA: Map<string, string> =
               (You start with 45 MC. As your first action, fund an award for free.)
             </div>
         </div>
-`],
-    [CardName.ARIDOR, ` 
-      
-      <div class="contentCorporation">
-        <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
-          <span class="resource-tag" style="background:linear-gradient(to bottom right, green, yellow, red)">&nbsp;</span>&nbsp;:
-          <div class="production-box">
-            <div class="production money">1</div>
-          </div>
-          <div class="description" style="text-align:center;margin-top:0px;">
-            (When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.)
-          </div>
-        </div>
-        <div class="aridor">ARIDOR</div>
-        <div class="resource money" style="margin-left:20px;">40</div>
-        <span style="background:#444;color:#eee;padding:4px;padding-left: 8px;padding-right: 8px; border-radius:20px;font-weight:normal;margin-left:20px;
-        box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3); border:1px solid #eee;">COLONY</span>
-        <div class="description" style="text-align:center;margin-top:0px;">
-          (You start with 40MC. As your first action add a colony tile.)
-        </div>
-      </div>
 `],
     [CardName.MONS_INSURANCE, ` 
       
@@ -454,56 +404,6 @@ export const HTML_DATA: Map<string, string> =
                     (You start with 54 MC.)
                 </div>
             </div>
-`],
-    [CardName.FACTORUM, `
-          
-          <div class="contentCorporation">
-            <div class="corporationEffectBox">
-              <div class="corporationEffectBoxLabel">ACTION</div>
-
-              <div class="corporation-action-icons nowrap">
-                <div class="red-arrow"></div><div class="production-box">
-                  <div class="production energy"></div>
-                </div> * OR
-                <div class="resource money">3</div><div class="red-arrow"></div>
-                <div class="resource card"><div class="card-icon tag-building"></div></div>
-              </div>
-
-              <div class="description">
-                (Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.)
-              </div>
-            </div>
-
-            <div class="factorum">FACTORUM</div>
-            <div class="corporation-starts-with">
-              <div class="resource money">37</div>
-              <div class="production-box">
-                <div class="production steel"></div>
-              </div>
-            </div>
-            <div class="description">
-              (You start with 37 MC. Increase your steel production 1 step.)
-            </div>
-          </div>
-          `],
-    [CardName.ASTRODRILL, `
-      
-      <div class="contentCorporation">
-        <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
-          <div class="corporationEffectBoxLabel" >ACTION</div>
-          <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource wild"></div> OR <br>
-          <div class="asteroid resource"></div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
-          <div class="description" style="text-align:center;">
-            (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)
-          </div><br>
-        </div>
-        <div class="astrodrill">Astrodrill</div>
-        <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
-        3 <div class="asteroid resource"></div>
-        <div class="description" style="text-align:center">
-          (You start with 38 MC and 3 asteroid resources.)
-        </div>
-      </div>
 `],
     [CardName.PHARMACY_UNION, `
     

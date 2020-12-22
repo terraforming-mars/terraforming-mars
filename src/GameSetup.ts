@@ -18,7 +18,7 @@ export class GameSetup {
     } as IDrawnMilestonesAndAwards;
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-    const requiredQty = includeVenus ? 5 : 6;
+    const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {
     case RandomMAOptionType.NONE:

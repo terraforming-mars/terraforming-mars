@@ -61,7 +61,9 @@ export class Dealer implements ISerializable<SerializedDealer> {
       function addToDecks(manifest: CardManifest) {
         addToDeck(dealer.deck, manifest.projectCards);
         addToDeck(dealer.corporationCards, manifest.corporationCards);
-        addToDeck(dealer.preludeDeck, manifest.preludeCards);
+        if (prelude) {
+          addToDeck(dealer.preludeDeck, manifest.preludeCards);
+        }
         projectCardsToRemove.push(...manifest.projectCardsToRemove);
       }
       addToDecks(BASE_CARD_MANIFEST);
@@ -94,9 +96,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       }
       const filteredDeck = dealer.deck.filter((card) => projectCardsToRemove.includes(card) === false);
       dealer.deck = dealer.shuffleCards(filteredDeck);
-      if (prelude) {
-        dealer.preludeDeck = dealer.shuffleCards(dealer.preludeDeck);
-      }
+      dealer.preludeDeck = dealer.shuffleCards(dealer.preludeDeck);
       return dealer;
     }
 

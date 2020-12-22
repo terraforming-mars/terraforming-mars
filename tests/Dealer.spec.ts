@@ -14,14 +14,13 @@ describe('Dealer', function() {
     expect(dealer2.getDeckSize()).to.eq(137);
   });
 
-  it.only('excludes expansion-specific preludes if those expansions are not selected ', function() {
+  it('excludes expansion-specific preludes if those expansions are not selected ', function() {
     const dealer = Dealer.newInstance(true, false, false, false, false, false, false, true);
     const preludeDeck = dealer.preludeDeck;
 
     const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
     turmoilPreludes.forEach((preludeName) => {
       const preludeCard = CardFinder.getProjectCardByName(preludeName)!;
-      console.log("checking for " + preludeCard.name);
       expect(preludeDeck.includes(preludeCard.name)).is.not.true;
     });
   });

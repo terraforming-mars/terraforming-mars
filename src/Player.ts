@@ -892,7 +892,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private doneWorldGovernmentTerraforming(game: Game): void {
-    game.deferredActions.runAllForPlayer(this.id, () => game.doneWorldGovernmentTerraforming());
+    game.deferredActions.runAll(() => game.doneWorldGovernmentTerraforming());
   }
 
   public worldGovernmentTerraforming(game: Game): void {

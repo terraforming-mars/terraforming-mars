@@ -51,7 +51,7 @@ export class BannedDelegate implements IProjectCard {
                   playerToRemove = selectedPlayer.id;
                 }
                 game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, game);
-                this.log(game, player, party);
+                this.log(game, player, party, selectedPlayer);
                 return undefined;
               });
               selectDelegate.buttonLabel = 'Remove delegate';
@@ -69,8 +69,12 @@ export class BannedDelegate implements IProjectCard {
         }
     }
 
-    private log(game: Game, player: Player, party: IParty) {
-      game.log('${0} removed a delegate from ${1}', (b) => b.player(player).party(party));
+    private log(game: Game, player: Player, party: IParty, selectedPlayer: Player | NeutralPlayer) {
+      if (selectedPlayer === 'NEUTRAL') {
+        game.log('${0} removed neutral delegate from ${1}', (b) => b.player(player).party(party));
+      } else {
+        game.log('${0} removed ${1}\'s delegate from ${2}', (b) => b.player(player).player(selectedPlayer).party(party));
+      }
     }
     public metadata: CardMetadata = {
       cardNumber: 'T02',

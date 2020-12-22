@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {SpaceType} from '../../SpaceType';
 import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';

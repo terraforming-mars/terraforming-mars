@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/Resources';
-import {ISpace} from '../src/ISpace';
+import {ISpace} from '../src/boards/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';

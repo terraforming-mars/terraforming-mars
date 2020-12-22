@@ -1,4 +1,4 @@
-import {ISpace} from '../ISpace';
+import {ISpace} from './ISpace';
 import {Random} from '../Random';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';

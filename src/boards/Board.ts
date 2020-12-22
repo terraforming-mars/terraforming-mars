@@ -1,4 +1,4 @@
-import {ISpace} from '../ISpace';
+import {ISpace} from './ISpace';
 import {Player} from '../Player';
 import {SpaceType} from '../SpaceType';
 import {SpaceName} from '../SpaceName';

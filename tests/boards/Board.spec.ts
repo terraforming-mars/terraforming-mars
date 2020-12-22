@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/TileType';
-import {ISpace} from '../../src/ISpace';
+import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestingUtils';
 

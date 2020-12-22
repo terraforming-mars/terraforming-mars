@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
 import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';

@@ -1,7 +1,7 @@
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from './DeferredAction';
 import {LogHelper} from '../components/LogHelper';
 

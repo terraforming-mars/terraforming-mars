@@ -2,7 +2,7 @@
 import {Message} from '../Message';
 import {OrOptions} from './OrOptions';
 import {PlayerInput} from '../PlayerInput';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 
 export class SelectSpace implements PlayerInput {

@@ -1,45 +1,13 @@
-import {ISpace} from '../ISpace';
-import {Player} from '../Player';
+import {ISpace} from './ISpace';
+import {Player, PlayerId} from '../Player';
 import {SpaceType} from '../SpaceType';
 import {SpaceName} from '../SpaceName';
-import {SpaceBonus} from '../SpaceBonus';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
-
-export abstract class Space implements ISpace {
-  constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
-
-  }
-}
-
-export class BoardColony extends Space {
-  constructor(id: string) {
-    super(id, SpaceType.COLONY, [], -1, -1);
-  }
-}
-
-export class Land extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
-    if (id < 10) {
-      str_id = '0'+str_id;
-    }
-    super(str_id, SpaceType.LAND, bonus, x, y);
-  }
-}
-
-export class Ocean extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
-    if (id < 10) {
-      str_id = '0'+str_id;
-    }
-    super(str_id, SpaceType.OCEAN, bonus, x, y);
-  }
-}
+import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
-  public spaces: Array<ISpace> = [];
+  public abstract spaces: Array<ISpace>;
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {
@@ -202,7 +170,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space !== undefined && space.tile === undefined && space instanceof Land;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND;
   }
 
   public getForestSpace(spaces: Array<ISpace>): ISpace {
@@ -221,5 +189,44 @@ export abstract class Board {
   public static isOceanSpace(space: ISpace): boolean {
     const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
     return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
+  }
+
+  public serialize(): SerializedBoard {
+    return {
+      spaces: this.spaces.map((space) => {
+        return {
+          id: space.id,
+          spaceType: space.spaceType,
+          tile: space.tile,
+          player: space.player?.id,
+          bonus: space.bonus,
+          adjacency: space.adjacency,
+          x: space.x,
+          y: space.y,
+        } as SerializedSpace;
+      }),
+    } as SerializedBoard;
+  }
+
+  public static deserializeSpace(space: SerializedSpace, players: Array<Player>): ISpace {
+    // TODO(kberg): Remove Player by 2021-01-15
+    const playerSpace : PlayerId | Player | undefined = space.player;
+    const playerId: PlayerId | undefined =
+        (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
+    const player = players.find((p) => p.id === playerId);
+    return {
+      id: space.id,
+      spaceType: space.spaceType,
+      tile: space.tile,
+      player: player,
+      bonus: space.bonus,
+      adjacency: space.adjacency,
+      x: space.x,
+      y: space.y,
+    } as ISpace;
+  }
+
+  public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {
+    return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }

@@ -2,16 +2,19 @@ import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
-import {ISpace} from '../ISpace';
+import {ISpace} from './ISpace';
 import {HELLAS_BONUS_OCEAN_COST} from '../constants';
 import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
+import {SerializedBoard} from './SerializedBoard';
 
 export class HellasBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  private constructor(public spaces: Array<ISpace>) {
     super();
+  }
 
-    const builder = new BoardBuilder(seed);
+  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): HellasBoard {
+    const builder = new BoardBuilder(seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -39,11 +42,16 @@ export class HellasBoard extends Board {
     // y=8
     builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
 
-    if (shuffleMapOption) {
+    if (shuffle) {
       builder.shuffle();
     }
 
-    this.spaces = builder.build();
+    const spaces = builder.build();
+    return new HellasBoard(spaces);
+  }
+
+  public static deserialize(board: SerializedBoard, players: Array<Player>): HellasBoard {
+    return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   private filterHellas(player: Player, spaces: Array<ISpace>) {

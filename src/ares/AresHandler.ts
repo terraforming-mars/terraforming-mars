@@ -3,7 +3,7 @@ import {ICard} from '../cards/ICard';
 import {LogHelper} from '../components/LogHelper';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {ResourceType} from '../ResourceType';

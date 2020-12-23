@@ -447,7 +447,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
       };
 
-      const game = new Game(gameId, players, firstPlayer, gameOptions);
+      const game = Game.newInstance(gameId, players, firstPlayer, gameOptions);
       GameLoader.getInstance().add(game);
       res.setHeader('Content-Type', 'application/json');
       res.write(getGameModelJSON(game));

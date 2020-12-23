@@ -9,7 +9,7 @@ describe('Arklight', function() {
     const card = new Arklight();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     const play = card.play(player);
     expect(play).is.undefined;
     expect(card.resourceCount).to.eq(1);

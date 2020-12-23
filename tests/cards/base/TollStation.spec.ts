@@ -9,7 +9,7 @@ describe('TollStation', function() {
     const card = new TollStation();
     const player = TestPlayers.BLUE.newPlayer();
     const anotherPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, anotherPlayer], player);
+    const game = Game.newInstance('foobar', [player, anotherPlayer], player);
     const action = card.play(player, game);
     expect(action).is.undefined;
     anotherPlayer.playedCards.push(card);

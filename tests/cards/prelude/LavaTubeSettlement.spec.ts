@@ -15,7 +15,7 @@ describe('LavaTubeSettlement', function() {
   beforeEach(function() {
     card = new LavaTubeSettlement();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     resetBoard(game);
   });
 

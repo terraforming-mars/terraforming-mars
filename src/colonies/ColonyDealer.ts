@@ -18,6 +18,7 @@ import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
+import {SerializedColony} from '../SerializedColony';
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
@@ -57,6 +58,24 @@ export function getColonyByName(colonyName: string): Colony | undefined {
     return new colonyFactory.Factory();
   }
   return undefined;
+}
+
+export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
+  const result: Array<Colony> = [];
+  for (const serialized of colonies) {
+    const colony = getColonyByName(serialized.name);
+    if (colony !== undefined) {
+      colony.isActive = serialized.isActive;
+      colony.visitor = serialized.visitor;
+      colony.trackPosition = serialized.trackPosition;
+      colony.colonies = serialized.colonies;
+      colony.resourceType = serialized.resourceType;
+      result.push(colony);
+    } else {
+      console.warn(`colony ${serialized.name} not found`);
+    }
+  }
+  return result;
 }
 
 export class ColonyDealer {

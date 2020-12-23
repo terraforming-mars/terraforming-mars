@@ -15,7 +15,7 @@ describe('AgricolaInc', function() {
     card = new AgricolaInc();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
 
     card.play(player);
     player.corporationCard = card;

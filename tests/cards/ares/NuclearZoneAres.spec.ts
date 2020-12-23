@@ -11,7 +11,7 @@ describe('NuclearZoneAres', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    const game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 
     const action = card.play(player, game);
     if (action !== undefined) {

@@ -11,7 +11,7 @@ describe('Aridor', function() {
     const card = new Aridor();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     const play = card.play();
     expect(play).is.undefined;
     player.corporationCard = card;

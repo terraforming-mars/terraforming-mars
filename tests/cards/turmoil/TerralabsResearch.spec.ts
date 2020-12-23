@@ -14,7 +14,7 @@ describe('TerralabsResearch', function() {
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([card2, card2]);

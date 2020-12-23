@@ -13,7 +13,7 @@ describe('PointLuna', function() {
   beforeEach(function() {
     card = new PointLuna();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 

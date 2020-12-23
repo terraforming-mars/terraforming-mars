@@ -11,7 +11,7 @@ describe('EcologyExperts', function() {
   beforeEach(function() {
     card = new EcologyExperts();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Gets requirement bonus', function() {

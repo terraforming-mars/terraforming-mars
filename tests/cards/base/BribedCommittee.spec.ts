@@ -8,7 +8,7 @@ describe('BribedCommittee', function() {
     const card = new BribedCommittee();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     card.play(player, game);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);

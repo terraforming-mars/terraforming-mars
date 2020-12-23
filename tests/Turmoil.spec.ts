@@ -32,7 +32,7 @@ describe('Turmoil', function() {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = new Game('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     resetBoard(game);
   });

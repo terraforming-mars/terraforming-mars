@@ -12,7 +12,7 @@ describe('GameLoader', function() {
   const originalGetInstance = (Database as any).getInstance;
   const player = TestPlayers.BLUE.newPlayer();
   const player2 = TestPlayers.RED.newPlayer();
-  const game = new Game('foobar', [player, player2], player);
+  const game = Game.newInstance('foobar', [player, player2], player);
   let playerIdIndex = 0;
 
   before(function() {
@@ -74,15 +74,15 @@ describe('GameLoader', function() {
 
   it('gets no game when fails to deserialize from database', function() {
     let actualGame1: Game | undefined = game;
-    const originalLoadFromJSON = Game.prototype.loadFromJSON;
-    Game.prototype.loadFromJSON = function() {
+    const originalDeserialize = Game.deserialize;
+    Game.deserialize = function() {
       throw 'could not parse this';
     };
     GameLoader.getInstance().getByGameId('foobar', false, (game1) => {
       actualGame1 = game1;
     });
     expect(actualGame1).is.undefined;
-    Game.prototype.loadFromJSON = originalLoadFromJSON;
+    Game.deserialize = originalDeserialize;
   });
 
   it('gets game when requested before database loaded', function(done) {

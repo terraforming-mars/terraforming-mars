@@ -10,7 +10,7 @@ describe('EarlySettlement', function() {
   it('Should play', function() {
     const card = new EarlySettlement();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
 
     card.play(player, game);
     const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;

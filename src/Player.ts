@@ -1982,8 +1982,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(game: Game): void {
-    this.howToAffordReds = undefined;
-
     if (this.usedUndo) {
       this.usedUndo = false;
       return;
@@ -1993,6 +1991,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       game.deferredActions.runAll(() => this.takeAction(game));
       return;
     }
+
+    this.howToAffordReds = undefined;
 
     const players = game.getPlayers();
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);

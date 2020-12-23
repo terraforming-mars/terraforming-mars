@@ -360,11 +360,6 @@ export class Game implements ISerializable<SerializedGame> {
     return game;
   }
 
-  // A placeholder for the real implementation, only used to simplify the transition by putting test refactoring in one place.
-  public static newInstance(gameId: GameId, players: Array<Player>, firstPlayer: Player, gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
-    return new Game(gameId, players, firstPlayer, gameOptions);
-  }
-
   public save(): void {
     /*
       * Because we save at the start of a player's takeAction, we need to

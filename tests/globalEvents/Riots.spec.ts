@@ -9,7 +9,7 @@ describe('Riots', function() {
   it('resolve play', function() {
     const card = new Riots();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);

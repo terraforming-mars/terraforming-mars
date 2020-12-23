@@ -13,7 +13,7 @@ describe('SaturnSystems', function() {
     card = new SaturnSystems();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -30,7 +30,7 @@ describe('SaturnSystems', function() {
 
   it('Runs onCardPlayed when other player plays card', function() {
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     player.corporationCard = card;
 
     card.onCardPlayed(player2, game, new MirandaResort());

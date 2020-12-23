@@ -12,7 +12,7 @@ describe('RobinsonIndustries', function() {
   beforeEach(function() {
     card = new RobinsonIndustries();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 

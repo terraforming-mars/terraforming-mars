@@ -9,7 +9,7 @@ describe('LunarExports', function() {
   it('Should play', function() {
     const card = new LunarExports();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const orOptions = card.play(player, game) as OrOptions;
 
     expect(orOptions).is.not.undefined;

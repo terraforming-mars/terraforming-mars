@@ -17,7 +17,7 @@ describe('TradeAdvance', function() {
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

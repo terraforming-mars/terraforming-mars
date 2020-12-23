@@ -35,7 +35,7 @@ describe('BioengineeringEnclosure', function() {
     card = new BioengineeringEnclosure();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can\'t play without a science tag', () => {

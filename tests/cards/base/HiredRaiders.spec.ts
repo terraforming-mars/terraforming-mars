@@ -12,7 +12,7 @@ describe('HiredRaiders', function() {
     card = new HiredRaiders();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -32,7 +32,7 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
 
     const action = card.play(player, game) as OrOptions;
     expect(action.options).has.lengthOf(2);

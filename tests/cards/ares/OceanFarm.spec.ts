@@ -16,7 +16,7 @@ describe('OceanFarm', function() {
     card = new OceanFarm();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can play', function() {

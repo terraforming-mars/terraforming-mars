@@ -8,7 +8,7 @@ describe('AcquiredSpaceAgency', function() {
   it('Should play', function() {
     const card = new AcquiredSpaceAgency();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);
 

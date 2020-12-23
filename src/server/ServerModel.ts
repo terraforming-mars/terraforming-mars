@@ -30,15 +30,12 @@ import {
 } from '../models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../models/FundedAwardModel';
 import {
-  PartyModel,
-  DelegatesModel,
-  TurmoilModel,
+  getTurmoil,
 } from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {PartyName} from '../turmoil/parties/PartyName';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -430,141 +427,6 @@ function getColonies(game: Game): Array<ColonyModel> {
             game.getPlayerById(colony.visitor).color,
     }),
   );
-}
-
-function getTurmoil(game: Game): TurmoilModel | undefined {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    const parties = getParties(game);
-    let chairman; let dominant; let ruling;
-    if (game.turmoil.chairman) {
-      if (game.turmoil.chairman === 'NEUTRAL') {
-        chairman = Color.NEUTRAL;
-      } else {
-        chairman = game.getPlayerById(game.turmoil.chairman).color;
-      }
-    }
-    if (game.turmoil.dominantParty) {
-      dominant = game.turmoil.dominantParty.name;
-    }
-    if (game.turmoil.rulingParty) {
-      ruling = game.turmoil.rulingParty.name;
-    }
-
-    const lobby = Array.from(
-      game.turmoil.lobby,
-      (player) => game.getPlayerById(player).color,
-    );
-
-    const reserve = game.turmoil.getPresentPlayers().map((player) => {
-      const number = game.turmoil!.getDelegates(player);
-      if (player !== 'NEUTRAL') {
-        return {
-          color: game.getPlayerById(player).color,
-          number: number,
-        };
-      } else {
-        return {color: Color.NEUTRAL, number: number};
-      }
-    });
-
-    let distant;
-    if (game.turmoil.distantGlobalEvent) {
-      distant = {
-        name: game.turmoil.distantGlobalEvent.name,
-        description: game.turmoil.distantGlobalEvent.description,
-        revealed: game.turmoil.distantGlobalEvent.revealedDelegate,
-        current: game.turmoil.distantGlobalEvent.currentDelegate,
-      };
-    }
-
-    let coming;
-    if (game.turmoil.comingGlobalEvent) {
-      coming = {
-        name: game.turmoil.comingGlobalEvent.name,
-        description: game.turmoil.comingGlobalEvent.description,
-        revealed: game.turmoil.comingGlobalEvent.revealedDelegate,
-        current: game.turmoil.comingGlobalEvent.currentDelegate,
-      };
-    }
-
-    let current;
-    if (game.turmoil.currentGlobalEvent) {
-      current = {
-        name: game.turmoil.currentGlobalEvent.name,
-        description: game.turmoil.currentGlobalEvent.description,
-        revealed: game.turmoil.currentGlobalEvent.revealedDelegate,
-        current: game.turmoil.currentGlobalEvent.currentDelegate,
-      };
-    }
-
-    const staticAgendas = game.turmoil.politicalAgendasData.staticAgendas;
-    let staticAgendasData;
-    if (staticAgendas) {
-      staticAgendasData = {
-        marsFirstPolicy: staticAgendas.get(PartyName.MARS)!.policyId,
-        marsFirstBonus: staticAgendas.get(PartyName.MARS)!.bonusId,
-        scientistsPolicy: staticAgendas.get(PartyName.SCIENTISTS)!.policyId,
-        scientistsBonus: staticAgendas.get(PartyName.SCIENTISTS)!.bonusId,
-        unityPolicy: staticAgendas.get(PartyName.UNITY)!.policyId,
-        unityBonus: staticAgendas.get(PartyName.UNITY)!.bonusId,
-        greensPolicy: staticAgendas.get(PartyName.GREENS)!.policyId,
-        greensBonus: staticAgendas.get(PartyName.GREENS)!.bonusId,
-        redsPolicy: staticAgendas.get(PartyName.REDS)!.policyId,
-        redsBonus: staticAgendas.get(PartyName.REDS)!.bonusId,
-        kelvinistsPolicy: staticAgendas.get(PartyName.KELVINISTS)!.policyId,
-        kelvinistsBonus: staticAgendas.get(PartyName.KELVINISTS)!.bonusId,
-      };
-    }
-
-    return {
-      chairman: chairman,
-      ruling: ruling,
-      dominant: dominant,
-      parties: parties,
-      lobby: lobby,
-      reserve: reserve,
-      distant: distant,
-      comming: coming,
-      current: current,
-      staticAgendas: staticAgendasData,
-    };
-  } else {
-    return undefined;
-  }
-}
-
-function getParties(game: Game): Array<PartyModel> {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
-      const delegates: Array<DelegatesModel> = [];
-      party.getPresentPlayers().forEach((player) => {
-        const number = party.getDelegates(player);
-        if (player !== 'NEUTRAL') {
-          delegates.push({
-            color: game.getPlayerById(player).color,
-            number: number,
-          });
-        } else {
-          delegates.push({color: Color.NEUTRAL, number: number});
-        }
-      });
-      let partyLeader;
-      if (party.partyLeader) {
-        if (party.partyLeader === 'NEUTRAL') {
-          partyLeader = Color.NEUTRAL;
-        } else {
-          partyLeader = game.getPlayerById(party.partyLeader).color;
-        }
-      }
-      return {
-        name: party.name,
-        description: party.description,
-        partyLeader: partyLeader,
-        delegates: delegates,
-      };
-    });
-  }
-  return [];
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

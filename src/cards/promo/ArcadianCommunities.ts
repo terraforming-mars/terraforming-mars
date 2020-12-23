@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';

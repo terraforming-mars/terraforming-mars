@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
-import {ISpace} from '../../src/ISpace';
+import {ISpace} from '../../src/boards/ISpace';
 import {setCustomGameOptions} from '../TestingUtils';
 import {AresHandler} from '../../src/ares/AresHandler';
 

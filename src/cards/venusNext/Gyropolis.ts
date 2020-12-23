@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';

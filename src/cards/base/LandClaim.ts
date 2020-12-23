@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {CardMetadata} from '../CardMetadata';

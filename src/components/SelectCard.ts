@@ -7,7 +7,8 @@ import {PlayerModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 
 interface SelectCardModel {
-    cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
+  cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
+  warning: string | undefined;
 }
 
 import {Card} from './card/Card';
@@ -35,6 +36,7 @@ export const SelectCard = Vue.component('select-card', {
   data: function() {
     return {
       cards: [],
+      warning: undefined,
     } as SelectCardModel;
   },
   components: {
@@ -62,6 +64,15 @@ export const SelectCard = Vue.component('select-card', {
     getTitle: function() {
       return $t(this.playerinput.title);
     },
+    hasCardWarning: function() {
+      if (Array.isArray(this.cards)) {
+        return false;
+      } else if (typeof this.cards === 'object' && this.cards.warning !== undefined) {
+        this.warning = this.cards.warning;
+        return true;
+      }
+      return false;
+    },
     isOptionalToManyCards: function(): boolean {
       return this.playerinput.maxCardsToSelect !== undefined &&
              this.playerinput.maxCardsToSelect > 1 &&
@@ -78,6 +89,7 @@ export const SelectCard = Vue.component('select-card', {
             <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />
             <Card :card="card" />
         </label>
+        <div v-if="hasCardWarning()" class="card-warning">{{ warning }}</div>
         <div v-if="showsave === true" class="nofloat">
             <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
             <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="'Skip this action'" />

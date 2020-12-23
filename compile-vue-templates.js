@@ -132,7 +132,7 @@ checkComponent(
 checkComponent(
     'src/components/SelectCard',
     require('./build/src/components/SelectCard').SelectCard,
-    ['cards'],
+    ['cards', 'warning'],
 );
 checkComponent(
     'src/components/SelectColony',

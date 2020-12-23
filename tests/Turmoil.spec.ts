@@ -102,6 +102,10 @@ describe('Turmoil', function() {
   });
 
   it('Correctly run end of generation', function() {
+    // Eliminate the flaky cases where the current global event sends delegates to
+    // parties, changing the dominant party outcome.
+    turmoil.parties.forEach((p) => p.delegates = []);
+
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);

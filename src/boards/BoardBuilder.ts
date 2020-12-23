@@ -118,7 +118,7 @@ export class BoardBuilder {
 }
 
 class Space implements ISpace {
-  constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+  private constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
   }
 
   static colony(id: string) {

@@ -49,7 +49,7 @@ describe('Colony', function() {
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
     player4 = TestPlayers.GREEN.newPlayer();
-    game = new Game('foobar', [player, player2, player3, player4], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2, player3, player4], player, gameOptions);
     game.colonies = [luna];
   });
 

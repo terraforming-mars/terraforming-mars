@@ -10,7 +10,7 @@ describe('SolarProbe', function() {
     const card2 = new Research();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     player.playedCards.push(card2);
     const action = card.play(player, game);
     expect(action).is.undefined;

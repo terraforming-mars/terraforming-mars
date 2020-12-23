@@ -12,7 +12,7 @@ describe('Election', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.GREEN.newPlayer();
-    const game = new Game('foobar', [player, player2, player3], player);
+    const game = Game.newInstance('foobar', [player, player2, player3], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new StripMine());

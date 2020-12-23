@@ -13,7 +13,7 @@ describe('Birds', function() {
     card = new Birds();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Cannot play without oxygen', function() {
@@ -22,7 +22,7 @@ describe('Birds', function() {
 
   it('Should play', function() {
     const player3 = TestPlayers.GREEN.newPlayer();
-    const game = new Game('foobar', [player, player2, player3], player);
+    const game = Game.newInstance('foobar', [player, player2, player3], player);
 
     player2.addProduction(Resources.PLANTS, 2);
     player3.addProduction(Resources.PLANTS, 7);

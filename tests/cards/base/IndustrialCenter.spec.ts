@@ -13,7 +13,7 @@ describe('IndustrialCenter', function() {
     card = new IndustrialCenter();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play or act', function() {

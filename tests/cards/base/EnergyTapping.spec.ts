@@ -13,7 +13,7 @@ describe('EnergyTapping', function() {
     card = new EnergyTapping();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play - auto select if single target', function() {
@@ -38,7 +38,7 @@ describe('EnergyTapping', function() {
   });
 
   it('Playable in solo mode', function() {
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     card.play(player, game);
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

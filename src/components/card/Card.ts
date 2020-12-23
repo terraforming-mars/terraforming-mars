@@ -75,7 +75,7 @@ export const Card = Vue.component('card', {
       required: true,
     },
     'actionUsed': {
-      type: Function,
+      type: Boolean,
     },
   },
   methods: {
@@ -113,11 +113,14 @@ export const Card = Vue.component('card', {
       return this.getCardMetadata()?.cardNumber;
     },
     getCardClasses: function(card: CardModel): string {
-      const classes = ['card-container', 'filterDiv'];
+      const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
       if (this.actionUsed) {
         classes.push('cards-action-was-used');
+      }
+      if (this.isCorporationCard()) {
+        classes.push('card-corp');
       }
       return classes.join(' ');
     },
@@ -139,11 +142,11 @@ export const Card = Vue.component('card', {
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()"/>
+                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :isCorporation="isCorporationCard()"/>
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()" />
                 <div v-else class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
-            <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />
+            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

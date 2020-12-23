@@ -8,6 +8,8 @@ import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SulphurExports implements IProjectCard {
     public cost = 21;
@@ -30,4 +32,13 @@ export class SulphurExports implements IProjectCard {
       game.increaseVenusScaleLevel(player, 1);
       return undefined;
     }
+
+    public metadata: CardMetadata = {
+      cardNumber: '250',
+      renderData: CardRenderer.builder((b) => {
+        b.venus(1).br;
+        b.productionBox((pb) => pb.megacredits(1).slash().venus(1).played);
+      }),
+      description: 'Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.',
+    };
 }

@@ -1,17 +1,16 @@
 import {expect} from 'chai';
+import {EosChasmaNationalPark} from '../../../src/cards/base/EOSChasmaNationalPark';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Predators} from '../../../src/cards/base/Predators';
 import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Fish} from '../../../src/cards/Fish';
-import {Predators} from '../../../src/cards/Predators';
 import {Game} from '../../../src/Game';
-import {EosChasmaNationalPark} from '../../../src/cards/EOSChasmaNationalPark';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MeatIndustry', function() {
   it('Gives 2 MC whenever player gains an animal', function() {
     const card = new MeatIndustry();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     player.playedCards.push(card);
 

@@ -1,9 +1,8 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
-import {resetBoard} from '../../TestingUtils';
+import {resetBoard, TestPlayers} from '../../TestingUtils';
 import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
@@ -13,8 +12,9 @@ describe('LavaFlowsAres', function() {
 
   beforeEach(function() {
     card = new LavaFlowsAres();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     resetBoard(game);
   });
 

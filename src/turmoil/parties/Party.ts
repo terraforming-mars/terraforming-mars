@@ -1,24 +1,25 @@
 import {Player, PlayerId} from '../../Player';
 import {Game} from '../../Game';
+import {NeutralPlayer} from '../Turmoil';
 
 export abstract class Party {
-    public partyLeader: undefined | PlayerId | 'NEUTRAL' = undefined;
-    public delegates: Array<PlayerId|'NEUTRAL'> = [];
+    public partyLeader: undefined | PlayerId | NeutralPlayer = undefined;
+    public delegates: Array<PlayerId | NeutralPlayer> = [];
 
     // Send a delegate in the area
-    public sendDelegate(playerId: PlayerId | 'NEUTRAL', game: Game): void {
+    public sendDelegate(playerId: PlayerId | NeutralPlayer, game: Game): void {
       this.delegates.push(playerId);
       this.checkPartyLeader(playerId, game);
     }
 
     // Remove a delegate from the area
-    public removeDelegate(playerId: PlayerId | 'NEUTRAL', game: Game): void {
+    public removeDelegate(playerId: PlayerId | NeutralPlayer, game: Game): void {
       this.delegates.splice(this.delegates.indexOf(playerId), 1);
       this.checkPartyLeader(playerId, game);
     }
 
     // Check if you are the new party leader
-    public checkPartyLeader(newPlayer: PlayerId | 'NEUTRAL', game: Game): void {
+    public checkPartyLeader(newPlayer: PlayerId | NeutralPlayer, game: Game): void {
       // If there is a party leader
       if (this.partyLeader) {
         if (game) {
@@ -35,7 +36,7 @@ export abstract class Party {
               currentIndex = game.getPlayers().indexOf(game.getPlayerById(this.partyLeader));
             }
 
-            let playersToCheck: Array<Player | 'NEUTRAL'> = [];
+            let playersToCheck: Array<Player | NeutralPlayer> = [];
 
             // Manage if it's the first player or the last
             if (game.getPlayers().length === 1 || currentIndex === 0) {
@@ -73,12 +74,12 @@ export abstract class Party {
     }
 
     // List players present in this party
-    public getPresentPlayers(): Array<PlayerId | 'NEUTRAL'> {
+    public getPresentPlayers(): Array<PlayerId | NeutralPlayer> {
       return Array.from(new Set(this.delegates));
     }
 
     // Return number of delegate
-    public getDelegates(player: PlayerId | 'NEUTRAL'): number {
+    public getDelegates(player: PlayerId | NeutralPlayer): number {
       const delegates = this.delegates.filter((p) => p === player).length;
       return delegates;
     }

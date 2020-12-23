@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
-import {Game} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TradeAdvance', function() {
   let card : TradeAdvance; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new TradeAdvance();
-    player = new Player('test', Color.BLUE, false);
-
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

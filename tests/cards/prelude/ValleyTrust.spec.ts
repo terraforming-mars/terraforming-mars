@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/Ants';
-import {Color} from '../../../src/Color';
-import {Game} from '../../../src/Game';
-import {MedicalLab} from '../../../src/cards/MedicalLab';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/cards/base/Ants';
+import {MedicalLab} from '../../../src/cards/base/MedicalLab';
+import {Research} from '../../../src/cards/base/Research';
 import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
-import {Research} from '../../../src/cards/Research';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('ValleyTrust', function() {
   let card : ValleyTrust; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ValleyTrust();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
   });
 

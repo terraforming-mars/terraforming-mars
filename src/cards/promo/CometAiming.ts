@@ -14,6 +14,8 @@ import {LogHelper} from '../../components/LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.COMET_AIMING;
@@ -96,5 +98,19 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       }
 
       return new OrOptions(...availableActions);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X15',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.titanium(1).startAction.asteroids(1).asterix();
+          eb.description('Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.asteroids(1).startAction.oceans(1);
+          eb.description('Action: Remove 1 asteroid here to place an ocean.');
+        });
+      }),
     }
 }

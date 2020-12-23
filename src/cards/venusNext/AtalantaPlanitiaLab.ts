@@ -27,7 +27,7 @@ export class AtalantaPlanitiaLab implements IProjectCard {
   }
   public metadata: CardMetadata = {
     cardNumber: '216',
-    description: 'Requires 3 science tags. Draw 2 cards',
+    description: 'Requires 3 science tags. Draw 2 cards.',
     requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
     renderData: CardRenderer.builder((b) => b.cards(2)),
     victoryPoints: 2,

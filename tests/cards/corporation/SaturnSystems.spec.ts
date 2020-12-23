@@ -1,18 +1,19 @@
 import {expect} from 'chai';
+import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {MirandaResort} from '../../../src/cards/MirandaResort';
+import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SaturnSystems', function() {
   let card : SaturnSystems; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SaturnSystems();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -28,7 +29,7 @@ describe('SaturnSystems', function() {
   });
 
   it('Runs onCardPlayed when other player plays card', function() {
-    const player2 = new Player('test', Color.RED, false);
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     player.corporationCard = card;
 

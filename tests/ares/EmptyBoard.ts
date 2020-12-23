@@ -1,11 +1,13 @@
-import {Board} from '../../src/Board';
-import {BoardBuilder} from '../../src/BoardBuilder';
+import {Board} from '../../src/boards/Board';
+import {BoardBuilder} from '../../src/boards/BoardBuilder';
+import {ISpace} from '../../src/boards/ISpace';
 
 export class EmptyBoard extends Board {
+  public spaces: Array<ISpace>;
   constructor() {
     super();
 
-    const builder = new BoardBuilder(0);
+    const builder = new BoardBuilder(0, false);
 
     // y=0
     builder.land().land().land().land().land();

@@ -2,7 +2,7 @@ import {Game} from '../Game';
 import * as constants from '../constants';
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {SpaceType} from '../SpaceType';
 import {DeferredAction} from './DeferredAction';
 

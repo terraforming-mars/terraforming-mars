@@ -1,8 +1,7 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/Ants';
+import {Ants} from '../../../src/cards/base/Ants';
 import {GeologicalSurvey} from '../../../src/cards/ares/GeologicalSurvey';
-import {Pets} from '../../../src/cards/Pets';
-import {Color} from '../../../src/Color';
+import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/SpaceBonus';
@@ -10,14 +9,16 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('GeologicalSurvey', function() {
   let card : GeologicalSurvey; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new GeologicalSurvey();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 

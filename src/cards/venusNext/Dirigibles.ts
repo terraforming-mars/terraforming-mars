@@ -8,7 +8,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {LogHelper} from '../../components/LogHelper';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 11;
@@ -43,5 +44,18 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
           return undefined;
         },
       );
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '222',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.floaters(1).asterix();
+          eb.description('Action: add 1 Floater to ANY card');
+        }).br;
+        b.effectBox((eb) => {
+          eb.venus(1).played.startEffect.floaters(1).equals().megacredits(3);
+          eb.description('Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.');
+        });
+      }),
     }
 }

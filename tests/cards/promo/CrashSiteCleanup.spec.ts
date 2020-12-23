@@ -1,18 +1,19 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {CrashSiteCleanup} from '../../../src/cards/promo/CrashSiteCleanup';
 import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('CrashSiteCleanup', function() {
   let card : CrashSiteCleanup; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -20,7 +21,7 @@ describe('CrashSiteCleanup', function() {
   });
 
   it('Can play if removed plants from another player this generation', function() {
-    const player2 = new Player('test', Color.RED, false);
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
     player2.plants = 1;
 

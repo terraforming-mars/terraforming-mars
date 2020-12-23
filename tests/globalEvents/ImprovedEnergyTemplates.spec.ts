@@ -1,20 +1,19 @@
 import {expect} from 'chai';
-import {ImprovedEnergyTemplates} from '../../src/turmoil/globalEvents/ImprovedEnergyTemplates';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
+import {SolarWindPower} from '../../src/cards/base/SolarWindPower';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Resources} from '../../src/Resources';
+import {ImprovedEnergyTemplates} from '../../src/turmoil/globalEvents/ImprovedEnergyTemplates';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {SolarWindPower} from '../../src/cards/SolarWindPower';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('ImprovedEnergyTemplates', function() {
   it('resolve play', function() {
     const card = new ImprovedEnergyTemplates();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new SolarWindPower());
     player2.playedCards.push(new SolarWindPower());

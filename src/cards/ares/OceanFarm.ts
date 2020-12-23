@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {SpaceBonus} from '../../SpaceBonus';
@@ -9,6 +9,9 @@ import {TileType} from '../../TileType';
 import {CardType} from './../CardType';
 import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanFarm implements IProjectCard {
   public cost = 15;
@@ -37,5 +40,16 @@ export class OceanFarm implements IProjectCard {
         return undefined;
       },
     );
+  }
+  public metadata: CardMetadata = {
+    cardNumber: 'A21',
+    requirements: CardRequirements.builder((b) => b.oceans(4)),
+    renderData: CardRenderer.builder((b) => {
+      b.productionBox((pb) => {
+        pb.plus().heat(1).br;
+        pb.plus().plants(1);
+      }).nbsp.tile(TileType.OCEAN_FARM, false, true);
+    }),
+    description: 'Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.',
   }
 }

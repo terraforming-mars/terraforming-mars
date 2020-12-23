@@ -1,20 +1,21 @@
 import {expect} from 'chai';
 import {FloaterTechnology} from '../../../src/cards/colonies/FloaterTechnology';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {ICard} from '../../../src/cards/ICard';
-import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FloaterTechnology', function() {
   let card : FloaterTechnology; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new FloaterTechnology();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can play', function() {

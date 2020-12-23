@@ -6,6 +6,8 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ImportedNutrients implements IProjectCard {
     public cost = 14;
@@ -28,5 +30,12 @@ export class ImportedNutrients implements IProjectCard {
       }
 
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X26',
+      renderData: CardRenderer.builder((b) => {
+        b.plants(4).digit.nbsp.microbes(4).digit.asterix();
+      }),
+      description: 'Gain 4 plants and add 4 microbes to ANOTHER CARD.',
     }
 }

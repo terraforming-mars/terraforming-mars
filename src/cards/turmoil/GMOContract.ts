@@ -41,9 +41,15 @@ export class GMOContract implements IProjectCard {
   }
 
   public metadata: CardMetadata = {
-    description: 'Requires that Greens are ruling or that you have 2 delegates there',
+    description: 'Requires that Greens are ruling or that you have 2 delegates there.',
     cardNumber: 'T06',
     requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
-    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.animals(1).played.slash().plants(1).played.slash().microbes(1).played.slash().startEffect.megacredits(2).description('Effect: Each time you play a plant, animal or microbe tag, including this, gain 2MC'))),
+    renderData: CardRenderer.builder((b) => {
+      b.effectBox((be) => {
+        be.animals(1).played.slash().plants(1).played.slash().microbes(1).played;
+        be.startEffect.megacredits(2);
+        be.description('Effect: Each time you play a plant, animal or microbe tag, including this, gain 2MC.');
+      });
+    }),
   };
 }

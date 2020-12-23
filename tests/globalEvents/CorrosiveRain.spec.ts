@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {CorrosiveRain} from '../../src/turmoil/globalEvents/CorrosiveRain';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {CorrosiveRain} from '../../src/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('CorrosiveRain', function() {
   it('resolve play', function() {
     const card = new CorrosiveRain();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
 
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();

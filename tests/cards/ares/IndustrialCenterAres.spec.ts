@@ -1,19 +1,20 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
 import {IndustrialCenterAres} from '../../../src/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('IndustrialCenterAres', function() {
   let card : IndustrialCenterAres; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new IndustrialCenterAres();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {

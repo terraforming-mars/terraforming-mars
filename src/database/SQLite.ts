@@ -1,6 +1,7 @@
 import {IDatabase} from './IDatabase';
-import {Game, GameOptions, Score} from '../Game';
+import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
+import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
 const path = require('path');
@@ -27,7 +28,7 @@ export class SQLite implements IDatabase {
     this.db.all(sql, [], (err, rows) => {
       if (rows) {
         rows.forEach((row) => {
-          const gameId: string = row.game_id;
+          const gameId: GameId = row.game_id;
           const playerCount: number = row.players;
           const gameData: IGameData = {
             gameId,
@@ -40,9 +41,9 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(cb: (err: any, allGames: Array<string>) => void) {
-    const allGames: Array<string> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\' and save_id > 0';
+  getGames(cb: (err: any, allGames: Array<GameId>) => void) {
+    const allGames: Array<GameId> = [];
+    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
     this.db.all(sql, [], (err, rows) => {
       if (rows) {
         rows.forEach((row) => {
@@ -53,9 +54,9 @@ export class SQLite implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: string, game: Game, cb: (err: any) => void) {
+  restoreReferenceGame(game_id: GameId, game: Game, cb: (err: any) => void) {
     // Retrieve first save from database
-    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: string, game: any; }) => {
+    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
         return cb(new Error('Game not found'));
       }
@@ -76,27 +77,21 @@ export class SQLite implements IDatabase {
     });
   }
 
-  saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
+  saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
     return;
   }
 
-  restoreGameLastSave(game_id: string, game: Game, cb: (err: any) => void) {
+  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {
         return cb(err);
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(row.game);
-
-      // Rebuild each objects
-      game.loadFromJSON(gameToRestore);
-
-      return cb(err);
+      cb(undefined, JSON.parse(row.game));
     });
   }
 
-  cleanSaves(game_id: string, save_id: number): void {
+  cleanSaves(game_id: GameId, save_id: number): void {
     // DELETE all saves except initial and last one
     this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: { message: any; }) {
       if (err) {
@@ -119,7 +114,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: string, save_id: number, game: Game): void {
+  restoreGame(game_id: GameId, save_id: number, game: Game): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {
@@ -135,7 +130,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  saveGameState(game_id: string, save_id: number, game: string, players: number): void {
+  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
     // Insert
     this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function(err: { message: any; }) {
       if (err) {
@@ -145,7 +140,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  deleteGameNbrSaves(game_id: string, rollbackCount: number): void {
+  deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
     if (rollbackCount > 0) {
       this.db.run('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount], function(err: { message: any; }) {
         if (err) {

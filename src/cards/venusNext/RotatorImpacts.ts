@@ -12,6 +12,10 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -21,7 +25,7 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
     public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;
+      return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 14;
     }
     public play() {
       return undefined;
@@ -60,13 +64,30 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
 
     private addResource(player: Player, game: Game) {
       game.defer(new SelectHowToPayDeferred(player, 6, false, true, 'Select how to pay for action'));
-      this.resourceCount++;
+      player.addResourceTo(this);
+      LogHelper.logAddResource(game, player, this);
       return undefined;
     }
 
     private spendResource(player: Player, game: Game) {
       player.removeResourceFrom(this);
       game.increaseVenusScaleLevel(player, 1);
+      game.log('${0} removed an asteroid resource to increase Venus scale 1 step', (b) => b.player(player));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '243',
+      requirements: CardRequirements.builder((b) => b.venus(14).max()),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);
+          eb.description('Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].');
+        }).br;
+        b.effectBox((eb) => {
+          eb.or().asteroids(1).startAction.venus(1);
+          eb.description('Action: Spend 1 resource from this card to increase Venus 1 step.');
+        });
+      }),
+      description: 'Venus must be 14% or lower',
     }
 }

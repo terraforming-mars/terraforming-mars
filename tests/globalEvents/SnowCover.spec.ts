@@ -1,22 +1,22 @@
 import {expect} from 'chai';
-import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {MAX_TEMPERATURE} from '../../src/constants';
+import {Game} from '../../src/Game';
+import {Player} from '../../src/Player';
+import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';
+import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('SnowCover', function() {
   let card : SnowCover; let player : Player; let player2: Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new SnowCover();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
 
-    turmoil = new Turmoil(game);
+    turmoil = Turmoil.newInstance(game);
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;

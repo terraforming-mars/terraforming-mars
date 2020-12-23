@@ -4,6 +4,7 @@ import {range} from '../../utils/utils';
 import {Button} from '../common/Button';
 import {mainAppSettings} from '../App';
 import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerTimer} from './PlayerTimer';
 
 const isPinned = (root: any, playerIndex: number): boolean => {
   return (root as any).getVisibilityState('pinned_player_' + playerIndex);
@@ -35,6 +36,7 @@ export const PlayerStatus = Vue.component('player-status', {
   },
   components: {
     Button,
+    PlayerTimer,
   },
   methods: {
     togglePlayerDetails: function() {
@@ -54,7 +56,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return this.actionLabel !== ActionLabel.NONE;
     },
     getLabelClasses: function(): string {
-      const classes = [];
+      const classes: Array<string> = [];
       const baseClass = 'player-action-status';
       classes.push(baseClass);
       if (this.actionLabel === ActionLabel.PASSED) {
@@ -65,7 +67,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return classes.join(' ');
     },
     getPlayerNameClasses: function(): string {
-      const classes = [];
+      const classes: Array<string> = [];
       const baseClass = 'player-name';
       classes.push(baseClass);
       if (this.player.id === this.activePlayer.id) {
@@ -74,7 +76,7 @@ export const PlayerStatus = Vue.component('player-status', {
       return classes.join(' ');
     },
     getNrPlayedCards: function(): number {
-      return this.player.playedCards.length;
+      return (this.player.corporationCard !== undefined ? 1 : 0) + this.player.playedCards.length;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
@@ -106,7 +108,7 @@ export const PlayerStatus = Vue.component('player-status', {
                     <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
-                <div :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
+                <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
             </div>
             <div class="player-status-right">
@@ -119,6 +121,7 @@ export const PlayerStatus = Vue.component('player-status', {
                 </div> 
                 <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
+            <div class="player-status-timer" v-if="player.showTimers"><player-timer :timer="player.timer"/></div>
         </div>
     `,
 });

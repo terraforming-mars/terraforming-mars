@@ -47,6 +47,7 @@ export const MA_ITEMS = [
   ...VENUS_AWARDS,
 ];
 
+// TODO(kberg): Move someplace more global, since it's now part of game set-up.
 export interface IDrawnMilestonesAndAwards {
     milestones: Array<IMilestone>,
     awards: Array<IAward>

@@ -45,7 +45,7 @@ export class AirScrappingExpedition implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: '215',
-    description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD',
+    description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.',
     renderData: CardRenderer.builder((b) => {
       b.venus(1).floaters(3).secondaryTag(Tags.VENUS);
     }),

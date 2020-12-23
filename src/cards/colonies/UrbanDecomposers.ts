@@ -7,6 +7,9 @@ import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardRequirements} from '../CardRequirements';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanDecomposers implements IProjectCard {
     public cost = 6;
@@ -31,5 +34,13 @@ export class UrbanDecomposers implements IProjectCard {
       }
 
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C48',
+      requirements: CardRequirements.builder((b) => b.colonies().cities()),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.plants(1)).microbes(2).asterix();
+      }),
+      description: 'Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.',
     }
 }

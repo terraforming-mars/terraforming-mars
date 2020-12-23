@@ -7,8 +7,11 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
-import {ISpace} from '../../ISpace';
-import {Board} from '../../Board';
+import {ISpace} from '../../boards/ISpace';
+import {Board} from '../../boards/Board';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class GreatDamPromo implements IProjectCard {
     public cost = 15;
@@ -43,5 +46,14 @@ export class GreatDamPromo implements IProjectCard {
           ).length > 0,
         );
     }
+    public metadata: CardMetadata = {
+      cardNumber: '136',
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
+      }),
+      description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
+      victoryPoints: 1,
+    };
 }
 

@@ -1,18 +1,20 @@
 import {expect} from 'chai';
+import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
+import {MAX_VENUS_SCALE} from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {MAX_VENUS_SCALE} from '../../../src/constants';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('RotatorImpacts', function() {
   let card : RotatorImpacts; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new RotatorImpacts();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -24,6 +26,15 @@ describe('RotatorImpacts', function() {
     expect(card.canPlay(player, game)).is.true;
     const action = card.play();
     expect(action).is.undefined;
+  });
+
+  it('Works with MSI corporation', function() {
+    const corp = new MorningStarInc();
+    corp.play();
+    player.corporationCard = corp;
+
+    (game as any).venusScaleLevel = 18;
+    expect(card.canPlay(player, game)).is.true;
   });
 
   it('Should act', function() {

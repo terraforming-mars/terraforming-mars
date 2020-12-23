@@ -11,6 +11,10 @@ export const CardContent = Vue.component('CardContent', {
       type: Object as () => CardMetadata,
       required: true,
     },
+    isCorporation: {
+      type: Boolean,
+      required: true,
+    },
   },
   components: {
     CardRequirementsComponent,
@@ -21,6 +25,9 @@ export const CardContent = Vue.component('CardContent', {
   methods: {
     getClasses: function(): string {
       const classes: Array<string> = ['card-content'];
+      if (this.isCorporation) {
+        classes.push('card-content-corporation');
+      }
       return classes.join(' ');
     },
   },
@@ -28,7 +35,7 @@ export const CardContent = Vue.component('CardContent', {
         <div :class="getClasses()">
             <CardRequirementsComponent v-if="metadata.requirements !== undefined" :requirements="metadata.requirements"/>
             <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
-            <CardDescription v-if="metadata.description !== undefined" :text="metadata.description" />
+            <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
             <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
         </div>
     `,

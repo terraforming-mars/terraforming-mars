@@ -1,6 +1,7 @@
 import {IDatabase} from './IDatabase';
-import {Game, GameOptions, Score} from '../Game';
+import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
+import {SerializedGame} from '../SerializedGame';
 
 import {Client, ClientConfig} from 'pg';
 
@@ -53,7 +54,7 @@ export class PostgreSQL implements IDatabase {
         return;
       }
       for (const row of res.rows) {
-        const gameId: string = row.game_id;
+        const gameId: GameId = row.game_id;
         const playerCount: number = row.players;
         const gameData: IGameData = {
           gameId,
@@ -65,9 +66,9 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGames(cb: (err: any, allGames: Array<string>) => void) {
-    const allGames: Array<string> = [];
-    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' AND save_id > 0 GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
+  getGames(cb: (err: any, allGames: Array<GameId>) => void) {
+    const allGames: Array<GameId> = [];
+    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
     this.client.query(sql, (err, res) => {
       if (err) {
         console.error('PostgreSQL:getGames', err);
@@ -81,7 +82,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: string, game: Game, cb: (err: any) => void) {
+  restoreReferenceGame(game_id: GameId, game: Game, cb: (err: any) => void) {
     // Retrieve first save from database
     this.client.query('SELECT game_id game_id, game game FROM games WHERE game_id = $1 AND save_id = 0', [game_id], (err: any, res) => {
       if (err) {
@@ -106,32 +107,21 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreGameLastSave(game_id: string, game: Game, cb: (err: any) => void) {
+  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
     // Retrieve last save from database
     this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id], (err, res) => {
       if (err) {
-        console.error('PostgreSQL:restoreGameLastSave', err);
+        console.error('PostgreSQL:getGame', err);
         return cb(err);
       }
       if (res.rows.length === 0) {
         return cb(new Error('Game not found'));
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(res.rows[0].game);
-
-      // Rebuild each objects
-      try {
-        game.loadFromJSON(gameToRestore);
-      } catch (e) {
-        cb(e);
-        return;
-      }
-
-      return cb(err);
+      cb(undefined, JSON.parse(res.rows[0].game));
     });
   }
 
-  saveGameResults(game_id: string, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+  saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
     this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
       if (err) {
         console.error('PostgreSQL:saveGameResults', err);
@@ -140,7 +130,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: string, save_id: number): void {
+  cleanSaves(game_id: GameId, save_id: number): void {
     // DELETE all saves except initial and last one
     this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
       if (err) {
@@ -169,7 +159,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreGame(game_id: string, save_id: number, game: Game): void {
+  restoreGame(game_id: GameId, save_id: number, game: Game): void {
     // Retrieve last save from database
     this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
       if (err) {
@@ -188,7 +178,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  saveGameState(game_id: string, save_id: number, game: string, players: number): void {
+  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
     // Insert
     this.client.query('INSERT INTO games(game_id, save_id, game, players) VALUES($1, $2, $3, $4)', [game_id, save_id, game, players], (err) => {
       if (err) {
@@ -198,7 +188,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  deleteGameNbrSaves(game_id: string, rollbackCount: number): void {
+  deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
     if (rollbackCount > 0) {
       this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [game_id, rollbackCount], (err) => {
         if (err) {

@@ -1,20 +1,19 @@
 import {expect} from 'chai';
-import {GlobalDustStorm} from '../../src/turmoil/globalEvents/GlobalDustStorm';
-import {Player} from '../../src/Player';
-import {Color} from '../../src/Color';
-import {Resources} from '../../src/Resources';
+import {StripMine} from '../../src/cards/base/StripMine';
 import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {StripMine} from '../../src/cards/StripMine';
+import {Resources} from '../../src/Resources';
+import {GlobalDustStorm} from '../../src/turmoil/globalEvents/GlobalDustStorm';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayers} from '../TestingUtils';
 
 describe('GlobalDustStorm', function() {
   it('resolve play', function() {
     const card = new GlobalDustStorm();
-    const player = new Player('test', Color.BLUE, false);
-    const player2 = new Player('test2', Color.RED, false);
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const game = new Game('foobar', [player, player2], player);
-    const turmoil = new Turmoil(game);
+    const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());

@@ -4,10 +4,10 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Board} from '../../Board';
+import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
 
 
@@ -31,8 +31,7 @@ export class TharsisRepublic implements CorporationCard {
           player.megaCredits += 3;
         }
         if (space.spaceType !== SpaceType.COLONY) {
-          if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
-          player.shouldTriggerCardEffect = true; // reset value
+          player.addProduction(Resources.MEGACREDITS);
         }
       }
     }

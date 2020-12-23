@@ -9,6 +9,8 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IceMoonColony implements IProjectCard {
     public cost = 23;
@@ -33,5 +35,10 @@ export class IceMoonColony implements IProjectCard {
       game.defer(new BuildColony(player, game, false, 'Select colony for Ice Moon Colony'));
       game.defer(new PlaceOceanTile(player, game, 'Select ocean for Ice Moon Colony'));
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C15',
+      renderData: CardRenderer.builder((b) => b.colonies(1).oceans(1)),
+      description: 'Place 1 colony and 1 ocean tile.',
     }
 }

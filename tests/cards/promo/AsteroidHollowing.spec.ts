@@ -1,17 +1,18 @@
 import {expect} from 'chai';
 import {AsteroidHollowing} from '../../../src/cards/promo/AsteroidHollowing';
-import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AsteroidHollowing', function() {
   let card : AsteroidHollowing; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AsteroidHollowing();
-    player = new Player('test', Color.BLUE, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {

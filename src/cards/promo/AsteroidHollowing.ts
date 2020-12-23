@@ -47,7 +47,7 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.titanium(1).startAction.asteroids(1).productionBox((pb) => pb.megacredits(1));
-        eb.description('Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step');
+        eb.description('Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.');
       });
     }),
     victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 2),

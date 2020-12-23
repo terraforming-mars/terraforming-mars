@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
@@ -39,27 +39,27 @@ export class Philares implements CorporationCard {
       const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
         megacreditsAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
         steelAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
         titaniumAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
         plantsAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
         energyAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
         heatAmount = amount;
         return undefined;
-      }, resourceCount);
+      }, 0, resourceCount);
       const selectResources = new AndOptions(
         () => {
           if (

@@ -1,4 +1,3 @@
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {OceanFarm} from '../../../src/cards/ares/OceanFarm';
@@ -8,14 +7,15 @@ import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('OceanFarm', function() {
   let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
 
   beforeEach(function() {
     card = new OceanFarm();
-    player = new Player('test', Color.BLUE, false);
-    otherPlayer = new Player('test', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

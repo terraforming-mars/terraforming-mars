@@ -1,7 +1,7 @@
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from './DeferredAction';
 
 export class PlaceCityTile implements DeferredAction {

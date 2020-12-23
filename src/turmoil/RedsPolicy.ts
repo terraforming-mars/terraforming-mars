@@ -1,9 +1,9 @@
 import * as constants from '../constants';
-import {Board} from '../Board';
+import {Board} from '../boards/Board';
 import {CardName} from '../CardName';
 import {Game} from '../Game';
 import {IProjectCard} from '../cards/IProjectCard';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {ResourceType} from '../ResourceType';
 import {SpaceBonus} from '../SpaceBonus';

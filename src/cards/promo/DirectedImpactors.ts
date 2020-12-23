@@ -14,6 +14,8 @@ import {LogHelper} from '../../components/LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.DIRECTED_IMPACTORS;
@@ -93,5 +95,19 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
       LogHelper.logRemoveResource(game, player, this, 1, 'raise temperature 1 step');
       game.increaseTemperature(player, 1);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'X18',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
+          eb.description('Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.asteroids(1).startAction.temperature(1);
+          eb.description('Action: Remove 1 asteroid here to raise temperature 1 step.');
+        });
+      }),
     }
 }

@@ -7,10 +7,12 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public cost = 22;
@@ -41,4 +43,15 @@ export class MagneticFieldGeneratorsPromo implements IProjectCard {
         return undefined;
       });
     }
+    public metadata: CardMetadata = {
+      cardNumber: '165',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(4).digit.br;
+          pb.plus().plants(2);
+        }).br;
+        b.tr(3).digit.tile(TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
+      }),
+      description: 'Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.',
+    };
 }

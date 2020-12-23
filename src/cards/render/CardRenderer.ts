@@ -3,6 +3,7 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
 import {Tags} from '../Tags';
+import {TileType} from '../../TileType';
 
 type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
@@ -33,7 +34,7 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public selector: string, public isAresTile: boolean) { };
+  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { };
 }
 
 export class CardRenderEffect extends CardRenderer {
@@ -83,9 +84,34 @@ export class CardRenderEffect extends CardRenderer {
   public get description(): ItemType {
     this._validate();
     // TODO (chosta): validate builder method to make sure it's the last element
-    return `${this.rows[2].slice(-1)[0]}`;
+    return this.rows[2].slice(-1)[0];
   }
 }
+
+export class CardRenderCorpBoxEffect extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+    const builder = new CorpEffectBuilderEffect();
+    f(builder);
+    return builder.build();
+  }
+}
+
+export class CardRenderCorpBoxAction extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+    const builder = new CorpEffectBuilderAction();
+    f(builder);
+    return builder.build();
+  }
+}
+
 
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
@@ -120,10 +146,10 @@ class Builder {
     }
   }
 
-  protected _addTile(selector: string, isAresTile: boolean): void {
+  protected _addTile(tile: TileType, hasSymbol: boolean, isAres: boolean): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
-      row.push(new CardRenderTile(selector, isAresTile));
+      row.push(new CardRenderTile(tile, hasSymbol, isAres));
       this._data.push(row);
     }
   }
@@ -174,13 +200,24 @@ class Builder {
     return this;
   }
 
-  public titanium(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TITANIUM, amount));
+  public titanium(amount: number, bigAmountShowDigit: boolean = true): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount);
+    // override default showing a digit for items with amount > 5
+    // Done as an exception for 'Acquired Space Agency'
+    if (amount > 5 && bigAmountShowDigit === false) {
+      item.showDigit = false;
+    }
+    this._addRowItem(item);
     return this;
   }
 
   public steel(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.STEEL, amount));
+    return this;
+  }
+
+  public tr(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TR, amount));
     return this;
   }
 
@@ -217,8 +254,39 @@ class Builder {
     return this;
   }
 
+  public earth(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.EARTH, amount));
+    return this;
+  }
+
+  public building(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.BUILDING, amount));
+    return this;
+  }
+
+  public jovian(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.JOVIAN));
+    return this;
+  }
+
+  public science(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SCIENCE, amount));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
+    return this;
+  }
+  public tradeFleet(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
+    return this;
+  }
+
+  public colonies(amount: number = 1, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
+    item.size = size;
+    this._addRowItem(item);
     return this;
   }
 
@@ -226,6 +294,11 @@ class Builder {
     const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
     item.amountInside = true;
     this._addRowItem(item);
+    return this;
+  }
+
+  public placeColony(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PLACE_COLONY));
     return this;
   }
 
@@ -241,9 +314,89 @@ class Builder {
     return this;
   }
 
-  public description(description: string): Builder {
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
+    const item = new CardRenderItem(CardRenderItemType.GREENERY);
+    item.size = size;
+    if (withO2) {
+      item.secondaryTag = 'oxygen';
+    }
+    this._addRowItem(item);
+    return this;
+  }
+
+  public delegates(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
+    return this;
+  }
+
+  public partyLeaders(amount: number = -1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount));
+    return this;
+  }
+
+  public chairman() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CHAIRMAN));
+    return this;
+  }
+
+  public noTags() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
+    return this;
+  }
+
+  public wild(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
+    return this;
+  }
+
+  public preservation(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PRESERVATION, amount));
+    return this;
+  }
+
+  public diverseTag(amount: number = 1) {
+    const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
+    item.isPlayed = true;
+    this._addRowItem(item);
+    return this;
+  }
+
+  public fighter(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.FIGHTER, amount));
+    return this;
+  }
+
+  public camps(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CAMPS, amount));
+    return this;
+  }
+
+  public selfReplicatingRobots() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SELF_REPLICATING));
+    return this;
+  }
+
+  public multiplierWhite() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
+    return this;
+  }
+
+  public description(description: string | undefined = undefined): Builder {
     this._checkExistingItem();
     this._addRowItem(description);
+    return this;
+  }
+
+  public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+    if (type === 'normal') {
+      const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
+      normal.size = size;
+      this._addRowItem(normal);
+    } else if (type === 'golden') {
+      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1);
+      golden.size = size;
+      this._addRowItem(golden);
+    }
     return this;
   }
 
@@ -256,6 +409,17 @@ class Builder {
     this._addRowItem(CardRenderEffect.builder(eb));
     return this;
   }
+
+  public corpBox(type: 'action' | 'effect', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void): Builder {
+    this.br;
+    if (type === 'action') {
+      this._addRowItem(CardRenderCorpBoxAction.builder(eb));
+    } else {
+      this._addRowItem(CardRenderCorpBoxEffect.builder(eb));
+    }
+    return this;
+  }
+
 
   public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
     this._checkExistingItem();
@@ -293,6 +457,18 @@ class Builder {
     return this;
   }
 
+  public arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.arrow(size));
+    return this;
+  }
+
+  public equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._checkExistingItem();
+    this._addSymbol(CardRenderSymbol.equals(size));
+    return this;
+  }
+
   public empty(): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.empty());
@@ -322,8 +498,16 @@ class Builder {
     return this;
   }
 
-  public tile(selector: string, isAresTile = true): Builder {
-    this._addTile(selector, isAresTile);
+  public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
+    this._addTile(tile, hasSymbol, isAres);
+    return this;
+  }
+
+  /*
+   * A one off function to handle Project Requirements prelude card
+   */
+  public projectRequirements(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
     return this;
   }
 
@@ -333,6 +517,14 @@ class Builder {
   public get nbsp(): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.nbsp());
+    return this;
+  }
+
+  /*
+   * add non breakable vertical space (a div with different pixels height)
+   */
+  public vSpace(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._addSymbol(CardRenderSymbol.vSpace(size));
     return this;
   }
 
@@ -404,9 +596,34 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags): Builder {
+  /**
+   * Mark any amount to be a multiplier 'X'
+   */
+  public get multiplier(): Builder {
     this._checkExistingItem();
 
+    const row = this._getCurrentRow();
+    if (row !== undefined) {
+      const item = row.pop();
+      if (item === undefined) {
+        throw new Error('Called "multiplier" without a CardRenderItem.');
+      }
+      if (!(item instanceof CardRenderItem)) {
+        throw new Error('"multiplier" could be called on CardRenderItem only');
+      }
+
+      item.amountInside = true;
+      item.multiplier = true;
+      row.push(item);
+
+      this._data.push(row);
+    }
+
+    return this;
+  }
+
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater'): Builder {
+    this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
       const item = row.pop();
@@ -425,7 +642,6 @@ class Builder {
 
     return this;
   }
-
   public get brackets(): Builder {
     this._checkExistingItem();
 
@@ -480,5 +696,21 @@ class EffectBuilder extends Builder {
 
   public build(): CardRenderEffect {
     return new CardRenderEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderEffect extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderCorpBoxAction {
+    return new CardRenderCorpBoxEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderAction extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderCorpBoxEffect {
+    return new CardRenderCorpBoxAction(this._data);
   }
 }

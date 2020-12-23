@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('SmallAsteroid', function() {
   let card : SmallAsteroid; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new SmallAsteroid();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 
@@ -38,7 +38,7 @@ describe('SmallAsteroid', function() {
   });
 
   it('Works correctly with multiple targets', function() {
-    const player3 = new Player('test3', Color.YELLOW, false);
+    const player3 = TestPlayers.YELLOW.newPlayer();
     game = new Game('foobar', [player, player2, player3], player);
     player2.setResource(Resources.PLANTS, 3);
     player3.setResource(Resources.PLANTS, 5);

@@ -22,6 +22,9 @@ export const PlayerInfo = Vue.component('player-info', {
     playerIndex: {
       type: Number,
     },
+    hideZeroTags: {
+      type: Boolean,
+    },
   },
   components: {
     'player-resources': PlayerResources,
@@ -48,7 +51,7 @@ export const PlayerInfo = Vue.component('player-info', {
                 <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
                 <player-resources :player="player" v-trim-whitespace />
             </div>
-            <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()"/> 
+            <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
         </div>
     `,
 });

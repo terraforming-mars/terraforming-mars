@@ -1,5 +1,6 @@
 
 import Vue from 'vue';
+import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 
 interface SelectHowToPayForCardModel {
@@ -101,6 +102,9 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
         }
       }
       throw new Error(`card not found ${this.card}`);
+    },
+    getTitle: function() {
+      return $t(this.playerinput.title);
     },
     setDefaultMicrobesValue: function() {
       // automatically use available microbes to pay if not enough MC
@@ -368,7 +372,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ playerinput.title }}</div>
+  <div v-if="showtitle === true">{{ getTitle() }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard.name" />

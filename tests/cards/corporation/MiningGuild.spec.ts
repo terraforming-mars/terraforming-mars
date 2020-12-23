@@ -1,22 +1,22 @@
 import {expect} from 'chai';
 import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
-import {Color} from '../../../src/Color';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
-import {Resources} from '../../../src/Resources';
-import {maxOutOceans} from '../../TestingUtils';
-import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
+import {maxOutOceans} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
 
   beforeEach(function() {
     card = new MiningGuild();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
-    game = new Game('foobar', [player, player], player);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, player2], player);
 
     player.corporationCard = card;
   });
@@ -42,7 +42,12 @@ describe('MiningGuild', function() {
   });
 
   it('Gives steel production bonus when placing ocean tile', function() {
-    maxOutOceans(player, game); // 1 ocean with titanium and 1 with steel
+    game.board.getSpaces(SpaceType.OCEAN, player).forEach((space) => {
+      if (space.bonus.includes(SpaceBonus.TITANIUM) || space.bonus.includes(SpaceBonus.STEEL)) {
+        game.addOceanTile(player, space.id);
+      }
+    });
+    // There are two spaces on the main board that grant titanium or steel.
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
   });
 

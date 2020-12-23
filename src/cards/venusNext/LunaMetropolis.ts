@@ -7,6 +7,8 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class LunaMetropolis implements IProjectCard {
     public cost = 21;
@@ -21,4 +23,13 @@ export class LunaMetropolis implements IProjectCard {
     public getVictoryPoints() {
       return 2;
     }
+    public metadata: CardMetadata = {
+      cardNumber: '236',
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => pb.megacredits(1).slash().earth().played).br;
+        b.city().asterix();
+      }),
+      description: 'Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
+      victoryPoints: 2,
+    };
 }

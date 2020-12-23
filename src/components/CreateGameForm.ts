@@ -1,16 +1,18 @@
 import Vue from 'vue';
 import {Color} from '../Color';
-import {BoardName} from '../BoardName';
+import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
-import {$t} from '../directives/i18n';
+import {translateMessage} from '../directives/i18n';
 import {IGameData} from '../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
 import {ColonyName} from '../colonies/ColonyName';
 import {CardsFilter} from './CardsFilter';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
+import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
+import {GameId} from '../Game';
 
 export interface CreateGameModel {
     allOfficialExpansions: boolean;
@@ -44,6 +46,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     undoOption: boolean;
+    showTimers: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
     includeVenusMA: boolean;
@@ -110,6 +113,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       undoOption: false,
+      showTimers: false,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
@@ -196,7 +200,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
     },
     getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
-      return $t('Player ' + player.index + ' name');
+      return translateMessage({
+        message: 'Player ${0} name',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(player.index),
+        }],
+      });
     },
     updateCustomCorporationsList: function(newCustomCorporationsList: Array<CardName>) {
       const component = (this as any) as CreateGameModel;
@@ -336,6 +346,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const undoOption = component.undoOption;
+      const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
@@ -344,7 +355,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
-      let clonedGamedId: undefined | string = undefined;
+      let clonedGamedId: undefined | GameId = undefined;
 
       if (customColoniesList.length > 0) {
         const playersCount = players.length;
@@ -392,6 +403,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         undoOption,
+        showTimers,
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
@@ -562,6 +574,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="showTimers" id="timer-checkbox">
+                            <label for="timer-checkbox">
+                                <span v-i18n>Show timers</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
@@ -759,6 +776,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
                 ref="coloniesFilter"
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:venusNext="venusNext"
+                v-bind:turmoil="turmoil"
                 v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 

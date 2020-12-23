@@ -6,7 +6,10 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SpacePort implements IProjectCard {
     public cost = 22;
@@ -32,5 +35,18 @@ export class SpacePort implements IProjectCard {
         game.addCityTile(player, space.id);
         return undefined;
       });
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'C39',
+      requirements: CardRequirements.builder((b) => b.colonies()),
+      renderData: CardRenderer.builder((b) => {
+        b.productionBox((pb) => {
+          pb.minus().energy(1).br;
+          pb.plus().megacredits(4);
+        }).nbsp.city().br;
+        b.tradeFleet();
+      }),
+      description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
     }
 }

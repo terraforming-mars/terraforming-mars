@@ -17,6 +17,7 @@ import {Hygiea} from '../cards/community/Hygiea';
 import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
+import {Pallas} from '../cards/community/Pallas';
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
@@ -45,6 +46,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.TITANIA, Factory: Titania},
   {colonyName: ColonyName.VENUS, Factory: Venus},
   {colonyName: ColonyName.LEAVITT, Factory: Leavitt},
+  {colonyName: ColonyName.PALLAS, Factory: Pallas},
 ];
 
 // Function to return a card object by its name
@@ -72,11 +74,12 @@ export class ColonyDealer {
     public discard(card: Colony): void {
       this.discardedColonies.push(card);
     }
-    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
+    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
       let count: number = players + 2;
       let colonyTiles = ALL_COLONIES_TILES;
       if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
       if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+      if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
 
       if (allowList.length === 0) {
         colonyTiles.forEach((e) => allowList.push(e.colonyName));

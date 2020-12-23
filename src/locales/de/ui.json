@@ -33,11 +33,7 @@
 
     "Players": "Spieler",
 
-    "Player 1 name": "Name Spieler 1",
-    "Player 2 name": "Name Spieler 2",
-    "Player 3 name": "Name Spieler 3",
-    "Player 4 name": "Name Spieler 4",
-    "Player 5 name": "Name Spieler 5",
+    "Player ${0} name": "Name Spieler ${0}",
 
     "Beginner?": "Anfänger?",
     "Goes First?": "Startspieler?",
@@ -52,7 +48,7 @@
     "NEXT CARD:": "NÄCHSTE KARTE:",
 
     "Milestones": "Meilensteine",
-    "Terraformer": "Терраформер",
+    "Terraformer": "Terraformer",
     "Having a terraform rating of at least 35 or 26 with Turmoil.": "Mindestens 35 (26 mit Aufruhr) als eigener Terraformwert.",
     "Mayor": "Bürgermeister",
     "Owning at least 3 city tiles": "Mindestens 3 eigene Stadtplättchen.",
@@ -150,7 +146,7 @@
     "Sell patents": "Patente verkaufen",
     "Fund an award": "Auszeichnung finanzieren",
     "Take action for action phase, select one available action.": "Wähle ein der zur Verfügung stehenden Aktionen:",
-    "Undo Turn": "Zug rückgängig machen",
+    "Undo last action": "Zug rückgängig machen",
     "End Turn": "Zug beenden",
     "Perform an action from a played card": "Kartenaktion nutzen",
     "Power plant (11 MC)": "Kraftwerk (11 M€)",
@@ -169,7 +165,7 @@
     "Air scrapping": "Luftaufbereitung",
     "Buffer Gas": "Puffergas",
     "Build colony": "Kolonie errichten",
-    "Trade with a colony": "Mit einer Kolonie handeln",
+    "Trade with a colony tile": "Mit einer Koloniekarte handeln",
 
     "Place any final greenery from plants": "Übrige Pflanzen-Resourcen in Grünflächen umwandeln:",
     "Don't place a greenery": "KEINE Grünfläche platzieren",

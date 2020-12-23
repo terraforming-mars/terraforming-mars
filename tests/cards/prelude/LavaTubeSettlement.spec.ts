@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/cards/prelude/LavaTubeSettlement';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TileType} from '../../../src/TileType';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
-import {Resources} from '../../../src/Resources';
-import {resetBoard} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {TileType} from '../../../src/TileType';
+import {resetBoard, TestPlayers} from '../../TestingUtils';
 
 describe('LavaTubeSettlement', function() {
   let card : LavaTubeSettlement; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new LavaTubeSettlement();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player], player);
     resetBoard(game);
   });
@@ -34,7 +33,7 @@ describe('LavaTubeSettlement', function() {
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
-    const anotherPlayer = new Player('test', Color.RED, false);
+    const anotherPlayer = TestPlayers.RED.newPlayer();
     game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
 
     expect(card.canPlay(player, game)).is.not.true;

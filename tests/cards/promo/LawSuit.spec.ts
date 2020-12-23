@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {LawSuit} from '../../../src/cards/promo/LawSuit';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('LawSuit', function() {
   let card : LawSuit; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new LawSuit();
-    player = new Player('test', Color.BLUE, false);
-    player2 = new Player('test2', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, player2], player);
   });
 

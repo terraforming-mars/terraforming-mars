@@ -1,20 +1,20 @@
 import {expect} from 'chai';
 import {OceanSanctuary} from '../../../src/cards/ares/OceanSanctuary';
-import {Color} from '../../../src/Color';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
   let card : OceanSanctuary; let player : Player; let otherPlayer: Player; let game : Game;
 
   beforeEach(function() {
     card = new OceanSanctuary();
-    player = new Player('test', Color.BLUE, false);
-    otherPlayer = new Player('test', Color.RED, false);
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.RED.newPlayer();
     game = new Game('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

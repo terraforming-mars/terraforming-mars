@@ -13,6 +13,9 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../components/LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 9;
@@ -80,5 +83,21 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
       venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
 
       return new OrOptions(...opts);
+    }
+    public metadata: CardMetadata = {
+      cardNumber: '253',
+      requirements: CardRequirements.builder((b) => b.venus(6)),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.empty().startAction.microbes(1).secondaryTag(Tags.VENUS);
+          eb.description('Action: Add 1 Microbe to ANY Venus CARD.');
+        }).br;
+        b.or().br;
+        b.effectBox((eb) => {
+          eb.microbes(2).startAction.venus(1);
+          eb.description('Action: Spend 2 Microbes here to raise Venus 1 step.');
+        });
+      }),
+      description: 'Requires Venus 6%',
     }
 }

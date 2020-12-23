@@ -6,6 +6,9 @@ import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MarketManipulation implements IProjectCard {
     public cost = 1;
@@ -63,5 +66,11 @@ export class MarketManipulation implements IProjectCard {
       });
 
       return selectColonies;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'C23',
+      renderData: CardRenderer.builder((b) => {
+        b.text('Increase one colony tile track 1 step. Decrease another colony tile track 1 step.', CardRenderItemSize.SMALL, true);
+      }),
     }
 }

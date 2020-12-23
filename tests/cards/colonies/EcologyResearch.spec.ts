@@ -1,25 +1,25 @@
 import {expect} from 'chai';
+import {Ants} from '../../../src/cards/base/Ants';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {EcologyResearch} from '../../../src/cards/colonies/EcologyResearch';
-import {Color} from '../../../src/Color';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Luna} from '../../../src/colonies/Luna';
-import {Resources} from '../../../src/Resources';
-import {Tardigrades} from '../../../src/cards/Tardigrades';
-import {Fish} from '../../../src/cards/Fish';
-import {Ants} from '../../../src/cards/Ants';
 import {ICard} from '../../../src/cards/ICard';
+import {Luna} from '../../../src/colonies/Luna';
+import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 
 describe('EcologyResearch', function() {
   let card : EcologyResearch; let player : Player; let game : Game; let colony1: Luna;
 
   beforeEach(function() {
     card = new EcologyResearch();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

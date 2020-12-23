@@ -3,6 +3,9 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class RegoPlastics implements IProjectCard {
     public name = CardName.REGO_PLASTICS;
@@ -21,5 +24,16 @@ export class RegoPlastics implements IProjectCard {
 
     public onDiscard(player: Player): void {
       player.decreaseSteelValue();
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'X10',
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          eb.description('Effect: Your steel resources are worth 1 MC extra.');
+        });
+      }),
+      victoryPoints: 1,
     }
 }

@@ -5,7 +5,7 @@ import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
 
 export interface SerializedBoard {
-    spaces: Array<SerializedSpace>;
+  spaces: Array<SerializedSpace>;
 }
 
 export interface SerializedSpace {

@@ -226,32 +226,6 @@ export abstract class Board {
     } as ISpace;
   }
 
-  /*
-    d.board.spaces.forEach((element: ISpace) => {
-      const space = this.getSpace(element.id);
-      if (element.tile) {
-        const tileType = element.tile.tileType;
-        const tileCard = element.tile.card;
-        const protectedHazard = element.tile.protectedHazard;
-        if (element.player) {
-          const player = this.players.find((player) => player.id === element.player!.id);
-          // Prevent loss of "neutral" player tile ownership across reloads
-          space.player = player ? player : element.player;
-        }
-        space.tile = {
-          tileType: tileType,
-          card: tileCard,
-          protectedHazard: protectedHazard,
-        };
-      } else if (element.player) {
-        // Correct Land Claim
-        space.player = this.players.find((player) => player.id === element.player!.id);
-      }
-      space.adjacency = element.adjacency;
-    });
-
-
-  */
   public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }

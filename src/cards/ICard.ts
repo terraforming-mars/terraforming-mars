@@ -48,4 +48,5 @@ export interface ICard {
     cardType: CardType;
     metadata?: CardMetadata;
     howToAffordReds?: HowToAffordRedsPolicy;
+    warning?: string;
 }

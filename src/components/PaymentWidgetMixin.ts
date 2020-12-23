@@ -8,11 +8,8 @@ export const PaymentWidgetMixin = {
   'methods': {
     getMegaCreditsMax: function(): number {
       const $this = (this as any);
-      if ($this.card !== undefined && $this.cards !== undefined) {
-        const card = ($this.cards as Array<CardModel>).find((card) => $this.card === card.name);
-        if (card !== undefined && card.mustSpendAtMost !== undefined) {
-          return card.mustSpendAtMost;
-        }
+      if ($this.card !== undefined && $this.card.mustSpendAtMost !== undefined) {
+        return $this.card.mustSpendAtMost;
       }
       return Math.min($this.player.megaCredits, $this.$data.cost);
     },

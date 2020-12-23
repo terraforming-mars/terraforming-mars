@@ -198,6 +198,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
     calculatedCost: 0,
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
+    warning: player.corporationCard.warning,
   } as CardModel;
 }
 
@@ -221,6 +222,7 @@ function getCardsAsCardModel(
           undefined,
       cardType: CardType.AUTOMATED,
       isDisabled: false,
+      warning: card.warning,
     });
   });
 
@@ -359,6 +361,7 @@ function getCards(
         undefined,
     cardType: card.cardType,
     isDisabled: false,
+    warning: card.warning,
   }));
 }
 

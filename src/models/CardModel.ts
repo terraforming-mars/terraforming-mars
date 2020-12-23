@@ -9,4 +9,5 @@ export interface CardModel {
     mustSpendAtMost?: number;
     cardType: CardType;
     isDisabled: boolean;
+    warning?: string;
 }

@@ -70,6 +70,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       // The game begins with Greens in power and a Neutral chairman
       const turmoil = new Turmoil(PartyName.GREENS, 'NEUTRAL', PartyName.GREENS, dealer);
 
+      game.log('A neutral delegate is the new chairman.');
+      game.log('Greens are in power in the first generation.');
+
       // Init parties
       turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
@@ -87,10 +90,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve.push('NEUTRAL');
       }
 
-      // Set up party bonuses and policies
       turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties, turmoil.rulingParty);
-
-      // Init the global event dealer
+      // Note: this call relies on an instance of Game that will not be fully formed.
+      // TODO(kberg): split newInstance into create/set-up so this can be done once the whole thing is ready.
+      turmoil.onAgendaSelected(game);
       turmoil.initGlobalEvent(game);
       return turmoil;
     }
@@ -274,6 +277,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           const player = game.getPlayerById(this.chairman);
           player.increaseTerraformRating(game);
           game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
+        } else {
+          game.log('A neutral delegate is the new chairman.');
         }
 
         const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
@@ -301,12 +306,17 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (bonus === undefined) {
         throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
       }
+      game.log('The ruling bonus is ${0} (${1}})', (b) => b.string(bonus.description).string(bonusId));
       bonus.grant(game);
 
-      // Resolve Ruling Policy for Scientists P4
       const policyId = this.politicalAgendasData.currentAgenda.policyId;
       const policy = rulingParty.policies.find((p) => p.id === policyId);
-      if (policy !== undefined && policy.apply !== undefined) {
+      if (policy === undefined) {
+        throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
+      }
+      game.log('The ruling policy is ${0} (${1}})', (b) => b.string(policy.description).string(policyId));
+      // Resolve Ruling Policy for Scientists P4
+      if (policy.apply !== undefined) {
         policy.apply(game);
       }
     }

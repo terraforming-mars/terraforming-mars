@@ -1,4 +1,3 @@
-
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -7,6 +6,8 @@ import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Viron implements ICard, CorporationCard {
     public name = CardName.VIRON;
@@ -51,5 +52,20 @@ export class Viron implements ICard, CorporationCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R12',
+      description: 'You start with 48 MC.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br.br;
+        b.megacredits(48);
+        b.corpBox('action', (ce) => {
+          ce.effectBox((eb) => {
+            eb.empty().startAction.empty();
+            eb.description('Action: Use a blue card action that has already been used this generation.');
+          });
+        });
+      }),
     }
 }

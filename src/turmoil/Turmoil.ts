@@ -14,6 +14,8 @@ import {ISerializable} from '../ISerializable';
 import {SerializedParty, SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 
+export type NeutralPlayer = 'NEUTRAL';
+
 export interface IPartyFactory<T> {
     partyName: PartyName;
     Factory: new () => T
@@ -29,11 +31,11 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
 ];
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
-    public chairman: undefined | PlayerId | 'NEUTRAL' = undefined;
+    public chairman: undefined | PlayerId | NeutralPlayer = undefined;
     public rulingParty: IParty;
     public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
-    public delegateReserve: Array<PlayerId | 'NEUTRAL'> = [];
+    public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
     public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public readonly globalEventDealer: GlobalEventDealer;
@@ -98,7 +100,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // Use to send a delegate to a specific party
     public sendDelegateToParty(
-      playerId: PlayerId | 'NEUTRAL',
+      playerId: PlayerId | NeutralPlayer,
       partyName: PartyName,
       game: Game,
       fromLobby: boolean = true): void {
@@ -120,7 +122,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Use to remove a delegate from a specific party
-    public removeDelegateFromParty(playerId: PlayerId | 'NEUTRAL', partyName: PartyName, game: Game): void {
+    public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
       const party = this.getPartyByName(partyName);
       if (party) {
         this.delegateReserve.push(playerId);
@@ -323,18 +325,18 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // List players present in the reserve
-    public getPresentPlayers(): Array<PlayerId | 'NEUTRAL'> {
+    public getPresentPlayers(): Array<PlayerId | NeutralPlayer> {
       return Array.from(new Set(this.delegateReserve));
     }
 
     // Return number of delegate
-    public getDelegates(playerId: PlayerId | 'NEUTRAL'): number {
+    public getDelegates(playerId: PlayerId | NeutralPlayer): number {
       const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;
     }
 
     // Check if player has delegates available
-    public hasAvailableDelegates(playerId: PlayerId | 'NEUTRAL'): boolean {
+    public hasAvailableDelegates(playerId: PlayerId | NeutralPlayer): boolean {
       return this.getDelegates(playerId) > 0;
     }
 

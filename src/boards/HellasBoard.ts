@@ -1,10 +1,10 @@
-import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
+import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
-import {Player} from './Player';
-import {ISpace} from './ISpace';
-import {HELLAS_BONUS_OCEAN_COST} from './constants';
-import {SpaceType} from './SpaceType';
+import {Player} from '../Player';
+import {ISpace} from '../ISpace';
+import {HELLAS_BONUS_OCEAN_COST} from '../constants';
+import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 
 export class HellasBoard extends Board {

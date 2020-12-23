@@ -140,7 +140,7 @@ describe('Player', function() {
     const json = player.serialize();
     json.pickedCorporationCard = new SaturnSystems();
     const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
-    expect(s.pickedCorporationCard).to.deep.eq({'name': 'Saturn Systems', 'tags': ['jovian'], 'startingMegaCredits': 42, 'cardType': 'brown'});
+    expect(s.pickedCorporationCard).to.deep.eq(JSON.parse(JSON.stringify(new SaturnSystems())));
     const p = Player.deserialize(s);
     expect(p.pickedCorporationCard?.name).eq('Saturn Systems');
   });

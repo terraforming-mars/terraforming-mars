@@ -88,6 +88,31 @@ export class CardRenderEffect extends CardRenderer {
   }
 }
 
+export class CardRenderCorpBoxEffect extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+    const builder = new CorpEffectBuilderEffect();
+    f(builder);
+    return builder.build();
+  }
+}
+
+export class CardRenderCorpBoxAction extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+    const builder = new CorpEffectBuilderAction();
+    f(builder);
+    return builder.build();
+  }
+}
+
+
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
 
@@ -272,6 +297,11 @@ class Builder {
     return this;
   }
 
+  public placeColony(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PLACE_COLONY));
+    return this;
+  }
+
   public influence(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
     return this;
@@ -316,6 +346,11 @@ class Builder {
 
   public wild(amount: number) {
     this._addRowItem(new CardRenderItem(CardRenderItemType.WILD, amount));
+    return this;
+  }
+
+  public preservation(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PRESERVATION, amount));
     return this;
   }
 
@@ -374,6 +409,17 @@ class Builder {
     this._addRowItem(CardRenderEffect.builder(eb));
     return this;
   }
+
+  public corpBox(type: 'action' | 'effect', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void): Builder {
+    this.br;
+    if (type === 'action') {
+      this._addRowItem(CardRenderCorpBoxAction.builder(eb));
+    } else {
+      this._addRowItem(CardRenderCorpBoxEffect.builder(eb));
+    }
+    return this;
+  }
+
 
   public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
     this._checkExistingItem();
@@ -474,6 +520,14 @@ class Builder {
     return this;
   }
 
+  /*
+   * add non breakable vertical space (a div with different pixels height)
+   */
+  public vSpace(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._addSymbol(CardRenderSymbol.vSpace(size));
+    return this;
+  }
+
   public get any(): Builder {
     this._checkExistingItem();
 
@@ -568,7 +622,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil'): Builder {
+  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater'): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {
@@ -642,5 +696,21 @@ class EffectBuilder extends Builder {
 
   public build(): CardRenderEffect {
     return new CardRenderEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderEffect extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderCorpBoxAction {
+    return new CardRenderCorpBoxEffect(this._data);
+  }
+}
+
+class CorpEffectBuilderAction extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderCorpBoxEffect {
+    return new CardRenderCorpBoxAction(this._data);
   }
 }

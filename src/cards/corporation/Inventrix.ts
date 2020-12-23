@@ -34,7 +34,7 @@ export class Inventrix implements CorporationCard {
     }
 
     public metadata: CardMetadata = {
-      cardNumber: 'R20',
+      cardNumber: 'R43',
       description: 'As you first action in the game, draw 3 cards. Start with 45MC.',
       renderData: CardRenderer.builder((b) => {
         b.br;

@@ -26,7 +26,7 @@ export class TollStation implements IProjectCard {
       cardNumber: '099',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.megacredits(1).slash().space().played.any;
+          pb.megacredits(1).slash().space().played.any.asterix();
         });
       }),
       description: 'Increase your MC production 1 step for each space tag your OPPONENTS have.',

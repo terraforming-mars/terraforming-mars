@@ -6,7 +6,8 @@ import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class ValleyTrust implements CorporationCard {
     public name = CardName.VALLEY_TRUST;
@@ -42,5 +43,20 @@ export class ValleyTrust implements CorporationCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R34',
+      description: 'You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(37).nbsp.prelude().asterix();
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.science(1).played.startEffect.megacredits(-2);
+            eb.description('Effect: When you play an Science tag, you pay 2MC less for it.');
+          });
+        });
+      }),
     }
 }

@@ -20,8 +20,8 @@ export class BoardBuilder {
     private unshufflableSpaces: Array<number> = [];
 
     constructor(seed: number, private includeVenus: boolean) {
-      this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
-      this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
+      this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
+      this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
       this.rng = new Random(seed);
     }
 
@@ -58,13 +58,13 @@ export class BoardBuilder {
         }
       }
 
-      this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
+      this.spaces.push(Space.colony(SpaceName.STANFORD_TORUS));
       if (this.includeVenus) {
         this.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS),
+          Space.colony(SpaceName.DAWN_CITY),
+          Space.colony(SpaceName.LUNA_METROPOLIS),
+          Space.colony(SpaceName.MAXWELL_BASE),
+          Space.colony(SpaceName.STRATOPOLIS),
         );
       }
 
@@ -110,41 +110,33 @@ export class BoardBuilder {
 
     private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
       if (is_ocean) {
-        return new Ocean(idx, pos_x, pos_y, bonus);
+        return Space.ocean(idx, pos_x, pos_y, bonus);
       } else {
-        return new Land(idx, pos_x, pos_y, bonus);
+        return Space.land(idx, pos_x, pos_y, bonus);
       }
     }
 }
 
-abstract class Space implements ISpace {
+class Space implements ISpace {
   constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
-
   }
-}
 
-class BoardColony extends Space {
-  constructor(id: string) {
-    super(id, SpaceType.COLONY, [], -1, -1);
+  static colony(id: string) {
+    return new Space(id, SpaceType.COLONY, [], -1, -1);
   }
-}
 
-class Land extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
+  private static strId(id: number): string {
+    let strId = id.toString();
     if (id < 10) {
-      str_id = '0'+str_id;
+      strId = '0'+strId;
     }
-    super(str_id, SpaceType.LAND, bonus, x, y);
+    return strId;
   }
-}
+  static land(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(this.strId(id), SpaceType.LAND, bonus, x, y);
+  }
 
-class Ocean extends Space {
-  constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    let str_id = id.toString();
-    if (id < 10) {
-      str_id = '0'+str_id;
-    }
-    super(str_id, SpaceType.OCEAN, bonus, x, y);
+  static ocean(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(this.strId(id), SpaceType.OCEAN, bonus, x, y);
   }
 }

@@ -306,7 +306,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (bonus === undefined) {
         throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
       }
-      game.log('The ruling bonus is ${0} (${1}})', (b) => b.string(bonus.description).string(bonusId));
+      game.log('The ruling bonus is ${0}', (b) => b.string(bonus.description).string(bonusId));
       bonus.grant(game);
 
       const policyId = this.politicalAgendasData.currentAgenda.policyId;
@@ -314,7 +314,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (policy === undefined) {
         throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
       }
-      game.log('The ruling policy is ${0} (${1}})', (b) => b.string(policy.description).string(policyId));
+      game.log('The ruling policy is ${0}', (b) => b.string(policy.description).string(policyId));
       // Resolve Ruling Policy for Scientists P4
       if (policy.apply !== undefined) {
         policy.apply(game);

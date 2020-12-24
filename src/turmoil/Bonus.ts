@@ -5,6 +5,6 @@ export type BonusId = string;
 export interface Bonus {
   id: BonusId;
   description: string;
-  isDefault?: boolean;
+  isDefault: boolean;
   grant: (game: Game) => void;
 }

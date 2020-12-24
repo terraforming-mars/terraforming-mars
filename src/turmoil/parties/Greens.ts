@@ -44,6 +44,7 @@ export class GreensBonus01 implements Bonus {
 export class GreensBonus02 implements Bonus {
   id = 'gb02';
   description: string = 'Gain 2 MC for each greenery tile you have';
+  isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -71,6 +72,7 @@ export class GreensPolicy01 implements Policy {
 export class GreensPolicy02 implements Policy {
   id = 'gp02';
   description: string = 'When you place a tile, gain 1 plant';
+  isDefault = false;
 
   onTilePlaced(player: Player) {
     player.setResource(Resources.PLANTS);
@@ -80,6 +82,7 @@ export class GreensPolicy02 implements Policy {
 export class GreensPolicy03 implements Policy {
   id = 'gp03';
   description: string = 'When you play an animal, plant or microbe tag, gain 2 MC';
+  isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
     const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBES];
@@ -92,6 +95,7 @@ export class GreensPolicy03 implements Policy {
 export class GreensPolicy04 implements Policy {
   id = 'gp04';
   description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
+  isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

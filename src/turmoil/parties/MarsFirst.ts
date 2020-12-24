@@ -37,6 +37,7 @@ export class MarsFirstBonus01 implements Bonus {
 export class MarsFirstBonus02 implements Bonus {
   id = 'mb02';
   description = 'Gain 1 MC for each tile you have ON MARS';
+  isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -64,6 +65,7 @@ export class MarsFirstPolicy01 implements Policy {
 export class MarsFirstPolicy02 implements Policy {
   id = 'mfp02';
   description: string = 'When you play a Building tag, gain 2 MC';
+  isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS, 2);
@@ -73,11 +75,13 @@ export class MarsFirstPolicy02 implements Policy {
 export class MarsFirstPolicy03 implements Policy {
   id = 'mfp03';
   description: string = 'Your steel resources are worth 1 MC extra';
+  isDefault = false;
 }
 
 export class MarsFirstPolicy04 implements Policy {
   id = 'mfp04';
   description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
+  isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

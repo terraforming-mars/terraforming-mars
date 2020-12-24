@@ -46,6 +46,7 @@ export class RedsBonus01 implements Bonus {
 export class RedsBonus02 implements Bonus {
   id = 'rb02';
   description = 'The player(s) with the highest TR loses 1 TR';
+  isDefault = false;
 
   grant(game: Game) {
     const players = game.getPlayers();
@@ -73,6 +74,7 @@ export class RedsPolicy01 implements Policy {
 export class RedsPolicy02 implements Policy {
   id = 'rp02';
   description: string = 'When you place a tile, pay 3 MC or as much as possible';
+  isDefault = false;
 
   onTilePlaced(player: Player, _space: ISpace, game: Game) {
     let amountPlayerHas: number = player.megaCredits;
@@ -88,6 +90,7 @@ export class RedsPolicy02 implements Policy {
 export class RedsPolicy03 implements Policy {
   id = 'rp03';
   description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+  isDefault = false;
 
   canAct(player: Player, game: Game) {
     if (game.marsIsTerraformed()) return false;
@@ -178,4 +181,5 @@ export class RedsPolicy03 implements Policy {
 export class RedsPolicy04 implements Policy {
   id = 'rp04';
   description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
+  isDefault = false;
 }

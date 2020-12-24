@@ -42,6 +42,7 @@ export class UnityBonus01 implements Bonus {
 export class UnityBonus02 implements Bonus {
   id = 'ub02';
   description = 'Gain 1 MC for each Space tag you have';
+  isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -60,6 +61,7 @@ export class UnityPolicy01 implements Policy {
 export class UnityPolicy02 implements Policy {
   id = 'up02';
   description: string = 'Spend 4 MC to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
+  isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -120,6 +122,7 @@ export class UnityPolicy02 implements Policy {
 export class UnityPolicy03 implements Policy {
   id = 'up03';
   description: string = 'Spend 4 MC to draw a Space card (Turmoil Unity)';
+  isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -149,4 +152,5 @@ export class UnityPolicy03 implements Policy {
 export class UnityPolicy04 implements Policy {
   id = 'up04';
   description: string = 'Cards with Space tags cost 2 MC less to play';
+  isDefault = false;
 }

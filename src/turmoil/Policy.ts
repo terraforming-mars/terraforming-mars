@@ -9,7 +9,7 @@ export type PolicyId = string;
 export interface Policy {
   id: PolicyId;
   description: string;
-  isDefault?: boolean;
+  isDefault: boolean;
   onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
   onCardPlayed?: (player: Player, card: IProjectCard) => void;
   action?: (player: Player, game: Game) => OrOptions | undefined;

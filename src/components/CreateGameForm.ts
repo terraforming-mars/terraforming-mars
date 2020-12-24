@@ -253,12 +253,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
       return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
     },
     politicalAgendasExtensionToggle: function() {
-      const component = (this as any) as CreateGameModel;
-      if (component.politicalAgendasExtension === AgendaStyle.STANDARD) {
-        component.politicalAgendasExtension = AgendaStyle.RANDOM;
+      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
         this.politicalAgendasExtension = AgendaStyle.RANDOM;
       } else {
-        component.politicalAgendasExtension = AgendaStyle.STANDARD;
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
       }
     },
@@ -268,6 +265,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       } else if (type === 'chairman') {
         return AgendaStyle.CHAIRMAN;
       } else {
+        console.warn('AgendaStyle not found');
         return AgendaStyle.STANDARD;
       }
     },
@@ -377,7 +375,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const promoCardsOption = component.promoCardsOption;
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
-      const politicalAgendasExtension = component.politicalAgendasExtension;
+      const politicalAgendasExtension = this.politicalAgendasExtension;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;

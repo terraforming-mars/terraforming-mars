@@ -32,6 +32,7 @@ export class ScientistsBonus01 implements Bonus {
 export class ScientistsBonus02 implements Bonus {
   id = 'sb02';
   description: string = 'Gain 1 MC for every 3 cards in hand';
+  isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -76,16 +77,19 @@ export class ScientistsPolicy01 implements Policy {
 export class ScientistsPolicy02 implements Policy {
   id = 'sp02';
   description: string = 'Your global requirements are +/- 2 steps';
+  isDefault = false;
 }
 
 export class ScientistsPolicy03 implements Policy {
   id = 'sp03';
   description: string = 'When you raise a global parameter, draw a card per step raised';
+  isDefault = false;
 }
 
 export class ScientistsPolicy04 implements Policy {
   id = 'sp04';
   description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  isDefault = false;
 
   apply(game: Game) {
     game.getPlayers().forEach((player) => {

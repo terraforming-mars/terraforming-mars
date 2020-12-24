@@ -186,9 +186,9 @@ export const Turmoil = Vue.component('turmoil', {
       }
       if (bonusId !== undefined) {
         const bonus = AGENDA_HTML.get(bonusId);
-        return bonus || `Can't find party bonus.`;
+        return bonus || `No ruling Bonus`;
       }
-      return `Can't find party bonus.`;
+      return `No ruling Bonus`;
     },
     getPolicy: function(party: PartyName | undefined, politicalAgendas: PoliticalAgendasModel | undefined, useCurrentAgenda: boolean = false) {
       let policyId: PolicyId | undefined = undefined;
@@ -224,7 +224,7 @@ export const Turmoil = Vue.component('turmoil', {
       if (policyId !== undefined) {
         const policy = AGENDA_HTML.get(policyId);
         console.log(`policy is ${policy}`);
-        return policy || `Can't find party policy.`;
+        return policy || `No ruling Policy`;
       }
       return '<p>' + $t('No ruling Policy') + '</p>';
     },

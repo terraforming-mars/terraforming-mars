@@ -31,6 +31,7 @@ export class KelvinistsBonus01 implements Bonus {
 export class KelvinistsBonus02 implements Bonus {
   id = 'kb02';
   description = 'Gain 1 heat for each Heat production you have';
+  isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -71,11 +72,13 @@ export class KelvinistsPolicy01 implements Policy {
 export class KelvinistsPolicy02 implements Policy {
   id = 'kp02';
   description: string = 'When you raise temperature, gain 3 MC per step raised';
+  isDefault = false;
 }
 
 export class KelvinistsPolicy03 implements Policy {
   id = 'kp03';
   description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
+  isDefault = false;
 
   canAct(player: Player) {
     return player.heat >= 6;
@@ -94,6 +97,7 @@ export class KelvinistsPolicy03 implements Policy {
 export class KelvinistsPolicy04 implements Policy {
   id = 'kp04';
   description: string = 'When you place a tile, gain 2 heat';
+  isDefault = false;
 
   onTilePlaced(player: Player) {
     player.setResource(Resources.HEAT, 2);

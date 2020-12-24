@@ -30,219 +30,219 @@ require.cache[vue] = {
 };
 
 checkComponent(
-    'src/components/Award',
-    require('./build/src/components/Award').Award,
-    [],
+  'src/components/Award',
+  require('./build/src/components/Award').Award,
+  [],
 );
 checkComponent(
-    'src/components/Board',
-    require('./build/src/components/Board').Board,
-    ['constants'],
+  'src/components/Board',
+  require('./build/src/components/Board').Board,
+  ['constants'],
 );
 checkComponent(
-    'src/components/BoardSpace',
-    require('./build/src/components/BoardSpace').BoardSpace,
-    [],
+  'src/components/BoardSpace',
+  require('./build/src/components/BoardSpace').BoardSpace,
+  [],
 );
 checkComponent(
-    'src/components/card/CardCost',
-    require('./build/src/components/card/CardCost').CardCost,
-    [],
+  'src/components/card/CardCost',
+  require('./build/src/components/card/CardCost').CardCost,
+  [],
 );
 checkComponent(
-    'src/components/card/CardProductionBoxComponent',
-    require('./build/src/components/card/CardProductionBoxComponent').CardProductionBoxComponent,
-    [],
+  'src/components/card/CardProductionBoxComponent',
+  require('./build/src/components/card/CardProductionBoxComponent').CardProductionBoxComponent,
+  [],
 );
 checkComponent(
-    'src/components/CardsFilter',
-    require('./build/src/components/CardsFilter').CardsFilter,
-    ['selectedCardNames', 'foundCardNames', 'searchTerm'],
+  'src/components/CardsFilter',
+  require('./build/src/components/CardsFilter').CardsFilter,
+  ['selectedCardNames', 'foundCardNames', 'searchTerm'],
 );
 checkComponent(
-    'src/components/ColoniesFilter',
-    require('./build/src/components/ColoniesFilter').ColoniesFilter,
-    ['allColonies', 'officialColonies', 'communityColonies', 'selectedColonies'],
+  'src/components/ColoniesFilter',
+  require('./build/src/components/ColoniesFilter').ColoniesFilter,
+  ['allColonies', 'officialColonies', 'communityColonies', 'selectedColonies'],
 );
 checkComponent(
-    'src/components/Colony',
-    require('./build/src/components/Colony').Colony,
-    ['PLUTO', 'GANYMEDE'],
+  'src/components/Colony',
+  require('./build/src/components/Colony').Colony,
+  ['PLUTO', 'GANYMEDE'],
 );
 checkComponent(
-    'src/components/CorporationsFilter',
-    require('./build/src/components/CorporationsFilter').CorporationsFilter,
-    ['cardsByModuleMap', 'customCorporationsList', 'selectedCorporations', 'corpsByModule'],
+  'src/components/CorporationsFilter',
+  require('./build/src/components/CorporationsFilter').CorporationsFilter,
+  ['cardsByModuleMap', 'customCorporationsList', 'selectedCorporations', 'corpsByModule'],
 );
 checkComponent(
-    'src/components/DebugUI',
-    require('./build/src/components/DebugUI').DebugUI,
-    ['filterText', 'filterDescription', 'base', 'corporateEra', 'prelude', 'venusNext', 'colonies', 'turmoil', 'community', 'ares', 'promo'],
+  'src/components/DebugUI',
+  require('./build/src/components/DebugUI').DebugUI,
+  ['filterText', 'filterDescription', 'base', 'corporateEra', 'prelude', 'venusNext', 'colonies', 'turmoil', 'community', 'ares', 'promo'],
 );
 checkComponent(
-    'src/components/GameHome',
-    require('./build/src/components/GameHome').GameHome,
-    [],
+  'src/components/GameHome',
+  require('./build/src/components/GameHome').GameHome,
+  [],
 );
 checkComponent(
-    'src/components/GameEnd',
-    require('./build/src/components/GameEnd').GameEnd,
-    [],
+  'src/components/GameEnd',
+  require('./build/src/components/GameEnd').GameEnd,
+  [],
 );
 checkComponent(
-    'src/components/LoadGameForm',
-    require('./build/src/components/LoadGameForm').LoadGameForm,
-    ['gameId', 'rollbackCount'],
+  'src/components/LoadGameForm',
+  require('./build/src/components/LoadGameForm').LoadGameForm,
+  ['gameId', 'rollbackCount'],
 );
 checkComponent(
-    'src/components/LogPanel',
-    require('./build/src/components/LogPanel').LogPanel,
-    ['cards', 'messages'],
+  'src/components/LogPanel',
+  require('./build/src/components/LogPanel').LogPanel,
+  ['cards', 'messages'],
 );
 checkComponent(
-    'src/components/Milestone',
-    require('./build/src/components/Milestone').Milestone,
-    [],
+  'src/components/Milestone',
+  require('./build/src/components/Milestone').Milestone,
+  [],
 );
 checkComponent(
-    'src/components/OtherPlayer',
-    require('./build/src/components/OtherPlayer').OtherPlayer,
-    [],
+  'src/components/OtherPlayer',
+  require('./build/src/components/OtherPlayer').OtherPlayer,
+  [],
 );
 checkComponent(
-    'src/components/PlayerHome',
-    require('./build/src/components/PlayerHome').PlayerHome,
-    [],
+  'src/components/PlayerHome',
+  require('./build/src/components/PlayerHome').PlayerHome,
+  [],
 );
 checkComponent(
-    'src/components/Preferences',
-    require('./build/src/components/Preferences').Preferences,
-    [
-      'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
-      'hide_turnorder', 'hide_corporation_names', ,'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
-      'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
-      'lang', 'langs', 'enable_sounds',
-    ],
+  'src/components/Preferences',
+  require('./build/src/components/Preferences').Preferences,
+  [
+    'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
+    'hide_turnorder', 'hide_corporation_names', , 'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
+    'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
+    'lang', 'langs', 'enable_sounds',
+  ],
 );
 checkComponent(
-    'src/components/SelectAmount',
-    require('./build/src/components/SelectAmount').SelectAmount,
-    ['amount'],
+  'src/components/SelectAmount',
+  require('./build/src/components/SelectAmount').SelectAmount,
+  ['amount'],
 );
 checkComponent(
-    'src/components/SelectCard',
-    require('./build/src/components/SelectCard').SelectCard,
-    ['cards'],
+  'src/components/SelectCard',
+  require('./build/src/components/SelectCard').SelectCard,
+  ['cards'],
 );
 checkComponent(
-    'src/components/SelectColony',
-    require('./build/src/components/SelectColony').SelectColony,
-    ['selectedColony'],
+  'src/components/SelectColony',
+  require('./build/src/components/SelectColony').SelectColony,
+  ['selectedColony'],
 );
 checkComponent(
-    'src/components/SelectHowToPay',
-    require('./build/src/components/SelectHowToPay').SelectHowToPay,
-    ['cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
+  'src/components/SelectHowToPay',
+  require('./build/src/components/SelectHowToPay').SelectHowToPay,
+  ['cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(
-    'src/components/SelectHowToPayForCard',
-    require('./build/src/components/SelectHowToPayForCard').SelectHowToPayForCard,
-    ['card', 'cards', 'cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
+  'src/components/SelectHowToPayForCard',
+  require('./build/src/components/SelectHowToPayForCard').SelectHowToPayForCard,
+  ['card', 'cards', 'cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(
-    'src/components/SelectOption',
-    require('./build/src/components/SelectOption').SelectOption,
-    [],
+  'src/components/SelectOption',
+  require('./build/src/components/SelectOption').SelectOption,
+  [],
 );
 checkComponent(
-    'src/components/SelectPartyPlayer',
-    require('./build/src/components/SelectPartyPlayer').SelectPartyPlayer,
-    ['selectedPlayer'],
+  'src/components/SelectPartyPlayer',
+  require('./build/src/components/SelectPartyPlayer').SelectPartyPlayer,
+  ['selectedPlayer'],
 );
 checkComponent(
-    'src/components/SelectPlayer',
-    require('./build/src/components/SelectPlayer').SelectPlayer,
-    ['selectedPlayer'],
+  'src/components/SelectPlayer',
+  require('./build/src/components/SelectPlayer').SelectPlayer,
+  ['selectedPlayer'],
 );
 checkComponent(
-    'src/components/SelectPlayerRow',
-    require('./build/src/components/SelectPlayerRow').SelectPlayerRow,
-    [],
+  'src/components/SelectPlayerRow',
+  require('./build/src/components/SelectPlayerRow').SelectPlayerRow,
+  [],
 );
 checkComponent(
-    'src/components/SelectProductionToLose',
-    require('./build/src/components/SelectProductionToLose').SelectProductionToLose,
-    ['megacredits', 'steel', 'titanium', 'plants', 'energy', 'heat', 'warning'],
+  'src/components/SelectProductionToLose',
+  require('./build/src/components/SelectProductionToLose').SelectProductionToLose,
+  ['megacredits', 'steel', 'titanium', 'plants', 'energy', 'heat', 'warning'],
 );
 checkComponent(
-    'src/components/ShiftAresGlobalParameters',
-    require('./build/src/components/ShiftAresGlobalParameters').ShiftAresGlobalParameters,
-    ['hazardData', 'lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta', 'ADJUSTMENT_RANGE'],
+  'src/components/ShiftAresGlobalParameters',
+  require('./build/src/components/ShiftAresGlobalParameters').ShiftAresGlobalParameters,
+  ['hazardData', 'lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta', 'ADJUSTMENT_RANGE'],
 );
 checkComponent(
-    'src/components/SortableCards',
-    require('./build/src/components/SortableCards').SortableCards,
-    [],
+  'src/components/SortableCards',
+  require('./build/src/components/SortableCards').SortableCards,
+  [],
 );
 checkComponent(
-    'src/components/StackedCards',
-    require('./build/src/components/StackedCards').StackedCards,
-    [],
+  'src/components/StackedCards',
+  require('./build/src/components/StackedCards').StackedCards,
+  [],
 );
 checkComponent(
-    'src/components/StartScreen',
-    require('./build/src/components/StartScreen').StartScreen,
-    [],
+  'src/components/StartScreen',
+  require('./build/src/components/StartScreen').StartScreen,
+  [],
 );
 checkComponent(
-    'src/components/Tag',
-    require('./build/src/components/Tag').Tag,
-    [],
+  'src/components/Tag',
+  require('./build/src/components/Tag').Tag,
+  [],
 );
 checkComponent(
-    'src/components/TagCount',
-    require('./build/src/components/TagCount').TagCount,
-    [],
+  'src/components/TagCount',
+  require('./build/src/components/TagCount').TagCount,
+  [],
 );
 checkComponent(
-    'src/components/Turmoil',
-    require('./build/src/components/Turmoil').Turmoil,
-    [],
+  'src/components/Turmoil',
+  require('./build/src/components/Turmoil').Turmoil,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerInfo',
-    require('./build/src/components/overview/PlayerInfo').PlayerInfo,
-    [],
+  'src/components/overview/PlayerInfo',
+  require('./build/src/components/overview/PlayerInfo').PlayerInfo,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerResource',
-    require('./build/src/components/overview/PlayerResource').PlayerResource,
-    [],
+  'src/components/overview/PlayerResource',
+  require('./build/src/components/overview/PlayerResource').PlayerResource,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerResources',
-    require('./build/src/components/overview/PlayerResources').PlayerResources,
-    ['resources'],
+  'src/components/overview/PlayerResources',
+  require('./build/src/components/overview/PlayerResources').PlayerResources,
+  ['resources'],
 );
 checkComponent(
-    'src/components/overview/PlayersOverview',
-    require('./build/src/components/overview/PlayersOverview').PlayersOverview,
-    [],
+  'src/components/overview/PlayersOverview',
+  require('./build/src/components/overview/PlayersOverview').PlayersOverview,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerStatus',
-    require('./build/src/components/overview/PlayerStatus').PlayerStatus,
-    [],
+  'src/components/overview/PlayerStatus',
+  require('./build/src/components/overview/PlayerStatus').PlayerStatus,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerTags',
-    require('./build/src/components/overview/PlayerTags').PlayerTags,
-    [],
+  'src/components/overview/PlayerTags',
+  require('./build/src/components/overview/PlayerTags').PlayerTags,
+  [],
 );
 checkComponent(
-    'src/components/overview/PlayerTimer',
-    require('./build/src/components/overview/PlayerTimer').PlayerTimer,
-    ['timerText'],
+  'src/components/overview/PlayerTimer',
+  require('./build/src/components/overview/PlayerTimer').PlayerTimer,
+  ['timerText'],
 );
 checkComponent(
   'src/components/TopBar',

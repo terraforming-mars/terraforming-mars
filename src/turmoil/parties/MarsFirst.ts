@@ -13,6 +13,7 @@ import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -52,7 +53,7 @@ export class MarsFirstBonus02 implements Bonus {
 
 export class MarsFirstPolicy01 implements Policy {
   isDefault = true;
-  id = 'mfp01';
+  id = TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY;
   description: string = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
@@ -63,7 +64,7 @@ export class MarsFirstPolicy01 implements Policy {
 }
 
 export class MarsFirstPolicy02 implements Policy {
-  id = 'mfp02';
+  id = TurmoilPolicy.MARS_FIRST_POLICY_2;
   description: string = 'When you play a Building tag, gain 2 MC';
   isDefault = false;
 
@@ -73,13 +74,13 @@ export class MarsFirstPolicy02 implements Policy {
 }
 
 export class MarsFirstPolicy03 implements Policy {
-  id = 'mfp03';
+  id = TurmoilPolicy.MARS_FIRST_POLICY_3;
   description: string = 'Your steel resources are worth 1 MC extra';
   isDefault = false;
 }
 
 export class MarsFirstPolicy04 implements Policy {
-  id = 'mfp04';
+  id = TurmoilPolicy.MARS_FIRST_POLICY_4;
   description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 

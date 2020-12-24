@@ -7,6 +7,7 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
@@ -43,7 +44,7 @@ export class KelvinistsBonus02 implements Bonus {
 
 export class KelvinistsPolicy01 implements Policy {
   isDefault = true;
-  id = 'kp01';
+  id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
   description: string = 'Pay 10 MC to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   canAct(player: Player) {
@@ -70,13 +71,13 @@ export class KelvinistsPolicy01 implements Policy {
 }
 
 export class KelvinistsPolicy02 implements Policy {
-  id = 'kp02';
+  id = TurmoilPolicy.KELVINISTS_POLICY_2;
   description: string = 'When you raise temperature, gain 3 MC per step raised';
   isDefault = false;
 }
 
 export class KelvinistsPolicy03 implements Policy {
-  id = 'kp03';
+  id = TurmoilPolicy.KELVINISTS_POLICY_3;
   description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
   isDefault = false;
 
@@ -95,7 +96,7 @@ export class KelvinistsPolicy03 implements Policy {
 }
 
 export class KelvinistsPolicy04 implements Policy {
-  id = 'kp04';
+  id = TurmoilPolicy.KELVINISTS_POLICY_4;
   description: string = 'When you place a tile, gain 2 heat';
   isDefault = false;
 

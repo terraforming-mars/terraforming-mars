@@ -20,6 +20,7 @@ import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -59,7 +60,7 @@ export class GreensBonus02 implements Bonus {
 
 export class GreensPolicy01 implements Policy {
   isDefault = true;
-  id = 'gp01';
+  id = TurmoilPolicy.GREENS_DEFAULT_POLICY;
   description: string = 'When you place a greenery tile, gain 4 MC';
 
   onTilePlaced(player: Player, space: ISpace, game: Game) {
@@ -70,7 +71,7 @@ export class GreensPolicy01 implements Policy {
 }
 
 export class GreensPolicy02 implements Policy {
-  id = 'gp02';
+  id = TurmoilPolicy.GREENS_POLICY_2;
   description: string = 'When you place a tile, gain 1 plant';
   isDefault = false;
 
@@ -80,7 +81,7 @@ export class GreensPolicy02 implements Policy {
 }
 
 export class GreensPolicy03 implements Policy {
-  id = 'gp03';
+  id = TurmoilPolicy.GREENS_POLICY_3;
   description: string = 'When you play an animal, plant or microbe tag, gain 2 MC';
   isDefault = false;
 
@@ -93,7 +94,7 @@ export class GreensPolicy03 implements Policy {
 }
 
 export class GreensPolicy04 implements Policy {
-  id = 'gp04';
+  id = TurmoilPolicy.GREENS_POLICY_4;
   description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
   isDefault = false;
 

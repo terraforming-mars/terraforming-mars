@@ -65,6 +65,7 @@ import {GreensPolicy02} from './turmoil/parties/Greens';
 import {KelvinistsPolicy04} from './turmoil/parties/Kelvinists';
 import {DrawCards} from './deferredActions/DrawCards';
 import {GameSetup} from './GameSetup';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 
 export type GameId = string;
 
@@ -1197,12 +1198,12 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
         player.addProduction(Resources.MEGACREDITS, -1 * steps);
       }
 
       // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
         this.defer(new DrawCards(player, this, steps));
       }
 
@@ -1248,11 +1249,11 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
         player.addProduction(Resources.MEGACREDITS, -1 * steps);
       }
       // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
         this.defer(new DrawCards(player, this, steps));
       }
 
@@ -1297,16 +1298,16 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       // PoliticalAgendas Kelvinists P2 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp02')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
         player.setResource(Resources.MEGACREDITS, steps * 3);
       }
       // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
         player.addProduction(Resources.MEGACREDITS, -1 * steps);
       }
 
       // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
         this.defer(new DrawCards(player, this, steps));
       }
 
@@ -1427,7 +1428,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     // PoliticalAgendas Reds P2 hook
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp02') && this.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && this.phase === Phase.ACTION) {
       const redsPolicy = new RedsPolicy02();
       redsPolicy.onTilePlaced(player, space, this);
     }
@@ -1468,13 +1469,13 @@ export class Game implements ISerializable<SerializedGame> {
       PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
 
       // PoliticalAgendas Greens P2 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, 'gp02') && this.phase === Phase.ACTION) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && this.phase === Phase.ACTION) {
         const greensPolicy = new GreensPolicy02();
         greensPolicy.onTilePlaced(player);
       }
 
       // PoliticalAgendas Kelvinists P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, 'kp04') && this.phase === Phase.ACTION) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && this.phase === Phase.ACTION) {
         const kelvinistsPolicy = new KelvinistsPolicy04();
         kelvinistsPolicy.onTilePlaced(player);
       }
@@ -1558,11 +1559,11 @@ export class Game implements ISerializable<SerializedGame> {
     });
     if (this.phase !== Phase.SOLAR) {
       // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp04')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
         player.addProduction(Resources.MEGACREDITS, -1);
       }
       // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp03')) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
         this.defer(new DrawCards(player, this, 1));
       }
 

@@ -8,6 +8,7 @@ import {Bonus} from '../Bonus';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
+import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
@@ -44,7 +45,7 @@ export class ScientistsBonus02 implements Bonus {
 
 export class ScientistsPolicy01 implements Policy {
   isDefault = true;
-  id = 'sp01';
+  id = TurmoilPolicy.SCIENTISTS_DEFAULT_POLICY;
   description: string = 'Pay 10 MC to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player) {
@@ -75,19 +76,19 @@ export class ScientistsPolicy01 implements Policy {
 }
 
 export class ScientistsPolicy02 implements Policy {
-  id = 'sp02';
+  id = TurmoilPolicy.SCIENTISTS_POLICY_2;
   description: string = 'Your global requirements are +/- 2 steps';
   isDefault = false;
 }
 
 export class ScientistsPolicy03 implements Policy {
-  id = 'sp03';
+  id = TurmoilPolicy.SCIENTISTS_POLICY_3;
   description: string = 'When you raise a global parameter, draw a card per step raised';
   isDefault = false;
 }
 
 export class ScientistsPolicy04 implements Policy {
-  id = 'sp04';
+  id = TurmoilPolicy.SCIENTISTS_POLICY_4;
   description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
   isDefault = false;
 

@@ -61,6 +61,7 @@ import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 
 export type PlayerId = string;
 
@@ -190,7 +191,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getSteelValue(game: Game): number {
     // TODO: Move policyIds to enum
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, 'mfp03')) return this.steelValue + 1;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -522,7 +523,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Scientists P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, 'sp02')) {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
       requirementsBonus += 2;
     }
 
@@ -1103,7 +1104,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, 'up04')) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
     }
 

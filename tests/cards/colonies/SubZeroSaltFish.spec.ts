@@ -12,7 +12,7 @@ describe('SubZeroSaltFish', function() {
     card = new SubZeroSaltFish();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play if no one has plant production', function() {

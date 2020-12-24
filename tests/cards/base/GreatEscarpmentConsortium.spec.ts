@@ -13,7 +13,7 @@ describe('GreatEscarpmentConsortium', function() {
     card = new GreatEscarpmentConsortium();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Cannot play without steel production', function() {
@@ -46,7 +46,7 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Can play in solo - won\'t reduce own production', function() {
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     player.addProduction(Resources.STEEL);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 

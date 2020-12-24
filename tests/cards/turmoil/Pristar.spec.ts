@@ -8,7 +8,7 @@ describe('Pristar', function() {
     const card = new Pristar();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     const play = card.play(player);
     player.corporationCard = card;
     expect(play).is.undefined;

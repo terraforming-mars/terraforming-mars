@@ -9,7 +9,7 @@ describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
 
     player.playedCards.push(advertising);
     advertising.play();

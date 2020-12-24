@@ -4,7 +4,7 @@ import {CardType} from '../../cards/CardType';
 import {Game} from '../../Game';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {LogHelper} from '../../components/LogHelper';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';

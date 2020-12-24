@@ -7,7 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';

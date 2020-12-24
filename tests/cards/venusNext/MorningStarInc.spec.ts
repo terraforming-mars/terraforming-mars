@@ -10,7 +10,7 @@ describe('MorningStarInc', function() {
     const card = new IshtarMining();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
     game.increaseVenusScaleLevel(player, 3);
     expect(card.canPlay(player, game)).is.true;

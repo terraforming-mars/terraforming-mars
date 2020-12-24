@@ -13,7 +13,7 @@ describe('ProjectInspection', function() {
   beforeEach(function() {
     card = new ProjectInspection();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     actionCard = new RestrictedArea();
     player.playedCards.push(actionCard);
   });

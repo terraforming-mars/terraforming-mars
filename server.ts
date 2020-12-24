@@ -1,4 +1,8 @@
 require('dotenv').config();
+require('console-stamp')(
+  console,
+  {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
+);
 
 import * as https from 'https';
 import * as http from 'http';

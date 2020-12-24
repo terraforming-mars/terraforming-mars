@@ -10,7 +10,7 @@ describe('GiantSolarShade', function() {
     const card = new GiantSolarShade();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play(player, game);
     expect(action).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(6);
@@ -20,7 +20,7 @@ describe('GiantSolarShade', function() {
   it('Should play with Reds and Dirigibles', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = new Game('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('foobar', [player], player, gameOptions);
         game.turmoil!.rulingParty = new Reds();
         const card = new GiantSolarShade();
         player.megaCredits = 27;

@@ -9,7 +9,7 @@ describe('VestaShipyard', function() {
     const card = new VestaShipyard();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
 
     card.play(player, game);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

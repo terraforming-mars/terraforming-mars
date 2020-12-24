@@ -10,7 +10,7 @@ describe('EccentricSponsor', function() {
   beforeEach(function() {
     card = new EccentricSponsor();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Gets card discount', function() {

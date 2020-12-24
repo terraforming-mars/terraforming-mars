@@ -32,7 +32,7 @@ describe('Turmoil', function() {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = new Game('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -102,7 +102,10 @@ describe('Turmoil', function() {
   });
 
   it('Correctly run end of generation', function() {
-    return; // TODO Fix me! I am flaky. A am randomly failing in CI
+    // Eliminate the flaky cases where the current global event sends delegates to
+    // parties, changing the dominant party outcome.
+    turmoil.parties.forEach((p) => p.delegates = []);
+
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);

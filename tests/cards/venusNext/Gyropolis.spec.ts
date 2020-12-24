@@ -13,7 +13,7 @@ describe('Gyropolis', function() {
     const card = new Gyropolis();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     const card1 = new ResearchNetwork();
     const card2 = new LunaGovernor();
 

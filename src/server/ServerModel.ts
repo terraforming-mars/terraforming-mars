@@ -6,7 +6,7 @@ import {Game} from '../Game';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {OrOptions} from '../inputs/OrOptions';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';

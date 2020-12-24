@@ -11,7 +11,7 @@ describe('GenerousFunding', function() {
     const card = new GenerousFunding();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);

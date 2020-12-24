@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardMetadata} from '../CardMetadata';

@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {REDS_RULING_POLICY_COST, MAX_OXYGEN_LEVEL} from '../../constants';
 import {CardMetadata} from '../CardMetadata';

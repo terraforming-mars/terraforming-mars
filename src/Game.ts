@@ -1624,8 +1624,6 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public static deserialize(d: SerializedGame): Game {
-    // const o = Object.assign(this, d);
-
     const gameOptions = d.gameOptions;
 
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
@@ -1720,6 +1718,21 @@ export class Game implements ISerializable<SerializedGame> {
     d.unDraftedCards.forEach((unDraftedCard) => {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
+
+    game.lastSaveId = d.lastSaveId;
+    game.clonedGamedId = d.clonedGamedId;
+    game.gameAge = d.gameAge;
+    game.gameLog = d.gameLog;
+    game.generation = d.generation;
+    game.phase = d.phase;
+    game.oxygenLevel = d.oxygenLevel;
+    game.temperature = d.temperature;
+    game.venusScaleLevel = d.venusScaleLevel;
+    game.activePlayer = d.activePlayer;
+    game.draftRound = d.draftRound;
+    game.initialDraftIteration = d.initialDraftIteration;
+    game.monsInsuranceOwner = d.monsInsuranceOwner;
+    game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {

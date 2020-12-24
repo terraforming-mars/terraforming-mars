@@ -1,3 +1,4 @@
+import {CardName} from '../CardName';
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {ICard} from '../cards/ICard';
@@ -92,9 +93,29 @@ export class LogHelper {
     game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(game: Game, discardedCards: Array<ICard>) {
-    game.log(discardedCards.length + ' card(s) were discarded', (b) => {
-      discardedCards.forEach((card) => b.card(card));
+  static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
+    game.log(cards.length + ' card(s) were discarded', (b) => {
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+    });
+  }
+
+  static logDrawnCards(game: Game, player: Player, cards: Array<ICard> | Array<CardName>) {
+    game.log('${0} drew ${1} card(s)', (b) => {
+      b.player(player);
+      b.number(cards.length);
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
     });
   }
 }

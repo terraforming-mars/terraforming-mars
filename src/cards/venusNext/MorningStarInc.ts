@@ -1,4 +1,5 @@
 import {CorporationCard} from '../corporation/CorporationCard';
+import {LogHelper} from '../../components/LogHelper';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
@@ -15,17 +16,9 @@ export class MorningStarInc implements CorporationCard {
 
     public initialActionText: string = 'Draw 3 Venus-tag cards';
     public initialAction(player: Player, game: Game) {
-      if (game.hasCardsWithTag(Tags.VENUS, 3)) {
-        for (const foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
-          player.cardsInHand.push(foundCard);
-        }
-
-        const drawnCards = game.getCardsInHandByTag(player, Tags.VENUS).slice(-3);
-
-        game.log('${0} drew ${1}, ${2} and ${3}', (b) =>
-          b.player(player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
-      }
-
+      const cards = game.drawCardsByTag(Tags.VENUS, 3);
+      player.cardsInHand.push(...cards);
+      LogHelper.logDrawnCards(game, player, cards);
       return undefined;
     }
 

@@ -1,3 +1,4 @@
+import {Message} from '../Message';
 import {CardType} from '../cards/CardType';
 import {ResourceType} from '../ResourceType';
 
@@ -8,5 +9,5 @@ export interface CardModel {
     calculatedCost: number;
     cardType: CardType;
     isDisabled: boolean;
-    warning?: string;
+    warning?: string | Message;
 }

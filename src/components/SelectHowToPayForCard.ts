@@ -97,6 +97,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     });
   },
   methods: {
+    translate: $t,
     getCard: function() {
       const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -110,9 +111,6 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
         throw new Error(`card not found ${this.cardName}`);
       }
       return card.tags;
-    },
-    getTitle: function() {
-      return $t(this.playerinput.title);
     },
     setDefaultMicrobesValue: function() {
       // automatically use available microbes to pay if not enough MC
@@ -369,7 +367,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ getTitle() }}</div>
+  <div v-if="showtitle === true">{{ translate(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -377,7 +375,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning }}</div>
+    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning !== undefined ? translate(this.card.warning) : '' }}</div>
 
     <h3 class="payments_title">How to pay?</h3>
 

@@ -14,7 +14,7 @@ describe('SponsoredAcademies', function() {
     const card3 = new Tardigrades();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     player.cardsInHand.push(card);
     expect(card.canPlay(player)).is.not.true;
     player.cardsInHand.push(card2, card3);

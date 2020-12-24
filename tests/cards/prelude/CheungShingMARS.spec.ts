@@ -13,7 +13,7 @@ describe('CheungShingMARS', function() {
   beforeEach(function() {
     card = new CheungShingMARS();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Gets card discount', function() {

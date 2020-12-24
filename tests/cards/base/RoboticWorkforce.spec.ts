@@ -28,7 +28,7 @@ describe('RoboticWorkforce', function() {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if no building cards to copy', function() {
@@ -68,7 +68,7 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Should work with Capital (Ares expansion)', function() {
-    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
@@ -84,7 +84,7 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Should work with Solar Farm (Ares expansion)', function() {
-    game = new Game('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map
@@ -137,7 +137,7 @@ describe('RoboticWorkforce', function() {
           // Create new players, set all productions to 2 and place some tiles
           player = TestPlayers.BLUE.newPlayer();
           redPlayer = TestPlayers.RED.newPlayer();
-          game = new Game('foobar', [player, redPlayer], player, gameOptions);
+          game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
           resetBoard(game);
           game.addCityTile(player, '17');
           game.addCityTile(player, '19');

@@ -13,7 +13,7 @@ describe('PowerSupplyConsortium', function() {
     card = new PowerSupplyConsortium();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play without power tags', function() {
@@ -46,7 +46,7 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play in solo mode if have enough power tags', function() {
-    const game = new Game('foobar2', [player], player);
+    const game = Game.newInstance('foobar2', [player], player);
     player.playedCards.push(card, card);
     expect(card.canPlay(player)).is.true;
 

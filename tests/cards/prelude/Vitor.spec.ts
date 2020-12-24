@@ -14,7 +14,7 @@ describe('Vitor', function() {
     card = new Vitor();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -31,7 +31,7 @@ describe('Vitor', function() {
   });
 
   it('No initial action for solo games', function() {
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const action = card.initialAction(player, game);
     expect(action).is.undefined;
   });

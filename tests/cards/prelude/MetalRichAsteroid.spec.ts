@@ -7,7 +7,7 @@ describe('Metal-RichAsteroid', function() {
   it('Should play', function() {
     const card = new MetalRichAsteroid();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const action = card.play(player, game);
     expect(action).is.undefined;
     expect(player.titanium).to.eq(4);

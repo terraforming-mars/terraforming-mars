@@ -10,7 +10,7 @@ describe('AerosportTournament', function() {
     const corp = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
     corp.action(player, game);
     corp.action(player, game);

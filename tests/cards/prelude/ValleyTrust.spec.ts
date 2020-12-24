@@ -13,7 +13,7 @@ describe('ValleyTrust', function() {
   beforeEach(function() {
     card = new ValleyTrust();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Doesn\'t get card discount for other tags', function() {

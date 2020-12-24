@@ -2,6 +2,7 @@ import {CardType} from './CardType';
 import {AndOptions} from '../inputs/AndOptions';
 import {IProjectCard} from '../cards/IProjectCard';
 import {ISpace} from '../boards/ISpace';
+import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {Game} from '../Game';
@@ -48,5 +49,5 @@ export interface ICard {
     cardType: CardType;
     metadata?: CardMetadata;
     howToAffordReds?: HowToAffordRedsPolicy;
-    warning?: string;
+    warning?: string | Message;
 }

@@ -149,6 +149,10 @@ export class Dealer implements ISerializable<SerializedDealer> {
       return this.deck.length;
     }
 
+    public getDiscardedSize(): number {
+      return this.discarded.length;
+    }
+
     public static deserialize(d: SerializedDealer): Dealer {
       const dealer = new Dealer();
       const cardFinder = new CardFinder();

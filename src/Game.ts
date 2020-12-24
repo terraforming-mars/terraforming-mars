@@ -1535,7 +1535,7 @@ export class Game implements ISerializable<SerializedGame> {
     const discardedCards = new Set<CardName>();
 
     while (result.length < total) {
-      if (discardedCards.size >= this.dealer.getDeckSize()) {
+      if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
         console.warn('discarded every card without match');
         break;
       }

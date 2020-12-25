@@ -10,6 +10,8 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 
 export class Recyclon implements CorporationCard, IResourceCard {
@@ -45,5 +47,21 @@ export class Recyclon implements CorporationCard, IResourceCard {
         return undefined;
       });
       return new OrOptions(spendResource, addResource);
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R26',
+      description: 'You start with 38 MC and 1 steel production.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(38).nbsp.productionBox((pb) => pb.steel(1));
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.building().played.colon().microbes(1).or();
+            eb.microbes(2).digit.startEffect.productionBox((pb) => pb.plants(1));
+            eb.description('Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.');
+          });
+        });
+      }),
     }
 }

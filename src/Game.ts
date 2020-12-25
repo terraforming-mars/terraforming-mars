@@ -214,17 +214,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     this.activePlayer = first.id;
 
-    this.dealer = Dealer.newInstance(
-      gameOptions.corporateEra,
-      gameOptions.preludeExtension,
-      gameOptions.venusNextExtension,
-      gameOptions.coloniesExtension,
-      gameOptions.promoCardsOption,
-      gameOptions.turmoilExtension,
-      gameOptions.aresExtension,
-      gameOptions.communityCardsOption,
-      gameOptions.cardsBlackList,
-    );
+    this.dealer = Dealer.newInstance(gameOptions);
 
     // Clone game
     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
@@ -1624,7 +1614,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.deferredActions = new DeferredActionsQueue();
 
     // Rebuild dealer object to be sure that we will have cards in the same order
-    this.dealer = Dealer.deserialize(d.dealer);
+    this.dealer = Dealer.deserialize(d.dealer, d.gameOptions);
 
     // Rebuild every player objects
     this.players = d.players.map((element: SerializedPlayer) => {

@@ -1,4 +1,3 @@
-import {CardName} from './CardName';
 import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
@@ -17,6 +16,7 @@ import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {GameOptions} from './Game';
 
 export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
@@ -28,15 +28,8 @@ export class Dealer implements ISerializable<SerializedDealer> {
     private constructor() { }
 
     public static newInstance(
-      corporateEra: boolean,
-      prelude: boolean,
-      venusNext: boolean,
-      colonies : boolean,
-      promoCards: boolean,
-      turmoil: boolean,
-      ares: boolean,
-      communityCards: boolean = false,
-      cardsBlackList?: Array<CardName>,
+      gameOptions: GameOptions,
+      standardProjectsOnly = false,
     ): Dealer {
       const dealer = new Dealer();
 
@@ -52,11 +45,11 @@ export class Dealer implements ISerializable<SerializedDealer> {
         case undefined:
           return true;
         case GameModule.Venus:
-          return venusNext;
+          return gameOptions.venusNextExtension;
         case GameModule.Colonies:
-          return colonies;
+          return gameOptions.coloniesExtension;
         case GameModule.Turmoil:
-          return turmoil;
+          return gameOptions.turmoilExtension;
         default:
           throw ('Unhandled expansion type: ' + expansion);
         }
@@ -67,44 +60,38 @@ export class Dealer implements ISerializable<SerializedDealer> {
           .map((cf) => new cf.Factory());
         deck.push(...cardInstances);
       }
-      function addToDecks(manifest: CardManifest) {
+      function addToDecks(manifest: CardManifest, standardProjectsOnly = false) {
+        addToDeck(standardProjects, manifest.standardProjects);
+        if (standardProjectsOnly) return;
         addToDeck(deck, manifest.projectCards);
         addToDeck(corporationCards, manifest.corporationCards);
         addToDeck(preludeDeck, manifest.preludeCards);
-        addToDeck(standardProjects, manifest.standardProjects);
         projectCardsToRemove.push(...manifest.projectCardsToRemove);
       }
-      addToDecks(BASE_CARD_MANIFEST);
-      if (corporateEra) {
-        addToDecks(CORP_ERA_CARD_MANIFEST);
+
+      const manifests = [
+        [true, BASE_CARD_MANIFEST],
+        [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
+        [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
+        [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
+        [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
+        [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
+        [gameOptions.aresExtension, ARES_CARD_MANIFEST],
+        [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
+        [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
+      ];
+      for (const manifest of manifests) {
+        if (manifest[0]) {
+          addToDecks(<CardManifest>manifest[1], standardProjectsOnly);
+        }
       }
-      if (prelude) {
-        addToDecks(PRELUDE_CARD_MANIFEST);
-      }
-      if (venusNext) {
-        addToDecks(VENUS_CARD_MANIFEST);
-      }
-      if (colonies) {
-        addToDecks(COLONIES_CARD_MANIFEST);
-      }
-      if (turmoil) {
-        addToDecks(TURMOIL_CARD_MANIFEST);
-      }
-      if (ares) {
-        addToDecks(ARES_CARD_MANIFEST);
-      }
-      if (promoCards) {
-        addToDecks(PROMO_CARD_MANIFEST);
-      }
-      if (communityCards) {
-        addToDecks(COMMUNITY_CARD_MANIFEST);
-      }
-      if (cardsBlackList) {
-        projectCardsToRemove.push(...cardsBlackList);
+
+      if (gameOptions.cardsBlackList) {
+        projectCardsToRemove.push(...gameOptions.cardsBlackList);
       }
       const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
       dealer.deck = dealer.shuffleCards(filteredDeck);
-      if (prelude) {
+      if (gameOptions.preludeExtension) {
         dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
       }
       dealer.corporationCards = corporationCards;
@@ -156,7 +143,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       return this.deck.length;
     }
 
-    public static deserialize(d: SerializedDealer): Dealer {
+    public static deserialize(d: SerializedDealer, gameOptions: GameOptions): Dealer {
       const dealer = new Dealer();
       const cardFinder = new CardFinder();
 
@@ -164,7 +151,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       dealer.deck = cardFinder.cardsFromJSON(d.deck);
       dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
       dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
-      dealer.standardProjects = cardFinder.standardProjectsFromJSON(d.standardProjects);
+      dealer.standardProjects = this.newInstance(gameOptions, true).standardProjects;
       return dealer;
     }
 
@@ -174,7 +161,6 @@ export class Dealer implements ISerializable<SerializedDealer> {
         deck: this.deck.map((c) => c.name),
         discarded: this.discarded.map((c) => c.name),
         preludeDeck: this.preludeDeck.map((c) => c.name),
-        standardProjects: this.standardProjects.map((c) => c.name),
       };
     }
 }

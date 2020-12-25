@@ -15,6 +15,10 @@ export const CardContent = Vue.component('CardContent', {
       type: Boolean,
       required: true,
     },
+    isStandardProject: {
+      type: Boolean,
+      required: true,
+    },
   },
   components: {
     CardRequirementsComponent,
@@ -27,6 +31,9 @@ export const CardContent = Vue.component('CardContent', {
       const classes: Array<string> = ['card-content'];
       if (this.isCorporation) {
         classes.push('card-content-corporation');
+      }
+      if (this.isStandardProject) {
+        classes.push('card-content-standard-project');
       }
       return classes.join(' ');
     },

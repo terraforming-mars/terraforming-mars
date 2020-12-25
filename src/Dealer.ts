@@ -16,12 +16,14 @@ import {CardTypes, Deck} from './Deck';
 import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 
 export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
     public corporationCards: Array<CorporationCard> = [];
+    public standardProjects: Array<StandardProjectCard> = [];
 
     private constructor() { }
 
@@ -42,6 +44,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       const preludeDeck:Array<IProjectCard> = [];
       const projectCardsToRemove:Array<String> = [];
       const corporationCards: Array<CorporationCard> = [];
+      const standardProjects: Array<StandardProjectCard> = [];
 
       function include(cf: ICardFactory<CardTypes>) : boolean {
         const expansion = cf.compatibility;
@@ -68,6 +71,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         addToDeck(deck, manifest.projectCards);
         addToDeck(corporationCards, manifest.corporationCards);
         addToDeck(preludeDeck, manifest.preludeCards);
+        addToDeck(standardProjects, manifest.standardProjects);
         projectCardsToRemove.push(...manifest.projectCardsToRemove);
       }
       addToDecks(BASE_CARD_MANIFEST);
@@ -104,6 +108,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
       }
       dealer.corporationCards = corporationCards;
+      dealer.standardProjects = standardProjects;
       return dealer;
     }
 
@@ -157,6 +162,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       dealer.deck = cardFinder.cardsFromJSON(d.deck);
       dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
       dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      dealer.standardProjects = cardFinder.standardProjectsFromJSON(d.standardProjects);
       return dealer;
     }
 
@@ -166,6 +172,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         deck: this.deck.map((c) => c.name),
         discarded: this.discarded.map((c) => c.name),
         preludeDeck: this.preludeDeck.map((c) => c.name),
+        standardProjects: this.standardProjects.map((c) => c.name),
       };
     }
 }

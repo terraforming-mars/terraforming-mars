@@ -13,6 +13,7 @@ import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -31,6 +32,22 @@ export class CardFinder {
         ];
       }
       return CardFinder.decks;
+    }
+
+    public getStandardProjectCardByName(cardName: string): StandardProjectCard | undefined {
+      let found : (ICardFactory<StandardProjectCard> | undefined);
+      CardFinder.getDecks().forEach((deck) => {
+        // Short circuit
+        if (found !== undefined) {
+          return;
+        }
+        found = deck.standardProjects.findByCardName(cardName);
+      });
+      if (found !== undefined) {
+        return new found.Factory();
+      }
+      console.warn(`standard project card not found ${cardName}`);
+      return undefined;
     }
 
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
@@ -110,6 +127,26 @@ export class CardFinder {
           result.push(card);
         } else {
           console.warn(`corporation card ${card} not found for deck`);
+        }
+      });
+      return result;
+    }
+
+    public standardProjectsFromJSON(cards: Array<ICard | CardName>): Array<StandardProjectCard> {
+      if (cards === undefined) {
+        console.warn('missing cards calling corporationCardsFromJSON');
+        return [];
+      }
+      const result: Array<StandardProjectCard> = [];
+      cards.forEach((element: ICard | CardName) => {
+        if (typeof element !== 'string') {
+          element = element.name;
+        }
+        const card = this.getStandardProjectCardByName(element);
+        if (card !== undefined) {
+          result.push(card);
+        } else {
+          console.warn(`standard project card ${card} not found for deck`);
         }
       });
       return result;

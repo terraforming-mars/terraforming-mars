@@ -69,6 +69,10 @@
     box-shadow: 0 0 2px 1px black;
 }
 
+.card-standard-project{
+    height: 150px;
+}
+
 .clicked-card {
     box-shadow: 0 0 1px 1px #444, 0 0 15px 5px white !important;
     filter: grayscale(1);
@@ -473,6 +477,15 @@ input[type="radio"]:checked + .filterDiv::after {
         #f2a6c8,
         rgb(235, 118, 171) 90%
     );
+}
+
+.card-title-standard-project {
+    padding-top: 20px !important;
+    padding-bottom: 20px;
+}
+
+.background-color-standard-project {
+    background: linear-gradient(-60deg, #bc8a13 10%, #fcfaa3, #bc8a13 90%);
 }
 
 .background-color-colony {
@@ -1391,7 +1404,7 @@ input[type="radio"]:checked + .filterDiv::after {
   border-right: 4px solid #898989;
   z-index: 3;
 }
- 
+
 .card-resources-counter-number {
     z-index: 3;
     font-size: 22px;
@@ -1400,7 +1413,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-resources-counter-label {
     text-transform: uppercase;
 }
- 
+
 .polyphemos {
     font-family: Prototype;
     width: 180px;
@@ -2230,7 +2243,7 @@ input[type="radio"]:checked + .filterDiv::after {
         }
     }
     .description-starting-resource{
-        text-align: center; 
+        text-align: center;
     }
     .description-effect {
         text-align: center;
@@ -2309,7 +2322,7 @@ input[type="radio"]:checked + .filterDiv::after {
           margin-bottom: -5px;
           vertical-align: text-bottom;
         }
-      
+
         .tile.trade {
             margin: 0 !important;
         }
@@ -2423,7 +2436,7 @@ input[type="radio"]:checked + .filterDiv::after {
     .herbivores-requirement{
         position: absolute;
         text-align: left;
-        margin-top: 42px; 
+        margin-top: 42px;
         width: 130px;
     }
     .production-box{
@@ -2658,7 +2671,30 @@ input[type="radio"]:checked + .filterDiv::after {
                     #e28c22
                 );
                 border-radius: 7px 7px 2px 2px;
+            }
+            .standard-project-label {
                 text-transform: uppercase;
+                float: left;
+                top: 0;
+                position: absolute;
+                color: #020202;
+                width: 135px;
+                height: 14px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 13px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: #cccccc;
+                background-color: rgb(255, 204, 100);
+                background: linear-gradient(
+                        to right,
+                        #e28c22,
+                        rgb(255, 204, 100),
+                        rgb(255, 204, 100),
+                        #e28c22
+                );
+                border-radius: 7px 7px 2px 2px;
             }
             .prelude-label {
                 position: absolute;

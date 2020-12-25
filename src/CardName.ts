@@ -1,4 +1,16 @@
 export enum CardName {
+    // Standard projects:
+    STANDARD_GREENERY = 'Greenery',
+    STANDARD_ASTEROID = 'asteroid',
+    STANDARD_AQUIFER = 'Aquifer',
+    STANDARD_CITY = 'City',
+    STANDARD_AIR_SCRAPPING = 'Air scrapping',
+    STANDARD_BUILD_COLONY = 'Build Colony',
+    STANDARD_BUFFER_GAS = 'Buffer Gas',
+    STANDARD_POWER_PLANT = 'Power plant',
+    STANDARD_POWER_PLANT_THORGATE = 'Power plant (Thorgate)',
+    STANDARD_SELLING_PATENTS = 'Selling Patents',
+
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
     ADAPTED_LICHEN = 'Adapted Lichen',

@@ -1,0 +1,42 @@
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {Game} from '../../Game';
+import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {StandardProjectCard} from './StandardProjectCard';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../turmoil/parties/PartyName';
+
+export class Aquifer extends StandardProjectCard {
+  public name = CardName.STANDARD_AQUIFER;
+  public _cost = 18;
+
+  public canAct(player: Player, game: Game): boolean {
+    if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
+      return false;
+    }
+
+    let additionalCost = 0;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      additionalCost += REDS_RULING_POLICY_COST;
+    }
+
+    return player.canAfford(this._cost + additionalCost, game);
+  }
+
+  actionEssence(player: Player, game: Game): void {
+    game.defer(new PlaceOceanTile(player, game, 'Select space for ocean'));
+  }
+
+  public metadata: CardMetadata = {
+    cardNumber: '',
+    renderData: CardRenderer.builder((b) =>
+      b.effectBox((eb) => {
+        eb.megacredits(18).startAction.oceans(1);
+        eb.description('Action: Spend 18 MC to place an ocean tile.');
+      }),
+    ),
+  };
+}

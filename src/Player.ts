@@ -1917,7 +1917,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjects = this.getStandardProjects(game);
+    const standardProjects = this.getAvailableStandardProjects(game);
     if (standardProjects.cards.length >= 1) {
       action.options.push(standardProjects);
     }
@@ -2226,7 +2226,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return colonyTilesAlreadyBuiltOn < game.colonies.length;
   }
 
-  public getStandardProjects(game: Game) {
+  public getAvailableStandardProjects(game: Game) {
     let projects = game.dealer.standardProjects;
     if (this.corporationCard?.name === CardName.THORGATE) {
       projects = projects.filter((card) => card.name !== CardName.STANDARD_POWER_PLANT);

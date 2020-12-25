@@ -10,10 +10,10 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 
 export class BufferGas extends StandardProjectCard {
   public name = CardName.STANDARD_BUFFER_GAS;
-  public _cost = 16;
+  public cost = 16;
 
   public canAct(player: Player, game: Game): boolean {
-    let cost = this._cost;
+    let cost = this.cost;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost);

@@ -19,7 +19,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     public hasRequirements = false;
     public tags = [];
     public abstract name: CardName;
-    abstract _cost: number;
+    abstract cost: number;
 
     public play() {
       return undefined;
@@ -29,7 +29,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
       game.defer(new SelectHowToPayDeferred(
         player,
-        this._cost,
+        this.cost,
         false,
         false,
         `Select how to pay for ${this.name} project`,

@@ -20,7 +20,7 @@ export class CrediCor implements CorporationCard {
       }
     }
     public onStandardProject(player: Player, project: StandardProjectCard) {
-      if (project._cost >= 20) {
+      if (project.cost >= 20) {
         player.megaCredits += 4;
       }
     }

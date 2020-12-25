@@ -2240,7 +2240,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new SelectCard(
       'Standard projects',
       'Confirm',
-      projects.sort((a, b) => a._cost - b._cost).filter((card) => card.canAct(this, game)),
+      projects.sort((a, b) => a.cost - b.cost).filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

@@ -8,10 +8,10 @@ import {Resources} from '../../Resources';
 
 export class PowerPlantStandard extends StandardProjectCard {
   public name = CardName.STANDARD_POWER_PLANT;
-  public _cost = 11;
+  public cost = 11;
 
   public canAct(player: Player, game: Game): boolean {
-    return player.canAfford(this._cost, game);
+    return player.canAfford(this.cost, game);
   }
 
   actionEssence(player: Player): void {

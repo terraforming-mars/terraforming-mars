@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class PowerPlantThorgate extends PowerPlantStandard {
   public name = CardName.STANDARD_POWER_PLANT_THORGATE;
-  public _cost = 11 - 3;
+  public cost = 11 - 3;
 
   public metadata: CardMetadata = {
     cardNumber: '',

@@ -11,10 +11,10 @@ import * as constants from '../../constants';
 
 export class AsteroidStandard extends StandardProjectCard {
   public name = CardName.STANDARD_ASTEROID;
-  public _cost = 14;
+  public cost = 14;
 
   public canAct(player: Player, game: Game): boolean {
-    let asteroidCost = this._cost;
+    let asteroidCost = this.cost;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE;

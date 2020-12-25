@@ -9,10 +9,10 @@ import {Resources} from '../../Resources';
 
 export class City extends StandardProjectCard {
   public name = CardName.STANDARD_CITY;
-  public _cost = 25;
+  public cost = 25;
 
   public canAct(player: Player, game: Game): boolean {
-    return player.canAfford(this._cost) && game.board.getAvailableSpacesForCity(player).length > 0;
+    return player.canAfford(this.cost) && game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   actionEssence(player: Player, game: Game): void {

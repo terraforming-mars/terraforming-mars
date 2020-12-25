@@ -11,7 +11,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 
 export class Aquifer extends StandardProjectCard {
   public name = CardName.STANDARD_AQUIFER;
-  public _cost = 18;
+  public cost = 18;
 
   public canAct(player: Player, game: Game): boolean {
     if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
@@ -23,7 +23,7 @@ export class Aquifer extends StandardProjectCard {
       additionalCost += REDS_RULING_POLICY_COST;
     }
 
-    return player.canAfford(this._cost + additionalCost, game);
+    return player.canAfford(this.cost + additionalCost, game);
   }
 
   actionEssence(player: Player, game: Game): void {

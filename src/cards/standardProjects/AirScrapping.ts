@@ -11,10 +11,10 @@ import * as constants from '../../constants';
 
 export class AirScrapping extends StandardProjectCard {
   public name = CardName.STANDARD_AIR_SCRAPPING;
-  public _cost = 15;
+  public cost = 15;
 
   public canAct(player: Player, game: Game): boolean {
-    let cost = this._cost;
+    let cost = this.cost;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost) && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;

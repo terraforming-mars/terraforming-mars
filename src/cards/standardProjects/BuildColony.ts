@@ -12,17 +12,17 @@ import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class BuildColonyStandard extends StandardProjectCard {
   public name = CardName.STANDARD_BUILD_COLONY;
-  public _cost = 17;
+  public cost = 17;
 
   private getOpenColonies(player: Player, game: Game) {
-    if (!player.canAfford(this._cost)) return [];
+    if (!player.canAfford(this.cost)) return [];
 
     let openColonies = game.colonies.filter((colony) => colony.colonies.length < 3 &&
       colony.colonies.indexOf(player.id) === -1 &&
       colony.isActive);
 
     // TODO: Europa sometimes costs additional 3.
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(this._cost + constants.REDS_RULING_POLICY_COST)) {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
     }
 

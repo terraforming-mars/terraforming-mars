@@ -12,10 +12,10 @@ import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 
 export class Greenery extends StandardProjectCard {
   public name = CardName.STANDARD_GREENERY;
-  public _cost = 23;
+  public cost = 23;
 
   public canAct(player: Player, game: Game): boolean {
-    let greeneryCost = this._cost;
+    let greeneryCost = this.cost;
     const oxygenNotMaxed = game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
 

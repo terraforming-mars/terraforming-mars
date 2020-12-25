@@ -9,7 +9,7 @@ import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ClaimedMilestone} from './ClaimedMilestone';
 import {Colony} from './colonies/Colony';
-import {ColonyDealer, getColonyByName} from './colonies/ColonyDealer';
+import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
@@ -45,7 +45,6 @@ import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
 import {SelectSpace} from './inputs/SelectSpace';
-import {SerializedColony} from './SerializedColony';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './SpaceBonus';
@@ -250,7 +249,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
+      const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
       this.colonyDealer = new ColonyDealer();
@@ -296,8 +295,9 @@ export class Game implements ISerializable<SerializedGame> {
     // handicaps.
     for (const player of this.getPlayers()) {
       player.increaseTerraformRatingSteps(player.handicap, this);
-      this.setStartingProductions(player);
-
+      if (!gameOptions.corporateEra) {
+        GameSetup.setStartingProductions(player);
+      }
       if (!player.beginner ||
       // Bypass beginner choice if any extension is choosen
             gameOptions.preludeExtension ||
@@ -417,32 +417,8 @@ export class Game implements ISerializable<SerializedGame> {
     return result;
   }
 
-  public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
-    if (!gameOptions.customColoniesList) return false;
-    if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
-
-    return false;
-  }
-
   public isSoloMode() :boolean {
     return this.players.length === 1;
-  }
-
-  private setStartingProductions(player: Player) {
-    if (!this.gameOptions.corporateEra) {
-      player.addProduction(Resources.MEGACREDITS);
-      player.addProduction(Resources.STEEL);
-      player.addProduction(Resources.TITANIUM);
-      player.addProduction(Resources.PLANTS);
-      player.addProduction(Resources.ENERGY);
-      player.addProduction(Resources.HEAT);
-    }
   }
 
   // Function to retrieve a player by it's id
@@ -1638,24 +1614,6 @@ export class Game implements ISerializable<SerializedGame> {
     return space;
   }
 
-  private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
-    const result: Array<Colony> = [];
-    for (const serialized of colonies) {
-      const colony = getColonyByName(serialized.name);
-      if (colony !== undefined) {
-        colony.isActive = serialized.isActive;
-        colony.visitor = serialized.visitor;
-        colony.trackPosition = serialized.trackPosition;
-        colony.colonies = serialized.colonies;
-        colony.resourceType = serialized.resourceType;
-        result.push(colony);
-      } else {
-        console.warn(`colony ${serialized.name} not found`);
-      }
-    }
-    return result;
-  }
-
   // Function used to rebuild each objects
   public loadFromJSON(d: SerializedGame): Game {
     // Assign each attributes
@@ -1713,10 +1671,10 @@ export class Game implements ISerializable<SerializedGame> {
       this.colonyDealer = new ColonyDealer();
 
       if (d.colonyDealer !== undefined) {
-        this.colonyDealer.discardedColonies = this.loadColoniesFromJSON(d.colonyDealer.discardedColonies);
+        this.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
       }
 
-      this.colonies = this.loadColoniesFromJSON(d.colonies);
+      this.colonies = loadColoniesFromJSON(d.colonies);
     }
 
     // Reload turmoil elements if needed

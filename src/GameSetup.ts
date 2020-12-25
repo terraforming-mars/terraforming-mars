@@ -9,6 +9,9 @@ import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILEST
 import {OriginalBoard} from './boards/OriginalBoard';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {getRandomMilestonesAndAwards, IDrawnMilestonesAndAwards} from './MilestoneAwardSelector';
+import {Player} from './Player';
+import {Resources} from './Resources';
+import {ColonyName} from './colonies/ColonyName';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -65,5 +68,27 @@ export class GameSetup {
     } else {
       return OriginalBoard.newInstance(shuffle, seed, includeVenus);
     }
+  }
+
+  public static setStartingProductions(player: Player) {
+    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.HEAT);
+  }
+
+  public static includesCommunityColonies(gameOptions: GameOptions) : boolean {
+    if (!gameOptions.customColoniesList) return false;
+    if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
+
+    return false;
   }
 }

@@ -24,7 +24,7 @@ export class EcoLine implements CorporationCard {
       description: 'You start with 2 plant production, 3 plants, and 36 MC.',
       renderData: CardRenderer.builder((b) => {
         b.br;
-        b.productionBox((pb) => pb.plants(2)).megacredits(36).plants(3).digit;
+        b.productionBox((pb) => pb.plants(2)).nbsp.megacredits(36).plants(3).digit;
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
             eb.plants(7).digit.startAction.greenery();

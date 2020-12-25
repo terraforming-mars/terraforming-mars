@@ -5,7 +5,9 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Incite implements CorporationCard {
     public name = CardName.INCITE;
@@ -26,5 +28,25 @@ export class Incite implements CorporationCard {
       }
 
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R37',
+      description: 'You start with 32 MC. As your first action, place two delegates in one party.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(32).nbsp.delegates(2);
+        b.corpBox('effect', (ce) => {
+          ce.vSpace(CardRenderItemSize.LARGE);
+          ce.effectBox((eb) => {
+            eb.startEffect.influence(1).description(undefined);
+          });
+          ce.vSpace(CardRenderItemSize.SMALL);
+          ce.effectBox((eb) => {
+            eb.delegates(1).startEffect.megacredits(-2);
+            eb.description('Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.');
+          });
+        });
+      }),
     }
 }

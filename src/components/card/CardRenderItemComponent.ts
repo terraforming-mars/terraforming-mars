@@ -31,7 +31,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.OCEANS) {
         classes.push('card-global-requirement');
         classes.push('card-ocean-global-requirement');
-        if (this.item.size !== undefined) {
+        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
           classes.push(`card-ocean--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.VENUS) {
@@ -40,6 +40,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.TR) {
         classes.push('card-tile');
         classes.push('card-tr');
+        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+          classes.push(`card-tr--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.TITANIUM) {
         classes.push('card-resource');
         classes.push('card-resource-titanium');
@@ -58,6 +61,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.MEGACREDITS) {
         classes.push('card-resource');
         classes.push('card-resource-money');
+        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+          classes.push(`card-money--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.CARDS) {
         classes.push('card-resource');
         classes.push('card-card');
@@ -133,6 +139,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--adjacency-tile');
+      } else if (type === CardRenderItemType.COMMUNITY) {
+        classes.push('card-resource');
+        classes.push('card-resource-community');
+      } else if (type === CardRenderItemType.DISEASE) {
+        classes.push('card-resource');
+        classes.push('card-resource-disease');
       }
 
       // round tags
@@ -180,6 +192,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push(`card-text-size--${this.item.size}`);
         if (this.item.isUppercase) {
           classes.push('card-text-uppercase');
+        }
+        if (this.item.isBold) {
+          classes.push('card-text-bold');
+        } else {
+          classes.push('card-text-normal');
         }
       }
 
@@ -229,6 +246,22 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       }
       if (this.item.type === CardRenderItemType.PLACE_COLONY) {
         result = '<span class="card-place-colony">colony</span>';
+      }
+      if (this.item.type === CardRenderItemType.PRELUDE) {
+        result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';
+      }
+      if (this.item.type === CardRenderItemType.AWARD) {
+        result = '<span class="card-award-icon">award</span>';
+      }
+      if (this.item.type === CardRenderItemType.VP) {
+        result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
+      }
+      if (this.item.type === CardRenderItemType.DISEASE) {
+        result += 'D';
+      }
+      // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
+      if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
+        result = '?';
       }
 
       return result;

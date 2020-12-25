@@ -106,9 +106,24 @@ export class LogHelper {
   }
 
   static logDrawnCards(game: Game, player: Player, cards: Array<ICard> | Array<CardName>) {
-    game.log('${0} drew ${1} card(s)', (b) => {
+    // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
+    let message = '${0} drew ';
+    if (cards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let i = 0, length = cards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + 1) + '}';
+      }
+    }
+    game.log(message, (b) => {
       b.player(player);
-      b.number(cards.length);
       for (const card of cards) {
         if (typeof card === 'string') {
           b.cardName(card);

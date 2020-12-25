@@ -1,4 +1,5 @@
 import {Game} from '../Game';
+import {LogHelper} from '../components/LogHelper';
 import {Player} from '../Player';
 import {Tags} from '../cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -17,15 +18,8 @@ export class DrawCards implements DeferredAction {
 
     if (this.tag !== undefined) {
       // Reveal cards from the deck until |this.count| of a specific tag have be drawn
-      for (const foundCard of this.game.drawCardsByTag(this.tag, this.count)) {
-        drawnCards.push(foundCard);
-      }
-      // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
-      const nCards = Array.from(Array(this.count - 1).keys());
-      const message = '${0} drew ' + (nCards.map((n) => '${' + (n + 1) + '}').join(', ')) + (this.count > 1 ? ' and ' : '') + '${' + this.count + '}';
-      this.game.log(message, (b) => {
-        b.player(this.player); drawnCards.forEach((c) => b.card(c));
-      });
+      drawnCards.push(...this.game.drawCardsByTag(this.tag, this.count));
+      LogHelper.logDrawnCards(this.game, this.player, drawnCards);
     } else {
       // Draw |this.count| cards from the deck
       for (let i = 0; i < this.count; i++) {

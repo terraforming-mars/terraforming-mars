@@ -5,6 +5,8 @@ import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Teractor implements CorporationCard {
     public name = CardName.TERACTOR;
@@ -17,5 +19,20 @@ export class Teractor implements CorporationCard {
     }
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R30',
+      description: 'You start with 60 MC.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(60);
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.earth(1).played.startEffect.megacredits(-3);
+            eb.description('Effect: When you play an Earth tag, you pay 3 MC less for it.');
+          });
+        });
+      }),
     }
 }

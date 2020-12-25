@@ -75,6 +75,72 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         result += '<span class="card-factorum-logo">FACTORUM</span>';
       } else if (title === CardName.MANUTECH) {
         result += '<span class="card-manutech-logo"><span style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>';
+      } else if (title === CardName.AGRICOLA_INC) {
+        result += '<span class="card-agricola-logo">Agricola Inc</span>';
+      } else if (title === CardName.ARCADIAN_COMMUNITIES) {
+        result += '<span class="card-arcadian-logo"><span>Arcadian</span></br><span>Communities</span></span>';
+      } else if (title === CardName.INCITE) {
+        result += '<span class="card-incite-logo">Incite</span>';
+      } else if (title === CardName.LAKEFRONT_RESORTS) {
+        result += '<div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>';
+      } else if (title === CardName.MINING_GUILD) {
+        result += '<span class="card-mining-guild-logo">MINING<br>GUILD</span>';
+      } else if (title === CardName.PHILARES) {
+        result += '<div class="card-philares-logo">PHIL<span style="color:#ff5858">A</span>RES</div>';
+      } else if (title === CardName.RECYCLON) {
+        result += '<div class="card-recyclon-logo">Recyclon</div>';
+      } else if (title === CardName.ROBINSON_INDUSTRIES) {
+        result += '<div class="card-robinson-logo"><div style="letter-spacing:4px;border-bottom:3px solid #ccc;margin-top:5px;">ROBINSON</div>';
+        result += '<div style="border-bottom:3px solid #ccc;">•—•—•—•—•—•—•&nbsp;</div>';
+        result += '<div style="letter-spacing:2px;">INDUSTRIES</div></div>';
+      } else if (title === CardName.SPLICE) {
+        result += '<div class="card-splice-logo"><div>SPLI<span style="color:red">C</span>E</div>';
+        result += '<div STYLE="height:3px;background:red;margin-top:-3px;"></div>';
+        result += '<div STYLE="font-size:10px;line-height:18px;">TACTICAL GENOMICS</div>';
+        result += '</div>';
+      } else if (title === CardName.STORMCRAFT_INCORPORATED) {
+        result += '<div class="card-stormcraft-logo">';
+        result += '<div class="stormcraft1">STORM</div><div class="stormcraft2">CRAFT</div>';
+        result += '<div class="stormcraft3">INCOR</div><div class="stormcraft4">PORATED</div>';
+        result += '</div>';
+      } else if (title === CardName.TERACTOR) {
+        result += '<span class="card-teractor-logo">TERACTOR</span>';
+      } else if (title === CardName.THARSIS_REPUBLIC) {
+        result += '<div class="card-tharsis-logo">';
+        result += '<div style="color: #020202;font-size:24px;text-shadow:6px 6px 6px grey;">';
+        result += '<div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2;<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2;</span>';
+        result += '</div>THARSIS<br>&nbsp; REPUBLIC</div>';
+        result += '</div>';
+      } else if (title === CardName.UNITED_NATIONS_MARS_INITIATIVE) {
+        result += '<span class="card-unmi-logo">UNITED<br/>NATIONS<br/>MARS<br/>INITIATIVE</span>';
+      } else if (title === CardName.UTOPIA_INVEST) {
+        result += '<div class="card-utopia-logo">';
+        result += '<div class="utopia-corp-name-1">UTOPIA</div>';
+        result += '<div class="utopia-corp-name-2">INVEST</div>';
+        result += '</div>';
+      } else if (title === CardName.VALLEY_TRUST) {
+        result += '<div class="card-valley-trust-logo">';
+        result += '<div style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY<br/> TRUST</div>';
+        result += '</div>';
+      } else if (title === CardName.VITOR) {
+        result += '<div class="card-vitor-logo">';
+        result += '<span style="color:white;background:orangered;padding-left:3px;">VIT</span>';
+        result += '<span style="background:linear-gradient(to right, orangered,white);">O</span>';
+        result += '<span style="background:white;padding-right:3px;">R</span></div>';
+      } else if (title === CardName.PHARMACY_UNION) {
+        result += '<div class="card-pharmacy-union-logo">Pharmacy<br/>Union</div>';
+      } else if (title === CardName.PLAYWRIGHTS) {
+        result += '<div class="card-playwrights-logo">Playwrights</div>';
+      } else if (title === CardName.MIDAS) {
+        result += '<div class="card-midas-logo">MIDAS</div>';
+      } else if (title === CardName.PROJECT_WORKSHOP) {
+        result += '<div class="card-project-workshop-logo">PROJECT<br/>WORKSHOP</div>';
+      } else if (title === CardName.MONS_INSURANCE) {
+        result += '<div class="card-mons-logo">';
+        result += '<div class="mons0">▲</div>';
+        result += '<div class="mons1">mons</div>';
+        result += '<div class="mons2">INSURANCE</div>';
+        result += '</div>';
       }
 
       return result;

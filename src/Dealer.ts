@@ -124,10 +124,6 @@ export class Dealer implements ISerializable<SerializedDealer> {
       this.discarded.push(card);
     }
     public dealCard(isResearchPhase: boolean = false): IProjectCard {
-      if (this.deck.length === 0) {
-        this.deck = this.shuffleCards(this.discarded);
-        this.discarded = [];
-      }
       let result: IProjectCard | undefined;
       if (isResearchPhase) {
         result = this.deck.shift();
@@ -138,6 +134,12 @@ export class Dealer implements ISerializable<SerializedDealer> {
       if (result === undefined) {
         throw 'Unexpected empty deck';
       }
+
+      if (this.deck.length === 0) {
+        this.deck = this.shuffleCards(this.discarded);
+        this.discarded = [];
+      }
+
       return result;
     }
     // Prelude deck does not need discard and reshuffle mecanisms

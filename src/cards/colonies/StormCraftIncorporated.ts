@@ -12,6 +12,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {LogHelper} from '../../components/LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
   public name = CardName.STORMCRAFT_INCORPORATED;
@@ -82,5 +85,26 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
       return raiseTempOptions;
     });
+  }
+
+  public metadata: CardMetadata = {
+    cardNumber: 'R29',
+    description: 'You start with 48 MC.',
+    renderData: CardRenderer.builder((b) => {
+      b.br.br.br;
+      b.megacredits(48);
+      b.corpBox('action', (ce) => {
+        ce.vSpace(CardRenderItemSize.LARGE);
+        ce.effectBox((eb) => {
+          eb.empty().startAction.floaters(1).asterix();
+          eb.description('Action: Add a floater to ANY card.');
+        });
+        ce.vSpace();
+        ce.effectBox((eb) => {
+          eb.startEffect.floaters(1).equals().heat(2);
+          eb.description('Effect: Floaters on this card may be used as 2 heat each.');
+        });
+      });
+    }),
   }
 }

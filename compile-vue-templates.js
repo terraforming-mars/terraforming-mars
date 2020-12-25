@@ -132,7 +132,7 @@ checkComponent(
 checkComponent(
   'src/components/SelectCard',
   require('./build/src/components/SelectCard').SelectCard,
-  ['cards'],
+  ['cards', 'warning'],
 );
 checkComponent(
   'src/components/SelectColony',
@@ -147,7 +147,7 @@ checkComponent(
 checkComponent(
   'src/components/SelectHowToPayForCard',
   require('./build/src/components/SelectHowToPayForCard').SelectHowToPayForCard,
-  ['card', 'cards', 'cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
+  ['cardName', 'card', 'cards', 'cost', 'tags', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(
   'src/components/SelectOption',

@@ -3,7 +3,6 @@ import Vue from 'vue';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ICard} from '../../cards/ICard';
 import {BeginnerCorporation} from '../../cards/corporation/BeginnerCorporation';
-import {HTML_DATA} from '../../HTML_data';
 import {CardModel} from '../../models/CardModel';
 import {CardTitle} from './CardTitle';
 import {CardNumber} from './CardNumber';
@@ -58,12 +57,6 @@ export function getCardExpansionByName(cardName: string): GameModule {
   return manifest.module;
 }
 
-function getCardContent(cardName: string): string {
-  let htmlData: string | undefined = '';
-  htmlData = HTML_DATA.get(cardName);
-  return htmlData || '';
-}
-
 export const Card = Vue.component('card', {
   components: {
     CardTitle,
@@ -85,9 +78,6 @@ export const Card = Vue.component('card', {
     },
   },
   methods: {
-    getCardContent: function() {
-      return getCardContent(this.card.name);
-    },
     getCardExpansion: function(): string {
       return getCardExpansionByName(this.card.name);
     },
@@ -151,10 +141,10 @@ export const Card = Vue.component('card', {
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
+
                 <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()"
                              :isStandardProject="isStandardProject()" :isCorporation="isCorporationCard()"/>
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()" />
-                <div v-else class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />

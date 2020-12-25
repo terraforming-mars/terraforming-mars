@@ -6,6 +6,10 @@ import {CardName} from '../../CardName';
 import {ITagCount} from '../../ITagCount';
 import {Game} from '../../Game';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class AgricolaInc implements CorporationCard {
     public name = CardName.AGRICOLA_INC;
@@ -40,5 +44,17 @@ export class AgricolaInc implements CorporationCard {
       });
 
       return points;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R36',
+      description: 'You start with 1 plant production, 1 MC production and 40 MC.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.productionBox((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+        b.corpBox('effect', (ce) => {
+          ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
+        });
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
     }
 }

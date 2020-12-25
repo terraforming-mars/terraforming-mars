@@ -46,4 +46,9 @@ export enum CardRenderItemType {
   SELF_REPLICATING = 'self_replicating',
   MULTIPLIER_WHITE = 'multiplier_white',
   PROJECT_REQUIREMENTS = 'project_requirements',
+  PRELUDE = 'prelude',
+  AWARD = 'award',
+  VP = 'vp',
+  COMMUNITY = 'community',
+  DISEASE = 'disease',
 }

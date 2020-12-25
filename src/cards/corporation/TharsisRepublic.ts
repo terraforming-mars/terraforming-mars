@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';

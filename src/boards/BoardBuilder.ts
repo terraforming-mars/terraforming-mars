@@ -1,15 +1,12 @@
-import {Ocean, Land, BoardColony} from './Board';
 import {BoardRandomizer} from './BoardRandomizer';
-import {ISpace} from '../ISpace';
+import {ISpace} from './ISpace';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {TILES_PER_ROW} from '../constants';
+import {SpaceType} from '../SpaceType';
 
 export class BoardBuilder {
-    private oceans: Array<boolean> = [];
-    private bonuses: Array<Array<SpaceBonus>> = [];
-    private spaces: Array<ISpace> = [];
     private randomizer: BoardRandomizer;
 
     // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
@@ -19,9 +16,13 @@ export class BoardBuilder {
     // "Beloved, " I said "watch me scare you though." said she,
     // "Able am I, Son."
 
-    constructor(randomBoardOption: RandomBoardOptionType, seed: number) {
-      this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
-      this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
+    private oceans: Array<boolean> = [];
+    private bonuses: Array<Array<SpaceBonus>> = [];
+    private spaces: Array<ISpace> = [];
+
+    constructor(randomBoardOption: RandomBoardOptionType, seed: number, private includeVenus: boolean) {
+      this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
+      this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
       this.randomizer = new BoardRandomizer(randomBoardOption, seed);
     }
 
@@ -63,16 +64,48 @@ export class BoardBuilder {
         }
       }
 
-      this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
+      this.spaces.push(Space.colony(SpaceName.STANFORD_TORUS));
+      if (this.includeVenus) {
+        this.spaces.push(
+          Space.colony(SpaceName.DAWN_CITY),
+          Space.colony(SpaceName.LUNA_METROPOLIS),
+          Space.colony(SpaceName.MAXWELL_BASE),
+          Space.colony(SpaceName.STRATOPOLIS),
+        );
+      }
 
       return this.spaces;
     }
 
     private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
       if (is_ocean) {
-        return new Ocean(idx, pos_x, pos_y, bonus);
+        return Space.ocean(idx, pos_x, pos_y, bonus);
       } else {
-        return new Land(idx, pos_x, pos_y, bonus);
+        return Space.land(idx, pos_x, pos_y, bonus);
       }
     }
+}
+
+class Space implements ISpace {
+  private constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+  }
+
+  static colony(id: string) {
+    return new Space(id, SpaceType.COLONY, [], -1, -1);
+  }
+
+  private static strId(id: number): string {
+    let strId = id.toString();
+    if (id < 10) {
+      strId = '0'+strId;
+    }
+    return strId;
+  }
+  static land(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(this.strId(id), SpaceType.LAND, bonus, x, y);
+  }
+
+  static ocean(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(this.strId(id), SpaceType.OCEAN, bonus, x, y);
+  }
 }

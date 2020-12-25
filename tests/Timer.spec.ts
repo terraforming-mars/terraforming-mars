@@ -18,16 +18,24 @@ describe('Timer', function() {
     expect(timer.serialize().running).eq(true);
   });
 
-  it('shows 00:00:01 after 1 sec', function(done) {
+  it('shows 00:00:01 after 1 sec', function() {
     const timer = Timer.newInstance();
     timer.start(); // Skipping first action
+    let callCount = 0;
+    const originalNow = Date.now;
+    const start = originalNow();
+    Date.now = function() {
+      callCount++;
+      if (callCount === 1) {
+        return start;
+      }
+      return start + 1000;
+    };
     timer.stop();
     timer.start();
-    setTimeout(() => {
-      expect(Timer.toString(timer.serialize())).eq('00:00:01');
-      timer.stop();
-      expect(Timer.toString(timer.serialize())).eq('00:00:01');
-      done();
-    }, 1000);
+    expect(Timer.toString(timer.serialize())).eq('00:00:01');
+    timer.stop();
+    expect(Timer.toString(timer.serialize())).eq('00:00:01');
+    Date.now = originalNow;
   });
 });

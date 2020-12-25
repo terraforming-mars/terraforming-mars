@@ -89,7 +89,7 @@ export class CardRenderEffect extends CardRenderer {
 }
 
 export class CardRenderCorpBoxEffect extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderEffect | string>>) {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
     super(rows);
   }
 
@@ -101,7 +101,7 @@ export class CardRenderCorpBoxEffect extends CardRenderer {
 }
 
 export class CardRenderCorpBoxAction extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderEffect | string>>) {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
     super(rows);
   }
 
@@ -294,6 +294,11 @@ class Builder {
     const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
     item.amountInside = true;
     this._addRowItem(item);
+    return this;
+  }
+
+  public placeColony(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.PLACE_COLONY));
     return this;
   }
 
@@ -515,6 +520,14 @@ class Builder {
     return this;
   }
 
+  /*
+   * add non breakable vertical space (a div with different pixels height)
+   */
+  public vSpace(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+    this._addSymbol(CardRenderSymbol.vSpace(size));
+    return this;
+  }
+
   public get any(): Builder {
     this._checkExistingItem();
 
@@ -687,7 +700,7 @@ class EffectBuilder extends Builder {
 }
 
 class CorpEffectBuilderEffect extends Builder {
-  protected _data: Array<Array<CardRenderEffect>> = [[]];
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
 
   public build(): CardRenderCorpBoxAction {
     return new CardRenderCorpBoxEffect(this._data);
@@ -695,7 +708,7 @@ class CorpEffectBuilderEffect extends Builder {
 }
 
 class CorpEffectBuilderAction extends Builder {
-  protected _data: Array<Array<CardRenderEffect>> = [[]];
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
 
   public build(): CardRenderCorpBoxEffect {
     return new CardRenderCorpBoxAction(this._data);

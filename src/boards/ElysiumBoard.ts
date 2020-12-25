@@ -1,13 +1,19 @@
+import {ISpace} from './ISpace';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {RandomBoardOptionType} from './RandomBoardOptionType';
+import {SerializedBoard} from './SerializedBoard';
+import {Player} from '../Player';
 
 export class ElysiumBoard extends Board {
-  constructor(randomBoardOption: RandomBoardOptionType = RandomBoardOptionType.NONE, seed: number = 0) {
+  private constructor(public spaces: Array<ISpace>) {
     super();
-    const builder = new BoardBuilder(randomBoardOption, seed);
+  }
+
+  public static newInstance(randomBoardOption: RandomBoardOptionType, seed: number, includeVenus: boolean): ElysiumBoard {
+    const builder = new BoardBuilder(randomBoardOption, seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -34,6 +40,11 @@ export class ElysiumBoard extends Board {
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
     builder.setMustBeLandSpaces(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
-    this.spaces = builder.build();
+    const spaces = builder.build();
+    return new ElysiumBoard(spaces);
+  }
+
+  public static deserialize(board: SerializedBoard, players: Array<Player>): ElysiumBoard {
+    return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 }

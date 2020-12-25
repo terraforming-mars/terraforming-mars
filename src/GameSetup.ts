@@ -19,7 +19,7 @@ export class GameSetup {
     } as IDrawnMilestonesAndAwards;
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-    const requiredQty = includeVenus ? 5 : 6;
+    const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {
     case RandomMAOptionType.NONE:
@@ -58,13 +58,13 @@ export class GameSetup {
   };
 
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: RandomBoardOptionType, seed: number): Board {
+  public static newBoard(boardName: BoardName, randomBoard: RandomBoardOptionType, seed: number, includeVenus: boolean): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return new ElysiumBoard(shuffle, seed);
+      return ElysiumBoard.newInstance(randomBoard, seed, includeVenus);
     } else if (boardName === BoardName.HELLAS) {
-      return new HellasBoard(shuffle, seed);
+      return HellasBoard.newInstance(randomBoard, seed, includeVenus);
     } else {
-      return new OriginalBoard(shuffle, seed);
+      return OriginalBoard.newInstance(randomBoard, seed, includeVenus);
     }
   }
 }

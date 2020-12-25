@@ -2,7 +2,7 @@ import {Game} from '../Game';
 import {Player} from '../Player';
 import {ICard} from '../cards/ICard';
 import {Resources} from '../Resources';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {TileType} from '../TileType';
 import {Colony} from '../colonies/Colony';
 

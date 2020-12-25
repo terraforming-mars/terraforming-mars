@@ -5,7 +5,7 @@ import {SpaceType} from '../src/SpaceType';
 import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {RandomBoardOptionType} from '../src/boards/RandomBoardOptionType';
-import {ISpace} from '../src/ISpace';
+import {ISpace} from '../src/boards/ISpace';
 import {Color} from '../src/Color';
 
 // Returns the oceans created during this operation which may not reflect all oceans.

@@ -1,12 +1,14 @@
 import {Board} from '../../src/boards/Board';
 import {BoardBuilder} from '../../src/boards/BoardBuilder';
 import {RandomBoardOptionType} from '../../src/boards/RandomBoardOptionType';
+import {ISpace} from '../../src/boards/ISpace';
 
 export class EmptyBoard extends Board {
+  public spaces: Array<ISpace>;
   constructor() {
     super();
 
-    const builder = new BoardBuilder(RandomBoardOptionType.NONE, 0);
+    const builder = new BoardBuilder(RandomBoardOptionType.NONE, 0, false);
 
     // y=0
     builder.land().land().land().land().land();

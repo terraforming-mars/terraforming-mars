@@ -64,9 +64,17 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         result += '<div style="font-size: 13px;left:32px;top:10px;font-family:Prototype;color:#222;transform:scale(2,1);position:absolute;">TERRALABS</div>';
         result += '<div style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype;transform:scale(2,1)">RESEARCH</div>';
       } else if (title === CardName.THORGATE) {
-        result += '<div class="card-thorgate-logo">THORGATE</div>';
+        result += '<span class="card-thorgate-logo">THORGATE</span>';
       } else if (title === CardName.VIRON) {
-        result += '<div class="card-viron-logo">VIRON</div>';
+        result += '<span class="card-viron-logo">VIRON</span>';
+      } else if (title === CardName.ARIDOR) {
+        result += '<span class="card-aridor-logo">ARIDOR</span>';
+      } else if (title === CardName.ASTRODRILL) {
+        result += '<span class="card-astrodril-logo">Astrodrill</span>';
+      } else if (title === CardName.FACTORUM) {
+        result += '<span class="card-factorum-logo">FACTORUM</span>';
+      } else if (title === CardName.MANUTECH) {
+        result += '<span class="card-manutech-logo"><span style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>';
       }
 
       return result;

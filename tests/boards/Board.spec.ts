@@ -2,15 +2,19 @@ import {expect} from 'chai';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/TileType';
-import {ISpace} from '../../src/ISpace';
+import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestingUtils';
+import {Board} from '../../src/boards/Board';
+import {Color} from '../../src/Color';
+import {SerializedBoard} from '../../src/boards/SerializedBoard';
+import {RandomBoardOptionType} from '../../src/boards/RandomBoardOptionType';
 
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
-    board = new OriginalBoard();
+    board = OriginalBoard.newInstance(RandomBoardOptionType.NONE, 0, false);
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
   });
@@ -142,5 +146,154 @@ describe('Board', function() {
 
     expect(board.getOceansOnBoard(true)).eq(2);
     expect(board.getOceansOnBoard(false)).eq(1);
+  });
+
+  class TestBoard extends Board {
+    public constructor(public spaces: Array<ISpace>) {
+      super();
+    };
+
+    public getSpaceById(id: string): ISpace | undefined {
+      return this.spaces.find((space) => space.id === id);
+    }
+  };
+
+  it('deserialize-backward compatible', () => {
+    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
+    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
+    const json = {
+      'spaces': [
+        {
+          'id': '01',
+          'spaceType': 'colony',
+          'bonus': [],
+          'x': -1,
+          'y': -1,
+          'player': {
+            'name': 'name-1',
+            'color': 'blue',
+            'beginner': false,
+            'handicap': 0,
+            'usedUndo': false,
+            'id': 'name-1-id',
+          },
+          'tile': {
+            'tileType': 2,
+          },
+        },
+        {
+          'id': '03',
+          'spaceType': 'land',
+          'bonus': [
+            1,
+            1,
+          ],
+          'x': 4,
+          'y': 0,
+          'player': {
+            'name': 'name-2',
+            'color': 'green',
+            'beginner': false,
+            'handicap': 0,
+            'usedUndo': false,
+            'id': 'name-2-id',
+          },
+          'tile': {
+            'tileType': 0,
+          },
+        },
+        {
+          'id': '04',
+          'spaceType': 'ocean',
+          'bonus': [
+            1,
+            1,
+          ],
+          'x': 5,
+          'y': 0,
+          'tile': {
+            'tileType': 1,
+          },
+        },
+        {
+          'id': '05',
+          'spaceType': 'land',
+          'bonus': [],
+          'x': 6,
+          'y': 0,
+        },
+      ],
+    } as SerializedBoard;
+    const board = new TestBoard(Board.deserializeSpaces(json.spaces, [player1, player2]));
+    expect(board.getSpaceById('01')!.player).eq(player1);
+    expect(board.getSpaceById('03')!.player).eq(player2);
+
+    const serialized = board.serialize();
+    const boardJson = {
+      'spaces': [
+        {
+          'id': '01',
+          'spaceType': 'colony', 'adjacency': undefined, 'bonus': [],
+          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'tile': {'tileType': 2},
+        },
+        {
+          'id': '03',
+          'spaceType': 'land', 'adjacency': undefined, 'bonus': [1, 1],
+          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'tile': {'tileType': 0},
+        },
+        {
+          'id': '04',
+          'spaceType': 'ocean', 'adjacency': undefined, 'bonus': [1, 1],
+          'x': 5, 'y': 0, 'player': undefined,
+          'tile': {'tileType': 1},
+        },
+        {
+          'id': '05',
+          'spaceType': 'land', 'adjacency': undefined, 'bonus': [],
+          'x': 6, 'y': 0, 'player': undefined,
+          'tile': undefined,
+        },
+      ],
+    };
+    expect(serialized).deep.eq(boardJson);
+  });
+
+
+  it('deserialize', () => {
+    const boardJson = {
+      'spaces': [
+        {
+          'id': '01',
+          'spaceType': 'colony', 'bonus': [],
+          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'tile': {'tileType': 2},
+        },
+        {
+          'id': '03',
+          'spaceType': 'land', 'bonus': [1, 1],
+          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'tile': {'tileType': 0},
+        },
+        {
+          'id': '04',
+          'spaceType': 'ocean', 'bonus': [1, 1],
+          'x': 5, 'y': 0,
+          'tile': {'tileType': 1},
+        },
+        {
+          'id': '05',
+          'spaceType': 'land', 'bonus': [],
+          'x': 6, 'y': 0,
+        },
+      ],
+    };
+    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
+    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
+
+    const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
+    expect(board.getSpaceById('01')!.player).eq(player1);
+    expect(board.getSpaceById('03')!.player).eq(player2);
   });
 });

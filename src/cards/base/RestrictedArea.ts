@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';

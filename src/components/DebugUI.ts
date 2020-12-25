@@ -18,9 +18,9 @@ const cards: Map<string, Entry> = new Map();
 ALL_CARD_MANIFESTS.forEach((manifest) => {
   manifest.projectCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.projectCards.cards.forEach((card) =>
+  manifest.corporationCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.projectCards.cards.forEach((card) =>
+  manifest.preludeCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
 });
 

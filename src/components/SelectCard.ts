@@ -2,12 +2,14 @@
 import Vue from 'vue';
 import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
+import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PlayerModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 
 interface SelectCardModel {
-    cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
+  cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
+  warning: string | Message | undefined;
 }
 
 import {Card} from './card/Card';
@@ -35,6 +37,7 @@ export const SelectCard = Vue.component('select-card', {
   data: function() {
     return {
       cards: [],
+      warning: undefined,
     } as SelectCardModel;
   },
   components: {
@@ -42,6 +45,7 @@ export const SelectCard = Vue.component('select-card', {
     Button,
   },
   methods: {
+    translate: $t,
     cardsSelected: function(): number {
       if (Array.isArray(this.cards)) {
         return this.cards.length;
@@ -59,8 +63,14 @@ export const SelectCard = Vue.component('select-card', {
         this.playerinput.cards,
       );
     },
-    getTitle: function() {
-      return $t(this.playerinput.title);
+    hasCardWarning: function() {
+      if (Array.isArray(this.cards)) {
+        return false;
+      } else if (typeof this.cards === 'object' && this.cards.warning !== undefined) {
+        this.warning = this.cards.warning;
+        return true;
+      }
+      return false;
     },
     isOptionalToManyCards: function(): boolean {
       return this.playerinput.maxCardsToSelect !== undefined &&
@@ -72,12 +82,13 @@ export const SelectCard = Vue.component('select-card', {
     },
   },
   template: `<div class="wf-component wf-component--select-card">
-        <div v-if="showtitle === true" class="nofloat wf-component-title">{{getTitle()}}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title">{{ translate(playerinput.title) }}</div>
         <label v-for="card in getOrderedCards()" class="cardbox">
             <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
             <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />
             <Card :card="card" />
         </label>
+        <div v-if="hasCardWarning()" class="card-warning">{{ warning !== undefined ? translate(warning) : '' }}</div>
         <div v-if="showsave === true" class="nofloat">
             <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
             <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="'Skip this action'" />

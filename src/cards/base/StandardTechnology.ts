@@ -14,7 +14,7 @@ export class StandardTechnology implements IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public onStandardProject(player: Player, projectType: StandardProjectCard) {
-      if (projectType.name !== CardName.STANDARD_SELLING_PATENTS) {
+      if (projectType.name !== CardName.STANDARD_SELL_PATENTS) {
         player.megaCredits += 3;
       }
     }

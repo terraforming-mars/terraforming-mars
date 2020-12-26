@@ -228,6 +228,7 @@ import {PowerPlantThorgate} from './standardProjects/PowerPlantThorgate';
 import {Greenery} from './standardProjects/Greenery';
 import {AsteroidStandard} from './standardProjects/Asteroid';
 import {BufferGas} from './standardProjects/BufferGas';
+import {SellPatents} from './standardProjects/SellPatents';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -390,6 +391,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STANDARD_GREENERY, Factory: Greenery},
     {cardName: CardName.STANDARD_ASTEROID, Factory: AsteroidStandard},
     {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},
+    {cardName: CardName.STANDARD_SELL_PATENTS, Factory: SellPatents},
   ],
 });
 

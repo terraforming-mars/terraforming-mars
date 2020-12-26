@@ -1317,31 +1317,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private sellPatents(game: Game): PlayerInput {
-    const result = new SelectCard(
-      'Sell patents',
-      'Sell',
-      this.cardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        // this.onStandardProject(StandardProjectType.SELLING_PATENTS);
-        this.megaCredits += foundCards.length;
-        foundCards.forEach((card) => {
-          for (let i = 0; i < this.cardsInHand.length; i++) {
-            if (this.cardsInHand[i].name === card.name) {
-              this.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
-          game.dealer.discard(card);
-        });
-        game.log('${0} sold ${1} patents', (b) => b.player(this).number(foundCards.length));
-        return undefined;
-      }, this.cardsInHand.length,
-    );
-
-    return result;
-  }
-
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
     const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
@@ -1925,12 +1900,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.options.push(
       this.passOption(game),
     );
-
-    if (this.cardsInHand.length > 0) {
-      action.options.push(
-        this.sellPatents(game),
-      );
-    }
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {

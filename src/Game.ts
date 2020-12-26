@@ -381,7 +381,7 @@ export class Game implements ISerializable<SerializedGame> {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
       awards: this.awards,
-      board: this.board,
+      board: this.board.serialize(),
       claimedMilestones: this.claimedMilestones,
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,

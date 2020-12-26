@@ -53,7 +53,6 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         }).br;
         b.text('1 VP for each Jovian tag you have.', CardRenderItemSize.TINY, true);
       }),
-      description: 'Requires 2 ocean tiles.',
       victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
     }
 }

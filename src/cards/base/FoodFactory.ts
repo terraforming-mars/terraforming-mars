@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class FoodFactory implements IProjectCard {
   public cost = 12;
-  public tags = [Tags.STEEL];
+  public tags = [Tags.BUILDING];
   public name = CardName.FOOD_FACTORY;
   public cardType = CardType.AUTOMATED;
   public hasRequirements = false;

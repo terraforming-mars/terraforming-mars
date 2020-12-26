@@ -15,7 +15,7 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name = CardName.POWER_INFRASTRUCTURE;
     public cardType = CardType.ACTIVE;
     public cost = 4;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
 
     public play(_player: Player, _game: Game) {
       return undefined;

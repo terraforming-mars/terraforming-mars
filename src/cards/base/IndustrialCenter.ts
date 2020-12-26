@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost = 4;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public cardType = CardType.ACTIVE;
     public name = CardName.INDUSTRIAL_CENTER;
     public hasRequirements = false;

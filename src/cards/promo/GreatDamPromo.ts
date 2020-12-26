@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class GreatDamPromo implements IProjectCard {
     public cost = 15;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.GREAT_DAM_PROMO;
     public canPlay(player: Player, game: Game): boolean {

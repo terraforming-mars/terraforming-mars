@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeLake implements IActionCard, IProjectCard {
     public cost = 31;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MOHOLE_LAKE;
     public cardType = CardType.ACTIVE;
     public hasRequirements = false;

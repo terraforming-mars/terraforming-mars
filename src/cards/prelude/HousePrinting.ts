@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class HousePrinting implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.HOUSE_PRINTING;
     public cardType = CardType.AUTOMATED;
 

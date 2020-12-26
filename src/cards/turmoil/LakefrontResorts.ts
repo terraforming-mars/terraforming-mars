@@ -12,7 +12,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LakefrontResorts implements CorporationCard {
     public name = CardName.LAKEFRONT_RESORTS;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 54;
     public cardType = CardType.CORPORATION;
 

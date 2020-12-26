@@ -605,11 +605,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     tags.push({tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
     tags.push({tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
     tags.push({tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
-    tags.push({tag: Tags.MICROBES, count: this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
+    tags.push({tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)} as ITagCount);
     tags.push({tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
     tags.push({tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
     tags.push({tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
-    tags.push({tag: Tags.STEEL, count: this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
+    tags.push({tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, false, false)} as ITagCount);
     tags.push({tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
     tags.push({tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
     tags.push({tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)} as ITagCount);
@@ -1098,7 +1098,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.indexOf(Tags.STEEL) !== -1;
+    return card.tags.indexOf(Tags.BUILDING) !== -1;
   }
 
   private canUseTitanium(card: ICard): boolean {
@@ -1824,7 +1824,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
+      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;
       if (this.canUseHeatAsMegaCredits) {

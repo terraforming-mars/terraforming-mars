@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeArea implements IProjectCard {
     public cost = 20;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MOHOLE_AREA;
     public cardType = CardType.AUTOMATED;
     public adjacencyBonus?: IAdjacencyBonus = undefined;

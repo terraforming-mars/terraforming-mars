@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class DeepWellHeating implements IProjectCard {
     public cost = 13;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.DEEP_WELL_HEATING;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

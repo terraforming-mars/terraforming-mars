@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Manutech implements CorporationCard {
     public name = CardName.MANUTECH;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 35;
     public cardType = CardType.CORPORATION;
 

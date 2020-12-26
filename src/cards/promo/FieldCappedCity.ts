@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class FieldCappedCity implements IProjectCard {
     public cost = 29;
-    public tags = [Tags.CITY, Tags.STEEL, Tags.ENERGY];
+    public tags = [Tags.CITY, Tags.BUILDING, Tags.ENERGY];
     public name = CardName.FIELD_CAPPED_CITY;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

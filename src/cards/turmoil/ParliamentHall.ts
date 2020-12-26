@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ParliamentHall implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.PARLIAMENT_HALL;
     public cardType = CardType.AUTOMATED;
 
@@ -24,7 +24,7 @@ export class ParliamentHall implements IProjectCard {
     }
 
     public play(player: Player) {
-      const amount = Math.floor((player.getTagCount(Tags.STEEL) + 1) / 3);
+      const amount = Math.floor((player.getTagCount(Tags.BUILDING) + 1) / 3);
       player.addProduction(Resources.MEGACREDITS, amount);
       return undefined;
     }

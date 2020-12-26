@@ -11,14 +11,14 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Worms implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public cardType = CardType.AUTOMATED;
     public name = CardName.WORMS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-      player.addProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2));
+      player.addProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBE) + 1) / 2));
       return undefined;
     }
     public metadata: CardMetadata = {

@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SFMemorial implements IProjectCard {
     public cost = 7;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.SF_MEMORIAL;
     public cardType = CardType.AUTOMATED;
 

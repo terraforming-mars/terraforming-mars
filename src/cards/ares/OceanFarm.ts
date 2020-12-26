@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanFarm implements IProjectCard {
   public cost = 15;
-  public tags = [Tags.PLANT, Tags.STEEL];
+  public tags = [Tags.PLANT, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_FARM;
 

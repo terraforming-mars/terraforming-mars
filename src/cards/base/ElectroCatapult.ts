@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost = 17;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.ELECTRO_CATAPULT;
     public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {

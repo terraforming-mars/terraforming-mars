@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchOutpost implements IProjectCard {
     public cost = 18;
-    public tags = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.CITY, Tags.BUILDING];
     public name = CardName.RESEARCH_OUTPOST;
     public cardType = CardType.ACTIVE;
     public hasRequirements = false;

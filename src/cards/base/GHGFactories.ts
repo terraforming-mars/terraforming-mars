@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class GHGFactories implements IProjectCard {
   public cost = 11;
-  public tags = [Tags.STEEL];
+  public tags = [Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.GHG_FACTORIES;
   public hasRequirements = false;

@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaTubeSettlement implements IProjectCard {
     public cost = 15;
-    public tags = [Tags.STEEL, Tags.CITY];
+    public tags = [Tags.BUILDING, Tags.CITY];
     public name = CardName.LAVA_TUBE_SETTLEMENT;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost = 13;
-    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.MICROBE];
     public name = CardName.REGOLITH_EATERS;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

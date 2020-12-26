@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ProtectedValley implements IProjectCard {
     public cost = 23;
     public cardType = CardType.AUTOMATED;
-    public tags = [Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.PLANT, Tags.BUILDING];
     public name = CardName.PROTECTED_VALLEY;
     public hasRequirements = false;
 

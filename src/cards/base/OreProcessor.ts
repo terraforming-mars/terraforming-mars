@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OreProcessor implements IActionCard, IProjectCard {
     public cost = 13;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.ORE_PROCESSOR;
     public cardType = CardType.ACTIVE;
 

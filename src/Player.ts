@@ -2197,11 +2197,6 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getAvailableStandardProjects(game: Game) {
     let projects = game.dealer.standardProjects;
-    if (this.corporationCard?.name === CardName.THORGATE) {
-      projects = projects.filter((card) => card.name !== CardName.STANDARD_POWER_PLANT);
-    } else {
-      projects = projects.filter((card) => card.name !== CardName.STANDARD_POWER_PLANT_THORGATE);
-    }
     if (game.getPlayers().length !== 1) {
       projects = projects.filter((card) => card.name !== CardName.STANDARD_BUFFER_GAS);
     }

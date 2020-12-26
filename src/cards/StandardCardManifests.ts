@@ -224,7 +224,6 @@ import {Zeppelins} from './base/Zeppelins';
 import {Aquifer} from './standardProjects/Aquifer';
 import {City} from './standardProjects/City';
 import {PowerPlantStandard} from './standardProjects/PowerPlant';
-import {PowerPlantThorgate} from './standardProjects/PowerPlantThorgate';
 import {Greenery} from './standardProjects/Greenery';
 import {AsteroidStandard} from './standardProjects/Asteroid';
 import {BufferGas} from './standardProjects/BufferGas';
@@ -387,7 +386,6 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STANDARD_AQUIFER, Factory: Aquifer},
     {cardName: CardName.STANDARD_CITY, Factory: City},
     {cardName: CardName.STANDARD_POWER_PLANT, Factory: PowerPlantStandard},
-    {cardName: CardName.STANDARD_POWER_PLANT_THORGATE, Factory: PowerPlantThorgate},
     {cardName: CardName.STANDARD_GREENERY, Factory: Greenery},
     {cardName: CardName.STANDARD_ASTEROID, Factory: AsteroidStandard},
     {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},

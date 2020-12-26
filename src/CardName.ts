@@ -8,7 +8,6 @@ export enum CardName {
     STANDARD_BUILD_COLONY = 'Build Colony',
     STANDARD_BUFFER_GAS = 'Buffer Gas',
     STANDARD_POWER_PLANT = 'Power plant',
-    STANDARD_POWER_PLANT_THORGATE = 'Power plant (Thorgate)',
     STANDARD_SELL_PATENTS = 'Sell patents',
 
     ACQUIRED_COMPANY = 'Acquired Company',

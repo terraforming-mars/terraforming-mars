@@ -11,10 +11,17 @@ export class PowerPlantStandard extends StandardProjectCard {
   public cost = 11;
 
   public canAct(player: Player, game: Game): boolean {
-    return player.canAfford(this.cost, game);
+    let cost = this.cost;
+    if (player.corporationCard?.name === CardName.THORGATE) {
+      cost -= 3;
+    }
+    return player.canAfford(cost, game);
   }
 
   actionEssence(player: Player): void {
+    if (player.corporationCard?.name === CardName.THORGATE) {
+      player.megaCredits += 3;
+    }
     player.addProduction(Resources.ENERGY);
   }
 

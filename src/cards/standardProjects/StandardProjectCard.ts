@@ -38,7 +38,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
         },
       ));
 
-      game.log('${0} used ${1} standard project', (b) => b.player(player).standardProject(this.name));
+      game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
       player.onStandardProject(this);
 
       return undefined;

@@ -5,7 +5,7 @@ export enum CardName {
     STANDARD_ASTEROID = 'asteroid',
     STANDARD_AIR_SCRAPPING = 'Air scrapping',
     STANDARD_BUFFER_GAS = 'Buffer Gas',
-    STANDARD_BUILD_COLONY = 'Build Colony',
+    STANDARD_BUILD_COLONY = 'Colony',
     STANDARD_AQUIFER = 'Aquifer',
     STANDARD_GREENERY = 'Greenery',
     STANDARD_CITY = 'City',

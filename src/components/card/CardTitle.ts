@@ -21,9 +21,6 @@ export const CardTitle = Vue.component('CardTitle', {
     isCorporation: function(): boolean {
       return this.type === CardType.CORPORATION;
     },
-    isStandardProject: function(): boolean {
-      return this.type === CardType.STANDARD_PROJECT;
-    },
     isPrelude: function(): boolean {
       return this.type === CardType.PRELUDE;
     },
@@ -67,7 +64,6 @@ export const CardTitle = Vue.component('CardTitle', {
       <div :class="getMainClasses()">
           <div v-if="isPrelude()" class="prelude-label">prelude</div>
           <div v-if="isCorporation()" class="corporation-label">corporation</div>
-          <div v-if="isStandardProject()" class="standard-project-label">standard project</div>
           <CardCorporationLogo v-if="isCorporation()" :title="title"/>
           <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
       </div>

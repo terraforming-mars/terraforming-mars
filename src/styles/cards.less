@@ -75,10 +75,6 @@
     box-shadow: 0 0 2px 1px black;
 }
 
-.card-standard-project{
-    height: 150px;
-}
-
 .clicked-card {
     box-shadow: 0 0 1px 1px #444, 0 0 15px 5px white !important;
     filter: grayscale(1);
@@ -483,15 +479,6 @@ input[type="radio"]:checked + .filterDiv::after {
         #f2a6c8,
         rgb(235, 118, 171) 90%
     );
-}
-
-.card-title-standard-project {
-    padding-top: 20px !important;
-    padding-bottom: 20px;
-}
-
-.background-color-standard-project {
-    background: linear-gradient(-60deg, #bc8a13 10%, #fcfaa3, #bc8a13 90%);
 }
 
 .background-color-colony {
@@ -1222,28 +1209,6 @@ input[type="radio"]:checked + .filterDiv::after {
     padding-left: 7px;
     padding-right: 7px;
     border-radius: 3px;
-    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
-}
-
-.card-colony {
-    background-color: rgb(44, 44, 44);
-    background: linear-gradient(
-        to right bottom,
-        black,
-        rgb(60, 60, 60),
-        rgb(150, 150, 150),
-        rgb(60, 60, 60),
-        rgb(60, 60, 60),
-        black
-    );
-    color: black;
-    font-size: 12px;
-    width: 44px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
-    border-radius: 13px;
     box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
 }
 
@@ -2650,30 +2615,6 @@ input[type="radio"]:checked + .filterDiv::after {
                 );
                 border-radius: 7px 7px 2px 2px;
             }
-            .standard-project-label {
-                text-transform: uppercase;
-                float: left;
-                top: 0;
-                position: absolute;
-                color: #020202;
-                width: 135px;
-                height: 14px;
-                line-height: 15px;
-                text-align: center;
-                font-size: 13px;
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
-                0 0 0 2px rgba(0, 0, 0, 0.3);
-                background: #cccccc;
-                background-color: rgb(255, 204, 100);
-                background: linear-gradient(
-                        to right,
-                        #e28c22,
-                        rgb(255, 204, 100),
-                        rgb(255, 204, 100),
-                        #e28c22
-                );
-                border-radius: 7px 7px 2px 2px;
-            }
             .prelude-label {
                 position: absolute;
                 text-transform: uppercase;
@@ -2716,6 +2657,30 @@ input[type="radio"]:checked + .filterDiv::after {
         }
     }
 }
+
+.card-standard-project {
+    height: 140px;
+    width: 200px;
+    .card-content-wrapper {
+        .card-cost-and-tags {
+            position: absolute;
+            top: 6px;
+        }
+        .card-title-standard-project {
+            padding-top: 12px;
+            .background-color-standard-project {
+                background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
+                border-radius: 16px 16px 30% 30% !important;
+            }
+        }
+        .card-content {
+            height: unset !important;
+            width: unset !important;
+            top: -10px;
+        }
+    }
+}
+
 .celestic-fix {
     position: absolute;
     top: 18px;

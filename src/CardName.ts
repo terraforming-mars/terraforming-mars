@@ -1,14 +1,14 @@
 export enum CardName {
     // Standard projects:
-    STANDARD_GREENERY = 'Greenery',
-    STANDARD_ASTEROID = 'asteroid',
-    STANDARD_AQUIFER = 'Aquifer',
-    STANDARD_CITY = 'City',
-    STANDARD_AIR_SCRAPPING = 'Air scrapping',
-    STANDARD_BUILD_COLONY = 'Build Colony',
-    STANDARD_BUFFER_GAS = 'Buffer Gas',
-    STANDARD_POWER_PLANT = 'Power plant',
     STANDARD_SELL_PATENTS = 'Sell patents',
+    STANDARD_POWER_PLANT = 'Power plant',
+    STANDARD_ASTEROID = 'asteroid',
+    STANDARD_AIR_SCRAPPING = 'Air scrapping',
+    STANDARD_BUFFER_GAS = 'Buffer Gas',
+    STANDARD_BUILD_COLONY = 'Build Colony',
+    STANDARD_AQUIFER = 'Aquifer',
+    STANDARD_GREENERY = 'Greenery',
+    STANDARD_CITY = 'City',
 
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
@@ -282,6 +282,7 @@ export enum CardName {
     VIRUS = 'Virus',
     WARP_DRIVE = 'Warp Drive',
     WATER_IMPORT_FROM_EUROPA = 'Water Import From Europa',
+    // Venus:
     AERIAL_MAPPERS = 'Aerial Mappers',
     AEROSPORT_TOURNAMENT = 'Aerosport Tournament',
     AIR_SCRAPPING_EXPEDITION = 'Air-Scrapping Expedition',
@@ -334,6 +335,7 @@ export enum CardName {
     WINDMILLS = 'Windmills',
     WORMS = 'Worms',
     ZEPPELINS = 'Zeppelins',
+    // Corps:
     BEGINNER_CORPORATION = 'Beginner Corporation',
     CREDICOR = 'CrediCor',
     ECOLINE = 'EcoLine',
@@ -348,6 +350,7 @@ export enum CardName {
     THORGATE = 'Thorgate',
     UNITED_NATIONS_MARS_INITIATIVE = 'United Nations Mars Initiative',
     ACQUIRED_SPACE_AGENCY = 'Acquired Space Agency',
+    // Preludes:
     ALLIED_BANKS = 'Allied Banks',
     BIOFUELS = 'Biofuels',
     BIOLAB = 'Biolab',

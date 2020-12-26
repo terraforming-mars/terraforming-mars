@@ -44,7 +44,7 @@ export class SellPatents extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.text('X').cards(1).startAction.megacredits(0).multiplier;
-        eb.description('Action: Discard any number of cards to gain that amount of MC.');
+        eb.description('Discard any number of cards to gain that amount of MC.');
       }),
     ),
   };

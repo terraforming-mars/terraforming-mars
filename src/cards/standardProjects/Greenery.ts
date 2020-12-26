@@ -31,7 +31,7 @@ export class Greenery extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(23).startAction.greenery().secondaryTag('oxygen');
-        eb.description('Action: Spend 23 MC to place a greenery tile and increase oxygen 1 step.');
+        eb.description('Spend 23 MC to place a greenery tile and raise oxygen 1 step.');
       }),
     ),
   };

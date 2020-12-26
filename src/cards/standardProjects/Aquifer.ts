@@ -35,7 +35,7 @@ export class Aquifer extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(18).startAction.oceans(1);
-        eb.description('Action: Spend 18 MC to place an ocean tile.');
+        eb.description('Spend 18 MC to place an ocean tile.');
       }),
     ),
   };

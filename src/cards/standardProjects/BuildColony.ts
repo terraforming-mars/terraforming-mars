@@ -42,7 +42,7 @@ export class BuildColonyStandard extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(17).startAction.colonies();
-        eb.description('Action: Spend 17 MC to place a colony.');
+        eb.description('Spend 17 MC to place a colony.');
       }),
     ),
   };

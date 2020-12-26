@@ -32,7 +32,7 @@ export class PowerPlantStandard extends StandardProjectCard {
         eb.megacredits(11).startAction.productionBox((pb) => {
           pb.energy(1);
         });
-        eb.description('Action: Spend 11 MC to increase your Energy production 1 step.');
+        eb.description('Spend 11 MC to increase your Energy production 1 step.');
       }),
     ),
   };

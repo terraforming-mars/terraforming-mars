@@ -28,7 +28,7 @@ export class BufferGas extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(16).startAction.tr(1);
-        eb.description('Action: Spend 16 MC to increase your TR 1 step. Solo games only.');
+        eb.description('Spend 16 MC to increase your TR 1 step. Solo games only.');
       }),
     ),
   };

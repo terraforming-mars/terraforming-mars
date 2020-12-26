@@ -27,7 +27,7 @@ export class City extends StandardProjectCard {
         eb.megacredits(25).startAction.city().productionBox((pb) => {
           pb.megacredits(1);
         });
-        eb.description('Action: Spend 25 MC to place a city tile and increase your MC production 1 step.');
+        eb.description('Spend 25 MC to place a city tile and increase your MC production 1 step.');
       }),
     ),
   };

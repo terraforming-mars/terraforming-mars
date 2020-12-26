@@ -29,7 +29,7 @@ export class AsteroidStandard extends StandardProjectCard {
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(14).startAction.temperature(1);
-        eb.description('Action: Spend 14 MC to raise temperature 1 step.');
+        eb.description('Spend 14 MC to raise temperature 1 step.');
       }),
     ),
   };

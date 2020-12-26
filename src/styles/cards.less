@@ -89,7 +89,7 @@ input[type="checkbox"]:checked + .filterDiv::after,
 input[type="radio"]:checked + .filterDiv::after {
     content: "✓";
     position: absolute;
-    width: 252px;
+    width: calc(100% + 12px);
     height: 50px;
     line-height: 50px;
     top: 50%;
@@ -492,6 +492,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .background-color-global {
     background: linear-gradient(-60deg, #43afa5 10%, #43afa588, #43afa5 90%);
+}
+
+.background-color-standard-project {
+    background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
 }
 
 /*********** Style the tags ************/
@@ -2669,7 +2673,6 @@ input[type="radio"]:checked + .filterDiv::after {
         .card-title-standard-project {
             padding-top: 12px;
             .background-color-standard-project {
-                background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
                 border-radius: 16px 16px 30% 30% !important;
             }
         }

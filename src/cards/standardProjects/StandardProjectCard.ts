@@ -19,7 +19,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     public hasRequirements = false;
     public tags = [];
     public abstract name: CardName;
-    abstract cost: number;
+    public abstract cost: number;
     protected discount(_player: Player) {
       return 0;
     }

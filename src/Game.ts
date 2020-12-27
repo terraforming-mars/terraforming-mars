@@ -231,6 +231,10 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
       this.setupSolo();
+    } else {
+      // Remove Buffer Gas
+      this.dealer.standardProjects = this.dealer.standardProjects.filter(
+        (card) => card.name !== CardName.STANDARD_BUFFER_GAS);
     }
 
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);

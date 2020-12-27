@@ -2196,15 +2196,10 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getAvailableStandardProjects(game: Game) {
-    let projects = game.dealer.standardProjects;
-    if (game.getPlayers().length !== 1) {
-      projects = projects.filter((card) => card.name !== CardName.STANDARD_BUFFER_GAS);
-    }
-
     return new SelectCard(
       'Standard projects',
       'Confirm',
-      projects.sort((a, b) => a.cost - b.cost).filter((card) => card.canAct(this, game)),
+      game.dealer.standardProjects.filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

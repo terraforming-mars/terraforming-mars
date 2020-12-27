@@ -95,7 +95,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
       }
       dealer.corporationCards = corporationCards;
-      dealer.standardProjects = standardProjects;
+      dealer.standardProjects = standardProjects.sort((a, b) => a.cost - b.cost);
       return dealer;
     }
 

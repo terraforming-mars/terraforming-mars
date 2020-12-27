@@ -29,15 +29,20 @@ export const PlayerTags = Vue.component('player-tags', {
     showInfluence: function(): boolean {
       return this.player.turmoil !== undefined;
     },
+    showVenus: function(): boolean {
+      return this.player.venusNextExtension;
+    },
     getTagsPlaceholders: function() {
       const tags: {[x: string]: Tags | SpecialTags} = {...Tags, ...SpecialTags};
-      if (!this.showColonyCount()) {
+      if (this.showColonyCount() === false) {
         delete tags.COLONY_COUNT;
       }
-      if (!this.showInfluence()) {
+      if (this.showInfluence() === false) {
         delete tags.INFLUENCE;
       }
-
+      if (this.showVenus() === false) {
+        delete tags.VENUS;
+      }
       return tags;
     },
     getCardCount: function(): number {
@@ -92,7 +97,7 @@ export const PlayerTags = Vue.component('player-tags', {
             </div>
             <div class="player-tags-secondary">
                 <tag-count v-if="showShortTags()" v-for="tag in player.tags" :key="tag.tag" :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
-                <tag-count v-if="! showShortTags()" v-for="tagName in getTagsPlaceholders()" :key="tagName" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
+                <tag-count v-else v-for="tagName in getTagsPlaceholders()" :key="tagName" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
             </div>
         </div>
     `,

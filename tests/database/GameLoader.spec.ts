@@ -74,15 +74,15 @@ describe('GameLoader', function() {
 
   it('gets no game when fails to deserialize from database', function() {
     let actualGame1: Game | undefined = game;
-    const originalLoadFromJSON = Game.prototype.loadFromJSON;
-    Game.prototype.loadFromJSON = function() {
+    const originalDeserialize = Game.deserialize;
+    Game.deserialize = function() {
       throw 'could not parse this';
     };
     GameLoader.getInstance().getByGameId('foobar', false, (game1) => {
       actualGame1 = game1;
     });
     expect(actualGame1).is.undefined;
-    Game.prototype.loadFromJSON = originalLoadFromJSON;
+    Game.deserialize = originalDeserialize;
   });
 
   it('gets game when requested before database loaded', function(done) {

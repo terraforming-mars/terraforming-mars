@@ -19,7 +19,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class PharmacyUnion implements CorporationCard {
     public name = CardName.PHARMACY_UNION;
-    public tags = [Tags.MICROBES, Tags.MICROBES];
+    public tags = [Tags.MICROBE, Tags.MICROBE];
     public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
     public resourceType = ResourceType.DISEASE;
     public cardType = CardType.CORPORATION;
@@ -41,7 +41,7 @@ export class PharmacyUnion implements CorporationCard {
       if (this.isDisabled) return undefined;
 
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
-      const hasMicrobesTag = card.tags.includes(Tags.MICROBES);
+      const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
       const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
       const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
@@ -126,7 +126,7 @@ export class PharmacyUnion implements CorporationCard {
         game.defer(new DeferredAction(
           player,
           () => {
-            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;
             const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
             const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
             player.addResourceTo(this, microbeTagCount);

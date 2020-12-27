@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanCity implements IProjectCard {
   public cost = 18;
-  public tags = [Tags.CITY, Tags.STEEL];
+  public tags = [Tags.CITY, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_CITY;
 

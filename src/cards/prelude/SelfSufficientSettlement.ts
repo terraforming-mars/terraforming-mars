@@ -10,7 +10,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL, Tags.CITY];
+    public tags = [Tags.BUILDING, Tags.CITY];
     public name = CardName.SELF_SUFFICIENT_SETTLEMENT;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS, 2);

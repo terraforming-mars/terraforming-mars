@@ -16,7 +16,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Philares implements CorporationCard {
     public name = CardName.PHILARES;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 47;
     public cardType = CardType.CORPORATION;
 

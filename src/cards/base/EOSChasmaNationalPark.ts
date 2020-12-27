@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class EosChasmaNationalPark implements IProjectCard {
   public cost = 16;
   public nonNegativeVPIcon: boolean = true;
-  public tags = [Tags.PLANT, Tags.STEEL];
+  public tags = [Tags.PLANT, Tags.BUILDING];
   public name = CardName.EOS_CHASMA_NATIONAL_PARK;
   public cardType = CardType.AUTOMATED;
 

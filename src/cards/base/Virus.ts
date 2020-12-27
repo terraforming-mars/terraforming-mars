@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Virus implements IProjectCard {
     public cost = 1;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.VIRUS;
     public cardType = CardType.EVENT;
     public hasRequirements = false;

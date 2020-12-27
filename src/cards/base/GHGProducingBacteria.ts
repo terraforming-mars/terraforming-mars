@@ -18,7 +18,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 8;
-    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.MICROBE];
     public name = CardName.GHG_PRODUCING_BACTERIA;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

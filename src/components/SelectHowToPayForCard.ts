@@ -224,7 +224,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.player.steel > 0) {
-        if (this.tags.find((tag) => tag === Tags.STEEL) !== undefined) {
+        if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
           return true;
         }
       }

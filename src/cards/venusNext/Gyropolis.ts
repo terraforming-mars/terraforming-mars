@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Gyropolis implements IProjectCard {
     public cost = 20;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.GYROPOLIS;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

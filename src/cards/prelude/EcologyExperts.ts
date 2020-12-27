@@ -10,7 +10,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EcologyExperts extends PreludeCard implements IProjectCard {
-    public tags = [Tags.PLANT, Tags.MICROBES];
+    public tags = [Tags.PLANT, Tags.MICROBE];
     public name = CardName.ECOLOGY_EXPERTS;
     public getRequirementBonus(player: Player): number {
       if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {

@@ -25,7 +25,7 @@ export class AgricolaInc implements CorporationCard {
     }
 
     public getVictoryPoints(player: Player, game: Game): number {
-      const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBES, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.STEEL, Tags.ANIMAL];
+      const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
       if (game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
 
       const playerTags : ITagCount[] = player.getAllTags();

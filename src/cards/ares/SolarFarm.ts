@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm implements IProjectCard {
     public cost = 12;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.SOLAR_FARM;
 

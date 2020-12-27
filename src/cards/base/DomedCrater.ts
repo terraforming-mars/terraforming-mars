@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class DomedCrater implements IProjectCard {
     public cost = 24;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.DOMED_CRATER;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

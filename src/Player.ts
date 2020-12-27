@@ -601,15 +601,15 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getAllTags(): Array<ITagCount> {
     return [
+      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, false, false)},
       {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)},
       {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)},
       {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
       {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
-      {tag: Tags.MICROBES, count: this.getTagCount(Tags.MICROBES, false, false)},
+      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)},
       {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
       {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},
-      {tag: Tags.STEEL, count: this.getTagCount(Tags.STEEL, false, false)},
       {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
       {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
       {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
@@ -1097,7 +1097,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.indexOf(Tags.STEEL) !== -1;
+    return card.tags.indexOf(Tags.BUILDING) !== -1;
   }
 
   private canUseTitanium(card: ICard): boolean {
@@ -1821,7 +1821,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
+      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;
       if (this.canUseHeatAsMegaCredits) {

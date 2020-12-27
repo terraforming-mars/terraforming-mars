@@ -13,7 +13,7 @@ export class Pandemic implements IGlobalEvent {
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const maxedSteelTags = Math.min(5, player.getTagCount(Tags.STEEL, false, false));
+        const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, false, false));
         player.setResource(Resources.MEGACREDITS, -3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), game, undefined, true);
       });
     }

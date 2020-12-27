@@ -12,7 +12,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Greenhouses implements IProjectCard {
     public cost = 6;
-    public tags = [Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.PLANT, Tags.BUILDING];
     public name = CardName.GREENHOUSES;
     public cardType = CardType.AUTOMATED;
 

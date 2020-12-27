@@ -16,7 +16,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 3;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.EXTREMOPHILES;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

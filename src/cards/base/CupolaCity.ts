@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class CupolaCity implements IProjectCard {
     public cost = 16;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.CUPOLA_CITY;
     public canPlay(player: Player, game: Game): boolean {

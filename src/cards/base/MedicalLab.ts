@@ -9,12 +9,12 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MedicalLab implements IProjectCard {
     public cost = 13;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.MEDICAL_LAB;
 
     public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2));
+      player.addProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.BUILDING) + 1) / 2));
       return undefined;
     }
     public getVictoryPoints() {

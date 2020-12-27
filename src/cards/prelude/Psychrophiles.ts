@@ -14,7 +14,7 @@ export class Psychrophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 2;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.PSYCHROPHILES;
     public cardType = CardType.ACTIVE;
 

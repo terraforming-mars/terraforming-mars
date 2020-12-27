@@ -12,7 +12,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class PhysicsComplex implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public name = CardName.PHYSICS_COMPLEX;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.SCIENCE;

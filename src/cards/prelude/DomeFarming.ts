@@ -8,7 +8,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class DomeFarming extends PreludeCard implements IProjectCard {
-    public tags = [Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.PLANT, Tags.BUILDING];
     public name = CardName.DOME_FARMING;
     public play(player: Player) {
       player.addProduction(Resources.PLANTS);

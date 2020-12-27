@@ -10,7 +10,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 export class RegoPlastics implements IProjectCard {
     public name = CardName.REGO_PLASTICS;
     public cost = 10;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public cardType = CardType.ACTIVE;
 
     public play(player: Player) {

@@ -11,7 +11,7 @@ export class MarsFirst extends Party implements IParty {
 
     public rulingBonus(game: Game): void {
       game.getPlayers().forEach((player) => {
-        const tagCount = player.getTagCount(Tags.STEEL, false, false);
+        const tagCount = player.getTagCount(Tags.BUILDING, false, false);
         player.setResource(Resources.MEGACREDITS, tagCount);
       });
     }

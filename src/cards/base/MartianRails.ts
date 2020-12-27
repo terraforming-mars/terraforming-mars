@@ -13,7 +13,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MartianRails implements IActionCard, IProjectCard {
     public cost = 13;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MARTIAN_RAILS;
     public cardType = CardType.ACTIVE;
 

@@ -1,4 +1,4 @@
-import {IDatabase} from './IDatabase';
+import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
@@ -54,26 +54,22 @@ export class SQLite implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: GameId, game: Game, cb: (err: any) => void) {
+  restoreReferenceGame(game_id: GameId, cb: DbLoadCallback) {
     // Retrieve first save from database
     this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
-        return cb(new Error('Game not found'));
+        return cb(new Error('Game not found'), undefined);
       }
 
       try {
-        // Transform string to json
-        const gameToRestore = JSON.parse(row.game);
-
-        // Rebuild each objects
-        game.loadFromJSON(gameToRestore);
+        const json = JSON.parse(row.game);
+        const game = Game.deserialize(json);
+        return cb(err, game);
       } catch (exception) {
         console.error(`unable to restore reference game ${game_id}`, exception);
-        cb(exception);
+        cb(exception, undefined);
         return;
       }
-
-      return cb(err);
     });
   }
 
@@ -114,19 +110,21 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: GameId, save_id: number, game: Game): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {
-        return console.error(err.message);
+        console.error(err.message);
+        cb(err, undefined);
+        return;
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(row.game);
-
-      // Rebuild each objects
-      game.loadFromJSON(gameToRestore);
-
-      return true;
+      try {
+        const json = JSON.parse(row.game);
+        const game = Game.deserialize(json);
+        cb(undefined, game);
+      } catch (err) {
+        cb(err, undefined);
+      }
     });
   }
 

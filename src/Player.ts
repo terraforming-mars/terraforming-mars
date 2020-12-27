@@ -10,7 +10,6 @@ import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {Database} from './database/Database';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -60,6 +59,7 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
+import {GameLoader} from './database/GameLoader';
 
 export type PlayerId = string;
 
@@ -1755,13 +1755,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(game: Game): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      try {
-        Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
-        Database.getInstance().deleteGameNbrSaves(game.id, 1);
-        this.usedUndo = true; // To prevent going back into takeAction()
-      } catch (error) {
-        console.log(error);
-      }
+      GameLoader.getInstance().restoreGameAt(game.id, game.lastSaveId - 2, (game) => {
+        if (game !== undefined) {
+          this.usedUndo = true; // To prevent going back into takeAction()
+        }
+      });
       return undefined;
     });
   }

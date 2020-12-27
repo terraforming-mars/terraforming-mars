@@ -149,7 +149,7 @@ export class Game implements ISerializable<SerializedGame> {
   public phase: Phase = Phase.RESEARCH;
   public dealer: Dealer;
   public board: Board;
-  public standardProjects: Array<StandardProjectCard>;
+  public standardProjects: Array<StandardProjectCard> = [];
 
   // Global parameters
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -1641,7 +1641,8 @@ export class Game implements ISerializable<SerializedGame> {
     const dealer = Dealer.deserialize(d.dealer);
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
-    game.standardProjects = new CardLoader(d.gameOptions).getCards(CardLoader.getStandardProjects);
+    game.standardProjects = new CardLoader(d.gameOptions)
+      .getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost);
 
     game.milestones = [];
     d.milestones.forEach((element: IMilestone) => {

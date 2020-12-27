@@ -1,5 +1,6 @@
 import * as constants from '../constants';
 import {Board} from '../boards/Board';
+import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {Game} from '../Game';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -102,20 +103,20 @@ export class RedsPolicy {
      * Anyway, this is a list of cards that can make the player get money from playing a TR-increasing card/action
      */
     // Animals
-    const hasEcologicalZone = player.playedCards.filter((c) => c.name === CardName.ECOLOGICAL_ZONE).length > 0;
-    const hasHerbivores = player.playedCards.filter((c) => c.name === CardName.HERBIVORES).length > 0;
-    const hasMartianZoo = player.playedCards.filter((c) => c.name === CardName.MARTIAN_ZOO).length > 0;
-    const hasMeatIndustries = player.playedCards.filter((c) => c.name === CardName.MEAT_INDUSTRY).length > 0;
+    const hasEcologicalZone = player.playedCards.some((c) => c.name === CardName.ECOLOGICAL_ZONE);
+    const hasHerbivores = player.playedCards.some((c) => c.name === CardName.HERBIVORES);
+    const hasMartianZoo = player.playedCards.some((c) => c.name === CardName.MARTIAN_ZOO);
+    const hasMeatIndustries = player.playedCards.some((c) => c.name === CardName.MEAT_INDUSTRY);
     // Microbes
-    const hasDecomposers = player.playedCards.filter((c) => c.name === CardName.DECOMPOSERS).length > 0;
-    const hasTopsoilContract = player.playedCards.filter((c) => c.name === CardName.TOPSOIL_CONTRACT).length > 0;
+    const hasDecomposers = player.playedCards.some((c) => c.name === CardName.DECOMPOSERS);
+    const hasTopsoilContract = player.playedCards.some((c) => c.name === CardName.TOPSOIL_CONTRACT);
     // Events
-    const hasMediaGroup = player.playedCards.filter((c) => c.name === CardName.MEDIA_GROUP).length > 0;
-    const hasOptimalAerobraking = player.playedCards.filter((c) => c.name === CardName.OPTIMAL_AEROBRAKING).length > 0;
+    const hasMediaGroup = player.playedCards.some((c) => c.name === CardName.MEDIA_GROUP);
+    const hasOptimalAerobraking = player.playedCards.some((c) => c.name === CardName.OPTIMAL_AEROBRAKING);
     // Others
-    const hasAdvertising = player.playedCards.filter((c) => c.name === CardName.ADVERTISING).length > 0;
-    const hasGMOContracts = player.playedCards.filter((c) => c.name === CardName.GMO_CONTRACT).length > 0;
-    const hasStandardTechnology = player.playedCards.filter((c) => c.name === CardName.STANDARD_TECHNOLOGY).length > 0;
+    const hasAdvertising = player.playedCards.some((c) => c.name === CardName.ADVERTISING);
+    const hasGMOContracts = player.playedCards.some((c) => c.name === CardName.GMO_CONTRACT);
+    const hasStandardTechnology = player.playedCards.some((c) => c.name === CardName.STANDARD_TECHNOLOGY);
     // Corporations
     const isAphrodite = player.isCorporation(CardName.APHRODITE);
     const isArklight = player.isCorporation(CardName.ARKLIGHT);
@@ -184,17 +185,22 @@ export class RedsPolicy {
           bonusMCFromPlay += 2;
         }
       }
-      if (hasAdvertising && isManutech && action.card.cost >= 20) {
-        bonusMCFromPlay += 1;
+      if (action.card.cost >= 20) {
+        if (isCredicor) {
+          bonusMCFromPlay += 4;
+        }
+        if (hasAdvertising && isManutech) {
+          bonusMCFromPlay += 1;
+        }
       }
-      if (action.card.tags.filter((tag) => tag === Tags.EVENT).length > 0) {
+      if (action.card.tags.some((tag) => tag === Tags.EVENT)) {
         if (isInterplanetary) {
           bonusMCFromPlay += 2;
         }
         if (hasMediaGroup) {
           bonusMCFromPlay += 3;
         }
-        if (hasOptimalAerobraking) {
+        if (hasOptimalAerobraking && action.card.tags.some((tag) => tag === Tags.SPACE)) {
           bonusMCFromPlay += 3;
           if (isHelion) {
             bonusMCFromPlay += 3;
@@ -263,7 +269,6 @@ export class RedsPolicy {
      * Let's see if we can manage to pay Reds using the bonus placement from those tiles
      *
      * TODO: Include Ares adjacency bonus/malus/hazards
-     * TODO: Improve calculation for placement on HELIAS special ocean tile
      */
 
     // Let's compute bonus MC from each board space
@@ -305,7 +310,7 @@ export class RedsPolicy {
       let bonus = game.board.getAdjacentSpaces(space).filter(
         (adjacentSpace) => Board.isOceanSpace(adjacentSpace)).length * player.oceanBonus;
 
-      if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
+      if (game.gameOptions.boardName === BoardName.HELLAS && space.id === SpaceName.HELLAS_OCEAN_TILE) {
         bonus -= 6;
       }
 
@@ -345,9 +350,35 @@ export class RedsPolicy {
     } else {
       const spaces = nonOcean === 0 ? oceansSpaces : nonOceanSpaces;
       spaces.forEach((space) => {
-        const bonus = totalBonus + spacesBonusMC[game.board.spaces.indexOf(space)];
-        if (bonus >= target) {
-          spacesTree.set(space, undefined);
+        // Are we placing the tile on HELLAS south pole and there's still 1 ocean available ?
+        if (game.gameOptions.boardName === BoardName.HELLAS && space.id === SpaceName.HELLAS_OCEAN_TILE && game.board.getOceansOnBoard() + oceans < constants.MAX_OCEAN_TILES) {
+          const tempBonusMC = Array.from(spacesBonusMC);
+          // Are we placing an Ocean on a LAND space (Artifical Lake) ?
+          if (nonOcean === 0) {
+            game.board.getAdjacentSpaces(space).forEach((s) => {
+              tempBonusMC[game.board.spaces.indexOf(s)] += player.oceanBonus;
+            });
+          }
+          const tree = RedsPolicy.makeISpaceTree(
+            player,
+            game,
+            tempBonusMC,
+            oceans,
+            oceansSpaces,
+            0,
+            [],
+            target + 3, // +3 for the Reds policy cost for that extra ocean
+            iteration + 1,
+            totalBonus + tempBonusMC[game.board.spaces.indexOf(space)],
+          );
+          if (tree.size > 0) {
+            spacesTree.set(space, tree);
+          }
+        } else {
+          const bonus = totalBonus + spacesBonusMC[game.board.spaces.indexOf(space)];
+          if (bonus >= target) {
+            spacesTree.set(space, undefined);
+          }
         }
       });
     }

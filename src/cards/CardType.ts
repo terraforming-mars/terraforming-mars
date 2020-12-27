@@ -4,7 +4,7 @@ export enum CardType {
     AUTOMATED = 'green',
     PRELUDE = 'pink',
     CORPORATION = 'brown',
-    STANDARD_PROJECT = 'yellow',
+    STANDARD_PROJECT = 'gray',
     // Proxy cards are not real cards, but for operations that need a card-like behavior.
     PROXY = 'proxy',
 }

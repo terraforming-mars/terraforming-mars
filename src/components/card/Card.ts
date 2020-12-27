@@ -141,10 +141,8 @@ export const Card = Vue.component('card', {
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()"
-                             :isStandardProject="isStandardProject()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()" />
+                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :isCorporation="isCorporationCard()"/>
+                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />

@@ -131,24 +131,4 @@ export class CardFinder {
       });
       return result;
     }
-
-    public standardProjectsFromJSON(cards: Array<ICard | CardName>): Array<StandardProjectCard> {
-      if (cards === undefined) {
-        console.warn('missing cards calling corporationCardsFromJSON');
-        return [];
-      }
-      const result: Array<StandardProjectCard> = [];
-      cards.forEach((element: ICard | CardName) => {
-        if (typeof element !== 'string') {
-          element = element.name;
-        }
-        const card = this.getStandardProjectCardByName(element);
-        if (card !== undefined) {
-          result.push(card);
-        } else {
-          console.warn(`standard project card ${card} not found for deck`);
-        }
-      });
-      return result;
-    }
 }

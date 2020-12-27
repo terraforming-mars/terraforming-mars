@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -23,6 +22,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
+import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
@@ -1305,7 +1305,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  onStandardProject(projectType: StandardProjectCard): void {
+  public onStandardProject(projectType: StandardProjectCard): void {
     if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
       this.corporationCard.onStandardProject(this, projectType);
     }

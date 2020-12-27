@@ -15,8 +15,6 @@ export class BuildColonyStandard extends StandardProjectCard {
   public cost = 17;
 
   private getOpenColonies(player: Player, game: Game) {
-    if (!player.canAfford(this.cost)) return [];
-
     let openColonies = game.colonies.filter((colony) => colony.colonies.length < 3 &&
       colony.colonies.indexOf(player.id) === -1 &&
       colony.isActive);
@@ -30,7 +28,7 @@ export class BuildColonyStandard extends StandardProjectCard {
   }
 
   public canAct(player: Player, game: Game): boolean {
-    return this.getOpenColonies(player, game).length > 0;
+    return super.canAct(player, game) && this.getOpenColonies(player, game).length > 0;
   }
 
   actionEssence(player: Player, game: Game): void {

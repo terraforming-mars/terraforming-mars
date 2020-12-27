@@ -20,16 +20,23 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     public tags = [];
     public abstract name: CardName;
     abstract cost: number;
+    protected discount(_player: Player) {
+      return 0;
+    }
 
     public play() {
       return undefined;
     }
     protected abstract actionEssence(player: Player, game: Game): void
 
-    action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
+    public canAct(player: Player, game: Game): boolean {
+      return player.canAfford(this.cost - this.discount(player), game);
+    }
+
+    public action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
       game.defer(new SelectHowToPayDeferred(
         player,
-        this.cost,
+        this.cost - this.discount(player),
         false,
         false,
         `Select how to pay for ${this.name} project`,
@@ -43,5 +50,4 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
 
       return undefined;
     }
-    abstract canAct(player: Player, game: Game): boolean
 }

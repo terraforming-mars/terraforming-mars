@@ -24,7 +24,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     public play() {
       return undefined;
     }
-    abstract actionEssence(player: Player, game: Game): void
+    protected abstract actionEssence(player: Player, game: Game): void
 
     action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
       game.defer(new SelectHowToPayDeferred(

@@ -58,6 +58,8 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {CardLoader} from './CardLoader';
 
 export type GameId = string;
 
@@ -147,6 +149,7 @@ export class Game implements ISerializable<SerializedGame> {
   public phase: Phase = Phase.RESEARCH;
   public dealer: Dealer;
   public board: Board;
+  public standardProjects: Array<StandardProjectCard>;
 
   // Global parameters
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -214,7 +217,9 @@ export class Game implements ISerializable<SerializedGame> {
 
     this.activePlayer = first.id;
 
-    this.dealer = Dealer.newInstance(gameOptions);
+    const cardLoader = new CardLoader(gameOptions);
+    this.dealer = Dealer.newInstance(cardLoader);
+    this.standardProjects = cardLoader.getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost);
 
     // Clone game
     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
@@ -1614,7 +1619,8 @@ export class Game implements ISerializable<SerializedGame> {
     this.deferredActions = new DeferredActionsQueue();
 
     // Rebuild dealer object to be sure that we will have cards in the same order
-    this.dealer = Dealer.deserialize(d.dealer, d.gameOptions);
+    this.dealer = Dealer.deserialize(d.dealer);
+    this.standardProjects = new CardLoader(d.gameOptions).getCards(CardLoader.getStandardProjects);
 
     // Rebuild every player objects
     this.players = d.players.map((element: SerializedPlayer) => {

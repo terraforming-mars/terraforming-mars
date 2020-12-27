@@ -3,11 +3,12 @@ import {Dealer} from '../src/Dealer';
 import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
 import {CardFinder} from '../src/CardFinder';
 import {setCustomGameOptions} from './TestingUtils';
+import {CardLoader} from '../src/CardLoader';
 
 describe('Dealer', function() {
   it('correctly separates 71 corporate era cards', function() {
     // include corporate era
-    const dealer = Dealer.newInstance(setCustomGameOptions({
+    const gameOptions = setCustomGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,
@@ -16,25 +17,18 @@ describe('Dealer', function() {
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
-    }));
-    expect(dealer.getDeckSize()).to.eq(208);
+    });
+    expect(Dealer.newInstance(new CardLoader(gameOptions)).getDeckSize())
+      .to.eq(208);
 
     // exclude corporate era
-    const dealer2 = Dealer.newInstance(setCustomGameOptions({
-      corporateEra: false,
-      preludeExtension: false,
-      venusNextExtension: false,
-      coloniesExtension: false,
-      turmoilExtension: false,
-      promoCardsOption: false,
-      communityCardsOption: false,
-      aresExtension: false,
-    }));
-    expect(dealer2.getDeckSize()).to.eq(137);
+    gameOptions.corporateEra = false;
+    expect(Dealer.newInstance(new CardLoader(gameOptions)).getDeckSize())
+      .to.eq(137);
   });
 
   it('excludes expansion-specific preludes if those expansions are not selected ', function() {
-    const dealer = Dealer.newInstance(setCustomGameOptions({
+    const gameOptions = setCustomGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,
@@ -43,7 +37,9 @@ describe('Dealer', function() {
       promoCardsOption: false,
       communityCardsOption: true,
       aresExtension: false,
-    }));
+    });
+
+    const dealer = Dealer.newInstance(new CardLoader(gameOptions));
     const preludeDeck = dealer.preludeDeck;
 
     const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
@@ -54,7 +50,7 @@ describe('Dealer', function() {
   });
 
   it('deserializes from serialized', function() {
-    const options = setCustomGameOptions({
+    const gameOptions = setCustomGameOptions({
       corporateEra: false,
       preludeExtension: true,
       venusNextExtension: false,
@@ -64,8 +60,8 @@ describe('Dealer', function() {
       communityCardsOption: false,
       aresExtension: true,
     });
-    const dealer = Dealer.newInstance(options);
-    expect(dealer).to.deep.eq(Dealer.deserialize(dealer.serialize(), options));
+    const dealer = Dealer.newInstance(new CardLoader(gameOptions));
+    expect(dealer).to.deep.eq(Dealer.deserialize(dealer.serialize()));
   });
 });
 

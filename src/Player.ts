@@ -2199,7 +2199,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new SelectCard(
       'Standard projects',
       'Confirm',
-      game.dealer.standardProjects.filter((card) => card.canAct(this, game)),
+      game.standardProjects.filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

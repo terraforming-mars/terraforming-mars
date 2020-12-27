@@ -492,14 +492,11 @@ describe('Game', function() {
    * serialization. if this fails update SerializedGame
    * to match
    */
-  it('serializes every property', function() {
+  it('deserializes from serialized', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const gameKeys = Object.keys(game);
-    serializedKeys.sort();
-    gameKeys.sort();
-    expect(serializedKeys).to.deep.eq(gameKeys);
+
+    expect(game).to.deep.eq(game.loadFromJSON(serialized));
   });
 });

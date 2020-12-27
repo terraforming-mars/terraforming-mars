@@ -229,7 +229,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     const game: Game = new Game(id, players, first, activePlayer, gameOptions, seed, board, dealer);
 
-    game.standardProjects = cardLoader.getCards(CardLoader.getStandardProjects);
+    game.standardProjects = cardLoader.getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost);
 
     // Clone game
     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {

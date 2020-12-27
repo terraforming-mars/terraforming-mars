@@ -1,8 +1,6 @@
-
-import {Color} from '../Color';
 import {Database} from './Database';
 import {Game, GameId} from '../Game';
-import {Player, PlayerId} from '../Player';
+import {PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
 
@@ -98,6 +96,24 @@ export class GameLoader {
     }
   }
 
+  public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
+    try {
+      Database.getInstance().restoreGame(gameId, saveId, (err, game) => {
+        if (game !== undefined) {
+          Database.getInstance().deleteGameNbrSaves(gameId, 1);
+          this.add(game);
+          cb(game);
+        } else {
+          console.log(err);
+          cb(undefined);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      cb(undefined);
+    }
+  }
+
   private loadGame(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
     if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
@@ -105,9 +121,6 @@ export class GameLoader {
       console.warn(`GameLoader:game id not found ${gameId}`);
       cb(undefined);
     } else {
-      const player = new Player('test', Color.BLUE, false, 0);
-      const player2 = new Player('test2', Color.RED, false, 0);
-      const gameToRebuild = new Game(gameId, [player, player2], player);
       Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
         if (err || (serializedGame === undefined)) {
           console.error('GameLoader:loadGame', err);
@@ -115,15 +128,15 @@ export class GameLoader {
           return;
         }
         try {
-          gameToRebuild.loadFromJSON(serializedGame);
+          const game = Game.deserialize(serializedGame);
+          this.add(game);
+          console.log(`GameLoader loaded game ${gameId} into memory from database`);
+          cb(game);
         } catch (e) {
           console.error('GameLoader:loadGame', e);
           cb(undefined);
           return;
         }
-        this.add(gameToRebuild);
-        console.log(`GameLoader loaded game ${gameId} into memory from database`);
-        cb(gameToRebuild);
       });
     }
   }

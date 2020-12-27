@@ -10,7 +10,6 @@ import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {Database} from './database/Database';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -57,6 +56,7 @@ import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
 import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {GameLoader} from './database/GameLoader';
 
 export type PlayerId = string;
 
@@ -596,22 +596,21 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getAllTags(): Array<ITagCount> {
-    const tags: Array<ITagCount> = [];
-    tags.push({tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)} as ITagCount);
-    tags.push({tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
-    tags.push({tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
-    tags.push({tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
-    tags.push({tag: Tags.MICROBES, count: this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
-    tags.push({tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
-    tags.push({tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
-    tags.push({tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
-    tags.push({tag: Tags.STEEL, count: this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
-    tags.push({tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
-    tags.push({tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
-    tags.push({tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)} as ITagCount);
-    tags.push({tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length} as ITagCount);
-
-    return tags.filter((tag) => tag.count > 0);
+    return [
+      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)},
+      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)},
+      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
+      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
+      {tag: Tags.MICROBES, count: this.getTagCount(Tags.MICROBES, false, false)},
+      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
+      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
+      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},
+      {tag: Tags.STEEL, count: this.getTagCount(Tags.STEEL, false, false)},
+      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
+      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
+      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
+      {tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length},
+    ].filter((tag) => tag.count > 0);
   }
 
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
@@ -1547,13 +1546,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(game: Game): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      try {
-        Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
-        Database.getInstance().deleteGameNbrSaves(game.id, 1);
-        this.usedUndo = true; // To prevent going back into takeAction()
-      } catch (error) {
-        console.log(error);
-      }
+      GameLoader.getInstance().restoreGameAt(game.id, game.lastSaveId - 2, (game) => {
+        if (game !== undefined) {
+          this.usedUndo = true; // To prevent going back into takeAction()
+        }
+      });
       return undefined;
     });
   }

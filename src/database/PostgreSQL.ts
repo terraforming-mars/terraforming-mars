@@ -1,4 +1,4 @@
-import {IDatabase} from './IDatabase';
+import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
@@ -82,28 +82,25 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: GameId, game: Game, cb: (err: any) => void) {
+  restoreReferenceGame(game_id: GameId, cb: DbLoadCallback) {
     // Retrieve first save from database
     this.client.query('SELECT game_id game_id, game game FROM games WHERE game_id = $1 AND save_id = 0', [game_id], (err: any, res) => {
       if (err) {
         console.error('PostgreSQL:restoreReferenceGame', err);
-        return cb(err);
+        return cb(err, undefined);
       }
       if (res.rows.length === 0) {
-        return cb(new Error('Game not found'));
+        return cb(new Error(`Game ${game_id} not found`), undefined);
       }
       try {
-        // Transform string to json
-        const gameToRestore = JSON.parse(res.rows[0].game);
-
-        // Rebuild each objects
-        game.loadFromJSON(gameToRestore);
+        const json = JSON.parse(res.rows[0].game);
+        const game = Game.deserialize(json);
+        return cb(undefined, game);
       } catch (exception) {
         console.error(`Unable to restore game ${game_id}`, exception);
-        cb(exception);
+        cb(exception, undefined);
         return;
       }
-      return cb(undefined);
     });
   }
 
@@ -159,22 +156,27 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreGame(game_id: GameId, save_id: number, game: Game): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void {
     // Retrieve last save from database
     this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
       if (err) {
-        return console.error('PostgreSQL:restoreGame', err);
-      }
-      if (res.rows.length === 0) {
-        console.error('PostgreSQL:restoreGame', 'Game not found');
+        console.error('PostgreSQL:restoreGame', err);
+        cb(err, undefined);
         return;
       }
-
-      // Transform string to json
-      const gameToRestore = JSON.parse(res.rows[0].game);
-
-      // Rebuild each objects
-      game.loadFromJSON(gameToRestore);
+      if (res.rows.length === 0) {
+        console.error('PostgreSQL:restoreGame', `Game ${game_id} not found`);
+        cb(err, undefined);
+        return;
+      }
+      try {
+        // Transform string to json
+        const json = JSON.parse(res.rows[0].game);
+        const game = Game.deserialize(json);
+        cb(undefined, game);
+      } catch (err) {
+        cb(err, undefined);
+      }
     });
   }
 

@@ -981,6 +981,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
+  /**
+   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
+   * plus any units of heat available thanks to Thorgate.
+   */
+  public spendableMegacredits(): number {
+    return (this.canUseHeatAsMegaCredits) ? (this.heat + this.megaCredits) : this.megaCredits;
+  }
+
   public runResearchPhase(game: Game, draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
@@ -1016,12 +1024,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     };
 
     let maxPurchaseQty = 4;
-
-    if (this.canUseHeatAsMegaCredits) {
-      maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor((this.megaCredits + this.heat) / this.cardCost));
-    } else {
-      maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.megaCredits / this.cardCost));
-    }
+    maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.spendableMegacredits() / this.cardCost));
 
     this.setWaitingFor(
       new SelectCard(
@@ -1824,9 +1827,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;
-      if (this.canUseHeatAsMegaCredits) {
-        maxPay += this.heat;
-      }
       if (canUseSteel) {
         maxPay += this.steel * this.steelValue;
       }
@@ -1852,7 +1852,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         maxPay += dirigibles.resourceCount * 3;
       }
 
-      maxPay += this.megaCredits;
+      maxPay += this.spendableMegacredits();
       return maxPay >= this.getCardCost(game, card) &&
                   (card.canPlay === undefined || card.canPlay(this, game));
     });
@@ -1870,17 +1870,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (game !== undefined && canUseTitanium) {
-      return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+      return this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
-      extraResource +
-        this.megaCredits >= cost;
+      extraResource >= cost;
     }
 
-    return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
-            (canUseSteel ? this.steel * this.steelValue : 0) +
-            extraResource +
-              this.megaCredits >= cost;
+    return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
   public getAvailableStandardProjects(game: Game): OrOptions {

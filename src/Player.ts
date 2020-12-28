@@ -57,6 +57,7 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 import {GameLoader} from './database/GameLoader';
+import {CardLoader} from './CardLoader';
 
 export type PlayerId = string;
 
@@ -2196,7 +2197,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new SelectCard(
       'Standard projects',
       'Confirm',
-      game.standardProjects.filter((card) => card.canAct(this, game)),
+      new CardLoader(game.gameOptions)
+        .getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost)
+        .filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

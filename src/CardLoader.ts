@@ -72,12 +72,12 @@ export class CardLoader {
     return manifest.preludeCards;
   }
 
-  public getCards<T extends CardTypes>(getter: (arg0: CardManifest) => Deck<T>) : Array<T> {
-    let deck: Array<T> = [];
+  // Should be called like this: getCards(CardLoader.getProjectCards())
+  public getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
+    const deck: Array<T> = [];
     for (const manifest of this.manifests) {
-      this.addToDeck(deck, getter(manifest));
-      deck = deck.filter((card) => this.gameOptions.cardsBlackList.includes(card.name) === false);
+      this.addToDeck(deck, getDeck(manifest));
     }
-    return deck;
+    return deck.filter((card) => this.gameOptions.cardsBlackList.includes(card.name) === false); ;
   }
 }

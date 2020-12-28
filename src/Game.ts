@@ -58,7 +58,6 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 import {CardLoader} from './CardLoader';
 
 export type GameId = string;
@@ -149,7 +148,6 @@ export class Game implements ISerializable<SerializedGame> {
   public phase: Phase = Phase.RESEARCH;
   public dealer: Dealer;
   public board: Board;
-  public standardProjects: Array<StandardProjectCard>;
 
   // Global parameters
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -214,8 +212,6 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
-    this.standardProjects = new CardLoader(gameOptions)
-      .getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost);
   }
 
   public static newInstance(id: GameId,

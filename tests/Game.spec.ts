@@ -497,11 +497,9 @@ describe('Game', function() {
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
-    let gameKeys = Object.keys(game);
+    const gameKeys = Object.keys(game);
     serializedKeys.sort();
     gameKeys.sort();
-    // TODO(sienmich?) Improve this test after game.serialize is reworked
-    gameKeys = gameKeys.filter((key) => key !== 'standardProjects'); // standardProjects are not being serialized
     expect(serializedKeys).to.deep.eq(gameKeys);
   });
 });

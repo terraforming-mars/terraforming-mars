@@ -983,7 +983,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   /**
    * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
-   * plus any units of heat available thanks to Thorgate.
+   * plus any units of heat available thanks to Helion.
    */
   public spendableMegacredits(): number {
     return (this.canUseHeatAsMegaCredits) ? (this.heat + this.megaCredits) : this.megaCredits;

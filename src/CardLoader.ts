@@ -76,9 +76,7 @@ export class CardLoader {
     let deck: Array<T> = [];
     for (const manifest of this.manifests) {
       this.addToDeck(deck, getter(manifest));
-      if (this.gameOptions.cardsBlackList) {
-        deck = deck.filter((card) => ![...this.gameOptions.cardsBlackList].includes(card.name));
-      }
+      deck = deck.filter((card) => this.gameOptions.cardsBlackList.includes(card.name) === false);
     }
     return deck;
   }

@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';

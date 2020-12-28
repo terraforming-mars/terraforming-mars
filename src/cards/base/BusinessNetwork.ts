@@ -7,7 +7,7 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';

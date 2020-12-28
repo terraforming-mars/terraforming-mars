@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';

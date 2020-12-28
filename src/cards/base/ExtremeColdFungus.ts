@@ -9,7 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';

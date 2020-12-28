@@ -8,7 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

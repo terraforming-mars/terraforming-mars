@@ -5,7 +5,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';

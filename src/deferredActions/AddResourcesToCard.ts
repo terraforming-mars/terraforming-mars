@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
 import {ICard} from '../cards/ICard';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
 import {DeferredAction} from './DeferredAction';
 

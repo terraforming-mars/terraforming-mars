@@ -7,7 +7,7 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';

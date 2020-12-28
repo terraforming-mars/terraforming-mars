@@ -8,7 +8,7 @@ import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardMetadata} from '../CardMetadata';

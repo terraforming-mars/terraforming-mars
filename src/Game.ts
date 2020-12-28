@@ -27,7 +27,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
-import {LogHelper} from './components/LogHelper';
+import {LogHelper} from './LogHelper';
 import {LogMessage} from './LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';

@@ -10,7 +10,7 @@ import {Game} from '../Game';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player, PlayerId} from '../Player';

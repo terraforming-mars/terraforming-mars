@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Game} from '../../Game';
 
 export class LunarExports implements IProjectCard {

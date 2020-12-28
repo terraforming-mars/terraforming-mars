@@ -7,7 +7,7 @@ import {CardType} from '../CardType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

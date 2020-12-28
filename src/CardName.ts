@@ -1,9 +1,9 @@
 export enum CardName {
     // Standard projects:
-    STANDARD_SELL_PATENTS = 'Sell patents',
-    STANDARD_POWER_PLANT = 'Power plant',
-    STANDARD_ASTEROID = 'asteroid',
-    STANDARD_AIR_SCRAPPING = 'Air scrapping',
+    STANDARD_SELL_PATENTS = 'Sell Patents',
+    STANDARD_POWER_PLANT = 'Power plant', // 'Power Plant' is already taken
+    STANDARD_ASTEROID = 'asteroid', // 'Asteroid' is already taken
+    STANDARD_AIR_SCRAPPING = 'Air Scrapping',
     STANDARD_BUFFER_GAS = 'Buffer Gas',
     STANDARD_BUILD_COLONY = 'Colony',
     STANDARD_AQUIFER = 'Aquifer',

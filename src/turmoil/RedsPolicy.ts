@@ -235,8 +235,8 @@ export class RedsPolicy {
 
 
     const totalToPay = redTaxes + action.cost - bonusMCFromPlay;
-    let missingMC = totalToPay - (player.megaCredits + (isHelion ? player.heat : 0));
-    const mustSpendAtMost = player.megaCredits - (redTaxes - bonusMCFromPlay) + (isHelion ? player.heat : 0);
+    let missingMC = totalToPay - player.spendableMegacredits();
+    const mustSpendAtMost = player.spendableMegacredits() - (redTaxes - bonusMCFromPlay);
 
     if (missingMC <= 0) {
       // Player has enough MC to cover for everything

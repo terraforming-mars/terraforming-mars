@@ -4,7 +4,7 @@ import {Colony} from '../colonies/Colony';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction} from './DeferredAction';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 
 export class IncreaseColonyTrack implements DeferredAction {
   constructor(

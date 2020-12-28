@@ -6,45 +6,40 @@ import {TILES_PER_ROW} from '../constants';
 
 export class BoardRandomizer {
     private rng: Random;
-    private randomBoardOption: RandomBoardOptionType = RandomBoardOptionType.NONE;
-    private adjacentSpaceMap: Map<number, Array<number>> = new Map();
     private mustBeLandSpaces: Array<SpaceName> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(randomBoardOption: RandomBoardOptionType, seed: number) {
+    constructor(private randomBoardOption: RandomBoardOptionType, seed: number) {
       this.rng = new Random(seed);
-      this.randomBoardOption = randomBoardOption;
-      this.mustBeLandSpaces = [];
-      this.createAdjacentSpaceMap();
     }
 
-    setMustBeLandSpaces(...lands: Array<SpaceName>) {
+    public setMustBeLandSpaces(...lands: Array<SpaceName>) {
       this.mustBeLandSpaces = lands;
     }
 
-    addUnshufflableSpace(idx: number) {
+    public addUnshufflableSpace(idx: number) {
       this.unshufflableSpaces.push(idx);
     }
 
     // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
     // |lands| so that those IDs most definitely have land spaces.
-    randomizeOceans(oceans: Array<boolean>): Array<boolean> {
+    public randomizeOceans(oceans: Array<boolean>): Array<boolean> {
       if (this.randomBoardOption === RandomBoardOptionType.NONE) {
         return oceans;
       }
       this.shuffleArray(oceans);
       if (this.randomBoardOption === RandomBoardOptionType.LIMITED) {
+        const adjacent = this.getAdjacentSpaceMap();
         const idOrder = Array.from(Array(oceans.length).keys());
         this.shuffleArray(idOrder);
         idOrder.forEach((i)=>{
           if (!oceans[i]) return;
           if (this.unshufflableSpaces.includes(i)) return;
-          const adjacentOceanCount = this.getNumAdjacentOceanSpaces(i, oceans);
-          if (adjacentOceanCount === undefined) return;
+          const adjacentOceanCount = this.getNumAdjacentOceanSpaces(adjacent[i], oceans);
           if (adjacentOceanCount >= 2 ) return;
           if (adjacentOceanCount === 1 && this.rng.next() < 0.7 ) return;
           if (adjacentOceanCount === 0 && this.rng.next() < 0.1 ) return;
-          const landWithTheMostOceanAdjacent = this.getLandWithTheMostOceanAdjacent(oceans);
+          const landWithTheMostOceanAdjacent = this.getLandWithTheMostOceanAdjacent(adjacent, oceans);
           if (landWithTheMostOceanAdjacent === undefined) return;
           [oceans[landWithTheMostOceanAdjacent], oceans[i]] = [oceans[i], oceans[landWithTheMostOceanAdjacent]];
         });
@@ -71,23 +66,23 @@ export class BoardRandomizer {
     }
 
     // Shuffle the bonus spaces.
-    randomizeBonuses(bonuses: Array<Array<SpaceBonus>>): Array<Array<SpaceBonus>> {
+    public randomizeBonuses(bonuses: Array<Array<SpaceBonus>>): Array<Array<SpaceBonus>> {
       if (this.randomBoardOption === RandomBoardOptionType.NONE) {
         return bonuses;
       }
       this.shuffleArray(bonuses);
       if (this.randomBoardOption === RandomBoardOptionType.LIMITED) {
+        const adjacent = this.getAdjacentSpaceMap();
         const idOrder = Array.from(Array(bonuses.length).keys());
         this.shuffleArray(idOrder);
         idOrder.forEach((i)=>{
           if (this.unshufflableSpaces.includes(i)) return;
           if (!(bonuses[i].includes(SpaceBonus.PLANT))) return;
-          const adjacentPlantBonusSpaceCount = this.getNumAdjacentPlantBonusSpaces(i, bonuses);
-          if (adjacentPlantBonusSpaceCount === undefined) return;
+          const adjacentPlantBonusSpaceCount = this.getNumAdjacentPlantBonusSpaces(adjacent[i], bonuses);
           if (adjacentPlantBonusSpaceCount >= 2 ) return;
           if (adjacentPlantBonusSpaceCount === 1 && this.rng.next() < 0.7 ) return;
           if (adjacentPlantBonusSpaceCount === 0 && this.rng.next() < 0.1 ) return;
-          const landWithTheMostAdjacentPlantBonus = this.getLandWithTheMostAdjacentPlantBonus(bonuses);
+          const landWithTheMostAdjacentPlantBonus = this.getLandWithTheMostAdjacentPlantBonus(adjacent, bonuses);
           if (landWithTheMostAdjacentPlantBonus === undefined) return;
           [bonuses[landWithTheMostAdjacentPlantBonus], bonuses[i]] = [bonuses[i], bonuses[landWithTheMostAdjacentPlantBonus]];
         });
@@ -102,8 +97,9 @@ export class BoardRandomizer {
     // adjacentSpaceMap[3]=[0,4,7]
     // adjacentSpaceMap[1]=[0,2,4,5]
     // adjacentSpaceMap[4]=[0,1,3,5,7,8]
-    createAdjacentSpaceMap() {
+    private getAdjacentSpaceMap() {
       let idx = 0;
+      const adjacent: Array<Array<number>> = [];
       for (let row = 0; row < TILES_PER_ROW.length; row++) {
         const tilesInThisRow = TILES_PER_ROW[row];
         for (let i = 0; i < tilesInThisRow; i++) {
@@ -138,32 +134,32 @@ export class BoardRandomizer {
               adjIds.push(idx + TILES_PER_ROW[row + 1]); // downright for 0,1,2
             }
           }
-          this.adjacentSpaceMap.set(idx, adjIds);
+          adjacent[idx] = adjIds;
           idx++;
         }
       }
+      return adjacent;
     }
 
     // calculate how many tile adjacent to i has plant
-    getNumAdjacentPlantBonusSpaces(i: number, bonuses: Array<Array<SpaceBonus>>): number|undefined {
+    private getNumAdjacentPlantBonusSpaces(adjIds: Array<number> | undefined, bonuses: Array<Array<SpaceBonus>>): number {
       let plantDeg = 0;
-      const adjIds = this.adjacentSpaceMap.get(i);
-      if (adjIds === undefined) return undefined;
-      adjIds.forEach((idx) => {
-        if (bonuses[idx].includes(SpaceBonus.PLANT)) plantDeg++;
-      });
+      if (adjIds !== undefined) {
+        for (const idx of adjIds) {
+          if (bonuses[idx].includes(SpaceBonus.PLANT)) plantDeg++;
+        }
+      }
       return plantDeg;
     }
 
     // find a tile without plant, and has the most adjacent plant tile
-    getLandWithTheMostAdjacentPlantBonus(bonuses: Array<Array<SpaceBonus>>): number|undefined {
+    private getLandWithTheMostAdjacentPlantBonus(adjacent: Array<Array<number>>, bonuses: Array<Array<SpaceBonus>>): number | undefined {
       let candidates: Array<number> = [];
       let curPlantDegree = -1;
       for (let i = 0; i < bonuses.length; ++i) {
         if (this.unshufflableSpaces.includes(i)) continue;
         if (bonuses[i].includes(SpaceBonus.PLANT)) continue;
-        const plantDegree = this.getNumAdjacentPlantBonusSpaces(i, bonuses);
-        if (plantDegree === undefined) continue;
+        const plantDegree = this.getNumAdjacentPlantBonusSpaces(adjacent[i], bonuses);
         if (plantDegree > curPlantDegree) {
           curPlantDegree = plantDegree;
           candidates = [i];
@@ -177,25 +173,26 @@ export class BoardRandomizer {
     }
 
     // calculate how many tile adjacent to i is ocean
-    getNumAdjacentOceanSpaces(i: number, oceans: Array<boolean>): number|undefined {
+    private getNumAdjacentOceanSpaces(adjIds: Array<number> | undefined, oceans: Array<boolean>): number {
       let oceanDeg = 0;
-      const adjIds = this.adjacentSpaceMap.get(i);
-      if (adjIds === undefined) return undefined;
-      adjIds.forEach((idx) => {
-        if (oceans[idx]) oceanDeg++;
-      });
+      if (adjIds !== undefined) {
+        for (const idx of adjIds) {
+          if (oceans[idx]) {
+            oceanDeg++;
+          }
+        }
+      }
       return oceanDeg;
     }
 
     // find a land tile, and has the most adjacent ocean
-    getLandWithTheMostOceanAdjacent(oceans: Array<boolean>): number|undefined {
+    private getLandWithTheMostOceanAdjacent(adjacent: Array<Array<number>>, oceans: Array<boolean>): number | undefined {
       let candidates: Array<number> = [];
       let curOceanDegree = -1;
       for (let i = 0; i < oceans.length; ++i) {
         if (this.unshufflableSpaces.includes(i)) continue;
         if (oceans[i]) continue;
-        const oceanDegree = this.getNumAdjacentOceanSpaces(i, oceans);
-        if (oceanDegree === undefined) continue;
+        const oceanDegree = this.getNumAdjacentOceanSpaces(adjacent[i], oceans);
         if (oceanDegree > curOceanDegree) {
           curOceanDegree = oceanDegree;
           candidates = [i];
@@ -208,10 +205,10 @@ export class BoardRandomizer {
       return candidates[idx];
     }
 
-    public shuffleArray(array: Array<Object>): void {
+    private shuffleArray(array: Array<unknown>): void {
       this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
-      // Reverseing the indexes so the elements are pulled from the right.
-      // Revering the result so elements are listed left to right.
+      // Reversing the indices so the elements are pulled from the right.
+      // Reversing the result so elements are listed left to right.
       const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(this.rng.next() * (i + 1));

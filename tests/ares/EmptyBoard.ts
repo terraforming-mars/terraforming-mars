@@ -1,6 +1,7 @@
 import {Board} from '../../src/boards/Board';
 import {BoardBuilder} from '../../src/boards/BoardBuilder';
 import {ISpace} from '../../src/boards/ISpace';
+import {SpaceName} from '../../src/SpaceName';
 
 export class EmptyBoard extends Board {
   public spaces: Array<ISpace>;
@@ -29,5 +30,9 @@ export class EmptyBoard extends Board {
     builder.land().land().land().land().land();
 
     this.spaces = builder.build();
+  }
+
+  public getHighlightedSpaces(): Array<SpaceName> {
+    return [];
   }
 }

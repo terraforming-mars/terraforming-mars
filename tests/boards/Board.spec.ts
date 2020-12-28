@@ -3,6 +3,7 @@ import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/TileType';
 import {ISpace} from '../../src/boards/ISpace';
+import {SpaceName} from '../../src/SpaceName';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestingUtils';
 import {Board} from '../../src/boards/Board';
@@ -154,6 +155,10 @@ describe('Board', function() {
 
     public getSpaceById(id: string): ISpace | undefined {
       return this.spaces.find((space) => space.id === id);
+    }
+
+    public getHighlightedSpaces(): Array<SpaceName> {
+      return [];
     }
   };
 

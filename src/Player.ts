@@ -150,9 +150,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     public color: Color,
     public beginner: boolean,
     public handicap: number = 0,
-    id: PlayerId | undefined = undefined) {
-    // TODO(kberg): Take ID generation outside of this constructor, and leave it up to callers.
-    this.id = id === undefined ? this.generateId() : id;
+    id: PlayerId) {
+    this.id = id;
   }
 
   public static initialize(
@@ -160,7 +159,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     color: Color,
     beginner: boolean,
     handicap: number = 0,
-    id: PlayerId | undefined = undefined): Player {
+    id: PlayerId): Player {
     const player = new Player(name, color, beginner, handicap, id);
     return player;
   }
@@ -517,9 +516,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return requirementsBonus;
   }
 
-  private generateId(): string {
-    return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
-  }
   public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
     if (card.resourceCount) {
       card.resourceCount = Math.max(card.resourceCount - count, 0);

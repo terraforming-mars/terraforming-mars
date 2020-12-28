@@ -1237,6 +1237,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Play the card
+    this.howToAffordReds = selectedCard.howToAffordReds;
     const action = selectedCard.play(this, game);
     if (action !== undefined) {
       game.defer(new DeferredAction(
@@ -1830,6 +1831,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
+      // Reset card warning
+      card.warning = undefined;
+
       const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;

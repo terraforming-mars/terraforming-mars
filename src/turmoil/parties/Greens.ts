@@ -11,7 +11,7 @@ export class Greens extends Party implements IParty {
 
     public rulingBonus(game: Game): void {
       game.getPlayers().forEach((player) => {
-        const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBES, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
+        const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBE, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
         player.setResource(Resources.MEGACREDITS, tagCount);
       });
     }

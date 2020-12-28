@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ArtificialLake implements IProjectCard {
   public cost = 15;
-  public tags = [Tags.STEEL];
+  public tags = [Tags.BUILDING];
   public name = CardName.ARTIFICIAL_LAKE;
   public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {

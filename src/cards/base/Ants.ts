@@ -15,7 +15,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public cost = 9;
-  public tags = [Tags.MICROBES];
+  public tags = [Tags.MICROBE];
   public name = CardName.ANTS;
   public resourceType = ResourceType.MICROBE;
   public resourceCount: number = 0;

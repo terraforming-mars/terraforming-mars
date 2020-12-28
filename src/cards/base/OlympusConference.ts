@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OlympusConference implements IProjectCard, IResourceCard {
     public cost = 10;
-    public tags = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.EARTH, Tags.BUILDING];
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.SCIENCE;
     public resourceCount: number = 0;

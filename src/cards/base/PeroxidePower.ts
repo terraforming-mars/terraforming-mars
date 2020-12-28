@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class PeroxidePower implements IProjectCard {
     public cost = 7;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.PEROXIDE_POWER;
     public hasRequirements = false;

@@ -15,7 +15,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IResourceCard {
   public name = CardName.ASTEROID_DEFLECTION_SYSTEM;
   public cost = 13;
-  public tags = [Tags.SPACE, Tags.EARTH, Tags.STEEL];
+  public tags = [Tags.SPACE, Tags.EARTH, Tags.BUILDING];
   public resourceType = ResourceType.ASTEROID;
   public resourceCount: number = 0;
   public cardType = CardType.ACTIVE;

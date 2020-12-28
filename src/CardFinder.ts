@@ -89,7 +89,7 @@ export class CardFinder {
         if (card !== undefined) {
           result.push(card);
         } else {
-          console.warn(`card ${card} not found for deck`);
+          console.warn(`card ${element} not found while loading game.`);
         }
       });
       return result;
@@ -109,7 +109,7 @@ export class CardFinder {
         if (card !== undefined) {
           result.push(card);
         } else {
-          console.warn(`corporation card ${card} not found for deck`);
+          console.warn(`corporation ${element} not found while loading game.`);
         }
       });
       return result;

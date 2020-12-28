@@ -16,7 +16,7 @@ import {TileType} from '../../TileType';
 export abstract class MiningCard implements IProjectCard {
     public abstract cost: number;
     public abstract name: CardName;
-    public readonly tags: Array<Tags> = [Tags.STEEL];
+    public readonly tags: Array<Tags> = [Tags.BUILDING];
     public readonly cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public bonusResource: Resources | undefined = undefined;

@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost = 11;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.EQUATORIAL_MAGNETIZER;
     public cardType = CardType.ACTIVE;
     public hasRequirements = false;

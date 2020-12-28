@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Windmills implements IProjectCard {
     public cost = 6;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.WINDMILLS;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

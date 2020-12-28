@@ -38,7 +38,7 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     }
     public action(player: Player, game: Game) {
       const topCard = game.dealer.dealCard();
-      if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
+      if (topCard.tags.indexOf(Tags.MICROBE) !== -1) {
         this.resourceCount++;
         game.log('${0} found life!', (b) => b.player(player));
       }

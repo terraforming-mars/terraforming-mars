@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SpaceElevator implements IActionCard, IProjectCard {
     public cost = 27;
-    public tags = [Tags.SPACE, Tags.STEEL];
+    public tags = [Tags.SPACE, Tags.BUILDING];
     public name = CardName.SPACE_ELEVATOR;
     public cardType = CardType.ACTIVE;
 

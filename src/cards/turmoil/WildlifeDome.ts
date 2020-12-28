@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class WildlifeDome implements IProjectCard {
     public cost = 15;
-    public tags = [Tags.ANIMAL, Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.ANIMAL, Tags.PLANT, Tags.BUILDING];
     public name = CardName.WILDLIFE_DOME;
     public cardType = CardType.AUTOMATED;
 

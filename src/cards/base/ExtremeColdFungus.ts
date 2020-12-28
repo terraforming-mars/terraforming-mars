@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost = 13;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public cardType = CardType.ACTIVE;
     public name = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {

@@ -19,7 +19,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 9;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.THERMOPHILES;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

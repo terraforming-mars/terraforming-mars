@@ -13,10 +13,13 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class PharmacyUnion implements CorporationCard {
     public name = CardName.PHARMACY_UNION;
-    public tags = [Tags.MICROBES, Tags.MICROBES];
+    public tags = [Tags.MICROBE, Tags.MICROBE];
     public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
     public resourceType = ResourceType.DISEASE;
     public cardType = CardType.CORPORATION;
@@ -38,7 +41,7 @@ export class PharmacyUnion implements CorporationCard {
       if (this.isDisabled) return undefined;
 
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
-      const hasMicrobesTag = card.tags.includes(Tags.MICROBES);
+      const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
       const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
       const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
@@ -123,7 +126,7 @@ export class PharmacyUnion implements CorporationCard {
         game.defer(new DeferredAction(
           player,
           () => {
-            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;
             const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
             const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
             player.addResourceTo(this, microbeTagCount);
@@ -137,8 +140,29 @@ export class PharmacyUnion implements CorporationCard {
       return undefined;
     }
 
-
     public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
       return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R39',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
+        // blank space after MC is on purpose
+        b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
+        b.corpBox('effect', (ce) => {
+          ce.vSpace(CardRenderItemSize.LARGE);
+          ce.effectBox((eb) => {
+            eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
+            eb.description(undefined);
+          });
+          ce.vSpace();
+          ce.effectBox((eb) => {
+            eb.science(1).played.startEffect.minus().disease();
+            eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
+            eb.description('Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR');
+          });
+        });
+      }),
     }
 }

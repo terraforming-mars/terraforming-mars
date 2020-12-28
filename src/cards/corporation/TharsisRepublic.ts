@@ -9,11 +9,13 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
-
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class TharsisRepublic implements CorporationCard {
     public name = CardName.THARSIS_REPUBLIC;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 40;
     public cardType = CardType.CORPORATION;
 
@@ -41,5 +43,21 @@ export class TharsisRepublic implements CorporationCard {
         player.addProduction(Resources.MEGACREDITS, 2);
       }
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R31',
+      description: 'You start with 40 MC. As your first action in the game,place a city tile.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(40).nbsp.city();
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.city(CardRenderItemSize.SMALL).any.asterix().colon();
+            eb.productionBox((pb) => pb.megacredits(1)).nbsp;
+            eb.city(CardRenderItemSize.SMALL).startEffect.megacredits(3);
+            eb.description('Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.');
+          });
+        });
+      }),
     }
 }

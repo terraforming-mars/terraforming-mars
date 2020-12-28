@@ -18,9 +18,9 @@ const cards: Map<string, Entry> = new Map();
 ALL_CARD_MANIFESTS.forEach((manifest) => {
   manifest.projectCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.projectCards.cards.forEach((card) =>
+  manifest.corporationCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.projectCards.cards.forEach((card) =>
+  manifest.preludeCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
 });
 
@@ -57,6 +57,18 @@ export const DebugUI = Vue.component('debug-ui', {
     } as DebugUIModel;
   },
   methods: {
+    toggleAll: function() {
+      const data = this.$data;
+      data.base = !data.base;
+      data.corporateEra = !data.corporateEra;
+      data.prelude = !data.prelude;
+      data.venusNext = !data.venusNext;
+      data.colonies = !data.colonies;
+      data.turmoil = !data.turmoil;
+      data.community = !data.community;
+      data.promo = !data.promo;
+      data.ares = !data.ares;
+    },
     getAllProjectCards: function() {
       return ALL_PROJECT_CARD_NAMES.sort();
     },
@@ -117,8 +129,13 @@ export const DebugUI = Vue.component('debug-ui', {
             <label for="filterDescription-checkbox">
                 <span v-i18n>Filter description</span>
             </label>
+
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
-              <input type="checkbox" name="base" id="base-checkbox" v-model="base"></input>
+            <button id="toggle-checkbox" v-on:click="toggleAll()">
+                <span v-i18n>Toggle all</span>
+            </button>
+
+            <input type="checkbox" name="base" id="base-checkbox" v-model="base"></input>
               <label for="base-checkbox" class="expansion-button">
                   <span v-i18n>Base</span>
               </label>

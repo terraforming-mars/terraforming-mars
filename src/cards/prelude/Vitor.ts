@@ -8,6 +8,8 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Vitor implements CorporationCard {
     public name = CardName.VITOR;
@@ -43,5 +45,20 @@ export class Vitor implements CorporationCard {
 
     public play(_player: Player) {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R35',
+      description: 'You start with 45 MC. As your first action, fund an award for free.',
+      renderData: CardRenderer.builder((b) => {
+        b.br.br;
+        b.megacredits(45).nbsp.award();
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.vpIcon().startEffect.megacredits(3);
+            eb.description('Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.');
+          });
+        });
+      }),
     }
 }

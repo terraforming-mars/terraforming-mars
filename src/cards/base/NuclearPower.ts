@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearPower implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.NUCLEAR_POWER;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

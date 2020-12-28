@@ -8,10 +8,12 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Game} from '../../Game';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class UtopiaInvest implements IActionCard, CorporationCard {
     public name = CardName.UTOPIA_INVEST;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 40;
     public cardType = CardType.CORPORATION;
     public play(player: Player) {
@@ -99,5 +101,19 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
 
       result.options = options;
       return result;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R33',
+      description: 'You start with 40 MC. Increase your steel and titanium production 1 step each.',
+      renderData: CardRenderer.builder((b) => {
+        b.br;
+        b.megacredits(40).nbsp.productionBox((pb) => pb.steel(1).titanium(1));
+        b.corpBox('action', (ce) => {
+          ce.effectBox((eb) => {
+            eb.productionBox((eb) => eb.wild(1)).startAction.wild(4).digit;
+            eb.description('Action: Decrease any production to gain 4 resources of that kind.');
+          });
+        });
+      }),
     }
 }

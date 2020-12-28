@@ -10,10 +10,13 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Philares implements CorporationCard {
     public name = CardName.PHILARES;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 47;
     public cardType = CardType.CORPORATION;
 
@@ -108,5 +111,20 @@ export class Philares implements CorporationCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R25',
+      description: 'You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(47).greenery().secondaryTag('oxygen');
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;
+            eb.emptyTile('normal', CardRenderItemSize.SMALL).startEffect.wild(1);
+            eb.description('Effect: Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].');
+          });
+        });
+      }),
     }
 }

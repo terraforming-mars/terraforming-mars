@@ -12,16 +12,18 @@ export class CardRenderItem {
   public showDigit?: boolean; // rendering a digit instead of chain of items
   public amountInside?: boolean; // showing the amount for the item in its container
   public isPlayed?: boolean; // used to mark an item as 'played' e.g. event tags
-  public text?: string; // we can use text instead of integers in some cases
-  public isUppercase?: boolean; // if we have text and it's uppercase
+  public text?: string; // used text instead of integers in some cases
+  public isUppercase?: boolean; // for uppercase text
+  public isBold?: boolean; // for bold text
   public isPlate?: boolean; // used to mark plate a.k.a. text with golden background
   public size?: CardRenderItemSize;
   // adding tag dependency (top right bubble)
   // 'req' => used for Cutting Edge Technology's discount on cards with requirements
   // 'oxygen' => used for Greenery tile that increases oxygen on placement
   // 'turmoil' => used in Political Uprising community prelude
-  // TODO (chosta): if we have more than three non Tags secondary tag, add an enum
-  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater';
+  // 'blue' => used in Project Workshop
+  // TODO (chosta): if we have more than four! non Tags secondary tag, add an enum
+  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater' | 'blue';
   // use this for amount labels like 2x, x, etc.
   public multiplier?: boolean = false;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown

@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class StripMine implements IProjectCard {
     public cost = 25;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.STRIP_MINE;
     public hasRequirements = false;

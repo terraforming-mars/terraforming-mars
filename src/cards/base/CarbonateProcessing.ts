@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class CarbonateProcessing implements IProjectCard {
     public cost = 6;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.CARBONATE_PROCESSING;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

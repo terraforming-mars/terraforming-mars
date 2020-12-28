@@ -13,12 +13,12 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ViralEnhancers implements IProjectCard {
     public cost = 9;
-    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.MICROBE];
     public name = CardName.VIRAL_ENHANCERS;
     public cardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-      const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
+      const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
       if (resourceCount === 0) {
         return undefined;
       }

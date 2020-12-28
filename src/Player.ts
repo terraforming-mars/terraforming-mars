@@ -10,7 +10,6 @@ import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {Database} from './database/Database';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -61,6 +60,7 @@ import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
 import {HowToAffordRedsPolicy} from './turmoil/RedsPolicy';
 import {Timer} from './Timer';
+import {GameLoader} from './database/GameLoader';
 
 export type PlayerId = string;
 
@@ -602,22 +602,21 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getAllTags(): Array<ITagCount> {
-    const tags: Array<ITagCount> = [];
-    tags.push({tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)} as ITagCount);
-    tags.push({tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
-    tags.push({tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
-    tags.push({tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
-    tags.push({tag: Tags.MICROBES, count: this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
-    tags.push({tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
-    tags.push({tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
-    tags.push({tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
-    tags.push({tag: Tags.STEEL, count: this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
-    tags.push({tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
-    tags.push({tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
-    tags.push({tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)} as ITagCount);
-    tags.push({tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length} as ITagCount);
-
-    return tags.filter((tag) => tag.count > 0);
+    return [
+      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, false, false)},
+      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)},
+      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)},
+      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
+      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
+      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)},
+      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
+      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
+      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},
+      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
+      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
+      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
+      {tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length},
+    ].filter((tag) => tag.count > 0);
   }
 
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
@@ -988,6 +987,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
+  /**
+   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
+   * plus any units of heat available thanks to Helion.
+   */
+  public spendableMegacredits(): number {
+    return (this.canUseHeatAsMegaCredits) ? (this.heat + this.megaCredits) : this.megaCredits;
+  }
+
   public runResearchPhase(game: Game, draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
@@ -1023,12 +1030,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     };
 
     let maxPurchaseQty = 4;
-
-    if (this.canUseHeatAsMegaCredits) {
-      maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor((this.megaCredits + this.heat) / this.cardCost));
-    } else {
-      maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.megaCredits / this.cardCost));
-    }
+    maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.spendableMegacredits() / this.cardCost));
 
     this.setWaitingFor(
       new SelectCard(
@@ -1104,7 +1106,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.indexOf(Tags.STEEL) !== -1;
+    return card.tags.indexOf(Tags.BUILDING) !== -1;
   }
 
   private canUseTitanium(card: ICard): boolean {
@@ -1762,13 +1764,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(game: Game): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      try {
-        Database.getInstance().restoreGame(game.id, game.lastSaveId - 2, game);
-        Database.getInstance().deleteGameNbrSaves(game.id, 1);
-        this.usedUndo = true; // To prevent going back into takeAction()
-      } catch (error) {
-        console.log(error);
-      }
+      GameLoader.getInstance().restoreGameAt(game.id, game.lastSaveId - 2, (game) => {
+        if (game !== undefined) {
+          this.usedUndo = true; // To prevent going back into takeAction()
+        }
+      });
       return undefined;
     });
   }
@@ -1830,12 +1830,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
+      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;
-      if (this.canUseHeatAsMegaCredits) {
-        maxPay += this.heat;
-      }
       if (canUseSteel) {
         maxPay += this.steel * this.steelValue;
       }
@@ -1861,7 +1858,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         maxPay += dirigibles.resourceCount * 3;
       }
 
-      maxPay += this.megaCredits;
+      maxPay += this.spendableMegacredits();
       return maxPay >= this.getCardCost(game, card) &&
                   (card.canPlay === undefined || card.canPlay(this, game));
     });
@@ -1879,17 +1876,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (game !== undefined && canUseTitanium) {
-      return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+      return this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
-      extraResource +
-        this.megaCredits >= cost;
+      extraResource >= cost;
     }
 
-    return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
-            (canUseSteel ? this.steel * this.steelValue : 0) +
-            extraResource +
-              this.megaCredits >= cost;
+    return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
   public getAvailableStandardProjects(game: Game): OrOptions {

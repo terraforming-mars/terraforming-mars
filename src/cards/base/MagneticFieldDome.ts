@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MagneticFieldDome implements IProjectCard {
     public cost = 5;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.MAGNETIC_FIELD_DOME;
     public hasRequirements = false;

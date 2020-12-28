@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 
 export class ColonizerTrainingCamp implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.JOVIAN, Tags.STEEL];
+    public tags = [Tags.JOVIAN, Tags.BUILDING];
     public name = CardName.COLONIZER_TRAINING_CAMP;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

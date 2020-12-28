@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SponsoredMohole implements IProjectCard {
     public cost = 5;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.SPONSORED_MOHOLE;
     public cardType = CardType.AUTOMATED;
 

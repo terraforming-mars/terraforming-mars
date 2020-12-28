@@ -23,7 +23,7 @@ describe('RedsPolicy', function() {
   beforeEach(function() {
     player = new Player('test', Color.BLUE, false);
     const gameOptions = setCustomGameOptions() as GameOptions;
-    game = new Game('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player, gameOptions);
     resetBoard(game);
     iceAsteroid = new ActionDetails({
       card: new IceAsteroid(),
@@ -98,7 +98,7 @@ describe('RedsPolicy', function() {
   });
 
   it('Should prevent placing on the South Pole', function() {
-    game = new Game('foobar', [player], player, setCustomGameOptions({boardName: BoardName.HELLAS}));
+    game = Game.newInstance('foobar', [player], player, setCustomGameOptions({boardName: BoardName.HELLAS}));
     resetBoard(game);
 
     player.megaCredits = 6; // Needed so that getAvailableSpacesOnLand also returns South Pole

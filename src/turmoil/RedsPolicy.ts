@@ -160,17 +160,17 @@ export class RedsPolicy {
     // Card play
     if (action.card !== undefined) {
       if (hasGMOContracts) {
-        bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length * 2;
+        bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length * 2;
       }
       if (hasTopsoilContract) {
         if (action.card.resourceType === ResourceType.MICROBE || player.getResourceCards(ResourceType.MICROBE).length > 0) {
           bonusMCFromPlay += action.microbes;
         }
         if (hasDecomposers) {
-          bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
+          bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
         }
         if (isRecyclon) {
-          bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.STEEL).length;
+          bonusMCFromPlay += action.card.tags.filter((tag) => tag === Tags.BUILDING).length;
         }
       }
       if (hasMeatIndustries) {

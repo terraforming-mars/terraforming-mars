@@ -55,7 +55,7 @@ export class CardLoader {
   private addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
     const cardInstances = cards.cards
       .filter(CardLoader.include(this.gameOptions))
-      .map((cf) => new cf.Factory());
+      .map((cf) => cf.factory());
     deck.push(...cardInstances);
   }
 

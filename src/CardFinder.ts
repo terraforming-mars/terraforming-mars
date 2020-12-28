@@ -44,7 +44,7 @@ export class CardFinder {
         found = deck.standardProjects.findByCardName(cardName);
       });
       if (found !== undefined) {
-        return new found.Factory();
+        return found.factory();
       }
       console.warn(`standard project card not found ${cardName}`);
       return undefined;
@@ -63,7 +63,7 @@ export class CardFinder {
         found = deck.corporationCards.findByCardName(cardName);
       });
       if (found !== undefined) {
-        return new found.Factory();
+        return found.factory();
       }
       console.warn(`corporation card not found ${cardName}`);
       return undefined;
@@ -86,7 +86,7 @@ export class CardFinder {
         }
       });
       if (found !== undefined) {
-        return new found.Factory();
+        return found.factory();
       }
       console.warn(`card not found ${cardName}`);
       return undefined;

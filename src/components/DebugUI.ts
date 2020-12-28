@@ -18,11 +18,11 @@ interface Entry {
 const cards: Map<string, Entry> = new Map();
 ALL_CARD_MANIFESTS.forEach((manifest) => {
   manifest.projectCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+    cards.set(card.cardName, {card: card.factory(), module: manifest.module}));
   manifest.corporationCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+    cards.set(card.cardName, {card: card.factory(), module: manifest.module}));
   manifest.preludeCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+    cards.set(card.cardName, {card: card.factory(), module: manifest.module}));
 });
 
 export interface DebugUIModel {

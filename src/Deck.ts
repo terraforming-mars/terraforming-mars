@@ -41,7 +41,7 @@ export class Decks {
       }
       const cf = deck.findByCardName(cardName);
       if (cf) {
-        found = new cf.Factory();
+        found = cf.factory();
       }
     });
     return found;

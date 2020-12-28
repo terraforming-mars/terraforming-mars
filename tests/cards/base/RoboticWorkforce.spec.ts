@@ -127,7 +127,7 @@ describe('RoboticWorkforce', function() {
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     ALL_CARD_MANIFESTS.forEach((manifest) => {
       manifest.projectCards.cards.forEach((c) => {
-        const card = new c.Factory();
+        const card = c.factory();
         if (card.tags.includes(Tags.BUILDING) && card.play !== undefined) {
           // Solar Farm is a pain to test so let's just say it's fine
           if (card.name === CardName.SOLAR_FARM) {

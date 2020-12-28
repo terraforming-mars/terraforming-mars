@@ -1,3 +1,4 @@
+import {CardManifest} from '../src/cards/CardManifest';
 import {Deck} from '../src/Deck';
 import {Decks} from '../src/Deck';
 import {IProjectCard} from '../src/cards/IProjectCard';
@@ -13,16 +14,16 @@ import {FuelFactory} from '../src/cards/base/FuelFactory';
 
 describe('Deck', function() {
   const cards: Array<ICardFactory<IProjectCard>> = [
-    {cardName: CardName.ACQUIRED_COMPANY, Factory: AcquiredCompany},
-    {cardName: CardName.BANNED_DELEGATE, Factory: BannedDelegate},
-    {cardName: CardName.CALLISTO_PENAL_MINES, Factory: CallistoPenalMines},
+    CardManifest.dynamicFactory(CardName.ACQUIRED_COMPANY, AcquiredCompany),
+    CardManifest.dynamicFactory(CardName.BANNED_DELEGATE, BannedDelegate),
+    CardManifest.dynamicFactory(CardName.CALLISTO_PENAL_MINES, CallistoPenalMines),
   ];
   const deck: Deck<IProjectCard> = new Deck(cards);
 
   const secondCards: Array<ICardFactory<IProjectCard>> = [
-    {cardName: CardName.DECOMPOSERS, Factory: Decomposers},
-    {cardName: CardName.ECOLOGICAL_ZONE, Factory: EcologicalZone},
-    {cardName: CardName.FUEL_FACTORY, Factory: FuelFactory},
+    CardManifest.dynamicFactory(CardName.DECOMPOSERS, Decomposers),
+    CardManifest.dynamicFactory(CardName.ECOLOGICAL_ZONE, EcologicalZone),
+    CardManifest.dynamicFactory(CardName.FUEL_FACTORY, FuelFactory),
   ];
   const secondDeck: Deck<IProjectCard> = new Deck(secondCards);
 

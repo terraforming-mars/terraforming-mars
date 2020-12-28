@@ -206,9 +206,9 @@ function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
 ): Array<CardModel> {
-  const result: Array<CardModel> = [];
+  const cardModel: Array<CardModel> = [];
   cards.forEach((card) => {
-    result.push({
+    cardModel.push({
       name: card.name,
       resources:
         card.resourceCount !== undefined && showResouces ?
@@ -222,7 +222,7 @@ function getCardsAsCardModel(
     });
   });
 
-  return result;
+  return cardModel;
 }
 
 function getWaitingFor(
@@ -231,7 +231,7 @@ function getWaitingFor(
   if (waitingFor === undefined) {
     return undefined;
   }
-  const result: PlayerInputModel = {
+  const playerInputModel: PlayerInputModel = {
     title: waitingFor.title,
     buttonLabel: waitingFor.buttonLabel,
     inputType: waitingFor.inputType,
@@ -256,60 +256,60 @@ function getWaitingFor(
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
   case PlayerInputTypes.OR_OPTIONS:
-    result.options = [];
+    playerInputModel.options = [];
     for (const option of (waitingFor as AndOptions | OrOptions)
       .options) {
       const subOption = getWaitingFor(option);
       if (subOption !== undefined) {
-        result.options.push(subOption);
+        playerInputModel.options.push(subOption);
       }
     }
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-    result.cards = getCardsAsCardModel(
+    playerInputModel.cards = getCardsAsCardModel(
       (waitingFor as SelectHowToPayForCard).cards,
       false,
     );
-    result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
-    result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
-    result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
+    playerInputModel.microbes = (waitingFor as SelectHowToPayForCard).microbes;
+    playerInputModel.floaters = (waitingFor as SelectHowToPayForCard).floaters;
+    playerInputModel.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
-    result.cards = getCardsAsCardModel(
+    playerInputModel.cards = getCardsAsCardModel(
       (waitingFor as SelectCard<ICard>).cards,
     );
-    result.maxCardsToSelect = (waitingFor as SelectCard<
+    playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).maxCardsToSelect;
-    result.minCardsToSelect = (waitingFor as SelectCard<
+    playerInputModel.minCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).minCardsToSelect;
     break;
   case PlayerInputTypes.SELECT_COLONY:
-    result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+    playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY:
-    result.amount = (waitingFor as SelectHowToPay).amount;
-    result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
-    result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
-    result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+    playerInputModel.amount = (waitingFor as SelectHowToPay).amount;
+    playerInputModel.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
+    playerInputModel.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
+    playerInputModel.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
     break;
   case PlayerInputTypes.SELECT_PLAYER:
-    result.players = (waitingFor as SelectPlayer).players.map(
+    playerInputModel.players = (waitingFor as SelectPlayer).players.map(
       (player) => player.color,
     );
     break;
   case PlayerInputTypes.SELECT_SPACE:
-    result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
+    playerInputModel.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map(
       (space) => space.id,
     );
     break;
   case PlayerInputTypes.SELECT_AMOUNT:
-    result.min = (waitingFor as SelectAmount).min;
-    result.max = (waitingFor as SelectAmount).max;
+    playerInputModel.min = (waitingFor as SelectAmount).min;
+    playerInputModel.max = (waitingFor as SelectAmount).max;
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
-    result.players = (waitingFor as SelectDelegate).players.map(
+    playerInputModel.players = (waitingFor as SelectDelegate).players.map(
       (player) => {
         if (player === 'NEUTRAL') {
           return 'NEUTRAL';
@@ -321,7 +321,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
     const _player = (waitingFor as SelectProductionToLose).player;
-    result.payProduction = {
+    playerInputModel.payProduction = {
       cost: (waitingFor as SelectProductionToLose).unitsToLose,
       units: {
         megacredits: _player.getProduction(Resources.MEGACREDITS),
@@ -334,10 +334,10 @@ function getWaitingFor(
     };
     break;
   case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
-    result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
+    playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
     break;
   }
-  return result;
+  return playerInputModel;
 }
 
 function getCards(

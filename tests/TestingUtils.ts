@@ -4,6 +4,7 @@ import * as constants from '../src/constants';
 import {SpaceType} from '../src/SpaceType';
 import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
+import {RandomBoardOptionType} from '../src/boards/RandomBoardOptionType';
 import {ISpace} from '../src/boards/ISpace';
 import {Color} from '../src/Color';
 
@@ -44,7 +45,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     showOtherPlayersVP: false,
     customCorporationsList: [],
     solarPhaseOption: false,
-    shuffleMapOption: false,
+    randomBoardOption: RandomBoardOptionType.NONE,
     promoCardsOption: false,
     communityCardsOption: false,
     undoOption: false,

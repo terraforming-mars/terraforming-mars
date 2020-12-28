@@ -16,6 +16,7 @@ import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
 import {Phase} from '../../src/Phase';
 import {TestPlayers} from '../TestingUtils';
+import {RandomBoardOptionType} from '../../src/boards/RandomBoardOptionType';
 
 describe('AresHandler', function() {
   let player : Player; let otherPlayer: Player; let game : Game;
@@ -328,7 +329,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(false, 0, false);
+    game.board = OriginalBoard.newInstance(RandomBoardOptionType.NONE, 0, false);
     const space = game.board.getSpaces(SpaceType.OCEAN).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

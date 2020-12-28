@@ -23,6 +23,7 @@ export const HELLAS_BONUS_OCEAN_COST: number = 6;
 export const MAX_FLEET_SIZE: number = 4;
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;
+export const TILES_PER_ROW: Array<number> = [5, 6, 7, 8, 9, 8, 7, 6, 5];
 
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},

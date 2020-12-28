@@ -55,6 +55,7 @@ import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
+import {RandomBoardOptionType} from './boards/RandomBoardOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
@@ -95,7 +96,7 @@ export interface GameOptions {
   draftVariant: boolean;
   initialDraftVariant: boolean;
   startingCorporations: number;
-  shuffleMapOption: boolean;
+  randomBoardOption: RandomBoardOptionType;
   randomMA: RandomMAOptionType;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
@@ -126,7 +127,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
   showTimers: false,
-  shuffleMapOption: false,
+  randomBoardOption: RandomBoardOptionType.NONE,
   solarPhaseOption: false,
   soloTR: false,
   startingCorporations: 2,
@@ -206,7 +207,7 @@ export class Game implements ISerializable<SerializedGame> {
     const seed = Math.random();
     this.seed = seed;
 
-    this.board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    this.board = GameSetup.newBoard(gameOptions.boardName, gameOptions.randomBoardOption, seed, gameOptions.venusNextExtension);
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {

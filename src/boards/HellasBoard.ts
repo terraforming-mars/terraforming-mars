@@ -6,6 +6,7 @@ import {ISpace} from './ISpace';
 import {HELLAS_BONUS_OCEAN_COST} from '../constants';
 import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SerializedBoard} from './SerializedBoard';
 
 export class HellasBoard extends Board {
@@ -13,8 +14,8 @@ export class HellasBoard extends Board {
     super();
   }
 
-  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): HellasBoard {
-    const builder = new BoardBuilder(seed, includeVenus);
+  public static newInstance(randomBoardOption: RandomBoardOptionType, seed: number, includeVenus: boolean): HellasBoard {
+    const builder = new BoardBuilder(randomBoardOption, seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -42,9 +43,6 @@ export class HellasBoard extends Board {
     // y=8
     builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
 
-    if (shuffle) {
-      builder.shuffle();
-    }
 
     const spaces = builder.build();
     return new HellasBoard(spaces);

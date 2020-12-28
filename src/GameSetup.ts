@@ -3,6 +3,7 @@ import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './aw
 import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
+import {RandomBoardOptionType} from './boards/RandomBoardOptionType';
 import {GameOptions} from './Game';
 import {HellasBoard} from './boards/HellasBoard';
 import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
@@ -57,13 +58,13 @@ export class GameSetup {
   };
 
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: boolean, seed: number, includeVenus: boolean): Board {
+  public static newBoard(boardName: BoardName, randomBoard: RandomBoardOptionType, seed: number, includeVenus: boolean): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, seed, includeVenus);
+      return ElysiumBoard.newInstance(randomBoard, seed, includeVenus);
     } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, seed, includeVenus);
+      return HellasBoard.newInstance(randomBoard, seed, includeVenus);
     } else {
-      return OriginalBoard.newInstance(shuffle, seed, includeVenus);
+      return OriginalBoard.newInstance(randomBoard, seed, includeVenus);
     }
   }
 }

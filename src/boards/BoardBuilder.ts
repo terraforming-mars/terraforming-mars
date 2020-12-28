@@ -1,11 +1,13 @@
+import {BoardRandomizer} from './BoardRandomizer';
 import {ISpace} from './ISpace';
-import {Random} from '../Random';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
+import {TILES_PER_ROW} from '../constants';
 import {SpaceType} from '../SpaceType';
 
 export class BoardBuilder {
-    private rng: Random;
+    private randomizer: BoardRandomizer;
 
     // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
     //
@@ -17,12 +19,11 @@ export class BoardBuilder {
     private oceans: Array<boolean> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
-    private unshufflableSpaces: Array<number> = [];
 
-    constructor(seed: number, private includeVenus: boolean) {
+    constructor(randomBoardOption: RandomBoardOptionType, seed: number, private includeVenus: boolean) {
       this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
-      this.rng = new Random(seed);
+      this.randomizer = new BoardRandomizer(randomBoardOption, seed);
     }
 
     ocean(...bonus: Array<SpaceBonus>) {
@@ -38,18 +39,23 @@ export class BoardBuilder {
     }
 
     doNotShuffleLastSpace() {
-      this.unshufflableSpaces.push(this.oceans.length - 1);
+      this.randomizer.addUnshufflableSpace(this.oceans.length - 1);
       return this;
     }
 
+    setMustBeLandSpaces(...lands: Array<SpaceName>) {
+      this.randomizer.setMustBeLandSpaces(...lands);
+    }
 
     build(): Array<ISpace> {
-      const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
+      this.oceans = this.randomizer.randomizeOceans(this.oceans);
+      this.bonuses = this.randomizer.randomizeBonuses(this.bonuses);
+
       const idOffset = this.spaces.length + 1;
       let idx = 0;
 
-      for (let row = 0; row < 9; row++) {
-        const tilesInThisRow = tilesPerRow[row];
+      for (let row = 0; row < TILES_PER_ROW.length; row++) {
+        const tilesInThisRow = TILES_PER_ROW[row];
         const xOffset = 9 - tilesInThisRow;
         for (let i = 0; i < tilesInThisRow; i++) {
           const space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);
@@ -69,43 +75,6 @@ export class BoardBuilder {
       }
 
       return this.spaces;
-    }
-
-    public shuffleArray(array: Array<Object>): void {
-      this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
-      // Reverseing the indexes so the elements are pulled from the right.
-      // Revering the result so elements are listed left to right.
-      const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(this.rng.next() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      for (let idx = 0; idx < this.unshufflableSpaces.length; idx++) {
-        array.splice(this.unshufflableSpaces[idx], 0, spliced[idx]);
-      }
-    }
-
-    // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
-    // |lands| so that those IDs most definitely have land spaces.
-    public shuffle(...lands: Array<SpaceName>) {
-      this.shuffleArray(this.oceans);
-      this.shuffleArray(this.bonuses);
-      let safety = 0;
-      while (safety < 1000) {
-        let satisfy = true;
-        for (const land of lands) {
-          // Why -3?
-          const land_id = Number(land) - 3;
-          while (this.oceans[land_id]) {
-            satisfy = false;
-            const idx = Math.floor(this.rng.next() * (this.oceans.length + 1));
-            [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
-          }
-        }
-        if (satisfy) return;
-        safety++;
-      }
-      throw new Error('infinite loop detected');
     }
 
     private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {

@@ -3,6 +3,7 @@ import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
+import {RandomBoardOptionType} from './RandomBoardOptionType';
 import {SerializedBoard} from './SerializedBoard';
 import {Player} from '../Player';
 
@@ -11,8 +12,8 @@ export class ElysiumBoard extends Board {
     super();
   }
 
-  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): ElysiumBoard {
-    const builder = new BoardBuilder(seed, includeVenus);
+  public static newInstance(randomBoardOption: RandomBoardOptionType, seed: number, includeVenus: boolean): ElysiumBoard {
+    const builder = new BoardBuilder(randomBoardOption, seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -38,9 +39,7 @@ export class ElysiumBoard extends Board {
     // y=8
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
-    if (shuffle) {
-      builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
-    }
+    builder.setMustBeLandSpaces(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     const spaces = builder.build();
     return new ElysiumBoard(spaces);
   }

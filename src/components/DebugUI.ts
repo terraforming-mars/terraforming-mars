@@ -5,6 +5,7 @@ import {
   ALL_CORPORATION_CARD_NAMES,
   ALL_PRELUDE_CARD_NAMES,
   ALL_PROJECT_CARD_NAMES,
+  ALL_STANDARD_PROJECT_CARD_NAMES,
 } from '../cards/AllCards';
 import {GameModule} from '../GameModule';
 import {ICard} from '../cards/ICard';
@@ -68,6 +69,9 @@ export const DebugUI = Vue.component('debug-ui', {
       data.community = !data.community;
       data.promo = !data.promo;
       data.ares = !data.ares;
+    },
+    getAllStandardProjectCards: function() {
+      return ALL_STANDARD_PROJECT_CARD_NAMES.sort();
     },
     getAllProjectCards: function() {
       return ALL_PROJECT_CARD_NAMES.sort();
@@ -188,26 +192,32 @@ export const DebugUI = Vue.component('debug-ui', {
                   <span v-i18n>Community</span>
               </label><span/>
             </div>
-            <div class="cardbox"" v-for="card in getAllProjectCards()"></div>
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
-                <div class="cardbox"" v-for="card in getAllProjectCards()">
+                <div class="cardbox" v-for="card in getAllProjectCards()">
                     <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Corporations</h2>
-                <div class="cardbox"" v-for="card in getAllCorporationCards()">
+                <div class="cardbox" v-for="card in getAllCorporationCards()">
                     <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Preludes</h2>
-                <div class="cardbox"" v-for="card in getAllPreludeCards()">
+                <div class="cardbox" v-for="card in getAllPreludeCards()">
                     <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+              <h2>Standard Projects</h2>
+              <div class="cardbox" v-for="card in getAllStandardProjectCards()">
+                  <Card v-show="filtered(card)" :card="{'name': card}" />
+              </div>
             </section>
         </div>
     `,

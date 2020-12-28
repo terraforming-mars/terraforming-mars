@@ -33,9 +33,6 @@ import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
-import {PlaceCityTile} from './deferredActions/PlaceCityTile';
-import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
-import {PlaceGreeneryTile} from './deferredActions/PlaceGreeneryTile';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -50,16 +47,17 @@ import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
-import {StandardProjectType} from './StandardProjectType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters, IAresGlobalParametersResponse} from './inputs/ShiftAresGlobalParameters';
+import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 import {GameLoader} from './database/GameLoader';
+import {CardLoader} from './CardLoader';
 
 export type PlayerId = string;
 
@@ -129,7 +127,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Turmoil
   public turmoilScientistsActionUsed: boolean = false;
 
-  public powerPlantCost: number = 11;
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   public oceanBonus: number = constants.OCEAN_BONUS;
 
@@ -1307,7 +1304,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  private onStandardProject(projectType: StandardProjectType): void {
+  public onStandardProject(projectType: StandardProjectCard): void {
     if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
       this.corporationCard.onStandardProject(this, projectType);
     }
@@ -1317,211 +1314,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCard.onStandardProject(this, projectType);
       }
     }
-  }
-
-  private sellPatents(game: Game): PlayerInput {
-    const result = new SelectCard(
-      'Sell patents',
-      'Sell',
-      this.cardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        this.onStandardProject(StandardProjectType.SELLING_PATENTS);
-        this.megaCredits += foundCards.length;
-        foundCards.forEach((card) => {
-          for (let i = 0; i < this.cardsInHand.length; i++) {
-            if (this.cardsInHand[i].name === card.name) {
-              this.cardsInHand.splice(i, 1);
-              break;
-            }
-          }
-          game.dealer.discard(card);
-        });
-        game.log('${0} sold ${1} patents', (b) => b.player(this).number(foundCards.length));
-        return undefined;
-      }, this.cardsInHand.length,
-    );
-
-    return result;
-  }
-
-  private buildColony(game: Game, openColonies: Array<Colony>): PlayerInput {
-    const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
-    return new SelectColony('Build colony (' + constants.BUILD_COLONY_COST + ' MC)', 'Build', coloniesModel, (colonyName: ColonyName) => {
-      openColonies.forEach((colony) => {
-        if (colony.name === colonyName) {
-          game.defer(new SelectHowToPayDeferred(
-            this,
-            constants.BUILD_COLONY_COST,
-            false,
-            false,
-            'Select how to pay for Colony project',
-            () => {
-              game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Build Colony'));
-              colony.addColony(this, game);
-              this.onStandardProject(StandardProjectType.BUILD_COLONY);
-            },
-          ));
-          return undefined;
-        }
-        return undefined;
-      });
-      return undefined;
-    });
-  }
-
-  private airScrapping(game: Game): PlayerInput {
-    return new SelectOption(
-      'Air scrapping (' + constants.AIR_SCRAPPING_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.AIR_SCRAPPING_COST,
-          false,
-          false,
-          'Select how to pay for Air Scrapping project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Air Scrapping'));
-            game.increaseVenusScaleLevel(this, 1);
-            this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private bufferGas(game: Game): PlayerInput {
-    return new SelectOption(
-      'Buffer Gas (' + constants.BUFFER_GAS_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.BUFFER_GAS_COST,
-          false,
-          false,
-          'Select how to pay for Buffer Gas project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Buffer Gas'));
-            this.increaseTerraformRatingSteps(1, game);
-            this.onStandardProject(StandardProjectType.BUFFER_GAS);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private buildPowerPlant(game: Game): PlayerInput {
-    return new SelectOption(
-      'Power plant (' + this.powerPlantCost + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          this.powerPlantCost,
-          false,
-          false,
-          'Select how to pay for Power Plant project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Power plant'));
-            this.addProduction(Resources.ENERGY);
-            this.onStandardProject(StandardProjectType.POWER_PLANT);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private asteroid(game: Game): PlayerInput {
-    return new SelectOption(
-      'Asteroid (' + constants.ASTEROID_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.ASTEROID_COST,
-          false,
-          false,
-          'Select how to pay for Asteroid project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Asteroid'));
-            game.increaseTemperature(this, 1);
-            this.onStandardProject(StandardProjectType.ASTEROID);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private aquifer(game: Game): PlayerInput {
-    return new SelectOption(
-      'Aquifer (' + constants.AQUIFER_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.AQUIFER_COST,
-          false,
-          false,
-          'Select how to pay for Aquifer project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Aquifer'));
-            game.defer(new PlaceOceanTile(this, game, 'Select space for ocean'));
-            this.onStandardProject(StandardProjectType.AQUIFER);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private addGreenery(game: Game): PlayerInput {
-    return new SelectOption(
-      'Greenery (' + constants.GREENERY_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.GREENERY_COST,
-          false,
-          false,
-          'Select how to pay for Greenery project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('Greenery'));
-            game.defer(new PlaceGreeneryTile(this, game));
-            this.onStandardProject(StandardProjectType.GREENERY);
-          },
-        ));
-        return undefined;
-      },
-    );
-  }
-
-  private addCity(game: Game): PlayerInput {
-    return new SelectOption(
-      'City (' + constants.CITY_COST + ' MC)',
-      'Confirm',
-      () => {
-        game.defer(new SelectHowToPayDeferred(
-          this,
-          constants.CITY_COST,
-          false,
-          false,
-          'Select how to pay for City project',
-          () => {
-            game.log('${0} used ${1} standard project', (b) => b.player(this).standardProject('City'));
-            game.defer(new PlaceCityTile(this, game));
-            this.onStandardProject(StandardProjectType.CITY);
-            this.addProduction(Resources.MEGACREDITS);
-          },
-        ));
-        return undefined;
-      },
-    );
   }
 
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
@@ -1875,95 +1667,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
-  public getAvailableStandardProjects(game: Game): OrOptions {
-    const standardProjects = new OrOptions();
-    standardProjects.title = 'Pay for a Standard Project';
-    standardProjects.buttonLabel = 'Confirm';
-
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-
-    if (this.canAfford(this.powerPlantCost)) {
-      standardProjects.options.push(
-        this.buildPowerPlant(game),
-      );
-    }
-
-    let asteroidCost = constants.ASTEROID_COST;
-    if (redsAreRuling) asteroidCost += REDS_RULING_POLICY_COST;
-
-    if (this.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE) {
-      standardProjects.options.push(
-        this.asteroid(game),
-      );
-    }
-
-    let aquiferCost = constants.AQUIFER_COST;
-    if (redsAreRuling) aquiferCost += REDS_RULING_POLICY_COST;
-
-    if (this.canAfford(aquiferCost) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-      standardProjects.options.push(
-        this.aquifer(game),
-      );
-    }
-
-    let greeneryCost = constants.GREENERY_COST;
-    const oxygenNotMaxed = game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL;
-    if (redsAreRuling && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
-
-    if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
-      standardProjects.options.push(
-        this.addGreenery(game),
-      );
-    }
-
-    if (
-      this.canAfford(constants.CITY_COST) &&
-          game.board.getAvailableSpacesForCity(this).length > 0) {
-      standardProjects.options.push(
-        this.addCity(game),
-      );
-    }
-
-    let airScrappingCost = constants.AIR_SCRAPPING_COST;
-    if (redsAreRuling) airScrappingCost += REDS_RULING_POLICY_COST;
-
-    if (game.gameOptions.venusNextExtension &&
-      this.canAfford(airScrappingCost) &&
-      game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
-      standardProjects.options.push(
-        this.airScrapping(game),
-      );
-    }
-
-    if ( game.gameOptions.coloniesExtension &&
-      this.canAfford(constants.BUILD_COLONY_COST)) {
-      let openColonies = game.colonies.filter((colony) => colony.colonies.length < 3 &&
-        colony.colonies.indexOf(this.id) === -1 &&
-        colony.isActive);
-
-      if (redsAreRuling && !this.canAfford(constants.BUILD_COLONY_COST + constants.REDS_RULING_POLICY_COST)) {
-        openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
-      }
-
-      if (openColonies.length > 0) {
-        standardProjects.options.push(
-          this.buildColony(game, openColonies),
-        );
-      }
-    }
-
-    let bufferGasCost = constants.BUFFER_GAS_COST;
-    if (redsAreRuling) bufferGasCost += REDS_RULING_POLICY_COST;
-
-    if (game.gameOptions.soloTR && this.canAfford(bufferGasCost)) {
-      standardProjects.options.push(
-        this.bufferGas(game),
-      );
-    }
-
-    return standardProjects;
-  }
-
   public takeAction(game: Game): void {
     if (this.usedUndo) {
       this.usedUndo = false;
@@ -2180,22 +1883,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const standardProjects = this.getAvailableStandardProjects(game);
-
-    if (standardProjects.options.length > 1) {
+    if (standardProjects.cards.length >= 1) {
       action.options.push(standardProjects);
-    } else if (standardProjects.options.length === 1) {
-      action.options.push(standardProjects.options[0]);
     }
 
     action.options.push(
       this.passOption(game),
     );
-
-    if (this.cardsInHand.length > 0) {
-      action.options.push(
-        this.sellPatents(game),
-      );
-    }
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
@@ -2312,7 +2006,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       colonyVictoryPoints: this.colonyVictoryPoints,
       // Turmoil
       turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
-      powerPlantCost: this.powerPlantCost,
       victoryPointsBreakdown: this.victoryPointsBreakdown,
       oceanBonus: this.oceanBonus,
       // Custom cards
@@ -2368,7 +2061,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       player.plantProduction = d.plantProduction;
       player.plants = d.plants;
       player.plantsNeededForGreenery = d.plantsNeededForGreenery;
-      player.powerPlantCost = d.powerPlantCost;
       player.removingPlayers = d.removingPlayers;
       player.scienceTagCount = d.scienceTagCount;
       player.steel = d.steel;
@@ -2491,5 +2183,16 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     return colonyTilesAlreadyBuiltOn < game.colonies.length;
+  }
+
+  public getAvailableStandardProjects(game: Game) {
+    return new SelectCard(
+      'Standard projects',
+      'Confirm',
+      new CardLoader(game.gameOptions)
+        .getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost)
+        .filter((card) => card.canAct(this, game)),
+      (card) => card[0].action(this, game),
+    );
   }
 }

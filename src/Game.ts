@@ -58,6 +58,7 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
+import {CardLoader} from './CardLoader';
 
 export type GameId = string;
 
@@ -219,17 +220,8 @@ export class Game implements ISerializable<SerializedGame> {
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
-    const dealer = Dealer.newInstance(
-      gameOptions.corporateEra,
-      gameOptions.preludeExtension,
-      gameOptions.venusNextExtension,
-      gameOptions.coloniesExtension,
-      gameOptions.promoCardsOption,
-      gameOptions.turmoilExtension,
-      gameOptions.aresExtension,
-      gameOptions.communityCardsOption,
-      gameOptions.cardsBlackList,
-    );
+    const cardLoader = new CardLoader(gameOptions);
+    const dealer = Dealer.newInstance(cardLoader);
 
     const activePlayer = first.id;
 
@@ -1645,6 +1637,7 @@ export class Game implements ISerializable<SerializedGame> {
     const dealer = Dealer.deserialize(d.dealer);
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+
     game.milestones = [];
     d.milestones.forEach((element: IMilestone) => {
       ALL_MILESTONES.forEach((ms: IMilestone) => {

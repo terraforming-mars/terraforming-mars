@@ -1,21 +1,9 @@
-import {CardName} from './CardName';
-import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
-import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
-import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
-import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardManifests';
-import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
-import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
-import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
-import {CardManifest} from './cards/CardManifest';
-import {ICardFactory} from './cards/ICardFactory';
-import {CardTypes, Deck} from './Deck';
-import {GameModule} from './GameModule';
 import {CardFinder} from './CardFinder';
-import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
+import {CardLoader} from './CardLoader';
 
 export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
@@ -25,85 +13,12 @@ export class Dealer implements ISerializable<SerializedDealer> {
 
     private constructor() { }
 
-    public static newInstance(
-      corporateEra: boolean,
-      prelude: boolean,
-      venusNext: boolean,
-      colonies : boolean,
-      promoCards: boolean,
-      turmoil: boolean,
-      ares: boolean,
-      communityCards: boolean = false,
-      cardsBlackList?: Array<CardName>,
-    ): Dealer {
+    public static newInstance(loader: CardLoader): Dealer {
       const dealer = new Dealer();
 
-      const deck:Array<IProjectCard> = [];
-      const preludeDeck:Array<IProjectCard> = [];
-      const projectCardsToRemove:Array<String> = [];
-      const corporationCards: Array<CorporationCard> = [];
-
-      function include(cf: ICardFactory<CardTypes>) : boolean {
-        const expansion = cf.compatibility;
-        switch (expansion) {
-        case undefined:
-          return true;
-        case GameModule.Venus:
-          return venusNext;
-        case GameModule.Colonies:
-          return colonies;
-        case GameModule.Turmoil:
-          return turmoil;
-        default:
-          throw ('Unhandled expansion type: ' + expansion);
-        }
-      }
-      function addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
-        const cardInstances = cards.cards
-          .filter((cf) => include(cf))
-          .map((cf) => new cf.Factory());
-        deck.push(...cardInstances);
-      }
-      function addToDecks(manifest: CardManifest) {
-        addToDeck(deck, manifest.projectCards);
-        addToDeck(corporationCards, manifest.corporationCards);
-        addToDeck(preludeDeck, manifest.preludeCards);
-        projectCardsToRemove.push(...manifest.projectCardsToRemove);
-      }
-      addToDecks(BASE_CARD_MANIFEST);
-      if (corporateEra) {
-        addToDecks(CORP_ERA_CARD_MANIFEST);
-      }
-      if (prelude) {
-        addToDecks(PRELUDE_CARD_MANIFEST);
-      }
-      if (venusNext) {
-        addToDecks(VENUS_CARD_MANIFEST);
-      }
-      if (colonies) {
-        addToDecks(COLONIES_CARD_MANIFEST);
-      }
-      if (turmoil) {
-        addToDecks(TURMOIL_CARD_MANIFEST);
-      }
-      if (ares) {
-        addToDecks(ARES_CARD_MANIFEST);
-      }
-      if (promoCards) {
-        addToDecks(PROMO_CARD_MANIFEST);
-      }
-      if (communityCards) {
-        addToDecks(COMMUNITY_CARD_MANIFEST);
-      }
-      if (cardsBlackList) {
-        projectCardsToRemove.push(...cardsBlackList);
-      }
-      const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
-      dealer.deck = dealer.shuffleCards(filteredDeck);
-      if (prelude) {
-        dealer.preludeDeck = dealer.shuffleCards(preludeDeck);
-      }
-      dealer.corporationCards = corporationCards;
+      dealer.deck = dealer.shuffleCards(loader.getCards(CardLoader.getProjectCards));
+      dealer.preludeDeck = dealer.shuffleCards(loader.getCards(CardLoader.getPreludeCards));
+      dealer.corporationCards = loader.getCards(CardLoader.getCorporationCards);
       return dealer;
     }
 

@@ -3,8 +3,9 @@ import {ICardFactory} from './cards/ICardFactory';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {PreludeCard} from './cards/prelude/PreludeCard';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 
-export type CardTypes = IProjectCard | CorporationCard | PreludeCard;
+export type CardTypes = IProjectCard | CorporationCard | PreludeCard | StandardProjectCard;
 
 export class Deck<T extends CardTypes> {
     cards: Array<ICardFactory<T>>;

@@ -68,6 +68,11 @@ export class RedsPolicy {
     canUseFloaters: boolean = false,
     canUseMicrobes: boolean = false,
   ): HowToAffordRedsPolicy {
+    // This will be the object returned by the method
+    const howToAffordRedsPolicy: HowToAffordRedsPolicy = {
+      canAfford: false,
+    };
+
     // If oxygen increase will increase temperature
     if (game.getOxygenLevel() < 8 && game.getOxygenLevel() + action.oxygenIncrease >= 8) {
       action.temperatureIncrease++;
@@ -230,79 +235,75 @@ export class RedsPolicy {
 
 
     const totalToPay = redTaxes + action.cost - bonusMCFromPlay;
-
-    // Player has enough MC to cover for everything
-    if (player.canAfford(totalToPay)) {
-      return {canAfford: true};
-    }
-
+    let missingMC = totalToPay - (player.megaCredits + (isHelion ? player.heat : 0));
     const mustSpendAtMost = player.megaCredits - (redTaxes - bonusMCFromPlay) + (isHelion ? player.heat : 0);
 
-    let missingMC: number = totalToPay - (player.megaCredits + (isHelion ? player.heat : 0));
-    if (canUseSteel) {
-      missingMC -= Math.min(player.steel, Math.ceil(missingMC / player.getSteelValue())) * player.getSteelValue();
-    }
-    if (canUseTitanium) {
-      missingMC -= Math.min(player.titanium, Math.ceil(missingMC / player.getTitaniumValue(game))) * player.getTitaniumValue(game);
-    }
-    if (canUseMicrobes) {
-      missingMC -= Math.min(player.getMicrobesCanSpend(), Math.ceil(missingMC / 2)) * 2;
-    }
-    if (canUseFloaters) {
-      missingMC -= Math.min(player.getFloatersCanSpend(), Math.ceil(missingMC / 3)) * 3;
-    }
-
-    // If player uses steel/titanium/etc it can pay for everything but must not spend more than |mustSpendAtMost| MC on the action/card itself
     if (missingMC <= 0) {
-      return {canAfford: true, mustSpendAtMost: mustSpendAtMost};
-    }
-
-
-    // If we still can't pay, and there's no tile to place, there's no way to get more cash, so player can't pay Reds
-    if (action.oceansToPlace === 0 && action.nonOceanToPlace === undefined) {
-      return {canAfford: false};
-    }
-
-
-    /*
-     * Ok so if we arrived here that means we have tiles to place
-     * Let's see if we can manage to pay Reds using the bonus placement from those tiles
-     *
-     * TODO: Include Ares adjacency bonus/malus/hazards
-     */
-
-    // Let's compute bonus MC from each board space
-    const spacesBonusMC = RedsPolicy.getBoardSpacesBonusMC(player, game, isHelion);
-
-    // And generate a tree of tile placements that provide at least |missingMC|
-    const spacesTree: ISpaceTree = RedsPolicy.makeISpaceTree(
-      player,
-      game,
-      action.card,
-      spacesBonusMC,
-      action.oceansToPlace,
-      action.oceansAvailableSpaces,
-      action.nonOceanToPlace !== undefined ? 1 : 0,
-      action.nonOceanAvailableSpaces,
-      missingMC,
-    );
-
-
-    // If our tree has at least one branch, we can afford to pay Reds !
-    if (spacesTree.size > 0) {
-      if (action.card !== undefined) {
-        if (action.card.warning !== undefined) {
-          action.card.warning += ' Tile placement will be limited due to Reds policy.';
-        } else {
-          action.card.warning = 'Tile placement will be limited due to Reds policy.';
-        }
+      // Player has enough MC to cover for everything
+      howToAffordRedsPolicy.canAfford = true;
+    } else {
+      // Let's try using other resources to pay for the action/card
+      if (canUseSteel) {
+        missingMC -= Math.min(player.steel, Math.ceil(missingMC / player.getSteelValue())) * player.getSteelValue();
       }
-      return {canAfford: true, mustSpendAtMost: mustSpendAtMost + missingMC, spaces: spacesTree};
+      if (canUseTitanium) {
+        missingMC -= Math.min(player.titanium, Math.ceil(missingMC / player.getTitaniumValue(game))) * player.getTitaniumValue(game);
+      }
+      if (canUseMicrobes) {
+        missingMC -= Math.min(player.getMicrobesCanSpend(), Math.ceil(missingMC / 2)) * 2;
+      }
+      if (canUseFloaters) {
+        missingMC -= Math.min(player.getFloatersCanSpend(), Math.ceil(missingMC / 3)) * 3;
+      }
+
+      // If player is able to pay using other resources but must not spend more than |mustSpendAtMost| MC on the action/card itself
+      if (missingMC <= 0) {
+        howToAffordRedsPolicy.canAfford = true;
+        howToAffordRedsPolicy.mustSpendAtMost = mustSpendAtMost;
+      }
     }
 
+    if (action.oceansToPlace > 0 || action.nonOceanToPlace !== undefined) {
+      /*
+       * Ok so if we arrived here that means we have tiles to place
+       * Let's see if we can manage to pay Reds using the bonus placement from those tiles
+       *
+       * TODO: Include Ares adjacency bonus/malus/hazards
+       */
 
-    // We did all we could, still can't pay
-    return {canAfford: false};
+      // Let's compute bonus MC from each board space
+      const spacesBonusMC = RedsPolicy.getBoardSpacesBonusMC(player, game, isHelion);
+
+      // And generate a tree of tile placements that provide at least |missingMC|
+      const spacesTree: ISpaceTree = RedsPolicy.makeISpaceTree(
+        player,
+        game,
+        action.card,
+        spacesBonusMC,
+        action.oceansToPlace,
+        action.oceansAvailableSpaces,
+        action.nonOceanToPlace !== undefined ? 1 : 0,
+        action.nonOceanAvailableSpaces,
+        missingMC,
+      );
+
+
+      // If our tree has at least one branch, we can afford to pay Reds !
+      if (spacesTree.size > 0) {
+        if (action.card !== undefined) {
+          if (action.card.warning !== undefined) {
+            action.card.warning += ' Tile placement will be limited due to Reds policy.';
+          } else {
+            action.card.warning = 'Tile placement will be limited due to Reds policy.';
+          }
+        }
+
+        howToAffordRedsPolicy.canAfford = true;
+        howToAffordRedsPolicy.spaces = spacesTree;
+      }
+    }
+
+    return howToAffordRedsPolicy;
   }
 
 

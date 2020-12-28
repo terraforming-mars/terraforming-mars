@@ -278,6 +278,7 @@ export class RedsPolicy {
     const spacesTree: ISpaceTree = RedsPolicy.makeISpaceTree(
       player,
       game,
+      action.card,
       spacesBonusMC,
       action.oceansToPlace,
       action.oceansAvailableSpaces,
@@ -323,7 +324,7 @@ export class RedsPolicy {
   }
 
 
-  public static makeISpaceTree(player: Player, game: Game, spacesBonusMC: Array<number>, oceans: number, oceansSpaces: Array<ISpace>, nonOcean: number, nonOceanSpaces: Array<ISpace>, target: number, iteration: number = 1, totalBonus: number = 0): ISpaceTree {
+  public static makeISpaceTree(player: Player, game: Game, card: IProjectCard | undefined, spacesBonusMC: Array<number>, oceans: number, oceansSpaces: Array<ISpace>, nonOcean: number, nonOceanSpaces: Array<ISpace>, target: number, iteration: number = 1, totalBonus: number = 0): ISpaceTree {
     const spacesTree = new Map();
     if (iteration < oceans + nonOcean) {
       oceansSpaces.forEach((space) => {
@@ -334,6 +335,7 @@ export class RedsPolicy {
         const tree = RedsPolicy.makeISpaceTree(
           player,
           game,
+          card,
           tempBonusMC,
           oceans,
           oceansSpaces.filter((s) => s.id !== space.id),
@@ -352,19 +354,25 @@ export class RedsPolicy {
       spaces.forEach((space) => {
         // Are we placing the tile on HELLAS south pole and there's still 1 ocean available ?
         if (game.gameOptions.boardName === BoardName.HELLAS && space.id === SpaceName.HELLAS_OCEAN_TILE && game.board.getOceansOnBoard() + oceans < constants.MAX_OCEAN_TILES) {
+          let tempOceansSpaces: Array<ISpace>;
           const tempBonusMC = Array.from(spacesBonusMC);
-          // Are we placing an Ocean on a LAND space (Artifical Lake) ?
-          if (nonOcean === 0) {
+          if (card !== undefined && card.name === CardName.ARTIFICIAL_LAKE) {
             game.board.getAdjacentSpaces(space).forEach((s) => {
               tempBonusMC[game.board.spaces.indexOf(s)] += player.oceanBonus;
             });
+            tempOceansSpaces = game.board.getAvailableSpacesForOcean(player);
+          } else if (oceans === 0) {
+            tempOceansSpaces = game.board.getAvailableSpacesForOcean(player);
+          } else {
+            tempOceansSpaces = oceansSpaces;
           }
           const tree = RedsPolicy.makeISpaceTree(
             player,
             game,
+            card,
             tempBonusMC,
             oceans,
-            oceansSpaces,
+            tempOceansSpaces,
             0,
             [],
             target + 3, // +3 for the Reds policy cost for that extra ocean

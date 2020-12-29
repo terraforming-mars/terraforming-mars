@@ -51,6 +51,10 @@ export class OriginalBoard extends Board {
     return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
+  }
+
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }

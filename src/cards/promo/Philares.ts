@@ -91,19 +91,23 @@ export class Philares implements CorporationCard {
     }
 
     public onTilePlaced(player: Player, space: ISpace, game: Game): void {
+      const philaresPlayer = game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
+      if (philaresPlayer === undefined) {
+        console.error('Could not find Philares player');
+        return;
+      }
       if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
         let bonusResource: number = 0;
-        if (space.player !== undefined && space.player.isCorporation(CardName.PHILARES)) {
+        if (space.player !== undefined && space.player.id === philaresPlayer.id) {
           bonusResource = game.board.getAdjacentSpaces(space)
             .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
             .length;
-        } else if (space.player !== undefined && !space.player.isCorporation(CardName.PHILARES)) {
+        } else if (space.player !== undefined && space.player.id !== philaresPlayer.id) {
           bonusResource = game.board.getAdjacentSpaces(space)
-            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.isCorporation(CardName.PHILARES))
+            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === philaresPlayer.id)
             .length;
         }
         if (bonusResource > 0) {
-          const philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CardName.PHILARES))[0];
           this.selectResources(philaresPlayer, game, bonusResource);
         }
       }

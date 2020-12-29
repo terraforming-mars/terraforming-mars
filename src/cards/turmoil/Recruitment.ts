@@ -15,23 +15,14 @@ export class Recruitment implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        if (!game.turmoil!.hasAvailableDelegates(player.id)) {
-          return false;
-        }
-
-        const parties = game.turmoil!.parties.filter((party) => {
-          if (party.delegates.length > 1) {
-            const delegates = party.delegates.slice();
-            delegates.splice(party.delegates.indexOf(party.partyLeader!), 1);
-            return delegates.indexOf('NEUTRAL') !== -1;
-          } else {
-            return false;
-          }
-        });
-        return parties.length > 0;
+      if (game.turmoil === undefined || game.turmoil.hasAvailableDelegates(player.id) === false) {
+        return false;
       }
-      return false;
+
+      return game.turmoil.parties.some((party) => {
+        const neutralDelegates = party.getDelegates('NEUTRAL');
+        return neutralDelegates > 1 || (neutralDelegates === 1 && party.partyLeader !== 'NEUTRAL');
+      });
     }
 
     public play(player: Player, game: Game) {

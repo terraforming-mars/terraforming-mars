@@ -7,8 +7,10 @@ import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {CardManifest} from './cards/CardManifest';
+import {CardName} from './CardName';
+import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
-import {CardTypes, Deck} from './Deck';
+import {Deck} from './Deck';
 import {GameModule} from './GameModule';
 import {GameOptions} from './Game';
 
@@ -35,7 +37,7 @@ export class CardLoader {
   }
 
   private static include(gameOptions: GameOptions) {
-    return function(cf: ICardFactory<CardTypes>): boolean {
+    return function(cf: ICardFactory<ICard>): boolean {
       const expansion = cf.compatibility;
       switch (expansion) {
       case undefined:
@@ -52,7 +54,7 @@ export class CardLoader {
     };
   }
 
-  private addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
+  private addToDeck<T extends ICard>(deck: Array<T>, cards: Deck<T>): void {
     const cardInstances = cards.cards
       .filter(CardLoader.include(this.gameOptions))
       .map((cf) => new cf.Factory());
@@ -66,13 +68,14 @@ export class CardLoader {
     return this.getCards((manifest) => manifest.standardProjects);
   }
   public getCorporationCards() {
-    return this.getCards((manifest) => manifest.corporationCards);
+    return this.getCards((manifest) => manifest.corporationCards)
+      .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
   }
   public getPreludeCards() {
     return this.getCards((manifest) => manifest.preludeCards);
   }
 
-  private getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
+  private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
     const deck: Array<T> = [];
     for (const manifest of this.manifests) {
       this.addToDeck(deck, getDeck(manifest));

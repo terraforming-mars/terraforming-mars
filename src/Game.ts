@@ -215,7 +215,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static newInstance(id: GameId,
     players: Array<Player>,
-    first: Player,
+    firstPlayerIndex: number,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
@@ -231,9 +231,10 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.cardsBlackList,
     );
 
-    const activePlayer = first.id;
+    const firstPlayer = players[firstPlayerIndex];
+    const activePlayer = firstPlayer.id;
 
-    const game: Game = new Game(id, players, first, activePlayer, gameOptions, seed, board, dealer);
+    const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
 
     // Clone game
     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
@@ -437,85 +438,6 @@ export class Game implements ISerializable<SerializedGame> {
   public getPlayersById(ids: Array<string>): Array<Player> {
     return ids.map((id) => this.getPlayerById(id));
   }
-
-  // private cloneGame(gameId: GameId): void {
-  //   Database.getInstance().restoreReferenceGame(gameId, function(err, game) {
-  //     try {
-  //       if (err) {
-  //         throw new Error('Game ' + gameId + ' not found');
-  //       }
-  //       // Check number of players
-  //       if (game.players.length !== gameToRebuild.players.length) {
-  //         throw new Error('Player number mismatch');
-  //       }
-  //     } catch (e) {
-  //       if (e instanceof Error) {
-  //         console.log('Clone game error: ' + e.message);
-  //         // Revert to game creation screen with error message
-  //         return;
-  //       }
-  //     }
-
-  //     // Update game options
-  //     game.gameOptions = gameToRebuild.gameOptions;
-  //     game.board = gameToRebuild.board;
-
-  //     // Update dealers
-  //     game.dealer = gameToRebuild.dealer;
-  //     game.colonyDealer = gameToRebuild.colonyDealer;
-
-  //     // Update other objects
-  //     game.milestones = gameToRebuild.milestones;
-  //     game.awards = gameToRebuild.awards;
-  //     game.colonies = gameToRebuild.colonies;
-  //     game.turmoil = gameToRebuild.turmoil;
-
-  //     // Set active player
-  //     const playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
-  //     game.first = game.players[playerIndex];
-  //     game.activePlayer = game.players[playerIndex].id;
-
-  //     // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
-  //     if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
-  //       game.turmoil.lobby.clear();
-  //       game.turmoil.delegateReserve = [];
-  //       game.getPlayers().forEach((player) => {
-  //         if (game.turmoil !== undefined) {
-  //           game.turmoil.lobby.add(player.id);
-  //           for (let i = 0; i < 6; i++) {
-  //             game.turmoil.delegateReserve.push(player.id);
-  //           }
-  //         }
-  //       });
-  //       for (let i = 0; i < 13; i++) {
-  //         game.turmoil.delegateReserve.push('NEUTRAL');
-  //       }
-  //     }
-
-  //     // Update Players
-  //     game.players.forEach((player) => {
-  //       const playerIndex = game.players.indexOf(player);
-  //       const referencePlayer = gameToRebuild.players[playerIndex];
-  //       player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
-  //       player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
-  //       player.dealtProjectCards = referencePlayer.dealtProjectCards;
-  //       player.setTerraformRating(referencePlayer.getTerraformRating());
-
-  //       // Special case solo play and Colonies
-  //       if (game.players.length === 1 && game.gameOptions.coloniesExtension) {
-  //         player.addProduction(Resources.MEGACREDITS, -2);
-  //         game.defer(new RemoveColonyFromGame(player, game));
-  //       }
-  //     });
-
-  //     // Initial Draft
-  //     if (game.gameOptions.initialDraftVariant) {
-  //       game.runDraftRound(true);
-  //     } else {
-  //       game.gotoInitialResearchPhase();
-  //     }
-  //   });
-  // }
 
   public defer(action: DeferredAction, priority: boolean = false): void {
     if (priority) {

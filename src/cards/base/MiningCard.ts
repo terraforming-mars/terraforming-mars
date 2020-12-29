@@ -1,4 +1,5 @@
 
+import {CardMetadata} from '../CardMetadata';
 import {CardName} from '../../CardName';
 import {CardType} from '../../cards/CardType';
 import {Game} from '../../Game';
@@ -16,6 +17,7 @@ import {TileType} from '../../TileType';
 export abstract class MiningCard implements IProjectCard {
     public abstract cost: number;
     public abstract name: CardName;
+    public abstract metadata: CardMetadata;
     public readonly tags: Array<Tags> = [Tags.BUILDING];
     public readonly cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;

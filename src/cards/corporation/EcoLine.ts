@@ -4,22 +4,30 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EcoLine implements CorporationCard {
-    public name = CardName.ECOLINE;
-    public tags = [Tags.PLANT];
-    public startingMegaCredits: number = 36;
-    public cardType = CardType.CORPORATION;
-    public play(player: Player) {
-      player.addProduction(Resources.PLANTS, 2);
-      player.plants = 3;
-      player.plantsNeededForGreenery = 7;
-      return undefined;
-    }
+  public get name() {
+    return CardName.ECOLINE;
+  }
+  public get tags() {
+    return [Tags.PLANT];
+  }
+  public get startingMegaCredits() {
+    return 36;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.PLANTS, 2);
+    player.plants = 3;
+    player.plantsNeededForGreenery = 7;
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R17',
       description: 'You start with 2 plant production, 3 plants, and 36 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -32,5 +40,6 @@ export class EcoLine implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }

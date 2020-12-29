@@ -5,35 +5,45 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Inventrix implements CorporationCard {
-    public name = CardName.INVENTRIX;
-    public tags = [Tags.SCIENCE];
-    public startingMegaCredits: number = 45;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.INVENTRIX;
+  }
+  public get tags() {
+    return [Tags.SCIENCE];
+  }
+  public get startingMegaCredits() {
+    return 45;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
 
-    public initialActionText: string = 'Draw 3 cards';
-    public initialAction(player: Player, game: Game) {
-      player.cardsInHand.push(
-        game.dealer.dealCard(),
-        game.dealer.dealCard(),
-        game.dealer.dealCard(),
-      );
+  public get initialActionText() {
+    return 'Draw 3 cards';
+  }
+  public initialAction(player: Player, game: Game) {
+    player.cardsInHand.push(
+      game.dealer.dealCard(),
+      game.dealer.dealCard(),
+      game.dealer.dealCard(),
+    );
 
-      LogHelper.logCardChange(game, player, 'drew', 3);
+    LogHelper.logCardChange(game, player, 'drew', 3);
 
-      return undefined;
-    }
-    public getRequirementBonus(_player: Player, _game: Game): number {
-      return 2;
-    }
-    public play() {
-      return undefined;
-    }
+    return undefined;
+  }
+  public getRequirementBonus(_player: Player, _game: Game): number {
+    return 2;
+  }
+  public play() {
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R43',
       description: 'As you first action in the game, draw 3 cards. Start with 45MC.',
       renderData: CardRenderer.builder((b) => {
@@ -46,6 +56,7 @@ export class Inventrix implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }
 

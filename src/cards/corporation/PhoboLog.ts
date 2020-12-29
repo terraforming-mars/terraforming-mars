@@ -4,23 +4,30 @@ import {Game} from '../../Game';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class PhoboLog implements CorporationCard {
-    public name = CardName.PHOBOLOG;
-    public tags = [Tags.SPACE];
-    public startingMegaCredits: number = 23;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.PHOBOLOG;
+  }
+  public get tags() {
+    return [Tags.SPACE];
+  }
+  public get startingMegaCredits() {
+    return 23;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
+  public play(player: Player, _game: Game) {
+    player.titanium = 10;
+    player.increaseTitaniumValue();
+    return undefined;
+  }
 
-    public play(player: Player, _game: Game) {
-      player.titanium = 10;
-      player.increaseTitaniumValue();
-      return undefined;
-    }
-
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R09',
       description: 'You start with 10 titanium and 23 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -33,5 +40,6 @@ export class PhoboLog implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }

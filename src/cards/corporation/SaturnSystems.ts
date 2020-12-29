@@ -7,34 +7,42 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ICard} from '../ICard';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SaturnSystems implements CorporationCard {
-    public name = CardName.SATURN_SYSTEMS;
-    public tags = [Tags.JOVIAN];
-    public startingMegaCredits: number = 42;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.SATURN_SYSTEMS;
+  }
+  public get tags() {
+    return [Tags.JOVIAN];
+  }
+  public get startingMegaCredits() {
+    return 42;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
 
-    public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
-      for (const tag of card.tags) {
-        if (tag === Tags.JOVIAN) {
-          game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS);
-        }
+  public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
+    for (const tag of card.tags) {
+      if (tag === Tags.JOVIAN) {
+        game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS);
       }
     }
+  }
 
-    public onCorpCardPlayed(_player: Player, game: Game, card: CorporationCard) {
-      return this.onCardPlayed(_player, game, card as ICard as IProjectCard);
-    }
+  public onCorpCardPlayed(_player: Player, game: Game, card: CorporationCard) {
+    return this.onCardPlayed(_player, game, card as ICard as IProjectCard);
+  }
 
-    public play(player: Player) {
-      player.addProduction(Resources.TITANIUM);
-      player.addProduction(Resources.MEGACREDITS);
-      return undefined;
-    }
+  public play(player: Player) {
+    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.MEGACREDITS);
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R03',
       description: 'You start with 1 titanium production and 42 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -47,5 +55,6 @@ export class SaturnSystems implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }

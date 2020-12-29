@@ -5,23 +5,31 @@ import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Teractor implements CorporationCard {
-    public name = CardName.TERACTOR;
-    public tags = [Tags.EARTH];
-    public startingMegaCredits: number = 60;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.TERACTOR;
+  }
+  public get tags() {
+    return [Tags.EARTH];
+  }
+  public get startingMegaCredits() {
+    return 60;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
 
-    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-      return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;
-    }
-    public play() {
-      return undefined;
-    }
+  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+    return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;
+  }
+  public play() {
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R30',
       description: 'You start with 60 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -34,5 +42,6 @@ export class Teractor implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }

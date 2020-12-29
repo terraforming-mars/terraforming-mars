@@ -4,22 +4,30 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Helion implements CorporationCard {
-    public name = CardName.HELION;
-    public tags = [Tags.SPACE];
-    public startingMegaCredits: number = 42;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.HELION;
+  }
+  public get tags() {
+    return [Tags.SPACE];
+  }
+  public get startingMegaCredits() {
+    return 42;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
 
-    public play(player: Player) {
-      player.canUseHeatAsMegaCredits = true;
-      player.addProduction(Resources.HEAT, 3);
-      return undefined;
-    }
+  public play(player: Player) {
+    player.canUseHeatAsMegaCredits = true;
+    player.addProduction(Resources.HEAT, 3);
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
+  public get metadata() {
+    return {
       cardNumber: 'R18',
       description: 'You start with 3 heat production and 42 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -32,5 +40,6 @@ export class Helion implements CorporationCard {
           });
         });
       }),
-    }
+    };
+  }
 }

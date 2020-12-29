@@ -8,35 +8,42 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
-    public name = CardName.UNITED_NATIONS_MARS_INITIATIVE;
-    public tags = [Tags.EARTH];
-    public startingMegaCredits: number = 40;
-    public cardType = CardType.CORPORATION;
+  public get name() {
+    return CardName.UNITED_NATIONS_MARS_INITIATIVE;
+  }
+  public get tags() {
+    return [Tags.EARTH];
+  }
+  public get startingMegaCredits() {
+    return 40;
+  }
+  public get cardType() {
+    return CardType.CORPORATION;
+  }
 
-    public play() {
-      return undefined;
-    }
-    public canAct(player: Player, game: Game): boolean {
-      const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
-      const actionCost = 3;
+  public play() {
+    return undefined;
+  }
+  public canAct(player: Player, game: Game): boolean {
+    const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
+    const actionCost = 3;
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
-      }
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
+    }
 
-      return hasIncreasedTR && player.canAfford(actionCost);
-    }
-    public action(player: Player, game: Game) {
-      player.megaCredits -= 3;
-      player.increaseTerraformRating(game);
-      return undefined;
-    }
-    public metadata: CardMetadata = {
+    return hasIncreasedTR && player.canAfford(actionCost);
+  }
+  public action(player: Player, game: Game) {
+    player.megaCredits -= 3;
+    player.increaseTerraformRating(game);
+    return undefined;
+  }
+  public get metadata() {
+    return {
       cardNumber: 'R32',
       description: 'You start with 40 MC.',
       renderData: CardRenderer.builder((b) => {
@@ -50,5 +57,6 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
           });
         });
       }),
-    }
+    };
+  }
 }

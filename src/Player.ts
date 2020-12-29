@@ -2190,7 +2190,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Standard projects',
       'Confirm',
       new CardLoader(game.gameOptions)
-        .getCards(CardLoader.getStandardProjects).sort((a, b) => a.cost - b.cost)
+        .getStandardProjects().sort((a, b) => a.cost - b.cost)
         .filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );

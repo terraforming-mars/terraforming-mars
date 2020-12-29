@@ -16,9 +16,9 @@ export class Dealer implements ISerializable<SerializedDealer> {
     public static newInstance(loader: CardLoader): Dealer {
       const dealer = new Dealer();
 
-      dealer.deck = dealer.shuffleCards(loader.getCards(CardLoader.getProjectCards));
-      dealer.preludeDeck = dealer.shuffleCards(loader.getCards(CardLoader.getPreludeCards));
-      dealer.corporationCards = loader.getCards(CardLoader.getCorporationCards);
+      dealer.deck = dealer.shuffleCards(loader.getProjectCards());
+      dealer.preludeDeck = dealer.shuffleCards(loader.getPreludeCards());
+      dealer.corporationCards = loader.getCorporationCards();
       return dealer;
     }
 

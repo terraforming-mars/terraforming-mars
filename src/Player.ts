@@ -657,12 +657,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
       this.corporationCard.tags.forEach((tag) => allTags.push(tag));
     }
-    this.playedCards.filter((card) => card.cardType !== CardType.EVENT)
-      .forEach((card) => {
-        card.tags.forEach((tag) => {
-          allTags.push(tag);
-        });
+    this.playedCards.forEach((card) => {
+      if (card.cardType === CardType.EVENT) {
+        return;
+      }
+      card.tags.forEach((tag) => {
+        allTags.push(tag);
       });
+    });
     for (const tags of allTags) {
       if (tags === Tags.WILDCARD) {
         wildcardCount++;
@@ -998,20 +1000,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (selectedCards.length > 0) {
         game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, false, false, 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'));
       }
-      selectedCards.forEach((card) => {
-        this.cardsInHand.push(card);
-      });
-      // Discard the cards which were not purchased.
-      dealtCards
-        .filter(
-          (card) => selectedCards
-            .find(
-              (foundCard) => foundCard.name === card.name,
-            ) === undefined,
-        )
-        .forEach((card) => {
+      dealtCards.forEach((card) => {
+        if (selectedCards.find((c) => c.name === card.name)) {
+          // Add selected cards to hand
+          this.cardsInHand.push(card);
+        } else {
+          // Discard the cards which were not purchased
           game.dealer.discard(card);
-        });
+        }
+      });
       game.log('${0} bought ${1} card(s)', (b) => b.player(this).number(selectedCards.length));
       game.playerIsFinishedWithResearchPhase(this);
     };
@@ -1212,8 +1209,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Activate some colonies
     if (game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
-      game.colonies.filter((colony) => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach((colony) => {
-        colony.isActive = true;
+      game.colonies.forEach((colony) => {
+        if (colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType) {
+          colony.isActive = true;
+        }
       });
 
       // Check for Venus colony

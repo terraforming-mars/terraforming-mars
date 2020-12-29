@@ -149,6 +149,9 @@ export class SQLite implements IDatabase {
         }
       },
     );
+
+    // This must occur after the save.
+    game.lastSaveId++;
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

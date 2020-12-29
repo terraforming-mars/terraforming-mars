@@ -191,6 +191,7 @@ export class PostgreSQL implements IDatabase {
         }
       },
     );
+    // This must occur after the save.
     game.lastSaveId++;
   }
 

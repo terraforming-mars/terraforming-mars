@@ -1317,7 +1317,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public canSpendHeat(amount: number) {
     return this.heat >= amount ||
-      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.getResourcesOnCorporation() * 2) + this.heat >= 8);
+      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.getResourcesOnCorporation() * 2) + this.heat >= amount);
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {

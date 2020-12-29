@@ -659,8 +659,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Activate some colonies
     if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
-      this.colonies.filter((colony) => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach((colony) => {
-        colony.isActive = true;
+      this.colonies.forEach((colony) => {
+        if (colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType) {
+          colony.isActive = true;
+        }
       });
 
       // Check for Venus colony
@@ -684,9 +686,11 @@ export class Game implements ISerializable<SerializedGame> {
         throw new Error('Too many cards selected');
       }
       // discard all unpurchased cards
-      player.dealtProjectCards
-        .filter((card) => player.cardsInHand.includes(card) === false)
-        .forEach((card) => this.dealer.discard(card));
+      player.dealtProjectCards.forEach((card) => {
+        if (player.cardsInHand.includes(card) === false) {
+          this.dealer.discard(card);
+        }
+      });
 
       this.playerHasPickedCorporationCard(player, corporation); return undefined;
     });
@@ -1563,7 +1567,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
-    return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode();
+    return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
   }
 
   public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {

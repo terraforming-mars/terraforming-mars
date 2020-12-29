@@ -1258,19 +1258,19 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getPlayer(name: string): Player {
-    const found = this.players.filter((player) => player.name === name);
-    if (found.length === 0) {
+    const player = this.players.find((player) => player.name === name);
+    if (player === undefined) {
       throw new Error('Player not found');
     }
-    return found[0];
+    return player;
   }
 
   public getSpace(id: string): ISpace {
-    const matchedSpaces = this.board.spaces.filter((space) => space.id === id);
-    if (matchedSpaces.length === 1) {
-      return matchedSpaces[0];
+    const space = this.board.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error('Error with getting space');
     }
-    throw new Error('Error with getting space');
+    return space;
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(

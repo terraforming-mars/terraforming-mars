@@ -76,7 +76,7 @@ export abstract class Board {
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
-      (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length === 0,
+      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );
   }
 

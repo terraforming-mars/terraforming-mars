@@ -59,21 +59,20 @@ export class CardLoader {
     deck.push(...cardInstances);
   }
 
-  public static getProjectCards(manifest: CardManifest) {
-    return manifest.projectCards;
+  public getProjectCards() {
+    return this.getCards((manifest) => manifest.projectCards);
   }
-  public static getStandardProjects(manifest: CardManifest) {
-    return manifest.standardProjects;
+  public getStandardProjects() {
+    return this.getCards((manifest) => manifest.standardProjects);
   }
-  public static getCorporationCards(manifest: CardManifest) {
-    return manifest.corporationCards;
+  public getCorporationCards() {
+    return this.getCards((manifest) => manifest.corporationCards);
   }
-  public static getPreludeCards(manifest: CardManifest) {
-    return manifest.preludeCards;
+  public getPreludeCards() {
+    return this.getCards((manifest) => manifest.preludeCards);
   }
 
-  // Should be called like this: getCards(CardLoader.getProjectCards())
-  public getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
+  private getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
     const deck: Array<T> = [];
     for (const manifest of this.manifests) {
       this.addToDeck(deck, getDeck(manifest));

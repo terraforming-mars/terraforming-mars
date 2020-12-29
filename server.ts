@@ -464,7 +464,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           res.end();
         });
       } else {
-        const game = Game.newInstance(gameId, players, firstPlayerIdx, gameOptions);
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

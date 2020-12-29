@@ -216,14 +216,13 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static newInstance(id: GameId,
     players: Array<Player>,
-    firstPlayerIndex: number,
+    firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
 
-    const firstPlayer = players[firstPlayerIndex];
     const activePlayer = firstPlayer.id;
 
     const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);

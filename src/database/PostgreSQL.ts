@@ -180,14 +180,18 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
-    // Insert
-    this.client.query('INSERT INTO games(game_id, save_id, game, players) VALUES($1, $2, $3, $4)', [game_id, save_id, game, players], (err) => {
-      if (err) {
-        // Should be a duplicate, does not matter
-        return;
-      }
-    });
+  saveGame(game: Game): void {
+    // TODO(kberg): why is player size a useful first-class piece of data?
+    this.client.query(
+      'INSERT INTO games(game_id, save_id, game, players) VALUES($1, $2, $3, $4)',
+      [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length], (err) => {
+        if (err) {
+          // Should be a duplicate, does not matter
+          return;
+        }
+      },
+    );
+    game.lastSaveId++;
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

@@ -128,14 +128,18 @@ export class SQLite implements IDatabase {
     });
   }
 
-  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
+  saveGame(game: Game): void {
     // Insert
-    this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function(err: { message: any; }) {
-      if (err) {
-        // Should be a duplicate, does not matter
-        return;
-      }
-    });
+    this.db.run(
+      'INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)',
+      [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length],
+      (err: { message: any; }) => {
+        if (err) {
+          // Should be a duplicate, does not matter
+          return;
+        }
+      },
+    );
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

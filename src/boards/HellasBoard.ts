@@ -74,7 +74,11 @@ export class HellasBoard extends Board {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
   }
 
-  public getHighlightedSpaceIds(): Array<string> {
+  public getVolcanicSpaceIds(): Array<string> {
+    return [];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
     return [];
   }
 }

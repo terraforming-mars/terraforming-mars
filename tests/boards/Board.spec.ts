@@ -156,7 +156,11 @@ describe('Board', function() {
       return this.spaces.find((space) => space.id === id);
     }
 
-    public getHighlightedSpaceIds(): Array<string> {
+    public getVolcanicSpaceIds(): Array<string> {
+      return [];
+    }
+
+    public getNoctisCitySpaceIds(): Array<string> {
       return [];
     }
   };

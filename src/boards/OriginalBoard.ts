@@ -63,14 +63,16 @@ export class OriginalBoard extends Board {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 
-  public getHighlightedSpaceIds(): Array<string> {
+  public getVolcanicSpaceIds(): Array<string> {
     return [
-      SpaceName.NOCTIS_CITY,
-
       SpaceName.ASCRAEUS_MONS,
       SpaceName.ARSIA_MONS,
       SpaceName.PAVONIS_MONS,
       SpaceName.THARSIS_THOLUS,
     ];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
+    return [SpaceName.NOCTIS_CITY];
   }
 }

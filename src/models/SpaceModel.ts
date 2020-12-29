@@ -4,6 +4,8 @@ import {TileType} from '../TileType';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
 
+export type SpaceHighlight = undefined | 'noctis' | 'volcanic';
+
 export interface SpaceModel {
     id: string;
     x: number;
@@ -12,5 +14,5 @@ export interface SpaceModel {
     color: Color | undefined;
     tileType: TileType | undefined;
     spaceType: SpaceType;
-    highlight: boolean;
+    highlight: SpaceHighlight;
 }

@@ -20,6 +20,7 @@ import {
   ALL_CORPORATION_DECKS,
   ALL_PRELUDE_DECKS,
   ALL_PROJECT_DECKS,
+  ALL_STANDARD_PROJECT_DECKS,
 } from '../../cards/AllCards';
 import {CardTypes, Deck, Decks} from '../../Deck';
 import {GameModule} from '../../GameModule';
@@ -35,12 +36,17 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
   return Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), cardName);
 }
 
+function getStandardProjectCardByName(cardName: string): ICard | undefined {
+  return Decks.findByName(ALL_STANDARD_PROJECT_DECKS, cardName);
+}
+
 export function getCardExpansionByName(cardName: string): GameModule {
   const manifest = ALL_CARD_MANIFESTS.find((manifest) => {
     const decks: Array<Deck<CardTypes>> = [
       manifest.corporationCards,
       manifest.projectCards,
       manifest.preludeCards,
+      manifest.standardProjects,
     ];
     return Decks.findByName(decks, cardName);
   });
@@ -76,7 +82,7 @@ export const Card = Vue.component('card', {
       return getCardExpansionByName(this.card.name);
     },
     getCard: function(): ICard | undefined {
-      return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
+      return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name) || getStandardProjectCardByName(this.card.name);
     },
     getTags: function(): Array<string> {
       let result: Array<string> = [];
@@ -109,8 +115,8 @@ export const Card = Vue.component('card', {
       if (this.actionUsed) {
         classes.push('cards-action-was-used');
       }
-      if (this.isCorporationCard()) {
-        classes.push('card-corp');
+      if (this.isStandardProject()) {
+        classes.push('card-standard-project');
       }
       return classes.join(' ');
     },
@@ -123,11 +129,14 @@ export const Card = Vue.component('card', {
     isCorporationCard: function() : boolean {
       return getCorporationCardByName(this.card.name) !== undefined;
     },
+    isStandardProject: function() : boolean {
+      return getStandardProjectCardByName(this.card.name) !== undefined;
+    },
   },
   template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
-                <div class="card-cost-and-tags">
+                <div v-if="!isStandardProject()" class="card-cost-and-tags">
                     <CardCost :amount="getCost()" />
                     <CardTags :tags="getTags()" />
                 </div>

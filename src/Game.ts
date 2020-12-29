@@ -58,6 +58,7 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
+import {CardLoader} from './CardLoader';
 
 export type GameId = string;
 
@@ -219,17 +220,8 @@ export class Game implements ISerializable<SerializedGame> {
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
-    const dealer = Dealer.newInstance(
-      gameOptions.corporateEra,
-      gameOptions.preludeExtension,
-      gameOptions.venusNextExtension,
-      gameOptions.coloniesExtension,
-      gameOptions.promoCardsOption,
-      gameOptions.turmoilExtension,
-      gameOptions.aresExtension,
-      gameOptions.communityCardsOption,
-      gameOptions.cardsBlackList,
-    );
+    const cardLoader = new CardLoader(gameOptions);
+    const dealer = Dealer.newInstance(cardLoader);
 
     const activePlayer = first.id;
 
@@ -658,8 +650,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Activate some colonies
     if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
-      this.colonies.filter((colony) => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach((colony) => {
-        colony.isActive = true;
+      this.colonies.forEach((colony) => {
+        if (colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType) {
+          colony.isActive = true;
+        }
       });
 
       // Check for Venus colony
@@ -683,9 +677,11 @@ export class Game implements ISerializable<SerializedGame> {
         throw new Error('Too many cards selected');
       }
       // discard all unpurchased cards
-      player.dealtProjectCards
-        .filter((card) => player.cardsInHand.includes(card) === false)
-        .forEach((card) => this.dealer.discard(card));
+      player.dealtProjectCards.forEach((card) => {
+        if (player.cardsInHand.includes(card) === false) {
+          this.dealer.discard(card);
+        }
+      });
 
       this.playerHasPickedCorporationCard(player, corporation); return undefined;
     });
@@ -1257,19 +1253,19 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getPlayer(name: string): Player {
-    const found = this.players.filter((player) => player.name === name);
-    if (found.length === 0) {
+    const player = this.players.find((player) => player.name === name);
+    if (player === undefined) {
       throw new Error('Player not found');
     }
-    return found[0];
+    return player;
   }
 
   public getSpace(id: string): ISpace {
-    const matchedSpaces = this.board.spaces.filter((space) => space.id === id);
-    if (matchedSpaces.length === 1) {
-      return matchedSpaces[0];
+    const space = this.board.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error('Error with getting space');
     }
-    throw new Error('Error with getting space');
+    return space;
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
@@ -1562,7 +1558,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
-    return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode();
+    return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
   }
 
   public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
@@ -1636,6 +1632,7 @@ export class Game implements ISerializable<SerializedGame> {
     const dealer = Dealer.deserialize(d.dealer);
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+
     game.milestones = [];
     d.milestones.forEach((element: IMilestone) => {
       ALL_MILESTONES.forEach((ms: IMilestone) => {

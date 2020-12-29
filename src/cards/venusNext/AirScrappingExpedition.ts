@@ -32,7 +32,7 @@ export class AirScrappingExpedition implements IProjectCard {
   public play(player: Player, game: Game) {
     game.increaseVenusScaleLevel(player, 1);
     let floaterCards = player.getResourceCards(ResourceType.FLOATER);
-    floaterCards = floaterCards.filter((card) => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0);
+    floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
     if (floaterCards.length === 0) {
       return undefined;
     }

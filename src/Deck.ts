@@ -40,7 +40,7 @@ export class Decks {
     if (found !== undefined) {
       return new found.Factory();
     }
-    console.warn(`card not found ${cardName}`);
+    // currently flooding player's console. console.warn(`card not found ${cardName}`);
     return undefined;
   }
 

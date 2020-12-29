@@ -36,12 +36,9 @@ export class CardFinder {
 
     public getStandardProjectCardByName(cardName: string): StandardProjectCard | undefined {
       let found : (ICardFactory<StandardProjectCard> | undefined);
-      CardFinder.getDecks().forEach((deck) => {
-        // Short circuit
-        if (found !== undefined) {
-          return;
-        }
+      CardFinder.getDecks().some((deck) => {
         found = deck.standardProjects.findByCardName(cardName);
+        return found !== undefined;
       });
       if (found !== undefined) {
         return new found.Factory();
@@ -55,12 +52,9 @@ export class CardFinder {
         return new BeginnerCorporation();
       }
       let found : (ICardFactory<CorporationCard> | undefined);
-      CardFinder.getDecks().forEach((deck) => {
-        // Short circuit
-        if (found !== undefined) {
-          return;
-        }
+      CardFinder.getDecks().some((deck) => {
         found = deck.corporationCards.findByCardName(cardName);
+        return found !== undefined;
       });
       if (found !== undefined) {
         return new found.Factory();
@@ -75,15 +69,12 @@ export class CardFinder {
     //              another function, perhaps?
     public getProjectCardByName(cardName: string): IProjectCard | undefined {
       let found : (ICardFactory<IProjectCard> | undefined);
-      CardFinder.getDecks().forEach((deck) => {
-        // Short circuit
-        if (found !== undefined) {
-          return;
-        }
+      CardFinder.getDecks().some((deck) => {
         found = deck.projectCards.findByCardName(cardName);
         if (found === undefined) {
           found = deck.preludeCards.findByCardName(cardName);
         }
+        return found !== undefined;
       });
       if (found !== undefined) {
         return new found.Factory();

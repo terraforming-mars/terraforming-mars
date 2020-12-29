@@ -1,7 +1,6 @@
 import Vue from 'vue';
 
 import {ICard} from '../../cards/ICard';
-// import {BeginnerCorporation} from '../../cards/corporation/BeginnerCorporation';
 import {CardModel} from '../../models/CardModel';
 import {CardTitle} from './CardTitle';
 import {CardNumber} from './CardNumber';

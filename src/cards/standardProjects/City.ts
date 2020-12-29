@@ -21,7 +21,7 @@ export class City extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP4',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(25).startAction.city().productionBox((pb) => {

@@ -27,7 +27,7 @@ export class Greenery extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP6',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(23).startAction.greenery().secondaryTag('oxygen');

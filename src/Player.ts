@@ -163,7 +163,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public isCorporation(corporationName: CardName): boolean {
-    return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
+    return this.corporationCard?.name === corporationName;
   }
 
   public getTitaniumValue(game: Game): number {
@@ -1317,6 +1317,19 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  public canSpendHeat(amount: number) {
+    return this.heat >= amount ||
+      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.getResourcesOnCorporation() * 2) + this.heat >= 8);
+  }
+
+  public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
+    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
+    }
+    this.heat -= amount;
+    return cb();
+  }
+
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
     const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
@@ -1449,16 +1462,12 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private convertHeatIntoTemperature(game: Game): PlayerInput {
-    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
-      return (this.corporationCard as StormCraftIncorporated).convertHeatIntoTemperature(
-        game, this,
-      );
-    }
     return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      game.increaseTemperature(this, 1);
-      this.heat -= constants.HEAT_FOR_TEMPERATURE;
-      game.log('${0} converted heat into temperature', (b) => b.player(this));
-      return undefined;
+      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
+        game.increaseTemperature(this, 1);
+        game.log('${0} converted heat into temperature', (b) => b.player(this));
+        return undefined;
+      });
     });
   }
 
@@ -1803,9 +1812,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    const hasEnoughHeat = this.heat >= constants.HEAT_FOR_TEMPERATURE ||
-      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-        this.getResourcesOnCorporation() * 2 + this.heat >= constants.HEAT_FOR_TEMPERATURE);
+    const hasEnoughHeat = this.canSpendHeat(constants.HEAT_FOR_TEMPERATURE);
 
     const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 

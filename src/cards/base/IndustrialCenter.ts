@@ -25,7 +25,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
       return game.board.getAvailableSpacesOnLand(player)
-        .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length > 0);
+        .filter((space) => game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
     }
     public canPlay(player: Player, game: Game): boolean {
       return this.getAvailableSpaces(player, game).length > 0;

@@ -22,7 +22,6 @@ export class Thorgate implements CorporationCard {
       return 0;
     }
     public play(player: Player, _game: Game) {
-      player.powerPlantCost -= 3;
       player.addProduction(Resources.ENERGY);
       return undefined;
     }

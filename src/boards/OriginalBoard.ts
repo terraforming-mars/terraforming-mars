@@ -63,7 +63,7 @@ export class OriginalBoard extends Board {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 
-  public getHighlightedSpaces(): Array<SpaceName> {
+  public getHighlightedSpaceIds(): Array<string> {
     return [
       SpaceName.NOCTIS_CITY,
 

@@ -1,6 +1,5 @@
 import {ISpace} from './ISpace';
 import {Player, PlayerId} from '../Player';
-import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
@@ -8,7 +7,7 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
-  public abstract getHighlightedSpaces(): Array<SpaceName>;
+  public abstract getHighlightedSpaceIds(): Array<string>;
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {

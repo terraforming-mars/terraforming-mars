@@ -49,7 +49,7 @@ export class ElysiumBoard extends Board {
     return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public getHighlightedSpaces(): Array<SpaceName> {
+  public getHighlightedSpaceIds(): Array<string> {
     return [
       SpaceName.ARSIA_MONS_ELYSIUM,
       SpaceName.ELYSIUM_MONS,

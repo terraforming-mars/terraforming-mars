@@ -74,7 +74,7 @@ export class HellasBoard extends Board {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
   }
 
-  public getHighlightedSpaces(): Array<SpaceName> {
+  public getHighlightedSpaceIds(): Array<string> {
     return [];
   }
 }

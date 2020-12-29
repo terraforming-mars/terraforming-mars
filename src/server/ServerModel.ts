@@ -20,7 +20,6 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForCard} from '../inputs/SelectHowToPayForCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceName} from '../SpaceName';
 import {SpaceModel} from '../models/SpaceModel';
 import {TileType} from '../TileType';
 import {Phase} from '../Phase';
@@ -565,7 +564,7 @@ function getColor(space: ISpace): Color | undefined {
 }
 
 function getSpaces(board: Board): Array<SpaceModel> {
-  const highlightedSpaces = board.getHighlightedSpaces();
+  const highlightedSpaceIds = board.getHighlightedSpaceIds();
 
   return board.spaces.map((space) => {
     return {
@@ -576,7 +575,7 @@ function getSpaces(board: Board): Array<SpaceModel> {
       spaceType: space.spaceType,
       tileType: space.tile && space.tile.tileType,
       color: getColor(space),
-      isHighlighted: highlightedSpaces.includes(space.id as SpaceName),
+      highlight: highlightedSpaceIds.includes(space.id),
     };
   });
 }

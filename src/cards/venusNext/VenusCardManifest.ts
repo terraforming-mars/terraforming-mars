@@ -55,6 +55,7 @@ import {VenusSoils} from './VenusSoils';
 import {VenusWaystation} from './VenusWaystation';
 import {Viron} from './Viron';
 import {WaterToVenus} from './WaterToVenus';
+import {AirScrapping} from '../standardProjects/AirScrapping';
 
 export const VENUS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Venus,
@@ -108,6 +109,9 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ORBITAL_REFLECTORS, Factory: OrbitalReflectors},
     {cardName: CardName.OMNICOURT, Factory: Omnicourt},
     {cardName: CardName.MINING_QUOTA, Factory: MiningQuota},
+  ],
+  standardProjects: [
+    {cardName: CardName.STANDARD_AIR_SCRAPPING, Factory: AirScrapping},
   ],
 
   corporationCards: [

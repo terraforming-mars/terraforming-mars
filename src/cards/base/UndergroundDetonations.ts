@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost = 6;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.UNDERGROUND_DETONATIONS;
     public cardType = CardType.ACTIVE;
 

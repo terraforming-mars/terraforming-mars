@@ -7,14 +7,14 @@ import {CardType} from '../CardType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SymbioticFungus implements IActionCard, IProjectCard {
     public cost = 4;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public cardType = CardType.ACTIVE;
     public name = CardName.SYMBIOTIC_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {

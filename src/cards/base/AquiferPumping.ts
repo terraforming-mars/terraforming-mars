@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class AquiferPumping implements IActionCard, IProjectCard {
   public cost = 18;
-  public tags = [Tags.STEEL];
+  public tags = [Tags.BUILDING];
   public name = CardName.AQUIFER_PUMPING;
   public cardType = CardType.ACTIVE;
 

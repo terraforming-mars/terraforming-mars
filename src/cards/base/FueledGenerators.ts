@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class FueledGenerators implements IProjectCard {
   public cost = 1;
-  public tags = [Tags.ENERGY, Tags.STEEL];
+  public tags = [Tags.ENERGY, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.FUELED_GENERATORS;
   public hasRequirements = false;

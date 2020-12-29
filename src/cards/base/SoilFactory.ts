@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SoilFactory implements IProjectCard {
     public cost = 9;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.SOIL_FACTORY;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

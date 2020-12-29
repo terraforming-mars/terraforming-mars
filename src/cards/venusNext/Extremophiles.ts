@@ -7,7 +7,7 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -16,7 +16,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 3;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.EXTREMOPHILES;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

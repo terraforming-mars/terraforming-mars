@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class NaturalPreserve implements IProjectCard {
     public cost = 9;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.NATURAL_PRESERVE;
     public adjacencyBonus?: IAdjacencyBonus = undefined;

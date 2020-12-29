@@ -19,7 +19,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Capital implements IProjectCard {
     public cost = 26;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.CAPITAL;
     public adjacencyBonus?: IAdjacencyBonus = undefined;

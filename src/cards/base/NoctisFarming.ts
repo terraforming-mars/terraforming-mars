@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class NoctisFarming implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.PLANT, Tags.BUILDING];
     public name = CardName.NOCTIS_FARMING;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

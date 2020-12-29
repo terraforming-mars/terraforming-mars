@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningGuild implements CorporationCard {
     public name = CardName.MINING_GUILD;
-    public tags = [Tags.STEEL, Tags.STEEL];
+    public tags = [Tags.BUILDING, Tags.BUILDING];
     public startingMegaCredits: number = 30;
     public cardType = CardType.CORPORATION;
 

@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianEmbassy implements IProjectCard {
     public cost = 14;
-    public tags = [Tags.JOVIAN, Tags.STEEL];
+    public tags = [Tags.JOVIAN, Tags.BUILDING];
     public name = CardName.JOVIAN_EMBASSY;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

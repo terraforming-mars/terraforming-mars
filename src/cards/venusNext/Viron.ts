@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Viron implements ICard, CorporationCard {
     public name = CardName.VIRON;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public startingMegaCredits: number = 48;
     public cardType = CardType.CORPORATION;
 

@@ -4,7 +4,7 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';

@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UtopiaInvest implements IActionCard, CorporationCard {
     public name = CardName.UTOPIA_INVEST;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 40;
     public cardType = CardType.CORPORATION;
     public play(player: Player) {

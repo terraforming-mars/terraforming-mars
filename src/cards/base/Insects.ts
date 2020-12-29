@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Insects implements IProjectCard {
     public cost = 9;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public cardType = CardType.AUTOMATED;
     public name = CardName.INSECTS;
     public canPlay(player: Player, game: Game): boolean {

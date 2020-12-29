@@ -15,7 +15,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class TharsisRepublic implements CorporationCard {
     public name = CardName.THARSIS_REPUBLIC;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 40;
     public cardType = CardType.CORPORATION;
 

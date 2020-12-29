@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class HiTechLab implements IProjectCard {
     public name = CardName.HI_TECH_LAB;
     public cost = 17;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public cardType = CardType.ACTIVE;
 
     public play() {

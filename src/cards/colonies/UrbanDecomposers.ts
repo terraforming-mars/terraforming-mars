@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanDecomposers implements IProjectCard {
     public cost = 6;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.URBAN_DECOMPOSERS;
     public cardType = CardType.AUTOMATED;
 

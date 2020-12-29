@@ -7,7 +7,7 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES} from '../../constants';
@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeLake implements IActionCard, IProjectCard {
     public cost = 31;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MOHOLE_LAKE;
     public cardType = CardType.ACTIVE;
     public hasRequirements = false;

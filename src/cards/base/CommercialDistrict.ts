@@ -17,7 +17,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class CommercialDistrict implements IProjectCard {
     public cost = 16;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.COMMERCIAL_DISTRICT;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

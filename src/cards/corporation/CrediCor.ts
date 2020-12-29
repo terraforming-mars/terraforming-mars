@@ -1,12 +1,12 @@
 import {CorporationCard} from './CorporationCard';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {StandardProjectType} from '../../StandardProjectType';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
 
 export class CrediCor implements CorporationCard {
     public name = CardName.CREDICOR;
@@ -19,8 +19,8 @@ export class CrediCor implements CorporationCard {
         player.megaCredits += 4;
       }
     }
-    public onStandardProject(player: Player, project: StandardProjectType) {
-      if (project === StandardProjectType.GREENERY || project === StandardProjectType.CITY) {
+    public onStandardProject(player: Player, project: StandardProjectCard) {
+      if (project.cost >= 20) {
         player.megaCredits += 4;
       }
     }

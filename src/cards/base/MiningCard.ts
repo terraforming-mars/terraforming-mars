@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -16,7 +16,7 @@ import {TileType} from '../../TileType';
 export abstract class MiningCard implements IProjectCard {
     public abstract cost: number;
     public abstract name: CardName;
-    public readonly tags: Array<Tags> = [Tags.STEEL];
+    public readonly tags: Array<Tags> = [Tags.BUILDING];
     public readonly cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public bonusResource: Resources | undefined = undefined;

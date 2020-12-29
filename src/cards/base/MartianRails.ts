@@ -6,14 +6,14 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MartianRails implements IActionCard, IProjectCard {
     public cost = 13;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MARTIAN_RAILS;
     public cardType = CardType.ACTIVE;
 

@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OpenCity implements IProjectCard {
     public cost = 23;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.OPEN_CITY;
     public canPlay(player: Player, game: Game): boolean {

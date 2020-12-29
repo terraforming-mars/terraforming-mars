@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
@@ -18,7 +18,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 8;
-    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.MICROBE];
     public name = CardName.GHG_PRODUCING_BACTERIA;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

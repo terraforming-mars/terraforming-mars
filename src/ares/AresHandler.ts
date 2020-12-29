@@ -1,6 +1,6 @@
 import {CardName} from '../CardName';
 import {ICard} from '../cards/ICard';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';

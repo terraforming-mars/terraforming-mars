@@ -42,12 +42,12 @@ export class SelfReplicatingRobots implements IProjectCard {
 
     public canAct(player: Player): boolean {
       return this.targetCards.length > 0 ||
-             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
+             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
     }
 
     public action(player: Player, game: Game) {
       const orOptions = new OrOptions();
-      const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.STEEL));
+      const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
 
       if (this.targetCards.length > 0) {
         const robotCards = this.targetCards.map((targetCard) => targetCard.card);

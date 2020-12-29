@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UndergroundCity implements IProjectCard {
     public cost = 18;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.UNDERGROUND_CITY;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

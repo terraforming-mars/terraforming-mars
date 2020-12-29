@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class HeatTrappers implements IProjectCard {
     public cost = 6;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.HEAT_TRAPPERS;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

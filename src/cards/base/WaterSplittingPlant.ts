@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class WaterSplittingPlant implements IProjectCard {
     public cost = 12;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.WATER_SPLITTING_PLANT;
     public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {

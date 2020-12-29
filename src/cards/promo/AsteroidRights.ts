@@ -7,7 +7,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';

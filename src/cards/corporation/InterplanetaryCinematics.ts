@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class InterplanetaryCinematics implements CorporationCard {
     public name = CardName.INTERPLANETARY_CINEMATICS;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 30;
     public cardType = CardType.CORPORATION;
 

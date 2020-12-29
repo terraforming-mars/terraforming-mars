@@ -6,6 +6,7 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ColonizerTrainingCamp implements IProjectCard {
     public cost = 8;
@@ -13,7 +14,7 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public name = CardName.COLONIZER_TRAINING_CAMP;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() <= 5 + player.getRequirementsBonus(game);
+      return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 5);
     }
     public play() {
       return undefined;

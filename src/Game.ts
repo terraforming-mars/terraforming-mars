@@ -59,6 +59,7 @@ import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
+import {GlobalParameter} from './GlobalParameter';
 
 export type GameId = string;
 
@@ -1247,6 +1248,37 @@ export class Game implements ISerializable<SerializedGame> {
 
   public getTemperature(): number {
     return this.temperature;
+  }
+
+  public checkMinRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level);
+  }
+
+  public checkMaxRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level, true);
+  }
+
+  private checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+    let currentLevel: number;
+    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+
+    if (parameter === GlobalParameter.OCEANS) {
+      currentLevel = this.board.getOceansOnBoard();
+    } else if (parameter === GlobalParameter.OXYGEN) {
+      currentLevel = this.getOxygenLevel();
+    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      currentLevel = this.getTemperature();
+      playerRequirementsBonus *= 2;
+    } else { // parameter === GlobalParameter.VENUS
+      currentLevel = this.getVenusScaleLevel();
+      playerRequirementsBonus *= 2;
+    }
+
+    if (max) {
+      return currentLevel <= level + playerRequirementsBonus;
+    } else {
+      return currentLevel >= level - playerRequirementsBonus;
+    }
   }
 
   public getGeneration(): number {

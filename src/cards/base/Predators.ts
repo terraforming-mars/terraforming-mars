@@ -13,6 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public cost = 14;
@@ -23,7 +24,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 11);
     }
 
     public getVictoryPoints(): number {

@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class KelpFarming implements IProjectCard {
     public cost = 17;
@@ -15,7 +16,7 @@ export class KelpFarming implements IProjectCard {
     public name = CardName.KELP_FARMING;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 6);
     }
     public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 2);

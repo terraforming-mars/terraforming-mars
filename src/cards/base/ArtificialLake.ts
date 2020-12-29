@@ -13,6 +13,7 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ArtificialLake implements IProjectCard {
   public cost = 15;
@@ -20,7 +21,7 @@ export class ArtificialLake implements IProjectCard {
   public name = CardName.ARTIFICIAL_LAKE;
   public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.getTemperature() >= -6 - player.getRequirementsBonus(game) * 2;
+    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {

@@ -11,6 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class VenusianAnimals implements IProjectCard, IResourceCard {
     public cost = 15;
@@ -20,7 +21,7 @@ export class VenusianAnimals implements IProjectCard, IResourceCard {
     public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 18 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 18);
     }
     public play() {
       return undefined;

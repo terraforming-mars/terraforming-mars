@@ -31,7 +31,7 @@ export class EcologicalSurvey implements IProjectCard {
   public metadata: CardMetadata = {
     description: 'Requires 3 greeneries on Mars.',
     cardNumber: 'A07',
-    requirements: CardRequirements.builder((b) => b.forests(3)),
+    requirements: CardRequirements.builder((b) => b.gerreneries(3)),
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.emptyTile().startEffect;

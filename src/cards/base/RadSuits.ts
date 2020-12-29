@@ -28,7 +28,7 @@ export class RadSuits implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '186',
-      requirements: CardRequirements.builder((b) => b.cities(2)),
+      requirements: CardRequirements.builder((b) => b.cities(2).any()),
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.megacredits(1));
       }),

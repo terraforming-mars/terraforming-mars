@@ -6,6 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -25,8 +26,7 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P11',
       renderData: CardRenderer.builder((b) => {
-        b.cards(1).colon().megacredits(-25);
+        b.text('Play a card from hand, reducing its cost by 25 MC', CardRenderItemSize.SMALL, true);
       }),
-      description: 'Play 1 card from hand with a 25 MC reduction.',
     }
 }

@@ -22,7 +22,7 @@ export class HugeAsteroid extends PreludeCard implements IProjectCard {
       cardNumber: 'P15',
       renderData: CardRenderer.builder((b) => {
         b.temperature(3).br;
-        b.minus().megacredits(5);
+        b.megacredits(-5);
       }),
       description: 'Increase Temperature 3 steps. Pay 5 MC.',
     }

@@ -25,7 +25,7 @@ export class BusinessEmpire extends PreludeCard implements IProjectCard {
       cardNumber: 'P06',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.megacredits(6)).br;
-        b.minus().megacredits(6);
+        b.megacredits(-6);
       }),
       description: 'Increase your MC production 6 steps. Pay 6 MC.',
     }

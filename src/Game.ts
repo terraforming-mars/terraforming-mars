@@ -352,16 +352,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public save(): void {
-    /*
-      * Because we save at the start of a player's takeAction, we need to
-      * save the game in the database before increasing lastSaveId so that
-      * reloading it doesn't create another new save on top of it, like this:
-      *
-      * increment -> save -> reload -> increment -> save
-      *
-      */
-    Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-    this.lastSaveId++;
+    Database.getInstance().saveGame(this);
   }
 
   public toJSON(): string {

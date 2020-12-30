@@ -73,14 +73,10 @@ export interface IDatabase {
     getClonableGames(cb:(err: any, allGames:Array<IGameData>)=> void) : void;
 
     /**
-     * Saves the current state of the game at a supplied save point. Used for
+     * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
-     *
-     * The `save_id` is managed outside of the database, and so it is up to the
-     * game to increment its state count.
      */
-    // TODO(kberg): why is `players` a useful first-class piece of data?
-    saveGameState(game_id: GameId, save_id: number, game: string, players: number): void;
+    saveGame(game: Game): void;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal

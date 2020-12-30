@@ -46,9 +46,6 @@ export function deserializeFundedAwards(
       throw new Error(`Player ${playerId} not found when rebuilding Funded Award ${awardName}`);
     }
 
-    return {
-      award: award,
-      player: player,
-    } as FundedAward;
+    return { award, player } as FundedAward;
   });
 }

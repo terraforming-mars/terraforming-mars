@@ -41,7 +41,7 @@ Database.getInstance = function() {
     restoreGame: () => {},
     restoreReferenceGame: () => {},
     saveGameResults: () => {},
-    saveGameState: () => {},
+    saveGame: () => {},
   };
 };
 

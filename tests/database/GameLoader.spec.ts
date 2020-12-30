@@ -30,7 +30,7 @@ describe('GameLoader', function() {
       getGames: function(getInstanceCb: (err: unknown, allGames: Array<string>) => void) {
         getInstanceCb(undefined, expectedGameIds);
       },
-      saveGameState: function() {},
+      saveGame: function() {},
     };
     (Database as any).getInstance = function() {
       return database;

@@ -16,7 +16,7 @@ describe('Stratopolis', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Can\'t play', function() {

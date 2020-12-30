@@ -25,6 +25,7 @@ export enum CardRenderItemType {
   TRADE = 'trade',
   TRADE_DISCOUNT = 'trade_discount',
   TRADE_FLEET = 'trade_fleet',
+  PLACE_COLONY = 'place_colony',
   CHAIRMAN = 'chairman',
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
@@ -45,4 +46,9 @@ export enum CardRenderItemType {
   SELF_REPLICATING = 'self_replicating',
   MULTIPLIER_WHITE = 'multiplier_white',
   PROJECT_REQUIREMENTS = 'project_requirements',
+  PRELUDE = 'prelude',
+  AWARD = 'award',
+  VP = 'vp',
+  COMMUNITY = 'community',
+  DISEASE = 'disease',
 }

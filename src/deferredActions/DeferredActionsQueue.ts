@@ -1,4 +1,3 @@
-import {PlayerId} from '../Player';
 import {DeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
 
@@ -19,10 +18,6 @@ export class DeferredActionsQueue {
 
     public next(): DeferredAction | undefined {
       return this.queue[0];
-    }
-
-    public nextForPlayer(playerId: PlayerId): DeferredAction | undefined {
-      return this.queue.find((action) => action.player.id === playerId);
     }
 
     public remove(action: DeferredAction): void {
@@ -59,16 +54,6 @@ export class DeferredActionsQueue {
       }
 
       this.run(action, () => this.runAll(cb));
-    }
-
-    public runAllForPlayer(playerId: PlayerId, cb: () => void): void {
-      const action = this.nextForPlayer(playerId);
-      if (action === undefined) {
-        cb();
-        return;
-      }
-
-      this.run(action, () => this.runAllForPlayer(playerId, cb));
     }
 
 

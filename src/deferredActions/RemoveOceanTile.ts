@@ -1,9 +1,9 @@
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from './DeferredAction';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 
 export class RemoveOceanTile implements DeferredAction {
   constructor(

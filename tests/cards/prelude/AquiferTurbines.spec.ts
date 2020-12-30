@@ -11,7 +11,7 @@ describe('AquiferTurbines', function() {
   beforeEach(function() {
     card = new AquiferTurbines();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Can play', function() {

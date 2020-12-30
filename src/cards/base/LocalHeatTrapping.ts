@@ -10,7 +10,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';

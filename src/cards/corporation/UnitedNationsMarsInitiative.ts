@@ -8,6 +8,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
 
 
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
@@ -33,5 +35,20 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
       player.megaCredits -= 3;
       player.increaseTerraformRating(game);
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R32',
+      description: 'You start with 40 MC.',
+      renderData: CardRenderer.builder((b) => {
+        // TODO(chosta): find a not so hacky solutions to spacing
+        b.br.br.br;
+        b.empty().nbsp.nbsp.nbsp.nbsp.megacredits(40);
+        b.corpBox('action', (ce) => {
+          ce.effectBox((eb) => {
+            eb.megacredits(3).startAction.tr(1).asterix();
+            eb.description('Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.');
+          });
+        });
+      }),
     }
 }

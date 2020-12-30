@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class FusionPower implements IProjectCard {
   public cost = 14;
-  public tags = [Tags.SCIENCE, Tags.ENERGY, Tags.STEEL];
+  public tags = [Tags.SCIENCE, Tags.ENERGY, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.FUSION_POWER;
   public canPlay(player: Player): boolean {

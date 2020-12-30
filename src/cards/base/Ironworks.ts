@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Ironworks implements IActionCard, IProjectCard {
     public cost = 11;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.IRONWORKS;
     public cardType = CardType.ACTIVE;
 

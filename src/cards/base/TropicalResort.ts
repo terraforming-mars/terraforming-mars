@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class TropicalResort implements IProjectCard {
     public cost = 13;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.TROPICAL_RESORT;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

@@ -23,7 +23,7 @@ describe('Player', function() {
   });
   it('Should throw error if nothing to process', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
     expect(function() {
       player.process(game, []);
@@ -34,12 +34,12 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.YELLOW.newPlayer();
-    const game = new Game('foobar', [player, player2, player3], player);
+    const game = Game.newInstance('foobar', [player, player2, player3], player);
     player2.addProduction(Resources.ENERGY, 2);
     player3.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, new Game('foobar', [player, player2, player3], player));
+    const action = card.play(player, Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       player.process(game, [[player2.id]]);
@@ -51,10 +51,10 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
+    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;
@@ -75,8 +75,8 @@ describe('Player', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     player.addProduction(Resources.HEAT, 2);
-    const game = new Game('foobar', [player, redPlayer], player);
-    const action = card.play(player, new Game('foobar', [player, redPlayer], player));
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);
@@ -98,7 +98,7 @@ describe('Player', function() {
   it('Runs SaturnSystems when other player plays card', function() {
     const player1 = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('gto', [player1, player2], player1);
+    const game = Game.newInstance('gto', [player1, player2], player1);
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
@@ -108,7 +108,7 @@ describe('Player', function() {
   });
   it('Chains onend functions from player inputs', function(done) {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const mockOption3 = new SelectOption('Mock select option 3', 'Save', () => {
       return undefined;
     });
@@ -209,7 +209,6 @@ describe('Player', function() {
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
       turmoilScientistsActionUsed: false,
-      powerPlantCost: 11,
       victoryPointsBreakdown: {
         terraformRating: 1,
         milestones: 2,

@@ -11,7 +11,7 @@ describe('MercurianAlloys', function() {
   beforeEach(function() {
     card = new MercurianAlloys();
     player = TestPlayers.BLUE.newPlayer();
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play if not enough science tags available', function() {

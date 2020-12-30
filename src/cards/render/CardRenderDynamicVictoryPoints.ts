@@ -8,6 +8,7 @@ export class CardRenderDynamicVictoryPoints {
   constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
   public getPointsHtml(): string {
+    if (this.item === undefined && this.points === 0 && this.target === 0) return '?';
     if (this.item === undefined) return `${this.points}`;
     if (this.target === this.points) return `${this.target}/`;
     return `${this.points}/${this.target}`;
@@ -63,6 +64,9 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static preservation(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.PRESERVATION), points, target);
+  }
+  public static questionmark(): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
   }
   public static any(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(undefined, points, points);

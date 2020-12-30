@@ -6,7 +6,7 @@ import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
@@ -19,7 +19,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Capital implements IProjectCard {
     public cost = 26;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.CAPITAL;
     public adjacencyBonus?: IAdjacencyBonus = undefined;

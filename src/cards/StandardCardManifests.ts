@@ -221,6 +221,13 @@ import {WavePower} from './base/WavePower';
 import {Windmills} from './base/Windmills';
 import {Worms} from './base/Worms';
 import {Zeppelins} from './base/Zeppelins';
+import {Aquifer} from './standardProjects/Aquifer';
+import {City} from './standardProjects/City';
+import {PowerPlantStandard} from './standardProjects/PowerPlant';
+import {Greenery} from './standardProjects/Greenery';
+import {AsteroidStandard} from './standardProjects/Asteroid';
+import {BufferGas} from './standardProjects/BufferGas';
+import {SellPatents} from './standardProjects/SellPatents';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -363,7 +370,6 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.WORMS, Factory: Worms},
     {cardName: CardName.ZEPPELINS, Factory: Zeppelins},
   ],
-
   corporationCards: [
     {cardName: CardName.CREDICOR, Factory: CrediCor},
     {cardName: CardName.ECOLINE, Factory: EcoLine},
@@ -375,7 +381,17 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.THARSIS_REPUBLIC, Factory: TharsisRepublic},
     {cardName: CardName.THORGATE, Factory: Thorgate},
     {cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, Factory: UnitedNationsMarsInitiative},
-  ]});
+  ],
+  standardProjects: [
+    {cardName: CardName.STANDARD_AQUIFER, Factory: Aquifer},
+    {cardName: CardName.STANDARD_CITY, Factory: City},
+    {cardName: CardName.STANDARD_POWER_PLANT, Factory: PowerPlantStandard},
+    {cardName: CardName.STANDARD_GREENERY, Factory: Greenery},
+    {cardName: CardName.STANDARD_ASTEROID, Factory: AsteroidStandard},
+    {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},
+    {cardName: CardName.STANDARD_SELL_PATENTS, Factory: SellPatents},
+  ],
+});
 
 
 export const CORP_ERA_CARD_MANIFEST = new CardManifest({

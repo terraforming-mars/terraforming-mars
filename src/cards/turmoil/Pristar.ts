@@ -6,6 +6,7 @@ import {IResourceCard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Pristar implements CorporationCard, IResourceCard {
@@ -37,10 +38,11 @@ export class Pristar implements CorporationCard, IResourceCard {
       cardNumber: 'R07',
       description: 'You start with 53 MC. Decrease your TR 2 steps. 1 VP per preservation resource here.',
       renderData: CardRenderer.builder((b) => {
-        b.megacredits(53).minus().tr(2);
+        b.br.br.br;
+        b.megacredits(53).nbsp.nbsp.minus().tr(2, CardRenderItemSize.SMALL);
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
-            eb.tr(1).startEffect.preservation(1).megacredits(6);
+            eb.tr(1, CardRenderItemSize.SMALL).startEffect.preservation(1).megacredits(6);
             eb.description('Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 MC.');
           });
         });

@@ -7,7 +7,7 @@ import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../TileType';
 import {ResourceType} from '../../ResourceType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';

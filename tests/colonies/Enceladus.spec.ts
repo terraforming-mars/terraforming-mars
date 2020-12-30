@@ -15,7 +15,7 @@ describe('Enceladus', function() {
     tardigrades = new Tardigrades();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(enceladus);
   });

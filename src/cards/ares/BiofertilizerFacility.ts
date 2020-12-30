@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
@@ -18,7 +18,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class BiofertilizerFacility implements IProjectCard {
     public cost = 12;
-    public tags = [Tags.MICROBES, Tags.STEEL];
+    public tags = [Tags.MICROBE, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.BIOFERTILIZER_FACILITY;
 

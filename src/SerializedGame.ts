@@ -6,7 +6,6 @@ import {IMilestone} from './milestones/IMilestone';
 import {IAward} from './awards/IAward';
 import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
-import {Board} from './boards/Board';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
@@ -15,12 +14,13 @@ import {PlayerId} from './Player';
 import {GameId, GameOptions} from './Game';
 import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
+import {SerializedBoard} from './boards/SerializedBoard';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
     aresData?: IAresData;
     awards: Array<IAward>;
-    board: Board;
+    board: SerializedBoard;
     claimedMilestones: Array<ClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;

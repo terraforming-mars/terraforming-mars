@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ArchaeBacteria implements IProjectCard {
   public cost = 6;
-  public tags = [Tags.MICROBES];
+  public tags = [Tags.MICROBE];
   public name = CardName.ARCHAEBACTERIA;
   public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {

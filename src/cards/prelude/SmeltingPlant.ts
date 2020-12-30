@@ -8,7 +8,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SmeltingPlant extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.SMELTING_PLANT;
     public play(player: Player, game: Game) {
       player.steel += 5;

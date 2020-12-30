@@ -9,14 +9,14 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.SULPHUR_EATING_BACTERIA;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

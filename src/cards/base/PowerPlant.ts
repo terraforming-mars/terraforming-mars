@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class PowerPlant implements IProjectCard {
     public cost = 4;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.POWER_PLANT;
     public cardType = CardType.AUTOMATED;
 

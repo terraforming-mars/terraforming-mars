@@ -24,6 +24,7 @@ import {EarthCatapult} from '../src/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../src/cards/base/QuantumExtractor';
 import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
+import {Greenery} from '../src/cards/standardProjects/Greenery';
 
 describe('Turmoil', function() {
   let player : Player; let game : Game; let turmoil: Turmoil;
@@ -32,7 +33,7 @@ describe('Turmoil', function() {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = new Game('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -102,7 +103,10 @@ describe('Turmoil', function() {
   });
 
   it('Correctly run end of generation', function() {
-    return; // TODO Fix me! I am flaky. A am randomly failing in CI
+    // Eliminate the flaky cases where the current global event sends delegates to
+    // parties, changing the dominant party outcome.
+    turmoil.parties.forEach((p) => p.delegates = []);
+
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
@@ -151,18 +155,16 @@ describe('Turmoil', function() {
     const availableStandardProjects = player.getAvailableStandardProjects(game);
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(availableStandardProjects.options).has.lengthOf(1);
+    expect(availableStandardProjects.cards).has.lengthOf(1);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
     turmoil.rulingParty = new Reds();
     player.megaCredits = 23;
-    let availableStandardProjects = player.getAvailableStandardProjects(game);
-    expect(availableStandardProjects.options).has.lengthOf(4);
+    expect(new Greenery().canAct(player, game)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    availableStandardProjects = player.getAvailableStandardProjects(game);
-    expect(availableStandardProjects.options).has.lengthOf(5);
+    expect(new Greenery().canAct(player, game)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {

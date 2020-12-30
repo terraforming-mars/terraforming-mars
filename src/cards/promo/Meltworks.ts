@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Meltworks implements IActionCard, IProjectCard {
     public cost = 4;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MELTWORKS;
     public cardType = CardType.ACTIVE;
 

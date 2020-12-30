@@ -4,12 +4,15 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ProjectWorkshop implements CorporationCard {
     public name = CardName.PROJECT_WORKSHOP;
@@ -107,5 +110,27 @@ export class ProjectWorkshop implements CorporationCard {
 
     private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
       game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R45',
+      description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag('blue');
+        b.corpBox('action', (cb) => {
+          cb.vSpace(CardRenderItemSize.LARGE);
+          cb.effectBox((eb) => {
+            eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag('blue');
+            eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
+            eb.cards(2).digit;
+            eb.description(undefined);
+          });
+          cb.vSpace(CardRenderItemSize.SMALL);
+          cb.effectBox((eb) => {
+            eb.or().megacredits(3).startAction.cards(1).secondaryTag('blue');
+            eb.description('Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.');
+          });
+        });
+      }),
     }
 }

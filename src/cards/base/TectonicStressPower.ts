@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class TectonicStressPower implements IProjectCard {
     public cost = 18;
-     public tags = [Tags.ENERGY, Tags.STEEL];
+     public tags = [Tags.ENERGY, Tags.BUILDING];
     public name = CardName.TECTONIC_STRESS_POWER;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {

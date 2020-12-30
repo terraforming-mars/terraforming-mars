@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +15,7 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name = CardName.POWER_INFRASTRUCTURE;
     public cardType = CardType.ACTIVE;
     public cost = 4;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
 
     public play(_player: Player, _game: Game) {
       return undefined;

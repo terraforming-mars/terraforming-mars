@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanizedArea implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.URBANIZED_AREA;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

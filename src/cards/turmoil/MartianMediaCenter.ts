@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MartianMediaCenter implements IProjectCard {
     public cost = 7;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MARTIAN_MEDIA_CENTER;
     public cardType = CardType.ACTIVE;
 

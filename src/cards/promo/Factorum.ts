@@ -8,11 +8,14 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Factorum implements IActionCard, CorporationCard {
     public name = CardName.FACTORUM;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public startingMegaCredits: number = 37;
     public cardType = CardType.CORPORATION;
 
@@ -38,9 +41,9 @@ export class Factorum implements IActionCard, CorporationCard {
 
       const drawBuildingCard = new SelectOption('Spend 3 MC to draw a building card', 'Draw card', () => {
         player.megaCredits -= 3;
-        player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
+        player.cardsInHand.push(game.drawCardsByTag(Tags.BUILDING, 1)[0]);
 
-        const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
+        const drawnCard = game.getCardsInHandByTag(player, Tags.BUILDING).slice(-1)[0];
 
         game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
 
@@ -51,5 +54,21 @@ export class Factorum implements IActionCard, CorporationCard {
       if (!player.canAfford(3)) return increaseEnergy;
 
       return new OrOptions(increaseEnergy, drawBuildingCard);
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R22',
+      description: 'You start with 37 MC. Increase your steel production 1 step.',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(37).nbsp.productionBox((pb) => pb.steel(1));
+        b.corpBox('action', (ce) => {
+          ce.vSpace(CardRenderItemSize.LARGE);
+          ce.effectBox((eb) => {
+            eb.empty().arrow().productionBox((pb) => pb.energy(1));
+            eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
+            eb.description('Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.');
+          });
+        });
+      }),
     }
 }

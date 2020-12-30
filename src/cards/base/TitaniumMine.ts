@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class TitaniumMine implements IProjectCard {
     public cost = 7;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.TITANIUM_MINE;
     public cardType = CardType.AUTOMATED;
 

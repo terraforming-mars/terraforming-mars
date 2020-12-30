@@ -8,9 +8,12 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 
 export class Astrodrill implements IActionCard, CorporationCard {
@@ -101,5 +104,25 @@ export class Astrodrill implements IActionCard, CorporationCard {
     public play() {
       this.resourceCount = 3;
       return undefined;
+    }
+    public metadata: CardMetadata = {
+      cardNumber: 'R21',
+      description: 'You start with 38 MC and 3 asteroid resources.',
+      renderData: CardRenderer.builder((b) => {
+        b.br;
+        b.megacredits(38).nbsp.asteroids(3).digit;
+        b.corpBox('action', (ce) => {
+          ce.vSpace(CardRenderItemSize.LARGE);
+          ce.effectBox((eb) => {
+            eb.empty().startAction.asteroids(1).asterix().slash().wild(1).or();
+            eb.description(undefined);
+          });
+          ce.vSpace();
+          ce.effectBox((eb) => {
+            eb.asteroids(1).startAction.titanium(3).digit;
+            eb.description('Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.');
+          });
+        });
+      }),
     }
 }

@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningQuota implements IProjectCard {
     public cost = 5;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MINING_QUOTA;
     public cardType = CardType.AUTOMATED;
 

@@ -14,7 +14,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard {
     public cost = 5;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.VENUSIAN_INSECTS;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;

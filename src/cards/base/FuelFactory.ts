@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class FuelFactory implements IProjectCard {
   public cost = 6;
   public name = CardName.FUEL_FACTORY;
-  public tags = [Tags.STEEL];
+  public tags = [Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public hasRequirements = false;
   public canPlay(player: Player): boolean {

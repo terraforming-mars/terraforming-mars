@@ -8,7 +8,7 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -20,7 +20,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     public cost = 11;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public cardType = CardType.ACTIVE;
     public name = CardName.NITRITE_REDUCING_BACTERIA;
 

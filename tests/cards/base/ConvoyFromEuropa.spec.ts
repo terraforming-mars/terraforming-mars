@@ -8,7 +8,7 @@ describe('ConvoyFromEuropa', function() {
     const card = new ConvoyFromEuropa();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     card.play(player, game);
     expect(player.cardsInHand).has.lengthOf(1);
   });

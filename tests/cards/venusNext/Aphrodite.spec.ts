@@ -9,7 +9,7 @@ describe('Aphrodite', function() {
     const card = new Aphrodite();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);

@@ -4,7 +4,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OpenCity implements IProjectCard {
     public cost = 23;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.OPEN_CITY;
     public canPlay(player: Player, game: Game): boolean {

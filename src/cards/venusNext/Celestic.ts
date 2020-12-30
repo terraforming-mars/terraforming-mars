@@ -7,7 +7,7 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -105,6 +105,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
             eb.empty().startAction.floaters(1).asterix();
             eb.description('Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.');
           });
+          ce.vSpace(); // to offset the description to the top a bit so it can be readable
         });
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),

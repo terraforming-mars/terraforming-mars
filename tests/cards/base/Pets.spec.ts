@@ -9,7 +9,7 @@ describe('Pets', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     player.playedCards.push(card);
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
     player.addResourceTo(card, 4);

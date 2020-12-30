@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SubCrustMeasurements implements IActionCard, IProjectCard {
     public cost = 20;
-    public tags = [Tags.SCIENCE, Tags.STEEL, Tags.EARTH];
+    public tags = [Tags.SCIENCE, Tags.BUILDING, Tags.EARTH];
     public cardType = CardType.ACTIVE;
     public name = CardName.SUB_CRUST_MEASUREMENTS;
 

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -11,7 +11,7 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class RoverConstruction implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.ROVER_CONSTRUCTION;
     public cardType = CardType.ACTIVE;
 

@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchOutpost implements IProjectCard {
     public cost = 18;
-    public tags = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.CITY, Tags.BUILDING];
     public name = CardName.RESEARCH_OUTPOST;
     public cardType = CardType.ACTIVE;
     public hasRequirements = false;

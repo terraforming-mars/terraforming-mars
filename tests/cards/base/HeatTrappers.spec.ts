@@ -13,11 +13,11 @@ describe('HeatTrappers', function() {
     card = new HeatTrappers();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should be playable in solo mode', function() {
-    game = new Game('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
     player.addProduction(Resources.HEAT);
 
     expect(card.canPlay(player, game)).is.true;

@@ -3,8 +3,9 @@ import {ICardFactory} from './cards/ICardFactory';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {PreludeCard} from './cards/prelude/PreludeCard';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 
-export type CardTypes = IProjectCard | CorporationCard | PreludeCard;
+export type CardTypes = IProjectCard | CorporationCard | PreludeCard | StandardProjectCard;
 
 export class Deck<T extends CardTypes> {
     cards: Array<ICardFactory<T>>;
@@ -31,19 +32,16 @@ export class Deck<T extends CardTypes> {
 
 export class Decks {
   public static findByName<T extends CardTypes>(decks: Array<Deck<T>>, cardName: string): T | undefined {
-    let found: T | undefined;
-
-    decks.forEach((deck) => {
-      // Short circuit
-      if (found) {
-        return;
-      }
-      const cf = deck.findByCardName(cardName);
-      if (cf) {
-        found = new cf.Factory();
-      }
+    let found : (ICardFactory<T> | undefined);
+    decks.some((deck) => {
+      found = deck.findByCardName(cardName);
+      return found !== undefined;
     });
-    return found;
+    if (found !== undefined) {
+      return new found.Factory();
+    }
+    // currently flooding player's console. console.warn(`card not found ${cardName}`);
+    return undefined;
   }
 
   public static allCardNames(decks: Array<Deck<CardTypes>>): Array<CardName> {

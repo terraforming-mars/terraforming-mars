@@ -16,7 +16,7 @@ describe('MiningGuild', function() {
     card = new MiningGuild();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
 
     player.corporationCard = card;
   });

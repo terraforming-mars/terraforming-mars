@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class DomedCrater implements IProjectCard {
     public cost = 24;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.DOMED_CRATER;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

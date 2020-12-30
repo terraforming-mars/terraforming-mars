@@ -14,7 +14,7 @@ describe('GiantIceAsteroid', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    game = new Game('foobar', [player, player2, player3], player);
+    game = Game.newInstance('foobar', [player, player2, player3], player);
   });
 
   it('Should play', function() {

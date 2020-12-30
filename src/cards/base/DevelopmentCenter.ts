@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class DevelopmentCenter implements IActionCard, IProjectCard {
     public cost = 11;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public name = CardName.DEVELOPMENT_CENTER;
     public cardType = CardType.ACTIVE;
 

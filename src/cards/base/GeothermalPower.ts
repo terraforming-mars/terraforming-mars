@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class GeothermalPower implements IProjectCard {
     public cost = 11;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.GEOTHERMAL_POWER;
 

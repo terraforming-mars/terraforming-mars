@@ -21,7 +21,7 @@ describe('Playwrights', function() {
     card = new Playwrights();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
 
     card.play(player);
     player.corporationCard = card;

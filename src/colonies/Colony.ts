@@ -10,7 +10,7 @@ import {Game} from '../Game';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player, PlayerId} from '../Player';
@@ -82,9 +82,9 @@ export abstract class Colony implements SerializedColony {
       }
 
       // Poseidon hook
-      const poseidon = game.getPlayers().filter((player) => player.isCorporation(CardName.POSEIDON));
-      if (poseidon.length > 0) {
-        poseidon[0].addProduction(Resources.MEGACREDITS);
+      const poseidon = game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+      if (poseidon !== undefined) {
+        poseidon.addProduction(Resources.MEGACREDITS);
       }
     }
 

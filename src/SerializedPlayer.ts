@@ -46,7 +46,6 @@ export interface SerializedPlayer {
     plantsNeededForGreenery: number;
     playedCards: Array<SerializedCard>;
     politicalAgendasActionUsedCount: number;
-    powerPlantCost: number;
     preludeCardsInHand: Array<CardName>;
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;

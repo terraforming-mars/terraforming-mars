@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestingUtils';
 describe('UNMIContractor', function() {
   it('Should play', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('bar', [player], player);
+    const game = Game.newInstance('bar', [player], player);
     const card = new UNMIContractor();
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);

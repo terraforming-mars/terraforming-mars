@@ -5,7 +5,7 @@ import {SpaceType} from '../../SpaceType';
 import {Phase} from '../../Phase';
 import {PolicyId} from '../Policy';
 import {Resources} from '../../Resources';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {GreensPolicy01} from './Greens';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 

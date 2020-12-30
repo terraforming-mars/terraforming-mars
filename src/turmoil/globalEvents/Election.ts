@@ -6,7 +6,7 @@ import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;
@@ -63,7 +63,7 @@ export class Election implements IGlobalEvent {
     }
 
     public getScore(player: Player, turmoil: Turmoil, game: Game) {
-      const score = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player);
+      const score = player.getTagCount(Tags.BUILDING, false, false) + turmoil.getPlayerInfluence(player);
 
       const cities = game.board.spaces.filter(
         (space) => Board.isCitySpace(space) && space.player === player,

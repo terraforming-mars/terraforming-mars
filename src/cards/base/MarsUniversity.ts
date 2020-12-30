@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MarsUniversity implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public name = CardName.MARS_UNIVERSITY;
     public cardType = CardType.ACTIVE;
 

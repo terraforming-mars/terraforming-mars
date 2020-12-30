@@ -6,7 +6,7 @@ import {Tags} from '../../cards/Tags';
 import {Resources} from '../../Resources';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../SpaceType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 import {Phase} from '../../Phase';
@@ -29,7 +29,7 @@ export class MarsFirstBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.STEEL, false, false);
+      const tagCount = player.getTagCount(Tags.BUILDING, false, false);
       player.setResource(Resources.MEGACREDITS, tagCount);
     });
   }
@@ -69,7 +69,7 @@ export class MarsFirstPolicy02 implements Policy {
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.STEEL)) player.setResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tags.BUILDING)) player.setResource(Resources.MEGACREDITS, 2);
   }
 }
 
@@ -99,8 +99,8 @@ export class MarsFirstPolicy04 implements Policy {
       false,
       'Select how to pay for action',
       () => {
-        player.cardsInHand.push(game.drawCardsByTag(Tags.STEEL, 1)[0]);
-        const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
+        player.cardsInHand.push(game.drawCardsByTag(Tags.BUILDING, 1)[0]);
+        const drawnCard = game.getCardsInHandByTag(player, Tags.BUILDING).slice(-1)[0];
         game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
       },
     ));

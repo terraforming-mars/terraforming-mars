@@ -14,7 +14,7 @@ export class Tardigrades implements IProjectCard, IResourceCard {
     public cost = 4;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.TARDIGRADES;
     public cardType = CardType.ACTIVE;
 

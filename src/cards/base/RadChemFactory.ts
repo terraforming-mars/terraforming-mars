@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class RadChemFactory implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.RAD_CHEM_FACTORY;
     public hasRequirements = false;

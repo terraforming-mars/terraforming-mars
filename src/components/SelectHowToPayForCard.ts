@@ -4,16 +4,18 @@ import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 
 interface SelectHowToPayForCardModel {
-    card: string;
-    cards: Array<CardModel>;
-    cost: number;
-    heat: number;
-    megaCredits: number;
-    steel: number;
-    titanium: number;
-    microbes: number;
-    floaters: number;
-    warning: string | undefined;
+  cardName: string;
+  card: CardModel;
+  cards: Array<CardModel>;
+  cost: number;
+  tags: Array<Tags>
+  heat: number;
+  megaCredits: number;
+  steel: number;
+  titanium: number;
+  microbes: number;
+  floaters: number;
+  warning: string | undefined;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -45,8 +47,8 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
   },
   data: function(): SelectHowToPayForCardModel {
+    let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
-    let card: string | undefined;
     if (this.playerinput !== undefined &&
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
@@ -54,15 +56,17 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
         CardOrderStorage.getCardOrder(this.player.id),
         this.playerinput.cards,
       );
-      card = cards[0].name;
+      card = cards[0];
     }
     if (card === undefined) {
       throw new Error('no card provided in player input');
     }
     return {
-      card,
-      cards,
+      cardName: card.name,
+      card: card,
+      cards: cards,
       cost: 0,
+      tags: [],
       heat: 0,
       megaCredits: 0,
       steel: 0,
@@ -80,7 +84,9 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
-      app.$data.cost = app.getCardCost();
+      app.$data.card = app.getCard();
+      app.$data.cost = app.$data.card.calculatedCost;
+      app.$data.tags = app.getCardTags(),
       app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       app.setDefaultMicrobesValue();
@@ -91,17 +97,20 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     });
   },
   methods: {
-    getCardCost: function() {
-      const cards = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards);
-      for (const icard of cards) {
-        if (this.card === icard.name) {
-          return icard.calculatedCost;
-        }
+    translate: $t,
+    getCard: function() {
+      const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+      if (card === undefined) {
+        throw new Error(`card not found ${this.cardName}`);
       }
-      throw new Error(`card not found ${this.card}`);
+      return card;
     },
-    getTitle: function() {
-      return $t(this.playerinput.title);
+    getCardTags: function() {
+      const card = getProjectCardByName(this.cardName);
+      if (card === undefined) {
+        throw new Error(`card not found ${this.cardName}`);
+      }
+      return card.tags;
     },
     setDefaultMicrobesValue: function() {
       // automatically use available microbes to pay if not enough MC
@@ -215,50 +224,41 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.player.steel > 0) {
-        const card = getProjectCardByName(this.card);
-        if (card !== undefined) {
-          if (card.tags.find((tag) => tag === Tags.STEEL) !== undefined) {
-            return true;
-          }
+        if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
+          return true;
         }
       }
       return false;
     },
     canUseTitanium: function() {
       if (this.card !== undefined && this.player.titanium > 0) {
-        const card = getProjectCardByName(this.card);
-        if (card !== undefined) {
-          if (card.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
-            return true;
-          }
+        if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
+          return true;
         }
       }
       return false;
     },
     canUseMicrobes: function() {
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
-        const card = getProjectCardByName(this.card);
-        if (card !== undefined) {
-          if (card.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
-            return true;
-          }
+        if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
+          return true;
         }
       }
       return false;
     },
     canUseFloaters: function() {
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
-        const card = getProjectCardByName(this.card);
-        if (card !== undefined) {
-          if (card.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
-            return true;
-          }
+        if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
+          return true;
         }
       }
       return false;
     },
     cardChanged: function() {
-      this.cost = this.getCardCost();
+      this.card = this.getCard();
+      this.cost = this.card.calculatedCost;
+      this.tags = this.getCardTags();
+
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultMicrobesValue();
@@ -269,6 +269,9 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
     hasWarning: function() {
       return this.warning !== undefined;
+    },
+    hasCardWarning: function() {
+      return this.card !== undefined && this.card.warning !== undefined;
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -307,13 +310,13 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
 
       const totalSpentAmt = (3 * htp.floaters) + (2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue);
 
-      if (totalSpentAmt < this.getCardCost()) {
+      if (totalSpentAmt < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
       }
 
-      if (totalSpentAmt > this.getCardCost()) {
-        const diff = totalSpentAmt - this.getCardCost();
+      if (totalSpentAmt > this.cost) {
+        const diff = totalSpentAmt - this.cost;
         if (htp.titanium && diff >= this.player.titaniumValue) {
           this.warning = 'You cannot overspend titanium';
           return;
@@ -342,12 +345,12 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
 
       const showAlert = PreferencesManager.loadValue('show_alerts') === '1';
 
-      if (totalSpentAmt > this.getCardCost() && showAlert) {
-        const diff = totalSpentAmt - this.getCardCost();
+      if (totalSpentAmt > this.cost && showAlert) {
+        const diff = totalSpentAmt - this.cost;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' MC')) {
           this.onsave([[
-            this.card,
+            this.card.name,
             JSON.stringify(htp),
           ]]);
         } else {
@@ -356,7 +359,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
         }
       } else {
         this.onsave([[
-          this.card,
+          this.card.name,
           JSON.stringify(htp),
         ]]);
       }
@@ -364,14 +367,15 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ getTitle() }}</div>
+  <div v-if="showtitle === true">{{ translate(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
-    <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard.name" />
+    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>
 
   <section v-trim-whitespace>
+    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning !== undefined ? translate(this.card.warning) : '' }}</div>
 
     <h3 class="payments_title">How to pay?</h3>
 
@@ -432,4 +436,3 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
   </section>
 </div>`,
 });
-

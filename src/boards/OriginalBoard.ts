@@ -2,14 +2,17 @@ import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
-import {ISpace} from '../ISpace';
+import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
+import {SerializedBoard} from './SerializedBoard';
 
 export class OriginalBoard extends Board {
-  constructor(shuffleMapOption: boolean = false, seed: number = 0) {
+  private constructor(public spaces: Array<ISpace>) {
     super();
+  }
 
-    const builder = new BoardBuilder(seed);
+  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): OriginalBoard {
+    const builder = new BoardBuilder(seed, includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -37,14 +40,25 @@ export class OriginalBoard extends Board {
     // y=8
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
-    if (shuffleMapOption) {
+    if (shuffle) {
       builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
-    this.spaces = builder.build();
+    const spaces = builder.build();
+    return new OriginalBoard(spaces);
   }
+
+  public static deserialize(board: SerializedBoard, players: Array<Player>): OriginalBoard {
+    return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
+  }
+
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
+  }
+
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
+
   public canPlaceTile(space: ISpace): boolean {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }

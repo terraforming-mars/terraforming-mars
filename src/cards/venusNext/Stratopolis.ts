@@ -10,7 +10,7 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -38,7 +38,7 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
 
     public getResCards(player: Player): ICard[] {
       const resourceCards = player.getResourceCards(ResourceType.FLOATER);
-      return resourceCards.filter((card) => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0);
+      return resourceCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
     }
 
     public canAct(): boolean {

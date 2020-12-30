@@ -159,8 +159,6 @@ export const Board = Vue.component('board', {
   },
   template: `
     <div :class="getGameBoardClassName()">
-        <div class="seasonal-xmas-tree"></div>
-        <div class="seasonal-santa"></div>
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>

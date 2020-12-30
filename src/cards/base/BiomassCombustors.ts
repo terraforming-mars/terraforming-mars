@@ -13,7 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 export class BiomassCombustors implements IProjectCard {
   public cost = 4;
   public cardType = CardType.AUTOMATED;
-  public tags = [Tags.ENERGY, Tags.STEEL];
+  public tags = [Tags.ENERGY, Tags.BUILDING];
   public name = CardName.BIOMASS_COMBUSTORS;
   public canPlay(player: Player, game: Game): boolean {
     return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 1);

@@ -10,7 +10,7 @@ describe('CloudSocieties', function() {
   it('resolve play', function() {
     const card = new CloudSocieties();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player);
     const turmoil = Turmoil.newInstance(game);
     player.playedCards.push(new FloatingHabs());
     turmoil.chairman = player.id;

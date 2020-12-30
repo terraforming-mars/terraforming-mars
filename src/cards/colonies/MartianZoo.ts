@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MartianZoo implements IProjectCard, IResourceCard {
     public cost = 12;
-    public tags = [Tags.ANIMAL, Tags.STEEL];
+    public tags = [Tags.ANIMAL, Tags.BUILDING];
     public name = CardName.MARTIAN_ZOO;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.ANIMAL;

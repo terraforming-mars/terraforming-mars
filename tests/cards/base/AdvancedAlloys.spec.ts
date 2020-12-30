@@ -8,7 +8,7 @@ describe('AdvancedAlloys', function() {
     const card = new AdvancedAlloys();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, redPlayer], player);
     card.play(player);
     expect(player.getTitaniumValue(game)).to.eq(4);
     expect(player.getSteelValue(game)).to.eq(3);

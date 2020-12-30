@@ -4,7 +4,7 @@ import * as constants from '../src/constants';
 import {SpaceType} from '../src/SpaceType';
 import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
-import {ISpace} from '../src/ISpace';
+import {ISpace} from '../src/boards/ISpace';
 import {Color} from '../src/Color';
 import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
 

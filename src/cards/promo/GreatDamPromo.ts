@@ -7,7 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class GreatDamPromo implements IProjectCard {
     public cost = 15;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.GREAT_DAM_PROMO;
     public canPlay(player: Player, game: Game): boolean {

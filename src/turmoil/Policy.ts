@@ -1,7 +1,7 @@
 import {IProjectCard} from '../cards/IProjectCard';
 import {Game} from '../Game';
 import {OrOptions} from '../inputs/OrOptions';
-import {ISpace} from '../ISpace';
+import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 
 export type PolicyId = string;

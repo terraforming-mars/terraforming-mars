@@ -17,7 +17,7 @@ describe('WildlifeDome', function() {
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play: reds', function() {
@@ -25,7 +25,6 @@ describe('WildlifeDome', function() {
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     expect(card.canPlay(player, game)).is.not.true;
   });
-
 
   it('Should play: greens', function() {
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;

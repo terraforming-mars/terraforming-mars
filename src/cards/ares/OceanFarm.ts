@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {SpaceBonus} from '../../SpaceBonus';
@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanFarm implements IProjectCard {
   public cost = 15;
-  public tags = [Tags.PLANT, Tags.STEEL];
+  public tags = [Tags.PLANT, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_FARM;
 

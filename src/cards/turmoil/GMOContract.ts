@@ -13,7 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 
 export class GMOContract implements IProjectCard {
   public cost = 3;
-  public tags = [Tags.MICROBES, Tags.SCIENCE];
+  public tags = [Tags.MICROBE, Tags.SCIENCE];
   public name = CardName.GMO_CONTRACT;
   public cardType = CardType.ACTIVE;
 
@@ -25,7 +25,7 @@ export class GMOContract implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
-    const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
+    const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
     if (amount > 0) {
       game.defer(
         new DeferredAction(player, () => {

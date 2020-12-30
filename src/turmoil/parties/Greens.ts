@@ -7,11 +7,11 @@ import {Resources} from '../../Resources';
 import {Bonus} from '../Bonus';
 import {TileType} from '../../TileType';
 import {Policy} from '../Policy';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ICard} from '../../cards/ICard';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -36,7 +36,7 @@ export class GreensBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBES, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
+      const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBE, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
       player.setResource(Resources.MEGACREDITS, tagCount);
     });
   }
@@ -86,7 +86,7 @@ export class GreensPolicy03 implements Policy {
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBES];
+    const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
     player.setResource(Resources.MEGACREDITS, tagCount * 2);

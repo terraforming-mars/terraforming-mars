@@ -10,7 +10,7 @@ describe('CometForVenus', function() {
     const card2 = new AerialMappers();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = new Game('foobar', [player, player2], player);
+    const game = Game.newInstance('foobar', [player, player2], player);
 
     player2.megaCredits = 10;
     player2.playedCards.push(card2);

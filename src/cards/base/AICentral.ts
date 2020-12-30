@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class AICentral implements IActionCard, IProjectCard {
   public cost = 21;
-  public tags = [Tags.SCIENCE, Tags.STEEL];
+  public tags = [Tags.SCIENCE, Tags.BUILDING];
   public cardType = CardType.ACTIVE;
   public name = CardName.AI_CENTRAL;
   public canPlay(player: Player): boolean {

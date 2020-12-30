@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class EcologyResearch implements IProjectCard {
     public cost = 21;
-    public tags = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBE];
     public name = CardName.ECOLOGY_RESEARCH;
     public cardType = CardType.AUTOMATED;
 

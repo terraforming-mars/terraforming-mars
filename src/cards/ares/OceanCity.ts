@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {TileType} from '../../TileType';
@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanCity implements IProjectCard {
   public cost = 18;
-  public tags = [Tags.CITY, Tags.STEEL];
+  public tags = [Tags.CITY, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_CITY;
 

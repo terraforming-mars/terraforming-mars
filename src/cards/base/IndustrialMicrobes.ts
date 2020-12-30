@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialMicrobes implements IProjectCard {
     public cost = 12;
-    public tags = [Tags.MICROBES, Tags.STEEL];
+    public tags = [Tags.MICROBE, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.INDUSTRIAL_MICROBES;
 

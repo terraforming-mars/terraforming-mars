@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {SpaceType} from '../../SpaceType';
 import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
@@ -17,7 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class ProtectedValley implements IProjectCard {
     public cost = 23;
     public cardType = CardType.AUTOMATED;
-    public tags = [Tags.PLANT, Tags.STEEL];
+    public tags = [Tags.PLANT, Tags.BUILDING];
     public name = CardName.PROTECTED_VALLEY;
     public hasRequirements = false;
 

@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class DesignedMicroOrganisms implements IProjectCard {
     public cost = 16;
-    public tags = [Tags.SCIENCE, Tags.MICROBES];
+    public tags = [Tags.SCIENCE, Tags.MICROBE];
     public name = CardName.DESIGNED_MICRO_ORGANISMS;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {

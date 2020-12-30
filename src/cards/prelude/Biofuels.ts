@@ -8,7 +8,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Biofuels extends PreludeCard implements IProjectCard {
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.BIOFUELS;
     public play(player: Player) {
       player.addProduction(Resources.ENERGY);

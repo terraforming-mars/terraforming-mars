@@ -8,7 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class EosChasmaNationalPark implements IProjectCard {
   public cost = 16;
   public nonNegativeVPIcon: boolean = true;
-  public tags = [Tags.PLANT, Tags.STEEL];
+  public tags = [Tags.PLANT, Tags.BUILDING];
   public name = CardName.EOS_CHASMA_NATIONAL_PARK;
   public cardType = CardType.AUTOMATED;
 

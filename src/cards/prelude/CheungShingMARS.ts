@@ -11,12 +11,12 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class CheungShingMARS implements CorporationCard {
     public name = CardName.CHEUNG_SHING_MARS;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 44;
     public cardType = CardType.CORPORATION;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-      return card.tags.filter((tag) => tag === Tags.STEEL).length * 2;
+      return card.tags.filter((tag) => tag === Tags.BUILDING).length * 2;
     }
 
     public play(player: Player) {

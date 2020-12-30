@@ -4,7 +4,7 @@ import {TileType} from '../../TileType';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class NaturalPreserve implements IProjectCard {
     public cost = 9;
-    public tags = [Tags.SCIENCE, Tags.STEEL];
+    public tags = [Tags.SCIENCE, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.NATURAL_PRESERVE;
     public adjacencyBonus?: IAdjacencyBonus = undefined;

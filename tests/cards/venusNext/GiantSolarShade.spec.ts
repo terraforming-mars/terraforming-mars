@@ -16,7 +16,9 @@ describe('GiantSolarShade', function() {
     card = new GiantSolarShade();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, redPlayer], player, setCustomGameOptions());
+
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {
@@ -29,8 +31,6 @@ describe('GiantSolarShade', function() {
   it('Should play with Reds and Dirigibles', function() {
     game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
-
-    const card = new GiantSolarShade();
     player.megaCredits = 27;
     expect(card.canPlay(player, game)).is.not.true;
     player.playedCards.push(new Dirigibles());

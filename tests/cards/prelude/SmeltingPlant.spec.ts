@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestingUtils';
 describe('SmeltingPlant', function() {
   it('Should play', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = new Game('bar', [player], player);
+    const game = Game.newInstance('bar', [player], player);
     const card = new SmeltingPlant();
     const action = card.play(player, game);
     expect(action).is.undefined;

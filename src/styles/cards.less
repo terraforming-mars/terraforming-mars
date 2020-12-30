@@ -43,6 +43,12 @@
     margin-bottom: 15px;
 }
 
+.card-warning {
+    font-size: 18px;
+    color: #d73a49;
+    padding: 10px 0;
+}
+
 .filterDiv {
     cursor: pointer;
     position: relative;
@@ -83,10 +89,10 @@ input[type="checkbox"]:checked + .filterDiv::after,
 input[type="radio"]:checked + .filterDiv::after {
     content: "✓";
     position: absolute;
-    width: 252px;
+    width: calc(100% + 12px);
     height: 50px;
     line-height: 50px;
-    top: 195px;
+    top: 50%;
     left: -6px;
     text-align: center;
     font-weight: bold;
@@ -486,6 +492,10 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .background-color-global {
     background: linear-gradient(-60deg, #43afa5 10%, #43afa588, #43afa5 90%);
+}
+
+.background-color-standard-project {
+    background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
 }
 
 /*********** Style the tags ************/
@@ -1206,28 +1216,6 @@ input[type="radio"]:checked + .filterDiv::after {
     box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
 }
 
-.card-colony {
-    background-color: rgb(44, 44, 44);
-    background: linear-gradient(
-        to right bottom,
-        black,
-        rgb(60, 60, 60),
-        rgb(150, 150, 150),
-        rgb(60, 60, 60),
-        rgb(60, 60, 60),
-        black
-    );
-    color: black;
-    font-size: 12px;
-    width: 44px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
-    border-radius: 13px;
-    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
-}
-
 /************** Extras ************/
 .red-arrow {
     background-image: url(./assets/misc/arrow.png);
@@ -1391,7 +1379,7 @@ input[type="radio"]:checked + .filterDiv::after {
   border-right: 4px solid #898989;
   z-index: 3;
 }
- 
+
 .card-resources-counter-number {
     z-index: 3;
     font-size: 22px;
@@ -1400,7 +1388,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-resources-counter-label {
     text-transform: uppercase;
 }
- 
+
 .polyphemos {
     font-family: Prototype;
     width: 180px;
@@ -1525,34 +1513,6 @@ input[type="radio"]:checked + .filterDiv::after {
     transform: scaleX(0.7);
     margin-left: -35px;
     margin-top: 15px;
-}
-
-.mons {
-    background: rgb(200, 110, 35);
-    color: white;
-    text-align: center;
-    width: 80px;
-    height: 75px;
-    box-shadow: 3px 3px 6px #444;
-}
-
-.mons0 {
-    font-size: 38px;
-    transform: scaleX(2.5);
-    margin-top: -15px;
-}
-
-.mons1 {
-    letter-spacing: 5px;
-    font-size: 20px;
-    margin-top: -25px;
-    margin-left: 5px;
-}
-.mons2 {
-    margin-top: -5px;
-    letter-spacing: 3px;
-    margin-left: 2px;
-    font-size: 7px;
 }
 
 .philares {
@@ -2230,7 +2190,7 @@ input[type="radio"]:checked + .filterDiv::after {
         }
     }
     .description-starting-resource{
-        text-align: center; 
+        text-align: center;
     }
     .description-effect {
         text-align: center;
@@ -2309,7 +2269,7 @@ input[type="radio"]:checked + .filterDiv::after {
           margin-bottom: -5px;
           vertical-align: text-bottom;
         }
-      
+
         .tile.trade {
             margin: 0 !important;
         }
@@ -2423,7 +2383,7 @@ input[type="radio"]:checked + .filterDiv::after {
     .herbivores-requirement{
         position: absolute;
         text-align: left;
-        margin-top: 42px; 
+        margin-top: 42px;
         width: 130px;
     }
     .production-box{
@@ -2662,7 +2622,6 @@ input[type="radio"]:checked + .filterDiv::after {
                     #e28c22
                 );
                 border-radius: 7px 7px 2px 2px;
-                text-transform: uppercase;
             }
             .prelude-label {
                 position: absolute;
@@ -2706,6 +2665,29 @@ input[type="radio"]:checked + .filterDiv::after {
         }
     }
 }
+
+.card-standard-project {
+    height: 140px;
+    width: 200px;
+    .card-content-wrapper {
+        .card-cost-and-tags {
+            position: absolute;
+            top: 6px;
+        }
+        .card-title-standard-project {
+            padding-top: 12px;
+            .background-color-standard-project {
+                border-radius: 16px 16px 30% 30% !important;
+            }
+        }
+        .card-content {
+            height: unset !important;
+            width: unset !important;
+            top: -10px;
+        }
+    }
+}
+
 .celestic-fix {
     position: absolute;
     top: 18px;

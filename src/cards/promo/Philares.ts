@@ -3,17 +3,20 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardMetadata} from '../CardMetadata';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Philares implements CorporationCard {
     public name = CardName.PHILARES;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public startingMegaCredits: number = 47;
     public cardType = CardType.CORPORATION;
 
@@ -88,19 +91,23 @@ export class Philares implements CorporationCard {
     }
 
     public onTilePlaced(player: Player, space: ISpace, game: Game): void {
+      const philaresPlayer = game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
+      if (philaresPlayer === undefined) {
+        console.error('Could not find Philares player');
+        return;
+      }
       if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
         let bonusResource: number = 0;
-        if (space.player !== undefined && space.player.isCorporation(CardName.PHILARES)) {
+        if (space.player !== undefined && space.player.id === philaresPlayer.id) {
           bonusResource = game.board.getAdjacentSpaces(space)
             .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
             .length;
-        } else if (space.player !== undefined && !space.player.isCorporation(CardName.PHILARES)) {
+        } else if (space.player !== undefined && space.player.id !== philaresPlayer.id) {
           bonusResource = game.board.getAdjacentSpaces(space)
-            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.isCorporation(CardName.PHILARES))
+            .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === philaresPlayer.id)
             .length;
         }
         if (bonusResource > 0) {
-          const philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CardName.PHILARES))[0];
           this.selectResources(philaresPlayer, game, bonusResource);
         }
       }
@@ -108,5 +115,20 @@ export class Philares implements CorporationCard {
 
     public play() {
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'R25',
+      description: 'You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.',
+      renderData: CardRenderer.builder((b) => {
+        b.megacredits(47).greenery().secondaryTag('oxygen');
+        b.corpBox('effect', (ce) => {
+          ce.effectBox((eb) => {
+            eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;
+            eb.emptyTile('normal', CardRenderItemSize.SMALL).startEffect.wild(1);
+            eb.description('Effect: Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].');
+          });
+        });
+      }),
     }
 }

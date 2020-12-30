@@ -12,7 +12,7 @@ describe('ImpactorSwarm', function() {
     card = new ImpactorSwarm();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play when no other player has plants', function() {

@@ -8,7 +8,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Mohole extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MOHOLE;
     public play(player: Player) {
       player.addProduction(Resources.HEAT, 3);

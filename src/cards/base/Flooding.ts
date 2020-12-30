@@ -6,7 +6,7 @@ import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';

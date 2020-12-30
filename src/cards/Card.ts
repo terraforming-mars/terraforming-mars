@@ -4,16 +4,6 @@ import {CardName} from '../CardName';
 import {CardType} from './CardType';
 import {Tags} from './Tags';
 
-/**
- * Utility function to pull the static instance
- * of a class.
- * @param {Card} instance of a card
- * @return {Object} static instance of card
- */
-function staticInstance(instance: Card) {
-  return Object.getPrototypeOf(instance).constructor;
-}
-
 interface StaticCardProperties {
   cardType: CardType;
   initialActionText?: string;
@@ -24,28 +14,33 @@ interface StaticCardProperties {
 }
 
 export abstract class Card {
+  private readonly properties: StaticCardProperties;
   constructor(properties: StaticCardProperties) {
-    const instance = staticInstance(this);
-    if (instance.properties === undefined) {
-      instance.properties = properties;
+    const staticInstance = Object.getPrototypeOf(this).constructor;
+    if (staticInstance.properties === undefined) {
+      if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
+        throw new Error('must define startingMegaCredits for corporation cards');
+      }
+      staticInstance.properties = properties;
     }
+    this.properties = staticInstance.properties;
   }
   public get cardType() {
-    return staticInstance(this).properties.cardType;
+    return this.properties.cardType;
   }
   public get initialActionText() {
-    return staticInstance(this).properties.initialActionText;
+    return this.properties.initialActionText;
   }
   public get metadata() {
-    return staticInstance(this).properties.metadata;
+    return this.properties.metadata;
   }
   public get name() {
-    return staticInstance(this).properties.name;
+    return this.properties.name;
   }
   public get startingMegaCredits() {
-    return staticInstance(this).properties.startingMegaCredits;
+    return this.properties.startingMegaCredits || 0;
   }
   public get tags() {
-    return staticInstance(this).properties.tags;
+    return this.properties.tags || [];
   }
 }

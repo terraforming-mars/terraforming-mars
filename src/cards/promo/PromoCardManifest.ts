@@ -89,7 +89,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SATURN_SURFING, Factory: SaturnSurfing},
   ],
 
-  projectCardsToRemove: [
+  cardsToRemove: [
     CardName.DEIMOS_DOWN,
     CardName.GREAT_DAM,
     CardName.MAGNETIC_FIELD_GENERATORS],

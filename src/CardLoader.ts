@@ -52,11 +52,11 @@ export class CardLoader {
     };
   }
 
-  private addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
-    const cardInstances = cards.cards
+  private addDeck<T extends CardTypes>(cards: Array<T>, deck: Deck<T>): void {
+    const cardInstances = deck.cards
       .filter(CardLoader.include(this.gameOptions))
       .map((cf) => new cf.Factory());
-    deck.push(...cardInstances);
+    cards.push(...cardInstances);
   }
 
   public getProjectCards() {
@@ -73,10 +73,16 @@ export class CardLoader {
   }
 
   private getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
-    const deck: Array<T> = [];
+    const cards: Array<T> = [];
     for (const manifest of this.manifests) {
-      this.addToDeck(deck, getDeck(manifest));
+      this.addDeck(cards, getDeck(manifest));
     }
-    return deck.filter((card) => this.gameOptions.cardsBlackList.includes(card.name) === false); ;
+    return cards.filter((card) => {
+      if (this.gameOptions.cardsBlackList.includes(card.name)) return false;
+      for (const manifest of this.manifests) {
+        if (manifest.cardsToRemove.includes(card.name)) return false;
+      }
+      return true;
+    });
   }
 }

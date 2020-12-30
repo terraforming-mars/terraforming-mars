@@ -1269,9 +1269,12 @@ export class Game implements ISerializable<SerializedGame> {
     } else if (parameter === GlobalParameter.TEMPERATURE) {
       currentLevel = this.getTemperature();
       playerRequirementsBonus *= 2;
-    } else { // parameter === GlobalParameter.VENUS
+    } else if (parameter === GlobalParameter.VENUS) {
       currentLevel = this.getVenusScaleLevel();
       playerRequirementsBonus *= 2;
+    } else {
+      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
+      return false;
     }
 
     if (max) {

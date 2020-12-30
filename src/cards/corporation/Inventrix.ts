@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
@@ -7,22 +8,29 @@ import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Inventrix implements CorporationCard {
-  public get name() {
-    return CardName.INVENTRIX;
-  }
-  public get tags() {
-    return [Tags.SCIENCE];
-  }
-  public get startingMegaCredits() {
-    return 45;
-  }
-  public get cardType() {
-    return CardType.CORPORATION;
-  }
-
-  public get initialActionText() {
-    return 'Draw 3 cards';
+export class Inventrix extends Card implements CorporationCard {
+  constructor() {
+    super({
+      name: CardName.INVENTRIX,
+      tags: [Tags.SCIENCE],
+      initialActionText: 'Draw 3 cards',
+      startingMegaCredits: 45,
+      cardType: CardType.CORPORATION,
+      metadata: {
+        cardNumber: 'R43',
+        description: 'As you first action in the game, draw 3 cards. Start with 45MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br;
+          b.megacredits(45).nbsp.cards(3);
+          b.corpBox('effect', (ce) => {
+            ce.effectBox((eb) => {
+              eb.plate('Global requirements').startEffect.text('+/- 2');
+              eb.description('Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.');
+            });
+          });
+        }),
+      },
+    });
   }
   public initialAction(player: Player, game: Game) {
     player.cardsInHand.push(
@@ -40,23 +48,6 @@ export class Inventrix implements CorporationCard {
   }
   public play() {
     return undefined;
-  }
-
-  public get metadata() {
-    return {
-      cardNumber: 'R43',
-      description: 'As you first action in the game, draw 3 cards. Start with 45MC.',
-      renderData: CardRenderer.builder((b) => {
-        b.br;
-        b.megacredits(45).nbsp.cards(3);
-        b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
-            eb.plate('Global requirements').startEffect.text('+/- 2');
-            eb.description('Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.');
-          });
-        });
-      }),
-    };
   }
 }
 

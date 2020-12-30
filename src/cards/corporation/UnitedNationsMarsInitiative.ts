@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {IActionCard} from '../ICard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
@@ -10,20 +11,30 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
-  public get name() {
-    return CardName.UNITED_NATIONS_MARS_INITIATIVE;
+export class UnitedNationsMarsInitiative extends Card implements IActionCard, CorporationCard {
+  constructor() {
+    super({
+      name: CardName.UNITED_NATIONS_MARS_INITIATIVE,
+      tags: [Tags.EARTH],
+      startingMegaCredits: 40,
+      cardType: CardType.CORPORATION,
+      metadata: {
+        cardNumber: 'R32',
+        description: 'You start with 40 MC.',
+        renderData: CardRenderer.builder((b) => {
+          // TODO(chosta): find a not so hacky solutions to spacing
+          b.br.br.br;
+          b.empty().nbsp.nbsp.nbsp.nbsp.megacredits(40);
+          b.corpBox('action', (ce) => {
+            ce.effectBox((eb) => {
+              eb.megacredits(3).startAction.tr(1).asterix();
+              eb.description('Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.');
+            });
+          });
+        }),
+      },
+    });
   }
-  public get tags() {
-    return [Tags.EARTH];
-  }
-  public get startingMegaCredits() {
-    return 40;
-  }
-  public get cardType() {
-    return CardType.CORPORATION;
-  }
-
   public play() {
     return undefined;
   }
@@ -41,22 +52,5 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
     player.megaCredits -= 3;
     player.increaseTerraformRating(game);
     return undefined;
-  }
-  public get metadata() {
-    return {
-      cardNumber: 'R32',
-      description: 'You start with 40 MC.',
-      renderData: CardRenderer.builder((b) => {
-        // TODO(chosta): find a not so hacky solutions to spacing
-        b.br.br.br;
-        b.empty().nbsp.nbsp.nbsp.nbsp.megacredits(40);
-        b.corpBox('action', (ce) => {
-          ce.effectBox((eb) => {
-            eb.megacredits(3).startAction.tr(1).asterix();
-            eb.description('Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.');
-          });
-        });
-      }),
-    };
   }
 }

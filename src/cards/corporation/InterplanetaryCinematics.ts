@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {IProjectCard} from '../IProjectCard';
@@ -7,20 +8,29 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class InterplanetaryCinematics implements CorporationCard {
-  public get name() {
-    return CardName.INTERPLANETARY_CINEMATICS;
+export class InterplanetaryCinematics extends Card implements CorporationCard {
+  constructor() {
+    super({
+      name: CardName.INTERPLANETARY_CINEMATICS,
+      tags: [Tags.BUILDING],
+      startingMegaCredits: 30,
+      cardType: CardType.CORPORATION,
+      metadata: {
+        cardNumber: 'R19',
+        description: 'You start with 20 steel and 30 MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br.br;
+          b.megacredits(30).nbsp.steel(20).digit;
+          b.corpBox('effect', (ce) => {
+            ce.effectBox((eb) => {
+              eb.event().played.startEffect.megacredits(2);
+              eb.description('Effect: Each time you play an event, you gain 2 MC.');
+            });
+          });
+        }),
+      },
+    });
   }
-  public get tags() {
-    return [Tags.BUILDING];
-  }
-  public get startingMegaCredits() {
-    return 30;
-  }
-  public get cardType() {
-    return CardType.CORPORATION;
-  }
-
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
     if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cardType === CardType.EVENT) {
       player.megaCredits += 2;
@@ -29,21 +39,5 @@ export class InterplanetaryCinematics implements CorporationCard {
   public play(player: Player) {
     player.steel = 20;
     return undefined;
-  }
-  public get metadata() {
-    return {
-      cardNumber: 'R19',
-      description: 'You start with 20 steel and 30 MC.',
-      renderData: CardRenderer.builder((b) => {
-        b.br.br.br;
-        b.megacredits(30).nbsp.steel(20).digit;
-        b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
-            eb.event().played.startEffect.megacredits(2);
-            eb.description('Effect: Each time you play an event, you gain 2 MC.');
-          });
-        });
-      }),
-    };
   }
 }

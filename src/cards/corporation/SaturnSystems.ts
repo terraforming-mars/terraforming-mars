@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -9,18 +10,28 @@ import {ICard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SaturnSystems implements CorporationCard {
-  public get name() {
-    return CardName.SATURN_SYSTEMS;
-  }
-  public get tags() {
-    return [Tags.JOVIAN];
-  }
-  public get startingMegaCredits() {
-    return 42;
-  }
-  public get cardType() {
-    return CardType.CORPORATION;
+export class SaturnSystems extends Card implements CorporationCard {
+  constructor() {
+    super({
+      name: CardName.SATURN_SYSTEMS,
+      tags: [Tags.JOVIAN],
+      startingMegaCredits: 42,
+      cardType: CardType.CORPORATION,
+      metadata: {
+        cardNumber: 'R03',
+        description: 'You start with 1 titanium production and 42 MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br;
+          b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(42);
+          b.corpBox('effect', (ce) => {
+            ce.effectBox((eb) => {
+              eb.jovian().played.any.startEffect.productionBox((pb) => pb.megacredits(1));
+              eb.description('Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.');
+            });
+          });
+        }),
+      },
+    });
   }
 
   public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
@@ -39,22 +50,5 @@ export class SaturnSystems implements CorporationCard {
     player.addProduction(Resources.TITANIUM);
     player.addProduction(Resources.MEGACREDITS);
     return undefined;
-  }
-
-  public get metadata() {
-    return {
-      cardNumber: 'R03',
-      description: 'You start with 1 titanium production and 42 MC.',
-      renderData: CardRenderer.builder((b) => {
-        b.br;
-        b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(42);
-        b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
-            eb.jovian().played.any.startEffect.productionBox((pb) => pb.megacredits(1));
-            eb.description('Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.');
-          });
-        });
-      }),
-    };
   }
 }

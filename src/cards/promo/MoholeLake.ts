@@ -41,14 +41,17 @@ export class MoholeLake implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    public canAct(player: Player): boolean {
-      const microbeCards = player.getResourceCards(ResourceType.MICROBE);
-      const animalCards = player.getResourceCards(ResourceType.ANIMAL);
-      return microbeCards.length > 0 || animalCards.length > 0;
+    public canAct(): boolean {
+      return true;
     }
 
     public action(player: Player, game: Game) {
       const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
+
+      if (availableCards.length === 0) {
+        return undefined;
+      }
+
       if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0]);
         LogHelper.logAddResource(game, player, availableCards[0], 1);

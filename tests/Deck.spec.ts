@@ -21,7 +21,4 @@ describe('Deck', function() {
   it('findCardByName: failure', function() {
     expect(deck.findByCardName('Ecological Zone')).is.undefined;
   });
-  it('shuffle', function() {
-    expect(deck.shuffled().cards).to.have.members(cards);
-  });
 });

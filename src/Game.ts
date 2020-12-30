@@ -7,7 +7,7 @@ import {BoardName} from './boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
-import {ClaimedMilestone} from './ClaimedMilestone';
+import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
@@ -18,7 +18,7 @@ import {Database} from './database/Database';
 import {Dealer} from './Dealer';
 import {Decks} from './Deck';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {FundedAward} from './FundedAward';
+import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
@@ -374,7 +374,7 @@ export class Game implements ISerializable<SerializedGame> {
       activePlayer: this.activePlayer,
       awards: this.awards,
       board: this.board.serialize(),
-      claimedMilestones: this.claimedMilestones,
+      claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),
@@ -383,7 +383,7 @@ export class Game implements ISerializable<SerializedGame> {
       draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
       first: this.first.id,
-      fundedAwards: this.fundedAwards,
+      fundedAwards: serializeFundedAwards(this.fundedAwards),
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -1642,48 +1642,29 @@ export class Game implements ISerializable<SerializedGame> {
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
 
-    game.milestones = [];
+    const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {
       ALL_MILESTONES.forEach((ms: IMilestone) => {
         if (ms.name === element.name) {
-          game.milestones.push(ms);
+          milestones.push(ms);
         }
       });
     });
 
-    // Rebuild claimed milestones
-    game.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone) => {
-      const player: Player = game.getPlayerById(element.player.id);
-      const milestone: IMilestone | undefined = game.milestones.find((milestone) => milestone.name === element.milestone.name);
-      if (milestone === undefined) {
-        throw new Error(`Milestone ${element.milestone.name} not found when rebuilding Claimed Milestone`);
-      }
-      return {
-        player: player,
-        milestone: milestone,
-      };
-    });
+    game.milestones = milestones;
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
-    game.awards = [];
+    const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
-          game.awards.push(award);
+          awards.push(award);
         }
       });
     });
 
-    game.fundedAwards = d.fundedAwards.map((element: FundedAward) => {
-      const player: Player = game.getPlayerById(element.player.id);
-      const award: IAward | undefined = game.awards.find((award) => award.name === element.award.name);
-      if (award === undefined) {
-        throw new Error(`Award ${element.award.name} not found when rebuilding Claimed Award`);
-      }
-      return {
-        player: player,
-        award: award,
-      };
-    });
+    game.awards = awards;
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;

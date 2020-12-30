@@ -30,20 +30,20 @@ export function deserializeFundedAwards(
   return fundedAwards.map((element: SerializedFundedAward) => {
     const awardName = element.award?.name !== undefined ? element.award.name : element.name;
     if (awardName === undefined) {
-      throw new Error('Milestone name not found');
+      throw new Error('Award name not found');
     }
     const award: IAward | undefined = awards.find((award) => award.name === awardName);
     if (award === undefined) {
-      throw new Error(`Award ${awardName} not found when rebuilding Claimed Milestone`);
+      throw new Error(`Award ${awardName} not found when rebuilding Funded Award`);
     }
 
     const playerId = element.player?.id !== undefined ? element.player.id : element.playerId;
     if (playerId === undefined) {
-      throw new Error(`Player ID not found when rebuilding claimed milestone ${awardName}`);
+      throw new Error(`Player ID not found when rebuilding Funded Award ${awardName}`);
     }
     const player = players.find((player) => player.id === playerId);
     if (player === undefined) {
-      throw new Error(`Player ${playerId} not found when rebuilding claimed milestone ${awardName}`);
+      throw new Error(`Player ${playerId} not found when rebuilding Funded Award ${awardName}`);
     }
 
     return {

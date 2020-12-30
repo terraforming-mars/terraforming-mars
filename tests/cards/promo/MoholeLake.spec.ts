@@ -34,7 +34,7 @@ describe('MoholeLake', function() {
 
   it('Can act - no target', function() {
     expect(card.canAct()).is.true;
-    card.action(player, game);
+    expect(card.action(player, game)).is.undefined;
   });
 
   it('Can act - single target', function() {

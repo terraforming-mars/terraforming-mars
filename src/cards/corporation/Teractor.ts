@@ -11,10 +11,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Teractor extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.TERACTOR,
       tags: [Tags.EARTH],
       startingMegaCredits: 60,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R30',
         description: 'You start with 60 MC.',

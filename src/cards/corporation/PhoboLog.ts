@@ -11,10 +11,11 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 export class PhoboLog extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.PHOBOLOG,
       tags: [Tags.SPACE],
       startingMegaCredits: 23,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R09',
         description: 'You start with 10 titanium and 23 MC.',

@@ -10,10 +10,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class EcoLine extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.ECOLINE,
       tags: [Tags.PLANT],
       startingMegaCredits: 36,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R17',
         description: 'You start with 2 plant production, 3 plants, and 36 MC.',

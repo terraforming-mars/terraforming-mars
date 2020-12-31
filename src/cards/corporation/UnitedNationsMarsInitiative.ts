@@ -14,10 +14,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MARS_INITIATIVE,
       tags: [Tags.EARTH],
       startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R32',
         description: 'You start with 40 MC.',

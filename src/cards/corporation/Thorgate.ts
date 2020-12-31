@@ -12,10 +12,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Thorgate extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.THORGATE,
       tags: [Tags.ENERGY],
       startingMegaCredits: 48,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R13',
         description: 'You start with 1 energy production and 48 MC.',

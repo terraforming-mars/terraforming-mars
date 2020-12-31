@@ -12,10 +12,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class MiningGuild extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.MINING_GUILD,
       tags: [Tags.BUILDING, Tags.BUILDING],
       startingMegaCredits: 30,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R24',
         description: 'You start with 30 MC, 5 steel and 1 steel production.',

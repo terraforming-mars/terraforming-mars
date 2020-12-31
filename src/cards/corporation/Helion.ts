@@ -10,10 +10,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Helion extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.HELION,
       tags: [Tags.SPACE],
       startingMegaCredits: 42,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R18',
         description: 'You start with 3 heat production and 42 MC.',

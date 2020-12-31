@@ -14,6 +14,7 @@ export class CrediCor extends Card implements CorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.CREDICOR,
       startingMegaCredits: 57,
+
       metadata: {
         cardNumber: 'R08',
         description: 'You start with 57 MC.',
@@ -30,15 +31,16 @@ export class CrediCor extends Card implements CorporationCard {
       },
     });
   }
-  public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+  private effect(player: Player, card: IProjectCard | StandardProjectCard): void {
     if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cost >= 20) {
       player.megaCredits += 4;
     }
   }
+  public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+    this.effect(player, card);
+  }
   public onStandardProject(player: Player, project: StandardProjectCard) {
-    if (project.cost >= 20) {
-      player.megaCredits += 4;
-    }
+    this.effect(player, project);
   }
   public play() {
     return undefined;

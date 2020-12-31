@@ -16,11 +16,12 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 export class TharsisRepublic extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.THARSIS_REPUBLIC,
       tags: [Tags.BUILDING],
-      startingMegaCredits: 40,
-      cardType: CardType.CORPORATION,
       initialActionText: 'Place a city tile',
+      startingMegaCredits: 40,
+
       metadata: {
         cardNumber: 'R31',
         description: 'You start with 40 MC. As your first action in the game,place a city tile.',

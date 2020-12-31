@@ -38,9 +38,9 @@ export abstract class Card {
     return this.properties.name;
   }
   public get startingMegaCredits() {
-    return this.properties.startingMegaCredits || 0;
+    return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;
   }
   public get tags() {
-    return this.properties.tags || [];
+    return this.properties.tags === undefined ? [] : this.properties.tags;
   }
 }

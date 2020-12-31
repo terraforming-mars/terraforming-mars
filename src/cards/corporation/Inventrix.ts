@@ -11,11 +11,12 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Inventrix extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.INVENTRIX,
       tags: [Tags.SCIENCE],
       initialActionText: 'Draw 3 cards',
       startingMegaCredits: 45,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R43',
         description: 'As you first action in the game, draw 3 cards. Start with 45MC.',

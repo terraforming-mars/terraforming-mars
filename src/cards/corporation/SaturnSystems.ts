@@ -13,10 +13,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class SaturnSystems extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.SATURN_SYSTEMS,
       tags: [Tags.JOVIAN],
       startingMegaCredits: 42,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R03',
         description: 'You start with 1 titanium production and 42 MC.',

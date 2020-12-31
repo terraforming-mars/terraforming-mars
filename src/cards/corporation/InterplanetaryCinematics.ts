@@ -11,10 +11,11 @@ import {CardRenderer} from '../render/CardRenderer';
 export class InterplanetaryCinematics extends Card implements CorporationCard {
   constructor() {
     super({
+      cardType: CardType.CORPORATION,
       name: CardName.INTERPLANETARY_CINEMATICS,
       tags: [Tags.BUILDING],
       startingMegaCredits: 30,
-      cardType: CardType.CORPORATION,
+
       metadata: {
         cardNumber: 'R19',
         description: 'You start with 20 steel and 30 MC.',

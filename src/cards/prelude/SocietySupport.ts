@@ -1,12 +1,11 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SocietySupport extends PreludeCard implements IProjectCard {
+export class SocietySupport extends PreludeCard {
     public tags = [];
     public name = CardName.SOCIETY_SUPPORT;
     public play(player: Player) {

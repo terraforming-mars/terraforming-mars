@@ -2,13 +2,12 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class UNMIContractor extends PreludeCard implements IProjectCard {
+export class UNMIContractor extends PreludeCard {
     public tags = [Tags.EARTH];
     public name = CardName.UNMI_CONTRACTOR;
 

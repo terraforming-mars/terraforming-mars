@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -16,7 +15,6 @@ import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {Decks} from './Deck';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
@@ -220,6 +218,7 @@ export class Game implements ISerializable<SerializedGame> {
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
 
@@ -283,7 +282,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
       const customCorporationCards: CorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
-        const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp);
+        const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
       }
       corporationCards = customCorporationCards;
@@ -353,16 +352,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public save(): void {
-    /*
-      * Because we save at the start of a player's takeAction, we need to
-      * save the game in the database before increasing lastSaveId so that
-      * reloading it doesn't create another new save on top of it, like this:
-      *
-      * increment -> save -> reload -> increment -> save
-      *
-      */
-    Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-    this.lastSaveId++;
+    Database.getInstance().saveGame(this);
   }
 
   public toJSON(): string {

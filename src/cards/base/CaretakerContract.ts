@@ -25,7 +25,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-      const hasEnoughHeat = player.canSpendHeat(8);
+      const hasEnoughHeat = player.availableHeat >= 8;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
         return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughHeat;

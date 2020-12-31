@@ -1315,9 +1315,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public canSpendHeat(amount: number) {
-    return this.heat >= amount ||
-      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.getResourcesOnCorporation() * 2) + this.heat >= amount);
+  public get availableHeat(): number {
+    return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
@@ -1803,7 +1802,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    const hasEnoughHeat = this.canSpendHeat(constants.HEAT_FOR_TEMPERATURE);
+    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
 
     const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 

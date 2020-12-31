@@ -27,7 +27,7 @@ export class LocalHeatTrapping implements IProjectCard {
         return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this));
       }
 
-      return player.canSpendHeat(requiredHeatAmt);
+      return player.availableHeat >= requiredHeatAmt;
     }
     public play(player: Player, game: Game) {
       const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);

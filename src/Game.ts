@@ -1303,12 +1303,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
-      (space) => space.tile !== undefined &&
-                ((space.tile.tileType === TileType.CITY &&
-                space.spaceType !== SpaceType.COLONY) ||
-                space.tile.tileType === TileType.CAPITAL ||
-                space.tile.tileType === TileType.OCEAN_CITY),
-    ).length;
+      (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
   }
   public getCitiesInPlay(): number {
     return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;

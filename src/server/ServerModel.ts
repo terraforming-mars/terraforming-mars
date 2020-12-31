@@ -6,6 +6,7 @@ import {Game} from '../Game';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
+import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {OrOptions} from '../inputs/OrOptions';
 import {Player} from '../Player';
@@ -19,7 +20,7 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForCard} from '../inputs/SelectHowToPayForCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceModel} from '../models/SpaceModel';
+import {SpaceHighlight, SpaceModel} from '../models/SpaceModel';
 import {TileType} from '../TileType';
 import {Phase} from '../Phase';
 import {Resources} from '../Resources';
@@ -86,7 +87,7 @@ export class Server {
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       coloniesExtension: game.gameOptions.coloniesExtension,
       players: getPlayers(game.getPlayers(), game),
-      spaces: getSpaces(game.board.spaces),
+      spaces: getSpaces(game.board),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
@@ -562,8 +563,17 @@ function getColor(space: ISpace): Color | undefined {
   return undefined;
 }
 
-function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
-  return spaces.map((space) => {
+function getSpaces(board: Board): Array<SpaceModel> {
+  const volcanicSpaceIds = board.getVolcanicSpaceIds();
+  const noctisCitySpaceIds = board.getNoctisCitySpaceIds();
+
+  return board.spaces.map((space) => {
+    let highlight: SpaceHighlight = undefined;
+    if (volcanicSpaceIds.includes(space.id)) {
+      highlight = 'volcanic';
+    } else if (noctisCitySpaceIds.includes(space.id)) {
+      highlight = 'noctis';
+    }
     return {
       x: space.x,
       y: space.y,
@@ -572,6 +582,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
       spaceType: space.spaceType,
       tileType: space.tile && space.tile.tileType,
       color: getColor(space),
+      highlight: highlight,
     };
   });
 }

@@ -5,6 +5,7 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class DustSeals implements IProjectCard {
     public cost = 2;
@@ -12,7 +13,7 @@ export class DustSeals implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.DUST_SEALS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() <= 3 + player.getRequirementsBonus(game);
+      return game.checkMaxRequirements(player, GlobalParameter.OCEANS, 3);
     }
     public play() {
       return undefined;

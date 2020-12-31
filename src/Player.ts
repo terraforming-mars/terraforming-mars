@@ -2085,7 +2085,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
     if (d.pickedCorporationCard !== undefined) {
-      player.pickedCorporationCard = cardFinder.getCorporationCardByName(typeof d.pickedCorporationCard === 'string' ? d.pickedCorporationCard : d.pickedCorporationCard.name);
+      player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
     }
 
     // Rebuild corporation card

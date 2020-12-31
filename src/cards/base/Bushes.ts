@@ -9,6 +9,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Bushes implements IProjectCard {
     public cost = 10;
@@ -16,9 +17,7 @@ export class Bushes implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.BUSHES;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -10 - (
-        2 * player.getRequirementsBonus(game)
-      );
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -10);
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS, 2);

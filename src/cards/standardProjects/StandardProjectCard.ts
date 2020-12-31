@@ -11,6 +11,7 @@ import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {CardMetadata} from '../CardMetadata';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 
@@ -20,6 +21,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     public tags = [];
     public abstract name: CardName;
     public abstract cost: number;
+    public abstract metadata: CardMetadata;
     protected discount(_player: Player) {
       return 0;
     }

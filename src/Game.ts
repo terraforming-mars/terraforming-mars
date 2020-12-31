@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -16,7 +15,6 @@ import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {Decks} from './Deck';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward} from './FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
@@ -59,6 +57,7 @@ import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
+import {GlobalParameter} from './GlobalParameter';
 
 export type GameId = string;
 
@@ -220,6 +219,7 @@ export class Game implements ISerializable<SerializedGame> {
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
 
@@ -283,7 +283,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
       const customCorporationCards: CorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
-        const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp);
+        const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
       }
       corporationCards = customCorporationCards;
@@ -1238,6 +1238,40 @@ export class Game implements ISerializable<SerializedGame> {
 
   public getTemperature(): number {
     return this.temperature;
+  }
+
+  public checkMinRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level);
+  }
+
+  public checkMaxRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level, true);
+  }
+
+  private checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+    let currentLevel: number;
+    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+
+    if (parameter === GlobalParameter.OCEANS) {
+      currentLevel = this.board.getOceansOnBoard();
+    } else if (parameter === GlobalParameter.OXYGEN) {
+      currentLevel = this.getOxygenLevel();
+    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      currentLevel = this.getTemperature();
+      playerRequirementsBonus *= 2;
+    } else if (parameter === GlobalParameter.VENUS) {
+      currentLevel = this.getVenusScaleLevel();
+      playerRequirementsBonus *= 2;
+    } else {
+      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
+      return false;
+    }
+
+    if (max) {
+      return currentLevel <= level + playerRequirementsBonus;
+    } else {
+      return currentLevel >= level - playerRequirementsBonus;
+    }
   }
 
   public getGeneration(): number {

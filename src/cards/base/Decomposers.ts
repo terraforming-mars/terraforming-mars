@@ -10,6 +10,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Decomposers implements IProjectCard, IResourceCard {
     public cost = 5;
@@ -19,7 +20,7 @@ export class Decomposers implements IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
     public name = CardName.DECOMPOSERS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 3);
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);

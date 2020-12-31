@@ -135,15 +135,6 @@ describe('Player', function() {
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);
   });
-  it('backward compatible deserialization for pickedCorporationCard', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const json = player.serialize();
-    json.pickedCorporationCard = new SaturnSystems();
-    const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
-    expect(s.pickedCorporationCard).to.deep.eq(JSON.parse(JSON.stringify(new SaturnSystems())));
-    const p = Player.deserialize(s);
-    expect(p.pickedCorporationCard?.name).eq('Saturn Systems');
-  });
   it('forward serialization for pickedCorporationCard', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.pickedCorporationCard = new SaturnSystems();

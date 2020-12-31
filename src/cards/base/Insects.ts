@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Insects implements IProjectCard {
     public cost = 9;
@@ -15,7 +16,7 @@ export class Insects implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.INSECTS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6);
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT));

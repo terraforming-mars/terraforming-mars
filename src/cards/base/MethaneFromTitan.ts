@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class MethaneFromTitan implements IProjectCard {
     public cost = 28;
@@ -15,7 +16,7 @@ export class MethaneFromTitan implements IProjectCard {
     public name = CardName.METHANE_FROM_TITAN;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 2 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 2);
     }
     public play(player: Player) {
       player.addProduction(Resources.HEAT, 2);

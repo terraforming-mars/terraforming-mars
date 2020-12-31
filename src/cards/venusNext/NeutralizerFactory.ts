@@ -10,6 +10,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class NeutralizerFactory implements IProjectCard {
     public cost = 7;
@@ -18,7 +19,7 @@ export class NeutralizerFactory implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-      const venusRequirementMet = game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));
+      const venusRequirementMet = game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
         return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, false, true) && venusRequirementMet;
       }

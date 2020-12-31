@@ -1,13 +1,12 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AlliedBanks extends PreludeCard implements IProjectCard {
+export class AlliedBanks extends PreludeCard {
     public tags = [Tags.EARTH];
     public name = CardName.ALLIED_BANKS;
 

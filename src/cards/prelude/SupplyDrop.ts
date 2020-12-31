@@ -1,11 +1,10 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SupplyDrop extends PreludeCard implements IProjectCard {
+export class SupplyDrop extends PreludeCard {
     public tags = [];
     public name = CardName.SUPPLY_DROP;
 

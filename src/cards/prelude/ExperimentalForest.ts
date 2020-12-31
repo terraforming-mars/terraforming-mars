@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
@@ -10,7 +9,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class ExperimentalForest extends PreludeCard implements IProjectCard {
+export class ExperimentalForest extends PreludeCard {
     public tags = [Tags.PLANT];
     public name = CardName.EXPERIMENTAL_FOREST
 

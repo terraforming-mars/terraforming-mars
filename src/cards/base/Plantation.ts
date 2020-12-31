@@ -12,6 +12,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Plantation implements IProjectCard {
     public cost = 15;
@@ -41,7 +42,7 @@ export class Plantation implements IProjectCard {
       cardNumber: '193',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.greenery().secondaryTag('oxygen');
+        b.greenery().secondaryTag(AltSecondaryTag.OXYGEN);
       }),
       description: 'Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.',
     }

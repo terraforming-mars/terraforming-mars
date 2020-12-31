@@ -32,7 +32,6 @@
 	font-size: 10px;
 	font-weight: bold;
 	fill: white;
-	fill-opacity: 0.5;
 	pointer-events: none;
 }
 
@@ -212,6 +211,7 @@
 	width: 46px;
 	height: 51px;
 	position: absolute;
+	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 
 	.board-space-text {
 		font-size: 11px;
@@ -251,6 +251,15 @@
 
 .board-space-type-land {
 	background: url(assets/hex_white.png) no-repeat;
+}
+
+.board-space-type-land-volcanic {
+	background-image: url(assets/hex_volcanic.png);
+	background-color: #8305;
+}
+
+.board-space-type-land-noctis {
+	background-color: #fff6;
 }
 
 .board-space-type-ocean {

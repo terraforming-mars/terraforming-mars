@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Lichen implements IProjectCard {
     public cost = 7;
@@ -15,7 +16,7 @@ export class Lichen implements IProjectCard {
     public name = CardName.LICHEN;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -24 - (2 * player.getRequirementsBonus(game));
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -24);
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS);

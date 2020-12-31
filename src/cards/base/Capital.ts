@@ -16,6 +16,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Capital implements IProjectCard {
     public cost = 26;
@@ -26,7 +27,7 @@ export class Capital implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
-        game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
+        game.checkMinRequirements(player, GlobalParameter.OCEANS, 4) &&
         game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public getVictoryPoints(_player: Player, game: Game) {

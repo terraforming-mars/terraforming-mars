@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost = 17;
@@ -19,7 +20,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
-        game.getOxygenLevel() <= 8 + player.getRequirementsBonus(game);
+        game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 8);
     }
     public canAct(player: Player): boolean {
       return player.plants > 0 || player.steel > 0;

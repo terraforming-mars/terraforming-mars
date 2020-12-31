@@ -15,6 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Herbivores implements IProjectCard, IResourceCard {
     public cost = 12;
@@ -25,7 +26,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 8) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public getVictoryPoints(): number {

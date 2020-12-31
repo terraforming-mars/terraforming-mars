@@ -12,6 +12,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost = 3;
@@ -19,9 +20,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
     public cardType = CardType.ACTIVE;
     public name = CardName.CARETAKER_CONTRACT;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= 0 - (
-        2 * player.getRequirementsBonus(game)
-      );
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 0);
     }
     public play() {
       return undefined;

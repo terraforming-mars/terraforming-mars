@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class DomedCrater implements IProjectCard {
     public cost = 24;
@@ -19,7 +20,7 @@ export class DomedCrater implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
-        game.getOxygenLevel() <= 7 + player.getRequirementsBonus(game) &&
+        game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 7) &&
         game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public play(player: Player, game: Game) {

@@ -12,6 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost = 16;
@@ -21,9 +22,7 @@ export class EosChasmaNationalPark implements IProjectCard {
   public cardType = CardType.AUTOMATED;
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.getTemperature() >= -12 - (
-      2 * player.getRequirementsBonus(game)
-    );
+    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
 
   public play(player: Player, game: Game) {

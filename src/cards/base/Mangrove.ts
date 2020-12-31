@@ -14,6 +14,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Mangrove implements IProjectCard {
     public cost = 12;
@@ -22,7 +23,7 @@ export class Mangrove implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-      const meetsTemperatureRequirements = game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));
+      const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 4);
       const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {

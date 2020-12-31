@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ArchaeBacteria implements IProjectCard {
   public cost = 6;
@@ -15,7 +16,7 @@ export class ArchaeBacteria implements IProjectCard {
   public name = CardName.ARCHAEBACTERIA;
   public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {
-    return game.getTemperature() <= -18 + player.getRequirementsBonus(game) * 2;
+    return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -18);
   }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS);

@@ -14,6 +14,7 @@ import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost = 13;
@@ -21,9 +22,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cardType = CardType.ACTIVE;
     public name = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() <= -10 + (
-        2 * player.getRequirementsBonus(game)
-      );
+      return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -10);
     }
     public play() {
       return undefined;

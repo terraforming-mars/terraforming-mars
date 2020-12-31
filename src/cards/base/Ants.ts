@@ -12,6 +12,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public cost = 9;
@@ -22,7 +23,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
   public cardType = CardType.ACTIVE;
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
+    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
   }
 
   public getVictoryPoints(): number {

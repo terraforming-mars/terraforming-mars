@@ -11,6 +11,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType = CardType.EVENT;
@@ -19,7 +20,7 @@ export class PermafrostExtraction implements IProjectCard {
     public name = CardName.PERMAFROST_EXTRACTION;
 
     public canPlay(player: Player, game: Game): boolean {
-      const meetsTemperatureRequirements = game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));
+      const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -8);
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {

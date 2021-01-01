@@ -10,6 +10,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class IceCapMelting implements IProjectCard {
     public cost = 5;
@@ -17,7 +18,7 @@ export class IceCapMelting implements IProjectCard {
     public tags = [];
     public name = CardName.ICE_CAP_MELTING;
     public canPlay(player: Player, game: Game): boolean {
-      const meetsTemperatureRequirements = game.getTemperature() >= 2 - (2 * player.getRequirementsBonus(game));
+      const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 2);
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {

@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class IshtarMining implements IProjectCard {
     public cost = 5;
@@ -15,7 +16,7 @@ export class IshtarMining implements IProjectCard {
     public name = CardName.ISHTAR_MINING;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 8 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 8);
     }
     public play(player: Player) {
       player.addProduction(Resources.TITANIUM);

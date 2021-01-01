@@ -12,6 +12,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class VenusMagnetizer implements IActionCard, IProjectCard {
     public cost = 7;
@@ -20,7 +21,7 @@ export class VenusMagnetizer implements IActionCard, IProjectCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
     }
     public play() {
       return undefined;

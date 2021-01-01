@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Shuttles implements IProjectCard {
     public cost = 10;
@@ -15,7 +16,7 @@ export class Shuttles implements IProjectCard {
     public cardType = CardType.ACTIVE;
     public name = CardName.SHUTTLES;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1;
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 5) && player.getProduction(Resources.ENERGY) >= 1;
     }
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
       if (card.tags.indexOf(Tags.SPACE) !== -1) {

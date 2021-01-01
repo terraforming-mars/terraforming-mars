@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class StratosphericBirds implements IActionCard, IProjectCard, IResourceCard {
     public cost = 12;
@@ -24,7 +25,7 @@ export class StratosphericBirds implements IActionCard, IProjectCard, IResourceC
       const cardsWithFloater = player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER);
       if (cardsWithFloater.length === 0) return false;
 
-      const meetsVenusRequirements = game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
+      const meetsVenusRequirements = game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
 
       if (cardsWithFloater.length > 1) {
         return meetsVenusRequirements;

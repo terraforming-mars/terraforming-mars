@@ -8,6 +8,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Zeppelins implements IProjectCard {
     public cost = 13;
@@ -15,7 +16,7 @@ export class Zeppelins implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.ZEPPELINS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 5);
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS, game.getCitiesInPlayOnMars());

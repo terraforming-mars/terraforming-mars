@@ -8,6 +8,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class CloudSeeding implements IProjectCard {
     public cost = 11;
@@ -17,7 +18,7 @@ export class CloudSeeding implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.MEGACREDITS) > -5 &&
-        game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) &&
+        game.checkMinRequirements(player, GlobalParameter.OCEANS, 3) &&
         game.someoneHasResourceProduction(Resources.HEAT, 1);
     }
 

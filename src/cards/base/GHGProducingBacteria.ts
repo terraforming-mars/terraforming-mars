@@ -14,6 +14,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
@@ -24,7 +25,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
     }
     public play() {
       return undefined;

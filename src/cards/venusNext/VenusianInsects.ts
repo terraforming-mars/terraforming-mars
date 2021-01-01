@@ -11,6 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard {
     public cost = 5;
@@ -20,7 +21,7 @@ export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
     }
     public play() {
       return undefined;

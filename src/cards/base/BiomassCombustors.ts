@@ -9,6 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class BiomassCombustors implements IProjectCard {
   public cost = 4;
@@ -16,7 +17,7 @@ export class BiomassCombustors implements IProjectCard {
   public tags = [Tags.ENERGY, Tags.BUILDING];
   public name = CardName.BIOMASS_COMBUSTORS;
   public canPlay(player: Player, game: Game): boolean {
-    return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public play(player: Player, game: Game) {

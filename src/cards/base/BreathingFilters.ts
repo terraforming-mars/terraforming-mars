@@ -6,6 +6,7 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class BreathingFilters implements IProjectCard {
   public cost = 11;
@@ -13,7 +14,7 @@ export class BreathingFilters implements IProjectCard {
   public name = CardName.BREATHING_FILTERS;
   public cardType = CardType.AUTOMATED;
   public canPlay(player: Player, game: Game): boolean {
-    return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);
+    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 7);
   }
   public play() {
     return undefined;

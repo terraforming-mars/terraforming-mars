@@ -8,6 +8,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class MartianSurvey implements IProjectCard {
     public cost = 9;
@@ -16,7 +17,7 @@ export class MartianSurvey implements IProjectCard {
     public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() <= 4 + player.getRequirementsBonus(game);
+      return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
     }
 
     public play(player: Player, game: Game) {

@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class CupolaCity implements IProjectCard {
     public cost = 16;
@@ -18,7 +19,7 @@ export class CupolaCity implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.CUPOLA_CITY;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() <= 9 + player.getRequirementsBonus(game) &&
+      return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 9) &&
         player.getProduction(Resources.ENERGY) >= 1 &&
         game.board.getAvailableSpacesForCity(player).length > 0;
     }

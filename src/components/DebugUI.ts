@@ -23,6 +23,8 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
   manifest.preludeCards.cards.forEach((card) =>
     cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+  manifest.standardProjects.cards.forEach((card) =>
+    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
 });
 
 export interface DebugUIModel {

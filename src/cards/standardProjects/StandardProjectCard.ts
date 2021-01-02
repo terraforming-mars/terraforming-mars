@@ -31,8 +31,25 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
     }
     protected abstract actionEssence(player: Player, game: Game): void
 
+    public onStandardProject(player: Player): void {
+      if (player.corporationCard?.onStandardProject !== undefined) {
+        player.corporationCard.onStandardProject(player, this);
+      }
+
+      for (const playedCard of player.playedCards) {
+        if (playedCard.onStandardProject !== undefined) {
+          playedCard.onStandardProject(player, this);
+        }
+      }
+    }
+
     public canAct(player: Player, game: Game): boolean {
       return player.canAfford(this.cost - this.discount(player), game);
+    }
+
+    protected projectPlayed(player: Player, game: Game) {
+      game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+      this.onStandardProject(player);
     }
 
     public action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
@@ -46,10 +63,7 @@ export abstract class StandardProjectCard implements IActionCard, ICard {
           this.actionEssence(player, game);
         },
       ));
-
-      game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
-      player.onStandardProject(this);
-
+      this.projectPlayed(player, game);
       return undefined;
     }
 }

@@ -564,6 +564,7 @@ function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void 
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
+Database.getInstance();
 console.log('version 0.X');
 
 server.listen(process.env.PORT || 8080);

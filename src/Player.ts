@@ -1881,7 +1881,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    // Add the standard projects
     this.addStandardProjects(game, action.options);
 
     action.options.push(

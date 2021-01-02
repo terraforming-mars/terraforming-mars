@@ -33,6 +33,7 @@ import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
+import {SellPatents} from './cards/standardProjects/SellPatents';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -55,7 +56,6 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 
@@ -1303,18 +1303,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public onStandardProject(projectType: StandardProjectCard): void {
-    if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
-      this.corporationCard.onStandardProject(this, projectType);
-    }
-
-    for (const playedCard of this.playedCards) {
-      if (playedCard.onStandardProject !== undefined) {
-        playedCard.onStandardProject(this, projectType);
-      }
-    }
-  }
-
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
     const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
@@ -1666,6 +1654,18 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
+  private addStandardProjects(game: Game, options: Array<PlayerInput>) {
+    const standardProjects = this.getAvailableStandardProjects(game);
+    if (standardProjects.cards.length >= 1) {
+      options.push(standardProjects);
+    }
+
+    const sellPatents = new SellPatents();
+    if (sellPatents.canAct(this)) {
+      options.push(sellPatents.action(this, game));
+    }
+  }
+
   public takeAction(game: Game): void {
     if (this.usedUndo) {
       this.usedUndo = false;
@@ -1881,10 +1881,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjects = this.getAvailableStandardProjects(game);
-    if (standardProjects.cards.length >= 1) {
-      action.options.push(standardProjects);
-    }
+    // Add the standard projects
+    this.addStandardProjects(game, action.options);
 
     action.options.push(
       this.passOption(game),
@@ -2190,7 +2188,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Confirm',
       new CardLoader(game.gameOptions)
         .getStandardProjects().sort((a, b) => a.cost - b.cost)
-        .filter((card) => card.canAct(this, game)),
+        .filter((card) => card.canAct(this, game))
+        .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
       (card) => card[0].action(this, game),
     );
   }

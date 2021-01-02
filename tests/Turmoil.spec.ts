@@ -3,7 +3,6 @@ import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Game} from '../src/Game';
 import {Unity} from '../src/turmoil/parties/Unity';
-import {Greens} from '../src/turmoil/parties/Greens';
 import {MarsFirst} from '../src/turmoil/parties/MarsFirst';
 import {Phase} from '../src/Phase';
 import {OrOptions} from '../src/inputs/OrOptions';
@@ -42,6 +41,7 @@ describe('Turmoil', function() {
 
   it('Should initialize with right defaults', function() {
     expect(turmoil.chairman).to.eq('NEUTRAL');
+    expect(turmoil.rulingParty.name).to.eq(PartyName.GREENS);
   });
 
   it('Correctly send delegate', function() {
@@ -128,13 +128,6 @@ describe('Turmoil', function() {
     setRulingParty(turmoil, game, new Unity());
     game.phase = Phase.ACTION;
     expect(player.getTitaniumValue(game)).to.eq(4);
-  });
-
-  it('Check ruling policy: Greens', function() {
-    setRulingParty(turmoil, game, new Greens());
-    game.phase = Phase.ACTION;
-    game.addGreenery(player, '10');
-    expect(player.megaCredits).to.eq(4);
   });
 
   it('Check ruling policy: Mars First', function() {

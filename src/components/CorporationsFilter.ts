@@ -10,7 +10,8 @@ function corpCardNames(module: GameModule): Array<CardName> {
     console.log('manifest %s not found', manifest);
     return [];
   } else {
-    return manifest.corporationCards.cards.map((cf) => cf.cardName);
+    return manifest.corporationCards.cards.map((cf) => cf.cardName)
+      .filter((cardName) => cardName !== CardName.BEGINNER_CORPORATION);
   }
 }
 

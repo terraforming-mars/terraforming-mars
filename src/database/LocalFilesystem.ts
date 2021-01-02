@@ -61,6 +61,7 @@ export class Localfilesystem implements IDatabase {
   getGames(cb: (err: any, allGames: Array<GameId>) => void) {
     const gameIds: Array<GameId> = [];
 
+    // TODO(kberg): use readdir since this is expected to be async anyway.
     fs.readdirSync(dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
       if (!dirent.isFile()) {
         return;

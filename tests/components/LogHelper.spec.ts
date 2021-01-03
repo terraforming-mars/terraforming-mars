@@ -4,7 +4,7 @@ import {Algae} from '../../src/cards/base/Algae';
 import {Ants} from '../../src/cards/base/Ants';
 import {Birds} from '../../src/cards/base/Birds';
 import {Game} from '../../src/Game';
-import {LogHelper} from '../../src/components/LogHelper';
+import {LogHelper} from '../../src/LogHelper';
 import {TestPlayers} from '../TestingUtils';
 
 describe('LogHelper', function() {

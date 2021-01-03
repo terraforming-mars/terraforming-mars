@@ -1,5 +1,5 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';

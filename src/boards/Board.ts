@@ -33,7 +33,8 @@ export abstract class Board {
     return space;
   }
 
-  // getAdjacentSpaces expects an odd number of rows. If a funny shape appears, it can be addressed.
+  // Returns adjacent spaces in clockwise order starting from the top left.
+  // Expects an odd number of rows. If a funny shape appears, it can be addressed.
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
@@ -59,16 +60,21 @@ export abstract class Board {
         bottomRightSpace[0]++;
         topLeftSpace[0]--;
       }
-      return this.spaces.filter((adj) => {
-        return space !== adj && adj.spaceType !== SpaceType.COLONY && (
-          (adj.x === leftSpace[0] && adj.y === leftSpace[1]) ||
-          (adj.x === rightSpace[0] && adj.y === rightSpace[1]) ||
-          (adj.x === topLeftSpace[0] && adj.y === topLeftSpace[1]) ||
-          (adj.x === topRightSpace[0] && adj.y === topRightSpace[1]) ||
-          (adj.x === bottomLeftSpace[0] && adj.y === bottomLeftSpace[1]) ||
-          (adj.x === bottomRightSpace[0] && adj.y === bottomRightSpace[1])
-        );
-      });
+      const coordsInOrder = [
+        topLeftSpace,
+        topRightSpace,
+        rightSpace,
+        bottomRightSpace,
+        bottomLeftSpace,
+        leftSpace,
+      ];
+      // Make lists with 0 or 1 elements for all adjacent positions (depending on
+      // whether they exist), then concatenate. (Like flatMap in ES2019.)
+      const listsToConcat = coordsInOrder.map(([x, y]) => this.spaces.filter((adj) =>
+        space !== adj && adj.spaceType !== SpaceType.COLONY &&
+          adj.x === x && adj.y === y,
+      ));
+      return (<ISpace[]>[]).concat(...listsToConcat);
     }
     return [];
   }

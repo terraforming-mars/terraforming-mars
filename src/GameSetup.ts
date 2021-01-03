@@ -100,16 +100,11 @@ export class GameSetup {
     return new Player('neutral', Color.NEUTRAL, true, 0, gameId + '-neutral');
   }
 
-  public static setupNeutralPlayer(game: Game, rng: Random) {
+  public static setupNeutralPlayer(game: Game) {
     function getRandomForestSpace(spaces: Array<ISpace>): ISpace {
-      let idx = rng.nextInt(spaces.length);
-      for (let count = 0; count < spaces.length; count++) {
-        if (game.board.canPlaceTile(spaces[idx])) {
-          return spaces[idx];
-        }
-        idx = (idx + 1) % spaces.length;
-      }
-      throw new Error('Did not find space for forest');
+      let idx = game.discardForCost('greenery');
+      idx = Math.max(idx-1, 0); // Some cards cost zero.
+      return spaces[idx%spaces.length];
     };
 
     // Single player add neutral player
@@ -118,9 +113,12 @@ export class GameSetup {
 
     function placeCityAndForest(game: Game, direction: -1 | 1) {
       const board = game.board;
-      const citySpace = game.getSpaceByOffset(direction);
+      const citySpace = game.getSpaceByOffset(direction, 'city');
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
-      const adjacentSpaces = board.getAdjacentSpaces(citySpace);
+      const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
+      if (adjacentSpaces.length === 0) {
+        throw new Error('No space for forest');
+      }
       const forestSpace = getRandomForestSpace(adjacentSpaces);
       game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
     }

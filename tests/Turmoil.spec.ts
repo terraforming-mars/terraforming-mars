@@ -130,13 +130,6 @@ describe('Turmoil', function() {
     expect(player.getTitaniumValue(game)).to.eq(4);
   });
 
-  it('Check ruling policy: Mars First', function() {
-    setRulingParty(turmoil, game, new MarsFirst());
-    game.phase = Phase.ACTION;
-    game.addGreenery(player, '11');
-    expect(player.steel).to.eq(1);
-  });
-
   it('Does not give Mars First bonus for World Government terraforming', function() {
     setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;

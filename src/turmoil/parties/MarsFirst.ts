@@ -43,7 +43,7 @@ export class MarsFirstBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tileCount = game.board.spaces.filter((space) => {
-        space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
+        return space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
       }).length;
 
       player.setResource(Resources.MEGACREDITS, tileCount);

@@ -2,11 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TurmoilPolicy} from '../../src/turmoil/TurmoilPolicy';
-import {IParty} from '../../src/turmoil/parties/IParty';
-import {resetBoard, setCustomGameOptions, TestPlayers} from '../TestingUtils';
+import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
 import {Unity, UnityBonus01, UnityBonus02, UnityPolicy02, UnityPolicy03} from '../../src/turmoil/parties/Unity';
-import {Phase} from '../../src/Phase';
 import {SisterPlanetSupport} from '../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../src/cards/base/VestaShipyard';
 import {LocalShading} from '../../src/cards/venusNext/LocalShading';
@@ -43,12 +40,12 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 1: Your titanium resources are worth 1 MC extra', function() {
-    setRulingPartyAndRulingPolicy(turmoil, unity, unity.policies[0].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[0].id);
     expect(player.getTitaniumValue(game)).to.eq(4);
   });
 
   it('Ruling policy 2: Spend 4 MC to gain 2 titanium or add 2 floaters to any card', function() {
-    setRulingPartyAndRulingPolicy(turmoil, unity, unity.policies[1].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[1].id);
 
     const unityPolicy = new UnityPolicy02();
     player.megaCredits = 8;
@@ -72,7 +69,7 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 3: Spend 4 MC to draw a Space card', function() {
-    setRulingPartyAndRulingPolicy(turmoil, unity, unity.policies[2].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[2].id);
 
     const unityPolicy = new UnityPolicy03();
     player.megaCredits = 7;
@@ -88,15 +85,9 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 4: Cards with Space tags cost 2 MC less to play', function() {
-    setRulingPartyAndRulingPolicy(turmoil, unity, unity.policies[3].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[3].id);
 
     const card = new VestaShipyard();
     expect(player.getCardCost(game, card)).to.eq(card.cost - 2);
   });
-
-  function setRulingPartyAndRulingPolicy(turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
-    turmoil.rulingParty = party;
-    turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
-    game.phase = Phase.ACTION;
-  }
 });

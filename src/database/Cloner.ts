@@ -19,18 +19,19 @@ export class Cloner {
         return;
       }
 
-      const playerIds = players.map((player) => player.id);
-      Cloner.replacePlayers(serialized, playerIds);
+      const oldPlayerIds = serialized.players.map((player) => player.id);
+      const newPlayerIds = players.map((player) => player.id);
+      Cloner.replacePlayers(serialized, oldPlayerIds, newPlayerIds);
       serialized.id = id;
       serialized.players = players.map((player) => player.serialize());
-      serialized.first = serialized.players[firstPlayerIndex];
+      serialized.first = serialized.players[firstPlayerIndex].id;
 
       const game: Game = Game.deserialize(serialized);
       cb(undefined, game);
     });
   }
 
-  private static replacePlayers(obj: any, ids: Array<string>) {
+  private static replacePlayers(obj: any, oldPlayerIds:Array<string>, newPlayerIds: Array<string>) {
     if (obj === undefined || obj === null || typeof obj !== 'object') {
       return;
     }
@@ -38,12 +39,12 @@ export class Cloner {
     keys.forEach(([key, val]) => {
       if (obj.hasOwnProperty(key)) {
         if (typeof val === 'string') {
-          const idx = ids.indexOf(val);
+          const idx = oldPlayerIds.indexOf(val);
           if (idx > -1) {
-            obj[key] = ids[idx];
+            obj[key] = newPlayerIds[idx];
           }
         } else if (typeof val === 'object') {
-          Cloner.replacePlayers(val, ids);
+          Cloner.replacePlayers(val, oldPlayerIds, newPlayerIds);
         }
       }
     });

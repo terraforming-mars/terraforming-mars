@@ -25,7 +25,6 @@ export interface IActionCard {
 }
 
 export interface IResourceCard {
-    resourceType: ResourceType;
     resourceCount: number;
 }
 

@@ -14,6 +14,8 @@ import {IProductionUnits} from '../../src/inputs/IProductionUnits';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
+import {Decomposers} from '../../src/cards/base/Decomposers';
+import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
 import {Phase} from '../../src/Phase';
 import {TestPlayers} from '../TestingUtils';
 
@@ -57,8 +59,8 @@ describe('AresHandler', function() {
     // Even though there's already a game, with a board, that laid out hazards, this is going to use a clean set-up.
 
     const deck = game.dealer.deck;
-    deck[deck.length - 1].cost = 5;
-    deck[deck.length - 2].cost = 3;
+    deck.push(new EnergyTapping());
+    deck.push(new Decomposers());
     game.board.spaces.forEach((space) => {
       space.tile = undefined; space.player = undefined;
     });

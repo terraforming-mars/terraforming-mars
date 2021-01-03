@@ -25,7 +25,8 @@ export class Localfilesystem implements IDatabase {
   }
 
   _historyFilename(gameId: string, saveId: number) {
-    return path.resolve(historyFolder, `game-${gameId}-${saveId}.json`);
+    const saveIdString = saveId.toString().padStart(5, '0');
+    return path.resolve(historyFolder, `game-${gameId}-${saveIdString}.json`);
   }
 
   saveGame(game: Game): void {

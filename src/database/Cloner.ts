@@ -6,7 +6,7 @@ import {DbLoadCallback} from './IDatabase';
 
 export class Cloner {
   public static clone(
-    id: GameId,
+    newGameId: GameId,
     players: Array<Player>,
     firstPlayerIndex: number,
     err: any,
@@ -28,7 +28,7 @@ export class Cloner {
       throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
     }
     Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
-    serialized.id = id;
+    serialized.id = newGameId;
 
     for (let idx = 0; idx < players.length; idx++) {
       this.updatePlayer(players[idx], serialized.players[idx]);
@@ -40,6 +40,7 @@ export class Cloner {
 
     cb(undefined, game);
   }
+
   private static replacePlayerIds(obj: any, oldPlayerIds:Array<string>, newPlayerIds: Array<string>) {
     if (obj === undefined || obj === null || typeof obj !== 'object') {
       return;

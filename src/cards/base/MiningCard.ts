@@ -1,11 +1,13 @@
 
+import {Card} from '../Card';
+import {CardMetadata} from '../CardMetadata';
 import {CardName} from '../../CardName';
 import {CardType} from '../../cards/CardType';
 import {Game} from '../../Game';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -13,12 +15,20 @@ import {SpaceBonus} from '../../SpaceBonus';
 import {Tags} from '../../cards/Tags';
 import {TileType} from '../../TileType';
 
-export abstract class MiningCard implements IProjectCard {
-    public abstract cost: number;
-    public abstract name: CardName;
-    public readonly tags: Array<Tags> = [Tags.STEEL];
-    public readonly cardType: CardType = CardType.AUTOMATED;
-    public hasRequirements = false;
+export abstract class MiningCard extends Card implements IProjectCard {
+  constructor(
+    name: CardName,
+    cost: number,
+    metadata: CardMetadata) {
+    super({
+      cardType: CardType.AUTOMATED,
+      name,
+      tags: [Tags.BUILDING],
+      cost,
+      hasRequirements: false,
+      metadata,
+    });
+  }
     public bonusResource: Resources | undefined = undefined;
     public canPlay(player: Player, game: Game): boolean {
       return this.getAvailableSpaces(player, game).length > 0;

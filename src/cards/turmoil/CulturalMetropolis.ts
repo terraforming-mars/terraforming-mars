@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class CulturalMetropolis implements IProjectCard {
     public cost = 20;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.CULTURAL_METROPOLIS;
     public cardType = CardType.AUTOMATED;
 

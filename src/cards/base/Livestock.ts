@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Livestock implements IActionCard, IProjectCard, IResourceCard {
     public cost = 13;
@@ -21,7 +22,7 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
     public tags = [Tags.ANIMAL];
     public name = CardName.LIVESTOCK;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.getProduction(Resources.PLANTS) >= 1;
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 9) && player.getProduction(Resources.PLANTS) >= 1;
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

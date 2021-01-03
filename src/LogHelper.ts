@@ -1,11 +1,11 @@
-import {CardName} from '../CardName';
-import {Game} from '../Game';
-import {Player} from '../Player';
-import {ICard} from '../cards/ICard';
-import {Resources} from '../Resources';
-import {ISpace} from '../boards/ISpace';
-import {TileType} from '../TileType';
-import {Colony} from '../colonies/Colony';
+import {CardName} from './CardName';
+import {Game} from './Game';
+import {Player} from './Player';
+import {ICard} from './cards/ICard';
+import {Resources} from './Resources';
+import {ISpace} from './boards/ISpace';
+import {TileType} from './TileType';
+import {Colony} from './colonies/Colony';
 
 export class LogHelper {
   static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {

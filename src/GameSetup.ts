@@ -1,4 +1,3 @@
-import {AresHandler} from './ares/AresHandler';
 import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
@@ -12,6 +11,7 @@ import {getRandomMilestonesAndAwards, IDrawnMilestonesAndAwards} from './Milesto
 import {Player} from './Player';
 import {Resources} from './Resources';
 import {ColonyName} from './colonies/ColonyName';
+import {AresSetup} from './ares/AresSetup';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -54,7 +54,7 @@ export class GameSetup {
     }
 
     if (gameOptions.aresExtension) {
-      AresHandler.setupMilestonesAwards(drawnMilestonesAndAwards);
+      AresSetup.setupMilestonesAwards(drawnMilestonesAndAwards);
     };
     return drawnMilestonesAndAwards;
   };

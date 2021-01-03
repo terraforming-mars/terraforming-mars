@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class TopsoilContract implements IProjectCard {
     public cost = 8;
-    public tags = [Tags.MICROBES, Tags.EARTH];
+    public tags = [Tags.MICROBE, Tags.EARTH];
     public name = CardName.TOPSOIL_CONTRACT;
     public cardType = CardType.ACTIVE;
 

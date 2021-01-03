@@ -10,10 +10,11 @@ import {IActionCard, ICard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class MaxwellBase implements IActionCard, IProjectCard {
     public cost = 18;
@@ -21,7 +22,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
     public name = CardName.MAXWELL_BASE;
     public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
-      return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
+      return player.getProduction(Resources.ENERGY) >= 1 && game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.ENERGY, -1);

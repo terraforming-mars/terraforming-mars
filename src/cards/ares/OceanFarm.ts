@@ -12,15 +12,16 @@ import {Tags} from './../Tags';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class OceanFarm implements IProjectCard {
   public cost = 15;
-  public tags = [Tags.PLANT, Tags.STEEL];
+  public tags = [Tags.PLANT, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_FARM;
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
+    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
   }
 
   public play(player: Player, game: Game) {

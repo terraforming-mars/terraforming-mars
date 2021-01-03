@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -7,7 +6,7 @@ import {BoardName} from './boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
-import {ClaimedMilestone} from './ClaimedMilestone';
+import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
@@ -16,9 +15,8 @@ import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {Decks} from './Deck';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {FundedAward} from './FundedAward';
+import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
@@ -27,10 +25,10 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
-import {LogHelper} from './components/LogHelper';
+import {LogHelper} from './LogHelper';
 import {LogMessage} from './LogMessage';
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ARES_MILESTONES} from './milestones/Milestones';
-import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ARES_AWARDS} from './awards/Awards';
+import {ALL_MILESTONES} from './milestones/Milestones';
+import {ALL_AWARDS} from './awards/Awards';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
@@ -58,6 +56,9 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
+import {CardLoader} from './CardLoader';
+import {GlobalParameter} from './GlobalParameter';
+import {AresSetup} from './ares/AresSetup';
 
 export type GameId = string;
 
@@ -183,56 +184,62 @@ export class Game implements ISerializable<SerializedGame> {
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
-  constructor(
+  private constructor(
     public id: GameId,
     private players: Array<Player>,
     private first: Player,
-    public gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}) {
-    {
-      const _playerIds = players.map((p) => p.id);
-      const _colors = players.map((p) => p.color);
-      if (_playerIds.includes(first.id) === false) {
-        throw new Error('Cannot find first player ' + first.id + ' in ' + _playerIds);
-      }
-      if (new Set(_playerIds).size !== players.length) {
-        throw new Error('Duplicate player found: ' + _playerIds);
-      }
-      if (new Set(_colors).size !== players.length) {
-        throw new Error('Duplicate color found: ' + _colors);
-      }
+    activePlayer: PlayerId,
+    public gameOptions: GameOptions,
+    seed: number,
+    board: Board,
+    dealer: Dealer) {
+    const playerIds = players.map((p) => p.id);
+    if (playerIds.includes(first.id) === false) {
+      throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
+    }
+    if (playerIds.includes(activePlayer) === false) {
+      throw new Error('Cannot find active player ' + activePlayer + ' in ' + playerIds);
+    }
+    if (new Set(playerIds).size !== players.length) {
+      throw new Error('Duplicate player found: ' + playerIds);
+    }
+    const colors = players.map((p) => p.color);
+    if (new Set(colors).size !== players.length) {
+      throw new Error('Duplicate color found: ' + colors);
     }
 
-    const seed = Math.random();
+    this.activePlayer = activePlayer;
     this.seed = seed;
+    this.dealer = dealer;
+    this.board = board;
+  }
 
-    this.board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+  public static newInstance(id: GameId,
+    players: Array<Player>,
+    first: Player,
+    gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
+    const seed = Math.random();
+    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const cardFinder = new CardFinder();
+    const cardLoader = new CardLoader(gameOptions);
+    const dealer = Dealer.newInstance(cardLoader);
 
-    // Initialize Ares data
-    if (gameOptions.aresExtension) {
-      this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
-    }
+    const activePlayer = first.id;
 
-    this.activePlayer = first.id;
-
-    this.dealer = Dealer.newInstance(
-      gameOptions.corporateEra,
-      gameOptions.preludeExtension,
-      gameOptions.venusNextExtension,
-      gameOptions.coloniesExtension,
-      gameOptions.promoCardsOption,
-      gameOptions.turmoilExtension,
-      gameOptions.aresExtension,
-      gameOptions.communityCardsOption,
-      gameOptions.cardsBlackList,
-    );
+    const game: Game = new Game(id, players, first, activePlayer, gameOptions, seed, board, dealer);
 
     // Clone game
     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-      this.cloneGame(gameOptions.clonedGamedId, this);
-      this.clonedGamedId = '#' + gameOptions.clonedGamedId;
-      return;
+      throw new Error('Clone game disabled temporarily. Should be restored in January.');
+    //   game.cloneGame(gameOptions.clonedGamedId);
+    //   game.clonedGamedId = '#' + gameOptions.clonedGamedId;
+    //   return game;
     }
 
+    // Initialize Ares data
+    if (gameOptions.aresExtension) {
+      game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+    }
 
     // Single player game player starts with 14TR
     // and 2 neutral cities and forests on board
@@ -240,50 +247,50 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
-      this.setupSolo();
+      game.setupSolo();
     }
 
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
-    this.milestones = milestonesAwards.milestones;
-    this.awards = milestonesAwards.awards;
+    game.milestones = milestonesAwards.milestones;
+    game.awards = milestonesAwards.awards;
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
+      game.colonyDealer = new ColonyDealer();
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
-      this.colonyDealer = new ColonyDealer();
-      this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, this.gameOptions.turmoilExtension, allowCommunityColonies);
-      if (this.players.length === 1) {
+      game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
+      if (players.length === 1) {
         players[0].addProduction(Resources.MEGACREDITS, -2);
-        this.defer(new RemoveColonyFromGame(players[0], this));
+        game.defer(new RemoveColonyFromGame(players[0], game));
       }
     }
 
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
-      this.turmoil = Turmoil.newInstance(this);
+      game.turmoil = Turmoil.newInstance(game);
     }
 
     // Setup Ares hazards
     if (gameOptions.aresExtension && gameOptions.aresHazards) {
-      AresHandler.setupHazards(this, players.length);
+      AresSetup.setupHazards(game, players.length);
     }
 
     // Setup custom corporation list
-    let corporationCards = this.dealer.corporationCards;
+    let corporationCards = game.dealer.corporationCards;
 
     const minCorpsRequired = players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
       const customCorporationCards: CorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
-        const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp);
+        const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
       }
       corporationCards = customCorporationCards;
     }
 
-    corporationCards = this.dealer.shuffleCards(corporationCards);
+    corporationCards = dealer.shuffleCards(corporationCards);
 
     // Failsafe for exceding corporation pool
     if (gameOptions.startingCorporations * players.length > corporationCards.length) {
@@ -293,11 +300,12 @@ export class Game implements ISerializable<SerializedGame> {
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
-    for (const player of this.getPlayers()) {
-      player.increaseTerraformRatingSteps(player.handicap, this);
+    for (const player of game.getPlayers()) {
+      player.increaseTerraformRatingSteps(player.handicap, game);
       if (!gameOptions.corporateEra) {
         GameSetup.setStartingProductions(player);
       }
+
       if (!player.beginner ||
       // Bypass beginner choice if any extension is choosen
             gameOptions.preludeExtension ||
@@ -315,50 +323,38 @@ export class Game implements ISerializable<SerializedGame> {
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(this.dealer.dealCard());
+            player.dealtProjectCards.push(dealer.dealCard());
           }
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < 4; i++) {
-            player.dealtPreludeCards.push(this.dealer.dealPreludeCard());
+            player.dealtPreludeCards.push(dealer.dealPreludeCard());
           }
         }
       } else {
-        this.playerHasPickedCorporationCard(player, new BeginnerCorporation());
+        game.playerHasPickedCorporationCard(player, new BeginnerCorporation());
       }
     }
 
     // Print game_id if solo game
     if (players.length === 1) {
-      this.log('The id of this game is ${0}', (b) => b.rawString(this.id));
+      game.log('The id of this game is ${0}', (b) => b.rawString(id));
     }
 
-    this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
+    game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
     // Initial Draft
     if (gameOptions.initialDraftVariant) {
-      this.runDraftRound(true);
+      game.runDraftRound(true);
     } else {
-      this.gotoInitialResearchPhase();
+      game.gotoInitialResearchPhase();
     }
-  }
 
-  // A placeholder for the real implementation, only used to simplify the transition by putting test refactoring in one place.
-  public static newInstance(gameId: GameId, players: Array<Player>, firstPlayer: Player, gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
-    return new Game(gameId, players, firstPlayer, gameOptions);
+    return game;
   }
 
   public save(): void {
-    /*
-      * Because we save at the start of a player's takeAction, we need to
-      * save the game in the database before increasing lastSaveId so that
-      * reloading it doesn't create another new save on top of it, like this:
-      *
-      * increment -> save -> reload -> increment -> save
-      *
-      */
-    Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-    this.lastSaveId++;
+    Database.getInstance().saveGame(this);
   }
 
   public toJSON(): string {
@@ -369,8 +365,8 @@ export class Game implements ISerializable<SerializedGame> {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
       awards: this.awards,
-      board: this.board,
-      claimedMilestones: this.claimedMilestones,
+      board: this.board.serialize(),
+      claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),
@@ -379,7 +375,7 @@ export class Game implements ISerializable<SerializedGame> {
       draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
       first: this.first.id,
-      fundedAwards: this.fundedAwards,
+      fundedAwards: serializeFundedAwards(this.fundedAwards),
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -435,87 +431,84 @@ export class Game implements ISerializable<SerializedGame> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  private cloneGame(gameId: GameId, game: Game): void {
-    const player = new Player('test', Color.BLUE, false, 0);
-    const player2 = new Player('test2', Color.RED, false, 0);
-    const gameToRebuild = new Game(gameId, [player, player2], player);
-    Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function(err) {
-      try {
-        if (err) {
-          throw new Error('Game ' + gameId + ' not found');
-        }
-        // Check number of players
-        if (game.players.length !== gameToRebuild.players.length) {
-          throw new Error('Player number missmatch');
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          console.log('Clone game error: ' + e.message);
-          // Revert to game creation screen with error message
-          return;
-        }
-      }
+  // private cloneGame(gameId: GameId): void {
+  //   Database.getInstance().restoreReferenceGame(gameId, function(err, game) {
+  //     try {
+  //       if (err) {
+  //         throw new Error('Game ' + gameId + ' not found');
+  //       }
+  //       // Check number of players
+  //       if (game.players.length !== gameToRebuild.players.length) {
+  //         throw new Error('Player number mismatch');
+  //       }
+  //     } catch (e) {
+  //       if (e instanceof Error) {
+  //         console.log('Clone game error: ' + e.message);
+  //         // Revert to game creation screen with error message
+  //         return;
+  //       }
+  //     }
 
-      // Update game options
-      game.gameOptions = gameToRebuild.gameOptions;
-      game.board = gameToRebuild.board;
+  //     // Update game options
+  //     game.gameOptions = gameToRebuild.gameOptions;
+  //     game.board = gameToRebuild.board;
 
-      // Update dealers
-      game.dealer = gameToRebuild.dealer;
-      game.colonyDealer = gameToRebuild.colonyDealer;
+  //     // Update dealers
+  //     game.dealer = gameToRebuild.dealer;
+  //     game.colonyDealer = gameToRebuild.colonyDealer;
 
-      // Update other objects
-      game.milestones = gameToRebuild.milestones;
-      game.awards = gameToRebuild.awards;
-      game.colonies = gameToRebuild.colonies;
-      game.turmoil = gameToRebuild.turmoil;
+  //     // Update other objects
+  //     game.milestones = gameToRebuild.milestones;
+  //     game.awards = gameToRebuild.awards;
+  //     game.colonies = gameToRebuild.colonies;
+  //     game.turmoil = gameToRebuild.turmoil;
 
-      // Set active player
-      const playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
-      game.first = game.players[playerIndex];
-      game.activePlayer = game.players[playerIndex].id;
+  //     // Set active player
+  //     const playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
+  //     game.first = game.players[playerIndex];
+  //     game.activePlayer = game.players[playerIndex].id;
 
-      // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
-      if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
-        game.turmoil.lobby.clear();
-        game.turmoil.delegateReserve = [];
-        game.getPlayers().forEach((player) => {
-          if (game.turmoil !== undefined) {
-            game.turmoil.lobby.add(player.id);
-            for (let i = 0; i < 6; i++) {
-              game.turmoil.delegateReserve.push(player.id);
-            }
-          }
-        });
-        for (let i = 0; i < 13; i++) {
-          game.turmoil.delegateReserve.push('NEUTRAL');
-        }
-      }
+  //     // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
+  //     if (gameToRebuild.gameOptions.turmoilExtension && game.turmoil !== undefined) {
+  //       game.turmoil.lobby.clear();
+  //       game.turmoil.delegateReserve = [];
+  //       game.getPlayers().forEach((player) => {
+  //         if (game.turmoil !== undefined) {
+  //           game.turmoil.lobby.add(player.id);
+  //           for (let i = 0; i < 6; i++) {
+  //             game.turmoil.delegateReserve.push(player.id);
+  //           }
+  //         }
+  //       });
+  //       for (let i = 0; i < 13; i++) {
+  //         game.turmoil.delegateReserve.push('NEUTRAL');
+  //       }
+  //     }
 
-      // Update Players
-      game.players.forEach((player) => {
-        const playerIndex = game.players.indexOf(player);
-        const referencePlayer = gameToRebuild.players[playerIndex];
-        player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
-        player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
-        player.dealtProjectCards = referencePlayer.dealtProjectCards;
-        player.setTerraformRating(referencePlayer.getTerraformRating());
+  //     // Update Players
+  //     game.players.forEach((player) => {
+  //       const playerIndex = game.players.indexOf(player);
+  //       const referencePlayer = gameToRebuild.players[playerIndex];
+  //       player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
+  //       player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
+  //       player.dealtProjectCards = referencePlayer.dealtProjectCards;
+  //       player.setTerraformRating(referencePlayer.getTerraformRating());
 
-        // Special case solo play and Colonies
-        if (game.players.length === 1 && game.gameOptions.coloniesExtension) {
-          player.addProduction(Resources.MEGACREDITS, -2);
-          game.defer(new RemoveColonyFromGame(player, game));
-        }
-      });
+  //       // Special case solo play and Colonies
+  //       if (game.players.length === 1 && game.gameOptions.coloniesExtension) {
+  //         player.addProduction(Resources.MEGACREDITS, -2);
+  //         game.defer(new RemoveColonyFromGame(player, game));
+  //       }
+  //     });
 
-      // Initial Draft
-      if (game.gameOptions.initialDraftVariant) {
-        game.runDraftRound(true);
-      } else {
-        game.gotoInitialResearchPhase();
-      }
-    });
-  }
+  //     // Initial Draft
+  //     if (game.gameOptions.initialDraftVariant) {
+  //       game.runDraftRound(true);
+  //     } else {
+  //       game.gotoInitialResearchPhase();
+  //     }
+  //   });
+  // }
 
   public defer(action: DeferredAction, priority: boolean = false): void {
     if (priority) {
@@ -658,8 +651,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Activate some colonies
     if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
-      this.colonies.filter((colony) => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach((colony) => {
-        colony.isActive = true;
+      this.colonies.forEach((colony) => {
+        if (colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType) {
+          colony.isActive = true;
+        }
       });
 
       // Check for Venus colony
@@ -683,9 +678,11 @@ export class Game implements ISerializable<SerializedGame> {
         throw new Error('Too many cards selected');
       }
       // discard all unpurchased cards
-      player.dealtProjectCards
-        .filter((card) => player.cardsInHand.includes(card) === false)
-        .forEach((card) => this.dealer.discard(card));
+      player.dealtProjectCards.forEach((card) => {
+        if (player.cardsInHand.includes(card) === false) {
+          this.dealer.discard(card);
+        }
+      });
 
       this.playerHasPickedCorporationCard(player, corporation); return undefined;
     });
@@ -1244,6 +1241,40 @@ export class Game implements ISerializable<SerializedGame> {
     return this.temperature;
   }
 
+  public checkMinRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level);
+  }
+
+  public checkMaxRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level, true);
+  }
+
+  private checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+    let currentLevel: number;
+    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+
+    if (parameter === GlobalParameter.OCEANS) {
+      currentLevel = this.board.getOceansOnBoard();
+    } else if (parameter === GlobalParameter.OXYGEN) {
+      currentLevel = this.getOxygenLevel();
+    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      currentLevel = this.getTemperature();
+      playerRequirementsBonus *= 2;
+    } else if (parameter === GlobalParameter.VENUS) {
+      currentLevel = this.getVenusScaleLevel();
+      playerRequirementsBonus *= 2;
+    } else {
+      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
+      return false;
+    }
+
+    if (max) {
+      return currentLevel <= level + playerRequirementsBonus;
+    } else {
+      return currentLevel >= level - playerRequirementsBonus;
+    }
+  }
+
   public getGeneration(): number {
     return this.generation;
   }
@@ -1257,28 +1288,23 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getPlayer(name: string): Player {
-    const found = this.players.filter((player) => player.name === name);
-    if (found.length === 0) {
+    const player = this.players.find((player) => player.name === name);
+    if (player === undefined) {
       throw new Error('Player not found');
     }
-    return found[0];
+    return player;
   }
 
   public getSpace(id: string): ISpace {
-    const matchedSpaces = this.board.spaces.filter((space) => space.id === id);
-    if (matchedSpaces.length === 1) {
-      return matchedSpaces[0];
+    const space = this.board.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error('Error with getting space');
     }
-    throw new Error('Error with getting space');
+    return space;
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
-      (space) => space.tile !== undefined &&
-                ((space.tile.tileType === TileType.CITY &&
-                space.spaceType !== SpaceType.COLONY) ||
-                space.tile.tileType === TileType.CAPITAL ||
-                space.tile.tileType === TileType.OCEAN_CITY),
-    ).length;
+      (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
   }
   public getCitiesInPlay(): number {
     return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
@@ -1560,7 +1586,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
-    return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode();
+    return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
   }
 
   private setupSolo() {
@@ -1604,148 +1630,120 @@ export class Game implements ISerializable<SerializedGame> {
     return space;
   }
 
-  // Function used to rebuild each objects
-  public loadFromJSON(d: SerializedGame): Game {
-    // Assign each attributes
-    const o = Object.assign(this, d);
-    const cardFinder = new CardFinder();
+  public static deserialize(d: SerializedGame): Game {
+    const gameOptions = d.gameOptions;
 
-    // Brand new deferred actions queue
-    this.deferredActions = new DeferredActionsQueue();
+    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
+    const first = players.find((player) => player.id === d.first);
+    if (first === undefined) {
+      throw new Error(`Player ${d.first} not found when rebuilding First Player`);
+    }
+
+    let board;
+    if (gameOptions.boardName === BoardName.ELYSIUM) {
+      board = ElysiumBoard.deserialize(d.board, players);
+    } else if (gameOptions.boardName === BoardName.HELLAS) {
+      board = HellasBoard.deserialize(d.board, players);
+    } else {
+      board = OriginalBoard.deserialize(d.board, players);
+    }
 
     // Rebuild dealer object to be sure that we will have cards in the same order
-    this.dealer = Dealer.deserialize(d.dealer);
+    const dealer = Dealer.deserialize(d.dealer);
 
-    // Rebuild every player objects
-    this.players = d.players.map((element: SerializedPlayer) => {
-      return Player.deserialize(element);
-    });
+    const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
 
-    // Rebuild milestones, awards and board elements
-    if (this.gameOptions.boardName === BoardName.ELYSIUM) {
-      this.board = ElysiumBoard.deserialize(d.board, this.players);
-    } else if (this.gameOptions.boardName === BoardName.HELLAS) {
-      this.board = HellasBoard.deserialize(d.board, this.players);
-    } else {
-      this.board = OriginalBoard.deserialize(d.board, this.players);
-    }
-
-    this.milestones = [];
-    this.awards = [];
-
-    const allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES, ARES_MILESTONES);
-
+    const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {
-      allMilestones.forEach((ms: IMilestone) => {
+      ALL_MILESTONES.forEach((ms: IMilestone) => {
         if (ms.name === element.name) {
-          this.milestones.push(ms);
+          milestones.push(ms);
         }
       });
     });
 
-    const allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS, ARES_AWARDS);
+    game.milestones = milestones;
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
+    const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
-      allAwards.forEach((award: IAward) => {
+      ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
-          this.awards.push(award);
+          awards.push(award);
         }
       });
     });
 
-    if (this.gameOptions.aresExtension) {
-      this.aresData = d.aresData;
+    game.awards = awards;
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
+
+    if (gameOptions.aresExtension) {
+      game.aresData = d.aresData;
     }
     // Reload colonies elements if needed
-    if (this.gameOptions.coloniesExtension) {
-      this.colonyDealer = new ColonyDealer();
+    if (gameOptions.coloniesExtension) {
+      game.colonyDealer = new ColonyDealer();
 
       if (d.colonyDealer !== undefined) {
-        this.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
+        game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
       }
 
-      this.colonies = loadColoniesFromJSON(d.colonies);
+      game.colonies = loadColoniesFromJSON(d.colonies);
     }
 
     // Reload turmoil elements if needed
-    if (d.turmoil && this.gameOptions.turmoilExtension) {
-      this.turmoil = Turmoil.deserialize(d.turmoil);
+    if (d.turmoil && gameOptions.turmoilExtension) {
+      game.turmoil = Turmoil.deserialize(d.turmoil);
     }
 
-    // Rebuild claimed milestones
-    this.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone) => {
-      const player = this.players.find((player) => player.id === element.player.id);
-      const milestone = this.milestones.find((milestone) => milestone.name === element.milestone.name);
-      if (player && milestone) {
-        return {
-          player: player,
-          milestone: milestone,
-        };
-      } else {
-        throw 'Player or Milestone not found when rebuilding Claimed Milestone';
-      }
-    });
+    game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
+    game.donePlayers = new Set<PlayerId>(d.donePlayers);
+    game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
+    game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
-    // Rebuild funded awards
-    this.fundedAwards = d.fundedAwards.map((element: FundedAward) => {
-      const player = this.players.find((player) => player.id === element.player.id);
-      const award = this.awards.find((award) => award.name === element.award.name);
-      if (player && award) {
-        return {
-          player: player,
-          award: award,
-        };
-      } else {
-        throw 'Player or Award not found when rebuilding Claimed Award';
-      }
-    });
-
-    this.passedPlayers = new Set<PlayerId>(d.passedPlayers);
-    this.donePlayers = new Set<PlayerId>(d.donePlayers);
-    this.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
-    this.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
-
+    const cardFinder = new CardFinder();
     // Reinit undrafted cards map
-    this.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
+    game.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
     d.unDraftedCards.forEach((unDraftedCard) => {
-      this.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
+      game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
-    // Define who was the first player for this generation
-    const first = this.players.find((player) => player.id === d.first);
-    if (first === undefined) {
-      throw 'No Player found when rebuilding First Player';
-    }
-    this.first = first;
-
-    // Define who is the active player and init the take action phase
-    const active = this.players.find((player) => player.id === d.activePlayer);
-    if (active === undefined) {
-      throw 'No Player found when rebuilding Active Player';
-    }
-    this.activePlayer = active.id;
+    game.lastSaveId = d.lastSaveId;
+    game.clonedGamedId = d.clonedGamedId;
+    game.gameAge = d.gameAge;
+    game.gameLog = d.gameLog;
+    game.generation = d.generation;
+    game.phase = d.phase;
+    game.oxygenLevel = d.oxygenLevel;
+    game.temperature = d.temperature;
+    game.venusScaleLevel = d.venusScaleLevel;
+    game.activePlayer = d.activePlayer;
+    game.draftRound = d.draftRound;
+    game.initialDraftIteration = d.initialDraftIteration;
+    game.monsInsuranceOwner = d.monsInsuranceOwner;
+    game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
 
     // Still in Draft or Research of generation 1
-    if (this.generation === 1 && this.players.some((p) => p.corporationCard === undefined)) {
-      if (this.gameOptions.initialDraftVariant) {
-        if (this.initialDraftIteration === 3) {
-          this.runDraftRound(true, true);
+    if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
+      if (gameOptions.initialDraftVariant) {
+        if (game.initialDraftIteration === 3) {
+          game.runDraftRound(true, true);
         } else {
-          this.runDraftRound(true);
+          game.runDraftRound(true);
         }
       } else {
-        this.gotoInitialResearchPhase();
+        game.gotoInitialResearchPhase();
       }
-    } else if (this.phase === Phase.DRAFTING) {
-      this.runDraftRound();
-    } else if (this.phase === Phase.RESEARCH) {
-      this.gotoResearchPhase();
+    } else if (game.phase === Phase.DRAFTING) {
+      game.runDraftRound();
+    } else if (game.phase === Phase.RESEARCH) {
+      game.gotoResearchPhase();
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      this.getPlayerById(this.activePlayer).takeAction(this);
+      game.getPlayerById(game.activePlayer).takeAction(game);
     }
 
-    return o;
+    return game;
   }
 }
 

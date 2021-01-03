@@ -1,27 +1,30 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class ProtectedHabitats implements IProjectCard {
-    public cardType = CardType.ACTIVE;
-    public cost = 5;
-    public tags = [];
-    public name = CardName.PROTECTED_HABITATS;
+export class ProtectedHabitats extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.PROTECTED_HABITATS,
+      cost: 5,
 
-    public play(_player: Player, _game: Game) {
-      return undefined;
-    }
+      metadata: {
+        cardNumber: '173',
+        renderData: CardRenderer.builder((b) => {
+          b.text('Opponents may not remove your', CardRenderItemSize.SMALL, true).br;
+          b.plants(1).animals(1).microbes(1);
+        }),
+      },
+    });
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: '173',
-      renderData: CardRenderer.builder((b) => {
-        b.text('Opponents may not remove your', CardRenderItemSize.SMALL, true).br;
-        b.plants(1).animals(1).microbes(1);
-      }),
-    }
+  public play(_player: Player, _game: Game) {
+    return undefined;
+  }
 }

@@ -19,7 +19,8 @@ interface SelectHowToPayForCardModel {
 }
 
 import {HowToPay} from '../inputs/HowToPay';
-import {getProjectCardByName, Card} from './card/Card';
+import {Card} from './card/Card';
+import {CardFinder} from '../CardFinder';
 import {Tags} from '../cards/Tags';
 import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
@@ -106,7 +107,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
       return card;
     },
     getCardTags: function() {
-      const card = getProjectCardByName(this.cardName);
+      const card = new CardFinder().getProjectCardByName(this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
@@ -224,7 +225,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.player.steel > 0) {
-        if (this.tags.find((tag) => tag === Tags.STEEL) !== undefined) {
+        if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
           return true;
         }
       }

@@ -51,11 +51,28 @@ export class OriginalBoard extends Board {
     return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
+  }
+
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
   public canPlaceTile(space: ISpace): boolean {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
+  }
+
+  public getVolcanicSpaceIds(): Array<string> {
+    return [
+      SpaceName.ASCRAEUS_MONS,
+      SpaceName.ARSIA_MONS,
+      SpaceName.PAVONIS_MONS,
+      SpaceName.THARSIS_THOLUS,
+    ];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
+    return [SpaceName.NOCTIS_CITY];
   }
 }

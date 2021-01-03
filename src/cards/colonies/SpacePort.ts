@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SpacePort implements IProjectCard {
     public cost = 22;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.SPACE_PORT;
     public cardType = CardType.AUTOMATED;
 

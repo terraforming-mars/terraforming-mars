@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public cost = 22;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MAGNETIC_FIELD_GENERATORS_PROMO;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

@@ -37,6 +37,9 @@ export interface IGameData {
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
  */
+
+export type DbLoadCallback = (err: any, game: Game | undefined) => void
+
 export interface IDatabase {
 
     /**
@@ -70,14 +73,10 @@ export interface IDatabase {
     getClonableGames(cb:(err: any, allGames:Array<IGameData>)=> void) : void;
 
     /**
-     * Saves the current state of the game at a supplied save point. Used for
+     * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
-     *
-     * The `save_id` is managed outside of the database, and so it is up to the
-     * game to increment its state count.
      */
-    // TODO(kberg): why is `players` a useful first-class piece of data?
-    saveGameState(game_id: GameId, save_id: number, game: string, players: number): void;
+    saveGame(game: Game): void;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
@@ -92,18 +91,18 @@ export interface IDatabase {
     saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
-     * The meat behind player undo. Loads the game at the given save point
-     * and overwrites all data in `game`.
+     * The meat behind player undo. Loads the game at the given save point,
+     * and provides it in the callback.
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, game: Game): void;
+    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void;
 
     /**
      * The meat behind cloning a game. Load a game at save point 0,
-     * and overrides all data in `game`.
+     * and provides it in the callback.
      */
-    restoreReferenceGame(game_id: GameId, game: Game, cb:(err: any) => void): void;
+    restoreReferenceGame(game_id: GameId, cb: DbLoadCallback): void;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.

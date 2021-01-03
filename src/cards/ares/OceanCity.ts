@@ -11,16 +11,17 @@ import {Tags} from './../Tags';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class OceanCity implements IProjectCard {
   public cost = 18;
-  public tags = [Tags.CITY, Tags.STEEL];
+  public tags = [Tags.CITY, Tags.BUILDING];
   public cardType = CardType.AUTOMATED;
   public name = CardName.OCEAN_CITY;
 
   public canPlay(player: Player, game: Game): boolean {
     return (player.getProduction(Resources.ENERGY) > 0) &&
-        (game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game));
+      game.checkMinRequirements(player, GlobalParameter.OCEANS, 6);
   }
 
   public play(player: Player, game: Game) {

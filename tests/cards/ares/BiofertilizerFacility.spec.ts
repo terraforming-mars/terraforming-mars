@@ -1,13 +1,11 @@
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {AICentral} from '../../../src/cards/base/AICentral';
+import {Ants} from '../../../src/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/cards/ares/BiofertilizerFacility';
-import {CardType} from '../../../src/cards/CardType';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {ResourceType} from '../../../src/ResourceType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
@@ -16,29 +14,16 @@ import {TestPlayers} from '../../TestingUtils';
 describe('BiofertilizerFacility', function() {
   let card : BiofertilizerFacility; let player : Player; let game : Game;
 
-  const scienceTagCard: IProjectCard = {
-    name: CardName.ACQUIRED_COMPANY,
-    cardType: CardType.ACTIVE,
-    cost: 0,
-    tags: [Tags.SCIENCE],
-    play: () => undefined,
-  };
-
-  const microbeHost: IProjectCard = {
-    name: CardName.ACQUIRED_SPACE_AGENCY,
-    cardType: CardType.ACTIVE,
-    cost: 0,
-    tags: [],
-    resourceType: ResourceType.MICROBE,
-    resourceCount: 0,
-    play: () => undefined,
-  };
+  let scienceTagCard: IProjectCard = new AICentral();
+  let microbeHost: IProjectCard = new Ants();
 
   beforeEach(function() {
     card = new BiofertilizerFacility();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    scienceTagCard = new AICentral();
+    microbeHost = new Ants();
   });
 
   it('Can\'t play without a science tag', function() {

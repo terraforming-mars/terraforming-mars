@@ -155,6 +155,14 @@ describe('Board', function() {
     public getSpaceById(id: string): ISpace | undefined {
       return this.spaces.find((space) => space.id === id);
     }
+
+    public getVolcanicSpaceIds(): Array<string> {
+      return [];
+    }
+
+    public getNoctisCitySpaceIds(): Array<string> {
+      return [];
+    }
   };
 
   it('deserialize-backward compatible', () => {

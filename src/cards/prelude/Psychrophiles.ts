@@ -9,17 +9,18 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Psychrophiles implements IActionCard, IProjectCard, IResourceCard {
     public cost = 2;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public tags = [Tags.MICROBES];
+    public tags = [Tags.MICROBE];
     public name = CardName.PSYCHROPHILES;
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);
+      return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -20);
     }
 
     public play() {

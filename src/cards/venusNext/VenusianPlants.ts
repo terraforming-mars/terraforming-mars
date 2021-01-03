@@ -7,13 +7,14 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Game} from '../../Game';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class VenusianPlants implements IProjectCard {
     public cost = 13;
@@ -22,7 +23,7 @@ export class VenusianPlants implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-      const meetsVenusRequirements = game.getVenusScaleLevel() >= 16 - (2 * player.getRequirementsBonus(game, true));
+      const meetsVenusRequirements = game.checkMinRequirements(player, GlobalParameter.VENUS, 16);
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {

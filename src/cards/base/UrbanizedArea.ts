@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanizedArea implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.CITY, Tags.STEEL];
+    public tags = [Tags.CITY, Tags.BUILDING];
     public name = CardName.URBANIZED_AREA;
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;

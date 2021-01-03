@@ -48,3 +48,5 @@ export const HELLAS_MILESTONES: Array<IMilestone> = [
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
+
+export const ALL_MILESTONES: Array<IMilestone> = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VENUS_MILESTONES, ...ARES_MILESTONES];

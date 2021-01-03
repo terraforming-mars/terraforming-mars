@@ -11,6 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Penguins implements IActionCard, IProjectCard, IResourceCard {
     public name = CardName.PENGUINS;
@@ -21,7 +22,7 @@ export class Penguins implements IActionCard, IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() >= 8 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 8);
     }
 
     public play() {

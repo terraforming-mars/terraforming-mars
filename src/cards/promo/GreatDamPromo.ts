@@ -12,14 +12,15 @@ import {Board} from '../../boards/Board';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class GreatDamPromo implements IProjectCard {
     public cost = 15;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public cardType = CardType.AUTOMATED;
     public name = CardName.GREAT_DAM_PROMO;
     public canPlay(player: Player, game: Game): boolean {
-      const meetsOceanRequirements = game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
+      const meetsOceanRequirements = game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
       const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;
 
       return meetsOceanRequirements && canPlaceTile;

@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class Recyclon implements CorporationCard, IResourceCard {
     public name = CardName.RECYCLON;
-    public tags = [Tags.MICROBES, Tags.STEEL];
+    public tags = [Tags.MICROBE, Tags.BUILDING];
     public startingMegaCredits: number = 38;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
@@ -28,7 +28,7 @@ export class Recyclon implements CorporationCard, IResourceCard {
       return undefined;
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-      if (card.tags.indexOf(Tags.STEEL) === -1 || !player.isCorporation(this.name)) {
+      if (card.tags.indexOf(Tags.BUILDING) === -1 || !player.isCorporation(this.name)) {
         return undefined;
       }
       if (this.resourceCount < 2) {

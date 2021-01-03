@@ -48,3 +48,5 @@ export const HELLAS_AWARDS: Array<IAward> = [
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepeneur(),
 ];
+
+export const ALL_AWARDS: Array<IAward> = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VENUS_AWARDS, ...ARES_AWARDS];

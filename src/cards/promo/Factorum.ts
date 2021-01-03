@@ -8,14 +8,14 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Factorum implements IActionCard, CorporationCard {
     public name = CardName.FACTORUM;
-    public tags = [Tags.ENERGY, Tags.STEEL];
+    public tags = [Tags.ENERGY, Tags.BUILDING];
     public startingMegaCredits: number = 37;
     public cardType = CardType.CORPORATION;
 
@@ -41,7 +41,7 @@ export class Factorum implements IActionCard, CorporationCard {
 
       const drawBuildingCard = new SelectOption('Spend 3 MC to draw a building card', 'Draw card', () => {
         player.megaCredits -= 3;
-        const cards = game.drawCardsByTag(Tags.STEEL, 1);
+        const cards = game.drawCardsByTag(Tags.BUILDING, 1);
         player.cardsInHand.push(...cards);
         LogHelper.logDrawnCards(game, player, cards);
         return undefined;
@@ -62,7 +62,7 @@ export class Factorum implements IActionCard, CorporationCard {
           ce.vSpace(CardRenderItemSize.LARGE);
           ce.effectBox((eb) => {
             eb.empty().arrow().productionBox((pb) => pb.energy(1));
-            eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.STEEL);
+            eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
             eb.description('Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.');
           });
         });

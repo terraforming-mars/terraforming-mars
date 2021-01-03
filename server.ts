@@ -21,7 +21,7 @@ import {Player} from './src/Player';
 import {Database} from './src/database/Database';
 import {Server} from './src/server/ServerModel';
 
-const serverId = process.env.SERVER_ID || generateRandomServerId();
+const serverId = process.env.SERVER_ID || generateRandomId();
 const styles = fs.readFileSync('styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const route = new Route();
@@ -181,12 +181,9 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = http.createServer(requestHandler);
 }
 
-function generateRandomGameId(): GameId {
+function generateRandomId(): GameId {
+  // 281474976710656 possible values.
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
-}
-
-function generateRandomServerId(): string {
-  return generateRandomGameId();
 }
 
 function processInput(
@@ -394,13 +391,14 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   req.once('end', function() {
     try {
       const gameReq = JSON.parse(body);
-      const gameId = generateRandomGameId();
+      const gameId = generateRandomId();
       const players = gameReq.players.map((obj: any) => {
         return new Player(
           obj.name,
           obj.color,
           obj.beginner,
           obj.handicap,
+          generateRandomId(),
         );
       });
       let firstPlayer = players[0];
@@ -451,7 +449,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
       };
 
-      const game = new Game(gameId, players, firstPlayer, gameOptions);
+      const game = Game.newInstance(gameId, players, firstPlayer, gameOptions);
       GameLoader.getInstance().add(game);
       res.setHeader('Content-Type', 'application/json');
       res.write(getGameModelJSON(game));

@@ -1,4 +1,4 @@
-import {IDatabase} from './IDatabase';
+import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
@@ -19,6 +19,7 @@ export class SQLite implements IDatabase {
     }
     this.db = new sqlite3.Database(dbPath);
     this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
+    this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
   }
 
   getClonableGames(cb: (err: any, allGames: Array<IGameData>) => void) {
@@ -54,31 +55,35 @@ export class SQLite implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: GameId, game: Game, cb: (err: any) => void) {
+  restoreReferenceGame(game_id: GameId, cb: DbLoadCallback) {
     // Retrieve first save from database
     this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
-        return cb(new Error('Game not found'));
+        return cb(new Error('Game not found'), undefined);
       }
 
       try {
-        // Transform string to json
-        const gameToRestore = JSON.parse(row.game);
-
-        // Rebuild each objects
-        game.loadFromJSON(gameToRestore);
+        const json = JSON.parse(row.game);
+        const game = Game.deserialize(json);
+        return cb(err, game);
       } catch (exception) {
         console.error(`unable to restore reference game ${game_id}`, exception);
-        cb(exception);
+        cb(exception, undefined);
         return;
       }
-
-      return cb(err);
     });
   }
 
-  saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
-    return;
+  saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+    this.db.run(
+      'INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)',
+      [game_id, gameOptions.clonedGamedId, players, generations, JSON.stringify(gameOptions), JSON.stringify(scores)], (err) => {
+        if (err) {
+          console.error('SQLite:saveGameResults', err);
+          throw err;
+        }
+      },
+    );
   }
 
   getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
@@ -114,30 +119,39 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: GameId, save_id: number, game: Game): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {
-        return console.error(err.message);
+        console.error(err.message);
+        cb(err, undefined);
+        return;
       }
-      // Transform string to json
-      const gameToRestore = JSON.parse(row.game);
-
-      // Rebuild each objects
-      game.loadFromJSON(gameToRestore);
-
-      return true;
+      try {
+        const json = JSON.parse(row.game);
+        const game = Game.deserialize(json);
+        cb(undefined, game);
+      } catch (err) {
+        cb(err, undefined);
+      }
     });
   }
 
-  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
+  saveGame(game: Game): void {
     // Insert
-    this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function(err: { message: any; }) {
-      if (err) {
-        // Should be a duplicate, does not matter
-        return;
-      }
-    });
+    this.db.run(
+      'INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)',
+      [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length],
+      (err: { message: any; }) => {
+        if (err) {
+          // Should be a duplicate, does not matter
+          return;
+        }
+      },
+    );
+
+    // This must occur after the save.
+    game.lastSaveId++;
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

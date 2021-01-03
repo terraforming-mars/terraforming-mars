@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class SpinoffDepartment implements IProjectCard {
     public cost = 10;
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.SPINOFF_DEPARTMENT
     public cardType = CardType.ACTIVE;
 

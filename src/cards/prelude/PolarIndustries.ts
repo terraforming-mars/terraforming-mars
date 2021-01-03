@@ -10,7 +10,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class PolarIndustries extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.POLAR_INDUSTRIES;
     public play(player: Player, game: Game) {
       game.defer(new PlaceOceanTile(player, game));

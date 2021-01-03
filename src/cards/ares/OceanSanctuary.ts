@@ -14,6 +14,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class OceanSanctuary implements IResourceCard {
   public cost = 9;
@@ -24,7 +25,7 @@ export class OceanSanctuary implements IResourceCard {
   public name = CardName.OCEAN_SANCTUARY;
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.board.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);
+    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 5);
   }
 
   public getVictoryPoints(): number {

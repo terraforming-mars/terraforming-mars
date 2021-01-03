@@ -4,6 +4,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
+import {PowerPlantStandard} from '../../../src/cards/standardProjects/PowerPlant';
 
 describe('Manutech', function() {
   let card : Manutech; let player : Player; let game : Game;
@@ -23,10 +24,8 @@ describe('Manutech', function() {
   });
 
   it('Should add energy resources by Power Plant standard project', function() {
-    const action = (player as any).buildPowerPlant(game);
-    expect(action).is.not.undefined;
-    action.cb();
-        game.deferredActions.shift()!.execute();
-        expect(player.getResource(Resources.ENERGY)).to.eq(1);
+    new PowerPlantStandard().action(player, game);
+    game.deferredActions.shift()!.execute();
+    expect(player.getResource(Resources.ENERGY)).to.eq(1);
   });
 });

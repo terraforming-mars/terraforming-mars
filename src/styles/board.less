@@ -32,7 +32,6 @@
 	font-size: 10px;
 	font-weight: bold;
 	fill: white;
-	fill-opacity: 0.5;
 	pointer-events: none;
 }
 
@@ -212,6 +211,7 @@
 	width: 46px;
 	height: 51px;
 	position: absolute;
+	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 
 	.board-space-text {
 		font-size: 11px;
@@ -253,6 +253,15 @@
 	background: url(assets/hex_white.png) no-repeat;
 }
 
+.board-space-type-land-volcanic {
+	background-image: url(assets/hex_volcanic.png);
+	background-color: #8305;
+}
+
+.board-space-type-land-noctis {
+	background-color: #fff6;
+}
+
 .board-space-type-ocean {
 	background: url(assets/hex_blue.png) no-repeat;
 	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
@@ -264,20 +273,3 @@
     margin-bottom: -1px;
 }
 
-.seasonal-xmas-tree{
-    background: url(assets/misc/xmas-tree.png) no-repeat;
-    background-size: 55px 55px;
-    width: 55px;
-    height: 55px;
-    position: absolute;
-    margin: 60px 0px 0px 290px;
-}
-
-.seasonal-santa{
-    background: url(assets/misc/santa.png) no-repeat;
-    background-size: 100px 58px;
-    width: 100px;
-    height: 58px;
-    position: absolute;
-    margin: -10px 0px 0px -15px;
-}

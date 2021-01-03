@@ -9,20 +9,21 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
-    public tags = [Tags.VENUS, Tags.MICROBES];
+    public tags = [Tags.VENUS, Tags.MICROBE];
     public name = CardName.SULPHUR_EATING_BACTERIA;
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
     }
     public play() {
       return undefined;

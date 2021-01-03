@@ -1538,7 +1538,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     while (result.length < total) {
       if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
-        game.log('discarded every card without match');
+        this.log('discarded every card without match');
         break;
       }
       const projectCard = this.dealer.dealCard();

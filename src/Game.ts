@@ -58,6 +58,7 @@ import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
+import {AresSetup} from './ares/AresSetup';
 
 export type GameId = string;
 
@@ -237,7 +238,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {
-      game.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+      game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
     // Single player game player starts with 14TR
@@ -273,7 +274,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Setup Ares hazards
     if (gameOptions.aresExtension && gameOptions.aresHazards) {
-      AresHandler.setupHazards(game, players.length);
+      AresSetup.setupHazards(game, players.length);
     }
 
     // Setup custom corporation list

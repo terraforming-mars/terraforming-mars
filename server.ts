@@ -466,7 +466,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           });
         });
       } else {
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions);
+        const seed = Math.random();
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

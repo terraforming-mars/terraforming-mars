@@ -1,4 +1,5 @@
 import {Game, GameId} from '../Game';
+import {GameSetup} from '../GameSetup';
 import {Player} from '../Player';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
@@ -28,6 +29,12 @@ export class Cloner {
       throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
     }
     Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
+    if (oldPlayerIds.length === 1) {
+      Cloner.replacePlayerIds(
+        serialized,
+        [GameSetup.neutralPlayerFor(sourceGameId).id],
+        [GameSetup.neutralPlayerFor(newGameId).id]);
+    }
     serialized.id = newGameId;
 
     for (let idx = 0; idx < players.length; idx++) {

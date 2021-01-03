@@ -213,11 +213,12 @@ export class Game implements ISerializable<SerializedGame> {
     this.board = board;
   }
 
+  // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)
   public static newInstance(id: GameId,
     players: Array<Player>,
     firstPlayer: Player,
-    gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
-    const seed = Math.random();
+    gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
+    seed: number = 0): Game {
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
@@ -1522,7 +1523,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.players[0].terraformRatingAtGenerationStart = 14;
     // Single player add neutral player
     // put 2 neutrals cities on board with adjacent forest
-    const neutral = new Player('neutral', Color.NEUTRAL, true, 0, this.id + '-neutral');
+    const neutral = GameSetup.neutralPlayerFor(this.id);
 
     function placeCityAndForest(game: Game, direction: -1 | 1) {
       const space1 = game.getSpaceByOffset(direction);
@@ -1567,13 +1568,14 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
+    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
     let board;
     if (gameOptions.boardName === BoardName.ELYSIUM) {
-      board = ElysiumBoard.deserialize(d.board, players);
+      board = ElysiumBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.HELLAS) {
-      board = HellasBoard.deserialize(d.board, players);
+      board = HellasBoard.deserialize(d.board, playersForBoard);
     } else {
-      board = OriginalBoard.deserialize(d.board, players);
+      board = OriginalBoard.deserialize(d.board, playersForBoard);
     }
 
     // Rebuild dealer object to be sure that we will have cards in the same order

@@ -58,7 +58,9 @@ export class Localfilesystem implements IDatabase {
     this.getGames((err, gameIds) => {
       const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
       const gameData = filtered.map((gameId) => {
-        return {gameId: gameId, playerCount: 2} as IGameData;
+        const text = fs.readFileSync(this._historyFilename(gameId, 0));
+        const serializedGame = JSON.parse(text) as SerializedGame;
+        return {gameId: gameId, playerCount: serializedGame.players.length} as IGameData;
       });
       cb(err, gameData);
     });

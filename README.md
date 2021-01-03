@@ -1,8 +1,11 @@
 # Terraforming-mars
 
+This is an open-source online implementation of the great board game Terraforming mars. **It is not affiliated
+with FryxGames, Asmodee Digital or Steam in any way.**
+
 **Terraforming Mars Board Game**
 
-The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use. If you want to play with people online, you can use this web app.
+The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
 Join us on Discord [here](https://discord.gg/fWXE53K).
 

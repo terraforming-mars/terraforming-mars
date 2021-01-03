@@ -451,17 +451,19 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       };
 
       if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-        Cloner.clone(gameId, gameOptions.clonedGamedId, players, firstPlayerIdx, (err, game) => {
-          if (err) {
-            throw err;
-          }
-          if (game === undefined) {
-            throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
-          }
-          GameLoader.getInstance().add(game);
-          res.setHeader('Content-Type', 'application/json');
-          res.write(getGameModelJSON(game));
-          res.end();
+        Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId, (err, serialized) => {
+          Cloner.clone(gameId, players, firstPlayerIdx, err, serialized, (err, game) => {
+            if (err) {
+              throw err;
+            }
+            if (game === undefined) {
+              throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
+            }
+            GameLoader.getInstance().add(game);
+            res.setHeader('Content-Type', 'application/json');
+            res.write(getGameModelJSON(game));
+            res.end();
+          });
         });
       } else {
         const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions);

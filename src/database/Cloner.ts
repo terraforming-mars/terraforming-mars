@@ -1,37 +1,46 @@
 import {Game, GameId} from '../Game';
 import {Player} from '../Player';
-import {Database} from './Database';
+import {SerializedGame} from '../SerializedGame';
+import {SerializedPlayer} from '../SerializedPlayer';
 import {DbLoadCallback} from './IDatabase';
 
 export class Cloner {
-  public static clone(id: GameId,
-    sourceGameId: GameId,
+  public static clone(
+    id: GameId,
     players: Array<Player>,
     firstPlayerIndex: number,
-    cb: DbLoadCallback<Game>): void {
-    Database.getInstance().loadCloneableGame(sourceGameId, (err, serialized) => {
-      if (err !== undefined) {
-        cb(err, undefined);
-        return;
-      }
-      if (serialized === undefined) {
-        cb(err, undefined);
-        return;
-      }
+    err: any,
+    serialized: SerializedGame | undefined,
+    cb: DbLoadCallback<Game>) {
+    if (err !== undefined) {
+      cb(err, undefined);
+      return;
+    }
+    if (serialized === undefined) {
+      cb(err, undefined);
+      return;
+    }
 
-      const oldPlayerIds = serialized.players.map((player) => player.id);
-      const newPlayerIds = players.map((player) => player.id);
-      Cloner.replacePlayers(serialized, oldPlayerIds, newPlayerIds);
-      serialized.id = id;
-      serialized.players = players.map((player) => player.serialize());
-      serialized.first = serialized.players[firstPlayerIndex].id;
+    const sourceGameId = serialized.id;
+    const oldPlayerIds = serialized.players.map((player) => player.id);
+    const newPlayerIds = players.map((player) => player.id);
+    if (oldPlayerIds.length !== newPlayerIds.length) {
+      throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
+    }
+    Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
+    serialized.id = id;
 
-      const game: Game = Game.deserialize(serialized);
-      cb(undefined, game);
-    });
+    for (let idx = 0; idx < players.length; idx++) {
+      this.updatePlayer(players[idx], serialized.players[idx]);
+    }
+    serialized.first = serialized.players[firstPlayerIndex].id;
+    serialized.clonedGamedId = '#' + sourceGameId;
+
+    const game: Game = Game.deserialize(serialized);
+
+    cb(undefined, game);
   }
-
-  private static replacePlayers(obj: any, oldPlayerIds:Array<string>, newPlayerIds: Array<string>) {
+  private static replacePlayerIds(obj: any, oldPlayerIds:Array<string>, newPlayerIds: Array<string>) {
     if (obj === undefined || obj === null || typeof obj !== 'object') {
       return;
     }
@@ -44,10 +53,24 @@ export class Cloner {
             obj[key] = newPlayerIds[idx];
           }
         } else if (typeof val === 'object') {
-          Cloner.replacePlayers(val, oldPlayerIds, newPlayerIds);
+          Cloner.replacePlayerIds(val, oldPlayerIds, newPlayerIds);
         }
       }
     });
+  }
+
+  private static updatePlayer(from: Player, to: SerializedPlayer) {
+    // id is already copied over.
+    to.color = from.color;
+    to.name = from.name;
+
+    // Handicap updates are only done during game set-up. So when cloning, adjust the
+    // terraforming rating to the difference between the two handicaps.
+    const terraformRatingDelta = from.handicap - to.handicap;
+    const newTerraformRating = to.terraformRating + terraformRatingDelta;
+    to.terraformRating = newTerraformRating;
+    // Also update the handicap to reflect appropriately.
+    to.handicap = from.handicap;
   }
 }
 

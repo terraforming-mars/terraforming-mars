@@ -227,12 +227,8 @@ export class Game implements ISerializable<SerializedGame> {
 
     const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
 
-    // Clone game
-    if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-      throw new Error('Clone game disabled temporarily. Should be restored in January.');
-    //   game.cloneGame(gameOptions.clonedGamedId);
-    //   game.clonedGamedId = '#' + gameOptions.clonedGamedId;
-    //   return game;
+    if (gameOptions.clonedGamedId !== undefined) {
+      throw new Error('Cloning should not come through this execution path.');
     }
 
     // Initialize Ares data
@@ -243,9 +239,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Single player game player starts with 14TR
     // and 2 neutral cities and forests on board
     if (players.length === 1) {
-      gameOptions.draftVariant = false;
-      gameOptions.initialDraftVariant = false;
-      gameOptions.randomMA = RandomMAOptionType.NONE;
+      // TODO(kberg): move to GameSetup.
       game.setupSolo();
     }
 
@@ -306,12 +300,12 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       if (!player.beginner ||
-      // Bypass beginner choice if any extension is choosen
-            gameOptions.preludeExtension ||
-            gameOptions.venusNextExtension ||
-            gameOptions.coloniesExtension ||
-            gameOptions.turmoilExtension ||
-            gameOptions.initialDraftVariant) {
+        // Bypass beginner choice if any extension is choosen
+        gameOptions.preludeExtension ||
+        gameOptions.venusNextExtension ||
+        gameOptions.coloniesExtension ||
+        gameOptions.turmoilExtension ||
+        gameOptions.initialDraftVariant) {
         for (let i = 0; i < gameOptions.startingCorporations; i++) {
           const corpCard = corporationCards.pop();
           if (corpCard !== undefined) {
@@ -1520,6 +1514,10 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private setupSolo() {
+    this.gameOptions.draftVariant = false;
+    this.gameOptions.initialDraftVariant = false;
+    this.gameOptions.randomMA = RandomMAOptionType.NONE;
+
     this.players[0].setTerraformRating(14);
     this.players[0].terraformRatingAtGenerationStart = 14;
     // Single player add neutral player

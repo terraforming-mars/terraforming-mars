@@ -20,18 +20,13 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  _pad(saveId: number, z = '0') {
-    const s = saveId.toString();
-    const width = 5;
-    return s.length >= width ? s : new Array(width - s.length + 1).join(z) + s;
-  }
-
   _filename(gameId: string): string {
     return path.resolve(dbFolder, `game-${gameId}.json`);
   }
 
   _historyFilename(gameId: string, saveId: number) {
-    return path.resolve(historyFolder, `game-${gameId}-${this._pad(saveId)}.json`);
+    const saveIdString = saveId.toString().padStart(5, '0');
+    return path.resolve(historyFolder, `game-${gameId}-${saveIdString}.json`);
   }
 
   saveGame(game: Game): void {

@@ -1533,22 +1533,24 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
-    let cardsToDraw = 0;
     const result: Array<IProjectCard> = [];
-    const discardedCards: Array<IProjectCard> = [];
+    const discardedCards = new Set<CardName>();
 
-    while (cardsToDraw < total) {
+    while (result.length < total) {
+      if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
+        this.log('discarded every card without match');
+        break;
+      }
       const projectCard = this.dealer.dealCard();
       if (include(projectCard)) {
-        cardsToDraw++;
         result.push(projectCard);
       } else {
-        discardedCards.push(projectCard);
+        discardedCards.add(projectCard.name);
         this.dealer.discard(projectCard);
       }
     }
 
-    LogHelper.logDiscardedCards(this, discardedCards);
+    LogHelper.logDiscardedCards(this, Array.from(discardedCards));
 
     return result;
   }
@@ -1563,10 +1565,6 @@ export class Game implements ISerializable<SerializedGame> {
 
   public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
     return this.drawProjectCardsByCondition(total, (card) => card.cardType === cardType);
-  }
-
-  public getCardsInHandByTag(player: Player, tag: Tags) {
-    return player.cardsInHand.filter((card) => card.tags.includes(tag));
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
@@ -1589,14 +1587,6 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
-  }
-
-  public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
-    return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
-  }
-
-  public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
-    return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
   }
 
   private setupSolo() {

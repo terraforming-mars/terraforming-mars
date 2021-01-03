@@ -42,23 +42,18 @@ export class CardLoader {
         return true;
       }
       const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
-      let meets = true;
-      expansions.forEach((expansion) => {
+      return expansions.every((expansion) => {
         switch (expansion) {
         case GameModule.Venus:
-          meets = meets && gameOptions.venusNextExtension;
-          break;
+          return gameOptions.venusNextExtension;
         case GameModule.Colonies:
-          meets = meets && gameOptions.coloniesExtension;
-          break;
+          return gameOptions.coloniesExtension;
         case GameModule.Turmoil:
-          meets = meets && gameOptions.turmoilExtension;
-          break;
+          return gameOptions.turmoilExtension;
         default:
           throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
         }
       });
-      return meets;
     };
   }
 

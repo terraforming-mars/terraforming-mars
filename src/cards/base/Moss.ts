@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Moss implements IProjectCard {
     public cost = 4;
@@ -15,7 +16,7 @@ export class Moss implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.MOSS;
     public canPlay(player: Player, game: Game): boolean {
-      const meetsOceanRequirements = game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
+      const meetsOceanRequirements = game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
       const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
       const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
 

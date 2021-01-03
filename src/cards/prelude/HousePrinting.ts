@@ -1,4 +1,3 @@
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -7,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class HousePrinting implements IProjectCard {
+export class HousePrinting {
     public cost = 10;
     public tags = [Tags.BUILDING];
     public name = CardName.HOUSE_PRINTING;

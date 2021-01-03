@@ -7,6 +7,8 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
+  public abstract getVolcanicSpaceIds(): Array<string>;
+  public abstract getNoctisCitySpaceIds(): Array<string>
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {

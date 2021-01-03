@@ -16,6 +16,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -25,7 +26,7 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
     public resourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 14;
+      return game.checkMaxRequirements(player, GlobalParameter.VENUS, 14);
     }
     public play() {
       return undefined;

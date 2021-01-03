@@ -13,6 +13,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class ProtectedValley implements IProjectCard {
     public cost = 23;
@@ -46,7 +47,7 @@ export class ProtectedValley implements IProjectCard {
       cardNumber: '174',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => pb.megacredits(2)).nbsp;
-        b.greenery().secondaryTag('oxygen').asterix();
+        b.greenery().secondaryTag(AltSecondaryTag.OXYGEN).asterix();
       }),
       description: 'Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',
     }

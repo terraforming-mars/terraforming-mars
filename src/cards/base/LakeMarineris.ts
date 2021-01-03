@@ -10,7 +10,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class LakeMarineris implements IProjectCard {
     public cost = 18;
@@ -18,7 +18,7 @@ export class LakeMarineris implements IProjectCard {
     public name = CardName.LAKE_MARINERIS;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      const meetsTemperatureRequirements = game.getTemperature() >= 0 - (2 * player.getRequirementsBonus(game));
+      const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 0);
       const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();
       const oceansPlaced = Math.min(remainingOceans, 2);
 

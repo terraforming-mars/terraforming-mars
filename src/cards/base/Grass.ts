@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Grass implements IProjectCard {
     public cost = 11;
@@ -15,7 +16,7 @@ export class Grass implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.GRASS;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -16 - (2 * player.getRequirementsBonus(game));
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -16);
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS);

@@ -10,6 +10,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class OpenCity implements IProjectCard {
     public cost = 23;
@@ -17,7 +18,7 @@ export class OpenCity implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.OPEN_CITY;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 12 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 12) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public play(player: Player, game: Game) {
       return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {

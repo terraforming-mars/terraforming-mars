@@ -19,6 +19,7 @@ import {Asteroid} from './base/Asteroid';
 import {AsteroidMining} from './base/AsteroidMining';
 import {AsteroidMiningConsortium} from './base/AsteroidMiningConsortium';
 import {BeamFromAThoriumAsteroid} from './base/BeamFromAThoriumAsteroid';
+import {BeginnerCorporation} from './corporation/BeginnerCorporation';
 import {BigAsteroid} from './base/BigAsteroid';
 import {BiomassCombustors} from './base/BiomassCombustors';
 import {Birds} from './base/Birds';
@@ -371,6 +372,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ZEPPELINS, Factory: Zeppelins},
   ],
   corporationCards: [
+    {cardName: CardName.BEGINNER_CORPORATION, Factory: BeginnerCorporation},
     {cardName: CardName.CREDICOR, Factory: CrediCor},
     {cardName: CardName.ECOLINE, Factory: EcoLine},
     {cardName: CardName.HELION, Factory: Helion},

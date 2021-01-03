@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class GreatDam implements IProjectCard {
     public cost = 12;
@@ -15,7 +16,7 @@ export class GreatDam implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public name = CardName.GREAT_DAM;
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
     }
     public play(player: Player) {
       player.addProduction(Resources.ENERGY, 2);

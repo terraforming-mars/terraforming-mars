@@ -12,6 +12,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public cost = 10;
@@ -22,7 +23,7 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 2);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 13);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

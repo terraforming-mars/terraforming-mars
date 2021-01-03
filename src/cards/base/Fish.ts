@@ -13,6 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class Fish implements IActionCard, IProjectCard, IResourceCard {
     public cost = 9;
@@ -23,7 +24,7 @@ export class Fish implements IActionCard, IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 2) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

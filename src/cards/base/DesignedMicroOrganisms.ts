@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class DesignedMicroOrganisms implements IProjectCard {
     public cost = 16;
@@ -15,9 +16,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
     public name = CardName.DESIGNED_MICRO_ORGANISMS;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() <= -14 + (
-        2 * player.getRequirementsBonus(game)
-      );
+      return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -14);
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS, 2);

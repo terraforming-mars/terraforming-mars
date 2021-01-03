@@ -1,4 +1,4 @@
-import {CardRenderItem} from './CardRenderItem';
+import {AltSecondaryTag, CardRenderItem} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
@@ -323,7 +323,7 @@ class Builder {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     if (withO2) {
-      item.secondaryTag = 'oxygen';
+      item.secondaryTag = AltSecondaryTag.OXYGEN;
     }
     this._addRowItem(item);
     return this;
@@ -653,7 +653,7 @@ class Builder {
     return this;
   }
 
-  public secondaryTag(tag: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater' | 'blue'): Builder {
+  public secondaryTag(tag: Tags | AltSecondaryTag): Builder {
     this._checkExistingItem();
     const row = this._getCurrentRow();
     if (row !== undefined) {

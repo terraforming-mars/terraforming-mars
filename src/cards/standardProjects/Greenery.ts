@@ -9,6 +9,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Greenery extends StandardProjectCard {
   public name = CardName.STANDARD_GREENERY;
@@ -30,7 +31,7 @@ export class Greenery extends StandardProjectCard {
     cardNumber: '',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
-        eb.megacredits(23).startAction.greenery().secondaryTag('oxygen');
+        eb.megacredits(23).startAction.greenery().secondaryTag(AltSecondaryTag.OXYGEN);
         eb.description('Spend 23 MC to place a greenery tile and raise oxygen 1 step.');
       }),
     ),

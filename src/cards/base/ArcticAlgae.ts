@@ -9,6 +9,7 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class ArcticAlgae implements IProjectCard {
   public cost = 12;
@@ -16,7 +17,7 @@ export class ArcticAlgae implements IProjectCard {
   public name = CardName.ARCTIC_ALGAE;
   public cardType = CardType.ACTIVE;
   public canPlay(player: Player, game: Game): boolean {
-    return game.getTemperature() <= -12 + player.getRequirementsBonus(game) * 2;
+    return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
   public onTilePlaced(player: Player, space: ISpace) {
     if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {

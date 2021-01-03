@@ -22,7 +22,7 @@ describe('CrediCor', function() {
   it('Should play', function() {
     const action = card.play();
     expect(action).is.undefined;
-
+    player.corporationCard = card;
     card.onStandardProject(player, new AsteroidStandard());
     card.onStandardProject(player, new City());
     card.onStandardProject(player, new Greenery());

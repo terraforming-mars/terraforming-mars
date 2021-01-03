@@ -49,7 +49,24 @@ export class Localfilesystem implements IDatabase {
     }
   }
   getClonableGames(cb: (err: any, allGames: Array<IGameData>) => void) {
-    cb(undefined, []);
+    this.getGames((err, gameIds) => {
+      const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
+      const gameData = filtered.map((gameId) => {
+        return {gameId: gameId, playerCount: 2} as IGameData;
+      });
+      cb(err, gameData);
+    });
+  }
+
+  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+    try {
+      console.log(`Loading ${game_id} at save point 0`);
+      const text = fs.readFileSync(this._historyFilename(game_id, 0));
+      const serializedGame = JSON.parse(text);
+      cb(undefined, serializedGame);
+    } catch (err) {
+      cb(err, undefined);
+    }
   }
 
   getGames(cb: (err: any, allGames: Array<GameId>) => void) {
@@ -70,7 +87,7 @@ export class Localfilesystem implements IDatabase {
     cb(undefined, gameIds);
   }
 
-  restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback) {
+  restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback<Game>) {
     cb('Does not work', undefined);
   }
 
@@ -82,7 +99,7 @@ export class Localfilesystem implements IDatabase {
     // Not implemented here.
   }
 
-  restoreGame(_game_id: GameId, _save_id: number, _cb: DbLoadCallback): void {
+  restoreGame(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
     throw new Error('Undo not yet implemented');
   }
 

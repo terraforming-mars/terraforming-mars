@@ -1,10 +1,14 @@
+import {CardName} from './CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 
 export class Deck<T extends ICard> {
-  constructor(public cards: Array<ICardFactory<T>>) {}
+  public readonly factories: Map<CardName, ICardFactory<T>>;
+  constructor(cards: Array<ICardFactory<T>>) {
+    this.factories = new Map(cards.map((cf) => [cf.cardName, cf]));
+  }
 
-  public findByCardName(name: string): ICardFactory<T> | undefined {
-    return this.cards.find((cf) => cf.cardName === name);
+  public findByCardName(name: CardName): ICardFactory<T> | undefined {
+    return this.factories.get(name);
   }
 }

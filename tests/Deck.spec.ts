@@ -16,9 +16,9 @@ describe('Deck', function() {
   const deck: Deck<IProjectCard> = new Deck(cards);
 
   it('findCardByName: success', function() {
-    expect(deck.findByCardName('Acquired Company')).is.not.undefined;
+    expect(deck.findByCardName(CardName.ACQUIRED_COMPANY)).is.not.undefined;
   });
   it('findCardByName: failure', function() {
-    expect(deck.findByCardName('Ecological Zone')).is.undefined;
+    expect(deck.findByCardName(CardName.ECOLOGICAL_ZONE)).is.undefined;
   });
 });

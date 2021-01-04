@@ -583,7 +583,16 @@ function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void 
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
-Database.getInstance();
+
+try {
+  // The first call to Database.getInstance also intiailizes a connection to the database. Better to
+  // fail here than after the server opens to process requests.
+  Database.getInstance();
+} catch (err) {
+  console.error('Cannot connect to database:', err);
+  throw err;
+}
+
 console.log('version 0.X');
 
 server.listen(process.env.PORT || 8080);

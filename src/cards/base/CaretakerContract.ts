@@ -51,5 +51,5 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
       player.increaseTerraformRating(game);
       return undefined;
     });
-  }   
+  }
 }

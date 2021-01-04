@@ -1306,9 +1306,7 @@ export class Game implements ISerializable<SerializedGame> {
     const coveringExistingTile = space.tile !== undefined;
 
     // Part 4. Place the tile
-    space.tile = tile;
-    space.player = player;
-    LogHelper.logTilePlacement(this, player, space, tile.tileType);
+    this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
 
@@ -1361,6 +1359,12 @@ export class Game implements ISerializable<SerializedGame> {
       // Must occur after all other onTilePlaced operations.
       AresHandler.afterTilePlacement(this, player, startingResources);
     });
+  }
+
+  public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
+    space.tile = tile;
+    space.player = player;
+    LogHelper.logTilePlacement(this, player, space, tile.tileType);
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {

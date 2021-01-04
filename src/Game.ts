@@ -220,6 +220,10 @@ export class Game implements ISerializable<SerializedGame> {
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
     seed: number = 0): Game {
+    if (gameOptions.clonedGamedId !== undefined) {
+      throw new Error('Cloning should not come through this execution path.');
+    }
+
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
@@ -228,10 +232,6 @@ export class Game implements ISerializable<SerializedGame> {
     const activePlayer = firstPlayer.id;
 
     const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
-
-    if (gameOptions.clonedGamedId !== undefined) {
-      throw new Error('Cloning should not come through this execution path.');
-    }
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {

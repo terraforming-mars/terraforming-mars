@@ -14,6 +14,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {LogHelper} from '../../LogHelper';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -99,9 +100,9 @@ export class MarsFirstPolicy04 implements Policy {
       false,
       'Select how to pay for action',
       () => {
-        player.cardsInHand.push(game.drawCardsByTag(Tags.BUILDING, 1)[0]);
-        const drawnCard = game.getCardsInHandByTag(player, Tags.BUILDING).slice(-1)[0];
-        game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+        const card = game.drawCardsByTag(Tags.BUILDING, 1);
+        player.cardsInHand.push(...card);
+        LogHelper.logDrawnCards(game, player, card);
       },
     ));
 

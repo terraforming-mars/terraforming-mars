@@ -5,6 +5,7 @@
  */
 const jsdom = require('jsdom');
 import {Database} from '../../src/database/Database';
+import {IDatabase} from '../../src/database/IDatabase';
 
 const dom = new jsdom.JSDOM('<!doctype html><html><body></body></html>');
 
@@ -39,9 +40,9 @@ Database.getInstance = function() {
     getGame: () => {},
     getGames: () => {},
     restoreGame: () => {},
-    restoreReferenceGame: () => {},
+    loadCloneableGame: () => {},
     saveGameResults: () => {},
-    saveGameState: () => {},
-  };
+    saveGame: () => {},
+  } as IDatabase;
 };
 

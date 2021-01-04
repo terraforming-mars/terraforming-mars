@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
@@ -9,7 +8,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardMetadata} from '../../cards/CardMetadata';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-export class GalileanMining extends PreludeCard implements IProjectCard {
+export class GalileanMining extends PreludeCard {
     public tags = [Tags.JOVIAN];
     public name = CardName.GALILEAN_MINING;
     public canPlay(player: Player, _game: Game) {
@@ -26,7 +25,7 @@ export class GalileanMining extends PreludeCard implements IProjectCard {
         b.productionBox((pb) => {
           pb.titanium(2);
         }).br;
-        b.minus().megacredits(5);
+        b.megacredits(-5);
       }),
       description: 'Increase your titanium production 2 steps. Pay 5 MC.',
     }

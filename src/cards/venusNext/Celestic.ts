@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {Game} from '../../Game';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -12,6 +11,7 @@ import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name = CardName.CELESTIC;
@@ -37,29 +37,9 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
 
     public initialActionText: string = 'Draw 2 cards with a floater icon on it';
     public initialAction(player: Player, game: Game) {
-      const requiredCardsCount = 2;
-      if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
-        let drawnCount = 0;
-        const floaterCards: Array<CardName> = [];
-        const discardedCards: Array<IProjectCard> = [];
-
-        while (drawnCount < requiredCardsCount) {
-          const card = game.dealer.dealCard();
-          if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
-            player.cardsInHand.push(card);
-            drawnCount++;
-            floaterCards.push(card.name);
-          } else {
-            discardedCards.push(card);
-            game.dealer.discard(card);
-          }
-        }
-
-        game.log('${0} drew ${1} and ${2}', (b) => b.player(player).cardName(floaterCards[0]).cardName(floaterCards[1]));
-
-        LogHelper.logDiscardedCards(game, discardedCards);
-      }
-
+      const cards = game.drawProjectCardsByCondition(2, (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER);
+      player.cardsInHand.push(...cards);
+      LogHelper.logDrawnCards(game, player, cards);
       return undefined;
     }
 
@@ -99,7 +79,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
       cardNumber: 'R05',
       description: 'You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
       renderData: CardRenderer.builder((b) => {
-        b.megacredits(42).nbsp.cards(2).secondaryTag('floater');
+        b.megacredits(42).nbsp.cards(2).secondaryTag(AltSecondaryTag.FLOATER);
         b.corpBox('action', (ce) => {
           ce.effectBox((eb) => {
             eb.empty().startAction.floaters(1).asterix();

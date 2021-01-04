@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -10,17 +11,29 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
-export class ArtificialLake implements IProjectCard {
-  public cost = 15;
-  public tags = [Tags.BUILDING];
-  public name = CardName.ARTIFICIAL_LAKE;
-  public cardType = CardType.AUTOMATED;
+export class ArtificialLake extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.ARTIFICIAL_LAKE,
+      tags: [Tags.BUILDING],
+      cost: 15,
+
+      metadata: {
+        description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.',
+        cardNumber: '116',
+        requirements: CardRequirements.builder((b) => b.temperature(-6)),
+        renderData: CardRenderer.builder((b) => b.oceans(1).asterix()),
+        victoryPoints: 1,
+      },
+    });
+  }
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.getTemperature() >= -6 - player.getRequirementsBonus(game) * 2;
+    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
@@ -40,12 +53,4 @@ export class ArtificialLake implements IProjectCard {
   public getVictoryPoints() {
     return 1;
   }
-
-  public metadata: CardMetadata = {
-    description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.',
-    cardNumber: '116',
-    requirements: CardRequirements.builder((b) => b.temperature(-6)),
-    renderData: CardRenderer.builder((b) => b.oceans(1).asterix()),
-    victoryPoints: 1,
-  };
 }

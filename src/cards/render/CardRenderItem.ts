@@ -6,6 +6,19 @@ import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {Tags} from '../Tags';
 
+// Tags that belong in `CardRenderItem.secondaryTag` that aren't part of `Tags`.
+export enum AltSecondaryTag {
+  // 'req' => used for Cutting Edge Technology's discount on cards with requirements
+  REQ = 'req',
+  // 'oxygen' => used for Greenery tile that increases oxygen on placement
+  OXYGEN = 'oxygen',
+  // 'turmoil' => used in Political Uprising community prelude
+  TURMOIL = 'turmoil',
+  FLOATER = 'floater',
+  // 'blue' => used in Project Workshop
+  BLUE = 'blue',
+}
+
 export class CardRenderItem {
   // TODO (chosta): use child classes to describe special behavior
   public anyPlayer?: boolean; // activated for any player
@@ -18,14 +31,11 @@ export class CardRenderItem {
   public isPlate?: boolean; // used to mark plate a.k.a. text with golden background
   public size?: CardRenderItemSize;
   // adding tag dependency (top right bubble)
-  // 'req' => used for Cutting Edge Technology's discount on cards with requirements
-  // 'oxygen' => used for Greenery tile that increases oxygen on placement
-  // 'turmoil' => used in Political Uprising community prelude
-  // 'blue' => used in Project Workshop
-  // TODO (chosta): if we have more than four! non Tags secondary tag, add an enum
-  public secondaryTag?: Tags | 'req' | 'oxygen' | 'turmoil' | 'floater' | 'blue';
+  public secondaryTag?: Tags | AltSecondaryTag;
   // use this for amount labels like 2x, x, etc.
   public multiplier?: boolean = false;
+  // add a symbol on top of the item to show it's cancelled or negated in some way (usually X)
+  public cancelled?: boolean = false;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown
   constructor(public type: CardRenderItemType, public amount: number = -1) {
     if (Math.abs(this.amount) > 5) {

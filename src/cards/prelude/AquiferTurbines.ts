@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -10,7 +9,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AquiferTurbines extends PreludeCard implements IProjectCard {
+export class AquiferTurbines extends PreludeCard {
     public tags = [Tags.ENERGY];
     public name = CardName.AQUIFER_TURBINES;
     public canPlay(player: Player, _game: Game) {
@@ -26,7 +25,7 @@ export class AquiferTurbines extends PreludeCard implements IProjectCard {
       cardNumber: 'P02',
       renderData: CardRenderer.builder((b) => {
         b.oceans(1).productionBox((pb) => pb.energy(2)).br;
-        b.minus().megacredits(3);
+        b.megacredits(-3);
       }),
       description: 'Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.',
     }

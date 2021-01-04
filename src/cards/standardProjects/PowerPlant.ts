@@ -21,7 +21,7 @@ export class PowerPlantStandard extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP7',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(11).startAction.productionBox((pb) => {

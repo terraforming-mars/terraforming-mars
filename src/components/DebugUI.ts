@@ -10,24 +10,30 @@ import {
 import {GameModule} from '../GameModule';
 import {ICard} from '../cards/ICard';
 import {ICardRenderDescription, isIDescription} from '../cards/render/ICardRenderDescription';
+import {CardName} from '../CardName';
+import {ICardFactory} from '../cards/ICardFactory';
 
-interface Entry {
-  card: ICard,
-  module: GameModule
-}
-const cards: Map<string, Entry> = new Map();
+const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
+
 ALL_CARD_MANIFESTS.forEach((manifest) => {
-  manifest.projectCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.corporationCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
-  manifest.preludeCards.cards.forEach((card) =>
-    cards.set(card.cardName, {card: new card.Factory(), module: manifest.module}));
+  const module = manifest.module;
+  [
+    manifest.projectCards,
+    manifest.corporationCards,
+    manifest.preludeCards,
+    manifest.standardProjects].forEach((deck) => {
+    deck.factories.forEach((cf: ICardFactory<ICard>) => {
+      const card: ICard = new cf.Factory();
+      const cardNumber = card.metadata.cardNumber;
+      cards.set(card.name, {card, module, cardNumber});
+    });
+  });
 });
 
 export interface DebugUIModel {
   filterText: string,
   filterDescription: boolean | unknown[],
+  sortById: boolean | unknown[],
   base: boolean | unknown[],
   corporateEra: boolean | unknown[],
   prelude: boolean | unknown[],
@@ -46,6 +52,7 @@ export const DebugUI = Vue.component('debug-ui', {
     return {
       filterText: '',
       filterDescription: false,
+      sortById: false,
       base: true,
       corporateEra: true,
       prelude: true,
@@ -70,19 +77,30 @@ export const DebugUI = Vue.component('debug-ui', {
       data.promo = !data.promo;
       data.ares = !data.ares;
     },
+    sort: function(names: Array<CardName>): Array<CardName> {
+      if (this.$data.sortById) {
+        return names.sort((a: CardName, b: CardName) => {
+          const an = cards.get(a)?.cardNumber || '';
+          const bn = cards.get(b)?.cardNumber || '';
+          return an.localeCompare(bn);
+        });
+      } else {
+        return names.sort();
+      }
+    },
     getAllStandardProjectCards: function() {
-      return ALL_STANDARD_PROJECT_CARD_NAMES.sort();
+      return this.sort(ALL_STANDARD_PROJECT_CARD_NAMES);
     },
     getAllProjectCards: function() {
-      return ALL_PROJECT_CARD_NAMES.sort();
+      return this.sort(ALL_PROJECT_CARD_NAMES);
     },
     getAllCorporationCards: function() {
-      return ALL_CORPORATION_CARD_NAMES.sort();
+      return this.sort(ALL_CORPORATION_CARD_NAMES);
     },
     getAllPreludeCards: function() {
-      return ALL_PRELUDE_CARD_NAMES.sort();
+      return this.sort(ALL_PRELUDE_CARD_NAMES);
     },
-    filtered: function(cardName: string): boolean {
+    filtered: function(cardName: CardName): boolean {
       const card = cards.get(cardName);
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
@@ -132,6 +150,10 @@ export const DebugUI = Vue.component('debug-ui', {
             <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
             <label for="filterDescription-checkbox">
                 <span v-i18n>Filter description</span>
+            </label>&nbsp;
+            <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
+            <label for="sortById-checkbox">
+                <span v-i18n>Sort by ID (work in progress)</span>
             </label>
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">

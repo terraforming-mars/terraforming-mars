@@ -1,13 +1,12 @@
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GreatAquifer extends PreludeCard implements IProjectCard {
+export class GreatAquifer extends PreludeCard {
     public tags = [];
     public name = CardName.GREAT_AQUIFER;
 

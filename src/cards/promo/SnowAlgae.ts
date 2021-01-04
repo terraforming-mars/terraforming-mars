@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SnowAlgae implements IProjectCard {
     public name = CardName.SNOW_ALGAE;
@@ -16,7 +17,7 @@ export class SnowAlgae implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() >= 2 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 2);
     }
 
     public play(player: Player) {

@@ -7,6 +7,8 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
+  public abstract getVolcanicSpaceIds(): Array<string>;
+  public abstract getNoctisCitySpaceIds(): Array<string>
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {
@@ -76,7 +78,7 @@ export abstract class Board {
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
-      (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length === 0,
+      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );
   }
 
@@ -205,22 +207,31 @@ export abstract class Board {
     } as SerializedBoard;
   }
 
-  public static deserializeSpace(space: SerializedSpace, players: Array<Player>): ISpace {
+  public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
     // TODO(kberg): Remove Player by 2021-01-15
-    const playerSpace : PlayerId | Player | undefined = space.player;
+    const playerSpace : PlayerId | Player | undefined = serialized.player;
     const playerId: PlayerId | undefined =
         (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
     const player = players.find((p) => p.id === playerId);
-    return {
-      id: space.id,
-      spaceType: space.spaceType,
-      tile: space.tile,
-      player: player,
-      bonus: space.bonus,
-      adjacency: space.adjacency,
-      x: space.x,
-      y: space.y,
+    const space = {
+      id: serialized.id,
+      spaceType: serialized.spaceType,
+      bonus: serialized.bonus,
+      x: serialized.x,
+      y: serialized.y,
     } as ISpace;
+
+    if (serialized.tile !== undefined) {
+      space.tile = serialized.tile;
+    }
+    if (player !== undefined) {
+      space.player = player;
+    }
+    if (serialized.adjacency !== undefined) {
+      space.adjacency = serialized.adjacency;
+    }
+
+    return space;
   }
 
   public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {

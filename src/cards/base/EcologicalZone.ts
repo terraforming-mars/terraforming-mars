@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -17,14 +18,41 @@ import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class EcologicalZone implements IProjectCard, IResourceCard {
-  public cost = 12;
-  public resourceType = ResourceType.ANIMAL;
+export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
+  constructor(
+    name: CardName = CardName.ECOLOGICAL_ZONE,
+    cost: number = 12,
+    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    metadata: CardMetadata = {
+      description: {
+        text: 'Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.',
+        align: 'left',
+      },
+      cardNumber: '128',
+      requirements: CardRequirements.builder((b) => b.greeneries()),
+      renderData: CardRenderer.builder((b) => {
+        b.effectBox((eb) => {
+          eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
+          eb.description('Effect: When you play an animal or plant tag /including these/, add an animal to this card.');
+        }).br;
+        b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true).tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+      }),
+      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
+    },
+  ) {
+    super({
+      cardType: CardType.ACTIVE,
+      name,
+      tags: [Tags.ANIMAL, Tags.PLANT],
+      cost,
+      resourceType: ResourceType.ANIMAL,
+      adjacencyBonus,
+
+      metadata,
+    });
+  }
+
   public resourceCount: number = 0;
-  public tags = [Tags.ANIMAL, Tags.PLANT];
-  public cardType = CardType.ACTIVE;
-  public name = CardName.ECOLOGICAL_ZONE;
-  public adjacencyBonus?: IAdjacencyBonus = undefined;
 
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
@@ -69,20 +97,4 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
       },
     );
   }
-  public metadata: CardMetadata = {
-    description: {
-      text: 'Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.',
-      align: 'left',
-    },
-    cardNumber: '128',
-    requirements: CardRequirements.builder((b) => b.forests()),
-    renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
-        eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
-        eb.description('Effect: When you play an animal or plant tag /including these/, add an animal to this card.');
-      }).br;
-      b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true).tile(TileType.ECOLOGICAL_ZONE, true).asterix();
-    }),
-    victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
-  };
 }

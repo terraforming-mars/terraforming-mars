@@ -1,13 +1,12 @@
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class HugeAsteroid extends PreludeCard implements IProjectCard {
+export class HugeAsteroid extends PreludeCard {
     public tags = [];
     public name = CardName.HUGE_ASTEROID;
     public canPlay(player: Player, _game: Game) {
@@ -22,7 +21,7 @@ export class HugeAsteroid extends PreludeCard implements IProjectCard {
       cardNumber: 'P15',
       renderData: CardRenderer.builder((b) => {
         b.temperature(3).br;
-        b.minus().megacredits(5);
+        b.megacredits(-5);
       }),
       description: 'Increase Temperature 3 steps. Pay 5 MC.',
     }

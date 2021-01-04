@@ -36,7 +36,7 @@ export class BuildColonyStandard extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP5',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.megacredits(17).startAction.colonies();

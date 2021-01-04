@@ -25,9 +25,11 @@ export class RedTourismWave implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      const amount = game.board.getEmptySpaces()
-        .filter((space) => game.board.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined &&
-                adj.player === player) !== undefined).length;
+      const amount = game.board.getEmptySpaces().filter((space) =>
+        game.board.getAdjacentSpaces(space).some((adj) =>
+          adj.tile !== undefined && adj.player === player,
+        ),
+      ).length;
       player.setResource(Resources.MEGACREDITS, amount);
       return undefined;
     }

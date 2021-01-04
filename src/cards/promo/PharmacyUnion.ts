@@ -1,4 +1,5 @@
 import {Tags} from '../Tags';
+import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../CardName';
@@ -28,11 +29,9 @@ export class PharmacyUnion implements CorporationCard {
 
     public play(player: Player, game: Game) {
       this.resourceCount = 2;
-
-      player.cardsInHand.push(game.drawCardsByTag(Tags.SCIENCE, 1)[0]);
-      const drawnCard = game.getCardsInHandByTag(player, Tags.SCIENCE).slice(-1)[0];
-
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+      const cards = game.drawCardsByTag(Tags.SCIENCE, 1);
+      player.cardsInHand.push(...cards);
+      LogHelper.logDrawnCards(game, player, cards);
 
       return undefined;
     }

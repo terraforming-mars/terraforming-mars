@@ -1,7 +1,7 @@
 import {Phase} from './Phase';
 import {CardName} from './CardName';
-import {ClaimedMilestone} from './ClaimedMilestone';
-import {FundedAward} from './FundedAward';
+import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
+import {SerializedFundedAward} from './awards/FundedAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IAward} from './awards/IAward';
 import {ColonyDealer} from './colonies/ColonyDealer';
@@ -21,7 +21,7 @@ export interface SerializedGame {
     aresData?: IAresData;
     awards: Array<IAward>;
     board: SerializedBoard;
-    claimedMilestones: Array<ClaimedMilestone>;
+    claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;
@@ -31,7 +31,7 @@ export interface SerializedGame {
     draftedPlayers: Array<PlayerId>;
     draftRound: number;
     first: SerializedPlayer | PlayerId;
-    fundedAwards: Array<FundedAward>;
+    fundedAwards: Array<SerializedFundedAward>;
     gameAge: number;
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;

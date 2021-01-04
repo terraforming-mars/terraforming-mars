@@ -7,6 +7,7 @@ import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -23,7 +24,8 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     }
 
     private drawTurmoilCard(player: Player, game: Game) {
-      const turmoilCards = TURMOIL_CARD_MANIFEST.projectCards.cards.map((c) => c.cardName);
+      const turmoilCards: Array<CardName> = [];
+      TURMOIL_CARD_MANIFEST.projectCards.factories.forEach((cf) => turmoilCards.push(cf.cardName));
       const drawnCard = game.dealer.deck.find((card) => turmoilCards.includes(card.name));
 
       if (drawnCard) {
@@ -40,7 +42,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
       cardNumber: 'Y03',
       renderData: CardRenderer.builder((b) => {
         b.delegates(4).br.br;
-        b.cards(1).secondaryTag('turmoil');
+        b.cards(1).secondaryTag(AltSecondaryTag.TURMOIL);
       }),
       description: 'Place 4 delegates. Draw a Turmoil card.',
     }

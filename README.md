@@ -1,8 +1,11 @@
 # Terraforming-mars
 
+This is an open-source online implementation of the great board game Terraforming mars. **It is not affiliated
+with FryxGames, Asmodee Digital or Steam in any way.**
+
 **Terraforming Mars Board Game**
 
-The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use. If you want to play with people online, you can use this web app.
+The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
 Join us on Discord [here](https://discord.gg/fWXE53K).
 
@@ -41,14 +44,15 @@ Additional information on how to setup the game server locally can be found [her
 
 A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environmental variables like `PORT=443`. The following are supported **and are optional**:
 
-* PORT: (default 8080) Which port to use for this server
-* HOST: What hostname to use
-* CERT_PATH: Your TLS certificate path (=> `fullchain.pem` created by certbot)
-* KEY_PATH: Your TLS private key path (=> `privkey.pem` created by certbot)
-* MAX_GAME_DAYS: How many days to keep unfinished games before deleting them
-* WAITING_FOR_TIMEOUT: (default 5000) How many milliseconds to check for game update on multi-player games
-* ASSET_CACHE_MAX_AGE: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
-* SERVER_ID: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
+* `PORT`: (default 8080) Which port to use for this server
+* `HOST`: What hostname to use
+* `CERT_PATH`: Your TLS certificate path (=> `fullchain.pem` created by certbot)
+* `KEY_PATH`: Your TLS private key path (=> `privkey.pem` created by certbot)
+* `MAX_GAME_DAYS`: How many days to keep unfinished games before deleting them
+* `WAITING_FOR_TIMEOUT`: (default 5000) How many milliseconds to check for game update on multi-player games
+* `ASSET_CACHE_MAX_AGE`: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
+* `SERVER_ID`: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
+* `LOCAL_FS_DB`: When non-empty, stores game states in JSON files. Good for local development and debugging, bad for hosting lots of games.
 
 ### Deployment
 
@@ -100,7 +104,7 @@ Thanks goes to these wonderful people:
   <tr>
     <td align="center">
       <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>Robert Konigsberg</b></sub><br />Ares expansion!!!!!</a>
+        <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a>
     </td>    
   </tr>
 </table>

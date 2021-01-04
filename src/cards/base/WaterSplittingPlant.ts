@@ -10,6 +10,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class WaterSplittingPlant implements IProjectCard {
     public cost = 12;
@@ -17,7 +18,7 @@ export class WaterSplittingPlant implements IProjectCard {
     public name = CardName.WATER_SPLITTING_PLANT;
     public cardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
-      return game.board.getOceansOnBoard() >= 2 - player.getRequirementsBonus(game);
+      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 2);
     }
     public play() {
       return undefined;

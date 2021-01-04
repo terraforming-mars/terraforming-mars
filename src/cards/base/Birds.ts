@@ -43,7 +43,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
     public resourceCount = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 13);
+      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 13) && game.someoneHasResourceProduction(Resources.PLANTS, 2);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

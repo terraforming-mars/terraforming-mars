@@ -19,6 +19,7 @@ export class SQLite implements IDatabase {
     }
     this.db = new sqlite3.Database(dbPath);
     this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
+    this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
   }
 
   getClonableGames(cb: (err: any, allGames: Array<IGameData>) => void) {
@@ -73,8 +74,16 @@ export class SQLite implements IDatabase {
     });
   }
 
-  saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
-    return;
+  saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+    this.db.run(
+      'INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)',
+      [game_id, gameOptions.clonedGamedId, players, generations, JSON.stringify(gameOptions), JSON.stringify(scores)], (err) => {
+        if (err) {
+          console.error('SQLite:saveGameResults', err);
+          throw err;
+        }
+      },
+    );
   }
 
   getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
@@ -128,14 +137,21 @@ export class SQLite implements IDatabase {
     });
   }
 
-  saveGameState(game_id: GameId, save_id: number, game: string, players: number): void {
+  saveGame(game: Game): void {
     // Insert
-    this.db.run('INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)', [game_id, save_id, game, players], function(err: { message: any; }) {
-      if (err) {
-        // Should be a duplicate, does not matter
-        return;
-      }
-    });
+    this.db.run(
+      'INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)',
+      [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length],
+      (err: { message: any; }) => {
+        if (err) {
+          // Should be a duplicate, does not matter
+          return;
+        }
+      },
+    );
+
+    // This must occur after the save.
+    game.lastSaveId++;
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

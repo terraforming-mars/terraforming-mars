@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public cost = 3;
@@ -21,7 +22,7 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public name = CardName.SEARCH_FOR_LIFE;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
+      return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 6);
     }
 
     public getVictoryPoints() {

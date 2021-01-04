@@ -13,6 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     public cost = 5;
@@ -27,7 +28,7 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     }
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public action(player: Player) {

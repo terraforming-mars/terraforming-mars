@@ -7,8 +7,10 @@ import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {CardManifest} from './cards/CardManifest';
+import {CardName} from './CardName';
+import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
-import {CardTypes, Deck} from './Deck';
+import {Deck} from './Deck';
 import {GameModule} from './GameModule';
 import {GameOptions} from './Game';
 
@@ -35,28 +37,31 @@ export class CardLoader {
   }
 
   private static include(gameOptions: GameOptions) {
-    return function(cf: ICardFactory<CardTypes>): boolean {
-      const expansion = cf.compatibility;
-      switch (expansion) {
-      case undefined:
+    return function(cf: ICardFactory<ICard>): boolean {
+      if (cf.compatibility === undefined) {
         return true;
-      case GameModule.Venus:
-        return gameOptions.venusNextExtension;
-      case GameModule.Colonies:
-        return gameOptions.coloniesExtension;
-      case GameModule.Turmoil:
-        return gameOptions.turmoilExtension;
-      default:
-        throw ('Unhandled expansion type: ' + expansion);
       }
+      const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
+      return expansions.every((expansion) => {
+        switch (expansion) {
+        case GameModule.Venus:
+          return gameOptions.venusNextExtension;
+        case GameModule.Colonies:
+          return gameOptions.coloniesExtension;
+        case GameModule.Turmoil:
+          return gameOptions.turmoilExtension;
+        default:
+          throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
+        }
+      });
     };
   }
 
-  private addToDeck<T extends CardTypes>(deck: Array<T>, cards: Deck<T>): void {
-    const cardInstances = cards.cards
+  private addDeck<T extends ICard>(cards: Array<T>, deck: Deck<T>): void {
+    const cardInstances = deck.cards
       .filter(CardLoader.include(this.gameOptions))
       .map((cf) => new cf.Factory());
-    deck.push(...cardInstances);
+    cards.push(...cardInstances);
   }
 
   public getProjectCards() {
@@ -66,17 +71,24 @@ export class CardLoader {
     return this.getCards((manifest) => manifest.standardProjects);
   }
   public getCorporationCards() {
-    return this.getCards((manifest) => manifest.corporationCards);
+    return this.getCards((manifest) => manifest.corporationCards)
+      .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
   }
   public getPreludeCards() {
     return this.getCards((manifest) => manifest.preludeCards);
   }
 
-  private getCards<T extends CardTypes>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
-    const deck: Array<T> = [];
+  private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
+    const cards: Array<T> = [];
     for (const manifest of this.manifests) {
-      this.addToDeck(deck, getDeck(manifest));
+      this.addDeck(cards, getDeck(manifest));
     }
-    return deck.filter((card) => this.gameOptions.cardsBlackList.includes(card.name) === false); ;
+    return cards.filter((card) => {
+      if (this.gameOptions.cardsBlackList.includes(card.name)) return false;
+      for (const manifest of this.manifests) {
+        if (manifest.cardsToRemove.includes(card.name)) return false;
+      }
+      return true;
+    });
   }
 }

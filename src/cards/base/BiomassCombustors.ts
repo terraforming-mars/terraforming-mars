@@ -2,21 +2,40 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {GlobalParameter} from '../../GlobalParameter';
 
-export class BiomassCombustors implements IProjectCard {
-  public cost = 4;
-  public cardType = CardType.AUTOMATED;
-  public tags = [Tags.ENERGY, Tags.BUILDING];
-  public name = CardName.BIOMASS_COMBUSTORS;
+export class BiomassCombustors extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.BIOMASS_COMBUSTORS,
+      tags: [Tags.ENERGY, Tags.BUILDING],
+      cost: 4,
+
+      metadata: {
+        description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
+        cardNumber: '183',
+        requirements: CardRequirements.builder((b) => b.oxygen(6)),
+        renderData: CardRenderer.builder((b) => {
+          b.productionBox((pb) => {
+            pb.minus().plants(-1).any.br;
+            pb.energy(2);
+          });
+        }),
+        victoryPoints: -1,
+      },
+    });
+  }
+
   public canPlay(player: Player, game: Game): boolean {
-    return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public play(player: Player, game: Game) {
@@ -27,16 +46,4 @@ export class BiomassCombustors implements IProjectCard {
   public getVictoryPoints() {
     return -1;
   }
-  public metadata: CardMetadata = {
-    description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
-    cardNumber: '183',
-    requirements: CardRequirements.builder((b) => b.oxygen(6)),
-    renderData: CardRenderer.builder((b) => {
-      b.productionBox((pb) => {
-        pb.minus().plants(-1).any.br;
-        pb.energy(2);
-      });
-    }),
-    victoryPoints: -1,
-  };
 }

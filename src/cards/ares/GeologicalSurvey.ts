@@ -18,7 +18,7 @@ export class GeologicalSurvey implements IProjectCard {
 
   private countGreeneryTiles(game: Game): number {
     return game.board.spaces.filter(
-      (space) => space.tile?.tileType === TileType.GREENERY).length;
+      (space) => space.tile !== undefined && space.tile.tileType === TileType.GREENERY).length;
   }
 
   public canPlay(_player: Player, game: Game): boolean {
@@ -31,7 +31,7 @@ export class GeologicalSurvey implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: 'A09',
-    requirements: CardRequirements.builder((b) => b.gerreneries(5).max()),
+    requirements: CardRequirements.builder((b) => b.greeneries(5).max()),
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.emptyTile().startEffect;

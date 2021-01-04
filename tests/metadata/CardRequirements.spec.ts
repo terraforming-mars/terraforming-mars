@@ -105,12 +105,12 @@ describe('CardRequirement', function() {
     );
   });
   it('Greenery: success', function() {
-    expect(CardRequirements.builder((b) => b.gerreneries()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.greeneries()).getRequirementsText()).to.equal(
       'Greenery',
     );
   });
   it('Greenerys-max: success', function() {
-    expect(CardRequirements.builder((b) => b.gerreneries(2).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.greeneries(2).max()).getRequirementsText()).to.equal(
       'max 2 Greeneries',
     );
   });

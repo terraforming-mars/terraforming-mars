@@ -7,6 +7,8 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
+  public abstract getVolcanicSpaceIds(): Array<string>;
+  public abstract getNoctisCitySpaceIds(): Array<string>
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {
@@ -76,7 +78,7 @@ export abstract class Board {
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
-      (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length === 0,
+      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );
   }
 

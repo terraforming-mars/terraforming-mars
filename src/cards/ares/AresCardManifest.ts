@@ -52,7 +52,7 @@ export const ARES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RESTRICTED_AREA_ARES, Factory: RestrictedAreaAres},
     {cardName: CardName.SOLAR_FARM, Factory: SolarFarm},
   ],
-  projectCardsToRemove: [
+  cardsToRemove: [
     CardName.CAPITAL,
     CardName.COMMERCIAL_DISTRICT,
     CardName.ECOLOGICAL_ZONE,

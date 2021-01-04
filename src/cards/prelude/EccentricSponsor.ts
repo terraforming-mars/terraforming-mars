@@ -2,13 +2,12 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class EccentricSponsor extends PreludeCard implements IProjectCard {
+export class EccentricSponsor extends PreludeCard {
     public tags = [];
     public name = CardName.ECCENTRIC_SPONSOR;
 

@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {ALL_CORPORATION_DECKS} from './cards/AllCards';
 import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -7,7 +6,7 @@ import {BoardName} from './boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
-import {ClaimedMilestone} from './ClaimedMilestone';
+import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyModel} from './models/ColonyModel';
@@ -16,9 +15,8 @@ import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {Decks} from './Deck';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {FundedAward} from './FundedAward';
+import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
@@ -59,6 +57,8 @@ import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
+import {GlobalParameter} from './GlobalParameter';
+import {AresSetup} from './ares/AresSetup';
 
 export type GameId = string;
 
@@ -220,6 +220,7 @@ export class Game implements ISerializable<SerializedGame> {
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS}): Game {
     const seed = Math.random();
     const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
 
@@ -237,7 +238,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {
-      game.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+      game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
     // Single player game player starts with 14TR
@@ -273,7 +274,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Setup Ares hazards
     if (gameOptions.aresExtension && gameOptions.aresHazards) {
-      AresHandler.setupHazards(game, players.length);
+      AresSetup.setupHazards(game, players.length);
     }
 
     // Setup custom corporation list
@@ -283,7 +284,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
       const customCorporationCards: CorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
-        const customCorp = Decks.findByName(ALL_CORPORATION_DECKS, corp);
+        const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
       }
       corporationCards = customCorporationCards;
@@ -353,16 +354,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public save(): void {
-    /*
-      * Because we save at the start of a player's takeAction, we need to
-      * save the game in the database before increasing lastSaveId so that
-      * reloading it doesn't create another new save on top of it, like this:
-      *
-      * increment -> save -> reload -> increment -> save
-      *
-      */
-    Database.getInstance().saveGameState(this.id, this.lastSaveId, this.toJSON(), this.players.length);
-    this.lastSaveId++;
+    Database.getInstance().saveGame(this);
   }
 
   public toJSON(): string {
@@ -374,7 +366,7 @@ export class Game implements ISerializable<SerializedGame> {
       activePlayer: this.activePlayer,
       awards: this.awards,
       board: this.board.serialize(),
-      claimedMilestones: this.claimedMilestones,
+      claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),
@@ -383,7 +375,7 @@ export class Game implements ISerializable<SerializedGame> {
       draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
       first: this.first.id,
-      fundedAwards: this.fundedAwards,
+      fundedAwards: serializeFundedAwards(this.fundedAwards),
       gameAge: this.gameAge,
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
@@ -1249,6 +1241,40 @@ export class Game implements ISerializable<SerializedGame> {
     return this.temperature;
   }
 
+  public checkMinRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level);
+  }
+
+  public checkMaxRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
+    return this.checkRequirements(player, parameter, level, true);
+  }
+
+  private checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+    let currentLevel: number;
+    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+
+    if (parameter === GlobalParameter.OCEANS) {
+      currentLevel = this.board.getOceansOnBoard();
+    } else if (parameter === GlobalParameter.OXYGEN) {
+      currentLevel = this.getOxygenLevel();
+    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      currentLevel = this.getTemperature();
+      playerRequirementsBonus *= 2;
+    } else if (parameter === GlobalParameter.VENUS) {
+      currentLevel = this.getVenusScaleLevel();
+      playerRequirementsBonus *= 2;
+    } else {
+      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
+      return false;
+    }
+
+    if (max) {
+      return currentLevel <= level + playerRequirementsBonus;
+    } else {
+      return currentLevel >= level - playerRequirementsBonus;
+    }
+  }
+
   public getGeneration(): number {
     return this.generation;
   }
@@ -1262,28 +1288,23 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getPlayer(name: string): Player {
-    const found = this.players.filter((player) => player.name === name);
-    if (found.length === 0) {
+    const player = this.players.find((player) => player.name === name);
+    if (player === undefined) {
       throw new Error('Player not found');
     }
-    return found[0];
+    return player;
   }
 
   public getSpace(id: string): ISpace {
-    const matchedSpaces = this.board.spaces.filter((space) => space.id === id);
-    if (matchedSpaces.length === 1) {
-      return matchedSpaces[0];
+    const space = this.board.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error('Error with getting space');
     }
-    throw new Error('Error with getting space');
+    return space;
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
-      (space) => space.tile !== undefined &&
-                ((space.tile.tileType === TileType.CITY &&
-                space.spaceType !== SpaceType.COLONY) ||
-                space.tile.tileType === TileType.CAPITAL ||
-                space.tile.tileType === TileType.OCEAN_CITY),
-    ).length;
+      (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
   }
   public getCitiesInPlay(): number {
     return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
@@ -1512,22 +1533,24 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
-    let cardsToDraw = 0;
     const result: Array<IProjectCard> = [];
-    const discardedCards: Array<IProjectCard> = [];
+    const discardedCards = new Set<CardName>();
 
-    while (cardsToDraw < total) {
+    while (result.length < total) {
+      if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
+        this.log('discarded every card without match');
+        break;
+      }
       const projectCard = this.dealer.dealCard();
       if (include(projectCard)) {
-        cardsToDraw++;
         result.push(projectCard);
       } else {
-        discardedCards.push(projectCard);
+        discardedCards.add(projectCard.name);
         this.dealer.discard(projectCard);
       }
     }
 
-    LogHelper.logDiscardedCards(this, discardedCards);
+    LogHelper.logDiscardedCards(this, Array.from(discardedCards));
 
     return result;
   }
@@ -1542,10 +1565,6 @@ export class Game implements ISerializable<SerializedGame> {
 
   public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
     return this.drawProjectCardsByCondition(total, (card) => card.cardType === cardType);
-  }
-
-  public getCardsInHandByTag(player: Player, tag: Tags) {
-    return player.cardsInHand.filter((card) => card.tags.includes(tag));
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
@@ -1568,14 +1587,6 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
-  }
-
-  public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
-    return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
-  }
-
-  public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
-    return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
   }
 
   private setupSolo() {
@@ -1642,48 +1653,29 @@ export class Game implements ISerializable<SerializedGame> {
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
 
-    game.milestones = [];
+    const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {
       ALL_MILESTONES.forEach((ms: IMilestone) => {
         if (ms.name === element.name) {
-          game.milestones.push(ms);
+          milestones.push(ms);
         }
       });
     });
 
-    // Rebuild claimed milestones
-    game.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone) => {
-      const player: Player = game.getPlayerById(element.player.id);
-      const milestone: IMilestone | undefined = game.milestones.find((milestone) => milestone.name === element.milestone.name);
-      if (milestone === undefined) {
-        throw new Error(`Milestone ${element.milestone.name} not found when rebuilding Claimed Milestone`);
-      }
-      return {
-        player: player,
-        milestone: milestone,
-      };
-    });
+    game.milestones = milestones;
+    game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
-    game.awards = [];
+    const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
-          game.awards.push(award);
+          awards.push(award);
         }
       });
     });
 
-    game.fundedAwards = d.fundedAwards.map((element: FundedAward) => {
-      const player: Player = game.getPlayerById(element.player.id);
-      const award: IAward | undefined = game.awards.find((award) => award.name === element.award.name);
-      if (award === undefined) {
-        throw new Error(`Award ${element.award.name} not found when rebuilding Claimed Award`);
-      }
-      return {
-        player: player,
-        award: award,
-      };
-    });
+    game.awards = awards;
+    game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;

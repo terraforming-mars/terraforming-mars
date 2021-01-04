@@ -1,14 +1,13 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AerospaceMission extends PreludeCard implements IProjectCard {
+export class AerospaceMission extends PreludeCard {
     public tags = [Tags.SPACE];
     public name = CardName.AEROSPACE_MISSION;
 

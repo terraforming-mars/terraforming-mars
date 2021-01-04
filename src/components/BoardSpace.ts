@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {Bonus} from './Bonus';
 import {SpaceModel} from '../models/SpaceModel';
+import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
 import {$t} from '../directives/i18n';
 
@@ -153,10 +154,15 @@ export const BoardSpace = Vue.component('board-space', {
           css += ' board-space-tile--' + cssClass;
         }
       } else {
-        if (this.space.spaceType === 'ocean') {
+        if (this.space.spaceType === SpaceType.OCEAN) {
           css += ' board-space-type-ocean';
         } else {
-          css += ' board-space-type-land';
+          css += ` board-space-type-land`;
+
+          const highlight = this.space.highlight;
+          if (highlight) {
+            css += ` board-space-type-land-${highlight}`;
+          }
         }
       }
 

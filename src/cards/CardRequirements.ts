@@ -75,7 +75,7 @@ class Builder {
     return this;
   }
 
-  public gerreneries(amount: number = -1): Builder {
+  public greeneries(amount: number = -1): Builder {
     this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount));
     return this;
   }

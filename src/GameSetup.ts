@@ -13,7 +13,6 @@ import {Resources} from './Resources';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {AresSetup} from './ares/AresSetup';
-import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
 
 export class GameSetup {
@@ -105,14 +104,11 @@ export class GameSetup {
     const neutral = this.neutralPlayerFor(game.id);
 
     function placeCityAndForest(game: Game, direction: -1 | 1) {
-      const space1 = game.getSpaceByOffset(direction);
-      game.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = game.board.getForestSpace(
-        game.board.getAdjacentSpaces(space1),
-      );
-      game.addTile(neutral, SpaceType.LAND, fspace1, {
-        tileType: TileType.GREENERY,
-      });
+      const board = game.board;
+      const citySpace = game.getSpaceByOffset(direction);
+      game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
+      const forestSpace = board.getForestSpace(board.getAdjacentSpaces(citySpace));
+      game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
     }
 
     placeCityAndForest(game, 1);

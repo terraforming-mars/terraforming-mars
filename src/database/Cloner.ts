@@ -30,6 +30,7 @@ export class Cloner {
     }
     Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
     if (oldPlayerIds.length === 1) {
+      // The neutral player has a different ID in different games, and yet, it isn't serialized. So it gets a special case.
       Cloner.replacePlayerIds(
         serialized,
         [GameSetup.neutralPlayerFor(sourceGameId).id],

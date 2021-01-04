@@ -10,6 +10,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SpinInducingAsteroid implements IProjectCard {
     public cost = 16;
@@ -18,7 +19,7 @@ export class SpinInducingAsteroid implements IProjectCard {
     public cardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game): boolean {
-      const meetsVenusRequirements = game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 10;
+      const meetsVenusRequirements = game.checkMaxRequirements(player, GlobalParameter.VENUS, 10);
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
         return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2, game, false, true) && meetsVenusRequirements;

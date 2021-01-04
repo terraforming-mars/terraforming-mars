@@ -4,9 +4,7 @@ import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SerializedTimer} from './SerializedTimer';
-import {CorporationCard} from './cards/corporation/CorporationCard';
 
-// TODO(kberg): remove reference to CorporationCard by 2021-01-15
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
@@ -40,7 +38,7 @@ export interface SerializedPlayer {
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
-    pickedCorporationCard: CardName | CorporationCard | undefined;
+    pickedCorporationCard: CardName | undefined;
     plantProduction: number;
     plants: number;
     plantsNeededForGreenery: number;

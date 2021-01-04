@@ -13,7 +13,10 @@ export class BufferGas extends StandardProjectCard {
   public cost = 16;
 
   public canAct(player: Player, game: Game): boolean {
-    if (game.getPlayers().length > 1) return false;
+    if (game.isSoloMode() === false || game.gameOptions.soloTR === false) {
+      return false;
+    }
+
     let cost = this.cost;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 

@@ -38,19 +38,22 @@ export class CardLoader {
 
   private static include(gameOptions: GameOptions) {
     return function(cf: ICardFactory<ICard>): boolean {
-      const expansion = cf.compatibility;
-      switch (expansion) {
-      case undefined:
+      if (cf.compatibility === undefined) {
         return true;
-      case GameModule.Venus:
-        return gameOptions.venusNextExtension;
-      case GameModule.Colonies:
-        return gameOptions.coloniesExtension;
-      case GameModule.Turmoil:
-        return gameOptions.turmoilExtension;
-      default:
-        throw ('Unhandled expansion type: ' + expansion);
       }
+      const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
+      return expansions.every((expansion) => {
+        switch (expansion) {
+        case GameModule.Venus:
+          return gameOptions.venusNextExtension;
+        case GameModule.Colonies:
+          return gameOptions.coloniesExtension;
+        case GameModule.Turmoil:
+          return gameOptions.turmoilExtension;
+        default:
+          throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
+        }
+      });
     };
   }
 

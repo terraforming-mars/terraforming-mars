@@ -86,7 +86,7 @@ export const Card = Vue.component('card', {
     getCost: function(): number | undefined {
       const cost = this.getCard()?.cost;
       const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE ? undefined : cost;
+      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
     getCardType: function(): CardType | undefined {
       return this.getCard()?.cardType;

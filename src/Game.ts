@@ -212,6 +212,10 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
+
+    this.players.forEach((player) => {
+      player.game = this;
+    });
   }
 
   // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)

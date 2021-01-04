@@ -130,7 +130,7 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const serialized = player.serialize();
     const serializedKeys = Object.keys(serialized);
-    const playerKeys = Object.keys(player);
+    const playerKeys = Object.keys(player).filter((key) => key !== '_game');
     serializedKeys.sort();
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);

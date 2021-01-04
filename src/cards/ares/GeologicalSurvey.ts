@@ -31,7 +31,7 @@ export class GeologicalSurvey implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: 'A09',
-    requirements: CardRequirements.builder((b) => b.forests(5).max()),
+    requirements: CardRequirements.builder((b) => b.greeneries(5).max()),
     renderData: CardRenderer.builder((b) => {
       b.effectBox((eb) => {
         eb.emptyTile().startEffect;

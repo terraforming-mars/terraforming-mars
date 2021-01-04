@@ -55,7 +55,7 @@ export class Vitor implements CorporationCard {
         b.megacredits(45).nbsp.award();
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
-            eb.vpIcon().startEffect.megacredits(3);
+            eb.vpIcon().asterix().startEffect.megacredits(3);
             eb.description('Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.');
           });
         });

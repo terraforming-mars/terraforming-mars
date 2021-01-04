@@ -47,7 +47,7 @@ export class MartianZoo implements IProjectCard, IResourceCard {
 
     public metadata: CardMetadata = {
       cardNumber: 'C24',
-      requirements: CardRequirements.builder((b) => b.cities(2)),
+      requirements: CardRequirements.builder((b) => b.cities(2).any()),
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.earth().played.startEffect.animals(1);

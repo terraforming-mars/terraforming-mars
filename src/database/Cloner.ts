@@ -1,6 +1,6 @@
 import {Game, GameId} from '../Game';
 import {GameSetup} from '../GameSetup';
-import {Player} from '../Player';
+import {Player, PlayerId} from '../Player';
 import {SerializedGame} from '../SerializedGame';
 import {SerializedPlayer} from '../SerializedPlayer';
 import {DbLoadCallback} from './IDatabase';
@@ -22,9 +22,9 @@ export class Cloner {
       return;
     }
 
-    const sourceGameId = serialized.id;
-    const oldPlayerIds = serialized.players.map((player) => player.id);
-    const newPlayerIds = players.map((player) => player.id);
+    const sourceGameId: GameId = serialized.id;
+    const oldPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
+    const newPlayerIds: Array<PlayerId> = players.map((player) => player.id);
     if (oldPlayerIds.length !== newPlayerIds.length) {
       throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
     }
@@ -48,8 +48,8 @@ export class Cloner {
     cb(undefined, game);
   }
 
-  private static replacePlayerIds(obj: any, oldPlayerIds:Array<string>, newPlayerIds: Array<string>) {
-    if (obj === undefined || obj === null || typeof obj !== 'object') {
+  private static replacePlayerIds(obj: any, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
+    if (obj === undefined || obj === null) {
       return;
     }
     const keys = Object.entries(obj);

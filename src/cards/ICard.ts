@@ -25,7 +25,6 @@ export interface IActionCard {
 }
 
 export interface IResourceCard {
-    resourceType: ResourceType;
     resourceCount: number;
 }
 
@@ -46,6 +45,6 @@ export interface ICard {
     resourceCount?: number;
     cost?: number;
     cardType: CardType;
-    metadata?: CardMetadata;
+    metadata: CardMetadata;
     warning?: string | Message;
 }

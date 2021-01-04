@@ -12,6 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class FreyjaBiodomes implements IProjectCard {
     public cost = 14;
@@ -19,7 +20,7 @@ export class FreyjaBiodomes implements IProjectCard {
     public name = CardName.FREYJA_BIODOMES;
     public cardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));
+      return player.getProduction(Resources.ENERGY) >= 1 && game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
     }
     public getResCards(player: Player): ICard[] {
       let resourceCards = player.getResourceCards(ResourceType.ANIMAL);

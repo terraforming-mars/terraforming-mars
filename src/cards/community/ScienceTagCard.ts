@@ -2,14 +2,25 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
+import {CardMetadata} from '../CardMetadata';
 
 export class ScienceTagCard implements IProjectCard {
-    public cost = 0;
-    public tags = [Tags.SCIENCE];
-    public name = CardName.SCIENCE_TAG_BLANK_CARD;
-    public cardType = CardType.PROXY;
-
-    public play() {
-      return undefined;
-    }
+  public get cost() {
+    return 0;
+  }
+  public get tags() {
+    return [Tags.SCIENCE];
+  }
+  public get name() {
+    return CardName.SCIENCE_TAG_BLANK_CARD;
+  }
+  public get cardType() {
+    return CardType.PROXY;
+  }
+  public get metadata(): CardMetadata {
+    throw new Error('ScienceTagCard is a proxy card, not a real card. Should not render');
+  }
+  public play() {
+    return undefined;
+  }
 }

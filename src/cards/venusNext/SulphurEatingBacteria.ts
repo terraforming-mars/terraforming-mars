@@ -13,6 +13,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost = 6;
@@ -22,7 +23,7 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
+      return game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
     }
     public play() {
       return undefined;

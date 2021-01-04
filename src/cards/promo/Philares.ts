@@ -13,6 +13,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Philares implements CorporationCard {
     public name = CardName.PHILARES;
@@ -121,7 +122,7 @@ export class Philares implements CorporationCard {
       cardNumber: 'R25',
       description: 'You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.',
       renderData: CardRenderer.builder((b) => {
-        b.megacredits(47).greenery().secondaryTag('oxygen');
+        b.megacredits(47).greenery().secondaryTag(AltSecondaryTag.OXYGEN);
         b.corpBox('effect', (ce) => {
           ce.effectBox((eb) => {
             eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;

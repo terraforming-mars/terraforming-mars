@@ -1,3 +1,5 @@
+export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'victoryPoints';
+
 export class VictoryPointsBreakdown {
     public terraformRating: number = 0;
     public milestones: number = 0;
@@ -20,7 +22,7 @@ export class VictoryPointsBreakdown {
       this.total += this.victoryPoints;
     }
 
-    public setVictoryPoints(key: string, points: number, message?: string) {
+    public setVictoryPoints(key: VictoryPoints, points: number, message?: string) {
       switch (key) {
       case 'terraformRating':
         this.terraformRating += points;
@@ -42,6 +44,9 @@ export class VictoryPointsBreakdown {
       case 'victoryPoints':
         this.victoryPoints += points;
         if (message !== undefined) this.detailsCards.push(message+': '+points);
+        break;
+      default:
+        console.warn('Unknown victory point constraint ' + key);
         break;
       }
     }

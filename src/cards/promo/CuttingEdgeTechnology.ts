@@ -6,6 +6,7 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class CuttingEdgeTechnology implements IProjectCard {
     public cost = 11;
@@ -30,7 +31,7 @@ export class CuttingEdgeTechnology implements IProjectCard {
       cardNumber: 'X17',
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
-          eb.cards(1).secondaryTag('req').startEffect.megacredits(-2);
+          eb.cards(1).secondaryTag(AltSecondaryTag.REQ).startEffect.megacredits(-2);
           eb.description('Effect: When playing a card with a requirement, you pay 2 MC less for it.');
         });
       }),

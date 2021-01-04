@@ -1,3 +1,5 @@
+import {PlayerId} from '../Player';
+
 export interface IAresData {
     active: boolean;
     includeHazards: boolean;
@@ -18,6 +20,6 @@ export interface IHazardData {
 };
 
 export interface IMilestoneCount {
-    id: string;
+    id: PlayerId;
     count: number;
 }

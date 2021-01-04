@@ -2,14 +2,13 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EcologyExperts extends PreludeCard implements IProjectCard {
+export class EcologyExperts extends PreludeCard {
     public tags = [Tags.PLANT, Tags.MICROBE];
     public name = CardName.ECOLOGY_EXPERTS;
     public getRequirementBonus(player: Player): number {

@@ -45,9 +45,8 @@ export class SellPatents extends StandardProjectCard {
   public metadata: CardMetadata = {
     cardNumber: 'SP8',
     renderData: CardRenderer.builder((b) =>
-      b.effectBox((eb) => {
+      b.standartProject('Discard any number of cards to gain that amount of MC.', (eb) => {
         eb.text('X').cards(1).startAction.megacredits(0).multiplier;
-        eb.description('Discard any number of cards to gain that amount of MC.');
       }),
     ),
   };

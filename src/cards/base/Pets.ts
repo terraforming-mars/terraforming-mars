@@ -24,9 +24,8 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
       metadata: {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.effect('When any City tile is placed, add an Animal to this card.', (eb) => {
             eb.city(CardRenderItemSize.SMALL).any.startEffect.animals(1);
-            eb.description('Effect: When any City tile is placed, add an Animal to this card.');
           }).br;
           b.animals(1).br;
           b.text('Animals may not be removed from this card', CardRenderItemSize.SMALL, true).br;

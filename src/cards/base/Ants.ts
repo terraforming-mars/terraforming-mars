@@ -28,9 +28,8 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
         description: 'Requires 4% oxygen. 1 VP per 2 Microbes on this card.',
         requirements: CardRequirements.builder((b) => b.oxygen(4)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
             eb.microbes(1).any.startAction.microbes(1);
-            eb.description('Action: Remove 1 Microbe from any card to add 1 to this card.');
           });
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),

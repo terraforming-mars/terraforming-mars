@@ -60,14 +60,13 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
     public metadata: CardMetadata = {
       cardNumber: '033',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Microbe to this card.', (eb) => {
           eb.empty().startAction.microbes(1);
-          eb.description('Action: Add 1 Microbe to this card.');
+          eb.description();
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Remove 2 Microbes from this card to raise oxygen level 1 step.', (eb) => {
           eb.microbes(2).startAction.oxygen(1);
-          eb.description('Action: Remove 2 Microbes from this card to raise oxygen level 1 step.');
         }).br;
       }),
     }

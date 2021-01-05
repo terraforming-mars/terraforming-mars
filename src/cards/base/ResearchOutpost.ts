@@ -38,9 +38,8 @@ export class ResearchOutpost implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '020',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.effect('When you play a card, you pay 1 MC less for it.', (eb) => {
           eb.empty().startEffect.megacredits(-1);
-          eb.description('Effect: When you play a card, you pay 1 MC less for it.');
         }).br;
         b.city();
       }),

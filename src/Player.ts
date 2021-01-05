@@ -1659,11 +1659,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (standardProjects.cards.length >= 1) {
       options.push(standardProjects);
     }
-
-    const sellPatents = new SellPatents();
-    if (sellPatents.canAct(this)) {
-      options.push(sellPatents.action(this, game));
-    }
   }
 
   public takeAction(game: Game): void {
@@ -1886,6 +1881,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.options.push(
       this.passOption(game),
     );
+
+    // Sell patents
+    const sellPatents = new SellPatents();
+    if (sellPatents.canAct(this)) {
+      action.options.push(sellPatents.action(this, game));
+    }
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {

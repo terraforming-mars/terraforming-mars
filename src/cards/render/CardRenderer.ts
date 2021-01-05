@@ -83,8 +83,11 @@ export class CardRenderEffect extends CardRenderer {
 
   public get description(): ItemType {
     this._validate();
-    // TODO (chosta): validate builder method to make sure it's the last element
     return this.rows[2].slice(-1)[0];
+  }
+
+  public set description(content: ItemType) {
+    this.rows[2].push(content);
   }
 }
 
@@ -438,6 +441,27 @@ class Builder {
 
   public effectBox(eb: (builder: EffectBuilder) => void): Builder {
     this._addRowItem(CardRenderEffect.builder(eb));
+    return this;
+  }
+
+  public standartProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description;
+    this._addRowItem(builder);
+    return this;
+  }
+
+  public action(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description !== undefined ? 'Action: ' + description : undefined;
+    this._addRowItem(builder);
+    return this;
+  }
+
+  public effect(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description !== undefined ? 'Effect: ' + description : undefined;
+    this._addRowItem(builder);
     return this;
   }
 

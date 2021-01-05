@@ -207,22 +207,31 @@ export abstract class Board {
     } as SerializedBoard;
   }
 
-  public static deserializeSpace(space: SerializedSpace, players: Array<Player>): ISpace {
+  public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
     // TODO(kberg): Remove Player by 2021-01-15
-    const playerSpace : PlayerId | Player | undefined = space.player;
+    const playerSpace : PlayerId | Player | undefined = serialized.player;
     const playerId: PlayerId | undefined =
         (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
     const player = players.find((p) => p.id === playerId);
-    return {
-      id: space.id,
-      spaceType: space.spaceType,
-      tile: space.tile,
-      player: player,
-      bonus: space.bonus,
-      adjacency: space.adjacency,
-      x: space.x,
-      y: space.y,
+    const space = {
+      id: serialized.id,
+      spaceType: serialized.spaceType,
+      bonus: serialized.bonus,
+      x: serialized.x,
+      y: serialized.y,
     } as ISpace;
+
+    if (serialized.tile !== undefined) {
+      space.tile = serialized.tile;
+    }
+    if (player !== undefined) {
+      space.player = player;
+    }
+    if (serialized.adjacency !== undefined) {
+      space.adjacency = serialized.adjacency;
+    }
+
+    return space;
   }
 
   public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {

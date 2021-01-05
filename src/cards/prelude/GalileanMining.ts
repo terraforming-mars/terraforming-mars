@@ -25,7 +25,7 @@ export class GalileanMining extends PreludeCard {
         b.productionBox((pb) => {
           pb.titanium(2);
         }).br;
-        b.minus().megacredits(5);
+        b.megacredits(-5);
       }),
       description: 'Increase your titanium production 2 steps. Pay 5 MC.',
     }

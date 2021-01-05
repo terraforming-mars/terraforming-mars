@@ -29,7 +29,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         align: 'left',
       },
       cardNumber: '128',
-      requirements: CardRequirements.builder((b) => b.forests()),
+      requirements: CardRequirements.builder((b) => b.greeneries()),
       renderData: CardRenderer.builder((b) => {
         b.effectBox((eb) => {
           eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
@@ -39,7 +39,6 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
     },
-
   ) {
     super({
       cardType: CardType.ACTIVE,

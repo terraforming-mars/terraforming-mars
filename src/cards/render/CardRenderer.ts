@@ -218,9 +218,10 @@ class Builder {
     return this;
   }
 
-  public tr(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public tr(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, cancelled: boolean = false): Builder {
     const item = new CardRenderItem(CardRenderItemType.TR, amount);
     item.size = size;
+    item.cancelled = cancelled;
     this._addRowItem(item);
     return this;
   }

@@ -39,8 +39,8 @@ export class FieldCappedCity implements IProjectCard {
       description: 'Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
       renderData: CardRenderer.builder((b) => {
         b.productionBox((pb) => {
-          pb.plus().megacredits(2).br;
-          pb.plus().energy(1);
+          pb.megacredits(2).br;
+          pb.energy(1);
         }).nbsp.city().br;
         b.plants(3);
       }),

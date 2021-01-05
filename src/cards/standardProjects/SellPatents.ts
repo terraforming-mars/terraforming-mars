@@ -43,7 +43,7 @@ export class SellPatents extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP8',
     renderData: CardRenderer.builder((b) =>
       b.effectBox((eb) => {
         eb.text('X').cards(1).startAction.megacredits(0).multiplier;

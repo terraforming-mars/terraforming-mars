@@ -61,6 +61,12 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
         if (heatAmount + (floaterAmount * 2) < targetAmount) {
           throw new Error(`Need to pay ${targetAmount} heat`);
         }
+        if (heatAmount > 0 && heatAmount - 1 + (floaterAmount * 2) >= targetAmount) {
+          throw new Error(`You cannot overspend heat`);
+        }
+        if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
+          throw new Error(`You cannot overspend floaters`);
+        }
         player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
         player.heat -= heatAmount;
         return cb();

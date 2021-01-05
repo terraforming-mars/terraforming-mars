@@ -10,7 +10,7 @@ export class PowerPlantStandard extends StandardProjectCard {
   public cost = 11;
 
   protected discount(player: Player): number {
-    if (player.corporationCard?.name === CardName.THORGATE) {
+    if (player.isCorporation(CardName.THORGATE)) {
       return 3;
     }
     return super.discount(player);

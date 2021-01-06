@@ -52,13 +52,12 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
 
     private spendResource(player: Player, game: Game) {
       this.resourceCount--;
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game);
       return undefined;
     }
 
     public play(player: Player, game: Game) {
-      player.cardsInHand.push(game.dealer.dealCard());
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game, 2);
       return undefined;
     }
 

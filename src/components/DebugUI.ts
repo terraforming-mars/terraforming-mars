@@ -22,7 +22,7 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     manifest.corporationCards,
     manifest.preludeCards,
     manifest.standardProjects].forEach((deck) => {
-    deck.cards.forEach((cf: ICardFactory<ICard>) => {
+    deck.factories.forEach((cf: ICardFactory<ICard>) => {
       const card: ICard = new cf.Factory();
       const cardNumber = card.metadata.cardNumber;
       cards.set(card.name, {card, module, cardNumber});

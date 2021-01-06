@@ -84,6 +84,11 @@ describe('CardRequirement', function() {
       '2 Cities',
     );
   });
+  it('Any Cities-plural: success', function() {
+    expect(CardRequirements.builder((b) => b.cities(2).any()).getRequirementsText()).to.equal(
+      'Any 2 Cities',
+    );
+  });
   it('Cities-max: success', function() {
     expect(CardRequirements.builder((b) => b.cities(4).max()).getRequirementsText()).to.equal(
       'max 4 Cities',
@@ -99,14 +104,14 @@ describe('CardRequirement', function() {
       'max 2 Colonies',
     );
   });
-  it('Forest: success', function() {
-    expect(CardRequirements.builder((b) => b.forests()).getRequirementsText()).to.equal(
-      'Forest',
+  it('Greenery: success', function() {
+    expect(CardRequirements.builder((b) => b.greeneries()).getRequirementsText()).to.equal(
+      'Greenery',
     );
   });
-  it('Forests-max: success', function() {
-    expect(CardRequirements.builder((b) => b.forests(2).max()).getRequirementsText()).to.equal(
-      'max 2 Forests',
+  it('Greenerys-max: success', function() {
+    expect(CardRequirements.builder((b) => b.greeneries(2).max()).getRequirementsText()).to.equal(
+      'max 2 Greeneries',
     );
   });
   it('Floater: success', function() {

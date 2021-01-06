@@ -125,7 +125,7 @@ describe('RoboticWorkforce', function() {
     const gameOptions = setCustomGameOptions();
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     ALL_CARD_MANIFESTS.forEach((manifest) => {
-      manifest.projectCards.cards.forEach((c) => {
+      manifest.projectCards.factories.forEach((c) => {
         const card = new c.Factory();
         if (card.tags.includes(Tags.BUILDING) && card.play !== undefined) {
           // Solar Farm is a pain to test so let's just say it's fine

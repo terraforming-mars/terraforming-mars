@@ -24,7 +24,8 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     }
 
     private drawTurmoilCard(player: Player, game: Game) {
-      const turmoilCards = TURMOIL_CARD_MANIFEST.projectCards.cards.map((c) => c.cardName);
+      const turmoilCards: Array<CardName> = [];
+      TURMOIL_CARD_MANIFEST.projectCards.factories.forEach((cf) => turmoilCards.push(cf.cardName));
       const drawnCard = game.dealer.deck.find((card) => turmoilCards.includes(card.name));
 
       if (drawnCard) {

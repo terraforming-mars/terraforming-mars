@@ -15,7 +15,7 @@ describe('CardMetadata', function() {
 
   it('should have a VP icon', function() {
     ALL_CARD_MANIFESTS.forEach((manifest) => {
-      manifest.projectCards.cards.forEach((c) => {
+      manifest.projectCards.factories.forEach((c) => {
         const card = new c.Factory();
         if (card.metadata !== undefined && card.getVictoryPoints !== undefined) {
           expect(card.metadata.victoryPoints, card.name + ' is missing VP metadata').is.not.undefined;

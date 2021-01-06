@@ -11,6 +11,7 @@ import {ICard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {SpaceBonus} from '../../SpaceBonus';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -20,10 +21,10 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 9,
       hasRequirements: false,
-
       metadata: {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {
+          b.text('Copy A', CardRenderItemSize.SMALL, true).nbsp;
           b.productionBox((pb) => pb.building().played);
         }),
         description: 'Duplicate only the production box of one of your building cards.',

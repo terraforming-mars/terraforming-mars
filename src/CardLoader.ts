@@ -36,12 +36,13 @@ export class CardLoader {
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);
   }
 
-  private static include(gameOptions: GameOptions) {
-    return function(cf: ICardFactory<ICard>): boolean {
-      const expansion = cf.compatibility;
+  private static include(gameOptions: GameOptions, cf: ICardFactory<ICard>): boolean {
+    if (cf.compatibility === undefined) {
+      return true;
+    }
+    const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
+    return expansions.every((expansion) => {
       switch (expansion) {
-      case undefined:
-        return true;
       case GameModule.Venus:
         return gameOptions.venusNextExtension;
       case GameModule.Colonies:
@@ -49,16 +50,17 @@ export class CardLoader {
       case GameModule.Turmoil:
         return gameOptions.turmoilExtension;
       default:
-        throw ('Unhandled expansion type: ' + expansion);
+        throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
       }
-    };
+    });
   }
 
   private addDeck<T extends ICard>(cards: Array<T>, deck: Deck<T>): void {
-    const cardInstances = deck.cards
-      .filter(CardLoader.include(this.gameOptions))
-      .map((cf) => new cf.Factory());
-    cards.push(...cardInstances);
+    deck.factories.forEach((cf) => {
+      if (CardLoader.include(this.gameOptions, cf)) {
+        cards.push(new cf.Factory());
+      }
+    });
   }
 
   public getProjectCards() {
@@ -83,7 +85,7 @@ export class CardLoader {
     return cards.filter((card) => {
       if (this.gameOptions.cardsBlackList.includes(card.name)) return false;
       for (const manifest of this.manifests) {
-        if (manifest.cardsToRemove.includes(card.name)) return false;
+        if (manifest.cardsToRemove.has(card.name)) return false;
       }
       return true;
     });

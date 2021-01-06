@@ -27,7 +27,7 @@ export class AddResourcesToCard implements DeferredAction {
   public execute() {
     const count = this.options.count || 1;
     const title = this.options.title ||
-      'Select card to add ' + count + ' ' + this.resourceType + '(s)';
+      'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
     let resourceCards = this.player.getResourceCards(this.resourceType);
 
     if (this.options.restrictedTag !== undefined) {

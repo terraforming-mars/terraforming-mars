@@ -23,9 +23,8 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
         description: 'Requires 0° C or warmer.',
         requirements: CardRequirements.builder((b) => b.temperature(0)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 8 heat to increase your terraform rating 1 step.', (eb) => {
             eb.heat(8).startAction.tr(1);
-            eb.description('Action: Spend 8 heat to increase your terraform rating 1 step.');
           });
         }),
       },

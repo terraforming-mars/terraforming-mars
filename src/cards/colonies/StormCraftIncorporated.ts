@@ -90,14 +90,12 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       b.megacredits(48);
       b.corpBox('action', (ce) => {
         ce.vSpace(CardRenderItemSize.LARGE);
-        ce.effectBox((eb) => {
+        ce.action('Add a floater to ANY card.', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: Add a floater to ANY card.');
         });
         ce.vSpace();
-        ce.effectBox((eb) => {
+        ce.effect('Floaters on this card may be used as 2 heat each.', (eb) => {
           eb.startEffect.floaters(1).equals().heat(2);
-          eb.description('Effect: Floaters on this card may be used as 2 heat each.');
         });
       });
     }),

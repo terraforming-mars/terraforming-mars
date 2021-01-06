@@ -28,9 +28,8 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
         cardNumber: '054',
         requirements: CardRequirements.builder((b) => b.oxygen(6)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
-            eb.description('Action: Add 1 Animal to this card.');
           }).br;
           b.productionBox((pb) => pb.minus().plants(1).any).br;
           b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true);

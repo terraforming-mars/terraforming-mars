@@ -120,16 +120,14 @@ export class ProjectWorkshop implements CorporationCard {
         b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
         b.corpBox('action', (cb) => {
           cb.vSpace(CardRenderItemSize.LARGE);
-          cb.effectBox((eb) => {
+          cb.action(undefined, (eb) => {
             eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
             eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
             eb.cards(2).digit;
-            eb.description(undefined);
           });
           cb.vSpace(CardRenderItemSize.SMALL);
-          cb.effectBox((eb) => {
+          cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.', (eb) => {
             eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
-            eb.description('Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.');
           });
         });
       }),

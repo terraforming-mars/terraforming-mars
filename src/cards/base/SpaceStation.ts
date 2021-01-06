@@ -18,9 +18,8 @@ export class SpaceStation extends Card implements IProjectCard {
       metadata: {
         cardNumber: '025',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
-            eb.description('Effect: When you play a Space card, you pay 2 MC less for it.');
           });
         }),
         victoryPoints: 1,

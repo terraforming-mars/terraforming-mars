@@ -41,9 +41,8 @@ export class WaterSplittingPlant implements IProjectCard {
       cardNumber: '177',
       requirements: CardRequirements.builder((b) => b.oceans(2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 3 Energy to raise oxygen 1 step.', (eb) => {
           eb.energy(3).startAction.oxygen(1);
-          eb.description('Action: Spend 3 Energy to raise oxygen 1 step.');
         });
       }),
       description: 'Requires 2 ocean tiles.',

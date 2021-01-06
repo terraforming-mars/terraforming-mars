@@ -30,7 +30,7 @@ export class UrbanDecomposers implements IProjectCard {
 
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
       if (microbeCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, 2));
+        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 2}));
       }
 
       return undefined;

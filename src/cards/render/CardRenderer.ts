@@ -444,7 +444,7 @@ class Builder {
     return this;
   }
 
-  public standartProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
+  public standardProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
     const builder = CardRenderEffect.builder(eb);
     builder.description = description;
     this._addRowItem(builder);

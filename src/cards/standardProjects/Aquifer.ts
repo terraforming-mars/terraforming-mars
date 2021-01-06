@@ -33,7 +33,7 @@ export class Aquifer extends StandardProjectCard {
   public metadata: CardMetadata = {
     cardNumber: 'SP2',
     renderData: CardRenderer.builder((b) =>
-      b.standartProject('Spend 18 MC to place an ocean tile.', (eb) => {
+      b.standardProject('Spend 18 MC to place an ocean tile.', (eb) => {
         eb.megacredits(18).startAction.oceans(1);
       }),
     ),

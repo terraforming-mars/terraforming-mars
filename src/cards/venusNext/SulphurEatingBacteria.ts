@@ -37,13 +37,13 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
       const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player, game));
       const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, game, amount), 1, this.resourceCount);
 
+      opts.push(addResource);
+
       if (this.resourceCount > 0) {
         opts.push(spendResource);
       } else {
         return this.addResource(player, game);
       }
-
-      opts.push(addResource);
 
       return new OrOptions(...opts);
     }

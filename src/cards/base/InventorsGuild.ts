@@ -23,7 +23,7 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '006',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => eb.empty().startAction.empty().description()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true);
+          b.action(undefined, (eb) => eb.empty().startAction.empty()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true);
         }),
       },
     });

@@ -33,10 +33,9 @@ export class EcologicalSurvey implements IProjectCard {
     cardNumber: 'A07',
     requirements: CardRequirements.builder((b) => b.greeneries(3)),
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.effect('When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.', (eb) => {
         eb.emptyTile().startEffect;
         eb.plus().plants(1).animals(1).microbes(1);
-        eb.description('Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.');
       });
     }),
   };

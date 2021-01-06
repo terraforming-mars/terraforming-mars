@@ -26,7 +26,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
         cardNumber: '208',
         requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((ab) => ab.empty().startAction.cards(2).description('Action: Draw 2 cards.')).br;
+          b.effect('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
           b.productionBox((pb) => pb.minus().energy(1));
         }),
         victoryPoints: 1,

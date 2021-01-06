@@ -41,14 +41,14 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
       this.resourceCount--;
 
       return new OrOptions(
-        new SelectOption('Increase MC production 1 step', 'Select', () => {
-          player.addProduction(Resources.MEGACREDITS);
-          LogHelper.logRemoveResource(game, player, this, 1, 'increase MC production 1 step');
-          return undefined;
-        }),
         new SelectOption('Gain 2 titanium', 'Select', () => {
           player.titanium += 2;
           LogHelper.logRemoveResource(game, player, this, 1, 'gain 2 titanium');
+          return undefined;
+        }),
+        new SelectOption('Increase MC production 1 step', 'Select', () => {
+          player.addProduction(Resources.MEGACREDITS);
+          LogHelper.logRemoveResource(game, player, this, 1, 'increase MC production 1 step');
           return undefined;
         }),
       );

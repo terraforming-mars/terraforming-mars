@@ -24,9 +24,8 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
       metadata: {
         cardNumber: '015',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Decrease your Energy production 1 step to increase your terraform rating 1 step.', (eb) => {
             eb.productionBox((pb) => pb.energy(1)).startAction.tr(1);
-            eb.description('Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.');
           });
         }),
       },

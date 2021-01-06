@@ -8,7 +8,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {StandardAction} from './StandardAction';
-import {SelectOption} from '../../inputs/SelectOption';
 
 
 export class ConvertHeat extends StandardAction {

@@ -58,6 +58,7 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
+import {range} from './utils/utils';
 
 export type PlayerId = string;
 
@@ -1303,6 +1304,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
+  public drawCard(game: Game, n = 1): void {
+    range(n).forEach(() => {
+      this.cardsInHand.push(game.dealer.dealCard());
+    });
+  }
+
   public get availableHeat(): number {
     return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
   }
@@ -1435,11 +1442,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       () => {
         game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Scientists draw'}));
         this.turmoilScientistsActionUsed = true;
-        this.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-        );
+        this.drawCard(game, 3);
         game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
         return undefined;
       },

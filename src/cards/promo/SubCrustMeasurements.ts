@@ -32,7 +32,7 @@ export class SubCrustMeasurements implements IActionCard, IProjectCard {
     }
 
     public action(player: Player, game: Game) {
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game);
       return undefined;
     }
 

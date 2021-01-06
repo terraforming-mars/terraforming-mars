@@ -16,7 +16,7 @@ export class SpinoffDepartment implements IProjectCard {
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
       if (card.cost >= 20) {
-        player.cardsInHand.push(game.dealer.dealCard());
+        player.drawCard(game);
       }
     }
 

@@ -45,8 +45,7 @@ export namespace SelectHowToPayDeferred {
   export interface Options {
     canUseSteel?: boolean;
     canUseTitanium?: boolean;
-    title?: string; // = ;
+    title?: string;
     afterPay?: () => void;
   };
 }
-

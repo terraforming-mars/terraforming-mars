@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
+import {StandardProject} from '../standardProjects/StandardProject';
 
 export class StandardTechnology implements IProjectCard {
     public cost = 6;
@@ -13,7 +13,7 @@ export class StandardTechnology implements IProjectCard {
     public name = CardName.STANDARD_TECHNOLOGY;
     public cardType = CardType.ACTIVE;
 
-    public onStandardProject(player: Player, projectType: StandardProjectCard) {
+    public onStandardProject(player: Player, projectType: StandardProject) {
       if (projectType.name !== CardName.STANDARD_SELL_PATENTS) {
         player.megaCredits += 3;
       }

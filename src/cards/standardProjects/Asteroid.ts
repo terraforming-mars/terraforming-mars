@@ -4,12 +4,12 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 
-export class AsteroidStandard extends StandardProjectCard {
+export class AsteroidStandard extends StandardProject {
   public name = CardName.STANDARD_ASTEROID;
   public cost = 14;
 

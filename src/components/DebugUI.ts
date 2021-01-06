@@ -5,7 +5,7 @@ import {
   ALL_CORPORATION_CARD_NAMES,
   ALL_PRELUDE_CARD_NAMES,
   ALL_PROJECT_CARD_NAMES,
-  ALL_STANDARD_PROJECT_CARD_NAMES,
+  ALL_STANDARD_ACTIONS_NAMES,
 } from '../cards/AllCards';
 import {GameModule} from '../GameModule';
 import {ICard} from '../cards/ICard';
@@ -21,7 +21,8 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     manifest.projectCards,
     manifest.corporationCards,
     manifest.preludeCards,
-    manifest.standardProjects].forEach((deck) => {
+    manifest.standardActions,
+  ].forEach((deck) => {
     deck.factories.forEach((cf: ICardFactory<ICard>) => {
       const card: ICard = new cf.Factory();
       const cardNumber = card.metadata.cardNumber;
@@ -88,8 +89,8 @@ export const DebugUI = Vue.component('debug-ui', {
         return names.sort();
       }
     },
-    getAllStandardProjectCards: function() {
-      return this.sort(ALL_STANDARD_PROJECT_CARD_NAMES);
+    getAllStandardActions: function() {
+      return this.sort(ALL_STANDARD_ACTIONS_NAMES);
     },
     getAllProjectCards: function() {
       return this.sort(ALL_PROJECT_CARD_NAMES);
@@ -236,8 +237,8 @@ export const DebugUI = Vue.component('debug-ui', {
             </section>
             <br>
             <section class="debug-ui-cards-list">
-              <h2>Standard Projects</h2>
-              <div class="cardbox" v-for="card in getAllStandardProjectCards()">
+              <h2>Standard Actions</h2>
+              <div class="cardbox" v-for="card in getAllStandardActions()">
                   <Card v-show="filtered(card)" :card="{'name': card}" />
               </div>
             </section>

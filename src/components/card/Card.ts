@@ -41,7 +41,7 @@ export const Card = Vue.component('card', {
     const cardName = this.card.name;
     let expansion: GameModule | undefined;
     for (const manifest of ALL_CARD_MANIFESTS) {
-      for (const deck of [manifest.corporationCards, manifest.projectCards, manifest.preludeCards, manifest.standardProjects]) {
+      for (const deck of [manifest.corporationCards, manifest.projectCards, manifest.preludeCards, manifest.standardActions]) {
         const factory = deck.findByCardName(cardName);
         if (factory !== undefined) {
           cardInstance = new factory.Factory();
@@ -101,8 +101,8 @@ export const Card = Vue.component('card', {
       if (this.actionUsed) {
         classes.push('cards-action-was-used');
       }
-      if (this.isStandardProject()) {
-        classes.push('card-standard-project');
+      if (this.isStandardAction()) {
+        classes.push('card-standard-action');
       }
       return classes.join(' ');
     },
@@ -115,14 +115,14 @@ export const Card = Vue.component('card', {
     isCorporationCard: function() : boolean {
       return this.getCardType() === CardType.CORPORATION;
     },
-    isStandardProject: function() : boolean {
-      return this.getCardType() === CardType.STANDARD_PROJECT;
+    isStandardAction: function() : boolean {
+      return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
     },
   },
   template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
-                <div v-if="!isStandardProject()" class="card-cost-and-tags">
+                <div v-if="!isStandardAction()" class="card-cost-and-tags">
                     <CardCost :amount="getCost()" />
                     <CardTags :tags="getTags()" />
                 </div>

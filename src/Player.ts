@@ -18,7 +18,6 @@ import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
 import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
@@ -1401,19 +1400,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return trade;
   }
 
-  private convertPlantsIntoGreenery(game: Game): PlayerInput {
-    return new SelectSpace(
-      `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-      game.board.getAvailableSpacesForGreenery(this),
-      (space: ISpace) => {
-        game.addGreenery(this, space.id);
-        this.plants -= this.plantsNeededForGreenery;
-        game.log('${0} converted plants into a greenery', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
   private turmoilKelvinistsAction(game: Game): PlayerInput {
     return new SelectOption(
       'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
@@ -1444,16 +1430,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         return undefined;
       },
     );
-  }
-
-  private convertHeatIntoTemperature(game: Game): PlayerInput {
-    return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
-        game.increaseTemperature(this, 1);
-        game.log('${0} converted heat into temperature', (b) => b.player(this));
-        return undefined;
-      });
-    });
   }
 
   private claimMilestone(milestone: IMilestone, game: Game): SelectOption {
@@ -1663,9 +1639,16 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private addStandardProjects(game: Game, options: Array<PlayerInput>) {
-    const standardProjects = this.getAvailableStandardProjects(game);
-    if (standardProjects.cards.length >= 1) {
-      options.push(standardProjects);
+    const add = this.getAvailableStandardProjects(game);
+    if (add.cards.length >= 1) {
+      options.push(add);
+    }
+  }
+
+  private addStandardActions(game: Game, options: Array<PlayerInput>) {
+    const add = this.getAvailableStandardActions(game);
+    if (add.cards.length >= 1) {
+      options.push(add);
     }
   }
 
@@ -1680,7 +1663,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
-    const players = game.getPlayers();
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed(game);
 
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
@@ -1753,62 +1735,34 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
+    this.setWaitingFor(this.getNormalActions(game), () => {
+      this.actionsTakenThisRound++;
+      this.takeAction(game);
+    });
+  }
+
+  private getNormalActions(game: Game) {
     const action: OrOptions = new OrOptions();
     action.title = 'Take action for action phase, select one ' +
-                      'available action.';
+      'available action.';
     action.buttonLabel = 'Take action';
 
-    if (this.getPlayableCards(game).length > 0) {
-      action.options.push(
-        this.playProjectCard(game),
-      );
+    if (this.canAfford(8) && !game.allMilestonesClaimed()) {
+      const remainingMilestones = new OrOptions();
+      remainingMilestones.title = 'Claim a milestone';
+      remainingMilestones.options = game.milestones
+        .filter(
+          (milestone: IMilestone) =>
+            !game.milestoneClaimed(milestone) &&
+            milestone.canClaim(this, game))
+        .map(
+          (milestone: IMilestone) =>
+            this.claimMilestone(milestone, game));
+
+      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
     }
 
-    if (this.getPlayableActionCards(game).length > 0) {
-      action.options.push(
-        this.playActionCard(game),
-      );
-    }
-
-    if (game.gameOptions.coloniesExtension) {
-      const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-      if (openColonies.length > 0 &&
-        this.fleetSize > this.tradesThisTurn &&
-        (this.canAfford(9 - this.colonyTradeDiscount) ||
-          this.energy >= (3 - this.colonyTradeDiscount) ||
-          this.titanium >= (3 - this.colonyTradeDiscount))
-      ) {
-        action.options.push(
-          this.tradeWithColony(openColonies, game),
-        );
-      }
-    }
-
-    const hasEnoughPlants = this.plants >= this.plantsNeededForGreenery;
-    const canPlaceGreenery = game.board.getAvailableSpacesForGreenery(this).length > 0;
-    const oxygenIsMaxed = game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
-
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-    const canAffordReds = !redsAreRuling || (redsAreRuling && this.canAfford(REDS_RULING_POLICY_COST));
-
-    if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
-      action.options.push(
-        this.convertPlantsIntoGreenery(game),
-      );
-    }
-
-    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
-
-    const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
-
-    const canAffordRedsForHeatConversion =
-      !redsAreRuling || (!this.isCorporation(CardName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
-
-    if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
-      action.options.push(
-        this.convertHeatIntoTemperature(game),
-      );
-    }
+    this.addStandardActions(game, action.options);
 
     // Turmoil Scientists capacity
     if (this.canAfford(10) &&
@@ -1822,19 +1776,16 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(this.turmoilKelvinistsAction(game));
     }
 
-    if (this.canAfford(8) && !game.allMilestonesClaimed()) {
-      const remainingMilestones = new OrOptions();
-      remainingMilestones.title = 'Claim a milestone';
-      remainingMilestones.options = game.milestones
-        .filter(
-          (milestone: IMilestone) =>
-            !game.milestoneClaimed(milestone) &&
-                      milestone.canClaim(this, game))
-        .map(
-          (milestone: IMilestone) =>
-            this.claimMilestone(milestone, game));
+    if (this.getPlayableActionCards(game).length > 0) {
+      action.options.push(
+        this.playActionCard(game),
+      );
+    }
 
-      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
+    if (this.getPlayableCards(game).length > 0) {
+      action.options.push(
+        this.playProjectCard(game),
+      );
     }
 
     // If you can pay to send some in the Ara
@@ -1855,24 +1806,29 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    action.options.sort((a, b) => {
-      if (a.title > b.title) {
-        return 1;
-      } else if (a.title < b.title) {
-        return -1;
+    if (game.gameOptions.coloniesExtension) {
+      const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+      if (openColonies.length > 0 &&
+        this.fleetSize > this.tradesThisTurn &&
+        (this.canAfford(9 - this.colonyTradeDiscount) ||
+          this.energy >= (3 - this.colonyTradeDiscount) ||
+          this.titanium >= (3 - this.colonyTradeDiscount))
+      ) {
+        action.options.push(
+          this.tradeWithColony(openColonies, game),
+        );
       }
-      return 0;
-    });
+    }
 
-    if (players.length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption && allOtherPlayersHavePassed === false) {
+
+    if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 &&
+      !game.gameOptions.fastModeOption && this.allOtherPlayersHavePassed(game) === false) {
       action.options.push(
         this.endTurnOption(game),
       );
     }
 
-    if (
-      this.canAfford(game.getAwardFundingCost()) &&
-          !game.allAwardsFunded()) {
+    if (this.canAfford(game.getAwardFundingCost()) && !game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
       remainingAwards.title = 'Fund an award';
       remainingAwards.buttonLabel = 'Confirm';
@@ -1899,10 +1855,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(this.undoTurnOption(game));
     }
 
-    this.setWaitingFor(action, () => {
-      this.actionsTakenThisRound++;
-      this.takeAction(game);
-    });
+    return action;
   }
 
   public allOtherPlayersHavePassed(game: Game): boolean {
@@ -2193,9 +2146,23 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Standard projects',
       'Confirm',
       new CardLoader(game.gameOptions)
-        .getStandardProjects().sort((a, b) => a.cost - b.cost)
+        .getStandardActions()
+        .filter((card) => card.cardType === CardType.STANDARD_PROJECT)
+        .sort((a, b) => a.cost - b.cost)
         .filter((card) => card.canAct(this, game))
         .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
+      (card) => card[0].action(this, game),
+    );
+  }
+
+  public getAvailableStandardActions(game: Game) {
+    return new SelectCard(
+      'Standard actions',
+      'Confirm',
+      new CardLoader(game.gameOptions)
+        .getStandardActions()
+        .filter((card) => card.cardType === CardType.STANDARD_ACTION)
+        .filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

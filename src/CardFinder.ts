@@ -12,7 +12,7 @@ import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {StandardAction} from './cards/standardActions/StandardAction';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -33,10 +33,10 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getStandardProjectCardByName(cardName: string): StandardProjectCard | undefined {
-      let found : (ICardFactory<StandardProjectCard> | undefined);
+    public getStandardActionByName(cardName: string): StandardAction | undefined {
+      let found : (ICardFactory<StandardAction> | undefined);
       CardFinder.getDecks().some((deck) => {
-        found = deck.standardProjects.findByCardName(cardName as CardName);
+        found = deck.standardActions.findByCardName(cardName as CardName);
         return found !== undefined;
       });
       if (found !== undefined) {

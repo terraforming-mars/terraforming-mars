@@ -3,11 +3,11 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Resources} from '../../Resources';
 
-export class City extends StandardProjectCard {
+export class City extends StandardProject {
   public name = CardName.STANDARD_CITY;
   public cost = 25;
 

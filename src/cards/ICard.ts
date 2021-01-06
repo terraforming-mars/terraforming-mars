@@ -17,7 +17,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
-import {StandardProjectCard} from './standardProjects/StandardProjectCard';
+import {StandardProject} from './standardProjects/StandardProject';
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -38,7 +38,7 @@ export interface ICard {
     getRequirementBonus?: (player: Player, game: Game, venusOnly?: boolean) => number;
     getVictoryPoints?: (player: Player, game: Game) => number;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
-    onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
+    onStandardProject?: (player: Player, projectType: StandardProject) => void;
     onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;

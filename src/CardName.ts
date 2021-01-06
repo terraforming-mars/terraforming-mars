@@ -1,14 +1,18 @@
 export enum CardName {
     // Standard projects:
-    STANDARD_SELL_PATENTS = 'Sell Patents',
-    STANDARD_POWER_PLANT = 'Power plant', // 'Power Plant' is already taken
-    STANDARD_ASTEROID = 'asteroid', // 'Asteroid' is already taken
-    STANDARD_AIR_SCRAPPING = 'Air Scrapping',
-    STANDARD_BUFFER_GAS = 'Buffer Gas',
-    STANDARD_BUILD_COLONY = 'Colony',
-    STANDARD_AQUIFER = 'Aquifer',
-    STANDARD_GREENERY = 'Greenery',
-    STANDARD_CITY = 'City',
+    STANDARD_SELL_PATENTS = 'Sell Patents:SP',
+    STANDARD_POWER_PLANT = 'Power Plant:SP', // 'Power Plant' is already taken
+    STANDARD_ASTEROID = 'Asteroid:SP', // 'Asteroid' is already taken
+    STANDARD_AIR_SCRAPPING = 'Air Scrapping:SP',
+    STANDARD_BUFFER_GAS = 'Buffer Gas:SP',
+    STANDARD_BUILD_COLONY = 'Colony:SP',
+    STANDARD_AQUIFER = 'Aquifer:SP',
+    STANDARD_GREENERY = 'Greenery:SP',
+    STANDARD_CITY = 'City:SP',
+
+    // Standard actions:
+    CONVERT_PLANTS = 'Convert Plants',
+    CONVERT_HEAT = 'Convert Heat',
 
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',

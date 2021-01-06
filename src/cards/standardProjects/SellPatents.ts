@@ -3,11 +3,11 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 
-export class SellPatents extends StandardProjectCard {
+export class SellPatents extends StandardProject {
   public name = CardName.STANDARD_SELL_PATENTS;
   public cost = 0;
 

@@ -35,8 +35,8 @@ export const CardTitle = Vue.component('CardTitle', {
         classes.push('background-color-events');
       } else if (this.type === CardType.PRELUDE) {
         classes.push('background-color-prelude');
-      } else if (this.type === CardType.STANDARD_PROJECT) {
-        classes.push('background-color-standard-project');
+      } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
+        classes.push('background-color-standard-action');
       }
 
       const trimmedTitle = this.getCardTitleWithoutSuffix(title);
@@ -51,8 +51,8 @@ export const CardTitle = Vue.component('CardTitle', {
     },
     getMainClasses() {
       const classes: Array<String> = ['card-title'];
-      if (this.type === CardType.STANDARD_PROJECT) {
-        classes.push('card-title-standard-project');
+      if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
+        classes.push('card-title-standard-action');
       }
       return classes.join(' ');
     },

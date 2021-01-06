@@ -2,10 +2,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {Resources} from '../../Resources';
 
-export class PowerPlantStandard extends StandardProjectCard {
+export class PowerPlantStandard extends StandardProject {
   public name = CardName.STANDARD_POWER_PLANT;
   public cost = 11;
 

@@ -47,12 +47,12 @@ const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(
 export const ALL_PRELUDE_DECKS = ALL_CARD_MANIFESTS.map(
   (deck) => deck.preludeCards,
 );
-export const ALL_STANDARD_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
-  (deck) => deck.standardProjects,
+export const ALL_STANDARD_ACTIONS_DECKS = ALL_CARD_MANIFESTS.map(
+  (deck) => deck.standardActions,
 );
 
 export const ALL_PROJECT_CARD_NAMES = allCardNames(ALL_PROJECT_DECKS);
-export const ALL_STANDARD_PROJECT_CARD_NAMES = allCardNames(ALL_STANDARD_PROJECT_DECKS);
+export const ALL_STANDARD_ACTIONS_NAMES = allCardNames(ALL_STANDARD_ACTIONS_DECKS);
 
 export const ALL_CORPORATION_CARD_NAMES = allCardNames(
   ALL_CORPORATION_DECKS,

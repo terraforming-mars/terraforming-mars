@@ -47,8 +47,8 @@ export const LogPanel = Vue.component('log-panel', {
         className = 'background-color-automated';
       } else if (cardType === CardType.PRELUDE) {
         className = 'background-color-prelude';
-      } else if (cardType === CardType.STANDARD_PROJECT) {
-        className = 'background-color-standard-project';
+      } else if (cardType === CardType.STANDARD_PROJECT || cardType === CardType.STANDARD_ACTION) {
+        className = 'background-color-standard-action';
       }
 
       if (className === undefined) {
@@ -87,7 +87,7 @@ export const LogPanel = Vue.component('log-panel', {
           }
           let card = new CardFinder().getProjectCardByName(data.value);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
-          card = new CardFinder().getStandardProjectCardByName(data.value);
+          card = new CardFinder().getStandardActionByName(data.value);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
         } else if (translatableMessageDataTypes.includes(data.type)) {
           return $t(data.value);

@@ -3,14 +3,14 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
-export class BuildColonyStandard extends StandardProjectCard {
+export class BuildColonyStandard extends StandardProject {
   public name = CardName.STANDARD_BUILD_COLONY;
   public cost = 17;
 

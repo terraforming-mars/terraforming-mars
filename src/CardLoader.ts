@@ -66,8 +66,8 @@ export class CardLoader {
   public getProjectCards() {
     return this.getCards((manifest) => manifest.projectCards);
   }
-  public getStandardProjects() {
-    return this.getCards((manifest) => manifest.standardProjects);
+  public getStandardActions() {
+    return this.getCards((manifest) => manifest.standardActions);
   }
   public getCorporationCards() {
     return this.getCards((manifest) => manifest.corporationCards)

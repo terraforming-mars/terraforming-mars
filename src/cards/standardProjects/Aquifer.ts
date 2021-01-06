@@ -5,11 +5,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProject} from './StandardProject';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 
-export class Aquifer extends StandardProjectCard {
+export class Aquifer extends StandardProject {
   public name = CardName.STANDARD_AQUIFER;
   public cost = 18;
 

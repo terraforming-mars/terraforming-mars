@@ -54,28 +54,30 @@ export interface StaticAgendasModel {
 export function getTurmoil(game: Game): TurmoilModel | undefined {
   if (game.gameOptions.turmoilExtension && game.turmoil) {
     const parties = getParties(game);
+    const turmoil = game.turmoil;
     let chairman; let dominant; let ruling;
-    if (game.turmoil.chairman) {
-      if (game.turmoil.chairman === 'NEUTRAL') {
+
+    if (turmoil.chairman) {
+      if (turmoil.chairman === 'NEUTRAL') {
         chairman = Color.NEUTRAL;
       } else {
-        chairman = game.getPlayerById(game.turmoil.chairman).color;
+        chairman = game.getPlayerById(turmoil.chairman).color;
       }
     }
-    if (game.turmoil.dominantParty) {
-      dominant = game.turmoil.dominantParty.name;
+    if (turmoil.dominantParty) {
+      dominant = turmoil.dominantParty.name;
     }
-    if (game.turmoil.rulingParty) {
-      ruling = game.turmoil.rulingParty.name;
+    if (turmoil.rulingParty) {
+      ruling = turmoil.rulingParty.name;
     }
 
     const lobby = Array.from(
-      game.turmoil.lobby,
+      turmoil.lobby,
       (player) => game.getPlayerById(player).color,
     );
 
-    const reserve = game.turmoil.getPresentPlayers().map((player) => {
-      const number = game.turmoil!.getDelegates(player);
+    const reserve = turmoil.getPresentPlayers().map((player) => {
+      const number = turmoil.getDelegates(player);
       if (player !== 'NEUTRAL') {
         return {
           color: game.getPlayerById(player).color,
@@ -87,36 +89,36 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
     });
 
     let distant;
-    if (game.turmoil.distantGlobalEvent) {
+    if (turmoil.distantGlobalEvent) {
       distant = {
-        name: game.turmoil.distantGlobalEvent.name,
-        description: game.turmoil.distantGlobalEvent.description,
-        revealed: game.turmoil.distantGlobalEvent.revealedDelegate,
-        current: game.turmoil.distantGlobalEvent.currentDelegate,
+        name: turmoil.distantGlobalEvent.name,
+        description: turmoil.distantGlobalEvent.description,
+        revealed: turmoil.distantGlobalEvent.revealedDelegate,
+        current: turmoil.distantGlobalEvent.currentDelegate,
       };
     }
 
     let coming;
-    if (game.turmoil.comingGlobalEvent) {
+    if (turmoil.comingGlobalEvent) {
       coming = {
-        name: game.turmoil.comingGlobalEvent.name,
-        description: game.turmoil.comingGlobalEvent.description,
-        revealed: game.turmoil.comingGlobalEvent.revealedDelegate,
-        current: game.turmoil.comingGlobalEvent.currentDelegate,
+        name: turmoil.comingGlobalEvent.name,
+        description: turmoil.comingGlobalEvent.description,
+        revealed: turmoil.comingGlobalEvent.revealedDelegate,
+        current: turmoil.comingGlobalEvent.currentDelegate,
       };
     }
 
     let current;
-    if (game.turmoil.currentGlobalEvent) {
+    if (turmoil.currentGlobalEvent) {
       current = {
-        name: game.turmoil.currentGlobalEvent.name,
-        description: game.turmoil.currentGlobalEvent.description,
-        revealed: game.turmoil.currentGlobalEvent.revealedDelegate,
-        current: game.turmoil.currentGlobalEvent.currentDelegate,
+        name: turmoil.currentGlobalEvent.name,
+        description: turmoil.currentGlobalEvent.description,
+        revealed: turmoil.currentGlobalEvent.revealedDelegate,
+        current: turmoil.currentGlobalEvent.currentDelegate,
       };
     }
 
-    const staticAgendas = game.turmoil.politicalAgendasData.staticAgendas;
+    const staticAgendas = turmoil.politicalAgendasData.staticAgendas;
     const getStaticAgenda = function(partyName: PartyName): Agenda {
       if (staticAgendas === undefined) {
         throw new Error('Trying to resolve static agendas when agendas are dynamic.');
@@ -151,7 +153,7 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       comming: coming,
       current: current,
       politicalAgendas: {
-        currentAgenda: game.turmoil.politicalAgendasData.currentAgenda,
+        currentAgenda: turmoil.politicalAgendasData.currentAgenda,
         staticAgendas: staticAgendasModel,
       },
     };

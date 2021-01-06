@@ -32,9 +32,8 @@ export class PointLuna implements CorporationCard {
         b.br;
         b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(38);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you play an Earth tag, including this, draw a card.', (eb) => {
             eb.earth().played.startEffect.cards(1);
-            eb.description('Effect: When you play an Earth tag, including this, draw a card.');
           });
         });
       }),

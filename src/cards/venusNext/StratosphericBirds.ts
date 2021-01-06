@@ -55,9 +55,8 @@ export class StratosphericBirds implements IActionCard, IProjectCard, IResourceC
       cardNumber: '249',
       requirements: CardRequirements.builder((b) => b.venus(12)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
-          eb.description('Action: Add 1 animal to this card.');
         }).br;
         b.minus().floaters(1).br;
         b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);

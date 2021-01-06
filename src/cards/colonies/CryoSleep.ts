@@ -27,7 +27,9 @@ export class CryoSleep implements IProjectCard {
 
   public metadata: CardMetadata = {
     cardNumber: 'C07',
-    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.trade().startEffect.tradeDiscount(1).description('Effect: When you trade, you pay 1 less resource for it.'))),
+    renderData: CardRenderer.builder((b) => b.effect('When you trade, you pay 1 less resource for it.', (be) => {
+      be.trade().startEffect.tradeDiscount(1);
+    })),
     victoryPoints: 1,
   };
 }

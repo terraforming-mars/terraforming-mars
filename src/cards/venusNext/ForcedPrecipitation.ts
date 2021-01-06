@@ -76,14 +76,12 @@ export class ForcedPrecipitation implements IActionCard, IProjectCard, IResource
     public metadata: CardMetadata = {
       cardNumber: '226',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 2 MC to add 1 Floater to THIS card.', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix;
-          eb.description('Action: Spend 2 MC to add 1 Floater to THIS card');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend 2 Floaters here to increase Venus 1 step.', (eb) => {
           eb.floaters(2).startAction.venus(1);
-          eb.description('Action: Spend 2 Floaters here to increase Venus 1 step');
         });
       }),
     }

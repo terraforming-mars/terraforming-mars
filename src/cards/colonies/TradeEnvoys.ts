@@ -24,9 +24,8 @@ export class TradeEnvoys implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C46',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
           eb.trade().startEffect.text('+1', CardRenderItemSize.LARGE);
-          eb.description('Effect: When you trade, you may first increase that Colony Tile track 1 step.');
         });
       }),
     }

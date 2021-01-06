@@ -77,14 +77,12 @@ export class EnergyMarket implements IProjectCard {
   public metadata: CardMetadata = {
     cardNumber: 'X03',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.action('Spend 2X MC to gain X energy.', (eb) => {
         eb.megacredits(2).multiplier.startAction.text('x').energy(1);
-        eb.description('Action: Spend 2X MC to gain X energy.');
       }).br;
       b.or().br;
-      b.effectBox((eb) => {
+      b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
         eb.productionBox((pb) => pb.energy(1)).startAction.megacredits(8);
-        eb.description('Action: Decrease energy production 1 step to gain 8 MC.');
       });
     }),
   };

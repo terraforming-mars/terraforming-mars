@@ -47,9 +47,8 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '012',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.', (eb) => {
           eb.megacredits(12).titanium(1).brackets.startAction.oceans(1);
-          eb.description('Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.');
         }).br;
         b.text('1 VP for each Jovian tag you have.', CardRenderItemSize.TINY, true);
       }),

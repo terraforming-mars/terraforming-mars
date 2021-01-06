@@ -22,9 +22,8 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
       metadata: {
         cardNumber: '028',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 1 titanium to add 1 fighter resource to this card.', (eb) => {
             eb.titanium(1).startAction.fighter();
-            eb.description('Action: Spend 1 titanium to add 1 fighter resource to this card.');
           }).br;
           b.text('1 VP for each fighter resource on this card.', CardRenderItemSize.TINY, true);
         }),

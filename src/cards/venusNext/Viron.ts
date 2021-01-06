@@ -61,9 +61,8 @@ export class Viron implements ICard, CorporationCard {
         b.br.br.br;
         b.megacredits(48);
         b.corpBox('action', (ce) => {
-          ce.effectBox((eb) => {
+          ce.action('Use a blue card action that has already been used this generation.', (eb) => {
             eb.empty().startAction.empty();
-            eb.description('Action: Use a blue card action that has already been used this generation.');
           });
         });
       }),

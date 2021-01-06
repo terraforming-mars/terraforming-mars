@@ -44,9 +44,8 @@ export class MartianMediaCenter implements IProjectCard {
       cardNumber: 'T07',
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Pay 3 MC to add a delegate to any party.', (eb) => {
           eb.megacredits(3).startAction.delegates(1);
-          eb.description('Action: Pay 3 MC to add a delegate to any party.');
         }).br;
         b.productionBox((pb) => {
           pb.megacredits(2);

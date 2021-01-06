@@ -69,14 +69,12 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
       cardNumber: '251',
       requirements: CardRequirements.builder((b) => b.venus(6)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Microbe to this card.', (eb) => {
           eb.empty().startAction.microbes(1);
-          eb.description('Action: Add 1 Microbe to this card.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend any number of Microbes here to gain triple amount of MC.', (eb) => {
           eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
-          eb.description('Action: Spend any number of Microbes here to gain triple amount of MC.');
         });
       }),
       description: 'Requires Venus 6%',

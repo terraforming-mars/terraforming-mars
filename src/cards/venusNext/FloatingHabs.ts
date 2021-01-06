@@ -63,9 +63,8 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
       cardNumber: '225',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 2 MC to add 1 Floater to ANY card', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix();
-          eb.description('Action: spend 2 MC to add 1 Floater to ANY card');
         }).br;
         b.text('1 VP for every 2nd Floater on this card', CardRenderItemSize.TINY, true);
       }),

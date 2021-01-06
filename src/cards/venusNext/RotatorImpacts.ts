@@ -80,13 +80,11 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
       cardNumber: '243',
       requirements: CardRequirements.builder((b) => b.venus(14).max()),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
           eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);
-          eb.description('Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].');
         }).br;
-        b.effectBox((eb) => {
+        b.action('Spend 1 resource from this card to increase Venus 1 step.', (eb) => {
           eb.or().asteroids(1).startAction.venus(1);
-          eb.description('Action: Spend 1 resource from this card to increase Venus 1 step.');
         });
       }),
       description: 'Venus must be 14% or lower',

@@ -33,6 +33,8 @@ export class EventAnalysts implements IProjectCard {
     description: 'Requires that Scientists are ruling or that you have 2 delegates there.',
     cardNumber: 'T05',
     requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
-    renderData: CardRenderer.builder((b) => b.effectBox((be) => be.startEffect.influence(1).description('Effect: You have +1 influence.'))),
+    renderData: CardRenderer.builder((b) => b.effect('You have +1 influence.', (be) => {
+      be.startEffect.influence(1);
+    })),
   };
 }

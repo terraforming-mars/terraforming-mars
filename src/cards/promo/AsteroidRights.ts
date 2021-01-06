@@ -89,16 +89,14 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
     cardNumber: 'X31',
     description: 'Add 2 asteroids to this card.',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.action('Spend 1 MC to add 1 asteroid to ANY card.', (eb) => {
         eb.megacredits(1).startAction.asteroids(1).asterix();
-        eb.description('Action: Spend 1 MC to add 1 asteroid to ANY card.');
       }).br;
-      b.effectBox((eb) => {
+      b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
         eb.asteroids(1)
           .startAction.productionBox((pb) => pb.megacredits(1))
           .or()
           .titanium(2);
-        eb.description('Action: Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.');
       }).br;
       b.asteroids(2);
     }),

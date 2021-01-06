@@ -439,11 +439,6 @@ class Builder {
     return this;
   }
 
-  public effectBox(eb: (builder: EffectBuilder) => void): Builder {
-    this._addRowItem(CardRenderEffect.builder(eb));
-    return this;
-  }
-
   public standardProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
     const builder = CardRenderEffect.builder(eb);
     builder.description = description;
@@ -722,7 +717,7 @@ class Builder {
   }
 
   /**
-   * Used to start the effect for effectBox and actionBox, also adds a delimiter symbol
+   * Used to start the effect for action(), effect() and standardProject(), also adds a delimiter symbol
    */
   public get startEffect(): Builder {
     this.br;

@@ -5,8 +5,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
-import {AndOptions} from '../../inputs/AndOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
@@ -27,9 +25,9 @@ export class LocalHeatTrapping implements IProjectCard {
       // Helion must be able to pay for both the card and its effect
       if (player.canUseHeatAsMegaCredits) {
         return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this));
-      };
+      }
 
-      return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
+      return player.availableHeat >= requiredHeatAmt;
     }
     public play(player: Player, game: Game) {
       const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
@@ -59,42 +57,12 @@ export class LocalHeatTrapping implements IProjectCard {
             LogHelper.logAddResource(game, player, foundCards[0], 2);
             return undefined;
           }));
-      };
-
-      if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-          player.getResourcesOnCorporation() > 0) {
-        let heatAmount: number;
-        let floaterAmount: number;
-        return new AndOptions(
-          () => {
-            if (
-              heatAmount +
-                    (floaterAmount * 2) < 5
-            ) {
-              throw new Error('Need to pay 5 heat');
-            }
-            player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
-            player.heat -= heatAmount;
-
-            if (availableActions.options.length === 1) return availableActions.options[0].cb();
-            return availableActions;
-          },
-          new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
-            heatAmount = amount;
-            return undefined;
-          }, 0, player.heat),
-          new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
-            floaterAmount = amount;
-            return undefined;
-          }, 0, player.getResourcesOnCorporation()),
-
-        );
       }
 
-      player.heat -= 5;
-
-      if (availableActions.options.length === 1) return availableActions.options[0].cb();
-      return availableActions;
+      return player.spendHeat(5, () => {
+        if (availableActions.options.length === 1) return availableActions.options[0].cb();
+        return availableActions;
+      });
     }
     public metadata: CardMetadata = {
       cardNumber: '190',

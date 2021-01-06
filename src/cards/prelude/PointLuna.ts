@@ -17,14 +17,12 @@ export class PointLuna implements CorporationCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
       const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
       if (player.isCorporation(this.name) && card.tags.indexOf(Tags.EARTH) !== -1) {
-        for (let i = 0; i < tagCount; i++) {
-          player.cardsInHand.push(game.dealer.dealCard());
-        }
+        player.drawCard(game, tagCount);
       }
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM);
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game);
       return undefined;
     }
     public metadata: CardMetadata = {

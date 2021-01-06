@@ -51,8 +51,7 @@ export class ProjectWorkshop implements CorporationCard {
           if (activeCards.length === 1) {
             this.convertCardPointsToTR(player, game, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
-            player.cardsInHand.push(game.dealer.dealCard());
-            player.cardsInHand.push(game.dealer.dealCard());
+            player.drawCard(game, 2);
 
             return undefined;
           }
@@ -64,8 +63,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
-                      player.cardsInHand.push(game.dealer.dealCard());
-                      player.cardsInHand.push(game.dealer.dealCard());
+                      player.drawCard(game, 2);
 
                       return undefined;
                     },

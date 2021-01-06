@@ -35,7 +35,7 @@ export class HiTechLab implements IProjectCard {
           const cardsDrawn: Array<IProjectCard> = [];
           for (let counter = 0; counter < amount; counter++) {
             cardsDrawn.push(game.dealer.dealCard());
-          };
+          }
           game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
           return undefined;
         },

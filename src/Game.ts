@@ -1277,7 +1277,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, false, false, 'Select how to pay for placement bonus ocean'));
+        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 

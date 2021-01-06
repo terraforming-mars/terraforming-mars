@@ -35,7 +35,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
       return player.canAfford(2);
     }
     public action(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
       player.cardsInHand.push(game.dealer.dealCard());
       return undefined;
     }

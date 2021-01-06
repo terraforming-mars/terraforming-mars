@@ -20,7 +20,7 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
       return player.canAfford(10);
     }
     public action(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 10, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
       player.addProduction(Resources.HEAT, 2);
       return undefined;
     }

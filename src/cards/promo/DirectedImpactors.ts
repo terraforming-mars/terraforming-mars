@@ -70,7 +70,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     }
 
     private addResource(player: Player, game: Game, asteroidCards: ICard[]) {
-      game.defer(new SelectHowToPayDeferred(player, 6, false, true, 'Select how to pay for Directed Impactors action'));
+      game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
 
       if (asteroidCards.length === 1) {
         player.addResourceTo(this);

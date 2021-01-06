@@ -292,7 +292,7 @@ export class AresHandler {
     if (cost.megacredits > 0) {
       game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
 
-      game.defer(new SelectHowToPayDeferred(player, cost.megacredits, false, false, 'Select how to pay additional placement costs.'));
+      game.defer(new SelectHowToPayDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }
 

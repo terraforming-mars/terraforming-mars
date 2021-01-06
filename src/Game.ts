@@ -57,9 +57,9 @@ import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
 import {PartyName} from './turmoil/parties/PartyName';
 import {AgendaStyle} from './turmoil/PoliticalAgendas';
-import {RedsPolicy02} from './turmoil/parties/Reds';
-import {GreensPolicy02} from './turmoil/parties/Greens';
-import {KelvinistsPolicy04} from './turmoil/parties/Kelvinists';
+import {REDS_POLICY_2} from './turmoil/parties/Reds';
+import {GREENS_POLICY_2} from './turmoil/parties/Greens';
+import {KELVINISTS_POLICY_4} from './turmoil/parties/Kelvinists';
 import {DrawCards} from './deferredActions/DrawCards';
 import {GameSetup} from './GameSetup';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
@@ -1422,7 +1422,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // PoliticalAgendas Reds P2 hook
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && this.phase === Phase.ACTION) {
-      const redsPolicy = new RedsPolicy02();
+      const redsPolicy = REDS_POLICY_2;
       redsPolicy.onTilePlaced(player, space, this);
     }
 
@@ -1463,13 +1463,13 @@ export class Game implements ISerializable<SerializedGame> {
 
       // PoliticalAgendas Greens P2 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && this.phase === Phase.ACTION) {
-        const greensPolicy = new GreensPolicy02();
+        const greensPolicy = GREENS_POLICY_2;
         greensPolicy.onTilePlaced(player);
       }
 
       // PoliticalAgendas Kelvinists P4 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && this.phase === Phase.ACTION) {
-        const kelvinistsPolicy = new KelvinistsPolicy04();
+        const kelvinistsPolicy = KELVINISTS_POLICY_4;
         kelvinistsPolicy.onTilePlaced(player);
       }
 

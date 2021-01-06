@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {Unity, UnityBonus01, UnityBonus02, UnityPolicy02, UnityPolicy03} from '../../src/turmoil/parties/Unity';
+import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../src/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../src/cards/base/VestaShipyard';
 import {LocalShading} from '../../src/cards/venusNext/LocalShading';
@@ -26,7 +26,7 @@ describe('Unity', function() {
   it('Ruling bonus 1: Gain 1 MC for each Venus, Earth and Jovian tag you have', function() {
     player.playedCards.push(new SisterPlanetSupport(), new VestaShipyard());
 
-    const bonus = new UnityBonus01();
+    const bonus = UNITY_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(3);
   });
@@ -34,7 +34,7 @@ describe('Unity', function() {
   it('Ruling bonus 2: Gain 1 MC for each Space tag you have', function() {
     player.playedCards.push(new VestaShipyard());
 
-    const bonus = new UnityBonus02();
+    const bonus = UNITY_BONUS_2;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
   });
@@ -47,7 +47,7 @@ describe('Unity', function() {
   it('Ruling policy 2: Spend 4 MC to gain 2 titanium or add 2 floaters to any card', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[1].id);
 
-    const unityPolicy = new UnityPolicy02();
+    const unityPolicy = UNITY_POLICY_2;
     player.megaCredits = 8;
 
     // Gain titanium
@@ -71,7 +71,7 @@ describe('Unity', function() {
   it('Ruling policy 3: Spend 4 MC to draw a Space card', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[2].id);
 
-    const unityPolicy = new UnityPolicy03();
+    const unityPolicy = UNITY_POLICY_3;
     player.megaCredits = 7;
 
     unityPolicy.action(player, game);

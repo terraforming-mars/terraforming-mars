@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {ISpace} from '../../src/boards/ISpace';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {Kelvinists, KelvinistsBonus01, KelvinistsBonus02, KelvinistsPolicy01, KelvinistsPolicy03} from '../../src/turmoil/parties/Kelvinists';
+import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from '../../src/turmoil/parties/Kelvinists';
 import {TileType} from '../../src/TileType';
 import {Resources} from '../../src/Resources';
 
@@ -24,7 +24,7 @@ describe('Kelvinists', function() {
   it('Ruling bonus 1: Gain 1 MC for each Heat production you have', function() {
     player.addProduction(Resources.HEAT, 5);
 
-    const bonus = new KelvinistsBonus01();
+    const bonus = KELVINISTS_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(5);
   });
@@ -32,7 +32,7 @@ describe('Kelvinists', function() {
   it('Ruling bonus 2: Gain 1 heat for each Heat production you have', function() {
     player.addProduction(Resources.HEAT, 5);
 
-    const bonus = new KelvinistsBonus02();
+    const bonus = KELVINISTS_BONUS_2;
     bonus.grant(game);
     expect(player.heat).to.eq(5);
   });
@@ -40,7 +40,7 @@ describe('Kelvinists', function() {
   it('Ruling policy 1: Pay 10 MC to increase your Energy and Heat production 1 step', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
 
-    const kelvinistsPolicy = new KelvinistsPolicy01();
+    const kelvinistsPolicy = KELVINISTS_POLICY_1;
     kelvinistsPolicy.action(player, game);
 
     game.deferredActions.runNext();
@@ -58,7 +58,7 @@ describe('Kelvinists', function() {
   it('Ruling policy 3: Convert 6 heat into temperature', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[2].id);
 
-    const kelvinistsPolicy = new KelvinistsPolicy03();
+    const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.false;
 
     player.setResource(Resources.HEAT, 6);

@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {MarsFirst, MarsFirstBonus01, MarsFirstBonus02, MarsFirstPolicy04} from '../../src/turmoil/parties/MarsFirst';
+import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../src/turmoil/parties/MarsFirst';
 import {Mine} from '../../src/cards/base/Mine';
 import {Tags} from '../../src/cards/Tags';
 
@@ -23,7 +23,7 @@ describe('MarsFirst', function() {
   it('Ruling bonus 1: Gain 1 MC for each Building tag you have', function() {
     player.playedCards.push(new Mine());
 
-    const bonus = new MarsFirstBonus01();
+    const bonus = MARS_FIRST_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
   });
@@ -31,7 +31,7 @@ describe('MarsFirst', function() {
   it('Ruling bonus 2: Gain 1 MC for each tile you have ON MARS', function() {
     game.addGreenery(player, '11');
 
-    const bonus = new MarsFirstBonus02();
+    const bonus = MARS_FIRST_BONUS_2;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
   });
@@ -59,7 +59,7 @@ describe('MarsFirst', function() {
   it('Ruling policy 4: Spend 4 MC to draw a Building card', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[3].id);
 
-    const marsFirstPolicy = new MarsFirstPolicy04();
+    const marsFirstPolicy = MARS_FIRST_POLICY_4;
     player.megaCredits = 7;
 
     marsFirstPolicy.action(player, game);

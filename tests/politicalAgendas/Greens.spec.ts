@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {ISpace} from '../../src/boards/ISpace';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {Greens, GreensBonus01, GreensBonus02, GreensPolicy04} from '../../src/turmoil/parties/Greens';
+import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../src/turmoil/parties/Greens';
 import {Lichen} from '../../src/cards/base/Lichen';
 import {Fish} from '../../src/cards/base/Fish';
 import {Tardigrades} from '../../src/cards/base/Tardigrades';
@@ -28,7 +28,7 @@ describe('Greens', function() {
   it('Ruling bonus 1: Gain 1 MC for each Plant, Microbe and Animal tag you have', function() {
     player.playedCards.push(new Tardigrades(), new Lichen(), new Fish());
 
-    const bonus = new GreensBonus01();
+    const bonus = GREENS_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(3);
   });
@@ -39,7 +39,7 @@ describe('Greens', function() {
     game.board.spaces[1].player = player;
     game.board.spaces[1].tile = {tileType: TileType.GREENERY};
 
-    const bonus = new GreensBonus02();
+    const bonus = GREENS_BONUS_2;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(4);
   });
@@ -70,7 +70,7 @@ describe('Greens', function() {
   it('Ruling policy 4: Spend 5 MC to gain 3 plants or add 2 microbes to any card', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[3].id);
 
-    const greensPolicy = new GreensPolicy04();
+    const greensPolicy = GREENS_POLICY_4;
     player.megaCredits = 10;
 
     // Gain plants

@@ -25,11 +25,11 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
   description = 'Want to see a new Earth as soon as possible.';
-  bonuses = [new GreensBonus01(), new GreensBonus02()];
-  policies = [new GreensPolicy01(), new GreensPolicy02(), new GreensPolicy03(), new GreensPolicy04()];
+  bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
+  policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
 
-export class GreensBonus01 implements Bonus {
+class GreensBonus01 implements Bonus {
   isDefault = true;
   id = 'gb01';
   description: string = 'Gain 1 MC for each Plant, Microbe and Animal tag you have';
@@ -42,7 +42,7 @@ export class GreensBonus01 implements Bonus {
   }
 }
 
-export class GreensBonus02 implements Bonus {
+class GreensBonus02 implements Bonus {
   id = 'gb02';
   description: string = 'Gain 2 MC for each greenery tile you have';
   isDefault = false;
@@ -58,7 +58,7 @@ export class GreensBonus02 implements Bonus {
   }
 }
 
-export class GreensPolicy01 implements Policy {
+class GreensPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.GREENS_DEFAULT_POLICY;
   description: string = 'When you place a greenery tile, gain 4 MC';
@@ -70,7 +70,7 @@ export class GreensPolicy01 implements Policy {
   }
 }
 
-export class GreensPolicy02 implements Policy {
+class GreensPolicy02 implements Policy {
   id = TurmoilPolicy.GREENS_POLICY_2;
   description: string = 'When you place a tile, gain 1 plant';
   isDefault = false;
@@ -80,7 +80,7 @@ export class GreensPolicy02 implements Policy {
   }
 }
 
-export class GreensPolicy03 implements Policy {
+class GreensPolicy03 implements Policy {
   id = TurmoilPolicy.GREENS_POLICY_3;
   description: string = 'When you play an animal, plant or microbe tag, gain 2 MC';
   isDefault = false;
@@ -93,7 +93,7 @@ export class GreensPolicy03 implements Policy {
   }
 }
 
-export class GreensPolicy04 implements Policy {
+class GreensPolicy04 implements Policy {
   id = TurmoilPolicy.GREENS_POLICY_4;
   description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
   isDefault = false;
@@ -153,3 +153,10 @@ export class GreensPolicy04 implements Policy {
     return undefined;
   }
 }
+
+export const GREENS_BONUS_1 = new GreensBonus01();
+export const GREENS_BONUS_2 = new GreensBonus02();
+export const GREENS_POLICY_1 = new GreensPolicy01();
+export const GREENS_POLICY_2 = new GreensPolicy02();
+export const GREENS_POLICY_3 = new GreensPolicy03();
+export const GREENS_POLICY_4 = new GreensPolicy04();

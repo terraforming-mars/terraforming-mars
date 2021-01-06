@@ -3,14 +3,14 @@ import {Game} from '../Game';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {GreensPolicy03, GreensPolicy04} from './parties/Greens';
-import {KelvinistsPolicy01, KelvinistsPolicy03} from './parties/Kelvinists';
-import {MarsFirstPolicy02, MarsFirstPolicy04} from './parties/MarsFirst';
+import {GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
+import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from './parties/Kelvinists';
+import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
-import {RedsPolicy03} from './parties/Reds';
-import {ScientistsPolicy01} from './parties/Scientists';
-import {UnityPolicy02, UnityPolicy03} from './parties/Unity';
+import {REDS_POLICY_3} from './parties/Reds';
+import {SCIENTISTS_POLICY_1} from './parties/Scientists';
+import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
 
 export class TurmoilHandler {
@@ -19,7 +19,7 @@ export class TurmoilHandler {
   public static addPlayerAction(player: Player, game: Game, options: PlayerInput[]): void {
     // Turmoil Scientists action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS)) {
-      const scientistsPolicy = new ScientistsPolicy01();
+      const scientistsPolicy = SCIENTISTS_POLICY_1;
 
       if (scientistsPolicy.canAct(player)) {
         options.push(
@@ -34,7 +34,7 @@ export class TurmoilHandler {
 
     // Turmoil Kelvinists action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS)) {
-      const kelvinistsPolicy = new KelvinistsPolicy01();
+      const kelvinistsPolicy = KELVINISTS_POLICY_1;
 
       if (kelvinistsPolicy.canAct(player)) {
         options.push(
@@ -49,7 +49,7 @@ export class TurmoilHandler {
 
     // Turmoil Kelvinists action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, 'kp03')) {
-      const kelvinistsPolicy = new KelvinistsPolicy03();
+      const kelvinistsPolicy = KELVINISTS_POLICY_3;
 
       if (kelvinistsPolicy.canAct(player)) {
         options.push(
@@ -64,7 +64,7 @@ export class TurmoilHandler {
 
     // Turmoil Greens action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_4)) {
-      const greensPolicy = new GreensPolicy04();
+      const greensPolicy = GREENS_POLICY_4;
 
       if (greensPolicy.canAct(player)) {
         options.push(
@@ -79,7 +79,7 @@ export class TurmoilHandler {
 
     // Turmoil Mars First action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_4)) {
-      const marsFirstPolicy = new MarsFirstPolicy04();
+      const marsFirstPolicy = MARS_FIRST_POLICY_4;
 
       if (marsFirstPolicy.canAct(player)) {
         options.push(
@@ -94,7 +94,7 @@ export class TurmoilHandler {
 
     // Turmoil Unity action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_2)) {
-      const unityPolicy = new UnityPolicy02();
+      const unityPolicy = UNITY_POLICY_2;
 
       if (unityPolicy.canAct(player)) {
         options.push(
@@ -109,7 +109,7 @@ export class TurmoilHandler {
 
     // Turmoil Unity action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_3)) {
-      const unityPolicy = new UnityPolicy03();
+      const unityPolicy = UNITY_POLICY_3;
 
       if (unityPolicy.canAct(player)) {
         options.push(
@@ -124,7 +124,7 @@ export class TurmoilHandler {
 
     // Turmoil Reds action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
-      const redsPolicy = new RedsPolicy03();
+      const redsPolicy = REDS_POLICY_3;
 
       if (redsPolicy.canAct(player, game)) {
         options.push(
@@ -141,13 +141,13 @@ export class TurmoilHandler {
   public static applyOnCardPlayedEffect(player: Player, game: Game, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
-      const policy = new GreensPolicy03();
+      const policy = GREENS_POLICY_3;
       policy.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
-      const policy = new MarsFirstPolicy02();
+      const policy = MARS_FIRST_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }
   }

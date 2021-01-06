@@ -21,11 +21,11 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
   description: string = 'Wants to see humanity prosper in the whole solar system.';
-  bonuses = [new UnityBonus01(), new UnityBonus02()];
-  policies = [new UnityPolicy01(), new UnityPolicy02(), new UnityPolicy03(), new UnityPolicy04()];
+  bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
+  policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
 
-export class UnityBonus01 implements Bonus {
+class UnityBonus01 implements Bonus {
   id = 'ub01';
   description = 'Gain 1 MC for each Venus, Earth and Jovian tag you have';
   isDefault = true;
@@ -40,7 +40,7 @@ export class UnityBonus01 implements Bonus {
   }
 }
 
-export class UnityBonus02 implements Bonus {
+class UnityBonus02 implements Bonus {
   id = 'ub02';
   description = 'Gain 1 MC for each Space tag you have';
   isDefault = false;
@@ -53,13 +53,13 @@ export class UnityBonus02 implements Bonus {
   }
 }
 
-export class UnityPolicy01 implements Policy {
+class UnityPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.UNITY_DEFAULT_POLICY;
   description: string = 'Your titanium resources are worth 1 MC extra';
 }
 
-export class UnityPolicy02 implements Policy {
+class UnityPolicy02 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_2;
   description: string = 'Spend 4 MC to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
   isDefault = false;
@@ -120,7 +120,7 @@ export class UnityPolicy02 implements Policy {
   }
 }
 
-export class UnityPolicy03 implements Policy {
+class UnityPolicy03 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_3;
   description: string = 'Spend 4 MC to draw a Space card (Turmoil Unity)';
   isDefault = false;
@@ -150,8 +150,15 @@ export class UnityPolicy03 implements Policy {
   }
 }
 
-export class UnityPolicy04 implements Policy {
+class UnityPolicy04 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_4;
   description: string = 'Cards with Space tags cost 2 MC less to play';
   isDefault = false;
 }
+
+export const UNITY_BONUS_1 = new UnityBonus01();
+export const UNITY_BONUS_2 = new UnityBonus02();
+export const UNITY_POLICY_1 = new UnityPolicy01();
+export const UNITY_POLICY_2 = new UnityPolicy02();
+export const UNITY_POLICY_3 = new UnityPolicy03();
+export const UNITY_POLICY_4 = new UnityPolicy04();

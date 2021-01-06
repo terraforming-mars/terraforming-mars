@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {Scientists, ScientistsBonus01, ScientistsBonus02, ScientistsPolicy01, ScientistsPolicy04} from '../../src/turmoil/parties/Scientists';
+import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_4} from '../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Research} from '../../src/cards/base/Research';
 import {GeneRepair} from '../../src/cards/base/GeneRepair';
@@ -24,7 +24,7 @@ describe('Scientists', function() {
   it('Ruling bonus 1: Gain 1 MC for each Science tag you have', function() {
     player.playedCards.push(new SearchForLife());
 
-    const bonus = new ScientistsBonus01();
+    const bonus = SCIENTISTS_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
   });
@@ -32,7 +32,7 @@ describe('Scientists', function() {
   it('Ruling bonus 2: Gain 1 MC for every 3 cards in hand', function() {
     player.cardsInHand.push(new SearchForLife(), new Research(), new GeneRepair());
 
-    const bonus = new ScientistsBonus02();
+    const bonus = SCIENTISTS_BONUS_2;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
   });
@@ -40,7 +40,7 @@ describe('Scientists', function() {
   it('Ruling policy 1: Pay 10 MC to draw 3 cards', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[0].id);
 
-    const scientistsPolicy = new ScientistsPolicy01();
+    const scientistsPolicy = SCIENTISTS_POLICY_1;
     player.megaCredits = 10;
     expect(scientistsPolicy.canAct(player)).to.be.true;
 
@@ -77,7 +77,7 @@ describe('Scientists', function() {
     const card = new GeneRepair();
     expect(card.canPlay(player)).to.be.false;
 
-    const scientistsPolicy = new ScientistsPolicy04();
+    const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).to.be.true;

@@ -12,11 +12,11 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
   description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
-  bonuses = [new KelvinistsBonus01(), new KelvinistsBonus02()];
-  policies = [new KelvinistsPolicy01(), new KelvinistsPolicy02(), new KelvinistsPolicy03(), new KelvinistsPolicy04()];
+  bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
+  policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
 }
 
-export class KelvinistsBonus01 implements Bonus {
+class KelvinistsBonus01 implements Bonus {
   id = 'kb01';
   isDefault = true;
   description = 'Gain 1 MC for each Heat production you have';
@@ -29,7 +29,7 @@ export class KelvinistsBonus01 implements Bonus {
   }
 }
 
-export class KelvinistsBonus02 implements Bonus {
+class KelvinistsBonus02 implements Bonus {
   id = 'kb02';
   description = 'Gain 1 heat for each Heat production you have';
   isDefault = false;
@@ -42,7 +42,7 @@ export class KelvinistsBonus02 implements Bonus {
   }
 }
 
-export class KelvinistsPolicy01 implements Policy {
+class KelvinistsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
   description: string = 'Pay 10 MC to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
@@ -70,13 +70,13 @@ export class KelvinistsPolicy01 implements Policy {
   }
 }
 
-export class KelvinistsPolicy02 implements Policy {
+class KelvinistsPolicy02 implements Policy {
   id = TurmoilPolicy.KELVINISTS_POLICY_2;
   description: string = 'When you raise temperature, gain 3 MC per step raised';
   isDefault = false;
 }
 
-export class KelvinistsPolicy03 implements Policy {
+class KelvinistsPolicy03 implements Policy {
   id = TurmoilPolicy.KELVINISTS_POLICY_3;
   description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
   isDefault = false;
@@ -95,7 +95,7 @@ export class KelvinistsPolicy03 implements Policy {
   }
 }
 
-export class KelvinistsPolicy04 implements Policy {
+class KelvinistsPolicy04 implements Policy {
   id = TurmoilPolicy.KELVINISTS_POLICY_4;
   description: string = 'When you place a tile, gain 2 heat';
   isDefault = false;
@@ -104,3 +104,10 @@ export class KelvinistsPolicy04 implements Policy {
     player.setResource(Resources.HEAT, 2);
   }
 }
+
+export const KELVINISTS_BONUS_1 = new KelvinistsBonus01();
+export const KELVINISTS_BONUS_2 = new KelvinistsBonus02();
+export const KELVINISTS_POLICY_1 = new KelvinistsPolicy01();
+export const KELVINISTS_POLICY_2 = new KelvinistsPolicy02();
+export const KELVINISTS_POLICY_3 = new KelvinistsPolicy03();
+export const KELVINISTS_POLICY_4 = new KelvinistsPolicy04();

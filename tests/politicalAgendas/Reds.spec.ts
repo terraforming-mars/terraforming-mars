@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
-import {Reds, RedsBonus01, RedsBonus02, RedsPolicy03} from '../../src/turmoil/parties/Reds';
+import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../src/turmoil/parties/Reds';
 import {Resources} from '../../src/Resources';
 
 describe('Reds', function() {
@@ -24,7 +24,7 @@ describe('Reds', function() {
     player.increaseTerraformRating(game);
 
     const secondPlayerInitialTR = secondPlayer.getTerraformRating();
-    const bonus = new RedsBonus01();
+    const bonus = REDS_BONUS_1;
     bonus.grant(game);
     expect(secondPlayer.getTerraformRating()).to.eq(secondPlayerInitialTR + 1);
   });
@@ -33,7 +33,7 @@ describe('Reds', function() {
     player.increaseTerraformRating(game);
 
     const playerInitialTR = player.getTerraformRating();
-    const bonus = new RedsBonus02();
+    const bonus = REDS_BONUS_2;
     bonus.grant(game);
     expect(player.getTerraformRating()).to.eq(playerInitialTR - 1);
   });
@@ -59,7 +59,7 @@ describe('Reds', function() {
   it('Ruling policy 3: Pay 4 MC to reduce a non-maxed global parameter 1 step', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
 
-    const redsPolicy = new RedsPolicy03();
+    const redsPolicy = REDS_POLICY_3;
     player.megaCredits = 7;
     game.increaseOxygenLevel(player, 1);
     expect(game.getOxygenLevel()).to.eq(1);

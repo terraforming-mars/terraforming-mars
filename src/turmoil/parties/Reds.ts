@@ -18,11 +18,11 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 export class Reds extends Party implements IParty {
   name = PartyName.REDS;
   description = 'Wishes to preserve the red planet.';
-  bonuses = [new RedsBonus01(), new RedsBonus02()];
-  policies = [new RedsPolicy01(), new RedsPolicy02(), new RedsPolicy03(), new RedsPolicy04()];
+  bonuses = [REDS_BONUS_1, REDS_BONUS_2];
+  policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-export class RedsBonus01 implements Bonus {
+class RedsBonus01 implements Bonus {
   id = 'rb01';
   description = 'The player(s) with the lowest TR gains 1 TR';
   isDefault = true;
@@ -44,7 +44,7 @@ export class RedsBonus01 implements Bonus {
   }
 }
 
-export class RedsBonus02 implements Bonus {
+class RedsBonus02 implements Bonus {
   id = 'rb02';
   description = 'The player(s) with the highest TR loses 1 TR';
   isDefault = false;
@@ -66,13 +66,13 @@ export class RedsBonus02 implements Bonus {
   }
 }
 
-export class RedsPolicy01 implements Policy {
+class RedsPolicy01 implements Policy {
   id = TurmoilPolicy.REDS_DEFAULT_POLICY;
   isDefault = true;
   description: string = 'When you take an action that raises TR, you MUST pay 3 MC per step raised';
 }
 
-export class RedsPolicy02 implements Policy {
+class RedsPolicy02 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_2;
   description: string = 'When you place a tile, pay 3 MC or as much as possible';
   isDefault = false;
@@ -88,7 +88,7 @@ export class RedsPolicy02 implements Policy {
   }
 }
 
-export class RedsPolicy03 implements Policy {
+class RedsPolicy03 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_3;
   description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
@@ -179,8 +179,15 @@ export class RedsPolicy03 implements Policy {
   }
 }
 
-export class RedsPolicy04 implements Policy {
+class RedsPolicy04 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_4;
   description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
   isDefault = false;
 }
+
+export const REDS_BONUS_1 = new RedsBonus01();
+export const REDS_BONUS_2 = new RedsBonus02();
+export const REDS_POLICY_1 = new RedsPolicy01();
+export const REDS_POLICY_2 = new RedsPolicy02();
+export const REDS_POLICY_3 = new RedsPolicy03();
+export const REDS_POLICY_4 = new RedsPolicy04();

@@ -19,11 +19,11 @@ import {LogHelper} from '../../LogHelper';
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
   description = 'Focused on Martian development and independence.';
-  bonuses = [new MarsFirstBonus01(), new MarsFirstBonus02()];
-  policies = [new MarsFirstPolicy01(), new MarsFirstPolicy02(), new MarsFirstPolicy03(), new MarsFirstPolicy04()];
+  bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
+  policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
-export class MarsFirstBonus01 implements Bonus {
+class MarsFirstBonus01 implements Bonus {
   id = 'mb01';
   description = 'Gain 1 MC for each Building tag you have';
   isDefault = true;
@@ -36,7 +36,7 @@ export class MarsFirstBonus01 implements Bonus {
   }
 }
 
-export class MarsFirstBonus02 implements Bonus {
+class MarsFirstBonus02 implements Bonus {
   id = 'mb02';
   description = 'Gain 1 MC for each tile you have ON MARS';
   isDefault = false;
@@ -52,7 +52,7 @@ export class MarsFirstBonus02 implements Bonus {
   }
 }
 
-export class MarsFirstPolicy01 implements Policy {
+class MarsFirstPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY;
   description: string = 'When you place a tile ON MARS, gain 1 steel';
@@ -64,7 +64,7 @@ export class MarsFirstPolicy01 implements Policy {
   }
 }
 
-export class MarsFirstPolicy02 implements Policy {
+class MarsFirstPolicy02 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_2;
   description: string = 'When you play a Building tag, gain 2 MC';
   isDefault = false;
@@ -74,13 +74,13 @@ export class MarsFirstPolicy02 implements Policy {
   }
 }
 
-export class MarsFirstPolicy03 implements Policy {
+class MarsFirstPolicy03 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_3;
   description: string = 'Your steel resources are worth 1 MC extra';
   isDefault = false;
 }
 
-export class MarsFirstPolicy04 implements Policy {
+class MarsFirstPolicy04 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_4;
   description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
   isDefault = false;
@@ -109,3 +109,10 @@ export class MarsFirstPolicy04 implements Policy {
     return undefined;
   }
 }
+
+export const MARS_FIRST_BONUS_1 = new MarsFirstBonus01();
+export const MARS_FIRST_BONUS_2 = new MarsFirstBonus02();
+export const MARS_FIRST_POLICY_1 = new MarsFirstPolicy01();
+export const MARS_FIRST_POLICY_2 = new MarsFirstPolicy02();
+export const MARS_FIRST_POLICY_3 = new MarsFirstPolicy03();
+export const MARS_FIRST_POLICY_4 = new MarsFirstPolicy04();

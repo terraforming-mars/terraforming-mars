@@ -41,7 +41,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
 
       // add to itself if no other available target
       if (floaterCards.length === 1) {
-        game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+        game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
         LogHelper.logAddResource(game, player, floaterCards[0]);
         player.addResourceTo(floaterCards[0], 1);
         return undefined;
@@ -52,7 +52,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         'Add floater',
         floaterCards,
         (foundCards: Array<ICard>) => {
-          game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+          game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
           LogHelper.logAddResource(game, player, foundCards[0]);
           player.addResourceTo(foundCards[0], 1);
           return undefined;

@@ -34,7 +34,7 @@ export class EnergyMarket implements IProjectCard {
       (amount: number) => {
         if (player.canUseHeatAsMegaCredits) {
           player.setResource(Resources.ENERGY, amount);
-          game.defer(new SelectHowToPayDeferred(player, (amount * 2), false, false));
+          game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
         } else {
           player.setResource(Resources.ENERGY, amount);
           player.setResource(Resources.MEGACREDITS, -(amount * 2));

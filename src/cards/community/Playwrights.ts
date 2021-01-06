@@ -48,23 +48,23 @@ export class Playwrights implements CorporationCard {
           game.defer(new SelectHowToPayDeferred(
             player,
             cost,
-            false,
-            false,
-            'Select how to pay to replay the event',
-            () => {
-              player.playCard(game, selectedCard);
-              game.defer(new DeferredAction(player, () => {
-                for (const p of game.getPlayers()) {
-                  const card = p.playedCards[p.playedCards.length - 1];
+            {
+              title: 'Select how to pay to replay the event',
+              afterPay: () => {
+                player.playCard(game, selectedCard);
+                game.defer(new DeferredAction(player, () => {
+                  for (const p of game.getPlayers()) {
+                    const card = p.playedCards[p.playedCards.length - 1];
 
-                  if (card !== undefined && card.name === selectedCard.name) {
-                    p.playedCards.pop();
-                    player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-                    return undefined;
+                    if (card !== undefined && card.name === selectedCard.name) {
+                      p.playedCards.pop();
+                      player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+                      return undefined;
+                    }
                   }
-                }
-                return undefined;
-              }));
+                  return undefined;
+                }));
+              },
             },
           ));
           return undefined;

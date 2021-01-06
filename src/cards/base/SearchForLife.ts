@@ -63,7 +63,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
       game.dealer.discard(topCard);
-      game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
       return undefined;
     }
 }

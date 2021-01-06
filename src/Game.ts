@@ -59,10 +59,6 @@ import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
-import {AdvancedAlloys} from './cards/base/AdvancedAlloys';
-import {RegoPlastics} from './cards/promo/RegoPlastics';
-import {MercurianAlloys} from './cards/promo/MercurianAlloys';
-import {ProtectedHabitats} from './cards/base/ProtectedHabitats';
 
 export type GameId = string;
 
@@ -324,10 +320,6 @@ export class Game implements ISerializable<SerializedGame> {
           for (let i = 0; i < 10; i++) {
             player.dealtProjectCards.push(dealer.dealCard());
           }
-          player.dealtProjectCards.push(new AdvancedAlloys);
-          player.dealtProjectCards.push(new RegoPlastics);
-          player.dealtProjectCards.push(new MercurianAlloys);
-          player.dealtProjectCards.push(new ProtectedHabitats);
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < 4; i++) {

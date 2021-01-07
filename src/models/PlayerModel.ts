@@ -62,6 +62,7 @@ export interface PlayerModel {
     titaniumProduction: number;
     titaniumValue: number;
     turmoil: TurmoilModel | undefined;
+    turmoilExtension: boolean;
     venusNextExtension: boolean;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

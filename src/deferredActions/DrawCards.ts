@@ -65,7 +65,7 @@ export class DrawCards implements DeferredAction {
         if (selected.length > 0) {
           this.game.defer(new SelectHowToPayDeferred(
             this.player, selected.length * this.player.cardCost,
-            false, false, 'Select how to pay for action'));
+            {title: 'Select how to pay for cards'}));
         }
         this.game.log('${0} bought ${1}', (b) => b
           .player(this.player)
@@ -113,4 +113,3 @@ export namespace DrawCards {
     include?: (card: IProjectCard) => boolean,
   }
 }
-

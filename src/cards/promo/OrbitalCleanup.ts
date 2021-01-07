@@ -38,9 +38,8 @@ export class OrbitalCleanup implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X08',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Gain 1 MC per Science tag you have.', (eb) => {
           eb.empty().startAction.megacredits(1).slash().science().played;
-          eb.description('Action: Gain 1 MC per Science tag you have.');
         }).br;
         b.productionBox((pb) => {
           pb.megacredits(-2);

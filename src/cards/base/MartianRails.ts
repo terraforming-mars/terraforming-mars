@@ -22,9 +22,8 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '007',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 1 Energy to gain 1 MC for each City tile ON MARS.', (eb) => {
             eb.energy(1).startAction.megacredits(1).slash().city(CardRenderItemSize.SMALL);
-            eb.description('Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.');
           }).br;
         }),
       },

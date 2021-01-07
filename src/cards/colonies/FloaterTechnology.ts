@@ -36,9 +36,8 @@ export class FloaterTechnology implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C12',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 floater to ANOTHER card.', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: Add 1 floater to ANOTHER card.');
         });
       }),
     }

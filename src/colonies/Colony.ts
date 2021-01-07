@@ -195,7 +195,7 @@ export abstract class Colony implements SerializedColony {
 
               player.cardsInHand.push(dealtCard);
               game.log('${0} bought ${1}', (b) => b.player(player).card(dealtCard));
-              game.defer(new SelectHowToPayDeferred(player, player.cardCost, false, false, 'Select how to pay for action'));
+              game.defer(new SelectHowToPayDeferred(player, player.cardCost, {title: 'Select how to pay for action'}));
               return undefined;
             },
             canSelectCard ? 1 : 0,
@@ -205,7 +205,7 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-        player.cardsInHand.push(game.dealer.dealCard());
+        player.drawCard(game);
         action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
         break;
 

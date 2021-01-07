@@ -17,14 +17,12 @@ export class PointLuna implements CorporationCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
       const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
       if (player.isCorporation(this.name) && card.tags.indexOf(Tags.EARTH) !== -1) {
-        for (let i = 0; i < tagCount; i++) {
-          player.cardsInHand.push(game.dealer.dealCard());
-        }
+        player.drawCard(game, tagCount);
       }
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM);
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game);
       return undefined;
     }
     public metadata: CardMetadata = {
@@ -34,9 +32,8 @@ export class PointLuna implements CorporationCard {
         b.br;
         b.productionBox((pb) => pb.titanium(1)).nbsp.megacredits(38);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you play an Earth tag, including this, draw a card.', (eb) => {
             eb.earth().played.startEffect.cards(1);
-            eb.description('Effect: When you play an Earth tag, including this, draw a card.');
           });
         });
       }),

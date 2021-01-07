@@ -1091,7 +1091,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
-        player.cardsInHand.push(this.dealer.dealCard());
+        player.drawCard(this);
       }
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
         player.increaseTerraformRating(this);
@@ -1277,7 +1277,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, false, false, 'Select how to pay for placement bonus ocean'));
+        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1351,7 +1351,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
-      player.cardsInHand.push(this.dealer.dealCard());
+      player.drawCard(this);
     } else if (spaceBonus === SpaceBonus.PLANT) {
       player.plants++;
     } else if (spaceBonus === SpaceBonus.STEEL) {

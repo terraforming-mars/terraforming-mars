@@ -29,9 +29,8 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
         },
         requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 1 plant or 1 steel to gain 7MC.', (eb) => {
             eb.plants(1).slash().steel(1).startAction.megacredits(7);
-            eb.description('Action: Spend 1 plant or 1 steel to gain 7MC.');
           }).br;
           b.productionBox((pb) => pb.minus().energy(1));
         }),

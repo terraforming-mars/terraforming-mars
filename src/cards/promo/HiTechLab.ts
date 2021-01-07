@@ -35,7 +35,7 @@ export class HiTechLab implements IProjectCard {
           const cardsDrawn: Array<IProjectCard> = [];
           for (let counter = 0; counter < amount; counter++) {
             cardsDrawn.push(game.dealer.dealCard());
-          };
+          }
           game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
           return undefined;
         },
@@ -50,9 +50,8 @@ export class HiTechLab implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X04',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.', (eb) => {
           eb.text('X').energy(1).startAction.text('X').cards(1).asterix();
-          eb.description('Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.');
         });
       }),
       victoryPoints: 1,

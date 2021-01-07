@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,8 +12,7 @@ export class UNMIContractor extends PreludeCard {
 
     public play(player: Player, game: Game) {
       player.increaseTerraformRatingSteps(3, game);
-      game.defer(new DrawCards(player, game, 1));
-      return undefined;
+      return player.drawCard(game);
     }
     public metadata: CardMetadata = {
       cardNumber: 'P34',

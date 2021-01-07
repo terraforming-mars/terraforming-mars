@@ -37,9 +37,10 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
 
     public initialActionText: string = 'Draw 2 cards with a floater icon on it';
     public initialAction(player: Player, game: Game) {
-      const cards = game.drawProjectCardsByCondition(2, (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      player.drawCard(game, {
+        amount: 2,
+        include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER,
+      });
       return undefined;
     }
 

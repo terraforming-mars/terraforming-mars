@@ -4,7 +4,6 @@ import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,7 +12,7 @@ export class IoResearchOutpost extends PreludeCard {
     public name = CardName.IO_RESEARCH_OUTPOST;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM);
-      game.defer(new DrawCards(player, game, 1));
+      player.drawCard(game);
       return undefined;
     }
     public metadata: CardMetadata = {

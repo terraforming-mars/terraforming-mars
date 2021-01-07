@@ -41,9 +41,7 @@ export class Factorum implements IActionCard, CorporationCard {
 
       const drawBuildingCard = new SelectOption('Spend 3 MC to draw a building card', 'Draw card', () => {
         player.megaCredits -= 3;
-        const cards = game.drawCardsByTag(Tags.BUILDING, 1);
-        player.cardsInHand.push(...cards);
-        LogHelper.logDrawnCards(game, player, cards);
+        player.drawCard(game, {amount: 1, tag: Tags.BUILDING});
         return undefined;
       });
 

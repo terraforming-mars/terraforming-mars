@@ -32,8 +32,7 @@ export class SubCrustMeasurements implements IActionCard, IProjectCard {
     }
 
     public action(player: Player, game: Game) {
-      player.drawCard(game);
-      return undefined;
+      return player.drawCard(game);
     }
 
     public metadata: CardMetadata = {

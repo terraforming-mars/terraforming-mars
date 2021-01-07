@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -22,10 +21,10 @@ export class SponsoredAcademies implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.defer(new DiscardCards(player, game));
-      game.defer(new DrawCards(player, game, 3));
+      player.drawCard(game, {amount: 3});
       const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
       for (const p of otherPlayers) {
-        game.defer(new DrawCards(p, game));
+        p.drawCard(game);
       }
       return undefined;
     }

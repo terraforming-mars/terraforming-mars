@@ -1,5 +1,4 @@
 import {Tags} from '../Tags';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -14,9 +13,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseVenusScaleLevel(player, 2);
-      const cards = game.drawCardsByTag(Tags.VENUS, 2);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      player.drawCard(game, {amount: 2, tag: Tags.VENUS});
       return undefined;
     }
     public metadata: CardMetadata = {

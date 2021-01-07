@@ -4,7 +4,6 @@ import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,7 +12,7 @@ export class Biolab extends PreludeCard {
     public name = CardName.BIOLAB;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.PLANTS);
-      game.defer(new DrawCards(player, game, 3));
+      player.drawCard(game, {amount: 3});
       return undefined;
     }
     public metadata: CardMetadata = {

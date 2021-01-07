@@ -5,7 +5,6 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -14,7 +13,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     public name = CardName.RESEARCH_NETWORK;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS);
-      game.defer(new DrawCards(player, game, 3));
+      player.drawCard(game, {amount: 3});
       return undefined;
     }
     public metadata: CardMetadata = {

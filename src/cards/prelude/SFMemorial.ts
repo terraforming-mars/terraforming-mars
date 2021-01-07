@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -15,8 +14,7 @@ export class SFMemorial implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-      game.defer(new DrawCards(player, game, 1));
-      return undefined;
+      return player.drawCard(game);
     }
 
     public getVictoryPoints() {

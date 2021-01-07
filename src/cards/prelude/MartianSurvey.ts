@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -21,8 +20,7 @@ export class MartianSurvey implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new DrawCards(player, game, 2));
-      return undefined;
+      return player.drawCard(game, {amount: 2});
     }
 
     public getVictoryPoints() {

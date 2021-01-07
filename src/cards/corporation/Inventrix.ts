@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -34,15 +33,7 @@ export class Inventrix extends Card implements CorporationCard {
     });
   }
   public initialAction(player: Player, game: Game) {
-    player.cardsInHand.push(
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-    );
-
-    LogHelper.logCardChange(game, player, 'drew', 3);
-
-    return undefined;
+    return player.drawCard(game, {amount: 3});
   }
   public getRequirementBonus(_player: Player, _game: Game): number {
     return 2;

@@ -58,7 +58,7 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
-import {range} from './utils/utils';
+import {DrawCards} from './deferredActions/DrawCards';
 
 export type PlayerId = string;
 
@@ -1304,10 +1304,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public drawCard(game: Game, n = 1): void {
-    range(n).forEach(() => {
-      this.cardsInHand.push(game.dealer.dealCard());
-    });
+  public drawCard(game: Game, options?: DrawCards.Options): undefined | SelectCard<IProjectCard> {
+    return new DrawCards(this, game, options).execute();
   }
 
   public get availableHeat(): number {
@@ -1442,8 +1440,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       () => {
         game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
         this.turmoilScientistsActionUsed = true;
-        this.drawCard(game, 3);
         game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
+        this.drawCard(game, {amount: 3});
         return undefined;
       },
     );

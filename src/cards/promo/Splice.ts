@@ -1,5 +1,4 @@
 import {Tags} from '../Tags';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
@@ -22,10 +21,7 @@ export class Splice implements CorporationCard {
 
     public initialActionText: string = 'Draw a card with a microbe tag';
     public initialAction(player: Player, game: Game) {
-      const cards = game.drawCardsByTag(Tags.MICROBE, 1);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
-
+      player.drawCard(game, {amount: 1, tag: Tags.MICROBE});
       return undefined;
     }
 

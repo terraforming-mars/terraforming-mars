@@ -4,10 +4,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class InventionContest extends Card implements IProjectCard {
   constructor() {
@@ -26,18 +26,7 @@ export class InventionContest extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    const cardsDrawn: Array<IProjectCard> = [
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-    ];
-    return new SelectCard('Select card to take into hand', 'Take', cardsDrawn, (foundCards: Array<IProjectCard>) => {
-      player.cardsInHand.push(foundCards[0]);
-      cardsDrawn
-        .filter((c) => c !== foundCards[0])
-        .forEach((c) => game.dealer.discard(c));
-      return undefined;
-    });
+  public play(player: Player, game: Game): SelectCard<IProjectCard> {
+    return player.drawCard(game, {amount: 1, from: 3})!;
   }
 }

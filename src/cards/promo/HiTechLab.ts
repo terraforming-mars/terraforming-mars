@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectCardToKeep} from '../../deferredActions/SelectCardToKeep';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -31,13 +30,7 @@ export class HiTechLab implements IProjectCard {
         (amount: number) => {
           player.setResource(Resources.ENERGY, -amount);
           game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-
-          const cardsDrawn: Array<IProjectCard> = [];
-          for (let counter = 0; counter < amount; counter++) {
-            cardsDrawn.push(game.dealer.dealCard());
-          }
-          game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
-          return undefined;
+          return player.drawCard(game, {amount: 1, from: amount});
         },
         1,
         player.getResource(Resources.ENERGY),

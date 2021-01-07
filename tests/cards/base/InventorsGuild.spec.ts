@@ -40,7 +40,6 @@ describe('InventorsGuild', function() {
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
     const selectCard = card.action(player, game) as SelectCard<IProjectCard>;
-    expect(selectCard.title).to.eq('You cannot pay for this card');
     selectCard.cb([selectCard.cards[0]]);
     expect(game.deferredActions).has.lengthOf(0);
     expect(game.dealer.discarded).has.lengthOf(1);

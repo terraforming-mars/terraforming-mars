@@ -1448,41 +1448,6 @@ export class Game implements ISerializable<SerializedGame> {
     return undefined;
   }
 
-  public drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
-    const result: Array<IProjectCard> = [];
-    const discardedCards = new Set<CardName>();
-
-    while (result.length < total) {
-      if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
-        this.log('discarded every card without match');
-        break;
-      }
-      const projectCard = this.dealer.dealCard();
-      if (include(projectCard)) {
-        result.push(projectCard);
-      } else {
-        discardedCards.add(projectCard.name);
-        this.dealer.discard(projectCard);
-      }
-    }
-
-    LogHelper.logDiscardedCards(this, Array.from(discardedCards));
-
-    return result;
-  }
-
-  public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.tags.includes(tag));
-  }
-
-  public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.resourceType !== undefined && card.resourceType === resource);
-  }
-
-  public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.cardType === cardType);
-  }
-
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }

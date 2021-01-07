@@ -29,10 +29,7 @@ export class ProjectWorkshop implements CorporationCard {
 
     public initialActionText: string = 'Draw a blue card';
     public initialAction(player: Player, game: Game) {
-      const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
-      player.cardsInHand.push(drawnCard);
-      this.logCardDraw(game, player, drawnCard);
-
+      player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
       return undefined;
     }
 
@@ -51,7 +48,7 @@ export class ProjectWorkshop implements CorporationCard {
           if (activeCards.length === 1) {
             this.convertCardPointsToTR(player, game, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
-            player.drawCard(game, 2);
+            player.drawCard(game, {amount: 2});
 
             return undefined;
           }
@@ -63,7 +60,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
-                      player.drawCard(game, 2);
+                      player.drawCard(game, {amount: 2});
 
                       return undefined;
                     },
@@ -73,7 +70,7 @@ export class ProjectWorkshop implements CorporationCard {
 
       const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
         player.megaCredits -= 3;
-        player.cardsInHand.push(game.drawCardsByType(CardType.ACTIVE, 1)[0]);
+        player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
 
         const drawnCard = game.getCardsInHandByType(player, CardType.ACTIVE).slice(-1)[0];
         this.logCardDraw(game, player, drawnCard);

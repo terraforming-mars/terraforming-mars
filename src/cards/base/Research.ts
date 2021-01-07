@@ -27,8 +27,7 @@ export class Research extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    player.drawCard(game, 2);
-    return undefined;
+    return player.drawCard(game, {amount: 2});
   }
   public getVictoryPoints() {
     return 1;

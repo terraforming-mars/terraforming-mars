@@ -16,11 +16,7 @@ export class ResearchColony implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.defer(new BuildColony(player, game, true, 'Select colony for Research Colony'));
-      player.cardsInHand.push(
-        game.dealer.dealCard(),
-        game.dealer.dealCard(),
-      );
-      return undefined;
+      return player.drawCard(game, {amount: 2});
     }
     public metadata: CardMetadata = {
       cardNumber: 'C34',

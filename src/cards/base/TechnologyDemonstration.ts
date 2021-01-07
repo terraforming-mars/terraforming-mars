@@ -14,7 +14,7 @@ export class TechnologyDemonstration implements IProjectCard {
     public name = CardName.TECHNOLOGY_DEMONSTRATION;
 
     public play(player: Player, game: Game) {
-      player.drawCard(game, 2);
+      player.drawCard(game, {amount: 2});
       return undefined;
     }
     public metadata: CardMetadata = {

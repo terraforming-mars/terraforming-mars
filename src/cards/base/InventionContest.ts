@@ -26,7 +26,7 @@ export class InventionContest extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game): SelectCard<IProjectCard> {
-    return player.drawCard(game, {amount: 1, from: 3})!;
+  public play(player: Player, game: Game): SelectCard<IProjectCard> | undefined {
+    return player.drawCard(game, {amount: 1, from: 3});
   }
 }

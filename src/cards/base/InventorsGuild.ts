@@ -33,7 +33,6 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
     return true;
   }
   public action(player: Player, game: Game) {
-    const canSelectCard = player.canAfford(player.cardCost);
-    return player.drawCard(game, {amount: canSelectCard ? 1 : 0, from: 1, isBuying: true});
+    return player.drawCard(game, {amount: 1, from: 1, isBuying: true});
   }
 }

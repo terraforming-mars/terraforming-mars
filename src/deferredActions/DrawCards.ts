@@ -8,6 +8,7 @@ import {ResourceType} from '../ResourceType';
 import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
+import {range} from '../utils/utils';
 
 export class DrawCards implements DeferredAction {
   constructor(
@@ -16,11 +17,7 @@ export class DrawCards implements DeferredAction {
         public options: DrawCards.Options = {amount: 1},
   ) { }
 
-  public static cardString(amount: number) {
-    return `${amount} card${amount === 1 ? '' : 's'}`;
-  }
-
-  private selected(selected: Array<IProjectCard>, from: Array<IProjectCard>) {
+  private drawSelectedDiscardOthers(selected: Array<IProjectCard>, from: Array<IProjectCard>) {
     this.player.cardsInHand.push(...selected);
     from.forEach((card) => {
       if (selected.find((f) => f.name === card.name) === undefined) {
@@ -40,14 +37,14 @@ export class DrawCards implements DeferredAction {
     }
   }
 
-  private selectCardsToDraw(cards: Array<IProjectCard>) {
+  private selectCardsToKeep(cards: Array<IProjectCard>) {
     return new SelectCard(
-      `Select ${DrawCards.cardString(this.options.amount)} to keep`,
+      `Select ${this.options.amount} card(s) to keep`,
       'Select',
       cards,
       (selected: Array<IProjectCard>) => {
         selected = selected.slice(0, this.options.amount);
-        this.selected(selected, cards);
+        this.drawSelectedDiscardOthers(selected, cards);
         this.log(cards);
         return undefined;
       }, this.options.amount, this.options.amount,
@@ -55,32 +52,38 @@ export class DrawCards implements DeferredAction {
   }
 
   private selectCardsToBuy(cards: Array<IProjectCard>) {
+    const howManyCanAfford = Math.max(
+      ...range(this.options.amount + 1)
+        .filter((n) => this.player.canAfford(n * this.player.cardCost)),
+    );
+    const info = howManyCanAfford !== this.options.amount ? ' (you cannot afford more)':'';
     return new SelectCard(
-      `Select at most ${DrawCards.cardString(this.options.amount)} to buy`,
+      `Select at most ${howManyCanAfford}${info} card(s) to buy`,
       'Buy',
       cards,
       (selected: Array<IProjectCard>) => {
-        selected = selected.slice(0, this.options.amount);
-        this.selected(selected, cards);
+        selected = selected.slice(0, howManyCanAfford);
+        this.drawSelectedDiscardOthers(selected, cards);
         if (selected.length > 0) {
           this.game.defer(new SelectHowToPayDeferred(
             this.player, selected.length * this.player.cardCost,
             {title: 'Select how to pay for cards'}));
         }
-        this.game.log('${0} bought ${1}', (b) => b
+        this.game.log('${0} bought ${1} card(s)', (b) => b
           .player(this.player)
-          .string(DrawCards.cardString(this.options.amount)));
+          .number(selected.length));
         return undefined;
       }, this.options.amount, 0,
     );
   }
 
   private get specialRequirements(): boolean {
-    return !!(this.options.include || this.options.tag || this.options.resource || this.options.cardType);
+    return Boolean(this.options.include || this.options.tag || this.options.resource || this.options.cardType);
   }
 
   public execute() {
     const total = this.options.from || this.options.amount;
+    if (total <= 0) return undefined;
     const include = (card: IProjectCard) => (
       (!this.options.tag || card.tags.includes(this.options.tag)) &&
       (!this.options.resource || this.options.resource === card.resourceType) &&
@@ -97,7 +100,7 @@ export class DrawCards implements DeferredAction {
     if (this.options.isBuying) {
       return this.selectCardsToBuy(cards);
     } else {
-      return this.selectCardsToDraw(cards);
+      return this.selectCardsToKeep(cards);
     }
   }
 }

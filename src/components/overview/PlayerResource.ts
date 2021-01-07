@@ -53,16 +53,14 @@ export const PlayerResource = Vue.component('player-resource', {
     displayPlantsProtectedIcon: function(): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
-    isMetal: function(): boolean {
-      return (this.type === Resources.STEEL || this.type === Resources.TITANIUM);
+    isMetalUpgraded: function(): boolean {
+      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) || (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE);
     },
     getMetalBonus: function(): string {
       if (this.type === Resources.STEEL) {
-        const steelBonus: number = this.steelValue-DEFAULT_STEEL_VALUE;
-        return '&#9679;'.repeat(steelBonus);
+        return `${this.steelValue}`;
       } else if (this.type === Resources.TITANIUM) {
-        const titaniumBonus: number = this.titaniumValue-DEFAULT_TITANIUM_VALUE;
-        return titaniumBonus <= 2 ? '&#9679;'.repeat(titaniumBonus) : '&#9679;&#9679;<br>'+'&#9679;'.repeat(titaniumBonus-2);
+        return `${this.titaniumValue}`;
       } else {
         return '';
       }
@@ -77,7 +75,7 @@ export const PlayerResource = Vue.component('player-resource', {
             <div class="resource_item_prod">
                 <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
                 <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
-                <div v-if="isMetal()" class="alloys" v-html="getMetalBonus()"></div>
+                <div v-if="isMetalUpgraded()" class="resource_icon--metalbonus" v-html="getMetalBonus()"></div>
             </div>
         </div>
     `,

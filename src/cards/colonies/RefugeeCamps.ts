@@ -40,10 +40,9 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: 'C33',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
-          eb.productionBox((pb) => pb.minus().megacredits(1));
+        b.action('Decrease your MC production 1 step to add a camp resource to this card.', (eb) => {
+          eb.productionBox((pb) => pb.megacredits(1));
           eb.startAction.camps();
-          eb.description('Action: Decrease your MC production 1 step to add a camp resource to this card.');
         }).br;
         b.text('1 VP for each camp resource on this card.', CardRenderItemSize.TINY, true);
       }),

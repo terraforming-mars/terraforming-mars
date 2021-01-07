@@ -83,7 +83,7 @@ class RedsPolicy02 implements Policy {
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
-      game.defer(new SelectHowToPayDeferred(player, amountToPay, false, false, 'Select how to pay for tile placement'));
+      game.defer(new SelectHowToPayDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
     }
   }
 }
@@ -115,63 +115,63 @@ class RedsPolicy03 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        const orOptions = new OrOptions();
+      {
+        title: 'Select how to pay for Turmoil  Redsaction',
+        afterPay: () => {
+          const orOptions = new OrOptions();
 
-        // Decrease temperature option
-        const temperature = game.getTemperature();
-        const canDecreaseTemperature = temperature > MIN_TEMPERATURE && temperature !== MAX_TEMPERATURE;
+          // Decrease temperature option
+          const temperature = game.getTemperature();
+          const canDecreaseTemperature = temperature > MIN_TEMPERATURE && temperature !== MAX_TEMPERATURE;
 
-        if (canDecreaseTemperature) {
-          orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
-            game.increaseTemperature(player, -1);
-            game.log('${0} decreased temperature 1 step', (b) => b.player(player));
-            return undefined;
-          }));
-        }
+          if (canDecreaseTemperature) {
+            orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
+              game.increaseTemperature(player, -1);
+              game.log('${0} decreased temperature 1 step', (b) => b.player(player));
+              return undefined;
+            }));
+          }
 
-        // Remove ocean option
-        const oceansPlaced = game.board.getOceansOnBoard();
-        const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
+          // Remove ocean option
+          const oceansPlaced = game.board.getOceansOnBoard();
+          const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
 
-        if (canRemoveOcean) {
-          orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
-            game.defer(new RemoveOceanTile(player, game, 'Turmoil Reds action - Remove an Ocean tile from the board'));
-            return undefined;
-          }));
-        }
+          if (canRemoveOcean) {
+            orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
+              game.defer(new RemoveOceanTile(player, game, 'Turmoil Reds action - Remove an Ocean tile from the board'));
+              return undefined;
+            }));
+          }
 
-        // Decrease oxygen level option
-        const oxygenLevel = game.getOxygenLevel();
-        const canDecreaseOxygen = oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== MAX_OXYGEN_LEVEL;
+          // Decrease oxygen level option
+          const oxygenLevel = game.getOxygenLevel();
+          const canDecreaseOxygen = oxygenLevel > MIN_OXYGEN_LEVEL && oxygenLevel !== MAX_OXYGEN_LEVEL;
 
-        if (canDecreaseOxygen) {
-          orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
-            game.increaseOxygenLevel(player, -1);
-            game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
-            return undefined;
-          }));
-        }
+          if (canDecreaseOxygen) {
+            orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
+              game.increaseOxygenLevel(player, -1);
+              game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
+              return undefined;
+            }));
+          }
 
-        // Decrease Venus scale option
-        const venusScaleLevel = game.getVenusScaleLevel();
-        const canDecreaseVenus = game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
+          // Decrease Venus scale option
+          const venusScaleLevel = game.getVenusScaleLevel();
+          const canDecreaseVenus = game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
 
-        if (canDecreaseVenus) {
-          orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
-            game.increaseVenusScaleLevel(player, -1);
-            game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
-            return undefined;
-          }));
-        }
+          if (canDecreaseVenus) {
+            orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
+              game.increaseVenusScaleLevel(player, -1);
+              game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
+              return undefined;
+            }));
+          }
 
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+          if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-        game.defer(new DeferredAction(player, () => orOptions));
-        return undefined;
+          game.defer(new DeferredAction(player, () => orOptions));
+          return undefined;
+        },
       },
     ));
 

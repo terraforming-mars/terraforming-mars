@@ -43,27 +43,7 @@ export class LogHelper {
   }
 
   static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
-    let type : string;
-
-    switch (tileType) {
-    case TileType.GREENERY:
-      type = 'greenery tile';
-      break;
-
-    case TileType.CITY:
-      type = 'city tile';
-      break;
-
-    case TileType.OCEAN:
-      type = 'ocean tile';
-      break;
-
-    default:
-      type = 'special tile';
-      break;
-    }
-
-    this.logBoardTileAction(game, player, space, type);
+    this.logBoardTileAction(game, player, space, TileType.toString(tileType) + ' tile');
   }
 
   static logBoardTileAction(game: Game, player: Player, space: ISpace, description: string, action: string = 'placed') {

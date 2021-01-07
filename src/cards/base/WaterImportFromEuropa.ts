@@ -40,16 +40,15 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
       return player.canAfford(oceanCost, game, false, true); ;
     }
     public action(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 12, false, true, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action'}));
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: '012',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.', (eb) => {
           eb.megacredits(12).titanium(1).brackets.startAction.oceans(1);
-          eb.description('Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.');
         }).br;
         b.text('1 VP for each Jovian tag you have.', CardRenderItemSize.TINY, true);
       }),

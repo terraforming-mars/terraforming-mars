@@ -28,11 +28,10 @@ export class BufferGas extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP3',
     renderData: CardRenderer.builder((b) =>
-      b.effectBox((eb) => {
+      b.standardProject('Spend 16 MC to increase your TR 1 step. Solo games only.', (eb) => {
         eb.megacredits(16).startAction.tr(1);
-        eb.description('Spend 16 MC to increase your TR 1 step. Solo games only.');
       }),
     ),
   };

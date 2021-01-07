@@ -47,9 +47,8 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
       cardNumber: '133',
       requirements: CardRequirements.builder((b) => b.temperature(-14)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add a microbe to ANOTHER card.', (eb) => {
           eb.empty().startAction.microbes(1).asterix();
-          eb.description('Action: Add a microbe to ANOTHER card.');
         });
       }),
       description: 'Requires -14 C° or warmer.',

@@ -22,9 +22,8 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       metadata: {
         cardNumber: '194',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend any amount of Energy and gain that amount of MC.', (eb) => {
             eb.text('x').energy(1).startAction.megacredits(0).multiplier;
-            eb.description('Action: Spend any amount of Energy and gain that amount of MC.');
           });
         }),
       },

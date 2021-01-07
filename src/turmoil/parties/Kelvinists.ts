@@ -56,13 +56,13 @@ class KelvinistsPolicy01 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       10,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        player.addProduction(Resources.ENERGY);
-        player.addProduction(Resources.HEAT);
-        game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
+      {
+        title: 'Select how to pay for Turmoil Kelvinists action',
+        afterPay: () => {
+          player.addProduction(Resources.ENERGY);
+          player.addProduction(Resources.HEAT);
+          game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
+        },
       },
     ));
 

@@ -96,13 +96,13 @@ class MarsFirstPolicy04 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        const card = game.drawCardsByTag(Tags.BUILDING, 1);
-        player.cardsInHand.push(...card);
-        LogHelper.logDrawnCards(game, player, card);
+      {
+        title: 'Select how to pay for Turmoil Mars First action',
+        afterPay: () => {
+          const card = game.drawCardsByTag(Tags.BUILDING, 1);
+          player.cardsInHand.push(...card);
+          LogHelper.logDrawnCards(game, player, card);
+        },
       },
     ));
 

@@ -20,6 +20,7 @@ import {Phase} from './src/Phase';
 import {Player} from './src/Player';
 import {Database} from './src/database/Database';
 import {Server} from './src/server/ServerModel';
+import {Cloner} from './src/database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const styles = fs.readFileSync('styles.css');
@@ -401,10 +402,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           generateRandomId(),
         );
       });
-      let firstPlayer = players[0];
+      let firstPlayerIdx: number = 0;
       for (let i = 0; i < gameReq.players.length; i++) {
         if (gameReq.players[i].first === true) {
-          firstPlayer = players[i];
+          firstPlayerIdx = i;
           break;
         }
       }
@@ -450,11 +451,29 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
       };
 
-      const game = Game.newInstance(gameId, players, firstPlayer, gameOptions);
-      GameLoader.getInstance().add(game);
-      res.setHeader('Content-Type', 'application/json');
-      res.write(getGameModelJSON(game));
-      res.end();
+      if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
+        Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId, (err, serialized) => {
+          Cloner.clone(gameId, players, firstPlayerIdx, err, serialized, (err, game) => {
+            if (err) {
+              throw err;
+            }
+            if (game === undefined) {
+              throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
+            }
+            GameLoader.getInstance().add(game);
+            res.setHeader('Content-Type', 'application/json');
+            res.write(getGameModelJSON(game));
+            res.end();
+          });
+        });
+      } else {
+        const seed = Math.random();
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
+        GameLoader.getInstance().add(game);
+        res.setHeader('Content-Type', 'application/json');
+        res.write(getGameModelJSON(game));
+        res.end();
+      }
     } catch (error) {
       route.internalServerError(req, res, error);
     }

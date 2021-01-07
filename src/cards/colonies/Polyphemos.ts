@@ -26,9 +26,8 @@ export class Polyphemos implements CorporationCard {
         b.br;
         b.megacredits(50).nbsp.productionBox((pb) => pb.megacredits(5)).nbsp.titanium(5).digit;
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you buy a card to hand, pay 5MC instead of 3, including the starting hand.', (eb) => {
             eb.cards(1).asterix().startEffect.megacredits(5);
-            eb.description('Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.');
           });
         });
       }),

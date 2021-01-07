@@ -28,9 +28,8 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
         cardNumber: '024',
         requirements: CardRequirements.builder((b) => b.oxygen(11)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
             eb.animals(1).any.startAction.animals(1);
-            eb.description('Action: Remove 1 Animal from any card and add it to this card.');
           }).br;
           b.text('1 VP per Animal on this card.', CardRenderItemSize.TINY, true);
         }),

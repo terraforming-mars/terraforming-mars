@@ -24,7 +24,7 @@ export class ArcticAlgae extends Card implements IProjectCard {
         cardNumber: '023',
         requirements: CardRequirements.builder((b) => b.temperature(-12).max()),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((be) => be.oceans(1).any.startEffect.plants(2).description('Effect: When anyone places an ocean tile, gain 2 plants.')).br;
+          b.effect('When anyone places an ocean tile, gain 2 plants.', (be) => be.oceans(1).any.startEffect.plants(2)).br;
           b.plants(1);
         }),
       },

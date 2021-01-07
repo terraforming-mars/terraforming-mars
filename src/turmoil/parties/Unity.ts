@@ -75,44 +75,44 @@ class UnityPolicy02 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
-        const orOptions = new OrOptions();
+      {
+        title: 'Select how to pay for Turmoil Unity action',
+        afterPay: () => {
+          const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
+          const orOptions = new OrOptions();
 
-        if (availableFloaterCards.length === 1) {
-          orOptions.options.push(
-            new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
-              player.addResourceTo(availableFloaterCards[0], 2);
-              LogHelper.logAddResource(game, player, availableFloaterCards[0], 2);
+          if (availableFloaterCards.length === 1) {
+            orOptions.options.push(
+              new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
+                player.addResourceTo(availableFloaterCards[0], 2);
+                LogHelper.logAddResource(game, player, availableFloaterCards[0], 2);
 
-              return undefined;
-            }),
-          );
-        } else if (availableFloaterCards.length > 1) {
-          orOptions.options.push(
-            new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
-              return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
-                player.addResourceTo(foundCards[0], 2);
-                LogHelper.logAddResource(game, player, foundCards[0], 2);
                 return undefined;
-              });
-            }),
-          );
-        }
+              }),
+            );
+          } else if (availableFloaterCards.length > 1) {
+            orOptions.options.push(
+              new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
+                return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
+                  player.addResourceTo(foundCards[0], 2);
+                  LogHelper.logAddResource(game, player, foundCards[0], 2);
+                  return undefined;
+                });
+              }),
+            );
+          }
 
-        orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-          player.setResource(Resources.TITANIUM, 2);
-          game.log('${0} gained 2 titanium', (b) => b.player(player));
+          orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
+            player.setResource(Resources.TITANIUM, 2);
+            game.log('${0} gained 2 titanium', (b) => b.player(player));
+            return undefined;
+          }));
+
+          if (orOptions.options.length === 1) return orOptions.options[0].cb();
+
+          game.defer(new DeferredAction(player, () => orOptions));
           return undefined;
-        }));
-
-        if (orOptions.options.length === 1) return orOptions.options[0].cb();
-
-        game.defer(new DeferredAction(player, () => orOptions));
-        return undefined;
+        },
       },
     ));
 
@@ -136,13 +136,13 @@ class UnityPolicy03 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       4,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        const card = game.drawCardsByTag(Tags.SPACE, 1);
-        player.cardsInHand.push(...card);
-        LogHelper.logDrawnCards(game, player, card);
+      {
+        title: 'Select how to pay for Turmoil Unity action',
+        afterPay: () => {
+          const card = game.drawCardsByTag(Tags.SPACE, 1);
+          player.cardsInHand.push(...card);
+          LogHelper.logDrawnCards(game, player, card);
+        },
       },
     ));
 

@@ -36,9 +36,8 @@ export class VenusianAnimals implements IProjectCard, IResourceCard {
       cardNumber: '259',
       requirements: CardRequirements.builder((b) => b.venus(18)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb)=> {
+        b.effect('When you play a Science tag, including this, add 1 Animal to this card.', (eb)=> {
           eb.science().played.startEffect.animals(1);
-          eb.description('Effect: when you play a Science tag, including this, add 1 Animal to this card.');
         }).br;
         b.text('1 VP per Animal on this card.', CardRenderItemSize.TINY, true);
       }),

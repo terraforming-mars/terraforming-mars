@@ -3,9 +3,9 @@ import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
-import {SelectHowToPayForCard} from '../../src/components/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
 
-describe('SelectHowToPayForCard', function() {
+describe('SelectHowToPayForProjectCard', function() {
   function getLocalVue() {
     const localVue = createLocalVue();
     localVue.directive('i18n', {});
@@ -37,7 +37,7 @@ describe('SelectHowToPayForCard', function() {
       [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
     });
-    const sortable = mount(SelectHowToPayForCard, {
+    const sortable = mount(SelectHowToPayForProjectCard, {
       localVue: getLocalVue(),
       propsData: {
         player: {

@@ -57,17 +57,17 @@ class ScientistsPolicy01 implements Policy {
     game.defer(new SelectHowToPayDeferred(
       player,
       10,
-      false,
-      false,
-      'Select how to pay for action',
-      () => {
-        player.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-        );
-        player.turmoilPolicyActionUsed = true;
-        game.log('${0} drew 3 cards', (b) => b.player(player));
+      {
+        title: 'Select how to pay for Turmoil Scientists action',
+        afterPay: () => {
+          player.cardsInHand.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+          );
+          player.turmoilPolicyActionUsed = true;
+          game.log('${0} drew 3 cards', (b) => b.player(player));
+        },
       },
     ));
 

@@ -18,14 +18,14 @@ export class AquiferTurbines extends PreludeCard {
     public play(player: Player, game: Game) {
       player.addProduction(Resources.ENERGY, 2);
       game.defer(new PlaceOceanTile(player, game));
-      game.defer(new SelectHowToPayDeferred(player, 3, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 3));
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: 'P02',
       renderData: CardRenderer.builder((b) => {
         b.oceans(1).productionBox((pb) => pb.energy(2)).br;
-        b.minus().megacredits(3);
+        b.megacredits(-3);
       }),
       description: 'Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.',
     }

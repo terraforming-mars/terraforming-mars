@@ -237,8 +237,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = 'X';
       } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';
-        result += '<div class="card-red-x">x</div>';
-        result += '<div class="card-requirements">Project Requirements</div>';
+        result += '<div class="card-x">x</div>';
+        result += '<div class="card-requirements">Global Requirements</div>';
         result += '</div>';
       }
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
@@ -251,7 +251,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';
       }
       if (this.item.type === CardRenderItemType.AWARD) {
-        result = '<span class="card-award-icon">award</span>';
+        // iconography on card shows plural (awards)
+        result = '<span class="card-award-icon">awards</span>';
       }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
@@ -262,6 +263,10 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
         result = '?';
+      }
+      // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
+      if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
+        result = '<div class="card-x">x</div>';
       }
 
       return result;

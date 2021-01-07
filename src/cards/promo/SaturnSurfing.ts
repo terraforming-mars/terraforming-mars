@@ -38,10 +38,9 @@ export class SaturnSurfing implements IActionCard, IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: 'X11',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
           eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
           eb.asterix().text('max 5');
-          eb.description('Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.');
         }).br;
         b.floaters(1).slash().earth().played;
       }),

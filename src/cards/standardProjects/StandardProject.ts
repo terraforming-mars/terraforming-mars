@@ -47,13 +47,12 @@ export abstract class StandardProject extends StandardAction {
       game.defer(new SelectHowToPayDeferred(
         player,
         this.cost - this.discount(player),
-        false,
-        false,
-        `Select how to pay for ${this.name} project`,
-        () => {
-          this.actionEssence(player, game);
-        },
-      ));
+        {
+          title: `Select how to pay for ${this.name} project`,
+          afterPay: () => {
+            this.actionEssence(player, game);
+          },
+        }));
       this.projectPlayed(player, game);
       return undefined;
     }

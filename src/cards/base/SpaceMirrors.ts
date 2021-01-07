@@ -21,9 +21,8 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '076',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 7 MC to increase your energy production 1 step.', (eb) => {
             eb.megacredits(7).startAction.productionBox((pb) => pb.energy(1));
-            eb.description('Action: Spend 7 MC to increase your energy production 1 step.');
           });
         }),
       },
@@ -36,7 +35,7 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
     return player.canAfford(7);
   }
   public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 7, false, false, 'Select how to pay for action'));
+    game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
     player.addProduction(Resources.ENERGY);
     return undefined;
   }

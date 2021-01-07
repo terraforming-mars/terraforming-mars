@@ -24,9 +24,7 @@ export class BeginnerCorporation extends Card implements CorporationCard {
     });
   }
   public play(player: Player, game: Game) {
-    for (let i = 0; i < 10; i++) {
-      player.cardsInHand.push(game.dealer.dealCard());
-    }
+    player.drawCard(game, 10);
     return undefined;
   }
 }

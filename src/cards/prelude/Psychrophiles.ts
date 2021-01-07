@@ -40,13 +40,11 @@ export class Psychrophiles implements IActionCard, IProjectCard, IResourceCard {
       cardNumber: 'P39',
       requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 microbe to this card.', (eb) => {
           eb.empty().startAction.microbes(1);
-          eb.description('Action: Add 1 microbe to this card.');
         }).br;
-        b.effectBox((eb) => {
+        b.effect('When paying for a plant card, microbes here may be used as 2 MC each.', (eb) => {
           eb.plants(1).played.startEffect.microbes(1).equals().megacredits(2);
-          eb.description('Effect: When paying for a plant card, microbes here may be used as 2 MC each.');
         });
       }),
       description: 'Temperature must be -20 C or lower.',

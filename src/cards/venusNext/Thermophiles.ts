@@ -89,14 +89,12 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
       cardNumber: '253',
       requirements: CardRequirements.builder((b) => b.venus(6)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
           eb.empty().startAction.microbes(1).secondaryTag(Tags.VENUS);
-          eb.description('Action: Add 1 Microbe to ANY Venus CARD.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend 2 Microbes here to raise Venus 1 step.', (eb) => {
           eb.microbes(2).startAction.venus(1);
-          eb.description('Action: Spend 2 Microbes here to raise Venus 1 step.');
         });
       }),
       description: 'Requires Venus 6%',

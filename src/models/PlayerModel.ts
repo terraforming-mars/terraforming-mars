@@ -50,6 +50,7 @@ export interface PlayerModel {
     phase: Phase;
     plants: number;
     plantProduction: number;
+    plantsAreProtected: boolean;
     players: Array<PlayerModel>;
     randomMA: RandomMAOptionType;
     spaces: Array<SpaceModel>;

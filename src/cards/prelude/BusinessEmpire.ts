@@ -17,7 +17,7 @@ export class BusinessEmpire extends PreludeCard {
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS, 6);
-      game.defer(new SelectHowToPayDeferred(player, 6, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 6));
       return undefined;
     }
     public metadata: CardMetadata = {

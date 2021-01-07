@@ -109,9 +109,8 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
         b.br;
         b.megacredits(40).nbsp.productionBox((pb) => pb.steel(1).titanium(1));
         b.corpBox('action', (ce) => {
-          ce.effectBox((eb) => {
+          ce.action('Decrease any production to gain 4 resources of that kind.', (eb) => {
             eb.productionBox((eb) => eb.wild(1)).startAction.wild(4).digit;
-            eb.description('Action: Decrease any production to gain 4 resources of that kind.');
           });
         });
       }),

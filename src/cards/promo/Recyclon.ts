@@ -56,10 +56,9 @@ export class Recyclon implements CorporationCard, IResourceCard {
         b.br.br;
         b.megacredits(38).nbsp.productionBox((pb) => pb.steel(1));
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.', (eb) => {
             eb.building().played.colon().microbes(1).or();
             eb.microbes(2).digit.startEffect.productionBox((pb) => pb.plants(1));
-            eb.description('Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.');
           });
         });
       }),

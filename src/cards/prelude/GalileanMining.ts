@@ -16,7 +16,7 @@ export class GalileanMining extends PreludeCard {
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM, 2);
-      game.defer(new SelectHowToPayDeferred(player, 5, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 5));
       return undefined;
     }
     public metadata: CardMetadata = {

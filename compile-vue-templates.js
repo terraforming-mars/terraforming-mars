@@ -145,8 +145,8 @@ checkComponent(
   ['cost', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(
-  'src/components/SelectHowToPayForCard',
-  require('./build/src/components/SelectHowToPayForCard').SelectHowToPayForCard,
+  'src/components/SelectHowToPayForProjectCard',
+  require('./build/src/components/SelectHowToPayForProjectCard').SelectHowToPayForProjectCard,
   ['cardName', 'card', 'cards', 'cost', 'tags', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(

@@ -20,9 +20,8 @@ export class RoverConstruction extends Card implements IProjectCard {
       metadata: {
         cardNumber: '038',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.effect('When any City tile is placed, gain 2 MC.', (eb) => {
             eb.city(CardRenderItemSize.SMALL).any.startEffect.megacredits(2);
-            eb.description('Effect: When any City tile is placed, gain 2 MC.');
           });
         }),
         victoryPoints: 1,

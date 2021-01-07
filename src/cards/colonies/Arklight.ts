@@ -42,9 +42,8 @@ export class Arklight implements CorporationCard, IResourceCard {
       renderData: CardRenderer.builder((b) => {
         b.megacredits(45).nbsp.productionBox((pb) => pb.megacredits(2));
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you play an animal or plant tag, including this, add 1 animal to this card.', (eb) => {
             eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
-            eb.description('Effect: When you play an animal or plant tag, including this, add 1 animal to this card.');
           });
           ce.vSpace(); // to offset the description to the top a bit so it can be readable
         });

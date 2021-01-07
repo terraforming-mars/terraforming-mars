@@ -27,9 +27,8 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
         cardNumber: '005',
         requirements: CardRequirements.builder((b) => b.oxygen(6).max()),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.', (eb) => {
             eb.megacredits(1).startAction.microbes(1).played.asterix().nbsp.colon().nbsp.science();
-            eb.description('Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.');
           }).br;
           b.text('3 VPs if you have one or more Science resources here.', CardRenderItemSize.TINY, true);
         }),
@@ -64,7 +63,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
       game.dealer.discard(topCard);
-      game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
       return undefined;
     }
 }

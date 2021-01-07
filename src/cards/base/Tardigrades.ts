@@ -34,9 +34,8 @@ export class Tardigrades implements IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: '049',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Microbe to this card.', (eb) => {
           eb.empty().startAction.microbes(1);
-          eb.description('Action: Add 1 Microbe to this card.');
         }).br;
         b.text('1 VP per 4 Microbes on this card.', CardRenderItemSize.TINY, true);
       }),

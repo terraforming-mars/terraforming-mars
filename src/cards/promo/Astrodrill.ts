@@ -113,14 +113,12 @@ export class Astrodrill implements IActionCard, CorporationCard {
         b.megacredits(38).nbsp.asteroids(3).digit;
         b.corpBox('action', (ce) => {
           ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effectBox((eb) => {
+          ce.action(undefined, (eb) => {
             eb.empty().startAction.asteroids(1).asterix().slash().wild(1).or();
-            eb.description(undefined);
           });
           ce.vSpace();
-          ce.effectBox((eb) => {
+          ce.action('Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.', (eb) => {
             eb.asteroids(1).startAction.titanium(3).digit;
-            eb.description('Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.');
           });
         });
       }),

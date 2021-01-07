@@ -9,6 +9,8 @@ import {IMilestone} from './milestones/IMilestone';
 import {Colony} from './colonies/Colony';
 import {IParty} from './turmoil/parties/IParty';
 import {LogMessage} from './LogMessage';
+import {TileType} from './TileType';
+import {SpaceBonus} from './SpaceBonus';
 
 export class LogBuilder {
     private message: string;
@@ -81,6 +83,16 @@ export class LogBuilder {
 
     public party(value: IParty): LogBuilder {
       this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value.name));
+      return this;
+    }
+
+    public tileType(value: TileType): LogBuilder {
+      this.parameters.push(new LogMessageData(LogMessageDataType.TILE_TYPE, value.toString()));
+      return this;
+    }
+
+    public spaceBonus(value: SpaceBonus): LogBuilder {
+      this.parameters.push(new LogMessageData(LogMessageDataType.SPACE_BONUS, value.toString()));
       return this;
     }
 

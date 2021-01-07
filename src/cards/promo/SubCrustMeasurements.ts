@@ -39,9 +39,8 @@ export class SubCrustMeasurements implements IActionCard, IProjectCard {
       cardNumber: 'X28',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Draw a card.', (eb) => {
           eb.empty().startAction.cards(1);
-          eb.description('Action: Draw a card.');
         });
       }),
       description: 'Requires 2 science tags.',

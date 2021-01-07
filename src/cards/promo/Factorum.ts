@@ -58,10 +58,9 @@ export class Factorum implements IActionCard, CorporationCard {
         b.megacredits(37).nbsp.productionBox((pb) => pb.steel(1));
         b.corpBox('action', (ce) => {
           ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effectBox((eb) => {
+          ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.', (eb) => {
             eb.empty().arrow().productionBox((pb) => pb.energy(1));
             eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
-            eb.description('Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.');
           });
         });
       }),

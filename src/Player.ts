@@ -213,7 +213,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil Reds capacity
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, false, false, 'Select how to pay for TR increase'));
+        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
         // Cannot pay Reds, will not increase TR
         return;
@@ -999,7 +999,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const payForCards = () => {
       const purchasedCardsCost = this.cardCost * selectedCards.length;
       if (selectedCards.length > 0) {
-        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, false, false, 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'));
+        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, {title: 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'}));
       }
       dealtCards.forEach((card) => {
         if (selectedCards.find((c) => c.name === card.name)) {
@@ -1334,11 +1334,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.defer(new SelectHowToPayDeferred(
               this,
               9 - this.colonyTradeDiscount,
-              false,
-              false,
-              'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
-              () => {
-                colony.trade(this, game);
+              {
+                title: 'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
+                afterPay: () => {
+                  colony.trade(this, game);
+                },
               },
             ));
           } else if (payWith === Resources.ENERGY) {
@@ -1424,7 +1424,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
       'Pay',
       () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
+        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Kelvinists action'}));
         this.addProduction(Resources.ENERGY);
         this.addProduction(Resources.HEAT);
         game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
@@ -1438,7 +1438,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
       'Pay',
       () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
+        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Scientists draw'}));
         this.turmoilScientistsActionUsed = true;
         game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
         this.drawCard(game, {amount: 3});
@@ -1463,7 +1463,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      game.defer(new SelectHowToPayDeferred(this, 8, false, false, 'Select how to pay for milestone'));
+      game.defer(new SelectHowToPayDeferred(this, 8, {title: 'Select how to pay for milestone'}));
       game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1471,7 +1471,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private fundAward(award: IAward, game: Game): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), false, false, 'Select how to pay for award'));
+      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       game.fundAward(this, award);
       return undefined;
     });

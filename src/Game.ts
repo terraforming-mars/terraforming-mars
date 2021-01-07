@@ -231,6 +231,16 @@ export class Game implements ISerializable<SerializedGame> {
 
     const activePlayer = firstPlayer.id;
 
+    // Single player game player starts with 14TR
+    if (players.length === 1) {
+      gameOptions.draftVariant = false;
+      gameOptions.initialDraftVariant = false;
+      gameOptions.randomMA = RandomMAOptionType.NONE;
+
+      players[0].setTerraformRating(14);
+      players[0].terraformRatingAtGenerationStart = 14;
+    }
+
     const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
 
     // Initialize Ares data
@@ -238,16 +248,10 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    // Single player game player starts with 14TR
-    // and 2 neutral cities and forests on board
-    if (players.length === 1) {
-      // TODO(kberg): move to GameSetup.
-      game.setupSolo();
-    }
-
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
+
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
@@ -265,6 +269,12 @@ export class Game implements ISerializable<SerializedGame> {
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
       game.turmoil = Turmoil.newInstance(game);
+    }
+
+    // and 2 neutral cities and forests on board
+    if (players.length === 1) {
+      //  Setup solo player's starting tiles
+      GameSetup.setupNeutralPlayer(game);
     }
 
     // Setup Ares hazards
@@ -296,7 +306,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
     for (const player of game.getPlayers()) {
-      player.increaseTerraformRatingSteps(player.handicap, game);
+      player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
         GameSetup.setStartingProductions(player);
       }
@@ -1277,7 +1287,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, false, false, 'Select how to pay for placement bonus ocean'));
+        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1292,9 +1302,7 @@ export class Game implements ISerializable<SerializedGame> {
     const coveringExistingTile = space.tile !== undefined;
 
     // Part 4. Place the tile
-    space.tile = tile;
-    space.player = player;
-    LogHelper.logTilePlacement(this, player, space, tile.tileType);
+    this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
 
@@ -1347,6 +1355,12 @@ export class Game implements ISerializable<SerializedGame> {
       // Must occur after all other onTilePlaced operations.
       AresHandler.afterTilePlacement(this, player, startingResources);
     });
+  }
+
+  public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
+    space.tile = tile;
+    space.player = player;
+    LogHelper.logTilePlacement(this, player, space, tile.tileType);
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
@@ -1468,34 +1482,6 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
-  }
-
-  private setupSolo() {
-    this.gameOptions.draftVariant = false;
-    this.gameOptions.initialDraftVariant = false;
-    this.gameOptions.randomMA = RandomMAOptionType.NONE;
-
-    this.players[0].setTerraformRating(14);
-    this.players[0].terraformRatingAtGenerationStart = 14;
-    // Single player add neutral player
-    // put 2 neutrals cities on board with adjacent forest
-    const neutral = GameSetup.neutralPlayerFor(this.id);
-
-    function placeCityAndForest(game: Game, direction: -1 | 1) {
-      const space1 = game.getSpaceByOffset(direction);
-      game.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = game.board.getForestSpace(
-        game.board.getAdjacentSpaces(space1),
-      );
-      game.addTile(neutral, SpaceType.LAND, fspace1, {
-        tileType: TileType.GREENERY,
-      });
-    }
-
-    placeCityAndForest(this, 1);
-    placeCityAndForest(this, -1);
-
-    return undefined;
   }
 
   public getSpaceByOffset(direction: -1 | 1, type = 'tile') {

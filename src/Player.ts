@@ -57,6 +57,8 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
+import {ConvertPlants} from './cards/standardActions/ConvertPlants';
+import {ConvertHeat} from './cards/standardActions/ConvertHeat';
 
 export type PlayerId = string;
 
@@ -1645,13 +1647,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private addStandardActions(game: Game, options: Array<PlayerInput>) {
-    const add = this.getAvailableStandardActions(game);
-    if (add.cards.length >= 1) {
-      options.push(add);
-    }
-  }
-
   public takeAction(game: Game): void {
     if (this.usedUndo) {
       this.usedUndo = false;
@@ -1762,7 +1757,19 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
     }
 
-    this.addStandardActions(game, action.options);
+    const convertPlants = new ConvertPlants();
+    if (convertPlants.canAct(this, game)) {
+      action.options.push(convertPlants.action(this, game));
+    }
+
+    const convertHeat = new ConvertHeat();
+    if (convertHeat.canAct(this, game)) {
+      action.options.push(new SelectOption(
+        `Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+          return convertHeat.action(this, game);
+        }));
+    }
+
 
     // Turmoil Scientists capacity
     if (this.canAfford(10) &&
@@ -2151,18 +2158,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         .sort((a, b) => a.cost - b.cost)
         .filter((card) => card.canAct(this, game))
         .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
-      (card) => card[0].action(this, game),
-    );
-  }
-
-  public getAvailableStandardActions(game: Game) {
-    return new SelectCard(
-      'Standard actions',
-      'Confirm',
-      new CardLoader(game.gameOptions)
-        .getStandardActions()
-        .filter((card) => card.cardType === CardType.STANDARD_ACTION)
-        .filter((card) => card.canAct(this, game)),
       (card) => card[0].action(this, game),
     );
   }

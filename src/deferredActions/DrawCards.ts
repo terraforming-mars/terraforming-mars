@@ -29,10 +29,7 @@ export class DrawCards implements DeferredAction {
     if (this.specialRequirements) {
       LogHelper.logDrawnCards(this.game, this.player, cards);
     } else {
-      this.game.log('${0} drew ${1} card(s)', (b) => b
-        .player(this.player)
-        .number(cards.length),
-      );
+      LogHelper.logCardChange(this.game, this.player, this.options.isBuying ? 'bought' : 'drew', cards.length);
     }
   }
 
@@ -72,9 +69,7 @@ export class DrawCards implements DeferredAction {
             this.player, selected.length * this.player.cardCost,
             {title: 'Select how to pay for cards'}));
         }
-        this.game.log('${0} bought ${1} card(s)', (b) => b
-          .player(this.player)
-          .number(selected.length));
+        this.log(cards);
         this.runCb();
         return undefined;
       }, howManyCanAfford, 0,

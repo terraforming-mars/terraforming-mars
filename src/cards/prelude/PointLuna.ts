@@ -22,8 +22,7 @@ export class PointLuna implements CorporationCard {
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM);
-      player.drawCard(game);
-      return undefined;
+      return player.drawCard(game);
     }
     public metadata: CardMetadata = {
       cardNumber: 'R10',

@@ -13,8 +13,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseVenusScaleLevel(player, 2);
-      player.drawCard(game, {amount: 2, tag: Tags.VENUS});
-      return undefined;
+      return player.drawCard(game, {amount: 2, tag: Tags.VENUS});
     }
     public metadata: CardMetadata = {
       cardNumber: 'Y07',

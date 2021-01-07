@@ -994,42 +994,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.draftedCards = [];
     }
 
-    let selectedCards: Array<IProjectCard> = [];
-
-    const payForCards = () => {
-      const purchasedCardsCost = this.cardCost * selectedCards.length;
-      if (selectedCards.length > 0) {
-        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, {title: 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'}));
-      }
-      dealtCards.forEach((card) => {
-        if (selectedCards.find((c) => c.name === card.name)) {
-          // Add selected cards to hand
-          this.cardsInHand.push(card);
-        } else {
-          // Discard the cards which were not purchased
-          game.dealer.discard(card);
-        }
-      });
-      game.log('${0} bought ${1} card(s)', (b) => b.player(this).number(selectedCards.length));
-      game.playerIsFinishedWithResearchPhase(this);
-    };
-
-    let maxPurchaseQty = 4;
-    maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.spendableMegacredits() / this.cardCost));
-
-    this.setWaitingFor(
-      new SelectCard(
-        'Select which cards to take into hand',
-        'Buy',
-        dealtCards,
-        (foundCards: Array<IProjectCard>) => {
-          selectedCards = foundCards;
-          return undefined;
-        }, maxPurchaseQty, 0,
-      ), () => {
-        payForCards();
-      },
-    );
+    game.defer(new DrawCards(this, game, {
+      amount: dealtCards.length,
+      isBuying: true,
+      cards: dealtCards,
+      cb: () => game.playerIsFinishedWithResearchPhase(this),
+    }));
   }
 
   public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
@@ -1223,6 +1193,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
+    if (selectedCard.cardType !== CardType.PROXY) {
+      this.addPlayedCard(game, selectedCard);
+    }
+
     // Play the card
     const action = selectedCard.play(this, game);
     if (action !== undefined) {
@@ -1250,10 +1224,6 @@ export class Player implements ISerializable<SerializedPlayer> {
           card.targetCards.splice(index, 1);
         }
       }
-    }
-
-    if (selectedCard.cardType !== CardType.PROXY) {
-      this.addPlayedCard(game, selectedCard);
     }
 
     for (const playedCard of this.playedCards) {
@@ -1290,6 +1260,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getPlayableActionCards(game),
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
+        this.actionsThisGeneration.add(foundCard.name);
+        game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         const action = foundCard.action!(this, game);
         if (action !== undefined) {
           game.defer(new DeferredAction(
@@ -1297,8 +1269,6 @@ export class Player implements ISerializable<SerializedPlayer> {
             () => action,
           ));
         }
-        this.actionsThisGeneration.add(foundCard.name);
-        game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         return undefined;
       },
     );
@@ -1441,8 +1411,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Scientists draw'}));
         this.turmoilScientistsActionUsed = true;
         game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
-        this.drawCard(game, {amount: 3});
-        return undefined;
+        return this.drawCard(game, {amount: 3});
       },
     );
   }

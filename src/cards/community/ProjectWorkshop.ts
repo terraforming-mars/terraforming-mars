@@ -29,8 +29,7 @@ export class ProjectWorkshop implements CorporationCard {
 
     public initialActionText: string = 'Draw a blue card';
     public initialAction(player: Player, game: Game) {
-      player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
-      return undefined;
+      return player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
     }
 
     public canAct(player: Player): boolean {
@@ -48,9 +47,7 @@ export class ProjectWorkshop implements CorporationCard {
           if (activeCards.length === 1) {
             this.convertCardPointsToTR(player, game, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
-            player.drawCard(game, {amount: 2});
-
-            return undefined;
+            return player.drawCard(game, {amount: 2});
           }
 
           return new SelectCard(
@@ -60,9 +57,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
-                      player.drawCard(game, {amount: 2});
-
-                      return undefined;
+                      return player.drawCard(game, {amount: 2});
                     },
           );
         },
@@ -70,12 +65,7 @@ export class ProjectWorkshop implements CorporationCard {
 
       const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
         player.megaCredits -= 3;
-        player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
-
-        const drawnCard = game.getCardsInHandByType(player, CardType.ACTIVE).slice(-1)[0];
-        this.logCardDraw(game, player, drawnCard);
-
-        return undefined;
+        return player.drawCard(game, {amount: 1, cardType: CardType.ACTIVE});
       });
 
       if (activeCards.length === 0) return drawBlueCard;
@@ -102,10 +92,6 @@ export class ProjectWorkshop implements CorporationCard {
       }
 
       game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
-    }
-
-    private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
     }
 
     public metadata: CardMetadata = {

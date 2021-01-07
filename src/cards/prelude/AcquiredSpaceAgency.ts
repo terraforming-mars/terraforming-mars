@@ -10,9 +10,8 @@ export class AcquiredSpaceAgency extends PreludeCard {
     public tags = [];
     public name = CardName.ACQUIRED_SPACE_AGENCY;
     public play(player: Player, game: Game) {
-      player.drawCard(game, {amount: 2, tag: Tags.SPACE});
       player.titanium += 6;
-      return undefined;
+      return player.drawCard(game, {amount: 2, tag: Tags.SPACE});
     };
     public metadata: CardMetadata = {
       cardNumber: 'P35',

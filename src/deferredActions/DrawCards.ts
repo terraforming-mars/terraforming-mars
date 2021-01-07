@@ -8,7 +8,6 @@ import {ResourceType} from '../ResourceType';
 import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
-import {range} from '../utils/utils';
 
 export class DrawCards implements DeferredAction {
   constructor(
@@ -37,6 +36,12 @@ export class DrawCards implements DeferredAction {
     }
   }
 
+  private runCb() {
+    if (this.options.cb) {
+      this.options.cb();
+    }
+  }
+
   private selectCardsToKeep(cards: Array<IProjectCard>) {
     return new SelectCard(
       `Select ${this.options.amount} card(s) to keep`,
@@ -45,21 +50,19 @@ export class DrawCards implements DeferredAction {
       (selected: Array<IProjectCard>) => {
         selected = selected.slice(0, this.options.amount);
         this.drawSelectedDiscardOthers(selected, cards);
-        this.log(cards);
+        this.log(selected);
+        this.runCb();
         return undefined;
       }, this.options.amount, this.options.amount,
     );
   }
 
   private selectCardsToBuy(cards: Array<IProjectCard>) {
-    const howManyCanAfford = Math.max(
-      ...range(this.options.amount + 1)
-        .filter((n) => this.player.canAfford(n * this.player.cardCost)),
-    );
-    const info = howManyCanAfford !== this.options.amount ? ' (you cannot afford more)':'';
+    const howManyCanAfford = Math.min(this.options.amount, Math.floor(this.player.spendableMegacredits() / this.player.cardCost));
+    const info = howManyCanAfford !== this.options.amount ? `at most ${howManyCanAfford} (you cannot afford more) `:'';
     return new SelectCard(
-      `Select at most ${howManyCanAfford}${info} card(s) to buy`,
-      'Buy',
+      howManyCanAfford === 0 ? `You cannot afford any cards` : `Select ${info}card(s) to buy`,
+      howManyCanAfford === 0 ? 'Ok' : 'Buy',
       cards,
       (selected: Array<IProjectCard>) => {
         selected = selected.slice(0, howManyCanAfford);
@@ -72,8 +75,9 @@ export class DrawCards implements DeferredAction {
         this.game.log('${0} bought ${1} card(s)', (b) => b
           .player(this.player)
           .number(selected.length));
+        this.runCb();
         return undefined;
-      }, this.options.amount, 0,
+      }, howManyCanAfford, 0,
     );
   }
 
@@ -89,7 +93,9 @@ export class DrawCards implements DeferredAction {
       (!this.options.resource || this.options.resource === card.resourceType) &&
       (!this.options.cardType || this.options.cardType === card.cardType));
 
-    const cards = this.game.dealer.drawProjectCardsByCondition(this.game, total, this.options.include || include);
+    const cards = this.options.cards ||
+      this.game.dealer.drawProjectCardsByCondition(this.game, total, this.options.include || include);
+    if (cards.length === 0) return undefined;
 
     if (this.options.from === undefined && !this.options.isBuying) {
       this.player.cardsInHand.push(...cards);
@@ -114,5 +120,7 @@ export namespace DrawCards {
     cardType?: CardType,
     isBuying?: boolean,
     include?: (card: IProjectCard) => boolean,
+    cards?: Array<IProjectCard>,
+    cb?: () => void,
   }
 }

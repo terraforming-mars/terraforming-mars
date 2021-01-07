@@ -25,8 +25,7 @@ export class LagrangeObservatory extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    player.drawCard(game);
-    return undefined;
+    return player.drawCard(game);
   }
   public getVictoryPoints() {
     return 1;

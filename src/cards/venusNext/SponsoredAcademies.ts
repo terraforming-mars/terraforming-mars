@@ -7,6 +7,7 @@ import {CardName} from '../../CardName';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {DrawCards} from '../../deferredActions/DrawCards';
 
 export class SponsoredAcademies implements IProjectCard {
     public cost = 9;
@@ -21,7 +22,7 @@ export class SponsoredAcademies implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.defer(new DiscardCards(player, game));
-      player.drawCard(game, {amount: 3});
+      game.defer(new DrawCards(player, game, {amount: 3}));
       const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
       for (const p of otherPlayers) {
         p.drawCard(game);

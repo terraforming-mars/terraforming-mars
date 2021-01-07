@@ -7,7 +7,6 @@ import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
-import {SelectCard} from '../../inputs/SelectCard';
 
 export class InventionContest extends Card implements IProjectCard {
   constructor() {
@@ -26,7 +25,7 @@ export class InventionContest extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game): SelectCard<IProjectCard> | undefined {
+  public play(player: Player, game: Game) {
     return player.drawCard(game, {amount: 1, from: 3});
   }
 }

@@ -15,8 +15,7 @@ export class MorningStarInc implements CorporationCard {
 
     public initialActionText: string = 'Draw 3 Venus-tag cards';
     public initialAction(player: Player, game: Game) {
-      player.drawCard(game, {amount: 3, tag: Tags.VENUS});
-      return undefined;
+      return player.drawCard(game, {amount: 3, tag: Tags.VENUS});
     }
 
     public getRequirementBonus(_player: Player, _game: Game, venusOnly?: boolean): number {

@@ -31,7 +31,7 @@ export class AddResourcesToCard implements DeferredAction {
     let resourceCards = this.player.getResourceCards(this.resourceType);
 
     if (this.options.restrictedTag !== undefined) {
-      resourceCards = resourceCards.filter((card) => card.tags.indexOf(this.options.restrictedTag!) !== -1);
+      resourceCards = resourceCards.filter((card) => card.tags.includes(this.options.restrictedTag!));
     }
     if (this.options.filter !== undefined) {
       resourceCards = resourceCards.filter(this.options.filter);

@@ -61,8 +61,8 @@ export const PlayerResource = Vue.component('player-resource', {
         const steelBonus: number = this.steelValue-DEFAULT_STEEL_VALUE;
         return '&#9679;'.repeat(steelBonus);
       } else if (this.type === Resources.TITANIUM) {
-        const titaniumBonus: number = this.playerAdjustedTitaniumValue-DEFAULT_TITANIUM_VALUE;
-        return '&#9679;'.repeat(titaniumBonus);
+        const titaniumBonus: number = this.titaniumValue-DEFAULT_TITANIUM_VALUE;
+        return titaniumBonus <= 2 ? '&#9679;'.repeat(titaniumBonus) : '&#9679;&#9679;<br>'+'&#9679;'.repeat(titaniumBonus-2);
       } else {
         return '';
       }

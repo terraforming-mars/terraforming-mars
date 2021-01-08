@@ -1050,9 +1050,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     return Math.max(cost, 0);
   }
 
-  private addPlayedCard(game: Game, card: IProjectCard): void {
+  private addPlayedCard(card: IProjectCard): void {
     this.playedCards.push(card);
-    game.log('${0} played ${1}', (b) => b.player(this).card(card));
     this.lastCardPlayed = card;
 
     // Playwrights hook for Conscription and Indentured Workers
@@ -1193,9 +1192,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    if (selectedCard.cardType !== CardType.PROXY) {
-      this.addPlayedCard(game, selectedCard);
-    }
+    game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
 
     // Play the card
     const action = selectedCard.play(this, game);
@@ -1224,6 +1221,10 @@ export class Player implements ISerializable<SerializedPlayer> {
           card.targetCards.splice(index, 1);
         }
       }
+    }
+
+    if (selectedCard.cardType !== CardType.PROXY) {
+      this.addPlayedCard(selectedCard);
     }
 
     for (const playedCard of this.playedCards) {
@@ -1260,7 +1261,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getPlayableActionCards(game),
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
-        this.actionsThisGeneration.add(foundCard.name);
         game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         const action = foundCard.action!(this, game);
         if (action !== undefined) {
@@ -1269,6 +1269,7 @@ export class Player implements ISerializable<SerializedPlayer> {
             () => action,
           ));
         }
+        this.actionsThisGeneration.add(foundCard.name);
         return undefined;
       },
     );

@@ -1193,7 +1193,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
+    if (selectedCard.cardType !== CardType.PROXY) {
+      game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
+    }
 
     // Play the card
     const action = selectedCard.play(this, game);

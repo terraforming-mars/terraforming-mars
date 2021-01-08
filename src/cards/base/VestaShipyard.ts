@@ -23,7 +23,7 @@ export class VestaShipyard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '057',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.titanium(1));
+        b.production((pb) => pb.titanium(1));
       }),
       description: 'Increase your titanium production 1 step.',
       victoryPoints: 1,

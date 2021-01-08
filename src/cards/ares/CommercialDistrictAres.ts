@@ -16,7 +16,7 @@ export class CommercialDistrictAres extends CommercialDistrict {
         cardNumber: 'A06',
         description: 'Decrease your energy production 1 step and increase your MC production 4 steps.',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(4).br;
           }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;

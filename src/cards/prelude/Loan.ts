@@ -21,7 +21,7 @@ export class Loan extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P17',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.minus().megacredits(2)).br;
+        b.production((pb) => pb.minus().megacredits(2)).br;
         b.megacredits(30);
       }),
       description: 'Gain 30 MC. Decrease your MC production 2 steps.',

@@ -46,7 +46,7 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
         b.action('Add 1 Animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
         }).br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().plants(1).nbsp.plus().megacredits(2);
         }).br;
         b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);

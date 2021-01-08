@@ -31,7 +31,7 @@ export class Capital extends Card implements IProjectCard {
       },
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(2).br;
           pb.plus().megacredits(5);
         }).nbsp.tile(TileType.CAPITAL, false).br;

@@ -434,7 +434,7 @@ class Builder {
     return this;
   }
 
-  public productionBox(pb: (builder: ProductionBoxBuilder) => void): Builder {
+  public production(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this._addRowItem(CardRenderProductionBox.builder(pb));
     return this;
   }

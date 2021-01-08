@@ -19,7 +19,7 @@ export class Cartel extends Card implements IProjectCard {
       metadata: {
         cardNumber: '137',
         description: 'Increase your MC production 1 step for each Earth tag you have, including this.',
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
+        renderData: CardRenderer.builder((b) => b.production((pb) => {
           pb.megacredits(1).slash().earth().played;
         })),
       },

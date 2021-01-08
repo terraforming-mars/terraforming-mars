@@ -35,7 +35,7 @@ export class LunarExports implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C21',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.plants(2).or(CardRenderItemSize.SMALL).megacredits(5);
         });
       }),

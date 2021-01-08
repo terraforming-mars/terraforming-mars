@@ -32,7 +32,7 @@ export class LightningHarvest implements IProjectCard {
       cardNumber: '046',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(1).megacredits(1));
+        b.production((pb) => pb.energy(1).megacredits(1));
       }),
       description: 'Requires 3 Science tags. Increase your Energy production and your MC production one step each.',
       victoryPoints: 1,

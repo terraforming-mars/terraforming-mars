@@ -24,7 +24,7 @@ export class AquiferTurbines extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P02',
       renderData: CardRenderer.builder((b) => {
-        b.oceans(1).productionBox((pb) => pb.energy(2)).br;
+        b.oceans(1).production((pb) => pb.energy(2)).br;
         b.megacredits(-3);
       }),
       description: 'Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.',

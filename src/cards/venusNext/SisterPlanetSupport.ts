@@ -24,7 +24,7 @@ export class SisterPlanetSupport implements IProjectCard {
       cardNumber: '244',
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(3));
+        b.production((pb) => pb.megacredits(3));
       }),
       description: 'Requires Venus and Earth tags. Increase your MC production 3 steps.',
     }

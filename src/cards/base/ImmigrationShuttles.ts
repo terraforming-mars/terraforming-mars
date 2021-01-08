@@ -21,7 +21,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
       metadata: {
         cardNumber: '198',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.megacredits(5)).br;
+          b.production((pb) => pb.megacredits(5)).br;
           b.text('1 VP for every 3rd City in play', CardRenderItemSize.TINY, true);
         }),
         description: 'Increase your MC production 5 steps.',

@@ -22,7 +22,7 @@ export class TundraFarming extends Card implements IProjectCard {
         cardNumber: '169',
         requirements: CardRequirements.builder((b) => b.temperature(-6)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) =>{
+          b.production((pb) =>{
             pb.plants(1).megacredits(2);
           }).plants(1);
         }),

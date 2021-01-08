@@ -22,7 +22,7 @@ export class HousePrinting {
     public metadata: CardMetadata = {
       cardNumber: 'P36',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.steel(1));
+        b.production((pb) => pb.steel(1));
       }),
       description: 'Increase your steel production 1 step.',
       victoryPoints: 1,

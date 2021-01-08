@@ -22,11 +22,11 @@ export class MiningGuild extends Card implements CorporationCard {
         description: 'You start with 30 MC, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(30).nbsp.steel(5).digit.nbsp.productionBox((pb) => pb.steel(1));
+          b.megacredits(30).nbsp.steel(5).digit.nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
             ce.effect('Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.', (eb) => {
               eb.steel(1).asterix().slash().titanium(1).asterix();
-              eb.startEffect.productionBox((pb) => pb.steel(1));
+              eb.startEffect.production((pb) => pb.steel(1));
             });
           });
         }),

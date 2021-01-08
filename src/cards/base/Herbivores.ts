@@ -34,7 +34,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
             eb.greenery().startEffect.animals(1);
           }).br;
           b.text('1 VP per 2 Animals on this card', CardRenderItemSize.TINY, true);
-          b.animals(1).productionBox((pb) => pb.minus().plants(1).any);
+          b.animals(1).production((pb) => pb.minus().plants(1).any);
         }),
         description: {
         // TODO (chosta): revert the original description once a solution for description space is found

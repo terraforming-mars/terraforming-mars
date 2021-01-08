@@ -21,7 +21,7 @@ export class SolarReflectors implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C38',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.heat(5).digit);
+        b.production((pb) => pb.heat(5).digit);
       }),
       description: 'Increase your heat production 5 steps.',
     }

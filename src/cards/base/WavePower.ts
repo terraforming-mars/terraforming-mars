@@ -29,7 +29,7 @@ export class WavePower implements IProjectCard {
       cardNumber: '139',
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(1));
+        b.production((pb) => pb.energy(1));
       }),
       description: 'Requires 3 ocean tiles. Increase your energy production 1 step.',
       victoryPoints: 1,

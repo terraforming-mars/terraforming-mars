@@ -28,7 +28,7 @@ export class MinorityRefuge implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C26',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(-2)).colonies(1);
+        b.production((pb) => pb.megacredits(-2)).colonies(1);
       }),
       description: 'Decrease your MC production 2 steps. Place a colony.',
     }

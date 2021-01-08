@@ -19,7 +19,7 @@ export class EarlySettlement extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P09',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.plants(1)).city();
+        b.production((pb) => pb.plants(1)).city();
       }),
       description: 'Increase your plant production 1 step. Place a city tile.',
     }

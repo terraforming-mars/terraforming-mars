@@ -22,7 +22,7 @@ export class NitrophilicMoss extends Card implements IProjectCard {
         cardNumber: '146',
         requirements: CardRequirements.builder((b) => b.oceans(3)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.plants(2);
           }).nbsp.minus().plants(2);
         }),

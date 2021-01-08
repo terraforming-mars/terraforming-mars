@@ -46,7 +46,7 @@ export class OceanFarm implements IProjectCard {
     cardNumber: 'A21',
     requirements: CardRequirements.builder((b) => b.oceans(4)),
     renderData: CardRenderer.builder((b) => {
-      b.productionBox((pb) => {
+      b.production((pb) => {
         pb.heat(1).br;
         pb.plants(1);
       }).nbsp.tile(TileType.OCEAN_FARM, false, true);

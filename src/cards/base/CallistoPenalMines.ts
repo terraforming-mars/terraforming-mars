@@ -19,7 +19,7 @@ export class CallistoPenalMines extends Card implements IProjectCard {
       metadata: {
         description: 'Increase your MC production 3 steps.',
         cardNumber: '082',
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
+        renderData: CardRenderer.builder((b) => b.production((pb) => {
           pb.megacredits(3);
         })),
         victoryPoints: 2,

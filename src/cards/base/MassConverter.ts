@@ -24,7 +24,7 @@ export class MassConverter extends Card implements IProjectCard {
           b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
           }).br;
-          b.productionBox((pb) => pb.energy(6));
+          b.production((pb) => pb.energy(6));
         }),
         description: 'Requires 5 science tags. Increase your energy production 6 steps.',
       },

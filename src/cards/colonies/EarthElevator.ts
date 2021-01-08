@@ -24,7 +24,7 @@ export class EarthElevator implements IProjectCard {
       description: 'Increase your titanium production 3 steps.',
       cardNumber: 'C08',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.titanium(3));
+        b.production((pb) => pb.titanium(3));
       }),
       victoryPoints: 4,
     };

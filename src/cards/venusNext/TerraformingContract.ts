@@ -24,7 +24,7 @@ export class TerraformingContract implements IProjectCard {
       cardNumber: '252',
       requirements: CardRequirements.builder((b) => b.tr(25)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(4));
+        b.production((pb) => pb.megacredits(4));
       }),
       description: 'Requires that you have at least 25 TR. Increase your MC production 4 steps.',
     }

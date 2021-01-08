@@ -30,7 +30,7 @@ export class Potatoes implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X29',
       renderData: CardRenderer.builder((b) => {
-        b.minus().plants(2).nbsp.productionBox((pb) => pb.megacredits(2));
+        b.minus().plants(2).nbsp.production((pb) => pb.megacredits(2));
       }),
       description: 'Lose 2 plants. Increase your MC production 2 steps.',
     }

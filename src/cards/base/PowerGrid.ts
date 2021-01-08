@@ -18,7 +18,7 @@ export class PowerGrid extends Card implements IProjectCard {
       metadata: {
         cardNumber: '102',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(1).slash().energy(1).played);
+          b.production((pb) => pb.energy(1).slash().energy(1).played);
         }),
         description: 'Increase your Energy production step for each Power tag you have, including this.',
       },

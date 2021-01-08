@@ -30,7 +30,7 @@ export class SnowAlgae implements IProjectCard {
       cardNumber: '211',
       requirements: CardRequirements.builder((b) => b.oceans(2)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.plants(1).heat(1);
         });
       }),

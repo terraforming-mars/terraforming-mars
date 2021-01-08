@@ -22,7 +22,7 @@ export class Worms extends Card implements IProjectCard {
         cardNumber: '129',
         requirements: CardRequirements.builder((b) => b.oxygen(4)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.plants(1).slash().microbes(2).played);
+          b.production((pb) => pb.plants(1).slash().microbes(2).played);
         }),
         description: 'Requires 4% oxygen. Increase your Plant production 1 step for every 2 Microbe tags you have, including this.',
       },

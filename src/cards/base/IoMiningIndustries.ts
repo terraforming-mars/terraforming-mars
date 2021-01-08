@@ -20,7 +20,7 @@ export class IoMiningIndustries extends Card implements IProjectCard {
       metadata: {
         cardNumber: '092',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.titanium(2).megacredits(2)).br;
+          b.production((pb) => pb.titanium(2).megacredits(2)).br;
           b.text('1 VP per Jovian tag you have.', CardRenderItemSize.TINY, true);
         }),
         description: 'Increase your titanium production 2 steps and your MC production 2 steps.',

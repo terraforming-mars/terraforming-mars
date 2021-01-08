@@ -22,7 +22,7 @@ export class UndergroundCity extends Card implements IProjectCard {
       metadata: {
         cardNumber: '032',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(2).br;
             pb.plus().steel(2);
           }).nbsp.city();

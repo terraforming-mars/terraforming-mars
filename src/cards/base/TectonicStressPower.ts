@@ -20,7 +20,7 @@ export class TectonicStressPower extends Card implements IProjectCard {
         cardNumber: '145',
         requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(3));
+          b.production((pb) => pb.energy(3));
         }),
         description: 'Requires 2 Science tags. Increase your Energy production 3 steps.',
         victoryPoints: 1,

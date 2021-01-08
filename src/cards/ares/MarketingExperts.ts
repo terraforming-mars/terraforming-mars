@@ -24,7 +24,7 @@ export class MarketingExperts implements IProjectCard {
       b.effect('When an ADJACENCY BONUS is collected from a tile you own, you gain 1MC.', (eb) => {
         eb.emptyTile().emptyTile('golden').startEffect.megacredits(1);
       }).br;
-      b.productionBox((pb) => pb.megacredits(1));
+      b.production((pb) => pb.megacredits(1));
     }),
     description: 'Increase your MC production 1 step.',
   }

@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
-import {SelectHowToPayForCard} from '../../inputs/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -20,7 +20,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       const playableCards = player.getPlayableCards(game).filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
 
       if (playableCards.length > 0) {
-        return new SelectHowToPayForCard(
+        return new SelectHowToPayForProjectCard(
           playableCards,
           player.getMicrobesCanSpend(),
           player.getFloatersCanSpend(),

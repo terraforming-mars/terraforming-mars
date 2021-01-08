@@ -40,7 +40,7 @@ import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './inputs/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -775,7 +775,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const selectedOptionInput = input.slice(1);
       this.runInput(game, selectedOptionInput, pi.options[optionIndex]);
       this.runInputCb(game, pi.cb());
-    } else if (pi instanceof SelectHowToPayForCard) {
+    } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
       const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
       const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
@@ -1133,7 +1133,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public playProjectCard(game: Game): PlayerInput {
-    return new SelectHowToPayForCard(
+    return new SelectHowToPayForProjectCard(
       this.getPlayableCards(game),
       this.getMicrobesCanSpend(),
       this.getFloatersCanSpend(),

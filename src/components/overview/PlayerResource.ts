@@ -1,5 +1,8 @@
 import Vue from 'vue';
+import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '../../constants';
 import {Resources} from '../../Resources';
+import {TurmoilModel} from '../../models/TurmoilModel';
+import {PartyName} from '../../turmoil/parties/PartyName';
 
 export const PlayerResource = Vue.component('player-resource', {
   props: {
@@ -12,9 +15,29 @@ export const PlayerResource = Vue.component('player-resource', {
     production: {
       type: Number,
     },
+    plantsAreProtected: {
+      type: Boolean || undefined,
+    },
+    steelValue: {
+      type: Number,
+    },
+    titaniumValue: {
+      type: Number,
+    },
+    turmoil: {
+      type: Object as () => TurmoilModel || undefined,
+    },
   },
   data: function() {
-    return {};
+    // TODO: Update logic after PoliticalAgendas merge
+    const unityTitaniumBonusActive: boolean = this.turmoil !== undefined && this.turmoil.ruling === PartyName.UNITY;
+
+    let playerTitaniumValueWithOffset: number = this.titaniumValue;
+    if (unityTitaniumBonusActive) playerTitaniumValueWithOffset -= 1;
+
+    return {
+      playerAdjustedTitaniumValue: playerTitaniumValueWithOffset,
+    };
   },
   methods: {
     mainCSS: function(): string {
@@ -27,6 +50,21 @@ export const PlayerResource = Vue.component('player-resource', {
       if (this.production > 0) return '+';
       return '';
     },
+    displayPlantsProtectedIcon: function(): boolean {
+      return this.type === Resources.PLANTS && this.plantsAreProtected;
+    },
+    isMetalUpgraded: function(): boolean {
+      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) || (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE);
+    },
+    getMetalBonus: function(): string {
+      if (this.type === Resources.STEEL) {
+        return `${this.steelValue}`;
+      } else if (this.type === Resources.TITANIUM) {
+        return `${this.titaniumValue}`;
+      } else {
+        return '';
+      }
+    },
   },
   template: `
         <div class="resource_item" :class="mainCSS()">
@@ -36,6 +74,8 @@ export const PlayerResource = Vue.component('player-resource', {
             </div>
             <div class="resource_item_prod">
                 <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
+                <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
+                <div v-if="isMetalUpgraded()" class="resource_icon--metalbonus" v-html="getMetalBonus()"></div>
             </div>
         </div>
     `,

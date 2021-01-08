@@ -17,7 +17,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from '../inputs/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../models/SpaceModel';
@@ -79,6 +79,7 @@ export class Server {
       phase: game.phase,
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
+      plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards, game),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(game),
@@ -266,14 +267,14 @@ function getWaitingFor(
       }
     }
     break;
-  case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
+  case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
-      (waitingFor as SelectHowToPayForCard).cards,
+      (waitingFor as SelectHowToPayForProjectCard).cards,
       false,
     );
-    playerInputModel.microbes = (waitingFor as SelectHowToPayForCard).microbes;
-    playerInputModel.floaters = (waitingFor as SelectHowToPayForCard).floaters;
-    playerInputModel.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
+    playerInputModel.microbes = (waitingFor as SelectHowToPayForProjectCard).microbes;
+    playerInputModel.floaters = (waitingFor as SelectHowToPayForProjectCard).floaters;
+    playerInputModel.canUseHeat = (waitingFor as SelectHowToPayForProjectCard).canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
@@ -375,6 +376,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       name: player.name,
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
+      plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards, game),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(game),

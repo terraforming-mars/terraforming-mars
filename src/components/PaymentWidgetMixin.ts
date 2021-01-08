@@ -1,4 +1,4 @@
-// Common code for SelectHowToPay and SelectHowToPayForCard
+// Common code for SelectHowToPay and SelectHowToPayForProjectCard
 import {CardName} from '../CardName';
 import {CardModel} from '../models/CardModel';
 import {ResourceType} from '../ResourceType';

@@ -725,7 +725,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                                 </label>
             
                                                 <label class="form-label">
-                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
+                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
                                                     <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
                                                 </label>
                                             </template>

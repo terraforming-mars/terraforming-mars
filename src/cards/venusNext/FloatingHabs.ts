@@ -41,7 +41,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
 
       // add to itself if no other available target
       if (floaterCards.length === 1) {
-        game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+        game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
         LogHelper.logAddResource(game, player, floaterCards[0]);
         player.addResourceTo(floaterCards[0], 1);
         return undefined;
@@ -52,7 +52,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         'Add floater',
         floaterCards,
         (foundCards: Array<ICard>) => {
-          game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for Floating Habs action'));
+          game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
           LogHelper.logAddResource(game, player, foundCards[0]);
           player.addResourceTo(foundCards[0], 1);
           return undefined;
@@ -63,9 +63,8 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
       cardNumber: '225',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 2 MC to add 1 Floater to ANY card', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix();
-          eb.description('Action: spend 2 MC to add 1 Floater to ANY card');
         }).br;
         b.text('1 VP for every 2nd Floater on this card', CardRenderItemSize.TINY, true);
       }),

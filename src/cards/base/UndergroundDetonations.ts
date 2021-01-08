@@ -20,7 +20,7 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
       return player.canAfford(10);
     }
     public action(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 10, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
       player.addProduction(Resources.HEAT, 2);
       return undefined;
     }
@@ -30,9 +30,8 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '202',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 10MC to increase your heat production 2 steps.', (eb) => {
           eb.megacredits(10).startAction.productionBox((pb)=>pb.heat(2));
-          eb.description('Action: Spend 10MC to increase your heat production 2 steps.');
         });
       }),
     }

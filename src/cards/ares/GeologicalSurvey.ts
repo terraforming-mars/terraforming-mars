@@ -33,10 +33,9 @@ export class GeologicalSurvey implements IProjectCard {
     cardNumber: 'A09',
     requirements: CardRequirements.builder((b) => b.greeneries(5).max()),
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.effect('When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.', (eb) => {
         eb.emptyTile().startEffect;
         eb.plus().steel(1).titanium(1).heat(1);
-        eb.description('Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.');
       });
     }),
     description: 'Requires 5 or fewer greeneries on Mars.',

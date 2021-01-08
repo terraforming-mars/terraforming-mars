@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -6,34 +7,36 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ReleaseOfInertGases implements IProjectCard {
-    public cost = 14;
-    public tags = [];
-    public name = CardName.RELEASE_OF_INERT_GASES;
-    public cardType = CardType.EVENT;
-    public hasRequirements = false;
+export class ReleaseOfInertGases extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.EVENT,
+      name: CardName.RELEASE_OF_INERT_GASES,
+      cost: 14,
+      hasRequirements: false,
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2);
-      }
+      metadata: {
+        cardNumber: '036',
+        renderData: CardRenderer.builder((b) => {
+          b.tr(2);
+        }),
+        description: 'Raise your terraforming rating 2 steps.',
+      },
+    });
+  }
 
-      return true;
+  public canPlay(player: Player, game: Game): boolean {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2);
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
-      return undefined;
-    }
+    return true;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: '036',
-      renderData: CardRenderer.builder((b) => {
-        b.tr(2);
-      }),
-      description: 'Raise your terraforming rating 2 steps.',
-    }
+  public play(player: Player, game: Game) {
+    player.increaseTerraformRatingSteps(2, game);
+    return undefined;
+  }
 }

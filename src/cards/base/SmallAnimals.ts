@@ -1,6 +1,7 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -8,20 +9,40 @@ import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
-export class SmallAnimals implements IActionCard, IProjectCard, IResourceCard {
-    public cost = 6;
-    public tags = [Tags.ANIMAL];
-    public name = CardName.SMALL_ANIMALS;
-    public cardType = CardType.ACTIVE;
-    public resourceType = ResourceType.ANIMAL;
-    public resourceCount: number = 0;
+export class SmallAnimals extends Card implements IActionCard, IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.SMALL_ANIMALS,
+      tags: [Tags.ANIMAL],
+      cost: 6,
+      resourceType: ResourceType.ANIMAL,
+
+      metadata: {
+        cardNumber: '054',
+        requirements: CardRequirements.builder((b) => b.oxygen(6)),
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 Animal to this card.', (eb) => {
+            eb.empty().startAction.animals(1);
+          }).br;
+          b.productionBox((pb) => pb.minus().plants(1).any).br;
+          b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true);
+        }),
+        description: {
+          text: 'Requires 6% oxygen. Decrease any Plant production 1 step.',
+          align: 'left',
+        },
+        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
+      },
+    });
+  }
+    public resourceCount = 0;
     public canPlay(player: Player, game: Game): boolean {
       return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
@@ -38,22 +59,5 @@ export class SmallAnimals implements IActionCard, IProjectCard, IResourceCard {
     public action(player: Player) {
       player.addResourceTo(this);
       return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: '054',
-      requirements: CardRequirements.builder((b) => b.oxygen(6)),
-      renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
-          eb.empty().startAction.animals(1);
-          eb.description('Action: Add 1 Animal to this card.');
-        }).br;
-        b.productionBox((pb) => pb.minus().plants(1).any).br;
-        b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true);
-      }),
-      description: {
-        text: 'Requires 6% oxygen. Decrease any Plant production 1 step.',
-        align: 'left',
-      },
-      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
     }
 }

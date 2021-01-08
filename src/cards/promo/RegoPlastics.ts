@@ -29,9 +29,8 @@ export class RegoPlastics implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X10',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.effect('Your steel resources are worth 1 MC extra.', (eb) => {
           eb.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
-          eb.description('Effect: Your steel resources are worth 1 MC extra.');
         });
       }),
       victoryPoints: 1,

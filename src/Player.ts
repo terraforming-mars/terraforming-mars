@@ -40,7 +40,7 @@ import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './inputs/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -58,6 +58,7 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
+import {range} from './utils/utils';
 
 export type PlayerId = string;
 
@@ -162,7 +163,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public isCorporation(corporationName: CardName): boolean {
-    return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
+    return this.corporationCard?.name === corporationName;
   }
 
   public getTitaniumValue(game: Game): number {
@@ -212,7 +213,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil Reds capacity
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, false, false, 'Select how to pay for TR increase'));
+        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
         // Cannot pay Reds, will not increase TR
         return;
@@ -774,7 +775,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const selectedOptionInput = input.slice(1);
       this.runInput(game, selectedOptionInput, pi.options[optionIndex]);
       this.runInputCb(game, pi.cb());
-    } else if (pi instanceof SelectHowToPayForCard) {
+    } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
       const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
       const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
@@ -998,7 +999,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const payForCards = () => {
       const purchasedCardsCost = this.cardCost * selectedCards.length;
       if (selectedCards.length > 0) {
-        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, false, false, 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'));
+        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, {title: 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'}));
       }
       dealtCards.forEach((card) => {
         if (selectedCards.find((c) => c.name === card.name)) {
@@ -1162,7 +1163,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public playProjectCard(game: Game): PlayerInput {
-    return new SelectHowToPayForCard(
+    return new SelectHowToPayForProjectCard(
       this.getPlayableCards(game),
       this.getMicrobesCanSpend(),
       this.getFloatersCanSpend(),
@@ -1303,6 +1304,24 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
+  public drawCard(game: Game, n = 1): void {
+    range(n).forEach(() => {
+      this.cardsInHand.push(game.dealer.dealCard());
+    });
+  }
+
+  public get availableHeat(): number {
+    return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
+  }
+
+  public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
+    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
+    }
+    this.heat -= amount;
+    return cb();
+  }
+
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
     const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
@@ -1317,11 +1336,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.defer(new SelectHowToPayDeferred(
               this,
               9 - this.colonyTradeDiscount,
-              false,
-              false,
-              'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
-              () => {
-                colony.trade(this, game);
+              {
+                title: 'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
+                afterPay: () => {
+                  colony.trade(this, game);
+                },
               },
             ));
           } else if (payWith === Resources.ENERGY) {
@@ -1407,7 +1426,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
       'Pay',
       () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
+        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Kelvinists action'}));
         this.addProduction(Resources.ENERGY);
         this.addProduction(Resources.HEAT);
         game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
@@ -1421,13 +1440,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
       'Pay',
       () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
+        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Scientists draw'}));
         this.turmoilScientistsActionUsed = true;
-        this.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-        );
+        this.drawCard(game, 3);
         game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
         return undefined;
       },
@@ -1435,16 +1450,12 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private convertHeatIntoTemperature(game: Game): PlayerInput {
-    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
-      return (this.corporationCard as StormCraftIncorporated).convertHeatIntoTemperature(
-        game, this,
-      );
-    }
     return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      game.increaseTemperature(this, 1);
-      this.heat -= constants.HEAT_FOR_TEMPERATURE;
-      game.log('${0} converted heat into temperature', (b) => b.player(this));
-      return undefined;
+      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
+        game.increaseTemperature(this, 1);
+        game.log('${0} converted heat into temperature', (b) => b.player(this));
+        return undefined;
+      });
     });
   }
 
@@ -1454,7 +1465,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      game.defer(new SelectHowToPayDeferred(this, 8, false, false, 'Select how to pay for milestone'));
+      game.defer(new SelectHowToPayDeferred(this, 8, {title: 'Select how to pay for milestone'}));
       game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1462,7 +1473,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private fundAward(award: IAward, game: Game): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), false, false, 'Select how to pay for award'));
+      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       game.fundAward(this, award);
       return undefined;
     });
@@ -1659,11 +1670,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (standardProjects.cards.length >= 1) {
       options.push(standardProjects);
     }
-
-    const sellPatents = new SellPatents();
-    if (sellPatents.canAct(this)) {
-      options.push(sellPatents.action(this, game));
-    }
   }
 
   public takeAction(game: Game): void {
@@ -1794,9 +1800,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    const hasEnoughHeat = this.heat >= constants.HEAT_FOR_TEMPERATURE ||
-      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-        this.getResourcesOnCorporation() * 2 + this.heat >= constants.HEAT_FOR_TEMPERATURE);
+    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
 
     const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 
@@ -1886,6 +1890,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.options.push(
       this.passOption(game),
     );
+
+    // Sell patents
+    const sellPatents = new SellPatents();
+    if (sellPatents.canAct(this)) {
+      action.options.push(sellPatents.action(this, game));
+    }
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {

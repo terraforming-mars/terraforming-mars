@@ -16,9 +16,8 @@ export class EarthCatapult extends Card implements IProjectCard {
       metadata: {
         cardNumber: '070',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.effect('When you play a card, you pay 2 MC less for it.', (eb) => {
             eb.empty().startEffect.megacredits(-2);
-            eb.description('Effect: When you play a card, you pay 2 MC less for it.');
           });
         }),
         victoryPoints: 2,

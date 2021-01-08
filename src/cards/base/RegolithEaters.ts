@@ -1,6 +1,7 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -12,16 +13,33 @@ import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
-    public cost = 13;
-    public tags = [Tags.SCIENCE, Tags.MICROBE];
-    public name = CardName.REGOLITH_EATERS;
-    public cardType = CardType.ACTIVE;
-    public resourceType = ResourceType.MICROBE;
-    public resourceCount: number = 0;
+export class RegolithEaters extends Card implements IActionCard, IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.REGOLITH_EATERS,
+      tags: [Tags.SCIENCE, Tags.MICROBE],
+      cost: 13,
+      resourceType: ResourceType.MICROBE,
+
+      metadata: {
+        cardNumber: '033',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 Microbe to this card.', (eb) => {
+            eb.empty().startAction.microbes(1);
+          }).br;
+          b.or().br;
+          b.action('Remove 2 Microbes from this card to raise oxygen level 1 step.', (eb) => {
+            eb.microbes(2).startAction.oxygen(1);
+          }).br;
+        }),
+      },
+    });
+  }
+
+    public resourceCount = 0;
 
     public play(_player: Player, _game: Game) {
       return undefined;
@@ -55,20 +73,5 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
 
       if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: '033',
-      renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
-          eb.empty().startAction.microbes(1);
-          eb.description('Action: Add 1 Microbe to this card.');
-        }).br;
-        b.or().br;
-        b.effectBox((eb) => {
-          eb.microbes(2).startAction.oxygen(1);
-          eb.description('Action: Remove 2 Microbes from this card to raise oxygen level 1 step.');
-        }).br;
-      }),
     }
 }

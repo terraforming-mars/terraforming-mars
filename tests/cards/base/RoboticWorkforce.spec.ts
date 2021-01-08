@@ -121,7 +121,6 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Has all building cards set up', function() {
-    const roboticWorkforce = card;
     const researchCoordination = new ResearchCoordination();
     const gameOptions = setCustomGameOptions();
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
@@ -173,22 +172,22 @@ describe('RoboticWorkforce', function() {
           // Now if any of the production changed, that means the card has a production box
           if (productions.filter((prod) => player.getProduction(prod) !== 2).length > 0) {
             if (card.cardType === CardType.CORPORATION) {
-              expect(roboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is missing in corporationCardsNames').is.true;
+              expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is missing in corporationCardsNames').is.true;
             } else {
-              expect(roboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is missing in builderCardsNames').is.true;
+              expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is missing in builderCardsNames').is.true;
             }
           } else {
             if (card.cardType === CardType.CORPORATION) {
-              expect(roboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
+              expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
             } else {
-              expect(roboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
+              expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
             }
           }
         } else {
           if (card.cardType === CardType.CORPORATION) {
-            expect(roboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
+            expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
           } else {
-            expect(roboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
+            expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
           }
         }
       });

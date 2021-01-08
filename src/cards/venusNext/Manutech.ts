@@ -25,9 +25,8 @@ export class Manutech implements CorporationCard {
         b.br.br;
         b.productionBox((pb) => pb.steel(1)).nbsp.megacredits(35);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('For each step you increase the production of a resource, including this, you also gain that resource.', (eb) => {
             eb.productionBox((pb) => pb.wild(1)).startEffect.wild(1);
-            eb.description('Effect: For each step you increase the production of a resource, including this, you also gain that resource.');
           });
         });
       }),

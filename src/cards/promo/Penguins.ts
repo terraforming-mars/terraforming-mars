@@ -46,9 +46,8 @@ export class Penguins implements IActionCard, IProjectCard, IResourceCard {
       cardNumber: '212',
       requirements: CardRequirements.builder((b) => b.oceans(8)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
-          eb.description('Action: Add 1 Animal to this card.');
         }).br;
         b.text('1 VP for each animal on this card.', CardRenderItemSize.TINY, true);
       }),

@@ -45,7 +45,6 @@ export class DrawCards implements DeferredAction {
       'Select',
       cards,
       (selected: Array<IProjectCard>) => {
-        selected = selected.slice(0, this.options.amount);
         this.drawSelectedDiscardOthers(selected, cards);
         this.log(selected);
         this.runCb();
@@ -62,7 +61,6 @@ export class DrawCards implements DeferredAction {
       howManyCanAfford === 0 ? 'Ok' : 'Buy',
       cards,
       (selected: Array<IProjectCard>) => {
-        selected = selected.slice(0, howManyCanAfford);
         this.drawSelectedDiscardOthers(selected, cards);
         if (selected.length > 0) {
           this.game.defer(new SelectHowToPayDeferred(

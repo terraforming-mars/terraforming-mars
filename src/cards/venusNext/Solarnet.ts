@@ -25,7 +25,7 @@ export class Solarnet implements IProjectCard {
     }
     public metadata: CardMetadata = {
       cardNumber: '245',
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.unity()),
       renderData: CardRenderer.builder((b) => {
         b.cards(2);
       }),

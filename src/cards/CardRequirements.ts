@@ -105,6 +105,13 @@ class Builder {
     return this;
   }
 
+  public unity(): Builder {
+    this.reqs.push(new TagCardRequirement(Tags.VENUS, -1));
+    this.reqs.push(new TagCardRequirement(Tags.EARTH, -1));
+    this.reqs.push(new TagCardRequirement(Tags.JOVIAN, -1));
+    return this;
+  }
+
   public production(resource: Resources, amount: number = -1): Builder {
     this.reqs.push(new ProductionCardRequirement(resource, amount));
     return this;

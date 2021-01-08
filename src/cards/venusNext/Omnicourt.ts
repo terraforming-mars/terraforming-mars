@@ -33,7 +33,7 @@ export class Omnicourt implements IProjectCard {
 
     public metadata: CardMetadata = {
       cardNumber: '241',
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.unity()),
       renderData: CardRenderer.builder((b) => {
         b.tr(2);
       }),

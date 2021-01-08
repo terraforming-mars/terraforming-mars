@@ -201,6 +201,11 @@ describe('CardRequirement', function() {
       'Party leader',
     );
   });
+  it('unity', function() {
+    expect(CardRequirements.builder((b) => b.unity()).getRequirementsText()).to.equal(
+      'Venus Earth Jovian',
+    );
+  });
   it('Throws error on max w/o requirement', function() {
     expect(() => {
       CardRequirements.builder((b) => b.max());

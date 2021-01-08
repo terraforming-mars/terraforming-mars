@@ -14,7 +14,6 @@ import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
@@ -74,7 +73,7 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
           eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);
         }).br;
         b.production((pb) => pb.megacredits(2)).city().asterix();
-        b.text('1 VP for every 3rd Floater on this card.', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for every 3rd Floater on this card.');
       }),
       description: {
         text: 'Requires 2 science tags. Increase your MC production 2 steps. Place a City tile ON THE RESERVED AREA',

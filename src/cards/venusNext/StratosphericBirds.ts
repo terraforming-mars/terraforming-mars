@@ -10,7 +10,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -59,7 +58,7 @@ export class StratosphericBirds implements IActionCard, IProjectCard, IResourceC
           eb.empty().startAction.animals(1);
         }).br;
         b.minus().floaters(1).br;
-        b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for each Animal on this card.');
       }),
       description: {
         text: 'Requires Venus 12% and that you spend 1 Floater from any card.',

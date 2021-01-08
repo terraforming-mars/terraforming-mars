@@ -3,7 +3,6 @@ import {CardName} from '../../CardName';
 import {CommercialDistrict} from '../base/CommercialDistrict';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../TileType';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 
@@ -20,7 +19,7 @@ export class CommercialDistrictAres extends CommercialDistrict {
             pb.minus().energy(1).br;
             pb.plus().megacredits(4).br;
           }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;
-          b.text('Place this tile which grants an ADJACENCY BONUS of 2MC. 1 vp per adjacent city', CardRenderItemSize.TINY, true);
+          b.vpText('Place this tile which grants an ADJACENCY BONUS of 2MC. 1 vp per adjacent city');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
       });

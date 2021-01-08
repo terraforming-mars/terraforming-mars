@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class SecurityFleet extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -25,7 +24,7 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
           b.action('Spend 1 titanium to add 1 fighter resource to this card.', (eb) => {
             eb.titanium(1).startAction.fighter();
           }).br;
-          b.text('1 VP for each fighter resource on this card.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP for each fighter resource on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.fighter(1, 1),
       },

@@ -431,6 +431,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         turmoilExtension: gameReq.turmoil,
         aresExtension: gameReq.aresExtension,
         aresHazards: true, // Not a runtime option.
+        politicalAgendasExtension: gameReq.politicalAgendasExtension,
         promoCardsOption: gameReq.promoCardsOption,
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,

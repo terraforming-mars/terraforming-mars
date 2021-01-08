@@ -56,6 +56,8 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
+import {TurmoilHandler} from './turmoil/TurmoilHandler';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {range} from './utils/utils';
@@ -126,7 +128,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyVictoryPoints: number = 0;
 
   // Turmoil
-  public turmoilScientistsActionUsed: boolean = false;
+  public turmoilPolicyActionUsed: boolean = false;
+  public politicalAgendasActionUsedCount: number = 0;
 
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   public oceanBonus: number = constants.OCEAN_BONUS;
@@ -134,6 +137,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Custom cards
   // Leavitt Station.
   public scienceTagCount: number = 0;
+  // PoliticalAgendas Scientists P4
+  public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
   public plantsNeededForGreenery: number = 8;
   // Lawsuit
@@ -181,7 +186,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public getSteelValue(): number {
+  public getSteelValue(game: Game): number {
+    // TODO: Move policyIds to enum
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -511,6 +518,12 @@ export class Player implements ISerializable<SerializedPlayer> {
         requirementsBonus += playedCard.getRequirementBonus(this, game);
       }
     }
+
+    // PoliticalAgendas Scientists P2 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
+      requirementsBonus += 2;
+    }
+
     return requirementsBonus;
   }
 
@@ -628,6 +641,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Leavitt Station hook
     if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
       tagCount += this.scienceTagCount;
+    }
+
+    // PoliticalAgendas Scientists P4 hook
+    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
+      tagCount += 1;
     }
 
     if (tag === Tags.WILDCARD) {
@@ -872,7 +890,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
     this.tradesThisTurn = 0;
-    this.turmoilScientistsActionUsed = false;
+    this.turmoilPolicyActionUsed = false;
+    this.politicalAgendasActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
     this.heat += this.energy;
     this.heat += this.heatProduction;
@@ -1077,6 +1096,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     });
 
+    // PoliticalAgendas Unity P4 hook
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+      cost -= 2;
+    }
+
     return Math.max(cost, 0);
   }
 
@@ -1268,6 +1292,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
+    TurmoilHandler.applyOnCardPlayedEffect(this, game, selectedCard);
+
     for (const somePlayer of game.getPlayers()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
@@ -1416,34 +1442,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.addGreenery(this, space.id);
         this.plants -= this.plantsNeededForGreenery;
         game.log('${0} converted plants into a greenery', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
-  private turmoilKelvinistsAction(game: Game): PlayerInput {
-    return new SelectOption(
-      'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
-      'Pay',
-      () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Kelvinists action'}));
-        this.addProduction(Resources.ENERGY);
-        this.addProduction(Resources.HEAT);
-        game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
-  private turmoilScientistsAction(game: Game): PlayerInput {
-    return new SelectOption(
-      'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
-      'Pay',
-      () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, {title: 'Select how to pay for Turmoil Scientists draw'}));
-        this.turmoilScientistsActionUsed = true;
-        this.drawCard(game, 3);
-        game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
         return undefined;
       },
     );
@@ -1813,17 +1811,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    // Turmoil Scientists capacity
-    if (this.canAfford(10) &&
-      PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS) &&
-      !this.turmoilScientistsActionUsed) {
-      action.options.push(this.turmoilScientistsAction(game));
-    }
-
-    // Turmoil Kelvinists capacity
-    if (this.canAfford(10) && PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS)) {
-      action.options.push(this.turmoilKelvinistsAction(game));
-    }
+    TurmoilHandler.addPlayerAction(this, game, action.options);
 
     if (this.canAfford(8) && !game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();
@@ -2011,7 +1999,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       colonyTradeDiscount: this.colonyTradeDiscount,
       colonyVictoryPoints: this.colonyVictoryPoints,
       // Turmoil
-      turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
+      turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
+      politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
+      hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
       victoryPointsBreakdown: this.victoryPointsBreakdown,
       oceanBonus: this.oceanBonus,
       // Custom cards
@@ -2078,7 +2068,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       player.titaniumProduction = d.titaniumProduction;
       player.titaniumValue = d.titaniumValue;
       player.tradesThisTurn = d.tradesThisTurn;
-      player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+      player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+      player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
       player.victoryPointsBreakdown = d.victoryPointsBreakdown;
     }
 
@@ -2181,7 +2172,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.fleetSize > 0) this.fleetSize--;
   }
 
-  public canPlayColonyPlacementCard(game: Game): boolean {
+  public hasAvailableColonyTileToBuildOn(game: Game): boolean {
+    if (game.gameOptions.coloniesExtension === false) return false;
+
     let colonyTilesAlreadyBuiltOn: number = 0;
 
     game.colonies.forEach((colony) => {

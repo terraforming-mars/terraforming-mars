@@ -7,7 +7,6 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class ImmigrationShuttles extends Card implements IProjectCard {
@@ -22,7 +21,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
         cardNumber: '198',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(5)).br;
-          b.text('1 VP for every 3rd City in play', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP for every 3rd City in play');
         }),
         description: 'Increase your MC production 5 steps.',
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),

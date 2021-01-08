@@ -543,6 +543,10 @@ class Builder {
     return this;
   }
 
+  public vpText(text: string): Builder {
+    return this.text(text, CardRenderItemSize.TINY, true);
+  }
+
   public get br(): Builder {
     const newRow: Array<ItemType> = [];
     this._data.push(newRow);

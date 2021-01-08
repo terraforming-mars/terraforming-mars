@@ -11,7 +11,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -29,7 +28,7 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
           b.action('Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.', (eb) => {
             eb.megacredits(12).titanium(1).brackets.startAction.oceans(1);
           }).br;
-          b.text('1 VP for each Jovian tag you have.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP for each Jovian tag you have.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },

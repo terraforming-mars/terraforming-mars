@@ -398,7 +398,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           obj.name,
           obj.color,
           obj.beginner,
-          obj.handicap,
+          Number(obj.handicap), // For some reason handicap is coming up a string.
           generateRandomId(),
         );
       });

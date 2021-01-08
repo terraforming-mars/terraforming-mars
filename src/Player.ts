@@ -2040,7 +2040,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Only use useObjectAssign in tests.
   // TODO(kberg): Remove useObjectAssign by 2020-02-01
   public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
-    const player = new Player(d.name, d.color, d.beginner, d.handicap, d.id);
+    const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
     if (useObjectAssign) {

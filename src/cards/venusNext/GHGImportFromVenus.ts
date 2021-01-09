@@ -36,7 +36,7 @@ export class GHGImportFromVenus implements IProjectCard {
       description: 'Raise Venus 1 step. Increase your heat production 3 steps.',
       cardNumber: '228',
       renderData: CardRenderer.builder((b) => {
-        b.venus(1).productionBox((pb) => {
+        b.venus(1).production((pb) => {
           pb.heat(3);
         });
       }),

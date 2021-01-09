@@ -1,3 +1,4 @@
+import {CardName} from './CardName';
 import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';
@@ -42,27 +43,7 @@ export class LogHelper {
   }
 
   static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
-    let type : string;
-
-    switch (tileType) {
-    case TileType.GREENERY:
-      type = 'greenery tile';
-      break;
-
-    case TileType.CITY:
-      type = 'city tile';
-      break;
-
-    case TileType.OCEAN:
-      type = 'ocean tile';
-      break;
-
-    default:
-      type = 'special tile';
-      break;
-    }
-
-    this.logBoardTileAction(game, player, space, type);
+    this.logBoardTileAction(game, player, space, TileType.toString(tileType) + ' tile');
   }
 
   static logBoardTileAction(game: Game, player: Player, space: ISpace, description: string, action: string = 'placed') {
@@ -92,9 +73,44 @@ export class LogHelper {
     game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(game: Game, discardedCards: Array<ICard>) {
-    game.log(discardedCards.length + ' card(s) were discarded', (b) => {
-      discardedCards.forEach((card) => b.card(card));
+  static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
+    game.log(cards.length + ' card(s) were discarded', (b) => {
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+    });
+  }
+
+  static logDrawnCards(game: Game, player: Player, cards: Array<ICard> | Array<CardName>) {
+    // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
+    let message = '${0} drew ';
+    if (cards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let i = 0, length = cards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + 1) + '}';
+      }
+    }
+    game.log(message, (b) => {
+      b.player(player);
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
     });
   }
 }

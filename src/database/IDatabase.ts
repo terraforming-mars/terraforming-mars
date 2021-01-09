@@ -38,7 +38,7 @@ export interface IGameData {
  * in the game. Why, I have no idea, says kberg.
  */
 
-export type DbLoadCallback = (err: any, game: Game | undefined) => void
+export type DbLoadCallback<T> = (err: any, game: T | undefined) => void
 
 export interface IDatabase {
 
@@ -96,13 +96,12 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void;
+    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void;
 
     /**
-     * The meat behind cloning a game. Load a game at save point 0,
-     * and provides it in the callback.
+     * Load a game at save point 0, and provide it in the callback.
      */
-    restoreReferenceGame(game_id: GameId, cb: DbLoadCallback): void;
+    loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>): void;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.

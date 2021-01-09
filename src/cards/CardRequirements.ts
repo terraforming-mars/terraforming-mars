@@ -14,10 +14,16 @@ export class CardRequirements {
   }
   public getRequirementsText(): string {
     const reqTexts: Array<string> = this.requirements.map((req) => req.getLabel());
+    if (this.hasAny()) {
+      reqTexts.unshift('Any');
+    }
     return reqTexts.join(' ');
   }
   public hasMax(): boolean {
     return this.requirements.some((req) => req.isMax);
+  }
+  public hasAny(): boolean {
+    return this.requirements.some((req) => req.isAny);
   }
   public hasParty(): boolean {
     return this.requirements.some((req) => req instanceof PartyCardRequirement);
@@ -69,8 +75,8 @@ class Builder {
     return this;
   }
 
-  public forests(amount: number = -1): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.FORESTS, amount));
+  public greeneries(amount: number = -1): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount));
     return this;
   }
 
@@ -120,6 +126,15 @@ class Builder {
       throw new Error('Called max without a CardRequirement.');
     }
     this.reqs.push(req.max());
+    return this;
+  }
+
+  public any(): Builder {
+    const req = this.reqs.pop();
+    if (req === undefined) {
+      throw new Error('Called any without a CardRequirement.');
+    }
+    this.reqs.push(req.any());
     return this;
   }
 }

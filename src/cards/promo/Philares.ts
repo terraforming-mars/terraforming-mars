@@ -124,10 +124,9 @@ export class Philares implements CorporationCard {
       renderData: CardRenderer.builder((b) => {
         b.megacredits(47).greenery().secondaryTag(AltSecondaryTag.OXYGEN);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].', (eb) => {
             eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;
             eb.emptyTile('normal', CardRenderItemSize.SMALL).startEffect.wild(1);
-            eb.description('Effect: Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].');
           });
         });
       }),

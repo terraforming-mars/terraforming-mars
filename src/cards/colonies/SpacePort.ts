@@ -41,7 +41,7 @@ export class SpacePort implements IProjectCard {
       cardNumber: 'C39',
       requirements: CardRequirements.builder((b) => b.colonies()),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(1).br;
           pb.plus().megacredits(4);
         }).nbsp.city().br;

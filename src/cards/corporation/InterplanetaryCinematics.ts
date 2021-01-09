@@ -23,9 +23,8 @@ export class InterplanetaryCinematics extends Card implements CorporationCard {
           b.br.br.br;
           b.megacredits(30).nbsp.steel(20).digit;
           b.corpBox('effect', (ce) => {
-            ce.effectBox((eb) => {
+            ce.effect('Each time you play an event, you gain 2 MC.', (eb) => {
               eb.event().played.startEffect.megacredits(2);
-              eb.description('Effect: Each time you play an event, you gain 2 MC.');
             });
           });
         }),

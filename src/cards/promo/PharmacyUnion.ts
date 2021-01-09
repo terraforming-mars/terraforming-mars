@@ -1,4 +1,5 @@
 import {Tags} from '../Tags';
+import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../CardName';
@@ -28,11 +29,9 @@ export class PharmacyUnion implements CorporationCard {
 
     public play(player: Player, game: Game) {
       this.resourceCount = 2;
-
-      player.cardsInHand.push(game.drawCardsByTag(Tags.SCIENCE, 1)[0]);
-      const drawnCard = game.getCardsInHandByTag(player, Tags.SCIENCE).slice(-1)[0];
-
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+      const cards = game.drawCardsByTag(Tags.SCIENCE, 1);
+      player.cardsInHand.push(...cards);
+      LogHelper.logDrawnCards(game, player, cards);
 
       return undefined;
     }
@@ -152,15 +151,13 @@ export class PharmacyUnion implements CorporationCard {
         b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
         b.corpBox('effect', (ce) => {
           ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effectBox((eb) => {
+          ce.effect(undefined, (eb) => {
             eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
-            eb.description(undefined);
           });
           ce.vSpace();
-          ce.effectBox((eb) => {
+          ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
             eb.science(1).played.startEffect.minus().disease();
             eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
-            eb.description('Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR');
           });
         });
       }),

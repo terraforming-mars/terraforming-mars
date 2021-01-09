@@ -3,7 +3,6 @@ import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Game} from '../src/Game';
 import {Unity} from '../src/turmoil/parties/Unity';
-import {Greens} from '../src/turmoil/parties/Greens';
 import {MarsFirst} from '../src/turmoil/parties/MarsFirst';
 import {Phase} from '../src/Phase';
 import {OrOptions} from '../src/inputs/OrOptions';
@@ -24,6 +23,8 @@ import {EarthCatapult} from '../src/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../src/cards/base/QuantumExtractor';
 import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
+import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
+import {IParty} from '../src/turmoil/parties/IParty';
 import {Greenery} from '../src/cards/standardProjects/Greenery';
 
 describe('Turmoil', function() {
@@ -40,6 +41,7 @@ describe('Turmoil', function() {
 
   it('Should initialize with right defaults', function() {
     expect(turmoil.chairman).to.eq('NEUTRAL');
+    expect(turmoil.rulingParty.name).to.eq(PartyName.GREENS);
   });
 
   it('Correctly send delegate', function() {
@@ -122,22 +124,14 @@ describe('Turmoil', function() {
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
   });
 
-  it('Check ruling policy', function() {
-    turmoil.rulingParty = new Unity();
+  it('Check ruling policy: Unity', function() {
+    setRulingParty(turmoil, game, new Unity());
     game.phase = Phase.ACTION;
     expect(player.getTitaniumValue(game)).to.eq(4);
-
-    turmoil.rulingParty = new Greens();
-    game.addGreenery(player, '10');
-    expect(player.megaCredits).to.eq(4);
-
-    turmoil.rulingParty = new MarsFirst();
-    game.addGreenery(player, '11');
-    expect(player.steel).to.eq(1);
   });
 
   it('Does not give Mars First bonus for World Government terraforming', function() {
-    turmoil.rulingParty = new MarsFirst();
+    setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming(game);
@@ -150,7 +144,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
     const availableStandardProjects = player.getAvailableStandardProjects(game);
 
@@ -159,7 +153,7 @@ describe('Turmoil', function() {
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
     expect(new Greenery().canAct(player, game)).equal(false);
 
@@ -168,7 +162,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
     const jovianEmbassy = new JovianEmbassy();
@@ -183,7 +177,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 25;
     const iceAsteroid = new IceAsteroid();
     const protectedValley = new ProtectedValley();
@@ -198,7 +192,7 @@ describe('Turmoil', function() {
   });
 
   it('Applies card discounts when checking canPlay while Reds are ruling', function() {
-    turmoil.rulingParty = new Reds();
+    setRulingParty(turmoil, game, new Reds());
     const nitrogenFromTitan = new NitrogenFromTitan();
 
     player.megaCredits = 29;
@@ -266,6 +260,7 @@ describe('Turmoil', function() {
       },
       'distantGlobalEvent': {'name': 'Aquifer Released by Public Council', 'description': 'First player places an ocean tile. Gain 1 plant and 1 steel per influence.', 'revealedDelegate': 'Mars First', 'currentDelegate': 'Greens'},
       'commingGlobalEvent': {'name': 'Solar Flare', 'description': 'Lose 3 MC for each space tag (max 5, then reduced by influence).', 'revealedDelegate': 'Unity', 'currentDelegate': 'Kelvinists'},
+      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
@@ -310,6 +305,7 @@ describe('Turmoil', function() {
         'discarded': ['Pandemic']},
       'distantGlobalEvent': 'Eco Sabotage',
       'comingGlobalEvent': 'Celebrity Leaders',
+      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
@@ -319,7 +315,12 @@ describe('Turmoil', function() {
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
     expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
-    expect(t.rulingParty!.description).eq('All players receive 1 MC for each Plant tag, Microbe tag, and Animal tag they have.');
-    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('All players receive 1 MC for each Heat production they have.');
+    expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
+    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
+
+  function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {
+    turmoil.rulingParty = party;
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+  }
 });

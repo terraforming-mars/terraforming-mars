@@ -1,17 +1,33 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class AdvancedAlloys implements IProjectCard {
-  public cost = 9;
-  public tags = [Tags.SCIENCE];
-  public name = CardName.ADVANCED_ALLOYS;
-  public cardType = CardType.ACTIVE;
+export class AdvancedAlloys extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.ADVANCED_ALLOYS,
+      tags: [Tags.SCIENCE],
+      cost: 9,
+
+      metadata: {
+        cardNumber: '071',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('Each titanium you have is worth 1 MC extra.', (be) => {
+            be.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          }).br;
+          b.effect('Each steel you have is worth 1 MC extra.', (be) => {
+            be.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          });
+        }),
+      },
+    });
+  }
 
   public play(player: Player) {
     player.increaseTitaniumValue();
@@ -23,12 +39,4 @@ export class AdvancedAlloys implements IProjectCard {
     player.decreaseTitaniumValue();
     player.decreaseSteelValue();
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: '071',
-    renderData: CardRenderer.builder((b) => {
-      b.effectBox((be) => be.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1).description('Effect: Each titanium you have is worth 1 MC extra.')).br;
-      b.effectBox((be) => be.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1).description('Effect: Each steel you have is worth 1 MC extra.'));
-    }),
-  };
 }

@@ -17,8 +17,7 @@ export class Solarnet implements IProjectCard {
       return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
     }
     public play(player: Player, game: Game) {
-      player.cardsInHand.push(game.dealer.dealCard());
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game, 2);
       return undefined;
     }
     public getVictoryPoints() {

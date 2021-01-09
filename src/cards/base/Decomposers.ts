@@ -1,24 +1,43 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
-export class Decomposers implements IProjectCard, IResourceCard {
-    public cost = 5;
-    public resourceType = ResourceType.MICROBE;
+export class Decomposers extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.DECOMPOSERS,
+      tags: [Tags.MICROBE],
+      cost: 5,
+      resourceType: ResourceType.MICROBE,
+
+      metadata: {
+        cardNumber: '131',
+        requirements: CardRequirements.builder((b) => b.oxygen(3)),
+        description: 'Requires 3% oxygen. 1 VP per 3 Microbes on this card.',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.', (be) => {
+            be.animals(1).played.slash();
+            be.plants(1).played.slash();
+            be.microbes(1).played.slash();
+            be.startEffect.microbes(1);
+          });
+        }),
+        victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
+      },
+    });
+  }
     public resourceCount: number = 0;
-    public tags = [Tags.MICROBE];
-    public cardType = CardType.ACTIVE;
-    public name = CardName.DECOMPOSERS;
     public canPlay(player: Player, game: Game): boolean {
       return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 3);
     }
@@ -30,21 +49,6 @@ export class Decomposers implements IProjectCard, IResourceCard {
     }
     public play() {
       return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: '131',
-      requirements: CardRequirements.builder((b) => b.oxygen(3)),
-      description: 'Requires 3% oxygen. 1 VP per 3 Microbes on this card.',
-      renderData: CardRenderer.builder((b) => {
-        b.effectBox((be) => {
-          be.animals(1).played.slash();
-          be.plants(1).played.slash();
-          be.microbes(1).played.slash();
-          be.startEffect.microbes(1);
-          be.description('Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.');
-        });
-      }),
-      victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
     }
 }
 

@@ -33,13 +33,14 @@ import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
+import {SellPatents} from './cards/standardProjects/SellPatents';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './inputs/SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -55,9 +56,11 @@ import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {TurmoilHandler} from './turmoil/TurmoilHandler';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
+import {range} from './utils/utils';
 
 export type PlayerId = string;
 
@@ -125,7 +128,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyVictoryPoints: number = 0;
 
   // Turmoil
-  public turmoilScientistsActionUsed: boolean = false;
+  public turmoilPolicyActionUsed: boolean = false;
+  public politicalAgendasActionUsedCount: number = 0;
 
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   public oceanBonus: number = constants.OCEAN_BONUS;
@@ -133,6 +137,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Custom cards
   // Leavitt Station.
   public scienceTagCount: number = 0;
+  // PoliticalAgendas Scientists P4
+  public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
   public plantsNeededForGreenery: number = 8;
   // Lawsuit
@@ -162,7 +168,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public isCorporation(corporationName: CardName): boolean {
-    return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
+    return this.corporationCard?.name === corporationName;
   }
 
   public getTitaniumValue(game: Game): number {
@@ -180,7 +186,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public getSteelValue(): number {
+  public getSteelValue(game: Game): number {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -212,7 +219,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil Reds capacity
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, false, false, 'Select how to pay for TR increase'));
+        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
         // Cannot pay Reds, will not increase TR
         return;
@@ -510,6 +517,12 @@ export class Player implements ISerializable<SerializedPlayer> {
         requirementsBonus += playedCard.getRequirementBonus(this, game);
       }
     }
+
+    // PoliticalAgendas Scientists P2 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
+      requirementsBonus += 2;
+    }
+
     return requirementsBonus;
   }
 
@@ -627,6 +640,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Leavitt Station hook
     if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
       tagCount += this.scienceTagCount;
+    }
+
+    // PoliticalAgendas Scientists P4 hook
+    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
+      tagCount += 1;
     }
 
     if (tag === Tags.WILDCARD) {
@@ -774,7 +792,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const selectedOptionInput = input.slice(1);
       this.runInput(game, selectedOptionInput, pi.options[optionIndex]);
       this.runInputCb(game, pi.cb());
-    } else if (pi instanceof SelectHowToPayForCard) {
+    } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
       const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
       const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
@@ -871,7 +889,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
     this.tradesThisTurn = 0;
-    this.turmoilScientistsActionUsed = false;
+    this.turmoilPolicyActionUsed = false;
+    this.politicalAgendasActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
     this.heat += this.energy;
     this.heat += this.heatProduction;
@@ -998,7 +1017,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const payForCards = () => {
       const purchasedCardsCost = this.cardCost * selectedCards.length;
       if (selectedCards.length > 0) {
-        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, false, false, 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'));
+        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, {title: 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'}));
       }
       dealtCards.forEach((card) => {
         if (selectedCards.find((c) => c.name === card.name)) {
@@ -1076,6 +1095,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     });
 
+    // PoliticalAgendas Unity P4 hook
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+      cost -= 2;
+    }
+
     return Math.max(cost, 0);
   }
 
@@ -1121,7 +1145,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (howToPay.steel > this.steel) {
         throw new Error('Do not have enough steel');
       }
-      totalToPay += howToPay.steel * this.steelValue;
+      totalToPay += howToPay.steel * this.getSteelValue(game);
     }
 
     if (canUseTitanium && howToPay.titanium > 0) {
@@ -1162,7 +1186,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public playProjectCard(game: Game): PlayerInput {
-    return new SelectHowToPayForCard(
+    return new SelectHowToPayForProjectCard(
       this.getPlayableCards(game),
       this.getMicrobesCanSpend(),
       this.getFloatersCanSpend(),
@@ -1267,6 +1291,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
+    TurmoilHandler.applyOnCardPlayedEffect(this, game, selectedCard);
+
     for (const somePlayer of game.getPlayers()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
@@ -1303,16 +1329,22 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public onStandardProject(projectType: StandardProjectCard): void {
-    if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
-      this.corporationCard.onStandardProject(this, projectType);
-    }
+  public drawCard(game: Game, n = 1): void {
+    range(n).forEach(() => {
+      this.cardsInHand.push(game.dealer.dealCard());
+    });
+  }
 
-    for (const playedCard of this.playedCards) {
-      if (playedCard.onStandardProject !== undefined) {
-        playedCard.onStandardProject(this, projectType);
-      }
+  public get availableHeat(): number {
+    return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
+  }
+
+  public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
+    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
     }
+    this.heat -= amount;
+    return cb();
   }
 
   private tradeWithColony(openColonies: Array<Colony>, game: Game): PlayerInput {
@@ -1329,11 +1361,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.defer(new SelectHowToPayDeferred(
               this,
               9 - this.colonyTradeDiscount,
-              false,
-              false,
-              'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
-              () => {
-                colony.trade(this, game);
+              {
+                title: 'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
+                afterPay: () => {
+                  colony.trade(this, game);
+                },
               },
             ));
           } else if (payWith === Resources.ENERGY) {
@@ -1414,49 +1446,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  private turmoilKelvinistsAction(game: Game): PlayerInput {
-    return new SelectOption(
-      'Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)',
-      'Pay',
-      () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Kelvinists action'));
-        this.addProduction(Resources.ENERGY);
-        this.addProduction(Resources.HEAT);
-        game.log('${0} used Turmoil Kelvinists action', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
-  private turmoilScientistsAction(game: Game): PlayerInput {
-    return new SelectOption(
-      'Pay 10 MC to draw 3 cards (Turmoil Scientists)',
-      'Pay',
-      () => {
-        game.defer(new SelectHowToPayDeferred(this, 10, false, false, 'Select how to pay for Turmoil Scientists draw'));
-        this.turmoilScientistsActionUsed = true;
-        this.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-        );
-        game.log('${0} used Turmoil Scientists draw action', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
   private convertHeatIntoTemperature(game: Game): PlayerInput {
-    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
-      return (this.corporationCard as StormCraftIncorporated).convertHeatIntoTemperature(
-        game, this,
-      );
-    }
     return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      game.increaseTemperature(this, 1);
-      this.heat -= constants.HEAT_FOR_TEMPERATURE;
-      game.log('${0} converted heat into temperature', (b) => b.player(this));
-      return undefined;
+      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
+        game.increaseTemperature(this, 1);
+        game.log('${0} converted heat into temperature', (b) => b.player(this));
+        return undefined;
+      });
     });
   }
 
@@ -1466,7 +1462,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      game.defer(new SelectHowToPayDeferred(this, 8, false, false, 'Select how to pay for milestone'));
+      game.defer(new SelectHowToPayDeferred(this, 8, {title: 'Select how to pay for milestone'}));
       game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1474,7 +1470,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private fundAward(award: IAward, game: Game): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), false, false, 'Select how to pay for award'));
+      game.defer(new SelectHowToPayDeferred(this, game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       game.fundAward(this, award);
       return undefined;
     });
@@ -1666,6 +1662,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
+  private addStandardProjects(game: Game, options: Array<PlayerInput>) {
+    const standardProjects = this.getAvailableStandardProjects(game);
+    if (standardProjects.cards.length >= 1) {
+      options.push(standardProjects);
+    }
+  }
+
   public takeAction(game: Game): void {
     if (this.usedUndo) {
       this.usedUndo = false;
@@ -1794,9 +1797,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    const hasEnoughHeat = this.heat >= constants.HEAT_FOR_TEMPERATURE ||
-      (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-        this.getResourcesOnCorporation() * 2 + this.heat >= constants.HEAT_FOR_TEMPERATURE);
+    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
 
     const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 
@@ -1809,17 +1810,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    // Turmoil Scientists capacity
-    if (this.canAfford(10) &&
-      PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS) &&
-      !this.turmoilScientistsActionUsed) {
-      action.options.push(this.turmoilScientistsAction(game));
-    }
-
-    // Turmoil Kelvinists capacity
-    if (this.canAfford(10) && PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS)) {
-      action.options.push(this.turmoilKelvinistsAction(game));
-    }
+    TurmoilHandler.addPlayerAction(this, game, action.options);
 
     if (this.canAfford(8) && !game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();
@@ -1881,14 +1872,17 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjects = this.getAvailableStandardProjects(game);
-    if (standardProjects.cards.length >= 1) {
-      action.options.push(standardProjects);
-    }
+    this.addStandardProjects(game, action.options);
 
     action.options.push(
       this.passOption(game),
     );
+
+    // Sell patents
+    const sellPatents = new SellPatents();
+    if (sellPatents.canAct(this)) {
+      action.options.push(sellPatents.action(this, game));
+    }
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
@@ -2004,7 +1998,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       colonyTradeDiscount: this.colonyTradeDiscount,
       colonyVictoryPoints: this.colonyVictoryPoints,
       // Turmoil
-      turmoilScientistsActionUsed: this.turmoilScientistsActionUsed,
+      turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
+      politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
+      hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
       victoryPointsBreakdown: this.victoryPointsBreakdown,
       oceanBonus: this.oceanBonus,
       // Custom cards
@@ -2033,7 +2029,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Only use useObjectAssign in tests.
   // TODO(kberg): Remove useObjectAssign by 2020-02-01
   public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
-    const player = new Player(d.name, d.color, d.beginner, d.handicap, d.id);
+    const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
     if (useObjectAssign) {
@@ -2071,7 +2067,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       player.titaniumProduction = d.titaniumProduction;
       player.titaniumValue = d.titaniumValue;
       player.tradesThisTurn = d.tradesThisTurn;
-      player.turmoilScientistsActionUsed = d.turmoilScientistsActionUsed;
+      player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+      player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
       player.victoryPointsBreakdown = d.victoryPointsBreakdown;
     }
 
@@ -2174,7 +2171,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.fleetSize > 0) this.fleetSize--;
   }
 
-  public canPlayColonyPlacementCard(game: Game): boolean {
+  public hasAvailableColonyTileToBuildOn(game: Game): boolean {
+    if (game.gameOptions.coloniesExtension === false) return false;
+
     let colonyTilesAlreadyBuiltOn: number = 0;
 
     game.colonies.forEach((colony) => {
@@ -2190,7 +2189,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Confirm',
       new CardLoader(game.gameOptions)
         .getStandardProjects().sort((a, b) => a.cost - b.cost)
-        .filter((card) => card.canAct(this, game)),
+        .filter((card) => card.canAct(this, game))
+        .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
       (card) => card[0].action(this, game),
     );
   }

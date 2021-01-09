@@ -62,14 +62,12 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: 'C45',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 2 floaters to ANY JOVIAN CARD.', (eb) => {
           eb.empty().startAction.floaters(2).secondaryTag(Tags.JOVIAN);
-          eb.description('Action: Add 2 floaters to ANY JOVIAN CARD.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend any number of floaters here to gain the same number of titanium.', (eb) => {
           eb.text('x').floaters(1).startAction.text('x').titanium(1);
-          eb.description('Action: Spend any number of floaters here to gain the same number of titanium.');
         }).br;
       }),
       victoryPoints: 1,

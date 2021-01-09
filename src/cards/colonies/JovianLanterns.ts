@@ -13,7 +13,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 
@@ -59,12 +58,11 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
       cardNumber: 'C18',
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
           eb.titanium(1).startAction.floaters(2);
-          eb.description('Action: Spend 1 titanium to add 2 floaters here.');
         }).br;
         b.tr(1).floaters(2).asterix().br;
-        b.text('1VP per 2 floaters.', CardRenderItemSize.TINY, true);
+        b.vpText('1VP per 2 floaters.');
       }),
       description: {
         text: 'Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.',

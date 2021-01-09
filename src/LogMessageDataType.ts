@@ -7,5 +7,7 @@ export enum LogMessageDataType {
     MILESTONE,
     COLONY,
     STANDARD_PROJECT,
-    PARTY
+    PARTY,
+    TILE_TYPE,
+    SPACE_BONUS,
 }

@@ -16,16 +16,16 @@ export class GalileanMining extends PreludeCard {
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.TITANIUM, 2);
-      game.defer(new SelectHowToPayDeferred(player, 5, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 5));
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: 'P13',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.titanium(2);
         }).br;
-        b.minus().megacredits(5);
+        b.megacredits(-5);
       }),
       description: 'Increase your titanium production 2 steps. Pay 5 MC.',
     }

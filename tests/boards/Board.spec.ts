@@ -48,6 +48,7 @@ describe('Board', function() {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(1);
   });
+
   it('getNthAvailableLandSpace', function() {
     // board spaces start at 03, and the top of the map looks like this
     //

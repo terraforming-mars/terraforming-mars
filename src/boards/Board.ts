@@ -7,8 +7,20 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
+
   public abstract getVolcanicSpaceIds(): Array<string>;
+
   public abstract getNoctisCitySpaceIds(): Array<string>
+
+  /* Returns the space given a Space ID. */
+  public getSpace(id: string) {
+    const space = this.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error(`Can't find space with id ${id}`);
+    }
+    return space;
+  }
+
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {

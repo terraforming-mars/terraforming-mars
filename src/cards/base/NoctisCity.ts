@@ -43,7 +43,7 @@ export class NoctisCity extends Card implements IProjectCard {
     }
   }
   public play(player: Player, game: Game) {
-    const noctisSpace = game.getSpace(SpaceName.NOCTIS_CITY);
+    const noctisSpace = game.board.getSpace(SpaceName.NOCTIS_CITY);
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 3);
     if (game.gameOptions.boardName === BoardName.ORIGINAL) {

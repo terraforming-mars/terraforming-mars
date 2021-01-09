@@ -187,7 +187,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSteelValue(game: Game): number {
-    // TODO: Move policyIds to enum
     if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
@@ -1146,7 +1145,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (howToPay.steel > this.steel) {
         throw new Error('Do not have enough steel');
       }
-      totalToPay += howToPay.steel * this.steelValue;
+      totalToPay += howToPay.steel * this.getSteelValue(game);
     }
 
     if (canUseTitanium && howToPay.titanium > 0) {

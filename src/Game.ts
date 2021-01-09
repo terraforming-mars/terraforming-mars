@@ -55,7 +55,14 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {PartyName} from './turmoil/parties/PartyName';
+import {AgendaStyle} from './turmoil/PoliticalAgendas';
+import {REDS_POLICY_2} from './turmoil/parties/Reds';
+import {GREENS_POLICY_2} from './turmoil/parties/Greens';
+import {KELVINISTS_POLICY_4} from './turmoil/parties/Kelvinists';
+import {DrawCards} from './deferredActions/DrawCards';
 import {GameSetup} from './GameSetup';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
@@ -87,6 +94,7 @@ export interface GameOptions {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -119,6 +127,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
+  politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
@@ -268,7 +277,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.newInstance(game);
+      game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
     }
 
     // and 2 neutral cities and forests on board
@@ -471,7 +480,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
   }
 
-  private marsIsTerraformed(): boolean {
+  public marsIsTerraformed(): boolean {
     const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
     const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
@@ -1063,8 +1072,14 @@ export class Game implements ISerializable<SerializedGame> {
     player.takeAction(this);
   }
 
-  public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
+  public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
+      return undefined;
+    }
+
+    // PoliticalAgendas Reds P3 hook
+    if (increments === -1) {
+      this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
       return undefined;
     }
 
@@ -1072,6 +1087,16 @@ export class Game implements ISerializable<SerializedGame> {
     const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
     if (this.phase !== Phase.SOLAR) {
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
+      }
+
       player.increaseTerraformRatingSteps(steps, this);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1091,8 +1116,14 @@ export class Game implements ISerializable<SerializedGame> {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
+  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): SelectSpace | undefined {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+      return undefined;
+    }
+
+    // PoliticalAgendas Reds P3 hook
+    if (increments === -1) {
+      this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
       return undefined;
     }
 
@@ -1106,6 +1137,16 @@ export class Game implements ISerializable<SerializedGame> {
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
         player.increaseTerraformRating(this);
       }
+
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
+      }
+
       player.increaseTerraformRatingSteps(steps, this);
     }
 
@@ -1124,8 +1165,8 @@ export class Game implements ISerializable<SerializedGame> {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
-    if (increments === -2) {
+  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+    if (increments === -2 || increments === -1) {
       this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
       return undefined;
     }
@@ -1144,6 +1185,20 @@ export class Game implements ISerializable<SerializedGame> {
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
         player.addProduction(Resources.HEAT);
+      }
+
+      // PoliticalAgendas Kelvinists P2 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
+        player.setResource(Resources.MEGACREDITS, steps * 3);
+      }
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
       }
 
       player.increaseTerraformRatingSteps(steps, this);
@@ -1291,6 +1346,11 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
+    // PoliticalAgendas Reds P2 hook
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && this.phase === Phase.ACTION) {
+      const redsPolicy = REDS_POLICY_2;
+      redsPolicy.onTilePlaced(player, space, this);
+    }
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1324,6 +1384,18 @@ export class Game implements ISerializable<SerializedGame> {
       });
 
       PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
+
+      // PoliticalAgendas Greens P2 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && this.phase === Phase.ACTION) {
+        const greensPolicy = GREENS_POLICY_2;
+        greensPolicy.onTilePlaced(player);
+      }
+
+      // PoliticalAgendas Kelvinists P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && this.phase === Phase.ACTION) {
+        const kelvinistsPolicy = KELVINISTS_POLICY_4;
+        kelvinistsPolicy.onTilePlaced(player);
+      }
 
       if (arcadianCommunityBonus) {
         player.megaCredits += 3;
@@ -1385,7 +1457,7 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(this, player);
+    PartyHooks.applyGreensRulingPolicy(this, player, this.getSpace(spaceId));
 
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;
@@ -1409,6 +1481,15 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1);
+      }
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, 1));
+      }
+
       player.increaseTerraformRating(this);
     }
     AresHandler.ifAres(this, (aresData) => {

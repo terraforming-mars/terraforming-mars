@@ -11,7 +11,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -31,8 +30,8 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
-          b.productionBox((pb) => pb.minus().plants(1).any).br;
-          b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);
+          b.production((pb) => pb.minus().plants(1).any).br;
+          b.text('1 VP for each Animal on this card.');
         }),
         description: {
           text: 'Requires +2 C° or warmer. Decrease any Plant production 1 step.',

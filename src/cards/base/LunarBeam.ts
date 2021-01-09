@@ -25,7 +25,7 @@ export class LunarBeam implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '030',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().megacredits(2).br;
           pb.plus().heat(2).br;
           pb.plus().energy(2);

@@ -17,7 +17,7 @@ export class DomeFarming extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P07',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(2).plants(1));
+        b.production((pb) => pb.megacredits(2).plants(1));
       }),
       description: 'Increase your MC production 2 steps and plant production 1 step.',
     }

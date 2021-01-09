@@ -17,7 +17,7 @@ export class Biolab extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P04',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.plants(1)).br;
+        b.production((pb) => pb.plants(1)).br;
         b.cards(3);
       }),
       description: 'Increase your plant production 1 step. Draw 3 cards.',

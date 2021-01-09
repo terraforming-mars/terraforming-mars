@@ -19,7 +19,7 @@ export class TollStation extends Card implements IProjectCard {
       metadata: {
         cardNumber: '099',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(1).slash().space().played.any.asterix();
           });
         }),

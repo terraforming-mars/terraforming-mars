@@ -26,7 +26,7 @@ export class CupolaCity extends Card implements IProjectCard {
         requirements: CardRequirements.builder((b) => b.oxygen(9).max()),
         description: 'Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(3);
           }).nbsp.nbsp.city();

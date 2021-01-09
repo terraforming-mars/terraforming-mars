@@ -17,7 +17,7 @@ export class MiningColony implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      return player.canPlayColonyPlacementCard(game);
+      return player.hasAvailableColonyTileToBuildOn(game);
     }
 
     public play(player: Player, game: Game) {
@@ -28,7 +28,7 @@ export class MiningColony implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C25',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.titanium(1)).colonies(1);
+        b.production((pb) => pb.titanium(1)).colonies(1);
       }),
       description: 'Increase your titanium production 1 step. Place a colony.',
     }

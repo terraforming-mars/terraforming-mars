@@ -16,6 +16,7 @@ export const HELLAS_BONUS_OCEAN_COST: number = 6;
 export const MAX_FLEET_SIZE: number = 4;
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;
+export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
 
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},

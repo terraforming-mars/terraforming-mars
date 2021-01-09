@@ -19,7 +19,7 @@ export class SoilFactory extends Card implements IProjectCard {
       metadata: {
         cardNumber: '179',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().plants(1);
           });

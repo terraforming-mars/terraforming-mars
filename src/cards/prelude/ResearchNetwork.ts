@@ -18,7 +18,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P28',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(1)).br;
+        b.production((pb) => pb.megacredits(1)).br;
         b.cards(3);
       }),
       description: 'Increase your MC production 1 step. Draw 3 cards.',

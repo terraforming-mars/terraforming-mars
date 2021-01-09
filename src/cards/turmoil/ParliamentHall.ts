@@ -37,7 +37,7 @@ export class ParliamentHall implements IProjectCard {
       cardNumber: 'T08',
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(1).slash().building(3).played;
         });
       }),

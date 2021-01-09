@@ -43,7 +43,7 @@ export class SolarFarm implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'A17',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.energy(1).slash().plants(1);
         }).asterix().nbsp.tile(TileType.SOLAR_FARM, false, true).br;
       }),

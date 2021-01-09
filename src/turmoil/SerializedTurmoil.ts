@@ -30,5 +30,5 @@ export interface SerializedTurmoil {
     commingGlobalEvent: IGlobalEvent | undefined;
     comingGlobalEvent: GlobalEventName | undefined;
     currentGlobalEvent?: IGlobalEvent | GlobalEventName;
-    politicalAgendasData: SerializedPoliticalAgendasData;
+    politicalAgendasData: SerializedPoliticalAgendasData | undefined;
 }

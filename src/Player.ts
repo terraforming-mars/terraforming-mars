@@ -69,6 +69,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
   private waitingForCb?: () => void;
+  private _game: Game | undefined = undefined;
 
   // Corporate identity
   public corporationCard: CorporationCard | undefined = undefined;
@@ -165,6 +166,21 @@ export class Player implements ISerializable<SerializedPlayer> {
     id: PlayerId): Player {
     const player = new Player(name, color, beginner, handicap, id);
     return player;
+  }
+
+  public set game(game: Game) {
+    if (this._game !== undefined) {
+      // TODO(kberg): Replace this with an Error.
+      console.warn(`Reinitializing game ${game.id} for player ${this.color}`);
+    }
+    this._game = game;
+  }
+
+  public get game(): Game {
+    if (this._game === undefined) {
+      throw new Error(`Fetching game for player ${this.color} too soon.`);
+    }
+    return this._game;
   }
 
   public isCorporation(corporationName: CardName): boolean {

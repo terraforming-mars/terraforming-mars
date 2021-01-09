@@ -60,7 +60,6 @@ import {AgendaStyle} from './turmoil/PoliticalAgendas';
 import {REDS_POLICY_2} from './turmoil/parties/Reds';
 import {GREENS_POLICY_2} from './turmoil/parties/Greens';
 import {KELVINISTS_POLICY_4} from './turmoil/parties/Kelvinists';
-import {DrawCards} from './deferredActions/DrawCards';
 import {GameSetup} from './GameSetup';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {CardLoader} from './CardLoader';
@@ -1094,7 +1093,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // PoliticalAgendas Scientists P3 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        this.defer(new DrawCards(player, this, steps));
+        player.drawCard(this, {amount: steps});
       }
 
       player.increaseTerraformRatingSteps(steps, this);
@@ -1144,7 +1143,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
       // PoliticalAgendas Scientists P3 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        this.defer(new DrawCards(player, this, steps));
+        player.drawCard(this, {amount: steps});
       }
 
       player.increaseTerraformRatingSteps(steps, this);
@@ -1198,7 +1197,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       // PoliticalAgendas Scientists P3 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        this.defer(new DrawCards(player, this, steps));
+        player.drawCard(this, {amount: steps});
       }
 
       player.increaseTerraformRatingSteps(steps, this);
@@ -1487,7 +1486,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
       // PoliticalAgendas Scientists P3 hook
       if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        this.defer(new DrawCards(player, this, 1));
+        player.drawCard(this);
       }
 
       player.increaseTerraformRating(this);

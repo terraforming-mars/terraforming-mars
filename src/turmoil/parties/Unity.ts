@@ -139,9 +139,7 @@ class UnityPolicy03 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          const card = game.drawCardsByTag(Tags.SPACE, 1);
-          player.cardsInHand.push(...card);
-          LogHelper.logDrawnCards(game, player, card);
+          player.drawCard(game, {amount: 1, tag: Tags.SPACE});
         },
       },
     ));

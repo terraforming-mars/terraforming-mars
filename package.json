@@ -54,6 +54,7 @@
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
     "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "testgiven": "tsc --build tsconfig.json && npm run webpack && tsc --build tsconfig-test.json && mocha",
+    "watch": "WATCH_IT=1 npm run webpack",
     "webpack": "webpack --config webpack.config.js"
   },
   "repository": {

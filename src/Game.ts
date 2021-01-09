@@ -265,7 +265,6 @@ export class Game implements ISerializable<SerializedGame> {
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
-
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
       game.colonyDealer = new ColonyDealer();
@@ -282,12 +281,6 @@ export class Game implements ISerializable<SerializedGame> {
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
       game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
-    }
-
-    // and 2 neutral cities and forests on board
-    if (players.length === 1) {
-      //  Setup solo player's starting tiles
-      GameSetup.setupNeutralPlayer(game);
     }
 
     // and 2 neutral cities and forests on board

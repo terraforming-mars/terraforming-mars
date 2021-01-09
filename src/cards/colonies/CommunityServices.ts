@@ -24,7 +24,7 @@ export class CommunityServices implements IProjectCard {
       cardNumber: 'C04',
       description: 'Increase your MC production 1 step per CARD WITH NO TAGS, including this.',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(1);
         }).slash().noTags();
       }),

@@ -40,7 +40,7 @@ export class Arklight implements CorporationCard, IResourceCard {
       cardNumber: 'R04',
       description: 'You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.',
       renderData: CardRenderer.builder((b) => {
-        b.megacredits(45).nbsp.productionBox((pb) => pb.megacredits(2));
+        b.megacredits(45).nbsp.production((pb) => pb.megacredits(2));
         b.corpBox('effect', (ce) => {
           ce.effect('When you play an animal or plant tag, including this, add 1 animal to this card.', (eb) => {
             eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);

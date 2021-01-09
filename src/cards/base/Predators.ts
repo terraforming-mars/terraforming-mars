@@ -12,7 +12,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {GlobalParameter} from '../../GlobalParameter';
 
 export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
@@ -31,7 +30,7 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
           b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
             eb.animals(1).any.startAction.animals(1);
           }).br;
-          b.text('1 VP per Animal on this card.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP per Animal on this card.');
         }),
         description: 'Requires 11% oxygen.',
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),

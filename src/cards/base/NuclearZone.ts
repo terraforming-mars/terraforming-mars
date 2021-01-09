@@ -52,10 +52,11 @@ export class NuclearZone extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
+    game.increaseTemperature(player, 2);
     return new SelectSpace('Select space for special tile', game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
       game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NUCLEAR_ZONE});
       foundSpace.adjacency = this.adjacencyBonus;
-      return game.increaseTemperature(player, 2);
+      return undefined;
     });
   }
 

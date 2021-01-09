@@ -18,7 +18,7 @@ export class SocietySupport extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P31',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(-1).plants(1).br;
           pb.energy(1).heat(1);
         });

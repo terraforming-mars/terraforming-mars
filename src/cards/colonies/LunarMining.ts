@@ -20,7 +20,7 @@ export class LunarMining implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C22',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.titanium(1).slash().earth(2).played;
         });
       }),

@@ -18,7 +18,7 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
     public metadata: CardMetadata = {
       cardNumber: 'P25',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.titanium(1)).br;
+        b.production((pb) => pb.titanium(1)).br;
         b.titanium(4);
       }),
       description: 'Increase your titanium production 1 step. Gain 4 titanium.',

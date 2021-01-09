@@ -18,7 +18,7 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P20',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(1).steel(1).titanium(1));
+        b.production((pb) => pb.megacredits(1).steel(1).titanium(1));
       }),
       description: 'Increase your MC, steel and titanium production 1 step.',
     }

@@ -17,7 +17,7 @@ export class GeothermalPower extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '117',
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.energy(2))),
+        renderData: CardRenderer.builder((b) => b.production((pb) => pb.energy(2))),
         description: 'Increase your energy production 2 steps.',
       },
     });

@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class IoMiningIndustries extends Card implements IProjectCard {
   constructor() {
@@ -20,8 +19,8 @@ export class IoMiningIndustries extends Card implements IProjectCard {
       metadata: {
         cardNumber: '092',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.titanium(2).megacredits(2)).br;
-          b.text('1 VP per Jovian tag you have.', CardRenderItemSize.TINY, true);
+          b.production((pb) => pb.titanium(2).megacredits(2)).br;
+          b.vpText('1 VP per Jovian tag you have.');
         }),
         description: 'Increase your titanium production 2 steps and your MC production 2 steps.',
         victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),

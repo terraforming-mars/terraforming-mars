@@ -434,7 +434,7 @@ class Builder {
     return this;
   }
 
-  public productionBox(pb: (builder: ProductionBoxBuilder) => void): Builder {
+  public production(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this._addRowItem(CardRenderProductionBox.builder(pb));
     return this;
   }
@@ -541,6 +541,10 @@ class Builder {
     item.isBold = isBold;
     this._addRowItem(item);
     return this;
+  }
+
+  public vpText(text: string): Builder {
+    return this.text(text, CardRenderItemSize.TINY, true);
   }
 
   public get br(): Builder {

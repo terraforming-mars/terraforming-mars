@@ -30,7 +30,7 @@ export class SpinoffDepartment implements IProjectCard {
         b.effect('WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.', (eb) => {
           eb.megacredits(20).asterix().startEffect.cards(1);
         }).br;
-        b.productionBox((pb) => pb.megacredits(2));
+        b.production((pb) => pb.megacredits(2));
       }),
       description: 'Increase your MC production 2 steps.',
     };

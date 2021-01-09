@@ -127,7 +127,9 @@ export const PlayerHome = Vue.component('player-home', {
               :oxygen = "player.oxygenLevel"
               :oceans = "player.oceans"
               :venus = "player.venusScaleLevel"
-              :venusNextExtension ="player.venusNextExtension">
+              :venusNextExtension = "player.venusNextExtension"
+              :turmoilExtension = "player.turmoilExtension"
+              :turmoil = "player.turmoil">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 

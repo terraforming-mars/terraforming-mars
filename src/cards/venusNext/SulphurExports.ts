@@ -37,7 +37,7 @@ export class SulphurExports implements IProjectCard {
       cardNumber: '250',
       renderData: CardRenderer.builder((b) => {
         b.venus(1).br;
-        b.productionBox((pb) => pb.megacredits(1).slash().venus(1).played);
+        b.production((pb) => pb.megacredits(1).slash().venus(1).played);
       }),
       description: 'Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.',
     };

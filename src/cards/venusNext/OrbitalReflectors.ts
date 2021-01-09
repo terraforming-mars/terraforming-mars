@@ -39,7 +39,7 @@ export class OrbitalReflectors implements IProjectCard {
       cardNumber: '242',
       renderData: CardRenderer.builder((b) => {
         b.venus(2).br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.heat(2);
         });
       }),

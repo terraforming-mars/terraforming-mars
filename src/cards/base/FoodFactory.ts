@@ -19,7 +19,7 @@ export class FoodFactory extends Card implements IProjectCard {
       metadata: {
         cardNumber: '041',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().plants(1).br;
             pb.plus().megacredits(4);
           });

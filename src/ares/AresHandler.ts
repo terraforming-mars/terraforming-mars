@@ -19,7 +19,6 @@ import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
-import {bonusAsString, tileTypeAsString} from './_StringGen';
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -122,8 +121,8 @@ export class AresHandler {
       }
     });
 
-    const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${bonusAsString(elem[0])}`).join(', ');
-    const tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
+    const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${SpaceBonus.toString(elem[0])}`).join(', ');
+    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile?.tileType) : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
     let ownerBonus = 1;
@@ -291,8 +290,7 @@ export class AresHandler {
     }
     if (cost.megacredits > 0) {
       player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
-
-      player.game.defer(new SelectHowToPayDeferred(player, cost.megacredits, false, false, 'Select how to pay additional placement costs.'));
+      player.game.defer(new SelectHowToPayDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }
 
@@ -344,7 +342,7 @@ export class AresHandler {
       return;
     }
     player.increaseTerraformRatingSteps(steps, player.game);
-    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(tileTypeAsString(initialTileType)));
+    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
   }
 }
 

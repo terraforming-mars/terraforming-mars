@@ -46,7 +46,7 @@ export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '165',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(4).digit.br;
           pb.plus().plants(2);
         }).br;

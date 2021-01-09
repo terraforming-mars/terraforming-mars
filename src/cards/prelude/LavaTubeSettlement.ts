@@ -46,7 +46,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P37',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(1).br;
           pb.plus().megacredits(2);
         }).br;

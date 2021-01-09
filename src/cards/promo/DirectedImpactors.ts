@@ -70,7 +70,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     }
 
     private addResource(player: Player, game: Game, asteroidCards: ICard[]) {
-      game.defer(new SelectHowToPayDeferred(player, 6, false, true, 'Select how to pay for Directed Impactors action'));
+      game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
 
       if (asteroidCards.length === 1) {
         player.addResourceTo(this);
@@ -99,14 +99,12 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     public metadata: CardMetadata = {
       cardNumber: 'X18',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
           eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
-          eb.description('Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Remove 1 asteroid here to raise temperature 1 step.', (eb) => {
           eb.asteroids(1).startAction.temperature(1);
-          eb.description('Action: Remove 1 asteroid here to raise temperature 1 step.');
         });
       }),
     }

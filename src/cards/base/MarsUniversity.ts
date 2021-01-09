@@ -22,9 +22,8 @@ export class MarsUniversity extends Card implements IProjectCard {
       metadata: {
         cardNumber: '073',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
-            eb.science().played.startEffect.minus().cards(1).nbsp.plus().cards(1)
-              .description('Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.');
+          b.effect('When you play a Science tag, including this, you may discard a card from hand to draw a card.', (eb) => {
+            eb.science().played.startEffect.minus().cards(1).nbsp.plus().cards(1);
           });
         }),
         victoryPoints: 1,
@@ -46,7 +45,7 @@ export class MarsUniversity extends Card implements IProjectCard {
             new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
               game.dealer.discard(foundCards[0]);
-              player.cardsInHand.push(game.dealer.dealCard());
+              player.drawCard(game);
               return undefined;
             }),
             new SelectOption('Do nothing', 'Confirm', () => {

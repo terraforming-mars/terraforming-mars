@@ -11,8 +11,8 @@ export class PlayerInputFactory {
       return 'and-options';
     case PlayerInputTypes.SELECT_CARD:
       return 'select-card';
-    case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      return 'select-how-to-pay-for-card';
+    case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
+      return 'select-how-to-pay-for-project-card';
     case PlayerInputTypes.OR_OPTIONS:
       return 'or-options';
     case PlayerInputTypes.SELECT_OPTION:

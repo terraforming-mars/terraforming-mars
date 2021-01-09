@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class PhysicsComplex extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -22,11 +21,10 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
       metadata: {
         cardNumber: '095',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 6 Energy to add a science resource to this card.', (eb) => {
             eb.energy(6).digit.startAction.science();
-            eb.description('Action: Spend 6 Energy to add a science resource to this card.');
           }).br;
-          b.text('2 VP for each science resource on this card.', CardRenderItemSize.TINY, true);
+          b.vpText('2 VP for each science resource on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.science(2, 2),
       },

@@ -35,11 +35,9 @@ export class Conscription implements IProjectCard {
       cardNumber: 'C05',
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
-          eb.text('next card', CardRenderItemSize.SMALL, true).startEffect.megacredits(-16);
-          eb.description('Requires 2 Earth tags. The next card you play this generation costs 16 MC less.');
-        });
+        b.text('next card', CardRenderItemSize.SMALL, true).colon().megacredits(-16);
       }),
+      description: 'Requires 2 Earth tags. The next card you play this generation costs 16 MC less.',
       victoryPoints: -1,
     }
 }

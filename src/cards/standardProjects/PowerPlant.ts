@@ -10,7 +10,7 @@ export class PowerPlantStandard extends StandardProjectCard {
   public cost = 11;
 
   protected discount(player: Player): number {
-    if (player.corporationCard?.name === CardName.THORGATE) {
+    if (player.isCorporation(CardName.THORGATE)) {
       return 3;
     }
     return super.discount(player);
@@ -23,11 +23,10 @@ export class PowerPlantStandard extends StandardProjectCard {
   public metadata: CardMetadata = {
     cardNumber: 'SP7',
     renderData: CardRenderer.builder((b) =>
-      b.effectBox((eb) => {
-        eb.megacredits(11).startAction.productionBox((pb) => {
+      b.standardProject('Spend 11 MC to increase your Energy production 1 step.', (eb) => {
+        eb.megacredits(11).startAction.production((pb) => {
           pb.energy(1);
         });
-        eb.description('Spend 11 MC to increase your Energy production 1 step.');
       }),
     ),
   };

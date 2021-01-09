@@ -20,7 +20,7 @@ export class FloaterLeasing implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C10',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(1)).slash().floaters(3).digit;
+        b.production((pb) => pb.megacredits(1)).slash().floaters(3).digit;
       }),
       description: 'Increase your MC production 1 step PER 3 floaters you have.',
     }

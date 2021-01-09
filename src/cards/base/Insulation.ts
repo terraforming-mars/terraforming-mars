@@ -19,7 +19,7 @@ export class Insulation extends Card implements IProjectCard {
       metadata: {
         cardNumber: '152',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.text('-X').heat(1).nbsp.text('+').megacredits(0).multiplier;
           });
         }),

@@ -22,9 +22,8 @@ export class Ironworks extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '101',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 4 energy to gain 1 steel and raise oxygen 1 step.', (eb) => {
             eb.energy(4).digit.startAction.steel(1).oxygen(1);
-            eb.description('Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.');
           });
         }),
       },

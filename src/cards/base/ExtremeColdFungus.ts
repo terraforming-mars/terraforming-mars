@@ -29,14 +29,12 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         description: 'It must be -10 C or colder.',
         requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Gain 1 plant.', (eb) => {
             eb.empty().startAction.plants(1);
-            eb.description('Action: Gain 1 plant.');
           }).br;
           b.or().br;
-          b.effectBox((eb) => {
+          b.action('Add 2 microbes to ANOTHER card.', (eb) => {
             eb.empty().startAction.microbes(2).asterix();
-            eb.description('Action: Add 2 microbes to ANOTHER card.');
           });
         }),
       },

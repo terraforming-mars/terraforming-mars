@@ -81,9 +81,8 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
       renderData: CardRenderer.builder((b) => {
         b.megacredits(42).nbsp.cards(2).secondaryTag(AltSecondaryTag.FLOATER);
         b.corpBox('action', (ce) => {
-          ce.effectBox((eb) => {
+          ce.action('Add a floater to ANY card. 1 VP per 3 floaters on this card.', (eb) => {
             eb.empty().startAction.floaters(1).asterix();
-            eb.description('Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.');
           });
           ce.vSpace(); // to offset the description to the top a bit so it can be readable
         });

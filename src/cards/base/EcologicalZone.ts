@@ -14,7 +14,6 @@ import {IResourceCard} from '../ICard';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -31,11 +30,10 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       cardNumber: '128',
       requirements: CardRequirements.builder((b) => b.greeneries()),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
           eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
-          eb.description('Effect: When you play an animal or plant tag /including these/, add an animal to this card.');
         }).br;
-        b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true).tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+        b.vpText('1 VP per 2 Animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
     },

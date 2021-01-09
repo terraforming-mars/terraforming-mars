@@ -5,7 +5,6 @@ import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {TileType} from '../TileType';
 import {IAresData, IHazardConstraint} from './IAresData';
-import {tileTypeAsString} from './_StringGen';
 
 /**
  * Package-private support for placing and upgrading hazard tiles.
@@ -28,7 +27,7 @@ export class _AresHazardPlacement {
         this.putHazardAt(s, to);
       });
 
-    game.log('${0} have upgraded to ${1}', (b) => b.string(tileTypeAsString(from)).string(tileTypeAsString(to)));
+    game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
   }
 
   public static onTemperatureChange(game: Game, aresData: IAresData) {

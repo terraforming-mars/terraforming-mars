@@ -10,7 +10,6 @@ import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -60,11 +59,10 @@ export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
       description: 'Requires 2 Science tags.',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 microbe to ANY card.', (eb) => {
           eb.empty().startAction.microbes(1).asterix();
-          eb.description('Action: Add 1 microbe to ANY card.');
         }).br;
-        b.text('1 VP for every 3rd Microbe on this card', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for every 3rd Microbe on this card');
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
     };

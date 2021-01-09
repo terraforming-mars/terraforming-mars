@@ -22,7 +22,7 @@ export class Moss extends Card implements IProjectCard {
         cardNumber: '122',
         requirements: CardRequirements.builder((b) => b.oceans(3)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.plants(1)).nbsp.minus().plants(1);
+          b.production((pb) => pb.plants(1)).nbsp.minus().plants(1);
         }),
         description: 'Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.',
       },

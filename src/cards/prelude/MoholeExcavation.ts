@@ -19,7 +19,7 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P23',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.steel(1).br;
           pb.heat(2);
         }).heat(2);

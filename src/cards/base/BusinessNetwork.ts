@@ -26,8 +26,8 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
         cardNumber: '110',
         description: 'Decrease your MC production 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => eb.empty().startAction.empty().description()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true).br;
-          b.productionBox((pb) => pb.megacredits(-1));
+          b.action(undefined, (eb) => eb.empty().startAction.empty()).text('Action: Look at the top card and either buy it or discard it', CardRenderItemSize.SMALL, true).br;
+          b.production((pb) => pb.megacredits(-1));
         }),
       },
     });
@@ -59,7 +59,7 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
         }
         LogHelper.logCardChange(game, player, 'drew', 1);
         player.cardsInHand.push(dealtCard);
-        game.defer(new SelectHowToPayDeferred(player, player.cardCost, false, false, 'Select how to pay for action'));
+        game.defer(new SelectHowToPayDeferred(player, player.cardCost, {title: 'Select how to pay for action'}));
         return undefined;
       },
       canSelectCard ? 1 : 0,

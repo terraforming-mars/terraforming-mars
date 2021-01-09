@@ -13,7 +13,6 @@ import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -30,12 +29,11 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
         cardNumber: '147',
         requirements: CardRequirements.builder((b) => b.oxygen(8)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.effect('When you place a greenery tile, add an Animal to this card.', (eb) => {
             eb.greenery().startEffect.animals(1);
-            eb.description('Effect: When you place a greenery tile, add an Animal to this card.');
           }).br;
-          b.text('1 VP per 2 Animals on this card', CardRenderItemSize.TINY, true);
-          b.animals(1).productionBox((pb) => pb.minus().plants(1).any);
+          b.vpText('1 VP per 2 Animals on this card');
+          b.animals(1).production((pb) => pb.minus().plants(1).any);
         }),
         description: {
         // TODO (chosta): revert the original description once a solution for description space is found

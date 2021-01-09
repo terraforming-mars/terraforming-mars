@@ -22,11 +22,10 @@ export class Aphrodite implements CorporationCard {
       description: 'You start with 1 plant production and 47 MC.',
       renderData: CardRenderer.builder((b) => {
         b.br;
-        b.productionBox((pb) => pb.plants(1)).nbsp.megacredits(47);
+        b.production((pb) => pb.plants(1)).nbsp.megacredits(47);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('Whenever Venus is terraformed 1 step, you gain 2MC.', (eb) => {
             eb.venus(1).any.startEffect.megacredits(2);
-            eb.description('Effect: Whenever Venus is terraformed 1 step, you gain 2MC.');
           });
         });
       }),

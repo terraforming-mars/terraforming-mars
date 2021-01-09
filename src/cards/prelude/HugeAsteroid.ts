@@ -14,7 +14,7 @@ export class HugeAsteroid extends PreludeCard {
     }
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 3);
-      game.defer(new SelectHowToPayDeferred(player, 5, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 5));
       return undefined;
     }
     public metadata: CardMetadata = {

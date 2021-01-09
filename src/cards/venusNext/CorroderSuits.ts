@@ -51,7 +51,7 @@ export class CorroderSuits implements IProjectCard {
       cardNumber: '219',
       description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD.',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(2);
         }).wild(1).secondaryTag(Tags.VENUS);
       }),

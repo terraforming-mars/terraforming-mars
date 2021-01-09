@@ -18,7 +18,7 @@ export class Mohole extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P22',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.heat(3)).br;
+        b.production((pb) => pb.heat(3)).br;
         b.heat(3);
       }),
       description: 'Increase your heat production 3 steps. Gain 3 heat.',

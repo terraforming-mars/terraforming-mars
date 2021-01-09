@@ -95,7 +95,7 @@ export class Playwrights implements CorporationCard {
       description: 'You start with 38 MC and 1 Energy production.',
       renderData: CardRenderer.builder((b) => {
         b.br.br;
-        b.megacredits(38).productionBox((pb) => pb.energy(1));
+        b.megacredits(38).production((pb) => pb.energy(1));
         b.corpBox('action', (cb) => {
           cb.action('Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
             // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)

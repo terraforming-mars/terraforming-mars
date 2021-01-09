@@ -71,7 +71,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
           eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
         }).br;
-        b.productionBox((pb) => pb.minus().energy(1)).nbsp.city().asterix();
+        b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
       }),
       description: {
         text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',

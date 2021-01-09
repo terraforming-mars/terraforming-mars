@@ -24,7 +24,7 @@ export class Farming extends Card implements IProjectCard {
         requirements: CardRequirements.builder((b) => b.temperature(4)),
         description: 'Requires +4° C or warmer. Increase your MC production 2 steps and your plant production 2 steps. Gain 2 Plants.',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(2).br;
             pb.plants(2);
           }).nbsp.plants(2);

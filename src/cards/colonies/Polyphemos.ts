@@ -24,7 +24,7 @@ export class Polyphemos implements CorporationCard {
       description: 'You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.',
       renderData: CardRenderer.builder((b) => {
         b.br;
-        b.megacredits(50).nbsp.productionBox((pb) => pb.megacredits(5)).nbsp.titanium(5).digit;
+        b.megacredits(50).nbsp.production((pb) => pb.megacredits(5)).nbsp.titanium(5).digit;
         b.corpBox('effect', (ce) => {
           ce.effect('When you buy a card to hand, pay 5MC instead of 3, including the starting hand.', (eb) => {
             eb.cards(1).asterix().startEffect.megacredits(5);

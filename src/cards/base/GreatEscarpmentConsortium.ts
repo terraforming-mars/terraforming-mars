@@ -20,7 +20,7 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
         cardNumber: '061',
         requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().steel(-1).any.br;
             pb.plus().steel(1);
           });

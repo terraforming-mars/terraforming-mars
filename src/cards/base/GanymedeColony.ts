@@ -8,7 +8,6 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class GanymedeColony extends Card implements IProjectCard {
@@ -24,7 +23,7 @@ export class GanymedeColony extends Card implements IProjectCard {
         cardNumber: '081',
         renderData: CardRenderer.builder((b) => {
           b.city().asterix().br;
-          b.text('1 VP per Jovian tag you have.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP per Jovian tag you have.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },

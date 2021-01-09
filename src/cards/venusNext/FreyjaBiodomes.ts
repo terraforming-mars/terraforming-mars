@@ -64,7 +64,7 @@ export class FreyjaBiodomes implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.venus(10)),
       renderData: CardRenderer.builder((b) => {
         b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
-        b.productionBox((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
+        b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
       }),
       description: {
         text: 'Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, MC +2.',

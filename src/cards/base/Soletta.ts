@@ -19,7 +19,7 @@ export class Soletta extends Card implements IProjectCard {
       metadata: {
         cardNumber: '203',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.heat(7));
+          b.production((pb) => pb.heat(7));
         }),
         description: 'Increase your heat production 7 steps.',
       },

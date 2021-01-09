@@ -32,6 +32,6 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
 
 export namespace SpaceBonus {
   export function toString(spaceBonus: SpaceBonus): string {
-    return TO_STRING_MAP.get(spaceBonus) || `(unnamed tile, id ${spaceBonus})`;
+    return TO_STRING_MAP.get(spaceBonus) || `(unnamed space bonus, id ${spaceBonus})`;
   }
 }

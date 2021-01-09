@@ -31,9 +31,7 @@ import {
 } from '../models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../models/FundedAwardModel';
 import {
-  PartyModel,
-  DelegatesModel,
-  TurmoilModel,
+  getTurmoil,
 } from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
@@ -91,7 +89,7 @@ export class Server {
       spaces: getSpaces(game.board),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
+      steelValue: player.getSteelValue(game),
       temperature: game.getTemperature(),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
@@ -104,6 +102,7 @@ export class Server {
       isActive: player.id === game.activePlayer,
       corporateEra: game.gameOptions.corporateEra,
       venusNextExtension: game.gameOptions.venusNextExtension,
+      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
@@ -127,6 +126,7 @@ export class Server {
       aresExtension: game.gameOptions.aresExtension,
       aresData: game.aresData,
       preludeExtension: game.gameOptions.preludeExtension,
+      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     };
   }
@@ -386,7 +386,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
-      steelValue: player.getSteelValue(),
+      steelValue: player.getSteelValue(game),
       terraformRating: player.getTerraformRating(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -394,6 +394,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer,
       venusNextExtension: game.gameOptions.venusNextExtension,
+      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
@@ -413,6 +414,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       preludeExtension: game.gameOptions.preludeExtension,
+      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     } as PlayerModel;
   });
@@ -433,121 +435,6 @@ function getColonies(game: Game): Array<ColonyModel> {
             game.getPlayerById(colony.visitor).color,
     }),
   );
-}
-
-function getTurmoil(game: Game): TurmoilModel | undefined {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    const parties = getParties(game);
-    let chairman; let dominant; let ruling;
-    if (game.turmoil.chairman) {
-      if (game.turmoil.chairman === 'NEUTRAL') {
-        chairman = Color.NEUTRAL;
-      } else {
-        chairman = game.getPlayerById(game.turmoil.chairman).color;
-      }
-    }
-    if (game.turmoil.dominantParty) {
-      dominant = game.turmoil.dominantParty.name;
-    }
-    if (game.turmoil.rulingParty) {
-      ruling = game.turmoil.rulingParty.name;
-    }
-
-    const lobby = Array.from(
-      game.turmoil.lobby,
-      (player) => game.getPlayerById(player).color,
-    );
-
-    const reserve = game.turmoil.getPresentPlayers().map((player) => {
-      const number = game.turmoil!.getDelegates(player);
-      if (player !== 'NEUTRAL') {
-        return {
-          color: game.getPlayerById(player).color,
-          number: number,
-        };
-      } else {
-        return {color: Color.NEUTRAL, number: number};
-      }
-    });
-
-    let distant;
-    if (game.turmoil.distantGlobalEvent) {
-      distant = {
-        name: game.turmoil.distantGlobalEvent.name,
-        description: game.turmoil.distantGlobalEvent.description,
-        revealed: game.turmoil.distantGlobalEvent.revealedDelegate,
-        current: game.turmoil.distantGlobalEvent.currentDelegate,
-      };
-    }
-
-    let coming;
-    if (game.turmoil.comingGlobalEvent) {
-      coming = {
-        name: game.turmoil.comingGlobalEvent.name,
-        description: game.turmoil.comingGlobalEvent.description,
-        revealed: game.turmoil.comingGlobalEvent.revealedDelegate,
-        current: game.turmoil.comingGlobalEvent.currentDelegate,
-      };
-    }
-
-    let current;
-    if (game.turmoil.currentGlobalEvent) {
-      current = {
-        name: game.turmoil.currentGlobalEvent.name,
-        description: game.turmoil.currentGlobalEvent.description,
-        revealed: game.turmoil.currentGlobalEvent.revealedDelegate,
-        current: game.turmoil.currentGlobalEvent.currentDelegate,
-      };
-    }
-
-    return {
-      chairman: chairman,
-      ruling: ruling,
-      dominant: dominant,
-      parties: parties,
-      lobby: lobby,
-      reserve: reserve,
-      distant: distant,
-      comming: coming,
-      current: current,
-    };
-  } else {
-    return undefined;
-  }
-}
-
-function getParties(game: Game): Array<PartyModel> {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
-      const delegates: Array<DelegatesModel> = [];
-      party.getPresentPlayers().forEach((player) => {
-        const number = party.getDelegates(player);
-        if (player !== 'NEUTRAL') {
-          delegates.push({
-            color: game.getPlayerById(player).color,
-            number: number,
-          });
-        } else {
-          delegates.push({color: Color.NEUTRAL, number: number});
-        }
-      });
-      let partyLeader;
-      if (party.partyLeader) {
-        if (party.partyLeader === 'NEUTRAL') {
-          partyLeader = Color.NEUTRAL;
-        } else {
-          partyLeader = game.getPlayerById(party.partyLeader).color;
-        }
-      }
-      return {
-        name: party.name,
-        description: party.description,
-        partyLeader: partyLeader,
-        delegates: delegates,
-      };
-    });
-  }
-  return [];
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

@@ -24,7 +24,7 @@ export class City extends StandardProject {
     cardNumber: 'SP4',
     renderData: CardRenderer.builder((b) =>
       b.standardProject('Spend 25 MC to place a city tile and increase your MC production 1 step.', (eb) => {
-        eb.megacredits(25).startAction.city().productionBox((pb) => {
+        eb.megacredits(25).startAction.city().production((pb) => {
           pb.megacredits(1);
         });
       }),

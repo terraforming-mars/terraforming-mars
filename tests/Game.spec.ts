@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/Resources';
-import {ISpace} from '../src/boards/ISpace';
+import {ISpace, SpaceId} from '../src/boards/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
@@ -351,7 +351,7 @@ describe('Game', function() {
   it('Does not assign player to ocean after placement', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('oceanz', [player], player);
-    const spaceId: string = game.board.getAvailableSpacesForOcean(player)[0].id;
+    const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     game.addOceanTile(player, spaceId);
 
     const space: ISpace = game.getSpace(spaceId);

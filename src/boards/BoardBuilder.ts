@@ -1,4 +1,4 @@
-import {ISpace} from './ISpace';
+import {ISpace, SpaceId} from './ISpace';
 import {Random} from '../Random';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
@@ -118,14 +118,14 @@ export class BoardBuilder {
 }
 
 class Space implements ISpace {
-  private constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+  private constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
   }
 
-  static colony(id: string) {
+  static colony(id: SpaceId) {
     return new Space(id, SpaceType.COLONY, [], -1, -1);
   }
 
-  private static strId(id: number): string {
+  private static spaceId(id: number): SpaceId {
     let strId = id.toString();
     if (id < 10) {
       strId = '0'+strId;
@@ -133,10 +133,10 @@ class Space implements ISpace {
     return strId;
   }
   static land(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(this.strId(id), SpaceType.LAND, bonus, x, y);
+    return new Space(this.spaceId(id), SpaceType.LAND, bonus, x, y);
   }
 
   static ocean(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(this.strId(id), SpaceType.OCEAN, bonus, x, y);
+    return new Space(this.spaceId(id), SpaceType.OCEAN, bonus, x, y);
   }
 }

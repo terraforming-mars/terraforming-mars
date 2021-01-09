@@ -22,7 +22,7 @@ import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
+import {ISpace, SpaceId} from './boards/ISpace';
 import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
 import {LogHelper} from './LogHelper';
@@ -1457,7 +1457,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public addGreenery(
-    player: Player, spaceId: string,
+    player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.LAND,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, spaceType, this.getSpace(spaceId), {
@@ -1470,7 +1470,7 @@ export class Game implements ISerializable<SerializedGame> {
     return undefined;
   }
   public addCityTile(
-    player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
+    player: Player, spaceId: SpaceId, spaceType: SpaceType = SpaceType.LAND,
     cardName: string | undefined = undefined): void {
     const space = this.getSpace(spaceId);
     this.addTile(player, spaceType, space, {
@@ -1479,7 +1479,7 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
   public addOceanTile(
-    player: Player, spaceId: string,
+    player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.OCEAN): void {
     if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
       return;
@@ -1504,7 +1504,7 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
-  public removeTile(spaceId: string): void {
+  public removeTile(spaceId: SpaceId): void {
     this.getSpace(spaceId).tile = undefined;
     this.getSpace(spaceId).player = undefined;
   }

@@ -1462,6 +1462,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;
   }
+
   public addCityTile(
     player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
     cardName: string | undefined = undefined): void {
@@ -1471,6 +1472,7 @@ export class Game implements ISerializable<SerializedGame> {
       card: cardName,
     });
   }
+
   public addOceanTile(
     player: Player, spaceId: string,
     spaceType: SpaceType = SpaceType.OCEAN): void {

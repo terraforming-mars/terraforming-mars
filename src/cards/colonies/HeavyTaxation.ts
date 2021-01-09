@@ -31,7 +31,7 @@ export class HeavyTaxation implements IProjectCard {
       cardNumber: 'C14',
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(2)).nbsp.megacredits(4);
+        b.production((pb) => pb.megacredits(2)).nbsp.megacredits(4);
       }),
       description: 'Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.',
       victoryPoints: -1,

@@ -18,7 +18,7 @@ export class Supplier extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P32',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(2)).br;
+        b.production((pb) => pb.energy(2)).br;
         b.steel(4);
       }),
       description: 'Increase your energy production 2 steps. Gain 4 steel.',

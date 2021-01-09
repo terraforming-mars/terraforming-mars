@@ -13,6 +13,7 @@ import {playerColorClass} from '../utils/utils';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {GameId} from '../Game';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 export interface CreateGameModel {
     allOfficialExpansions: boolean;
@@ -45,6 +46,7 @@ export interface CreateGameModel {
     promoCardsOption: boolean;
     communityCardsOption: boolean;
     aresExtension: boolean;
+    politicalAgendasExtension: AgendaStyle;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -112,6 +114,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
+      politicalAgendasExtension: AgendaStyle.STANDARD,
       undoOption: false,
       showTimers: false,
       fastModeOption: false,
@@ -246,6 +249,26 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return RandomMAOptionType.NONE;
       }
     },
+    isPoliticalAgendasExtensionEnabled: function(): Boolean {
+      return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
+    },
+    politicalAgendasExtensionToggle: function() {
+      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
+        this.politicalAgendasExtension = AgendaStyle.RANDOM;
+      } else {
+        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+      }
+    },
+    getPoliticalAgendasExtensionAgendaStyle: function(type: 'random' | 'chairman'): AgendaStyle {
+      if (type === 'random') {
+        return AgendaStyle.RANDOM;
+      } else if (type === 'chairman') {
+        return AgendaStyle.CHAIRMAN;
+      } else {
+        console.warn('AgendaStyle not found');
+        return AgendaStyle.STANDARD;
+      }
+    },
     isBeginnerToggleEnabled: function(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
     },
@@ -260,6 +283,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
     },
     toggleVenusNext: function() {
       this.solarPhaseOption = this.$data.venusNext;
+    },
+    deselectPoliticalAgendasWhenDeselectingTurmoil: function() {
+      if (this.$data.turmoil === false) {
+        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+      }
+    },
+    deselectVenusCompletion: function() {
       if (this.$data.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
@@ -345,6 +375,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const promoCardsOption = component.promoCardsOption;
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
+      const politicalAgendasExtension = this.politicalAgendasExtension;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -402,6 +433,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         promoCardsOption,
         communityCardsOption,
         aresExtension: aresExtension,
+        politicalAgendasExtension: politicalAgendasExtension,
         undoOption,
         showTimers,
         fastModeOption,
@@ -513,7 +545,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Colonies</span>
                             </label>
 
-                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
+                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil" v-on:change="deselectPoliticalAgendasWhenDeselectingTurmoil()">
                             <label for="turmoil-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
@@ -538,6 +570,30 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <template v-if="turmoil">
+                                <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
+                                <label for="politicalAgendas-checkbox" class="expansion-button">
+                                    <div class="create-game-expansion-icon expansion-icon-agendas"></div>
+                                    <span v-i18n>Agendas</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#political-agendas" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+
+                                <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled()">
+                                    <div>
+                                    <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
+                                    <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
+                                        <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('random') }}</span>
+                                    </label>
+                                    </div>
+
+                                    <div>
+                                    <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('chairman')" id="chairmanAgendaStyle-radio">
+                                    <label class="label-agendaStyle agendaStyle-chairman" for="chairmanAgendaStyle-radio">
+                                        <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('chairman') }}</span>
+                                    </label>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
 
                         <div class="create-game-page-column">
@@ -725,7 +781,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                                 </label>
             
                                                 <label class="form-label">
-                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
+                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
                                                     <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
                                                 </label>
                                             </template>

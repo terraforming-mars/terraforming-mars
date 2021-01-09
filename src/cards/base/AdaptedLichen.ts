@@ -18,7 +18,7 @@ export class AdaptedLichen extends Card implements IProjectCard {
       metadata: {
         description: 'Increase your Plant production 1 step.',
         cardNumber: '048',
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(1))),
+        renderData: CardRenderer.builder((b) => b.production((pb) => pb.plants(1))),
       },
     });
   }

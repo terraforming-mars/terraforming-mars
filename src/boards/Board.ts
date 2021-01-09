@@ -10,10 +10,10 @@ export abstract class Board {
 
   public abstract getVolcanicSpaceIds(): Array<string>;
 
-  public abstract getNoctisCitySpaceIds(): Array<string>
+  public abstract getNoctisCitySpaceIds(): Array<string>;
 
   /* Returns the space given a Space ID. */
-  public getSpace(id: string) {
+  public getSpace(id: string): ISpace {
     const space = this.spaces.find((space) => space.id === id);
     if (space === undefined) {
       throw new Error(`Can't find space with id ${id}`);

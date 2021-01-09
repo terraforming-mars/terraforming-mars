@@ -24,7 +24,7 @@ export class Bushes extends Card implements IProjectCard {
         description: 'Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.',
         requirements: CardRequirements.builder((b) => b.temperature(-10)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.plants(2);
           }).plants(2);
         }),

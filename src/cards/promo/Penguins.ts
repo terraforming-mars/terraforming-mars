@@ -9,7 +9,6 @@ import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -49,7 +48,7 @@ export class Penguins implements IActionCard, IProjectCard, IResourceCard {
         b.action('Add 1 Animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
         }).br;
-        b.text('1 VP for each animal on this card.', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for each animal on this card.');
       }),
       description: 'Requires 8 oceans.',
       victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),

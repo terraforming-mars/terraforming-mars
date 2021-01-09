@@ -29,7 +29,7 @@ export class GalileanWaystation implements IProjectCard {
       description: 'Increase your MC production 1 step for every Jovian tag in play.',
       cardNumber: 'C13',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(1).slash().jovian().played.any);
+        b.production((pb) => pb.megacredits(1).slash().jovian().played.any);
       }),
       victoryPoints: 1,
     };

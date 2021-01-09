@@ -41,7 +41,7 @@ export class EcologyResearch implements IProjectCard {
       description: 'Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.',
       cardNumber: 'C09',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.plants(1).slash().colonies(1, CardRenderItemSize.SMALL)).br;
+        b.production((pb) => pb.plants(1).slash().colonies(1, CardRenderItemSize.SMALL)).br;
         b.animals(1).asterix().nbsp.nbsp.microbes(2).asterix();
       }),
       victoryPoints: 1,

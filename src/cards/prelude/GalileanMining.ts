@@ -22,7 +22,7 @@ export class GalileanMining extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P13',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.titanium(2);
         }).br;
         b.megacredits(-5);

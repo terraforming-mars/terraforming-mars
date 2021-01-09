@@ -73,11 +73,11 @@ export class Cloner {
 
     // Handicap updates are only done during game set-up. So when cloning, adjust the
     // terraforming rating to the difference between the two handicaps.
-    const terraformRatingDelta = from.handicap - to.handicap;
-    const newTerraformRating = to.terraformRating + terraformRatingDelta;
+    const terraformRatingDelta = Number(from.handicap) - Number(to.handicap);
+    const newTerraformRating = Number(to.terraformRating) + terraformRatingDelta;
     to.terraformRating = newTerraformRating;
     // Also update the handicap to reflect appropriately.
-    to.handicap = from.handicap;
+    to.handicap = Number(from.handicap);
   }
 }
 

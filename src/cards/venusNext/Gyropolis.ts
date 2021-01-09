@@ -32,7 +32,7 @@ export class Gyropolis implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '230',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(2).br;
           pb.plus().megacredits(1).slash().venus(1).played.br;
           pb.plus().megacredits(1).slash().earth().played.br;

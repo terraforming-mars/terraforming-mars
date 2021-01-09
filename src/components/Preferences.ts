@@ -3,6 +3,9 @@ import {Color} from '../Color';
 import {PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
 import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
+import {TurmoilModel} from '../models/TurmoilModel';
+import {PartyName} from '../turmoil/parties/PartyName';
+
 // @ts-ignore
 import {$t} from '../directives/i18n';
 
@@ -31,6 +34,12 @@ export const Preferences = Vue.component('preferences', {
     },
     venusNextExtension: {
       type: Boolean,
+    },
+    turmoilExtension: {
+      type: Boolean,
+    },
+    turmoil: {
+      type: Object as () => TurmoilModel || undefined,
     },
   },
   data: function() {
@@ -147,6 +156,25 @@ export const Preferences = Vue.component('preferences', {
         return `${this.venus}`;
       }
     },
+    rulingPartyToCss: function(): string {
+      if (this.turmoil.ruling === undefined) {
+        console.warn('no party provided');
+        return '';
+      }
+      return this.turmoil.ruling.toLowerCase().split(' ').join('_');
+    },
+    getRulingParty: function(): string {
+      const rulingPartyName = this.turmoil.ruling;
+      if (rulingPartyName === PartyName.MARS) {
+        return `Mars`;
+      } else if (rulingPartyName === PartyName.SCIENTISTS) {
+        return `Science`;
+      } else if (rulingPartyName === PartyName.KELVINISTS) {
+        return `Kelvin`;
+      } else {
+        return `${rulingPartyName}`;
+      }
+    },
   },
   mounted: function() {
     this.updatePreferencesFromStorage();
@@ -156,6 +184,9 @@ export const Preferences = Vue.component('preferences', {
                 <div class="preferences_tm">
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
+                </div>
+                <div v-if="turmoilExtension">
+                <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
                 </div>
                 <div class="preferences_global_params">
                   <div class="preferences_temperature-tile"></div>

@@ -20,7 +20,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P26',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.heat(2)).br;
+        b.production((pb) => pb.heat(2)).br;
         b.oceans(1);
       }),
       description: 'Increase your heat production 2 steps. Place an Ocean tile.',

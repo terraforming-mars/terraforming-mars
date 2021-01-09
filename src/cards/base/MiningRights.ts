@@ -12,7 +12,7 @@ export class MiningRights extends MiningCard {
       cardNumber: '067',
       renderData: CardRenderer.builder((b) => {
         b.tile(TileType.MINING_RIGHTS, true).asterix().br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.steel(1).or().titanium(1);
         }).asterix();
       }),

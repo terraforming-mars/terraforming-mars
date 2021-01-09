@@ -21,7 +21,7 @@ export class BiosphereSupport extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P05',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().megacredits(1).br;
           pb.plants(2);
         });

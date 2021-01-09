@@ -47,7 +47,7 @@ export class MartianMediaCenter implements IProjectCard {
         b.action('Pay 3 MC to add a delegate to any party.', (eb) => {
           eb.megacredits(3).startAction.delegates(1);
         }).br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(2);
         });
       }),

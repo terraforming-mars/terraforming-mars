@@ -30,7 +30,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
           b.action('Add an animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().plants(-2).any;
           });
         }),

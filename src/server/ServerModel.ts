@@ -1,4 +1,3 @@
-import {AndOptions} from '../inputs/AndOptions';
 import {CardModel} from '../models/CardModel';
 import {ColonyModel} from '../models/ColonyModel';
 import {Color} from '../Color';
@@ -9,7 +8,6 @@ import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
-import {OrOptions} from '../inputs/OrOptions';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../models/PlayerInputModel';
@@ -265,13 +263,17 @@ function getWaitingFor(
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
   case PlayerInputTypes.OR_OPTIONS:
+  case PlayerInputTypes.SELECT_INITIAL_CARDS:
     playerInputModel.options = [];
-    for (const option of (waitingFor as AndOptions | OrOptions)
-      .options) {
-      const subOption = getWaitingFor(option);
-      if (subOption !== undefined) {
-        playerInputModel.options.push(subOption);
+    if (waitingFor.options !== undefined) {
+      for (const option of waitingFor.options) {
+        const subOption = getWaitingFor(option);
+        if (subOption !== undefined) {
+          playerInputModel.options.push(subOption);
+        }
       }
+    } else {
+      throw new Error('required options not defined');
     }
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:

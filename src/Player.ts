@@ -1499,23 +1499,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       const players: Array<Player> = game.getPlayers().slice();
       players.sort(
-        (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game),
+        (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
       );
 
       // We have one rank 1 player
-      if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+      if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
         if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
         players.shift();
 
         if (players.length > 1) {
           // We have one rank 2 player
-          if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+          if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
             if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
 
           // We have at least two rank 2 players
           } else {
-            const score = fundedAward.award.getScore(players[0], game);
-            while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+            const score = fundedAward.award.getScore(players[0]);
+            while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
               if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
               players.shift();
             }
@@ -1524,8 +1524,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // We have at least two rank 1 players
       } else {
-        const score = fundedAward.award.getScore(players[0], game);
-        while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+        const score = fundedAward.award.getScore(players[0]);
+        while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
           if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
           players.shift();
         }
@@ -1835,7 +1835,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         .filter(
           (milestone: IMilestone) =>
             !game.milestoneClaimed(milestone) &&
-                      milestone.canClaim(this, game))
+                      milestone.canClaim(this))
         .map(
           (milestone: IMilestone) =>
             this.claimMilestone(milestone, game));

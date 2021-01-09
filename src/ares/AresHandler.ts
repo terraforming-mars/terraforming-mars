@@ -43,11 +43,11 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(game: Game, aresData: IAresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: IAresData, player: Player, space: ISpace) {
     let incrementMilestone = false;
 
-    game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-      if (this.earnAdacencyBonus(game, adjacentSpace, player)) {
+    player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+      if (this.earnAdacencyBonus(adjacentSpace, player)) {
         incrementMilestone = true;
       }
     });
@@ -63,7 +63,7 @@ export class AresHandler {
 
   // |player| placed a tile next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(game: Game, adjacentSpace: ISpace, player: Player): boolean {
+  private static earnAdacencyBonus(adjacentSpace: ISpace, player: Player): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -72,13 +72,13 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
+    const addResourceToCard = function(player: Player, resourceType: ResourceType, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0]);
       } else if (availableCards.length > 1) {
-        game.defer(new DeferredAction(
+        player.game.defer(new DeferredAction(
           player,
           () => new SelectCard(
             'Select a card to add an ' + resourceAsText,
@@ -86,7 +86,7 @@ export class AresHandler {
             availableCards,
             (selected: ICard[]) => {
               player.addResourceTo(selected[0]);
-              LogHelper.logAddResource(game, player, selected[0], 1);
+              LogHelper.logAddResource(player.game, player, selected[0], 1);
               return undefined;
             },
           ),
@@ -100,7 +100,7 @@ export class AresHandler {
       bonuses.add(bonus);
       switch (bonus) {
       case SpaceBonus.ANIMAL:
-        addResourceToCard(game, player, ResourceType.ANIMAL, 'animal');
+        addResourceToCard(player, ResourceType.ANIMAL, 'animal');
         break;
 
       case SpaceBonus.MEGACREDITS:
@@ -112,18 +112,18 @@ export class AresHandler {
         break;
 
       case SpaceBonus.MICROBE:
-        addResourceToCard(game, player, ResourceType.MICROBE, 'microbe');
+        addResourceToCard(player, ResourceType.MICROBE, 'microbe');
         break;
 
       default:
-        game.grantSpaceBonus(player, bonus);
+        player.game.grantSpaceBonus(player, bonus);
         break;
       }
     });
 
     const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${SpaceBonus.toString(elem[0])}`).join(', ');
     const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile?.tileType) : 'no tile';
-    game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
+    player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
     let ownerBonus = 1;
     if (adjacentPlayer.cardIsInEffect(CardName.MARKETING_EXPERTS)) {
@@ -131,7 +131,7 @@ export class AresHandler {
     };
 
     adjacentPlayer.megaCredits += ownerBonus;
-    game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
+    player.game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
 
     return true;
   }
@@ -157,11 +157,11 @@ export class AresHandler {
   }
 
   // Used with Ecological and Geological Survey
-  public static afterTilePlacement(game: Game, player: Player, startingResources?: Multiset<Resources | ResourceType>): void {
+  public static afterTilePlacement(player: Player, startingResources?: Multiset<Resources | ResourceType>): void {
     if (startingResources === undefined) {
       return;
     }
-    if (game.phase === Phase.SOLAR) {
+    if (player.game.phase === Phase.SOLAR) {
       return;
     }
 
@@ -176,14 +176,14 @@ export class AresHandler {
         player.setResource(resource, 1);
 
         const cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
-        game.log('${0} gained a bonus ${1} because of ${2}', (b) => b.player(player).string(resource).cardName(cardName));
+        player.game.log('${0} gained a bonus ${1} because of ${2}', (b) => b.player(player).string(resource).cardName(cardName));
       }
     });
     [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
       if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
-        game.defer(new AddResourcesToCard(
+        player.game.defer(new AddResourcesToCard(
           player,
-          game,
+          player.game,
           resourceType,
           1,
         ));
@@ -256,11 +256,11 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(game: Game, player: Player, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
-    if (game.phase === Phase.SOLAR) {
+  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
+    if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
-    const cost = AresHandler.computeAdjacencyCosts(game, space, subjectToHazardAdjacency);
+    const cost = AresHandler.computeAdjacencyCosts(player.game, space, subjectToHazardAdjacency);
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.
@@ -281,17 +281,16 @@ export class AresHandler {
     }
   }
 
-  public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
-    const cost = this.assertCanPay(game, player, space, subjectToHazardAdjacency);
+  public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
+    const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
     if (cost.production > 0) {
       // TODO(kberg): don't send interrupt if total is available.
-      game.defer(new SelectProductionToLoseDeferred(player, cost.production));
+      player.game.defer(new SelectProductionToLoseDeferred(player, cost.production));
     }
     if (cost.megacredits > 0) {
-      game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
-
-      game.defer(new SelectHowToPayDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
+      player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
+      player.game.defer(new SelectHowToPayDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }
 
@@ -315,16 +314,16 @@ export class AresHandler {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
-  public static onOceanPlaced(game: Game, aresData: IAresData, player: Player) {
-    _AresHazardPlacement.onOceanPlaced(game, aresData, player);
+  public static onOceanPlaced(aresData: IAresData, player: Player) {
+    _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 
   public static onOxygenChange(game: Game, aresData: IAresData) {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined) {
-    if (game.phase === Phase.SOLAR) {
+  public static grantBonusForRemovingHazard(player: Player, initialTileType: TileType | undefined) {
+    if (player.game.phase === Phase.SOLAR) {
       return;
     }
     let steps: number;
@@ -342,8 +341,8 @@ export class AresHandler {
     default:
       return;
     }
-    player.increaseTerraformRatingSteps(steps, game);
-    game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
+    player.increaseTerraformRatingSteps(steps, player.game);
+    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
   }
 }
 

@@ -1276,9 +1276,6 @@ export class Game implements ISerializable<SerializedGame> {
     return player;
   }
 
-  public getSpace(id: string): ISpace {
-    return this.board.getSpace(id);
-  }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
@@ -1449,11 +1446,11 @@ export class Game implements ISerializable<SerializedGame> {
     player: Player, spaceId: string,
     spaceType: SpaceType = SpaceType.LAND,
     shouldRaiseOxygen: boolean = true): undefined {
-    this.addTile(player, spaceType, this.getSpace(spaceId), {
+    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(this, player, this.getSpace(spaceId));
+    PartyHooks.applyGreensRulingPolicy(this, player, this.board.getSpace(spaceId));
 
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;
@@ -1462,7 +1459,7 @@ export class Game implements ISerializable<SerializedGame> {
   public addCityTile(
     player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
     cardName: string | undefined = undefined): void {
-    const space = this.getSpace(spaceId);
+    const space = this.board.getSpace(spaceId);
     this.addTile(player, spaceType, space, {
       tileType: TileType.CITY,
       card: cardName,
@@ -1475,7 +1472,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
       return;
     }
-    this.addTile(player, spaceType, this.getSpace(spaceId), {
+    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
@@ -1496,8 +1493,8 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public removeTile(spaceId: string): void {
-    this.getSpace(spaceId).tile = undefined;
-    this.getSpace(spaceId).player = undefined;
+    this.board.getSpace(spaceId).tile = undefined;
+    this.board.getSpace(spaceId).player = undefined;
   }
 
   public getPlayers(): Array<Player> {

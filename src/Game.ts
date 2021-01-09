@@ -1277,11 +1277,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getSpace(id: string): ISpace {
-    const space = this.board.spaces.find((space) => space.id === id);
-    if (space === undefined) {
-      throw new Error('Error with getting space');
-    }
-    return space;
+    return this.board.getSpace(id);
   }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(

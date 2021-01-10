@@ -17,6 +17,7 @@ import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
 import {TopBar} from './TopBar';
+import {PreferencesManager} from './PreferencesManager';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -89,6 +90,30 @@ export const PlayerHome = Vue.component('player-home', {
       }
 
       return 'generation ' + this.player.generation;
+    },
+    toggleAutomatedCardsHiding() {
+      const newVal = this.isAutomatedCardShown() ? '1': '';
+      PreferencesManager.saveValue('hide_automated_cards', newVal);
+      PreferencesManager.preferencesValues.set('hide_automated_cards', this.isAutomatedCardShown());
+    },
+    isAutomatedCardShown(): boolean {
+      const val = PreferencesManager.loadValue('hide_automated_cards');
+      return val !== '1';
+    },
+    getAutomatedToggleLabel: function(): string {
+      return this.isAutomatedCardShown() ? 'Hide automated cards' : 'Show automated cards';
+    },
+    toggleEventCardsHiding() {
+      const newVal = this.isEventCardShown() ? '1': '';
+      PreferencesManager.saveValue('hide_event_cards', newVal);
+      PreferencesManager.preferencesValues.set('hide_event_cards', this.isEventCardShown());
+    },
+    isEventCardShown(): boolean {
+      const val = PreferencesManager.loadValue('hide_event_cards');
+      return val !== '1';
+    },
+    getEventToggleLabel: function(): string {
+      return this.isEventCardShown() ? 'Hide event cards' : 'Show event cards';
     },
   },
   mounted: function() {
@@ -189,6 +214,10 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
+
+                    <div class="hiding-card-button hiding-card-button--automated" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getAutomatedToggleLabel() }}</div>
+                    <div class="hiding-card-button hiding-card-button--event" v-on:click.prevent="toggleEventCardsHiding()">{{ getEventToggleLabel() }}</div>
+                    
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
@@ -196,8 +225,10 @@ export const PlayerHome = Vue.component('player-home', {
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 
-                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
-                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isAutomatedCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+                    
+                    <stacked-cards v-show="isEventCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">

@@ -55,16 +55,12 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
-import {PartyName} from './turmoil/parties/PartyName';
 import {AgendaStyle} from './turmoil/PoliticalAgendas';
-import {REDS_POLICY_2} from './turmoil/parties/Reds';
-import {GREENS_POLICY_2} from './turmoil/parties/Greens';
-import {KELVINISTS_POLICY_4} from './turmoil/parties/Kelvinists';
 import {GameSetup} from './GameSetup';
-import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
+import {TurmoilHandler} from './turmoil/TurmoilHandler';
 
 export type GameId = string;
 
@@ -220,6 +216,10 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
+
+    this.players.forEach((player) => {
+      player.game = this;
+    });
   }
 
   // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)
@@ -259,7 +259,6 @@ export class Game implements ISerializable<SerializedGame> {
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
-
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
@@ -1033,9 +1032,16 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoFinalGreeneryPlacement(): void {
-    const players = this.players.filter(
-      (player) => this.canPlaceGreenery(player),
-    );
+    const players: Player[] = [];
+
+    this.players.forEach((player) => {
+      if (this.canPlaceGreenery(player)) {
+        players.push(player);
+      } else {
+        this.donePlayers.add(player.id);
+      }
+    });
+
     // If no players can place greeneries we are done
     if (players.length === 0) {
       this.gotoEndGame();
@@ -1086,16 +1092,7 @@ export class Game implements ISerializable<SerializedGame> {
     const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
     if (this.phase !== Phase.SOLAR) {
-      // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
-        player.addProduction(Resources.MEGACREDITS, -1 * steps);
-      }
-
-      // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        player.drawCard(this, {amount: steps});
-      }
-
+      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OXYGEN, steps);
       player.increaseTerraformRatingSteps(steps, this);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1137,15 +1134,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.increaseTerraformRating(this);
       }
 
-      // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
-        player.addProduction(Resources.MEGACREDITS, -1 * steps);
-      }
-      // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        player.drawCard(this, {amount: steps});
-      }
-
+      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRatingSteps(steps, this);
     }
 
@@ -1186,20 +1175,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.addProduction(Resources.HEAT);
       }
 
-      // PoliticalAgendas Kelvinists P2 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
-        player.setResource(Resources.MEGACREDITS, steps * 3);
-      }
-      // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
-        player.addProduction(Resources.MEGACREDITS, -1 * steps);
-      }
-
-      // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        player.drawCard(this, {amount: steps});
-      }
-
+      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.TEMPERATURE, steps);
       player.increaseTerraformRatingSteps(steps, this);
     }
 
@@ -1326,13 +1302,13 @@ export class Game implements ISerializable<SerializedGame> {
     const subjectToHazardAdjacency = tile.tileType !== TileType.OCEAN;
 
     AresHandler.ifAres(this, () => {
-      AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
+      AresHandler.assertCanPay(player, space, subjectToHazardAdjacency);
     });
 
     // Part 2. Collect additional fees.
     // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
     AresHandler.ifAres(this, () => {
-      AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
+      AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
     });
 
     // Hellas special requirements ocean tile
@@ -1345,11 +1321,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
-    // PoliticalAgendas Reds P2 hook
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && this.phase === Phase.ACTION) {
-      const redsPolicy = REDS_POLICY_2;
-      redsPolicy.onTilePlaced(player, space, this);
-    }
+    TurmoilHandler.resolveTilePlacementCosts(this, player, space);
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1379,22 +1351,10 @@ export class Game implements ISerializable<SerializedGame> {
       });
 
       AresHandler.ifAres(this, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(this, aresData, player, space);
+        AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
-      PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
-
-      // PoliticalAgendas Greens P2 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && this.phase === Phase.ACTION) {
-        const greensPolicy = GREENS_POLICY_2;
-        greensPolicy.onTilePlaced(player);
-      }
-
-      // PoliticalAgendas Kelvinists P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && this.phase === Phase.ACTION) {
-        const kelvinistsPolicy = KELVINISTS_POLICY_4;
-        kelvinistsPolicy.onTilePlaced(player);
-      }
+      TurmoilHandler.resolveTilePlacementBonuses(this, player, spaceType);
 
       if (arcadianCommunityBonus) {
         player.megaCredits += 3;
@@ -1421,10 +1381,10 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     AresHandler.ifAres(this, () => {
-      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
+      AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
 
       // Must occur after all other onTilePlaced operations.
-      AresHandler.afterTilePlacement(this, player, startingResources);
+      AresHandler.afterTilePlacement(player, startingResources);
     });
   }
 
@@ -1480,19 +1440,11 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
-      // PoliticalAgendas Reds P4 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
-        player.addProduction(Resources.MEGACREDITS, -1);
-      }
-      // PoliticalAgendas Scientists P3 hook
-      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-        player.drawCard(this);
-      }
-
+      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OCEANS);
       player.increaseTerraformRating(this);
     }
     AresHandler.ifAres(this, (aresData) => {
-      AresHandler.onOceanPlaced(this, aresData, player);
+      AresHandler.onOceanPlaced(aresData, player);
     });
   }
 

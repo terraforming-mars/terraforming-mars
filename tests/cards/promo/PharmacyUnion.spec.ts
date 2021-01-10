@@ -107,6 +107,7 @@ describe('PharmacyUnion', function() {
     player.playedCards.push(searchForLife);
     card.onCardPlayed(player, game, searchForLife);
     expect(game.deferredActions).has.lengthOf(1);
+    expect(player.getPlayedEventsCount()).to.eq(0);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
     game.deferredActions.shift();
@@ -114,6 +115,7 @@ describe('PharmacyUnion', function() {
 
     expect(player.getTerraformRating()).to.eq(23);
     expect(card.isDisabled).is.true;
+    expect(player.getPlayedEventsCount()).to.eq(1); // Counts as a played event
 
     // Cannot trigger once per game effect a second time
     card.onCardPlayed(player, game, searchForLife);

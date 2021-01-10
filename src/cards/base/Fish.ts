@@ -31,7 +31,7 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => pb.minus().plants(1).any).br;
-          b.text('1 VP for each Animal on this card.');
+          b.vpText('1 VP for each Animal on this card.');
         }),
         description: {
           text: 'Requires +2 C° or warmer. Decrease any Plant production 1 step.',

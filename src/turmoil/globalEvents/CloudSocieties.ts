@@ -19,7 +19,7 @@ export class CloudSocieties implements IGlobalEvent {
         });
         const amount = turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, amount));
+          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: amount}));
         }
       });
     }

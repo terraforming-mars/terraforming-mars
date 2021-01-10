@@ -47,7 +47,7 @@ export class ShiftAresGlobalParametersDeferred implements DeferredAction {
             AresHandler.onOxygenChange(this.game, aresData);
           }
           if (response.lowOceanDelta !== 0 || response.highOceanDelta !== 0) {
-            AresHandler.onOceanPlaced(this.game, aresData, this.player);
+            AresHandler.onOceanPlaced(aresData, this.player);
           }
           return undefined;
         });

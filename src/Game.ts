@@ -221,6 +221,10 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
+
+    this.players.forEach((player) => {
+      player.game = this;
+    });
   }
 
   // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)
@@ -260,7 +264,6 @@ export class Game implements ISerializable<SerializedGame> {
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
-
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
@@ -1034,9 +1037,16 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoFinalGreeneryPlacement(): void {
-    const players = this.players.filter(
-      (player) => this.canPlaceGreenery(player),
-    );
+    const players: Player[] = [];
+
+    this.players.forEach((player) => {
+      if (this.canPlaceGreenery(player)) {
+        players.push(player);
+      } else {
+        this.donePlayers.add(player.id);
+      }
+    });
+
     // If no players can place greeneries we are done
     if (players.length === 0) {
       this.gotoEndGame();
@@ -1327,13 +1337,13 @@ export class Game implements ISerializable<SerializedGame> {
     const subjectToHazardAdjacency = tile.tileType !== TileType.OCEAN;
 
     AresHandler.ifAres(this, () => {
-      AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
+      AresHandler.assertCanPay(player, space, subjectToHazardAdjacency);
     });
 
     // Part 2. Collect additional fees.
     // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
     AresHandler.ifAres(this, () => {
-      AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
+      AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
     });
 
     // Hellas special requirements ocean tile
@@ -1380,7 +1390,7 @@ export class Game implements ISerializable<SerializedGame> {
       });
 
       AresHandler.ifAres(this, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(this, aresData, player, space);
+        AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
       PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
@@ -1422,10 +1432,10 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     AresHandler.ifAres(this, () => {
-      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
+      AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
 
       // Must occur after all other onTilePlaced operations.
-      AresHandler.afterTilePlacement(this, player, startingResources);
+      AresHandler.afterTilePlacement(player, startingResources);
     });
   }
 
@@ -1493,7 +1503,7 @@ export class Game implements ISerializable<SerializedGame> {
       player.increaseTerraformRating(this);
     }
     AresHandler.ifAres(this, (aresData) => {
-      AresHandler.onOceanPlaced(this, aresData, player);
+      AresHandler.onOceanPlaced(aresData, player);
     });
   }
 

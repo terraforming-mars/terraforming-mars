@@ -10,7 +10,9 @@ describe('CardMetadata', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, redPlayer], player);
+    console.log(game.getCitiesInPlay());
   });
 
   it('should have a VP icon', function() {

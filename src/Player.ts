@@ -70,6 +70,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
   private waitingForCb?: () => void;
+  private _game: Game | undefined = undefined;
 
   // Corporate identity
   public corporationCard: CorporationCard | undefined = undefined;
@@ -168,6 +169,21 @@ export class Player implements ISerializable<SerializedPlayer> {
     return player;
   }
 
+  public set game(game: Game) {
+    if (this._game !== undefined) {
+      // TODO(kberg): Replace this with an Error.
+      console.warn(`Reinitializing game ${game.id} for player ${this.color}`);
+    }
+    this._game = game;
+  }
+
+  public get game(): Game {
+    if (this._game === undefined) {
+      throw new Error(`Fetching game for player ${this.color} too soon.`);
+    }
+    return this._game;
+  }
+
   public isCorporation(corporationName: CardName): boolean {
     return this.corporationCard?.name === corporationName;
   }
@@ -188,7 +204,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSteelValue(game: Game): number {
-    // TODO: Move policyIds to enum
     if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
@@ -493,6 +508,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return coloniesCount;
   }
 
+  public getPlayedEventsCount(): number {
+    let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
+    if (this.corporationCard?.name === CardName.PHARMACY_UNION && this.corporationCard.isDisabled) count++;
+
+    return count;
+  }
+
   public getResourcesOnCard(card: ICard): number | undefined {
     if (card.resourceCount !== undefined) {
       return card.resourceCount;
@@ -621,7 +643,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
       {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
       {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
-      {tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length},
+      {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
 
@@ -1147,7 +1169,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (howToPay.steel > this.steel) {
         throw new Error('Do not have enough steel');
       }
-      totalToPay += howToPay.steel * this.steelValue;
+      totalToPay += howToPay.steel * this.getSteelValue(game);
     }
 
     if (canUseTitanium && howToPay.titanium > 0) {
@@ -1462,23 +1484,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       const players: Array<Player> = game.getPlayers().slice();
       players.sort(
-        (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game),
+        (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
       );
 
       // We have one rank 1 player
-      if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+      if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
         if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
         players.shift();
 
         if (players.length > 1) {
           // We have one rank 2 player
-          if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+          if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
             if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
 
           // We have at least two rank 2 players
           } else {
-            const score = fundedAward.award.getScore(players[0], game);
-            while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+            const score = fundedAward.award.getScore(players[0]);
+            while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
               if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
               players.shift();
             }
@@ -1487,8 +1509,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // We have at least two rank 1 players
       } else {
-        const score = fundedAward.award.getScore(players[0], game);
-        while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+        const score = fundedAward.award.getScore(players[0]);
+        while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
           if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
           players.shift();
         }
@@ -1784,6 +1806,23 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(
         this.playProjectCard(game),
       );
+    }
+
+    TurmoilHandler.addPlayerAction(this, game, action.options);
+
+    if (this.canAfford(8) && !game.allMilestonesClaimed()) {
+      const remainingMilestones = new OrOptions();
+      remainingMilestones.title = 'Claim a milestone';
+      remainingMilestones.options = game.milestones
+        .filter(
+          (milestone: IMilestone) =>
+            !game.milestoneClaimed(milestone) &&
+                      milestone.canClaim(this))
+        .map(
+          (milestone: IMilestone) =>
+            this.claimMilestone(milestone, game));
+
+      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
     }
 
     // If you can pay to send some in the Ara

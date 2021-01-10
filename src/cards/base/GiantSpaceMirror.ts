@@ -17,7 +17,7 @@ export class GiantSpaceMirror extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '083',
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.energy(3))),
+        renderData: CardRenderer.builder((b) => b.production((pb) => pb.energy(3))),
         description: 'Increase your energy production 3 steps.',
       },
     });

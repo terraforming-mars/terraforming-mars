@@ -7,7 +7,6 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Tardigrades extends Card implements IProjectCard, IResourceCard {
@@ -25,7 +24,7 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
           b.action('Add 1 Microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
-          b.text('1 VP per 4 Microbes on this card.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP per 4 Microbes on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 4),
       },

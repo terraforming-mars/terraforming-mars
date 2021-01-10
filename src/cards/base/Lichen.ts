@@ -22,7 +22,7 @@ export class Lichen extends Card implements IProjectCard {
         cardNumber: '159',
         requirements: CardRequirements.builder((b) => b.temperature(-24)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.plants(1));
+          b.production((pb) => pb.plants(1));
         }),
         description: 'Requires -24 C or warmer. Increase your Plant production 1 step.',
       },

@@ -18,7 +18,7 @@ export class Biofuels extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P03',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(1).plants(1)).br;
+        b.production((pb) => pb.energy(1).plants(1)).br;
         b.plants(2);
       }),
       description: 'Increase your energy and plant production 1 step. Gain 2 plants.',

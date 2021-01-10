@@ -20,7 +20,7 @@ export class FusionPower extends Card implements IProjectCard {
         cardNumber: '132',
         requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(3));
+          b.production((pb) => pb.energy(3));
         }),
         description: 'Requires 2 Power tags. Increase your Energy production 3 steps.',
       },

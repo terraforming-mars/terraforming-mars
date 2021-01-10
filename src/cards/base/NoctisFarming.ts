@@ -22,7 +22,7 @@ export class NoctisFarming extends Card implements IProjectCard {
         cardNumber: '176',
         requirements: CardRequirements.builder((b) => b.temperature(-20)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(1);
           }).nbsp.plants(2);
         }),

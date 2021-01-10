@@ -19,7 +19,7 @@ export class IoResearchOutpost extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P16',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.titanium(1)).br;
+        b.production((pb) => pb.titanium(1)).br;
         b.cards(1);
       }),
       description: 'Increase your titanium production 1 step. Draw a card.',

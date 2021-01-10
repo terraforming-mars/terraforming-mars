@@ -18,7 +18,7 @@ export class Sponsors extends Card implements IProjectCard {
       metadata: {
         cardNumber: '068',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.megacredits(2));
+          b.production((pb) => pb.megacredits(2));
         }),
         description: 'Increase your MC production 2 steps.',
       },

@@ -12,7 +12,6 @@ import {Tags} from '../Tags';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -51,7 +50,7 @@ export class OceanSanctuary implements IResourceCard {
     requirements: CardRequirements.builder((b) => b.oceans(5)),
     renderData: CardRenderer.builder((b) => {
       b.tile(TileType.OCEAN_SANCTUARY, false, true).nbsp.animals(1).br;
-      b.text('1 VP per animal on this card.', CardRenderItemSize.TINY, true);
+      b.vpText('1 VP per animal on this card.');
     }),
     description: 'Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.',
     victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),

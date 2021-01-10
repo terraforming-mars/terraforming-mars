@@ -14,9 +14,9 @@ export abstract class StandardAction implements IActionCard, ICard {
     public abstract name: CardName;
     public abstract metadata: CardMetadata;
 
-    abstract action(player: Player, game: Game): PlayerInput | undefined
+    abstract action(_player: Player, _game: Game): PlayerInput | undefined
 
-    abstract canAct(player: Player, game: Game): boolean
+    abstract canAct(_player: Player, _game: Game): boolean
 
     play(_player: Player, _game: Game): PlayerInput | undefined {
       return undefined;

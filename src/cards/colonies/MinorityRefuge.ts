@@ -17,7 +17,7 @@ export class MinorityRefuge implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      return player.canPlayColonyPlacementCard(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
+      return player.hasAvailableColonyTileToBuildOn(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
     }
 
     public play(player: Player, game: Game) {
@@ -28,7 +28,7 @@ export class MinorityRefuge implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C26',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(-2)).colonies(1);
+        b.production((pb) => pb.megacredits(-2)).colonies(1);
       }),
       description: 'Decrease your MC production 2 steps. Place a colony.',
     }

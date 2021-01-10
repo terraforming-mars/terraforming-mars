@@ -2,7 +2,7 @@ import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './aw
 import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {GameId, GameOptions} from './Game';
+import {Game, GameId, GameOptions} from './Game';
 import {HellasBoard} from './boards/HellasBoard';
 import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {OriginalBoard} from './boards/OriginalBoard';
@@ -13,6 +13,7 @@ import {Resources} from './Resources';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {AresSetup} from './ares/AresSetup';
+import {TileType} from './TileType';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -95,5 +96,22 @@ export class GameSetup {
 
   public static neutralPlayerFor(gameId: GameId): Player {
     return new Player('neutral', Color.NEUTRAL, true, 0, gameId + '-neutral');
+  }
+
+  public static setupNeutralPlayer(game: Game) {
+    // Single player add neutral player
+    // put 2 neutrals cities on board with adjacent forest
+    const neutral = this.neutralPlayerFor(game.id);
+
+    function placeCityAndForest(game: Game, direction: -1 | 1) {
+      const board = game.board;
+      const citySpace = game.getSpaceByOffset(direction);
+      game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
+      const forestSpace = board.getForestSpace(board.getAdjacentSpaces(citySpace));
+      game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
+    }
+
+    placeCityAndForest(game, 1);
+    placeCityAndForest(game, -1);
   }
 }

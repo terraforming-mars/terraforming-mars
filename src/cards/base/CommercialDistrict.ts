@@ -13,7 +13,6 @@ import {Board} from '../../boards/Board';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class CommercialDistrict extends Card implements IProjectCard {
@@ -24,11 +23,11 @@ export class CommercialDistrict extends Card implements IProjectCard {
       cardNumber: '085',
       description: 'Decrease your energy production 1 step and increase your MC production 4 steps.',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().energy(1).br;
           pb.plus().megacredits(4).br;
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
-        b.text('Place this tile. 1 vp per adjacent city tile', CardRenderItemSize.TINY, true);
+        b.vpText('Place this tile. 1 vp per adjacent city tile');
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
     },

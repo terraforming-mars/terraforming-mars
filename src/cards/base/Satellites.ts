@@ -18,7 +18,7 @@ export class Satellites extends Card implements IProjectCard {
       metadata: {
         cardNumber: '175',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(1).slash().space().played;
           });
         }),

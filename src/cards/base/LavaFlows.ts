@@ -71,10 +71,11 @@ export class LavaFlows extends Card implements IProjectCard {
     return canPlaceTile;
   }
   public play(player: Player, game: Game) {
+    game.increaseTemperature(player, 2);
     return new SelectSpace('Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons', LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
       game.addTile(player, SpaceType.LAND, space, {tileType: TileType.LAVA_FLOWS});
       space.adjacency = this.adjacencyBonus;
-      return game.increaseTemperature(player, 2);
+      return undefined;
     });
   }
 }

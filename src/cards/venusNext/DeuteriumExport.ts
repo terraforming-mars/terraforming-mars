@@ -51,7 +51,7 @@ export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard
       }).br;
       b.or(CardRenderItemSize.SMALL).br;
       b.action('Spend 1 Floater here to increase your energy production 1 step.', (be) => {
-        be.floaters(1).startAction.productionBox((pb) => pb.energy(1));
+        be.floaters(1).startAction.production((pb) => pb.energy(1));
       });
     }),
   }

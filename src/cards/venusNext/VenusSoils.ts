@@ -60,7 +60,7 @@ export class VenusSoils implements IProjectCard {
       cardNumber: '257',
       renderData: CardRenderer.builder((b) => {
         b.venus(1).br;
-        b.productionBox((pb) => pb.plants(1)).microbes(2).asterix();
+        b.production((pb) => pb.plants(1)).microbes(2).asterix();
       }),
       description: 'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
     }

@@ -55,7 +55,14 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
 import {Multiset} from './utils/Multiset';
+import {PartyName} from './turmoil/parties/PartyName';
+import {AgendaStyle} from './turmoil/PoliticalAgendas';
+import {REDS_POLICY_2} from './turmoil/parties/Reds';
+import {GREENS_POLICY_2} from './turmoil/parties/Greens';
+import {KELVINISTS_POLICY_4} from './turmoil/parties/Kelvinists';
+import {DrawCards} from './deferredActions/DrawCards';
 import {GameSetup} from './GameSetup';
+import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
@@ -87,6 +94,7 @@ export interface GameOptions {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -119,6 +127,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
+  politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
@@ -212,6 +221,10 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
+
+    this.players.forEach((player) => {
+      player.game = this;
+    });
   }
 
   // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)
@@ -231,18 +244,21 @@ export class Game implements ISerializable<SerializedGame> {
 
     const activePlayer = firstPlayer.id;
 
+    // Single player game player starts with 14TR
+    if (players.length === 1) {
+      gameOptions.draftVariant = false;
+      gameOptions.initialDraftVariant = false;
+      gameOptions.randomMA = RandomMAOptionType.NONE;
+
+      players[0].setTerraformRating(14);
+      players[0].terraformRatingAtGenerationStart = 14;
+    }
+
     const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
-    }
-
-    // Single player game player starts with 14TR
-    // and 2 neutral cities and forests on board
-    if (players.length === 1) {
-      // TODO(kberg): move to GameSetup.
-      game.setupSolo();
     }
 
     const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
@@ -264,7 +280,13 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.newInstance(game);
+      game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
+    }
+
+    // and 2 neutral cities and forests on board
+    if (players.length === 1) {
+      //  Setup solo player's starting tiles
+      GameSetup.setupNeutralPlayer(game);
     }
 
     // Setup Ares hazards
@@ -296,7 +318,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
     for (const player of game.getPlayers()) {
-      player.increaseTerraformRatingSteps(player.handicap, game);
+      player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
         GameSetup.setStartingProductions(player);
       }
@@ -461,7 +483,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
   }
 
-  private marsIsTerraformed(): boolean {
+  public marsIsTerraformed(): boolean {
     const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
     const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
@@ -1015,9 +1037,16 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoFinalGreeneryPlacement(): void {
-    const players = this.players.filter(
-      (player) => this.canPlaceGreenery(player),
-    );
+    const players: Player[] = [];
+
+    this.players.forEach((player) => {
+      if (this.canPlaceGreenery(player)) {
+        players.push(player);
+      } else {
+        this.donePlayers.add(player.id);
+      }
+    });
+
     // If no players can place greeneries we are done
     if (players.length === 0) {
       this.gotoEndGame();
@@ -1053,8 +1082,14 @@ export class Game implements ISerializable<SerializedGame> {
     player.takeAction(this);
   }
 
-  public increaseOxygenLevel(player: Player, increments: 1 | 2): undefined {
+  public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
+      return undefined;
+    }
+
+    // PoliticalAgendas Reds P3 hook
+    if (increments === -1) {
+      this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
       return undefined;
     }
 
@@ -1062,6 +1097,16 @@ export class Game implements ISerializable<SerializedGame> {
     const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
     if (this.phase !== Phase.SOLAR) {
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
+      }
+
       player.increaseTerraformRatingSteps(steps, this);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1081,8 +1126,14 @@ export class Game implements ISerializable<SerializedGame> {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: 1 | 2 | 3): SelectSpace | undefined {
+  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): SelectSpace | undefined {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+      return undefined;
+    }
+
+    // PoliticalAgendas Reds P3 hook
+    if (increments === -1) {
+      this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
       return undefined;
     }
 
@@ -1096,6 +1147,16 @@ export class Game implements ISerializable<SerializedGame> {
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
         player.increaseTerraformRating(this);
       }
+
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
+      }
+
       player.increaseTerraformRatingSteps(steps, this);
     }
 
@@ -1114,8 +1175,8 @@ export class Game implements ISerializable<SerializedGame> {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | 1 | 2 | 3): undefined {
-    if (increments === -2) {
+  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+    if (increments === -2 || increments === -1) {
       this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
       return undefined;
     }
@@ -1134,6 +1195,20 @@ export class Game implements ISerializable<SerializedGame> {
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
         player.addProduction(Resources.HEAT);
+      }
+
+      // PoliticalAgendas Kelvinists P2 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
+        player.setResource(Resources.MEGACREDITS, steps * 3);
+      }
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1 * steps);
+      }
+
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, steps));
       }
 
       player.increaseTerraformRatingSteps(steps, this);
@@ -1262,13 +1337,13 @@ export class Game implements ISerializable<SerializedGame> {
     const subjectToHazardAdjacency = tile.tileType !== TileType.OCEAN;
 
     AresHandler.ifAres(this, () => {
-      AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
+      AresHandler.assertCanPay(player, space, subjectToHazardAdjacency);
     });
 
     // Part 2. Collect additional fees.
     // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
     AresHandler.ifAres(this, () => {
-      AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
+      AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
     });
 
     // Hellas special requirements ocean tile
@@ -1281,6 +1356,11 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
+    // PoliticalAgendas Reds P2 hook
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && this.phase === Phase.ACTION) {
+      const redsPolicy = REDS_POLICY_2;
+      redsPolicy.onTilePlaced(player, space, this);
+    }
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1292,9 +1372,7 @@ export class Game implements ISerializable<SerializedGame> {
     const coveringExistingTile = space.tile !== undefined;
 
     // Part 4. Place the tile
-    space.tile = tile;
-    space.player = player;
-    LogHelper.logTilePlacement(this, player, space, tile.tileType);
+    this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
 
@@ -1312,10 +1390,22 @@ export class Game implements ISerializable<SerializedGame> {
       });
 
       AresHandler.ifAres(this, (aresData) => {
-        AresHandler.earnAdjacencyBonuses(this, aresData, player, space);
+        AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
       PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
+
+      // PoliticalAgendas Greens P2 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && this.phase === Phase.ACTION) {
+        const greensPolicy = GREENS_POLICY_2;
+        greensPolicy.onTilePlaced(player);
+      }
+
+      // PoliticalAgendas Kelvinists P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && this.phase === Phase.ACTION) {
+        const kelvinistsPolicy = KELVINISTS_POLICY_4;
+        kelvinistsPolicy.onTilePlaced(player);
+      }
 
       if (arcadianCommunityBonus) {
         player.megaCredits += 3;
@@ -1342,11 +1432,17 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     AresHandler.ifAres(this, () => {
-      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
+      AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
 
       // Must occur after all other onTilePlaced operations.
-      AresHandler.afterTilePlacement(this, player, startingResources);
+      AresHandler.afterTilePlacement(player, startingResources);
     });
+  }
+
+  public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
+    space.tile = tile;
+    space.player = player;
+    LogHelper.logTilePlacement(this, player, space, tile.tileType);
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
@@ -1371,7 +1467,7 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(this, player);
+    PartyHooks.applyGreensRulingPolicy(this, player, this.getSpace(spaceId));
 
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;
@@ -1395,10 +1491,19 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
+      // PoliticalAgendas Reds P4 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+        player.addProduction(Resources.MEGACREDITS, -1);
+      }
+      // PoliticalAgendas Scientists P3 hook
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+        this.defer(new DrawCards(player, this, 1));
+      }
+
       player.increaseTerraformRating(this);
     }
     AresHandler.ifAres(this, (aresData) => {
-      AresHandler.onOceanPlaced(this, aresData, player);
+      AresHandler.onOceanPlaced(aresData, player);
     });
   }
 
@@ -1503,34 +1608,6 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
-  }
-
-  private setupSolo() {
-    this.gameOptions.draftVariant = false;
-    this.gameOptions.initialDraftVariant = false;
-    this.gameOptions.randomMA = RandomMAOptionType.NONE;
-
-    this.players[0].setTerraformRating(14);
-    this.players[0].terraformRatingAtGenerationStart = 14;
-    // Single player add neutral player
-    // put 2 neutrals cities on board with adjacent forest
-    const neutral = GameSetup.neutralPlayerFor(this.id);
-
-    function placeCityAndForest(game: Game, direction: -1 | 1) {
-      const space1 = game.getSpaceByOffset(direction);
-      game.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = game.board.getForestSpace(
-        game.board.getAdjacentSpaces(space1),
-      );
-      game.addTile(neutral, SpaceType.LAND, fspace1, {
-        tileType: TileType.GREENERY,
-      });
-    }
-
-    placeCityAndForest(this, 1);
-    placeCityAndForest(this, -1);
-
-    return undefined;
   }
 
   public getSpaceByOffset(direction: -1 | 1, type = 'tile') {

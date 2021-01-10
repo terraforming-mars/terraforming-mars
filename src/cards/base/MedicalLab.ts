@@ -18,7 +18,7 @@ export class MedicalLab extends Card implements IProjectCard {
       metadata: {
         cardNumber: '207',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(1).slash().building(2).played;
           });
         }),

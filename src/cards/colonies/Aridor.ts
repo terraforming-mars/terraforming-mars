@@ -85,7 +85,7 @@ export class Aridor implements CorporationCard {
         b.megacredits(40).nbsp.placeColony();
         b.corpBox('effect', (ce) => {
           ce.effect('When you get a new type of tag in play [event cards do not count], increase your MC production 1 step.', (eb) => {
-            eb.diverseTag().startEffect.productionBox((pb) => pb.megacredits(1));
+            eb.diverseTag().startEffect.production((pb) => pb.megacredits(1));
           });
         });
       }),

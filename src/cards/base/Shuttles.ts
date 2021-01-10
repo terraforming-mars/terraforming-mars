@@ -24,7 +24,7 @@ export class Shuttles extends Card implements IProjectCard {
           b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
           }).br;
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).nbsp;
             pb.plus().megacredits(2);
           });

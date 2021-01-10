@@ -19,7 +19,7 @@ export class PeroxidePower extends Card implements IProjectCard {
       metadata: {
         cardNumber: '089',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().megacredits(1).br;
             pb.plus().energy(2);
           });

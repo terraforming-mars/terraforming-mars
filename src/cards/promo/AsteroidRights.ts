@@ -94,7 +94,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
       }).br;
       b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
         eb.asteroids(1)
-          .startAction.productionBox((pb) => pb.megacredits(1))
+          .startAction.production((pb) => pb.megacredits(1))
           .or()
           .titanium(2);
       }).br;

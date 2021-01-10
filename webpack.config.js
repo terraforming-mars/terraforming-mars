@@ -21,4 +21,5 @@ module.exports = {
   stats: {
     warnings: false,
   },
+  watch: process.env.WATCH_IT !== undefined
 };

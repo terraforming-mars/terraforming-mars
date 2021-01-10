@@ -24,7 +24,7 @@ export class VenusGovernor implements IProjectCard {
       cardNumber: '255',
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(2));
+        b.production((pb) => pb.megacredits(2));
       }),
       description: 'Requires 2 Venus tags. Increase your MC production 2 steps.',
     }

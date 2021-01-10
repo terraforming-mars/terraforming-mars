@@ -22,7 +22,7 @@ export class Algae extends Card implements IProjectCard {
         description: 'Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.',
         cardNumber: '047',
         requirements: CardRequirements.builder((b) => b.oceans(5)),
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.plants(2)).plants(1)),
+        renderData: CardRenderer.builder((b) => b.production((pb) => pb.plants(2)).plants(1)),
       },
     });
   }

@@ -29,7 +29,7 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
           }).br;
           b.animals(1).br;
           b.text('Animals may not be removed from this card', CardRenderItemSize.SMALL, true).br;
-          b.text('1 VP per 2 Animals here.', CardRenderItemSize.TINY, true);
+          b.vpText('1 VP per 2 Animals here.');
         }),
         description: {text: 'Add 1 Animal to this card.', align: 'left'},
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),

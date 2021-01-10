@@ -61,7 +61,7 @@ export class LocalShading implements IActionCard, IProjectCard, IResourceCard {
         }).br;
         b.or().br;
         b.action('Spend 1 Floater here to raise your MC production 1 step.', (eb) => {
-          eb.floaters(1).startAction.productionBox((pb) => pb.megacredits(1));
+          eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
         });
       }),
     };

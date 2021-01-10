@@ -22,7 +22,7 @@ export class EnergySaving extends Card implements IProjectCard {
         cardNumber: '189',
         description: 'Increase your Energy production 1 step for each City tile in play.',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(1).slash().city(CardRenderItemSize.SMALL).any);
+          b.production((pb) => pb.energy(1).slash().city(CardRenderItemSize.SMALL).any);
         }),
       },
     });

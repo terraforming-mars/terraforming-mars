@@ -7,7 +7,7 @@ import {PlayerInputFactory} from './PlayerInputFactory';
 import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';
-import {SelectHowToPayForCard} from './SelectHowToPayForCard';
+import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
 import {SelectOption} from './SelectOption';
 import {SelectPlayer} from './SelectPlayer';
 import {SelectSpace} from './SelectSpace';
@@ -52,7 +52,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     'select-card': SelectCard,
     'select-option': SelectOption,
     'select-how-to-pay': SelectHowToPay,
-    'select-how-to-pay-for-card': SelectHowToPayForCard,
+    'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
     'select-party-player': SelectPartyPlayer,

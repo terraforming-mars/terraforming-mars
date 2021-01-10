@@ -18,7 +18,7 @@ export class SolarWindPower extends Card implements IProjectCard {
       metadata: {
         cardNumber: '077',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(1)).br.titanium(2);
+          b.production((pb) => pb.energy(1)).br.titanium(2);
         }),
         description: 'Increase your energy production 1 step and gain 2 titanium.',
       },

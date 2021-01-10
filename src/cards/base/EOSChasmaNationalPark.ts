@@ -28,7 +28,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
         description: 'Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.',
         renderData: CardRenderer.builder((b) => {
           b.animals(1).asterix().plants(3).br;
-          b.productionBox((pb) => pb.megacredits(2));
+          b.production((pb) => pb.megacredits(2));
         }),
         victoryPoints: 1,
       },

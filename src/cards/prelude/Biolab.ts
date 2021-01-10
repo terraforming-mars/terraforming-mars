@@ -12,7 +12,7 @@ export class Biolab extends PreludeCard {
     public name = CardName.BIOLAB;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.PLANTS);
-      return player.drawCard(game, {amount: 3});
+      return player.drawCard(game, {count: 3});
     }
     public metadata: CardMetadata = {
       cardNumber: 'P04',

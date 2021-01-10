@@ -1036,12 +1036,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const action = this.drawCard(game, {
-      amount: dealtCards.length,
-      isBuying: true,
+      count: dealtCards.length,
+      paying: true,
       cards: dealtCards,
     });
-    if (action === undefined) game.playerIsFinishedWithResearchPhase(this);
-    else this.setWaitingFor(action, () => game.playerIsFinishedWithResearchPhase(this));
+    if (action === undefined) {
+      game.playerIsFinishedWithResearchPhase(this);
+    } else {
+      this.setWaitingFor(action, () => game.playerIsFinishedWithResearchPhase(this));
+    }
   }
 
   public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {

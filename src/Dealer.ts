@@ -73,7 +73,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
           this.discard(projectCard);
         }
       }
-      if (discardedCards.size) {
+      if (discardedCards.size > 0) {
         LogHelper.logDiscardedCards(game, Array.from(discardedCards));
       }
 

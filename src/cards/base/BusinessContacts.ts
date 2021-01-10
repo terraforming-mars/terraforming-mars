@@ -25,6 +25,6 @@ export class BusinessContacts extends Card implements IProjectCard {
     });
   }
   public play(player: Player, game: Game): SelectCard<IProjectCard> | undefined {
-    return player.drawCard(game, {amount: 2, from: 4});
+    return player.drawCard(game, {keep: 2, count: 4});
   }
 }

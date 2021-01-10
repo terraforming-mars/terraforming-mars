@@ -52,7 +52,7 @@ export class LargeConvoy extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game): PlayerInput | undefined {
-    player.drawCard(game, {amount: 2});
+    player.drawCard(game, {count: 2});
 
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
 

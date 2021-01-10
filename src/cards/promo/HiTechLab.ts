@@ -30,7 +30,7 @@ export class HiTechLab implements IProjectCard {
         (amount: number) => {
           player.setResource(Resources.ENERGY, -amount);
           game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-          return player.drawCard(game, {amount: 1, from: amount});
+          return player.drawCard(game, {keep: 1, count: amount});
         },
         1,
         player.getResource(Resources.ENERGY),

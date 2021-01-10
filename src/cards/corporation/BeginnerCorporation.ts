@@ -24,6 +24,6 @@ export class BeginnerCorporation extends Card implements CorporationCard {
     });
   }
   public play(player: Player, game: Game) {
-    return player.drawCard(game, {amount: 10});
+    return player.drawCard(game, {count: 10});
   }
 }

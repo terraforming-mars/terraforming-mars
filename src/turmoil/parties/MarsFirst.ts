@@ -98,7 +98,7 @@ class MarsFirstPolicy04 implements Policy {
       {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
-          player.drawCard(game, {amount: 1, tag: Tags.BUILDING});
+          player.drawCard(game, {count: 1, tag: Tags.BUILDING});
         },
       },
     ));

@@ -41,6 +41,6 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
     return true;
   }
   public action(player: Player, game: Game) {
-    return player.drawCard(game, {amount: 1, from: 1, isBuying: true});
+    return player.drawCard(game, {count: 1, paying: true});
   }
 }

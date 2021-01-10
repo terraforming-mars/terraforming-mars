@@ -14,7 +14,7 @@ export class IoSulphurResearch implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-      return player.drawCard(game, {amount: player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1});
+      return player.drawCard(game, {count: player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1});
     }
     public getVictoryPoints() {
       return 2;

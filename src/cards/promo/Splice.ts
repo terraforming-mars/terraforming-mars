@@ -21,7 +21,7 @@ export class Splice implements CorporationCard {
 
     public initialActionText: string = 'Draw a card with a microbe tag';
     public initialAction(player: Player, game: Game) {
-      return player.drawCard(game, {amount: 1, tag: Tags.MICROBE});
+      return player.drawCard(game, {count: 1, tag: Tags.MICROBE});
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard | CorporationCard) {

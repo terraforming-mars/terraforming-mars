@@ -171,11 +171,11 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS:
-        action = new DrawCards(player, game, {amount: quantity});
+        action = new DrawCards(player, game, {count: quantity});
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-        action = new DrawCards(player, game, {amount: 1, from: 1, isBuying: true});
+        action = new DrawCards(player, game, {count: 1, paying: true});
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:

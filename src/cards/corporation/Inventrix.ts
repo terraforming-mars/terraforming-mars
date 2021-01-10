@@ -32,7 +32,7 @@ export class Inventrix extends Card implements CorporationCard {
     });
   }
   public initialAction(player: Player, game: Game) {
-    return player.drawCard(game, {amount: 3});
+    return player.drawCard(game, {count: 3});
   }
   public getRequirementBonus(_player: Player, _game: Game): number {
     return 2;

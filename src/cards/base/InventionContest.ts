@@ -26,6 +26,6 @@ export class InventionContest extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    return player.drawCard(game, {amount: 1, from: 3});
+    return player.drawCard(game, {keep: 1, count: 3});
   }
 }

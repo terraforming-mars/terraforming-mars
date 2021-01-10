@@ -13,7 +13,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     public name = CardName.RESEARCH_NETWORK;
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS);
-      return player.drawCard(game, {amount: 3});
+      return player.drawCard(game, {count: 3});
     }
     public metadata: CardMetadata = {
       cardNumber: 'P28',

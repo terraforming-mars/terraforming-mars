@@ -28,7 +28,7 @@ export class PharmacyUnion implements CorporationCard {
 
     public play(player: Player, game: Game) {
       this.resourceCount = 2;
-      return player.drawCard(game, {amount: 1, tag: Tags.SCIENCE});
+      return player.drawCard(game, {count: 1, tag: Tags.SCIENCE});
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {

@@ -15,7 +15,7 @@ export class SolarProbe implements IProjectCard {
 
     public play(player: Player, game: Game) {
       const cardsToDraw = Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3);
-      return player.drawCard(game, {amount: cardsToDraw});
+      return player.drawCard(game, {count: cardsToDraw});
     }
 
     public getVictoryPoints() {

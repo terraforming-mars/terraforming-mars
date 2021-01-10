@@ -492,14 +492,31 @@ describe('Game', function() {
    * serialization. if this fails update SerializedGame
    * to match
    */
-  it('serializes every property', function() {
+  it('serializes properties', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
     const gameKeys = Object.keys(game);
-    serializedKeys.sort();
-    gameKeys.sort();
-    expect(serializedKeys).to.deep.eq(gameKeys);
+    expect(gameKeys).not.include('moonData');
+    expect(serializedKeys).to.have.members(gameKeys.concat('moonData'));
+  });
+
+  it('serializes every property', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const serialized = game.serialize();
+    const serializedKeys = Object.keys(serialized);
+    const gameKeys = Object.keys(game);
+    expect(serializedKeys).to.have.members(gameKeys);
+  });
+
+  it('deserializing a game without moon data still loads', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: false}));
+    const serialized = game.serialize();
+    delete serialized['moonData'];
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.moonData).is.undefined;
   });
 });

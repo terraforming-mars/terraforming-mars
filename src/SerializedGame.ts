@@ -15,6 +15,7 @@ import {GameId, GameOptions} from './Game';
 import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
+import {SerializedMoonData} from './moon/SerializedMoonData';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
@@ -41,6 +42,7 @@ export interface SerializedGame {
     lastSaveId: number;
     milestones: Array<IMilestone>;
     monsInsuranceOwner: PlayerId | undefined;
+    moonData: SerializedMoonData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
     phase: Phase;

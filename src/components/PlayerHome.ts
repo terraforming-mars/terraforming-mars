@@ -214,10 +214,10 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
-
-                    <div class="hiding-card-button hiding-card-button--automated" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getAutomatedToggleLabel() }}</div>
-                    <div class="hiding-card-button hiding-card-button--event" v-on:click.prevent="toggleEventCardsHiding()">{{ getEventToggleLabel() }}</div>
-                    
+                    <div class="hiding-card-button-row">
+                        <div class="hiding-card-button hiding-card-button--automated" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getAutomatedToggleLabel() }}</div>
+                        <div class="hiding-card-button hiding-card-button--event" v-on:click.prevent="toggleEventCardsHiding()">{{ getEventToggleLabel() }}</div>
+                    </div>
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>

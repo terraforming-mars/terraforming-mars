@@ -34,10 +34,10 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getCardByName<T extends ICard>(cardName: string, decksToSearch: (man: CardManifest) => Array<Deck<T>>): T | undefined {
+    public getCardByName<T extends ICard>(cardName: string, decksd: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
       let found : (ICardFactory<T> | undefined);
       CardFinder.getDecks().some((man) => {
-        decksToSearch(man).some((deck) => {
+        decksd(man).some((deck) => {
           found = deck.findByCardName(cardName as CardName);
           return found;
         });
@@ -50,7 +50,7 @@ export class CardFinder {
       return undefined;
     }
 
-    public getProjectOrSAByName(cardName: string): StandardAction | IProjectCard | undefined {
+    public getProjectOrStandardActionByName(cardName: string): StandardAction | IProjectCard | undefined {
       return this.getCardByName(cardName, (man) => [
         man.projectCards,
         man.preludeCards,

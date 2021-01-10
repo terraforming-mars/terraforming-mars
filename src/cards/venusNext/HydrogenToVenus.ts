@@ -50,7 +50,7 @@ export class HydrogenToVenus implements IProjectCard {
       if (jovianTags > 0) {
         if (floatersCards.length === 1) {
           player.addResourceTo(floatersCards[0], jovianTags);
-          LogHelper.logAddResource(game, player, floatersCards[0], jovianTags);
+          LogHelper.logAddResource(player, floatersCards[0], jovianTags);
         }
         if (floatersCards.length > 1) {
           return new SelectCard(
@@ -59,7 +59,7 @@ export class HydrogenToVenus implements IProjectCard {
             floatersCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], jovianTags);
-              LogHelper.logAddResource(game, player, foundCards[0], jovianTags);
+              LogHelper.logAddResource(player, foundCards[0], jovianTags);
               game.increaseVenusScaleLevel(player, 1);
               return undefined;
             },

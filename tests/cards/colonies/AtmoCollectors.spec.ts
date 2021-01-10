@@ -22,11 +22,11 @@ describe('AtmoCollectors', function() {
 
   it('Should act', function() {
     player.playedCards.push(card);
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions).is.not.undefined;
     expect(orOptions instanceof OrOptions).is.true;
 

@@ -66,7 +66,7 @@ export class _AresHazardPlacement {
         const space1 = this.randomlyPlaceHazard(player.game, type, 1);
         const space2 = this.randomlyPlaceHazard(player.game, type, -1);
         [space1, space2].forEach((space) => {
-          LogHelper.logTilePlacement(player.game, player, space, type);
+          LogHelper.logTilePlacement(player, space, type);
         });
       },
     );

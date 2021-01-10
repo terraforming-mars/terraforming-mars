@@ -30,7 +30,7 @@ export class Greenhouses extends Card implements IProjectCard {
   public play(player: Player, game: Game) {
     const qty = game.getCitiesInPlay();
     player.plants += qty;
-    LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
+    LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
     return undefined;
   }
 }

@@ -9,17 +9,17 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CorroderSuits', function() {
-  let card : CorroderSuits; let player : Player; let game : Game;
+  let card : CorroderSuits; let player : Player;
 
   beforeEach(function() {
     card = new CorroderSuits();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play - no targets', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
@@ -27,7 +27,7 @@ describe('CorroderSuits', function() {
     const card2 = new AerialMappers();
     player.playedCards.push(card2);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getResourcesOnCard(card2)).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
@@ -37,7 +37,7 @@ describe('CorroderSuits', function() {
     const card3 = new Dirigibles();
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
         action!.cb([card2]);

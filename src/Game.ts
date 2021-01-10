@@ -1442,7 +1442,7 @@ export class Game implements ISerializable<SerializedGame> {
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
     space.tile = tile;
     space.player = player;
-    LogHelper.logTilePlacement(this, player, space, tile.tileType);
+    LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {

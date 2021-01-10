@@ -66,7 +66,7 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
     private addResource(player: Player, game: Game) {
       game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 

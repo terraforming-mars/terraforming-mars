@@ -101,7 +101,7 @@ class MarsFirstPolicy04 implements Policy {
         afterPay: () => {
           const card = game.drawCardsByTag(Tags.BUILDING, 1);
           player.cardsInHand.push(...card);
-          LogHelper.logDrawnCards(game, player, card);
+          LogHelper.logDrawnCards(player, card);
         },
       },
     ));

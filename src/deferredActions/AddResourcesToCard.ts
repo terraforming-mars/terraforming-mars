@@ -30,7 +30,7 @@ export class AddResourcesToCard implements DeferredAction {
 
     if (resourceCards.length === 1) {
       this.player.addResourceTo(resourceCards[0], this.count);
-      LogHelper.logAddResource(this.game, this.player, resourceCards[0], this.count);
+      LogHelper.logAddResource(this.player, resourceCards[0], this.count);
       return undefined;
     }
 
@@ -40,7 +40,7 @@ export class AddResourcesToCard implements DeferredAction {
       resourceCards,
       (foundCards: Array<ICard>) => {
         this.player.addResourceTo(foundCards[0], this.count);
-        LogHelper.logAddResource(this.game, this.player, foundCards[0], this.count);
+        LogHelper.logAddResource(this.player, foundCards[0], this.count);
         return undefined;
       },
     );

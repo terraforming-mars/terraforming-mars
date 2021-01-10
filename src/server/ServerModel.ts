@@ -146,7 +146,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
       game.getPlayers().forEach((player) => {
         scores.push({
           playerColor: player.color,
-          playerScore: milestone.getScore(player, game),
+          playerScore: milestone.getScore(player),
         });
       });
     }
@@ -176,7 +176,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
       game.getPlayers().forEach((player) => {
         scores.push({
           playerColor: player.color,
-          playerScore: award.getScore(player, game),
+          playerScore: award.getScore(player),
         });
       });
     }

@@ -1765,21 +1765,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       'available action.';
     action.buttonLabel = 'Take action';
 
-    if (this.canAfford(8) && !game.allMilestonesClaimed()) {
-      const remainingMilestones = new OrOptions();
-      remainingMilestones.title = 'Claim a milestone';
-      remainingMilestones.options = game.milestones
-        .filter(
-          (milestone: IMilestone) =>
-            !game.milestoneClaimed(milestone) &&
-            milestone.canClaim(this, game))
-        .map(
-          (milestone: IMilestone) =>
-            this.claimMilestone(milestone, game));
-
-      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
-    }
-
     const convertPlants = new ConvertPlants();
     if (convertPlants.canAct(this, game)) {
       action.options.push(convertPlants.action(this, game));

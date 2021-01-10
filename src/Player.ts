@@ -507,6 +507,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return coloniesCount;
   }
 
+  public getPlayedEventsCount(): number {
+    let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
+    if (this.corporationCard?.name === CardName.PHARMACY_UNION && this.corporationCard.isDisabled) count++;
+
+    return count;
+  }
+
   public getResourcesOnCard(card: ICard): number | undefined {
     if (card.resourceCount !== undefined) {
       return card.resourceCount;
@@ -635,7 +642,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
       {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
       {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
-      {tag: Tags.EVENT, count: this.playedCards.filter((card) => card.cardType === CardType.EVENT).length},
+      {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
 

@@ -42,6 +42,7 @@ export interface DebugUIModel {
   turmoil: boolean | unknown[],
   community: boolean | unknown[],
   ares: boolean | unknown[],
+  moon: boolean | unknown[],
   promo: boolean | unknown[],
 }
 export const DebugUI = Vue.component('debug-ui', {
@@ -61,6 +62,7 @@ export const DebugUI = Vue.component('debug-ui', {
       turmoil: true,
       community: true,
       ares: true,
+      moon: true,
       promo: true,
     } as DebugUIModel;
   },
@@ -76,6 +78,7 @@ export const DebugUI = Vue.component('debug-ui', {
       data.community = !data.community;
       data.promo = !data.promo;
       data.ares = !data.ares;
+      data.moon = !data.moon;
     },
     sort: function(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
@@ -139,6 +142,8 @@ export const DebugUI = Vue.component('debug-ui', {
         return this.community === true;
       case GameModule.Ares:
         return this.ares === true;
+      case GameModule.Moon:
+        return this.moon === true;
       default:
         return true;
       }

@@ -37,6 +37,7 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
     policyId: 'none',
   },
   staticAgendas: undefined,
+  agendaStyle: AgendaStyle.STANDARD,
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
@@ -291,7 +292,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.rulingParty.partyLeader = undefined;
         this.rulingParty.delegates = [];
 
-        PoliticalAgendas.setNextAgenda(this, game);
+        PoliticalAgendas.setNextAgenda(this, game, this.politicalAgendasData.agendaStyle);
       }
     }
 
@@ -421,6 +422,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         politicalAgendasData: {
           currentAgenda: this.politicalAgendasData.currentAgenda,
           staticAgendas: this.politicalAgendasData.staticAgendas === undefined ? undefined : Array.from(this.politicalAgendasData.staticAgendas.entries()),
+          agendaStyle: this.politicalAgendasData.agendaStyle,
         },
       };
       if (this.currentGlobalEvent !== undefined) {
@@ -465,11 +467,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.politicalAgendasData = {
           currentAgenda: d.politicalAgendasData.currentAgenda,
           staticAgendas: new Map(d.politicalAgendasData.staticAgendas),
+          agendaStyle: d.politicalAgendasData.agendaStyle,
         };
       } else {
         turmoil.politicalAgendasData = {
           currentAgenda: d.politicalAgendasData.currentAgenda,
           staticAgendas: undefined,
+          agendaStyle: d.politicalAgendasData.agendaStyle,
         };
       }
 

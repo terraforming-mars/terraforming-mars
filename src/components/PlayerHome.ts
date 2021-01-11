@@ -23,7 +23,26 @@ const dialogPolyfill = require('dialog-polyfill');
 
 import * as raw_settings from '../../assets/settings.json';
 
+export interface PlayerHomeModel {
+  hide_automated_cards: string;
+  hide_event_cards: string;
+}
+
 export const PlayerHome = Vue.component('player-home', {
+  data: function(): PlayerHomeModel {
+    return {
+      hide_automated_cards: PreferencesManager.loadValue('hide_automated_cards'),
+      hide_event_cards: PreferencesManager.loadValue('hide_event_cards'),
+    };
+  },
+  watch: {
+    hide_automated_cards: function() {
+      PreferencesManager.preferencesValues.set('hide_automated_cards', this.hide_automated_cards);
+    },
+    hide_event_cards: function() {
+      PreferencesManager.preferencesValues.set('hide_event_cards', this.hide_event_cards);
+    },
+  },
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -92,9 +111,8 @@ export const PlayerHome = Vue.component('player-home', {
       return 'generation ' + this.player.generation;
     },
     toggleAutomatedCardsHiding() {
-      const newVal = this.isAutomatedCardShown() ? '1': '';
-      PreferencesManager.saveValue('hide_automated_cards', newVal);
-      PreferencesManager.preferencesValues.set('hide_automated_cards', this.isAutomatedCardShown());
+      this.hide_automated_cards = this.isAutomatedCardShown() ? '1': '';
+      PreferencesManager.saveValue('hide_automated_cards', this.hide_automated_cards);
     },
     isAutomatedCardShown(): boolean {
       const val = PreferencesManager.loadValue('hide_automated_cards');
@@ -104,9 +122,8 @@ export const PlayerHome = Vue.component('player-home', {
       return this.isAutomatedCardShown() ? 'Hide automated cards' : 'Show automated cards';
     },
     toggleEventCardsHiding() {
-      const newVal = this.isEventCardShown() ? '1': '';
-      PreferencesManager.saveValue('hide_event_cards', newVal);
-      PreferencesManager.preferencesValues.set('hide_event_cards', this.isEventCardShown());
+      this.hide_event_cards = this.isEventCardShown() ? '1': '';
+      PreferencesManager.saveValue('hide_event_cards', this.hide_event_cards);
     },
     isEventCardShown(): boolean {
       const val = PreferencesManager.loadValue('hide_event_cards');

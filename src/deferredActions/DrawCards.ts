@@ -63,9 +63,9 @@ export namespace DrawCards {
 
   export interface AllOptions extends DrawOptions, ChooseOptions { }
 
-  export function keep(player: Player, cards: Array<IProjectCard>): undefined {
+  export function keep(player: Player, cards: Array<IProjectCard>, logText?: string): undefined {
     player.cardsInHand.push(...cards);
-    LogHelper.logCardChange(player, 'kept', cards.length);
+    LogHelper.logCardChange(player, logText || 'drew', cards.length);
     return undefined;
   }
 
@@ -78,17 +78,21 @@ export namespace DrawCards {
   }
 
   export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
-    // if paying, adjust max accordingly.
-
-    const max = Math.min(options.keepMax || 0, Math.floor(player.spendableMegacredits() / player.cardCost));
-    const msg = '';
+    let max = options.keepMax || cards.length;
+    console.log(max, options.keepMax, cards.length);
+    if (options.paying) {
+      max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
+      console.log(max, player.spendableMegacredits(), player.cardCost);
+    }
+    const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
+      `Select ${max} card(s) to keep`;
     const cb = (selected: Array<IProjectCard>) => {
-      if (options.paying === true && selected.length > 0) {
+      if (options.paying && selected.length > 0) {
         player.game.defer(
           new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
-              keep(player, cards);
+              keep(player, cards, 'bought');
               discard(player, selected, cards);
             },
           }));
@@ -100,7 +104,7 @@ export namespace DrawCards {
     };
     return new SelectCard(
       msg,
-      max === 0 ? 'Ok' : 'Buy',
+      max === 0 ? 'Oh' : 'Select',
       cards,
       cb,
       max,

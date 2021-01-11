@@ -49,6 +49,7 @@ describe('DrawCards', function() {
   it('draws 2 from 4', function() {
     const action = DrawCards.keepSome(player, 4, {keepMax: 2}).execute();
     expect(action instanceof SelectCard).is.true;
+    expect(action!.maxCardsToSelect).to.eq(2);
     action!.cb([action!.cards[0], action!.cards[2]]);
     check(2, 2);
   });
@@ -57,6 +58,7 @@ describe('DrawCards', function() {
     player.megaCredits = 3;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
     expect(action instanceof SelectCard).is.true;
+    expect(action!.maxCardsToSelect).to.eq(1);
     action!.cb([action!.cards[0]]);
     player.game.deferredActions.runNext();
     check(1, 0);

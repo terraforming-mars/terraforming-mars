@@ -19,6 +19,7 @@ import {Phase} from '../../src/Phase';
 import {TestPlayers} from '../TestingUtils';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
+import {Random} from '../../src/Random';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -333,7 +334,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(false, 0, false);
+    game.board = OriginalBoard.newInstance(false, new Random(0), false);
     const space = game.board.getSpaces(SpaceType.OCEAN).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

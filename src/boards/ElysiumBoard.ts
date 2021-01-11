@@ -5,14 +5,15 @@ import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Player} from '../Player';
+import {Random} from '../Random';
 
 export class ElysiumBoard extends Board {
   private constructor(public spaces: Array<ISpace>) {
     super();
   }
 
-  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): ElysiumBoard {
-    const builder = new BoardBuilder(seed, includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): ElysiumBoard {
+    const builder = new BoardBuilder(includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -39,7 +40,7 @@ export class ElysiumBoard extends Board {
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
     if (shuffle) {
-      builder.shuffle(SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
+      builder.shuffle(rng, SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     }
     const spaces = builder.build();
     return new ElysiumBoard(spaces);

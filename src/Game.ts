@@ -61,6 +61,7 @@ import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
+import {Random} from './Random';
 
 export type GameId = string;
 
@@ -232,7 +233,8 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error('Cloning should not come through this execution path.');
     }
 
-    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const rng = new Random(seed);
+    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
@@ -281,7 +283,7 @@ export class Game implements ISerializable<SerializedGame> {
     // and 2 neutral cities and forests on board
     if (players.length === 1) {
       //  Setup solo player's starting tiles
-      GameSetup.setupNeutralPlayer(game);
+      GameSetup.setupNeutralPlayer(game, rng);
     }
 
     // Setup Ares hazards
@@ -1549,6 +1551,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public getSpaceByOffset(direction: -1 | 1, type = 'tile') {
     const card = this.dealer.dealCard();
+    this.dealer.discard(card);
     this.log('Dealt and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).string(type));
 
     const distance = Math.max(card.cost-1, 0); // Some cards cost zero.

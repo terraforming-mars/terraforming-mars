@@ -1,28 +1,25 @@
 import {ISpace, SpaceId} from './ISpace';
-import {Random} from '../Random';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../SpaceType';
+import {Random} from '../Random';
 
 export class BoardBuilder {
-    private rng: Random;
-
-    // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
-    //
-    // "Son I am able, " she said "though you scare me."
-    // "Watch, " said I
-    // "Beloved, " I said "watch me scare you though." said she,
-    // "Able am I, Son."
+  // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
+  //
+  // "Son I am able, " she said "though you scare me."
+  // "Watch, " said I
+  // "Beloved, " I said "watch me scare you though." said she,
+  // "Able am I, Son."
 
     private oceans: Array<boolean> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(seed: number, private includeVenus: boolean) {
+    constructor(private includeVenus: boolean) {
       this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
-      this.rng = new Random(seed);
     }
 
     ocean(...bonus: Array<SpaceBonus>) {
@@ -71,13 +68,13 @@ export class BoardBuilder {
       return this.spaces;
     }
 
-    public shuffleArray(array: Array<Object>): void {
+    public shuffleArray(rng: Random, array: Array<Object>): void {
       this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
       // Reverseing the indexes so the elements are pulled from the right.
       // Revering the result so elements are listed left to right.
       const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
       for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(this.rng.next() * (i + 1));
+        const j = rng.nextInt(i + 1);
         [array[i], array[j]] = [array[j], array[i]];
       }
       for (let idx = 0; idx < this.unshufflableSpaces.length; idx++) {
@@ -87,9 +84,9 @@ export class BoardBuilder {
 
     // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
     // |lands| so that those IDs most definitely have land spaces.
-    public shuffle(...lands: Array<SpaceName>) {
-      this.shuffleArray(this.oceans);
-      this.shuffleArray(this.bonuses);
+    public shuffle(rng: Random, ...lands: Array<SpaceName>) {
+      this.shuffleArray(rng, this.oceans);
+      this.shuffleArray(rng, this.bonuses);
       let safety = 0;
       while (safety < 1000) {
         let satisfy = true;
@@ -98,7 +95,7 @@ export class BoardBuilder {
           const land_id = Number(land) - 3;
           while (this.oceans[land_id]) {
             satisfy = false;
-            const idx = Math.floor(this.rng.next() * (this.oceans.length + 1));
+            const idx = rng.nextInt(this.oceans.length + 1);
             [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
           }
         }

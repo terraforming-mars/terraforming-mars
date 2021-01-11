@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {Tags} from '../cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -10,109 +9,109 @@ import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 
 export class DrawCards implements DeferredAction {
-  constructor(
-        public player: Player,
-        public game: Game,
-        public options: DrawCards.Options = {count: 1},
+  private constructor(
+    public player: Player,
+    public count: number = 1,
+    public options: DrawCards.DrawOptions = {},
+    public cb: (cards: Array<IProjectCard>) => undefined | SelectCard<IProjectCard>,
   ) { }
 
-  private drawSelectedDiscardOthers(selected: Array<IProjectCard>, from: Array<IProjectCard>) {
-    this.player.cardsInHand.push(...selected);
-    this.log(selected);
-    from.forEach((card) => {
-      if (selected.find((f) => f.name === card.name) === undefined) {
-        this.game.dealer.discard(card);
-      }
-    });
-  }
-
-  private log(cards: Array<IProjectCard>) {
-    if (this.specialRequirements) {
-      LogHelper.logDrawnCards(this.game, this.player, cards);
-    } else {
-      LogHelper.logCardChange(this.game, this.player, this.options.paying ? 'bought' : 'drew', cards.length);
-    }
-  }
-
-  private selectCardsToKeep(cards: Array<IProjectCard>) {
-    const keep = this.options.keep || this.options.count;
-    return new SelectCard(
-      `Select ${keep} card(s) to keep`,
-      'Select',
-      cards,
-      (selected: Array<IProjectCard>) => {
-        this.drawSelectedDiscardOthers(selected, cards);
-        this.options.cb?.();
-        return undefined;
-      }, keep, keep,
-    );
-  }
-
-  private selectCardsToBuy(cards: Array<IProjectCard>) {
-    const max = Math.min(this.options.count, Math.floor(this.player.spendableMegacredits() / this.player.cardCost));
-    const title = max === 0 ? 'You cannot afford any cards' :
-      `Select up to ${max} cards to buy for ${this.player.cardCost} MC each`;
-    return new SelectCard(
-      title,
-      max === 0 ? 'Ok' : 'Buy',
-      cards,
-      (selected: Array<IProjectCard>) => {
-        if (selected.length > 0) {
-          this.game.defer(new SelectHowToPayDeferred(
-            this.player,
-            selected.length * this.player.cardCost,
-            {
-              title: 'Select how to pay for cards',
-              afterPay: () => this.drawSelectedDiscardOthers(selected, cards),
-            }));
-        } else {
-          this.drawSelectedDiscardOthers(selected, cards);
-        }
-        this.options.cb?.();
-        return undefined;
-      }, max, 0,
-    );
-  }
-
-  private get specialRequirements(): boolean {
-    return Boolean(this.options.include || this.options.tag || this.options.resource || this.options.cardType);
-  }
-
   public execute() {
-    if (this.options.count <= 0) return undefined;
-    const include = (card: IProjectCard) => (
-      (!this.options.tag || card.tags.includes(this.options.tag)) &&
-      (!this.options.resource || this.options.resource === card.resourceType) &&
-      (!this.options.cardType || this.options.cardType === card.cardType));
+    if (this.count <= 0) return undefined;
 
-    const cards = this.options.cards ||
-      this.game.dealer.drawProjectCardsByCondition(this.game, this.options.count, this.options.include || include);
-    if (cards.length === 0) return undefined;
+    const game = this.player.game;
+    const cards = game.dealer.drawProjectCardsByCondition(game, this.count, (card) => {
+      if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
+        return false;
+      }
+      if (this.options.cardType !== undefined && this.options.cardType !== card.cardType) {
+        return false;
+      }
+      if (this.options.tag !== undefined && !card.tags.includes(this.options.tag)) {
+        return false;
+      }
+      if (this.options.include !== undefined && !this.options.include(card)) {
+        return false;
+      }
+      return true;
+    });
 
-    if (this.options.keep === undefined && !this.options.paying) {
-      this.player.cardsInHand.push(...cards);
-      this.log(cards);
-      return undefined;
-    }
+    return this.cb(cards);
+  };
 
-    if (this.options.paying) {
-      return this.selectCardsToBuy(cards);
-    } else {
-      return this.selectCardsToKeep(cards);
-    }
+  public static keepAll(
+    player: Player,
+    count: number = 1,
+    options: DrawCards.DrawOptions = {}): DrawCards {
+    return new DrawCards(player, count, options, (cards) => DrawCards.keep(player, cards));
+  }
+
+  public static keepSome(
+    player: Player,
+    count: number = 1,
+    drawOptions: DrawCards.DrawOptions = {},
+    chooseOptions:DrawCards.ChooseOptions = {}): DrawCards {
+    return new DrawCards(player, count, drawOptions, (cards) => DrawCards.choose(player, cards, chooseOptions));
   }
 }
 
 export namespace DrawCards {
-  export interface Options {
-    count: number,
-    keep?: number,
+  export interface DrawOptions {
     tag?: Tags,
     resource?: ResourceType,
     cardType?: CardType,
-    paying?: boolean,
     include?: (card: IProjectCard) => boolean,
-    cards?: Array<IProjectCard>, // Cards to draw or buy. If undefined, then cards are draw from game.dealer.
-    cb?: () => void,
+  }
+
+  export interface ChooseOptions {
+    max?: number,
+    paying?: boolean,
+  }
+
+
+  export function keep(player: Player, cards: Array<IProjectCard>): undefined {
+    player.cardsInHand.push(...cards);
+    LogHelper.logCardChange(player.game, player, 'kept', cards.length);
+    return undefined;
+  }
+
+  export function discard(player: Player, cards: Array<IProjectCard>, all: Array<IProjectCard>) {
+    all.forEach((card) => {
+      if (cards.find((f) => f.name === card.name) === undefined) {
+        player.game.dealer.discard(card);
+      }
+    });
+  }
+
+  export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
+    // if paying, adjust max accordingly.
+
+    const max = Math.min(options.max || 0, Math.floor(player.spendableMegacredits() / player.cardCost));
+    const msg = '';
+    const cb = (selected: Array<IProjectCard>) => {
+      if (options.paying === true) {
+        if (selected.length > 0) {
+          player.game.defer(
+            new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
+              title: 'Select how to pay for cards',
+              afterPay: () => {
+                keep(player, cards);
+                discard(player, selected, cards);
+              },
+            }));
+        }
+      } else {
+        keep(player, selected);
+        discard(player, selected, cards);
+      }
+      return undefined;
+    };
+    return new SelectCard(
+      msg,
+      max === 0 ? 'Ok' : 'Buy',
+      cards,
+      cb,
+      max,
+      0);
   }
 }

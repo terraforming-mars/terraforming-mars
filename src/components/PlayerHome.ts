@@ -258,9 +258,9 @@ export const PlayerHome = Vue.component('player-home', {
                 <div class="player_home_block player_home_block--cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
-                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">{{ getToggleLabel('ACTIVE') }}</div>
-                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getToggleLabel('AUTOMATED') }}</div>
-                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">{{ getToggleLabel('EVENT') }}</div>
+                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">{{ getToggleLabel('ACTIVE')+' ('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</div>
+                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getToggleLabel('AUTOMATED')+' ('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</div>
+                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">{{ getToggleLabel('EVENT')+' ('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</div>
                     </div>
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>

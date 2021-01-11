@@ -58,7 +58,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     const gainPlants = function() {
       player.plants += 5;
-      LogHelper.logGainStandardResource(game, player, Resources.PLANTS, 5);
+      LogHelper.logGainStandardResource(player, Resources.PLANTS, 5);
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     };
@@ -74,7 +74,7 @@ export class LargeConvoy extends Card implements IProjectCard {
       const targetAnimalCard = animalCards[0];
       availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, 4);
-        LogHelper.logAddResource(game, player, targetAnimalCard, 4);
+        LogHelper.logAddResource(player, targetAnimalCard, 4);
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       }));
@@ -86,7 +86,7 @@ export class LargeConvoy extends Card implements IProjectCard {
           animalCards,
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 4);
-            LogHelper.logAddResource(game, player, foundCards[0], 4);
+            LogHelper.logAddResource(player, foundCards[0], 4);
             game.defer(new PlaceOceanTile(player, game));
             return undefined;
           },

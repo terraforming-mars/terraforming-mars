@@ -1251,13 +1251,6 @@ export class Game implements ISerializable<SerializedGame> {
     return player;
   }
 
-  public getSpace(id: string): ISpace {
-    const space = this.board.spaces.find((space) => space.id === id);
-    if (space === undefined) {
-      throw new Error('Error with getting space');
-    }
-    return space;
-  }
   public getCitiesInPlayOnMars(): number {
     return this.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
@@ -1391,7 +1384,7 @@ export class Game implements ISerializable<SerializedGame> {
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
     space.tile = tile;
     space.player = player;
-    LogHelper.logTilePlacement(this, player, space, tile.tileType);
+    LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
@@ -1412,31 +1405,33 @@ export class Game implements ISerializable<SerializedGame> {
     player: Player, spaceId: string,
     spaceType: SpaceType = SpaceType.LAND,
     shouldRaiseOxygen: boolean = true): undefined {
-    this.addTile(player, spaceType, this.getSpace(spaceId), {
+    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(this, player, this.getSpace(spaceId));
+    PartyHooks.applyGreensRulingPolicy(this, player, this.board.getSpace(spaceId));
 
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;
   }
+
   public addCityTile(
     player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
     cardName: string | undefined = undefined): void {
-    const space = this.getSpace(spaceId);
+    const space = this.board.getSpace(spaceId);
     this.addTile(player, spaceType, space, {
       tileType: TileType.CITY,
       card: cardName,
     });
   }
+
   public addOceanTile(
     player: Player, spaceId: string,
     spaceType: SpaceType = SpaceType.OCEAN): void {
     if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
       return;
     }
-    this.addTile(player, spaceType, this.getSpace(spaceId), {
+    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
@@ -1449,8 +1444,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public removeTile(spaceId: string): void {
-    this.getSpace(spaceId).tile = undefined;
-    this.getSpace(spaceId).player = undefined;
+    const space = this.board.getSpace(spaceId);
+    space.tile = undefined;
+    space.player = undefined;
   }
 
   public getPlayers(): Array<Player> {

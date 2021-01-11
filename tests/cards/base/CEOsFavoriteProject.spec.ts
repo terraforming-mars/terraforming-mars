@@ -10,13 +10,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CEOsFavoriteProject', function() {
-  let card : CEOsFavoriteProject; let player : Player; let game : Game;
+  let card : CEOsFavoriteProject; let player : Player;
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -35,7 +35,7 @@ describe('CEOsFavoriteProject', function() {
     player.addResourceTo(searchForLife);
     player.addResourceTo(birds);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
     action.cb([searchForLife]);

@@ -85,7 +85,7 @@ class UnityPolicy02 implements Policy {
             orOptions.options.push(
               new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
                 player.addResourceTo(availableFloaterCards[0], 2);
-                LogHelper.logAddResource(game, player, availableFloaterCards[0], 2);
+                LogHelper.logAddResource(player, availableFloaterCards[0], 2);
 
                 return undefined;
               }),
@@ -95,7 +95,7 @@ class UnityPolicy02 implements Policy {
               new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
                 return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
-                  LogHelper.logAddResource(game, player, foundCards[0], 2);
+                  LogHelper.logAddResource(player, foundCards[0], 2);
                   return undefined;
                 });
               }),

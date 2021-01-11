@@ -38,7 +38,7 @@ describe('FreyjaBiodomes', function() {
     (game as any).venusScaleLevel = 10;
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     expect(player.getResourcesOnCard(card2)).to.eq(2);
@@ -50,7 +50,7 @@ describe('FreyjaBiodomes', function() {
     player.addProduction(Resources.ENERGY);
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player, game) as SelectCard<ICard>;
+    const action = card.play(player) as SelectCard<ICard>;
     expect(action instanceof SelectCard).is.true;
 
     action.cb([card2]);

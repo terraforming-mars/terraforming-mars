@@ -34,7 +34,7 @@ export class Factorum implements IActionCard, CorporationCard {
         'Increase production',
         () => {
           player.addProduction(Resources.ENERGY);
-          LogHelper.logGainProduction(game, player, Resources.ENERGY);
+          LogHelper.logGainProduction(player, Resources.ENERGY);
           return undefined;
         },
       );

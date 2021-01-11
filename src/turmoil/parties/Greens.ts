@@ -119,7 +119,7 @@ class GreensPolicy04 implements Policy {
             orOptions.options.push(
               new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
                 player.addResourceTo(availableMicrobeCards[0], 2);
-                LogHelper.logAddResource(game, player, availableMicrobeCards[0], 2);
+                LogHelper.logAddResource(player, availableMicrobeCards[0], 2);
 
                 return undefined;
               }),
@@ -129,7 +129,7 @@ class GreensPolicy04 implements Policy {
               new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
                 return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
-                  LogHelper.logAddResource(game, player, foundCards[0], 2);
+                  LogHelper.logAddResource(player, foundCards[0], 2);
                   return undefined;
                 });
               }),

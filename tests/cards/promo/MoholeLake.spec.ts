@@ -34,7 +34,7 @@ describe('MoholeLake', function() {
 
   it('Can act - no target', function() {
     expect(card.canAct()).is.true;
-    expect(card.action(player, game)).is.undefined;
+    expect(card.action(player)).is.undefined;
   });
 
   it('Can act - single target', function() {
@@ -43,7 +43,7 @@ describe('MoholeLake', function() {
 
     card.play(player, game);
     expect(card.canAct()).is.true;
-    card.action(player, game);
+    card.action(player);
     expect(fish.resourceCount).to.eq(1);
   });
 
@@ -54,7 +54,7 @@ describe('MoholeLake', function() {
 
     card.play(player, game);
     expect(card.canAct()).is.true;
-    const action = card.action(player, game) as SelectCard<ICard>;
+    const action = card.action(player) as SelectCard<ICard>;
 
     action.cb([ants]);
     expect(ants.resourceCount).to.eq(1);

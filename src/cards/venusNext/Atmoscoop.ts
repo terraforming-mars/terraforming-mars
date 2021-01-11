@@ -61,7 +61,7 @@ export class Atmoscoop implements IProjectCard {
       floaterCards,
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(game, player, foundCards[0], 2);
+        LogHelper.logAddResource(player, foundCards[0], 2);
         return undefined;
       },
     );
@@ -75,7 +75,7 @@ export class Atmoscoop implements IProjectCard {
     switch (floaterCards.length) {
     case 1:
       player.addResourceTo(floaterCards[0], 2);
-      LogHelper.logAddResource(game, player, floaterCards[0], 2);
+      LogHelper.logAddResource(player, floaterCards[0], 2);
 
     case 0:
       if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {

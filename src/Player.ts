@@ -1931,7 +1931,12 @@ export class Player implements ISerializable<SerializedPlayer> {
         resourceCount: c.resourceCount,
       };
       if (c instanceof SelfReplicatingRobots) {
-        result.targetCards = c.targetCards;
+        result.targetCards = c.targetCards.map((t) => {
+          return {
+            card: {name: t.card.name},
+            resourceCount: t.resourceCount,
+          };
+        });
       }
       return result;
     });

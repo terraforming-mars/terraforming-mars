@@ -78,7 +78,7 @@ export class ProjectWorkshop implements CorporationCard {
       if (card.getVictoryPoints !== undefined) {
         const steps = card.getVictoryPoints(player, game);
         player.increaseTerraformRatingSteps(steps, game);
-        LogHelper.logTRIncrease(game, player, steps);
+        LogHelper.logTRIncrease(player, steps);
       }
     }
 

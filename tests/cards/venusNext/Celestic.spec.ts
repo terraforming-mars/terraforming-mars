@@ -8,13 +8,13 @@ describe('Celestic', function() {
     const card = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const play = card.play();
     expect(play).is.undefined;
 
     player.corporationCard = card;
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
     player.addResourceTo(card, 4);

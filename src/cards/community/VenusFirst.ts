@@ -16,7 +16,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       const cards = game.drawCardsByTag(Tags.VENUS, 2);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
       return undefined;
     }
     public metadata: CardMetadata = {

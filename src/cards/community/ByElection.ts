@@ -11,6 +11,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {PoliticalAgendas} from '../../turmoil/PoliticalAgendas';
 
 export class ByElection extends PreludeCard implements IProjectCard {
     public tags = [Tags.WILDCARD];
@@ -30,6 +31,8 @@ export class ByElection extends PreludeCard implements IProjectCard {
       setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
         p.partyName, 'Select', () => {
           turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+          PoliticalAgendas.setNextAgenda(turmoil, game);
+
           return undefined;
         }),
       )];

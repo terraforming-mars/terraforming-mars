@@ -40,7 +40,7 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
     const gainedMC = game.getCitiesInPlayOnMars();
     player.energy--;
     player.megaCredits += gainedMC;
-    LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, gainedMC);
+    LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, gainedMC);
 
     return undefined;
   }

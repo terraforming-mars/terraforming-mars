@@ -7,13 +7,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Dirigibles', function() {
-  let card : Dirigibles; let player : Player; let game : Game;
+  let card : Dirigibles; let player : Player;
 
   beforeEach(function() {
     card = new Dirigibles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 
@@ -23,17 +23,17 @@ describe('Dirigibles', function() {
   });
 
   it('Should act - single target', function() {
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
   });
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(new FloatingHabs());
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
 
-        action!.cb([card]);
-        expect(card.resourceCount).to.eq(1);
+    action!.cb([card]);
+    expect(card.resourceCount).to.eq(1);
   });
 });

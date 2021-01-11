@@ -39,7 +39,7 @@ export class Inventrix extends Card implements CorporationCard {
       game.dealer.dealCard(),
     );
 
-    LogHelper.logCardChange(game, player, 'drew', 3);
+    LogHelper.logCardChange( player, 'drew', 3);
 
     return undefined;
   }

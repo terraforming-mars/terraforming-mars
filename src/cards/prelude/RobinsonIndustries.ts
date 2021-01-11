@@ -6,7 +6,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -24,13 +23,13 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
       return player.canAfford(4);
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       let minimum = player.getProduction(Resources.MEGACREDITS);
       let lowest: Array<SelectOption> = [];
 
       [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
         const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-          this.increaseAndLogProduction(game, player, resource);
+          this.increaseAndLogProduction(player, resource);
           return undefined;
         });
 
@@ -47,10 +46,10 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
       return result;
     }
 
-    private increaseAndLogProduction(game: Game, player: Player, resource: Resources) {
+    private increaseAndLogProduction(player: Player, resource: Resources) {
       player.addProduction(resource);
       player.megaCredits -= 4;
-      LogHelper.logGainProduction(game, player, resource);
+      LogHelper.logGainProduction(player, resource);
     }
 
     public metadata: CardMetadata = {

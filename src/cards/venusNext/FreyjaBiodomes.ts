@@ -28,7 +28,7 @@ export class FreyjaBiodomes implements IProjectCard {
       return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       const cards = this.getResCards(player);
 
       if (cards.length > 1) {
@@ -40,7 +40,7 @@ export class FreyjaBiodomes implements IProjectCard {
             player.addResourceTo(foundCards[0], 2);
             player.addProduction(Resources.ENERGY, -1);
             player.addProduction(Resources.MEGACREDITS, 2);
-            LogHelper.logAddResource(game, player, foundCards[0], 2);
+            LogHelper.logAddResource(player, foundCards[0], 2);
             return undefined;
           },
         );
@@ -48,7 +48,7 @@ export class FreyjaBiodomes implements IProjectCard {
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 2);
-        LogHelper.logAddResource(game, player, cards[0], 2);
+        LogHelper.logAddResource(player, cards[0], 2);
       }
 
       player.addProduction(Resources.ENERGY, -1);

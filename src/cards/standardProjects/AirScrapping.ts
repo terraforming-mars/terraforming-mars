@@ -4,12 +4,12 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProject} from './StandardProject';
+import {StandardProjectCard} from './StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 
-export class AirScrapping extends StandardProject {
+export class AirScrapping extends StandardProjectCard {
   public name = CardName.STANDARD_AIR_SCRAPPING;
   public cost = 15;
 

@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProject} from '../standardProjects/StandardProject';
+import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
 
 export class CrediCor extends Card implements CorporationCard {
   constructor() {
@@ -30,7 +30,7 @@ export class CrediCor extends Card implements CorporationCard {
       },
     });
   }
-  private effect(player: Player, card: IProjectCard | StandardProject): void {
+  private effect(player: Player, card: IProjectCard | StandardProjectCard): void {
     if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cost >= 20) {
       player.megaCredits += 4;
     }
@@ -38,7 +38,7 @@ export class CrediCor extends Card implements CorporationCard {
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
     this.effect(player, card);
   }
-  public onStandardProject(player: Player, project: StandardProject) {
+  public onStandardProject(player: Player, project: StandardProjectCard) {
     this.effect(player, project);
   }
   public play() {

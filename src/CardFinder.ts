@@ -12,7 +12,7 @@ import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
-import {StandardAction} from './cards/standardActions/StandardAction';
+import {StandardActionCard} from './cards/standardActions/StandardActionCard';
 import {Deck} from './Deck';
 
 export class CardFinder {
@@ -34,10 +34,10 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getCardByName<T extends ICard>(cardName: string, decksd: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
+    public getCardByName<T extends ICard>(cardName: string, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
       let found : (ICardFactory<T> | undefined);
       CardFinder.getDecks().some((man) => {
-        decksd(man).some((deck) => {
+        decks(man).some((deck) => {
           found = deck.findByCardName(cardName as CardName);
           return found;
         });
@@ -50,7 +50,7 @@ export class CardFinder {
       return undefined;
     }
 
-    public getProjectOrStandardActionByName(cardName: string): StandardAction | IProjectCard | undefined {
+    public getProjectOrStandardActionByName(cardName: string): StandardActionCard | IProjectCard | undefined {
       return this.getCardByName(cardName, (man) => [
         man.projectCards,
         man.preludeCards,

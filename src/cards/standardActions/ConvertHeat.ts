@@ -3,27 +3,29 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
+import * as constants from '../../constants';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import * as constants from '../../constants';
-import {StandardAction} from './StandardAction';
+import {StandardActionCard} from './StandardActionCard';
 
 
-export class ConvertHeat extends StandardAction {
+export class ConvertHeat extends StandardActionCard {
   public name = CardName.CONVERT_HEAT;
 
   public canAct(player: Player, game: Game): boolean {
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-    const hasEnoughHeat = player.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
-    const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
+    if (game.getTemperature() === constants.MAX_TEMPERATURE) {
+      return false;
+    }
+    if (player.availableHeat < constants.HEAT_FOR_TEMPERATURE) {
+      return false;
+    }
 
-    const canAffordRedsForHeatConversion =
-      !redsAreRuling ||
-      (!player.isCorporation(CardName.HELION) && player.canAfford(REDS_RULING_POLICY_COST)) ||
-      player.canAfford(REDS_RULING_POLICY_COST + 8);
-
-    return hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      return (!player.isCorporation(CardName.HELION) && player.canAfford(REDS_RULING_POLICY_COST)) ||
+        player.canAfford(REDS_RULING_POLICY_COST + 8);
+    }
+    return true;
   }
 
   public action(player: Player, game: Game) {

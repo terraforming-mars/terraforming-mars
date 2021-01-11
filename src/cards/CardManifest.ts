@@ -4,8 +4,8 @@ import {GameModule} from '../GameModule';
 import {CorporationCard} from './corporation/CorporationCard';
 import {ICardFactory} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';
-import {StandardAction} from './standardActions/StandardAction';
-import {StandardProject} from './standardProjects/StandardProject';
+import {StandardActionCard} from './standardActions/StandardActionCard';
+import {StandardProjectCard} from './standardProjects/StandardProjectCard';
 
 export class CardManifest {
     module: GameModule;
@@ -13,21 +13,21 @@ export class CardManifest {
     cardsToRemove: Set<CardName>;
     corporationCards : Deck<CorporationCard>;
     preludeCards : Deck<IProjectCard>;
-    standardActions : Deck<StandardAction>;
+    standardActions : Deck<StandardActionCard>;
     constructor(arg: {
          module: GameModule,
          projectCards?: Array<ICardFactory<IProjectCard>>,
          cardsToRemove?: Array<CardName>,
          corporationCards?: Array<ICardFactory<CorporationCard>>,
          preludeCards?: Array<ICardFactory<IProjectCard>>,
-         standardProjects?: Array<ICardFactory<StandardProject>>,
-         standardActions?: Array<ICardFactory<StandardAction>>,
+         standardProjects?: Array<ICardFactory<StandardProjectCard>>,
+         standardActions?: Array<ICardFactory<StandardActionCard>>,
          }) {
       this.module = arg.module;
       this.projectCards = new Deck<IProjectCard>(arg.projectCards || []);
       this.cardsToRemove = new Set(arg.cardsToRemove || []);
       this.corporationCards = new Deck<CorporationCard>(arg.corporationCards || []);
       this.preludeCards = new Deck<IProjectCard>(arg.preludeCards || []);
-      this.standardActions = new Deck<StandardAction>((arg.standardActions || []).concat(arg.standardProjects || []));
+      this.standardActions = new Deck<StandardActionCard>((arg.standardActions || []).concat(arg.standardProjects || []));
     }
 }

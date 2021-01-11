@@ -8,23 +8,28 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {StandardAction} from './StandardAction';
+import {StandardActionCard} from './StandardActionCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 
 
-export class ConvertPlants extends StandardAction {
+export class ConvertPlants extends StandardActionCard {
   public name = CardName.CONVERT_PLANTS;
 
   public canAct(player: Player, game: Game): boolean {
-    const hasEnoughPlants = player.plants >= player.plantsNeededForGreenery;
-    const canPlaceGreenery = game.board.getAvailableSpacesForGreenery(player).length > 0;
-    const oxygenIsMaxed = game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
-
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-    const canAffordReds = !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST));
-
-    return hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds));
+    if (player.plants < player.plantsNeededForGreenery) {
+      return false;
+    }
+    if (game.board.getAvailableSpacesForGreenery(player).length === 0) {
+      return false;
+    }
+    if (game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL) {
+      return true;
+    }
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      return player.canAfford(REDS_RULING_POLICY_COST);
+    }
+    return true;
   }
 
   public action(player: Player, game: Game) {

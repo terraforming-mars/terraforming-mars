@@ -4,14 +4,14 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProject} from './StandardProject';
+import {StandardProjectCard} from './StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class Greenery extends StandardProject {
+export class Greenery extends StandardProjectCard {
   public name = CardName.STANDARD_GREENERY;
   public cost = 23;
 

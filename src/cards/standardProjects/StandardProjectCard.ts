@@ -12,9 +12,9 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {StandardAction} from '../standardActions/StandardAction';
+import {StandardActionCard} from '../standardActions/StandardActionCard';
 
-export abstract class StandardProject extends StandardAction {
+export abstract class StandardProjectCard extends StandardActionCard {
     public cardType = CardType.STANDARD_PROJECT;
     protected discount(_player: Player) {
       return 0;

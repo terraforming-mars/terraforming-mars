@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PlayerInput} from '../../PlayerInput';
 
-export abstract class StandardAction implements IActionCard, ICard {
+export abstract class StandardActionCard implements IActionCard, ICard {
     public cardType = CardType.STANDARD_ACTION;
     public hasRequirements = false;
     public tags = [];

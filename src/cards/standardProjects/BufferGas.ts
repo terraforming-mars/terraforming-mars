@@ -4,11 +4,11 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProject} from './StandardProject';
+import {StandardProjectCard} from './StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 
-export class BufferGas extends StandardProject {
+export class BufferGas extends StandardProjectCard {
   public name = CardName.STANDARD_BUFFER_GAS;
   public cost = 16;
 

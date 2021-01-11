@@ -7,21 +7,34 @@ import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
 import {DeferredAction} from './DeferredAction';
 
+export namespace AddResourcesToCard {
+  export interface Options {
+    count?: number;
+    restrictedTag?: Tags;
+    title?: string;
+    filter?: (card: ICard) => boolean;
+  }
+}
+
 export class AddResourcesToCard implements DeferredAction {
   constructor(
         public player: Player,
         public game: Game,
         public resourceType: ResourceType | undefined,
-        public count: number = 1,
-        public restrictedTag?: Tags,
-        public title: string = 'Select card to add ' + count + ' ' + resourceType + '(s)',
+        public options: AddResourcesToCard.Options = {},
   ) {}
 
   public execute() {
+    const count = this.options.count || 1;
+    const title = this.options.title ||
+      'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
     let resourceCards = this.player.getResourceCards(this.resourceType);
 
-    if (this.restrictedTag !== undefined) {
-      resourceCards = resourceCards.filter((card) => card.tags.indexOf(this.restrictedTag!) !== -1);
+    if (this.options.restrictedTag !== undefined) {
+      resourceCards = resourceCards.filter((card) => card.tags.includes(this.options.restrictedTag!));
+    }
+    if (this.options.filter !== undefined) {
+      resourceCards = resourceCards.filter(this.options.filter);
     }
 
     if (resourceCards.length === 0) {
@@ -29,18 +42,18 @@ export class AddResourcesToCard implements DeferredAction {
     }
 
     if (resourceCards.length === 1) {
-      this.player.addResourceTo(resourceCards[0], this.count);
-      LogHelper.logAddResource(this.player, resourceCards[0], this.count);
+      this.player.addResourceTo(resourceCards[0], count);
+      LogHelper.logAddResource(this.player, resourceCards[0], count);
       return undefined;
     }
 
     return new SelectCard(
-      this.title,
+      title,
       'Add resource(s)',
       resourceCards,
       (foundCards: Array<ICard>) => {
-        this.player.addResourceTo(foundCards[0], this.count);
-        LogHelper.logAddResource(this.player, foundCards[0], this.count);
+        this.player.addResourceTo(foundCards[0], count);
+        LogHelper.logAddResource(this.player, foundCards[0], count);
         return undefined;
       },
     );

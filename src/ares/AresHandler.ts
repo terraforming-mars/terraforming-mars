@@ -185,7 +185,6 @@ export class AresHandler {
           player,
           player.game,
           resourceType,
-          1,
         ));
       }
     });

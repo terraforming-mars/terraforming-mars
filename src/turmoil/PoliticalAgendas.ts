@@ -114,4 +114,30 @@ export class PoliticalAgendas {
       return agenda;
     }
   }
+
+  public static serialize(agenda: PoliticalAgendasData): SerializedPoliticalAgendasData {
+    return {
+      currentAgenda: agenda.currentAgenda,
+      staticAgendas: agenda.staticAgendas === undefined ?
+        undefined :
+        Array.from(agenda.staticAgendas.entries()),
+    };
+  }
+
+  public static deserialize(d: SerializedPoliticalAgendasData | undefined, turmoil: Turmoil): PoliticalAgendasData {
+    if (d === undefined) {
+      return PoliticalAgendas.newInstance(AgendaStyle.STANDARD, turmoil.parties, turmoil.rulingParty);
+    }
+
+    if (d.staticAgendas !== undefined) {
+      return {
+        currentAgenda: d.currentAgenda,
+        staticAgendas: new Map(d.staticAgendas),
+      };
+    }
+    return {
+      currentAgenda: d.currentAgenda,
+      staticAgendas: undefined,
+    };
+  }
 }

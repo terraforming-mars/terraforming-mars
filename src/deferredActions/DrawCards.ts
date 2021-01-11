@@ -69,9 +69,9 @@ export namespace DrawCards {
     return undefined;
   }
 
-  export function discard(player: Player, cards: Array<IProjectCard>, all: Array<IProjectCard>) {
-    all.forEach((card) => {
-      if (cards.find((f) => f.name === card.name) === undefined) {
+  export function discard(player: Player, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
+    discard.forEach((card) => {
+      if (preserve.find((f) => f.name === card.name) === undefined) {
         player.game.dealer.discard(card);
       }
     });

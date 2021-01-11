@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -46,10 +45,10 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
         b.action('Add 1 Animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
         }).br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.minus().plants(1).nbsp.plus().megacredits(2);
         }).br;
-        b.text('1 VP for each Animal on this card.', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for each Animal on this card.');
       }),
       description: {
         text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps',

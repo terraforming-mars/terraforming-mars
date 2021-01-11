@@ -23,9 +23,8 @@ export class Teractor extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(60);
           b.corpBox('effect', (ce) => {
-            ce.effectBox((eb) => {
+            ce.effect('When you play an Earth tag, you pay 3 MC less for it.', (eb) => {
               eb.earth(1).played.startEffect.megacredits(-3);
-              eb.description('Effect: When you play an Earth tag, you pay 3 MC less for it.');
             });
           });
         }),

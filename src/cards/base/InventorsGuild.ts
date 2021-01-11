@@ -44,13 +44,13 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
       [dealtCard],
       (cards: Array<IProjectCard>) => {
         if (cards.length === 0 || !canSelectCard) {
-          LogHelper.logCardChange(game, player, 'discarded', 1);
+          LogHelper.logCardChange( player, 'discarded', 1);
           game.dealer.discard(dealtCard);
           return undefined;
         }
-        LogHelper.logCardChange(game, player, 'drew', 1);
+        LogHelper.logCardChange( player, 'drew', 1);
         player.cardsInHand.push(dealtCard);
-        game.defer(new SelectHowToPayDeferred(player, player.cardCost, false, false, 'Select how to pay for action'));
+        game.defer(new SelectHowToPayDeferred(player, player.cardCost, {title: 'Select how to pay for action'}));
         return undefined;
       }, canSelectCard ? 1 : 0, 0,
     );

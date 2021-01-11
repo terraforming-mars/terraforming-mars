@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,11 +27,11 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
     return player.titanium > 0;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.titanium -= 1;
     player.addProduction(Resources.MEGACREDITS);
     player.addResourceTo(this);
-    LogHelper.logAddResource(game, player, this);
+    LogHelper.logAddResource(player, this);
 
     return undefined;
   }
@@ -45,9 +44,8 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
     cardNumber: 'X13',
     description: '1VP for each 2 asteroids on this card',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
-        eb.titanium(1).startAction.asteroids(1).productionBox((pb) => pb.megacredits(1));
-        eb.description('Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.');
+      b.action('Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.', (eb) => {
+        eb.titanium(1).startAction.asteroids(1).production((pb) => pb.megacredits(1));
       });
     }),
     victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 2),

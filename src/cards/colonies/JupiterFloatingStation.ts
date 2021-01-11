@@ -35,13 +35,15 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, 'Add 1 floater to a Jovian card'));
+          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {
+            restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
+          }));
           return undefined;
         }),
         new SelectOption('Gain 1 MC per floater here (max 4) ', 'Gain MC', () => {
           const amount = Math.min(this.resourceCount, 4);
           player.megaCredits += amount;
-          LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
+          LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
           return undefined;
         }),
       );
@@ -59,15 +61,13 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
       cardNumber: 'C19',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
           eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN);
-          eb.description('Action: Add 1 floater to a JOVIAN CARD.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Gain 1 MC for every floater here [MAX 4].', (eb) => {
           eb.empty().startAction;
           eb.megacredits(1).slash().floaters(1).text('[max 4]', CardRenderItemSize.SMALL);
-          eb.description('Action: Gain 1 MC for every floater here [MAX 4].');
         });
       }),
       description: {

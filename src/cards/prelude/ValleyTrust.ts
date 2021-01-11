@@ -52,9 +52,8 @@ export class ValleyTrust implements CorporationCard {
         b.br.br;
         b.megacredits(37).nbsp.prelude().asterix();
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
+          ce.effect('When you play a Science tag, you pay 2MC less for it.', (eb) => {
             eb.science(1).played.startEffect.megacredits(-2);
-            eb.description('Effect: When you play a Science tag, you pay 2MC less for it.');
           });
         });
       }),

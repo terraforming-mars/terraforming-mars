@@ -130,7 +130,7 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const serialized = player.serialize();
     const serializedKeys = Object.keys(serialized);
-    const playerKeys = Object.keys(player);
+    const playerKeys = Object.keys(player).filter((key) => key !== '_game');
     serializedKeys.sort();
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);
@@ -199,7 +199,9 @@ describe('Player', function() {
       colonyTradeOffset: 101,
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,
-      turmoilScientistsActionUsed: false,
+      turmoilPolicyActionUsed: false,
+      politicalAgendasActionUsedCount: 0,
+      hasTurmoilScienceTagBonus: false,
       victoryPointsBreakdown: {
         terraformRating: 1,
         milestones: 2,

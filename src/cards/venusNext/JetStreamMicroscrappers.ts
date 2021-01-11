@@ -41,13 +41,13 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
     public action(player: Player, game: Game) {
       const opts: Array<SelectOption> = [];
 
-      const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium', () => this.addResource(player, game));
+      const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium', () => this.addResource(player));
       const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player, game));
 
       if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
         opts.push(spendResource);
       } else {
-        return this.addResource(player, game);
+        return this.addResource(player);
       }
 
       if (player.titanium > 0) {
@@ -59,9 +59,9 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
       return new OrOptions(...opts);
     }
 
-    private addResource(player: Player, game: Game) {
+    private addResource(player: Player) {
       player.addResourceTo(this, 2);
-      LogHelper.logAddResource(game, player, this, 2);
+      LogHelper.logAddResource(player, this, 2);
       player.titanium--;
       return undefined;
     }
@@ -69,20 +69,18 @@ export class JetStreamMicroscrappers implements IActionCard, IProjectCard, IReso
     private spendResource(player: Player, game: Game) {
       this.resourceCount -= 2;
       game.increaseVenusScaleLevel(player, 1);
-      LogHelper.logVenusIncrease(game, player, 1);
+      LogHelper.logVenusIncrease( player, 1);
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: '234',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 1 titanium to add 2 Floaters here', (eb) => {
           eb.titanium(1).startAction.floaters(2);
-          eb.description('Action: Spend 1 titanium to add 2 Floaters here');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend 2 Floaters here to raise Venus 1 step', (eb) => {
           eb.floaters(2).startAction.venus(1);
-          eb.description('Action: Spend 2 Floaters here to raise Venus 1 step');
         });
       }),
     };

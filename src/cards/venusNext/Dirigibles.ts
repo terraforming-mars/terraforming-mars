@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -26,11 +25,11 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
         this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
+        LogHelper.logAddResource(player, floaterCards[0]);
         return undefined;
       }
 
@@ -40,7 +39,7 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
         floaterCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
@@ -48,13 +47,11 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: '222',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Floater to ANY card', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: add 1 Floater to ANY card');
         }).br;
-        b.effectBox((eb) => {
+        b.effect('When playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.', (eb) => {
           eb.venus(1).played.startEffect.floaters(1).equals().megacredits(3);
-          eb.description('Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.');
         });
       }),
     }

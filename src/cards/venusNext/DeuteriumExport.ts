@@ -46,9 +46,13 @@ export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard
   public metadata: CardMetadata = {
     cardNumber: '221',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => eb.empty().startAction.floaters(1).description('Action: Add 1 Floater to this card.')).br;
+      b.action('Add 1 Floater to this card.', (eb) => {
+        eb.empty().startAction.floaters(1);
+      }).br;
       b.or(CardRenderItemSize.SMALL).br;
-      b.effectBox((be) => be.floaters(1).startAction.productionBox((pb) => pb.energy(1)).description('Action: spend 1 Floater here to increase your energy production 1 step.'));
+      b.action('Spend 1 Floater here to increase your energy production 1 step.', (be) => {
+        be.floaters(1).startAction.production((pb) => pb.energy(1));
+      });
     }),
   }
 }

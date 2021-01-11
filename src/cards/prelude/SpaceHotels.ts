@@ -27,7 +27,7 @@ export class SpaceHotels implements IProjectCard {
       cardNumber: 'P42',
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(4);
         });
       }),

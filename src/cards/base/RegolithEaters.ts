@@ -27,14 +27,12 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
       metadata: {
         cardNumber: '033',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Add 1 Microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
-            eb.description('Action: Add 1 Microbe to this card.');
           }).br;
           b.or().br;
-          b.effectBox((eb) => {
+          b.action('Remove 2 Microbes from this card to raise oxygen level 1 step.', (eb) => {
             eb.microbes(2).startAction.oxygen(1);
-            eb.description('Action: Remove 2 Microbes from this card to raise oxygen level 1 step.');
           }).br;
         }),
       },
@@ -52,7 +50,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
     public action(player: Player, game: Game) {
       if (this.resourceCount < 2) {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }
 
@@ -62,14 +60,14 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
           player.removeResourceFrom(this, 2);
-          LogHelper.logRemoveResource(game, player, this, 2, 'raise oxygen 1 step');
+          LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
           return game.increaseOxygenLevel(player, 1);
         }));
       }
 
       orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }));
 

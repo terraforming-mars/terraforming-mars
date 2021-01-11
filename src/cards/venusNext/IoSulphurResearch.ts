@@ -22,7 +22,7 @@ export class IoSulphurResearch implements IProjectCard {
         );
         return undefined;
       }
-      player.cardsInHand.push(game.dealer.dealCard());
+      player.drawCard(game);
       return undefined;
     }
     public getVictoryPoints() {

@@ -30,9 +30,8 @@ export class CuttingEdgeTechnology implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X17',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.effect('When playing a card with a requirement, you pay 2 MC less for it.', (eb) => {
           eb.cards(1).secondaryTag(AltSecondaryTag.REQ).startEffect.megacredits(-2);
-          eb.description('Effect: When playing a card with a requirement, you pay 2 MC less for it.');
         });
       }),
       victoryPoints: 1,

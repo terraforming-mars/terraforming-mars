@@ -18,7 +18,7 @@ export class AlliedBanks extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P01',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(4)).br;
+        b.production((pb) => pb.megacredits(4)).br;
         b.megacredits(3);
       }),
       description: 'Increase your MC production 4 steps. Gain 3 MC.',

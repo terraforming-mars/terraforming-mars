@@ -21,7 +21,7 @@ describe('MeatIndustry', function() {
     expect(player.megaCredits).to.eq(2);
 
     const eosChasmaNationalPark = new EosChasmaNationalPark();
-    eosChasmaNationalPark.play(player, game);
+    eosChasmaNationalPark.play(player);
     expect(fish.resourceCount).to.eq(2);
     expect(player.megaCredits).to.eq(4);
 

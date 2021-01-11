@@ -434,13 +434,8 @@ class Builder {
     return this;
   }
 
-  public productionBox(pb: (builder: ProductionBoxBuilder) => void): Builder {
+  public production(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this._addRowItem(CardRenderProductionBox.builder(pb));
-    return this;
-  }
-
-  public effectBox(eb: (builder: EffectBuilder) => void): Builder {
-    this._addRowItem(CardRenderEffect.builder(eb));
     return this;
   }
 
@@ -546,6 +541,10 @@ class Builder {
     item.isBold = isBold;
     this._addRowItem(item);
     return this;
+  }
+
+  public vpText(text: string): Builder {
+    return this.text(text, CardRenderItemSize.TINY, true);
   }
 
   public get br(): Builder {
@@ -722,7 +721,7 @@ class Builder {
   }
 
   /**
-   * Used to start the effect for effectBox and actionBox, also adds a delimiter symbol
+   * Used to start the effect for action(), effect() and standardProject(), also adds a delimiter symbol
    */
   public get startEffect(): Builder {
     this.br;

@@ -21,9 +21,8 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
     metadata: CardMetadata = {
       cardNumber: '199',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 2 MC to draw a card.', (eb) => {
           eb.megacredits(2).startAction.cards(1);
-          eb.description('Action: Spend 2 MC to draw a card.');
         }).br;
         b.tile(TileType.RESTRICTED_AREA, true);
       }),
@@ -54,8 +53,8 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
     return player.canAfford(2);
   }
   public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for action'));
-    player.cardsInHand.push(game.dealer.dealCard());
+    game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+    player.drawCard(game);
     return undefined;
   }
 }

@@ -59,7 +59,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const gainPlants = function() {
       const qty = 3;
       player.plants += qty;
-      LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
+      LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     };
@@ -77,7 +77,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       const targetMicrobeCard = availableMicrobeCards[0];
       availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
         player.addResourceTo(targetMicrobeCard, 3);
-        LogHelper.logAddResource(game, player, targetMicrobeCard, 3);
+        LogHelper.logAddResource(player, targetMicrobeCard, 3);
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       }));
@@ -86,7 +86,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         'Add microbes',
         availableMicrobeCards, (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 3);
-          LogHelper.logAddResource(game, player, foundCards[0], 3);
+          LogHelper.logAddResource(player, foundCards[0], 3);
           game.defer(new PlaceOceanTile(player, game));
           return undefined;
         }));
@@ -96,14 +96,14 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       const targetAnimalCard = availableAnimalCards[0];
       availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, 2);
-        LogHelper.logAddResource(game, player, targetAnimalCard, 2);
+        LogHelper.logAddResource(player, targetAnimalCard, 2);
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
       availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(game, player, foundCards[0], 2);
+        LogHelper.logAddResource(player, foundCards[0], 2);
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       }));

@@ -61,29 +61,27 @@ export class ForcedPrecipitation implements IActionCard, IProjectCard, IResource
     }
 
     private addResource(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 2, false, false, 'Select how to pay for action'));
+      game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 
     private spendResource(player: Player, game: Game) {
       player.removeResourceFrom(this, 2);
       game.increaseVenusScaleLevel(player, 1);
-      LogHelper.logVenusIncrease(game, player, 1);
+      LogHelper.logVenusIncrease( player, 1);
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: '226',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 2 MC to add 1 Floater to THIS card.', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix;
-          eb.description('Action: Spend 2 MC to add 1 Floater to THIS card');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Spend 2 Floaters here to increase Venus 1 step.', (eb) => {
           eb.floaters(2).startAction.venus(1);
-          eb.description('Action: Spend 2 Floaters here to increase Venus 1 step');
         });
       }),
     }

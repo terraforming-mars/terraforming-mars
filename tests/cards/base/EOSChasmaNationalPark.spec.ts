@@ -29,7 +29,7 @@ describe('EosChasmaNationalPark', function() {
     player.playedCards.push(birds, fish);
 
     expect(card.canPlay(player, game)).is.true;
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
     player.playedCards.push(card);
         action!.cb([birds]);
@@ -48,7 +48,7 @@ describe('EosChasmaNationalPark', function() {
     player.playedCards.push(birds);
 
     expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    card.play(player);
     player.playedCards.push(card);
 
     expect(player.getResourcesOnCard(birds)).to.eq(1);

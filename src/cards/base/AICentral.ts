@@ -27,7 +27,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
         requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
           b.effect('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
-          b.productionBox((pb) => pb.minus().energy(1));
+          b.production((pb) => pb.minus().energy(1));
         }),
         victoryPoints: 1,
       },
@@ -47,7 +47,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
     return 1;
   }
   public action(player: Player, game: Game) {
-    player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
+    player.drawCard(game, 2);
     return undefined;
   }
 }

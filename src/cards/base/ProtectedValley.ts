@@ -27,7 +27,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       metadata: {
         cardNumber: '174',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.megacredits(2)).nbsp;
+          b.production((pb) => pb.megacredits(2)).nbsp;
           b.greenery().secondaryTag(AltSecondaryTag.OXYGEN).asterix();
         }),
         description: 'Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',

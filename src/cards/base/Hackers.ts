@@ -19,7 +19,7 @@ export class Hackers extends Card implements IProjectCard {
       metadata: {
         cardNumber: '125',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).megacredits(2).any.br;
             pb.plus().megacredits(2);
           });

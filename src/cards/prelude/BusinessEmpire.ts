@@ -17,13 +17,13 @@ export class BusinessEmpire extends PreludeCard {
     }
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS, 6);
-      game.defer(new SelectHowToPayDeferred(player, 6, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 6));
       return undefined;
     }
     public metadata: CardMetadata = {
       cardNumber: 'P06',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(6)).br;
+        b.production((pb) => pb.megacredits(6)).br;
         b.megacredits(-6);
       }),
       description: 'Increase your MC production 6 steps. Pay 6 MC.',

@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
@@ -28,7 +27,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
       const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
@@ -36,32 +35,32 @@ export class Astrodrill implements IActionCard, CorporationCard {
         return new OrOptions(
           new SelectOption('Gain 1 titanium', 'Gain titanium', () => {
             player.titanium += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
+            LogHelper.logGainStandardResource(player, Resources.TITANIUM);
             return undefined;
           }),
           new SelectOption('Gain 1 steel', 'Gain steel', () => {
             player.steel += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.STEEL);
+            LogHelper.logGainStandardResource(player, Resources.STEEL);
             return undefined;
           }),
           new SelectOption('Gain 1 plant', 'Gain plant', () => {
             player.plants += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.PLANTS);
+            LogHelper.logGainStandardResource(player, Resources.PLANTS);
             return undefined;
           }),
           new SelectOption('Gain 1 energy', 'Gain energy', () => {
             player.energy += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.ENERGY);
+            LogHelper.logGainStandardResource(player, Resources.ENERGY);
             return undefined;
           }),
           new SelectOption('Gain 1 heat', 'Gain heat', () => {
             player.heat += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.HEAT);
+            LogHelper.logGainStandardResource(player, Resources.HEAT);
             return undefined;
           }),
           new SelectOption('Gain 1 MC', 'Gain MC', () => {
             player.megaCredits += 1;
-            LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS);
+            LogHelper.logGainStandardResource(player, Resources.MEGACREDITS);
             return undefined;
           }),
         );
@@ -69,7 +68,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
 
       const addResourceToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
 
         return undefined;
       });
@@ -80,7 +79,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
         asteroidCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
 
           return undefined;
         },
@@ -89,7 +88,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
       const spendResource = new SelectOption('Remove 1 asteroid on this card to gain 3 titanium', 'Remove asteroid', () => {
         this.resourceCount--;
         player.titanium += 3;
-        LogHelper.logRemoveResource(game, player, this, 1, 'gain 3 titanium');
+        LogHelper.logRemoveResource(player, this, 1, 'gain 3 titanium');
 
         return undefined;
       });
@@ -113,14 +112,12 @@ export class Astrodrill implements IActionCard, CorporationCard {
         b.megacredits(38).nbsp.asteroids(3).digit;
         b.corpBox('action', (ce) => {
           ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effectBox((eb) => {
+          ce.action(undefined, (eb) => {
             eb.empty().startAction.asteroids(1).asterix().slash().wild(1).or();
-            eb.description(undefined);
           });
           ce.vSpace();
-          ce.effectBox((eb) => {
+          ce.action('Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.', (eb) => {
             eb.asteroids(1).startAction.titanium(3).digit;
-            eb.description('Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.');
           });
         });
       }),

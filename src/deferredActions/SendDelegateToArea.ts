@@ -39,11 +39,11 @@ export class SendDelegateToArea implements DeferredAction {
     }
 
     sendDelegate.options = parties.map((party) => new SelectOption(
-      party.name + ' - (' + party.description + ')',
+      party.name + ' (' + party.description + ')',
       'Send delegate',
       () => {
         if (this.price) {
-          this.game.defer(new SelectHowToPayDeferred(this.player, this.price, false, false, 'Select how to pay for send delegate action'));
+          this.game.defer(new SelectHowToPayDeferred(this.player, this.price, {title: 'Select how to pay for send delegate action'}));
         }
 
         if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis

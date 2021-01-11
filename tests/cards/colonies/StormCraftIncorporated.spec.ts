@@ -7,13 +7,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('StormCraftIncorporated', function() {
-  let card : StormCraftIncorporated; let player : Player; let game : Game;
+  let card : StormCraftIncorporated; let player : Player;
 
   beforeEach(function() {
     card = new StormCraftIncorporated();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     player.corporationCard = card;
   });
@@ -22,7 +22,7 @@ describe('StormCraftIncorporated', function() {
     const play = card.play();
     expect(play).is.undefined;
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
   });

@@ -25,7 +25,7 @@ export class IshtarMining implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '233',
       requirements: CardRequirements.builder((b) => b.venus(8)),
-      renderData: CardRenderer.builder((b) => b.productionBox((pb) => pb.titanium(1))),
+      renderData: CardRenderer.builder((b) => b.production((pb) => pb.titanium(1))),
       description: 'Requires Venus 8%. Increase your titanium production 1 step.',
     };
 }

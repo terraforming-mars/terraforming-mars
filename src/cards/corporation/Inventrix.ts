@@ -24,9 +24,8 @@ export class Inventrix extends Card implements CorporationCard {
           b.br;
           b.megacredits(45).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
-            ce.effectBox((eb) => {
+            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.', (eb) => {
               eb.plate('Global requirements').startEffect.text('+/- 2');
-              eb.description('Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.');
             });
           });
         }),
@@ -40,7 +39,7 @@ export class Inventrix extends Card implements CorporationCard {
       game.dealer.dealCard(),
     );
 
-    LogHelper.logCardChange(game, player, 'drew', 3);
+    LogHelper.logCardChange( player, 'drew', 3);
 
     return undefined;
   }

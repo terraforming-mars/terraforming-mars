@@ -24,7 +24,7 @@ export class Splice implements CorporationCard {
     public initialAction(player: Player, game: Game) {
       const cards = game.drawCardsByTag(Tags.MICROBE, 1);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
 
       return undefined;
     }
@@ -74,16 +74,14 @@ export class Splice implements CorporationCard {
         b.megacredits(44).nbsp.cards(1).secondaryTag(Tags.MICROBE);
         b.corpBox('effect', (ce) => {
           ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effectBox((eb) => {
+          ce.effect(undefined, (eb) => {
             eb.microbes(1).played.any.startEffect;
             eb.megacredits(2).any.or().microbes(1).any.asterix();
-            eb.description(undefined);
           });
           ce.vSpace();
-          ce.effectBox((eb) => {
+          ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.', (eb) => {
             eb.microbes(1).played.any.startEffect;
             eb.megacredits(2);
-            eb.description('Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.');
           });
         });
       }),

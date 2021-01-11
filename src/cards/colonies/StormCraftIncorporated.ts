@@ -1,5 +1,4 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
@@ -31,11 +30,11 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     return true;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     if (floaterCards.length === 1) {
       this.resourceCount++;
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 
@@ -45,7 +44,7 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       floaterCards,
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(game, player, foundCards[0]);
+        LogHelper.logAddResource(player, foundCards[0]);
         return undefined;
       },
     );
@@ -90,14 +89,12 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       b.megacredits(48);
       b.corpBox('action', (ce) => {
         ce.vSpace(CardRenderItemSize.LARGE);
-        ce.effectBox((eb) => {
+        ce.action('Add a floater to ANY card.', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: Add a floater to ANY card.');
         });
         ce.vSpace();
-        ce.effectBox((eb) => {
+        ce.effect('Floaters on this card may be used as 2 heat each.', (eb) => {
           eb.startEffect.floaters(1).equals().heat(2);
-          eb.description('Effect: Floaters on this card may be used as 2 heat each.');
         });
       });
     }),

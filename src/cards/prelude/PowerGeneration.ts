@@ -17,7 +17,7 @@ export class PowerGeneration extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'P27',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(3));
+        b.production((pb) => pb.energy(3));
       }),
       description: 'Increase your energy production 3 steps.',
     }

@@ -26,7 +26,7 @@ export class EcologyExperts extends PreludeCard {
     public metadata: CardMetadata = {
       cardNumber: 'P10',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.plants(1)).br.br;
+        b.production((pb) => pb.plants(1)).br.br;
         b.projectRequirements();
       }),
       description: 'Increase your plant production 1 step. Play a card from hand, ignoring global requirements.',

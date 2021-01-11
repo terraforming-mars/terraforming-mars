@@ -1,14 +1,13 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
 import {Resources} from '../Resources';
-import {Game} from '../Game';
 
 export class Generalist implements IMilestone {
     public name: string = 'Generalist';
     public description: string = 'Requires that you have increased all 6 productions by at least 1 step'
-    public getScore(player: Player, game: Game): number {
+    public getScore(player: Player): number {
       let score: number = 0;
-      const requiredProduction : number = game.gameOptions.corporateEra ? 0 : 1;
+      const requiredProduction : number = player.game.gameOptions.corporateEra ? 0 : 1;
 
       if (player.getProduction(Resources.MEGACREDITS) > requiredProduction) score++;
       if (player.getProduction(Resources.STEEL) > requiredProduction) score++;
@@ -19,7 +18,7 @@ export class Generalist implements IMilestone {
 
       return score;
     }
-    public canClaim(player: Player, game: Game): boolean {
-      return this.getScore(player, game) === 6;
+    public canClaim(player: Player): boolean {
+      return this.getScore(player) === 6;
     }
 }

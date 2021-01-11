@@ -74,7 +74,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
       if (asteroidCards.length === 1) {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }
 
@@ -84,7 +84,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         asteroidCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
@@ -92,7 +92,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
     private spendResource(player: Player, game: Game) {
       this.resourceCount--;
-      LogHelper.logRemoveResource(game, player, this, 1, 'raise temperature 1 step');
+      LogHelper.logRemoveResource(player, this, 1, 'raise temperature 1 step');
       game.increaseTemperature(player, 1);
       return undefined;
     }

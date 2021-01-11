@@ -46,7 +46,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       const addAsteroidToSelf = function() {
         player.titanium--;
         player.addResourceTo(asteroidCards[0]);
-        LogHelper.logAddResource(game, player, asteroidCards[0]);
+        LogHelper.logAddResource(player, asteroidCards[0]);
         return undefined;
       };
 
@@ -57,14 +57,14 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         (foundCards: Array<ICard>) => {
           player.titanium--;
           player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
 
       const spendAsteroidResource = () => {
         this.resourceCount--;
-        LogHelper.logRemoveResource(game, player, this, 1, 'place an ocean');
+        LogHelper.logRemoveResource(player, this, 1, 'place an ocean');
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       };

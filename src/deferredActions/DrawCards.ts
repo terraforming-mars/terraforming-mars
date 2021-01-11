@@ -19,7 +19,7 @@ export class DrawCards implements DeferredAction {
     if (this.tag !== undefined) {
       // Reveal cards from the deck until |this.count| of a specific tag have be drawn
       drawnCards.push(...this.game.drawCardsByTag(this.tag, this.count));
-      LogHelper.logDrawnCards(this.game, this.player, drawnCards);
+      LogHelper.logDrawnCards(this.player, drawnCards);
     } else {
       // Draw |this.count| cards from the deck
       for (let i = 0; i < this.count; i++) {

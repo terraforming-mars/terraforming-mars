@@ -58,7 +58,7 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     );
   }
   public play(player: Player, game: Game) {
-    game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+    game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
   public metadata: CardMetadata = {

@@ -44,12 +44,12 @@ export class MaxwellBase implements IActionCard, IProjectCard {
       return this.getResCards(player).length > 0;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const cards = this.getResCards(player);
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 1);
-        LogHelper.logAddResource(game, player, cards[0]);
+        LogHelper.logAddResource(player, cards[0]);
         return undefined;
       }
 
@@ -59,7 +59,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         cards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );

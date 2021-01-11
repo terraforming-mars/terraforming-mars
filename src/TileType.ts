@@ -5,7 +5,6 @@ export enum TileType {
     GREENERY, // 0
     OCEAN, // 1
     CITY, // 2
-
     CAPITAL, // 3
     COMMERCIAL_DISTRICT, // 4
     ECOLOGICAL_ZONE, // 5
@@ -34,6 +33,15 @@ export enum TileType {
     EROSION_SEVERE, // 26
     MINING_STEEL_BONUS, // 27
     MINING_TITANIUM_BONUS, // 28
+
+    // The Moon
+    MOON_MINE, // 29
+    MOON_COLONY, // 30
+    MOON_ROAD, // 31
+    LUNA_TRADE_STATION, // 32
+    LUNA_MINING_HUB, // 33
+    LUNA_TRAIN_STATION, // 34
+    LUNAR_MINE_URBANIZATION, // 35
 }
 
 const TO_STRING_MAP: Map<TileType, string> = new Map([
@@ -67,6 +75,13 @@ const TO_STRING_MAP: Map<TileType, string> = new Map([
   [TileType.EROSION_SEVERE, 'Severe Erosion'],
   [TileType.MINING_STEEL_BONUS, 'Mining (Steel)'],
   [TileType.MINING_TITANIUM_BONUS, 'Mining (Titanium)'],
+  [TileType.MOON_MINE, 'Moon Mine'],
+  [TileType.MOON_COLONY, 'Moon Colony'],
+  [TileType.MOON_ROAD, 'Moon Road'],
+  [TileType.LUNA_TRADE_STATION, 'Luna Trade Station'],
+  [TileType.LUNA_MINING_HUB, 'Luna Mining Hub'],
+  [TileType.LUNA_TRAIN_STATION, 'Luna Train Station'],
+  [TileType.LUNAR_MINE_URBANIZATION, 'Lunar Mine Urbanization'],
 ]);
 
 export namespace TileType {

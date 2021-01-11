@@ -51,7 +51,7 @@ describe('MaxwellBase', function() {
 
     player.playedCards.push(card3);
     expect(card.canAct(player)).is.true;
-    card.action(player, game);
+    card.action(player);
     expect(player.getResourcesOnCard(card3)).to.eq(1);
   });
 
@@ -61,7 +61,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card, card2, card3);
     expect(card.canAct(player)).is.true;
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
     (action as SelectCard<ICard>).cb([card2]);
     expect(player.getResourcesOnCard(card2)).to.eq(1);

@@ -18,6 +18,12 @@ describe('Board', function() {
     player2 = TestPlayers.RED.newPlayer();
   });
 
+  it('getSpace', () => {
+    expect(board.getSpace('01').spaceType).eq(SpaceType.COLONY);
+    expect(board.getSpace('01').id).eq('01');
+    expect(() => board.getSpace('m01').id).to.throw(Error, /Can't find space with id m01/);
+  });
+
   it('Can have greenery placed on any available land when player has no tile placed', function() {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);

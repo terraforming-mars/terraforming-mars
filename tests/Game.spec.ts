@@ -291,13 +291,13 @@ describe('Game', function() {
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = player.getWaitingFor() as OrOptions;
-    const arsiaMons = game.getSpace(SpaceName.ARSIA_MONS);
+    const arsiaMons = game.board.getSpace(SpaceName.ARSIA_MONS);
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
     // Place second greenery
     const placeSecondGreenery = player.getWaitingFor() as OrOptions;
-    const otherSpace = game.getSpace('30');
+    const otherSpace = game.board.getSpace('30');
     placeSecondGreenery.options[0].cb(otherSpace); ;
 
     // End the game
@@ -354,7 +354,7 @@ describe('Game', function() {
     const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     game.addOceanTile(player, spaceId);
 
-    const space: ISpace = game.getSpace(spaceId);
+    const space: ISpace = game.board.getSpace(spaceId);
     expect(space.player).is.undefined;
   });
 

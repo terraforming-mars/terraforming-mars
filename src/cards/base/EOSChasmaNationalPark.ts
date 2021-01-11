@@ -39,7 +39,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
     return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const cards = player.getResourceCards(ResourceType.ANIMAL);
     player.plants += 3;
     player.addProduction(Resources.MEGACREDITS, 2);
@@ -48,13 +48,13 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
 
     if (cards.length === 1) {
       player.addResourceTo(cards[0], 1);
-      LogHelper.logAddResource(game, player, cards[0]);
+      LogHelper.logAddResource(player, cards[0]);
       return undefined;
     }
 
     return new SelectCard('Add 1 animal to a card', 'Add animal', cards, (foundCards: Array<ICard>) => {
       player.addResourceTo(foundCards[0], 1);
-      LogHelper.logAddResource(game, player, foundCards[0]);
+      LogHelper.logAddResource(player, foundCards[0]);
       return undefined;
     });
   }

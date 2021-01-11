@@ -36,14 +36,14 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
   public canAct(player: Player): boolean {
     return player.energy > 0;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return new SelectAmount(
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
         player.energy -= amount;
         player.megaCredits += amount;
-        LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
+        LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
         return undefined;
       },
       1,

@@ -65,7 +65,7 @@ export namespace DrawCards {
 
   export function keep(player: Player, cards: Array<IProjectCard>): undefined {
     player.cardsInHand.push(...cards);
-    LogHelper.logCardChange(player.game, player, 'kept', cards.length);
+    LogHelper.logCardChange(player, 'kept', cards.length);
     return undefined;
   }
 

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/cards/base/AICentral';
 import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -10,6 +11,8 @@ describe('AICentral', function() {
   beforeEach(function() {
     card = new AICentral();
     player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if not enough science tags to play', function() {

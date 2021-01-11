@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {RedSpotObservatory} from '../../../src/cards/colonies/RedSpotObservatory';
+import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,8 @@ describe('RedSpotObservatory', function() {
   beforeEach(function() {
     card = new RedSpotObservatory();
     player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {

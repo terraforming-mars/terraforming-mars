@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {DevelopmentCenter} from '../../../src/cards/base/DevelopmentCenter';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -9,6 +10,8 @@ describe('DevelopmentCenter', function() {
   beforeEach(function() {
     card = new DevelopmentCenter();
     player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t act', function() {

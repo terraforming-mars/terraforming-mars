@@ -18,7 +18,7 @@ export class MorningStarInc implements CorporationCard {
     public initialAction(player: Player, game: Game) {
       const cards = game.drawCardsByTag(Tags.VENUS, 3);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
       return undefined;
     }
 

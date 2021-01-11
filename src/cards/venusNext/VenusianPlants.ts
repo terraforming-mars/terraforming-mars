@@ -40,7 +40,7 @@ export class VenusianPlants implements IProjectCard {
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 1);
-        LogHelper.logAddResource(game, player, cards[0]);
+        LogHelper.logAddResource(player, cards[0]);
         return undefined;
       }
 
@@ -50,7 +50,7 @@ export class VenusianPlants implements IProjectCard {
         cards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );

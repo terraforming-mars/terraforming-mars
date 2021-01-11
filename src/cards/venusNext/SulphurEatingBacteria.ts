@@ -31,37 +31,37 @@ export class SulphurEatingBacteria implements IActionCard, IProjectCard, IResour
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const opts: Array<SelectOption | SelectAmount> = [];
 
-      const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player, game));
-      const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, game, amount), 1, this.resourceCount);
+      const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player));
+      const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), 1, this.resourceCount);
 
       opts.push(addResource);
 
       if (this.resourceCount > 0) {
         opts.push(spendResource);
       } else {
-        return this.addResource(player, game);
+        return this.addResource(player);
       }
 
       return new OrOptions(...opts);
     }
 
-    private addResource(player: Player, game: Game) {
+    private addResource(player: Player) {
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 
-    private spendResource(player: Player, game: Game, amount: number) {
+    private spendResource(player: Player, amount: number) {
       player.removeResourceFrom(this, amount);
 
       const megaCreditsGained = 3 * amount;
       player.megaCredits += megaCreditsGained;
 
       const logText: string = 'gain ' + megaCreditsGained + ' MC';
-      LogHelper.logRemoveResource(game, player, this, amount, logText);
+      LogHelper.logRemoveResource(player, this, amount, logText);
       return undefined;
     }
 

@@ -35,13 +35,15 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, 'Add 1 floater to a Jovian card'));
+          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {
+            restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
+          }));
           return undefined;
         }),
         new SelectOption('Gain 1 MC per floater here (max 4) ', 'Gain MC', () => {
           const amount = Math.min(this.resourceCount, 4);
           player.megaCredits += amount;
-          LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
+          LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
           return undefined;
         }),
       );

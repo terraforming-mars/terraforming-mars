@@ -31,7 +31,7 @@ export class PharmacyUnion implements CorporationCard {
       this.resourceCount = 2;
       const cards = game.drawCardsByTag(Tags.SCIENCE, 1);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
 
       return undefined;
     }

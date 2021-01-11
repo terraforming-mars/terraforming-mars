@@ -419,11 +419,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         distantGlobalEvent: this.distantGlobalEvent?.name,
         commingGlobalEvent: this.comingGlobalEvent,
         comingGlobalEvent: this.comingGlobalEvent?.name,
-        politicalAgendasData: {
-          currentAgenda: this.politicalAgendasData.currentAgenda,
-          staticAgendas: this.politicalAgendasData.staticAgendas === undefined ? undefined : Array.from(this.politicalAgendasData.staticAgendas.entries()),
-          agendaStyle: this.politicalAgendasData.agendaStyle,
-        },
+        politicalAgendasData: PoliticalAgendas.serialize(this.politicalAgendasData),
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;
@@ -463,19 +459,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve = d.delegate_reserve;
       }
 
-      if (d.politicalAgendasData.staticAgendas !== undefined) {
-        turmoil.politicalAgendasData = {
-          currentAgenda: d.politicalAgendasData.currentAgenda,
-          staticAgendas: new Map(d.politicalAgendasData.staticAgendas),
-          agendaStyle: d.politicalAgendasData.agendaStyle,
-        };
-      } else {
-        turmoil.politicalAgendasData = {
-          currentAgenda: d.politicalAgendasData.currentAgenda,
-          staticAgendas: undefined,
-          agendaStyle: d.politicalAgendasData.agendaStyle,
-        };
-      }
+      // TODO(kberg): remove this test by 2021-02-01
+      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData, turmoil);
 
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);

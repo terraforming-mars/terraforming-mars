@@ -141,12 +141,6 @@ export class PostgreSQL implements IDatabase {
         }
       });
     });
-    // Purge unfinished solo games older than 1 days
-    this.client.query('DELETE FROM games WHERE players = 1 and created_time < now() - interval \'1 days\'', function(err: { message: any; }) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
     // Purge unfinished games older than 10 days
     this.client.query('DELETE FROM games WHERE created_time < now() - interval \'10 days\'', function(err: { message: any; }) {
       if (err) {

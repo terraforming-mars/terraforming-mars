@@ -86,7 +86,7 @@ export class AresHandler {
             availableCards,
             (selected: ICard[]) => {
               player.addResourceTo(selected[0]);
-              LogHelper.logAddResource(player.game, player, selected[0], 1);
+              LogHelper.logAddResource(player, selected[0], 1);
               return undefined;
             },
           ),
@@ -185,7 +185,6 @@ export class AresHandler {
           player,
           player.game,
           resourceType,
-          1,
         ));
       }
     });

@@ -60,7 +60,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     public action(player: Player, game: Game) {
       if (this.resourceCount < 3) {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }
 
@@ -70,7 +70,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
           this.resourceCount -= 3;
-          LogHelper.logRemoveResource(game, player, this, 3, 'gain 1 TR');
+          LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
           player.increaseTerraformRating(game);
           return undefined;
         }));
@@ -78,7 +78,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
 
       orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }));
 

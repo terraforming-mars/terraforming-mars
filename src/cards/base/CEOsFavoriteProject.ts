@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -28,14 +27,14 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
     return player.getCardsWithResources().length > 0;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
       player.getCardsWithResources(),
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0]);
-        LogHelper.logAddResource(game, player, foundCards[0]);
+        LogHelper.logAddResource(player, foundCards[0]);
         return undefined;
       },
     );

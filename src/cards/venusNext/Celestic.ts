@@ -39,7 +39,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public initialAction(player: Player, game: Game) {
       const cards = game.drawProjectCardsByCondition(2, (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
       return undefined;
     }
 
@@ -55,11 +55,11 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
       return Math.floor(this.resourceCount / 3);
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
         this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
+        LogHelper.logAddResource(player, floaterCards[0]);
         return undefined;
       }
 
@@ -69,7 +69,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         floaterCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );

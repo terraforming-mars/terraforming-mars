@@ -21,13 +21,13 @@ export class CrashSiteCleanup implements IProjectCard {
       return game.someoneHasRemovedOtherPlayersPlants;
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       const gainTitanium = new SelectOption(
         'Gain 1 titanium',
         'Gain titanium',
         () => {
           player.titanium++;
-          LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
+          LogHelper.logGainStandardResource(player, Resources.TITANIUM);
           return undefined;
         },
       );
@@ -37,7 +37,7 @@ export class CrashSiteCleanup implements IProjectCard {
         'Gain steel',
         () => {
           player.steel += 2;
-          LogHelper.logGainStandardResource(game, player, Resources.STEEL, 2);
+          LogHelper.logGainStandardResource(player, Resources.STEEL, 2);
           return undefined;
         },
       );

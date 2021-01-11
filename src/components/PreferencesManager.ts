@@ -15,6 +15,7 @@ export class PreferencesManager {
       'show_alerts',
       'hide_ma_scores',
       'hide_non_blue_cards',
+      'hide_active_cards',
       'hide_automated_cards',
       'hide_event_cards',
       'hide_log',

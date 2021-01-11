@@ -24,6 +24,7 @@ const dialogPolyfill = require('dialog-polyfill');
 import * as raw_settings from '../../assets/settings.json';
 
 export interface PlayerHomeModel {
+  hide_active_cards: string;
   hide_automated_cards: string;
   hide_event_cards: string;
 }
@@ -31,6 +32,7 @@ export interface PlayerHomeModel {
 export const PlayerHome = Vue.component('player-home', {
   data: function(): PlayerHomeModel {
     return {
+      hide_active_cards: PreferencesManager.loadValue('hide_active_cards'),
       hide_automated_cards: PreferencesManager.loadValue('hide_automated_cards'),
       hide_event_cards: PreferencesManager.loadValue('hide_event_cards'),
     };
@@ -110,27 +112,51 @@ export const PlayerHome = Vue.component('player-home', {
 
       return 'generation ' + this.player.generation;
     },
+    toggleActiveCardsHiding() {
+      this.hide_active_cards = this.isActiveCardShown() ? '1': '';
+      PreferencesManager.saveValue('hide_active_cards', this.hide_active_cards);
+    },
     toggleAutomatedCardsHiding() {
       this.hide_automated_cards = this.isAutomatedCardShown() ? '1': '';
       PreferencesManager.saveValue('hide_automated_cards', this.hide_automated_cards);
-    },
-    isAutomatedCardShown(): boolean {
-      const val = PreferencesManager.loadValue('hide_automated_cards');
-      return val !== '1';
-    },
-    getAutomatedToggleLabel: function(): string {
-      return this.isAutomatedCardShown() ? 'Hide automated cards' : 'Show automated cards';
     },
     toggleEventCardsHiding() {
       this.hide_event_cards = this.isEventCardShown() ? '1': '';
       PreferencesManager.saveValue('hide_event_cards', this.hide_event_cards);
     },
+    isActiveCardShown(): boolean {
+      const val = PreferencesManager.loadValue('hide_active_cards');
+      return val !== '1';
+    },
+    isAutomatedCardShown(): boolean {
+      const val = PreferencesManager.loadValue('hide_automated_cards');
+      return val !== '1';
+    },
     isEventCardShown(): boolean {
       const val = PreferencesManager.loadValue('hide_event_cards');
       return val !== '1';
     },
-    getEventToggleLabel: function(): string {
-      return this.isEventCardShown() ? 'Hide event cards' : 'Show event cards';
+    getToggleLabel: function(hideType: string): string {
+      if (hideType === 'ACTIVE') {
+        return this.isActiveCardShown() ? 'Hide active cards' : 'Show active cards';
+      } else if (hideType === 'AUTOMATED') {
+        return this.isAutomatedCardShown() ? 'Hide automated cards' : 'Show automated cards';
+      } else if (hideType === 'EVENT') {
+        return this.isEventCardShown() ? 'Hide event cards' : 'Show event cards';
+      } else {
+        return '';
+      }
+    },
+    getHideButtonClass: function(hideType: string): string {
+      if (hideType === 'ACTIVE') {
+        return this.isActiveCardShown() ? 'hiding-card-button hiding-card-button--active' : 'hiding-card-button hiding-card-button--active-hid';
+      } else if (hideType === 'AUTOMATED') {
+        return this.isAutomatedCardShown() ? 'hiding-card-button hiding-card-button--automated' : 'hiding-card-button hiding-card-button--automated-hid';
+      } else if (hideType === 'EVENT') {
+        return this.isEventCardShown() ? 'hiding-card-button hiding-card-button--event' : 'hiding-card-button hiding-card-button--event-hid';
+      } else {
+        return '';
+      }
     },
   },
   mounted: function() {
@@ -232,13 +258,14 @@ export const PlayerHome = Vue.component('player-home', {
                 <div class="player_home_block player_home_block--cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
-                        <div class="hiding-card-button hiding-card-button--automated" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getAutomatedToggleLabel() }}</div>
-                        <div class="hiding-card-button hiding-card-button--event" v-on:click.prevent="toggleEventCardsHiding()">{{ getEventToggleLabel() }}</div>
+                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">{{ getToggleLabel('ACTIVE') }}</div>
+                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">{{ getToggleLabel('AUTOMATED') }}</div>
+                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">{{ getToggleLabel('EVENT') }}</div>
                     </div>
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
-                    <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                    <div v-show="isActiveCardShown()" v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 

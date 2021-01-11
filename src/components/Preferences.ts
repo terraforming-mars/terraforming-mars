@@ -62,8 +62,6 @@ export const Preferences = Vue.component('preferences', {
       'show_alerts': true as boolean | unknown[],
       'hide_ma_scores': false as boolean | unknown[],
       'hide_non_blue_cards': false as boolean | unknown[],
-      'hide_automated_cards': false as boolean | unknown[],
-      'hide_event_cards': false as boolean | unknown[],
       'hide_log': false as boolean | unknown[],
       'lang': 'en',
       'langs': LANGUAGES,

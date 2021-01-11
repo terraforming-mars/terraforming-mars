@@ -34,7 +34,7 @@ describe('BusinessNetwork', function() {
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
     expect(action!.maxCardsToSelect).to.eq(0);
 
@@ -46,7 +46,7 @@ describe('BusinessNetwork', function() {
 
   it('Should action as not helion', function() {
     player.megaCredits = 3;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
 
     (action! as SelectCard<IProjectCard>).cb([]);

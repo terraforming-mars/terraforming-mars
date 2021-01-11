@@ -45,7 +45,7 @@ export class MarsUniversity extends Card implements IProjectCard {
             new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
               game.dealer.discard(foundCards[0]);
-              return player.drawCard(game);
+              return player.drawCard();
             }),
             new SelectOption('Do nothing', 'Confirm', () => {
               return undefined;

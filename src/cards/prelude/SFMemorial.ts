@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,8 +12,8 @@ export class SFMemorial implements IProjectCard {
     public name = CardName.SF_MEMORIAL;
     public cardType = CardType.AUTOMATED;
 
-    public play(player: Player, game: Game) {
-      return player.drawCard(game);
+    public play(player: Player) {
+      return player.drawCard();
     }
 
     public getVictoryPoints() {

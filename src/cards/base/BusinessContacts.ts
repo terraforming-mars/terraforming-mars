@@ -1,10 +1,8 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -24,7 +22,7 @@ export class BusinessContacts extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game): SelectCard<IProjectCard> | undefined {
-    return player.drawCard(game, {keep: 2, count: 4});
+  public play(player: Player): SelectCard<IProjectCard> | undefined {
+    return player.drawCardKeepSome(4, {keepMax: 2});
   }
 }

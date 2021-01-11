@@ -26,7 +26,7 @@ describe('TerralabsResearch', function() {
     expect(player.getTerraformRating()).to.eq(13);
 
     player.playedCards.push(card3);
-    const action = card3.action(player, game);
+    const action = card3.action(player);
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);

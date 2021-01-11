@@ -80,7 +80,9 @@ export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmo
 class TestPlayerFactory {
   constructor(private color: Color) {}
   newPlayer() {
-    return new Player('player-' + this.color, this.color, false, 0, this.color + '-id');
+    const player = new Player('player-' + this.color, this.color, false, 0, this.color + '-id');
+    Game.newInstance('foobar', [player], player);
+    return player;
   }
 }
 

@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -10,9 +9,9 @@ import {CardRenderer} from '../render/CardRenderer';
 export class Biolab extends PreludeCard {
     public tags = [Tags.SCIENCE];
     public name = CardName.BIOLAB;
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.PLANTS);
-      return player.drawCard(game, {count: 3});
+      return player.drawCard(3);
     }
     public metadata: CardMetadata = {
       cardNumber: 'P04',

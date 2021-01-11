@@ -23,7 +23,7 @@ describe('InventorsGuild', function() {
 
   it('Should act', function() {
     player.megaCredits = 3;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
     (action! as SelectCard<IProjectCard>).cb([]);
 
@@ -39,7 +39,7 @@ describe('InventorsGuild', function() {
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const selectCard = card.action(player, game) as SelectCard<IProjectCard>;
+    const selectCard = card.action(player) as SelectCard<IProjectCard>;
     expect(selectCard.maxCardsToSelect).to.eq(0);
     selectCard.cb([]);
     expect(game.deferredActions).has.lengthOf(0);

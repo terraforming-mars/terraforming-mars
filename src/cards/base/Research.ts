@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -26,8 +25,8 @@ export class Research extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    return player.drawCard(game, {count: 2});
+  public play(player: Player) {
+    return player.drawCard(2);
   }
   public getVictoryPoints() {
     return 1;

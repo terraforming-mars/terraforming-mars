@@ -12,7 +12,7 @@ export class SponsoredProjects implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         player.getCardsWithResources().forEach((card) => card.resourceCount && player.addResourceTo(card));
-        player.drawCard(game, {count: turmoil.getPlayerInfluence(player)});
+        player.drawCard(turmoil.getPlayerInfluence(player));
       });
     }
 }

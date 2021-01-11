@@ -139,7 +139,7 @@ class UnityPolicy03 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          player.drawCard(game, {count: 1, tag: Tags.SPACE});
+          player.drawCard(1, {tag: Tags.SPACE});
         },
       },
     ));

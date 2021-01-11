@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -10,9 +9,9 @@ import {CardRenderer} from '../render/CardRenderer';
 export class IoResearchOutpost extends PreludeCard {
     public tags = [Tags.JOVIAN, Tags.SCIENCE];
     public name = CardName.IO_RESEARCH_OUTPOST;
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.TITANIUM);
-      return player.drawCard(game);
+      return player.drawCard();
     }
     public metadata: CardMetadata = {
       cardNumber: 'P16',

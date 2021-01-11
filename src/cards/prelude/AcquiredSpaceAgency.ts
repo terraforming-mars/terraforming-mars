@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
@@ -9,9 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AcquiredSpaceAgency extends PreludeCard {
     public tags = [];
     public name = CardName.ACQUIRED_SPACE_AGENCY;
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.titanium += 6;
-      return player.drawCard(game, {count: 2, tag: Tags.SPACE});
+      return player.drawCard(2, {tag: Tags.SPACE});
     };
     public metadata: CardMetadata = {
       cardNumber: 'P35',

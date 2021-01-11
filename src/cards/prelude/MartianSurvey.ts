@@ -19,8 +19,8 @@ export class MartianSurvey implements IProjectCard {
       return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
     }
 
-    public play(player: Player, game: Game) {
-      return player.drawCard(game, {count: 2});
+    public play(player: Player) {
+      return player.drawCard(2);
     }
 
     public getVictoryPoints() {

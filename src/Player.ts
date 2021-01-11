@@ -1,4 +1,5 @@
 import * as constants from './constants';
+import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -21,7 +22,6 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
-import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
@@ -1035,16 +1035,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.draftedCards = [];
     }
 
-    const action = this.drawCard(game, {
-      count: dealtCards.length,
-      paying: true,
-      cards: dealtCards,
-    });
-    if (action === undefined) {
-      game.playerIsFinishedWithResearchPhase(this);
-    } else {
-      this.setWaitingFor(action, () => game.playerIsFinishedWithResearchPhase(this));
-    }
+    const action = DrawCards.choose(this, dealtCards, {paying: true});
+    this.setWaitingFor(action, () => game.playerIsFinishedWithResearchPhase(this));
   }
 
   public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
@@ -1329,8 +1321,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public drawCard(game: Game, options?: DrawCards.Options): undefined | SelectCard<IProjectCard> {
-    return new DrawCards(this, game, options).execute();
+  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined | SelectCard<IProjectCard> {
+    return DrawCards.keepAll(this, count, options).execute();
+  }
+
+  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): undefined | SelectCard<IProjectCard> {
+    return DrawCards.keepSome(this, count, options).execute();
   }
 
   public get availableHeat(): number {

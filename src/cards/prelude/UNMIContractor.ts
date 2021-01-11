@@ -12,7 +12,7 @@ export class UNMIContractor extends PreludeCard {
 
     public play(player: Player, game: Game) {
       player.increaseTerraformRatingSteps(3, game);
-      return player.drawCard(game);
+      return player.drawCard();
     }
     public metadata: CardMetadata = {
       cardNumber: 'P34',

@@ -1,18 +1,15 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/cards/base/AICentral';
 import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AICentral', function() {
-  let card : AICentral; let player : Player; let game : Game;
+  let card : AICentral; let player : Player;
 
   beforeEach(function() {
     card = new AICentral();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if not enough science tags to play', function() {
@@ -35,7 +32,7 @@ describe('AICentral', function() {
   });
 
   it('Should take action', function() {
-    card.action(player, game);
+    card.action(player);
     expect(player.cardsInHand).has.lengthOf(2);
   });
 });

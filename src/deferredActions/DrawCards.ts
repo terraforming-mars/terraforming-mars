@@ -12,7 +12,7 @@ export class DrawCards implements DeferredAction {
   private constructor(
     public player: Player,
     public count: number = 1,
-    public options: DrawCards.DrawOptions = {},
+    public options: DrawCards.AllOptions = {},
     public cb: (cards: Array<IProjectCard>) => undefined | SelectCard<IProjectCard>,
   ) { }
 
@@ -39,19 +39,12 @@ export class DrawCards implements DeferredAction {
     return this.cb(cards);
   };
 
-  public static keepAll(
-    player: Player,
-    count: number = 1,
-    options: DrawCards.DrawOptions = {}): DrawCards {
+  public static keepAll(player: Player, count: number = 1, options: DrawCards.DrawOptions = {}): DrawCards {
     return new DrawCards(player, count, options, (cards) => DrawCards.keep(player, cards));
   }
 
-  public static keepSome(
-    player: Player,
-    count: number = 1,
-    drawOptions: DrawCards.DrawOptions = {},
-    chooseOptions:DrawCards.ChooseOptions = {}): DrawCards {
-    return new DrawCards(player, count, drawOptions, (cards) => DrawCards.choose(player, cards, chooseOptions));
+  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions = {}): DrawCards {
+    return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
   }
 }
 
@@ -64,10 +57,11 @@ export namespace DrawCards {
   }
 
   export interface ChooseOptions {
-    max?: number,
+    keepMax?: number,
     paying?: boolean,
   }
 
+  export interface AllOptions extends DrawOptions, ChooseOptions { }
 
   export function keep(player: Player, cards: Array<IProjectCard>): undefined {
     player.cardsInHand.push(...cards);
@@ -86,20 +80,18 @@ export namespace DrawCards {
   export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
     // if paying, adjust max accordingly.
 
-    const max = Math.min(options.max || 0, Math.floor(player.spendableMegacredits() / player.cardCost));
+    const max = Math.min(options.keepMax || 0, Math.floor(player.spendableMegacredits() / player.cardCost));
     const msg = '';
     const cb = (selected: Array<IProjectCard>) => {
-      if (options.paying === true) {
-        if (selected.length > 0) {
-          player.game.defer(
-            new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
-              title: 'Select how to pay for cards',
-              afterPay: () => {
-                keep(player, cards);
-                discard(player, selected, cards);
-              },
-            }));
-        }
+      if (options.paying === true && selected.length > 0) {
+        player.game.defer(
+          new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
+            title: 'Select how to pay for cards',
+            afterPay: () => {
+              keep(player, cards);
+              discard(player, selected, cards);
+            },
+          }));
       } else {
         keep(player, selected);
         discard(player, selected, cards);

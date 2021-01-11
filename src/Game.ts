@@ -1128,7 +1128,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
-        player.drawCard(this);
+        player.drawCard();
       }
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
         player.increaseTerraformRating(this);
@@ -1396,7 +1396,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
-      player.drawCard(this);
+      player.drawCard();
     } else if (spaceBonus === SpaceBonus.PLANT) {
       player.plants++;
     } else if (spaceBonus === SpaceBonus.STEEL) {

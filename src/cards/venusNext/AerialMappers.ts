@@ -57,7 +57,7 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
     const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
       this.resourceCount--;
       LogHelper.logRemoveResource(game, player, this, 1, 'draw a card');
-      return player.drawCard(game);
+      return player.drawCard();
     });
 
     if (this.resourceCount > 0) {

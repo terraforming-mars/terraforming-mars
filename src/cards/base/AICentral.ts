@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -46,7 +45,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
   public getVictoryPoints() {
     return 1;
   }
-  public action(player: Player, game: Game) {
-    return player.drawCard(game, {count: 2});
+  public action(player: Player) {
+    return player.drawCard(2);
   }
 }

@@ -171,15 +171,15 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS:
-        action = new DrawCards(player, game, {count: quantity});
+        action = DrawCards.keepAll(player, quantity);
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-        action = new DrawCards(player, game, {count: 1, paying: true});
+        action = DrawCards.keepSome(player, 1, {paying: true});
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-        player.drawCard(game);
+        player.drawCard();
         action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
         break;
 

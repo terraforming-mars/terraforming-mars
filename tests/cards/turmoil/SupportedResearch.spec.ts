@@ -17,7 +17,7 @@ describe('SupportedResearch', function() {
     scientists.delegates.push(player.id, player.id);
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.cardsInHand).has.lengthOf(2);
   });
 });

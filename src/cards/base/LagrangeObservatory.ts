@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
@@ -24,8 +23,8 @@ export class LagrangeObservatory extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    return player.drawCard(game);
+  public play(player: Player) {
+    return player.drawCard();
   }
   public getVictoryPoints() {
     return 1;

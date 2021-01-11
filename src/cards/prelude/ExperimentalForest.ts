@@ -13,7 +13,7 @@ export class ExperimentalForest extends PreludeCard {
     public name = CardName.EXPERIMENTAL_FOREST
 
     public play(player: Player, game: Game) {
-      player.drawCard(game, {count: 2, tag: Tags.PLANT});
+      player.drawCard(2, {tag: Tags.PLANT});
       game.defer(new PlaceGreeneryTile(player, game));
       return undefined;
     }

@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {AcquiredSpaceAgency} from '../../../src/cards/prelude/AcquiredSpaceAgency';
 import {Tags} from '../../../src/cards/Tags';
-import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AcquiredSpaceAgency', function() {
   it('Should play', function() {
     const card = new AcquiredSpaceAgency();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    card.play(player);
 
     expect(player.titanium).to.eq(6);
     expect(player.cardsInHand).has.lengthOf(2);

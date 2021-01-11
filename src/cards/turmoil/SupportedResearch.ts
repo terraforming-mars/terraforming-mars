@@ -22,8 +22,8 @@ export class SupportedResearch implements IProjectCard {
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      return player.drawCard(game, {count: 2});
+    public play(player: Player) {
+      return player.drawCard(2);
     }
 
     public metadata: CardMetadata = {

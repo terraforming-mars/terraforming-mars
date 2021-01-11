@@ -2,7 +2,6 @@ import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
 import {CardType} from './../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IActionCard} from './../ICard';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
@@ -31,8 +30,8 @@ export class SubCrustMeasurements implements IActionCard, IProjectCard {
       return 2;
     }
 
-    public action(player: Player, game: Game) {
-      return player.drawCard(game);
+    public action(player: Player) {
+      return player.drawCard();
     }
 
     public metadata: CardMetadata = {

@@ -14,15 +14,15 @@ export class PointLuna implements CorporationCard {
     public tags = [Tags.SPACE, Tags.EARTH];
     public startingMegaCredits: number = 38;
     public cardType = CardType.CORPORATION;
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
       const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
       if (player.isCorporation(this.name) && card.tags.indexOf(Tags.EARTH) !== -1) {
-        player.drawCard(game, {count: tagCount});
+        player.drawCard(tagCount);
       }
     }
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.TITANIUM);
-      return player.drawCard(game);
+      return player.drawCard();
     }
     public metadata: CardMetadata = {
       cardNumber: 'R10',

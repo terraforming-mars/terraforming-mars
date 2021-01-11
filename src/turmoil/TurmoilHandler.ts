@@ -196,7 +196,7 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Scientists P3 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-      player.drawCard(game, {count: steps});
+      player.drawCard(steps);
     }
   }
 }

@@ -32,7 +32,7 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player, game: Game) {
-    return player.drawCard(game, {count: 1, paying: true});
+  public action(player: Player) {
+    return player.drawCardKeepSome(1, {paying: true});
   }
 }

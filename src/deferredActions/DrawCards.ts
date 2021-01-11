@@ -86,6 +86,7 @@ export namespace DrawCards {
     }
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;
+    const button = max === 0 ? 'Oh' : (options.paying ? 'Buy' : 'Select');
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
         player.game.defer(
@@ -104,7 +105,7 @@ export namespace DrawCards {
     };
     return new SelectCard(
       msg,
-      max === 0 ? 'Oh' : 'Select',
+      button,
       cards,
       cb,
       max,

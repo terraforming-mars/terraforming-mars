@@ -18,7 +18,7 @@ function copyToClipboard(text: string): void {
   document.execCommand('copy');
   document.body.removeChild(input);
 }
-const DEFAULT_COPIED_ID = '-1';
+const DEFAULT_COPIED_PLAYER_ID = '-1';
 
 export const GameHome = Vue.component('game-home', {
   props: {
@@ -31,7 +31,8 @@ export const GameHome = Vue.component('game-home', {
   },
   data: function() {
     return {
-      urlCopiedPlayerId: DEFAULT_COPIED_ID as string,
+      // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
+      urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID as string,
     };
   },
   methods: {
@@ -52,26 +53,26 @@ export const GameHome = Vue.component('game-home', {
       }
     },
     setCopiedIdToDefault: function() {
-      this.urlCopiedPlayerId = DEFAULT_COPIED_ID;
+      this.urlCopiedPlayerId = DEFAULT_COPIED_PLAYER_ID;
     },
     getPlayerCubeColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getHref: function(id: string): string {
-      return `/player?id=${id}`;
+    getHref: function(playerId: string): string {
+      return `/player?id=${playerId}`;
     },
-    copyUrl: function(id: string): void {
-      copyToClipboard(window.location.host + this.getHref(id));
-      this.urlCopiedPlayerId = id;
+    copyUrl: function(playerId: string): void {
+      copyToClipboard(window.location.host + this.getHref(playerId));
+      this.urlCopiedPlayerId = playerId;
     },
-    isPlayerUrlCopied: function(id: string): boolean {
-      return id === this.urlCopiedPlayerId;
+    isPlayerUrlCopied: function(playerId: string): boolean {
+      return playerId === this.urlCopiedPlayerId;
     },
   },
   template: `
       <div id="game-home" class="game-home-container">
-        <h1>Terraforming mars [game id: <span>{{getGameId()}}</span>]</h1>
-        <h4>Click on YOUR name to start game. Click on the button next to player name to copy the playable link for THAT player.</h4> 
+        <h1><span v-i18n>Terraforming mars</span> [game id: <span>{{getGameId()}}</span>]</h1>
+        <h4 v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name. <br/>Save this page in case you or one of your opponents loses a link.</h4>
         <ul>
           <li v-for="(player, index) in (game === undefined ? [] : game.players)">
             <span class="turn-order">{{getTurnOrder(index)}}</span>
@@ -84,4 +85,3 @@ export const GameHome = Vue.component('game-home', {
       </div>
     `,
 });
-

@@ -79,10 +79,8 @@ export namespace DrawCards {
 
   export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
     let max = options.keepMax || cards.length;
-    console.log(max, options.keepMax, cards.length);
     if (options.paying) {
       max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
-      console.log(max, player.spendableMegacredits(), player.cardCost);
     }
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;

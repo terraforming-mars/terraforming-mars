@@ -9,41 +9,42 @@ import {CapitalAres} from '../../src/cards/ares/CapitalAres';
 import {CardType} from '../../src/cards/CardType';
 import {Tags} from '../../src/cards/Tags';
 import {SelectCard} from '../../src/inputs/SelectCard';
+import {Dealer} from '../../src/Dealer';
 
 describe('DrawCards', function() {
-  let player: Player;
+  let player: Player; let dealer: Dealer;
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
+    dealer = player.game.dealer;
   });
 
-  function check(expectedCardsInHand: number, expectedDiscardedCards: number) {
-    expect(player.cardsInHand.length).to.eq(expectedCardsInHand);
-    expect(player.game.dealer.discarded.length).to.eq(expectedDiscardedCards);
-  }
 
   it('keeps cards', function() {
     DrawCards.keep(player, [cards[0], cards[1]]);
-    check(2, 0);
+    expect(player.cardsInHand).has.length(2);
+    expect(dealer.discarded).has.length(0);
   });
 
   it('discards cards', function() {
     DrawCards.discard(player, [cards[1]], cards);
-    check(0, 2);
+    expect(player.cardsInHand).has.length(0);
+    expect(dealer.discarded).has.length(2);
   });
 
   it('draws 3', function() {
     DrawCards.keepAll(player, 3).execute();
-    check(3, 0);
+    expect(player.cardsInHand).has.length(3);
+    expect(dealer.discarded).has.length(0);
   });
 
   it('draws 3 special', function() {
     DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tags.SPACE}).execute();
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SPACE) && card.cardType === CardType.ACTIVE).length)
-      .to.eq(3);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SPACE) && card.cardType === CardType.ACTIVE))
+      .has.length(3);
   });
 
   it('draws 2 from 4', function() {
@@ -51,7 +52,8 @@ describe('DrawCards', function() {
     expect(action instanceof SelectCard).is.true;
     expect(action!.maxCardsToSelect).to.eq(2);
     action!.cb([action!.cards[0], action!.cards[2]]);
-    check(2, 2);
+    expect(player.cardsInHand).has.length(2);
+    expect(dealer.discarded).has.length(2);
   });
 
   it('buys 1', function() {
@@ -61,7 +63,8 @@ describe('DrawCards', function() {
     expect(action!.maxCardsToSelect).to.eq(1);
     action!.cb([action!.cards[0]]);
     player.game.deferredActions.runNext();
-    check(1, 0);
+    expect(player.cardsInHand).has.length(1);
+    expect(dealer.discarded).has.length(0);
     expect(player.megaCredits).to.eq(0);
   });
 

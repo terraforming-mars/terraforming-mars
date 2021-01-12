@@ -298,9 +298,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Called either directly during generation change, or after asking chairperson player
     // to choose an agenda.
     public onAgendaSelected(game: Game): void {
-      // Resolve Ruling Bonus
       const rulingParty = this.rulingParty;
 
+      // Resolve Ruling Bonus
       const bonusId = this.politicalAgendasData.currentAgenda.bonusId;
       const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
       if (bonus === undefined) {

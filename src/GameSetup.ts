@@ -14,6 +14,8 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {AresSetup} from './ares/AresSetup';
 import {TileType} from './TileType';
+import {ISpace} from './boards/ISpace';
+import {Random} from './Random';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -62,13 +64,13 @@ export class GameSetup {
   };
 
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: boolean, seed: number, includeVenus: boolean): Board {
+  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, seed, includeVenus);
+      return ElysiumBoard.newInstance(shuffle, rng, includeVenus);
     } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, seed, includeVenus);
+      return HellasBoard.newInstance(shuffle, rng, includeVenus);
     } else {
-      return OriginalBoard.newInstance(shuffle, seed, includeVenus);
+      return OriginalBoard.newInstance(shuffle, rng, includeVenus);
     }
   }
 
@@ -98,7 +100,18 @@ export class GameSetup {
     return new Player('neutral', Color.NEUTRAL, true, 0, gameId + '-neutral');
   }
 
-  public static setupNeutralPlayer(game: Game) {
+  public static setupNeutralPlayer(game: Game, rng: Random) {
+    function getRandomForestSpace(spaces: Array<ISpace>): ISpace {
+      let idx = rng.nextInt(spaces.length);
+      for (let count = 0; count < spaces.length; count++) {
+        if (game.board.canPlaceTile(spaces[idx])) {
+          return spaces[idx];
+        }
+        idx = (idx + 1) % spaces.length;
+      }
+      throw new Error('Did not find space for forest');
+    };
+
     // Single player add neutral player
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
@@ -107,7 +120,8 @@ export class GameSetup {
       const board = game.board;
       const citySpace = game.getSpaceByOffset(direction);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
-      const forestSpace = board.getForestSpace(board.getAdjacentSpaces(citySpace));
+      const adjacentSpaces = board.getAdjacentSpaces(citySpace);
+      const forestSpace = getRandomForestSpace(adjacentSpaces);
       game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
     }
 

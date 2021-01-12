@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
@@ -7,15 +8,24 @@ import {CardName} from '../../CardName';
 import {Tags} from '../Tags';
 import {IProjectCard} from '../IProjectCard';
 
-export abstract class PreludeCard implements IProjectCard {
-    public cost = 0;
-    public cardType = CardType.PRELUDE;
-    public abstract metadata: CardMetadata;
-    public abstract name: CardName;
-    public abstract tags: Array<Tags>;
-    public abstract play(player: Player, game: Game): PlayerInput | undefined;
-    public hasRequirements = false;
-    public canPlay(_player: Player, _game: Game): boolean {
-      return true;
-    }
+interface StaticPreludeProperties {
+    metadata: CardMetadata;
+    name: CardName;
+    tags?: Array<Tags>;
+}
+
+export abstract class PreludeCard extends Card implements IProjectCard {
+  constructor(properties: StaticPreludeProperties) {
+    super({
+      cardType: CardType.PRELUDE,
+      name: properties.name,
+      tags: properties.tags,
+      hasRequirements: false,
+      metadata: properties.metadata,
+    });
+  }
+  public abstract play(player: Player, game: Game): PlayerInput | undefined;
+  public canPlay(_player: Player, _game: Game): boolean {
+    return true;
+  }
 }

@@ -5,14 +5,15 @@ import {Player} from '../Player';
 import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
+import {Random} from '../Random';
 
 export class OriginalBoard extends Board {
   private constructor(public spaces: Array<ISpace>) {
     super();
   }
 
-  public static newInstance(shuffle: boolean, seed: number, includeVenus: boolean): OriginalBoard {
-    const builder = new BoardBuilder(seed, includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): OriginalBoard {
+    const builder = new BoardBuilder(includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -41,7 +42,7 @@ export class OriginalBoard extends Board {
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
     if (shuffle) {
-      builder.shuffle(SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
+      builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
     const spaces = builder.build();
     return new OriginalBoard(spaces);

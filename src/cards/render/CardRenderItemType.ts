@@ -51,4 +51,13 @@ export enum CardRenderItemType {
   VP = 'vp',
   COMMUNITY = 'community',
   DISEASE = 'disease',
+  MOON = 'moon',
+  RESOURCE_CUBE = 'resource_cube',
+  DATA_RESOURCE = 'data resource',
+  MOON_COLONY = 'moon-colony',
+  MOON_COLONY_RATE = 'moon-colony-rate',
+  MOON_ROAD = 'moon-road',
+  MOON_LOGISTICS_RATE = 'moon-logistics-rate',
+  MOON_MINE = 'moon-mine',
+  MOON_MINE_RATE = 'moon-mine-rate',
 }

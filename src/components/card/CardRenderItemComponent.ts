@@ -264,6 +264,30 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
         result = '?';
       }
+      if (this.item.type === CardRenderItemType.MOON) {
+        return 'MOON';
+      }
+      if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
+        return '<div class="board-cube--bronze"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_COLONY) {
+        return '<div class="card-play-moon-colony"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
+        return '<div class="card-increase-colony-rate"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_ROAD) {
+        return '<div class="card-play-moon-road"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
+        return '<div class="card-increase-logistics-rate"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINE) {
+        return '<div class="card-play-moon-mine"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINE_RATE) {
+        return '<div class="card-increase-mine-rate"></div>';
+      }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
         result = '<div class="card-x">x</div>';

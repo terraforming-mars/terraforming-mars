@@ -22,7 +22,7 @@ import {IAward} from './awards/IAward';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
+import {ISpace, SpaceId} from './boards/ISpace';
 import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
 import {LogHelper} from './LogHelper';
@@ -63,6 +63,7 @@ import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
+import {Random} from './Random';
 
 export type GameId = string;
 
@@ -237,7 +238,8 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error('Cloning should not come through this execution path.');
     }
 
-    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, seed, gameOptions.venusNextExtension);
+    const rng = new Random(seed);
+    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
@@ -286,7 +288,7 @@ export class Game implements ISerializable<SerializedGame> {
     // and 2 neutral cities and forests on board
     if (players.length === 1) {
       //  Setup solo player's starting tiles
-      GameSetup.setupNeutralPlayer(game);
+      GameSetup.setupNeutralPlayer(game, rng);
     }
 
     // Setup Ares hazards
@@ -1412,7 +1414,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public addGreenery(
-    player: Player, spaceId: string,
+    player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.LAND,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, spaceType, this.board.getSpace(spaceId), {
@@ -1426,7 +1428,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public addCityTile(
-    player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
+    player: Player, spaceId: SpaceId, spaceType: SpaceType = SpaceType.LAND,
     cardName: string | undefined = undefined): void {
     const space = this.board.getSpace(spaceId);
     this.addTile(player, spaceType, space, {
@@ -1436,7 +1438,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public addOceanTile(
-    player: Player, spaceId: string,
+    player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.OCEAN): void {
     if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
       return;
@@ -1559,6 +1561,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public getSpaceByOffset(direction: -1 | 1, type = 'tile') {
     const card = this.dealer.dealCard();
+    this.dealer.discard(card);
     this.log('Dealt and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).string(type));
 
     const distance = Math.max(card.cost-1, 0); // Some cards cost zero.

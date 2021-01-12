@@ -3,7 +3,7 @@ export enum KeyboardNavigation {
   GAMEBOARD = 'q',
   TURMOILBOARD = 'w',
   MILESTONESAWARDS = 'e',
-  TAGOVERVIEW = 'r',
+  PLAYERSOVERVIEW = 'r',
   GAMELOG = 't',
   ACTION = 'a',
   HAND = 's',

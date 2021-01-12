@@ -57,42 +57,42 @@ export const PlayerHome = Vue.component('player-home', {
       window.removeEventListener('keyup', this.navigatePage);
     },
     navigatePage: function(event: any) {
-      let className: string | undefined = undefined;
+      let id: string | undefined = undefined;
       switch (event.key) {
       case KeyboardNavigation.GAMEBOARD:
-        className = 'player_home_anchor';
+        id = 'shortkey-board';
         break;
       case KeyboardNavigation.TURMOILBOARD:
-        className = 'colonies-fleets-cont';
+        id = 'shortkey-turmoil';
         break;
       case KeyboardNavigation.MILESTONESAWARDS:
-        className = 'colonies-fleets-cont';
+        id = 'shortkey-milestonesawards';
         break;
-      case KeyboardNavigation.TAGOVERVIEW:
-        className = 'player_home_block--players';
+      case KeyboardNavigation.PLAYERSOVERVIEW:
+        id = 'shortkey-playersoverview';
         break;
       case KeyboardNavigation.GAMELOG:
-        className = 'player_home_block--log';
+        id = 'shortkey-gamelog';
         break;
       case KeyboardNavigation.ACTION:
-        className = 'player_home_block--actions';
+        id = 'shortkey-actions';
         break;
       case KeyboardNavigation.HAND:
-        className = 'player_home_block--hand';
+        id = 'shortkey-hand';
         break;
       case KeyboardNavigation.PLAYEDCARDS:
-        className = 'player_home_block--cards';
+        id = 'shortkey-cards';
         break;
       case KeyboardNavigation.COLONIES:
-        className = 'colonies-fleets-cont';
+        id = 'shortkey-colonies';
         break;
       }
-      if (className === undefined) {
+      if (id === undefined) {
         return;
       }
-      const el = this.$el.getElementsByClassName(className)[0];
+      const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({behavior: 'smooth'});
+        el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
       }
     },
     getPlayerCssForTurnOrder: (
@@ -193,20 +193,21 @@ export const PlayerHome = Vue.component('player-home', {
                         :temperature="player.temperature"
                         :shouldNotify="true"
                         :aresExtension="player.aresExtension"
-                        :aresData="player.aresData"></board>
+                        :aresData="player.aresData" 
+                        id="shortkey-board"></board>
 
-                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil" id="shortkey-turmoil"></turmoil>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards" id="shortkey-milestonesawards">
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
+                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation" />
+                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation" id="shortkey-gamelog"/>
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
                         <span class="label-additional" v-html="getGenerationText()"></span>
@@ -216,7 +217,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <dynamic-title title="Actions" :color="player.color" />
+                    <dynamic-title title="Actions" :color="player.color" id="shortkey-actions"/>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
@@ -228,12 +229,12 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
-                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0" id="shortkey-hand">
                     <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
                     <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
                 </div>
 
-                <div class="player_home_block player_home_block--cards">
+                <div class="player_home_block player_home_block--cards" id="shortkey-cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
@@ -313,7 +314,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </details>
             </div>
 
-            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies">
+            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">

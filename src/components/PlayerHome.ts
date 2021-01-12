@@ -149,11 +149,11 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getHideButtonClass: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
-        return this.isActiveCardShown() ? 'hiding-card-button hiding-card-button--active-transparent' : 'hiding-card-button hiding-card-button--active';
+        return this.isActiveCardShown() ? 'hiding-card-button hiding-card-button--active' : 'hiding-card-button hiding-card-button--active-transparent';
       } else if (hideType === 'AUTOMATED') {
-        return this.isAutomatedCardShown() ? 'hiding-card-button hiding-card-button--automated-transparent' : 'hiding-card-button hiding-card-button--automated';
+        return this.isAutomatedCardShown() ? 'hiding-card-button hiding-card-button--automated' : 'hiding-card-button hiding-card-button--automated-transparent';
       } else if (hideType === 'EVENT') {
-        return this.isEventCardShown() ? 'hiding-card-button hiding-card-button--event-transparent' : 'hiding-card-button hiding-card-button--event';
+        return this.isEventCardShown() ? 'hiding-card-button hiding-card-button--event' : 'hiding-card-button hiding-card-button--event-transparent';
       } else {
         return '';
       }

@@ -75,12 +75,6 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mixins: [PlayerMixin],
   methods: {
-    mounted: function() {
-      window.addEventListener('keyup', this.navigatePage);
-    },
-    destroyed: function() {
-      window.removeEventListener('keyup', this.navigatePage);
-    },
     navigatePage: function(event: any) {
       let id: string | undefined = undefined;
       switch (event.key) {

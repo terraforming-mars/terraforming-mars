@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {Game} from '../../Game';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../Resources';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -28,7 +27,7 @@ export class Factorum implements IActionCard, CorporationCard {
       return player.energy === 0 || player.canAfford(3);
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const increaseEnergy = new SelectOption(
         'Increase your energy production 1 step',
         'Increase production',
@@ -41,9 +40,7 @@ export class Factorum implements IActionCard, CorporationCard {
 
       const drawBuildingCard = new SelectOption('Spend 3 MC to draw a building card', 'Draw card', () => {
         player.megaCredits -= 3;
-        const cards = game.drawCardsByTag(Tags.BUILDING, 1);
-        player.cardsInHand.push(...cards);
-        LogHelper.logDrawnCards(player, cards);
+        player.drawCard(1, {tag: Tags.BUILDING});
         return undefined;
       });
 

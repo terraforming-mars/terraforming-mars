@@ -9,10 +9,6 @@ describe('UNMIContractor', function() {
     const game = Game.newInstance('bar', [player], player);
     const card = new UNMIContractor();
     card.play(player, game);
-    expect(game.deferredActions).has.lengthOf(1);
-
-    // Draw cards
-    game.deferredActions.runNext();
 
     expect(player.getTerraformRating()).to.eq(17);
     expect(player.cardsInHand).has.lengthOf(1);

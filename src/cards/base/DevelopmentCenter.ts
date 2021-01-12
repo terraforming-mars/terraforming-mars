@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -32,9 +31,9 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
   public canAct(player: Player): boolean {
     return player.energy > 0;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.energy--;
-    player.drawCard(game);
+    player.drawCard();
     return undefined;
   }
 }

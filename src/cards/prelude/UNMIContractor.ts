@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class UNMIContractor extends PreludeCard {
@@ -11,7 +10,6 @@ export class UNMIContractor extends PreludeCard {
     super({
       name: CardName.UNMI_CONTRACTOR,
       tags: [Tags.EARTH],
-
       metadata: {
         cardNumber: 'P34',
         renderData: CardRenderer.builder((b) => {
@@ -25,7 +23,7 @@ export class UNMIContractor extends PreludeCard {
 
   public play(player: Player, game: Game) {
     player.increaseTerraformRatingSteps(3, game);
-    game.defer(new DrawCards(player, game, 1));
+    player.drawCard();
     return undefined;
   }
 }

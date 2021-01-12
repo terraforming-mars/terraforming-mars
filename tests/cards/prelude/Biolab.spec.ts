@@ -8,12 +8,8 @@ describe('Biolab', function() {
   it('Should play', function() {
     const card = new Biolab();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
-    expect(game.deferredActions).has.lengthOf(1);
-
-    // Draw cards
-    game.deferredActions.runNext();
+    Game.newInstance('foobar', [player], player);
+    card.play(player);
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(3);

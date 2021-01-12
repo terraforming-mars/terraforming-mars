@@ -4,6 +4,9 @@ import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
 import {CardFinder} from './CardFinder';
 import {CardLoader} from './CardLoader';
+import {CardName} from './CardName';
+import {LogHelper} from './LogHelper';
+import {Game} from './Game';
 
 export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
@@ -52,6 +55,31 @@ export class Dealer implements ISerializable<SerializedDealer> {
 
       return result;
     }
+
+    public drawProjectCardsByCondition(game: Game, total: number, include: (card: IProjectCard) => boolean) {
+      const result: Array<IProjectCard> = [];
+      const discardedCards = new Set<CardName>();
+
+      while (result.length < total) {
+        if (discardedCards.size >= this.getDeckSize() + this.getDiscardedSize()) {
+          game.log('discarded every card without match');
+          break;
+        }
+        const projectCard = this.dealCard();
+        if (include(projectCard)) {
+          result.push(projectCard);
+        } else {
+          discardedCards.add(projectCard.name);
+          this.discard(projectCard);
+        }
+      }
+      if (discardedCards.size > 0) {
+        LogHelper.logDiscardedCards(game, Array.from(discardedCards));
+      }
+
+      return result;
+    }
+
     // Prelude deck does not need discard and reshuffle mecanisms
     public dealPreludeCard(): IProjectCard {
       const result: IProjectCard | undefined = this.preludeDeck.pop();

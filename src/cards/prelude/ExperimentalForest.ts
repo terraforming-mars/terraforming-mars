@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
@@ -13,7 +12,6 @@ export class ExperimentalForest extends PreludeCard {
     super({
       name: CardName.EXPERIMENTAL_FOREST,
       tags: [Tags.PLANT],
-
       metadata: {
         cardNumber: 'P12',
         renderData: CardRenderer.builder((b) => {
@@ -24,7 +22,7 @@ export class ExperimentalForest extends PreludeCard {
     });
   }
   public play(player: Player, game: Game) {
-    game.defer(new DrawCards(player, game, 2, Tags.PLANT));
+    player.drawCard(2, {tag: Tags.PLANT});
     game.defer(new PlaceGreeneryTile(player, game));
     return undefined;
   }

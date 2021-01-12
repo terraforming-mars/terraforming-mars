@@ -38,11 +38,14 @@ export const PlayerHome = Vue.component('player-home', {
     };
   },
   watch: {
+    hide_active_cards: function() {
+      PreferencesManager.saveValue('hide_active_cards', this.hide_active_cards);
+    },
     hide_automated_cards: function() {
-      PreferencesManager.preferencesValues.set('hide_automated_cards', this.hide_automated_cards);
+      PreferencesManager.saveValue('hide_automated_cards', this.hide_automated_cards);
     },
     hide_event_cards: function() {
-      PreferencesManager.preferencesValues.set('hide_event_cards', this.hide_event_cards);
+      PreferencesManager.saveValue('hide_event_cards', this.hide_event_cards);
     },
   },
   props: {
@@ -114,27 +117,21 @@ export const PlayerHome = Vue.component('player-home', {
     },
     toggleActiveCardsHiding() {
       this.hide_active_cards = this.isActiveCardShown() ? '1': '';
-      PreferencesManager.saveValue('hide_active_cards', this.hide_active_cards);
     },
     toggleAutomatedCardsHiding() {
       this.hide_automated_cards = this.isAutomatedCardShown() ? '1': '';
-      PreferencesManager.saveValue('hide_automated_cards', this.hide_automated_cards);
     },
     toggleEventCardsHiding() {
       this.hide_event_cards = this.isEventCardShown() ? '1': '';
-      PreferencesManager.saveValue('hide_event_cards', this.hide_event_cards);
     },
     isActiveCardShown(): boolean {
-      const val = PreferencesManager.loadValue('hide_active_cards');
-      return val !== '1';
+      return this.hide_active_cards !== '1';
     },
     isAutomatedCardShown(): boolean {
-      const val = PreferencesManager.loadValue('hide_automated_cards');
-      return val !== '1';
+      return this.hide_automated_cards !== '1';
     },
     isEventCardShown(): boolean {
-      const val = PreferencesManager.loadValue('hide_event_cards');
-      return val !== '1';
+      return this.hide_event_cards !== '1';
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {

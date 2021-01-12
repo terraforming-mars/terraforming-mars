@@ -50,14 +50,49 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mixins: [PlayerMixin],
   methods: {
+    mounted: function() {
+      window.addEventListener('keyup', this.navigatePage);
+    },
+    destroyed: function() {
+      window.removeEventListener('keyup', this.navigatePage);
+    },
     navigatePage: function(event: any) {
-      console.log('key pressed');
-      if (event.keyCode === KeyboardNavigation.COLONIES) {
-        console.log('f pressed');
-        const el = this.$el.getElementsByClassName('colonies-fleets-cont')[0];
-        if (el) {
-          el.scrollIntoView({behavior: 'smooth'});
-        }
+      let className: string | undefined = undefined;
+      switch (event.key) {
+      case KeyboardNavigation.GAMEBOARD:
+        className = 'player_home_anchor';
+        break;
+      case KeyboardNavigation.TURMOILBOARD:
+        className = 'colonies-fleets-cont';
+        break;
+      case KeyboardNavigation.MILESTONESAWARDS:
+        className = 'colonies-fleets-cont';
+        break;
+      case KeyboardNavigation.TAGOVERVIEW:
+        className = 'player_home_block--players';
+        break;
+      case KeyboardNavigation.GAMELOG:
+        className = 'player_home_block--log';
+        break;
+      case KeyboardNavigation.ACTION:
+        className = 'player_home_block--actions';
+        break;
+      case KeyboardNavigation.HAND:
+        className = 'player_home_block--hand';
+        break;
+      case KeyboardNavigation.PLAYEDCARDS:
+        className = 'player_home_block--cards';
+        break;
+      case KeyboardNavigation.COLONIES:
+        className = 'colonies-fleets-cont';
+        break;
+      }
+      if (className === undefined) {
+        return;
+      }
+      const el = this.$el.getElementsByClassName(className)[0];
+      if (el) {
+        el.scrollIntoView({behavior: 'smooth'});
       }
     },
     getPlayerCssForTurnOrder: (

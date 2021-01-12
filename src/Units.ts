@@ -26,7 +26,7 @@ export namespace Units {
 
   // Converts partial units to a full Units, allowing code to use a Units stricture,
   // reducing the need to check for undefined everywhere.
-  export function of(partialUnits: Pargittial<Units>): Units {
+  export function of(partialUnits: Partial<Units>): Units {
     return {
       megacredits: partialUnits.megacredits === undefined ? 0 : partialUnits.megacredits,
       steel: partialUnits.steel === undefined ? 0 : partialUnits.steel,
@@ -36,7 +36,6 @@ export namespace Units {
       heat: partialUnits.heat === undefined ? 0 : partialUnits.heat,
     };
   }
-  export const EMPTY: Units = Units.of({});
 
   // export function adjustUnits(delta: PartialUnits, player: Player, purse: Units) {
   //   if (!player.hasUnits(delta)) {

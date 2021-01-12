@@ -16,20 +16,6 @@ export interface Units {
   heat: number;
 }
 
-// PartialUnits looks just like Units, but every field is optional.
-// PartialUnits is used when coding, it simplifies the API, allowing
-// expressions like `{steel: 2}` instead of
-// {megacredits: 0, steel: 2, titanium: 0, plants: 0, ...}
-//
-export interface PartialUnits {
-  megacredits?: number;
-  steel?: number;
-  titanium?: number;
-  plants?: number;
-  energy?: number;
-  heat?: number;
-}
-
 export namespace Units {
   // // Options used when logging changes in units.
   // export interface Options {
@@ -40,7 +26,7 @@ export namespace Units {
 
   // Converts partial units to a full Units, allowing code to use a Units stricture,
   // reducing the need to check for undefined everywhere.
-  export function of(partialUnits: PartialUnits): Units {
+  export function of(partialUnits: Pargittial<Units>): Units {
     return {
       megacredits: partialUnits.megacredits === undefined ? 0 : partialUnits.megacredits,
       steel: partialUnits.steel === undefined ? 0 : partialUnits.steel,

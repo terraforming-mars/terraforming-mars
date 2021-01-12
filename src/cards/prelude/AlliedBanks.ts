@@ -3,25 +3,28 @@ import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class AlliedBanks extends PreludeCard {
-    public tags = [Tags.EARTH];
-    public name = CardName.ALLIED_BANKS;
+  constructor() {
+    super({
+      name: CardName.ALLIED_BANKS,
+      tags: [Tags.EARTH],
 
-    public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, 4);
-      player.megaCredits += 3;
-      return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'P01',
-      renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.megacredits(4)).br;
-        b.megacredits(3);
-      }),
-      description: 'Increase your MC production 4 steps. Gain 3 MC.',
-    }
+      metadata: {
+        cardNumber: 'P01',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(4)).br;
+          b.megacredits(3);
+        }),
+        description: 'Increase your MC production 4 steps. Gain 3 MC.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, 4);
+    player.megaCredits += 3;
+    return undefined;
+  }
 }
 

@@ -17,6 +17,7 @@ import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
 import {TopBar} from './TopBar';
+import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -49,6 +50,11 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mixins: [PlayerMixin],
   methods: {
+    navigatePage: function(event: any) {
+      if (event.keyCode === KeyboardNavigation.COLONIES) {
+        window.location.href = 'colonies';
+      }
+    },
     getPlayerCssForTurnOrder: (
       player: PlayerModel,
       highlightActive: boolean,
@@ -97,7 +103,7 @@ export const PlayerHome = Vue.component('player-home', {
     );
   },
   template: `
-        <div id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
+        <div v-on:keyup="navigatePage" tabindex="0" id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

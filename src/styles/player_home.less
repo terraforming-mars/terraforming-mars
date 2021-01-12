@@ -846,24 +846,27 @@
     cursor: pointer;
     font-size: 16px;
     margin: 5px;
+    padding: 0px 8px;
+
+    &.active {
+        background-color: rgba(47,146,225, 0.75);
+    }
+    &.automated {
+        background-color: rgba(13,176,11, 0.75);
+    }
+    &.event {
+        background-color: rgba(237,106,21, 0.75);
+    }
+    &.active-transparent {
+        background-color: rgba(47,146,225, 0.5);
+    }
+    &.automated-transparent {
+        background-color: rgba(13,176,11, 0.5);
+    }
+    &.event-transparent {
+        background-color: rgba(237,106,21,0.5);
+    }
 }
 
-.hiding-card-button--active {
-    background-color: rgba(47,146,225, 0.75);
-}
-.hiding-card-button--automated {
-    background-color: rgba(13,176,11, 0.75);
-}
-.hiding-card-button--event {
-    background-color: rgba(237,106,21, 0.75);
-}
 
-.hiding-card-button--active-transparent {
-    background-color: rgba(47,146,225, 0.5);
-}
-.hiding-card-button--automated-transparent {
-    background-color: rgba(13,176,11, 0.5);
-}
-.hiding-card-button--event-transparent {
-    background-color: rgba(237,106,21,0.5);
-}
+

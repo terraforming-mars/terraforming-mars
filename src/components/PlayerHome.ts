@@ -135,22 +135,23 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
-        return this.isActiveCardShown() ? 'Hide active cards' : 'Show active cards';
+        return (this.isActiveCardShown() ? 'Hide' : 'Show') + ' active cards';
       } else if (hideType === 'AUTOMATED') {
-        return this.isAutomatedCardShown() ? 'Hide automated cards' : 'Show automated cards';
+        return (this.isAutomatedCardShown() ? 'Hide' : 'Show') + ' automated cards';
       } else if (hideType === 'EVENT') {
-        return this.isEventCardShown() ? 'Hide event cards' : 'Show event cards';
+        return (this.isEventCardShown() ? 'Hide' : 'Show') + ' event cards';
       } else {
         return '';
       }
     },
     getHideButtonClass: function(hideType: string): string {
+      const prefix = 'hiding-card-button ';
       if (hideType === 'ACTIVE') {
-        return this.isActiveCardShown() ? 'hiding-card-button hiding-card-button--active' : 'hiding-card-button hiding-card-button--active-transparent';
+        return prefix + (this.isActiveCardShown() ? 'active' : 'active-transparent');
       } else if (hideType === 'AUTOMATED') {
-        return this.isAutomatedCardShown() ? 'hiding-card-button hiding-card-button--automated' : 'hiding-card-button hiding-card-button--automated-transparent';
+        return prefix + (this.isAutomatedCardShown() ? 'automated' : 'automated-transparent');
       } else if (hideType === 'EVENT') {
-        return this.isEventCardShown() ? 'hiding-card-button hiding-card-button--event' : 'hiding-card-button hiding-card-button--event-transparent';
+        return prefix + (this.isEventCardShown() ? 'event' : 'event-transparent');
       } else {
         return '';
       }

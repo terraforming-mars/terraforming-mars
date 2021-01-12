@@ -51,8 +51,13 @@ export const PlayerHome = Vue.component('player-home', {
   mixins: [PlayerMixin],
   methods: {
     navigatePage: function(event: any) {
+      console.log('key pressed');
       if (event.keyCode === KeyboardNavigation.COLONIES) {
-        window.location.href = 'colonies';
+        console.log('f pressed');
+        const el = this.$el.getElementsByClassName('colonies-fleets-cont')[0];
+        if (el) {
+          el.scrollIntoView({behavior: 'smooth'});
+        }
       }
     },
     getPlayerCssForTurnOrder: (
@@ -273,7 +278,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </details>
             </div>
 
-            <div v-if="player.colonies.length > 0" class="player_home_block">
+            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies">
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">

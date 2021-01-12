@@ -56,7 +56,6 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
-      app.$data.isResearchPhase = app.playerinput.title === 'Select how to pay for cards';
       app.setInitialCost();
       app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
@@ -73,10 +72,6 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       return this.$data.warning !== undefined;
     },
     setInitialCost: function() {
-      if (this.$data.isResearchPhase) {
-        this.playerinput.amount = this.player.cardCost * 4;
-      }
-
       this.$data.cost = this.playerinput.amount;
     },
     setDefaultSteelValue: function() {
@@ -157,7 +152,6 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         titanium: this.$data.titanium,
         microbes: 0,
         floaters: 0,
-        isResearchPhase: this.$data.isResearchPhase,
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
@@ -180,12 +174,12 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       const requiredAmt = this.playerinput.amount || 0;
       const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
 
-      if (requiredAmt > 0 && totalSpentAmt < requiredAmt && !htp.isResearchPhase) {
+      if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';
         return;
       }
 
-      if (htp.isResearchPhase && requiredAmt === 0) {
+      if (requiredAmt === 0) {
         htp.heat = 0;
         htp.megaCredits = 0;
       }

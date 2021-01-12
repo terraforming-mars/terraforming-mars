@@ -764,7 +764,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       megaCredits: 0,
       microbes: 0,
       floaters: 0,
-      isResearchPhase: false,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);

@@ -1,21 +1,12 @@
 import {expect} from 'chai';
-// import {Player} from '../../src/Player';
-// import {TileType} from '../../src/TileType';
-// import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/SpaceType';
-// import {TestPlayers} from '../TestingUtils';
 import {MoonBoard} from '../../src/moon/MoonBoard';
-// import {Color} from '../../src/Color';
-// import {SerializedBoard} from '../../src/boards/SerializedBoard';
 
 describe('MoonBoard', function() {
   let board : MoonBoard;
-  // let player : Player; let player2 : Player;
 
   beforeEach(function() {
     board = MoonBoard.newInstance();
-    // player = TestPlayers.BLUE.newPlayer();
-    // player2 = TestPlayers.RED.newPlayer();
   });
 
   it('getSpace', () => {

@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/Resources';
-import {ISpace} from '../src/boards/ISpace';
+import {ISpace, SpaceId} from '../src/boards/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
@@ -351,7 +351,7 @@ describe('Game', function() {
   it('Does not assign player to ocean after placement', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('oceanz', [player], player);
-    const spaceId: string = game.board.getAvailableSpacesForOcean(player)[0].id;
+    const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     game.addOceanTile(player, spaceId);
 
     const space: ISpace = game.board.getSpace(spaceId);
@@ -492,14 +492,31 @@ describe('Game', function() {
    * serialization. if this fails update SerializedGame
    * to match
    */
-  it('serializes every property', function() {
+  it('serializes properties', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
     const gameKeys = Object.keys(game);
-    serializedKeys.sort();
-    gameKeys.sort();
-    expect(serializedKeys).to.deep.eq(gameKeys);
+    expect(gameKeys).not.include('moonData');
+    expect(serializedKeys).to.have.members(gameKeys.concat('moonData'));
+  });
+
+  it('serializes every property', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const serialized = game.serialize();
+    const serializedKeys = Object.keys(serialized);
+    const gameKeys = Object.keys(game);
+    expect(serializedKeys).to.have.members(gameKeys);
+  });
+
+  it('deserializing a game without moon data still loads', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: false}));
+    const serialized = game.serialize();
+    delete serialized['moonData'];
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.moonData).is.undefined;
   });
 });

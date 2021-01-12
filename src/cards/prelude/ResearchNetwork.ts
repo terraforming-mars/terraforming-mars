@@ -4,22 +4,26 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
-    public tags = [Tags.WILDCARD];
-    public name = CardName.RESEARCH_NETWORK;
-    public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS);
-      return player.drawCard(3);
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'P28',
-      renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.megacredits(1)).br;
-        b.cards(3);
-      }),
-      description: 'Increase your MC production 1 step. Draw 3 cards.',
-    }
+  constructor() {
+    super({
+      name: CardName.RESEARCH_NETWORK,
+      tags: [Tags.WILDCARD],
+
+      metadata: {
+        cardNumber: 'P28',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(1)).br;
+          b.cards(3);
+        }),
+        description: 'Increase your MC production 1 step. Draw 3 cards.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS);
+    return player.drawCard(3);
+  }
 }

@@ -23,7 +23,8 @@ export class SupportedResearch implements IProjectCard {
     }
 
     public play(player: Player) {
-      return player.drawCard(2);
+      player.drawCard(2);
+      return undefined;
     }
 
     public metadata: CardMetadata = {

@@ -23,6 +23,7 @@ export class UNMIContractor extends PreludeCard {
 
   public play(player: Player, game: Game) {
     player.increaseTerraformRatingSteps(3, game);
-    return player.drawCard();
+    player.drawCard();
+    return undefined;
   }
 }

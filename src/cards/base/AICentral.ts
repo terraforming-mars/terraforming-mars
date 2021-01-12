@@ -46,6 +46,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
     return 1;
   }
   public action(player: Player) {
-    return player.drawCard(2);
+    player.drawCard(2);
+    return undefined;
   }
 }

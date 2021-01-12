@@ -23,6 +23,7 @@ export class IoResearchOutpost extends PreludeCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM);
-    return player.drawCard();
+    player.drawCard();
+    return undefined;
   }
 }

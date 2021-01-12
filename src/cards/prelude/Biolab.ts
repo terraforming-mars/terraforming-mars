@@ -23,7 +23,8 @@ export class Biolab extends PreludeCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS);
-    return player.drawCard(3);
+    player.drawCard(3);
+    return undefined;
   }
 }
 

@@ -16,7 +16,8 @@ export class AtalantaPlanitiaLab implements IProjectCard {
     return player.getTagCount(Tags.SCIENCE) >= 3;
   }
   public play(player: Player) {
-    return player.drawCard(2);
+    player.drawCard(2);
+    return undefined;
   }
 
   public getVictoryPoints() {

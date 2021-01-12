@@ -22,6 +22,7 @@ export class BeginnerCorporation extends Card implements CorporationCard {
     });
   }
   public play(player: Player) {
-    return player.drawCard(10);
+    player.drawCard(10);
+    return undefined;
   }
 }

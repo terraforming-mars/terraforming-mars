@@ -13,7 +13,8 @@ export class SolarProbe implements IProjectCard {
     public cardType = CardType.EVENT;
 
     public play(player: Player) {
-      return player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
+      player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
+      return undefined;
     }
 
     public getVictoryPoints() {

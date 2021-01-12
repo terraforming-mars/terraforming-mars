@@ -33,7 +33,8 @@ export class MartianSurvey extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    return player.drawCard(2);
+    player.drawCard(2);
+    return undefined;
   }
 
   public getVictoryPoints() {

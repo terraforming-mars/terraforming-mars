@@ -33,6 +33,7 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
   }
   public action(player: Player) {
     player.energy--;
-    return player.drawCard();
+    player.drawCard();
+    return undefined;
   }
 }

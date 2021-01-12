@@ -23,7 +23,8 @@ export class TechnologyDemonstration extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    return player.drawCard(2);
+    player.drawCard(2);
+    return undefined;
   }
 }
 

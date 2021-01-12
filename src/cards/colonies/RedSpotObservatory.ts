@@ -51,11 +51,13 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
 
     private spendResource(player: Player) {
       this.resourceCount--;
-      return player.drawCard();
+      player.drawCard();
+      return undefined;
     }
 
     public play(player: Player) {
-      return player.drawCard(2);
+      player.drawCard(2);
+      return undefined;
     }
 
     public getVictoryPoints(): number {

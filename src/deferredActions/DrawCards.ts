@@ -69,7 +69,7 @@ export namespace DrawCards {
 
   export interface AllOptions extends DrawOptions, ChooseOptions { }
 
-  export function keep(player: Player, cards: Array<IProjectCard>, logType: LogType): undefined {
+  export function keep(player: Player, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
     player.cardsInHand.push(...cards);
     if (logType === LogType.DREW_VERBOSE) {
       LogHelper.logDrawnCards(player, cards);
@@ -106,7 +106,7 @@ export namespace DrawCards {
             },
           }));
       } else {
-        keep(player, selected, DrawCards.LogType.DREW);
+        keep(player, selected);
         discard(player, selected, cards);
       }
       return undefined;

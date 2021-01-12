@@ -143,7 +143,7 @@ export const PlayerHome = Vue.component('player-home', {
     );
   },
   template: `
-        <div v-on:keyup="navigatePage" tabindex="0" id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
+        <div v-on:keyup="navigatePage" tabindex="0" id="player-home" :class="player.turmoil ? 'with-turmoil': ''" style="outline: none;">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

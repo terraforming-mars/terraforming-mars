@@ -1,6 +1,5 @@
 import {ISpace} from '../boards/ISpace';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DrawCards} from '../deferredActions/DrawCards';
 import {Game} from '../Game';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
@@ -197,7 +196,7 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Scientists P3 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-      game.defer(new DrawCards(player, game, steps));
+      player.drawCard(steps);
     }
   }
 }

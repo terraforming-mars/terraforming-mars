@@ -1,9 +1,7 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class AcquiredSpaceAgency extends PreludeCard {
@@ -21,9 +19,9 @@ export class AcquiredSpaceAgency extends PreludeCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    game.defer(new DrawCards(player, game, 2, Tags.SPACE));
+  public play(player: Player) {
     player.titanium += 6;
+    player.drawCard(2, {tag: Tags.SPACE});
     return undefined;
   };
 }

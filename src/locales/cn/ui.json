@@ -104,6 +104,12 @@
 
     "Actions": "可执行行动",
     "Played Cards": "已打出的项目卡",
+    "Hide active cards": "隱藏行動(主動)卡",
+    "Show active cards": "顯示行動(主動)卡",
+    "Hide automated cards": "隱藏自動(被動)卡",
+    "Show automated cards": "顯示自動(被動)卡",
+    "Hide event cards": "隱藏事件卡",
+    "Show event cards": "顯示事件卡",
     "Cards In Hand": "手牌",
     "Last Actions": "上一个动作",
     "Game Log": "游戏记录",

@@ -1140,7 +1140,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       if (this.venusScaleLevel < 8 && this.venusScaleLevel + steps * 2 >= 8) {
-        player.drawCard(this);
+        player.drawCard();
       }
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
         player.increaseTerraformRating(this);
@@ -1401,7 +1401,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
-      player.drawCard(this);
+      player.drawCard();
     } else if (spaceBonus === SpaceBonus.PLANT) {
       player.plants++;
     } else if (spaceBonus === SpaceBonus.STEEL) {
@@ -1500,41 +1500,6 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
     return undefined;
-  }
-
-  public drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
-    const result: Array<IProjectCard> = [];
-    const discardedCards = new Set<CardName>();
-
-    while (result.length < total) {
-      if (discardedCards.size >= this.dealer.getDeckSize() + this.dealer.getDiscardedSize()) {
-        this.log('discarded every card without match');
-        break;
-      }
-      const projectCard = this.dealer.dealCard();
-      if (include(projectCard)) {
-        result.push(projectCard);
-      } else {
-        discardedCards.add(projectCard.name);
-        this.dealer.discard(projectCard);
-      }
-    }
-
-    LogHelper.logDiscardedCards(this, Array.from(discardedCards));
-
-    return result;
-  }
-
-  public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.tags.includes(tag));
-  }
-
-  public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.resourceType !== undefined && card.resourceType === resource);
-  }
-
-  public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
-    return this.drawProjectCardsByCondition(total, (card) => card.cardType === cardType);
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {

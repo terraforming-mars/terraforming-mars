@@ -3,9 +3,7 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SFMemorial extends Card implements IProjectCard {
@@ -15,7 +13,6 @@ export class SFMemorial extends Card implements IProjectCard {
       name: CardName.SF_MEMORIAL,
       tags: [Tags.BUILDING],
       cost: 7,
-
       metadata: {
         cardNumber: 'P41',
         renderData: CardRenderer.builder((b) => b.cards(1)),
@@ -25,8 +22,8 @@ export class SFMemorial extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new DrawCards(player, game, 1));
+  public play(player: Player) {
+    player.drawCard();
     return undefined;
   }
 

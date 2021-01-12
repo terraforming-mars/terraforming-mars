@@ -8,9 +8,9 @@ describe('IoSulphurResearch', function() {
     const card = new IoSulphurResearch();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.cardsInHand).has.lengthOf(1);
   });

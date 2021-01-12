@@ -1,4 +1,5 @@
 import * as constants from './constants';
+import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -21,7 +22,6 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
-import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
 import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
@@ -60,7 +60,7 @@ import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
-import {range} from './utils/utils';
+import {DrawCards} from './deferredActions/DrawCards';
 
 export type PlayerId = string;
 
@@ -1036,42 +1036,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.draftedCards = [];
     }
 
-    let selectedCards: Array<IProjectCard> = [];
-
-    const payForCards = () => {
-      const purchasedCardsCost = this.cardCost * selectedCards.length;
-      if (selectedCards.length > 0) {
-        game.defer(new SelectHowToPayDeferred(this, purchasedCardsCost, {title: 'Select how to pay ' + purchasedCardsCost + ' for purchasing ' + selectedCards.length + ' card(s)'}));
-      }
-      dealtCards.forEach((card) => {
-        if (selectedCards.find((c) => c.name === card.name)) {
-          // Add selected cards to hand
-          this.cardsInHand.push(card);
-        } else {
-          // Discard the cards which were not purchased
-          game.dealer.discard(card);
-        }
-      });
-      game.log('${0} bought ${1} card(s)', (b) => b.player(this).number(selectedCards.length));
-      game.playerIsFinishedWithResearchPhase(this);
-    };
-
-    let maxPurchaseQty = 4;
-    maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.spendableMegacredits() / this.cardCost));
-
-    this.setWaitingFor(
-      new SelectCard(
-        'Select which cards to take into hand',
-        'Buy',
-        dealtCards,
-        (foundCards: Array<IProjectCard>) => {
-          selectedCards = foundCards;
-          return undefined;
-        }, maxPurchaseQty, 0,
-      ), () => {
-        payForCards();
-      },
-    );
+    const action = DrawCards.choose(this, dealtCards, {paying: true});
+    this.setWaitingFor(action, () => game.playerIsFinishedWithResearchPhase(this));
   }
 
   public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
@@ -1127,9 +1093,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     return Math.max(cost, 0);
   }
 
-  private addPlayedCard(game: Game, card: IProjectCard): void {
+  private addPlayedCard(card: IProjectCard): void {
     this.playedCards.push(card);
-    game.log('${0} played ${1}', (b) => b.player(this).card(card));
     this.lastCardPlayed = card;
 
     // Playwrights hook for Conscription and Indentured Workers
@@ -1270,6 +1235,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
+    if (selectedCard.cardType !== CardType.PROXY) {
+      game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
+    }
+
     // Play the card
     const action = selectedCard.play(this, game);
     if (action !== undefined) {
@@ -1300,7 +1269,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (selectedCard.cardType !== CardType.PROXY) {
-      this.addPlayedCard(game, selectedCard);
+      this.addPlayedCard(selectedCard);
     }
 
     for (const playedCard of this.playedCards) {
@@ -1339,6 +1308,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getPlayableActionCards(game),
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
+        game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         const action = foundCard.action!(this, game);
         if (action !== undefined) {
           game.defer(new DeferredAction(
@@ -1347,16 +1317,17 @@ export class Player implements ISerializable<SerializedPlayer> {
           ));
         }
         this.actionsThisGeneration.add(foundCard.name);
-        game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         return undefined;
       },
     );
   }
 
-  public drawCard(game: Game, n = 1): void {
-    range(n).forEach(() => {
-      this.cardsInHand.push(game.dealer.dealCard());
-    });
+  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
+    return DrawCards.keepAll(this, count, options).execute();
+  }
+
+  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): SelectCard<IProjectCard> {
+    return DrawCards.keepSome(this, count, options).execute();
   }
 
   public get availableHeat(): number {

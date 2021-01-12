@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
@@ -33,8 +32,8 @@ export class MartianSurvey extends Card implements IProjectCard {
     return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new DrawCards(player, game, 2));
+  public play(player: Player) {
+    player.drawCard(2);
     return undefined;
   }
 

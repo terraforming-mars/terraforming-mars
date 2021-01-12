@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,9 +12,8 @@ export class SolarProbe implements IProjectCard {
     public name = CardName.SOLAR_PROBE;
     public cardType = CardType.EVENT;
 
-    public play(player: Player, game: Game) {
-      const cardsToDraw = Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3);
-      player.drawCard(game, cardsToDraw);
+    public play(player: Player) {
+      player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
       return undefined;
     }
 

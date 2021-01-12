@@ -60,6 +60,8 @@ import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
+import {IMoonData} from './moon/IMoonData';
+import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 
 export type GameId = string;
@@ -93,6 +95,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
+  moonExpansion: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -122,6 +125,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
+  moonExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,
@@ -181,6 +185,7 @@ export class Game implements ISerializable<SerializedGame> {
   public colonyDealer: ColonyDealer | undefined = undefined;
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;
+  public moonData: IMoonData | undefined;
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -287,6 +292,10 @@ export class Game implements ISerializable<SerializedGame> {
     // Setup Ares hazards
     if (gameOptions.aresExtension && gameOptions.aresHazards) {
       AresSetup.setupHazards(game, players.length);
+    }
+
+    if (gameOptions.moonExpansion) {
+      game.moonData = MoonExpansion.initialize();
     }
 
     // Setup custom corporation list
@@ -397,6 +406,7 @@ export class Game implements ISerializable<SerializedGame> {
       lastSaveId: this.lastSaveId,
       milestones: this.milestones,
       monsInsuranceOwner: this.monsInsuranceOwner,
+      moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
       phase: this.phase,
@@ -1629,6 +1639,11 @@ export class Game implements ISerializable<SerializedGame> {
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
       game.turmoil = Turmoil.deserialize(d.turmoil);
+    }
+
+    // Reload moon elements if needed
+    if (d.moonData !== undefined && gameOptions.moonExpansion === true) {
+      game.moonData = IMoonData.deserialize(d.moonData, players);
     }
 
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);

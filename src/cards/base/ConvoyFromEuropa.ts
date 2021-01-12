@@ -39,7 +39,7 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    player.drawCard(game);
+    player.drawCard();
     game.defer(new PlaceOceanTile(player, game));
     return undefined;
   }

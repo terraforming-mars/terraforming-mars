@@ -19,9 +19,7 @@ import {ResourceType} from '../ResourceType';
 import {Resources} from '../Resources';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectCardToKeep} from '../deferredActions/SelectCardToKeep';
-import {SelectCard} from '../inputs/SelectCard';
 import {SelectColony} from '../inputs/SelectColony';
-import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
@@ -173,39 +171,15 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS:
-        action = new DrawCards(player, game, quantity);
+        action = DrawCards.keepAll(player, quantity);
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-        // TODO (Lynesth): Make a deferred action for that and cards that behave the same (ie. Business Network)
-        const dealtCard = game.dealer.dealCard();
-        const canSelectCard = player.canAfford(player.cardCost);
-        action = new DeferredAction(
-          player,
-          () => new SelectCard(
-            canSelectCard ? 'Select card to buy or none to discard' : 'You cannot pay for this card',
-            'Save',
-            [dealtCard],
-            (cards: Array<IProjectCard>) => {
-              if (cards.length === 0 || !canSelectCard) {
-                game.dealer.discard(dealtCard);
-                game.log('${0} discarded ${1}', (b) => b.player(player).card(dealtCard));
-                return undefined;
-              }
-
-              player.cardsInHand.push(dealtCard);
-              game.log('${0} bought ${1}', (b) => b.player(player).card(dealtCard));
-              game.defer(new SelectHowToPayDeferred(player, player.cardCost, {title: 'Select how to pay for action'}));
-              return undefined;
-            },
-            canSelectCard ? 1 : 0,
-            0,
-          ),
-        );
+        action = DrawCards.keepSome(player, 1, {paying: true});
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-        player.drawCard(game);
+        player.drawCard();
         action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
         break;
 

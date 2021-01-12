@@ -14,9 +14,9 @@ export class SpinoffDepartment implements IProjectCard {
     public name = CardName.SPINOFF_DEPARTMENT
     public cardType = CardType.ACTIVE;
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
       if (card.cost >= 20) {
-        player.drawCard(game);
+        player.drawCard();
       }
     }
 

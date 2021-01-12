@@ -1,5 +1,4 @@
 import {Tags} from '../Tags';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -12,7 +11,6 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
     super({
       name: CardName.VENUS_FIRST,
       tags: [Tags.VENUS],
-
       metadata: {
         cardNumber: 'Y07',
         renderData: CardRenderer.builder((b) => {
@@ -26,9 +24,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
 
   public play(player: Player, game: Game) {
     game.increaseVenusScaleLevel(player, 2);
-    const cards = game.drawCardsByTag(Tags.VENUS, 2);
-    player.cardsInHand.push(...cards);
-    LogHelper.logDrawnCards(player, cards);
+    player.drawCard(2, {tag: Tags.VENUS});
     return undefined;
   }
 }

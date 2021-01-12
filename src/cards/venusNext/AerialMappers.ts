@@ -3,7 +3,6 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -31,7 +30,7 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public getVictoryPoints() {
     return 1;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
@@ -56,8 +55,8 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
 
     const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
       this.resourceCount--;
-      player.drawCard(game);
       LogHelper.logRemoveResource(player, this, 1, 'draw a card');
+      player.drawCard();
       return undefined;
     });
 

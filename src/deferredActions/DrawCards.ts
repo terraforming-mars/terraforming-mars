@@ -38,11 +38,12 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
     return this.cb(cards);
   };
 
-  public static keepAll(player: Player, count: number = 1, options: DrawCards.DrawOptions = {}): DrawCards<undefined> {
-    return new DrawCards(player, count, options, (cards) => DrawCards.keep(player, cards));
+  public static keepAll(player: Player, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
+    return new DrawCards(player, count, options, (cards) =>
+      DrawCards.keep(player, cards, options === undefined ? DrawCards.LogType.DREW : DrawCards.LogType.DREW_VERBOSE));
   }
 
-  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions = {}): DrawCards<SelectCard<IProjectCard>> {
+  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
     return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
   }
 }
@@ -60,11 +61,21 @@ export namespace DrawCards {
     paying?: boolean,
   }
 
+  export enum LogType {
+    DREW='drew',
+    BOUGHT='bought',
+    DREW_VERBOSE='drew_verbose',
+  }
+
   export interface AllOptions extends DrawOptions, ChooseOptions { }
 
-  export function keep(player: Player, cards: Array<IProjectCard>, logText?: string): undefined {
+  export function keep(player: Player, cards: Array<IProjectCard>, logType: LogType): undefined {
     player.cardsInHand.push(...cards);
-    LogHelper.logCardChange(player, logText || 'drew', cards.length);
+    if (logType === LogType.DREW_VERBOSE) {
+      LogHelper.logDrawnCards(player, cards);
+    } else {
+      LogHelper.logCardChange(player, logType, cards.length);
+    }
     return undefined;
   }
 
@@ -90,12 +101,12 @@ export namespace DrawCards {
           new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
-              keep(player, selected, 'bought');
+              keep(player, selected, DrawCards.LogType.BOUGHT);
               discard(player, selected, cards);
             },
           }));
       } else {
-        keep(player, selected);
+        keep(player, selected, DrawCards.LogType.DREW);
         discard(player, selected, cards);
       }
       return undefined;

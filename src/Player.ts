@@ -1325,7 +1325,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return DrawCards.keepAll(this, count, options).execute();
   }
 
-  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): SelectCard<IProjectCard> {
+  public drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard> {
     return DrawCards.keepSome(this, count, options).execute();
   }
 

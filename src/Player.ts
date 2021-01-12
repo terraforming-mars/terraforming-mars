@@ -1321,11 +1321,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined | SelectCard<IProjectCard> {
+  public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
     return DrawCards.keepAll(this, count, options).execute();
   }
 
-  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): undefined | SelectCard<IProjectCard> {
+  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): SelectCard<IProjectCard> {
     return DrawCards.keepSome(this, count, options).execute();
   }
 

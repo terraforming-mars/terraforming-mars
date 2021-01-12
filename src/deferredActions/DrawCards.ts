@@ -8,17 +8,16 @@ import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 
-export class DrawCards implements DeferredAction {
+// <T> is the return value type
+export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implements DeferredAction {
   private constructor(
     public player: Player,
     public count: number = 1,
     public options: DrawCards.AllOptions = {},
-    public cb: (cards: Array<IProjectCard>) => undefined | SelectCard<IProjectCard>,
+    public cb: (cards: Array<IProjectCard>) => T,
   ) { }
 
-  public execute() {
-    if (this.count <= 0) return undefined;
-
+  public execute() : T {
     const game = this.player.game;
     const cards = game.dealer.drawProjectCardsByCondition(game, this.count, (card) => {
       if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
@@ -39,11 +38,11 @@ export class DrawCards implements DeferredAction {
     return this.cb(cards);
   };
 
-  public static keepAll(player: Player, count: number = 1, options: DrawCards.DrawOptions = {}): DrawCards {
+  public static keepAll(player: Player, count: number = 1, options: DrawCards.DrawOptions = {}): DrawCards<undefined> {
     return new DrawCards(player, count, options, (cards) => DrawCards.keep(player, cards));
   }
 
-  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions = {}): DrawCards {
+  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions = {}): DrawCards<SelectCard<IProjectCard>> {
     return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
   }
 }

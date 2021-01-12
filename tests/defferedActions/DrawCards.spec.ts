@@ -74,7 +74,8 @@ describe('DrawCards', function() {
     expect(action instanceof SelectCard).is.true;
     expect(action!.maxCardsToSelect).to.eq(0);
     action!.cb([]);
-    check(0, 1);
+    expect(player.cardsInHand).has.length(0);
+    expect(dealer.discarded).has.length(1);
     expect(player.megaCredits).to.eq(2);
   });
 });

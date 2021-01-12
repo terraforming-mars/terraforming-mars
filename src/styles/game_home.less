@@ -1,0 +1,45 @@
+.game-home-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  height: 860px;
+  >h4 {
+    margin-left: 20px;
+  }
+  .turn-order {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
+  }
+  >ul {
+    list-style: none;
+    >li {
+      font-size: @font_size_big;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+    }
+  }
+  .color-square {
+    display: block;
+    width: 23px;
+    height: 23px;
+    border-radius: 3px;
+    margin: 0px 12px;
+  }
+  .player-name {
+    text-decoration: underline;
+    margin-right: 18px;
+    cursor: pointer;
+  }
+  .copied-notice {
+    margin-left: 12px;
+    font-size: @font_size_normal;
+    .dismissed {
+      font-size: @font_size_small;
+      padding: 1px 3px;
+      border-radius: 2px;
+      color: black;
+      background: #e8e8e8;
+    }
+  }
+}

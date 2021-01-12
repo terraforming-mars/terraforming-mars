@@ -4,10 +4,10 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {DrawCards} from '../../deferredActions/DrawCards';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {DrawCards} from '../../deferredActions/DrawCards';
 
 export class SponsoredAcademies implements IProjectCard {
     public cost = 9;
@@ -22,10 +22,10 @@ export class SponsoredAcademies implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.defer(new DiscardCards(player, game));
-      game.defer(new DrawCards(player, game, 3));
+      game.defer(DrawCards.keepAll(player, 3));
       const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
       for (const p of otherPlayers) {
-        game.defer(new DrawCards(p, game));
+        game.defer(DrawCards.keepAll(p));
       }
       return undefined;
     }

@@ -17,13 +17,38 @@ import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
 import {TopBar} from './TopBar';
+import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 
 const dialogPolyfill = require('dialog-polyfill');
 
 import * as raw_settings from '../../assets/settings.json';
 
+export interface PlayerHomeModel {
+  hide_active_cards: string;
+  hide_automated_cards: string;
+  hide_event_cards: string;
+}
+
 export const PlayerHome = Vue.component('player-home', {
+  data: function(): PlayerHomeModel {
+    return {
+      hide_active_cards: PreferencesManager.loadValue('hide_active_cards'),
+      hide_automated_cards: PreferencesManager.loadValue('hide_automated_cards'),
+      hide_event_cards: PreferencesManager.loadValue('hide_event_cards'),
+    };
+  },
+  watch: {
+    hide_active_cards: function() {
+      PreferencesManager.saveValue('hide_active_cards', this.hide_active_cards);
+    },
+    hide_automated_cards: function() {
+      PreferencesManager.saveValue('hide_automated_cards', this.hide_automated_cards);
+    },
+    hide_event_cards: function() {
+      PreferencesManager.saveValue('hide_event_cards', this.hide_event_cards);
+    },
+  },
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -136,6 +161,47 @@ export const PlayerHome = Vue.component('player-home', {
 
       return 'generation ' + this.player.generation;
     },
+    toggleActiveCardsHiding() {
+      this.hide_active_cards = this.isActiveCardShown() ? '1': '';
+    },
+    toggleAutomatedCardsHiding() {
+      this.hide_automated_cards = this.isAutomatedCardShown() ? '1': '';
+    },
+    toggleEventCardsHiding() {
+      this.hide_event_cards = this.isEventCardShown() ? '1': '';
+    },
+    isActiveCardShown(): boolean {
+      return this.hide_active_cards !== '1';
+    },
+    isAutomatedCardShown(): boolean {
+      return this.hide_automated_cards !== '1';
+    },
+    isEventCardShown(): boolean {
+      return this.hide_event_cards !== '1';
+    },
+    getToggleLabel: function(hideType: string): string {
+      if (hideType === 'ACTIVE') {
+        return (this.isActiveCardShown() ? 'Hide' : 'Show') + ' active cards';
+      } else if (hideType === 'AUTOMATED') {
+        return (this.isAutomatedCardShown() ? 'Hide' : 'Show') + ' automated cards';
+      } else if (hideType === 'EVENT') {
+        return (this.isEventCardShown() ? 'Hide' : 'Show') + ' event cards';
+      } else {
+        return '';
+      }
+    },
+    getHideButtonClass: function(hideType: string): string {
+      const prefix = 'hiding-card-button ';
+      if (hideType === 'ACTIVE') {
+        return prefix + (this.isActiveCardShown() ? 'active' : 'active-transparent');
+      } else if (hideType === 'AUTOMATED') {
+        return prefix + (this.isAutomatedCardShown() ? 'automated' : 'automated-transparent');
+      } else if (hideType === 'EVENT') {
+        return prefix + (this.isEventCardShown() ? 'event' : 'event-transparent');
+      } else {
+        return '';
+      }
+    },
   },
   mounted: function() {
     dialogPolyfill.default.registerDialog(
@@ -236,15 +302,31 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--cards" id="shortkey-cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
+                    <div class="hiding-card-button-row">
+                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">
+                          <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span> 
+                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</span>
+                        </div>
+                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">
+                          <span v-i18n>{{ getToggleLabel('AUTOMATED')}}</span>
+                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</span>
+                        </div>
+                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">
+                          <span v-i18n>{{ getToggleLabel('EVENT')}}</span> 
+                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</span>
+                        </div>
+                    </div>
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
-                    <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                    <div v-show="isActiveCardShown()" v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 
-                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
-                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isAutomatedCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+                    
+                    <stacked-cards v-show="isEventCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">

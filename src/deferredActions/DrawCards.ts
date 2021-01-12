@@ -1,35 +1,111 @@
-import {Game} from '../Game';
-import {LogHelper} from '../LogHelper';
 import {Player} from '../Player';
 import {Tags} from '../cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction} from './DeferredAction';
+import {SelectCard} from '../inputs/SelectCard';
+import {ResourceType} from '../ResourceType';
+import {CardType} from '../cards/CardType';
+import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
+import {LogHelper} from '../LogHelper';
 
-export class DrawCards implements DeferredAction {
-  constructor(
-        public player: Player,
-        public game: Game,
-        public count: number = 1,
-        public tag?: Tags,
-  ) {}
+// <T> is the return value type
+export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implements DeferredAction {
+  private constructor(
+    public player: Player,
+    public count: number = 1,
+    public options: DrawCards.AllOptions = {},
+    public cb: (cards: Array<IProjectCard>) => T,
+  ) { }
 
-  public execute() {
-    const drawnCards: Array<IProjectCard> = [];
-
-    if (this.tag !== undefined) {
-      // Reveal cards from the deck until |this.count| of a specific tag have be drawn
-      drawnCards.push(...this.game.drawCardsByTag(this.tag, this.count));
-      LogHelper.logDrawnCards(this.player, drawnCards);
-    } else {
-      // Draw |this.count| cards from the deck
-      for (let i = 0; i < this.count; i++) {
-        drawnCards.push(this.game.dealer.dealCard());
+  public execute() : T {
+    const game = this.player.game;
+    const cards = game.dealer.drawProjectCardsByCondition(game, this.count, (card) => {
+      if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
+        return false;
       }
-      this.game.log('${0} drew ${1} card(s)', (b) => b.player(this.player).number(this.count));
-    }
+      if (this.options.cardType !== undefined && this.options.cardType !== card.cardType) {
+        return false;
+      }
+      if (this.options.tag !== undefined && !card.tags.includes(this.options.tag)) {
+        return false;
+      }
+      if (this.options.include !== undefined && !this.options.include(card)) {
+        return false;
+      }
+      return true;
+    });
 
-    // Add the cards to the player's hand
-    this.player.cardsInHand.push(...drawnCards);
+    return this.cb(cards);
+  };
+
+  public static keepAll(player: Player, count: number = 1, options: DrawCards.DrawOptions = {}): DrawCards<undefined> {
+    return new DrawCards(player, count, options, (cards) => DrawCards.keep(player, cards));
+  }
+
+  public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions = {}): DrawCards<SelectCard<IProjectCard>> {
+    return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
+  }
+}
+
+export namespace DrawCards {
+  export interface DrawOptions {
+    tag?: Tags,
+    resource?: ResourceType,
+    cardType?: CardType,
+    include?: (card: IProjectCard) => boolean,
+  }
+
+  export interface ChooseOptions {
+    keepMax?: number,
+    paying?: boolean,
+  }
+
+  export interface AllOptions extends DrawOptions, ChooseOptions { }
+
+  export function keep(player: Player, cards: Array<IProjectCard>, logText?: string): undefined {
+    player.cardsInHand.push(...cards);
+    LogHelper.logCardChange(player, logText || 'drew', cards.length);
     return undefined;
+  }
+
+  export function discard(player: Player, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
+    discard.forEach((card) => {
+      if (preserve.find((f) => f.name === card.name) === undefined) {
+        player.game.dealer.discard(card);
+      }
+    });
+  }
+
+  export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
+    let max = options.keepMax || cards.length;
+    if (options.paying) {
+      max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
+    }
+    const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
+      `Select ${max} card(s) to keep`;
+    const button = max === 0 ? 'Oh' : (options.paying ? 'Buy' : 'Select');
+    const cb = (selected: Array<IProjectCard>) => {
+      if (options.paying && selected.length > 0) {
+        player.game.defer(
+          new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
+            title: 'Select how to pay for cards',
+            afterPay: () => {
+              keep(player, selected, 'bought');
+              discard(player, selected, cards);
+            },
+          }));
+      } else {
+        keep(player, selected);
+        discard(player, selected, cards);
+      }
+      return undefined;
+    };
+    return new SelectCard(
+      msg,
+      button,
+      cards,
+      cb,
+      max,
+      0);
   }
 }

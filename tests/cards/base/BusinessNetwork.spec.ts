@@ -34,10 +34,11 @@ describe('BusinessNetwork', function() {
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
+    expect(action!.maxCardsToSelect).to.eq(0);
 
-    (action! as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    (action! as SelectCard<IProjectCard>).cb([]);
     expect(game.dealer.discarded).has.lengthOf(1);
     expect(player.cardsInHand).has.lengthOf(0);
     expect(player.megaCredits).to.eq(2);
@@ -45,7 +46,7 @@ describe('BusinessNetwork', function() {
 
   it('Should action as not helion', function() {
     player.megaCredits = 3;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
 
     (action! as SelectCard<IProjectCard>).cb([]);
@@ -54,6 +55,7 @@ describe('BusinessNetwork', function() {
 
     player.megaCredits = 3;
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    expect(game.deferredActions).has.lengthOf(1);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);

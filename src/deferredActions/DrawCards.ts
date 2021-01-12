@@ -90,7 +90,7 @@ export namespace DrawCards {
           new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
-              keep(player, cards, 'bought');
+              keep(player, selected, 'bought');
               discard(player, selected, cards);
             },
           }));

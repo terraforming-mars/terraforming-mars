@@ -73,10 +73,10 @@ export class MoonExpansion {
   //   MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_COLONY, card: cardName});
   // }
 
-  // public static addRoadTile(
-  //   player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
-  //   MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_ROAD, card: cardName});
-  // }
+  public static addRoadTile(
+    player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
+    MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_ROAD, card: cardName});
+  }
 
   // Having a custom addTile isn't ideal, but game.addTile is pretty specific, and this
   // isn't.
@@ -125,16 +125,16 @@ export class MoonExpansion {
   //   });
   // }
 
-  // public static raiseLogisticRate(player: Player) {
-  //   MoonExpansion.ifMoon(player.game, (moonData) => {
-  //     if (moonData.logisticRate < 8) {
-  //       moonData.logisticRate++;
-  //       player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
-  //       player.increaseTerraformRatingSteps(1, game);
-  //       this.activateLunaFirst(player, player.game);
-  //     }
-  //   });
-  // }
+  public static raiseLogisticRate(player: Player) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      if (moonData.logisticRate < 8) {
+        moonData.logisticRate++;
+        player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
+        player.increaseTerraformRatingSteps(1, player.game);
+        this.activateLunaFirst(player, player.game);
+      }
+    });
+  }
 
   private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game) {
     // const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;

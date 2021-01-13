@@ -75,8 +75,9 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mixins: [PlayerMixin],
   methods: {
-    navigatePage: function(event: any) {
-      if (event.target.nodeName.toLowerCase() !== 'input') {
+    navigatePage: function(event: KeyboardEvent) {
+      const inputSource = event.target as Element;
+      if (inputSource.nodeName.toLowerCase() !== 'input') {
         let id: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:

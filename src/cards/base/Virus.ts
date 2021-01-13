@@ -37,7 +37,7 @@ export class Virus extends Card implements IProjectCard {
   }
   public play(player: Player, game: Game): PlayerInput | undefined {
     if (game.getPlayers().length === 1) {
-      new RemoveAnyPlants(player, game, 5).execute();
+      game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }
 

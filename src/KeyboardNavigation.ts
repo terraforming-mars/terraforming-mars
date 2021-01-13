@@ -4,9 +4,9 @@ export enum KeyboardNavigation {
   TURMOILBOARD = '',
   MILESTONESAWARDS = '',
   PLAYERSOVERVIEW = 'Digit2',
-  GAMELOG = 'Digit3',
+  GAMELOG = '',
   ACTION = '',
-  HAND = 'Digit4',
+  HAND = 'Digit3',
   PLAYEDCARDS = '',
-  COLONIES = 'Digit5',
+  COLONIES = 'Digit4',
 }

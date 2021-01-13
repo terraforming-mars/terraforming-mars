@@ -121,7 +121,7 @@ checkComponent(
     'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
     'hide_turnorder', 'hide_corporation_names', , 'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
     'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
-    'lang', 'langs', 'enable_sounds',
+    'lang', 'langs', 'enable_sounds', 'smooth_scrolling', 
   ],
 );
 checkComponent(

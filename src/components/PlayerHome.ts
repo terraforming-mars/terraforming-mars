@@ -113,7 +113,8 @@ export const PlayerHome = Vue.component('player-home', {
         const el = document.getElementById(id);
         if (el) {
           event.preventDefault();
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
+          const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: scrollingSpeed});
         }
       }
     },

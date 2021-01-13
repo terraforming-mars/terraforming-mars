@@ -8,8 +8,8 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 
 export class OriginalBoard extends Board {
-  private constructor(public spaces: Array<ISpace>) {
-    super();
+  private constructor(spaces: Array<ISpace>) {
+    super(spaces);
   }
 
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): OriginalBoard {

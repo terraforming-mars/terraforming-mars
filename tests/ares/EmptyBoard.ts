@@ -3,10 +3,11 @@ import {BoardBuilder} from '../../src/boards/BoardBuilder';
 import {ISpace} from '../../src/boards/ISpace';
 
 export class EmptyBoard extends Board {
-  public spaces: Array<ISpace>;
-  constructor() {
-    super();
+  private constructor(spaces: Array<ISpace>) {
+    super(spaces);
+  }
 
+  public static newInstance() {
     const builder = new BoardBuilder(false);
 
     // y=0
@@ -28,9 +29,8 @@ export class EmptyBoard extends Board {
     // y=8
     builder.land().land().land().land().land();
 
-    this.spaces = builder.build();
+    return new EmptyBoard(builder.build());
   }
-
   public getVolcanicSpaceIds(): Array<string> {
     return [];
   }

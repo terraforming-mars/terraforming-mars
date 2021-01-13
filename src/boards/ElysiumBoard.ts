@@ -8,8 +8,8 @@ import {Player} from '../Player';
 import {Random} from '../Random';
 
 export class ElysiumBoard extends Board {
-  private constructor(public spaces: Array<ISpace>) {
-    super();
+  private constructor(spaces: Array<ISpace>) {
+    super(spaces);
   }
 
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): ElysiumBoard {

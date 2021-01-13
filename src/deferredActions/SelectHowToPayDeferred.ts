@@ -21,8 +21,6 @@ export class SelectHowToPayDeferred implements DeferredAction {
       return undefined;
     }
 
-    console.log('need to pay:', this.amount);
-
     return new SelectHowToPay(
       this.options.title || 'Select how to pay for ' + this.amount + ' MCs',
       this.options.canUseSteel || false,

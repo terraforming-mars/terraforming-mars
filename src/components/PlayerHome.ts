@@ -76,7 +76,6 @@ export const PlayerHome = Vue.component('player-home', {
   mixins: [PlayerMixin],
   methods: {
     navigatePage: function(event: any) {
-      event.preventDefault();
       if (event.target.nodeName.toLowerCase() !== 'input') {
         let id: string | undefined = undefined;
         switch (event.code) {
@@ -113,6 +112,7 @@ export const PlayerHome = Vue.component('player-home', {
         }
         const el = document.getElementById(id);
         if (el) {
+          event.preventDefault();
           el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
         }
       }

@@ -216,7 +216,7 @@ export const HelpIconology = Vue.component('help-iconology', {
                     <div class="keys">
                         <div v-i18n>Main Board</div>
                         <div v-i18n>Players Overview Table</div>
-                        <div v-i18n>Cards in Hand Table</div>
+                        <div v-i18n>Cards in Hand</div>
                         <div v-i18n>Colonies</div>
                     </div>
                 </div>

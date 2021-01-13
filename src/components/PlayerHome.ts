@@ -206,7 +206,7 @@ export const PlayerHome = Vue.component('player-home', {
     );
   },
   template: `
-        <div v-on:keyup="navigatePage" tabindex="0" id="player-home" :class="'shortkey-no-outline'+(player.turmoil ? ' with-turmoil': '')">
+        <div v-on:keydown="navigatePage" tabindex="0" id="player-home" :class="'shortkey-no-outline'+(player.turmoil ? ' with-turmoil': '')">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

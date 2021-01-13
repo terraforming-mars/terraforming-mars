@@ -218,7 +218,14 @@ export const DebugUI = Vue.component('debug-ui', {
                   <div class="create-game-expansion-icon expansion-icon-community"></div>
                   <span v-i18n>Community</span>
               </label><span/>
+
+              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon"></input>
+              <label for="moon-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                <span v-i18n>The Moon (under development)</span>
+              </label><span/>
             </div>
+
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
                 <div class="cardbox" v-for="card in getAllProjectCards()">

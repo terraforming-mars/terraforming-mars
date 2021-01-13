@@ -636,6 +636,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
       {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
       {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)},
+      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, false, false)},
       {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
       {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},

@@ -76,42 +76,44 @@ export const PlayerHome = Vue.component('player-home', {
   mixins: [PlayerMixin],
   methods: {
     navigatePage: function(event: any) {
-      let id: string | undefined = undefined;
-      switch (event.key) {
-      case KeyboardNavigation.GAMEBOARD:
-        id = 'shortkey-board';
-        break;
-      case KeyboardNavigation.TURMOILBOARD:
-        id = 'shortkey-turmoil';
-        break;
-      case KeyboardNavigation.MILESTONESAWARDS:
-        id = 'shortkey-milestonesawards';
-        break;
-      case KeyboardNavigation.PLAYERSOVERVIEW:
-        id = 'shortkey-playersoverview';
-        break;
-      case KeyboardNavigation.GAMELOG:
-        id = 'shortkey-gamelog';
-        break;
-      case KeyboardNavigation.ACTION:
-        id = 'shortkey-actions';
-        break;
-      case KeyboardNavigation.HAND:
-        id = 'shortkey-hand';
-        break;
-      case KeyboardNavigation.PLAYEDCARDS:
-        id = 'shortkey-cards';
-        break;
-      case KeyboardNavigation.COLONIES:
-        id = 'shortkey-colonies';
-        break;
-      }
-      if (id === undefined) {
-        return;
-      }
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
+      if (event.target.nodeName.toLowerCase() !== 'input') {
+        let id: string | undefined = undefined;
+        switch (event.code) {
+        case KeyboardNavigation.GAMEBOARD:
+          id = 'shortkey-board';
+          break;
+        case KeyboardNavigation.TURMOILBOARD:
+          id = 'shortkey-turmoil';
+          break;
+        case KeyboardNavigation.MILESTONESAWARDS:
+          id = 'shortkey-milestonesawards';
+          break;
+        case KeyboardNavigation.PLAYERSOVERVIEW:
+          id = 'shortkey-playersoverview';
+          break;
+        case KeyboardNavigation.GAMELOG:
+          id = 'shortkey-gamelog';
+          break;
+        case KeyboardNavigation.ACTION:
+          id = 'shortkey-actions';
+          break;
+        case KeyboardNavigation.HAND:
+          id = 'shortkey-hand';
+          break;
+        case KeyboardNavigation.PLAYEDCARDS:
+          id = 'shortkey-cards';
+          break;
+        case KeyboardNavigation.COLONIES:
+          id = 'shortkey-colonies';
+          break;
+        }
+        if (id === undefined) {
+          return;
+        }
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
+        }
       }
     },
     getPlayerCssForTurnOrder: (

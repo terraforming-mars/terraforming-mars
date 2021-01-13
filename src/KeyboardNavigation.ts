@@ -1,12 +1,12 @@
 
 export enum KeyboardNavigation {
-  GAMEBOARD = 'q',
-  TURMOILBOARD = 'w',
-  MILESTONESAWARDS = 'e',
-  PLAYERSOVERVIEW = 'r',
-  GAMELOG = 't',
-  ACTION = 'a',
-  HAND = 's',
-  PLAYEDCARDS = 'd',
-  COLONIES = 'f',
+  GAMEBOARD = 'Digit1',
+  TURMOILBOARD = '',
+  MILESTONESAWARDS = '',
+  PLAYERSOVERVIEW = 'Digit2',
+  GAMELOG = 'Digit3',
+  ACTION = '',
+  HAND = 'Digit4',
+  PLAYEDCARDS = '',
+  COLONIES = 'Digit5',
 }

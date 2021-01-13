@@ -47,6 +47,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
+    moonExpansion: boolean;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -115,6 +116,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
+      moonExpansion: false,
       undoOption: false,
       showTimers: false,
       fastModeOption: false,
@@ -383,6 +385,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
+      const moonExpansion = component.moonExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -441,6 +444,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
+        moonExpansion: moonExpansion,
         undoOption,
         showTimers,
         fastModeOption,

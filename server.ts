@@ -432,13 +432,13 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         aresExtension: gameReq.aresExtension,
         aresHazards: true, // Not a runtime option.
         politicalAgendasExtension: gameReq.politicalAgendasExtension,
+        moonExpansion: gameReq.moonExpansion,
         promoCardsOption: gameReq.promoCardsOption,
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
         removeNegativeGlobalEventsOption:
           gameReq.removeNegativeGlobalEventsOption,
         includeVenusMA: gameReq.includeVenusMA,
-        moonExpansion: false,
 
         draftVariant: gameReq.draftVariant,
         initialDraftVariant: gameReq.initialDraft,

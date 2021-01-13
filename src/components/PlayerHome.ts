@@ -77,6 +77,7 @@ export const PlayerHome = Vue.component('player-home', {
   methods: {
     navigatePage: function(event: any) {
       if (event.target.nodeName.toLowerCase() !== 'input') {
+        event.preventDefault();
         let id: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:

@@ -5,6 +5,7 @@ import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
+import {Units} from '../Units';
 
 interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
@@ -17,9 +18,10 @@ interface StaticCardProperties {
   resourceType?: ResourceType;
   startingMegaCredits?: number;
   tags?: Array<Tags>;
+  productionDelta?: Units;
 }
 
-const staticCardProperties = new Map<CardName, StaticCardProperties>();
+export const staticCardProperties = new Map<CardName, StaticCardProperties>();
 
 export abstract class Card {
   private readonly properties: StaticCardProperties;
@@ -66,5 +68,8 @@ export abstract class Card {
   }
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
+  }
+  public get productionDelta() {
+    return this.properties.productionDelta;
   }
 }

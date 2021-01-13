@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card} from '../Card';
+import {Card, staticCardProperties} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -266,10 +266,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       }
 
       const updaters: Array<Updater> = [
-        new Updater(CardName.AI_CENTRAL, {energy: -1}),
         new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, {energy: -1}),
-        new Updater(CardName.BIOFERTILIZER_FACILITY, {plants: 1}),
-        new Updater(CardName.BUILDING_INDUSTRIES, {energy: -2, steel: 2}),
         new Updater(CardName.CAPITAL, {energy: -2, megacredits: 5}),
         new Updater(CardName.CAPITAL_ARES, {energy: -2, megacredits: 5}),
         new Updater(CardName.CARBONATE_PROCESSING, {energy: -1, heat: 3}),
@@ -355,11 +352,14 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
       const result:Updater = updaters.filter((u) => u.name === foundCard.name)[0];
 
-      if (!result) {
-        throw new Error('Production not found for selected card');
-      }
+      let units: Units | undefined = result?.units;
 
-      const units = result.units;
+      if (units === undefined) {
+        units = staticCardProperties.get(foundCard.name)?.productionDelta;
+        if (units === undefined) {
+          throw new Error('Production not found for selected card ' + foundCard.name);
+        }
+      }
 
       if (player.getProduction(Resources.ENERGY) + units.energy < 0) {
         throw new Error('not enough energy production');

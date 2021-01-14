@@ -41,7 +41,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new ColonizerTrainingCamp());
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(11);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
   });
 
   it('Should give victory points', function() {

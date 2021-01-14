@@ -636,6 +636,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
       {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
       {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)},
+      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, false, false)},
       {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
       {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},
@@ -764,7 +765,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       megaCredits: 0,
       microbes: 0,
       floaters: 0,
-      isResearchPhase: false,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);
@@ -1325,7 +1325,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return DrawCards.keepAll(this, count, options).execute();
   }
 
-  public drawCardKeepSome(count?: number, options?: DrawCards.AllOptions): SelectCard<IProjectCard> {
+  public drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard> {
     return DrawCards.keepSome(this, count, options).execute();
   }
 

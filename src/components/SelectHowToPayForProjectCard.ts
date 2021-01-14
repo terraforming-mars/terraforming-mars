@@ -282,7 +282,6 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         titanium: this.titanium,
         microbes: this.microbes,
         floaters: this.floaters,
-        isResearchPhase: false,
       };
       if (htp.megaCredits > this.player.megaCredits) {
         this.warning = 'You don\'t have that many mega credits';

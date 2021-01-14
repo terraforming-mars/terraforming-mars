@@ -433,6 +433,46 @@ class Builder {
     return this;
   }
 
+  public moon(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON));
+    return this;
+  }
+
+  public resourceCube(amount = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount));
+    return this;
+  }
+
+  public moonColony(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY));
+    return this;
+  }
+
+  public moonColonyRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE, amount));
+    return this;
+  }
+
+  public moonRoad(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD));
+    return this;
+  }
+
+  public moonLogisticsRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE, amount));
+    return this;
+  }
+
+  public moonMine(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE));
+    return this;
+  }
+
+  public moonMineRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE_RATE, amount));
+    return this;
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);

@@ -66,6 +66,7 @@ export const Preferences = Vue.component('preferences', {
       'lang': 'en',
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
+      'smooth_scrolling': false as boolean | unknown[],
     };
   },
   methods: {
@@ -325,6 +326,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds" />
                             <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="smooth_scrolling" />
+                            <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

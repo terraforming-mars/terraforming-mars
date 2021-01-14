@@ -9,6 +9,7 @@ export interface GameHomeModel {
     id: GameId;
     phase: Phase;
     players: Array<GameHomePlayerModel>;
+    venusNextExtension: boolean;
 }
 
 interface GameHomePlayerModel {

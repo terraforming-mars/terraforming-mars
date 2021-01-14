@@ -68,6 +68,9 @@ export const GameHome = Vue.component('game-home', {
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
     },
+    isVenusNext: function(): boolean {
+      return (this.game !== undefined && this.game.venusNextExtension);
+    },
   },
   template: `
       <div id="game-home" class="game-home-container">
@@ -82,6 +85,8 @@ export const GameHome = Vue.component('game-home', {
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
+        <h4>Game settings</h4>
+        <div v-if="isVenusNext()">Venus Next</div>
       </div>
     `,
 });

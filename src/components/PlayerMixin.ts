@@ -1,7 +1,8 @@
 import {CardModel} from '../models/CardModel';
 import {CardType} from '../cards/CardType';
 import {PlayerModel} from '../models/PlayerModel';
-import {ActiveCardSortingOrder} from '../ActiveCardSortingOrder';
+import {ActiveCardsSortingOrder} from '../ActiveCardsSortingOrder';
+import {CardName} from '../CardName';
 
 // Common code for player layouts
 
@@ -10,8 +11,8 @@ export const PlayerMixin = {
   'methods': {
     sortActiveCards: function(inCards: Array<CardModel>): Array<CardModel> {
       console.log('sortActiveCards called.');
-      return inCards.slice().sort(function(cardA, cardB) {
-        return ActiveCardSortingOrder.indexOf(cardA.name) - ActiveCardSortingOrder.indexOf(cardB.name);
+      return inCards.sort(function(cardA, cardB) {
+        return (ActiveCardsSortingOrder.get(cardA.name as CardName) || 0) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || 0);
       });
     },
     getCardsByType: function(

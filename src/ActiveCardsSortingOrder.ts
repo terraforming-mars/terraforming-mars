@@ -1,6 +1,6 @@
 import {CardName} from './CardName';
 
-export const ActiveCardSortingOrder: Array<string> = [
+export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   // Universal discount
   CardName.EARTH_CATAPULT,
   CardName.ANTI_GRAVITY_TECHNOLOGY,
@@ -160,4 +160,7 @@ export const ActiveCardSortingOrder: Array<string> = [
   CardName.ADVANCED_ALLOYS,
   CardName.REGO_PLASTICS,
   CardName.MERCURIAN_ALLOYS,
-];
+].reduce((acc: Array<[CardName, number]>, card, index) => {
+  acc.push([card, index]);
+  return acc;
+}, []));

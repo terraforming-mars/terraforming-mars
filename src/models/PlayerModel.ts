@@ -15,6 +15,7 @@ import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {SerializedTimer} from '../SerializedTimer';
 
 export interface PlayerModel {
+    moonExtension: boolean;
     aresExtension: boolean;
     aresData: IAresData | undefined;
     politicalAgendasExtension: AgendaStyle;

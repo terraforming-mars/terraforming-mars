@@ -128,6 +128,7 @@ export class Server {
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
+      moonExtension: game.gameOptions.moonExpansion,
     };
   }
 }

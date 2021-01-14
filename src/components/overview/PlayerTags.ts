@@ -32,6 +32,9 @@ export const PlayerTags = Vue.component('player-tags', {
     showVenus: function(): boolean {
       return this.player.venusNextExtension;
     },
+    showMoon: function(): boolean {
+      return this.player.moonExtension;
+    },
     getTagsPlaceholders: function() {
       const tags: {[x: string]: Tags | SpecialTags} = {...Tags, ...SpecialTags};
       if (this.showColonyCount() === false) {
@@ -42,6 +45,9 @@ export const PlayerTags = Vue.component('player-tags', {
       }
       if (this.showVenus() === false) {
         delete tags.VENUS;
+      }
+      if (this.showMoon() === false) {
+        delete tags.MOON;
       }
       return tags;
     },

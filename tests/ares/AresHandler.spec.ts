@@ -30,7 +30,7 @@ describe('AresHandler', function() {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    game.board = new EmptyBoard();
+    game.board = EmptyBoard.newInstance();
   });
 
 

@@ -6,6 +6,5 @@ export interface HowToPay {
     titanium: number;
     microbes: number;
     floaters: number;
-    isResearchPhase: boolean;
 }
 

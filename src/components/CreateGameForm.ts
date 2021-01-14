@@ -311,6 +311,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
     getPlayerContainerColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
+    showSecretOptions: function(): boolean {
+      const uri = window.location.href.split('?');
+      if (uri.length === 2 && uri[1].indexOf('secret') >= 0) {
+        return true;
+      }
+      return false;
+    },
     serializeSettings: function() {
       const component = (this as any) as CreateGameModel;
 
@@ -570,6 +577,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div v-if="showSecretOptions()">
+                            <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
+                            <label for="themoon-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                                <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+                            </div>
 
                             <template v-if="turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">

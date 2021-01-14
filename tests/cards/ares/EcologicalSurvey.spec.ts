@@ -24,7 +24,7 @@ describe('EcologicalSurvey', function() {
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    game.board = new EmptyBoard();
+    game.board = EmptyBoard.newInstance();
   });
 
   it('Can play', function() {

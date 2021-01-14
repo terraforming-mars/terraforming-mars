@@ -46,6 +46,7 @@ export interface PlayerModel {
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
+    moonExpansion: boolean;
     name: string;
     oceans: number;
     oxygenLevel: number;

@@ -2,9 +2,6 @@ import {CardRenderer} from '../../src/cards/render/CardRenderer';
 import {CardRenderItem, AltSecondaryTag} from '../../src/cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
 import {CardRenderItemSize} from '../../src/cards/render/CardRenderItemSize';
-/* import {Tags} from '../../src/cards/Tags';
-import {Resources} from '../../src/Resources';
-import {PartyName} from '../../src/turmoil/parties/PartyName'; */
 import {expect} from 'chai';
 
 describe('CardRenderer', function() {

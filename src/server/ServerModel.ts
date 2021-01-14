@@ -49,7 +49,7 @@ export class Server {
         id: player.id,
         name: player.name,
       })),
-      venusNextExtension: game.gameOptions.venusNextExtension,
+      gameOptions: game.gameOptions,
     };
   }
 

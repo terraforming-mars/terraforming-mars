@@ -1,6 +1,6 @@
 
 import {Color} from '../Color';
-import {GameId} from '../Game';
+import {GameId, GameOptions} from '../Game';
 import {Phase} from '../Phase';
 import {PlayerId} from '../Player';
 
@@ -9,7 +9,7 @@ export interface GameHomeModel {
     id: GameId;
     phase: Phase;
     players: Array<GameHomePlayerModel>;
-    venusNextExtension: boolean;
+    gameOptions: GameOptions;
 }
 
 interface GameHomePlayerModel {

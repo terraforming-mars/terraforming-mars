@@ -68,8 +68,24 @@ export const GameHome = Vue.component('game-home', {
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
     },
-    isVenusNext: function(): boolean {
-      return (this.game !== undefined && this.game.venusNextExtension);
+    getExpansionIcons: function(): string {
+      let expansionIcons = '';
+      if (this.game !== undefined && this.game.gameOptions.venusNextExtension) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-venus"></div>';
+      }
+      if (this.game !== undefined && this.game.gameOptions.preludeExtension) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-prelude"></div>';
+      }
+      if (this.game !== undefined && this.game.gameOptions.coloniesExtension) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-colony"></div>';
+      }
+      if (this.game !== undefined && this.game.gameOptions.turmoilExtension) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-turmoil"></div>';
+      }
+      if (this.game !== undefined && this.game.gameOptions.promoCardsOption) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-promo"></div>';
+      }
+      return expansionIcons;
     },
   },
   template: `
@@ -85,8 +101,9 @@ export const GameHome = Vue.component('game-home', {
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
-        <h4>Game settings</h4>
-        <div v-if="isVenusNext()">Venus Next</div>
+        <br>
+        <h2>Game settings</h2>
+        <div v-html="getExpansionIcons()"></div>
       </div>
     `,
 });

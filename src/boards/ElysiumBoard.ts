@@ -1,4 +1,3 @@
-import {ISpace} from './ISpace';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
@@ -8,10 +7,6 @@ import {Player} from '../Player';
 import {Random} from '../Random';
 
 export class ElysiumBoard extends Board {
-  private constructor(spaces: Array<ISpace>) {
-    super(spaces);
-  }
-
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): ElysiumBoard {
     const builder = new BoardBuilder(includeVenus);
 

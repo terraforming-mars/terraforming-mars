@@ -23,10 +23,6 @@ class Space implements ISpace {
 }
 
 export class MoonBoard extends Board {
-  private constructor(spaces: Array<ISpace>) {
-    super(spaces);
-  }
-
   public getNoctisCitySpaceIds() {
     return [];
   }

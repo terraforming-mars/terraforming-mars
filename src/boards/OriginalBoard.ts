@@ -8,10 +8,6 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 
 export class OriginalBoard extends Board {
-  private constructor(spaces: Array<ISpace>) {
-    super(spaces);
-  }
-
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): OriginalBoard {
     const builder = new BoardBuilder(includeVenus);
 

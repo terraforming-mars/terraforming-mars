@@ -83,26 +83,11 @@ export const PlayerHome = Vue.component('player-home', {
         case KeyboardNavigation.GAMEBOARD:
           id = 'shortkey-board';
           break;
-        case KeyboardNavigation.TURMOILBOARD:
-          id = 'shortkey-turmoil';
-          break;
-        case KeyboardNavigation.MILESTONESAWARDS:
-          id = 'shortkey-milestonesawards';
-          break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
           id = 'shortkey-playersoverview';
           break;
-        case KeyboardNavigation.GAMELOG:
-          id = 'shortkey-gamelog';
-          break;
-        case KeyboardNavigation.ACTION:
-          id = 'shortkey-actions';
-          break;
         case KeyboardNavigation.HAND:
           id = 'shortkey-hand';
-          break;
-        case KeyboardNavigation.PLAYEDCARDS:
-          id = 'shortkey-cards';
           break;
         case KeyboardNavigation.COLONIES:
           id = 'shortkey-colonies';
@@ -261,9 +246,9 @@ export const PlayerHome = Vue.component('player-home', {
                         :aresData="player.aresData" 
                         id="shortkey-board"></board>
 
-                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil" id="shortkey-turmoil"></turmoil>
+                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards" id="shortkey-milestonesawards">
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
                     </div>
@@ -271,7 +256,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" id="shortkey-gamelog">
+                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
                     <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation"/>
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
@@ -282,7 +267,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <dynamic-title title="Actions" :color="player.color" id="shortkey-actions"/>
+                    <dynamic-title title="Actions" :color="player.color"/>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
@@ -299,7 +284,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
                 </div>
 
-                <div class="player_home_block player_home_block--cards" id="shortkey-cards">
+                <div class="player_home_block player_home_block--cards"">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
                         <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">

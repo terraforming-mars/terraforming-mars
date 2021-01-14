@@ -42,6 +42,6 @@ describe('Virus', function() {
   });
 
   it('Should play', function() {
-    expect(card.canPlay()).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

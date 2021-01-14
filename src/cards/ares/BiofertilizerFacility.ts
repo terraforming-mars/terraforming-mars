@@ -40,10 +40,6 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, _game: Game): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 1;
-  }
-
   public play(player: Player, game: Game) {
     player.addProduction(Resources.PLANTS, 1);
     game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 2}));

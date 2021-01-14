@@ -12,7 +12,6 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Birds extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -42,7 +41,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
     public resourceCount = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 13) && game.someoneHasResourceProduction(Resources.PLANTS, 2);
+      return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 2);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

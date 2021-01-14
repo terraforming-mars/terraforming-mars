@@ -21,25 +21,25 @@ describe('OceanCity', function() {
 
   it('Can play', function() {
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.addProduction(Resources.ENERGY, 1);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {

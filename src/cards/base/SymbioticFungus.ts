@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {IActionCard, ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -11,7 +10,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -32,9 +30,6 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
         description: 'Requires -14 C° or warmer.',
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -14);
   }
   public play() {
     return undefined;

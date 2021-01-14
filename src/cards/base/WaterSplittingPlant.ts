@@ -10,7 +10,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class WaterSplittingPlant extends Card implements IProjectCard {
   constructor() {
@@ -31,9 +30,6 @@ export class WaterSplittingPlant extends Card implements IProjectCard {
         description: 'Requires 2 ocean tiles.',
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 2);
   }
   public play() {
     return undefined;

@@ -3,6 +3,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from './RequirementType';
 import {Tags} from './Tags';
+import {Player} from '../Player';
 
 export class CardRequirements {
   constructor(private requirements: Array<CardRequirement>) {}
@@ -30,6 +31,14 @@ export class CardRequirements {
   }
   public hasPlantsRemoved(): boolean {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
+  }
+  public satisfies(player: Player): boolean {
+    const tags = this.requirements.filter((requirement) => requirement.type === RequirementType.TAG)
+      .map((requirement) => (requirement as TagCardRequirement).tag);
+    if (!player.checkMultipleTagPresence(tags)) {
+      return false;
+    }
+    return this.requirements.every((requirement) => requirement.satisfies(player));
   }
 }
 

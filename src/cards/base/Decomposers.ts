@@ -10,7 +10,6 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Decomposers extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -38,9 +37,6 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
     });
   }
     public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 3);
-    }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
     }

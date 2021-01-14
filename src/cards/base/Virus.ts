@@ -32,9 +32,6 @@ export class Virus extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(): boolean {
-    return true;
-  }
   public play(player: Player, game: Game): PlayerInput | undefined {
     if (game.getPlayers().length === 1) {
       return undefined;

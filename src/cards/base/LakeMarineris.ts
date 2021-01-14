@@ -10,7 +10,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class LakeMarineris extends Card implements IProjectCard {
   constructor() {
@@ -29,7 +28,7 @@ export class LakeMarineris extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 0);
+    const meetsTemperatureRequirements = super.canPlay(player);
     const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();
     const oceansPlaced = Math.min(remainingOceans, 2);
 

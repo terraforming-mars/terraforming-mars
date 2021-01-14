@@ -11,7 +11,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class SearchForLife extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -36,9 +35,6 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
     });
   }
     public resourceCount = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 6);
-    }
 
     public getVictoryPoints() {
       if (this.resourceCount > 0) {

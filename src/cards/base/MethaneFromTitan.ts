@@ -3,12 +3,10 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class MethaneFromTitan extends Card implements IProjectCard {
   constructor() {
@@ -31,9 +29,6 @@ export class MethaneFromTitan extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 2);
-  }
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 2);
     player.addProduction(Resources.PLANTS, 2);

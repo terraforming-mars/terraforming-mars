@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
-import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../TileType';
 import {ResourceType} from '../../ResourceType';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -61,20 +60,8 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         ).length > 0,
       );
   }
-  private hasGreeneryTile(player: Player, game: Game): boolean {
-    return game.board.getSpaces(SpaceType.OCEAN, player)
-      .concat(game.board.getSpaces(SpaceType.LAND, player))
-      .filter(
-        (space) => space.tile !== undefined &&
-          space.tile.tileType === TileType.GREENERY &&
-          space.player === player,
-      ).length > 0;
-  }
   public canPlay(player: Player, game: Game): boolean {
-    const hasGreenery = this.hasGreeneryTile(player, game);
-    const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;
-
-    return hasGreenery && canPlaceTile;
+    return super.canPlay(player) && this.getAvailableSpaces(player, game).length > 0;
   }
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);

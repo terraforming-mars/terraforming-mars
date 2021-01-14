@@ -37,6 +37,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {MoonModel} from '../models/MoonModel';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -128,6 +129,8 @@ export class Server {
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
+      moonExpansion: game.gameOptions.moonExpansion,
+      moon: MoonModel.serialize(game),
     };
   }
 }
@@ -359,6 +362,9 @@ function getCards(
   }));
 }
 
+// NOTE: This doesn't return a proper PlayerModel. It returns only a partial one, because
+// many of the field's values aren't set. That's why the code needs an "as PlayerModel" at
+// the end. Eyuch. Warning, surprises ahead.
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   const turmoil = getTurmoil(game);
 
@@ -416,6 +422,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
+      moonExpansion: game.gameOptions.moonExpansion,
     } as PlayerModel;
   });
 }

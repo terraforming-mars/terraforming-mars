@@ -22,7 +22,7 @@ export class Airliners implements IProjectCard {
 
   public play(player: Player, game: Game) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2));
+    game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
   public getVictoryPoints() {
@@ -33,7 +33,7 @@ export class Airliners implements IProjectCard {
     description: 'Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.',
     requirements: CardRequirements.builder((b) => b.floaters(3)),
     renderData: CardRenderer.builder((b) => {
-      b.productionBox((pb) => pb.megacredits(2)).br;
+      b.production((pb) => pb.megacredits(2)).br;
       b.floaters(2).asterix();
     }),
     victoryPoints: 1,

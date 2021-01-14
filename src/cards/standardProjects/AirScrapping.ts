@@ -25,11 +25,10 @@ export class AirScrapping extends StandardProjectCard {
   }
 
   public metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'SP1',
     renderData: CardRenderer.builder((b) =>
-      b.effectBox((eb) => {
+      b.standardProject('Spend 15 MC to raise Venus 1 step.', (eb) => {
         eb.megacredits(15).startAction.venus(1);
-        eb.description('Spend 15 MC to raise Venus 1 step.');
       }),
     ),
   };

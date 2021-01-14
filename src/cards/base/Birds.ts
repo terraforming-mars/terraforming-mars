@@ -27,11 +27,10 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
         description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.',
         requirements: CardRequirements.builder((b) => b.oxygen(13)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Add an animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
-            eb.description('Action: Add an animal to this card.');
           }).br;
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().plants(-2).any;
           });
         }),

@@ -46,7 +46,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       const addAsteroidToSelf = function() {
         player.titanium--;
         player.addResourceTo(asteroidCards[0]);
-        LogHelper.logAddResource(game, player, asteroidCards[0]);
+        LogHelper.logAddResource(player, asteroidCards[0]);
         return undefined;
       };
 
@@ -57,14 +57,14 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         (foundCards: Array<ICard>) => {
           player.titanium--;
           player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
 
       const spendAsteroidResource = () => {
         this.resourceCount--;
-        LogHelper.logRemoveResource(game, player, this, 1, 'place an ocean');
+        LogHelper.logRemoveResource(player, this, 1, 'place an ocean');
         game.defer(new PlaceOceanTile(player, game));
         return undefined;
       };
@@ -102,14 +102,12 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: 'X15',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend 1 titanium to add 1 asteroid resource to ANY CARD.', (eb) => {
           eb.titanium(1).startAction.asteroids(1).asterix();
-          eb.description('Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
+        b.action('Remove 1 asteroid here to place an ocean.', (eb) => {
           eb.asteroids(1).startAction.oceans(1);
-          eb.description('Action: Remove 1 asteroid here to place an ocean.');
         });
       }),
     }

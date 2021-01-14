@@ -20,7 +20,7 @@ export class NuclearPower extends Card implements IProjectCard {
       metadata: {
         cardNumber: '045',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().megacredits(2).br;
             pb.plus().energy(3);
           });

@@ -8,9 +8,9 @@ describe('Solarnet', function() {
     const card = new Solarnet();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     expect(card.canPlay(player)).is.not.true;
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.cardsInHand).has.lengthOf(2);
   });

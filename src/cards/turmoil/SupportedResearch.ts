@@ -22,10 +22,8 @@ export class SupportedResearch implements IProjectCard {
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      for (let i = 0; i < 2; i++) {
-        player.cardsInHand.push(game.dealer.dealCard());
-      }
+    public play(player: Player) {
+      player.drawCard(2);
       return undefined;
     }
 

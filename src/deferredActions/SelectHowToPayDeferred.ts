@@ -7,35 +7,45 @@ export class SelectHowToPayDeferred implements DeferredAction {
   constructor(
         public player: Player,
         public amount: number,
-        public canUseSteel: boolean,
-        public canUseTitanium: boolean,
-        public title: string = 'Select how to pay for ' + amount + ' MCs',
-        public afterPay?: () => void,
+        public options: SelectHowToPayDeferred.Options = {},
   ) {}
 
   public execute() {
     if ((!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
-            (!this.canUseSteel || this.player.steel === 0) &&
-            (!this.canUseTitanium || this.player.titanium === 0)) {
+            (!this.options.canUseSteel || this.player.steel === 0) &&
+            (!this.options.canUseTitanium || this.player.titanium === 0)) {
       this.player.megaCredits -= this.amount;
-      if (this.afterPay !== undefined) {
-        this.afterPay();
+      if (this.options.afterPay !== undefined) {
+        this.options.afterPay();
       }
       return undefined;
     }
 
     return new SelectHowToPay(
-      this.title,
-      this.canUseSteel, this.canUseTitanium, this.player.canUseHeatAsMegaCredits, this.amount, (howToPay: HowToPay) => {
+      this.options.title || 'Select how to pay for ' + this.amount + ' MCs',
+      this.options.canUseSteel || false,
+      this.options.canUseTitanium || false,
+      this.player.canUseHeatAsMegaCredits,
+      this.amount,
+      (howToPay: HowToPay) => {
         this.player.steel -= howToPay.steel;
         this.player.titanium -= howToPay.titanium;
         this.player.megaCredits -= howToPay.megaCredits;
         this.player.heat -= howToPay.heat;
-        if (this.afterPay !== undefined) {
-          this.afterPay();
+        if (this.options.afterPay !== undefined) {
+          this.options.afterPay();
         }
         return undefined;
       },
     );
   }
+}
+
+export namespace SelectHowToPayDeferred {
+  export interface Options {
+    canUseSteel?: boolean;
+    canUseTitanium?: boolean;
+    title?: string;
+    afterPay?: () => void;
+  };
 }

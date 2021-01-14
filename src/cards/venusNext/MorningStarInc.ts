@@ -1,5 +1,4 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
@@ -15,10 +14,8 @@ export class MorningStarInc implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Draw 3 Venus-tag cards';
-    public initialAction(player: Player, game: Game) {
-      const cards = game.drawCardsByTag(Tags.VENUS, 3);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+    public initialAction(player: Player) {
+      player.drawCard(3, {tag: Tags.VENUS});
       return undefined;
     }
 
@@ -37,9 +34,8 @@ export class MorningStarInc implements CorporationCard {
       renderData: CardRenderer.builder((b) => {
         b.megacredits(50).nbsp.cards(3).secondaryTag(Tags.VENUS);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
-            eb.venus(1).startEffect.text('+/- 2');
-            eb.description('Effect: Your Venus requirements are +/- 2 steps, your choice in each case.');
+          ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
+            eb.plate('Venus requirements').startEffect.text('+/- 2');
           });
         });
       }),

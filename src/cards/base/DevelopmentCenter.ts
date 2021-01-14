@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -19,9 +18,8 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: '014',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend 1 Energy to draw a card.', (eb) => {
             eb.energy(1).startAction.cards(1);
-            eb.description('Action: Spend 1 Energy to draw a card.');
           });
         }),
       },
@@ -33,9 +31,9 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
   public canAct(player: Player): boolean {
     return player.energy > 0;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.energy--;
-    player.cardsInHand.push(game.dealer.dealCard());
+    player.drawCard();
     return undefined;
   }
 }

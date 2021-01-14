@@ -55,7 +55,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: GameId, cb: DbLoadCallback) {
+  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
     // Retrieve first save from database
     this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
@@ -64,10 +64,9 @@ export class SQLite implements IDatabase {
 
       try {
         const json = JSON.parse(row.game);
-        const game = Game.deserialize(json);
-        return cb(err, game);
+        return cb(err, json);
       } catch (exception) {
-        console.error(`unable to restore reference game ${game_id}`, exception);
+        console.error(`unable to load game ${game_id} at save point 0`, exception);
         cb(exception, undefined);
         return;
       }
@@ -119,7 +118,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: { message: any; }, row: { game: any; }) => {
       if (err) {

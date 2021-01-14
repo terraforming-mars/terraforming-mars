@@ -14,6 +14,7 @@ import {
 } from './StandardCardManifests';
 import {TURMOIL_CARD_MANIFEST} from './turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './venusNext/VenusCardManifest';
+import {MOON_CARD_MANIFEST} from './moon/MoonCardManifest';
 
 export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
   BASE_CARD_MANIFEST,
@@ -25,11 +26,15 @@ export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
   TURMOIL_CARD_MANIFEST,
   COMMUNITY_CARD_MANIFEST,
   ARES_CARD_MANIFEST,
+  MOON_CARD_MANIFEST,
 ];
 
 function allCardNames(decks: Array<Deck<ICard>>): Array<CardName> {
-  const arrays: Array<Array<CardName>> = decks.map((deck) => deck.cards.map((cf) => cf.cardName));
-  return ([] as Array<CardName>).concat(...arrays);
+  const cardNames: Array<CardName> = [];
+  for (const deck of decks) {
+    deck.factories.forEach((cf) => cardNames.push(cf.cardName));
+  }
+  return cardNames;
 }
 
 export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> =
@@ -38,7 +43,7 @@ export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> =
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
   (deck) => deck.projectCards,
 );
-export const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(
+const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(
   (deck) => deck.corporationCards,
 );
 export const ALL_PRELUDE_DECKS = ALL_CARD_MANIFESTS.map(

@@ -25,9 +25,8 @@ export class VenusWaystation implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: '258',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb)=> {
+        b.effect('When you play a Venus tag, you pay 2 MC less for it.', (eb)=> {
           eb.venus(1).played.startEffect.megacredits(-2);
-          eb.description('Effect: When you play a Venus tag, you pay 2 MC less for it.');
         });
       }),
       victoryPoints: 1,

@@ -28,11 +28,8 @@ export class ProjectWorkshop implements CorporationCard {
     }
 
     public initialActionText: string = 'Draw a blue card';
-    public initialAction(player: Player, game: Game) {
-      const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
-      player.cardsInHand.push(drawnCard);
-      this.logCardDraw(game, player, drawnCard);
-
+    public initialAction(player: Player) {
+      player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;
     }
 
@@ -51,9 +48,7 @@ export class ProjectWorkshop implements CorporationCard {
           if (activeCards.length === 1) {
             this.convertCardPointsToTR(player, game, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
-            player.cardsInHand.push(game.dealer.dealCard());
-            player.cardsInHand.push(game.dealer.dealCard());
-
+            player.drawCard(2);
             return undefined;
           }
 
@@ -64,9 +59,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
-                      player.cardsInHand.push(game.dealer.dealCard());
-                      player.cardsInHand.push(game.dealer.dealCard());
-
+                      player.drawCard(2);
                       return undefined;
                     },
           );
@@ -75,11 +68,7 @@ export class ProjectWorkshop implements CorporationCard {
 
       const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
         player.megaCredits -= 3;
-        player.cardsInHand.push(game.drawCardsByType(CardType.ACTIVE, 1)[0]);
-
-        const drawnCard = game.getCardsInHandByType(player, CardType.ACTIVE).slice(-1)[0];
-        this.logCardDraw(game, player, drawnCard);
-
+        player.drawCard(1, {cardType: CardType.ACTIVE});
         return undefined;
       });
 
@@ -93,7 +82,7 @@ export class ProjectWorkshop implements CorporationCard {
       if (card.getVictoryPoints !== undefined) {
         const steps = card.getVictoryPoints(player, game);
         player.increaseTerraformRatingSteps(steps, game);
-        LogHelper.logTRIncrease(game, player, steps);
+        LogHelper.logTRIncrease(player, steps);
       }
     }
 
@@ -109,10 +98,6 @@ export class ProjectWorkshop implements CorporationCard {
       game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
     }
 
-    private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
-    }
-
     public metadata: CardMetadata = {
       cardNumber: 'R45',
       description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
@@ -120,16 +105,14 @@ export class ProjectWorkshop implements CorporationCard {
         b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
         b.corpBox('action', (cb) => {
           cb.vSpace(CardRenderItemSize.LARGE);
-          cb.effectBox((eb) => {
+          cb.action(undefined, (eb) => {
             eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
             eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
             eb.cards(2).digit;
-            eb.description(undefined);
           });
           cb.vSpace(CardRenderItemSize.SMALL);
-          cb.effectBox((eb) => {
+          cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.', (eb) => {
             eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
-            eb.description('Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.');
           });
         });
       }),

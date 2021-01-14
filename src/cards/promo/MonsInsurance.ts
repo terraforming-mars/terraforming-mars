@@ -27,15 +27,14 @@ export class MonsInsurance implements CorporationCard {
       cardNumber: 'R46',
       description: 'You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.',
       renderData: CardRenderer.builder((b) => {
-        b.megacredits(48).productionBox((pb) => {
+        b.megacredits(48).production((pb) => {
           pb.megacredits(4).nbsp.megacredits(-2).any.asterix();
         });
         b.corpBox('effect', (cb) => {
           cb.vSpace(CardRenderItemSize.SMALL);
-          cb.effectBox((eb) => {
-            eb.productionBox((pb) => pb.wild(1)).or().minus().wild(1).any;
+          cb.effect('When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.', (eb) => {
+            eb.production((pb) => pb.wild(1).any).or().minus().wild(1).any;
             eb.startEffect.text('pay', CardRenderItemSize.SMALL, true).megacredits(3);
-            eb.description('Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.');
           });
         });
       }),

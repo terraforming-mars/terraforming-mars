@@ -51,7 +51,7 @@ export class GreatDamPromo implements IProjectCard {
       cardNumber: '136',
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
+        b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
       }),
       description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
       victoryPoints: 1,

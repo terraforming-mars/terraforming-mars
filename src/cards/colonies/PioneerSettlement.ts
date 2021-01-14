@@ -38,7 +38,7 @@ export class PioneerSettlement implements IProjectCard {
       cardNumber: 'C29',
       requirements: CardRequirements.builder((b) => b.colonies(1).max()),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.megacredits(-2));
+        b.production((pb) => pb.megacredits(-2));
         b.nbsp.colonies(1);
       }),
       description: 'Requires that you have no more than 1 colony. Decrease your MC production 2 steps. Place a colony.',

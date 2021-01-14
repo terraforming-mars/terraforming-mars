@@ -36,7 +36,7 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
     const cannotAffordRed = PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
     if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
     return new OrOptions(
@@ -44,12 +44,12 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
         'Remove floaters', () => {
           this.resourceCount -= 2;
           game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease(game, player, 1);
+          LogHelper.logVenusIncrease( player, 1);
           return undefined;
         }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }),
     );
@@ -58,13 +58,11 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
     cardNumber: '223',
     description: 'Add 3 Floaters to this card',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.action('Add 1 Floater to this card.', (eb) => {
         eb.empty().startAction.floaters(1);
-        eb.description('Action: Add 1 Floater to this card.');
       }).br;
-      b.effectBox((eb) => {
+      b.action('Add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step.', (eb) => {
         eb.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1);
-        eb.description('Action: add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step.');
       }).br.floaters(3);
     }),
   }

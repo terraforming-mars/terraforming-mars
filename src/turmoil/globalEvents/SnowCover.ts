@@ -15,9 +15,7 @@ export class SnowCover implements IGlobalEvent {
       if (canDecreaseTemperature) game.increaseTemperature(game.getPlayers()[0], -2);
 
       game.getPlayers().forEach((player) => {
-        for (let i = 0, length = turmoil.getPlayerInfluence(player); i < length; i++) {
-          player.cardsInHand.push(game.dealer.dealCard());
-        }
+        player.drawCard(turmoil.getPlayerInfluence(player));
       });
     }
 }

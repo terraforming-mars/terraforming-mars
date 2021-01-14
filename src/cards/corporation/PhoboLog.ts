@@ -23,9 +23,8 @@ export class PhoboLog extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(23).nbsp.titanium(10).digit;
           b.corpBox('effect', (ce) => {
-            ce.effectBox((eb) => {
+            ce.effect('Your titanium resources are each worth 1 MC extra.', (eb) => {
               eb.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
-              eb.description('Effect: Your titanium resources are each worth 1 MC extra.');
             });
           });
         }),

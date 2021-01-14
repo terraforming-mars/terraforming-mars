@@ -36,7 +36,7 @@ export class CardFinder {
     public getStandardProjectCardByName(cardName: string): StandardProjectCard | undefined {
       let found : (ICardFactory<StandardProjectCard> | undefined);
       CardFinder.getDecks().some((deck) => {
-        found = deck.standardProjects.findByCardName(cardName);
+        found = deck.standardProjects.findByCardName(cardName as CardName);
         return found !== undefined;
       });
       if (found !== undefined) {
@@ -49,7 +49,7 @@ export class CardFinder {
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
       let found : (ICardFactory<CorporationCard> | undefined);
       CardFinder.getDecks().some((deck) => {
-        found = deck.corporationCards.findByCardName(cardName);
+        found = deck.corporationCards.findByCardName(cardName as CardName);
         return found !== undefined;
       });
       if (found !== undefined) {
@@ -66,9 +66,9 @@ export class CardFinder {
     public getProjectCardByName(cardName: string): IProjectCard | undefined {
       let found : (ICardFactory<IProjectCard> | undefined);
       CardFinder.getDecks().some((deck) => {
-        found = deck.projectCards.findByCardName(cardName);
+        found = deck.projectCards.findByCardName(cardName as CardName);
         if (found === undefined) {
-          found = deck.preludeCards.findByCardName(cardName);
+          found = deck.preludeCards.findByCardName(cardName as CardName);
         }
         return found !== undefined;
       });

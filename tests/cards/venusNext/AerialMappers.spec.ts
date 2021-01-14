@@ -9,13 +9,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AerialMappers', function() {
-  let card : AerialMappers; let player : Player; let game : Game;
+  let card : AerialMappers; let player : Player;
 
   beforeEach(function() {
     card = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 
@@ -27,13 +27,13 @@ describe('AerialMappers', function() {
   it('Should act - multiple targets', function() {
     const card2 = new Dirigibles();
     player.playedCards.push(card2);
-    const action = card.action(player, game) as SelectCard<ICard>;
+    const action = card.action(player) as SelectCard<ICard>;
     expect(action instanceof SelectCard).is.true;
 
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
     orOptions.options[0].cb([card]);
@@ -42,10 +42,10 @@ describe('AerialMappers', function() {
   });
 
   it('Should act - single target', function() {
-    card.action(player, game);
+    card.action(player);
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb([card]);
     expect(card.resourceCount).to.eq(0);

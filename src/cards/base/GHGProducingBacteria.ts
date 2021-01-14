@@ -31,14 +31,12 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
         cardNumber: '034',
         requirements: CardRequirements.builder((b) => b.oxygen(4)),
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Add 1 Microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
-            eb.description('Action: Add 1 Microbe to this card.');
           }).br;
           b.or().br;
-          b.effectBox((eb) => {
+          b.action('Remove 2 Microbes to raise temperature 1 step.', (eb) => {
             eb.microbes(2).startAction.temperature(1);
-            eb.description('Action: Remove 2 Microbes to raise temperature 1 step.');
           });
         }),
       },
@@ -58,7 +56,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
     public action(player: Player, game: Game) {
       if (this.resourceCount < 2) {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }
 
@@ -68,14 +66,14 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 2 microbes to raise temperature 1 step', 'Remove microbes', () => {
           player.removeResourceFrom(this, 2);
-          LogHelper.logRemoveResource(game, player, this, 2, 'raise temperature 1 step');
+          LogHelper.logRemoveResource(player, this, 2, 'raise temperature 1 step');
           return game.increaseTemperature(player, 1);
         }));
       }
 
       orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
         player.addResourceTo(this);
-        LogHelper.logAddResource(game, player, this);
+        LogHelper.logAddResource(player, this);
         return undefined;
       }));
 

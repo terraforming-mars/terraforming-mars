@@ -1,9 +1,9 @@
 
 import Vue from 'vue';
 import {$t} from '../directives/i18n';
-import {Button} from '../components/common/Button';
+import {Button} from './common/Button';
 
-interface SelectHowToPayForCardModel {
+interface SelectHowToPayForProjectCardModel {
   cardName: string;
   card: CardModel;
   cards: Array<CardModel>;
@@ -29,7 +29,7 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 
-export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card', {
+export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -47,7 +47,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
       type: Boolean,
     },
   },
-  data: function(): SelectHowToPayForCardModel {
+  data: function(): SelectHowToPayForProjectCardModel {
     let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
     if (this.playerinput !== undefined &&
@@ -75,7 +75,7 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
       microbes: 0,
       floaters: 0,
       warning: undefined,
-    } as SelectHowToPayForCardModel;
+    } as SelectHowToPayForProjectCardModel;
   },
   components: {
     Card,
@@ -282,7 +282,6 @@ export const SelectHowToPayForCard = Vue.component('select-how-to-pay-for-card',
         titanium: this.titanium,
         microbes: this.microbes,
         floaters: this.floaters,
-        isResearchPhase: false,
       };
       if (htp.megaCredits > this.player.megaCredits) {
         this.warning = 'You don\'t have that many mega credits';

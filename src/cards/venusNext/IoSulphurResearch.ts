@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,16 +12,8 @@ export class IoSulphurResearch implements IProjectCard {
     public name = CardName.IO_SULPHUR_RESEARCH;
     public cardType = CardType.AUTOMATED;
 
-    public play(player: Player, game: Game) {
-      if (player.getTagCount(Tags.VENUS) >= 3) {
-        player.cardsInHand.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-        );
-        return undefined;
-      }
-      player.cardsInHand.push(game.dealer.dealCard());
+    public play(player: Player) {
+      player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);
       return undefined;
     }
     public getVictoryPoints() {

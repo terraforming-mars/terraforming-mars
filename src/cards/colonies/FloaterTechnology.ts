@@ -23,7 +23,7 @@ export class FloaterTechnology implements IProjectCard {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
       if (floaterCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1));
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 1}));
       }
 
       return undefined;
@@ -36,9 +36,8 @@ export class FloaterTechnology implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C12',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 floater to ANOTHER card.', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: Add 1 floater to ANOTHER card.');
         });
       }),
     }

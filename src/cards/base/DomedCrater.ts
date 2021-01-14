@@ -29,7 +29,7 @@ export class DomedCrater extends Card implements IProjectCard {
           align: 'left',
         },
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(3);
           }).nbsp.city().plants(3).digit.br;

@@ -12,11 +12,7 @@ export class LeadershipSummit implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const partyLeaderCount = turmoil.parties.filter((party) => party.partyLeader === player.id).length;
-        const amount = Math.min(5, partyLeaderCount) + turmoil.getPlayerInfluence(player);
-
-        for (let i = 0; i < amount; i++) {
-          player.cardsInHand.push(game.dealer.dealCard());
-        }
+        player.drawCard(Math.min(5, partyLeaderCount) + turmoil.getPlayerInfluence(player));
       });
     }
 }

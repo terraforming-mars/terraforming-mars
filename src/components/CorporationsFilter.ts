@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 import {CardName} from '../CardName';
-import {ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, MANIFEST_BY_MODULE} from '../cards/AllCards';
+import {ALL_CARD_MANIFESTS, MANIFEST_BY_MODULE} from '../cards/AllCards';
 import {GameModule} from '../GameModule';
 
 function corpCardNames(module: GameModule): Array<CardName> {
@@ -10,15 +10,22 @@ function corpCardNames(module: GameModule): Array<CardName> {
     console.log('manifest %s not found', manifest);
     return [];
   } else {
-    return manifest.corporationCards.cards.map((cf) => cf.cardName)
-      .filter((cardName) => cardName !== CardName.BEGINNER_CORPORATION);
+    const cards: Array<CardName> = [];
+    manifest.corporationCards.factories.forEach((cf) => {
+      if (cf.cardName !== CardName.BEGINNER_CORPORATION) {
+        cards.push(cf.cardName);
+      }
+    });
+    return cards;
   }
 }
 
-// TODO(kberg): no need for both ALL_CORPORATION_DECKS and MANIFEST_BY_MODULE
-const allItems: Array<CardName> =
-    ALL_CORPORATION_DECKS.map((deck) => deck.cards.map((cf) => cf.cardName))
-      .reduce((accumulator, cards) => accumulator.concat(cards));
+const allItems: Array<CardName> = [];
+ALL_CARD_MANIFESTS.forEach((manifest) => {
+  manifest.corporationCards.factories.forEach((cf) => {
+    allItems.push(cf.cardName);
+  });
+});
 
 export const CorporationsFilter = Vue.component('corporations-filter', {
   props: {

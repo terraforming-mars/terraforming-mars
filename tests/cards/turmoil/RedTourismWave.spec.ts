@@ -20,7 +20,7 @@ describe('RedTourismWave', function() {
     reds.delegates.push(player.id, player.id);
     expect(card.canPlay(player, game)).is.true;
 
-    const tharsis = game.getSpace(SpaceName.THARSIS_THOLUS);
+    const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);
     const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
     game.addCityTile(player, lands[0].id);
     card.play(player, game);

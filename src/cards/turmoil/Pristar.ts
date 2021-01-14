@@ -41,9 +41,8 @@ export class Pristar implements CorporationCard, IResourceCard {
         b.br.br.br;
         b.megacredits(53).nbsp.nbsp.minus().tr(2, CardRenderItemSize.SMALL);
         b.corpBox('effect', (ce) => {
-          ce.effectBox((eb) => {
-            eb.tr(1, CardRenderItemSize.SMALL).startEffect.preservation(1).megacredits(6);
-            eb.description('Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 MC.');
+          ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 MC.', (eb) => {
+            eb.tr(1, CardRenderItemSize.SMALL, true).startEffect.preservation(1).megacredits(6);
           });
         });
       }),

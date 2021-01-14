@@ -50,7 +50,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
             return new OrOptions(
               new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
                 player.removeResourceFrom(this);
-                player.cardsInHand.push(game.dealer.dealCard());
+                player.drawCard();
                 return undefined;
               }),
               new SelectOption('Add a science resource to this card', 'Add resource', () => {

@@ -22,9 +22,8 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       metadata: {
         cardNumber: '194',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => {
+          b.action('Spend any amount of Energy and gain that amount of MC.', (eb) => {
             eb.text('x').energy(1).startAction.megacredits(0).multiplier;
-            eb.description('Action: Spend any amount of Energy and gain that amount of MC.');
           });
         }),
       },
@@ -37,14 +36,14 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
   public canAct(player: Player): boolean {
     return player.energy > 0;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return new SelectAmount(
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
         player.energy -= amount;
         player.megaCredits += amount;
-        LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
+        LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
         return undefined;
       },
       1,

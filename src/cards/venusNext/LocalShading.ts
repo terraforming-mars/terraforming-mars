@@ -56,14 +56,12 @@ export class LocalShading implements IActionCard, IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: '235',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Floater to this card.', (eb) => {
           eb.empty().startAction.floaters(1);
-          eb.description('Action: Add 1 Floater to this card.');
         }).br;
         b.or().br;
-        b.effectBox((eb) => {
-          eb.floaters(1).startAction.productionBox((pb) => pb.megacredits(1));
-          eb.description('Action: Spend 1 Floater here to raise your MC production 1 step.');
+        b.action('Spend 1 Floater here to raise your MC production 1 step.', (eb) => {
+          eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
         });
       }),
     };

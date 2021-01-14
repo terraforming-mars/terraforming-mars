@@ -11,11 +11,13 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {SerializedTimer} from '../SerializedTimer';
 
 export interface PlayerModel {
     aresExtension: boolean;
     aresData: IAresData | undefined;
+    politicalAgendasExtension: AgendaStyle;
     awards: Array<FundedAwardModel>;
     boardName: string;
     corporationCard: CardModel | undefined;
@@ -44,12 +46,14 @@ export interface PlayerModel {
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
+    moonExpansion: boolean;
     name: string;
     oceans: number;
     oxygenLevel: number;
     phase: Phase;
     plants: number;
     plantProduction: number;
+    plantsAreProtected: boolean;
     players: Array<PlayerModel>;
     randomMA: RandomMAOptionType;
     spaces: Array<SpaceModel>;
@@ -62,6 +66,7 @@ export interface PlayerModel {
     titaniumProduction: number;
     titaniumValue: number;
     turmoil: TurmoilModel | undefined;
+    turmoilExtension: boolean;
     venusNextExtension: boolean;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

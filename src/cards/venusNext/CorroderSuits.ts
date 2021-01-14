@@ -8,7 +8,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -18,7 +17,7 @@ export class CorroderSuits implements IProjectCard {
     public name = CardName.CORRODER_SUITS;
     public cardType = CardType.AUTOMATED;
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 2);
       const cards = CorroderSuits.getVenusResCards(player);
 
@@ -26,7 +25,7 @@ export class CorroderSuits implements IProjectCard {
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 1);
-        LogHelper.logAddResource(game, player, cards[0]);
+        LogHelper.logAddResource(player, cards[0]);
         return undefined;
       }
 
@@ -36,7 +35,7 @@ export class CorroderSuits implements IProjectCard {
         CorroderSuits.getVenusResCards(player),
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
@@ -51,7 +50,7 @@ export class CorroderSuits implements IProjectCard {
       cardNumber: '219',
       description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD.',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(2);
         }).wild(1).secondaryTag(Tags.VENUS);
       }),

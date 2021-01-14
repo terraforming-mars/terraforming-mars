@@ -83,8 +83,11 @@ export class CardRenderEffect extends CardRenderer {
 
   public get description(): ItemType {
     this._validate();
-    // TODO (chosta): validate builder method to make sure it's the last element
     return this.rows[2].slice(-1)[0];
+  }
+
+  public set description(content: ItemType) {
+    this.rows[2].push(content);
   }
 }
 
@@ -218,9 +221,10 @@ class Builder {
     return this;
   }
 
-  public tr(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public tr(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, cancelled: boolean = false): Builder {
     const item = new CardRenderItem(CardRenderItemType.TR, amount);
     item.size = size;
+    item.cancelled = cancelled;
     this._addRowItem(item);
     return this;
   }
@@ -417,6 +421,46 @@ class Builder {
     return this;
   }
 
+  public moon(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON));
+    return this;
+  }
+
+  public resourceCube(amount = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount));
+    return this;
+  }
+
+  public moonColony(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY));
+    return this;
+  }
+
+  public moonColonyRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE, amount));
+    return this;
+  }
+
+  public moonRoad(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD));
+    return this;
+  }
+
+  public moonLogisticsRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE, amount));
+    return this;
+  }
+
+  public moonMine(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE));
+    return this;
+  }
+
+  public moonMineRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE_RATE, amount));
+    return this;
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
@@ -430,13 +474,29 @@ class Builder {
     return this;
   }
 
-  public productionBox(pb: (builder: ProductionBoxBuilder) => void): Builder {
+  public production(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this._addRowItem(CardRenderProductionBox.builder(pb));
     return this;
   }
 
-  public effectBox(eb: (builder: EffectBuilder) => void): Builder {
-    this._addRowItem(CardRenderEffect.builder(eb));
+  public standardProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description;
+    this._addRowItem(builder);
+    return this;
+  }
+
+  public action(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description !== undefined ? 'Action: ' + description : undefined;
+    this._addRowItem(builder);
+    return this;
+  }
+
+  public effect(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+    const builder = CardRenderEffect.builder(eb);
+    builder.description = description !== undefined ? 'Effect: ' + description : undefined;
+    this._addRowItem(builder);
     return this;
   }
 
@@ -521,6 +581,10 @@ class Builder {
     item.isBold = isBold;
     this._addRowItem(item);
     return this;
+  }
+
+  public vpText(text: string): Builder {
+    return this.text(text, CardRenderItemSize.TINY, true);
   }
 
   public get br(): Builder {
@@ -697,7 +761,7 @@ class Builder {
   }
 
   /**
-   * Used to start the effect for effectBox and actionBox, also adds a delimiter symbol
+   * Used to start the effect for action(), effect() and standardProject(), also adds a delimiter symbol
    */
   public get startEffect(): Builder {
     this.br;

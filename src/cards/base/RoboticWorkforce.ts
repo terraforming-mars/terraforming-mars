@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -9,15 +10,27 @@ import {Resources} from '../../Resources';
 import {ICard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {SpaceBonus} from '../../SpaceBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class RoboticWorkforce implements IProjectCard {
-  public cost = 9;
-  public tags = [Tags.SCIENCE];
-  public name = CardName.ROBOTIC_WORKFORCE;
-  public cardType = CardType.AUTOMATED;
-  public hasRequirements = false;
+export class RoboticWorkforce extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.ROBOTIC_WORKFORCE,
+      tags: [Tags.SCIENCE],
+      cost: 9,
+      hasRequirements: false,
+      metadata: {
+        cardNumber: '086',
+        renderData: CardRenderer.builder((b) => {
+          b.text('Copy A', CardRenderItemSize.SMALL, true).nbsp;
+          b.production((pb) => pb.building().played);
+        }),
+        description: 'Duplicate only the production box of one of your building cards.',
+      },
+    });
+  }
   public canPlay(player: Player, game: Game): boolean {
     return this.getAvailableCards(player, game).length > 0;
   }
@@ -26,7 +39,7 @@ export class RoboticWorkforce implements IProjectCard {
   private solarFarmEnergyProduction: number = 0;
 
   // Made public for availability in tests
-  public builderCardsNames: ReadonlyArray<CardName> = [
+  public static readonly builderCardsNames: ReadonlyArray<CardName> = [
     CardName.AI_CENTRAL,
     CardName.ASTEROID_DEFLECTION_SYSTEM,
     CardName.BIOFERTILIZER_FACILITY,
@@ -64,6 +77,10 @@ export class RoboticWorkforce implements IProjectCard {
     CardName.MAGNETIC_FIELD_DOME,
     CardName.MAGNETIC_FIELD_GENERATORS,
     CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
+    CardName.MARE_IMBRIUM_MINE,
+    CardName.MARE_NECTARIS_MINE,
+    CardName.MARE_NUBIUM_MINE,
+    // CardName.MARE_SERENITATIS_MINE,
     CardName.MARTIAN_INDUSTRIES,
     CardName.MARTIAN_MEDIA_CENTER,
     CardName.MEDICAL_LAB,
@@ -110,7 +127,7 @@ export class RoboticWorkforce implements IProjectCard {
   ];
 
   // Made public for availability in tests
-  public corporationCardsNames: ReadonlyArray<CardName> = [
+  public static readonly corporationCardsNames: ReadonlyArray<CardName> = [
     CardName.CHEUNG_SHING_MARS,
     CardName.FACTORUM,
     CardName.MANUTECH,
@@ -185,13 +202,13 @@ export class RoboticWorkforce implements IProjectCard {
         if (player.getProduction(Resources.PLANTS) >= 1) {
           return true;
         }
-      } else if (this.builderCardsNames.includes(card.name)) {
+      } else if (RoboticWorkforce.builderCardsNames.includes(card.name)) {
         return true;
       }
       return false;
     });
 
-    if (player.corporationCard !== undefined && this.corporationCardsNames.includes(player.corporationCard.name)) {
+    if (player.corporationCard !== undefined && RoboticWorkforce.corporationCardsNames.includes(player.corporationCard.name)) {
       availableCards.push(player.corporationCard);
     }
 
@@ -293,6 +310,10 @@ export class RoboticWorkforce implements IProjectCard {
         new Updater(CardName.MAGNETIC_FIELD_GENERATORS, -4, 0, 0, 0, 2, 0),
         new Updater(CardName.MAGNETIC_FIELD_GENERATORS_PROMO, -4, 0, 0, 0, 2, 0),
         new Updater(CardName.MANUTECH, 0, 0, 1, 0, 0, 0),
+        new Updater(CardName.MARE_IMBRIUM_MINE, 0, 0, 1, 1, 0, 0),
+        new Updater(CardName.MARE_NECTARIS_MINE, 0, 0, 1, 0, 0, 0),
+        new Updater(CardName.MARE_NUBIUM_MINE, 0, 0, 0, 1, 0, 0),
+        // new Updater(CardName.MARE_SERENITATIS_MINE, 0, 0, 1, 1, 0, 0),
         new Updater(CardName.MARTIAN_INDUSTRIES, 1, 0, 1, 0, 0, 0),
         new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0),
         new Updater(CardName.MEDICAL_LAB, 0, Math.floor(player.getTagCount(Tags.BUILDING) / 2), 0, 0, 0, 0),
@@ -372,12 +393,5 @@ export class RoboticWorkforce implements IProjectCard {
 
       return undefined;
     });
-  }
-  public metadata: CardMetadata = {
-    cardNumber: '086',
-    renderData: CardRenderer.builder((b) => {
-      b.productionBox((pb) => pb.building().played);
-    }),
-    description: 'Duplicate only the production box of one of your building cards.',
   }
 }

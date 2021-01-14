@@ -82,7 +82,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreReferenceGame(game_id: GameId, cb: DbLoadCallback) {
+  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
     // Retrieve first save from database
     this.client.query('SELECT game_id game_id, game game FROM games WHERE game_id = $1 AND save_id = 0', [game_id], (err: any, res) => {
       if (err) {
@@ -94,8 +94,7 @@ export class PostgreSQL implements IDatabase {
       }
       try {
         const json = JSON.parse(res.rows[0].game);
-        const game = Game.deserialize(json);
-        return cb(undefined, game);
+        return cb(undefined, json);
       } catch (exception) {
         console.error(`Unable to restore game ${game_id}`, exception);
         cb(exception, undefined);
@@ -142,12 +141,6 @@ export class PostgreSQL implements IDatabase {
         }
       });
     });
-    // Purge unfinished solo games older than 1 days
-    this.client.query('DELETE FROM games WHERE players = 1 and created_time < now() - interval \'1 days\'', function(err: { message: any; }) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
     // Purge unfinished games older than 10 days
     this.client.query('DELETE FROM games WHERE created_time < now() - interval \'10 days\'', function(err: { message: any; }) {
       if (err) {
@@ -156,7 +149,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
     // Retrieve last save from database
     this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
       if (err) {

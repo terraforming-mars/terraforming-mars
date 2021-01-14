@@ -58,7 +58,8 @@ describe('CardLoader', function() {
 
     const preludeDeck = new CardLoader(gameOptions).getPreludeCards();
 
-    const turmoilPreludes = COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((c) => c.cardName);
+    const turmoilPreludes: Array<CardName> = [];
+    COMMUNITY_CARD_MANIFEST.preludeCards.factories.forEach((cf) => turmoilPreludes.push(cf.cardName));
     turmoilPreludes.forEach((preludeName) => {
       const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;

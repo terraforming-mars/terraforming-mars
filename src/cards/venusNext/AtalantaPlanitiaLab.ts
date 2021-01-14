@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -16,9 +15,8 @@ export class AtalantaPlanitiaLab implements IProjectCard {
   public canPlay(player: Player): boolean {
     return player.getTagCount(Tags.SCIENCE) >= 3;
   }
-  public play(player: Player, game: Game) {
-    player.cardsInHand.push(game.dealer.dealCard());
-    player.cardsInHand.push(game.dealer.dealCard());
+  public play(player: Player) {
+    player.drawCard(2);
     return undefined;
   }
 

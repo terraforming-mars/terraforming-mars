@@ -3,7 +3,6 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -31,33 +30,33 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public getVictoryPoints() {
     return 1;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
     // only one valid target - itself
     if (floaterCards.length === 1 && this.resourceCount === 0) {
       this.resourceCount++;
-      LogHelper.logAddResource(game, player, floaterCards[0]);
+      LogHelper.logAddResource(player, floaterCards[0]);
       return undefined;
     }
 
     const addResourceToSelf = new SelectOption('Add 1 floater to this card', 'Add floater', () => {
       this.resourceCount++;
-      LogHelper.logAddResource(game, player, floaterCards[0]);
+      LogHelper.logAddResource(player, floaterCards[0]);
       return undefined;
     });
 
     const addResource = new SelectCard('Select card to add 1 floater', 'Add floater', floaterCards, (foundCards: Array<ICard>) => {
       player.addResourceTo(foundCards[0], 1);
-      LogHelper.logAddResource(game, player, foundCards[0]);
+      LogHelper.logAddResource(player, foundCards[0]);
       return undefined;
     });
 
     const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
       this.resourceCount--;
-      player.cardsInHand.push(game.dealer.dealCard());
-      LogHelper.logRemoveResource(game, player, this, 1, 'draw a card');
+      LogHelper.logRemoveResource(player, this, 1, 'draw a card');
+      player.drawCard();
       return undefined;
     });
 
@@ -73,9 +72,13 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
   public metadata: CardMetadata = {
     cardNumber: '213',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((be) => be.empty().startAction.floaters(1).asterix().description('Action: Add floater to ANY card.')).br;
+      b.action('Add floater to ANY card.', (be) => {
+        be.empty().startAction.floaters(1).asterix();
+      }).br;
       b.or(CardRenderItemSize.SMALL).br;
-      b.effectBox((be) => be.floaters(1).startAction.cards(1).description('Action: Spend one floater here to draw 1 card.'));
+      b.action('Spend one floater here to draw 1 card.', (be) => {
+        be.floaters(1).startAction.cards(1);
+      });
     }),
     victoryPoints: 1,
   };

@@ -23,9 +23,8 @@ export class RimFreighters implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'C35',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
-          eb.trade().startEffect.tradeDiscount(-1);
-          eb.description('Effect: When you trade, you pay 1 less resource for it.');
+        b.effect('When you trade, you pay 1 less resource for it.', (eb) => {
+          eb.trade().startEffect.tradeDiscount(1);
         });
       }),
     }

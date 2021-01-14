@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -7,37 +8,39 @@ import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SubterraneanReservoir implements IProjectCard {
-    public cost = 11;
-    public cardType = CardType.EVENT;
-    public tags = [];
-    public name = CardName.SUBTERRANEAN_RESERVOIR;
-    public hasRequirements = false;
+export class SubterraneanReservoir extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.EVENT,
+      name: CardName.SUBTERRANEAN_RESERVOIR,
+      cost: 11,
+      hasRequirements: false,
 
-    public canPlay(player: Player, game: Game): boolean {
-      const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+      metadata: {
+        cardNumber: '127',
+        renderData: CardRenderer.builder((b) => {
+          b.oceans(1);
+        }),
+        description: 'Place 1 ocean tile.',
+      },
+    });
+  }
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
-      }
+  public canPlay(player: Player, game: Game): boolean {
+    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-      return true;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new PlaceOceanTile(player, game));
-      return undefined;
-    }
+    return true;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: '127',
-      renderData: CardRenderer.builder((b) => {
-        b.oceans(1);
-      }),
-      description: 'Place 1 ocean tile.',
-    };
+  public play(player: Player, game: Game) {
+    game.defer(new PlaceOceanTile(player, game));
+    return undefined;
+  }
 }
 

@@ -24,7 +24,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '187',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1).description('Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.'));
+          b.action('Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.', (eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1));
         }),
       },
     });
@@ -46,7 +46,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
     return player.canAfford(oceanCost, game, true, false);
   }
   public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 8, true, false, 'Select how to pay for action'));
+    game.defer(new SelectHowToPayDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action'}));
     game.defer(new PlaceOceanTile(player, game));
     return undefined;
   }

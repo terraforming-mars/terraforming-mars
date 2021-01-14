@@ -48,23 +48,23 @@ export class Playwrights implements CorporationCard {
           game.defer(new SelectHowToPayDeferred(
             player,
             cost,
-            false,
-            false,
-            'Select how to pay to replay the event',
-            () => {
-              player.playCard(game, selectedCard);
-              game.defer(new DeferredAction(player, () => {
-                for (const p of game.getPlayers()) {
-                  const card = p.playedCards[p.playedCards.length - 1];
+            {
+              title: 'Select how to pay to replay the event',
+              afterPay: () => {
+                player.playCard(game, selectedCard);
+                game.defer(new DeferredAction(player, () => {
+                  for (const p of game.getPlayers()) {
+                    const card = p.playedCards[p.playedCards.length - 1];
 
-                  if (card !== undefined && card.name === selectedCard.name) {
-                    p.playedCards.pop();
-                    player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-                    return undefined;
+                    if (card !== undefined && card.name === selectedCard.name) {
+                      p.playedCards.pop();
+                      player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+                      return undefined;
+                    }
                   }
-                }
-                return undefined;
-              }));
+                  return undefined;
+                }));
+              },
             },
           ));
           return undefined;
@@ -95,15 +95,14 @@ export class Playwrights implements CorporationCard {
       description: 'You start with 38 MC and 1 Energy production.',
       renderData: CardRenderer.builder((b) => {
         b.br.br;
-        b.megacredits(38).productionBox((pb) => pb.energy(1));
+        b.megacredits(38).production((pb) => pb.energy(1));
         b.corpBox('action', (cb) => {
-          cb.effectBox((eb) => {
+          cb.action('Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
             // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
             // use 1000 as an id to tell Vue to render the '?'
             eb.megacredits(1000).startAction;
             eb.text('replay', CardRenderItemSize.SMALL, true);
             eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
-            eb.description('Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.');
           });
         });
       }),

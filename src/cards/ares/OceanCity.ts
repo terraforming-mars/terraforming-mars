@@ -1,3 +1,4 @@
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -8,16 +9,31 @@ import {TileType} from '../../TileType';
 import {CardType} from './../CardType';
 import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
 
-export class OceanCity implements IProjectCard {
-  public cost = 18;
-  public tags = [Tags.CITY, Tags.BUILDING];
-  public cardType = CardType.AUTOMATED;
-  public name = CardName.OCEAN_CITY;
+export class OceanCity extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.OCEAN_CITY,
+      tags: [Tags.CITY, Tags.BUILDING],
+      cost: 18,
+
+      metadata: {
+        cardNumber: 'A20',
+        requirements: CardRequirements.builder((b) => b.oceans(6)),
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => {
+            pb.minus().energy(1).br;
+            pb.plus().megacredits(3);
+          }).nbsp.tile(TileType.OCEAN_CITY, false, true);
+        }),
+        description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
+      },
+    });
+  }
 
   public canPlay(player: Player, game: Game): boolean {
     return (player.getProduction(Resources.ENERGY) > 0) &&
@@ -40,16 +56,5 @@ export class OceanCity implements IProjectCard {
         return undefined;
       },
     );
-  }
-  public metadata: CardMetadata = {
-    cardNumber: 'A20',
-    requirements: CardRequirements.builder((b) => b.oceans(6)),
-    renderData: CardRenderer.builder((b) => {
-      b.productionBox((pb) => {
-        pb.minus().energy(1).br;
-        pb.plus().megacredits(3);
-      }).nbsp.tile(TileType.OCEAN_CITY, false, true);
-    }),
-    description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
   }
 }

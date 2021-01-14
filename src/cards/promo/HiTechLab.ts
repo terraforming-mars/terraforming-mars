@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectCardToKeep} from '../../deferredActions/SelectCardToKeep';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -31,13 +30,7 @@ export class HiTechLab implements IProjectCard {
         (amount: number) => {
           player.setResource(Resources.ENERGY, -amount);
           game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
-
-          const cardsDrawn: Array<IProjectCard> = [];
-          for (let counter = 0; counter < amount; counter++) {
-            cardsDrawn.push(game.dealer.dealCard());
-          };
-          game.defer(new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn));
-          return undefined;
+          return player.drawCardKeepSome(amount, {keepMax: 1});
         },
         1,
         player.getResource(Resources.ENERGY),
@@ -50,9 +43,8 @@ export class HiTechLab implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'X04',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.', (eb) => {
           eb.text('X').energy(1).startAction.text('X').cards(1).asterix();
-          eb.description('Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.');
         });
       }),
       victoryPoints: 1,

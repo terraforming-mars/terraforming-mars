@@ -32,13 +32,13 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
       const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
       if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisTurn) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN, 'Add 1 floater to a Jovian card'));
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
         return undefined;
       }
 
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 1, Tags.JOVIAN));
+          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
           return undefined;
         }),
         new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
@@ -68,7 +68,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN));
+      game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }
 
@@ -79,13 +79,11 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
     public metadata: CardMetadata = {
       cardNumber: 'C44',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action(undefined, (eb) => {
           eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN).nbsp.or();
-          eb.description(undefined);
         }).br;
-        b.effectBox((eb) => {
+        b.action('Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.', (eb) => {
           eb.floaters(1).startAction.trade();
-          eb.description('Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.');
         }).br.br;
         b.floaters(2).secondaryTag(Tags.JOVIAN);
       }),

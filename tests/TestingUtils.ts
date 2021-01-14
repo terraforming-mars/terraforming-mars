@@ -6,6 +6,11 @@ import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/boards/ISpace';
 import {Color} from '../src/Color';
+import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
+import {Phase} from '../src/Phase';
+import {IParty} from '../src/turmoil/parties/IParty';
+import {Turmoil} from '../src/turmoil/Turmoil';
+import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {
@@ -60,9 +65,17 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     removeNegativeGlobalEventsOption: false,
     customColoniesList: [],
     requiresVenusTrackCompletion: false,
+    politicalAgendasExtension: AgendaStyle.STANDARD,
+    moonExpansion: false,
   };
 
   return Object.assign(defaultOptions, options);
+};
+
+export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
+  turmoil.rulingParty = party;
+  turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
+  game.phase = Phase.ACTION;
 };
 
 class TestPlayerFactory {

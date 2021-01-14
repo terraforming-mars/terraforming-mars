@@ -11,7 +11,6 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {GlobalParameter} from '../../GlobalParameter';
 
@@ -49,12 +48,11 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
       cardNumber: 'C42',
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 Animal to this card.', (eb) => {
           eb.empty().startAction.animals(1);
-          eb.description('Action: Add 1 Animal to this card.');
         }).br;
-        b.productionBox((pb) => pb.minus().plants(1).any).br;
-        b.text('1 VP per 2 Animals on this card.', CardRenderItemSize.TINY, true);
+        b.production((pb) => pb.minus().plants(1).any).br;
+        b.vpText('1 VP per 2 Animals on this card.');
       }),
       description: {
         text: 'Requires -6 C. Decrease any Plant production 1 step.',

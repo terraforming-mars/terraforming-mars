@@ -18,8 +18,12 @@ export class AdvancedAlloys extends Card implements IProjectCard {
       metadata: {
         cardNumber: '071',
         renderData: CardRenderer.builder((b) => {
-          b.effectBox((be) => be.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1).description('Effect: Each titanium you have is worth 1 MC extra.')).br;
-          b.effectBox((be) => be.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1).description('Effect: Each steel you have is worth 1 MC extra.'));
+          b.effect('Each titanium you have is worth 1 MC extra.', (be) => {
+            be.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          }).br;
+          b.effect('Each steel you have is worth 1 MC extra.', (be) => {
+            be.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          });
         }),
       },
     });

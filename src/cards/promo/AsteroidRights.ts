@@ -41,31 +41,31 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
       this.resourceCount--;
 
       return new OrOptions(
-        new SelectOption('Increase MC production 1 step', 'Select', () => {
-          player.addProduction(Resources.MEGACREDITS);
-          LogHelper.logRemoveResource(game, player, this, 1, 'increase MC production 1 step');
-          return undefined;
-        }),
         new SelectOption('Gain 2 titanium', 'Select', () => {
           player.titanium += 2;
-          LogHelper.logRemoveResource(game, player, this, 1, 'gain 2 titanium');
+          LogHelper.logRemoveResource(player, this, 1, 'gain 2 titanium');
+          return undefined;
+        }),
+        new SelectOption('Increase MC production 1 step', 'Select', () => {
+          player.addProduction(Resources.MEGACREDITS);
+          LogHelper.logRemoveResource(player, this, 1, 'increase MC production 1 step');
           return undefined;
         }),
       );
     });
 
     const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-      game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for asteroid'));
+      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
 
       return undefined;
     });
 
     const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
-      game.defer(new SelectHowToPayDeferred(player, 1, false, false, 'Select how to pay for asteroid'));
+      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(foundCards[0], 1);
-      LogHelper.logAddResource(game, player, foundCards[0]);
+      LogHelper.logAddResource(player, foundCards[0]);
 
       return undefined;
     });
@@ -89,16 +89,14 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
     cardNumber: 'X31',
     description: 'Add 2 asteroids to this card.',
     renderData: CardRenderer.builder((b) => {
-      b.effectBox((eb) => {
+      b.action('Spend 1 MC to add 1 asteroid to ANY card.', (eb) => {
         eb.megacredits(1).startAction.asteroids(1).asterix();
-        eb.description('Action: Spend 1 MC to add 1 asteroid to ANY card.');
       }).br;
-      b.effectBox((eb) => {
+      b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
         eb.asteroids(1)
-          .startAction.productionBox((pb) => pb.megacredits(1))
+          .startAction.production((pb) => pb.megacredits(1))
           .or()
           .titanium(2);
-        eb.description('Action: Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.');
       }).br;
       b.asteroids(2);
     }),

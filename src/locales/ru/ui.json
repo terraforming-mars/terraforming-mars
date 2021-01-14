@@ -104,6 +104,12 @@
 
     "Actions": "Действия",
     "Played Cards": "Сыгранные карты",
+    "Hide active cards": "Скрыть активные проекты",
+    "Show active cards": "Показать активные проекты",
+    "Hide automated cards": "Скрыть автоматические проекты",
+    "Show automated cards": "Показать автоматические проекты",
+    "Hide event cards": "Скрыть карты событий",
+    "Show event cards": "Показать карты событий",
     "Cards In Hand": "Карты в руке",
     "Last Actions": "Лог",
     "Game Log": "Лог",

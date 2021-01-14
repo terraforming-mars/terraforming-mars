@@ -44,12 +44,12 @@ export class MaxwellBase implements IActionCard, IProjectCard {
       return this.getResCards(player).length > 0;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const cards = this.getResCards(player);
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 1);
-        LogHelper.logAddResource(game, player, cards[0]);
+        LogHelper.logAddResource(player, cards[0]);
         return undefined;
       }
 
@@ -59,7 +59,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         cards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );
@@ -68,11 +68,10 @@ export class MaxwellBase implements IActionCard, IProjectCard {
       cardNumber: '238',
       requirements: CardRequirements.builder((b) => b.venus(12)),
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
           eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
-          eb.description('Action: Add 1 resource to ANOTHER VENUS CARD.');
         }).br;
-        b.productionBox((pb) => pb.minus().energy(1)).nbsp.city().asterix();
+        b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
       }),
       description: {
         text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',

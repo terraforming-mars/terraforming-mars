@@ -45,7 +45,7 @@ export class MoholeLake implements IActionCard, IProjectCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
 
       if (availableCards.length === 0) {
@@ -54,23 +54,22 @@ export class MoholeLake implements IActionCard, IProjectCard {
 
       if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0]);
-        LogHelper.logAddResource(game, player, availableCards[0], 1);
+        LogHelper.logAddResource(player, availableCards[0], 1);
         return undefined;
       }
 
       return new SelectCard('Select card to add microbe or animal', 'Add resource(s)', availableCards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0]);
-        LogHelper.logAddResource(game, player, foundCards[0], 1);
+        LogHelper.logAddResource(player, foundCards[0], 1);
         return undefined;
       });
     }
     public metadata: CardMetadata = {
       cardNumber: 'X22',
       renderData: CardRenderer.builder((b) => {
-        b.effectBox((eb) => {
+        b.action('Add a microbe or animal to ANOTHER card.', (eb) => {
           eb.empty().startAction.microbes(1).asterix();
           eb.nbsp.or().nbsp.animals(1).asterix();
-          eb.description('Action: Add a microbe or animal to ANOTHER card.');
         }).br;
         b.plants(3).temperature(1).oceans(1);
       }),

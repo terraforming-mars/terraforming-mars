@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -24,24 +23,16 @@ export class Inventrix extends Card implements CorporationCard {
           b.br;
           b.megacredits(45).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
-            ce.effectBox((eb) => {
+            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.', (eb) => {
               eb.plate('Global requirements').startEffect.text('+/- 2');
-              eb.description('Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.');
             });
           });
         }),
       },
     });
   }
-  public initialAction(player: Player, game: Game) {
-    player.cardsInHand.push(
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-      game.dealer.dealCard(),
-    );
-
-    LogHelper.logCardChange(game, player, 'drew', 3);
-
+  public initialAction(player: Player) {
+    player.drawCard(3);
     return undefined;
   }
   public getRequirementBonus(_player: Player, _game: Game): number {

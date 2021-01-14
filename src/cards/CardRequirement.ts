@@ -6,7 +6,7 @@ import {Resources} from '../Resources';
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(private _type: RequirementType, protected _amount: number, private _isMax: boolean = false) {}
+  constructor(private _type: RequirementType, protected _amount: number, private _isMax: boolean = false, private _isAny: boolean = false) {}
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -19,7 +19,7 @@ export class CardRequirement {
   }
 
   protected parseType(): string {
-    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.FORESTS, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
+    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
 
     if (this._amount > 1 && withPlural.includes(this._type)) {
       return this.getTypePlural();
@@ -34,6 +34,8 @@ export class CardRequirement {
       return 'Cities';
     } else if (this._type === RequirementType.COLONIES) {
       return 'Colonies';
+    } else if (this._type === RequirementType.GREENERIES) {
+      return 'Greeneries';
     } else {
       return `${this._type}s`;
     }
@@ -56,8 +58,16 @@ export class CardRequirement {
     return this;
   }
 
+  public any(): CardRequirement {
+    this._isAny = true;
+    return this;
+  }
+
   public get isMax(): boolean {
     return this._isMax;
+  }
+  public get isAny(): boolean {
+    return this._isAny;
   }
   public get type(): RequirementType {
     return this._type;

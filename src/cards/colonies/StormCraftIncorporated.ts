@@ -1,6 +1,4 @@
-import * as constants from '../../constants';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
@@ -8,13 +6,13 @@ import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
-import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {PlayerInput} from '../../PlayerInput';
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
   public name = CardName.STORMCRAFT_INCORPORATED;
@@ -32,11 +30,11 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     return true;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     if (floaterCards.length === 1) {
       this.resourceCount++;
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 
@@ -46,45 +44,41 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       floaterCards,
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(game, player, foundCards[0]);
+        LogHelper.logAddResource(player, foundCards[0]);
         return undefined;
       },
     );
   }
 
-  public convertHeatIntoTemperature(game: Game, player: Player): SelectOption {
-    const floatersToHeat = 2;
+  public spendHeat(player: Player, targetAmount: number,
+    cb: () => (undefined | PlayerInput) = () => undefined): AndOptions {
     let heatAmount: number;
     let floaterAmount: number;
-    const raiseTempOptions = new AndOptions(
+
+    return new AndOptions(
       () => {
-        const total = heatAmount + (floaterAmount * floatersToHeat);
-        if (total < constants.HEAT_FOR_TEMPERATURE) {
-          throw new Error(`Need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
+        if (heatAmount + (floaterAmount * 2) < targetAmount) {
+          throw new Error(`Need to pay ${targetAmount} heat`);
         }
-        if (total > constants.HEAT_FOR_TEMPERATURE) {
-          throw new Error(`Only need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
+        if (heatAmount > 0 && heatAmount - 1 + (floaterAmount * 2) >= targetAmount) {
+          throw new Error(`You cannot overspend heat`);
         }
-        player.removeResourceFrom(this, floaterAmount);
+        if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
+          throw new Error(`You cannot overspend floaters`);
+        }
+        player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
         player.heat -= heatAmount;
-        game.increaseTemperature(player, 1);
-        game.log('${0} converted heat into temperature', (b) => b.player(player));
-        return undefined;
+        return cb();
       },
       new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
         heatAmount = amount;
         return undefined;
-      }, 0, Math.min(player.heat, constants.HEAT_FOR_TEMPERATURE)),
+      }, 0, Math.min(player.heat, targetAmount)),
       new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
-      }, 0, Math.min(this.resourceCount, constants.HEAT_FOR_TEMPERATURE / floatersToHeat)),
+      }, 0, Math.min(player.getResourcesOnCorporation(), Math.ceil(targetAmount / 2))),
     );
-    raiseTempOptions.title = 'Select resource amounts to raise temp';
-
-    return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      return raiseTempOptions;
-    });
   }
 
   public metadata: CardMetadata = {
@@ -95,14 +89,12 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
       b.megacredits(48);
       b.corpBox('action', (ce) => {
         ce.vSpace(CardRenderItemSize.LARGE);
-        ce.effectBox((eb) => {
+        ce.action('Add a floater to ANY card.', (eb) => {
           eb.empty().startAction.floaters(1).asterix();
-          eb.description('Action: Add a floater to ANY card.');
         });
         ce.vSpace();
-        ce.effectBox((eb) => {
+        ce.effect('Floaters on this card may be used as 2 heat each.', (eb) => {
           eb.startEffect.floaters(1).equals().heat(2);
-          eb.description('Effect: Floaters on this card may be used as 2 heat each.');
         });
       });
     }),

@@ -138,6 +138,12 @@
 	"Drafted Cards": "Cartes draftées",
 	"Cards In Hand": "Cartes en Main",
 	"Played Cards": "Cartes Jouées",
+	"Hide active cards": "Cacher les cartes Actions",
+	"Show active cards": "Afficher les cartes Actions",
+	"Hide automated cards": "Cacher les cartes Instantanées",
+	"Show automated cards": "Afficher les cartes Instantanées",
+	"Hide event cards": "Cacher les cartes Evènements",
+	"Show event cards": "Afficher les cartes Evènements",
 	"Select which cards to take into hand": "Sélectionnez les cartes à ajouter à votre main",
 
 	"Colonies": "Colonies",

@@ -24,7 +24,7 @@ export class OpenCity extends Card implements IProjectCard {
         cardNumber: '108',
         requirements: CardRequirements.builder((b) => b.oxygen(12)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(4);
           }).city().plants(2);

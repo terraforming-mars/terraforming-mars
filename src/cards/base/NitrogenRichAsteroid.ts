@@ -23,7 +23,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
       metadata: {
         cardNumber: '037',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.plants(1).nbsp.or().br;
             pb.plants(3).played.digit.colon().nbsp.plants(4).digit;
           }).br;

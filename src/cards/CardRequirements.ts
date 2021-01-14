@@ -38,7 +38,7 @@ export class CardRequirements {
     if (!player.checkMultipleTagPresence(tags)) {
       return false;
     }
-    return this.requirements.every((requirement) => requirement.satisfies(player));
+    return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
   }
 }
 

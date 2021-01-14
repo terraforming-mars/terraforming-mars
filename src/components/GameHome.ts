@@ -62,7 +62,8 @@ export const GameHome = Vue.component('game-home', {
       return `/player?id=${playerId}`;
     },
     copyUrl: function(playerId: string): void {
-      copyToClipboard(window.location.host + this.getHref(playerId));
+      const urlPrefix = (window.location.host.includes('localhost:')) ? '' : 'https://';
+      copyToClipboard(urlPrefix + window.location.host + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },
     isPlayerUrlCopied: function(playerId: string): boolean {

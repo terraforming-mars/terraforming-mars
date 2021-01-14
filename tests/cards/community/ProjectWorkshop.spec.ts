@@ -30,7 +30,7 @@ describe('ProjectWorkshop', function() {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
-    card.initialAction(player, game);
+    card.initialAction(player);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
@@ -54,14 +54,14 @@ describe('ProjectWorkshop', function() {
     advancedAlloys.play(player);
     player.megaCredits = 0;
 
-    expect(player.getSteelValue()).to.eq(3);
+    expect(player.getSteelValue(game)).to.eq(3);
     expect(player.getTitaniumValue(game)).to.eq(4);
 
     card.action(player, game).cb();
     expect(player.playedCards).has.lengthOf(0);
     expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.getSteelValue()).to.eq(2);
+    expect(player.getSteelValue(game)).to.eq(2);
     expect(player.getTitaniumValue(game)).to.eq(3);
   });
 

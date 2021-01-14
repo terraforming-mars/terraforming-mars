@@ -22,7 +22,7 @@ export class KelpFarming extends Card implements IProjectCard {
         cardNumber: '055',
         requirements: CardRequirements.builder((b) => b.oceans(6)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.megacredits(2).br;
             pb.plants(3);
           }).nbsp.plants(2);

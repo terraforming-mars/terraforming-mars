@@ -37,7 +37,7 @@ export class QuantumCommunications implements IProjectCard {
       cardNumber: '079',
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.megacredits(1).slash().colonies(1, CardRenderItemSize.SMALL).any;
         });
       }),

@@ -107,10 +107,10 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
       description: 'You start with 40 MC. Increase your steel and titanium production 1 step each.',
       renderData: CardRenderer.builder((b) => {
         b.br;
-        b.megacredits(40).nbsp.productionBox((pb) => pb.steel(1).titanium(1));
+        b.megacredits(40).nbsp.production((pb) => pb.steel(1).titanium(1));
         b.corpBox('action', (ce) => {
           ce.action('Decrease any production to gain 4 resources of that kind.', (eb) => {
-            eb.productionBox((eb) => eb.wild(1)).startAction.wild(4).digit;
+            eb.production((eb) => eb.wild(1)).startAction.wild(4).digit;
           });
         });
       }),

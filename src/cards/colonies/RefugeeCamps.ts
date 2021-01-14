@@ -8,7 +8,6 @@ import {Resources} from '../../Resources';
 import {IResourceCard} from '../ICard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class RefugeeCamps implements IProjectCard, IResourceCard {
@@ -41,10 +40,10 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
       cardNumber: 'C33',
       renderData: CardRenderer.builder((b) => {
         b.action('Decrease your MC production 1 step to add a camp resource to this card.', (eb) => {
-          eb.productionBox((pb) => pb.megacredits(1));
+          eb.production((pb) => pb.megacredits(1));
           eb.startAction.camps();
         }).br;
-        b.text('1 VP for each camp resource on this card.', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for each camp resource on this card.');
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.camps(1, 1),
     }

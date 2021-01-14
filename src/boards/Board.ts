@@ -7,8 +7,20 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
 export abstract class Board {
   public abstract spaces: Array<ISpace>;
+
   public abstract getVolcanicSpaceIds(): Array<string>;
-  public abstract getNoctisCitySpaceIds(): Array<string>
+
+  public abstract getNoctisCitySpaceIds(): Array<string>;
+
+  /* Returns the space given a Space ID. */
+  public getSpace(id: string): ISpace {
+    const space = this.spaces.find((space) => space.id === id);
+    if (space === undefined) {
+      throw new Error(`Can't find space with id ${id}`);
+    }
+    return space;
+  }
+
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > 8) {
@@ -128,15 +140,6 @@ export abstract class Board {
     return landSpaces;
   }
 
-  protected shuffle(input: Array<ISpace>): Array<ISpace> {
-    const out: Array<ISpace> = [];
-    const copy = input.slice();
-    while (copy.length) {
-      out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
-    }
-    return out;
-  }
-
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
   // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
@@ -170,14 +173,6 @@ export abstract class Board {
 
   public canPlaceTile(space: ISpace): boolean {
     return space.tile === undefined && space.spaceType === SpaceType.LAND;
-  }
-
-  public getForestSpace(spaces: Array<ISpace>): ISpace {
-    const space = this.shuffle(spaces).find((s) => this.canPlaceTile(s));
-    if (space === undefined) {
-      throw new Error('Did not find space for forest');
-    }
-    return space;
   }
 
   public static isCitySpace(space: ISpace): boolean {

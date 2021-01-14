@@ -19,7 +19,7 @@ export class RadSuits extends Card implements IProjectCard {
         cardNumber: '186',
         requirements: CardRequirements.builder((b) => b.cities(2).any()),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.megacredits(1));
+          b.production((pb) => pb.megacredits(1));
         }),
         description: 'Requires two cities in play. Increase your MC up 1 step.',
         victoryPoints: 1,

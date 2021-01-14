@@ -28,6 +28,9 @@ describe('ByElection', function() {
 
     const turmoil = game.turmoil!;
     expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);
-    expect(turmoil.rulingParty!.name).to.eq(PartyName.MARS);
+
+    const rulingParty = turmoil.rulingParty;
+    expect(rulingParty.name).to.eq(PartyName.MARS);
+    expect(turmoil.politicalAgendasData!.currentAgenda).deep.eq({bonusId: 'mb01', policyId: 'mfp01'});
   });
 });

@@ -44,7 +44,7 @@ describe('PharmacyUnion', function() {
   it('Gains diseases and removes MC when ANY player plays microbe cards', function() {
     player.megaCredits = 8;
     player2.megaCredits = 8;
-    card.play(player, game);
+    card.play(player);
 
     const ants = new Ants();
     player.playedCards.push(ants);
@@ -63,7 +63,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('Removes diseases and gives TR only when corp owner plays science cards', function() {
-    card.play(player, game);
+    card.play(player);
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
@@ -84,7 +84,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('Works correctly with Research', function() {
-    card.play(player, game);
+    card.play(player);
     expect(card.resourceCount).to.eq(2);
 
     const research = new Research();
@@ -107,6 +107,7 @@ describe('PharmacyUnion', function() {
     player.playedCards.push(searchForLife);
     card.onCardPlayed(player, game, searchForLife);
     expect(game.deferredActions).has.lengthOf(1);
+    expect(player.getPlayedEventsCount()).to.eq(0);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
     game.deferredActions.shift();
@@ -114,6 +115,7 @@ describe('PharmacyUnion', function() {
 
     expect(player.getTerraformRating()).to.eq(23);
     expect(card.isDisabled).is.true;
+    expect(player.getPlayedEventsCount()).to.eq(1); // Counts as a played event
 
     // Cannot trigger once per game effect a second time
     card.onCardPlayed(player, game, searchForLife);

@@ -22,7 +22,7 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
         cardNumber: '160',
         requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => {
+          b.production((pb) => {
             pb.minus().energy(1).any.br;
             pb.plus().energy(1);
           });

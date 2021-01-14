@@ -24,7 +24,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
         cardNumber: '003',
         description: 'Increase your Energy production 1 step. Increase temperature 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(1)).temperature(1);
+          b.production((pb) => pb.energy(1)).temperature(1);
         }),
       },
     });

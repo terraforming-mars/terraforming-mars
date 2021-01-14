@@ -12,7 +12,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
@@ -42,7 +41,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
       // add to itself if no other available target
       if (floaterCards.length === 1) {
         game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-        LogHelper.logAddResource(game, player, floaterCards[0]);
+        LogHelper.logAddResource(player, floaterCards[0]);
         player.addResourceTo(floaterCards[0], 1);
         return undefined;
       }
@@ -53,7 +52,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         floaterCards,
         (foundCards: Array<ICard>) => {
           game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           player.addResourceTo(foundCards[0], 1);
           return undefined;
         },
@@ -66,7 +65,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         b.action('Spend 2 MC to add 1 Floater to ANY card', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix();
         }).br;
-        b.text('1 VP for every 2nd Floater on this card', CardRenderItemSize.TINY, true);
+        b.vpText('1 VP for every 2nd Floater on this card');
       }),
       description: 'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
       victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),

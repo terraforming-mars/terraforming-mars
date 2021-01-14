@@ -22,8 +22,8 @@ export class SupportedResearch implements IProjectCard {
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      player.drawCard(game, 2);
+    public play(player: Player) {
+      player.drawCard(2);
       return undefined;
     }
 

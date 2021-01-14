@@ -12,12 +12,12 @@ describe('AerosportTournament', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
-    corp.action(player, game);
-    corp.action(player, game);
-    corp.action(player, game);
-    corp.action(player, game);
+    corp.action(player);
+    corp.action(player);
+    corp.action(player);
+    corp.action(player);
     expect(card.canPlay(player)).is.not.true;
-    corp.action(player, game);
+    corp.action(player);
     expect(card.canPlay(player)).is.true;
 
     game.addCityTile(player, '03');

@@ -26,7 +26,7 @@ export class MiningQuota implements IProjectCard {
       cardNumber: '239',
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.steel(2));
+        b.production((pb) => pb.steel(2));
       }),
       description: 'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
     }

@@ -21,7 +21,7 @@ export class CloudSeeding extends Card implements IProjectCard {
         cardNumber: '004',
         description: 'Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.',
         requirements: CardRequirements.builder((b) => b.oceans(3)),
-        renderData: CardRenderer.builder((b) => b.productionBox((pb) => {
+        renderData: CardRenderer.builder((b) => b.production((pb) => {
           pb.minus().megacredits(1).heat(1).any.br;
           pb.plus().plants(2);
         })),

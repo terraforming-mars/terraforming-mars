@@ -22,7 +22,7 @@ export class GreatDam extends Card implements IProjectCard {
         cardNumber: '136',
         requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.energy(2));
+          b.production((pb) => pb.energy(2));
         }),
         description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps.',
         victoryPoints: 1,

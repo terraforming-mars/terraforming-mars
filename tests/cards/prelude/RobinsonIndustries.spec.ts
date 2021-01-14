@@ -7,12 +7,12 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('RobinsonIndustries', function() {
-  let card : RobinsonIndustries; let player : Player; let game : Game;
+  let card : RobinsonIndustries; let player : Player;
 
   beforeEach(function() {
     card = new RobinsonIndustries();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 
@@ -25,7 +25,7 @@ describe('RobinsonIndustries', function() {
     player.megaCredits = 4;
     expect(card.canAct(player)).is.true;
 
-    const result = card.action(player, game) as OrOptions;
+    const result = card.action(player) as OrOptions;
     expect(result.options).has.lengthOf(6);
 
     result.options[1].cb();
@@ -35,14 +35,14 @@ describe('RobinsonIndustries', function() {
 
   it('Only allows to choose from lowest production(s)', function() {
     player.addProduction(Resources.MEGACREDITS, -1);
-    let result = card.action(player, game) as OrOptions;
+    let result = card.action(player) as OrOptions;
     expect(result.options).has.lengthOf(1);
 
     player.addProduction(Resources.MEGACREDITS, 5);
     player.addProduction(Resources.TITANIUM, 1);
     player.addProduction(Resources.PLANTS, 2);
 
-    result = card.action(player, game) as OrOptions;
+    result = card.action(player) as OrOptions;
     expect(result.options).has.lengthOf(3);
   });
 });

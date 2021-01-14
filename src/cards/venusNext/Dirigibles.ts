@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -26,11 +25,11 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
         this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
+        LogHelper.logAddResource(player, floaterCards[0]);
         return undefined;
       }
 
@@ -40,7 +39,7 @@ export class Dirigibles implements IActionCard, IProjectCard, IResourceCard {
         floaterCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );

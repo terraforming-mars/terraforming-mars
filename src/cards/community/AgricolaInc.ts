@@ -50,7 +50,7 @@ export class AgricolaInc implements CorporationCard {
       description: 'You start with 1 plant production, 1 MC production and 40 MC.',
       renderData: CardRenderer.builder((b) => {
         b.br.br;
-        b.productionBox((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+        b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
         b.corpBox('effect', (ce) => {
           ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
         });

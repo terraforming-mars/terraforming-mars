@@ -63,14 +63,14 @@ export class ForcedPrecipitation implements IActionCard, IProjectCard, IResource
     private addResource(player: Player, game: Game) {
       game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
       player.addResourceTo(this);
-      LogHelper.logAddResource(game, player, this);
+      LogHelper.logAddResource(player, this);
       return undefined;
     }
 
     private spendResource(player: Player, game: Game) {
       player.removeResourceFrom(this, 2);
       game.increaseVenusScaleLevel(player, 1);
-      LogHelper.logVenusIncrease(game, player, 1);
+      LogHelper.logVenusIncrease( player, 1);
       return undefined;
     }
     public metadata: CardMetadata = {

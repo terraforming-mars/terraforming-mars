@@ -1,5 +1,4 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
@@ -15,10 +14,8 @@ export class MorningStarInc implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Draw 3 Venus-tag cards';
-    public initialAction(player: Player, game: Game) {
-      const cards = game.drawCardsByTag(Tags.VENUS, 3);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+    public initialAction(player: Player) {
+      player.drawCard(3, {tag: Tags.VENUS});
       return undefined;
     }
 

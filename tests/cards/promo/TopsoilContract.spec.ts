@@ -32,7 +32,7 @@ describe('TopsoilContract', function() {
     expect(player.megaCredits).to.eq(1);
 
     const aerobrakedAmmoniaAsteroid = new AerobrakedAmmoniaAsteroid();
-    aerobrakedAmmoniaAsteroid.play(player, game);
+    aerobrakedAmmoniaAsteroid.play(player);
     expect(tardigrades.resourceCount).to.eq(3);
     expect(player.megaCredits).to.eq(3);
 

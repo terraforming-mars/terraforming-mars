@@ -26,7 +26,7 @@ describe('Polyphemos', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 
     player.playedCards.push(card3);
-    const action = card3.action(player, game);
+    const action = card3.action(player);
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);

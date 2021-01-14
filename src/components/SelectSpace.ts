@@ -2,6 +2,7 @@
 import Vue, {VNode} from 'vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {$t} from '../directives/i18n';
+import {SpaceId} from '../boards/ISpace';
 
 export const SelectSpace = Vue.component('select-space', {
   props: {
@@ -38,7 +39,7 @@ export const SelectSpace = Vue.component('select-space', {
     const setOfSpaces: {[x: string]: boolean} = {};
 
     if (playerInput.availableSpaces !== undefined) {
-      playerInput.availableSpaces.forEach((spaceId: string) => {
+      playerInput.availableSpaces.forEach((spaceId: SpaceId) => {
         setOfSpaces[spaceId] = true;
       });
     }

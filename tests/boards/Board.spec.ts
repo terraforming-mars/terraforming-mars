@@ -8,14 +8,22 @@ import {TestPlayers} from '../TestingUtils';
 import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
+import {MoonSpaces} from '../../src/moon/MoonSpaces';
+import {Random} from '../../src/Random';
 
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
-    board = OriginalBoard.newInstance(false, 0, false);
+    board = OriginalBoard.newInstance(false, new Random(0), false);
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
+  });
+
+  it('getSpace', () => {
+    expect(board.getSpace('01').spaceType).eq(SpaceType.COLONY);
+    expect(board.getSpace('01').id).eq('01');
+    expect(() => board.getSpace(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
   });
 
   it('Can have greenery placed on any available land when player has no tile placed', function() {

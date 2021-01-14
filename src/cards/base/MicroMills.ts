@@ -17,7 +17,7 @@ export class MicroMills extends Card implements IProjectCard {
       metadata: {
         cardNumber: '164',
         renderData: CardRenderer.builder((b) => {
-          b.productionBox((pb) => pb.heat(1));
+          b.production((pb) => pb.heat(1));
         }),
         description: 'Increase your heat production 1 step.',
       },

@@ -8,8 +8,8 @@ describe('TechnologyDemonstration', function() {
     const card = new TechnologyDemonstration();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, game);
+    Game.newInstance('foobar', [player, redPlayer], player);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.cardsInHand[0]).not.to.eq(player.cardsInHand[1]);

@@ -28,7 +28,7 @@ export class MareSerenitatisMine implements IProjectCard {
     const moon = MoonExpansion.moonData(player.game).moon;
     const spaces = moon.getAdjacentSpaces(moon.getSpace(MoonSpaces.MARE_SERENITATIS));
     const availableRoadSpaces = spaces.filter((space) => {
-      space.player === undefined && space.spaceType === SpaceType.LAND;
+      return space.player === undefined && space.spaceType === SpaceType.LAND;
     });
     player.game.defer(new PlaceMoonRoadTile(player, 'Select a space next to Mare Serintatis to play a road', availableRoadSpaces));
     return undefined;

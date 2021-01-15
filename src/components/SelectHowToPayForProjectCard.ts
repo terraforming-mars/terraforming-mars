@@ -16,6 +16,8 @@ interface SelectHowToPayForProjectCardModel {
   microbes: number;
   floaters: number;
   warning: string | undefined;
+  availableSteel: number;
+  availableTitanium: number;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -28,6 +30,7 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+// import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -75,7 +78,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       microbes: 0,
       floaters: 0,
       warning: undefined,
-    } as SelectHowToPayForProjectCardModel;
+      availableSteel: 0,
+      availableTitanium: 0,
+    };
   },
   components: {
     Card,

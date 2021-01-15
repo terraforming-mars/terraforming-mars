@@ -197,4 +197,9 @@ describe('Units', () => {
       heat: 5,
     });
   });
+
+  it('EMPTY', () => {
+    const units = Units.EMPTY;
+    expect(() => units.megacredits = 1).to.throw();
+  });
 });

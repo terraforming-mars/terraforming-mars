@@ -61,6 +61,7 @@ import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
+import {Units} from './Units';
 
 export type PlayerId = string;
 
@@ -1053,6 +1054,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               calculatedCost: this.getCardCost(game, targetCard.card),
               cardType: card.cardType,
               isDisabled: false,
+              reserveUnits: Units.EMPTY // I wonder if this could just be removed.
             },
           );
         }
@@ -1174,11 +1176,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public playProjectCard(game: Game): PlayerInput {
+    const playableCards = this.getPlayableCards(game);
+
     return new SelectHowToPayForProjectCard(
-      this.getPlayableCards(game),
-      this.getMicrobesCanSpend(),
-      this.getFloatersCanSpend(),
-      this.canUseHeatAsMegaCredits,
+      this,
+      playableCards,
       (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, game),
     );
   }

@@ -38,6 +38,8 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {MoonModel} from '../models/MoonModel';
+import {CardName} from '../CardName';
+import {Units} from '../Units';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -210,6 +212,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
+  reserveUnitMap?: Map<CardName, Units>,
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
   cards.forEach((card) => {
@@ -224,6 +227,7 @@ function getCardsAsCardModel(
       cardType: CardType.AUTOMATED,
       isDisabled: false,
       warning: card.warning,
+      reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
     });
   });
 
@@ -271,13 +275,11 @@ function getWaitingFor(
     }
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
-    playerInputModel.cards = getCardsAsCardModel(
-      (waitingFor as SelectHowToPayForProjectCard).cards,
-      false,
-    );
-    playerInputModel.microbes = (waitingFor as SelectHowToPayForProjectCard).microbes;
-    playerInputModel.floaters = (waitingFor as SelectHowToPayForProjectCard).floaters;
-    playerInputModel.canUseHeat = (waitingFor as SelectHowToPayForProjectCard).canUseHeat;
+    const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
+    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap);
+    playerInputModel.microbes = shtpfpc.microbes;
+    playerInputModel.floaters = shtpfpc.floaters;
+    playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
@@ -359,6 +361,7 @@ function getCards(
     cardType: card.cardType,
     isDisabled: false,
     warning: card.warning,
+    reserveUnits: card.reserveUnits || Units.EMPTY,
   }));
 }
 

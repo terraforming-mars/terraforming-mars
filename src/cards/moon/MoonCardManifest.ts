@@ -22,6 +22,7 @@ import {CoreMine} from './CoreMine';
 // import {DeepLunarMining} from './DeepLunarMining';
 // import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
+// import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 // import {GeodesicTents} from './GeodesicTents';
 // import {GrandLunaAcademy} from './GrandLunaAcademy';
 // import {Habitat14} from './Habitat14';
@@ -67,6 +68,7 @@ import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+// import {SubterraneanHabitats} from './SubterraneanHabitats';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 // import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
@@ -136,8 +138,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     //   {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},
     //   {cardName: CardName.LUNAR_TRADE_FLEET, Factory: LunarTradeFleet},
-    //   // {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
-    //   // {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
+    //   {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
+    //   {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
     //   {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},
     //   {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     //   {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},

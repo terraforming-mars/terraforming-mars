@@ -34,7 +34,6 @@ describe('FirstLunarSettlement', () => {
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
-
   });
 });
 

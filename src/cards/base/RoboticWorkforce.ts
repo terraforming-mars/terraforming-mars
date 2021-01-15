@@ -268,35 +268,21 @@ export class RoboticWorkforce extends Card implements IProjectCard {
         }
       }
 
+      // Prefer moving these values to their respective cards as productionDelta.
+      // Cards still here are those not updated to the static card properties format, preludes, or ones
+      // with complicated math. Maybe they can be moved. Maybe productionDelta should have been a function
+      // instead of a structure. Well, there's room for sophistication.
       const updaters: Array<Updater> = [
         new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, {energy: -1}),
         new Updater(CardName.CAPITAL, {energy: -2, megacredits: 5}),
         new Updater(CardName.CAPITAL_ARES, {energy: -2, megacredits: 5}),
-        new Updater(CardName.CARBONATE_PROCESSING, {energy: -1, heat: 3}),
-        new Updater(CardName.CHEUNG_SHING_MARS, {megacredits: 3}),
-        new Updater(CardName.COMMERCIAL_DISTRICT, {energy: -1, megacredits: 4}),
-        new Updater(CardName.COMMERCIAL_DISTRICT_ARES, {energy: -1, megacredits: 4}),
-        new Updater(CardName.CORPORATE_STRONGHOLD, {energy: -1, megacredits: 3}),
         new Updater(CardName.CULTURAL_METROPOLIS, {energy: -1, megacredits: 3}),
-        new Updater(CardName.CUPOLA_CITY, {energy: -1, megacredits: 3}),
-        new Updater(CardName.DEEP_WELL_HEATING, {energy: 1}),
-        new Updater(CardName.DOMED_CRATER, {energy: -1, megacredits: 3}),
         new Updater(CardName.DOME_FARMING, {megacredits: 2, plants: 1}),
         new Updater(CardName.EARLY_SETTLEMENT, {plants: 1}),
-        new Updater(CardName.ELECTRO_CATAPULT, {energy: -1}),
-        new Updater(CardName.EOS_CHASMA_NATIONAL_PARK, {energy: 2}),
         new Updater(CardName.FACTORUM, {steel: 1}),
         new Updater(CardName.FIELD_CAPPED_CITY, {energy: 1, megacredits: 2}),
-        new Updater(CardName.FOOD_FACTORY, {megacredits: 4, plants: -1}),
-        new Updater(CardName.FUELED_GENERATORS, {energy: 1, megacredits: -1}),
-        new Updater(CardName.FUEL_FACTORY, {energy: -1, megacredits: 1, titanium: 1}),
-        new Updater(CardName.FUSION_POWER, {energy: 3}),
-        new Updater(CardName.GEOTHERMAL_POWER, {energy: 2}),
-        new Updater(CardName.GHG_FACTORIES, {energy: -1, heat: 4}),
-        new Updater(CardName.GREAT_DAM, {energy: 2}),
         new Updater(CardName.GREAT_DAM_PROMO, {energy: 2}),
         new Updater(CardName.GYROPOLIS, {energy: -2, megacredits: player.getMultipleTagCount([Tags.VENUS, Tags.EARTH])}),
-        new Updater(CardName.HOUSE_PRINTING, {steel: 1}),
         new Updater(CardName.IMMIGRANT_CITY, {energy: -1, megacredits: -2}),
         new Updater(CardName.INDUSTRIAL_MICROBES, {energy: 1, steel: 1}),
         new Updater(CardName.LAVA_TUBE_SETTLEMENT, {energy: -1, megacredits: 2}),

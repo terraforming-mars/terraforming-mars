@@ -10,7 +10,7 @@ import {GlobalParameter} from '../GlobalParameter';
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(private _type: RequirementType, protected _amount: number, private _isMax: boolean = false, private _isAny: boolean = false) {}
+  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {}
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -18,7 +18,7 @@ export class CardRequirement {
     } else if (this._type === RequirementType.TEMPERATURE) {
       return `${this._amount}°`;
     } else {
-      return this._amount !== -1 ? this._amount.toString() : '';
+      return (this._amount !== 1 || this._isMax) ? this._amount.toString() : '';
     }
   }
 
@@ -155,7 +155,7 @@ export class CardRequirement {
 }
 
 export class TagCardRequirement extends CardRequirement {
-  constructor(public tag: Tags, amount: number) {
+  constructor(public tag: Tags, amount: number = 1) {
     super(RequirementType.TAG, amount);
   }
 
@@ -168,7 +168,7 @@ export class TagCardRequirement extends CardRequirement {
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number) {
+  constructor(private resource: Resources, amount: number = 1) {
     super(RequirementType.RESOURCE_TYPES, amount);
   }
 
@@ -182,7 +182,7 @@ export class ProductionCardRequirement extends CardRequirement {
 
 export class PartyCardRequirement extends CardRequirement {
   constructor(private party: PartyName) {
-    super(RequirementType.PARTY, -1);
+    super(RequirementType.PARTY);
   }
   protected parseType(): string {
     return this.party.toLowerCase();

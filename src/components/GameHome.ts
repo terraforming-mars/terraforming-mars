@@ -2,6 +2,10 @@ import Vue from 'vue';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
+import {BoardName} from '../boards/BoardName';
+import {GameOptions} from '../Game';
+import {RandomMAOptionType} from '../RandomMAOptionType';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -68,24 +72,128 @@ export const GameHome = Vue.component('game-home', {
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
     },
-    getExpansionIcons: function(): string {
-      let expansionIcons = '';
-      if (this.game !== undefined && this.game.gameOptions.venusNextExtension) {
+    getSoloDetail: function(gameOptions: GameOptions): string {
+      if (this.game !== undefined && this.game.players.length !== 1) return '';
+
+      if (gameOptions.soloTR) {
+        return '<div>Solo mode: 63 TR</div>';
+      } else {
+        return '<div>Solo mode: All parameters</div>';
+      }
+    },
+    getExpansionIcons: function(gameOptions: GameOptions): string {
+      let expansionIcons = 'Expansion: ';
+      if (gameOptions.venusNextExtension) {
         expansionIcons += '<div class="create-game-expansion-icon expansion-icon-venus"></div>';
       }
-      if (this.game !== undefined && this.game.gameOptions.preludeExtension) {
+      if (gameOptions.preludeExtension) {
         expansionIcons += '<div class="create-game-expansion-icon expansion-icon-prelude"></div>';
       }
-      if (this.game !== undefined && this.game.gameOptions.coloniesExtension) {
+      if (gameOptions.coloniesExtension) {
         expansionIcons += '<div class="create-game-expansion-icon expansion-icon-colony"></div>';
       }
-      if (this.game !== undefined && this.game.gameOptions.turmoilExtension) {
+      if (gameOptions.turmoilExtension) {
         expansionIcons += '<div class="create-game-expansion-icon expansion-icon-turmoil"></div>';
       }
-      if (this.game !== undefined && this.game.gameOptions.promoCardsOption) {
+      if (gameOptions.promoCardsOption) {
         expansionIcons += '<div class="create-game-expansion-icon expansion-icon-promo"></div>';
       }
+      if (gameOptions.aresExtension) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-ares"></div>';
+      }
+      if (gameOptions.communityCardsOption) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-community"></div>';
+      }
+      if (gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD) {
+        expansionIcons += '<div class="create-game-expansion-icon expansion-icon-agendas"></div>';
+      }
       return expansionIcons;
+    },
+    getBoardDetail: function(gameOptions: GameOptions): string {
+      let boardDetail = 'Board: ';
+      if (gameOptions.boardName === BoardName.ORIGINAL) {
+        boardDetail += '<div class="create-game-board-hexagon create-game-tharsis">&#x2B22;</div>' + gameOptions.boardName;
+      } else if (gameOptions.boardName === BoardName.HELLAS) {
+        boardDetail += '<div class="create-game-board-hexagon create-game-hellas">&#x2B22;</div>' + gameOptions.boardName;
+      } else if (gameOptions.boardName === BoardName.ELYSIUM) {
+        boardDetail += '<div class="create-game-board-hexagon create-game-elysium">&#x2B22;</div>' + gameOptions.boardName;
+      } else {
+        boardDetail += gameOptions.boardName;
+      }
+      if (gameOptions.shuffleMapOption) {
+        boardDetail += ' (randomized tiles)';
+      }
+      return boardDetail;
+    },
+    getVenusDetail: function(gameOptions: GameOptions): string {
+      let venusDetail = '';
+      if (gameOptions.solarPhaseOption) {
+        venusDetail += '<div>WGT: On</div>';
+      } else {
+        venusDetail += '<div>WGT: Off</div>';
+      }
+      if (gameOptions.requiresVenusTrackCompletion) {
+        venusDetail += '<div>Require Terraforming Venus to end the game</div>';
+      }
+      return venusDetail;
+    },
+    getMilestonesAwardsDetail: function(gameOptions: GameOptions): string {
+      if (this.game !== undefined && this.game.players.length === 1) return '';
+      let MAtype = '';
+      if (gameOptions.randomMA === RandomMAOptionType.NONE) {
+        if (gameOptions.includeVenusMA) {
+          MAtype = 'Board-defined + Hoverlord & Venuphile';
+        } else {
+          MAtype = 'Board-defined';
+        }
+      } else if (gameOptions.randomMA === RandomMAOptionType.LIMITED) {
+        if (gameOptions.includeVenusMA) {
+          MAtype = 'Limited-synergy randomized (6 each)';
+        } else {
+          MAtype = 'Limited-synergy randomized (5 each)';
+        }
+      } else {
+        if (gameOptions.includeVenusMA) {
+          MAtype = 'Fully randomized (6 each)';
+        } else {
+          MAtype = 'Fully randomized (5 each)';
+        }
+      }
+      return `<div>Milestones and Awards: ${MAtype}</div>`;
+    },
+    getDraftDetail: function(gameOptions: GameOptions): string {
+      let draftType = '';
+      if (gameOptions.draftVariant && gameOptions.initialDraftVariant) {
+        draftType = 'Initial + Research phase';
+      } else if (gameOptions.draftVariant && !gameOptions.initialDraftVariant) {
+        draftType = 'Draft: Research phase only';
+      } else {
+        draftType = 'Off';
+      }
+      return `Draft: ${draftType}`;
+    },
+    getGameConfigs: function(gameOptions: GameOptions): string {
+      const configsDetail: Array<string> = [];
+      if (gameOptions.fastModeOption) {
+        configsDetail.push('fast mode');
+      }
+      if (gameOptions.showTimers) {
+        configsDetail.push('timer');
+      }
+      if (gameOptions.showOtherPlayersVP) {
+        configsDetail.push('real-time vp');
+      }
+      if (gameOptions.undoOption) {
+        configsDetail.push('undo');
+      }
+      return (configsDetail.length !== 0) ? 'Game configs: ' + configsDetail.join(', ') : '';
+    },
+    getBannedCards: function(gameOptions: GameOptions): string {
+      if (gameOptions.cardsBlackList.length === 0) {
+        return '';
+      } else {
+        return 'Banned cards: ' + gameOptions.cardsBlackList.join(', ');
+      }
     },
   },
   template: `
@@ -102,8 +210,17 @@ export const GameHome = Vue.component('game-home', {
           </li>
         </ul>
         <br>
-        <h2>Game settings</h2>
-        <div v-html="getExpansionIcons()"></div>
+        <div v-if="game !== undefined">
+          <h2>Game settings</h2>
+          <div v-html="getSoloDetail(game.gameOptions)"></div>
+          <div v-html="getExpansionIcons(game.gameOptions)"></div>
+          <div v-html="getBoardDetail(game.gameOptions)"></div>
+          <div v-html="getMilestonesAwardsDetail(game.gameOptions)"></div>
+          <div v-html="getVenusDetail(game.gameOptions)"></div>
+          <div v-html="getDraftDetail(game.gameOptions)"></div>
+          <div v-html="getGameConfigs(game.gameOptions)"></div>
+          <div v-html="getBannedCards(game.gameOptions)"></div>
+        </div>
       </div>
     `,
 });

@@ -93,10 +93,9 @@ export interface GameOptions {
   aresExtension: boolean;
   aresHazards: boolean;
   politicalAgendasExtension: AgendaStyle;
-  solarPhaseOption: boolean;
-  removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
   moonExpansion: boolean;
+  solarPhaseOption: boolean;
+  includeVenusMA: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -108,6 +107,7 @@ export interface GameOptions {
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  removeNegativeGlobalEventsOption: boolean;
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
 }
 

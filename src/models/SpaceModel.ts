@@ -3,11 +3,12 @@ import {Color} from '../Color';
 import {TileType} from '../TileType';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
+import {SpaceId} from '../boards/ISpace';
 
 export type SpaceHighlight = undefined | 'noctis' | 'volcanic';
 
 export interface SpaceModel {
-    id: string;
+    id: SpaceId;
     x: number;
     y: number;
     bonus: Array<SpaceBonus>;

@@ -43,6 +43,7 @@ export interface DebugUIModel {
   turmoil: boolean | unknown[],
   community: boolean | unknown[],
   ares: boolean | unknown[],
+  moon: boolean | unknown[],
   promo: boolean | unknown[],
 }
 export const DebugUI = Vue.component('debug-ui', {
@@ -62,6 +63,7 @@ export const DebugUI = Vue.component('debug-ui', {
       turmoil: true,
       community: true,
       ares: true,
+      moon: true,
       promo: true,
     } as DebugUIModel;
   },
@@ -77,6 +79,7 @@ export const DebugUI = Vue.component('debug-ui', {
       data.community = !data.community;
       data.promo = !data.promo;
       data.ares = !data.ares;
+      data.moon = !data.moon;
     },
     sort: function(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
@@ -140,6 +143,8 @@ export const DebugUI = Vue.component('debug-ui', {
         return this.community === true;
       case GameModule.Ares:
         return this.ares === true;
+      case GameModule.Moon:
+        return this.moon === true;
       default:
         return true;
       }
@@ -214,7 +219,14 @@ export const DebugUI = Vue.component('debug-ui', {
                   <div class="create-game-expansion-icon expansion-icon-community"></div>
                   <span v-i18n>Community</span>
               </label><span/>
+
+              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon"></input>
+              <label for="moon-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                <span v-i18n>The Moon (under development)</span>
+              </label><span/>
             </div>
+
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
                 <div class="cardbox" v-for="card in getAllProjectCards()">

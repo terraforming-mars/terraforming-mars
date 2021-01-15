@@ -27,13 +27,13 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
 
     public action(player: Player, game: Game) {
       if (this.resourceCount === 0) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN, 'Add 2 floaters to a Jovian card'));
+        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN, title: 'Add 2 floaters to a Jovian card'}));
         return undefined;
       }
 
       return new OrOptions(
         new SelectOption('Add 2 floaters to a Jovian card', 'Add floaters', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, 2, Tags.JOVIAN));
+          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
           return undefined;
         }),
         new SelectAmount(

@@ -30,7 +30,7 @@ describe('ProjectWorkshop', function() {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
-    card.initialAction(player, game);
+    card.initialAction(player);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });

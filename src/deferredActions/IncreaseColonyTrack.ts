@@ -27,7 +27,7 @@ export class IncreaseColonyTrack implements DeferredAction {
       options.options.push(
         new SelectOption('Increase colony track ' + step + ' step(s)', 'Confirm', () => {
           this.colony.increaseTrack(step);
-          LogHelper.logColonyTrackIncrease(this.game, this.player, this.colony, step);
+          LogHelper.logColonyTrackIncrease(this.player, this.colony, step);
           this.cb();
           return undefined;
         }),

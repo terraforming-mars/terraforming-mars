@@ -14,7 +14,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {LogHelper} from '../../LogHelper';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -23,6 +22,7 @@ export class MarsFirst extends Party implements IParty {
   policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
+// TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
   id = 'mb01';
   description = 'Gain 1 MC for each Building tag you have';
@@ -99,9 +99,7 @@ class MarsFirstPolicy04 implements Policy {
       {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
-          const card = game.drawCardsByTag(Tags.BUILDING, 1);
-          player.cardsInHand.push(...card);
-          LogHelper.logDrawnCards(game, player, card);
+          player.drawCard(1, {tag: Tags.BUILDING});
         },
       },
     ));

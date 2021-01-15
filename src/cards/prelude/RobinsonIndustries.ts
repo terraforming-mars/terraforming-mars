@@ -4,66 +4,67 @@ import {CorporationCard} from './../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RobinsonIndustries implements IActionCard, CorporationCard {
-    public name = CardName.ROBINSON_INDUSTRIES;
-    public tags = [];
-    public startingMegaCredits: number = 47;
-    public cardType = CardType.CORPORATION;
-    public play() {
-      return undefined;
-    }
+export class RobinsonIndustries extends Card implements IActionCard, CorporationCard {
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.ROBINSON_INDUSTRIES,
+      startingMegaCredits: 47,
 
-    public canAct(player: Player): boolean {
-      return player.canAfford(4);
-    }
+      metadata: {
+        cardNumber: 'R27',
+        description: 'You start with 47 MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br.br;
+          b.megacredits(47);
+          b.corpBox('action', (ce) => {
+            ce.action('Spend 4 MC to increase (one of) your LOWEST production 1 step.', (eb) => {
+              eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());
+            });
+          });
+        }),
+      },
+    });
+  }
+  public play() {
+    return undefined;
+  }
 
-    public action(player: Player, game: Game) {
-      let minimum = player.getProduction(Resources.MEGACREDITS);
-      let lowest: Array<SelectOption> = [];
+  public canAct(player: Player): boolean {
+    return player.canAfford(4);
+  }
 
-      [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
-        const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-          this.increaseAndLogProduction(game, player, resource);
-          return undefined;
-        });
+  public action(player: Player) {
+    let minimum = player.getProduction(Resources.MEGACREDITS);
+    let lowest: Array<SelectOption> = [];
 
-        if (player.getProduction(resource) < minimum) {
-          lowest = [];
-          minimum = player.getProduction(resource);
-        }
-
-        if (player.getProduction(resource) === minimum) lowest.push(option);
+    [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
+      const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
+        this.increaseAndLogProduction(player, resource);
+        return undefined;
       });
 
-      const result = new OrOptions();
-      result.options = lowest;
-      return result;
-    }
+      if (player.getProduction(resource) < minimum) {
+        lowest = [];
+        minimum = player.getProduction(resource);
+      }
+      if (player.getProduction(resource) === minimum) lowest.push(option);
+    });
 
-    private increaseAndLogProduction(game: Game, player: Player, resource: Resources) {
-      player.addProduction(resource);
-      player.megaCredits -= 4;
-      LogHelper.logGainProduction(game, player, resource);
-    }
+    const result = new OrOptions();
+    result.options = lowest;
+    return result;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: 'R27',
-      description: 'You start with 47 MC.',
-      renderData: CardRenderer.builder((b) => {
-        b.br.br.br;
-        b.megacredits(47);
-        b.corpBox('action', (ce) => {
-          ce.action('Spend 4 MC to increase (one of) your LOWEST production 1 step.', (eb) => {
-            eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());
-          });
-        });
-      }),
-    }
+  private increaseAndLogProduction(player: Player, resource: Resources) {
+    player.addProduction(resource);
+    player.megaCredits -= 4;
+    LogHelper.logGainProduction(player, resource);
+  }
 }

@@ -2,7 +2,6 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
@@ -36,10 +35,10 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     ]);
 
     public initialActionText: string = 'Draw 2 cards with a floater icon on it';
-    public initialAction(player: Player, game: Game) {
-      const cards = game.drawProjectCardsByCondition(2, (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+    public initialAction(player: Player) {
+      player.drawCard(2, {
+        include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER,
+      });
       return undefined;
     }
 
@@ -55,11 +54,11 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
       return Math.floor(this.resourceCount / 3);
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
         this.resourceCount++;
-        LogHelper.logAddResource(game, player, floaterCards[0]);
+        LogHelper.logAddResource(player, floaterCards[0]);
         return undefined;
       }
 
@@ -69,7 +68,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         floaterCards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(game, player, foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       );

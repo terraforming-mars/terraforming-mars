@@ -44,12 +44,12 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const cards = this.getResCards(player);
 
       if (cards.length === 1) {
         player.addResourceTo(cards[0], 2);
-        LogHelper.logAddResource(game, player, cards[0], 2);
+        LogHelper.logAddResource(player, cards[0], 2);
         return undefined;
       }
 
@@ -59,7 +59,7 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
         cards,
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 2);
-          LogHelper.logAddResource(game, player, foundCards[0], 2);
+          LogHelper.logAddResource(player, foundCards[0], 2);
           return undefined;
         },
       );

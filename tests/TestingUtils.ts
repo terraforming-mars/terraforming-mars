@@ -66,6 +66,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     customColoniesList: [],
     requiresVenusTrackCompletion: false,
     politicalAgendasExtension: AgendaStyle.STANDARD,
+    moonExpansion: false,
   };
 
   return Object.assign(defaultOptions, options);

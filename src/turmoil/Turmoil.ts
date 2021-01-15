@@ -298,9 +298,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Called either directly during generation change, or after asking chairperson player
     // to choose an agenda.
     public onAgendaSelected(game: Game): void {
-      // Resolve Ruling Bonus
       const rulingParty = this.rulingParty;
 
+      // Resolve Ruling Bonus
       const bonusId = this.politicalAgendasData.currentAgenda.bonusId;
       const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
       if (bonus === undefined) {
@@ -418,10 +418,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         distantGlobalEvent: this.distantGlobalEvent?.name,
         commingGlobalEvent: this.comingGlobalEvent,
         comingGlobalEvent: this.comingGlobalEvent?.name,
-        politicalAgendasData: {
-          currentAgenda: this.politicalAgendasData.currentAgenda,
-          staticAgendas: this.politicalAgendasData.staticAgendas === undefined ? undefined : Array.from(this.politicalAgendasData.staticAgendas.entries()),
-        },
+        politicalAgendasData: PoliticalAgendas.serialize(this.politicalAgendasData),
       };
       if (this.currentGlobalEvent !== undefined) {
         result.currentGlobalEvent = this.currentGlobalEvent;
@@ -461,17 +458,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve = d.delegate_reserve;
       }
 
-      if (d.politicalAgendasData.staticAgendas !== undefined) {
-        turmoil.politicalAgendasData = {
-          currentAgenda: d.politicalAgendasData.currentAgenda,
-          staticAgendas: new Map(d.politicalAgendasData.staticAgendas),
-        };
-      } else {
-        turmoil.politicalAgendasData = {
-          currentAgenda: d.politicalAgendasData.currentAgenda,
-          staticAgendas: undefined,
-        };
-      }
+      // TODO(kberg): remove this test by 2021-02-01
+      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData, turmoil);
 
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);

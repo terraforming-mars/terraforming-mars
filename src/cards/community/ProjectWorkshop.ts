@@ -28,11 +28,8 @@ export class ProjectWorkshop implements CorporationCard {
     }
 
     public initialActionText: string = 'Draw a blue card';
-    public initialAction(player: Player, game: Game) {
-      const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
-      player.cardsInHand.push(drawnCard);
-      this.logCardDraw(game, player, drawnCard);
-
+    public initialAction(player: Player) {
+      player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;
     }
 
@@ -51,8 +48,7 @@ export class ProjectWorkshop implements CorporationCard {
           if (activeCards.length === 1) {
             this.convertCardPointsToTR(player, game, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
-            player.drawCard(game, 2);
-
+            player.drawCard(2);
             return undefined;
           }
 
@@ -63,8 +59,7 @@ export class ProjectWorkshop implements CorporationCard {
                     (foundCards: Array<ICard>) => {
                       this.convertCardPointsToTR(player, game, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
-                      player.drawCard(game, 2);
-
+                      player.drawCard(2);
                       return undefined;
                     },
           );
@@ -73,11 +68,7 @@ export class ProjectWorkshop implements CorporationCard {
 
       const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
         player.megaCredits -= 3;
-        player.cardsInHand.push(game.drawCardsByType(CardType.ACTIVE, 1)[0]);
-
-        const drawnCard = game.getCardsInHandByType(player, CardType.ACTIVE).slice(-1)[0];
-        this.logCardDraw(game, player, drawnCard);
-
+        player.drawCard(1, {cardType: CardType.ACTIVE});
         return undefined;
       });
 
@@ -91,7 +82,7 @@ export class ProjectWorkshop implements CorporationCard {
       if (card.getVictoryPoints !== undefined) {
         const steps = card.getVictoryPoints(player, game);
         player.increaseTerraformRatingSteps(steps, game);
-        LogHelper.logTRIncrease(game, player, steps);
+        LogHelper.logTRIncrease(player, steps);
       }
     }
 
@@ -105,10 +96,6 @@ export class ProjectWorkshop implements CorporationCard {
       }
 
       game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
-    }
-
-    private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
     }
 
     public metadata: CardMetadata = {

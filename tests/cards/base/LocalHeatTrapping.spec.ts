@@ -26,7 +26,7 @@ describe('LocalHeatTrapping', function() {
     player.heat = 5;
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     player.playedCards.push(card);
     expect(player.plants).to.eq(4);
     expect(player.heat).to.eq(0);
@@ -37,7 +37,7 @@ describe('LocalHeatTrapping', function() {
     const pets = new Pets();
     player.playedCards.push(card, pets);
 
-    const orOptions = card.play(player, game) as OrOptions;
+    const orOptions = card.play(player) as OrOptions;
     expect(orOptions).is.not.undefined;
     expect(orOptions instanceof OrOptions).is.true;
 
@@ -55,7 +55,7 @@ describe('LocalHeatTrapping', function() {
     const fish = new Fish();
     player.playedCards.push(card, pets, fish);
 
-    const orOptions = card.play(player, game) as OrOptions;
+    const orOptions = card.play(player) as OrOptions;
     expect(player.heat).to.eq(0);
     orOptions.options[1].cb([fish]);
     expect(player.getResourcesOnCard(fish)).to.eq(2);

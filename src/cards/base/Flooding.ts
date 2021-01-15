@@ -50,17 +50,23 @@ export class Flooding extends Card implements IProjectCard {
       game.defer(new PlaceOceanTile(player, game));
       return undefined;
     }
+
+    const oceansMaxedBeforePlacement = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    if (oceansMaxedBeforePlacement === true) return undefined;
+
     return new SelectSpace(
       'Select space for ocean tile',
       game.board.getAvailableSpacesForOcean(player),
       (space: ISpace) => {
         const adjacentPlayers: Set<Player> = new Set<Player>();
         game.addOceanTile(player, space.id);
+
         game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
             adjacentPlayers.add(space.player);
           }
         });
+
         if (adjacentPlayers.size > 0) {
           return new OrOptions(
             new SelectPlayer(

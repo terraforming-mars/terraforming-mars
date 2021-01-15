@@ -19,7 +19,7 @@ describe('GeologicalSurvey', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    game.board = new EmptyBoard();
+    game.board = EmptyBoard.newInstance();
   });
 
   it('Can play', function() {

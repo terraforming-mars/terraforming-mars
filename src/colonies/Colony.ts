@@ -145,11 +145,11 @@ export abstract class Colony implements SerializedColony {
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
         const resourceType = this.resourceType!;
-        action = new AddResourcesToCard(player, game, resourceType, {count: quantity});
+        action = new AddResourcesToCard(player, resourceType, {count: quantity});
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-        action = new AddResourcesToCard(player, game, undefined, {count: quantity, restrictedTag: Tags.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
+        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tags.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
         break;
 
       case ColonyBenefit.COPY_TRADE:

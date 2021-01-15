@@ -52,7 +52,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
-import {IProductionUnits} from './inputs/IProductionUnits';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
@@ -61,6 +60,7 @@ import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
+import {Units} from './Units';
 
 export type PlayerId = string;
 
@@ -389,6 +389,27 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.resolveMonsInsurance(game);
     }
   };
+
+  public setProductionForTest(units: Partial<Units>) {
+    if (units.megacredits !== undefined) {
+      this.megaCreditProduction = units.megacredits;
+    }
+    if (units.steel !== undefined) {
+      this.steelProduction = units.steel;
+    }
+    if (units.titanium !== undefined) {
+      this.titaniumProduction = units.titanium;
+    }
+    if (units.plants !== undefined) {
+      this.plantProduction = units.plants;
+    }
+    if (units.energy !== undefined) {
+      this.energyProduction = units.energy;
+    }
+    if (units.heat !== undefined) {
+      this.heatProduction = units.heat;
+    }
+  }
 
   public getActionsThisGeneration(): Set<CardName> {
     return this.actionsThisGeneration;
@@ -874,7 +895,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.runInputCb(game, pi.cb(howToPay));
     } else if (pi instanceof SelectProductionToLose) {
       // TODO(kberg): I'm sure there's some input validation required.
-      const units: IProductionUnits = JSON.parse(input[0][0]);
+      const units: Units = JSON.parse(input[0][0]);
       pi.cb(units);
     } else if (pi instanceof ShiftAresGlobalParameters) {
       // TODO(kberg): I'm sure there's some input validation required.

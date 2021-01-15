@@ -61,7 +61,6 @@ import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
-import {ActiveCardsSortingOrder} from './ActiveCardsSortingOrder';
 
 export type PlayerId = string;
 
@@ -906,9 +905,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    return result.sort(function(cardA, cardB) {
-      return (ActiveCardsSortingOrder.get(cardA.name) || -1) - (ActiveCardsSortingOrder.get(cardB.name) || -1);
-    });
+    return result;
   }
 
   public runProductionPhase(): void {
@@ -1320,7 +1317,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
         this.actionsThisGeneration.add(foundCard.name);
         return undefined;
-      },
+      }, 1, 1, true,
     );
   }
 

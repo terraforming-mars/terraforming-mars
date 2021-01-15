@@ -13,6 +13,7 @@ export class SelectCard<T> implements PlayerInput {
         public cb: (cards: Array<T>) => PlayerInput | undefined,
         public maxCardsToSelect: number = 1,
         public minCardsToSelect: number = 1,
+        public isBlueAction: boolean = false,
     ) {
       this.buttonLabel = buttonLabel;
     }

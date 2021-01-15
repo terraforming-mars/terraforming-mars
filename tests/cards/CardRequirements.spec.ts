@@ -209,4 +209,16 @@ describe('CardRequirements', function() {
 
     expect(requirements.satisfies(player)).eq(true);
   });
+
+  it('throws errors when out of range', function() {
+    expect(() => CardRequirements.builder((b) => b.temperature(-32))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.temperature(10))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.temperature(-5))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oxygen(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oxygen(15))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oceans(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oceans(10))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.venus(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.venus(31))).to.throw();
+  });
 });

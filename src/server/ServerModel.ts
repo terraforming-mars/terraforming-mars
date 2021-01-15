@@ -37,6 +37,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {GameOptionsModel} from '../models/GameOptionsModel';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -65,13 +66,13 @@ export class Server {
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
+      gameOptions: game.gameOptions as GameOptionsModel,
       generation: game.getGeneration(),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
-      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
@@ -85,7 +86,6 @@ export class Server {
       coloniesCount: player.getColoniesCount(game),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
-      coloniesExtension: game.gameOptions.coloniesExtension,
       players: getPlayers(game.getPlayers(), game),
       spaces: getSpaces(game.board),
       steel: player.steel,
@@ -101,15 +101,9 @@ export class Server {
       isSoloModeWin: game.isSoloModeWin(),
       gameAge: game.gameAge,
       isActive: player.id === game.activePlayer,
-      corporateEra: game.gameOptions.corporateEra,
-      venusNextExtension: game.gameOptions.venusNextExtension,
-      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
       tags: player.getAllTags(),
-      showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
-      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
@@ -118,16 +112,11 @@ export class Server {
       dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
       dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
       dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
-      initialDraft: game.gameOptions.initialDraftVariant,
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
-      randomMA: game.gameOptions.randomMA,
       actionsTakenThisRound: player.actionsTakenThisRound,
       passedPlayers: game.getPassedPlayers(),
-      aresExtension: game.gameOptions.aresExtension,
       aresData: game.aresData,
-      preludeExtension: game.gameOptions.preludeExtension,
-      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     };
   }
@@ -366,6 +355,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   return players.map((player) => {
     return {
       color: player.color,
+      gameOptions: {} as GameOptionsModel,
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
@@ -384,7 +374,6 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesCount: player.getColoniesCount(game),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
-      coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(game),
@@ -394,15 +383,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumValue: player.getTitaniumValue(game),
       victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer,
-      venusNextExtension: game.gameOptions.venusNextExtension,
-      moonExpansion: game.gameOptions.moonExpansion,
-      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
       tags: player.getAllTags(),
-      showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
-      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(
         player.getActionsThisGeneration(),
       ),
@@ -415,8 +398,6 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
-      preludeExtension: game.gameOptions.preludeExtension,
-      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     } as PlayerModel;
   });

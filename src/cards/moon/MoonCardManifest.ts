@@ -57,7 +57,7 @@ import {CardManifest} from '../CardManifest';
 import {MareImbriumMine} from './MareImbriumMine';
 import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
-// import {MareSerenitatisMine} from './MareSerenitatisMine';
+import {MareSerenitatisMine} from './MareSerenitatisMine';
 // import {MicrosingularityPlant} from './MicrosingularityPlant';
 // import {MiningComplex} from './MiningComplex';
 // import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
@@ -101,10 +101,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   projectCards: [
     // These cards are done.
     {cardName: CardName.MARE_NECTARIS_MINE, Factory: MareNectarisMine},
-    //   // These cards have behavior and rendering.
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
-    // {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
+    {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
+    //   // These cards have behavior and rendering.
     //   {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
     //   {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},

@@ -385,7 +385,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       player.addProduction(Resources.HEAT, units.heat);
 
       game.log('${0} copied ${1} production with ${2}', (b) =>
-        b.player(player).cardName(result.name).card(this));
+        b.player(player).card(foundCard).card(this));
 
       return undefined;
     });

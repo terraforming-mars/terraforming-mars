@@ -180,7 +180,6 @@
     "Help Translation": "帮助翻译",
     
     
-    "_comment": "This is translated by ltdstudio below",
 
     "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "介绍：请点击名字右方的复制按钮以复制链接发送给相应玩家，然后你自己点击自己名字来开始游戏",
     "Save this page in case you or one of your opponents loses a link.": "请保存此页面如果你或者其他玩家丢失链接或者更换设备，您可以再次发送给他们",
@@ -201,7 +200,7 @@
      "Select space for tile": "为板块选择放置地点",
      "Select card to take into hand": "选择卡牌将牌拿到手里",
      "Send a delegate in an area (5 MC)": "派出额外代表到某个区域（花费5MC）",
-     "Pay 10 MC to draw 3 cards (Turmoil Scientists)": "花费10MC摸三张牌(T党当政)",
+     "Pay 10 MC to draw 3 cards (Turmoil Scientists)": "花费10MC摸三张牌(科学家党)",
      "Select card to keep or none to discard": "点击卡牌选择保留或者不选丢弃",
      "Select a space with a steel or titanium bonus": "选择一个钢铁奖励或者钛奖励的地块",
      "Select card to add 1 floater": "选择一张卡牌增加 1 云豆",
@@ -209,7 +208,7 @@
      "Add 1 floater to this card": "在这张卡增加1云豆",
      "Remove 2 floaters to raise Venus scale 1 step": "移除 2 云豆来增加1金星改造度",
      "Show timers": "显示计时器",
-     "You cannot pay for this card": "你不需要为此牌支付费用",
+     "You cannot pay for this card": "你不能为此牌支付",
      "Select card(s) to buy":"选择你需要购买的牌",
      
     "(Spend 11 MC to increase your Energy production 1 step.)": "花费11MC来增加你的电力产能1格",

@@ -29,7 +29,7 @@ export class SpaceHotels extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getTagCount(Tags.EARTH) >= 2;
   }
 

@@ -39,17 +39,16 @@ export class Atmoscoop extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const meetsTagRequirements = super.canPlay(player);
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, game, false, true) && meetsTagRequirements;
+      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
     }
 
-    return meetsTagRequirements;
+    return true;
   }
 
   public play(player: Player, game: Game) {

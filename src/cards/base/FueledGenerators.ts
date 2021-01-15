@@ -31,7 +31,7 @@ export class FueledGenerators extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -4;
   }
   public play(player: Player) {

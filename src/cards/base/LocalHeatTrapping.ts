@@ -32,7 +32,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const requiredHeatAmt = 5;
 
     // Helion must be able to pay for both the card and its effect

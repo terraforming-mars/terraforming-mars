@@ -27,12 +27,11 @@ export class Moss extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    const meetsOceanRequirements = super.canPlay(player);
+  protected canPlayAdditionalChecks(player: Player): boolean {
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
 
-    return meetsOceanRequirements && hasEnoughPlants;
+    return hasEnoughPlants;
   }
   public play(player: Player) {
     player.plants--;

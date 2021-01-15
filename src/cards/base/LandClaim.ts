@@ -26,7 +26,7 @@ export class LandClaim extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(_player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(_player: Player, game: Game): boolean {
     return game.board.getNonReservedLandSpaces().length > 0;
   }
   public play(player: Player, game: Game) {

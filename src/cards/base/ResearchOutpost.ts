@@ -38,7 +38,7 @@ export class ResearchOutpost extends Card implements IProjectCard {
         return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
       });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return this.getAvailableSpaces(player, game).length > 0;
   }
   public getCardDiscount() {

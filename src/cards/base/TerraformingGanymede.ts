@@ -30,7 +30,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

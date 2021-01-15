@@ -36,8 +36,8 @@ export class Shuttles extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
+  protected canPlayAdditionalChecks(player: Player): boolean {
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
     if (card.tags.indexOf(Tags.SPACE) !== -1) {

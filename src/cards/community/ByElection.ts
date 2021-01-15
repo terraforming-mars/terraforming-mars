@@ -28,7 +28,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay(_player: Player, game: Game) {
+  protected canPlayAdditionalChecks(_player: Player, game: Game) {
     return game.turmoil !== undefined;
   }
   public play(player: Player, game: Game) {

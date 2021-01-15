@@ -33,7 +33,7 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 

@@ -36,7 +36,7 @@ export class NoctisCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     if (game.gameOptions.boardName === BoardName.ORIGINAL) {
       return player.getProduction(Resources.ENERGY) >= 1;
     } else {

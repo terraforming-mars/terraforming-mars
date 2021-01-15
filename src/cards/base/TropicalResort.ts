@@ -31,7 +31,7 @@ export class TropicalResort extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.HEAT) >= 2;
   }
   public play(player: Player) {

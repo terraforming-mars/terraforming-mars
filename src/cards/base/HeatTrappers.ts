@@ -32,7 +32,7 @@ export class HeatTrappers extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(_player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(_player: Player, game: Game): boolean {
     return game.someoneHasResourceProduction(Resources.HEAT, 2);
   }
 

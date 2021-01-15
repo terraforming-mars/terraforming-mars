@@ -31,7 +31,7 @@ export class FoodFactory extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.PLANTS) >= 1;
   }
   public play(player: Player) {

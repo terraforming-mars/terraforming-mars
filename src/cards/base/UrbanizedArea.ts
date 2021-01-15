@@ -38,7 +38,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
     return game.board.getAvailableSpacesOnLand(player)
       .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 && this.getAvailableSpaces(player, game).length > 0;
   }
   public play(player: Player, game: Game) {

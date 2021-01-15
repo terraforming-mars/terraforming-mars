@@ -59,7 +59,7 @@ export class LavaFlows extends Card implements IProjectCard {
         .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
     }
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const canPlaceTile = LavaFlows.getVolcanicSpaces(player, game).length > 0;
     const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);

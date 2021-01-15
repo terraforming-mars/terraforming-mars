@@ -35,7 +35,7 @@ export class StripMine extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
     const remainingOxygenSteps = MAX_OXYGEN_LEVEL - game.getOxygenLevel();
     const stepsRaised = Math.min(remainingOxygenSteps, 2);

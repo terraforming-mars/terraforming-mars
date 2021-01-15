@@ -28,7 +28,7 @@ export class FusionPower extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getTagCount(Tags.ENERGY) >= 2;
   }
   public play(player: Player) {

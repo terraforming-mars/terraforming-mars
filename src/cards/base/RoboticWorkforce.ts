@@ -32,7 +32,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return this.getAvailableCards(player, game).length > 0;
   }
   private miningSteelProduction: number = 0;

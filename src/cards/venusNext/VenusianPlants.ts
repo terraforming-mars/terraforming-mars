@@ -40,15 +40,14 @@ export class VenusianPlants extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const meetsVenusRequirements = super.canPlay(player);
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, false, true, true) && meetsVenusRequirements;
+      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, false, true, true);
     }
 
-    return meetsVenusRequirements;
+    return true;
   }
 
   public play(player: Player, game: Game) {

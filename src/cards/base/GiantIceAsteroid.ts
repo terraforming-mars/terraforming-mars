@@ -33,7 +33,7 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();
     const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2) + Math.min(remainingOceans, 2);

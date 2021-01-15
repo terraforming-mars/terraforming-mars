@@ -20,7 +20,7 @@ export class Loan extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -3;
   }
   public play(player: Player) {

@@ -45,7 +45,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     return LavaFlows.getVolcanicSpaces(player, game);
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return this.getSpacesForCity(player, game).length > 0 && player.getProduction(Resources.ENERGY) >= 1;
   }
 

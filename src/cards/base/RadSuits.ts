@@ -26,7 +26,7 @@ export class RadSuits extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(_player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(_player: Player, game: Game): boolean {
     return game.getCitiesInPlay() >= 2;
   }
   public play(player: Player, game: Game) {

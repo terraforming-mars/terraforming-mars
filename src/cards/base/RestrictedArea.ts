@@ -39,7 +39,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       metadata,
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public play(player: Player, game: Game) {

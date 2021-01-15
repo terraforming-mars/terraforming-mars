@@ -28,7 +28,7 @@ export class IceAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();
     const oceansPlaced = Math.min(remainingOceans, 2);
 

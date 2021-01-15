@@ -29,7 +29,7 @@ export class WavePower extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
   }
   public play(player: Player) {

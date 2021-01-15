@@ -41,8 +41,8 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
     });
   }
     public resourceCount = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    protected canPlayAdditionalChecks(player: Player): boolean {
+      return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 2);

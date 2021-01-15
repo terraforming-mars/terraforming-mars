@@ -34,7 +34,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     let steps = 2;
     if (game.getTemperature() < MAX_TEMPERATURE) steps++;
 

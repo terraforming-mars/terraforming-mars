@@ -28,7 +28,7 @@ export class Worms extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
   }
   public play(player: Player) {

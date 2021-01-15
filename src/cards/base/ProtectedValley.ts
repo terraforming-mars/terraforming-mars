@@ -37,7 +37,7 @@ export class ProtectedValley extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {

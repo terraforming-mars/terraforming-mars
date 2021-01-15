@@ -29,7 +29,7 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -4;
   }
   public play(player: Player) {

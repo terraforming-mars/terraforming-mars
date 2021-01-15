@@ -33,8 +33,8 @@ export class BiomassCombustors extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+  protected canPlayAdditionalChecks(player: Player): boolean {
+    return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public play(player: Player, game: Game) {

@@ -23,7 +23,7 @@ export class BusinessEmpire extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player, _game: Game) {
+  protected canPlayAdditionalChecks(player: Player, _game: Game) {
     if (player.isCorporation(CardName.MANUTECH)) return true;
     return player.canAfford(6);
   }

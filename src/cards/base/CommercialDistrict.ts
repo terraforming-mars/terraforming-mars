@@ -46,7 +46,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
   }
   // public adjacencyBonus?: IAdjacencyBonus = undefined;
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 &&
       game.board.getAvailableSpacesOnLand(player).length > 0;
   }

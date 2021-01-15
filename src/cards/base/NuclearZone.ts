@@ -39,7 +39,7 @@ export class NuclearZone extends Card implements IProjectCard {
       metadata,
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
     const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);

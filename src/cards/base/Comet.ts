@@ -32,7 +32,7 @@ export class Comet extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
     const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
     const totalSteps = temperatureStep + oceanStep;

@@ -23,7 +23,7 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getCardsWithResources().length > 0;
   }
 

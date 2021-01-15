@@ -30,7 +30,7 @@ export class GHGFactories extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  protected canPlayAdditionalChecks(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {

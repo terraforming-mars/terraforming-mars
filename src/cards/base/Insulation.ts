@@ -28,7 +28,7 @@ export class Insulation extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  protected canPlayAdditionalChecks(player: Player) {
     return player.getProduction(Resources.HEAT) >= 1;
   }
 

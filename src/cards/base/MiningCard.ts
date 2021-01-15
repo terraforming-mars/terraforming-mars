@@ -30,7 +30,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     });
   }
     public bonusResource: Resources | undefined = undefined;
-    public canPlay(player: Player, game: Game): boolean {
+    protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
       return this.getAvailableSpaces(player, game).length > 0;
     }
     private isAres(): boolean {

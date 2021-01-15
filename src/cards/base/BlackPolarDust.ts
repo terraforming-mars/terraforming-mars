@@ -31,7 +31,7 @@ export class BlackPolarDust extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const meetsMcProdRequirement = player.getProduction(Resources.MEGACREDITS) >= -3;
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 

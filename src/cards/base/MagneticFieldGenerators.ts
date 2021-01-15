@@ -36,7 +36,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

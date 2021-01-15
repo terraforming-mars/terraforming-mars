@@ -91,20 +91,22 @@ export class CardRequirement {
     switch (this.type) {
     case RequirementType.CHAIRMAN:
       return player.game.turmoil?.chairman === player.id;
+
     case RequirementType.CITIES:
       if (this._isAny) {
         return this.satisfiesInequality(player.game.getCitiesInPlay());
       } else {
         return this.satisfiesInequality(player.getCitiesCount(player.game));
       }
+
     case RequirementType.COLONIES:
-      let coloniesCount: number = 0;
-      player.game.colonies.forEach((colony) => {
-        coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
-      });
+      const coloniesCount = player.game.colonies.map((colony) => colony.colonies.filter((owner) => owner === player.id).length)
+        .reduce((sum, colonyCount) => sum + colonyCount);
       return this.satisfiesInequality(coloniesCount);
+
     case RequirementType.FLOATERS:
       return this.satisfiesInequality(player.getResourceCount(ResourceType.FLOATER));
+
     case RequirementType.GREENERIES:
       const greeneries = player.game.board.spaces.filter(
         (space) => space.tile !== undefined &&
@@ -112,29 +114,38 @@ export class CardRequirement {
             (space.player === player || this._isAny),
       ).length;
       return this.satisfiesInequality(greeneries);
+
     case RequirementType.PARTY_LEADERS:
       if (player.game.turmoil !== undefined) {
         const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id).length;
         return this.satisfiesInequality(parties);
       }
       return false;
+
     case RequirementType.OCEANS:
       return player.game.checkRequirements(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+
     case RequirementType.OXYGEN:
       return player.game.checkRequirements(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+
     case RequirementType.TEMPERATURE:
       return player.game.checkRequirements(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+
     case RequirementType.VENUS:
       return player.game.checkRequirements(player, GlobalParameter.VENUS, this.amount, this.isMax);
+
     case RequirementType.TR:
       return this.satisfiesInequality(player.getTerraformRating());
+
     case RequirementType.REMOVED_PLANTS:
       return player.game.someoneHasRemovedOtherPlayersPlants;
+
     case RequirementType.RESOURCE_TYPES:
       const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
         .filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
       return this.satisfiesInequality(standardResources + nonStandardResources);
+
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:

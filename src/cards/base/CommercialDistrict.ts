@@ -14,6 +14,7 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Units} from '../../Units';
 
 export class CommercialDistrict extends Card implements IProjectCard {
   constructor(
@@ -39,7 +40,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
       cost: 16,
       hasRequirements: false,
       adjacencyBonus,
-
+      productionDelta: Units.of({energy: -1, megacredits: 4}),
       metadata,
     });
   }

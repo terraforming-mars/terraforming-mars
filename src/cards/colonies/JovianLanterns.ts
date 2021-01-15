@@ -62,7 +62,7 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
           eb.titanium(1).startAction.floaters(2);
         }).br;
         b.tr(1).floaters(2).asterix().br;
-        b.vpText('1VP per 2 floaters.');
+        b.vpText('1 VP per 2 floaters here.');
       }),
       description: {
         text: 'Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.',

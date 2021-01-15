@@ -13,13 +13,13 @@ export class CommercialDistrictAres extends CommercialDistrict {
       {bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]},
       {
         cardNumber: 'A06',
-        description: 'Decrease your energy production 1 step and increase your MC production 4 steps.',
+        description: 'Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your MC production 4 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(4).br;
           }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;
-          b.vpText('Place this tile which grants an ADJACENCY BONUS of 2MC. 1 vp per adjacent city');
+          b.vpText('1 VP per adjacent city tile.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
       });

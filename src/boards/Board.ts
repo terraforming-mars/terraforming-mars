@@ -217,10 +217,7 @@ export abstract class Board {
   }
 
   public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
-    // TODO(kberg): Remove Player by 2021-01-15
-    const playerSpace : PlayerId | Player | undefined = serialized.player;
-    const playerId: PlayerId | undefined =
-        (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
+    const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space = {
       id: serialized.id,

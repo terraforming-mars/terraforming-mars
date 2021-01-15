@@ -90,10 +90,7 @@ export class CardRequirement {
   public satisfies(player: Player): boolean {
     switch (this.type) {
     case RequirementType.CHAIRMAN:
-      if (player.game.turmoil !== undefined) {
-        return player.game.turmoil.chairman === player.id;
-      }
-      return false;
+      return player.game.turmoil?.chairman === player.id;
     case RequirementType.CITIES:
       if (this._isAny) {
         return this.satisfiesInequality(player.game.getCitiesInPlay());
@@ -135,8 +132,8 @@ export class CardRequirement {
       return player.game.someoneHasRemovedOtherPlayersPlants;
     case RequirementType.RESOURCE_TYPES:
       const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
-        .map((res) => player.getResource(res)).filter((count) => count > 0).length;
-      const nonStandardResources = player.getCardsWithResources().map((card) => card.resourceType).filter((v, i, a) => a.indexOf(v) === i).length;
+        .filter((res) => player.getResource(res) > 0).length;
+      const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
       return this.satisfiesInequality(standardResources + nonStandardResources);
     case RequirementType.TAG:
     case RequirementType.PARTY:

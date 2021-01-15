@@ -13,7 +13,7 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
-  constructor(public spaces: Array<ISpace>) {
+  protected constructor(public spaces: Array<ISpace>) {
     spaces.forEach((space) => {
       this.maxX = Math.max(this.maxX, space.x);
       this.maxY = Math.max(this.maxY, space.y);

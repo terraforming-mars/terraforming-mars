@@ -72,6 +72,8 @@ export class Server {
       id: player.id,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      moon: MoonModel.serialize(game),
+      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
@@ -129,8 +131,6 @@ export class Server {
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
-      moonExpansion: game.gameOptions.moonExpansion,
-      moon: MoonModel.serialize(game),
     };
   }
 }
@@ -379,6 +379,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       id: game.phase === Phase.END ? player.id : player.color,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
@@ -422,7 +423,6 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       preludeExtension: game.gameOptions.preludeExtension,
       politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
-      moonExpansion: game.gameOptions.moonExpansion,
     } as PlayerModel;
   });
 }

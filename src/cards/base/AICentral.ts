@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -16,6 +17,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       name: CardName.AI_CENTRAL,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 21,
+      productionDelta: Units.of({energy: -1}),
 
       metadata: {
         description: {

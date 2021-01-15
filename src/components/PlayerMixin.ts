@@ -10,7 +10,6 @@ export const PlayerMixin = {
   'name': 'PlayerMixin',
   'methods': {
     sortActiveCards: function(inCards: Array<CardModel>): Array<CardModel> {
-      console.log('sortActiveCards called.');
       return inCards.sort(function(cardA, cardB) {
         return (ActiveCardsSortingOrder.get(cardA.name as CardName) || 0) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || 0);
       });

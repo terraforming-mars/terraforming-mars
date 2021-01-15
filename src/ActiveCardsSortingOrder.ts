@@ -160,7 +160,4 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.ADVANCED_ALLOYS,
   CardName.REGO_PLASTICS,
   CardName.MERCURIAN_ALLOYS,
-].reduce((acc: Array<[CardName, number]>, card, index) => {
-  acc.push([card, index]);
-  return acc;
-}, []));
+].map((card, index) => [card, index]));

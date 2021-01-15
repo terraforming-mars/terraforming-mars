@@ -21,6 +21,7 @@ export class PreferencesManager {
       'hide_log',
       'lang',
       'enable_sounds',
+      'smooth_scrolling',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();

@@ -1,21 +1,17 @@
-import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonRoadTile implements DeferredAction {
+export class PlaceMoonMineTile implements DeferredAction {
   constructor(
     public player: Player,
-    public title: string = 'Select a space on the Moon for a road tile.',
-    public spaces?: Array<ISpace>,
+    public title: string = 'Select a space on the Moon for a mining tile.',
   ) {}
 
   public execute() {
     const moonData = MoonExpansion.moonData(this.player.game);
-    const spaces = this.spaces !== undefined ?
-      this.spaces:
-      moonData.moon.getAvailableSpacesOnLand(this.player);
+    const spaces = moonData.moon.getAvailableSpacesForMine(this.player);
 
     if (spaces.length === 0) {
       return undefined;
@@ -24,8 +20,8 @@ export class PlaceMoonRoadTile implements DeferredAction {
       this.title,
       spaces,
       (space) => {
-        MoonExpansion.addRoadTile(this.player, space.id);
-        MoonExpansion.raiseLogisticRate(this.player);
+        MoonExpansion.addMineTile(this.player, space.id);
+        MoonExpansion.raiseMiningRate(this.player);
         return undefined;
       });
   }

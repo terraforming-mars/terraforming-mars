@@ -134,7 +134,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
-  showTimers: false,
+  showTimers: true,
   shuffleMapOption: false,
   solarPhaseOption: false,
   soloTR: false,

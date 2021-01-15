@@ -118,7 +118,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
       undoOption: false,
-      showTimers: false,
+      showTimers: true,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,

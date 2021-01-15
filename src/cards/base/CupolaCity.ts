@@ -11,6 +11,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class CupolaCity extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class CupolaCity extends Card implements IProjectCard {
       name: CardName.CUPOLA_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 16,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '029',

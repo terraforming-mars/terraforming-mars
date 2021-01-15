@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class NoctisFarming extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class NoctisFarming extends Card implements IProjectCard {
       name: CardName.NOCTIS_FARMING,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 10,
+      productionDelta: Units.of({megacredits: 1}),
 
       metadata: {
         cardNumber: '176',

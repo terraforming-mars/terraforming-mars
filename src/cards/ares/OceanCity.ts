@@ -11,6 +11,7 @@ import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class OceanCity extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class OceanCity extends Card implements IProjectCard {
       name: CardName.OCEAN_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: 'A20',

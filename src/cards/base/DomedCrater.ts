@@ -11,6 +11,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class DomedCrater extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class DomedCrater extends Card implements IProjectCard {
       name: CardName.DOMED_CRATER,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 24,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: 'T03',

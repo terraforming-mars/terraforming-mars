@@ -10,6 +10,7 @@ import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class StripMine extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class StripMine extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 25,
       hasRequirements: false,
+      productionDelta: Units.of({energy: -2, steel: 2, titanium: 1}),
 
       metadata: {
         cardNumber: '138',

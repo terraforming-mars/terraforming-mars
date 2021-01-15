@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MiningGuild extends Card implements CorporationCard {
   constructor() {
@@ -16,6 +17,7 @@ export class MiningGuild extends Card implements CorporationCard {
       name: CardName.MINING_GUILD,
       tags: [Tags.BUILDING, Tags.BUILDING],
       startingMegaCredits: 30,
+      productionDelta: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R24',

@@ -13,6 +13,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
   constructor() {
@@ -21,6 +22,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
+      productionDelta: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '026',

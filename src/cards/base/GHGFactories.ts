@@ -6,6 +6,7 @@ import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class GHGFactories extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class GHGFactories extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 11,
       hasRequirements: false,
+      productionDelta: Units.of({energy: -1, heat: 4}),
 
       metadata: {
         cardNumber: '126',

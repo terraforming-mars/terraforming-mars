@@ -17,6 +17,7 @@ export class MareNectarisMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 14,
+      productionDelta: Units.of({steel: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',

@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class CloudSeeding extends Card implements IProjectCard {
   constructor() {
@@ -29,9 +28,9 @@ export class CloudSeeding extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player, game: Game): boolean {
-    return player.getProduction(Resources.MEGACREDITS) > -5 &&
-        game.checkMinRequirements(player, GlobalParameter.OCEANS, 3) &&
-        game.someoneHasResourceProduction(Resources.HEAT, 1);
+    return super.canPlay(player) &&
+      player.getProduction(Resources.MEGACREDITS) > -5 &&
+      game.someoneHasResourceProduction(Resources.HEAT, 1);
   }
 
   public play(player: Player, game: Game) {

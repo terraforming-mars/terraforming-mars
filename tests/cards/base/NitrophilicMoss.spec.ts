@@ -20,19 +20,19 @@ describe('NitrophilicMoss', function() {
   it('Can\'t play without enough oceans', function() {
     maxOutOceans(player, game, 2);
     player.plants = 2;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if not enough plants', function() {
     maxOutOceans(player, game, 3);
     player.plants = 1;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, game, 3);
     player.plants = 2;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(0);
@@ -46,7 +46,7 @@ describe('NitrophilicMoss', function() {
     maxOutOceans(player, game, 3);
     player.plants = 1;
 
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     expect(player.plants).to.eq(-1);
@@ -58,6 +58,6 @@ describe('NitrophilicMoss', function() {
   it('Should play', function() {
     maxOutOceans(player, game, 3);
     player.corporationCard = new Manutech();
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

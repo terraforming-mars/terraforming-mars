@@ -14,7 +14,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 
 export class GHGProducingBacteria extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -44,9 +43,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
   }
 
     public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
-    }
+
     public play() {
       return undefined;
     }

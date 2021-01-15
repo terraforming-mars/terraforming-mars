@@ -564,9 +564,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
   }
 
-  private playCorporationCard(
-    player: Player, corporationCard: CorporationCard,
-  ): void {
+  private playCorporationCard(player: Player, corporationCard: CorporationCard): void {
     player.corporationCard = corporationCard;
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {

@@ -17,13 +17,13 @@ describe('ElectroCatapult', function() {
   });
 
   it('Can\'t play without energy production', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if oxygen level too high', function() {
     player.addProduction(Resources.ENERGY);
     (game as any).oxygenLevel = 9;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {

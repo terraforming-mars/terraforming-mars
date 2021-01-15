@@ -13,7 +13,6 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
@@ -42,7 +41,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       .filter((space) => game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined) === false);
   }
   public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4) && this.getAvailableSpaces(player, game).length > 0;
+    return super.canPlay(player) && this.getAvailableSpaces(player, game).length > 0;
   }
   public play(player: Player, game: Game) {
     return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {

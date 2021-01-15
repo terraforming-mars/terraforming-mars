@@ -10,7 +10,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class IceCapMelting extends Card implements IProjectCard {
   constructor() {
@@ -28,7 +27,7 @@ export class IceCapMelting extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 2);
+    const meetsTemperatureRequirements = super.canPlay(player);
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {

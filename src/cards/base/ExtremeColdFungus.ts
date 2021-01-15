@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -14,7 +13,6 @@ import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -39,9 +37,6 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -10);
   }
   public play() {
     return undefined;

@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -12,7 +11,6 @@ import {ResourceType} from '../../ResourceType';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
@@ -35,10 +33,6 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
 
   public play(player: Player) {

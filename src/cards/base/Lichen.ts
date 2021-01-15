@@ -2,13 +2,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Lichen extends Card implements IProjectCard {
   constructor() {
@@ -29,9 +27,6 @@ export class Lichen extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -24);
-  }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS);
     return undefined;

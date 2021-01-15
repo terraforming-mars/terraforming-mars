@@ -14,7 +14,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Mangrove extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +34,7 @@ export class Mangrove extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 4);
+    const meetsTemperatureRequirements = super.canPlay(player);
     const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {

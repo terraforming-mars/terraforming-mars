@@ -13,19 +13,34 @@ import {LogHelper} from '../../LogHelper';
 import * as constants from './../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Card} from '../Card';
 
-export class Atmoscoop implements IProjectCard {
-  public cost = 22;
-  public tags = [Tags.JOVIAN, Tags.SPACE];
-  public name = CardName.ATMOSCOOP;
-  public cardType = CardType.AUTOMATED;
+export class Atmoscoop extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.ATMOSCOOP,
+      cost: 22,
+      tags: [Tags.JOVIAN, Tags.SPACE],
+
+      metadata: {
+        cardNumber: '217',
+        description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
+        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+        renderData: CardRenderer.builder((b) => {
+          b.temperature(2).or(CardRenderItemSize.SMALL).venus(2).br;
+          b.floaters(2).asterix();
+        }),
+        victoryPoints: 1,
+      },
+    });
+  }
 
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 3;
+    const meetsTagRequirements = super.canPlay(player);
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
@@ -103,15 +118,4 @@ export class Atmoscoop implements IProjectCard {
   private venusIsMaxed(game: Game) {
     return game.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: '217',
-    description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
-    requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
-    renderData: CardRenderer.builder((b) => {
-      b.temperature(2).or(CardRenderItemSize.SMALL).venus(2).br;
-      b.floaters(2).asterix();
-    }),
-    victoryPoints: 1,
-  };
 }

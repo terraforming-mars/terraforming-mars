@@ -3,6 +3,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from './RequirementType';
 import {Tags} from './Tags';
+import {Player} from '../Player';
 
 export class CardRequirements {
   constructor(private requirements: Array<CardRequirement>) {}
@@ -31,6 +32,14 @@ export class CardRequirements {
   public hasPlantsRemoved(): boolean {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
   }
+  public satisfies(player: Player): boolean {
+    const tags = this.requirements.filter((requirement) => requirement.type === RequirementType.TAG)
+      .map((requirement) => (requirement as TagCardRequirement).tag);
+    if (!player.checkMultipleTagPresence(tags)) {
+      return false;
+    }
+    return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
+  }
 }
 
 class Builder {
@@ -40,7 +49,7 @@ class Builder {
     return new CardRequirements(this.reqs);
   }
 
-  public oceans(amount: number = -1): Builder {
+  public oceans(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.OCEANS, amount));
     return this;
   }
@@ -66,7 +75,7 @@ class Builder {
   }
 
   public chairman(): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.CHAIRMAN, -1));
+    this.reqs.push(new CardRequirement(RequirementType.CHAIRMAN));
     return this;
   }
 
@@ -75,37 +84,37 @@ class Builder {
     return this;
   }
 
-  public greeneries(amount: number = -1): Builder {
+  public greeneries(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount));
     return this;
   }
 
-  public cities(amount: number = -1): Builder {
+  public cities(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.CITIES, amount));
     return this;
   }
 
-  public colonies(amount: number = -1): Builder {
+  public colonies(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.COLONIES, amount));
     return this;
   }
 
-  public floaters(amount: number = -1): Builder {
+  public floaters(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.FLOATERS, amount));
     return this;
   }
 
-  public partyLeaders(amount: number = -1): Builder {
+  public partyLeaders(amount?: number): Builder {
     this.reqs.push(new CardRequirement(RequirementType.PARTY_LEADERS, amount));
     return this;
   }
 
-  public tag(tag: Tags, amount: number = -1): Builder {
+  public tag(tag: Tags, amount?: number): Builder {
     this.reqs.push(new TagCardRequirement(tag, amount));
     return this;
   }
 
-  public production(resource: Resources, amount: number = -1): Builder {
+  public production(resource: Resources, amount?: number): Builder {
     this.reqs.push(new ProductionCardRequirement(resource, amount));
     return this;
   }
@@ -116,7 +125,7 @@ class Builder {
   }
 
   public plantsRemoved(): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS, -1));
+    this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS));
     return this;
   }
 

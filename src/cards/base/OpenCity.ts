@@ -10,7 +10,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class OpenCity extends Card implements IProjectCard {
@@ -41,7 +40,7 @@ export class OpenCity extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 12) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player, game: Game) {
     return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {

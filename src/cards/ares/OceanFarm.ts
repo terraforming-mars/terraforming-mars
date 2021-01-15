@@ -12,7 +12,6 @@ import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class OceanFarm extends Card implements IProjectCard {
@@ -36,10 +35,6 @@ export class OceanFarm extends Card implements IProjectCard {
         description: 'Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.',
       },
     });
-  }
-
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
   }
 
   public play(player: Player, game: Game) {

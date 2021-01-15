@@ -2,11 +2,15 @@ import {RequirementType} from './RequirementType';
 import {Tags} from './Tags';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {Resources} from '../Resources';
+import {Player} from '../Player';
+import {ResourceType} from '../ResourceType';
+import {TileType} from '../TileType';
+import {GlobalParameter} from '../GlobalParameter';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(private _type: RequirementType, protected _amount: number, private _isMax: boolean = false, private _isAny: boolean = false) {}
+  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {}
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -14,7 +18,7 @@ export class CardRequirement {
     } else if (this._type === RequirementType.TEMPERATURE) {
       return `${this._amount}°`;
     } else {
-      return this._amount !== -1 ? this._amount.toString() : '';
+      return (this._amount !== 1 || this._isMax) ? this._amount.toString() : '';
     }
   }
 
@@ -75,33 +79,118 @@ export class CardRequirement {
   public get amount(): number {
     return this._amount;
   }
+
+  protected satisfiesInequality(calculated: number) : boolean {
+    if (this.isMax) {
+      return calculated <= this.amount;
+    }
+    return calculated >= this.amount;
+  }
+
+  public satisfies(player: Player): boolean {
+    switch (this.type) {
+    case RequirementType.CHAIRMAN:
+      return player.game.turmoil?.chairman === player.id;
+
+    case RequirementType.CITIES:
+      if (this._isAny) {
+        return this.satisfiesInequality(player.game.getCitiesInPlay());
+      } else {
+        return this.satisfiesInequality(player.getCitiesCount(player.game));
+      }
+
+    case RequirementType.COLONIES:
+      const coloniesCount = player.game.colonies.map((colony) => colony.colonies.filter((owner) => owner === player.id).length)
+        .reduce((sum, colonyCount) => sum + colonyCount);
+      return this.satisfiesInequality(coloniesCount);
+
+    case RequirementType.FLOATERS:
+      return this.satisfiesInequality(player.getResourceCount(ResourceType.FLOATER));
+
+    case RequirementType.GREENERIES:
+      const greeneries = player.game.board.spaces.filter(
+        (space) => space.tile !== undefined &&
+            space.tile.tileType === TileType.GREENERY &&
+            (space.player === player || this._isAny),
+      ).length;
+      return this.satisfiesInequality(greeneries);
+
+    case RequirementType.PARTY_LEADERS:
+      if (player.game.turmoil !== undefined) {
+        const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id).length;
+        return this.satisfiesInequality(parties);
+      }
+      return false;
+
+    case RequirementType.OCEANS:
+      return player.game.checkRequirements(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+
+    case RequirementType.OXYGEN:
+      return player.game.checkRequirements(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+
+    case RequirementType.TEMPERATURE:
+      return player.game.checkRequirements(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+
+    case RequirementType.VENUS:
+      return player.game.checkRequirements(player, GlobalParameter.VENUS, this.amount, this.isMax);
+
+    case RequirementType.TR:
+      return this.satisfiesInequality(player.getTerraformRating());
+
+    case RequirementType.REMOVED_PLANTS:
+      return player.game.someoneHasRemovedOtherPlayersPlants;
+
+    case RequirementType.RESOURCE_TYPES:
+      const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
+        .filter((res) => player.getResource(res) > 0).length;
+      const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
+      return this.satisfiesInequality(standardResources + nonStandardResources);
+
+    case RequirementType.TAG:
+    case RequirementType.PARTY:
+    case RequirementType.PRODUCTION:
+      throw 'Should use subclass satisfies()';
+    }
+  }
 }
 
 export class TagCardRequirement extends CardRequirement {
-  constructor(private tag: Tags, amount: number) {
+  constructor(public tag: Tags, amount: number = 1) {
     super(RequirementType.TAG, amount);
   }
 
   protected parseType(): string {
     return firstLetterUpperCase(this.tag);
   }
+  public satisfies(player: Player): boolean {
+    return this.satisfiesInequality(player.getTagCount(this.tag));
+  }
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number) {
+  constructor(private resource: Resources, amount: number = 1) {
     super(RequirementType.RESOURCE_TYPES, amount);
   }
 
   protected parseType(): string {
     return `${firstLetterUpperCase(this.resource)} production`;
   }
+  public satisfies(player: Player): boolean {
+    return this.satisfiesInequality(player.getProduction(this.resource));
+  }
 }
 
 export class PartyCardRequirement extends CardRequirement {
   constructor(private party: PartyName) {
-    super(RequirementType.PARTY, -1);
+    super(RequirementType.PARTY);
   }
   protected parseType(): string {
     return this.party.toLowerCase();
+  }
+  public satisfies(player: Player): boolean {
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, this.party);
+    }
+    return false;
   }
 }

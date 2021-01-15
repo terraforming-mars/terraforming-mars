@@ -1217,7 +1217,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.checkRequirements(player, parameter, level, true);
   }
 
-  private checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+  public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
     let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
 

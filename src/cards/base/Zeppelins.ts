@@ -8,7 +8,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Zeppelins extends Card implements IProjectCard {
   constructor() {
@@ -27,9 +26,6 @@ export class Zeppelins extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 5);
   }
   public play(player: Player, game: Game) {
     player.addProduction(Resources.MEGACREDITS, game.getCitiesInPlayOnMars());

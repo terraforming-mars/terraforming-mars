@@ -5,6 +5,8 @@ import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
+import {Player} from '../Player';
+import {Game} from '../Game';
 import {Units} from '../Units';
 
 interface StaticCardProperties {
@@ -71,5 +73,11 @@ export abstract class Card {
   }
   public get productionDelta() {
     return this.properties.productionDelta;
+  }
+  public canPlay(player: Player, _game?: Game) {
+    if (this.properties.metadata.requirements === undefined) {
+      return true;
+    }
+    return this.properties.metadata.requirements.satisfies(player);
   }
 }

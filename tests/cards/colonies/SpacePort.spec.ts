@@ -22,7 +22,7 @@ describe('SpacePort', function() {
     expect(card.canPlay(player, game)).is.not.true;
   });
 
-  it('Can\'t play without colony', function() {
+  it('Can\'t play without energy production', function() {
     const colony = new Ceres();
     colony.colonies.push(player.id);
     game.colonies.push(colony);

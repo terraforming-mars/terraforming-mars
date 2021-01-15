@@ -6,7 +6,7 @@ import {expect} from 'chai';
 
 describe('CardRequirement', function() {
   it('ocean: success', function() {
-    expect(CardRequirements.builder((b) => b.oceans(-1)).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.oceans(1)).getRequirementsText()).to.equal(
       'Ocean',
     );
   });
@@ -115,7 +115,7 @@ describe('CardRequirement', function() {
     );
   });
   it('Floater: success', function() {
-    expect(CardRequirements.builder((b) => b.floaters(-1)).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.floaters(1)).getRequirementsText()).to.equal(
       'Floater',
     );
   });
@@ -151,7 +151,7 @@ describe('CardRequirement', function() {
   });
   it('Tag-science: success', function() {
     expect(
-      CardRequirements.builder((b) => b.tag(Tags.SCIENCE, -1)).getRequirementsText(),
+      CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 1)).getRequirementsText(),
     ).to.equal('Science');
   });
   it('Tag-science: default - success', function() {
@@ -167,7 +167,7 @@ describe('CardRequirement', function() {
   it('Production-titanium: success', function() {
     expect(
       CardRequirements.builder((b) =>
-        b.production(Resources.TITANIUM, -1),
+        b.production(Resources.TITANIUM, 1),
       ).getRequirementsText(),
     ).to.equal('Titanium production');
   });

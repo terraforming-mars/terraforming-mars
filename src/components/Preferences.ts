@@ -5,12 +5,20 @@ import {LANGUAGES} from '../constants';
 import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
+import {GameSetupDetail} from '../components/GameSetupDetail';
+import {GameOptionsModel} from '../models/GameOptionsModel';
 
 // @ts-ignore
 import {$t} from '../directives/i18n';
 
 export const Preferences = Vue.component('preferences', {
   props: {
+    playerNumber: {
+      type: Number,
+    },
+    gameOptions: {
+      type: Object as () => GameOptionsModel,
+    },
     player_color: {
       type: String as () => Color,
     },
@@ -42,10 +50,14 @@ export const Preferences = Vue.component('preferences', {
       type: Object as () => TurmoilModel || undefined,
     },
   },
+  components: {
+    'game-setup-detail': GameSetupDetail,
+  },
   data: function() {
     return {
       'ui': {
         'preferences_panel_open': false,
+        'gamesetup_detail_open': false,
       },
       'hide_corporation': false as boolean | unknown[],
       'hide_hand': false as boolean | unknown[],
@@ -343,8 +355,14 @@ export const Preferences = Vue.component('preferences', {
                             </label>
                         </div>
                     </div>
+                    
+                    <div  v-if="ui.gamesetup_detail_open">
+                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>
+                    </div>
+
                     <div class="preferences_panel_actions">
-                        <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
+                      <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
+                      <button class="btn btn-tiny btn-primary" v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open">Game Setup Details</button>
                     </div>
                 </div>
             </div>

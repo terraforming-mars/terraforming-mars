@@ -84,8 +84,7 @@ export const GameHome = Vue.component('game-home', {
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
-        <br>
-        
+        <div class="spacing-setup"></div>
         <game-setup-detail :game="game"></game-setup-detail>
         
       </div>

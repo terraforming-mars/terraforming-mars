@@ -157,7 +157,6 @@ class Builder {
     }
   }
 
-
   public temperature(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
     return this;

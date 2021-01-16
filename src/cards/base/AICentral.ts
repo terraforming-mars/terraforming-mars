@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -16,6 +17,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       name: CardName.AI_CENTRAL,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 21,
+      productionDelta: Units.of({energy: -1}),
 
       metadata: {
         description: {
@@ -33,7 +35,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3 && player.getProduction(Resources.ENERGY) >= 1;
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

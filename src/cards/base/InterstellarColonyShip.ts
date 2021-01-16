@@ -23,9 +23,6 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 5;
-  }
   public play(player: Player, _game: Game) {
     if (player.getTagCount(Tags.SCIENCE) < 5) {
       throw 'Requires 5 science tags.';

@@ -8,6 +8,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class CheungShingMARS extends Card implements CorporationCard {
   constructor() {
@@ -16,6 +17,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tags.BUILDING],
       startingMegaCredits: 44,
+      productionDelta: Units.of({megacredits: 3}),
 
       metadata: {
         cardNumber: 'R16',

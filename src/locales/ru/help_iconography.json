@@ -34,5 +34,10 @@
     "Colony": "Колония",
     "Trade Fleet": "Торговый флот",
     "Delegate": "Делегат",
-    "Influence": "Влияние"
+    "Influence": "Влияние",
+    "Hotkeys Mapping" : "Горячие клавиши",
+    "Main Board": "Карта Марса",
+    "Players Overview Table": "Игроки", 
+    "Cards in Hand": "Карты в руке", 
+    "Colonies": "Колонии"
 }

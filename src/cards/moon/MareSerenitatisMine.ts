@@ -19,6 +19,7 @@ export class MareSerenitatisMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 21,
+      productionDelta: Units.of({steel: 1, titanium: 1}),
 
       metadata: {
         description: 'Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. ' +

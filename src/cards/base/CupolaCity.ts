@@ -11,7 +11,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class CupolaCity extends Card implements IProjectCard {
   constructor() {
@@ -20,6 +20,7 @@ export class CupolaCity extends Card implements IProjectCard {
       name: CardName.CUPOLA_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 16,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '029',
@@ -35,7 +36,7 @@ export class CupolaCity extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 9) &&
+    return super.canPlay(player) &&
         player.getProduction(Resources.ENERGY) >= 1 &&
         game.board.getAvailableSpacesForCity(player).length > 0;
   }

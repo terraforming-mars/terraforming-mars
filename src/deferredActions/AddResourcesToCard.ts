@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
@@ -19,7 +18,6 @@ export namespace AddResourcesToCard {
 export class AddResourcesToCard implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public resourceType: ResourceType | undefined,
         public options: AddResourcesToCard.Options = {},
   ) {}

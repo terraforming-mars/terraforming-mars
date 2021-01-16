@@ -54,6 +54,8 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * `SERVER_ID`: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
 * `LOCAL_FS_DB`: When non-empty, stores game states in JSON files. Good for local development and debugging, bad for hosting lots of games.
 
+A `.env.sample` file can be used as a template. You can rename it to `.env` and it will take effect in your environment. Note that `.env` is ignored in source control.
+
 ### Deployment
 
 If you are looking for a dead simple deployment, use Heroku, instructions are are on the [wiki](../../wiki/Heroku-Setup). For Docker, read below.

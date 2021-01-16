@@ -7,6 +7,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class CarbonateProcessing extends Card implements IProjectCard {
   constructor() {
@@ -16,6 +17,7 @@ export class CarbonateProcessing extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 6,
       hasRequirements: false,
+      productionDelta: Units.of({energy: -1, heat: 3}),
 
       metadata: {
         cardNumber: '043',

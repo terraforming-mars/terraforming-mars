@@ -6,12 +6,9 @@ import {expect} from 'chai';
 
 describe('CardRequirement', function() {
   it('ocean: success', function() {
-    expect(CardRequirements.builder((b) => b.oceans(-1)).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.oceans(1)).getRequirementsText()).to.equal(
       'Ocean',
     );
-  });
-  it('ocean: success - default', function() {
-    expect(CardRequirements.builder((b) => b.oceans()).getRequirementsText()).to.equal('Ocean');
   });
   it('oceans: success', function() {
     expect(CardRequirements.builder((b) => b.oceans(3)).getRequirementsText()).to.equal(
@@ -34,8 +31,8 @@ describe('CardRequirement', function() {
     );
   });
   it('temperature (+): success', function() {
-    expect(CardRequirements.builder((b) => b.temperature(24)).getRequirementsText()).to.equal(
-      '24° C',
+    expect(CardRequirements.builder((b) => b.temperature(2)).getRequirementsText()).to.equal(
+      '2° C',
     );
   });
   it('temperature (0): success', function() {
@@ -50,8 +47,8 @@ describe('CardRequirement', function() {
   });
   it('temperature (-): success', function() {
     expect(
-      CardRequirements.builder((b) => b.temperature(10).max()).getRequirementsText(),
-    ).to.equal('max 10° C');
+      CardRequirements.builder((b) => b.temperature(4).max()).getRequirementsText(),
+    ).to.equal('max 4° C');
   });
   it('venus: success', function() {
     expect(CardRequirements.builder((b) => b.venus(10)).getRequirementsText()).to.equal(
@@ -115,7 +112,7 @@ describe('CardRequirement', function() {
     );
   });
   it('Floater: success', function() {
-    expect(CardRequirements.builder((b) => b.floaters(-1)).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.floaters(1)).getRequirementsText()).to.equal(
       'Floater',
     );
   });
@@ -151,7 +148,7 @@ describe('CardRequirement', function() {
   });
   it('Tag-science: success', function() {
     expect(
-      CardRequirements.builder((b) => b.tag(Tags.SCIENCE, -1)).getRequirementsText(),
+      CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 1)).getRequirementsText(),
     ).to.equal('Science');
   });
   it('Tag-science: default - success', function() {
@@ -167,7 +164,7 @@ describe('CardRequirement', function() {
   it('Production-titanium: success', function() {
     expect(
       CardRequirements.builder((b) =>
-        b.production(Resources.TITANIUM, -1),
+        b.production(Resources.TITANIUM, 1),
       ).getRequirementsText(),
     ).to.equal('Titanium production');
   });

@@ -5,6 +5,7 @@ import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class HousePrinting extends Card {
   constructor() {
@@ -13,6 +14,7 @@ export class HousePrinting extends Card {
       name: CardName.HOUSE_PRINTING,
       tags: [Tags.BUILDING],
       cost: 10,
+      productionDelta: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'P36',

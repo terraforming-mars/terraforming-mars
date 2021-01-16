@@ -152,6 +152,12 @@ describe('Board', function() {
         expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
+  it('getNthAvailableLandSpace throws if no spaces available', function() {
+    expect(function() {
+      board.getNthAvailableLandSpace(0, 1, undefined, () => false);
+    }).to.throw('no spaces available');
+  });
+
   function expectSpace(space: ISpace, id: string, x: number, y: number) {
     if (id !== space.id || x !== space.x || y !== space.y) {
       expect.fail(`space ${space.id} at (${space.x}, ${space.y}) does not match [${id}, ${x}, ${y}]`);

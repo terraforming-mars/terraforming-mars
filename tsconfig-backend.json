@@ -1,0 +1,11 @@
+{
+    // TODO(kberg): splitting this into a frontend and backend, please. But make sure the tests split along with it.
+    "incremental": true,
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "types": ["node"]
+    },
+    "exclude": [
+        "tests",
+    ]
+}

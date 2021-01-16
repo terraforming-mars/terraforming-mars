@@ -1,4 +1,3 @@
-
 /**
  * Provide a mock vue so we can interact with
  * the components from node

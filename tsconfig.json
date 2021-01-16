@@ -14,14 +14,13 @@
         "skipLibCheck": true,
         "sourceMap": true,
         "target": "es5",
-        "types": ["node"],
+        "types": ["node", "mocha", "chai"],
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "incremental": true
     },
     "include": [
         "src/**/*.ts",
-        "script.ts",
-        "server.ts"
+        "tests/**/*.ts",
+        "*.ts",
     ]
 }

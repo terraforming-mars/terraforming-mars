@@ -1,23 +1,10 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "moduleResolution": "node",
-        "lib": ["dom"],
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "strict": true,
-        "removeComments": true,
-        "resolveJsonModule": true,
-        "preserveConstEnums": true,
-        "outDir": "build",
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "target": "es5",
-        "types": ["node", "mocha", "chai"]
+        "declaration": false,
     },
-    "include": [
-        "tests/utils/Vue.ts",
-        "tests/**/*.spec.ts"
+    "exclude": [
+        "src",
+        "*.ts"
     ]
 }

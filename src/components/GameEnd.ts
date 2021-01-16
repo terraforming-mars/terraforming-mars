@@ -6,6 +6,8 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 
+import * as htmlToImage from 'html-to-image';
+
 export const GameEnd = Vue.component('game-end', {
   props: {
     player: {
@@ -55,6 +57,17 @@ export const GameEnd = Vue.component('game-end', {
     isSoloGame: function(): boolean {
       return this.player.players.length === 1;
     },
+    captureTable: function(elementID: string): void {
+      const tableElement = document.getElementById(elementID);
+      if (tableElement !== null) {
+        htmlToImage.toJpeg(tableElement, {quality: 0.95, style: {fontFamily: 'Ubuntu, Sans;'}}).then(function(dataUrl) {
+          const link = document.createElement('a');
+          link.download = elementID+'.jpeg';
+          link.href = dataUrl;
+          link.click();
+        });
+      }
+    },
   },
   template: `
         <div id="game-end" class="game_end_cont">
@@ -99,12 +112,17 @@ export const GameEnd = Vue.component('game-end', {
                         Go to main page
                     </a>
                 </div>
+                <span>
+                    <Button title="capture result table" size="tiny" :onClick="_=>captureTable('game-result-table')"/>
+                    <Button title="capture vp breakdown" size="tiny" :onClick="_=>captureTable('vp-breakdown')"/>
+                </span>
                 <div v-if="!isSoloGame() || player.isSoloModeWin" class="game-end-winer-announcement">
                     <span v-for="p in getWinners()"><span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
                 <div class="game_end_victory_points">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
                     <table class="table game_end_table">
+                        <div id="game-result-table">
                         <thead>
                             <tr v-i18n>
                                 <th>Player</th>
@@ -135,10 +153,12 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>
+                        </div>
                     </table>
                     <br/>
                     <h2 v-i18n>Victory points details</h2>
-                    <div class="game-end-flexrow">
+                    </h2>
+                    <div class="game-end-flexrow" id="vp-breakdown">
                         <div v-for="p in getSortedPlayers()" class="game-end-column">
                             <div class="game-end-winer-scorebreak-player-title">
                                 <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>

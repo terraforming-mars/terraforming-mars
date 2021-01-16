@@ -34,7 +34,6 @@ export const TagCount = Vue.component('tag-count', {
       if (this.tag === Tags.EVENT) {
         classes.push('tag-event-separate');
       }
-      console.log(this.type);
 
       return classes.join(' ');
     },

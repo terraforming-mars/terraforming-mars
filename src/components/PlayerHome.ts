@@ -130,7 +130,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getGenerationText: function(): string {
       if (this.player.players.length === 1) {
-        const MAX_GEN = this.player.gameOptions.preludeExtension ? 12 : 14;
+        const MAX_GEN = this.player.preludeExtension ? 12 : 14;
         let retText =
                     'generation ' + this.player.generation + ' of ' + MAX_GEN;
         if (MAX_GEN === this.player.generation) {
@@ -223,8 +223,8 @@ export const PlayerHome = Vue.component('player-home', {
               :oxygen = "player.oxygenLevel"
               :oceans = "player.oceans"
               :venus = "player.venusScaleLevel"
-              :venusNextExtension = "player.gameOptions.venusNextExtension"
-              :turmoilExtension = "player.gameOptions.turmoilExtension"
+              :venusNextExtension = "player.venusNextExtension"
+              :turmoilExtension = "player.turmoilExtension"
               :turmoil = "player.turmoil">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
@@ -235,14 +235,14 @@ export const PlayerHome = Vue.component('player-home', {
                     <a name="board" class="player_home_anchor"></a>
                     <board
                         :spaces="player.spaces"
-                        :venusNextExtension="player.gameOptions.venusNextExtension"
+                        :venusNextExtension="player.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
-                        :boardName ="player.gameOptions.boardName"
+                        :boardName ="player.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
                         :shouldNotify="true"
-                        :aresExtension="player.gameOptions.aresExtension"
+                        :aresExtension="player.aresExtension"
                         :aresData="player.aresData" 
                         id="shortkey-board"></board>
 
@@ -326,15 +326,15 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
-                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
                     <Card :card="card"/>
                 </div>
 
@@ -374,7 +374,7 @@ export const PlayerHome = Vue.component('player-home', {
                         </div>
                     </summary>
                     <div class="accordion-body">
-                        <board :spaces="player.spaces" :venusNextExtension="player.gameOptions.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.gameOptions.boardName"></board>
+                        <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                     </div>
                 </details>

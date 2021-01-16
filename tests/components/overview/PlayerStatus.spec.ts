@@ -26,7 +26,6 @@ describe('PlayerStatus', function() {
           corporationCard: {},
           id: 'foobar',
           playedCards: [],
-          gameOptions: {},
         },
       },
     });

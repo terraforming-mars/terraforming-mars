@@ -116,7 +116,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <th>City</th>
                                 <th>VP</th>
                                 <th>MC</th>
-                                <th v-if="player.gameOptions.showTimers">Timer</th>
+                                <th v-if="player.showTimers">Timer</th>
                                 <th><div class="game-end-total-column">Total</div></th>
                             </tr>
                         </thead>
@@ -131,7 +131,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td>{{ p.megaCredits }}</td>
-                                <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
+                                <td v-if="player.showTimers">{{ getTimer(p) }}</td>
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>
@@ -160,9 +160,9 @@ export const GameEnd = Vue.component('game-end', {
                     <h2 v-i18n>Final situation on the board</h2>
                     <board 
                         :spaces="player.spaces" 
-                        :venusNextExtension="player.gameOptions.venusNextExtension" 
+                        :venusNextExtension="player.venusNextExtension" 
                         :venusScaleLevel="player.venusScaleLevel" 
-                        :boardName ="player.gameOptions.boardName"
+                        :boardName ="player.boardName"
                         :oceans_count="player.oceans" 
                         :oxygen_level="player.oxygenLevel" 
                         :temperature="player.temperature"

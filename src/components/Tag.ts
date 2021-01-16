@@ -1,9 +1,10 @@
 import Vue from 'vue';
+import {Tags} from '../cards/Tags';
 
 export const Tag = Vue.component('tag', {
   props: {
     tag: {
-      type: String,
+      type: String as () => Tags,
     },
     size: {
       type: String,
@@ -22,7 +23,6 @@ export const Tag = Vue.component('tag', {
       if (this.type !== undefined) {
         classes.push(`tag-type-${this.type}`);
       }
-
       return classes.join(' ');
     },
   },

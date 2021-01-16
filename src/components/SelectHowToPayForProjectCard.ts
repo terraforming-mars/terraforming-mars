@@ -95,11 +95,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       app.$data.tags = app.getCardTags(),
       app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
-      app.setDefaultMicrobesValue();
-      app.setDefaultFloatersValue();
-      app.setDefaultSteelValue();
-      app.setDefaultTitaniumValue();
-      app.setDefaultHeatValue();
+      app.setDefaultValues();
     });
   },
   methods: {
@@ -118,112 +114,56 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
       return card.tags;
     },
-    setDefaultMicrobesValue: function() {
-      // automatically use available microbes to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits;
-        const requiredMicrobes = Math.ceil(remainingCostToPay / 2);
+    setDefaultValues: function() {
+      this.microbes = 0;
+      this.floaters = 0;
+      this.steel = 0;
+      this.titanium = 0;
+      this.heat = 0;
 
-        if (this.playerinput.microbes !== undefined && requiredMicrobes > this.playerinput.microbes) {
-          this.microbes = this.playerinput.microbes;
-        } else {
-          this.microbes = requiredMicrobes;
+      let megacreditBalance = this.cost - this.player.megaCredits;
+
+      // Calcualtes the optimal number of units to use given the unit value.
+      //
+      // It reads `megacreditBalance` as the remaining balance, and deducts the
+      // consumed balance as part of this method.
+      //
+      // It returns the number of units consumed from availableUnits to make that
+      const deductUnits = function(
+        availableUnits: number | undefined,
+        unitValue: number,
+        overpay: boolean = true): number {
+        if (availableUnits === undefined || availableUnits === 0) {
+          return 0;
         }
+        // The number of units required to sell to meet the balance.
+        const _tmp = megacreditBalance / unitValue;
+        const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
+        const contributingUnits = Math.min(availableUnits, balanceAsUnits);
 
-        const discountedCost = this.cost - (this.microbes * 2);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.microbes = 0;
+        megacreditBalance -= contributingUnits * unitValue;
+        return contributingUnits;
+      };
+
+      if (megacreditBalance > 0 && this.canUseMicrobes()) {
+        this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
-    },
-    setDefaultFloatersValue: function() {
-      // automatically use available floaters to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2);
-        const requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3);
 
-        if (this.playerinput.floaters !== undefined && requiredFloaters > this.playerinput.floaters) {
-          this.floaters = this.playerinput.floaters;
-        } else {
-          this.floaters = requiredFloaters;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.floaters = 0;
+      if (megacreditBalance > 0 && this.canUseFloaters()) {
+        this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
-    },
-    setDefaultSteelValue: function() {
-      // automatically use available steel to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3);
-        let requiredSteelQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.steelValue);
 
-        if (requiredSteelQty > this.player.steel) {
-          this.steel = this.player.steel;
-        } else {
-          // use as much steel as possible without overpaying by default
-          let currentSteelValue = requiredSteelQty * this.player.steelValue;
-          while (currentSteelValue <= remainingCostToPay + this.player.megaCredits - this.player.steelValue && requiredSteelQty < this.player.steel) {
-            requiredSteelQty++;
-            currentSteelValue = requiredSteelQty * this.player.steelValue;
-          }
-
-          this.steel = requiredSteelQty;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.steel = 0;
+      if (megacreditBalance > 0 && this.canUseSteel()) {
+        this.steel = deductUnits(this.player.steel, this.player.steelValue, false);
       }
-    },
-    setDefaultTitaniumValue: function() {
-      // automatically use available titanium to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
-        let requiredTitaniumQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.titaniumValue);
 
-        if (requiredTitaniumQty > this.player.titanium) {
-          this.titanium = this.player.titanium;
-        } else {
-          // use as much titanium as possible without overpaying by default
-          let currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-          while (currentTitaniumValue <= remainingCostToPay + this.player.megaCredits - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
-            requiredTitaniumQty++;
-            currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-          }
-
-          this.titanium = requiredTitaniumQty;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.titanium = 0;
+      if (megacreditBalance > 0 && this.canUseTitanium()) {
+        this.titanium = deductUnits(this.player.titanium, this.player.titaniumValue, false);
       }
-    },
-    setDefaultHeatValue: function() {
-      // automatically use available heat for Helion if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
-        const requiredHeat = Math.max(remainingCostToPay, 0);
 
-        if (requiredHeat > this.player.heat) {
-          this.heat = this.player.heat;
-        } else {
-          this.heat = requiredHeat;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue) - this.heat;
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.heat = 0;
+      if (megacreditBalance > 0 && this.canUseHeat()) {
+        this.heat = deductUnits(this.player.heat, 1);
       }
-    },
-    canAffordWithMcOnly: function() {
-      return this.player.megaCredits >= this.cost;
     },
     canUseHeat: function() {
       return this.playerinput.canUseHeat && this.player.heat > 0;
@@ -245,6 +185,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseMicrobes: function() {
+      // FYI Microbes are limited to the Psychrophiles card, which allows spending micrbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
           return true;
@@ -253,6 +194,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseFloaters: function() {
+      // FYI Floaters are limited to the DIRIGIBLES cards.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
           return true;
@@ -267,11 +209,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
-      this.setDefaultMicrobesValue();
-      this.setDefaultFloatersValue();
-      this.setDefaultSteelValue();
-      this.setDefaultTitaniumValue();
-      this.setDefaultHeatValue();
+      this.setDefaultValues();
     },
     hasWarning: function() {
       return this.warning !== undefined;

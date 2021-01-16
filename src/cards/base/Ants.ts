@@ -12,7 +12,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -39,10 +38,6 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
   }
 
   public resourceCount = 0;
-
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
-  }
 
   public getVictoryPoints(): number {
     return Math.floor(this.resourceCount / 2);

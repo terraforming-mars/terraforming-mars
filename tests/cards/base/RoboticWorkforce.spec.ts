@@ -28,7 +28,7 @@ describe('RoboticWorkforce', function() {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Can\'t play if no building cards to copy', function() {
@@ -122,7 +122,7 @@ describe('RoboticWorkforce', function() {
 
   it('Has all building cards set up', function() {
     const researchCoordination = new ResearchCoordination();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions({moonExpansion: true});
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     ALL_CARD_MANIFESTS.forEach((manifest) => {
       manifest.projectCards.factories.forEach((c) => {

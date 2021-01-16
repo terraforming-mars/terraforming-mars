@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 
@@ -21,9 +20,6 @@ export class AdvancedEcosystems extends Card implements IProjectCard {
         victoryPoints: 3,
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    return player.checkMultipleTagPresence([Tags.PLANT, Tags.ANIMAL, Tags.MICROBE]);
   }
   public play() {
     return undefined;

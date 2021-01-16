@@ -12,6 +12,7 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -20,6 +21,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       name: CardName.ELECTRO_CATAPULT,
       tags: [Tags.BUILDING],
       cost: 17,
+      productionDelta: Units.of({energy: -1}),
 
       metadata: {
         cardNumber: '069',

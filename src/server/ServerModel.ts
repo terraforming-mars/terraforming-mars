@@ -37,6 +37,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {MoonModel} from '../models/MoonModel';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -71,6 +72,8 @@ export class Server {
       id: player.id,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      moon: MoonModel.serialize(game),
+      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
@@ -359,6 +362,9 @@ function getCards(
   }));
 }
 
+// NOTE: This doesn't return a proper PlayerModel. It returns only a partial one, because
+// many of the field's values aren't set. That's why the code needs an "as PlayerModel" at
+// the end. Eyuch. Warning, surprises ahead.
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   const turmoil = getTurmoil(game);
 
@@ -373,6 +379,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       id: game.phase === Phase.END ? player.id : player.color,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),

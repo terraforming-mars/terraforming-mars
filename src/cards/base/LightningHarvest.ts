@@ -14,8 +14,8 @@ export class LightningHarvest extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LIGHTNING_HARVEST,
-      tags: [Tags.ENERGY],
       cost: 8,
+      tags: [Tags.ENERGY],
 
       metadata: {
         cardNumber: '046',
@@ -29,17 +29,12 @@ export class LightningHarvest extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3;
-  }
   public play(player: Player, _game: Game) {
-    if (player.getTagCount(Tags.SCIENCE) < 3) {
-      throw 'Requires 3 science tags';
-    }
     player.addProduction(Resources.ENERGY);
     player.addProduction(Resources.MEGACREDITS);
     return undefined;
   }
+
   public getVictoryPoints() {
     return 1;
   }

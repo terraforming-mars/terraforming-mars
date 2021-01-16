@@ -3,13 +3,11 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class ArcticAlgae extends Card implements IProjectCard {
   constructor() {
@@ -31,9 +29,6 @@ export class ArcticAlgae extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -12);
-  }
   public onTilePlaced(player: Player, space: ISpace) {
     if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {
       player.plants += 2;

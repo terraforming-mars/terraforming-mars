@@ -105,6 +105,16 @@ checkComponent(
   [],
 );
 checkComponent(
+  'src/components/moon/MoonBoard',
+  require('./build/src/components/moon/MoonBoard').MoonBoard,
+  [],
+);
+checkComponent(
+  'src/components/moon/MoonSpace',
+  require('./build/src/components/moon/MoonSpace').MoonSpace,
+  [],
+);
+checkComponent(
   'src/components/OtherPlayer',
   require('./build/src/components/OtherPlayer').OtherPlayer,
   [],
@@ -115,13 +125,48 @@ checkComponent(
   [],
 );
 checkComponent(
+  'src/components/overview/PlayerInfo',
+  require('./build/src/components/overview/PlayerInfo').PlayerInfo,
+  [],
+);
+checkComponent(
+  'src/components/overview/PlayerResource',
+  require('./build/src/components/overview/PlayerResource').PlayerResource,
+  [],
+);
+checkComponent(
+  'src/components/overview/PlayerResources',
+  require('./build/src/components/overview/PlayerResources').PlayerResources,
+  ['resources'],
+);
+checkComponent(
+  'src/components/overview/PlayersOverview',
+  require('./build/src/components/overview/PlayersOverview').PlayersOverview,
+  [],
+);
+checkComponent(
+  'src/components/overview/PlayerStatus',
+  require('./build/src/components/overview/PlayerStatus').PlayerStatus,
+  [],
+);
+checkComponent(
+  'src/components/overview/PlayerTags',
+  require('./build/src/components/overview/PlayerTags').PlayerTags,
+  [],
+);
+checkComponent(
+  'src/components/overview/PlayerTimer',
+  require('./build/src/components/overview/PlayerTimer').PlayerTimer,
+  ['timerText'],
+);
+checkComponent(
   'src/components/Preferences',
   require('./build/src/components/Preferences').Preferences,
   [
     'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
     'hide_turnorder', 'hide_corporation_names', , 'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
     'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
-    'lang', 'langs', 'enable_sounds',
+    'lang', 'langs', 'enable_sounds', 'smooth_scrolling', 
   ],
 );
 checkComponent(
@@ -205,49 +250,14 @@ checkComponent(
   [],
 );
 checkComponent(
-  'src/components/Turmoil',
-  require('./build/src/components/Turmoil').Turmoil,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerInfo',
-  require('./build/src/components/overview/PlayerInfo').PlayerInfo,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerResource',
-  require('./build/src/components/overview/PlayerResource').PlayerResource,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerResources',
-  require('./build/src/components/overview/PlayerResources').PlayerResources,
-  ['resources'],
-);
-checkComponent(
-  'src/components/overview/PlayersOverview',
-  require('./build/src/components/overview/PlayersOverview').PlayersOverview,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerStatus',
-  require('./build/src/components/overview/PlayerStatus').PlayerStatus,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerTags',
-  require('./build/src/components/overview/PlayerTags').PlayerTags,
-  [],
-);
-checkComponent(
-  'src/components/overview/PlayerTimer',
-  require('./build/src/components/overview/PlayerTimer').PlayerTimer,
-  ['timerText'],
-);
-checkComponent(
   'src/components/TopBar',
   require('./build/src/components/TopBar').TopBar,
   ['componentKey'],
+);
+checkComponent(
+  'src/components/Turmoil',
+  require('./build/src/components/Turmoil').Turmoil,
+  [],
 );
 
 function checkComponent(name, component, dataProperties) {

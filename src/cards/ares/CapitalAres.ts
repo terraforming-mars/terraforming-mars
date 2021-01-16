@@ -23,7 +23,7 @@ export class CapitalAres extends Capital {
             pb.minus().energy(2).br;
             pb.plus().megacredits(5);
           }).nbsp.tile(TileType.CAPITAL, false, true).br;
-          b.vpText('1 additional VP for each ocean tile adjacent to this city tile');
+          b.vpText('1 additional VP for each ocean tile adjacent to this city tile.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.oceans(1, 1),
       },

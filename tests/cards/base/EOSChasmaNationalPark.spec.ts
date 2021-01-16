@@ -38,7 +38,7 @@ describe('EosChasmaNationalPark', function() {
         expect(player.plants).to.eq(3);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-        player.getVictoryPoints(game);
+        player.getVictoryPoints();
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 
@@ -55,7 +55,7 @@ describe('EosChasmaNationalPark', function() {
     expect(player.plants).to.eq(3);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    player.getVictoryPoints(game);
+    player.getVictoryPoints();
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

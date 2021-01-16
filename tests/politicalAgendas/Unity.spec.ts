@@ -41,7 +41,7 @@ describe('Unity', function() {
 
   it('Ruling policy 1: Your titanium resources are worth 1 MC extra', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[0].id);
-    expect(player.getTitaniumValue(game)).to.eq(4);
+    expect(player.getTitaniumValue()).to.eq(4);
   });
 
   it('Ruling policy 2: Spend 4 MC to gain 2 titanium or add 2 floaters to any card', function() {

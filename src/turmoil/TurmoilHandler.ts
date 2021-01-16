@@ -143,15 +143,15 @@ export class TurmoilHandler {
     }
   }
 
-  public static applyOnCardPlayedEffect(player: Player, game: Game, selectedCard: IProjectCard): void {
+  public static applyOnCardPlayedEffect(player: Player, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
       const policy = GREENS_POLICY_3;
       policy.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
       const policy = MARS_FIRST_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }

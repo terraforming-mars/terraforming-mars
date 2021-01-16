@@ -23,10 +23,10 @@ describe('Player', function() {
   });
   it('Should throw error if nothing to process', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
     expect(function() {
-      player.process(game, []);
+      player.process([]);
     }).to.throw('Not waiting for anything');
   });
   it('Should run select player for PowerSupplyConsortium', function() {
@@ -34,7 +34,7 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.YELLOW.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('foobar', [player, player2, player3], player);
     player2.addProduction(Resources.ENERGY, 2);
     player3.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
@@ -42,7 +42,7 @@ describe('Player', function() {
     const action = card.play(player, Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
-      player.process(game, [[player2.id]]);
+      player.process([[player2.id]]);
       expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     }
   });
@@ -51,7 +51,7 @@ describe('Player', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
     const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
@@ -59,13 +59,13 @@ describe('Player', function() {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;
       expect(function() {
-        player.process(game, [[]]);
+        player.process([[]]);
       }).to.throw('Invalid players array provided');
       expect(function() {
-        player.process(game, []);
+        player.process([]);
       }).to.throw('Incorrect options provided');
       expect(function() {
-        player.process(game, [['bar']]);
+        player.process([['bar']]);
       }).to.throw('Player not available');
     }
   });
@@ -75,22 +75,22 @@ describe('Player', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     player.addProduction(Resources.HEAT, 2);
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);
     expect(player.getWaitingFor()).is.not.undefined;
     expect(function() {
-      player.process(game, [[]]);
+      player.process([[]]);
     }).to.throw('Incorrect options provided');
     expect(function() {
-      player.process(game, []);
+      player.process([]);
     }).to.throw('Incorrect options provided');
     expect(function() {
-      player.process(game, [['foobar']]);
+      player.process([['foobar']]);
     }).to.throw('Number not provided for amount');
-    player.process(game, [['1']]);
+    player.process([['1']]);
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.getWaitingFor()).is.undefined;
@@ -98,17 +98,17 @@ describe('Player', function() {
   it('Runs SaturnSystems when other player plays card', function() {
     const player1 = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('gto', [player1, player2], player1);
+    Game.newInstance('gto', [player1, player2], player1);
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
     player1.corporationCard = corporationCard;
-    player2.playCard(game, card, undefined);
+    player2.playCard(card, undefined);
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
   it('Chains onend functions from player inputs', function(done) {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     const mockOption3 = new SelectOption('Mock select option 3', 'Save', () => {
       return undefined;
     });
@@ -119,11 +119,11 @@ describe('Player', function() {
       return mockOption2;
     });
     player.setWaitingFor(mockOption, () => done());
-    player.process(game, [['1']]);
+    player.process([['1']]);
     expect(player.getWaitingFor()).not.to.be.undefined;
-    player.process(game, [['1']]);
+    player.process([['1']]);
     expect(player.getWaitingFor()).not.to.be.undefined;
-    player.process(game, [['1']]);
+    player.process([['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
   it('serializes every property', function() {

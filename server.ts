@@ -200,7 +200,7 @@ function processInput(
   req.once('end', function() {
     try {
       const entity = JSON.parse(body);
-      player.process(game, entity);
+      player.process(entity);
       res.setHeader('Content-Type', 'application/json');
       res.write(getPlayerModelJSON(player, game));
       res.end();

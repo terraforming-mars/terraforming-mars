@@ -63,7 +63,7 @@ describe('Greens', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[2].id);
 
     const lichen = new Lichen();
-    player.playCard(game, lichen);
+    player.playCard(lichen);
     expect(player.megaCredits).to.eq(2);
   });
 

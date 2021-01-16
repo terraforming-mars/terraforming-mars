@@ -6,7 +6,6 @@ import {ColonyName} from './ColonyName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
-import {Game} from '../Game';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
@@ -69,10 +68,10 @@ export abstract class Colony implements SerializedColony {
       return this.colonies.length >= 3;
     }
 
-    public addColony(player: Player, game: Game): void {
-      game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
+    public addColony(player: Player): void {
+      player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-      this.giveBonus(player, game, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
+      this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
 
       this.colonies.push(player.id);
       if (this.trackPosition < this.colonies.length) {
@@ -80,20 +79,20 @@ export abstract class Colony implements SerializedColony {
       }
 
       // Poseidon hook
-      const poseidon = game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS);
       }
     }
 
-    public trade(player: Player, game: Game, bonusTradeOffset: number = 0, usesTradeFleet: boolean = true, decreaseTrackAfterTrade: boolean = true): void {
+    public trade(player: Player, bonusTradeOffset: number = 0, usesTradeFleet: boolean = true, decreaseTrackAfterTrade: boolean = true): void {
       const tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 
       if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
         // Don't increase
-        this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade);
+        this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
         return;
       }
 
@@ -101,26 +100,26 @@ export abstract class Colony implements SerializedColony {
         // No point in asking the player, just increase it
         this.increaseTrack(steps);
         LogHelper.logColonyTrackIncrease(player, this, steps);
-        this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade);
+        this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
         return;
       }
 
       // Ask the player if they want to increase the track
-      game.defer(new IncreaseColonyTrack(
+      player.game.defer(new IncreaseColonyTrack(
         player,
-        game,
+        player.game,
         this,
         steps,
-        () => this.handleTrade(player, game, usesTradeFleet, decreaseTrackAfterTrade),
+        () => this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade),
       ));
     }
 
-    private handleTrade(player: Player, game: Game, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean) {
+    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean) {
       const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
 
-      this.giveBonus(player, game, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
+      this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
 
-      game.defer(new GiveColonyBonus(player, game, this));
+      player.game.defer(new GiveColonyBonus(player, this));
 
       if (usesTradeFleet) {
         this.visitor = player.id;
@@ -128,19 +127,21 @@ export abstract class Colony implements SerializedColony {
       }
 
       if (decreaseTrackAfterTrade) {
-        game.defer(new DeferredAction(player, () => {
+        player.game.defer(new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
         }));
       }
     }
 
-    public giveColonyBonus(player: Player, game: Game, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-      return this.giveBonus(player, game, this.colonyBonusType!, this.colonyBonusQuantity!, this.colonyBonusResource, isGiveColonyBonus);
+    public giveColonyBonus(player: Player, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+      return this.giveBonus(player, this.colonyBonusType!, this.colonyBonusQuantity!, this.colonyBonusResource, isGiveColonyBonus);
     }
 
 
-    private giveBonus(player: Player, game: Game, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+      const game = player.game;
+
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
@@ -161,7 +162,7 @@ export abstract class Colony implements SerializedColony {
             openColonies.forEach((colony) => {
               if (colony.name === colonyName) {
                 game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.trade(player, game, 0, false, false);
+                colony.trade(player, 0, false, false);
               }
               return undefined;
             });
@@ -210,7 +211,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
         player.scienceTagCount += 1;
-        player.playCard(game, new ScienceTagCard());
+        player.playCard(new ScienceTagCard());
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 

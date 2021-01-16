@@ -92,9 +92,9 @@ describe('Game', function() {
     game.playerIsDoneWithGame(player2);
     game.playerIsDoneWithGame(player);
 
-    player.getVictoryPoints(game);
-    player2.getVictoryPoints(game);
-    player3.getVictoryPoints(game);
+    player.getVictoryPoints();
+    player2.getVictoryPoints();
+    player3.getVictoryPoints();
 
     expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
     expect(player.victoryPointsBreakdown.milestones).to.eq(5);
@@ -287,7 +287,7 @@ describe('Game', function() {
     // Trigger end game
     player.setTerraformRating(20);
     player.plants = 14;
-    player.takeActionForFinalGreenery(game);
+    player.takeActionForFinalGreenery();
 
     // Place first greenery to get 2 plants
     const placeFirstGreenery = player.getWaitingFor() as OrOptions;

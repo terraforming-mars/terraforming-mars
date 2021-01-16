@@ -6,12 +6,12 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MercurianAlloys', function() {
-  let card : MercurianAlloys; let player : Player; let game : Game;
+  let card : MercurianAlloys; let player : Player;
 
   beforeEach(function() {
     card = new MercurianAlloys();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play if not enough science tags available', function() {
@@ -23,6 +23,6 @@ describe('MercurianAlloys', function() {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getTitaniumValue(game)).to.eq(4);
+    expect(player.getTitaniumValue()).to.eq(4);
   });
 });

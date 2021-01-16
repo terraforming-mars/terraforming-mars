@@ -1078,7 +1078,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   private startFinalGreeneryPlacement(player: Player) {
     this.activePlayer = player.id;
-    player.takeActionForFinalGreenery(this);
+    player.takeActionForFinalGreenery();
   }
 
   private startActionsForPlayer(player: Player) {

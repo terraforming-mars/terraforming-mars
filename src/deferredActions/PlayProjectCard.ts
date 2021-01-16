@@ -9,9 +9,9 @@ export class PlayProjectCard implements DeferredAction {
   ) {}
 
   public execute() {
-    if (this.player.getPlayableCards(this.game).length === 0) {
+    if (this.player.getPlayableCards().length === 0) {
       return undefined;
     }
-    return this.player.playProjectCard(this.game);
+    return this.player.playProjectCard();
   }
 }

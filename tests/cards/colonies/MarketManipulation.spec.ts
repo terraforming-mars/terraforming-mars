@@ -42,7 +42,7 @@ describe('MarketManipulation', function() {
     game.gameOptions.coloniesExtension = true;
     expect(card.canPlay(player, game)).is.not.true;
 
-    player.playCard(game, new Pets());
+    player.playCard(new Pets());
     expect(card.canPlay(player, game)).is.true;
   });
 });

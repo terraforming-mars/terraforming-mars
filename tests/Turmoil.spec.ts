@@ -125,7 +125,7 @@ describe('Turmoil', function() {
   });
 
   it('Check ruling policy: Unity', function() {
-    setRulingParty(turmoil, game, new Unity());
+    setRulingParty(turmoil, player.game, new Unity());
     game.phase = Phase.ACTION;
     expect(player.getTitaniumValue()).to.eq(4);
   });

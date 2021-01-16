@@ -38,7 +38,7 @@ export class IceCapMelting extends Card implements IProjectCard {
     return meetsTemperatureRequirements;
   }
   public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, game));
+    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

@@ -10,18 +10,18 @@ import {GREENS_POLICY_1} from './Greens';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class PartyHooks {
-  static applyMarsFirstRulingPolicy(game: Game, player: Player, spaceType: SpaceType) {
-    if (this.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
+  static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
+    if (this.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
         spaceType !== SpaceType.COLONY &&
-        game.phase === Phase.ACTION) {
+        player.game.phase === Phase.ACTION) {
       player.setResource(Resources.STEEL, 1);
     }
   }
 
-  static applyGreensRulingPolicy(game: Game, player: Player, space: ISpace) {
-    if (this.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
+  static applyGreensRulingPolicy(player: Player, space: ISpace) {
+    if (this.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
       const greensPolicy = GREENS_POLICY_1;
-      greensPolicy.onTilePlaced(player, space, game);
+      greensPolicy.onTilePlaced(player, space);
     }
   }
 

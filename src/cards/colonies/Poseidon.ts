@@ -16,7 +16,7 @@ export class Poseidon implements CorporationCard {
     public initialActionText: string = 'Place a colony';
     public initialAction(player: Player, game: Game) {
       if (game.gameOptions.coloniesExtension) {
-        game.defer(new BuildColony(player, game, false, 'Poseidon first action - Select where to build colony'));
+        game.defer(new BuildColony(player, false, 'Poseidon first action - Select where to build colony'));
         return undefined;
       } else {
         console.warn('Colonies extension isn\'t selected.');

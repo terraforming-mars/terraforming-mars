@@ -61,7 +61,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     }
     public play(player: Player, game: Game) {
       player.addResourceTo(this);
-      game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
 }

@@ -37,7 +37,7 @@ export class StratosphericBirds implements IActionCard, IProjectCard, IResourceC
       }
     }
     public play(player: Player, game: Game) {
-      game.defer(new RemoveResourcesFromCard(player, game, ResourceType.FLOATER, 1, true));
+      game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
       return undefined;
     }
     public canAct(): boolean {

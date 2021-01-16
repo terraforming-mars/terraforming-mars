@@ -47,9 +47,9 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     game.increaseTemperature(player, 2);
-    game.defer(new PlaceOceanTile(player, game, 'Select space for first ocean'));
-    game.defer(new PlaceOceanTile(player, game, 'Select space for second ocean'));
-    game.defer(new RemoveAnyPlants(player, game, 6));
+    game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
+    game.defer(new RemoveAnyPlants(player, 6));
     return undefined;
   }
 }

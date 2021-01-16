@@ -1,11 +1,9 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {DeferredAction} from './DeferredAction';
 
 export class PlayProjectCard implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
   ) {}
 
   public execute() {

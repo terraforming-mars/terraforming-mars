@@ -16,7 +16,7 @@ export class City extends StandardProjectCard {
   }
 
   actionEssence(player: Player, game: Game): void {
-    game.defer(new PlaceCityTile(player, game));
+    game.defer(new PlaceCityTile(player));
     player.addProduction(Resources.MEGACREDITS);
   }
 

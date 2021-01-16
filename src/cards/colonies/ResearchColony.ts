@@ -15,7 +15,7 @@ export class ResearchColony implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, true, 'Select colony for Research Colony'));
+      game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
       player.drawCard(2);
       return undefined;
     }

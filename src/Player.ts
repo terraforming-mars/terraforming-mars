@@ -1825,11 +1825,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (game.gameOptions.turmoilExtension) {
       let sendDelegate;
       if (game.turmoil?.lobby.has(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, game, 'Send a delegate in an area (from lobby)');
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
       } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, game, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
       } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, game, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();

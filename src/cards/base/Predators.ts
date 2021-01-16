@@ -49,11 +49,11 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
 
     public canAct(player: Player, game: Game): boolean {
       if (game.isSoloMode()) return true;
-      return RemoveResourcesFromCard.getAvailableTargetCards(player, game, ResourceType.ANIMAL).length > 0;
+      return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
     }
 
     public action(player: Player, game: Game) {
-      game.defer(new RemoveResourcesFromCard(player, game, ResourceType.ANIMAL));
+      game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
       game.defer(new DeferredAction(
         player,
         () => {

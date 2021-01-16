@@ -29,7 +29,7 @@ export class SmallAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 1);
-      game.defer(new RemoveAnyPlants(player, game, 2));
+      game.defer(new RemoveAnyPlants(player, 2));
       return undefined;
     }
     public metadata: CardMetadata = {

@@ -63,8 +63,8 @@ class GreensPolicy01 implements Policy {
   id = TurmoilPolicy.GREENS_DEFAULT_POLICY;
   description: string = 'When you place a greenery tile, gain 4 MC';
 
-  onTilePlaced(player: Player, space: ISpace, game: Game) {
-    if (space.tile?.tileType === TileType.GREENERY && game.phase === Phase.ACTION) {
+  onTilePlaced(player: Player, space: ISpace) {
+    if (space.tile?.tileType === TileType.GREENERY && player.game.phase === Phase.ACTION) {
       player.setResource(Resources.MEGACREDITS, 4);
     }
   }
@@ -102,7 +102,8 @@ class GreensPolicy04 implements Policy {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 

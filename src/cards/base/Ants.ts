@@ -49,11 +49,11 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
 
   public canAct(player: Player, game: Game): boolean {
     if (game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, game, this.resourceType).length > 0;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
   }
 
   public action(player: Player, game: Game) {
-    game.defer(new RemoveResourcesFromCard(player, game, ResourceType.MICROBE));
+    game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
     game.defer(
       new DeferredAction(player, () => {
         player.addResourceTo(this);

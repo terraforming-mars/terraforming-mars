@@ -84,7 +84,7 @@ describe('OlympusConference', function() {
     card.resourceCount = 1;
 
     // Play a 1 science tag card
-    player.playCard(game, scienceTagCard);
+    player.playCard(scienceTagCard);
 
     // OC asking to draw & MU asking to discard
     expect(game.deferredActions).has.lengthOf(2);
@@ -107,7 +107,7 @@ describe('OlympusConference', function() {
     card.resourceCount = 1;
 
     // Play a 1 science tag card
-    player.playCard(game, scienceTagCard);
+    player.playCard(scienceTagCard);
 
     // OC asking to draw & MU asking to discard
     expect(game.deferredActions).has.lengthOf(2);

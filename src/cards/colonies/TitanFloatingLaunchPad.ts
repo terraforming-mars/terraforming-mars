@@ -51,7 +51,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
                 if (colony.name === colonyName) {
                   this.resourceCount--;
                   game.log('${0} traded with ${1}', (b) => b.player(player).colony(colony));
-                  colony.trade(player, game);
+                  colony.trade(player);
                   return undefined;
                 }
 

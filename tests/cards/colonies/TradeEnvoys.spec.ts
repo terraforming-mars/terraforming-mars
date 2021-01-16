@@ -9,11 +9,11 @@ describe('TradeEnvoys', function() {
     const card = new TradeEnvoys();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     const ceres = new Ceres();
-    ceres.trade(player, game);
+    ceres.trade(player);
     expect(player.steel).to.eq(3);
   });
 });

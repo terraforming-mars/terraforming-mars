@@ -48,7 +48,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).temperature = -8;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -59,7 +59,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).oxygenLevel = 3;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -70,7 +70,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).venusScaleLevel = 7;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -81,7 +81,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player as any).terraformRating = 24;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(false);
   });
 

@@ -33,7 +33,7 @@ describe('LargeConvoy', function() {
     const action = card.play(player, game);
     player.playedCards.push(card);
     (action as OrOptions).options[1].cb();
-    player.getVictoryPoints(game);
+    player.getVictoryPoints();
 
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);

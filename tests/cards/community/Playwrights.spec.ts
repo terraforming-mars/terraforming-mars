@@ -97,7 +97,7 @@ describe('Playwrights', function() {
         const deimosDown = new DeimosDown();
         expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost - 8);
 
-        player.playCard(game, deimosDown);
+        player.playCard(deimosDown);
         expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost); // no more discount
   });
 

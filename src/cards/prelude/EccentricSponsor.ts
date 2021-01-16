@@ -27,7 +27,7 @@ export class EccentricSponsor extends PreludeCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new PlayProjectCard(player, game));
+    game.defer(new PlayProjectCard(player));
     return undefined;
   }
 }

@@ -21,7 +21,7 @@ export class SponsoredAcademies implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new DiscardCards(player, game));
+      game.defer(new DiscardCards(player));
       game.defer(DrawCards.keepAll(player, 3));
       const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
       for (const p of otherPlayers) {

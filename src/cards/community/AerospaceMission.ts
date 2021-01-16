@@ -29,8 +29,8 @@ export class AerospaceMission extends PreludeCard {
 
   public play(player: Player, game: Game) {
     player.megaCredits -= 14;
-    game.defer(new BuildColony(player, game, false, 'Select where to build the first colony'));
-    game.defer(new BuildColony(player, game, false, 'Select where to build the second colony'));
+    game.defer(new BuildColony(player, false, 'Select where to build the first colony'));
+    game.defer(new BuildColony(player, false, 'Select where to build the second colony'));
     return undefined;
   }
 }

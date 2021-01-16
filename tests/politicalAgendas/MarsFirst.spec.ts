@@ -62,7 +62,7 @@ describe('MarsFirst', function() {
     const marsFirstPolicy = MARS_FIRST_POLICY_4;
     player.megaCredits = 7;
 
-    marsFirstPolicy.action(player, game);
+    marsFirstPolicy.action(player);
     expect(marsFirstPolicy.canAct(player)).to.be.true;
     game.deferredActions.runNext();
 

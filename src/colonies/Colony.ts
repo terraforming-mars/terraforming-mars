@@ -107,7 +107,6 @@ export abstract class Colony implements SerializedColony {
       // Ask the player if they want to increase the track
       player.game.defer(new IncreaseColonyTrack(
         player,
-        player.game,
         this,
         steps,
         () => this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade),
@@ -181,7 +180,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
         player.drawCard();
-        action = new DiscardCards(player, game, 1, this.name + ' colony bonus. Select a card to discard');
+        action = new DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard');
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
@@ -189,7 +188,7 @@ export abstract class Colony implements SerializedColony {
         for (let counter = 0; counter < quantity; counter++) {
           cardsDrawn.push(game.dealer.dealCard());
         };
-        action = new SelectCardToKeep(player, game, 'Select card to take into hand', cardsDrawn);
+        action = new SelectCardToKeep(player, 'Select card to take into hand', cardsDrawn);
         break;
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
@@ -227,7 +226,7 @@ export abstract class Colony implements SerializedColony {
           const qty = Math.min(quantity, game.turmoil.getDelegates(player.id));
 
           for (let i = 0; i < qty; i++) {
-            game.defer(new SendDelegateToArea(player, game, 'Select where to send delegate', 1, undefined, undefined, false));
+            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, false));
           }
         }
         break;
@@ -279,7 +278,7 @@ export abstract class Colony implements SerializedColony {
               'Select player to discard a card',
               'Select',
               (selectedPlayer: Player) => {
-                game.defer(new DiscardCards(selectedPlayer, game, 1, this.name + ' colony effect. Select a card to discard'));
+                game.defer(new DiscardCards(selectedPlayer, 1, this.name + ' colony effect. Select a card to discard'));
                 return undefined;
               },
             );
@@ -288,12 +287,12 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.PLACE_OCEAN_TILE:
-        action = new PlaceOceanTile(player, game, 'Select ocean space for ' + this.name + ' colony');
+        action = new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony');
         break;
 
       case ColonyBenefit.STEAL_RESOURCES:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        action = new StealResources(player, game, resource, quantity);
+        action = new StealResources(player, resource, quantity);
         break;
 
       default:

@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {ResourceType} from '../ResourceType';
 import {OrOptions} from '../inputs/OrOptions';
@@ -14,7 +13,6 @@ const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE]
 export class RemoveResourcesFromCard implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public resourceType: ResourceType,
         public count: number = 1,
         public ownCardsOnly: boolean = false,
@@ -23,11 +21,11 @@ export class RemoveResourcesFromCard implements DeferredAction {
   ) {}
 
   public execute() {
-    if (this.ownCardsOnly === false && this.game.isSoloMode()) {
+    if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
       return undefined;
     }
 
-    const resourceCards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.game, this.resourceType, this.ownCardsOnly);
+    const resourceCards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.resourceType, this.ownCardsOnly);
 
     if (resourceCards.length === 0) {
       return undefined;
@@ -39,8 +37,8 @@ export class RemoveResourcesFromCard implements DeferredAction {
       resourceCards,
       (foundCards: Array<ICard>) => {
         const card = foundCards[0];
-        const owner = this.game.getCardPlayer(card.name);
-        owner.removeResourceFrom(card, this.count, this.game, this.player);
+        const owner = this.player.game.getCardPlayer(card.name);
+        owner.removeResourceFrom(card, this.count, this.player.game, this.player);
         return undefined;
       },
     );
@@ -48,8 +46,8 @@ export class RemoveResourcesFromCard implements DeferredAction {
     if (this.mandatory) {
       if (resourceCards.length === 1) {
         const card = resourceCards[0];
-        const owner = this.game.getCardPlayer(card.name);
-        owner.removeResourceFrom(card, this.count, this.game, this.player);
+        const owner = this.player.game.getCardPlayer(card.name);
+        owner.removeResourceFrom(card, this.count, this.player.game, this.player);
         return undefined;
       }
       return selectCard;
@@ -63,7 +61,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
     );
   }
 
-  public static getAvailableTargetCards(player: Player, game: Game, resourceType: ResourceType | undefined, ownCardsOnly: boolean = false): Array<ICard> {
+  public static getAvailableTargetCards(player: Player, resourceType: ResourceType | undefined, ownCardsOnly: boolean = false): Array<ICard> {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === ResourceType.ANIMAL) {
@@ -73,7 +71,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
       }
     } else {
       resourceCards = [];
-      game.getPlayers().forEach((p) => {
+      player.game.getPlayers().forEach((p) => {
         switch (resourceType) {
         case ResourceType.ANIMAL:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;

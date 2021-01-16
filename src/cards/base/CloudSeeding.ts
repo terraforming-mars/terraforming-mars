@@ -35,7 +35,7 @@ export class CloudSeeding extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new DecreaseAnyProduction(player, game, Resources.HEAT, 1));
+    game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 1));
     player.addProduction(Resources.MEGACREDITS, -1);
     player.addProduction(Resources.PLANTS, 2);
     return undefined;

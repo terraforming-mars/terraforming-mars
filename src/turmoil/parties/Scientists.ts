@@ -52,7 +52,8 @@ class ScientistsPolicy01 implements Policy {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
       player,

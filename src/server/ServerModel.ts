@@ -2,8 +2,9 @@ import {AndOptions} from '../inputs/AndOptions';
 import {CardModel} from '../models/CardModel';
 import {ColonyModel} from '../models/ColonyModel';
 import {Color} from '../Color';
-import {Game} from '../Game';
+import {Game, GameOptions} from '../Game';
 import {GameHomeModel} from '../models/GameHomeModel';
+import {GameOptionsModel} from '../models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Board} from '../boards/Board';
@@ -66,6 +67,7 @@ export class Server {
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
@@ -374,6 +376,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
+      // TODO(kberg): strictly speaking, game options shouldn't be necessary on the
+      // individual player level.
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: game.phase === Phase.END ? player.id : player.color,
@@ -390,7 +395,6 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       coloniesCount: player.getColoniesCount(game),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
-      coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(game),
@@ -400,14 +404,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumValue: player.getTitaniumValue(game),
       victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer,
-      venusNextExtension: game.gameOptions.venusNextExtension,
-      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
       tags: player.getAllTags(),
-      showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
-      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(
         player.getActionsThisGeneration(),
       ),
@@ -420,8 +419,6 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
-      preludeExtension: game.gameOptions.preludeExtension,
-      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     } as PlayerModel;
   });
@@ -481,4 +478,22 @@ function getSpaces(board: Board): Array<SpaceModel> {
       highlight: highlight,
     };
   });
+}
+
+function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
+  return {
+    aresExtension: options.aresExtension,
+    boardName: options.boardName,
+    coloniesExtension: options.coloniesExtension,
+    corporateEra: options.corporateEra,
+    initialDraftVariant: options.initialDraftVariant,
+    moonExpansion: options.moonExpansion,
+    preludeExtension: options.preludeExtension,
+    politicalAgendasExtension: options.politicalAgendasExtension,
+    showOtherPlayersVP: options.showOtherPlayersVP,
+    showTimers: options.showTimers,
+    randomMA: options.randomMA,
+    turmoilExtension: options.turmoilExtension,
+    venusNextExtension: options.venusNextExtension,
+  };
 }

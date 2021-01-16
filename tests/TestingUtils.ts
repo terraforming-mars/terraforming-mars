@@ -11,6 +11,7 @@ import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
+import {Units} from '../src/Units';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {
@@ -77,6 +78,27 @@ export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmo
   turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
   game.phase = Phase.ACTION;
 };
+
+export function setPlayerProductionForTest(player: Player, units: Partial<Units>) {
+  if (units.megacredits !== undefined) {
+    (player as any).megaCreditProduction = units.megacredits;
+  }
+  if (units.steel !== undefined) {
+    (player as any).steelProduction = units.steel;
+  }
+  if (units.titanium !== undefined) {
+    (player as any).titaniumProduction = units.titanium;
+  }
+  if (units.plants !== undefined) {
+    (player as any).plantProduction = units.plants;
+  }
+  if (units.energy !== undefined) {
+    (player as any).energyProduction = units.energy;
+  }
+  if (units.heat !== undefined) {
+    (player as any).heatProduction = units.heat;
+  }
+}
 
 class TestPlayerFactory {
   constructor(private color: Color) {}

@@ -1,7 +1,9 @@
 // A representation of a value associated with each standard resource type.
 // Could be a player's inventory, or their production, or just a way to pass several resource-related values
 
+import {Game} from './Game';
 import {Player} from './Player';
+import {Resources} from './Resources';
 
 // import {Player} from './Player';
 
@@ -86,29 +88,29 @@ export namespace Units {
   //     player.getProduction(Resources.HEAT) - units.heat >= 0;
   // }
 
-  // export function deductProduction(units: Units, player: Player, game?: Game, fromPlayer?: Player) {
-  //   if (units.megacredits !== undefined) {
-  //     player.addProduction(Resources.MEGACREDITS, -units.megacredits, game, fromPlayer);
-  //   }
+  export function deductProduction(units: Units, player: Player, game?: Game, fromPlayer?: Player) {
+    if (units.megacredits !== undefined) {
+      player.addProduction(Resources.MEGACREDITS, -units.megacredits, game, fromPlayer);
+    }
 
-  //   if (units.steel !== undefined) {
-  //     player.addProduction(Resources.STEEL, -units.steel, game, fromPlayer);
-  //   }
+    if (units.steel !== undefined) {
+      player.addProduction(Resources.STEEL, -units.steel, game, fromPlayer);
+    }
 
-  //   if (units.titanium !== undefined) {
-  //     player.addProduction(Resources.TITANIUM, -units.titanium, game, fromPlayer);
-  //   }
+    if (units.titanium !== undefined) {
+      player.addProduction(Resources.TITANIUM, -units.titanium, game, fromPlayer);
+    }
 
-  //   if (units.plants !== undefined) {
-  //     player.addProduction(Resources.PLANTS, -units.plants, game, fromPlayer);
-  //   }
+    if (units.plants !== undefined) {
+      player.addProduction(Resources.PLANTS, -units.plants, game, fromPlayer);
+    }
 
-  //   if (units.energy !== undefined) {
-  //     player.addProduction(Resources.ENERGY, -units.energy, game, fromPlayer);
-  //   }
+    if (units.energy !== undefined) {
+      player.addProduction(Resources.ENERGY, -units.energy, game, fromPlayer);
+    }
 
-  //   if (units.heat !== undefined) {
-  //     player.addProduction(Resources.HEAT, -units.heat, game, fromPlayer);
-  //   }
-  // }
+    if (units.heat !== undefined) {
+      player.addProduction(Resources.HEAT, -units.heat, game, fromPlayer);
+    }
+  }
 }

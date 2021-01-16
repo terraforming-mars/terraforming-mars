@@ -121,7 +121,7 @@ export const PlayerStatus = Vue.component('player-status', {
                 </div> 
                 <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
-            <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+            <div class="player-status-timer" v-if="player.showTimers"><player-timer :timer="player.timer"/></div>
         </div>
     `,
 });

@@ -4,6 +4,7 @@ import {ColonyModel} from '../models/ColonyModel';
 import {Color} from '../Color';
 import {Game, GameOptions} from '../Game';
 import {GameHomeModel} from '../models/GameHomeModel';
+import {GameOptionsModel} from '../models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Board} from '../boards/Board';
@@ -37,7 +38,6 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {GameOptionsModel} from '../models/GameOptionsModel';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -73,6 +73,7 @@ export class Server {
       id: player.id,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      moonExpansion: game.gameOptions.moonExpansion,
       name: player.name,
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
@@ -86,6 +87,7 @@ export class Server {
       coloniesCount: player.getColoniesCount(game),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+      coloniesExtension: game.gameOptions.coloniesExtension,
       players: getPlayers(game.getPlayers(), game),
       spaces: getSpaces(game.board),
       steel: player.steel,
@@ -101,9 +103,15 @@ export class Server {
       isSoloModeWin: game.isSoloModeWin(),
       gameAge: game.gameAge,
       isActive: player.id === game.activePlayer,
+      corporateEra: game.gameOptions.corporateEra,
+      venusNextExtension: game.gameOptions.venusNextExtension,
+      turmoilExtension: game.gameOptions.turmoilExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
+      boardName: game.gameOptions.boardName,
       colonies: getColonies(game),
       tags: player.getAllTags(),
+      showOtherPlayersVP: game.gameOptions.showOtherPlayersVP,
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
@@ -112,11 +120,16 @@ export class Server {
       dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
       dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
       dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
+      initialDraft: game.gameOptions.initialDraftVariant,
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
+      randomMA: game.gameOptions.randomMA,
       actionsTakenThisRound: player.actionsTakenThisRound,
       passedPlayers: game.getPassedPlayers(),
+      aresExtension: game.gameOptions.aresExtension,
       aresData: game.aresData,
+      preludeExtension: game.gameOptions.preludeExtension,
+      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
     };
   }
@@ -355,12 +368,12 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   return players.map((player) => {
     return {
       color: player.color,
-      // TODO(kberg): strictly speaking, game options shouldn't be necessary on the
-      // individual player level.
-      gameOptions: getGameOptionsAsModel(game.gameOptions),
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
+      // TODO(kberg): strictly speaking, game options shouldn't be necessary on the
+      // individual player level.
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: game.phase === Phase.END ? player.id : player.color,

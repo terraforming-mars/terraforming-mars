@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {Resources} from '../src/Resources';
 import {Units} from '../src/Units';
-import {TestPlayers} from './TestingUtils';
+import {setPlayerProductionForTest, TestPlayers} from './TestingUtils';
 
 describe('Units', () => {
   it('of', () => {
@@ -222,7 +222,7 @@ describe('Units', () => {
       heat: 0,
     });
 
-    player.setProductionForTest({
+    setPlayerProductionForTest(player, {
       megacredits: 20,
       steel: 19,
       titanium: 18,

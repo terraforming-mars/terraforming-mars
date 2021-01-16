@@ -32,43 +32,76 @@ describe('SelectHowToPayForProjectCard', function() {
   beforeEach(function() {
     expectedStorage = {};
   });
-  it('uses sort order for cards', async function() {
+  // it('uses sort order for cards', async function() {
+  //   expectedStorage['cardOrderfoo'] = JSON.stringify({
+  //     [CardName.ANTS]: 2,
+  //     [CardName.BIRDS]: 1,
+  //   });
+  //   const sortable = mount(SelectHowToPayForProjectCard, {
+  //     localVue: getLocalVue(),
+  //     propsData: {
+  //       player: {
+  //         cardsInHand: [{
+  //           calculatedCost: 4,
+  //           name: CardName.ANTS,
+  //         }, {
+  //           calculatedCost: 3,
+  //           name: CardName.BIRDS,
+  //         }],
+  //         id: 'foo',
+  //         selfReplicatingRobotCards: [],
+  //       },
+  //       playerinput: {
+  //         title: 'foo',
+  //         cards: [{
+  //           name: CardName.ANTS,
+  //         }, {
+  //           name: CardName.BIRDS,
+  //         }],
+  //       },
+  //       onsave: function() {},
+  //       showsave: true,
+  //       showtitle: true,
+  //     },
+  //   });
+  //   const cards = sortable.findAllComponents({
+  //     name: 'Card',
+  //   });
+  //   expect(cards.length).to.eq(2);
+  //   expect(cards.at(0).props().card.name).to.eq(CardName.BIRDS);
+  //   expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
+  // });
+  it('select how to pay uses heat', async function() {
     expectedStorage['cardOrderfoo'] = JSON.stringify({
-      [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
     });
-    const sortable = mount(SelectHowToPayForProjectCard, {
+    const wrapper = mount(SelectHowToPayForProjectCard, {
       localVue: getLocalVue(),
       propsData: {
         player: {
           cardsInHand: [{
-            calculatedCost: 4,
-            name: CardName.ANTS,
-          }, {
             calculatedCost: 3,
             name: CardName.BIRDS,
           }],
           id: 'foo',
           selfReplicatingRobotCards: [],
+          heat: 4,
+          megaCredits: 7,
         },
         playerinput: {
           title: 'foo',
           cards: [{
-            name: CardName.ANTS,
-          }, {
             name: CardName.BIRDS,
           }],
+          canUseHeat: true,
         },
         onsave: function() {},
         showsave: true,
         showtitle: true,
       },
     });
-    const cards = sortable.findAllComponents({
-      name: 'Card',
-    });
-    expect(cards.length).to.eq(2);
-    expect(cards.at(0).props().card.name).to.eq(CardName.BIRDS);
-    expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
+    const heatTextBox = wrapper.find('[title~=Heat] ~ input');
+    console.log(heatTextBox);
+    expect(wrapper.vm.heat).eq(3);
   });
 });

@@ -8,14 +8,18 @@ import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
 import {FundedAwardModel} from './FundedAwardModel';
 import {Phase} from '../Phase';
 import {PlayerInputModel} from './PlayerInputModel';
+import {RandomMAOptionType} from '../RandomMAOptionType';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {SerializedTimer} from '../SerializedTimer';
-import {GameOptionsModel} from './GameOptionsModel';
 
 export interface PlayerModel {
+    aresExtension: boolean;
     aresData: IAresData | undefined;
+    politicalAgendasExtension: AgendaStyle;
     awards: Array<FundedAwardModel>;
+    boardName: string;
     corporationCard: CardModel | undefined;
     playedCards: Array<CardModel>;
     cardCost: number;
@@ -23,15 +27,16 @@ export interface PlayerModel {
     cardsInHandNbr: number;
     citiesCount: number;
     coloniesCount: number;
+    corporateEra: boolean;
     draftedCards: Array<CardModel>;
     noTagsCount: number;
     influence: number;
     colonies: Array<ColonyModel>;
+    coloniesExtension: boolean;
     color: Color;
     energy: number;
     energyProduction: number;
     gameAge: number;
-    gameOptions: GameOptionsModel;
     generation: number;
     heat: number;
     heatProduction: number;
@@ -41,6 +46,7 @@ export interface PlayerModel {
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
+    moonExpansion: boolean;
     name: string;
     oceans: number;
     oxygenLevel: number;
@@ -49,6 +55,7 @@ export interface PlayerModel {
     plantProduction: number;
     plantsAreProtected: boolean;
     players: Array<PlayerModel>;
+    randomMA: RandomMAOptionType;
     spaces: Array<SpaceModel>;
     steel: number;
     steelProduction: number;
@@ -59,9 +66,13 @@ export interface PlayerModel {
     titaniumProduction: number;
     titaniumValue: number;
     turmoil: TurmoilModel | undefined;
+    turmoilExtension: boolean;
+    venusNextExtension: boolean;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     tags: Array<ITagCount>;
+    showOtherPlayersVP: boolean;
+    showTimers: boolean;
     actionsThisGeneration: Array<string>;
     fleetSize: number;
     tradesThisTurn: number;
@@ -69,10 +80,12 @@ export interface PlayerModel {
     dealtCorporationCards: Array<CardModel>;
     dealtPreludeCards: Array<CardModel>;
     dealtProjectCards: Array<CardModel>;
+    initialDraft: boolean;
     needsToDraft: boolean | undefined;
     passedPlayers: Array<Color>;
     actionsTakenThisRound: number;
     deckSize: number;
+    preludeExtension: boolean;
     waitingFor: PlayerInputModel | undefined;
     timer: SerializedTimer;
 }

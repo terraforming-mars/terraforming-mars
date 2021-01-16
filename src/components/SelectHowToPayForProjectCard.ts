@@ -180,6 +180,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseMicrobes: function() {
+      // FYI Microbes are limited to the Psychrophiles card, which allows spending micrbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
           return true;
@@ -188,6 +189,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseFloaters: function() {
+      // FYI Floaters are limited to the DIRIGIBLES cards.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
           return true;

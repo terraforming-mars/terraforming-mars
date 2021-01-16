@@ -1054,7 +1054,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               calculatedCost: this.getCardCost(game, targetCard.card),
               cardType: card.cardType,
               isDisabled: false,
-              reserveUnits: Units.EMPTY // I wonder if this could just be removed.
+              reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
             },
           );
         }

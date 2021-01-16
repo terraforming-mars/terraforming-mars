@@ -11,8 +11,10 @@ import {Units} from '../../Units';
 import {SpaceType} from '../../SpaceType';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
+import {IMoonCard} from './IMoonCard';
+import {TileType} from '../../TileType';
 
-export class MareSerenitatisMine extends Card implements IProjectCard {
+export class MareSerenitatisMine extends Card implements IProjectCard, IMoonCard {
   constructor() {
     super({
       name: CardName.MARE_SERENITATIS_MINE,
@@ -35,6 +37,7 @@ export class MareSerenitatisMine extends Card implements IProjectCard {
   }
 
   public reserveUnits = Units.of({titanium: 2, steel: 1});
+  public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD]
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);

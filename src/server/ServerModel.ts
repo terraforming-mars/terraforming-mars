@@ -2,7 +2,7 @@ import {AndOptions} from '../inputs/AndOptions';
 import {CardModel} from '../models/CardModel';
 import {ColonyModel} from '../models/ColonyModel';
 import {Color} from '../Color';
-import {Game} from '../Game';
+import {Game, GameOptions} from '../Game';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -66,7 +66,7 @@ export class Server {
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
-      gameOptions: game.gameOptions as GameOptionsModel,
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
@@ -355,7 +355,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   return players.map((player) => {
     return {
       color: player.color,
-      gameOptions: {} as GameOptionsModel,
+      // TODO(kberg): strictly speaking, game options shouldn't be necessary on the
+      // individual player level.
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
@@ -457,4 +459,22 @@ function getSpaces(board: Board): Array<SpaceModel> {
       highlight: highlight,
     };
   });
+}
+
+function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
+  return {
+    aresExtension: options.aresExtension,
+    boardName: options.boardName,
+    coloniesExtension: options.coloniesExtension,
+    corporateEra: options.corporateEra,
+    initialDraftVariant: options.initialDraftVariant,
+    moonExpansion: options.moonExpansion,
+    preludeExtension: options.preludeExtension,
+    politicalAgendasExtension: options.politicalAgendasExtension,
+    showOtherPlayersVP: options.showOtherPlayersVP,
+    showTimers: options.showTimers,
+    randomMA: options.randomMA,
+    turmoilExtension: options.turmoilExtension,
+    venusNextExtension: options.venusNextExtension,
+  };
 }

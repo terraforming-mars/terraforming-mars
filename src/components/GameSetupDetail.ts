@@ -80,10 +80,20 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
             </li>
             
-            <li><div class="setup-item" v-i18n>Draft:</div>
+            <li v-if="playerNumber > 1">
+              <div class="setup-item" v-i18n>Draft:</div>
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
               <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
               <div v-else class="game-config generic" v-i18n>Off</div>
+            </li>
+
+
+            <li v-if="playerNumber === 1">
+              <div class="setup-item" v-i18n>Solo:</div>
+              <div v-if="gameOptions.preludeExtension" class="game-config generic" v-i18n>12 Gens</div>
+              <div v-else class="game-config generic" v-i18n>14 Gens</div>
+              <div v-if="gameOptions.soloTR" class="game-config generic" v-i18n>63 TR</div>
+              <div v-else class="game-config generic" v-i18n>TR all</div>
             </li>
 
             <li><div class="setup-item" v-i18n>Game configs:</div>

@@ -21,6 +21,7 @@ export interface GameOptionsModel {
   showOtherPlayersVP: boolean,
   showTimers: boolean,
   shuffleMapOption: boolean,
+  soloTR: boolean,
   randomMA: RandomMAOptionType,
   turmoilExtension: boolean,
   venusNextExtension: boolean,

@@ -168,6 +168,9 @@ export abstract class Board {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
     }).filter(predicate);
     let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+    if (spaces.length === 0) {
+      throw new Error('no spaces available');
+    }
     while (idx < 0) {
       idx += spaces.length;
     }

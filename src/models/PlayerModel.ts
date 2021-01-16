@@ -13,6 +13,7 @@ import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {SerializedTimer} from '../SerializedTimer';
+import {MoonModel} from './MoonModel';
 
 export interface PlayerModel {
     aresExtension: boolean;
@@ -46,7 +47,8 @@ export interface PlayerModel {
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
-    moonExpansion: boolean;
+    moon: MoonModel | undefined;
+    moonExpansion: boolean,
     name: string;
     oceans: number;
     oxygenLevel: number;

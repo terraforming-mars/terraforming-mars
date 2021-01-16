@@ -1,13 +1,13 @@
-import {Game} from '../../src/Game';
-import {IMoonData} from '../../src/moon/IMoonData';
-import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {Player} from '../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {MareNectarisMine} from '../../src/cards/moon/MareNectarisMine';
+import {Game} from '../../../src/Game';
+import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {Player} from '../../../src/Player';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
 import {expect} from 'chai';
-import {Resources} from '../../src/Resources';
-import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {TileType} from '../../src/TileType';
+import {Resources} from '../../../src/Resources';
+import {MoonSpaces} from '../../../src/moon/MoonSpaces';
+import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

@@ -19,6 +19,7 @@ import {SortableCards} from './SortableCards';
 import {TopBar} from './TopBar';
 import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
+import {MoonBoard} from './moon/MoonBoard';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -72,6 +73,7 @@ export const PlayerHome = Vue.component('player-home', {
     'Button': Button,
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
+    'moonboard': MoonBoard,
   },
   mixins: [PlayerMixin],
   methods: {
@@ -247,6 +249,8 @@ export const PlayerHome = Vue.component('player-home', {
                         id="shortkey-board"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+
+                    <moonboard v-if="player.moonExpansion" :model="player.moon"></moonboard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />

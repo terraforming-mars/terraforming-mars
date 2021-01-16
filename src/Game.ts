@@ -228,7 +228,6 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
-  // TODO(kberg): remove the default seed value for Game. (Move into GameOptions?)
   public static newInstance(id: GameId,
     players: Array<Player>,
     firstPlayer: Player,

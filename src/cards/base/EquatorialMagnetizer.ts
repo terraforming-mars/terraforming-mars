@@ -19,7 +19,6 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
       name: CardName.EQUATORIAL_MAGNETIZER,
       tags: [Tags.BUILDING],
       cost: 11,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '015',

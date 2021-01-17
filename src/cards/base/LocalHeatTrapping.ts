@@ -19,7 +19,6 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '190',

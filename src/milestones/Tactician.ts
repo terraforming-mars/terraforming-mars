@@ -10,7 +10,7 @@ export class Tactician implements IMilestone {
     public getScore(player: Player): number {
       const validCards = player.playedCards.filter((card) => {
         const isValidCardType = !this.excludedCardTypes.includes(card.cardType);
-        const hasRequirements = card.canPlay && (card.hasRequirements === undefined || card.hasRequirements);
+        const hasRequirements = card.metadata.requirements !== undefined;
 
         return isValidCardType && hasRequirements;
       });

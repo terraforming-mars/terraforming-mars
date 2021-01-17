@@ -14,7 +14,6 @@ export class SponsoredAcademies implements IProjectCard {
     public tags = [Tags.EARTH, Tags.SCIENCE];
     public name = CardName.SPONSORED_ACADEMIES;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player): boolean {
       return player.cardsInHand.length > 1; // this card and at least another

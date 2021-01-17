@@ -23,7 +23,6 @@ export class ProtectedValley extends Card implements IProjectCard {
       name: CardName.PROTECTED_VALLEY,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 23,
-      hasRequirements: false,
       productionDelta: Units.of({megacredits: 2}),
 
       metadata: {

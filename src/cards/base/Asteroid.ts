@@ -18,7 +18,6 @@ export class Asteroid extends Card implements IProjectCard {
       name: CardName.ASTEROID,
       tags: [Tags.SPACE],
       cost: 14,
-      hasRequirements: false,
 
       metadata: {
         description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',

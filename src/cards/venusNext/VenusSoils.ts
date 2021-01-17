@@ -20,7 +20,6 @@ export class VenusSoils implements IProjectCard {
     public tags = [Tags.VENUS, Tags.PLANT];
     public name = CardName.VENUS_SOILS;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

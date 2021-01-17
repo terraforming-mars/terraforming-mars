@@ -16,7 +16,6 @@ export class EnergyTapping extends Card implements IProjectCard {
       name: CardName.ENERGY_TAPPING,
       tags: [Tags.ENERGY],
       cost: 3,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '201',

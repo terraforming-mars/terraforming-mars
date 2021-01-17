@@ -16,7 +16,6 @@ export class LandClaim extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LAND_CLAIM,
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '066',

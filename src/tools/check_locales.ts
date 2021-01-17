@@ -13,13 +13,13 @@ const args = process.argv.slice(2);
 let localesToWarn = locales;
 if (args) {
   const localeArgPos = args.indexOf('--locale');
-  if (localeArgPos != -1 && args.length > localeArgPos+1) {
+  if (localeArgPos !== -1 && args.length > localeArgPos+1) {
     const warnLocale = args[localeArgPos+1].toLowerCase();
     if ( ! locales.includes(warnLocale)) {
       console.log('Wrong ' + warnLocale + ' --locale provided');
       process.exit(1);
     }
-    localesToWarn = [warnLocale]
+    localesToWarn = [warnLocale];
   }
 }
 

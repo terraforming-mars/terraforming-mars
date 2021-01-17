@@ -22,7 +22,7 @@ describe('DesperateMeasures', function() {
 
     const priorTr = player.getTerraformRating();
 
-    card.play(player, game).cb(protectedDustStorm);
+    card.play(player).cb(protectedDustStorm);
 
     expect(player.getTerraformRating()).eq(priorTr + 1);
     expect(game.getOxygenLevel()).eq(1);
@@ -40,7 +40,7 @@ describe('DesperateMeasures', function() {
     const priorTr = player.getTerraformRating();
     const priorTemp = game.getTemperature();
 
-    card.play(player, game).cb(protectedErosion);
+    card.play(player).cb(protectedErosion);
 
     expect(player.getTerraformRating()).eq(priorTr + 1);
     expect(game.getTemperature()).eq(priorTemp + 2);
@@ -51,7 +51,7 @@ describe('DesperateMeasures', function() {
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).contains(protectedDustStorm.id);
 
-    card.play(player, game).cb(protectedDustStorm);
+    card.play(player).cb(protectedDustStorm);
 
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).not.contains(protectedDustStorm.id);
   });

@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,7 +17,7 @@ export class CuttingEdgeTechnology implements IProjectCard {
       return undefined;
     }
 
-    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+    public getCardDiscount(_player: Player, card: IProjectCard) {
       if (card.canPlay && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
       return 0;
     }

@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardMetadata} from '../CardMetadata';
@@ -16,12 +15,12 @@ export class MinorityRefuge implements IProjectCard {
     public cardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return player.hasAvailableColonyTileToBuildOn(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
+    public canPlay(player: Player): boolean {
+      return player.hasAvailableColonyTileToBuildOn() && player.getProduction(Resources.MEGACREDITS) >= -3;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge'));
+    public play(player: Player) {
+      player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge'));
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;
     }

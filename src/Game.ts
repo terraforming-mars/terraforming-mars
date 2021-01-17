@@ -693,13 +693,13 @@ export class Game implements ISerializable<SerializedGame> {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name, player.dealtPreludeCards);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, player.dealtPreludeCards);
       } else {
         const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
         this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name, cards);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, cards);
       }
     });
   }
@@ -718,7 +718,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.researchedPlayers.clear();
     this.save();
     this.players.forEach((player) => {
-      player.runResearchPhase(this, this.gameOptions.draftVariant);
+      player.runResearchPhase(this.gameOptions.draftVariant);
     });
   }
 
@@ -809,7 +809,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoWorldGovernmentTerraforming() {
-    this.first.worldGovernmentTerraforming(this);
+    this.first.worldGovernmentTerraforming();
   }
 
   public doneWorldGovernmentTerraforming() {
@@ -1218,7 +1218,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter === GlobalParameter.VENUS);
 
     if (parameter === GlobalParameter.OCEANS) {
       currentLevel = this.board.getOceansOnBoard();

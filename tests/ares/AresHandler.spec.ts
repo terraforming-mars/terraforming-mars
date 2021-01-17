@@ -260,7 +260,7 @@ describe('AresHandler', function() {
 
     // The key two lines
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
-    new DesperateMeasures().play(player, game).cb(protectedDustStorm);
+    new DesperateMeasures().play(player).cb(protectedDustStorm);
 
     const priorTr = player.getTerraformRating();
 

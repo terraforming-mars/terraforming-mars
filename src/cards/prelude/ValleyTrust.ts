@@ -34,7 +34,7 @@ export class ValleyTrust extends Card implements CorporationCard {
     });
   }
 
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.SCIENCE).length * 2;
   }
 

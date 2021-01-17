@@ -4,7 +4,7 @@ We like external contributions! Every internal contributor started as an externa
 (Except the founder, of course.)
 
 When contributing to this repository, please first discuss the change you wish to make via issue,
-email, Discord, or any other method with the owners of this repository before making a change.
+email, Discord, or any other method with the owners of this repository, before making a change.
 
 Our contributors vary in experience. Many of our contributors have very little software development
 experience, but a great understanding of the game, and some have over 30 years of software industry
@@ -44,4 +44,4 @@ This project is designed to run on single node servers or locally. Any change sh
 
 ## Questions?
 
-[Post an issue](https://github.com/bafolts/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/AUfyx5ba)
+[Post an issue](https://github.com/bafolts/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/fWXE53K)

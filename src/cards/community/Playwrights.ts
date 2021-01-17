@@ -25,15 +25,18 @@ export class Playwrights implements CorporationCard {
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
-      const replayableEvents = this.getReplayableEvents(player, game);
-      return replayableEvents.length > 0;
+    public canAct(): boolean {
+      return true;
     }
 
     public action(player: Player, game: Game) {
-      const players = game.getPlayers();
       const replayableEvents = this.getReplayableEvents(player, game);
 
+      if (replayableEvents.length === 0) {
+        return undefined;
+      }
+
+      const players = game.getPlayers();
       return new SelectCard<ICard>(
         'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
         (foundCards: Array<ICard>) => {

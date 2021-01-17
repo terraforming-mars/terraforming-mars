@@ -18,21 +18,15 @@ describe('ProjectInspection', function() {
     player.playedCards.push(actionCard);
   });
 
-  it('Can\'t play if no actions played this turn', function() {
-    expect(card.canPlay(player, game)).is.not.true;
-  });
-
-  it('Can\'t play if available actions can\'t act', function() {
-    player.setActionsThisGeneration(actionCard.name);
-    player.megaCredits = 1;
-
-    expect(card.canPlay(player, game)).is.not.true;
+  it('Can always play', function() {
+    expect(card.canPlay()).is.true;
+    expect(card.play(player, game)).is.undefined;
   });
 
   it('Should play', function() {
     player.setResource(Resources.MEGACREDITS, 2);
     player.setActionsThisGeneration(actionCard.name);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay()).is.true;
 
     const play = card.play(player, game);
     expect(play instanceof SelectCard).is.true;

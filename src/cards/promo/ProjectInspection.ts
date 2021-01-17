@@ -35,18 +35,19 @@ export class ProjectInspection implements IProjectCard {
       return result;
     }
 
-    public canPlay(player: Player, game: Game): boolean {
-      return this.getActionCards(player, game).length > 0;
+    public canPlay(): boolean {
+      return true;
     }
 
     public play(player: Player, game: Game) {
-      if (this.getActionCards(player, game).length === 0 ) {
+      const actionCards = this.getActionCards(player, game);
+      if (actionCards.length === 0) {
         return undefined;
       }
       return new SelectCard(
         'Perform an action from a played card again',
         'Take action',
-        this.getActionCards(player, game),
+        actionCards,
         (foundCards: Array<ICard>) => {
           const foundCard = foundCards[0];
           game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));

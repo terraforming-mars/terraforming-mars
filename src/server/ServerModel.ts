@@ -254,7 +254,7 @@ function getWaitingFor(
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: undefined,
-    isBlueAction: false,
+    selectBlueCardAction: false,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -287,9 +287,9 @@ function getWaitingFor(
     playerInputModel.minCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).minCardsToSelect;
-    playerInputModel.isBlueAction = (waitingFor as SelectCard<
+    playerInputModel.selectBlueCardAction = (waitingFor as SelectCard<
           ICard
-      >).isBlueAction;
+      >).selectBlueCardAction;
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

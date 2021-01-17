@@ -59,7 +59,7 @@ export const SelectCard = Vue.component('select-card', {
       if (this.playerinput.cards === undefined) {
         return [];
       }
-      if (this.playerinput.isBlueAction) {
+      if (this.playerinput.selectBlueCardAction) {
         return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(

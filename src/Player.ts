@@ -1527,6 +1527,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private passOption(): PlayerInput {
     return new SelectOption('Pass for this generation', 'Pass', () => {
+      this.pass();
       this.game.log('${0} passed', (b) => b.player(this));
       return undefined;
     });

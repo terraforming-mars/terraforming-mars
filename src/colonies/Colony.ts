@@ -118,9 +118,8 @@ export abstract class Colony implements SerializedColony {
 
       this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
 
-      player.game.defer(new GiveColonyBonus(player, this));
-
       if (usesTradeFleet) {
+        player.game.defer(new GiveColonyBonus(player, this));
         this.visitor = player.id;
         player.tradesThisTurn++;
       }

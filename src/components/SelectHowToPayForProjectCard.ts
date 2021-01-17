@@ -220,10 +220,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning: function(): boolean {
-      return this.card?.reserveUnits.steel > 0;
+      return this.card?.reserveUnits?.steel > 0;
     },
     showReserveTitaniumWarning: function(): boolean {
-      return this.card?.reserveUnits.titanium > 0;
+      return this.card?.reserveUnits?.titanium > 0;
     },
     saveData: function() {
       const htp: HowToPay = {

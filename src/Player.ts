@@ -1606,11 +1606,30 @@ export class Player implements ISerializable<SerializedPlayer> {
       const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
       const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
       let maxPay = 0;
+
+      let steel = this.steel;
+      let titanium = this.titanium;
+      if (card.reserveUnits !== undefined) {
+        // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
+        if (steel < card.reserveUnits.steel) {
+          return false;
+        }
+        // Set aside reserve units in case the card has a building tag.
+        steel = Math.max(0, steel - card.reserveUnits.steel);
+
+        // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
+        if (titanium < card.reserveUnits.titanium) {
+          return false;
+        }
+        // Set aside reserve units in case the card has a space tag.
+        steel = Math.max(0, steel - card.reserveUnits.steel);
+        titanium -= Math.max(0, card.reserveUnits.titanium);
+      }
       if (canUseSteel) {
-        maxPay += this.steel * this.steelValue;
+        maxPay += steel * this.steelValue;
       }
       if (canUseTitanium) {
-        maxPay += this.titanium * this.getTitaniumValue(game);
+        maxPay += titanium * this.getTitaniumValue(this.game);
       }
 
       const psychrophiles = this.playedCards.find(

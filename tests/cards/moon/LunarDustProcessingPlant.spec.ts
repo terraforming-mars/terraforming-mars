@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
+import {LunarDustProcessingPlant} from '../../../src/cards/moon/LunarDustProcessingPlant';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {MoonSpaces} from '../../../src/moon/MoonSpaces';
@@ -11,23 +11,25 @@ import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
-describe('MareNectarisMine', () => {
+describe('LunarDustProcessingPlant', () => {
   let game: Game;
   let player: Player;
   let moonData: IMoonData;
-  let card: MareNectarisMine;
+  let card: LunarDustProcessingPlant;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('id', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
-    card = new MareNectarisMine();
+    card = new LunarDustProcessingPlant();
   });
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 0;
     player.megaCredits = card.cost;
+
+    
+    player.titanium = 0;
     expect(player.getPlayableCards(game)).does.not.include(card);
     player.titanium = 1;
     expect(player.getPlayableCards(game)).does.include(card);
@@ -51,4 +53,3 @@ describe('MareNectarisMine', () => {
     expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
   });
 });
-

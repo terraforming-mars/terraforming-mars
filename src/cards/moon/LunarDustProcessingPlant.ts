@@ -34,6 +34,7 @@ export class LunarDustProcessingPlant extends Card implements IProjectCard {
   public reserveUnits = Units.of({titanium: 1});
 
   public play(player: Player) {
+    Units.deductUnits(this.reserveUnits, player);
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

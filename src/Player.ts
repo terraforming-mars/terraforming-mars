@@ -61,6 +61,7 @@ import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 
 export type PlayerId = string;
 
@@ -1674,11 +1675,26 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
-  private addStandardProjects(options: Array<PlayerInput>) {
-    const standardProjects = this.getAvailableStandardProjects();
-    if (standardProjects.cards.length >= 1) {
-      options.push(standardProjects);
+  // Public for testing
+  public getPlayableStandardProjects(): Array<StandardProjectCard> {
+    return new CardLoader(this.game.gameOptions)
+      .getStandardProjects().sort((a, b) => a.cost - b.cost)
+      .filter((card) => card.canAct(this, this.game))
+      .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS);
+  }
+
+  private getPlayableStandardProjectOption(): PlayerInput | undefined {
+    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
+    if (standardProjects.length === 0) {
+      return undefined;
     }
+
+    return new SelectCard(
+      'Standard projects',
+      'Confirm',
+      standardProjects,
+      (card) => card[0].action(this, this.game),
+    );
   }
 
   public takeAction(game: Game): void {
@@ -1884,7 +1900,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    this.addStandardProjects(action.options);
+    const standardProjectsOption = this.getPlayableStandardProjectOption();
+    if (standardProjectsOption !== undefined) {
+      action.options.push(standardProjectsOption);
+    }
 
     action.options.push(
       this.passOption(),
@@ -2198,17 +2217,5 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     return colonyTilesAlreadyBuiltOn < game.colonies.length;
-  }
-
-  public getAvailableStandardProjects() {
-    return new SelectCard(
-      'Standard projects',
-      'Confirm',
-      new CardLoader(this.game.gameOptions)
-        .getStandardProjects().sort((a, b) => a.cost - b.cost)
-        .filter((card) => card.canAct(this, this.game))
-        .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
-      (card) => card[0].action(this, this.game),
-    );
   }
 }

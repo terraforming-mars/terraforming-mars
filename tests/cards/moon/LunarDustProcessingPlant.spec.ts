@@ -5,9 +5,6 @@ import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LunarDustProcessingPlant} from '../../../src/cards/moon/LunarDustProcessingPlant';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
-import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -36,19 +33,18 @@ describe('LunarDustProcessingPlant', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.miningRate).eq(0);
+    expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.miningRate).eq(1);
+    expect(moonData.logisticRate).eq(1);
+  });
 
-    const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
-    expect(mareNectaris.player).eq(player);
-    expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
+  it('effect', () => {
+    player.playedCards = [card];
+    player.getPlayableCards
   });
 });

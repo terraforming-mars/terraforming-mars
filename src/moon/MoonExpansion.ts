@@ -13,6 +13,7 @@ import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
+import {Tags} from '../cards/Tags';
 // import {IProjectCard} from '../cards/IProjectCard';
 // import {Units} from '../Units';
 // import {CardName} from '../CardName';
@@ -182,15 +183,11 @@ export class MoonExpansion {
   //   return tiles;
   // }
 
-  // public static moonToModel(game: Game): MoonModel | undefined {
-  //   return MoonSerialization.moonToModel(game);
-  // }
-
   /*
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
-  public static adjustedReservationCosts(player: Player, card: IProjectCard) : Units {
-    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES)) {
+  public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
+    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
       return Units.EMPTY;
     }
 

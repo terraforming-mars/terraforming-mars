@@ -2,9 +2,12 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
+import {Cards} from '../../../src/cards/Cards';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LunarDustProcessingPlant} from '../../../src/cards/moon/LunarDustProcessingPlant';
 import {expect} from 'chai';
+import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
+import {CardName} from '../../../src/CardName';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -44,7 +47,20 @@ describe('LunarDustProcessingPlant', () => {
   });
 
   it('effect', () => {
+    // This test and the next show that Mare Sernaitatis needs a steel and titanium.
+    player.titanium = 2;
+    player.steel = 1;
+    player.megaCredits = 1000;
+
+    player.cardsInHand = [new MareSerenitatisMine()];
+    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+
+    player.titanium = 2;
+    player.steel = 0;
+    expect(player.getPlayableCards().map(Cards.toCardName)).is.empty;
+
+    // And this one shows that with Lunar Dust Processing Plant, doesn't need steel.
     player.playedCards = [card];
-    player.getPlayableCards
+    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 });

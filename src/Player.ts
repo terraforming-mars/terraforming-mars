@@ -62,6 +62,7 @@ import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
 import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {MoonExpansion} from './moon/MoonExpansion';
 
 export type PlayerId = string;
 
@@ -1601,28 +1602,32 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
-      const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
+      const canUseSteel = card.tags.includes(Tags.BUILDING);
+      const canUseTitanium = card.tags.includes(Tags.SPACE);
       let maxPay = 0;
 
       let steel = this.steel;
       let titanium = this.titanium;
+
+      // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
+      // reserve costs that a player cannot afford.
       if (card.reserveUnits !== undefined) {
+        const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
         // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-        if (steel < card.reserveUnits.steel) {
+        if (steel < reserveUnits.steel) {
           return false;
         }
         // Set aside reserve units in case the card has a building tag.
-        steel = Math.max(0, steel - card.reserveUnits.steel);
+        steel = Math.max(0, steel - reserveUnits.steel);
 
         // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-        if (titanium < card.reserveUnits.titanium) {
+        if (titanium < reserveUnits.titanium) {
           return false;
         }
         // Set aside reserve units in case the card has a space tag.
-        steel = Math.max(0, steel - card.reserveUnits.steel);
-        titanium -= Math.max(0, card.reserveUnits.titanium);
+        titanium = Math.max(0, titanium - reserveUnits.titanium);
       }
+
       if (canUseSteel) {
         maxPay += steel * this.steelValue;
       }
@@ -1677,6 +1682,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Public for testing
   public getPlayableStandardProjects(): Array<StandardProjectCard> {
+    // TODO(kberg): Filter playability based on the project's reserve units.
+    // TODO: Make standard projects static for the game.
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects().sort((a, b) => a.cost - b.cost)
       .filter((card) => card.canAct(this, this.game))

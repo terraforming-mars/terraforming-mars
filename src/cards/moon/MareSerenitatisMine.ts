@@ -25,7 +25,7 @@ export class MareSerenitatisMine extends Card implements IProjectCard, IMoonCard
 
       metadata: {
         description: 'Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. ' +
-        'Place a mine ON THE RESERVED AREA and adjacent to it road tile. Raise Mining Rate 1 step and Logistic Rate 1 step.',
+        'Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the Mining Rate 1 step and the Logistic Rate 1 step.',
         cardNumber: 'M04',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).minus().steel(1).br;

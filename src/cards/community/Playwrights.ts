@@ -45,6 +45,9 @@ export class Playwrights implements CorporationCard {
           });
 
           const cost = player.getCardCost(game, selectedCard);
+          // Special case for Law Suit which enters another player's discard pile
+          const isLawSuit = selectedCard.name === CardName.LAW_SUIT ? false : true;
+
           game.defer(new SelectHowToPayDeferred(
             player,
             cost,
@@ -63,7 +66,7 @@ export class Playwrights implements CorporationCard {
                     }
                   }
                   return undefined;
-                }));
+                }), isLawSuit);
               },
             },
           ));

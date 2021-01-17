@@ -1739,15 +1739,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.buttonLabel = 'Take action';
 
     const convertPlants = new ConvertPlants();
-    if (convertPlants.canAct(this, game)) {
-      action.options.push(convertPlants.action(this, game));
+    if (convertPlants.canAct(this)) {
+      action.options.push(convertPlants.action(this));
     }
 
     const convertHeat = new ConvertHeat();
-    if (convertHeat.canAct(this, game)) {
+    if (convertHeat.canAct(this)) {
       action.options.push(new SelectOption(
         `Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-          return convertHeat.action(this, game);
+          return convertHeat.action(this);
         }));
     }
 
@@ -1841,7 +1841,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Sell patents
     const sellPatents = new SellPatents();
     if (sellPatents.canAct(this)) {
-      action.options.push(sellPatents.action(this, game));
+      action.options.push(sellPatents.action(this));
     }
 
     // Propose undo action only if you have done one action this turn
@@ -2153,9 +2153,9 @@ export class Player implements ISerializable<SerializedPlayer> {
         .getStandardActions()
         .filter((card) => card.cardType === CardType.STANDARD_PROJECT)
         .sort((a, b) => a.cost - b.cost)
-        .filter((card) => card.canAct(this, this.game))
+        .filter((card) => card.canAct(this))
         .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
-      (card) => card[0].action(this, this.game),
+      (card) => card[0].action(this),
     );
   }
 }

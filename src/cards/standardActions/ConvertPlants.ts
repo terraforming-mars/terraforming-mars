@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -16,29 +15,29 @@ import {ISpace} from '../../boards/ISpace';
 export class ConvertPlants extends StandardActionCard {
   public name = CardName.CONVERT_PLANTS;
 
-  public canAct(player: Player, game: Game): boolean {
+  public canAct(player: Player): boolean {
     if (player.plants < player.plantsNeededForGreenery) {
       return false;
     }
-    if (game.board.getAvailableSpacesForGreenery(player).length === 0) {
+    if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
       return false;
     }
-    if (game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL) {
+    if (player.game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL) {
       return true;
     }
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(REDS_RULING_POLICY_COST);
     }
     return true;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return new SelectSpace(
       `Convert ${player.plantsNeededForGreenery} plants into greenery`,
-      game.board.getAvailableSpacesForGreenery(player),
+      player.game.board.getAvailableSpacesForGreenery(player),
       (space: ISpace) => {
-        this.actionPlayed(player, game);
-        game.addGreenery(player, space.id);
+        this.actionPlayed(player);
+        player.game.addGreenery(player, space.id);
         player.plants -= player.plantsNeededForGreenery;
         return undefined;
       },

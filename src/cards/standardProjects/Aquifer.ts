@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {StandardProjectCard} from './StandardProjectCard';
@@ -13,21 +12,21 @@ export class Aquifer extends StandardProjectCard {
   public name = CardName.STANDARD_AQUIFER;
   public cost = 18;
 
-  public canAct(player: Player, game: Game): boolean {
-    if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
+  public canAct(player: Player): boolean {
+    if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
       return false;
     }
 
     let additionalCost = 0;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       additionalCost += REDS_RULING_POLICY_COST;
     }
 
-    return player.canAfford(this.cost + additionalCost, game);
+    return player.canAfford(this.cost + additionalCost, player.game);
   }
 
-  actionEssence(player: Player, game: Game): void {
-    game.defer(new PlaceOceanTile(player, 'Select space for ocean'));
+  actionEssence(player: Player): void {
+    player.game.defer(new PlaceOceanTile(player, 'Select space for ocean'));
   }
 
   public metadata: CardMetadata = {

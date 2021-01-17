@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {StandardProjectCard} from './StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -13,15 +12,15 @@ export class AirScrapping extends StandardProjectCard {
   public name = CardName.STANDARD_AIR_SCRAPPING;
   public cost = 15;
 
-  public canAct(player: Player, game: Game): boolean {
+  public canAct(player: Player): boolean {
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(cost) && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
+    return player.canAfford(cost) && player.game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
   }
 
-  actionEssence(player: Player, game: Game): void {
-    game.increaseVenusScaleLevel(player, 1);
+  actionEssence(player: Player): void {
+    player.game.increaseVenusScaleLevel(player, 1);
   }
 
   public metadata: CardMetadata = {

@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
@@ -30,19 +29,19 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     return super.discount(player);
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    const moonData = MoonExpansion.moonData(game);
+  public canAct(player: Player): boolean {
+    const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
     if (spaces.length === 0) {
       return false;
     }
 
-    return player.canAfford(this.cost, game) && Units.hasUnits(this.reserveUnits, player);
+    return player.canAfford(this.cost, player.game) && Units.hasUnits(this.reserveUnits, player);
   }
 
-  actionEssence(player: Player, game: Game): void {
+  actionEssence(player: Player): void {
     Units.deductUnits(this.reserveUnits, player);
-    game.defer(new PlaceMoonRoadTile(player));
+    player.game.defer(new PlaceMoonRoadTile(player));
   }
 }

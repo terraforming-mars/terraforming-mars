@@ -1,6 +1,5 @@
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ICard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -20,7 +19,7 @@ export abstract class StandardProjectCard extends StandardActionCard {
       return 0;
     }
 
-    protected abstract actionEssence(player: Player, game: Game): void
+    protected abstract actionEssence(player: Player): void
 
     public onStandardProject(player: Player): void {
       if (player.corporationCard?.onStandardProject !== undefined) {
@@ -34,26 +33,26 @@ export abstract class StandardProjectCard extends StandardActionCard {
       }
     }
 
-    public canAct(player: Player, game: Game): boolean {
-      return player.canAfford(this.cost - this.discount(player), game);
+    public canAct(player: Player): boolean {
+      return player.canAfford(this.cost - this.discount(player), player.game);
     }
 
-    protected projectPlayed(player: Player, game: Game) {
-      game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    protected projectPlayed(player: Player) {
+      player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
       this.onStandardProject(player);
     }
 
-    public action(player: Player, game: Game): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
-      game.defer(new SelectHowToPayDeferred(
+    public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
+      player.game.defer(new SelectHowToPayDeferred(
         player,
         this.cost - this.discount(player),
         {
           title: `Select how to pay for ${this.name} project`,
           afterPay: () => {
-            this.actionEssence(player, game);
+            this.actionEssence(player);
           },
         }));
-      this.projectPlayed(player, game);
+      this.projectPlayed(player);
       return undefined;
     }
 }

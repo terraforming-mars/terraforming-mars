@@ -4,6 +4,8 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Units} from '../../Units';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Player} from '../../Player';
 
 export class SubterraneanHabitats extends Card implements IProjectCard {
   constructor() {
@@ -24,13 +26,16 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
       },
     });
   };
+
   public reserveUnits = Units.of({steel: 2});
 
   public canPlay(): boolean {
     return true;
   }
 
-  public play() {
+  public play(player: Player) {
+    Units.deductUnits(this.reserveUnits, player);
+    MoonExpansion.raiseColonyRate(player);
     return undefined;
   }
 }

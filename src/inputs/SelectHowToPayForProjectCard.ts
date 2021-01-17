@@ -27,7 +27,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
       if (card.reserveUnits === undefined) {
         return [card.name, Units.EMPTY];
       }
-      return [card.name, MoonExpansion.adjustedReservationCosts(player, card)];
+      return [card.name, MoonExpansion.adjustedReserveCosts(player, card)];
     }));
   }
 }

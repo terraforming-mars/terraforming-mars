@@ -29,13 +29,13 @@ export class CulturalMetropolis implements IProjectCard {
     public play(player: Player, game: Game) {
       player.addProduction(Resources.ENERGY, -1);
       player.addProduction(Resources.MEGACREDITS, 3);
-      game.defer(new PlaceCityTile(player, game));
+      game.defer(new PlaceCityTile(player));
       const title = 'Select where to send two delegates';
 
       if (game.turmoil!.getDelegates(player.id) > 1) {
-        game.defer(new SendDelegateToArea(player, game, title, 2, undefined, undefined, false));
+        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
       } else if (game.turmoil!.getDelegates(player.id) === 1 && game.turmoil!.lobby.has(player.id)) {
-        game.defer(new SendDelegateToArea(player, game, title, 2, undefined, undefined, true));
+        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, true));
       }
       return undefined;
     }

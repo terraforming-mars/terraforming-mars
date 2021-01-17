@@ -21,7 +21,7 @@ export class MinorityRefuge implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, false, 'Select colony for Minority Refuge'));
+      game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge'));
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;
     }

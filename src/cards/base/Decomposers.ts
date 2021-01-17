@@ -10,7 +10,6 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Decomposers extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -24,23 +23,21 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
       metadata: {
         cardNumber: '131',
         requirements: CardRequirements.builder((b) => b.oxygen(3)),
-        description: 'Requires 3% oxygen. 1 VP per 3 Microbes on this card.',
+        description: 'Requires 3% oxygen.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.', (be) => {
             be.animals(1).played.slash();
             be.plants(1).played.slash();
             be.microbes(1).played.slash();
             be.startEffect.microbes(1);
-          });
+          }).br;
+          b.vpText('1 VP per 3 Microbes on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
       },
     });
   }
     public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 3);
-    }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
     }

@@ -37,10 +37,6 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
   }
   public resourceCount = 0;
 
-  public canPlay(player: Player, _game: Game): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 1;
-  }
-
   public play(player: Player, _game: Game) {
     player.addResourceTo(this, 2);
 

@@ -11,7 +11,7 @@ Join us on Discord [here](https://discord.gg/fWXE53K).
 
 ## Demo
 
-You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in issues tab. If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted during each push to `master`. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host the game locally, and it's dead simple: run `npm install` and then `npm run start`.
+You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in issues tab. If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted during each push to `main`. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host the game locally, and it's dead simple: run `npm install` and then `npm run start`.
 
 ## Docker Hub Image Game Server Running
 
@@ -53,6 +53,8 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * `ASSET_CACHE_MAX_AGE`: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
 * `SERVER_ID`: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
 * `LOCAL_FS_DB`: When non-empty, stores game states in JSON files. Good for local development and debugging, bad for hosting lots of games.
+
+A `.env.sample` file can be used as a template. You can rename it to `.env` and it will take effect in your environment. Note that `.env` is ignored in source control.
 
 ### Deployment
 

@@ -168,6 +168,9 @@ export abstract class Board {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
     }).filter(predicate);
     let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+    if (spaces.length === 0) {
+      throw new Error('no spaces available');
+    }
     while (idx < 0) {
       idx += spaces.length;
     }
@@ -217,10 +220,7 @@ export abstract class Board {
   }
 
   public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
-    // TODO(kberg): Remove Player by 2021-01-15
-    const playerSpace : PlayerId | Player | undefined = serialized.player;
-    const playerId: PlayerId | undefined =
-        (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
+    const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space = {
       id: serialized.id,

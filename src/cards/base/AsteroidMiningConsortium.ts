@@ -36,7 +36,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
     return player.getProduction(Resources.TITANIUM) >= 1;
   }
   public play(player: Player, game: Game) {
-    game.defer(new DecreaseAnyProduction(player, game, Resources.TITANIUM, 1));
+    game.defer(new DecreaseAnyProduction(player, Resources.TITANIUM, 1));
     player.addProduction(Resources.TITANIUM);
     return undefined;
   }

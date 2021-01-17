@@ -125,9 +125,9 @@ describe('Turmoil', function() {
   });
 
   it('Check ruling policy: Unity', function() {
-    setRulingParty(turmoil, game, new Unity());
+    setRulingParty(turmoil, player.game, new Unity());
     game.phase = Phase.ACTION;
-    expect(player.getTitaniumValue(game)).to.eq(4);
+    expect(player.getTitaniumValue()).to.eq(4);
   });
 
   it('Does not give Mars First bonus for World Government terraforming', function() {
@@ -146,7 +146,7 @@ describe('Turmoil', function() {
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
-    const availableStandardProjects = player.getAvailableStandardProjects(game);
+    const availableStandardProjects = player.getAvailableStandardProjects();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
     expect(availableStandardProjects.cards).has.lengthOf(1);

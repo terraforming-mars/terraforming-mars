@@ -24,7 +24,7 @@ export class Incite implements CorporationCard {
     public initialAction(player: Player, game: Game) {
       if (game.turmoil) {
         const title = 'Incite first action - Select where to send two delegates';
-        game.defer(new SendDelegateToArea(player, game, title, 2, undefined, undefined, false));
+        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
       }
 
       return undefined;

@@ -28,7 +28,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     this.drawTurmoilCard(player, game);
 
     for (let i = 0; i < 4; i++) {
-      game.defer(new SendDelegateToArea(player, game, 'Select where to send delegate', 1, undefined, undefined, false));
+      game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, false));
     }
 
     return undefined;

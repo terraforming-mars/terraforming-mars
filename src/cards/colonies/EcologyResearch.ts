@@ -23,12 +23,12 @@ export class EcologyResearch implements IProjectCard {
 
       const animalCards = player.getResourceCards(ResourceType.ANIMAL);
       if (animalCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, {count: 1}));
+        game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
       }
 
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
       if (microbeCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 2}));
+        game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
       }
 
       return undefined;

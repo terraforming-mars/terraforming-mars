@@ -35,7 +35,7 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {
+          game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {
             restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
           }));
           return undefined;

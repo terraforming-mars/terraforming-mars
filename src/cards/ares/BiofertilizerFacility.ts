@@ -15,6 +15,7 @@ import {Tags} from '../Tags';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
   constructor() {
@@ -23,6 +24,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
       name: CardName.BIOFERTILIZER_FACILITY,
       tags: [Tags.MICROBE, Tags.BUILDING],
       cost: 12,
+      productionDelta: Units.of({plants: 1}),
 
       metadata: {
         description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
@@ -40,13 +42,9 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, _game: Game): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 1;
-  }
-
   public play(player: Player, game: Game) {
     player.addProduction(Resources.PLANTS, 1);
-    game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 2}));
+    game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
 
     return new SelectSpace(
       'Select space for Biofertilizer Facility tile',

@@ -20,7 +20,7 @@ describe('SponsoredAcademies', function() {
     player.cardsInHand.push(card2, card3);
     expect(card.canPlay(player)).is.true;
 
-    player.playCard(game, card);
+    player.playCard(card);
     const discardCard = game.deferredActions.shift()!.execute() as SelectCard<IProjectCard>;
     expect(discardCard instanceof SelectCard).is.true;
 

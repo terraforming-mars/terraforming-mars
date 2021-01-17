@@ -1,4 +1,5 @@
 import {CardModel} from './CardModel';
+import {GameOptionsModel} from './GameOptionsModel';
 import {ColonyModel} from './ColonyModel';
 import {Color} from '../Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
@@ -13,6 +14,7 @@ import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {SerializedTimer} from '../SerializedTimer';
+import {MoonModel} from './MoonModel';
 
 export interface PlayerModel {
     aresExtension: boolean;
@@ -37,16 +39,18 @@ export interface PlayerModel {
     energy: number;
     energyProduction: number;
     gameAge: number;
+    gameOptions: GameOptionsModel;
     generation: number;
     heat: number;
     heatProduction: number;
-    id: string;
+    id: string; // PlayerId
     isActive: boolean;
     isSoloModeWin: boolean;
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
-    moonExpansion: boolean;
+    moon: MoonModel | undefined;
+    moonExpansion: boolean,
     name: string;
     oceans: number;
     oxygenLevel: number;

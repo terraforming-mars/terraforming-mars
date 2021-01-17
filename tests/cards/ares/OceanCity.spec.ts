@@ -21,25 +21,25 @@ describe('OceanCity', function() {
 
   it('Can play', function() {
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.addProduction(Resources.ENERGY, 1);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
@@ -122,11 +122,11 @@ describe('OceanCity', function() {
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
-    expect(player.getVictoryPoints(game).city).eq(0);
+    expect(player.getVictoryPoints().city).eq(0);
 
     game.addGreenery(player, greenery.id);
 
-    expect(player.getVictoryPoints(game).city).eq(1);
+    expect(player.getVictoryPoints().city).eq(1);
   });
 
   it('Ocean City counts as VP for Capital', function() {
@@ -143,7 +143,7 @@ describe('OceanCity', function() {
 
     // In a real game Capital couldn't be placed without an ocean on the board, but this test
     // works around that to guarantee zero points.
-    expect(player.getVictoryPoints(game).victoryPoints).to.eq(0);
+    expect(player.getVictoryPoints().victoryPoints).to.eq(0);
 
     // And now adds the tile.
     game.addOceanTile(player, oceanSpace.id);
@@ -152,6 +152,6 @@ describe('OceanCity', function() {
     oceanCityAction.cb(oceanSpace);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
 
-    expect(player.getVictoryPoints(game).victoryPoints).to.eq(1);
+    expect(player.getVictoryPoints().victoryPoints).to.eq(1);
   });
 });

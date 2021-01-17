@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player, PlayerId} from '../Player';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
@@ -9,7 +8,6 @@ import {NeutralPlayer} from '../turmoil/Turmoil';
 export class SendDelegateToArea implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public title: string = 'Select where to send a delegate',
         public nbr: number = 1,
         public replace: PlayerId | NeutralPlayer | undefined = undefined,
@@ -24,7 +22,7 @@ export class SendDelegateToArea implements DeferredAction {
     sendDelegate.buttonLabel = 'Send delegate';
     let parties;
     if (this.replace) {
-      parties = this.game.turmoil!.parties.filter((party) => {
+      parties = this.player.game.turmoil!.parties.filter((party) => {
         if (party.delegates.length < 2) return false;
 
         for (const delegate of party.delegates) {
@@ -35,7 +33,7 @@ export class SendDelegateToArea implements DeferredAction {
         return false;
       });
     } else {
-      parties = this.game.turmoil!.parties;
+      parties = this.player.game.turmoil!.parties;
     }
 
     sendDelegate.options = parties.map((party) => new SelectOption(
@@ -43,24 +41,24 @@ export class SendDelegateToArea implements DeferredAction {
       'Send delegate',
       () => {
         if (this.price) {
-          this.game.defer(new SelectHowToPayDeferred(this.player, this.price, {title: 'Select how to pay for send delegate action'}));
+          this.player.game.defer(new SelectHowToPayDeferred(this.player, this.price, {title: 'Select how to pay for send delegate action'}));
         }
 
         if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis
-                    this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, true);
+                    this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, true);
                     for (let i = 0; i < this.nbr - 1; i++) {
-                        this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, false);
+                        this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, false);
                     }
         } else {
           for (let i = 0; i < this.nbr; i++) {
             if (this.replace) {
-                            this.game.turmoil?.removeDelegateFromParty(this.replace, party.name, this.game);
+                            this.player.game.turmoil?.removeDelegateFromParty(this.replace, party.name, this.player.game);
             }
-                        this.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.game, this.fromLobby);
+                        this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, this.fromLobby);
           }
         }
 
-        this.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(this.nbr).party(party));
+        this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(this.nbr).party(party));
         return undefined;
       },
     ));

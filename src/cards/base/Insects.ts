@@ -3,12 +3,10 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Insects extends Card implements IProjectCard {
   constructor() {
@@ -27,9 +25,6 @@ export class Insects extends Card implements IProjectCard {
         description: 'Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.',
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6);
   }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT));

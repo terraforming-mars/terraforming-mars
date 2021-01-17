@@ -13,6 +13,7 @@ import {ICardFactory} from './cards/ICardFactory';
 import {Deck} from './Deck';
 import {GameModule} from './GameModule';
 import {GameOptions} from './Game';
+import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 
 export class CardLoader {
   private readonly gameOptions: GameOptions;
@@ -31,6 +32,7 @@ export class CardLoader {
       [gameOptions.aresExtension, ARES_CARD_MANIFEST],
       [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
+      [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
     ];
 
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);

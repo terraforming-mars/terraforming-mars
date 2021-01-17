@@ -1,11 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class DustSeals extends Card implements IProjectCard {
   constructor() {
@@ -21,9 +18,6 @@ export class DustSeals extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.OCEANS, 3);
   }
   public play() {
     return undefined;

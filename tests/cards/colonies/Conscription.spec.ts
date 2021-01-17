@@ -25,19 +25,19 @@ describe('Conscription', function() {
   });
 
   it('Should apply card discount until next card played', () => {
-    player.playCard(game, card);
+    player.playCard(card);
     expect(card.getCardDiscount(player, game)).to.eq(16);
 
-    player.playCard(game, new MicroMills());
+    player.playCard(new MicroMills());
 
     expect(card.getCardDiscount(player, game)).to.eq(0);
   });
 
   it('Change in generation disables Indentured Workers', () => {
-    player.playCard(game, card);
+    player.playCard(card);
     expect(card.getCardDiscount(player, game)).to.eq(16);
 
-    player.pass(game);
+    player.pass();
 
     expect(card.getCardDiscount(player, game)).to.eq(0);
   });

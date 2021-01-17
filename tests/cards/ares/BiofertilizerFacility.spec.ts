@@ -33,8 +33,8 @@ describe('BiofertilizerFacility', function() {
   it('Play', function() {
     // Set up the cards.
     // Adds the necessary Science tag.
-    player.playCard(game, scienceTagCard);
-    player.playCard(game, microbeHost);
+    player.playCard(scienceTagCard);
+    player.playCard(microbeHost);
 
     // Initial expectations that will change after playing the card.
     expect(player.getProduction(Resources.PLANTS)).is.eq(0);

@@ -22,13 +22,13 @@ describe('Enceladus', function() {
 
   it('Should activate', function() {
     expect(enceladus.isActive).is.false;
-    player.playCard(game, tardigrades);
+    player.playCard(tardigrades);
     expect(enceladus.isActive).is.true;
   });
 
   it('Should build', function() {
-    player.playCard(game, tardigrades);
-    enceladus.addColony(player, game);
+    player.playCard(tardigrades);
+    enceladus.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -41,8 +41,8 @@ describe('Enceladus', function() {
   });
 
   it('Should trade', function() {
-    player.playCard(game, tardigrades);
-    enceladus.trade(player, game);
+    player.playCard(tardigrades);
+    enceladus.trade(player);
 
     // Should have AddResourcesToCard, GiveColontBonus and decrease track
     expect(game.deferredActions).has.lengthOf(3);
@@ -57,13 +57,13 @@ describe('Enceladus', function() {
 
   it('Should give trade bonus', function() {
     const regolithEaters = new RegolithEaters();
-    player.playCard(game, tardigrades);
-    player2.playCard(game, regolithEaters);
+    player.playCard(tardigrades);
+    player2.playCard(regolithEaters);
 
-    enceladus.addColony(player, game);
+    enceladus.addColony(player);
     game.deferredActions.shift()!.execute(); // Gain placement microbes
 
-    enceladus.trade(player2, game);
+    enceladus.trade(player2);
     game.deferredActions.shift()!.execute(); // Gain trade microbes
 
     game.deferredActions.runAll(() => {}); // Trade bonus

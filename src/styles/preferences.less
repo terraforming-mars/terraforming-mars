@@ -27,6 +27,14 @@
     height: 60px;
 }
 
+.preferences_item--info {
+    position: absolute;
+    bottom: 111px;
+    left: 0px;
+    margin-left: 7px;
+    height: 46px
+}
+
 .preferences_item--help {
     position: absolute;
     bottom: 60px;
@@ -153,6 +161,11 @@
     background-image: url(assets/sidebar/preferences_board.png);
 }
 
+.preferences_icon.preferences_icon--info {
+    background-image: url(assets/sidebar/preferences_info.png);
+    background-size: 36px 36px;
+}
+
 .preferences_icon.preferences_icon--help {
     background-image: url(assets/sidebar/preferences_help.png);
     background-size: 36px 36px;
@@ -266,4 +279,55 @@
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.6);
     padding: 3px;
     z-index: 5;
+}
+
+
+
+.help-page-hotkeys {
+    display: flex;
+    background: url(assets/help/hotkeys.png);
+    width: 608px;
+    height: 436px;
+    background-size: 608px 436px;
+    color: white;
+    font-family: Prototype;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 250px;
+    line-height: 38px;
+    .keys{
+        position: relative;
+        left: -245px;
+        margin-top: 263px;
+    }
+}
+
+
+.info_panel-spacing{
+    padding-bottom: 40px;
+}
+
+.info-panel-title{
+    font-size: 25px;
+    font-style: normal;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 15px;
+}
+
+.info_panel {
+    padding: 15px 15px 15px 20px;
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    left: 53px;
+    color: #c6c6c6;
+    background: #000000;
+    max-height: calc(85vh);
+    overflow-y: auto;
+}
+
+.info_panel_actions {
+    text-align: center;
 }

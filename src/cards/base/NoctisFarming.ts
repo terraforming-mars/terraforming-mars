@@ -3,12 +3,11 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class NoctisFarming extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +16,7 @@ export class NoctisFarming extends Card implements IProjectCard {
       name: CardName.NOCTIS_FARMING,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 10,
+      productionDelta: Units.of({megacredits: 1}),
 
       metadata: {
         cardNumber: '176',
@@ -32,9 +32,6 @@ export class NoctisFarming extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -20);
-  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS);
     player.plants += 2;

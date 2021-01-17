@@ -1,19 +1,14 @@
 import {CardModel} from '../models/CardModel';
 import {CardType} from '../cards/CardType';
 import {PlayerModel} from '../models/PlayerModel';
-import {ActiveCardsSortingOrder} from '../components/ActiveCardsSortingOrder';
-import {CardName} from '../CardName';
+import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 
 // Common code for player layouts
 
 export const PlayerMixin = {
   'name': 'PlayerMixin',
   'methods': {
-    sortActiveCards: function(inCards: Array<CardModel>): Array<CardModel> {
-      return inCards.sort(function(cardA, cardB) {
-        return (ActiveCardsSortingOrder.get(cardA.name as CardName) || 0) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || 0);
-      });
-    },
+    sortActiveCards: sortActiveCards,
     getCardsByType: function(
       inCards: Array<CardModel>,
       cardType: Array<CardType>,
@@ -24,11 +19,7 @@ export const PlayerMixin = {
           cards.push(inCards[index]);
         }
       }
-      if (cardType.length === 1 && cardType[0] === CardType.ACTIVE) {
-        return this.sortActiveCards(cards);
-      } else {
-        return cards.reverse();
-      }
+      return cards.reverse();
     },
     getPlayerCardsPlayed: function(
       player: PlayerModel,

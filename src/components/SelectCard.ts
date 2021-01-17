@@ -15,8 +15,7 @@ interface SelectCardModel {
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {ActiveCardsSortingOrder} from '../components/ActiveCardsSortingOrder';
-import {CardName} from '../CardName';
+import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 
 export const SelectCard = Vue.component('select-card', {
   props: {
@@ -61,9 +60,7 @@ export const SelectCard = Vue.component('select-card', {
         return [];
       }
       if (this.playerinput.isBlueAction) {
-        return this.playerinput.cards.sort(function(cardA, cardB) {
-          return (ActiveCardsSortingOrder.get(cardA.name as CardName) || -1) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || -1);
-        });
+        return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(
           CardOrderStorage.getCardOrder(this.player.id),

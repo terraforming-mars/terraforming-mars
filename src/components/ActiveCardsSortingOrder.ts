@@ -1,4 +1,12 @@
-import {CardName} from './CardName';
+import {CardName} from '../CardName';
+import {CardModel} from '../models/CardModel';
+
+export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {
+  const blueCardNumbers = ActiveCardsSortingOrder.size;
+  return inCards.slice().sort(function(cardA, cardB) {
+    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || blueCardNumbers) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || blueCardNumbers);
+  });
+}
 
 export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   // Universal discount

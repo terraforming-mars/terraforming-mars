@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Game} from '../src/Game';
-import {Unity} from '../src/turmoil/parties/Unity';
 import {MarsFirst} from '../src/turmoil/parties/MarsFirst';
 import {Phase} from '../src/Phase';
 import {OrOptions} from '../src/inputs/OrOptions';
@@ -130,12 +129,6 @@ describe('Turmoil', function() {
     expect(turmoil.lobby.size).to.eq(2);
     expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
-  });
-
-  it('Check ruling policy: Unity', function() {
-    setRulingParty(turmoil, player.game, new Unity());
-    game.phase = Phase.ACTION;
-    expect(player.getTitaniumValue()).to.eq(4);
   });
 
   it('Does not give Mars First bonus for World Government terraforming', function() {

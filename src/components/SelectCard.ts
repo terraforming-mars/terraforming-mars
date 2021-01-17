@@ -15,7 +15,7 @@ interface SelectCardModel {
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {ActiveCardsSortingOrder} from '../ActiveCardsSortingOrder';
+import {ActiveCardsSortingOrder} from '../components/ActiveCardsSortingOrder';
 import {CardName} from '../CardName';
 
 export const SelectCard = Vue.component('select-card', {

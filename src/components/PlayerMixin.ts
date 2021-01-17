@@ -1,7 +1,7 @@
 import {CardModel} from '../models/CardModel';
 import {CardType} from '../cards/CardType';
 import {PlayerModel} from '../models/PlayerModel';
-import {ActiveCardsSortingOrder} from '../ActiveCardsSortingOrder';
+import {ActiveCardsSortingOrder} from '../components/ActiveCardsSortingOrder';
 import {CardName} from '../CardName';
 
 // Common code for player layouts

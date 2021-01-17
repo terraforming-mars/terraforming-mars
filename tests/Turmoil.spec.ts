@@ -28,13 +28,14 @@ import {IParty} from '../src/turmoil/parties/IParty';
 import {Greenery} from '../src/cards/standardProjects/Greenery';
 
 describe('Turmoil', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil;
+  let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -109,18 +110,25 @@ describe('Turmoil', function() {
     // parties, changing the dominant party outcome.
     turmoil.parties.forEach((p) => p.delegates = []);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+    player.setTerraformRating(20);
+    player2.setTerraformRating(21);
+
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.endGeneration(game);
-    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
 
-    expect(turmoil.lobby.size).to.eq(1);
-    expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.MARS));
+    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
+    // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(player2.getTerraformRating()).to.eq(20);
+
+    expect(turmoil.lobby.size).to.eq(2);
+    expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
   });
 

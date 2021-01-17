@@ -309,7 +309,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
-                    <div v-show="isActiveCardShown()" v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                    <div v-show="isActiveCardShown()" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 

@@ -1317,7 +1317,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
         this.actionsThisGeneration.add(foundCard.name);
         return undefined;
-      },
+      }, 1, 1, true,
     );
   }
 

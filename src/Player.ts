@@ -1428,7 +1428,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return trade;
   }
 
-  private claimMilestone(milestone: IMilestone, game: Game): SelectOption {
+  private claimMilestone(milestone: IMilestone): SelectOption {
     return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')', () => {
       this.game.claimedMilestones.push({
         player: this,
@@ -1753,15 +1753,15 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     TurmoilHandler.addPlayerAction(this, game, action.options);
 
-    if (this.getPlayableActionCards(game).length > 0) {
+    if (this.getPlayableActionCards().length > 0) {
       action.options.push(
-        this.playActionCard(game),
+        this.playActionCard(),
       );
     }
 
-    if (this.getPlayableCards(game).length > 0) {
+    if (this.getPlayableCards().length > 0) {
       action.options.push(
-        this.playProjectCard(game),
+        this.playProjectCard(),
       );
     }
 
@@ -1809,7 +1809,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           this.titanium >= (3 - this.colonyTradeDiscount))
       ) {
         action.options.push(
-          this.tradeWithColony(openColonies, game),
+          this.tradeWithColony(openColonies),
         );
       }
     }
@@ -2149,7 +2149,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new SelectCard(
       'Standard projects',
       'Confirm',
-      new CardLoader(game.gameOptions)
+      new CardLoader(this.game.gameOptions)
         .getStandardActions()
         .filter((card) => card.cardType === CardType.STANDARD_PROJECT)
         .sort((a, b) => a.cost - b.cost)

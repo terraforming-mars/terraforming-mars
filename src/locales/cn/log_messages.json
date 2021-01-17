@@ -42,26 +42,5 @@
     "drew":"摸了",
     "bought":"买了",
     "sold":"卖了",
-    
-    
-     "1 card(s) were discarded": "1 张卡片被丢弃",
-    "2 card(s) were discarded": "2 张卡片被丢弃",
-    "3 card(s) were discarded": "3 张卡片被丢弃",
-    "4 card(s) were discarded": "4 张卡片被丢弃",
-    "5 card(s) were discarded": "5 张卡片被丢弃",
-    "6 card(s) were discarded": "6 张卡片被丢弃",
-    "7 card(s) were discarded": "7 张卡片被丢弃",
-    "8 card(s) were discarded": "8 张卡片被丢弃",
-    "9 card(s) were discarded": "9 张卡片被丢弃",
-    "10 card(s) were discarded": "10 张卡片被丢弃",
-    "11 card(s) were discarded": "11 张卡片被丢弃",
-    "12 card(s) were discarded": "12 张卡片被丢弃",
-    "13 card(s) were discarded": "13 张卡片被丢弃",
-    "14 card(s) were discarded": "14 张卡片被丢弃",
-    "15 card(s) were discarded": "15 张卡片被丢弃",
-    "16 card(s) were discarded": "16 张卡片被丢弃",
-    "17 card(s) were discarded": "17 张卡片被丢弃",
-    "18 card(s) were discarded": "18 张卡片被丢弃",
-    "19 card(s) were discarded": "19 张卡片被丢弃",
-    "20 card(s) were discarded": "20 张卡片被丢弃"
+    "${0} card(s) were discarded": "1 张卡片被丢弃"
 }

@@ -21,6 +21,8 @@ We care that our project is correct, and that means testing, and unit tests are 
 
 While some small changes can be made without unit tests, larger, or more fundamental changes will need them. Rather than write an exhaustive list here, be confident that your reviewer will guide you as to what tests you need.
 
+If you both agree that the code doesn't need any tests, don't be surprised if your reviewer asks, "How do you know this is correct?"
+
 ## Readability
 
 The code needs to be readable as well as correct. Far too often we have reviewed code from just a few months before, where a regular contributor has since disappeared, and nobody understands what it does. So before sending  PR for review, consider these things: _Is your code structured well? Do comments explain the tricky parts? Do variable names make sense? If you weren’t around to maintain the change, would someone else understand?_

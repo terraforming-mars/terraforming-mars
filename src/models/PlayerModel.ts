@@ -43,7 +43,7 @@ export interface PlayerModel {
     generation: number;
     heat: number;
     heatProduction: number;
-    id: string;
+    id: string; // PlayerId
     isActive: boolean;
     isSoloModeWin: boolean;
     megaCredits: number;

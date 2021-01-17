@@ -1724,13 +1724,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
-    this.setWaitingFor(this.getNormalActions(game), () => {
+    this.setWaitingFor(this.getCommonActions(game), () => {
       this.actionsTakenThisRound++;
       this.takeAction(game);
     });
   }
 
-  private getNormalActions(game: Game) {
+  // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
+  private getCommonActions(game: Game) {
     const action: OrOptions = new OrOptions();
     action.title = 'Take action for action phase, select one ' +
       'available action.';

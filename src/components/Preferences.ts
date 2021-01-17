@@ -7,7 +7,6 @@ import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GameSetupDetail} from '../components/GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
-import {translateText} from '../directives/i18n';
 
 // @ts-ignore
 import {$t} from '../directives/i18n';
@@ -189,9 +188,7 @@ export const Preferences = Vue.component('preferences', {
         return `${rulingPartyName}`;
       }
     },
-    getToolTip: function(tip :string): string {
-      return translateText(tip);
-    },
+    translate: $t,
   },
   mounted: function() {
     this.updatePreferencesFromStorage();
@@ -244,7 +241,7 @@ export const Preferences = Vue.component('preferences', {
                   <i class="preferences_icon preferences_icon--info" 
                   :class="{'preferences_item--is-active': ui.gamesetup_detail_open}" 
                   v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open" 
-                  :title="getToolTip('hotkeys and game setup details')"></i>
+                  :title="translate('hotkeys and game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
                       <div class="help-page-hotkeys">
@@ -266,7 +263,7 @@ export const Preferences = Vue.component('preferences', {
                 </div>
                 <a href="/help-iconology" target="_blank">
                     <div class="preferences_item preferences_item--help">
-                      <i class="preferences_icon preferences_icon--help" :title="getToolTip('game symbols')"></i>
+                      <i class="preferences_icon preferences_icon--help" :title="translate('game symbols')"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">

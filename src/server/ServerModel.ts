@@ -51,6 +51,7 @@ export class Server {
         id: player.id,
         name: player.name,
       })),
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
     };
   }
 
@@ -483,14 +484,22 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
   return {
     aresExtension: options.aresExtension,
     boardName: options.boardName,
+    cardsBlackList: options.cardsBlackList,
     coloniesExtension: options.coloniesExtension,
+    communityCardsOption: options.communityCardsOption,
     corporateEra: options.corporateEra,
+    draftVariant: options.draftVariant,
+    fastModeOption: options.fastModeOption,
+    includeVenusMA: options.includeVenusMA,
     initialDraftVariant: options.initialDraftVariant,
     moonExpansion: options.moonExpansion,
     preludeExtension: options.preludeExtension,
+    promoCardsOption: options.promoCardsOption,
     politicalAgendasExtension: options.politicalAgendasExtension,
     showOtherPlayersVP: options.showOtherPlayersVP,
     showTimers: options.showTimers,
+    shuffleMapOption: options.shuffleMapOption,
+    soloTR: options.soloTR,
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,

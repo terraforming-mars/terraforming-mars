@@ -28,11 +28,10 @@ describe('LunarDustProcessingPlant', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    
     player.titanium = 0;
-    expect(player.getPlayableCards(game)).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.titanium = 1;
-    expect(player.getPlayableCards(game)).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

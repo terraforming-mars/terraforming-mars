@@ -51,7 +51,7 @@ export class Playwrights implements CorporationCard {
             {
               title: 'Select how to pay to replay the event',
               afterPay: () => {
-                player.playCard(game, selectedCard);
+                player.playCard(selectedCard);
                 game.defer(new DeferredAction(player, () => {
                   for (const p of game.getPlayers()) {
                     const card = p.playedCards[p.playedCards.length - 1];

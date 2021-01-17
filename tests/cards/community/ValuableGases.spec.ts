@@ -5,17 +5,17 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('ValuableGases', function() {
-  let card : ValuableGases; let player : Player; let game: Game;
+  let card : ValuableGases; let player : Player;
 
   beforeEach(function() {
     card = new ValuableGases();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.megaCredits).to.eq(6);
   });
 });

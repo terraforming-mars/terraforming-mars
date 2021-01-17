@@ -106,7 +106,7 @@ export namespace DrawCards {
             },
           }));
       } else {
-        keep(player, selected);
+        keep(player, selected, options.paying ? DrawCards.LogType.BOUGHT : DrawCards.LogType.DREW);
         discard(player, selected, cards);
       }
       return undefined;

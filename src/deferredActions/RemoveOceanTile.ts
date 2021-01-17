@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
@@ -8,20 +7,19 @@ import {LogHelper} from '../LogHelper';
 export class RemoveOceanTile implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public title: string = 'Select an Ocean tile to remove from board',
   ) {}
 
   public execute() {
-    if (this.game.board.getOceansOnBoard() === 0) {
+    if (this.player.game.board.getOceansOnBoard() === 0) {
       return undefined;
     }
     return new SelectSpace(
       this.title,
       // false: don't include upgraded oceans.
-      this.game.board.getOceansTiles(false),
+      this.player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        this.game.removeTile(space.id);
+        this.player.game.removeTile(space.id);
         LogHelper.logBoardTileAction(this.player, space, 'ocean space', 'removed');
         return undefined;
       },

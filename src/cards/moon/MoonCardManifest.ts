@@ -24,7 +24,7 @@ import {CoreMine} from './CoreMine';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
 // import {GeodesicTents} from './GeodesicTents';
 // import {GrandLunaAcademy} from './GrandLunaAcademy';
-import {Habitat14} from './Habitat14';
+// import {Habitat14} from './Habitat14';
 // import {HE3FusionPlant} from './HE3FusionPlant';
 // import {HE3Lobbyists} from './HE3Lobbyists';
 // import {HE3ProductionQuotas} from './HE3ProductionQuotas';
@@ -107,7 +107,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
     {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
-    {cardName: CardName.HABITAT_14, Factory: Habitat14},
+    // {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   // These cards have behavior and rendering.
     //   {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
     //   {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},

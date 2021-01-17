@@ -13,7 +13,7 @@ export class CorrosiveRain implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         player.drawCard(turmoil.getPlayerInfluence(player));
-        game.defer(new CorrosiveRainDeferredAction(player, game));
+        game.defer(new CorrosiveRainDeferredAction(player));
       });
     }
 }

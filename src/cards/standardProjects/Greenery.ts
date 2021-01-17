@@ -24,7 +24,7 @@ export class Greenery extends StandardProjectCard {
   }
 
   actionEssence(player: Player, game: Game): void {
-    game.defer(new PlaceGreeneryTile(player, game, 'Select space for greenery'));
+    game.defer(new PlaceGreeneryTile(player, 'Select space for greenery'));
   }
 
   public metadata: CardMetadata = {

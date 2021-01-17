@@ -22,13 +22,13 @@ describe('Miranda', function() {
 
   it('Should activate', function() {
     expect(miranda.isActive).is.false;
-    player.playCard(game, pets);
+    player.playCard(pets);
     expect(miranda.isActive).is.true;
   });
 
   it('Should build', function() {
-    player.playCard(game, pets);
-    miranda.addColony(player, game);
+    player.playCard(pets);
+    miranda.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -41,8 +41,8 @@ describe('Miranda', function() {
   });
 
   it('Should trade', function() {
-    player.playCard(game, pets);
-    miranda.trade(player, game);
+    player.playCard(pets);
+    miranda.trade(player);
 
     // Should have AddResourcesToCard, GiveColonyBonus and decrease track
     expect(game.deferredActions).has.lengthOf(3);
@@ -57,13 +57,13 @@ describe('Miranda', function() {
 
   it('Should give trade bonus', function() {
     const predators = new Predators();
-    player.playCard(game, pets);
-    player2.playCard(game, predators);
+    player.playCard(pets);
+    player2.playCard(predators);
 
-    miranda.addColony(player, game);
+    miranda.addColony(player);
     game.deferredActions.shift()!.execute(); // Gain placement animals
 
-    miranda.trade(player2, game);
+    miranda.trade(player2);
     game.deferredActions.shift()!.execute(); // Gain trade animals
 
     game.deferredActions.runAll(() => {}); // Trade bonus

@@ -275,7 +275,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
       if (players.length === 1) {
         players[0].addProduction(Resources.MEGACREDITS, -2);
-        game.defer(new RemoveColonyFromGame(players[0], game));
+        game.defer(new RemoveColonyFromGame(players[0]));
       }
     }
 
@@ -1078,7 +1078,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   private startFinalGreeneryPlacement(player: Player) {
     this.activePlayer = player.id;
-    player.takeActionForFinalGreenery(this);
+    player.takeActionForFinalGreenery();
   }
 
   private startActionsForPlayer(player: Player) {
@@ -1192,7 +1192,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // BONUS FOR OCEAN TILE AT 0
     if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
-      this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from temperature increase'));
+      this.defer(new PlaceOceanTile(player, 'Select space for ocean from temperature increase'));
     }
 
     this.temperature += steps * 2;
@@ -1320,12 +1320,12 @@ export class Game implements ISerializable<SerializedGame> {
         this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES &&
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
-        this.defer(new PlaceOceanTile(player, this, 'Select space for ocean from placement bonus'));
+        this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
         this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
-    TurmoilHandler.resolveTilePlacementCosts(this, player, space);
+    TurmoilHandler.resolveTilePlacementCosts(this, player);
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1420,7 +1420,7 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(this, player, this.board.getSpace(spaceId));
+    PartyHooks.applyGreensRulingPolicy(player, this.board.getSpace(spaceId));
 
     if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
     return undefined;

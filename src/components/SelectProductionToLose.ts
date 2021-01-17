@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 
 interface SelectProductionToLoseModel {
@@ -11,12 +10,12 @@ interface SelectProductionToLoseModel {
     warning: string | undefined;
 }
 
-import {IProductionUnits} from '../inputs/IProductionUnits';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
 import {$t} from '../directives/i18n';
+import {Units} from '../Units';
 
 export const SelectProductionToLose = Vue.component('select-production-to-lose', {
   props: {
@@ -99,7 +98,7 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
       this.$data[type] = newValue;
     },
     saveData: function() {
-      const htp: IProductionUnits = {
+      const htp: Units = {
         megacredits: this.$data.megacredits,
         steel: this.$data.steel,
         titanium: this.$data.titanium,

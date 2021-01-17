@@ -10,9 +10,9 @@ export interface Policy {
   id: PolicyId;
   description: string;
   isDefault: boolean;
-  onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
+  onTilePlaced?: (player: Player, space: ISpace) => void;
   onCardPlayed?: (player: Player, card: IProjectCard) => void;
-  action?: (player: Player, game: Game) => OrOptions | undefined;
-  canAct?: (player: Player, game: Game) => boolean;
+  action?: (player: Player) => OrOptions | undefined;
+  canAct?: (player: Player) => boolean;
   apply?: (game: Game) => void;
 }

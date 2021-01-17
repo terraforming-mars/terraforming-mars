@@ -195,6 +195,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
             if (component.showCardsBlackList) {
               (refs.cardsFilter as any).selectedCardNames = results['cardsBlackList'];
             }
+
+            if ( ! component.seededGame) {
+              component.seed = Math.random();
+            }
           });
         }
       }, false);
@@ -426,7 +430,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
 
       const dataToSend = JSON.stringify({
-        players: players,
+        players,
         corporateEra,
         prelude,
         draftVariant,

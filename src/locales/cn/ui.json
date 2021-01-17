@@ -153,7 +153,7 @@
     "Greenery (23 MC)": "绿化 (23 MC)",
     "City (25 MC)": "建造城市 (25 MC)",
     "Build colony (17 MC)": "建立殖民地 (17 MC)",
-    "Air scrapping (15 MC)": "建设金星(15 MC)",
+    "Air scrapping (15 MC)": "空中竞争(15 MC)",
     "Buffer Gas (16 MC)": "缓冲气体 (16 MC) - 提升1TR",
     "Power plant": "建造发电厂",
     "Asteroid": "导引小行星",
@@ -179,7 +179,23 @@
     "LoginOut": "登出",
     "Help Translation": "帮助翻译",
     
-    
+        
+    "Toggle all": "全部切换",
+    "Base": "基础",
+    "Agendas": "议会扩",
+    "Random": "随机",
+    "The Moon": "月亮扩",
+    "Drafted cards": "已选择卡牌",
+    "Take first action of Celestic corporation": "为Celestic公司做出第一个行动",
+    "Draw 2 cards with a floater icon on it": "摸两张含有云豆的牌",
+    "Project Cards": "项目卡牌",
+    "Standard Projects": "标准项目",
+    "Preludes": "前序",
+    "filter": "过滤器",
+    "Filter description": "过滤叙述",
+    "Sort by ID": "按编号排序",
+
+ 
 
     "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "介绍：请点击名字右方的复制按钮以复制链接发送给相应玩家，然后你自己点击自己名字来开始游戏",
     "Save this page in case you or one of your opponents loses a link.": "请保存此页面如果你或者其他玩家丢失链接或者更换设备，您可以再次发送给他们",
@@ -210,7 +226,13 @@
      "Show timers": "显示计时器",
      "You cannot pay for this card": "你不能为此牌支付",
      "Select card(s) to buy":"选择你需要购买的牌",
-     
+   
+    
+    "Air Scrapping": "空中竞争",
+    "Buffer Gas": "缓冲气体",
+    "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "花费16MC来提升改造度1格，仅Solo用。",
+    "Sell Patents": "贩卖专利",
+    "(Discard any number of cards to gain that amount of MC.)": "丢弃任意数量的卡牌来获得对应数量的MC",
     "(Spend 11 MC to increase your Energy production 1 step.)": "花费11MC来增加你的电力产能1格",
     "(Spend 14 MC to raise temperature 1 step.)":"花费14MC来提升温度1格",
     "(Spend 15 MC to raise Venus 1 step.)": "花费15MC来提升金星改造度1格",

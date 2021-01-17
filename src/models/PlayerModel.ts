@@ -1,4 +1,5 @@
 import {CardModel} from './CardModel';
+import {GameOptionsModel} from './GameOptionsModel';
 import {ColonyModel} from './ColonyModel';
 import {Color} from '../Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
@@ -38,6 +39,7 @@ export interface PlayerModel {
     energy: number;
     energyProduction: number;
     gameAge: number;
+    gameOptions: GameOptionsModel;
     generation: number;
     heat: number;
     heatProduction: number;

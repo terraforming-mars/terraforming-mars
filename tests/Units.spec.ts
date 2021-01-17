@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {Player} from '../src/Player';
+import {Resources} from '../src/Resources';
 import {Units} from '../src/Units';
-import {TestPlayers} from './TestingUtils';
+import {setPlayerProductionForTest, TestPlayers} from './TestingUtils';
 
 describe('Units', () => {
   it('of', () => {
@@ -201,5 +202,98 @@ describe('Units', () => {
   it('EMPTY', () => {
     const units = Units.EMPTY;
     expect(() => units.megacredits = 1).to.throw();
+  });
+
+  it('deduct production', () => {
+    function asProductionUnits(player: Player): Units {
+      return {
+        megacredits: player.getProduction(Resources.MEGACREDITS),
+        steel: player.getProduction(Resources.STEEL),
+        titanium: player.getProduction(Resources.TITANIUM),
+        plants: player.getProduction(Resources.PLANTS),
+        energy: player.getProduction(Resources.ENERGY),
+        heat: player.getProduction(Resources.HEAT),
+      };
+    };
+
+    const player = TestPlayers.BLUE.newPlayer();
+
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 0,
+      steel: 0,
+      titanium: 0,
+      plants: 0,
+      energy: 0,
+      heat: 0,
+    });
+
+    setPlayerProductionForTest(player, {
+      megacredits: 20,
+      steel: 19,
+      titanium: 18,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({megacredits: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 19,
+      titanium: 18,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({steel: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 9,
+      titanium: 18,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({titanium: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 9,
+      titanium: 8,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({plants: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 9,
+      titanium: 8,
+      plants: 7,
+      energy: 16,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({energy: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 9,
+      titanium: 8,
+      plants: 7,
+      energy: 6,
+      heat: 15,
+    });
+
+    Units.deductProduction(Units.of({heat: 10}), player);
+    expect(asProductionUnits(player)).deep.eq({
+      megacredits: 10,
+      steel: 9,
+      titanium: 8,
+      plants: 7,
+      energy: 6,
+      heat: 5,
+    });
   });
 });

@@ -18,21 +18,21 @@ describe('Io', function() {
   });
 
   it('Should build', function() {
-    io.addColony(player, game);
+    io.addColony(player);
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
     expect(player2.getProduction(Resources.HEAT)).to.eq(0);
   });
 
   it('Should trade', function() {
-    io.trade(player, game);
+    io.trade(player);
     expect(player.heat).to.eq(3);
     expect(player2.heat).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
-    io.addColony(player, game);
+    io.addColony(player);
 
-    io.trade(player2, game);
+    io.trade(player2);
     game.deferredActions.runAll(() => {});
 
     expect(player.getProduction(Resources.HEAT)).to.eq(1);

@@ -28,7 +28,7 @@ export const MoonBoard = Vue.component('moonboard', {
   },
   methods: {
     getAllNonColonySpaces: function(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = this.model!.spaces;
+      const boardSpaces: Array<SpaceModel> = this.model.spaces;
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
           return parseInt(space1.id) - parseInt(space2.id);
@@ -39,7 +39,7 @@ export const MoonBoard = Vue.component('moonboard', {
       });
     },
     getSpaceById: function(spaceId: string) {
-      for (const space of this.model!.spaces) {
+      for (const space of this.model.spaces) {
         if (space.id === spaceId) {
           return space;
         }

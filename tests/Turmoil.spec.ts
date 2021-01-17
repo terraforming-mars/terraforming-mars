@@ -155,10 +155,10 @@ describe('Turmoil', function() {
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
-    expect(new Greenery().canAct(player, game)).equal(false);
+    expect(new Greenery().canAct(player)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    expect(new Greenery().canAct(player, game)).equal(true);
+    expect(new Greenery().canAct(player)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {

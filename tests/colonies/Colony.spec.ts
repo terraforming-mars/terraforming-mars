@@ -17,8 +17,8 @@ import {BuildColonyStandard} from '../../src/cards/standardProjects/BuildColony'
 
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
-function isBuildColonyStandardProjectAvailable(player: Player, game: Game) {
-  return new BuildColonyStandard().canAct(player, game);
+function isBuildColonyStandardProjectAvailable(player: Player) {
+  return new BuildColonyStandard().canAct(player);
 }
 
 function isTradeWithColonyActionAvailable(player: Player, game: Game) {
@@ -192,20 +192,20 @@ describe('Colony', function() {
   });
 
   it('Should let player build a colony only if they can afford it', function() {
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
     player.megaCredits = 17;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players build a colony if they already have one', function() {
     player.megaCredits = 17;
 
     luna.addColony(player2);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Shouldn\'t let players build a colony if colony tile is full', function() {
@@ -214,15 +214,15 @@ describe('Colony', function() {
 
     luna.addColony(player2);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player3);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player4);
     expect(luna.isColonyFull()).to.be.true;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Should let players trade only if they can afford it', function() {

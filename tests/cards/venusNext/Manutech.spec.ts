@@ -24,7 +24,7 @@ describe('Manutech', function() {
   });
 
   it('Should add energy resources by Power Plant standard project', function() {
-    new PowerPlantStandard().action(player, game);
+    new PowerPlantStandard().action(player);
     game.deferredActions.shift()!.execute();
     expect(player.getResource(Resources.ENERGY)).to.eq(1);
   });

@@ -43,6 +43,7 @@ describe('DrawCards', function() {
 
   it('draws 3 special', function() {
     DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tags.SPACE}).execute();
+    expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SPACE) && card.cardType === CardType.ACTIVE))
       .has.length(3);
   });
@@ -50,6 +51,7 @@ describe('DrawCards', function() {
   it('draws 2 from 4', function() {
     const action = DrawCards.keepSome(player, 4, {keepMax: 2}).execute();
     expect(action instanceof SelectCard).is.true;
+    expect(action!.minCardsToSelect).to.eq(2);
     expect(action!.maxCardsToSelect).to.eq(2);
     action!.cb([action!.cards[0], action!.cards[2]]);
     expect(player.cardsInHand).has.length(2);
@@ -60,6 +62,7 @@ describe('DrawCards', function() {
     player.megaCredits = 3;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
     expect(action instanceof SelectCard).is.true;
+    expect(action!.minCardsToSelect).to.eq(0);
     expect(action!.maxCardsToSelect).to.eq(1);
     action!.cb([action!.cards[0]]);
     player.game.deferredActions.runNext();
@@ -72,6 +75,7 @@ describe('DrawCards', function() {
     player.megaCredits = 2;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
     expect(action instanceof SelectCard).is.true;
+    expect(action!.minCardsToSelect).to.eq(0);
     expect(action!.maxCardsToSelect).to.eq(0);
     action!.cb([]);
     expect(player.cardsInHand).has.length(0);

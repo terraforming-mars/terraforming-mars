@@ -37,7 +37,7 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
       const opts: Array<SelectOption> = [];
 
       const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
-      const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player, game));
+      const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
       if (this.resourceCount >= 2 && player.titanium > 0) {
         const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
@@ -48,7 +48,7 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
       } else if (player.titanium > 0) {
         return this.addResource(player);
       } else {
-        return this.spendResource(player, game);
+        return this.spendResource(player);
       }
 
       return new OrOptions(...opts);
@@ -60,9 +60,9 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    private spendResource(player: Player, game: Game) {
+    private spendResource(player: Player) {
       this.resourceCount -= 2;
-      player.increaseTerraformRating(game);
+      player.increaseTerraformRating();
       return undefined;
     }
 

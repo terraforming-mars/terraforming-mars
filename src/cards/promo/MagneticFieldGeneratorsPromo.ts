@@ -33,7 +33,7 @@ export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public play(player: Player, game: Game) {
       player.addProduction(Resources.ENERGY, -4);
       player.addProduction(Resources.PLANTS, 2);
-      player.increaseTerraformRatingSteps(3, game);
+      player.increaseTerraformRatingSteps(3);
 
       const availableSpaces = game.board.getAvailableSpacesOnLand(player);
       if (availableSpaces.length < 1) return undefined;

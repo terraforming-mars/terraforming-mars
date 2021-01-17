@@ -26,8 +26,8 @@ export class MagneticShield implements IProjectCard {
       return hasEnergyTags;
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(4, game);
+    public play(player: Player) {
+      player.increaseTerraformRatingSteps(4);
       return undefined;
     }
 

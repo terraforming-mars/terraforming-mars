@@ -25,7 +25,7 @@ export class ButterflyEffect extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.increaseTerraformRating(player.game);
+    player.increaseTerraformRating();
     player.game.defer(new ShiftAresGlobalParametersDeferred(player));
     return undefined;
   }

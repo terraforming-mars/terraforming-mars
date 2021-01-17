@@ -29,8 +29,8 @@ export class PoliticalAlliance implements IProjectCard {
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRating(game);
+    public play(player: Player) {
+      player.increaseTerraformRating();
       return undefined;
     }
 

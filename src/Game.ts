@@ -1085,7 +1085,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 
-    player.takeAction(this);
+    player.takeAction();
   }
 
   public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
@@ -1104,7 +1104,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OXYGEN, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
       this.increaseTemperature(player, 1);
@@ -1142,11 +1142,11 @@ export class Game implements ISerializable<SerializedGame> {
         player.drawCard();
       }
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
-        player.increaseTerraformRating(this);
+        player.increaseTerraformRating();
       }
 
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.VENUS, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
 
     // Check for Aphrodite corporation
@@ -1187,7 +1187,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.TEMPERATURE, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
 
     // BONUS FOR OCEAN TILE AT 0
@@ -1447,7 +1447,7 @@ export class Game implements ISerializable<SerializedGame> {
     });
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OCEANS);
-      player.increaseTerraformRating(this);
+      player.increaseTerraformRating();
     }
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOceanPlaced(aresData, player);
@@ -1657,7 +1657,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.gotoResearchPhase();
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction(game);
+      game.getPlayerById(game.activePlayer).takeAction();
     }
 
     return game;

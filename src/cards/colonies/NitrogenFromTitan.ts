@@ -28,7 +28,7 @@ export class NitrogenFromTitan implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
+      player.increaseTerraformRatingSteps(2);
       game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }

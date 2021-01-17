@@ -226,17 +226,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.terraformRating--;
   }
 
-  public increaseTerraformRating(game: Game) {
-    if (!game.gameOptions.turmoilExtension) {
+  public increaseTerraformRating() {
+    if (!this.game.gameOptions.turmoilExtension) {
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;
       return;
     }
 
     // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS) && this.game.phase === Phase.ACTION) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
+        this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
         // Cannot pay Reds, will not increase TR
         return;
@@ -251,9 +251,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.hasIncreasedTerraformRatingThisGeneration = true;
   }
 
-  public increaseTerraformRatingSteps(value: number, game: Game) {
+  public increaseTerraformRatingSteps(value: number) {
     for (let i = 0; i < value; i++) {
-      this.increaseTerraformRating(game);
+      this.increaseTerraformRating();
     }
   }
 
@@ -1682,14 +1682,16 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  public takeAction(game: Game): void {
+  public takeAction(): void {
     if (this.usedUndo) {
       this.usedUndo = false;
       return;
     }
 
+    const game = this.game;
+
     if (game.deferredActions.length > 0) {
-      game.deferredActions.runAll(() => this.takeAction(game));
+      game.deferredActions.runAll(() => this.takeAction());
       return;
     }
 
@@ -1713,7 +1715,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       this.setWaitingFor(this.playPreludeCard(), () => {
         if (this.preludeCardsInHand.length === 1) {
-          this.takeAction(game);
+          this.takeAction();
         } else {
           game.playerIsFinishedTakingActions();
         }
@@ -1761,7 +1763,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
       this.setWaitingFor(initialActionOrPass, () => {
         this.actionsTakenThisRound++;
-        this.takeAction(game);
+        this.takeAction();
       });
       return;
     }

@@ -26,8 +26,8 @@ export class Omnicourt implements IProjectCard {
       return hasRequiredTags;
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
+    public play(player: Player) {
+      player.increaseTerraformRatingSteps(2);
       return undefined;
     }
 

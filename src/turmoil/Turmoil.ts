@@ -275,7 +275,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
         if (this.chairman !== 'NEUTRAL') {
           const player = game.getPlayerById(this.chairman);
-          player.increaseTerraformRating(game);
+          player.increaseTerraformRating();
           game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
         } else {
           game.log('A neutral delegate is the new chairman.');

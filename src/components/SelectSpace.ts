@@ -1,8 +1,8 @@
-
 import Vue, {VNode} from 'vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
+import {PreferencesManager} from './PreferencesManager';
 
 export const SelectSpace = Vue.component('select-space', {
   props: {
@@ -52,6 +52,14 @@ export const SelectSpace = Vue.component('select-space', {
       }
     };
 
+    const confirm = function() {
+      const hideTileConfirmation = PreferencesManager.loadValue('hide_tile_confirmation') === '1';
+      if (hideTileConfirmation) {
+        return true;
+      }
+      return window.confirm('Place your tile here?');
+    };
+
     {
       clearAllAvailableSpaces();
       const elTiles = document.getElementsByClassName('board-space-selectable');
@@ -63,13 +71,15 @@ export const SelectSpace = Vue.component('select-space', {
         elTile.classList.add('board-space--available');
 
         elTile.onclick = () => {
-          clearAllAvailableSpaces();
-          for (let j = 0; j < elTiles.length; j++) {
-            (elTiles[j] as HTMLElement).onclick = null;
+          if (confirm()) {
+            clearAllAvailableSpaces();
+            for (let j = 0; j < elTiles.length; j++) {
+              (elTiles[j] as HTMLElement).onclick = null;
+            }
+            this.$data.spaceId = elTile.getAttribute('data_space_id');
+            elTile.classList.add('board-space--selected');
+            this.saveData();
           }
-          this.$data.spaceId = elTile.getAttribute('data_space_id');
-          elTile.classList.add('board-space--selected');
-          this.saveData();
         };
       }
     }

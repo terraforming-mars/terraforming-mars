@@ -67,6 +67,7 @@ export const Preferences = Vue.component('preferences', {
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
+      'hide_tile_confirmation': false as boolean | unknown[],
     };
   },
   methods: {
@@ -332,6 +333,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="smooth_scrolling" />
                             <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
+                            <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

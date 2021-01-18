@@ -33,6 +33,8 @@ import {FirstLunarSettlement} from './FirstLunarSettlement';
 // import {HeliostatMirrorArray} from './HeliostatMirrorArray';
 // import {HostileTakeover} from './HostileTakeover';
 // import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFactory';
+import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
+import {LTFPrivileges} from './LTFPrivileges';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 // import {IronExtractionCenter} from './IronExtractionCenter';
 // import {LTFHeadquarters} from './LTFHeadquarters';
@@ -40,7 +42,7 @@ import {FirstLunarSettlement} from './FirstLunarSettlement';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 // import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
-// import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
+import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 // import {LunaResort} from './LunaResort';
 // import {LunarIndependenceWar} from './LunarIndependenceWar';
 // import {LunarIndustryComplex} from './LunarIndustryComplex';
@@ -67,6 +69,7 @@ import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {SubterraneanHabitats} from './SubterraneanHabitats';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 // import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
@@ -104,8 +107,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
     {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
+    // {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   // These cards have behavior and rendering.
-    //   {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
     //   {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},
     //   {cardName: CardName.THE_WOMB, Factory: TheWomb},
@@ -117,7 +120,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.LUNA_MINING_HUB, Factory: LunaMiningHub},
     //   {cardName: CardName.LUNA_TRAIN_STATION, Factory: LunaTrainStation},
     //   {cardName: CardName.COLONIST_SHUTTLES, Factory: ColonistShuttles},
-    //   {cardName: CardName.LUNAR_DUST_PROCESSING_PLANT, Factory: LunarDustProcessingPlant},
+    {cardName: CardName.LUNAR_DUST_PROCESSING_PLANT, Factory: LunarDustProcessingPlant},
     //   {cardName: CardName.DEEP_LUNAR_MINING, Factory: DeepLunarMining},
     //   {cardName: CardName.ANCIENT_SHIPYARDS, Factory: AncientShipyards},
     //   // {cardName: CardName.LUNA_PROJECT_OFFICE, Factory: LunaProjectOffice},
@@ -136,8 +139,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     //   {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},
     //   {cardName: CardName.LUNAR_TRADE_FLEET, Factory: LunarTradeFleet},
-    //   // {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
-    //   // {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
+    {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
+    {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
     //   {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},
     //   {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     //   {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
@@ -184,7 +187,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
     //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
-    //   // {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
+    {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     //   {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},

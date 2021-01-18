@@ -61,6 +61,8 @@ import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
+import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {MoonExpansion} from './moon/MoonExpansion';
 
 export type PlayerId = string;
 
@@ -1053,6 +1055,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               calculatedCost: this.getCardCost(game, targetCard.card),
               cardType: card.cardType,
               isDisabled: false,
+              reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
             },
           );
         }
@@ -1166,10 +1169,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public playProjectCard(): PlayerInput {
     return new SelectHowToPayForProjectCard(
+      this,
       this.getPlayableCards(),
-      this.getMicrobesCanSpend(),
-      this.getFloatersCanSpend(),
-      this.canUseHeatAsMegaCredits,
       (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay),
     );
   }
@@ -1594,14 +1595,37 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
-      const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
+      const canUseSteel = card.tags.includes(Tags.BUILDING);
+      const canUseTitanium = card.tags.includes(Tags.SPACE);
       let maxPay = 0;
+
+      let steel = this.steel;
+      let titanium = this.titanium;
+
+      // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
+      // reserve costs that a player cannot afford.
+      if (card.reserveUnits !== undefined) {
+        const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+        // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
+        if (steel < reserveUnits.steel) {
+          return false;
+        }
+        // Set aside reserve units in case the card has a building tag.
+        steel = Math.max(0, steel - reserveUnits.steel);
+
+        // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
+        if (titanium < reserveUnits.titanium) {
+          return false;
+        }
+        // Set aside reserve units in case the card has a space tag.
+        titanium = Math.max(0, titanium - reserveUnits.titanium);
+      }
+
       if (canUseSteel) {
-        maxPay += this.steel * this.steelValue;
+        maxPay += steel * this.steelValue;
       }
       if (canUseTitanium) {
-        maxPay += this.titanium * this.getTitaniumValue();
+        maxPay += titanium * this.getTitaniumValue();
       }
 
       const psychrophiles = this.playedCards.find(
@@ -1649,11 +1673,28 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
   }
 
-  private addStandardProjects(options: Array<PlayerInput>) {
-    const standardProjects = this.getAvailableStandardProjects();
-    if (standardProjects.cards.length >= 1) {
-      options.push(standardProjects);
+  // Public for testing
+  public getPlayableStandardProjects(): Array<StandardProjectCard> {
+    // TODO(kberg): Filter playability based on the project's reserve units.
+    // TODO: Make standard projects static for the game.
+    return new CardLoader(this.game.gameOptions)
+      .getStandardProjects().sort((a, b) => a.cost - b.cost)
+      .filter((card) => card.canAct(this, this.game))
+      .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS);
+  }
+
+  private getPlayableStandardProjectOption(): PlayerInput | undefined {
+    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
+    if (standardProjects.length === 0) {
+      return undefined;
     }
+
+    return new SelectCard(
+      'Standard projects',
+      'Confirm',
+      standardProjects,
+      (card) => card[0].action(this, this.game),
+    );
   }
 
   public takeAction(game: Game): void {
@@ -1859,7 +1900,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    this.addStandardProjects(action.options);
+    const standardProjectsOption = this.getPlayableStandardProjectOption();
+    if (standardProjectsOption !== undefined) {
+      action.options.push(standardProjectsOption);
+    }
 
     action.options.push(
       this.passOption(),
@@ -2173,17 +2217,5 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     return colonyTilesAlreadyBuiltOn < game.colonies.length;
-  }
-
-  public getAvailableStandardProjects() {
-    return new SelectCard(
-      'Standard projects',
-      'Confirm',
-      new CardLoader(this.game.gameOptions)
-        .getStandardProjects().sort((a, b) => a.cost - b.cost)
-        .filter((card) => card.canAct(this, this.game))
-        .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
-      (card) => card[0].action(this, this.game),
-    );
   }
 }

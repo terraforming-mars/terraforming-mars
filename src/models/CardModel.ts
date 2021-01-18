@@ -11,5 +11,5 @@ export interface CardModel {
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;
-    reserveUnits: Units;
+    reserveUnits: Readonly<Units>;
 }

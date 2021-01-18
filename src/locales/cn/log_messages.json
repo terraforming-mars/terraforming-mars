@@ -1,5 +1,5 @@
 {
-    "Generation ${0}": "时代 ${0}",
+    "Generation ${0}": "--<<时代 ${0}>>--",
     "${0} played ${1}": "${0} 打出 ${1}",
     "${0} used ${1} action": "${0} 执行了 ${1} 行动",
     "${0} funded ${1} award": "${0} 资助了 ${1} 结算奖励",
@@ -24,5 +24,23 @@
     "${0} copied ${1} production with ${2}": "${0} 用 ${2} 复制 ${1} 的产能 ",
     "${0} used ${1} action with ${2}": "${0} 用 ${2} 执行 ${1} 行动 ",
     "${0} is the new chairman and got 1 TR increase" : "${0} 成为了新的议会主席,并获得1点改造度(TR)提升",
-    "Turmoil phase has been resolved" : "动荡阶段结算完毕"
+    "Turmoil phase has been resolved" : "动荡阶段结算完毕",
+    
+  
+    "${0} drew ${1}":"${0} 摸了 ${1}",
+    "${0} drew ${1} and ${2}":"${0} 摸了 ${1} 和 ${2}",
+    "${0} drew ${1}, ${2} and ${3}": "${0} 摸了 ${1}, ${2} et ${3}",
+    "${0} sold ${1} patents":"${0} 卖了 ${1} 张专利(牌)",
+    "${0}'s ${1} production increased by ${2}":"${0}的 ${1}产能 增加 ${2}",
+    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} 在第 ${3} 排的第 ${4} 个位置上",
+    "placed":"放置",
+    "greenery tile":"绿化板块",
+    "ocean tile":"海洋板块",
+    "city tile":"城市版块",
+    "special tile":"特殊板块",
+    "${0} ${1} ${2} card(s)":"${0} ${1} ${2} 张牌",
+    "drew":"摸了",
+    "bought":"买了",
+    "sold":"卖了",
+    "${0} card(s) were discarded": "1 张卡片被丢弃"
 }

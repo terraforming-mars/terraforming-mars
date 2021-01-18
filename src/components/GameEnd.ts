@@ -116,7 +116,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <th>City</th>
                                 <th>VP</th>
                                 <th>MC</th>
-                                <th v-if="player.showTimers">Timer</th>
+                                <th v-if="player.gameOptions.showTimers">Timer</th>
                                 <th><div class="game-end-total-column">Total</div></th>
                             </tr>
                         </thead>
@@ -131,7 +131,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td>{{ p.megaCredits }}</td>
-                                <td v-if="player.showTimers">{{ getTimer(p) }}</td>
+                                <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>

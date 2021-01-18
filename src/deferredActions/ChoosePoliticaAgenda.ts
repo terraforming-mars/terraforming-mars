@@ -1,7 +1,6 @@
 import {AndOptions} from '../inputs/AndOptions';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {DeferredAction} from './DeferredAction';
@@ -13,7 +12,6 @@ export class ChoosePoliticalAgenda implements DeferredAction {
   constructor(
     public player: Player,
     public party: IParty,
-    public game: Game,
     public turmoil: Turmoil,
   ) {}
 
@@ -38,7 +36,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
 
     const cb = () => {
       this.turmoil.politicalAgendasData.currentAgenda = agenda;
-      this.turmoil.onAgendaSelected(this.game);
+      this.turmoil.onAgendaSelected(this.player.game);
       return undefined;
     };
 

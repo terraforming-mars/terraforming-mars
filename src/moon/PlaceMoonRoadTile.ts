@@ -2,7 +2,6 @@ import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
-import {Resources} from '../Resources';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonRoadTile implements DeferredAction {
@@ -27,8 +26,6 @@ export class PlaceMoonRoadTile implements DeferredAction {
       (space) => {
         MoonExpansion.addRoadTile(this.player, space.id);
         MoonExpansion.raiseLogisticRate(this.player);
-        // TODO(kberg): do not raise production rate unless this is done with a standard project.
-        this.player.addProduction(Resources.MEGACREDITS, 1, this.player.game);
         return undefined;
       });
   }

@@ -32,7 +32,7 @@ export class BuildColonyStandard extends StandardProjectCard {
   }
 
   actionEssence(player: Player, game: Game): void {
-    game.defer(new BuildColony(player, game, false, 'Select colony'));
+    game.defer(new BuildColony(player, false, 'Select colony'));
   }
 
   public metadata: CardMetadata = {

@@ -48,7 +48,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).temperature = -8;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -59,7 +59,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).oxygenLevel = 3;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -70,7 +70,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).venusScaleLevel = 7;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(true);
   });
 
@@ -81,7 +81,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
     (player as any).terraformRating = 24;
     expect(requirements.satisfies(player)).eq(false);
-    player.playCard(player.game, adaptationTechnology);
+    player.playCard(adaptationTechnology);
     expect(requirements.satisfies(player)).eq(false);
   });
 
@@ -208,5 +208,17 @@ describe('CardRequirements', function() {
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);
+  });
+
+  it('throws errors when out of range', function() {
+    expect(() => CardRequirements.builder((b) => b.temperature(-32))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.temperature(10))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.temperature(-5))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oxygen(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oxygen(15))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oceans(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.oceans(10))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.venus(-1))).to.throw();
+    expect(() => CardRequirements.builder((b) => b.venus(31))).to.throw();
   });
 });

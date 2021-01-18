@@ -39,7 +39,8 @@ export class LavaFlows extends Card implements IProjectCard {
     });
   }
 
-  public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
+  public static getVolcanicSpaces(player: Player): Array<ISpace> {
+    const game = player.game;
     if (game.gameOptions.boardName === BoardName.ORIGINAL) {
       return game.board.getSpaces(SpaceType.LAND, player)
         .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
@@ -60,7 +61,7 @@ export class LavaFlows extends Card implements IProjectCard {
     }
   }
   protected canPlayAdditionalChecks(player: Player, game: Game): boolean {
-    const canPlaceTile = LavaFlows.getVolcanicSpaces(player, game).length > 0;
+    const canPlaceTile = LavaFlows.getVolcanicSpaces(player).length > 0;
     const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
@@ -72,7 +73,7 @@ export class LavaFlows extends Card implements IProjectCard {
   }
   public play(player: Player, game: Game) {
     game.increaseTemperature(player, 2);
-    return new SelectSpace('Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons', LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
+    return new SelectSpace('Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons', LavaFlows.getVolcanicSpaces(player), (space: ISpace) => {
       game.addTile(player, SpaceType.LAND, space, {tileType: TileType.LAVA_FLOWS});
       space.adjacency = this.adjacencyBonus;
       return undefined;

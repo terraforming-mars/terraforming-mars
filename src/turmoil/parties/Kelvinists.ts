@@ -51,7 +51,8 @@ class KelvinistsPolicy01 implements Policy {
     return player.canAfford(10);
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
       player,
@@ -85,7 +86,8 @@ class KelvinistsPolicy03 implements Policy {
     return player.heat >= 6;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 

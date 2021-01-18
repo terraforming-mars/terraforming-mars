@@ -92,6 +92,7 @@ export namespace DrawCards {
     if (options.paying) {
       max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
     }
+    const min = options.paying ? 0 : options.keepMax;
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;
     const button = max === 0 ? 'Oh' : (options.paying ? 'Buy' : 'Select');
@@ -106,7 +107,7 @@ export namespace DrawCards {
             },
           }));
       } else {
-        keep(player, selected);
+        keep(player, selected, options.paying ? DrawCards.LogType.BOUGHT : DrawCards.LogType.DREW);
         discard(player, selected, cards);
       }
       return undefined;
@@ -117,6 +118,6 @@ export namespace DrawCards {
       cards,
       cb,
       max,
-      0);
+      min);
   }
 }

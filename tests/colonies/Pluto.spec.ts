@@ -19,21 +19,21 @@ describe('Pluto', function() {
   });
 
   it('Should build', function() {
-    pluto.addColony(player, game);
+    pluto.addColony(player);
     game.deferredActions.runAll(() => {}); // Draw cards
     expect(player.cardsInHand).has.lengthOf(2);
   });
 
   it('Should trade', function() {
-    pluto.trade(player, game);
+    pluto.trade(player);
     game.deferredActions.runAll(() => {}); // Draw cards
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
   it('Should give trade bonus', function() {
-    pluto.addColony(player, game);
+    pluto.addColony(player);
 
-    pluto.trade(player2, game);
+    pluto.trade(player2);
 
     game.deferredActions.runAll(() => {});
 

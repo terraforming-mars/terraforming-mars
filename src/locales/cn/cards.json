@@ -55,14 +55,13 @@
     "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.": "行动:降低电力产能1级并提升改造度(TR)1级",
 
     "Domed Crater": "圆顶火山口",
-    "Oxygen must be 7% or less.": "氧气浓度不能多于7%",
-    "Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "获得3个植物资源,放置一个城市版块。降低电力产能1级,提升MC产能3级",
-    
+    "(Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.)": "氧气浓度不能多于7%,获得3个植物资源,放置一个城市版块。降低电力产能1级,提升MC产能3级",
+        
     "Noctis City": "诺提斯城",
     "Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.": "降低你的电力产能1级,提升你的MC产能3级。放置一个城市版块到'预留区域',无视基础放置条件。",
 
     "Methane from Titan": "从来自泰坦的甲烷",
-    "Requires 2% oxygen. Increase your heat production 2 steps and your Plant production 2 steps.": "需要达到至少2%的氧气浓度。提升你的热能产能2级和植物产能2级",
+    "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "需要达到至少2%的氧气浓度。提升你的热能产能2级和植物产能2级",
 
     "Imported Hydrogen": "外部注入氢气",
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "获得3个植物资源,或者放置3个微生物资源或2个动物资源到另一张卡。放置一个海洋版块",
@@ -78,13 +77,13 @@
     "Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps.": "放置1个海洋版块。降低你的MC产能2级,提升你的热能产能3级",
 
     "Arctic Algae": "北极的藻类植物",
-    "Effect: When anyone places an ocean tile, gain 2 Plants.": "效果:当任何人放置一个海洋版块时,你获得2个植物资源",
-    "It must be -12 C or colder to play. Gain 1 Plant.": "火星温度不能超过-12度。获得1个植物资源",
+    "(Effect: When anyone places an ocean tile, gain 2 plants.)": "效果:当任何人放置一个海洋版块时,你获得2个植物资源",
+    "(It must be -12 C or colder to play. Gain 1 plant.)": "火星温度不能超过-12度。获得1个植物资源",
 
     "Predators": "捕食者",
     "Action: Remove 1 Animal from any card and add it to this card.": "行动:移除任意一张卡上的1个动物资源,并放置到这张卡上",
-    "Requires 11% oxygen. 1 VP per Animal on this card.": "需要至少11%的氧气浓度才能打出,这张卡每有1个动物资源,获得1分",
-
+    "(Requires 11% oxygen.)": "需要至少11%的氧气浓度才能打出,这张卡每有1个动物资源,获得1分",
+    
     "Space Station": "空间站",
     "Effect: When you play a Space card, you pay 2 MC less for it.": "效果:每当你打出一张空间标志卡,你可以少支付2MC",
 
@@ -111,17 +110,21 @@
 
     "Regolith Eaters": "风化层蚕食者",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.": "行动: 增加1个媒生物资源到本卡,或移除本卡上的2个微生物资源来提升氧气浓度1级",
+    "(Action: Remove 2 Microbes from this card to raise oxygen level 1 step.)": "移除本卡上的2个微生物资源来提升氧气浓度1级",
 
+    
     "GHG Producing Bacteria": "温室气体生产细菌",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.": "行动: 增加1个微生物资源到本卡,或移除本卡上的2个微生物来提升火星温度1级",
+    "(Action: Remove 2 Microbes to raise temperature 1 step.)":"或移除本卡上的2个微生物来提升火星温度1级",
     "Requires 4% oxygen.": "必须至少有4%氧气浓度",
 
     "Ants": "蚂蚁",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "行动: 从任意的卡上移除一个微生物资源,并放置到本卡上",
+    "1 VP PER 2 MICROBES ON THIS CARD.": "这张卡上每有2个微生物资源,获得1分",
     "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "需要至少4%的氧气浓度。这张卡上每有2个微生物资源,获得1分",
 
     "Release of Inert Gases": "释放惰性气体",
-    "Raise your terraform rating 2 steps.": "提升你的改造度(TR)2",
+    "(Raise your terraforming rating 2 steps.)": "提升你的改造度(TR)2",
 
     "Nitrogen-Rich Asteroid": "富氮小行星",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "提升你的改造度(TR)2,提升火星温度1级。提升你的植物产能1级,如果你有至少3个植物标志,则提升4级",
@@ -136,7 +139,7 @@
     "Increase your titanium production 2 steps.": "增加你的钛合金产能2级",
 
     "Food Factory": "食品工厂",
-    "Decrease your Plant production 1 step and increase your MC production 4 steps.": "降低你的植物产能1级，增加你的MC产能4级",
+    "(Decrease your Plant production 1 step and increase your MC production 4 steps)": "降低你的植物产能1级，增加你的MC产能4级",
 
     "Archaebacteria": "古细菌类",
     "It must be -18 C or colder. Increase your Plant production 1 step.": "需要火星温度至少低于-18度。增加你的植物产能1级",
@@ -171,14 +174,16 @@
 
     "Fish": "鱼",
     "Action: Add 1 Animal to this card.": "增加1个动物资源到本卡",
-    "Requires +2 C or warmer. Decrease any Plant production 1 step. 1 VP for each Animal on this card.": "需要火星温度至少为+2度。降低任一玩家的植物产能1级。本卡上每有1个动物资源,获得1分",
+    "(Requires +2 C° or warmer. Decrease any Plant production 1 step.)": "需要火星温度至少为+2度。降低任一玩家的植物产能1级。",
+    "1 VP for each Animal on this card.": "本卡上每有1个动物资源,获得1分",
 
+    
     "Lake Marineris": "水手湖",
-    "Requires 0 C or warmer. Place 2 ocean tiles.": "需要温度至少达到0度,放置2块海洋板块",
+    "(Requires 0° C or warmer. Place 2 ocean tiles.)": "需要温度至少达到0度,放置2块海洋板块",
 
     "Small Animals": "小动物",
-    "Requires 6% oxygen.": "需要氧气浓度至少达到6%",
-    "Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.": "降低任一玩家的植物产能1级。本卡上每有2个动物资源,获得1分",
+    "(Requires 6% oxygen. Decrease any Plant production 1 step.)": "需要氧气浓度至少达到6% 降低任一玩家的植物产能1级。本卡上每有2个动物资源,获得1分",
+ 
 
     "Kelp Farming": "养殖海藻",
     "Requires 6 ocean tiles. Increase your MC production 2 steps and your Plant production 3 steps. Gain 2 Plants.": "需要6块海洋板。增加你的MC产能2级和植物产能3级。获得2个植物。",
@@ -188,8 +193,8 @@
 
     "Vesta Shipyard": "维斯塔造船厂",
 
-    "Beam from a Thorium Asteroid": "钍行星射线",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each.": "需要拥有一个木星标志。增加你的热能产能和电力产能各3级",
+    "Beam From A Thorium Asteroid": "钍行星射线",
+    "(Requires a Jovian tag. Increase your heat production and Energy production 3 steps each)": "需要拥有一个木星标志。增加你的热能产能和电力产能各3级",
 
     "Mangrove": "红树林",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "需要火星温度至少+4度。放置一个绿化版块在原本用于放置海洋版块的地方(无视基础放置条件)。提升氧气浓度1级",
@@ -229,7 +234,8 @@
     "Effect: When you play a card, you pay 2 MC less for it.": "效果: 当你打牌的时候,费用减少2MC",
 
     "Advanced Alloys": "优化合金",
-    "Effect: Each titanium you have is worth 1 MC extra. Each steel you have is worth 1 MC extra.": "效果:你的钛合金资源价值+1MC,你的钢铁资源价值+1MC",
+    "(Effect: Each titanium you have is worth 1 MC extra.)": "效果:你的钛合金资源价值+1MC",
+    "(Effect: Each steel you have is worth 1 MC extra.)": "你的钢铁资源价值+1MC",
 
     "Birds": "鸟",
     "Action: Add an animal to this card.": "行动: 增加一个动物资源到本卡",
@@ -260,7 +266,8 @@
     "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.": "提升火星温度2格并放置2个海洋版块。移除任一玩家最多6个植物资源",
 
     "Ganymede Colony": "木卫三殖民地",
-    "Place a city tile ON THE RESERVED AREA. 1 VP per Jovian tag you have.": "放置一个城市版块在'预留位置'上。你每有一个木星标志,获得1分",
+    "(Place a city tile ON THE RESERVED AREA.)": "放置一个城市版块在'预留位置'上。",
+    " 1 VP per Jovian tag you have": "你每有一个木星标志,获得1分",
 
     "Callisto Penal Mines": "木卫四开采法",
     "Increase your MC production 3 steps.": "增加你的MC产能3级",
@@ -278,10 +285,10 @@
     "Duplicate only the production box of one of your building cards.": "复制一张你已打出的带有建筑标志的卡的产能变化",
 
     "Grass": "草",
-    "Requires -16 C or warmer. Increase your plant production 1 step. Gain 3 plants.": "需要至少 -16 度,增加你的植物产能1级,获得3个植物资源",
+    "(Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "需要至少 -16 度,增加你的植物产能1级,获得3个植物资源",
 
     "Heather": "帚石楠",
-    "Requires -14 C or warmer. Increase your plant production 1 step. Gain 1 plant.": "需要至少 -14 度,增加你的植物产能1级,获得1个植物资源",
+    "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "需要至少 -14 度,增加你的植物产能1级,获得1个植物资源",
 
     "Peroxide Power": "过氧化氢能源",
     "Decrease your MC production 1 step and increase your Energy production 2 steps.": "降低你的MC产能1级并增加你的电力产能2级",
@@ -371,13 +378,13 @@
     "Increase your energy production 2 steps.": "增加你的电力产能2级",
 
     "Farming": "农业",
-    "Requires +4 C or warmer. Increase your MC production 2 steps and your plant production 2 steps. Gain 2 Plants.": "需要至少+4度。增加你的MC产能2级和植物产能2级。获得2个植物资源",
+    "(Requires +4° C or warmer. Increase your MC production 2 steps and your plant production 2 steps. Gain 2 Plants.)": "需要至少+4度。增加你的MC产能2级和植物产能2级。获得2个植物资源",
 
     "Dust Seals": "垃圾密封",
     "Requires 3 or less ocean tiles.": "需要不多于3个海洋版块在场",
 
     "Urbanized Area": "城市化区域",
-    "Decrease your energy production 1 step and increase your MC production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "降低你的电力产能1级并增加你的MC产能2级。放置1个城市版块在相邻至少2个城市的区域",
+    "(Decrease your Energy production 1 step and increase your MC production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "降低你的电力产能1级并增加你的MC产能2级。放置1个城市版块在相邻至少2个城市的区域",
 
     "Sabotage": "蓄意破坏",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 MC.": "移除任一玩家的最多3个钛合金资源,或4个钢铁资源,或7MC",
@@ -402,8 +409,9 @@
     "Place 1 ocean tile.": "放置1个海洋版块",
 
     "Ecological Zone": "生态保护区",
-    "Effect: When you play an animal or plant tag (including these), add an animal to this card.": "效果: 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
-    "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
+    "(Effect: When you play an animal or plant tag /including these/, add an animal to this card.)": "效果: 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
+    "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
+    "1 VP PER 2 ANIMALS ON THIS CARD.": "两个动物1分",
 
     "Zeppelins": "齐柏林飞艇",
     "Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.": "需要至少氧气浓度5%,火星上每有1个城市,增加你的MC产能1级",
@@ -413,20 +421,23 @@
 
     "Decomposers": "分解者",
     "Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.": "效果: 当你打出动物、植物或微生物标志(包括本牌)时,增加一个微生物资源到本牌",
-    "Requires 3% oxygen. 1 VP per 3 Microbes on this card.": "需要至少3%氧气浓度。本牌上每有3个微生物资源,获得1分",
+    "(Requires 3% oxygen.)": "需要至少3%氧气浓度。",
+    "1 VP PER 3 MICROBES ON THIS CARD.": "本牌上每有3个微生物资源,获得1分",
 
     "Fusion Power": "聚变能源",
     "Requires 2 Power tags. Increase your Energy production 3 steps.": "需要至少2个电力标志。增加你的电力产能3级",
 
     "Symbiotic Fungus": "共生真菌",
     "Action: Add a microbe to ANOTHER card.": "行动: 增加一个微生物资源到其它的牌",
-    "Requires -14 C or warmer.": "需要火星温度至少-14度以上",
+    "(Requires -14 C° or warmer.)": "需要火星温度至少-14度以上",
 
     "Extreme-Cold Fungus": "极寒真菌",
-    "Action: Gain 1 plant or add 2 microbes to ANOTHER card.": "行动: 获得1个植物资源或者放置2个微生物资源到其它的牌",
+    "(Action: Gain 1 plant.)": "行动: 获得1个植物资源",
+    "(Action: Add 2 microbes to ANOTHER card.)": "行动:放置2个微生物资源到其它的牌",
     "It must be -10 C or colder.": "火星温度必须不高于-10度",
 
     "Advanced Ecosystems": "先进的生态系统",
+    "Plant Animal Microbe": "植物 动物 微生物",
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "需要1个植物标志,1个微生物标志和1个动物标志",
 
     "Great Dam": "大坝",
@@ -463,7 +474,7 @@
 
     "Herbivores": "食草动物",
     "Effect: When you place a greenery tile, add an Animal to this card.": "效果: 当你放置一个绿化版块时,放置一个动物资源到本牌",
-    "Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.": "需要至少8%氧气浓度。放置1个动物资源到本牌。降低任一玩家的植物产能1级。本牌每有2动物资源,获得1分",
+    "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "需要至少8%氧气浓度。放置1个动物资源到本牌。降低任一玩家的植物产能1级。本牌每有2动物资源,获得1分",
 
     "Insects": "昆虫",
     "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.": "需要至少6%氧气浓度。你每有1个植物标志,增加你的植物产能1级",
@@ -481,6 +492,7 @@
     "Decrease your heat production any number of steps and increase your MC production the same number of steps.": "降低你任意级数的热能产能,增加你对应级数的MC产能",
 
     "Adaptation Technology": "适应性技术",
+    "Global requirements": "全球需求",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "效果: 你打出牌时对全球改造需求+2或-2格",
 
     "Caretaker Contract": "合同工",
@@ -495,6 +507,7 @@
 
     "Nitrite Reducing Bacteria": "亚硝酸盐还原菌",
     "Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.": "行动: 放置1个微生物资源到本牌,或移除3个微生物资源来提升你的改造度(TR) 1格",
+    "(Action: Remove 3 Microbes to increase your TR 1 step.)": "移除3个微生物资源来提升你的改造度(TR) 1格",
     "Add 3 Microbes to this card.": "放置3个微生物到本牌",
 
     "Industrial Microbes": "工业微生物",
@@ -519,7 +532,7 @@
   "Increase your heat production 1 step.": "热能产量+1",
 
   "Magnetic Field Generators": "磁力发动机",
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "电力产量-4 植物产量+2 改造度+3",
+  "(Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.)": "电力产量-4 植物产量+2 改造度+3",
 
   "Shuttles": " 穿梭机",
   "Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.": "（需求：氧气浓度≥5％）电力产量-1 MC产量+2",
@@ -531,10 +544,10 @@
   "Requires 7% oxygen. Increase your Energy production 1 step.": "（需求：氧气浓度≥7％） 电力产量+1",
 
   "Tundra Farming": "冻原农耕",
-  "Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.": "（需求：温度≥6℃） 植物产量+1 MC产量+2 并获得一枚植物资源",
+  "(Requires -6° C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.)": "（需求：温度≥6℃） 植物产量+1 MC产量+2 并获得一枚植物资源",
 
   "Aerobraked Ammonia Asteroid": "氮气小行星",
-  "Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.": "向另一张卡牌增加2枚微生物资源，热能产量+3 植物产量+1",
+  "(Increase your heat production 3 steps and your Plant productions 1 step. Add 2 Microbes to ANOTHER card.)": "(热能产量+3 植物产量+1,向另一张卡牌增加2枚微生物资源)",
 
   "Magnetic Field Dome": "磁力区域圆顶",
   "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "电力产量-2 植物产量+1 改造度+1",
@@ -542,13 +555,14 @@
   "Pets": "宠物",
   "ANIMALS MAY NOT BE REMOVED FROM THIS CARD": "此牌上的动物资源不能被移除",
   "Effect: When any City tile is placed, add an Animal to this card.": "效果:每当有城市板块被放置 时增加1枚动物资源到此牌上",
-  "Add 1 Animal to this card. 1 VP per 2 Animals here.": "增加1枚动物资源到此牌上 此牌上:2枚动物资源=1分",
+  "(Add 1 Animal to this card.)": "增加1枚动物资源到此牌上 ",
+  "1 VP per 2 Animals here.": "此牌上:2枚动物资源=1分",
 
   "Protected Habitats": "受保护的栖息地",
   "OPPONENTS MAY NOT REMOVE YOUR": "效果：对手无法移除你的下列资源",
 
   "Protected Valley": "受保护的山脉",
-  "Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "MC产量+2 放置一块绿植板块到1格海洋保留区上",
+  "(Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "MC产量+2 放置一块绿植板块到1格海洋保留区上",
 
   "Satellites": "卫星",
   "Increase your MC production 1 step for each space tag you have, including this one.": "MC产量+n，n=你的太空图标数（包括此牌）",
@@ -579,7 +593,8 @@
   "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.": "（需求：氧气浓度≥6％） 任一玩家植物产量-1 你的电力产量+2",
 
   "Livestock": "畜牧",
-  "Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.": "（需求：氧气浓度≥9％ 植物产量+1 MC产量+2 此牌上一枚动物资源=1分）",
+  "(Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps)": "（需求：氧气浓度≥9％ 植物产量+1 MC产量+2）",
+  "1 VP for each Animal on this card.": "此牌上一枚动物资源=1分",
 
   "Olympus Conference": "奥林巴斯峰会",
   "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.": "效果：每当你打出一个科技标（包括此牌的）时可选择在此牌上增加一枚科技资源或花费此牌上的一枚科技资源来抽取一张牌",
@@ -621,8 +636,9 @@
   "Raise your TR 1 step for each Jovian tag you have, including this.": "每有一个木星标就提升一步改造度（包括此牌）",
 
   "Immigration Shuttles": "移民航天机",
-  "Increase your MC production 5 steps. 1 VP for every 3rd City in play.": "MC产量+5 场上每三块城市板块=1分",
-
+  "(Increase your MC production 5 steps.)": "MC产量+5",
+  "1 VP for every 3rd City in play.": "场上每三块城市板块=1分",
+    
   "Restricted Area": "管制区",
   "Action: Spend 2 MC to draw a card.": "行动：花费两枚MC资源 抽取一张牌",
   "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each":"效果：当你打出带有V标志的牌时，这张卡上的每个云资源可以当成3MC支付",
@@ -658,7 +674,7 @@
   "2 Science": "2 科技标",
   "3 Science": "3 科技标",
   "5 Science": "5 科技标",
-  "Action: Draw 2 cards.": "行动：抽取两张牌",
+  "(Effect: Draw 2 cards.)": "行动：抽取两张牌",
   
   "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "（需求：科技图标数≥3）电力产量-1",
 

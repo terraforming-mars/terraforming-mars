@@ -230,13 +230,13 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       // this card require additional user input
       case CardName.BIOMASS_COMBUSTORS:
         player.addProduction(Resources.ENERGY, 2);
-        game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+        game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
         return undefined;
 
       // this card require additional user input
       case CardName.HEAT_TRAPPERS:
         player.addProduction(Resources.ENERGY, 1);
-        game.defer(new DecreaseAnyProduction(player, game, Resources.HEAT, 2));
+        game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 2));
         return undefined;
 
       // Mining resource definition

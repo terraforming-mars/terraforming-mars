@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {Colony} from '../colonies/Colony';
 import {OrOptions} from '../inputs/OrOptions';
@@ -9,7 +8,6 @@ import {LogHelper} from '../LogHelper';
 export class IncreaseColonyTrack implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public colony: Colony,
         public steps: number,
         public cb: () => void,

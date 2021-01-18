@@ -42,4 +42,59 @@
       background: #e8e8e8;
     }
   }
+  .spacing-setup{
+    padding-bottom: 64px;
+  }
+}
+
+.game-setup-detail-container{
+  >ul {
+    list-style: none;
+    >li {
+      font-size: @font_size_big;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+    }
+  }
+  .setup-item{
+    margin-right: 10px;
+  }
+
+  .game-config{
+    border-radius: 4px;
+    margin: 0px 5px;
+    padding: 0px 10px;
+    
+    &.map{
+      text-transform: uppercase;
+    }
+    &.fastmode{
+      background-color: #69962e;
+    }
+    &.timer{
+      background-color: #43419c;
+    }
+    &.realtime-vp{
+      background-color: #8d4321;
+    }
+    &.undo{
+      background-color: #757575;
+    }
+    &.generic{
+      background-color: #49597a;
+    }
+    &.board-tharsis{
+      background-color: rgb(202, 117, 64);
+    }
+    &.board-hellas{
+      background-color: rgb(55,111,156);
+    }
+    &.board-elysium{
+      background-color: rgb(31,121,32);
+    }
+    &.board-other{
+      background-color: rgb(106,106,106);;
+    }
+  }
 }

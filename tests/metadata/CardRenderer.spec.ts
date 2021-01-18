@@ -12,14 +12,6 @@ describe('CardRenderer', function() {
       expect(item.type).to.equal(CardRenderItemType.TEMPERATURE);
       expect(item.amount).to.equal(1);
     });
-    it('error if outside of range', () => {
-      expect(() => {
-        CardRenderer.builder((b) => b.temperature(-50));
-      }).to.throw;
-      expect(() => {
-        CardRenderer.builder((b) => b.temperature(55));
-      }).to.throw;
-    });
   });
   describe('oceans', () => {
     it('success', () => {
@@ -27,14 +19,6 @@ describe('CardRenderer', function() {
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.OCEANS);
       expect(item.amount).to.equal(1);
-    });
-    it('error if outside of range', () => {
-      expect(() => {
-        CardRenderer.builder((b) => b.oceans(0));
-      }).to.throw;
-      expect(() => {
-        CardRenderer.builder((b) => b.oceans(10));
-      }).to.throw;
     });
   });
   describe('oxygen', () => {
@@ -44,14 +28,6 @@ describe('CardRenderer', function() {
       expect(item.type).to.equal(CardRenderItemType.OXYGEN);
       expect(item.amount).to.equal(3);
     });
-    it('error if outside of range', () => {
-      expect(() => {
-        CardRenderer.builder((b) => b.oxygen(-1));
-      }).to.throw;
-      expect(() => {
-        CardRenderer.builder((b) => b.oceans(22));
-      }).to.throw;
-    });
   });
   describe('venus', () => {
     it('success', () => {
@@ -59,14 +35,6 @@ describe('CardRenderer', function() {
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.VENUS);
       expect(item.amount).to.equal(18);
-    });
-    it('error if outside of range', () => {
-      expect(() => {
-        CardRenderer.builder((b) => b.oxygen(-1));
-      }).to.throw;
-      expect(() => {
-        CardRenderer.builder((b) => b.oceans(32));
-      }).to.throw;
     });
   });
   it('plants: success', () => {

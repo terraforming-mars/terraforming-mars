@@ -1,0 +1,15 @@
+{
+  "Mare Imbrium Mine": "雨海(月面)矿",
+  "(Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise Mining Rate 1 step.)": "花费1个钛 增加1钢铁产量和1钛产量 在预留区域上放置矿板块并提高开采速度1格",
+ 
+  "Mare Nectaris Mine": "酒海(月面)矿",
+  "(Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.)":"(花费1个钛 增加1钢铁产量。在预留区域上放置矿板块并提高开采速度1格)",
+  
+  "Mare Nubium Mine": "云海(月面)矿",
+    "(Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise Mining Rate 1 step.)": "(花费1个钛 增加1钛产量。在预留区域上放置矿板块并提高开采速度1格)",
+  
+  "Mare Serenitatis Mine": "澄海(月面)矿",
+   "(Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and adjacent to it road tile. Raise Mining Rate 1 step and Logistic Rate 1 step.)": "(花费2个钛和1个钢 增加1钢铁产量和1钛产量。在预留区域上放置矿板块并在与其相邻的地方放置道路板块，提高物流速度1格)"
+  
+  
+}

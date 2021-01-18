@@ -56,7 +56,7 @@ export const SelectSpace = Vue.component('select-space', {
       if (activate) {
         tile.classList.add('board-space--available');
       } else {
-        tile.classList.add('board-space--available');
+        tile.classList.remove('board-space--available');
       }
     };
 
@@ -75,7 +75,7 @@ export const SelectSpace = Vue.component('select-space', {
       if (hideTileConfirmation) {
         return true;
       }
-      return window.confirm('Place your tile here? (This dialog can be disabled in preferences).');
+      return window.confirm('Place your tile here?\n\n(This confirmation can be disabled in preferences).');
     };
 
     {
@@ -93,7 +93,8 @@ export const SelectSpace = Vue.component('select-space', {
           disableAvailableSpaceAnimation();
           animateSpace(tile, true);
           // All this goes on a timeout so it is executed after the animation changes.
-          // Otherwise the confirmation dialog prevents the update.
+          // Otherwise the confirmation dialog prevents the CSS animation updates above
+          // this comment.
           setTimeout(() => {
             tile.classList.remove('board-space--available');
             if (confirm()) {
@@ -104,14 +105,12 @@ export const SelectSpace = Vue.component('select-space', {
               tile.classList.add('board-space--selected');
               this.saveData();
             } else {
+              animateSpace(tile, false);
               // without the timeout, this flashing animation gets out of sync with
               // the other tiles, like the blinker of the car in front of you.
-              setTimeout(() => {
-                animateSpace(tile, false);
-                setTimeout(() => animateAvailableSpaces(tiles), 0);
-              }, 0);
+              setTimeout(() => animateAvailableSpaces(tiles), 0);
             }
-          }, 0);
+          }, 15); // 15ms gives the entire DOM a chance to catch up.
         };
       }
     }

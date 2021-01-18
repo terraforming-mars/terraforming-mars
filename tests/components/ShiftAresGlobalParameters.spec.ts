@@ -49,6 +49,7 @@ describe('ShiftAresGlobalParameters', function() {
       },
       milestoneResults: [],
     },
+    selectBlueCardAction: false,
   };
   function getLocalVue() {
     const localVue = createLocalVue();

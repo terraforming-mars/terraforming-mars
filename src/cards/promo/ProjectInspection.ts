@@ -14,7 +14,6 @@ export class ProjectInspection implements IProjectCard {
     public cost = 0;
     public tags = [];
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
     private getActionCards(player: Player, game: Game): Array<ICard> {
       const result: Array<ICard> = [];
 

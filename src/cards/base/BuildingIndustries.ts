@@ -16,7 +16,6 @@ export class BuildingIndustries extends Card implements IProjectCard {
       name: CardName.BUILDING_INDUSTRIES,
       tags: [Tags.BUILDING],
       cost: 6,
-      hasRequirements: false,
       productionDelta: Units.of({energy: -2, steel: 2}),
 
       metadata: {

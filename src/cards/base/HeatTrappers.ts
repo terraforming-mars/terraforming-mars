@@ -16,7 +16,6 @@ export class HeatTrappers extends Card implements IProjectCard {
       name: CardName.HEAT_TRAPPERS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '178',

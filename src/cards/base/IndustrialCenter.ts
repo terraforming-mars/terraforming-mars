@@ -35,7 +35,6 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
       name,
       tags: [Tags.BUILDING],
       cost: 4,
-      hasRequirements: false,
       adjacencyBonus,
 
       metadata,

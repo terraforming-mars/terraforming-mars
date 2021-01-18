@@ -18,7 +18,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       name: CardName.CONVOY_FROM_EUROPA,
       tags: [Tags.SPACE],
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '161',

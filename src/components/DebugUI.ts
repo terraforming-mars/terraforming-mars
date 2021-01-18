@@ -200,7 +200,7 @@ export const DebugUI = Vue.component('debug-ui', {
                   <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                   <span v-i18n>Turmoil</span>
               </label>
-              
+
               <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo"></input>
               <label for="promo-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-promo"></div>

@@ -33,7 +33,6 @@ export class LavaFlows extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name,
       cost: 18,
-      hasRequirements: false,
       adjacencyBonus,
       metadata,
     });

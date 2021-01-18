@@ -19,7 +19,6 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
       name: CardName.GIANT_ICE_ASTEROID,
       tags: [Tags.SPACE],
       cost: 36,
-      hasRequirements: false,
 
       metadata: {
         description: 'Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.',

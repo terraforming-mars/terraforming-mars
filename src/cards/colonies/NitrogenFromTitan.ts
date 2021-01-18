@@ -17,7 +17,6 @@ export class NitrogenFromTitan implements IProjectCard {
     public tags = [Tags.JOVIAN, Tags.SPACE];
     public name = CardName.NITROGEN_FROM_TITAN;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) : boolean {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

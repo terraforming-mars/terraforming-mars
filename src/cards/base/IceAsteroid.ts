@@ -18,7 +18,6 @@ export class IceAsteroid extends Card implements IProjectCard {
       name: CardName.ICE_ASTEROID,
       tags: [Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '078',

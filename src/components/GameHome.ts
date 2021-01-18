@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
+import {GameSetupDetail} from '../components/GameSetupDetail';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -28,6 +29,7 @@ export const GameHome = Vue.component('game-home', {
   },
   components: {
     Button,
+    'game-setup-detail': GameSetupDetail,
   },
   data: function() {
     return {
@@ -82,6 +84,12 @@ export const GameHome = Vue.component('game-home', {
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
+
+        <div class="spacing-setup"></div>
+        <div v-if="game !== undefined">
+          <h1 v-i18n>Game settings</h1>
+          <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length"></game-setup-detail>
+        </div>
       </div>
     `,
 });

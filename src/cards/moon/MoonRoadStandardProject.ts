@@ -9,7 +9,7 @@ import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 
 export class MoonRoadStandardProject extends StandardProjectCard {
-  public name = CardName.STANDARD_PROJECT_MOON_ROAD;
+  public name = CardName.MOON_ROAD_STANDARD_PROJECT;
   public cost = 18;
 
   public metadata: CardMetadata = {

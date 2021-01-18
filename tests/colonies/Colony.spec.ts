@@ -13,12 +13,12 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {setCustomGameOptions} from '../TestingUtils';
-import {BuildColonyStandard} from '../../src/cards/colonies/BuildColony';
+import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonyStandardProject';
 
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
 function isBuildColonyStandardProjectAvailable(player: Player, game: Game) {
-  return new BuildColonyStandard().canAct(player, game);
+  return new BuildColonyStandardProject().canAct(player, game);
 }
 
 function isTradeWithColonyActionAvailable(player: Player, game: Game) {

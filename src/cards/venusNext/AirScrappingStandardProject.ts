@@ -9,8 +9,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 
-export class AirScrapping extends StandardProjectCard {
-  public name = CardName.STANDARD_AIR_SCRAPPING;
+export class AirScrappingStandardProject extends StandardProjectCard {
+  public name = CardName.AIR_SCRAPPING_STANDARD_PROJECT;
   public cost = 15;
 
   public canAct(player: Player, game: Game): boolean {

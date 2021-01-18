@@ -8,8 +8,8 @@ import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 
-export class BufferGas extends StandardProjectCard {
-  public name = CardName.STANDARD_BUFFER_GAS;
+export class BufferGasStandardProject extends StandardProjectCard {
+  public name = CardName.BUFFER_GAS_STANDARD_PROJECT;
   public cost = 16;
 
   public canAct(player: Player, game: Game): boolean {

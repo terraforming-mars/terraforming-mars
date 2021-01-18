@@ -3,7 +3,7 @@ import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AerialLenses} from './AerialLenses';
 import {BannedDelegate} from './BannedDelegate';
-import {BufferGas} from './BufferGas';
+import {BufferGasStandardProject} from './BufferGasStandardProject';
 import {CulturalMetropolis} from './CulturalMetropolis';
 import {DiasporaMovement} from './DiasporaMovement';
 import {EventAnalysts} from './EventAnalysts';
@@ -55,7 +55,7 @@ export const TURMOIL_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SEPTUM_TRIBUS, Factory: SeptumTribus},
   ],
   standardProjects: [
-    {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},
+    {cardName: CardName.BUFFER_GAS_STANDARD_PROJECT, Factory: BufferGasStandardProject},
   ],
 });
 

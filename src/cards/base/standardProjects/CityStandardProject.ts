@@ -7,8 +7,8 @@ import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {Resources} from '../../../Resources';
 
-export class City extends StandardProjectCard {
-  public name = CardName.STANDARD_CITY;
+export class CityStandardProject extends StandardProjectCard {
+  public name = CardName.CITY_STANDARD_PROJECT;
   public cost = 25;
 
   public canAct(player: Player, game: Game): boolean {

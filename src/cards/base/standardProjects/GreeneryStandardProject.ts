@@ -11,8 +11,8 @@ import * as constants from '../../../constants';
 import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
 import {AltSecondaryTag} from '../../render/CardRenderItem';
 
-export class Greenery extends StandardProjectCard {
-  public name = CardName.STANDARD_GREENERY;
+export class GreeneryStandardProject extends StandardProjectCard {
+  public name = CardName.GREENERY_STANDARD_PROJECT;
   public cost = 23;
 
   public canAct(player: Player, game: Game): boolean {

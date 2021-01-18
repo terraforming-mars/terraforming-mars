@@ -33,7 +33,7 @@ import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
-import {SellPatents} from './cards/base/standardProjects/SellPatents';
+import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -1874,7 +1874,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
 
     // Sell patents
-    const sellPatents = new SellPatents();
+    const sellPatents = new SellPatentsStandardProject();
     if (sellPatents.canAct(this)) {
       action.options.push(sellPatents.action(this, game));
     }
@@ -2190,7 +2190,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       new CardLoader(this.game.gameOptions)
         .getStandardProjects().sort((a, b) => a.cost - b.cost)
         .filter((card) => card.canAct(this, this.game))
-        .filter((card) => card.name !== CardName.STANDARD_SELL_PATENTS),
+        .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT),
       (card) => card[0].action(this, this.game),
     );
   }

@@ -10,8 +10,8 @@ import * as constants from '../../constants';
 import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
-export class BuildColonyStandard extends StandardProjectCard {
-  public name = CardName.STANDARD_BUILD_COLONY;
+export class BuildColonyStandardProject extends StandardProjectCard {
+  public name = CardName.BUILD_COLONY_STANDARD_PROJECT;
   public cost = 17;
 
   private getOpenColonies(player: Player, game: Game) {

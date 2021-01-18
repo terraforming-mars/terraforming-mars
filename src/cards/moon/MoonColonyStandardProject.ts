@@ -10,7 +10,7 @@ import {Units} from '../../Units';
 import {Resources} from '../../Resources';
 
 export class MoonColonyStandardProject extends StandardProjectCard {
-  public name = CardName.STANDARD_PROJECT_MOON_COLONY;
+  public name = CardName.MOON_COLONY_STANDARD_PROJECT;
   public cost = 22;
 
   public metadata: CardMetadata = {

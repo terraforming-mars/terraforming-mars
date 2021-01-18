@@ -7,8 +7,8 @@ import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
 
-export class SellPatents extends StandardProjectCard {
-  public name = CardName.STANDARD_SELL_PATENTS;
+export class SellPatentsStandardProject extends StandardProjectCard {
+  public name = CardName.SELL_PATENTS_STANDARD_PROJECT;
   public cost = 0;
 
   public canAct(player: Player): boolean {

@@ -9,8 +9,8 @@ import {StandardProjectCard} from '../../StandardProjectCard';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 
-export class Aquifer extends StandardProjectCard {
-  public name = CardName.STANDARD_AQUIFER;
+export class AquiferStandardProject extends StandardProjectCard {
+  public name = CardName.AQUIFER_STANDARD_PROJECT;
   public cost = 18;
 
   public canAct(player: Player, game: Game): boolean {

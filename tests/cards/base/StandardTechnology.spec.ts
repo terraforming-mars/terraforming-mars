@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {AsteroidStandard} from '../../../src/cards/base/standardProjects/Asteroid';
-import {SellPatents} from '../../../src/cards/base/standardProjects/SellPatents';
+import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
+import {SellPatentsStandardProject} from '../../../src/cards/base/standardProjects/SellPatentsStandardProject';
 import {StandardTechnology} from '../../../src/cards/base/StandardTechnology';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -9,9 +9,9 @@ describe('StandardTechnology', function() {
     const card = new StandardTechnology();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play();
-    card.onStandardProject(player, new SellPatents());
+    card.onStandardProject(player, new SellPatentsStandardProject());
     expect(player.megaCredits).to.eq(0);
-    card.onStandardProject(player, new AsteroidStandard());
+    card.onStandardProject(player, new AsteroidStandardProject());
     expect(player.megaCredits).to.eq(3);
     expect(action).is.undefined;
   });

@@ -3,7 +3,7 @@ import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AerialMappers} from './AerialMappers';
 import {AerosportTournament} from './AerosportTournament';
-import {AirScrapping} from './AirScrapping';
+import {AirScrappingStandardProject} from './AirScrappingStandardProject';
 import {AirScrappingExpedition} from './AirScrappingExpedition';
 import {Aphrodite} from './Aphrodite';
 import {AtalantaPlanitiaLab} from './AtalantaPlanitiaLab';
@@ -111,7 +111,7 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MINING_QUOTA, Factory: MiningQuota},
   ],
   standardProjects: [
-    {cardName: CardName.STANDARD_AIR_SCRAPPING, Factory: AirScrapping},
+    {cardName: CardName.AIR_SCRAPPING_STANDARD_PROJECT, Factory: AirScrappingStandardProject},
   ],
 
   corporationCards: [

@@ -209,9 +209,9 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   //   {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
   ],
   standardProjects: [
-    {cardName: CardName.STANDARD_PROJECT_MOON_COLONY, Factory: MoonColonyStandardProject},
-    {cardName: CardName.STANDARD_PROJECT_MOON_MINE, Factory: MoonMineStandardProject},
-    {cardName: CardName.STANDARD_PROJECT_MOON_ROAD, Factory: MoonRoadStandardProject},
+    {cardName: CardName.MOON_COLONY_STANDARD_PROJECT, Factory: MoonColonyStandardProject},
+    {cardName: CardName.MOON_MINE_STANDARD_PROJECT, Factory: MoonMineStandardProject},
+    {cardName: CardName.MOON_ROAD_STANDARD_PROJECT, Factory: MoonRoadStandardProject},
   ],
   preludeCards: [
     {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},

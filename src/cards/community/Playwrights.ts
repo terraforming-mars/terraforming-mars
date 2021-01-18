@@ -19,6 +19,7 @@ export class Playwrights implements CorporationCard {
     public tags = [Tags.ENERGY];
     public startingMegaCredits: number = 38;
     public cardType = CardType.CORPORATION;
+    private checkLoops: number = 0;
 
     public play(player: Player) {
       player.addProduction(Resources.ENERGY);
@@ -51,19 +52,25 @@ export class Playwrights implements CorporationCard {
             {
               title: 'Select how to pay to replay the event',
               afterPay: () => {
-                player.playCard(selectedCard);
-                game.defer(new DeferredAction(player, () => {
-                  for (const p of game.getPlayers()) {
-                    const card = p.playedCards[p.playedCards.length - 1];
-
-                    if (card !== undefined && card.name === selectedCard.name) {
-                      p.playedCards.pop();
-                      player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-                      return undefined;
-                    }
-                  }
-                  return undefined;
-                }));
+                player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
+                player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+                if (selectedCard.name === CardName.LAW_SUIT) {
+                  /*
+                   * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
+                   * Needs to be deferred to happen after Law Suit's `play()` method.
+                   */
+                  game.defer(new DeferredAction(player, () => {
+                    game.getPlayers().some((p) => {
+                      const card = p.playedCards[p.playedCards.length - 1];
+                      if (card?.name === selectedCard.name) {
+                        p.playedCards.pop();
+                        return true;
+                      }
+                      return false;
+                    });
+                    return undefined;
+                  }));
+                }
               },
             },
           ));
@@ -72,20 +79,22 @@ export class Playwrights implements CorporationCard {
       );
     }
 
+    public getCheckLoops(): number {
+      return this.checkLoops;
+    }
+
     private getReplayableEvents(player: Player, game: Game): Array<IProjectCard> {
-      const players = game.getPlayers();
-      let playedEvents : IProjectCard[] = [];
+      const playedEvents : IProjectCard[] = [];
 
-      players.forEach((player) => {
-        playedEvents.push(...player.playedCards.filter((card) => card.cardType === CardType.EVENT));
+      this.checkLoops++;
+      game.getPlayers().forEach((p) => {
+        playedEvents.push(...p.playedCards.filter((card) => {
+          return card.cardType === CardType.EVENT &&
+            player.canAfford(player.getCardCost(game, card)) &&
+            (card.canPlay === undefined || card.canPlay(player, game));
+        }));
       });
-
-      playedEvents = playedEvents.filter((card) => {
-        const cost = player.getCardCost(game, card);
-        const canAffordCard = player.canAfford(cost);
-        const canPlayCard = card.canPlay === undefined || card.canPlay(player, game);
-        return canAffordCard && canPlayCard;
-      });
+      this.checkLoops--;
 
       return playedEvents;
     }

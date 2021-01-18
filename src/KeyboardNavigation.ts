@@ -1,7 +1,7 @@
 
 export enum KeyboardNavigation {
-  GAMEBOARD = 'Digit1',
-  PLAYERSOVERVIEW = 'Digit2',
-  HAND = 'Digit3',
-  COLONIES = 'Digit4',
+  GAMEBOARD = 'KeyA',
+  PLAYERSOVERVIEW = 'KeyS',
+  HAND = 'KeyD',
+  COLONIES = 'KeyF',
 }

@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {ICard} from '../cards/ICard';
@@ -11,7 +10,6 @@ import {DeferredAction} from './DeferredAction';
 export class CorrosiveRainDeferredAction implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public title: string = 'Remove 2 floaters from a card or lose up to 10 MC',
   ) {}
 
@@ -21,7 +19,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
             card.resourceCount >= 2);
 
     if (floaterCards.length === 0) {
-      this.player.setResource(Resources.MEGACREDITS, -10, this.game, undefined, true);
+      this.player.setResource(Resources.MEGACREDITS, -10, this.player.game, undefined, true);
       return undefined;
     }
 

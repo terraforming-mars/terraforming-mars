@@ -5,12 +5,20 @@ import {LANGUAGES} from '../constants';
 import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
+import {GameSetupDetail} from '../components/GameSetupDetail';
+import {GameOptionsModel} from '../models/GameOptionsModel';
 
 // @ts-ignore
 import {$t} from '../directives/i18n';
 
 export const Preferences = Vue.component('preferences', {
   props: {
+    playerNumber: {
+      type: Number,
+    },
+    gameOptions: {
+      type: Object as () => GameOptionsModel,
+    },
     player_color: {
       type: String as () => Color,
     },
@@ -42,10 +50,14 @@ export const Preferences = Vue.component('preferences', {
       type: Object as () => TurmoilModel || undefined,
     },
   },
+  components: {
+    'game-setup-detail': GameSetupDetail,
+  },
   data: function() {
     return {
       'ui': {
         'preferences_panel_open': false,
+        'gamesetup_detail_open': false,
       },
       'hide_corporation': false as boolean | unknown[],
       'hide_hand': false as boolean | unknown[],
@@ -176,6 +188,7 @@ export const Preferences = Vue.component('preferences', {
         return `${rulingPartyName}`;
       }
     },
+    translate: $t,
   },
   mounted: function() {
     this.updatePreferencesFromStorage();
@@ -224,9 +237,33 @@ export const Preferences = Vue.component('preferences', {
                         <i class="preferences_icon preferences_icon--colonies"></i>
                     </div>
                 </a>
+                <div class="preferences_item preferences_item--info">
+                  <i class="preferences_icon preferences_icon--info" 
+                  :class="{'preferences_item--is-active': ui.gamesetup_detail_open}" 
+                  v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open" 
+                  :title="translate('hotkeys and game setup details')"></i>
+                    <div class="info_panel" v-if="ui.gamesetup_detail_open">
+                      <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
+                      <div class="help-page-hotkeys">
+                        <div class="keys">
+                          <div v-i18n>Main Board</div>
+                          <div v-i18n>Players Overview Table</div>
+                          <div v-i18n>Cards in Hand</div>
+                          <div v-i18n>Colonies</div>
+                        </div>
+                      </div>
+                      <div class="info_panel-spacing"></div>
+                      <div class="info-panel-title" v-i18n>Game Setup Details</div>
+                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>
+
+                      <div class="info_panel_actions">
+                        <button class="btn btn-lg btn-primary" v-on:click="ui.gamesetup_detail_open=false">Ok</button>
+                      </div>
+                    </div>
+                </div>
                 <a href="/help-iconology" target="_blank">
                     <div class="preferences_item preferences_item--help">
-                        <i class="preferences_icon preferences_icon--help"></i>
+                      <i class="preferences_icon preferences_icon--help" :title="translate('game symbols')"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">
@@ -343,8 +380,9 @@ export const Preferences = Vue.component('preferences', {
                             </label>
                         </div>
                     </div>
+
                     <div class="preferences_panel_actions">
-                        <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
+                      <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
                     </div>
                 </div>
             </div>

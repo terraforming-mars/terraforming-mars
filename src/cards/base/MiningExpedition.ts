@@ -41,7 +41,7 @@ export class MiningExpedition extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new RemoveAnyPlants(player, game, 2));
+    game.defer(new RemoveAnyPlants(player, 2));
     player.steel += 2;
     return game.increaseOxygenLevel(player, 1);
   }

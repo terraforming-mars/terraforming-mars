@@ -32,21 +32,18 @@ export class Virus extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(): boolean {
-    return true;
-  }
   public play(player: Player, game: Game): PlayerInput | undefined {
     if (game.getPlayers().length === 1) {
       game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }
 
-    const orOptionsAnimals = (new RemoveResourcesFromCard(player, game, ResourceType.ANIMAL, 2, false, false)).execute() as OrOptions;
+    const orOptionsAnimals = (new RemoveResourcesFromCard(player, ResourceType.ANIMAL, 2, false, false)).execute() as OrOptions;
     const removeAnimals = orOptionsAnimals !== undefined ?
       orOptionsAnimals.options[0] :
       undefined;
 
-    const orOptionsPlants = (new RemoveAnyPlants(player, game, 5)).execute() as OrOptions;
+    const orOptionsPlants = (new RemoveAnyPlants(player, 5)).execute() as OrOptions;
     const removePlants = orOptionsPlants !== undefined ?
       orOptionsPlants.options.slice(0, -1) :
       undefined;

@@ -41,7 +41,7 @@ describe('Kelvinists', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_1;
-    kelvinistsPolicy.action(player, game);
+    kelvinistsPolicy.action(player);
 
     game.deferredActions.runNext();
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
@@ -65,7 +65,7 @@ describe('Kelvinists', function() {
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
     const initialTR = player.getTerraformRating();
-    kelvinistsPolicy.action(player, game);
+    kelvinistsPolicy.action(player);
     expect(player.heat).to.eq(0);
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
     expect(game.getTemperature()).to.eq(-28);

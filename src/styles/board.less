@@ -1,7 +1,11 @@
 .board {
     width: 600px;
     height: 488px;
-    margin: 85px 0 0 93px;
+	margin: 85px 0 0 93px;
+
+	.board-space {
+		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+	}
 }
 
 .board-cont {
@@ -211,11 +215,10 @@
 	width: 46px;
 	height: 51px;
 	position: absolute;
-	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 
 	.board-space-text {
 		font-size: 11px;
-		font-family: Prototype;
+		font-weight: bold;
 		line-height: 11px;
 		text-align: center;
 		position: absolute;

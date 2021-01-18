@@ -11,7 +11,7 @@ import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class OceanCity extends Card implements IProjectCard {
   constructor() {
@@ -20,6 +20,7 @@ export class OceanCity extends Card implements IProjectCard {
       name: CardName.OCEAN_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: 'A20',
@@ -35,9 +36,8 @@ export class OceanCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return (player.getProduction(Resources.ENERGY) > 0) &&
-      game.checkMinRequirements(player, GlobalParameter.OCEANS, 6);
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && (player.getProduction(Resources.ENERGY) > 0);
   }
 
   public play(player: Player, game: Game) {

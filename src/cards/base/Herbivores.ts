@@ -32,7 +32,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
           b.effect('When you place a greenery tile, add an Animal to this card.', (eb) => {
             eb.greenery().startEffect.animals(1);
           }).br;
-          b.vpText('1 VP per 2 Animals on this card');
+          b.vpText('1 VP per 2 Animals on this card.');
           b.animals(1).production((pb) => pb.minus().plants(1).any);
         }),
         description: {
@@ -61,7 +61,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     }
     public play(player: Player, game: Game) {
       player.addResourceTo(this);
-      game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
 }

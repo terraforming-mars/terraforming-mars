@@ -11,7 +11,7 @@ import {CardManifest} from '../CardManifest';
 // import {ColonistShuttles} from './ColonistShuttles';
 // import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 // import {CopernicusTower} from './CopernicusTower';
-// import {CoreMine} from './CoreMine';
+import {CoreMine} from './CoreMine';
 // import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 // import {DarksideIncubationPlant} from './DarksideIncubationPlant';
@@ -21,7 +21,7 @@ import {CardManifest} from '../CardManifest';
 // import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 // import {DeepLunarMining} from './DeepLunarMining';
 // import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
-// import {FirstLunarSettlement} from './FirstLunarSettlement';
+import {FirstLunarSettlement} from './FirstLunarSettlement';
 // import {GeodesicTents} from './GeodesicTents';
 // import {GrandLunaAcademy} from './GrandLunaAcademy';
 // import {Habitat14} from './Habitat14';
@@ -46,7 +46,7 @@ import {CardManifest} from '../CardManifest';
 // import {LunarIndustryComplex} from './LunarIndustryComplex';
 // import {LunarMineUrbanization} from './LunarMineUrbanization';
 // import {LunarObservationPost} from './LunarObservationPost';
-// import {LunarPlanningOffice} from './LunarPlanningOffice';
+import {LunarPlanningOffice} from './LunarPlanningOffice';
 // import {LunarSteel} from './LunarSteel';
 // import {LunarTradeFleet} from './LunarTradeFleet';
 // import {LunaSenate} from './LunaSenate';
@@ -57,16 +57,16 @@ import {CardManifest} from '../CardManifest';
 import {MareImbriumMine} from './MareImbriumMine';
 import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
-// import {MareSerenitatisMine} from './MareSerenitatisMine';
+import {MareSerenitatisMine} from './MareSerenitatisMine';
 // import {MicrosingularityPlant} from './MicrosingularityPlant';
 // import {MiningComplex} from './MiningComplex';
 // import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 // import {MomentumViriumHabitat} from './MomentumViriumHabitat';
-// import {MoonColonyStandardProject} from './MoonColonyStandardProject';
+import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
-// import {MoonMineStandardProject} from './MoonMineStandardProject';
-// import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {MoonMineStandardProject} from './MoonMineStandardProject';
+import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 // import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
@@ -101,10 +101,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   projectCards: [
     // These cards are done.
     {cardName: CardName.MARE_NECTARIS_MINE, Factory: MareNectarisMine},
-    //   // These cards have behavior and rendering.
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
-    // {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
+    {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
+    //   // These cards have behavior and rendering.
     //   {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
     //   {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},
@@ -209,15 +209,15 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   //   {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
   ],
   standardProjects: [
-  //   {cardName: CardName.STANDARD_PROJECT_MOON_COLONY, Factory: MoonColonyStandardProject},
-  //   {cardName: CardName.STANDARD_PROJECT_MOON_MINE, Factory: MoonMineStandardProject},
-  //   {cardName: CardName.STANDARD_PROJECT_MOON_ROAD, Factory: MoonRoadStandardProject},
+    {cardName: CardName.STANDARD_PROJECT_MOON_COLONY, Factory: MoonColonyStandardProject},
+    {cardName: CardName.STANDARD_PROJECT_MOON_MINE, Factory: MoonMineStandardProject},
+    {cardName: CardName.STANDARD_PROJECT_MOON_ROAD, Factory: MoonRoadStandardProject},
   ],
   preludeCards: [
-  //   {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},
-  //   {cardName: CardName.CORE_MINE, Factory: CoreMine},
-  //   {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: GameModule.Colonies},
-  //   {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice},
-  //   {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
+    {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},
+    {cardName: CardName.CORE_MINE, Factory: CoreMine},
+    // {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: GameModule.Colonies},
+    {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice},
+    // {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
   ],
 });

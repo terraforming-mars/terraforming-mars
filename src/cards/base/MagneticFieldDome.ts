@@ -10,6 +10,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MagneticFieldDome extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 5,
       hasRequirements: false,
+      productionDelta: Units.of({energy: -2, plants: 1}),
 
       metadata: {
         cardNumber: '171',

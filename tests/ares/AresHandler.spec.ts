@@ -9,7 +9,6 @@ import {ITile} from '../../src/ITile';
 import {SpaceType} from '../../src/SpaceType';
 import {Resources} from '../../src/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
-import {IProductionUnits} from '../../src/inputs/IProductionUnits';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
@@ -20,6 +19,7 @@ import {TestPlayers} from '../TestingUtils';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {Random} from '../../src/Random';
+import {Units} from '../../src/Units';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -142,7 +142,7 @@ describe('AresHandler', function() {
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
     const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(1);
-    input.cb({plants: 1} as IProductionUnits);
+    input.cb(Units.of({plants: 1}));
     expect(player.getProduction(Resources.PLANTS)).eq(6);
   });
 
@@ -165,7 +165,7 @@ describe('AresHandler', function() {
 
     const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(2);
-    input.cb({plants: 2} as IProductionUnits);
+    input.cb(Units.of({plants: 2}));
     expect(player.getProduction(Resources.PLANTS)).eq(5);
   });
 

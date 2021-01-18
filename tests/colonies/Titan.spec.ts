@@ -22,13 +22,13 @@ describe('Titan', function() {
 
   it('Should activate', function() {
     expect(titan.isActive).is.false;
-    player.playCard(game, aerialMappers);
+    player.playCard(aerialMappers);
     expect(titan.isActive).is.true;
   });
 
   it('Should build', function() {
-    player.playCard(game, aerialMappers);
-    titan.addColony(player, game);
+    player.playCard(aerialMappers);
+    titan.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.shift()!;
@@ -41,8 +41,8 @@ describe('Titan', function() {
   });
 
   it('Should trade', function() {
-    player.playCard(game, aerialMappers);
-    titan.trade(player, game);
+    player.playCard(aerialMappers);
+    titan.trade(player);
 
     // Should have AddResourcesToCard, GiveColonyBonus and decrease track
     expect(game.deferredActions).has.lengthOf(3);
@@ -57,13 +57,13 @@ describe('Titan', function() {
 
   it('Should give trade bonus', function() {
     const dirigibles = new Dirigibles();
-    player.playCard(game, aerialMappers);
-    player2.playCard(game, dirigibles);
+    player.playCard(aerialMappers);
+    player2.playCard(dirigibles);
 
-    titan.addColony(player, game);
+    titan.addColony(player);
     game.deferredActions.shift()!.execute(); // Gain placement floaters
 
-    titan.trade(player2, game);
+    titan.trade(player2);
     game.deferredActions.shift()!.execute(); // Gain trade floaters
 
     game.deferredActions.runAll(() => {}); // Trade bonus

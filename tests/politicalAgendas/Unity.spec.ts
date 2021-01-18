@@ -41,7 +41,7 @@ describe('Unity', function() {
 
   it('Ruling policy 1: Your titanium resources are worth 1 MC extra', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[0].id);
-    expect(player.getTitaniumValue(game)).to.eq(4);
+    expect(player.getTitaniumValue()).to.eq(4);
   });
 
   it('Ruling policy 2: Spend 4 MC to gain 2 titanium or add 2 floaters to any card', function() {
@@ -51,7 +51,7 @@ describe('Unity', function() {
     player.megaCredits = 8;
 
     // Gain titanium
-    unityPolicy.action(player, game);
+    unityPolicy.action(player);
     game.deferredActions.runNext();
     expect(player.titanium).to.eq(2);
     expect(player.megaCredits).to.eq(4);
@@ -59,7 +59,7 @@ describe('Unity', function() {
     // Add floaters
     const localShading = new LocalShading();
     player.playedCards.push(localShading);
-    unityPolicy.action(player, game);
+    unityPolicy.action(player);
     game.deferredActions.runNext();
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
 
@@ -74,7 +74,7 @@ describe('Unity', function() {
     const unityPolicy = UNITY_POLICY_3;
     player.megaCredits = 7;
 
-    unityPolicy.action(player, game);
+    unityPolicy.action(player);
     expect(unityPolicy.canAct(player)).to.be.true;
     game.deferredActions.runNext();
 

@@ -32,13 +32,13 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
       const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
       if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisTurn) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
+        game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
         return undefined;
       }
 
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
+          game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
           return undefined;
         }),
         new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
@@ -51,7 +51,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
                 if (colony.name === colonyName) {
                   this.resourceCount--;
                   game.log('${0} traded with ${1}', (b) => b.player(player).colony(colony));
-                  colony.trade(player, game);
+                  colony.trade(player);
                   return undefined;
                 }
 
@@ -68,7 +68,7 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }
 

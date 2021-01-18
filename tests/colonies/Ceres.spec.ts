@@ -18,21 +18,21 @@ describe('Ceres', function() {
   });
 
   it('Should build', function() {
-    ceres.addColony(player, game);
+    ceres.addColony(player);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player2.getProduction(Resources.STEEL)).to.eq(0);
   });
 
   it('Should trade', function() {
-    ceres.trade(player, game);
+    ceres.trade(player);
     expect(player.steel).to.eq(2);
     expect(player2.steel).to.eq(0);
   });
 
   it('Should give trade bonus', function() {
-    ceres.addColony(player, game);
+    ceres.addColony(player);
 
-    ceres.trade(player2, game);
+    ceres.trade(player2);
     game.deferredActions.runAll(() => {});
 
     expect(player.getProduction(Resources.STEEL)).to.eq(1);

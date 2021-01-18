@@ -61,7 +61,7 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
       b.action('Add 1 Floater to this card.', (eb) => {
         eb.empty().startAction.floaters(1);
       }).br;
-      b.action('Add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step.', (eb) => {
+      b.action('Remove 2 Floaters here to raise Venus 1 step.', (eb) => {
         eb.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1);
       }).br.floaters(3);
     }),

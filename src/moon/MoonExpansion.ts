@@ -68,10 +68,10 @@ export class MoonExpansion {
     MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_MINE, card: cardName});
   }
 
-  // public static addColonyTile(
-  //   player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
-  //   MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_COLONY, card: cardName});
-  // }
+  public static addColonyTile(
+    player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
+    MoonExpansion.addTile(player, spaceId, {tileType: TileType.MOON_COLONY, card: cardName});
+  }
 
   public static addRoadTile(
     player: Player, spaceId: string, cardName: CardName | undefined = undefined): void {
@@ -114,16 +114,16 @@ export class MoonExpansion {
     });
   }
 
-  // public static raiseColonyRate(player: Player) {
-  //   MoonExpansion.ifMoon(player.game, (moonData) => {
-  //     if (moonData.colonyRate < 8) {
-  //       moonData.colonyRate++;
-  //       player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
-  //       player.increaseTerraformRatingSteps(1, game);
-  //       this.activateLunaFirst(player, player.game);
-  //     }
-  //   });
-  // }
+  public static raiseColonyRate(player: Player) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      if (moonData.colonyRate < 8) {
+        moonData.colonyRate++;
+        player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
+        player.increaseTerraformRatingSteps(1, player.game);
+        this.activateLunaFirst(player, player.game);
+      }
+    });
+  }
 
   public static raiseLogisticRate(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {

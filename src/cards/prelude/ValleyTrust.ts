@@ -48,7 +48,7 @@ export class ValleyTrust extends Card implements CorporationCard {
 
       return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
         if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player, game)) {
-          return player.playCard(game, foundCards[0]);
+          return player.playCard(foundCards[0]);
         } else {
           throw new Error('You cannot pay for this card');
         }

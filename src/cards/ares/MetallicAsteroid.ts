@@ -35,7 +35,7 @@ export class MetallicAsteroid extends Card implements IProjectCard {
   public play(player: Player, game: Game) {
     player.titanium++;
     game.increaseTemperature(player, 1);
-    game.defer(new RemoveAnyPlants(player, game, 4));
+    game.defer(new RemoveAnyPlants(player, 4));
 
     return new SelectSpace('Select space for Biofertilizer Facility tile', game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
       game.addTile(player, SpaceType.LAND, space, {

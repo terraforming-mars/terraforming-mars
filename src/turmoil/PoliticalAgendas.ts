@@ -90,7 +90,7 @@ export class PoliticalAgendas {
       turmoil.onAgendaSelected(game);
     } else {
       // Only called when player !== neutral and agenda style === chairman
-      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, game, turmoil));
+      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, turmoil));
     }
   }
 

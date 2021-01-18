@@ -57,8 +57,8 @@ class MarsFirstPolicy01 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY;
   description: string = 'When you place a tile ON MARS, gain 1 steel';
 
-  onTilePlaced(player: Player, space: ISpace, game: Game) {
-    if (space.tile && space.spaceType !== SpaceType.COLONY && game.phase === Phase.ACTION) {
+  onTilePlaced(player: Player, space: ISpace) {
+    if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
       player.setResource(Resources.STEEL);
     }
   }
@@ -89,7 +89,8 @@ class MarsFirstPolicy04 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 

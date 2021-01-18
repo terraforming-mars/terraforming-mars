@@ -10,6 +10,7 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class DeepWellHeating extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 13,
       hasRequirements: false,
+      productionDelta: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '003',

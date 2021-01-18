@@ -503,6 +503,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     showOtherPlayersVP: options.showOtherPlayersVP,
     showTimers: options.showTimers,
     shuffleMapOption: options.shuffleMapOption,
+    solarPhaseOption: options.solarPhaseOption,
     soloTR: options.soloTR,
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,

@@ -199,12 +199,7 @@ describe('Units', () => {
     });
   });
 
-  it('EMPTY', () => {
-    const units = Units.EMPTY;
-    expect(() => units.megacredits = 1).to.throw();
-  });
-
-  it('adjust production', () => {
+  it('deduct production', () => {
     function asProductionUnits(player: Player): Units {
       return {
         megacredits: player.getProduction(Resources.MEGACREDITS),

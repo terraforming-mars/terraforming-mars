@@ -19,7 +19,6 @@ export class Comet extends Card implements IProjectCard {
       name: CardName.COMET,
       tags: [Tags.SPACE],
       cost: 21,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '010',
@@ -46,8 +45,8 @@ export class Comet extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     game.increaseTemperature(player, 1);
-    game.defer(new PlaceOceanTile(player, game));
-    game.defer(new RemoveAnyPlants(player, game, 3));
+    game.defer(new PlaceOceanTile(player));
+    game.defer(new RemoveAnyPlants(player, 3));
     return undefined;
   }
 }

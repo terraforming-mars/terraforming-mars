@@ -18,7 +18,6 @@ export class BigAsteroid extends Card implements IProjectCard {
       name: CardName.BIG_ASTEROID,
       tags: [Tags.SPACE],
       cost: 27,
-      hasRequirements: false,
 
       metadata: {
         description: 'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
@@ -45,7 +44,7 @@ export class BigAsteroid extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     game.increaseTemperature(player, 2);
-    game.defer(new RemoveAnyPlants(player, game, 4));
+    game.defer(new RemoveAnyPlants(player, 4));
     player.titanium += 4;
     return undefined;
   }

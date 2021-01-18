@@ -69,6 +69,6 @@ describe('Capital', function() {
     // check VP
     const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);
     game.addGreenery(player, greenerySpace!.id);
-    expect(player.getVictoryPoints(game).city).to.eq(1); // 1 VP for Capital city
+    expect(player.getVictoryPoints().city).to.eq(1); // 1 VP for Capital city
   });
 });

@@ -18,7 +18,6 @@ export class IceAsteroid extends Card implements IProjectCard {
       name: CardName.ICE_ASTEROID,
       tags: [Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '078',
@@ -40,8 +39,8 @@ export class IceAsteroid extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, game, 'Select space for first ocean'));
-    game.defer(new PlaceOceanTile(player, game, 'Select space for second ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;
   }
 }

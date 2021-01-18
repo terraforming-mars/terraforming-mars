@@ -9,7 +9,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
@@ -35,12 +34,12 @@ export class BiomassCombustors extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public play(player: Player, game: Game) {
     player.addProduction(Resources.ENERGY, 2);
-    game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+    game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
     return undefined;
   }
   public getVictoryPoints() {

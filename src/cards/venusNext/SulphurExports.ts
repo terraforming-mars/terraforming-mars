@@ -16,7 +16,6 @@ export class SulphurExports implements IProjectCard {
     public tags = [Tags.VENUS, Tags.SPACE];
     public name = CardName.SULPHUR_EXPORTS;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

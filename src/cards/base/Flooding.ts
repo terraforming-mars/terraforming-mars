@@ -22,7 +22,6 @@ export class Flooding extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '188',
@@ -47,7 +46,7 @@ export class Flooding extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     if (game.isSoloMode()) {
-      game.defer(new PlaceOceanTile(player, game));
+      game.defer(new PlaceOceanTile(player));
       return undefined;
     }
 

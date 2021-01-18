@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class GeothermalPower extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class GeothermalPower extends Card implements IProjectCard {
       name: CardName.GEOTHERMAL_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 11,
+      productionDelta: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '117',

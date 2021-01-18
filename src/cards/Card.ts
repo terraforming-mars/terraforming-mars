@@ -5,21 +5,24 @@ import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {Units} from '../Units';
 
 interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;
   cost?: number;
-  hasRequirements?: boolean;
   initialActionText?: string;
   metadata: CardMetadata;
   name: CardName;
   resourceType?: ResourceType;
   startingMegaCredits?: number;
   tags?: Array<Tags>;
+  productionDelta?: Units;
 }
 
-const staticCardProperties = new Map<CardName, StaticCardProperties>();
+export const staticCardProperties = new Map<CardName, StaticCardProperties>();
 
 export abstract class Card {
   private readonly properties: StaticCardProperties;
@@ -46,9 +49,6 @@ export abstract class Card {
   public get cost() {
     return this.properties.cost === undefined ? 0 : this.properties.cost;
   }
-  public get hasRequirements() {
-    return this.properties.hasRequirements;
-  }
   public get initialActionText() {
     return this.properties.initialActionText;
   }
@@ -66,5 +66,14 @@ export abstract class Card {
   }
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
+  }
+  public get productionDelta() {
+    return this.properties.productionDelta;
+  }
+  public canPlay(player: Player, _game?: Game) {
+    if (this.properties.metadata.requirements === undefined) {
+      return true;
+    }
+    return this.properties.metadata.requirements.satisfies(player);
   }
 }

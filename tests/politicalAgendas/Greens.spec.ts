@@ -63,7 +63,7 @@ describe('Greens', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[2].id);
 
     const lichen = new Lichen();
-    player.playCard(game, lichen);
+    player.playCard(lichen);
     expect(player.megaCredits).to.eq(2);
   });
 
@@ -74,7 +74,7 @@ describe('Greens', function() {
     player.megaCredits = 10;
 
     // Gain plants
-    greensPolicy.action(player, game);
+    greensPolicy.action(player);
     game.deferredActions.runNext();
     expect(player.plants).to.eq(3);
     expect(player.megaCredits).to.eq(5);
@@ -82,7 +82,7 @@ describe('Greens', function() {
     // Add microbes
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
-    greensPolicy.action(player, game);
+    greensPolicy.action(player);
     game.deferredActions.runNext();
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
 

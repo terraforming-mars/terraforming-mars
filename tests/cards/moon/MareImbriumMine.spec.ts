@@ -1,27 +1,27 @@
-import {Game} from '../../src/Game';
-import {IMoonData} from '../../src/moon/IMoonData';
-import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {Player} from '../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {MareNubiumMine} from '../../src/cards/moon/MareNubiumMine';
+import {Game} from '../../../src/Game';
+import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {Player} from '../../../src/Player';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {MareImbriumMine} from '../../../src/cards/moon/MareImbriumMine';
 import {expect} from 'chai';
-import {Resources} from '../../src/Resources';
-import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {TileType} from '../../src/TileType';
+import {Resources} from '../../../src/Resources';
+import {MoonSpaces} from '../../../src/moon/MoonSpaces';
+import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
-describe('MareNubiumMine', () => {
+describe('MareImbriumMine', () => {
   let game: Game;
   let player: Player;
   let moonData: IMoonData;
-  let card: MareNubiumMine;
+  let card: MareImbriumMine;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('id', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
-    card = new MareNubiumMine();
+    card = new MareImbriumMine();
   });
 
   it('can play', () => {
@@ -37,13 +37,14 @@ describe('MareNubiumMine', () => {
     card.play(player);
 
     expect(player.titanium).eq(2);
+    expect(player.getProduction(Resources.STEEL)).eq(1);
     expect(player.getProduction(Resources.TITANIUM)).eq(1);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareNubium = moonData.moon.getSpace(MoonSpaces.MARE_NUBIUM);
-    expect(mareNubium.player).eq(player);
-    expect(mareNubium.tile!.tileType).eq(TileType.MOON_MINE);
+    const mareImbrium = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    expect(mareImbrium.player).eq(player);
+    expect(mareImbrium.tile!.tileType).eq(TileType.MOON_MINE);
   });
 });
 

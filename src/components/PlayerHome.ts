@@ -18,6 +18,8 @@ import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
 import {TopBar} from './TopBar';
 import {PreferencesManager} from './PreferencesManager';
+import {KeyboardNavigation} from '../../src/KeyboardNavigation';
+import {MoonBoard} from './moon/MoonBoard';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -71,9 +73,39 @@ export const PlayerHome = Vue.component('player-home', {
     'Button': Button,
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
+    'moonboard': MoonBoard,
   },
   mixins: [PlayerMixin],
   methods: {
+    navigatePage: function(event: KeyboardEvent) {
+      const inputSource = event.target as Element;
+      if (inputSource.nodeName.toLowerCase() !== 'input') {
+        let id: string | undefined = undefined;
+        switch (event.code) {
+        case KeyboardNavigation.GAMEBOARD:
+          id = 'shortkey-board';
+          break;
+        case KeyboardNavigation.PLAYERSOVERVIEW:
+          id = 'shortkey-playersoverview';
+          break;
+        case KeyboardNavigation.HAND:
+          id = 'shortkey-hand';
+          break;
+        case KeyboardNavigation.COLONIES:
+          id = 'shortkey-colonies';
+          break;
+        }
+        if (id === undefined) {
+          return;
+        }
+        const el = document.getElementById(id);
+        if (el) {
+          event.preventDefault();
+          const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: scrollingSpeed});
+        }
+      }
+    },
     getPlayerCssForTurnOrder: (
       player: PlayerModel,
       highlightActive: boolean,
@@ -100,7 +132,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getGenerationText: function(): string {
       if (this.player.players.length === 1) {
-        const MAX_GEN = this.player.preludeExtension ? 12 : 14;
+        const MAX_GEN = this.player.gameOptions.preludeExtension ? 12 : 14;
         let retText =
                     'generation ' + this.player.generation + ' of ' + MAX_GEN;
         if (MAX_GEN === this.player.generation) {
@@ -163,7 +195,7 @@ export const PlayerHome = Vue.component('player-home', {
     );
   },
   template: `
-        <div id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
+        <div v-on:keydown="navigatePage" tabindex="0" id="player-home" :class="'shortkey-no-outline'+(player.turmoil ? ' with-turmoil': '')">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -193,9 +225,9 @@ export const PlayerHome = Vue.component('player-home', {
               :oxygen = "player.oxygenLevel"
               :oceans = "player.oceans"
               :venus = "player.venusScaleLevel"
-              :venusNextExtension = "player.venusNextExtension"
-              :turmoilExtension = "player.turmoilExtension"
-              :turmoil = "player.turmoil">
+              :turmoil = "player.turmoil"
+              :gameOptions = "player.gameOptions"
+              :playerNumber = "player.players.length">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 
@@ -205,17 +237,20 @@ export const PlayerHome = Vue.component('player-home', {
                     <a name="board" class="player_home_anchor"></a>
                     <board
                         :spaces="player.spaces"
-                        :venusNextExtension="player.venusNextExtension"
+                        :venusNextExtension="player.gameOptions.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
-                        :boardName ="player.boardName"
+                        :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
                         :shouldNotify="true"
-                        :aresExtension="player.aresExtension"
-                        :aresData="player.aresData"></board>
+                        :aresExtension="player.gameOptions.aresExtension"
+                        :aresData="player.aresData" 
+                        id="shortkey-board"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+
+                    <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
@@ -223,10 +258,10 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
+                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation" />
+                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation"/>
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
                         <span class="label-additional" v-html="getGenerationText()"></span>
@@ -236,7 +271,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <dynamic-title title="Actions" :color="player.color" />
+                    <dynamic-title title="Actions" :color="player.color"/>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
@@ -248,12 +283,12 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
-                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0" id="shortkey-hand">
                     <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
                     <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
                 </div>
 
-                <div class="player_home_block player_home_block--cards">
+                <div class="player_home_block player_home_block--cards"">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
                         <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">
@@ -272,7 +307,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
-                    <div v-show="isActiveCardShown()" v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                    <div v-show="isActiveCardShown()" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 
@@ -343,13 +378,13 @@ export const PlayerHome = Vue.component('player-home', {
                         </div>
                     </summary>
                     <div class="accordion-body">
-                        <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                        <board :spaces="player.spaces" :venusNextExtension="player.gameOptions.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.gameOptions.boardName"></board>
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                     </div>
                 </details>
             </div>
 
-            <div v-if="player.colonies.length > 0" class="player_home_block">
+            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">

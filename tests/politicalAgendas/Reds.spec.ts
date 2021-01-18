@@ -64,13 +64,13 @@ describe('Reds', function() {
     game.increaseOxygenLevel(player, 1);
     expect(game.getOxygenLevel()).to.eq(1);
 
-    expect(redsPolicy.canAct(player, game)).to.be.true;
-    redsPolicy.action(player, game);
+    expect(redsPolicy.canAct(player)).to.be.true;
+    redsPolicy.action(player);
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(3);
     expect(game.getOxygenLevel()).to.eq(0);
-    expect(redsPolicy.canAct(player, game)).to.be.false;
+    expect(redsPolicy.canAct(player)).to.be.false;
   });
 
   it('Ruling policy 4: When you raise a global parameter, decrease your MC production 1 step per step raised if possible', function() {

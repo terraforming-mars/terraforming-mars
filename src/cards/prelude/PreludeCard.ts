@@ -20,7 +20,6 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       cardType: CardType.PRELUDE,
       name: properties.name,
       tags: properties.tags,
-      hasRequirements: false,
       metadata: properties.metadata,
     });
   }

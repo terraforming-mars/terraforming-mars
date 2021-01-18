@@ -183,7 +183,6 @@ export class AresHandler {
       if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
         player.game.defer(new AddResourcesToCard(
           player,
-          player.game,
           resourceType,
         ));
       }

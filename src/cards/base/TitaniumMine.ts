@@ -7,6 +7,7 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class TitaniumMine extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class TitaniumMine extends Card implements IProjectCard {
       name: CardName.TITANIUM_MINE,
       tags: [Tags.BUILDING],
       cost: 7,
+      productionDelta: Units.of({titanium: 1}),
 
       metadata: {
         cardNumber: '144',

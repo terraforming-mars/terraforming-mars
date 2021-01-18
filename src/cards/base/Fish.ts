@@ -12,7 +12,6 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Fish extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -44,13 +43,13 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
     public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 2) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;
     }
     public play(player: Player, game: Game) {
-      game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
     public canAct(): boolean {

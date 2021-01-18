@@ -20,7 +20,6 @@ export class MoholeLake implements IActionCard, IProjectCard {
     public tags = [Tags.BUILDING];
     public name = CardName.MOHOLE_LAKE;
     public cardType = CardType.ACTIVE;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
@@ -36,7 +35,7 @@ export class MoholeLake implements IActionCard, IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 1);
-      game.defer(new PlaceOceanTile(player, game));
+      game.defer(new PlaceOceanTile(player));
       player.plants += 3;
       return undefined;
     }

@@ -25,7 +25,6 @@ export abstract class MiningCard extends Card implements IProjectCard {
       name,
       tags: [Tags.BUILDING],
       cost,
-      hasRequirements: false,
       metadata,
     });
   }

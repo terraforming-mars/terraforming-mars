@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card} from '../Card';
+import {Card, staticCardProperties} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
@@ -12,6 +12,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {SpaceBonus} from '../../SpaceBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Units} from '../../Units';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +21,6 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       name: CardName.ROBOTIC_WORKFORCE,
       tags: [Tags.SCIENCE],
       cost: 9,
-      hasRequirements: false,
       metadata: {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {
@@ -80,7 +80,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.MARE_IMBRIUM_MINE,
     CardName.MARE_NECTARIS_MINE,
     CardName.MARE_NUBIUM_MINE,
-    // CardName.MARE_SERENITATIS_MINE,
+    CardName.MARE_SERENITATIS_MINE,
     CardName.MARTIAN_INDUSTRIES,
     CardName.MARTIAN_MEDIA_CENTER,
     CardName.MEDICAL_LAB,
@@ -229,13 +229,13 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       // this card require additional user input
       case CardName.BIOMASS_COMBUSTORS:
         player.addProduction(Resources.ENERGY, 2);
-        game.defer(new DecreaseAnyProduction(player, game, Resources.PLANTS, 1));
+        game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
         return undefined;
 
       // this card require additional user input
       case CardName.HEAT_TRAPPERS:
         player.addProduction(Resources.ENERGY, 1);
-        game.defer(new DecreaseAnyProduction(player, game, Resources.HEAT, 2));
+        game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 2));
         return undefined;
 
       // Mining resource definition
@@ -261,135 +261,88 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       }
 
       class Updater {
-        constructor(
-          public name: CardName,
-          public energyProduction: number,
-          public megaCreditProduction: number,
-          public steelProduction: number,
-          public titaniumProduction: number,
-          public plantProduction: number,
-          public heatProduction: number) {}
+        public units: Units;
+        constructor(public name: CardName, partialUnits: Partial<Units>) {
+          this.units = Units.of(partialUnits);
+        }
       }
 
+      // Prefer moving these values to their respective cards as productionDelta.
+      // Cards still here are those not updated to the static card properties format, preludes, or ones
+      // with complicated math. Maybe they can be moved. Maybe productionDelta should have been a function
+      // instead of a structure. Well, there's room for sophistication.
       const updaters: Array<Updater> = [
-        new Updater(CardName.AI_CENTRAL, -1, 0, 0, 0, 0, 0),
-        new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, -1, 0, 0, 0, 0, 0),
-        new Updater(CardName.BIOFERTILIZER_FACILITY, 0, 0, 0, 0, 1, 0),
-        new Updater(CardName.BUILDING_INDUSTRIES, -1, 0, 2, 0, 0, 0),
-        new Updater(CardName.CAPITAL, -2, 5, 0, 0, 0, 0),
-        new Updater(CardName.CAPITAL_ARES, -2, 5, 0, 0, 0, 0),
-        new Updater(CardName.CARBONATE_PROCESSING, -1, 0, 0, 0, 0, 3),
-        new Updater(CardName.CHEUNG_SHING_MARS, 0, 3, 0, 0, 0, 0),
-        new Updater(CardName.COMMERCIAL_DISTRICT, -1, 4, 0, 0, 0, 0),
-        new Updater(CardName.COMMERCIAL_DISTRICT_ARES, -1, 4, 0, 0, 0, 0),
-        new Updater(CardName.CORPORATE_STRONGHOLD, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.CULTURAL_METROPOLIS, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.CUPOLA_CITY, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.DEEP_WELL_HEATING, 1, 0, 0, 0, 0, 0),
-        new Updater(CardName.DOMED_CRATER, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.DOME_FARMING, 0, 2, 0, 0, 1, 0),
-        new Updater(CardName.EARLY_SETTLEMENT, 0, 0, 0, 0, 1, 0),
-        new Updater(CardName.ELECTRO_CATAPULT, -1, 0, 0, 0, 0, 0),
-        new Updater(CardName.EOS_CHASMA_NATIONAL_PARK, 2, 0, 0, 0, 0, 0),
-        new Updater(CardName.FACTORUM, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0),
-        new Updater(CardName.FOOD_FACTORY, 0, 4, 0, 0, -1, 0),
-        new Updater(CardName.FUELED_GENERATORS, 1, -1, 0, 0, 0, 0),
-        new Updater(CardName.FUEL_FACTORY, -1, 1, 0, 1, 0, 0),
-        new Updater(CardName.FUSION_POWER, 3, 0, 0, 0, 0, 0),
-        new Updater(CardName.GEOTHERMAL_POWER, 2, 0, 0, 0, 0, 0),
-        new Updater(CardName.GHG_FACTORIES, -1, 0, 0, 0, 0, 4),
-        new Updater(CardName.GREAT_DAM, 2, 0, 0, 0, 0, 0),
-        new Updater(CardName.GREAT_DAM_PROMO, 2, 0, 0, 0, 0, 0),
-        new Updater(CardName.GYROPOLIS, -2, player.getMultipleTagCount([Tags.VENUS, Tags.EARTH]), 0, 0, 0, 0),
-        new Updater(CardName.HOUSE_PRINTING, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.IMMIGRANT_CITY, -1, -2, 0, 0, 0, 0),
-        new Updater(CardName.INDUSTRIAL_MICROBES, 1, 0, 1, 0, 0, 0),
-        new Updater(CardName.LAVA_TUBE_SETTLEMENT, -1, 2, 0, 0, 0, 0),
-        new Updater(CardName.MAGNETIC_FIELD_DOME, -2, 0, 0, 0, 1, 0),
-        new Updater(CardName.MAGNETIC_FIELD_GENERATORS, -4, 0, 0, 0, 2, 0),
-        new Updater(CardName.MAGNETIC_FIELD_GENERATORS_PROMO, -4, 0, 0, 0, 2, 0),
-        new Updater(CardName.MANUTECH, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.MARE_IMBRIUM_MINE, 0, 0, 1, 1, 0, 0),
-        new Updater(CardName.MARE_NECTARIS_MINE, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.MARE_NUBIUM_MINE, 0, 0, 0, 1, 0, 0),
-        // new Updater(CardName.MARE_SERENITATIS_MINE, 0, 0, 1, 1, 0, 0),
-        new Updater(CardName.MARTIAN_INDUSTRIES, 1, 0, 1, 0, 0, 0),
-        new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0),
-        new Updater(CardName.MEDICAL_LAB, 0, Math.floor(player.getTagCount(Tags.BUILDING) / 2), 0, 0, 0, 0),
-        new Updater(CardName.MINE, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.MINING_AREA, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
-        new Updater(CardName.MINING_AREA_ARES, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
-        new Updater(CardName.MINING_GUILD, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.MINING_OPERATIONS, 0, 0, 2, 0, 0, 0),
-        new Updater(CardName.MINING_QUOTA, 0, 0, 2, 0, 0, 0),
-        new Updater(CardName.MINING_RIGHTS, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
-        new Updater(CardName.MINING_RIGHTS_ARES, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
-        new Updater(CardName.MOHOLE, 0, 0, 0, 0, 0, 3),
-        new Updater(CardName.MOHOLE_AREA, 0, 0, 0, 0, 0, 4),
-        new Updater(CardName.MOHOLE_AREA_ARES, 0, 0, 0, 0, 0, 4),
-        new Updater(CardName.MOHOLE_EXCAVATION, 0, 0, 1, 0, 0, 2),
-        new Updater(CardName.NATURAL_PRESERVE, 1, 0, 0, 0, 0, 0),
-        new Updater(CardName.NATURAL_PRESERVE_ARES, 1, 0, 0, 0, 0, 0),
-        new Updater(CardName.NOCTIS_CITY, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.NOCTIS_FARMING, 0, 1, 0, 0, 0, 0),
-        new Updater(CardName.NUCLEAR_POWER, 3, -2, 0, 0, 0, 0),
-        new Updater(CardName.OCEAN_CITY, -1, 3, 0, 0, 0, 0),
-        new Updater(CardName.OCEAN_FARM, 0, 0, 0, 0, 1, 1),
-        new Updater(CardName.OPEN_CITY, -1, 4, 0, 0, 0, 0),
-        new Updater(CardName.PARLIAMENT_HALL, 0, Math.floor(player.getTagCount(Tags.BUILDING) / 3), 0, 0, 0, 0),
-        new Updater(CardName.PEROXIDE_POWER, 2, -1, 0, 0, 0, 0),
-        new Updater(CardName.POLAR_INDUSTRIES, 0, 0, 0, 0, 0, 2),
-        new Updater(CardName.POWER_PLANT, 1, 0, 0, 0, 0, 0),
-        new Updater(CardName.PROTECTED_VALLEY, 0, 2, 0, 0, 0, 0),
-        new Updater(CardName.RAD_CHEM_FACTORY, -1, 0, 0, 0, 0, 0),
-        new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0),
-        new Updater(CardName.SELF_SUFFICIENT_SETTLEMENT, 0, 2, 0, 0, 0, 0),
-        new Updater(CardName.SOIL_FACTORY, -1, 0, 0, 0, 1, 0),
-        new Updater(CardName.SOLAR_FARM, this.solarFarmEnergyProduction, 0, 0, 0, 0, 0),
-        new Updater(CardName.SOLAR_POWER, 1, 0, 0, 0, 0, 0),
-        new Updater(CardName.SPACE_ELEVATOR, 0, 0, 0, 1, 0, 0),
-        new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0),
-        new Updater(CardName.SPINOFF_DEPARTMENT, 0, 2, 0, 0, 0, 0),
-        new Updater(CardName.SPONSORED_MOHOLE, 0, 0, 0, 0, 0, 2),
-        new Updater(CardName.STRIP_MINE, -2, 0, 2, 1, 0, 0),
-        new Updater(CardName.TECTONIC_STRESS_POWER, 3, 0, 0, 0, 0, 0),
-        new Updater(CardName.TITANIUM_MINE, 0, 0, 0, 1, 0, 0),
-        new Updater(CardName.TROPICAL_RESORT, 0, 3, 0, 0, 0, -2),
-        new Updater(CardName.UNDERGROUND_CITY, -2, 0, 2, 0, 0, 0),
-        new Updater(CardName.URBANIZED_AREA, -1, 2, 0, 0, 0, 0),
-        new Updater(CardName.UTOPIA_INVEST, 0, 0, 1, 1, 0, 0),
-        new Updater(CardName.WINDMILLS, 1, 0, 0, 0, 0, 0),
+        new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, {energy: -1}),
+        new Updater(CardName.CAPITAL, {energy: -2, megacredits: 5}),
+        new Updater(CardName.CAPITAL_ARES, {energy: -2, megacredits: 5}),
+        new Updater(CardName.CULTURAL_METROPOLIS, {energy: -1, megacredits: 3}),
+        new Updater(CardName.DOME_FARMING, {megacredits: 2, plants: 1}),
+        new Updater(CardName.EARLY_SETTLEMENT, {plants: 1}),
+        new Updater(CardName.FACTORUM, {steel: 1}),
+        new Updater(CardName.FIELD_CAPPED_CITY, {energy: 1, megacredits: 2}),
+        new Updater(CardName.GREAT_DAM_PROMO, {energy: 2}),
+        new Updater(CardName.GYROPOLIS, {energy: -2, megacredits: player.getMultipleTagCount([Tags.VENUS, Tags.EARTH])}),
+        new Updater(CardName.MAGNETIC_FIELD_GENERATORS_PROMO, {energy: -4, plants: 2}),
+        new Updater(CardName.MANUTECH, {steel: 1}),
+        new Updater(CardName.MARTIAN_INDUSTRIES, {energy: 1, steel: 1}),
+        new Updater(CardName.MARTIAN_MEDIA_CENTER, {megacredits: 2}),
+        new Updater(CardName.MEDICAL_LAB, {megacredits: Math.floor(player.getTagCount(Tags.BUILDING) / 2)}),
+        new Updater(CardName.MINING_AREA, {steel: this.miningSteelProduction, titanium: this.miningTitaniumProduction}),
+        new Updater(CardName.MINING_AREA_ARES, {steel: this.miningSteelProduction, titanium: this.miningTitaniumProduction}),
+        new Updater(CardName.MINING_OPERATIONS, {steel: 2}),
+        new Updater(CardName.MINING_QUOTA, {steel: 2}),
+        new Updater(CardName.MINING_RIGHTS, {steel: this.miningSteelProduction, titanium: this.miningTitaniumProduction}),
+        new Updater(CardName.MINING_RIGHTS_ARES, {steel: this.miningSteelProduction, titanium: this.miningTitaniumProduction}),
+        new Updater(CardName.MOHOLE, {heat: 3}),
+        new Updater(CardName.MOHOLE_AREA, {heat: 4}),
+        new Updater(CardName.MOHOLE_AREA_ARES, {heat: 4}),
+        new Updater(CardName.MOHOLE_EXCAVATION, {steel: 1, heat: 2}),
+        new Updater(CardName.NATURAL_PRESERVE, {megacredits: 1}),
+        new Updater(CardName.NATURAL_PRESERVE_ARES, {megacredits: 1}),
+        new Updater(CardName.PARLIAMENT_HALL, {megacredits: Math.floor(player.getTagCount(Tags.BUILDING) / 3)}),
+        new Updater(CardName.POLAR_INDUSTRIES, {heat: 2}),
+        new Updater(CardName.RECYCLON, {steel: 1}),
+        new Updater(CardName.SELF_SUFFICIENT_SETTLEMENT, {megacredits: 2}),
+        new Updater(CardName.SOLAR_FARM, {energy: this.solarFarmEnergyProduction}),
+        new Updater(CardName.SPACE_PORT, {energy: -1, megacredits: 4}),
+        new Updater(CardName.SPINOFF_DEPARTMENT, {megacredits: 2}),
+        new Updater(CardName.SPONSORED_MOHOLE, {heat: 2}),
+        new Updater(CardName.UTOPIA_INVEST, {steel: 1, titanium: 1}),
       ];
 
       const result:Updater = updaters.filter((u) => u.name === foundCard.name)[0];
 
-      if (!result) {
-        throw 'Production not found for selected card';
+      let units: Units | undefined = result?.units;
+
+      if (units === undefined) {
+        units = staticCardProperties.get(foundCard.name)?.productionDelta;
+        if (units === undefined) {
+          throw new Error('Production not found for selected card ' + foundCard.name);
+        }
       }
 
-      if (player.getProduction(Resources.ENERGY) + result.energyProduction < 0) {
-        throw 'not enough energy production';
+      if (player.getProduction(Resources.ENERGY) + units.energy < 0) {
+        throw new Error('not enough energy production');
       }
-      if (player.getProduction(Resources.TITANIUM) + result.titaniumProduction < 0) {
-        throw 'not enough titanium production';
+      if (player.getProduction(Resources.TITANIUM) + units.titanium < 0) {
+        throw new Error('not enough titanium production');
       }
-      if (player.getProduction(Resources.PLANTS) + result.plantProduction < 0) {
-        throw 'not enough plant production';
+      if (player.getProduction(Resources.PLANTS) + units.plants < 0) {
+        throw new Error('not enough plant production');
       }
-      if (player.getProduction(Resources.HEAT) + result.heatProduction < 0) {
-        throw 'not enough heat production';
+      if (player.getProduction(Resources.HEAT) + units.heat < 0) {
+        throw new Error('not enough heat production');
       }
 
-      player.addProduction(Resources.ENERGY, result.energyProduction);
-      player.addProduction(Resources.MEGACREDITS, result.megaCreditProduction);
-      player.addProduction(Resources.STEEL, result.steelProduction);
-      player.addProduction(Resources.TITANIUM, result.titaniumProduction);
-      player.addProduction(Resources.PLANTS, result.plantProduction);
-      player.addProduction(Resources.HEAT, result.heatProduction);
+      player.addProduction(Resources.ENERGY, units.energy);
+      player.addProduction(Resources.MEGACREDITS, units.megacredits);
+      player.addProduction(Resources.STEEL, units.steel);
+      player.addProduction(Resources.TITANIUM, units.titanium);
+      player.addProduction(Resources.PLANTS, units.plants);
+      player.addProduction(Resources.HEAT, units.heat);
 
       game.log('${0} copied ${1} production with ${2}', (b) =>
-        b.player(player).cardName(result.name).card(this));
+        b.player(player).card(foundCard).card(this));
 
       return undefined;
     });

@@ -14,6 +14,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
+import {Units} from '../../Units';
 
 export class ProtectedValley extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       name: CardName.PROTECTED_VALLEY,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 23,
-      hasRequirements: false,
+      productionDelta: Units.of({megacredits: 2}),
 
       metadata: {
         cardNumber: '174',

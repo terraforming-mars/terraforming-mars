@@ -16,7 +16,6 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SUBTERRANEAN_RESERVOIR,
       cost: 11,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '127',
@@ -39,7 +38,7 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, game));
+    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

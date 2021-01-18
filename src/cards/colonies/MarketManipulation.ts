@@ -15,7 +15,6 @@ export class MarketManipulation implements IProjectCard {
     public tags = [Tags.EARTH];
     public name = CardName.MARKET_MANIPULATION;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(_player: Player, game: Game): boolean {
       const increasableColonies = this.getIncreasableColonies(game);

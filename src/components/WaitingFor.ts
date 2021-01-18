@@ -8,6 +8,7 @@ import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
+import {SelectInitialCards} from './SelectInitialCards';
 import {SelectOption} from './SelectOption';
 import {SelectPlayer} from './SelectPlayer';
 import {SelectSpace} from './SelectSpace';
@@ -53,6 +54,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     'select-option': SelectOption,
     'select-how-to-pay': SelectHowToPay,
     'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
+    'select-initial-cards': SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
     'select-party-player': SelectPartyPlayer,

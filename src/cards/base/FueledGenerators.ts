@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class FueledGenerators extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +15,7 @@ export class FueledGenerators extends Card implements IProjectCard {
       name: CardName.FUELED_GENERATORS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 1,
-      hasRequirements: false,
+      productionDelta: Units.of({energy: 1, megacredits: -1}),
 
       metadata: {
         cardNumber: '100',

@@ -14,14 +14,13 @@ export class TradingColony implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.TRADING_COLONY;
     public cardType = CardType.ACTIVE;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.hasAvailableColonyTileToBuildOn(game);
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, false, 'Select colony for Trading Colony'));
+      game.defer(new BuildColony(player, false, 'Select colony for Trading Colony'));
       player.colonyTradeOffset++;
       return undefined;
     }

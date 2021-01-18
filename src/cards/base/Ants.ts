@@ -12,7 +12,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -40,10 +39,6 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
 
   public resourceCount = 0;
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 4);
-  }
-
   public getVictoryPoints(): number {
     return Math.floor(this.resourceCount / 2);
   }
@@ -54,11 +49,11 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
 
   public canAct(player: Player, game: Game): boolean {
     if (game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, game, this.resourceType).length > 0;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
   }
 
   public action(player: Player, game: Game) {
-    game.defer(new RemoveResourcesFromCard(player, game, ResourceType.MICROBE));
+    game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
     game.defer(
       new DeferredAction(player, () => {
         player.addResourceTo(this);

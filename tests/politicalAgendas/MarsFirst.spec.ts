@@ -47,13 +47,13 @@ describe('MarsFirst', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[1].id);
 
     const mine = new Mine();
-    player.playCard(game, mine);
+    player.playCard(mine);
     expect(player.megaCredits).to.eq(2);
   });
 
   it('Ruling policy 3: Your steel resources are worth 1 MC extra', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[2].id);
-    expect(player.getSteelValue(game)).to.eq(3);
+    expect(player.getSteelValue()).to.eq(3);
   });
 
   it('Ruling policy 4: Spend 4 MC to draw a Building card', function() {
@@ -62,7 +62,7 @@ describe('MarsFirst', function() {
     const marsFirstPolicy = MARS_FIRST_POLICY_4;
     player.megaCredits = 7;
 
-    marsFirstPolicy.action(player, game);
+    marsFirstPolicy.action(player);
     expect(marsFirstPolicy.canAct(player)).to.be.true;
     game.deferredActions.runNext();
 

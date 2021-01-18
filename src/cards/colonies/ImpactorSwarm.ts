@@ -20,7 +20,7 @@ export class ImpactorSwarm implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new RemoveAnyPlants(player, game, 2));
+      game.defer(new RemoveAnyPlants(player, 2));
       player.heat += 12;
       return undefined;
     }

@@ -10,7 +10,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class CaretakerContract extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -29,9 +28,6 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 0);
   }
   public play() {
     return undefined;

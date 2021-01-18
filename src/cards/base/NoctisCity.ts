@@ -11,6 +11,7 @@ import {ISpace} from '../../boards/ISpace';
 import {BoardName} from '../../boards/BoardName';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class NoctisCity extends Card implements IProjectCard {
       name: CardName.NOCTIS_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      hasRequirements: false,
+      productionDelta: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '017',

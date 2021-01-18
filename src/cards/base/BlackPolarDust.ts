@@ -17,7 +17,6 @@ export class BlackPolarDust extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '022',
@@ -44,7 +43,7 @@ export class BlackPolarDust extends Card implements IProjectCard {
   public play(player: Player, game: Game) {
     player.addProduction(Resources.MEGACREDITS, -2);
     player.addProduction(Resources.HEAT, 3);
-    game.defer(new PlaceOceanTile(player, game));
+    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

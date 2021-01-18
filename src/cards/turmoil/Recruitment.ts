@@ -12,7 +12,6 @@ export class Recruitment implements IProjectCard {
     public tags = [];
     public name = CardName.RECRUITMENT;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       if (game.turmoil === undefined || game.turmoil.hasAvailableDelegates(player.id) === false) {
@@ -26,7 +25,7 @@ export class Recruitment implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new SendDelegateToArea(player, game, 'Select which Neutral delegate to remove', 1, 'NEUTRAL', undefined, false));
+      game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', 1, 'NEUTRAL', undefined, false));
       return undefined;
     }
 

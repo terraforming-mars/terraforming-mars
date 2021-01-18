@@ -30,10 +30,6 @@ export class MassConverter extends Card implements IProjectCard {
       },
     });
   }
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 5;
-  }
   public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
     if (card.tags.indexOf(Tags.SPACE) !== -1) {
       return 2;

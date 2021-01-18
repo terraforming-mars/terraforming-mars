@@ -19,7 +19,6 @@ export class ImportedNitrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_NITROGEN,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '163',
@@ -45,8 +44,8 @@ export class ImportedNitrogen extends Card implements IProjectCard {
   public play(player: Player, game: Game) {
     player.plants += 4;
     player.increaseTerraformRating(game);
-    game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 3}));
-    game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, {count: 2}));
+    game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
+    game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
     return undefined;
   }
 }

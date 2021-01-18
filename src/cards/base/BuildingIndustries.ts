@@ -7,6 +7,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class BuildingIndustries extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +16,7 @@ export class BuildingIndustries extends Card implements IProjectCard {
       name: CardName.BUILDING_INDUSTRIES,
       tags: [Tags.BUILDING],
       cost: 6,
-      hasRequirements: false,
+      productionDelta: Units.of({energy: -2, steel: 2}),
 
       metadata: {
         cardNumber: '065',

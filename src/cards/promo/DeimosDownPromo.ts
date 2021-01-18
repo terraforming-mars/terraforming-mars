@@ -19,7 +19,6 @@ export class DeimosDownPromo implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.DEIMOS_DOWN_PROMO;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;
@@ -35,7 +34,7 @@ export class DeimosDownPromo implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 3);
-      game.defer(new RemoveAnyPlants(player, game, 6));
+      game.defer(new RemoveAnyPlants(player, 6));
       player.steel += 4;
 
       const availableSpaces = game.board.getAvailableSpacesForCity(player);

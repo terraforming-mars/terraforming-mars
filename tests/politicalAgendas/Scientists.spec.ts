@@ -44,7 +44,7 @@ describe('Scientists', function() {
     player.megaCredits = 10;
     expect(scientistsPolicy.canAct(player)).to.be.true;
 
-    scientistsPolicy.action(player, game);
+    scientistsPolicy.action(player);
     game.deferredActions.runNext();
     expect(player.cardsInHand).has.lengthOf(3);
     expect(player.megaCredits).to.eq(0);

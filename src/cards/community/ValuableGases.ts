@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from './../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -27,19 +26,17 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.megaCredits += 6;
 
     const playableCards = player.getPlayableCards().filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
 
     if (playableCards.length > 0) {
       return new SelectHowToPayForProjectCard(
+        player,
         playableCards,
-        player.getMicrobesCanSpend(),
-        player.getFloatersCanSpend(),
-        player.canUseHeatAsMegaCredits,
         (selectedCard, howToPay) => {
-          const result = player.checkHowToPayAndPlayCard(selectedCard, howToPay, game);
+          const result = player.checkHowToPayAndPlayCard(selectedCard, howToPay);
           if (selectedCard.resourceType === ResourceType.FLOATER) {
             player.addResourceTo(selectedCard, 4);
           }

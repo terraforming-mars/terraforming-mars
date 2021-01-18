@@ -14,7 +14,9 @@ interface SelectCardModel {
 
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
+import {CardName} from '../CardName';
 import {PlayerInputModel} from '../models/PlayerInputModel';
+import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 
 export const SelectCard = Vue.component('select-card', {
   props: {
@@ -44,6 +46,11 @@ export const SelectCard = Vue.component('select-card', {
     Card,
     Button,
   },
+  watch: {
+    cards: function() {
+      this.$emit('cardschanged', this.getData());
+    },
+  },
   methods: {
     translate: $t,
     cardsSelected: function(): number {
@@ -58,10 +65,14 @@ export const SelectCard = Vue.component('select-card', {
       if (this.playerinput.cards === undefined) {
         return [];
       }
-      return CardOrderStorage.getOrdered(
-        CardOrderStorage.getCardOrder(this.player.id),
-        this.playerinput.cards,
-      );
+      if (this.playerinput.selectBlueCardAction) {
+        return sortActiveCards(this.playerinput.cards);
+      } else {
+        return CardOrderStorage.getOrdered(
+          CardOrderStorage.getCardOrder(this.player.id),
+          this.playerinput.cards,
+        );
+      }
     },
     hasCardWarning: function() {
       if (Array.isArray(this.cards)) {
@@ -77,8 +88,11 @@ export const SelectCard = Vue.component('select-card', {
              this.playerinput.maxCardsToSelect > 1 &&
              this.playerinput.minCardsToSelect === 0;
     },
+    getData: function(): Array<CardName> {
+      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+    },
     saveData: function() {
-      this.onsave([Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name]]);
+      this.onsave([this.getData()]);
     },
   },
   template: `<div class="wf-component wf-component--select-card">

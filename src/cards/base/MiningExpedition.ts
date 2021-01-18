@@ -16,7 +16,6 @@ export class MiningExpedition extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.MINING_EXPEDITION,
       cost: 12,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '063',
@@ -41,7 +40,7 @@ export class MiningExpedition extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new RemoveAnyPlants(player, game, 2));
+    game.defer(new RemoveAnyPlants(player, 2));
     player.steel += 2;
     return game.increaseOxygenLevel(player, 1);
   }

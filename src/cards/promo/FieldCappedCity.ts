@@ -15,7 +15,6 @@ export class FieldCappedCity implements IProjectCard {
     public tags = [Tags.CITY, Tags.BUILDING, Tags.ENERGY];
     public name = CardName.FIELD_CAPPED_CITY;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return game.board.getAvailableSpacesForCity(player).length > 0;

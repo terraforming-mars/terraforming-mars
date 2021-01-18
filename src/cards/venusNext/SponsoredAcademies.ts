@@ -14,14 +14,13 @@ export class SponsoredAcademies implements IProjectCard {
     public tags = [Tags.EARTH, Tags.SCIENCE];
     public name = CardName.SPONSORED_ACADEMIES;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player): boolean {
       return player.cardsInHand.length > 1; // this card and at least another
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new DiscardCards(player, game));
+      game.defer(new DiscardCards(player));
       game.defer(DrawCards.keepAll(player, 3));
       const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
       for (const p of otherPlayers) {

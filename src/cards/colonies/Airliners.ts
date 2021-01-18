@@ -22,7 +22,7 @@ export class Airliners implements IProjectCard {
 
   public play(player: Player, game: Game) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2}));
+    game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
   public getVictoryPoints() {

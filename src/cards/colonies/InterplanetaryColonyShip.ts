@@ -13,14 +13,13 @@ export class InterplanetaryColonyShip implements IProjectCard {
     public tags = [Tags.SPACE, Tags.EARTH];
     public name = CardName.INTERPLANETARY_COLONY_SHIP;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.hasAvailableColonyTileToBuildOn(game);
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, false, 'Select colony for Interplanetary Colony Ship'));
+      game.defer(new BuildColony(player, false, 'Select colony for Interplanetary Colony Ship'));
       return undefined;
     }
     public metadata: CardMetadata = {

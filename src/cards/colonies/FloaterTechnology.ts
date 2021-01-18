@@ -23,7 +23,7 @@ export class FloaterTechnology implements IProjectCard {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
       if (floaterCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 1}));
+        game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
       }
 
       return undefined;

@@ -14,7 +14,6 @@ export class Hackers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HACKERS,
       cost: 3,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '125',
@@ -35,7 +34,7 @@ export class Hackers extends Card implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new DecreaseAnyProduction(player, game, Resources.MEGACREDITS, 2));
+    game.defer(new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2));
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
     return undefined;

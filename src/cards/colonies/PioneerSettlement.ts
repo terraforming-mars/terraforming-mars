@@ -25,7 +25,7 @@ export class PioneerSettlement implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, false, 'Select colony for Pioneer Settlement'));
+      game.defer(new BuildColony(player, false, 'Select colony for Pioneer Settlement'));
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;
     }

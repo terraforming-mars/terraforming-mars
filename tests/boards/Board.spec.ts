@@ -152,6 +152,12 @@ describe('Board', function() {
         expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
+  it('getNthAvailableLandSpace throws if no spaces available', function() {
+    expect(function() {
+      board.getNthAvailableLandSpace(0, 1, undefined, () => false);
+    }).to.throw('no spaces available');
+  });
+
   function expectSpace(space: ISpace, id: string, x: number, y: number) {
     if (id !== space.id || x !== space.x || y !== space.y) {
       expect.fail(`space ${space.id} at (${space.x}, ${space.y}) does not match [${id}, ${x}, ${y}]`);
@@ -247,109 +253,6 @@ describe('Board', function() {
       return [];
     }
   };
-
-  it('deserialize-backward compatible', () => {
-    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
-    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
-    const json = {
-      'spaces': [
-        {
-          'id': '01',
-          'spaceType': 'colony',
-          'bonus': [],
-          'x': -1,
-          'y': -1,
-          'player': {
-            'name': 'name-1',
-            'color': 'blue',
-            'beginner': false,
-            'handicap': 0,
-            'usedUndo': false,
-            'id': 'name-1-id',
-          },
-          'tile': {
-            'tileType': 2,
-          },
-        },
-        {
-          'id': '03',
-          'spaceType': 'land',
-          'bonus': [
-            1,
-            1,
-          ],
-          'x': 4,
-          'y': 0,
-          'player': {
-            'name': 'name-2',
-            'color': 'green',
-            'beginner': false,
-            'handicap': 0,
-            'usedUndo': false,
-            'id': 'name-2-id',
-          },
-          'tile': {
-            'tileType': 0,
-          },
-        },
-        {
-          'id': '04',
-          'spaceType': 'ocean',
-          'bonus': [
-            1,
-            1,
-          ],
-          'x': 5,
-          'y': 0,
-          'tile': {
-            'tileType': 1,
-          },
-        },
-        {
-          'id': '05',
-          'spaceType': 'land',
-          'bonus': [],
-          'x': 6,
-          'y': 0,
-        },
-      ],
-    } as SerializedBoard;
-    const board = new TestBoard(Board.deserializeSpaces(json.spaces, [player1, player2]));
-    expect(board.getSpaceById('01')!.player).eq(player1);
-    expect(board.getSpaceById('03')!.player).eq(player2);
-
-    const serialized = board.serialize();
-    const boardJson = {
-      'spaces': [
-        {
-          'id': '01',
-          'spaceType': 'colony', 'adjacency': undefined, 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
-          'tile': {'tileType': 2},
-        },
-        {
-          'id': '03',
-          'spaceType': 'land', 'adjacency': undefined, 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
-          'tile': {'tileType': 0},
-        },
-        {
-          'id': '04',
-          'spaceType': 'ocean', 'adjacency': undefined, 'bonus': [1, 1],
-          'x': 5, 'y': 0, 'player': undefined,
-          'tile': {'tileType': 1},
-        },
-        {
-          'id': '05',
-          'spaceType': 'land', 'adjacency': undefined, 'bonus': [],
-          'x': 6, 'y': 0, 'player': undefined,
-          'tile': undefined,
-        },
-      ],
-    };
-    expect(serialized).deep.eq(boardJson);
-  });
-
 
   it('deserialize', () => {
     const boardJson = {

@@ -18,7 +18,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       name: CardName.CONVOY_FROM_EUROPA,
       tags: [Tags.SPACE],
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '161',
@@ -40,7 +39,7 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     player.drawCard();
-    game.defer(new PlaceOceanTile(player, game));
+    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

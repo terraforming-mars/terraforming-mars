@@ -16,7 +16,6 @@ export class SmallAsteroid implements IProjectCard {
     public name = CardName.SMALL_ASTEROID;
     public tags = [Tags.SPACE];
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;
@@ -29,7 +28,7 @@ export class SmallAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 1);
-      game.defer(new RemoveAnyPlants(player, game, 2));
+      game.defer(new RemoveAnyPlants(player, 2));
       return undefined;
     }
     public metadata: CardMetadata = {

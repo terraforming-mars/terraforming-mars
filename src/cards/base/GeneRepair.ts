@@ -26,9 +26,6 @@ export class GeneRepair extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3;
-  }
   public play(player: Player, _game: Game) {
     if (player.getTagCount(Tags.SCIENCE) < 3) {
       throw 'Requires 3 science tags.';

@@ -5,17 +5,17 @@ import {TestPlayers} from '../../TestingUtils';
 import {Game} from '../../../src/Game';
 
 describe('RegoPlastics', function() {
-  let card : RegoPlastics; let player : Player; let game : Game;
+  let card : RegoPlastics; let player : Player;
 
   beforeEach(function() {
     card = new RegoPlastics();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getSteelValue(game)).to.eq(3);
+    expect(player.getSteelValue()).to.eq(3);
   });
 
   it('Should give victory points', function() {

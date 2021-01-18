@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class TectonicStressPower extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class TectonicStressPower extends Card implements IProjectCard {
       name: CardName.TECTONIC_STRESS_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 18,
+      productionDelta: Units.of({energy: 3}),
 
       metadata: {
         cardNumber: '145',

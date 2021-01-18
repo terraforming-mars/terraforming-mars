@@ -10,6 +10,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
       name: CardName.URBANIZED_AREA,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 10,
-      hasRequirements: false,
+      productionDelta: Units.of({energy: -1, megacredits: 2}),
 
       metadata: {
         cardNumber: '120',

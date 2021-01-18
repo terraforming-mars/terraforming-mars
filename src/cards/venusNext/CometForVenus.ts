@@ -17,7 +17,6 @@ export class CometForVenus implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.COMET_FOR_VENUS;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

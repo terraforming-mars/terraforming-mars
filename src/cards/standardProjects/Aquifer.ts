@@ -27,7 +27,7 @@ export class Aquifer extends StandardProjectCard {
   }
 
   actionEssence(player: Player, game: Game): void {
-    game.defer(new PlaceOceanTile(player, game, 'Select space for ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for ocean'));
   }
 
   public metadata: CardMetadata = {

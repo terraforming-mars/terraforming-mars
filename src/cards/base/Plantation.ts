@@ -34,7 +34,7 @@ export class Plantation extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 2;
+    const meetsTagRequirements = super.canPlay(player);
     const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
     const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 

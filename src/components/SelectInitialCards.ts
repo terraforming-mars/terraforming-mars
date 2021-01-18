@@ -39,6 +39,12 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     };
   },
   methods: {
+    getOption: function(idx: number) {
+      if (this.playerinput.options === undefined || this.playerinput.options[idx] === undefined) {
+        throw new Error('invalid input, missing option');
+      }
+      return this.playerinput.options[idx];
+    },
     saveData: function() {
       const result: Array<Array<string>> = [];
       result.push([]);
@@ -52,7 +58,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       this.onsave(result);
     },
     hasPrelude: function() {
-      return this.playerinput.options?.length === 3;
+      return this.playerinput.options !== undefined && this.playerinput.options.length === 3;
     },
     cardsChanged: function(cards: Array<CardName>) {
       this.selectedCards = cards;
@@ -65,9 +71,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     },
   },
   template: `<div>
-    <select-card :player="player" :playerinput="playerinput.options[0]" :showtitle="true" v-on:cardschanged="corporationChanged" />
-    <select-card v-if="hasPrelude()" :player="player" :playerinput="playerinput.options[1]" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <select-card :player="player" :playerinput="playerinput.options[playerinput.options.length - 1]" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
+    <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <Button v-if="showsave" :onClick="saveData" type="submit" :title="playerinput.buttonLabel" />
   </div>`,
 });

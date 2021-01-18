@@ -2,9 +2,9 @@ import {CardName} from '../CardName';
 import {CardModel} from '../models/CardModel';
 
 export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {
-  const blueCardNumbers = ActiveCardsSortingOrder.size;
+  const firstCardIndex = -1;
   return inCards.slice().sort(function(cardA, cardB) {
-    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || blueCardNumbers) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || blueCardNumbers);
+    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || firstCardIndex) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || firstCardIndex);
   });
 }
 
@@ -56,6 +56,7 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.AI_CENTRAL,
   CardName.SUB_CRUST_MEASUREMENTS,
   CardName.RESTRICTED_AREA,
+  CardName.RESTRICTED_AREA_ARES,
   CardName.DEVELOPMENT_CENTER,
   CardName.HI_TECH_LAB,
   CardName.RED_SPOT_OBSERVATORY,
@@ -115,6 +116,7 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.MARTIAN_MEDIA_CENTER,
   CardName.SPACE_MIRRORS,
   CardName.INDUSTRIAL_CENTER,
+  CardName.INDUSTRIAL_CENTER_ARES,
   CardName.UNDERGROUND_DETONATIONS,
 
   // Animals (active)
@@ -124,13 +126,16 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.BIRDS,
   CardName.LIVESTOCK,
   CardName.STRATOSPHERIC_BIRDS,
+  CardName.BIOENGINEERING_ENCLOSURE,
   CardName.SMALL_ANIMALS,
   CardName.SUBZERO_SALT_FISH,
 
   // Animals (passive)
   CardName.VENUSIAN_ANIMALS,
+  CardName.OCEAN_SANCTUARY,
   CardName.PETS,
   CardName.ECOLOGICAL_ZONE,
+  CardName.ECOLOGICAL_ZONE_ARES,
   CardName.HERBIVORES,
 
   // Microbes
@@ -160,12 +165,15 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.PROTECTED_HABITATS,
   CardName.ARCTIC_ALGAE,
   CardName.VIRAL_ENHANCERS,
+  CardName.ECOLOGICAL_SURVEY,
   CardName.ADAPTATION_TECHNOLOGY,
+  CardName.GEOLOGICAL_SURVEY,
   CardName.IMMIGRANT_CITY,
   CardName.ADVERTISING,
+  CardName.MARKETING_EXPERTS,
 
   // Alloys
   CardName.ADVANCED_ALLOYS,
   CardName.REGO_PLASTICS,
   CardName.MERCURIAN_ALLOYS,
-].map((card, index) => [card, index]));
+].map((card, index) => [card, index+1]));

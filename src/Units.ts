@@ -60,6 +60,17 @@ export namespace Units {
     };
   }
 
+  export function negative(units: Units): Units {
+    return {
+      megacredits: -units.megacredits,
+      steel: -units.steel,
+      titanium: -units.titanium,
+      plants: -units.plants,
+      energy: -units.energy,
+      heat: -units.heat,
+    };
+  }
+
   // export function adjustUnits(delta: PartialUnits, player: Player, purse: Units) {
   //   if (!player.hasUnits(delta)) {
   //     throw new Error();
@@ -70,15 +81,6 @@ export namespace Units {
   //   purse.plants += delta.plants || 0;
   //   purse.energy += delta.energy || 0;
   //   purse.heat += delta.heat || 0;
-  // }
-
-  // export function hasProduction(units: Units, player: Player): boolean {
-  //   return player.megaCreditProduction - units.megacredits >= -5 &&
-  //     player.steelProduction - units.steel >= 0 &&
-  //     player.titaniumProduction - units.titanium >= 0 &&
-  //     player.plantProduction - units.plants >= 0 &&
-  //     player.energyProduction - units.energy >= 0 &&
-  //     player.heatProduction - units.heat >= 0;
   // }
 
   // Returns true when the player has the supplied units in its inventory.
@@ -100,38 +102,38 @@ export namespace Units {
     player.heat -= units.heat;
   }
 
-  // export function hasProduction(units: Units, player: Player): boolean {
-  //   return player.getProduction(Resources.MEGACREDITS) - units.megacredits >= 0 &&
-  //     player.getProduction(Resources.STEEL) - units.steel >= 0 &&
-  //     player.getProduction(Resources.TITANIUM) - units.titanium >= 0 &&
-  //     player.getProduction(Resources.PLANTS) - units.plants >= 0 &&
-  //     player.getProduction(Resources.ENERGY) - units.energy >= 0 &&
-  //     player.getProduction(Resources.HEAT) - units.heat >= 0;
-  // }
+  export function canAdjustProduction(units: Units, player: Player): boolean {
+    return player.getProduction(Resources.MEGACREDITS) + units.megacredits >= -5 &&
+      player.getProduction(Resources.STEEL) + units.steel >= 0 &&
+      player.getProduction(Resources.TITANIUM) + units.titanium >= 0 &&
+      player.getProduction(Resources.PLANTS) + units.plants >= 0 &&
+      player.getProduction(Resources.ENERGY) + units.energy >= 0 &&
+      player.getProduction(Resources.HEAT) + units.heat >= 0;
+  }
 
-  export function deductProduction(units: Units, player: Player, game?: Game, fromPlayer?: Player) {
+  export function adjustProduction(units: Units, player: Player, game?: Game, fromPlayer?: Player) {
     if (units.megacredits !== undefined) {
-      player.addProduction(Resources.MEGACREDITS, -units.megacredits, game, fromPlayer);
+      player.addProduction(Resources.MEGACREDITS, units.megacredits, game, fromPlayer);
     }
 
     if (units.steel !== undefined) {
-      player.addProduction(Resources.STEEL, -units.steel, game, fromPlayer);
+      player.addProduction(Resources.STEEL, units.steel, game, fromPlayer);
     }
 
     if (units.titanium !== undefined) {
-      player.addProduction(Resources.TITANIUM, -units.titanium, game, fromPlayer);
+      player.addProduction(Resources.TITANIUM, units.titanium, game, fromPlayer);
     }
 
     if (units.plants !== undefined) {
-      player.addProduction(Resources.PLANTS, -units.plants, game, fromPlayer);
+      player.addProduction(Resources.PLANTS, units.plants, game, fromPlayer);
     }
 
     if (units.energy !== undefined) {
-      player.addProduction(Resources.ENERGY, -units.energy, game, fromPlayer);
+      player.addProduction(Resources.ENERGY, units.energy, game, fromPlayer);
     }
 
     if (units.heat !== undefined) {
-      player.addProduction(Resources.HEAT, -units.heat, game, fromPlayer);
+      player.addProduction(Resources.HEAT, units.heat, game, fromPlayer);
     }
   }
 }

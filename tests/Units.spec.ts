@@ -204,7 +204,7 @@ describe('Units', () => {
     expect(() => units.megacredits = 1).to.throw();
   });
 
-  it('deduct production', () => {
+  it('adjust production', () => {
     function asProductionUnits(player: Player): Units {
       return {
         megacredits: player.getProduction(Resources.MEGACREDITS),
@@ -236,7 +236,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({megacredits: 10}), player);
+    Units.adjustProduction(Units.of({megacredits: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 19,
@@ -246,7 +246,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({steel: 10}), player);
+    Units.adjustProduction(Units.of({steel: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -256,7 +256,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({titanium: 10}), player);
+    Units.adjustProduction(Units.of({titanium: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -266,7 +266,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({plants: 10}), player);
+    Units.adjustProduction(Units.of({plants: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -276,7 +276,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({energy: 10}), player);
+    Units.adjustProduction(Units.of({energy: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -286,7 +286,7 @@ describe('Units', () => {
       heat: 15,
     });
 
-    Units.deductProduction(Units.of({heat: 10}), player);
+    Units.adjustProduction(Units.of({heat: -10}), player);
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,

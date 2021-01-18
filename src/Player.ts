@@ -1909,7 +1909,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.setWaitingFor(action, () => {
       this.actionsTakenThisRound++;
-      this.takeAction(game);
+      this.takeAction();
     });
   }
 

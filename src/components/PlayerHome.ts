@@ -132,7 +132,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getGenerationText: function(): string {
       if (this.player.players.length === 1) {
-        const MAX_GEN = this.player.preludeExtension ? 12 : 14;
+        const MAX_GEN = this.player.gameOptions.preludeExtension ? 12 : 14;
         let retText =
                     'generation ' + this.player.generation + ' of ' + MAX_GEN;
         if (MAX_GEN === this.player.generation) {
@@ -225,8 +225,6 @@ export const PlayerHome = Vue.component('player-home', {
               :oxygen = "player.oxygenLevel"
               :oceans = "player.oceans"
               :venus = "player.venusScaleLevel"
-              :venusNextExtension = "player.venusNextExtension"
-              :turmoilExtension = "player.turmoilExtension"
               :turmoil = "player.turmoil"
               :gameOptions = "player.gameOptions"
               :playerNumber = "player.players.length">
@@ -239,20 +237,20 @@ export const PlayerHome = Vue.component('player-home', {
                     <a name="board" class="player_home_anchor"></a>
                     <board
                         :spaces="player.spaces"
-                        :venusNextExtension="player.venusNextExtension"
+                        :venusNextExtension="player.gameOptions.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
-                        :boardName ="player.boardName"
+                        :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
                         :shouldNotify="true"
-                        :aresExtension="player.aresExtension"
+                        :aresExtension="player.gameOptions.aresExtension"
                         :aresData="player.aresData" 
                         id="shortkey-board"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
-                    <moonboard v-if="player.moonExpansion" :model="player.moon"></moonboard>
+                    <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
@@ -380,7 +378,7 @@ export const PlayerHome = Vue.component('player-home', {
                         </div>
                     </summary>
                     <div class="accordion-body">
-                        <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                        <board :spaces="player.spaces" :venusNextExtension="player.gameOptions.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.gameOptions.boardName"></board>
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                     </div>
                 </details>

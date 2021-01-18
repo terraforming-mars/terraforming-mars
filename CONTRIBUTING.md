@@ -13,7 +13,7 @@ repository.
 
 Our codebase is growing and changing all the time, and with each change we ask ourselves if it
 introduces too much risk, resource consumption or unclear code. All of this is to make sure the
-project remains nimble and easy to maintain, enhance and undersetand. This is why we adhere to
+project remains nimble and easy to maintain, enhance and understand. This is why we adhere to
 some degree of quality and standards and comprehension, so please do not be surprised if our
 first response is to ask for clarification or possibly significant changes. We commit to
 respectfully working with you to ensure your change can be accepted, and also, that it be

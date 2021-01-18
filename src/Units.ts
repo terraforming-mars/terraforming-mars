@@ -26,7 +26,7 @@ export namespace Units {
   //   log?: boolean;
   // };
 
-  export const EMPTY: Units = {
+  export const EMPTY: Readonly<Units> = {
     get megacredits() {
       return 0;
     },

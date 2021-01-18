@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
 import {SelectInitialCards} from '../../src/components/SelectInitialCards';
 
-describe.only('SelectInitialCards', function() {
+describe('SelectInitialCards', function() {
   function getLocalVue() {
     const localVue = createLocalVue();
     localVue.directive('i18n', {});

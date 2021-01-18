@@ -2,8 +2,9 @@ import {CardName} from '../CardName';
 import {CardModel} from '../models/CardModel';
 
 export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {
+  const firstCardIndex = -1;
   return inCards.slice().sort(function(cardA, cardB) {
-    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || -1) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || -1);
+    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || firstCardIndex) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || firstCardIndex);
   });
 }
 

@@ -210,7 +210,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
         player.scienceTagCount += 1;
-        player.playCard(new ScienceTagCard());
+        player.playCard(new ScienceTagCard(), undefined, false);
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 

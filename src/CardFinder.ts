@@ -38,8 +38,8 @@ export class CardFinder {
 
     public getCardByName<T extends ICard>(cardName: string, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
       let found : (ICardFactory<T> | undefined);
-      CardFinder.getDecks().some((man) => {
-        decks(man).some((deck) => {
+      CardFinder.getDecks().some((manifest) => {
+        decks(manifest).some((deck) => {
           found = deck.findByCardName(cardName as CardName);
           return found;
         });
@@ -53,15 +53,15 @@ export class CardFinder {
     }
 
     public getProjectOrStandardActionByName(cardName: string): StandardActionCard | IProjectCard | undefined {
-      return this.getCardByName(cardName, (man) => [
-        man.projectCards,
-        man.preludeCards,
-        man.standardActions,
+      return this.getCardByName(cardName, (manifest) => [
+        manifest.projectCards,
+        manifest.preludeCards,
+        manifest.standardActions,
       ]);
     }
 
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
-      return this.getCardByName(cardName, (man) => [man.corporationCards]);
+      return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
     }
 
     // Function to return a card object by its name
@@ -69,7 +69,7 @@ export class CardFinder {
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
     //              another function, perhaps?
     public getProjectCardByName(cardName: string): IProjectCard | undefined {
-      return this.getCardByName(cardName, (man) => [man.projectCards, man.preludeCards]);
+      return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
     }
 
     public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {

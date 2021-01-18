@@ -8,6 +8,6 @@ export const CardNumber = Vue.component('CardNumber', {
     },
   },
   template: `
-        <div class="card-nr">#{{ number }}</div>
+        <div class="card-nr-outer"><span class="card-nr-inner">{{ number }}</span></div>
     `,
 });

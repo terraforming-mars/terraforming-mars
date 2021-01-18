@@ -18,7 +18,7 @@ export class CuttingEdgeTechnology implements IProjectCard {
     }
 
     public getCardDiscount(_player: Player, card: IProjectCard) {
-      if (card.canPlay && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
+      if (card.canPlay && card.metadata.requirements !== undefined) return 2;
       return 0;
     }
 

@@ -16,7 +16,6 @@ export class AirRaid implements IProjectCard {
   public tags = [];
   public name = CardName.AIR_RAID;
   public cardType = CardType.EVENT;
-  public hasRequirements = false;
 
   public canPlay(player: Player): boolean {
     return player.getResourceCount(ResourceType.FLOATER) > 0;

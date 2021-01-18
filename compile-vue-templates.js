@@ -195,6 +195,11 @@ checkComponent(
   ['cardName', 'card', 'cards', 'cost', 'tags', 'heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'warning'],
 );
 checkComponent(
+  'src/components/SelectInitialCards',
+  require('./build/src/components/SelectInitialCards').SelectInitialCards,
+  [],
+);
+checkComponent(
   'src/components/SelectOption',
   require('./build/src/components/SelectOption').SelectOption,
   [],

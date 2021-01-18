@@ -15,7 +15,6 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.CEOS_FAVORITE_PROJECT,
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '149',

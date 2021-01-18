@@ -1095,15 +1095,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return Math.max(cost, 0);
   }
 
-  private addPlayedCard(card: IProjectCard): void {
-    this.playedCards.push(card);
-    this.lastCardPlayed = card;
-
-    // Playwrights hook for Conscription and Indentured Workers
-    // Cards "removed from play" can still have an effect
-    this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
-  }
-
   private canUseSteel(card: ICard): boolean {
     return card.tags.indexOf(Tags.BUILDING) !== -1;
   }
@@ -1204,7 +1195,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return 0;
   }
 
-  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay): undefined {
+  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
     // Pay for card
     if (howToPay !== undefined) {
       this.steel -= howToPay.steel;
@@ -1238,6 +1229,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (selectedCard.cardType !== CardType.PROXY) {
+      this.lastCardPlayed = selectedCard;
       this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
     }
 
@@ -1270,8 +1262,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    if (selectedCard.cardType !== CardType.PROXY) {
-      this.addPlayedCard(selectedCard);
+    if (addToPlayedCards && selectedCard.name !== CardName.LAW_SUIT) {
+      this.playedCards.push(selectedCard);
     }
 
     for (const playedCard of this.playedCards) {
@@ -1320,7 +1312,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
         this.actionsThisGeneration.add(foundCard.name);
         return undefined;
-      },
+      }, 1, 1, true,
     );
   }
 

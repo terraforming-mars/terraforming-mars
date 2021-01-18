@@ -12,7 +12,6 @@ export class InterplanetaryColonyShip implements IProjectCard {
     public tags = [Tags.SPACE, Tags.EARTH];
     public name = CardName.INTERPLANETARY_COLONY_SHIP;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player): boolean {
       return player.hasAvailableColonyTileToBuildOn();

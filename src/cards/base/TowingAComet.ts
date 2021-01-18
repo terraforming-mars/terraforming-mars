@@ -18,7 +18,6 @@ export class TowingAComet extends Card implements IProjectCard {
       name: CardName.TOWING_A_COMET,
       tags: [Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '075',

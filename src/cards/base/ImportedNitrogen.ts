@@ -19,7 +19,6 @@ export class ImportedNitrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_NITROGEN,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '163',

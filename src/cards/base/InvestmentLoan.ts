@@ -15,7 +15,6 @@ export class InvestmentLoan extends Card implements IProjectCard {
       name: CardName.INVESTMENT_LOAN,
       tags: [Tags.EARTH],
       cost: 3,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '110',

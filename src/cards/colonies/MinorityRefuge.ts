@@ -13,7 +13,6 @@ export class MinorityRefuge implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.MINORITY_REFUGE;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player): boolean {
       return player.hasAvailableColonyTileToBuildOn() && player.getProduction(Resources.MEGACREDITS) >= -3;

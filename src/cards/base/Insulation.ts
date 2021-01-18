@@ -14,7 +14,6 @@ export class Insulation extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.INSULATION,
       cost: 2,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '152',

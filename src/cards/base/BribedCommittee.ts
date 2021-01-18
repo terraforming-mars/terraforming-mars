@@ -17,7 +17,6 @@ export class BribedCommittee extends Card implements IProjectCard {
       name: CardName.BRIBED_COMMITTEE,
       tags: [Tags.EARTH],
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '112',

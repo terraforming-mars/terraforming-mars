@@ -40,12 +40,6 @@ export const Preferences = Vue.component('preferences', {
     venus: {
       type: Number,
     },
-    venusNextExtension: {
-      type: Boolean,
-    },
-    turmoilExtension: {
-      type: Boolean,
-    },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
@@ -199,7 +193,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
-                <div v-if="turmoilExtension">
+                <div v-if="gameOptions.turmoilExtension">
                 <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
                 </div>
                 <div class="preferences_global_params">
@@ -209,7 +203,7 @@ export const Preferences = Vue.component('preferences', {
                   <div class="preferences_global_params_value" v-html="getOxygenCount()"></div>
                   <div class="preferences_ocean-tile"></div>
                   <div class="preferences_global_params_value" v-html="getOceanCount()"></div>
-                  <div v-if="venusNextExtension">
+                  <div v-if="gameOptions.venusNextExtension">
                     <div class="preferences_venus-tile"></div>
                     <div class="preferences_global_params_value" v-html="getVenusCount()"></div>
                   </div>

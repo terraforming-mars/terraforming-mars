@@ -27,7 +27,6 @@ export class LargeConvoy extends Card implements IProjectCard {
       name: CardName.LARGE_CONVOY,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 36,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '143',

@@ -1593,40 +1593,25 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
-      const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
-      let maxPay = 0;
-      if (canUseSteel) {
-        maxPay += this.steel * this.steelValue;
-      }
-      if (canUseTitanium) {
-        maxPay += this.titanium * this.getTitaniumValue();
-      }
+    return candidateCards.filter((card) => this.canPlay(card));
+  }
 
-      const psychrophiles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+  public canPlay(card: IProjectCard) {
+    if (!this.canAffordCard(card)) {
+      return false;
+    }
+    return card.canPlay === undefined || card.canPlay(this, this.game);
+  }
 
-      if (psychrophiles !== undefined &&
-          psychrophiles.resourceCount &&
-          card.tags.indexOf(Tags.PLANT) !== -1) {
-        maxPay += psychrophiles.resourceCount * 2;
-      }
-
-      const dirigibles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.DIRIGIBLES);
-
-      if (dirigibles !== undefined &&
-          dirigibles.resourceCount &&
-          card.tags.indexOf(Tags.VENUS) !== -1) {
-        maxPay += dirigibles.resourceCount * 3;
-      }
-
-      maxPay += this.spendableMegacredits();
-      return maxPay >= this.getCardCost(this.game, card) &&
-                  (card.canPlay === undefined || card.canPlay(this, this.game));
-    });
-    return playableCards;
+  public canAffordCard(card: IProjectCard) {
+    return this.canAfford(
+      this.getCardCost(this.game, card),
+      this.game,
+      card.tags.includes(Tags.BUILDING),
+      card.tags.includes(Tags.SPACE),
+      card.tags.includes(Tags.VENUS),
+      card.tags.includes(Tags.PLANT),
+    );
   }
 
   public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {

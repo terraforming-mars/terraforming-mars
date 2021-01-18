@@ -1,11 +1,11 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {IProjectCard} from '../IProjectCard';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Game} from '../../../Game';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {SelectCard} from '../../../inputs/SelectCard';
+import {IProjectCard} from '../../IProjectCard';
 
 export class SellPatents extends StandardProjectCard {
   public name = CardName.STANDARD_SELL_PATENTS;

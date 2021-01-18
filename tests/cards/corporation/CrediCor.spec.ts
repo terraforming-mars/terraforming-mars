@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Bushes} from '../../../src/cards/base/Bushes';
 import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
+import {AsteroidStandard} from '../../../src/cards/base/standardProjects/Asteroid';
+import {City} from '../../../src/cards/base/standardProjects/City';
+import {Greenery} from '../../../src/cards/base/standardProjects/Greenery';
 import {CrediCor} from '../../../src/cards/corporation/CrediCor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
-import {AsteroidStandard} from '../../../src/cards/standardProjects/Asteroid';
-import {City} from '../../../src/cards/standardProjects/City';
-import {Greenery} from '../../../src/cards/standardProjects/Greenery';
 
 describe('CrediCor', function() {
   let card : CrediCor; let player : Player; let game : Game;

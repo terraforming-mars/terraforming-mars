@@ -1,8 +1,8 @@
 import {expect} from 'chai';
+import {AsteroidStandard} from '../../../src/cards/base/standardProjects/Asteroid';
+import {SellPatents} from '../../../src/cards/base/standardProjects/SellPatents';
 import {StandardTechnology} from '../../../src/cards/base/StandardTechnology';
 import {TestPlayers} from '../../TestingUtils';
-import {AsteroidStandard} from '../../../src/cards/standardProjects/Asteroid';
-import {SellPatents} from '../../../src/cards/standardProjects/SellPatents';
 
 describe('StandardTechnology', function() {
   it('Should play', function() {

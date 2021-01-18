@@ -222,13 +222,12 @@ import {WavePower} from './base/WavePower';
 import {Windmills} from './base/Windmills';
 import {Worms} from './base/Worms';
 import {Zeppelins} from './base/Zeppelins';
-import {Aquifer} from './standardProjects/Aquifer';
-import {City} from './standardProjects/City';
-import {PowerPlantStandard} from './standardProjects/PowerPlant';
-import {Greenery} from './standardProjects/Greenery';
-import {AsteroidStandard} from './standardProjects/Asteroid';
-import {BufferGas} from './standardProjects/BufferGas';
-import {SellPatents} from './standardProjects/SellPatents';
+import {Aquifer} from './base/standardProjects/Aquifer';
+import {City} from './base/standardProjects/City';
+import {PowerPlantStandard} from './base/standardProjects/PowerPlant';
+import {Greenery} from './base/standardProjects/Greenery';
+import {AsteroidStandard} from './base/standardProjects/Asteroid';
+import {SellPatents} from './base/standardProjects/SellPatents';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -390,7 +389,6 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STANDARD_POWER_PLANT, Factory: PowerPlantStandard},
     {cardName: CardName.STANDARD_GREENERY, Factory: Greenery},
     {cardName: CardName.STANDARD_ASTEROID, Factory: AsteroidStandard},
-    {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},
     {cardName: CardName.STANDARD_SELL_PATENTS, Factory: SellPatents},
   ],
 });

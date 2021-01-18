@@ -4,34 +4,31 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import * as constants from '../../constants';
 
-export class BufferGas extends StandardProjectCard {
-  public name = CardName.STANDARD_BUFFER_GAS;
-  public cost = 16;
+export class AirScrapping extends StandardProjectCard {
+  public name = CardName.STANDARD_AIR_SCRAPPING;
+  public cost = 15;
 
   public canAct(player: Player, game: Game): boolean {
-    if (game.isSoloMode() === false || game.gameOptions.soloTR === false) {
-      return false;
-    }
-
     let cost = this.cost;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(cost);
+    return player.canAfford(cost) && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
   }
 
   actionEssence(player: Player, game: Game): void {
-    player.increaseTerraformRating(game);
+    game.increaseVenusScaleLevel(player, 1);
   }
 
   public metadata: CardMetadata = {
-    cardNumber: 'SP3',
+    cardNumber: 'SP1',
     renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 16 MC to increase your TR 1 step. Solo games only.', (eb) => {
-        eb.megacredits(16).startAction.tr(1);
+      b.standardProject('Spend 15 MC to raise Venus 1 step.', (eb) => {
+        eb.megacredits(15).startAction.venus(1);
       }),
     ),
   };

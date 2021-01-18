@@ -55,7 +55,7 @@ import {TradeEnvoys} from './TradeEnvoys';
 import {TradingColony} from './TradingColony';
 import {UrbanDecomposers} from './UrbanDecomposers';
 import {WarpDrive} from './WarpDrive';
-import {BuildColonyStandard} from '../standardProjects/BuildColony';
+import {BuildColonyStandard} from './BuildColony';
 
 export const COLONIES_CARD_MANIFEST = new CardManifest({
   module: GameModule.Colonies,

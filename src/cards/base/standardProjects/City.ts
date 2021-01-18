@@ -1,11 +1,11 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {Resources} from '../../Resources';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Game} from '../../../Game';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
+import {Resources} from '../../../Resources';
 
 export class City extends StandardProjectCard {
   public name = CardName.STANDARD_CITY;

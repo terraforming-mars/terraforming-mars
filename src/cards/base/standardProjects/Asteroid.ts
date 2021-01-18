@@ -1,13 +1,13 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
-import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import * as constants from '../../constants';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Game} from '../../../Game';
+import {REDS_RULING_POLICY_COST} from '../../../constants';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../turmoil/parties/PartyName';
+import * as constants from '../../../constants';
 
 export class AsteroidStandard extends StandardProjectCard {
   public name = CardName.STANDARD_ASTEROID;

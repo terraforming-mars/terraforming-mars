@@ -1,10 +1,10 @@
 import {expect} from 'chai';
+import {PowerPlantStandard} from '../../../src/cards/base/standardProjects/PowerPlant';
 import {Manutech} from '../../../src/cards/venusNext/Manutech';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
-import {PowerPlantStandard} from '../../../src/cards/standardProjects/PowerPlant';
 
 describe('Manutech', function() {
   let card : Manutech; let player : Player; let game : Game;

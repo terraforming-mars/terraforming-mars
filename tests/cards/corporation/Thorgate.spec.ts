@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {EnergySaving} from '../../../src/cards/base/EnergySaving';
 import {Pets} from '../../../src/cards/base/Pets';
+import {PowerPlantStandard} from '../../../src/cards/base/standardProjects/PowerPlant';
 import {Thorgate} from '../../../src/cards/corporation/Thorgate';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
-import {PowerPlantStandard} from '../../../src/cards/standardProjects/PowerPlant';
 
 describe('Thorgate', function() {
   it('Should play', function() {

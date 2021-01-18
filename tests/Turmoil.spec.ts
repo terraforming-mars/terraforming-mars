@@ -24,7 +24,7 @@ import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
-import {Greenery} from '../src/cards/standardProjects/Greenery';
+import {Greenery} from '../src/cards/base/standardProjects/Greenery';
 
 describe('Turmoil', function() {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;

@@ -1,13 +1,13 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {StandardProjectCard} from './StandardProjectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Game} from '../../../Game';
+import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../../constants';
+import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../turmoil/parties/PartyName';
 
 export class Aquifer extends StandardProjectCard {
   public name = CardName.STANDARD_AQUIFER;

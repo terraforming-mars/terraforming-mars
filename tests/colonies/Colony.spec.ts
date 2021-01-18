@@ -13,7 +13,7 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {setCustomGameOptions} from '../TestingUtils';
-import {BuildColonyStandard} from '../../src/cards/standardProjects/BuildColony';
+import {BuildColonyStandard} from '../../src/cards/colonies/BuildColony';
 
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 

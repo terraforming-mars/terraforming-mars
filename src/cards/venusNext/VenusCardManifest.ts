@@ -3,6 +3,7 @@ import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AerialMappers} from './AerialMappers';
 import {AerosportTournament} from './AerosportTournament';
+import {AirScrapping} from './AirScrapping';
 import {AirScrappingExpedition} from './AirScrappingExpedition';
 import {Aphrodite} from './Aphrodite';
 import {AtalantaPlanitiaLab} from './AtalantaPlanitiaLab';
@@ -55,7 +56,6 @@ import {VenusSoils} from './VenusSoils';
 import {VenusWaystation} from './VenusWaystation';
 import {Viron} from './Viron';
 import {WaterToVenus} from './WaterToVenus';
-import {AirScrapping} from '../standardProjects/AirScrapping';
 
 export const VENUS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Venus,

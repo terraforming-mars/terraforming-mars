@@ -3,17 +3,21 @@
 We like external contributions! Every internal contributor started as an external contributor.
 (Except the founder, of course.)
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, Discord, or any other method with the owners of this repository, before making a change.
-
 Our contributors vary in experience. Many of our contributors have very little software development
 experience, but a great understanding of the game, and some have over 30 years of software industry
 experience. Wherever you fit in that level of experience, your contribution is welcome.
 
-We still have to adhere to some degree of quality and standards and comprehension, though, so
-please do not be surprised if our first response is to ask for clarification or possibly significant
-changes. We commit to respectfully working with you to ensure your change can be accepted, and also,
-that it be clear, correct, and well-tested.
+Before taking on a substantial amout of work for your favorite feature, please first discuss the
+change you wish to make via issue, email, Discord, or any other method with the owners of this
+repository.
+
+Our codebase is growing and changing all the time, and with each change we ask ourselves if it
+introduces too much risk, resource consumption or unclear code. All of this is to make sure the
+project remains nimble and easy to maintain, enhance and undersetand. This is why we adhere to
+some degree of quality and standards and comprehension, so please do not be surprised if our
+first response is to ask for clarification or possibly significant changes. We commit to
+respectfully working with you to ensure your change can be accepted, and also, that it be
+clear, correct, and well-tested.
 
 ## Unit Tests
 

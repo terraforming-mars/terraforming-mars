@@ -1175,7 +1175,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public playProjectCard(game: Game): PlayerInput {
     return new SelectHowToPayForProjectCard(
-      this.getPlayableCards(game),
+      this.getPlayableCards(),
       this.getMicrobesCanSpend(),
       this.getFloatersCanSpend(),
       this.canUseHeatAsMegaCredits,
@@ -1590,7 +1590,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this, game));
   }
 
-  public getPlayableCards(game: Game): Array<IProjectCard> {
+  public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
@@ -1600,40 +1600,42 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
-      const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
-      let maxPay = 0;
-      if (canUseSteel) {
-        maxPay += this.steel * this.steelValue;
-      }
-      if (canUseTitanium) {
-        maxPay += this.titanium * this.getTitaniumValue(game);
-      }
-
-      const psychrophiles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
-
-      if (psychrophiles !== undefined &&
-          psychrophiles.resourceCount &&
-          card.tags.indexOf(Tags.PLANT) !== -1) {
-        maxPay += psychrophiles.resourceCount * 2;
-      }
-
-      const dirigibles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.DIRIGIBLES);
-
-      if (dirigibles !== undefined &&
-          dirigibles.resourceCount &&
-          card.tags.indexOf(Tags.VENUS) !== -1) {
-        maxPay += dirigibles.resourceCount * 3;
-      }
-
-      maxPay += this.spendableMegacredits();
-      return maxPay >= this.getCardCost(game, card) &&
-                  (card.canPlay === undefined || card.canPlay(this, game));
-    });
+    const playableCards = candidateCards.filter((card) => this.canPlay(card));
     return playableCards;
+  }
+
+  public canPlay(card: IProjectCard): boolean {
+    const canUseSteel = card.tags.indexOf(Tags.BUILDING) !== -1;
+    const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
+    let maxPay = 0;
+    if (canUseSteel) {
+      maxPay += this.steel * this.steelValue;
+    }
+    if (canUseTitanium) {
+      maxPay += this.titanium * this.getTitaniumValue(this.game);
+    }
+
+    const psychrophiles = this.playedCards.find(
+      (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+
+    if (psychrophiles !== undefined &&
+        psychrophiles.resourceCount &&
+        card.tags.indexOf(Tags.PLANT) !== -1) {
+      maxPay += psychrophiles.resourceCount * 2;
+    }
+
+    const dirigibles = this.playedCards.find(
+      (playedCard) => playedCard.name === CardName.DIRIGIBLES);
+
+    if (dirigibles !== undefined &&
+        dirigibles.resourceCount &&
+        card.tags.indexOf(Tags.VENUS) !== -1) {
+      maxPay += dirigibles.resourceCount * 3;
+    }
+
+    maxPay += this.spendableMegacredits();
+    return maxPay >= this.getCardCost(this.game, card) &&
+                (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
   public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
@@ -1752,7 +1754,7 @@ export class Player implements ISerializable<SerializedPlayer> {
                       'available action.';
     action.buttonLabel = 'Take action';
 
-    if (this.getPlayableCards(game).length > 0) {
+    if (this.getPlayableCards().length > 0) {
       action.options.push(
         this.playProjectCard(game),
       );

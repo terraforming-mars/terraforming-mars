@@ -30,7 +30,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   public play(player: Player, game: Game) {
     player.megaCredits += 6;
 
-    const playableCards = player.getPlayableCards(game).filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    const playableCards = player.getPlayableCards().filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
 
     if (playableCards.length > 0) {
       return new SelectHowToPayForProjectCard(

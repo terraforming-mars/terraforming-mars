@@ -11,18 +11,16 @@ fs.readdirSync(LOCALES_DIR).forEach((localeName) => {
 
 const args = process.argv.slice(2);
 let localesToWarn = locales;
-if (args) {
-  const localeArgPos = args.indexOf('--locale');
-  if (localeArgPos !== -1 && args.length > localeArgPos+1) {
-    const warnLocale = args[localeArgPos+1].toLowerCase();
-    if ( ! locales.includes(warnLocale)) {
-      console.log('Wrong ' + warnLocale + ' --locale provided');
+
+if (args[0] === '--locales') {
+  localesToWarn = args[1].split(',');
+  localesToWarn.forEach((locale) => {
+    if ( ! locales.includes(locale)) {
+      console.error(`Invalid locale ${locale}`);
       process.exit(1);
     }
-    localesToWarn = [warnLocale];
-  }
+  });
 }
-
 
 let sourceString: keyof typeof raw_translations;
 let warnings: Array<string>;
@@ -33,14 +31,12 @@ for (sourceString in raw_translations) {
   warnings = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
-    if ( ! trans && localeName === 'ru') {
+    if ( ! trans) {
       warnings.push('\tmissing ' + localeName);
     }
   }
   if (warnings.length > 0) {
     console.log(sourceString);
-    for (const warning of warnings) {
-      console.log(warning);
-    }
+    console.warn(warnings.join('\n'));
   }
 }

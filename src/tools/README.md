@@ -29,8 +29,8 @@ You start with 3 MC production and 44 MC.
 ...
 ```
 
-If you want to see warnings for given locale only use --locale switch
+If you want to see warnings for given locale only use --locales switch
 
-`node build/src/tools/check_locales.js --locale cn`
+`node build/src/tools/check_locales.js --locales cn,ru`
 
-as result you will see the warnings for Chinese language only.
+as result you will see the warnings for Chinese and Russian languages only.

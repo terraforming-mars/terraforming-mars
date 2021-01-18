@@ -28,4 +28,5 @@ export interface PlayerInputModel {
     coloniesModel : Array<ColonyModel> | undefined;
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
+    selectBlueCardAction: boolean;
 }

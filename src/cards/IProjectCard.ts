@@ -6,6 +6,5 @@ import {Resources} from '../Resources';
 export interface IProjectCard extends ICard {
     canPlay?: (player: Player, game: Game) => boolean;
     cost: number;
-    hasRequirements?: boolean;
     bonusResource?: Resources | undefined;
 }

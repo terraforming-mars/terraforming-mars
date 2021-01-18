@@ -16,7 +16,6 @@ export class GHGImportFromVenus implements IProjectCard {
     public tags = [Tags.SPACE, Tags.VENUS];
     public name = CardName.GHG_IMPORT_FROM_VENUS;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

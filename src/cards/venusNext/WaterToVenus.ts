@@ -15,7 +15,6 @@ export class WaterToVenus implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.WATER_TO_VENUS;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

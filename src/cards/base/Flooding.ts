@@ -22,7 +22,6 @@ export class Flooding extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '188',

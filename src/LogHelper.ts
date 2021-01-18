@@ -74,7 +74,8 @@ export class LogHelper {
   }
 
   static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
-    game.log(cards.length + ' card(s) were discarded', (b) => {
+    game.log('${0} card(s) were discarded', (b) => {
+      b.rawString(cards.length.toString());
       for (const card of cards) {
         if (typeof card === 'string') {
           b.cardName(card);

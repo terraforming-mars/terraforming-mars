@@ -1,0 +1,21 @@
+{
+    "Buffer Gas": "Буферный газ",
+    "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "Потратьте 16 MC, чтобы увеличить РТ на 1. Только для соло-игр",
+    "Build Moon Colony": "Лунная колония",
+    "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your MC production 1 step.)": "Потратьте 22 MC, чтобы разместить колонию на Луне и повысить производство MC 1",
+    "Build Moon Mine": "Лунная шахта",
+    "(Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "Потратьте 20 MC, чтобы построить шахту на Луне и увеличить производство стали на 1",
+    "Build Moon Road": "Лунная дорога",
+    "(Spend 18 MC and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "Потратьте 18 MC, чтобы построить дорогу на Луне и повысить рейтинг логистики на 1",
+    "(Spend 25 MC to place a city tile and increase your MC production 1 step.)": "Потратьте 25 MC, чтобы построить город и увеличить производство MC на 1",
+    "(Spend 17 MC to place a colony.)": "Потратьте 17 MC, чтобы построить Колонию",
+    "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)": "Потратьте 23 MC, чтобы разметить озеленение и повысить уровень кислорода на 1",
+    "(Spend 11 MC to increase your Energy production 1 step.)": "Потратьте 11 MC, чтобы увеличить производство энергии на 1",
+    "Sell Patents": "Продажа патентов",
+    "(Discard any number of cards to gain that amount of MC.)": "Сбросьте X карт, чтобы получить X MC",
+    "asteroid": "Астероид",
+    "(Spend 14 MC to raise temperature 1 step.)": "Потратьте 12 MC, чтобы увеличить температуру на 1 шаг",
+    "Air Scrapping": "Очистка  воздуха",
+    "(Spend 15 MC to raise Venus 1 step.)": "Потратьте 15 MC, чтобы увеличить шкалу Венеры на 1 шаг",
+    "(Spend 18 MC to place an ocean tile.)": "Потратьте 18 MC, чтобы разместить океан"
+}

@@ -24,7 +24,7 @@ import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
-import {Greenery} from '../src/cards/base/standardProjects/Greenery';
+import {GreeneryStandardProject} from '../src/cards/base/standardProjects/GreeneryStandardProject';
 
 describe('Turmoil', function() {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -156,10 +156,10 @@ describe('Turmoil', function() {
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
-    expect(new Greenery().canAct(player, game)).equal(false);
+    expect(new GreeneryStandardProject().canAct(player, game)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    expect(new Greenery().canAct(player, game)).equal(true);
+    expect(new GreeneryStandardProject().canAct(player, game)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {

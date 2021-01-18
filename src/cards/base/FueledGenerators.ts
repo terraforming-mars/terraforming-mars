@@ -15,7 +15,6 @@ export class FueledGenerators extends Card implements IProjectCard {
       name: CardName.FUELED_GENERATORS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 1,
-      hasRequirements: false,
       productionDelta: Units.of({energy: 1, megacredits: -1}),
 
       metadata: {

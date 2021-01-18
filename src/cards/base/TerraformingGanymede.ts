@@ -18,7 +18,6 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       name: CardName.TERRAFORMING_GANYMEDE,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 33,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '197',

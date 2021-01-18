@@ -16,7 +16,6 @@ export class LawSuit implements IProjectCard {
     public tags = [Tags.EARTH];
     public cardType = CardType.EVENT;
     public name = CardName.LAW_SUIT;
-    public hasRequirements = false;
 
     public canPlay(player: Player) {
       return player.removingPlayers.length > 0;

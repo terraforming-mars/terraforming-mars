@@ -1,5 +1,4 @@
 import * as constants from './constants';
-import {AndOptions} from './inputs/AndOptions';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
@@ -36,10 +35,10 @@ import {Player, PlayerId} from './Player';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
-import {SelectCard} from './inputs/SelectCard';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
+import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -612,8 +611,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private pickCorporationCard(player: Player): PlayerInput {
-    let corporation: CorporationCard;
-    const result: AndOptions = new AndOptions(() => {
+    return new SelectInitialCards(player, this, (corporation: CorporationCard) => {
       // Check for negative M€
       const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
       if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
@@ -630,42 +628,6 @@ export class Game implements ISerializable<SerializedGame> {
 
       this.playerHasPickedCorporationCard(player, corporation); return undefined;
     });
-
-    result.title = ' ';
-    result.buttonLabel = 'Start';
-
-    result.options.push(
-      new SelectCard<CorporationCard>(
-        'Select corporation', undefined, player.dealtCorporationCards,
-        (foundCards: Array<CorporationCard>) => {
-          corporation = foundCards[0];
-          return undefined;
-        },
-      ),
-    );
-
-    if (this.gameOptions.preludeExtension) {
-      result.options.push(
-        new SelectCard(
-          'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
-          (preludeCards: Array<IProjectCard>) => {
-            player.preludeCardsInHand.push(...preludeCards);
-            return undefined;
-          }, 2, 2,
-        ),
-      );
-    }
-
-    result.options.push(
-      new SelectCard(
-        'Select initial cards to buy', undefined, player.dealtProjectCards,
-        (foundCards: Array<IProjectCard>) => {
-          player.cardsInHand.push(...foundCards);
-          return undefined;
-        }, 10, 0,
-      ),
-    );
-    return result;
   }
 
   public hasPassedThisActionPhase(player: Player): boolean {

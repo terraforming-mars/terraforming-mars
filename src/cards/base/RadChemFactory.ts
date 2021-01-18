@@ -19,7 +19,6 @@ export class RadChemFactory extends Card implements IProjectCard {
       name: CardName.RAD_CHEM_FACTORY,
       tags: [Tags.BUILDING],
       cost: 8,
-      hasRequirements: false,
       productionDelta: Units.of({energy: -1}),
 
       metadata: {

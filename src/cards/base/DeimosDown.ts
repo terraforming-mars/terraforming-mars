@@ -18,7 +18,6 @@ export class DeimosDown extends Card implements IProjectCard {
       name: CardName.DEIMOS_DOWN,
       tags: [Tags.SPACE],
       cost: 31,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '039',

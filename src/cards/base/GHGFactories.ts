@@ -15,7 +15,6 @@ export class GHGFactories extends Card implements IProjectCard {
       name: CardName.GHG_FACTORIES,
       tags: [Tags.BUILDING],
       cost: 11,
-      hasRequirements: false,
       productionDelta: Units.of({energy: -1, heat: 4}),
 
       metadata: {

@@ -21,7 +21,6 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       name: CardName.ROBOTIC_WORKFORCE,
       tags: [Tags.SCIENCE],
       cost: 9,
-      hasRequirements: false,
       metadata: {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {

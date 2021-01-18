@@ -19,7 +19,6 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
   public resourceType = ResourceType.ASTEROID;
   public resourceCount: number = 0;
   public cardType = CardType.ACTIVE;
-  public hasRequirements = false;
 
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;

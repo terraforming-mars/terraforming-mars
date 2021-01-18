@@ -19,7 +19,6 @@ export class Comet extends Card implements IProjectCard {
       name: CardName.COMET,
       tags: [Tags.SPACE],
       cost: 21,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '010',

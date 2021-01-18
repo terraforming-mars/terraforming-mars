@@ -13,7 +13,6 @@ export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;
   cost?: number;
-  hasRequirements?: boolean;
   initialActionText?: string;
   metadata: CardMetadata;
   name: CardName;
@@ -49,9 +48,6 @@ export abstract class Card {
   }
   public get cost() {
     return this.properties.cost === undefined ? 0 : this.properties.cost;
-  }
-  public get hasRequirements() {
-    return this.properties.hasRequirements;
   }
   public get initialActionText() {
     return this.properties.initialActionText;

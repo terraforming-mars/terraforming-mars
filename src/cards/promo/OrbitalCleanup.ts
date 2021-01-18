@@ -12,7 +12,6 @@ export class OrbitalCleanup implements IProjectCard {
     public cost = 14;
     public tags = [Tags.EARTH, Tags.SPACE];
     public cardType = CardType.ACTIVE;
-    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.MEGACREDITS) >= -3;
     }

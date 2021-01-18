@@ -48,7 +48,5 @@
     "${0} ${1} ${2} card(s)": "${0} ${1} ${2} carte(s)",
     "${0} gained ${1} TR": "${0} a gagné ${1} NT",
     "1 card(s) were discarded": "1 carte a été défaussée",
-    "2 card(s) were discarded": "2 cartes ont été défaussées",
-    "3 card(s) were discarded": "3 cartes ont été défaussées",
-    "4 card(s) were discarded": "4 cartes ont été défaussées"
+    "${0} card(s) were discarded": "${0} cartes ont été défaussées"
 }

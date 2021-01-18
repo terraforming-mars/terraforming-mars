@@ -20,7 +20,6 @@ export class Virus extends Card implements IProjectCard {
       name: CardName.VIRUS,
       tags: [Tags.MICROBE],
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '050',

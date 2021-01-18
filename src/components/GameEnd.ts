@@ -160,9 +160,9 @@ export const GameEnd = Vue.component('game-end', {
                     <h2 v-i18n>Final situation on the board</h2>
                     <board 
                         :spaces="player.spaces" 
-                        :venusNextExtension="player.venusNextExtension" 
+                        :venusNextExtension="player.gameOptions.venusNextExtension" 
                         :venusScaleLevel="player.venusScaleLevel" 
-                        :boardName ="player.boardName"
+                        :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans" 
                         :oxygen_level="player.oxygenLevel" 
                         :temperature="player.temperature"

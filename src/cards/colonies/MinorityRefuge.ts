@@ -14,7 +14,6 @@ export class MinorityRefuge implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.MINORITY_REFUGE;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.hasAvailableColonyTileToBuildOn(game) && player.getProduction(Resources.MEGACREDITS) >= -3;

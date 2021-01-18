@@ -26,7 +26,6 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_HYDROGEN,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 16,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '019',

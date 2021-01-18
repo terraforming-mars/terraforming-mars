@@ -14,7 +14,6 @@ export class MiningColony implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.MINING_COLONY;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.hasAvailableColonyTileToBuildOn(game);

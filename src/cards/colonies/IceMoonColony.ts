@@ -17,7 +17,6 @@ export class IceMoonColony implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.ICE_MOON_COLONY;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

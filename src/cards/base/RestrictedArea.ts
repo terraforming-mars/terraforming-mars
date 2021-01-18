@@ -33,7 +33,6 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       name,
       tags: [Tags.SCIENCE],
       cost: 11,
-      hasRequirements: false,
       adjacencyBonus,
 
       metadata,

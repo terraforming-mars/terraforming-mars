@@ -14,7 +14,6 @@ export class LunarBeam extends Card implements IProjectCard {
       name: CardName.LUNAR_BEAM,
       tags: [Tags.EARTH, Tags.ENERGY],
       cost: 13,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '030',

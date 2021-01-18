@@ -34,7 +34,6 @@ export class NuclearZone extends Card implements IProjectCard {
       name,
       tags: [Tags.EARTH],
       cost,
-      hasRequirements: false,
       adjacencyBonus,
       metadata,
     });

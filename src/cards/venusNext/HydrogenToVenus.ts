@@ -19,7 +19,6 @@ export class HydrogenToVenus implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.HYDROGEN_TO_VENUS;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
     private static readonly venusCardsWithFloaters: Set<CardName> = new Set<CardName>([
       CardName.AERIAL_MAPPERS,
       CardName.CELESTIC,

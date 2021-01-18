@@ -16,7 +16,6 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
       name: CardName.BUSINESS_NETWORK,
       tags: [Tags.EARTH],
       cost: 4,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '110',

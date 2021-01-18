@@ -19,7 +19,6 @@ export class DeimosDownPromo implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.DEIMOS_DOWN_PROMO;
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;

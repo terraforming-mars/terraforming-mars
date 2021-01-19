@@ -84,7 +84,7 @@
   "Meat Industry":"肉类工业",
   "(Effect: When you gain an animal to ANY CARD, gain 2MC.)":"效果：每当你在任意卡上增加1个动物，获得2点金钱。",
   
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 Plants from any player.":"提升3点温度并获得4个钢铁。在不与任何城市相邻的位置放置一个板块。",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"提升3点温度并获得4个钢铁。在不与任何城市相邻的位置放置一个板块。",
   "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.":"降低4点电力产能并提升2点植物产能。提升3点改造度并放置本板块。",
   "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":"需要4片海洋。提升2点电力产能，在于海洋相邻的位置放置本版块。"
   

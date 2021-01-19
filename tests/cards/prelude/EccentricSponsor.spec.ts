@@ -14,9 +14,9 @@ describe('EccentricSponsor', function() {
   });
 
   it('Gets card discount', function() {
-    expect(card.getCardDiscount(player, game)).to.eq(0);
+    expect(card.getCardDiscount(player)).to.eq(0);
     player.lastCardPlayed = card;
-    expect(card.getCardDiscount(player, game)).to.eq(25);
+    expect(card.getCardDiscount(player)).to.eq(25);
   });
 
   it('Should play', function() {

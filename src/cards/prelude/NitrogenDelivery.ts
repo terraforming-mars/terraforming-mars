@@ -3,7 +3,6 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NitrogenDelivery extends PreludeCard implements IProjectCard {
@@ -21,9 +20,9 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.megaCredits += 5;
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     player.addProduction(Resources.PLANTS);
     return undefined;
   }

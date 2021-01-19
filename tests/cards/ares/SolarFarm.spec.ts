@@ -35,7 +35,7 @@ describe('SolarFarm', function() {
       SpaceBonus.PLANT,
     ];
 
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     expect(action instanceof SelectSpace).is.true;
 

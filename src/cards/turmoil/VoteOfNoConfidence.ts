@@ -40,7 +40,7 @@ export class VoteOfNoConfidence implements IProjectCard {
             if (index > -1) {
               game.turmoil.delegateReserve.splice(index, 1);
             }
-            player.increaseTerraformRating(game);
+            player.increaseTerraformRating();
       }
       return undefined;
     }

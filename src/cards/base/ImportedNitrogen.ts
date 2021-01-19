@@ -43,7 +43,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     player.plants += 4;
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
     game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
     return undefined;

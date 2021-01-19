@@ -37,7 +37,7 @@ describe('OceanSanctuary', function() {
 
   it('Play', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     action.cb(oceanSpace);
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
@@ -47,7 +47,7 @@ describe('OceanSanctuary', function() {
 
   it('Ocean Sanctuary counts as ocean for adjacency', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 

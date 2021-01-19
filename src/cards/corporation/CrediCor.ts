@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 
 export class CrediCor extends Card implements CorporationCard {
   constructor() {

@@ -9,8 +9,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {Card} from '../Card';
 import {Units} from '../../Units';
+import {TileType} from '../../TileType';
+import {IMoonCard} from './IMoonCard';
 
-export class MareNectarisMine extends Card implements IProjectCard {
+export class MareNectarisMine extends Card implements IProjectCard, IMoonCard {
   constructor() {
     super({
       name: CardName.MARE_NECTARIS_MINE,
@@ -32,6 +34,7 @@ export class MareNectarisMine extends Card implements IProjectCard {
   }
 
   public reserveUnits = Units.of({titanium: 1});
+  public tilesBuilt = [TileType.MOON_MINE];
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);

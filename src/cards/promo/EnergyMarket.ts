@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -9,14 +10,30 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EnergyMarket implements IProjectCard {
-  public name = CardName.ENERGY_MARKET;
-  public cost = 3;
-  public tags = [Tags.ENERGY];
-  public cardType = CardType.ACTIVE;
+export class EnergyMarket extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.ENERGY_MARKET,
+      tags: [Tags.ENERGY],
+      cost: 3,
+
+      metadata: {
+        cardNumber: 'X03',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 2X MC to gain X energy.', (eb) => {
+            eb.megacredits(2).multiplier.startAction.text('x').energy(1);
+          }).br;
+          b.or().br;
+          b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
+            eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
+          });
+        }),
+      },
+    });
+  }
 
   public play() {
     return undefined;
@@ -73,17 +90,4 @@ export class EnergyMarket implements IProjectCard {
     }
     return undefined;
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'X03',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Spend 2X MC to gain X energy.', (eb) => {
-        eb.megacredits(2).multiplier.startAction.text('x').energy(1);
-      }).br;
-      b.or().br;
-      b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
-        eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
-      });
-    }),
-  };
 }

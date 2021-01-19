@@ -1,8 +1,7 @@
 import Vue from 'vue';
-
 import {CardName} from '../CardName';
-import {$t} from '../directives/i18n';
 import {ALL_PROJECT_CARD_NAMES} from '../cards/AllCards';
+import {TranslateMixin} from './TranslateMixin';
 
 const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.sort();
 
@@ -21,6 +20,7 @@ export const CardsFilter = Vue.component('cards-filter', {
       searchTerm: '',
     } as CardsFilterModel;
   },
+  mixins: [TranslateMixin],
   methods: {
     removeCard: function(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
@@ -30,9 +30,6 @@ export const CardsFilter = Vue.component('cards-filter', {
       this.selectedCardNames.push(cardNameToAdd);
       this.selectedCardNames = this.selectedCardNames.sort();
       this.searchTerm = '';
-    },
-    getCardsInputPlaceholder: function() {
-      return $t('Start typing the card name to exclude');
     },
   },
   watch: {
@@ -61,7 +58,7 @@ export const CardsFilter = Vue.component('cards-filter', {
         </div>
         <div class="cards-filter-input">
             <div>
-                <input class="form-input" :placeholder="getCardsInputPlaceholder()" v-model="searchTerm" />
+                <input class="form-input" :placeholder="$t('Start typing the card name to exclude')" v-model="searchTerm" />
             </div>
             <div class="cards-filter-suggest" v-if="foundCardNames.length">
                 <div class="cards-filter-suggest-item" v-for="cardName in foundCardNames">

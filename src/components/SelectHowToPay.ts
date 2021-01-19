@@ -220,7 +220,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   template: `<div class="payments_cont">
   <section v-trim-whitespace>
 
-    <h3 class="payments_title" v-i18n>{{ playerinput.title }}</h3>
+    <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
@@ -254,11 +254,11 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error" v-i18n>{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+      <Button size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
     </div>
 
   </section>

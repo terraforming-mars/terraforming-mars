@@ -353,7 +353,7 @@ function checkComponent(name, component, dataProperties) {
   lines.unshift('declare const _m: any;');
   lines.unshift('declare function _n(arg: string): number;');
   lines.unshift('declare function _q<T>(arg1: T, arg2: T): string;');
-  lines.unshift('declare function _s(arg: any): string;');
+  lines.unshift('declare function _s(arg: number | string | undefined): string;');
   lines.unshift('declare function _t(arg: string): unknown;');
   lines.unshift('declare function _v(arg: string): unknown;');
   lines.unshift('interface VueDomEventTarget { checked: boolean, composing: boolean, value: string };');

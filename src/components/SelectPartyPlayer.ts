@@ -1,6 +1,5 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
@@ -35,9 +34,6 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
     'select-player-row': SelectPlayerRow,
   },
   methods: {
-    getTitle: function() {
-      return $t(this.playerinput.title);
-    },
     saveData: function() {
       const result: string[][] = [];
       result.push([]);
@@ -48,7 +44,7 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
     },
   },
   template: `<div>
-  <div v-if="showtitle === true">{{getTitle()}}</div>
+  <div v-if="showtitle === true" v-i18n>{{ playerinput.title.toString() }}</div>
   <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
     <input type="radio" v-model="selectedPlayer" :value="player" />
     <i class="form-icon"></i>

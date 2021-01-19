@@ -19,6 +19,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {staticCardProperties} from '../../../src/cards/Card';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
@@ -192,5 +193,20 @@ describe('RoboticWorkforce', function() {
         }
       });
     });
+  });
+
+  it('all cards have updaters or productionDeltas', () => {
+    const errors: Array<string> = [];
+    RoboticWorkforce.builderCardsNames.forEach((cardName) => {
+      const updater = card.getUpdater(cardName, player);
+      const units = staticCardProperties.get(cardName)?.productionDelta;
+      if (updater === undefined && units === undefined) {
+        errors.push(cardName + ' is unregistered');
+      }
+      if (updater !== undefined && units !== undefined) {
+        errors.push(cardName + ' is double-registered');
+      }
+    });
+    expect(errors, errors.toString()).is.empty;
   });
 });

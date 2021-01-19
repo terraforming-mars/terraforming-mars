@@ -1596,8 +1596,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    const playableCards = candidateCards.filter((card) => this.canPlay(card));
-    return playableCards;
+    return candidateCards.filter((card) => this.canPlay(card));
   }
 
   public canPlay(card: IProjectCard): boolean {
@@ -1612,19 +1611,19 @@ export class Player implements ISerializable<SerializedPlayer> {
     // reserve costs that a player cannot afford.
     if (card.reserveUnits !== undefined) {
       const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-      if (steel < reserveUnits.steel) {
-        return false;
-      }
       // Set aside reserve units in case the card has a building tag.
-      steel = Math.max(0, steel - reserveUnits.steel);
-
-      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-      if (titanium < reserveUnits.titanium) {
+      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
+      steel = steel - reserveUnits.steel;
+      if (steel < 0) {
         return false;
       }
+
       // Set aside reserve units in case the card has a space tag.
-      titanium = Math.max(0, titanium - reserveUnits.titanium);
+      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
+      titanium = titanium - reserveUnits.titanium;
+      if (titanium < 0) {
+        return false;
+      }
     }
 
     if (canUseSteel) {

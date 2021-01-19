@@ -52,17 +52,21 @@ export const PlayerStatus = Vue.component('player-status', {
       // any other player show cards container and hide all other
       this.pinPlayer();
     },
-    showLabel: function(): boolean {
-      return this.actionLabel !== ActionLabel.NONE;
-    },
-    getLabelClasses: function(): string {
+    getLabelAndTimerClasses: function(): string {
       const classes: Array<string> = [];
-      const baseClass = 'player-action-status';
+      const baseClass = 'player-action-status-container';
       classes.push(baseClass);
       if (this.actionLabel === ActionLabel.PASSED) {
         classes.push(`${baseClass}--passed`);
       } else if (this.actionLabel === ActionLabel.ACTIVE) {
         classes.push(`${baseClass}--active`);
+      }
+      return classes.join(' ');
+    },
+    getActionStatusClasses: function(): string {
+      const classes: Array<string> = ['player-action-status'];
+      if (this.actionLabel === ActionLabel.NONE) {
+        classes.push('visibility-hidden');
       }
       return classes.join(' ');
     },
@@ -102,6 +106,25 @@ export const PlayerStatus = Vue.component('player-status', {
   },
   template: `
       <div class="player-status">
+        <div class="player-status-top">
+          <div class="icons-and-count">
+            <div class="played-cards-icons">
+              <div class="played-cards-icon" />
+            </div>
+            <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
+          </div>
+          <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
+        </div>
+        <div class="player-status-bottom">
+          <div :class="getLabelAndTimerClasses()">
+            <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
+            <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+          </div>
+        </div>   
+      </div>
+    `,
+  /* template: `
+      <div class="player-status">
         <div class="player-status-left">
           <div class="top-row">
             <div class="player-view-status" />
@@ -115,10 +138,10 @@ export const PlayerStatus = Vue.component('player-status', {
               <div class="played-cards-icon" />
             </div>
             <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
-          </div> 
+          </div>
           <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
         </div>
         <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
       </div>
-    `,
+    `, */
 });

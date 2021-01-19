@@ -46,12 +46,17 @@ export const PlayerInfo = Vue.component('player-info', {
     },
   },
   template: ` 
-        <div :class="getClasses()">
-            <div :class="getPlayerStatusAndResClasses()">
-                <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
-                <player-resources :player="player" v-trim-whitespace />
-            </div>
-            <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
+      <div :class="getClasses()">
+        <div class="player-topmost">
+            <div>{{ player.name }}</div>
+            <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
+            <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
         </div>
+          <div :class="getPlayerStatusAndResClasses()">
+            <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
+            <player-resources :player="player" v-trim-whitespace />
+          </div>
+          <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
+      </div>
     `,
 });

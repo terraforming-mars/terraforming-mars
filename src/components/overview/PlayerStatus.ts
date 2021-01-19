@@ -101,27 +101,24 @@ export const PlayerStatus = Vue.component('player-status', {
     },
   },
   template: `
-        <div class="player-status">
-            <div class="player-status-left">
-                <div class="top-row">
-                    <div class="player-view-status" />
-                    <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
-                    <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
-                </div>
-                <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
-                <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
-            </div>
-            <div class="player-status-right">
-                <div class="icons-and-count">
-                    <div class="played-cards-icons">
-                        <div class="played-cards-arrow" />
-                        <div class="played-cards-icon" />
-                    </div>
-                    <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
-                </div> 
-                <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
-            </div>
-            <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+      <div class="player-status">
+        <div class="player-status-left">
+          <div class="top-row">
+            <div class="player-view-status" />
+          </div>
+          <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
         </div>
+        <div class="player-status-right">
+          <div class="icons-and-count">
+            <div class="played-cards-icons">
+              <div class="played-cards-arrow" />
+              <div class="played-cards-icon" />
+            </div>
+            <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
+          </div> 
+          <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
+        </div>
+        <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+      </div>
     `,
 });

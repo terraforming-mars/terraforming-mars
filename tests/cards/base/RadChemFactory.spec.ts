@@ -23,7 +23,7 @@ describe('RadChemFactory', function() {
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getTerraformRating()).to.eq(22);
   });

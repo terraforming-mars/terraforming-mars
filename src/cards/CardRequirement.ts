@@ -96,7 +96,7 @@ export class CardRequirement {
       if (this._isAny) {
         return this.satisfiesInequality(player.game.getCitiesInPlay());
       } else {
-        return this.satisfiesInequality(player.getCitiesCount(player.game));
+        return this.satisfiesInequality(player.getCitiesCount());
       }
 
     case RequirementType.COLONIES:

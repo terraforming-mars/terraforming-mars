@@ -113,7 +113,7 @@ export class MoonExpansion {
       if (moonData.miningRate < 8) {
         moonData.miningRate++;
         player.game.log('${0} raised the mining rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });
@@ -124,7 +124,7 @@ export class MoonExpansion {
       if (moonData.colonyRate < 8) {
         moonData.colonyRate++;
         player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });
@@ -135,7 +135,7 @@ export class MoonExpansion {
       if (moonData.logisticRate < 8) {
         moonData.logisticRate++;
         player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });

@@ -8,13 +8,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('DiversitySupport', function() {
-  let card : DiversitySupport; let player : Player; let game : Game;
+  let card : DiversitySupport; let player : Player;
 
   beforeEach(function() {
     card = new DiversitySupport();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -41,7 +41,7 @@ describe('DiversitySupport', function() {
     player.heat = 3;
 
     expect(card.canPlay(player)).is.true;
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
   });
 });

@@ -40,7 +40,7 @@ describe('Shuttles', function() {
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
-    expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
-    expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);
+    expect(card.getCardDiscount(player, new Bushes())).to.eq(0);
+    expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
   });
 });

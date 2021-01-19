@@ -136,7 +136,7 @@ describe('Turmoil', function() {
     setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;
 
-    player.worldGovernmentTerraforming(game);
+    player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);

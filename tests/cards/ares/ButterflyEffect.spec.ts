@@ -18,7 +18,7 @@ describe('ButterflyEffect', function() {
 
   it('play', function() {
     const priorTerraformingRating = player.getTerraformRating();
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
 
     const originalHazardData = game.aresData!.hazardData;

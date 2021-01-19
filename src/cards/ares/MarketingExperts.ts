@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
@@ -28,7 +27,7 @@ export class MarketingExperts extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }

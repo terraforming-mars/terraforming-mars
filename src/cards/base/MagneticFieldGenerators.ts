@@ -45,10 +45,10 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
     return meetsEnergyRequirements;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -4);
     player.addProduction(Resources.PLANTS, 2);
-    player.increaseTerraformRatingSteps(3, game);
+    player.increaseTerraformRatingSteps(3);
     return undefined;
   }
 }

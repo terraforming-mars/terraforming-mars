@@ -38,9 +38,9 @@ export class TerraformingGanymede extends Card implements IProjectCard {
 
     return true;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    player.increaseTerraformRatingSteps(steps, game);
+    player.increaseTerraformRatingSteps(steps);
     LogHelper.logTRIncrease(player, steps);
 
     return undefined;

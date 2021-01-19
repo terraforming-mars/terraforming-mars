@@ -48,9 +48,9 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
 
     return hasIncreasedTR && player.canAfford(actionCost);
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.megaCredits -= 3;
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     return undefined;
   }
 }

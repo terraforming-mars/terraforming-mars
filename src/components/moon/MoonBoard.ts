@@ -3,9 +3,6 @@ import {MoonModel} from '../../models/MoonModel';
 
 import {SpaceModel} from '../../models/SpaceModel';
 import {SpaceType} from '../../SpaceType';
-
-// @ts-ignore
-import {$t} from '../directives/i18n';
 import {MoonSpace} from './MoonSpace';
 
 class MoonParamLevel {

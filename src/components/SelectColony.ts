@@ -1,6 +1,4 @@
 import Vue from 'vue';
-
-import {$t} from '../directives/i18n';
 import {Colony} from './Colony';
 import {Button} from '../components/common/Button';
 import {PlayerInputModel} from '../models/PlayerInputModel';
@@ -30,9 +28,6 @@ export const SelectColony = Vue.component('select-colony', {
     'Button': Button,
   },
   methods: {
-    getTitle: function() {
-      return $t(this.playerinput.title);
-    },
     saveData: function() {
       const result: string[][] = [];
       result.push([]);
@@ -43,7 +38,7 @@ export const SelectColony = Vue.component('select-colony', {
     },
   },
   template: `<div class="wf-component wf-component--select-card">
-        <div v-if="showtitle === true" class="nofloat wf-component-title">{{getTitle()}}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title.toString() }}</div>
         <label v-for="colony in (playerinput.coloniesModel || [])" class="cardbox" :key="colony.name">
             <input type="radio" v-model="selectedColony" :value="colony.name" />
             <colony :colony="colony"></colony>

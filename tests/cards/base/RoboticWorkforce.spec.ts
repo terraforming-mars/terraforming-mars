@@ -94,7 +94,7 @@ describe('RoboticWorkforce', function() {
     expect(solarFarmSpace.bonus.every((b) => b === SpaceBonus.PLANT)).is.true;
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    const action = solarFarm.play(player, game);
+    const action = solarFarm.play(player);
     expect(action).is.not.undefined;
     action!.cb(solarFarmSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);

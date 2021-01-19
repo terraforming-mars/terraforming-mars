@@ -17,13 +17,13 @@ import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonySt
 
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
-function isBuildColonyStandardProjectAvailable(player: Player, game: Game) {
-  return new BuildColonyStandardProject().canAct(player, game);
+function isBuildColonyStandardProjectAvailable(player: Player) {
+  return new BuildColonyStandardProject().canAct(player, player.game);
 }
 
-function isTradeWithColonyActionAvailable(player: Player, game: Game) {
+function isTradeWithColonyActionAvailable(player: Player) {
   let tradeWithColonyIsAvailable = false;
-  player.takeAction(game);
+  player.takeAction();
   const actions = player.getWaitingFor()! as OrOptions;
   actions.options.forEach((option) => {
     if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
@@ -192,20 +192,20 @@ describe('Colony', function() {
   });
 
   it('Should let player build a colony only if they can afford it', function() {
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
     player.megaCredits = 17;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players build a colony if they already have one', function() {
     player.megaCredits = 17;
 
     luna.addColony(player2);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Shouldn\'t let players build a colony if colony tile is full', function() {
@@ -214,37 +214,37 @@ describe('Colony', function() {
 
     luna.addColony(player2);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player3);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
     luna.addColony(player4);
     expect(luna.isColonyFull()).to.be.true;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Should let players trade only if they can afford it', function() {
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.megaCredits = 9;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.megaCredits = 0;
     player.energy = 3;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.energy = 0;
     player.titanium = 3;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players trade if they have no fleet', function() {
     player.titanium = 3;
 
     luna.trade(player);
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
   it('Shouldn\'t let players trade with colonies that have already been traded with', function() {
@@ -252,7 +252,7 @@ describe('Colony', function() {
     player2.titanium = 3;
 
     luna.trade(player);
-    expect(isTradeWithColonyActionAvailable(player2, game)).to.be.false;
+    expect(isTradeWithColonyActionAvailable(player2)).to.be.false;
   });
 
   it('Testing GiveTradeBonus Deferred Action', function() {

@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -35,7 +34,7 @@ export class Inventrix extends Card implements CorporationCard {
     player.drawCard(3);
     return undefined;
   }
-  public getRequirementBonus(_player: Player, _game: Game): number {
+  public getRequirementBonus(): number {
     return 2;
   }
   public play() {

@@ -6,9 +6,9 @@ import {TestPlayers} from '../../TestingUtils';
 describe('UNMIContractor', function() {
   it('Should play', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('bar', [player], player);
+    Game.newInstance('bar', [player], player);
     const card = new UNMIContractor();
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getTerraformRating()).to.eq(17);
     expect(player.cardsInHand).has.lengthOf(1);

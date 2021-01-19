@@ -35,7 +35,7 @@ describe('Playwrights', function() {
   it('Can replay own event', function() {
     const event = new ReleaseOfInertGases();
     const tr = player.getTerraformRating();
-    event.play(player, game);
+    event.play(player);
     player.playedCards.push(event);
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
@@ -59,7 +59,7 @@ describe('Playwrights', function() {
   it('Can replay other player\'s event', function() {
     const event = new ReleaseOfInertGases();
     const tr = player.getTerraformRating();
-    event.play(player2, game);
+    event.play(player2);
     player2.playedCards.push(event);
 
     player.megaCredits = event.cost;

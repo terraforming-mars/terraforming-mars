@@ -7,25 +7,25 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('EarthOffice', function() {
-  let card : EarthOffice; let player : Player; let game : Game;
+  let card : EarthOffice; let player : Player;
 
   beforeEach(function() {
     card = new EarthOffice();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     const action = card.play();
     expect(action).is.undefined;
   });
 
   it('Should play', function() {
-    expect(card.getCardDiscount(player, game, card)).to.eq(3);
-    expect(card.getCardDiscount(player, game, new Birds())).to.eq(0);
+    expect(card.getCardDiscount(player, card)).to.eq(3);
+    expect(card.getCardDiscount(player, new Birds())).to.eq(0);
   });
 
   it('Discounts Luna Governor correctly', function() {
-    expect(card.getCardDiscount(player, game, new LunaGovernor())).to.eq(6);
+    expect(card.getCardDiscount(player, new LunaGovernor())).to.eq(6);
   });
 });
 

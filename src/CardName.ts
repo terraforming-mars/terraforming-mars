@@ -8,6 +8,7 @@ export enum CardName {
     AQUIFER_STANDARD_PROJECT = 'Aquifer',
     GREENERY_STANDARD_PROJECT = 'Greenery',
     CITY_STANDARD_PROJECT = 'City',
+    AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
 
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
@@ -285,7 +286,6 @@ export enum CardName {
     AERIAL_MAPPERS = 'Aerial Mappers',
     AEROSPORT_TOURNAMENT = 'Aerosport Tournament',
     AIR_SCRAPPING_EXPEDITION = 'Air-Scrapping Expedition',
-    AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
     APHRODITE = 'Aphrodite',
     ATALANTA_PLANITIA_LAB = 'Atalanta Planitia Lab',
     ATMOSCOOP = 'Atmoscoop',

@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -21,8 +20,8 @@ export class UNMIContractor extends PreludeCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRatingSteps(3, game);
+  public play(player: Player) {
+    player.increaseTerraformRatingSteps(3);
     player.drawCard();
     return undefined;
   }

@@ -12,13 +12,13 @@ describe('VenusWaystation', function() {
     const card3 = new VenusGovernor();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     const action = card.play();
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
-    expect(card.getCardDiscount(player, game, card2)).to.eq(2);
-    expect(card.getCardDiscount(player, game, card3)).to.eq(4);
+    expect(card.getCardDiscount(player, card2)).to.eq(2);
+    expect(card.getCardDiscount(player, card3)).to.eq(4);
   });
 });

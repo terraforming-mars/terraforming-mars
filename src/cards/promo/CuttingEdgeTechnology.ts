@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
@@ -32,7 +31,7 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
     return undefined;
   }
 
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.metadata.requirements !== undefined) return 2;
     return 0;
   }

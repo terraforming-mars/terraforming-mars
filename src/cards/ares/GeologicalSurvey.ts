@@ -1,7 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
-import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
@@ -30,7 +28,7 @@ export class GeologicalSurvey extends Card implements IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play() {
     return undefined;
   }
 }

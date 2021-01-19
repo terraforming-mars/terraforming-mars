@@ -37,8 +37,8 @@ export class JovianEmbassy extends Card implements IProjectCard {
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRating(game);
+  public play(player: Player) {
+    player.increaseTerraformRating();
     return undefined;
   }
 

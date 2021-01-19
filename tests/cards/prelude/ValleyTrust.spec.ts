@@ -8,21 +8,21 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('ValleyTrust', function() {
-  let card : ValleyTrust; let player : Player; let game : Game;
+  let card : ValleyTrust; let player : Player;
 
   beforeEach(function() {
     card = new ValleyTrust();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Doesn\'t get card discount for other tags', function() {
-    expect(card.getCardDiscount(player, game, new Ants())).to.eq(0);
+    expect(card.getCardDiscount(player, new Ants())).to.eq(0);
   });
 
   it('Gets card discount for science tags', function() {
-    expect(card.getCardDiscount(player, game, new MedicalLab())).to.eq(2);
-    expect(card.getCardDiscount(player, game, new Research())).to.eq(4);
+    expect(card.getCardDiscount(player, new MedicalLab())).to.eq(2);
+    expect(card.getCardDiscount(player, new Research())).to.eq(4);
   });
 
   it('Should play', function() {

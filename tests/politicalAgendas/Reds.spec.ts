@@ -21,7 +21,7 @@ describe('Reds', function() {
   });
 
   it('Ruling bonus 1: The player(s) with the lowest TR gains 1 TR', function() {
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
 
     const secondPlayerInitialTR = secondPlayer.getTerraformRating();
     const bonus = REDS_BONUS_1;
@@ -30,7 +30,7 @@ describe('Reds', function() {
   });
 
   it('Ruling bonus 2: The player(s) with the highest TR loses 1 TR', function() {
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
 
     const playerInitialTR = player.getTerraformRating();
     const bonus = REDS_BONUS_2;
@@ -42,7 +42,7 @@ describe('Reds', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[0].id);
 
     player.megaCredits = 3;
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
   });

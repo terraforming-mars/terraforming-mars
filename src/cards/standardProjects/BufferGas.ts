@@ -23,8 +23,8 @@ export class BufferGas extends StandardProjectCard {
     return player.canAfford(cost);
   }
 
-  actionEssence(player: Player, game: Game): void {
-    player.increaseTerraformRating(game);
+  actionEssence(player: Player): void {
+    player.increaseTerraformRating();
   }
 
   public metadata: CardMetadata = {

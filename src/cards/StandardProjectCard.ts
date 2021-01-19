@@ -1,19 +1,19 @@
-import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {Game} from '../../Game';
-import {IActionCard, ICard} from '../ICard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectHowToPay} from '../../inputs/SelectHowToPay';
-import {SelectOption} from '../../inputs/SelectOption';
-import {IProjectCard} from '../IProjectCard';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {AndOptions} from '../../inputs/AndOptions';
-import {SelectCard} from '../../inputs/SelectCard';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {CardMetadata} from '../CardMetadata';
-import {CardName} from '../../CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {IActionCard, ICard} from './ICard';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectAmount} from '../inputs/SelectAmount';
+import {SelectHowToPay} from '../inputs/SelectHowToPay';
+import {SelectOption} from '../inputs/SelectOption';
+import {IProjectCard} from './IProjectCard';
+import {SelectPlayer} from '../inputs/SelectPlayer';
+import {AndOptions} from '../inputs/AndOptions';
+import {SelectCard} from '../inputs/SelectCard';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {CardMetadata} from './CardMetadata';
+import {CardName} from '../CardName';
+import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 
 export abstract class StandardProjectCard implements IActionCard, ICard {
     public cardType = CardType.STANDARD_PROJECT;

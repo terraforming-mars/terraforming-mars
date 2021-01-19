@@ -3,15 +3,15 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
-export class BuildColonyStandard extends StandardProjectCard {
-  public name = CardName.STANDARD_BUILD_COLONY;
+export class BuildColonyStandardProject extends StandardProjectCard {
+  public name = CardName.BUILD_COLONY_STANDARD_PROJECT;
   public cost = 17;
 
   private getOpenColonies(player: Player, game: Game) {

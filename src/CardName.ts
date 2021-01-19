@@ -1,14 +1,14 @@
 export enum CardName {
     // Standard projects:
-    STANDARD_SELL_PATENTS = 'Sell Patents',
-    STANDARD_POWER_PLANT = 'Power plant', // 'Power Plant' is already taken
-    STANDARD_ASTEROID = 'asteroid', // 'Asteroid' is already taken
-    STANDARD_AIR_SCRAPPING = 'Air Scrapping',
-    STANDARD_BUFFER_GAS = 'Buffer Gas',
-    STANDARD_BUILD_COLONY = 'Colony',
-    STANDARD_AQUIFER = 'Aquifer',
-    STANDARD_GREENERY = 'Greenery',
-    STANDARD_CITY = 'City',
+    SELL_PATENTS_STANDARD_PROJECT = 'Sell Patents',
+    POWER_PLANT_STANDARD_PROJECT = 'Power Plant:SP',
+    ASTEROID_STANDARD_PROJECT = 'Asteroid:SP',
+    BUFFER_GAS_STANDARD_PROJECT = 'Buffer Gas',
+    BUILD_COLONY_STANDARD_PROJECT = 'Colony',
+    AQUIFER_STANDARD_PROJECT = 'Aquifer',
+    GREENERY_STANDARD_PROJECT = 'Greenery',
+    CITY_STANDARD_PROJECT = 'City',
+    AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
 
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
@@ -335,6 +335,7 @@ export enum CardName {
     WINDMILLS = 'Windmills',
     WORMS = 'Worms',
     ZEPPELINS = 'Zeppelins',
+
     // Corps:
     BEGINNER_CORPORATION = 'Beginner Corporation',
     CREDICOR = 'CrediCor',
@@ -607,7 +608,7 @@ export enum CardName {
     BASIC_INFRASTRUCTURE = 'Basic Infrastructure',
     LUNAR_PlANNING_OFFICE = 'Lunar Planning Office',
     MINING_COMPLEX = 'Mining Complex',
-    STANDARD_PROJECT_MOON_ROAD = 'Build Moon Road',
-    STANDARD_PROJECT_MOON_MINE = 'Build Moon Mine',
-    STANDARD_PROJECT_MOON_COLONY = 'Build Moon Colony',
+    MOON_ROAD_STANDARD_PROJECT = 'Build Moon Road',
+    MOON_MINE_STANDARD_PROJECT = 'Build Moon Mine',
+    MOON_COLONY_STANDARD_PROJECT = 'Build Moon Colony',
 }

@@ -12,7 +12,7 @@ import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
+import {StandardProjectCard} from './cards/StandardProjectCard';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 
 export class CardFinder {

@@ -1,4 +1,3 @@
-import {IProjectCard} from '../IProjectCard';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -9,16 +8,34 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Card} from '../Card';
 
-export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
-  public cost = 11;
-  public tags = [Tags.VENUS];
-  public name = CardName.AERIAL_MAPPERS;
-  public cardType = CardType.ACTIVE;
-  public resourceType = ResourceType.FLOATER;
+export class AerialMappers extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.AERIAL_MAPPERS,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS],
+      cost: 11,
+      resourceType: ResourceType.FLOATER,
+
+      metadata: {
+        cardNumber: '213',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add floater to ANY card.', (be) => {
+            be.empty().startAction.floaters(1).asterix();
+          }).br;
+          b.or(CardRenderItemSize.SMALL).br;
+          b.action('Spend one floater here to draw 1 card.', (be) => {
+            be.floaters(1).startAction.cards(1);
+          });
+        }),
+        victoryPoints: 1,
+      },
+    });
+  };
   public resourceCount: number = 0;
 
   public play() {
@@ -69,17 +86,4 @@ export class AerialMappers implements IActionCard, IProjectCard, IResourceCard {
 
     return new OrOptions(...opts);
   }
-  public metadata: CardMetadata = {
-    cardNumber: '213',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Add floater to ANY card.', (be) => {
-        be.empty().startAction.floaters(1).asterix();
-      }).br;
-      b.or(CardRenderItemSize.SMALL).br;
-      b.action('Spend one floater here to draw 1 card.', (be) => {
-        be.floaters(1).startAction.cards(1);
-      });
-    }),
-    victoryPoints: 1,
-  };
 }

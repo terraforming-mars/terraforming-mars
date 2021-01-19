@@ -14,7 +14,6 @@ export class Hackers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HACKERS,
       cost: 3,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '125',

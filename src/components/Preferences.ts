@@ -40,12 +40,6 @@ export const Preferences = Vue.component('preferences', {
     venus: {
       type: Number,
     },
-    venusNextExtension: {
-      type: Boolean,
-    },
-    turmoilExtension: {
-      type: Boolean,
-    },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
@@ -79,6 +73,7 @@ export const Preferences = Vue.component('preferences', {
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
+      'hide_tile_confirmation': false as boolean | unknown[],
     };
   },
   methods: {
@@ -199,7 +194,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
-                <div v-if="turmoilExtension">
+                <div v-if="gameOptions.turmoilExtension">
                 <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
                 </div>
                 <div class="preferences_global_params">
@@ -209,7 +204,7 @@ export const Preferences = Vue.component('preferences', {
                   <div class="preferences_global_params_value" v-html="getOxygenCount()"></div>
                   <div class="preferences_ocean-tile"></div>
                   <div class="preferences_global_params_value" v-html="getOceanCount()"></div>
-                  <div v-if="venusNextExtension">
+                  <div v-if="gameOptions.venusNextExtension">
                     <div class="preferences_venus-tile"></div>
                     <div class="preferences_global_params_value" v-html="getVenusCount()"></div>
                   </div>
@@ -369,6 +364,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="smooth_scrolling" />
                             <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
+                            <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

@@ -26,6 +26,27 @@ export namespace Units {
   //   log?: boolean;
   // };
 
+  export const EMPTY: Readonly<Units> = {
+    get megacredits() {
+      return 0;
+    },
+    get steel() {
+      return 0;
+    },
+    get titanium() {
+      return 0;
+    },
+    get plants() {
+      return 0;
+    },
+    get energy() {
+      return 0;
+    },
+    get heat() {
+      return 0;
+    },
+  };
+
   // Converts partial units to a full Units, allowing code to use a Units stricture,
   // reducing the need to check for undefined everywhere.
   export function of(partialUnits: Partial<Units>): Units {

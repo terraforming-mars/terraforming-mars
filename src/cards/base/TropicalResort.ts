@@ -15,7 +15,6 @@ export class TropicalResort extends Card implements IProjectCard {
       name: CardName.TROPICAL_RESORT,
       tags: [Tags.BUILDING],
       cost: 13,
-      hasRequirements: false,
       productionDelta: Units.of({megacredits: 3, heat: -2}),
 
       metadata: {

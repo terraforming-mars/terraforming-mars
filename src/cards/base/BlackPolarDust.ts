@@ -17,7 +17,6 @@ export class BlackPolarDust extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '022',

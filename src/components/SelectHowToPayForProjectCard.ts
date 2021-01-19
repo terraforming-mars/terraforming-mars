@@ -16,6 +16,8 @@ interface SelectHowToPayForProjectCardModel {
   microbes: number;
   floaters: number;
   warning: string | undefined;
+  availableSteel: number;
+  availableTitanium: number;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -28,6 +30,7 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+// import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -75,7 +78,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       microbes: 0,
       floaters: 0,
       warning: undefined,
-    } as SelectHowToPayForProjectCardModel;
+      availableSteel: 0,
+      availableTitanium: 0,
+    };
   },
   components: {
     Card,
@@ -149,11 +154,13 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
 
       if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.player.steel, this.player.steelValue, false);
+        const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
+        this.steel = deductUnits(availableSteel, this.player.steelValue, false);
       }
 
       if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.player.titanium, this.player.titaniumValue, false);
+        const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
+        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, false);
       }
 
       if (megacreditBalance > 0 && this.canUseHeat()) {
@@ -206,11 +213,17 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       this.setDefaultValues();
     },
-    hasWarning: function() {
+    hasWarning: function(): boolean {
       return this.warning !== undefined;
     },
-    hasCardWarning: function() {
+    hasCardWarning: function(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
+    },
+    showReserveSteelWarning: function(): boolean {
+      return this.card?.reserveUnits?.steel > 0;
+    },
+    showReserveTitaniumWarning: function(): boolean {
+      return this.card?.reserveUnits?.titanium > 0;
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -324,6 +337,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="plus" :onClick="_=>addValue('steel', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
+    <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
+    (Some steel is not available here because the project card requires some when it is played.)
+    </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
@@ -331,6 +347,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
+    </div>
+    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-18n>
+    (Some titanium is not available here because the project card needs some when it is played.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">

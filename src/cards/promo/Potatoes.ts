@@ -12,7 +12,6 @@ export class Potatoes implements IProjectCard {
     public tags = [Tags.PLANT];
     public name = CardName.POTATOES;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player): boolean {
       const viralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);

@@ -17,7 +17,6 @@ import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred'
 
 export abstract class StandardProjectCard implements IActionCard, ICard {
     public cardType = CardType.STANDARD_PROJECT;
-    public hasRequirements = false;
     public tags = [];
     public abstract name: CardName;
     public abstract cost: number;

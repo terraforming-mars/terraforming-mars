@@ -48,3 +48,4 @@ export interface ICard {
     metadata: CardMetadata;
     warning?: string | Message;
 }
+

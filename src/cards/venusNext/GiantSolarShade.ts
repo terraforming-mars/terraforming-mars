@@ -15,7 +15,6 @@ export class GiantSolarShade implements IProjectCard {
     public tags = [Tags.SPACE, Tags.VENUS];
     public name = CardName.GIANT_SOLAR_SHADE;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const remainingVenusSteps = (MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;

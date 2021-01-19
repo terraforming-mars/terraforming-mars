@@ -50,7 +50,7 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
         LogHelper.logGainStandardResource(player, Resources.HEAT, 4);
         return undefined;
       }),
-      new SelectOption('Add 1 floater to this card', 'Remove floater', () => {
+      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
         this.resourceCount++;
         LogHelper.logAddResource(player, this);
         return undefined;

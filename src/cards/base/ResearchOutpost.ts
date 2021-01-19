@@ -17,7 +17,6 @@ export class ResearchOutpost extends Card implements IProjectCard {
       name: CardName.RESEARCH_OUTPOST,
       tags: [Tags.SCIENCE, Tags.CITY, Tags.BUILDING],
       cost: 18,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '020',

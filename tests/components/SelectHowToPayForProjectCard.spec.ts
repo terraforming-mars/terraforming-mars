@@ -4,6 +4,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
 import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
+import {Units} from '../../src/Units';
 
 describe('SelectHowToPayForProjectCard', function() {
   function getLocalVue() {
@@ -136,7 +137,7 @@ describe('SelectHowToPayForProjectCard', function() {
   const setupCardForPurchase = function(
     cardName: CardName, cardCost: number, playerFields: object, playerInputFields: object) {
     const player = Object.assign({
-      cardsInHand: [{name: cardName, calculatedCost: cardCost}],
+      cardsInHand: [{name: cardName, calculatedCost: cardCost, reserveUnits: Units.of({})}],
       id: 'foo',
       selfReplicatingRobotCards: [],
     }, playerFields);

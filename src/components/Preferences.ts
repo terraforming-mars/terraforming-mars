@@ -7,9 +7,7 @@ import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GameSetupDetail} from '../components/GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
-
-// @ts-ignore
-import {$t} from '../directives/i18n';
+import {TranslateMixin} from './TranslateMixin';
 
 export const Preferences = Vue.component('preferences', {
   props: {
@@ -47,6 +45,7 @@ export const Preferences = Vue.component('preferences', {
   components: {
     'game-setup-detail': GameSetupDetail,
   },
+  mixins: [TranslateMixin],
   data: function() {
     return {
       'ui': {
@@ -73,6 +72,7 @@ export const Preferences = Vue.component('preferences', {
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
+      'hide_tile_confirmation': false as boolean | unknown[],
     };
   },
   methods: {
@@ -182,7 +182,6 @@ export const Preferences = Vue.component('preferences', {
         return `${rulingPartyName}`;
       }
     },
-    translate: $t,
   },
   mounted: function() {
     this.updatePreferencesFromStorage();
@@ -235,7 +234,7 @@ export const Preferences = Vue.component('preferences', {
                   <i class="preferences_icon preferences_icon--info" 
                   :class="{'preferences_item--is-active': ui.gamesetup_detail_open}" 
                   v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open" 
-                  :title="translate('hotkeys and game setup details')"></i>
+                  :title="$t('hotkeys and game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
                       <div class="help-page-hotkeys">
@@ -257,7 +256,7 @@ export const Preferences = Vue.component('preferences', {
                 </div>
                 <a href="/help-iconology" target="_blank">
                     <div class="preferences_item preferences_item--help">
-                      <i class="preferences_icon preferences_icon--help" :title="translate('game symbols')"></i>
+                      <i class="preferences_icon preferences_icon--help" :title="$t('game symbols')"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">
@@ -363,6 +362,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="smooth_scrolling" />
                             <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
+                            <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

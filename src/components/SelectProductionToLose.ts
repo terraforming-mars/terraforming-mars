@@ -14,7 +14,6 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
-import {$t} from '../directives/i18n';
 import {Units} from '../Units';
 
 export const SelectProductionToLose = Vue.component('select-production-to-lose', {
@@ -65,9 +64,6 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
     },
     canDeductHeat: function() {
       return this.playerinput.payProduction.units.heat > 0;
-    },
-    getTitle: function() {
-      return $t(this.playerinput.title);
     },
     hasWarning: function() {
       return this.$data.warning !== undefined;
@@ -127,7 +123,7 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
 
   // TODO(chosta): consolidate repetition into a reusable component.
   template: `<div class="wf-component wf-component--select-production-to-lose">
-        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{getTitle()}}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title.toString() }}</div>
 
         <h3 class="payments_title">Which resource production would you prefer to decrease?</h3>
 

@@ -17,7 +17,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
-import {StandardProjectCard} from './standardProjects/StandardProjectCard';
+import {StandardProjectCard} from './StandardProjectCard';
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;

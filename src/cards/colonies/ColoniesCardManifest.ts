@@ -55,7 +55,7 @@ import {TradeEnvoys} from './TradeEnvoys';
 import {TradingColony} from './TradingColony';
 import {UrbanDecomposers} from './UrbanDecomposers';
 import {WarpDrive} from './WarpDrive';
-import {BuildColonyStandard} from '../standardProjects/BuildColony';
+import {BuildColonyStandardProject} from './BuildColonyStandardProject';
 
 export const COLONIES_CARD_MANIFEST = new CardManifest({
   module: GameModule.Colonies,
@@ -112,7 +112,7 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.WARP_DRIVE, Factory: WarpDrive},
   ],
   standardProjects: [
-    {cardName: CardName.STANDARD_BUILD_COLONY, Factory: BuildColonyStandard},
+    {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT, Factory: BuildColonyStandardProject},
   ],
   corporationCards: [
     {cardName: CardName.ARIDOR, Factory: Aridor},

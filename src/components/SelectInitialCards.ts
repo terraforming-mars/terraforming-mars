@@ -4,6 +4,7 @@ import Vue from 'vue';
 import {Button} from './common/Button';
 import {CardFinder} from '../CardFinder';
 import {CardName} from '../CardName';
+import * as constants from '../constants';
 import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
@@ -45,6 +46,15 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       }
       return this.playerinput.options[idx];
     },
+    getRemainingMegacredits: function() {
+      if (this.selectedCorporation === undefined) {
+        return NaN;
+      }
+      let remaining = this.selectedCorporation.startingMegaCredits;
+      const cardCost = this.selectedCorporation.cardCost === undefined ? constants.CARD_COST : this.selectedCorporation.cardCost;
+      remaining -= this.selectedCards.length * cardCost;
+      return remaining;
+    },
     saveData: function() {
       const result: Array<Array<string>> = [];
       result.push([]);
@@ -70,10 +80,11 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       this.selectedPrelude = cards;
     },
   },
-  template: `<div>
-    <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
+  template: `<div class="select-initial-cards">
+   <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
     <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getRemainingMegacredits()}}</div></div>
     <Button v-if="showsave" :onClick="saveData" type="submit" :title="playerinput.buttonLabel" />
   </div>`,
 });

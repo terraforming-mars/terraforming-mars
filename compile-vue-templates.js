@@ -197,7 +197,7 @@ checkComponent(
 checkComponent(
   'src/components/SelectInitialCards',
   require('./build/src/components/SelectInitialCards').SelectInitialCards,
-  [],
+  ['selectedCorporation'],
 );
 checkComponent(
   'src/components/SelectOption',

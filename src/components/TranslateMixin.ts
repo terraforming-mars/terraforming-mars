@@ -10,7 +10,7 @@ Example:
 export const TranslateMixin = {
   'name': 'TranslateMixin',
   'methods': {
-    $t(englishString: string | Message):string {
+    $t(englishString: string | Message | number | undefined):string {
       return $t(englishString);
     },
   },

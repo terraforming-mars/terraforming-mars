@@ -316,7 +316,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true" v-i18n>{{ playerinput.title.toString() }}</div>
+  <div v-if="showtitle === true" v-i18n>{{ playerinput.title }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -324,7 +324,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ (this.card.warning || '').toString() }}</div>
+    <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ card.warning }}</div>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
@@ -382,7 +382,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error" v-i18n>{{ (this.card.warning || '').toString() }}</label>
+      <label class="label label-error" v-i18n>{{ warning }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

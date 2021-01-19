@@ -29,7 +29,7 @@ export const SelectOption = Vue.component('select-option', {
     },
   },
   template: `<div class="wf-component wf-component--select-option">
-        <div v-if="showtitle === true" class="wf-component-title" v-i18n>{{ playerinput.title.toString() }}</div>
+        <div v-if="showtitle === true" class="wf-component-title" v-i18n>{{ playerinput.title }}</div>
         <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
     </div>`,
 });

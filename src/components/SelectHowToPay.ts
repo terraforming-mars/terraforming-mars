@@ -220,7 +220,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   template: `<div class="payments_cont">
   <section v-trim-whitespace>
 
-    <h3 class="payments_title" v-i18n>{{ playerinput.title.toString() }}</h3>
+    <h3 class="payments_title" v-i18n>{{ playerinput.title }}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>

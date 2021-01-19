@@ -44,7 +44,7 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
     },
   },
   template: `<div>
-  <div v-if="showtitle === true" v-i18n>{{ playerinput.title.toString() }}</div>
+  <div v-if="showtitle === true" v-i18n>{{ playerinput.title }}</div>
   <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
     <input type="radio" v-model="selectedPlayer" :value="player" />
     <i class="form-icon"></i>

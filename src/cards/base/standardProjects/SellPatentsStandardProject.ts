@@ -1,6 +1,5 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Game} from '../../../Game';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -8,8 +7,20 @@ import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
 
 export class SellPatentsStandardProject extends StandardProjectCard {
-  public name = CardName.SELL_PATENTS_STANDARD_PROJECT;
-  public cost = 0;
+  constructor() {
+    super({
+      name: CardName.SELL_PATENTS_STANDARD_PROJECT,
+      cost: 0,
+      metadata: {
+        cardNumber: 'SP8',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Discard any number of cards to gain that amount of MC.', (eb) => {
+            eb.text('X').cards(1).startAction.megacredits(0).multiplier;
+          }),
+        ),
+      },
+    });
+  }
 
   public canAct(player: Player): boolean {
     return player.cardsInHand.length > 0;
@@ -41,13 +52,4 @@ export class SellPatentsStandardProject extends StandardProjectCard {
       }, player.cardsInHand.length,
     );
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP8',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Discard any number of cards to gain that amount of MC.', (eb) => {
-        eb.text('X').cards(1).startAction.megacredits(0).multiplier;
-      }),
-    ),
-  };
 }

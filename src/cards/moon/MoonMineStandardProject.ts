@@ -1,6 +1,5 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {StandardProjectCard} from '../StandardProjectCard';
@@ -10,16 +9,20 @@ import {Units} from '../../Units';
 import {Resources} from '../../Resources';
 
 export class MoonMineStandardProject extends StandardProjectCard {
-  public name = CardName.MOON_MINE_STANDARD_PROJECT;
-  public cost = 20;
-  public metadata: CardMetadata = {
-    cardNumber: '',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.', (eb) => {
-        eb.megacredits(20).titanium(1).startAction.moonMine().production((pb) => pb.steel(1));
-      }),
-    ),
-  };
+  constructor() {
+    super({
+      name: CardName.MOON_MINE_STANDARD_PROJECT,
+      cost: 20,
+      metadata: {
+        cardNumber: '',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.', (eb) => {
+            eb.megacredits(20).titanium(1).startAction.moonMine().production((pb) => pb.steel(1));
+          }),
+        ),
+      },
+    });
+  }
 
   public reserveUnits = Units.of({titanium: 1});
 

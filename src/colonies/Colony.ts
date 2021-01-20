@@ -113,13 +113,16 @@ export abstract class Colony implements SerializedColony {
       ));
     }
 
-    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean) {
+    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean, giveColonyBonuses: boolean = true) {
       const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
 
       this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
 
-      if (usesTradeFleet) {
+      if (giveColonyBonuses) {
         player.game.defer(new GiveColonyBonus(player, this));
+      }
+
+      if (usesTradeFleet) {
         this.visitor = player.id;
         player.tradesThisTurn++;
       }
@@ -160,7 +163,7 @@ export abstract class Colony implements SerializedColony {
             openColonies.forEach((colony) => {
               if (colony.name === colonyName) {
                 game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.handleTrade(player, false, false)
+                colony.handleTrade(player, false, false, false);
               }
               return undefined;
             });

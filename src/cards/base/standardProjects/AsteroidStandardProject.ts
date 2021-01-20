@@ -1,8 +1,6 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
 import {REDS_RULING_POLICY_COST} from '../../../constants';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
@@ -10,26 +8,29 @@ import {PartyName} from '../../../turmoil/parties/PartyName';
 import * as constants from '../../../constants';
 
 export class AsteroidStandardProject extends StandardProjectCard {
-  public name = CardName.ASTEROID_STANDARD_PROJECT;
-  public cost = 14;
+  constructor() {
+    super({
+      name: CardName.ASTEROID_STANDARD_PROJECT,
+      cost: 14,
+      metadata: {
+        cardNumber: 'SP9',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 14 MC to raise temperature 1 step.', (eb) => {
+            eb.megacredits(14).startAction.temperature(1);
+          }),
+        ),
+      },
+    });
+  }
 
-  public canAct(player: Player, game: Game): boolean {
+  public canAct(player: Player): boolean {
     let asteroidCost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE;
+    return player.canAfford(asteroidCost) && player.game.getTemperature() < constants.MAX_TEMPERATURE;
   }
 
-  actionEssence(player: Player, game: Game): void {
-    game.increaseTemperature(player, 1);
+  actionEssence(player: Player): void {
+    player.game.increaseTemperature(player, 1);
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP9',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 14 MC to raise temperature 1 step.', (eb) => {
-        eb.megacredits(14).startAction.temperature(1);
-      }),
-    ),
-  };
 }

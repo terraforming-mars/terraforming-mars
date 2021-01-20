@@ -19,7 +19,7 @@ export class StripMine extends Card implements IProjectCard {
       name: CardName.STRIP_MINE,
       tags: [Tags.BUILDING],
       cost: 25,
-      productionDelta: Units.of({energy: -2, steel: 2, titanium: 1}),
+      productionBox: Units.of({energy: -2, steel: 2, titanium: 1}),
 
       metadata: {
         cardNumber: '138',

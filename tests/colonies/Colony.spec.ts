@@ -18,7 +18,7 @@ import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonySt
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
 function isBuildColonyStandardProjectAvailable(player: Player) {
-  return new BuildColonyStandardProject().canAct(player, player.game);
+  return new BuildColonyStandardProject().canAct(player);
 }
 
 function isTradeWithColonyActionAvailable(player: Player) {

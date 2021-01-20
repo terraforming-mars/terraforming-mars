@@ -6,7 +6,7 @@ import {Player} from '../Player';
 import {TileType} from '../TileType';
 // import {MoonSerialization} from './MoonSerialization';
 // import {MoonModel} from './MoonModel';
-// import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../SpaceType';
 // import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
@@ -14,6 +14,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
+import {ISpace} from '../boards/ISpace';
 // import {IProjectCard} from '../cards/IProjectCard';
 // import {Units} from '../Units';
 // import {CardName} from '../CardName';
@@ -152,36 +153,36 @@ export class MoonExpansion {
     // }
   }
 
-  // /*
-  //  * Return the list of spaces on the board with a given tile type, optionally excluding
-  //  * colony spaces.
-  //  *
-  //  * Special tiles such as Lunar Mine Urbanization, are especially included.
-  //  */
-  // public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
-  //   let tiles: Array<ISpace> = [];
-  //   MoonExpansion.ifMoon(game, (moonData) => {
-  //     tiles = moonData.moon.spaces.filter(
-  //       (space) => {
-  //         const spaceTileType = space.tile?.tileType;
-  //         let include: boolean = true;
-  //         if (tileType === TileType.MOON_COLONY) {
-  //           include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
-  //         } else if (tileType === TileType.MOON_MINE) {
-  //           include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
-  //         } else {
-  //           include = include && space.tile?.tileType === tileType;
-  //         }
+  /*
+   * Return the list of spaces on the board with a given tile type, optionally excluding
+   * colony spaces.
+   *
+   * Special tiles such as Lunar Mine Urbanization, are especially included.
+   */
+  public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
+    let tiles: Array<ISpace> = [];
+    MoonExpansion.ifMoon(game, (moonData) => {
+      tiles = moonData.moon.spaces.filter(
+        (space) => {
+          const spaceTileType = space.tile?.tileType;
+          let include: boolean = true;
+          if (tileType === TileType.MOON_COLONY) {
+            include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+          } else if (tileType === TileType.MOON_MINE) {
+            include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+          } else {
+            include = include && space.tile?.tileType === tileType;
+          }
 
-  //         if (surfaceOnly) {
-  //           include = include && space.spaceType !== SpaceType.COLONY;
-  //         }
+          if (surfaceOnly) {
+            include = include && space.spaceType !== SpaceType.COLONY;
+          }
 
-  //         return include;
-  //       });
-  //   });
-  //   return tiles;
-  // }
+          return include;
+        });
+    });
+    return tiles;
+  }
 
   /*
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.

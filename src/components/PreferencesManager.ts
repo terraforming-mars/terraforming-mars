@@ -23,6 +23,7 @@ export class PreferencesManager {
       'enable_sounds',
       'smooth_scrolling',
       'hide_tile_confirmation',
+      'show_card_number',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();

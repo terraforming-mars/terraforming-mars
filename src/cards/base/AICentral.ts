@@ -17,7 +17,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       name: CardName.AI_CENTRAL,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 21,
-      productionDelta: Units.of({energy: -1}),
+      productionBox: Units.of({energy: -1}),
 
       metadata: {
         description: {

@@ -1,4 +1,3 @@
-
 import {CardMetadata} from './CardMetadata';
 import {CardName} from '../CardName';
 import {CardType} from './CardType';
@@ -32,7 +31,7 @@ export abstract class Card {
       if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
-      if (properties.cardType !== CardType.CORPORATION && properties.cardType !== CardType.PRELUDE && properties.cost === undefined) {
+      if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false && properties.cost === undefined) {
         throw new Error('must define cost for project cards');
       }
       staticCardProperties.set(properties.name, properties);

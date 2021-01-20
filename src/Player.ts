@@ -1054,7 +1054,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               resources: targetCard.resourceCount,
               resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
               name: targetCard.card.name,
-              calculatedCost: this.getCardCost(this.game, targetCard.card),
+              calculatedCost: this.getCardCost(targetCard.card),
               cardType: card.cardType,
               isDisabled: false,
               reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
@@ -1067,7 +1067,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return cards;
   }
 
-  public getCardCost(game: Game, card: IProjectCard): number {
+  public getCardCost(card: IProjectCard): number {
     let cost: number = card.cost;
     cost -= this.cardDiscount;
 
@@ -1090,7 +1090,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
     }
 
@@ -1119,7 +1119,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay) {
-    const cardCost: number = this.getCardCost(this.game, selectedCard);
+    const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
 
     const canUseSteel: boolean = this.canUseSteel(selectedCard);
@@ -1652,7 +1652,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     maxPay += this.spendableMegacredits();
-    return maxPay >= this.getCardCost(this.game, card) &&
+    return maxPay >= this.getCardCost(card) &&
                 (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 

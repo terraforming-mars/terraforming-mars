@@ -28,7 +28,7 @@ export class ReleaseOfInertGases extends Card implements IProjectCard {
 
   public canPlay(player: Player, game: Game): boolean {
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2);
     }
 
     return true;

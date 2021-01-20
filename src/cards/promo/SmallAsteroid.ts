@@ -20,7 +20,7 @@ export class SmallAsteroid implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && canRaiseTemperature) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, true);
       }
 
       return true;

@@ -4,5 +4,5 @@ export enum MoonSpaces {
   MARE_SERENITATIS = 'm07',
   MARE_NUBIUM = 'm15',
   MARE_NECTARIS = 'm17',
-  MOMENTUM_VIRIUM_HABITAT = 'm21',
+  MOMENTUM_VIRIUM = 'm21',
 }

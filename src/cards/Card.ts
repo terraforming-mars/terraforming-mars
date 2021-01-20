@@ -9,7 +9,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {Units} from '../Units';
 
-interface StaticCardProperties {
+export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;
   cost?: number;
@@ -67,8 +67,8 @@ export abstract class Card {
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
   }
-  public get productionDelta() {
-    return this.properties.productionDelta;
+  public get productionDelta(): Units {
+    return this.properties.productionDelta || Units.EMPTY;
   }
   public canPlay(player: Player, _game?: Game) {
     if (this.properties.metadata.requirements === undefined) {

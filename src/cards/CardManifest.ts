@@ -4,7 +4,7 @@ import {GameModule} from '../GameModule';
 import {CorporationCard} from './corporation/CorporationCard';
 import {ICardFactory} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';
-import {StandardProjectCard} from './standardProjects/StandardProjectCard';
+import {StandardProjectCard} from './StandardProjectCard';
 
 export class CardManifest {
     module: GameModule;

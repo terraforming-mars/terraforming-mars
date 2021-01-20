@@ -3,14 +3,14 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../Units';
 import {Resources} from '../../Resources';
 
 export class MoonMineStandardProject extends StandardProjectCard {
-  public name = CardName.STANDARD_PROJECT_MOON_MINE;
+  public name = CardName.MOON_MINE_STANDARD_PROJECT;
   public cost = 20;
   public metadata: CardMetadata = {
     cardNumber: '',

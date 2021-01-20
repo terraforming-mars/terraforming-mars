@@ -63,7 +63,9 @@ export function translateTextNode(el: HTMLElement) {
   translateChildren(el);
 }
 
-export const $t = function(msg: string | Message) {
+export const $t = function(msg: string | Message | number | undefined) {
+  if ( ! msg) return '';
+  if (typeof(msg) === 'number') return msg.toString();
   if (typeof msg === 'string') {
     return translateText(msg);
   }

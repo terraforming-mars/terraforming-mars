@@ -40,20 +40,59 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     };
   },
   methods: {
+    getAfterPreludes: function() {
+      let result = 0;
+      if (this.selectedPrelude.includes(CardName.ALLIED_BANKS)) {
+        result += 3;
+      }
+      if (this.selectedPrelude.includes(CardName.BUSINESS_EMPIRE)) {
+        result -= 6;
+      }
+      if (this.selectedPrelude.includes(CardName.AQUIFER_TURBINES)) {
+        result -= 3;
+      }
+      if (this.selectedPrelude.includes(CardName.DONATION)) {
+        result += 21;
+      }
+      if (this.selectedPrelude.includes(CardName.GALILEAN_MINING)) {
+        result -= 5;
+      }
+      if (this.selectedPrelude.includes(CardName.HUGE_ASTEROID)) {
+        result -= 5;
+      }
+      if (this.selectedPrelude.includes(CardName.LOAN)) {
+        result += 30;
+      }
+      if (this.selectedPrelude.includes(CardName.MARTIAN_INDUSTRIES)) {
+        result += 6;
+      }
+      if (this.selectedPrelude.includes(CardName.NITROGEN_SHIPMENT)) {
+        result += 5;
+      }
+      if (this.selectedCorporation?.name === CardName.THARSIS_REPUBLIC) {
+        if (this.selectedPrelude.includes(CardName.SELF_SUFFICIENT_SETTLEMENT)) {
+          result += 3;
+        }
+        if (this.selectedPrelude.includes(CardName.EARLY_SETTLEMENT)) {
+          result += 3;
+        }
+      }
+      return result;
+    },
     getOption: function(idx: number) {
       if (this.playerinput.options === undefined || this.playerinput.options[idx] === undefined) {
         throw new Error('invalid input, missing option');
       }
       return this.playerinput.options[idx];
     },
-    getRemainingMegacredits: function() {
+    getStartingMegacredits: function() {
       if (this.selectedCorporation === undefined) {
         return NaN;
       }
-      let remaining = this.selectedCorporation.startingMegaCredits;
+      let starting = this.selectedCorporation.startingMegaCredits;
       const cardCost = this.selectedCorporation.cardCost === undefined ? constants.CARD_COST : this.selectedCorporation.cardCost;
-      remaining -= this.selectedCards.length * cardCost;
-      return remaining;
+      starting -= this.selectedCards.length * cardCost;
+      return starting;
     },
     saveData: function() {
       const result: Array<Array<string>> = [];
@@ -84,7 +123,8 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
    <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
     <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
-    <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getRemainingMegacredits()}}</div></div>
+    <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
+    <div v-if="selectedCorporation && hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     <Button v-if="showsave" :onClick="saveData" type="submit" :title="playerinput.buttonLabel" />
   </div>`,
 });

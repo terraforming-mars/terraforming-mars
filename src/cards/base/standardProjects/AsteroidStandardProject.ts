@@ -1,6 +1,5 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Game} from '../../../Game';
 import {REDS_RULING_POLICY_COST} from '../../../constants';
@@ -10,8 +9,20 @@ import {PartyName} from '../../../turmoil/parties/PartyName';
 import * as constants from '../../../constants';
 
 export class AsteroidStandardProject extends StandardProjectCard {
-  public name = CardName.ASTEROID_STANDARD_PROJECT;
-  public cost = 14;
+  constructor() {
+    super({
+      name: CardName.ASTEROID_STANDARD_PROJECT,
+      cost: 14,
+      metadata: {
+        cardNumber: 'SP9',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 14 MC to raise temperature 1 step.', (eb) => {
+            eb.megacredits(14).startAction.temperature(1);
+          }),
+        ),
+      },
+    });
+  }
 
   public canAct(player: Player, game: Game): boolean {
     let asteroidCost = this.cost;
@@ -23,13 +34,4 @@ export class AsteroidStandardProject extends StandardProjectCard {
   actionEssence(player: Player, game: Game): void {
     game.increaseTemperature(player, 1);
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP9',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 14 MC to raise temperature 1 step.', (eb) => {
-        eb.megacredits(14).startAction.temperature(1);
-      }),
-    ),
-  };
 }

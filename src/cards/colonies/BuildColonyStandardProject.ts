@@ -1,6 +1,5 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {StandardProjectCard} from '../StandardProjectCard';
@@ -11,8 +10,20 @@ import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class BuildColonyStandardProject extends StandardProjectCard {
-  public name = CardName.BUILD_COLONY_STANDARD_PROJECT;
-  public cost = 17;
+  constructor() {
+    super({
+      name: CardName.BUILD_COLONY_STANDARD_PROJECT,
+      cost: 17,
+      metadata: {
+        cardNumber: 'SP5',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 17 MC to place a colony.', (eb) => {
+            eb.megacredits(17).startAction.colonies();
+          }),
+        ),
+      },
+    });
+  }
 
   private getOpenColonies(player: Player, game: Game) {
     let openColonies = game.colonies.filter((colony) => colony.colonies.length < 3 &&
@@ -34,13 +45,4 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   actionEssence(player: Player, game: Game): void {
     game.defer(new BuildColony(player, false, 'Select colony'));
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP5',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 17 MC to place a colony.', (eb) => {
-        eb.megacredits(17).startAction.colonies();
-      }),
-    ),
-  };
 }

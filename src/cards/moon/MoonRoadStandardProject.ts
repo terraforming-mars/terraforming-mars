@@ -1,6 +1,5 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {StandardProjectCard} from '../StandardProjectCard';
@@ -9,17 +8,20 @@ import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 
 export class MoonRoadStandardProject extends StandardProjectCard {
-  public name = CardName.MOON_ROAD_STANDARD_PROJECT;
-  public cost = 18;
-
-  public metadata: CardMetadata = {
-    cardNumber: '',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 18 MC and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
-        eb.megacredits(18).steel(1).startAction.moonRoad();
-      }),
-    ),
-  };
+  constructor() {
+    super({
+      name: CardName.MOON_ROAD_STANDARD_PROJECT,
+      cost: 18,
+      metadata: {
+        cardNumber: '',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 18 MC and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+            eb.megacredits(18).steel(1).startAction.moonRoad();
+          }),
+        ),
+      },
+    });
+  }
 
   public reserveUnits = Units.of({steel: 1});
 

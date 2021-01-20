@@ -1,6 +1,5 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Game} from '../../../Game';
 import {StandardProjectCard} from '../../StandardProjectCard';
@@ -8,8 +7,22 @@ import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {Resources} from '../../../Resources';
 
 export class CityStandardProject extends StandardProjectCard {
-  public name = CardName.CITY_STANDARD_PROJECT;
-  public cost = 25;
+  constructor() {
+    super({
+      name: CardName.CITY_STANDARD_PROJECT,
+      cost: 25,
+      metadata: {
+        cardNumber: 'SP4',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 25 MC to place a city tile and increase your MC production 1 step.', (eb) => {
+            eb.megacredits(25).startAction.city().production((pb) => {
+              pb.megacredits(1);
+            });
+          }),
+        ),
+      },
+    });
+  }
 
   public canAct(player: Player, game: Game): boolean {
     return player.canAfford(this.cost) && game.board.getAvailableSpacesForCity(player).length > 0;
@@ -19,15 +32,4 @@ export class CityStandardProject extends StandardProjectCard {
     game.defer(new PlaceCityTile(player));
     player.addProduction(Resources.MEGACREDITS);
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP4',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 25 MC to place a city tile and increase your MC production 1 step.', (eb) => {
-        eb.megacredits(25).startAction.city().production((pb) => {
-          pb.megacredits(1);
-        });
-      }),
-    ),
-  };
 }

@@ -1,6 +1,5 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Game} from '../../../Game';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../../constants';
@@ -10,8 +9,19 @@ import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 
 export class AquiferStandardProject extends StandardProjectCard {
-  public name = CardName.AQUIFER_STANDARD_PROJECT;
-  public cost = 18;
+  constructor() {
+    super({
+      name: CardName.AQUIFER_STANDARD_PROJECT,
+      cost: 18,
+      metadata: {
+        cardNumber: 'SP2',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 18 MC to place an ocean tile.', (eb) => {
+            eb.megacredits(18).startAction.oceans(1);
+          })),
+      },
+    });
+  }
 
   public canAct(player: Player, game: Game): boolean {
     if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
@@ -29,13 +39,4 @@ export class AquiferStandardProject extends StandardProjectCard {
   actionEssence(player: Player, game: Game): void {
     game.defer(new PlaceOceanTile(player, 'Select space for ocean'));
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP2',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 18 MC to place an ocean tile.', (eb) => {
-        eb.megacredits(18).startAction.oceans(1);
-      }),
-    ),
-  };
 }

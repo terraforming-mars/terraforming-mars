@@ -6,12 +6,12 @@ import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderD
 import {TestPlayers} from '../TestingUtils';
 
 describe('CardMetadata', function() {
-  let player : Player; let game : Game;
+  let player : Player;
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('should have a VP icon', function() {
@@ -20,7 +20,7 @@ describe('CardMetadata', function() {
         const card = new c.Factory();
         if (card.metadata !== undefined && card.getVictoryPoints !== undefined) {
           expect(card.metadata.victoryPoints, card.name + ' is missing VP metadata').is.not.undefined;
-          const vp = card.getVictoryPoints(player, game);
+          const vp = card.getVictoryPoints(player);
           if (vp !== 0) {
             if (card.metadata.victoryPoints instanceof CardRenderDynamicVictoryPoints && card.metadata.victoryPoints.anyPlayer === true) {
               expect(card.metadata.victoryPoints.points, card.name + ' has invalid VP metadata').to.eq(vp);

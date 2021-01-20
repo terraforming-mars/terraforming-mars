@@ -33,7 +33,7 @@ describe('Incite', function() {
   });
 
   it('Can perform initial action', function() {
-    card.initialAction(player, game);
+    card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;

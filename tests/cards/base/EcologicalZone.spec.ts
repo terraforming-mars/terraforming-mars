@@ -32,7 +32,7 @@ describe('EcologicalZone', function() {
     action.cb(adjacentSpace);
     expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.ECOLOGICAL_ZONE);
 
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
     expect(adjacentSpace.adjacency?.bonus).eq(undefined);

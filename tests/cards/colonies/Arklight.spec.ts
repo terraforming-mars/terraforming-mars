@@ -9,12 +9,12 @@ describe('Arklight', function() {
     const card = new Arklight();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     const play = card.play(player);
     expect(play).is.undefined;
     expect(card.resourceCount).to.eq(1);
     player.corporationCard = card;
-    card.onCardPlayed(player, game, new Predators());
+    card.onCardPlayed(player, new Predators());
     expect(card.resourceCount).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });

@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
@@ -22,18 +21,18 @@ export class Philares implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Place a greenery tile and raise the oxygen 1 step';
-    public initialAction(player: Player, game: Game) {
+    public initialAction(player: Player) {
       return new SelectSpace('Select space for greenery tile',
-        game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-          game.addGreenery(player, space.id);
+        player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
+          player.game.addGreenery(player, space.id);
 
-          game.log('${0} placed a Greenery tile', (b) => b.player(player));
+          player.game.log('${0} placed a Greenery tile', (b) => b.player(player));
 
           return undefined;
         });
     }
 
-    private selectResources(player: Player, game: Game, resourceCount: number) {
+    private selectResources(player: Player, resourceCount: number) {
       let megacreditsAmount: number = 0;
       let steelAmount: number = 0;
       let titaniumAmount: number = 0;
@@ -85,14 +84,14 @@ export class Philares implements CorporationCard {
           return undefined;
         }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
       selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
-      game.defer(new DeferredAction(
+      player.game.defer(new DeferredAction(
         player,
         () => selectResources,
       ));
     }
 
-    public onTilePlaced(player: Player, space: ISpace, game: Game): void {
-      const philaresPlayer = game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
+    public onTilePlaced(player: Player, space: ISpace): void {
+      const philaresPlayer = player.game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
       if (philaresPlayer === undefined) {
         console.error('Could not find Philares player');
         return;
@@ -100,16 +99,16 @@ export class Philares implements CorporationCard {
       if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
         let bonusResource: number = 0;
         if (space.player !== undefined && space.player.id === philaresPlayer.id) {
-          bonusResource = game.board.getAdjacentSpaces(space)
+          bonusResource = player.game.board.getAdjacentSpaces(space)
             .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
             .length;
         } else if (space.player !== undefined && space.player.id !== philaresPlayer.id) {
-          bonusResource = game.board.getAdjacentSpaces(space)
+          bonusResource = player.game.board.getAdjacentSpaces(space)
             .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === philaresPlayer.id)
             .length;
         }
         if (bonusResource > 0) {
-          this.selectResources(philaresPlayer, game, bonusResource);
+          this.selectResources(philaresPlayer, bonusResource);
         }
       }
     }

@@ -5,17 +5,17 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('PowerInfrastructure', function() {
-  let card : PowerInfrastructure; let player : Player; let game : Game;
+  let card : PowerInfrastructure; let player : Player;
 
   beforeEach(function() {
     card = new PowerInfrastructure();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t act', function() {
-    card.play(player, game);
+    card.play(player);
     expect(card.canAct(player)).is.not.true;
   });
 

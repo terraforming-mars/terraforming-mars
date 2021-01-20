@@ -63,7 +63,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   public canPlay(player: Player, game: Game): boolean {
     return super.canPlay(player) && this.getAvailableSpaces(player, game).length > 0;
   }
-  public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
   }
   public getVictoryPoints(): number {

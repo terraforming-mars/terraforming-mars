@@ -407,13 +407,13 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Victory points from corporations
     if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this, this.game), this.corporationCard.name);
+      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
     }
 
     // Victory points from cards
     for (const playedCard of this.playedCards) {
       if (playedCard.getVictoryPoints !== undefined) {
-        this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this, this.game), playedCard.name);
+        this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
     }
 
@@ -1268,7 +1268,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, this.game, selectedCard);
+        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, selectedCard);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1282,7 +1282,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     for (const somePlayer of this.game.getPlayers()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, this.game, selectedCard);
+        const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, selectedCard);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1765,7 +1765,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         corporationCard.initialActionText, () => {
           game.defer(new DeferredAction(this, () => {
             if (corporationCard.initialAction) {
-              return corporationCard.initialAction(this, game);
+              return corporationCard.initialAction(this);
             } else {
               return undefined;
             }

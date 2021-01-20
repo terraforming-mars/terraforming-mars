@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
+
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
@@ -32,7 +32,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
     if (resourceCount === 0) {
       return undefined;
@@ -44,7 +44,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
     }
 
     for (let i = 0; i < resourceCount; i++) {
-      game.defer(new DeferredAction(
+      player.game.defer(new DeferredAction(
         player,
         () => new OrOptions(
           new SelectOption('Add resource to card ' + card.name, 'Add resource', () => {

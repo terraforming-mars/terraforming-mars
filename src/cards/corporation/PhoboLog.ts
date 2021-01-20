@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
@@ -31,7 +30,7 @@ export class PhoboLog extends Card implements CorporationCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.titanium = 10;
     player.increaseTitaniumValue();
     return undefined;

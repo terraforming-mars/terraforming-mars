@@ -5,7 +5,6 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -32,8 +31,10 @@ export class PharmacyUnion implements CorporationCard {
       return undefined;
     }
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, card: IProjectCard): void {
       if (this.isDisabled) return undefined;
+
+      const game = player.game;
 
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
       const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
@@ -135,8 +136,8 @@ export class PharmacyUnion implements CorporationCard {
       return undefined;
     }
 
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-      return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this.onCardPlayed(player, card as ICard as IProjectCard);
     }
 
     public metadata: CardMetadata = {

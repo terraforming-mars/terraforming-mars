@@ -51,14 +51,6 @@ export class CardFinder {
       return undefined;
     }
 
-    public getProjectOrStandardProjectCardByName(cardName: string) {
-      return this.getCardByName(cardName, (manifest) => [
-        manifest.projectCards,
-        manifest.preludeCards,
-        manifest.standardProjects,
-      ]);
-    }
-
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
       return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
     }

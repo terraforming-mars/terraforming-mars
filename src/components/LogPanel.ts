@@ -85,7 +85,11 @@ export const LogPanel = Vue.component('log-panel', {
               }
             }
           }
-          const card = new CardFinder().getProjectOrStandardProjectCardByName(data.value);
+          const card = new CardFinder().getCardByName(data.value, (manifest) => [
+            manifest.projectCards,
+            manifest.preludeCards,
+            manifest.standardProjects,
+          ]);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
         } else if (translatableMessageDataTypes.includes(data.type)) {
           return $t(data.value);

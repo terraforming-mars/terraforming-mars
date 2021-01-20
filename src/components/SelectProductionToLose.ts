@@ -14,8 +14,8 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
-import {$t} from '../directives/i18n';
 import {Units} from '../Units';
+import {TranslateMixin} from './TranslateMixin';
 
 export const SelectProductionToLose = Vue.component('select-production-to-lose', {
   props: {
@@ -46,7 +46,7 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
       warning: undefined,
     } as SelectProductionToLoseModel;
   },
-  mixins: [PaymentWidgetMixin], // for getCssClassFor. Seems over-importish
+  mixins: [PaymentWidgetMixin, TranslateMixin], // for getCssClassFor. Seems over-importish
   methods: {
     canDeductMegaCredits: function() {
       return this.playerinput.payProduction.units.megacredits > -5;
@@ -65,9 +65,6 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
     },
     canDeductHeat: function() {
       return this.playerinput.payProduction.units.heat > 0;
-    },
-    getTitle: function() {
-      return $t(this.playerinput.title);
     },
     hasWarning: function() {
       return this.$data.warning !== undefined;
@@ -127,9 +124,9 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
 
   // TODO(chosta): consolidate repetition into a reusable component.
   template: `<div class="wf-component wf-component--select-production-to-lose">
-        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{getTitle()}}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 
-        <h3 class="payments_title">Which resource production would you prefer to decrease?</h3>
+        <h3 class="payments_title" v-i18n>Which resource production would you prefer to decrease?</h3>
 
         <div class="payments_type input-group" v-if="canDeductMegaCredits()">
           <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
@@ -169,11 +166,11 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
         </div >
 
         <div v-if="hasWarning()" class="tm-warning">
-          <label class="label label-error">{{ warning }}</label>
+          <label class="label label-error">{{ $t(warning) }}</label>
         </div>
   
         <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary btn-submit" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+            <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
         </div>
     </div>`,
 });

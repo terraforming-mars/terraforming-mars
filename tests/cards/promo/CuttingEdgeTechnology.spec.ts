@@ -11,16 +11,16 @@ describe('CuttingEdgeTechnology', function() {
     const card = new CuttingEdgeTechnology();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     card.play();
 
     const discountedCard = new DustSeals();
     const discountedCard2 = new VoteOfNoConfidence();
     const undiscountedCard = new HeatTrappers();
 
-    expect(card.getCardDiscount(player, game, discountedCard)).to.eq(2);
-    expect(card.getCardDiscount(player, game, discountedCard2)).to.eq(2);
-    expect(card.getCardDiscount(player, game, undiscountedCard)).to.eq(0);
+    expect(card.getCardDiscount(player, discountedCard)).to.eq(2);
+    expect(card.getCardDiscount(player, discountedCard2)).to.eq(2);
+    expect(card.getCardDiscount(player, undiscountedCard)).to.eq(0);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

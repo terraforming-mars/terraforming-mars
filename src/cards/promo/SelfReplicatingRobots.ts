@@ -23,7 +23,7 @@ export class SelfReplicatingRobots implements IProjectCard {
     public cardType = CardType.ACTIVE;
     public targetCards: Array<RobotCard> = [];
 
-    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard): number {
+    public getCardDiscount(_player: Player, card: IProjectCard): number {
       for (const targetCard of this.targetCards) {
         if (targetCard.card.name === card.name) {
           return targetCard.resourceCount;

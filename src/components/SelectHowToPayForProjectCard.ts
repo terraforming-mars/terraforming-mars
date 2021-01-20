@@ -1,6 +1,5 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from './common/Button';
 
 interface SelectHowToPayForProjectCardModel {
@@ -30,6 +29,7 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+import {TranslateMixin} from './TranslateMixin';
 // import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
@@ -86,7 +86,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     Card,
     Button,
   },
-  mixins: [PaymentWidgetMixin],
+  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
@@ -99,7 +99,6 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     });
   },
   methods: {
-    translate: $t,
     getCard: function() {
       const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -318,7 +317,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ translate(playerinput.title) }}</div>
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -326,9 +325,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning !== undefined ? translate(this.card.warning) : '' }}</div>
+    <div v-if="hasCardWarning()" class="card-warning">{{ $t(card.warning) }}</div>
 
-    <h3 class="payments_title">How to pay?</h3>
+    <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
@@ -342,18 +341,18 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
     </div>
-    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-18n>
+    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
     (Some titanium is not available here because the project card needs some when it is played.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
@@ -361,7 +360,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
+      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
       <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
@@ -369,7 +368,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
+      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
       <Button type="minus" :onClick="_=>reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
@@ -377,14 +376,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

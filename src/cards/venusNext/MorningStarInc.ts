@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
@@ -19,7 +18,7 @@ export class MorningStarInc implements CorporationCard {
       return undefined;
     }
 
-    public getRequirementBonus(_player: Player, _game: Game, venusOnly?: boolean): number {
+    public getRequirementBonus(_player: Player, venusOnly?: boolean): number {
       if (venusOnly !== undefined && venusOnly) return 2;
       return 0;
     }

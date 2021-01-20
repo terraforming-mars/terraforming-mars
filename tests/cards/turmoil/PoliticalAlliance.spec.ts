@@ -31,7 +31,7 @@ describe('PoliticalAlliance', function() {
     reds.partyLeader = player.id;
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
   });
 });

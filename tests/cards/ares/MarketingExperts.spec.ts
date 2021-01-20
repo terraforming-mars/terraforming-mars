@@ -23,7 +23,7 @@ describe('MarketingExperts', function() {
 
   it('Play', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
   });
 

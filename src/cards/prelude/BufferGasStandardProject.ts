@@ -4,12 +4,12 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 
-export class BufferGas extends StandardProjectCard {
-  public name = CardName.STANDARD_BUFFER_GAS;
+export class BufferGasStandardProject extends StandardProjectCard {
+  public name = CardName.BUFFER_GAS_STANDARD_PROJECT;
   public cost = 16;
 
   public canAct(player: Player, game: Game): boolean {
@@ -23,8 +23,8 @@ export class BufferGas extends StandardProjectCard {
     return player.canAfford(cost);
   }
 
-  actionEssence(player: Player, game: Game): void {
-    player.increaseTerraformRating(game);
+  actionEssence(player: Player): void {
+    player.increaseTerraformRating();
   }
 
   public metadata: CardMetadata = {

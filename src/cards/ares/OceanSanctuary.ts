@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -41,14 +40,14 @@ export class OceanSanctuary extends Card implements IResourceCard {
     return Math.floor(this.resourceCount);
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     this.resourceCount++;
     return new SelectSpace(
       'Select space for Ocean Sanctuary',
-      game.board.getOceansTiles(false),
+      player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        game.removeTile(space.id);
-        game.addTile(player, space.spaceType, space, {
+        player.game.removeTile(space.id);
+        player.game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_SANCTUARY,
         });
         space.adjacency = {bonus: [SpaceBonus.ANIMAL]};

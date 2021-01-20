@@ -40,9 +40,9 @@ export class RadChemFactory extends Card implements IProjectCard {
     return hasEnergyProduction;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.increaseTerraformRatingSteps(2, game);
+    player.increaseTerraformRatingSteps(2);
     return undefined;
   }
 }

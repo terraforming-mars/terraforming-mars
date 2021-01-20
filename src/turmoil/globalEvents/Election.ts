@@ -17,9 +17,9 @@ export class Election implements IGlobalEvent {
       // Solo
       if (game.isSoloMode()) {
         if (this.getScore(game.getPlayers()[0], turmoil, game) >= 10) {
-          game.getPlayers()[0].increaseTerraformRatingSteps(2, game);
+          game.getPlayers()[0].increaseTerraformRatingSteps(2);
         } else if (this.getScore(game.getPlayers()[0], turmoil, game) >= 1) {
-          game.getPlayers()[0].increaseTerraformRatingSteps(1, game);
+          game.getPlayers()[0].increaseTerraformRatingSteps(1);
         }
       } else {
         const players = [...game.getPlayers()].sort(
@@ -28,23 +28,23 @@ export class Election implements IGlobalEvent {
 
         // We have one rank 1 player
         if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-          players[0].increaseTerraformRatingSteps(2, game);
+          players[0].increaseTerraformRatingSteps(2);
           LogHelper.logTRIncrease(players[0], 2);
           players.shift();
 
           if (players.length === 1) {
-            players[0].increaseTerraformRatingSteps(1, game);
+            players[0].increaseTerraformRatingSteps(1);
             LogHelper.logTRIncrease(players[0], 1);
           } else if (players.length > 1) {
             // We have one rank 2 player
             if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-              players[0].increaseTerraformRatingSteps(1, game);
+              players[0].increaseTerraformRatingSteps(1);
               LogHelper.logTRIncrease(players[0], 1);
               // We have at least two rank 2 players
             } else {
               const score = this.getScore(players[0], turmoil, game);
               while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-                players[0].increaseTerraformRatingSteps(1, game);
+                players[0].increaseTerraformRatingSteps(1);
                 LogHelper.logTRIncrease(players[0], 1);
                 players.shift();
               }
@@ -54,7 +54,7 @@ export class Election implements IGlobalEvent {
         } else {
           const score = this.getScore(players[0], turmoil, game);
           while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-            players[0].increaseTerraformRatingSteps(2, game);
+            players[0].increaseTerraformRatingSteps(2);
             LogHelper.logTRIncrease(players[0], 2);
             players.shift();
           }

@@ -7,6 +7,7 @@ import {AquiferTurbines} from './AquiferTurbines';
 import {Biofuels} from './Biofuels';
 import {Biolab} from './Biolab';
 import {BiosphereSupport} from './BiosphereSupport';
+import {BufferGasStandardProject} from './BufferGasStandardProject';
 import {BusinessEmpire} from './BusinessEmpire';
 import {CheungShingMARS} from './CheungShingMARS';
 import {DomeFarming} from './DomeFarming';
@@ -105,5 +106,8 @@ export const PRELUDE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ECCENTRIC_SPONSOR, Factory: EccentricSponsor},
     {cardName: CardName.ECOLOGY_EXPERTS, Factory: EcologyExperts},
     {cardName: CardName.EXPERIMENTAL_FOREST, Factory: ExperimentalForest},
+  ],
+  standardProjects: [
+    {cardName: CardName.BUFFER_GAS_STANDARD_PROJECT, Factory: BufferGasStandardProject},
   ],
 });

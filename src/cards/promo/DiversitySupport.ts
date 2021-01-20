@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -23,8 +22,8 @@ export class DiversitySupport extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRating(game);
+  public play(player: Player) {
+    player.increaseTerraformRating();
     return undefined;
   }
 }

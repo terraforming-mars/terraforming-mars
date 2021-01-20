@@ -42,39 +42,77 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
   methods: {
     getAfterPreludes: function() {
       let result = 0;
-      if (this.selectedPrelude.includes(CardName.ALLIED_BANKS)) {
-        result += 3;
-      }
-      if (this.selectedPrelude.includes(CardName.BUSINESS_EMPIRE)) {
-        result -= 6;
-      }
-      if (this.selectedPrelude.includes(CardName.AQUIFER_TURBINES)) {
-        result -= 3;
-      }
-      if (this.selectedPrelude.includes(CardName.DONATION)) {
-        result += 21;
-      }
-      if (this.selectedPrelude.includes(CardName.GALILEAN_MINING)) {
-        result -= 5;
-      }
-      if (this.selectedPrelude.includes(CardName.HUGE_ASTEROID)) {
-        result -= 5;
-      }
-      if (this.selectedPrelude.includes(CardName.LOAN)) {
-        result += 30;
-      }
-      if (this.selectedPrelude.includes(CardName.MARTIAN_INDUSTRIES)) {
-        result += 6;
-      }
-      if (this.selectedPrelude.includes(CardName.NITROGEN_SHIPMENT)) {
-        result += 5;
-      }
-      if (this.selectedCorporation?.name === CardName.THARSIS_REPUBLIC) {
-        if (this.selectedPrelude.includes(CardName.SELF_SUFFICIENT_SETTLEMENT)) {
+      for (const prelude of this.selectedPrelude) {
+        switch (prelude) {
+        case CardName.ALLIED_BANKS:
           result += 3;
+          break;
+        case CardName.BUSINESS_EMPIRE:
+          result -= 6;
+          break;
+        case CardName.AQUIFER_TURBINES:
+          result -= 3;
+          break;
+        case CardName.DONATION:
+          result += 21;
+          break;
+        case CardName.GALILEAN_MINING:
+        case CardName.HUGE_ASTEROID:
+          result -= 5;
+          break;
+        case CardName.LOAN:
+          result += 30;
+          break;
+        case CardName.MARTIAN_INDUSTRIES:
+          result += 6;
+          break;
+        case CardName.NITROGEN_SHIPMENT:
+          result += 5;
+          break;
         }
-        if (this.selectedPrelude.includes(CardName.EARLY_SETTLEMENT)) {
-          result += 3;
+        switch (this.selectedCorporation?.name) {
+        case CardName.MANUTECH:
+          switch (prelude) {
+          case CardName.ALLIED_BANKS:
+            result += 4;
+            break;
+          case CardName.BUSINESS_EMPIRE:
+            result += 6;
+            break;
+          case CardName.DOME_FARMING:
+          case CardName.SELF_SUFFICIENT_SETTLEMENT:
+            result += 2;
+            break;
+          case CardName.METALS_COMPANY:
+          case CardName.RESEARCH_NETWORK:
+            result += 1;
+            break;
+          }
+          break;
+        case CardName.THARSIS_REPUBLIC:
+          switch (prelude) {
+          case CardName.SELF_SUFFICIENT_SETTLEMENT:
+          case CardName.EARLY_SETTLEMENT:
+            result += 3;
+            break;
+          }
+          break;
+        case CardName.PHARMACY_UNION:
+          switch (prelude) {
+          case CardName.BIOFUELS:
+          case CardName.ECOLOGY_EXPERTS:
+            result -= 4;
+            break;
+          }
+          break;
+        case CardName.SPLICE:
+          switch (prelude) {
+          case CardName.BIOFUELS:
+          case CardName.ECOLOGY_EXPERTS:
+            result += 2;
+            break;
+          }
+          break;
         }
       }
       return result;

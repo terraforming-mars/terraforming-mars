@@ -19,7 +19,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
       name: CardName.IMMIGRANT_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 13,
-      productionDelta: Units.of({energy: -1, megacredits: -2}),
+      productionBox: Units.of({energy: -1, megacredits: -2}),
 
       metadata: {
         cardNumber: '200',

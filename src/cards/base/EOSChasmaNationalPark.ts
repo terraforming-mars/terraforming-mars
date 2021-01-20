@@ -22,7 +22,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
-      productionDelta: Units.of({energy: 2}),
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '026',

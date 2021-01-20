@@ -16,7 +16,7 @@ export class MomentumViriumHabitat extends MoonCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.CITY, Tags.SPACE],
       cost: 23,
-      productionDelta: Units.of({heat: 2, megacredits: 3}),
+      productionBox: Units.of({heat: 2, megacredits: 3}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your heat production 2 steps and your MC production 3 steps. ' +

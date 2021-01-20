@@ -16,7 +16,7 @@ export class TitaniumMine extends Card implements IProjectCard {
       name: CardName.TITANIUM_MINE,
       tags: [Tags.BUILDING],
       cost: 7,
-      productionDelta: Units.of({titanium: 1}),
+      productionBox: Units.of({titanium: 1}),
 
       metadata: {
         cardNumber: '144',

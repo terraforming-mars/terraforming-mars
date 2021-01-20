@@ -20,7 +20,7 @@ export class DomedCrater extends Card implements IProjectCard {
       name: CardName.DOMED_CRATER,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 24,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: 'T03',

@@ -20,7 +20,7 @@ export class CupolaCity extends Card implements IProjectCard {
       name: CardName.CUPOLA_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 16,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '029',

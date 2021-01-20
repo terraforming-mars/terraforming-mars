@@ -19,7 +19,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_GENERATORS,
       tags: [Tags.BUILDING],
       cost: 20,
-      productionDelta: Units.of({energy: -4, plants: 2}),
+      productionBox: Units.of({energy: -4, plants: 2}),
 
       metadata: {
         cardNumber: '165',

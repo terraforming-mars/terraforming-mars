@@ -20,7 +20,7 @@ export class OceanFarm extends Card implements IProjectCard {
       name: CardName.OCEAN_FARM,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 15,
-      productionDelta: Units.of({plants: 1, heat: 1}),
+      productionBox: Units.of({plants: 1, heat: 1}),
 
       metadata: {
         cardNumber: 'A21',

@@ -224,9 +224,9 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
   // Public for tests
   public getUpdater(cardName: CardName, player: Player): Updater | undefined {
-    // Prefer moving these values to their respective cards as productionDelta.
+    // Prefer moving these values to their respective cards as productionBox.
     // Cards still here are those not updated to the static card properties format, preludes, or ones
-    // with complicated math. Maybe they can be moved. Maybe productionDelta should have been a function
+    // with complicated math. Maybe they can be moved. Maybe productionBox should have been a function
     // instead of a structure. Well, there's room for sophistication.
     const updaters: Array<Updater> = [
       new Updater(CardName.ASTEROID_DEFLECTION_SYSTEM, {energy: -1}),
@@ -320,7 +320,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       let units: Units | undefined = updater?.units;
 
       if (units === undefined) {
-        units = staticCardProperties.get(foundCard.name)?.productionDelta;
+        units = staticCardProperties.get(foundCard.name)?.productionBox;
         if (units === undefined) {
           throw new Error('Production not found for selected card ' + foundCard.name);
         }

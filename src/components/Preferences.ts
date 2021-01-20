@@ -73,6 +73,7 @@ export const Preferences = Vue.component('preferences', {
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
       'hide_tile_confirmation': false as boolean | unknown[],
+      'show_card_number': false as boolean | unknown[],
     };
   },
   methods: {
@@ -231,9 +232,9 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                 </a>
                 <div class="preferences_item preferences_item--info">
-                  <i class="preferences_icon preferences_icon--info" 
-                  :class="{'preferences_item--is-active': ui.gamesetup_detail_open}" 
-                  v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open" 
+                  <i class="preferences_icon preferences_icon--info"
+                  :class="{'preferences_item--is-active': ui.gamesetup_detail_open}"
+                  v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
                   :title="$t('hotkeys and game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
@@ -370,6 +371,13 @@ export const Preferences = Vue.component('preferences', {
                             <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
                         </label>
                     </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="show_card_number" />
+                            <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
+                        </label>
+                    </div>
+
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

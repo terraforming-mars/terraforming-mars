@@ -160,7 +160,7 @@ export abstract class Colony implements SerializedColony {
             openColonies.forEach((colony) => {
               if (colony.name === colonyName) {
                 game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.trade(player, 0, false, false);
+                colony.handleTrade(player, false, false)
               }
               return undefined;
             });

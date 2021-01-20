@@ -1680,9 +1680,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getPlayableStandardProjects(): Array<StandardProjectCard> {
     // TODO(kberg): Filter playability based on the project's reserve units.
     return new CardLoader(this.game.gameOptions)
-      .getStandardProjects().sort((a, b) => a.cost - b.cost)
-      .filter((card) => card.canAct(this))
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT);
+      .getStandardProjects()
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .sort((a, b) => a.cost - b.cost);
   }
 
   private getPlayableStandardProjectOption(): PlayerInput | undefined {

@@ -1,7 +1,6 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
@@ -30,7 +29,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     // no-op
   }
 
-  public action(player: Player, game: Game): SelectCard<IProjectCard> {
+  public action(player: Player): SelectCard<IProjectCard> {
     return new SelectCard(
       'Sell patents',
       'Sell',
@@ -44,10 +43,10 @@ export class SellPatentsStandardProject extends StandardProjectCard {
               break;
             }
           }
-          game.dealer.discard(card);
+          player.game.dealer.discard(card);
         });
-        this.projectPlayed(player, game);
-        game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+        this.projectPlayed(player);
+        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
         return undefined;
       }, player.cardsInHand.length,
     );

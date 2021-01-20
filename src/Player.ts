@@ -1682,7 +1682,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // TODO: Make standard projects static for the game.
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects().sort((a, b) => a.cost - b.cost)
-      .filter((card) => card.canAct(this, this.game))
+      .filter((card) => card.canAct(this))
       .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT);
   }
 
@@ -1696,7 +1696,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Standard projects',
       'Confirm',
       standardProjects,
-      (card) => card[0].action(this, this.game),
+      (card) => card[0].action(this),
     );
   }
 
@@ -1917,7 +1917,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();
     if (sellPatents.canAct(this)) {
-      action.options.push(sellPatents.action(this, game));
+      action.options.push(sellPatents.action(this));
     }
 
     // Propose undo action only if you have done one action this turn

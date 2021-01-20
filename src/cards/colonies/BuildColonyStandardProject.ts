@@ -38,11 +38,11 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     return openColonies;
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    return super.canAct(player, game) && this.getOpenColonies(player, game).length > 0;
+  public canAct(player: Player): boolean {
+    return super.canAct(player) && this.getOpenColonies(player, player.game).length > 0;
   }
 
-  actionEssence(player: Player, game: Game): void {
-    game.defer(new BuildColony(player, false, 'Select colony'));
+  actionEssence(player: Player): void {
+    player.game.defer(new BuildColony(player, false, 'Select colony'));
   }
 }

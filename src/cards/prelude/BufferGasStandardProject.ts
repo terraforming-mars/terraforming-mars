@@ -1,24 +1,34 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 
 export class BufferGasStandardProject extends StandardProjectCard {
-  public name = CardName.BUFFER_GAS_STANDARD_PROJECT;
-  public cost = 16;
+  constructor() {
+    super({
+      name: CardName.BUFFER_GAS_STANDARD_PROJECT,
+      cost: 16,
+      metadata: {
+        cardNumber: 'SP3',
+        renderData: CardRenderer.builder((b) =>
+          b.standardProject('Spend 16 MC to increase your TR 1 step. Solo games only.', (eb) => {
+            eb.megacredits(16).startAction.tr(1);
+          }),
+        ),
+      },
+    });
+  }
 
-  public canAct(player: Player, game: Game): boolean {
-    if (game.isSoloMode() === false || game.gameOptions.soloTR === false) {
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode() === false || player.game.gameOptions.soloTR === false) {
       return false;
     }
 
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost);
   }
@@ -26,13 +36,4 @@ export class BufferGasStandardProject extends StandardProjectCard {
   actionEssence(player: Player): void {
     player.increaseTerraformRating();
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'SP3',
-    renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 16 MC to increase your TR 1 step. Solo games only.', (eb) => {
-        eb.megacredits(16).startAction.tr(1);
-      }),
-    ),
-  };
 }

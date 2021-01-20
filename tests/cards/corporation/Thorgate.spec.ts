@@ -21,8 +21,8 @@ describe('Thorgate', function() {
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
     const powerPlant = new PowerPlantStandardProject();
     player.megaCredits = powerPlant.cost - 3;
-    expect(powerPlant.canAct(player, game)).eq(true);
+    expect(powerPlant.canAct(player)).eq(true);
     player.megaCredits--;
-    expect(powerPlant.canAct(player, game)).eq(false);
+    expect(powerPlant.canAct(player)).eq(false);
   });
 });

@@ -19,7 +19,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
       name: CardName.DEEP_WELL_HEATING,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 13,
-      productionDelta: Units.of({energy: 1}),
+      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '003',

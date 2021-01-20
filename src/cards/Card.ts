@@ -19,7 +19,7 @@ export interface StaticCardProperties {
   resourceType?: ResourceType;
   startingMegaCredits?: number;
   tags?: Array<Tags>;
-  productionDelta?: Units;
+  productionBox?: Units;
 }
 
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -67,8 +67,8 @@ export abstract class Card {
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
   }
-  public get productionDelta(): Units {
-    return this.properties.productionDelta || Units.EMPTY;
+  public get productionBox(): Units {
+    return this.properties.productionBox || Units.EMPTY;
   }
   public canPlay(player: Player, _game?: Game) {
     if (this.properties.metadata.requirements === undefined) {

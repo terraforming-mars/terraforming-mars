@@ -16,7 +16,7 @@ export class Habitat14 extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.CITY, Tags.MOON],
       cost: 5,
-      productionDelta: Units.of({energy: -1, megacredits: -1}),
+      productionBox: Units.of({energy: -1, megacredits: -1}),
 
       metadata: {
         description: 'Decrease your energy production 1 step and your MC production 1 step. Spend 1 titanium. Place a colony tile on the Moon and raise Colony Rate 1 step.',

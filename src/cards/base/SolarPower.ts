@@ -15,7 +15,7 @@ export class SolarPower extends Card implements IProjectCard {
       name: CardName.SOLAR_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 11,
-      productionDelta: Units.of({energy: 1}),
+      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '113',

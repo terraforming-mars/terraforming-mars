@@ -15,7 +15,7 @@ export class TheWomb extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.CITY, Tags.MOON],
       cost: 16,
-      productionDelta: Units.of({energy: -2, megacredits: 4}),
+      productionBox: Units.of({energy: -2, megacredits: 4}),
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your MC production 4 steps. ' +

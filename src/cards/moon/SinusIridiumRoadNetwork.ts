@@ -15,7 +15,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON],
       cost: 15,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your MC production 3 steps. ' +

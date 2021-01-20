@@ -56,6 +56,9 @@ export const PlayerStatus = Vue.component('player-status', {
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
+      if (!this.player.gameOptions.showTimers) {
+        classes.push('no-timer');
+      }
       if (this.actionLabel === ActionLabel.PASSED) {
         classes.push(`${baseClass}--passed`);
       } else if (this.actionLabel === ActionLabel.ACTIVE) {
@@ -123,25 +126,4 @@ export const PlayerStatus = Vue.component('player-status', {
         </div>   
       </div>
     `,
-  /* template: `
-      <div class="player-status">
-        <div class="player-status-left">
-          <div class="top-row">
-            <div class="player-view-status" />
-          </div>
-          <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
-        </div>
-        <div class="player-status-right">
-          <div class="icons-and-count">
-            <div class="played-cards-icons">
-              <div class="played-cards-arrow" />
-              <div class="played-cards-icon" />
-            </div>
-            <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
-          </div>
-          <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
-        </div>
-        <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
-      </div>
-    `, */
 });

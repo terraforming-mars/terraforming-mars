@@ -147,7 +147,11 @@
                     display: flex;
                     flex-flow: column;
                     align-items: center;
-                    
+                    .player-action-status-container.no-timer {
+                        .player-action-status {
+                            padding-bottom: 6px !important;
+                        }
+                    }
                     .player-action-status-container {
                         border-radius: 4px; 
                         display: inline-block;
@@ -158,8 +162,9 @@
                         margin-top: 9px;
                         .player-action-status {
                             font-size: 16px;
-                            line-height: 14px;
-                            padding-top: 2px;
+                            line-height: 8px;
+                            padding-top: 6px;
+                            padding-bottom: 2px;
                         }
                         .player-status-timer {
                             font-size: 18px;
@@ -179,6 +184,9 @@
                                 .timer-delimiter {
                                     margin-left: 1px;
                                     margin-right: 1px;
+                                }
+                                .player-timer-minutes {
+                                    text-align: center;
                                 }
                                 .player-timer-hours {
                                     font-size: 14px;

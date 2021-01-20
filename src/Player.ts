@@ -1596,63 +1596,64 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    const playableCards = candidateCards.filter((card) => {
-      const canUseSteel = card.tags.includes(Tags.BUILDING);
-      const canUseTitanium = card.tags.includes(Tags.SPACE);
-      let maxPay = 0;
+    return candidateCards.filter((card) => this.canPlay(card));
+  }
 
-      let steel = this.steel;
-      let titanium = this.titanium;
+  public canPlay(card: IProjectCard): boolean {
+    const canUseSteel = card.tags.includes(Tags.BUILDING);
+    const canUseTitanium = card.tags.includes(Tags.SPACE);
+    let maxPay = 0;
 
-      // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
-      // reserve costs that a player cannot afford.
-      if (card.reserveUnits !== undefined) {
-        const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-        // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-        if (steel < reserveUnits.steel) {
-          return false;
-        }
-        // Set aside reserve units in case the card has a building tag.
-        steel = Math.max(0, steel - reserveUnits.steel);
+    let steel = this.steel;
+    let titanium = this.titanium;
 
-        // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-        if (titanium < reserveUnits.titanium) {
-          return false;
-        }
-        // Set aside reserve units in case the card has a space tag.
-        titanium = Math.max(0, titanium - reserveUnits.titanium);
+    // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
+    // reserve costs that a player cannot afford.
+    if (card.reserveUnits !== undefined) {
+      const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+      // Set aside reserve units in case the card has a building tag.
+      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
+      steel = steel - reserveUnits.steel;
+      if (steel < 0) {
+        return false;
       }
 
-      if (canUseSteel) {
-        maxPay += steel * this.steelValue;
+      // Set aside reserve units in case the card has a space tag.
+      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
+      titanium = titanium - reserveUnits.titanium;
+      if (titanium < 0) {
+        return false;
       }
-      if (canUseTitanium) {
-        maxPay += titanium * this.getTitaniumValue();
-      }
+    }
 
-      const psychrophiles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+    if (canUseSteel) {
+      maxPay += steel * this.steelValue;
+    }
+    if (canUseTitanium) {
+      maxPay += titanium * this.getTitaniumValue();
+    }
 
-      if (psychrophiles !== undefined &&
-          psychrophiles.resourceCount &&
-          card.tags.indexOf(Tags.PLANT) !== -1) {
-        maxPay += psychrophiles.resourceCount * 2;
-      }
+    const psychrophiles = this.playedCards.find(
+      (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
 
-      const dirigibles = this.playedCards.find(
-        (playedCard) => playedCard.name === CardName.DIRIGIBLES);
+    if (psychrophiles !== undefined &&
+        psychrophiles.resourceCount &&
+        card.tags.indexOf(Tags.PLANT) !== -1) {
+      maxPay += psychrophiles.resourceCount * 2;
+    }
 
-      if (dirigibles !== undefined &&
-          dirigibles.resourceCount &&
-          card.tags.indexOf(Tags.VENUS) !== -1) {
-        maxPay += dirigibles.resourceCount * 3;
-      }
+    const dirigibles = this.playedCards.find(
+      (playedCard) => playedCard.name === CardName.DIRIGIBLES);
 
-      maxPay += this.spendableMegacredits();
-      return maxPay >= this.getCardCost(this.game, card) &&
-                  (card.canPlay === undefined || card.canPlay(this, this.game));
-    });
-    return playableCards;
+    if (dirigibles !== undefined &&
+        dirigibles.resourceCount &&
+        card.tags.indexOf(Tags.VENUS) !== -1) {
+      maxPay += dirigibles.resourceCount * 3;
+    }
+
+    maxPay += this.spendableMegacredits();
+    return maxPay >= this.getCardCost(this.game, card) &&
+                (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
   public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {

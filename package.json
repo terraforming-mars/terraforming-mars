@@ -41,7 +41,7 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
-    "build": "npm run lint && npm run compile && npm run templates && npm run webpack",
+    "build": "npm run compile && npm run templates && npm run webpack && npm run lint",
     "clean": "rm -r ./build/ ./styles.css || true",
     "compile": "tsc",
     "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests",

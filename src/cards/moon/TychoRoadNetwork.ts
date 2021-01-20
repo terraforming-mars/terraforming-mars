@@ -15,7 +15,7 @@ export class TychoRoadNetwork extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON],
       cost: 15,
-      productionDelta: Units.of({megacredits: 1}),
+      productionBox: Units.of({megacredits: 1}),
 
       metadata: {
         description: 'Spend 1 steel. Increase your MC production 1 step. ' +

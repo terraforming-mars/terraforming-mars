@@ -15,7 +15,7 @@ export class GeodesicTents extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.PLANT, Tags.CITY, Tags.MOON],
       cost: 13,
-      productionDelta: Units.of({energy: -1, plants: 1}),
+      productionBox: Units.of({energy: -1, plants: 1}),
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +

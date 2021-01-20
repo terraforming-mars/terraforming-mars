@@ -195,11 +195,11 @@ describe('RoboticWorkforce', function() {
     });
   });
 
-  it('all cards have updaters or productionDeltas', () => {
+  it('all cards have updaters or productionBoxes', () => {
     const errors: Array<string> = [];
     RoboticWorkforce.builderCardsNames.forEach((cardName) => {
       const updater = card.getUpdater(cardName, player);
-      const units = staticCardProperties.get(cardName)?.productionDelta;
+      const units = staticCardProperties.get(cardName)?.productionBox;
       if (updater === undefined && units === undefined) {
         errors.push(cardName + ' is unregistered');
       }

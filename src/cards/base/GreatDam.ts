@@ -18,7 +18,7 @@ export class GreatDam extends Card implements IProjectCard {
       name: CardName.GREAT_DAM,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 12,
-      productionDelta: Units.of({energy: 2}),
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '136',

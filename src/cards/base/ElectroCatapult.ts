@@ -21,7 +21,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       name: CardName.ELECTRO_CATAPULT,
       tags: [Tags.BUILDING],
       cost: 17,
-      productionDelta: Units.of({energy: -1}),
+      productionBox: Units.of({energy: -1}),
 
       metadata: {
         cardNumber: '069',

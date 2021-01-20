@@ -15,7 +15,7 @@ export class GeothermalPower extends Card implements IProjectCard {
       name: CardName.GEOTHERMAL_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 11,
-      productionDelta: Units.of({energy: 2}),
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '117',

@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {PlayerInputModel} from '../models/PlayerInputModel';
+import {TranslateMixin} from './TranslateMixin';
 
 export const SelectOption = Vue.component('select-option', {
   props: {
@@ -21,19 +21,17 @@ export const SelectOption = Vue.component('select-option', {
   components: {
     'Button': Button,
   },
+  mixins: [TranslateMixin],
   data: function() {
     return {};
   },
   methods: {
-    getTitle: function() {
-      return $t(this.playerinput.title);
-    },
     saveData: function() {
       this.onsave([['1']]);
     },
   },
   template: `<div class="wf-component wf-component--select-option">
-        <div v-if="showtitle === true" class="wf-component-title">{{getTitle()}}</div>
-        <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+        <div v-if="showtitle === true" class="wf-component-title">{{ $t(playerinput.title) }}</div>
+        <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
     </div>`,
 });

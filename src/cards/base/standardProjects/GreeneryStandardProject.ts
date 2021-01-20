@@ -1,18 +1,18 @@
-import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
-import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import * as constants from '../../constants';
-import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {Player} from '../../../Player';
+import {CardName} from '../../../CardName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
+import {Game} from '../../../Game';
+import {REDS_RULING_POLICY_COST} from '../../../constants';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../turmoil/parties/PartyName';
+import * as constants from '../../../constants';
+import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
+import {AltSecondaryTag} from '../../render/CardRenderItem';
 
-export class Greenery extends StandardProjectCard {
-  public name = CardName.STANDARD_GREENERY;
+export class GreeneryStandardProject extends StandardProjectCard {
+  public name = CardName.GREENERY_STANDARD_PROJECT;
   public cost = 23;
 
   public canAct(player: Player, game: Game): boolean {

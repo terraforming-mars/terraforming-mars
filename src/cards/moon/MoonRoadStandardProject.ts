@@ -3,13 +3,13 @@ import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
-import {StandardProjectCard} from '../standardProjects/StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 
 export class MoonRoadStandardProject extends StandardProjectCard {
-  public name = CardName.STANDARD_PROJECT_MOON_ROAD;
+  public name = CardName.MOON_ROAD_STANDARD_PROJECT;
   public cost = 18;
 
   public metadata: CardMetadata = {

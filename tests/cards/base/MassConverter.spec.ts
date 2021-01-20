@@ -7,13 +7,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MassConverter', function() {
-  let card : MassConverter; let player : Player; let game : Game;
+  let card : MassConverter; let player : Player;
 
   beforeEach(function() {
     card = new MassConverter();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -26,7 +26,7 @@ describe('MassConverter', function() {
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(6);
-    expect(card.getCardDiscount(player, game, card)).to.eq(0);
-    expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);
+    expect(card.getCardDiscount(player, card)).to.eq(0);
+    expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
   });
 });

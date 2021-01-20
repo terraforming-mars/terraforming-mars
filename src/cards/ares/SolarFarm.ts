@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -33,19 +32,19 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.board.getAvailableSpacesOnLand(player).length > 0;
+  public canPlay(player: Player): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select space for Solar Farm tile',
-      game.board.getAvailableSpacesOnLand(player),
+      player.game.board.getAvailableSpacesOnLand(player),
       (space: ISpace) => {
         const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-        player.addProduction(Resources.ENERGY, plantsOnSpace, game);
+        player.addProduction(Resources.ENERGY, plantsOnSpace, player.game);
 
-        game.addTile(player, SpaceType.LAND, space, {
+        player.game.addTile(player, SpaceType.LAND, space, {
           tileType: TileType.SOLAR_FARM,
           card: this.name,
         });

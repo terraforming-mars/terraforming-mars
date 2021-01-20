@@ -32,20 +32,20 @@ export class DesperateMeasures extends Card implements IProjectCard {
     return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public canPlay(_player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
-    return this.getHazardTiles(game).length > 0;
+    return this.getHazardTiles(player.game).length > 0;
   }
 
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(game), (space: ISpace) => {
+  public play(player: Player) {
+    return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
         space.tile!.protectedHazard = true;
         const tileType = space.tile!.tileType;
         if (TileType.DUST_STORM_MILD === tileType || TileType.DUST_STORM_SEVERE === tileType) {
-          game.increaseOxygenLevel(player, 1);
+          player.game.increaseOxygenLevel(player, 1);
         } else {
           // is an erosion tile when the expression above is false.
-          game.increaseTemperature(player, 1);
+          player.game.increaseTemperature(player, 1);
         }
         return undefined;
     });

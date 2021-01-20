@@ -25,7 +25,12 @@ describe('MareNectarisMine', () => {
   });
 
   it('can play', () => {
-    // TODO: Ensuring resources is going to require changes coming later.
+    player.cardsInHand = [card];
+    player.titanium = 0;
+    player.megaCredits = card.cost;
+    expect(player.getPlayableCards()).does.not.include(card);
+    player.titanium = 1;
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

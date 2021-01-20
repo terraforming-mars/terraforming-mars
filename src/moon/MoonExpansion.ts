@@ -10,6 +10,10 @@ import {TileType} from '../TileType';
 // import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
+import {IProjectCard} from '../cards/IProjectCard';
+import {Units} from '../Units';
+import {IMoonCard} from '../cards/moon/IMoonCard';
+import {Tags} from '../cards/Tags';
 // import {IProjectCard} from '../cards/IProjectCard';
 // import {Units} from '../Units';
 // import {CardName} from '../CardName';
@@ -108,7 +112,7 @@ export class MoonExpansion {
       if (moonData.miningRate < 8) {
         moonData.miningRate++;
         player.game.log('${0} raised the mining rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });
@@ -119,7 +123,7 @@ export class MoonExpansion {
       if (moonData.colonyRate < 8) {
         moonData.colonyRate++;
         player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });
@@ -130,7 +134,7 @@ export class MoonExpansion {
       if (moonData.logisticRate < 8) {
         moonData.logisticRate++;
         player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
+        player.increaseTerraformRatingSteps(1);
         this.activateLunaFirst(player, player.game);
       }
     });
@@ -179,39 +183,35 @@ export class MoonExpansion {
   //   return tiles;
   // }
 
-  // public static moonToModel(game: Game): MoonModel | undefined {
-  //   return MoonSerialization.moonToModel(game);
-  // }
+  /*
+   * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
+   */
+  public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
+    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
+      return Units.EMPTY;
+    }
 
-  // /*
-  //  * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
-  //  */
-  // public static adjustedReservationCosts(player: Player, card: IProjectCard) : Units {
-  //   if (player.cardIsInEffect(CardName.LTF_PRIVILEGES)) {
-  //     return Units.of({});
-  //   }
+    const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
 
-  //   const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
+    let steel = reserveUnits.steel || 0;
+    let titanium = reserveUnits.titanium || 0;
 
-  //   let steel = reserveUnits.steel || 0;
-  //   let titanium = reserveUnits.titanium || 0;
+    const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
 
-  //   const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
+    if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+      titanium -= 1;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
-  //     titanium -= 1;
-  //   }
+    if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+      steel -= 1;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
-  //     steel -= 1;
-  //   }
+    if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+      steel = 0;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
-  //     steel = 0;
-  //   }
-
-  //   steel = Math.max(steel, 0);
-  //   titanium = Math.max(titanium, 0);
-  //   return Units.of({steel, titanium});
-  // }
+    steel = Math.max(steel, 0);
+    titanium = Math.max(titanium, 0);
+    return Units.of({steel, titanium});
+  }
 }

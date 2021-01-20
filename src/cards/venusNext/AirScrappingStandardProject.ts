@@ -4,31 +4,31 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {StandardProjectCard} from './StandardProjectCard';
+import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import * as constants from '../../constants';
 
-export class AsteroidStandard extends StandardProjectCard {
-  public name = CardName.STANDARD_ASTEROID;
-  public cost = 14;
+export class AirScrappingStandardProject extends StandardProjectCard {
+  public name = CardName.AIR_SCRAPPING_STANDARD_PROJECT;
+  public cost = 15;
 
   public canAct(player: Player, game: Game): boolean {
-    let asteroidCost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
+    let cost = this.cost;
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE;
+    return player.canAfford(cost) && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
   }
 
   actionEssence(player: Player, game: Game): void {
-    game.increaseTemperature(player, 1);
+    game.increaseVenusScaleLevel(player, 1);
   }
 
   public metadata: CardMetadata = {
-    cardNumber: 'SP9',
+    cardNumber: 'SP1',
     renderData: CardRenderer.builder((b) =>
-      b.standardProject('Spend 14 MC to raise temperature 1 step.', (eb) => {
-        eb.megacredits(14).startAction.temperature(1);
+      b.standardProject('Spend 15 MC to raise Venus 1 step.', (eb) => {
+        eb.megacredits(15).startAction.venus(1);
       }),
     ),
   };

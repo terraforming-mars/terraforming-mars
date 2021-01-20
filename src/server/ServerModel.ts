@@ -37,6 +37,8 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {MoonModel} from '../models/MoonModel';
+import {CardName} from '../CardName';
+import {Units} from '../Units';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -83,8 +85,8 @@ export class Server {
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards),
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(game),
-      coloniesCount: player.getColoniesCount(game),
+      citiesCount: player.getCitiesCount(),
+      coloniesCount: player.getColoniesCount(),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       players: getPlayers(game.getPlayers(), game),
@@ -109,7 +111,7 @@ export class Server {
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
+      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
       dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
       dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
@@ -199,6 +201,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
+  reserveUnitMap?: Map<CardName, Units>,
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
   cards.forEach((card) => {
@@ -213,6 +216,7 @@ function getCardsAsCardModel(
       cardType: CardType.AUTOMATED,
       isDisabled: false,
       warning: card.warning,
+      reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
     });
   });
 
@@ -265,13 +269,11 @@ function getWaitingFor(
     }
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
-    playerInputModel.cards = getCardsAsCardModel(
-      (waitingFor as SelectHowToPayForProjectCard).cards,
-      false,
-    );
-    playerInputModel.microbes = (waitingFor as SelectHowToPayForProjectCard).microbes;
-    playerInputModel.floaters = (waitingFor as SelectHowToPayForProjectCard).floaters;
-    playerInputModel.canUseHeat = (waitingFor as SelectHowToPayForProjectCard).canUseHeat;
+    const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
+    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap);
+    playerInputModel.microbes = shtpfpc.microbes;
+    playerInputModel.floaters = shtpfpc.floaters;
+    playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
@@ -355,6 +357,7 @@ function getCards(
     cardType: card.cardType,
     isDisabled: false,
     warning: card.warning,
+    reserveUnits: card.reserveUnits || Units.EMPTY,
   }));
 }
 
@@ -384,8 +387,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards),
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(game),
-      coloniesCount: player.getColoniesCount(game),
+      citiesCount: player.getCitiesCount(),
+      coloniesCount: player.getColoniesCount(),
       noTagsCount: player.getNoTagsCount(),
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       steel: player.steel,
@@ -406,9 +409,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(
-        game,
-      ),
+      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,

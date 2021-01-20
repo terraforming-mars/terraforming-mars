@@ -46,17 +46,17 @@ describe('OceanCity', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
     player.addProduction(Resources.ENERGY, 1);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
     expect(game.getCitiesInPlayOnMars()).eq(0);
-    expect(player.getCitiesCount(game)).eq(0);
+    expect(player.getCitiesCount()).eq(0);
 
     action.cb(oceanSpace);
 
     expect(game.getCitiesInPlayOnMars()).eq(1);
-    expect(player.getCitiesCount(game)).eq(1);
+    expect(player.getCitiesCount()).eq(1);
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
@@ -66,7 +66,7 @@ describe('OceanCity', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
     player.addProduction(Resources.ENERGY, 1);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     action.cb(oceanSpace);
 
@@ -89,7 +89,7 @@ describe('OceanCity', function() {
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
     game.addCityTile(player, citySpace.id);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     action.cb(oceanSpace);
     expect(oceanSpace.player).to.eq(player);
@@ -101,7 +101,7 @@ describe('OceanCity', function() {
 
   it('Ocean City counts as ocean for adjacency', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board
       .getAdjacentSpaces(oceanSpace)
@@ -116,7 +116,7 @@ describe('OceanCity', function() {
 
   it('Ocean City counts for city-related VP', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board
       .getAdjacentSpaces(oceanSpace)
@@ -147,7 +147,7 @@ describe('OceanCity', function() {
 
     // And now adds the tile.
     game.addOceanTile(player, oceanSpace.id);
-    const oceanCityAction = card.play(player, game);
+    const oceanCityAction = card.play(player);
 
     oceanCityAction.cb(oceanSpace);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);

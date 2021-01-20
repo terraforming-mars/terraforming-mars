@@ -17,7 +17,7 @@ export class LunaResort extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON],
       cost: 11,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         requirements: CardRequirements.builder((b) => b.colonies(2)),
@@ -37,13 +37,13 @@ export class LunaResort extends MoonCard {
   };
 
   public canPlay(player: Player): boolean {
-    return Units.canAdjustProduction(this.productionDelta, player) &&
+    return Units.canAdjustProduction(this.productionBox, player) &&
       MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length > 2;
   }
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionDelta, player);
+    Units.adjustProduction(this.productionBox, player);
     player.addProduction(Resources.MEGACREDITS, 3, player.game);
     MoonExpansion.raiseColonyRate(player);
     return undefined;

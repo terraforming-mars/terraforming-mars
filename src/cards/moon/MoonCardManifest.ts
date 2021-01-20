@@ -2,6 +2,8 @@
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
+import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
+import {ColonistShuttles} from './ColonistShuttles';
 // import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 // import {AlgaeBioreactors} from './AlgaeBioreactors';
 // import {AncientShipyards} from './AncientShipyards';
@@ -22,6 +24,8 @@ import {CoreMine} from './CoreMine';
 // import {DeepLunarMining} from './DeepLunarMining';
 // import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
+import {GeodesicTents} from './GeodesicTents';
+import {Habitat14} from './Habitat14';
 // import {GeodesicTents} from './GeodesicTents';
 // import {GrandLunaAcademy} from './GrandLunaAcademy';
 // import {Habitat14} from './Habitat14';
@@ -35,6 +39,7 @@ import {FirstLunarSettlement} from './FirstLunarSettlement';
 // import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFactory';
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 import {LTFPrivileges} from './LTFPrivileges';
+// import {LunaMiningHub} from './LunaMiningHub';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 // import {IronExtractionCenter} from './IronExtractionCenter';
 // import {LTFHeadquarters} from './LTFHeadquarters';
@@ -49,6 +54,8 @@ import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 // import {LunarMineUrbanization} from './LunarMineUrbanization';
 // import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
+// import {LunaTradeStation} from './LunaTradeStation';
+// import {LunaTrainStation} from './LunaTrainStation';
 // import {LunarSteel} from './LunarSteel';
 // import {LunarTradeFleet} from './LunarTradeFleet';
 // import {LunaSenate} from './LunaSenate';
@@ -60,6 +67,7 @@ import {MareImbriumMine} from './MareImbriumMine';
 import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
 import {MareSerenitatisMine} from './MareSerenitatisMine';
+import {MomentumViriumHabitat} from './MomentumViriumHabitat';
 // import {MicrosingularityPlant} from './MicrosingularityPlant';
 // import {MiningComplex} from './MiningComplex';
 // import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
@@ -69,7 +77,11 @@ import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
+import {SphereHabitats} from './SphereHabitats';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
+import {TheWomb} from './TheWomb';
+import {TychoRoadNetwork} from './TychoRoadNetwork';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 // import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
@@ -107,19 +119,19 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
     {cardName: CardName.MARE_SERENITATIS_MINE, Factory: MareSerenitatisMine},
-    // {cardName: CardName.HABITAT_14, Factory: Habitat14},
+    {cardName: CardName.HABITAT_14, Factory: Habitat14},
     //   // These cards have behavior and rendering.
-    //   {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
-    //   {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},
-    //   {cardName: CardName.THE_WOMB, Factory: TheWomb},
-    //   {cardName: CardName.TYCHO_ROAD_NETWORK, Factory: TychoRoadNetwork},
-    //   {cardName: CardName.ARISTARCHUS_ROAD_NETWORK, Factory: AristarchusRoadNetwork},
-    //   {cardName: CardName.SINUS_IRIDIUM_ROAD_NETWORK, Factory: SinusIridiumRoadNetwork},
-    //   {cardName: CardName.MOMENTUM_VIRUM_HABITAT, Factory: MomentumViriumHabitat},
-    //   {cardName: CardName.LUNA_TRADE_STATION, Factory: LunaTradeStation},
-    //   {cardName: CardName.LUNA_MINING_HUB, Factory: LunaMiningHub},
-    //   {cardName: CardName.LUNA_TRAIN_STATION, Factory: LunaTrainStation},
-    //   {cardName: CardName.COLONIST_SHUTTLES, Factory: ColonistShuttles},
+    {cardName: CardName.GEODESIC_TENTS, Factory: GeodesicTents},
+    {cardName: CardName.SPHERE_HABITATS, Factory: SphereHabitats},
+    {cardName: CardName.THE_WOMB, Factory: TheWomb},
+    {cardName: CardName.TYCHO_ROAD_NETWORK, Factory: TychoRoadNetwork},
+    {cardName: CardName.ARISTARCHUS_ROAD_NETWORK, Factory: AristarchusRoadNetwork},
+    {cardName: CardName.SINUS_IRIDIUM_ROAD_NETWORK, Factory: SinusIridiumRoadNetwork},
+    {cardName: CardName.MOMENTUM_VIRUM_HABITAT, Factory: MomentumViriumHabitat},
+    // {cardName: CardName.LUNA_TRADE_STATION, Factory: LunaTradeStation},
+    // {cardName: CardName.LUNA_MINING_HUB, Factory: LunaMiningHub},
+    // {cardName: CardName.LUNA_TRAIN_STATION, Factory: LunaTrainStation},
+    {cardName: CardName.COLONIST_SHUTTLES, Factory: ColonistShuttles},
     {cardName: CardName.LUNAR_DUST_PROCESSING_PLANT, Factory: LunarDustProcessingPlant},
     //   {cardName: CardName.DEEP_LUNAR_MINING, Factory: DeepLunarMining},
     //   {cardName: CardName.ANCIENT_SHIPYARDS, Factory: AncientShipyards},

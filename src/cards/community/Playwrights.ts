@@ -45,7 +45,7 @@ export class Playwrights implements CorporationCard {
             if (cardIndex !== -1) player.playedCards.splice(cardIndex, 1);
           });
 
-          const cost = player.getCardCost(game, selectedCard);
+          const cost = player.getCardCost(selectedCard);
           game.defer(new SelectHowToPayDeferred(
             player,
             cost,
@@ -90,7 +90,7 @@ export class Playwrights implements CorporationCard {
       game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
-            player.canAfford(player.getCardCost(game, card)) &&
+            player.canAfford(player.getCardCost(card)) &&
             (card.canPlay === undefined || card.canPlay(player, game));
         }));
       });

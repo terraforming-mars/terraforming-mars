@@ -65,7 +65,7 @@ export class LavaFlows extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
     }
 
     return canPlaceTile;

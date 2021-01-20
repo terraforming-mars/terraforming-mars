@@ -23,7 +23,7 @@ export class AerospaceMission extends PreludeCard {
     });
   }
 
-  public canPlay(player: Player, _game: Game) {
+  public canPlay(player: Player) {
     return player.canAfford(14);
   }
 

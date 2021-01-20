@@ -20,7 +20,7 @@ describe('GMOContract', function() {
         expect(card.canPlay(player, game)).is.true;
       }
       card.play();
-      card.onCardPlayed(player, game, card);
+      card.onCardPlayed(player, card);
       game.deferredActions.runNext();
       expect(player.megaCredits).to.eq(2);
     }

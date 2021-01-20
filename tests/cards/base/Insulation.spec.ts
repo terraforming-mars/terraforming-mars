@@ -10,13 +10,13 @@ describe('Insulation', function() {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     expect(card.canPlay(player)).is.false;
     player.addProduction(Resources.HEAT);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
     if (action === undefined) return;
     action.cb(1);

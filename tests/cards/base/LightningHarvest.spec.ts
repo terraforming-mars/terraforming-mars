@@ -7,13 +7,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('LightningHarvest', function() {
-  let card : LightningHarvest; let player : Player; let game : Game;
+  let card : LightningHarvest; let player : Player;
 
   beforeEach(function() {
     card = new LightningHarvest();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -24,7 +24,7 @@ describe('LightningHarvest', function() {
     player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
 

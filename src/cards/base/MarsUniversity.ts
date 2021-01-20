@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -31,10 +30,10 @@ export class MarsUniversity extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
     for (let i = 0; i < scienceTags; i++) {
-      game.defer(new DeferredAction(
+      player.game.defer(new DeferredAction(
         player,
         () => {
           // No card to discard
@@ -44,7 +43,7 @@ export class MarsUniversity extends Card implements IProjectCard {
           return new OrOptions(
             new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-              game.dealer.discard(foundCards[0]);
+              player.game.dealer.discard(foundCards[0]);
               player.drawCard();
               return undefined;
             }),

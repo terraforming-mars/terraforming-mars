@@ -35,10 +35,10 @@ describe('MartianZoo', function() {
   });
 
   it('Should act', function() {
-    card.onCardPlayed(player, game, new LunaGovernor());
+    card.onCardPlayed(player, new LunaGovernor());
     expect(card.canAct()).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(player.megaCredits).to.eq(2);
     expect(card.resourceCount).to.eq(2);
   });

@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CorporationCard} from './../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
@@ -36,27 +35,27 @@ export class Vitor extends Card implements CorporationCard {
     });
   }
 
-  private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
+  private selectAwardToFund(player: Player, award: IAward): SelectOption {
     return new SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
-      game.fundAward(player, award);
+      player.game.fundAward(player, award);
       return undefined;
     });
   }
 
-  public initialAction(player: Player, game: Game) {
+  public initialAction(player: Player) {
     // Awards are disabled for 1 player games
-    if (game.isSoloMode()) {
+    if (player.game.isSoloMode()) {
       return;
     }
     const freeAward = new OrOptions();
     freeAward.title = 'Select award to fund';
     freeAward.buttonLabel = 'Confirm';
-    freeAward.options = game.awards.map((award) => this.selectAwardToFund(player, game, award));
+    freeAward.options = player.game.awards.map((award) => this.selectAwardToFund(player, award));
     return freeAward;
   }
 
-  public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-    if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player) >= 0) {
       player.megaCredits += 3;
     }
   }

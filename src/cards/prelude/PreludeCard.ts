@@ -24,7 +24,7 @@ export abstract class PreludeCard extends Card implements IProjectCard {
     });
   }
   public abstract play(player: Player, game: Game): PlayerInput | undefined;
-  public canPlay(_player: Player, _game: Game): boolean {
+  public canPlay(_player: Player): boolean {
     return true;
   }
 }

@@ -35,7 +35,7 @@ describe('CommercialDistrict', function() {
     const adjacent = game.board.getAdjacentSpaces(action.availableSpaces[0]);
     adjacent[0].tile = {tileType: TileType.CITY, card: card.name};
     adjacent[0].player = player;
-    expect(card.getVictoryPoints(player, game)).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(action.availableSpaces[0].adjacency?.bonus).eq(undefined);
   });
 });

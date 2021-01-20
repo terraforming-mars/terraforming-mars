@@ -19,7 +19,7 @@ describe('MoonBoard', function() {
 
   it('getAdjacentSpaces', () => {
     expect(board.getAdjacentSpaces(board.getSpace('m01'))).is.empty;
-    expect(board.getAdjacentSpaces(board.getSpace('m02')).map((s) => s.id)).deep.eq(['m03', 'm05', 'm06']);
+    expect(board.getAdjacentSpaces(board.getSpace('m02')).map((s) => s.id)).deep.eq(['m03', 'm06', 'm05']);
   });
 
   it('getAdjacentSpaces', () => {

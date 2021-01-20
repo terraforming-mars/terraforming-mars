@@ -1679,11 +1679,10 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Public for testing
   public getPlayableStandardProjects(): Array<StandardProjectCard> {
     // TODO(kberg): Filter playability based on the project's reserve units.
-    // TODO: Make standard projects static for the game.
     return new CardLoader(this.game.gameOptions)
-      .getStandardProjects().sort((a, b) => a.cost - b.cost)
-      .filter((card) => card.canAct(this, this.game))
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT);
+      .getStandardProjects()
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .sort((a, b) => a.cost - b.cost);
   }
 
   private getPlayableStandardProjectOption(): PlayerInput | undefined {
@@ -1696,7 +1695,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Standard projects',
       'Confirm',
       standardProjects,
-      (card) => card[0].action(this, this.game),
+      (card) => card[0].action(this),
     );
   }
 
@@ -1917,7 +1916,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();
     if (sellPatents.canAct(this)) {
-      action.options.push(sellPatents.action(this, game));
+      action.options.push(sellPatents.action(this));
     }
 
     // Propose undo action only if you have done one action this turn

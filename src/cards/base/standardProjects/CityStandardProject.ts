@@ -1,7 +1,6 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {Resources} from '../../../Resources';
@@ -24,12 +23,12 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    return player.canAfford(this.cost) && game.board.getAvailableSpacesForCity(player).length > 0;
+  public canAct(player: Player): boolean {
+    return player.canAfford(this.cost) && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
-  actionEssence(player: Player, game: Game): void {
-    game.defer(new PlaceCityTile(player));
+  actionEssence(player: Player): void {
+    player.game.defer(new PlaceCityTile(player));
     player.addProduction(Resources.MEGACREDITS);
   }
 }

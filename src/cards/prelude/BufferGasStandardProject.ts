@@ -1,7 +1,6 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -23,13 +22,13 @@ export class BufferGasStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    if (game.isSoloMode() === false || game.gameOptions.soloTR === false) {
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode() === false || player.game.gameOptions.soloTR === false) {
       return false;
     }
 
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost);
   }

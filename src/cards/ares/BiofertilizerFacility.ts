@@ -23,7 +23,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
       name: CardName.BIOFERTILIZER_FACILITY,
       tags: [Tags.MICROBE, Tags.BUILDING],
       cost: 12,
-      productionDelta: Units.of({plants: 1}),
+      productionBox: Units.of({plants: 1}),
 
       metadata: {
         description: 'Requires 1 science tag. Increase your plant production 1 step. ' +

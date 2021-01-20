@@ -16,7 +16,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       name: CardName.SPACE_ELEVATOR,
       tags: [Tags.SPACE, Tags.BUILDING],
       cost: 27,
-      productionDelta: Units.of({titanium: 1}),
+      productionBox: Units.of({titanium: 1}),
 
       metadata: {
         cardNumber: '203',

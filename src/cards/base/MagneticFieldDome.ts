@@ -19,7 +19,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_DOME,
       tags: [Tags.BUILDING],
       cost: 5,
-      productionDelta: Units.of({energy: -2, plants: 1}),
+      productionBox: Units.of({energy: -2, plants: 1}),
 
       metadata: {
         cardNumber: '171',

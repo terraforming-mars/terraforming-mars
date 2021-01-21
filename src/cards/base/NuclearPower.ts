@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,7 +15,7 @@ export class NuclearPower extends Card implements IProjectCard {
       name: CardName.NUCLEAR_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 10,
-      productionDelta: Units.of({energy: 3, megacredits: -2}),
+      productionBox: Units.of({energy: 3, megacredits: -2}),
 
       metadata: {
         cardNumber: '045',
@@ -34,7 +33,7 @@ export class NuclearPower extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -3;
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     if (player.getProduction(Resources.MEGACREDITS) < -3) {
       throw 'Not enough mega credit production';
     }

@@ -24,4 +24,5 @@ export const LANGUAGES = [
   {'id': 'fr', 'title': 'French'},
   {'id': 'ru', 'title': 'Russian'},
   {'id': 'cn', 'title': 'Chinese'},
+  {'id': 'pl', 'title': 'Polish'},
 ];

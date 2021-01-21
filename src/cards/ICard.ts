@@ -36,10 +36,10 @@ export interface ICard {
     canAct?: (player: Player, game: Game) => boolean;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
     getRequirementBonus?: (player: Player, venusOnly?: boolean) => number;
-    getVictoryPoints?: (player: Player, game: Game) => number;
-    onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
+    getVictoryPoints?: (player: Player) => number;
+    onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
-    onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
+    onTilePlaced?: (player: Player, space: ISpace) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;

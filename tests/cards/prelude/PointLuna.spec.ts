@@ -8,20 +8,20 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('PointLuna', function() {
-  let card : PointLuna; let player : Player; let game : Game;
+  let card : PointLuna; let player : Player;
 
   beforeEach(function() {
     card = new PointLuna();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 
   it('Gets card when earth tag played', function() {
-    card.onCardPlayed(player, game, new Ants());
+    card.onCardPlayed(player, new Ants());
     expect(player.cardsInHand).has.lengthOf(0);
 
-    card.onCardPlayed(player, game, new EarthCatapult());
+    card.onCardPlayed(player, new EarthCatapult());
     expect(player.cardsInHand).has.lengthOf(1);
   });
 

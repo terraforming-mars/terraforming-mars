@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -29,7 +28,7 @@ export class LightningHarvest extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
     player.addProduction(Resources.MEGACREDITS);
     return undefined;

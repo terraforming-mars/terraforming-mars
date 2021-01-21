@@ -19,7 +19,7 @@ export class StripMine extends Card implements IProjectCard {
       name: CardName.STRIP_MINE,
       tags: [Tags.BUILDING],
       cost: 25,
-      productionDelta: Units.of({energy: -2, steel: 2, titanium: 1}),
+      productionBox: Units.of({energy: -2, steel: 2, titanium: 1}),
 
       metadata: {
         cardNumber: '138',
@@ -41,7 +41,7 @@ export class StripMine extends Card implements IProjectCard {
     const requiredMC = REDS_RULING_POLICY_COST * stepsRaised;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + requiredMC, game, true) && player.canAfford(requiredMC) && hasEnergyProduction;
+      return player.canAfford(player.getCardCost(this) + requiredMC, game, true) && player.canAfford(requiredMC) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;

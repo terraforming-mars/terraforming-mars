@@ -19,7 +19,7 @@ export class Windmills extends Card implements IProjectCard {
       name: CardName.WINDMILLS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
-      productionDelta: Units.of({energy: 1}),
+      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '168',

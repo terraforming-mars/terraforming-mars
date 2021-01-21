@@ -46,7 +46,7 @@ export class ProjectWorkshop implements CorporationCard {
         'Select',
         () => {
           if (activeCards.length === 1) {
-            this.convertCardPointsToTR(player, game, activeCards[0]);
+            this.convertCardPointsToTR(player, activeCards[0]);
             this.discardPlayedCard(player, game, activeCards[0]);
             player.drawCard(2);
             return undefined;
@@ -57,7 +57,7 @@ export class ProjectWorkshop implements CorporationCard {
             'Discard',
                     activeCards as Array<ICard>,
                     (foundCards: Array<ICard>) => {
-                      this.convertCardPointsToTR(player, game, foundCards[0]);
+                      this.convertCardPointsToTR(player, foundCards[0]);
                       this.discardPlayedCard(player, game, foundCards[0]);
                       player.drawCard(2);
                       return undefined;
@@ -78,9 +78,9 @@ export class ProjectWorkshop implements CorporationCard {
       return new OrOptions(drawBlueCard, flipBlueCard);
     }
 
-    private convertCardPointsToTR(player: Player, game: Game, card: ICard) {
+    private convertCardPointsToTR(player: Player, card: ICard) {
       if (card.getVictoryPoints !== undefined) {
-        const steps = card.getVictoryPoints(player, game);
+        const steps = card.getVictoryPoints(player);
         player.increaseTerraformRatingSteps(steps);
         LogHelper.logTRIncrease(player, steps);
       }

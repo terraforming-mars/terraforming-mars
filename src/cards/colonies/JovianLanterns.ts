@@ -28,7 +28,7 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
       const meetsTagRequirements = player.getTagCount(Tags.JOVIAN) >= 1;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsTagRequirements;
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTagRequirements;
       }
 
       return meetsTagRequirements;

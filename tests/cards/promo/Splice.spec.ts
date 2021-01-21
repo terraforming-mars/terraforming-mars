@@ -10,13 +10,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Splice', function() {
-  let card : Splice; let player : Player; let player2 : Player; let game : Game;
+  let card : Splice; let player : Player; let player2 : Player;
 
   beforeEach(function() {
     card = new Splice();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -27,7 +27,7 @@ describe('Splice', function() {
     player.corporationCard = card;
 
     player2.playedCards.push(card2);
-    const action = card.onCardPlayed(player2, game, card2);
+    const action = card.onCardPlayed(player2, card2);
     expect(action instanceof OrOptions).is.true;
     if ( ! (action instanceof OrOptions)) return;
 
@@ -48,7 +48,7 @@ describe('Splice', function() {
     expect(play).is.undefined;
     expect(play2).is.undefined;
 
-    const action = card.onCardPlayed(player2, game, card2);
+    const action = card.onCardPlayed(player2, card2);
     expect(action).is.undefined;
     expect(player.megaCredits).to.eq(4);
     expect(player2.megaCredits).to.eq(4);

@@ -7,13 +7,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('InterstellarColonyShip', function() {
-  let card : InterstellarColonyShip; let player : Player; let game : Game;
+  let card : InterstellarColonyShip; let player : Player;
 
   beforeEach(function() {
     card = new InterstellarColonyShip();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -24,7 +24,7 @@ describe('InterstellarColonyShip', function() {
     player.playedCards.push(new Research(), new Research(), new GeneRepair());
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(4);
   });

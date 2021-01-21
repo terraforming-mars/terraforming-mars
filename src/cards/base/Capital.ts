@@ -54,10 +54,10 @@ export class Capital extends Card implements IProjectCard {
         game.checkMinRequirements(player, GlobalParameter.OCEANS, 4) &&
         game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public getVictoryPoints(_player: Player, game: Game) {
-    const usedSpace = game.board.getSpaceByTileCard(this.name);
+  public getVictoryPoints(player: Player) {
+    const usedSpace = player.game.board.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return game.board.getAdjacentSpaces(usedSpace)
+      return player.game.board.getAdjacentSpaces(usedSpace)
         .filter((s) => Board.isOceanSpace(s)).length;
     }
     return 0;

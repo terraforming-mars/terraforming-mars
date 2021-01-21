@@ -19,7 +19,7 @@ export class MareNubiumMine extends Card implements IProjectCard, IMoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 17,
-      productionDelta: Units.of({titanium: 1}),
+      productionBox: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise Mining Rate 1 step.',

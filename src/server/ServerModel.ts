@@ -353,7 +353,7 @@ function getCards(
     resources: showResouces ? player.getResourcesOnCard(card) : undefined,
     resourceType: card.resourceType,
     name: card.name,
-    calculatedCost: player.getCardCost(player.game, card),
+    calculatedCost: player.getCardCost(card),
     cardType: card.cardType,
     isDisabled: false,
     warning: card.warning,

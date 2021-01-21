@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -27,7 +26,7 @@ export class Meltworks extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
   public canAct(player: Player): boolean {

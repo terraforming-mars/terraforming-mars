@@ -12,8 +12,8 @@ describe('Thorgate', function() {
     const card = new Thorgate();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, game);
+    Game.newInstance('foobar', [player, redPlayer], player);
+    const action = card.play(player);
     expect(action).is.undefined;
     player.corporationCard = card;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
@@ -21,8 +21,8 @@ describe('Thorgate', function() {
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
     const powerPlant = new PowerPlantStandardProject();
     player.megaCredits = powerPlant.cost - 3;
-    expect(powerPlant.canAct(player, game)).eq(true);
+    expect(powerPlant.canAct(player)).eq(true);
     player.megaCredits--;
-    expect(powerPlant.canAct(player, game)).eq(false);
+    expect(powerPlant.canAct(player)).eq(false);
   });
 });

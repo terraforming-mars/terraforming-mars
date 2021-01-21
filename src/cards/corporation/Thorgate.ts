@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {CorporationCard} from './CorporationCard';
 import {Resources} from '../../Resources';
@@ -39,7 +38,7 @@ export class Thorgate extends Card implements CorporationCard {
     }
     return 0;
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
     return undefined;
   }

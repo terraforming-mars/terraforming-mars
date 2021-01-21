@@ -32,7 +32,7 @@ export class IceAsteroid extends Card implements IProjectCard {
     const oceansPlaced = Math.min(remainingOceans, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced, false, true);
     }
 
     return true;

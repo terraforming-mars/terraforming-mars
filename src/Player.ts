@@ -1788,7 +1788,7 @@ export class Player implements ISerializable<SerializedPlayer> {
             this.claimMilestone(milestone));
       if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
     }
-    
+
     // Convert Plants
     const convertPlants = new ConvertPlants();
     if (convertPlants.canAct(this)) {
@@ -1802,7 +1802,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return convertHeat.action(this);
       }));
     }
-    
+
     TurmoilHandler.addPlayerAction(this, this.game, action.options);
 
     if (this.getPlayableActionCards().length > 0) {

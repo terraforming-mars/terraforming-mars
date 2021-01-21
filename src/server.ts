@@ -11,19 +11,19 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
-import {BoardName} from './src/boards/BoardName';
-import {Game, GameId} from './src/Game';
-import {GameLoader} from './src/database/GameLoader';
-import {GameLogs} from './src/routes/GameLogs';
-import {Route} from './src/routes/Route';
-import {Phase} from './src/Phase';
-import {Player} from './src/Player';
-import {Database} from './src/database/Database';
-import {Server} from './src/server/ServerModel';
-import {Cloner} from './src/database/Cloner';
+import {BoardName} from './boards/BoardName';
+import {Game, GameId} from './Game';
+import {GameLoader} from './database/GameLoader';
+import {GameLogs} from './routes/GameLogs';
+import {Route} from './routes/Route';
+import {Phase} from './Phase';
+import {Player} from './Player';
+import {Database} from './database/Database';
+import {Server} from './server/ServerModel';
+import {Cloner} from './database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
-const styles = fs.readFileSync('styles.css');
+const styles = fs.readFileSync('build/styles.css');
 let compressedStyles: undefined | Buffer = undefined;
 const route = new Route();
 const gameLogs = new GameLogs();
@@ -85,7 +85,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else if (req.url.startsWith('/assets/translations.json')) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        res.write(fs.readFileSync('assets/translations.json'));
+        res.write(fs.readFileSync('build/assets/translations.json'));
         res.end();
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
@@ -504,7 +504,7 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
-  readFile('index.html', function(err, data) {
+  readFile('assets/index.html', function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
@@ -521,7 +521,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   if (req.url === '/favicon.ico') {
     res.setHeader('Content-Type', 'image/x-icon');
-    file = 'favicon.ico';
+    file = 'assets/favicon.ico';
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     res.setHeader('Content-Type', 'text/javascript');
     let suffix = '';

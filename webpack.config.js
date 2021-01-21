@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'source-map',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: [
-    './build/script.js',
+    './build/src/script.js',
   ],
   plugins: [new CompressionPlugin()],
   resolve: {
@@ -21,5 +21,5 @@ module.exports = {
   stats: {
     warnings: false,
   },
-  watch: process.env.WATCH_IT !== undefined
+  watch: process.env.WATCH_IT !== undefined,
 };

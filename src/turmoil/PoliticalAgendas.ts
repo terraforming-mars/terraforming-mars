@@ -73,7 +73,7 @@ export class PoliticalAgendas {
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman
   // And a person is the chairman -- the end of this method will just defer selection until later.
-  static setNextAgenda(turmoil: Turmoil, game: Game, agendaStyle: AgendaStyle): void {
+  static setNextAgenda(turmoil: Turmoil, game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): void {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman: string = turmoil.chairman as string;

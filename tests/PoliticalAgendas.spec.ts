@@ -10,6 +10,7 @@ describe('PoliticalAgendas', () => {
     const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.MARS);
     expect(PoliticalAgendas.deserialize(undefined, game.turmoil!)).deep.eq({
+      agendaStyle: 'Standard',
       currentAgenda: {
         bonusId: 'mb01',
         policyId: 'mfp01',

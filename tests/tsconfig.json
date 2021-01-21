@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "outDir": "../build/tests",
-
         "types": ["node", "mocha", "chai"]
     },
     "extends": "../tsconfig.json",

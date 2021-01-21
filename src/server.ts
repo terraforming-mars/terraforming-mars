@@ -85,7 +85,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else if (req.url.startsWith('/assets/translations.json')) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        res.write(fs.readFileSync('build/assets/translations.json'));
+        res.write(fs.readFileSync('build/genfiles/translations.json'));
         res.end();
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');

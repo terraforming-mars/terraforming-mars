@@ -2142,10 +2142,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       if (player.corporationCard instanceof PharmacyUnion) {
-        if (d.corporationCard.isDisabled === true) {
-          player.corporationCard.tags = [];
-          player.corporationCard.isDisabled = true;
-        }
+        player.corporationCard.isDisabled = Boolean(d.corporationCard.isDisabled);
       }
     } else {
       player.corporationCard = undefined;

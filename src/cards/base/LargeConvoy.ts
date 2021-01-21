@@ -27,7 +27,6 @@ export class LargeConvoy extends Card implements IProjectCard {
       name: CardName.LARGE_CONVOY,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 36,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '143',
@@ -45,21 +44,21 @@ export class LargeConvoy extends Card implements IProjectCard {
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, true);
     }
 
     return true;
   }
 
   public play(player: Player, game: Game): PlayerInput | undefined {
-    player.drawCard(game, 2);
+    player.drawCard(2);
 
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
 
     const gainPlants = function() {
       player.plants += 5;
       LogHelper.logGainStandardResource(player, Resources.PLANTS, 5);
-      game.defer(new PlaceOceanTile(player, game));
+      game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
@@ -75,7 +74,7 @@ export class LargeConvoy extends Card implements IProjectCard {
       availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, 4);
         LogHelper.logAddResource(player, targetAnimalCard, 4);
-        game.defer(new PlaceOceanTile(player, game));
+        game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else {
@@ -87,7 +86,7 @@ export class LargeConvoy extends Card implements IProjectCard {
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 4);
             LogHelper.logAddResource(player, foundCards[0], 4);
-            game.defer(new PlaceOceanTile(player, game));
+            game.defer(new PlaceOceanTile(player));
             return undefined;
           },
         ),

@@ -3,7 +3,6 @@ import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -31,7 +30,7 @@ export class InterplanetaryCinematics extends Card implements CorporationCard {
       },
     });
   }
-  public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cardType === CardType.EVENT) {
       player.megaCredits += 2;
     }

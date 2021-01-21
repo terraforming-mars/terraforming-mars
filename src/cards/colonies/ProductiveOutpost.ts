@@ -18,7 +18,7 @@ export class ProductiveOutpost implements IProjectCard {
       game.colonies.forEach((colony) => {
         colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
           // Not using GiveColonyBonus deferred action because it's only for the active player
-          game.defer(new DeferredAction(player, () => colony.giveColonyBonus(game.getPlayerById(owner), game)));
+          game.defer(new DeferredAction(player, () => colony.giveColonyBonus(game.getPlayerById(owner))));
         });
       });
       return undefined;

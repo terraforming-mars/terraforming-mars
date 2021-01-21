@@ -1,8 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
@@ -15,14 +13,12 @@ export class MorningStarInc implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Draw 3 Venus-tag cards';
-    public initialAction(player: Player, game: Game) {
-      const cards = game.drawCardsByTag(Tags.VENUS, 3);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(player, cards);
+    public initialAction(player: Player) {
+      player.drawCard(3, {tag: Tags.VENUS});
       return undefined;
     }
 
-    public getRequirementBonus(_player: Player, _game: Game, venusOnly?: boolean): number {
+    public getRequirementBonus(_player: Player, venusOnly?: boolean): number {
       if (venusOnly !== undefined && venusOnly) return 2;
       return 0;
     }

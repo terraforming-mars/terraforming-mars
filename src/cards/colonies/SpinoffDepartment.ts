@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -14,9 +13,9 @@ export class SpinoffDepartment implements IProjectCard {
     public name = CardName.SPINOFF_DEPARTMENT
     public cardType = CardType.ACTIVE;
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, card: IProjectCard) {
       if (card.cost >= 20) {
-        player.drawCard(game);
+        player.drawCard();
       }
     }
 

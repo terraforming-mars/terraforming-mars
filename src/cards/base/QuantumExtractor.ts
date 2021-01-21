@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -30,10 +29,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 4;
-  }
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tags.SPACE) !== -1) {
       return 2;
     }

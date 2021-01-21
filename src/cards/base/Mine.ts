@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class Mine extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class Mine extends Card implements IProjectCard {
       name: CardName.MINE,
       tags: [Tags.BUILDING],
       cost: 4,
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         description: 'Increase your steel production 1 step.',

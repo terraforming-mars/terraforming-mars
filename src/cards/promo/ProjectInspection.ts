@@ -3,6 +3,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {Playwrights} from '../community/Playwrights';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardMetadata} from '../CardMetadata';
@@ -14,17 +15,17 @@ export class ProjectInspection implements IProjectCard {
     public cost = 0;
     public tags = [];
     public cardType = CardType.EVENT;
-    public hasRequirements = false;
     private getActionCards(player: Player, game: Game): Array<ICard> {
       const result: Array<ICard> = [];
 
-      if (
-        player.corporationCard !== undefined &&
-                player.getActionsThisGeneration().has(player.corporationCard.name) &&
-                player.corporationCard.action !== undefined &&
-                player.corporationCard.canAct !== undefined &&
-                player.corporationCard.canAct(player, game)) {
-        result.push(player.corporationCard);
+      if (player.corporationCard !== undefined && player.getActionsThisGeneration().has(player.corporationCard.name)) {
+        if (player.corporationCard.name !== CardName.PLAYWRIGHTS || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
+          if (player.corporationCard.action !== undefined &&
+              player.corporationCard.canAct !== undefined &&
+              player.corporationCard.canAct(player, game)) {
+            result.push(player.corporationCard);
+          }
+        }
       }
 
       for (const playedCard of player.playedCards) {
@@ -40,13 +41,14 @@ export class ProjectInspection implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      if (this.getActionCards(player, game).length === 0 ) {
+      const actionCards = this.getActionCards(player, game);
+      if (actionCards.length === 0 ) {
         return undefined;
       }
       return new SelectCard(
         'Perform an action from a played card again',
         'Take action',
-        this.getActionCards(player, game),
+        actionCards,
         (foundCards: Array<ICard>) => {
           const foundCard = foundCards[0];
           game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));

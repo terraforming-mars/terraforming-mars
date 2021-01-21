@@ -4,10 +4,10 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class SpaceElevator extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -16,6 +16,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       name: CardName.SPACE_ELEVATOR,
       tags: [Tags.SPACE, Tags.BUILDING],
       cost: 27,
+      productionBox: Units.of({titanium: 1}),
 
       metadata: {
         cardNumber: '203',
@@ -30,14 +31,14 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.TITANIUM);
     return undefined;
   }
   public canAct(player: Player): boolean {
     return player.steel > 0;
   }
-  public action(player: Player, _game: Game) {
+  public action(player: Player) {
     player.steel--;
     player.megaCredits += 5;
     return undefined;

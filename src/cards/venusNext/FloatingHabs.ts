@@ -65,7 +65,7 @@ export class FloatingHabs implements IActionCard, IProjectCard, IResourceCard {
         b.action('Spend 2 MC to add 1 Floater to ANY card', (eb) => {
           eb.megacredits(2).startAction.floaters(1).asterix();
         }).br;
-        b.vpText('1 VP for every 2nd Floater on this card');
+        b.vpText('1 VP for every 2nd Floater on this card.');
       }),
       description: 'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
       victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),

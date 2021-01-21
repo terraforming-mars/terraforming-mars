@@ -25,14 +25,14 @@ export class SpacePortColony implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, game, true, 'Select colony for Space Port Colony'));
+      game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
       player.increaseFleetSize();
       return undefined;
     }
 
-    public getVictoryPoints(_player: Player, game: Game) {
+    public getVictoryPoints(player: Player) {
       let coloniesCount: number = 0;
-      game.colonies.forEach((colony) => {
+      player.game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.length;
       });
       return Math.floor(coloniesCount / 2);

@@ -5,21 +5,24 @@ import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {Units} from '../Units';
 
-interface StaticCardProperties {
+export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;
   cost?: number;
-  hasRequirements?: boolean;
   initialActionText?: string;
   metadata: CardMetadata;
   name: CardName;
   resourceType?: ResourceType;
   startingMegaCredits?: number;
   tags?: Array<Tags>;
+  productionBox?: Units;
 }
 
-const staticCardProperties = new Map<CardName, StaticCardProperties>();
+export const staticCardProperties = new Map<CardName, StaticCardProperties>();
 
 export abstract class Card {
   private readonly properties: StaticCardProperties;
@@ -29,8 +32,8 @@ export abstract class Card {
       if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
-      if (properties.cardType !== CardType.CORPORATION && properties.cost === undefined) {
-        throw new Error('must define cost for non-corporation cards');
+      if (properties.cardType !== CardType.CORPORATION && properties.cardType !== CardType.PRELUDE && properties.cost === undefined) {
+        throw new Error('must define cost for project cards');
       }
       staticCardProperties.set(properties.name, properties);
       staticInstance = properties;
@@ -45,9 +48,6 @@ export abstract class Card {
   }
   public get cost() {
     return this.properties.cost === undefined ? 0 : this.properties.cost;
-  }
-  public get hasRequirements() {
-    return this.properties.hasRequirements;
   }
   public get initialActionText() {
     return this.properties.initialActionText;
@@ -66,5 +66,14 @@ export abstract class Card {
   }
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
+  }
+  public get productionBox(): Units {
+    return this.properties.productionBox || Units.EMPTY;
+  }
+  public canPlay(player: Player, _game?: Game) {
+    if (this.properties.metadata.requirements === undefined) {
+      return true;
+    }
+    return this.properties.metadata.requirements.satisfies(player);
   }
 }

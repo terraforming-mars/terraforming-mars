@@ -17,7 +17,6 @@ export class BribedCommittee extends Card implements IProjectCard {
       name: CardName.BRIBED_COMMITTEE,
       tags: [Tags.EARTH],
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '112',
@@ -29,14 +28,14 @@ export class BribedCommittee extends Card implements IProjectCard {
   }
   public canPlay(player: Player, game: Game): boolean {
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRatingSteps(2, game);
+  public play(player: Player) {
+    player.increaseTerraformRatingSteps(2);
     return undefined;
   }
 

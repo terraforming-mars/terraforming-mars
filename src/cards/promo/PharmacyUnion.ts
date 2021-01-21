@@ -1,12 +1,10 @@
 import {Tags} from '../Tags';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -27,17 +25,16 @@ export class PharmacyUnion implements CorporationCard {
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       this.resourceCount = 2;
-      const cards = game.drawCardsByTag(Tags.SCIENCE, 1);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(player, cards);
-
+      player.drawCard(1, {tag: Tags.SCIENCE});
       return undefined;
     }
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, card: IProjectCard): void {
       if (this.isDisabled) return undefined;
+
+      const game = player.game;
 
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
       const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
@@ -55,14 +52,14 @@ export class PharmacyUnion implements CorporationCard {
                 new SelectOption('Turn it face down to gain 3 TR and lose up to 4 MC', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   this.isDisabled = true;
-                  player.increaseTerraformRatingSteps(3, game);
+                  player.increaseTerraformRatingSteps(3);
                   player.megaCredits -= megaCreditsLost;
                   game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),
                 new SelectOption('Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
-                  player.increaseTerraformRating(game);
+                  player.increaseTerraformRating();
                   player.megaCredits -= megaCreditsLost;
                   game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
                   game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
@@ -92,7 +89,7 @@ export class PharmacyUnion implements CorporationCard {
                   game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
                 } else {
                   this.resourceCount--;
-                  player.increaseTerraformRating(game);
+                  player.increaseTerraformRating();
                   game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                 }
                 return undefined;
@@ -107,7 +104,7 @@ export class PharmacyUnion implements CorporationCard {
               return new OrOptions(
                 new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR', () => {
                   this.isDisabled = true;
-                  player.increaseTerraformRatingSteps(3, game);
+                  player.increaseTerraformRatingSteps(3);
                   game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                   return undefined;
                 }),
@@ -139,8 +136,8 @@ export class PharmacyUnion implements CorporationCard {
       return undefined;
     }
 
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-      return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this.onCardPlayed(player, card as ICard as IProjectCard);
     }
 
     public metadata: CardMetadata = {

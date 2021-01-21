@@ -10,6 +10,7 @@ import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class StripMine extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class StripMine extends Card implements IProjectCard {
       name: CardName.STRIP_MINE,
       tags: [Tags.BUILDING],
       cost: 25,
-      hasRequirements: false,
+      productionBox: Units.of({energy: -2, steel: 2, titanium: 1}),
 
       metadata: {
         cardNumber: '138',
@@ -37,9 +38,10 @@ export class StripMine extends Card implements IProjectCard {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
     const remainingOxygenSteps = MAX_OXYGEN_LEVEL - game.getOxygenLevel();
     const stepsRaised = Math.min(remainingOxygenSteps, 2);
+    const requiredMC = REDS_RULING_POLICY_COST * stepsRaised;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, true) && hasEnergyProduction;
+      return player.canAfford(player.getCardCost(this) + requiredMC, game, true) && player.canAfford(requiredMC) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;

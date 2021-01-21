@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class SolarPower extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class SolarPower extends Card implements IProjectCard {
       name: CardName.SOLAR_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 11,
+      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '113',

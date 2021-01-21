@@ -2,13 +2,9 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
-import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
@@ -29,30 +25,13 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player, game: Game) {
-    const dealtCard = game.dealer.dealCard();
-    const canSelectCard = player.canAfford(player.cardCost);
-    return new SelectCard(
-      canSelectCard ? 'Select card to keep or none to discard' : 'You cannot pay for this card',
-      'Save',
-      [dealtCard],
-      (cards: Array<IProjectCard>) => {
-        if (cards.length === 0 || !canSelectCard) {
-          LogHelper.logCardChange( player, 'discarded', 1);
-          game.dealer.discard(dealtCard);
-          return undefined;
-        }
-        LogHelper.logCardChange( player, 'drew', 1);
-        player.cardsInHand.push(dealtCard);
-        game.defer(new SelectHowToPayDeferred(player, player.cardCost, {title: 'Select how to pay for action'}));
-        return undefined;
-      }, canSelectCard ? 1 : 0, 0,
-    );
+  public action(player: Player) {
+    return player.drawCardKeepSome(1, {paying: true});
   }
 }

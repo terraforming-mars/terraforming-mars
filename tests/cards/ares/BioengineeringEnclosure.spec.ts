@@ -22,33 +22,33 @@ describe('BioengineeringEnclosure', function() {
 
   it('Can\'t play without a science tag', () => {
     expect(card.canPlay(player, game)).is.false;
-    player.playCard(game, new AICentral());
+    player.playCard(new AICentral());
     expect(card.canPlay(player, game)).is.true;
   });
 
   it('Play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player, game);
+    card.play(player);
     expect(card.resourceCount).eq(2);
   });
 
   it('Can\'t move animal if it\'s empty', () => {
-    card.play(player, game);
-    player.playCard(game, animalHost);
+    card.play(player);
+    player.playCard(animalHost);
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
   it('Can\'t move animal if theres not another card', () => {
-    card.play(player, game);
+    card.play(player);
     expect(card.canAct(player)).is.false;
   });
 
   it('Move animal', () => {
     // Set up the cards.
-    player.playCard(game, animalHost);
+    player.playCard(animalHost);
     game.deferredActions.shift();
-    player.playCard(game, card);
+    player.playCard(card);
 
     // Initial expectations that will change after playing the card.
     expect(card.canAct(player)).is.true;
@@ -56,7 +56,7 @@ describe('BioengineeringEnclosure', function() {
     expect(animalHost.resourceCount).eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
-    card.action(player, game);
+    card.action(player);
 
     game.deferredActions.next()!.execute();
 

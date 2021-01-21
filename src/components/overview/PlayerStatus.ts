@@ -52,17 +52,24 @@ export const PlayerStatus = Vue.component('player-status', {
       // any other player show cards container and hide all other
       this.pinPlayer();
     },
-    showLabel: function(): boolean {
-      return this.actionLabel !== ActionLabel.NONE;
-    },
-    getLabelClasses: function(): string {
+    getLabelAndTimerClasses: function(): string {
       const classes: Array<string> = [];
-      const baseClass = 'player-action-status';
+      const baseClass = 'player-action-status-container';
       classes.push(baseClass);
+      if (!this.player.gameOptions.showTimers) {
+        classes.push('no-timer');
+      }
       if (this.actionLabel === ActionLabel.PASSED) {
         classes.push(`${baseClass}--passed`);
       } else if (this.actionLabel === ActionLabel.ACTIVE) {
         classes.push(`${baseClass}--active`);
+      }
+      return classes.join(' ');
+    },
+    getActionStatusClasses: function(): string {
+      const classes: Array<string> = ['player-action-status'];
+      if (this.actionLabel === ActionLabel.NONE) {
+        classes.push('visibility-hidden');
       }
       return classes.join(' ');
     },
@@ -101,27 +108,22 @@ export const PlayerStatus = Vue.component('player-status', {
     },
   },
   template: `
-        <div class="player-status">
-            <div class="player-status-left">
-                <div class="top-row">
-                    <div class="player-view-status" />
-                    <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
-                    <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
-                </div>
-                <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
-                <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
+      <div class="player-status">
+        <div class="player-status-top">
+          <div class="icons-and-count">
+            <div class="played-cards-icons">
+              <div class="played-cards-icon" />
             </div>
-            <div class="player-status-right">
-                <div class="icons-and-count">
-                    <div class="played-cards-icons">
-                        <div class="played-cards-arrow" />
-                        <div class="played-cards-icon" />
-                    </div>
-                    <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
-                </div> 
-                <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
-            </div>
-            <div class="player-status-timer" v-if="player.showTimers"><player-timer :timer="player.timer"/></div>
+            <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
+          </div>
+          <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
         </div>
+        <div class="player-status-bottom">
+          <div :class="getLabelAndTimerClasses()">
+            <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
+            <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+          </div>
+        </div>   
+      </div>
     `,
 });

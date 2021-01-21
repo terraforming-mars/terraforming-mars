@@ -10,6 +10,7 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class Windmills extends Card implements IProjectCard {
   constructor() {
@@ -18,6 +19,7 @@ export class Windmills extends Card implements IProjectCard {
       name: CardName.WINDMILLS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
+      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '168',

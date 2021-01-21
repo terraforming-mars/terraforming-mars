@@ -1,7 +1,5 @@
-
 import {CorporationCard} from './CorporationCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
@@ -23,8 +21,8 @@ export class BeginnerCorporation extends Card implements CorporationCard {
       startingMegaCredits: 42,
     });
   }
-  public play(player: Player, game: Game) {
-    player.drawCard(game, 10);
+  public play(player: Player) {
+    player.drawCard(10);
     return undefined;
   }
 }

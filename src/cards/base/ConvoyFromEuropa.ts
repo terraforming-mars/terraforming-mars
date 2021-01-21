@@ -18,7 +18,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       name: CardName.CONVOY_FROM_EUROPA,
       tags: [Tags.SPACE],
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '161',
@@ -32,15 +31,15 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, true);
     }
 
     return true;
   }
 
   public play(player: Player, game: Game) {
-    player.drawCard(game);
-    game.defer(new PlaceOceanTile(player, game));
+    player.drawCard();
+    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

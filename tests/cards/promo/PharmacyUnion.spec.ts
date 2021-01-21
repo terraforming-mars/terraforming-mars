@@ -44,18 +44,18 @@ describe('PharmacyUnion', function() {
   it('Gains diseases and removes MC when ANY player plays microbe cards', function() {
     player.megaCredits = 8;
     player2.megaCredits = 8;
-    card.play(player, game);
+    card.play(player);
 
     const ants = new Ants();
     player.playedCards.push(ants);
-    card.onCardPlayed(player, game, ants);
+    card.onCardPlayed(player, ants);
     game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(3);
     expect(player.megaCredits).to.eq(4);
 
     const viralEnhancers = new ViralEnhancers();
     player2.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player2, game, viralEnhancers);
+    card.onCardPlayed(player2, viralEnhancers);
     game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(player2.megaCredits).to.eq(8); // should not change
     expect(card.resourceCount).to.eq(4);
@@ -63,11 +63,11 @@ describe('PharmacyUnion', function() {
   });
 
   it('Removes diseases and gives TR only when corp owner plays science cards', function() {
-    card.play(player, game);
+    card.play(player);
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
-    card.onCardPlayed(player, game, searchForLife);
+    card.onCardPlayed(player, searchForLife);
     expect(game.deferredActions).has.lengthOf(1);
     expect(game.deferredActions.next()!.execute()).is.undefined;
     game.deferredActions.shift();
@@ -77,19 +77,19 @@ describe('PharmacyUnion', function() {
 
     const lagrangeObservatory = new LagrangeObservatory();
     player2.playedCards.push(lagrangeObservatory);
-    card.onCardPlayed(player2, game, lagrangeObservatory);
+    card.onCardPlayed(player2, lagrangeObservatory);
     expect(game.deferredActions).has.lengthOf(0);
     expect(card.resourceCount).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);
   });
 
   it('Works correctly with Research', function() {
-    card.play(player, game);
+    card.play(player);
     expect(card.resourceCount).to.eq(2);
 
     const research = new Research();
     player.playedCards.push(research);
-    card.onCardPlayed(player, game, research);
+    card.onCardPlayed(player, research);
     expect(game.deferredActions).has.lengthOf(2);
     expect(game.deferredActions.next()!.execute()).is.undefined;
     game.deferredActions.shift();
@@ -105,7 +105,7 @@ describe('PharmacyUnion', function() {
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
-    card.onCardPlayed(player, game, searchForLife);
+    card.onCardPlayed(player, searchForLife);
     expect(game.deferredActions).has.lengthOf(1);
     expect(player.getPlayedEventsCount()).to.eq(0);
 
@@ -118,7 +118,7 @@ describe('PharmacyUnion', function() {
     expect(player.getPlayedEventsCount()).to.eq(1); // Counts as a played event
 
     // Cannot trigger once per game effect a second time
-    card.onCardPlayed(player, game, searchForLife);
+    card.onCardPlayed(player, searchForLife);
     expect(game.deferredActions).has.lengthOf(0);
     expect(player.getTerraformRating()).to.eq(23);
   });
@@ -131,7 +131,7 @@ describe('PharmacyUnion', function() {
     expect(advancedEcosystems.canPlay(player)).is.true;
 
     card.resourceCount = 0;
-    card.onCardPlayed(player, game, new SearchForLife());
+    card.onCardPlayed(player, new SearchForLife());
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
     orOptions.options[0].cb();
@@ -150,7 +150,7 @@ describe('PharmacyUnion', function() {
     // Another player playing a Science/Microbes card and Pharmacy Union has no resource
     card.resourceCount = 0;
     player2.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player2, game, viralEnhancers);
+    card.onCardPlayed(player2, viralEnhancers);
     game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
@@ -160,7 +160,7 @@ describe('PharmacyUnion', function() {
     // PU player playing a Science/Microbes card and Pharmacy Union has no resource
     card.resourceCount = 0;
     player.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player, game, viralEnhancers);
+    card.onCardPlayed(player, viralEnhancers);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;

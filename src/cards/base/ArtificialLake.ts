@@ -13,7 +13,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class ArtificialLake extends Card implements IProjectCard {
   constructor() {
@@ -33,14 +32,14 @@ export class ArtificialLake extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
+    const meetsRequirements = super.canPlay(player);
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true) && meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, player.game, true) && meetsRequirements;
     }
 
-    return meetsTemperatureRequirements;
+    return meetsRequirements;
   }
   public play(player: Player, game: Game) {
     if (game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;

@@ -17,7 +17,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
-import {StandardProjectCard} from './standardProjects/StandardProjectCard';
+import {StandardProjectCard} from './StandardProjectCard';
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -34,12 +34,12 @@ export interface ICard {
     play: (player: Player, game: Game) => PlayerInput | undefined;
     action?: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
-    getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;
-    getRequirementBonus?: (player: Player, game: Game, venusOnly?: boolean) => number;
-    getVictoryPoints?: (player: Player, game: Game) => number;
-    onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
+    getCardDiscount?: (player: Player, card: IProjectCard) => number;
+    getRequirementBonus?: (player: Player, venusOnly?: boolean) => number;
+    getVictoryPoints?: (player: Player) => number;
+    onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
-    onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
+    onTilePlaced?: (player: Player, space: ISpace) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;
@@ -48,3 +48,4 @@ export interface ICard {
     metadata: CardMetadata;
     warning?: string | Message;
 }
+

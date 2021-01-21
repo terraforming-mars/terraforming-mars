@@ -18,17 +18,17 @@ export class EcologyResearch implements IProjectCard {
     public cardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-      const coloniesCount = player.getColoniesCount(game);
+      const coloniesCount = player.getColoniesCount();
       player.addProduction(Resources.PLANTS, coloniesCount);
 
       const animalCards = player.getResourceCards(ResourceType.ANIMAL);
       if (animalCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.ANIMAL, {count: 1}));
+        game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
       }
 
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
       if (microbeCards.length) {
-        game.defer(new AddResourcesToCard(player, game, ResourceType.MICROBE, {count: 2}));
+        game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
       }
 
       return undefined;

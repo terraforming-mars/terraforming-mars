@@ -9,7 +9,6 @@ import {ITile} from '../../src/ITile';
 import {SpaceType} from '../../src/SpaceType';
 import {Resources} from '../../src/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
-import {IProductionUnits} from '../../src/inputs/IProductionUnits';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {fail} from 'assert';
@@ -19,6 +18,8 @@ import {Phase} from '../../src/Phase';
 import {TestPlayers} from '../TestingUtils';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
+import {Random} from '../../src/Random';
+import {Units} from '../../src/Units';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -29,7 +30,7 @@ describe('AresHandler', function() {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    game.board = new EmptyBoard();
+    game.board = EmptyBoard.newInstance();
   });
 
 
@@ -141,7 +142,7 @@ describe('AresHandler', function() {
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
     const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(1);
-    input.cb({plants: 1} as IProductionUnits);
+    input.cb(Units.of({plants: 1}));
     expect(player.getProduction(Resources.PLANTS)).eq(6);
   });
 
@@ -164,7 +165,7 @@ describe('AresHandler', function() {
 
     const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(2);
-    input.cb({plants: 2} as IProductionUnits);
+    input.cb(Units.of({plants: 2}));
     expect(player.getProduction(Resources.PLANTS)).eq(5);
   });
 
@@ -259,7 +260,7 @@ describe('AresHandler', function() {
 
     // The key two lines
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
-    new DesperateMeasures().play(player, game).cb(protectedDustStorm);
+    new DesperateMeasures().play(player).cb(protectedDustStorm);
 
     const priorTr = player.getTerraformRating();
 
@@ -333,7 +334,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(false, 0, false);
+    game.board = OriginalBoard.newInstance(false, new Random(0), false);
     const space = game.board.getSpaces(SpaceType.OCEAN).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

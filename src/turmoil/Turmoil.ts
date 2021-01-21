@@ -274,13 +274,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
 
         this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
-        if (this.chairman !== 'NEUTRAL') {
-          const player = game.getPlayerById(this.chairman);
-          player.increaseTerraformRating(game);
-          game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
-        } else {
-          game.log('A neutral delegate is the new chairman.');
-        }
 
         const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
         // Remove the party leader from the delegates array
@@ -293,15 +286,24 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.rulingParty.delegates = [];
 
         PoliticalAgendas.setNextAgenda(this, game, this.politicalAgendasData.agendaStyle);
+
+        // Finally, award Chairman TR
+        if (this.chairman !== 'NEUTRAL') {
+          const player = game.getPlayerById(this.chairman);
+          player.increaseTerraformRating();
+          game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
+        } else {
+          game.log('A neutral delegate is the new chairman.');
+        }
       }
     }
 
     // Called either directly during generation change, or after asking chairperson player
     // to choose an agenda.
     public onAgendaSelected(game: Game): void {
-      // Resolve Ruling Bonus
       const rulingParty = this.rulingParty;
 
+      // Resolve Ruling Bonus
       const bonusId = this.politicalAgendasData.currentAgenda.bonusId;
       const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
       if (bonus === undefined) {

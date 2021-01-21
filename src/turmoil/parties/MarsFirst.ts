@@ -14,7 +14,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {LogHelper} from '../../LogHelper';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -58,8 +57,8 @@ class MarsFirstPolicy01 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY;
   description: string = 'When you place a tile ON MARS, gain 1 steel';
 
-  onTilePlaced(player: Player, space: ISpace, game: Game) {
-    if (space.tile && space.spaceType !== SpaceType.COLONY && game.phase === Phase.ACTION) {
+  onTilePlaced(player: Player, space: ISpace) {
+    if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
       player.setResource(Resources.STEEL);
     }
   }
@@ -90,7 +89,8 @@ class MarsFirstPolicy04 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
@@ -100,9 +100,7 @@ class MarsFirstPolicy04 implements Policy {
       {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
-          const card = game.drawCardsByTag(Tags.BUILDING, 1);
-          player.cardsInHand.push(...card);
-          LogHelper.logDrawnCards(player, card);
+          player.drawCard(1, {tag: Tags.BUILDING});
         },
       },
     ));

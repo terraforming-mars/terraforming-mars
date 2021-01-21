@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -14,7 +13,6 @@ export class TechnologyDemonstration extends Card implements IProjectCard {
       name: CardName.TECHNOLOGY_DEMONSTRATION,
       tags: [Tags.SCIENCE, Tags.SPACE],
       cost: 5,
-
       metadata: {
         cardNumber: '204',
         renderData: CardRenderer.builder((b) => {
@@ -24,8 +22,8 @@ export class TechnologyDemonstration extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    player.drawCard(game, 2);
+  public play(player: Player) {
+    player.drawCard(2);
     return undefined;
   }
 }

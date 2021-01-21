@@ -82,7 +82,7 @@ export class PoliticalAgendas {
       politicalAgendasData.currentAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, chairman);
       turmoil.onAgendaSelected(game);
     } else {
-      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, game, turmoil));
+      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, turmoil));
     }
   }
 

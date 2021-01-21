@@ -19,7 +19,7 @@ describe('ByElection', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
@@ -27,7 +27,11 @@ describe('ByElection', function() {
     subOptions.cb();
 
     const turmoil = game.turmoil!;
+    turmoil.chairman = player.id;
     expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);
-    expect(turmoil.rulingParty!.name).to.eq(PartyName.MARS);
+
+    const rulingParty = turmoil.rulingParty;
+    expect(rulingParty.name).to.eq(PartyName.MARS);
+    expect(turmoil.politicalAgendasData!.currentAgenda).deep.eq({bonusId: 'mb01', policyId: 'mfp01'});
   });
 });

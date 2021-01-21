@@ -1,4 +1,3 @@
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectAmount} from '../inputs/SelectAmount';
@@ -7,7 +6,6 @@ import {DeferredAction} from './DeferredAction';
 export class DryDesertsDeferredAction implements DeferredAction {
   constructor(
         public player: Player,
-        public game: Game,
         public count: number = 1,
         public title: string = 'Dry Deserts Global Event - Gain ' + count + ' resource(s) for influence',
   ) {}

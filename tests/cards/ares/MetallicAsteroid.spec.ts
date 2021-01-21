@@ -24,7 +24,7 @@ describe('MetallicAsteroid', function() {
     expect(game.getTemperature()).eq(-30);
     expect(game.deferredActions).has.lengthOf(0);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(player.titanium).eq(1);
     expect(game.getTemperature()).eq(-28);
     // This interrupt is for removing four plants. Not going to do further

@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -26,7 +25,7 @@ export class EarthOffice extends Card implements IProjectCard {
     });
   }
 
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;
   }
 

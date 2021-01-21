@@ -23,7 +23,7 @@ describe('EquatorialMagnetizer', function() {
     player.addProduction(Resources.ENERGY);
     expect(card.canAct(player, game)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getTerraformRating()).to.eq(21);
   });

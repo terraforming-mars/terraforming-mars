@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../ResourceType';
@@ -36,10 +35,10 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
 
     public resourceCount: number = 0;
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, card: IProjectCard) {
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
       for (let i = 0; i < scienceTags; i++) {
-        game.defer(new DeferredAction(
+        player.game.defer(new DeferredAction(
           player,
           () => {
             // Can't remove a resource
@@ -50,7 +49,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
             return new OrOptions(
               new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
                 player.removeResourceFrom(this);
-                player.drawCard(game);
+                player.drawCard();
                 return undefined;
               }),
               new SelectOption('Add a science resource to this card', 'Add resource', () => {

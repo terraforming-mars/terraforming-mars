@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -26,10 +25,7 @@ export class GeneRepair extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3;
-  }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     if (player.getTagCount(Tags.SCIENCE) < 3) {
       throw 'Requires 3 science tags.';
     }

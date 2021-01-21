@@ -13,17 +13,17 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {setCustomGameOptions} from '../TestingUtils';
-import {BuildColonyStandard} from '../../src/cards/standardProjects/BuildColony';
+import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonyStandardProject';
 
 const gameOptions = setCustomGameOptions({coloniesExtension: true});
 
-function isBuildColonyStandardProjectAvailable(player: Player, game: Game) {
-  return new BuildColonyStandard().canAct(player, game);
+function isBuildColonyStandardProjectAvailable(player: Player) {
+  return new BuildColonyStandardProject().canAct(player);
 }
 
-function isTradeWithColonyActionAvailable(player: Player, game: Game) {
+function isTradeWithColonyActionAvailable(player: Player) {
   let tradeWithColonyIsAvailable = false;
-  player.takeAction(game);
+  player.takeAction();
   const actions = player.getWaitingFor()! as OrOptions;
   actions.options.forEach((option) => {
     if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
@@ -51,17 +51,17 @@ describe('Colony', function() {
     expect(luna.colonies).has.lengthOf(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
 
-    luna.addColony(player, game);
+    luna.addColony(player);
     expect(luna.colonies).has.lengthOf(1);
     expect(luna.colonies[0]).to.eq(player.id);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    luna.addColony(player2, game);
+    luna.addColony(player2);
     expect(luna.colonies).has.lengthOf(2);
     expect(luna.colonies[1]).to.eq(player2.id);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    luna.addColony(player3, game);
+    luna.addColony(player3);
     expect(luna.colonies).has.lengthOf(3);
     expect(luna.colonies[2]).to.eq(player3.id);
     expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(2);
@@ -88,24 +88,24 @@ describe('Colony', function() {
 
   it('Should push the trackPosition if a colony is built on it', function() {
     expect(luna.trackPosition).to.eq(1);
-    luna.addColony(player, game);
+    luna.addColony(player);
     expect(luna.trackPosition).to.eq(1);
-    luna.addColony(player2, game);
+    luna.addColony(player2);
     expect(luna.trackPosition).to.eq(2);
-    luna.addColony(player3, game);
+    luna.addColony(player3);
     expect(luna.trackPosition).to.eq(3);
   });
 
   it('Should decrease trackPosition after trade', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
-    luna.trade(player, game);
+    luna.trade(player);
     game.deferredActions.runAll(() => {});
     expect(luna.trackPosition).to.eq(0);
 
-    luna.addColony(player, game);
-    luna.addColony(player2, game);
+    luna.addColony(player);
+    luna.addColony(player2);
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
-    luna.trade(player, game);
+    luna.trade(player);
     game.deferredActions.runAll(() => {});
     expect(luna.trackPosition).to.eq(2);
   });
@@ -126,7 +126,7 @@ describe('Colony', function() {
     for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
       player.megaCredits = 0;
       luna.trackPosition = i;
-      luna.trade(player, game);
+      luna.trade(player);
       game.deferredActions.runAll(() => {});
       expect(player.megaCredits).to.eq(income[i]);
     }
@@ -135,7 +135,7 @@ describe('Colony', function() {
   it('Should give trade bonus to players with colonies only', function() {
     // No colonies
     luna.trackPosition = 3; // 7 MC
-    luna.trade(player, game);
+    luna.trade(player);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(7);
     expect(player2.megaCredits).to.eq(0);
@@ -145,8 +145,8 @@ describe('Colony', function() {
     // 1 colony
     player.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.addColony(player, game);
-    luna.trade(player, game);
+    luna.addColony(player);
+    luna.trade(player);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(9);
     expect(player2.megaCredits).to.eq(0);
@@ -156,8 +156,8 @@ describe('Colony', function() {
     // 2 colonies
     player.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.addColony(player2, game);
-    luna.trade(player2, game);
+    luna.addColony(player2);
+    luna.trade(player2);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(9);
@@ -168,8 +168,8 @@ describe('Colony', function() {
     player.megaCredits = 0;
     player2.megaCredits = 0;
     luna.trackPosition = 3; // 7 MC
-    luna.addColony(player3, game);
-    luna.trade(player4, game);
+    luna.addColony(player3);
+    luna.trade(player4);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(2);
@@ -179,11 +179,11 @@ describe('Colony', function() {
 
   it('Should give trade bonus for each colony a player has', function() {
     luna.trackPosition = 3; // 7 MC
-    luna.addColony(player, game);
-    luna.addColony(player, game);
-    luna.addColony(player, game);
+    luna.addColony(player);
+    luna.addColony(player);
+    luna.addColony(player);
 
-    luna.trade(player2, game);
+    luna.trade(player2);
     game.deferredActions.runAll(() => {});
     expect(player.megaCredits).to.eq(6);
     expect(player2.megaCredits).to.eq(7);
@@ -192,67 +192,67 @@ describe('Colony', function() {
   });
 
   it('Should let player build a colony only if they can afford it', function() {
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
     player.megaCredits = 17;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players build a colony if they already have one', function() {
     player.megaCredits = 17;
 
-    luna.addColony(player2, game);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    luna.addColony(player2);
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
-    luna.addColony(player, game);
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    luna.addColony(player);
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Shouldn\'t let players build a colony if colony tile is full', function() {
     player.megaCredits = 17;
     expect(luna.isColonyFull()).to.be.false;
 
-    luna.addColony(player2, game);
+    luna.addColony(player2);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
-    luna.addColony(player3, game);
+    luna.addColony(player3);
     expect(luna.isColonyFull()).to.be.false;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.true;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
 
-    luna.addColony(player4, game);
+    luna.addColony(player4);
     expect(luna.isColonyFull()).to.be.true;
-    expect(isBuildColonyStandardProjectAvailable(player, game)).to.be.false;
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
   it('Should let players trade only if they can afford it', function() {
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.megaCredits = 9;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.megaCredits = 0;
     player.energy = 3;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.energy = 0;
     player.titanium = 3;
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
   it('Shouldn\'t let players trade if they have no fleet', function() {
     player.titanium = 3;
 
-    luna.trade(player, game);
-    expect(isTradeWithColonyActionAvailable(player, game)).to.be.false;
+    luna.trade(player);
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
   it('Shouldn\'t let players trade with colonies that have already been traded with', function() {
     player.titanium = 3;
     player2.titanium = 3;
 
-    luna.trade(player, game);
-    expect(isTradeWithColonyActionAvailable(player2, game)).to.be.false;
+    luna.trade(player);
+    expect(isTradeWithColonyActionAvailable(player2)).to.be.false;
   });
 
   it('Testing GiveTradeBonus Deferred Action', function() {
@@ -262,10 +262,10 @@ describe('Colony', function() {
     player3.cardsInHand.push(card);
 
     const pluto = new Pluto();
-    pluto.addColony(player, game);
-    pluto.addColony(player2, game);
-    pluto.addColony(player3, game);
-    pluto.trade(player4, game);
+    pluto.addColony(player);
+    pluto.addColony(player2);
+    pluto.addColony(player3);
+    pluto.trade(player4);
 
     let callbackWasCalled = false;
     game.deferredActions.runAll(() => {
@@ -275,17 +275,17 @@ describe('Colony', function() {
 
     const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
     expect(input).to.be.an.instanceof(SelectCard);
-    player.process(game, [['Dust Seals']]); // Discard a card
+    player.process([['Dust Seals']]); // Discard a card
     expect(callbackWasCalled).to.be.false;
 
     const input2 = player2.getWaitingFor()! as SelectCard<IProjectCard>;
     expect(input2).to.be.an.instanceof(SelectCard);
-    player2.process(game, [['Dust Seals']]); // Discard a card
+    player2.process([['Dust Seals']]); // Discard a card
     expect(callbackWasCalled).to.be.false;
 
     const input3 = player3.getWaitingFor()! as SelectCard<IProjectCard>;
     expect(input3).to.be.an.instanceof(SelectCard);
-    player3.process(game, [['Dust Seals']]); // Discard a card
+    player3.process([['Dust Seals']]); // Discard a card
     expect(callbackWasCalled).to.be.true;
   });
 });

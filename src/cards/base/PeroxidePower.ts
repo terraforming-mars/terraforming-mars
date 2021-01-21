@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class PeroxidePower extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +15,7 @@ export class PeroxidePower extends Card implements IProjectCard {
       name: CardName.PEROXIDE_POWER,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 7,
-      hasRequirements: false,
+      productionBox: Units.of({energy: 2, megacredits: -1}),
 
       metadata: {
         cardNumber: '089',

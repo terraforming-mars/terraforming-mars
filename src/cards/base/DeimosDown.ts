@@ -18,7 +18,6 @@ export class DeimosDown extends Card implements IProjectCard {
       name: CardName.DEIMOS_DOWN,
       tags: [Tags.SPACE],
       cost: 31,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '039',
@@ -37,7 +36,7 @@ export class DeimosDown extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
     }
 
     return true;
@@ -45,7 +44,7 @@ export class DeimosDown extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     game.increaseTemperature(player, 3);
-    game.defer(new RemoveAnyPlants(player, game, 8));
+    game.defer(new RemoveAnyPlants(player, 8));
     player.steel += 4;
     return undefined;
   }

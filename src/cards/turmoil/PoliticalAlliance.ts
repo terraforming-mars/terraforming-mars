@@ -22,15 +22,15 @@ export class PoliticalAlliance implements IProjectCard {
         const meetsPartyLeaderRequirements = parties.length > 1;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
         }
         return meetsPartyLeaderRequirements;
       }
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRating(game);
+    public play(player: Player) {
+      player.increaseTerraformRating();
       return undefined;
     }
 

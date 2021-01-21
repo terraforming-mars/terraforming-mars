@@ -8,12 +8,11 @@ import {TestPlayers} from '../../TestingUtils';
 describe('IndenturedWorkers', function() {
   let card: IndenturedWorkers;
   let player: Player;
-  let game: Game;
 
   beforeEach(() => {
     card = new IndenturedWorkers();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player, TestPlayers.RED.newPlayer()], player);
+    Game.newInstance('foobar', [player, TestPlayers.RED.newPlayer()], player);
   });
 
   it('play', () => {
@@ -21,24 +20,24 @@ describe('IndenturedWorkers', function() {
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
-    expect(card.getCardDiscount(player, game)).to.eq(0);
+    expect(card.getCardDiscount(player)).to.eq(0);
   });
 
   it('Should apply card discount until next card played', () => {
-    player.playCard(game, card);
-    expect(card.getCardDiscount(player, game)).to.eq(8);
+    player.playCard(card);
+    expect(card.getCardDiscount(player)).to.eq(8);
 
-    player.playCard(game, new MicroMills());
+    player.playCard(new MicroMills());
 
-    expect(card.getCardDiscount(player, game)).to.eq(0);
+    expect(card.getCardDiscount(player)).to.eq(0);
   });
 
   it('Change in generation disables Indentured Workers', () => {
-    player.playCard(game, card);
-    expect(card.getCardDiscount(player, game)).to.eq(8);
+    player.playCard(card);
+    expect(card.getCardDiscount(player)).to.eq(8);
 
-    player.pass(game);
+    player.pass();
 
-    expect(card.getCardDiscount(player, game)).to.eq(0);
+    expect(card.getCardDiscount(player)).to.eq(0);
   });
 });

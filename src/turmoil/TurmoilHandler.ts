@@ -1,6 +1,4 @@
-import {ISpace} from '../boards/ISpace';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DrawCards} from '../deferredActions/DrawCards';
 import {Game} from '../Game';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
@@ -32,7 +30,7 @@ export class TurmoilHandler {
           new SelectOption(
             scientistsPolicy.description,
             'Pay',
-            () => scientistsPolicy.action(player, game),
+            () => scientistsPolicy.action(player),
           ),
         );
       }
@@ -47,7 +45,7 @@ export class TurmoilHandler {
           new SelectOption(
             kelvinistsPolicy.description,
             'Pay',
-            () => kelvinistsPolicy.action(player, game),
+            () => kelvinistsPolicy.action(player),
           ),
         );
       }
@@ -62,7 +60,7 @@ export class TurmoilHandler {
           new SelectOption(
             kelvinistsPolicy.description,
             'Pay',
-            () => kelvinistsPolicy.action(player, game),
+            () => kelvinistsPolicy.action(player),
           ),
         );
       }
@@ -77,7 +75,7 @@ export class TurmoilHandler {
           new SelectOption(
             greensPolicy.description,
             'Pay',
-            () => greensPolicy.action(player, game),
+            () => greensPolicy.action(player),
           ),
         );
       }
@@ -92,7 +90,7 @@ export class TurmoilHandler {
           new SelectOption(
             marsFirstPolicy.description,
             'Pay',
-            () => marsFirstPolicy.action(player, game),
+            () => marsFirstPolicy.action(player),
           ),
         );
       }
@@ -107,7 +105,7 @@ export class TurmoilHandler {
           new SelectOption(
             unityPolicy.description,
             'Pay',
-            () => unityPolicy.action(player, game),
+            () => unityPolicy.action(player),
           ),
         );
       }
@@ -122,7 +120,7 @@ export class TurmoilHandler {
           new SelectOption(
             unityPolicy.description,
             'Pay',
-            () => unityPolicy.action(player, game),
+            () => unityPolicy.action(player),
           ),
         );
       }
@@ -132,42 +130,42 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
       const redsPolicy = REDS_POLICY_3;
 
-      if (redsPolicy.canAct(player, game)) {
+      if (redsPolicy.canAct(player)) {
         options.push(
           new SelectOption(
             redsPolicy.description,
             'Pay',
-            () => redsPolicy.action(player, game),
+            () => redsPolicy.action(player),
           ),
         );
       }
     }
   }
 
-  public static applyOnCardPlayedEffect(player: Player, game: Game, selectedCard: IProjectCard): void {
+  public static applyOnCardPlayedEffect(player: Player, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
       const policy = GREENS_POLICY_3;
       policy.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
       const policy = MARS_FIRST_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }
   }
 
-  public static resolveTilePlacementCosts(game: Game, player: Player, space: ISpace): void {
+  public static resolveTilePlacementCosts(game: Game, player: Player): void {
     // PoliticalAgendas Reds P2 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && game.phase === Phase.ACTION) {
       const redsPolicy = REDS_POLICY_2;
-      redsPolicy.onTilePlaced(player, space, game);
+      redsPolicy.onTilePlaced(player);
     }
   }
 
   public static resolveTilePlacementBonuses(game: Game, player: Player, spaceType: SpaceType): void {
-    PartyHooks.applyMarsFirstRulingPolicy(game, player, spaceType);
+    PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
 
     // PoliticalAgendas Greens P2 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && game.phase === Phase.ACTION) {
@@ -197,7 +195,7 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Scientists P3 hook
     if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
-      game.defer(new DrawCards(player, game, steps));
+      player.drawCard(steps);
     }
   }
 }

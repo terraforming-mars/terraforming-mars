@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class FusionPower extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class FusionPower extends Card implements IProjectCard {
       name: CardName.FUSION_POWER,
       tags: [Tags.SCIENCE, Tags.ENERGY, Tags.BUILDING],
       cost: 14,
+      productionBox: Units.of({energy: 3}),
 
       metadata: {
         cardNumber: '132',

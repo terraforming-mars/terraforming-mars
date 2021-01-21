@@ -8,6 +8,7 @@ import {SpaceType} from '../SpaceType';
 import {PreferencesManager} from './PreferencesManager';
 // @ts-ignore
 import {$t} from '../directives/i18n';
+import {SpaceId} from '../boards/ISpace';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -78,7 +79,7 @@ export const Board = Vue.component('board', {
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById: function(spaceId: string) {
+    getSpaceById: function(spaceId: SpaceId) {
       for (const space of this.spaces) {
         if (space.id === spaceId) {
           return space;

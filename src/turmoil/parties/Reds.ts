@@ -5,7 +5,6 @@ import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
@@ -31,13 +30,13 @@ class RedsBonus01 implements Bonus {
     const players = game.getPlayers();
 
     if (game.isSoloMode() && players[0].getTerraformRating() <= 20) {
-      players[0].increaseTerraformRating(game);
+      players[0].increaseTerraformRating();
     } else {
       players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
       const min = players[0].getTerraformRating();
 
       while (players.length > 0 && players[0].getTerraformRating() === min) {
-        players[0].increaseTerraformRating(game);
+        players[0].increaseTerraformRating();
         players.shift();
       }
     }
@@ -77,13 +76,13 @@ class RedsPolicy02 implements Policy {
   description: string = 'When you place a tile, pay 3 MC or as much as possible';
   isDefault = false;
 
-  onTilePlaced(player: Player, _space: ISpace, game: Game) {
+  onTilePlaced(player: Player) {
     let amountPlayerHas: number = player.megaCredits;
     if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
-      game.defer(new SelectHowToPayDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
+      player.game.defer(new SelectHowToPayDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
     }
   }
 }
@@ -93,7 +92,8 @@ class RedsPolicy03 implements Policy {
   description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
 
-  canAct(player: Player, game: Game) {
+  canAct(player: Player) {
+    const game = player.game;
     if (game.marsIsTerraformed()) return false;
 
     const temperature = game.getTemperature();
@@ -108,7 +108,8 @@ class RedsPolicy03 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
@@ -138,7 +139,7 @@ class RedsPolicy03 implements Policy {
 
           if (canRemoveOcean) {
             orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
-              game.defer(new RemoveOceanTile(player, game, 'Turmoil Reds action - Remove an Ocean tile from the board'));
+              game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
               return undefined;
             }));
           }

@@ -22,7 +22,6 @@ export class Flooding extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '188',
@@ -39,7 +38,7 @@ export class Flooding extends Card implements IProjectCard {
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
     return true;
@@ -47,20 +46,26 @@ export class Flooding extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     if (game.isSoloMode()) {
-      game.defer(new PlaceOceanTile(player, game));
+      game.defer(new PlaceOceanTile(player));
       return undefined;
     }
+
+    const oceansMaxedBeforePlacement = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    if (oceansMaxedBeforePlacement === true) return undefined;
+
     return new SelectSpace(
       'Select space for ocean tile',
       game.board.getAvailableSpacesForOcean(player),
       (space: ISpace) => {
         const adjacentPlayers: Set<Player> = new Set<Player>();
         game.addOceanTile(player, space.id);
+
         game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
             adjacentPlayers.add(space.player);
           }
         });
+
         if (adjacentPlayers.size > 0) {
           return new OrOptions(
             new SelectPlayer(

@@ -18,7 +18,6 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       name: CardName.TERRAFORMING_GANYMEDE,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 33,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '197',
@@ -34,14 +33,14 @@ export class TerraformingGanymede extends Card implements IProjectCard {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * steps, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, game, false, true);
     }
 
     return true;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    player.increaseTerraformRatingSteps(steps, game);
+    player.increaseTerraformRatingSteps(steps);
     LogHelper.logTRIncrease(player, steps);
 
     return undefined;

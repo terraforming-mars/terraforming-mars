@@ -5,8 +5,20 @@ import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
+/**
+ * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
+ *
+ * It also includes additional spaces, known as Colonies, that are not adjacent to other spaces.
+ */
 export abstract class Board {
-  public abstract spaces: Array<ISpace>;
+  private maxX: number = 0;
+  private maxY: number = 0;
+  protected constructor(public spaces: Array<ISpace>) {
+    spaces.forEach((space) => {
+      this.maxX = Math.max(this.maxX, space.x);
+      this.maxY = Math.max(this.maxY, space.y);
+    });
+  };
 
   public abstract getVolcanicSpaceIds(): Array<string>;
 
@@ -21,13 +33,15 @@ export abstract class Board {
     return space;
   }
 
+  // getAdjacentSpaces expects an odd number of rows. If a funny shape appears, it can be addressed.
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+    const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
-      if (space.y < 0 || space.y > 8) {
-        throw new Error('Unexpected space y value');
+      if (space.y < 0 || space.y > this.maxY) {
+        throw new Error('Unexpected space y value: ' + space.y);
       }
-      if (space.x < 0 || space.x > 8) {
-        throw new Error('Unexpected space x value');
+      if (space.x < 0 || space.x > this.maxX) {
+        throw new Error('Unexpected space x value: ' + space.x);
       }
       const leftSpace: Array<number> = [space.x - 1, space.y];
       const rightSpace: Array<number> = [space.x + 1, space.y];
@@ -35,10 +49,10 @@ export abstract class Board {
       const topRightSpace: Array<number> = [space.x, space.y - 1];
       const bottomLeftSpace: Array<number> = [space.x, space.y + 1];
       const bottomRightSpace: Array<number> = [space.x, space.y + 1];
-      if (space.y < 4) {
+      if (space.y < middleRow) {
         bottomLeftSpace[0]--;
         topRightSpace[0]++;
-      } else if (space.y === 4) {
+      } else if (space.y === middleRow) {
         bottomRightSpace[0]++;
         topRightSpace[0]++;
       } else {
@@ -140,15 +154,6 @@ export abstract class Board {
     return landSpaces;
   }
 
-  protected shuffle(input: Array<ISpace>): Array<ISpace> {
-    const out: Array<ISpace> = [];
-    const copy = input.slice();
-    while (copy.length) {
-      out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
-    }
-    return out;
-  }
-
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
   // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
@@ -163,6 +168,9 @@ export abstract class Board {
       return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
     }).filter(predicate);
     let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+    if (spaces.length === 0) {
+      throw new Error('no spaces available');
+    }
     while (idx < 0) {
       idx += spaces.length;
     }
@@ -182,14 +190,6 @@ export abstract class Board {
 
   public canPlaceTile(space: ISpace): boolean {
     return space.tile === undefined && space.spaceType === SpaceType.LAND;
-  }
-
-  public getForestSpace(spaces: Array<ISpace>): ISpace {
-    const space = this.shuffle(spaces).find((s) => this.canPlaceTile(s));
-    if (space === undefined) {
-      throw new Error('Did not find space for forest');
-    }
-    return space;
   }
 
   public static isCitySpace(space: ISpace): boolean {
@@ -220,10 +220,7 @@ export abstract class Board {
   }
 
   public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
-    // TODO(kberg): Remove Player by 2021-01-15
-    const playerSpace : PlayerId | Player | undefined = serialized.player;
-    const playerId: PlayerId | undefined =
-        (typeof playerSpace === 'string') ? playerSpace : playerSpace?.id;
+    const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space = {
       id: serialized.id,

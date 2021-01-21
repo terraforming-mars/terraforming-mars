@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -25,9 +24,9 @@ export class ButterflyEffect extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRating(game);
-    game.defer(new ShiftAresGlobalParametersDeferred(game, player));
+  public play(player: Player) {
+    player.increaseTerraformRating();
+    player.game.defer(new ShiftAresGlobalParametersDeferred(player));
     return undefined;
   }
 }

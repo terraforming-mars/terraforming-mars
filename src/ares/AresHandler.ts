@@ -183,7 +183,6 @@ export class AresHandler {
       if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
         player.game.defer(new AddResourcesToCard(
           player,
-          player.game,
           resourceType,
         ));
       }
@@ -340,7 +339,7 @@ export class AresHandler {
     default:
       return;
     }
-    player.increaseTerraformRatingSteps(steps, player.game);
+    player.increaseTerraformRatingSteps(steps);
     player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
   }
 }

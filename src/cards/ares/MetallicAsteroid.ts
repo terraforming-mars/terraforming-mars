@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -32,13 +31,13 @@ export class MetallicAsteroid extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.titanium++;
-    game.increaseTemperature(player, 1);
-    game.defer(new RemoveAnyPlants(player, game, 4));
+    player.game.increaseTemperature(player, 1);
+    player.game.defer(new RemoveAnyPlants(player, 4));
 
-    return new SelectSpace('Select space for Biofertilizer Facility tile', game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-      game.addTile(player, SpaceType.LAND, space, {
+    return new SelectSpace('Select space for Biofertilizer Facility tile', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
+      player.game.addTile(player, SpaceType.LAND, space, {
         tileType: TileType.METALLIC_ASTEROID,
         card: this.name,
       });

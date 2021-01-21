@@ -18,7 +18,6 @@ export class TowingAComet extends Card implements IProjectCard {
       name: CardName.TOWING_A_COMET,
       tags: [Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '075',
@@ -36,13 +35,13 @@ export class TowingAComet extends Card implements IProjectCard {
     const totalSteps = oxygenStep + oceanStep;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
     }
 
     return true;
   }
   public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, game));
+    game.defer(new PlaceOceanTile(player));
     player.plants += 2;
     return game.increaseOxygenLevel(player, 1);
   }

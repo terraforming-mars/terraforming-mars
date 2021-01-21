@@ -24,13 +24,16 @@ export const PlayerTags = Vue.component('player-tags', {
 
   methods: {
     showColonyCount: function(): boolean {
-      return this.player.coloniesExtension;
+      return this.player.gameOptions.coloniesExtension;
     },
     showInfluence: function(): boolean {
       return this.player.turmoil !== undefined;
     },
     showVenus: function(): boolean {
-      return this.player.venusNextExtension;
+      return this.player.gameOptions.venusNextExtension;
+    },
+    showMoon: function(): boolean {
+      return this.player.gameOptions.moonExpansion;
     },
     getTagsPlaceholders: function() {
       const tags: {[x: string]: Tags | SpecialTags} = {...Tags, ...SpecialTags};
@@ -42,6 +45,9 @@ export const PlayerTags = Vue.component('player-tags', {
       }
       if (this.showVenus() === false) {
         delete tags.VENUS;
+      }
+      if (this.showMoon() === false) {
+        delete tags.MOON;
       }
       return tags;
     },
@@ -58,7 +64,7 @@ export const PlayerTags = Vue.component('player-tags', {
       return this.player.victoryPointsBreakdown.total;
     },
     hideVpCount: function(): boolean {
-      return !this.player.showOtherPlayersVP && !this.isActivePlayer;
+      return !this.player.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
     },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;

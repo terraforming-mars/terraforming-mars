@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Game} from '../src/Game';
-import {Unity} from '../src/turmoil/parties/Unity';
 import {MarsFirst} from '../src/turmoil/parties/MarsFirst';
 import {Phase} from '../src/Phase';
 import {OrOptions} from '../src/inputs/OrOptions';
@@ -25,16 +24,18 @@ import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
-import {Greenery} from '../src/cards/standardProjects/Greenery';
+import {GreeneryStandardProject} from '../src/cards/base/standardProjects/GreeneryStandardProject';
+import {CardName} from '../src/CardName';
 
 describe('Turmoil', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil;
+  let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -109,32 +110,33 @@ describe('Turmoil', function() {
     // parties, changing the dominant party outcome.
     turmoil.parties.forEach((p) => p.delegates = []);
 
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+    player.setTerraformRating(20);
+    player2.setTerraformRating(21);
+
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.endGeneration(game);
-    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
 
-    expect(turmoil.lobby.size).to.eq(1);
-    expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.MARS));
+    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
+    // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(player2.getTerraformRating()).to.eq(20);
+
+    expect(turmoil.lobby.size).to.eq(2);
+    expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
   });
 
-  it('Check ruling policy: Unity', function() {
-    setRulingParty(turmoil, game, new Unity());
-    game.phase = Phase.ACTION;
-    expect(player.getTitaniumValue(game)).to.eq(4);
-  });
-
   it('Does not give Mars First bonus for World Government terraforming', function() {
-    setRulingParty(turmoil, game, new MarsFirst());
+    setRulingParty(turmoil, game, player.id, new MarsFirst());
     game.phase = Phase.SOLAR;
 
-    player.worldGovernmentTerraforming(game);
+    player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
@@ -144,25 +146,25 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
-    setRulingParty(turmoil, game, new Reds());
+    setRulingParty(turmoil, game, player.id, new Reds());
     player.megaCredits = 14;
-    const availableStandardProjects = player.getAvailableStandardProjects(game);
+    const availableStandardProjects = player.getPlayableStandardProjects();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(availableStandardProjects.cards).has.lengthOf(1);
+    expect(availableStandardProjects.map((c) => c.name)).deep.eq([CardName.POWER_PLANT_STANDARD_PROJECT]);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
-    setRulingParty(turmoil, game, new Reds());
+    setRulingParty(turmoil, game, player.id, new Reds());
     player.megaCredits = 23;
-    expect(new Greenery().canAct(player, game)).equal(false);
+    expect(new GreeneryStandardProject().canAct(player)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    expect(new Greenery().canAct(player, game)).equal(true);
+    expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
-    setRulingParty(turmoil, game, new Reds());
+    setRulingParty(turmoil, game, player.id, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
     const jovianEmbassy = new JovianEmbassy();
@@ -177,7 +179,7 @@ describe('Turmoil', function() {
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
-    setRulingParty(turmoil, game, new Reds());
+    setRulingParty(turmoil, game, player.id, new Reds());
     player.megaCredits = 25;
     const iceAsteroid = new IceAsteroid();
     const protectedValley = new ProtectedValley();
@@ -192,7 +194,7 @@ describe('Turmoil', function() {
   });
 
   it('Applies card discounts when checking canPlay while Reds are ruling', function() {
-    setRulingParty(turmoil, game, new Reds());
+    setRulingParty(turmoil, game, player.id, new Reds());
     const nitrogenFromTitan = new NitrogenFromTitan();
 
     player.megaCredits = 29;
@@ -319,8 +321,9 @@ describe('Turmoil', function() {
     expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
 
-  function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {
+  function setRulingParty(turmoil: Turmoil, game: Game, playerId: string, party: IParty) {
     turmoil.rulingParty = party;
+    turmoil.chairman = playerId;
     PoliticalAgendas.setNextAgenda(turmoil, game);
   }
 });

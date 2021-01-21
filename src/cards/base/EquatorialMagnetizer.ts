@@ -19,7 +19,6 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
       name: CardName.EQUATORIAL_MAGNETIZER,
       tags: [Tags.BUILDING],
       cost: 11,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '015',
@@ -43,9 +42,9 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
 
     return hasEnergyProduction;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     return undefined;
   }
 }

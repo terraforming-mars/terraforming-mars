@@ -22,12 +22,15 @@ describe('WildlifeDome', function() {
 
   it('Should play: reds', function() {
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
+    game.turmoil!.chairman = player.id;
+
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     expect(card.canPlay(player, game)).is.not.true;
   });
 
   it('Should play: greens', function() {
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
+    game.turmoil!.chairman = player.id;
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
 
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;

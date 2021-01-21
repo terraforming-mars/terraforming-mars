@@ -9,6 +9,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class UndergroundCity extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +18,7 @@ export class UndergroundCity extends Card implements IProjectCard {
       name: CardName.UNDERGROUND_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      hasRequirements: false,
+      productionBox: Units.of({energy: -2, steel: 2}),
 
       metadata: {
         cardNumber: '032',

@@ -12,7 +12,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
   constructor() {
@@ -40,10 +39,6 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
 
     public resourceCount: number = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 11);
-    }
-
     public getVictoryPoints(): number {
       return this.resourceCount;
     }
@@ -54,11 +49,11 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
 
     public canAct(player: Player, game: Game): boolean {
       if (game.isSoloMode()) return true;
-      return RemoveResourcesFromCard.getAvailableTargetCards(player, game, ResourceType.ANIMAL).length > 0;
+      return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
     }
 
     public action(player: Player, game: Game) {
-      game.defer(new RemoveResourcesFromCard(player, game, ResourceType.ANIMAL));
+      game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
       game.defer(new DeferredAction(
         player,
         () => {

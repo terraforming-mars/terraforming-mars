@@ -29,7 +29,9 @@ describe('GiantSolarShade', function() {
   });
 
   it('Should play with Reds and Dirigibles', function() {
-    game.turmoil!.rulingParty = new Reds();
+    player.game.turmoil!.rulingParty = new Reds();
+    player.game.turmoil!.chairman = player.id;
+
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     player.megaCredits = 27;
     expect(card.canPlay(player, game)).is.not.true;

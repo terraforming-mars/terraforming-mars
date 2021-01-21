@@ -85,7 +85,7 @@ describe('StratosphericBirds', function() {
 
     // 12 MC + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
-    const SelectHowToPayForProjectCard = player.playProjectCard(game);
+    const SelectHowToPayForProjectCard = player.playProjectCard();
     expect(card.canPlay(player, game)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
@@ -108,7 +108,7 @@ describe('StratosphericBirds', function() {
     (game as any).venusScaleLevel = 12;
     player.megaCredits = 3;
 
-    const selectHowToPayForCard = player.playProjectCard(game);
+    const selectHowToPayForCard = player.playProjectCard();
     expect(card.canPlay(player, game)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card

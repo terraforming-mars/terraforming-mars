@@ -18,7 +18,6 @@ export class IceAsteroid extends Card implements IProjectCard {
       name: CardName.ICE_ASTEROID,
       tags: [Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '078',
@@ -33,15 +32,15 @@ export class IceAsteroid extends Card implements IProjectCard {
     const oceansPlaced = Math.min(remainingOceans, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * oceansPlaced, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced, game, false, true);
     }
 
     return true;
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, game, 'Select space for first ocean'));
-    game.defer(new PlaceOceanTile(player, game, 'Select space for second ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
+    game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;
   }
 }

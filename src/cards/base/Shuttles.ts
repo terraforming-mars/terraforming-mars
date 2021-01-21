@@ -3,12 +3,10 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
@@ -37,10 +35,10 @@ export class Shuttles extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 5) && player.getProduction(Resources.ENERGY) >= 1;
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tags.SPACE) !== -1) {
       return 2;
     }

@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -12,7 +11,7 @@ import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {Units} from '../../Units';
 
 export class OceanFarm extends Card implements IProjectCard {
   constructor() {
@@ -21,6 +20,7 @@ export class OceanFarm extends Card implements IProjectCard {
       name: CardName.OCEAN_FARM,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 15,
+      productionBox: Units.of({plants: 1, heat: 1}),
 
       metadata: {
         cardNumber: 'A21',
@@ -36,20 +36,16 @@ export class OceanFarm extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
-  }
-
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.HEAT, 1);
     player.addProduction(Resources.PLANTS, 1);
 
     return new SelectSpace(
       'Select space for Ocean Farm',
-      game.board.getOceansTiles(false),
+      player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        game.removeTile(space.id);
-        game.addTile(player, space.spaceType, space, {
+        player.game.removeTile(space.id);
+        player.game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_FARM,
           card: this.name,
         });

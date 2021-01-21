@@ -31,9 +31,6 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.JOVIAN) >= 1;
-  }
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 3);
     player.addProduction(Resources.ENERGY, 3);

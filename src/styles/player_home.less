@@ -171,6 +171,10 @@
     margin-left: 0px;
     background-position: -2px;
 }
+.tag-event-separate {
+    border-left: 2px solid rgba(170, 170, 170, 0.5);
+    padding-left: 8px;
+}
 
 .tag-cards {
     background-image: url("./assets/sidebar/preferences_cards.png"); 
@@ -784,6 +788,7 @@
     margin: -40px 0 0 auto;
     z-index: 20;
     top: -12px;
+    display: flex;
 
     .top-bar-collapser {
         background: #303030;
@@ -791,16 +796,20 @@
         vertical-align: middle;
         padding: 8px 14px 8px 11px;
         border-radius: 0 10px 10px 0;
-        margin: -43px 0 0 -5px;
+        height: 46px;
         cursor: pointer;
+        margin-top: 12px;
 
         img {
             width: 20px;
         }
     }
 
-    .player-status {
+    .player-status, .player-info-top {
         display: none !important;
+    }
+    .player-info-bottom {
+        background: #303030 !important; 
     }
 
     .player-info {
@@ -823,10 +832,68 @@
     }
 
     .top-bar-collapser {
-        margin: 11px 0 0 auto;
+        margin: 11px 0 0 0;
 
         img {
             transform: scaleX(-1);
         }
+    }
+}
+
+.hiding-card-button-row {
+    display: flex;
+    flex-flow: row;   
+}
+
+.hiding-card-button {
+    display: flex;
+    width: fit-content;
+    padding: 2px 4px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    padding: 0px 8px;
+
+    &.active {
+        background-color: rgba(47,146,225, 0.75);
+    }
+    &.automated {
+        background-color: rgba(13,176,11, 0.75);
+    }
+    &.event {
+        background-color: rgba(237,106,21, 0.75);
+    }
+    &.active-transparent {
+        background-color: rgba(47,146,225, 0.5);
+    }
+    &.automated-transparent {
+        background-color: rgba(13,176,11, 0.5);
+    }
+    &.event-transparent {
+        background-color: rgba(237,106,21,0.5);
+    }
+}
+
+.shortkey-no-outline {
+    outline: none;
+}
+
+.select-initial-cards {
+    .megacredits {
+        display: inline-block;
+        font-size: 26px;
+        width: 50px;
+        height: 50px;
+        line-height: 48px;
+        border-radius: 10px;
+        text-align: center;
+        background-image: url(./assets/resources/megacredit.png);
+        background-size: 50px;
+        filter: drop-shadow(0px 0px 1px black);
+        font-family: Prototype;
+        color: #000;
     }
 }

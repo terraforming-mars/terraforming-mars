@@ -6,7 +6,7 @@ const STORAGE_PREFIX = 'cardOrder';
 export class CardOrderStorage {
   public static getCardOrder(playerId: string): {[x: string]: number} {
     try {
-      const order = localStorage.getItem(`${STORAGE_PREFIX}${playerId}`);
+      const order = typeof localStorage === 'undefined' ? null : localStorage.getItem(`${STORAGE_PREFIX}${playerId}`);
       if (order === null) {
         return {};
       }

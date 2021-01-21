@@ -68,7 +68,8 @@ class UnityPolicy02 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
@@ -129,7 +130,8 @@ class UnityPolicy03 implements Policy {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 
-  action(player: Player, game: Game) {
+  action(player: Player) {
+    const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
@@ -139,9 +141,7 @@ class UnityPolicy03 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          const card = game.drawCardsByTag(Tags.SPACE, 1);
-          player.cardsInHand.push(...card);
-          LogHelper.logDrawnCards(player, card);
+          player.drawCard(1, {tag: Tags.SPACE});
         },
       },
     ));

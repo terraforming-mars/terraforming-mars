@@ -17,19 +17,18 @@ export class NitrogenFromTitan implements IProjectCard {
     public tags = [Tags.JOVIAN, Tags.SPACE];
     public name = CardName.NITROGEN_FROM_TITAN;
     public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) : boolean {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2, game, false, true);
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, game, false, true);
       }
 
       return true;
     }
 
     public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
-      game.defer(new AddResourcesToCard(player, game, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+      player.increaseTerraformRatingSteps(2);
+      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }
     public getVictoryPoints() {

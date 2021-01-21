@@ -18,12 +18,12 @@ describe('MarketingExperts', function() {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    game.board = new EmptyBoard();
+    game.board = EmptyBoard.newInstance();
   });
 
   it('Play', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
   });
 

@@ -1,7 +1,5 @@
 import {Tags} from '../Tags';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -21,15 +19,12 @@ export class Splice implements CorporationCard {
     public cardType = CardType.CORPORATION;
 
     public initialActionText: string = 'Draw a card with a microbe tag';
-    public initialAction(player: Player, game: Game) {
-      const cards = game.drawCardsByTag(Tags.MICROBE, 1);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(player, cards);
-
+    public initialAction(player: Player) {
+      player.drawCard(1, {tag: Tags.MICROBE});
       return undefined;
     }
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard | CorporationCard) {
+    public onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
       if (card.tags.indexOf(Tags.MICROBE) === -1) {
         return undefined;
       }
@@ -48,7 +43,7 @@ export class Splice implements CorporationCard {
       });
 
       // Splice owner get 2MC per microbe tag
-      game.getCardPlayer(this.name).megaCredits += megacreditsGain;
+      player.game.getCardPlayer(this.name).megaCredits += megacreditsGain;
 
       // Card player choose between 2 MC and a microbe on card, if possible
       if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {
@@ -59,8 +54,8 @@ export class Splice implements CorporationCard {
       }
     }
 
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-      return this.onCardPlayed(player, game, card as ICard as IProjectCard);
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this.onCardPlayed(player, card as ICard as IProjectCard);
     }
 
     public play() {

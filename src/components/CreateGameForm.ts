@@ -47,6 +47,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
+    moonExpansion: boolean;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -115,8 +116,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
+      moonExpansion: false,
       undoOption: false,
-      showTimers: false,
+      showTimers: true,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
@@ -192,6 +194,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
             if (component.showCardsBlackList) {
               (refs.cardsFilter as any).selectedCardNames = results['cardsBlackList'];
+            }
+
+            if ( ! component.seededGame) {
+              component.seed = Math.random();
             }
           });
         }
@@ -311,6 +317,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
     getPlayerContainerColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
+    showSecretOptions: function(): boolean {
+      const uri = window.location.href.split('?');
+      if (uri.length === 2 && uri[1].indexOf('secret') >= 0) {
+        return true;
+      }
+      return false;
+    },
     serializeSettings: function() {
       const component = (this as any) as CreateGameModel;
 
@@ -376,6 +389,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
+      const moonExpansion = component.moonExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -416,7 +430,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
 
       const dataToSend = JSON.stringify({
-        players: players,
+        players,
         corporateEra,
         prelude,
         draftVariant,
@@ -434,6 +448,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
+        moonExpansion: moonExpansion,
         undoOption,
         showTimers,
         fastModeOption,
@@ -570,6 +585,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div v-if="showSecretOptions()">
+                            <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
+                            <label for="themoon-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                                <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+                            </div>
 
                             <template v-if="turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">

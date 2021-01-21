@@ -1,6 +1,5 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from './common/Button';
 
 interface SelectHowToPayForProjectCardModel {
@@ -16,6 +15,8 @@ interface SelectHowToPayForProjectCardModel {
   microbes: number;
   floaters: number;
   warning: string | undefined;
+  availableSteel: number;
+  availableTitanium: number;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -28,6 +29,8 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+import {TranslateMixin} from './TranslateMixin';
+// import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -75,13 +78,15 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       microbes: 0,
       floaters: 0,
       warning: undefined,
-    } as SelectHowToPayForProjectCardModel;
+      availableSteel: 0,
+      availableTitanium: 0,
+    };
   },
   components: {
     Card,
     Button,
   },
-  mixins: [PaymentWidgetMixin],
+  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
@@ -90,15 +95,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       app.$data.tags = app.getCardTags(),
       app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
-      app.setDefaultMicrobesValue();
-      app.setDefaultFloatersValue();
-      app.setDefaultSteelValue();
-      app.setDefaultTitaniumValue();
-      app.setDefaultHeatValue();
+      app.setDefaultValues();
     });
   },
   methods: {
-    translate: $t,
     getCard: function() {
       const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -113,112 +113,58 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
       return card.tags;
     },
-    setDefaultMicrobesValue: function() {
-      // automatically use available microbes to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits;
-        const requiredMicrobes = Math.ceil(remainingCostToPay / 2);
+    setDefaultValues: function() {
+      this.microbes = 0;
+      this.floaters = 0;
+      this.steel = 0;
+      this.titanium = 0;
+      this.heat = 0;
 
-        if (this.playerinput.microbes !== undefined && requiredMicrobes > this.playerinput.microbes) {
-          this.microbes = this.playerinput.microbes;
-        } else {
-          this.microbes = requiredMicrobes;
+      let megacreditBalance = this.cost - this.player.megaCredits;
+
+      // Calcualtes the optimal number of units to use given the unit value.
+      //
+      // It reads `megacreditBalance` as the remaining balance, and deducts the
+      // consumed balance as part of this method.
+      //
+      // It returns the number of units consumed from availableUnits to make that
+      const deductUnits = function(
+        availableUnits: number | undefined,
+        unitValue: number,
+        overpay: boolean = true): number {
+        if (availableUnits === undefined || availableUnits === 0) {
+          return 0;
         }
+        // The number of units required to sell to meet the balance.
+        const _tmp = megacreditBalance / unitValue;
+        const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
+        const contributingUnits = Math.min(availableUnits, balanceAsUnits);
 
-        const discountedCost = this.cost - (this.microbes * 2);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.microbes = 0;
+        megacreditBalance -= contributingUnits * unitValue;
+        return contributingUnits;
+      };
+
+      if (megacreditBalance > 0 && this.canUseMicrobes()) {
+        this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
-    },
-    setDefaultFloatersValue: function() {
-      // automatically use available floaters to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2);
-        const requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3);
 
-        if (this.playerinput.floaters !== undefined && requiredFloaters > this.playerinput.floaters) {
-          this.floaters = this.playerinput.floaters;
-        } else {
-          this.floaters = requiredFloaters;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.floaters = 0;
+      if (megacreditBalance > 0 && this.canUseFloaters()) {
+        this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
-    },
-    setDefaultSteelValue: function() {
-      // automatically use available steel to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3);
-        let requiredSteelQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.steelValue);
 
-        if (requiredSteelQty > this.player.steel) {
-          this.steel = this.player.steel;
-        } else {
-          // use as much steel as possible without overpaying by default
-          let currentSteelValue = requiredSteelQty * this.player.steelValue;
-          while (currentSteelValue <= remainingCostToPay + this.player.megaCredits - this.player.steelValue && requiredSteelQty < this.player.steel) {
-            requiredSteelQty++;
-            currentSteelValue = requiredSteelQty * this.player.steelValue;
-          }
-
-          this.steel = requiredSteelQty;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.steel = 0;
+      if (megacreditBalance > 0 && this.canUseSteel()) {
+        const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
+        this.steel = deductUnits(availableSteel, this.player.steelValue, false);
       }
-    },
-    setDefaultTitaniumValue: function() {
-      // automatically use available titanium to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue);
-        let requiredTitaniumQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.titaniumValue);
 
-        if (requiredTitaniumQty > this.player.titanium) {
-          this.titanium = this.player.titanium;
-        } else {
-          // use as much titanium as possible without overpaying by default
-          let currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-          while (currentTitaniumValue <= remainingCostToPay + this.player.megaCredits - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
-            requiredTitaniumQty++;
-            currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-          }
-
-          this.titanium = requiredTitaniumQty;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.titanium = 0;
+      if (megacreditBalance > 0 && this.canUseTitanium()) {
+        const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
+        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, false);
       }
-    },
-    setDefaultHeatValue: function() {
-      // automatically use available heat for Helion if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-        const remainingCostToPay = this.cost - this.player.megaCredits - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue);
-        const requiredHeat = Math.max(remainingCostToPay, 0);
 
-        if (requiredHeat > this.player.heat) {
-          this.heat = this.player.heat;
-        } else {
-          this.heat = requiredHeat;
-        }
-
-        const discountedCost = this.cost - (this.microbes * 2) - (this.floaters * 3) - (this.steel * this.player.steelValue) - (this.titanium * this.player.titaniumValue) - this.heat;
-        this.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.heat = 0;
+      if (megacreditBalance > 0 && this.canUseHeat()) {
+        this.heat = deductUnits(this.player.heat, 1);
       }
-    },
-    canAffordWithMcOnly: function() {
-      return this.player.megaCredits >= this.cost;
     },
     canUseHeat: function() {
       return this.playerinput.canUseHeat && this.player.heat > 0;
@@ -240,6 +186,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseMicrobes: function() {
+      // FYI Microbes are limited to the Psychrophiles card, which allows spending micrbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
           return true;
@@ -248,6 +195,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseFloaters: function() {
+      // FYI Floaters are limited to the DIRIGIBLES cards.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
           return true;
@@ -262,17 +210,19 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
-      this.setDefaultMicrobesValue();
-      this.setDefaultFloatersValue();
-      this.setDefaultSteelValue();
-      this.setDefaultTitaniumValue();
-      this.setDefaultHeatValue();
+      this.setDefaultValues();
     },
-    hasWarning: function() {
+    hasWarning: function(): boolean {
       return this.warning !== undefined;
     },
-    hasCardWarning: function() {
+    hasCardWarning: function(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
+    },
+    showReserveSteelWarning: function(): boolean {
+      return this.card?.reserveUnits?.steel > 0;
+    },
+    showReserveTitaniumWarning: function(): boolean {
+      return this.card?.reserveUnits?.titanium > 0;
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -282,7 +232,6 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         titanium: this.titanium,
         microbes: this.microbes,
         floaters: this.floaters,
-        isResearchPhase: false,
       };
       if (htp.megaCredits > this.player.megaCredits) {
         this.warning = 'You don\'t have that many mega credits';
@@ -368,7 +317,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ translate(playerinput.title) }}</div>
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -376,9 +325,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning !== undefined ? translate(this.card.warning) : '' }}</div>
+    <div v-if="hasCardWarning()" class="card-warning">{{ $t(card.warning) }}</div>
 
-    <h3 class="payments_title">How to pay?</h3>
+    <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
@@ -387,17 +336,23 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="plus" :onClick="_=>addValue('steel', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
+    <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
+    (Some steel is not available here because the project card requires some when it is played.)
+    </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
     </div>
+    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
+    (Some titanium is not available here because the project card needs some when it is played.)
+    </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
@@ -405,7 +360,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
+      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
       <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
@@ -413,7 +368,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
+      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
       <Button type="minus" :onClick="_=>reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
@@ -421,14 +376,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

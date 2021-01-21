@@ -3,10 +3,10 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class TitaniumMine extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +15,7 @@ export class TitaniumMine extends Card implements IProjectCard {
       name: CardName.TITANIUM_MINE,
       tags: [Tags.BUILDING],
       cost: 7,
+      productionBox: Units.of({titanium: 1}),
 
       metadata: {
         cardNumber: '144',
@@ -25,7 +26,7 @@ export class TitaniumMine extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.TITANIUM);
     return undefined;
   }

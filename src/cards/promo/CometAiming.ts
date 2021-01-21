@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard, ICard} from '../ICard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
@@ -14,16 +15,32 @@ import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
-    public name = CardName.COMET_AIMING;
-    public cost = 17;
-    public tags = [Tags.SPACE];
-    public resourceType = ResourceType.ASTEROID;
-    public resourceCount: number = 0;
-    public cardType = CardType.ACTIVE;
+export class CometAiming extends Card implements IActionCard, IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.COMET_AIMING,
+      tags: [Tags.SPACE],
+      cost: 17,
+      resourceType: ResourceType.ASTEROID,
+
+      metadata: {
+        cardNumber: 'X15',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 1 titanium to add 1 asteroid resource to ANY CARD.', (eb) => {
+            eb.titanium(1).startAction.asteroids(1).asterix();
+          }).br;
+          b.or().br;
+          b.action('Remove 1 asteroid here to place an ocean.', (eb) => {
+            eb.asteroids(1).startAction.oceans(1);
+          });
+        }),
+      },
+    });
+  }
+    public resourceCount = 0;
 
     public play() {
       return undefined;
@@ -65,7 +82,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       const spendAsteroidResource = () => {
         this.resourceCount--;
         LogHelper.logRemoveResource(player, this, 1, 'place an ocean');
-        game.defer(new PlaceOceanTile(player, game));
+        game.defer(new PlaceOceanTile(player));
         return undefined;
       };
 
@@ -98,17 +115,5 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
       }
 
       return new OrOptions(...availableActions);
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'X15',
-      renderData: CardRenderer.builder((b) => {
-        b.action('Spend 1 titanium to add 1 asteroid resource to ANY CARD.', (eb) => {
-          eb.titanium(1).startAction.asteroids(1).asterix();
-        }).br;
-        b.or().br;
-        b.action('Remove 1 asteroid here to place an ocean.', (eb) => {
-          eb.asteroids(1).startAction.oceans(1);
-        });
-      }),
     }
 }

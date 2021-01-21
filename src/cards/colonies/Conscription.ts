@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -19,7 +18,7 @@ export class Conscription implements IProjectCard {
       return player.getTagCount(Tags.EARTH) >= 2;
     }
 
-    public getCardDiscount(player: Player, _game: Game) {
+    public getCardDiscount(player: Player) {
       if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
         return 16;
       }

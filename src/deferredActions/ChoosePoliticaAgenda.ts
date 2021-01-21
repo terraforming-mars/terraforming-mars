@@ -1,6 +1,5 @@
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {Game} from '../Game';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {DeferredAction} from './DeferredAction';
@@ -13,7 +12,6 @@ export class ChoosePoliticalAgenda implements DeferredAction {
   constructor(
     public player: Player,
     public party: IParty,
-    public game: Game,
     public turmoil: Turmoil,
   ) {}
 
@@ -29,7 +27,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => new SelectOption(bonus.description, 'Select', () => {
       agenda.bonusId = bonus.id;
       this.turmoil.politicalAgendasData.currentAgenda = agenda;
-      this.turmoil.onAgendaSelected(this.game);
+      this.turmoil.onAgendaSelected(this.player.game);
       return undefined;
     }));
     const orBonuses = new OrOptions(...bonuses);
@@ -38,7 +36,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     const policies = this.party.policies.map((policy) => new SelectOption(policy.description, 'Select', () => {
       agenda.policyId = policy.id;
       this.turmoil.politicalAgendasData.currentAgenda = agenda;
-      this.turmoil.onAgendaSelected(this.game);
+      this.turmoil.onAgendaSelected(this.player.game);
       return undefined;
     }));
     const orPolicies = new OrOptions(...policies);

@@ -19,6 +19,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {staticCardProperties} from '../../../src/cards/Card';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
@@ -28,7 +29,7 @@ describe('RoboticWorkforce', function() {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Can\'t play if no building cards to copy', function() {
@@ -93,7 +94,7 @@ describe('RoboticWorkforce', function() {
     expect(solarFarmSpace.bonus.every((b) => b === SpaceBonus.PLANT)).is.true;
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    const action = solarFarm.play(player, game);
+    const action = solarFarm.play(player);
     expect(action).is.not.undefined;
     action!.cb(solarFarmSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
@@ -122,7 +123,7 @@ describe('RoboticWorkforce', function() {
 
   it('Has all building cards set up', function() {
     const researchCoordination = new ResearchCoordination();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = setCustomGameOptions({moonExpansion: true});
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     ALL_CARD_MANIFESTS.forEach((manifest) => {
       manifest.projectCards.factories.forEach((c) => {
@@ -192,5 +193,20 @@ describe('RoboticWorkforce', function() {
         }
       });
     });
+  });
+
+  it('all cards have updaters or productionBoxes', () => {
+    const errors: Array<string> = [];
+    RoboticWorkforce.builderCardsNames.forEach((cardName) => {
+      const updater = card.getUpdater(cardName, player);
+      const units = staticCardProperties.get(cardName)?.productionBox;
+      if (updater === undefined && units === undefined) {
+        errors.push(cardName + ' is unregistered');
+      }
+      if (updater !== undefined && units !== undefined) {
+        errors.push(cardName + ' is double-registered');
+      }
+    });
+    expect(errors, errors.toString()).is.empty;
   });
 });

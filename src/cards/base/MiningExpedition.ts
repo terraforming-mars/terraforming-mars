@@ -16,7 +16,6 @@ export class MiningExpedition extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.MINING_EXPEDITION,
       cost: 12,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '063',
@@ -34,14 +33,14 @@ export class MiningExpedition extends Card implements IProjectCard {
     const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
     return true;
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new RemoveAnyPlants(player, game, 2));
+    game.defer(new RemoveAnyPlants(player, 2));
     player.steel += 2;
     return game.increaseOxygenLevel(player, 1);
   }

@@ -61,7 +61,7 @@ export class Extremophiles implements IActionCard, IProjectCard, IResourceCard {
         b.action('Add 1 microbe to ANY card.', (eb) => {
           eb.empty().startAction.microbes(1).asterix();
         }).br;
-        b.vpText('1 VP for every 3rd Microbe on this card');
+        b.vpText('1 VP for every 3rd Microbe on this card.');
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
     };

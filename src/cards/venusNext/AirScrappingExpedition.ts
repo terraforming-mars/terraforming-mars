@@ -1,5 +1,4 @@
 import {ICard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -10,20 +9,31 @@ import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_VENUS_SCALE} from '../../constants';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class AirScrappingExpedition implements IProjectCard {
-  public cost = 13;
-  public tags = [Tags.VENUS];
-  public name = CardName.AIR_SCRAPPING_EXPEDITION;
-  public cardType = CardType.EVENT;
-  public hasRequirements = false;
+export class AirScrappingExpedition extends Card {
+  constructor() {
+    super({
+      name: CardName.AIR_SCRAPPING_EXPEDITION,
+      cardType: CardType.EVENT,
+      tags: [Tags.VENUS],
+      cost: 13,
+
+      metadata: {
+        cardNumber: '215',
+        description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.',
+        renderData: CardRenderer.builder((b) => {
+          b.venus(1).floaters(3).secondaryTag(Tags.VENUS);
+        }),
+      },
+    });
+  };
 
   public canPlay(player: Player, game: Game): boolean {
     const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, false, true);
     }
 
     return true;
@@ -42,12 +52,4 @@ export class AirScrappingExpedition implements IProjectCard {
       return undefined;
     });
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: '215',
-    description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.',
-    renderData: CardRenderer.builder((b) => {
-      b.venus(1).floaters(3).secondaryTag(Tags.VENUS);
-    }),
-  };
 }

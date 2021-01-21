@@ -50,7 +50,7 @@ describe('Capital', function() {
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
-    expect(card.getVictoryPoints(player, game)).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency?.bonus).eq(undefined);
   });
 
@@ -69,6 +69,6 @@ describe('Capital', function() {
     // check VP
     const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);
     game.addGreenery(player, greenerySpace!.id);
-    expect(player.getVictoryPoints(game).city).to.eq(1); // 1 VP for Capital city
+    expect(player.getVictoryPoints().city).to.eq(1); // 1 VP for Capital city
   });
 });

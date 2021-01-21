@@ -41,7 +41,10 @@ export class PioneerSettlement implements IProjectCard {
         return false;
       }
 
-      if (player.getProduction(Resources.MEGACREDITS) <= -4) {
+      const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
+      if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+        return true;
+      } else if (megaCreditsProduction <= -4) {
         if (lunaIsAvailable === false) {
           return false;
         }

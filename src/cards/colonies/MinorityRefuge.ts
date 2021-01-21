@@ -21,7 +21,10 @@ export class MinorityRefuge implements IProjectCard {
         return false;
       }
 
-      if (player.getProduction(Resources.MEGACREDITS) <= -4) {
+      const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
+      if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+        return true;
+      } else if (megaCreditsProduction <= -4) {
         const lunaIsAvailable = player.game.colonies.some((colony) =>
           colony.name === ColonyName.LUNA &&
           colony.isColonyFull() === false &&

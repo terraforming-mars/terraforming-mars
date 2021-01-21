@@ -788,6 +788,7 @@
     margin: -40px 0 0 auto;
     z-index: 20;
     top: -12px;
+    display: flex;
 
     .top-bar-collapser {
         background: #303030;
@@ -795,16 +796,20 @@
         vertical-align: middle;
         padding: 8px 14px 8px 11px;
         border-radius: 0 10px 10px 0;
-        margin: -43px 0 0 -5px;
+        height: 46px;
         cursor: pointer;
+        margin-top: 12px;
 
         img {
             width: 20px;
         }
     }
 
-    .player-status {
+    .player-status, .player-info-top {
         display: none !important;
+    }
+    .player-info-bottom {
+        background: #303030 !important; 
     }
 
     .player-info {
@@ -827,7 +832,7 @@
     }
 
     .top-bar-collapser {
-        margin: 11px 0 0 auto;
+        margin: 11px 0 0 0;
 
         img {
             transform: scaleX(-1);

@@ -31,8 +31,10 @@ export abstract class Card {
       if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
-      if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false && properties.cost === undefined) {
-        throw new Error('must define cost for project cards');
+      if (properties.cost === undefined) {
+        if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false) {
+          throw new Error(`${properties.name} must have a cost property`);
+        }
       }
       staticCardProperties.set(properties.name, properties);
       staticInstance = properties;

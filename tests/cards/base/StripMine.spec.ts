@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {StripMine} from '../../../src/cards/base/StripMine';
 import {REDS_RULING_POLICY_COST} from '../../../src/constants';
 import {Game} from '../../../src/Game';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {Reds} from '../../../src/turmoil/parties/Reds';
@@ -41,6 +42,7 @@ describe('StripMine', function() {
   it('Cannot play if Reds are ruling and cannot afford 6 MC', function() {
     player.addProduction(Resources.ENERGY, 2);
     player.megaCredits = card.cost;
+    player.game.phase = Phase.ACTION;
 
     const reds = new Reds();
     turmoil.rulingParty = reds;

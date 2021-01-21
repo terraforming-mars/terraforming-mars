@@ -16,7 +16,7 @@ jobs:
     - run: npm run build
     - run: npm test
     - run: npm run cover
-  build-linux:
+  build-windows:
 
     runs-on: windows-latest
 

@@ -220,10 +220,8 @@ export const Turmoil = Vue.component('turmoil', {
         }
       }
 
-      console.log(`loading policy id ${policyId}`);
       if (policyId !== undefined) {
         const policy = AGENDA_HTML.get(policyId);
-        console.log(`policy is ${policy}`);
         return policy || `No ruling Policy`;
       }
       return '<p>' + $t('No ruling Policy') + '</p>';

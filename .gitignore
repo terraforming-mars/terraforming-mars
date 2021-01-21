@@ -1,4 +1,4 @@
-# Server Settings 
+# Server Settings
 .env
 *.pem
 db/*
@@ -11,8 +11,6 @@ dist/
 .nyc_output/
 styles.css
 .vscode/
-assets/settings.json
-assets/translations.json
 pid
 *.log
 

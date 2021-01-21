@@ -19,7 +19,6 @@ import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
 import {MiningCard} from './cards/base/MiningCard';
@@ -63,6 +62,8 @@ import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
+import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
+import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 
 export type PlayerId = string;
 
@@ -1054,7 +1055,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               resources: targetCard.resourceCount,
               resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
               name: targetCard.card.name,
-              calculatedCost: this.getCardCost(this.game, targetCard.card),
+              calculatedCost: this.getCardCost(targetCard.card),
               cardType: card.cardType,
               isDisabled: false,
               reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
@@ -1067,7 +1068,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return cards;
   }
 
-  public getCardCost(game: Game, card: IProjectCard): number {
+  public getCardCost(card: IProjectCard): number {
     let cost: number = card.cost;
     cost -= this.cardDiscount;
 
@@ -1090,7 +1091,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
     }
 
@@ -1119,7 +1120,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay) {
-    const cardCost: number = this.getCardCost(this.game, selectedCard);
+    const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
 
     const canUseSteel: boolean = this.canUseSteel(selectedCard);
@@ -1422,29 +1423,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return trade;
   }
 
-  private convertPlantsIntoGreenery(): PlayerInput {
-    return new SelectSpace(
-      `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-      this.game.board.getAvailableSpacesForGreenery(this),
-      (space: ISpace) => {
-        this.game.addGreenery(this, space.id);
-        this.plants -= this.plantsNeededForGreenery;
-        this.game.log('${0} converted plants into a greenery', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
-  private convertHeatIntoTemperature(): PlayerInput {
-    return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
-        this.game.increaseTemperature(this, 1);
-        this.game.log('${0} converted heat into temperature', (b) => b.player(this));
-        return undefined;
-      });
-    });
-  }
-
   private claimMilestone(milestone: IMilestone): SelectOption {
     return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')', () => {
       this.game.claimedMilestones.push({
@@ -1652,7 +1630,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     maxPay += this.spendableMegacredits();
-    return maxPay >= this.getCardCost(this.game, card) &&
+    return maxPay >= this.getCardCost(card) &&
                 (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
@@ -1808,34 +1786,23 @@ export class Player implements ISerializable<SerializedPlayer> {
         .map(
           (milestone: IMilestone) =>
             this.claimMilestone(milestone));
-
       if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
     }
-
-    const hasEnoughPlants = this.plants >= this.plantsNeededForGreenery;
-    const canPlaceGreenery = this.game.board.getAvailableSpacesForGreenery(this).length > 0;
-    const oxygenIsMaxed = this.game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
-
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS);
-    const canAffordReds = !redsAreRuling || (redsAreRuling && this.canAfford(REDS_RULING_POLICY_COST));
-
-    if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
-      action.options.push(
-        this.convertPlantsIntoGreenery(),
-      );
+    
+    // Convert Plants
+    const convertPlants = new ConvertPlants();
+    if (convertPlants.canAct(this)) {
+      action.options.push(convertPlants.action(this));
     }
 
-    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
-    const temperatureIsMaxed = this.game.getTemperature() === constants.MAX_TEMPERATURE;
-    const canAffordRedsForHeatConversion =
-      !redsAreRuling || (!this.isCorporation(CardName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
-
-    if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
-      action.options.push(
-        this.convertHeatIntoTemperature(),
-      );
+    // Convert Heat
+    const convertHeat = new ConvertHeat();
+    if (convertHeat.canAct(this)) {
+      action.options.push(new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+        return convertHeat.action(this);
+      }));
     }
-
+    
     TurmoilHandler.addPlayerAction(this, this.game, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
@@ -2136,10 +2103,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       if (player.corporationCard instanceof PharmacyUnion) {
-        if (d.corporationCard.isDisabled === true) {
-          player.corporationCard.tags = [];
-          player.corporationCard.isDisabled = true;
-        }
+        player.corporationCard.isDisabled = Boolean(d.corporationCard.isDisabled);
       }
     } else {
       player.corporationCard = undefined;

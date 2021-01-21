@@ -30,7 +30,7 @@ export class GiantSolarShade extends Card {
     const stepsRaised = Math.min(remainingVenusSteps, 3);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true, true);
     }
 
     return true;

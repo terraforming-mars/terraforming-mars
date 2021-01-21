@@ -29,6 +29,23 @@ export const PlayerTimer = Vue.component('player-timer', {
     updateTimer: function() {
       this.timerText = Timer.toString(this.timer);
     },
+    getHours: function(): string {
+      return this.timerText.split(':')[0];
+    },
+    getMinutes: function(): string {
+      return this.timerText.split(':')[1];
+    },
+    getSeconds: function(): string {
+      return this.timerText.split(':')[2];
+    },
   },
-  template: `<div class="player-timer" > {{timerText}} </div>`,
+  template: `
+    <div class="player-timer">
+      <div class="player-timer-hours time-part">{{ getHours() }}</div>
+      <div class="timer-delimiter">:</div>
+      <div class="player-timer-minutes time-part">{{ getMinutes() }}</div>
+      <div class="timer-delimiter">:</div>
+      <div class="player-timer-seconds time-part">{{ getSeconds() }}</div>
+    </div>
+  `,
 });

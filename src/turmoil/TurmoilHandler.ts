@@ -2,7 +2,6 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Game} from '../Game';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
-import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
@@ -158,7 +157,7 @@ export class TurmoilHandler {
 
   public static resolveTilePlacementCosts(game: Game, player: Player): void {
     // PoliticalAgendas Reds P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2) && game.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2)) {
       const redsPolicy = REDS_POLICY_2;
       redsPolicy.onTilePlaced(player);
     }
@@ -168,13 +167,13 @@ export class TurmoilHandler {
     PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
 
     // PoliticalAgendas Greens P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2) && game.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2)) {
       const greensPolicy = GREENS_POLICY_2;
       greensPolicy.onTilePlaced(player);
     }
 
     // PoliticalAgendas Kelvinists P4 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4) && game.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4)) {
       const kelvinistsPolicy = KELVINISTS_POLICY_4;
       kelvinistsPolicy.onTilePlaced(player);
     }

@@ -821,7 +821,10 @@ export class Game implements ISerializable<SerializedGame> {
   public playerIsFinishedWithResearchPhase(player: Player): void {
     this.researchedPlayers.add(player.id);
     if (this.allPlayersHaveFinishedResearch()) {
-      this.deferredActions.runAll(() => this.gotoActionPhase());
+      this.deferredActions.runAll(() => {
+        this.passedPlayers.clear();
+        this.startActionsForPlayer(this.first);
+      });
     }
   }
 
@@ -969,12 +972,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.activePlayer = nextPlayer.id;
       this.playerIsFinishedTakingActions();
     }
-  }
-
-  private gotoActionPhase(): void {
-    this.phase = Phase.ACTION;
-    this.passedPlayers.clear();
-    this.startActionsForPlayer(this.first);
   }
 
   private gotoEndGame(): void {

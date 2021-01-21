@@ -1656,7 +1656,7 @@ export class Player implements ISerializable<SerializedPlayer> {
                 (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
-  public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
+  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
     let extraResource: number = 0;
     if (canUseFloaters !== undefined && canUseFloaters) {
       extraResource += this.getFloatersCanSpend() * 3;
@@ -1666,7 +1666,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       extraResource += this.getMicrobesCanSpend() * 2;
     }
 
-    if (game !== undefined && canUseTitanium) {
+    if (canUseTitanium) {
       return this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +

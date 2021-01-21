@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -47,14 +46,14 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
     return undefined;
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    if (game.isSoloMode()) return true;
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode()) return true;
     return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
   }
 
-  public action(player: Player, game: Game) {
-    game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
-    game.defer(
+  public action(player: Player) {
+    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
+    player.game.defer(
       new DeferredAction(player, () => {
         player.addResourceTo(this);
         return undefined;

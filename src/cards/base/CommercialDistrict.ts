@@ -49,10 +49,10 @@ export class CommercialDistrict extends Card implements IProjectCard {
     return player.getProduction(Resources.ENERGY) >= 1 &&
       game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public getVictoryPoints(_player: Player, game: Game) {
-    const usedSpace = game.board.getSpaceByTileCard(this.name);
+  public getVictoryPoints(player: Player) {
+    const usedSpace = player.game.board.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return game.board.getAdjacentSpaces(usedSpace).filter(
+      return player.game.board.getAdjacentSpaces(usedSpace).filter(
         (adjacentSpace) => Board.isCitySpace(adjacentSpace),
       ).length;
     }

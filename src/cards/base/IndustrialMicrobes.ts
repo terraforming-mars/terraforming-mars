@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -27,7 +26,7 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
     player.addProduction(Resources.STEEL);
     return undefined;

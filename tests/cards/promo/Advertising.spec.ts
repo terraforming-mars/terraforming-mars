@@ -9,7 +9,7 @@ describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
 
     player.playedCards.push(advertising);
     advertising.play();
@@ -17,7 +17,7 @@ describe('Advertising', function() {
 
     const card = new EarthCatapult();
     card.play();
-    advertising.onCardPlayed(player, game, card);
+    advertising.onCardPlayed(player, card);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 });

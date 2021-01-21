@@ -9,22 +9,22 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('LocalHeatTrapping', function() {
-  let card : LocalHeatTrapping; let player : Player; let game : Game;
+  let card : LocalHeatTrapping; let player : Player;
 
   beforeEach(function() {
     card = new LocalHeatTrapping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play without 5 heat', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - no animal targets', function() {
     player.heat = 5;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     player.playedCards.push(card);
@@ -68,6 +68,6 @@ describe('LocalHeatTrapping', function() {
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 });

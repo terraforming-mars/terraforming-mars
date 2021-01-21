@@ -10,13 +10,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CrediCor', function() {
-  let card : CrediCor; let player : Player; let game : Game;
+  let card : CrediCor; let player : Player;
 
   beforeEach(function() {
     card = new CrediCor();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -32,9 +32,9 @@ describe('CrediCor', function() {
   it('Runs onCardPlayed', function() {
     player.corporationCard = card;
     expect(player.megaCredits).to.eq(0);
-    card.onCardPlayed(player, game, new GiantIceAsteroid());
+    card.onCardPlayed(player, new GiantIceAsteroid());
     expect(player.megaCredits).to.eq(4);
-    card.onCardPlayed(player, game, new Bushes());
+    card.onCardPlayed(player, new Bushes());
     expect(player.megaCredits).to.eq(4);
   });
 });

@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Advertising extends Card implements IProjectCard {
@@ -25,7 +24,7 @@ export class Advertising extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.cost >= 20) {
       player.addProduction(Resources.MEGACREDITS);
     }

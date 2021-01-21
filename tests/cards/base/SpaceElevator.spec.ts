@@ -6,13 +6,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('SpaceElevator', function() {
-  let card : SpaceElevator; let player : Player; let game : Game;
+  let card : SpaceElevator; let player : Player;
 
   beforeEach(function() {
     card = new SpaceElevator();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t act if no steel', function() {
@@ -20,7 +20,7 @@ describe('SpaceElevator', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
@@ -30,7 +30,7 @@ describe('SpaceElevator', function() {
     player.steel = 1;
     expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(player.steel).to.eq(0);
     expect(player.megaCredits).to.eq(5);
   });

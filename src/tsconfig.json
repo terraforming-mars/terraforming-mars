@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "../build/src",
+        "module": "commonjs",
+        "composite": true,
+    },
+    "extends": "../tsconfig.json",
+    "include": [
+        "**/*.ts",
+        "genfiles/*.json",
+    ]
+}

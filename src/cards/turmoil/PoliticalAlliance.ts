@@ -22,7 +22,7 @@ export class PoliticalAlliance implements IProjectCard {
         const meetsPartyLeaderRequirements = parties.length > 1;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
         }
         return meetsPartyLeaderRequirements;
       }

@@ -18,7 +18,7 @@ export class MartianZoo implements IProjectCard, IResourceCard {
     public resourceType = ResourceType.ANIMAL;
     public resourceCount: number = 0;
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, card: IProjectCard) {
       if (card.tags.indexOf(Tags.EARTH) !== -1) {
         player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.EARTH).length);
       }
@@ -32,7 +32,7 @@ export class MartianZoo implements IProjectCard, IResourceCard {
       return this.resourceCount > 0;
     }
 
-    public action(player: Player, _game: Game) {
+    public action(player: Player) {
       player.megaCredits += this.resourceCount;
       return undefined;
     }

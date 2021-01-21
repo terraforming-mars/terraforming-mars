@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 export const StartScreen = Vue.component('start-screen', {
   props: {

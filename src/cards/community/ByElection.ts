@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {ALL_PARTIES} from '../../turmoil/Turmoil';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -28,11 +27,11 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay(_player: Player, game: Game) {
-    return game.turmoil !== undefined;
+  public canPlay(player: Player) {
+    return player.game.turmoil !== undefined;
   }
-  public play(player: Player, game: Game) {
-    const turmoil = game.turmoil;
+  public play(player: Player) {
+    const turmoil = player.game.turmoil;
     if (turmoil === undefined) {
       return;
     }
@@ -43,13 +42,13 @@ export class ByElection extends PreludeCard implements IProjectCard {
     setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
       p.partyName, 'Select', () => {
         turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
-        PoliticalAgendas.setNextAgenda(turmoil, game);
+        PoliticalAgendas.setNextAgenda(turmoil, player.game);
 
         return undefined;
       }),
     )];
 
-    game.defer(new DeferredAction(
+    player.game.defer(new DeferredAction(
       player,
       () => setRulingParty,
     ));

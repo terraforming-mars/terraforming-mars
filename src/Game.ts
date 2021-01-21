@@ -584,7 +584,7 @@ export class Game implements ISerializable<SerializedGame> {
           player,
           () => {
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-              return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard) || undefined;
+              return somePlayer.corporationCard.onCorpCardPlayed(player, corporationCard) || undefined;
             }
             return undefined;
           },
@@ -1333,11 +1333,11 @@ export class Game implements ISerializable<SerializedGame> {
     this.players.forEach((p) => {
       if (p.corporationCard !== undefined &&
           p.corporationCard.onTilePlaced !== undefined) {
-        p.corporationCard.onTilePlaced(p, space, this);
+        p.corporationCard.onTilePlaced(p, space);
       }
       p.playedCards.forEach((playedCard) => {
         if (playedCard.onTilePlaced !== undefined) {
-          playedCard.onTilePlaced(p, space, this);
+          playedCard.onTilePlaced(p, space);
         }
       });
     });

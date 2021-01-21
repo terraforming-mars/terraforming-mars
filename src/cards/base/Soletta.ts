@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -25,7 +24,7 @@ export class Soletta extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.HEAT, 7);
     return undefined;
   }

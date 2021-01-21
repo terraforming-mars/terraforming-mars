@@ -17,16 +17,11 @@ export class MinorityRefuge implements IProjectCard {
     public warning?: string;
 
     public canPlay(player: Player): boolean {
-      const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
-      if (megaCreditsProduction === -5) {
-        return false;
-      }
-
       if (player.hasAvailableColonyTileToBuildOn() === false) {
         return false;
       }
 
-      if (megaCreditsProduction === -4) {
+      if (player.getProduction(Resources.MEGACREDITS) <= -4) {
         const lunaIsAvailable = player.game.colonies.some((colony) =>
           colony.name === ColonyName.LUNA &&
           colony.isColonyFull() === false &&
@@ -43,7 +38,7 @@ export class MinorityRefuge implements IProjectCard {
 
     public play(player: Player) {
       const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
-        player.game.colonies.filter((colony) => colony.name !== ColonyName.LUNA) :
+        player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
         undefined;
       player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge', openColonies));
       player.addProduction(Resources.MEGACREDITS, -2);

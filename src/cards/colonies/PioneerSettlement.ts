@@ -18,11 +18,6 @@ export class PioneerSettlement implements IProjectCard {
     public warning?: string;
 
     public canPlay(player: Player): boolean {
-      const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
-      if (megaCreditsProduction === -5) {
-        return false;
-      }
-
       if (player.hasAvailableColonyTileToBuildOn() === false) {
         return false;
       }
@@ -46,7 +41,7 @@ export class PioneerSettlement implements IProjectCard {
         return false;
       }
 
-      if (megaCreditsProduction === -4) {
+      if (player.getProduction(Resources.MEGACREDITS) <= -4) {
         if (lunaIsAvailable === false) {
           return false;
         }
@@ -58,7 +53,7 @@ export class PioneerSettlement implements IProjectCard {
 
     public play(player: Player) {
       const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
-        player.game.colonies.filter((colony) => colony.name !== ColonyName.LUNA) :
+        player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
         undefined;
       player.game.defer(new BuildColony(player, false, 'Select colony for Pioneer Settlement', openColonies));
       player.addProduction(Resources.MEGACREDITS, -2);

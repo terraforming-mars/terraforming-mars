@@ -1,4 +1,7 @@
+// A base configuration for src and tests, and also the config
+// Visual Studio Code reads
 {
+    // Compiler options are mostly for the sub-configurations
     "compilerOptions": {
         "declaration": true,
         "declarationMap": true,
@@ -21,6 +24,7 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
     },
+    // This gives the VS Code IDE its magic.
     "include": [
         "**/*.ts",
     ]

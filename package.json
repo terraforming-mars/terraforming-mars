@@ -49,7 +49,7 @@
     "lint": "eslint src tests --ext ts",
     "makeJson": "node make_static_json.js",
     "precover": "tsc --build tsconfig-test.json",
-    "prebuild": "mkdir -p build/ && lessc src/styles/common.less > build/styles.css",
+    "prebuild": "lessc src/styles/common.less build/styles.css",
     "pretest": "tsc --build tsconfig-test.json",
     "start": "node build/src/server.js",
     "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",

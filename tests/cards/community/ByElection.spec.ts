@@ -27,7 +27,6 @@ describe('ByElection', function() {
     subOptions.cb();
 
     const turmoil = game.turmoil!;
-    turmoil.chairman = player.id;
     expect(turmoil.playersInfluenceBonus.get(player.id)).to.eq(1);
 
     const rulingParty = turmoil.rulingParty;

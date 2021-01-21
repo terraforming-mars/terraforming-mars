@@ -1,23 +1,26 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node",
-        "lib": ["dom"],
+        "outDir": "../build/src",
+        "module": "commonjs",
+
+        "strict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "strict": true,
         "removeComments": true,
-        "resolveJsonModule": true,
         "preserveConstEnums": true,
-        "outDir": "build",
         "skipLibCheck": true,
         "sourceMap": true,
         "target": "es5",
-        "types": ["node", "mocha", "chai"]
+        "types": ["node"],
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "composite": true,
     },
+    "extends": "../tsconfig.json",
     "include": [
-        "tests/utils/Vue.ts",
-        "tests/**/*.spec.ts"
+        "**/*.ts",
+        "genfiles/*.json",
     ]
 }

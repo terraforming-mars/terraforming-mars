@@ -1,14 +1,17 @@
 {
     "compilerOptions": {
         "declaration": true,
-        "module": "commonjs",
+        "declarationMap": true,
         "lib": ["dom"],
+        "incremental": true,
+
+        "module": "commonjs",
+
+        "strict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "outDir": "build",
-        "strict": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "skipLibCheck": true,
@@ -17,9 +20,8 @@
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "incremental": true
     },
     "include": [
-        "src/**/*.ts",
+        "**/*.ts",
     ]
 }

@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {GiantSolarShade} from '../../../src/cards/venusNext/GiantSolarShade';
 import {Game} from '../../../src/Game';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
@@ -29,6 +30,7 @@ describe('GiantSolarShade', function() {
   });
 
   it('Should play with Reds and Dirigibles', function() {
+    player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     player.megaCredits = 27;

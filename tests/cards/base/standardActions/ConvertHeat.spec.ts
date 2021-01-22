@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/cards/base/standardActions/ConvertHeat';
+import {Phase} from '../../../../src/Phase';
 import {Player} from '../../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../../TestingUtils';
 import {Game} from '../../../../src/Game';
@@ -24,6 +25,7 @@ describe('ConvertHeat', function() {
 
   it('Can not act with reds', function() {
     player.heat = 8;
+    player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);

@@ -236,7 +236,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS) && this.game.phase === Phase.ACTION) {
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS)) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
         this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {

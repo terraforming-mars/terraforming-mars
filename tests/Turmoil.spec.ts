@@ -36,6 +36,7 @@ describe('Turmoil', function() {
     const gameOptions = setCustomGameOptions();
 
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -120,6 +121,8 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+
+    game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
 
     expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);

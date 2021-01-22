@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -6,7 +7,6 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -16,11 +16,28 @@ export interface RobotCard {
     resourceCount: number;
 }
 
-export class SelfReplicatingRobots implements IProjectCard {
-    public name = CardName.SELF_REPLICATING_ROBOTS;
-    public cost = 7;
-    public tags = [];
-    public cardType = CardType.ACTIVE;
+export class SelfReplicatingRobots extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.SELF_REPLICATING_ROBOTS,
+      cost: 7,
+
+      metadata: {
+        cardNumber: '210',
+        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+        renderData: CardRenderer.builder((b) => {
+          b.action('Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.', (eb) => {
+            eb.empty().startAction.selfReplicatingRobots();
+            eb.nbsp.or().nbsp.arrow().multiplierWhite().text('x2');
+          }).br;
+          b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', CardRenderItemSize.TINY, true);
+        }),
+        description: 'Requires 2 Science tags.',
+      },
+    });
+  }
+
     public targetCards: Array<RobotCard> = [];
 
     public getCardDiscount(_player: Player, card: IProjectCard): number {
@@ -89,17 +106,5 @@ export class SelfReplicatingRobots implements IProjectCard {
       }
 
       return orOptions;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: '210',
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
-      renderData: CardRenderer.builder((b) => {
-        b.action('Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.', (eb) => {
-          eb.empty().startAction.selfReplicatingRobots();
-          eb.nbsp.or().nbsp.arrow().multiplierWhite().text('x2');
-        }).br;
-        b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', CardRenderItemSize.TINY, true);
-      }),
-      description: 'Requires 2 Science tags.',
     }
 }

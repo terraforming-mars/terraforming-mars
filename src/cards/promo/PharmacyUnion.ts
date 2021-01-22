@@ -1,6 +1,7 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,18 +13,48 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class PharmacyUnion implements CorporationCard {
-    public name = CardName.PHARMACY_UNION;
-    public tags = [Tags.MICROBE, Tags.MICROBE];
-    public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
-    public resourceType = ResourceType.DISEASE;
-    public cardType = CardType.CORPORATION;
-    public resourceCount: number = 0;
-    public isDisabled: boolean = false;
+export class PharmacyUnion extends Card implements CorporationCard {
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.PHARMACY_UNION,
+      startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
+      resourceType: ResourceType.DISEASE,
+
+      metadata: {
+        cardNumber: 'R39',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
+          // blank space after MC is on purpose
+          b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
+          b.corpBox('effect', (ce) => {
+            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.effect(undefined, (eb) => {
+              eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
+            });
+            ce.vSpace();
+            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
+              eb.science(1).played.startEffect.minus().disease();
+              eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
+            });
+          });
+        }),
+      },
+    });
+  }
+
+    public resourceCount = 0;
+    public isDisabled = false;
+
+    public get tags() {
+      if (this.isDisabled) {
+        return [];
+      }
+      return [Tags.MICROBE, Tags.MICROBE];
+    }
 
     public play(player: Player) {
       this.resourceCount = 2;
@@ -138,25 +169,5 @@ export class PharmacyUnion implements CorporationCard {
 
     public onCorpCardPlayed(player: Player, card: CorporationCard) {
       return this.onCardPlayed(player, card as ICard as IProjectCard);
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'R39',
-      renderData: CardRenderer.builder((b) => {
-        b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
-        // blank space after MC is on purpose
-        b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
-        b.corpBox('effect', (ce) => {
-          ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effect(undefined, (eb) => {
-            eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
-          });
-          ce.vSpace();
-          ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
-            eb.science(1).played.startEffect.minus().disease();
-            eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
-          });
-        });
-      }),
     }
 }

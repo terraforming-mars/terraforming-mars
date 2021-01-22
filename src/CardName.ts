@@ -10,6 +10,10 @@ export enum CardName {
     CITY_STANDARD_PROJECT = 'City',
     AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
 
+    // Standard actions:
+    CONVERT_PLANTS = 'Convert Plants',
+    CONVERT_HEAT = 'Convert Heat',
+
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
     ADAPTED_LICHEN = 'Adapted Lichen',

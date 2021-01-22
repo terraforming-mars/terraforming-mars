@@ -54,7 +54,7 @@ describe('MonsInsurance', function() {
     player2.playedCards.push(ants, tardigrades);
     tardigrades.resourceCount = 3;
 
-    ants.action(player2, game); // remove resource from own card
+    ants.action(player2); // remove resource from own card
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
   });
@@ -71,7 +71,7 @@ describe('MonsInsurance', function() {
     const ants = new Ants();
     player2.playedCards.push(ants);
 
-    ants.action(player2, game); // remove resource from Mons' card
+    ants.action(player2); // remove resource from Mons' card
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
   });

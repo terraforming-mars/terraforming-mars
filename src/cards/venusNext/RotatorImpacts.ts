@@ -36,10 +36,10 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
       const canSpendResource = this.resourceCount > 0 && !venusMaxed;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-        return player.canAfford(6, game, false, true) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+        return player.canAfford(6, false, true) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
       }
 
-      return player.canAfford(6, game, false, true) || canSpendResource;
+      return player.canAfford(6, false, true) || canSpendResource;
     }
 
     public action(player: Player, game: Game) {
@@ -54,7 +54,7 @@ export class RotatorImpacts implements IActionCard, IProjectCard, IResourceCard 
         return this.addResource(player, game);
       }
 
-      if (player.canAfford(6, game, false, true)) {
+      if (player.canAfford(6, false, true)) {
         opts.push(addResource);
       } else {
         return this.spendResource(player, game);

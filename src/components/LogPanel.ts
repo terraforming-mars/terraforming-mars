@@ -9,6 +9,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {Card} from './card/Card';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
+import {ICard} from '../cards/ICard';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
@@ -47,7 +48,7 @@ export const LogPanel = Vue.component('log-panel', {
         className = 'background-color-automated';
       } else if (cardType === CardType.PRELUDE) {
         className = 'background-color-prelude';
-      } else if (cardType === CardType.STANDARD_PROJECT) {
+      } else if (cardType === CardType.STANDARD_PROJECT || cardType === CardType.STANDARD_ACTION) {
         className = 'background-color-standard-project';
       }
 
@@ -85,10 +86,11 @@ export const LogPanel = Vue.component('log-panel', {
               }
             }
           }
-          const card = new CardFinder().getCardByName(data.value, (manifest) => [
+          const card = new CardFinder().getCardByName<ICard>(data.value, (manifest) => [
             manifest.projectCards,
             manifest.preludeCards,
             manifest.standardProjects,
+            manifest.standardActions,
           ]);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
         } else if (translatableMessageDataTypes.includes(data.type)) {

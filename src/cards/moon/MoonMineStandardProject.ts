@@ -40,7 +40,7 @@ export class MoonMineStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return player.canAfford(this.cost, player.game) && Units.hasUnits(this.reserveUnits, player);
+    return player.canAfford(this.cost) && Units.hasUnits(this.reserveUnits, player);
   }
 
   actionEssence(player: Player): void {

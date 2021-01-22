@@ -19,7 +19,6 @@ import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
 import {MiningCard} from './cards/base/MiningCard';
@@ -63,6 +62,8 @@ import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
+import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
+import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 
 export type PlayerId = string;
 
@@ -1422,29 +1423,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return trade;
   }
 
-  private convertPlantsIntoGreenery(): PlayerInput {
-    return new SelectSpace(
-      `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-      this.game.board.getAvailableSpacesForGreenery(this),
-      (space: ISpace) => {
-        this.game.addGreenery(this, space.id);
-        this.plants -= this.plantsNeededForGreenery;
-        this.game.log('${0} converted plants into a greenery', (b) => b.player(this));
-        return undefined;
-      },
-    );
-  }
-
-  private convertHeatIntoTemperature(): PlayerInput {
-    return new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
-      return this.spendHeat(constants.HEAT_FOR_TEMPERATURE, () => {
-        this.game.increaseTemperature(this, 1);
-        this.game.log('${0} converted heat into temperature', (b) => b.player(this));
-        return undefined;
-      });
-    });
-  }
-
   private claimMilestone(milestone: IMilestone): SelectOption {
     return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')', () => {
       this.game.claimedMilestones.push({
@@ -1656,7 +1634,7 @@ export class Player implements ISerializable<SerializedPlayer> {
                 (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
-  public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
+  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
     let extraResource: number = 0;
     if (canUseFloaters !== undefined && canUseFloaters) {
       extraResource += this.getFloatersCanSpend() * 3;
@@ -1666,7 +1644,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       extraResource += this.getMicrobesCanSpend() * 2;
     }
 
-    if (game !== undefined && canUseTitanium) {
+    if (canUseTitanium) {
       return this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +
@@ -1790,6 +1768,21 @@ export class Player implements ISerializable<SerializedPlayer> {
                       'available action.';
     action.buttonLabel = 'Take action';
 
+    // Convert Plants
+    const convertPlants = new ConvertPlants();
+    if (convertPlants.canAct(this)) {
+      action.options.push(convertPlants.action(this));
+    }
+
+    // Convert Heat
+    const convertHeat = new ConvertHeat();
+    if (convertHeat.canAct(this)) {
+      action.options.push(new SelectOption(`Convert ${constants.HEAT_FOR_TEMPERATURE} heat into temperature`, 'Convert heat', () => {
+        return convertHeat.action(this);
+      }));
+    }
+
+
     if (this.getPlayableCards().length > 0) {
       action.options.push(
         this.playProjectCard(),
@@ -1814,32 +1807,6 @@ export class Player implements ISerializable<SerializedPlayer> {
           this.tradeWithColony(openColonies),
         );
       }
-    }
-
-    const hasEnoughPlants = this.plants >= this.plantsNeededForGreenery;
-    const canPlaceGreenery = game.board.getAvailableSpacesForGreenery(this).length > 0;
-    const oxygenIsMaxed = game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
-
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-    const canAffordReds = !redsAreRuling || (redsAreRuling && this.canAfford(REDS_RULING_POLICY_COST));
-
-    if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
-      action.options.push(
-        this.convertPlantsIntoGreenery(),
-      );
-    }
-
-    const hasEnoughHeat = this.availableHeat >= constants.HEAT_FOR_TEMPERATURE;
-
-    const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
-
-    const canAffordRedsForHeatConversion =
-      !redsAreRuling || (!this.isCorporation(CardName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
-
-    if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
-      action.options.push(
-        this.convertHeatIntoTemperature(),
-      );
     }
 
     TurmoilHandler.addPlayerAction(this, game, action.options);
@@ -2142,10 +2109,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       if (player.corporationCard instanceof PharmacyUnion) {
-        if (d.corporationCard.isDisabled === true) {
-          player.corporationCard.tags = [];
-          player.corporationCard.isDisabled = true;
-        }
+        player.corporationCard.isDisabled = Boolean(d.corporationCard.isDisabled);
       }
     } else {
       player.corporationCard = undefined;

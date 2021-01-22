@@ -16,6 +16,7 @@ import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
+import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';
 import {Ecologist} from './milestones/Ecologist';
@@ -46,12 +47,6 @@ export const MA_ITEMS = [
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,
 ];
-
-// TODO(kberg): Move someplace more global, since it's now part of game set-up.
-export interface IDrawnMilestonesAndAwards {
-    milestones: Array<IMilestone>,
-    awards: Array<IAward>
-};
 
 export function buildSynergies(): Array<Array<number>> {
   const array: Array<Array<number>> = new Array(MA_ITEMS.length);

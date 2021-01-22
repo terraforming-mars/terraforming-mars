@@ -27,6 +27,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => new SelectOption(bonus.description, 'Select', () => {
       agenda.bonusId = bonus.id;
       this.turmoil.politicalAgendasData.currentAgenda = agenda;
+      staticAgendas.set(this.party.name, {bonusId: bonus.id, policyId: partyAgenda.policyId});
       this.turmoil.onAgendaSelected(this.player.game);
       return undefined;
     }));
@@ -36,6 +37,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     const policies = this.party.policies.map((policy) => new SelectOption(policy.description, 'Select', () => {
       agenda.policyId = policy.id;
       this.turmoil.politicalAgendasData.currentAgenda = agenda;
+      staticAgendas.set(this.party.name, {bonusId: partyAgenda.bonusId, policyId: policy.id});
       this.turmoil.onAgendaSelected(this.player.game);
       return undefined;
     }));

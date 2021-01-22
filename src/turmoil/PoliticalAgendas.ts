@@ -1,6 +1,5 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticaAgenda';
 import {Game} from '../Game';
-import {PlayerId} from '../Player';
 import {Bonus, BonusId} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from './parties/PartyName';
@@ -78,8 +77,8 @@ export class PoliticalAgendas {
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman: string = turmoil.chairman as string;
 
-    if (agendaStyle !== AgendaStyle.CHAIRMAN) {
-      politicalAgendasData.currentAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, chairman, agendaStyle);
+    if (agendaStyle !== AgendaStyle.CHAIRMAN || (agendaStyle === AgendaStyle.CHAIRMAN && chairman === 'NEUTRAL')) {
+      politicalAgendasData.currentAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas);
       turmoil.onAgendaSelected(game);
     } else {
       game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, turmoil));
@@ -88,10 +87,8 @@ export class PoliticalAgendas {
 
   private static getDeterministicAgenda(
     rulingParty: IParty,
-    staticAgendas: Map<PartyName, Agenda> | undefined,
-    chairman: PlayerId | 'NEUTRAL',
-    agendaStyle: AgendaStyle): Agenda {
-    if (agendaStyle !== AgendaStyle.STANDARD && chairman === 'NEUTRAL' || staticAgendas === undefined) {
+    staticAgendas: Map<PartyName, Agenda> | undefined): Agenda {
+    if (staticAgendas === undefined) {
       return PoliticalAgendas.getRandomAgenda(rulingParty);
     } else {
       const agenda = staticAgendas.get(rulingParty.name);

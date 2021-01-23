@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {WildlifeDome} from '../../../src/cards/turmoil/WildlifeDome';
 import {Game} from '../../../src/Game';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
@@ -27,6 +28,7 @@ describe('WildlifeDome', function() {
   });
 
   it('Should play: greens', function() {
+    game.phase = Phase.ACTION;
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
 

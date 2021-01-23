@@ -1,3 +1,5 @@
+// Generates the files settings.json and translations.json, stored in src/genfiles
+
 require('dotenv').config()
 const child_process = require("child_process");
 const fs = require("fs");
@@ -56,12 +58,15 @@ function getWaitingForTimeout() {
     return 5000;
 }
 
-fs.writeFileSync("assets/settings.json", JSON.stringify({
+if (!fs.existsSync('src/genfiles')) {
+    fs.mkdirSync('src/genfiles');
+}
+
+fs.writeFileSync("src/genfiles/settings.json", JSON.stringify({
     version: generateAppVersion(),
     waitingForTimeout: getWaitingForTimeout()
 }));
 
-fs.writeFileSync("assets/translations.json", JSON.stringify(
+fs.writeFileSync("src/genfiles/translations.json", JSON.stringify(
     getAllTranslations()
 ));
-

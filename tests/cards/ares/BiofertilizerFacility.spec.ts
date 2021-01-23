@@ -27,7 +27,7 @@ describe('BiofertilizerFacility', function() {
   });
 
   it('Cannot play without a science tag', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play', function() {

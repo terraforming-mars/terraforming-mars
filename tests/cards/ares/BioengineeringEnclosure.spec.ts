@@ -21,9 +21,9 @@ describe('BioengineeringEnclosure', function() {
   });
 
   it('Can\'t play without a science tag', () => {
-    expect(card.canPlay(player, game)).is.false;
+    expect(card.canPlay(player)).is.false;
     player.playCard(new AICentral());
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Play', () => {

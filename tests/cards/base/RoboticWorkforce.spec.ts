@@ -154,7 +154,7 @@ describe('RoboticWorkforce', function() {
           // Let's make sure we trigger any tag based production
           player.playedCards.push(...Array(5).fill(researchCoordination));
 
-          const action = card.play(player, player.game);
+          const action = card.play(player);
           if (action !== undefined) {
             if (action instanceof SelectSpace) {
               action.cb(action.availableSpaces[0]);

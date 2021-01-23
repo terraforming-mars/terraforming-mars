@@ -1,9 +1,8 @@
 import Vue from 'vue';
+import {ConfirmDialog} from './common/ConfirmDialog';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {TranslateMixin} from './TranslateMixin';
 import {PreferencesManager} from './PreferencesManager';
-
-const dialogPolyfill = require('dialog-polyfill');
+import {TranslateMixin} from './TranslateMixin';
 
 export const SelectSpace = Vue.component('select-space', {
   props: {
@@ -27,6 +26,9 @@ export const SelectSpace = Vue.component('select-space', {
       spaceId: undefined,
       warning: undefined,
     };
+  },
+  components: {
+    'confirm-dialog': ConfirmDialog,
   },
   mixins: [TranslateMixin],
   methods: {
@@ -78,6 +80,9 @@ export const SelectSpace = Vue.component('select-space', {
       }
       throw new Error('main board not found!');
     },
+    hideDialog: function(hide: boolean) {
+      PreferencesManager.saveValue('hide_tile_confirmation', hide === true ? '1' : '0');
+    },
     onTileSelected: function(tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
@@ -87,7 +92,7 @@ export const SelectSpace = Vue.component('select-space', {
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        (document.getElementById('dialog-confirm-tile') as HTMLDialogElement).showModal();
+        (this.$refs['confirmation'] as any).show();
       }
     },
     saveData: function() {
@@ -99,9 +104,6 @@ export const SelectSpace = Vue.component('select-space', {
     },
   },
   mounted: function() {
-    dialogPolyfill.default.registerDialog(
-      document.getElementById('dialog-confirm-tile'),
-    );
     this.disableAvailableSpaceAnimation();
     const tiles = this.getSelectableSpaces();
     this.animateAvailableSpaces(tiles);
@@ -116,18 +118,12 @@ export const SelectSpace = Vue.component('select-space', {
     }
   },
   template: `<div>
-    <section>
-      <dialog id="dialog-confirm-tile">
-        <form method="dialog">
-          <p v-i18n>Place your tile here?</p>
-          <p v-i18n>(This confirmation can be disabled in preferences).</p>
-          <menu class="dialog-menu centered-content">
-            <button class="btn btn-lg btn-primary" v-on:click="confirmPlacement()">Ok</button>
-            <button class="btn btn-lg" v-on:click="cancelPlacement()">Cancel</button>
-          </menu>
-        </form>
-      </dialog>
-    </section>
+    <confirm-dialog
+        message="Place your tile here?\n(This confirmation can be disabled in preferences)."
+        ref="confirmation"
+        v-on:accept="confirmPlacement"
+        v-on:dismiss="cancelPlacement"
+        v-on:hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
     <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
   </div>`,

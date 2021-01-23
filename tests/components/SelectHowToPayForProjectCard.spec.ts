@@ -134,6 +134,31 @@ describe('SelectHowToPayForProjectCard', function() {
     expect(steelTextBox.value).eq('2');
   });
 
+  it('select how to pay uses steel and titanium with metal bonus', async function() {
+    // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti (at value 6).
+    // The algorithm will try to spend 1 mc. Then spend as much steel as possible. Then spend as much Ti as possible.
+    // This will come down to 1 MC, 4 steels (at value 3), and 3 Ti (at value 6). So we are effectively spending 31.
+    // That is overspending by 4 mc. The algorithm will try to spend 4 mc less if possible.
+    // It is not, so it will try to overspend as little mc as it can.
+    // Then try to reduce the amount of metal.
+    // The final answer should be 0mc, 3 steels (at value 3) and 3 Ti (at value 6). 
+    const wrapper = setupCardForPurchase(
+      CardName.SPACE_ELEVATOR, 27,
+      {megaCredits: 1, steel: 4, steelValue: 3, titanium: 6, titaniumValue: 6},
+      {canUseSteel: true, canUseTitanium: true});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(0);
+    expect(vm.steel).eq(3);
+    expect(vm.titanium).eq(3);
+    const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
+    expect(steelTextBox.value).eq('3');
+    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
+    expect(titaniumTextBox.value).eq('3');
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName, cardCost: number, playerFields: object, playerInputFields: object) {
     const player = Object.assign({

@@ -166,9 +166,22 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.heat = deductUnits(this.player.heat, 1);
       }
 
-      // If we are overspending in mc, spend less mc.
-      if (megacreditBalance < 0 && this.megaCredits + megacreditBalance >= 0) {
-        this.megaCredits += megacreditBalance;
+      // If we are overspending
+      if (megacreditBalance < 0) {
+        // Try to spend less mc if possible
+        if (this.megaCredits + megacreditBalance >= 0) {
+          this.megaCredits += megacreditBalance;
+        } else {
+        // If not, try to spend less steel if possible
+          // Overspend with little mc as possible
+          megacreditBalance += this.megaCredits;
+          this.megaCredits = 0;
+          // Then try to reduce the amount of steel if possible
+          while (megacreditBalance + this.player.steelValue <= 0 && this.steel > 0) {
+            megacreditBalance += this.player.steelValue;
+            this.steel--;
+          }
+        }
       }
     },
     canUseHeat: function() {

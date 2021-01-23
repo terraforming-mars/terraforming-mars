@@ -183,16 +183,11 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       // If we are overspending
       if (megacreditBalance < 0) {
-        // Try to spend less mc if possible
-        if (this.megaCredits + megacreditBalance >= 0) {
-          this.megaCredits += megacreditBalance;
-        } else {
-        // If not, try to spend resources
-          this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
-          this.floaters -= saveOverSpendingUnits(this.floaters, 3);
-          this.microbes -= saveOverSpendingUnits(this.microbes, 2);
-          this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
-        }
+        // Try to spend less resource if possible
+        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
     canUseHeat: function() {

@@ -151,9 +151,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
           return 0;
         }
-        // The number of units required we are over spending by that we can save.
-        const overSpendingasUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
-        const toSaveUnits = Math.min(spendingUnits, overSpendingasUnits);
+        // Calculate the unit of resource we can save and still pay enough
+        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
 
         megacreditBalance += toSaveUnits * unitValue;
         return toSaveUnits;
@@ -183,7 +183,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       // If we are overspending
       if (megacreditBalance < 0) {
-        // Try to spend less resource if possible
+        // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
+        // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
+        // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
+        // We cannot reduce the amount of Ti and still pay enough.
         this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);

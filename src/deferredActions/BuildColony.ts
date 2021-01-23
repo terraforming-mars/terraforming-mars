@@ -3,9 +3,10 @@ import {SelectColony} from '../inputs/SelectColony';
 import {Colony} from '../colonies/Colony';
 import {ColonyName} from '../colonies/ColonyName';
 import {ColonyModel} from '../models/ColonyModel';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class BuildColony implements DeferredAction {
+  public priority = Priority.BUILD_COLONY;
   constructor(
     public player: Player,
     public allowDuplicate: boolean = false,

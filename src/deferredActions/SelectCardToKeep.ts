@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class SelectCardToKeep implements DeferredAction {
+  public priority = Priority.SELECT_CARD_TO_KEEP;
   constructor(
         public player: Player,
         public title: string,

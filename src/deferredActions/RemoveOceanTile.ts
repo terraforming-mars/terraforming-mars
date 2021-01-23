@@ -1,10 +1,11 @@
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
 export class RemoveOceanTile implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public title: string = 'Select an Ocean tile to remove from board',

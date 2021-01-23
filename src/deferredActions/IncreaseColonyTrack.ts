@@ -2,10 +2,11 @@ import {Player} from '../Player';
 import {Colony} from '../colonies/Colony';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
 export class IncreaseColonyTrack implements DeferredAction {
+  public priority = Priority.INCREASE_COLONY_TRACK;
   constructor(
         public player: Player,
         public colony: Colony,

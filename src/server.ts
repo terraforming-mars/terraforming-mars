@@ -525,7 +525,10 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     res.setHeader('Content-Type', 'text/javascript');
     let suffix = '';
-    if (supportsGzip(req)) {
+    if (supportsEncoding(req, 'br')) {
+      res.setHeader('Content-Encoding', 'br');
+      suffix = '.br';
+    } else if (supportsEncoding(req, 'gzip')) {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
@@ -569,14 +572,14 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
-function supportsGzip(req: http.IncomingMessage): boolean {
+function supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
   return req.headers['accept-encoding'] !== undefined &&
-         req.headers['accept-encoding'].includes('gzip');
+         req.headers['accept-encoding'].includes(encoding);
 }
 
 function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void {
   let buffer = styles;
-  if (compressedStyles !== undefined && supportsGzip(req)) {
+  if (compressedStyles !== undefined && supportsEncoding(req, 'gzip')) {
     res.setHeader('Content-Encoding', 'gzip');
     buffer = compressedStyles;
   }

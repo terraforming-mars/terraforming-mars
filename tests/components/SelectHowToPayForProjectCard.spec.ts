@@ -134,6 +134,27 @@ describe('SelectHowToPayForProjectCard', function() {
     expect(steelTextBox.value).eq('2');
   });
 
+  it('select how to pay uses titanium metal bonus', async function() {
+    // Solar Wind Power will cost 11. Player has 2MC and 4 Ti (at value 7).
+    // The algorithm will try to spend 2 mc. Then spend as much Ti as possible.
+    // This will come down to 2 MC and 2 Ti (at value 7). So we are effectively spending 16.
+    // That is overspending by 5 mc. The algorithm will try to spend 5 mc less if possible.
+    // It is not, so it will try to overspend as little mc as it can.
+    // The final answer should be 0mc and 2 Ti (at value 7).
+    const wrapper = setupCardForPurchase(
+      CardName.SOLAR_WIND_POWER, 11,
+      {megaCredits: 2, titanium: 4, titaniumValue: 7},
+      {canUseTitanium: true});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(0);
+    expect(vm.titanium).eq(2);
+    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
+    expect(titaniumTextBox.value).eq('2');
+  });
+
   it('select how to pay uses steel and titanium with metal bonus', async function() {
     // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti (at value 6).
     // The algorithm will try to spend 1 mc. Then spend as much steel as possible. Then spend as much Ti as possible.

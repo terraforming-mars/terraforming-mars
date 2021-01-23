@@ -91,7 +91,7 @@ export class Localfilesystem implements IDatabase {
   }
 
   restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback<Game>) {
-    cb('Does not work', undefined);
+    cb(new Error('Does not work'), undefined);
   }
 
   saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {

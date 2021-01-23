@@ -10,10 +10,10 @@ export class Cloner {
     newGameId: GameId,
     players: Array<Player>,
     firstPlayerIndex: number,
-    err: any,
+    err: Error | undefined,
     serialized: SerializedGame | undefined,
     cb: DbLoadCallback<Game>) {
-    const response: {err: any, game: Game | undefined} = {err: err, game: undefined};
+    const response: {err?: Error, game: Game | undefined} = {err: err, game: undefined};
 
     try {
       if (err === undefined && serialized !== undefined) {

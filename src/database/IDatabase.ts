@@ -38,7 +38,7 @@ export interface IGameData {
  * in the game. Why, I have no idea, says kberg.
  */
 
-export type DbLoadCallback<T> = (err: any, game: T | undefined) => void
+export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) => void
 
 export interface IDatabase {
 

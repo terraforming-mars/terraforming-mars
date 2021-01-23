@@ -57,14 +57,14 @@ export class SQLite implements IDatabase {
 
   loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
     // Retrieve first save from database
-    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: { message: any; }, row: { game_id: GameId, game: any; }) => {
+    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
         return cb(new Error('Game not found'), undefined);
       }
 
       try {
         const json = JSON.parse(row.game);
-        return cb(err, json);
+        return cb(err ?? undefined, json);
       } catch (exception) {
         console.error(`unable to load game ${game_id} at save point 0`, exception);
         cb(exception, undefined);
@@ -120,7 +120,7 @@ export class SQLite implements IDatabase {
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
     // Retrieve last save from database
-    this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: { message: any; }, row: { game: any; }) => {
+    this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
       if (err) {
         console.error(err.message);
         cb(err, undefined);

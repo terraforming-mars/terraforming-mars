@@ -141,7 +141,7 @@ describe('SelectHowToPayForProjectCard', function() {
     // That is overspending by 4 mc. The algorithm will try to spend 4 mc less if possible.
     // It is not, so it will try to overspend as little mc as it can.
     // Then try to reduce the amount of metal.
-    // The final answer should be 0mc, 3 steels (at value 3) and 3 Ti (at value 6). 
+    // The final answer should be 0mc, 3 steels (at value 3) and 3 Ti (at value 6).
     const wrapper = setupCardForPurchase(
       CardName.SPACE_ELEVATOR, 27,
       {megaCredits: 1, steel: 4, steelValue: 3, titanium: 6, titaniumValue: 6},

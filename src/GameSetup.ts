@@ -14,7 +14,6 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {AresSetup} from './ares/AresSetup';
 import {TileType} from './TileType';
-import {ISpace} from './boards/ISpace';
 import {Random} from './Random';
 
 export class GameSetup {
@@ -101,12 +100,6 @@ export class GameSetup {
   }
 
   public static setupNeutralPlayer(game: Game) {
-    function getRandomForestSpace(spaces: Array<ISpace>): ISpace {
-      let idx = game.discardForCost(TileType.GREENERY);
-      idx = Math.max(idx-1, 0); // Some cards cost zero.
-      return spaces[idx%spaces.length];
-    };
-
     // Single player add neutral player
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
@@ -119,7 +112,9 @@ export class GameSetup {
       if (adjacentSpaces.length === 0) {
         throw new Error('No space for forest');
       }
-      const forestSpace = getRandomForestSpace(adjacentSpaces);
+      let idx = game.discardForCost(TileType.GREENERY);
+      idx = Math.max(idx-1, 0); // Some cards cost zero.
+      const forestSpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});
     }
 

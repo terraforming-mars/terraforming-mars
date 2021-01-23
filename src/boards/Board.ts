@@ -13,12 +13,12 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
-  private readonly adjacency = new Map<SpaceId, Array<ISpace>>();
+  private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
   protected constructor(public spaces: Array<ISpace>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
-      this.adjacency.set(space.id, this.computeAdjacentSpaces(space));
+      this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
     });
   };
 
@@ -89,7 +89,7 @@ export abstract class Board {
 
   // Returns adjacent spaces in clockwise order starting from the top left.
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
-    const spaces = this.adjacency.get(space.id);
+    const spaces = this.adjacentSpaces.get(space.id);
     if (spaces === undefined) {
       throw new Error(`Unexpected space ID ${space.id}`);
     }

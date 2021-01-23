@@ -22,7 +22,7 @@ describe('ByElection', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions.next()!.execute() as OrOptions;
     const subOptions = orOptions.options[0] as OrOptions;
     subOptions.cb();
 

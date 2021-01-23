@@ -92,9 +92,9 @@ describe('ProjectInspection', function() {
     player.setActionsThisGeneration(restrictedArea.name);
     player.setActionsThisGeneration(playwrights.name);
     player.setResource(Resources.MEGACREDITS, 2);
-    expect(playwrights.canAct(player, game)).is.true; // PW -> PI -> RA
+    expect(playwrights.canAct(player)).is.true; // PW -> PI -> RA
 
-    const action1 = playwrights.action(player, game) as SelectCard<ICard>;
+    const action1 = playwrights.action(player) as SelectCard<ICard>;
     expect(action1).is.not.undefined;
     expect(action1.cards).has.lengthOf(1); // Only PI is available
     expect(action1.cards[0]?.name).eq(card.name);
@@ -115,9 +115,9 @@ describe('ProjectInspection', function() {
     player.playedCards.push(indenturedWorkers);
     player.setActionsThisGeneration(playwrights.name);
     player.setResource(Resources.MEGACREDITS, 2);
-    expect(playwrights.canAct(player, game)).is.true; // PW -> PI -> PW -> IW
+    expect(playwrights.canAct(player)).is.true; // PW -> PI -> PW -> IW
 
-    const action1 = playwrights.action(player, game) as SelectCard<ICard>;
+    const action1 = playwrights.action(player) as SelectCard<ICard>;
     expect(action1).is.not.undefined;
     expect(action1.cards).has.lengthOf(2); // PI and IW are available
     expect(action1.cards[0]?.name).eq(card.name);

@@ -16,9 +16,9 @@ export class MarketManipulation implements IProjectCard {
     public name = CardName.MARKET_MANIPULATION;
     public cardType = CardType.EVENT;
 
-    public canPlay(_player: Player, game: Game): boolean {
-      const increasableColonies = this.getIncreasableColonies(game);
-      const decreasableColonies = this.getDecreasableColonies(game);
+    public canPlay(player: Player): boolean {
+      const increasableColonies = this.getIncreasableColonies(player.game);
+      const decreasableColonies = this.getDecreasableColonies(player.game);
 
       if (increasableColonies.length === 0) return false;
       if (decreasableColonies.length === 0) return false;
@@ -37,12 +37,12 @@ export class MarketManipulation implements IProjectCard {
       return game.colonies.filter((colony) => colony.trackPosition > colony.colonies.length && colony.isActive);
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       const selectColonies = new OrOptions();
       selectColonies.title = 'Select colonies to increase and decrease tile track';
 
-      const increasableColonies = this.getIncreasableColonies(game);
-      const decreasableColonies = this.getDecreasableColonies(game);
+      const increasableColonies = this.getIncreasableColonies(player.game);
+      const decreasableColonies = this.getDecreasableColonies(player.game);
 
       increasableColonies.forEach(function(c1) {
         decreasableColonies.forEach(function(c2) {
@@ -54,7 +54,7 @@ export class MarketManipulation implements IProjectCard {
               () => {
                 c1.increaseTrack();
                 c2.decreaseTrack();
-                game.log('${0} increased ${1} track and decreased ${2} track', (b) => b.player(player).string(c1.name).string(c2.name));
+                player.game.log('${0} increased ${1} track and decreased ${2} track', (b) => b.player(player).string(c1.name).string(c2.name));
                 return undefined;
               },
             );

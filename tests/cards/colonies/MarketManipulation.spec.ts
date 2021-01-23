@@ -11,21 +11,21 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MarketManipulation', function() {
-  let card : MarketManipulation; let player : Player; let player2: Player; let game : Game; let luna: Luna;
+  let card : MarketManipulation; let player : Player; let player2: Player; let luna: Luna;
 
   beforeEach(function() {
     card = new MarketManipulation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     luna = new Luna();
   });
 
   it('Should play', function() {
     const triton = new Triton();
-    game.colonies.push(luna, triton);
+    player.game.colonies.push(luna, triton);
 
-    const action = card.play(player, game) as OrOptions;
+    const action = card.play(player) as OrOptions;
     expect(action).is.not.undefined;
     expect(action.options[0].title).to.eq('Increase Luna (MegaCredits) and decrease Triton (Titanium)');
     action.options[0].cb();
@@ -38,11 +38,11 @@ describe('MarketManipulation', function() {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
 
-    game.colonies.push(enceladus, miranda, luna);
-    game.gameOptions.coloniesExtension = true;
-    expect(card.canPlay(player, game)).is.not.true;
+    player.game.colonies.push(enceladus, miranda, luna);
+    player.game.gameOptions.coloniesExtension = true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.playCard(new Pets());
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

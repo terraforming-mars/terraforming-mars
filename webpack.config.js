@@ -15,7 +15,7 @@ module.exports = {
     new CompressionPlugin({
       algorithm: "brotliCompress",
       filename: "[path][base].br",
-      compressionOptions: { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } }
+      compressionOptions: { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY } }
     })
   ],
   resolve: {

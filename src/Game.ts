@@ -1485,14 +1485,14 @@ export class Game implements ISerializable<SerializedGame> {
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
   }
 
-  public discardForCost(toPlace: string) {
+  public discardForCost(toPlace: TileType) {
     const card = this.dealer.dealCard();
     this.dealer.discard(card);
-    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).string(toPlace));
+    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
     return card.cost;
   }
 
-  public getSpaceByOffset(direction: -1 | 1, toPlace: string) {
+  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType) {
     const cost = this.discardForCost(toPlace);
 
     const distance = Math.max(cost-1, 0); // Some cards cost zero.

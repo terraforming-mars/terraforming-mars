@@ -102,7 +102,7 @@ export class GameSetup {
 
   public static setupNeutralPlayer(game: Game) {
     function getRandomForestSpace(spaces: Array<ISpace>): ISpace {
-      let idx = game.discardForCost('greenery');
+      let idx = game.discardForCost(TileType.GREENERY);
       idx = Math.max(idx-1, 0); // Some cards cost zero.
       return spaces[idx%spaces.length];
     };
@@ -113,7 +113,7 @@ export class GameSetup {
 
     function placeCityAndForest(game: Game, direction: -1 | 1) {
       const board = game.board;
-      const citySpace = game.getSpaceByOffset(direction, 'city');
+      const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
       if (adjacentSpaces.length === 0) {

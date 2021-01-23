@@ -39,7 +39,7 @@ export class Localfilesystem implements IDatabase {
     game.lastSaveId++;
   }
 
-  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
+  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
     try {
       console.log(`Loading ${game_id}`);
       const text = fs.readFileSync(this._filename(game_id));
@@ -49,7 +49,7 @@ export class Localfilesystem implements IDatabase {
       cb(err, undefined);
     }
   }
-  getClonableGames(cb: (err: any, allGames: Array<IGameData>) => void) {
+  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
     this.getGames((err, gameIds) => {
       const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
       const gameData = filtered.map((gameId) => {
@@ -72,7 +72,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGames(cb: (err: any, allGames: Array<GameId>) => void) {
+  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const gameIds: Array<GameId> = [];
 
     // TODO(kberg): use readdir since this is expected to be async anyway.

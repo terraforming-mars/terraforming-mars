@@ -159,9 +159,8 @@ describe('SelectHowToPayForProjectCard', function() {
     // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti (at value 6).
     // The algorithm will try to spend 1 mc. Then spend as much steel as possible. Then spend as much Ti as possible.
     // This will come down to 1 MC, 4 steels (at value 3), and 3 Ti (at value 6). So we are effectively spending 31.
-    // That is overspending by 4 mc. The algorithm will try to spend 4 mc less if possible.
-    // It is not, so it will try to overspend as little mc as it can.
-    // Then try to reduce the amount of metal.
+    // That is overspending by 4 mc.
+    // It will try to save the resources. It will first save 1 steel and then 1 mc.
     // The final answer should be 0mc, 3 steels (at value 3) and 3 Ti (at value 6).
     const wrapper = setupCardForPurchase(
       CardName.SPACE_ELEVATOR, 27,
@@ -178,6 +177,78 @@ describe('SelectHowToPayForProjectCard', function() {
     expect(steelTextBox.value).eq('3');
     const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
     expect(titaniumTextBox.value).eq('3');
+  });
+
+  it('select how to pay uses steel and microbes', async function() {
+    // Protected Valley will cost 23. Player has no mc, 5 microbes, and 10 steels (at value 4).
+    // The algorithm will try to spend no mc. Then spend as much microbes as possible. Then spend as much steel as possible.
+    // This will come down to 0 MC, 5 microbes (at value 2), and 4 steels (at value 4). So we are effectively spending 26.
+    // That is overspending by 4 mc.
+    // It will try to reduce the amount of overspending resources.
+    // The final answer should be 0mc, 4 microbes (at value 2) and 4 steels (at value 4).
+    const wrapper = setupCardForPurchase(
+      CardName.PROTECTED_VALLEY, 23,
+      {megaCredits: 0, steel: 10, steelValue: 4},
+      {canUseSteel: true, microbes: 5});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(0);
+    expect(vm.steel).eq(4);
+    expect(vm.microbes).eq(4);
+    const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
+    expect(steelTextBox.value).eq('4');
+    const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
+    expect(microbesTextBox.value).eq('4');
+  });
+
+  it('select how to pay uses floater and microbes', async function() {
+    // Freyja Biodomes will cost 14. Player has 1 mc, 6 microbes, and 4 floater.
+    // The algorithm will try to spend 1 mc. Then spend as much microbes as possible. Then spend as much floater as possible.
+    // This will come down to 1 MC, 6 microbes (at value 2), and 1 floater (at value 3). So we are effectively spending 16.
+    // That is overspending by 2 mc.
+    // It will try to reduce the overspending resources. Then reduce the amount of mc if possible.
+    // The final answer should be 1mc, 5 microbes (at value 2) and 1 floater (at value 3).
+    const wrapper = setupCardForPurchase(
+      CardName.FREYJA_BIODOMES, 14,
+      {megaCredits: 1},
+      {microbes: 5, floaters: 3});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(1);
+    expect(vm.microbes).eq(5);
+    expect(vm.floaters).eq(1);
+    const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
+    expect(microbesTextBox.value).eq('5');
+    const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
+    expect(floatersTextBox.value).eq('1');
+  });
+
+  it('select how to pay uses floater and titanium', async function() {
+    // Giant Solar Shade will cost 27. Player has 1 mc, 8 floaters, and 6 ti.
+    // The algorithm will try to spend 1 mc. Then spend as much floaters as possible. Then spend as much ti as possible.
+    // This will come down to 1 MC, 8 floaters (at value 3), and 1 ti (at value 7). So we are effectively spending 32.
+    // That is overspending by 5 mc.
+    // It will try to reduce the overspending resources. Then reduce the amount of mc if possible.
+    // The final answer should be 0 mc, 7 floaters (at value 3) and 1 ti (at value 7).
+    const wrapper = setupCardForPurchase(
+      CardName.GIANT_SOLAR_SHADE, 27,
+      {megaCredits: 1, titanium: 6, titaniumValue: 7},
+      {canUseTitanium: true, floaters: 8});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(0);
+    expect(vm.floaters).eq(7);
+    expect(vm.titanium).eq(1);
+    const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
+    expect(floatersTextBox.value).eq('7');
+    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
+    expect(titaniumTextBox.value).eq('1');
   });
 
   const setupCardForPurchase = function(

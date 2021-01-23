@@ -144,6 +144,21 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         return contributingUnits;
       };
 
+      // This function help save some money at the end
+      const saveOverSpendingUnits = function(
+        spendingUnits: number | undefined,
+        unitValue: number): number {
+        if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
+          return 0;
+        }
+        // The number of units required we are over spending by that we can save.
+        const overSpendingasUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const toSaveUnits = Math.min(spendingUnits, overSpendingasUnits);
+
+        megacreditBalance += toSaveUnits * unitValue;
+        return toSaveUnits;
+      };
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -172,15 +187,11 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         if (this.megaCredits + megacreditBalance >= 0) {
           this.megaCredits += megacreditBalance;
         } else {
-        // If not, try to spend less steel if possible
-          // Overspend with little mc as possible
-          megacreditBalance += this.megaCredits;
-          this.megaCredits = 0;
-          // Then try to reduce the amount of steel if possible
-          while (megacreditBalance + this.player.steelValue <= 0 && this.steel > 0) {
-            megacreditBalance += this.player.steelValue;
-            this.steel--;
-          }
+        // If not, try to spend resources
+          this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+          this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+          this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+          this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
         }
       }
     },

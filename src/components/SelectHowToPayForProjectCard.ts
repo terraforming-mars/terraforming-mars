@@ -120,7 +120,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       this.titanium = 0;
       this.heat = 0;
 
-      let megacreditBalance = this.cost - this.player.megaCredits;
+      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
 
       // Calcualtes the optimal number of units to use given the unit value.
       //
@@ -154,16 +154,21 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       if (megacreditBalance > 0 && this.canUseSteel()) {
         const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
-        this.steel = deductUnits(availableSteel, this.player.steelValue, false);
+        this.steel = deductUnits(availableSteel, this.player.steelValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseTitanium()) {
         const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
-        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, false);
+        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.player.heat, 1);
+      }
+
+      // If we are overspending in mc, spend less mc.
+      if (megacreditBalance < 0) {
+        this.megaCredits += megacreditBalance;
       }
     },
     canUseHeat: function() {

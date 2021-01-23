@@ -1762,14 +1762,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
-    this.setWaitingFor(this.getCommonActions(), () => {
+    this.setWaitingFor(this.getActions(), () => {
       this.actionsTakenThisRound++;
       this.takeAction();
     });
   }
 
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
-  public getCommonActions() {
+  public getActions() {
     const action: OrOptions = new OrOptions();
     action.title = 'Take action for action phase, select one ' +
                       'available action.';

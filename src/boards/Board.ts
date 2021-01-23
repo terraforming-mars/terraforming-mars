@@ -15,10 +15,8 @@ export abstract class Board {
   private maxY: number = 0;
   private readonly adjacency = new Map<SpaceId, Array<ISpace>>();
   protected constructor(public spaces: Array<ISpace>) {
-    spaces.forEach((space) => {
-      this.maxX = Math.max(this.maxX, space.x);
-      this.maxY = Math.max(this.maxY, space.y);
-    });
+    this.maxX = Math.max(...spaces.map((s) => s.x));
+    this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
       this.adjacency.set(space.id, this.computeAdjacentSpaces(space));
     });
@@ -93,7 +91,7 @@ export abstract class Board {
   public getAdjacentSpaces(space: ISpace): Array<ISpace> {
     const spaces = this.adjacency.get(space.id);
     if (spaces === undefined) {
-      throw new Error(`Invalid space ${space.id}`);
+      throw new Error(`Unexpected space ID ${space.id}`);
     }
     // Clone so that callers can't mutate our arrays
     return [...spaces];

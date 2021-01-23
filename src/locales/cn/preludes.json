@@ -3,7 +3,7 @@
     "Increase your MC production 4 steps. Gain 3 MC.": "提升4格MC产量,获得3MC",
 
     "Aquifer Turbines": "含水层涡轮机",
-    "Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.": "放置一个海洋。提升你的电力产能2格,支付3MC",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "放置一个海洋。提升你的电力产能2格,支付3MC",
 
     "Biofuels": "生物燃料",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "提升你的电力和植物产能1级,获得2植物资源",
@@ -33,7 +33,7 @@
     "Play 1 card from hand with a 25 MC reduction.": "以降低 25MC 的价格打出一张手牌",
 
     "Experimental Forest": "实验林场",
-    "Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个绿化版块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个绿化版块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌",
 
     "Galilean Mining": "伽利略矿业",
     "Increase your titanium production 2 steps. Pay 5 MC.": "提升钛合金产量2格,支付5MC",
@@ -81,7 +81,7 @@
     "Increase your energy production 3 steps.": "提升你的电力产能3格",
 
     "Research Network": "研究网络",
-    "Increase your money production 1 step. Draw 3 cards.": "提升你的MC产量1格,抽3张牌",
+    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "提升你的MC产量1格,抽3张牌",
 
     "Self-Sufficient Settlement": "自给自足的据点",
     "Increase your money production 2 steps. Place a City tile.": "提升你的MC产量2级,放置1个城市版块",

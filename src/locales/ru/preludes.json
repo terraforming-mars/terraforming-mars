@@ -3,7 +3,7 @@
     "Increase your MC production 4 steps. Gain 3 MC.": "Повысьте доход на 4. Получите 3 MC.",
 
     "Aquifer Turbines": "Гидротурбины",
-    "Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 MC.",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 MC.",
 
     "Biofuels": "Биотопливо",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Повысьте производство энергии и растений на 1 шаг каждое. Получите 2 растения.",
@@ -33,7 +33,7 @@
     "Play 1 card from hand with a 25 MC reduction.": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
 
     "Experimental Forest": "Экспериментальный лес",
-    "Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
 
     "Galilean Mining": "Добыча на Галилео",
     "Increase your titanium production 2 steps. Pay 5 MC.": "Повысьте производство титана на 2. Заплатите 5 MC.",
@@ -81,7 +81,7 @@
     "Increase your energy production 3 steps.": "Повысьте производство энергии на 3.",
 
     "Research Network": "Исследовательская сеть",
-    "Increase your money production 1 step. Draw 3 cards.": "Возьмите 3 карты и увеличьте доход на 1.",
+    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Возьмите 3 карты и увеличьте доход на 1.",
 
     "Self-Sufficient Settlement": "Самодостаточное поселение",
     "Increase your money production 2 steps. Place a City tile.": "Выложите тайл города. Повысьте доход на 2.",

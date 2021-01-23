@@ -1809,7 +1809,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    TurmoilHandler.addPlayerAction(this, game, action.options);
+    TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.canAfford(8) && !game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();

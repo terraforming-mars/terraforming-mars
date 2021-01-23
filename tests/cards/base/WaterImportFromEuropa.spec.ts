@@ -41,7 +41,7 @@ describe('WaterImportFromEuropa', function() {
   });
 
   it('Can act if can pay even after oceans are maxed', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     player.megaCredits = 12;
 
     expect(card.canAct(player)).is.true;

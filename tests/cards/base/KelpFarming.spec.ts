@@ -6,13 +6,13 @@ import {Resources} from '../../../src/Resources';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('KelpFarming', function() {
-  let card : KelpFarming; let player : Player; let game : Game;
+  let card : KelpFarming; let player : Player;
 
   beforeEach(function() {
     card = new KelpFarming();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -20,7 +20,7 @@ describe('KelpFarming', function() {
   });
 
   it('Should play', function() {
-    maxOutOceans(player, game, 6);
+    maxOutOceans(player, 6);
     expect(card.canPlay(player)).is.true;
 
     const plantsCount = player.plants;

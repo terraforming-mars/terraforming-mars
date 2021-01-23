@@ -9,13 +9,13 @@ import {TestPlayers} from '../../TestingUtils';
 import {maxOutOceans} from './../../TestingUtils';
 
 describe('CometAiming', function() {
-  let card : CometAiming; let player : Player; let game : Game;
+  let card : CometAiming; let player : Player;
 
   beforeEach(function() {
     card = new CometAiming();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -59,7 +59,7 @@ describe('CometAiming', function() {
   it('Cannot spend resource to place ocean if oceans are maxed', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     expect(card.canAct(player)).is.not.true;
 
     player.titanium = 1;

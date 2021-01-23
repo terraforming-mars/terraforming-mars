@@ -36,7 +36,7 @@ describe('Comet', function() {
   });
 
   it('Provides no options if there is nothing to confirm', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     player.plants = 8;
 
     card.play(player);

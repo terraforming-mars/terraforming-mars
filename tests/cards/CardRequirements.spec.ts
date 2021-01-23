@@ -109,13 +109,13 @@ describe('CardRequirements', function() {
   it('satisfies properly for greeneries', function() {
     const requirements = CardRequirements.builder((b) => b.greeneries(2).max());
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player.game, player);
+    AresTestHelper.addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player.game, player);
+    AresTestHelper.addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player.game, player2);
+    AresTestHelper.addGreenery(player2);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player.game, player);
+    AresTestHelper.addGreenery(player);
     expect(requirements.satisfies(player)).eq(false);
   });
 

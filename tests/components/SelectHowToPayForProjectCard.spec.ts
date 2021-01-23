@@ -119,10 +119,10 @@ describe('SelectHowToPayForProjectCard', function() {
   });
 
   it('select how to pay uses steel', async function() {
-    // Forced Precipitation will cost 10. Player has 7MC and will 1 of the 4 available units of steel even though
-    // that leaves the player 1MC short.
+    // Regoplastic will cost 10. Player has 7MC and 4 steels.
+    // They should spend at least enough to pay for the card, that is 6 mc and 2 steel.
     const wrapper = setupCardForPurchase(
-      CardName.COMMERCIAL_DISTRICT, 10,
+      CardName.REGO_PLASTICS, 10,
       {steel: 4, megaCredits: 7, steelValue: 2},
       {canUseSteel: true});
 
@@ -131,7 +131,7 @@ describe('SelectHowToPayForProjectCard', function() {
 
     expect(vm.steel).eq(1);
     const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
-    expect(steelTextBox.value).eq('1');
+    expect(steelTextBox.value).eq('2');
   });
 
   const setupCardForPurchase = function(

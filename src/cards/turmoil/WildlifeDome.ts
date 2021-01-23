@@ -27,7 +27,7 @@ export class WildlifeDome implements IProjectCard {
         const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true, false, false, true) && meetsPartyRequirements && canPlaceTile;
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true, false, false, true) && meetsPartyRequirements && canPlaceTile;
         }
 
         return meetsPartyRequirements && canPlaceTile;

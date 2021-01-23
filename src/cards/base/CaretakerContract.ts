@@ -41,9 +41,9 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
 
     return hasEnoughHeat;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return player.spendHeat(8, () => {
-      player.increaseTerraformRating(game);
+      player.increaseTerraformRating();
       return undefined;
     });
   }

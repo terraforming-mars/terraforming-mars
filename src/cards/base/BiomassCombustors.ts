@@ -9,6 +9,7 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {Units} from '../../Units';
 
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +18,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
       name: CardName.BIOMASS_COMBUSTORS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 4,
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',

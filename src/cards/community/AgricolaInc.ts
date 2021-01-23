@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {ITagCount} from '../../ITagCount';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -24,9 +23,9 @@ export class AgricolaInc implements CorporationCard {
       return undefined;
     }
 
-    public getVictoryPoints(player: Player, game: Game): number {
+    public getVictoryPoints(player: Player): number {
       const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
-      if (game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
+      if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
 
       const playerTags : ITagCount[] = player.getAllTags();
       let points = 0;

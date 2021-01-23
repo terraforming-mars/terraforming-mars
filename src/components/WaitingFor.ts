@@ -22,7 +22,7 @@ import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 let ui_update_timeout_id: number | undefined = undefined;
 

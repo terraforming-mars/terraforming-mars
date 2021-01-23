@@ -30,9 +30,9 @@ export class SpacePortColony implements IProjectCard {
       return undefined;
     }
 
-    public getVictoryPoints(_player: Player, game: Game) {
+    public getVictoryPoints(player: Player) {
       let coloniesCount: number = 0;
-      game.colonies.forEach((colony) => {
+      player.game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.length;
       });
       return Math.floor(coloniesCount / 2);

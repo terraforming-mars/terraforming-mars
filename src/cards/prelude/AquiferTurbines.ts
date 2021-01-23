@@ -20,11 +20,11 @@ export class AquiferTurbines extends PreludeCard {
           b.oceans(1).production((pb) => pb.energy(2)).br;
           b.megacredits(-3);
         }),
-        description: 'Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.',
+        description: 'Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.',
       },
     });
   }
-  public canPlay(player: Player, _game: Game) {
+  public canPlay(player: Player) {
     return player.canAfford(3);
   }
   public play(player: Player, game: Game) {

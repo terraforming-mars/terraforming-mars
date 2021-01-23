@@ -41,7 +41,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
 
     public resourceCount = 0;
 
-    public play(_player: Player, _game: Game) {
+    public play(_player: Player) {
       return undefined;
     }
     public canAct(): boolean {

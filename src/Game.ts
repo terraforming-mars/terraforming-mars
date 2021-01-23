@@ -584,7 +584,7 @@ export class Game implements ISerializable<SerializedGame> {
           player,
           () => {
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-              return somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard) || undefined;
+              return somePlayer.corporationCard.onCorpCardPlayed(player, corporationCard) || undefined;
             }
             return undefined;
           },
@@ -655,13 +655,13 @@ export class Game implements ISerializable<SerializedGame> {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name, player.dealtPreludeCards);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, player.dealtPreludeCards);
       } else {
         const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
         this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this, this.getNextDraft(player).name, cards);
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, cards);
       }
     });
   }
@@ -680,7 +680,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.researchedPlayers.clear();
     this.save();
     this.players.forEach((player) => {
-      player.runResearchPhase(this, this.gameOptions.draftVariant);
+      player.runResearchPhase(this.gameOptions.draftVariant);
     });
   }
 
@@ -771,7 +771,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoWorldGovernmentTerraforming() {
-    this.first.worldGovernmentTerraforming(this);
+    this.first.worldGovernmentTerraforming();
   }
 
   public doneWorldGovernmentTerraforming() {
@@ -821,7 +821,10 @@ export class Game implements ISerializable<SerializedGame> {
   public playerIsFinishedWithResearchPhase(player: Player): void {
     this.researchedPlayers.add(player.id);
     if (this.allPlayersHaveFinishedResearch()) {
-      this.deferredActions.runAll(() => this.gotoActionPhase());
+      this.deferredActions.runAll(() => {
+        this.passedPlayers.clear();
+        this.startActionsForPlayer(this.first);
+      });
     }
   }
 
@@ -971,12 +974,6 @@ export class Game implements ISerializable<SerializedGame> {
     }
   }
 
-  private gotoActionPhase(): void {
-    this.phase = Phase.ACTION;
-    this.passedPlayers.clear();
-    this.startActionsForPlayer(this.first);
-  }
-
   private gotoEndGame(): void {
     Database.getInstance().cleanSaves(this.id, this.lastSaveId);
     const scores: Array<Score> = [];
@@ -1047,7 +1044,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 
-    player.takeAction(this);
+    player.takeAction();
   }
 
   public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
@@ -1066,7 +1063,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OXYGEN, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
       this.increaseTemperature(player, 1);
@@ -1104,11 +1101,11 @@ export class Game implements ISerializable<SerializedGame> {
         player.drawCard();
       }
       if (this.venusScaleLevel < 16 && this.venusScaleLevel + steps * 2 >= 16) {
-        player.increaseTerraformRating(this);
+        player.increaseTerraformRating();
       }
 
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.VENUS, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
 
     // Check for Aphrodite corporation
@@ -1149,7 +1146,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.TEMPERATURE, steps);
-      player.increaseTerraformRatingSteps(steps, this);
+      player.increaseTerraformRatingSteps(steps);
     }
 
     // BONUS FOR OCEAN TILE AT 0
@@ -1180,7 +1177,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(this, parameter === GlobalParameter.VENUS);
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter === GlobalParameter.VENUS);
 
     if (parameter === GlobalParameter.OCEANS) {
       currentLevel = this.board.getOceansOnBoard();
@@ -1333,11 +1330,11 @@ export class Game implements ISerializable<SerializedGame> {
     this.players.forEach((p) => {
       if (p.corporationCard !== undefined &&
           p.corporationCard.onTilePlaced !== undefined) {
-        p.corporationCard.onTilePlaced(p, space, this);
+        p.corporationCard.onTilePlaced(p, space);
       }
       p.playedCards.forEach((playedCard) => {
         if (playedCard.onTilePlaced !== undefined) {
-          playedCard.onTilePlaced(p, space, this);
+          playedCard.onTilePlaced(p, space);
         }
       });
     });
@@ -1409,7 +1406,7 @@ export class Game implements ISerializable<SerializedGame> {
     });
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OCEANS);
-      player.increaseTerraformRating(this);
+      player.increaseTerraformRating();
     }
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOceanPlaced(aresData, player);
@@ -1619,7 +1616,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.gotoResearchPhase();
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction(game);
+      game.getPlayerById(game.activePlayer).takeAction();
     }
 
     return game;

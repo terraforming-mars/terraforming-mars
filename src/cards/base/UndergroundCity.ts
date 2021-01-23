@@ -18,7 +18,7 @@ export class UndergroundCity extends Card implements IProjectCard {
       name: CardName.UNDERGROUND_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      productionDelta: Units.of({energy: -2, steel: 2}),
+      productionBox: Units.of({energy: -2, steel: 2}),
 
       metadata: {
         cardNumber: '032',

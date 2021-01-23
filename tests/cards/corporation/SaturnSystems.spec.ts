@@ -7,13 +7,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('SaturnSystems', function() {
-  let card : SaturnSystems; let player : Player; let game : Game;
+  let card : SaturnSystems; let player : Player;
 
   beforeEach(function() {
     card = new SaturnSystems();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -24,16 +24,16 @@ describe('SaturnSystems', function() {
 
   it('Runs onCardPlayed', function() {
     player.corporationCard = card;
-    card.onCardPlayed(player, game, new MirandaResort());
+    card.onCardPlayed(player, new MirandaResort());
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 
   it('Runs onCardPlayed when other player plays card', function() {
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     player.corporationCard = card;
 
-    card.onCardPlayed(player2, game, new MirandaResort());
+    card.onCardPlayed(player2, new MirandaResort());
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 });

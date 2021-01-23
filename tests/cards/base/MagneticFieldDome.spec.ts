@@ -23,7 +23,7 @@ describe('MagneticFieldDome', function() {
     player.addProduction(Resources.ENERGY, 2);
     expect(card.canPlay(player, game)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);

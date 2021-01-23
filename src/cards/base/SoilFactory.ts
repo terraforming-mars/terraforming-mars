@@ -15,7 +15,7 @@ export class SoilFactory extends Card implements IProjectCard {
       name: CardName.SOIL_FACTORY,
       tags: [Tags.BUILDING],
       cost: 9,
-      productionDelta: Units.of({energy: -1, plants: 1}),
+      productionBox: Units.of({energy: -1, plants: 1}),
 
       metadata: {
         cardNumber: '179',

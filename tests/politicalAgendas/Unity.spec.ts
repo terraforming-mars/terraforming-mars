@@ -88,6 +88,6 @@ describe('Unity', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[3].id);
 
     const card = new VestaShipyard();
-    expect(player.getCardCost(game, card)).to.eq(card.cost - 2);
+    expect(player.getCardCost(card)).to.eq(card.cost - 2);
   });
 });

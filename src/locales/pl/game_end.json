@@ -1,0 +1,27 @@
+{
+    "Sorry, you lose.": "Niestety, przegrałeś/aś.",
+    "Next time you will get more luck!": "Kolejnym razem na pewno pójdzie lepiej!",
+    "Also, take into account these small hints to win:": "Weź pod uwagę te drobne wskazówki:",
+    "Concentrate more on Global parameters, not on Victory Points": "Skup się bardziej na Wskaźnikach Globalnych zamiast Punktów Zwycięstwa",
+    "Don't be greedy on cards selection": "Nie przesadzaj z dobieraniem kart",
+    "Try to increase Heat production, not Megacredits": "Postaraj się zwiększać produkcję ciepła, nie Megakredytów",
+    "Try to start with Beginner corporation": "Spróbuj zacząć z korporacją dla początkujących",
+    
+    "You win!": "Wygrałeś/aś!",
+    "But it isn't the reason to stop making Mars better.": "Nie jest to jednak powód do zaprzestania dalszego doskonalenia Marsa",
+    "Try to win with expansions enabled": "Spróbuj wygrać korzystając z dodatków",
+    "Try to win before the last generation comes": "Postaraj się wygrać przed nadejściem ostatniego pokolenia",
+    "Can you get": "Czy zdołasz zdobyć",
+    "+ Victory Points?": "+ Punktów Zwycięstwa?",
+
+    "Victory points breakdown after": "Analiza punktów zwycięstwa po",
+    "generations": "pokoleniach",
+    "Player": "Gracz",
+    "Corporation": "Korporacja",
+    "TR": "WT",
+    "VP": "PZ",
+    "Total": "Razem",
+    "Victory points details for": "Szczegóły punktów zwycięstwa u:",
+    "Final situation on the board": "Końcowa sytuacja na planszy",
+    "Final game log": "Finalny dziennik gry"
+}

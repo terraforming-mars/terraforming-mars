@@ -17,7 +17,7 @@ export class MiningGuild extends Card implements CorporationCard {
       name: CardName.MINING_GUILD,
       tags: [Tags.BUILDING, Tags.BUILDING],
       startingMegaCredits: 30,
-      productionDelta: Units.of({steel: 1}),
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R24',

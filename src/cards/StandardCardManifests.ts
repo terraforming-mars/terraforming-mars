@@ -222,13 +222,14 @@ import {WavePower} from './base/WavePower';
 import {Windmills} from './base/Windmills';
 import {Worms} from './base/Worms';
 import {Zeppelins} from './base/Zeppelins';
-import {Aquifer} from './standardProjects/Aquifer';
-import {City} from './standardProjects/City';
-import {PowerPlantStandard} from './standardProjects/PowerPlant';
-import {Greenery} from './standardProjects/Greenery';
-import {AsteroidStandard} from './standardProjects/Asteroid';
-import {BufferGas} from './standardProjects/BufferGas';
-import {SellPatents} from './standardProjects/SellPatents';
+import {AquiferStandardProject} from './base/standardProjects/AquiferStandardProject';
+import {CityStandardProject} from './base/standardProjects/CityStandardProject';
+import {PowerPlantStandardProject} from './base/standardProjects/PowerPlantStandardProject';
+import {GreeneryStandardProject} from './base/standardProjects/GreeneryStandardProject';
+import {AsteroidStandardProject} from './base/standardProjects/AsteroidStandardProject';
+import {SellPatentsStandardProject} from './base/standardProjects/SellPatentsStandardProject';
+import {ConvertPlants} from './base/standardActions/ConvertPlants';
+import {ConvertHeat} from './base/standardActions/ConvertHeat';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -385,13 +386,16 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, Factory: UnitedNationsMarsInitiative},
   ],
   standardProjects: [
-    {cardName: CardName.STANDARD_AQUIFER, Factory: Aquifer},
-    {cardName: CardName.STANDARD_CITY, Factory: City},
-    {cardName: CardName.STANDARD_POWER_PLANT, Factory: PowerPlantStandard},
-    {cardName: CardName.STANDARD_GREENERY, Factory: Greenery},
-    {cardName: CardName.STANDARD_ASTEROID, Factory: AsteroidStandard},
-    {cardName: CardName.STANDARD_BUFFER_GAS, Factory: BufferGas},
-    {cardName: CardName.STANDARD_SELL_PATENTS, Factory: SellPatents},
+    {cardName: CardName.AQUIFER_STANDARD_PROJECT, Factory: AquiferStandardProject},
+    {cardName: CardName.CITY_STANDARD_PROJECT, Factory: CityStandardProject},
+    {cardName: CardName.POWER_PLANT_STANDARD_PROJECT, Factory: PowerPlantStandardProject},
+    {cardName: CardName.GREENERY_STANDARD_PROJECT, Factory: GreeneryStandardProject},
+    {cardName: CardName.ASTEROID_STANDARD_PROJECT, Factory: AsteroidStandardProject},
+    {cardName: CardName.SELL_PATENTS_STANDARD_PROJECT, Factory: SellPatentsStandardProject},
+  ],
+  standardActions: [
+    {cardName: CardName.CONVERT_PLANTS, Factory: ConvertPlants},
+    {cardName: CardName.CONVERT_HEAT, Factory: ConvertHeat},
   ],
 });
 

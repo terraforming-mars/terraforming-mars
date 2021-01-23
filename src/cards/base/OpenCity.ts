@@ -19,7 +19,7 @@ export class OpenCity extends Card implements IProjectCard {
       name: CardName.OPEN_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 23,
-      productionDelta: Units.of({energy: -1, megacredits: 4}),
+      productionBox: Units.of({energy: -1, megacredits: 4}),
 
       metadata: {
         cardNumber: '108',

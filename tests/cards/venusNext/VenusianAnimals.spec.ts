@@ -26,10 +26,10 @@ describe('VenusianAnimals', function() {
     player.playedCards.push(card);
     card.play();
 
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(player.getResourcesOnCard(card)).to.eq(1);
 
-    card.onCardPlayed(player, game, new Research());
+    card.onCardPlayed(player, new Research());
     expect(player.getResourcesOnCard(card)).to.eq(3);
 
     expect(card.getVictoryPoints()).to.eq(3);

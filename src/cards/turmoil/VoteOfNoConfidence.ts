@@ -25,7 +25,7 @@ export class VoteOfNoConfidence implements IProjectCard {
         const hasPartyLeadership = parties.length > 0;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && chairmanIsNeutral && hasPartyLeadership;
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && chairmanIsNeutral && hasPartyLeadership;
         }
 
         return chairmanIsNeutral && hasPartyLeadership;
@@ -40,7 +40,7 @@ export class VoteOfNoConfidence implements IProjectCard {
             if (index > -1) {
               game.turmoil.delegateReserve.splice(index, 1);
             }
-            player.increaseTerraformRating(game);
+            player.increaseTerraformRating();
       }
       return undefined;
     }

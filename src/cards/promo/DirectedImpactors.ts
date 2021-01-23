@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard, ICard} from '../ICard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
@@ -14,16 +15,32 @@ import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
-    public name = CardName.DIRECTED_IMPACTORS;
-    public cost = 8;
-    public tags = [Tags.SPACE];
-    public resourceType = ResourceType.ASTEROID;
-    public resourceCount: number = 0;
-    public cardType = CardType.ACTIVE;
+export class DirectedImpactors extends Card implements IActionCard, IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.DIRECTED_IMPACTORS,
+      tags: [Tags.SPACE],
+      cost: 8,
+      resourceType: ResourceType.ASTEROID,
+
+      metadata: {
+        cardNumber: 'X18',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
+            eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
+          }).br;
+          b.or().br;
+          b.action('Remove 1 asteroid here to raise temperature 1 step.', (eb) => {
+            eb.asteroids(1).startAction.temperature(1);
+          });
+        }),
+      },
+    });
+  }
+    public resourceCount = 0;
 
     public play() {
       return undefined;
@@ -31,7 +48,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
     public canAct(player: Player, game: Game): boolean {
       const cardHasResources = this.resourceCount > 0;
-      const canPayForAsteroid = player.canAfford(6, game, false, true);
+      const canPayForAsteroid = player.canAfford(6, false, true);
 
       if (game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
       if (canPayForAsteroid) return true;
@@ -60,7 +77,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         return this.addResource(player, game, asteroidCards);
       }
 
-      if (player.canAfford(6, game, false, true)) {
+      if (player.canAfford(6, false, true)) {
         opts.push(addResource);
       } else {
         return this.spendResource(player, game);
@@ -95,17 +112,5 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
       LogHelper.logRemoveResource(player, this, 1, 'raise temperature 1 step');
       game.increaseTemperature(player, 1);
       return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'X18',
-      renderData: CardRenderer.builder((b) => {
-        b.action('Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
-          eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
-        }).br;
-        b.or().br;
-        b.action('Remove 1 asteroid here to raise temperature 1 step.', (eb) => {
-          eb.asteroids(1).startAction.temperature(1);
-        });
-      }),
     }
 }

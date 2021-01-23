@@ -24,7 +24,7 @@ import * as constants from '../src/constants';
 import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
-import {Greenery} from '../src/cards/standardProjects/Greenery';
+import {GreeneryStandardProject} from '../src/cards/base/standardProjects/GreeneryStandardProject';
 import {CardName} from '../src/CardName';
 
 describe('Turmoil', function() {
@@ -36,6 +36,7 @@ describe('Turmoil', function() {
     const gameOptions = setCustomGameOptions();
 
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -120,6 +121,8 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+
+    game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
 
     expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
@@ -136,7 +139,7 @@ describe('Turmoil', function() {
     setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;
 
-    player.worldGovernmentTerraforming(game);
+    player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
@@ -151,16 +154,16 @@ describe('Turmoil', function() {
     const availableStandardProjects = player.getPlayableStandardProjects();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(availableStandardProjects.map((c) => c.name)).deep.eq([CardName.STANDARD_POWER_PLANT]);
+    expect(availableStandardProjects.map((c) => c.name)).deep.eq([CardName.POWER_PLANT_STANDARD_PROJECT]);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
-    expect(new Greenery().canAct(player, game)).equal(false);
+    expect(new GreeneryStandardProject().canAct(player)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    expect(new Greenery().canAct(player, game)).equal(true);
+    expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {

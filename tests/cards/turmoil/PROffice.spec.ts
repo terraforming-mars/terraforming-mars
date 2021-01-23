@@ -23,7 +23,7 @@ describe('PROffice', function() {
     expect(card.canPlay(player, game)).is.true;
 
     player.playedCards.push(card2, card3);
-    card.play(player, game);
+    card.play(player);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
     expect(player.getTerraformRating()).to.eq(15);
   });

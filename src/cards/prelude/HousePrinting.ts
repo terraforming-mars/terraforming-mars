@@ -14,7 +14,7 @@ export class HousePrinting extends Card {
       name: CardName.HOUSE_PRINTING,
       tags: [Tags.BUILDING],
       cost: 10,
-      productionDelta: Units.of({steel: 1}),
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'P36',

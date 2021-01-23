@@ -3,7 +3,7 @@
     "Increase your MC production 4 steps. Gain 3 MC.": "Augmentez votre production de M€ de 4. Gagnez 3 M€.",
 
     "Aquifer Turbines": "Turbines Aquifères",
-    "Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.": "Placez 1 tuile Océan. Augmentez votre production d'énergie de 2. Perdez 3 M€.",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Placez 1 tuile Océan. Augmentez votre production d'énergie de 2. Perdez 3 M€.",
 
     "Biofuels": "Biocarburants",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Augmentez vos productions de plantes et d'énergie de 1 chacune. Gagnez 2 plantes.",
@@ -33,7 +33,7 @@
     "Play 1 card from hand with a 25 MC reduction.": "JOUEZ 1 CARTE DE VOTRE MAIN, SON COÛT EST RÉDUIT DE 25 M€.",
 
     "Experimental Forest": "Forêt Expérimentale",
-    "Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Placez 1 tuile Forêt et augmentez l'oxygène de 1. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Plante : ajoutez ces cartes à votre main et défaussez les autres.",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Placez 1 tuile Forêt et augmentez l'oxygène de 1. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Plante : ajoutez ces cartes à votre main et défaussez les autres.",
 
     "Galilean Mining": "Mine Galiléenne",
     "Increase your titanium production 2 steps. Pay 5 MC.": "Augmentez votre production de titane de 2. Perdez 5 M€.",
@@ -81,7 +81,7 @@
     "Increase your energy production 3 steps.": "Augmentez votre production d'énergie de 3.",
 
     "Research Network": "Réseau de Recherche",
-    "Increase your money production 1 step. Draw 3 cards.": "Piochez 3 cartes et augmentez votre production de M€ de 1.",
+    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Piochez 3 cartes et augmentez votre production de M€ de 1.",
 
     "Self-Sufficient Settlement": "Campement Autonome",
     "Increase your money production 2 steps. Place a City tile.": "Placez 1 tuile Cité. Augmentez votre production de M€ de 2.",

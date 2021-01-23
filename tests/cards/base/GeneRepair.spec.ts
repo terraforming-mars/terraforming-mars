@@ -6,13 +6,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('GeneRepair', function() {
-  let card : GeneRepair; let player : Player; let game : Game;
+  let card : GeneRepair; let player : Player;
 
   beforeEach(function() {
     card = new GeneRepair();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -22,7 +22,7 @@ describe('GeneRepair', function() {
   it('Should play', function() {
     player.playedCards.push(card, card, card);
     expect(card.canPlay(player)).is.true;
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

@@ -20,7 +20,7 @@ export class NoctisCity extends Card implements IProjectCard {
       name: CardName.NOCTIS_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '017',
@@ -30,7 +30,7 @@ export class NoctisCity extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.city();
         }),
-        description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.',
+        description: 'Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.',
       },
     });
   }

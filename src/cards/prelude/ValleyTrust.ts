@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from './../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
@@ -34,20 +33,20 @@ export class ValleyTrust extends Card implements CorporationCard {
     });
   }
 
-  public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+  public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.SCIENCE).length * 2;
   }
 
-  public initialAction(player: Player, game: Game) {
-    if (game.gameOptions.preludeExtension) {
+  public initialAction(player: Player) {
+    if (player.game.gameOptions.preludeExtension) {
       const cardsDrawn: Array<IProjectCard> = [
-        game.dealer.dealPreludeCard(),
-        game.dealer.dealPreludeCard(),
-        game.dealer.dealPreludeCard(),
+        player.game.dealer.dealPreludeCard(),
+        player.game.dealer.dealPreludeCard(),
+        player.game.dealer.dealPreludeCard(),
       ];
 
       return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
-        if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player, game)) {
+        if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player, player.game)) {
           return player.playCard(foundCards[0]);
         } else {
           throw new Error('You cannot pay for this card');

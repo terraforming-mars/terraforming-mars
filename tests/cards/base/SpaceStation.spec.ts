@@ -10,12 +10,12 @@ describe('SpaceStation', function() {
     const card = new SpaceStation();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play();
     expect(action).is.undefined;
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
-    expect(card.getCardDiscount(player, game, card)).to.eq(2);
-    expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
+    expect(card.getCardDiscount(player, card)).to.eq(2);
+    expect(card.getCardDiscount(player, new Bushes())).to.eq(0);
   });
 });

@@ -16,7 +16,7 @@ export class LunarDustProcessingPlant extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.BUILDING],
       cost: 6,
-      productionDelta: Units.of({}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 1 titanium. Raise Logistic Rate 1 step.',

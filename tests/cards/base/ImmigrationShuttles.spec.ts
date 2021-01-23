@@ -17,6 +17,6 @@ describe('ImmigrationShuttles', function() {
       game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     }
     expect(game.getCitiesInPlay()).to.eq(5);
-    expect(card.getVictoryPoints(player, game)).to.eq(1);
+    expect(card.getVictoryPoints(player)).to.eq(1);
   });
 });

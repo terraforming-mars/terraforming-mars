@@ -35,7 +35,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
 
   public canPlay(player: Player, game: Game): boolean {
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
@@ -43,7 +43,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
 
   public play(player: Player, game: Game) {
     player.plants += 4;
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
     game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
     return undefined;

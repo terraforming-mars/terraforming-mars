@@ -8,13 +8,13 @@ import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmon
 import {TestPlayers} from '../../TestingUtils';
 
 describe('TopsoilContract', function() {
-  let card : TopsoilContract; let player : Player; let player2 : Player; let game : Game;
+  let card : TopsoilContract; let player : Player; let player2 : Player;
 
   beforeEach(function() {
     card = new TopsoilContract();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can play', function() {
@@ -39,7 +39,7 @@ describe('TopsoilContract', function() {
     // Don't get MC when other players gain microbes
     const ants = new Ants();
     player2.playedCards.push(ants);
-    ants.action(player2, game);
+    ants.action(player2);
     expect(player.megaCredits).to.eq(3);
   });
 });

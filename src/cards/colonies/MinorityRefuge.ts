@@ -3,8 +3,8 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
+import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,13 +14,36 @@ export class MinorityRefuge implements IProjectCard {
     public tags = [Tags.SPACE];
     public name = CardName.MINORITY_REFUGE;
     public cardType = CardType.AUTOMATED;
+    public warning?: string;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return player.hasAvailableColonyTileToBuildOn(game) && player.getProduction(Resources.MEGACREDITS) >= -3;
+    public canPlay(player: Player): boolean {
+      if (player.hasAvailableColonyTileToBuildOn() === false) {
+        return false;
+      }
+
+      const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
+      if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+        return true;
+      } else if (megaCreditsProduction <= -4) {
+        const lunaIsAvailable = player.game.colonies.some((colony) =>
+          colony.name === ColonyName.LUNA &&
+          colony.isColonyFull() === false &&
+          colony.colonies.includes(player.id) === false);
+
+        if (lunaIsAvailable === false) {
+          return false;
+        }
+        this.warning = 'You will only be able to build the colony on Luna.';
+      }
+
+      return true;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge'));
+    public play(player: Player) {
+      const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
+        player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
+        undefined;
+      player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge', openColonies));
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;
     }

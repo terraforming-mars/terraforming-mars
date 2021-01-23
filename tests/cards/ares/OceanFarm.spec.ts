@@ -38,7 +38,7 @@ describe('OceanFarm', function() {
     expect(player.getProduction(Resources.PLANTS)).eq(0);
 
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     expect(player.getProduction(Resources.HEAT)).eq(1);
     expect(player.getProduction(Resources.PLANTS)).eq(1);
@@ -53,7 +53,7 @@ describe('OceanFarm', function() {
 
   it('Ocean Farm counts as ocean for adjacency', function() {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 

@@ -76,7 +76,7 @@ describe('Player', function() {
 
     player.addProduction(Resources.HEAT, 2);
     Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
+    const action = card.play(player); // Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);

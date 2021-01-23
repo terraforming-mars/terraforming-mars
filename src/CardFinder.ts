@@ -12,8 +12,8 @@ import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
-import {StandardProjectCard} from './cards/standardProjects/StandardProjectCard';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
+import {Deck} from './Deck';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -35,30 +35,24 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getStandardProjectCardByName(cardName: string): StandardProjectCard | undefined {
-      let found : (ICardFactory<StandardProjectCard> | undefined);
-      CardFinder.getDecks().some((deck) => {
-        found = deck.standardProjects.findByCardName(cardName as CardName);
-        return found !== undefined;
+    public getCardByName<T extends ICard>(cardName: string, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
+      let found : (ICardFactory<T> | undefined);
+      CardFinder.getDecks().some((manifest) => {
+        decks(manifest).some((deck) => {
+          found = deck.findByCardName(cardName as CardName);
+          return found;
+        });
+        return found;
       });
       if (found !== undefined) {
         return new found.Factory();
       }
-      console.warn(`standard project card not found ${cardName}`);
+      console.warn(`card not found ${cardName}`);
       return undefined;
     }
 
     public getCorporationCardByName(cardName: string): CorporationCard | undefined {
-      let found : (ICardFactory<CorporationCard> | undefined);
-      CardFinder.getDecks().some((deck) => {
-        found = deck.corporationCards.findByCardName(cardName as CardName);
-        return found !== undefined;
-      });
-      if (found !== undefined) {
-        return new found.Factory();
-      }
-      console.warn(`corporation card not found ${cardName}`);
-      return undefined;
+      return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
     }
 
     // Function to return a card object by its name
@@ -66,19 +60,7 @@ export class CardFinder {
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
     //              another function, perhaps?
     public getProjectCardByName(cardName: string): IProjectCard | undefined {
-      let found : (ICardFactory<IProjectCard> | undefined);
-      CardFinder.getDecks().some((deck) => {
-        found = deck.projectCards.findByCardName(cardName as CardName);
-        if (found === undefined) {
-          found = deck.preludeCards.findByCardName(cardName as CardName);
-        }
-        return found !== undefined;
-      });
-      if (found !== undefined) {
-        return new found.Factory();
-      }
-      console.warn(`card not found ${cardName}`);
-      return undefined;
+      return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
     }
 
     public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {

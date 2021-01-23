@@ -9,13 +9,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AgricolaInc', function() {
-  let card : AgricolaInc; let player : Player; let game : Game;
+  let card : AgricolaInc; let player : Player;
 
   beforeEach(function() {
     card = new AgricolaInc();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     card.play(player);
     player.corporationCard = card;
@@ -27,9 +27,9 @@ describe('AgricolaInc', function() {
   });
 
   it('Scores endgame VP correctly', function() {
-    expect(card.getVictoryPoints(player, game)).to.eq(-18);
+    expect(card.getVictoryPoints(player)).to.eq(-18);
 
     player.playedCards.push(new SolarWindPower(), new Research(), new CoronaExtractor());
-    expect(card.getVictoryPoints(player, game)).to.eq(-11);
+    expect(card.getVictoryPoints(player)).to.eq(-11);
   });
 });

@@ -10,7 +10,7 @@ import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {HelpIconology} from './HelpIconology';
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 interface MainAppData {
     screen: 'create-game-form' |

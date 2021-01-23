@@ -27,11 +27,11 @@ describe('OlympusConference', function() {
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
-    card.onCardPlayed(player, game, new Bushes());
+    card.onCardPlayed(player, new Bushes());
     expect(game.deferredActions).has.lengthOf(0);
 
     // No resource
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.next()!.execute();
     game.deferredActions.shift();
@@ -39,7 +39,7 @@ describe('OlympusConference', function() {
     expect(card.resourceCount).to.eq(1);
 
     // Resource available
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
@@ -55,7 +55,7 @@ describe('OlympusConference', function() {
 
   it('Plays twice for Research', function() {
     player.playedCards.push(card);
-    card.onCardPlayed(player, game, new Research());
+    card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
 
     // No resource, can't draw, resource automatically added

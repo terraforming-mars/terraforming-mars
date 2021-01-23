@@ -6,7 +6,6 @@ import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -37,8 +36,8 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
   }
     public resourceCount = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OCEANS, 8);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 8);
     }
 
     public play() {

@@ -202,7 +202,7 @@ describe('CardRequirements', function() {
 
     player2.plants = 1;
     const smallAsteroid = new SmallAsteroid();
-    smallAsteroid.play(player, player.game);
+    smallAsteroid.play(player);
     // Choose Remove 1 plant option
     const orOptions = player.game.deferredActions.next()!.execute() as OrOptions;
     orOptions.options[0].cb([player2]);

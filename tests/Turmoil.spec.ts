@@ -173,12 +173,12 @@ describe('Turmoil', function() {
     const jovianEmbassy = new JovianEmbassy();
 
     expect(releaseOfInertGases.canPlay(player)).is.not.true; // needs 20 MC
-    expect(jovianEmbassy.canPlay(player, game)).is.not.true; // needs 17 MC
+    expect(jovianEmbassy.canPlay(player)).is.not.true; // needs 17 MC
 
     player.addProduction(Resources.ENERGY, 4);
     player.megaCredits = 30;
     const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
-    expect(magneticFieldGeneratorsPromo.canPlay(player, game)).is.not.true; // needs 31 MC
+    expect(magneticFieldGeneratorsPromo.canPlay(player)).is.not.true; // needs 31 MC
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {

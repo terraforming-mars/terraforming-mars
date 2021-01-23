@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -37,13 +36,13 @@ export class HiTechLab extends Card implements IProjectCard {
     return player.getResource(Resources.ENERGY) > 0;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return new SelectAmount(
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
         player.setResource(Resources.ENERGY, -amount);
-        game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
+        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         return player.drawCardKeepSome(amount, {keepMax: 1});
       },
       1,

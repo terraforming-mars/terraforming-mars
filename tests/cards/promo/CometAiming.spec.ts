@@ -24,21 +24,21 @@ describe('CometAiming', function() {
 
   it('Can\'t act', function() {
     player.playedCards.push(card);
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act - single action choice, single target', function() {
     player.playedCards.push(card);
     player.titanium = 1;
-    expect(card.canAct(player, game)).is.true;
+    expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
 
-    card.action(player, game);
-    expect(game.deferredActions).has.lengthOf(1);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    card.action(player);
+    expect(player.game.deferredActions).has.lengthOf(1);
+    const selectSpace = player.game.deferredActions.next()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
@@ -50,7 +50,7 @@ describe('CometAiming', function() {
     player.titanium = 1;
     card.resourceCount = 1;
 
-    const action = card.action(player, game) as OrOptions;
+    const action = card.action(player) as OrOptions;
     action.options[1].cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(player.titanium).to.eq(0);
@@ -60,13 +60,13 @@ describe('CometAiming', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
     maxOutOceans(player, game);
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
 
     player.titanium = 1;
-    expect(card.canAct(player, game)).is.true;
+    expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
-    expect(game.deferredActions).has.lengthOf(0);
+    card.action(player);
+    expect(player.game.deferredActions).has.lengthOf(0);
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(2);
   });

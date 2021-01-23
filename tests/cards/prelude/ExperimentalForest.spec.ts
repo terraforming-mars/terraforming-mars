@@ -10,7 +10,7 @@ describe('ExperimentalForest', function() {
     const card = new ExperimentalForest();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    card.play(player);
 
     // Select Greenery space
     const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;

@@ -6,12 +6,12 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('EcologyExperts', function() {
-  let card : EcologyExperts; let player : Player; let game: Game;
+  let card : EcologyExperts; let player : Player;
 
   beforeEach(function() {
     card = new EcologyExperts();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Gets requirement bonus', function() {
@@ -21,7 +21,7 @@ describe('EcologyExperts', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
   });

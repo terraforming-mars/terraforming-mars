@@ -135,7 +135,8 @@ describe('SelectHowToPayForProjectCard', function() {
   });
 
   it('select how to pay uses titanium metal bonus', async function() {
-    // Solar Wind Power will cost 11. Player has 2MC and 4 Ti (at value 7).
+    // Solar Wind Power will cost 11. Player has 2MC and 4 Ti. The titanium is
+    // artificially inflated to be worth 7MC each.
     // The algorithm will try to spend 2 mc. Then spend as much Ti as possible.
     // This will come down to 2 MC and 2 Ti (at value 7). So we are effectively spending 16.
     // That is overspending by 5 mc. The algorithm will try to spend 5 mc less if possible.
@@ -156,7 +157,8 @@ describe('SelectHowToPayForProjectCard', function() {
   });
 
   it('select how to pay uses steel and titanium with metal bonus', async function() {
-    // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti (at value 6).
+    // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti. The titanium is
+    // artificially inflated to be worth 6MC each.
     // The algorithm will try to spend 1 mc. Then spend as much steel as possible. Then spend as much Ti as possible.
     // This will come down to 1 MC, 4 steels (at value 3), and 3 Ti (at value 6). So we are effectively spending 31.
     // That is overspending by 4 mc.
@@ -180,7 +182,8 @@ describe('SelectHowToPayForProjectCard', function() {
   });
 
   it('select how to pay uses steel and microbes', async function() {
-    // Protected Valley will cost 23. Player has no mc, 5 microbes, and 10 steels (at value 4).
+    // Protected Valley will cost 23. Player has no mc, 5 microbes, and 10 steels The steel is
+    // artificially inflated to be worth 4MC each.
     // The algorithm will try to spend no mc. Then spend as much microbes as possible. Then spend as much steel as possible.
     // This will come down to 0 MC, 5 microbes (at value 2), and 4 steels (at value 4). So we are effectively spending 26.
     // That is overspending by 4 mc.

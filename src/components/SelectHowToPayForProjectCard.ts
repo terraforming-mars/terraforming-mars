@@ -167,7 +167,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
 
       // If we are overspending in mc, spend less mc.
-      if (megacreditBalance < 0) {
+      if (megacreditBalance < 0 && this.megaCredits + megacreditBalance >= 0) {
         this.megaCredits += megacreditBalance;
       }
     },

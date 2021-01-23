@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
@@ -28,14 +27,14 @@ export class CloudSeeding extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) > -5 &&
-        game.checkMinRequirements(player, GlobalParameter.OCEANS, 3) &&
-        game.someoneHasResourceProduction(Resources.HEAT, 1);
+        player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 3) &&
+        player.game.someoneHasResourceProduction(Resources.HEAT, 1);
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 1));
+  public play(player: Player) {
+    player.game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 1));
     player.addProduction(Resources.MEGACREDITS, -1);
     player.addProduction(Resources.PLANTS, 2);
     return undefined;

@@ -19,11 +19,11 @@ describe('ArtificialLake', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
         action!.availableSpaces.forEach((space) => {
@@ -50,10 +50,10 @@ describe('ArtificialLake', function() {
     }
 
     // Card is still playable to get VPs...
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // ...but an action to place ocean is not unavailable
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 });

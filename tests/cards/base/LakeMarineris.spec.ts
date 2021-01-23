@@ -16,13 +16,13 @@ describe('LakeMarineris', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = -0;
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
 
     expect(game.deferredActions).has.lengthOf(2);
     const firstOcean = game.deferredActions.shift()!.execute() as SelectSpace;

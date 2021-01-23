@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
@@ -27,20 +26,20 @@ export class IceAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();
+  public canPlay(player: Player): boolean {
+    const remainingOceans = MAX_OCEAN_TILES - player.game.board.getOceansOnBoard();
     const oceansPlaced = Math.min(remainingOceans, 2);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
-    game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
+  public play(player: Player) {
+    player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
+    player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;
   }
 }

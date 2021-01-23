@@ -21,7 +21,7 @@ describe('ImportedNitrogen', function() {
   });
 
   it('Should play without animals and microbes', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
     expect(player.plants).to.eq(4);
   });
@@ -30,7 +30,7 @@ describe('ImportedNitrogen', function() {
     const pets = new Pets();
     const birds = new Birds();
     player.playedCards.push(pets, birds);
-    card.play(player, game);
+    card.play(player);
 
     const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
     expect(addMicrobes).is.undefined;
@@ -47,7 +47,7 @@ describe('ImportedNitrogen', function() {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
-    card.play(player, game);
+    card.play(player);
 
     const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);
@@ -66,7 +66,7 @@ describe('ImportedNitrogen', function() {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(pets, tardigrades, birds, ants);
-    card.play(player, game);
+    card.play(player);
 
     const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);

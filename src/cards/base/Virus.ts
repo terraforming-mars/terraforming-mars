@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../CardName';
@@ -31,9 +30,9 @@ export class Virus extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game): PlayerInput | undefined {
-    if (game.getPlayers().length === 1) {
-      game.someoneHasRemovedOtherPlayersPlants = true;
+  public play(player: Player): PlayerInput | undefined {
+    if (player.game.getPlayers().length === 1) {
+      player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }
 

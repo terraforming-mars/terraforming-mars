@@ -18,7 +18,7 @@ describe('Asteroid', function() {
 
   it('Should play', function() {
     player2.plants = 2;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;

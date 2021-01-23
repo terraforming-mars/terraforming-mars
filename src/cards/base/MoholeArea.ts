@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SpaceType} from '../../SpaceType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -36,9 +35,9 @@ export class MoholeArea extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select an ocean space for special tile', game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      game.addTile(player, SpaceType.OCEAN, space, {tileType: TileType.MOHOLE_AREA});
+  public play(player: Player) {
+    return new SelectSpace('Select an ocean space for special tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
+      player.game.addTile(player, SpaceType.OCEAN, space, {tileType: TileType.MOHOLE_AREA});
       space.adjacency = this.adjacencyBonus;
       player.addProduction(Resources.HEAT, 4);
       return undefined;

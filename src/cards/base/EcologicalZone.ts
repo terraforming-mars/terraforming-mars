@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {ResourceType} from '../../ResourceType';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -51,17 +50,17 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
 
   public resourceCount: number = 0;
 
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
       .filter(
-        (space) => game.board.getAdjacentSpaces(space).filter(
+        (space) => player.game.board.getAdjacentSpaces(space).filter(
           (adjacentSpace) => adjacentSpace.tile !== undefined &&
               adjacentSpace.tile.tileType === TileType.GREENERY,
         ).length > 0,
       );
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return super.canPlay(player) && this.getAvailableSpaces(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
@@ -69,12 +68,12 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   public getVictoryPoints(): number {
     return Math.floor(this.resourceCount / 2);
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select space next to greenery for special tile',
-      this.getAvailableSpaces(player, game),
+      this.getAvailableSpaces(player),
       (requestedSpace: ISpace) => {
-        game.addTile(player, requestedSpace.spaceType, requestedSpace, {
+        player.game.addTile(player, requestedSpace.spaceType, requestedSpace, {
           tileType: TileType.ECOLOGICAL_ZONE,
         });
         requestedSpace.adjacency = this.adjacencyBonus;

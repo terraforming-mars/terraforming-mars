@@ -27,7 +27,7 @@ describe('GreatEscarpmentConsortium', function() {
 
   it('Should play - auto select if single target', function() {
     player.addProduction(Resources.STEEL);
-    card.play(player, game); // can decrease own production
+    card.play(player); // can decrease own production
     const input = game.deferredActions.next()!.execute();
     expect(input).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
@@ -36,7 +36,7 @@ describe('GreatEscarpmentConsortium', function() {
   it('Should play - multiple targets', function() {
     player.addProduction(Resources.STEEL);
     player2.addProduction(Resources.STEEL);
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
     expect(game.deferredActions).has.lengthOf(1);
@@ -50,7 +50,7 @@ describe('GreatEscarpmentConsortium', function() {
     player.addProduction(Resources.STEEL);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
-    card.play(player, game);
+    card.play(player);
 
     const input = game.deferredActions.next()!.execute();
     expect(input).is.undefined;

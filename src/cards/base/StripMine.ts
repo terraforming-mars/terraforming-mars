@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
@@ -34,22 +33,22 @@ export class StripMine extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
-    const remainingOxygenSteps = MAX_OXYGEN_LEVEL - game.getOxygenLevel();
+    const remainingOxygenSteps = MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
     const stepsRaised = Math.min(remainingOxygenSteps, 2);
     const requiredMC = REDS_RULING_POLICY_COST * stepsRaised;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + requiredMC, true) && player.canAfford(requiredMC) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -2);
     player.addProduction(Resources.STEEL, 2);
     player.addProduction(Resources.TITANIUM);
-    return game.increaseOxygenLevel(player, 2);
+    return player.game.increaseOxygenLevel(player, 2);
   }
 }

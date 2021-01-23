@@ -6,21 +6,21 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Mangrove', function() {
-  let card : Mangrove; let player : Player; let game : Game;
+  let card : Mangrove; let player : Player;
 
   beforeEach(function() {
     card = new Mangrove();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     action.cb(action.availableSpaces[0]);

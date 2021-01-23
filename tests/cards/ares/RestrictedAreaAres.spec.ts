@@ -8,17 +8,17 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('RestrictedAreaAres', function() {
-  let card : RestrictedAreaAres; let player : Player; let game : Game;
+  let card : RestrictedAreaAres; let player : Player;
 
   beforeEach(function() {
     card = new RestrictedAreaAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     const space = action.availableSpaces[0];

@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Game} from '../../Game';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
@@ -25,8 +24,8 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
     }
     public play() {
       return undefined;
@@ -34,9 +33,9 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
-      const canRaiseVenus = this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE;
+      const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
 
       // only 1 valid target and cannot remove 2 microbes - add to itself
       if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
@@ -49,7 +48,7 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
 
       const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
         player.removeResourceFrom(this, 2);
-        game.increaseVenusScaleLevel(player, 1);
+        player.game.increaseVenusScaleLevel(player, 1);
         return undefined;
       });
 
@@ -70,7 +69,7 @@ export class Thermophiles implements IActionCard, IProjectCard, IResourceCard {
         return undefined;
       });
 
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
 
       if (canRaiseVenus) {
         if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {

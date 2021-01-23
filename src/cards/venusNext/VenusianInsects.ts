@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -19,8 +18,8 @@ export class VenusianInsects implements IActionCard, IProjectCard, IResourceCard
     public cardType = CardType.ACTIVE;
     public resourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
     }
     public play() {
       return undefined;

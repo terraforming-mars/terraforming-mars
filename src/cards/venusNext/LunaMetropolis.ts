@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
@@ -28,9 +27,9 @@ export class LunaMetropolis extends Card {
       },
     });
   };
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
-    game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
+    player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
     return undefined;
   }
   public getVictoryPoints() {

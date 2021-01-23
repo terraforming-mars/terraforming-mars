@@ -25,7 +25,7 @@ describe('HydrogenToVenus', function() {
     const card4 = new Dirigibles();
     player.playedCards.push(card2, card3, card4);
 
-    const action = card.play(player, game) as SelectCard<ICard>;
+    const action = card.play(player) as SelectCard<ICard>;
     expect(action instanceof SelectCard).is.true;
     action.cb([card2]);
     expect(player.getResourcesOnCard(card2)).to.eq(1);
@@ -38,13 +38,13 @@ describe('HydrogenToVenus', function() {
     const card3 = new ColonizerTrainingCamp();
     player.playedCards.push(card2, card3);
 
-        card.play(player, game) as SelectCard<ICard>;
+        card.play(player) as SelectCard<ICard>;
         expect(player.getResourcesOnCard(card2)).to.eq(1);
         expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
   it('Should play with no venus cards', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

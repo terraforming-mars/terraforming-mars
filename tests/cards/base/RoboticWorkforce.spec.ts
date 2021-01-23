@@ -162,7 +162,7 @@ describe('RoboticWorkforce', function() {
           }
 
           while (game.deferredActions.length) {
-            const defAction = game.deferredActions.shift()!.execute();
+            const defAction = game.deferredActions.pop()!.execute();
             if (defAction !== undefined) {
               if (defAction instanceof SelectSpace) {
                 defAction.cb(defAction.availableSpaces[0]);

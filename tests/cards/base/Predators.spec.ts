@@ -43,10 +43,10 @@ describe('Predators', function() {
     player.addResourceTo(smallAnimals);
 
     card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player.getResourcesOnCard(fish)).to.eq(0);
@@ -64,9 +64,9 @@ describe('Predators', function() {
     expect(card.canAct(player, game)).is.true;
 
     card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);
@@ -85,9 +85,9 @@ describe('Predators', function() {
     expect(card.canAct(player, game)).is.true;
 
     card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);

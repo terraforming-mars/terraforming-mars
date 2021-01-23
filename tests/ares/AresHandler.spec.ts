@@ -97,7 +97,7 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        game.deferredActions.next()!.execute();
+        game.deferredActions.peek()!.execute();
 
         // player who placed next to Nuclear zone, loses two money.
         expect(player.megaCredits).is.eq(0);
@@ -140,7 +140,7 @@ describe('AresHandler', function() {
 
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
+    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(1);
     input.cb(Units.of({plants: 1}));
     expect(player.getProduction(Resources.PLANTS)).eq(6);
@@ -163,7 +163,7 @@ describe('AresHandler', function() {
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
-    const input = game.deferredActions.next()!.execute() as SelectProductionToLose;
+    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
     expect(input.unitsToLose).eq(2);
     input.cb(Units.of({plants: 2}));
     expect(player.getProduction(Resources.PLANTS)).eq(5);
@@ -177,7 +177,7 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.OCEAN});
-    expect(game.deferredActions.next()).is.undefined;
+    expect(game.deferredActions.peek()).is.undefined;
 
     const after = getProduction(player);
     expect(before).to.deep.eq(after);
@@ -190,7 +190,7 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.next()!.execute();
+        game.deferredActions.peek()!.execute();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);
@@ -204,7 +204,7 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.next()!.execute();
+        game.deferredActions.peek()!.execute();
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
         expect(player.megaCredits).is.eq(0);

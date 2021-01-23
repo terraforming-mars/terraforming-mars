@@ -35,7 +35,7 @@ describe('HeatTrappers', function() {
     card.play(player, game);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(player2.getProduction(Resources.HEAT)).to.eq(5);
   });
@@ -48,7 +48,7 @@ describe('HeatTrappers', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
+    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
     expect(player2.getProduction(Resources.HEAT)).to.eq(5);
   });

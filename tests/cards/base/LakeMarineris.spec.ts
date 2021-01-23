@@ -25,9 +25,9 @@ describe('LakeMarineris', function() {
     card.play(player, game);
 
     expect(game.deferredActions).has.lengthOf(2);
-    const firstOcean = game.deferredActions.shift()!.execute() as SelectSpace;
+    const firstOcean = game.deferredActions.pop()!.execute() as SelectSpace;
     firstOcean.cb(firstOcean.availableSpaces[0]);
-    const secondOcean = game.deferredActions.shift()!.execute() as SelectSpace;
+    const secondOcean = game.deferredActions.pop()!.execute() as SelectSpace;
     secondOcean.cb(secondOcean.availableSpaces[1]);
     expect(player.getTerraformRating()).to.eq(22);
 

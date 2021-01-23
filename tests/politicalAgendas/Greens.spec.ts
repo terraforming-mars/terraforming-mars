@@ -84,7 +84,7 @@ describe('Greens', function() {
     player.playedCards.push(tardigrades);
     greensPolicy.action(player);
     game.deferredActions.runNext();
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
 
     orOptions.options[0].cb();
     expect(tardigrades.resourceCount).to.eq(2);

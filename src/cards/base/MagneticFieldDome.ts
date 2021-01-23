@@ -19,7 +19,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_DOME,
       tags: [Tags.BUILDING],
       cost: 5,
-      productionDelta: Units.of({energy: -2, plants: 1}),
+      productionBox: Units.of({energy: -2, plants: 1}),
 
       metadata: {
         cardNumber: '171',
@@ -38,7 +38,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
   public canPlay(player: Player, game: Game): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true) && hasEnergyProduction;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;

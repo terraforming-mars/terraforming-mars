@@ -9,12 +9,12 @@ describe('MediaGroup', function() {
     const card = new MediaGroup();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play();
     expect(action).is.undefined;
-    card.onCardPlayed(player, game, new Virus());
+    card.onCardPlayed(player, new Virus());
     expect(player.megaCredits).to.eq(3);
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(player.megaCredits).to.eq(3);
   });
 });

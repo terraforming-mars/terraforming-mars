@@ -33,7 +33,7 @@ export class LakeMarineris extends Card implements IProjectCard {
     const oceansPlaced = Math.min(remainingOceans, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * oceansPlaced) && meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced) && meetsTemperatureRequirements;
     }
 
     return meetsTemperatureRequirements;

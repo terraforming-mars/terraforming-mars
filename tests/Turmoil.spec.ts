@@ -36,6 +36,7 @@ describe('Turmoil', function() {
     const gameOptions = setCustomGameOptions();
 
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
     resetBoard(game);
   });
@@ -120,6 +121,8 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+
+    game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
 
     expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
@@ -157,10 +160,10 @@ describe('Turmoil', function() {
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
-    expect(new GreeneryStandardProject().canAct(player, game)).equal(false);
+    expect(new GreeneryStandardProject().canAct(player)).equal(false);
 
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    expect(new GreeneryStandardProject().canAct(player, game)).equal(true);
+    expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
   it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {

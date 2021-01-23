@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -29,7 +28,7 @@ export class VestaShipyard extends Card implements IProjectCard {
   public getVictoryPoints(): number {
     return 1;
   }
-  public play(player: Player, _game: Game): undefined {
+  public play(player: Player): undefined {
     player.addProduction(Resources.TITANIUM);
     return undefined;
   }

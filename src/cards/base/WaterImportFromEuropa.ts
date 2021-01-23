@@ -44,13 +44,13 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const oceanCost = 12;
 
-    if (oceansMaxed) return player.canAfford(oceanCost, game, false, true);
+    if (oceansMaxed) return player.canAfford(oceanCost, false, true);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, game, false, true);
+      return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, false, true);
     }
 
-    return player.canAfford(oceanCost, game, false, true); ;
+    return player.canAfford(oceanCost, false, true); ;
   }
   public action(player: Player, game: Game) {
     game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action'}));

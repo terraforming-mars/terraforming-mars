@@ -95,10 +95,10 @@ describe('Playwrights', function() {
         game.deferredActions.shift()!.execute();
 
         const deimosDown = new DeimosDown();
-        expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost - 8);
+        expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
 
         player.playCard(deimosDown);
-        expect(player.getCardCost(game, deimosDown)).to.eq(deimosDown.cost); // no more discount
+        expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
   });
 
   it('Works with Law Suit', function() {

@@ -16,7 +16,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tags.BUILDING],
       startingMegaCredits: 44,
-      productionDelta: Units.of({megacredits: 3}),
+      productionBox: Units.of({megacredits: 3}),
 
       metadata: {
         cardNumber: 'R16',

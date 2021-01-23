@@ -50,7 +50,7 @@ describe('NitrophilicMoss', function() {
     card.play(player);
 
     expect(player.plants).to.eq(-1);
-    viralEnhancers.onCardPlayed(player, game, card);
+    viralEnhancers.onCardPlayed(player, card);
     expect(player.plants).to.eq(0);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
   });

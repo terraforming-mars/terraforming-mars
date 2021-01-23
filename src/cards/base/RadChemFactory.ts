@@ -19,7 +19,7 @@ export class RadChemFactory extends Card implements IProjectCard {
       name: CardName.RAD_CHEM_FACTORY,
       tags: [Tags.BUILDING],
       cost: 8,
-      productionDelta: Units.of({energy: -1}),
+      productionBox: Units.of({energy: -1}),
 
       metadata: {
         cardNumber: '205',
@@ -34,7 +34,7 @@ export class RadChemFactory extends Card implements IProjectCard {
   public canPlay(player: Player, game: Game): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2, game, true) && hasEnergyProduction;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, true) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;

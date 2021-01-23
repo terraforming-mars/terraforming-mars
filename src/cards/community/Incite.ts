@@ -21,10 +21,10 @@ export class Incite implements CorporationCard {
     }
 
     public initialActionText: string = 'Place 2 delegates in one party';
-    public initialAction(player: Player, game: Game) {
-      if (game.turmoil) {
+    public initialAction(player: Player) {
+      if (player.game.turmoil) {
         const title = 'Incite first action - Select where to send two delegates';
-        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
+        player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
       }
 
       return undefined;

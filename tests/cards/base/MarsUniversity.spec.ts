@@ -21,11 +21,11 @@ describe('MarsUniversity', function() {
     const action = card.play();
     expect(action).is.undefined;
 
-    expect(card.onCardPlayed(player, game, new Pets())).is.undefined;
+    expect(card.onCardPlayed(player, new Pets())).is.undefined;
     expect(game.deferredActions).has.lengthOf(0);
 
     player.cardsInHand.push(card);
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
@@ -46,7 +46,7 @@ describe('MarsUniversity', function() {
 
   it('Runs twice for multiple science tags', function() {
     player.cardsInHand.push(card, card);
-    card.onCardPlayed(player, game, new Research());
+    card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;

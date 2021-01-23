@@ -34,14 +34,14 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
     });
   }
 
-  public initialAction(player: Player, game: Game) {
+  public initialAction(player: Player) {
     return new SelectSpace(
       'Select space for claim',
-      game.board.getAvailableSpacesOnLand(player),
+      player.game.board.getAvailableSpacesOnLand(player),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
 
-        game.log('${0} placed a Community (player marker)', (b) => b.player(player));
+        player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
 
         return undefined;
       },

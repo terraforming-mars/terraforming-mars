@@ -30,7 +30,7 @@ export class Ironworks extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
   public canAct(player: Player, game: Game): boolean {

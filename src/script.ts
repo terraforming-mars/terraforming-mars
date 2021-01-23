@@ -1,9 +1,9 @@
 
 import Vue from 'vue';
 
-import {translateTextNode} from './src/directives/i18n';
-import {trimEmptyTextNodes} from './src/directives/TrimWhitespace';
-import {mainAppSettings} from './src/components/App';
+import {translateTextNode} from './directives/i18n';
+import {trimEmptyTextNodes} from './directives/TrimWhitespace';
+import {mainAppSettings} from './components/App';
 
 
 Vue.directive('trim-whitespace', {

@@ -19,7 +19,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_GENERATORS,
       tags: [Tags.BUILDING],
       cost: 20,
-      productionDelta: Units.of({energy: -4, plants: 2}),
+      productionBox: Units.of({energy: -4, plants: 2}),
 
       metadata: {
         cardNumber: '165',
@@ -39,7 +39,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 3, game, true) && meetsEnergyRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 3, true) && meetsEnergyRequirements;
     }
 
     return meetsEnergyRequirements;

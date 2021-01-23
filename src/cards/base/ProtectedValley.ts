@@ -23,7 +23,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       name: CardName.PROTECTED_VALLEY,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 23,
-      productionDelta: Units.of({megacredits: 2}),
+      productionBox: Units.of({megacredits: 2}),
 
       metadata: {
         cardNumber: '174',
@@ -40,7 +40,7 @@ export class ProtectedValley extends Card implements IProjectCard {
     const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true, false, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true, false, false, true);
     }
 
     return true;

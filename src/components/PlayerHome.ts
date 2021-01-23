@@ -23,7 +23,7 @@ import {MoonBoard} from './moon/MoonBoard';
 
 const dialogPolyfill = require('dialog-polyfill');
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 export interface PlayerHomeModel {
   hide_active_cards: string;
@@ -245,7 +245,7 @@ export const PlayerHome = Vue.component('player-home', {
                         :temperature="player.temperature"
                         :shouldNotify="true"
                         :aresExtension="player.gameOptions.aresExtension"
-                        :aresData="player.aresData" 
+                        :aresData="player.aresData"
                         id="shortkey-board"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
@@ -292,7 +292,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
                         <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">
-                          <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span> 
+                          <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span>
                           <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</span>
                         </div>
                         <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">
@@ -300,7 +300,7 @@ export const PlayerHome = Vue.component('player-home', {
                           <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</span>
                         </div>
                         <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">
-                          <span v-i18n>{{ getToggleLabel('EVENT')}}</span> 
+                          <span v-i18n>{{ getToggleLabel('EVENT')}}</span>
                           <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</span>
                         </div>
                     </div>
@@ -308,13 +308,13 @@ export const PlayerHome = Vue.component('player-home', {
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
                     <div v-show="isActiveCardShown()" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
-                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                     </div>
 
                     <stacked-cards v-show="isAutomatedCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
-                    
+
                     <stacked-cards v-show="isEventCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
-                    
+
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">

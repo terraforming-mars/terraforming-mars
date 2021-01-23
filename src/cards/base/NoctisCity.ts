@@ -20,7 +20,7 @@ export class NoctisCity extends Card implements IProjectCard {
       name: CardName.NOCTIS_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: '017',

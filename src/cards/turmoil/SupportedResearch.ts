@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -15,9 +14,9 @@ export class SupportedResearch implements IProjectCard {
     public name = CardName.SUPPORTED_RESEARCH;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.SCIENTISTS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.SCIENTISTS);
       }
       return false;
     }

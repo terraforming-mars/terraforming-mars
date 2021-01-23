@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 
@@ -12,9 +11,9 @@ export class PublicCelebrations implements IProjectCard {
     public name = CardName.PUBLIC_CELEBRATIONS;
     public cardType = CardType.EVENT;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.chairman === player.id;
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.chairman === player.id;
       }
       return false;
     }

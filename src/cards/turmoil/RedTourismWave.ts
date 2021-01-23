@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
@@ -17,16 +16,16 @@ export class RedTourismWave implements IProjectCard {
     public name = CardName.RED_TOURISM_WAVE;
     public cardType = CardType.EVENT;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.REDS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.REDS);
       }
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      const amount = game.board.getEmptySpaces().filter((space) =>
-        game.board.getAdjacentSpaces(space).some((adj) =>
+    public play(player: Player) {
+      const amount = player.game.board.getEmptySpaces().filter((space) =>
+        player.game.board.getAdjacentSpaces(space).some((adj) =>
           adj.tile !== undefined && adj.player === player,
         ),
       ).length;

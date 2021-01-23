@@ -28,7 +28,7 @@ describe('Incite', function() {
 
   it('Works with Event Analysts', function() {
     const eventAnalysts = new EventAnalysts();
-    eventAnalysts.play(player, game);
+    eventAnalysts.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
   });
 

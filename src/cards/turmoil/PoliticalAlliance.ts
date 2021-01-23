@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -16,12 +15,12 @@ export class PoliticalAlliance implements IProjectCard {
     public name = CardName.POLITICAL_ALLIANCE;
     public cardType = CardType.EVENT;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        const parties = game.turmoil.parties.filter((party) => party.partyLeader === player.id);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id);
         const meetsPartyLeaderRequirements = parties.length > 1;
 
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
           return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
         }
         return meetsPartyLeaderRequirements;

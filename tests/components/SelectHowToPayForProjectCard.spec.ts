@@ -129,7 +129,7 @@ describe('SelectHowToPayForProjectCard', function() {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
-    expect(vm.steel).eq(1);
+    expect(vm.steel).eq(2);
     const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
     expect(steelTextBox.value).eq('2');
   });

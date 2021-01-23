@@ -13,7 +13,10 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
+
+  // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
+
   protected constructor(public spaces: Array<ISpace>) {
     this.maxX = Math.max(...spaces.map((s) => s.x));
     this.maxY = Math.max(...spaces.map((s) => s.y));

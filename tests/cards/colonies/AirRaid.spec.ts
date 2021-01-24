@@ -38,8 +38,8 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
 
     card.play(player);
-    const option1 = player.game.deferredActions.shift()!.execute() as SelectCard<ICard>;
-    const option2 = player.game.deferredActions.shift()!.execute() as OrOptions;
+    const option1 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const option2 = player.game.deferredActions.pop()!.execute() as OrOptions;
 
     option1.cb([corpo]);
     expect(player.getResourcesOnCard(corpo)).to.eq(0);
@@ -56,8 +56,8 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
     card.play(player);
 
-        player.game.deferredActions.shift()!.execute(); // Remove floater
-        const option = player.game.deferredActions.shift()!.execute() as OrOptions; // Steal money
+        player.game.deferredActions.pop()!.execute(); // Remove floater
+        const option = player.game.deferredActions.pop()!.execute() as OrOptions; // Steal money
         expect(option.options).has.lengthOf(2);
         option.options[0].cb();
 

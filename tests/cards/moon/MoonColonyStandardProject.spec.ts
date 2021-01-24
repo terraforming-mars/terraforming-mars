@@ -31,10 +31,10 @@ describe('MoonColonyStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(22);
     // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     // expect(payAction.amount).eq(18);
   });
 
@@ -44,8 +44,7 @@ describe('MoonColonyStandardProject', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
 
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
-    game.deferredActions.remove(payAction);
+    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
@@ -53,7 +52,7 @@ describe('MoonColonyStandardProject', () => {
 
     expect(moonData.colonyRate).eq(0);
 
-    const placeTileAction = game.deferredActions.next() as PlaceMoonColonyTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonColonyTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);

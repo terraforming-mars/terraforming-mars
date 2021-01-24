@@ -2,11 +2,10 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {setCustomGameOptions, setPlayerProductionForTest, TestPlayers} from '../../TestingUtils';
 import {LunaResort} from '../../../src/cards/moon/LunaResort';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
 import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -26,29 +25,48 @@ describe('LunaResort', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
-    player.titanium = 1;
+
+    const spaces = moonData.moon.getAvailableSpacesOnLand();
+
+    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    player.titanium = 2;
+    setPlayerProductionForTest(player, {energy: 1});
     expect(player.getPlayableCards()).does.include(card);
+
+    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    player.titanium = 1;
+    setPlayerProductionForTest(player, {energy: 1});
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    player.titanium = 2;
+    setPlayerProductionForTest(player, {energy: 0});
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[1].tile = {tileType: TileType.MOON_ROAD};
+    player.titanium = 2;
+    setPlayerProductionForTest(player, {energy: 1});
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    setPlayerProductionForTest(player, {energy: 1, megacredits: 0});
     expect(player.getTerraformRating()).eq(14);
-    expect(moonData.miningRate).eq(0);
+    expect(moonData.colonyRate).eq(0);
 
     card.play(player);
 
-    expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
+    expect(player.titanium).eq(1);
+    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.miningRate).eq(1);
-
-    const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
-    expect(mareNectaris.player).eq(player);
-    expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
+    expect(moonData.colonyRate).eq(1);
   });
 });
 

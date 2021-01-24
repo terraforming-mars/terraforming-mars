@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
-import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
@@ -38,13 +37,12 @@ export class LunaResort extends MoonCard {
 
   public canPlay(player: Player): boolean {
     return Units.canAdjustProduction(this.productionBox, player) &&
-      MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length > 2;
+      MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length >= 2;
   }
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
     Units.adjustProduction(this.productionBox, player);
-    player.addProduction(Resources.MEGACREDITS, 3, player.game);
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

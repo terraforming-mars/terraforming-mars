@@ -64,8 +64,8 @@ describe('LunaMiningHub', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const placeTileAction = game.deferredActions.next() as PlaceSpecialMoonTile;
-    const space = moonData.moon.spaces[5];
+    const placeTileAction = game.deferredActions.pop() as PlaceSpecialMoonTile;
+    const space = moonData.moon.spaces[10];
     placeTileAction!.execute()!.cb(space);
 
     expect(moonData.miningRate).eq(1);

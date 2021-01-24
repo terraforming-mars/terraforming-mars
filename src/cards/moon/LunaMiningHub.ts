@@ -59,8 +59,9 @@ export class LunaMiningHub extends MoonCard {
     const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return 2 * player.game.board.getAdjacentSpaces(usedSpace)
-        .filter((s) => s.tile?.tileType === TileType.MOON_MINE).length;
+      const adjacentSpaces = moonData.moon.getAdjacentSpaces(usedSpace);
+      const adjacentMines = adjacentSpaces.filter((s) => s.tile?.tileType === TileType.MOON_MINE);
+      return 2 * adjacentMines.length;
     }
     return 0;
   }

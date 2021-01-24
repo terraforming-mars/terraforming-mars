@@ -14,10 +14,10 @@ export class MiningRobotsManufCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 12,
-      productionDelta: Units.of({}),
+      productionBox: Units.of({}),
 
       metadata: {
-        description: 'Spend 1 titanium. Raise Mining Rate 2 steps.',
+        description: 'Spend 1 titanium. Raise the Mining Rate 2 steps.',
         cardNumber: 'M23',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;

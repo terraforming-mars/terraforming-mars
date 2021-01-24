@@ -12,15 +12,15 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('Playwrights', function() {
   let card : Playwrights; let player : Player; let player2: Player; let game : Game;
 
   beforeEach(function() {
     card = new Playwrights();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
 
     card.play(player);
@@ -48,7 +48,7 @@ describe('Playwrights', function() {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 4);
     expect(player.megaCredits).eq(0);
@@ -68,7 +68,7 @@ describe('Playwrights', function() {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
     expect(player.megaCredits).eq(0);
@@ -116,7 +116,7 @@ describe('Playwrights', function() {
     const selectPlayer = game.deferredActions.pop()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
 
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
 
     expect(player.playedCards).has.lengthOf(0);
     expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player

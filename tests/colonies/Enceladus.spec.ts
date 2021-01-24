@@ -5,7 +5,7 @@ import {Enceladus} from '../../src/colonies/Enceladus';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('Enceladus', function() {
   let enceladus: Enceladus; let tardigrades: Tardigrades; let player: Player; let player2: Player; let game: Game;
@@ -13,8 +13,8 @@ describe('Enceladus', function() {
   beforeEach(function() {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(enceladus);
@@ -66,7 +66,7 @@ describe('Enceladus', function() {
     enceladus.trade(player2);
     game.deferredActions.pop()!.execute(); // Gain trade microbes
 
-    game.deferredActions.runAll(() => {}); // Trade bonus
+    utils.runAllActions(game); // Trade bonus
 
     expect(tardigrades.resourceCount).to.eq(4);
     expect(regolithEaters.resourceCount).to.eq(1);

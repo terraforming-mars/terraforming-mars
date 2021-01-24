@@ -7,6 +7,7 @@ import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/boards/ISpace';
 import {Color} from '../src/Color';
 import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
+import {NoopCallback} from '../src/server/callbacks/NoopCallback';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
@@ -79,8 +80,17 @@ export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmo
   game.phase = Phase.ACTION;
 };
 
-// This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.
-// So, someone do that sometime soon, please.
+export function runAllActions(game: Game) {
+  game.deferredActions.runAll(new NoopCallback(game));
+}
+
+export function runNextAction(game: Game) {
+  const action = game.deferredActions.pop();
+  if (action !== undefined) {
+    game.deferredActions.run(action, new NoopCallback(game));
+  }
+}
+
 class TestPlayerFactory {
   constructor(private color: Color) {}
   newPlayer(): TestPlayer {

@@ -22,11 +22,14 @@ import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
 import {MiningCard} from './cards/base/MiningCard';
+import {NoopCallback} from './server/callbacks/NoopCallback';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
 import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './Phase';
+import {PlayerCallback} from './server/PlayerCallback';
+import {PlayerCallbackId} from './server/PlayerCallbackId';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
@@ -68,10 +71,92 @@ import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
+  private static readonly DonePlayingPreludeCard = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DONE_PLAYING_PRELUDE_CARD;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      if (this.player.preludeCardsInHand.length === 1) {
+        this.player.takeAction();
+      } else {
+        this.game.playerIsFinishedTakingActions();
+      }
+    }
+  }
+
+  private static readonly DoneWithAction = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DONE_WITH_ACTION;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.player.actionsTakenThisRound++;
+      this.player.takeAction();
+    }
+  }
+
+  private static readonly DoneWithResearchPhase = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DONE_WITH_RESEARCH_PHASE;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.game.playerIsFinishedWithResearchPhase(this.player);
+    }
+  }
+
+  private static readonly DoneWorldGovernmentTerraforming = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DONE_WORLD_GOVERNMENT_TERRAFORMING;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.game.deferredActions.runAll(new Player.ReallyDone(this.player));
+    }
+  }
+
+  private static readonly FinalGreenery = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.FINAL_GREENERY;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.player.takeActionForFinalGreenery();
+    }
+  }
+
+  private static readonly ReallyDone = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.REALLY_DONE;
+    public game: Game;
+    constructor(player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.game.doneWorldGovernmentTerraforming();
+    }
+  }
+
+  private static readonly TakeAction = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.TAKE_ACTION;
+    public game: Game;
+    constructor(public player: Player) {
+      this.game = player.game;
+    }
+    public execute() {
+      this.player.takeAction();
+    }
+  }
+
   public readonly id: PlayerId;
   private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
-  private waitingForCb?: () => void;
+  private waitingForCb?: PlayerCallback;
   private _game: Game | undefined = undefined;
 
   // Corporate identity
@@ -931,10 +1016,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private doneWorldGovernmentTerraforming(): void {
-    this.game.deferredActions.runAll(() => this.game.doneWorldGovernmentTerraforming());
-  }
-
   public worldGovernmentTerraforming(): void {
     const action: OrOptions = new OrOptions();
     action.title = 'Select action for World Government Terraforming';
@@ -980,9 +1061,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    this.setWaitingFor(action, () => {
-      this.doneWorldGovernmentTerraforming();
-    });
+    this.setWaitingFor(action, new Player.DoneWorldGovernmentTerraforming(this));
   }
 
   public dealCards(quantity: number, cards: Array<IProjectCard>) {
@@ -1019,7 +1098,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, 1, 1,
-      ), () => { },
+      ), new NoopCallback(this.game),
     );
   }
 
@@ -1041,7 +1120,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const action = DrawCards.choose(this, dealtCards, {paying: true});
-    this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+    this.setWaitingFor(action, new Player.DoneWithResearchPhase(this));
   }
 
   public getSelfReplicatingRobotsCards() : Array<CardModel> {
@@ -1545,7 +1624,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return undefined;
         }),
       );
-      this.setWaitingFor(action, () => {});
+      this.setWaitingFor(action, new NoopCallback(this.game));
       return;
     }
 
@@ -1557,7 +1636,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private resolveFinalGreeneryDeferredActions() {
-    this.game.deferredActions.runAll(() => this.takeActionForFinalGreenery());
+    this.game.deferredActions.runAll(new Player.FinalGreenery(this));
   }
 
   private getPlayablePreludeCards(): Array<IProjectCard> {
@@ -1686,7 +1765,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
-      game.deferredActions.runAll(() => this.takeAction());
+      game.deferredActions.runAll(new Player.TakeAction(this));
       return;
     }
 
@@ -1707,13 +1786,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return;
       }
 
-      this.setWaitingFor(this.playPreludeCard(), () => {
-        if (this.preludeCardsInHand.length === 1) {
-          this.takeAction();
-        } else {
-          game.playerIsFinishedTakingActions();
-        }
-      });
+      this.setWaitingFor(this.playPreludeCard(), new Player.DonePlayingPreludeCard(this));
       return;
     } else {
       game.phase = Phase.ACTION;
@@ -1755,17 +1828,11 @@ export class Player implements ISerializable<SerializedPlayer> {
         initialActionOption,
         this.passOption(),
       );
-      this.setWaitingFor(initialActionOrPass, () => {
-        this.actionsTakenThisRound++;
-        this.takeAction();
-      });
+      this.setWaitingFor(initialActionOrPass, new Player.DoneWithAction(this));
       return;
     }
 
-    this.setWaitingFor(this.getActions(), () => {
-      this.actionsTakenThisRound++;
-      this.takeAction();
-    });
+    this.setWaitingFor(this.getActions(), new Player.DoneWithAction(this));
   }
 
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
@@ -1910,7 +1977,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     try {
       this.timer.stop();
       this.runInput(input, waitingFor);
-      waitingForCb();
+      waitingForCb.execute();
     } catch (err) {
       this.setWaitingFor(waitingFor, waitingForCb);
       throw err;
@@ -1921,7 +1988,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.waitingFor;
   }
 
-  public setWaitingFor(input: PlayerInput, cb: () => void): void {
+  public setWaitingFor(input: PlayerInput, cb: PlayerCallback): void {
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;

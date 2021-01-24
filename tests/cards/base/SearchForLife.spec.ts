@@ -3,15 +3,15 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('SearchForLife', function() {
   let card : SearchForLife; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SearchForLife();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -43,7 +43,7 @@ describe('SearchForLife', function() {
                game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE) === undefined) {
       player.megaCredits = 1;
       card.action(player);
-      game.deferredActions.runNext();
+      utils.runNextAction(game);
       expect(player.megaCredits).to.eq(0);
     }
 

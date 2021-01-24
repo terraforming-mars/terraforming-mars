@@ -3,15 +3,15 @@ import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuro
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WaterImportFromEuropa();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -31,7 +31,7 @@ describe('WaterImportFromEuropa', function() {
     const action = card.action(player);
     expect(action).is.undefined;
 
-    game.deferredActions.runNext(); // HowToPay
+    utils.runNextAction(game); // HowToPay
     expect(player.megaCredits).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
@@ -41,7 +41,7 @@ describe('WaterImportFromEuropa', function() {
   });
 
   it('Can act if can pay even after oceans are maxed', function() {
-    maxOutOceans(player, game);
+    utils.maxOutOceans(player, game);
     player.megaCredits = 12;
 
     expect(card.canAct(player)).is.true;

@@ -3,15 +3,15 @@ import {ForcedPrecipitation} from '../../../src/cards/venusNext/ForcedPrecipitat
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('ForcedPrecipitation', function() {
   let card : ForcedPrecipitation; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ForcedPrecipitation();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -25,7 +25,7 @@ describe('ForcedPrecipitation', function() {
     player.megaCredits = 10;
 
     const action = card.action(player);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);

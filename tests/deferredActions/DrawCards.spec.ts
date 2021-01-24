@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DrawCards} from '../../src/deferredActions/DrawCards';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {AICentral} from '../../src/cards/base/AICentral';
@@ -16,12 +16,11 @@ describe('DrawCards', function() {
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
     dealer = player.game.dealer;
   });
-
 
   it('keeps cards', function() {
     DrawCards.keep(player, [cards[0], cards[1]]);
@@ -65,7 +64,7 @@ describe('DrawCards', function() {
     expect(action!.minCardsToSelect).to.eq(0);
     expect(action!.maxCardsToSelect).to.eq(1);
     action!.cb([action!.cards[0]]);
-    player.game.deferredActions.runNext();
+    utils.runNextAction(player.game);
     expect(player.cardsInHand).has.length(1);
     expect(dealer.discarded).has.length(0);
     expect(player.megaCredits).to.eq(0);

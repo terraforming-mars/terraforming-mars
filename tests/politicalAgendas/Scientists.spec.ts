@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_4} from '../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Research} from '../../src/cards/base/Research';
@@ -12,13 +12,13 @@ describe('Scientists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const gameOptions = utils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     scientists = new Scientists();
 
-    resetBoard(game);
+    utils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Science tag you have', function() {
@@ -38,21 +38,21 @@ describe('Scientists', function() {
   });
 
   it('Ruling policy 1: Pay 10 MC to draw 3 cards', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[0].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[0].id);
 
     const scientistsPolicy = SCIENTISTS_POLICY_1;
     player.megaCredits = 10;
     expect(scientistsPolicy.canAct(player)).to.be.true;
 
     scientistsPolicy.action(player);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.cardsInHand).has.lengthOf(3);
     expect(player.megaCredits).to.eq(0);
     expect(scientistsPolicy.canAct(player)).to.be.false;
   });
 
   it('Ruling policy 2: Your global requirements are +/- 2 steps', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[1].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[1].id);
 
     const card = new SearchForLife();
     (game as any).oxygenLevel = 8;
@@ -60,19 +60,19 @@ describe('Scientists', function() {
   });
 
   it('Ruling policy 3: When you raise a global parameter, draw a card per step raised', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[2].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[2].id);
 
     game.increaseOxygenLevel(player, 1);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.cardsInHand).has.lengthOf(1);
 
     game.increaseTemperature(player, 2);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.cardsInHand).has.lengthOf(3);
   });
 
   it('Ruling policy 4: Cards with Science tag requirements may be played with 1 less Science tag', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[3].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[3].id);
 
     const card = new GeneRepair();
     expect(card.canPlay(player)).to.be.false;

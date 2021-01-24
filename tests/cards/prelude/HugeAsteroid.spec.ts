@@ -3,14 +3,14 @@ import {HugeAsteroid} from '../../../src/cards/prelude/HugeAsteroid';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('HugeAsteroid', function() {
   let card : HugeAsteroid; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new HugeAsteroid();
-    player = TestPlayers.BLUE.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
@@ -27,7 +27,7 @@ describe('HugeAsteroid', function() {
     card.play(player, game);
 
     // SelectHowToPayDeferred
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.HEAT)).to.eq(1);

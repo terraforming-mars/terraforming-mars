@@ -3,15 +3,15 @@ import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('RestrictedArea', function() {
   let card : RestrictedArea; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new RestrictedArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -36,7 +36,7 @@ describe('RestrictedArea', function() {
     expect(card.canAct(player)).is.true;
     card.action(player);
 
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.megaCredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });

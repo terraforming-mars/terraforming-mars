@@ -3,13 +3,13 @@ import {Game} from '../../src/Game';
 import {CorrosiveRain} from '../../src/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('CorrosiveRain', function() {
   it('resolve play', function() {
     const card = new CorrosiveRain();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = utils.TestPlayers.BLUE.newPlayer();
+    const player2 = utils.TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
@@ -24,7 +24,7 @@ describe('CorrosiveRain', function() {
 
     card.resolve(game, turmoil);
     expect(game.deferredActions).has.lengthOf(2);
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
     expect(game.deferredActions).has.lengthOf(0);
     expect(player2.cardsInHand).has.lengthOf(3);
     expect(player.cardsInHand).has.lengthOf(0);

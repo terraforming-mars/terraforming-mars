@@ -6,15 +6,15 @@ import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('NitrogenFromTitan', function() {
   let card : NitrogenFromTitan; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NitrogenFromTitan();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -31,7 +31,7 @@ describe('NitrogenFromTitan', function() {
     player.playedCards.push(jovianLanterns);
 
     card.play(player, game);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(jovianLanterns.resourceCount).to.eq(2);
   });
 

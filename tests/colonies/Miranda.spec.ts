@@ -5,7 +5,7 @@ import {Miranda} from '../../src/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('Miranda', function() {
   let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player; let game: Game;
@@ -13,8 +13,8 @@ describe('Miranda', function() {
   beforeEach(function() {
     miranda = new Miranda();
     pets = new Pets();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);
@@ -66,7 +66,7 @@ describe('Miranda', function() {
     miranda.trade(player2);
     game.deferredActions.pop()!.execute(); // Gain trade animals
 
-    game.deferredActions.runAll(() => {}); // Trade bonus
+    utils.runAllActions(game); // Trade bonus
 
     expect(pets.resourceCount).to.eq(2);
     expect(predators.resourceCount).to.eq(1);

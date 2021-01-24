@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../src/turmoil/parties/MarsFirst';
 import {Mine} from '../../src/cards/base/Mine';
 import {Tags} from '../../src/cards/Tags';
@@ -11,13 +11,13 @@ describe('MarsFirst', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let marsFirst: MarsFirst;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const gameOptions = utils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     marsFirst = new MarsFirst();
 
-    resetBoard(game);
+    utils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Building tag you have', function() {
@@ -37,14 +37,14 @@ describe('MarsFirst', function() {
   });
 
   it('Ruling policy 1: When you place a tile ON MARS, gain 1 steel', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
 
     game.addGreenery(player, '11');
     expect(player.steel).to.eq(1);
   });
 
   it('Ruling policy 2: When you play a Building tag, gain 2 MC', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[1].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[1].id);
 
     const mine = new Mine();
     player.playCard(mine);
@@ -52,19 +52,19 @@ describe('MarsFirst', function() {
   });
 
   it('Ruling policy 3: Your steel resources are worth 1 MC extra', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[2].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[2].id);
     expect(player.getSteelValue()).to.eq(3);
   });
 
   it('Ruling policy 4: Spend 4 MC to draw a Building card', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[3].id);
+    utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[3].id);
 
     const marsFirstPolicy = MARS_FIRST_POLICY_4;
     player.megaCredits = 7;
 
     marsFirstPolicy.action(player);
     expect(marsFirstPolicy.canAct(player)).to.be.true;
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);

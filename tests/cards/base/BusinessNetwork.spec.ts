@@ -5,15 +5,15 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('BusinessNetwork', function() {
   let card : BusinessNetwork; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -56,7 +56,7 @@ describe('BusinessNetwork', function() {
     player.megaCredits = 3;
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
     expect(game.deferredActions).has.lengthOf(1);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.megaCredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });

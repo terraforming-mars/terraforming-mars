@@ -3,15 +3,15 @@ import {SpaceMirrors} from '../../../src/cards/base/SpaceMirrors';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('SpaceMirrors', function() {
   let card : SpaceMirrors; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SpaceMirrors();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
@@ -25,7 +25,7 @@ describe('SpaceMirrors', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
   });

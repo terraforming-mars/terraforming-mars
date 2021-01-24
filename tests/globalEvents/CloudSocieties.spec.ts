@@ -4,12 +4,12 @@ import {Game} from '../../src/Game';
 import {CloudSocieties} from '../../src/turmoil/globalEvents/CloudSocieties';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('CloudSocieties', function() {
   it('resolve play', function() {
     const card = new CloudSocieties();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = utils.TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const turmoil = Turmoil.newInstance(game);
     player.playedCards.push(new FloatingHabs());
@@ -18,7 +18,7 @@ describe('CloudSocieties', function() {
     turmoil.dominantParty.partyLeader = player.id;
     turmoil.dominantParty.delegates.push(player.id);
     card.resolve(game, turmoil);
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
     expect(player.playedCards[0].resourceCount).to.eq(3);
   });
 });

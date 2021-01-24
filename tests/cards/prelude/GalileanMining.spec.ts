@@ -3,14 +3,14 @@ import {GalileanMining} from '../../../src/cards/prelude/GalileanMining';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('GalileanMining', function() {
   let card : GalileanMining; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new GalileanMining();
-    player = TestPlayers.BLUE.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
@@ -26,7 +26,7 @@ describe('GalileanMining', function() {
     card.play(player, game);
 
     // SelectHowToPayDeferred
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(2);

@@ -34,7 +34,6 @@ export class BuildColony implements DeferredAction {
         if (colony.name === colonyName) {
           colony.addColony(this.player);
         }
-        return undefined;
       });
       return undefined;
     });

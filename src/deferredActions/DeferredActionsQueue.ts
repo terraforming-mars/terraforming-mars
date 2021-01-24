@@ -1,8 +1,22 @@
 import {DeferredAction} from './DeferredAction';
+import {Game} from '../Game';
 import {GiveColonyBonus} from './GiveColonyBonus';
 import {Heap} from 'mnemonist';
+import {PlayerCallback} from '../server/PlayerCallback';
+import {PlayerCallbackId} from '../server/PlayerCallbackId';
 
 export class DeferredActionsQueue {
+  private static readonly RunAll = class implements PlayerCallback {
+    public readonly id = PlayerCallbackId.RUN_ALL;
+    public game: Game;
+    constructor(public cb: PlayerCallback) {
+      this.game = cb.game;
+    }
+    public execute() {
+      this.game.deferredActions.runAll(this.cb);
+    }
+  }
+
   private queue: Heap<DeferredAction> = new Heap((a, b) => {
     return (a.priority < b.priority) ? -1 : ((a.priority > b.priority) ? 1 : 0);
   });
@@ -23,7 +37,7 @@ export class DeferredActionsQueue {
     return this.queue.peek();
   }
 
-  public run(action: DeferredAction, cb: () => void): void {
+  public run(action: DeferredAction, cb: PlayerCallback): void {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
@@ -34,31 +48,19 @@ export class DeferredActionsQueue {
 
     const input = action.execute();
     if (input !== undefined) {
-      action.player.setWaitingFor(input, () => {
-        cb();
-      });
+      action.player.setWaitingFor(input, cb);
     } else {
-      cb();
+      cb.execute();
     }
   }
 
-  public runAll(cb: () => void): void {
+  public runAll(cb: PlayerCallback): void {
     const action = this.pop();
     if (action === undefined) {
-      cb();
+      cb.execute();
       return;
     }
 
-    this.run(action, () => this.runAll(cb));
-  }
-
-
-  // The following methods are used in tests
-
-  public runNext(): void {
-    const action = this.pop();
-    if (action !== undefined) {
-      this.run(action, () => {});
-    }
+    this.run(action, new DeferredActionsQueue.RunAll(cb));
   }
 }

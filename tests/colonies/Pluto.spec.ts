@@ -4,15 +4,15 @@ import {Pluto} from '../../src/colonies/Pluto';
 import {Game} from '../../src/Game';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('Pluto', function() {
   let pluto: Pluto; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(function() {
     pluto = new Pluto();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(pluto);
@@ -20,13 +20,13 @@ describe('Pluto', function() {
 
   it('Should build', function() {
     pluto.addColony(player);
-    game.deferredActions.runAll(() => {}); // Draw cards
+    utils.runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(2);
   });
 
   it('Should trade', function() {
     pluto.trade(player);
-    game.deferredActions.runAll(() => {}); // Draw cards
+    utils.runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
@@ -35,7 +35,7 @@ describe('Pluto', function() {
 
     pluto.trade(player2);
 
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
 
     const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
     expect(input).to.be.an.instanceof(SelectCard);

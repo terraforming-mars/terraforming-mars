@@ -3,14 +3,14 @@ import {BusinessEmpire} from '../../../src/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('BusinessEmpire', function() {
   let card : BusinessEmpire; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessEmpire();
-    player = TestPlayers.BLUE.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
@@ -25,7 +25,7 @@ describe('BusinessEmpire', function() {
     card.play(player, game);
 
     // SelectHowToPayDeferred
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);

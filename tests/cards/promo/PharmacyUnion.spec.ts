@@ -13,15 +13,15 @@ import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card : PharmacyUnion; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new PharmacyUnion();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
 
     player.corporationCard = card;
@@ -49,14 +49,14 @@ describe('PharmacyUnion', function() {
     const ants = new Ants();
     player.playedCards.push(ants);
     card.onCardPlayed(player, ants);
-    game.deferredActions.runNext(); // Add microbe and lose 4 MC
+    utils.runNextAction(game); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(3);
     expect(player.megaCredits).to.eq(4);
 
     const viralEnhancers = new ViralEnhancers();
     player2.playedCards.push(viralEnhancers);
     card.onCardPlayed(player2, viralEnhancers);
-    game.deferredActions.runNext(); // Add microbe and lose 4 MC
+    utils.runNextAction(game); // Add microbe and lose 4 MC
     expect(player2.megaCredits).to.eq(8); // should not change
     expect(card.resourceCount).to.eq(4);
     expect(player.megaCredits).to.eq(0);
@@ -151,7 +151,7 @@ describe('PharmacyUnion', function() {
     card.resourceCount = 0;
     player2.playedCards.push(viralEnhancers);
     card.onCardPlayed(player2, viralEnhancers);
-    game.deferredActions.runNext(); // Add microbe and lose 4 MC
+    utils.runNextAction(game); // Add microbe and lose 4 MC
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
     expect(game.deferredActions).has.lengthOf(0);

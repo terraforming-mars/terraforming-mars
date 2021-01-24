@@ -3,15 +3,15 @@ import {Ceres} from '../../src/colonies/Ceres';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
-import {TestPlayers} from '../TestingUtils';
+import * as utils from '../TestingUtils';
 
 describe('Ceres', function() {
   let ceres: Ceres; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(function() {
     ceres = new Ceres();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
+    player2 = utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(ceres);
@@ -33,7 +33,7 @@ describe('Ceres', function() {
     ceres.addColony(player);
 
     ceres.trade(player2);
-    game.deferredActions.runAll(() => {});
+    utils.runAllActions(game);
 
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player2.getProduction(Resources.STEEL)).to.eq(0);

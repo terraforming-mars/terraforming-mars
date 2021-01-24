@@ -26,12 +26,15 @@ import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
 import {LogHelper} from './LogHelper';
 import {LogMessage} from './LogMessage';
+import {NoopCallback} from './server/callbacks/NoopCallback';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
 import {Player, PlayerId} from './Player';
+import {PlayerCallback} from './server/PlayerCallback';
+import {PlayerCallbackId} from './server/PlayerCallbackId';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
@@ -144,6 +147,32 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
 };
 
 export class Game implements ISerializable<SerializedGame> {
+  private static readonly DoneWithResearch = class DoneWithResearch implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DONE_WITH_RESEARCH;
+    constructor(public game: Game) {}
+    public execute() {
+      this.game.phase = Phase.ACTION;
+      this.game.passedPlayers.clear();
+      this.game.startActionsForPlayer(this.game.first);
+    }
+  }
+
+  private static readonly DraftOrResearch = class DraftOrResearch implements PlayerCallback {
+    public readonly id = PlayerCallbackId.DRAFT_OR_RESEARCH;
+    constructor(public game: Game) {}
+    public execute() {
+      this.game.goToDraftOrResearch();
+    }
+  }
+
+  private static readonly PlayerFinishedTakingActions = class PlayerFinishedTakingActions implements PlayerCallback {
+    public readonly id = PlayerCallbackId.PLAYER_FINISHED_TAKING_ACTIONS;
+    constructor(public game: Game) {}
+    public execute() {
+      this.game.playerIsFinishedTakingActions();
+    }
+  }
+
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
@@ -669,7 +698,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
-        player.setWaitingFor(this.pickCorporationCard(player), () => {});
+        player.setWaitingFor(this.pickCorporationCard(player), new NoopCallback(this));
       }
     }
   }
@@ -749,10 +778,10 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private resolveTurmoilDeferredActions() {
-    this.deferredActions.runAll(() => this.goToDraftOrResearch());
+    this.deferredActions.runAll(new Game.DraftOrResearch(this));
   }
 
-  private goToDraftOrResearch() {
+  public goToDraftOrResearch() {
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -820,11 +849,7 @@ export class Game implements ISerializable<SerializedGame> {
   public playerIsFinishedWithResearchPhase(player: Player): void {
     this.researchedPlayers.add(player.id);
     if (this.allPlayersHaveFinishedResearch()) {
-      this.deferredActions.runAll(() => {
-        this.phase = Phase.ACTION;
-        this.passedPlayers.clear();
-        this.startActionsForPlayer(this.first);
-      });
+      this.deferredActions.runAll(new Game.DoneWithResearch(this));
     }
   }
 
@@ -948,7 +973,7 @@ export class Game implements ISerializable<SerializedGame> {
   public playerIsFinishedTakingActions(): void {
     // Deferred actions hook
     if (this.deferredActions.length > 0) {
-      this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
+      this.deferredActions.runAll(new Game.PlayerFinishedTakingActions(this));
       return;
     }
 
@@ -1040,7 +1065,7 @@ export class Game implements ISerializable<SerializedGame> {
     player.takeActionForFinalGreenery();
   }
 
-  private startActionsForPlayer(player: Player) {
+  public startActionsForPlayer(player: Player) {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 

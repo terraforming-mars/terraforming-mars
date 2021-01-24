@@ -3,14 +3,14 @@ import {AquiferTurbines} from '../../../src/cards/prelude/AquiferTurbines';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import * as utils from '../../TestingUtils';
 
 describe('AquiferTurbines', function() {
   let card : AquiferTurbines; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new AquiferTurbines();
-    player = TestPlayers.BLUE.newPlayer();
+    player = utils.TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
@@ -27,7 +27,7 @@ describe('AquiferTurbines', function() {
     game.deferredActions.pop();
 
     // SelectHowToPayDeferred
-    game.deferredActions.runNext();
+    utils.runNextAction(game);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player.megaCredits).to.eq(0);

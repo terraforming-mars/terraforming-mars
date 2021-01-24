@@ -2,6 +2,7 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
+import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';
@@ -31,7 +32,7 @@ export class SponsoredAcademies extends Card {
   }
 
   public play(player: Player) {
-    player.game.defer(new DiscardCards(player));
+    player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES);
     player.game.defer(DrawCards.keepAll(player, 3));
     const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
     for (const p of otherPlayers) {

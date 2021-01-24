@@ -35,7 +35,7 @@ import {Player, PlayerId} from './Player';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
-import {DeferredAction} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -453,12 +453,11 @@ export class Game implements ISerializable<SerializedGame> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority: boolean = false): void {
-    if (priority) {
-      this.deferredActions.unshift(action);
-    } else {
-      this.deferredActions.push(action);
+  public defer(action: DeferredAction, priority?: Priority | number): void {
+    if (priority !== undefined) {
+      action.priority = priority;
     }
+    this.deferredActions.push(action);
   }
 
   public getColoniesModel(colonies: Array<Colony>) : Array<ColonyModel> {
@@ -822,6 +821,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.researchedPlayers.add(player.id);
     if (this.allPlayersHaveFinishedResearch()) {
       this.deferredActions.runAll(() => {
+        this.phase = Phase.ACTION;
         this.passedPlayers.clear();
         this.startActionsForPlayer(this.first);
       });

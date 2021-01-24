@@ -22,7 +22,7 @@ describe('NitrogenFromTitan', function() {
     const tr = player.getTerraformRating();
     card.play(player);
     expect(player.getTerraformRating()).to.eq(tr + 2);
-    const input = player.game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
@@ -42,7 +42,7 @@ describe('NitrogenFromTitan', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = player.game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([jovianLanterns]);
     expect(jovianLanterns.resourceCount).to.eq(2);
   });

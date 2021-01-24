@@ -21,7 +21,7 @@ describe('SmallAsteroid', function() {
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[1].cb(); // do nothing
     expect(player2.plants).to.eq(3);
 
@@ -46,7 +46,7 @@ describe('SmallAsteroid', function() {
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[2].cb(); // do nothing

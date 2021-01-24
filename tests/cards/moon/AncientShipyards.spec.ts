@@ -1,54 +1,57 @@
 import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
-import {TileType} from '../../../src/TileType';
+import {OrOptions} from '../../../src/inputs/OrOptions';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AncientShipyards', () => {
   let game: Game;
-  let player: Player;
-  let moonData: IMoonData;
+  let bluePlayer: Player;
+  let redPlayer: Player;
   let card: AncientShipyards;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
-    moonData = MoonExpansion.moonData(game);
+    bluePlayer = TestPlayers.BLUE.newPlayer();
+    redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('id', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
     card = new AncientShipyards();
   });
 
   it('can play', () => {
-    player.cardsInHand = [card];
-    player.titanium = 2;
-    player.megaCredits = card.cost;
-    expect(player.getPlayableCards()).does.not.include(card);
-    player.titanium = 3;
-    expect(player.getPlayableCards()).does.include(card);
+    bluePlayer.cardsInHand = [card];
+    bluePlayer.titanium = 2;
+    bluePlayer.megaCredits = card.cost;
+    expect(bluePlayer.getPlayableCards()).does.not.include(card);
+    bluePlayer.titanium = 3;
+    expect(bluePlayer.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
-    player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
-    expect(player.getTerraformRating()).eq(14);
-    expect(moonData.miningRate).eq(0);
+    bluePlayer.titanium = 3;
+    expect(bluePlayer.getProduction(Resources.STEEL)).eq(0);
 
-    card.play(player);
+    card.play(bluePlayer);
 
-    expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getTerraformRating()).eq(15);
-    expect(moonData.miningRate).eq(1);
+    expect(bluePlayer.titanium).eq(0);
+  });
 
-    const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
-    expect(mareNectaris.player).eq(player);
-    expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
+  it('act', () => {
+    expect(card.resourceCount).eq(0);
+    bluePlayer.megaCredits = 0;
+    redPlayer.megaCredits = 10;
+
+    card.action(bluePlayer);
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    // Steal from red.
+    orOptions.options[0].cb();
+
+    expect(bluePlayer.megaCredits).eq(8);
+    expect(redPlayer.megaCredits).eq(2);
+    expect(card.resourceCount).eq(1);
   });
 
   it('victory points', () => {
@@ -56,11 +59,11 @@ describe('AncientShipyards', () => {
     card.resourceCount = 1;
     expect(card.getVictoryPoints()).eq(0);
     card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints()).eq(-1);
     card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
+    expect(card.getVictoryPoints()).eq(-1);
     card.resourceCount = 4;
-    expect(card.getVictoryPoints()).eq(2);
+    expect(card.getVictoryPoints()).eq(-2);
   });
 });
 

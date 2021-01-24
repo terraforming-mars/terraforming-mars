@@ -7,6 +7,7 @@ import {IMoonCard} from './IMoonCard';
 
 export interface MoonCardProperties {
   reserveUnits?: Units,
+  // Really only interested in MOON_COLONY, MOON_MINE and MOON_ROAD.
   tilesBuilt?: Array<TileType>
 }
 

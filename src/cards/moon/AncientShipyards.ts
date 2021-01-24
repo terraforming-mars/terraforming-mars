@@ -60,6 +60,6 @@ export class AncientShipyards extends MoonCard implements IProjectCard {
   }
 
   public getVictoryPoints() {
-    return this.resourceCount * -1;
+    return -Math.floor(this.resourceCount / 2);
   }
 }

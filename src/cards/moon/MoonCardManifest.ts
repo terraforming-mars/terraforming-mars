@@ -3,6 +3,7 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AncientShipyards} from './AncientShipyards';
+import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
 import {ColonistShuttles} from './ColonistShuttles';
 // import {AIControlledMineNetwork} from './AIControlledMineNetwork';
@@ -60,6 +61,7 @@ import {LunarObservationPost} from './LunarObservationPost';
 // import {LunarMineUrbanization} from './LunarMineUrbanization';
 // import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
+import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
 import {LunaTrainStation} from './LunaTrainStation';
 // import {LunaTradeStation} from './LunaTradeStation';
@@ -152,11 +154,11 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRIDE_OF_THE_EARTH_ARKSHIP, Factory: PrideoftheEarthArkship},
     {cardName: CardName.IRON_EXTRACTION_CENTER, Factory: IronExtractionCenter},
     {cardName: CardName.TITANIUM_EXTRACTION_CENTER, Factory: TitaniumExtractionCenter},
+    {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
     //   // These cards have behavior and rendering.
-    //   {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
     //   {cardName: CardName.STEEL_MARKET_MONOPOLISTS, Factory: SteelMarketMonopolists},
     //   {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
-    //   {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},
+    {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},
     //   {cardName: CardName.NEW_COLONY_PLANNING_INITIAITIVES, Factory: NewColonyPlanningInitiaitives},
     //   {cardName: CardName.AI_CONTROLLED_MINE_NETWORK, Factory: AIControlledMineNetwork},
     //   {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},

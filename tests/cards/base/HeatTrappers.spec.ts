@@ -20,8 +20,8 @@ describe('HeatTrappers', function() {
     game = Game.newInstance('foobar', [player], player);
     player.addProduction(Resources.HEAT);
 
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
 
     expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
@@ -31,8 +31,8 @@ describe('HeatTrappers', function() {
 
   it('Should play - auto select if single target', function() {
     player2.addProduction(Resources.HEAT, 7);
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
     const input = game.deferredActions.next()!.execute();
@@ -43,7 +43,7 @@ describe('HeatTrappers', function() {
   it('Should play - multiple targets', function() {
     player.addProduction(Resources.HEAT, 3);
     player2.addProduction(Resources.HEAT, 7);
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
@@ -54,7 +54,7 @@ describe('HeatTrappers', function() {
   });
 
   it('Can\'t play if nobody has heat production', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Gives victory points', function() {

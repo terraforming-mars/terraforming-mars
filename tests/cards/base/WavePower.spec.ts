@@ -17,12 +17,12 @@ describe('WavePower', function() {
 
   it('Can\'t play', function() {
     maxOutOceans(player, game, 2);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, game, 3);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

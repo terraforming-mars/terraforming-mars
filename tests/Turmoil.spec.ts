@@ -172,7 +172,7 @@ describe('Turmoil', function() {
     const releaseOfInertGases = new ReleaseOfInertGases();
     const jovianEmbassy = new JovianEmbassy();
 
-    expect(releaseOfInertGases.canPlay(player, game)).is.not.true; // needs 20 MC
+    expect(releaseOfInertGases.canPlay(player)).is.not.true; // needs 20 MC
     expect(jovianEmbassy.canPlay(player, game)).is.not.true; // needs 17 MC
 
     player.addProduction(Resources.ENERGY, 4);
@@ -187,13 +187,13 @@ describe('Turmoil', function() {
     const iceAsteroid = new IceAsteroid();
     const protectedValley = new ProtectedValley();
 
-    expect(iceAsteroid.canPlay(player, game)).is.not.true; // needs 29 MC
-    expect(protectedValley.canPlay(player, game)).is.not.true; // needs 26 MC
+    expect(iceAsteroid.canPlay(player)).is.not.true; // needs 29 MC
+    expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
     maxOutOceans(player, game, 9);
-    expect(protectedValley.canPlay(player, game)).is.true;
-    expect(iceAsteroid.canPlay(player, game)).is.true;
+    expect(protectedValley.canPlay(player)).is.true;
+    expect(iceAsteroid.canPlay(player)).is.true;
   });
 
   it('Applies card discounts when checking canPlay while Reds are ruling', function() {

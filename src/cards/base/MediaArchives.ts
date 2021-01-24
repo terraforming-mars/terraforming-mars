@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
@@ -27,8 +26,8 @@ export class MediaArchives extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    const allPlayedEvents: number = game.getPlayers().map((player) => player.getPlayedEventsCount()).reduce((a, c) => a + c, 0);
+  public play(player: Player) {
+    const allPlayedEvents: number = player.game.getPlayers().map((player) => player.getPlayedEventsCount()).reduce((a, c) => a + c, 0);
 
     player.megaCredits += allPlayedEvents;
     LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, allPlayedEvents);

@@ -24,7 +24,7 @@ describe('MartianRails', function() {
     expect(card.canAct(player)).is.true;
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
 
-    card.action(player, game);
+    card.action(player);
     expect(player.energy).to.eq(0);
     expect(player.megaCredits).to.eq(1);
   });

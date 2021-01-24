@@ -9,12 +9,12 @@ describe('TollStation', function() {
     const card = new TollStation();
     const player = TestPlayers.BLUE.newPlayer();
     const anotherPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, anotherPlayer], player);
-    const action = card.play(player, game);
+    Game.newInstance('foobar', [player, anotherPlayer], player);
+    const action = card.play(player);
     expect(action).is.undefined;
     anotherPlayer.playedCards.push(card);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 });

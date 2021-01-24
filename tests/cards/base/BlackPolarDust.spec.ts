@@ -18,11 +18,11 @@ describe('BlackPolarDust', function() {
 
   it('Can\'t play', function() {
     player.addProduction(Resources.MEGACREDITS, -4);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
 
@@ -34,7 +34,7 @@ describe('BlackPolarDust', function() {
 
   it('Cannot place ocean if no oceans left', function() {
     maxOutOceans(player, game);
-    card.play(player, game);
+    card.play(player);
     const input = game.deferredActions.next()!.execute();
     expect(input).is.undefined;
   });

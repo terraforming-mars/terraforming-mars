@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
@@ -27,8 +26,8 @@ export class Greenhouses extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    const qty = game.getCitiesInPlay();
+  public play(player: Player) {
+    const qty = player.game.getCitiesInPlay();
     player.plants += qty;
     LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
     return undefined;

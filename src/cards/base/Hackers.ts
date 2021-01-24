@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
@@ -33,8 +32,8 @@ export class Hackers extends Card implements IProjectCard {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2));
+  public play(player: Player) {
+    player.game.defer(new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2));
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
     return undefined;

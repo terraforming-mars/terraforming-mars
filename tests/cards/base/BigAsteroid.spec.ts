@@ -17,7 +17,7 @@ describe('BigAsteroid', function() {
 
   it('Should play', function() {
     player2.plants = 5;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.next()!.execute() as OrOptions;
@@ -33,7 +33,7 @@ describe('BigAsteroid', function() {
   it('Works fine in solo', function() {
     game = Game.newInstance('foobar', [player], player);
     player.plants = 5;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.next()!.execute();
     expect(input).is.undefined;

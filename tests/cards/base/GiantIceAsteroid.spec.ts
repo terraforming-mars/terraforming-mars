@@ -20,7 +20,7 @@ describe('GiantIceAsteroid', function() {
   it('Should play', function() {
     player2.plants = 4;
     player3.plants = 6;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(3);
 
     const firstOcean = game.deferredActions.shift()!.execute() as SelectSpace;

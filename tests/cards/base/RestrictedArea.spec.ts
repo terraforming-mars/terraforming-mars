@@ -21,7 +21,7 @@ describe('RestrictedArea', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     const space = action.availableSpaces[0];
@@ -34,7 +34,7 @@ describe('RestrictedArea', function() {
   it('Should act', function() {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.true;
-    card.action(player, game);
+    card.action(player);
 
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);

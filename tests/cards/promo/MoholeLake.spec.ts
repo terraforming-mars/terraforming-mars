@@ -23,7 +23,7 @@ describe('MoholeLake', function() {
     card.play(player);
 
     expect(player.game.deferredActions).has.lengthOf(1);
-    const selectSpace = player.game.deferredActions.next()!.execute() as SelectSpace;
+    const selectSpace = player.game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(player.game.getTemperature()).to.eq(-28);

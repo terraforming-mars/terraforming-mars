@@ -144,6 +144,21 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         return contributingUnits;
       };
 
+      // This function help save some money at the end
+      const saveOverSpendingUnits = function(
+        spendingUnits: number | undefined,
+        unitValue: number): number {
+        if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
+          return 0;
+        }
+        // Calculate the unit of resource we can save and still pay enough
+        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
+
+        megacreditBalance += toSaveUnits * unitValue;
+        return toSaveUnits;
+      };
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -166,9 +181,16 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.heat = deductUnits(this.player.heat, 1);
       }
 
-      // If we are overspending in mc, spend less mc.
-      if (megacreditBalance < 0 && this.megaCredits + megacreditBalance >= 0) {
-        this.megaCredits += megacreditBalance;
+      // If we are overspending
+      if (megacreditBalance < 0) {
+        // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
+        // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
+        // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
+        // We cannot reduce the amount of Ti and still pay enough.
+        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
     canUseHeat: function() {

@@ -51,9 +51,9 @@ describe('AsteroidRights', function() {
     card.resourceCount = 0;
 
     card.action(player);
-        player.game.deferredActions.next()!.execute();
-        expect(player.megaCredits).to.eq(0);
-        expect(card.resourceCount).to.eq(1);
+    player.game.deferredActions.peek()!.execute();
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
   });
 
   it('Should play - can add asteroid resource to other card', function() {

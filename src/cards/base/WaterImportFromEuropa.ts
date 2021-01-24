@@ -52,8 +52,9 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
     return player.canAfford(oceanCost, false, true); ;
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action'}));
-    player.game.defer(new PlaceOceanTile(player));
+    player.game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action', afterPay: () => {
+      player.game.defer(new PlaceOceanTile(player));
+    }}));
     return undefined;
   }
 }

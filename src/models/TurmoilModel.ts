@@ -12,8 +12,7 @@ export interface TurmoilModel {
   lobby: Array<Color>;
   reserve: Array<DelegatesModel>;
   distant: GlobalEventModel | undefined;
-  // TODO(kberg): rename to coming.
-  comming: GlobalEventModel | undefined;
+  coming: GlobalEventModel | undefined;
   current: GlobalEventModel | undefined;
   politicalAgendas: PoliticalAgendasModel | undefined;
 }
@@ -150,7 +149,7 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       lobby: lobby,
       reserve: reserve,
       distant: distant,
-      comming: coming,
+      coming: coming,
       current: current,
       politicalAgendas: {
         currentAgenda: turmoil.politicalAgendasData.currentAgenda,

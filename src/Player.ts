@@ -1690,7 +1690,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
-    const players = game.getPlayers();
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
 
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
@@ -1763,10 +1762,32 @@ export class Player implements ISerializable<SerializedPlayer> {
       return;
     }
 
+    this.setWaitingFor(this.getActions(), () => {
+      this.actionsTakenThisRound++;
+      this.takeAction();
+    });
+  }
+
+  // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
+  public getActions() {
     const action: OrOptions = new OrOptions();
     action.title = 'Take action for action phase, select one ' +
                       'available action.';
     action.buttonLabel = 'Take action';
+
+    if (this.canAfford(8) && !this.game.allMilestonesClaimed()) {
+      const remainingMilestones = new OrOptions();
+      remainingMilestones.title = 'Claim a milestone';
+      remainingMilestones.options = this.game.milestones
+        .filter(
+          (milestone: IMilestone) =>
+            !this.game.milestoneClaimed(milestone) &&
+            milestone.canClaim(this))
+        .map(
+          (milestone: IMilestone) =>
+            this.claimMilestone(milestone));
+      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
+    }
 
     // Convert Plants
     const convertPlants = new ConvertPlants();
@@ -1782,12 +1803,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }));
     }
 
-
-    if (this.getPlayableCards().length > 0) {
-      action.options.push(
-        this.playProjectCard(),
-      );
-    }
+    TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(
@@ -1795,8 +1811,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    if (game.gameOptions.coloniesExtension) {
-      const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+    if (this.getPlayableCards().length > 0) {
+      action.options.push(
+        this.playProjectCard(),
+      );
+    }
+
+    if (this.game.gameOptions.coloniesExtension) {
+      const openColonies = this.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
       if (openColonies.length > 0 &&
         this.fleetSize > this.tradesThisTurn &&
         (this.canAfford(9 - this.colonyTradeDiscount) ||
@@ -1809,31 +1831,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    TurmoilHandler.addPlayerAction(this, action.options);
-
-    if (this.canAfford(8) && !game.allMilestonesClaimed()) {
-      const remainingMilestones = new OrOptions();
-      remainingMilestones.title = 'Claim a milestone';
-      remainingMilestones.options = game.milestones
-        .filter(
-          (milestone: IMilestone) =>
-            !game.milestoneClaimed(milestone) &&
-                      milestone.canClaim(this))
-        .map(
-          (milestone: IMilestone) =>
-            this.claimMilestone(milestone));
-
-      if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
-    }
-
     // If you can pay to send some in the Ara
-    if (game.gameOptions.turmoilExtension) {
+    if (this.game.gameOptions.turmoilExtension) {
       let sendDelegate;
-      if (game.turmoil?.lobby.has(this.id)) {
+      if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil!.getDelegates(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
-      } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
       }
       if (sendDelegate) {
@@ -1844,29 +1849,21 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    action.options.sort((a, b) => {
-      if (a.title > b.title) {
-        return 1;
-      } else if (a.title < b.title) {
-        return -1;
-      }
-      return 0;
-    });
-
-    if (players.length > 1 && this.actionsTakenThisRound > 0 && !game.gameOptions.fastModeOption && allOtherPlayersHavePassed === false) {
+    if (this.game.getPlayers().length > 1 &&
+      this.actionsTakenThisRound > 0 &&
+      !this.game.gameOptions.fastModeOption &&
+      this.allOtherPlayersHavePassed() === false) {
       action.options.push(
         this.endTurnOption(),
       );
     }
 
-    if (
-      this.canAfford(game.getAwardFundingCost()) &&
-          !game.allAwardsFunded()) {
+    if (this.canAfford(this.game.getAwardFundingCost()) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
       remainingAwards.title = 'Fund an award';
       remainingAwards.buttonLabel = 'Confirm';
-      remainingAwards.options = game.awards
-        .filter((award: IAward) => game.hasBeenFunded(award) === false)
+      remainingAwards.options = this.game.awards
+        .filter((award: IAward) => this.game.hasBeenFunded(award) === false)
         .map((award: IAward) => this.fundAward(award));
       action.options.push(remainingAwards);
     }
@@ -1887,14 +1884,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Propose undo action only if you have done one action this turn
-    if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
+    if (this.actionsTakenThisRound > 0 && this.game.gameOptions.undoOption) {
       action.options.push(this.undoTurnOption());
     }
 
-    this.setWaitingFor(action, () => {
-      this.actionsTakenThisRound++;
-      this.takeAction();
-    });
+    return action;
   }
 
   private allOtherPlayersHavePassed(): boolean {

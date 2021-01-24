@@ -27,7 +27,7 @@ describe('BlackPolarDust', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
@@ -35,7 +35,5 @@ describe('BlackPolarDust', function() {
   it('Cannot place ocean if no oceans left', function() {
     maxOutOceans(player);
     card.play(player);
-    const input = game.deferredActions.next()!.execute();
-    expect(input).is.undefined;
   });
 });

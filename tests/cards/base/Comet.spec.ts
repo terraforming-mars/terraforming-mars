@@ -26,11 +26,11 @@ describe('Comet', function() {
     expect(game.getTemperature()).to.eq(-28);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectSpace = game.deferredActions.shift()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(22);
 
-    const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(0);
   });
@@ -40,7 +40,7 @@ describe('Comet', function() {
     player.plants = 8;
 
     card.play(player);
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
 
     expect(player.plants).to.eq(8); // self plants are not removed

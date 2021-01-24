@@ -58,7 +58,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
               }),
             );
           },
-        ), true); // Unshift that deferred action
+        ), -1); // Unshift that deferred action
       }
       return undefined;
     }

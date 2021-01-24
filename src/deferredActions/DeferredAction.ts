@@ -2,6 +2,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 
 export enum Priority {
+  SPONSORED_ACADEMIES, // To discard before drawing
   DRAW_CARDS,
   BUILD_COLONY,
   DECREASE_ANY_PRODUCTION,

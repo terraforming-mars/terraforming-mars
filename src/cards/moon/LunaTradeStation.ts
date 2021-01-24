@@ -1,5 +1,4 @@
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -25,7 +24,7 @@ export class LunaTradeStation extends Card implements IActionCard {
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 MC for each mining tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(2).slash().tile(TileType.MOON_COLONY, false));
+            eb.empty().startAction.megacredits(1).slash().tile(TileType.MOON_MINE, false));
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
@@ -49,9 +48,9 @@ export class LunaTradeStation extends Card implements IActionCard {
     return true;
   }
 
-  public action(player: Player, game: Game) {
-    const surfaceColonies = MoonExpansion.tiles(game, TileType.MOON_COLONY, true).length;
-    player.megaCredits += surfaceColonies * 2;
+  public action(player: Player) {
+    const surfaceMines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, true).length;
+    player.megaCredits += surfaceMines;
     return undefined;
   }
 }

@@ -30,10 +30,10 @@ describe('MoonRoadStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(18);
     // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     // expect(payAction.amount).eq(14);
   });
 
@@ -42,14 +42,13 @@ describe('MoonRoadStandardProject', () => {
     expect(player.getTerraformRating()).eq(14);
 
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
-    game.deferredActions.remove(payAction);
+    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     payAction.options.afterPay!();
 
     expect(player.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
-    const placeTileAction = game.deferredActions.next() as PlaceMoonRoadTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonRoadTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.logisticRate).eq(1);

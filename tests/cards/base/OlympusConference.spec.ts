@@ -33,8 +33,8 @@ describe('OlympusConference', function() {
     // No resource
     card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    const input = game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
     expect(input).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
@@ -42,8 +42,8 @@ describe('OlympusConference', function() {
     card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
 
@@ -59,14 +59,14 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     // No resource, can't draw, resource automatically added
-    const input = game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    const input = game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
     expect(input).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
     // Resource on card, can draw
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
@@ -90,8 +90,8 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     // OC's trigger should be the first one
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
 
@@ -113,8 +113,8 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     // OC's trigger should be the first one
-    const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions2 = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions2.options[1].cb();
     expect(card.resourceCount).to.eq(2);
   });

@@ -50,7 +50,7 @@ describe('MareSerenitatisMine', () => {
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 
-    const deferredAction = game.deferredActions.next() as PlaceMoonRoadTile;
+    const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
     const roadSpace = deferredAction.spaces![0];
     expect(roadSpace.tile).is.undefined;
     expect(roadSpace.player).is.undefined;

@@ -3,12 +3,13 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
 import {Agenda} from '../turmoil/PoliticalAgendas';
 import {Turmoil} from '../turmoil/Turmoil';
 
 export class ChoosePoliticalAgenda implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
     public player: Player,
     public party: IParty,

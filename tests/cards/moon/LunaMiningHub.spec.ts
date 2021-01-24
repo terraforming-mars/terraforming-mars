@@ -73,6 +73,13 @@ describe('LunaMiningHub', () => {
 
     expect(space.player).eq(player);
     expect(space.tile!.tileType).eq(TileType.LUNA_MINING_HUB);
+    expect(space.tile!.card).eq(card.name);
+  });
+
+  it('getVictoryPoints', () => {
+    // This space has room to surround it with mines.
+    const space = moonData.moon.spaces[10];
+    space.tile = {tileType: TileType.LUNA_MINING_HUB, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(space);

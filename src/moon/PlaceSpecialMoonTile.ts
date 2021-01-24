@@ -8,7 +8,7 @@ export class PlaceSpecialMoonTile implements DeferredAction {
   constructor(
     public player: Player,
     public tile: ITile,
-    public title: string = 'Select a space on the Moon for a colony tile.',
+    public title: string = 'Select a space on the Moon for this tile.',
     public priority = Priority.PLACE_MOON_TILE,
   ) {}
 

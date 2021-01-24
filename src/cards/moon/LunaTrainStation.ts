@@ -1,10 +1,8 @@
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../Resources';
 import {TileType} from '../../TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,9 +17,10 @@ export class LunaTrainStation extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 20,
+      productionBox: Units.of({megacredits: 4}),
 
       metadata: {
-        description: 'Requires Logistic Rate to be 5 or higher. Spend 2 steel. ' +
+        description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +
         'Increase your MC production 4 steps. Place this tile on the Moon and raise Logistic Rate 1 step. ' +
         '2 ADDITIONAL VPs FOR EACH MINING TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
@@ -43,7 +42,7 @@ export class LunaTrainStation extends MoonCard {
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
-    player.addProduction(Resources.MEGACREDITS, 4, player.game);
+    Units.adjustProduction(this.productionBox, player, player.game);
     player.game.defer(new PlaceSpecialMoonTile(player, {
       tileType: TileType.LUNA_TRAIN_STATION,
       card: this.name,
@@ -53,11 +52,11 @@ export class LunaTrainStation extends MoonCard {
     return undefined;
   }
 
-  public getVictoryPoints(_player: Player, game: Game) {
-    const moonData = MoonExpansion.moonData(game);
+  public getVictoryPoints(player: Player) {
+    const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return 2 * game.board.getAdjacentSpaces(usedSpace)
+      return 2 * player.game.board.getAdjacentSpaces(usedSpace)
         .filter((s) => s.tile?.tileType === TileType.MOON_ROAD).length;
     }
     return 0;

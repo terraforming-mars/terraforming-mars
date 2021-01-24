@@ -27,7 +27,7 @@ describe('ButterflyEffect', function() {
     expect(originalHazardData.severeErosionTemperature.threshold).eq(-4);
     expect(originalHazardData.severeDustStormOxygen.threshold).eq(5);
 
-    const input = game.deferredActions.next()!.execute() as ShiftAresGlobalParameters;
+    const input = game.deferredActions.peek()!.execute() as ShiftAresGlobalParameters;
     input.cb(
       {
         lowOceanDelta: -1,

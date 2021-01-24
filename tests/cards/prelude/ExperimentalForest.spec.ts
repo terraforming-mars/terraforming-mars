@@ -13,7 +13,7 @@ describe('ExperimentalForest', function() {
     card.play(player, game);
 
     // Select Greenery space
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
 
     expect(selectSpace).is.not.undefined;
     expect(selectSpace instanceof SelectSpace).is.true;

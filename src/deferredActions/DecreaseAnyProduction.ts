@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class DecreaseAnyProduction implements DeferredAction {
+  public priority = Priority.DECREASE_ANY_PRODUCTION;
   constructor(
         public player: Player,
         public resource: Resources,

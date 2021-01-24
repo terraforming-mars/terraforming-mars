@@ -30,7 +30,7 @@ describe('CoreMine', () => {
 
     card.play(player);
     expect(player.getProduction(Resources.TITANIUM)).eq(1);
-    const placeTileAction = game.deferredActions.next() as PlaceMoonMineTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonMineTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.miningRate).eq(1);

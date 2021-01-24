@@ -48,7 +48,7 @@ describe('SinusIridiumRoadNetwork', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
 
-    expect(player.game.deferredActions.next()).instanceOf(PlaceMoonRoadTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonRoadTile);
   });
 });
 

@@ -13,7 +13,7 @@ describe('NuclearZoneAres', function() {
 
     const game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     if (action !== undefined) {
       const space = action.availableSpaces[0];
       action.cb(space);

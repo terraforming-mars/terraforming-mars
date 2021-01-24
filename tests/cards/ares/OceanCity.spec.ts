@@ -133,7 +133,7 @@ describe('OceanCity', function() {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
 
     const capital = new Capital();
-    const capitalAction = capital.play(player, game);
+    const capitalAction = capital.play(player);
     player.playedCards = [capital];
 
     const capitalSpace = game.board

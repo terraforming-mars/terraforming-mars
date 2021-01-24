@@ -45,7 +45,7 @@ describe('TheWomb', () => {
     expect(player.titanium).eq(0);
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
-    expect(player.game.deferredActions.next()).instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });
 });
 

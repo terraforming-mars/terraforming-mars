@@ -1,10 +1,11 @@
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {Player} from '../Player';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {AresHandler} from '../ares/AresHandler';
 import {PlayerInput} from '../PlayerInput';
 
 export class ShiftAresGlobalParametersDeferred implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player) { }
   public execute() {

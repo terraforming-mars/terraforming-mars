@@ -16,14 +16,14 @@ describe('Ironworks', function() {
 
   it('Can\'t act without enough energy', function() {
     player.energy = 3;
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
     player.energy = 4;
-    expect(card.canAct(player, game)).is.true;
+    expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(player.energy).to.eq(0);
     expect(player.steel).to.eq(1);
     expect(game.getOxygenLevel()).to.eq(1);

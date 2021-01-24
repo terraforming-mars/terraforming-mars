@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
@@ -35,13 +34,13 @@ export class BiomassCombustors extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
-    game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
     return undefined;
   }
   public getVictoryPoints() {

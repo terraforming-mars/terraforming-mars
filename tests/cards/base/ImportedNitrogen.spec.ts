@@ -21,7 +21,7 @@ describe('ImportedNitrogen', function() {
   });
 
   it('Should play without animals and microbes', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
     expect(player.plants).to.eq(4);
   });
@@ -30,12 +30,12 @@ describe('ImportedNitrogen', function() {
     const pets = new Pets();
     const birds = new Birds();
     player.playedCards.push(pets, birds);
-    card.play(player, game);
+    card.play(player);
 
-    const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(addMicrobes).is.undefined;
 
-    const addAnimals = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addAnimals.cb([pets]);
     expect(player.getResourcesOnCard(pets)).to.eq(2);
 
@@ -47,13 +47,13 @@ describe('ImportedNitrogen', function() {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
-    card.play(player, game);
+    card.play(player);
 
-    const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);
     expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
 
-    const addAnimals = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(addAnimals).is.undefined;
 
     expect(player.getTerraformRating()).to.eq(21);
@@ -66,13 +66,13 @@ describe('ImportedNitrogen', function() {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(pets, tardigrades, birds, ants);
-    card.play(player, game);
+    card.play(player);
 
-    const addMicrobes = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);
     expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
 
-    const addAnimals = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addAnimals.cb([pets]);
     expect(player.getResourcesOnCard(pets)).to.eq(2);
 

@@ -4,7 +4,7 @@ import {ResourceType} from '../ResourceType';
 import {ICard} from '../cards/ICard';
 import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export namespace AddResourcesToCard {
   export interface Options {
@@ -16,6 +16,7 @@ export namespace AddResourcesToCard {
 }
 
 export class AddResourcesToCard implements DeferredAction {
+  public priority = Priority.ADD_RESOURCES_TO_CARDS;
   constructor(
         public player: Player,
         public resourceType: ResourceType | undefined,

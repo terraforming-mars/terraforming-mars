@@ -18,7 +18,7 @@ describe('LargeConvoy', function() {
   });
 
   it('Should play without animal cards', function() {
-    card.play(player, game);
+    card.play(player);
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
@@ -30,7 +30,7 @@ describe('LargeConvoy', function() {
     const pets = new Pets();
     player.playedCards.push(pets);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     player.playedCards.push(card);
     (action as OrOptions).options[1].cb();
     player.getVictoryPoints();
@@ -46,7 +46,7 @@ describe('LargeConvoy', function() {
     const fish = new Fish();
     player.playedCards.push(pets, fish);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
@@ -65,7 +65,7 @@ describe('LargeConvoy', function() {
     const plantsCount = player.plants;
     const cardsInHand = player.cardsInHand.length;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

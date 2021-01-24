@@ -36,7 +36,7 @@ describe('MonsInsurance', function() {
     player2.titanium = 3;
 
     const card2 = new Sabotage();
-    const action = card2.play!(player3, game) as OrOptions;
+    const action = card2.play!(player3) as OrOptions;
 
     action.options[1].cb();
     expect(player2.titanium).to.eq(0);

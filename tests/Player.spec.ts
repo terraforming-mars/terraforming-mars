@@ -39,7 +39,7 @@ describe('Player', function() {
     player3.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, Game.newInstance('foobar', [player, player2, player3], player));
+    const action = card.play(player); //  Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       player.process([[player2.id]]);
@@ -49,12 +49,12 @@ describe('Player', function() {
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    // const redPlayer = TestPlayers.RED.newPlayer();
 
     Game.newInstance('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
+    const action = card.play(player); // , Game.newInstance('foobar', [player, redPlayer], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;

@@ -23,12 +23,12 @@ describe('Ants', function() {
 
   it('Can\'t play without oxygen', function() {
     (game as any).oxygenLevel = 3;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 4;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play();
     card.resourceCount += 5;
@@ -49,10 +49,10 @@ describe('Ants', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.shift()!.execute(); // Add microbe to ants
+        game.deferredActions.pop()!.execute(); // Add microbe to ants
 
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);
@@ -83,9 +83,9 @@ describe('Ants', function() {
     player2.addResourceTo(securityFleet);
 
     card.action(player);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Tardigrades
-        game.deferredActions.shift()!.execute(); // Add microbe to ants
+        game.deferredActions.pop()!.execute(); // Add microbe to ants
 
         expect(card.resourceCount).to.eq(1);
         expect(tardigrades.resourceCount).to.eq(0);

@@ -1,4 +1,3 @@
-import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -8,16 +7,34 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Card} from '../Card';
 
-export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard {
-  public cost = 11;
-  public tags = [Tags.SPACE, Tags.VENUS, Tags.ENERGY];
-  public name = CardName.DEUTERIUM_EXPORT;
-  public cardType = CardType.ACTIVE;
-  public resourceType = ResourceType.FLOATER;
+export class DeuteriumExport extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.DEUTERIUM_EXPORT,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.SPACE, Tags.VENUS, Tags.ENERGY],
+      cost: 11,
+      resourceType: ResourceType.FLOATER,
+
+      metadata: {
+        cardNumber: '221',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 Floater to this card.', (eb) => {
+            eb.empty().startAction.floaters(1);
+          }).br;
+          b.or(CardRenderItemSize.SMALL).br;
+          b.action('Spend 1 Floater here to increase your energy production 1 step.', (be) => {
+            be.floaters(1).startAction.production((pb) => pb.energy(1));
+          });
+        }),
+      },
+    });
+  };
+
   public resourceCount: number = 0;
 
   public play() {
@@ -42,17 +59,5 @@ export class DeuteriumExport implements IActionCard, IProjectCard, IResourceCard
         return undefined;
       }),
     );
-  }
-  public metadata: CardMetadata = {
-    cardNumber: '221',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Add 1 Floater to this card.', (eb) => {
-        eb.empty().startAction.floaters(1);
-      }).br;
-      b.or(CardRenderItemSize.SMALL).br;
-      b.action('Spend 1 Floater here to increase your energy production 1 step.', (be) => {
-        be.floaters(1).startAction.production((pb) => pb.energy(1));
-      });
-    }),
   }
 }

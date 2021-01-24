@@ -20,7 +20,7 @@ describe('MiningExpedition', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(6);
 

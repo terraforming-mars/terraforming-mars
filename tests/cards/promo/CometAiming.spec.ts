@@ -38,7 +38,7 @@ describe('CometAiming', function() {
 
     card.action(player, game);
     expect(game.deferredActions).has.lengthOf(1);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });

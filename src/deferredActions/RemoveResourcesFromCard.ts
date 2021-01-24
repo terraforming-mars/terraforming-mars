@@ -5,12 +5,13 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
 import {CardName} from '../CardName';
 import {ICard} from '../cards/ICard';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard implements DeferredAction {
+  public priority = Priority.REMOVE_RESOURCES_FROM_CARD;
   constructor(
         public player: Player,
         public resourceType: ResourceType,

@@ -77,10 +77,10 @@ describe('EcologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
-    game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
+    game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);

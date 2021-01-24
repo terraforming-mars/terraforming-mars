@@ -33,7 +33,7 @@ describe('FloaterTechnology', function() {
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = player.game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(dirigibles.resourceCount).to.eq(1);
   });
@@ -46,7 +46,7 @@ describe('FloaterTechnology', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = player.game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

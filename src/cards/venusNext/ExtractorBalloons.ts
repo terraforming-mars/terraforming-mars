@@ -1,4 +1,3 @@
-import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
@@ -11,16 +10,34 @@ import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {LogHelper} from '../../LogHelper';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Card} from '../Card';
 
-export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCard {
-  public cost = 21;
-  public tags = [Tags.VENUS];
-  public name = CardName.EXTRACTOR_BALLOONS;
-  public cardType = CardType.ACTIVE;
-  public resourceType = ResourceType.FLOATER;
+export class ExtractorBalloons extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.EXTRACTOR_BALLOONS,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS],
+      cost: 21,
+      resourceType: ResourceType.FLOATER,
+
+      metadata: {
+        cardNumber: '223',
+        description: 'Add 3 Floaters to this card',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 Floater to this card.', (eb) => {
+            eb.empty().startAction.floaters(1);
+          }).br;
+          b.action('Remove 2 Floaters here to raise Venus 1 step.', (eb) => {
+            eb.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1);
+          }).br.floaters(3);
+        }),
+      },
+    });
+  };
+
   public resourceCount: number = 0;
 
   public play() {
@@ -52,17 +69,5 @@ export class ExtractorBalloons implements IActionCard, IProjectCard, IResourceCa
         return undefined;
       }),
     );
-  }
-  public metadata: CardMetadata = {
-    cardNumber: '223',
-    description: 'Add 3 Floaters to this card',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Add 1 Floater to this card.', (eb) => {
-        eb.empty().startAction.floaters(1);
-      }).br;
-      b.action('Remove 2 Floaters here to raise Venus 1 step.', (eb) => {
-        eb.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1);
-      }).br.floaters(3);
-    }),
   }
 }

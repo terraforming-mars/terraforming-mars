@@ -20,7 +20,7 @@ describe('DeimosDown', function() {
     card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
 
     expect(game.getTemperature()).to.eq(-24);

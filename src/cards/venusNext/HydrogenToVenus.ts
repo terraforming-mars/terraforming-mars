@@ -2,7 +2,6 @@ import {ICard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
@@ -45,16 +44,16 @@ export class HydrogenToVenus extends Card {
     CardName.STRATOPOLIS,
   ]);
 
-  public canPlay(player: Player, game: Game): boolean {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const jovianTags: number = player.getTagCount(Tags.JOVIAN);
     const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => {
       return HydrogenToVenus.venusCardsWithFloaters.has(card.name);
@@ -72,13 +71,13 @@ export class HydrogenToVenus extends Card {
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], jovianTags);
             LogHelper.logAddResource(player, foundCards[0], jovianTags);
-            game.increaseVenusScaleLevel(player, 1);
+            player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },
         );
       }
     }
-    game.increaseVenusScaleLevel(player, 1);
+    player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }
 }

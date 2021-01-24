@@ -22,7 +22,7 @@ describe('AerosportTournament', function() {
 
     game.addCityTile(player, '03');
 
-    const play = card.play(player, game);
+    const play = card.play(player);
     expect(play).is.undefined;
     expect(player.megaCredits).to.eq(1);
   });

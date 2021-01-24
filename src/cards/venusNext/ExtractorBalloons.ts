@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -48,9 +47,9 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
   public canAct(): boolean {
     return true;
   }
-  public action(player: Player, game: Game) {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const cannotAffordRed = PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+  public action(player: Player) {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
     if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
       player.addResourceTo(this);
       LogHelper.logAddResource(player, this);
@@ -60,7 +59,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
         'Remove floaters', () => {
           this.resourceCount -= 2;
-          game.increaseVenusScaleLevel(player, 1);
+          player.game.increaseVenusScaleLevel(player, 1);
           LogHelper.logVenusIncrease( player, 1);
           return undefined;
         }),

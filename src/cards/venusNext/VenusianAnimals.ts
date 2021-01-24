@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
@@ -36,8 +35,8 @@ export class VenusianAnimals extends Card implements IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.VENUS, 18);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 18);
   }
   public play() {
     return undefined;

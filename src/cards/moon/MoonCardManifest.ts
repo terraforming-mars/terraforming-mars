@@ -86,6 +86,7 @@ import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 import {SphereHabitats} from './SphereHabitats';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
@@ -148,7 +149,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNA_RESORT, Factory: LunaResort},
     {cardName: CardName.LUNAR_OBSERVATION_POST, Factory: LunarObservationPost},
     {cardName: CardName.MINING_ROBOTS_MANUF_CENTER, Factory: MiningRobotsManufCenter},
-    //   {cardName: CardName.PRIDE_OF_THE_EARTH_ARKSHIP, Factory: PrideoftheEarthArkship},
+    {cardName: CardName.PRIDE_OF_THE_EARTH_ARKSHIP, Factory: PrideoftheEarthArkship},
     {cardName: CardName.IRON_EXTRACTION_CENTER, Factory: IronExtractionCenter},
     {cardName: CardName.TITANIUM_EXTRACTION_CENTER, Factory: TitaniumExtractionCenter},
     //   // These cards have behavior and rendering.

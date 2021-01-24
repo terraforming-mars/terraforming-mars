@@ -18,14 +18,14 @@ describe('CommercialDistrict', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.addProduction(Resources.ENERGY);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace);
     action.cb(action.availableSpaces[0]);
 

@@ -22,12 +22,12 @@ describe('Predators', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 11;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play();
 
@@ -42,11 +42,11 @@ describe('Predators', function() {
     player.addResourceTo(fish);
     player.addResourceTo(smallAnimals);
 
-    card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    card.action(player);
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player.getResourcesOnCard(fish)).to.eq(0);
@@ -61,12 +61,12 @@ describe('Predators', function() {
     player2.addResourceTo(pets);
     player2.addResourceTo(fish);
 
-    expect(card.canAct(player, game)).is.true;
+    expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    card.action(player);
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);
@@ -82,12 +82,12 @@ describe('Predators', function() {
     player2.addResourceTo(bioengineeringEnclosure);
     player2.addResourceTo(fish);
 
-    expect(card.canAct(player, game)).is.true;
+    expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
-    const selectCard = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    card.action(player);
+    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.shift()!.execute(); // Add animal to predators
+        game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);
@@ -103,6 +103,6 @@ describe('Predators', function() {
     player2.addResourceTo(animals);
     player2.addResourceTo(fish);
 
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 });

@@ -55,8 +55,8 @@ describe('UrbanDecomposers', function() {
 
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    const input = game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
     expect(input).is.undefined;
     expect(decomposers.resourceCount).to.eq(2);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
@@ -71,7 +71,7 @@ describe('UrbanDecomposers', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([ants]);
     expect(ants.resourceCount).to.eq(2);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);

@@ -174,7 +174,6 @@ export class PostgreSQL implements IDatabase {
   }
 
   saveGame(game: Game): void {
-    // TODO(kberg): why is player size a useful first-class piece of data?
     this.client.query(
       'INSERT INTO games(game_id, save_id, game, players) VALUES($1, $2, $3, $4)',
       [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length], (err) => {

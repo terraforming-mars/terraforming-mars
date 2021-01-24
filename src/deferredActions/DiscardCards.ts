@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class DiscardCards implements DeferredAction {
+  public priority = Priority.DISCARD_CARDS;
   constructor(
         public player: Player,
         public count: number = 1,

@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {LogHelper} from '../../LogHelper';
@@ -36,8 +35,8 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
   public canAct(player: Player): boolean {
     return player.energy >= 1;
   }
-  public action(player: Player, game: Game) {
-    const gainedMC = game.getCitiesInPlayOnMars();
+  public action(player: Player) {
+    const gainedMC = player.game.getCitiesInPlayOnMars();
     player.energy--;
     player.megaCredits += gainedMC;
     LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, gainedMC);

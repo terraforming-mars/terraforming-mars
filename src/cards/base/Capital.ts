@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
@@ -49,10 +48,10 @@ export class Capital extends Card implements IProjectCard {
       metadata,
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 2 &&
-        game.checkMinRequirements(player, GlobalParameter.OCEANS, 4) &&
-        game.board.getAvailableSpacesForCity(player).length > 0;
+        player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 4) &&
+        player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
@@ -62,14 +61,14 @@ export class Capital extends Card implements IProjectCard {
     }
     return 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -2);
     player.addProduction(Resources.MEGACREDITS, 5);
     return new SelectSpace(
       'Select space for special city tile',
-      game.board.getAvailableSpacesForCity(player),
+      player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
-        game.addTile(player, SpaceType.LAND, space, {
+        player.game.addTile(player, SpaceType.LAND, space, {
           tileType: TileType.CAPITAL,
           card: this.name,
         });

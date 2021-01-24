@@ -16,7 +16,7 @@ describe('ResearchOutpost', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game) as SelectSpace;
+    const action = card.play(player) as SelectSpace;
     expect(action).is.not.undefined;
 
     action.cb(action.availableSpaces[0]);
@@ -30,6 +30,6 @@ describe('ResearchOutpost', function() {
       game.addGreenery(player, lands[i].id);
     }
 
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 });

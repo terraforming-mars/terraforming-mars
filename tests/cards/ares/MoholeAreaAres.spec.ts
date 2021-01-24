@@ -13,8 +13,8 @@ describe('MoholeAreaAres', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    const action = card.play(player, game);
+    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    const action = card.play(player);
 
     expect(action).is.not.undefined;
     expect(action instanceof SelectSpace).is.true;

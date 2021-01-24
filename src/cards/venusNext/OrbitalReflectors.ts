@@ -36,7 +36,7 @@ export class OrbitalReflectors extends Card {
     const stepsRaised = Math.min(remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, false, true, true);
     }
 
     return true;

@@ -21,7 +21,7 @@ describe('SponsoredAcademies', function() {
     expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
-    const discardCard = game.deferredActions.shift()!.execute() as SelectCard<IProjectCard>;
+    const discardCard = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;
     expect(discardCard instanceof SelectCard).is.true;
 
     // No SponsoredAcademies itself suggested to discard

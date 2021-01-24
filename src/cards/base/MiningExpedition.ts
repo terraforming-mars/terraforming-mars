@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
@@ -29,19 +28,19 @@ export class MiningExpedition extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
+  public canPlay(player: Player): boolean {
+    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new RemoveAnyPlants(player, 2));
+  public play(player: Player) {
+    player.game.defer(new RemoveAnyPlants(player, 2));
     player.steel += 2;
-    return game.increaseOxygenLevel(player, 1);
+    return player.game.increaseOxygenLevel(player, 1);
   }
 }

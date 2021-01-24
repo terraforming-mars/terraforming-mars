@@ -41,7 +41,14 @@ export const Card = Vue.component('card', {
     const cardName = this.card.name;
     let expansion: GameModule | undefined;
     for (const manifest of ALL_CARD_MANIFESTS) {
-      for (const deck of [manifest.corporationCards, manifest.projectCards, manifest.preludeCards, manifest.standardProjects]) {
+      const decks = [
+        manifest.corporationCards,
+        manifest.projectCards,
+        manifest.preludeCards,
+        manifest.standardProjects,
+        manifest.standardActions,
+      ];
+      for (const deck of decks) {
         const factory = deck.findByCardName(cardName);
         if (factory !== undefined) {
           cardInstance = new factory.Factory();
@@ -116,7 +123,7 @@ export const Card = Vue.component('card', {
       return this.getCardType() === CardType.CORPORATION;
     },
     isStandardProject: function() : boolean {
-      return this.getCardType() === CardType.STANDARD_PROJECT;
+      return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
     },
   },
   template: `

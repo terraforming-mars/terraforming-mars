@@ -33,7 +33,7 @@ export class NeutralizerFactory extends Card {
   public canPlay(player: Player, game: Game): boolean {
     const venusRequirementMet = game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
     if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, false, true) && venusRequirementMet;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true) && venusRequirementMet;
     }
 
     return venusRequirementMet;

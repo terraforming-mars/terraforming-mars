@@ -15,7 +15,7 @@ export class DeepLunarMining extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON],
       cost: 18,
-      productionDelta: Units.of({titanium: 2}),
+      productionBox: Units.of({titanium: 2}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise Mining Rate 1 step.',
@@ -34,7 +34,7 @@ export class DeepLunarMining extends MoonCard {
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionDelta, player, player.game);
+    Units.adjustProduction(this.productionBox, player, player.game);
     player.addProduction(Resources.TITANIUM, 2);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

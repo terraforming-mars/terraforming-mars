@@ -26,10 +26,10 @@ describe('AncientShipyards', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 0;
+    player.titanium = 2;
     player.megaCredits = card.cost;
     expect(player.getPlayableCards()).does.not.include(card);
-    player.titanium = 1;
+    player.titanium = 3;
     expect(player.getPlayableCards()).does.include(card);
   });
 
@@ -49,6 +49,18 @@ describe('AncientShipyards', () => {
     const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
     expect(mareNectaris.player).eq(player);
     expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
+  });
+
+  it('victory points', () => {
+    expect(card.getVictoryPoints()).eq(0);
+    card.resourceCount = 1;
+    expect(card.getVictoryPoints()).eq(0);
+    card.resourceCount = 2;
+    expect(card.getVictoryPoints()).eq(1);
+    card.resourceCount = 3;
+    expect(card.getVictoryPoints()).eq(1);
+    card.resourceCount = 4;
+    expect(card.getVictoryPoints()).eq(2);
   });
 });
 

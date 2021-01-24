@@ -18,7 +18,7 @@ export class LunaTradeStation extends Card implements IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
       cost: 10,
-      productionDelta: Units.of({}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',

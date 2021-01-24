@@ -330,15 +330,15 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
-                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
                     <Card :card="card"/>
                 </div>
 

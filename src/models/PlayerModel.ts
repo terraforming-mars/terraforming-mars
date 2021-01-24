@@ -71,7 +71,6 @@ export interface PlayerModel {
     dealtCorporationCards: Array<CardModel>;
     dealtPreludeCards: Array<CardModel>;
     dealtProjectCards: Array<CardModel>;
-    initialDraft: boolean;
     needsToDraft: boolean | undefined;
     passedPlayers: Array<Color>;
     actionsTakenThisRound: number;

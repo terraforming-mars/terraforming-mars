@@ -7,7 +7,6 @@ import {DeferredAction} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
-import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
@@ -17,7 +16,6 @@ import {PlayerInput} from '../PlayerInput';
 import {ResourceType} from '../ResourceType';
 import {Resources} from '../Resources';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
-import {SelectCardToKeep} from '../deferredActions/SelectCardToKeep';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SerializedColony} from '../SerializedColony';
@@ -186,11 +184,7 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
-        const cardsDrawn: Array<IProjectCard> = [];
-        for (let counter = 0; counter < quantity; counter++) {
-          cardsDrawn.push(game.dealer.dealCard());
-        };
-        action = new SelectCardToKeep(player, 'Select card to take into hand', cardsDrawn);
+        action = DrawCards.keepSome(player, quantity, {keepMax: 1});
         break;
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:

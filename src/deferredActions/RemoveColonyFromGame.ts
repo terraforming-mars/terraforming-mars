@@ -2,9 +2,10 @@ import {Player} from '../Player';
 import {ColonyName} from '../colonies/ColonyName';
 import {SelectColony} from '../inputs/SelectColony';
 import {ColonyModel} from '../models/ColonyModel';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class RemoveColonyFromGame implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
   ) {}

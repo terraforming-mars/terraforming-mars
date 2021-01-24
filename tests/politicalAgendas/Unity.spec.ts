@@ -61,7 +61,7 @@ describe('Unity', function() {
     player.playedCards.push(localShading);
     unityPolicy.action(player);
     game.deferredActions.runNext();
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
 
     orOptions.options[0].cb();
     expect(localShading.resourceCount).to.eq(2);

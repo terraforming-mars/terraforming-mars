@@ -60,7 +60,7 @@ describe('ProjectInspection', function() {
     expect(card.canPlay(player, game)).is.true; // PI -> PW -> PI -> PW -> IW
 
     player.playCard(card);
-    const play1 = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const play1 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play1).is.not.undefined;
     expect(play1.cards).has.lengthOf(1); // Only PW is available
     expect(play1.cards[0]?.name).eq(playwrights.name);
@@ -71,9 +71,9 @@ describe('ProjectInspection', function() {
     expect(action1.cards[0]?.name).eq(indenturedWorkers.name);
     expect(action1.cards[1]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    game.deferredActions.shift()!.execute(); // SelectHowToPay + Plays the card
+    game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
 
-    const play2 = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const play2 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play2).is.not.undefined;
     expect(play2.cards).has.lengthOf(1); // Only PW is available
     expect(play2.cards[0]?.name).eq(playwrights.name);
@@ -99,9 +99,9 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(1); // Only PI is available
     expect(action1.cards[0]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    game.deferredActions.shift()!.execute(); // SelectHowToPay + Plays the card
+    game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
 
-    const play1 = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const play1 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play1).is.not.undefined;
     expect(play1.cards).has.lengthOf(1); // Only RA is available
     expect(play1.cards[0]?.name).eq(restrictedArea.name);
@@ -122,9 +122,9 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(2); // PI and IW are available
     expect(action1.cards[0]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    game.deferredActions.shift()!.execute(); // SelectHowToPay + Plays the card
+    game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
 
-    const play1 = game.deferredActions.shift()!.execute() as SelectCard<ICard>;
+    const play1 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play1).is.not.undefined;
     expect(play1.cards).has.lengthOf(1); // Only PW is available
     expect(play1.cards[0]?.name).eq(playwrights.name);

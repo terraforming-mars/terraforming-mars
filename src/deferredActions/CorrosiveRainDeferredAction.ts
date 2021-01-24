@@ -5,9 +5,10 @@ import {OrOptions} from '../inputs/OrOptions';
 import {Resources} from '../Resources';
 import {ResourceType} from '../ResourceType';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class CorrosiveRainDeferredAction implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public title: string = 'Remove 2 floaters from a card or lose up to 10 MC',

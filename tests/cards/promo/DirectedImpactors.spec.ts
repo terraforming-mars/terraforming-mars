@@ -33,8 +33,8 @@ describe('DirectedImpactors', function() {
 
     // can add resource to itself
     card.action(player);
-    expect(player.game.deferredActions).has.lengthOf(1);
-    const selectHowToPay = player.game.deferredActions.next()!.execute() as SelectHowToPay;
+    expect(game.deferredActions).has.lengthOf(1);
+    const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
     selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
 
     expect(player.megaCredits).to.eq(0);
@@ -66,8 +66,8 @@ describe('DirectedImpactors', function() {
 
     // can add resource to any card
     const selectCard = action.options[1].cb();
-    expect(player.game.deferredActions).has.lengthOf(1);
-    const selectHowToPay = player.game.deferredActions.next()!.execute() as SelectHowToPay;
+    expect(game.deferredActions).has.lengthOf(1);
+    const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
     selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
 
         selectCard!.cb([card2]);

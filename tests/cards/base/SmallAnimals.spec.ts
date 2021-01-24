@@ -39,7 +39,7 @@ describe('SmallAnimals', function() {
 
     player.playedCards.push(card);
     card.play(player);
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });

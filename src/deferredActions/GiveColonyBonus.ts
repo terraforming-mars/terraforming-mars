@@ -1,9 +1,10 @@
 import {Player, PlayerId} from '../Player';
 import {Colony} from '../colonies/Colony';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {Multiset} from '../utils/Multiset';
 
 export class GiveColonyBonus implements DeferredAction {
+    public priority = Priority.DEFAULT;
     public cb: () => void = () => {};
     private waitingFor: Multiset<PlayerId> = new Multiset<PlayerId>();
     constructor(

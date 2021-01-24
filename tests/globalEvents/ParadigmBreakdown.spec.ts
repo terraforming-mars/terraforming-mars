@@ -37,14 +37,14 @@ describe('ParadigmBreakdown', function() {
 
     card.resolve(game, turmoil);
     while (game.deferredActions.length) {
-      const action = game.deferredActions.next()!;
+      const action = game.deferredActions.peek()!;
       const input = action.execute();
       if (input !== undefined && input instanceof SelectCard) {
         // Only |player| should be asked which cards to discard
         expect(action.player.id).to.eq(player.id);
         input.cb([powerPlant, asteroid]);
       }
-      game.deferredActions.shift();
+      game.deferredActions.pop();
     }
 
     expect(player.cardsInHand).has.lengthOf(1);

@@ -2,7 +2,6 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -18,7 +17,7 @@ export class DeepLunarMining extends MoonCard {
       productionBox: Units.of({titanium: 2}),
 
       metadata: {
-        description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise Mining Rate 1 step.',
+        description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.',
         cardNumber: 'M18',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).production((pb) => {
@@ -35,7 +34,6 @@ export class DeepLunarMining extends MoonCard {
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
     Units.adjustProduction(this.productionBox, player, player.game);
-    player.addProduction(Resources.TITANIUM, 2);
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

@@ -19,7 +19,7 @@ describe('ExtremeColdFungus', function() {
 
   it('Can\'t play', function() {
     (game as any).temperature = -8;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {

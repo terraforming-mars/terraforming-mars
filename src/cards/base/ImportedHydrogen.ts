@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -41,17 +40,17 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canPlay(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game): undefined | PlayerInput {
+  public play(player: Player): undefined | PlayerInput {
     const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
 
@@ -59,7 +58,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       const qty = 3;
       player.plants += qty;
       LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
-      game.defer(new PlaceOceanTile(player));
+      player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
@@ -77,7 +76,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
         player.addResourceTo(targetMicrobeCard, 3);
         LogHelper.logAddResource(player, targetMicrobeCard, 3);
-        game.defer(new PlaceOceanTile(player));
+        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else if (availableMicrobeCards.length > 1) {
@@ -86,7 +85,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         availableMicrobeCards, (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], 3);
           LogHelper.logAddResource(player, foundCards[0], 3);
-          game.defer(new PlaceOceanTile(player));
+          player.game.defer(new PlaceOceanTile(player));
           return undefined;
         }));
     }
@@ -96,14 +95,14 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, 2);
         LogHelper.logAddResource(player, targetAnimalCard, 2);
-        game.defer(new PlaceOceanTile(player));
+        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
       availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 2);
         LogHelper.logAddResource(player, foundCards[0], 2);
-        game.defer(new PlaceOceanTile(player));
+        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     }

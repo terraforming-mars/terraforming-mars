@@ -10,7 +10,7 @@ describe('NuclearZone', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     if (action !== undefined) {
       const space = action.availableSpaces[0];
       action.cb(space);

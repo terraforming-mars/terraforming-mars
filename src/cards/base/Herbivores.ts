@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
 import {TileType} from '../../TileType';
@@ -46,8 +45,8 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
   }
     public resourceCount: number = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 8) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.OXYGEN, 8) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public getVictoryPoints(): number {
@@ -59,9 +58,9 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
         cardOwner.addResourceTo(this);
       }
     }
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addResourceTo(this);
-      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
 }

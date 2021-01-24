@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -33,21 +32,21 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
   public play() {
     return undefined;
   }
-  public canAct(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canAct(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const oceanCost = 8;
 
     if (oceansMaxed) return player.canAfford(oceanCost, true, false);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, true, false);
     }
 
     return player.canAfford(oceanCost, true, false);
   }
-  public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
-      game.defer(new PlaceOceanTile(player));
+  public action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
+      player.game.defer(new PlaceOceanTile(player));
     }}));
     return undefined;
   }

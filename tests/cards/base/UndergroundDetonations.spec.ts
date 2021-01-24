@@ -24,7 +24,7 @@ describe('UndergroundDetonations', function() {
     player.megaCredits = 10;
     expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.HEAT)).to.eq(2);

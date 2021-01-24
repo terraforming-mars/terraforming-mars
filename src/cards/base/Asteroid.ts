@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -31,18 +30,18 @@ export class Asteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const temperatureMaxed = game.getTemperature() === MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !temperatureMaxed) {
+  public canPlay(player: Player): boolean {
+    const temperatureMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !temperatureMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 1);
-    game.defer(new RemoveAnyPlants(player, 3));
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 1);
+    player.game.defer(new RemoveAnyPlants(player, 3));
     player.titanium += 2;
     return undefined;
   }

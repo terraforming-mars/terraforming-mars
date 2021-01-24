@@ -4,7 +4,6 @@ import {TileType} from '../../TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
@@ -37,16 +36,16 @@ export class NaturalPreserve extends Card implements IProjectCard {
       metadata,
     });
   }
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined) === false);
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
+      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined) === false);
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4) && this.getAvailableSpaces(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return player.game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4) && this.getAvailableSpaces(player).length > 0;
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NATURAL_PRESERVE});
+  public play(player: Player) {
+    return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NATURAL_PRESERVE});
       foundSpace.adjacency = this.adjacencyBonus;
       player.addProduction(Resources.MEGACREDITS);
       return undefined;

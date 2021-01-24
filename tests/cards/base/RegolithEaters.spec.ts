@@ -17,13 +17,13 @@ describe('RegolithEaters', function() {
 
   it('Should act', function() {
     player.playedCards.push(card);
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
-    card.action(player, game);
+    card.action(player);
     expect(card.resourceCount).to.eq(2);
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
         orOptions!.options[1].cb();

@@ -27,7 +27,7 @@ describe('AsteroidMiningConsortium', function() {
 
   it('Should play - auto select if single target', function() {
     player.addProduction(Resources.TITANIUM);
-    card.play(player, game); // can decrease own production
+    card.play(player); // can decrease own production
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -36,7 +36,7 @@ describe('AsteroidMiningConsortium', function() {
   it('Should play - multiple targets', function() {
     player.addProduction(Resources.TITANIUM);
     player2.addProduction(Resources.TITANIUM);
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
 
     expect(game.deferredActions).has.lengthOf(1);

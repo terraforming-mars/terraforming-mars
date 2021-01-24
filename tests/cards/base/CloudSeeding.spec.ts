@@ -19,27 +19,27 @@ describe('CloudSeeding', function() {
   it('Can\'t play if cannot reduce MC production', function() {
     maxOutOceans(player, game, 3);
     player.addProduction(Resources.MEGACREDITS, -5);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if ocean requirements not met', function() {
     maxOutOceans(player, game, 2);
     player.addProduction(Resources.HEAT);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if no one has heat production', function() {
     maxOutOceans(player, game, 3);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - auto select if single target', function() {
     // Meet requirements
     player2.addProduction(Resources.HEAT);
     maxOutOceans(player, game, 3);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
 
@@ -52,7 +52,7 @@ describe('CloudSeeding', function() {
     player.addProduction(Resources.HEAT);
     player2.addProduction(Resources.HEAT);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
 

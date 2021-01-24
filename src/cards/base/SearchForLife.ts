@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -49,17 +48,17 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
     public canAct(player: Player): boolean {
       return player.canAfford(1);
     }
-    public action(player: Player, game: Game) {
-      const topCard = game.dealer.dealCard();
+    public action(player: Player) {
+      const topCard = player.game.dealer.dealCard();
       if (topCard.tags.indexOf(Tags.MICROBE) !== -1) {
         this.resourceCount++;
-        game.log('${0} found life!', (b) => b.player(player));
+        player.game.log('${0} found life!', (b) => b.player(player));
       }
 
-      game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+      player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
-      game.dealer.discard(topCard);
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
+      player.game.dealer.discard(topCard);
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
       return undefined;
     }
 }

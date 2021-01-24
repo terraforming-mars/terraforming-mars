@@ -18,21 +18,21 @@ describe('Herbivores', function() {
 
   it('Can\'t play if nobody has plant production', function() {
     (game as any).oxygenLevel = 8;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if oxygen level too low', function() {
     (game as any).oxygenLevel = 7;
     player2.addProduction(Resources.PLANTS);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - auto select if single target', function() {
     (game as any).oxygenLevel = 8;
     player2.addProduction(Resources.PLANTS);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(card.resourceCount).to.eq(1);
 
     const input = game.deferredActions.peek()!.execute();
@@ -44,7 +44,7 @@ describe('Herbivores', function() {
     player.addProduction(Resources.PLANTS);
     player2.addProduction(Resources.PLANTS);
 
-    card.play(player, game);
+    card.play(player);
     expect(card.resourceCount).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
@@ -72,8 +72,8 @@ describe('Herbivores', function() {
     (game as any).oxygenLevel = 8;
     player.addProduction(Resources.PLANTS);
 
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1); // should not decrease
   });
 });

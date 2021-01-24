@@ -17,7 +17,7 @@ describe('EnergyTapping', function() {
   });
 
   it('Should play - auto select if single target', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
@@ -27,7 +27,7 @@ describe('EnergyTapping', function() {
   it('Should play - multiple targets', function() {
     player2.addProduction(Resources.ENERGY, 3);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(game.deferredActions).has.lengthOf(1);
 
@@ -38,8 +38,8 @@ describe('EnergyTapping', function() {
   });
 
   it('Playable in solo mode', function() {
-    const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    Game.newInstance('foobar', [player], player);
+    card.play(player);
 
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

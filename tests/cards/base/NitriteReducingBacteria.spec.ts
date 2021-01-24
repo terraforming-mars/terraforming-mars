@@ -17,18 +17,18 @@ describe('NitriteReducingBacteria', function() {
 
   it('Should play', function() {
     player.playedCards.push(card);
-    card.play(player, game);
+    card.play(player);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(3);
   });
 
   it('Should act', function() {
     player.playedCards.push(card);
-    card.action(player, game);
+    card.action(player);
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 3);
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
         orOptions!.options[1].cb();

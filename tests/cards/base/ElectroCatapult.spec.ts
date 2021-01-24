@@ -17,13 +17,13 @@ describe('ElectroCatapult', function() {
   });
 
   it('Can\'t play without energy production', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if oxygen level too high', function() {
     player.addProduction(Resources.ENERGY);
     (game as any).oxygenLevel = 9;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -38,7 +38,7 @@ describe('ElectroCatapult', function() {
     player.plants = 1;
     player.steel = 1;
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof OrOptions).is.true;
     expect(action!.options).has.lengthOf(2);
 

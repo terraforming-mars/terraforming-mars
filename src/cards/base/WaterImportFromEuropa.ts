@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -40,21 +39,21 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
   public play() {
     return undefined;
   }
-  public canAct(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canAct(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const oceanCost = 12;
 
     if (oceansMaxed) return player.canAfford(oceanCost, false, true);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, false, true);
     }
 
     return player.canAfford(oceanCost, false, true); ;
   }
-  public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action', afterPay: () => {
-      game.defer(new PlaceOceanTile(player));
+  public action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 12, {canUseTitanium: true, title: 'Select how to pay for action', afterPay: () => {
+      player.game.defer(new PlaceOceanTile(player));
     }}));
     return undefined;
   }

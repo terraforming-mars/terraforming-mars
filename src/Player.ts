@@ -86,17 +86,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Resources
   public megaCredits: number = 0;
-  private megaCreditProduction: number = 0;
+  protected megaCreditProduction: number = 0;
   public steel: number = 0;
-  private steelProduction: number = 0;
+  protected steelProduction: number = 0;
   public titanium: number = 0;
-  private titaniumProduction: number = 0;
+  protected titaniumProduction: number = 0;
   public plants: number = 0;
-  private plantProduction: number = 0;
+  protected plantProduction: number = 0;
   public energy: number = 0;
-  private energyProduction: number = 0;
+  protected energyProduction: number = 0;
   public heat: number = 0;
-  private heatProduction: number = 0;
+  protected heatProduction: number = 0;
 
   // Resource values
   private titaniumValue: number = 3;

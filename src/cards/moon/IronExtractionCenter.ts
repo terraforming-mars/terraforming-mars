@@ -15,7 +15,7 @@ export class IronExtractionCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 10,
-      productionDelta: Units.of({}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.',

@@ -15,7 +15,7 @@ export class TitaniumExtractionCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 14,
-      productionDelta: Units.of({}),
+      productionBox: Units.of({}),
 
       metadata: {
         description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.',

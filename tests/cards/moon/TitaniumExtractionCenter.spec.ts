@@ -6,8 +6,6 @@ import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {TitaniumExtractionCenter} from '../../../src/cards/moon/TitaniumExtractionCenter';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
-import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -26,29 +24,30 @@ describe('TitaniumExtractionCenter', () => {
 
   it('can play', () => {
     player.cardsInHand = [card];
-    player.titanium = 0;
+    player.titanium = 1;
     player.megaCredits = card.cost;
     expect(player.getPlayableCards()).does.not.include(card);
-    player.titanium = 1;
+    player.titanium = 2;
     expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
-    player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
-    expect(player.getTerraformRating()).eq(14);
-    expect(moonData.miningRate).eq(0);
+    expect(player.getProduction(Resources.TITANIUM)).eq(0);
 
+    player.titanium = 4;
+    moonData.miningRate = 3;
     card.play(player);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getTerraformRating()).eq(15);
-    expect(moonData.miningRate).eq(1);
+    expect(player.getProduction(Resources.TITANIUM)).eq(1);
 
-    const mareNectaris = moonData.moon.getSpace(MoonSpaces.MARE_NECTARIS);
-    expect(mareNectaris.player).eq(player);
-    expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
+
+    // Play a second time. Steel rate will go up by 2.
+    moonData.miningRate = 4;
+    card.play(player);
+
+    expect(player.titanium).eq(0);
+    expect(player.getProduction(Resources.TITANIUM)).eq(3);
   });
 });
 

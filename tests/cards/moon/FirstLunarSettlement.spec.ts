@@ -29,7 +29,7 @@ describe('FirstLunarSettlement', () => {
     expect(moonData.colonyRate).eq(0);
 
     card.play(player);
-    const placeTileAction = game.deferredActions.next() as PlaceMoonColonyTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonColonyTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);

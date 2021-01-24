@@ -31,10 +31,10 @@ describe('MoonMineStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(20);
     // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     // expect(payAction.amount).eq(16);
   });
 
@@ -44,15 +44,14 @@ describe('MoonMineStandardProject', () => {
     expect(player.getProduction(Resources.STEEL)).eq(0);
 
     card.action(player);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
-    game.deferredActions.remove(payAction);
+    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
     expect(player.getProduction(Resources.STEEL)).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    const placeTileAction = game.deferredActions.next() as PlaceMoonMineTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonMineTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.miningRate).eq(1);

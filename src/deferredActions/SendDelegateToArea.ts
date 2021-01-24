@@ -1,11 +1,12 @@
 import {Player, PlayerId} from '../Player';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 
 export class SendDelegateToArea implements DeferredAction {
+  public priority = Priority.SEND_DELEGATE_TO_AREA;
   constructor(
         public player: Player,
         public title: string = 'Select where to send a delegate',

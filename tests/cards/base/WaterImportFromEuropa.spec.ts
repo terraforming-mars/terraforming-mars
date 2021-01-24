@@ -35,7 +35,7 @@ describe('WaterImportFromEuropa', function() {
     expect(player.megaCredits).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectOcean = game.deferredActions.next()!.execute() as SelectSpace;
+    const selectOcean = game.deferredActions.peek()!.execute() as SelectSpace;
     selectOcean.cb(selectOcean.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });

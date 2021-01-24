@@ -17,7 +17,7 @@ export class ExperimentalForest extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.greenery().secondaryTag(AltSecondaryTag.OXYGEN).cards(2).secondaryTag(Tags.PLANT);
         }),
-        description: 'Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
+        description: 'Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
       },
     });
   }

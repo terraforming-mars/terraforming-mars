@@ -34,8 +34,7 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
   mounted: function() {
     dialogPolyfill.default.registerDialog(this.$refs['dialog']);
   },
-  template: `<div>
-    <dialog ref="dialog">
+  template: `<dialog ref="dialog">
       <form method="dialog">
         <p v-i18n class="newlines">{{ message }}</p>
         <menu class="dialog-menu centered-content">
@@ -45,7 +44,6 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
         <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
         <label for="dialog-confirm-dismiss">Don't show this again</label>
       </form>
-    </dialog>
-  </div>`,
+    </dialog>`,
 });
 

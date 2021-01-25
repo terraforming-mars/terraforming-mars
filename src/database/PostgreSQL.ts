@@ -3,7 +3,7 @@ import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
 
-import {Client, ClientConfig} from 'pg';
+import {Client, ClientConfig, QueryResult} from 'pg';
 
 export class PostgreSQL implements IDatabase {
   private client: Client;
@@ -141,8 +141,17 @@ export class PostgreSQL implements IDatabase {
         }
       });
     });
-    // Purge unfinished games older than 10 days
-    this.client.query('DELETE FROM games WHERE created_time < now() - interval \'10 days\'', function(err: { message: any; }) {
+    this.purgeUnfinishedGames();
+  }
+
+  // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
+  purgeUnfinishedGames(): void {
+    const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
+    const days = Number.isInteger(envDays) ? envDays : 10;
+    this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
+      if (res) {
+        console.log(`Purged ${res.rowCount} rows`);
+      }
       if (err) {
         return console.warn(err.message);
       }

@@ -108,6 +108,10 @@ export class SQLite implements IDatabase {
         return console.warn(err.message);
       }
     });
+    this.purgeUnfinishedGames();
+  }
+
+  purgeUnfinishedGames(): void {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
       this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-? day\')) and status = \'running\'', [process.env.MAX_GAME_DAYS], function(err: { message: any; }) {

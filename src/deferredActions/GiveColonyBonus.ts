@@ -50,7 +50,7 @@ export class GiveColonyBonus implements DeferredAction {
       return undefined;
     }
 
-    public giveColonyBonus(player: Player): void {
+    private giveColonyBonus(player: Player): void {
       if (this.waitingFor.get(player.id) !== undefined && this.waitingFor.get(player.id)! > 0) {
         this.waitingFor.subtract(player.id);
         const input = this.colony.giveColonyBonus(player, true);

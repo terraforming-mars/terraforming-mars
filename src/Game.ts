@@ -781,7 +781,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.deferredActions.runAll(new Game.DraftOrResearch(this));
   }
 
-  public goToDraftOrResearch() {
+  private goToDraftOrResearch() {
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -1065,7 +1065,7 @@ export class Game implements ISerializable<SerializedGame> {
     player.takeActionForFinalGreenery();
   }
 
-  public startActionsForPlayer(player: Player) {
+  private startActionsForPlayer(player: Player) {
     this.activePlayer = player.id;
     player.actionsTakenThisRound = 0;
 

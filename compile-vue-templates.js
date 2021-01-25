@@ -289,6 +289,7 @@ function checkComponent(name, component, dataProperties) {
   }
 
   if (result.tips.length > 0) {
+    console.log(result.tips);
     throw new Error(`tips found while parsing template for ${name}`, result.tips);
   }
 

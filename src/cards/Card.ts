@@ -8,6 +8,11 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {Units} from '../Units';
 
+export interface IDiscount {
+  tag: Tags;
+  amount: number;
+}
+
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;
@@ -19,6 +24,7 @@ export interface StaticCardProperties {
   startingMegaCredits?: number;
   tags?: Array<Tags>;
   productionBox?: Units;
+  discounts?: Array<IDiscount>;
 }
 
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -70,6 +76,9 @@ export abstract class Card {
   }
   public get productionBox(): Units {
     return this.properties.productionBox || Units.EMPTY;
+  }
+  public get discounts() {
+    return this.properties.discounts === undefined ? [] : this.properties.discounts;
   }
   public canPlay(player: Player, _game?: Game) {
     if (this.properties.metadata.requirements === undefined) {

@@ -14,6 +14,7 @@ export class ValleyTrust extends Card implements CorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
       tags: [Tags.EARTH],
+      discounts: [{tag: Tags.SCIENCE, amount: 2}],
       startingMegaCredits: 37,
       initialActionText: 'Draw 3 Prelude cards, and play one of them',
 
@@ -34,6 +35,7 @@ export class ValleyTrust extends Card implements CorporationCard {
   }
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
+    // TODO(chosta) -> improve once the discounts property is given a go
     return card.tags.filter((tag) => tag === Tags.SCIENCE).length * 2;
   }
 

@@ -1,10 +1,10 @@
-.player-discounts {
+/* .player-discounts {
     display: flex;
     .player-tag-discount {
         background: gold;
     }
 }
-
+ */
 .icon-first-player {
     color: white;
     text-align: center;
@@ -85,23 +85,59 @@
             line-height: 32px;
             border-radius: 0px 8px 0px 0px;
             height: 32px;
-            color: black;
+            color:#ccc;
             font-family: 'Prototype';
         }
     }
     .player-info-bottom {
-        border-radius: 0px 8px 8px 8px;
+        border-radius: 0px 0px 8px 8px;
         padding: 8px;
         display: flex;
+        padding-right: 0px;
         .player-tags {
+            .player-tag-discount {
+                position: relative;
+                .megacredits-container {
+                    position: absolute;
+                    top: -54px;
+                    left: -9px;
+                    border-radius: 8px 8px 0px 1px;
+                    height: 38px;
+                    padding: 8px 8px 0px 8px;
+                    .megacredits { 
+                        display: inline-block;
+                        font-size: 18px;
+                        width: 35px;
+                        height: 35px;
+                        line-height: 35px;
+                        border-radius: 10px;
+                        text-align: center;
+                        background-image: url(./assets/resources/megacredit.png);
+                        background-size: 35px;
+                        filter: drop-shadow(0px 0px 1px black);
+                        font-family: Prototype;
+                        color: #000;
+                    }
+                }
+            }
             display: flex;
             flex-flow: row;
             .player-tags-main,
             .player-tags-secondary {
                 display: flex;
                 flex-flow: row;
-                margin-left: 16px;
+                margin-left: 8px;
+                padding-left: 8px;
                 align-items: center;
+                position: relative;
+                .player-discount-background {
+                    width: 100%;
+                    height: 38px; 
+                    position: absolute;
+                    top: -46px;
+                    left: 0px;
+                    border-radius: 8px 8px 0px 0px;
+                }
             }
             .tag-separator {
                 width: 2px;
@@ -237,9 +273,12 @@
             flex-flow: column !important;
         }
         .player-status-and-res {
-            margin-bottom: 8px;
-            border-bottom: 2px solid rgba(170, 170, 170, 0.2);
+            margin-bottom: 48px;
+            // border-bottom: 2px solid rgba(170, 170, 170, 0.2);
             padding-bottom: 8px;
         }
+    }
+    .player-discount-background {
+        background: none !important;
     }
 }

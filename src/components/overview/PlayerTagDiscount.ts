@@ -11,10 +11,19 @@ export const PlayerTagDiscount = Vue.component('PlayerTagDiscount', {
       const classes = ['player-tag-discount'];
       return classes.join(' ');
     },
+    getMegacreditsClasses: function(): string {
+      const classes = ['megacredits-container'];
+      return classes.join(' ');
+    },
+    getAmount: function(): number {
+      return this.amount * -1;
+    },
   },
   template: `
     <div :class="getClasses()">
-      {{ amount }}    
+      <div class="megacredits-container">
+        <div class="megacredits">{{ getAmount() }}</div>
+      </div>
     </div>
   `,
 });

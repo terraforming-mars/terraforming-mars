@@ -3,11 +3,95 @@ import {TagCount} from '../TagCount';
 import {ITagCount} from '../../ITagCount';
 import {PlayerModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';
+import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
 import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
+import {playerColorClass} from '../../utils/utils';
 
-export type InterfaceTagsType = Tags|SpecialTags|'separator';
+interface CardTagDiscount {
+  tag: InterfaceTagsType | 'all',
+  amount: number
+}
+type InterfaceTagsType = Tags | SpecialTags | 'separator';
+const DISCOUNTS_MAP: Map<CardName, CardTagDiscount> = new Map([
+  [CardName.ANTI_GRAVITY_TECHNOLOGY, {
+    tag: 'all',
+    amount: 2,
+  }],
+  [CardName.EARTH_CATAPULT, {
+    tag: 'all',
+    amount: 2,
+  }],
+  [CardName.EARTH_OFFICE, {
+    tag: Tags.EARTH,
+    amount: 3,
+  }],
+  [CardName.MASS_CONVERTER, {
+    tag: Tags.SPACE,
+    amount: 2,
+  }],
+  [CardName.QUANTUM_EXTRACTOR, {
+    tag: Tags.SPACE,
+    amount: 2,
+  }],
+  [CardName.RESEARCH_OUTPOST, {
+    tag: 'all',
+    amount: 1,
+  }],
+  [CardName.SHUTTLES, {
+    tag: Tags.SPACE,
+    amount: 2,
+  }],
+  [CardName.SPACE_STATION, {
+    tag: Tags.SPACE,
+    amount: 2,
+  }],
+  [CardName.SKY_DOCKS, {
+    tag: 'all',
+    amount: 1,
+  }],
+  [CardName.WARP_DRIVE, {
+    tag: Tags.SPACE,
+    amount: 4,
+  }],
+  [CardName.TERACTOR, {
+    tag: Tags.EARTH,
+    amount: 3,
+  }],
+  [CardName.THORGATE, {
+    tag: Tags.ENERGY,
+    amount: 3,
+  }],
+  [CardName.CHEUNG_SHING_MARS, {
+    tag: Tags.BUILDING,
+    amount: 2,
+  }],
+  [CardName.VALLEY_TRUST, {
+    tag: Tags.SCIENCE,
+    amount: 2,
+  }],
+  [CardName.VENUS_WAYSTATION, {
+    tag: Tags.VENUS,
+    amount: 2,
+  }],
+]);
+
+const hasDiscount = (tag: InterfaceTagsType, cardName: CardName): boolean => {
+  if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT) return false;
+  const cardDiscount: CardTagDiscount | undefined = DISCOUNTS_MAP.get(cardName);
+  if (cardDiscount !== undefined) {
+    return cardDiscount.tag === 'all' || cardDiscount.tag === tag;
+  }
+  return false;
+};
+
+const getDiscountAmount = (tag: InterfaceTagsType, cardName: CardName): number => {
+  if (hasDiscount(tag, cardName)) {
+    return DISCOUNTS_MAP.get(cardName)?.amount || 0;
+  }
+  return 0;
+};
 
 export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
   Tags.BUILDING,
@@ -103,10 +187,23 @@ export const PlayerTags = Vue.component('player-tags', {
       return isTagsViewConcise(this.$root);
     },
     hasTagDiscount: function(tag: InterfaceTagsType): boolean {
-      return this.player.hasTagDiscount(tag);
+      for (const card of [...this.player.playedCards, this.player.corporationCard]) {
+        if (card !== undefined) {
+          if (hasDiscount(tag, card.name as CardName)) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
     getTagDiscountAmount: function(tag: InterfaceTagsType): number {
-      return this.player.getTagDiscount(tag);
+      let discount = 0;
+      for (const card of [...this.player.playedCards, this.player.corporationCard]) {
+        if (card !== undefined) {
+          discount += getDiscountAmount(tag, card.name as CardName);
+        }
+      }
+      return discount;
     },
     getTagCount(tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
@@ -131,6 +228,11 @@ export const PlayerTags = Vue.component('player-tags', {
 
       return 0;
     },
+    getBgDiscountClasses: function(): string {
+      const classes = ['player-discount-background'];
+      classes.push(playerColorClass(this.player.color, 'bg_transparent'));
+      return classes.join(' ');
+    },
   },
   template: `
         <div class="player-tags">
@@ -140,10 +242,11 @@ export const PlayerTags = Vue.component('player-tags', {
                 <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
             </div>
             <div class="player-tags-secondary">
+                <div :class="getBgDiscountClasses()" />
                 <template v-if="showShortTags()">
                   <div class="tag-count-container" v-for="tag in player.tags">
                     <div class="tag-and-discount" :key="tag.tag">
-                      <PlayerTagDiscount v-if="hasTagDiscount(tagName)" :amount="getTagDiscountAmount(tag.tag)" />
+                      <PlayerTagDiscount v-if="hasTagDiscount(tag.tag)" :amount="getTagDiscountAmount(tag.tag)" :color="player.color" />
                       <tag-count :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
                     </div>
                   </div>
@@ -151,7 +254,7 @@ export const PlayerTags = Vue.component('player-tags', {
                 <template v-else>
                     <div class="tag-count-container" v-for="tagName in getTagsPlaceholders()" :key="tagName">
                       <div class="tag-and-discount" v-if="tagName !== 'separator'">
-                        <PlayerTagDiscount v-if="hasTagDiscount(tagName)" :tag="tagName" :player="player" :amount="getTagDiscountAmount(tagName)"/>
+                        <PlayerTagDiscount v-if="hasTagDiscount(tagName)" :color="player.color" :amount="getTagDiscountAmount(tagName)"/>
                         <tag-count :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
                       </div>
                       <div v-else class="tag-separator"></div>

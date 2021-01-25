@@ -5,17 +5,17 @@
 
     "Asteroid Mining Consortium": "Kosmiczne Konsorcjum Górnicze",
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Musisz mieć przynajmniej 1 poziom produkcji tytanu. Obniż produkcję tytanu dowolnego gracza o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom",
-    
+
     "Deep Well Heating": "Pompa Geotermalna",
     "Increase your Energy production 1 step. Increase temperature 1 step.": "Podnieś swoją produkcję energii o 1 poziom. Podnieś Temperaturę o 2°",
-    
+
     "Cloud Seeding": "Zasiewanie Chmur",
     "Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Na planszy muszą się znajdować przynajmniej 3 obszary oceanów. Obniż swoją produkcję MC i produkcję ciepła dowolnego gracza o 1 poziom. Podnieś swoją produkcję roślinności o 2 poziomy.",
-    
+
     "Search for Life": "Poszukiwania Życia",
     "Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Akcja: Zapłać 1 MC, żeby odkryć i odrzucić wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem mikrobów, umieść tu 1 jednostkę nauki.",
     "3 VPs if you have one or more Science resources here.": "Jeśli na tej karcie znajduje się przynajmniej 1 jednostka nauki, otrzymujesz 3 PZ",
-    
+
     "Inventors' Guild": "Gildia Wynalazców",
     "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJETKÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ.",
 
@@ -30,7 +30,7 @@
     "6 Oceans": "6 Oceanów",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Umieść ten obszar na planszy. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję MC o 5 poziomów.",
     "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "OTRZYMUJESZ PO 1 PZ ZA KAŻDY OBSZAR OCEANU SĄSIADUJĄCY Z TYM OBSZAREM.",
-    
+
     "Asteroid": "Asteroida",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Podnieś Temperaturę o 2°C. Otrzymujesz 2 jednostki tytanu. Usuń do 3 jednostek roślinności dowolnego gracza.",
 
@@ -39,7 +39,7 @@
 
     "Big Asteroid": "Duża Asteroida",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Podnieś Temperaturę o 4°C. Otrzymujesz 4 jednostki tytanu. Usuń do 4 jednostek roślinności dowolnego gracza.",
-    
+
     "Water Import from Europa": "Import Wody z Europy",
     "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Akcja: Zapłać 12 MC, żeby umieścić na planszy obszar oceanu. Możesz użyć jednostek tytanu, tak jakbyś zagrywał kartę z symbolem przestrzeni kosmicznej.",
     "1 VP for each Jovian tag you have.": "Otrzymujesz po 1 PZ za każdy posiadany symbol Jowisza.",
@@ -57,7 +57,7 @@
     "Domed Crater": "Zadaszony Krater",
     "Oxygen must be 7% or less.": "Poziom Tlenu musi być równy albo niższy niż 7%.",
     "Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję MC o 3 poziomy.",
-    
+
     "Noctis City": "Noctis City",
     "Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.": "Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję MC o 3 poziomy. Umieść obszar miasta na planszy, na polu zarezerwowanym dla Noctis City, ignorując normalne ograniczenia umieszczania obszarów.",
 
@@ -99,7 +99,7 @@
 
     "Cupola City": "Miasto pod Kopułą",
     "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 9%. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję MC o 3 poziomy.",
-    
+
     "Lunar Beam": "Wiązka z Księżyca",
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Obniż swoją produkcję MC o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
 
@@ -126,7 +126,7 @@
 
     "Nitrogen-Rich Asteroid": "Asteroida Bogata w Azot",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "Podnieś swój współczynnik terraformacji o 2. Podnieś Temperaturę o 2°C. Podnieś swoją produkcję roślinności o 1 poziom albo, jesli posiadasz 3 symbole roślinności, o 4 poziomy.",
-    
+
     "Rover Construction": "Fabryka Łazików",
     "Effect: When any City tile is placed, gain 2 MC.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, otrzymujesz 2 MC.",
 
@@ -179,7 +179,7 @@
 
     "Small Animals": "Małe Zwierzęta",
     "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "Requires 6% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 6%.", 
+    "Requires 6% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 6%.",
     "Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.": "Obniż produkcję roślinności dowolnego gracza o 1 poziom. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
 
     "Kelp Farming": "Farmy Wodorostów",
@@ -211,7 +211,7 @@
 
     "Mining Area": "Obszar Górniczy",
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Umieść ten obszar obok innych swoich obszarów, na polu zawierającym premię stali albo tytanu. Podnieś swoją produkcję tego zasobu o 1 poziom.",
-    
+
     "Building Industries": "Przemysł Budowlany",
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję stali o 2 poziomy.",
 
@@ -237,7 +237,7 @@
     "Birds": "Ptaki",
     "Action: Add an animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.": "Poziom Tlenu musi być równy albo wyższy niż 13%. Obniż produkcję roślinności dowolnego gracza o 2 poziomy. Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
-    
+
     "Mars University": "Uniwersytet Marsjański",
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie możesz odrzucić kartę z ręki i dobrać nową kartę.",
 
@@ -354,7 +354,7 @@
 
     "Business Network": "Sieć Kontaktów",
     "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ",
-    "Decrease your MC production 1 step.": "Obniż  swoją produkcję MC o 1 poziom.",    
+    "Decrease your MC production 1 step.": "Obniż  swoją produkcję MC o 1 poziom.",
 
     "Business Contacts": "Kontakty Biznesowa",
     "LOOK AT THE TOP 4 CARDS FROM THE DECK. TAKE 2 OF THEM INTO HAND AND DISCARD THE OTHER 2": "PODEJRZYJ 4 WIERZCHNIE KARTY Z TALII PROJEKTÓW. WEŹ 2 Z NICH NA RĘKĘ, A POZOSTAŁE 2 ODRZUĆ.",
@@ -460,7 +460,7 @@
 
     "Mohole Area": "Obszar Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Umieść ten obszar na polu zarezerwowanym dla oceanu. Podnieś swoją produkcję ciepła o 4 poziomy.",
-    
+
     "Large Convoy": "Duży Konwój",
     "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "Umieść na planszy obszar oceanu i dobierz 2 karty. Umieść na innej karcie 4 jednostki zwierząt ALBO otrzymaj 5 jednostek roślinności.",
 
@@ -535,7 +535,7 @@
     "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3.",
 
     "Shuttles": "Promy",
-    "Effect: When you play a Space card, you pay 2 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej."
+    "Effect: When you play a Space card, you pay 2 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
     "Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Import of Advanced GHG": "Zaawansowane Gazy Cieplarniane",
@@ -563,7 +563,7 @@
 
     "Protected Valley": "Chroniona Dolina",
     "Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Podnieś swoją produkcję MC o 2 poziomy. Umieść obszar zieleni na planszy, NA POLU ZAREZERWOWANYM DLA OBSZARU OCEANU, ignorując normalne ograniczenia umieszczania obszarów. Podnieś Poziom Tlenu o 1%.",
-    
+
     "Satellites": "Satelity",
     "Increase your MC production 1 step for each space tag you have, including this one.": "Podnieś swoją produkcję MC o 1 poziom za każdy posiadany symbol przestrzeni kosmicznej (z tym włącznie).",
 
@@ -630,7 +630,7 @@
 
     "Lagrange Observatory": "Obserwatorium Lagrange'a",
     "Draw 1 card.": "Dobierz 1 kartę.",
-    
+
     "Terraforming Ganymede": "Terraformacja Ganimedesa",
     "Raise your TR 1 step for each Jovian tag you have, including this.": "Podnieś swój współczynnik terraformacji o 1 za każdy posiadany symbol Jowisza (z tym włącznie).",
 
@@ -682,5 +682,5 @@
     "Venus Milestone/Award": "Tytuły/Nagrody Wenus",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} umieścił \"${1}\" obszar na (${2}, ${3}"
-      
+
 }

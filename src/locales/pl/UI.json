@@ -2,27 +2,27 @@
     "Terraforming Mars": "Terraformacja Marsa",
     "Create New Game": "Nowa gra",
     "№ of Players": "Liczba graczy",
-    
+
     "Expansions": "Dodatki",
-    "All": "Wszystkie",   
+    "All": "Wszystkie",
     "Corporate Era": "Era Korporacyjna",
     "Prelude": "Preludium",
     "Venus Next": "Wenus",
     "Colonies": "Kolonie",
     "Turmoil": "Niepokoje",
     "Promos": "Promos",
-   
+
    "Fan-made": "Dodatki fanowskie",
     "Ares": "Ekspansja Terytorialna",
     "Community": "Społeczność",
     "Agendas": "Agendy",
-   
+
     "Board": "Plansza",
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
     "random": "Losowa",
-    
+
     "Options": "Ustawienia",
     "Starting Corporations": "Początkowe korporacje",
     "World Government Terraforming": "Działania Rządu Światowego",
@@ -31,19 +31,19 @@
     "Randomize board tiles": "Losowe rozłożenie pól na planszy",
     "Set Predefined Game": "Ustaw predefiniowaną rozgrywkę",
     "Create game": "Stwórz grę",
-    
+
     "Promos": "Karty promo",
     "Start typing the card name to exclude": "Wpisz nazwę karty do wykluczenia",
     "TR Boost": "Boost WT",
     "Player ${0} name": "Nazwa gracza ${0}",
     "63 TR solo mode": "Tryb solo 63 WT",
-    
+
     "Filter": "Filtr",
     "Custom Corporation list": "Niestandardowa lista korporacji",
     "Exclude some cards": "Wyklucz karty",
     "Custom Colonies list": "Niestandardowa lista kolonii",
     "Remove negative Global Events": "Usuń negatywne Globalne Eventy",
-    
+
     "Multiplayer Options": "Ustawienia gry wieloosobowej",
     "Draft variant": "Wariant z selekcją kart",
     "Initial Draft variant": "Selekcja kart początkowych",
@@ -63,7 +63,7 @@
     "Official": "Oficjalne",
     "Community": "Społeczności",
     "Cards to exclude from the game": "Wybierz karty do wykluczenia",
-    
+
     "Create Game": "Stwórz grę",
     "Beginner?": "Początkujący?",
     "Color:": "Kolor:",
@@ -72,7 +72,7 @@
     "Yellow": "Żółty",
     "Blue": "Niebieski",
     "Black": "Czarny",
-    
+
     "Milestones": "Tytuły",
     "Builder": "Konstruktor",
     "Having at least 8 building tags in play": "Gracz posiada w grze przynajmniej 8 symboli budowli",
@@ -106,7 +106,7 @@
     "Having a terraform rating of at least 35 or 26 with Turmoil.": "Gracz posiada współczynnik terraformacji równy albo wyższy od 35 (26 z dodatkiem Niepokoje)",
     "Tycoon": "Inwestor",
     "Requires that you have 15 project cards in play (blue and green cards)": "Gracz posiada w grze przynajmniej 15 kart projetków aktywnych i natychmiastowych (niebieskich i zielonych)",
-    
+
     "Awards": "Nagrody",
     "Landlord": "Potentat Ziemski",
     "Owning the most tiles in play": "Gracz posiada najwięcej obszarów na planszy",
@@ -140,7 +140,7 @@
     "Highest terraform rating": "Gracz posiada najwyższy współczynnik terraformacji",
     "Venuphile": "Wenufil",
     "Having the most Venus tags in play": "Gracz posiada w grze najwięcej symboli Wenus",
-    
+
     "Actions": "Akcje",
     "Played Cards": "Zagrane karty",
     "Hide active cards": "Ukryj aktywne karty",
@@ -170,7 +170,7 @@
     "GENERATION 1 OF 12": "POKOLENIE ${0} Z ${1}",
     "PRELUDE": "PRELUDIUM",
 
-    
+
     "Select which cards to take into hand": "Wybierz karty, które weźmiesz na rękę",
 
     "Convert 7 heat into temperature": "Wymień 7 jednostek ciepła aby podnieść Temperaturę",
@@ -217,7 +217,7 @@
     "Increase oxygen": "Zwiększ Poziom Tlenu",
     "Add an ocean": "Umieść ocean",
     "Increase Venus scale": "Podnieś Współczynnik Terraformacji Wenus",
-    
+
     "Login": "Zaloguj się",
     "Register": "Zarejestruj się",
     "Go To Register": "Przejdź do rejestracji",
@@ -225,9 +225,9 @@
     "Donate": "Donate",
     "LoginOut": "Wyloguj",
     "Help Translation": "Pomóż z tłumaczeniem",
-    
+
     "Select a card to keep and pass the rest to ${0}": "Wybierz kartę, którą chcesz zatrzymać i przekaż resztę do ${0}",
-    
+
     "Game Home": "Strona główna gry",
     "Send players their links below. As game administrator pick your link to use.": "Wyślij pozostałym graczom linki poniżej. Jako administrator wybierz swój link.",
     "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Instrukcja: Aby rozpocząć grę, skopiuj i wyślij linki poszczególnym graczom, a następnie kliknij na swoją nazwę.",
@@ -260,3 +260,4 @@
     "End": "Zakończ",
     "Sell": "Sprzedaj",
     "Undo": "Cofnij",
+ }

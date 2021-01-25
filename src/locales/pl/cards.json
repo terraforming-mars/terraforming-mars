@@ -118,7 +118,8 @@
 
     "Ants": "Mrówki",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "Akcja: Usuń do 1 jednostkę mikrobów z innej karty dowolnego gracza i umieść ją na tej karcie.",
-    "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "Poziom Tlenu musi być równy albo wyższy niż 4%. Otrzymujesz 1 PZ za każde 2 znajdujące się na tej karcie jednostki mikrobów.",
+    "1 VP per 2 Microbes on this card.": "1 PZ za każde 2 mikroby na tej karcie",
+    "Requires 4% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 4%.",
 
     "Release of Inert Gases": "Wypuszczenie Gazów Obojętnych",
     "Raise your terraform rating 2 steps.": "Podnieś swój współczynnik terraformacji o 2.",
@@ -534,7 +535,7 @@
     "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3.",
 
     "Shuttles": "Promy",
-    "Effect: When you play a Space card, you pay 2 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a Space card, you pay 2 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej."
     "Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Import of Advanced GHG": "Zaawansowane Gazy Cieplarniane",
@@ -547,7 +548,7 @@
     "Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.": "Temperatura musi być równa albo wyższa niż -6°C. Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
 
     "Aerobraked Ammonia Asteroid": "Asteroida Bogata w Amoniak",
-    "Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.": "Umieść na innej karcie do 2 jednostek mikrobów. Podnieś swoją produkcję ciepła o 3 poziomy. Podnieś swoją produkcję roślinności o 1 poziom.",
+    "Increase your heat production 3 steps and your Plant productions 1 step. Add 2 Microbes to ANOTHER card.": "Umieść na innej karcie do 2 jednostek mikrobów. Podnieś swoją produkcję ciepła o 3 poziomy. Podnieś swoją produkcję roślinności o 1 poziom.",
 
     "Magnetic Field Dome": "Kopuła z Polem Magnetycznym.",
     "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swój współczynnik terraformacji o 1.",

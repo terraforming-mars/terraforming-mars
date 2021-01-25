@@ -13,7 +13,7 @@
     "Promos": "Promos",
    
    "Fan-made": "Dodatki fanowskie",
-    "Ares": "Pionierzy",
+    "Ares": "Ekspansja Terytorialna",
     "Community": "Społeczność",
     "Agendas": "Agendy",
    
@@ -29,7 +29,8 @@
     "Allow undo": "Zezwól na cofanie tury",
     "Show timers": "Pokaż licznik czasu",
     "Randomize board tiles": "Losowe rozłożenie pól na planszy",
-    "Set predefined game": "Ustaw predefiniowaną rozgrywkę",
+    "Set Predefined Game": "Ustaw predefiniowaną rozgrywkę",
+    "Create game": "Stwórz grę",
     
     "Promos": "Karty promo",
     "Start typing the card name to exclude": "Wpisz nazwę karty do wykluczenia",
@@ -55,9 +56,17 @@
     "Show real-time VP": "Pokaż VP w czasie rzeczywistym",
     "Fast mode": "Tryb szybki",
     "Beginner Options": "Ustawienia dla początkującego",
+    "Corporations": "Korporacje",
+    "All": "Wszystkie",
+    "None": "Wyczyść",
+    "Invert": "Odwróć",
+    "Official": "Oficjalne",
+    "Community": "Społeczności",
+    "Cards to exclude from the game": "Wybierz karty do wykluczenia",
     
     "Create Game": "Stwórz grę",
     "Beginner?": "Początkujący?",
+    "Color:": "Kolor:",
     "Red": "Czerwony",
     "Green": "Zielony",
     "Yellow": "Żółty",
@@ -153,6 +162,14 @@
     "(click on player name to see details)": "(kliknij na nazwę gracza aby wyświetlić szczegóły)",
     "Go to game results": "Przejdź do wyników gry",
     "Save": "Zapisz",
+    "TOGGLE TAGS VIEW:": "PRZEŁĄCZ WIDOK SYMBOLI:",
+    "CONCISE": "ZWIĘZŁE",
+    "FULL": "WSZYSTKIE",
+    "active": "aktywny",
+    "You": "Ty",
+    "GENERATION 1 OF 12": "POKOLENIE ${0} Z ${1}",
+    "PRELUDE": "PRELUDIUM",
+
     
     "Select which cards to take into hand": "Wybierz karty, które weźmiesz na rękę",
 
@@ -227,6 +244,7 @@
     "Select prelude card to play": "Wybierz kartę preludium do zagrania",
     "Pay trade fee": "Uiść opłatę handlową",
     "Select colony tile for trade": "Wybierz kafel obiektu, z którym będziesz handlować",
+    "Standard projects": "Standardowe projekty",
     "Pass for this generation": "Spasuj w tym pokoleniu",
     "Confirm": "Potwierdź",
     "Increase": "Zwiększ",
@@ -241,5 +259,4 @@
     "Build": "Zbuduj",
     "End": "Zakończ",
     "Sell": "Sprzedaj",
-    "Undo": "Cofnij"
-}
+    "Undo": "Cofnij",

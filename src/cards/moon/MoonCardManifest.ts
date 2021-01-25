@@ -3,7 +3,7 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AncientShipyards} from './AncientShipyards';
-import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
+// import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
 import {ColonistShuttles} from './ColonistShuttles';
 // import {AIControlledMineNetwork} from './AIControlledMineNetwork';
@@ -90,9 +90,11 @@ import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 import {SphereHabitats} from './SphereHabitats';
+import {SteelMarketMonopolists} from './SteelMarketMonopolists';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
 import {TheWomb} from './TheWomb';
 import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
+import {TitaniumMarketMonopolists} from './TitaniumMarketMonopolists';
 import {TychoRoadNetwork} from './TychoRoadNetwork';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
@@ -153,10 +155,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRIDE_OF_THE_EARTH_ARKSHIP, Factory: PrideoftheEarthArkship},
     {cardName: CardName.IRON_EXTRACTION_CENTER, Factory: IronExtractionCenter},
     {cardName: CardName.TITANIUM_EXTRACTION_CENTER, Factory: TitaniumExtractionCenter},
-    {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
+    // {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
     //   // These cards have behavior and rendering.
-    //   {cardName: CardName.STEEL_MARKET_MONOPOLISTS, Factory: SteelMarketMonopolists},
-    //   {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
+    {cardName: CardName.STEEL_MARKET_MONOPOLISTS, Factory: SteelMarketMonopolists},
+    {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
     //   {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},
     //   {cardName: CardName.NEW_COLONY_PLANNING_INITIAITIVES, Factory: NewColonyPlanningInitiaitives},
     //   {cardName: CardName.AI_CONTROLLED_MINE_NETWORK, Factory: AIControlledMineNetwork},

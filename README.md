@@ -16,7 +16,7 @@ You can demo this web app online [here](https://terraforming-mars.herokuapp.com/
 ## Docker Hub Image Game Server Running
 
 Docker Hub image is made for users who difficulty to Vist the Demo website.
-You can build game server easily. 
+You can build game server easily.
 1. Search terraforming-mars docker image on you NAS(eg:QNAP or Synology) or other container. You can find [ltdstudio/terraforming-mars].
 2. Build it when you downloaded docker Image.
 3. Run it. It will start the game server listening on the Host port of 8080.
@@ -32,7 +32,7 @@ npm run build
 npm run start
 ```
 
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. To change this port from 8080, add `PORT=<new port>` in your `.env` file. 
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. To change this port from 8080, add `PORT=<new port>` in your `.env` file.
 
 Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
@@ -49,6 +49,7 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * `CERT_PATH`: Your TLS certificate path (=> `fullchain.pem` created by certbot)
 * `KEY_PATH`: Your TLS private key path (=> `privkey.pem` created by certbot)
 * `MAX_GAME_DAYS`: How many days to keep unfinished games before deleting them
+* `POST_GAME_HOURS`: How many hours after a game completes before compressing it
 * `WAITING_FOR_TIMEOUT`: (default 5000) How many milliseconds to check for game update on multi-player games
 * `ASSET_CACHE_MAX_AGE`: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
 * `SERVER_ID`: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
@@ -107,7 +108,7 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a>
-    </td>    
+    </td>
   </tr>
 </table>
 

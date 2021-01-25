@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Game} from '../../Game';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -40,19 +39,19 @@ export class VenusianPlants extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsVenusRequirements = super.canPlay(player);
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true, true) && meetsVenusRequirements;
     }
 
     return meetsVenusRequirements;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseVenusScaleLevel(player, 1);
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
     const cards = this.getResCards(player);
     if (cards.length === 0) return undefined;
 

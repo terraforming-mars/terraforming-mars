@@ -21,7 +21,7 @@ describe('VenusSoils', function() {
   it('Should play - single target', function() {
     const card2 = new Thermophiles();
     player.playedCards.push(card2);
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getResourcesOnCard(card2)).to.eq(2);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
@@ -33,7 +33,7 @@ describe('VenusSoils', function() {
     const card3 = new VenusianInsects();
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
         action!.cb([card2]);

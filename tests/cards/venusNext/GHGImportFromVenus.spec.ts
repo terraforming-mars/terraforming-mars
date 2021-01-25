@@ -11,7 +11,7 @@ describe('GHGImportFromVenus', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
     expect(game.getVenusScaleLevel()).to.eq(2);

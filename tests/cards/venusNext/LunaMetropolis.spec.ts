@@ -10,9 +10,9 @@ describe('LunaMetropolis', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });

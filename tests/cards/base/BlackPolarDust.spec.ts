@@ -35,7 +35,5 @@ describe('BlackPolarDust', function() {
   it('Cannot place ocean if no oceans left', function() {
     maxOutOceans(player, game);
     card.play(player);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
   });
 });

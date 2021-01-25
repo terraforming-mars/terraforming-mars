@@ -16,12 +16,12 @@ describe('VenusianInsects', function() {
 
   it('Can\'t play', function() {
     (game as any).venusScaleLevel = 10;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).venusScaleLevel = 12;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
 
     const action = card.play();

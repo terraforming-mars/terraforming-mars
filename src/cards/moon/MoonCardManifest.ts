@@ -2,6 +2,7 @@
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
+import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 import {AncientShipyards} from './AncientShipyards';
 import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
@@ -161,7 +162,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
     {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},
     {cardName: CardName.NEW_COLONY_PLANNING_INITIAITIVES, Factory: NewColonyPlanningInitiaitives},
-    //   {cardName: CardName.AI_CONTROLLED_MINE_NETWORK, Factory: AIControlledMineNetwork},
+    {cardName: CardName.AI_CONTROLLED_MINE_NETWORK, Factory: AIControlledMineNetwork},
     //   {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     //   {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},
     //   {cardName: CardName.LUNAR_TRADE_FLEET, Factory: LunarTradeFleet},

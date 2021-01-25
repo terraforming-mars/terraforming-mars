@@ -987,7 +987,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public dealCards(quantity: number, cards: Array<IProjectCard>) {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.dealer.dealCard(true));
+      cards.push(this.game.dealer.dealCard(this.game, true));
     }
   }
 

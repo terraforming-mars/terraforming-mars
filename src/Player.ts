@@ -1578,39 +1578,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    const canUseSteel = card.tags.includes(Tags.BUILDING);
-    const canUseTitanium = card.tags.includes(Tags.SPACE);
-    const canUseMicrobes = card.tags.includes(Tags.PLANT);
-    const canUseFloaters = card.tags.includes(Tags.VENUS);
-
-    let steel = this.steel;
-    let titanium = this.titanium;
-
-    // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
-    // reserve costs that a player cannot afford.
-    if (card.reserveUnits !== undefined) {
-      const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-      // Set aside reserve units in case the card has a building tag.
-      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-      steel = steel - reserveUnits.steel;
-      if (steel < 0) {
-        return false;
-      }
-
-      // Set aside reserve units in case the card has a space tag.
-      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-      titanium = titanium - reserveUnits.titanium;
-      if (titanium < 0) {
-        return false;
-      }
-    }
-
-    const canAfford = this.getCardCost(card) <=
-      this.spendableMegacredits() +
-      (canUseSteel ? steel * this.steelValue : 0) +
-      (canUseTitanium ? titanium * this.getTitaniumValue() : 0) +
-      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
+    const canAfford = this.canAfford(
+      this.getCardCost(card),
+      card.tags.includes(Tags.BUILDING),
+      card.tags.includes(Tags.SPACE),
+      card.tags.includes(Tags.PLANT),
+      card.tags.includes(Tags.VENUS),
+      MoonExpansion.adjustedReserveCosts(this, card),
+    );
 
     return canAfford && (card.canPlay === undefined || card.canPlay(this, this.game));
   }

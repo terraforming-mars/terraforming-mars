@@ -36,7 +36,7 @@ describe('TitanShuttles', function() {
   it('Auto add floaters if only 1 option and 1 target available', function() {
     card.action(player, game);
     expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(card.resourceCount).to.eq(2);
   });
@@ -48,7 +48,7 @@ describe('TitanShuttles', function() {
     card.action(player, game);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(2);
   });
@@ -71,7 +71,7 @@ describe('TitanShuttles', function() {
     orOptions.options[0].cb();
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(2);
   });

@@ -21,7 +21,7 @@ describe('Europa', function() {
   it('Should build', function() {
     europa.addColony(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const action = game.deferredActions.shift()!;
+    const action = game.deferredActions.pop()!;
     expect(action).to.be.an.instanceof(PlaceOceanTile);
     expect(action.player).to.eq(player);
   });
@@ -34,7 +34,7 @@ describe('Europa', function() {
 
   it('Should give trade bonus', function() {
     europa.addColony(player);
-    game.deferredActions.shift();
+    game.deferredActions.pop();
 
     europa.trade(player2);
     game.deferredActions.runAll(() => {});

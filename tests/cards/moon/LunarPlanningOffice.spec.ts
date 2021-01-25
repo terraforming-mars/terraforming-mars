@@ -35,7 +35,7 @@ describe('LunarPlanningOffice', () => {
     game.dealer.discarded = [];
 
     card.play(player);
-    game.deferredActions.next()!.execute();
+    game.deferredActions.peek()!.execute();
     player.steel = 6;
 
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);

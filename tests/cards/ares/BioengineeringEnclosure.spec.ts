@@ -47,7 +47,7 @@ describe('BioengineeringEnclosure', function() {
   it('Move animal', () => {
     // Set up the cards.
     player.playCard(animalHost);
-    game.deferredActions.shift();
+    game.deferredActions.pop();
     player.playCard(card);
 
     // Initial expectations that will change after playing the card.
@@ -58,7 +58,7 @@ describe('BioengineeringEnclosure', function() {
 
     card.action(player);
 
-    game.deferredActions.next()!.execute();
+    game.deferredActions.peek()!.execute();
 
     expect(card.resourceCount).eq(1);
     expect(animalHost.resourceCount).eq(1);

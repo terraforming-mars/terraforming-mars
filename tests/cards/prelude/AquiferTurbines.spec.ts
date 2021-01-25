@@ -24,7 +24,7 @@ describe('AquiferTurbines', function() {
     card.play(player, game);
 
     // PlaceOceanTile
-    game.deferredActions.shift();
+    game.deferredActions.pop();
 
     // SelectHowToPayDeferred
     game.deferredActions.runNext();

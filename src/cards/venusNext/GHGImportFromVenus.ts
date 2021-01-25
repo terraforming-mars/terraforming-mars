@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
@@ -30,18 +29,18 @@ export class GHGImportFromVenus extends Card {
     });
   };
 
-  public canPlay(player: Player, game: Game): boolean {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, true, true);
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.HEAT, 3);
-    game.increaseVenusScaleLevel(player, 1);
+    player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }
 }

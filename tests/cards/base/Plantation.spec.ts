@@ -16,14 +16,14 @@ describe('Plantation', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new InventorsGuild(), new InventorsGuild());
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
     expect(game.getOxygenLevel()).to.eq(1);

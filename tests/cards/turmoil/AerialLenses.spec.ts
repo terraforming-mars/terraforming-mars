@@ -30,7 +30,7 @@ describe('AerialLenses', function() {
   it('Should play without plants', function() {
     card.play(player, game);
     expect(player.getProduction(Resources.HEAT)).to.eq(2);
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
@@ -40,7 +40,7 @@ describe('AerialLenses', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(3);
   });

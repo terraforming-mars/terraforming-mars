@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
@@ -40,17 +39,17 @@ export class DomedCrater extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return super.canPlay(player) &&
       player.getProduction(Resources.ENERGY) >= 1 &&
-      game.board.getAvailableSpacesForCity(player).length > 0;
+      player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select space for city tile',
-      game.board.getAvailableSpacesForCity(player),
+      player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
-        game.addCityTile(player, space.id);
+        player.game.addCityTile(player, space.id);
         player.plants += 3;
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, 3);

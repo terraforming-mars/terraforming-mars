@@ -36,7 +36,7 @@ describe('MonsInsurance', function() {
     player2.titanium = 3;
 
     const card2 = new Sabotage();
-    const action = card2.play!(player3, game) as OrOptions;
+    const action = card2.play!(player3) as OrOptions;
 
     action.options[1].cb();
     expect(player2.titanium).to.eq(0);
@@ -54,7 +54,7 @@ describe('MonsInsurance', function() {
     player2.playedCards.push(ants, tardigrades);
     tardigrades.resourceCount = 3;
 
-    ants.action(player2, game); // remove resource from own card
+    ants.action(player2); // remove resource from own card
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
   });
@@ -71,7 +71,7 @@ describe('MonsInsurance', function() {
     const ants = new Ants();
     player2.playedCards.push(ants);
 
-    ants.action(player2, game); // remove resource from Mons' card
+    ants.action(player2); // remove resource from Mons' card
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
   });

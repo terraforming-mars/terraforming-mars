@@ -16,7 +16,7 @@ describe('RadSuits', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -24,8 +24,8 @@ describe('RadSuits', function() {
     game.addCityTile(player, lands[0].id);
     game.addCityTile(player, lands[1].id);
 
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

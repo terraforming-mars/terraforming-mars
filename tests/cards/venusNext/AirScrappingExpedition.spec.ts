@@ -16,7 +16,7 @@ describe('AirScrappingExpedition', function() {
     player.corporationCard = corp;
 
 
-    const selectCard = card.play(player, game) as SelectCard<ICard>;
+    const selectCard = card.play(player) as SelectCard<ICard>;
     expect(selectCard).is.not.undefined;
     expect(selectCard instanceof SelectCard).is.true;
 

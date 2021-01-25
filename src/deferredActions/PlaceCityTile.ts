@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class PlaceCityTile implements DeferredAction {
+  public priority = Priority.PLACE_CITY_TILE;
   constructor(
         public player: Player,
         public title: string = 'Select space for city tile',

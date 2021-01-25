@@ -9,20 +9,20 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CommercialDistrictAres', function() {
-  let card : CommercialDistrictAres; let player : Player; let game : Game;
+  let card : CommercialDistrictAres; let player : Player;
 
   beforeEach(function() {
     card = new CommercialDistrictAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {
     player.addProduction(Resources.ENERGY);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace);
     action.cb(action.availableSpaces[0]);
 

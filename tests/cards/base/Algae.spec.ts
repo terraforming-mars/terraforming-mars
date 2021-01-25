@@ -17,7 +17,7 @@ describe('Algae', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -26,7 +26,7 @@ describe('Algae', function() {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
 
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(1);

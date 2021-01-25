@@ -88,6 +88,7 @@ import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 import {SphereHabitats} from './SphereHabitats';
@@ -159,7 +160,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.STEEL_MARKET_MONOPOLISTS, Factory: SteelMarketMonopolists},
     //   {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
     {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},
-    //   {cardName: CardName.NEW_COLONY_PLANNING_INITIAITIVES, Factory: NewColonyPlanningInitiaitives},
+    {cardName: CardName.NEW_COLONY_PLANNING_INITIAITIVES, Factory: NewColonyPlanningInitiaitives},
     //   {cardName: CardName.AI_CONTROLLED_MINE_NETWORK, Factory: AIControlledMineNetwork},
     //   {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     //   {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},

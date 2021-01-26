@@ -53,7 +53,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
   }
 
   public action(player: Player, game: Game) {
-    const topCard = game.dealer.dealCard();
+    const topCard = game.dealer.dealCard(game);
     if (topCard.tags.indexOf(Tags.SPACE) !== -1) player.addResourceTo(this);
     game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
     game.dealer.discard(topCard);

@@ -3,7 +3,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardMetadata} from '../CardMetadata';
@@ -16,16 +15,16 @@ export class AerialLenses implements IProjectCard {
   public name = CardName.AERIAL_LENSES;
   public cardType = CardType.AUTOMATED;
 
-  public canPlay(player: Player, game: Game): boolean {
-    if (game.turmoil !== undefined) {
-      return game.turmoil.canPlay(player, PartyName.KELVINISTS);
+  public canPlay(player: Player): boolean {
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, PartyName.KELVINISTS);
     }
     return false;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.HEAT, 2);
-    game.defer(new RemoveAnyPlants(player, 2));
+    player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }
 

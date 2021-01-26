@@ -987,7 +987,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public dealCards(quantity: number, cards: Array<IProjectCard>) {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.dealer.dealCard(true));
+      cards.push(this.game.dealer.dealCard(this.game, true));
     }
   }
 
@@ -1580,7 +1580,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   public canPlay(card: IProjectCard): boolean {
     const canUseSteel = card.tags.includes(Tags.BUILDING);
     const canUseTitanium = card.tags.includes(Tags.SPACE);
-    let maxPay = 0;
+    const canUseMicrobes = card.tags.includes(Tags.PLANT);
+    const canUseFloaters = card.tags.includes(Tags.VENUS);
 
     let steel = this.steel;
     let titanium = this.titanium;
@@ -1604,54 +1605,22 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    if (canUseSteel) {
-      maxPay += steel * this.steelValue;
-    }
-    if (canUseTitanium) {
-      maxPay += titanium * this.getTitaniumValue();
-    }
+    const canAfford = this.getCardCost(card) <=
+      this.spendableMegacredits() +
+      (canUseSteel ? steel * this.steelValue : 0) +
+      (canUseTitanium ? titanium * this.getTitaniumValue() : 0) +
+      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
 
-    const psychrophiles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
-
-    if (psychrophiles !== undefined &&
-        psychrophiles.resourceCount &&
-        card.tags.indexOf(Tags.PLANT) !== -1) {
-      maxPay += psychrophiles.resourceCount * 2;
-    }
-
-    const dirigibles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.DIRIGIBLES);
-
-    if (dirigibles !== undefined &&
-        dirigibles.resourceCount &&
-        card.tags.indexOf(Tags.VENUS) !== -1) {
-      maxPay += dirigibles.resourceCount * 3;
-    }
-
-    maxPay += this.spendableMegacredits();
-    return maxPay >= this.getCardCost(card) &&
-                (card.canPlay === undefined || card.canPlay(this, this.game));
+    return canAfford && (card.canPlay === undefined || card.canPlay(this, this.game));
   }
 
   public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
-    let extraResource: number = 0;
-    if (canUseFloaters !== undefined && canUseFloaters) {
-      extraResource += this.getFloatersCanSpend() * 3;
-    }
-
-    if (canUseMicrobes !== undefined && canUseMicrobes) {
-      extraResource += this.getMicrobesCanSpend() * 2;
-    }
-
-    if (canUseTitanium) {
-      return this.spendableMegacredits() +
+    return cost <= this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +
-      extraResource >= cost;
-    }
-
-    return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
+      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
   // Public for testing

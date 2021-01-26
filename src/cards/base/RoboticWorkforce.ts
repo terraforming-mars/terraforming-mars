@@ -77,6 +77,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.GYROPOLIS,
     CardName.HEAT_TRAPPERS,
     CardName.HOUSE_PRINTING,
+    CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY,
     CardName.IMMIGRANT_CITY,
     CardName.INDUSTRIAL_MICROBES,
     CardName.LAVA_TUBE_SETTLEMENT,

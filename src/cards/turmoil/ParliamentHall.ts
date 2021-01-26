@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardMetadata} from '../CardMetadata';
@@ -16,9 +15,9 @@ export class ParliamentHall implements IProjectCard {
     public name = CardName.PARLIAMENT_HALL;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.MARS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.MARS);
       }
       return false;
     }

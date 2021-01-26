@@ -4,7 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -16,15 +15,15 @@ export class DiasporaMovement implements IProjectCard {
     public name = CardName.DIASPORA_MOVEMENT;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.REDS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.REDS);
       }
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      const amount = game.getPlayers()
+    public play(player: Player) {
+      const amount = player.game.getPlayers()
         .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
         .reduce((a, c) => a + c);
       player.setResource(Resources.MEGACREDITS, amount + 1);

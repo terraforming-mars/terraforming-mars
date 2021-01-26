@@ -7,7 +7,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -29,10 +28,10 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
                 player.getProduction(Resources.ENERGY) +
                 player.getProduction(Resources.HEAT) > -5;
     }
-    private log(player: Player, game: Game, type: string) {
-      game.log('${0} decreased ${1} production 1 step to gain 4 ${2}', (b) => b.player(player).string(type).string(type));
+    private log(player: Player, type: string) {
+      player.game.log('${0} decreased ${1} production 1 step to gain 4 ${2}', (b) => b.player(player).string(type).string(type));
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const result = new OrOptions();
       result.title = 'Select production to decrease one step and gain 4 resources';
 
@@ -41,42 +40,42 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
       const reduceMegacredits = new SelectOption('Decrease MC production', 'Decrease production', () => {
         player.addProduction(Resources.MEGACREDITS, -1);
         player.megaCredits += 4;
-        this.log(player, game, 'megacredit');
+        this.log(player, 'megacredit');
         return undefined;
       });
 
       const reduceSteel = new SelectOption('Decrease steel production', 'Decrease production', () => {
         player.addProduction(Resources.STEEL, -1);
         player.steel += 4;
-        this.log(player, game, 'steel');
+        this.log(player, 'steel');
         return undefined;
       });
 
       const reduceTitanium = new SelectOption('Decrease titanium production', 'Decrease production', () => {
         player.addProduction(Resources.TITANIUM, -1);
         player.titanium += 4;
-        this.log(player, game, 'titanium');
+        this.log(player, 'titanium');
         return undefined;
       });
 
       const reducePlants = new SelectOption('Decrease plants production', 'Decrease production', () => {
         player.addProduction(Resources.PLANTS, -1);
         player.plants += 4;
-        this.log(player, game, 'plant');
+        this.log(player, 'plant');
         return undefined;
       });
 
       const reduceEnergy = new SelectOption('Decrease energy production', 'Decrease production', () => {
         player.addProduction(Resources.ENERGY, -1);
         player.energy += 4;
-        this.log(player, game, 'energy');
+        this.log(player, 'energy');
         return undefined;
       });
 
       const reduceHeat = new SelectOption('Decrease heat production', 'Decrease production', () => {
         player.addProduction(Resources.HEAT, -1);
         player.heat += 4;
-        this.log(player, game, 'heat');
+        this.log(player, 'heat');
         return undefined;
       });
 

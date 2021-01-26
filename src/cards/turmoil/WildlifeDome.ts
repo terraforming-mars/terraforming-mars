@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -20,13 +19,13 @@ export class WildlifeDome implements IProjectCard {
     public name = CardName.WILDLIFE_DOME;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        const canPlaceTile = game.board.getAvailableSpacesForGreenery(player).length > 0;
-        const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.GREENS);
-        const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+        const meetsPartyRequirements = player.game.turmoil.canPlay(player, PartyName.GREENS);
+        const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
+        if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
           return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true, false, false, true) && meetsPartyRequirements && canPlaceTile;
         }
 
@@ -35,9 +34,9 @@ export class WildlifeDome implements IProjectCard {
       return false;
     }
 
-    public play(player: Player, game: Game) {
-      return new SelectSpace('Select space for greenery tile', game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-        return game.addGreenery(player, space.id);
+    public play(player: Player) {
+      return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
+        return player.game.addGreenery(player, space.id);
       });
     }
     public metadata: CardMetadata = {

@@ -39,7 +39,7 @@
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your MC production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 4%. Umieść ten obszar na polu niesąsiadującym z innymi obszarami. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 MC. Podnieś swoją produkcję MC o 1 poziom.",
 
     "Ocean Sanctuary": "Sanktuarium Oceaniczne",
-    "1 VP per animal on this card.": "1 PZ za każde dwa zwierzęta na karcie.",
+    "1 VP per animal on this card.": "1 PZ za każdą jednostkę zwierząt na karcie.",
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Umieść ten obszar na istniejącym obszare oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę zwierząt. Umieść 1 jednostkę zwierząt na tej karcie.",
 
     "Nuclear Zone": "Strefa Nuklearna",
@@ -54,7 +54,7 @@
 
     "Ecological Zone": "Strefa Ekologiczna",
     "Effect: When you play an animal or plant tag /including these/, add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roślinności (z tymi włącznie), umieść tu 1 jednostkę zwierząt.",
-    "The tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "GDY DOWOLNY GRACZ UMIEŚCI OBSZAR OBOK TEGO OBSZARU, OTRZYMUJE 1 JEDNOSTKĘ ZWIERZĄT. 1 PZ ZA KAŻDE 2 JEDNOSTKI ZWIERZĄT NA TEJ KARCIE.",
+    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "GDY DOWOLNY GRACZ UMIEŚCI OBSZAR OBOK TEGO OBSZARU, OTRZYMUJE 1 JEDNOSTKĘ ZWIERZĄT. 1 PZ ZA KAŻDE 2 JEDNOSTKI ZWIERZĄT NA TEJ KARCIE.",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Musisz posiadać min. 1 obszar zieleni. Umieść ten obszar obok obszaru zieleni.",
 
     "Bio-Fertilizer Facility": "Ośrodek Eko Nawożenia",

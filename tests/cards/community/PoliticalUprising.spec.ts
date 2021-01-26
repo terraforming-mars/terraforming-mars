@@ -19,7 +19,7 @@ describe('PoliticalUprising', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(4);
 
     while (game.deferredActions.length) {

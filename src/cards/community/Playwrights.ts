@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
@@ -26,27 +25,29 @@ export class Playwrights implements CorporationCard {
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
-      const replayableEvents = this.getReplayableEvents(player, game);
+    public canAct(player: Player): boolean {
+      const replayableEvents = this.getReplayableEvents(player);
       return replayableEvents.length > 0;
     }
 
-    public action(player: Player, game: Game) {
-      const players = game.getPlayers();
-      const replayableEvents = this.getReplayableEvents(player, game);
+    public action(player: Player) {
+      const players = player.game.getPlayers();
+      const replayableEvents = this.getReplayableEvents(player);
 
       return new SelectCard<ICard>(
         'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
         (foundCards: Array<ICard>) => {
           const selectedCard = foundCards[0] as IProjectCard;
 
-          players.forEach((player) => {
-            const cardIndex = player.playedCards.findIndex((c) => c.name === selectedCard.name);
-            if (cardIndex !== -1) player.playedCards.splice(cardIndex, 1);
+          players.forEach((p) => {
+            const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
+            if (cardIndex !== -1) {
+              p.playedCards.splice(cardIndex, 1);
+            }
           });
 
           const cost = player.getCardCost(selectedCard);
-          game.defer(new SelectHowToPayDeferred(
+          player.game.defer(new SelectHowToPayDeferred(
             player,
             cost,
             {
@@ -59,8 +60,8 @@ export class Playwrights implements CorporationCard {
                    * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                    * Needs to be deferred to happen after Law Suit's `play()` method.
                    */
-                  game.defer(new DeferredAction(player, () => {
-                    game.getPlayers().some((p) => {
+                  player.game.defer(new DeferredAction(player, () => {
+                    player.game.getPlayers().some((p) => {
                       const card = p.playedCards[p.playedCards.length - 1];
                       if (card?.name === selectedCard.name) {
                         p.playedCards.pop();
@@ -83,15 +84,15 @@ export class Playwrights implements CorporationCard {
       return this.checkLoops;
     }
 
-    private getReplayableEvents(player: Player, game: Game): Array<IProjectCard> {
+    private getReplayableEvents(player: Player): Array<IProjectCard> {
       const playedEvents : IProjectCard[] = [];
 
       this.checkLoops++;
-      game.getPlayers().forEach((p) => {
+      player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
             player.canAfford(player.getCardCost(card)) &&
-            (card.canPlay === undefined || card.canPlay(player, game));
+            (card.canPlay === undefined || card.canPlay(player, player.game));
         }));
       });
       this.checkLoops--;

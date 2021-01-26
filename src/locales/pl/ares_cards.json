@@ -39,7 +39,7 @@
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your MC production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 4%. Umieść ten obszar na polu niesąsiadującym z innymi obszarami. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 MC. Podnieś swoją produkcję MC o 1 poziom.",
 
     "Ocean Sanctuary": "Sanktuarium Oceaniczne",
-    "1 VP PER ANIMAL ON THIS CARD.": "1 PZ za każde dwa zwierzęta na karcie.",
+    "1 VP per animal on this card.": "1 PZ za każde dwa zwierzęta na karcie.",
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Umieść ten obszar na istniejącym obszare oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę zwierząt. Umieść 1 jednostkę zwierząt na tej karcie.",
 
     "Nuclear Zone": "Strefa Nuklearna",
@@ -54,7 +54,7 @@
 
     "Ecological Zone": "Strefa Ekologiczna",
     "Effect: When you play an animal or plant tag /including these/, add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roślinności (z tymi włącznie), umieść tu 1 jednostkę zwierząt.",
-    "THE TILE GRANTS AN ADJACENCY BONUS OF 1 ANIMAL. 1 VP PER 2 ANIMALS ON THIS CARD.": "GDY DOWOLNY GRACZ UMIEŚCI OBSZAR OBOK TEGO OBSZARU, OTRZYMUJE 1 JEDNOSTKĘ ZWIERZĄT. OTRZYMUJESZ 1 PZ ZA KAŻDE 2 JEDNOSTKI ZWIERZĄT NA TEJ KARCIE.",
+    "The tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "GDY DOWOLNY GRACZ UMIEŚCI OBSZAR OBOK TEGO OBSZARU, OTRZYMUJE 1 JEDNOSTKĘ ZWIERZĄT. 1 PZ ZA KAŻDE 2 JEDNOSTKI ZWIERZĄT NA TEJ KARCIE.",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Musisz posiadać min. 1 obszar zieleni. Umieść ten obszar obok obszaru zieleni.",
 
     "Bio-Fertilizer Facility": "Ośrodek Eko Nawożenia",
@@ -67,7 +67,7 @@
     "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Na planszy muszą znajdować się przynajmniej 4 obszary oceanów. Podnieś swoją produkcję roślinności i ciepła o 1 poziom. Umieść ten obszar na istniejącym obszarze oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę roślinności.",
 
     "Commercial District": "Dystrykt Handlowy",
-    "1 VP PER ADJACENT CITY TILE.": "Otrzymujesz po 1 PZ za każdy obszar miasta sąsiadujący z tym obszarem.",
+    "1 VP per adjacent city tile.": "1 PZ ZA KAŻDY OBSZAR MIASTA OBOK TEGO OBSZARU.",
     "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your MC production 4 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 4 poziomy. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 MC.",
 
     "Ocean City": "Miasto na Oceanie",
@@ -80,7 +80,7 @@
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Umieść ten obszar na polu zarezerwowanym dla oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 jednostki ciepła. Podnieś swoją produkcję ciepła o 4 poziomy.",
 
     "Capital": "Stolica",
-    "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "OTRZYMUJESZ PO 1 PZ ZA KAŻDY OBSZAR OCEANU SĄSIADUJĄCY Z TYM OBSZAREM.",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "OTRZYMUJESZ PO 1 PZ ZA KAŻDY OBSZAR OCEANU SĄSIADUJĄCY Z TYM OBSZAREM.",
     "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 MC."
 
 }

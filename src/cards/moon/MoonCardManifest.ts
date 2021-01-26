@@ -143,7 +143,6 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},
     {cardName: CardName.LUNAR_TRADE_FLEET, Factory: LunarTradeFleet},
-    //   // These cards have behavior and rendering.
     {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
     {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
     //   {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},

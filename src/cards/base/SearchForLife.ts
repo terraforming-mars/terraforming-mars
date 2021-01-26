@@ -49,7 +49,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       return player.canAfford(1);
     }
     public action(player: Player) {
-      const topCard = player.game.dealer.dealCard();
+      const topCard = player.game.dealer.dealCard(player.game);
       if (topCard.tags.indexOf(Tags.MICROBE) !== -1) {
         this.resourceCount++;
         player.game.log('${0} found life!', (b) => b.player(player));

@@ -14,5 +14,8 @@ export enum RequirementType {
     TAG = 'tag',
     PRODUCTION = 'production',
     PARTY = 'party',
-    REMOVED_PLANTS = 'Removed plants'
+    REMOVED_PLANTS = 'Removed plants',
+    MINING_RATE = 'Mining rate',
+    LOGISTIC_RATE = 'Logistic rate',
+    COLONY_RATE = 'Colony rate',
 }

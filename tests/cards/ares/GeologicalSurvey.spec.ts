@@ -9,15 +9,15 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {TestPlayers} from '../../TestingUtils';
+import * as Utils from '../../TestingUtils';
 
 describe('GeologicalSurvey', function() {
   let card : GeologicalSurvey; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new GeologicalSurvey();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = Utils.TestPlayers.BLUE.newPlayer();
+    const redPlayer = Utils.TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
@@ -84,6 +84,7 @@ describe('GeologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    Utils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(2);

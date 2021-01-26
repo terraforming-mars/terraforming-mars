@@ -123,7 +123,7 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
 ];
 
 export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.gameOptions.coloniesExtension === false && tag === SpecialTags.CITY_COUNT) {
+  if (player.gameOptions.coloniesExtension === false || tag === SpecialTags.CITY_COUNT) {
     return false;
   }
   if ((player.turmoil !== undefined) === false && tag === SpecialTags.INFLUENCE) {

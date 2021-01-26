@@ -36,7 +36,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
     public discard(card: IProjectCard): void {
       this.discarded.push(card);
     }
-    public dealCard(isResearchPhase: boolean = false): IProjectCard {
+    public dealCard(game: Game, isResearchPhase: boolean = false): IProjectCard {
       let result: IProjectCard | undefined;
       if (isResearchPhase) {
         result = this.deck.shift();
@@ -49,6 +49,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       }
 
       if (this.deck.length === 0) {
+        game.log('The discard pile has been shuffled to form a new deck.');
         this.deck = this.shuffleCards(this.discarded);
         this.discarded = [];
       }
@@ -65,7 +66,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
           game.log('discarded every card without match');
           break;
         }
-        const projectCard = this.dealCard();
+        const projectCard = this.dealCard(game);
         if (include(projectCard)) {
           result.push(projectCard);
         } else {

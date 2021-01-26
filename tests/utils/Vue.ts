@@ -43,6 +43,7 @@ Database.getInstance = function() {
     loadCloneableGame: () => {},
     saveGameResults: () => {},
     saveGame: () => {},
+    purgeUnfinishedGames: () => {},
   } as IDatabase;
 };
 

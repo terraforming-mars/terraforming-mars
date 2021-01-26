@@ -7,7 +7,7 @@
     "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.": "Efekt trwały: Za każdym razem, gdy zapłacisz za kartę albo projekt standardowy o bazowym koszcie 20 lub więcej MC, otrzymujesz 4 MC.",
 
     "Ecoline": "Ecoline",
-    "You start with 2 plant production, 3 plants, and 36MC": "Rozpoczynasz grę z 2 dodatkowymi poziomami produkcji roślinności, 3 jednostkami roślinności i 36 MC.",
+    "You start with 2 plant production, 3 plants, and 36 MC.": "Rozpoczynasz grę z 2 dodatkowymi poziomami produkcji roślinności, 3 jednostkami roślinności i 36 MC.",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Efekt trwały: Za każdym razem, gdy chcesz umieścić na planszy obszar zieleni, możesz za niego zapłacić 7 jednostkami roślinności (zamiast 8).",
 
     "Helion": "Helion",
@@ -19,14 +19,15 @@
     "Effect: Each time you play an event, you gain 2 MC.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 2 MC.",
 
     "Inventrix": "Inventrix",
-    "As you first action in the game, draw 3 cards. Start with 45MC.": "W ramach swojej pierwszej akcji w grze dobierz za darmo 3 karty. Rozpoczynasz grę z 45 MC.",
+    "As your first action in the game, draw 3 cards. Start with 45MC.": "W ramach swojej pierwszej akcji w grze dobierz za darmo 3 karty. Rozpoczynasz grę z 45 MC.",
     "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Efekt trwały: Zagrywając karty, możesz każdorazowo traktować wybrane Wskaźniki Globalne tak, jakby były o 2 poziomy (2 obszary oceanów/2% Tlenu/4°C) wyższe albo niższe.",
 
     "Phobolog": "Phobolog",
     "You start with 10 titanium and 23 MC.": "Rozpoczynasz grę z 10 jednostkami tytanu i 23 MC.",
     "Effect: Your titanium resources are each worth 1 MC extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 MC więcej.",
 
-    "Tharsis Republic": "Republika Tharsis",
+    "THARSIS": "REPUBLIKA",
+    "  REPUBLIC": "  THARSIS",
     "You start with 40 MC. As your first action in the game,place a city tile.": "Rozpoczynasz grę z 40 MC. W ramach swojej pierwszej akcji w grze umieść na planszy obszar miasta.",
     "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Za każdym razem, gdy któryś z graczy umieści NA MARSIE obszar miasta, podnieś swoją produkcję MC o 1 poziom. Jeśli to Ty umieściłeś obszar miasta, otrzymujesz dodatkowo 3 MC.",
 
@@ -36,10 +37,10 @@
 
     "UNMI": "UNMI",
     "You start with 40 MC.": "Rozpoczynasz grę z 40 MC.",
-    "Action:If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 MC, żeby podnieść go o dodatkowy punkt.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 MC, żeby podnieść go o dodatkowy punkt.",
 
     "Mining Guild": "Mining Guild",
-    "You start with 30 MC, 5 steel, and 1 steel production": "Rozpoczynasz grę z 30 MC, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
+    "You start with 30 MC, 5 steel, and 1 steel production.": "Rozpoczynasz grę z 30 MC, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Efekt trwały: Za każdym razem, gdy otrzymujesz premię w dowolnej ilości jednostek stali lub tytanu z pola na planszy, podnieś swoją produkcję stali o 1 poziom.",
 
     "Terractor": "Terractor",

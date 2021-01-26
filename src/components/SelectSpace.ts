@@ -39,14 +39,13 @@ export const SelectSpace = Vue.component('select-space', {
         tile.classList.remove('board-space--available');
       }
     },
-    animateAvailableSpaces: function(tiles: HTMLCollectionOf<Element>) {
-      for (let i = 0, length = tiles.length; i < length; i++) {
-        const tile: Element = tiles[i];
+    animateAvailableSpaces: function(tiles: Array<Element>) {
+      tiles.forEach((tile: Element) => {
         const spaceId = tile.getAttribute('data_space_id');
         if (spaceId !== null && this.availableSpaces.has(spaceId)) {
           this.animateSpace(tile, true);
         }
-      }
+      });
     },
     cancelPlacement: function() {
       if (this.selectedTile === undefined) {
@@ -57,9 +56,10 @@ export const SelectSpace = Vue.component('select-space', {
     },
     confirmPlacement: function() {
       const tiles = this.getSelectableSpaces();
-      for (let i = 0, length = tiles.length; i < length; i++) {
-        (tiles[i] as HTMLElement).onclick = null;
-      }
+      tiles.forEach((tile: Element) => {
+        (tile as HTMLElement).onclick = null;
+      });
+
       if (this.selectedTile === undefined) {
         throw new Error('unexpected, no tile selected!');
       }
@@ -69,16 +69,30 @@ export const SelectSpace = Vue.component('select-space', {
     },
     disableAvailableSpaceAnimation: function() {
       const tiles = this.getSelectableSpaces();
-      for (let i = 0, length = tiles.length; i < length; i++) {
-        tiles[i].classList.remove('board-space--available', 'board-space--selected');
-      }
+      tiles.forEach((tile: Element) => {
+        tile.classList.remove('board-space--available', 'board-space--selected');
+      });
     },
     getSelectableSpaces: function() {
-      const board = document.getElementById('main_board');
+      const spaces: Array<Element> = [];
+
+      let board = document.getElementById('main_board');
       if (board !== null) {
-        return board.getElementsByClassName('board-space-selectable');
+        const array = board.getElementsByClassName('board-space-selectable');
+        for (let i = 0, length = array.length; i < length; i++) {
+          spaces.push(array[i]);
+        }
       }
-      throw new Error('main board not found!');
+
+      board = document.getElementById('moon_board');
+      if (board !== null) {
+        const array = board.getElementsByClassName('board-space-selectable');
+        for (let i = 0, length = array.length; i < length; i++) {
+          spaces.push(array[i]);
+        }
+      }
+
+      return spaces;
     },
     hideDialog: function(hide: boolean) {
       PreferencesManager.saveValue('hide_tile_confirmation', hide === true ? '1' : '0');

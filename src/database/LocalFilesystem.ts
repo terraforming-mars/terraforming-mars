@@ -102,6 +102,10 @@ export class Localfilesystem implements IDatabase {
     // Not implemented here.
   }
 
+  purgeUnfinishedGames(): void {
+    // Not implemented.
+  }
+
   restoreGame(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
     throw new Error('Undo not yet implemented');
   }

@@ -38,15 +38,15 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
 
     card.play(player, game);
-    const option1 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    const option2 = game.deferredActions.pop()!.execute() as OrOptions;
+    const option1 = game.deferredActions.pop()!.execute() as OrOptions;
+    const option2 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
 
-    option1.cb([corpo]);
-    expect(player.getResourcesOnCard(corpo)).to.eq(0);
-
-    option2.options[0].cb();
+    option1.options[0].cb();
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
+
+    option2.cb([corpo]);
+    expect(player.getResourcesOnCard(corpo)).to.eq(0);
   });
 
   it('Should play - single target for floater removal and MC removal', function() {
@@ -56,13 +56,13 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
     card.play(player, game);
 
-        game.deferredActions.pop()!.execute(); // Remove floater
-        const option = game.deferredActions.pop()!.execute() as OrOptions; // Steal money
-        expect(option.options).has.lengthOf(2);
-        option.options[0].cb();
+    const option = game.deferredActions.pop()!.execute() as OrOptions; // Steal money
+    expect(option.options).has.lengthOf(2);
+    option.options[0].cb();
+    game.deferredActions.pop()!.execute(); // Remove floater
 
-        expect(player.getResourcesOnCard(corpo)).to.eq(0);
-        expect(player2.megaCredits).to.eq(0);
-        expect(player.megaCredits).to.eq(4);
+    expect(player.getResourcesOnCard(corpo)).to.eq(0);
+    expect(player2.megaCredits).to.eq(0);
+    expect(player.megaCredits).to.eq(4);
   });
 });

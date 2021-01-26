@@ -3,7 +3,7 @@ import {CardName} from '../CardName';
 import {ColonyBenefit} from './ColonyBenefit';
 import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
@@ -129,7 +129,7 @@ export abstract class Colony implements SerializedColony {
         player.game.defer(new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
-        }));
+        }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
       }
     }
 

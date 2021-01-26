@@ -22,8 +22,8 @@ export class AirRaid implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
     game.defer(new StealResources(player, Resources.MEGACREDITS, 5));
+    game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
     return undefined;
   }
 

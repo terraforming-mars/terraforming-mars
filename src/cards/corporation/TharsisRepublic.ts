@@ -8,6 +8,8 @@ import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {GainResources} from '../../deferredActions/GainResources';
+import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -49,12 +51,13 @@ export class TharsisRepublic extends Card implements CorporationCard {
   public onTilePlaced(player: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       if (space.player === player) {
-        player.megaCredits += 3;
+        player.game.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
       }
       if (space.spaceType !== SpaceType.COLONY) {
-        player.addProduction(Resources.MEGACREDITS);
+        return new GainProduction(player, Resources.MEGACREDITS);
       }
     }
+    return;
   }
   public play(player: Player, game: Game) {
     if (game.getPlayers().length === 1) {

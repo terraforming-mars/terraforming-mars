@@ -5,6 +5,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
+import {GainResources} from '../../deferredActions/GainResources';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -30,8 +32,9 @@ export class RoverConstruction extends Card implements IProjectCard {
   }
   public onTilePlaced(player: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
-      player.megaCredits += 2;
+      return new GainResources(player, Resources.MEGACREDITS, {count: 2});
     }
+    return;
   }
   public play() {
     return undefined;

@@ -5,6 +5,7 @@ import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -21,9 +22,10 @@ export class LakefrontResorts implements CorporationCard {
       return undefined;
     }
     public onTilePlaced(player: Player, space: ISpace) {
-      if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {
-        player.addProduction(Resources.MEGACREDITS);
+      if (space.tile?.tileType === TileType.OCEAN) {
+        return new GainProduction(player, Resources.MEGACREDITS);
       }
+      return;
     }
     public metadata: CardMetadata = {
       cardNumber: 'R38',

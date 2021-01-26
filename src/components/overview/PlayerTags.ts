@@ -7,13 +7,21 @@ import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
 import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
-import {playerColorClass} from '../../utils/utils';
+import {JovianMultiplier} from './JovianMultiplier';
 
 interface CardTagDiscount {
-  tag: InterfaceTagsType | 'all',
+  tag: InterfaceTagsType,
   amount: number
 }
-type InterfaceTagsType = Tags | SpecialTags | 'separator';
+type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
+
+const JOVIAN_MULTIPLIERS: Array<CardName> = [
+  CardName.IO_MINING_INDUSTRIES,
+  CardName.GANYMEDE_COLONY,
+  CardName.TERRAFORMING_GANYMEDE,
+  CardName.WATER_IMPORT_FROM_EUROPA,
+];
+
 const DISCOUNTS_MAP: Map<CardName, CardTagDiscount> = new Map([
   [CardName.ANTI_GRAVITY_TECHNOLOGY, {
     tag: 'all',
@@ -81,7 +89,7 @@ const hasDiscount = (tag: InterfaceTagsType, cardName: CardName): boolean => {
   if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT) return false;
   const cardDiscount: CardTagDiscount | undefined = DISCOUNTS_MAP.get(cardName);
   if (cardDiscount !== undefined) {
-    return cardDiscount.tag === 'all' || cardDiscount.tag === tag;
+    return cardDiscount.tag === tag;
   }
   return false;
 };
@@ -146,6 +154,7 @@ export const PlayerTags = Vue.component('player-tags', {
   components: {
     'tag-count': TagCount,
     PlayerTagDiscount,
+    JovianMultiplier,
   },
 
   methods: {
@@ -205,7 +214,7 @@ export const PlayerTags = Vue.component('player-tags', {
       }
       return discount;
     },
-    getTagCount(tagName: InterfaceTagsType): number {
+    getTagCount: function(tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
         return this.player.coloniesCount || 0;
       }
@@ -228,10 +237,18 @@ export const PlayerTags = Vue.component('player-tags', {
 
       return 0;
     },
-    getBgDiscountClasses: function(): string {
-      const classes = ['player-discount-background'];
-      classes.push(playerColorClass(this.player.color, 'bg_transparent'));
-      return classes.join(' ');
+    showJovianMultipliers: function(tag: InterfaceTagsType): boolean {
+      return tag === Tags.JOVIAN && this.playerJovianMultipliersCount() > 0;
+    },
+    playerJovianMultipliersCount: function(): number {
+      let multipliers = 0;
+      for (const card of this.player.playedCards) {
+        if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {
+          multipliers += 1;
+        }
+      }
+      console.log(multipliers, 'multi');
+      return multipliers;
     },
   },
   template: `
@@ -239,14 +256,17 @@ export const PlayerTags = Vue.component('player-tags', {
             <div class="player-tags-main">
                 <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" :hideCount="hideVpCount()" />
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
-                <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
+                <div class="tag-and-discount">
+                  <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
+                  <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
+                </div>
             </div>
             <div class="player-tags-secondary">
-                <div :class="getBgDiscountClasses()" />
                 <template v-if="showShortTags()">
                   <div class="tag-count-container" v-for="tag in player.tags">
                     <div class="tag-and-discount" :key="tag.tag">
                       <PlayerTagDiscount v-if="hasTagDiscount(tag.tag)" :amount="getTagDiscountAmount(tag.tag)" :color="player.color" />
+                      <JovianMultiplier v-if="showJovianMultipliers(tag.tag)" :amount="playerJovianMultipliersCount()" />
                       <tag-count :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
                     </div>
                   </div>
@@ -255,6 +275,7 @@ export const PlayerTags = Vue.component('player-tags', {
                     <div class="tag-count-container" v-for="tagName in getTagsPlaceholders()" :key="tagName">
                       <div class="tag-and-discount" v-if="tagName !== 'separator'">
                         <PlayerTagDiscount v-if="hasTagDiscount(tagName)" :color="player.color" :amount="getTagDiscountAmount(tagName)"/>
+                        <JovianMultiplier v-if="showJovianMultipliers(tagName)" :amount="playerJovianMultipliersCount()" />
                         <tag-count :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
                       </div>
                       <div v-else class="tag-separator"></div>

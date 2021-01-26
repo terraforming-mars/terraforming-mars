@@ -4,7 +4,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Game} from '../../Game';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -33,18 +32,18 @@ export class VenusSoils extends Card {
     });
   };
 
-  public canPlay(player: Player, game: Game): boolean {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.PLANTS);
-    game.increaseVenusScaleLevel(player, 1);
+    player.game.increaseVenusScaleLevel(player, 1);
 
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
 

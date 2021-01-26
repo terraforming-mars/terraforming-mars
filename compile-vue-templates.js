@@ -70,6 +70,11 @@ checkComponent(
   ['PLUTO', 'GANYMEDE'],
 );
 checkComponent(
+  'src/components/common/ConfirmDialog',
+  require('./build/src/components/common/ConfirmDialog').ConfirmDialog,
+  ['hide'],
+);
+checkComponent(
   'src/components/CorporationsFilter',
   require('./build/src/components/CorporationsFilter').CorporationsFilter,
   ['cardsByModuleMap', 'customCorporationsList', 'selectedCorporations', 'corpsByModule'],

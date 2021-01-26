@@ -4,7 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -17,9 +16,9 @@ export class SponsoredMohole implements IProjectCard {
     public name = CardName.SPONSORED_MOHOLE;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.KELVINISTS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.KELVINISTS);
       }
       return false;
     }

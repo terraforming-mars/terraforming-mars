@@ -4,7 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
@@ -18,24 +17,24 @@ export class CulturalMetropolis implements IProjectCard {
     public name = CardName.CULTURAL_METROPOLIS;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
         // This card requires player has 2 delegates available
-        return game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (game.turmoil.getDelegates(player.id) > 1 || (game.turmoil.getDelegates(player.id) === 1 && game.turmoil.lobby.has(player.id)));
+        return player.game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (player.game.turmoil.getDelegates(player.id) > 1 || (player.game.turmoil.getDelegates(player.id) === 1 && player.game.turmoil.lobby.has(player.id)));
       }
       return false;
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.ENERGY, -1);
       player.addProduction(Resources.MEGACREDITS, 3);
-      game.defer(new PlaceCityTile(player));
+      player.game.defer(new PlaceCityTile(player));
       const title = 'Select where to send two delegates';
 
-      if (game.turmoil!.getDelegates(player.id) > 1) {
-        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
-      } else if (game.turmoil!.getDelegates(player.id) === 1 && game.turmoil!.lobby.has(player.id)) {
-        game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, true));
+      if (player.game.turmoil!.getDelegates(player.id) > 1) {
+        player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
+      } else if (player.game.turmoil!.getDelegates(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
+        player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, true));
       }
       return undefined;
     }

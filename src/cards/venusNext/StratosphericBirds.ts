@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
@@ -40,11 +39,11 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const cardsWithFloater = player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 
-    const meetsVenusRequirements = game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+    const meetsVenusRequirements = player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
 
     if (cardsWithFloater.length > 1) {
       return meetsVenusRequirements;
@@ -56,8 +55,8 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       return canPayForFloater && meetsVenusRequirements;
     }
   }
-  public play(player: Player, game: Game) {
-    game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
+  public play(player: Player) {
+    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
     return undefined;
   }
   public canAct(): boolean {

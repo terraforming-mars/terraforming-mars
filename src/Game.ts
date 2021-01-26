@@ -286,7 +286,7 @@ export class Game implements ISerializable<SerializedGame> {
     // and 2 neutral cities and forests on board
     if (players.length === 1) {
       //  Setup solo player's starting tiles
-      GameSetup.setupNeutralPlayer(game, rng);
+      GameSetup.setupNeutralPlayer(game);
     }
 
     // Setup Ares hazards
@@ -344,7 +344,7 @@ export class Game implements ISerializable<SerializedGame> {
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(dealer.dealCard());
+            player.dealtProjectCards.push(dealer.dealCard(game));
           }
         }
         if (gameOptions.preludeExtension) {
@@ -1482,12 +1482,17 @@ export class Game implements ISerializable<SerializedGame> {
     return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
   }
 
-  public getSpaceByOffset(direction: -1 | 1, type = 'tile') {
-    const card = this.dealer.dealCard();
+  public discardForCost(toPlace: TileType) {
+    const card = this.dealer.dealCard(this);
     this.dealer.discard(card);
-    this.log('Dealt and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).string(type));
+    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+    return card.cost;
+  }
 
-    const distance = Math.max(card.cost-1, 0); // Some cards cost zero.
+  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType) {
+    const cost = this.discardForCost(toPlace);
+
+    const distance = Math.max(cost-1, 0); // Some cards cost zero.
     const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
       (space) => {
         const adjacentSpaces = this.board.getAdjacentSpaces(space);
@@ -1495,7 +1500,7 @@ export class Game implements ISerializable<SerializedGame> {
             adjacentSpaces.find((sp) => this.board.canPlaceTile(sp)) !== undefined; // can place forest nearby
       });
     if (space === undefined) {
-      throw new Error('Couldn\'t find space when card cost is ' + card.cost);
+      throw new Error('Couldn\'t find space when card cost is ' + cost);
     }
     return space;
   }

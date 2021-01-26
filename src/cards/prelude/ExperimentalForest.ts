@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
@@ -21,9 +20,9 @@ export class ExperimentalForest extends PreludeCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.drawCard(2, {tag: Tags.PLANT});
-    game.defer(new PlaceGreeneryTile(player));
+    player.game.defer(new PlaceGreeneryTile(player));
     return undefined;
   }
 }

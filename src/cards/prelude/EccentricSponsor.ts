@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
@@ -26,8 +25,8 @@ export class EccentricSponsor extends PreludeCard {
     return 0;
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new PlayProjectCard(player));
+  public play(player: Player) {
+    player.game.defer(new PlayProjectCard(player));
     return undefined;
   }
 }

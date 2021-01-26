@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -19,9 +18,9 @@ export class GreatAquifer extends PreludeCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
-    game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
+  public play(player: Player) {
+    player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
+    player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;
   }
 }

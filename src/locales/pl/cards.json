@@ -23,11 +23,6 @@
     "Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.": "Akcja: Wydaj 1 jednostkę energii, żeby otrzymać po 1 jednostce MC za każdy obszar miasta NA POWIERZCHNI PLANETY",
 
     "Capital": "Stolica",
-    "2 Oceans": "2 Oceany",
-    "3 Oceans": "3 Oceany",
-    "4 Oceans": "4 Oceany",
-    "5 Oceans": "5 Oceanów",
-    "6 Oceans": "6 Oceanów",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Umieść ten obszar na planszy. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję MC o 5 poziomów.",
     "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "OTRZYMUJESZ PO 1 PZ ZA KAŻDY OBSZAR OCEANU SĄSIADUJĄCY Z TYM OBSZAREM.",
 
@@ -667,22 +662,6 @@
     "Increase your MC production 1 step for every 2 Building tags you have, including this.": "Podnieś swoją produkcję MC o 1 poziom za każde 2 posiadane symbole budowli (z tym włącznie).",
 
     "AI Central": "Centrala SI",
-    "2 Science": "2 symbole nauki",
-    "3 Science": "3 symbole nauki",
-    "4 Science": "4 symbole nauki",
-    "5 Science": "5 symboli nauki",
-    "7 Science": "7 symboli nauki",
     "Action: Draw 2 cards.": "Akcja: Dobierz 2 karty.",
-    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Musisz posiadać przynajmniej 3 symbole nauki. Obniż swoją produkcję energii o 1 poziom.",
-    "Jovian": "Jowisz",
-    "Sell": "Sprzedaj",
-    "PRELUDE": "PRELUDIUM",
-    "EFFECT": "EFEKT",
-    "ACTION": "AKCJA",
-    "Select prelude card to play": "Wybierz kartę preludium, którą chcesz zagrać.",
-    "Select space for ocean tile": "Wybierz pole, na którym chcesz umieścić ocean.",
-    "Venus Milestone/Award": "Tytuły/Nagrody Wenus",
-
-    "${0} placed ${1} tile on (${2}, ${3}": "${0} umieścił \"${1}\" obszar na (${2}, ${3}"
-
+    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Musisz posiadać przynajmniej 3 symbole nauki. Obniż swoją produkcję energii o 1 poziom."
 }

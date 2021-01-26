@@ -49,7 +49,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       }
 
       if (this.deck.length === 0) {
-        game.log('The discard has been shuffled to form a new deck.');
+        game.log('The discard pile has been shuffled to form a new deck.');
         this.deck = this.shuffleCards(this.discarded);
         this.discarded = [];
       }

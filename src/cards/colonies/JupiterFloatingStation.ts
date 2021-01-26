@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
@@ -32,10 +31,10 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {
+          player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {
             restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
           }));
           return undefined;

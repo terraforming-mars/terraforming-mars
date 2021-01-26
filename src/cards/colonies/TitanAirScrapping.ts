@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -22,25 +21,25 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
     public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
-    public canAct(player: Player, game: Game): boolean {
+    public canAct(player: Player): boolean {
       const hasTitanium = player.titanium > 0;
       const hasResources = this.resourceCount >= 2;
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
         return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && hasResources);
       }
 
       return hasTitanium || hasResources;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const opts: Array<SelectOption> = [];
 
       const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
       const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
       if (this.resourceCount >= 2 && player.titanium > 0) {
-        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
         if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
           opts.push(spendResource);
         }

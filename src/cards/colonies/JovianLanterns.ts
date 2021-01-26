@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {IResourceCard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -24,10 +23,10 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
     public resourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
+    public canPlay(player: Player): boolean {
       const meetsTagRequirements = player.getTagCount(Tags.JOVIAN) >= 1;
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
         return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTagRequirements;
       }
 
@@ -44,8 +43,8 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    public play(player: Player) {
+      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
       player.increaseTerraformRating();
       return undefined;
     }

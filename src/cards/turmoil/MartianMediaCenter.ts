@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -18,9 +17,9 @@ export class MartianMediaCenter implements IProjectCard {
     public name = CardName.MARTIAN_MEDIA_CENTER;
     public cardType = CardType.ACTIVE;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        return game.turmoil.canPlay(player, PartyName.MARS);
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        return player.game.turmoil.canPlay(player, PartyName.MARS);
       }
       return false;
     }
@@ -30,13 +29,13 @@ export class MartianMediaCenter implements IProjectCard {
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
-      return player.canAfford(3) && game.turmoil!.hasAvailableDelegates(player.id);
+    public canAct(player: Player): boolean {
+      return player.canAfford(3) && player.game.turmoil!.hasAvailableDelegates(player.id);
     }
 
-    public action(player: Player, game: Game) {
-      game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
-      game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', 1, undefined, undefined, false));
+    public action(player: Player) {
+      player.game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
+      player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', 1, undefined, undefined, false));
       return undefined;
     }
 

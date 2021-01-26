@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -17,9 +16,9 @@ export class GMOContract implements IProjectCard {
   public name = CardName.GMO_CONTRACT;
   public cardType = CardType.ACTIVE;
 
-  public canPlay(player: Player, game: Game): boolean {
-    if (game.turmoil !== undefined) {
-      return game.turmoil.canPlay(player, PartyName.GREENS);
+  public canPlay(player: Player): boolean {
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, PartyName.GREENS);
     }
     return false;
   }

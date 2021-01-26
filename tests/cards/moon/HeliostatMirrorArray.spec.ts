@@ -1,14 +1,14 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
-import {setCustomGameOptions, setPlayerProductionForTest, TestPlayers} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {HeliostatMirrorArray} from '../../../src/cards/moon/HeliostatMirrorArray';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('HeliostatMirrorArray', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: HeliostatMirrorArray;
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe('HeliostatMirrorArray', () => {
   });
 
   it('play', () => {
-    setPlayerProductionForTest(player, {energy: 0});
+    player.setProductionForTest({energy: 0});
     player.titanium = 1;
     player.heat = 0;
 

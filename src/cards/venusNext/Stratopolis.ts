@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
@@ -46,9 +45,9 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
   public canPlay(player: Player): boolean {
     return player.getTagCount(Tags.SCIENCE) >= 2;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
+    player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
   }
   public getVictoryPoints(): number {

@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
@@ -40,12 +39,12 @@ export class MaxwellBase extends Card implements IActionCard {
       },
     });
   };
-  public canPlay(player: Player, game: Game): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+  public canPlay(player: Player): boolean {
+    return player.getProduction(Resources.ENERGY) >= 1 && player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
+    player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
     return undefined;
   }
   public getVictoryPoints() {

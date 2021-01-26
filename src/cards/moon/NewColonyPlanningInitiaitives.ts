@@ -1,8 +1,8 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 

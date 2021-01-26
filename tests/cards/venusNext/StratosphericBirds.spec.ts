@@ -24,22 +24,22 @@ describe('StratosphericBirds', function() {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     (game as any).venusScaleLevel = 10;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if no floater', function() {
     (game as any).venusScaleLevel = 12;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     (game as any).venusScaleLevel = 12;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
 
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
     expect(game.deferredActions.pop()!.execute()).is.undefined;
   });
@@ -61,7 +61,7 @@ describe('StratosphericBirds', function() {
     player.addResourceTo(deuteriumExport, 1);
     player.addResourceTo(extractorBalloons, 1);
 
-    card.play(player, game);
+    card.play(player);
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
 
@@ -80,13 +80,13 @@ describe('StratosphericBirds', function() {
     player.megaCredits = 9;
 
     // 9 MC + 1 Dirigibles floater: Cannot play
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
 
     // 12 MC + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
     const SelectHowToPayForProjectCard = player.playProjectCard();
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
     expect(function() {
@@ -109,7 +109,7 @@ describe('StratosphericBirds', function() {
     player.megaCredits = 3;
 
     const selectHowToPayForCard = player.playProjectCard();
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     selectHowToPayForCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 3, microbes: 0, floaters: 3});

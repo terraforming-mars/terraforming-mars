@@ -19,12 +19,12 @@ describe('Thermophiles', function() {
 
   it('Can\'t play', function() {
     (game as any).venusScaleLevel = 4;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).venusScaleLevel = 6;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     const action = card.play();
     expect(action).is.undefined;
   });
@@ -33,14 +33,14 @@ describe('Thermophiles', function() {
     card.play();
     player.playedCards.push(card, new VenusianInsects());
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
         action!.cb([card]);
         expect(card.resourceCount).to.eq(1);
 
         player.addResourceTo(card);
 
-        const orOptions = card.action(player, game) as OrOptions;
+        const orOptions = card.action(player) as OrOptions;
         expect(orOptions).is.not.undefined;
         expect(orOptions instanceof OrOptions).is.true;
         orOptions.options[0].cb();
@@ -52,13 +52,13 @@ describe('Thermophiles', function() {
     card.play();
     player.playedCards.push(card);
 
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.not.true;
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);

@@ -4,7 +4,7 @@ import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 import {AncientShipyards} from './AncientShipyards';
-// import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
+import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
 // import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 // import {AlgaeBioreactors} from './AlgaeBioreactors';
@@ -134,7 +134,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRIDE_OF_THE_EARTH_ARKSHIP, Factory: PrideoftheEarthArkship},
     {cardName: CardName.IRON_EXTRACTION_CENTER, Factory: IronExtractionCenter},
     {cardName: CardName.TITANIUM_EXTRACTION_CENTER, Factory: TitaniumExtractionCenter},
-    // {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
+    {cardName: CardName.ARCHIMEDES_HYDROPONICS_STATION, Factory: ArchimedesHydroponicsStation},
     {cardName: CardName.STEEL_MARKET_MONOPOLISTS, Factory: SteelMarketMonopolists},
     {cardName: CardName.TITANIUM_MARKET_MONOPOLISTS, Factory: TitaniumMarketMonopolists},
     {cardName: CardName.LUNA_STAGING_STATION, Factory: LunaStagingStation},

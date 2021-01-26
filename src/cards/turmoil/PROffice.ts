@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -18,10 +17,10 @@ export class PROffice implements IProjectCard {
     public name = CardName.PR_OFFICE;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (game.turmoil !== undefined) {
-        const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.UNITY);
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    public canPlay(player: Player): boolean {
+      if (player.game.turmoil !== undefined) {
+        const meetsPartyRequirements = player.game.turmoil.canPlay(player, PartyName.UNITY);
+        if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
           return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyRequirements;
         }
 

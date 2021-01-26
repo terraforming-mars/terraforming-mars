@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -40,8 +39,8 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
   }
   public play() {
     return undefined;

@@ -171,7 +171,7 @@ export class MoonExpansion {
           } else if (tileType === TileType.MOON_MINE) {
             include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && space.tile?.tileType === tileType;
+            include = include && spaceTileType === tileType;
           }
 
           if (surfaceOnly) {

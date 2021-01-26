@@ -6,13 +6,8 @@ export const JovianMultiplier = Vue.component('JovianMultiplier', {
       type: Number,
     },
   },
-  methods: {
-    getClasses: function(): string {
-      const classes = ['player-jovian-multiplier'];
-      return classes.join(' ');
-    },
-  },
+  methods: {},
   template: `
-    <div :class="getClasses()">{{ amount }}</div>
+    <div class="player-jovian-multiplier">{{ amount }}</div>
   `,
 });

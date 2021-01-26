@@ -18,7 +18,6 @@ type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 const JOVIAN_MULTIPLIERS: Array<CardName> = [
   CardName.IO_MINING_INDUSTRIES,
   CardName.GANYMEDE_COLONY,
-  CardName.TERRAFORMING_GANYMEDE,
   CardName.WATER_IMPORT_FROM_EUROPA,
 ];
 
@@ -247,7 +246,6 @@ export const PlayerTags = Vue.component('player-tags', {
           multipliers += 1;
         }
       }
-      console.log(multipliers, 'multi');
       return multipliers;
     },
   },

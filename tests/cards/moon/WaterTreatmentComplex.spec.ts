@@ -1,22 +1,23 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {NewColonyPlanningInitiaitives} from '../../../src/cards/moon/NewColonyPlanningInitiaitives';
+import {WaterTreatmentComplex} from '../../../src/cards/moon/WaterTreatmentComplex';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {IMoonData} from '../../../src/moon/IMoonData';
+import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
-describe('NewColonyPlanningInitiaitives', () => {
+describe('WaterTreatmentComplex', () => {
   let player: Player;
-  let card: NewColonyPlanningInitiaitives;
+  let card: WaterTreatmentComplex;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
-    card = new NewColonyPlanningInitiaitives();
+    card = new WaterTreatmentComplex();
     moonData = MoonExpansion.moonData(game);
   });
 
@@ -24,21 +25,31 @@ describe('NewColonyPlanningInitiaitives', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    moonData.colonyRate = 2;
+    const space = moonData.moon.getAvailableSpacesOnLand()[0];
+
+    player.titanium = 1;
+    space.tile = {tileType: TileType.MOON_COLONY};
     expect(player.getPlayableCards()).does.include(card);
 
-    moonData.colonyRate = 1;
+    player.titanium = 0;
+    space.tile = {tileType: TileType.MOON_COLONY};
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    player.titanium = 1;
+    space.tile = {tileType: TileType.MOON_ROAD};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    moonData.colonyRate = 2;
+    expect(moonData.colonyRate).eq(0);
     expect(player.getTerraformRating()).eq(14);
+    player.titanium = 1;
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(3);
+    expect(player.titanium).eq(0);
+    expect(moonData.colonyRate).eq(2);
+    expect(player.getTerraformRating()).eq(16);
   });
 });
 

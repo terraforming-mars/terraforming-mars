@@ -1,22 +1,22 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {NewColonyPlanningInitiaitives} from '../../../src/cards/moon/NewColonyPlanningInitiaitives';
+import {LunarTradeFleet} from '../../../src/cards/moon/LunarTradeFleet';
 import {expect} from 'chai';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
-describe('NewColonyPlanningInitiaitives', () => {
-  let player: Player;
-  let card: NewColonyPlanningInitiaitives;
+describe('LunarTradeFleet', () => {
+  let player: TestPlayer;
+  let card: LunarTradeFleet;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
-    card = new NewColonyPlanningInitiaitives();
+    card = new LunarTradeFleet();
     moonData = MoonExpansion.moonData(game);
   });
 
@@ -24,21 +24,23 @@ describe('NewColonyPlanningInitiaitives', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    moonData.colonyRate = 2;
+    player.setProductionForTest({titanium: 2});
     expect(player.getPlayableCards()).does.include(card);
 
-    moonData.colonyRate = 1;
+    player.setProductionForTest({titanium: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    moonData.colonyRate = 2;
+    player.setProductionForTest({megacredits: 0});
     expect(player.getTerraformRating()).eq(14);
+    moonData.logisticRate = 0;
 
     card.play(player);
 
+    player.setProductionForTest({megacredits: 2});
+    expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(3);
   });
 });
 

@@ -1,22 +1,24 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {NewColonyPlanningInitiaitives} from '../../../src/cards/moon/NewColonyPlanningInitiaitives';
+import {MicrosingularityPlant} from '../../../src/cards/moon/MicrosingularityPlant';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {IMoonData} from '../../../src/moon/IMoonData';
+import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
-describe('NewColonyPlanningInitiaitives', () => {
+describe('MicrosingularityPlant', () => {
   let player: Player;
-  let card: NewColonyPlanningInitiaitives;
+  let card: MicrosingularityPlant;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
-    card = new NewColonyPlanningInitiaitives();
+    card = new MicrosingularityPlant();
     moonData = MoonExpansion.moonData(game);
   });
 
@@ -24,21 +26,23 @@ describe('NewColonyPlanningInitiaitives', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    moonData.colonyRate = 2;
+    const space1 = moonData.moon.getAvailableSpacesOnLand()[0];
+    const space2 = moonData.moon.getAvailableSpacesOnLand()[1];
+
+    space1.tile = {tileType: TileType.MOON_COLONY};
+    space2.tile = {tileType: TileType.MOON_COLONY};
     expect(player.getPlayableCards()).does.include(card);
 
-    moonData.colonyRate = 1;
+    space2.tile = {tileType: TileType.MOON_ROAD};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    moonData.colonyRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.getProduction(Resources.ENERGY)).eq(0);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
-    expect(moonData.colonyRate).eq(3);
+    expect(player.getProduction(Resources.ENERGY)).eq(2);
   });
 });
 

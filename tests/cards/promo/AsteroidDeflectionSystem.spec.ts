@@ -7,13 +7,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AsteroidDeflectionSystem', function() {
-  let card : AsteroidDeflectionSystem; let player : Player; let game : Game;
+  let card : AsteroidDeflectionSystem; let player : Player;
 
   beforeEach(function() {
     card = new AsteroidDeflectionSystem();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -32,8 +32,8 @@ describe('AsteroidDeflectionSystem', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
 
-    while (game.dealer.discarded.find((card) => card.tags.includes(Tags.SPACE)) === undefined) {
-      card.action(player, game);
+    while (player.game.dealer.discarded.find((card) => card.tags.includes(Tags.SPACE)) === undefined) {
+      card.action(player);
     }
 
     expect(card.resourceCount).to.eq(1);

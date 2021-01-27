@@ -1,4 +1,3 @@
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
@@ -34,10 +33,10 @@ export class LawSuit extends Card implements IProjectCard {
     return player.removingPlayers.length > 0;
   }
 
-  public play(player: Player, game: Game) {
-    return new SelectPlayer(game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 MC from)', 'Steal MC', (suedPlayer: Player) => {
+  public play(player: Player) {
+    return new SelectPlayer(player.game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 MC from)', 'Steal MC', (suedPlayer: Player) => {
       player.setResource(Resources.MEGACREDITS, Math.min(3, suedPlayer.getResource(Resources.MEGACREDITS)));
-      suedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
+      suedPlayer.setResource(Resources.MEGACREDITS, -3, player.game, player);
       suedPlayer.playedCards.push(this);
       return undefined;
     });

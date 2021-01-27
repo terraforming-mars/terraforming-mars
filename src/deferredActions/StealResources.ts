@@ -13,6 +13,9 @@ export class StealResources implements DeferredAction {
         public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
   ) {}
 
+  // Set this when you want to get a callback when the steal is completed.
+  public stealComplete: () => void = () => {};
+
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.setResource(this.resource, this.count);
@@ -38,6 +41,7 @@ export class StealResources implements DeferredAction {
         () => {
           candidate.setResource(this.resource, -qtyToSteal, this.player.game, this.player);
           this.player.setResource(this.resource, qtyToSteal);
+          this.stealComplete();
           return undefined;
         },
       );

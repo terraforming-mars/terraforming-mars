@@ -81,7 +81,7 @@ export const MoonBoard = Vue.component('moonboard', {
   },
   // Do I need board-cont?
   template: `
-    <div class="board-cont moon-board">
+    <div class="board-cont moon-board" id="moon_board">
         <div class="board-outer-spaces">
           <moon-space :space="getSpaceById('m01')" text="Luna Space Station"></moon-space>
           <moon-space :space="getSpaceById('m21')" text="Momentum Virium Habitat"></moon-space>

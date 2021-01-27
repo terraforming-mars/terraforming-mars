@@ -123,16 +123,16 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
 ];
 
 export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.gameOptions.coloniesExtension === false || tag === SpecialTags.CITY_COUNT) {
+  if (player.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
     return false;
   }
-  if ((player.turmoil !== undefined) === false && tag === SpecialTags.INFLUENCE) {
+  if (player.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
     return false;
   }
   if (player.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
     return false;
   }
-  if (player.gameOptions.moonExpansion && tag === Tags.MOON) {
+  if (player.gameOptions.moonExpansion === false && tag === Tags.MOON) {
     return false;
   }
   return true;

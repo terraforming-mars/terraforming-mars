@@ -41,7 +41,7 @@
 
   "Asteroid Deflection System": "Asteroid Deflection System",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Akcja: Odkryj i odrzuć wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem przestrzeni kosmicznej, umieść tu 1 jednostkę asteroid.\n",
-  "opponents may not remove your plants": "Efekt trwały: Przeciwnicy nie mogą usuwać twoich jednostek roślinności.\n",
+  "opponents may not remove your plants": "Efekt trwały: Przeciwnicy nie mogą usuwać twoich roślin",
   "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
 
   "Jovian Embassy": "Jovian Embassy",
@@ -96,7 +96,7 @@
 
   "Self-replicating Robots": "Maszyny samoreplikujące",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Akcja: Odkryj i umieść na tej karcie kartę z symbolem przestrzeni kosmicznej lub budowli ze swojej ręki i umieść na niej 2 surowce, albo podwój liczbę zasobów na tej karcie.",
-  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efekt trwały: Karty umieszczone na tej karcie mogą być zagrywane jak z ręki z kosztem zagrania obniżonym o umieszczoną na niej liczbę zasobów. Wymagania: musisz posiadać przynajmniej 2 symbole nauki.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efekt trwały: Karty umieszczone na tej karcie mogą być zagrywane jak z ręki z kosztem zagrania obniżonym o umieszczoną na niej liczbę zasobów.",
 
   "Dusk Laser Mining": "Nocne górnictwo laserowe",
   "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Wymagania: Musisz posiadać przynajmniej 2 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Otrzymujesz 4 jednostki tytanu.",
@@ -105,7 +105,7 @@
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Akcja: Wydaj dowolną liczbę jednostek energii, aby dobrać tyle samo kart. WEŹ 1 Z NICH NA RĘKĘ, ODRZUĆ RESZTĘ.",
 
   "Mercurian Alloys": "Merkuriańskie stopy",
-  "Effect: Your titanium resources are worth 1 MC extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 MC więcej. Wymagania: Musisz posiadać przynajmniej 2 symbole nauki.",
+  "Effect: Your titanium resources are worth 1 MC extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 MC więcej.",
 
   "Energy Market": "Rynek energetyczny",
   "Action: Spend 2X MC to gain X energy.": "Akcja: Wydaj 2*X MC, aby otrzymać X jednostek energii.",

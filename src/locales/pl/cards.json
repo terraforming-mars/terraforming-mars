@@ -504,7 +504,7 @@
 
     "Caretaker Contract": "Kontrakt Nadzorczy",
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "Akcja: Wydaj 8 jednostek ciepła, żeby podnieść swój współczynnik terraformacji o 1.",
-    "Requires 0 C or warmer.": "Temperatura musi być równa albo wyższa o 0°C.",
+    "Requires 0° C or warmer.": "Temperatura musi być równa albo wyższa o 0°C.",
 
     "Designed Micro-organisms": "Zaprojektowane Mikroorganizmy",
     "It must be -14 C or colder. Increase your Plant production 2 steps.": "Temperatura musi być równa albo niższa niż -14°C. Podnieś swoją produkcję roślinności o 2 poziomy.",

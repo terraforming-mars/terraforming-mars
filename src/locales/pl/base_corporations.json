@@ -27,7 +27,7 @@
     "Effect: Your titanium resources are each worth 1 MC extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 MC więcej.",
 
     "THARSIS": "REPUBLIKA",
-    "  REPUBLIC": "  THARSIS",
+    "REPUBLIC": "THARSIS",
     "You start with 40 MC. As your first action in the game,place a city tile.": "Rozpoczynasz grę z 40 MC. W ramach swojej pierwszej akcji w grze umieść na planszy obszar miasta.",
     "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Za każdym razem, gdy któryś z graczy umieści NA MARSIE obszar miasta, podnieś swoją produkcję MC o 1 poziom. Jeśli to Ty umieściłeś obszar miasta, otrzymujesz dodatkowo 3 MC.",
 
@@ -40,12 +40,12 @@
     "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 MC, żeby podnieść go o dodatkowy punkt.",
 
     "Mining Guild": "Mining Guild",
-    "You start with 30 MC, 5 steel, and 1 steel production.": "Rozpoczynasz grę z 30 MC, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
+    "You start with 30 MC, 5 steel and 1 steel production.": "Rozpoczynasz grę z 30 MC, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Efekt trwały: Za każdym razem, gdy otrzymujesz premię w dowolnej ilości jednostek stali lub tytanu z pola na planszy, podnieś swoją produkcję stali o 1 poziom.",
 
     "Terractor": "Terractor",
     "You start with 60 MC.": "Rozpoczynasz grę z 60 MC",
-    "Effect: When playing an Earth card, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
 
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji tytanu i 42 MC.",

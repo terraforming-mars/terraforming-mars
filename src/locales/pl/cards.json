@@ -649,7 +649,7 @@
 
     "Restricted Area": "Obszar Zastrzeżony",
     "Action: Spend 2 MC to draw a card.": "Akcja: Wydaj 2 MC, żeby dobrać 1 kartę.",
-    "Place this tile.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, dobiera 1 kartę.",
+    "Place this tile.": "Umieść ten obszar na planszy.",
 
     "Immigrant City": "Miasto Imigrantów",
     "Effect: When a City tile is placed, including this, increase your MC production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta (z tym włącznie), podnieś swoją produkcję MC o 1 poziom.",
@@ -667,7 +667,7 @@
     "Technology Demonstration": "Pokaz Technologii",
     "Draw two cards.": "Dobierz 2 karty.",
 
-    "Rad-Chem Factory": "Związki Przeciwpromienne",
+    "Rad-chem Factory": "Związki Przeciwpromienne",
     "Decrease your Energy production 1 step. Raise your TR 2 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swój współczynnik terraformacji o 2.",
 
     "Special Design": "Projekt Specjalny",

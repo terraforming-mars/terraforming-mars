@@ -14,7 +14,6 @@
     "Increase your MC production 1 step per CARD WITH NO TAGS, including this.": "Podnieś swoją produkcję MC o 1 poziom za każdą posiadaną kartę bez symboli (z tą włącznie).",
 
     "Conscription": "Pobór",
-    "NEXT CARD:": "NASTĘPNA KARTA:",
     "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Musisz posiadać przynajmniej 2 symbole ziemi. Nastepna zagrana przez Ciebie podczas tego pokolenia karta będzie kosztować o 16 MC mniej.",
 
     "Corona Extractor": "Ekstraktor Korony",
@@ -93,10 +92,10 @@
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Podnieś swój WT o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
 
     "Pioneer Settlement": "Osada Pionierów",
-    "Requires that you have no more than 1 colony. Decrease your MC production 2 steps. Place a colony.": "Możesz mieć maksymalnie 1 kolonię. Obniż swoją produkcję MC o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
+    "Requires that you have no more than 1 colony. Decrease your MC production 2 steps. Place a colony.": "Wymagania: Możesz mieć maksymalnie 1 kolonię. Obniż swoją produkcję MC o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
 
     "Productive Outpost": "Wydajna Placówka",
-    "GAIN ALL YOUR COLONY BONUSES": "OTRZYMUJESZ PREMIĘ KOLONIALNĄ ZA WSZYSTKIE SWOJE KOLONIE.",
+    "Gain all your colony bonuses.": "OTRZYMUJESZ PREMIĘ KOLONIALNĄ ZA WSZYSTKIE SWOJE KOLONIE.",
 
     "Quantum Communications": "Komunikacja Kwantowa",
     "Requires 4 Science tags. Increase your MC production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję MC o 1 poziom za każdą kolonię w grze.",

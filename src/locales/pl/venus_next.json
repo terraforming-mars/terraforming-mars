@@ -9,6 +9,7 @@
   "Venusian Plants":"Wenusjańskie Rośliny",
   "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 16%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 1 jednostkę mikrobów albo zwierząt na innej karcie z symbolem Wenus.",
 
+  "Extremophiles":"Ekstremofile",
   "Action: Add 1 microbe to ANY card.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie.",
   "1 VP for every 3rd Microbe on this card.":" Otrzymujesz po 1 PZ za każde 3 jednostki mikrobów znajdujące się na tej karcie.",
   "Requires 2 Science tags.":"Musisz posiadać przynajmniej 2 symbole nauki.",
@@ -124,7 +125,7 @@
   "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, MC +2.":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 10%. Umieść 2 jednostki mikrobów albo 2 jednostki zwierząt na innej karcie z symbolem Wenus. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
   "Giant Solar Shade":"Olbrzymia Osłona Przeciwsłoneczna",
-  "Raise Venus 3 steps.":"Podnieś Współczynnik Terraformacji Wenus o 3 poziom.",
+  "Raise Venus 3 steps.":"Podnieś Współczynnik Terraformacji Wenus o 3 poziomy.",
 
   "Gyropolis":" Żyropolis",
   "Decrease your energy production 2 steps. Increase your MC production 1 step for each Venus and Earth tag you have. Place a City tile.":"Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję MC o 1 poziomy za każdy posiadany symbol Ziemi i Wenus.",
@@ -178,8 +179,8 @@
   "Orbital Reflectors":"Reflektor Orbitalny",
   "Raise Venus 2 steps. Increase your heat production 2 steps.":"Podnieś Współczynnik Terraformacji Wenus o 2 poziomy. Podnieś swoją produkcję ciepła o 2 poziomy.",
 
-  "Saturn Surfing":"Surfowanie na Saturnie",
-  "Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Akcja: Wydaj 1 jednostkę dryfowców z tej karty, żeby otrzymać po 1 MC za każdą wykorzystaną jednostkę (z tą włącznie) (maksymalnie 5).",
-  "Add 1 floater here for every Earth tag you have, including this.":"Umieść po 1 jednostce dryfowców na tej karcie za każdy posiadany symbol Ziemi (z tym włącznie)."
+  "Saturn Surfing":"Saturiański Cloudsurfing",
+  "Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Akcja: Usuń z tej karty 1 jednostkę dryfowców, aby otrzymać po 1 MC za każdą znajdującą się na tej karcie jednostkę dryfowców, włączając tę, KTÓRĄ USUNĄŁEŚ (max 5).",
+  "Add 1 floater here for every Earth tag you have, including this.":"Umieść na tej karcie po 1 jednostce dryfowców za każdy posiadany symbol Ziemi (z tym włącznie)."
 
 }

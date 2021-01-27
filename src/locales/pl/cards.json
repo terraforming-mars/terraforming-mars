@@ -77,7 +77,6 @@
 
     "Predators": "Drapieżniki",
     "Action: Remove 1 Animal from any card and add it to this card.": "Akcja: Usuń 1 jednostkę zwierząt z innej karty dowolnego gracza i umieść ją na tej karcie.",
-    "1 VP per Animal on this card.": "Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
     "Requires 11% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 11%.",
 
     "Space Station": "Stacja Kosmiczna",
@@ -170,7 +169,7 @@
 
     "Fish": "Ryby",
     "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "1 VP for each Animal on this card.": "Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
+    "1 VP for each Animal on this card.": "1 PZ za każdą jednostkę zwierząt na tej karcie.",
     "Requires +2 C° or warmer. Decrease any Plant production 1 step.": "Temperatura musi być równa albo wyższa niż 2°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Lake Marineris": "Jezioro Marineris",
@@ -480,7 +479,7 @@
 
     "Herbivores": "Roślinożercy",
     "Effect: When you place a greenery tile, add an Animal to this card.": "Efekt trwały: Za każdym razem, gdy umieścisz na planszy obszar zieleni, umieść na tej karcie 1 jednostkę zwierząt.",
-    "1 VP per 2 Animals on this card.": "Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+    "1 VP per 2 Animals on this card.": "1 PZ za każde 2 jednostki zwierząt na tej karcie.",
     "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Poziom Tlenu musi być równy albo wyższy niż 8%. Umieść na tej karcie 1 jednostkę zwierząt. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Insects": "Insekty",
@@ -601,7 +600,6 @@
     "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 6%. Obniż produkcję roślinności dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 2 poziomy.",
 
     "Livestock": "Trzoda",
-    "1 VP for each Animal on this card.": "Otrzymujesz po 1 PZ za każdą jednostkę zwierząt znajdującą się na tej karcie.",
     "Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps": "Poziom Tlenu musi być równy albo wyższy niż 9%. Obniż swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Olympus Conference": "Konferencja Olimpijska",

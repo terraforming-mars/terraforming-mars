@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import {Tag} from './Tag';
 import {Tags} from '../cards/Tags';
+import {SpecialTags} from '../cards/SpecialTags';
 
 export const TagCount = Vue.component('tag-count', {
   props: {
     tag: {
-      type: String as () => Tags,
+      type: String as () => Tags|SpecialTags,
     },
     count: {
       type: Number,
@@ -30,11 +31,6 @@ export const TagCount = Vue.component('tag-count', {
       if (this.count === 0) {
         classes.push('tag-no-show');
       }
-      // event tag is added to the tail because it is not counted for actual tag for some cards and turmoil events (e.g. Interplanetary Trade)
-      if (this.tag === Tags.EVENT) {
-        classes.push('tag-event-separate');
-      }
-
       return classes.join(' ');
     },
     getCountClasses: function(): string {

@@ -88,7 +88,7 @@
     "Molecular Printing": "Druk Molekularny",
     "Gain 1 MC for each city tile in play. Gain 1 MC for each colony in play.": "Otrzymujesz 1 MC za każdy obszar miasta w grze. Otrzymujesz 1 MC za każdą kolonię w grze.",
 
-    "Nitrogen From Titan": "Azot z Tytana",
+    "Nitrogen from Titan": "Azot z Tytana",
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Podnieś swój WT o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
 
     "Pioneer Settlement": "Osada Pionierów",
@@ -165,8 +165,4 @@
     "Warp Drive": "Napęd Warp",
     "Effect: When you play a Space card, you pay 4 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 MC mniej.",
     "Requires 5 Science tags.": "Musisz posiadać przynajmniej 5 symboli nauki.",
-
-    "Colony City": "Kolonia Miasto",
-    "max 1 Colony": "max 1 Kolonia",
-    "2 Cities": "2 obszary miasta"
 }

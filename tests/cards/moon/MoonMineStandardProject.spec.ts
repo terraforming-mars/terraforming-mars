@@ -8,6 +8,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
+import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -31,11 +32,11 @@ describe('MoonMineStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    let payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(20);
-    // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
-    // expect(payAction.amount).eq(16);
+    player.playedCards.push(new MooncrateBlockFactory());
+    payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    expect(payAction.amount).eq(16);
   });
 
   it('act', () => {

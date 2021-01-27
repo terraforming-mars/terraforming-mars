@@ -7,6 +7,7 @@ import {MoonRoadStandardProject} from '../../../src/cards/moon/MoonRoadStandardP
 import {expect} from 'chai';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
+import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -30,11 +31,11 @@ describe('MoonRoadStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    let payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(18);
-    // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
-    // expect(payAction.amount).eq(14);
+    player.playedCards.push(new MooncrateBlockFactory());
+    payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    expect(payAction.amount).eq(14);
   });
 
   it('act', () => {

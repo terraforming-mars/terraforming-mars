@@ -70,7 +70,7 @@ import {MicrosingularityPlant} from './MicrosingularityPlant';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
 import {MoonColonyStandardProject} from './MoonColonyStandardProject';
-// import {MooncrateBlockFactory} from './MooncrateBlockFactory';
+import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
@@ -146,7 +146,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // These cards have behavior and rendering.
     {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
     {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
-    //   {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},
+    {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},
     //   {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
     {cardName: CardName.HELIOSTAT_MIRROR_ARRAY, Factory: HeliostatMirrorArray},

@@ -31,11 +31,11 @@ describe('MoonColonyStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    const payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    let payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(22);
-    // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
-    // expect(payAction.amount).eq(18);
+    player.playedCards.push(new MooncrateBlockFactory());
+    payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    expect(payAction.amount).eq(18);
   });
 
   it('act', () => {

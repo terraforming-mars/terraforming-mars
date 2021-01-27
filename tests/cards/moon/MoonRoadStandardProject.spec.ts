@@ -31,10 +31,12 @@ describe('MoonRoadStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    let payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    let payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(18);
+
     player.playedCards.push(new MooncrateBlockFactory());
-    payAction = game.deferredActions.peek() as SelectHowToPayDeferred;
+    card.action(player);
+    payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(14);
   });
 

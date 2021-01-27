@@ -4,7 +4,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class DecreaseAnyProduction implements DeferredAction {
-  public priority = Priority.DECREASE_ANY_PRODUCTION;
+  public priority = Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public resource: Resources,

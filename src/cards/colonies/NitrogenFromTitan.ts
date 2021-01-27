@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -18,17 +17,17 @@ export class NitrogenFromTitan implements IProjectCard {
     public name = CardName.NITROGEN_FROM_TITAN;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game) : boolean {
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    public canPlay(player: Player) : boolean {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
         return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, false, true);
       }
 
       return true;
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.increaseTerraformRatingSteps(2);
-      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }
     public getVictoryPoints() {

@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
@@ -17,20 +16,20 @@ export class UrbanDecomposers implements IProjectCard {
     public name = CardName.URBAN_DECOMPOSERS;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
+    public canPlay(player: Player): boolean {
       let coloniesCount: number = 0;
-      game.colonies.forEach((colony) => {
+      player.game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
       return coloniesCount > 0 && player.getCitiesCount() > 0;
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.PLANTS, 1);
 
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
       if (microbeCards.length) {
-        game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+        player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
       }
 
       return undefined;

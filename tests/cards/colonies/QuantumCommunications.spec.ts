@@ -11,17 +11,17 @@ describe('QuantumCommunications', function() {
     const card = new QuantumCommunications();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     const colony1 = new Luna();
     const colony2 = new Triton();
 
     colony1.colonies.push(player.id);
     colony2.colonies.push(player.id);
 
-    game.colonies.push(colony1);
-    game.colonies.push(colony2);
+    player.game.colonies.push(colony1);
+    player.game.colonies.push(colony2);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

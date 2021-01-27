@@ -18,7 +18,7 @@ describe('AerospaceMission', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;

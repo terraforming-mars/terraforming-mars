@@ -3,7 +3,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
@@ -57,8 +56,8 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
       }),
     );
   }
-  public play(player: Player, game: Game) {
-    game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+  public play(player: Player) {
+    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
   public metadata: CardMetadata = {

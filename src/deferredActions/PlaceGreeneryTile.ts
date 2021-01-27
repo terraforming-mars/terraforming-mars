@@ -4,7 +4,7 @@ import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class PlaceGreeneryTile implements DeferredAction {
-  public priority = Priority.PLACE_GREENERY_TILE;
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public title: string = 'Select space for greenery tile',

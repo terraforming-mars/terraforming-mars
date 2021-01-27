@@ -6,17 +6,17 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AtmoCollectors', function() {
-  let card : AtmoCollectors; let player : Player; let game : Game;
+  let card : AtmoCollectors; let player : Player;
 
   beforeEach(function() {
     card = new AtmoCollectors();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

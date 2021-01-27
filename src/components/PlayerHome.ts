@@ -20,6 +20,7 @@ import {TopBar} from './TopBar';
 import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';
+import {Phase} from '../../src/Phase';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -164,6 +165,12 @@ export const PlayerHome = Vue.component('player-home', {
     },
     isEventCardShown(): boolean {
       return this.hide_event_cards !== '1';
+    },
+    isInitialDraftingPhase(): boolean {
+      console.log(this.player.phase);
+      console.log(this.player.generation);
+      console.log(this.player.gameOptions.initialDraftVariant);
+      return (this.player.phase === Phase.INITIALDRAFTING) && (this.player.generation === 1) && this.player.gameOptions.initialDraftVariant;
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
@@ -330,15 +337,15 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
-                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.gameOptions.initialDraftVariant">
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 

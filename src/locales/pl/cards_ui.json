@@ -180,5 +180,9 @@
     "max 1 Colony": "max 1 kolonia",
     "2 Cities": "2 obszary miasta",
 
+    "1 VP for each Animal on this card.": "1 PZ za każdą jednostkę zwierząt na tej karcie.",
+    "1 VP per Animal on this card.": "1 PZ za każdą jednostkę zwierząt na tej karcie.",
+    "1 VP per 2 Animals on this card.": "1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+
     "${0} placed ${1} tile on (${2}, ${3}": "${0} umieścił \"${1}\" obszar na (${2}, ${3}"
 }

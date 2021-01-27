@@ -3,7 +3,6 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -30,9 +29,9 @@ export class EcologyExperts extends PreludeCard {
     }
     return 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.PLANTS);
-    game.defer(new PlayProjectCard(player));
+    player.game.defer(new PlayProjectCard(player));
     return undefined;
   }
 }

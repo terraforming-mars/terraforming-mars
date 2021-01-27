@@ -32,7 +32,7 @@ describe('TitanFloatingLaunchPad', function() {
     player.playedCards.push(card);
 
     // No resource and no other card to add to
-    card.action(player, game);
+    card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.peek()!.execute();
     game.deferredActions.pop();
@@ -40,7 +40,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(card.resourceCount).to.eq(1);
 
     // No open colonies and no other card to add to
-    card.action(player, game);
+    card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input2 = game.deferredActions.peek()!.execute();
     game.deferredActions.pop();
@@ -53,7 +53,7 @@ describe('TitanFloatingLaunchPad', function() {
     player.playedCards.push(card);
     player.playedCards.push(card2);
 
-    card.action(player, game);
+    card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([card]);
@@ -63,15 +63,15 @@ describe('TitanFloatingLaunchPad', function() {
   it('Should play with multiple targets and colonies', function() {
     const colony1 = new Luna();
     const colony2 = new Triton();
-    game.colonies.push(colony1);
-    game.colonies.push(colony2);
+    player.game.colonies.push(colony1);
+    player.game.colonies.push(colony2);
 
     const card2 = new JupiterFloatingStation();
     player.playedCards.push(card);
     player.playedCards.push(card2);
     player.addResourceTo(card, 7);
 
-    const orOptions = card.action(player, game) as OrOptions;
+    const orOptions = card.action(player) as OrOptions;
 
     orOptions.options[0].cb(); // Add resource
     expect(game.deferredActions).has.lengthOf(1);

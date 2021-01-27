@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -19,8 +18,8 @@ export class ImpactorSwarm implements IProjectCard {
       return player.getTagCount(Tags.JOVIAN) >= 2;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new RemoveAnyPlants(player, 2));
+    public play(player: Player) {
+      player.game.defer(new RemoveAnyPlants(player, 2));
       player.heat += 12;
       return undefined;
     }

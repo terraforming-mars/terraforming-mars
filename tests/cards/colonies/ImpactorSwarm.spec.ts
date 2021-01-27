@@ -16,14 +16,14 @@ describe('ImpactorSwarm', function() {
   });
 
   it('Should play when no other player has plants', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.heat).to.eq(12);
   });
 
   it('Should be able to remove plants from other player', function() {
     player2.plants = 2;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.peek()!.execute() as OrOptions;

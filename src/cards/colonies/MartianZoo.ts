@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {IResourceCard} from '../ICard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -24,8 +23,8 @@ export class MartianZoo implements IProjectCard, IResourceCard {
       }
     }
 
-    public canPlay(_player: Player, game: Game): boolean {
-      return game.getCitiesInPlay() >= 2;
+    public canPlay(player: Player): boolean {
+      return player.game.getCitiesInPlay() >= 2;
     }
 
     public canAct(): boolean {

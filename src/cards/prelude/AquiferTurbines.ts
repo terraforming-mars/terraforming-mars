@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -27,10 +26,10 @@ export class AquiferTurbines extends PreludeCard {
   public canPlay(player: Player) {
     return player.canAfford(3);
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
-    game.defer(new PlaceOceanTile(player));
-    game.defer(new SelectHowToPayDeferred(player, 3));
+    player.game.defer(new PlaceOceanTile(player));
+    player.game.defer(new SelectHowToPayDeferred(player, 3));
     return undefined;
   }
 }

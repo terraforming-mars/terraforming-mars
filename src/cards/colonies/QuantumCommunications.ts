@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -20,9 +19,9 @@ export class QuantumCommunications implements IProjectCard {
       return player.getTagCount(Tags.SCIENCE) >= 4;
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       let coloniesCount: number = 0;
-      game.colonies.forEach((colony) => {
+      player.game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.length;
       });
       player.addProduction(Resources.MEGACREDITS, coloniesCount);

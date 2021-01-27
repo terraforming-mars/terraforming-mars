@@ -8,6 +8,8 @@ import {SpecialTags} from '../../cards/SpecialTags';
 import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
 import {JovianMultiplier} from './JovianMultiplier';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 
 interface CardTagDiscount {
   tag: InterfaceTagsType,
@@ -202,6 +204,14 @@ export const PlayerTags = Vue.component('player-tags', {
           }
         }
       }
+
+      const turmoil = this.player.turmoil;
+      if (tag === Tags.SPACE &&
+        turmoil && turmoil.ruling === PartyName.UNITY &&
+        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) {
+        return true;
+      }
+
       return false;
     },
     getTagDiscountAmount: function(tag: InterfaceTagsType): number {
@@ -211,6 +221,11 @@ export const PlayerTags = Vue.component('player-tags', {
           discount += getDiscountAmount(tag, card.name as CardName);
         }
       }
+
+      if (tag === Tags.SPACE && this.player.turmoil?.ruling === PartyName.UNITY) {
+        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      }
+
       return discount;
     },
     getTagCount: function(tagName: InterfaceTagsType): number {

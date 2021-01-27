@@ -3,13 +3,10 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AIControlledMineNetwork} from './AIControlledMineNetwork';
+import {AlgaeBioreactors} from './AlgaeBioreactors';
 import {AncientShipyards} from './AncientShipyards';
 import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
-// import {AIControlledMineNetwork} from './AIControlledMineNetwork';
-// import {AlgaeBioreactors} from './AlgaeBioreactors';
-// import {AncientShipyards} from './AncientShipyards';
-// import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 // import {BasicInfrastructure} from './BasicInfrastructure';
 import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
@@ -17,7 +14,7 @@ import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 import {CoreMine} from './CoreMine';
 // import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
-// import {DarksideIncubationPlant} from './DarksideIncubationPlant';
+import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 // import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 // import {DarksideObservatory} from './DarksideObservatory';
@@ -28,24 +25,22 @@ import {FirstLunarSettlement} from './FirstLunarSettlement';
 import {GeodesicTents} from './GeodesicTents';
 // import {GrandLunaAcademy} from './GrandLunaAcademy';
 import {Habitat14} from './Habitat14';
-// import {HE3FusionPlant} from './HE3FusionPlant';
-// import {HE3Lobbyists} from './HE3Lobbyists';
+import {HE3FusionPlant} from './HE3FusionPlant';
+import {HE3Lobbyists} from './HE3Lobbyists';
 // import {HE3ProductionQuotas} from './HE3ProductionQuotas';
-// import {HE3Refinery} from './HE3Refinery';
-// import {HeavyDutyRovers} from './HeavyDutyRovers';
+import {HE3Refinery} from './HE3Refinery';
+import {HeavyDutyRovers} from './HeavyDutyRovers';
 import {HeliostatMirrorArray} from './HeliostatMirrorArray';
 // import {HostileTakeover} from './HostileTakeover';
 import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFactory';
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
+// import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 import {IronExtractionCenter} from './IronExtractionCenter';
 import {LTFPrivileges} from './LTFPrivileges';
-import {LunaMiningHub} from './LunaMiningHub';
-// import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
-// import {IronExtractionCenter} from './IronExtractionCenter';
 // import {LTFHeadquarters} from './LTFHeadquarters';
 // import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
-// import {LunaMiningHub} from './LunaMiningHub';
+import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
@@ -107,7 +102,6 @@ import {WaterTreatmentComplex} from './WaterTreatmentComplex';
 export const MOON_CARD_MANIFEST = new CardManifest({
   module: GameModule.Moon,
   projectCards: [
-    // These cards are done.
     {cardName: CardName.MARE_NECTARIS_MINE, Factory: MareNectarisMine},
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
     {cardName: CardName.MARE_IMBRIUM_MINE, Factory: MareImbriumMine},
@@ -143,22 +137,21 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DARKSIDE_METEOR_BOMBARDMENT, Factory: DarksideMeteorBombardment},
     {cardName: CardName.UNDERGROUND_DETONATORS, Factory: UndergroundDetonators},
     {cardName: CardName.LUNAR_TRADE_FLEET, Factory: LunarTradeFleet},
-    //   // These cards have behavior and rendering.
     {cardName: CardName.SUBTERRANEAN_HABITATS, Factory: SubterraneanHabitats},
     {cardName: CardName.IMPROVED_MOON_CONCRETE, Factory: ImprovedMoonConcrete},
     {cardName: CardName.MOONCRATE_BLOCK_FACTORY, Factory: MooncrateBlockFactory},
-    //   {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
+    {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
     {cardName: CardName.HELIOSTAT_MIRROR_ARRAY, Factory: HeliostatMirrorArray},
     //   // {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
     {cardName: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY, Factory: HypersensitiveSiliconChipFactory},
     {cardName: CardName.COPERNICUS_SOLAR_ARRAYS, Factory: CopernicusSolarArrays},
-    // {cardName: CardName.DARKSIDE_INCUBATION_PLANT, Factory: DarksideIncubationPlant},
+    {cardName: CardName.DARKSIDE_INCUBATION_PLANT, Factory: DarksideIncubationPlant},
     {cardName: CardName.WATER_TREATMENT_COMPLEX, Factory: WaterTreatmentComplex},
-    //   {cardName: CardName.ALGAE_BIOREACTORS, Factory: AlgaeBioreactors},
-    //   {cardName: CardName.HE3_FUSION_PLANT, Factory: HE3FusionPlant},
-    //   {cardName: CardName.HE3_REFINERY, Factory: HE3Refinery},
-    //   {cardName: CardName.HE3_LOBBYISTS, Factory: HE3Lobbyists},
+    {cardName: CardName.ALGAE_BIOREACTORS, Factory: AlgaeBioreactors},
+    {cardName: CardName.HE3_FUSION_PLANT, Factory: HE3FusionPlant},
+    {cardName: CardName.HE3_REFINERY, Factory: HE3Refinery},
+    {cardName: CardName.HE3_LOBBYISTS, Factory: HE3Lobbyists},
     //   // Start of second pack.
     //   {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
     //   {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},

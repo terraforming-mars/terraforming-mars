@@ -1,0 +1,36 @@
+import {CardName} from '../../CardName';
+import {Player} from '../../Player';
+import {CardType} from '../CardType';
+import {Tags} from '../Tags';
+import {Resources} from '../../Resources';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+
+export class HE3Lobbyists extends Card {
+  constructor() {
+    super({
+      name: CardName.HE3_LOBBYISTS,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.MOON],
+      cost: 7,
+
+      metadata: {
+        description: 'Increase your MC production 1 step for each moon tag you have (including this).',
+        cardNumber: 'M50',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(1)).slash().moon();
+        }),
+      },
+    });
+  };
+
+  public canPlay(): boolean {
+    return true;
+  }
+
+  public play(player: Player) {
+    // TODO(kberg): test whether this card's tag is included
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.MOON));
+    return undefined;
+  }
+}

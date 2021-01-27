@@ -124,4 +124,17 @@ export interface IDatabase {
     // this game. Also consider not needing the save_id, and
     // also to make the maintenance behavior a first-class method.
     cleanSaves(game_id: GameId, save_id: number): void;
+
+    /**
+     * A maintenance task that purges abandoned solo games older
+     * than a given date range.
+     *
+     * This is currently also part of cleanSaves().
+     *
+     * Behavior when the environment variable is absent is system-dependent:
+     * * In PostgreSQL, it uses a default of 10 days
+     * * In Sqlite, it doesn't purge
+     * * This whole method is ignored in LocalFilesystem.
+     */
+    purgeUnfinishedGames(): void;
 }

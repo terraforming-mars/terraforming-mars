@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ColonyName} from '../../colonies/ColonyName';
@@ -28,29 +27,29 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
-      const openColonies = game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+    public action(player: Player) {
+      const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
       if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisTurn) {
-        game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
+        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
         return undefined;
       }
 
       return new OrOptions(
         new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-          game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
+          player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
           return undefined;
         }),
         new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
-          const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+          const coloniesModel: Array<ColonyModel> = player.game.getColoniesModel(openColonies);
 
-          game.defer(new DeferredAction(
+          player.game.defer(new DeferredAction(
             player,
             () => new SelectColony('Select colony tile to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
               openColonies.forEach((colony) => {
                 if (colony.name === colonyName) {
                   this.resourceCount--;
-                  game.log('${0} traded with ${1}', (b) => b.player(player).colony(colony));
+                  player.game.log('${0} traded with ${1}', (b) => b.player(player).colony(colony));
                   colony.trade(player);
                   return undefined;
                 }
@@ -67,8 +66,8 @@ export class TitanFloatingLaunchPad implements IProjectCard, IResourceCard {
       );
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    public play(player: Player) {
+      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
       return undefined;
     }
 

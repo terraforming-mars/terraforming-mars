@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {LavaFlows} from '../base/LavaFlows';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -48,10 +47,10 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     return this.getSpacesForCity(player).length > 0 && player.getProduction(Resources.ENERGY) >= 1;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
-    game.defer(new PlaceCityTile(
+    player.game.defer(new PlaceCityTile(
       player,
       'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
       this.getSpacesForCity(player),

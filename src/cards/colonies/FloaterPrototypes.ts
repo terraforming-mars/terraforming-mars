@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,8 +14,8 @@ export class FloaterPrototypes implements IProjectCard {
     public name = CardName.FLOATER_PROTOTYPES;
     public cardType = CardType.EVENT;
 
-    public play(player: Player, game: Game) {
-      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    public play(player: Player) {
+      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
       return undefined;
     }
     public metadata: CardMetadata = {

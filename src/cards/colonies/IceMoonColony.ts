@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
@@ -18,21 +17,21 @@ export class IceMoonColony implements IProjectCard {
     public name = CardName.ICE_MOON_COLONY;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
-      const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    public canPlay(player: Player): boolean {
+      const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
       const hasAvailableColonyTile = player.hasAvailableColonyTileToBuildOn();
       const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
         return hasAvailableColonyTile && canPayForReds;
       }
 
       return hasAvailableColonyTile;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
-      game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
+    public play(player: Player) {
+      player.game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
+      player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
       return undefined;
     }
     public metadata: CardMetadata = {

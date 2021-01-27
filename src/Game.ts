@@ -879,7 +879,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.draftRound = 1;
       this.runDraftRound(true, true);
     } else {
-      this.phase = Phase.RESEARCH;
       this.gotoInitialResearchPhase();
     }
   }
@@ -1602,15 +1601,14 @@ export class Game implements ISerializable<SerializedGame> {
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
 
     // Still in Draft or Research of generation 1
-    if (game.phase === Phase.INITIALDRAFTING) {
-      if (gameOptions.initialDraftVariant) {
+    if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
+      if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
           game.runDraftRound(true, true);
         } else {
           game.runDraftRound(true);
         }
       } else {
-        game.phase = Phase.RESEARCH;
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {

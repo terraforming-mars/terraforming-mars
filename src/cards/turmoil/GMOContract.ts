@@ -6,15 +6,31 @@ import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
 
-export class GMOContract implements IProjectCard {
-  public cost = 3;
-  public tags = [Tags.MICROBE, Tags.SCIENCE];
-  public name = CardName.GMO_CONTRACT;
-  public cardType = CardType.ACTIVE;
+export class GMOContract extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.GMO_CONTRACT,
+      cost: 3,
+      tags: [Tags.MICROBE, Tags.SCIENCE],
+
+      metadata: {
+        description: 'Requires that Greens are ruling or that you have 2 delegates there.',
+        cardNumber: 'T06',
+        requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
+        renderData: CardRenderer.builder((b) => {
+          b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2MC.', (be) => {
+            be.animals(1).played.slash().plants(1).played.slash().microbes(1).played;
+            be.startEffect.megacredits(2);
+          });
+        }),
+      },
+    });
+  }
 
   public canPlay(player: Player): boolean {
     if (player.game.turmoil !== undefined) {
@@ -38,16 +54,4 @@ export class GMOContract implements IProjectCard {
   public play() {
     return undefined;
   }
-
-  public metadata: CardMetadata = {
-    description: 'Requires that Greens are ruling or that you have 2 delegates there.',
-    cardNumber: 'T06',
-    requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
-    renderData: CardRenderer.builder((b) => {
-      b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2MC.', (be) => {
-        be.animals(1).played.slash().plants(1).played.slash().microbes(1).played;
-        be.startEffect.megacredits(2);
-      });
-    }),
-  };
 }

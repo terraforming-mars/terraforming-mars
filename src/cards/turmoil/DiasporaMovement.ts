@@ -5,42 +5,46 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class DiasporaMovement implements IProjectCard {
-    public cost = 7;
-    public tags = [Tags.JOVIAN];
-    public name = CardName.DIASPORA_MOVEMENT;
-    public cardType = CardType.AUTOMATED;
+export class DiasporaMovement extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.DIASPORA_MOVEMENT,
+      cost: 7,
+      tags: [Tags.JOVIAN],
 
-    public canPlay(player: Player): boolean {
-      if (player.game.turmoil !== undefined) {
-        return player.game.turmoil.canPlay(player, PartyName.REDS);
-      }
-      return false;
+      metadata: {
+        cardNumber: 'TO4',
+        requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+        description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(1).slash().jovian().played.any;
+        }),
+        victoryPoints: 1,
+      },
+    });
+  }
+
+  public canPlay(player: Player): boolean {
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, PartyName.REDS);
     }
+    return false;
+  }
 
-    public play(player: Player) {
-      const amount = player.game.getPlayers()
-        .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
-        .reduce((a, c) => a + c);
-      player.setResource(Resources.MEGACREDITS, amount + 1);
-      return undefined;
-    }
+  public play(player: Player) {
+    const amount = player.game.getPlayers()
+      .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
+      .reduce((a, c) => a + c);
+    player.setResource(Resources.MEGACREDITS, amount + 1);
+    return undefined;
+  }
 
-    public getVictoryPoints() {
-      return 1;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'TO4',
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
-      description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.',
-      renderData: CardRenderer.builder((b) => {
-        b.megacredits(1).slash().jovian().played.any;
-      }),
-      victoryPoints: 1,
-    }
+  public getVictoryPoints() {
+    return 1;
+  }
 }

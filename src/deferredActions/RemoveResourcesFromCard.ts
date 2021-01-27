@@ -11,7 +11,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard implements DeferredAction {
-  public priority = Priority.REMOVE_RESOURCES_FROM_CARD;
+  public priority= Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public resourceType: ResourceType,
@@ -19,7 +19,11 @@ export class RemoveResourcesFromCard implements DeferredAction {
         public ownCardsOnly: boolean = false,
         public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
         public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
-  ) {}
+  ) {
+    if (ownCardsOnly) {
+      this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
+    }
+  }
 
   public execute() {
     if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {

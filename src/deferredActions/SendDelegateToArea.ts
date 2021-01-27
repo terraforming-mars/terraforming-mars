@@ -6,7 +6,7 @@ import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 
 export class SendDelegateToArea implements DeferredAction {
-  public priority = Priority.SEND_DELEGATE_TO_AREA;
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public title: string = 'Select where to send a delegate',

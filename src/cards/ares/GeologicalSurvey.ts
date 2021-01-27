@@ -8,6 +8,9 @@ import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../Phase';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
@@ -46,7 +49,7 @@ export class GeologicalSurvey extends Card implements IProjectCard {
 
     // Steel, Titanium and Heat
     ([[Resources.STEEL, SpaceBonus.STEEL], [Resources.TITANIUM, SpaceBonus.TITANIUM], [Resources.HEAT, SpaceBonus.HEAT]] as [Resources, SpaceBonus][]).forEach(([resource, bonus]) => {
-      if ((resource === Resources.STEEL && space.spaceType !== SpaceType.COLONY) ||
+      if ((resource === Resources.STEEL && space.spaceType !== SpaceType.COLONY && PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy. MARS_FIRST_DEFAULT_POLICY)) ||
           space.bonus.includes(bonus) ||
           this.hasAdjacencyBonus(player, space, bonus)) {
         player.game.defer(new GainResources(

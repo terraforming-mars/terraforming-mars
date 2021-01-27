@@ -23,7 +23,7 @@ describe('GalileanMining', function() {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
 
     // SelectHowToPayDeferred
     game.deferredActions.runNext();

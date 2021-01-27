@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -16,16 +15,16 @@ export class SpacePortColony implements IProjectCard {
     public name = CardName.SPACE_PORT_COLONY;
     public cardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game): boolean {
+    public canPlay(player: Player): boolean {
       let coloniesCount: number = 0;
-      game.colonies.forEach((colony) => {
+      player.game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
       return coloniesCount > 0;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
+    public play(player: Player) {
+      player.game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
       player.increaseFleetSize();
       return undefined;
     }

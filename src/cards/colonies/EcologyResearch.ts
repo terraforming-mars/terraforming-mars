@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardMetadata} from '../CardMetadata';
@@ -17,18 +16,18 @@ export class EcologyResearch implements IProjectCard {
     public name = CardName.ECOLOGY_RESEARCH;
     public cardType = CardType.AUTOMATED;
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       const coloniesCount = player.getColoniesCount();
       player.addProduction(Resources.PLANTS, coloniesCount);
 
       const animalCards = player.getResourceCards(ResourceType.ANIMAL);
       if (animalCards.length) {
-        game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
+        player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
       }
 
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
       if (microbeCards.length) {
-        game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+        player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
       }
 
       return undefined;

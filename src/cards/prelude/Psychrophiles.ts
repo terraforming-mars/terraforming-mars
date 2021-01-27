@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -37,8 +36,8 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
   }
     public resourceCount = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -20);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -20);
     }
 
     public play() {

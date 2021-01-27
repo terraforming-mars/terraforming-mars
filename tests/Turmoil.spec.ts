@@ -201,14 +201,14 @@ describe('Turmoil', function() {
     const nitrogenFromTitan = new NitrogenFromTitan();
 
     player.megaCredits = 29;
-    expect(nitrogenFromTitan.canPlay(player, game)).is.not.true; // needs 31 MC
+    expect(nitrogenFromTitan.canPlay(player)).is.not.true; // needs 31 MC
 
     player.playedCards.push(new SpaceStation());
-    expect(nitrogenFromTitan.canPlay(player, game)).is.true; // 25 + 6 - 2
+    expect(nitrogenFromTitan.canPlay(player)).is.true; // 25 + 6 - 2
 
     player.playedCards.push(new EarthCatapult(), new QuantumExtractor());
     player.megaCredits = 25;
-    expect(nitrogenFromTitan.canPlay(player, game)).is.true; // 25 + 6 - 6
+    expect(nitrogenFromTitan.canPlay(player)).is.true; // 25 + 6 - 6
   });
 
   it('backward compatible deserialization', () => {

@@ -11,18 +11,18 @@ describe('MolecularPrinting', function() {
     const card = new MolecularPrinting();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     const colony1 = new Luna();
     const colony2 = new Triton();
 
     colony1.colonies.push(player.id);
     colony2.colonies.push(player.id);
 
-    game.colonies.push(colony1);
-    game.colonies.push(colony2);
-    game.addCityTile(player, '03');
+    player.game.colonies.push(colony1);
+    player.game.colonies.push(colony2);
+    player.game.addCityTile(player, '03');
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

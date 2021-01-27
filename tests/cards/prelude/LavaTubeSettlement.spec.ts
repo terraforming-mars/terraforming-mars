@@ -43,7 +43,7 @@ describe('LavaTubeSettlement', function() {
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
 

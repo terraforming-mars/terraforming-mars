@@ -33,7 +33,6 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       reserveUnits: Units.of({titanium: 2}),
     });
   };
-  public readonly resource = ResourceType.SCIENCE;
   public resourceCount = 0;
 
   public canPlay(player: Player): boolean {

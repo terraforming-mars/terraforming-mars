@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
@@ -26,8 +25,8 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
       return true;
     }
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public action(player: Player) {
@@ -35,8 +34,8 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    public play(player: Player) {
+      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
 

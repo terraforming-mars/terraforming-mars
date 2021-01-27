@@ -16,7 +16,7 @@ export namespace AddResourcesToCard {
 }
 
 export class AddResourcesToCard implements DeferredAction {
-  public priority = Priority.ADD_RESOURCES_TO_CARDS;
+  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
   constructor(
         public player: Player,
         public resourceType: ResourceType | undefined,

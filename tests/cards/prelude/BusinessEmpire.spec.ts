@@ -22,7 +22,7 @@ describe('BusinessEmpire', function() {
   it('Should play', function() {
     player.megaCredits = 6;
     expect(card.canPlay(player)).is.true;
-    card.play(player, game);
+    card.play(player);
 
     // SelectHowToPayDeferred
     game.deferredActions.runNext();

@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,11 +18,11 @@ export class FloaterTechnology implements IProjectCard {
       return player.getResourceCards(ResourceType.FLOATER).length > 0;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
       if (floaterCards.length) {
-        game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
+        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
       }
 
       return undefined;

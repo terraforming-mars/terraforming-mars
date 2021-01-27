@@ -5,7 +5,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class StealResources implements DeferredAction {
-  public priority = Priority.STEAL_RESOURCES;
+  public priority = Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public resource: Resources,

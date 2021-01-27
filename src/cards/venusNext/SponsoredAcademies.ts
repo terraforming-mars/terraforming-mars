@@ -32,7 +32,7 @@ export class SponsoredAcademies extends Card {
   }
 
   public play(player: Player) {
-    player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES);
+    player.game.defer(new DiscardCards(player), Priority.DISCARD_BEFORE_DRAW);
     player.game.defer(DrawCards.keepAll(player, 3));
     const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
     for (const p of otherPlayers) {

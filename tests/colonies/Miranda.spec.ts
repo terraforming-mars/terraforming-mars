@@ -44,9 +44,11 @@ describe('Miranda', function() {
     player.playCard(pets);
     miranda.trade(player);
 
-    // Should have AddResourcesToCard, GiveColonyBonus and decrease track
+    // Should have GiveColonyBonus, AddResourcesToCard and decrease track
     expect(game.deferredActions).has.lengthOf(3);
-    const action = game.deferredActions.pop()!;
+    game.deferredActions.pop(); // GiveColonyBonus
+
+    const action = game.deferredActions.pop()!; // AddResourcesToCard
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
     // Should directly add to Pets, since there's no other target
@@ -64,9 +66,7 @@ describe('Miranda', function() {
     game.deferredActions.pop()!.execute(); // Gain placement animals
 
     miranda.trade(player2);
-    game.deferredActions.pop()!.execute(); // Gain trade animals
-
-    game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
 
     expect(pets.resourceCount).to.eq(2);
     expect(predators.resourceCount).to.eq(1);

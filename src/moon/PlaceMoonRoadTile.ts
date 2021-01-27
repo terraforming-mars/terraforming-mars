@@ -5,7 +5,7 @@ import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonRoadTile implements DeferredAction {
-  public priority = Priority.PLACE_MOON_TILE;
+  public priority = Priority.DEFAULT;
   constructor(
     public player: Player,
     public title: string = 'Select a space on the Moon for a road tile.',

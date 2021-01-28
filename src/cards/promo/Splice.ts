@@ -48,7 +48,7 @@ export class Splice extends Card implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    returnthis._onCardPlayed(player, card);
+    return this._onCardPlayed(player, card);
   }
 
   public onCorpCardPlayed(player: Player, card: CorporationCard) {

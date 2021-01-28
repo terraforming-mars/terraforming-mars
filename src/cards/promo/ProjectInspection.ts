@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {Playwrights} from '../community/Playwrights';
 import {ICard} from '../ICard';
@@ -25,33 +24,33 @@ export class ProjectInspection extends Card implements IProjectCard {
       },
     });
   }
-  private getActionCards(player: Player, game: Game): Array<ICard> {
+  private getActionCards(player: Player): Array<ICard> {
     const result: Array<ICard> = [];
 
     if (player.corporationCard !== undefined && player.getActionsThisGeneration().has(player.corporationCard.name)) {
       if (player.corporationCard.name !== CardName.PLAYWRIGHTS || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
         if (player.corporationCard.action !== undefined &&
               player.corporationCard.canAct !== undefined &&
-              player.corporationCard.canAct(player, game)) {
+              player.corporationCard.canAct(player, player.game)) {
           result.push(player.corporationCard);
         }
       }
     }
 
     for (const playedCard of player.playedCards) {
-      if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player, game) && player.getActionsThisGeneration().has(playedCard.name)) {
+      if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player, player.game) && player.getActionsThisGeneration().has(playedCard.name)) {
         result.push(playedCard);
       }
     }
     return result;
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return this.getActionCards(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return this.getActionCards(player).length > 0;
   }
 
-  public play(player: Player, game: Game) {
-    const actionCards = this.getActionCards(player, game);
+  public play(player: Player) {
+    const actionCards = this.getActionCards(player);
     if (actionCards.length === 0 ) {
       return undefined;
     }
@@ -61,8 +60,8 @@ export class ProjectInspection extends Card implements IProjectCard {
       actionCards,
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
-        game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-        return foundCard.action!(player, game);
+        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
+        return foundCard.action!(player, player.game);
       },
     );
   }

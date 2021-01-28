@@ -4,7 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -28,9 +27,9 @@ export class MagneticShield extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const hasEnergyTags = player.getTagCount(Tags.ENERGY) >= 2;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 4, false, true) && hasEnergyTags;
     }
 

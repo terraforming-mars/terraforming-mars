@@ -1,6 +1,5 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
@@ -34,12 +33,12 @@ export class MonsInsurance extends Card implements CorporationCard {
     });
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 6);
-    for (const player of game.getPlayers()) {
-      player.addProduction(Resources.MEGACREDITS, -2);
+    for (const p of player.game.getPlayers()) {
+      p.addProduction(Resources.MEGACREDITS, -2);
     }
-    game.monsInsuranceOwner = player.id;
+    player.game.monsInsuranceOwner = player.id;
     return undefined;
   }
 }

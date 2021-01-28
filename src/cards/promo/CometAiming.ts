@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Game} from '../../Game';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
@@ -46,18 +45,18 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
+    public canAct(player: Player): boolean {
       const hasTitanium = player.titanium > 0;
-      const canPlaceOcean = this.resourceCount > 0 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
+      const canPlaceOcean = this.resourceCount > 0 && player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
         return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && canPlaceOcean);
       }
 
       return hasTitanium || canPlaceOcean;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
 
       const addAsteroidToSelf = function() {
@@ -82,7 +81,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       const spendAsteroidResource = () => {
         this.resourceCount--;
         LogHelper.logRemoveResource(player, this, 1, 'place an ocean');
-        game.defer(new PlaceOceanTile(player));
+        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       };
 
@@ -94,8 +93,8 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       if (player.titanium === 0) return spendAsteroidResource();
 
       const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-      const canPlaceOcean = game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+      const canPlaceOcean = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
       if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid', spendAsteroidResource));

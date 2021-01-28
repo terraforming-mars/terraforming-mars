@@ -1,24 +1,23 @@
 import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {NewColonyPlanningInitiaitives} from '../../../src/cards/moon/NewColonyPlanningInitiaitives';
 import {expect} from 'chai';
+import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NewColonyPlanningInitiaitives', () => {
-  let game: Game;
   let player: Player;
-  let moonData: IMoonData;
   let card: NewColonyPlanningInitiaitives;
+  let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
-    moonData = MoonExpansion.moonData(game);
+    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
     card = new NewColonyPlanningInitiaitives();
+    moonData = MoonExpansion.moonData(game);
   });
 
   it('can play', () => {
@@ -38,7 +37,8 @@ describe('NewColonyPlanningInitiaitives', () => {
 
     card.play(player);
 
-    moonData.colonyRate = 3;
     expect(player.getTerraformRating()).eq(15);
+    expect(moonData.colonyRate).eq(3);
   });
 });
+

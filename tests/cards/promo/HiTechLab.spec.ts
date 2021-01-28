@@ -7,12 +7,12 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('HiTechLab', function() {
-  let card : HiTechLab; let player : Player; let game : Game;
+  let card : HiTechLab; let player : Player;
 
   beforeEach(function() {
     card = new HiTechLab();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t act if no energy resources available', function() {
@@ -23,7 +23,7 @@ describe('HiTechLab', function() {
     player.setResource(Resources.ENERGY, 5);
     expect(card.canAct(player)).is.true;
 
-    const amount = card.action(player, game) as SelectAmount;
+    const amount = card.action(player) as SelectAmount;
     expect(amount instanceof SelectAmount).is.true;
 
         amount!.cb(3);

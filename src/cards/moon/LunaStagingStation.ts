@@ -35,7 +35,7 @@ export class LunaStagingStation extends MoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     MoonExpansion.raiseLogisticRate(player);
     MoonExpansion.raiseLogisticRate(player);
     return undefined;

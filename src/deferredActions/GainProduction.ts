@@ -22,8 +22,10 @@ export class GainProduction implements DeferredAction {
   public execute() {
     if (this.options.count === undefined) {
       this.options.count = 1;
-    } else {
-      this.options.count = Math.abs(this.options.count);
+    } else if (this.options.count < 0) {
+      throw new Error('GainProduction count option must be >= 0');
+    } else if (this.options.count === 0) {
+      return undefined;
     }
     this.player.addProduction(this.resource, this.options.count);
     if (this.options.logMessage !== undefined) {

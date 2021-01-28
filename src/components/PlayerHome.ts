@@ -167,10 +167,7 @@ export const PlayerHome = Vue.component('player-home', {
       return this.hide_event_cards !== '1';
     },
     isInitialDraftingPhase(): boolean {
-      console.log(this.player.phase);
-      console.log(this.player.generation);
-      console.log(this.player.gameOptions.initialDraftVariant);
-      return (this.player.phase === Phase.INITIALDRAFTING) && (this.player.generation === 1) && this.player.gameOptions.initialDraftVariant;
+      return (this.player.phase === Phase.INITIALDRAFTING) && this.player.gameOptions.initialDraftVariant;
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {

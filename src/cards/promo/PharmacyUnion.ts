@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -63,6 +62,14 @@ export class PharmacyUnion extends Card implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, card: IProjectCard): void {
+      this._onCardPlayed(player, card);
+    }
+
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this._onCardPlayed(player, card);
+    }
+
+    private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): void {
       if (this.isDisabled) return undefined;
 
       const game = player.game;
@@ -165,9 +172,5 @@ export class PharmacyUnion extends Card implements CorporationCard {
       }
 
       return undefined;
-    }
-
-    public onCorpCardPlayed(player: Player, card: CorporationCard) {
-      return this.onCardPlayed(player, card as ICard as IProjectCard);
     }
 }

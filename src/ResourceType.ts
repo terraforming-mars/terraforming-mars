@@ -11,6 +11,5 @@ export enum ResourceType {
     DISEASE = 'Disease',
     RESOURCE_CUBE = 'Resource cube',
     DATA = 'Data',
-    SYNDICATE_FLEET = 'Syndicate Fleet',
 }
 

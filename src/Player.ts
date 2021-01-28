@@ -1997,51 +1997,45 @@ export class Player implements ISerializable<SerializedPlayer> {
     return result;
   }
 
-  // Only use useObjectAssign in tests.
-  // TODO(kberg): Remove useObjectAssign by 2020-02-01
-  public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
+  public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
-    if (useObjectAssign) {
-      Object.assign(player, d);
-    } else {
-      player.actionsTakenThisRound = d.actionsTakenThisRound;
-      player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
-      player.cardCost = d.cardCost;
-      player.cardDiscount = d.cardDiscount;
-      player.colonyTradeDiscount = d.colonyTradeDiscount;
-      player.colonyTradeOffset = d.colonyTradeOffset;
-      player.colonyVictoryPoints = d.colonyVictoryPoints;
-      player.corporationInitialActionDone = d.corporationInitialActionDone;
-      player.energy = d.energy;
-      player.energyProduction = d.energyProduction;
-      player.fleetSize = d.fleetSize;
-      player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
-      player.heat = d.heat;
-      player.heatProduction = d.heatProduction;
-      player.megaCreditProduction = d.megaCreditProduction;
-      player.megaCredits = d.megaCredits;
-      player.needsToDraft = d.needsToDraft;
-      player.oceanBonus = d.oceanBonus;
-      player.plantProduction = d.plantProduction;
-      player.plants = d.plants;
-      player.plantsNeededForGreenery = d.plantsNeededForGreenery;
-      player.removingPlayers = d.removingPlayers;
-      player.scienceTagCount = d.scienceTagCount;
-      player.steel = d.steel;
-      player.steelProduction = d.steelProduction;
-      player.steelValue = d.steelValue;
-      player.terraformRating = d.terraformRating;
-      player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
-      player.titanium = d.titanium;
-      player.titaniumProduction = d.titaniumProduction;
-      player.titaniumValue = d.titaniumValue;
-      player.tradesThisTurn = d.tradesThisTurn;
-      player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
-      player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
-      player.victoryPointsBreakdown = d.victoryPointsBreakdown;
-    }
+    player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+    player.cardCost = d.cardCost;
+    player.cardDiscount = d.cardDiscount;
+    player.colonyTradeDiscount = d.colonyTradeDiscount;
+    player.colonyTradeOffset = d.colonyTradeOffset;
+    player.colonyVictoryPoints = d.colonyVictoryPoints;
+    player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.energy = d.energy;
+    player.energyProduction = d.energyProduction;
+    player.fleetSize = d.fleetSize;
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+    player.heat = d.heat;
+    player.heatProduction = d.heatProduction;
+    player.megaCreditProduction = d.megaCreditProduction;
+    player.megaCredits = d.megaCredits;
+    player.needsToDraft = d.needsToDraft;
+    player.oceanBonus = d.oceanBonus;
+    player.plantProduction = d.plantProduction;
+    player.plants = d.plants;
+    player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.removingPlayers = d.removingPlayers;
+    player.scienceTagCount = d.scienceTagCount;
+    player.steel = d.steel;
+    player.steelProduction = d.steelProduction;
+    player.steelValue = d.steelValue;
+    player.terraformRating = d.terraformRating;
+    player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+    player.titanium = d.titanium;
+    player.titaniumProduction = d.titaniumProduction;
+    player.titaniumValue = d.titaniumValue;
+    player.tradesThisTurn = d.tradesThisTurn;
+    player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+    player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.victoryPointsBreakdown = d.victoryPointsBreakdown;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :

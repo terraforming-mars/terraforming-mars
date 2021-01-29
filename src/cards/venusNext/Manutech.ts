@@ -32,7 +32,7 @@ export class Manutech implements CorporationCard {
       }),
     }
 
-    public static resolveCorpEffect(player: Player, resource: Resources, amount: number) {
+    public static onProductionGain(player: Player, resource: Resources, amount: number) {
       if (resource === Resources.MEGACREDITS) player.megaCredits += amount;
       if (resource === Resources.STEEL) player.steel += amount;
       if (resource === Resources.TITANIUM) player.titanium += amount;

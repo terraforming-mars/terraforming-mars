@@ -376,7 +376,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Manutech hook
     if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
-      Manutech.resolveCorpEffect(this, resource, amount);
+      Manutech.onProductionGain(this, resource, amount);
     }
 
     // Mons Insurance hook
@@ -1614,7 +1614,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    const canAfford = this.getCardCost(card) <= this.getTotalSpendableResources(canUseSteel, canUseTitanium, canUseFloaters, canUseMicrobes);
+    const canAfford = this.getCardCost(card) <= this.getTotalSpendableResources(canUseSteel, canUseTitanium, canUseFloaters, canUseMicrobes, steel, titanium);
 
     return canAfford && (card.canPlay === undefined || card.canPlay(this, this.game));
   }
@@ -1623,10 +1623,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return cost <= this.getTotalSpendableResources(canUseSteel, canUseTitanium, canUseFloaters, canUseMicrobes);
   }
 
-  private getTotalSpendableResources(canUseSteel: boolean, canUseTitanium: boolean, canUseFloaters: boolean, canUseMicrobes: boolean): number {
+  private getTotalSpendableResources(canUseSteel: boolean, canUseTitanium: boolean, canUseFloaters: boolean, canUseMicrobes: boolean, spendableSteel?: number, spendableTitanium?: number): number {
     let amount = this.spendableMegacredits();
-    if (canUseSteel) amount += this.steel * this.getSteelValue();
-    if (canUseTitanium) amount += this.titanium * this.getTitaniumValue();
+    if (canUseSteel) amount += (spendableSteel === undefined ? this.steel : spendableSteel) * this.getSteelValue();
+    if (canUseTitanium) amount += (spendableTitanium === undefined ? this.titanium : spendableTitanium) * this.getTitaniumValue();
     if (canUseFloaters) amount += this.getFloatersCanSpend() * DEFAULT_FLOATERS_VALUE;
     if (canUseMicrobes) amount += this.getMicrobesCanSpend() * DEFAULT_MICROBES_VALUE;
 

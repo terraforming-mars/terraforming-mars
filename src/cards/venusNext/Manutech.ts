@@ -31,4 +31,13 @@ export class Manutech implements CorporationCard {
         });
       }),
     }
+
+    public static resolveCorpEffect(player: Player, resource: Resources, amount: number) {
+      if (resource === Resources.MEGACREDITS) player.megaCredits += amount;
+      if (resource === Resources.STEEL) player.steel += amount;
+      if (resource === Resources.TITANIUM) player.titanium += amount;
+      if (resource === Resources.PLANTS) player.plants += amount;
+      if (resource === Resources.ENERGY) player.energy += amount;
+      if (resource === Resources.HEAT) player.heat += amount;
+    }
 }

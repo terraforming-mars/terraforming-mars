@@ -1,5 +1,6 @@
 
 export const CARD_COST: number = 3;
+export const MILESTONE_COST: number = 8;
 export const HEAT_FOR_TEMPERATURE: number = 8;
 export const MAX_OCEAN_TILES: number = 9;
 export const MAX_TEMPERATURE: number = 8;
@@ -16,6 +17,8 @@ export const HELLAS_BONUS_OCEAN_COST: number = 6;
 export const MAX_FLEET_SIZE: number = 4;
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;
+export const DEFAULT_FLOATERS_VALUE: number = 3;
+export const DEFAULT_MICROBES_VALUE: number = 2;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
 
 export const LANGUAGES = [

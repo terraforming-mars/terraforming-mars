@@ -375,7 +375,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Manutech hook
-    if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
+    if (this.isCorporation(CardName.MANUTECH)) {
       Manutech.onProductionGain(this, resource, amount);
     }
 
@@ -505,7 +505,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getPlayedEventsCount(): number {
     let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
-    if (this.corporationCard?.name === CardName.PHARMACY_UNION && this.corporationCard.isDisabled) count++;
+    if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;
 
     return count;
   }

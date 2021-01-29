@@ -1594,6 +1594,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // and additionally pay the reserveUnits (no replaces here)
   // TODO(sienmich): use options parameter
   public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Partial<Units> = {}): boolean {
+    // Check if player has the reserveUnits - required resources
     const units = Units.of(reserveUnits);
     if (!Units.hasUnits(units, this)) {
       return false;

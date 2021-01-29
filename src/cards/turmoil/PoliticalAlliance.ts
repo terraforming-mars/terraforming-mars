@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -7,8 +8,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
-import {Card} from '../Card';
 
 export class PoliticalAlliance extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,6 @@ export class PoliticalAlliance extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.POLITICAL_ALLIANCE,
       cost: 4,
-      tags: [Tags.MICROBE, Tags.SCIENCE],
 
       metadata: {
         cardNumber: 'X09',
@@ -28,6 +26,7 @@ export class PoliticalAlliance extends Card implements IProjectCard {
       },
     });
   }
+
   public canPlay(player: Player): boolean {
     if (player.game.turmoil !== undefined) {
       const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id);

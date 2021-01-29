@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -8,15 +9,14 @@ import {Resources} from '../../Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
 
 export class GMOContract extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.GMO_CONTRACT,
-      cost: 3,
       tags: [Tags.MICROBE, Tags.SCIENCE],
+      cost: 3,
 
       metadata: {
         description: 'Requires that Greens are ruling or that you have 2 delegates there.',

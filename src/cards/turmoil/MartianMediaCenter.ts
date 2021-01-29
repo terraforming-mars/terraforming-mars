@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -9,15 +10,14 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MARTIAN_MEDIA_CENTER,
-      cost: 7,
       tags: [Tags.BUILDING],
+      cost: 7,
 
       metadata: {
         cardNumber: 'T07',

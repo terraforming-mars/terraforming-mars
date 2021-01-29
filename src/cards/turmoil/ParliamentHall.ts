@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -7,15 +8,14 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 
 export class ParliamentHall extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.PARLIAMENT_HALL,
-      cost: 8,
       tags: [Tags.BUILDING],
+      cost: 8,
 
       metadata: {
         cardNumber: 'T08',

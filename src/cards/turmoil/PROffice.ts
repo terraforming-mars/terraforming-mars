@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -9,15 +10,14 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 
 export class PROffice extends Card implements IProjectCard {
   constructor() {
     super({
-      cost: 7,
-      tags: [Tags.EARTH],
-      name: CardName.PR_OFFICE,
       cardType: CardType.AUTOMATED,
+      name: CardName.PR_OFFICE,
+      tags: [Tags.EARTH],
+      cost: 7,
 
       metadata: {
         cardNumber: 'T09',

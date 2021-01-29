@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -9,15 +10,14 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.CULTURAL_METROPOLIS,
-      cost: 20,
       tags: [Tags.CITY, Tags.BUILDING],
+      cost: 20,
 
       metadata: {
         cardNumber: 'T03',

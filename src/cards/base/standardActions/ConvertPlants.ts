@@ -5,7 +5,6 @@ import {Player} from '../../../Player';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../../constants';
-import {AltSecondaryTag} from '../../render/CardRenderItem';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {ISpace} from '../../../boards/ISpace';
 
@@ -18,7 +17,7 @@ export class ConvertPlants extends StandardActionCard {
         cardNumber: 'SA2',
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Spend 8 Plants to place a greenery tile and raise oxygen 1 step.', (eb) => {
-            eb.plants(8).startAction.greenery().secondaryTag(AltSecondaryTag.OXYGEN);
+            eb.plants(8).startAction.greenery();
           }),
         ),
       },

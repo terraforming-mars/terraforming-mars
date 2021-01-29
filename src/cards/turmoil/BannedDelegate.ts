@@ -1,4 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player, PlayerId} from '../../Player';
@@ -8,7 +9,6 @@ import {IParty} from '../../turmoil/parties/IParty';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer} from '../../turmoil/Turmoil';
-import {Card} from '../Card';
 
 export class BannedDelegate extends Card implements IProjectCard {
   constructor() {
@@ -37,47 +37,47 @@ export class BannedDelegate extends Card implements IProjectCard {
 
   public play(player: Player) {
     const orOptions: Array<SelectDelegate> = [];
-      // Take each party having more than just the party leader in the area
-      player.game.turmoil!.parties.forEach((party) => {
-        if (party.delegates.length > 1) {
-          // Remove the party leader from available choices
-          const delegates = party.delegates.slice();
-          delegates.splice(party.delegates.indexOf(party.partyLeader!), 1);
-          const playersId = Array.from(new Set<PlayerId | NeutralPlayer>(delegates));
-          const players: Array<Player | NeutralPlayer> = [];
-          playersId.forEach((playerId) => {
-            if (playerId === 'NEUTRAL') {
-              players.push('NEUTRAL');
-            } else {
-              players.push(player.game.getPlayerById(playerId));
-            }
-          });
-
-          if (players.length > 0) {
-            const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
-              let playerToRemove = '';
-              if (selectedPlayer === 'NEUTRAL') {
-                playerToRemove = 'NEUTRAL';
+        // Take each party having more than just the party leader in the area
+        player.game.turmoil!.parties.forEach((party) => {
+          if (party.delegates.length > 1) {
+            // Remove the party leader from available choices
+            const delegates = party.delegates.slice();
+            delegates.splice(party.delegates.indexOf(party.partyLeader!), 1);
+            const playersId = Array.from(new Set<PlayerId | NeutralPlayer>(delegates));
+            const players: Array<Player | NeutralPlayer> = [];
+            playersId.forEach((playerId) => {
+              if (playerId === 'NEUTRAL') {
+                players.push('NEUTRAL');
               } else {
-                playerToRemove = selectedPlayer.id;
+                players.push(player.game.getPlayerById(playerId));
               }
-              player.game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, player.game);
-              this.log(player, party, selectedPlayer);
-              return undefined;
             });
-            selectDelegate.buttonLabel = 'Remove delegate';
-            orOptions.push(selectDelegate);
+
+            if (players.length > 0) {
+              const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {
+                let playerToRemove = '';
+                if (selectedPlayer === 'NEUTRAL') {
+                  playerToRemove = 'NEUTRAL';
+                } else {
+                  playerToRemove = selectedPlayer.id;
+                }
+                player.game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, player.game);
+                this.log(player, party, selectedPlayer);
+                return undefined;
+              });
+              selectDelegate.buttonLabel = 'Remove delegate';
+              orOptions.push(selectDelegate);
+            }
           }
+        });
+        if (orOptions.length === 0) {
+          return undefined;
+        } else if (orOptions.length === 1) {
+          return orOptions[0];
+        } else {
+          const options = new OrOptions(...orOptions);
+          return options;
         }
-      });
-      if (orOptions.length === 0) {
-        return undefined;
-      } else if (orOptions.length === 1) {
-        return orOptions[0];
-      } else {
-        const options = new OrOptions(...orOptions);
-        return options;
-      }
   }
 
   private log(player: Player, party: IParty, selectedPlayer: Player | NeutralPlayer) {

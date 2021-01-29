@@ -1,20 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
 
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.EVENT_ANALYSTS,
-      cost: 5,
       tags: [Tags.SCIENCE],
+      cost: 5,
 
       metadata: {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there.',

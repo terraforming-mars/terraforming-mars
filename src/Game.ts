@@ -366,6 +366,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Initial Draft
     if (gameOptions.initialDraftVariant) {
+      game.phase = Phase.INITIALDRAFTING;
       game.runDraftRound(true);
     } else {
       game.gotoInitialResearchPhase();
@@ -573,7 +574,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       player.megaCredits -= player.cardsInHand.length * player.cardCost;
     }
-    corporationCard.play(player, this);
+    corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
 
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
@@ -666,6 +667,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoInitialResearchPhase(): void {
+    this.phase = Phase.RESEARCH;
     this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
@@ -877,7 +879,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.draftRound = 1;
       this.runDraftRound(true, true);
     } else {
-      this.gameOptions.initialDraftVariant = false;
       this.gotoInitialResearchPhase();
     }
   }
@@ -1606,7 +1607,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
-      if (gameOptions.initialDraftVariant) {
+      if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
           game.runDraftRound(true, true);
         } else {

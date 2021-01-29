@@ -1,5 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -7,15 +8,14 @@ import {Resources} from '../../Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 
 export class DiasporaMovement extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.DIASPORA_MOVEMENT,
-      cost: 7,
       tags: [Tags.JOVIAN],
+      cost: 7,
 
       metadata: {
         cardNumber: 'TO4',

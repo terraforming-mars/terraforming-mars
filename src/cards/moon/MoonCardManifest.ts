@@ -1,4 +1,3 @@
-// import {CardName} from '../../CardName';
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
@@ -7,7 +6,7 @@ import {AlgaeBioreactors} from './AlgaeBioreactors';
 import {AncientShipyards} from './AncientShipyards';
 import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
-// import {BasicInfrastructure} from './BasicInfrastructure';
+import {BasicInfrastructure} from './BasicInfrastructure';
 import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 // import {CopernicusTower} from './CopernicusTower';
@@ -36,8 +35,8 @@ import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFacto
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 import {IronExtractionCenter} from './IronExtractionCenter';
-import {LTFPrivileges} from './LTFPrivileges';
 // import {LTFHeadquarters} from './LTFHeadquarters';
+import {LTFPrivileges} from './LTFPrivileges';
 // import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
@@ -61,7 +60,7 @@ import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
 import {MareSerenitatisMine} from './MareSerenitatisMine';
 import {MicrosingularityPlant} from './MicrosingularityPlant';
-// import {MiningComplex} from './MiningComplex';
+import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
 import {MoonColonyStandardProject} from './MoonColonyStandardProject';
@@ -198,16 +197,16 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   //   // All cards have costs, type, tags, and text description, and behavior.
   ],
   corporationCards: [
-  //   {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
-  //   // {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
-  //   {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
-  //   {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
-  //   {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
-  //   // {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
-  //   // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
-  //   {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},
-  //   {cardName: CardName.LUNA_TRADE_FEDERATION, Factory: LunaTradeFederation},
-  //   {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
+    // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
+    // {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
+    // {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
+    // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
+    // {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
+    // {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
+    // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
+    // {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},
+    // {cardName: CardName.LUNA_TRADE_FEDERATION, Factory: LunaTradeFederation},
+    // {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
   ],
   standardProjects: [
     {cardName: CardName.MOON_COLONY_STANDARD_PROJECT, Factory: MoonColonyStandardProject},
@@ -217,8 +216,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   preludeCards: [
     {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},
     {cardName: CardName.CORE_MINE, Factory: CoreMine},
-    // {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: GameModule.Colonies},
+    {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: GameModule.Colonies},
     {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice},
-    // {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
+    {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
   ],
 });

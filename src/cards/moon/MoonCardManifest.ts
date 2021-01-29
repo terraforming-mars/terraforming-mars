@@ -48,6 +48,7 @@ import {LunaResort} from './LunaResort';
 // import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
+import {LunarSecurityStations} from './LunarSecurityStations';
 // import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
 // import {LunaSenate} from './LunaSenate';
@@ -142,7 +143,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
     {cardName: CardName.HELIOSTAT_MIRROR_ARRAY, Factory: HeliostatMirrorArray},
-    //   // {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
+    {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
     {cardName: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY, Factory: HypersensitiveSiliconChipFactory},
     {cardName: CardName.COPERNICUS_SOLAR_ARRAYS, Factory: CopernicusSolarArrays},
     {cardName: CardName.DARKSIDE_INCUBATION_PLANT, Factory: DarksideIncubationPlant},

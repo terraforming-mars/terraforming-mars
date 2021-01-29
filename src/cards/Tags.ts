@@ -12,5 +12,5 @@ export enum Tags {
     CITY = 'city',
     WILDCARD = 'wild',
     MOON = 'moon',
-    EVENT = 'event', // please, always keep event at the tail
+    EVENT = 'event',
 }

@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
-import {Units} from '../src/Units';
+import {TestPlayer} from './TestPlayer';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export const maxOutOceans = function(player: Player, toValue: number = 0): Array<ISpace> {
@@ -79,31 +79,12 @@ export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmo
   game.phase = Phase.ACTION;
 };
 
-export function setPlayerProductionForTest(player: Player, units: Partial<Units>) {
-  if (units.megacredits !== undefined) {
-    (player as any).megaCreditProduction = units.megacredits;
-  }
-  if (units.steel !== undefined) {
-    (player as any).steelProduction = units.steel;
-  }
-  if (units.titanium !== undefined) {
-    (player as any).titaniumProduction = units.titanium;
-  }
-  if (units.plants !== undefined) {
-    (player as any).plantProduction = units.plants;
-  }
-  if (units.energy !== undefined) {
-    (player as any).energyProduction = units.energy;
-  }
-  if (units.heat !== undefined) {
-    (player as any).heatProduction = units.heat;
-  }
-}
-
+// This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.
+// So, someone do that sometime soon, please.
 class TestPlayerFactory {
   constructor(private color: Color) {}
-  newPlayer() {
-    return new Player('player-' + this.color, this.color, false, 0, this.color + '-id');
+  newPlayer(): TestPlayer {
+    return new TestPlayer(this.color);
   }
 }
 

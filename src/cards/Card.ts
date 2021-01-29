@@ -7,6 +7,11 @@ import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
 
+export interface IDiscount {
+  tag: Tags;
+  amount: number;
+}
+
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardType: CardType;

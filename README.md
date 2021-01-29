@@ -16,7 +16,7 @@ You can demo this web app online [here](https://terraforming-mars.herokuapp.com/
 ## Docker Hub Image Game Server Running
 
 Docker Hub image is made for users who difficulty to Vist the Demo website.
-You can build game server easily. 
+You can build game server easily.
 1. Search terraforming-mars docker image on you NAS(eg:QNAP or Synology) or other container. You can find [ltdstudio/terraforming-mars].
 2. Build it when you downloaded docker Image.
 3. Run it. It will start the game server listening on the Host port of 8080.
@@ -32,7 +32,7 @@ npm run build
 npm run start
 ```
 
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. To change this port from 8080, add `PORT=<new port>` in your `.env` file. 
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. To change this port from 8080, add `PORT=<new port>` in your `.env` file.
 
 Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
@@ -107,7 +107,7 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a>
-    </td>    
+    </td>
   </tr>
 </table>
 

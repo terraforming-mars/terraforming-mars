@@ -592,7 +592,7 @@ console.log('Starting server on port ' + (process.env.PORT || 8080));
 try {
   // The first call to Database.getInstance also intiailizes a connection to the database. Better to
   // fail here than after the server opens to process requests.
-  Database.getInstance();
+  Database.getInstance().purgeUnfinishedGames();
 } catch (err) {
   console.error('Cannot connect to database:', err);
   throw err;

@@ -11,7 +11,6 @@ import {REDS_RULING_POLICY_COST, MAX_OXYGEN_LEVEL} from '../../constants';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class WildlifeDome implements IProjectCard {
     public cost = 15;
@@ -43,7 +42,7 @@ export class WildlifeDome implements IProjectCard {
       cardNumber: 'T15',
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
       renderData: CardRenderer.builder((b) => {
-        b.greenery().secondaryTag(AltSecondaryTag.OXYGEN);
+        b.greenery();
       }),
       description: 'Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.',
     }

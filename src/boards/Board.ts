@@ -1,4 +1,4 @@
-import {ISpace} from './ISpace';
+import {ISpace, SpaceId} from './ISpace';
 import {Player, PlayerId} from '../Player';
 import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
@@ -13,10 +13,15 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
+
+  // stores adjacent spaces in clockwise order starting from the top left
+  private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
+
   protected constructor(public spaces: Array<ISpace>) {
+    this.maxX = Math.max(...spaces.map((s) => s.x));
+    this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
-      this.maxX = Math.max(this.maxX, space.x);
-      this.maxY = Math.max(this.maxY, space.y);
+      this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
     });
   };
 
@@ -33,8 +38,8 @@ export abstract class Board {
     return space;
   }
 
-  // getAdjacentSpaces expects an odd number of rows. If a funny shape appears, it can be addressed.
-  public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+  protected computeAdjacentSpaces(space: ISpace): Array<ISpace> {
+    // Expects an odd number of rows. If a funny shape appears, it can be addressed.
     const middleRow = this.maxY / 2;
     if (space.spaceType !== SpaceType.COLONY) {
       if (space.y < 0 || space.y > this.maxY) {
@@ -59,18 +64,40 @@ export abstract class Board {
         bottomRightSpace[0]++;
         topLeftSpace[0]--;
       }
-      return this.spaces.filter((adj) => {
-        return space !== adj && adj.spaceType !== SpaceType.COLONY && (
-          (adj.x === leftSpace[0] && adj.y === leftSpace[1]) ||
-          (adj.x === rightSpace[0] && adj.y === rightSpace[1]) ||
-          (adj.x === topLeftSpace[0] && adj.y === topLeftSpace[1]) ||
-          (adj.x === topRightSpace[0] && adj.y === topRightSpace[1]) ||
-          (adj.x === bottomLeftSpace[0] && adj.y === bottomLeftSpace[1]) ||
-          (adj.x === bottomRightSpace[0] && adj.y === bottomRightSpace[1])
+      // Coordinates are in clockwise order. Order only ever matters during solo game set-up when
+      // placing starting forests. Since that is the only case where ordering matters, it is
+      // adopted here.
+      const coords = [
+        topLeftSpace,
+        topRightSpace,
+        rightSpace,
+        bottomRightSpace,
+        bottomLeftSpace,
+        leftSpace,
+      ];
+      const spaces: Array<ISpace> = [];
+      for (const [x, y] of coords) {
+        const adj = this.spaces.find((adj) =>
+          space !== adj && adj.spaceType !== SpaceType.COLONY &&
+            adj.x === x && adj.y === y,
         );
-      });
+        if (adj !== undefined) {
+          spaces.push(adj);
+        }
+      }
+      return spaces;
     }
     return [];
+  }
+
+  // Returns adjacent spaces in clockwise order starting from the top left.
+  public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+    const spaces = this.adjacentSpaces.get(space.id);
+    if (spaces === undefined) {
+      throw new Error(`Unexpected space ID ${space.id}`);
+    }
+    // Clone so that callers can't mutate our arrays
+    return [...spaces];
   }
 
   public getSpaceByTileCard(cardName: string): ISpace | undefined {

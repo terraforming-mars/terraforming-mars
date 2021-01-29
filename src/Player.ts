@@ -86,17 +86,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Resources
   public megaCredits: number = 0;
-  private megaCreditProduction: number = 0;
+  protected megaCreditProduction: number = 0;
   public steel: number = 0;
-  private steelProduction: number = 0;
+  protected steelProduction: number = 0;
   public titanium: number = 0;
-  private titaniumProduction: number = 0;
+  protected titaniumProduction: number = 0;
   public plants: number = 0;
-  private plantProduction: number = 0;
+  protected plantProduction: number = 0;
   public energy: number = 0;
-  private energyProduction: number = 0;
+  protected energyProduction: number = 0;
   public heat: number = 0;
-  private heatProduction: number = 0;
+  protected heatProduction: number = 0;
 
   // Resource values
   private titaniumValue: number = 3;
@@ -987,7 +987,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public dealCards(quantity: number, cards: Array<IProjectCard>) {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.dealer.dealCard(true));
+      cards.push(this.game.dealer.dealCard(this.game, true));
     }
   }
 
@@ -1580,7 +1580,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   public canPlay(card: IProjectCard): boolean {
     const canUseSteel = card.tags.includes(Tags.BUILDING);
     const canUseTitanium = card.tags.includes(Tags.SPACE);
-    let maxPay = 0;
+    const canUseMicrobes = card.tags.includes(Tags.PLANT);
+    const canUseFloaters = card.tags.includes(Tags.VENUS);
 
     let steel = this.steel;
     let titanium = this.titanium;
@@ -1604,54 +1605,22 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    if (canUseSteel) {
-      maxPay += steel * this.steelValue;
-    }
-    if (canUseTitanium) {
-      maxPay += titanium * this.getTitaniumValue();
-    }
+    const canAfford = this.getCardCost(card) <=
+      this.spendableMegacredits() +
+      (canUseSteel ? steel * this.steelValue : 0) +
+      (canUseTitanium ? titanium * this.getTitaniumValue() : 0) +
+      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
 
-    const psychrophiles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
-
-    if (psychrophiles !== undefined &&
-        psychrophiles.resourceCount &&
-        card.tags.indexOf(Tags.PLANT) !== -1) {
-      maxPay += psychrophiles.resourceCount * 2;
-    }
-
-    const dirigibles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.DIRIGIBLES);
-
-    if (dirigibles !== undefined &&
-        dirigibles.resourceCount &&
-        card.tags.indexOf(Tags.VENUS) !== -1) {
-      maxPay += dirigibles.resourceCount * 3;
-    }
-
-    maxPay += this.spendableMegacredits();
-    return maxPay >= this.getCardCost(card) &&
-                (card.canPlay === undefined || card.canPlay(this));
+    return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
   public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
-    let extraResource: number = 0;
-    if (canUseFloaters !== undefined && canUseFloaters) {
-      extraResource += this.getFloatersCanSpend() * 3;
-    }
-
-    if (canUseMicrobes !== undefined && canUseMicrobes) {
-      extraResource += this.getMicrobesCanSpend() * 2;
-    }
-
-    if (canUseTitanium) {
-      return this.spendableMegacredits() +
+    return cost <= this.spendableMegacredits() +
       (canUseSteel ? this.steel * this.steelValue : 0) +
       (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +
-      extraResource >= cost;
-    }
-
-    return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
+      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
   // Public for testing
@@ -2028,51 +1997,45 @@ export class Player implements ISerializable<SerializedPlayer> {
     return result;
   }
 
-  // Only use useObjectAssign in tests.
-  // TODO(kberg): Remove useObjectAssign by 2020-02-01
-  public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
+  public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
-    if (useObjectAssign) {
-      Object.assign(player, d);
-    } else {
-      player.actionsTakenThisRound = d.actionsTakenThisRound;
-      player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
-      player.cardCost = d.cardCost;
-      player.cardDiscount = d.cardDiscount;
-      player.colonyTradeDiscount = d.colonyTradeDiscount;
-      player.colonyTradeOffset = d.colonyTradeOffset;
-      player.colonyVictoryPoints = d.colonyVictoryPoints;
-      player.corporationInitialActionDone = d.corporationInitialActionDone;
-      player.energy = d.energy;
-      player.energyProduction = d.energyProduction;
-      player.fleetSize = d.fleetSize;
-      player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
-      player.heat = d.heat;
-      player.heatProduction = d.heatProduction;
-      player.megaCreditProduction = d.megaCreditProduction;
-      player.megaCredits = d.megaCredits;
-      player.needsToDraft = d.needsToDraft;
-      player.oceanBonus = d.oceanBonus;
-      player.plantProduction = d.plantProduction;
-      player.plants = d.plants;
-      player.plantsNeededForGreenery = d.plantsNeededForGreenery;
-      player.removingPlayers = d.removingPlayers;
-      player.scienceTagCount = d.scienceTagCount;
-      player.steel = d.steel;
-      player.steelProduction = d.steelProduction;
-      player.steelValue = d.steelValue;
-      player.terraformRating = d.terraformRating;
-      player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
-      player.titanium = d.titanium;
-      player.titaniumProduction = d.titaniumProduction;
-      player.titaniumValue = d.titaniumValue;
-      player.tradesThisTurn = d.tradesThisTurn;
-      player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
-      player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
-      player.victoryPointsBreakdown = d.victoryPointsBreakdown;
-    }
+    player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+    player.cardCost = d.cardCost;
+    player.cardDiscount = d.cardDiscount;
+    player.colonyTradeDiscount = d.colonyTradeDiscount;
+    player.colonyTradeOffset = d.colonyTradeOffset;
+    player.colonyVictoryPoints = d.colonyVictoryPoints;
+    player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.energy = d.energy;
+    player.energyProduction = d.energyProduction;
+    player.fleetSize = d.fleetSize;
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+    player.heat = d.heat;
+    player.heatProduction = d.heatProduction;
+    player.megaCreditProduction = d.megaCreditProduction;
+    player.megaCredits = d.megaCredits;
+    player.needsToDraft = d.needsToDraft;
+    player.oceanBonus = d.oceanBonus;
+    player.plantProduction = d.plantProduction;
+    player.plants = d.plants;
+    player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.removingPlayers = d.removingPlayers;
+    player.scienceTagCount = d.scienceTagCount;
+    player.steel = d.steel;
+    player.steelProduction = d.steelProduction;
+    player.steelValue = d.steelValue;
+    player.terraformRating = d.terraformRating;
+    player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+    player.titanium = d.titanium;
+    player.titaniumProduction = d.titaniumProduction;
+    player.titaniumValue = d.titaniumValue;
+    player.tradesThisTurn = d.tradesThisTurn;
+    player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+    player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.victoryPointsBreakdown = d.victoryPointsBreakdown;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :

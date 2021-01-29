@@ -2,28 +2,20 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 
 export enum Priority {
-  SPONSORED_ACADEMIES, // To discard before drawing
+  COST, // Cost of a blue card action. Must happen before the effects.
+  OPPONENT_TRIGGER, // Any effect from one of your opponent's card that triggers during your turn.
+  DISCARD_BEFORE_DRAW, // When you must discard before you can draw. Mars University, Sponsored Academies.
   DRAW_CARDS,
   BUILD_COLONY,
-  DECREASE_ANY_PRODUCTION,
-  DISCARD_CARDS,
   INCREASE_COLONY_TRACK,
-  PLACE_CITY_TILE,
   PLACE_OCEAN_TILE,
-  PLACE_GREENERY_TILE,
-  PLACE_MOON_MINE_TILE,
-  PLACE_MOON_ROAD_TILE,
-  PLACE_MOON_COLONY_TILE,
-  PLAY_PROJECT_CARD,
-  REMOVE_ANY_PLANTS,
-  REMOVE_RESOURCES_FROM_CARD,
-  ADD_RESOURCES_TO_CARDS,
-  SELECT_HOW_TO_PAY,
-  SELECT_CARD_TO_KEEP,
-  SEND_DELEGATE_TO_AREA,
-  SELECT_PRODUCTION_TO_LOSE,
-  STEAL_RESOURCES,
-  DEFAULT,
+  DEFAULT, // Anything that doesn't fit into another category.
+  ATTACK_OPPONENT, // Effects that make your opponents lose resources or production.
+  LOSE_AS_MUCH_AS_POSSIBLE, // Effects that make you lose resource or production "as much as possible". Pharmacy Union, Mons.
+  GAIN_RESOURCE_OR_PRODUCTION,
+  LOSE_RESOURCE_OR_PRODUCTION,
+  DECREASE_COLONY_TRACK_AFTER_TRADE,
+  DISCARD_CARDS,
 }
 
 export class DeferredAction {

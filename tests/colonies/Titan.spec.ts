@@ -44,9 +44,11 @@ describe('Titan', function() {
     player.playCard(aerialMappers);
     titan.trade(player);
 
-    // Should have AddResourcesToCard, GiveColonyBonus and decrease track
+    // Should have GiveColonyBonus, AddResourcesToCard and decrease track
     expect(game.deferredActions).has.lengthOf(3);
-    const action = game.deferredActions.pop()!;
+    game.deferredActions.pop(); // GiveColonyBonus
+
+    const action = game.deferredActions.pop()!; // AddResourcesToCard
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
     // Should directly add to AerialMappers, since there's no other target
@@ -64,9 +66,7 @@ describe('Titan', function() {
     game.deferredActions.pop()!.execute(); // Gain placement floaters
 
     titan.trade(player2);
-    game.deferredActions.pop()!.execute(); // Gain trade floaters
-
-    game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
 
     expect(aerialMappers.resourceCount).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(1);

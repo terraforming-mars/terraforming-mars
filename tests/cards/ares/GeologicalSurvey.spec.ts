@@ -23,22 +23,22 @@ describe('GeologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.false;
   });
 

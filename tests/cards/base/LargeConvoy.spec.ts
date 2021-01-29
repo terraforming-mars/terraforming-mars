@@ -8,13 +8,13 @@ import {Player} from '../../../src/Player';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : Player; let game : Game;
+  let card : LargeConvoy; let player : Player;
 
   beforeEach(function() {
     card = new LargeConvoy();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play without animal cards', function() {
@@ -61,7 +61,7 @@ describe('LargeConvoy', function() {
   it('Should play without oceans', function() {
     const pets = new Pets();
     player.playedCards.push(pets);
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     const plantsCount = player.plants;
     const cardsInHand = player.cardsInHand.length;
 

@@ -5,17 +5,17 @@ import {Player} from '../../../src/Player';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('DustSeals', function() {
-  let card : DustSeals; let player : Player; let game : Game;
+  let card : DustSeals; let player : Player;
 
   beforeEach(function() {
     card = new DustSeals();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, game, 4);
+    maxOutOceans(player, 4);
     expect(card.canPlay(player)).is.not.true;
   });
 

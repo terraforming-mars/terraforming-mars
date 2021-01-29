@@ -1,5 +1,4 @@
 import {IProjectCard} from '../cards/IProjectCard';
-import {Game} from '../Game';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
@@ -19,9 +18,9 @@ import {TurmoilPolicy} from './TurmoilPolicy';
 export class TurmoilHandler {
   private constructor() {}
 
-  public static addPlayerAction(player: Player, game: Game, options: PlayerInput[]): void {
+  public static addPlayerAction(player: Player, options: PlayerInput[]): void {
     // Turmoil Scientists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS)) {
       const scientistsPolicy = SCIENTISTS_POLICY_1;
 
       if (scientistsPolicy.canAct(player)) {
@@ -36,7 +35,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Kelvinists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS)) {
       const kelvinistsPolicy = KELVINISTS_POLICY_1;
 
       if (kelvinistsPolicy.canAct(player)) {
@@ -51,7 +50,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Kelvinists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, 'kp03')) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, 'kp03')) {
       const kelvinistsPolicy = KELVINISTS_POLICY_3;
 
       if (kelvinistsPolicy.canAct(player)) {
@@ -66,7 +65,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Greens action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_4)) {
       const greensPolicy = GREENS_POLICY_4;
 
       if (greensPolicy.canAct(player)) {
@@ -81,7 +80,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Mars First action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_4)) {
       const marsFirstPolicy = MARS_FIRST_POLICY_4;
 
       if (marsFirstPolicy.canAct(player)) {
@@ -96,7 +95,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_2)) {
       const unityPolicy = UNITY_POLICY_2;
 
       if (unityPolicy.canAct(player)) {
@@ -111,7 +110,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_3)) {
       const unityPolicy = UNITY_POLICY_3;
 
       if (unityPolicy.canAct(player)) {
@@ -126,7 +125,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Reds action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
       const redsPolicy = REDS_POLICY_3;
 
       if (redsPolicy.canAct(player)) {
@@ -155,45 +154,45 @@ export class TurmoilHandler {
     }
   }
 
-  public static resolveTilePlacementCosts(game: Game, player: Player): void {
+  public static resolveTilePlacementCosts(player: Player): void {
     // PoliticalAgendas Reds P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2)) {
       const redsPolicy = REDS_POLICY_2;
       redsPolicy.onTilePlaced(player);
     }
   }
 
-  public static resolveTilePlacementBonuses(game: Game, player: Player, spaceType: SpaceType): void {
+  public static resolveTilePlacementBonuses(player: Player, spaceType: SpaceType): void {
     PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
 
     // PoliticalAgendas Greens P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2)) {
       const greensPolicy = GREENS_POLICY_2;
       greensPolicy.onTilePlaced(player);
     }
 
     // PoliticalAgendas Kelvinists P4 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4)) {
       const kelvinistsPolicy = KELVINISTS_POLICY_4;
       kelvinistsPolicy.onTilePlaced(player);
     }
   }
 
-  public static onGlobalParameterIncrease(game: Game, player: Player, parameter: GlobalParameter, steps: number = 1): void {
+  public static onGlobalParameterIncrease(player: Player, parameter: GlobalParameter, steps: number = 1): void {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
         player.setResource(Resources.MEGACREDITS, steps * 3);
       }
     }
 
     // PoliticalAgendas Reds P4 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
       player.addProduction(Resources.MEGACREDITS, -1 * steps);
     }
 
     // PoliticalAgendas Scientists P3 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
       player.drawCard(steps);
     }
   }

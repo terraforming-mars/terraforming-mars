@@ -28,13 +28,13 @@ describe('EcologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
+    AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
   });
 

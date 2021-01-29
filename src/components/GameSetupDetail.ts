@@ -88,6 +88,11 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
             </li>
 
 
+            <li v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents">
+              <div class="setup-item" v-i18n>Turmoil:</div>
+              <div class="game-config generic" v-i18n>No negative Turmoil event</div>
+            </li>
+
             <li v-if="playerNumber === 1">
               <div class="setup-item" v-i18n>Solo:</div>
               <div v-if="gameOptions.preludeExtension" class="game-config generic" v-i18n>12 Gens</div>

@@ -40,14 +40,15 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon(game: Game, cb: (moonData: IMoonData) => void) {
+  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T) {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
         return;
       }
-      cb(game.moonData);
+      return cb(game.moonData);
     }
+    return elseCb ? elseCb() : undefined;
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.

@@ -5,7 +5,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class RemoveAnyPlants implements DeferredAction {
-  public priority = Priority.REMOVE_ANY_PLANTS;
+  public priority = Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public count: number = 1,

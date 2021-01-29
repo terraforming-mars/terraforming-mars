@@ -15,7 +15,7 @@ export class _AresHazardPlacement {
   }
 
   public static randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
-    const space = game.getSpaceByOffset(direction, 'hazard');
+    const space = game.getSpaceByOffset(direction, tileType);
     this.putHazardAt(space, tileType);
     return space;
   }

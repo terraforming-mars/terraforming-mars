@@ -322,7 +322,7 @@ class Builder {
     return this;
   }
 
-  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = true) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     if (withO2) {

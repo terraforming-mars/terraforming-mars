@@ -87,7 +87,7 @@ export class LogBuilder {
     }
 
     public tileType(value: TileType): LogBuilder {
-      this.parameters.push(new LogMessageData(LogMessageDataType.TILE_TYPE, value.toString()));
+      this.parameters.push(new LogMessageData(LogMessageDataType.TILE_TYPE, TileType.toString(value)));
       return this;
     }
 

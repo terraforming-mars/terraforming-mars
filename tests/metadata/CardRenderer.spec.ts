@@ -247,11 +247,10 @@ describe('CardRenderer', function() {
       expect(item.size).to.equal(CardRenderItemSize.SMALL);
       expect(item.amount).to.equal(-1);
     });
-    it('with 02', () => {
-      const renderer = CardRenderer.builder((b) => b.greenery(CardRenderItemSize.SMALL, true));
+    it('without 02', () => {
+      const renderer = CardRenderer.builder((b) => b.greenery());
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.GREENERY);
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
       expect(item.secondaryTag).to.equal(AltSecondaryTag.OXYGEN);
       expect(item.amount).to.equal(-1);
     });

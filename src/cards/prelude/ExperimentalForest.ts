@@ -4,7 +4,6 @@ import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
 import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class ExperimentalForest extends PreludeCard {
   constructor() {
@@ -14,7 +13,7 @@ export class ExperimentalForest extends PreludeCard {
       metadata: {
         cardNumber: 'P12',
         renderData: CardRenderer.builder((b) => {
-          b.greenery().secondaryTag(AltSecondaryTag.OXYGEN).cards(2).secondaryTag(Tags.PLANT);
+          b.greenery().cards(2).secondaryTag(Tags.PLANT);
         }),
         description: 'Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
       },

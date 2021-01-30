@@ -11,7 +11,7 @@ import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 // import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
-// import {CosmicRadiation} from './CosmicRadiation';
+import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
@@ -76,7 +76,7 @@ import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 // import {ProcessorFactory} from './ProcessorFactory';
-// import {RevoltingColonists} from './RevoltingColonists';
+import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
 // import {RustEatingBacteria} from './RustEatingBacteria';
@@ -152,8 +152,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HE3_REFINERY, Factory: HE3Refinery},
     {cardName: CardName.HE3_LOBBYISTS, Factory: HE3Lobbyists},
     //   // Start of second pack.
-    //   {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
-    //   {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
+    {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
+    {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
     //   {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},

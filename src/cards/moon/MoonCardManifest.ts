@@ -26,7 +26,7 @@ import {GeodesicTents} from './GeodesicTents';
 import {Habitat14} from './Habitat14';
 import {HE3FusionPlant} from './HE3FusionPlant';
 import {HE3Lobbyists} from './HE3Lobbyists';
-// import {HE3ProductionQuotas} from './HE3ProductionQuotas';
+import {HE3ProductionQuotas} from './HE3ProductionQuotas';
 import {HE3Refinery} from './HE3Refinery';
 import {HeavyDutyRovers} from './HeavyDutyRovers';
 import {HeliostatMirrorArray} from './HeliostatMirrorArray';
@@ -158,7 +158,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
     //   {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
-    //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
     //   // // These cards have some sort of behavior.

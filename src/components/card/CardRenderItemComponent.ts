@@ -257,9 +257,6 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
       }
-      if (this.item.type === CardRenderItemType.DISEASE) {
-        result += 'D';
-      }
       // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
         result = '?';

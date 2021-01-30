@@ -85,9 +85,6 @@ export const maxOutOceans = function(player: Player, toValue: number = 0): Array
   return TestingUtils.maxOutOceans(player, toValue);
 };
 
-export const resetBoard = function(game: Game): void {
-  TestingUtils.resetBoard(game);
-};
 
 export const setCustomGameOptions = function(options: object = {}): GameOptions {
   return TestingUtils.setCustomGameOptions(options);

@@ -31,8 +31,7 @@ export class MiningRobotsManufCenter extends MoonCard {
 
   public play(player: Player) {
     Units.deductUnits(this.reserveUnits, player);
-    MoonExpansion.raiseMiningRate(player);
-    MoonExpansion.raiseMiningRate(player);
+    MoonExpansion.raiseMiningRate(player, 2);
     return undefined;
   }
 }

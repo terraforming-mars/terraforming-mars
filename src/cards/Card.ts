@@ -5,7 +5,6 @@ import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
 import {Player} from '../Player';
-import {Game} from '../Game';
 import {Units} from '../Units';
 
 export interface IDiscount {
@@ -76,7 +75,7 @@ export abstract class Card {
   public get productionBox(): Units {
     return this.properties.productionBox || Units.EMPTY;
   }
-  public canPlay(player: Player, _game?: Game) {
+  public canPlay(player: Player) {
     if (this.properties.metadata.requirements === undefined) {
       return true;
     }

@@ -489,6 +489,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     preludeExtension: options.preludeExtension,
     promoCardsOption: options.promoCardsOption,
     politicalAgendasExtension: options.politicalAgendasExtension,
+    removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
     showOtherPlayersVP: options.showOtherPlayersVP,
     showTimers: options.showTimers,
     shuffleMapOption: options.shuffleMapOption,

@@ -4,25 +4,29 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
-import {CardMetadata} from '../CardMetadata';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class FloaterLeasing implements IProjectCard {
-    public cost = 3;
-    public tags = [];
-    public name = CardName.FLOATER_LEASING;
-    public cardType = CardType.AUTOMATED;
+export class FloaterLeasing extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 3,
+      name: CardName.FLOATER_LEASING,
+      cardType: CardType.AUTOMATED,
 
-    public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, Math.floor(player.getResourceCount(ResourceType.FLOATER) / 3));
-      return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'C10',
-      renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.megacredits(1)).slash().floaters(3).digit;
-      }),
-      description: 'Increase your MC production 1 step PER 3 floaters you have.',
-    }
+      metadata: {
+        cardNumber: 'C10',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(1)).slash().floaters(3).digit;
+        }),
+        description: 'Increase your MC production 1 step PER 3 floaters you have.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, Math.floor(player.getResourceCount(ResourceType.FLOATER) / 3));
+    return undefined;
+  }
 }
 

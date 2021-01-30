@@ -515,9 +515,47 @@
                 text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;
             }
             .card-tharsis-logo {
-                position: absolute;
-                top: 10px;
-                left: 6px;
+                color: #020202;
+                font-size: 24px;
+                text-shadow: 6px 6px 6px grey;
+                margin: 15px 0 0 -26px;
+
+                .card-tharsis-logo-image {
+                    text-shadow: none;
+                    box-shadow: 3px 3px 6px grey;
+                    margin: 0 0 0 -108px;
+                    border: 1px solid red;
+                    display:inline-block;
+                    background-color:#ff5f00;
+                    position: absolute;
+                    width: 32px;
+                    height: 33px;
+
+                    &::before {
+                        content: "▲";
+                        text-shadow: none;
+                        margin-right: 2px;
+                        position: absolute;
+                        margin: -2px 0 0 -12px;
+                    }
+
+                    &::after {
+                        content: "▲";
+                        color: #020202;
+                        font-size: 14px;
+                        position: absolute;
+                        margin: 3px 0 0 3px;
+                    }
+                }
+
+                .card-tharsis-logo-text {
+                    text-transform: uppercase;
+                    width: 135px;
+                    white-space: normal;
+                    text-indent: 45px;
+                    line-height: 30px;
+                    padding: 4px 0 0 20px;
+                }
             }
             .card-unmi-logo {
                 position: absolute;
@@ -842,6 +880,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/asteroid.png);
             }
+            .card-resource-disease {
+                color: #0000 !important;
+                background-image: url(./assets/resources/disease.png);
+            }
             .card-resource-preservation {
                 background-image: url(./assets/resources/pristar.png);
             }
@@ -850,10 +892,6 @@
             }
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
-            }
-            .card-resource-disease {
-                background: linear-gradient(darkorange, gold, darkorange);
-                color: black;
             }
             /*special*/
             .card-special {

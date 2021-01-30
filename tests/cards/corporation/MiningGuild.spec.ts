@@ -57,7 +57,7 @@ describe('MiningGuild', function() {
   });
 
   it('Does not give bonus when other players place ocean tiles', function() {
-    maxOutOceans(player2, game); // 1 ocean with titanium and 1 with steel
+    maxOutOceans(player2); // 1 ocean with titanium and 1 with steel
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });
 

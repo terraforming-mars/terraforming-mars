@@ -10,6 +10,7 @@ import {Card} from './card/Card';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
+import {CardName} from '../CardName';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {

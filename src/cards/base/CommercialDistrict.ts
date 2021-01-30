@@ -29,7 +29,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
         b.vpText('1 VP per adjacent city tile.');
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
+      victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1, true),
     },
   ) {
     super({

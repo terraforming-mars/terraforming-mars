@@ -115,7 +115,6 @@ export class Server {
       dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
       dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
       dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
-      initialDraft: game.gameOptions.initialDraftVariant,
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,

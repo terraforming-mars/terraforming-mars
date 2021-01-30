@@ -91,7 +91,7 @@ export class Playwrights implements CorporationCard {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
             player.canAfford(player.getCardCost(card)) &&
-            (card.canPlay === undefined || card.canPlay(player, player.game));
+            (card.canPlay === undefined || card.canPlay(player));
         }));
       });
       this.checkLoops--;

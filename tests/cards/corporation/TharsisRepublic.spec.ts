@@ -58,8 +58,8 @@ describe('TharsisRepublic', function() {
 
   it('Gives 2 MC production in solo mode', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    Game.newInstance('foobar', [player], player);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

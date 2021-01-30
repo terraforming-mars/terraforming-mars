@@ -8,6 +8,9 @@ import {SpecialTags} from '../../cards/SpecialTags';
 import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
 import {JovianMultiplier} from './JovianMultiplier';
+import {PartyName} from '../../turmoil/parties/PartyName';
+import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
+import {ColonyName} from '../../colonies/ColonyName';
 
 interface CardTagDiscount {
   tag: InterfaceTagsType,
@@ -202,6 +205,22 @@ export const PlayerTags = Vue.component('player-tags', {
           }
         }
       }
+
+      const turmoil = this.player.turmoil;
+      if (tag === Tags.SPACE &&
+        turmoil && turmoil.ruling === PartyName.UNITY &&
+        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) {
+        return true;
+      }
+
+      const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      if (tag === 'all' &&
+        iapetusColony !== undefined &&
+        iapetusColony.visitor !== undefined &&
+        iapetusColony.colonies.includes(this.player.color)) {
+        return true;
+      }
+
       return false;
     },
     getTagDiscountAmount: function(tag: InterfaceTagsType): number {
@@ -211,6 +230,16 @@ export const PlayerTags = Vue.component('player-tags', {
           discount += getDiscountAmount(tag, card.name as CardName);
         }
       }
+
+      if (tag === Tags.SPACE && this.player.turmoil?.ruling === PartyName.UNITY) {
+        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      }
+
+      const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      if (tag === 'all' && iapetusColony !== undefined && iapetusColony.visitor !== undefined) {
+        discount += iapetusColony.colonies.filter((owner) => owner === this.player.color).length;
+      }
+
       return discount;
     },
     getTagCount: function(tagName: InterfaceTagsType): number {

@@ -11,6 +11,8 @@ import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 
+import * as raw_settings from '../genfiles/settings.json';
+
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {
@@ -161,9 +163,7 @@ export const LogPanel = Vue.component('log-panel', {
     },
   },
   mounted: function() {
-    const envLength = parseInt(process.env.LOG_LENGTH || '' );
-    const logLength = Number.isInteger(envLength) ? envLength : 50;
-    fetch(`/api/game/logs?id=${this.id}&limit=${logLength}`)
+    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}`)
       .then((response) => response.json())
       .then((messages) => {
         this.messages.splice(0, this.messages.length);

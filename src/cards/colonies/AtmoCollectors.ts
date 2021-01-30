@@ -9,16 +9,34 @@ import {IResourceCard} from '../ICard';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardMetadata} from '../CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class AtmoCollectors implements IProjectCard, IResourceCard {
-  public cost = 15;
-  public tags = [];
-  public name = CardName.ATMO_COLLECTORS;
-  public cardType = CardType.ACTIVE;
-  public resourceType = ResourceType.FLOATER;
+export class AtmoCollectors extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 15,
+      name: CardName.ATMO_COLLECTORS,
+      cardType: CardType.ACTIVE,
+      resourceType: ResourceType.FLOATER,
+
+      metadata: {
+        description: 'Add 2 floaters to ANY card.',
+        cardNumber: 'C03',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add one floater here.', (eb) => {
+            eb.empty().startAction.floaters(1).or(CardRenderItemSize.SMALL);
+          }).br;
+          b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
+            eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit;
+          }).br;
+          b.floaters(2).asterix();
+        }),
+      },
+    });
+  }
+
   public resourceCount: number = 0;
 
   public canAct(): boolean {
@@ -60,17 +78,4 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
-  public metadata: CardMetadata = {
-    description: 'Add 2 floaters to ANY card.',
-    cardNumber: 'C03',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Add one floater here.', (eb) => {
-        eb.empty().startAction.floaters(1).or(CardRenderItemSize.SMALL);
-      }).br;
-      b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-        eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit;
-      }).br;
-      b.floaters(2).asterix();
-    }),
-  };
 }

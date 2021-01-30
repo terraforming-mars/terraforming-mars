@@ -23,7 +23,7 @@ describe('GreatDamPromo', function() {
   });
 
   it('Should play', function() {
-    maxOutOceans(player, player.game, 4);
+    maxOutOceans(player, 4);
 
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
@@ -32,7 +32,7 @@ describe('GreatDamPromo', function() {
   });
 
   it('Works with Ares', function() {
-    maxOutOceans(player, player.game, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
+    maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;

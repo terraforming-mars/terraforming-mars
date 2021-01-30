@@ -191,7 +191,7 @@ describe('Turmoil', function() {
     expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
-    maxOutOceans(player, game, 9);
+    maxOutOceans(player, 9);
     expect(protectedValley.canPlay(player)).is.true;
     expect(iceAsteroid.canPlay(player)).is.true;
   });

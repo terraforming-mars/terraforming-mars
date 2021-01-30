@@ -896,7 +896,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           !this.actionsThisGeneration.has(this.corporationCard.name) &&
           this.corporationCard.action !== undefined &&
           this.corporationCard.canAct !== undefined &&
-          this.corporationCard.canAct(this, this.game)) {
+          this.corporationCard.canAct(this)) {
       result.push(this.corporationCard);
     }
     for (const playedCard of this.playedCards) {
@@ -904,7 +904,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCard.action !== undefined &&
               playedCard.canAct !== undefined &&
               !this.actionsThisGeneration.has(playedCard.name) &&
-              playedCard.canAct(this, this.game)) {
+              playedCard.canAct(this)) {
         result.push(playedCard);
       }
     }
@@ -1235,7 +1235,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Play the card
-    const action = selectedCard.play(this, this.game);
+    const action = selectedCard.play(this);
     if (action !== undefined) {
       this.game.defer(new DeferredAction(
         this,
@@ -1304,7 +1304,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
-        const action = foundCard.action!(this, this.game);
+        const action = foundCard.action!(this);
         if (action !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1561,7 +1561,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private getPlayablePreludeCards(): Array<IProjectCard> {
-    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this, this.game));
+    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
   public getPlayableCards(): Array<IProjectCard> {
@@ -1612,7 +1612,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
 
-    return canAfford && (card.canPlay === undefined || card.canPlay(this, this.game));
+    return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
   public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
@@ -1772,7 +1772,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }));
     }
 
-    TurmoilHandler.addPlayerAction(this, this.game, action.options);
+    TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(

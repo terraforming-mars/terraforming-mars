@@ -1,11 +1,10 @@
 import {ICard} from './ICard';
 import {Player} from '../Player';
-import {Game} from '../Game';
 import {Resources} from '../Resources';
 import {Units} from '../Units';
 
 export interface IProjectCard extends ICard {
-    canPlay?: (player: Player, game: Game) => boolean;
+    canPlay?: (player: Player) => boolean;
     cost: number;
     hasRequirements?: boolean;
 

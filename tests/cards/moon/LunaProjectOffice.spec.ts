@@ -27,7 +27,15 @@ describe('LunaProjectOffice', () => {
 
   it('play - solo', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance(
+      'id',
+      [player],
+      player,
+      setCustomGameOptions({
+        moonExpansion: true,
+        turmoilExtension: false,
+      }));
+
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
@@ -66,7 +74,15 @@ describe('LunaProjectOffice', () => {
   it('play - 2 player - draft', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('id', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true, draftVariant: true}));
+    const game = Game.newInstance(
+      'id',
+      [player, redPlayer],
+      player,
+      setCustomGameOptions({
+        moonExpansion: true,
+        draftVariant: true,
+        turmoilExtension: false,
+      }));
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
@@ -115,7 +131,15 @@ describe('LunaProjectOffice', () => {
   it('play - 2 player - no draft', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('id', [player, redPlayer], player, MOON_OPTIONS);
+    const game = Game.newInstance(
+      'id',
+      [player, redPlayer],
+      player,
+      setCustomGameOptions({
+        moonExpansion: true,
+        draftVariant: false,
+        turmoilExtension: false,
+      }));
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
@@ -158,10 +182,15 @@ describe('LunaProjectOffice', () => {
 });
 
 function finishGeneration(game: Game): void {
+  const priorGeneration = game.generation;
   game.getPlayers().forEach((player) => {
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
   });
+  const currentGeneration = game.generation;
+  if (currentGeneration !== priorGeneration + 1) {
+    console.log('uh oh');
+  }
 }
 
 function getWaitingFor(player: Player): SelectCard<IProjectCard> {

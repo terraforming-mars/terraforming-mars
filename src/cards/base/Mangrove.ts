@@ -26,7 +26,7 @@ export class Mangrove extends Card implements IProjectCard {
       metadata: {
         cardNumber: '059',
         requirements: CardRequirements.builder((b) => b.temperature(4)),
-        renderData: CardRenderer.builder((b) => b.greenery(CardRenderItemSize.MEDIUM, true).asterix()),
+        renderData: CardRenderer.builder((b) => b.greenery(CardRenderItemSize.MEDIUM).asterix()),
         description: 'Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.',
         victoryPoints: 1,
       },

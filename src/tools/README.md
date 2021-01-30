@@ -34,3 +34,16 @@ If you want to see warnings for given locale only use --locales switch
 `node build/src/tools/check_locales.js --locales cn,ru`
 
 as result you will see the warnings for Chinese and Russian languages only.
+
+## Export game
+
+### Usage
+
+`node build/src/tools/export_game.js <game id>`
+
+### Description
+This tool extracts the entire history of a game from a database and stores it in the local filesystem database.
+
+If you plan to extract from the local SQLite database, have no environemnt variables. If you're extracting
+from PostgreSQL, use the POSTGRES_HOST environment variable. You cannot export from a local filesystem database.
+You might as well then just run `cp -R`

@@ -33,7 +33,7 @@ describe('BlackPolarDust', function() {
   });
 
   it('Cannot place ocean if no oceans left', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     card.play(player);
   });
 });

@@ -16,12 +16,12 @@ describe('SnowAlgae', function() {
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, player.game, 1);
+    maxOutOceans(player, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, player.game, 2);
+    maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

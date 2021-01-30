@@ -366,6 +366,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Initial Draft
     if (gameOptions.initialDraftVariant) {
+      game.phase = Phase.INITIALDRAFTING;
       game.runDraftRound(true);
     } else {
       game.gotoInitialResearchPhase();
@@ -573,7 +574,7 @@ export class Game implements ISerializable<SerializedGame> {
     if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       player.megaCredits -= player.cardsInHand.length * player.cardCost;
     }
-    corporationCard.play(player, this);
+    corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
 
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
@@ -610,7 +611,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private pickCorporationCard(player: Player): PlayerInput {
-    return new SelectInitialCards(player, this, (corporation: CorporationCard) => {
+    return new SelectInitialCards(player, (corporation: CorporationCard) => {
       // Check for negative M€
       const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
       if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
@@ -666,6 +667,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoInitialResearchPhase(): void {
+    this.phase = Phase.RESEARCH;
     this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
@@ -877,7 +879,6 @@ export class Game implements ISerializable<SerializedGame> {
       this.draftRound = 1;
       this.runDraftRound(true, true);
     } else {
-      this.gameOptions.initialDraftVariant = false;
       this.gotoInitialResearchPhase();
     }
   }
@@ -1062,7 +1063,7 @@ export class Game implements ISerializable<SerializedGame> {
     const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
 
     if (this.phase !== Phase.SOLAR) {
-      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OXYGEN, steps);
+      TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
       player.increaseTerraformRatingSteps(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1104,7 +1105,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.increaseTerraformRating();
       }
 
-      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.VENUS, steps);
+      TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRatingSteps(steps);
     }
 
@@ -1145,7 +1146,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.addProduction(Resources.HEAT);
       }
 
-      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.TEMPERATURE, steps);
+      TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
       player.increaseTerraformRatingSteps(steps);
     }
 
@@ -1284,7 +1285,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
-    TurmoilHandler.resolveTilePlacementCosts(this, player);
+    TurmoilHandler.resolveTilePlacementCosts(player);
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
@@ -1317,7 +1318,7 @@ export class Game implements ISerializable<SerializedGame> {
         AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
-      TurmoilHandler.resolveTilePlacementBonuses(this, player, spaceType);
+      TurmoilHandler.resolveTilePlacementBonuses(player, spaceType);
 
       if (arcadianCommunityBonus) {
         player.megaCredits += 3;
@@ -1405,7 +1406,7 @@ export class Game implements ISerializable<SerializedGame> {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
-      TurmoilHandler.onGlobalParameterIncrease(this, player, GlobalParameter.OCEANS);
+      TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);
       player.increaseTerraformRating();
     }
     AresHandler.ifAres(this, (aresData) => {
@@ -1606,7 +1607,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
-      if (gameOptions.initialDraftVariant) {
+      if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
           game.runDraftRound(true, true);
         } else {

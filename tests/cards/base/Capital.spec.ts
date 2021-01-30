@@ -20,7 +20,7 @@ describe('Capital', function() {
   });
 
   it('Can\'t play without energy production', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     expect(card.canPlay(player)).is.not.true;
   });
 

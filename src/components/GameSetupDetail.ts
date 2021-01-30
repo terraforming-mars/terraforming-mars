@@ -84,9 +84,14 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div class="setup-item" v-i18n>Draft:</div>
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
               <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
-              <div v-else class="game-config generic" v-i18n>Off</div>
+              <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
             </li>
 
+
+            <li v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents">
+              <div class="setup-item" v-i18n>Turmoil:</div>
+              <div class="game-config generic" v-i18n>No negative Turmoil event</div>
+            </li>
 
             <li v-if="playerNumber === 1">
               <div class="setup-item" v-i18n>Solo:</div>

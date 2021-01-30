@@ -56,7 +56,7 @@ describe('Scientists', function() {
 
     const card = new SearchForLife();
     (game as any).oxygenLevel = 8;
-    expect(card.canPlay(player, game)).to.be.true;
+    expect(card.canPlay(player)).to.be.true;
   });
 
   it('Ruling policy 3: When you raise a global parameter, draw a card per step raised', function() {

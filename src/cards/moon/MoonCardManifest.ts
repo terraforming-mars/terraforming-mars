@@ -89,7 +89,7 @@ import {SubterraneanHabitats} from './SubterraneanHabitats';
 // import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 // import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
 import {TheWomb} from './TheWomb';
-// import {ThoriumRush} from './ThoriumRush';
+import {ThoriumRush} from './ThoriumRush';
 import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
 import {TitaniumMarketMonopolists} from './TitaniumMarketMonopolists';
 import {TychoRoadNetwork} from './TychoRoadNetwork';
@@ -157,7 +157,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
-    //   {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
+    {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
     //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},

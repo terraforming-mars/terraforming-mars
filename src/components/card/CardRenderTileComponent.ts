@@ -138,6 +138,8 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-luna-mining-hub');
         } else if (type === TileType.LUNA_TRAIN_STATION) {
           classes.push('card-tile-symbol-luna-train-station');
+        } else if (type === TileType.LUNAR_MINE_URBANIZATION) {
+          classes.push('card-tile-symbol-lunar-mine-urbanization');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

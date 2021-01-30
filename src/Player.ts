@@ -1593,18 +1593,17 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
   // TODO(sienmich): use options parameter
-  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Partial<Units> = {}): boolean {
+  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
     // Check if player has the reserveUnits - required resources
-    const units = Units.of(reserveUnits);
-    if (!Units.hasUnits(units, this)) {
+    if (!Units.hasUnits(reserveUnits, this)) {
       return false;
     }
 
     return cost <=
-      this.megaCredits - units.megacredits +
-      (this.canUseHeatAsMegaCredits ? this.heat - units.heat : 0) +
-      (canUseSteel ? (this.steel - units.steel) * this.steelValue : 0) +
-      (canUseTitanium ? (this.titanium - units.titanium) * this.getTitaniumValue() : 0) +
+      this.megaCredits - reserveUnits.megacredits +
+      (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
+      (canUseSteel ? (this.steel - reserveUnits.steel) * this.steelValue : 0) +
+      (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }

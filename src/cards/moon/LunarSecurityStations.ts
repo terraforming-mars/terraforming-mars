@@ -6,8 +6,9 @@ import {Card} from '../Card';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {IProjectCard} from '../IProjectCard';
 
-export class LunarSecurityStations extends Card {
+export class LunarSecurityStations extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_SECURITY_STATIONS,
@@ -32,5 +33,6 @@ export class LunarSecurityStations extends Card {
 
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
+    return undefined;
   }
 }

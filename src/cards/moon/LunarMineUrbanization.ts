@@ -11,6 +11,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
+import {Units} from '../../Units';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
+      productionBox: Units.of({megacredits: 1}),
 
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your MC production 1 step. Replace one of your mine tiles ' +

@@ -57,12 +57,15 @@ export class Timer implements ISerializable<SerializedTimer> {
     this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
   }
 
-  // Converts Timer to hhh:mm:ss format based on current time. Used to display the timer.
+  // Converts Timer to [hhh:]mm:ss format based on current time. Used to display the timer.
   public static toString(d: SerializedTimer) : string {
     const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);
     const elapsedDate = new Date(elapsed);
-    const hours = String(elapsedDate.getUTCHours() + (elapsedDate.getUTCDate()-1)*24);
-    return hours+elapsedDate.toISOString().substr(13, 6);
+    const hours = elapsedDate.getUTCHours() + (elapsedDate.getUTCDate()-1)*24;
+    if (hours > 0) {
+      return String(hours)+elapsedDate.toISOString().substr(13, 6);
+    }
+    return elapsedDate.toISOString().substr(14, 5);
   }
 }
 

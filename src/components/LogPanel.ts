@@ -161,7 +161,9 @@ export const LogPanel = Vue.component('log-panel', {
     },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=50`)
+    const envLength = parseInt(process.env.LOG_LENGTH || '' );
+    const logLength = Number.isInteger(envLength) ? envLength : 50;
+    fetch(`/api/game/logs?id=${this.id}&limit=${logLength}`)
       .then((response) => response.json())
       .then((messages) => {
         this.messages.splice(0, this.messages.length);

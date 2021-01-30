@@ -19,10 +19,10 @@ import {Random} from './Random';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
-    let drawnMilestonesAndAwards = {
+    let drawnMilestonesAndAwards: IDrawnMilestonesAndAwards = {
       milestones: [],
       awards: [],
-    } as IDrawnMilestonesAndAwards;
+    };
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
     const requiredQty = includeVenus ? 6 : 5;

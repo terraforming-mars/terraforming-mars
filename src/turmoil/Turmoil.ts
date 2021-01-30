@@ -11,7 +11,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
-import {SerializedParty, SerializedTurmoil} from './SerializedTurmoil';
+import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 
@@ -413,7 +413,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
             name: p.name,
             delegates: p.delegates,
             partyLeader: p.partyLeader,
-          } as SerializedParty;
+          };
         }),
         playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
         globalEventDealer: this.globalEventDealer.serialize(),

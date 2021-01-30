@@ -17,7 +17,7 @@ export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMiles
     return {
       name: claimedMilestone.milestone.name,
       playerId: claimedMilestone.player.id,
-    } as SerializedClaimedMilestone;
+    };
   });
 }
 
@@ -44,9 +44,6 @@ export function deserializeClaimedMilestones(
       throw new Error(`Player ${playerId} not found when rebuilding claimed milestone ${milestoneName}`);
     }
 
-    return {
-      milestone: milestone,
-      player: player,
-    } as ClaimedMilestone;
+    return {milestone, player};
   });
 }

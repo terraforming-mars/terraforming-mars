@@ -1578,47 +1578,32 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    const canUseSteel = card.tags.includes(Tags.BUILDING);
-    const canUseTitanium = card.tags.includes(Tags.SPACE);
-    const canUseMicrobes = card.tags.includes(Tags.PLANT);
-    const canUseFloaters = card.tags.includes(Tags.VENUS);
-
-    let steel = this.steel;
-    let titanium = this.titanium;
-
-    // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
-    // reserve costs that a player cannot afford.
-    if (card.reserveUnits !== undefined) {
-      const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-      // Set aside reserve units in case the card has a building tag.
-      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-      steel = steel - reserveUnits.steel;
-      if (steel < 0) {
-        return false;
-      }
-
-      // Set aside reserve units in case the card has a space tag.
-      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-      titanium = titanium - reserveUnits.titanium;
-      if (titanium < 0) {
-        return false;
-      }
-    }
-
-    const canAfford = this.getCardCost(card) <=
-      this.spendableMegacredits() +
-      (canUseSteel ? steel * this.steelValue : 0) +
-      (canUseTitanium ? titanium * this.getTitaniumValue() : 0) +
-      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
+    const canAfford = this.canAfford(
+      this.getCardCost(card),
+      card.tags.includes(Tags.BUILDING),
+      card.tags.includes(Tags.SPACE),
+      card.tags.includes(Tags.PLANT),
+      card.tags.includes(Tags.VENUS),
+      MoonExpansion.adjustedReserveCosts(this, card),
+    );
 
     return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
-  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
-    return cost <= this.spendableMegacredits() +
-      (canUseSteel ? this.steel * this.steelValue : 0) +
-      (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +
+  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
+  // and additionally pay the reserveUnits (no replaces here)
+  // TODO(sienmich): use options parameter
+  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
+    // Check if player has the reserveUnits - required resources
+    if (!Units.hasUnits(reserveUnits, this)) {
+      return false;
+    }
+
+    return cost <=
+      this.megaCredits - reserveUnits.megacredits +
+      (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
+      (canUseSteel ? (this.steel - reserveUnits.steel) * this.steelValue : 0) +
+      (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }

@@ -35,7 +35,7 @@ export class HE3Refinery implements IProjectCard {
     renderData: CardRenderer.builder((b) => {
       b.action('Gain 1 MC for each level of Mining Rate.', (eb) => {
         eb.empty().startAction;
-        eb.megacredits(1).slash().moonMineRate();
+        eb.megacredits(1).slash().moonMiningRate();
       });
     }),
   };

@@ -145,6 +145,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.DISEASE) {
         classes.push('card-resource');
         classes.push('card-resource-disease');
+      } else if (type === CardRenderItemType.DATA_RESOURCE) {
+        classes.push('card-resource');
+        classes.push('card-resource-data');
       }
 
       // round tags
@@ -262,7 +265,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '?';
       }
       if (this.item.type === CardRenderItemType.MOON) {
-        return 'MOON';
+        return '<div class="card-tag-moon-on-card"></div>';
       }
       if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
         return '<div class="board-cube--bronze"></div>';

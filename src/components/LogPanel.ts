@@ -11,6 +11,7 @@ import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
+import {TileType} from '../TileType';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
@@ -95,6 +96,9 @@ export const LogPanel = Vue.component('log-panel', {
             manifest.standardActions,
           ]);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
+        } else if (data.type === LogMessageDataType.TILE_TYPE) {
+          const tileType: TileType = +data.value;
+          return $t(TileType.toString(tileType));
         } else if (translatableMessageDataTypes.includes(data.type)) {
           return $t(data.value);
         } else {

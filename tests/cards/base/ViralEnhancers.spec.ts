@@ -30,7 +30,7 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, birds);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player.getResourcesOnCard(birds)).to.eq(1);
     orOptions.options[1].cb();
@@ -39,7 +39,7 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, ants);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions2 = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions2.options[0].cb();
     expect(player.getResourcesOnCard(ants)).to.eq(1);
     orOptions2.options[1].cb();
@@ -53,12 +53,12 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, ecologicalZone);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player.getResourcesOnCard(ecologicalZone)).to.eq(1);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions2 = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions2 = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions2.options[1].cb();
     expect(player.plants).to.eq(1);
     expect(game.deferredActions).has.lengthOf(0);

@@ -23,7 +23,7 @@ describe('GiantSolarShade', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(6);
     expect(player.getTerraformRating()).to.eq(23);
@@ -34,9 +34,9 @@ describe('GiantSolarShade', function() {
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     player.megaCredits = 27;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     player.playedCards.push(new Dirigibles());
     player.addResourceTo(player.playedCards[0], 3);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

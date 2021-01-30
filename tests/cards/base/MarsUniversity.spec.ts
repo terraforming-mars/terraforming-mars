@@ -28,8 +28,8 @@ describe('MarsUniversity', function() {
     card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions.options[0].cb([card]);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).not.to.eq(card);
@@ -49,12 +49,12 @@ describe('MarsUniversity', function() {
     card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions.options[1].cb();
 
-    const orOptions2 = game.deferredActions.next()!.execute() as OrOptions;
-    game.deferredActions.shift();
+    const orOptions2 = game.deferredActions.peek()!.execute() as OrOptions;
+    game.deferredActions.pop();
     orOptions2.options[1].cb();
 
     expect(game.deferredActions).has.lengthOf(0);

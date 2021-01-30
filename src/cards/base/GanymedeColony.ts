@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
@@ -32,8 +31,8 @@ export class GanymedeColony extends Card implements IProjectCard {
   public getVictoryPoints(player: Player) {
     return player.getTagCount(Tags.JOVIAN, false, false);
   }
-  public play(player: Player, game: Game) {
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+  public play(player: Player) {
+    player.game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
     return undefined;
   }
 }

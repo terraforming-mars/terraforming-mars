@@ -8,12 +8,12 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('EnergyMarket', function() {
-  let card : EnergyMarket; let player : Player; let game : Game;
+  let card : EnergyMarket; let player : Player;
 
   beforeEach(function() {
     card = new EnergyMarket();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t act', function() {
@@ -43,19 +43,19 @@ describe('EnergyMarket', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
-    const result = card.action(player, game);
+    const result = card.action(player);
     expect(result instanceof OrOptions).is.true;
   });
 
   it('Should act when sufficient MC resources available', function() {
     player.setResource(Resources.MEGACREDITS, 2);
-    const result = card.action(player, game);
+    const result = card.action(player);
     expect(result instanceof SelectAmount).is.true;
   });
 
   it('Should act when energy production available', function() {
     player.addProduction(Resources.ENERGY, 1);
-    const result = card.action(player, game);
+    const result = card.action(player);
     expect(result).is.undefined;
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

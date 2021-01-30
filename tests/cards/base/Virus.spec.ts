@@ -25,7 +25,7 @@ describe('Virus', function() {
     player.addResourceTo(predators);
     player.plants = 5;
 
-    const orOptions = card.play(player2, game) as OrOptions;
+    const orOptions = card.play(player2) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
     orOptions.options[0].cb([player.playedCards[0]]);
@@ -37,14 +37,14 @@ describe('Virus', function() {
 
   it('Can play when no other player has resources', function() {
     player.plants = 5;
-    expect(card.play(player, game)).is.undefined;
+    expect(card.play(player)).is.undefined;
     expect(player.plants).to.eq(5);
   });
 
   it('Works in solo mode', function() {
     game = Game.newInstance('foobar', [player], player);
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player, game)).is.undefined;
+    expect(card.play(player)).is.undefined;
     expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
   });
 });

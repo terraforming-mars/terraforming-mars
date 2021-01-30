@@ -18,7 +18,7 @@ describe('VenusFirst', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
 

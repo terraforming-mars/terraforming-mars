@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
@@ -31,17 +30,17 @@ export class DeepWellHeating extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const temperatureMaxed = game.getVenusScaleLevel() === MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !temperatureMaxed) {
+  public canPlay(player: Player): boolean {
+    const temperatureMaxed = player.game.getVenusScaleLevel() === MAX_TEMPERATURE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !temperatureMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
-    return game.increaseTemperature(player, 1);
+    return player.game.increaseTemperature(player, 1);
   }
 }

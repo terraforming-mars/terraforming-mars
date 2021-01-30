@@ -7,25 +7,25 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MagneticFieldGeneratorsPromo', function() {
-  let card : MagneticFieldGeneratorsPromo; let player : Player; let game : Game;
+  let card : MagneticFieldGeneratorsPromo; let player : Player;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Cannot play without enough energy production', function() {
     player.addProduction(Resources.ENERGY, 3);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.addProduction(Resources.ENERGY, 4);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);

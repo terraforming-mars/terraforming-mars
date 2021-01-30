@@ -22,25 +22,25 @@ describe('Comet', function() {
     player2.plants = 2;
     player3.plants = 4;
 
-    card.play(player, game);
+    card.play(player);
     expect(game.getTemperature()).to.eq(-28);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectSpace = game.deferredActions.shift()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(22);
 
-    const orOptions = game.deferredActions.shift()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(0);
   });
 
   it('Provides no options if there is nothing to confirm', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     player.plants = 8;
 
-    card.play(player, game);
-    const input = game.deferredActions.next()!.execute();
+    card.play(player);
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
 
     expect(player.plants).to.eq(8); // self plants are not removed
@@ -48,10 +48,10 @@ describe('Comet', function() {
   });
 
   it('Works fine in solo mode', function() {
-    const game = Game.newInstance('solo_game', [player], player);
+    Game.newInstance('solo_game', [player], player);
     player.plants = 8;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.plants).to.eq(8);
   });

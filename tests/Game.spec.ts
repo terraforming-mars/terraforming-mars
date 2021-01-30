@@ -187,7 +187,7 @@ describe('Game', function() {
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     // (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
     (game as any).venusScaleLevel = 6;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -208,7 +208,7 @@ describe('Game', function() {
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -229,7 +229,7 @@ describe('Game', function() {
     (game as any).temperature = 2;
     (game as any).oxygenLevel = 2;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -261,7 +261,7 @@ describe('Game', function() {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
 
     player.plants = 0; // Skip final greenery Phase
 
@@ -282,7 +282,7 @@ describe('Game', function() {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL - 2;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
 
     // Trigger end game
     player.setTerraformRating(20);

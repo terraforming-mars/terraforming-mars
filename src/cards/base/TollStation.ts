@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -27,8 +26,8 @@ export class TollStation extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    const amount = game.getPlayers()
+  public play(player: Player) {
+    const amount = player.game.getPlayers()
       .filter((aPlayer) => aPlayer !== player)
       .map((opponent) => opponent.getTagCount(Tags.SPACE, false, false))
       .reduce((a, c) => a + c, 0);

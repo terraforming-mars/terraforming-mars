@@ -1,8 +1,8 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
+import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';
@@ -31,12 +31,12 @@ export class SponsoredAcademies extends Card {
     return player.cardsInHand.length > 1; // this card and at least another
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new DiscardCards(player));
-    game.defer(DrawCards.keepAll(player, 3));
-    const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
+  public play(player: Player) {
+    player.game.defer(new DiscardCards(player), Priority.DISCARD_BEFORE_DRAW);
+    player.game.defer(DrawCards.keepAll(player, 3));
+    const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
     for (const p of otherPlayers) {
-      game.defer(DrawCards.keepAll(p));
+      player.game.defer(DrawCards.keepAll(p));
     }
     return undefined;
   }

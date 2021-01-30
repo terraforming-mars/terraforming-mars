@@ -11,7 +11,7 @@ describe('MeatIndustry', function() {
     const card = new MeatIndustry();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     player.playedCards.push(card);
 
     // Get 2 MC when player gains animals
@@ -28,7 +28,7 @@ describe('MeatIndustry', function() {
     // Don't get MC when other players gain animals
     const predators = new Predators();
     player2.playedCards.push(predators);
-    predators.action(player2, game);
+    predators.action(player2);
     expect(player.megaCredits).to.eq(4);
   });
 });

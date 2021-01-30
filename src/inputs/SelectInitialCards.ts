@@ -1,7 +1,6 @@
 
 import {AndOptions} from './AndOptions';
 import {CorporationCard} from '../cards/corporation/CorporationCard';
-import {Game} from '../Game';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
@@ -10,7 +9,7 @@ import {SelectCard} from './SelectCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
     public inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
-    constructor(player: Player, game: Game, cb: (corporation: CorporationCard) => undefined) {
+    constructor(player: Player, cb: (corporation: CorporationCard) => undefined) {
       super(() => {
         cb(corporation);
         return undefined;
@@ -29,7 +28,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         ),
       );
 
-      if (game.gameOptions.preludeExtension) {
+      if (player.game.gameOptions.preludeExtension) {
         this.options.push(
           new SelectCard(
             'Select 2 Prelude cards', undefined, player.dealtPreludeCards,

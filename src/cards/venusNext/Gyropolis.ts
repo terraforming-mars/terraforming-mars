@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -30,16 +29,16 @@ export class Gyropolis extends Card {
       },
     });
   };
-  public canPlay(player: Player, game: Game): boolean {
-    if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
+  public canPlay(player: Player): boolean {
+    if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     return player.getProduction(Resources.ENERGY) >= 2;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
     player.addProduction(Resources.ENERGY, -2);
     player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags));
-    return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      game.addCityTile(player, space.id);
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
       return undefined;
     });
   }

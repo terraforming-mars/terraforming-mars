@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,8 +13,8 @@ export class ResearchColony implements IProjectCard {
     public name = CardName.RESEARCH_COLONY;
     public cardType = CardType.AUTOMATED;
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
+    public play(player: Player) {
+      player.game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
       player.drawCard(2);
       return undefined;
     }

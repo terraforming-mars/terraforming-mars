@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -35,8 +34,8 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
   }
   public play() {
     return undefined;

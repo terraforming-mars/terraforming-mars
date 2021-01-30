@@ -17,15 +17,15 @@ describe('EcologicalZone', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace.id);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     const adjacentSpace = action.availableSpaces[0];

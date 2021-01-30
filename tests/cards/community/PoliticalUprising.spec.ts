@@ -19,13 +19,13 @@ describe('PoliticalUprising', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(4);
 
     while (game.deferredActions.length) {
-      const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+      const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
       orOptions.options[0].cb();
-      game.deferredActions.shift();
+      game.deferredActions.pop();
     }
 
     const turmoil = game.turmoil!;

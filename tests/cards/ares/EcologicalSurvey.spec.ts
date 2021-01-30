@@ -28,14 +28,14 @@ describe('EcologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
@@ -77,10 +77,10 @@ describe('EcologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
-    game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
+    game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);

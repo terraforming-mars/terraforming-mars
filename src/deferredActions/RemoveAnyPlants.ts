@@ -2,9 +2,10 @@ import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class RemoveAnyPlants implements DeferredAction {
+  public priority = Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public count: number = 1,

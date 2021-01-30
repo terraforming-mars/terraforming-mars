@@ -11,13 +11,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('ImportedHydrogen', function() {
-  let card : ImportedHydrogen; let player : Player; let game : Game;
+  let card : ImportedHydrogen; let player : Player;
 
   beforeEach(function() {
     card = new ImportedHydrogen();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -26,7 +26,7 @@ describe('ImportedHydrogen', function() {
     const decomposers = new Decomposers();
     player.playedCards.push(pets, tardigrades, decomposers);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof OrOptions).is.true;
     expect((action as OrOptions).options).has.lengthOf(3);
 
@@ -47,7 +47,7 @@ describe('ImportedHydrogen', function() {
 
   it('Should add plants directly if no microbe or animal cards available', function() {
     expect(player.plants).to.eq(0);
-    card.play(player, game);
+    card.play(player);
     expect(player.plants).to.eq(3);
   });
 });

@@ -11,14 +11,14 @@ describe('EventAnalysts', function() {
 
     const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-        expect(card.canPlay(player, game)).is.true;
+        expect(card.canPlay(player)).is.true;
 
-        card.play(player, game);
+        card.play(player);
         expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
   });
 });

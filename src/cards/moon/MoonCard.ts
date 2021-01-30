@@ -7,7 +7,8 @@ import {IMoonCard} from './IMoonCard';
 
 export interface MoonCardProperties {
   reserveUnits?: Units,
-  tilesBuilt?: Array<TileType>
+  // Really only interested in MOON_COLONY, MOON_MINE and MOON_ROAD.
+  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>
 }
 
 export abstract class MoonCard extends Card implements IProjectCard, IMoonCard {

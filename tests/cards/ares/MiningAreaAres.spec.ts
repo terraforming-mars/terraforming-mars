@@ -32,7 +32,7 @@ describe('MiningAreaAres', function() {
       }
     }
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);

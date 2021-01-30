@@ -9,13 +9,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Astrodrill', function() {
-  let card : Astrodrill; let player : Player; let game : Game;
+  let card : Astrodrill; let player : Player;
 
   beforeEach(function() {
     card = new Astrodrill();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     card.play();
     player.corporationCard = card;
@@ -34,7 +34,7 @@ describe('Astrodrill', function() {
     const spendAsteroidOption = action.options[0];
     spendAsteroidOption.cb();
     expect(player.titanium).to.eq(3);
-    expect(game.deferredActions).has.lengthOf(0);
+    expect(player.game.deferredActions).has.lengthOf(0);
   });
 
   it('Should play - can add asteroid resource to self', function() {

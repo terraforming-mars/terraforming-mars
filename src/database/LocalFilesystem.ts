@@ -31,15 +31,17 @@ export class Localfilesystem implements IDatabase {
 
   saveGame(game: Game): void {
     console.log(`saving ${game.id} at position ${game.lastSaveId}`);
-    const text = JSON.stringify(game.serialize(), null, 2);
-    fs.writeFileSync(this._filename(game.id), text);
-    fs.writeFileSync(this._historyFilename(game.id, game.lastSaveId), text);
-
-    // This must occur after the save.
+    this.saveSerializedGame(game.serialize());
     game.lastSaveId++;
   }
 
-  getGame(game_id: GameId, cb: (err: any, game?: SerializedGame) => void): void {
+  saveSerializedGame(serializedGame: SerializedGame): void {
+    const text = JSON.stringify(serializedGame, null, 2);
+    fs.writeFileSync(this._filename(serializedGame.id), text);
+    fs.writeFileSync(this._historyFilename(serializedGame.id, serializedGame.lastSaveId), text);
+  }
+
+  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
     try {
       console.log(`Loading ${game_id}`);
       const text = fs.readFileSync(this._filename(game_id));
@@ -49,13 +51,18 @@ export class Localfilesystem implements IDatabase {
       cb(err, undefined);
     }
   }
-  getClonableGames(cb: (err: any, allGames: Array<IGameData>) => void) {
+
+  getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+    throw new Error('Not implemented');
+  }
+
+  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
     this.getGames((err, gameIds) => {
       const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
       const gameData = filtered.map((gameId) => {
         const text = fs.readFileSync(this._historyFilename(gameId, 0));
         const serializedGame = JSON.parse(text) as SerializedGame;
-        return {gameId: gameId, playerCount: serializedGame.players.length} as IGameData;
+        return {gameId: gameId, playerCount: serializedGame.players.length};
       });
       cb(err, gameData);
     });
@@ -72,7 +79,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGames(cb: (err: any, allGames: Array<GameId>) => void) {
+  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const gameIds: Array<GameId> = [];
 
     // TODO(kberg): use readdir since this is expected to be async anyway.
@@ -91,7 +98,7 @@ export class Localfilesystem implements IDatabase {
   }
 
   restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback<Game>) {
-    cb('Does not work', undefined);
+    cb(new Error('Does not work'), undefined);
   }
 
   saveGameResults(_game_id: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
@@ -100,6 +107,10 @@ export class Localfilesystem implements IDatabase {
 
   cleanSaves(_game_id: GameId, _save_id: number): void {
     // Not implemented here.
+  }
+
+  purgeUnfinishedGames(): void {
+    // Not implemented.
   }
 
   restoreGame(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {

@@ -11,13 +11,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
-  let card : AsteroidRights; let player : Player; let game : Game;
+  let card : AsteroidRights; let player : Player;
 
   beforeEach(function() {
     card = new AsteroidRights();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
     player.playedCards.push(card);
     card.play();
@@ -35,7 +35,7 @@ describe('AsteroidRights', function() {
 
   it('Should act - can auto spend asteroid resource', function() {
     player.megaCredits = 0;
-    const action = card.action(player, game) as OrOptions;
+    const action = card.action(player) as OrOptions;
 
     // Gain 1 MC prod
     action.options[1].cb();
@@ -50,10 +50,10 @@ describe('AsteroidRights', function() {
     player.megaCredits = 1;
     card.resourceCount = 0;
 
-    card.action(player, game);
-        game.deferredActions.next()!.execute();
-        expect(player.megaCredits).to.eq(0);
-        expect(card.resourceCount).to.eq(1);
+    card.action(player);
+    player.game.deferredActions.peek()!.execute();
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
   });
 
   it('Should play - can add asteroid resource to other card', function() {
@@ -62,7 +62,7 @@ describe('AsteroidRights', function() {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
-    const action = card.action(player, game) as SelectCard<ICard>;
+    const action = card.action(player) as SelectCard<ICard>;
     action.cb([cometAiming]);
     expect(cometAiming.resourceCount).to.eq(1);
   });
@@ -72,7 +72,7 @@ describe('AsteroidRights', function() {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
-    const action = card.action(player, game) as OrOptions;
+    const action = card.action(player) as OrOptions;
     expect(action instanceof OrOptions).is.true;
     expect(action.options[0] instanceof SelectOption).is.true;
     expect(action.options[1] instanceof SelectCard).is.true;

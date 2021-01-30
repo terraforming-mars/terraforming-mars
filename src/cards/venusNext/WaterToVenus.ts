@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -25,17 +24,17 @@ export class WaterToVenus extends Card {
     });
   };
 
-  public canPlay(player: Player, game: Game): boolean {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseVenusScaleLevel(player, 1);
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }
 }

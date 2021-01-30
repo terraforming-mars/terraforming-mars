@@ -1,7 +1,7 @@
 import {Player} from '../Player';
 import {Tags} from '../cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
 import {CardType} from '../cards/CardType';
@@ -10,6 +10,7 @@ import {LogHelper} from '../LogHelper';
 
 // <T> is the return value type
 export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implements DeferredAction {
+  public priority = Priority.DRAW_CARDS;
   private constructor(
     public player: Player,
     public count: number = 1,

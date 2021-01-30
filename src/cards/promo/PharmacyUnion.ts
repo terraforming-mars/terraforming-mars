@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -63,6 +62,14 @@ export class PharmacyUnion extends Card implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, card: IProjectCard): void {
+      this._onCardPlayed(player, card);
+    }
+
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this._onCardPlayed(player, card);
+    }
+
+    private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): void {
       if (this.isDisabled) return undefined;
 
       const game = player.game;
@@ -100,7 +107,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
               orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
               return orOptions;
             },
-          ), true); // Make it a priority
+          ), -1); // Make it a priority
           return undefined;
         }
       }
@@ -144,7 +151,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
                 }),
               );
             },
-          ), true); // Make it a priority
+          ), -1); // Make it a priority
         }
       }
 
@@ -161,13 +168,9 @@ export class PharmacyUnion extends Card implements CorporationCard {
             game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
             return undefined;
           },
-        ), true); // Make it a priority
+        ), -1); // Make it a priority
       }
 
       return undefined;
-    }
-
-    public onCorpCardPlayed(player: Player, card: CorporationCard) {
-      return this.onCardPlayed(player, card as ICard as IProjectCard);
     }
 }

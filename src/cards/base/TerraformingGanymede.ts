@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -29,10 +28,10 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, false, true);
     }
 

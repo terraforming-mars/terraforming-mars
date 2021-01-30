@@ -8,24 +8,24 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CorporateStronghold', function() {
-  let card : CorporateStronghold; let player : Player; let game : Game;
+  let card : CorporateStronghold; let player : Player;
 
   beforeEach(function() {
     card = new CorporateStronghold();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.addProduction(Resources.ENERGY);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
     action.cb(action.availableSpaces[0]);
 

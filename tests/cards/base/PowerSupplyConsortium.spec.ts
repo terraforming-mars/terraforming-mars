@@ -25,9 +25,9 @@ describe('PowerSupplyConsortium', function() {
     player.playedCards.push(card, card);
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
   });
@@ -35,22 +35,22 @@ describe('PowerSupplyConsortium', function() {
   it('Can play - multiple targets', function() {
     player2.addProduction(Resources.ENERGY, 3);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
+    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(2);
   });
 
   it('Can play in solo mode if have enough power tags', function() {
-    const game = Game.newInstance('foobar2', [player], player);
+    Game.newInstance('foobar2', [player], player);
     player.playedCards.push(card, card);
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
   });
 });

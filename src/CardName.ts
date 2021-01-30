@@ -612,7 +612,7 @@ export enum CardName {
     BASIC_INFRASTRUCTURE = 'Basic Infrastructure',
     LUNAR_PlANNING_OFFICE = 'Lunar Planning Office',
     MINING_COMPLEX = 'Mining Complex',
-    MOON_ROAD_STANDARD_PROJECT = 'Build Moon Road',
-    MOON_MINE_STANDARD_PROJECT = 'Build Moon Mine',
-    MOON_COLONY_STANDARD_PROJECT = 'Build Moon Colony',
+    MOON_ROAD_STANDARD_PROJECT = 'Road Infrastructure',
+    MOON_MINE_STANDARD_PROJECT = 'Lunar Mine',
+    MOON_COLONY_STANDARD_PROJECT = 'Lunar Habitat',
 }

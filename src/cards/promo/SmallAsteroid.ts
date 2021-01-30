@@ -4,7 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../constants';
@@ -30,18 +29,18 @@ export class SmallAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && canRaiseTemperature) {
+  public canPlay(player: Player): boolean {
+    const canRaiseTemperature = player.game.getTemperature() < MAX_TEMPERATURE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && canRaiseTemperature) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 1);
-    game.defer(new RemoveAnyPlants(player, 2));
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 1);
+    player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }
 }

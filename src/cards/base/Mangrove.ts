@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -27,27 +26,27 @@ export class Mangrove extends Card implements IProjectCard {
       metadata: {
         cardNumber: '059',
         requirements: CardRequirements.builder((b) => b.temperature(4)),
-        renderData: CardRenderer.builder((b) => b.greenery(CardRenderItemSize.MEDIUM, true).asterix()),
+        renderData: CardRenderer.builder((b) => b.greenery(CardRenderItemSize.MEDIUM).asterix()),
         description: 'Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.',
         victoryPoints: 1,
       },
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const meetsTemperatureRequirements = game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 4);
-    const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
+  public canPlay(player: Player): boolean {
+    const meetsTemperatureRequirements = player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, 4);
+    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, false, true) && meetsTemperatureRequirements;
     }
 
     return meetsTemperatureRequirements;
   }
 
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select ocean space for greenery tile', game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-      return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
+  public play(player: Player) {
+    return new SelectSpace('Select ocean space for greenery tile', player.game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+      return player.game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
     });
   }
   public getVictoryPoints() {

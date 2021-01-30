@@ -39,7 +39,7 @@ describe('SphereHabitats', () => {
     // Currently that path is already tested with existing code.
     // So I won't keep repeating it.
     // That said, PlaceMoonRoadTile could have its own test. :D
-    expect(player.game.deferredActions.next()).instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });
 });
 

@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -41,14 +40,14 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
     });
   }
     public resourceCount = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    public canPlay(player: Player): boolean {
+      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 2);
     }
-    public play(player: Player, game: Game) {
-      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    public play(player: Player) {
+      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
     public canAct(): boolean {

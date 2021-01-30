@@ -456,7 +456,7 @@ class Builder {
   }
 
   public moonMineRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE_RATE, amount));
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, amount));
     return this;
   }
 

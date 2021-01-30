@@ -273,17 +273,17 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
         return '<div class="card-increase-colony-rate"></div>';
       }
+      if (this.item.type === CardRenderItemType.MOON_MINE) {
+        return '<div class="card-play-moon-mine"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
+        return '<div class="card-increase-mining-rate"></div>';
+      }
       if (this.item.type === CardRenderItemType.MOON_ROAD) {
         return '<div class="card-play-moon-road"></div>';
       }
       if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
         return '<div class="card-increase-logistics-rate"></div>';
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE) {
-        return '<div class="card-play-moon-mine"></div>';
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE_RATE) {
-        return '<div class="card-increase-mine-rate"></div>';
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {

@@ -67,6 +67,7 @@ export const LogPanel = Vue.component('log-panel', {
         LogMessageDataType.AWARD,
         LogMessageDataType.COLONY,
         LogMessageDataType.PARTY,
+        LogMessageDataType.TILE_TYPE,
       ];
       if (data.type !== undefined && data.value !== undefined) {
         if (data.type === LogMessageDataType.PLAYER) {

@@ -81,25 +81,24 @@ export const PlayerHome = Vue.component('player-home', {
     navigatePage: function(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let id: string | undefined = undefined;
+        let idSuffix: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:
-          id = 'shortkey-board';
+          idSuffix = 'board';
           break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
-          id = 'shortkey-playersoverview';
+          idSuffix = 'playersoverview';
           break;
         case KeyboardNavigation.HAND:
-          id = 'shortkey-hand';
+          idSuffix = 'hand';
           break;
         case KeyboardNavigation.COLONIES:
-          id = 'shortkey-colonies';
+          idSuffix = 'colonies';
           break;
-        }
-        if (id === undefined) {
+        default:
           return;
         }
-        const el = document.getElementById(id);
+        const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
           const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
@@ -193,13 +192,17 @@ export const PlayerHome = Vue.component('player-home', {
       }
     },
   },
+  destroyed: function() {
+    window.removeEventListener('keydown', this.navigatePage);
+  },
   mounted: function() {
     dialogPolyfill.default.registerDialog(
       document.getElementById('dialog-default'),
     );
+    window.addEventListener('keydown', this.navigatePage);
   },
   template: `
-        <div v-on:keydown="navigatePage" tabindex="0" id="player-home" :class="'shortkey-no-outline'+(player.turmoil ? ' with-turmoil': '')">
+        <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

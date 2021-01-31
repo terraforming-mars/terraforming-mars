@@ -83,6 +83,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         {index: 4, name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
         {index: 5, name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
         {index: 6, name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
+        {index: 7, name: '', color: Color.ORANGE, beginner: false, handicap: 0, first: false},
+        {index: 8, name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
       ],
       corporateEra: true,
       prelude: false,
@@ -347,7 +349,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       // Auto assign an available color if there are duplicates
       const uniqueColors = players.map((player) => player.color).filter((v, i, a) => a.indexOf(v) === i);
       if (uniqueColors.length !== players.length) {
-        const allColors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE];
+        const allColors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];
         players.forEach((player) => {
           if (allColors.includes(player.color)) {
             allColors.splice(allColors.indexOf(player.color), 1);
@@ -512,7 +514,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                         <div class="create-game-colors-wrapper">
                             <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
                             <span class="create-game-colors-cont">
-                            <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                            <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
                                 <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
                             </label>
@@ -805,7 +807,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                             <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                                         </div>
                                         <div class="create-game-page-color-row">
-                                            <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                                            <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
                                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
                                                 <label :for="'radioBox' + color + newPlayer.index">
                                                     <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>

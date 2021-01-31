@@ -15,12 +15,12 @@ describe('Penguins', function() {
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, player.game, 7);
+    maxOutOceans(player, 7);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, player.game, 8);
+    maxOutOceans(player, 8);
     expect(card.canPlay(player)).is.true;
   });
 

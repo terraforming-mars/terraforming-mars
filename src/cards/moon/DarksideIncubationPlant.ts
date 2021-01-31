@@ -1,5 +1,4 @@
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -32,13 +31,13 @@ export class DarksideIncubationPlant implements IActionCard, IProjectCard {
     return true;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const options: Array<SelectOption> = [];
     options.push(new SelectOption('Add 1 microbe to this card', 'Select', () => {
       this.resourceCount++;
       return undefined;
     }));
-    MoonExpansion.ifMoon(game, (moonData) => {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
       if (this.resourceCount >= 2 && moonData.colonyRate < 8) {
         options.push(new SelectOption('Spend 2 microbes to raise the Colony Rate 1 step.', 'Select', () => {
           this.resourceCount -= 2;

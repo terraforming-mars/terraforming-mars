@@ -95,6 +95,15 @@ export class SQLite implements IDatabase {
     });
   }
 
+  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
+    this.db.get('SELECT game game FROM games WHERE game_id = ? and save_id = ?', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
+      if (err) {
+        return cb(err ?? undefined, undefined);
+      }
+      cb(undefined, JSON.parse(row.game));
+    });
+  }
+
   cleanSaves(game_id: GameId, save_id: number): void {
     // DELETE all saves except initial and last one
     this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {

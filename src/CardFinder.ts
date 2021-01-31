@@ -35,11 +35,11 @@ export class CardFinder {
       return CardFinder.decks;
     }
 
-    public getCardByName<T extends ICard>(cardName: string, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
+    public getCardByName<T extends ICard>(cardName: CardName, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
       let found : (ICardFactory<T> | undefined);
       CardFinder.getDecks().some((manifest) => {
         decks(manifest).some((deck) => {
-          found = deck.findByCardName(cardName as CardName);
+          found = deck.findByCardName(cardName);
           return found;
         });
         return found;
@@ -51,7 +51,7 @@ export class CardFinder {
       return undefined;
     }
 
-    public getCorporationCardByName(cardName: string): CorporationCard | undefined {
+    public getCorporationCardByName(cardName: CardName): CorporationCard | undefined {
       return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
     }
 
@@ -59,7 +59,7 @@ export class CardFinder {
     // NOTE(kberg): This replaces a larger function which searched for both Prelude cards amidst project cards
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
     //              another function, perhaps?
-    public getProjectCardByName(cardName: string): IProjectCard | undefined {
+    public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
       return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
     }
 

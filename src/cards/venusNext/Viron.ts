@@ -21,7 +21,7 @@ export class Viron implements ICard, CorporationCard {
           playedCard.action !== undefined &&
                     playedCard.canAct !== undefined &&
                     player.getActionsThisGeneration().has(playedCard.name) &&
-                    playedCard.canAct(player, player.game)) {
+                    playedCard.canAct(player)) {
           result.push(playedCard);
         }
       }
@@ -44,7 +44,7 @@ export class Viron implements ICard, CorporationCard {
         (foundCards: Array<ICard>) => {
           const foundCard = foundCards[0];
           player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-          return foundCard.action!(player, player.game);
+          return foundCard.action!(player);
         },
       );
     }

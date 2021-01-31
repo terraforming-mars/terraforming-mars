@@ -107,9 +107,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         result += '<span class="card-teractor-logo">TERACTOR</span>';
       } else if (title === CardName.THARSIS_REPUBLIC) {
         result += '<div class="card-tharsis-logo">';
-        result += '<div style="color: #020202;font-size:24px;text-shadow:6px 6px 6px grey;">';
-        result += '<div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2;<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2;</span>';
-        result += '</div>THARSIS<br>&nbsp; REPUBLIC</div>';
+        result += '<div class="card-tharsis-logo-image"></div>';
+        result += '<div class="card-tharsis-logo-text">Tharsis Republic</div>';
         result += '</div>';
       } else if (title === CardName.UNITED_NATIONS_MARS_INITIATIVE) {
         result += '<span class="card-unmi-logo">UNITED<br/>NATIONS<br/>MARS<br/>INITIATIVE</span>';

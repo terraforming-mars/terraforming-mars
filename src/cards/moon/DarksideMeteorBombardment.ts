@@ -32,8 +32,7 @@ export class DarksideMeteorBombardment extends Card {
   public play(player: Player) {
     player.steel += 2;
     player.titanium += 2;
-    MoonExpansion.raiseMiningRate(player);
-    MoonExpansion.raiseMiningRate(player);
+    MoonExpansion.raiseMiningRate(player, 2);
     return undefined;
   }
 }

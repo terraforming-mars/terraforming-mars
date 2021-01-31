@@ -177,7 +177,7 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     return {
       deck: this.globalEventsDeck.map((card) => card.name),
       discarded: this.discardedGlobalEvents.map((card) => card.name),
-    } as SerializedGlobalEventDealer;
+    };
   }
 
   public static deserialize(d: GlobalEventDealer | SerializedGlobalEventDealer): GlobalEventDealer {

@@ -6,22 +6,22 @@ import {Resources} from '../../../src/Resources';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('WavePower', function() {
-  let card : WavePower; let player : Player; let game : Game;
+  let card : WavePower; let player : Player;
 
   beforeEach(function() {
     card = new WavePower();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, game, 2);
+    maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, game, 3);
+    maxOutOceans(player, 3);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

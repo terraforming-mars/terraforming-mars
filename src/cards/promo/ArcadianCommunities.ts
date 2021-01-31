@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -48,14 +47,14 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
     );
   }
 
-  public canAct(player: Player, game: Game): boolean {
-    return game.board.getAvailableSpacesForMarker(player).length > 0;
+  public canAct(player: Player): boolean {
+    return player.game.board.getAvailableSpacesForMarker(player).length > 0;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     return new SelectSpace(
       'Select space for claim',
-      game.board.getAvailableSpacesForMarker(player),
+      player.game.board.getAvailableSpacesForMarker(player),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
         return undefined;

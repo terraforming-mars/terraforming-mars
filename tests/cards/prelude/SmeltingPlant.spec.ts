@@ -8,7 +8,7 @@ describe('SmeltingPlant', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('bar', [player], player);
     const card = new SmeltingPlant();
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.steel).to.eq(5);
     expect(game.getOxygenLevel()).to.eq(2);

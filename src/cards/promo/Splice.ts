@@ -7,7 +7,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {ICard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -48,7 +47,15 @@ export class Splice extends Card implements CorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    return this._onCardPlayed(player, card);
+  }
+
+  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+    return this._onCardPlayed(player, card);
+  }
+
+  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): OrOptions | undefined {
     if (card.tags.indexOf(Tags.MICROBE) === -1) {
       return undefined;
     }
@@ -76,10 +83,6 @@ export class Splice extends Card implements CorporationCard {
       player.megaCredits += megacreditsGain;
       return undefined;
     }
-  }
-
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 
   public play() {

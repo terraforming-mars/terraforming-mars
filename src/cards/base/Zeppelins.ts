@@ -19,7 +19,10 @@ export class Zeppelins extends Card implements IProjectCard {
         cardNumber: '129',
         requirements: CardRequirements.builder((b) => b.oxygen(5)),
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().city(CardRenderItemSize.SMALL).any);
+          b.production((pb) => {
+            pb.megacredits(1).slash();
+            pb.city(CardRenderItemSize.SMALL).any.asterix();
+          });
         }),
         description: 'Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.',
         victoryPoints: 1,

@@ -8,21 +8,12 @@ describe('OriginalBoard', function() {
     const board = OriginalBoard.newInstance(false, new Random(0), false);
     expect(function() {
       board.getAdjacentSpaces({
-        x: -1,
+        x: 0,
         y: 0,
         bonus: [],
         id: 'foobar',
         spaceType: SpaceType.LAND,
       });
-    }).to.throw('Unexpected space x value');
-    expect(function() {
-      board.getAdjacentSpaces({
-        x: 0,
-        y: -1,
-        bonus: [],
-        id: 'foobar',
-        spaceType: SpaceType.LAND,
-      });
-    }).to.throw('Unexpected space y value');
+    }).to.throw('Unexpected space ID foobar');
   });
 });

@@ -289,11 +289,12 @@ function checkComponent(name, component, dataProperties) {
   });
 
   if (result.errors.length > 0) {
-    console.error(result.errors);
+    console.error(result.errors); // needed for debugging
     throw new Error(`errors found while parsing template for ${name}`, result.errors);
   }
 
   if (result.tips.length > 0) {
+    console.log(result.tips); // needed for debugging
     throw new Error(`tips found while parsing template for ${name}`, result.tips);
   }
 

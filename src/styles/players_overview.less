@@ -78,23 +78,73 @@
             line-height: 32px;
             border-radius: 0px 8px 0px 0px;
             height: 32px;
-            color: black;
+            color:#ccc;
             font-family: 'Prototype';
         }
     }
     .player-info-bottom {
-        border-radius: 0px 8px 8px 8px;
+        border-radius: 0px 0px 8px 8px;
         padding: 8px;
         display: flex;
+        padding-right: 0px;
         .player-tags {
             display: flex;
             flex-flow: row;
+            .player-tag-discount {
+                position: relative;
+                .megacredits-container {
+                    position: absolute;
+                    left: 12px;
+                    top: -17px;
+                    z-index: 10;
+                    border-radius: 8px 8px 0px 1px;
+                    padding: 8px 8px 0px 8px;
+                    .megacredits {
+                        background-image: url(assets/resources/megacredit.png);
+                        background-size: 20px 20px;
+                        width: 20px;
+                        height: 20px;
+                        color: black;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-family: Prototype;
+                        line-height: 21px;
+                        text-align: center;
+                    }
+                }
+            }
+            .player-jovian-multiplier {
+                position: absolute;
+                background: url(/assets/board/mars.png);
+                width: 21px;
+                height: 21px;
+                border-radius: 50%;
+                box-shadow: 0 1px 1px 1px black;
+                font-family: Prototype;
+                text-align: center;
+                line-height: 23px;
+                color: black;
+                background-size: 100px;
+                background-position: -26px -20px;
+                font-size: 18px;
+                top: 13px;
+                left: 14px;
+                z-index: 10;
+            }
             .player-tags-main,
             .player-tags-secondary {
                 display: flex;
                 flex-flow: row;
-                margin-left: 16px;
+                margin-left: 8px;
+                padding-left: 8px;
                 align-items: center;
+                position: relative;
+            }
+            .tag-separator {
+                width: 2px;
+                height: 70px;
+                margin-right: 6px;
+                background:rgba(170, 170, 170, 0.2);
             }
         }
         .player-status-and-res {
@@ -190,6 +240,7 @@
                                 }
                                 .player-timer-hours {
                                     font-size: 14px;
+                                    width: 27px;
                                     text-align: right;
                                     line-height: 24px;
                                     align-self: flex-end;
@@ -213,19 +264,19 @@
             }
         }
     }
-
-    
+}
+.tag-and-discount {
+    position: relative;
 }
 
 @media only screen and (max-width: 1740px)  {
-    
     .players-overview {
         .player-info-bottom {
             flex-flow: column !important;
         }
         .player-status-and-res {
-            margin-bottom: 8px;
-            border-bottom: 2px solid rgba(170, 170, 170, 0.2);
+            margin-bottom: 48px;
+            // border-bottom: 2px solid rgba(170, 170, 170, 0.2);
             padding-bottom: 8px;
         }
     }

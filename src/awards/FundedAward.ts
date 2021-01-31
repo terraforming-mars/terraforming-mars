@@ -6,12 +6,9 @@ export interface FundedAward {
   player: Player;
 }
 
-// TODO(kberg): remove references to award and player by 2020-02-01
 export interface SerializedFundedAward {
   name?: string;
   playerId?: PlayerId;
-  award?: IAward;
-  player?: Player;
 }
 
 export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<SerializedFundedAward> {
@@ -19,7 +16,7 @@ export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<
     return {
       name: fundedAward.award.name,
       playerId: fundedAward.player.id,
-    } as SerializedFundedAward;
+    };
   });
 }
 
@@ -28,7 +25,7 @@ export function deserializeFundedAwards(
   players: Array<Player>,
   awards: Array<IAward>): Array<FundedAward> {
   return fundedAwards.map((element: SerializedFundedAward) => {
-    const awardName = element.award?.name !== undefined ? element.award.name : element.name;
+    const awardName = element.name;
     if (awardName === undefined) {
       throw new Error('Award name not found');
     }
@@ -37,7 +34,7 @@ export function deserializeFundedAwards(
       throw new Error(`Award ${awardName} not found when rebuilding Funded Award`);
     }
 
-    const playerId = element.player?.id !== undefined ? element.player.id : element.playerId;
+    const playerId = element.playerId;
     if (playerId === undefined) {
       throw new Error(`Player ID not found when rebuilding Funded Award ${awardName}`);
     }
@@ -46,6 +43,6 @@ export function deserializeFundedAwards(
       throw new Error(`Player ${playerId} not found when rebuilding Funded Award ${awardName}`);
     }
 
-    return {award, player} as FundedAward;
+    return {award, player};
   });
 }

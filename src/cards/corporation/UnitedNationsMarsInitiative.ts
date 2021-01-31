@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {IActionCard} from '../ICard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -38,11 +37,11 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
   public play() {
     return undefined;
   }
-  public canAct(player: Player, game: Game): boolean {
+  public canAct(player: Player): boolean {
     const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
     const actionCost = 3;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
     }
 

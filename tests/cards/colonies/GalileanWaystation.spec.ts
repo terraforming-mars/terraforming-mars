@@ -10,13 +10,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('GalileanWaystation', function() {
-  let card : GalileanWaystation; let player : Player; let player2: Player; let game : Game;
+  let card : GalileanWaystation; let player : Player; let player2: Player;
 
   beforeEach(function() {
     card = new GalileanWaystation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -25,7 +25,7 @@ describe('GalileanWaystation', function() {
     player.playedCards.push(card2);
     player2.playedCards.push(card3);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
@@ -38,7 +38,7 @@ describe('GalileanWaystation', function() {
     player.playedCards.push(card2, researchCoordination); // Should include this wild tag
     player2.playedCards.push(card3, researchNetwork); // Should NOT include this wild tag
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
   });
 });

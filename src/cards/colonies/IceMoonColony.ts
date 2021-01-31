@@ -3,41 +3,45 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {CardMetadata} from '../CardMetadata';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IceMoonColony implements IProjectCard {
-    public cost = 23;
-    public tags = [Tags.SPACE];
-    public name = CardName.ICE_MOON_COLONY;
-    public cardType = CardType.AUTOMATED;
+export class IceMoonColony extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 23,
+      tags: [Tags.SPACE],
+      name: CardName.ICE_MOON_COLONY,
+      cardType: CardType.AUTOMATED,
 
-    public canPlay(player: Player, game: Game): boolean {
-      const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-      const hasAvailableColonyTile = player.hasAvailableColonyTileToBuildOn();
-      const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
+      metadata: {
+        cardNumber: 'C15',
+        renderData: CardRenderer.builder((b) => b.colonies(1).oceans(1)),
+        description: 'Place 1 colony and 1 ocean tile.',
+      },
+    });
+  }
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-        return hasAvailableColonyTile && canPayForReds;
-      }
+  public canPlay(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const hasAvailableColonyTile = player.hasAvailableColonyTileToBuildOn();
+    const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
 
-      return hasAvailableColonyTile;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return hasAvailableColonyTile && canPayForReds;
     }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
-      game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
-      return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'C15',
-      renderData: CardRenderer.builder((b) => b.colonies(1).oceans(1)),
-      description: 'Place 1 colony and 1 ocean tile.',
-    }
+    return hasAvailableColonyTile;
+  }
+
+  public play(player: Player) {
+    player.game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
+    player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
+    return undefined;
+  }
 }

@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {MAX_FLEET_SIZE, REDS_RULING_POLICY_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -64,6 +64,8 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
+import {Manutech} from './cards/venusNext/Manutech';
+import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 
 export type PlayerId = string;
 
@@ -86,17 +88,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Resources
   public megaCredits: number = 0;
-  private megaCreditProduction: number = 0;
+  protected megaCreditProduction: number = 0;
   public steel: number = 0;
-  private steelProduction: number = 0;
+  protected steelProduction: number = 0;
   public titanium: number = 0;
-  private titaniumProduction: number = 0;
+  protected titaniumProduction: number = 0;
   public plants: number = 0;
-  private plantProduction: number = 0;
+  protected plantProduction: number = 0;
   public energy: number = 0;
-  private energyProduction: number = 0;
+  protected energyProduction: number = 0;
   public heat: number = 0;
-  private heatProduction: number = 0;
+  protected heatProduction: number = 0;
 
   // Resource values
   private titaniumValue: number = 3;
@@ -243,10 +245,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         // Cannot pay Reds, will not increase TR
         return;
       }
-
-      this.terraformRating++;
-      this.hasIncreasedTerraformRatingThisGeneration = true;
-      return;
     }
 
     this.terraformRating++;
@@ -378,13 +376,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Manutech hook
-    if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
-      if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
-      if (resource === Resources.STEEL) this.steel += amount;
-      if (resource === Resources.TITANIUM) this.titanium += amount;
-      if (resource === Resources.PLANTS) this.plants += amount;
-      if (resource === Resources.ENERGY) this.energy += amount;
-      if (resource === Resources.HEAT) this.heat += amount;
+    if (this.isCorporation(CardName.MANUTECH)) {
+      Manutech.onProductionGain(this, resource, amount);
     }
 
     // Mons Insurance hook
@@ -513,7 +506,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getPlayedEventsCount(): number {
     let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
-    if (this.corporationCard?.name === CardName.PHARMACY_UNION && this.corporationCard.isDisabled) count++;
+    if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;
 
     return count;
   }
@@ -896,7 +889,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           !this.actionsThisGeneration.has(this.corporationCard.name) &&
           this.corporationCard.action !== undefined &&
           this.corporationCard.canAct !== undefined &&
-          this.corporationCard.canAct(this, this.game)) {
+          this.corporationCard.canAct(this)) {
       result.push(this.corporationCard);
     }
     for (const playedCard of this.playedCards) {
@@ -904,7 +897,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         playedCard.action !== undefined &&
               playedCard.canAct !== undefined &&
               !this.actionsThisGeneration.has(playedCard.name) &&
-              playedCard.canAct(this, this.game)) {
+              playedCard.canAct(this)) {
         result.push(playedCard);
       }
     }
@@ -987,15 +980,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public dealCards(quantity: number, cards: Array<IProjectCard>) {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.dealer.dealCard(true));
+      cards.push(this.game.dealer.dealCard(this.game, true));
     }
   }
 
   public runDraftPhase(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+    let cardsToKeep = 1;
+
     let cards: Array<IProjectCard> = [];
     if (passedCards === undefined) {
       if (!initialDraft) {
-        this.dealCards(4, cards);
+        let cardsToDraw = 4;
+        if (LunaProjectOffice.consume(this)) {
+          cardsToDraw = 5;
+          cardsToKeep = 2;
+        }
+
+        this.dealCards(cardsToDraw, cards);
       } else {
         this.dealCards(5, cards);
       }
@@ -1003,9 +1004,13 @@ export class Player implements ISerializable<SerializedPlayer> {
       cards = passedCards;
     }
 
+    const message = cardsToKeep === 1 ?
+      'Select a card to keep and pass the rest to ${0}' :
+      'Select two cards to keep and pass the rest to ${0}';
+
     this.setWaitingFor(
       new SelectCard({
-        message: 'Select a card to keep and pass the rest to ${0}',
+        message: message,
         data: [{
           type: LogMessageDataType.RAW_STRING,
           value: playerName,
@@ -1018,7 +1023,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         cards = cards.filter((card) => card !== foundCards[0]);
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
-      }, 1, 1,
+      }, cardsToKeep, cardsToKeep,
       ), () => { },
     );
   }
@@ -1034,7 +1039,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealCards(4, dealtCards);
+      this.dealCards(LunaProjectOffice.consume(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
@@ -1099,11 +1104,31 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.indexOf(Tags.BUILDING) !== -1;
+    return card.tags.includes(Tags.BUILDING);
   }
 
   private canUseTitanium(card: ICard): boolean {
-    return card.tags.indexOf(Tags.SPACE) !== -1;
+    return card.tags.includes(Tags.SPACE);
+  }
+
+  private canUseMicrobes(card: ICard): boolean {
+    return card.tags.includes(Tags.PLANT);
+  }
+
+  private canUseFloaters(card: ICard): boolean {
+    return card.tags.includes(Tags.VENUS);
+  }
+
+  private getMcTradeCost(): number {
+    return MC_TRADE_COST - this.colonyTradeDiscount;
+  }
+
+  private getEnergyTradeCost(): number {
+    return ENERGY_TRADE_COST - this.colonyTradeDiscount;
+  }
+
+  private getTitaniumTradeCost(): number {
+    return TITANIUM_TRADE_COST - this.colonyTradeDiscount;
   }
 
   private playPreludeCard(): PlayerInput {
@@ -1114,8 +1139,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       (foundCards: Array<IProjectCard>) => {
         return this.playCard(foundCards[0]);
       },
-      1,
-      1,
     );
   }
 
@@ -1145,7 +1168,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (howToPay.microbes !== undefined) {
-      totalToPay += howToPay.microbes * 2;
+      totalToPay += howToPay.microbes * DEFAULT_MICROBES_VALUE;
     }
 
     if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
@@ -1155,7 +1178,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
         }
       }
-      totalToPay += howToPay.floaters * 3;
+      totalToPay += howToPay.floaters * DEFAULT_FLOATERS_VALUE;
     }
 
     if (howToPay.megaCredits > this.megaCredits) {
@@ -1179,20 +1202,16 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getMicrobesCanSpend(): number {
-    for (const playedCard of this.playedCards) {
-      if (playedCard.name === CardName.PSYCHROPHILES) {
-        return this.getResourcesOnCard(playedCard)!;
-      }
-    }
+    const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
+    if (psychrophiles !== undefined) return this.getResourcesOnCard(psychrophiles)!;
+
     return 0;
   }
 
   public getFloatersCanSpend(): number {
-    for (const playedCard of this.playedCards) {
-      if (playedCard.name === CardName.DIRIGIBLES) {
-        return this.getResourcesOnCard(playedCard)!;
-      }
-    }
+    const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
+    if (dirigibles !== undefined) return this.getResourcesOnCard(dirigibles)!;
+
     return 0;
   }
 
@@ -1235,7 +1254,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Play the card
-    const action = selectedCard.play(this, this.game);
+    const action = selectedCard.play(this);
     if (action !== undefined) {
       this.game.defer(new DeferredAction(
         this,
@@ -1304,7 +1323,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
-        const action = foundCard.action!(this, this.game);
+        const action = foundCard.action!(this);
         if (action !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1342,6 +1361,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     let payWith: Resources | ResourceType | undefined = undefined;
     const coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(openColonies);
     const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
+    const mcTradeAmount: number = this.getMcTradeCost();
+    const energyTradeAmount: number = this.getEnergyTradeCost();
+    const titaniumTradeAmount: number = this.getTitaniumTradeCost();
 
     const selectColony = new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
       openColonies.forEach((colony) => {
@@ -1350,19 +1372,19 @@ export class Player implements ISerializable<SerializedPlayer> {
           if (payWith === Resources.MEGACREDITS) {
             this.game.defer(new SelectHowToPayDeferred(
               this,
-              9 - this.colonyTradeDiscount,
+              mcTradeAmount,
               {
-                title: 'Select how to pay ' + (9 - this.colonyTradeDiscount) + ' for colony trade',
+                title: 'Select how to pay ' + mcTradeAmount + ' for colony trade',
                 afterPay: () => {
                   colony.trade(this);
                 },
               },
             ));
           } else if (payWith === Resources.ENERGY) {
-            this.energy -= (3 - this.colonyTradeDiscount);
+            this.energy -= energyTradeAmount;
             colony.trade(this);
           } else if (payWith === Resources.TITANIUM) {
-            this.titanium -= (3 - this.colonyTradeDiscount);
+            this.titanium -= titaniumTradeAmount;
             colony.trade(this);
           } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount) {
             titanFloatingLaunchPad.resourceCount--;
@@ -1380,15 +1402,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     howToPayForTrade.title = 'Pay trade fee';
     howToPayForTrade.buttonLabel = 'Pay';
 
-    const payWithMC = new SelectOption('Pay ' + (9 - this.colonyTradeDiscount) +' MC', '', () => {
+    const payWithMC = new SelectOption('Pay ' + mcTradeAmount +' MC', '', () => {
       payWith = Resources.MEGACREDITS;
       return undefined;
     });
-    const payWithEnergy = new SelectOption('Pay ' + (3 - this.colonyTradeDiscount) +' Energy', '', () => {
+    const payWithEnergy = new SelectOption('Pay ' + energyTradeAmount +' Energy', '', () => {
       payWith = Resources.ENERGY;
       return undefined;
     });
-    const payWithTitanium = new SelectOption('Pay ' + (3 - this.colonyTradeDiscount) +' Titanium', '', () => {
+    const payWithTitanium = new SelectOption('Pay ' + titaniumTradeAmount +' Titanium', '', () => {
       payWith = Resources.TITANIUM;
       return undefined;
     });
@@ -1403,9 +1425,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       }));
     }
 
-    if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
-    if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
-    if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
+    if (this.energy >= energyTradeAmount) howToPayForTrade.options.push(payWithEnergy);
+    if (this.titanium >= titaniumTradeAmount) howToPayForTrade.options.push(payWithTitanium);
+    if (this.canAfford(mcTradeAmount)) howToPayForTrade.options.push(payWithMC);
 
     opts.push(howToPayForTrade);
     opts.push(selectColony);
@@ -1429,7 +1451,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectHowToPayDeferred(this, 8, {title: 'Select how to pay for milestone'}));
+      this.game.defer(new SelectHowToPayDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1561,7 +1583,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private getPlayablePreludeCards(): Array<IProjectCard> {
-    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this, this.game));
+    return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
   public getPlayableCards(): Array<IProjectCard> {
@@ -1578,80 +1600,34 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    const canUseSteel = card.tags.includes(Tags.BUILDING);
-    const canUseTitanium = card.tags.includes(Tags.SPACE);
-    let maxPay = 0;
+    const canAfford = this.canAfford(
+      this.getCardCost(card),
+      this.canUseSteel(card),
+      this.canUseTitanium(card),
+      this.canUseMicrobes(card),
+      this.canUseFloaters(card),
+      MoonExpansion.adjustedReserveCosts(this, card),
+    );
 
-    let steel = this.steel;
-    let titanium = this.titanium;
-
-    // Adjust available steel based on reserve costs on Moon cards. Also reject cards with
-    // reserve costs that a player cannot afford.
-    if (card.reserveUnits !== undefined) {
-      const reserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-      // Set aside reserve units in case the card has a building tag.
-      // If there isn't enough steel to meet the purchase reserve, this isn't a playable card.
-      steel = steel - reserveUnits.steel;
-      if (steel < 0) {
-        return false;
-      }
-
-      // Set aside reserve units in case the card has a space tag.
-      // If there isn't enough titanium to meet the purchase reserve, this isn't a playable card.
-      titanium = titanium - reserveUnits.titanium;
-      if (titanium < 0) {
-        return false;
-      }
-    }
-
-    if (canUseSteel) {
-      maxPay += steel * this.steelValue;
-    }
-    if (canUseTitanium) {
-      maxPay += titanium * this.getTitaniumValue();
-    }
-
-    const psychrophiles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
-
-    if (psychrophiles !== undefined &&
-        psychrophiles.resourceCount &&
-        card.tags.indexOf(Tags.PLANT) !== -1) {
-      maxPay += psychrophiles.resourceCount * 2;
-    }
-
-    const dirigibles = this.playedCards.find(
-      (playedCard) => playedCard.name === CardName.DIRIGIBLES);
-
-    if (dirigibles !== undefined &&
-        dirigibles.resourceCount &&
-        card.tags.indexOf(Tags.VENUS) !== -1) {
-      maxPay += dirigibles.resourceCount * 3;
-    }
-
-    maxPay += this.spendableMegacredits();
-    return maxPay >= this.getCardCost(card) &&
-                (card.canPlay === undefined || card.canPlay(this, this.game));
+    return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
-  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
-    let extraResource: number = 0;
-    if (canUseFloaters !== undefined && canUseFloaters) {
-      extraResource += this.getFloatersCanSpend() * 3;
+  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
+  // and additionally pay the reserveUnits (no replaces here)
+  // TODO(sienmich): use options parameter
+  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
+    // Check if player has the reserveUnits - required resources
+    if (!Units.hasUnits(reserveUnits, this)) {
+      return false;
     }
 
-    if (canUseMicrobes !== undefined && canUseMicrobes) {
-      extraResource += this.getMicrobesCanSpend() * 2;
-    }
-
-    if (canUseTitanium) {
-      return this.spendableMegacredits() +
-      (canUseSteel ? this.steel * this.steelValue : 0) +
-      (canUseTitanium ? this.titanium * this.getTitaniumValue() : 0) +
-      extraResource >= cost;
-    }
-
-    return this.spendableMegacredits() + (canUseSteel ? this.steel * this.steelValue : 0) + extraResource >= cost;
+    return cost <=
+      this.megaCredits - reserveUnits.megacredits +
+      (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
+      (canUseSteel ? (this.steel - reserveUnits.steel) * this.steelValue : 0) +
+      (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
+      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
   // Public for testing
@@ -1775,7 +1751,7 @@ export class Player implements ISerializable<SerializedPlayer> {
                       'available action.';
     action.buttonLabel = 'Take action';
 
-    if (this.canAfford(8) && !this.game.allMilestonesClaimed()) {
+    if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();
       remainingMilestones.title = 'Claim a milestone';
       remainingMilestones.options = this.game.milestones
@@ -1803,7 +1779,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }));
     }
 
-    TurmoilHandler.addPlayerAction(this, this.game, action.options);
+    TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(
@@ -1821,9 +1797,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       const openColonies = this.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
       if (openColonies.length > 0 &&
         this.fleetSize > this.tradesThisTurn &&
-        (this.canAfford(9 - this.colonyTradeDiscount) ||
-          this.energy >= (3 - this.colonyTradeDiscount) ||
-          this.titanium >= (3 - this.colonyTradeDiscount))
+        (this.canAfford(this.getMcTradeCost()) ||
+          this.energy >= this.getEnergyTradeCost() ||
+          this.titanium >= this.getTitaniumTradeCost())
       ) {
         action.options.push(
           this.tradeWithColony(openColonies),
@@ -2028,51 +2004,45 @@ export class Player implements ISerializable<SerializedPlayer> {
     return result;
   }
 
-  // Only use useObjectAssign in tests.
-  // TODO(kberg): Remove useObjectAssign by 2020-02-01
-  public static deserialize(d: SerializedPlayer, useObjectAssign = false): Player {
+  public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
-    if (useObjectAssign) {
-      Object.assign(player, d);
-    } else {
-      player.actionsTakenThisRound = d.actionsTakenThisRound;
-      player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
-      player.cardCost = d.cardCost;
-      player.cardDiscount = d.cardDiscount;
-      player.colonyTradeDiscount = d.colonyTradeDiscount;
-      player.colonyTradeOffset = d.colonyTradeOffset;
-      player.colonyVictoryPoints = d.colonyVictoryPoints;
-      player.corporationInitialActionDone = d.corporationInitialActionDone;
-      player.energy = d.energy;
-      player.energyProduction = d.energyProduction;
-      player.fleetSize = d.fleetSize;
-      player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
-      player.heat = d.heat;
-      player.heatProduction = d.heatProduction;
-      player.megaCreditProduction = d.megaCreditProduction;
-      player.megaCredits = d.megaCredits;
-      player.needsToDraft = d.needsToDraft;
-      player.oceanBonus = d.oceanBonus;
-      player.plantProduction = d.plantProduction;
-      player.plants = d.plants;
-      player.plantsNeededForGreenery = d.plantsNeededForGreenery;
-      player.removingPlayers = d.removingPlayers;
-      player.scienceTagCount = d.scienceTagCount;
-      player.steel = d.steel;
-      player.steelProduction = d.steelProduction;
-      player.steelValue = d.steelValue;
-      player.terraformRating = d.terraformRating;
-      player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
-      player.titanium = d.titanium;
-      player.titaniumProduction = d.titaniumProduction;
-      player.titaniumValue = d.titaniumValue;
-      player.tradesThisTurn = d.tradesThisTurn;
-      player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
-      player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
-      player.victoryPointsBreakdown = d.victoryPointsBreakdown;
-    }
+    player.actionsTakenThisRound = d.actionsTakenThisRound;
+    player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+    player.cardCost = d.cardCost;
+    player.cardDiscount = d.cardDiscount;
+    player.colonyTradeDiscount = d.colonyTradeDiscount;
+    player.colonyTradeOffset = d.colonyTradeOffset;
+    player.colonyVictoryPoints = d.colonyVictoryPoints;
+    player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.energy = d.energy;
+    player.energyProduction = d.energyProduction;
+    player.fleetSize = d.fleetSize;
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+    player.heat = d.heat;
+    player.heatProduction = d.heatProduction;
+    player.megaCreditProduction = d.megaCreditProduction;
+    player.megaCredits = d.megaCredits;
+    player.needsToDraft = d.needsToDraft;
+    player.oceanBonus = d.oceanBonus;
+    player.plantProduction = d.plantProduction;
+    player.plants = d.plants;
+    player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.removingPlayers = d.removingPlayers;
+    player.scienceTagCount = d.scienceTagCount;
+    player.steel = d.steel;
+    player.steelProduction = d.steelProduction;
+    player.steelValue = d.steelValue;
+    player.terraformRating = d.terraformRating;
+    player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
+    player.titanium = d.titanium;
+    player.titaniumProduction = d.titaniumProduction;
+    player.titaniumValue = d.titaniumValue;
+    player.tradesThisTurn = d.tradesThisTurn;
+    player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
+    player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.victoryPointsBreakdown = d.victoryPointsBreakdown;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :

@@ -106,7 +106,7 @@ Thanks goes to these wonderful people:
   <tr>
     <td align="center">
       <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a>
+        <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, The Moon fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a>
     </td>
   </tr>
 </table>

@@ -81,7 +81,7 @@ describe('Flooding', function() {
   });
 
   it('Does not suggest to remove money if oceans are already maxed', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

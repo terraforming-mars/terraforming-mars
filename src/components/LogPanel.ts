@@ -10,6 +10,8 @@ import {Card} from './card/Card';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
+import {CardName} from '../CardName';
+import {TileType} from '../TileType';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
@@ -36,9 +38,9 @@ export const LogPanel = Vue.component('log-panel', {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    parseCardType: function(cardType: CardType, cardName: string) {
-      cardName = $t(cardName);
-      const suffixFreeCardName = cardName.split(':')[0];
+    parseCardType: function(cardType: CardType, cardNameString: string) {
+      cardNameString = $t(cardNameString);
+      const suffixFreeCardName = cardNameString.split(':')[0];
       let className: string | undefined;
       if (cardType === CardType.EVENT) {
         className = 'background-color-events';
@@ -65,6 +67,7 @@ export const LogPanel = Vue.component('log-panel', {
         LogMessageDataType.AWARD,
         LogMessageDataType.COLONY,
         LogMessageDataType.PARTY,
+        LogMessageDataType.TILE_TYPE,
       ];
       if (data.type !== undefined && data.value !== undefined) {
         if (data.type === LogMessageDataType.PLAYER) {
@@ -74,25 +77,29 @@ export const LogPanel = Vue.component('log-panel', {
             }
           }
         } else if (data.type === LogMessageDataType.CARD) {
+          const cardName = data.value as CardName;
           for (const player of this.players) {
-            if (player.corporationCard !== undefined && data.value === player.corporationCard.name) {
-              return '<span class="log-card background-color-corporation">' + $t(data.value) + '</span>';
+            if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
+              return '<span class="log-card background-color-corporation">' + $t(cardName) + '</span>';
             } else {
               const cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
               for (const card of cards) {
-                if (data.value === card.name && card.cardType !== undefined) {
+                if (cardName === card.name && card.cardType !== undefined) {
                   return this.parseCardType(card.cardType, data.value);
                 }
               }
             }
           }
-          const card = new CardFinder().getCardByName<ICard>(data.value, (manifest) => [
+          const card = new CardFinder().getCardByName<ICard>(cardName, (manifest) => [
             manifest.projectCards,
             manifest.preludeCards,
             manifest.standardProjects,
             manifest.standardActions,
           ]);
           if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
+        } else if (data.type === LogMessageDataType.TILE_TYPE) {
+          const tileType: TileType = +data.value;
+          return $t(TileType.toString(tileType));
         } else if (translatableMessageDataTypes.includes(data.type)) {
           return $t(data.value);
         } else {

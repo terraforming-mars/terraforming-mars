@@ -20,7 +20,7 @@ describe('Capital', function() {
   });
 
   it('Can\'t play without energy production', function() {
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -42,7 +42,7 @@ describe('Capital', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 
-    const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[0];
+    const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[1];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
     action.cb(citySpace);
 

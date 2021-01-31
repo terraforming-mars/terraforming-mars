@@ -10,7 +10,7 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MonsInsurance', function() {
-  let card : MonsInsurance; let player : Player; let player2: Player; let player3: Player; let game: Game;
+  let card : MonsInsurance; let player : Player; let player2: Player; let player3: Player;
 
   beforeEach(function() {
     card = new MonsInsurance();
@@ -18,11 +18,11 @@ describe('MonsInsurance', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('foobar', [player, player2, player3], player);
   });
 
   it('Should play', function() {
-    const play = card.play(player, game);
+    const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
@@ -30,7 +30,7 @@ describe('MonsInsurance', function() {
   });
 
   it('Triggers effect when resources are removed', function() {
-    card.play(player, game);
+    card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
     player2.titanium = 3;
@@ -45,7 +45,7 @@ describe('MonsInsurance', function() {
   });
 
   it('Doesn\'t trigger effect when player removes resources from self', function() {
-    card.play(player, game);
+    card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
 
@@ -60,7 +60,7 @@ describe('MonsInsurance', function() {
   });
 
   it('Doesn\'t trigger effect when player should pay itself', function() {
-    card.play(player, game);
+    card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
 

@@ -105,6 +105,10 @@ export class Localfilesystem implements IDatabase {
     // Not implemented
   }
 
+  markFinished(_game_id: GameId): void {
+    // Not implemented here.
+  }
+
   cleanSaves(_game_id: GameId, _save_id: number): void {
     // Not implemented here.
   }

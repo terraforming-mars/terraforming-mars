@@ -90,11 +90,6 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
   return TestingUtils.setCustomGameOptions(options);
 };
 
-export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
-  TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, party, policyId);
-};
-
-
 // TODO: Move TestPlayers and TestPlayerFactory to its own file.
 // This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.
 // So, someone do that sometime soon, please.

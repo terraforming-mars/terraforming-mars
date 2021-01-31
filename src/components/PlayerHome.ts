@@ -81,24 +81,24 @@ export const PlayerHome = Vue.component('player-home', {
     navigatePage: function(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let id: string | undefined = undefined;
+        let idSuffix: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:
-          id = 'board';
+          idSuffix = 'board';
           break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
-          id = 'playersoverview';
+          idSuffix = 'playersoverview';
           break;
         case KeyboardNavigation.HAND:
-          id = 'hand';
+          idSuffix = 'hand';
           break;
         case KeyboardNavigation.COLONIES:
-          id = 'colonies';
+          idSuffix = 'colonies';
           break;
         default:
           return;
         }
-        const el = document.getElementById('shortkey-' + id);
+        const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
           const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';

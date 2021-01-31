@@ -6,46 +6,51 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {IResourceCard} from '../ICard';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class RefugeeCamps implements IProjectCard, IResourceCard {
-    public cost = 10;
-    public tags = [Tags.EARTH];
-    public name = CardName.REFUGEE_CAMP;
-    public cardType = CardType.ACTIVE;
-    public resourceType = ResourceType.CAMP;
-    public resourceCount: number = 0;
+export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 10,
+      tags: [Tags.EARTH],
+      name: CardName.REFUGEE_CAMP,
+      cardType: CardType.ACTIVE,
+      resourceType: ResourceType.CAMP,
 
-    public canAct(player: Player): boolean {
-      return player.getProduction(Resources.MEGACREDITS) >= -4;
-    }
+      metadata: {
+        cardNumber: 'C33',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Decrease your MC production 1 step to add a camp resource to this card.', (eb) => {
+            eb.production((pb) => pb.megacredits(1));
+            eb.startAction.camps();
+          }).br;
+          b.vpText('1 VP for each camp resource on this card.');
+        }),
+        victoryPoints: CardRenderDynamicVictoryPoints.camps(1, 1),
+      },
+    });
+  }
 
-    public action(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, -1);
-      this.resourceCount++;
-      return undefined;
-    }
+  public resourceCount: number = 0;
 
-    public play() {
-      return undefined;
-    }
+  public canAct(player: Player): boolean {
+    return player.getProduction(Resources.MEGACREDITS) >= -4;
+  }
 
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
+  public action(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, -1);
+    this.resourceCount++;
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: 'C33',
-      renderData: CardRenderer.builder((b) => {
-        b.action('Decrease your MC production 1 step to add a camp resource to this card.', (eb) => {
-          eb.production((pb) => pb.megacredits(1));
-          eb.startAction.camps();
-        }).br;
-        b.vpText('1 VP for each camp resource on this card.');
-      }),
-      victoryPoints: CardRenderDynamicVictoryPoints.camps(1, 1),
-    }
+  public play() {
+    return undefined;
+  }
+
+  public getVictoryPoints(): number {
+    return this.resourceCount;
+  }
 }
 

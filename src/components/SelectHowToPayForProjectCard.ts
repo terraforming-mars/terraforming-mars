@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {Button} from './common/Button';
 
 interface SelectHowToPayForProjectCardModel {
-  cardName: string;
+  cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
   cost: number;
@@ -30,6 +30,7 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
+import {CardName} from '../CardName';
 // import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {

@@ -3,8 +3,8 @@ import {CardModel} from '../models/CardModel';
 
 export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {
   const firstCardIndex = -1;
-  return inCards.slice().sort(function(cardA, cardB) {
-    return (ActiveCardsSortingOrder.get(cardA.name as CardName) || firstCardIndex) - (ActiveCardsSortingOrder.get(cardB.name as CardName) || firstCardIndex);
+  return inCards.slice().sort(function(cardA: CardModel, cardB: CardModel) {
+    return (ActiveCardsSortingOrder.get(cardA.name) || firstCardIndex) - (ActiveCardsSortingOrder.get(cardB.name) || firstCardIndex);
   });
 }
 

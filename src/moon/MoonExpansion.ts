@@ -4,10 +4,7 @@ import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
 import {TileType} from '../TileType';
-// import {MoonSerialization} from './MoonSerialization';
-// import {MoonModel} from './MoonModel';
 import {SpaceType} from '../SpaceType';
-// import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -16,10 +13,6 @@ import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
-// import {IProjectCard} from '../cards/IProjectCard';
-// import {Units} from '../Units';
-// import {CardName} from '../CardName';
-// import {IMoonCard} from './IMoonCard';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -45,9 +38,9 @@ export class MoonExpansion {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
-        return;
+      } else {
+        return cb(game.moonData);
       }
-      return cb(game.moonData);
     }
     return elseCb ? elseCb() : undefined;
   }

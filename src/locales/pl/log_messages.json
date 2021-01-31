@@ -23,5 +23,8 @@
     "${0} copied ${1} production with ${2}": "${0} skopiował/a produkcję ${1} za pomocą ${2}",
     "${0} used ${1} action with ${2}": "${0} wykorzystał/a akcję ${1} za pomocą ${2}",
     "${0} sold ${1} patents": "${0} sprzedał/a ${1} patent/y/ów",
-    "${0} card(s) were discarded": "Odrzucono kart: ${0}"
+    "${0} card(s) were discarded": "Odrzucono kart: ${0}",
+    "${0} placed ocean tile on row ${1} position ${2}": "${0} umieścił/a obszar oceanu na polu ${2} w rzędzie ${1}",
+    "Dealt and discarded ${0} (cost ${1}) to place a tile": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić pole na planszy",
+    "Dealt and discarded ${0} (cost ${1}) to place a hazard": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić kafel niebezpieczeństwa na planszy"
 }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import {TestingUtils, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
 import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_4} from '../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Research} from '../../src/cards/base/Research';
@@ -18,7 +18,7 @@ describe('Scientists', function() {
     turmoil = game.turmoil!;
     scientists = new Scientists();
 
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Science tag you have', function() {

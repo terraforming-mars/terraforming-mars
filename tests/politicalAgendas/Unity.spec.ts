@@ -61,7 +61,7 @@ describe('Unity', function() {
     player.playedCards.push(localShading);
     unityPolicy.action(player);
     game.deferredActions.runNext();
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
 
     orOptions.options[0].cb();
     expect(localShading.resourceCount).to.eq(2);
@@ -88,6 +88,6 @@ describe('Unity', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[3].id);
 
     const card = new VestaShipyard();
-    expect(player.getCardCost(game, card)).to.eq(card.cost - 2);
+    expect(player.getCardCost(card)).to.eq(card.cost - 2);
   });
 });

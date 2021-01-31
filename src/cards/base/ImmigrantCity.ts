@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
@@ -19,8 +18,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
       name: CardName.IMMIGRANT_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 13,
-      hasRequirements: false,
-      productionDelta: Units.of({energy: -1, megacredits: -2}),
+      productionBox: Units.of({energy: -1, megacredits: -2}),
 
       metadata: {
         cardNumber: '200',
@@ -34,9 +32,9 @@ export class ImmigrantCity extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
-    const canPlaceCityOnMars = game.board.getAvailableSpacesForCity(player).length > 0;
+    const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
     const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
 
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
@@ -46,9 +44,9 @@ export class ImmigrantCity extends Card implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS);
     }
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      game.addCityTile(player, space.id);
+  public play(player: Player) {
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
       player.addProduction(Resources.ENERGY, -1);
       player.addProduction(Resources.MEGACREDITS, -2);
       return undefined;

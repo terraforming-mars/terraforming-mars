@@ -18,7 +18,7 @@ describe('Incite', function() {
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
 
-    card.play(player, game);
+    card.play(player);
     player.corporationCard = card;
   });
 
@@ -28,15 +28,15 @@ describe('Incite', function() {
 
   it('Works with Event Analysts', function() {
     const eventAnalysts = new EventAnalysts();
-    eventAnalysts.play(player, game);
+    eventAnalysts.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
   });
 
   it('Can perform initial action', function() {
-    card.initialAction(player, game);
+    card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

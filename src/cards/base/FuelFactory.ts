@@ -15,8 +15,7 @@ export class FuelFactory extends Card implements IProjectCard {
       name: CardName.FUEL_FACTORY,
       tags: [Tags.BUILDING],
       cost: 6,
-      hasRequirements: false,
-      productionDelta: Units.of({energy: -1, megacredits: 1, titanium: 1}),
+      productionBox: Units.of({energy: -1, megacredits: 1, titanium: 1}),
 
       metadata: {
         cardNumber: '180',

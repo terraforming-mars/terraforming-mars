@@ -6,6 +6,7 @@ import {Player} from '../Player';
 import {ResourceType} from '../ResourceType';
 import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -96,7 +97,7 @@ export class CardRequirement {
       if (this._isAny) {
         return this.satisfiesInequality(player.game.getCitiesInPlay());
       } else {
-        return this.satisfiesInequality(player.getCitiesCount(player.game));
+        return this.satisfiesInequality(player.getCitiesCount());
       }
 
     case RequirementType.COLONIES:
@@ -145,6 +146,15 @@ export class CardRequirement {
         .filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
       return this.satisfiesInequality(standardResources + nonStandardResources);
+
+    case RequirementType.COLONY_RATE:
+      return this.satisfiesInequality(MoonExpansion.moonData(player.game).colonyRate);
+
+    case RequirementType.MINING_RATE:
+      return this.satisfiesInequality(MoonExpansion.moonData(player.game).miningRate);
+
+    case RequirementType.LOGISTIC_RATE:
+      return this.satisfiesInequality(MoonExpansion.moonData(player.game).logisticRate);
 
     case RequirementType.TAG:
     case RequirementType.PARTY:

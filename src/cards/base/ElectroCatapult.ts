@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
@@ -21,7 +20,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       name: CardName.ELECTRO_CATAPULT,
       tags: [Tags.BUILDING],
       cost: 17,
-      productionDelta: Units.of({energy: -1}),
+      productionBox: Units.of({energy: -1}),
 
       metadata: {
         cardNumber: '069',
@@ -40,36 +39,36 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 &&
-        game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 8);
+        player.game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 8);
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     if (player.plants > 0 && player.steel > 0) {
       return new OrOptions(
         new SelectOption('Spend 1 plant to gain 7 mega credit', 'Spend plant', () => {
           player.plants--;
           player.megaCredits += 7;
-          this.log(game, player, Resources.PLANTS);
+          this.log(player, Resources.PLANTS);
           return undefined;
         }),
         new SelectOption('Spend 1 steel to gain 7 mega credit', 'Spend steel', () => {
           player.steel--;
           player.megaCredits += 7;
-          this.log(game, player, Resources.STEEL);
+          this.log(player, Resources.STEEL);
           return undefined;
         }),
       );
     } else if (player.plants > 0) {
       player.plants--;
-      this.log(game, player, Resources.PLANTS);
+      this.log(player, Resources.PLANTS);
       player.megaCredits += 7;
     } else if (player.steel > 0) {
       player.steel--;
-      this.log(game, player, Resources.STEEL);
+      this.log(player, Resources.STEEL);
       player.megaCredits += 7;
     }
     return undefined;
@@ -82,7 +81,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     return 1;
   }
 
-  private log(game: Game, player: Player, resource: Resources) {
-    game.log('${0} spent 1 ${1} to gain 7 MC', (b) => b.player(player).string(resource));
+  private log(player: Player, resource: Resources) {
+    player.game.log('${0} spent 1 ${1} to gain 7 MC', (b) => b.player(player).string(resource));
   }
 }

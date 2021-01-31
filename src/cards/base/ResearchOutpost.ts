@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {PlayerInput} from '../../PlayerInput';
@@ -17,7 +16,6 @@ export class ResearchOutpost extends Card implements IProjectCard {
       name: CardName.RESEARCH_OUTPOST,
       tags: [Tags.SCIENCE, Tags.CITY, Tags.BUILDING],
       cost: 18,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '020',
@@ -31,22 +29,22 @@ export class ResearchOutpost extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => {
-        const adjacentSpaces = game.board.getAdjacentSpaces(space);
+        const adjacentSpaces = player.game.board.getAdjacentSpaces(space);
         return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
       });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return this.getAvailableSpaces(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return this.getAvailableSpaces(player).length > 0;
   }
   public getCardDiscount() {
     return 1;
   }
-  public play(player: Player, game: Game): PlayerInput {
-    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-      game.addCityTile(player, foundSpace.id);
+  public play(player: Player): PlayerInput {
+    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
+      player.game.addCityTile(player, foundSpace.id);
       return undefined;
     });
   }

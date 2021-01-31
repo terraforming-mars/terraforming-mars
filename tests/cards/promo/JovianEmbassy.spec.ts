@@ -9,9 +9,9 @@ describe('JovianEmbassy', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
     expect(card.getVictoryPoints()).to.eq(1);
   });

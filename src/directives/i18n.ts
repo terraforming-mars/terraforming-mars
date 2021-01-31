@@ -2,7 +2,7 @@
 import {LogMessageDataType} from '../LogMessageDataType';
 import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
-import * as raw_translations from '../../assets/translations.json';
+import * as raw_translations from '../genfiles/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
@@ -63,7 +63,9 @@ export function translateTextNode(el: HTMLElement) {
   translateChildren(el);
 }
 
-export const $t = function(msg: string | Message) {
+export const $t = function(msg: string | Message | number | undefined) {
+  if ( ! msg) return '';
+  if (typeof(msg) === 'number') return msg.toString();
   if (typeof msg === 'string') {
     return translateText(msg);
   }

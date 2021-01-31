@@ -197,9 +197,6 @@
 
  
 
-    "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "介绍：请点击名字右方的复制按钮以复制链接发送给相应玩家，然后你自己点击自己名字来开始游戏",
-    "Save this page in case you or one of your opponents loses a link.": "请保存此页面如果你或者其他玩家丢失链接或者更换设备，您可以再次发送给他们",
-    "copy": "复制",
      "Remove colony": "移除殖民地",
      "Select colony tile to remove":  "选择你想移除的殖民地",
      "Select where to build the first colony": "选择在什么地方建造你的第一个殖民地",
@@ -227,6 +224,9 @@
      "You cannot pay for this card": "你不能为此牌支付",
      "Select card(s) to buy":"选择你需要购买的牌",
    
+    "Starting Megacredits:":"起始MC：",
+    "After Preludes:":"前序牌打出后MC：",
+    
     
     "Air Scrapping": "空中竞争",
     "Buffer Gas": "缓冲气体",

@@ -8,6 +8,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
+import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -30,12 +31,14 @@ describe('MoonMineStandardProject', () => {
   });
 
   it('has discount', () => {
-    card.action(player, player.game);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
+    card.action(player);
+    let payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     expect(payAction.amount).eq(20);
-    // // player.playedCards.push(new MooncrateBlockFactory());
-    // payAction = game.deferredActions.next() as SelectHowToPayDeferred;
-    // expect(payAction.amount).eq(16);
+
+    player.playedCards.push(new MooncrateBlockFactory());
+    card.action(player);
+    payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    expect(payAction.amount).eq(16);
   });
 
   it('act', () => {
@@ -43,16 +46,15 @@ describe('MoonMineStandardProject', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(player.getProduction(Resources.STEEL)).eq(0);
 
-    card.action(player, player.game);
-    const payAction = game.deferredActions.next() as SelectHowToPayDeferred;
-    game.deferredActions.remove(payAction);
+    card.action(player);
+    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
     expect(player.getProduction(Resources.STEEL)).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    const placeTileAction = game.deferredActions.next() as PlaceMoonMineTile;
+    const placeTileAction = game.deferredActions.peek() as PlaceMoonMineTile;
     placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.miningRate).eq(1);

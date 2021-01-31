@@ -6,7 +6,6 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
@@ -19,7 +18,6 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
       name: CardName.EQUATORIAL_MAGNETIZER,
       tags: [Tags.BUILDING],
       cost: 11,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '015',
@@ -34,18 +32,18 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
   public play() {
     return undefined;
   }
-  public canAct(player: Player, game: Game): boolean {
+  public canAct(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;
   }
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     return undefined;
   }
 }

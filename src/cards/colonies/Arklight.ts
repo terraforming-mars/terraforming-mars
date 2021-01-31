@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
@@ -26,7 +25,7 @@ export class Arklight implements CorporationCard, IResourceCard {
       return undefined;
     }
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, card: IProjectCard): void {
       if (player.isCorporation(CardName.ARKLIGHT)) {
         player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
       }

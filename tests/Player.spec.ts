@@ -14,7 +14,6 @@ import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
-import {Timer} from '../src/Timer';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -39,7 +38,7 @@ describe('Player', function() {
     player3.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, Game.newInstance('foobar', [player, player2, player3], player));
+    const action = card.play(player); //  Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       player.process([[player2.id]]);
@@ -49,12 +48,12 @@ describe('Player', function() {
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    // const redPlayer = TestPlayers.RED.newPlayer();
 
     Game.newInstance('foobar', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
+    const action = card.play(player); // , Game.newInstance('foobar', [player, redPlayer], player));
     if (action !== undefined) {
       player.setWaitingFor(action, () => undefined);
       expect(player.getWaitingFor()).is.not.undefined;
@@ -76,7 +75,7 @@ describe('Player', function() {
 
     player.addProduction(Resources.HEAT, 2);
     Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, Game.newInstance('foobar', [player, redPlayer], player));
+    const action = card.play(player); // Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
     player.setWaitingFor(action, () => undefined);
@@ -135,27 +134,11 @@ describe('Player', function() {
     playerKeys.sort();
     expect(serializedKeys).to.deep.eq(playerKeys);
   });
-  it('forward serialization for pickedCorporationCard', () => {
+  it('serialization test for pickedCorporationCard', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.pickedCorporationCard = new SaturnSystems();
     const json = player.serialize();
     expect(json.pickedCorporationCard).eq('Saturn Systems');
-  });
-  it('backward compatible deserialization for actionsThisGeneration', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const json = player.serialize();
-    json.actionsThisGeneration = ['Food Factory', 'Gene Repair'] as Array<CardName>;
-    const s: SerializedPlayer = JSON.parse(JSON.stringify(json));
-    expect(s.actionsThisGeneration).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
-    const p = Player.deserialize(s);
-    expect(Array.from(p.getActionsThisGeneration())).to.deep.eq([CardName.FOOD_FACTORY, CardName.GENE_REPAIR]);
-  });
-  it('backward compatible deserialization for timer', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const json: any = player.serialize();
-    json.timer = undefined;
-    const p = Player.deserialize(json);
-    expect(p.timer.serialize()).to.deep.eq(Timer.newInstance().serialize());
   });
   it('serialization test', () => {
     const json = {
@@ -232,15 +215,8 @@ describe('Player', function() {
       } as SerializedTimer,
     };
 
-    const legacyPlayer = Player.deserialize(json as SerializedPlayer, false);
-    const newPlayer = Player.deserialize(json as SerializedPlayer, true);
+    const newPlayer = Player.deserialize(json as SerializedPlayer);
 
-    expect(legacyPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.color).eq(Color.PURPLE);
-
-    const legacyPlayerSerialized = legacyPlayer.serialize();
-    const newPlayerSerialized = newPlayer.serialize();
-    expect(legacyPlayerSerialized, 'legacy vs new').to.deep.eq(newPlayerSerialized);
-    expect(legacyPlayerSerialized, 'legacy vs json').to.deep.eq(json);
   });
 });

@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -18,7 +17,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       name: CardName.CONVOY_FROM_EUROPA,
       tags: [Tags.SPACE],
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '161',
@@ -28,19 +26,19 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canPlay(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.drawCard();
-    game.defer(new PlaceOceanTile(player));
+    player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

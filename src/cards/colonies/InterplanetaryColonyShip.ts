@@ -3,29 +3,32 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {CardMetadata} from '../CardMetadata';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class InterplanetaryColonyShip implements IProjectCard {
-    public cost = 12;
-    public tags = [Tags.SPACE, Tags.EARTH];
-    public name = CardName.INTERPLANETARY_COLONY_SHIP;
-    public cardType = CardType.EVENT;
-    public hasRequirements = false;
+export class InterplanetaryColonyShip extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 12,
+      tags: [Tags.SPACE, Tags.EARTH],
+      name: CardName.INTERPLANETARY_COLONY_SHIP,
+      cardType: CardType.EVENT,
 
-    public canPlay(player: Player, game: Game): boolean {
-      return player.hasAvailableColonyTileToBuildOn(game);
-    }
+      metadata: {
+        cardNumber: 'C17',
+        renderData: CardRenderer.builder((b) => b.colonies(1)),
+        description: 'Place a colony.',
+      },
+    });
+  }
 
-    public play(player: Player, game: Game) {
-      game.defer(new BuildColony(player, false, 'Select colony for Interplanetary Colony Ship'));
-      return undefined;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'C17',
-      renderData: CardRenderer.builder((b) => b.colonies(1)),
-      description: 'Place a colony.',
-    }
+  public canPlay(player: Player): boolean {
+    return player.hasAvailableColonyTileToBuildOn();
+  }
+
+  public play(player: Player) {
+    player.game.defer(new BuildColony(player, false, 'Select colony for Interplanetary Colony Ship'));
+    return undefined;
+  }
 }

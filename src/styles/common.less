@@ -20,7 +20,7 @@ body {
     border-color: #4b48d6;
     color: #fff;
     cursor: pointer;
-    height: 1.35rem;
+    height: 1.5rem;
     line-height: 0.5rem;
 }
 .btn-max {
@@ -45,6 +45,9 @@ body {
     display: flex;
     padding: 0px;
     justify-content: center;
+}
+.centered-content button {
+    margin-right: 20px;
 }
 .dynamic-title {
     font-size: @font_size_huge;
@@ -119,6 +122,9 @@ h2 {
 .nowrap {
     white-space: nowrap;
 }
+.newlines {
+    white-space: pre;
+}
 
 .mt-5 {
     margin-top: 5px;
@@ -153,6 +159,14 @@ h2 {
     background-color: @player_purple;
 }
 
+.player_bg_color_orange {
+    background-color: @player_orange;
+}
+
+.player_bg_color_pink {
+    background-color: @player_pink;
+}
+
 // backgroungs with opacity
 .player_translucent_bg_color_red {
     .player_red_bg_translucent();
@@ -176,6 +190,14 @@ h2 {
 
 .player_translucent_bg_color_purple {
     .player_purple_bg_translucent();
+}
+
+.player_translucent_bg_color_orange {
+    .player_orange_bg_translucent();
+}
+
+.player_translucent_bg_color_pink {
+    .player_pink_bg_translucent();
 }
 
 @import "./language_switcher.less";

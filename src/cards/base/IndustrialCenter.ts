@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -35,23 +34,22 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
       name,
       tags: [Tags.BUILDING],
       cost: 4,
-      hasRequirements: false,
       adjacencyBonus,
 
       metadata,
     });
   }
 
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
+      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return this.getAvailableSpaces(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return this.getAvailableSpaces(player).length > 0;
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.INDUSTRIAL_CENTER});
+  public play(player: Player) {
+    return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.INDUSTRIAL_CENTER});
       foundSpace.adjacency = this.adjacencyBonus;
       return undefined;
     });
@@ -59,8 +57,8 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
   public canAct(player: Player): boolean {
     return player.canAfford(7);
   }
-  public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
+  public action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
     player.addProduction(Resources.STEEL);
     return undefined;
   }

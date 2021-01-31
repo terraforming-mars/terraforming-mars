@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
@@ -17,7 +16,6 @@ export class BlackPolarDust extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '022',
@@ -31,20 +29,20 @@ export class BlackPolarDust extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsMcProdRequirement = player.getProduction(Resources.MEGACREDITS) >= -3;
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsMcProdRequirement;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsMcProdRequirement;
     }
 
     return meetsMcProdRequirement;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, -2);
     player.addProduction(Resources.HEAT, 3);
-    game.defer(new PlaceOceanTile(player));
+    player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

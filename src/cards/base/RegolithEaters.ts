@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -41,13 +40,13 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
 
     public resourceCount = 0;
 
-    public play(_player: Player, _game: Game) {
+    public play(_player: Player) {
       return undefined;
     }
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       if (this.resourceCount < 2) {
         player.addResourceTo(this);
         LogHelper.logAddResource(player, this);
@@ -55,13 +54,13 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
       }
 
       const orOptions = new OrOptions();
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
 
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
           player.removeResourceFrom(this, 2);
           LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
-          return game.increaseOxygenLevel(player, 1);
+          return player.game.increaseOxygenLevel(player, 1);
         }));
       }
 

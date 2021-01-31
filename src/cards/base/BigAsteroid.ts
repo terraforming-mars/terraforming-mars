@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -18,7 +17,6 @@ export class BigAsteroid extends Card implements IProjectCard {
       name: CardName.BIG_ASTEROID,
       tags: [Tags.SPACE],
       cost: 27,
-      hasRequirements: false,
 
       metadata: {
         description: 'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
@@ -32,20 +30,20 @@ export class BigAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
+  public canPlay(player: Player): boolean {
+    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 2);
-    game.defer(new RemoveAnyPlants(player, 4));
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 2);
+    player.game.defer(new RemoveAnyPlants(player, 4));
     player.titanium += 4;
     return undefined;
   }

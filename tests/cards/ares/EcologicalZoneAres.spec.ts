@@ -21,16 +21,16 @@ describe('EcologicalZoneAres', function() {
   it('Should play', function() {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace.id);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     const adjacentSpace = action.availableSpaces[0];
     action.cb(adjacentSpace);
     expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.ECOLOGICAL_ZONE);
 
-    card.onCardPlayed(player, game, card);
+    card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
     expect(adjacentSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.ANIMAL]});

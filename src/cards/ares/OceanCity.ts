@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -20,7 +19,7 @@ export class OceanCity extends Card implements IProjectCard {
       name: CardName.OCEAN_CITY,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 18,
-      productionDelta: Units.of({energy: -1, megacredits: 3}),
+      productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
         cardNumber: 'A20',
@@ -40,16 +39,16 @@ export class OceanCity extends Card implements IProjectCard {
     return super.canPlay(player) && (player.getProduction(Resources.ENERGY) > 0);
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 3);
 
     return new SelectSpace(
       'Select space for Ocean City',
-      game.board.getOceansTiles(false),
+      player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        game.removeTile(space.id);
-        game.addTile(player, space.spaceType, space, {
+        player.game.removeTile(space.id);
+        player.game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_CITY,
           card: this.name,
         });

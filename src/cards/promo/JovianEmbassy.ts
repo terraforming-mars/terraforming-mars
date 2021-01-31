@@ -1,45 +1,47 @@
 import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
+import {Card} from '../Card';
 import {CardType} from './../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class JovianEmbassy implements IProjectCard {
-    public cost = 14;
-    public tags = [Tags.JOVIAN, Tags.BUILDING];
-    public name = CardName.JOVIAN_EMBASSY;
-    public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
+export class JovianEmbassy extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.JOVIAN_EMBASSY,
+      tags: [Tags.JOVIAN, Tags.BUILDING],
+      cost: 14,
 
-    public canPlay(player: Player, game: Game): boolean {
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true);
-      }
+      metadata: {
+        cardNumber: 'X24',
+        renderData: CardRenderer.builder((b) => {
+          b.tr(1);
+        }),
+        description: 'Raise your TR 1 step.',
+        victoryPoints: 1,
+      },
+    });
+  }
 
-      return true;
+  public canPlay(player: Player): boolean {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true);
     }
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRating(game);
-      return undefined;
-    }
+    return true;
+  }
 
-    public getVictoryPoints() {
-      return 1;
-    }
+  public play(player: Player) {
+    player.increaseTerraformRating();
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: 'X24',
-      renderData: CardRenderer.builder((b) => {
-        b.tr(1);
-      }),
-      description: 'Raise your TR 1 step.',
-      victoryPoints: 1,
-    };
+  public getVictoryPoints() {
+    return 1;
+  }
 }

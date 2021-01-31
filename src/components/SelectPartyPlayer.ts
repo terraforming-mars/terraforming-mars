@@ -1,11 +1,11 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {SelectPlayerRow} from './SelectPlayerRow';
+import {TranslateMixin} from './TranslateMixin';
 
 export const SelectPartyPlayer = Vue.component('select-party-player', {
   props: {
@@ -30,14 +30,12 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
       selectedPlayer: undefined as ColorWithNeutral | undefined,
     };
   },
+  mixins: [TranslateMixin],
   components: {
     'Button': Button,
     'select-player-row': SelectPlayerRow,
   },
   methods: {
-    getTitle: function() {
-      return $t(this.playerinput.title);
-    },
     saveData: function() {
       const result: string[][] = [];
       result.push([]);
@@ -48,14 +46,14 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
     },
   },
   template: `<div>
-  <div v-if="showtitle === true">{{getTitle()}}</div>
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
   <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
     <input type="radio" v-model="selectedPlayer" :value="player" />
     <i class="form-icon"></i>
     <span v-if="player === 'NEUTRAL'" >Neutral</span>
     <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
   </label>
-  <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+  <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
 </div>`,
 });
 

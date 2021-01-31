@@ -19,6 +19,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {staticCardProperties} from '../../../src/cards/Card';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
@@ -32,13 +33,13 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Can\'t play if no building cards to copy', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should throw', function() {
     player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
-    expect(card.canPlay(player, game)).is.not.true;
-    const action = card.play(player, game);
+    expect(card.canPlay(player)).is.not.true;
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
@@ -46,7 +47,7 @@ describe('RoboticWorkforce', function() {
     const noctisFarming = new NoctisFarming();
     player.playedCards.push(noctisFarming);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
     action!.cb([noctisFarming]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -56,11 +57,11 @@ describe('RoboticWorkforce', function() {
     const capital = new Capital();
     player.playedCards.push(capital);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
     player.addProduction(Resources.ENERGY, 2);
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([capital]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
@@ -72,11 +73,11 @@ describe('RoboticWorkforce', function() {
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
     player.addProduction(Resources.ENERGY, 2);
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([capitalAres]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
@@ -93,14 +94,14 @@ describe('RoboticWorkforce', function() {
     expect(solarFarmSpace.bonus.every((b) => b === SpaceBonus.PLANT)).is.true;
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    const action = solarFarm.play(player, game);
+    const action = solarFarm.play(player);
     expect(action).is.not.undefined;
     action!.cb(solarFarmSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
 
     player.playedCards.push(solarFarm);
 
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([solarFarm]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(4);
@@ -110,7 +111,7 @@ describe('RoboticWorkforce', function() {
     const corporationCard = new UtopiaInvest();
     player.corporationCard = corporationCard;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
@@ -153,7 +154,7 @@ describe('RoboticWorkforce', function() {
           // Let's make sure we trigger any tag based production
           player.playedCards.push(...Array(5).fill(researchCoordination));
 
-          const action = card.play(player, game);
+          const action = card.play(player);
           if (action !== undefined) {
             if (action instanceof SelectSpace) {
               action.cb(action.availableSpaces[0]);
@@ -161,7 +162,7 @@ describe('RoboticWorkforce', function() {
           }
 
           while (game.deferredActions.length) {
-            const defAction = game.deferredActions.shift()!.execute();
+            const defAction = game.deferredActions.pop()!.execute();
             if (defAction !== undefined) {
               if (defAction instanceof SelectSpace) {
                 defAction.cb(defAction.availableSpaces[0]);
@@ -192,5 +193,20 @@ describe('RoboticWorkforce', function() {
         }
       });
     });
+  });
+
+  it('all cards have updaters or productionBoxes', () => {
+    const errors: Array<string> = [];
+    RoboticWorkforce.builderCardsNames.forEach((cardName) => {
+      const updater = card.getUpdater(cardName, player);
+      const units = staticCardProperties.get(cardName)?.productionBox;
+      if (updater === undefined && units === undefined) {
+        errors.push(cardName + ' is unregistered');
+      }
+      if (updater !== undefined && units !== undefined) {
+        errors.push(cardName + ' is double-registered');
+      }
+    });
+    expect(errors, errors.toString()).is.empty;
   });
 });

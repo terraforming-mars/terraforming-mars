@@ -9,11 +9,11 @@ describe('Greenhouses', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.plants).to.eq(0);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    card.play(player, game);
+    card.play(player);
     expect(player.plants).to.eq(1);
   });
 });

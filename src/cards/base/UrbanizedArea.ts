@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
@@ -19,8 +18,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
       name: CardName.URBANIZED_AREA,
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 10,
-      hasRequirements: false,
-      productionDelta: Units.of({energy: -1, megacredits: 2}),
+      productionBox: Units.of({energy: -1, megacredits: 2}),
 
       metadata: {
         cardNumber: '120',
@@ -34,16 +32,16 @@ export class UrbanizedArea extends Card implements IProjectCard {
       },
     });
   }
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
+      .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && this.getAvailableSpaces(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return player.getProduction(Resources.ENERGY) >= 1 && this.getAvailableSpaces(player).length > 0;
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-      game.addCityTile(player, foundSpace.id);
+  public play(player: Player) {
+    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
+      player.game.addCityTile(player, foundSpace.id);
       player.addProduction(Resources.ENERGY, -1);
       player.addProduction(Resources.MEGACREDITS, 2);
       return undefined;

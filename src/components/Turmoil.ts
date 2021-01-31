@@ -8,52 +8,52 @@ import {PolicyId} from '../turmoil/Policy';
 const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
 {
   AGENDA_HTML.set('mb01',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="resource-tag tag-building party-resource-tag"></div>`);
   AGENDA_HTML.set('mb02',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="tile empty-tile-small"></div>ON MARS`);
   AGENDA_HTML.set('sb01',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="resource-tag tag-science party-resource-tag"></div>`);
   AGENDA_HTML.set('sb02',
     `<div class="resource money party-resource">1</div> / 3
     <div class="resource card card-small"></div>`);
   AGENDA_HTML.set('ub01',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="resource-tag tag-venus party-resource-tag"></div>
     <div class="resource-tag tag-earth party-resource-tag"></div>
     <div class="resource-tag tag-jovian party-resource-tag"></div>`);
   AGENDA_HTML.set('ub02',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="resource-tag tag-space party-resource-tag"></div>`);
   AGENDA_HTML.set('kb01',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="production-box party-production-box">
       <div class="heat production"></div>
     </div>`);
   AGENDA_HTML.set('kb02',
-    `<div class="resource heat party-resource"></div> / 
+    `<div class="resource heat party-resource"></div> /
     <div class="production-box party-production-box">
       <div class="heat production"></div>
     </div>`);
   AGENDA_HTML.set('rb01',
-    `<div class="party-inferior-rating tile party-rating party-tile">&lt;</div> : 
+    `<div class="party-inferior-rating tile party-rating party-tile">&lt;</div> :
   <div class="rating tile party-rating party-tile"></div>`);
   AGENDA_HTML.set('rb02',
-    `<div class="party-inferior-rating tile party-rating party-tile">&gt;</div> : 
+    `<div class="party-inferior-rating tile party-rating party-tile">&gt;</div> :
   <div class="rating tile party-rating party-tile red-outline "></div>`);
   AGENDA_HTML.set('gb01',
-    `<div class="resource money party-resource">1</div> / 
+    `<div class="resource money party-resource">1</div> /
     <div class="resource-tag tag-plant party-resource-tag"></div>
     <div class="resource-tag tag-microbe party-resource-tag"></div>
     <div class="resource-tag tag-animal party-resource-tag"></div>`);
   AGENDA_HTML.set('gb02',
-    `<div class="resource money party-resource">2</div> / 
+    `<div class="resource money party-resource">2</div> /
     <div class="tile greenery-tile greenery-tile-small"></div>`);
 
   AGENDA_HTML.set('mfp01',
-    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
     <span class="steel resource"></span></div>`);
   AGENDA_HTML.set('mfp02',
     `<div class="policy-top-margin"><div class="resource-tag tag-building"></div> : <div class="money resource">2</div></div>`);
@@ -82,7 +82,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     : <div class="resource card card-with-border"></div></span>`);
   AGENDA_HTML.set('sp04', `<div class="scientists-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`);
   AGENDA_HTML.set('up01',
-    `<div class="policy-top-margin"><div class="resource titanium"></div> : 
+    `<div class="policy-top-margin"><div class="resource titanium"></div> :
     + <div class="resource money">1</div></div>`);
   AGENDA_HTML.set('up02',
     `<div class="policy-top-margin">
@@ -107,19 +107,19 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <span class="red-arrow-infinity"></span>
     <div class="tile temperature-tile"></div>`);
   AGENDA_HTML.set('kp04',
-    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
     <span class="heat resource"></span><span class="heat resource"></span></div>`);
   AGENDA_HTML.set('rp01',
     `<div class="policy-top-margin">
-    <div class="rating tile"></div> : 
+    <div class="rating tile"></div> :
     <div class="resource money">-3</div>
     </div>`);
   AGENDA_HTML.set('rp02', `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="money resource">-3</span></div>`);
   AGENDA_HTML.set('rp03',
     `<span class="money resource">4</span>
     <span class="red-arrow-3x"></span>
-    <div class="tile oxygen-tile req-tile-small red-outline" style="margin: 10px -5px;"></div> / 
-    <div class="tile ocean-tile req-tile-small red-outline"></div> / 
+    <div class="tile oxygen-tile req-tile-small red-outline" style="margin: 10px -5px;"></div> /
+    <div class="tile ocean-tile req-tile-small red-outline"></div> /
     <div class="tile temperature-tile req-tile-small red-outline"></div>`);
   AGENDA_HTML.set('rp04',
     `<div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
@@ -130,7 +130,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     </div>`);
   AGENDA_HTML.set('gp01', `<div class="tile greenery-tile"></div> : <div class="resource money">4</div>`);
   AGENDA_HTML.set('gp02',
-    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : 
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
     <span class="plant resource"></span></div>`);
   AGENDA_HTML.set('gp03',
     `<div class="policy-top-margin">
@@ -220,10 +220,8 @@ export const Turmoil = Vue.component('turmoil', {
         }
       }
 
-      console.log(`loading policy id ${policyId}`);
       if (policyId !== undefined) {
         const policy = AGENDA_HTML.get(policyId);
-        console.log(`policy is ${policy}`);
         return policy || `No ruling Policy`;
       }
       return '<p>' + $t('No ruling Policy') + '</p>';
@@ -244,10 +242,10 @@ export const Turmoil = Vue.component('turmoil', {
             <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.distant.current)" v-i18n>{{ turmoil.distant.current }}</div>
             <div class="event-content"><div class="event-text" v-i18n>{{ turmoil.distant.description }}</div></div>
           </div>
-          <div v-if="turmoil.comming" class="global-event global-event--comming">
-            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.comming.revealed)" v-i18n>{{ turmoil.comming.revealed }}</div>
-            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.comming.current)" v-i18n>{{ turmoil.comming.current }}</div>
-            <div class="event-content" v-i18n>{{ turmoil.comming.description }}</div>
+          <div v-if="turmoil.coming" class="global-event global-event--coming">
+            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.coming.revealed)" v-i18n>{{ turmoil.coming.revealed }}</div>
+            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.coming.current)" v-i18n>{{ turmoil.coming.current }}</div>
+            <div class="event-content" v-i18n>{{ turmoil.coming.description }}</div>
           </div>
           <div v-if="turmoil.current" class="global-event global-event--current">
             <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.current.revealed)" v-i18n>{{ turmoil.current.revealed }}</div>
@@ -255,7 +253,7 @@ export const Turmoil = Vue.component('turmoil', {
             <div class="event-content" v-i18n>{{ turmoil.current.description }}</div>
           </div>
       </div>
-      
+
       <div class="turmoil-board">
         <div class="turmoil-header">
           <div class="turmoil-lobby">
@@ -290,7 +288,7 @@ export const Turmoil = Vue.component('turmoil', {
           <div v-for="party in turmoil.parties" :class="['leader-spot', 'leader-spot--'+partyNameToCss(party.name), {'player-token-new-leader': (party.name === turmoil.dominant)}]">
             <div class="delegate-spot">
               <div v-if="party.partyLeader" :class="['player-token', party.partyLeader]"></div>
-            </div>    
+            </div>
           </div>
         </div>
 

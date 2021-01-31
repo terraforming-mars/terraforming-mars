@@ -6,25 +6,25 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('MagneticShield', function() {
-  let card : MagneticShield; let player : Player; let game : Game;
+  let card : MagneticShield; let player : Player;
 
   beforeEach(function() {
     card = new MagneticShield();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play if not enough power tags available', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).to.eq(24);
   });
 });

@@ -21,12 +21,12 @@ describe('SearchForLife', function() {
 
   it('Can\'t play if oxygen level too high', function() {
     (game as any).oxygenLevel = 7;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 6;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play();
 
@@ -42,7 +42,7 @@ describe('SearchForLife', function() {
     while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBE) === undefined ||
                game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE) === undefined) {
       player.megaCredits = 1;
-      card.action(player, game);
+      card.action(player);
       game.deferredActions.runNext();
       expect(player.megaCredits).to.eq(0);
     }

@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
@@ -24,8 +23,8 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player));
+  public play(player: Player) {
+    player.game.defer(new PlaceOceanTile(player));
     player.addProduction(Resources.HEAT, 2);
     return undefined;
   }

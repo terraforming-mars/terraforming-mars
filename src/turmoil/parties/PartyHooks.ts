@@ -12,8 +12,7 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
     if (this.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
-        spaceType !== SpaceType.COLONY &&
-        player.game.phase === Phase.ACTION) {
+        spaceType !== SpaceType.COLONY) {
       player.setResource(Resources.STEEL, 1);
     }
   }
@@ -29,6 +28,8 @@ export class PartyHooks {
   // the default policy for `partyName`.
   static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: PolicyId): boolean {
     if (!game.gameOptions.turmoilExtension) return false;
+
+    if (game.phase !== Phase.ACTION) return false;
 
     const turmoil = game.turmoil!;
     if (!turmoil) return false;

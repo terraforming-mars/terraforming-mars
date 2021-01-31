@@ -1,35 +1,37 @@
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
 
-export class LuxuryFoods implements IProjectCard {
-    public cost = 8;
-    public tags = [];
-    public name = CardName.LUXURY_FOODS;
-    public cardType = CardType.AUTOMATED;
+export class LuxuryFoods extends Card {
+  constructor() {
+    super({
+      name: CardName.LUXURY_FOODS,
+      cardType: CardType.AUTOMATED,
+      cost: 8,
 
-    public canPlay(player: Player): boolean {
-      return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
-    }
+      metadata: {
+        description: 'Requires that you have a Venus tag, an Earth tag and a Jovian tag.',
+        cardNumber: 'T10',
+        requirements: CardRequirements.builder((b) =>
+          b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN),
+        ),
+        victoryPoints: 2,
+      },
+    });
+  };
 
-    public play() {
-      return undefined;
-    }
+  public canPlay(player: Player): boolean {
+    return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
+  }
 
-    public getVictoryPoints() {
-      return 2;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
-      description: 'Requires that you have a Venus tag, an Earth tag and a Jovian tag.',
-      cardNumber: 'T10',
-      requirements: CardRequirements.builder((b) =>
-        b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN),
-      ),
-      victoryPoints: 2,
-    };
+  public getVictoryPoints() {
+    return 2;
+  }
 }

@@ -10,13 +10,13 @@ export class Cloner {
     newGameId: GameId,
     players: Array<Player>,
     firstPlayerIndex: number,
-    err: any,
+    err: Error | undefined,
     serialized: SerializedGame | undefined,
     cb: DbLoadCallback<Game>) {
-    const response: {err: any, game: Game | undefined} = {err: err, game: undefined};
+    const response: {err?: Error, game: Game | undefined} = {err: err, game: undefined};
 
     try {
-      if (err === undefined && serialized !== undefined) {
+      if ((err === undefined || err === null) && serialized !== undefined) {
         const sourceGameId: GameId = serialized.id;
         const oldPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
         const newPlayerIds: Array<PlayerId> = players.map((player) => player.id);

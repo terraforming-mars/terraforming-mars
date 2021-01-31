@@ -1,30 +1,59 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class PharmacyUnion implements CorporationCard {
-    public name = CardName.PHARMACY_UNION;
-    public tags = [Tags.MICROBE, Tags.MICROBE];
-    public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
-    public resourceType = ResourceType.DISEASE;
-    public cardType = CardType.CORPORATION;
-    public resourceCount: number = 0;
-    public isDisabled: boolean = false;
+export class PharmacyUnion extends Card implements CorporationCard {
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.PHARMACY_UNION,
+      startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
+      resourceType: ResourceType.DISEASE,
+
+      metadata: {
+        cardNumber: 'R39',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
+          // blank space after MC is on purpose
+          b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
+          b.corpBox('effect', (ce) => {
+            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.effect(undefined, (eb) => {
+              eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
+            });
+            ce.vSpace();
+            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
+              eb.science(1).played.startEffect.minus().disease();
+              eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
+            });
+          });
+        }),
+      },
+    });
+  }
+
+    public resourceCount = 0;
+    public isDisabled = false;
+
+    public get tags() {
+      if (this.isDisabled) {
+        return [];
+      }
+      return [Tags.MICROBE, Tags.MICROBE];
+    }
 
     public play(player: Player) {
       this.resourceCount = 2;
@@ -32,8 +61,18 @@ export class PharmacyUnion implements CorporationCard {
       return undefined;
     }
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, card: IProjectCard): void {
+      this._onCardPlayed(player, card);
+    }
+
+    public onCorpCardPlayed(player: Player, card: CorporationCard) {
+      return this._onCardPlayed(player, card);
+    }
+
+    private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): void {
       if (this.isDisabled) return undefined;
+
+      const game = player.game;
 
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
       const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
@@ -51,14 +90,14 @@ export class PharmacyUnion implements CorporationCard {
                 new SelectOption('Turn it face down to gain 3 TR and lose up to 4 MC', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   this.isDisabled = true;
-                  player.increaseTerraformRatingSteps(3, game);
+                  player.increaseTerraformRatingSteps(3);
                   player.megaCredits -= megaCreditsLost;
                   game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),
                 new SelectOption('Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
-                  player.increaseTerraformRating(game);
+                  player.increaseTerraformRating();
                   player.megaCredits -= megaCreditsLost;
                   game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
                   game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
@@ -68,7 +107,7 @@ export class PharmacyUnion implements CorporationCard {
               orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
               return orOptions;
             },
-          ), true); // Make it a priority
+          ), -1); // Make it a priority
           return undefined;
         }
       }
@@ -88,7 +127,7 @@ export class PharmacyUnion implements CorporationCard {
                   game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
                 } else {
                   this.resourceCount--;
-                  player.increaseTerraformRating(game);
+                  player.increaseTerraformRating();
                   game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                 }
                 return undefined;
@@ -103,7 +142,7 @@ export class PharmacyUnion implements CorporationCard {
               return new OrOptions(
                 new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR', () => {
                   this.isDisabled = true;
-                  player.increaseTerraformRatingSteps(3, game);
+                  player.increaseTerraformRatingSteps(3);
                   game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                   return undefined;
                 }),
@@ -112,7 +151,7 @@ export class PharmacyUnion implements CorporationCard {
                 }),
               );
             },
-          ), true); // Make it a priority
+          ), -1); // Make it a priority
         }
       }
 
@@ -129,33 +168,9 @@ export class PharmacyUnion implements CorporationCard {
             game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
             return undefined;
           },
-        ), true); // Make it a priority
+        ), -1); // Make it a priority
       }
 
       return undefined;
-    }
-
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
-      return this.onCardPlayed(player, game, card as ICard as IProjectCard);
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'R39',
-      renderData: CardRenderer.builder((b) => {
-        b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
-        // blank space after MC is on purpose
-        b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
-        b.corpBox('effect', (ce) => {
-          ce.vSpace(CardRenderItemSize.LARGE);
-          ce.effect(undefined, (eb) => {
-            eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
-          });
-          ce.vSpace();
-          ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
-            eb.science(1).played.startEffect.minus().disease();
-            eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
-          });
-        });
-      }),
     }
 }

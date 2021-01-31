@@ -7,9 +7,7 @@ import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GameSetupDetail} from '../components/GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
-
-// @ts-ignore
-import {$t} from '../directives/i18n';
+import {TranslateMixin} from './TranslateMixin';
 
 export const Preferences = Vue.component('preferences', {
   props: {
@@ -40,12 +38,6 @@ export const Preferences = Vue.component('preferences', {
     venus: {
       type: Number,
     },
-    venusNextExtension: {
-      type: Boolean,
-    },
-    turmoilExtension: {
-      type: Boolean,
-    },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
@@ -53,6 +45,7 @@ export const Preferences = Vue.component('preferences', {
   components: {
     'game-setup-detail': GameSetupDetail,
   },
+  mixins: [TranslateMixin],
   data: function() {
     return {
       'ui': {
@@ -79,6 +72,8 @@ export const Preferences = Vue.component('preferences', {
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
+      'hide_tile_confirmation': false as boolean | unknown[],
+      'show_card_number': false as boolean | unknown[],
     };
   },
   methods: {
@@ -188,7 +183,6 @@ export const Preferences = Vue.component('preferences', {
         return `${rulingPartyName}`;
       }
     },
-    translate: $t,
   },
   mounted: function() {
     this.updatePreferencesFromStorage();
@@ -199,7 +193,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
-                <div v-if="turmoilExtension">
+                <div v-if="gameOptions.turmoilExtension">
                 <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
                 </div>
                 <div class="preferences_global_params">
@@ -209,7 +203,7 @@ export const Preferences = Vue.component('preferences', {
                   <div class="preferences_global_params_value" v-html="getOxygenCount()"></div>
                   <div class="preferences_ocean-tile"></div>
                   <div class="preferences_global_params_value" v-html="getOceanCount()"></div>
-                  <div v-if="venusNextExtension">
+                  <div v-if="gameOptions.venusNextExtension">
                     <div class="preferences_venus-tile"></div>
                     <div class="preferences_global_params_value" v-html="getVenusCount()"></div>
                   </div>
@@ -238,10 +232,10 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                 </a>
                 <div class="preferences_item preferences_item--info">
-                  <i class="preferences_icon preferences_icon--info" 
-                  :class="{'preferences_item--is-active': ui.gamesetup_detail_open}" 
-                  v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open" 
-                  :title="translate('hotkeys and game setup details')"></i>
+                  <i class="preferences_icon preferences_icon--info"
+                  :class="{'preferences_item--is-active': ui.gamesetup_detail_open}"
+                  v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
+                  :title="$t('hotkeys and game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
                       <div class="help-page-hotkeys">
@@ -263,7 +257,7 @@ export const Preferences = Vue.component('preferences', {
                 </div>
                 <a href="/help-iconology" target="_blank">
                     <div class="preferences_item preferences_item--help">
-                      <i class="preferences_icon preferences_icon--help" :title="translate('game symbols')"></i>
+                      <i class="preferences_icon preferences_icon--help" :title="$t('game symbols')"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">
@@ -371,6 +365,19 @@ export const Preferences = Vue.component('preferences', {
                             <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
                         </label>
                     </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
+                            <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="show_card_number" />
+                            <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
+                        </label>
+                    </div>
+
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

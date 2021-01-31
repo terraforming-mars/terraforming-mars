@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -33,18 +32,17 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       name,
       tags: [Tags.SCIENCE],
       cost: 11,
-      hasRequirements: false,
       adjacencyBonus,
 
       metadata,
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.board.getAvailableSpacesOnLand(player).length > 0;
+  public canPlay(player: Player): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space for tile', game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.RESTRICTED_AREA});
+  public play(player: Player) {
+    return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.RESTRICTED_AREA});
       foundSpace.adjacency = this.adjacencyBonus;
       return undefined;
     });
@@ -52,8 +50,8 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
   public canAct(player: Player): boolean {
     return player.canAfford(2);
   }
-  public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+  public action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
     player.drawCard();
     return undefined;
   }

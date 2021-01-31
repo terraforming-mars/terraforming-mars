@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -16,7 +15,7 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
       name: CardName.INDUSTRIAL_MICROBES,
       tags: [Tags.MICROBE, Tags.BUILDING],
       cost: 12,
-      productionDelta: Units.of({energy: 1, steel: 1}),
+      productionBox: Units.of({energy: 1, steel: 1}),
 
       metadata: {
         cardNumber: '158',
@@ -27,7 +26,7 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
     player.addProduction(Resources.STEEL);
     return undefined;

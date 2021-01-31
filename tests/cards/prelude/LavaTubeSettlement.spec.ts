@@ -43,8 +43,8 @@ describe('LavaTubeSettlement', function() {
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    card.play(player);
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

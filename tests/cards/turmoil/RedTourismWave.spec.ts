@@ -14,16 +14,16 @@ describe('RedTourismWave', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS)!;
     reds.delegates.push(player.id, player.id);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);
     const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
     game.addCityTile(player, lands[0].id);
-    card.play(player, game);
+    card.play(player);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
   });
 });

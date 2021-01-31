@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectAmount} from '../inputs/SelectAmount';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class DryDesertsDeferredAction implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public count: number = 1,

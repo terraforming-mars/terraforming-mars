@@ -2,15 +2,19 @@ import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class StealResources implements DeferredAction {
+  public priority = Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public resource: Resources,
         public count: number = 1,
         public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
   ) {}
+
+  // Set this when you want to get a callback when the steal is completed.
+  public stealComplete: () => void = () => {};
 
   public execute() {
     if (this.player.game.isSoloMode()) {
@@ -37,6 +41,7 @@ export class StealResources implements DeferredAction {
         () => {
           candidate.setResource(this.resource, -qtyToSteal, this.player.game, this.player);
           this.player.setResource(this.resource, qtyToSteal);
+          this.stealComplete();
           return undefined;
         },
       );

@@ -80,7 +80,7 @@ export class MoonBoard extends Board {
     spaces.push(Space.surface('m19', 3, 4));
     spaces.push(Space.surface('m20', 4, 4));
 
-    spaces.push(Space.colony(MoonSpaces.MOMENTUM_VIRIUM_HABITAT));
+    spaces.push(Space.colony(MoonSpaces.MOMENTUM_VIRIUM));
     return new MoonBoard(spaces);
   }
 

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
@@ -19,8 +18,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_DOME,
       tags: [Tags.BUILDING],
       cost: 5,
-      hasRequirements: false,
-      productionDelta: Units.of({energy: -2, plants: 1}),
+      productionBox: Units.of({energy: -2, plants: 1}),
 
       metadata: {
         cardNumber: '171',
@@ -36,19 +34,19 @@ export class MagneticFieldDome extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true) && hasEnergyProduction;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, -2);
     player.addProduction(Resources.PLANTS);
-    player.increaseTerraformRating(game);
+    player.increaseTerraformRating();
     return undefined;
   }
 }

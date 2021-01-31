@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
@@ -18,7 +17,6 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
       name: CardName.NITROGEN_RICH_ASTEROID,
       tags: [Tags.SPACE],
       cost: 31,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '037',
@@ -34,24 +32,24 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     let steps = 2;
-    if (game.getTemperature() < MAX_TEMPERATURE) steps++;
+    if (player.game.getTemperature() < MAX_TEMPERATURE) steps++;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * steps, game, false, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    player.increaseTerraformRatingSteps(2, game);
+  public play(player: Player) {
+    player.increaseTerraformRatingSteps(2);
     if (player.getTagCount(Tags.PLANT) < 3) {
       player.addProduction(Resources.PLANTS);
     } else {
       player.addProduction(Resources.PLANTS, 4);
     }
-    return game.increaseTemperature(player, 1);
+    return player.game.increaseTemperature(player, 1);
   }
 }

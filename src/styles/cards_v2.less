@@ -6,9 +6,19 @@
 }
 
 .card-container {
-    .card-nr {
-        display: none;
+    .card-nr-outer {
+        bottom: 24px;
+        left: 30px;
+        margin: 0px;
+        position: relative;
+        font-size: 11px;
+        color: #777;
     }
+    .card-nr-inner {
+        border: 2px inset #fdfdfd;
+        padding: 2px;
+    }
+
     .project-icon:after,
     .preludeCard-icon:after {
         bottom: 8px;
@@ -49,8 +59,8 @@
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);
-            background-size: 164px 34px;
-            background-position: -4px -4px;
+            background-size: 174px 34px;
+            background-position: -12px -4px;
             filter: grayscale(0.2);
         }
 
@@ -505,9 +515,47 @@
                 text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;
             }
             .card-tharsis-logo {
-                position: absolute;
-                top: 10px;
-                left: 6px;
+                color: #020202;
+                font-size: 24px;
+                text-shadow: 6px 6px 6px grey;
+                margin: 15px 0 0 -26px;
+
+                .card-tharsis-logo-image {
+                    text-shadow: none;
+                    box-shadow: 3px 3px 6px grey;
+                    margin: 0 0 0 -108px;
+                    border: 1px solid red;
+                    display:inline-block;
+                    background-color:#ff5f00;
+                    position: absolute;
+                    width: 32px;
+                    height: 33px;
+
+                    &::before {
+                        content: "▲";
+                        text-shadow: none;
+                        margin-right: 2px;
+                        position: absolute;
+                        margin: -2px 0 0 -12px;
+                    }
+
+                    &::after {
+                        content: "▲";
+                        color: #020202;
+                        font-size: 14px;
+                        position: absolute;
+                        margin: 3px 0 0 3px;
+                    }
+                }
+
+                .card-tharsis-logo-text {
+                    text-transform: uppercase;
+                    width: 135px;
+                    white-space: normal;
+                    text-indent: 45px;
+                    line-height: 30px;
+                    padding: 4px 0 0 20px;
+                }
             }
             .card-unmi-logo {
                 position: absolute;
@@ -832,6 +880,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/asteroid.png);
             }
+            .card-resource-disease {
+                color: #0000 !important;
+                background-image: url(./assets/resources/disease.png);
+            }
             .card-resource-preservation {
                 background-image: url(./assets/resources/pristar.png);
             }
@@ -840,10 +892,6 @@
             }
             .card-resource-community {
                 background: linear-gradient(orange, orangered);
-            }
-            .card-resource-disease {
-                background: linear-gradient(darkorange, gold, darkorange);
-                color: black;
             }
             /*special*/
             .card-special {
@@ -1258,17 +1306,18 @@
             .card-plate {
                 width: 130px;
                 text-shadow: none;
-                font-size: 12px;
+                font-size: 14px;
+                text-transform: uppercase;
                 font-weight: bold;
                 line-height: 17px;
                 display: inline-block;
                 vertical-align: middle;
-                padding-top: 5px;
+                padding: 4px 0px;
                 margin-right: 5px;
-                border-radius: 5px;
-                height: 20px;
-                background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+                border-radius: 14px;
+                background: linear-gradient(90deg, #f3a10e 0%, #fdea25 45%, #fdea25 55%, #f3a10e 100%);
                 filter: drop-shadow(0px 0px 1px black);
+                box-shadow: 2px 2px 1px;
             }
             .card-text-size--XS {
                 font-size: @font_size_tiny;

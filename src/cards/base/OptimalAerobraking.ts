@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -24,7 +23,7 @@ export class OptimalAerobraking extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.cardType === CardType.EVENT && card.tags.indexOf(Tags.SPACE) !== -1) {
       player.megaCredits += 3;
       player.heat += 3;

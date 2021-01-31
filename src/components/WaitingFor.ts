@@ -8,6 +8,7 @@ import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
+import {SelectInitialCards} from './SelectInitialCards';
 import {SelectOption} from './SelectOption';
 import {SelectPlayer} from './SelectPlayer';
 import {SelectSpace} from './SelectSpace';
@@ -21,7 +22,7 @@ import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 let ui_update_timeout_id: number | undefined = undefined;
 
@@ -53,6 +54,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     'select-option': SelectOption,
     'select-how-to-pay': SelectHowToPay,
     'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
+    'select-initial-cards': SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
     'select-party-player': SelectPartyPlayer,

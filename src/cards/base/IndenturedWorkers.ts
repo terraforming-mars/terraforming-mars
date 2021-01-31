@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -25,7 +24,7 @@ export class IndenturedWorkers extends Card implements IProjectCard {
     });
   }
 
-  public getCardDiscount(player: Player, _game: Game) {
+  public getCardDiscount(player: Player) {
     if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
       return 8;
     }

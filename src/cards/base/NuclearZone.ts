@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../boards/ISpace';
@@ -34,27 +33,26 @@ export class NuclearZone extends Card implements IProjectCard {
       name,
       tags: [Tags.EARTH],
       cost,
-      hasRequirements: false,
       adjacencyBonus,
       metadata,
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
+  public canPlay(player: Player): boolean {
+    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
     }
 
     return canPlaceTile;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 2);
-    return new SelectSpace('Select space for special tile', game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NUCLEAR_ZONE});
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 2);
+    return new SelectSpace('Select space for special tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NUCLEAR_ZONE});
       foundSpace.adjacency = this.adjacencyBonus;
       return undefined;
     });

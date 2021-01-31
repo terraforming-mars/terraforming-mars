@@ -16,8 +16,7 @@ export class CarbonateProcessing extends Card implements IProjectCard {
       name: CardName.CARBONATE_PROCESSING,
       tags: [Tags.BUILDING],
       cost: 6,
-      hasRequirements: false,
-      productionDelta: Units.of({energy: -1, heat: 3}),
+      productionBox: Units.of({energy: -1, heat: 3}),
 
       metadata: {
         cardNumber: '043',

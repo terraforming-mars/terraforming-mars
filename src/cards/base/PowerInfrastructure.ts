@@ -4,7 +4,6 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -30,7 +29,7 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
   public canAct(player: Player): boolean {

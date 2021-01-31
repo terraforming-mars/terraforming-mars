@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -24,7 +23,7 @@ export class ProtectedHabitats extends Card implements IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
 }

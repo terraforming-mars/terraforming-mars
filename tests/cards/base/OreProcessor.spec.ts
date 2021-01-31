@@ -16,13 +16,13 @@ describe('OreProcessor', function() {
 
   it('Can\'t act', function() {
     player.energy = 3;
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should act', function() {
     player.energy = 4;
-    expect(card.canAct(player, game)).is.true;
-    card.action(player, game);
+    expect(card.canAct(player)).is.true;
+    card.action(player);
 
     expect(player.energy).to.eq(0);
     expect(player.titanium).to.eq(1);

@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -14,7 +13,6 @@ export class Insulation extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.INSULATION,
       cost: 2,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '152',
@@ -32,7 +30,7 @@ export class Insulation extends Card implements IProjectCard {
     return player.getProduction(Resources.HEAT) >= 1;
   }
 
-  public play(player: Player, _game: Game) {
+  public play(player: Player) {
     return new SelectAmount(
       'Select amount of heat production to decrease',
       'Decrease',

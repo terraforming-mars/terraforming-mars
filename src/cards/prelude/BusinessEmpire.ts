@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -23,13 +22,13 @@ export class BusinessEmpire extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player, _game: Game) {
+  public canPlay(player: Player) {
     if (player.isCorporation(CardName.MANUTECH)) return true;
     return player.canAfford(6);
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 6);
-    game.defer(new SelectHowToPayDeferred(player, 6));
+    player.game.defer(new SelectHowToPayDeferred(player, 6));
     return undefined;
   }
 }

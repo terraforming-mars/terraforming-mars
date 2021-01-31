@@ -17,6 +17,9 @@ export const MAX_FLEET_SIZE: number = 4;
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
+export const MAXIMUM_COLONY_RATE = 8;
+export const MAXIMUM_MINING_RATE = 8;
+export const MAXIMUM_LOGISTICS_RATE = 8;
 
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},
@@ -24,4 +27,5 @@ export const LANGUAGES = [
   {'id': 'fr', 'title': 'French'},
   {'id': 'ru', 'title': 'Russian'},
   {'id': 'cn', 'title': 'Chinese'},
+  {'id': 'pl', 'title': 'Polish'},
 ];

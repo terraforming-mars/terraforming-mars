@@ -1,40 +1,42 @@
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class GiantSolarShade implements IProjectCard {
-    public cost = 27;
-    public tags = [Tags.SPACE, Tags.VENUS];
-    public name = CardName.GIANT_SOLAR_SHADE;
-    public cardType = CardType.AUTOMATED;
-    public hasRequirements = false;
+export class GiantSolarShade extends Card {
+  constructor() {
+    super({
+      name: CardName.GIANT_SOLAR_SHADE,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.SPACE, Tags.VENUS],
+      cost: 27,
 
-    public canPlay(player: Player, game: Game): boolean {
-      const remainingVenusSteps = (MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;
-      const stepsRaised = Math.min(remainingVenusSteps, 3);
+      metadata: {
+        cardNumber: '229',
+        renderData: CardRenderer.builder((b) => b.venus(3)),
+        description: 'Raise Venus 3 steps.',
+      },
+    });
+  };
 
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true, true);
-      }
+  public canPlay(player: Player): boolean {
+    const remainingVenusSteps = (MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
+    const stepsRaised = Math.min(remainingVenusSteps, 3);
 
-      return true;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, false, true, true);
     }
 
-    public play(player: Player, game: Game) {
-      return game.increaseVenusScaleLevel(player, 3);
-    }
-    public metadata: CardMetadata = {
-      cardNumber: '229',
-      renderData: CardRenderer.builder((b) => b.venus(3)),
-      description: 'Raise Venus 3 steps.',
-    };
+    return true;
+  }
+
+  public play(player: Player) {
+    return player.game.increaseVenusScaleLevel(player, 3);
+  }
 }
 

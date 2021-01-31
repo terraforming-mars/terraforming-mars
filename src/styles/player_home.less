@@ -24,6 +24,12 @@
 .player_shadow_color_purple {
     text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
 }
+.player_shadow_color_orange {
+    text-shadow: -1px -1px 6px @player_orange 1px 1px 1px #333a;
+}
+.player_shadow_color_pink {
+    text-shadow: -1px -1px 6px @player_pink 1px 1px 1px #333a;
+}
 
 .game-title {
     text-transform: uppercase;
@@ -96,6 +102,13 @@
         background-color: rgba(170, 170, 0, 0.2);
     }
 
+    .grid-item.player_tag_bg_color_orange {
+        background-color: rgba(189, 123, 0, 0.2);
+    }
+
+    .grid-item.player_tag_bg_color_pink {
+        background-color: rgb(245, 116, 187, 0.2);
+    }
     .city-count {
         background: url(assets/icon_city.png) center no-repeat;
         filter: invert(100%) contrast(200%);
@@ -744,8 +757,17 @@
     &.colonies-fleet-blue {
         background-position: -272px 0;
     }
+
     &.colonies-fleet-purple {
         background-position: -342px 0;
+    }
+
+    &.colonies-fleet-orange {
+        background-position: -416px 0;
+    }
+    
+    &.colonies-fleet-pink {
+        background-position: -490px 0;
     }
 }
 
@@ -788,6 +810,7 @@
     margin: -40px 0 0 auto;
     z-index: 20;
     top: -12px;
+    display: flex;
 
     .top-bar-collapser {
         background: #303030;
@@ -795,16 +818,20 @@
         vertical-align: middle;
         padding: 8px 14px 8px 11px;
         border-radius: 0 10px 10px 0;
-        margin: -43px 0 0 -5px;
+        height: 46px;
         cursor: pointer;
+        margin-top: 12px;
 
         img {
             width: 20px;
         }
     }
 
-    .player-status {
+    .player-status, .player-info-top {
         display: none !important;
+    }
+    .player-info-bottom {
+        background: #303030 !important; 
     }
 
     .player-info {
@@ -827,7 +854,7 @@
     }
 
     .top-bar-collapser {
-        margin: 11px 0 0 auto;
+        margin: 11px 0 0 0;
 
         img {
             transform: scaleX(-1);
@@ -874,4 +901,21 @@
 
 .shortkey-no-outline {
     outline: none;
+}
+
+.select-initial-cards {
+    .megacredits {
+        display: inline-block;
+        font-size: 26px;
+        width: 50px;
+        height: 50px;
+        line-height: 48px;
+        border-radius: 10px;
+        text-align: center;
+        background-image: url(./assets/resources/megacredit.png);
+        background-size: 50px;
+        filter: drop-shadow(0px 0px 1px black);
+        font-family: Prototype;
+        color: #000;
+    }
 }

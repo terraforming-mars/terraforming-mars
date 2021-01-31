@@ -8,7 +8,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,7 +18,6 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '190',
@@ -32,12 +30,12 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const requiredHeatAmt = 5;
 
     // Helion must be able to pay for both the card and its effect
     if (player.canUseHeatAsMegaCredits) {
-      return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this));
+      return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(this));
     }
 
     return player.availableHeat >= requiredHeatAmt;

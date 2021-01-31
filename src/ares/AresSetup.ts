@@ -1,6 +1,6 @@
 import {ARES_MILESTONES} from '../milestones/Milestones';
 import {ARES_AWARDS} from '../awards/Awards';
-import {IDrawnMilestonesAndAwards} from '../MilestoneAwardSelector';
+import {IDrawnMilestonesAndAwards} from '../IDrawnMilestonesAndAwards';
 import {Player} from '../Player';
 import {IAresData} from './IAresData';
 import {Game} from '../Game';

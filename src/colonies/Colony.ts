@@ -3,11 +3,10 @@ import {CardName} from '../CardName';
 import {ColonyBenefit} from './ColonyBenefit';
 import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
-import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
@@ -17,7 +16,6 @@ import {PlayerInput} from '../PlayerInput';
 import {ResourceType} from '../ResourceType';
 import {Resources} from '../Resources';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
-import {SelectCardToKeep} from '../deferredActions/SelectCardToKeep';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SerializedColony} from '../SerializedColony';
@@ -113,12 +111,14 @@ export abstract class Colony implements SerializedColony {
       ));
     }
 
-    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean) {
+    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean, giveColonyBonuses: boolean = true) {
       const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
 
       this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
 
-      player.game.defer(new GiveColonyBonus(player, this));
+      if (giveColonyBonuses) {
+        player.game.defer(new GiveColonyBonus(player, this));
+      }
 
       if (usesTradeFleet) {
         this.visitor = player.id;
@@ -129,7 +129,7 @@ export abstract class Colony implements SerializedColony {
         player.game.defer(new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
-        }));
+        }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
       }
     }
 
@@ -161,7 +161,7 @@ export abstract class Colony implements SerializedColony {
             openColonies.forEach((colony) => {
               if (colony.name === colonyName) {
                 game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.trade(player, 0, false, false);
+                colony.handleTrade(player, false, false, false);
               }
               return undefined;
             });
@@ -184,11 +184,7 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
-        const cardsDrawn: Array<IProjectCard> = [];
-        for (let counter = 0; counter < quantity; counter++) {
-          cardsDrawn.push(game.dealer.dealCard());
-        };
-        action = new SelectCardToKeep(player, 'Select card to take into hand', cardsDrawn);
+        action = DrawCards.keepSome(player, quantity, {keepMax: 1});
         break;
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
@@ -210,7 +206,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
         player.scienceTagCount += 1;
-        player.playCard(new ScienceTagCard());
+        player.playCard(new ScienceTagCard(), undefined, false);
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 
@@ -244,7 +240,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_TR:
         if (quantity > 0) {
-          player.increaseTerraformRatingSteps(quantity, game);
+          player.increaseTerraformRatingSteps(quantity);
           LogHelper.logTRIncrease(player, quantity);
         };
         break;

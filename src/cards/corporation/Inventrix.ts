@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,7 +17,7 @@ export class Inventrix extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R43',
-        description: 'As you first action in the game, draw 3 cards. Start with 45MC.',
+        description: 'As your first action in the game, draw 3 cards. Start with 45MC.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(45).nbsp.cards(3);
@@ -35,7 +34,7 @@ export class Inventrix extends Card implements CorporationCard {
     player.drawCard(3);
     return undefined;
   }
-  public getRequirementBonus(_player: Player, _game: Game): number {
+  public getRequirementBonus(): number {
     return 2;
   }
   public play() {

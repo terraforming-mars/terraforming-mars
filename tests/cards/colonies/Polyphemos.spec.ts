@@ -15,7 +15,7 @@ describe('Polyphemos', function() {
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([card2, card2]);
@@ -30,7 +30,7 @@ describe('Polyphemos', function() {
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-    game.deferredActions.runNext();
+    player.game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(35);
     expect(player.cardsInHand).has.lengthOf(3);
   });

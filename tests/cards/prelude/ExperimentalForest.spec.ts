@@ -10,10 +10,10 @@ describe('ExperimentalForest', function() {
     const card = new ExperimentalForest();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    card.play(player);
 
     // Select Greenery space
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
 
     expect(selectSpace).is.not.undefined;
     expect(selectSpace instanceof SelectSpace).is.true;

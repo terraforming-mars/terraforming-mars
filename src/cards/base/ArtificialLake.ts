@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
@@ -31,21 +30,21 @@ export class ArtificialLake extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsRequirements = super.canPlay(player);
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, player.game, true) && meetsRequirements;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true) && meetsRequirements;
     }
 
     return meetsRequirements;
   }
-  public play(player: Player, game: Game) {
-    if (game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;
+  public play(player: Player) {
+    if (player.game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;
 
-    return new SelectSpace('Select a land space to place an ocean', game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
+    return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+      player.game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
       return undefined;
     });
   }

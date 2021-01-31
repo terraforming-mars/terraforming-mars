@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -39,10 +38,10 @@ export class TharsisRepublic extends Card implements CorporationCard {
       },
     });
   }
-  public initialAction(player: Player, game: Game) {
-    return new SelectSpace('Select space on mars for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      game.addCityTile(player, space.id);
-      game.log('${0} placed a City tile', (b) => b.player(player));
+  public initialAction(player: Player) {
+    return new SelectSpace('Select space on mars for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
+      player.game.log('${0} placed a City tile', (b) => b.player(player));
       return undefined;
     });
   }
@@ -56,8 +55,8 @@ export class TharsisRepublic extends Card implements CorporationCard {
       }
     }
   }
-  public play(player: Player, game: Game) {
-    if (game.getPlayers().length === 1) {
+  public play(player: Player) {
+    if (player.game.getPlayers().length === 1) {
       // Get bonus for 2 neutral cities
       player.addProduction(Resources.MEGACREDITS, 2);
     }

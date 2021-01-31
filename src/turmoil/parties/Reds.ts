@@ -30,13 +30,13 @@ class RedsBonus01 implements Bonus {
     const players = game.getPlayers();
 
     if (game.isSoloMode() && players[0].getTerraformRating() <= 20) {
-      players[0].increaseTerraformRating(game);
+      players[0].increaseTerraformRating();
     } else {
       players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
       const min = players[0].getTerraformRating();
 
       while (players.length > 0 && players[0].getTerraformRating() === min) {
-        players[0].increaseTerraformRating(game);
+        players[0].increaseTerraformRating();
         players.shift();
       }
     }

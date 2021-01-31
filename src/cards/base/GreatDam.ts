@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
@@ -18,7 +17,7 @@ export class GreatDam extends Card implements IProjectCard {
       name: CardName.GREAT_DAM,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 12,
-      productionDelta: Units.of({energy: 2}),
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '136',
@@ -31,8 +30,8 @@ export class GreatDam extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);

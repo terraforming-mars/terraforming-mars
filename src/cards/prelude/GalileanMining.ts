@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
@@ -25,12 +24,12 @@ export class GalileanMining extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player, _game: Game) {
+  public canPlay(player: Player) {
     return player.canAfford(5);
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 2);
-    game.defer(new SelectHowToPayDeferred(player, 5));
+    player.game.defer(new SelectHowToPayDeferred(player, 5));
     return undefined;
   }
 }

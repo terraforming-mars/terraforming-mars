@@ -1,12 +1,12 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {HowToPay} from '../inputs/HowToPay';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Button} from '../components/common/Button';
+import {TranslateMixin} from './TranslateMixin';
 
 interface SelectHowToPayModel {
     cost: number;
@@ -52,7 +52,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       warning: undefined,
     } as SelectHowToPayModel;
   },
-  mixins: [PaymentWidgetMixin],
+  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
@@ -65,9 +65,6 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     });
   },
   methods: {
-    getTitle: function() {
-      return $t(this.playerinput.title);
-    },
     hasWarning: function() {
       return this.$data.warning !== undefined;
     },
@@ -223,10 +220,10 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   template: `<div class="payments_cont">
   <section v-trim-whitespace>
 
-    <h3 class="payments_title">{{getTitle()}}</h3>
+    <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
-      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+      <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
       <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
       <Button type="plus" :onClick="_=>addValue('steel', 1)" />
@@ -234,7 +231,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
@@ -242,7 +239,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
-      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
@@ -250,18 +247,18 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+      <Button size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
     </div>
 
   </section>

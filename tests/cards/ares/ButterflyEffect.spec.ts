@@ -18,7 +18,7 @@ describe('ButterflyEffect', function() {
 
   it('play', function() {
     const priorTerraformingRating = player.getTerraformRating();
-    card.play(player, game);
+    card.play(player);
     expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
 
     const originalHazardData = game.aresData!.hazardData;
@@ -27,7 +27,7 @@ describe('ButterflyEffect', function() {
     expect(originalHazardData.severeErosionTemperature.threshold).eq(-4);
     expect(originalHazardData.severeDustStormOxygen.threshold).eq(5);
 
-    const input = game.deferredActions.next()!.execute() as ShiftAresGlobalParameters;
+    const input = game.deferredActions.peek()!.execute() as ShiftAresGlobalParameters;
     input.cb(
       {
         lowOceanDelta: -1,

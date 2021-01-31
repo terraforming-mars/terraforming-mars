@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {TileType} from '../../TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -30,7 +29,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
         b.vpText('1 VP per adjacent city tile.');
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
+      victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1, true),
     },
   ) {
     super({
@@ -38,33 +37,32 @@ export class CommercialDistrict extends Card implements IProjectCard {
       name,
       tags: [Tags.BUILDING],
       cost: 16,
-      hasRequirements: false,
       adjacencyBonus,
-      productionDelta: Units.of({energy: -1, megacredits: 4}),
+      productionBox: Units.of({energy: -1, megacredits: 4}),
       metadata,
     });
   }
   // public adjacencyBonus?: IAdjacencyBonus = undefined;
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 &&
-      game.board.getAvailableSpacesOnLand(player).length > 0;
+      player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public getVictoryPoints(_player: Player, game: Game) {
-    const usedSpace = game.board.getSpaceByTileCard(this.name);
+  public getVictoryPoints(player: Player) {
+    const usedSpace = player.game.board.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return game.board.getAdjacentSpaces(usedSpace).filter(
+      return player.game.board.getAdjacentSpaces(usedSpace).filter(
         (adjacentSpace) => Board.isCitySpace(adjacentSpace),
       ).length;
     }
     return 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select space for special tile',
-      game.board.getAvailableSpacesOnLand(player),
+      player.game.board.getAvailableSpacesOnLand(player),
       (foundSpace: ISpace) => {
-        game.addTile(player, foundSpace.spaceType, foundSpace, {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
           tileType: TileType.COMMERCIAL_DISTRICT,
           card: this.name,
         });

@@ -1,27 +1,47 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard {
-  public name = CardName.ASTEROID_RIGHTS;
-  public cost = 10;
-  public tags = [Tags.EARTH, Tags.SPACE];
-  public resourceType = ResourceType.ASTEROID;
-  public resourceCount: number = 0;
-  public cardType = CardType.ACTIVE;
+export class AsteroidRights extends Card implements IActionCard, IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.ASTEROID_RIGHTS,
+      tags: [Tags.EARTH, Tags.SPACE],
+      cost: 10,
+      resourceType: ResourceType.ASTEROID,
+
+      metadata: {
+        cardNumber: 'X31',
+        description: 'Add 2 asteroids to this card.',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 1 MC to add 1 asteroid to ANY card.', (eb) => {
+            eb.megacredits(1).startAction.asteroids(1).asterix().nbsp.or();
+          }).br;
+          b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
+            eb.asteroids(1)
+              .startAction.production((pb) => pb.megacredits(1))
+              .or()
+              .titanium(2);
+          }).br;
+          b.asteroids(2);
+        }),
+      },
+    });
+  }
+  public resourceCount = 0;
 
   public play() {
     this.resourceCount = 2;
@@ -32,7 +52,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
     return player.canAfford(1) || this.resourceCount > 0;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const canAddAsteroid = player.canAfford(1);
     const hasAsteroids = this.resourceCount > 0;
     const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
@@ -55,7 +75,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
     });
 
     const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(this);
       LogHelper.logAddResource(player, this);
 
@@ -63,7 +83,7 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
     });
 
     const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(foundCards[0], 1);
       LogHelper.logAddResource(player, foundCards[0]);
 
@@ -85,20 +105,4 @@ export class AsteroidRights implements IActionCard, IProjectCard, IResourceCard 
 
     return new OrOptions(...opts);
   }
-  public metadata: CardMetadata = {
-    cardNumber: 'X31',
-    description: 'Add 2 asteroids to this card.',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Spend 1 MC to add 1 asteroid to ANY card.', (eb) => {
-        eb.megacredits(1).startAction.asteroids(1).asterix().nbsp.or();
-      }).br;
-      b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
-        eb.asteroids(1)
-          .startAction.production((pb) => pb.megacredits(1))
-          .or()
-          .titanium(2);
-      }).br;
-      b.asteroids(2);
-    }),
-  };
 }

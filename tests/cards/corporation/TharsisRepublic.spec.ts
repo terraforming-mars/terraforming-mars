@@ -20,7 +20,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Should take initial action', function() {
-    const action = card.initialAction(player, game);
+    const action = card.initialAction(player);
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
 
@@ -58,8 +58,8 @@ describe('TharsisRepublic', function() {
 
   it('Gives 2 MC production in solo mode', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
-    card.play(player, game);
+    Game.newInstance('foobar', [player], player);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

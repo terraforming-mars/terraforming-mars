@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../CardName';
@@ -26,7 +25,7 @@ export class InventorsGuild extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public play(_player: Player, _game: Game) {
+  public play(_player: Player) {
     return undefined;
   }
   public canAct(): boolean {

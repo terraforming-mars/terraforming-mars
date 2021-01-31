@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -16,7 +15,6 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SUBTERRANEAN_RESERVOIR,
       cost: 11,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '127',
@@ -28,18 +26,18 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canPlay(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player));
+  public play(player: Player) {
+    player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

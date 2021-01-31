@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
@@ -16,7 +15,6 @@ export class LandClaim extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LAND_CLAIM,
       cost: 1,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '066',
@@ -26,13 +24,13 @@ export class LandClaim extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(_player: Player, game: Game): boolean {
-    return game.board.getNonReservedLandSpaces().length > 0;
+  public canPlay(player: Player): boolean {
+    return player.game.board.getNonReservedLandSpaces().length > 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select space for claim',
-      game.board.getNonReservedLandSpaces(),
+      player.game.board.getNonReservedLandSpaces(),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
         LogHelper.logBoardTileAction(player, foundSpace, 'land claim');

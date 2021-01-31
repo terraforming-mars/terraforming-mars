@@ -15,7 +15,7 @@ export class _AresHazardPlacement {
   }
 
   public static randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
-    const space = game.getSpaceByOffset(direction, 'hazard');
+    const space = game.getSpaceByOffset(direction, tileType);
     this.putHazardAt(space, tileType);
     return space;
   }
@@ -86,7 +86,7 @@ export class _AresHazardPlacement {
         });
 
         if (player.game.phase !== Phase.SOLAR) {
-          player.increaseTerraformRating(player.game);
+          player.increaseTerraformRating();
           player.game.log('${0}\'s TR increases 1 step for eliminating dust storms.', (b) => b.player(player));
         }
       },

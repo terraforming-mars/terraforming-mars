@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
@@ -22,7 +21,6 @@ export class Flooding extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '188',
@@ -35,33 +33,33 @@ export class Flooding extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+  public canPlay(player: Player): boolean {
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    if (game.isSoloMode()) {
-      game.defer(new PlaceOceanTile(player));
+  public play(player: Player) {
+    if (player.game.isSoloMode()) {
+      player.game.defer(new PlaceOceanTile(player));
       return undefined;
     }
 
-    const oceansMaxedBeforePlacement = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxedBeforePlacement = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     if (oceansMaxedBeforePlacement === true) return undefined;
 
     return new SelectSpace(
       'Select space for ocean tile',
-      game.board.getAvailableSpacesForOcean(player),
+      player.game.board.getAvailableSpacesForOcean(player),
       (space: ISpace) => {
         const adjacentPlayers: Set<Player> = new Set<Player>();
-        game.addOceanTile(player, space.id);
+        player.game.addOceanTile(player, space.id);
 
-        game.board.getAdjacentSpaces(space).forEach((space) => {
+        player.game.board.getAdjacentSpaces(space).forEach((space) => {
           if (space.player && space.player !== player && space.tile) {
             adjacentPlayers.add(space.player);
           }
@@ -74,7 +72,7 @@ export class Flooding extends Card implements IProjectCard {
               'Select adjacent player to remove 4 mega credits from',
               'Remove credits',
               (selectedPlayer: Player) => {
-                selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
+                selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
                 return undefined;
               },
             ),

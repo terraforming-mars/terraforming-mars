@@ -8,19 +8,19 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('CheungShingMARS', function() {
-  let card : CheungShingMARS; let player : Player; let game : Game;
+  let card : CheungShingMARS; let player : Player;
 
   beforeEach(function() {
     card = new CheungShingMARS();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Gets card discount', function() {
     const ants = new Ants();
     const buildingIndustries = new BuildingIndustries();
-    expect(card.getCardDiscount(player, game, ants)).to.eq(0);
-    expect(card.getCardDiscount(player, game, buildingIndustries)).to.eq(2);
+    expect(card.getCardDiscount(player, ants)).to.eq(0);
+    expect(card.getCardDiscount(player, buildingIndustries)).to.eq(2);
   });
 
   it('Should play', function() {

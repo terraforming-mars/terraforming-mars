@@ -1,12 +1,10 @@
 import {Card} from '../Card';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CorporationCard} from './CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {ICard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -34,16 +32,20 @@ export class SaturnSystems extends Card implements CorporationCard {
     });
   }
 
-  public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
-    for (const tag of card.tags) {
-      if (tag === Tags.JOVIAN) {
-        game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS);
-      }
-    }
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(_player: Player, game: Game, card: CorporationCard) {
-    return this.onCardPlayed(_player, game, card as ICard as IProjectCard);
+  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+    return this._onCardPlayed(player, card);
+  }
+
+  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
+    for (const tag of card.tags) {
+      if (tag === Tags.JOVIAN) {
+        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS);
+      }
+    }
   }
 
   public play(player: Player) {

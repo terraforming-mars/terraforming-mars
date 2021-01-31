@@ -19,7 +19,7 @@ describe('LavaFlowsAres', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     const space = action.availableSpaces[0];

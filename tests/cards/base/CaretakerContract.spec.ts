@@ -15,18 +15,18 @@ describe('CaretakerContract', function() {
   });
 
   it('Can\'t play or act', function() {
-    expect(card.canPlay(player, game)).is.not.true;
-    expect(card.canAct(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
+    expect(card.canAct(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = 0;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should act', function() {
     player.heat = 8;
-    card.action(player, game);
+    card.action(player);
     expect(player.heat).to.eq(0);
     expect(player.getTerraformRating()).to.eq(21);
   });

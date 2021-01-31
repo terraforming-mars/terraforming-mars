@@ -6,10 +6,16 @@ import {Player} from '../Player';
 import {TileType} from '../TileType';
 // import {MoonSerialization} from './MoonSerialization';
 // import {MoonModel} from './MoonModel';
-// import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../SpaceType';
 // import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
+import {IProjectCard} from '../cards/IProjectCard';
+import {Units} from '../Units';
+import {IMoonCard} from '../cards/moon/IMoonCard';
+import {Tags} from '../cards/Tags';
+import {ISpace} from '../boards/ISpace';
+import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 // import {IProjectCard} from '../cards/IProjectCard';
 // import {Units} from '../Units';
 // import {CardName} from '../CardName';
@@ -103,40 +109,46 @@ export class MoonExpansion {
     });
   }
 
-  public static raiseMiningRate(player: Player) {
+  public static raiseMiningRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.miningRate < 8) {
-        moonData.miningRate++;
-        player.game.log('${0} raised the mining rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_MINING_RATE - moonData.miningRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.miningRate += increment;
+        player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(increment);
+        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }
 
-  public static raiseColonyRate(player: Player) {
+  public static raiseColonyRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.colonyRate < 8) {
-        moonData.colonyRate++;
-        player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_COLONY_RATE - moonData.colonyRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.colonyRate += increment;
+        player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(count);
+        this.activateLunaFirst(player, player.game, count);
       }
     });
   }
 
-  public static raiseLogisticRate(player: Player) {
+  public static raiseLogisticRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.logisticRate < 8) {
-        moonData.logisticRate++;
-        player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1, player.game);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.logisticRate += increment;
+        player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(count);
+        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }
 
-  private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game) {
+  private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game, _count: number) {
     // const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     // // TODO(kberg): Have raiseXRate accept a qty parameter so this doesn't log countless times.
     // if (lunaFirstPlayer !== undefined) {
@@ -148,70 +160,66 @@ export class MoonExpansion {
     // }
   }
 
-  // /*
-  //  * Return the list of spaces on the board with a given tile type, optionally excluding
-  //  * colony spaces.
-  //  *
-  //  * Special tiles such as Lunar Mine Urbanization, are especially included.
-  //  */
-  // public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
-  //   let tiles: Array<ISpace> = [];
-  //   MoonExpansion.ifMoon(game, (moonData) => {
-  //     tiles = moonData.moon.spaces.filter(
-  //       (space) => {
-  //         const spaceTileType = space.tile?.tileType;
-  //         let include: boolean = true;
-  //         if (tileType === TileType.MOON_COLONY) {
-  //           include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
-  //         } else if (tileType === TileType.MOON_MINE) {
-  //           include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
-  //         } else {
-  //           include = include && space.tile?.tileType === tileType;
-  //         }
+  /*
+   * Return the list of spaces on the board with a given tile type, optionally excluding
+   * colony spaces.
+   *
+   * Special tiles such as Lunar Mine Urbanization, are especially included.
+   */
+  public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
+    let tiles: Array<ISpace> = [];
+    MoonExpansion.ifMoon(game, (moonData) => {
+      tiles = moonData.moon.spaces.filter(
+        (space) => {
+          const spaceTileType = space.tile?.tileType;
+          let include: boolean = true;
+          if (tileType === TileType.MOON_COLONY) {
+            include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+          } else if (tileType === TileType.MOON_MINE) {
+            include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+          } else {
+            include = include && spaceTileType === tileType;
+          }
 
-  //         if (surfaceOnly) {
-  //           include = include && space.spaceType !== SpaceType.COLONY;
-  //         }
+          if (surfaceOnly) {
+            include = include && space.spaceType !== SpaceType.COLONY;
+          }
 
-  //         return include;
-  //       });
-  //   });
-  //   return tiles;
-  // }
+          return include;
+        });
+    });
+    return tiles;
+  }
 
-  // public static moonToModel(game: Game): MoonModel | undefined {
-  //   return MoonSerialization.moonToModel(game);
-  // }
+  /*
+   * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
+   */
+  public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
+    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
+      return Units.EMPTY;
+    }
 
-  // /*
-  //  * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
-  //  */
-  // public static adjustedReservationCosts(player: Player, card: IProjectCard) : Units {
-  //   if (player.cardIsInEffect(CardName.LTF_PRIVILEGES)) {
-  //     return Units.of({});
-  //   }
+    const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
 
-  //   const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
+    let steel = reserveUnits.steel || 0;
+    let titanium = reserveUnits.titanium || 0;
 
-  //   let steel = reserveUnits.steel || 0;
-  //   let titanium = reserveUnits.titanium || 0;
+    const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
 
-  //   const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
+    if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+      titanium -= 1;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
-  //     titanium -= 1;
-  //   }
+    if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+      steel -= 1;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
-  //     steel -= 1;
-  //   }
+    if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+      steel = 0;
+    }
 
-  //   if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
-  //     steel = 0;
-  //   }
-
-  //   steel = Math.max(steel, 0);
-  //   titanium = Math.max(titanium, 0);
-  //   return Units.of({steel, titanium});
-  // }
+    steel = Math.max(steel, 0);
+    titanium = Math.max(titanium, 0);
+    return Units.of({steel, titanium});
+  }
 }

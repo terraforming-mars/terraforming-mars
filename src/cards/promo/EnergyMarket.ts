@@ -1,22 +1,38 @@
 import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EnergyMarket implements IProjectCard {
-  public name = CardName.ENERGY_MARKET;
-  public cost = 3;
-  public tags = [Tags.ENERGY];
-  public cardType = CardType.ACTIVE;
+export class EnergyMarket extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.ENERGY_MARKET,
+      tags: [Tags.ENERGY],
+      cost: 3,
+
+      metadata: {
+        cardNumber: 'X03',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 2X MC to gain X energy.', (eb) => {
+            eb.megacredits(2).multiplier.startAction.text('x').energy(1);
+          }).br;
+          b.or().br;
+          b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
+            eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
+          });
+        }),
+      },
+    });
+  }
 
   public play() {
     return undefined;
@@ -27,20 +43,20 @@ export class EnergyMarket implements IProjectCard {
     return availableMC >= 2 || player.getProduction(Resources.ENERGY) >= 1;
   }
 
-  private getEnergyOption(player: Player, game: Game, availableMC: number): SelectAmount {
+  private getEnergyOption(player: Player, availableMC: number): SelectAmount {
     return new SelectAmount(
       'Select amount of energy to gain',
       'Gain energy',
       (amount: number) => {
         if (player.canUseHeatAsMegaCredits) {
           player.setResource(Resources.ENERGY, amount);
-          game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
+          player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
         } else {
           player.setResource(Resources.ENERGY, amount);
           player.setResource(Resources.MEGACREDITS, -(amount * 2));
         }
 
-        game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
+        player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
         return undefined;
       },
       1,
@@ -48,42 +64,29 @@ export class EnergyMarket implements IProjectCard {
     );
   }
 
-  private getMegacreditsOption(player: Player, game: Game) {
+  private getMegacreditsOption(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.setResource(Resources.MEGACREDITS, 8);
-    game.log('${0} decreased energy production 1 step to gain 8 MC', (b) => b.player(player));
+    player.game.log('${0} decreased energy production 1 step to gain 8 MC', (b) => b.player(player));
     return undefined;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const availableMC = player.spendableMegacredits();
     if (availableMC >= 2 && player.getProduction(Resources.ENERGY) >= 1) {
       return new OrOptions(
         new SelectOption('Spend 2X MC to gain X energy', 'Spend MC', () => {
-          return this.getEnergyOption(player, game, availableMC);
+          return this.getEnergyOption(player, availableMC);
         }),
         new SelectOption('Decrease energy production 1 step to gain 8 MC', 'Decrease energy', () => {
-          return this.getMegacreditsOption(player, game);
+          return this.getMegacreditsOption(player);
         }),
       );
     } else if (availableMC >= 2) {
-      return this.getEnergyOption(player, game, availableMC);
+      return this.getEnergyOption(player, availableMC);
     } else if (player.getProduction(Resources.ENERGY) >= 1) {
-      return this.getMegacreditsOption(player, game);
+      return this.getMegacreditsOption(player);
     }
     return undefined;
   }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'X03',
-    renderData: CardRenderer.builder((b) => {
-      b.action('Spend 2X MC to gain X energy.', (eb) => {
-        eb.megacredits(2).multiplier.startAction.text('x').energy(1);
-      }).br;
-      b.or().br;
-      b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
-        eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
-      });
-    }),
-  };
 }

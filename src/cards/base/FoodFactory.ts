@@ -15,8 +15,7 @@ export class FoodFactory extends Card implements IProjectCard {
       name: CardName.FOOD_FACTORY,
       tags: [Tags.BUILDING],
       cost: 12,
-      hasRequirements: false,
-      productionDelta: Units.of({megacredits: 4, plants: -1}),
+      productionBox: Units.of({megacredits: 4, plants: -1}),
 
       metadata: {
         cardNumber: '041',

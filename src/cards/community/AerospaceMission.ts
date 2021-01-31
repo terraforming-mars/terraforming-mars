@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -23,14 +22,14 @@ export class AerospaceMission extends PreludeCard {
     });
   }
 
-  public canPlay(player: Player, _game: Game) {
+  public canPlay(player: Player) {
     return player.canAfford(14);
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.megaCredits -= 14;
-    game.defer(new BuildColony(player, false, 'Select where to build the first colony'));
-    game.defer(new BuildColony(player, false, 'Select where to build the second colony'));
+    player.game.defer(new BuildColony(player, false, 'Select where to build the first colony'));
+    player.game.defer(new BuildColony(player, false, 'Select where to build the second colony'));
     return undefined;
   }
 }

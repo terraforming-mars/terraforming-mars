@@ -1,10 +1,9 @@
 
 import Vue from 'vue';
-import {$t} from '../directives/i18n';
 import {Button} from './common/Button';
 
 interface SelectHowToPayForProjectCardModel {
-  cardName: string;
+  cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
   cost: number;
@@ -16,6 +15,8 @@ interface SelectHowToPayForProjectCardModel {
   microbes: number;
   floaters: number;
   warning: string | undefined;
+  availableSteel: number;
+  availableTitanium: number;
 }
 
 import {HowToPay} from '../inputs/HowToPay';
@@ -28,6 +29,9 @@ import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+import {TranslateMixin} from './TranslateMixin';
+import {CardName} from '../CardName';
+// import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -75,13 +79,15 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       microbes: 0,
       floaters: 0,
       warning: undefined,
-    } as SelectHowToPayForProjectCardModel;
+      availableSteel: 0,
+      availableTitanium: 0,
+    };
   },
   components: {
     Card,
     Button,
   },
-  mixins: [PaymentWidgetMixin],
+  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     const app = this;
     Vue.nextTick(function() {
@@ -94,7 +100,6 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     });
   },
   methods: {
-    translate: $t,
     getCard: function() {
       const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -116,7 +121,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       this.titanium = 0;
       this.heat = 0;
 
-      let megacreditBalance = this.cost - this.player.megaCredits;
+      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
 
       // Calcualtes the optimal number of units to use given the unit value.
       //
@@ -140,6 +145,21 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         return contributingUnits;
       };
 
+      // This function help save some money at the end
+      const saveOverSpendingUnits = function(
+        spendingUnits: number | undefined,
+        unitValue: number): number {
+        if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
+          return 0;
+        }
+        // Calculate the unit of resource we can save and still pay enough
+        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
+
+        megacreditBalance += toSaveUnits * unitValue;
+        return toSaveUnits;
+      };
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -149,15 +169,29 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
 
       if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.player.steel, this.player.steelValue, false);
+        const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
+        this.steel = deductUnits(availableSteel, this.player.steelValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.player.titanium, this.player.titaniumValue, false);
+        const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
+        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.player.heat, 1);
+      }
+
+      // If we are overspending
+      if (megacreditBalance < 0) {
+        // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
+        // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
+        // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
+        // We cannot reduce the amount of Ti and still pay enough.
+        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
     canUseHeat: function() {
@@ -206,11 +240,17 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       this.setDefaultValues();
     },
-    hasWarning: function() {
+    hasWarning: function(): boolean {
       return this.warning !== undefined;
     },
-    hasCardWarning: function() {
+    hasCardWarning: function(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
+    },
+    showReserveSteelWarning: function(): boolean {
+      return this.card?.reserveUnits?.steel > 0;
+    },
+    showReserveTitaniumWarning: function(): boolean {
+      return this.card?.reserveUnits?.titanium > 0;
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -305,7 +345,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ translate(playerinput.title) }}</div>
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -313,9 +353,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="hasCardWarning()" class="card-warning">{{ this.card.warning !== undefined ? translate(this.card.warning) : '' }}</div>
+    <div v-if="hasCardWarning()" class="card-warning">{{ $t(card.warning) }}</div>
 
-    <h3 class="payments_title">How to pay?</h3>
+    <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
@@ -324,33 +364,39 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="plus" :onClick="_=>addValue('steel', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
+    <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
+    (Some steel is not available here because the project card requires some when it is played.)
+    </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
+      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
+    </div>
+    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
+    (Some titanium is not available here because the project card needs some when it is played.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" /> 
+      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
+      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
       <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('microbes')" title="MAX" /> 
+      <Button type="max" :onClick="_=>setMaxValue('microbes')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
+      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
       <Button type="minus" :onClick="_=>reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
@@ -358,14 +404,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

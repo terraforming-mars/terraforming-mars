@@ -8,7 +8,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -44,8 +43,8 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
 
     public resourceCount: number = 0;
 
-    public play(player: Player, game: Game) {
-      game.defer(new DeferredAction(
+    public play(player: Player) {
+      player.game.defer(new DeferredAction(
         player,
         () => {
           player.addResourceTo(this, 3);
@@ -57,7 +56,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       if (this.resourceCount < 3) {
         player.addResourceTo(this);
         LogHelper.logAddResource(player, this);
@@ -65,13 +64,13 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       }
 
       const orOptions = new OrOptions();
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
 
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
           this.resourceCount -= 3;
           LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
-          player.increaseTerraformRating(game);
+          player.increaseTerraformRating();
           return undefined;
         }));
       }

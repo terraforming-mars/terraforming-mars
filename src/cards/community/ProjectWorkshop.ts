@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -38,7 +37,7 @@ export class ProjectWorkshop implements CorporationCard {
       return activeCards.length > 0 || player.megaCredits >= 3;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const activeCards = player.getCardsByCardType(CardType.ACTIVE);
 
       const flipBlueCard = new SelectOption(
@@ -46,22 +45,22 @@ export class ProjectWorkshop implements CorporationCard {
         'Select',
         () => {
           if (activeCards.length === 1) {
-            this.convertCardPointsToTR(player, game, activeCards[0]);
-            this.discardPlayedCard(player, game, activeCards[0]);
+            this.convertCardPointsToTR(player, activeCards[0]);
+            this.discardPlayedCard(player, activeCards[0]);
             player.drawCard(2);
             return undefined;
           }
 
-          return new SelectCard(
+          return new SelectCard<IProjectCard>(
             'Select active card to discard',
             'Discard',
-                    activeCards as Array<ICard>,
-                    (foundCards: Array<ICard>) => {
-                      this.convertCardPointsToTR(player, game, foundCards[0]);
-                      this.discardPlayedCard(player, game, foundCards[0]);
-                      player.drawCard(2);
-                      return undefined;
-                    },
+            activeCards,
+            (foundCards) => {
+              this.convertCardPointsToTR(player, foundCards[0]);
+              this.discardPlayedCard(player, foundCards[0]);
+              player.drawCard(2);
+              return undefined;
+            },
           );
         },
       );
@@ -78,24 +77,24 @@ export class ProjectWorkshop implements CorporationCard {
       return new OrOptions(drawBlueCard, flipBlueCard);
     }
 
-    private convertCardPointsToTR(player: Player, game: Game, card: ICard) {
+    private convertCardPointsToTR(player: Player, card: ICard) {
       if (card.getVictoryPoints !== undefined) {
-        const steps = card.getVictoryPoints(player, game);
-        player.increaseTerraformRatingSteps(steps, game);
+        const steps = card.getVictoryPoints(player);
+        player.increaseTerraformRatingSteps(steps);
         LogHelper.logTRIncrease(player, steps);
       }
     }
 
-    private discardPlayedCard(player: Player, game: Game, card: ICard) {
+    private discardPlayedCard(player: Player, card: IProjectCard) {
       const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
       player.playedCards.splice(cardIndex, 1);
-      game.dealer.discard(card as IProjectCard);
+      player.game.dealer.discard(card);
 
       if (card.onDiscard) {
         card.onDiscard(player);
       }
 
-      game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
+      player.game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
     }
 
     public metadata: CardMetadata = {

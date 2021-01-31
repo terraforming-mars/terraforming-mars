@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -18,7 +17,6 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       name: CardName.TERRAFORMING_GANYMEDE,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 33,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '197',
@@ -30,18 +28,18 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * steps, game, false, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, false, true);
     }
 
     return true;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    player.increaseTerraformRatingSteps(steps, game);
+    player.increaseTerraformRatingSteps(steps);
     LogHelper.logTRIncrease(player, steps);
 
     return undefined;

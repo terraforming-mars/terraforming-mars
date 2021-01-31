@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -22,7 +21,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
-      productionDelta: Units.of({energy: 2}),
+      productionBox: Units.of({energy: 2}),
 
       metadata: {
         cardNumber: '026',
@@ -37,8 +36,8 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
 
   public play(player: Player) {

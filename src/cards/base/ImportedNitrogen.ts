@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -19,7 +18,6 @@ export class ImportedNitrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_NITROGEN,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 23,
-      hasRequirements: false,
 
       metadata: {
         cardNumber: '163',
@@ -34,19 +32,19 @@ export class ImportedNitrogen extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
+  public canPlay(player: Player): boolean {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.plants += 4;
-    player.increaseTerraformRating(game);
-    game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
-    game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
+    player.increaseTerraformRating();
+    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
     return undefined;
   }
 }

@@ -13,14 +13,14 @@ describe('Gyropolis', function() {
     const card = new Gyropolis();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     const card1 = new ResearchNetwork();
     const card2 = new LunaGovernor();
 
     player.playedCards.push(card1, card2);
     player.addProduction(Resources.ENERGY, 2);
-    expect(card.canPlay(player, game)).is.true;
-    const action = card.play(player, game) as SelectSpace;
+    expect(card.canPlay(player)).is.true;
+    const action = card.play(player) as SelectSpace;
     expect(action).is.not.undefined;
     expect(action.cb(action.availableSpaces[0])).is.undefined;
     expect(action.availableSpaces[0].player).to.eq(player);

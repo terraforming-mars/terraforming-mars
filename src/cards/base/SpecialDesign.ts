@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -24,7 +23,7 @@ export class SpecialDesign extends Card implements IProjectCard {
       },
     });
   }
-  public getRequirementBonus(player: Player, _game: Game): number {
+  public getRequirementBonus(player: Player): number {
     if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
       return 2;
     }

@@ -35,7 +35,7 @@ export const CardTitle = Vue.component('CardTitle', {
         classes.push('background-color-events');
       } else if (this.type === CardType.PRELUDE) {
         classes.push('background-color-prelude');
-      } else if (this.type === CardType.STANDARD_PROJECT) {
+      } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
         classes.push('background-color-standard-project');
       }
 
@@ -51,7 +51,7 @@ export const CardTitle = Vue.component('CardTitle', {
     },
     getMainClasses() {
       const classes: Array<String> = ['card-title'];
-      if (this.type === CardType.STANDARD_PROJECT) {
+      if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
         classes.push('card-title-standard-project');
       }
       return classes.join(' ');

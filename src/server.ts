@@ -21,6 +21,7 @@ import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
 import {Cloner} from './database/Cloner';
+import {DatabaseMaintenance} from './server/DatabaseMaintenance';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const styles = fs.readFileSync('build/styles.css');
@@ -592,11 +593,12 @@ console.log('Starting server on port ' + (process.env.PORT || 8080));
 try {
   // The first call to Database.getInstance also intiailizes a connection to the database. Better to
   // fail here than after the server opens to process requests.
-  Database.getInstance().purgeUnfinishedGames();
+  Database.getInstance();
 } catch (err) {
   console.error('Cannot connect to database:', err);
   throw err;
 }
+DatabaseMaintenance.initialize();
 
 console.log('version 0.X');
 

@@ -153,7 +153,6 @@ export class PostgreSQL implements IDatabase {
         throw err;
       }
     });
-    this.purgeUnfinishedGames();
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.

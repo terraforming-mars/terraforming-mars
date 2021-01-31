@@ -57,7 +57,7 @@ export class SQLite implements IDatabase {
 
   loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
     // Retrieve first save from database
-    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
+    this.db.get('SELECT game_id, game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
       if (row.game_id === undefined) {
         return cb(new Error('Game not found'), undefined);
       }
@@ -120,7 +120,6 @@ export class SQLite implements IDatabase {
         return console.warn(err.message);
       }
     });
-    this.purgeUnfinishedGames();
   }
 
   purgeUnfinishedGames(): void {

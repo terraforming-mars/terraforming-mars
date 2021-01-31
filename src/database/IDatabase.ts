@@ -85,9 +85,7 @@ export interface IDatabase {
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanSaves}.
-     *
-     * This is not impliemented in {@link SQLite}.
+     * games. Called at a game's conclusion.
      *
      * @param generations the generation number at the end of the game
      * @param gameOptions the options used for this game.
@@ -125,9 +123,6 @@ export interface IDatabase {
      * It will:
      *
      * * Purge all saves between `(0, save_id]`.
-     * * It also participates in purging abandoned solo games older
-     *   than a given date range, regardless of the supplied `game_id`.
-     *   Constraints for this purge vary by database.
      */
     cleanSaves(game_id: GameId, save_id: number): void;
 
@@ -135,7 +130,7 @@ export interface IDatabase {
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
-     * This is currently also part of cleanSaves().
+     * This is run as part of a node-cron job.
      *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days

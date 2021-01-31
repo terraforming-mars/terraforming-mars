@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -1120,15 +1120,15 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private getMcTradeCost(): number {
-    return 9 - this.colonyTradeDiscount;
+    return MC_TRADE_COST - this.colonyTradeDiscount;
   }
 
   private getEnergyTradeCost(): number {
-    return 3 - this.colonyTradeDiscount;
+    return ENERGY_TRADE_COST - this.colonyTradeDiscount;
   }
 
   private getTitaniumTradeCost(): number {
-    return 3 - this.colonyTradeDiscount;
+    return TITANIUM_TRADE_COST - this.colonyTradeDiscount;
   }
 
   private playPreludeCard(): PlayerInput {

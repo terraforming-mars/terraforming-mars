@@ -14,9 +14,9 @@ export class GeologicalSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.greeneries(5).any().max()),
       metadata: {
         cardNumber: 'A09',
-        requirements: CardRequirements.builder((b) => b.greeneries(5).any().max()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.', (eb) => {
             eb.emptyTile().startEffect;

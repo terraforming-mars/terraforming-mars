@@ -15,9 +15,9 @@ export class SisterPlanetSupport extends Card {
       tags: [Tags.VENUS, Tags.EARTH],
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH)),
       metadata: {
         cardNumber: '244',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3));
         }),

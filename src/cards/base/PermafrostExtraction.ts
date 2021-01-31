@@ -18,9 +18,9 @@ export class PermafrostExtraction extends Card implements IProjectCard {
       name: CardName.PERMAFROST_EXTRACTION,
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-8)),
       metadata: {
         cardNumber: '191',
-        requirements: CardRequirements.builder((b) => b.temperature(-8)),
         renderData: CardRenderer.builder((b) => {
           b.oceans(1);
         }),

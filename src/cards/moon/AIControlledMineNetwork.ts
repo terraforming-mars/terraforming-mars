@@ -15,10 +15,10 @@ export class AIControlledMineNetwork extends Card {
       tags: [Tags.SCIENCE],
       cost: 6,
 
+      requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {
         description: 'Requires Logistic Rate to be 2 or higher. Raise Logistic Rate 1 step',
         cardNumber: 'M32',
-        requirements: CardRequirements.builder((b) => b.logisticRate(2)),
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate(1);
         }),

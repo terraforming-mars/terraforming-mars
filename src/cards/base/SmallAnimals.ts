@@ -21,9 +21,9 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
       cost: 6,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
         cardNumber: '054',
-        requirements: CardRequirements.builder((b) => b.oxygen(6)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

@@ -16,9 +16,9 @@ export class HeavyTaxation extends Card implements IProjectCard {
       name: CardName.HEAVY_TAXATION,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
         cardNumber: 'C14',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).nbsp.megacredits(4);
         }),

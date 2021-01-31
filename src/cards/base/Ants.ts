@@ -21,10 +21,10 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
       cost: 9,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(4)),
       metadata: {
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
-        requirements: CardRequirements.builder((b) => b.oxygen(4)),
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
             eb.microbes(1).any.startAction.microbes(1);

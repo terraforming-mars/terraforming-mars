@@ -13,9 +13,9 @@ export class Solarnet extends Card {
       cardType: CardType.AUTOMATED,
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       metadata: {
         cardNumber: '245',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),

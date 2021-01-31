@@ -14,10 +14,10 @@ export class EcologicalSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 9,
 
+      requirements: CardRequirements.builder((b) => b.greeneries(3).any()),
       metadata: {
         description: 'Requires 3 greeneries on Mars.',
         cardNumber: 'A07',
-        requirements: CardRequirements.builder((b) => b.greeneries(3).any()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.', (eb) => {
             eb.emptyTile().startEffect;

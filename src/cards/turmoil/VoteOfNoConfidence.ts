@@ -43,9 +43,9 @@ export class VoteOfNoConfidence implements IProjectCard {
       }
       return undefined;
     }
+    public readonly requirements = CardRequirements.builder((b) => b.partyLeaders());
     public metadata: CardMetadata = {
       cardNumber: 'T16',
-      requirements: CardRequirements.builder((b) => b.partyLeaders()),
       renderData: CardRenderer.builder((b) => {
         b.minus().chairman().any.asterix();
         b.nbsp.plus().partyLeaders().br;

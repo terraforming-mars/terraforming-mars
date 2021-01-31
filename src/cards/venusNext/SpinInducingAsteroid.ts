@@ -18,9 +18,9 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
       cost: 16,
       tags: [Tags.SPACE],
 
+      requirements: CardRequirements.builder((b) => b.venus(10).max()),
       metadata: {
         cardNumber: '246',
-        requirements: CardRequirements.builder((b) => b.venus(10).max()),
         renderData: CardRenderer.builder((b) => {
           b.venus(2);
         }),

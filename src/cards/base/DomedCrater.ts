@@ -21,9 +21,9 @@ export class DomedCrater extends Card implements IProjectCard {
       cost: 24,
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(7).max()),
       metadata: {
         cardNumber: 'T03',
-        requirements: CardRequirements.builder((b) => b.oxygen(7).max()),
         description: {
           text: 'Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.',
           align: 'left',

@@ -13,10 +13,10 @@ export class PublicCelebrations extends Card implements IProjectCard {
       name: CardName.PUBLIC_CELEBRATIONS,
       cardType: CardType.EVENT,
 
+      requirements: CardRequirements.builder((b) => b.chairman()),
       metadata: {
         description: 'Requires that you are Chairman.',
         cardNumber: 'T10',
-        requirements: CardRequirements.builder((b) => b.chairman()),
         victoryPoints: 2,
       },
     });

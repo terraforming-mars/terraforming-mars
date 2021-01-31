@@ -20,9 +20,9 @@ export class LunaMiningHub extends MoonCard {
       cost: 16,
       productionBox: Units.of({steel: 1, titanium: 1}),
 
+      requirements: CardRequirements.builder((b) => b.miningRate(5)),
       metadata: {
         cardNumber: 'M14',
-        requirements: CardRequirements.builder((b) => b.miningRate(5)),
         description: 'Requires a Mining Rate of 5 or higher. ' +
           'Spend 1 titanium and 1 steel. Increase your steel and titanium production 1 step each. ' +
           'Place this tile on the Moon and raise Mining Rate 1 step. ' +

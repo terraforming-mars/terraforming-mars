@@ -20,10 +20,10 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
       cost: 3,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '224',
         description: 'Requires 2 Science tags.',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to ANY card.', (eb) => {
             eb.empty().startAction.microbes(1).asterix();

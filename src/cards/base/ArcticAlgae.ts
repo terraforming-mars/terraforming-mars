@@ -17,10 +17,10 @@ export class ArcticAlgae extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 12,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-12).max()),
       metadata: {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
         cardNumber: '023',
-        requirements: CardRequirements.builder((b) => b.temperature(-12).max()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When anyone places an ocean tile, gain 2 plants.', (be) => be.oceans(1).any.startEffect.plants(2)).br;
           b.plants(1);

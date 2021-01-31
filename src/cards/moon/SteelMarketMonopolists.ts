@@ -15,11 +15,11 @@ export class SteelMarketMonopolists extends MarketCard {
         name: CardName.STEEL_MARKET_MONOPOLISTS,
         cardType: CardType.ACTIVE,
         cost: 15,
+        requirements: CardRequirements.builder((b) => b.miningRate(3)),
 
         metadata: {
           description: 'Requires Mining Rate to be 3 or higher.',
           cardNumber: 'M28',
-          requirements: CardRequirements.builder((b) => b.miningRate(3)),
           renderData: CardRenderer.builder((b) => {
             b.action('Spend 3X MC to gain 2X steel (max 9MC)', (eb) => {
               eb.megacredits(3).multiplier.startAction.text('x').steel(2).asterix();

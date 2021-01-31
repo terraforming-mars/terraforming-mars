@@ -14,16 +14,16 @@ import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
 import {TestPlayer} from './TestPlayer';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
-export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): Array<ISpace> {
+export const maxOutOceans = function(player: Player, toValue: number = 0): Array<ISpace> {
   const oceans = [];
   if (toValue < 1) {
     toValue = constants.MAX_OCEAN_TILES;
   }
 
-  for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
+  for (const space of player.game.board.getSpaces(SpaceType.OCEAN, player)) {
     if (space.tile !== undefined) continue;
-    if (game.board.getOceansOnBoard() >= toValue) break;
-    game.addOceanTile(player, space.id);
+    if (player.game.board.getOceansOnBoard() >= toValue) break;
+    player.game.addOceanTile(player, space.id);
     oceans.push(space);
   }
   return oceans;

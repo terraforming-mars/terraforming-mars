@@ -47,7 +47,8 @@ export class VoteOfNoConfidence implements IProjectCard {
       cardNumber: 'T16',
       requirements: CardRequirements.builder((b) => b.partyLeaders()),
       renderData: CardRenderer.builder((b) => {
-        b.chairman().any.asterix().nbsp.partyLeaders().br;
+        b.minus().chairman().any.asterix();
+        b.nbsp.plus().partyLeaders().br;
         b.tr(1);
       }),
       description: 'Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.',

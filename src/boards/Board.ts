@@ -241,21 +241,21 @@ export abstract class Board {
           adjacency: space.adjacency,
           x: space.x,
           y: space.y,
-        } as SerializedSpace;
+        };
       }),
-    } as SerializedBoard;
+    };
   }
 
   public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
-    const space = {
+    const space: ISpace = {
       id: serialized.id,
       spaceType: serialized.spaceType,
       bonus: serialized.bonus,
       x: serialized.x,
       y: serialized.y,
-    } as ISpace;
+    };
 
     if (serialized.tile !== undefined) {
       space.tile = serialized.tile;

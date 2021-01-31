@@ -31,12 +31,14 @@ export class Localfilesystem implements IDatabase {
 
   saveGame(game: Game): void {
     console.log(`saving ${game.id} at position ${game.lastSaveId}`);
-    const text = JSON.stringify(game.serialize(), null, 2);
-    fs.writeFileSync(this._filename(game.id), text);
-    fs.writeFileSync(this._historyFilename(game.id, game.lastSaveId), text);
-
-    // This must occur after the save.
+    this.saveSerializedGame(game.serialize());
     game.lastSaveId++;
+  }
+
+  saveSerializedGame(serializedGame: SerializedGame): void {
+    const text = JSON.stringify(serializedGame, null, 2);
+    fs.writeFileSync(this._filename(serializedGame.id), text);
+    fs.writeFileSync(this._historyFilename(serializedGame.id, serializedGame.lastSaveId), text);
   }
 
   getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
@@ -49,13 +51,18 @@ export class Localfilesystem implements IDatabase {
       cb(err, undefined);
     }
   }
+
+  getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+    throw new Error('Not implemented');
+  }
+
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
     this.getGames((err, gameIds) => {
       const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
       const gameData = filtered.map((gameId) => {
         const text = fs.readFileSync(this._historyFilename(gameId, 0));
         const serializedGame = JSON.parse(text) as SerializedGame;
-        return {gameId: gameId, playerCount: serializedGame.players.length} as IGameData;
+        return {gameId: gameId, playerCount: serializedGame.players.length};
       });
       cb(err, gameData);
     });

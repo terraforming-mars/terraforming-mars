@@ -12,6 +12,7 @@ import {ICard} from '../cards/ICard';
 import {ICardRenderDescription, isIDescription} from '../cards/render/ICardRenderDescription';
 import {CardName} from '../CardName';
 import {ICardFactory} from '../cards/ICardFactory';
+import {PreferencesManager} from './PreferencesManager';
 
 const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
 
@@ -148,9 +149,13 @@ export const DebugUI = Vue.component('debug-ui', {
         return true;
       }
     },
+    getLanguageCssClass() {
+      const language = PreferencesManager.loadValue('lang') || 'en';
+      return 'language-' + language;
+    },
   },
   template: `
-        <div class="debug-ui-container">
+        <div class="debug-ui-container" :class="getLanguageCssClass()">
             <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
             <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
             <label for="filterDescription-checkbox">

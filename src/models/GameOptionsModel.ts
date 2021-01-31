@@ -18,6 +18,7 @@ export interface GameOptionsModel {
   preludeExtension: boolean,
   promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
+  removeNegativeGlobalEvents: boolean,
   showOtherPlayersVP: boolean,
   showTimers: boolean,
   shuffleMapOption: boolean,

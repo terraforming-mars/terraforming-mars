@@ -20,6 +20,9 @@ export const DEFAULT_TITANIUM_VALUE: number = 3;
 export const DEFAULT_FLOATERS_VALUE: number = 3;
 export const DEFAULT_MICROBES_VALUE: number = 2;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
+export const MAXIMUM_COLONY_RATE = 8;
+export const MAXIMUM_MINING_RATE = 8;
+export const MAXIMUM_LOGISTICS_RATE = 8;
 
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},

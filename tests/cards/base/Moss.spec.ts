@@ -7,29 +7,29 @@ import {Resources} from '../../../src/Resources';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('Moss', function() {
-  let card : Moss; let player : Player; let game : Game;
+  let card : Moss; let player : Player;
 
   beforeEach(function() {
     card = new Moss();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play without enough oceans', function() {
-    maxOutOceans(player, game, 2);
+    maxOutOceans(player, 2);
     player.plants = 1;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play if have no plants', function() {
-    maxOutOceans(player, game, 3);
+    maxOutOceans(player, 3);
     player.plants = 0;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, game, 3);
+    maxOutOceans(player, 3);
     player.plants = 1;
     expect(card.canPlay(player)).is.true;
 
@@ -39,7 +39,7 @@ describe('Moss', function() {
   });
 
   it('Can play with 0 plants if have Viral Enhancers', function() {
-    maxOutOceans(player, game, 3);
+    maxOutOceans(player, 3);
     const viralEnhancers = new ViralEnhancers();
     player.playedCards.push(viralEnhancers);
     player.plants = 0;

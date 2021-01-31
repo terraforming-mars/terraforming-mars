@@ -3,29 +3,34 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class RimFreighters implements IProjectCard {
-    public cost = 4;
-    public tags = [Tags.SPACE];
-    public name = CardName.RIM_FREIGHTERS;
-    public cardType = CardType.ACTIVE;
+export class RimFreighters extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 4,
+      tags: [Tags.SPACE],
+      name: CardName.RIM_FREIGHTERS,
+      cardType: CardType.ACTIVE,
 
-    public play(player: Player) {
-      player.colonyTradeDiscount++;
-      return undefined;
-    }
+      metadata: {
+        cardNumber: 'C35',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you trade, you pay 1 less resource for it.', (eb) => {
+            eb.trade().startEffect.tradeDiscount(1);
+          });
+        }),
+      },
+    });
+  }
 
-    public onDiscard(player: Player): void {
-      player.colonyTradeDiscount--;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'C35',
-      renderData: CardRenderer.builder((b) => {
-        b.effect('When you trade, you pay 1 less resource for it.', (eb) => {
-          eb.trade().startEffect.tradeDiscount(1);
-        });
-      }),
-    }
+  public play(player: Player) {
+    player.colonyTradeDiscount++;
+    return undefined;
+  }
+
+  public onDiscard(player: Player): void {
+    player.colonyTradeDiscount--;
+  }
 }

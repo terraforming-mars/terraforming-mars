@@ -117,6 +117,16 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
+    this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
+      if (err) {
+        console.error('PostgreSQL:getGameVersion', err);
+        return cb(err, undefined);
+      }
+      cb(undefined, JSON.parse(res.rows[0].game));
+    });
+  }
+
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
     this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
       if (err) {

@@ -2,9 +2,10 @@ import {Message} from '../Message';
 import {CardType} from '../cards/CardType';
 import {ResourceType} from '../ResourceType';
 import {Units} from '../Units';
+import {CardName} from '../CardName';
 
 export interface CardModel {
-    name: string;
+    name: CardName;
     resources: number | undefined;
     resourceType: ResourceType | undefined;
     calculatedCost: number;

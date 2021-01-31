@@ -9,13 +9,13 @@ import {TestPlayers} from '../../TestingUtils';
 import {maxOutOceans} from './../../TestingUtils';
 
 describe('CometAiming', function() {
-  let card : CometAiming; let player : Player; let game : Game;
+  let card : CometAiming; let player : Player;
 
   beforeEach(function() {
     card = new CometAiming();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -37,8 +37,8 @@ describe('CometAiming', function() {
     expect(card.resourceCount).to.eq(1);
 
     card.action(player);
-    expect(game.deferredActions).has.lengthOf(1);
-    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    expect(player.game.deferredActions).has.lengthOf(1);
+    const selectSpace = player.game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });
@@ -59,7 +59,7 @@ describe('CometAiming', function() {
   it('Cannot spend resource to place ocean if oceans are maxed', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    maxOutOceans(player, game);
+    maxOutOceans(player);
     expect(card.canAct(player)).is.not.true;
 
     player.titanium = 1;

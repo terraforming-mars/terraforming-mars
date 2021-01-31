@@ -31,14 +31,14 @@ export class ProjectInspection extends Card implements IProjectCard {
       if (player.corporationCard.name !== CardName.PLAYWRIGHTS || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
         if (player.corporationCard.action !== undefined &&
               player.corporationCard.canAct !== undefined &&
-              player.corporationCard.canAct(player, player.game)) {
+              player.corporationCard.canAct(player)) {
           result.push(player.corporationCard);
         }
       }
     }
 
     for (const playedCard of player.playedCards) {
-      if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player, player.game) && player.getActionsThisGeneration().has(playedCard.name)) {
+      if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
         result.push(playedCard);
       }
     }
@@ -61,7 +61,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       (foundCards: Array<ICard>) => {
         const foundCard = foundCards[0];
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-        return foundCard.action!(player, player.game);
+        return foundCard.action!(player);
       },
     );
   }

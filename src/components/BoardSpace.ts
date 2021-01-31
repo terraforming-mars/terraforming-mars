@@ -60,6 +60,9 @@ export const BoardSpace = Vue.component('board-space', {
     aresExtension: {
       type: Boolean,
     },
+    isTileHidden: {
+      type: Boolean,
+    },
   },
   data: function() {
     return {};
@@ -165,6 +168,9 @@ export const BoardSpace = Vue.component('board-space', {
           }
         }
       }
+      if (this.isTileHidden) {
+        css += ' board-hidden-tile';
+      }
 
       return css;
     },
@@ -173,6 +179,7 @@ export const BoardSpace = Vue.component('board-space', {
         <div :class="getMainClass()" :data_space_id="space.id" :title="getVerboseTitle(space.tileType)">
             <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
             <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
+            <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
             <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
         </div>
     `,

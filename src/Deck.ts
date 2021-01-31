@@ -2,10 +2,12 @@ import {CardName} from './CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 
-// TODO(bafolts): remove after 02/15/2021 before 03/01/2021
 const CARD_RENAMES = new Map<string, CardName>([
+  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
   ['CEOs Favorite Project', CardName.CEOS_FAVORITE_PROJECT],
+  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
   ['Rad-chem Factory', CardName.RAD_CHEM_FACTORY],
+  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
   ['Titan Floater Launch-pad', CardName.TITAN_FLOATING_LAUNCHPAD],
 ]);
 

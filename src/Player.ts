@@ -1898,8 +1898,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.playedCards.map((c) => {
       const result: SerializedCard = {
         name: c.name,
-        resourceCount: c.resourceCount,
       };
+      if (c.bonusResource !== undefined) {
+        result.bonusResource = c.bonusResource;
+      }
+      if (c.resourceCount !== undefined) {
+        result.resourceCount = c.resourceCount;
+      }
       if (c instanceof SelfReplicatingRobots) {
         result.targetCards = c.targetCards.map((t) => {
           return {

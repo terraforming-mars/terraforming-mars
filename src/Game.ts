@@ -976,7 +976,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoEndGame(): void {
-    Database.getInstance().cleanSaves(this.id, this.lastSaveId);
+    Database.getInstance().markFinished(this.id);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
       let corponame: String = '';
@@ -987,6 +987,8 @@ export class Game implements ISerializable<SerializedGame> {
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
+    Database.getInstance().cleanSaves(this.id, this.lastSaveId);
+
     if (this.phase === Phase.END) return;
     this.phase = Phase.END;
   }

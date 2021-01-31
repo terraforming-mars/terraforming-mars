@@ -136,6 +136,15 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  markFinished(game_id: string): void {
+    this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id], (err) => {
+      if (err) {
+        console.error('PostgreSQL:markFinished', err);
+        throw err;
+      }
+    });
+  }
+
   cleanSaves(game_id: GameId, save_id: number): void {
     // DELETE all saves except initial and last one
     this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
@@ -143,13 +152,6 @@ export class PostgreSQL implements IDatabase {
         console.error('PostgreSQL:cleanSaves', err);
         throw err;
       }
-      // Flag game as finished
-      this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id], (err2) => {
-        if (err2) {
-          console.error('PostgreSQL:cleanSaves2', err2);
-          throw err2;
-        }
-      });
     });
     this.purgeUnfinishedGames();
   }

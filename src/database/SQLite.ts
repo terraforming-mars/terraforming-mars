@@ -104,15 +104,18 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId, save_id: number): void {
-    // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
+  markFinished(game_id: GameId): void {
+    // Flag game as finished
+    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
       if (err) {
         return console.warn(err.message);
       }
     });
-    // Flag game as finished
-    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
+  }
+
+  cleanSaves(game_id: GameId, save_id: number): void {
+    // DELETE all saves except initial and last one
+    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
       if (err) {
         return console.warn(err.message);
       }

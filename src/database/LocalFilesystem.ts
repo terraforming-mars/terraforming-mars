@@ -109,7 +109,7 @@ export class Localfilesystem implements IDatabase {
     // Not implemented here.
   }
 
-  cleanSaves(_game_id: GameId, _save_id: number): void {
+  pruneFinishedGames(): void {
     // Not implemented here.
   }
 

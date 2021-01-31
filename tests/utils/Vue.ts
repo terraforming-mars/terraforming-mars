@@ -34,8 +34,6 @@ Vue.default = Vue;
 // don't save to database during tests
 Database.getInstance = function() {
   const val: IDatabase = {
-    markFinished: () => {},
-    cleanSaves: () => {},
     deleteGameNbrSaves: () => {},
     getClonableGames: () => {},
     getGame: () => {},
@@ -43,8 +41,10 @@ Database.getInstance = function() {
     getGames: () => {},
     restoreGame: () => {},
     loadCloneableGame: () => {},
+    markFinished: () => {},
     saveGameResults: () => {},
     saveGame: () => {},
+    pruneFinishedGames: () => {},
     purgeUnfinishedGames: () => {},
   };
   return val;

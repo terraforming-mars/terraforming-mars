@@ -9,6 +9,8 @@ const fs = require('fs');
 const dbFolder = path.resolve(__dirname, '../../../db');
 const dbPath = path.resolve(__dirname, '../../../db/game.db');
 
+type Status = 'running' | 'finished' | 'purged';
+
 export class SQLite implements IDatabase {
   private db: sqlite3.Database;
 
@@ -22,7 +24,7 @@ export class SQLite implements IDatabase {
     this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
   }
 
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
+  getClonableGames(cb: (err: Error | undefined, games: Array<IGameData>) => void) {
     const allGames: Array<IGameData> = [];
     const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';
 
@@ -42,15 +44,27 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
-    this.db.all(sql, [], (err, rows) => {
+  getGames(cb: (err: Error | undefined, allGameIds: Array<GameId>) => void) {
+    this.getAllGamesByStatus('running', cb);
+  }
+
+  getAllGamesByStatus(status: Status, cb: (err: Error | undefined, gameIds: Array<GameId>) => void) {
+    const gameIds: Array<GameId> = [];
+    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = ?';
+    this.db.all(sql, [status], (err, rows) => {
       if (rows) {
         rows.forEach((row) => {
-          allGames.push(row.game_id);
+          gameIds.push(row.game_id);
         });
-        return cb(err ?? undefined, allGames);
+        return cb(err ?? undefined, gameIds);
+      }
+    });
+  }
+
+  setStatus(gameId: GameId, status: Status) {
+    this.db.run('UPDATE games SET status = ? WHERE game_id = ?', [status, gameId], function(err: Error | null) {
+      if (err) {
+        return console.warn(err.message);
       }
     });
   }
@@ -105,7 +119,6 @@ export class SQLite implements IDatabase {
   }
 
   markFinished(game_id: GameId): void {
-    // Flag game as finished
     this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
       if (err) {
         return console.warn(err.message);
@@ -113,12 +126,34 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId, save_id: number): void {
-    // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
+  pruneFinishedGames(): void {
+    this.getAllGamesByStatus('finished', (err, gameIds) => {
       if (err) {
         return console.warn(err.message);
       }
+      if (gameIds === undefined) {
+        return console.warn('games undefined in purge');
+      }
+      gameIds.forEach((gameId) => {
+        this.purgeFinishedGame(gameId);
+      });
+    });
+  }
+
+  purgeFinishedGame(gameId: GameId): void {
+    this.getGame(gameId, (err, game) => {
+      if (err) {
+        return console.warn(err.message);
+      }
+      if (game === undefined) {
+        return console.warn('game undefined in purge');
+      }
+      // DELETE all saves except initial and last one
+      this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, game.lastSaveId], function(err: Error | null) {
+        if (err) {
+          return console.warn(err.message);
+        }
+      });
     });
   }
 

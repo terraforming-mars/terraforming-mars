@@ -119,12 +119,10 @@ export interface IDatabase {
     markFinished(game_id: GameId): void;
 
     /**
-     * A maintenance task on a single game to close it out upon its completion.
-     * It will:
-     *
-     * * Purge all saves between `(0, save_id]`.
+     * A maintenance task that finds all finsihed games, and prunes them. This means
+     * it will remove all saves between the first and the last.
      */
-    cleanSaves(game_id: GameId, save_id: number): void;
+    pruneFinishedGames(): void;
 
     /**
      * A maintenance task that purges abandoned solo games older

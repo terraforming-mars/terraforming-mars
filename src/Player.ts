@@ -64,6 +64,7 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
+import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 
 export type PlayerId = string;
 
@@ -992,10 +993,18 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public runDraftPhase(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+    let cardsToKeep = 1;
+
     let cards: Array<IProjectCard> = [];
     if (passedCards === undefined) {
       if (!initialDraft) {
-        this.dealCards(4, cards);
+        let cardsToDraw = 4;
+        if (LunaProjectOffice.consume(this)) {
+          cardsToDraw = 5;
+          cardsToKeep = 2;
+        }
+
+        this.dealCards(cardsToDraw, cards);
       } else {
         this.dealCards(5, cards);
       }
@@ -1003,9 +1012,13 @@ export class Player implements ISerializable<SerializedPlayer> {
       cards = passedCards;
     }
 
+    const message = cardsToKeep === 1 ?
+      'Select a card to keep and pass the rest to ${0}' :
+      'Select two cards to keep and pass the rest to ${0}';
+
     this.setWaitingFor(
       new SelectCard({
-        message: 'Select a card to keep and pass the rest to ${0}',
+        message: message,
         data: [{
           type: LogMessageDataType.RAW_STRING,
           value: playerName,
@@ -1018,7 +1031,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         cards = cards.filter((card) => card !== foundCards[0]);
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
-      }, 1, 1,
+      }, cardsToKeep, cardsToKeep,
       ), () => { },
     );
   }
@@ -1034,7 +1047,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealCards(4, dealtCards);
+      this.dealCards(LunaProjectOffice.consume(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];

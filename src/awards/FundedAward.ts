@@ -16,7 +16,7 @@ export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<
     return {
       name: fundedAward.award.name,
       playerId: fundedAward.player.id,
-    } as SerializedFundedAward;
+    };
   });
 }
 
@@ -43,6 +43,6 @@ export function deserializeFundedAwards(
       throw new Error(`Player ${playerId} not found when rebuilding Funded Award ${awardName}`);
     }
 
-    return {award, player} as FundedAward;
+    return {award, player};
   });
 }

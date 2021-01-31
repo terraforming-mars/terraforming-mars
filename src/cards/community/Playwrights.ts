@@ -5,7 +5,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
 import {Resources} from '../../Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -34,10 +33,10 @@ export class Playwrights implements CorporationCard {
       const players = player.game.getPlayers();
       const replayableEvents = this.getReplayableEvents(player);
 
-      return new SelectCard<ICard>(
+      return new SelectCard<IProjectCard>(
         'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
-        (foundCards: Array<ICard>) => {
-          const selectedCard = foundCards[0] as IProjectCard;
+        (foundCards: Array<IProjectCard>) => {
+          const selectedCard: IProjectCard = foundCards[0];
 
           players.forEach((p) => {
             const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);

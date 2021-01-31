@@ -41,6 +41,7 @@ import {LTFPrivileges} from './LTFPrivileges';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
+import {LunaProjectOffice} from './LunaProjectOffice';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
 // import {LunarIndependenceWar} from './LunarIndependenceWar';
@@ -121,7 +122,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNAR_DUST_PROCESSING_PLANT, Factory: LunarDustProcessingPlant},
     {cardName: CardName.DEEP_LUNAR_MINING, Factory: DeepLunarMining},
     {cardName: CardName.ANCIENT_SHIPYARDS, Factory: AncientShipyards},
-    // {cardName: CardName.LUNA_PROJECT_OFFICE, Factory: LunaProjectOffice},
+    {cardName: CardName.LUNA_PROJECT_OFFICE, Factory: LunaProjectOffice},
     {cardName: CardName.LUNA_RESORT, Factory: LunaResort},
     {cardName: CardName.LUNAR_OBSERVATION_POST, Factory: LunarObservationPost},
     {cardName: CardName.MINING_ROBOTS_MANUF_CENTER, Factory: MiningRobotsManufCenter},

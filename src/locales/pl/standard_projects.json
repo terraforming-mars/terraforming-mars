@@ -1,0 +1,23 @@
+{
+    "Buffer Gas": "Gaz buforowy",
+    "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "Wydaj 16 MC, aby podnieść WT o 1 poziom. Tylko w grach solo.",
+    "(Spend 25 MC to place a city tile and increase your MC production 1 step.)": "Wydaj 25 MC, aby umieścić na planszy obszar miasta oraz podnieść swoją produkcję MC o 1 poziom.",
+    "(Spend 17 MC to place a colony.)": "Wydaj 17 MC, aby umieścić kolonię.",
+    "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)": "Wydaj 23 MC, aby umieścić na planszy obszar zieleni oraz podnieść Poziom Tlenu o 1 poziom.",
+    "(Spend 11 MC to increase your Energy production 1 step.)": "Wydaj 11 MC, aby podnieść swoją produkcję energii o 1 poziom.",
+    "Sell Patents": "Sprzedaj patenty",
+    "Sell patents": "Sprzedaj patenty",
+    "(Discard any number of cards to gain that amount of MC.)": "Odrzuć z ręki dowolną liczbę kart, aby uzyskać taką samą liczbę MC",
+    "asteroid": "asteroida",
+    "(Spend 14 MC to raise temperature 1 step.)": "Wydaj 14 MC, aby podnieść Temperaturę o 1 poziom.",
+    "Air Scrapping": "Uzdatnianie powietrza",
+    "(Spend 15 MC to raise Venus 1 step.)": "Wydaj 14 MC, aby podnieść terraformację Wenus o 1 poziom",
+    "(Spend 18 MC to place an ocean tile.)": "Wydaj 18 MC, aby położyć obszar oceanu na planszy.",
+
+    "Build Moon Colony": "",
+    "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your MC production 1 step.)": "",
+    "Build Moon Mine": "",
+    "(Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "",
+    "Build Moon Road": "",
+    "(Spend 18 MC and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": ""
+}

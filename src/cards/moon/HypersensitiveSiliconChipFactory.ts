@@ -24,6 +24,7 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2);
           b.production((pb) => pb.megacredits(4));
+          b.projectRequirements().moonMine().moonMine();
         }),
       },
     }, {

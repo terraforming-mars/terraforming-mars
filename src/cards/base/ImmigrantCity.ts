@@ -7,6 +7,8 @@ import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {GainProduction} from '../../deferredActions/GainProduction';
+import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -41,14 +43,15 @@ export class ImmigrantCity extends Card implements IProjectCard {
   }
   public onTilePlaced(player: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
-      player.addProduction(Resources.MEGACREDITS);
+      return new GainProduction(player, Resources.MEGACREDITS);
     }
+    return;
   }
   public play(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
-      player.addProduction(Resources.ENERGY, -1);
-      player.addProduction(Resources.MEGACREDITS, -2);
+      player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));
+      player.game.defer(new LoseProduction(player, Resources.MEGACREDITS, {count: 2}));
       return undefined;
     });
   }

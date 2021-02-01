@@ -6,13 +6,10 @@ export class DeferredActionsQueue {
   private insertId: number = 0;
 
   private queue: Heap<DeferredAction> = new Heap((a, b) => {
-    if (a.priority < b.priority) {
-      return -1;
-    } else if (a.priority > b.priority) {
-      return 1;
-    } else {
+    if (a.priority === b.priority) {
       return (a.queueId! < b.queueId!) ? -1 : 1;
     }
+    return a.priority - b.priority;
   });
 
   get length(): number {

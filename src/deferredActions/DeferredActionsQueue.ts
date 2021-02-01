@@ -3,8 +3,16 @@ import {GiveColonyBonus} from './GiveColonyBonus';
 import {Heap} from 'mnemonist';
 
 export class DeferredActionsQueue {
+  private insertId: number = 0;
+
   private queue: Heap<DeferredAction> = new Heap((a, b) => {
-    return (a.priority < b.priority) ? -1 : ((a.priority > b.priority) ? 1 : 0);
+    if (a.priority < b.priority) {
+      return -1;
+    } else if (a.priority > b.priority) {
+      return 1;
+    } else {
+      return (a.queueId! < b.queueId!) ? -1 : 1;
+    }
   });
 
   get length(): number {
@@ -12,6 +20,7 @@ export class DeferredActionsQueue {
   }
 
   public push(action: DeferredAction): void {
+    action.queueId = this.insertId++;
     this.queue.push(action);
   }
 

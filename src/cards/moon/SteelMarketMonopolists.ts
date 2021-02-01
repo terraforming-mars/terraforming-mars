@@ -9,7 +9,7 @@ export class SteelMarketMonopolists extends MarketCard {
   constructor() {
     super(
       Resources.STEEL,
-      {from: 3, to: 2, limit: 6},
+      {from: 3, to: 2, limit: 3},
       {from: 1, to: 3, limit: 3},
       {
         name: CardName.STEEL_MARKET_MONOPOLISTS,

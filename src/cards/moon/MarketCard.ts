@@ -97,7 +97,7 @@ export abstract class MarketCard extends Card implements IActionCard {
       throw new Error('selling from !== 1 not yet supported.');
     }
     let limit = player.getResource(this.tradeResource);
-    limit = terms.limit === undefined ? limit : Math.min(limit, terms.limit);
+    limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
       `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} MC, max ${limit})`,

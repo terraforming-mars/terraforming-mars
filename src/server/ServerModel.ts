@@ -121,6 +121,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       aresData: game.aresData,
       timer: player.timer.serialize(),
+      preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
     };
   }
 }

@@ -356,6 +356,13 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
 
+                <div v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                  <Card :card="card"/>
+                </div>
+                <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
+                  <Card :card="card"/>
+                </div>
+
                 <dynamic-title title="Select initial cards:" :color="player.color"/>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 

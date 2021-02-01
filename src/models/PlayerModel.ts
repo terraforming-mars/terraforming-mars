@@ -77,4 +77,5 @@ export interface PlayerModel {
     deckSize: number;
     waitingFor: PlayerInputModel | undefined;
     timer: SerializedTimer;
+    preludeCardsInHand: Array<CardModel>;
 }

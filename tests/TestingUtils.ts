@@ -95,6 +95,28 @@ export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmo
 };
 
 
+// Just shortcuts to some often called methods
+// related to the deferred actions queue
+export function runAllActions(game: Game) {
+  game.deferredActions.runAll(() => {});
+}
+
+export function runNextAction(game: Game) {
+  const action = game.deferredActions.pop();
+  if (action !== undefined) {
+    game.deferredActions.run(action, () => {});
+  }
+}
+
+export function executeNextAction(game: Game) {
+  const action = game.deferredActions.pop();
+  if (action === undefined) {
+    throw new Error('No action in queue.');
+  }
+  return action.execute();
+}
+
+
 // TODO: Move TestPlayers and TestPlayerFactory to its own file.
 // This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.
 // So, someone do that sometime soon, please.

@@ -28,9 +28,9 @@ export class LunaMiningHub extends MoonCard {
           'Place this tile on the Moon and raise Mining Rate 1 step. ' +
           '2 ADDITIONAL VPs FOR EACH MINING TILE ADJACENT TO THIS TILE.',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).steel(1).br;
+          b.minus().titanium(1).minus().steel(1).br;
           b.production((pb) => pb.steel(1).titanium(1));
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMineRate(1);
+          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate(1);
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
       },

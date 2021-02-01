@@ -20,6 +20,7 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {staticCardProperties} from '../../../src/cards/Card';
+import {TileType} from '../../../src/TileType';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
@@ -153,6 +154,11 @@ describe('RoboticWorkforce', function() {
 
           // Let's make sure we trigger any tag based production
           player.playedCards.push(...Array(5).fill(researchCoordination));
+
+          if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
+            game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
+            game.moonData!.moon.spaces[4].player = player;
+          }
 
           const action = card.play(player);
           if (action !== undefined) {

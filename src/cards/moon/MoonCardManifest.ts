@@ -37,7 +37,7 @@ import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 import {IronExtractionCenter} from './IronExtractionCenter';
 // import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
-// import {LunaConference} from './LunaConference';
+import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
@@ -161,7 +161,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
     {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
     //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
     {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
     //   {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars},
     //   {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},

@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {ISpace} from '../../src/boards/ISpace';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import {TestingUtils, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../src/turmoil/parties/Greens';
 import {Lichen} from '../../src/cards/base/Lichen';
 import {Fish} from '../../src/cards/base/Fish';
@@ -22,7 +22,7 @@ describe('Greens', function() {
     turmoil = game.turmoil!;
     greens = new Greens();
 
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Plant, Microbe and Animal tag you have', function() {

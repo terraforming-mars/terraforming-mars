@@ -27,7 +27,6 @@ export class Capital extends Card implements IProjectCard {
         text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.',
         align: 'left',
       },
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => {
           pb.minus().energy(2).br;
@@ -45,6 +44,7 @@ export class Capital extends Card implements IProjectCard {
       cost: 26,
       adjacencyBonus,
 
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata,
     });
   }

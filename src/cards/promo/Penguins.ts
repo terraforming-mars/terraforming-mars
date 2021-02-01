@@ -20,9 +20,9 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       cost: 7,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oceans(8)),
       metadata: {
         cardNumber: '212',
-        requirements: CardRequirements.builder((b) => b.oceans(8)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

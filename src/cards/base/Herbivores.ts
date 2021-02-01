@@ -26,9 +26,9 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       cost: 12,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(8)),
       metadata: {
         cardNumber: '147',
-        requirements: CardRequirements.builder((b) => b.oxygen(8)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a greenery tile, add an Animal to this card.', (eb) => {
             eb.greenery(CardRenderItemSize.MEDIUM, false).startEffect.animals(1);

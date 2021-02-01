@@ -13,10 +13,10 @@ export class BreathingFilters extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 11,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(7)),
       metadata: {
         description: 'Requires 7% oxygen.',
         cardNumber: '114',
-        requirements: CardRequirements.builder((b) => b.oxygen(7)),
         victoryPoints: 2,
       },
     });

@@ -16,9 +16,9 @@ export class SupportedResearch extends Card implements IProjectCard {
       name: CardName.SUPPORTED_RESEARCH,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
       metadata: {
         cardNumber: 'T14',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),

@@ -17,9 +17,9 @@ export class ParliamentHall extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {
         cardNumber: 'T08',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1).slash().building(3).played;

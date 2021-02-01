@@ -16,9 +16,9 @@ export class CoronaExtractor extends Card implements IProjectCard {
       cost: 10,
       tags: [Tags.SPACE, Tags.ENERGY],
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
         cardNumber: 'C06',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
         description: 'Requires 4 science tags. Increase your energy production 4 steps.',
         renderData: CardRenderer.builder((b) => b.production((pb) => pb.energy(4).digit)),
       },

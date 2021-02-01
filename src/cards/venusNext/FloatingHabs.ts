@@ -21,9 +21,9 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       cost: 5,
       resourceType: ResourceType.FLOATER,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '225',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 MC to add 1 Floater to ANY card', (eb) => {
             eb.megacredits(2).startAction.floaters(1).asterix();

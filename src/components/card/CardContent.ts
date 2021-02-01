@@ -4,12 +4,16 @@ import {CardRequirementsComponent} from './CardRequirementsComponent';
 import {CardVictoryPoints} from './CardVictoryPoints';
 import {CardDescription} from './CardDescription';
 import {CardRenderData} from './CardRenderData';
+import {CardRequirements} from '../../cards/CardRequirements';
 
 export const CardContent = Vue.component('CardContent', {
   props: {
     metadata: {
       type: Object as () => CardMetadata,
       required: true,
+    },
+    requirements: {
+      type: Object as () => CardRequirements,
     },
     isCorporation: {
       type: Boolean,
@@ -33,7 +37,7 @@ export const CardContent = Vue.component('CardContent', {
   },
   template: `
         <div :class="getClasses()">
-            <CardRequirementsComponent v-if="metadata.requirements !== undefined" :requirements="metadata.requirements"/>
+            <CardRequirementsComponent v-if="requirements !== undefined" :requirements="requirements"/>
             <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
             <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
             <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />

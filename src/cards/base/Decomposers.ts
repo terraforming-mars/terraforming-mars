@@ -19,9 +19,9 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
       cost: 5,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(3)),
       metadata: {
         cardNumber: '131',
-        requirements: CardRequirements.builder((b) => b.oxygen(3)),
         description: 'Requires 3% oxygen.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.', (be) => {

@@ -18,6 +18,7 @@ import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
+import {CardRequirements} from './CardRequirements';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -45,6 +46,7 @@ export interface ICard {
     resourceCount?: number;
     cost?: number;
     cardType: CardType;
+    requirements?: CardRequirements;
     metadata: CardMetadata;
     warning?: string | Message;
 }

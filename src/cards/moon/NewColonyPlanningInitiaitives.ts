@@ -13,10 +13,10 @@ export class NewColonyPlanningInitiaitives extends Card {
       cardType: CardType.ACTIVE,
       cost: 6,
 
+      requirements: CardRequirements.builder((b) => b.colonyRate(2)),
       metadata: {
         description: 'Requires Colony Rate to be 2 or higher. Raise Colony Rate 1 step.',
         cardNumber: 'M31',
-        requirements: CardRequirements.builder((b) => b.colonyRate(2)),
         renderData: CardRenderer.builder((b) => {
           b.moonColonyRate(1);
         }),

@@ -16,9 +16,9 @@ export class TerraformingContract extends Card implements IProjectCard {
       cost: 8,
       tags: [Tags.EARTH],
 
+      requirements: CardRequirements.builder((b) => b.tr(25)),
       metadata: {
         cardNumber: '252',
-        requirements: CardRequirements.builder((b) => b.tr(25)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(4));
         }),

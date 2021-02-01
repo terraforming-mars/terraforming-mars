@@ -471,6 +471,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
 
+  public alloysAreProtected(): boolean {
+    return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
+  }
+
   // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.
   // Search for uses of TileType.OCEAN_CITY for reference.
   public getCitiesCount() {

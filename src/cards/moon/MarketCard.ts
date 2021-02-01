@@ -50,8 +50,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption('', `Buy ${this.tradeResource}`, () => this.getBuyingOption(player)),
-        new SelectOption('', `Sell ${this.tradeResource}`, () => this.getSellingOption(player)),
+        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () => this.getBuyingOption(player)),
+        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -67,7 +67,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     let limit = Math.floor(availableMC / terms.from);
     limit = terms.limit === undefined ? limit : Math.max(limit, terms.limit);
 
-    // TODO(kberg): replace this with a better UI.
+    // TODO(kberg): the messages and UI need work.
+
     return new SelectAmount(
       `Select a number of trades of ${terms.to} ${this.tradeResource} to gain`,
       `Buy ${this.tradeResource}`,
@@ -98,6 +99,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     }
     let limit = player.getResource(this.tradeResource);
     limit = terms.limit === undefined ? limit : Math.max(limit, terms.limit);
+
+    // TODO(kberg): the messages and UI need work.
 
     return new SelectAmount(
       `Select amount of ${this.tradeResource} to sell`,

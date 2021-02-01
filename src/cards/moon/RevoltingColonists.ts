@@ -16,11 +16,11 @@ export class RevoltingColonists extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON, Tags.EVENT],
       cost: 3,
+      requirements: CardRequirements.builder((b) => b.colonyRate(4)),
 
       metadata: {
         description: 'Requires 4 Colony Rate. All players pay 3MC for each colony tile they own.',
         cardNumber: 'M51',
-        requirements: CardRequirements.builder((b) => b.colonyRate(4)),
         renderData: CardRenderer.builder((b) => {
           b.megacredits(3).slash().tile(TileType.MOON_COLONY, false).asterix();
         }),

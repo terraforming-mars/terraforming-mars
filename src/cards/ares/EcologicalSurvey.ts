@@ -37,38 +37,38 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     });
   }
 
-  private hasAdjacencyBonus(player: Player, space: ISpace, bonus: SpaceBonus) {
+  private anyAdjacentSpaceGivesBonus(player: Player, space: ISpace, bonus: SpaceBonus): boolean {
     return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 
-  public onTilePlaced(player: Player, space: ISpace) {
-    if (player.game.phase === Phase.SOLAR || player.id !== space.player?.id) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (cardOwner.game.phase === Phase.SOLAR || cardOwner.id !== activePlayer.id) {
       return;
     }
 
     // Plants
     if (space.bonus.includes(SpaceBonus.PLANT) ||
-        this.hasAdjacencyBonus(player, space, SpaceBonus.PLANT) ||
-        (space.tile?.tileType === TileType.OCEAN && player.playedCards.some((card) => card.name === CardName.ARCTIC_ALGAE))) {
-      player.game.defer(new GainResources(
-        player,
+        this.anyAdjacentSpaceGivesBonus(cardOwner, space, SpaceBonus.PLANT) ||
+        (space.tile?.tileType === TileType.OCEAN && cardOwner.playedCards.some((card) => card.name === CardName.ARCTIC_ALGAE))) {
+      cardOwner.game.defer(new GainResources(
+        cardOwner,
         Resources.PLANTS,
         {
           logMessage: '${0} gained a bonus ${1} because of ${2}',
-          logBuilder: (b) => b.player(player).string(Resources.PLANTS).cardName(this.name),
+          logBuilder: (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name),
         }));
     }
 
     // Microbes and Animals
     ([[ResourceType.MICROBE, SpaceBonus.MICROBE], [ResourceType.ANIMAL, SpaceBonus.ANIMAL]] as [ResourceType, SpaceBonus][]).forEach(([resource, bonus]) => {
-      if (player.playedCards.some((card) => card.resourceType === resource) &&
-          (space.bonus.includes(bonus) || this.hasAdjacencyBonus(player, space, bonus))) {
-        player.game.defer(new AddResourcesToCard(
-          player,
+      if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
+          (space.bonus.includes(bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
+        cardOwner.game.defer(new AddResourcesToCard(
+          cardOwner,
           resource,
           {
             logMessage: '${0} gained a bonus ${1} because of ${2}',
-            logBuilder: (b) => b.player(player).string(resource).cardName(this.name),
+            logBuilder: (b) => b.player(cardOwner).string(resource).cardName(this.name),
           }));
       }
     });

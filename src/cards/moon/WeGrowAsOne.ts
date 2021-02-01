@@ -42,7 +42,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.colonies.forEach((colony) => {
-      if (colony.colonies.indexOf(player.id) > -1) {
+      if (colony.colonies.includes(player.id)) {
         colony.increaseTrack(2);
       } else {
         colony.increaseTrack(1);

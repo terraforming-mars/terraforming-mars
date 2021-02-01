@@ -36,6 +36,7 @@ export class HeavyDutyRovers implements IProjectCard {
     description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise Logistic Rate 1 step.',
     cardNumber: 'M39',
     renderData: CardRenderer.builder((b) => {
+      // TODO(kberg): Can the two tiles abut each other?
       b.megacredits(4).slash().tile(TileType.MOON_MINE, false).tile(TileType.MOON_ROAD, false);
       b.br;
       b.moonLogisticsRate(1);

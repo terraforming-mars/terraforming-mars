@@ -145,6 +145,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.DISEASE) {
         classes.push('card-resource');
         classes.push('card-resource-disease');
+      } else if (type === CardRenderItemType.DATA_RESOURCE) {
+        classes.push('card-resource');
+        classes.push('card-resource-data');
       }
 
       // round tags
@@ -262,7 +265,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '?';
       }
       if (this.item.type === CardRenderItemType.MOON) {
-        return 'MOON';
+        return '<div class="card-tag-moon-on-card"></div>';
       }
       if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
         return '<div class="board-cube--bronze"></div>';
@@ -273,17 +276,17 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
         return '<div class="card-increase-colony-rate"></div>';
       }
+      if (this.item.type === CardRenderItemType.MOON_MINE) {
+        return '<div class="card-play-moon-mine"></div>';
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
+        return '<div class="card-increase-mining-rate"></div>';
+      }
       if (this.item.type === CardRenderItemType.MOON_ROAD) {
         return '<div class="card-play-moon-road"></div>';
       }
       if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
         return '<div class="card-increase-logistics-rate"></div>';
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE) {
-        return '<div class="card-play-moon-mine"></div>';
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE_RATE) {
-        return '<div class="card-increase-mine-rate"></div>';
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {

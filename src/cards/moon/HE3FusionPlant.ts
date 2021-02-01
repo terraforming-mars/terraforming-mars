@@ -27,11 +27,12 @@ export class HE3FusionPlant implements IProjectCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'Requires Mining Rate of 2 or higher. Increase your energy production 1 step for each mining tile on the Moon.',
+    description: 'Requires Mining Rate of 2 or higher. ' +
+      'Increase your energy production 1 step for each mining tile on the Moon.',
     cardNumber: 'M48',
     requirements: CardRequirements.builder((b) => b.miningRate(2)),
     renderData: CardRenderer.builder((b) => {
-      b.production((pb) => pb.energy(1)).slash().moonMine();
+      b.production((pb) => pb.energy(1)).slash().tile(TileType.MOON_MINE, false);
     }),
   };
 }

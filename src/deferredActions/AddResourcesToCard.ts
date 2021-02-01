@@ -5,6 +5,7 @@ import {ICard} from '../cards/ICard';
 import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
+import {LogBuilder} from '../LogBuilder';
 
 export namespace AddResourcesToCard {
   export interface Options {
@@ -12,6 +13,8 @@ export namespace AddResourcesToCard {
     restrictedTag?: Tags;
     title?: string;
     filter?: (card: ICard) => boolean;
+    logMessage?: string;
+    logBuilder?: (builder: LogBuilder) => void;
   }
 }
 

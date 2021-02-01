@@ -11,7 +11,7 @@ import {IActionCard} from '../ICard';
 export interface Terms {
   from: number,
   to: number,
-  limit: number | undefined
+  limit: number
 }
 
 // An abstract base class for SteelMarketMonopolists and TitaniumMarketMonopolists
@@ -50,8 +50,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption('', `Buy ${this.tradeResource}`, () => this.getBuyingOption(player)),
-        new SelectOption('', `Sell ${this.tradeResource}`, () => this.getSellingOption(player)),
+        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () => this.getBuyingOption(player)),
+        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () => this.getSellingOption(player)),
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -65,22 +65,22 @@ export abstract class MarketCard extends Card implements IActionCard {
     const availableMC = (player.canUseHeatAsMegaCredits) ? player.megaCredits + player.heat : player.megaCredits;
     const terms = this.buyingTerms;
     let limit = Math.floor(availableMC / terms.from);
-    limit = terms.limit === undefined ? limit : Math.max(limit, terms.limit);
+    limit = Math.min(limit, terms.limit);
 
-    // TODO(kberg): replace this with a better UI.
     return new SelectAmount(
-      `Select a number of trades of ${terms.to} ${this.tradeResource} to gain`,
+      `Select a number of trades (${terms.from} MC => ${terms.to} ${this.tradeResource}, max ${limit})`,
       `Buy ${this.tradeResource}`,
       (tradesRequested: number) => {
         const cashDue = tradesRequested * terms.from;
+        const unitsEarned = tradesRequested * terms.to;
         if (player.canUseHeatAsMegaCredits) {
           const howToPay = new SelectHowToPayDeferred(player, cashDue, {afterPay: () => {
-            player.setResource(this.tradeResource, tradesRequested);
+            player.setResource(this.tradeResource, unitsEarned);
           }});
           player.game.defer(howToPay);
         } else {
           player.setResource(Resources.MEGACREDITS, -cashDue);
-          player.setResource(this.tradeResource, tradesRequested);
+          player.setResource(this.tradeResource, unitsEarned);
         }
 
         player.game.log('${0} gained ${1} ${2}', (b) => b.player(player).number(tradesRequested).string(this.tradeResource));
@@ -97,15 +97,15 @@ export abstract class MarketCard extends Card implements IActionCard {
       throw new Error('selling from !== 1 not yet supported.');
     }
     let limit = player.getResource(this.tradeResource);
-    limit = terms.limit === undefined ? limit : Math.max(limit, terms.limit);
+    limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
-      `Select amount of ${this.tradeResource} to sell`,
+      `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} MC, max ${limit})`,
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
         player.setResource(Resources.MEGACREDITS, cashEarned);
-        player.setResource(this.tradeResource, unitsSold);
+        player.setResource(this.tradeResource, -unitsSold);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
         return undefined;

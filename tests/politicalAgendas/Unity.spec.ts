@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import {TestingUtils, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../src/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../src/cards/base/VestaShipyard';
@@ -20,7 +20,7 @@ describe('Unity', function() {
     turmoil = game.turmoil!;
     unity = new Unity();
 
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Venus, Earth and Jovian tag you have', function() {

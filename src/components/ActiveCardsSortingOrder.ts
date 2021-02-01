@@ -85,7 +85,7 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.TITAN_SHUTTLES,
   CardName.JOVIAN_LANTERNS,
   CardName.TITAN_AIRSCRAPPING,
-  CardName.TITAN_FLOATER_LAUNCHPAD,
+  CardName.TITAN_FLOATING_LAUNCHPAD,
   CardName.JUPITER_FLOATING_STATION,
   CardName.SATURN_SURFING,
 

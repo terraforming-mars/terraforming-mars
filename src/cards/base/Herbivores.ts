@@ -9,6 +9,7 @@ import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -55,8 +56,8 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     }
 
     public onTilePlaced(cardOwner: Player, space: ISpace) {
-      if (space.player === cardOwner && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
-        cardOwner.addResourceTo(this);
+      if (space.player === cardOwner && space.tile?.tileType === TileType.GREENERY) {
+        cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
       }
     }
     public play(player: Player) {

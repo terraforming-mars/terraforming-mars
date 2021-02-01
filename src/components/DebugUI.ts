@@ -46,6 +46,9 @@ export interface DebugUIModel {
   moon: boolean | unknown[],
   promo: boolean | unknown[],
 }
+
+let throttleTimeout = 0;
+
 export const DebugUI = Vue.component('debug-ui', {
   components: {
     Card,
@@ -67,7 +70,30 @@ export const DebugUI = Vue.component('debug-ui', {
       promo: true,
     } as DebugUIModel;
   },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchString = urlParams.get('search');
+    if (searchString) {
+      this.filterText = searchString;
+    }
+  },
   methods: {
+    updateUrl(newSearchString: string) {
+      if (window.history.pushState) {
+        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?search=' + newSearchString;
+        window.history.pushState({path: newurl}, '', newurl);
+      }
+    },
+    onSearchInput(event: any) {
+      if ( ! event.target) return;
+      const searchString = (event.target as HTMLInputElement).value;
+      if (searchString === this.filterText || searchString.length < 1) return;
+      clearTimeout(throttleTimeout);
+      throttleTimeout = window.setTimeout(() => {
+        this.filterText = searchString;
+        this.updateUrl(searchString);
+      }, 50);
+    },
     toggleAll: function() {
       const data = this.$data;
       data.base = !data.base;
@@ -156,15 +182,18 @@ export const DebugUI = Vue.component('debug-ui', {
   },
   template: `
         <div class="debug-ui-container" :class="getLanguageCssClass()">
-            <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
-            <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
-            <label for="filterDescription-checkbox">
-                <span v-i18n>Filter description</span>
-            </label>&nbsp;
-            <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
-            <label for="sortById-checkbox">
-                <span v-i18n>Sort by ID (work in progress)</span>
-            </label>
+            <h1>Debug UI</h1>
+            <div class="form-group">
+              <input class="form-input form-input-line" placeholder="filter" :value="filterText" v-on:keyup.prevent="onSearchInput"></input>
+              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
+              <label for="filterDescription-checkbox">
+                  <span v-i18n>Filter description</span>
+              </label>
+              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
+              <label for="sortById-checkbox">
+                  <span v-i18n>Sort by ID (work in progress)</span>
+              </label>
+            </div>
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
             <button id="toggle-checkbox" v-on:click="toggleAll()">

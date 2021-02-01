@@ -9,7 +9,7 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
@@ -49,7 +49,7 @@ export class Philares extends Card implements CorporationCard {
       });
   }
 
-  private selectResources(player: Player, resourceCount: number) {
+  private selectResources(tilePlayer: Player, philaresPlayer: Player, resourceCount: number) {
     let megacreditsAmount: number = 0;
     let steelAmount: number = 0;
     let titaniumAmount: number = 0;
@@ -92,22 +92,22 @@ export class Philares extends Card implements CorporationCard {
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        player.megaCredits += megacreditsAmount;
-        player.steel += steelAmount;
-        player.titanium += titaniumAmount;
-        player.plants += plantsAmount;
-        player.energy += energyAmount;
-        player.heat += heatAmount;
+        philaresPlayer.megaCredits += megacreditsAmount;
+        philaresPlayer.steel += steelAmount;
+        philaresPlayer.titanium += titaniumAmount;
+        philaresPlayer.plants += plantsAmount;
+        philaresPlayer.energy += energyAmount;
+        philaresPlayer.heat += heatAmount;
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
-    player.game.defer(new DeferredAction(
-      player,
+    tilePlayer.game.defer(new DeferredAction(
+      philaresPlayer,
       () => selectResources,
-    ));
+    ), tilePlayer.id === philaresPlayer.id ? Priority.GAIN_RESOURCE_OR_PRODUCTION : Priority.OPPONENT_TRIGGER);
   }
 
-  public onTilePlaced(player: Player, space: ISpace): void {
+  public onTilePlaced(player: Player, space: ISpace) {
     const philaresPlayer = player.game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
     if (philaresPlayer === undefined) {
       console.error('Could not find Philares player');
@@ -125,7 +125,7 @@ export class Philares extends Card implements CorporationCard {
           .length;
       }
       if (bonusResource > 0) {
-        this.selectResources(philaresPlayer, bonusResource);
+        this.selectResources(player, philaresPlayer, bonusResource);
       }
     }
   }

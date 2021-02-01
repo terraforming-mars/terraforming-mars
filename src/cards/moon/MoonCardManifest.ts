@@ -98,7 +98,7 @@ import {TychoRoadNetwork} from './TychoRoadNetwork';
 import {UndergroundDetonators} from './UndergroundDetonators';
 // import {UndermoonDrugLordsNetwork} from './UndermoonDrugLordsNetwork';
 import {WaterTreatmentComplex} from './WaterTreatmentComplex';
-// import {WeGrowAsOne} from './WeGrowAsOne';
+import {WeGrowAsOne} from './WeGrowAsOne';
 
 export const MOON_CARD_MANIFEST = new CardManifest({
   module: GameModule.Moon,
@@ -162,7 +162,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
     //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
+    {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
     //   {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars},
     //   {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
     //   // {cardName: CardName.AN_OFFER_HE_CANNOT_REFUSE, Factory: AnOfferHeCannotRefuse, compatibility: GameModule.Turmoil},

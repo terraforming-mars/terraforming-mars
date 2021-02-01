@@ -6,6 +6,8 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../TileType';
 import {CardName} from '../../CardName';
+import {Resources} from '../../Resources';
+import {GainResources} from '../../deferredActions/GainResources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -30,10 +32,12 @@ export class ArcticAlgae extends Card implements IProjectCard {
   }
 
   public onTilePlaced(player: Player, space: ISpace) {
-    if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {
-      player.plants += 2;
+    if (space.tile?.tileType === TileType.OCEAN) {
+      return new GainResources(player, Resources.PLANTS, {count: 2});
     }
+    return;
   }
+
   public play(player: Player) {
     player.plants++;
     return undefined;

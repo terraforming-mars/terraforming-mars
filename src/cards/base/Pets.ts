@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
@@ -44,8 +45,9 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
       if (Board.isCitySpace(space)) {
-        player.addResourceTo(this);
+        return new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name});
       }
+      return;
     }
     public play(player: Player) {
       player.addResourceTo(this);

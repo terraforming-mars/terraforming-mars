@@ -21,8 +21,8 @@ export class TitaniumExtractionCenter extends MoonCard {
         description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.',
         cardNumber: 'M26',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).br;
-          b.production((pb) => pb.titanium(1)).slash().moonMineRate(2);
+          b.minus().titanium(2).br;
+          b.production((pb) => pb.titanium(1)).slash().moonMiningRate(2);
         }),
       },
     }, {

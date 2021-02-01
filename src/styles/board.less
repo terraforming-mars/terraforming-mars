@@ -288,14 +288,23 @@
 	opacity: 0.6;
 }
 
-.hide-tile-button {
-	position: absolute;
-	top: 610px;
-	text-transform: uppercase;
-	border-radius: 4px;
-	font-size: 12px;
-	padding: 1px 10px;
-	color: black;
-	background: #666;
-	cursor: pointer;
+
+.hide-tile-button-container {
+	position: relative;
+	width: 0px;
+	height: 0px;
+
+	.hide-tile-button {
+		position: absolute;
+    width: fit-content;
+    white-space: nowrap;
+    bottom: -560px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-size: @font_size_small;
+    padding: 1px 5px;
+    color: black;
+    background: #666;
+    cursor: pointer;
+	}
 }

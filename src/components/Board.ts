@@ -158,8 +158,11 @@ export const Board = Vue.component('board', {
     getGameBoardClassName: function():string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
-    hideTile: function() {
-      return this.isTileHidden = !this.isTileHidden;
+    toggleHideTile: function() {
+      this.isTileHidden = !this.isTileHidden;
+    },
+    toggleHideTileLabel: function(): string {
+      return this.isTileHidden ? 'show tiles' : 'hide tiles';
     },
     checkHideTile: function():boolean {
       return this.isTileHidden;
@@ -167,7 +170,9 @@ export const Board = Vue.component('board', {
   },
   template: `
     <div :class="getGameBoardClassName()">
-        <div class="hide-tile-button" v-on:click.prevent="hideTile()">Hide tiles</div>
+        <div class="hide-tile-button-container">
+          <div class="hide-tile-button" v-on:click.prevent="toggleHideTile()">{{ toggleHideTileLabel() }}</div>
+        </div>
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>

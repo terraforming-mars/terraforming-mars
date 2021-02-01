@@ -12,7 +12,6 @@ import {CardType} from '../CardType';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
-import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Philares extends Card implements CorporationCard {
   constructor() {
@@ -27,7 +26,7 @@ export class Philares extends Card implements CorporationCard {
         cardNumber: 'R25',
         description: 'You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(47).greenery().secondaryTag(AltSecondaryTag.OXYGEN);
+          b.megacredits(47).nbsp.greenery();
           b.corpBox('effect', (ce) => {
             ce.effect('Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].', (eb) => {
               eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;

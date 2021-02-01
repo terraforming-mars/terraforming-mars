@@ -7,12 +7,9 @@ export interface ClaimedMilestone {
   player: Player;
 }
 
-// TODO(kberg): remove references to milesetone and player by 2020-02-01
 export interface SerializedClaimedMilestone {
   name?: string;
   playerId?: PlayerId;
-  milestone?: IMilestone;
-  player?: Player;
 }
 
 export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMilestone>) : Array<SerializedClaimedMilestone> {
@@ -20,7 +17,7 @@ export function serializeClaimedMilestones(claimedMilestones: Array<ClaimedMiles
     return {
       name: claimedMilestone.milestone.name,
       playerId: claimedMilestone.player.id,
-    } as SerializedClaimedMilestone;
+    };
   });
 }
 
@@ -29,7 +26,7 @@ export function deserializeClaimedMilestones(
   players: Array<Player>,
   milestones: Array<IMilestone>): Array<ClaimedMilestone> {
   return claimedMilestones.map((element: SerializedClaimedMilestone) => {
-    const milestoneName = element.milestone?.name !== undefined ? element.milestone.name : element.name;
+    const milestoneName = element.name;
     if (milestoneName === undefined) {
       throw new Error('Milestone name not found');
     }
@@ -38,7 +35,7 @@ export function deserializeClaimedMilestones(
       throw new Error(`Milestone ${milestoneName} not found when rebuilding Claimed Milestone`);
     }
 
-    const playerId = element.player?.id !== undefined ? element.player.id : element.playerId;
+    const playerId = element.playerId;
     if (playerId === undefined) {
       throw new Error(`Player ID not found when rebuilding claimed milestone ${milestoneName}`);
     }
@@ -47,9 +44,6 @@ export function deserializeClaimedMilestones(
       throw new Error(`Player ${playerId} not found when rebuilding claimed milestone ${milestoneName}`);
     }
 
-    return {
-      milestone: milestone,
-      player: player,
-    } as ClaimedMilestone;
+    return {milestone, player};
   });
 }

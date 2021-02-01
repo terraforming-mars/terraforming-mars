@@ -2,31 +2,34 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class TradeEnvoys implements IProjectCard {
-    public cost = 6;
-    public tags = [];
-    public name = CardName.TRADE_ENVOYS;
-    public cardType = CardType.ACTIVE;
+export class TradeEnvoys extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 6,
+      name: CardName.TRADE_ENVOYS,
+      cardType: CardType.ACTIVE,
 
-    public play(player: Player) {
-      player.colonyTradeOffset++;
-      return undefined;
-    }
+      metadata: {
+        cardNumber: 'C46',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
+            eb.trade().startEffect.text('+1', CardRenderItemSize.LARGE);
+          });
+        }),
+      },
+    });
+  }
 
-    public onDiscard(player: Player): void {
-      player.colonyTradeOffset--;
-    }
+  public play(player: Player) {
+    player.colonyTradeOffset++;
+    return undefined;
+  }
 
-    public metadata: CardMetadata = {
-      cardNumber: 'C46',
-      renderData: CardRenderer.builder((b) => {
-        b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
-          eb.trade().startEffect.text('+1', CardRenderItemSize.LARGE);
-        });
-      }),
-    }
+  public onDiscard(player: Player): void {
+    player.colonyTradeOffset--;
+  }
 }

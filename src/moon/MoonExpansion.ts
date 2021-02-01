@@ -4,10 +4,7 @@ import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
 import {TileType} from '../TileType';
-// import {MoonSerialization} from './MoonSerialization';
-// import {MoonModel} from './MoonModel';
 import {SpaceType} from '../SpaceType';
-// import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -15,10 +12,7 @@ import {Units} from '../Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
-// import {IProjectCard} from '../cards/IProjectCard';
-// import {Units} from '../Units';
-// import {CardName} from '../CardName';
-// import {IMoonCard} from './IMoonCard';
+import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -40,14 +34,15 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon(game: Game, cb: (moonData: IMoonData) => void) {
+  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T) {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
-        return;
+      } else {
+        return cb(game.moonData);
       }
-      cb(game.moonData);
     }
+    return elseCb ? elseCb() : undefined;
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
@@ -108,40 +103,46 @@ export class MoonExpansion {
     });
   }
 
-  public static raiseMiningRate(player: Player) {
+  public static raiseMiningRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.miningRate < 8) {
-        moonData.miningRate++;
-        player.game.log('${0} raised the mining rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_MINING_RATE - moonData.miningRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.miningRate += increment;
+        player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(increment);
+        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }
 
-  public static raiseColonyRate(player: Player) {
+  public static raiseColonyRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.colonyRate < 8) {
-        moonData.colonyRate++;
-        player.game.log('${0} raised the moon colony rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_COLONY_RATE - moonData.colonyRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.colonyRate += increment;
+        player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(count);
+        this.activateLunaFirst(player, player.game, count);
       }
     });
   }
 
-  public static raiseLogisticRate(player: Player) {
+  public static raiseLogisticRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (moonData.logisticRate < 8) {
-        moonData.logisticRate++;
-        player.game.log('${0} raised the logistic rate 1 step', (b) => b.player(player));
-        player.increaseTerraformRatingSteps(1);
-        this.activateLunaFirst(player, player.game);
+      const available = MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
+      const increment = Math.min(count, available);
+      if (increment > 0) {
+        moonData.logisticRate += increment;
+        player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+        player.increaseTerraformRatingSteps(count);
+        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }
 
-  private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game) {
+  private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game, _count: number) {
     // const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     // // TODO(kberg): Have raiseXRate accept a qty parameter so this doesn't log countless times.
     // if (lunaFirstPlayer !== undefined) {

@@ -18,7 +18,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {resetBoard, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {staticCardProperties} from '../../../src/cards/Card';
 
 describe('RoboticWorkforce', function() {
@@ -138,7 +138,7 @@ describe('RoboticWorkforce', function() {
           player = TestPlayers.BLUE.newPlayer();
           redPlayer = TestPlayers.RED.newPlayer();
           game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-          resetBoard(game);
+          TestingUtils.resetBoard(game);
           game.addCityTile(player, '17');
           game.addCityTile(player, '19');
           game.addOceanTile(player, '32');
@@ -154,7 +154,7 @@ describe('RoboticWorkforce', function() {
           // Let's make sure we trigger any tag based production
           player.playedCards.push(...Array(5).fill(researchCoordination));
 
-          const action = card.play(player, player.game);
+          const action = card.play(player);
           if (action !== undefined) {
             if (action instanceof SelectSpace) {
               action.cb(action.availableSpaces[0]);

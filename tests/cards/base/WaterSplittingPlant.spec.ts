@@ -19,7 +19,7 @@ describe('WaterSplittingPlant', function() {
   });
 
   it('Can play', function() {
-    maxOutOceans(player, game, 2);
+    maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
   });
 

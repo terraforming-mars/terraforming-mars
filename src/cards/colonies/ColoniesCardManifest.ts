@@ -104,7 +104,7 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SPINOFF_DEPARTMENT, Factory: SpinoffDepartment},
     {cardName: CardName.SUBZERO_SALT_FISH, Factory: SubZeroSaltFish},
     {cardName: CardName.TITAN_AIRSCRAPPING, Factory: TitanAirScrapping},
-    {cardName: CardName.TITAN_FLOATER_LAUNCHPAD, Factory: TitanFloatingLaunchPad},
+    {cardName: CardName.TITAN_FLOATING_LAUNCHPAD, Factory: TitanFloatingLaunchPad},
     {cardName: CardName.TITAN_SHUTTLES, Factory: TitanShuttles},
     {cardName: CardName.TRADING_COLONY, Factory: TradingColony},
     {cardName: CardName.TRADE_ENVOYS, Factory: TradeEnvoys},

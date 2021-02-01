@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -62,7 +61,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
              player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
       const orOptions = new OrOptions();
       const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
 
@@ -78,7 +77,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
                 targetCard.resourceCount *= 2;
               }
             }
-            game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
+            player.game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
               b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
             });
             return undefined;
@@ -99,7 +98,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
                 resourceCount: 2,
               },
             );
-            game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(foundCards[0]).card(this));
+            player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(foundCards[0]).card(this));
             return undefined;
           },
         ));

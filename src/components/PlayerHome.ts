@@ -20,6 +20,7 @@ import {TopBar} from './TopBar';
 import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';
+import {Phase} from '../../src/Phase';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -80,25 +81,24 @@ export const PlayerHome = Vue.component('player-home', {
     navigatePage: function(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let id: string | undefined = undefined;
+        let idSuffix: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:
-          id = 'shortkey-board';
+          idSuffix = 'board';
           break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
-          id = 'shortkey-playersoverview';
+          idSuffix = 'playersoverview';
           break;
         case KeyboardNavigation.HAND:
-          id = 'shortkey-hand';
+          idSuffix = 'hand';
           break;
         case KeyboardNavigation.COLONIES:
-          id = 'shortkey-colonies';
+          idSuffix = 'colonies';
           break;
-        }
-        if (id === undefined) {
+        default:
           return;
         }
-        const el = document.getElementById(id);
+        const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
           const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
@@ -165,6 +165,9 @@ export const PlayerHome = Vue.component('player-home', {
     isEventCardShown(): boolean {
       return this.hide_event_cards !== '1';
     },
+    isInitialDraftingPhase(): boolean {
+      return (this.player.phase === Phase.INITIALDRAFTING) && this.player.gameOptions.initialDraftVariant;
+    },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
         return (this.isActiveCardShown() ? 'Hide' : 'Show') + ' active cards';
@@ -189,13 +192,17 @@ export const PlayerHome = Vue.component('player-home', {
       }
     },
   },
+  destroyed: function() {
+    window.removeEventListener('keydown', this.navigatePage);
+  },
   mounted: function() {
     dialogPolyfill.default.registerDialog(
       document.getElementById('dialog-default'),
     );
+    window.addEventListener('keydown', this.navigatePage);
   },
   template: `
-        <div v-on:keydown="navigatePage" tabindex="0" id="player-home" :class="'shortkey-no-outline'+(player.turmoil ? ' with-turmoil': '')">
+        <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -330,15 +337,15 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
-                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
-                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 

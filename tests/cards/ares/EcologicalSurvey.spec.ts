@@ -28,14 +28,14 @@ describe('EcologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from

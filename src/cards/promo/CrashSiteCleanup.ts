@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -30,8 +29,8 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(_player: Player, game: Game) {
-    return game.someoneHasRemovedOtherPlayersPlants;
+  public canPlay(player: Player) {
+    return player.game.someoneHasRemovedOtherPlayersPlants;
   }
 
   public play(player: Player) {

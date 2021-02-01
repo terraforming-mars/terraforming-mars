@@ -13,17 +13,21 @@ export class StealResources implements DeferredAction {
         public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
   ) {}
 
+  // Set this when you want to get a callback when the steal is completed.
+  public stealComplete: () => void = () => {};
+
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.setResource(this.resource, this.count);
       return undefined;
     }
 
-    let candidates: Array<Player> = [];
+    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
     if (this.resource === Resources.PLANTS) {
-      candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0 && !p.plantsAreProtected());
-    } else {
-      candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
+      candidates = candidates.filter((p) => !p.plantsAreProtected());
+    }
+    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
+      candidates = candidates.filter((p) => !p.alloysAreProtected());
     }
 
     if (candidates.length === 0) {
@@ -38,6 +42,7 @@ export class StealResources implements DeferredAction {
         () => {
           candidate.setResource(this.resource, -qtyToSteal, this.player.game, this.player);
           this.player.setResource(this.resource, qtyToSteal);
+          this.stealComplete();
           return undefined;
         },
       );

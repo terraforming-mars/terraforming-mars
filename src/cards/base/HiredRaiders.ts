@@ -46,7 +46,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
-      if (target.steel > 0) {
+      if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountStolen = Math.min(2, target.steel);
         const optionTitle = 'Steal ' + amountStolen + ' steel from ' + target.name;
 

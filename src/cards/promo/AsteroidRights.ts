@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -53,7 +52,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
     return player.canAfford(1) || this.resourceCount > 0;
   }
 
-  public action(player: Player, game: Game) {
+  public action(player: Player) {
     const canAddAsteroid = player.canAfford(1);
     const hasAsteroids = this.resourceCount > 0;
     const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
@@ -76,7 +75,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
     });
 
     const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(this);
       LogHelper.logAddResource(player, this);
 
@@ -84,7 +83,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
     });
 
     const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(foundCards[0], 1);
       LogHelper.logAddResource(player, foundCards[0]);
 

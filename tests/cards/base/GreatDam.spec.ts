@@ -6,13 +6,13 @@ import {Resources} from '../../../src/Resources';
 import {maxOutOceans, TestPlayers} from '../../TestingUtils';
 
 describe('GreatDam', function() {
-  let card : GreatDam; let player : Player; let game : Game;
+  let card : GreatDam; let player : Player;
 
   beforeEach(function() {
     card = new GreatDam();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -20,7 +20,7 @@ describe('GreatDam', function() {
   });
 
   it('Should play', function() {
-    maxOutOceans(player, game, 4);
+    maxOutOceans(player, 4);
     expect(card.canPlay(player)).is.true;
     card.play(player);
 

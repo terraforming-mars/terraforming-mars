@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -59,8 +58,8 @@ export class TharsisRepublic extends Card implements CorporationCard {
     }
     return;
   }
-  public play(player: Player, game: Game) {
-    if (game.getPlayers().length === 1) {
+  public play(player: Player) {
+    if (player.game.getPlayers().length === 1) {
       // Get bonus for 2 neutral cities
       player.addProduction(Resources.MEGACREDITS, 2);
     }

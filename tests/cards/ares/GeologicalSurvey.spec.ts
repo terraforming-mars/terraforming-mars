@@ -25,23 +25,23 @@ describe('GeologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
   });
 
 
@@ -107,13 +107,13 @@ describe('GeologicalSurvey', function() {
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
 
-    Utils.resetBoard(game);
+    Utils.TestingUtils.resetBoard(game);
 
     game.addGreenery(player, '11');
     Utils.runAllActions(game);
     expect(player.steel).eq(0);
 
-    Utils.resetBoard(game);
+    Utils.TestingUtils.resetBoard(game);
 
     Utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
     game.addGreenery(player, '11');

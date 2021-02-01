@@ -46,7 +46,7 @@ describe('HE3ProductionQuotas', () => {
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.steel = 3;
-    spaces[3].tile = {tileType: TileType.MOON_MINE};
+    spaces[3].tile = {tileType: TileType.MOON_ROAD};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 

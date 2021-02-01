@@ -59,6 +59,7 @@ export class Server {
     const turmoil = getTurmoil(game);
 
     return {
+      canUseHeatAsMegaCredits: player.canUseHeatAsMegaCredits,
       cardsInHand: getCards(player, player.cardsInHand, false),
       draftedCards: getCards(player, player.draftedCards, false),
       milestones: getMilestones(game),
@@ -368,6 +369,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
 
   return players.map((player) => {
     return {
+      canUseHeatAsMegaCredits: player.canUseHeatAsMegaCredits,
       color: player.color,
       corporationCard: getCorporationCard(player),
       energy: player.energy,

@@ -17,12 +17,12 @@ export class LunaConference extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.SCIENCE, Tags.MOON, Tags.EVENT],
       cost: 5,
+      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
 
       metadata: {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there. ' +
         'Gain 2 MC per road tile on the Moon. Gain 2MC per colony tile on the Moon.',
         cardNumber: 'M58',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
         renderData: CardRenderer.builder((b) => {
           b.megacredits(2).slash().tile(TileType.MOON_ROAD, false).br;
           b.megacredits(2).slash().tile(TileType.MOON_COLONY, false).asterix().br;

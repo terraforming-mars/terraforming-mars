@@ -22,6 +22,10 @@ export class DecreaseAnyProduction implements DeferredAction {
       candidates = this.player.game.getPlayers().filter((p) => p.getProduction(this.resource) >= this.count);
     }
 
+    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
+      candidates = candidates.filter((candidate) => !candidate.alloysAreProtected());
+    }
+
     if (candidates.length === 0) {
       return undefined;
     }

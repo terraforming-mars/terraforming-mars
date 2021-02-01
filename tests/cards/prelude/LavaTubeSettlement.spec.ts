@@ -7,7 +7,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {resetBoard, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('LavaTubeSettlement', function() {
   let card : LavaTubeSettlement; let player : Player; let game : Game;
@@ -16,11 +16,11 @@ describe('LavaTubeSettlement', function() {
     card = new LavaTubeSettlement();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   after(function() {
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Can\'t play without energy production', function() {

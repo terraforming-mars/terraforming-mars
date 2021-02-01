@@ -159,8 +159,10 @@ export class CardRequirement {
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
-      throw 'Should use subclass satisfies()';
+      throw `Use subclass satisfies() for requirement type ${this.type}`;
     }
+
+    return false;
   }
 }
 

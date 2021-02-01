@@ -11,7 +11,7 @@ import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 // import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
-// import {CosmicRadiation} from './CosmicRadiation';
+import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
@@ -41,13 +41,15 @@ import {LTFPrivileges} from './LTFPrivileges';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
+import {LunaProjectOffice} from './LunaProjectOffice';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
 // import {LunarIndependenceWar} from './LunarIndependenceWar';
 // import {LunarIndustryComplex} from './LunarIndustryComplex';
-// import {LunarMineUrbanization} from './LunarMineUrbanization';
+import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
+import {LunarSecurityStations} from './LunarSecurityStations';
 // import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
 // import {LunaSenate} from './LunaSenate';
@@ -71,12 +73,12 @@ import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
-// import {OffWorldCityLiving} from './OffWorldCityLiving';
+import {OffWorldCityLiving} from './OffWorldCityLiving';
 // import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 // import {ProcessorFactory} from './ProcessorFactory';
-// import {RevoltingColonists} from './RevoltingColonists';
+import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
 // import {RustEatingBacteria} from './RustEatingBacteria';
@@ -120,7 +122,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNAR_DUST_PROCESSING_PLANT, Factory: LunarDustProcessingPlant},
     {cardName: CardName.DEEP_LUNAR_MINING, Factory: DeepLunarMining},
     {cardName: CardName.ANCIENT_SHIPYARDS, Factory: AncientShipyards},
-    // {cardName: CardName.LUNA_PROJECT_OFFICE, Factory: LunaProjectOffice},
+    {cardName: CardName.LUNA_PROJECT_OFFICE, Factory: LunaProjectOffice},
     {cardName: CardName.LUNA_RESORT, Factory: LunaResort},
     {cardName: CardName.LUNAR_OBSERVATION_POST, Factory: LunarObservationPost},
     {cardName: CardName.MINING_ROBOTS_MANUF_CENTER, Factory: MiningRobotsManufCenter},
@@ -142,7 +144,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
     {cardName: CardName.HELIOSTAT_MIRROR_ARRAY, Factory: HeliostatMirrorArray},
-    //   // {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
+    {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
     {cardName: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY, Factory: HypersensitiveSiliconChipFactory},
     {cardName: CardName.COPERNICUS_SOLAR_ARRAYS, Factory: CopernicusSolarArrays},
     {cardName: CardName.DARKSIDE_INCUBATION_PLANT, Factory: DarksideIncubationPlant},
@@ -152,11 +154,11 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HE3_REFINERY, Factory: HE3Refinery},
     {cardName: CardName.HE3_LOBBYISTS, Factory: HE3Lobbyists},
     //   // Start of second pack.
-    //   {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
-    //   {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
-    //   {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
+    {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
+    {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
+    {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
-    //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
+    {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
     //   {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
     {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},

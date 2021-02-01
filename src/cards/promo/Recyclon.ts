@@ -45,7 +45,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
       return undefined;
     }
     public onCardPlayed(player: Player, card: IProjectCard) {
-      if (card.tags.indexOf(Tags.BUILDING) === -1 || !player.isCorporation(this.name)) {
+      if (card.tags.includes(Tags.BUILDING) === false || !player.isCorporation(this.name)) {
         return undefined;
       }
       if (this.resourceCount < 2) {

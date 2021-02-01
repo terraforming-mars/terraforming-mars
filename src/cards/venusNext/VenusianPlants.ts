@@ -80,6 +80,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

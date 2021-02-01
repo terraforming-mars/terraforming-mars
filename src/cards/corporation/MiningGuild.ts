@@ -39,7 +39,7 @@ export class MiningGuild extends Card implements CorporationCard {
     if (
       player.isCorporation(this.name) &&
             space.player === player &&
-            (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)) {
+            (space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM))) {
       player.addProduction(Resources.STEEL);
     }
   }

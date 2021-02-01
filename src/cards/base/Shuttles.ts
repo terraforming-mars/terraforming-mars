@@ -39,7 +39,7 @@ export class Shuttles extends Card implements IProjectCard {
     return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 2;
     }
     return 0;

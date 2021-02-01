@@ -33,7 +33,7 @@ export class PointLuna extends Card implements CorporationCard {
   }
   public onCardPlayed(player: Player, card: IProjectCard) {
     const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
-    if (player.isCorporation(this.name) && card.tags.indexOf(Tags.EARTH) !== -1) {
+    if (player.isCorporation(this.name) && card.tags.includes(Tags.EARTH)) {
       player.drawCard(tagCount);
     }
   }

@@ -1604,8 +1604,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getCardCost(card),
       this.canUseSteel(card),
       this.canUseTitanium(card),
-      this.canUseMicrobes(card),
       this.canUseFloaters(card),
+      this.canUseMicrobes(card),
       MoonExpansion.adjustedReserveCosts(this, card),
     );
 

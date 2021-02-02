@@ -87,6 +87,7 @@ import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
 // import {SolarPanelFoundry} from './SolarPanelFoundry';
 import {SphereHabitats} from './SphereHabitats';
+import {StagingStationBehemoth} from './StagingStationBehemoth';
 import {SteelMarketMonopolists} from './SteelMarketMonopolists';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
 // import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
@@ -172,7 +173,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: GameModule.Colonies},
     //   {cardName: CardName.DARKSIDE_MINING_SYNDICATE, Factory: DarksideMiningSyndicate},
     //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: GameModule.Colonies},
-    //   // {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
+    {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     //   {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     //   {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},

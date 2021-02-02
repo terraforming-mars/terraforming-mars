@@ -18,9 +18,9 @@ export class UrbanDecomposers extends Card implements IProjectCard {
       name: CardName.URBAN_DECOMPOSERS,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.colonies().cities()),
       metadata: {
         cardNumber: 'C48',
-        requirements: CardRequirements.builder((b) => b.colonies().cities()),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).microbes(2).asterix();
         }),

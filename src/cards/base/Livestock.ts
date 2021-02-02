@@ -21,9 +21,9 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
       cost: 13,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(9)),
       metadata: {
         cardNumber: '184',
-        requirements: CardRequirements.builder((b) => b.oxygen(9)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

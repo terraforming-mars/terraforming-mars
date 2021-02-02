@@ -18,9 +18,9 @@ export class RedTourismWave extends Card implements IProjectCard {
       name: CardName.RED_TOURISM_WAVE,
       cardType: CardType.EVENT,
 
+      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
       metadata: {
         cardNumber: 'T12',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().emptyTile('normal', CardRenderItemSize.SMALL).asterix();
         }),

@@ -16,9 +16,9 @@ export class LunaGovernor extends Card implements IProjectCard {
       name: CardName.LUNA_GOVERNOR,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 3)),
       metadata: {
         cardNumber: 'C20',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 3)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2));
         }),

@@ -19,10 +19,10 @@ export class BiomassCombustors extends Card implements IProjectCard {
       cost: 4,
       productionBox: Units.of({energy: 2}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
         description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
         cardNumber: '183',
-        requirements: CardRequirements.builder((b) => b.oxygen(6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().plants(-1).any.br;

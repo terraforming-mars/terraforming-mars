@@ -8,10 +8,10 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {Pets} from '../../../src/cards/base/Pets';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TestPlayers} from '../../TestingUtils';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('EcologicalSurvey', function() {
   let card : EcologicalSurvey;
@@ -77,10 +77,7 @@ describe('EcologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    game.deferredActions.peek()!.execute();
-    game.deferredActions.pop();
-    game.deferredActions.peek()!.execute();
-    game.deferredActions.pop();
+    TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);
@@ -104,6 +101,7 @@ describe('EcologicalSurvey', function() {
 
     player.plants = 0;
     game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    TestingUtils.runAllActions(game);
     expect(player.plants).eq(3);
   });
 
@@ -119,6 +117,7 @@ describe('EcologicalSurvey', function() {
     game.phase = Phase.SOLAR;
     player.plants = 0;
     game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    TestingUtils.runAllActions(game);
     expect(player.plants).eq(2);
   });
 });

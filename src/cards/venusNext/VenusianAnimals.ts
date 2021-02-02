@@ -20,9 +20,9 @@ export class VenusianAnimals extends Card implements IResourceCard {
       cost: 15,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.venus(18)),
       metadata: {
         cardNumber: '259',
-        requirements: CardRequirements.builder((b) => b.venus(18)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Science tag, including this, add 1 Animal to this card.', (eb)=> {
             eb.science().played.startEffect.animals(1);

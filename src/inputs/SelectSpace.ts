@@ -13,7 +13,7 @@ export class SelectSpace implements PlayerInput {
         public availableSpaces: Array<ISpace>,
         public cb: (space: ISpace) => OrOptions | SelectSpace | undefined) {
       if (availableSpaces.length === 0) {
-        throw 'No available spaces';
+        throw new Error('No available spaces');
       }
     }
 }

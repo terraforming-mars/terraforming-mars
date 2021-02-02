@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../src/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../src/cards/base/VestaShipyard';
@@ -20,7 +20,7 @@ describe('Unity', function() {
     turmoil = game.turmoil!;
     unity = new Unity();
 
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Venus, Earth and Jovian tag you have', function() {
@@ -40,12 +40,12 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 1: Your titanium resources are worth 1 MC extra', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[0].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[0].id);
     expect(player.getTitaniumValue()).to.eq(4);
   });
 
   it('Ruling policy 2: Spend 4 MC to gain 2 titanium or add 2 floaters to any card', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[1].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[1].id);
 
     const unityPolicy = UNITY_POLICY_2;
     player.megaCredits = 8;
@@ -69,7 +69,7 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 3: Spend 4 MC to draw a Space card', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[2].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[2].id);
 
     const unityPolicy = UNITY_POLICY_3;
     player.megaCredits = 7;
@@ -85,7 +85,7 @@ describe('Unity', function() {
   });
 
   it('Ruling policy 4: Cards with Space tags cost 2 MC less to play', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[3].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, unity, unity.policies[3].id);
 
     const card = new VestaShipyard();
     expect(player.getCardCost(card)).to.eq(card.cost - 2);

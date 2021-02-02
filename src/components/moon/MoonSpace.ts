@@ -7,9 +7,9 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],
   [TileType.MOON_COLONY, 'colony'],
   [TileType.MOON_MINE, 'mine'],
-  [TileType.LUNA_TRADE_STATION, 'lunar-trade-station'],
-  [TileType.LUNA_MINING_HUB, 'lunar-mining-hub'],
-  [TileType.LUNA_TRAIN_STATION, 'lunar-train-station'],
+  [TileType.LUNA_TRADE_STATION, 'luna-trade-station'],
+  [TileType.LUNA_MINING_HUB, 'luna-mining-hub'],
+  [TileType.LUNA_TRAIN_STATION, 'luna-train-station'],
 ]);
 
 export const MoonSpace = Vue.component('moon-space', {

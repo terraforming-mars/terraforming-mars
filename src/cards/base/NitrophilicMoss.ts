@@ -17,9 +17,9 @@ export class NitrophilicMoss extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
         cardNumber: '146',
-        requirements: CardRequirements.builder((b) => b.oceans(3)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(2);

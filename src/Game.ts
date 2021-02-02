@@ -41,6 +41,7 @@ import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
+import {GainResources} from './deferredActions/GainResources';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
@@ -53,7 +54,6 @@ import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './ares/IAresData';
-import {Multiset} from './utils/Multiset';
 import {AgendaStyle} from './turmoil/PoliticalAgendas';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
@@ -1290,10 +1290,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
-    let startingResources: Multiset<Resources | ResourceType> | undefined = undefined;
-    AresHandler.ifAres(this, () => {
-      startingResources = AresHandler.beforeTilePlacement(player);
-    });
     const initialTileTypeForAres = space.tile?.tileType;
     const coveringExistingTile = space.tile !== undefined;
 
@@ -1301,7 +1297,6 @@ export class Game implements ISerializable<SerializedGame> {
     this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
-
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
         space.bonus.forEach((spaceBonus) => {
@@ -1322,40 +1317,28 @@ export class Game implements ISerializable<SerializedGame> {
       TurmoilHandler.resolveTilePlacementBonuses(player, spaceType);
 
       if (arcadianCommunityBonus) {
-        player.megaCredits += 3;
+        this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
       }
     } else {
       space.player = undefined;
     }
 
-    // Mining Guild tile placement effects should resolve before removing space.player for Oceans
     this.players.forEach((p) => {
-      if (p.corporationCard !== undefined &&
-          p.corporationCard.onTilePlaced !== undefined) {
-        p.corporationCard.onTilePlaced(p, space);
-      }
+      p.corporationCard?.onTilePlaced?.(p, player, space);
       p.playedCards.forEach((playedCard) => {
-        if (playedCard.onTilePlaced !== undefined) {
-          playedCard.onTilePlaced(p, space);
-        }
+        playedCard.onTilePlaced?.(p, player, space);
       });
     });
 
-    if (tile.tileType === TileType.OCEAN) {
-      space.player = undefined;
-    }
 
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
-
-      // Must occur after all other onTilePlaced operations.
-      AresHandler.afterTilePlacement(player, startingResources);
     });
   }
 
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
     space.tile = tile;
-    space.player = player;
+    space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 

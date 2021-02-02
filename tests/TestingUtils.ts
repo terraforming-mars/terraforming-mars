@@ -79,24 +79,37 @@ export class TestingUtils {
     turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
     game.phase = Phase.ACTION;
   };
+
+  // Just shortcuts to some often called methods
+  // related to the deferred actions queue
+  public static runAllActions(game: Game) {
+    game.deferredActions.runAll(() => {});
+  }
+
+  public static runNextAction(game: Game) {
+    const action = game.deferredActions.pop();
+    if (action !== undefined) {
+      game.deferredActions.run(action, () => {});
+    }
+  }
+
+  public static executeNextAction(game: Game) {
+    const action = game.deferredActions.pop();
+    if (action === undefined) {
+      throw new Error('No action in queue.');
+    }
+    return action.execute();
+  }
 }
 
 export const maxOutOceans = function(player: Player, toValue: number = 0): Array<ISpace> {
   return TestingUtils.maxOutOceans(player, toValue);
 };
 
-export const resetBoard = function(game: Game): void {
-  TestingUtils.resetBoard(game);
-};
 
 export const setCustomGameOptions = function(options: object = {}): GameOptions {
   return TestingUtils.setCustomGameOptions(options);
 };
-
-export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
-  TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, party, policyId);
-};
-
 
 // TODO: Move TestPlayers and TestPlayerFactory to its own file.
 // This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.

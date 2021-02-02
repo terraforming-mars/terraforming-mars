@@ -219,10 +219,15 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.PLACE_DELEGATES:
         if (game.turmoil !== undefined) {
-          const qty = Math.min(quantity, game.turmoil.getDelegates(player.id));
+          const playerHasLobbyDelegate = game.turmoil.lobby.has(player.id);
+          let availablePlayerDelegates = game.turmoil.getDelegates(player.id);
+          if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
+
+          const qty = Math.min(quantity, availablePlayerDelegates);
 
           for (let i = 0; i < qty; i++) {
-            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, false));
+            const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
+            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, fromLobby));
           }
         }
         break;

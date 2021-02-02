@@ -16,9 +16,9 @@ export class QuantumCommunications extends Card implements IProjectCard {
       name: CardName.QUANTUM_COMMUNICATIONS,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
         cardNumber: '079',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1).slash().colonies(1, CardRenderItemSize.SMALL).any;

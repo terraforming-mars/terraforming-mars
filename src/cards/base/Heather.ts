@@ -16,9 +16,9 @@ export class Heather extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 6,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-14)),
       metadata: {
         cardNumber: '178',
-        requirements: CardRequirements.builder((b) => b.temperature(-14)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).plants(1);
         }),

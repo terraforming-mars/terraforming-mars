@@ -16,10 +16,10 @@ export class LunaStagingStation extends MoonCard {
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 12,
 
+      requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {
         description: 'Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise Logistic Rate 2 steps.',
         cardNumber: 'M30',
-        requirements: CardRequirements.builder((b) => b.logisticRate(2)),
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
           b.moonLogisticsRate(2);

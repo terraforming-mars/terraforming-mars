@@ -16,10 +16,10 @@ export class TitaniumMarketMonopolists extends MarketCard {
         cardType: CardType.ACTIVE,
         cost: 21,
 
+        requirements: CardRequirements.builder((b) => b.miningRate(3)),
         metadata: {
           description: 'Requires Mining Rate to be 3 or higher.',
           cardNumber: 'M29',
-          requirements: CardRequirements.builder((b) => b.miningRate(3)),
           renderData: CardRenderer.builder((b) => {
             b.action('Spend 2X MC to gain X titanium [max 8MC]', (eb) => {
               eb.megacredits(2).multiplier.startAction.text('X').titanium(1).asterix();

@@ -53,6 +53,7 @@ A [.env](https://www.npmjs.com/package/dotenv) file allows you to store environm
 * `ASSET_CACHE_MAX_AGE`: (default 0) How many seconds should assets (fonts, stylesheets, images) be cached by browsers
 * `SERVER_ID`: (default random) Static pass phrase to restrict access to /games-overview and /api/games endpoints
 * `LOCAL_FS_DB`: When non-empty, stores game states in JSON files. Good for local development and debugging, bad for hosting lots of games.
+* `LOG_LENGTH`: (default 50) The number of lines of history shown in the game log 
 
 A `.env.sample` file can be used as a template. You can rename it to `.env` and it will take effect in your environment. Note that `.env` is ignored in source control.
 

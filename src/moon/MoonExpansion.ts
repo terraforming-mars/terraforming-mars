@@ -165,14 +165,17 @@ export class MoonExpansion {
     MoonExpansion.ifMoon(game, (moonData) => {
       tiles = moonData.moon.spaces.filter(
         (space) => {
-          const spaceTileType = space.tile?.tileType;
+          if (space.tile === undefined) {
+            return false;
+          }
+          const type = space.tile.tileType;
           let include: boolean = true;
           if (tileType === TileType.MOON_COLONY) {
-            include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_COLONY || type === TileType.LUNAR_MINE_URBANIZATION;
           } else if (tileType === TileType.MOON_MINE) {
-            include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && spaceTileType === tileType;
+            include = include && type === tileType;
           }
 
           if (surfaceOnly) {

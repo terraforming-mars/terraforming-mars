@@ -22,9 +22,9 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       name: CardName.SELF_REPLICATING_ROBOTS,
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '210',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.', (eb) => {
             eb.empty().startAction.selfReplicatingRobots();

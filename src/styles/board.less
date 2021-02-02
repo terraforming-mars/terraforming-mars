@@ -57,7 +57,7 @@
     width: 16px;
     height: 16px;
     margin: 0 0 0 2px;
-    border-radius: 2px;
+		border-radius: 2px;
 
 	&.board-space-bonus-pos--1 {
 		margin: 15px 0 0 5px;
@@ -242,8 +242,6 @@
 
 	.board-space-bonuses {
 		position: absolute;
-
-
 	}
 
 	&.board-space--available {
@@ -284,3 +282,27 @@
     margin-bottom: -1px;
 }
 
+.board-hidden-tile{
+	opacity: 0.4;
+}
+
+
+.hide-tile-button-container {
+	position: relative;
+	width: 0px;
+	height: 0px;
+
+	.hide-tile-button {
+		position: absolute;
+    width: fit-content;
+    white-space: nowrap;
+    bottom: -560px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-size: @font_size_small;
+    padding: 1px 5px;
+    color: black;
+    background: #666;
+    cursor: pointer;
+	}
+}

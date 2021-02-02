@@ -23,9 +23,9 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
       cost: 22,
       resourceType: ResourceType.FLOATER,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '248',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
             eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);

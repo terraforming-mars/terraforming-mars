@@ -26,7 +26,7 @@ import {GeodesicTents} from './GeodesicTents';
 import {Habitat14} from './Habitat14';
 import {HE3FusionPlant} from './HE3FusionPlant';
 import {HE3Lobbyists} from './HE3Lobbyists';
-// import {HE3ProductionQuotas} from './HE3ProductionQuotas';
+import {HE3ProductionQuotas} from './HE3ProductionQuotas';
 import {HE3Refinery} from './HE3Refinery';
 import {HeavyDutyRovers} from './HeavyDutyRovers';
 import {HeliostatMirrorArray} from './HeliostatMirrorArray';
@@ -37,7 +37,7 @@ import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 import {IronExtractionCenter} from './IronExtractionCenter';
 // import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
-// import {LunaConference} from './LunaConference';
+import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 // import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
@@ -91,7 +91,7 @@ import {SubterraneanHabitats} from './SubterraneanHabitats';
 // import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 // import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
 import {TheWomb} from './TheWomb';
-// import {ThoriumRush} from './ThoriumRush';
+import {ThoriumRush} from './ThoriumRush';
 import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
 import {TitaniumMarketMonopolists} from './TitaniumMarketMonopolists';
 import {TychoRoadNetwork} from './TychoRoadNetwork';
@@ -159,11 +159,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
-    //   {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
-    //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
+    {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
+    {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
     {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
-    //   // // These cards have some sort of behavior.
     //   {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars},
     //   {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
     //   // {cardName: CardName.AN_OFFER_HE_CANNOT_REFUSE, Factory: AnOfferHeCannotRefuse, compatibility: GameModule.Turmoil},

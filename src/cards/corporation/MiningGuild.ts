@@ -2,11 +2,13 @@ import {Card} from '../Card';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from './CorporationCard';
+import {Phase} from '../../Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
+import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 
@@ -35,14 +37,16 @@ export class MiningGuild extends Card implements CorporationCard {
       },
     });
   }
-  public onTilePlaced(player: Player, space: ISpace) {
-    if (
-      player.isCorporation(this.name) &&
-            space.player === player &&
-            (space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM))) {
-      player.addProduction(Resources.STEEL);
+
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
+    if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {
+      cardOwner.game.defer(new GainProduction(cardOwner, Resources.STEEL));
     }
   }
+
   public play(player: Player) {
     player.steel = 5;
     player.addProduction(Resources.STEEL);

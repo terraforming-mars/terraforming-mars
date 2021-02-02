@@ -15,9 +15,9 @@ export class Zeppelins extends Card implements IProjectCard {
       name: CardName.ZEPPELINS,
       cost: 13,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(5)),
       metadata: {
         cardNumber: '129',
-        requirements: CardRequirements.builder((b) => b.oxygen(5)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1).slash();

@@ -24,9 +24,9 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: 'C19',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
             eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN);

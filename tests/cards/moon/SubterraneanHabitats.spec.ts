@@ -7,7 +7,6 @@ import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
-import {Cards} from '../../../src/cards/Cards';
 import {TileType} from '../../../src/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -57,14 +56,14 @@ describe('SubterraneanHabitats', () => {
     // FOR NOW ACTUALLY I'M HACKING THE CARD TO SAY THAT IS IS PLACING A COLONY
     msm.tilesBuilt.push(TileType.MOON_COLONY);
     player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
     player.titanium = 1;
     player.steel = 1;
-    expect(player.getPlayableCards().map(Cards.toCardName)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 });

@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Cards} from '../Cards';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
 
@@ -31,7 +30,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
 
   public static consume(player: Player): boolean {
     return MoonExpansion.ifMoon(player.game, () => {
-      const card = player.playedCards.find(Cards.byCardName(CardName.LUNA_PROJECT_OFFICE));
+      const card = player.playedCards.find((card) => card.name === CardName.LUNA_PROJECT_OFFICE);
       if (card !== undefined) {
         const lunaProjectOffice = card as LunaProjectOffice;
         if (lunaProjectOffice.resourceCount > 0) {

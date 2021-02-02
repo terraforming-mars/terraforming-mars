@@ -55,11 +55,12 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       return Math.floor(this.resourceCount / 2);
     }
 
-    public onTilePlaced(cardOwner: Player, space: ISpace) {
-      if (space.player === cardOwner && space.tile?.tileType === TileType.GREENERY) {
+    public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+      if (cardOwner.id === activePlayer.id && space.tile?.tileType === TileType.GREENERY) {
         cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
       }
     }
+
     public play(player: Player) {
       player.addResourceTo(this);
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));

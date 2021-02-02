@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ArcadianCommunities} from '../../../src/cards/promo/ArcadianCommunities';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers, runAllActions} from '../../TestingUtils';
 
 
 describe('ArcadianCommunities', function() {
@@ -26,6 +26,7 @@ describe('ArcadianCommunities', function() {
     action.cb(lands[0]);
 
     player.game.addCityTile(player, lands[0].id);
+    runAllActions(player.game);
     expect(player.megaCredits).to.eq(3);
   });
 });

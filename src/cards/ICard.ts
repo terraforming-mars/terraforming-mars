@@ -6,7 +6,6 @@ import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {Tags} from './Tags';
-import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -40,7 +39,7 @@ export interface ICard {
     getVictoryPoints?: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
-    onTilePlaced?: (player: Player, space: ISpace) => DeferredAction | void;
+    onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;

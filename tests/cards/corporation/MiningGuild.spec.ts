@@ -6,7 +6,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
-import {maxOutOceans, TestPlayers, runAllActions} from '../../TestingUtils';
+import {maxOutOceans, TestPlayers, TestingUtils} from '../../TestingUtils';
 
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
@@ -28,19 +28,19 @@ describe('MiningGuild', function() {
 
   it('Gives steel production bonus when placing tiles', function() {
     card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: []});
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
 
     card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]});
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
     card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL]});
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
     card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]});
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(3);
   });
 
@@ -51,26 +51,26 @@ describe('MiningGuild', function() {
       }
     });
     // There are two spaces on the main board that grant titanium or steel.
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
   });
 
   it('Does not give bonus when other players place tiles', function() {
     card.onTilePlaced(player, player2, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]});
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });
 
   it('Does not give bonus when other players place ocean tiles', function() {
     maxOutOceans(player2); // 1 ocean with titanium and 1 with steel
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });
 
   it('Does not give bonus for WGT', function() {
     game.phase = Phase.SOLAR;
     maxOutOceans(player); // 1 ocean with titanium and 1 with steel
-    runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });
 });

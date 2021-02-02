@@ -11,15 +11,15 @@ import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
-import * as Utils from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('GeologicalSurvey', function() {
   let card : GeologicalSurvey; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new GeologicalSurvey();
-    player = Utils.TestPlayers.BLUE.newPlayer();
-    const redPlayer = Utils.TestPlayers.RED.newPlayer();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
@@ -84,7 +84,7 @@ describe('GeologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(2);
@@ -98,8 +98,8 @@ describe('GeologicalSurvey', function() {
   });
 
   it('Works with Mars First policy', function() {
-    player = Utils.TestPlayers.BLUE.newPlayer();
-    const gameOptions = Utils.setCustomGameOptions();
+    player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
     const turmoil = game.turmoil!;
     const marsFirst = new MarsFirst();
@@ -107,17 +107,17 @@ describe('GeologicalSurvey', function() {
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
 
-    Utils.TestingUtils.resetBoard(game);
+    TestingUtils.resetBoard(game);
 
     game.addGreenery(player, '11');
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.steel).eq(0);
 
-    Utils.TestingUtils.resetBoard(game);
+    TestingUtils.resetBoard(game);
 
-    Utils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
     game.addGreenery(player, '11');
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.steel).eq(2);
   });
 });

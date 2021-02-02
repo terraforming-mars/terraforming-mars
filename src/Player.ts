@@ -1613,7 +1613,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       MoonExpansion.adjustedReserveCosts(this, card),
     );
 
-    return canAfford && (card.canPlay === undefined || card.canPlay(this));
+    return canAfford && card.requirements?.satisfies(this) !== false && (card.canPlay === undefined || card.canPlay(this));
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)

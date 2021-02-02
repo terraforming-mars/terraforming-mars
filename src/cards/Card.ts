@@ -4,7 +4,6 @@ import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
-import {Player} from '../Player';
 import {Units} from '../Units';
 import {CardRequirements} from './CardRequirements';
 
@@ -79,11 +78,5 @@ export abstract class Card {
   }
   public get productionBox(): Units {
     return this.properties.productionBox || Units.EMPTY;
-  }
-  public canPlay(player: Player) {
-    if (this.properties.requirements === undefined) {
-      return true;
-    }
-    return this.properties.requirements.satisfies(player);
   }
 }

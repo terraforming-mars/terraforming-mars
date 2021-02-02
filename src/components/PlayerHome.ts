@@ -358,14 +358,18 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <template v-if="player.pickedCorporationCard.length === 1">
                   <dynamic-title title="Your selected cards" :color="player.color"/>
-                  <div v-for="card in player.pickedCorporationCard" :key="card.name" class="cardbox">
-                    <Card :card="card"/>
+                  <div>
+                    <div class="cardbox">
+                      <Card :card="player.pickedCorporationCard[0]"/>
+                    </div>
+                    <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
                   </div>
-                  <div v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
-                    <Card :card="card"/>
-                  </div>
-                  <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
-                    <Card :card="card"/>
+                  <div>
+                    <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
                   </div>
                 </template>
 

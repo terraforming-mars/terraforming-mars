@@ -19,7 +19,6 @@ export interface PlayerModel {
     awards: Array<FundedAwardModel>;
     corporationCard: CardModel | undefined;
     playedCards: Array<CardModel>;
-    canUseHeatAsMegaCredits: boolean,
     cardCost: number;
     cardsInHand: Array<CardModel>;
     cardsInHandNbr: number;

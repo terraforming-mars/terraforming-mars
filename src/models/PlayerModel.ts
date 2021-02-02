@@ -47,10 +47,12 @@ export interface PlayerModel {
     oceans: number;
     oxygenLevel: number;
     phase: Phase;
+    pickedCorporationCard: Array<CardModel>;
     plants: number;
     plantProduction: number;
     plantsAreProtected: boolean;
     players: Array<PlayerModel>;
+    preludeCardsInHand: Array<CardModel>;
     spaces: Array<SpaceModel>;
     steel: number;
     steelProduction: number;
@@ -77,5 +79,4 @@ export interface PlayerModel {
     deckSize: number;
     waitingFor: PlayerInputModel | undefined;
     timer: SerializedTimer;
-    preludeCardsInHand: Array<CardModel>;
 }

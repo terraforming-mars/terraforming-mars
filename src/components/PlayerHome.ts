@@ -356,6 +356,9 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
 
+                <div v-for="card in player.pickedCorporationCard" :key="card.name" class="cardbox">
+                  <Card :card="card"/>
+                </div>
                 <div v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
                   <Card :card="card"/>
                 </div>

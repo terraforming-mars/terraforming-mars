@@ -80,10 +80,12 @@ export class Server {
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
       phase: game.phase,
+      pickedCorporationCard: player.pickedCorporationCard ? getCardsAsCardModel([player.pickedCorporationCard], false) : [],
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards),
+      preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       coloniesCount: player.getColoniesCount(),
@@ -121,7 +123,6 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       aresData: game.aresData,
       timer: player.timer.serialize(),
-      preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
     };
   }
 }

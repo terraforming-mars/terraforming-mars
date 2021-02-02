@@ -356,7 +356,24 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
 
-                <dynamic-title title="Select initial cards:" :color="player.color"/>
+                <template v-if="player.pickedCorporationCard.length === 1">
+                  <dynamic-title title="Your selected cards:" :color="player.color"/>
+                  <div>
+                    <div class="cardbox">
+                      <Card :card="player.pickedCorporationCard[0]"/>
+                    </div>
+                    <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
+                  </div>
+                  <div>
+                    <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
+                      <Card :card="card"/>
+                    </div>
+                  </div>
+                </template>
+
+                <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>

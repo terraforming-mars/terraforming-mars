@@ -11,13 +11,13 @@ Join us on Discord [here](https://discord.gg/fWXE53K).
 
 ## Demo
 
-You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in [issues tab](https://github.com/bafolts/terraforming-mars/issues/new). If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host your own instance of the web server.
+You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in [issues tab](https://github.com/bafolts/terraforming-mars/issues/new). If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host your own web server.
 
 ## Hosting the web server
-
-1. Run the web server locally from your personal computer. ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup))
-2. Run the web server on [Heroku](https://www.heroku.com/). A free Heroku account will satisfy most needs, and it will take five minutes to set up. ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Heroku-Setup))
-3. Run the web server with [Docker](https://www.docker.com/). ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup))
+We have three documented ways of hosting this web server:
+1. Host the web server locally from your personal computer. ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup))
+2. Host the web server on [Heroku](https://www.heroku.com/). A free Heroku account will satisfy most needs, and it will take five minutes to set up. ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Heroku-Setup))
+3. Host the web server with [Docker](https://www.docker.com/). ([instruction](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup))
 
 #### dotenv
 

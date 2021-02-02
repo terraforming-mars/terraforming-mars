@@ -12,11 +12,15 @@ import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
 import {TileType} from '../TileType';
+import {range} from '../utils/utils';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {
       type: String,
+    },
+    generation: {
+      type: Number,
     },
     players: {
       type: Array as () => Array<PlayerModel>,
@@ -26,6 +30,7 @@ export const LogPanel = Vue.component('log-panel', {
     return {
       cards: [] as Array<string>,
       messages: [] as Array<LogMessage>,
+      selectedGeneration: this.generation,
     };
   },
   components: {
@@ -166,9 +171,48 @@ export const LogPanel = Vue.component('log-panel', {
     getCrossHtml: function() {
       return '<i class=\'icon icon-cross\' /i>';
     },
+    selectGeneration: function(gen: number): void {
+      this.selectedGeneration = gen;
+      // pause logging globally
+      (this.$root as any).changeLogPaused(true);
+
+      fetch(`/api/game/logs?id=${this.id}&generation=${gen}`)
+        .then((response) => response.json())
+        .then((messages) => {
+          this.messages.splice(0, this.messages.length);
+          this.messages.push(...messages);
+          // if it's current gen go to default behavior
+          if (gen === this.generation) {
+            // resume logging globally
+            (this.$root as any).changeLogPaused(false);
+            (this.$root as any).updatePlayer();
+          }
+        })
+        .catch((error) => {
+          console.error('error updating messages', error);
+        });
+    },
+    getClassesGenIndicator: function(gen: number): string {
+      const classes = ['log-gen-indicator'];
+      if (gen === this.selectedGeneration) {
+        classes.push('log-gen-indicator--selected');
+      }
+      return classes.join(' ');
+    },
+    pauseButtonText: function(): string {
+      return (this.$root as any).logPaused ? 'resume' : 'pause';
+    },
+    togglePause: function() {
+      (this.$root as any).changeLogPaused(!(this.$root as any).logPaused);
+    },
+    getGenerationsRange: function(): Array<number> {
+      const result = range(this.generation + 1);
+      result.shift();
+      return result;
+    },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=50`)
+    fetch(`/api/game/logs?id=${this.id}&limit=50&generation=${this.selectedGeneration}`)
       .then((response) => response.json())
       .then((messages) => {
         this.messages.splice(0, this.messages.length);
@@ -180,20 +224,31 @@ export const LogPanel = Vue.component('log-panel', {
       });
   },
   template: `
-    <div>
-        <div class="panel log-panel">
-            <div id="logpanel-scrollable" class="panel-body">
-                <ul v-if="messages">
-                    <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
-                </ul>
+      <div class="log-container">
+        <div class="log-generations">
+          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-numbers">
+            <div v-for="n in getGenerationsRange()" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
+              {{ n }}
             </div>
+          </div>
+        </div>
+        <div class="panel log-panel">
+          <div id="logpanel-scrollable" class="panel-body">
+            <div class="log-panel-actions">
+              <div class="pause-button" v-on:click="togglePause">{{ pauseButtonText() }}</div>
+            </div>
+            <ul v-if="messages">
+              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+            </ul>
+          </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0">
-            <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-            <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
-                <Card :card="{name: card}"/>
-            </div>
+          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+            <Card :card="{name: card}"/>
+          </div>
         </div>
-    </div>
+      </div>
     `,
 });

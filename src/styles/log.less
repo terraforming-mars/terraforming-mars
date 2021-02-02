@@ -1,3 +1,32 @@
+.log-generations {
+    display: flex;
+    margin-bottom: 16px;
+    align-items: center;
+    .log-gen-title {
+        margin-left: 16px;
+        text-transform: uppercase;
+        font-family: Prototype;
+    }
+    .log-gen-numbers {
+        display: flex;
+        .log-gen-indicator {
+            padding: 2px 12px;
+            margin-left: 8px;
+            cursor: pointer;
+            border: 2px solid rgba(170, 170, 170, 0.6);
+            border-radius: 8px;
+            &:hover{
+                background: #ccc;
+                color: black;
+            }
+        }
+        .log-gen-indicator--selected {
+            background: #ccc;
+            color: black;
+        }
+    }
+}
+
 .log-panel {
     height: 180px;
     max-height: 180px;
@@ -6,6 +35,19 @@
     padding: 5px;
     max-width: 767px;
     background: #222;
+    position: relative;
+    .log-panel-actions {
+        position: absolute;
+        top: 20px;
+        right: 60px;
+        .pause-button {
+            text-transform: uppercase;
+            color: #ccc;
+            padding: 2px 12px;
+            border-radius: 8px;
+            font-family: Prototype;
+        }
+    }
 
     li {
         margin-top: 0 !important;

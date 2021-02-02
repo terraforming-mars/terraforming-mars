@@ -58,13 +58,21 @@ function getWaitingForTimeout() {
     return 5000;
 }
 
+function getLogLength() {
+    if (process.env.LOG_LENGTH) {
+	return Number(process.env.LOG_LENGTH);
+    }
+    return 50;
+}
+
 if (!fs.existsSync('src/genfiles')) {
     fs.mkdirSync('src/genfiles');
 }
 
 fs.writeFileSync("src/genfiles/settings.json", JSON.stringify({
     version: generateAppVersion(),
-    waitingForTimeout: getWaitingForTimeout()
+    waitingForTimeout: getWaitingForTimeout(),
+    logLength: getLogLength()
 }));
 
 fs.writeFileSync("src/genfiles/translations.json", JSON.stringify(

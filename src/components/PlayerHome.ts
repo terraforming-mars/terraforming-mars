@@ -357,7 +357,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
 
                 <template v-if="player.pickedCorporationCard.length === 1">
-                  <dynamic-title title="Your selected cards" :color="player.color"/>
+                  <dynamic-title title="Your selected cards:" :color="player.color"/>
                   <div>
                     <div class="cardbox">
                       <Card :card="player.pickedCorporationCard[0]"/>

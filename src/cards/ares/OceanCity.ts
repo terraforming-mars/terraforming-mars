@@ -21,9 +21,9 @@ export class OceanCity extends Card implements IProjectCard {
       cost: 18,
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
+      requirements: CardRequirements.builder((b) => b.oceans(6)),
       metadata: {
         cardNumber: 'A20',
-        requirements: CardRequirements.builder((b) => b.oceans(6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;

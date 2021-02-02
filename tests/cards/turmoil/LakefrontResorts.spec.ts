@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {
@@ -15,6 +15,7 @@ describe('LakefrontResorts', function() {
     player.corporationCard = card2;
     game.addOceanTile(player, '06');
     game.addOceanTile(player, '07');
+    TestingUtils.runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     // The 2 oceans are adjacent

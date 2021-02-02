@@ -22,11 +22,10 @@ export class TheWomb extends MoonCard {
           'Spend 2 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(2).br;
           b.production((pb) => {
             pb.minus().energy(2).br.megacredits(4);
           }).br;
-          b.moonColony();
+          b.minus().titanium(2).moonColony();
         }),
       },
     }, {

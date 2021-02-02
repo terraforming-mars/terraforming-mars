@@ -22,9 +22,9 @@ export class OceanFarm extends Card implements IProjectCard {
       cost: 15,
       productionBox: Units.of({plants: 1, heat: 1}),
 
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
         cardNumber: 'A21',
-        requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.heat(1).br;

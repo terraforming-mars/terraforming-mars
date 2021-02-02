@@ -23,6 +23,7 @@
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,
+        "allowUnreachableCode": false,
     },
     // This gives the VS Code IDE its magic.
     "include": [

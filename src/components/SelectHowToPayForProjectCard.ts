@@ -214,7 +214,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseMicrobes: function() {
-      // FYI Microbes are limited to the Psychrophiles card, which allows spending micrbes for Plant cards.
+      // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
           return true;
@@ -223,7 +223,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseFloaters: function() {
-      // FYI Floaters are limited to the DIRIGIBLES cards.
+      // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
           return true;
@@ -247,10 +247,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning: function(): boolean {
-      return this.card?.reserveUnits?.steel > 0;
+      return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
     },
     showReserveTitaniumWarning: function(): boolean {
-      return this.card?.reserveUnits?.titanium > 0;
+      return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -365,7 +365,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
     <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
-    (Some steel is not available here because the project card requires some when it is played.)
+    (Some steel is unavailable here in reserve for the project card.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
@@ -376,7 +376,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
     </div>
     <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
-    (Some titanium is not available here because the project card needs some when it is played.)
+    (Some titanium is unavailable here in reserve for the project card.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">

@@ -20,9 +20,9 @@ export class FreyjaBiodomes extends Card {
       tags: [Tags.PLANT, Tags.VENUS],
       cost: 14,
 
+      requirements: CardRequirements.builder((b) => b.venus(10)),
       metadata: {
         cardNumber: '227',
-        requirements: CardRequirements.builder((b) => b.venus(10)),
         renderData: CardRenderer.builder((b) => {
           b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));

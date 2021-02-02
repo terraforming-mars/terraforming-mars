@@ -16,9 +16,9 @@ export class ImpactorSwarm extends Card implements IProjectCard {
       name: CardName.IMPACTOR_SWARM,
       cardType: CardType.EVENT,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN, 2)),
       metadata: {
         cardNumber: 'C16',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN, 2)),
         renderData: CardRenderer.builder((b) => {
           b.heat(12).digit.br;
           b.minus().plants(2).any;

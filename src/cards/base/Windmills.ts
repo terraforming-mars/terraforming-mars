@@ -20,9 +20,9 @@ export class Windmills extends Card implements IProjectCard {
       cost: 6,
       productionBox: Units.of({energy: 1}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(7)),
       metadata: {
         cardNumber: '168',
-        requirements: CardRequirements.builder((b) => b.oxygen(7)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1));
         }),

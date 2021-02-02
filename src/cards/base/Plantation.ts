@@ -20,9 +20,9 @@ export class Plantation extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 15,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: '193',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         renderData: CardRenderer.builder((b) => {
           b.greenery();
         }),

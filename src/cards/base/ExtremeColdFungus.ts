@@ -23,10 +23,10 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       tags: [Tags.MICROBE],
       cost: 13,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
       metadata: {
         cardNumber: '134',
         description: 'It must be -10 C or colder.',
-        requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 plant.', (eb) => {
             eb.empty().startAction.plants(1);

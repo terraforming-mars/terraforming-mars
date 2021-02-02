@@ -17,9 +17,9 @@ export class Worms extends Card implements IProjectCard {
       tags: [Tags.MICROBE],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(4)),
       metadata: {
         cardNumber: '129',
-        requirements: CardRequirements.builder((b) => b.oxygen(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1).slash().microbes(2).played);
         }),

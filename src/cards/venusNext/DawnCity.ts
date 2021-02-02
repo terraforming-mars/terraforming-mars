@@ -17,9 +17,9 @@ export class DawnCity extends Card {
       tags: [Tags.CITY, Tags.SPACE],
       cost: 15,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
         cardNumber: '220',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
         description: 'Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

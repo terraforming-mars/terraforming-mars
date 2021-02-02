@@ -74,6 +74,7 @@ import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
+import {PreliminaryDarkside} from './PreliminaryDarkside';
 // import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
@@ -163,10 +164,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
     {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
-    //   {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars},
-    //   {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
+    // // {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars},
+    // // {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
     //   // {cardName: CardName.AN_OFFER_HE_CANNOT_REFUSE, Factory: AnOfferHeCannotRefuse, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.PRELIMINARY_DARKSIDE, Factory: PreliminaryDarkside},
+    {cardName: CardName.PRELIMINARY_DARKSIDE, Factory: PreliminaryDarkside},
     //   {cardName: CardName.HOSTILE_TAKEOVER, Factory: HostileTakeover},
     //   // {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: GameModule.Colonies},
     //   {cardName: CardName.DARKSIDE_MINING_SYNDICATE, Factory: DarksideMiningSyndicate},

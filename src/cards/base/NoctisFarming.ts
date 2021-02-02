@@ -18,9 +18,9 @@ export class NoctisFarming extends Card implements IProjectCard {
       cost: 10,
       productionBox: Units.of({megacredits: 1}),
 
+      requirements: CardRequirements.builder((b) => b.temperature(-20)),
       metadata: {
         cardNumber: '176',
-        requirements: CardRequirements.builder((b) => b.temperature(-20)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);

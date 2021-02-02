@@ -22,11 +22,12 @@ export class StealResources implements DeferredAction {
       return undefined;
     }
 
-    let candidates: Array<Player> = [];
+    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
     if (this.resource === Resources.PLANTS) {
-      candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0 && !p.plantsAreProtected());
-    } else {
-      candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
+      candidates = candidates.filter((p) => !p.plantsAreProtected());
+    }
+    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
+      candidates = candidates.filter((p) => !p.alloysAreProtected());
     }
 
     if (candidates.length === 0) {

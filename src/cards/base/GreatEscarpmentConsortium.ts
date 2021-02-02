@@ -15,9 +15,9 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
       name: CardName.GREAT_ESCARPMENT_CONSORTIUM,
       cost: 6,
 
+      requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
       metadata: {
         cardNumber: '061',
-        requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().steel(-1).any.br;

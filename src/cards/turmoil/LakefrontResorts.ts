@@ -6,6 +6,8 @@ import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
+import {Priority} from '../../deferredActions/DeferredAction';
+import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
@@ -41,9 +43,13 @@ export class LakefrontResorts extends Card implements CorporationCard {
     player.oceanBonus = 3;
     return undefined;
   }
-  public onTilePlaced(player: Player, space: ISpace) {
-    if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {
-      player.addProduction(Resources.MEGACREDITS);
+
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (space.tile?.tileType === TileType.OCEAN) {
+      cardOwner.game.defer(
+        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+      );
     }
   }
 }

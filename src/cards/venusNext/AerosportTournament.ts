@@ -17,10 +17,10 @@ export class AerosportTournament extends Card {
       cardType: CardType.EVENT,
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.floaters(5)),
       metadata: {
         cardNumber: '214',
         description: 'Requires that you have 5 Floaters. Gain 1 MC per each City tile in play.',
-        requirements: CardRequirements.builder((b) => b.floaters(5)),
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().city(CardRenderItemSize.SMALL).any;
         }),

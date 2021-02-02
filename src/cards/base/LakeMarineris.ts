@@ -17,9 +17,9 @@ export class LakeMarineris extends Card implements IProjectCard {
       name: CardName.LAKE_MARINERIS,
       cost: 18,
 
+      requirements: CardRequirements.builder((b) => b.temperature(0)),
       metadata: {
         cardNumber: '053',
-        requirements: CardRequirements.builder((b) => b.temperature(0)),
         renderData: CardRenderer.builder((b) => b.oceans(2)),
         description: 'Requires 0° C or warmer. Place 2 ocean tiles.',
         victoryPoints: 2,

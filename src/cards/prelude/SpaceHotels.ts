@@ -16,9 +16,9 @@ export class SpaceHotels extends Card implements IProjectCard {
       tags: [Tags.SPACE, Tags.EARTH],
       cost: 12,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
         cardNumber: 'P42',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(4);

@@ -14,10 +14,10 @@ export class AtalantaPlanitiaLab extends Card {
       tags: [Tags.VENUS, Tags.SCIENCE],
       cost: 10,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: '216',
         description: 'Requires 3 science tags. Draw 2 cards.',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => b.cards(2)),
         victoryPoints: 2,
       },

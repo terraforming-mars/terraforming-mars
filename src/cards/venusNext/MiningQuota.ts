@@ -15,9 +15,9 @@ export class MiningQuota extends Card {
       tags: [Tags.BUILDING],
       cost: 5,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       metadata: {
         cardNumber: '239',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(2));
         }),

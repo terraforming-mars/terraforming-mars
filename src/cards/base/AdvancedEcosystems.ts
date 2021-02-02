@@ -13,10 +13,10 @@ export class AdvancedEcosystems extends Card implements IProjectCard {
       tags: [Tags.PLANT, Tags.MICROBE, Tags.ANIMAL],
       cost: 11,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.PLANT).tag(Tags.ANIMAL).tag(Tags.MICROBE)),
       metadata: {
         description: 'Requires a Plant tag, a Microbe tag, and an Animal tag.',
         cardNumber: '135',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.PLANT).tag(Tags.ANIMAL).tag(Tags.MICROBE)),
         victoryPoints: 3,
       },
     });

@@ -5,6 +5,7 @@ import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {TitaniumMarketMonopolists} from '../../../src/cards/moon/TitaniumMarketMonopolists';
 import {expect} from 'chai';
+import {SelectAmount} from '../../../src/inputs/SelectAmount';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -47,6 +48,51 @@ describe('TitaniumMarketMonopolists', () => {
     expect(card.canAct(player)).eq(true);
   });
 
-  // TODO(kberg): action tests, which are tricky.
+
+  it('sell titanium', () => {
+    player.megaCredits = 1;
+    player.titanium = 2;
+    const action = card.action(player);
+    expect(action).is.instanceof(SelectAmount);
+    const selectAmount = action as SelectAmount;
+    expect(selectAmount.min).eq(1);
+    expect(selectAmount.max).eq(2);
+    selectAmount.cb(2);
+    expect(player.megaCredits).eq(9);
+    expect(player.titanium).eq(0);
+  });
+
+  it('sell titanium - limited', () => {
+    player.megaCredits = 0;
+    player.titanium = 100;
+    const action = card.action(player);
+    expect(action).is.instanceof(SelectAmount);
+    const selectAmount = action as SelectAmount;
+    expect(selectAmount.min).eq(1);
+    expect(selectAmount.max).eq(4);
+  });
+
+  it('buy titanium', () => {
+    player.megaCredits = 7;
+    player.titanium = 0;
+    const action = card.action(player);
+    expect(action).is.instanceof(SelectAmount);
+    const selectAmount = action as SelectAmount;
+    expect(selectAmount.min).eq(1);
+    expect(selectAmount.max).eq(3);
+    selectAmount.cb(2);
+    expect(player.megaCredits).eq(3);
+    expect(player.titanium).eq(2);
+  });
+
+  it('buy titanium - limited', () => {
+    player.megaCredits = 100;
+    player.titanium = 0;
+    const action = card.action(player);
+    expect(action).is.instanceof(SelectAmount);
+    const selectAmount = action as SelectAmount;
+    expect(selectAmount.min).eq(1);
+    expect(selectAmount.max).eq(4);
+  });
 });
 

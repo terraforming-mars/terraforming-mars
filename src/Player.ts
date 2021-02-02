@@ -471,6 +471,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
 
+  public alloysAreProtected(): boolean {
+    return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
+  }
+
   // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.
   // Search for uses of TileType.OCEAN_CITY for reference.
   public getCitiesCount() {
@@ -1360,7 +1364,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
     const coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(openColonies);
-    const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
+    const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
     const mcTradeAmount: number = this.getMcTradeCost();
     const energyTradeAmount: number = this.getEnergyTradeCost();
     const titaniumTradeAmount: number = this.getTitaniumTradeCost();
@@ -1604,8 +1608,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getCardCost(card),
       this.canUseSteel(card),
       this.canUseTitanium(card),
-      this.canUseMicrobes(card),
       this.canUseFloaters(card),
+      this.canUseMicrobes(card),
       MoonExpansion.adjustedReserveCosts(this, card),
     );
 
@@ -1907,8 +1911,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.playedCards.map((c) => {
       const result: SerializedCard = {
         name: c.name,
-        resourceCount: c.resourceCount,
       };
+      if (c.bonusResource !== undefined) {
+        result.bonusResource = c.bonusResource;
+      }
+      if (c.resourceCount !== undefined) {
+        result.resourceCount = c.resourceCount;
+      }
       if (c instanceof SelfReplicatingRobots) {
         result.targetCards = c.targetCards.map((t) => {
           return {

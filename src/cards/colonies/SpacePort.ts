@@ -18,9 +18,9 @@ export class SpacePort extends Card implements IProjectCard {
       name: CardName.SPACE_PORT,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.colonies()),
       metadata: {
         cardNumber: 'C39',
-        requirements: CardRequirements.builder((b) => b.colonies()),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;

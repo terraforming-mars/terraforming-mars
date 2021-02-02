@@ -38,9 +38,10 @@ export class WildlifeDome implements IProjectCard {
         return player.game.addGreenery(player, space.id);
       });
     }
+    public requirements = CardRequirements.builder((b) => b.party(PartyName.GREENS));
+
     public metadata: CardMetadata = {
       cardNumber: 'T15',
-      requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
       renderData: CardRenderer.builder((b) => {
         b.greenery();
       }),

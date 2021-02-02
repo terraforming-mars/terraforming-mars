@@ -5,7 +5,7 @@ import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
 import {SponsoredAcademies} from '../../../src/cards/venusNext/SponsoredAcademies';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/deferredActions/DrawCards';
 

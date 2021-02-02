@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GiantIceAsteroid', function() {
   let card : GiantIceAsteroid; let player : Player; let player2 : Player; let player3 : Player; let game : Game;

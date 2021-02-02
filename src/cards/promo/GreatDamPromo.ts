@@ -33,10 +33,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsOceanRequirements = super.canPlay(player);
-    const canPlaceTile = this.getAvailableSpaces(player).length > 0;
-
-    return meetsOceanRequirements && canPlaceTile;
+    return this.getAvailableSpaces(player).length > 0;
   }
 
   public play(player: Player) {

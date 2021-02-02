@@ -32,15 +32,14 @@ export class Plantation extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsTagRequirements = super.canPlay(player);
     const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, false, true) && meetsTagRequirements && canPlaceTile;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, false, true) && canPlaceTile;
     }
 
-    return meetsTagRequirements && canPlaceTile;
+    return canPlaceTile;
   }
 
   public play(player: Player) {

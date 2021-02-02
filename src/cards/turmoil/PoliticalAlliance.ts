@@ -16,9 +16,9 @@ export class PoliticalAlliance extends Card implements IProjectCard {
       name: CardName.POLITICAL_ALLIANCE,
       cost: 4,
 
+      requirements: CardRequirements.builder((b) => b.partyLeaders(2)),
       metadata: {
         cardNumber: 'X09',
-        requirements: CardRequirements.builder((b) => b.partyLeaders(2)),
         renderData: CardRenderer.builder((b) => {
           b.tr(1);
         }),

@@ -6,6 +6,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
@@ -30,15 +31,20 @@ export class RoverConstruction extends Card implements IProjectCard {
       },
     });
   }
-  public onTilePlaced(player: Player, space: ISpace) {
+
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
-      return new GainResources(player, Resources.MEGACREDITS, {count: 2});
+      cardOwner.game.defer(
+        new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2}),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+      );
     }
-    return;
   }
+
   public play() {
     return undefined;
   }
+
   public getVictoryPoints() {
     return 1;
   }

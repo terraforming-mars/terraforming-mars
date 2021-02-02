@@ -17,9 +17,9 @@ export class Omnicourt extends Card {
       tags: [Tags.BUILDING],
       cost: 11,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       metadata: {
         cardNumber: '241',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
         renderData: CardRenderer.builder((b) => {
           b.tr(2);
         }),

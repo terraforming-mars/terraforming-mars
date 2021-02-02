@@ -19,13 +19,13 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       cost: 21,
       productionBox: Units.of({energy: -1}),
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         description: {
           text: 'Requires 3 Science tags to play. Decrease your Energy production 1 step.',
           align: 'left',
         },
         cardNumber: '208',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
           b.action('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
           b.production((pb) => pb.minus().energy(1));

@@ -22,9 +22,9 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
       cost: 6,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.venus(6)),
       metadata: {
         cardNumber: '251',
-        requirements: CardRequirements.builder((b) => b.venus(6)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);

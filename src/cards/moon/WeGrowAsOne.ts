@@ -15,9 +15,9 @@ export class WeGrowAsOne extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.SPACE, Tags.EVENT],
       cost: 8,
+      requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
 
       metadata: {
-        requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
         description: 'Requires that Unity are ruling or that you have 2 delegates there. ' +
         'Increase ALL Colony Tile Tracks 1 step. ' +
         'Increase each Colony Tile Track 1 step if you have a colony on that Colony Tile.',

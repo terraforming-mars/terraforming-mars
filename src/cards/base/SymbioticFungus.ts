@@ -19,9 +19,9 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
       tags: [Tags.MICROBE],
       cost: 4,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-14)),
       metadata: {
         cardNumber: '133',
-        requirements: CardRequirements.builder((b) => b.temperature(-14)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add a microbe to ANOTHER card.', (eb) => {
             eb.empty().startAction.microbes(1).asterix();

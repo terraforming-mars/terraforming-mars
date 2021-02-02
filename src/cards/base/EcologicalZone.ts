@@ -26,7 +26,6 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         align: 'left',
       },
       cardNumber: '128',
-      requirements: CardRequirements.builder((b) => b.greeneries()),
       renderData: CardRenderer.builder((b) => {
         b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
           eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
@@ -44,6 +43,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       resourceType: ResourceType.ANIMAL,
       adjacencyBonus,
 
+      requirements: CardRequirements.builder((b) => b.greeneries()),
       metadata,
     });
   }

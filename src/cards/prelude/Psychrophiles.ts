@@ -19,9 +19,9 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       cost: 2,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
       metadata: {
         cardNumber: 'P39',
-        requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);

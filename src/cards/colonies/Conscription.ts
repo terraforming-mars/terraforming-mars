@@ -16,9 +16,9 @@ export class Conscription extends Card implements IProjectCard {
       tags: [Tags.EARTH],
       name: CardName.CONSCRIPTION,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
         cardNumber: 'C05',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
         renderData: CardRenderer.builder((b) => {
           b.text('next card', CardRenderItemSize.SMALL, true).colon().megacredits(-16);
         }),

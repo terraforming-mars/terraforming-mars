@@ -20,7 +20,6 @@ export class NaturalPreserve extends Card implements IProjectCard {
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
     metadata: CardMetadata = {
       cardNumber: '044',
-      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, true).asterix();
       }),
@@ -33,6 +32,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 9,
       adjacencyBonus,
+      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
       metadata,
     });
   }

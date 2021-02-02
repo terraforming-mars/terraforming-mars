@@ -21,10 +21,10 @@ export class ArtificialLake extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 15,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
         description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.',
         cardNumber: '116',
-        requirements: CardRequirements.builder((b) => b.temperature(-6)),
         renderData: CardRenderer.builder((b) => b.oceans(1).asterix()),
         victoryPoints: 1,
       },

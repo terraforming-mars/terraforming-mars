@@ -16,9 +16,9 @@ export class MartianSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 9,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
       metadata: {
         cardNumber: 'P38',
-        requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),

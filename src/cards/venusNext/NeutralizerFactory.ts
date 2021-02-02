@@ -18,9 +18,9 @@ export class NeutralizerFactory extends Card {
       tags: [Tags.VENUS],
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.venus(10)),
       metadata: {
         cardNumber: '240',
-        requirements: CardRequirements.builder((b) => b.venus(10)),
         renderData: CardRenderer.builder((b) => {
           b.venus(1);
         }),

@@ -17,9 +17,9 @@ export class TundraFarming extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 16,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
         cardNumber: '169',
-        requirements: CardRequirements.builder((b) => b.temperature(-6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) =>{
             pb.plants(1).megacredits(2);

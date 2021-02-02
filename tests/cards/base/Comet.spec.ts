@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Comet} from '../../../src/cards/base/Comet';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayers} from '../../TestingUtils';
@@ -36,7 +36,7 @@ describe('Comet', function() {
   });
 
   it('Provides no options if there is nothing to confirm', function() {
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     player.plants = 8;
 
     card.play(player);

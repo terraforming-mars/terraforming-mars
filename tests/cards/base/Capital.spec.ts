@@ -6,7 +6,7 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', function() {
@@ -20,7 +20,7 @@ describe('Capital', function() {
   });
 
   it('Can\'t play without energy production', function() {
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     expect(card.canPlay(player)).is.not.true;
   });
 

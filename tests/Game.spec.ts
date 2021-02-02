@@ -8,7 +8,7 @@ import * as constants from '../src/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/Phase';
-import {maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/Resources';
 import {ISpace, SpaceId} from '../src/boards/ISpace';
@@ -187,7 +187,7 @@ describe('Game', function() {
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     // (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
     (game as any).venusScaleLevel = 6;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -208,7 +208,7 @@ describe('Game', function() {
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -229,7 +229,7 @@ describe('Game', function() {
     (game as any).temperature = 2;
     (game as any).oxygenLevel = 2;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -261,7 +261,7 @@ describe('Game', function() {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
 
     player.plants = 0; // Skip final greenery Phase
 
@@ -282,7 +282,7 @@ describe('Game', function() {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL - 2;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
 
     // Trigger end game
     player.setTerraformRating(20);

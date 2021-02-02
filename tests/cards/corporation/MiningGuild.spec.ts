@@ -6,7 +6,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
-import {maxOutOceans, TestPlayers, TestingUtils} from '../../TestingUtils';
+import {TestPlayers, TestingUtils} from '../../TestingUtils';
 
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
@@ -62,14 +62,14 @@ describe('MiningGuild', function() {
   });
 
   it('Does not give bonus when other players place ocean tiles', function() {
-    maxOutOceans(player2); // 1 ocean with titanium and 1 with steel
+    TestingUtils.maxOutOceans(player2); // 1 ocean with titanium and 1 with steel
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });
 
   it('Does not give bonus for WGT', function() {
     game.phase = Phase.SOLAR;
-    maxOutOceans(player); // 1 ocean with titanium and 1 with steel
+    TestingUtils.maxOutOceans(player); // 1 ocean with titanium and 1 with steel
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });

@@ -1634,8 +1634,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
-  // Public for testing
-  public getStandardProjects(): Array<StandardProjectCard> {
+  private getStandardProjects(): Array<StandardProjectCard> {
     // TODO(kberg): Filter playability based on the project's reserve units.
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
@@ -1643,11 +1642,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       .sort((a, b) => a.cost - b.cost);
   }
 
-  private getPlayableStandardProjectOption(): PlayerInput | undefined {
+  // Public for testing
+  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
-    if (standardProjects.length === 0) {
-      return undefined;
-    }
 
     return new SelectCard(
       'Standard projects',
@@ -1850,7 +1847,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjectsOption = this.getPlayableStandardProjectOption();
+    const standardProjectsOption = this.getStandardProjectOption();
     if (standardProjectsOption !== undefined) {
       action.options.push(standardProjectsOption);
     }

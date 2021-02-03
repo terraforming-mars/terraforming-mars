@@ -47,8 +47,6 @@ export interface DebugUIModel {
   promo: boolean | unknown[],
 }
 
-let throttleTimeout = 0;
-
 export const DebugUI = Vue.component('debug-ui', {
   components: {
     Card,
@@ -77,23 +75,15 @@ export const DebugUI = Vue.component('debug-ui', {
       this.filterText = searchString;
     }
   },
-  methods: {
-    updateUrl(newSearchString: string) {
+  watch: {
+    filterText(newSearchString) {
       if (window.history.pushState) {
         const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?search=' + newSearchString;
         window.history.pushState({path: newurl}, '', newurl);
       }
     },
-    onSearchInput(event: any) {
-      if ( ! event.target) return;
-      const searchString = (event.target as HTMLInputElement).value;
-      if (searchString === this.filterText || searchString.length < 1) return;
-      clearTimeout(throttleTimeout);
-      throttleTimeout = window.setTimeout(() => {
-        this.filterText = searchString;
-        this.updateUrl(searchString);
-      }, 50);
-    },
+  },
+  methods: {
     toggleAll: function() {
       const data = this.$data;
       data.base = !data.base;
@@ -184,7 +174,7 @@ export const DebugUI = Vue.component('debug-ui', {
         <div class="debug-ui-container" :class="getLanguageCssClass()">
             <h1>Debug UI</h1>
             <div class="form-group">
-              <input class="form-input form-input-line" placeholder="filter" :value="filterText" v-on:keyup.prevent="onSearchInput"></input>
+              <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
               <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
               <label for="filterDescription-checkbox">
                   <span v-i18n>Filter description</span>

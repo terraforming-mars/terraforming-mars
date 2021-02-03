@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AirRaid', function() {
   let card : AirRaid; let player : Player; let player2 : Player; let corpo: StormCraftIncorporated;

@@ -5,13 +5,12 @@ import {SpaceType} from '../src/SpaceType';
 import {BoardName} from '../src/boards/BoardName';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/boards/ISpace';
-import {Color} from '../src/Color';
 import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
-import {TestPlayer} from './TestPlayer';
+import {TestPlayers as NewTestPlayers} from './TestPlayers';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -111,24 +110,8 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
   return TestingUtils.setCustomGameOptions(options);
 };
 
-// TODO: Move TestPlayers and TestPlayerFactory to its own file.
-// This could be moved to TestPlayer.ts, but that would require HUNDREDS of updates.
-// So, someone do that sometime soon, please.
-class TestPlayerFactory {
-  constructor(private color: Color) {}
-  newPlayer(): TestPlayer {
-    return new TestPlayer(this.color);
-  }
-}
-
 // Prefer these players when testing, as their IDs are easy to recognize in output.
 export class TestPlayers {
-  public static BLUE: TestPlayerFactory = new TestPlayerFactory(Color.BLUE);
-  public static RED: TestPlayerFactory = new TestPlayerFactory(Color.RED);
-  public static YELLOW: TestPlayerFactory = new TestPlayerFactory(Color.YELLOW);
-  public static GREEN: TestPlayerFactory = new TestPlayerFactory(Color.GREEN);
-  public static BLACK: TestPlayerFactory = new TestPlayerFactory(Color.BLACK);
-  public static PURPLE: TestPlayerFactory = new TestPlayerFactory(Color.PURPLE);
-  public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
-  public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
+  public static BLUE = NewTestPlayers.BLUE;
+  public static RED = NewTestPlayers.RED;
 }

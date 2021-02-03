@@ -99,7 +99,7 @@ export const SelectCard = Vue.component('select-card', {
         <label v-for="card in getOrderedCards()" :key="card.name" class="cardbox">
           <template v-if="!card.isDisabled">
             <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
-            <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />
+            <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
           </template>
             <Card :card="card" />
         </label>

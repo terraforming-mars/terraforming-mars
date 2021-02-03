@@ -312,7 +312,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
 
@@ -355,7 +355,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
       game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
@@ -566,7 +566,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       // Lawsuit hook
-      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);
       }
     }

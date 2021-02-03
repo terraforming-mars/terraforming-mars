@@ -1024,7 +1024,7 @@ export class Game implements ISerializable<SerializedGame> {
     // greenery and the player needs enough plants
     let firstPlayer: Player | undefined = this.first;
     while (
-      firstPlayer !== undefined && players.indexOf(firstPlayer) === -1
+      firstPlayer !== undefined && players.includes(firstPlayer) === false
     ) {
       firstPlayer = this.getNextPlayer(this.players, firstPlayer);
     }

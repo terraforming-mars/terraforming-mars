@@ -200,10 +200,11 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
+  canAct?: Array<boolean>,
   reserveUnitMap?: Map<CardName, Units>,
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
-  cards.forEach((card) => {
+  cards.forEach((card, index) => {
     cardModel.push({
       name: card.name,
       resources:
@@ -213,7 +214,7 @@ function getCardsAsCardModel(
       resourceType: card.resourceType,
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
-      isDisabled: false,
+      isDisabled: canAct?.[index] === false,
       warning: card.warning,
       reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
     });
@@ -269,7 +270,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap);
+    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, undefined, shtpfpc.reserveUnitsMap);
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
@@ -277,6 +278,8 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
       (waitingFor as SelectCard<ICard>).cards,
+      false,
+      (waitingFor as SelectCard<ICard>).canAct,
     );
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard

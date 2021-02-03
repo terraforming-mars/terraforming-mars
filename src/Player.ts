@@ -1635,16 +1635,16 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   // Public for testing
-  public getPlayableStandardProjects(): Array<StandardProjectCard> {
+  public getStandardProjects(): Array<StandardProjectCard> {
     // TODO(kberg): Filter playability based on the project's reserve units.
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
       .sort((a, b) => a.cost - b.cost);
   }
 
   private getPlayableStandardProjectOption(): PlayerInput | undefined {
-    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
+    const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
     if (standardProjects.length === 0) {
       return undefined;
     }
@@ -1654,6 +1654,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Confirm',
       standardProjects,
       (card) => card[0].action(this),
+      1, 1, false,
+      standardProjects.map((card) => card.canAct(this)),
     );
   }
 

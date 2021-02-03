@@ -486,11 +486,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
   template: `
         <div id="create-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
-            <h4 class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
-              <a href="https://discord.gg/fWXE53K" class="tooltip" target="_blank">
-                (Looking for people to play with? Join us on Discord.)
-              </a>
-            </h4>
+            <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
+                (Looking for people to play with? <a href="https://discord.gg/fWXE53K" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+            </div>
 
             <div class="create-game-form create-game--block">
 

@@ -134,14 +134,14 @@ export const DebugUI = Vue.component('debug-ui', {
       const card = cards.get(cardName);
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
-        if (cardName.toUpperCase().indexOf(filterText) === -1) {
+        if (cardName.toUpperCase().includes(filterText) === false) {
           if (this.$data.filterDescription) {
             let desc: string | ICardRenderDescription | undefined = card?.card.metadata?.description;
             if (isIDescription(desc)) {
               desc = desc.text;
             }
             // TODO(kberg): optimize by having all the descriptions in upper case.
-            if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
+            if (desc === undefined || desc.toUpperCase().includes(filterText) === false) {
               return false;
             }
           } else {

@@ -94,7 +94,7 @@ export const mainAppSettings = {
           app.playerkey++;
           if (
             app.player.phase === 'end' &&
-                        window.location.search.indexOf('&noredirect') === -1
+                        window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
             if (currentPathname !== '/the-end') {

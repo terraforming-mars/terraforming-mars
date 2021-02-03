@@ -630,6 +630,10 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
+  public finishedResearchPhase(player: Player): boolean {
+    return this.researchedPlayers.has(player.id);
+  }
+
   public hasPassedThisActionPhase(player: Player): boolean {
     return this.passedPlayers.has(player.id);
   }

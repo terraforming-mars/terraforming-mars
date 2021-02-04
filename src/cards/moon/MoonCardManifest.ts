@@ -15,7 +15,7 @@ import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
-// import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
+import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 // import {DarksideObservatory} from './DarksideObservatory';
 // import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
@@ -171,7 +171,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRELIMINARY_DARKSIDE, Factory: PreliminaryDarkside},
     //   {cardName: CardName.HOSTILE_TAKEOVER, Factory: HostileTakeover},
     //   // {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: GameModule.Colonies},
-    //   {cardName: CardName.DARKSIDE_MINING_SYNDICATE, Factory: DarksideMiningSyndicate},
+    {cardName: CardName.DARKSIDE_MINING_SYNDICATE, Factory: DarksideMiningSyndicate},
     //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: GameModule.Colonies},
     {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},

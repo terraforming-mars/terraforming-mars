@@ -14,7 +14,7 @@ export class SelectCard<T> implements PlayerInput {
         public maxCardsToSelect: number = 1,
         public minCardsToSelect: number = 1,
         public selectBlueCardAction: boolean = false,
-        public canAct?: Array<boolean>,
+        public enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
     ) {
       this.buttonLabel = buttonLabel;
     }

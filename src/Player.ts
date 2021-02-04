@@ -832,7 +832,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
         mappedCards.push(this.getCard(pi.cards, cardName));
-        if (pi.canAct?.[pi.cards.map((card) => card.name).indexOf(cardName)] === false) {
+        if (pi.enabled?.[pi.cards.map((card) => card.name).indexOf(cardName)] === false) {
           throw new Error('Selected unavailable card');
         }
       }

@@ -202,7 +202,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
-  canAct?: Array<boolean>,
+  enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   reserveUnitMap?: Map<CardName, Units>,
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
@@ -216,7 +216,7 @@ function getCardsAsCardModel(
       resourceType: card.resourceType,
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
-      isDisabled: canAct?.[index] === false,
+      isDisabled: enabled?.[index] === false,
       warning: card.warning,
       reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
     });

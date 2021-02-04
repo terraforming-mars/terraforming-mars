@@ -65,11 +65,11 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/chosta"><img src="https://avatars.githubusercontent.com/u/836179?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>chosta</b></sub><br />Front end</a> 
+        <sub><b>chosta</b></sub><br />Front end and back end</a> 
     </td>
     <td align="center">
       <a href="https://github.com/Lynesth"><img src="https://avatars.githubusercontent.com/u/5318258?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>Lynesth</b></sub><br />Front end and back end</a> 
+        <sub><b>Lynesth</b></sub><br />Help with the things</a> 
     </td>
   </tr>
 </table>

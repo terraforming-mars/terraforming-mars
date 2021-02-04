@@ -36,19 +36,19 @@ describe('DarksideMiningSyndicate', () => {
     card.play(player);
     expect(moonData.miningRate).eq(1);
 
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+    expect(player.getProduction(Resources.TITANIUM)).eq(2);
     expect(player.getTerraformRating()).eq(15);
 
     card.play(player);
     expect(moonData.miningRate).eq(2);
 
-    expect(player.getProduction(Resources.TITANIUM)).eq(2);
+    expect(player.getProduction(Resources.TITANIUM)).eq(4);
     expect(player.getTerraformRating()).eq(16);
 
     card.play(player);
     expect(moonData.miningRate).eq(3);
 
-    expect(player.getProduction(Resources.TITANIUM)).eq(4);
+    expect(player.getProduction(Resources.TITANIUM)).eq(5);
     expect(player.getTerraformRating()).eq(17);
   });
 });

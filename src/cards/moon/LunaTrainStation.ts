@@ -41,8 +41,7 @@ export class LunaTrainStation extends MoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player, player.game);
+    super.play(player);
     player.game.defer(new PlaceSpecialMoonTile(player, {
       tileType: TileType.LUNA_TRAIN_STATION,
       card: this.name,

@@ -1646,7 +1646,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       .sort((a, b) => a.cost - b.cost);
   }
 
-  // Public for testing
+  // Public for testing. TODO: make protected using the TestPlayer class.
   public getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 

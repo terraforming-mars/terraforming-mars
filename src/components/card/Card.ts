@@ -107,7 +107,7 @@ export const Card = Vue.component('card', {
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
       if (this.actionUsed || card.isDisabled) {
-        classes.push('cards-action-was-used');
+        classes.push('card-unavailable');
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');

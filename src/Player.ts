@@ -1852,9 +1852,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const standardProjectsOption = this.getStandardProjectOption();
-    if (standardProjectsOption !== undefined) {
-      action.options.push(standardProjectsOption);
-    }
+    action.options.push(standardProjectsOption);
 
     action.options.push(
       this.passOption(),

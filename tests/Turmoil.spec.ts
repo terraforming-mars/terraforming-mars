@@ -8,7 +8,7 @@ import {OrOptions} from '../src/inputs/OrOptions';
 import {SelectSpace} from '../src/inputs/SelectSpace';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {Turmoil} from '../src/turmoil/Turmoil';
-import {TestingUtils, maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../src/cards/promo/JovianEmbassy';
@@ -191,7 +191,7 @@ describe('Turmoil', function() {
     expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
-    maxOutOceans(player, 9);
+    TestingUtils.maxOutOceans(player, 9);
     expect(protectedValley.canPlay(player)).is.true;
     expect(iceAsteroid.canPlay(player)).is.true;
   });

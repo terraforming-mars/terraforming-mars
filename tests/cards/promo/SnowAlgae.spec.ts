@@ -3,7 +3,7 @@ import {SnowAlgae} from '../../../src/cards/promo/SnowAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('SnowAlgae', function() {
@@ -16,12 +16,12 @@ describe('SnowAlgae', function() {
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, 1);
+    TestingUtils.maxOutOceans(player, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, 2);
+    TestingUtils.maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

@@ -3,7 +3,7 @@ import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('GreatDam', function() {
   let card : GreatDam; let player : Player;
@@ -20,7 +20,7 @@ describe('GreatDam', function() {
   });
 
   it('Should play', function() {
-    maxOutOceans(player, 4);
+    TestingUtils.maxOutOceans(player, 4);
     expect(card.canPlay(player)).is.true;
     card.play(player);
 

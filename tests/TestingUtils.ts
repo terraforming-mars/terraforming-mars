@@ -101,11 +101,6 @@ export class TestingUtils {
   }
 }
 
-export const maxOutOceans = function(player: Player, toValue: number = 0): Array<ISpace> {
-  return TestingUtils.maxOutOceans(player, toValue);
-};
-
-
 export const setCustomGameOptions = function(options: object = {}): GameOptions {
   return TestingUtils.setCustomGameOptions(options);
 };

@@ -18,7 +18,7 @@ export class BuildColony implements DeferredAction {
     if (this.openColonies === undefined) {
       this.openColonies = this.player.game.colonies.filter((colony) =>
         colony.colonies.length < 3 &&
-        (colony.colonies.indexOf(this.player.id) === -1 || this.allowDuplicate) &&
+        (colony.colonies.includes(this.player.id) === false || this.allowDuplicate) &&
         colony.isActive);
     }
 

@@ -41,7 +41,7 @@ export class FreyjaBiodomes extends Card {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.ANIMAL);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 
   public play(player: Player) {

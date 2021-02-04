@@ -30,7 +30,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
     });
   }
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 2;
     }
     return 0;

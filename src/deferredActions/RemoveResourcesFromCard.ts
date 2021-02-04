@@ -70,7 +70,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === ResourceType.ANIMAL) {
-        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1);
+        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false);
       } else {
         resourceCards = player.getCardsWithResources(resourceType);
       }
@@ -80,7 +80,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
         switch (resourceType) {
         case ResourceType.ANIMAL:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1));
+          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
           break;
         case ResourceType.MICROBE:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;

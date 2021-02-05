@@ -9,6 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
+import {CardRequirements} from '../CardRequirements';
 
 export class LunaTrainStation extends MoonCard {
   constructor() {
@@ -18,6 +19,7 @@ export class LunaTrainStation extends MoonCard {
       tags: [Tags.BUILDING],
       cost: 20,
       productionBox: Units.of({megacredits: 4}),
+      requirements: CardRequirements.builder((b) => b.logisticRate(5)),
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +

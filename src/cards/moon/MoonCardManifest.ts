@@ -85,7 +85,7 @@ import {RevoltingColonists} from './RevoltingColonists';
 // import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
-// import {SolarPanelFoundry} from './SolarPanelFoundry';
+import {SolarPanelFoundry} from './SolarPanelFoundry';
 import {SphereHabitats} from './SphereHabitats';
 import {StagingStationBehemoth} from './StagingStationBehemoth';
 import {SteelMarketMonopolists} from './SteelMarketMonopolists';
@@ -194,7 +194,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
     //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
-    //   {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
+    {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     //   {cardName: CardName.MOON_TETHER, Factory: MoonTether},
 
   //   // All cards have costs, type, tags, and text description, and behavior.

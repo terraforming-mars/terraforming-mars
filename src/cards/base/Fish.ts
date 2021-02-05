@@ -21,9 +21,9 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       cost: 9,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.temperature(2)),
       metadata: {
         cardNumber: '052',
-        requirements: CardRequirements.builder((b) => b.temperature(2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

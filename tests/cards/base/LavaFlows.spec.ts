@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {resetBoard, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('LavaFlows', function() {
   let card : LavaFlows; let player : Player; let game : Game;
@@ -15,7 +15,7 @@ describe('LavaFlows', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Can\'t play if no available spaces', function() {

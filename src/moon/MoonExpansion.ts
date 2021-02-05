@@ -4,10 +4,7 @@ import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
 import {TileType} from '../TileType';
-// import {MoonSerialization} from './MoonSerialization';
-// import {MoonModel} from './MoonModel';
 import {SpaceType} from '../SpaceType';
-// import {Resources} from '../Resources';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -16,10 +13,6 @@ import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
-// import {IProjectCard} from '../cards/IProjectCard';
-// import {Units} from '../Units';
-// import {CardName} from '../CardName';
-// import {IMoonCard} from './IMoonCard';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -40,7 +33,8 @@ export class MoonExpansion {
   private constructor() {
   }
 
-  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T): T | undefined {
+  // If the moon expansion is enabled, execute this callback, otherwise do nothing.
+  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T) {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -48,7 +42,7 @@ export class MoonExpansion {
         return cb(game.moonData);
       }
     }
-    return elseCb !== undefined ? elseCb() : undefined;
+    return elseCb ? elseCb() : undefined;
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
@@ -171,14 +165,17 @@ export class MoonExpansion {
     MoonExpansion.ifMoon(game, (moonData) => {
       tiles = moonData.moon.spaces.filter(
         (space) => {
-          const spaceTileType = space.tile?.tileType;
+          if (space.tile === undefined) {
+            return false;
+          }
+          const type = space.tile.tileType;
           let include: boolean = true;
           if (tileType === TileType.MOON_COLONY) {
-            include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_COLONY || type === TileType.LUNAR_MINE_URBANIZATION;
           } else if (tileType === TileType.MOON_MINE) {
-            include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && spaceTileType === tileType;
+            include = include && type === tileType;
           }
 
           if (surfaceOnly) {
@@ -221,5 +218,32 @@ export class MoonExpansion {
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
     return Units.of({steel, titanium});
+  }
+
+  public static calculateVictoryPoints(player: Player): void {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      // Each road tile on the map awards 1VP to the player owning it.
+      // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
+      const moon = moonData.moon;
+      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+      mySpaces.forEach((space) => {
+        if (space.tile !== undefined) {
+          switch (space.tile.tileType) {
+          case TileType.MOON_ROAD:
+            player.victoryPointsBreakdown.setVictoryPoints('moon road', 1);
+            break;
+          case TileType.MOON_MINE:
+          case TileType.MOON_COLONY:
+            const points = moon.getAdjacentSpaces(space).filter((adj) => adj.tile?.tileType === TileType.MOON_ROAD).length;
+            if (space.tile.tileType === TileType.MOON_MINE) {
+              player.victoryPointsBreakdown.setVictoryPoints('moon mine', points);
+            } else {
+              player.victoryPointsBreakdown.setVictoryPoints('moon colony', points);
+            }
+            break;
+          }
+        }
+      });
+    });
   }
 }

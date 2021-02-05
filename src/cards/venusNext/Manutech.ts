@@ -31,4 +31,10 @@ export class Manutech implements CorporationCard {
         });
       }),
     }
+
+    public static onProductionGain(player: Player, resource: Resources, amount: number) {
+      if (amount > 0) {
+        player.setResource(resource, amount);
+      }
+    }
 }

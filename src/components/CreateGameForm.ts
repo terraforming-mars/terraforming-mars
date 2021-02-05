@@ -326,13 +326,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
     getPlayerContainerColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    showSecretOptions: function(): boolean {
-      const uri = window.location.href.split('?');
-      if (uri.length === 2 && uri[1].indexOf('secret') >= 0) {
-        return true;
-      }
-      return false;
-    },
     serializeSettings: function() {
       const component = (this as any) as CreateGameModel;
 
@@ -502,6 +495,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
   template: `
         <div id="create-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
+            <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
+                (Looking for people to play with? <a href="https://discord.gg/fWXE53K" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+            </div>
 
             <div class="create-game-form create-game--block">
 
@@ -597,13 +593,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div v-if="showSecretOptions()">
-                              <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
-                              <label for="themoon-checkbox" class="expansion-button">
-                                  <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                                  <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
-                              </label>
-                            </div>
+                            <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
+                            <label for="themoon-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                                <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
+                                &nbsp;<span style="font-size: smaller;">α: alpha</span>
+                            </label>
 
                             <template v-if="moonExpansion">
                               <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">

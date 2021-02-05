@@ -8,7 +8,7 @@ import {OrOptions} from '../src/inputs/OrOptions';
 import {SelectSpace} from '../src/inputs/SelectSpace';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {Turmoil} from '../src/turmoil/Turmoil';
-import {resetBoard, maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../src/cards/promo/JovianEmbassy';
@@ -38,7 +38,7 @@ describe('Turmoil', function() {
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Should initialize with right defaults', function() {
@@ -142,7 +142,7 @@ describe('Turmoil', function() {
     player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
-    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
+    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
     placeOcean.cb(steelSpace!);
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
@@ -191,7 +191,7 @@ describe('Turmoil', function() {
     expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
-    maxOutOceans(player, 9);
+    TestingUtils.maxOutOceans(player, 9);
     expect(protectedValley.canPlay(player)).is.true;
     expect(iceAsteroid.canPlay(player)).is.true;
   });

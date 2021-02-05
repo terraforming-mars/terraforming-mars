@@ -18,9 +18,9 @@ export class SponsoredMohole extends Card implements IProjectCard {
       name: CardName.SPONSORED_MOHOLE,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       metadata: {
         cardNumber: 'T13',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.heat(2));
         }),

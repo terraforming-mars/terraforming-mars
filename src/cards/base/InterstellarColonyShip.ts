@@ -14,10 +14,10 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 24,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       metadata: {
         description: 'Requires that you have 5 Science tags.',
         cardNumber: '027',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
         victoryPoints: 4,
       },
     });

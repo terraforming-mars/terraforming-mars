@@ -22,13 +22,13 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       cost: 17,
       productionBox: Units.of({energy: -1}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
       metadata: {
         cardNumber: '069',
         description: {
           text: 'Oxygen must be 8% or less. Decrease your energy production 1 step.',
           align: 'left',
         },
-        requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 plant or 1 steel to gain 7MC.', (eb) => {
             eb.plants(1).slash().steel(1).startAction.megacredits(7);

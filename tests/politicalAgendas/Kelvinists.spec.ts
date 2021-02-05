@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {ISpace} from '../../src/boards/ISpace';
-import {resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, TestPlayers} from '../TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from '../../src/turmoil/parties/Kelvinists';
 import {TileType} from '../../src/TileType';
 import {Resources} from '../../src/Resources';
@@ -18,7 +18,7 @@ describe('Kelvinists', function() {
     turmoil = game.turmoil!;
     kelvinists = new Kelvinists();
 
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 MC for each Heat production you have', function() {
@@ -38,7 +38,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling policy 1: Pay 10 MC to increase your Energy and Heat production 1 step', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_1;
     kelvinistsPolicy.action(player);
@@ -49,14 +49,14 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling policy 2: When you raise temperature, gain 3 MC per step raised', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[1].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[1].id);
 
     game.increaseTemperature(player, 1);
     expect(player.megaCredits).to.eq(3);
   });
 
   it('Ruling policy 3: Convert 6 heat into temperature', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[2].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[2].id);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.false;
@@ -72,7 +72,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling policy 4: When you place a tile, gain 2 heat', function() {
-    setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[3].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[3].id);
 
     const emptySpace: ISpace = game.board.spaces.find((space) => space.bonus.length === 0) as ISpace;
     game.addTile(player, emptySpace.spaceType, emptySpace, {tileType: TileType.CITY});

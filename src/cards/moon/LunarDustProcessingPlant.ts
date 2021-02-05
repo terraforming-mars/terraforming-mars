@@ -23,7 +23,7 @@ export class LunarDustProcessingPlant extends Card implements IProjectCard {
         cardNumber: 'M17',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a road tile on the Moon, you spend no steel on it.', (eb) => {
-            eb.empty().startEffect.tile(TileType.MOON_ROAD, false).colon().steel(0).asterix();
+            eb.startEffect.tile(TileType.MOON_ROAD, false).colon().text('0').steel(1);
           }).br;
           b.minus().titanium(1).moonLogisticsRate(1);
         }),

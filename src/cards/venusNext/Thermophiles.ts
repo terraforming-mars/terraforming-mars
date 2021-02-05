@@ -25,9 +25,9 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       cost: 9,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.venus(6)),
       metadata: {
         cardNumber: '253',
-        requirements: CardRequirements.builder((b) => b.venus(6)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
             eb.empty().startAction.microbes(1).secondaryTag(Tags.VENUS);
@@ -52,7 +52,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
     return true;
   }
   public action(player: Player) {
-    const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
     const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
 
     // only 1 valid target and cannot remove 2 microbes - add to itself

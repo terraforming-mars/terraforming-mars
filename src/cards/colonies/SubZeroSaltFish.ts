@@ -22,9 +22,9 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
         cardNumber: 'C42',
-        requirements: CardRequirements.builder((b) => b.temperature(-6)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

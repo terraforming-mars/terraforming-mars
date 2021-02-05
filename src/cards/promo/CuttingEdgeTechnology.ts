@@ -32,7 +32,7 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
   }
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.metadata.requirements !== undefined) return 2;
+    if (card.requirements !== undefined) return 2;
     return 0;
   }
 

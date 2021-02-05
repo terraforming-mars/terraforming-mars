@@ -25,9 +25,9 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
       cost: 6,
       resourceType: ResourceType.ASTEROID,
 
+      requirements: CardRequirements.builder((b) => b.venus(14).max()),
       metadata: {
         cardNumber: '243',
-        requirements: CardRequirements.builder((b) => b.venus(14).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
             eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);

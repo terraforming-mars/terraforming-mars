@@ -15,9 +15,9 @@ export class SkyDocks extends Card implements IProjectCard {
       name: CardName.SKY_DOCKS,
       cardType: CardType.ACTIVE,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
         cardNumber: 'C36',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a card, you pay 1 MC less for it.', (eb) => {
             eb.empty().startEffect.megacredits(-1);

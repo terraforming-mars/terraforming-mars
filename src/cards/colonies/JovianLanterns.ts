@@ -23,9 +23,9 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
       metadata: {
         cardNumber: 'C18',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
             eb.titanium(1).startAction.floaters(2);

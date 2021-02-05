@@ -17,9 +17,9 @@ export class SpacePortColony extends Card implements IProjectCard {
       name: CardName.SPACE_PORT_COLONY,
       cardType: CardType.AUTOMATED,
 
+      requirements: CardRequirements.builder((b) => b.colonies()),
       metadata: {
         cardNumber: 'C39',
-        requirements: CardRequirements.builder((b) => b.colonies()),
         renderData: CardRenderer.builder((b) => {
           b.colonies(1).asterix().nbsp.tradeFleet().br;
           b.vpText('1VP per 2 colonies in play.');

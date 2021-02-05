@@ -20,9 +20,9 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: 'C32',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card, or spend 1 floater here to draw a card.', (eb) => {
             eb.empty().arrow().floaters(1).or();

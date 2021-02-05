@@ -18,9 +18,9 @@ export class IceCapMelting extends Card implements IProjectCard {
       name: CardName.ICE_CAP_MELTING,
       cost: 5,
 
+      requirements: CardRequirements.builder((b) => b.temperature(2)),
       metadata: {
         cardNumber: '181',
-        requirements: CardRequirements.builder((b) => b.temperature(2)),
         renderData: CardRenderer.builder((b) => b.oceans(1)),
         description: 'Requires +2 C or warmer. Place 1 ocean tile.',
       },

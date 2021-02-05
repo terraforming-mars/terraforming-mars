@@ -20,9 +20,9 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       cost: 12,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.venus(12)),
       metadata: {
         cardNumber: '249',
-        requirements: CardRequirements.builder((b) => b.venus(12)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);

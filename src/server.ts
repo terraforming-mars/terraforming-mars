@@ -4,6 +4,7 @@ require('console-stamp')(
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
 
+import * as crypto from 'crypto';
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
@@ -25,11 +26,16 @@ import {Cloner} from './database/Cloner';
 const serverId = process.env.SERVER_ID || generateRandomId();
 const styles = fs.readFileSync('build/styles.css');
 let compressedStyles: undefined | Buffer = undefined;
+let compressedStylesHash: undefined | string = undefined;
 const route = new Route();
 const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new Map<string, Buffer>();
 const isProduction = process.env.NODE_ENV === 'production';
+
+function hashFile(data: Buffer): string {
+  return crypto.createHash('md5').update(data).digest('hex');
+}
 
 // compress styles.css
 zlib.gzip(styles, function(err, compressed) {
@@ -38,6 +44,7 @@ zlib.gzip(styles, function(err, compressed) {
     return;
   }
   compressedStyles = compressed;
+  compressedStylesHash = hashFile(compressed);
 });
 
 function readFile(path: string, cb: (err: Error | null, data: Buffer) => void): void {
@@ -88,8 +95,12 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         res.write(fs.readFileSync('build/genfiles/translations.json'));
         res.end();
       } else if (req.url === '/styles.css') {
+        if (compressedStylesHash !== undefined && req.headers['if-none-match'] === compressedStylesHash) {
+          route.notModified(res);
+          return;
+        }
         res.setHeader('Content-Type', 'text/css');
-        res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
+        res.setHeader('Cache-Control', 'must-revalidate');
         serveStyles(req, res);
       } else if (
         req.url.startsWith('/assets/') ||
@@ -582,6 +593,9 @@ function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void 
   let buffer = styles;
   if (compressedStyles !== undefined && supportsEncoding(req, 'gzip')) {
     res.setHeader('Content-Encoding', 'gzip');
+    if (compressedStylesHash !== undefined) {
+      res.setHeader('ETag', compressedStylesHash);
+    }
     buffer = compressedStyles;
   }
   res.setHeader('Content-Length', buffer.length);

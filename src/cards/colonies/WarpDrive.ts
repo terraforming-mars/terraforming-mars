@@ -15,9 +15,9 @@ export class WarpDrive extends Card implements IProjectCard {
       name: CardName.WARP_DRIVE,
       cardType: CardType.ACTIVE,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       metadata: {
         cardNumber: 'C49',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 4 MC less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-4);
@@ -30,7 +30,7 @@ export class WarpDrive extends Card implements IProjectCard {
   }
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 4;
     }
     return 0;

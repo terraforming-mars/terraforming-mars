@@ -18,9 +18,9 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.cities(2).any()),
       metadata: {
         cardNumber: 'C24',
-        requirements: CardRequirements.builder((b) => b.cities(2).any()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth tag, place an animal here.', (eb) => {
             eb.earth().played.startEffect.animals(1);
@@ -41,7 +41,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
   public resourceCount: number = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.EARTH) !== -1) {
+    if (card.tags.includes(Tags.EARTH)) {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.EARTH).length);
     }
   }

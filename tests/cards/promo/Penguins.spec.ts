@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {maxOutOceans} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Penguins', function() {
@@ -15,12 +15,12 @@ describe('Penguins', function() {
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, 7);
+    TestingUtils.maxOutOceans(player, 7);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, 8);
+    TestingUtils.maxOutOceans(player, 8);
     expect(card.canPlay(player)).is.true;
   });
 

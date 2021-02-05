@@ -2,7 +2,6 @@ import {SpaceBonus} from '../../SpaceBonus';
 import {CardName} from '../../CardName';
 import {TileType} from '../../TileType';
 import {Capital} from '../base/Capital';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -17,7 +16,6 @@ export class CapitalAres extends Capital {
           text: 'Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5.',
           align: 'left',
         },
-        requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(2).br;

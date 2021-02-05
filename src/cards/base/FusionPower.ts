@@ -18,9 +18,9 @@ export class FusionPower extends Card implements IProjectCard {
       cost: 14,
       productionBox: Units.of({energy: 3}),
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
       metadata: {
         cardNumber: '132',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(3));
         }),

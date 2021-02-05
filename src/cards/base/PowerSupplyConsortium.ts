@@ -17,9 +17,9 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
       tags: [Tags.ENERGY],
       cost: 5,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
       metadata: {
         cardNumber: '160',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).any.br;

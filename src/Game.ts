@@ -630,10 +630,6 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
-  public finishedResearchPhase(player: Player): boolean {
-    return this.researchedPlayers.has(player.id);
-  }
-
   public hasPassedThisActionPhase(player: Player): boolean {
     return this.passedPlayers.has(player.id);
   }
@@ -797,7 +793,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.passedPlayers.add(player.id);
   }
 
-  private hasResearched(player: Player): boolean {
+  public hasResearched(player: Player): boolean {
     return this.researchedPlayers.has(player.id);
   }
 

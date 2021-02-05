@@ -192,7 +192,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
-    //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
+    //   {cardName: CardName.LUNAR_STEEL, Facetory: LunarSteel},
     //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     //   {cardName: CardName.MOON_TETHER, Factory: MoonTether},

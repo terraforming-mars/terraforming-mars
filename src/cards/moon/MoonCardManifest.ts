@@ -40,7 +40,7 @@ import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
-// import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
+import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
 import {LunaProjectOffice} from './LunaProjectOffice';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
@@ -176,7 +176,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     //   {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
-    //   {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     //   {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     //   {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},

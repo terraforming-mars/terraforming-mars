@@ -40,7 +40,7 @@ import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
-// import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
+import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
 import {LunaProjectOffice} from './LunaProjectOffice';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
@@ -70,7 +70,7 @@ import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
-// import {MoonTether} from './MoonTether';
+import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
@@ -176,7 +176,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     //   {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
-    //   {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     //   {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     //   {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
@@ -195,9 +195,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.LUNAR_STEEL, Facetory: LunarSteel},
     //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
-    //   {cardName: CardName.MOON_TETHER, Factory: MoonTether},
-
-  //   // All cards have costs, type, tags, and text description, and behavior.
+    {cardName: CardName.MOON_TETHER, Factory: MoonTether},
   ],
   corporationCards: [
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},

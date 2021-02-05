@@ -5,17 +5,22 @@ export const CardCost = Vue.component('CardCost', {
     amount: {
       type: Number as () => number | undefined,
     },
+    newCost: {
+      type: Number as () => number | undefined,
+    },
   },
   methods: {
     getClasses: function(): string {
       const classes = ['card-cost'];
       if (this.amount === undefined) {
         classes.push('visibility-hidden');
+      } else if (this.newCost !== undefined && this.newCost !== this.amount) {
+        classes.push('reduced-cost');
       }
       return classes.join(' ');
     },
   },
   template: `
-        <div :class="getClasses()">{{ amount === null ? 0 : amount }}</div>
+        <div :class="getClasses()">{{ newCost !== undefined ? newCost : (amount === null ? 0 : amount) }}</div>
     `,
 });

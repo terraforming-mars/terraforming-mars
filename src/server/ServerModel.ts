@@ -123,7 +123,7 @@ export class Server {
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
-      waitingFor: getWaitingFor(player.getWaitingFor()),
+      waitingFor: getWaitingFor(player.getWaitingFor(), player),
     };
   }
 }
@@ -193,17 +193,24 @@ function getCorporationCard(player: Player): CardModel | undefined {
   return {
     name: player.corporationCard.name,
     resources: player.getResourcesOnCard(player.corporationCard),
-    calculatedCost: 0,
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
     warning: player.corporationCard.warning,
   } as CardModel;
 }
 
+function getCalculatedCost(card: ICard, player?: Player) : number | undefined {
+  if ([CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT].includes(card.cardType)) {
+    return player?.getCardCost(card as IProjectCard);
+  }
+  return undefined;
+}
+
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
   reserveUnitMap?: Map<CardName, Units>,
+  player?: Player, // If provided, then the cards have applied discounts from the given player.
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
   cards.forEach((card) => {
@@ -214,7 +221,7 @@ function getCardsAsCardModel(
           card.resourceCount :
           undefined,
       resourceType: card.resourceType,
-      calculatedCost: 0,
+      calculatedCost: getCalculatedCost(card, player),
       cardType: CardType.AUTOMATED,
       isDisabled: false,
       warning: card.warning,
@@ -227,6 +234,7 @@ function getCardsAsCardModel(
 
 function getWaitingFor(
   waitingFor: PlayerInput | undefined,
+  player: Player,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
     return undefined;
@@ -261,7 +269,7 @@ function getWaitingFor(
     playerInputModel.options = [];
     if (waitingFor.options !== undefined) {
       for (const option of waitingFor.options) {
-        const subOption = getWaitingFor(option);
+        const subOption = getWaitingFor(option, player);
         if (subOption !== undefined) {
           playerInputModel.options.push(subOption);
         }
@@ -272,14 +280,14 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap);
+    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap, player);
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
-      (waitingFor as SelectCard<ICard>).cards,
+      (waitingFor as SelectCard<ICard>).cards, true, undefined, player,
     );
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard

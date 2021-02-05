@@ -61,7 +61,7 @@ export const PlayerStatus = Vue.component('player-status', {
       }
       if (this.actionLabel === ActionLabel.PASSED) {
         classes.push(`${baseClass}--passed`);
-      } else if (this.actionLabel === ActionLabel.ACTIVE) {
+      } else if (this.actionLabel === ActionLabel.ACTIVE || this.actionLabel === ActionLabel.DRAFTING || this.actionLabel === ActionLabel.RESEARCHING) {
         classes.push(`${baseClass}--active`);
       }
       return classes.join(' ');

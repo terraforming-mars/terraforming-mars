@@ -51,7 +51,7 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>nwai90</b></sub><br />Helps with the things</a>
+        <sub><b>nwai90</b></sub><br />Community and Political Agendas fan-made expansions, and helps with the things</a>
     </td>
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
@@ -62,6 +62,14 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/kberg"><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>Robert Konigsberg</b></sub><br />Ares fan expansion, The Moon fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a> 
+    </td>
+    <td align="center">
+      <a href="https://github.com/chosta"><img src="https://avatars.githubusercontent.com/u/836179?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>chosta</b></sub><br />Front end and back end</a> 
+    </td>
+    <td align="center">
+      <a href="https://github.com/Lynesth"><img src="https://avatars.githubusercontent.com/u/5318258?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>Lynesth</b></sub><br />Help with the things</a> 
     </td>
   </tr>
 </table>

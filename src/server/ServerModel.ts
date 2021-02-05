@@ -104,7 +104,7 @@ export class Server {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: getCards(player, player.playedCards),
+      playedCards: getCards(player, player.playedCards, true, false),
       players: getPlayers(game.getPlayers(), game),
       preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),

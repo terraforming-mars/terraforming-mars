@@ -16,6 +16,10 @@ export class Route {
     res.write('Not found');
     res.end();
   }
+  public notModified(res: http.ServerResponse): void {
+    res.writeHead(304);
+    res.end();
+  }
   public internalServerError(
     req: http.IncomingMessage,
     res: http.ServerResponse,

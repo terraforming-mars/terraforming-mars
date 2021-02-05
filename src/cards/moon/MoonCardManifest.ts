@@ -82,7 +82,7 @@ import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
-// import {RustEatingBacteria} from './RustEatingBacteria';
+import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
 import {SolarPanelFoundry} from './SolarPanelFoundry';
@@ -193,7 +193,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
-    //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
+    {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
 

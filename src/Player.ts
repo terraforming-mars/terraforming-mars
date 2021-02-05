@@ -454,6 +454,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
     }
 
+    MoonExpansion.calculateVictoryPoints(this);
+
     this.victoryPointsBreakdown.updateTotal();
     return this.victoryPointsBreakdown;
   }

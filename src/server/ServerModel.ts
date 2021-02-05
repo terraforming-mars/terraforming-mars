@@ -358,12 +358,13 @@ function getCards(
   player: Player,
   cards: Array<IProjectCard>,
   showResouces: boolean = true,
+  calculateNewCost: boolean = true,
 ): Array<CardModel> {
   return cards.map((card) => ({
     resources: showResouces ? player.getResourcesOnCard(card) : undefined,
     resourceType: card.resourceType,
     name: card.name,
-    calculatedCost: player.getCardCost(card),
+    calculatedCost: calculateNewCost ? player.getCardCost(card) : card.cost,
     cardType: card.cardType,
     isDisabled: false,
     warning: card.warning,
@@ -395,7 +396,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: getCards(player, player.playedCards),
+      playedCards: getCards(player, player.playedCards, true, false),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       coloniesCount: player.getColoniesCount(),

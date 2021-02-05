@@ -70,7 +70,7 @@ import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
-// import {MoonTether} from './MoonTether';
+import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
@@ -195,7 +195,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
     //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
-    //   {cardName: CardName.MOON_TETHER, Factory: MoonTether},
+    {cardName: CardName.MOON_TETHER, Factory: MoonTether},
 
   //   // All cards have costs, type, tags, and text description, and behavior.
   ],

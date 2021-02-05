@@ -78,7 +78,7 @@ import {PreliminaryDarkside} from './PreliminaryDarkside';
 // import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
-// import {ProcessorFactory} from './ProcessorFactory';
+import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
@@ -191,7 +191,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
-    //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
+    {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
     //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},

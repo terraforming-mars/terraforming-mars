@@ -461,6 +461,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         cardsBlackList: gameReq.cardsBlackList,
         customColoniesList: gameReq.customColoniesList,
         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
+        requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
       };
 
       if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {

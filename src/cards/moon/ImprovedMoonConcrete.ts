@@ -2,12 +2,12 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
 import {Units} from '../../Units';
 import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
+import {MoonCard} from './MoonCard';
 
-export class ImprovedMoonConcrete extends Card implements IProjectCard {
+export class ImprovedMoonConcrete extends MoonCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.IMPROVED_MOON_CONCRETE,
@@ -24,17 +24,17 @@ export class ImprovedMoonConcrete extends Card implements IProjectCard {
           b.minus().steel(2).moonMiningRate(1);
         }),
       },
+    }, {
+      reserveUnits: Units.of({steel: 2}),
     });
   }
-
-  public reserveUnits = Units.of({steel: 2});
 
   public canPlay(): boolean {
     return true;
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

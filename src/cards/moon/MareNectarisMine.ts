@@ -4,15 +4,14 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
-import {Card} from '../Card';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {IMoonCard} from './IMoonCard';
+import {MoonCard} from './MoonCard';
 
-export class MareNectarisMine extends Card implements IProjectCard, IMoonCard {
+export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCard {
   constructor() {
     super({
       name: CardName.MARE_NECTARIS_MINE,
@@ -30,15 +29,14 @@ export class MareNectarisMine extends Card implements IProjectCard, IMoonCard {
           b.moonMine().asterix();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 1}),
+      tilesBuilt: [TileType.MOON_MINE],
     });
   }
 
-  public reserveUnits = Units.of({titanium: 1});
-  public tilesBuilt = [TileType.MOON_MINE];
-
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    player.addProduction(Resources.STEEL, 1);
+    super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NECTARIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

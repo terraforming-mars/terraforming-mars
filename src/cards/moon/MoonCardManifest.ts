@@ -22,7 +22,7 @@ import {DeepLunarMining} from './DeepLunarMining';
 // import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
 import {GeodesicTents} from './GeodesicTents';
-// import {GrandLunaAcademy} from './GrandLunaAcademy';
+import {GrandLunaAcademy} from './GrandLunaAcademy';
 import {Habitat14} from './Habitat14';
 import {HE3FusionPlant} from './HE3FusionPlant';
 import {HE3Lobbyists} from './HE3Lobbyists';
@@ -79,7 +79,7 @@ import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
-// import {ProcessorFactory} from './ProcessorFactory';
+import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
@@ -189,10 +189,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
-    //   {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
+    {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
-    //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
+    {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
     {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},

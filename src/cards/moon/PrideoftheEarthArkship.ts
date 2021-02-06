@@ -36,11 +36,11 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   public resourceCount = 0;
 
   public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SPACE) >= 2 && player.getTagCount(Tags.SCIENCE) >= 1;
+    return super.canPlay(player) && player.getTagCount(Tags.SPACE) >= 2 && player.getTagCount(Tags.SCIENCE) >= 1;
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     return undefined;
   }
 

@@ -1,19 +1,19 @@
 import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
-import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
-import {TileType} from '../../../src/TileType';
+import {TheWomb} from '../../../src/cards/moon/TheWomb';
+import {TestPlayer} from '../../TestPlayer';
+import {TestPlayers} from '../../TestPlayers';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('SubterraneanHabitats', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: SubterraneanHabitats;
 
@@ -47,23 +47,20 @@ describe('SubterraneanHabitats', () => {
   });
 
   it('effect', () => {
-    // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
+    // This test and the next show that The Womb needs 2 titanium.
+    const theWomb = new TheWomb();
+    player.setProductionForTest({energy: 2});
     player.titanium = 2;
-    player.steel = 1;
     player.megaCredits = 1000;
 
-    const msm = new MareSerenitatisMine();
-    // FOR NOW ACTUALLY I'M HACKING THE CARD TO SAY THAT IS IS PLACING A COLONY
-    msm.tilesBuilt.push(TileType.MOON_COLONY);
-    player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    player.cardsInHand = [theWomb];
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
 
     player.titanium = 1;
-    player.steel = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Improved Moon Concrete, doesn't need steel.
+    // And this one shows that with Subterranean Habitats, it doesn't need both titanium.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
   });
 });

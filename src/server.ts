@@ -31,6 +31,7 @@ const route = new Route();
 const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new Map<string, Buffer>();
+const hashCache = new Map<string, string>();
 const isProduction = process.env.NODE_ENV === 'production';
 
 function hashFile(data: Buffer): string {
@@ -56,6 +57,9 @@ function readFile(path: string, cb: (err: Error | null, data: Buffer) => void): 
         return;
       }
       fileCache.set(path, data1);
+      if (isProduction === true) {
+        hashCache.set(path, hashFile(data1));
+      }
       cb(null, data1);
     });
   } else {
@@ -571,7 +575,16 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   } else {
     return route.notFound(req, res);
   }
-  if (req.url !== '/main.js' && req.url !== '/main.js.map') {
+  // asset caching
+  const hash = hashCache.get(file);
+  if (isProduction === true && hash !== undefined) {
+    if (req.headers['if-none-match'] === hash) {
+      route.notModified(res);
+      return;
+    }
+    res.setHeader('Cache-Control', 'must-revalidate');
+    res.setHeader('ETag', hash);
+  } else if (isProduction === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
   readFile(file, function(err, data) {

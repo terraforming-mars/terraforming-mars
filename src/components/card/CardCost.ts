@@ -24,7 +24,10 @@ export const CardCost = Vue.component('CardCost', {
   template: `
     <div>
         <div :class="getClasses()">{{ newCost !== undefined ? newCost : (amount === null ? 0 : amount) }}</div>
-        <div :class="'card-old-cost'" v-if="displayTwoCosts()">{{amount}}</div>
+        <template v-if="displayTwoCosts()">
+          <div class="card-cost-transition"></div>
+          <div class="card-old-cost">{{amount}}</div>
+        </template>
     </div>
     `,
 });

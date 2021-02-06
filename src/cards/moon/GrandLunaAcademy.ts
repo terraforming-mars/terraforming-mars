@@ -1,0 +1,36 @@
+import {CardName} from '../../CardName';
+import {Player} from '../../Player';
+import {CardType} from '../CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../Tags';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+
+export class GrandLunaAcademy extends Card implements IProjectCard {
+  constructor() {
+    super({
+      name: CardName.GRAND_LUNA_ACADEMY,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.MOON],
+      cost: 13,
+
+      metadata: {
+        description: 'Draw 1 card per each 2 Moon tags you have, including this.',
+        cardNumber: 'M83',
+        renderData: CardRenderer.builder((b) => {
+          b.cards(1).slash().moon(2).digit.played;
+        }),
+      },
+    });
+  };
+
+  public canPlay(): boolean {
+    return true;
+  }
+
+  public play(player: Player) {
+    const gain = Math.floor(player.getTagCount(Tags.MOON) / 2);
+    player.drawCard(gain);
+    return undefined;
+  }
+}

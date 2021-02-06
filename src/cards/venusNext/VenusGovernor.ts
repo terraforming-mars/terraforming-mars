@@ -15,9 +15,9 @@ export class VenusGovernor extends Card {
       tags: [Tags.VENUS, Tags.VENUS],
       cost: 4,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 2)),
       metadata: {
         cardNumber: '255',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2));
         }),

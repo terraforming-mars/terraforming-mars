@@ -8,9 +8,9 @@ import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
-import {Card} from '../Card';
+import {MoonCard} from './MoonCard';
 
-export class LunaTradeStation extends Card implements IActionCard {
+export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_STATION,
@@ -28,12 +28,13 @@ export class LunaTradeStation extends Card implements IActionCard {
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 2}),
     });
   };
-  public reserveUnits = Units.of({titanium: 2});
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     MoonExpansion.addTile(
       player,
       MoonSpaces.LUNA_TRADE_STATION,
@@ -44,8 +45,8 @@ export class LunaTradeStation extends Card implements IActionCard {
     return undefined;
   }
 
-  public canAct(): boolean {
-    return true;
+  public canAct(player: Player): boolean {
+    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, true).length > 0;
   }
 
   public action(player: Player) {

@@ -23,7 +23,7 @@ export class DeepLunarMining extends MoonCard {
           b.minus().titanium(1).production((pb) => {
             pb.titanium(2);
           }).br;
-          b.moonMineRate(1);
+          b.moonMiningRate(1);
         }),
       },
     }, {
@@ -32,8 +32,7 @@ export class DeepLunarMining extends MoonCard {
   };
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player, player.game);
+    super.play(player);
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

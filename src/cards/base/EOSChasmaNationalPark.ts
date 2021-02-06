@@ -23,9 +23,9 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       cost: 16,
       productionBox: Units.of({energy: 2}),
 
+      requirements: CardRequirements.builder((b) => b.temperature(-12)),
       metadata: {
         cardNumber: '026',
-        requirements: CardRequirements.builder((b) => b.temperature(-12)),
         description: 'Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.',
         renderData: CardRenderer.builder((b) => {
           b.animals(1).asterix().plants(3).br;

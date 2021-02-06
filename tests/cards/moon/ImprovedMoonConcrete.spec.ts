@@ -7,7 +7,6 @@ import {ImprovedMoonConcrete} from '../../../src/cards/moon/ImprovedMoonConcrete
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
-import {Cards} from '../../../src/cards/Cards';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -57,14 +56,14 @@ describe('ImprovedMoonConcrete', () => {
     // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
     msm.reserveUnits.steel = 2;
     player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
     player.titanium = 2;
     player.steel = 1;
-    expect(player.getPlayableCards().map(Cards.toCardName)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 });

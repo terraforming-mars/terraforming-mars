@@ -17,9 +17,9 @@ export class Farming extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 16,
 
+      requirements: CardRequirements.builder((b) => b.temperature(4)),
       metadata: {
         cardNumber: '118',
-        requirements: CardRequirements.builder((b) => b.temperature(4)),
         description: 'Requires +4° C or warmer. Increase your MC production 2 steps and your plant production 2 steps. Gain 2 Plants.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

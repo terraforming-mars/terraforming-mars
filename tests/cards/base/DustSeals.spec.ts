@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('DustSeals', function() {
   let card : DustSeals; let player : Player;
@@ -15,7 +15,7 @@ describe('DustSeals', function() {
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, 4);
+    TestingUtils.maxOutOceans(player, 4);
     expect(card.canPlay(player)).is.not.true;
   });
 

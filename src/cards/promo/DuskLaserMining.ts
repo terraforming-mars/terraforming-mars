@@ -16,9 +16,9 @@ export class DuskLaserMining extends Card implements IProjectCard {
       cost: 8,
       tags: [Tags.SPACE],
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
         cardNumber: 'X01',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
         description: 'Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

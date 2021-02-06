@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('WaterSplittingPlant', function() {
   let card : WaterSplittingPlant; let player : Player; let game : Game;
@@ -19,7 +19,7 @@ describe('WaterSplittingPlant', function() {
   });
 
   it('Can play', function() {
-    maxOutOceans(player, 2);
+    TestingUtils.maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
   });
 

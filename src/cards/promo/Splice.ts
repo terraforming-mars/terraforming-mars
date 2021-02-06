@@ -56,7 +56,7 @@ export class Splice extends Card implements CorporationCard {
   }
 
   private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): OrOptions | undefined {
-    if (card.tags.indexOf(Tags.MICROBE) === -1) {
+    if (card.tags.includes(Tags.MICROBE) === false) {
       return undefined;
     }
     const gainPerMicrobe = 2;

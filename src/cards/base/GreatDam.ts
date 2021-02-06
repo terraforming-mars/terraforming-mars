@@ -19,9 +19,9 @@ export class GreatDam extends Card implements IProjectCard {
       cost: 12,
       productionBox: Units.of({energy: 2}),
 
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
         cardNumber: '136',
-        requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2));
         }),

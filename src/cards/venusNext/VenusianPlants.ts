@@ -22,9 +22,9 @@ export class VenusianPlants extends Card implements IProjectCard {
       cost: 13,
       tags: [Tags.VENUS, Tags.PLANT],
 
+      requirements: CardRequirements.builder((b) => b.venus(16)),
       metadata: {
         cardNumber: '261',
-        requirements: CardRequirements.builder((b) => b.venus(16)),
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // intentional double br
           b.microbes(1).secondaryTag(Tags.VENUS).nbsp;
@@ -80,6 +80,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

@@ -3,18 +3,17 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 import {SpaceType} from '../../SpaceType';
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
+import {MoonCard} from './MoonCard';
 
-export class MareSerenitatisMine extends Card implements IProjectCard, IMoonCard {
+export class MareSerenitatisMine extends MoonCard implements IProjectCard, IMoonCard {
   constructor() {
     super({
       name: CardName.MARE_SERENITATIS_MINE,
@@ -33,16 +32,18 @@ export class MareSerenitatisMine extends Card implements IProjectCard, IMoonCard
           b.moonMine().asterix().nbsp.moonRoad().asterix();
         }),
       },
+    }, {
+      reserveUnits: Units.of({titanium: 2, steel: 1}),
+      tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
     });
   }
 
-  public reserveUnits = Units.of({titanium: 2, steel: 1});
-  public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD]
+  public canPlay(player: Player) {
+    return super.canPlay(player);
+  }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    player.addProduction(Resources.STEEL, 1);
-    player.addProduction(Resources.TITANIUM, 1);
+    super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     const moon = MoonExpansion.moonData(player.game).moon;

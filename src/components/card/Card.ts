@@ -15,6 +15,7 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
+import {CardRequirements} from '../../cards/CardRequirements';
 
 export const Card = Vue.component('card', {
   components: {
@@ -105,8 +106,8 @@ export const Card = Vue.component('card', {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (this.actionUsed) {
-        classes.push('cards-action-was-used');
+      if (this.actionUsed || card.isDisabled) {
+        classes.push('card-unavailable');
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
@@ -115,6 +116,9 @@ export const Card = Vue.component('card', {
     },
     getCardMetadata: function(): CardMetadata | undefined {
       return this.getCard()?.metadata;
+    },
+    getCardRequirements: function(): CardRequirements | undefined {
+      return this.getCard()?.requirements;
     },
     getResourceAmount: function(card: CardModel): number {
       return card.resources !== undefined ? card.resources : 0;
@@ -134,7 +138,7 @@ export const Card = Vue.component('card', {
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :isCorporation="isCorporationCard()"/>
+                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>

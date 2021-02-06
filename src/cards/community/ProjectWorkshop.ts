@@ -51,16 +51,16 @@ export class ProjectWorkshop implements CorporationCard {
             return undefined;
           }
 
-          return new SelectCard(
+          return new SelectCard<IProjectCard>(
             'Select active card to discard',
             'Discard',
-                    activeCards as Array<ICard>,
-                    (foundCards: Array<ICard>) => {
-                      this.convertCardPointsToTR(player, foundCards[0]);
-                      this.discardPlayedCard(player, foundCards[0]);
-                      player.drawCard(2);
-                      return undefined;
-                    },
+            activeCards,
+            (foundCards) => {
+              this.convertCardPointsToTR(player, foundCards[0]);
+              this.discardPlayedCard(player, foundCards[0]);
+              player.drawCard(2);
+              return undefined;
+            },
           );
         },
       );
@@ -85,10 +85,10 @@ export class ProjectWorkshop implements CorporationCard {
       }
     }
 
-    private discardPlayedCard(player: Player, card: ICard) {
+    private discardPlayedCard(player: Player, card: IProjectCard) {
       const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
       player.playedCards.splice(cardIndex, 1);
-      player.game.dealer.discard(card as IProjectCard);
+      player.game.dealer.discard(card);
 
       if (card.onDiscard) {
         card.onDiscard(player);

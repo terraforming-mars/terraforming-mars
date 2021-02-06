@@ -8,7 +8,7 @@ import {OrOptions} from '../src/inputs/OrOptions';
 import {SelectSpace} from '../src/inputs/SelectSpace';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {Turmoil} from '../src/turmoil/Turmoil';
-import {resetBoard, maxOutOceans, setCustomGameOptions, TestPlayers} from './TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../src/cards/promo/JovianEmbassy';
@@ -25,7 +25,6 @@ import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../src/cards/base/standardProjects/GreeneryStandardProject';
-import {CardName} from '../src/CardName';
 
 describe('Turmoil', function() {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -38,7 +37,7 @@ describe('Turmoil', function() {
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Should initialize with right defaults', function() {
@@ -142,7 +141,7 @@ describe('Turmoil', function() {
     player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
-    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
+    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
     placeOcean.cb(steelSpace!);
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
@@ -151,10 +150,11 @@ describe('Turmoil', function() {
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
-    const availableStandardProjects = player.getPlayableStandardProjects();
+    const standardProjects = player.getStandardProjectOption();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(availableStandardProjects.map((c) => c.name)).deep.eq([CardName.POWER_PLANT_STANDARD_PROJECT]);
+    expect(standardProjects.enabled![0]).to.eq(true);
+    expect(standardProjects.enabled!.slice(1)).to.not.contain(true);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
@@ -191,7 +191,7 @@ describe('Turmoil', function() {
     expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
-    maxOutOceans(player, 9);
+    TestingUtils.maxOutOceans(player, 9);
     expect(protectedValley.canPlay(player)).is.true;
     expect(iceAsteroid.canPlay(player)).is.true;
   });

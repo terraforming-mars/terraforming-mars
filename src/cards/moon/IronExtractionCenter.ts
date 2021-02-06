@@ -22,7 +22,7 @@ export class IronExtractionCenter extends MoonCard {
         cardNumber: 'M25',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.production((pb) => pb.steel(1)).slash().moonMineRate(2);
+          b.production((pb) => pb.steel(1)).slash().moonMiningRate(2);
         }),
       },
     }, {
@@ -32,7 +32,7 @@ export class IronExtractionCenter extends MoonCard {
 
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     const miningRate = MoonExpansion.moonData(player.game).miningRate;
     const productionIncrease = Math.floor(miningRate / 2);
     player.addProduction(Resources.STEEL, productionIncrease);

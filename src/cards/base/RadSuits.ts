@@ -14,9 +14,9 @@ export class RadSuits extends Card implements IProjectCard {
       name: CardName.RAD_SUITS,
       cost: 6,
 
+      requirements: CardRequirements.builder((b) => b.cities(2).any()),
       metadata: {
         cardNumber: '186',
-        requirements: CardRequirements.builder((b) => b.cities(2).any()),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
         }),

@@ -59,68 +59,71 @@ export class Server {
     const turmoil = getTurmoil(game);
 
     return {
-      cardsInHand: getCards(player, player.cardsInHand, false),
-      draftedCards: getCards(player, player.draftedCards, false),
-      milestones: getMilestones(game),
+      actionsTakenThisRound: player.actionsTakenThisRound,
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      aresData: game.aresData,
       awards: getAwards(game),
       cardCost: player.cardCost,
+      cardsInHand: getCards(player, player.cardsInHand, false),
+      cardsInHandNbr: player.cardsInHand.length,
+      citiesCount: player.getCitiesCount(),
+      colonies: getColonies(game),
+      coloniesCount: player.getColoniesCount(),
       color: player.color,
       corporationCard: getCorporationCard(player),
+      dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
+      dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
+      dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
+      deckSize: game.dealer.getDeckSize(),
+      draftedCards: getCards(player, player.draftedCards, false),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
+      fleetSize: player.getFleetSize(),
+      gameAge: game.gameAge,
       gameOptions: getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,
+      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+      isActive: player.id === game.activePlayer,
+      isSoloModeWin: game.isSoloModeWin(),
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      milestones: getMilestones(game),
       moon: MoonModel.serialize(game),
       name: player.name,
+      needsToDraft: player.needsToDraft,
+      needsToResearch: !game.hasResearched(player),
+      noTagsCount: player.getNoTagsCount(),
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
+      passedPlayers: game.getPassedPlayers(),
       phase: game.phase,
+      pickedCorporationCard: player.pickedCorporationCard ? getCardsAsCardModel([player.pickedCorporationCard], false) : [],
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards),
-      cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(),
-      coloniesCount: player.getColoniesCount(),
-      noTagsCount: player.getNoTagsCount(),
-      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       players: getPlayers(game.getPlayers(), game),
+      preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
+      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       spaces: getSpaces(game.board),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
+      tags: player.getAllTags(),
       temperature: game.getTemperature(),
       terraformRating: player.getTerraformRating(),
+      timer: player.timer.serialize(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(),
-      victoryPointsBreakdown: player.getVictoryPoints(),
-      waitingFor: getWaitingFor(player.getWaitingFor()),
-      isSoloModeWin: game.isSoloModeWin(),
-      gameAge: game.gameAge,
-      isActive: player.id === game.activePlayer,
-      venusScaleLevel: game.getVenusScaleLevel(),
-      colonies: getColonies(game),
-      tags: player.getAllTags(),
-      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-      fleetSize: player.getFleetSize(),
       tradesThisTurn: player.tradesThisTurn,
       turmoil: turmoil,
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
-      dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
-      dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
-      dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
-      needsToDraft: player.needsToDraft,
-      deckSize: game.dealer.getDeckSize(),
-      actionsTakenThisRound: player.actionsTakenThisRound,
-      passedPlayers: game.getPassedPlayers(),
-      aresData: game.aresData,
-      timer: player.timer.serialize(),
+      venusScaleLevel: game.getVenusScaleLevel(),
+      victoryPointsBreakdown: player.getVictoryPoints(),
+      waitingFor: getWaitingFor(player.getWaitingFor()),
     };
   }
 }
@@ -200,10 +203,11 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getCardsAsCardModel(
   cards: Array<ICard>,
   showResouces: boolean = true,
+  enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   reserveUnitMap?: Map<CardName, Units>,
 ): Array<CardModel> {
   const cardModel: Array<CardModel> = [];
-  cards.forEach((card) => {
+  cards.forEach((card, index) => {
     cardModel.push({
       name: card.name,
       resources:
@@ -213,7 +217,7 @@ function getCardsAsCardModel(
       resourceType: card.resourceType,
       calculatedCost: 0,
       cardType: CardType.AUTOMATED,
-      isDisabled: false,
+      isDisabled: enabled?.[index] === false,
       warning: card.warning,
       reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
     });
@@ -269,7 +273,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, shtpfpc.reserveUnitsMap);
+    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, undefined, shtpfpc.reserveUnitsMap);
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
@@ -277,6 +281,8 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
       (waitingFor as SelectCard<ICard>).cards,
+      false,
+      (waitingFor as SelectCard<ICard>).enabled,
     );
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
@@ -410,6 +416,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       needsToDraft: player.needsToDraft,
+      needsToResearch: !game.hasResearched(player),
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
@@ -489,6 +496,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     preludeExtension: options.preludeExtension,
     promoCardsOption: options.promoCardsOption,
     politicalAgendasExtension: options.politicalAgendasExtension,
+    removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
     showOtherPlayersVP: options.showOtherPlayersVP,
     showTimers: options.showTimers,
     shuffleMapOption: options.shuffleMapOption,

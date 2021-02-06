@@ -6,6 +6,7 @@ import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
+import {CardRequirements} from './CardRequirements';
 
 export interface IDiscount {
   tag: Tags;
@@ -18,6 +19,7 @@ export interface StaticCardProperties {
   cost?: number;
   initialActionText?: string;
   metadata: CardMetadata;
+  requirements?: CardRequirements;
   name: CardName;
   resourceType?: ResourceType;
   startingMegaCredits?: number;
@@ -60,6 +62,9 @@ export abstract class Card {
   public get metadata() {
     return this.properties.metadata;
   }
+  public get requirements() {
+    return this.properties.requirements;
+  }
   public get name() {
     return this.properties.name;
   }
@@ -76,9 +81,9 @@ export abstract class Card {
     return this.properties.productionBox || Units.EMPTY;
   }
   public canPlay(player: Player) {
-    if (this.properties.metadata.requirements === undefined) {
+    if (this.properties.requirements === undefined) {
       return true;
     }
-    return this.properties.metadata.requirements.satisfies(player);
+    return this.properties.requirements.satisfies(player);
   }
 }

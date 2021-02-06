@@ -23,8 +23,8 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
         description: 'Spend 1 titanium. 1 VP for every 3 data resources here.',
         cardNumber: 'M22',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 data resource to ANY card', (eb) => {
-            eb.empty().startAction.asterix(); // TODO(kberg): fix
+          b.action('Add 1 data resource to ANY card', (ab) => {
+            ab.data().startAction.asterix();
           });
           b.br;
           b.minus().titanium(1);
@@ -33,14 +33,13 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
       },
     }, {
       reserveUnits: Units.of({titanium: 1}),
-      tilesBuilt: [],
     });
   }
 
   public resourceCount: number = 0;
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     return undefined;
   }
 

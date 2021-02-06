@@ -20,7 +20,7 @@ export class DarksideMeteorBombardment extends Card {
         renderData: CardRenderer.builder((b) => {
           b.steel(2).titanium(2);
           b.br;
-          b.moonMineRate(2);
+          b.moonMiningRate(2);
         }),
       },
     });
@@ -32,8 +32,7 @@ export class DarksideMeteorBombardment extends Card {
   public play(player: Player) {
     player.steel += 2;
     player.titanium += 2;
-    MoonExpansion.raiseMiningRate(player);
-    MoonExpansion.raiseMiningRate(player);
+    MoonExpansion.raiseMiningRate(player, 2);
     return undefined;
   }
 }

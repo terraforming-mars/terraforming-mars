@@ -126,7 +126,7 @@ describe('Player', function() {
     expect(player.getWaitingFor()).to.be.undefined;
   });
   it('serializes every property', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = new Player('blue', Color.BLUE, false, 0, 'id');
     const serialized = player.serialize();
     const serializedKeys = Object.keys(serialized);
     const playerKeys = Object.keys(player).filter((key) => key !== '_game');

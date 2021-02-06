@@ -50,8 +50,9 @@ import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
 import {LunarSecurityStations} from './LunarSecurityStations';
-// import {LunarSteel} from './LunarSteel';
+import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
+import {LunaSenate} from './LunaSenate';
 // import {LunaSenate} from './LunaSenate';
 import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
@@ -82,7 +83,7 @@ import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
-// import {RustEatingBacteria} from './RustEatingBacteria';
+import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
 import {SolarPanelFoundry} from './SolarPanelFoundry';
@@ -175,7 +176,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: GameModule.Colonies},
     {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
-    //   {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
+    {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     //   {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
@@ -192,8 +193,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
-    //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
-    //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
+    {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
+    {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
 

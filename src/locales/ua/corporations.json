@@ -1,0 +1,55 @@
+{
+    "Beginner": "Початківець",
+    "You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Ви починаєте із 42 МК. Замість вибору із 10 кард на початку гри, отримайте усі 10 безплатно.",
+
+    "Credicor": "Кредикор",
+    "You start with 57 MC.": "Ви починаєте із 57 МК.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.": "Ефект: Отримайте 4 МК після оплати стандартного проекту або карти, чия вартість більша або рівна 20 МК.",
+    
+    "Ecoline": "Еколайн",
+    "You start with 2 plant production, 3 plants, and 36MC": "Ви починаєте із 2 рівнями виробництва рослин, 3 рослинами і 36 МК.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Ефект: Щоб поставити жетон зелені вам достатньо 7 рослин замість 8.",
+
+
+    "Helion": "Геліон",
+    "You start with 3 heat production and 42 MC.": "Ви починаєте із 3 рівнями виробництва тепла і 42 МК.",
+    "Effect: You may use heat as MC. You may not use MC as heat.": "Ефект: Ви можете використовувати тепло у якості грошей.",
+
+
+    "Interplanetary Сinematics": "Міжпланетна Кінематика",
+    "You start with 20 steel and 30 MC.": "Ви починаєте із 20 сталі і 30 MК",
+    "Effect: Each time you play an event, you gain 2 MC.)": "Ефект: Отримайте 2 МК після кожної зіграної події.",
+
+
+    "Inventrix": "Інвентрикс",
+    "As your first action in the game, draw 3 cards. Start with 45MC.": "Першою дією отримайте 3 карти із колоди. Ви починаєте із 45 МК.",
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Ефект: Вимоги ваших карт до температури, кисню, океану, Венери, можуть бути змінені на +2 чи -2 рівні.",
+
+    "Phobolog": "Фоболог",
+    "You start with 10 titanium and 23 MC.": "Ви починаєте із 10 титану і 23 МК.",
+    "Effect: Your titanium resources are each worth 1 MC extra.": "Ефект: Кожен ваш титан вартує на 1 МК більше.",
+
+    "Tharsis Republic": "Республіка Тарсиса",
+    "You start with 40 MC. As your first action in the game,place a city tile.": "Ви починаєте із 40 МК. Першою дією побудуйте місто.",
+    "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Ефект: Коли на Марсі ставить жетон міста, ваш рівень виробництва МК збільшується на 1. Отримайте 3 МК, коли ви кладете жетон міста.",
+
+    "Thorgate": "Торгейт",
+    "You start with 1 energy production and 48 MC.": "Ви починаєте із 1 рівнем виробництва енергії і 48 МК.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.": "Ефект: Вартість гри карт із міткою енергії або використання стандарного проекту Електростанції є на 3 МК меншими.",
+
+    "UNMI": "UNMI",
+    "You start with 40 MC.": "Ви починаєте із 40 МК.",
+    "Action:If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Дія: Якщо ваш Рейтинг Тераформування був піднятий цієї генерації, ви можете оплатити 3 МК, щоб підняти РТ ще на 1 рівень.",
+
+    "Mining Guild": "Гільдія Шахтарів",
+    "You start with 30 MC, 5 steel, and 1 steel production": "Ви починаєте із 30 МК, 5 сталі, 1 рівнем виробництва сталі.",
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Ефект: Підніміть ваш рівень виробництва сталі на 1 після того як ви отримали сталь або титан як бонус від кладіння жетону.",
+
+    "Terractor": "Террактор",
+    "You start with 60 MC.": "Ви починаєте із 60 МК.",
+    "Effect: When playing an Earth card, you pay 3 MC less for it.": "Ефект: Вартість гри карт із міткою Земліє на 3 МК меншою.",
+
+    "Saturn Systems": "Системи Сатурну",
+    "You start with 1 titanium production and 42 MC.": "Ви починаєте із 1 рівнем виробництва титану і 42 МК.",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Ефект: Підніміть ваш рівень виробництва титану на 1 після того як будь-хто зіграє карту із міткою Юпітера."
+}

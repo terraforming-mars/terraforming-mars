@@ -39,7 +39,6 @@ zlib.gzip(styles, function(err, compressed) {
     console.warn('error compressing styles', err);
     return;
   }
-  console.log('adding the compressed styles');
   fileCache.set('styles.css.gz', compressed);
 });
 

@@ -76,7 +76,7 @@ import {MoonTether} from './MoonTether';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
-// import {OrbitalPowerGrid} from './OrbitalPowerGrid';
+import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 // import {ProcessorFactory} from './ProcessorFactory';
@@ -191,7 +191,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     //   {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
     //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
-    //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
+    {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
     {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},

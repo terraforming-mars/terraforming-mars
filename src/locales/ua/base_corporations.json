@@ -3,6 +3,6 @@
     "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"Ви починаєте із 37МК. Першою дією отримайте 3 карти Прологу. Зіграйте одну із них, решту викиньте.",
 
     "You start with 47 MC.": "Ви починаєте із 47 МК.",
-    "Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.": "Дія: Потратьте 4 МК щоб збільшити один з ваших найменших видобутків на 1 крок.",
-    "${0} drew ${1} and ${2}": "${0} витягнув ${1} та ${2}"
+    "Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.": "Дія: Витратити 4 МК, щоб збільшити одне з ваших найменших виробництв на 1 крок.",
+    "${0} drew ${1} and ${2}": "${0} витягнули ${1} та ${2}"
 }

@@ -253,7 +253,8 @@ function getWaitingFor(
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
-    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards);
+    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, true, undefined,
+      (waitingFor as SelectCard<ICard>).enabled);
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).maxCardsToSelect;

@@ -35,6 +35,7 @@ export const GameHome = Vue.component('game-home', {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
       urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID as string,
+      clickedLinks: [] as Array<string>,
     };
   },
   methods: {
@@ -66,9 +67,16 @@ export const GameHome = Vue.component('game-home', {
     copyUrl: function(playerId: string): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
+      this.clickedLinks.push(playerId);
     },
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
+    },
+    isLinkClicked: function(playerId: string): boolean {
+      return this.clickedLinks.includes(playerId);
+    },
+    clickLink: function(playerId: string): void {
+      this.clickedLinks.push(playerId);
     },
   },
   template: `
@@ -79,8 +87,9 @@ export const GameHome = Vue.component('game-home', {
           <li v-for="(player, index) in (game === undefined ? [] : game.players)">
             <span class="turn-order">{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
-            <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-            <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
+            <span v-if="!isLinkClicked(player.id)" class="player-name"><a :href="getHref(player.id)" :onClick="_=>clickLink(player.id)">{{player.name}}</a></span>
+            <span v-else class="player-name">{{player.name}}</span>
+            <Button v-if="!isLinkClicked(player.id)" title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>

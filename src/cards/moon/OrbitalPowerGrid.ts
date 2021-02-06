@@ -29,8 +29,7 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
 
   public play(player: Player) {
     const amount = player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();
-    player.addProduction(Resources.ENERGY, amount);
-    LogHelper.logGainProduction(player, Resources.MEGACREDITS, amount);
+    player.addProduction(Resources.ENERGY, amount, player.game);
     return undefined;
   }
 

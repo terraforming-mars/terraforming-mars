@@ -5,7 +5,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
-import {LogHelper} from '../../LogHelper';
 import {Card} from '../Card';
 
 export class OrbitalPowerGrid extends Card implements IProjectCard {

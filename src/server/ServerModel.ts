@@ -319,13 +319,6 @@ function getWaitingFor(
   return playerInputModel;
 }
 
-function getCalculatedCost(card: ICard, player: Player) : number | undefined {
-  if ([CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT].includes(card.cardType)) {
-    return player.getCardCost(card as IProjectCard);
-  }
-  return undefined;
-}
-
 function getCards(
   player: Player,
   cards: Array<ICard>,
@@ -339,7 +332,7 @@ function getCards(
     resources: options.showResouces ? player.getResourcesOnCard(card) : undefined,
     resourceType: card.resourceType,
     name: card.name,
-    calculatedCost: getCalculatedCost(card, player),
+    calculatedCost: card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard),
     cardType: card.cardType,
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,

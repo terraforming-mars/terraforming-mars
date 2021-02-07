@@ -23,10 +23,6 @@ export class BufferGasStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    if (player.game.isSoloMode() === false || player.game.gameOptions.soloTR === false) {
-      return false;
-    }
-
     let cost = this.cost;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 

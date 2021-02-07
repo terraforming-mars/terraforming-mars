@@ -281,7 +281,7 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_CARD:
     playerInputModel.cards = getCardsAsCardModel(
       (waitingFor as SelectCard<ICard>).cards,
-      false,
+      true,
       (waitingFor as SelectCard<ICard>).enabled,
     );
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<

@@ -39,6 +39,7 @@ import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
+import {WaitingForModel} from '../models/WaitingForModel';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -125,6 +126,18 @@ export class Server {
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: getWaitingFor(player.getWaitingFor()),
     };
+  }
+
+  public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
+    const result: WaitingForModel = {
+      result: 'WAIT',
+    };
+    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
+      result.result = 'GO';
+    } else if (player.game.gameAge > prevGameAge) {
+      result.result = 'REFRESH';
+    }
+    return result;
   }
 }
 

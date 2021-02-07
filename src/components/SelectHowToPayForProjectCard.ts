@@ -233,11 +233,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     },
     cardChanged: function() {
       this.card = this.getCard();
-      if (this.card.calculatedCost === undefined) {
-        throw new Error('Unexpected undefined calculatedCost in SelectHowToPayForProjectCard');
-      } else {
-        this.cost = this.card.calculatedCost;
-      }
+      this.cost = this.card.calculatedCost!; // TODO(sienmich): Remove the ! here. It could require splitting the CardModel into ProjectCardModel and CorporationCardModel.
       this.tags = this.getCardTags();
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();

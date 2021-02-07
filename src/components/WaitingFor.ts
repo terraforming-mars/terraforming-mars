@@ -21,6 +21,7 @@ import {playActivePlayerSound} from '../SoundManager';
 import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
+import {WaitingForModel} from '../models/WaitingForModel';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -75,8 +76,8 @@ export const WaitingFor = Vue.component('waiting-for', {
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
-            const result = xhr.response;
-            if (result['result'] === 'GO') {
+            const result = xhr.response as WaitingForModel;
+            if (result.result === 'GO') {
               root.updatePlayer();
 
               if (Notification.permission !== 'granted') {
@@ -93,7 +94,7 @@ export const WaitingFor = Vue.component('waiting-for', {
 
               // We don't need to wait anymore - it's our turn
               return;
-            } else if (result['result'] === 'REFRESH') {
+            } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               root.updatePlayer();
               return;

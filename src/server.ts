@@ -17,7 +17,6 @@ import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
 import {Route} from './routes/Route';
-import {Phase} from './Phase';
 import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
@@ -319,17 +318,7 @@ function apiGetWaitingFor(
     }
 
     res.setHeader('Content-Type', 'application/json');
-    const answer = {
-      'result': 'WAIT',
-      'player': game.getPlayerById(game.activePlayer).name,
-    };
-    if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
-      answer['result'] = 'GO';
-    } else if (game.gameAge > prevGameAge) {
-      answer['result'] = 'REFRESH';
-    }
-    res.write(JSON.stringify(answer));
-    res.end();
+    res.end(JSON.stringify(Server.getWaitingForModel(player, prevGameAge)));
   });
 }
 

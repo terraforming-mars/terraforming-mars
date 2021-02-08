@@ -19,6 +19,7 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
       metadata: {
         description: 'Increase your MC production 1 step per each 2 Colony Rate.',
         cardNumber: 'M81',
+        victoryPoints: -1,
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);

@@ -82,7 +82,7 @@ import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
-// import {RoverDriversUnion} from './RoverDriversUnion';
+import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
@@ -184,7 +184,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     //   // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     //   {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
-    //   {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
+    {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
     //   {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
     //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},

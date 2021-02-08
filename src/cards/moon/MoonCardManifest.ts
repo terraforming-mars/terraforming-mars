@@ -197,8 +197,6 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
-
-  //   // All cards have costs, type, tags, and text description, and behavior.
   ],
   corporationCards: [
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},

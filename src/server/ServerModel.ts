@@ -65,18 +65,18 @@ export class Server {
       aresData: game.aresData,
       awards: getAwards(game),
       cardCost: player.cardCost,
-      cardsInHand: getCards(player, player.cardsInHand, false),
+      cardsInHand: getCards(player, player.cardsInHand),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       colonies: getColonies(game),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       corporationCard: getCorporationCard(player),
-      dealtCorporationCards: getCardsAsCardModel(player.dealtCorporationCards, false),
-      dealtPreludeCards: getCardsAsCardModel(player.dealtPreludeCards, false),
-      dealtProjectCards: getCardsAsCardModel(player.dealtProjectCards, false),
+      dealtCorporationCards: getCards(player, player.dealtCorporationCards),
+      dealtPreludeCards: getCards(player, player.dealtPreludeCards),
+      dealtProjectCards: getCards(player, player.dealtProjectCards),
       deckSize: game.dealer.getDeckSize(),
-      draftedCards: getCards(player, player.draftedCards, false),
+      draftedCards: getCards(player, player.draftedCards),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),
@@ -101,13 +101,13 @@ export class Server {
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
       phase: game.phase,
-      pickedCorporationCard: player.pickedCorporationCard ? getCardsAsCardModel([player.pickedCorporationCard], false) : [],
+      pickedCorporationCard: player.pickedCorporationCard ? getCards(player, [player.pickedCorporationCard]) : [],
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: getCards(player, player.playedCards),
       players: getPlayers(game.getPlayers(), game),
-      preludeCardsInHand: getCardsAsCardModel(player.preludeCardsInHand, false),
+      preludeCardsInHand: getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       spaces: getSpaces(game.board),
       steel: player.steel,
@@ -124,7 +124,7 @@ export class Server {
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
-      waitingFor: getWaitingFor(player.getWaitingFor()),
+      waitingFor: getWaitingFor(player, player.getWaitingFor()),
     };
   }
 
@@ -206,40 +206,14 @@ function getCorporationCard(player: Player): CardModel | undefined {
   return {
     name: player.corporationCard.name,
     resources: player.getResourcesOnCard(player.corporationCard),
-    calculatedCost: 0,
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
     warning: player.corporationCard.warning,
   } as CardModel;
 }
 
-function getCardsAsCardModel(
-  cards: Array<ICard>,
-  showResouces: boolean = true,
-  enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
-  reserveUnitMap?: Map<CardName, Units>,
-): Array<CardModel> {
-  const cardModel: Array<CardModel> = [];
-  cards.forEach((card, index) => {
-    cardModel.push({
-      name: card.name,
-      resources:
-        card.resourceCount !== undefined && showResouces ?
-          card.resourceCount :
-          undefined,
-      resourceType: card.resourceType,
-      calculatedCost: 0,
-      cardType: CardType.AUTOMATED,
-      isDisabled: enabled?.[index] === false,
-      warning: card.warning,
-      reserveUnits: (reserveUnitMap !== undefined ? reserveUnitMap.get(card.name) : Units.EMPTY) || Units.EMPTY,
-    });
-  });
-
-  return cardModel;
-}
-
 function getWaitingFor(
+  player: Player,
   waitingFor: PlayerInput | undefined,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
@@ -275,7 +249,7 @@ function getWaitingFor(
     playerInputModel.options = [];
     if (waitingFor.options !== undefined) {
       for (const option of waitingFor.options) {
-        const subOption = getWaitingFor(option);
+        const subOption = getWaitingFor(player, option);
         if (subOption !== undefined) {
           playerInputModel.options.push(subOption);
         }
@@ -286,17 +260,13 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCardsAsCardModel(shtpfpc.cards, false, undefined, shtpfpc.reserveUnitsMap);
+    playerInputModel.cards = getCards(player, shtpfpc.cards, {reserveUnitMap: shtpfpc.reserveUnitsMap});
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
-    playerInputModel.cards = getCardsAsCardModel(
-      (waitingFor as SelectCard<ICard>).cards,
-      true,
-      (waitingFor as SelectCard<ICard>).enabled,
-    );
+    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, {showResouces: true, enabled: (waitingFor as SelectCard<ICard>).enabled});
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).maxCardsToSelect;
@@ -364,18 +334,22 @@ function getWaitingFor(
 
 function getCards(
   player: Player,
-  cards: Array<IProjectCard>,
-  showResouces: boolean = true,
+  cards: Array<ICard>,
+  options: {
+    showResouces?: boolean,
+    reserveUnitMap?: Map<CardName, Units>,
+    enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
+  } = {},
 ): Array<CardModel> {
-  return cards.map((card) => ({
-    resources: showResouces ? player.getResourcesOnCard(card) : undefined,
+  return cards.map((card, index) => ({
+    resources: options.showResouces ? player.getResourcesOnCard(card) : undefined,
     resourceType: card.resourceType,
     name: card.name,
-    calculatedCost: player.getCardCost(card),
+    calculatedCost: card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard),
     cardType: card.cardType,
-    isDisabled: false,
+    isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
-    reserveUnits: card.reserveUnits || Units.EMPTY,
+    reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
   }));
 }
 
@@ -403,7 +377,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: getCards(player, player.playedCards),
+      playedCards: getCards(player, player.playedCards, {showResouces: true}),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       coloniesCount: player.getColoniesCount(),

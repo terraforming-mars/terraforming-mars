@@ -35,7 +35,7 @@ import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFacto
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 import {IronExtractionCenter} from './IronExtractionCenter';
-// import {LTFHeadquarters} from './LTFHeadquarters';
+import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
@@ -185,7 +185,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     // {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
     // {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
-    // {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
+    {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
     // {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
@@ -197,8 +197,6 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
-
-  //   // All cards have costs, type, tags, and text description, and behavior.
   ],
   corporationCards: [
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},

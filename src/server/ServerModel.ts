@@ -266,17 +266,15 @@ function getWaitingFor(
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
-    // TODO(sienmich): Show resources and cost of the cards depending on situation.
-    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, {showNewCost: true, showResources: true, enabled: (waitingFor as SelectCard<ICard>).enabled});
-    playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
-        ICard
-      >).maxCardsToSelect;
-    playerInputModel.minCardsToSelect = (waitingFor as SelectCard<
-        ICard
-      >).minCardsToSelect;
-    playerInputModel.selectBlueCardAction = (waitingFor as SelectCard<
-          ICard
-      >).selectBlueCardAction;
+    const selectCard = waitingFor as SelectCard<ICard>;
+    playerInputModel.cards = getCards(player, selectCard.cards, {
+      showNewCost: !selectCard.played,
+      showResources: selectCard.played,
+      enabled: selectCard.enabled,
+    });
+    playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
+    playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
+    playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

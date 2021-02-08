@@ -35,7 +35,6 @@ export const GameHome = Vue.component('game-home', {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
       urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID as string,
-      clickedLinks: [] as Array<string>,
     };
   },
   methods: {
@@ -67,16 +66,16 @@ export const GameHome = Vue.component('game-home', {
     copyUrl: function(playerId: string): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
-      this.clickedLinks.push(playerId);
+      this.game?.clickedLinks.push(playerId);
     },
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
     },
     isLinkClicked: function(playerId: string): boolean {
-      return this.clickedLinks.includes(playerId);
+      return this.game ? this.game.clickedLinks.includes(playerId) : false;
     },
     clickLink: function(playerId: string): void {
-      this.clickedLinks.push(playerId);
+      this.game?.clickedLinks.push(playerId);
     },
   },
   template: `

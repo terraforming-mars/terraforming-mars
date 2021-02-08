@@ -105,7 +105,7 @@ export class Server {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: getCards(player, player.playedCards, {showResouces: true}),
+      playedCards: getCards(player, player.playedCards, {showResources: true}),
       players: getPlayers(game.getPlayers(), game),
       preludeCardsInHand: getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
@@ -267,7 +267,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_CARD:
     // TODO(sienmich): Show resources and cost of the cards depending on situation.
-    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, {showNewCost: true, showResouces: true, enabled: (waitingFor as SelectCard<ICard>).enabled});
+    playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, {showNewCost: true, showResources: true, enabled: (waitingFor as SelectCard<ICard>).enabled});
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard
       >).maxCardsToSelect;
@@ -337,14 +337,14 @@ function getCards(
   player: Player,
   cards: Array<ICard>,
   options: {
-    showResouces?: boolean,
+    showResources?: boolean,
     showNewCost?: boolean,
     reserveUnitMap?: Map<CardName, Units>,
     enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
 ): Array<CardModel> {
   return cards.map((card, index) => ({
-    resources: options.showResouces ? player.getResourcesOnCard(card) : undefined,
+    resources: options.showResources ? player.getResourcesOnCard(card) : undefined,
     resourceType: card.resourceType,
     name: card.name,
     calculatedCost: options.showNewCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
@@ -379,7 +379,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: getCards(player, player.playedCards, {showResouces: true}),
+      playedCards: getCards(player, player.playedCards, {showResources: true}),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       coloniesCount: player.getColoniesCount(),

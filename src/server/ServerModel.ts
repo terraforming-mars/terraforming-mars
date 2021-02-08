@@ -65,7 +65,7 @@ export class Server {
       aresData: game.aresData,
       awards: getAwards(game),
       cardCost: player.cardCost,
-      cardsInHand: getCards(player, player.cardsInHand),
+      cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
       cardsInHandNbr: player.cardsInHand.length,
       citiesCount: player.getCitiesCount(),
       colonies: getColonies(game),
@@ -76,7 +76,7 @@ export class Server {
       dealtPreludeCards: getCards(player, player.dealtPreludeCards),
       dealtProjectCards: getCards(player, player.dealtProjectCards),
       deckSize: game.dealer.getDeckSize(),
-      draftedCards: getCards(player, player.draftedCards),
+      draftedCards: getCards(player, player.draftedCards, {showNewCost: true}),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),
@@ -266,6 +266,7 @@ function getWaitingFor(
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
     break;
   case PlayerInputTypes.SELECT_CARD:
+    // TODO(sienmich): Show resources and cost of the cards depending on situation.
     playerInputModel.cards = getCards(player, (waitingFor as SelectCard<ICard>).cards, {showNewCost: true, showResouces: true, enabled: (waitingFor as SelectCard<ICard>).enabled});
     playerInputModel.maxCardsToSelect = (waitingFor as SelectCard<
         ICard

@@ -233,7 +233,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     },
     cardChanged: function() {
       this.card = this.getCard();
-      this.cost = this.card.calculatedCost!; // TODO(sienmich): Remove the ! here. It could require splitting the CardModel into ProjectCardModel and CorporationCardModel.
+      this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();

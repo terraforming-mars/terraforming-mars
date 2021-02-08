@@ -69,7 +69,8 @@ export class CardLoader {
     return this.getCards((manifest) => manifest.projectCards);
   }
   public getStandardProjects() {
-    return this.getCards((manifest) => manifest.standardProjects);
+    return this.getCards((manifest) => manifest.standardProjects)
+      .filter((card) => card.name !== CardName.BUFFER_GAS_STANDARD_PROJECT || this.gameOptions.soloTR);
   }
   public getCorporationCards() {
     return this.getCards((manifest) => manifest.corporationCards)

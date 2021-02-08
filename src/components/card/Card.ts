@@ -111,8 +111,8 @@ export const Card = Vue.component('card', {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (this.actionUsed) {
-        classes.push('cards-action-was-used');
+      if (this.actionUsed || card.isDisabled) {
+        classes.push('card-unavailable');
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');

@@ -22,7 +22,7 @@ import {DeepLunarMining} from './DeepLunarMining';
 // import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
 import {GeodesicTents} from './GeodesicTents';
-// import {GrandLunaAcademy} from './GrandLunaAcademy';
+import {GrandLunaAcademy} from './GrandLunaAcademy';
 import {Habitat14} from './Habitat14';
 import {HE3FusionPlant} from './HE3FusionPlant';
 import {HE3Lobbyists} from './HE3Lobbyists';
@@ -35,7 +35,7 @@ import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFacto
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 import {IronExtractionCenter} from './IronExtractionCenter';
-// import {LTFHeadquarters} from './LTFHeadquarters';
+import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
@@ -50,8 +50,9 @@ import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
 import {LunarSecurityStations} from './LunarSecurityStations';
-// import {LunarSteel} from './LunarSteel';
+import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
+import {LunaSenate} from './LunaSenate';
 // import {LunaSenate} from './LunaSenate';
 import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
@@ -70,19 +71,19 @@ import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 // import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
-// import {MoonTether} from './MoonTether';
+import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
-// import {OrbitalPowerGrid} from './OrbitalPowerGrid';
+import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
-// import {ProcessorFactory} from './ProcessorFactory';
+import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
-// import {RustEatingBacteria} from './RustEatingBacteria';
+import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
 import {SolarPanelFoundry} from './SolarPanelFoundry';
@@ -98,7 +99,7 @@ import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
 import {TitaniumMarketMonopolists} from './TitaniumMarketMonopolists';
 import {TychoRoadNetwork} from './TychoRoadNetwork';
 import {UndergroundDetonators} from './UndergroundDetonators';
-// import {UndermoonDrugLordsNetwork} from './UndermoonDrugLordsNetwork';
+import {UndermoonDrugLordsNetwork} from './UndermoonDrugLordsNetwork';
 import {WaterTreatmentComplex} from './WaterTreatmentComplex';
 import {WeGrowAsOne} from './WeGrowAsOne';
 
@@ -175,29 +176,27 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: GameModule.Colonies},
     {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
-    //   {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
+    {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
-    //   {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
-    //   {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
-    //   {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
-    //   // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
-    //   {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
-    //   {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
-    //   {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
-    //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
-    //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
+    // {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
+    // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
+    // {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
+    // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
+    // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
+    // {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
+    // {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
+    {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
+    // {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
+    {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
-    //   {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
-    //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
-    //   {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
-    //   {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
-    //   {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
-    //   {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
+    {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
+    // // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
+    {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
+    {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
+    {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},
+    {cardName: CardName.RUST_EATING_BACTERIA, Factory: RustEatingBacteria},
     {cardName: CardName.SOLAR_PANEL_FOUNDRY, Factory: SolarPanelFoundry},
-    //   {cardName: CardName.MOON_TETHER, Factory: MoonTether},
-
-  //   // All cards have costs, type, tags, and text description, and behavior.
+    {cardName: CardName.MOON_TETHER, Factory: MoonTether},
   ],
   corporationCards: [
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},

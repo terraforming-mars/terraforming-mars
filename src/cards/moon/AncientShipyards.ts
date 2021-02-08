@@ -1,7 +1,6 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {StealResources} from '../../deferredActions/StealResources';
@@ -11,7 +10,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 
-export class AncientShipyards extends MoonCard implements IProjectCard {
+export class AncientShipyards extends MoonCard {
   constructor() {
     super({
       name: CardName.ANCIENT_SHIPYARDS,
@@ -42,7 +41,7 @@ export class AncientShipyards extends MoonCard implements IProjectCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     return undefined;
   }
 

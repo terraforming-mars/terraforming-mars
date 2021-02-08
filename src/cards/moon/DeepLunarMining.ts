@@ -32,8 +32,7 @@ export class DeepLunarMining extends MoonCard {
   };
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player, player.game);
+    super.play(player);
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

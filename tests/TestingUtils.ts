@@ -68,6 +68,7 @@ export class TestingUtils {
       requiresVenusTrackCompletion: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
+      requiresMoonTrackCompletion: false,
     };
 
     return Object.assign(defaultOptions, options);

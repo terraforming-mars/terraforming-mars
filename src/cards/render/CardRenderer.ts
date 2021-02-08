@@ -425,8 +425,8 @@ class Builder {
     return this;
   }
 
-  public moon(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON));
+  public moon(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON, amount));
     return this;
   }
 

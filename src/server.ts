@@ -4,7 +4,6 @@ require('console-stamp')(
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
 );
 
-import * as crypto from 'crypto';
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
@@ -13,55 +12,34 @@ import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
 import {BoardName} from './boards/BoardName';
+import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
 import {Route} from './routes/Route';
-import {Phase} from './Phase';
 import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
 import {Cloner} from './database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
-const styles = fs.readFileSync('build/styles.css');
-let compressedStyles: undefined | Buffer = undefined;
-let compressedStylesHash: undefined | string = undefined;
 const route = new Route();
 const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
-const fileCache = new Map<string, Buffer>();
+const fileCache = new BufferCache();
+
 const isProduction = process.env.NODE_ENV === 'production';
 
-function hashFile(data: Buffer): string {
-  return crypto.createHash('md5').update(data).digest('hex');
-}
-
-// compress styles.css
+// prime the cache and compress styles.css
+const styles = fs.readFileSync('build/styles.css');
+fileCache.set('styles.css', styles);
 zlib.gzip(styles, function(err, compressed) {
   if (err !== null) {
     console.warn('error compressing styles', err);
     return;
   }
-  compressedStyles = compressed;
-  compressedStylesHash = hashFile(compressed);
+  fileCache.set('styles.css.gz', compressed);
 });
-
-function readFile(path: string, cb: (err: Error | null, data: Buffer) => void): void {
-  const result = fileCache.get(path);
-  if (isProduction === false || result === undefined) {
-    fs.readFile(path, (err1, data1) => {
-      if (err1) {
-        cb(err1, Buffer.alloc(0));
-        return;
-      }
-      fileCache.set(path, data1);
-      cb(null, data1);
-    });
-  } else {
-    cb(null, result);
-  }
-}
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== undefined) {
@@ -94,16 +72,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
         res.write(fs.readFileSync('build/genfiles/translations.json'));
         res.end();
-      } else if (req.url === '/styles.css') {
-        if (compressedStylesHash !== undefined && req.headers['if-none-match'] === compressedStylesHash) {
-          route.notModified(res);
-          return;
-        }
-        res.setHeader('Content-Type', 'text/css');
-        res.setHeader('Cache-Control', 'must-revalidate');
-        serveStyles(req, res);
       } else if (
         req.url.startsWith('/assets/') ||
+        req.url === '/styles.css' ||
         req.url === '/favicon.ico' ||
         req.url === '/main.js' ||
         req.url === '/main.js.map'
@@ -347,17 +318,7 @@ function apiGetWaitingFor(
     }
 
     res.setHeader('Content-Type', 'application/json');
-    const answer = {
-      'result': 'WAIT',
-      'player': game.getPlayerById(game.activePlayer).name,
-    };
-    if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
-      answer['result'] = 'GO';
-    } else if (game.gameAge > prevGameAge) {
-      answer['result'] = 'REFRESH';
-    }
-    res.write(JSON.stringify(answer));
-    res.end();
+    res.end(JSON.stringify(Server.getWaitingForModel(player, prevGameAge)));
   });
 }
 
@@ -516,90 +477,105 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
-  readFile('assets/index.html', function(err, data) {
-    if (err) {
-      return route.internalServerError(req, res, err);
-    }
-    res.setHeader('Content-Length', data.length);
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.end(data);
-  });
+  req.url = '/assets/index.html';
+  serveAsset(req, res);
 }
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (req.url === undefined) throw new Error('Empty url');
+  if (req.url === undefined) {
+    route.internalServerError(req, res, new Error('no url on request'));
+    return;
+  }
 
+  let contentEncoding: string | undefined;
+  let contentType: string | undefined;
   let file: string | undefined;
 
-  if (req.url === '/favicon.ico') {
-    res.setHeader('Content-Type', 'image/x-icon');
+  if (req.url === '/styles.css') {
+    const compressed = fileCache.get('styles.css.gz');
+    contentType = 'text/css';
+    file = 'styles.css';
+    if (compressed !== undefined && supportsEncoding(req, 'gzip')) {
+      contentEncoding = 'gzip';
+      file += '.gz';
+    }
+  } else if (req.url === '/assets/index.html') {
+    contentType = 'text/html; charset=utf-8';
+    file = req.url.substring(1);
+  } else if (req.url === '/favicon.ico') {
+    contentType = 'image/x-icon';
     file = 'assets/favicon.ico';
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
-    res.setHeader('Content-Type', 'text/javascript');
-    let suffix = '';
+    contentType = 'text/javascript';
+    file = `build${req.url}`;
     if (supportsEncoding(req, 'br')) {
-      res.setHeader('Content-Encoding', 'br');
-      suffix = '.br';
+      contentEncoding = 'br';
+      file += '.br';
     } else if (supportsEncoding(req, 'gzip')) {
-      res.setHeader('Content-Encoding', 'gzip');
-      suffix = '.gz';
+      contentEncoding = 'gzip';
+      file += '.gz';
     }
-    file = `build${req.url}${suffix}`;
-  } else if (req.url === '/assets/Prototype.ttf') {
-    file = 'assets/Prototype.ttf';
-  } else if (req.url === '/assets/futureforces.ttf') {
-    file = 'assets/futureforces.ttf';
-  } else if (req.url.endsWith('.png')) {
+  } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf') {
+    contentType = 'font/ttf';
+    file = req.url.substring(1);
+  } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
 
     // Disallow to go outside of assets directory
-    if (!reqFile.startsWith(assetsRoot) || !fs.existsSync(reqFile)) {
+    if (reqFile.startsWith(assetsRoot) === false) {
       return route.notFound(req, res);
     }
-    res.setHeader('Content-Type', 'image/png');
-    file = reqFile;
-  } else if (req.url.endsWith('.jpg')) {
-    const assetsRoot = path.resolve('./assets');
-    const reqFile = path.resolve(path.normalize(req.url).slice(1));
-
-    // Disallow to go outside of assets directory
-    if (!reqFile.startsWith(assetsRoot) || !fs.existsSync(reqFile)) {
-      return route.notFound(req, res);
-    }
-    res.setHeader('Content-Type', 'image/jpeg');
+    contentType = req.url.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
     file = reqFile;
   } else {
     return route.notFound(req, res);
   }
-  if (req.url !== '/main.js' && req.url !== '/main.js.map') {
+  // asset caching
+  const buffer = fileCache.get(file);
+  if (buffer !== undefined) {
+    if (req.headers['if-none-match'] === buffer.hash) {
+      route.notModified(res);
+      return;
+    }
+    res.setHeader('Cache-Control', 'must-revalidate');
+    res.setHeader('ETag', buffer.hash);
+  } else if (isProduction === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
-  readFile(file, function(err, data) {
+
+  if (contentType !== undefined) {
+    res.setHeader('Content-Type', contentType);
+  }
+
+  if (contentEncoding !== undefined) {
+    res.setHeader('Content-Encoding', contentEncoding);
+  }
+
+  if (buffer !== undefined) {
+    res.setHeader('Content-Length', buffer.buffer.length);
+    res.end(buffer.buffer);
+    return;
+  }
+
+  const finalFile = file;
+
+  fs.readFile(finalFile, function(err, data) {
     if (err) {
       return route.internalServerError(req, res, err);
     }
     res.setHeader('Content-Length', data.length);
     res.end(data);
+    // only production caches resources
+    if (isProduction === true) {
+      fileCache.set(finalFile, data);
+    }
   });
 }
 
 function supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
   return req.headers['accept-encoding'] !== undefined &&
          req.headers['accept-encoding'].includes(encoding);
-}
-
-function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void {
-  let buffer = styles;
-  if (compressedStyles !== undefined && supportsEncoding(req, 'gzip')) {
-    res.setHeader('Content-Encoding', 'gzip');
-    if (compressedStylesHash !== undefined) {
-      res.setHeader('ETag', compressedStylesHash);
-    }
-    buffer = compressedStyles;
-  }
-  res.setHeader('Content-Length', buffer.length);
-  res.end(buffer);
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));

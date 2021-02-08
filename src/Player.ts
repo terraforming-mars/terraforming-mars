@@ -1853,12 +1853,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjectsOption = this.getStandardProjectOption();
-    action.options.push(standardProjectsOption);
+    action.options.push(this.passOption());
 
-    action.options.push(
-      this.passOption(),
-    );
+    action.options.push(this.getStandardProjectOption());
 
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();

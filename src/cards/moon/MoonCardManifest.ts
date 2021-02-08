@@ -19,7 +19,7 @@ import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 // import {DarksideObservatory} from './DarksideObservatory';
 // import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
-// import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
+import {EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
 import {GeodesicTents} from './GeodesicTents';
 import {GrandLunaAcademy} from './GrandLunaAcademy';
@@ -35,7 +35,7 @@ import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFacto
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 // import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
 import {IronExtractionCenter} from './IronExtractionCenter';
-// import {LTFHeadquarters} from './LTFHeadquarters';
+import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
 // import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
@@ -178,14 +178,14 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
-    //   {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
-    //   {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
-    //   {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
-    //   {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
-    //   // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
-    //   {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
-    //   {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
-    //   {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
+    // {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
+    // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
+    // {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
+    // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
+    // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
+    {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
+    // {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
+    {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
     //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},

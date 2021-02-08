@@ -64,7 +64,12 @@ export class Aridor implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, card: IProjectCard) {
-      if (card.cardType === CardType.EVENT || card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 || !player.isCorporation(this.name)) return undefined;
+      if (
+        card.cardType === CardType.EVENT ||
+        card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 ||
+        !player.isCorporation(this.name)) {
+        return undefined;
+      }
 
       for (const tag of card.tags.filter((tag) => tag !== Tags.WILDCARD)) {
         const currentSize = this.allTags.size;

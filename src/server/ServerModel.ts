@@ -52,7 +52,7 @@ export class Server {
         name: player.name,
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
-      clickedLinks: [],
+      clickedLinks: game.clickedLinks,
     };
   }
 

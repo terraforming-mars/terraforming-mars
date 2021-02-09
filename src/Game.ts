@@ -195,6 +195,8 @@ export class Game implements ISerializable<SerializedGame> {
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
+  public clickedLinks: Array<string> = [];
+
   private constructor(
     public id: GameId,
     private players: Array<Player>,
@@ -417,6 +419,7 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      clickedLinks: this.clickedLinks,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [

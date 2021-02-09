@@ -23,6 +23,7 @@ export interface SerializedGame {
     awards: Array<IAward>;
     board: SerializedBoard;
     claimedMilestones: Array<SerializedClaimedMilestone>;
+    clickedLinks: Array<string>,
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;

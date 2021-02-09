@@ -5,6 +5,9 @@ export const CardCost = Vue.component('CardCost', {
     amount: {
       type: Number as () => number | undefined,
     },
+    newCost: {
+      type: Number as () => number | undefined,
+    },
   },
   methods: {
     getClasses: function(): string {
@@ -14,8 +17,17 @@ export const CardCost = Vue.component('CardCost', {
       }
       return classes.join(' ');
     },
+    displayTwoCosts: function(): boolean {
+      return this.newCost !== undefined && this.newCost !== this.amount;
+    },
   },
   template: `
-        <div :class="getClasses()">{{ amount === null ? 0 : amount }}</div>
+    <div>
+        <div :class="getClasses()">{{ newCost !== undefined ? newCost : (amount === null ? 0 : amount) }}</div>
+        <template v-if="displayTwoCosts()">
+          <div class="card-cost-transition"></div>
+          <div class="card-old-cost">{{amount}}</div>
+        </template>
+    </div>
     `,
 });

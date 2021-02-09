@@ -1035,6 +1035,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
+      false, undefined, false,
       ), () => { },
     );
   }

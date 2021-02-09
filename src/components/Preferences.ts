@@ -255,7 +255,7 @@ export const Preferences = Vue.component('preferences', {
                       </div>
                     </div>
                 </div>
-                <a href="/help-iconology" target="_blank">
+                <a href="/help-page" target="_blank">
                     <div class="preferences_item preferences_item--help">
                       <i class="preferences_icon preferences_icon--help" :title="$t('game symbols')"></i>
                     </div>

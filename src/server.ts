@@ -60,7 +60,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         req.url.startsWith('/the-end?id=') ||
         req.url.startsWith('/load') ||
         req.url.startsWith('/debug-ui') ||
-        req.url.startsWith('/help-iconology')
+        req.url.startsWith('/help-page')
       ) {
         serveApp(req, res);
       } else if (req.url.startsWith('/api/player?id=')) {

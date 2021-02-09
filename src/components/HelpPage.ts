@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {Card} from './card/Card';
 
-export const HelpIconology = Vue.component('help-iconology', {
+export const HelpPage = Vue.component('help-page', {
   components: {
     Card,
   },

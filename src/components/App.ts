@@ -8,7 +8,7 @@ import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
-import {HelpIconology} from './HelpIconology';
+import {HelpPage} from './HelpPage';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -18,7 +18,7 @@ interface MainAppData {
             'empty' |
             'game-home' |
             'games-overview' |
-            'help-iconology' |
+            'help-page' |
             'load' |
             'player-home' |
             'start-screen' |
@@ -66,7 +66,7 @@ export const mainAppSettings = {
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    'help-iconology': HelpIconology,
+    'help-page': HelpPage,
   },
   'methods': {
     setVisibilityState: function(targetVar: string, isVisible: boolean) {
@@ -159,8 +159,8 @@ export const mainAppSettings = {
       app.screen = 'load';
     } else if (currentPathname === '/debug-ui') {
       app.screen = 'debug-ui';
-    } else if (currentPathname === '/help-iconology') {
-      app.screen = 'help-iconology';
+    } else if (currentPathname === '/help-page') {
+      app.screen = 'help-page';
     } else {
       app.screen = 'start-screen';
     }

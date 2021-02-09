@@ -10,6 +10,7 @@ import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {HelpIconology} from './HelpIconology';
 
+import * as constants from '../constants';
 import * as raw_settings from '../genfiles/settings.json';
 
 interface MainAppData {
@@ -100,7 +101,7 @@ export const mainAppSettings = {
             if (currentPathname !== '/the-end') {
               window.history.replaceState(
                 xhr.response,
-                'Teraforming Mars - Player',
+                `${constants.APP_NAME} - Player`,
                 '/the-end?id=' + app.player.id,
               );
             }
@@ -109,7 +110,7 @@ export const mainAppSettings = {
             if (currentPathname !== '/player') {
               window.history.replaceState(
                 xhr.response,
-                'Teraforming Mars - Game',
+                `${constants.APP_NAME} - Game`,
                 '/player?id=' + app.player.id,
               );
             }
@@ -123,6 +124,7 @@ export const mainAppSettings = {
     },
   },
   'mounted': function() {
+    document.title = constants.APP_NAME;
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player' || currentPathname === '/the-end') {
@@ -138,7 +140,7 @@ export const mainAppSettings = {
         if (xhr.status === 200) {
           window.history.replaceState(
             xhr.response,
-            'Teraforming Mars - Game',
+            `${constants.APP_NAME} - Game`,
             '/game?id=' + xhr.response.id,
           );
           app.game = xhr.response as GameHomeModel;

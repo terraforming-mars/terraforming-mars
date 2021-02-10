@@ -5,6 +5,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
+        padding-bottom: 10px;
     }
 
     input[type="radio"] {
@@ -39,7 +40,7 @@
     }
 }
 
-.help-page-symbol {
+.help-page-symbol-container {
     padding: 20px;
     display : flex;
     flex-flow: row wrap;
@@ -99,6 +100,11 @@
     background-size: 30px;
     filter: drop-shadow(0px 0px 1px black);
     vertical-align: middle;
+}
+
+.help-page-other-symbols {
+    display: inline-block;
+    width: 60px;
 }
 
 .help-page-param-box-temperature {
@@ -194,3 +200,69 @@
     transform: scale(0.8);
   }
   
+.help-page-phases-container {
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+      
+    label{
+        display: block;
+        cursor: pointer;
+        width: fit-content;
+        border-radius: 8px;
+        border: none;
+        background-color: rgb(104, 37, 37);
+    }
+
+    label:hover{
+        background: #9b524d;
+    }
+
+    input[type="checkbox"]:checked + label{
+        background: #8d615e;
+    }
+
+    ul li ul {
+        label{
+            margin-top: 10px;
+            background: #805c0f;
+        }
+
+        label:hover{
+            background: #caaa64;
+        }
+
+        input[type="checkbox"]:checked + label{
+            background: #9c7e3b;
+        }
+        li {
+            margin-left: 25px;
+        }
+    }
+
+    ul ul li{
+        margin-left: 25px;
+    }
+
+    input[type="checkbox"]{
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+    input[type="checkbox"] ~ ul{
+        height: 0;
+        transform: scaleY(0);
+    }
+
+    input[type="checkbox"]:checked ~ ul{
+        height: 100%;
+        transform-origin: top;
+        transition: transform .2s ease-out;
+        transform: scaleY(1); 
+    }
+
+      
+  }

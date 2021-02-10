@@ -21,7 +21,7 @@ export const HelpStandardProjects = Vue.component('help-standard-projects', {
     },
   },
   template: `
-    <div class="help-page-standard-projects">
+    <div class="help-page-standard-projects-container">
       <div class="cardbox" v-for="card in getOfficialStandardProjectCards()">
         <Card :card="{'name': card}" />
       </div>

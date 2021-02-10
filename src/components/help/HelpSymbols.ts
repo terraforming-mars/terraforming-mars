@@ -6,7 +6,7 @@ export const HelpSymbols = Vue.component('help-symbols', {
   methods: {
   },
   template: `
-    <div class="help-page-symbol">
+    <div class="help-page-symbol-container">
         <div class="help-page-column">
             <div>
                 <div class="help-page-section-title" v-i18n>Card Tags</div>
@@ -172,35 +172,35 @@ export const HelpSymbols = Vue.component('help-symbols', {
                 <div class="help-page-section-title" v-i18n>Others</div>
             </div>
             <div>
-                <div class="help-page-victory-point">?</div>
+                <div class="help-page-other-symbols"><div class="help-page-victory-point">?</div></div>
                 <div class="help-page-label" v-i18n>Victory Point (VP)</div>
             </div>
             <div>
-                <div class="tile rating"></div>
+                <div class="help-page-other-symbols"><div class="tile rating"></div></div>
                 <div class="help-page-label" v-i18n>Terraform Rating (TR)</div>
             </div>
             <div>
-                <div class="help-page-card card"></div>
+                <div class="help-page-other-symbols"><div class="help-page-card card"></div></div>
                 <div class="help-page-label" v-i18n>Project Card</div>
             </div>
             <div>
-                <div class="tile colony"></div>
+                <div class="help-page-other-symbols"><div class="tile colony"></div></div>
                 <div class="help-page-label" v-i18n>Colony</div>
             </div>
             <div>
-                <div class="tile trade"></div>
+                <div class="help-page-other-symbols"><div class="tile trade"></div></div>
                 <div class="help-page-label" v-i18n>Trade</div>
             </div>
             <div>
-                <div class="tile fleet"></div>
+                <div class="help-page-other-symbols"><div class="tile fleet"></div></div>
                 <div class="help-page-label" v-i18n>Trade Fleet</div>
             </div>
             <div>
-                <div class="help-page-delegate"></div>
+                <div class="help-page-other-symbols"><div class="help-page-delegate"></div></div>
                 <div class="help-page-label" v-i18n>Delegate</div>
             </div>
             <div>
-                <div class="help-page-influence influence"></div>
+                <div class="help-page-other-symbols"><div class="help-page-influence influence"></div></div>
                 <div class="help-page-label" v-i18n>Influence</div>
             </div>
         </div>

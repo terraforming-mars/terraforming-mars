@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {HelpSymbols} from './HelpSymbols';
 import {HelpStandardProjects} from './HelpStandardProjects';
+import {HelpPhases} from './HelpPhases';
 
 enum HelpPageTab {
     Symbols = 'symbols',
@@ -21,6 +22,7 @@ export const HelpPage = Vue.component('help-page', {
   components: {
     'help-symbols': HelpSymbols,
     'help-standard-projects': HelpStandardProjects,
+    'help-phases': HelpPhases,
   },
   methods: {
     setTab: function(tab: string): void {
@@ -55,7 +57,7 @@ export const HelpPage = Vue.component('help-page', {
         <div class="help-topics">
             <input type="radio" name="help-page-tab" id="radio-symbols">
             <label class="" for="radio-symbols" v-on:click="setTab('symbols')">
-                <span v-i18n>Symbols</span>
+                <span v-i18n>Game Symbols</span>
             </label>
 
             <input type="radio" name="help-page-tab" id="radio-standard-projects">
@@ -71,6 +73,7 @@ export const HelpPage = Vue.component('help-page', {
 
         <help-symbols v-if="isTabOpen('symbols')"></help-symbols>
         <help-standard-projects v-if="isTabOpen('standard')"></help-standard-projects>
+        <help-phases v-if="isTabOpen('phases')"></help-phases>
     </div>
     `,
 });

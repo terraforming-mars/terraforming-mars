@@ -6,6 +6,8 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 
+import * as constants from '../constants';
+
 export const GameEnd = Vue.component('game-end', {
   props: {
     player: {
@@ -13,7 +15,9 @@ export const GameEnd = Vue.component('game-end', {
     },
   },
   data: function() {
-    return {};
+    return {
+      constants,
+    };
   },
   components: {
     'board': Board,
@@ -58,7 +62,7 @@ export const GameEnd = Vue.component('game-end', {
   },
   template: `
         <div id="game-end" class="game_end_cont">
-            <h1>Terraforming Mars - Game finished!</h1>
+            <h1>{{ constants.APP_NAME }} - Game finished!</h1>
             <div class="game_end">
                 <div v-if="isSoloGame()">
                     <div v-if="player.isSoloModeWin">

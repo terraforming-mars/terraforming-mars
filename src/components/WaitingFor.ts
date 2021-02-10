@@ -74,7 +74,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + constants.APP_NAME;
+      document.title = next + ' ' + $t(constants.APP_NAME);
     },
     waitForUpdate: function() {
       const vueApp = this;
@@ -124,7 +124,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     },
   },
   render: function(createElement) {
-    document.title = constants.APP_NAME;
+    document.title = $t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

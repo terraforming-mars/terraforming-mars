@@ -74,6 +74,7 @@ export const Preferences = Vue.component('preferences', {
       'smooth_scrolling': false as boolean | unknown[],
       'hide_tile_confirmation': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
+      'show_discount_on_cards': true as boolean | unknown[],
     };
   },
   methods: {
@@ -369,6 +370,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
                             <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="show_discount_on_cards" />
+                            <i class="form-icon"></i> <span v-i18n>Show discount on cards</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

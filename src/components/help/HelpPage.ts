@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {HelpSymbols} from './HelpSymbols';
+import {HelpStandardProjects} from './HelpStandardProjects';
 
 enum HelpPageTab {
     Symbols = 'symbols',
@@ -19,6 +20,7 @@ export const HelpPage = Vue.component('help-page', {
   },
   components: {
     'help-symbols': HelpSymbols,
+    'help-standard-projects': HelpStandardProjects,
   },
   methods: {
     setTab: function(tab: string): void {
@@ -26,7 +28,7 @@ export const HelpPage = Vue.component('help-page', {
       case ('symbols'):
         this.currentPage = HelpPageTab.Symbols;
         break;
-      case ('projects'):
+      case ('standard'):
         this.currentPage = HelpPageTab.StandardProjects;
         break;
       case ('phases'):
@@ -38,7 +40,7 @@ export const HelpPage = Vue.component('help-page', {
       switch (tab) {
       case ('symbols'):
         return this.currentPage === HelpPageTab.Symbols;
-      case ('projects'):
+      case ('standard'):
         return this.currentPage === HelpPageTab.StandardProjects;
       case ('phases'):
         return this.currentPage === HelpPageTab.Phases;
@@ -57,7 +59,7 @@ export const HelpPage = Vue.component('help-page', {
             </label>
 
             <input type="radio" name="help-page-tab" id="radio-standard-projects">
-            <label class="" for="radio-standard-projects" v-on:click="setTab('projects')">
+            <label class="" for="radio-standard-projects" v-on:click="setTab('standard')">
                 <span v-i18n>Standard Projects</span>
             </label>
 
@@ -68,6 +70,7 @@ export const HelpPage = Vue.component('help-page', {
         </div>
 
         <help-symbols v-if="isTabOpen('symbols')"></help-symbols>
+        <help-standard-projects v-if="isTabOpen('standard')"></help-standard-projects>
     </div>
     `,
 });

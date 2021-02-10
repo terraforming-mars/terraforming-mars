@@ -39,6 +39,16 @@ export const HelpPhases = Vue.component('help-phases', {
           <label for="generation"><span v-i18n>Each generation</span></label>
           <ul>
             <li>
+            <input type="checkbox" id="production-phase">
+            <label for="production-phase"><span v-i18n>Research Phase</span></label>
+            <ul>
+              <li v-i18n>Draw four project cards</li>
+              <li v-i18n>(Optional variant: draft the cards. Pick one pass to the player below in even generation and above in odd generation. Repeat until you have four cards.)</li>
+              <li v-i18n>Decide how many cards to keep</li>
+            </ul>
+            </li>
+
+            <li>
             <input type="checkbox" id="action-phase">
             <label for="action-phase" class="last"><span v-i18n>Action phase</span> (<span v-i18n>Turmoil policy in effect</span> <div class="expansion-icon expansion-icon-turmoil"></div>) </label> 
             <ul>

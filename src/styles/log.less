@@ -34,24 +34,49 @@
 }
 
 .log-panel {
-    height: 180px;
-    max-height: 180px;
-    border-style:none;
+    height: 240px;
+    max-height: 240px;
+    border-style: none;
     font-size: 18px;
     padding: 5px;
-    max-width: 767px;
+    max-width: 860px;
     background: #222;
     position: relative;
     .log-panel-actions {
         position: absolute;
         top: 20px;
         right: 60px;
-        .pause-button {
+        .pause-resume-button {
             text-transform: uppercase;
-            color: #ccc;
-            padding: 2px 12px;
+            color: #222;
+            background: #ccc;
+            padding: 2px 12px 1px 12px;
             border-radius: 8px;
             font-family: Prototype;
+            cursor: pointer;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            .icon-play {
+                width: 15px;
+                background: url(./assets/play.png);
+                background-size: 17px;
+                display: block;
+                height: 19px;
+                line-height: 16px;
+                margin-left: 4px;
+                background-repeat: no-repeat;
+            }
+            .icon-pause {
+                width: 14px;
+                background: url(./assets/pause.png);
+                background-size: 16px;
+                display: block;
+                height: 17px;
+                line-height: 16px;
+                margin-left: 4px;
+                background-repeat: no-repeat;
+            }
         }
     }
 

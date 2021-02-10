@@ -210,6 +210,7 @@ export const LogPanel = Vue.component('log-panel', {
     },
     togglePause: function() {
       (this.$root as any).changeLogPaused(!(this.$root as any).logPaused);
+      (this.$root as any).updatePlayer();
     },
     getGenerationsRange: function(): Array<number> {
       const result = range(this.generation + 1);
@@ -220,6 +221,9 @@ export const LogPanel = Vue.component('log-panel', {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
+    },
+    getIconClass: function(): string {
+      return (this.$root as any).logPaused ? 'icon-play' : 'icon-pause';
     },
     getGenerationText: function(): string {
       let retText = '';
@@ -263,7 +267,7 @@ export const LogPanel = Vue.component('log-panel', {
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
             <div class="log-panel-actions">
-              <div class="pause-button" v-on:click="togglePause">{{ pauseButtonText() }}</div>
+              <div class="pause-resume-button" v-on:click="togglePause">{{ pauseButtonText() }}<span :class="getIconClass()"></span></div>
             </div>
             <ul v-if="messages">
               <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>

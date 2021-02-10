@@ -12,7 +12,8 @@ import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
 import {TileType} from '../TileType';
-import {range} from '../utils/utils';
+import {range, playerColorClass} from '../utils/utils';
+import {Color} from '../Color';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -26,6 +27,9 @@ export const LogPanel = Vue.component('log-panel', {
     },
     players: {
       type: Array as () => Array<PlayerModel>,
+    },
+    color: {
+      type: String as () => Color,
     },
   },
   data: function() {
@@ -212,6 +216,11 @@ export const LogPanel = Vue.component('log-panel', {
       result.shift();
       return result;
     },
+    getTitleClasses: function(): string {
+      const classes = ['log-title'];
+      classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
+      return classes.join(' ');
+    },
   },
   mounted: function() {
     fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
@@ -226,8 +235,11 @@ export const LogPanel = Vue.component('log-panel', {
       });
   },
   template: `
-      <div class="log-container">
+      <div class="log-container"> 
         <div class="log-generations">
+          <h2 :class="getTitleClasses()">
+              <span v-i18n>Game log</span>
+          </h2>
           <div class="log-gen-title">Gen: </div>
           <div class="log-gen-numbers">
             <div v-for="n in getGenerationsRange()" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">

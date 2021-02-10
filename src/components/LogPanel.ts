@@ -221,6 +221,18 @@ export const LogPanel = Vue.component('log-panel', {
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
     },
+    getGenerationText: function(): string {
+      let retText = '';
+      if (this.players.length === 1) {
+        const MAX_GEN = this.players[0].gameOptions.preludeExtension ? 12 : 14;
+        retText += 'of ' + MAX_GEN;
+        if (MAX_GEN === this.generation) {
+          retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
+        }
+      }
+
+      return retText;
+    },
   },
   mounted: function() {
     fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
@@ -246,6 +258,7 @@ export const LogPanel = Vue.component('log-panel', {
               {{ n }}
             </div>
           </div>
+          <span class="label-additional" v-html="getGenerationText()"></span>
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">

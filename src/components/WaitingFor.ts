@@ -21,10 +21,13 @@ import {playActivePlayerSound} from '../SoundManager';
 import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
+import {WaitingForModel} from '../models/WaitingForModel';
 
+import * as constants from '../constants';
 import * as raw_settings from '../genfiles/settings.json';
 
-let ui_update_timeout_id: number | undefined = undefined;
+let ui_update_timeout_id: number | undefined;
+let documentTitleTimer: number | undefined;
 
 export const WaitingFor = Vue.component('waiting-for', {
   props: {
@@ -63,6 +66,16 @@ export const WaitingFor = Vue.component('waiting-for', {
     'shift-ares-global-parameters': ShiftAresGlobalParameters,
   },
   methods: {
+    animateTitle: function() {
+      const sequence = '\u25f7\u25f6\u25f5\u25f4';
+      const first = document.title[0];
+      const position = sequence.indexOf(first);
+      let next = sequence[0];
+      if (position !== -1 && position < sequence.length - 1) {
+        next = sequence[position + 1];
+      }
+      document.title = next + ' ' + $t(constants.APP_NAME);
+    },
     waitForUpdate: function() {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;
@@ -75,15 +88,15 @@ export const WaitingFor = Vue.component('waiting-for', {
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
-            const result = xhr.response;
-            if (result['result'] === 'GO') {
+            const result = xhr.response as WaitingForModel;
+            if (result.result === 'GO') {
               root.updatePlayer();
 
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission();
               }
               if (Notification.permission === 'granted') {
-                new Notification('Terraforming Mars Online', {
+                new Notification(constants.APP_NAME, {
                   icon: '/favicon.ico',
                   body: 'It\'s your turn!',
                 });
@@ -93,12 +106,13 @@ export const WaitingFor = Vue.component('waiting-for', {
 
               // We don't need to wait anymore - it's our turn
               return;
-            } else if (result['result'] === 'REFRESH') {
+            } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               root.updatePlayer();
+
               return;
             }
-            (vueApp).waitForUpdate();
+            vueApp.waitForUpdate();
           } else {
             alert('Unexpected server response');
           }
@@ -110,9 +124,14 @@ export const WaitingFor = Vue.component('waiting-for', {
     },
   },
   render: function(createElement) {
+    document.title = $t(constants.APP_NAME);
+    window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
       return createElement('div', $t('Not your turn to take any actions'));
+    }
+    if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
+      documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
     const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
       const xhr = new XMLHttpRequest();

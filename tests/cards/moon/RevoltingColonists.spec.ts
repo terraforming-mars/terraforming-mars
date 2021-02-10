@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {RevoltingColonists} from '../../../src/cards/moon/RevoltingColonists';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';

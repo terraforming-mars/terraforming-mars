@@ -312,7 +312,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
 
@@ -355,7 +355,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
       game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
@@ -453,6 +453,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.colonyVictoryPoints > 0) {
       this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
     }
+
+    MoonExpansion.calculateVictoryPoints(this);
 
     this.victoryPointsBreakdown.updateTotal();
     return this.victoryPointsBreakdown;
@@ -566,7 +568,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       // Lawsuit hook
-      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);
       }
     }
@@ -778,7 +780,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  // This is only public for a test. It's not great.
+  // TODO(kberg): Fix taht.
+  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {
@@ -832,6 +836,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
         mappedCards.push(this.getCard(pi.cards, cardName));
+        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
+          throw new Error('Selected unavailable card');
+        }
       }
       this.runInputCb(pi.cb(mappedCards));
     } else if (pi instanceof SelectAmount) {
@@ -1028,6 +1035,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
+      false, undefined, false,
       ), () => { },
     );
   }
@@ -1634,26 +1642,24 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
-  // Public for testing
-  public getPlayableStandardProjects(): Array<StandardProjectCard> {
-    // TODO(kberg): Filter playability based on the project's reserve units.
+  private getStandardProjects(): Array<StandardProjectCard> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
       .sort((a, b) => a.cost - b.cost);
   }
 
-  private getPlayableStandardProjectOption(): PlayerInput | undefined {
-    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
-    if (standardProjects.length === 0) {
-      return undefined;
-    }
+  // Public for testing. TODO: make protected using the TestPlayer class.
+  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
+    const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',
       'Confirm',
       standardProjects,
       (card) => card[0].action(this),
+      1, 1, false,
+      standardProjects.map((card) => card.canAct(this)),
     );
   }
 
@@ -1848,14 +1854,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjectsOption = this.getPlayableStandardProjectOption();
-    if (standardProjectsOption !== undefined) {
-      action.options.push(standardProjectsOption);
-    }
+    action.options.push(this.getStandardProjectOption());
 
-    action.options.push(
-      this.passOption(),
-    );
+    action.options.push(this.passOption());
 
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();

@@ -33,14 +33,13 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
       },
     }, {
       reserveUnits: Units.of({titanium: 1}),
-      tilesBuilt: [],
     });
   }
 
   public resourceCount: number = 0;
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     return undefined;
   }
 

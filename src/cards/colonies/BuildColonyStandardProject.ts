@@ -26,7 +26,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
 
   private getOpenColonies(player: Player) {
     let openColonies = player.game.colonies.filter((colony) => colony.colonies.length < 3 &&
-      colony.colonies.indexOf(player.id) === -1 &&
+      colony.colonies.includes(player.id) === false &&
       colony.isActive);
 
     // TODO: Europa sometimes costs additional 3.

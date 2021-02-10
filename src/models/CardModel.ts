@@ -8,7 +8,7 @@ export interface CardModel {
     name: CardName;
     resources: number | undefined;
     resourceType: ResourceType | undefined;
-    calculatedCost: number;
+    calculatedCost?: number;
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;

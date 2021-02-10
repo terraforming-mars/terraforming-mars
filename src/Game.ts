@@ -393,6 +393,7 @@ export class Game implements ISerializable<SerializedGame> {
       awards: this.awards,
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
+      clickedLinks: this.clickedLinks,
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),
@@ -419,7 +420,6 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
-      clickedLinks: this.clickedLinks,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [

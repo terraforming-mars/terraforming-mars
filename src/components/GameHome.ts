@@ -66,16 +66,9 @@ export const GameHome = Vue.component('game-home', {
     copyUrl: function(playerId: string): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
-      this.game?.clickedLinks.push(playerId);
     },
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
-    },
-    isLinkClicked: function(playerId: string): boolean {
-      return this.game ? this.game.clickedLinks.includes(playerId) : false;
-    },
-    clickLink: function(playerId: string): void {
-      this.game?.clickedLinks.push(playerId);
     },
   },
   template: `
@@ -86,10 +79,8 @@ export const GameHome = Vue.component('game-home', {
           <li v-for="(player, index) in (game === undefined ? [] : game.players)">
             <span class="turn-order">{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
-            <span v-if="!isLinkClicked(player.id)" class="player-name"><a :href="getHref(player.id)" :onClick="_=>clickLink(player.id)">{{player.name}}</a></span>
+            <span v-if="player.id !== ''" class="player-name"><a :href="getHref(player.id)" :onClick="_=>copyUrl(player.id)">{{player.name}}</a></span>
             <span v-else class="player-name">{{player.name}}</span>
-            <Button v-if="!isLinkClicked(player.id)" title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
 

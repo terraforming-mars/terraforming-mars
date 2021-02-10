@@ -11,7 +11,6 @@ export interface GameHomeModel {
     phase: Phase;
     players: Array<GameHomePlayerModel>;
     gameOptions: GameOptionsModel;
-    clickedLinks: Array<string>;
 }
 
 interface GameHomePlayerModel {

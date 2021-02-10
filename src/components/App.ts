@@ -8,7 +8,7 @@ import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
-import {HelpPage} from './HelpPage';
+import {HelpPage} from './help/HelpPage';
 
 import * as raw_settings from '../genfiles/settings.json';
 

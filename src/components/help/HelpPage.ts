@@ -1,12 +1,9 @@
 import Vue from 'vue';
-import {Card} from './card/Card';
 
 export const HelpPage = Vue.component('help-page', {
   components: {
-    Card,
   },
   methods: {
-
   },
   template: `
     <div class="help-page-container">

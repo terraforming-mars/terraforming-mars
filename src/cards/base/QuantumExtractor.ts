@@ -16,9 +16,9 @@ export class QuantumExtractor extends Card implements IProjectCard {
       tags: [Tags.SCIENCE, Tags.ENERGY],
       cost: 13,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       metadata: {
         cardNumber: '079',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
@@ -30,7 +30,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
     });
   }
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 2;
     }
     return 0;

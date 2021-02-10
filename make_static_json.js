@@ -41,7 +41,7 @@ function getAllTranslations() {
 function generateAppVersion() {
     // assumes SOURCE_VERSION is git hash
     if (process.env.SOURCE_VERSION) {
-        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
+        return process.env.SOURCE_VERSION.substring(0, 7) + " " + new Date().toUTCString().replace(/ \(.+\)/, '');
     }
     try {
         return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
@@ -58,13 +58,21 @@ function getWaitingForTimeout() {
     return 5000;
 }
 
+function getLogLength() {
+    if (process.env.LOG_LENGTH) {
+	return Number(process.env.LOG_LENGTH);
+    }
+    return 50;
+}
+
 if (!fs.existsSync('src/genfiles')) {
     fs.mkdirSync('src/genfiles');
 }
 
 fs.writeFileSync("src/genfiles/settings.json", JSON.stringify({
     version: generateAppVersion(),
-    waitingForTimeout: getWaitingForTimeout()
+    waitingForTimeout: getWaitingForTimeout(),
+    logLength: getLogLength()
 }));
 
 fs.writeFileSync("src/genfiles/translations.json", JSON.stringify(

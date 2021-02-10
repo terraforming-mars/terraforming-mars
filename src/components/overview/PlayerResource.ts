@@ -9,6 +9,9 @@ export const PlayerResource = Vue.component('player-resource', {
     type: {
       type: String as () => Resources,
     },
+    canUseHeatAsMegaCredits: {
+      type: Boolean || undefined,
+    },
     count: {
       type: Number,
     },
@@ -53,14 +56,18 @@ export const PlayerResource = Vue.component('player-resource', {
     displayPlantsProtectedIcon: function(): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
-    isMetalUpgraded: function(): boolean {
-      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) || (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE);
+    isResourceUpgraded: function(): boolean {
+      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
+        (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE) ||
+        (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
     },
-    getMetalBonus: function(): string {
+    getResourceBonus: function(): string {
       if (this.type === Resources.STEEL) {
         return `${this.steelValue}`;
       } else if (this.type === Resources.TITANIUM) {
         return `${this.titaniumValue}`;
+      } else if (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits) {
+        return '1';
       } else {
         return '';
       }
@@ -75,7 +82,7 @@ export const PlayerResource = Vue.component('player-resource', {
             <div class="resource_item_prod">
                 <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
                 <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
-                <div v-if="isMetalUpgraded()" class="resource_icon--metalbonus" v-html="getMetalBonus()"></div>
+                <div v-if="isResourceUpgraded()" class="resource_icon--metalbonus" v-html="getResourceBonus()"></div>
             </div>
         </div>
     `,

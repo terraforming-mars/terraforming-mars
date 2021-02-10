@@ -24,9 +24,9 @@ export class GeologicalSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.greeneries(5).any().max()),
       metadata: {
         cardNumber: 'A09',
-        requirements: CardRequirements.builder((b) => b.greeneries(5).any().max()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.', (eb) => {
             eb.emptyTile().startEffect;
@@ -38,26 +38,26 @@ export class GeologicalSurvey extends Card implements IProjectCard {
     });
   }
 
-  private hasAdjacencyBonus(player: Player, space: ISpace, bonus: SpaceBonus) {
+  private anyAdjacentSpaceGivesBonus(player: Player, space: ISpace, bonus: SpaceBonus): boolean {
     return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 
-  public onTilePlaced(player: Player, space: ISpace) {
-    if (player.game.phase === Phase.SOLAR || player.id !== space.player?.id) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (cardOwner.game.phase === Phase.SOLAR || cardOwner.id !== activePlayer.id) {
       return;
     }
 
     // Steel, Titanium and Heat
     ([[Resources.STEEL, SpaceBonus.STEEL], [Resources.TITANIUM, SpaceBonus.TITANIUM], [Resources.HEAT, SpaceBonus.HEAT]] as [Resources, SpaceBonus][]).forEach(([resource, bonus]) => {
-      if ((resource === Resources.STEEL && space.spaceType !== SpaceType.COLONY && PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy. MARS_FIRST_DEFAULT_POLICY)) ||
+      if ((resource === Resources.STEEL && space.spaceType !== SpaceType.COLONY && PartyHooks.shouldApplyPolicy(cardOwner.game, PartyName.MARS, TurmoilPolicy. MARS_FIRST_DEFAULT_POLICY)) ||
           space.bonus.includes(bonus) ||
-          this.hasAdjacencyBonus(player, space, bonus)) {
-        player.game.defer(new GainResources(
-          player,
+          this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus)) {
+        cardOwner.game.defer(new GainResources(
+          cardOwner,
           resource,
           {
             logMessage: '${0} gained a bonus ${1} because of ${2}',
-            logBuilder: (b) => b.player(player).string(resource).cardName(this.name),
+            logBuilder: (b) => b.player(cardOwner).string(resource).cardName(this.name),
           }));
       }
     });

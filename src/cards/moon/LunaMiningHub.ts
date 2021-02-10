@@ -20,9 +20,9 @@ export class LunaMiningHub extends MoonCard {
       cost: 16,
       productionBox: Units.of({steel: 1, titanium: 1}),
 
+      requirements: CardRequirements.builder((b) => b.miningRate(5)),
       metadata: {
         cardNumber: 'M14',
-        requirements: CardRequirements.builder((b) => b.miningRate(5)),
         description: 'Requires a Mining Rate of 5 or higher. ' +
           'Spend 1 titanium and 1 steel. Increase your steel and titanium production 1 step each. ' +
           'Place this tile on the Moon and raise Mining Rate 1 step. ' +
@@ -44,13 +44,13 @@ export class LunaMiningHub extends MoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player);
-    player.game.defer(new PlaceSpecialMoonTile(player, {
-      tileType: TileType.LUNA_MINING_HUB,
-      card: this.name,
-    },
-    'Select a space for Luna Mining Hub.'));
+    super.play(player);
+    player.game.defer(new PlaceSpecialMoonTile(
+      player, {
+        tileType: TileType.LUNA_MINING_HUB,
+        card: this.name,
+      },
+      'Select a space for Luna Mining Hub.'));
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

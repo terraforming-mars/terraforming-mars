@@ -41,6 +41,7 @@ import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
+import {GainResources} from './deferredActions/GainResources';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
@@ -107,6 +108,7 @@ export interface GameOptions {
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
+  requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -129,6 +131,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
+  requiresMoonTrackCompletion: false,
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
@@ -491,8 +494,18 @@ export class Game implements ISerializable<SerializedGame> {
     const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
     const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
-    const globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
+    let globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
     const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+
+    MoonExpansion.ifMoon(this, (moonData) => {
+      if (this.gameOptions.requiresMoonTrackCompletion) {
+        const moonMaxed =
+          moonData.colonyRate === constants.MAXIMUM_COLONY_RATE &&
+          moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
+          moonData.logisticRate === constants.MAXIMUM_LOGISTICS_RATE;
+        globalParametersMaxed = globalParametersMaxed && moonMaxed;
+      }
+    });
 
     // Solo games with Venus needs Venus maxed to end the game.
     if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
@@ -792,7 +805,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.passedPlayers.add(player.id);
   }
 
-  private hasResearched(player: Player): boolean {
+  public hasResearched(player: Player): boolean {
     return this.researchedPlayers.has(player.id);
   }
 
@@ -1023,7 +1036,7 @@ export class Game implements ISerializable<SerializedGame> {
     // greenery and the player needs enough plants
     let firstPlayer: Player | undefined = this.first;
     while (
-      firstPlayer !== undefined && players.indexOf(firstPlayer) === -1
+      firstPlayer !== undefined && players.includes(firstPlayer) === false
     ) {
       firstPlayer = this.getNextPlayer(this.players, firstPlayer);
     }
@@ -1295,7 +1308,6 @@ export class Game implements ISerializable<SerializedGame> {
     this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
-
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
         space.bonus.forEach((spaceBonus) => {
@@ -1316,33 +1328,19 @@ export class Game implements ISerializable<SerializedGame> {
       TurmoilHandler.resolveTilePlacementBonuses(player, spaceType);
 
       if (arcadianCommunityBonus) {
-        player.megaCredits += 3;
+        this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
       }
     } else {
       space.player = undefined;
     }
 
-    // Mining Guild tile placement effects should resolve before removing space.player for Oceans
     this.players.forEach((p) => {
-      if (p.corporationCard?.onTilePlaced !== undefined) {
-        const actionFromPlacedTile = p.corporationCard.onTilePlaced(p, space);
-        if (actionFromPlacedTile !== undefined) {
-          this.defer(actionFromPlacedTile, player.id !== p.id ? Priority.OPPONENT_TRIGGER : undefined);
-        }
-      }
+      p.corporationCard?.onTilePlaced?.(p, player, space);
       p.playedCards.forEach((playedCard) => {
-        if (playedCard.onTilePlaced !== undefined) {
-          const actionFromPlacedTile = playedCard.onTilePlaced(p, space);
-          if (actionFromPlacedTile !== undefined) {
-            this.defer(actionFromPlacedTile, player.id !== p.id ? Priority.OPPONENT_TRIGGER : undefined);
-          }
-        }
+        playedCard.onTilePlaced?.(p, player, space);
       });
     });
 
-    if (tile.tileType === TileType.OCEAN) {
-      space.player = undefined;
-    }
 
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
@@ -1351,7 +1349,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
     space.tile = tile;
-    space.player = player;
+    space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 

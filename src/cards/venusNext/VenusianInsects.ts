@@ -19,9 +19,9 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
       cost: 5,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.venus(12)),
       metadata: {
         cardNumber: '260',
-        requirements: CardRequirements.builder((b) => b.venus(12)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Microbe to this card.', (eb)=> {
             eb.empty().startAction.microbes(1);

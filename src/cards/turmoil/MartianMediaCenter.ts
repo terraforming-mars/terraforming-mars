@@ -19,9 +19,9 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 7,
 
+      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {
         cardNumber: 'T07',
-        requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
         renderData: CardRenderer.builder((b) => {
           b.action('Pay 3 MC to add a delegate to any party.', (eb) => {
             eb.megacredits(3).startAction.delegates(1);

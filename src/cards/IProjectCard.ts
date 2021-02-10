@@ -6,7 +6,6 @@ import {Units} from '../Units';
 export interface IProjectCard extends ICard {
     canPlay?: (player: Player) => boolean;
     cost: number;
-    hasRequirements?: boolean;
 
     // A field dedicated to Robotic Workforce which tracks whether a card has an additional production
     // bonus besides the obvious ones printed on the card. Mining Rights and Mining Area are the only

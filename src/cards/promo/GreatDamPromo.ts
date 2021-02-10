@@ -20,9 +20,9 @@ export class GreatDamPromo extends Card implements IProjectCard {
       cost: 15,
       tags: [Tags.ENERGY, Tags.BUILDING],
 
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
         cardNumber: '136',
-        requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
         }),

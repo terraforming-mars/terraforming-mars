@@ -165,14 +165,17 @@ export class MoonExpansion {
     MoonExpansion.ifMoon(game, (moonData) => {
       tiles = moonData.moon.spaces.filter(
         (space) => {
-          const spaceTileType = space.tile?.tileType;
+          if (space.tile === undefined) {
+            return false;
+          }
+          const type = space.tile.tileType;
           let include: boolean = true;
           if (tileType === TileType.MOON_COLONY) {
-            include = spaceTileType === TileType.MOON_COLONY || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_COLONY || type === TileType.LUNAR_MINE_URBANIZATION;
           } else if (tileType === TileType.MOON_MINE) {
-            include = spaceTileType === TileType.MOON_MINE || spaceTileType === TileType.LUNAR_MINE_URBANIZATION;
+            include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && spaceTileType === tileType;
+            include = include && type === tileType;
           }
 
           if (surfaceOnly) {
@@ -198,7 +201,7 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
+    const tilesBuilt: Array<TileType> = (card as unknown as IMoonCard).tilesBuilt || [];
 
     if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;
@@ -215,5 +218,32 @@ export class MoonExpansion {
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
     return Units.of({steel, titanium});
+  }
+
+  public static calculateVictoryPoints(player: Player): void {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      // Each road tile on the map awards 1VP to the player owning it.
+      // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
+      const moon = moonData.moon;
+      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+      mySpaces.forEach((space) => {
+        if (space.tile !== undefined) {
+          switch (space.tile.tileType) {
+          case TileType.MOON_ROAD:
+            player.victoryPointsBreakdown.setVictoryPoints('moon road', 1);
+            break;
+          case TileType.MOON_MINE:
+          case TileType.MOON_COLONY:
+            const points = moon.getAdjacentSpaces(space).filter((adj) => adj.tile?.tileType === TileType.MOON_ROAD).length;
+            if (space.tile.tileType === TileType.MOON_MINE) {
+              player.victoryPointsBreakdown.setVictoryPoints('moon mine', points);
+            } else {
+              player.victoryPointsBreakdown.setVictoryPoints('moon colony', points);
+            }
+            break;
+          }
+        }
+      });
+    });
   }
 }

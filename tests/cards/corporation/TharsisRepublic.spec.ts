@@ -5,15 +5,15 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import * as Utils from '../../TestingUtils';
+import {TestPlayers, TestingUtils} from '../../TestingUtils';
 
 describe('TharsisRepublic', function() {
   let card : TharsisRepublic; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new TharsisRepublic();
-    player = Utils.TestPlayers.BLUE.newPlayer();
-    player2 = Utils.TestPlayers.RED.newPlayer();
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
 
     player.corporationCard = card;
@@ -23,7 +23,7 @@ describe('TharsisRepublic', function() {
     const action = card.initialAction(player);
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
 
     expect(game.getCitiesInPlayOnMars()).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -32,7 +32,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives 3 MC and MC production for own city on Mars', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -40,7 +40,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives MC production only for other player\'s city on Mars', function() {
     game.addCityTile(player2, game.board.getAvailableSpacesOnLand(player)[0].id);
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -50,15 +50,15 @@ describe('TharsisRepublic', function() {
     game.addTile(player, SpaceType.COLONY, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
       tileType: TileType.CITY,
     });
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
   });
 
   it('Gives 2 MC production in solo mode', function() {
-    const player = Utils.TestPlayers.BLUE.newPlayer();
+    const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     card.play(player);
-    Utils.runAllActions(game);
+    TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

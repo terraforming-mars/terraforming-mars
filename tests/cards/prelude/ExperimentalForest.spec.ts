@@ -19,6 +19,6 @@ describe('ExperimentalForest', function() {
     expect(selectSpace instanceof SelectSpace).is.true;
     expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.cardsInHand.filter((card) => card.tags.indexOf(Tags.PLANT) !== -1)).has.lengthOf(2);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.PLANT))).has.lengthOf(2);
   });
 });

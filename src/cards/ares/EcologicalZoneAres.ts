@@ -2,7 +2,6 @@ import {CardName} from '../../CardName';
 import {EcologicalZone} from '../base/EcologicalZone';
 import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../TileType';
-import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -18,7 +17,6 @@ export class EcologicalZoneAres extends EcologicalZone {
           align: 'left',
         },
         cardNumber: 'A08',
-        requirements: CardRequirements.builder((b) => b.greeneries()),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
             eb.animals(1).played.slash().plants(1).played.startEffect;

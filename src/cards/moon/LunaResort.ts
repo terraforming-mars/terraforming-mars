@@ -18,8 +18,8 @@ export class LunaResort extends MoonCard {
       cost: 11,
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
+      requirements: CardRequirements.builder((b) => b.colonies(2)),
       metadata: {
-        requirements: CardRequirements.builder((b) => b.colonies(2)),
         description:
           'Requires 2 colonies on the Moon. Spend 2 titanium. Decrease your energy prodcution 1 step and increase your MC production 3 steps. Raise Colony Rate 1 step.',
         cardNumber: 'M21',
@@ -41,8 +41,7 @@ export class LunaResort extends MoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player);
+    super.play(player);
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

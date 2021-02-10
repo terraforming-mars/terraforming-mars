@@ -21,15 +21,15 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
       productionBox: Units.of({megacredits: 1}),
-
+      requirements: CardRequirements.builder((b) => {
+        // TODO(kberg): distinguish between any mining tile and your mining tile.
+        b.miningTiles(1);
+      }),
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your MC production 1 step. Replace one of your mine tiles ' +
         'with this special tile. Raise Colony Rate 1 step. This tile counts both as a colony and a mine tile.',
         cardNumber: 'M55',
-        requirements: CardRequirements.builder((b) => {
-          // TODO(kberg): distinguish between any mining tile and your mining tile.
-          b.miningTiles(1);
-        }),
+
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).br;
           b.moonColonyRate(1);

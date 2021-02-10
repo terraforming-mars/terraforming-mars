@@ -16,9 +16,9 @@ export class Insects extends Card implements IProjectCard {
       tags: [Tags.MICROBE],
       cost: 9,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
         cardNumber: '148',
-        requirements: CardRequirements.builder((b) => b.oxygen(6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1).slash().plants(1).played);
         }),

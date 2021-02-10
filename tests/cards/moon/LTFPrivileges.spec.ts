@@ -4,7 +4,6 @@ import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/CardName';
-import {Cards} from '../../../src/cards/Cards';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -30,15 +29,15 @@ describe('LTFPrivileges', () => {
     // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
     msm.reserveUnits.steel = 2;
     player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
     player.titanium = 0;
     player.steel = 0;
-    expect(player.getPlayableCards().map(Cards.toCardName)).is.empty;
+    expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map(Cards.toCardName)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 });
 

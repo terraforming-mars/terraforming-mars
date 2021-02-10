@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
@@ -49,13 +48,14 @@ export class Philares extends Card implements CorporationCard {
       });
   }
 
-  private selectResources(tilePlayer: Player, philaresPlayer: Player, resourceCount: number) {
+  private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
     let megacreditsAmount: number = 0;
     let steelAmount: number = 0;
     let titaniumAmount: number = 0;
     let plantsAmount: number = 0;
     let energyAmount: number = 0;
     let heatAmount: number = 0;
+
     const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
       megacreditsAmount = amount;
       return undefined;
@@ -80,6 +80,7 @@ export class Philares extends Card implements CorporationCard {
       heatAmount = amount;
       return undefined;
     }, 0, resourceCount);
+
     const selectResources = new AndOptions(
       () => {
         if (
@@ -101,32 +102,31 @@ export class Philares extends Card implements CorporationCard {
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
-    tilePlayer.game.defer(new DeferredAction(
-      philaresPlayer,
-      () => selectResources,
-    ), tilePlayer.id === philaresPlayer.id ? Priority.GAIN_RESOURCE_OR_PRODUCTION : Priority.OPPONENT_TRIGGER);
+
+    return selectResources;
   }
 
-  public onTilePlaced(player: Player, space: ISpace) {
-    const philaresPlayer = player.game.getPlayers().find((player) => player.isCorporation(CardName.PHILARES));
-    if (philaresPlayer === undefined) {
-      console.error('Could not find Philares player');
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (space.player === undefined) {
       return;
     }
-    if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
-      let bonusResource: number = 0;
-      if (space.player !== undefined && space.player.id === philaresPlayer.id) {
-        bonusResource = player.game.board.getAdjacentSpaces(space)
-          .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
-          .length;
-      } else if (space.player !== undefined && space.player.id !== philaresPlayer.id) {
-        bonusResource = player.game.board.getAdjacentSpaces(space)
-          .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === philaresPlayer.id)
-          .length;
-      }
-      if (bonusResource > 0) {
-        this.selectResources(player, philaresPlayer, bonusResource);
-      }
+    let bonusResource: number = 0;
+    if (cardOwner.id === activePlayer.id) {
+      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
+        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id !== cardOwner.id)
+        .length;
+    } else {
+      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
+        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === cardOwner.id)
+        .length;
+    }
+    if (bonusResource > 0) {
+      cardOwner.game.defer(
+        new DeferredAction(cardOwner, () => {
+          return this.selectResources(cardOwner, bonusResource);
+        }),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
+      );
     }
   }
 

@@ -21,9 +21,9 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
       cost: 14,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(11)),
       metadata: {
         cardNumber: '024',
-        requirements: CardRequirements.builder((b) => b.oxygen(11)),
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
             eb.animals(1).any.startAction.animals(1);

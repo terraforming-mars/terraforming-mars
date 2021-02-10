@@ -2,7 +2,6 @@ import {Game} from '../../../src/Game';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
-import {Tags} from '../../../src/cards/Tags';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Player} from '../../../src/Player';
@@ -18,10 +17,10 @@ describe('LunaProjectOffice', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.getTagCount = (tag) => tag === Tags.SCIENCE ? 2 : 0;
+    player.tagsForTest = {science: 2};
     expect(player.getPlayableCards()).does.include(card);
 
-    player.getTagCount = (tag) => tag === Tags.SCIENCE ? 1 : 0;
+    player.tagsForTest = {science: 1};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 

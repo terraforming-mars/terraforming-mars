@@ -14,6 +14,8 @@ import {CardName} from '../CardName';
 import {TileType} from '../TileType';
 import {range} from '../utils/utils';
 
+import * as raw_settings from '../genfiles/settings.json';
+
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {
@@ -212,7 +214,7 @@ export const LogPanel = Vue.component('log-panel', {
     },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=50&generation=${this.selectedGeneration}`)
+    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
       .then((response) => response.json())
       .then((messages) => {
         this.messages.splice(0, this.messages.length);

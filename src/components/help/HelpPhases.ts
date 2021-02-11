@@ -31,7 +31,10 @@ export const HelpPhases = Vue.component('help-phases', {
           <ul>
             <li v-i18n>Select which corporation, 2 preludes and project cards to keep.</li>
             <li v-i18n>In turn order, play the corporation and pay 3 mc for each of the kept project cards.</li>
-            <li v-i18n>In turn order, play both preludes. <div class="expansion-icon expansion-icon-prelude"></div></li>
+            <li>
+              <span v-i18n>In turn order, play both preludes.</span> 
+              <div class="expansion-icon expansion-icon-prelude"></div>
+            </li>
           </ul>
         </li>
 

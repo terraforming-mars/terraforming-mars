@@ -23,7 +23,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
         cardNumber: 'M78',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate(1).br;
-          b.production((pb) => pb.megacredits(1)).slash().moonLogisticsRate(2);
+          b.production((pb) => pb.megacredits(1)).slash().moonLogisticsRate(1);
         }),
       },
     });

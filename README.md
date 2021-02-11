@@ -7,7 +7,7 @@ with FryxGames, Asmodee Digital or Steam in any way.**
 
 The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
-Join us on Discord [here](https://discord.gg/fWXE53K).
+Join us on Discord [here](https://discord.gg/VR8TbrD).
 
 ## Demo
 

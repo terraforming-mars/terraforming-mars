@@ -1035,6 +1035,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
+      false, undefined, false,
       ), () => { },
     );
   }
@@ -1853,9 +1854,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    action.options.push(this.passOption());
-
     action.options.push(this.getStandardProjectOption());
+
+    action.options.push(this.passOption());
 
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();

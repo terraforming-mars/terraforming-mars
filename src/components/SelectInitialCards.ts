@@ -64,10 +64,20 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           result += 30;
           break;
         case CardName.MARTIAN_INDUSTRIES:
+        case CardName.VALUABLE_GASES:
           result += 6;
           break;
         case CardName.NITROGEN_SHIPMENT:
           result += 5;
+          break;
+        case CardName.AEROSPACE_MISSION:
+          result -= 14;
+          break;
+        case CardName.RESEARCH_GRANT:
+          result += 8;
+          break;
+        case CardName.TRADE_ADVANCE:
+          result += 2;
           break;
         }
         switch (this.selectedCorporation?.name) {
@@ -113,6 +123,12 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
             break;
           }
           break;
+        case CardName.APHRODITE:
+          switch (prelude) {
+          case CardName.VENUS_FIRST:
+            result += 4;
+            break;
+          }
         }
       }
       return result;

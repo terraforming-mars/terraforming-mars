@@ -124,11 +124,11 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           }
           break;
         case CardName.APHRODITE:
-            switch (prelude) {
-            case CardName.VENUS_FIRST:
-              result += 4;
-              break;
-            }
+          switch (prelude) {
+          case CardName.VENUS_FIRST:
+            result += 4;
+            break;
+          }
         }
       }
       return result;

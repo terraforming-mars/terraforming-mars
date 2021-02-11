@@ -2,9 +2,12 @@ import Vue from 'vue';
 
 import {Phase} from '../Phase';
 
+import * as constants from '../constants';
+
 export const GamesOverview = Vue.component('games-overview', {
   data: function() {
     return {
+      constants,
       serverId: '',
       games: {},
     };
@@ -66,7 +69,7 @@ export const GamesOverview = Vue.component('games-overview', {
   },
   template: `
         <div id="games-overview">
-            <h1>Terraforming Mars — Games Overview</h1>
+            <h1>{{ constants.APP_NAME }} — Games Overview</h1>
             <p>The following games are available on this server:</p>
             <ul>
                 <li v-for="game in games">

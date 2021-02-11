@@ -82,7 +82,7 @@ import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 import {ProcessorFactory} from './ProcessorFactory';
 import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
-// import {RoverDriversUnion} from './RoverDriversUnion';
+import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
 // import {SmallDutyRovers} from './SmallDutyRovers';
@@ -99,7 +99,7 @@ import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
 import {TitaniumMarketMonopolists} from './TitaniumMarketMonopolists';
 import {TychoRoadNetwork} from './TychoRoadNetwork';
 import {UndergroundDetonators} from './UndergroundDetonators';
-// import {UndermoonDrugLordsNetwork} from './UndermoonDrugLordsNetwork';
+import {UndermoonDrugLordsNetwork} from './UndermoonDrugLordsNetwork';
 import {WaterTreatmentComplex} from './WaterTreatmentComplex';
 import {WeGrowAsOne} from './WeGrowAsOne';
 
@@ -184,13 +184,12 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
-    // {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
+    {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
     {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
-    //   {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
-    //   {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
+    {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
-    //   // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
+    // // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},

@@ -15,7 +15,10 @@ import {RandomMAOptionType} from '../RandomMAOptionType';
 import {GameId} from '../Game';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
+import * as constants from '../constants';
+
 export interface CreateGameModel {
+    constants: typeof constants;
     allOfficialExpansions: boolean;
     firstIndex: number;
     playersCount: number;
@@ -74,6 +77,7 @@ export interface NewPlayerModel {
 export const CreateGameForm = Vue.component('create-game-form', {
   data: function(): CreateGameModel {
     return {
+      constants,
       firstIndex: 1,
       playersCount: 1,
       players: [
@@ -479,7 +483,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
           window.location.href = '/player?id=' + response.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, 'Teraforming Mars - Game', '/game?id=' + response.id);
+          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
           (this as any).$root.$data.game = response;
           (this as any).$root.$data.screen = 'game-home';
         }
@@ -494,7 +498,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
   template: `
         <div id="create-game">
-            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
+            <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
             <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
                 (Looking for people to play with? <a href="https://discord.gg/fWXE53K" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
             </div>

@@ -3,6 +3,7 @@ import {CardType} from '../cards/CardType';
 import {ResourceType} from '../ResourceType';
 import {Units} from '../Units';
 import {CardName} from '../CardName';
+import {Resources} from '../Resources';
 
 export interface CardModel {
     name: CardName;
@@ -13,4 +14,5 @@ export interface CardModel {
     isDisabled: boolean;
     warning?: string | Message;
     reserveUnits: Readonly<Units>;
+    bonusResource?: Resources | undefined;
 }

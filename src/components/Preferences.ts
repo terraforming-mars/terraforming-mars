@@ -237,15 +237,6 @@ export const Preferences = Vue.component('preferences', {
                   v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
                   :title="$t('hotkeys and game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
-                      <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
-                      <div class="help-page-hotkeys">
-                        <div class="keys">
-                          <div v-i18n>Main Board</div>
-                          <div v-i18n>Players Overview Table</div>
-                          <div v-i18n>Cards in Hand</div>
-                          <div v-i18n>Colonies</div>
-                        </div>
-                      </div>
                       <div class="info_panel-spacing"></div>
                       <div class="info-panel-title" v-i18n>Game Setup Details</div>
                       <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>

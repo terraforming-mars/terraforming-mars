@@ -48,7 +48,7 @@ export const HelpPhases = Vue.component('help-phases', {
               <ul>
                 <li v-i18n>Draw four project cards</li>
                 <li v-i18n>(Optional variant: draft the cards. Pick one pass to the player below in even generation and above in odd generation. Repeat until you have four cards.)</li>
-                <li v-i18n>Decide how many cards to keep</li>
+                <li v-i18n>Decide how many cards to buy</li>
               </ul>
             </li>
 
@@ -99,7 +99,7 @@ export const HelpPhases = Vue.component('help-phases', {
               <ul>
                 <li><span v-i18n>i. Game end check</span>
                   <ul>
-                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to end game phase. </li>
+                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase. </li>
                     <li v-i18n>(If playing solo, the game is ended after 14 generations or 12 generations if Prelude expansion is used. </li>
                     <li v-i18n>(If Venus Next is in use, the Venus track must be completed as well for solo mode victory.) </li>
                   </ul>

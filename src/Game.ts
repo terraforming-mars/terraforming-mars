@@ -236,8 +236,8 @@ export class Game implements ISerializable<SerializedGame> {
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
     seed: number = 0,
-    spectatorId: SpectatorId
-    ): Game {
+    spectatorId: SpectatorId,
+  ): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }

@@ -19,7 +19,7 @@ import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
 // import {DarksideObservatory} from './DarksideObservatory';
 // import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
-// import {EarthEmbasy as EarthEmbassy} from './EarthEmbassy';
+import {EarthEmbassy} from './EarthEmbassy';
 import {FirstLunarSettlement} from './FirstLunarSettlement';
 import {GeodesicTents} from './GeodesicTents';
 import {GrandLunaAcademy} from './GrandLunaAcademy';
@@ -183,10 +183,9 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
-    // {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
+    {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
     {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
     {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
-    // {cardName: CardName.DARKSIDE_SMUGGLERS_UNION, Factory: DarksideSmugglersUnion, compatibility: GameModule.Colonies},
     {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},

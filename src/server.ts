@@ -56,6 +56,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         req.url.startsWith('/new-game') ||
         req.url.startsWith('/solo') ||
         req.url.startsWith('/game?id=') ||
+        req.url.startsWith('/spectator?id=') ||
         req.url.startsWith('/player?id=') ||
         req.url.startsWith('/the-end?id=') ||
         req.url.startsWith('/load') ||
@@ -365,6 +366,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     try {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomId();
+      const spectatorId = generateRandomId();
       const players = gameReq.players.map((obj: any) => {
         return new Player(
           obj.name,
@@ -442,7 +444,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         });
       } else {
         const seed = Math.random();
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

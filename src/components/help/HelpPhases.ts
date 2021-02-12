@@ -26,25 +26,25 @@ export const HelpPhases = Vue.component('help-phases', {
         </li>
 
         <li>
-          <input type="checkbox" id="initial-research">
-          <label for="initial-research" v-i18n><span v-i18n>Initial Research Phase</span></label>
-          <ul>
-            <li v-i18n>Select which corporation, 2 preludes and project cards to keep.</li>
-            <li v-i18n>In turn order, play the corporation and pay 3 mc for each of the kept project cards.</li>
-            <li>
-              <span v-i18n>In turn order, play both preludes.</span> 
-              <div class="expansion-icon expansion-icon-prelude"></div>
-            </li>
-          </ul>
-        </li>
-
-        <li>
           <input type="checkbox" id="generation">
           <label for="generation"><span v-i18n>Each generation</span></label>
           <ul>
             <li>
+              <input type="checkbox" id="initial-research">
+              <label for="initial-research" v-i18n><span v-i18n>Initial Research Phase (Generation 1 only)</span></label>
+              <ul>
+                <li v-i18n>Select which corporation, 2 preludes and project cards to keep.</li>
+                <li v-i18n>In turn order, play the corporation and pay 3 mc for each of the project cards bought.</li>
+                <li>
+                  <span v-i18n>In turn order, play both preludes.</span> 
+                  <div class="expansion-icon expansion-icon-prelude"></div>
+                </li>
+              </ul>
+            </li>
+
+            <li>
               <input type="checkbox" id="research-phase">
-              <label for="research-phase"><span v-i18n>Research Phase</span></label>
+              <label for="research-phase"><span v-i18n>Research Phase (Generation 2+)</span></label>
               <ul>
                 <li v-i18n>Draw four project cards</li>
                 <li v-i18n>(Optional variant: draft the cards. Pick one pass to the player below in even generation and above in odd generation. Repeat until you have four cards.)</li>
@@ -101,7 +101,7 @@ export const HelpPhases = Vue.component('help-phases', {
                   <ul>
                     <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to end game phase. </li>
                     <li v-i18n>(If playing solo, the game is ended after 14 generations or 12 generations if Prelude expansion is used. </li>
-                    <li v-i18n>(In solo mode, the game also end when temperature, oxygen and oceans are maxed. If Venus Next is in use, the gaVenus track must be completed as well.) </li>
+                    <li v-i18n>(If Venus Next is in use, the Venus track must be completed as well for solo mode victory.) </li>
                   </ul>
                 <li>
                   <span v-i18n>ii. World Government Terraforming (start player chooses)</span> 

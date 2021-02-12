@@ -64,7 +64,7 @@ export const HelpPhases = Vue.component('help-phases', {
                 <li><span v-i18n>Take 1 or 2 actions (mandatory 2 actions if playing with fast mode):</span>
                   <ul>
                     <li v-i18n>play card</li>
-                    <li v-i18n>use active (blue) card action</li>
+                    <li v-i18n>use active card action</li>
                     <li v-i18n>standard project</li>
                     <li v-i18n>convert plants to greenery</li>
                     <li v-i18n>convert heat to temperature</li>
@@ -75,7 +75,7 @@ export const HelpPhases = Vue.component('help-phases', {
                       <div class="expansion-icon expansion-icon-colony"></div>
                     </li>
                     <li>
-                      <span v-i18n>lobby: one is free, 5 mc per delegate after<span> 
+                      <span v-i18n>send delegate: free from lobby, 5 mc from reserve<span> 
                       <div class="expansion-icon expansion-icon-turmoil"></div>
                     </li>
                   </ul>
@@ -100,7 +100,8 @@ export const HelpPhases = Vue.component('help-phases', {
                 <li><span v-i18n>i. Game end check</span>
                   <ul>
                     <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to end game phase. </li>
-                    <li v-i18n>(If playing solo, Venus track must be completed as well.) </li>
+                    <li v-i18n>(If playing solo, the game is ended after 14 generations or 12 generations if Prelude expansion is used. </li>
+                    <li v-i18n>(In solo mode, the game also end when temperature, oxygen and oceans are maxed. If Venus Next is in use, the gaVenus track must be completed as well.) </li>
                   </ul>
                 <li>
                   <span v-i18n>ii. World Government Terraforming (start player chooses)</span> 
@@ -109,7 +110,7 @@ export const HelpPhases = Vue.component('help-phases', {
                 <li><span v-i18n>iii. Colony production</span>
                   <ul>
                     <li v-i18n>Trade fleets return</li>
-                    <li v-i18n>Each colony marker goes up one step</li>
+                    <li v-i18n>Each colony tile track is increased 1 step if possible</li>
                   </ul>
                 </li>
 

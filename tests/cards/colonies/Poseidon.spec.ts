@@ -5,6 +5,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
+// TODO: add a test for Posideon's initial action.
+
 describe('Poseidon', function() {
   it('Should play', function() {
     const card = new Poseidon();

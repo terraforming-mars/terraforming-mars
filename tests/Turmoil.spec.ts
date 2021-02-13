@@ -25,7 +25,6 @@ import {SerializedTurmoil} from '../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../src/cards/base/standardProjects/GreeneryStandardProject';
-import {CardName} from '../src/CardName';
 
 describe('Turmoil', function() {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -151,10 +150,11 @@ describe('Turmoil', function() {
   it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
-    const availableStandardProjects = player.getPlayableStandardProjects();
+    const standardProjects = player.getStandardProjectOption();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(availableStandardProjects.map((c) => c.name)).deep.eq([CardName.POWER_PLANT_STANDARD_PROJECT]);
+    expect(standardProjects.enabled![0]).to.eq(true);
+    expect(standardProjects.enabled!.slice(1)).to.not.contain(true);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {

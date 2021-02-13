@@ -51,66 +51,90 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   switch (req.method) {
   case 'GET':
-    if (url.pathname === '/games-overview') {
+    switch (url.pathname) {
+    case '/games-overview':
       if (!isServerIdValid(req)) {
         route.notAuthorized(req, res);
         return;
       } else {
         serveApp(req, res);
       }
-    } else if (
-      url.pathname === '/' ||
-      url.pathname === '/new-game' ||
-      url.pathname === '/solo' ||
-      url.pathname === '/game' ||
-      url.pathname === '/player' ||
-      url.pathname === '/the-end' ||
-      url.pathname === '/load' ||
-      url.pathname === '/debug-ui' ||
-      url.pathname === '/help-iconology'
-    ) {
+      break;
+
+    case '/':
+    case '/new-game':
+    case '/solo':
+    case '/game':
+    case '/player':
+    case '/the-end':
+    case '/load':
+    case '/debug-ui':
+    case '/help-iconology':
       serveApp(req, res);
-    } else if (url.pathname === '/api/player') {
+      break;
+
+    case '/api/player':
       apiGetPlayer(req, res);
-    } else if (url.pathname === '/api/waitingfor') {
+      break;
+
+    case '/api/waitingfor':
       apiGetWaitingFor(req, res);
-    } else if (url.pathname === '/assets/translations.json') {
+      break;
+
+    // TODO(kberg): move to serveAsset.
+    case '/assets/translations.json':
       res.setHeader('Content-Type', 'application/json');
       res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
       res.write(fs.readFileSync('build/genfiles/translations.json'));
       res.end();
-    } else if (
-      url.pathname.startsWith('/assets/') ||
-      url.pathname === '/styles.css' ||
-      url.pathname === '/styles.css' ||
-      url.pathname === '/favicon.ico' ||
-      url.pathname === '/main.js' ||
-      url.pathname === '/main.js.map'
-    ) {
-      serveAsset(req, res);
-    } else if (url.pathname === '/api/games') {
-      apiGetGames(req, res);
-    } else if (url.pathname === '/api/game') {
-      apiGetGame(req, res);
-    } else if (gameLogs.canHandle(req.url)) {
-      gameLogs.handle(req, res);
-    } else if (url.pathname === '/api/clonablegames') {
-      getClonableGames(res);
-    } else {
-      route.notFound(req, res);
-    }
+      break;
 
+    case '/styles.css':
+    case '/styles.css':
+    case '/favicon.ico':
+    case '/main.js':
+    case '/main.js.map':
+      serveAsset(req, res);
+      break;
+
+    case '/api/games':
+      apiGetGames(req, res);
+      break;
+
+    case '/api/game':
+      apiGetGame(req, res);
+      break;
+
+    case '/api/clonablegames':
+      getClonableGames(res);
+      break;
+
+    default:
+      if (url.pathname.startsWith('/assets/')) {
+        serveAsset(req, res);
+      } else if (gameLogs.canHandle(req.url)) {
+        gameLogs.handle(req, res);
+      } else {
+        route.notFound(req, res);
+      }
+    }
     break;
 
   case 'PUT':
-    if (req.url.indexOf('/game') === 0) {
+    switch (url.pathname) {
+    case '/game':
       createGame(req, res);
-    } else if (req.url.indexOf('/load') === 0) {
+      break;
+
+    case '/load':
       loadGame(req, res);
-    } else {
+      break;
+
+    default:
       route.notFound(req, res);
     }
     break;
+
   case 'POST':
     if (req.url.indexOf('/player/input?id=') === 0) {
       const playerId: string = req.url.substring(

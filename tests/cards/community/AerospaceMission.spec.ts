@@ -1,5 +1,7 @@
 import {expect} from 'chai';
 import {AerospaceMission} from '../../../src/cards/community/AerospaceMission';
+import {Iapetus} from '../../../src/cards/community/Iapetus';
+import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
@@ -15,6 +17,7 @@ describe('AerospaceMission', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game.colonies.push(new Iapetus(), new Leavitt()); // ensure 2 colonies are always available
   });
 
   it('Should play', function() {

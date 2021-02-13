@@ -43,8 +43,10 @@ zlib.gzip(styles, function(err, compressed) {
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url !== undefined) {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+
     if (req.method === 'GET') {
-      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
+      if (url.pathname === '/games-overview') {
         if (!isServerIdValid(req)) {
           route.notAuthorized(req, res);
           return;
@@ -52,41 +54,42 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
           serveApp(req, res);
         }
       } else if (
-        req.url === '/' ||
-        req.url.startsWith('/new-game') ||
-        req.url.startsWith('/solo') ||
-        req.url.startsWith('/game?id=') ||
-        req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?id=') ||
-        req.url.startsWith('/load') ||
-        req.url.startsWith('/debug-ui') ||
-        req.url.startsWith('/help-iconology')
+        url.pathname === '/' ||
+        url.pathname === '/new-game' ||
+        url.pathname === '/solo' ||
+        url.pathname === '/game' ||
+        url.pathname === '/player' ||
+        url.pathname === '/the-end' ||
+        url.pathname === '/load' ||
+        url.pathname === '/debug-ui' ||
+        url.pathname === '/help-iconology'
       ) {
         serveApp(req, res);
-      } else if (req.url.startsWith('/api/player?id=')) {
+      } else if (url.pathname === '/api/player') {
         apiGetPlayer(req, res);
-      } else if (req.url.startsWith('/api/waitingfor?id=')) {
+      } else if (url.pathname === '/api/waitingfor') {
         apiGetWaitingFor(req, res);
-      } else if (req.url.startsWith('/assets/translations.json')) {
+      } else if (url.pathname === '/assets/translations.json') {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
         res.write(fs.readFileSync('build/genfiles/translations.json'));
         res.end();
       } else if (
-        req.url.startsWith('/assets/') ||
-        req.url === '/styles.css' ||
-        req.url === '/favicon.ico' ||
-        req.url === '/main.js' ||
-        req.url === '/main.js.map'
+        url.pathname.startsWith('/assets/') ||
+        url.pathname === '/styles.css' ||
+        url.pathname === '/styles.css' ||
+        url.pathname === '/favicon.ico' ||
+        url.pathname === '/main.js' ||
+        url.pathname === '/main.js.map'
       ) {
         serveAsset(req, res);
-      } else if (req.url.startsWith('/api/games')) {
+      } else if (url.pathname === '/api/games') {
         apiGetGames(req, res);
-      } else if (req.url.indexOf('/api/game?id=') === 0) {
+      } else if (url.pathname === '/api/game') {
         apiGetGame(req, res);
       } else if (gameLogs.canHandle(req.url)) {
         gameLogs.handle(req, res);
-      } else if (req.url.startsWith('/api/clonablegames')) {
+      } else if (url.pathname === '/api/clonablegames') {
         getClonableGames(res);
       } else {
         route.notFound(req, res);

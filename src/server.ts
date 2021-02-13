@@ -42,66 +42,77 @@ zlib.gzip(styles, function(err, compressed) {
 });
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (req.url !== undefined) {
-    const url = new URL(req.url, `http://${req.headers.host}`);
+  if (req.url === undefined) {
+    route.notFound(req, res);
+    return;
+  }
 
-    if (req.method === 'GET') {
-      if (url.pathname === '/games-overview') {
-        if (!isServerIdValid(req)) {
-          route.notAuthorized(req, res);
-          return;
-        } else {
-          serveApp(req, res);
-        }
-      } else if (
-        url.pathname === '/' ||
-        url.pathname === '/new-game' ||
-        url.pathname === '/solo' ||
-        url.pathname === '/game' ||
-        url.pathname === '/player' ||
-        url.pathname === '/the-end' ||
-        url.pathname === '/load' ||
-        url.pathname === '/debug-ui' ||
-        url.pathname === '/help-iconology'
-      ) {
-        serveApp(req, res);
-      } else if (url.pathname === '/api/player') {
-        apiGetPlayer(req, res);
-      } else if (url.pathname === '/api/waitingfor') {
-        apiGetWaitingFor(req, res);
-      } else if (url.pathname === '/assets/translations.json') {
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        res.write(fs.readFileSync('build/genfiles/translations.json'));
-        res.end();
-      } else if (
-        url.pathname.startsWith('/assets/') ||
-        url.pathname === '/styles.css' ||
-        url.pathname === '/styles.css' ||
-        url.pathname === '/favicon.ico' ||
-        url.pathname === '/main.js' ||
-        url.pathname === '/main.js.map'
-      ) {
-        serveAsset(req, res);
-      } else if (url.pathname === '/api/games') {
-        apiGetGames(req, res);
-      } else if (url.pathname === '/api/game') {
-        apiGetGame(req, res);
-      } else if (gameLogs.canHandle(req.url)) {
-        gameLogs.handle(req, res);
-      } else if (url.pathname === '/api/clonablegames') {
-        getClonableGames(res);
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
+  switch (req.method) {
+  case 'GET':
+    if (url.pathname === '/games-overview') {
+      if (!isServerIdValid(req)) {
+        route.notAuthorized(req, res);
+        return;
       } else {
-        route.notFound(req, res);
+        serveApp(req, res);
       }
-    } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
-      createGame(req, res);
-    } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
-      loadGame(req, res);
     } else if (
-      req.method === 'POST' &&
-      req.url.indexOf('/player/input?id=') === 0
+      url.pathname === '/' ||
+      url.pathname === '/new-game' ||
+      url.pathname === '/solo' ||
+      url.pathname === '/game' ||
+      url.pathname === '/player' ||
+      url.pathname === '/the-end' ||
+      url.pathname === '/load' ||
+      url.pathname === '/debug-ui' ||
+      url.pathname === '/help-iconology'
     ) {
+      serveApp(req, res);
+    } else if (url.pathname === '/api/player') {
+      apiGetPlayer(req, res);
+    } else if (url.pathname === '/api/waitingfor') {
+      apiGetWaitingFor(req, res);
+    } else if (url.pathname === '/assets/translations.json') {
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
+      res.write(fs.readFileSync('build/genfiles/translations.json'));
+      res.end();
+    } else if (
+      url.pathname.startsWith('/assets/') ||
+      url.pathname === '/styles.css' ||
+      url.pathname === '/styles.css' ||
+      url.pathname === '/favicon.ico' ||
+      url.pathname === '/main.js' ||
+      url.pathname === '/main.js.map'
+    ) {
+      serveAsset(req, res);
+    } else if (url.pathname === '/api/games') {
+      apiGetGames(req, res);
+    } else if (url.pathname === '/api/game') {
+      apiGetGame(req, res);
+    } else if (gameLogs.canHandle(req.url)) {
+      gameLogs.handle(req, res);
+    } else if (url.pathname === '/api/clonablegames') {
+      getClonableGames(res);
+    } else {
+      route.notFound(req, res);
+    }
+
+    break;
+
+  case 'PUT':
+    if (req.url.indexOf('/game') === 0) {
+      createGame(req, res);
+    } else if (req.url.indexOf('/load') === 0) {
+      loadGame(req, res);
+    } else {
+      route.notFound(req, res);
+    }
+    break;
+  case 'POST':
+    if (req.url.indexOf('/player/input?id=') === 0) {
       const playerId: string = req.url.substring(
         '/player/input?id='.length,
       );
@@ -122,10 +133,13 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         }
         processInput(req, res, player, game);
       });
+      break;
     } else {
       route.notFound(req, res);
     }
-  } else {
+    break;
+
+  default:
     route.notFound(req, res);
   }
 }

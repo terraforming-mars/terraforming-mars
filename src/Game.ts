@@ -723,12 +723,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.gameIsOver()) {
       this.gotoFinalGreeneryPlacement();
-      // Log id or cloned game id
-      if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-        this.log('This game was a clone from game ' + this.clonedGamedId);
-      } else {
-        this.log('This game id was ' + this.id);
-      }
       return;
     }
 
@@ -988,6 +982,13 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoEndGame(): void {
+    // Log id or cloned game id
+    if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
+      this.log('This game was a clone from game ' + this.clonedGamedId);
+    } else {
+      this.log('This game id was ' + this.id);
+    }
+
     Database.getInstance().cleanSaves(this.id, this.lastSaveId);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
@@ -1623,4 +1624,3 @@ export class Game implements ISerializable<SerializedGame> {
     return game;
   }
 }
-

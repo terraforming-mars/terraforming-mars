@@ -56,7 +56,7 @@ export class LogHelper {
     const row: number = space.y + 1;
     const position: number = space.x - offset + 1;
 
-    player.game.log('${0} ${1} ${2} on row ${3} position ${4}', (b) =>
+    player.game.log('${0} ${1} ${2} at (${3},${4})', (b) =>
       b.player(player).string(action).string(description).number(row).number(position));
   }
 

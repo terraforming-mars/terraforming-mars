@@ -28,7 +28,7 @@
     "${0}'s ${1} production increased by ${2}": "La production de ${1} de ${0} a augmenté de ${2}",
     "${0} received ${1} MC from ${2} owner (${3})": "${0} a reçu ${1} M€ de ${2} (appartenant à ${3})",
     "${0} copied ${1} production with ${2}": "${0} a copié la production de ${1} avec ${2}",
-    "${0} placed ${1} tile on row ${2} position ${3}": "${0} a placé une tuile ${1} sur la ligne ${2} position ${3}",
+    "${0} placed ${1} tile at (${3},${4})": "${0} a placé une tuile ${1} sur la ligne ${2} position ${3}",
     "${0} gained ${1} ${2}": "${0} a gagné ${1} ${2}",
     "${0} spent 1 ${1} to gain 7 MC": "${0} a dépensé 1 ${1} pour gagner 7 M€",
     "${0} removed an animal from ${1}": "${0} a retiré un animal de ${1}",

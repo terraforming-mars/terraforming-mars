@@ -82,6 +82,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.INDUSTRIAL_MICROBES,
     CardName.LAVA_TUBE_SETTLEMENT,
     CardName.LUNA_MINING_HUB,
+    CardName.LUNAR_INDUSTRY_COMPLEX,
     CardName.LUNAR_MINE_URBANIZATION,
     CardName.LUNA_TRAIN_STATION,
     CardName.MAGNETIC_FIELD_DOME,

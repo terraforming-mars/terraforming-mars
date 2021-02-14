@@ -45,7 +45,7 @@ import {LunaProjectOffice} from './LunaProjectOffice';
 import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
 // import {LunarIndependenceWar} from './LunarIndependenceWar';
-// import {LunarIndustryComplex} from './LunarIndustryComplex';
+import {LunarIndustryComplex} from './LunarIndustryComplex';
 import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
@@ -180,7 +180,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
     // {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
-    // {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
+    {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},

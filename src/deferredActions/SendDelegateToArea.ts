@@ -49,17 +49,18 @@ export class SendDelegateToArea implements DeferredAction {
           this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
         }
 
-        if (count > 1 && this.options.fromLobby) { // For card: Cultural Metropolis
-          turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, true);
+        const source = this.options.source || 'lobby';
+        if (count > 1 && source === 'lobby') { // For card: Cultural Metropolis
+          turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, 'lobby');
           for (let i = 0; i < count - 1; i++) {
-            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, false);
+            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, 'reserve');
           }
         } else {
           for (let i = 0; i < count; i++) {
             if (this.options.replace) {
               turmoil.removeDelegateFromParty(this.options.replace, party.name, this.player.game);
             }
-            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, this.options.fromLobby);
+            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, source);
           }
         }
 
@@ -80,8 +81,7 @@ export namespace SendDelegateToArea {
     replace?: PlayerId | NeutralPlayer | undefined,
     /** Cost for sending this delegate. Default is no cost. */
     cost?: number,
-    /** When true, delegate comes from the lobby. When false, delegate
-        comes from the reserve. The default is true. */
-    fromLobby?: boolean,
+    /** Source of the delegates being added. Default is 'lobby' */
+    source?: 'lobby' | 'reserve'
   }
 }

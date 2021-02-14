@@ -16,7 +16,7 @@ import {CosmicRadiation} from './CosmicRadiation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
-// import {DarksideObservatory} from './DarksideObservatory';
+import {DarksideObservatory} from './DarksideObservatory';
 // import {DarksideSmugglersUnion} from './DarksideSmugglersUnion';
 import {DeepLunarMining} from './DeepLunarMining';
 import {EarthEmbassy} from './EarthEmbassy';
@@ -181,7 +181,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
-    // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
+    {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
     {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},

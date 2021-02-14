@@ -91,6 +91,7 @@ import {SphereHabitats} from './SphereHabitats';
 import {StagingStationBehemoth} from './StagingStationBehemoth';
 import {SteelMarketMonopolists} from './SteelMarketMonopolists';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
+import {TempestConsultancy} from './TempestConsultancy';
 // import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 // import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
 import {TheWomb} from './TheWomb';
@@ -199,7 +200,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
-    // {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
+    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
     // {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
     // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
     // {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},

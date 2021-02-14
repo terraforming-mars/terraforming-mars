@@ -14,6 +14,7 @@ import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
+import {CardName} from '../CardName';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -289,8 +290,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         // Finally, award Chairman TR
         if (this.chairman !== 'NEUTRAL') {
           const player = game.getPlayerById(this.chairman);
-          player.increaseTerraformRating();
-          game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
+          // Tempest Consultancy Hook (gains an additional TR when they become chairman)
+          const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
+          player.increaseTerraformRatingSteps(steps);
+          game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('A neutral delegate is the new chairman.');
         }
@@ -377,7 +380,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return Array.from(new Set(this.delegateReserve));
     }
 
-    // Return number of delegate
+    // Return number of delegates in reserve
+    // TODO(kberg): rename to getDelegatesInReserve()
     public getDelegates(playerId: PlayerId | NeutralPlayer): number {
       const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;

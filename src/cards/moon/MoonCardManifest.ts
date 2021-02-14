@@ -9,7 +9,7 @@ import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
 import {BasicInfrastructure} from './BasicInfrastructure';
 import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
-// import {CopernicusTower} from './CopernicusTower';
+import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
 import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
@@ -178,7 +178,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
+    {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},

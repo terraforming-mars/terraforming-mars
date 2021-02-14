@@ -85,7 +85,7 @@ import {RevoltingColonists} from './RevoltingColonists';
 import {RoverDriversUnion} from './RoverDriversUnion';
 import {RustEatingBacteria} from './RustEatingBacteria';
 import {SinusIridiumRoadNetwork} from './SinusIridiumRoadNetwork';
-// import {SmallDutyRovers} from './SmallDutyRovers';
+import {SmallDutyRovers} from './SmallDutyRovers';
 import {SolarPanelFoundry} from './SolarPanelFoundry';
 import {SphereHabitats} from './SphereHabitats';
 import {StagingStationBehemoth} from './StagingStationBehemoth';
@@ -179,7 +179,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
     {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
     // {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
-    // {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
+    {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     // {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     // {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
     // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},

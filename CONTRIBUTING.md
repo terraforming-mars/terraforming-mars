@@ -48,4 +48,4 @@ This project is designed to run on single node servers or locally. Any change sh
 
 ## Questions?
 
-[Post an issue](https://github.com/bafolts/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/fWXE53K)
+[Post an issue](https://github.com/bafolts/terraforming-mars/issues/new) or [Find us on Discord](https://discord.gg/VR8TbrD)

@@ -38,7 +38,7 @@ import {IronExtractionCenter} from './IronExtractionCenter';
 import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
-// import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
+import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
 import {LunaProjectOffice} from './LunaProjectOffice';
@@ -201,7 +201,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
     // {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
     // {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
-    // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
+    {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
     // {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
     // {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
     // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},

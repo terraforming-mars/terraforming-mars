@@ -85,6 +85,10 @@ const DISCOUNTS_MAP: Map<CardName, CardTagDiscount> = new Map([
     tag: Tags.VENUS,
     amount: 2,
   }],
+  [CardName.MOON_TETHER, {
+    tag: 'all',
+    amount: 2,
+  }],
 ]);
 
 const hasDiscount = (tag: InterfaceTagsType, cardName: CardName): boolean => {

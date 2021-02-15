@@ -227,7 +227,7 @@ export abstract class Colony implements SerializedColony {
 
           for (let i = 0; i < qty; i++) {
             const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
-            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, fromLobby));
+            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: fromLobby ? 'lobby' : 'reserve'}));
           }
         }
         break;

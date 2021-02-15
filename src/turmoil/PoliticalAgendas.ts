@@ -25,11 +25,18 @@ export interface PoliticalAgendasData {
   // by the will of the chairperson, so when staticAgendas is undefined, that means
   // it's the CHAIRMAN agenda style
   staticAgendas: Map<PartyName, Agenda> | undefined;
+
+  // Agendas will always be populated, even if unused for now.
+  agendas: Map<PartyName, Agenda>;
+  agendaStyle: AgendaStyle;
 }
 
 export interface SerializedPoliticalAgendasData {
   currentAgenda: Agenda;
   staticAgendas: Array<[PartyName, Agenda]> | undefined;
+  // Replacing staticAgendas and currentAgenda with agendas, eventually.
+  agendas: Array<[PartyName, Agenda]> | undefined;
+  agendaStyle: AgendaStyle | undefined;
 }
 
 export class PoliticalAgendas {
@@ -37,30 +44,33 @@ export class PoliticalAgendas {
     agendaStyle: AgendaStyle,
     parties: Array<IParty>,
     firstRulingParty: IParty): PoliticalAgendasData {
+    const agendas: Map<PartyName, Agenda> = new Map();
+    parties.forEach((p) => {
+      if (agendaStyle === AgendaStyle.STANDARD) {
+        agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
+      } else {
+        agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
+      }
+    });
+
     if (agendaStyle === AgendaStyle.CHAIRMAN) {
       return {
         // First chairman will always be neutral, so get a random agenda.
         currentAgenda: PoliticalAgendas.getRandomAgenda(firstRulingParty),
         staticAgendas: undefined,
+        agendas: agendas,
+        agendaStyle: agendaStyle,
       };
     } else {
-      const staticAgendas: Map<PartyName, Agenda> = new Map();
-      parties.forEach((p) => {
-        if (agendaStyle === AgendaStyle.STANDARD) {
-          staticAgendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
-        } else {
-          staticAgendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
-        }
-      });
-
-
-      const firstAgenda = staticAgendas.get(firstRulingParty.name);
+      const firstAgenda = agendas.get(firstRulingParty.name);
       if (firstAgenda === undefined) {
         throw new Error('No static agenda for party ' + firstRulingParty.name);
       }
       return {
         currentAgenda: firstAgenda,
-        staticAgendas: staticAgendas,
+        staticAgendas: agendas,
+        agendas: agendas,
+        agendaStyle: agendaStyle,
       };
     }
   }
@@ -84,7 +94,7 @@ export class PoliticalAgendas {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman: string = turmoil.chairman as string;
-    const nextAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, chairman);
+    const nextAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.agendas, chairman);
     if (nextAgenda !== undefined) {
       politicalAgendasData.currentAgenda = nextAgenda;
       turmoil.onAgendaSelected(game);
@@ -118,26 +128,48 @@ export class PoliticalAgendas {
   public static serialize(agenda: PoliticalAgendasData): SerializedPoliticalAgendasData {
     return {
       currentAgenda: agenda.currentAgenda,
-      staticAgendas: agenda.staticAgendas === undefined ?
-        undefined :
-        Array.from(agenda.staticAgendas.entries()),
+      staticAgendas: agenda.staticAgendas === undefined ? undefined : Array.from(agenda.staticAgendas.entries()),
+      agendaStyle: agenda.agendaStyle,
+      agendas: Array.from(agenda.agendas.entries()),
     };
   }
 
-  public static deserialize(d: SerializedPoliticalAgendasData | undefined, turmoil: Turmoil): PoliticalAgendasData {
-    if (d === undefined) {
-      return PoliticalAgendas.newInstance(AgendaStyle.STANDARD, turmoil.parties, turmoil.rulingParty);
+  public static deserialize(d: SerializedPoliticalAgendasData): PoliticalAgendasData {
+    if (d.agendaStyle === undefined) {
+      if (d.staticAgendas !== undefined) {
+        return {
+          currentAgenda: d.currentAgenda,
+          staticAgendas: new Map(d.staticAgendas),
+          agendas: new Map(d.staticAgendas),
+          agendaStyle: AgendaStyle.CHAIRMAN,
+        };
+      }
+      return {
+        currentAgenda: d.currentAgenda,
+        staticAgendas: undefined,
+        agendas: new Map(), // An empty map for a legacy game is fine.
+        agendaStyle: AgendaStyle.STANDARD, // Defaulting to STANDARD isn't great, but it'll do the job correctly.
+      };
     }
 
-    if (d.staticAgendas !== undefined) {
+    // Agenda style is stored, which means all four fields are populated.
+    switch (d.agendaStyle) {
+    case AgendaStyle.STANDARD:
+    case AgendaStyle.RANDOM:
       return {
         currentAgenda: d.currentAgenda,
         staticAgendas: new Map(d.staticAgendas),
+        agendas: new Map(d.agendas),
+        agendaStyle: d.agendaStyle,
+      };
+
+    case AgendaStyle.CHAIRMAN:
+      return {
+        currentAgenda: d.currentAgenda,
+        staticAgendas: undefined,
+        agendas: new Map(d.agendas),
+        agendaStyle: d.agendaStyle,
       };
     }
-    return {
-      currentAgenda: d.currentAgenda,
-      staticAgendas: undefined,
-    };
   }
 }

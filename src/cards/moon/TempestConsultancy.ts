@@ -22,9 +22,7 @@ export class TempestConsultancy implements CorporationCard {
   public initialAction(player: Player) {
     if (player.game.turmoil) {
       const title = 'Tempest Consultancy first action - Select where to send two delegates';
-      player.game.defer(new SendDelegateToArea(player, title,
-        2, undefined, undefined, false));
-      // )); // , {count: 2, source: 'reserve'}));
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
     }
 
     return undefined;
@@ -40,8 +38,7 @@ export class TempestConsultancy implements CorporationCard {
     player.game.defer(new SendDelegateToArea(
       player,
       `Select a party to send ${count} delegate(s) to`,
-      count, undefined, undefined, false));
-    // {count: delegates, source: 'reserve'}));
+      {count: count, source: 'reserve'}));
 
     return undefined;
   }

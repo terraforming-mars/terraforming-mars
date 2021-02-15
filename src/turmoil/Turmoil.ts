@@ -124,10 +124,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       playerId: PlayerId | NeutralPlayer,
       partyName: PartyName,
       game: Game,
-      fromLobby: boolean = true): void {
+      source: 'lobby' | 'reserve' = 'lobby'): void {
       const party = this.getPartyByName(partyName);
       if (party) {
-        if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && fromLobby) {
+        if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
           this.lobby.delete(playerId);
         } else {
           const index = this.delegateReserve.indexOf(playerId);

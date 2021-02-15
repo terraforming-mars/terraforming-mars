@@ -43,7 +43,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
   }
 
   public action(player: Player) {
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', 1, undefined, undefined, false));
+    player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', {source: 'reserve'}));
     return undefined;
   }
 }

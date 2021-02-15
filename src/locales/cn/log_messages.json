@@ -23,10 +23,10 @@
     "${0} received ${1} MC from ${2} owner (${3})": "${0} 获得 ${1} MC 从 ${2} 拥有者(${3})",
     "${0} copied ${1} production with ${2}": "${0} 用 ${2} 复制 ${1} 的产能 ",
     "${0} used ${1} action with ${2}": "${0} 用 ${2} 执行 ${1} 行动 ",
-    "${0} is the new chairman and got 1 TR increase" : "${0} 成为了新的议会主席,并获得1点改造度(TR)提升",
+    "${0} is the new chairman and gained ${1} TR" : "${0} 成为了新的议会主席,并获得1点改造度(TR) (${1}) 提升",
     "Turmoil phase has been resolved" : "动荡阶段结算完毕",
-    
-  
+
+
     "${0} drew ${1}":"${0} 摸了 ${1}",
     "${0} drew ${1} and ${2}":"${0} 摸了 ${1} 和 ${2}",
     "${0} drew ${1}, ${2} and ${3}": "${0} 摸了 ${1}, ${2} et ${3}",

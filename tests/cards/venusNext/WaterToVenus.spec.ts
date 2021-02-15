@@ -10,7 +10,7 @@ describe('WaterToVenus', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
 
-    const play = card.play(player, game);
+    const play = card.play(player);
     expect(play).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

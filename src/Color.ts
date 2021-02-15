@@ -1,4 +1,3 @@
-
 export enum Color {
     BLUE = 'blue',
     RED = 'red',
@@ -6,6 +5,8 @@ export enum Color {
     GREEN = 'green',
     BLACK = 'black',
     PURPLE = 'purple',
+    ORANGE = 'orange',
+    PINK = 'pink',
     NEUTRAL = 'neutral',
     BRONZE = 'bronze',
 }

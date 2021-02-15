@@ -16,9 +16,9 @@ export class KelpFarming extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 17,
 
+      requirements: CardRequirements.builder((b) => b.oceans(6)),
       metadata: {
         cardNumber: '055',
-        requirements: CardRequirements.builder((b) => b.oceans(6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2).br;

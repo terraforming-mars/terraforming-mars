@@ -12,8 +12,8 @@ describe('EarlySettlement', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
 
-    card.play(player, game);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    card.play(player);
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;

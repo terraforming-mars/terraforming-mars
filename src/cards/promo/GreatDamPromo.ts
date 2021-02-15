@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -21,9 +20,9 @@ export class GreatDamPromo extends Card implements IProjectCard {
       cost: 15,
       tags: [Tags.ENERGY, Tags.BUILDING],
 
+      requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
         cardNumber: '136',
-        requirements: CardRequirements.builder((b) => b.oceans(4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
         }),
@@ -33,21 +32,21 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsOceanRequirements = super.canPlay(player);
-    const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;
+    const canPlaceTile = this.getAvailableSpaces(player).length > 0;
 
     return meetsOceanRequirements && canPlaceTile;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
 
-    const availableSpaces = this.getAvailableSpaces(player, game);
+    const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
     return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.GREAT_DAM});
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.GREAT_DAM});
       return undefined;
     });
   }
@@ -56,10 +55,10 @@ export class GreatDamPromo extends Card implements IProjectCard {
     return 1;
   }
 
-  private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
       .filter(
-        (space) => game.board.getAdjacentSpaces(space).filter(
+        (space) => player.game.board.getAdjacentSpaces(space).filter(
           (adjacentSpace) => Board.isOceanSpace(adjacentSpace),
         ).length > 0,
       );

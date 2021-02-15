@@ -1,7 +1,6 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Game} from '../../Game';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -25,13 +24,13 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     });
   }
 
-  private getOpenColonies(player: Player, game: Game) {
-    let openColonies = game.colonies.filter((colony) => colony.colonies.length < 3 &&
-      colony.colonies.indexOf(player.id) === -1 &&
+  private getOpenColonies(player: Player) {
+    let openColonies = player.game.colonies.filter((colony) => colony.colonies.length < 3 &&
+      colony.colonies.includes(player.id) === false &&
       colony.isActive);
 
     // TODO: Europa sometimes costs additional 3.
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
     }
 
@@ -39,7 +38,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return super.canAct(player) && this.getOpenColonies(player, player.game).length > 0;
+    return super.canAct(player) && this.getOpenColonies(player).length > 0;
   }
 
   actionEssence(player: Player): void {

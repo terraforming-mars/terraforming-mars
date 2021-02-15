@@ -1,7 +1,6 @@
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
@@ -19,9 +18,9 @@ export class PermafrostExtraction extends Card implements IProjectCard {
       name: CardName.PERMAFROST_EXTRACTION,
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-8)),
       metadata: {
         cardNumber: '191',
-        requirements: CardRequirements.builder((b) => b.temperature(-8)),
         renderData: CardRenderer.builder((b) => {
           b.oceans(1);
         }),
@@ -30,24 +29,24 @@ export class PermafrostExtraction extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsTemperatureRequirements = super.canPlay(player);
-    const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
     }
 
     return meetsTemperatureRequirements;
   }
 
-  public play(player: Player, game: Game) {
-    if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
+  public play(player: Player) {
+    if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
       return undefined;
     }
 
-    return new SelectSpace('Select space for ocean tile', game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      game.addOceanTile(player, space.id);
+    return new SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
+      player.game.addOceanTile(player, space.id);
       return undefined;
     });
   }

@@ -7,7 +7,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {resetBoard, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('LavaTubeSettlement', function() {
   let card : LavaTubeSettlement; let player : Player; let game : Game;
@@ -16,11 +16,11 @@ describe('LavaTubeSettlement', function() {
     card = new LavaTubeSettlement();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   after(function() {
-    resetBoard(game);
+    TestingUtils.resetBoard(game);
   });
 
   it('Can\'t play without energy production', function() {
@@ -43,8 +43,8 @@ describe('LavaTubeSettlement', function() {
     player.addProduction(Resources.ENERGY);
     expect(card.canPlay(player)).is.true;
 
-    card.play(player, game);
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
+    card.play(player);
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

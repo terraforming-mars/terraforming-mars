@@ -1,7 +1,8 @@
 import {Player} from '../Player';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class PlayProjectCard implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
   ) {}

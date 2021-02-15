@@ -44,7 +44,7 @@ describe('AristarchusRoadNetwork', () => {
     expect(player.steel).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
 
-    const deferredAction = game.deferredActions.next() as PlaceMoonRoadTile;
+    const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
     const selectSpace = deferredAction.execute()!;
     const roadSpace = selectSpace.availableSpaces[0];
     expect(roadSpace.tile).is.undefined;

@@ -10,6 +10,10 @@ export enum CardName {
     CITY_STANDARD_PROJECT = 'City',
     AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
 
+    // Standard actions:
+    CONVERT_PLANTS = 'Convert Plants',
+    CONVERT_HEAT = 'Convert Heat',
+
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
     ADAPTED_LICHEN = 'Adapted Lichen',
@@ -48,7 +52,7 @@ export enum CardName {
     CAPITAL = 'Capital',
     CARETAKER_CONTRACT = 'Caretaker Contract',
     CARTEL = 'Cartel',
-    CEOS_FAVORITE_PROJECT = 'CEOs Favorite Project',
+    CEOS_FAVORITE_PROJECT = 'CEO\'s Favorite Project',
     CLOUD_SEEDING = 'Cloud Seeding',
     COLONIZER_TRAINING_CAMP = 'Colonizer Training Camp',
     COMET = 'Comet',
@@ -214,7 +218,7 @@ export enum CardName {
     PSYCHROPHILES = 'Psychrophiles',
     QUANTUM_COMMUNICATIONS = 'Quantum Communications',
     QUANTUM_EXTRACTOR = 'Quantum Extractor',
-    RAD_CHEM_FACTORY = 'Rad-chem Factory',
+    RAD_CHEM_FACTORY = 'Rad-Chem Factory',
     RAD_SUITS = 'Rad-Suits',
     RED_SPOT_OBSERVATORY = 'Red Spot Observatory',
     REFUGEE_CAMP = 'Refugee Camp',
@@ -262,7 +266,7 @@ export enum CardName {
     TECTONIC_STRESS_POWER = 'Tectonic Stress Power',
     TERRAFORMING_GANYMEDE = 'Terraforming Ganymede',
     TITAN_AIRSCRAPPING = 'Titan Air-scrapping',
-    TITAN_FLOATER_LAUNCHPAD = 'Titan Floater Launch-pad',
+    TITAN_FLOATING_LAUNCHPAD = 'Titan Floating Launch-pad',
     TITAN_SHUTTLES = 'Titan Shuttles',
     TITANIUM_MINE = 'Titanium Mine',
     TOLL_STATION = 'Toll Station',
@@ -608,7 +612,7 @@ export enum CardName {
     BASIC_INFRASTRUCTURE = 'Basic Infrastructure',
     LUNAR_PlANNING_OFFICE = 'Lunar Planning Office',
     MINING_COMPLEX = 'Mining Complex',
-    MOON_ROAD_STANDARD_PROJECT = 'Build Moon Road',
-    MOON_MINE_STANDARD_PROJECT = 'Build Moon Mine',
-    MOON_COLONY_STANDARD_PROJECT = 'Build Moon Colony',
+    MOON_ROAD_STANDARD_PROJECT = 'Road Infrastructure',
+    MOON_MINE_STANDARD_PROJECT = 'Lunar Mine',
+    MOON_COLONY_STANDARD_PROJECT = 'Lunar Habitat',
 }

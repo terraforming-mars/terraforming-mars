@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card, staticCardProperties} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
@@ -38,8 +37,8 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return this.getAvailableCards(player, game).length > 0;
+  public canPlay(player: Player): boolean {
+    return this.getAvailableCards(player).length > 0;
   }
   private miningSteelProduction: number = 0;
   private miningTitaniumProduction: number = 0;
@@ -78,9 +77,14 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.GYROPOLIS,
     CardName.HEAT_TRAPPERS,
     CardName.HOUSE_PRINTING,
+    CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY,
     CardName.IMMIGRANT_CITY,
     CardName.INDUSTRIAL_MICROBES,
     CardName.LAVA_TUBE_SETTLEMENT,
+    CardName.LUNA_MINING_HUB,
+    CardName.LUNAR_INDUSTRY_COMPLEX,
+    CardName.LUNAR_MINE_URBANIZATION,
+    CardName.LUNA_TRAIN_STATION,
     CardName.MAGNETIC_FIELD_DOME,
     CardName.MAGNETIC_FIELD_GENERATORS,
     CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
@@ -116,6 +120,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.POWER_PLANT,
     CardName.PROTECTED_VALLEY,
     CardName.RAD_CHEM_FACTORY,
+    CardName.RESEARCH_NETWORK,
     CardName.SELF_SUFFICIENT_SETTLEMENT,
     CardName.SOIL_FACTORY,
     CardName.SOLAR_FARM,
@@ -143,10 +148,10 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.UTOPIA_INVEST,
   ];
 
-  private getAvailableCards(player: Player, game: Game): Array<ICard> {
+  private getAvailableCards(player: Player): Array<ICard> {
     const availableCards: Array<ICard> = player.playedCards.filter((card) => {
       if (card.name === CardName.BIOMASS_COMBUSTORS) {
-        if (game.someoneHasResourceProduction(Resources.PLANTS, 1)) {
+        if (player.game.someoneHasResourceProduction(Resources.PLANTS, 1)) {
           return true;
         }
       } else if (card.name === CardName.MAGNETIC_FIELD_GENERATORS || card.name === CardName.MAGNETIC_FIELD_GENERATORS_PROMO) {
@@ -194,7 +199,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
           return true;
         }
       } else if (card.name === CardName.HEAT_TRAPPERS) {
-        if (game.someoneHasResourceProduction(Resources.HEAT, 2)) {
+        if (player.game.someoneHasResourceProduction(Resources.HEAT, 2)) {
           return true;
         }
       } else if (card.name === CardName.PEROXIDE_POWER || card.name === CardName.FUELED_GENERATORS) {
@@ -259,6 +264,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       new Updater(CardName.PARLIAMENT_HALL, {megacredits: Math.floor(player.getTagCount(Tags.BUILDING) / 3)}),
       new Updater(CardName.POLAR_INDUSTRIES, {heat: 2}),
       new Updater(CardName.RECYCLON, {steel: 1}),
+      new Updater(CardName.RESEARCH_NETWORK, {megacredits: 1}),
       new Updater(CardName.SELF_SUFFICIENT_SETTLEMENT, {megacredits: 2}),
       new Updater(CardName.SOLAR_FARM, {energy: this.solarFarmEnergyProduction}),
       new Updater(CardName.SPACE_PORT, {energy: -1, megacredits: 4}),
@@ -271,8 +277,8 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     return result;
   }
 
-  public play(player: Player, game: Game) {
-    const availableCards = this.getAvailableCards(player, game);
+  public play(player: Player) {
+    const availableCards = this.getAvailableCards(player);
 
     if (availableCards.length === 0) {
       return undefined;
@@ -285,13 +291,13 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       // this card require additional user input
       case CardName.BIOMASS_COMBUSTORS:
         player.addProduction(Resources.ENERGY, 2);
-        game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+        player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
         return undefined;
 
       // this card require additional user input
       case CardName.HEAT_TRAPPERS:
         player.addProduction(Resources.ENERGY, 1);
-        game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 2));
+        player.game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 2));
         return undefined;
 
       // Mining resource definition
@@ -309,7 +315,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
         break;
 
       case CardName.SOLAR_FARM:
-        const solarFarmSpace = game.board.getSpaceByTileCard(CardName.SOLAR_FARM);
+        const solarFarmSpace = player.game.board.getSpaceByTileCard(CardName.SOLAR_FARM);
         if (solarFarmSpace !== undefined) {
           this.solarFarmEnergyProduction = solarFarmSpace.bonus.filter((bonus) => bonus === SpaceBonus.PLANT).length;
         }
@@ -346,7 +352,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       player.addProduction(Resources.PLANTS, units.plants);
       player.addProduction(Resources.HEAT, units.heat);
 
-      game.log('${0} copied ${1} production with ${2}', (b) =>
+      player.game.log('${0} copied ${1} production with ${2}', (b) =>
         b.player(player).card(foundCard).card(this));
 
       return undefined;

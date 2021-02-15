@@ -67,6 +67,7 @@ export const PlayerInfo = Vue.component('player-info', {
               <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
             </div>
             <div v-if="player.corporationCard !== undefined" :title="player.corporationCard.name" :class="getPlayerCorpClasses()">{{ player.corporationCard.name }}</div>
+            <div class="player-discounts-background" />
         </div>
         <div :class="getInfoBottomClasses()">
           <div :class="getPlayerStatusAndResClasses()">

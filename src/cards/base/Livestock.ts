@@ -3,7 +3,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Game} from '../../Game';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
@@ -22,9 +21,9 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
       cost: 13,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(9)),
       metadata: {
         cardNumber: '184',
-        requirements: CardRequirements.builder((b) => b.oxygen(9)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
@@ -44,8 +43,8 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
   }
 
     public resourceCount = 0;
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMinRequirements(player, GlobalParameter.OXYGEN, 9) && player.getProduction(Resources.PLANTS) >= 1;
+    public canPlay(player: Player): boolean {
+      return player.game.checkMinRequirements(player, GlobalParameter.OXYGEN, 9) && player.getProduction(Resources.PLANTS) >= 1;
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

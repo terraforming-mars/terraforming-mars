@@ -2,7 +2,7 @@
 import {LogMessageDataType} from '../LogMessageDataType';
 import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
-import * as raw_translations from '../../assets/translations.json';
+import * as raw_translations from '../genfiles/translations.json';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 

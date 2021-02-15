@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
@@ -34,27 +33,27 @@ export class DeimosDownPromo extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
+  public canPlay(player: Player): boolean {
+    const canPlaceTile = player.game.board.getAvailableSpacesForCity(player).length > 0;
+    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true) && canPlaceTile;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, false, true) && canPlaceTile;
     }
 
     return canPlaceTile;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 3);
-    game.defer(new RemoveAnyPlants(player, 6));
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 3);
+    player.game.defer(new RemoveAnyPlants(player, 6));
     player.steel += 4;
 
-    const availableSpaces = game.board.getAvailableSpacesForCity(player);
+    const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
 
     return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.DEIMOS_DOWN});
+      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.DEIMOS_DOWN});
       return undefined;
     });
   }

@@ -26,10 +26,10 @@ export class Atmoscoop extends Card implements IProjectCard {
       cost: 22,
       tags: [Tags.JOVIAN, Tags.SPACE],
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: '217',
         description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).or(CardRenderItemSize.SMALL).venus(2).br;
           b.floaters(2).asterix();
@@ -39,20 +39,21 @@ export class Atmoscoop extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsTagRequirements = super.canPlay(player);
-    const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - game.getTemperature()) / 2;
-    const remainingVenusSteps = (constants.MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;
+    const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
+    const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, game, false, true) && meetsTagRequirements;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, false, true) && meetsTagRequirements;
     }
 
     return meetsTagRequirements;
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
+    const game = player.game;
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
     if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game) && floaterCards.length === 0) {
@@ -82,9 +83,9 @@ export class Atmoscoop extends Card implements IProjectCard {
     );
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
-      game.increaseTemperature(player, 2);
+      player.game.increaseTemperature(player, 2);
     } else if (this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-      game.increaseVenusScaleLevel(player, 2);
+      player.game.increaseVenusScaleLevel(player, 2);
     }
 
     switch (floaterCards.length) {

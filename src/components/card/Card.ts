@@ -15,6 +15,7 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
+import {CardRequirements} from '../../cards/CardRequirements';
 
 export const Card = Vue.component('card', {
   components: {
@@ -29,7 +30,7 @@ export const Card = Vue.component('card', {
   },
   props: {
     'card': {
-      type: Object as () => ICard,
+      type: Object as () => CardModel,
       required: true,
     },
     'actionUsed': {
@@ -41,7 +42,14 @@ export const Card = Vue.component('card', {
     const cardName = this.card.name;
     let expansion: GameModule | undefined;
     for (const manifest of ALL_CARD_MANIFESTS) {
-      for (const deck of [manifest.corporationCards, manifest.projectCards, manifest.preludeCards, manifest.standardProjects]) {
+      const decks = [
+        manifest.corporationCards,
+        manifest.projectCards,
+        manifest.preludeCards,
+        manifest.standardProjects,
+        manifest.standardActions,
+      ];
+      for (const deck of decks) {
         const factory = deck.findByCardName(cardName);
         if (factory !== undefined) {
           cardInstance = new factory.Factory();
@@ -88,6 +96,11 @@ export const Card = Vue.component('card', {
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
+    getReducedCost: function(): number | undefined {
+      const cost = this.card.calculatedCost;
+      const type = this.getCardType();
+      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+    },
     getCardType: function(): CardType | undefined {
       return this.getCard()?.cardType;
     },
@@ -98,8 +111,8 @@ export const Card = Vue.component('card', {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (this.actionUsed) {
-        classes.push('cards-action-was-used');
+      if (this.actionUsed || card.isDisabled) {
+        classes.push('card-unavailable');
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
@@ -109,6 +122,9 @@ export const Card = Vue.component('card', {
     getCardMetadata: function(): CardMetadata | undefined {
       return this.getCard()?.metadata;
     },
+    getCardRequirements: function(): CardRequirements | undefined {
+      return this.getCard()?.requirements;
+    },
     getResourceAmount: function(card: CardModel): number {
       return card.resources !== undefined ? card.resources : 0;
     },
@@ -116,18 +132,18 @@ export const Card = Vue.component('card', {
       return this.getCardType() === CardType.CORPORATION;
     },
     isStandardProject: function() : boolean {
-      return this.getCardType() === CardType.STANDARD_PROJECT;
+      return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
     },
   },
   template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
                 <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" />
+                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :isCorporation="isCorporationCard()"/>
+                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>

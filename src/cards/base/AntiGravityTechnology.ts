@@ -14,10 +14,10 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 14,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
       metadata: {
         description: 'Requires 7 science tags.',
         cardNumber: '150',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a card, you pay 2 MC less for it.', (be) => be.empty().startEffect.megacredits(-2));
         }),

@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {Button} from './common/Button';
 
 interface SelectHowToPayForProjectCardModel {
-  cardName: string;
+  cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
   cost: number;
@@ -30,6 +30,7 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
+import {CardName} from '../CardName';
 // import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
@@ -120,7 +121,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       this.titanium = 0;
       this.heat = 0;
 
-      let megacreditBalance = this.cost - this.player.megaCredits;
+      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
 
       // Calcualtes the optimal number of units to use given the unit value.
       //
@@ -144,6 +145,21 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         return contributingUnits;
       };
 
+      // This function help save some money at the end
+      const saveOverSpendingUnits = function(
+        spendingUnits: number | undefined,
+        unitValue: number): number {
+        if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
+          return 0;
+        }
+        // Calculate the unit of resource we can save and still pay enough
+        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
+        const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
+
+        megacreditBalance += toSaveUnits * unitValue;
+        return toSaveUnits;
+      };
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -154,16 +170,28 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       if (megacreditBalance > 0 && this.canUseSteel()) {
         const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
-        this.steel = deductUnits(availableSteel, this.player.steelValue, false);
+        this.steel = deductUnits(availableSteel, this.player.steelValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseTitanium()) {
         const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
-        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, false);
+        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.player.heat, 1);
+      }
+
+      // If we are overspending
+      if (megacreditBalance < 0) {
+        // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
+        // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
+        // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
+        // We cannot reduce the amount of Ti and still pay enough.
+        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
     canUseHeat: function() {
@@ -186,7 +214,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseMicrobes: function() {
-      // FYI Microbes are limited to the Psychrophiles card, which allows spending micrbes for Plant cards.
+      // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
           return true;
@@ -195,7 +223,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseFloaters: function() {
-      // FYI Floaters are limited to the DIRIGIBLES cards.
+      // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
           return true;
@@ -205,7 +233,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     },
     cardChanged: function() {
       this.card = this.getCard();
-      this.cost = this.card.calculatedCost;
+      this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
@@ -219,10 +247,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning: function(): boolean {
-      return this.card?.reserveUnits?.steel > 0;
+      return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
     },
     showReserveTitaniumWarning: function(): boolean {
-      return this.card?.reserveUnits?.titanium > 0;
+      return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
     },
     saveData: function() {
       const htp: HowToPay = {
@@ -337,7 +365,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
     <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
-    (Some steel is not available here because the project card requires some when it is played.)
+    (Some steel is unavailable here in reserve for the project card.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
@@ -345,10 +373,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
+      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
     </div>
     <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
-    (Some titanium is not available here because the project card needs some when it is played.)
+    (Some titanium is unavailable here in reserve for the project card.)
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
@@ -356,7 +384,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" /> 
+      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
@@ -364,7 +392,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('microbes')" title="MAX" /> 
+      <Button type="max" :onClick="_=>setMaxValue('microbes')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">

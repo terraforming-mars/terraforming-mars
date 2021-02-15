@@ -64,7 +64,12 @@ export class Aridor implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, card: IProjectCard) {
-      if (card.cardType === CardType.EVENT || card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 || !player.isCorporation(this.name)) return undefined;
+      if (
+        card.cardType === CardType.EVENT ||
+        card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 ||
+        !player.isCorporation(this.name)) {
+        return undefined;
+      }
 
       for (const tag of card.tags.filter((tag) => tag !== Tags.WILDCARD)) {
         const currentSize = this.allTags.size;
@@ -80,7 +85,7 @@ export class Aridor implements CorporationCard {
     }
     public metadata: CardMetadata = {
       cardNumber: 'R20',
-      description: 'You start with 40MC. As your first action add a colony tile.',
+      description: 'You start with 40MC. As your first action, put an additional Colony Tile of your choice into play',
       renderData: CardRenderer.builder((b) => {
         b.br.br;
         b.megacredits(40).nbsp.placeColony();

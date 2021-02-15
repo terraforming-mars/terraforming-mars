@@ -17,12 +17,12 @@ describe('VenusMagnetizer', function() {
 
   it('Can\'t play', function() {
     (game as any).venusScaleLevel = 8;
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).venusScaleLevel = 10;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     expect(card.play()).is.undefined;
   });
 
@@ -30,7 +30,7 @@ describe('VenusMagnetizer', function() {
     player.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(card);
 
-    card.action(player, game);
+    card.action(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

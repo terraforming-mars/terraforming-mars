@@ -18,8 +18,10 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {resetBoard, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {staticCardProperties} from '../../../src/cards/Card';
+import {TileType} from '../../../src/TileType';
+import {ICard} from '../../../src/cards/ICard';
 
 describe('RoboticWorkforce', function() {
   let card : RoboticWorkforce; let player : Player; let game : Game;
@@ -33,13 +35,13 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Can\'t play if no building cards to copy', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should throw', function() {
     player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
-    expect(card.canPlay(player, game)).is.not.true;
-    const action = card.play(player, game);
+    expect(card.canPlay(player)).is.not.true;
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
@@ -47,7 +49,7 @@ describe('RoboticWorkforce', function() {
     const noctisFarming = new NoctisFarming();
     player.playedCards.push(noctisFarming);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
     action!.cb([noctisFarming]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -57,11 +59,11 @@ describe('RoboticWorkforce', function() {
     const capital = new Capital();
     player.playedCards.push(capital);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
     player.addProduction(Resources.ENERGY, 2);
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([capital]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
@@ -73,11 +75,11 @@ describe('RoboticWorkforce', function() {
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
     player.addProduction(Resources.ENERGY, 2);
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([capitalAres]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
@@ -101,7 +103,7 @@ describe('RoboticWorkforce', function() {
 
     player.playedCards.push(solarFarm);
 
-    const selectCard = card.play(player, game);
+    const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
     selectCard!.cb([solarFarm]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(4);
@@ -111,7 +113,7 @@ describe('RoboticWorkforce', function() {
     const corporationCard = new UtopiaInvest();
     player.corporationCard = corporationCard;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.not.undefined;
 
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
@@ -122,75 +124,15 @@ describe('RoboticWorkforce', function() {
   });
 
   it('Has all building cards set up', function() {
-    const researchCoordination = new ResearchCoordination();
-    const gameOptions = setCustomGameOptions({moonExpansion: true});
-    const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
     ALL_CARD_MANIFESTS.forEach((manifest) => {
       manifest.projectCards.factories.forEach((c) => {
-        const card = new c.Factory();
-        if (card.tags.includes(Tags.BUILDING) && card.play !== undefined) {
-          // Solar Farm is a pain to test so let's just say it's fine
-          if (card.name === CardName.SOLAR_FARM) {
-            return;
-          }
-
-          // Create new players, set all productions to 2 and place some tiles
-          player = TestPlayers.BLUE.newPlayer();
-          redPlayer = TestPlayers.RED.newPlayer();
-          game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-          resetBoard(game);
-          game.addCityTile(player, '17');
-          game.addCityTile(player, '19');
-          game.addOceanTile(player, '32');
-          game.addOceanTile(player, '33');
-          game.addOceanTile(player, '34');
-          for (const prod of productions) {
-            player.addProduction(prod, 2);
-            expect(player.getProduction(prod)).to.eq(2);
-          }
-
-          expect(game.deferredActions).has.lengthOf(0);
-
-          // Let's make sure we trigger any tag based production
-          player.playedCards.push(...Array(5).fill(researchCoordination));
-
-          const action = card.play(player, game);
-          if (action !== undefined) {
-            if (action instanceof SelectSpace) {
-              action.cb(action.availableSpaces[0]);
-            }
-          }
-
-          while (game.deferredActions.length) {
-            const defAction = game.deferredActions.shift()!.execute();
-            if (defAction !== undefined) {
-              if (defAction instanceof SelectSpace) {
-                defAction.cb(defAction.availableSpaces[0]);
-              }
-            }
-          }
-
-          // Now if any of the production changed, that means the card has a production box
-          if (productions.filter((prod) => player.getProduction(prod) !== 2).length > 0) {
-            if (card.cardType === CardType.CORPORATION) {
-              expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is missing in corporationCardsNames').is.true;
-            } else {
-              expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is missing in builderCardsNames').is.true;
-            }
-          } else {
-            if (card.cardType === CardType.CORPORATION) {
-              expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
-            } else {
-              expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
-            }
-          }
-        } else {
-          if (card.cardType === CardType.CORPORATION) {
-            expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
-          } else {
-            expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
-          }
-        }
+        testCard(new c.Factory());
+      });
+      manifest.preludeCards.factories.forEach((c) => {
+        testCard(new c.Factory());
+      });
+      manifest.corporationCards.factories.forEach((c) => {
+        testCard(new c.Factory());
       });
     });
   });
@@ -209,4 +151,79 @@ describe('RoboticWorkforce', function() {
     });
     expect(errors, errors.toString()).is.empty;
   });
+
+  const testCard = function(card: ICard) {
+    const researchCoordination = new ResearchCoordination();
+    const gameOptions = setCustomGameOptions({moonExpansion: true});
+    const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
+
+    if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {
+    // Solar Farm is a pain to test so let's just say it's fine
+      if (card.name === CardName.SOLAR_FARM) {
+        return;
+      }
+
+      // Create new players, set all productions to 2 and place some tiles
+      player = TestPlayers.BLUE.newPlayer();
+      redPlayer = TestPlayers.RED.newPlayer();
+      game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+      TestingUtils.resetBoard(game);
+      game.addCityTile(player, '17');
+      game.addCityTile(player, '19');
+      game.addOceanTile(player, '32');
+      game.addOceanTile(player, '33');
+      game.addOceanTile(player, '34');
+      for (const prod of productions) {
+        player.addProduction(prod, 2);
+        expect(player.getProduction(prod)).to.eq(2);
+      }
+
+      expect(game.deferredActions).has.lengthOf(0);
+
+      // Let's make sure we trigger any tag based production
+      player.playedCards.push(...Array(5).fill(researchCoordination));
+
+      if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
+      game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
+      game.moonData!.moon.spaces[4].player = player;
+      }
+
+      const action = card.play(player);
+      if (action !== undefined) {
+        if (action instanceof SelectSpace) {
+          action.cb(action.availableSpaces[0]);
+        }
+      }
+
+      while (game.deferredActions.length) {
+        const defAction = game.deferredActions.pop()!.execute();
+        if (defAction !== undefined) {
+          if (defAction instanceof SelectSpace) {
+            defAction.cb(defAction.availableSpaces[0]);
+          }
+        }
+      }
+
+      // Now if any of the production changed, that means the card has a production box
+      if (productions.filter((prod) => player.getProduction(prod) !== 2).length > 0) {
+        if (card.cardType === CardType.CORPORATION) {
+          expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is missing in corporationCardsNames').is.true;
+        } else {
+          expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is missing in builderCardsNames').is.true;
+        }
+      } else {
+        if (card.cardType === CardType.CORPORATION) {
+          expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
+        } else {
+          expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
+        }
+      }
+    } else {
+      if (card.cardType === CardType.CORPORATION) {
+        expect(RoboticWorkforce.corporationCardsNames.includes(card.name), card.name + ' is mistakenly included in corporationCardsNames').is.false;
+      } else {
+        expect(RoboticWorkforce.builderCardsNames.includes(card.name), card.name + ' is mistakenly included in builderCardsNames').is.false;
+      }
+    }
+  };
 });

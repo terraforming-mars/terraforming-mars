@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
@@ -29,8 +28,8 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
+  public play(player: Player) {
+    player.game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
     player.addProduction(Resources.TITANIUM);
     return undefined;
   }

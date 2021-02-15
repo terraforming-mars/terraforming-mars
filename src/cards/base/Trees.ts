@@ -16,9 +16,9 @@ export class Trees extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 13,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-4)),
       metadata: {
         cardNumber: '060',
-        requirements: CardRequirements.builder((b) => b.temperature(-4)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(3)).plants(1);
         }),

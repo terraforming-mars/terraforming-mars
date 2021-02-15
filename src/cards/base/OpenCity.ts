@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
@@ -21,9 +20,9 @@ export class OpenCity extends Card implements IProjectCard {
       cost: 23,
       productionBox: Units.of({energy: -1, megacredits: 4}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(12)),
       metadata: {
         cardNumber: '108',
-        requirements: CardRequirements.builder((b) => b.oxygen(12)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
@@ -39,12 +38,12 @@ export class OpenCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      game.addCityTile(player, space.id);
+  public play(player: Player) {
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
       player.addProduction(Resources.ENERGY, -1);
       player.addProduction(Resources.MEGACREDITS, 4);
       player.plants += 2;

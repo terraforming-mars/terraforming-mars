@@ -65,6 +65,15 @@ export class CardRenderDynamicVictoryPoints {
   public static preservation(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.PRESERVATION), points, target);
   }
+  public static resourceCube(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE), points, target);
+  }
+  public static data(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.DATA_RESOURCE), points, target);
+  }
+  public static moon(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MOON), points, target);
+  }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
   }

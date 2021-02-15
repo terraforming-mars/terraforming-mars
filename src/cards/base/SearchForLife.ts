@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -21,9 +20,10 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       cost: 3,
       resourceType: ResourceType.SCIENCE,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(6).max()),
       metadata: {
         cardNumber: '005',
-        requirements: CardRequirements.builder((b) => b.oxygen(6).max()),
+        description: 'Oxygen must be 6% or less.',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.', (eb) => {
             eb.megacredits(1).startAction.microbes(1).played.asterix().nbsp.colon().nbsp.science();
@@ -48,17 +48,17 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
     public canAct(player: Player): boolean {
       return player.canAfford(1);
     }
-    public action(player: Player, game: Game) {
-      const topCard = game.dealer.dealCard();
-      if (topCard.tags.indexOf(Tags.MICROBE) !== -1) {
+    public action(player: Player) {
+      const topCard = player.game.dealer.dealCard(player.game);
+      if (topCard.tags.includes(Tags.MICROBE)) {
         this.resourceCount++;
-        game.log('${0} found life!', (b) => b.player(player));
+        player.game.log('${0} found life!', (b) => b.player(player));
       }
 
-      game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+      player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
-      game.dealer.discard(topCard);
-      game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
+      player.game.dealer.discard(topCard);
+      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
       return undefined;
     }
 }

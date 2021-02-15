@@ -34,7 +34,7 @@ describe('LawSuit', function() {
     player.setResource(Resources.MEGACREDITS, -1, game, player2);
     player.addProduction(Resources.MEGACREDITS, -1, game, player2);
 
-    const play = card.play(player, game);
+    const play = card.play(player);
     expect(play instanceof SelectPlayer).is.true;
   });
 });

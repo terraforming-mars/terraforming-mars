@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ArcadianCommunities} from '../../../src/cards/promo/ArcadianCommunities';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 
 describe('ArcadianCommunities', function() {
@@ -10,22 +10,23 @@ describe('ArcadianCommunities', function() {
     const card = new ArcadianCommunities();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.steel).to.eq(10);
     player.corporationCard = card;
 
-    const initLands = game.board.getAvailableSpacesForGreenery(player);
+    const initLands = player.game.board.getAvailableSpacesForGreenery(player);
     initLands[1].player = player;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectSpace).is.true;
     if ( ! (action instanceof SelectSpace)) return;
 
-    const lands = game.board.getAvailableSpacesForMarker(player);
+    const lands = player.game.board.getAvailableSpacesForMarker(player);
     action.cb(lands[0]);
 
-    game.addCityTile(player, lands[0].id);
+    player.game.addCityTile(player, lands[0].id);
+    TestingUtils.runAllActions(player.game);
     expect(player.megaCredits).to.eq(3);
   });
 });

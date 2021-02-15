@@ -4,7 +4,8 @@ import {ResourceType} from '../ResourceType';
 import {ICard} from '../cards/ICard';
 import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
+import {LogBuilder} from '../LogBuilder';
 
 export namespace AddResourcesToCard {
   export interface Options {
@@ -12,10 +13,13 @@ export namespace AddResourcesToCard {
     restrictedTag?: Tags;
     title?: string;
     filter?: (card: ICard) => boolean;
+    logMessage?: string;
+    logBuilder?: (builder: LogBuilder) => void;
   }
 }
 
 export class AddResourcesToCard implements DeferredAction {
+  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
   constructor(
         public player: Player,
         public resourceType: ResourceType | undefined,

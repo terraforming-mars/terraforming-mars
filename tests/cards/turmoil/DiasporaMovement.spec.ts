@@ -26,17 +26,17 @@ describe('DiasporaMovement', function() {
 
   it('Can\'t play', function() {
     reds.sendDelegate(player.id, game);
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     reds.sendDelegate(player.id, game);
     reds.sendDelegate(player.id, game);
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.playedCards.push(new ColonizerTrainingCamp());
     player2.playedCards.push(new MethaneFromTitan());
-    card.play(player, game);
+    card.play(player);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
   });
 });

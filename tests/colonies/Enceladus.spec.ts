@@ -31,7 +31,7 @@ describe('Enceladus', function() {
     enceladus.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const action = game.deferredActions.shift()!;
+    const action = game.deferredActions.pop()!;
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
     // Should directly add to Tardigrades, since there's no other target
@@ -44,9 +44,11 @@ describe('Enceladus', function() {
     player.playCard(tardigrades);
     enceladus.trade(player);
 
-    // Should have AddResourcesToCard, GiveColontBonus and decrease track
+    // Should have GiveColonyBonus, AddResourcesToCard and decrease track
     expect(game.deferredActions).has.lengthOf(3);
-    const action = game.deferredActions.shift()!;
+    game.deferredActions.pop(); // GiveColonyBonus
+
+    const action = game.deferredActions.pop()!; // AddResourcesToCard
     expect(action).to.be.an.instanceof(AddResourcesToCard);
     expect(action.player).to.eq(player);
     // Should directly add to Tardigrades, since there's no other target
@@ -61,12 +63,10 @@ describe('Enceladus', function() {
     player2.playCard(regolithEaters);
 
     enceladus.addColony(player);
-    game.deferredActions.shift()!.execute(); // Gain placement microbes
+    game.deferredActions.pop()!.execute(); // Gain placement microbes
 
     enceladus.trade(player2);
-    game.deferredActions.shift()!.execute(); // Gain trade microbes
-
-    game.deferredActions.runAll(() => {}); // Trade bonus
+    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
 
     expect(tardigrades.resourceCount).to.eq(4);
     expect(regolithEaters.resourceCount).to.eq(1);

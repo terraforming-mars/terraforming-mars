@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -17,16 +16,16 @@ export class IshtarMining extends Card {
       tags: [Tags.VENUS],
       cost: 5,
 
+      requirements: CardRequirements.builder((b) => b.venus(8)),
       metadata: {
         cardNumber: '233',
-        requirements: CardRequirements.builder((b) => b.venus(8)),
         renderData: CardRenderer.builder((b) => b.production((pb) => pb.titanium(1))),
         description: 'Requires Venus 8%. Increase your titanium production 1 step.',
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.VENUS, 8);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 8);
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM);

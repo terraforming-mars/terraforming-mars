@@ -4,10 +4,9 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -22,9 +21,9 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
       cost: 14,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(11)),
       metadata: {
         cardNumber: '024',
-        requirements: CardRequirements.builder((b) => b.oxygen(11)),
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
             eb.animals(1).any.startAction.animals(1);
@@ -47,20 +46,14 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
-      if (game.isSoloMode()) return true;
+    public canAct(player: Player): boolean {
+      if (player.game.isSoloMode()) return true;
       return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
     }
 
-    public action(player: Player, game: Game) {
-      game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
-      game.defer(new DeferredAction(
-        player,
-        () => {
-          player.addResourceTo(this);
-          return undefined;
-        },
-      ));
+    public action(player: Player) {
+      player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
+      player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
       return undefined;
     }
 }

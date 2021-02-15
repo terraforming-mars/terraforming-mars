@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {MAX_OXYGEN_LEVEL, MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -29,20 +28,20 @@ export class TowingAComet extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    const oxygenStep = game.getOxygenLevel() < MAX_OXYGEN_LEVEL ? 1 : 0;
-    const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+  public canPlay(player: Player): boolean {
+    const oxygenStep = player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL ? 1 : 0;
+    const oceanStep = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
     const totalSteps = oxygenStep + oceanStep;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * totalSteps, false, true);
     }
 
     return true;
   }
-  public play(player: Player, game: Game) {
-    game.defer(new PlaceOceanTile(player));
+  public play(player: Player) {
+    player.game.defer(new PlaceOceanTile(player));
     player.plants += 2;
-    return game.increaseOxygenLevel(player, 1);
+    return player.game.increaseOxygenLevel(player, 1);
   }
 }

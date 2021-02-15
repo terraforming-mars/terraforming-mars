@@ -24,6 +24,12 @@
     min-width: 70px;
     padding: 8px 0px 4px 8px;
     box-sizing: border-box;
+
+    &.resource_item--energy {
+        clip-path: polygon(85% 0, 100% 25%, 100% 75%, 85% 100%, 0 100%, 0 0);
+        margin-right: -10px;
+        padding-right: 8px;
+    }
 }
 
 .resource_item_stock {
@@ -118,6 +124,10 @@
 
 .resource_icon--heat {
     background-image: url(assets/resources/heat.png);
+}
+
+.resource_icon--data {
+    background-image: url(assets/resources/data.png);
 }
 
 .shield_icon {

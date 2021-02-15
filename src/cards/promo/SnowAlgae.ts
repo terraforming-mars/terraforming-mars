@@ -16,9 +16,9 @@ export class SnowAlgae extends Card implements IProjectCard {
       cost: 12,
       tags: [Tags.PLANT],
 
+      requirements: CardRequirements.builder((b) => b.oceans(2)),
       metadata: {
         cardNumber: '211',
-        requirements: CardRequirements.builder((b) => b.oceans(2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(1).heat(1);

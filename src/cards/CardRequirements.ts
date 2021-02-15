@@ -152,6 +152,36 @@ class Builder {
     return this;
   }
 
+  public colonyRate(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.COLONY_RATE, amount));
+    return this;
+  }
+
+  public miningRate(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.MINING_RATE, amount));
+    return this;
+  }
+
+  public logisticRate(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.LOGISTIC_RATE, amount));
+    return this;
+  }
+
+  public colonyTiles(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.COLONY_TILES, amount));
+    return this;
+  }
+
+  public miningTiles(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.MINING_TILES, amount));
+    return this;
+  }
+
+  public roadTiles(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.ROAD_TILES, amount));
+    return this;
+  }
+
   public max(): Builder {
     const req = this.reqs.pop();
     if (req === undefined) {

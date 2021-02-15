@@ -17,12 +17,12 @@ describe('Decomposers', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 3;
-    expect(card.canPlay(player, game)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play();
 
     card.onCardPlayed(player, new Birds());

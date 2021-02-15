@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -18,9 +17,9 @@ export class WavePower extends Card implements IProjectCard {
       tags: [Tags.ENERGY],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
         cardNumber: '139',
-        requirements: CardRequirements.builder((b) => b.oceans(3)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1));
         }),
@@ -29,8 +28,8 @@ export class WavePower extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY);

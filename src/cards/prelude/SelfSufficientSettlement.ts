@@ -1,6 +1,5 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
@@ -23,9 +22,9 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
       },
     });
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    game.defer(new PlaceCityTile(player));
+    player.game.defer(new PlaceCityTile(player));
     return undefined;
   }
 }

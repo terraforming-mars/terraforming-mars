@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -24,10 +23,10 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       tags: [Tags.MICROBE],
       cost: 13,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
       metadata: {
         cardNumber: '134',
         description: 'It must be -10 C or colder.',
-        requirements: CardRequirements.builder((b) => b.temperature(-10).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 plant.', (eb) => {
             eb.empty().startAction.plants(1);
@@ -40,8 +39,8 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -10);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -10);
   }
   public play() {
     return undefined;

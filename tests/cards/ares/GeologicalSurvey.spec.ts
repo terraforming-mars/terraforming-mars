@@ -3,13 +3,15 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {GeologicalSurvey} from '../../../src/cards/ares/GeologicalSurvey';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {TestPlayers} from '../../TestingUtils';
+import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('GeologicalSurvey', function() {
   let card : GeologicalSurvey; let player : Player; let game : Game;
@@ -23,28 +25,26 @@ describe('GeologicalSurvey', function() {
   });
 
   it('Can play', function() {
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.true;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.true;
 
-    AresTestHelper.addGreenery(game, player);
-    expect(card.canPlay(player, game)).is.false;
+    AresTestHelper.addGreenery(player);
+    expect(card.canPlay(player)).is.false;
   });
 
 
-  // This doesn't test anything about this card, but about the behavior this card provides, from
-  // AresHandler.
   it('Bonus in the field', function() {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
@@ -84,6 +84,7 @@ describe('GeologicalSurvey', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(2);
@@ -94,5 +95,29 @@ describe('GeologicalSurvey', function() {
     expect(player.cardsInHand).is.length(1);
     expect(microbeCard.resourceCount).eq(1);
     expect(animalCard.resourceCount).eq(1);
+  });
+
+  it('Works with Mars First policy', function() {
+    player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions();
+    game = Game.newInstance('foobar', [player], player, gameOptions);
+    const turmoil = game.turmoil!;
+    const marsFirst = new MarsFirst();
+
+    player.playedCards.push(card);
+    game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
+
+    TestingUtils.resetBoard(game);
+
+    game.addGreenery(player, '11');
+    TestingUtils.runAllActions(game);
+    expect(player.steel).eq(0);
+
+    TestingUtils.resetBoard(game);
+
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    game.addGreenery(player, '11');
+    TestingUtils.runAllActions(game);
+    expect(player.steel).eq(2);
   });
 });

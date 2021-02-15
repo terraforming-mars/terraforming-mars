@@ -2,12 +2,14 @@ import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {Priority} from '../../deferredActions/DeferredAction';
+import {GainResources} from '../../deferredActions/GainResources';
+import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,6 +41,7 @@ export class TharsisRepublic extends Card implements CorporationCard {
       },
     });
   }
+
   public initialAction(player: Player) {
     return new SelectSpace('Select space on mars for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
@@ -46,18 +49,24 @@ export class TharsisRepublic extends Card implements CorporationCard {
       return undefined;
     });
   }
-  public onTilePlaced(player: Player, space: ISpace) {
+
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
-      if (space.player === player) {
-        player.megaCredits += 3;
+      if (cardOwner.id === activePlayer.id) {
+        cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 3}));
       }
       if (space.spaceType !== SpaceType.COLONY) {
-        player.addProduction(Resources.MEGACREDITS);
+        cardOwner.game.defer(
+          new GainProduction(cardOwner, Resources.MEGACREDITS),
+          cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+        );
       }
     }
+    return;
   }
-  public play(player: Player, game: Game) {
-    if (game.getPlayers().length === 1) {
+
+  public play(player: Player) {
+    if (player.game.getPlayers().length === 1) {
       // Get bonus for 2 neutral cities
       player.addProduction(Resources.MEGACREDITS, 2);
     }

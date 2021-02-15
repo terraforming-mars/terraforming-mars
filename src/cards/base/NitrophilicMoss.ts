@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -18,9 +17,9 @@ export class NitrophilicMoss extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 8,
 
+      requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
         cardNumber: '146',
-        requirements: CardRequirements.builder((b) => b.oceans(3)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(2);
@@ -31,8 +30,8 @@ export class NitrophilicMoss extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const meetsOceanRequirements = game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
+  public canPlay(player: Player): boolean {
+    const meetsOceanRequirements = player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CardName.MANUTECH) || player.plants >= 1 && hasViralEnhancers !== undefined;
 

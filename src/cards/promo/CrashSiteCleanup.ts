@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {Game} from '../../Game';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -18,10 +17,10 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       name: CardName.CRASH_SITE_CLEANUP,
       cost: 4,
 
+      requirements: CardRequirements.builder((b) => b.plantsRemoved()),
       metadata: {
         description: 'Requires that a player removed ANOTHER PLAYER\'s plants this generation. Gain 1 titanium or 2 steel.',
         cardNumber: 'X16',
-        requirements: CardRequirements.builder((b) => b.plantsRemoved()),
         renderData: CardRenderer.builder((b) => {
           b.titanium(1).nbsp.or().nbsp.steel(2);
         }),
@@ -30,8 +29,8 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(_player: Player, game: Game) {
-    return game.someoneHasRemovedOtherPlayersPlants;
+  public canPlay(player: Player) {
+    return player.game.someoneHasRemovedOtherPlayersPlants;
   }
 
   public play(player: Player) {

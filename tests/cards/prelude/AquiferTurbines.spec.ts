@@ -21,10 +21,10 @@ describe('AquiferTurbines', function() {
 
   it('Should play', function() {
     player.megaCredits = 3;
-    card.play(player, game);
+    card.play(player);
 
     // PlaceOceanTile
-    game.deferredActions.shift();
+    game.deferredActions.pop();
 
     // SelectHowToPayDeferred
     game.deferredActions.runNext();

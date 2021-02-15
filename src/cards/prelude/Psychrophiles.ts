@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -20,9 +19,9 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       cost: 2,
       resourceType: ResourceType.MICROBE,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
       metadata: {
         cardNumber: 'P39',
-        requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
@@ -37,8 +36,8 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
   }
     public resourceCount = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -20);
+    public canPlay(player: Player): boolean {
+      return player.game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -20);
     }
 
     public play() {

@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -17,9 +16,9 @@ export class MartianSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 9,
 
+      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
       metadata: {
         cardNumber: 'P38',
-        requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),
@@ -28,8 +27,8 @@ export class MartianSurvey extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
   }
 
   public play(player: Player) {

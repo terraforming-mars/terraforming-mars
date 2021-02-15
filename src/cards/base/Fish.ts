@@ -5,7 +5,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
@@ -22,9 +21,9 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       cost: 9,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.temperature(2)),
       metadata: {
         cardNumber: '052',
-        requirements: CardRequirements.builder((b) => b.temperature(2)),
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
@@ -42,14 +41,14 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
   }
     public resourceCount: number = 0;
 
-    public canPlay(player: Player, game: Game): boolean {
-      return super.canPlay(player) && game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    public canPlay(player: Player): boolean {
+      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;
     }
-    public play(player: Player, game: Game) {
-      game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    public play(player: Player) {
+      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;
     }
     public canAct(): boolean {

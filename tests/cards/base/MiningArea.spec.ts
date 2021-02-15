@@ -19,13 +19,13 @@ describe('MiningArea', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (const land of lands) {
-      if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
+      if (land.bonus.includes(SpaceBonus.STEEL) || land.bonus.includes(SpaceBonus.TITANIUM)) {
         const adjacents = game.board.getAdjacentSpaces(land);
         for (const adjacent of adjacents) {
           if (adjacent.tile === undefined && adjacent.bonus.length === 0) {
@@ -35,10 +35,10 @@ describe('MiningArea', function() {
       }
     }
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
-    const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
+    const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
@@ -48,7 +48,7 @@ describe('MiningArea', function() {
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(titaniumSpace!.adjacency?.bonus).eq(undefined);
 
-    const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
+    const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
     expect(steelSpace).is.not.undefined;
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
     action.cb(steelSpace!);

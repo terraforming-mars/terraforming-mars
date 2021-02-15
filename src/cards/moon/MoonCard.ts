@@ -1,3 +1,4 @@
+import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {TileType} from '../../TileType';
 import {Units} from '../../Units';
@@ -7,7 +8,7 @@ import {IMoonCard} from './IMoonCard';
 
 export interface MoonCardProperties {
   reserveUnits?: Units,
-  tilesBuilt?: Array<TileType>
+  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>
 }
 
 export abstract class MoonCard extends Card implements IProjectCard, IMoonCard {
@@ -29,7 +30,8 @@ export abstract class MoonCard extends Card implements IProjectCard, IMoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+    Units.deductUnits(adjustedReserveUnits, player);
     Units.adjustProduction(this.productionBox, player, player.game);
     return undefined;
   }

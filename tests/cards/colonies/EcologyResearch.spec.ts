@@ -23,11 +23,11 @@ describe('EcologyResearch', function() {
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);
-    game.colonies.push(colony1);
+    player.game.colonies.push(colony1);
   });
 
   it('Should play without targets', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
@@ -38,13 +38,13 @@ describe('EcologyResearch', function() {
     const fish = new Fish();
     player.playedCards.push(tardigrades, fish);
 
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
-    const input = game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    const input = game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
     expect(input).is.undefined;
-    const input2 = game.deferredActions.next()!.execute();
-    game.deferredActions.shift();
+    const input2 = game.deferredActions.peek()!.execute();
+    game.deferredActions.pop();
     expect(input2).is.undefined;
 
     expect(tardigrades.resourceCount).to.eq(2);
@@ -57,11 +57,11 @@ describe('EcologyResearch', function() {
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
 
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.next()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([ants]);
 
     expect(ants.resourceCount).to.eq(2);

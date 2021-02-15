@@ -322,7 +322,7 @@ class Builder {
     return this;
   }
 
-  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = true) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     if (withO2) {
@@ -409,6 +409,11 @@ class Builder {
     return this;
   }
 
+  public data(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount));
+    return this;
+  }
+
   public multiplierWhite() {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
     return this;
@@ -420,8 +425,8 @@ class Builder {
     return this;
   }
 
-  public moon(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON));
+  public moon(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON, amount));
     return this;
   }
 
@@ -455,8 +460,8 @@ class Builder {
     return this;
   }
 
-  public moonMineRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE_RATE, amount));
+  public moonMiningRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, amount));
     return this;
   }
 

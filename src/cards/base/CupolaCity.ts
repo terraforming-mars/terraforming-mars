@@ -4,7 +4,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
@@ -22,9 +21,9 @@ export class CupolaCity extends Card implements IProjectCard {
       cost: 16,
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
+      requirements: CardRequirements.builder((b) => b.oxygen(9).max()),
       metadata: {
         cardNumber: '029',
-        requirements: CardRequirements.builder((b) => b.oxygen(9).max()),
         description: 'Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
@@ -35,17 +34,17 @@ export class CupolaCity extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     return super.canPlay(player) &&
         player.getProduction(Resources.ENERGY) >= 1 &&
-        game.board.getAvailableSpacesForCity(player).length > 0;
+        player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     return new SelectSpace(
       'Select a space for city tile',
-      game.board.getAvailableSpacesForCity(player),
+      player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
-        game.addCityTile(player, space.id);
+        player.game.addCityTile(player, space.id);
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, 3);
         return undefined;

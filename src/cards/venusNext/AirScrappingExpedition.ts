@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_VENUS_SCALE} from '../../constants';
@@ -30,17 +29,17 @@ export class AirScrappingExpedition extends Card {
     });
   };
 
-  public canPlay(player: Player, game: Game): boolean {
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, false, true);
+  public canPlay(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseVenusScaleLevel(player, 1);
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
     let floaterCards = player.getResourceCards(ResourceType.FLOATER);
     floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
     if (floaterCards.length === 0) {

@@ -12,6 +12,7 @@ import {ICard} from '../cards/ICard';
 import {ICardRenderDescription, isIDescription} from '../cards/render/ICardRenderDescription';
 import {CardName} from '../CardName';
 import {ICardFactory} from '../cards/ICardFactory';
+import {PreferencesManager} from './PreferencesManager';
 
 const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
 
@@ -45,6 +46,7 @@ export interface DebugUIModel {
   moon: boolean | unknown[],
   promo: boolean | unknown[],
 }
+
 export const DebugUI = Vue.component('debug-ui', {
   components: {
     Card,
@@ -65,6 +67,21 @@ export const DebugUI = Vue.component('debug-ui', {
       moon: true,
       promo: true,
     } as DebugUIModel;
+  },
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchString = urlParams.get('search');
+    if (searchString) {
+      this.filterText = searchString;
+    }
+  },
+  watch: {
+    filterText(newSearchString) {
+      if (window.history.pushState) {
+        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?search=' + newSearchString;
+        window.history.pushState({path: newurl}, '', newurl);
+      }
+    },
   },
   methods: {
     toggleAll: function() {
@@ -107,14 +124,14 @@ export const DebugUI = Vue.component('debug-ui', {
       const card = cards.get(cardName);
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
-        if (cardName.toUpperCase().indexOf(filterText) === -1) {
+        if (cardName.toUpperCase().includes(filterText) === false) {
           if (this.$data.filterDescription) {
             let desc: string | ICardRenderDescription | undefined = card?.card.metadata?.description;
             if (isIDescription(desc)) {
               desc = desc.text;
             }
             // TODO(kberg): optimize by having all the descriptions in upper case.
-            if (desc === undefined || desc.toUpperCase().indexOf(filterText) === -1) {
+            if (desc === undefined || desc.toUpperCase().includes(filterText) === false) {
               return false;
             }
           } else {
@@ -148,18 +165,25 @@ export const DebugUI = Vue.component('debug-ui', {
         return true;
       }
     },
+    getLanguageCssClass() {
+      const language = PreferencesManager.loadValue('lang') || 'en';
+      return 'language-' + language;
+    },
   },
   template: `
-        <div class="debug-ui-container">
-            <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
-            <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
-            <label for="filterDescription-checkbox">
-                <span v-i18n>Filter description</span>
-            </label>&nbsp;
-            <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
-            <label for="sortById-checkbox">
-                <span v-i18n>Sort by ID (work in progress)</span>
-            </label>
+        <div class="debug-ui-container" :class="getLanguageCssClass()">
+            <h1>Debug UI</h1>
+            <div class="form-group">
+              <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
+              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
+              <label for="filterDescription-checkbox">
+                  <span v-i18n>Filter description</span>
+              </label>
+              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
+              <label for="sortById-checkbox">
+                  <span v-i18n>Sort by ID (work in progress)</span>
+              </label>
+            </div>
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
             <button id="toggle-checkbox" v-on:click="toggleAll()">
@@ -222,7 +246,7 @@ export const DebugUI = Vue.component('debug-ui', {
               <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon"></input>
               <label for="moon-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                <span v-i18n>The Moon (under development)</span>
+                <span v-i18n>The Moon</span>
               </label><span/>
             </div>
 

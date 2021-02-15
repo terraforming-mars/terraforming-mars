@@ -4,7 +4,6 @@ import {Tags} from './../Tags';
 import {Card} from '../Card';
 import {CardType} from './../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -37,21 +36,21 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
-    const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+  public canPlay(player: Player): boolean {
+    const temperatureStep = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
+    const oceanStep = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
     const totalSteps = temperatureStep + oceanStep;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, game, true);
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, true);
     }
 
     return true;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseTemperature(player, 1);
-    game.defer(new PlaceOceanTile(player));
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 1);
+    player.game.defer(new PlaceOceanTile(player));
     player.plants += 3;
     return undefined;
   }

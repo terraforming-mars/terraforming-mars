@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -18,9 +17,9 @@ export class TundraFarming extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 16,
 
+      requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
         cardNumber: '169',
-        requirements: CardRequirements.builder((b) => b.temperature(-6)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) =>{
             pb.plants(1).megacredits(2);
@@ -31,8 +30,8 @@ export class TundraFarming extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
-    return game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
+  public canPlay(player: Player): boolean {
+    return player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
   }
   public play(player: Player) {
     player.addProduction(Resources.PLANTS);

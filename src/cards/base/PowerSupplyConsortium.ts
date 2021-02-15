@@ -3,7 +3,6 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
@@ -18,9 +17,9 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
       tags: [Tags.ENERGY],
       cost: 5,
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
       metadata: {
         cardNumber: '160',
-        requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 2)),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).any.br;
@@ -32,9 +31,9 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
+  public play(player: Player) {
     player.addProduction(Resources.ENERGY);
-    game.defer(new DecreaseAnyProduction(player, Resources.ENERGY, 1));
+    player.game.defer(new DecreaseAnyProduction(player, Resources.ENERGY, 1));
     return undefined;
   }
 }

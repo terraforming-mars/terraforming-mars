@@ -17,10 +17,10 @@ describe('DeimosDown', function() {
 
   it('Should play', function() {
     player2.plants = 8;
-    card.play(player, game);
+    card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
 
     expect(game.getTemperature()).to.eq(-24);
@@ -32,7 +32,7 @@ describe('DeimosDown', function() {
     const game = Game.newInstance('foobar', [player], player);
 
     player.plants = 15;
-    card.play(player, game);
+    card.play(player);
 
     expect(game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);

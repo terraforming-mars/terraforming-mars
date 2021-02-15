@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {SpaceType} from '../../../src/SpaceType';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('Flooding', function() {
   let card : Flooding; let player : Player; let player2 : Player; let game : Game;
@@ -21,7 +21,7 @@ describe('Flooding', function() {
 
   it('Should play', function() {
     const oceans = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     expect(action!.cb(oceans[0])).is.undefined;
@@ -52,7 +52,7 @@ describe('Flooding', function() {
 
   it('Does not suggest to remove money from yourself', function() {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player, game);
+    const action = card.play(player);
 
     game.addGreenery(player, '03');
     game.addGreenery(player2, '05');
@@ -68,7 +68,7 @@ describe('Flooding', function() {
 
   it('Does not suggest player who played Land Claim', function() {
     const landClaim = new LandClaim();
-    const landClaimAction = landClaim.play(player2, game);
+    const landClaimAction = landClaim.play(player2);
     const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === '03')[0];
 
     landClaimAction.cb(adjacentSpace);
@@ -76,15 +76,15 @@ describe('Flooding', function() {
     expect(adjacentSpace.tile).is.undefined;
 
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player, game) as SelectSpace;
+    const action = card.play(player) as SelectSpace;
     expect(action.cb(oceanSpaces[0])).is.undefined;
   });
 
   it('Does not suggest to remove money if oceans are already maxed', function() {
-    maxOutOceans(player, game);
-    expect(card.canPlay(player, game)).is.true;
+    TestingUtils.maxOutOceans(player);
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 });

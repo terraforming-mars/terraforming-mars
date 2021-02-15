@@ -34,8 +34,8 @@
     }
 }
 
-.cards-action-was-used {
-    filter: grayscale(1);
+.card-unavailable {
+    filter: brightness(0.4);
 }
 
 .nofloat {
@@ -73,11 +73,6 @@
     border-right: 4px solid rgb(137, 137, 137);
     border-radius: 20px;
     box-shadow: 0 0 2px 1px black;
-}
-
-.clicked-card {
-    box-shadow: 0 0 1px 1px #444, 0 0 15px 5px white !important;
-    filter: grayscale(1);
 }
 
 input[type="checkbox"]:checked + .filterDiv,
@@ -988,6 +983,10 @@ input[type="radio"]:checked + .filterDiv::after {
 .asteroid {
     color: #0000 !important;
     background-image: url(./assets/resources/asteroid.png);
+}
+.disease {
+    color: #0000 !important;
+    background-image: url(./assets/resources/disease.png);
 }
 .pristar {
     background-image: url(./assets/resources/pristar.png);

@@ -16,7 +16,7 @@ describe('GHGProducingBacteria', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
@@ -28,13 +28,13 @@ describe('GHGProducingBacteria', function() {
   it('Should act', function() {
     player.playedCards.push(card);
 
-    card.action(player, game);
+    card.action(player);
     expect(card.resourceCount).to.eq(1);
 
-    card.action(player, game);
+    card.action(player);
     expect(card.resourceCount).to.eq(2);
 
-    const orAction = card.action(player, game) as OrOptions;
+    const orAction = card.action(player) as OrOptions;
     expect(orAction instanceof OrOptions).is.true;
 
         orAction!.options[1].cb();

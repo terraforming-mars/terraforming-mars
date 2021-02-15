@@ -22,9 +22,9 @@ export class OceanSanctuary extends Card implements IResourceCard {
       cost: 9,
       resourceType: ResourceType.ANIMAL,
 
+      requirements: CardRequirements.builder((b) => b.oceans(5)),
       metadata: {
         cardNumber: 'A22',
-        requirements: CardRequirements.builder((b) => b.oceans(5)),
         renderData: CardRenderer.builder((b) => {
           b.tile(TileType.OCEAN_SANCTUARY, false, true).nbsp.animals(1).br;
           b.vpText('1 VP per animal on this card.');

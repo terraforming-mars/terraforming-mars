@@ -27,7 +27,7 @@ describe('BiofertilizerFacility', function() {
   });
 
   it('Cannot play without a science tag', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play', function() {
@@ -52,7 +52,7 @@ describe('BiofertilizerFacility', function() {
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZER_FACILITY);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]});
 
-    game.deferredActions.next()!.execute();
+    game.deferredActions.peek()!.execute();
 
     expect(microbeHost.resourceCount).is.eq(2);
   });

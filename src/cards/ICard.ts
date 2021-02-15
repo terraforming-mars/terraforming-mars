@@ -5,7 +5,6 @@ import {ISpace} from '../boards/ISpace';
 import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {Game} from '../Game';
 import {Tags} from './Tags';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
@@ -18,10 +17,11 @@ import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
+import {CardRequirements} from './CardRequirements';
 
 export interface IActionCard {
-    action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
-    canAct: (player: Player, game: Game) => boolean;
+    action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    canAct: (player: Player) => boolean;
 }
 
 export interface IResourceCard {
@@ -31,20 +31,21 @@ export interface IResourceCard {
 export interface ICard {
     name: CardName;
     tags: Array<Tags>;
-    play: (player: Player, game: Game) => PlayerInput | undefined;
-    action?: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
-    canAct?: (player: Player, game: Game) => boolean;
+    play: (player: Player) => PlayerInput | undefined;
+    action?: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    canAct?: (player: Player) => boolean;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
     getRequirementBonus?: (player: Player, venusOnly?: boolean) => number;
     getVictoryPoints?: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
-    onTilePlaced?: (player: Player, space: ISpace) => void;
+    onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;
     cost?: number;
     cardType: CardType;
+    requirements?: CardRequirements;
     metadata: CardMetadata;
     warning?: string | Message;
 }

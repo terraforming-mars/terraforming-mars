@@ -5,12 +5,13 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
 import {CardName} from '../CardName';
 import {ICard} from '../cards/ICard';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard implements DeferredAction {
+  public priority= Priority.ATTACK_OPPONENT;
   constructor(
         public player: Player,
         public resourceType: ResourceType,
@@ -18,7 +19,11 @@ export class RemoveResourcesFromCard implements DeferredAction {
         public ownCardsOnly: boolean = false,
         public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
         public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
-  ) {}
+  ) {
+    if (ownCardsOnly) {
+      this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
+    }
+  }
 
   public execute() {
     if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
@@ -65,7 +70,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
     let resourceCards: Array<ICard>;
     if (ownCardsOnly) {
       if (resourceType === ResourceType.ANIMAL) {
-        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1);
+        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false);
       } else {
         resourceCards = player.getCardsWithResources(resourceType);
       }
@@ -75,7 +80,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
         switch (resourceType) {
         case ResourceType.ANIMAL:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.indexOf(card.name) === -1));
+          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
           break;
         case ResourceType.MICROBE:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;

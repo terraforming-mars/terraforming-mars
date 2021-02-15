@@ -3,11 +3,13 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
+import {Priority} from '../../deferredActions/DeferredAction';
+import {GainProduction} from '../../deferredActions/GainProduction';
+import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -33,23 +35,29 @@ export class ImmigrantCity extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player, game: Game): boolean {
+
+  public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
-    const canPlaceCityOnMars = game.board.getAvailableSpacesForCity(player).length > 0;
+    const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
     const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
 
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
   }
-  public onTilePlaced(player: Player, space: ISpace) {
+
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
-      player.addProduction(Resources.MEGACREDITS);
+      cardOwner.game.defer(
+        new GainProduction(cardOwner, Resources.MEGACREDITS),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+      );
     }
   }
-  public play(player: Player, game: Game) {
-    return new SelectSpace('Select space for city tile', game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      game.addCityTile(player, space.id);
-      player.addProduction(Resources.ENERGY, -1);
-      player.addProduction(Resources.MEGACREDITS, -2);
+
+  public play(player: Player) {
+    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
+      player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));
+      player.game.defer(new LoseProduction(player, Resources.MEGACREDITS, {count: 2}));
       return undefined;
     });
   }

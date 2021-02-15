@@ -4,17 +4,17 @@
 
     "Asteroid Mining Consortium": "Consortium Minier",
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Vous devez être capable de produire du titane. Diminuez n'importe quelle production de titane de 1 et augmentez la vôtre de 1.",
-    
+
     "Deep Well Heating": "Chauffage Géothermique",
     "Increase your Energy production 1 step. Increase temperature 1 step.": "Augmentez votre production d'énergie de 1. Augmentez la température de 1.",
-    
+
     "Cloud Seeding": "Ensemencement de Nuages",
     "Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Nécessite 3 tuiles Océan. Diminuez votre production de M€ de 1 et n'importe quelle production de chaleur de 1. Augmentez votre production de plantes de 2.",
-    
+
     "Search for Life": "Traces de Vie",
     "Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Action: Dépensez 1 M€ pour révéler et défausser la première carte de la pioche. Si cette carte a un symbole Microbe, placez 1 symbole science sur cette carte.",
     "3 VPs if you have one or more Science resources here.": "3 PV si vous avez une ou plusieurs Science sur cette carte.",
-    
+
     "Inventors' Guild": "Guilde des Inventeurs",
     "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "ACTION: CONSULTEZ LA PREMIÈRE CARTE DE LA PIOCHE. VOUS POUVEZ SOIT L'ACHETER, SOIT LA DÉFAUSSER.",
 
@@ -24,7 +24,7 @@
     "Capital": "Capitale",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "Nécessite 4 tuiles Océan. Placez cette tuile. Diminuez votre production d'néergie de 2 et augmentez votre production de M€ de 5.",
     "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "+1 PV POUR CHAQUE TUILE OCÉAN ADJACENTE À CETTE TUILE CITÉ.",
-    
+
     "Asteroid": "Astéroïde",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Augmentez la température de 1 et gagnez 2 titanes. Retirez jusqu'à 3 plantes à n'importe quel joueur.",
 
@@ -33,7 +33,7 @@
 
     "Big Asteroid": "Astéroïde Géant",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Augmentez la température de 2 et gagnez 4 titanes. Retirez jusqu'à 4 plantes à n'importe quel joueur.",
-    
+
     "Water Import from Europa": "Importation d'Eau d'Europe",
     "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Action: Payez 12 M€ pour placer une tuile Océan. vous POUVEZ UTILISER DU TITANE comme si vous jouiez une carte Espace.",
     "1 VP for each Jovian tag you have.": "1 PC par badge Jovien en votre possession.",
@@ -51,9 +51,9 @@
     "Domed Crater": "Cratère Couvert",
     "Oxygen must be 7% or less.": "Le niveau d'oxygène doit être de 7% ou moins.",
     "Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Gagnez 3 plantes et placez une tuile Cité. Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 3.",
-    
+
     "Noctis City": "Noctis Ville",
-    "Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.": "Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 3. Placez une tuile Cité SUR LA ZONE RÉSERVÉE, en ignorant toute restriction de placement.",
+    "Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 3. Placez une tuile Cité SUR LA ZONE RÉSERVÉE, en ignorant toute restriction de placement.",
 
     "Methane from Titan": "Méthane de Titan",
     "Requires 2% oxygen. Increase your heat production 2 steps and your Plant production 2 steps.": "Nécessite au moins 2% d'oxygène. Augmentez vos productions de chaleur et de plantes de 2 chacune.",
@@ -93,7 +93,7 @@
 
     "Cupola City": "Cité de la Coupole",
     "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Le niveau d'oxygène doit être de 9% ou moins. Placez une tuile Cité. Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 3.",
-    
+
     "Lunar Beam": "Faisceau Lunaire",
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Diminuez votre production de M€ de 2 et augmentez vos productions de chaleur et d'énergie de 2 chacune.",
 
@@ -119,7 +119,7 @@
 
     "Nitrogen-Rich Asteroid": "Astéroïde Riche en Azote",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "Augmentez votre NT de 2 et la température de 1. Augmentez votre production de plante de 1, ou de 4 si vous avez 3 badges Plante.",
-    
+
     "Rover Construction": "Construction d'un Rover",
     "Effect: When any City tile is placed, gain 2 MC.": "Effet: Lorsqu'une tuile Cité est placée, par n'importe quel joueur, gagnez 2 M€.",
 
@@ -202,7 +202,7 @@
 
     "Mining Area": "Carrière",
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Placez cette tuile sur une zone offrant un bonus d'acier ou de titane, adjacent à l'une de vos autres tuiles. Augmentez votre production de cette ressource de 1.",
-    
+
     "Building Industries": "IndustrieS de Construction",
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Diminuez votre production d'énergie de 1 et augmentez votre production d'acier de 2.",
 
@@ -228,7 +228,7 @@
     "Birds": "Oiseaux",
     "Action: Add an animal to this card.": "Action: Ajoutez un animal sur cette carte.",
     "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.": "Nécessite au moins 13% d'oxygène. Diminuez n'importe quelle production de plantes de 2. 1 PV par animal sur cette carte.",
-    
+
     "Mars University": "Université de Mars",
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Effet: Lorsque vous jouez un badge Science, y compris celui-ci, vous pouvez défausser une carte de votre main pour piocher une carte.",
 
@@ -443,7 +443,7 @@
 
     "Mohole Area": "Zone de Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Augmentez votre production de chaleur de 4. Placez cette tuile SUR UNE ZONE RÉSERVÉE POUR UN OCÉAN.",
-    
+
     "Large Convoy": "Grand Convoi",
     "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "Placez une tuile Océan et piochez 2 cartes. Gagnez 5 plantes, ou ajoutez 4 animaux à une AUTRE carte.",
 
@@ -543,7 +543,7 @@
 
     "Protected Valley": "Vallée Protégée",
     "Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Augmentez votre production de M€ de 2. Placez une tuile Forêt SUR UNE ZONE RÉSERVÉE POUR UN OCÉAN, en ignorant toute restriction de placement, et augmentez l'oxygène de 1.",
-    
+
     "Satellites": "Satellites",
     "Increase your MC production 1 step for each space tag you have, including this one.": "Augmentez votre production de M€ de 1 pour chaque badge Espace en votre possession, y compris celui-ci.",
 
@@ -610,7 +610,7 @@
 
     "Lagrange Observatory": "Observatoire Lagrange",
     "Draw 1 card.": "Piochez 1 carte.",
-    
+
     "Terraforming Ganymede": "Terraformation de Ganymède",
     "Raise your TR 1 step for each Jovian tag you have, including this.": "Augmentez votre NT de 1 pour chaque badge Jovien en votre possession, y compris celui-ci.",
 

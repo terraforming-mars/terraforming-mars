@@ -17,7 +17,7 @@ describe('Fish', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should act', function() {
@@ -29,10 +29,10 @@ describe('Fish', function() {
     (game as any).temperature = 2;
     player2.addProduction(Resources.PLANTS);
 
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
 
-    const input = game.deferredActions.next()!.execute();
+    const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
@@ -42,11 +42,11 @@ describe('Fish', function() {
     player.addProduction(Resources.PLANTS);
     player2.addProduction(Resources.PLANTS);
 
-    expect(card.canPlay(player, game)).is.true;
-    card.play(player, game);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.next()!.execute() as SelectPlayer;
+    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });

@@ -11,7 +11,7 @@ describe('SulphurExports', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
 
-    card.play(player, game);
+    card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

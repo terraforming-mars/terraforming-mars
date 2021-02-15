@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {Game} from '../../Game';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -34,8 +33,8 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
   public canAct(player: Player): boolean {
     return player.canAfford(7);
   }
-  public action(player: Player, game: Game) {
-    game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
+  public action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
     player.addProduction(Resources.ENERGY);
     return undefined;
   }

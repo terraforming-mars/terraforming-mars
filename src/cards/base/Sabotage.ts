@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
@@ -28,29 +27,29 @@ export class Sabotage extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player, game: Game) {
-    if (game.isSoloMode()) return undefined;
+  public play(player: Player) {
+    if (player.game.isSoloMode()) return undefined;
 
-    const availablePlayerTargets = game.getPlayers().filter((p) => p.id !== player.id);
+    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
-      if (target.titanium > 0) {
+      if (target.titanium > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(3, target.titanium);
         const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.TITANIUM, -3, game, player);
+          target.setResource(Resources.TITANIUM, -3, player.game, player);
           return undefined;
         }));
       }
 
-      if (target.steel > 0) {
+      if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(4, target.steel);
         const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.STEEL, -4, game, player);
+          target.setResource(Resources.STEEL, -4, player.game, player);
           return undefined;
         }));
       }
@@ -60,7 +59,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' MC from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.MEGACREDITS, -7, game, player);
+          target.setResource(Resources.MEGACREDITS, -7, player.game, player);
           return undefined;
         }));
       }

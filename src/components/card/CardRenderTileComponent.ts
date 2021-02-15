@@ -91,6 +91,13 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
       } else if (type === TileType.OCEAN_SANCTUARY) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--ocean_sanctuary');
+      } else if (type === TileType.MOON_MINE) {
+        // TODO(kberg): add the secondary tag.
+        classes.push('card-tile-lunar-mine');
+      } else if (type === TileType.MOON_COLONY) {
+        classes.push('card-tile-lunar-colony');
+      } else if (type === TileType.MOON_ROAD) {
+        classes.push('card-tile-lunar-road');
       }
 
       return generateClassString(classes);
@@ -125,6 +132,14 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
           classes.push('card-tile-symbol-natural-preserve');
         } else if (type === TileType.NUCLEAR_ZONE) {
           classes.push('card-tile-symbol-nuclear-zone');
+        } else if (type === TileType.LUNA_TRADE_STATION) {
+          classes.push('card-tile-symbol-luna-trade-station');
+        } else if (type === TileType.LUNA_MINING_HUB) {
+          classes.push('card-tile-symbol-luna-mining-hub');
+        } else if (type === TileType.LUNA_TRAIN_STATION) {
+          classes.push('card-tile-symbol-luna-train-station');
+        } else if (type === TileType.LUNAR_MINE_URBANIZATION) {
+          classes.push('card-tile-symbol-lunar-mine-urbanization');
         }
       }
       return '<div class="' + generateClassString(classes) + '"/></div>';

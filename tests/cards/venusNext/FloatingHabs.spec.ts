@@ -33,7 +33,7 @@ describe('FloatingHabs', function() {
     player.playedCards.push(card);
     player.megaCredits = 10;
 
-    card.action(player, game);
+    card.action(player);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
@@ -42,7 +42,7 @@ describe('FloatingHabs', function() {
   it('Should act - multiple targets', function() {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
 
     (action as SelectCard<ICard>).cb([card]);

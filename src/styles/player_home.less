@@ -24,6 +24,12 @@
 .player_shadow_color_purple {
     text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
 }
+.player_shadow_color_orange {
+    text-shadow: -1px -1px 6px @player_orange 1px 1px 1px #333a;
+}
+.player_shadow_color_pink {
+    text-shadow: -1px -1px 6px @player_pink 1px 1px 1px #333a;
+}
 
 .game-title {
     text-transform: uppercase;
@@ -96,6 +102,13 @@
         background-color: rgba(170, 170, 0, 0.2);
     }
 
+    .grid-item.player_tag_bg_color_orange {
+        background-color: rgba(189, 123, 0, 0.2);
+    }
+
+    .grid-item.player_tag_bg_color_pink {
+        background-color: rgb(245, 116, 187, 0.2);
+    }
     .city-count {
         background: url(assets/icon_city.png) center no-repeat;
         filter: invert(100%) contrast(200%);
@@ -744,8 +757,17 @@
     &.colonies-fleet-blue {
         background-position: -272px 0;
     }
+
     &.colonies-fleet-purple {
         background-position: -342px 0;
+    }
+
+    &.colonies-fleet-orange {
+        background-position: -416px 0;
+    }
+    
+    &.colonies-fleet-pink {
+        background-position: -490px 0;
     }
 }
 
@@ -786,6 +808,7 @@
 .top-bar {
     position: sticky;
     margin: -40px 0 0 auto;
+    margin-bottom: 15px;
     z-index: 20;
     top: -12px;
     display: flex;
@@ -875,10 +898,6 @@
     &.event-transparent {
         background-color: rgba(237,106,21,0.5);
     }
-}
-
-.shortkey-no-outline {
-    outline: none;
 }
 
 .select-initial-cards {

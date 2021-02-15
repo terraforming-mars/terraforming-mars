@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Game} from '../../Game';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -23,9 +22,9 @@ export class VenusianPlants extends Card implements IProjectCard {
       cost: 13,
       tags: [Tags.VENUS, Tags.PLANT],
 
+      requirements: CardRequirements.builder((b) => b.venus(16)),
       metadata: {
         cardNumber: '261',
-        requirements: CardRequirements.builder((b) => b.venus(16)),
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // intentional double br
           b.microbes(1).secondaryTag(Tags.VENUS).nbsp;
@@ -40,19 +39,19 @@ export class VenusianPlants extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player, game: Game): boolean {
+  public canPlay(player: Player): boolean {
     const meetsVenusRequirements = super.canPlay(player);
-    const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, game, false, false, true, true) && meetsVenusRequirements;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true, true) && meetsVenusRequirements;
     }
 
     return meetsVenusRequirements;
   }
 
-  public play(player: Player, game: Game) {
-    game.increaseVenusScaleLevel(player, 1);
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
     const cards = this.getResCards(player);
     if (cards.length === 0) return undefined;
 
@@ -81,6 +80,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

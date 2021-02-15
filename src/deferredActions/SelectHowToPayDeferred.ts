@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {HowToPay} from '../inputs/HowToPay';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class SelectHowToPayDeferred implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public amount: number,

@@ -9,8 +9,8 @@ describe('PolarIndustries', function() {
   it('Should play', function() {
     const card = new PolarIndustries();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
-    const action = card.play(player, game);
+    Game.newInstance('foobar', [player], player);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.HEAT)).to.eq(2);
   });

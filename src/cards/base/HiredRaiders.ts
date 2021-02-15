@@ -1,4 +1,3 @@
-import {Game} from '../../Game';
 import {Card} from '../Card';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
@@ -29,8 +28,8 @@ export class HiredRaiders extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player, game: Game) {
-    if (game.isSoloMode()) {
+  public play(player: Player) {
+    if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel', () => {
           player.steel += 2;
@@ -43,17 +42,17 @@ export class HiredRaiders extends Card implements IProjectCard {
       );
     }
 
-    const availablePlayerTargets = game.getPlayers().filter((p) => p.id !== player.id);
+    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
-      if (target.steel > 0) {
+      if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountStolen = Math.min(2, target.steel);
         const optionTitle = 'Steal ' + amountStolen + ' steel from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.steel += amountStolen;
-          target.setResource(Resources.STEEL, -2, game, player);
+          target.setResource(Resources.STEEL, -2, player.game, player);
           return undefined;
         }));
       }
@@ -64,7 +63,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;
-          target.setResource(Resources.MEGACREDITS, -3, game, player);
+          target.setResource(Resources.MEGACREDITS, -3, player.game, player);
           return undefined;
         }));
       }

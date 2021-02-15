@@ -4,30 +4,60 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
+import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class MinorityRefuge implements IProjectCard {
-    public cost = 5;
-    public tags = [Tags.SPACE];
-    public name = CardName.MINORITY_REFUGE;
-    public cardType = CardType.AUTOMATED;
+export class MinorityRefuge extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 5,
+      tags: [Tags.SPACE],
+      name: CardName.MINORITY_REFUGE,
+      cardType: CardType.AUTOMATED,
 
-    public canPlay(player: Player): boolean {
-      return player.hasAvailableColonyTileToBuildOn() && player.getProduction(Resources.MEGACREDITS) >= -3;
+      metadata: {
+        cardNumber: 'C26',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(-2)).colonies(1);
+        }),
+        description: 'Decrease your MC production 2 steps. Place a colony.',
+      },
+    });
+  }
+
+  public warning?: string;
+
+  public canPlay(player: Player): boolean {
+    if (player.hasAvailableColonyTileToBuildOn() === false) {
+      return false;
     }
 
-    public play(player: Player) {
-      player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge'));
-      player.addProduction(Resources.MEGACREDITS, -2);
-      return undefined;
+    const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
+    if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+      return true;
+    } else if (megaCreditsProduction <= -4) {
+      const lunaIsAvailable = player.game.colonies.some((colony) =>
+        colony.name === ColonyName.LUNA &&
+        colony.isColonyFull() === false &&
+        colony.colonies.includes(player.id) === false);
+
+      if (lunaIsAvailable === false) {
+        return false;
+      }
+      this.warning = 'You will only be able to build the colony on Luna.';
     }
-    public metadata: CardMetadata = {
-      cardNumber: 'C26',
-      renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.megacredits(-2)).colonies(1);
-      }),
-      description: 'Decrease your MC production 2 steps. Place a colony.',
-    }
+
+    return true;
+  }
+
+  public play(player: Player) {
+    const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
+      player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
+      undefined;
+    player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge', openColonies));
+    player.addProduction(Resources.MEGACREDITS, -2);
+    return undefined;
+  }
 }

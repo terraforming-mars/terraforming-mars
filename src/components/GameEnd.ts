@@ -6,6 +6,8 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 
+import * as constants from '../constants';
+
 export const GameEnd = Vue.component('game-end', {
   props: {
     player: {
@@ -13,7 +15,9 @@ export const GameEnd = Vue.component('game-end', {
     },
   },
   data: function() {
-    return {};
+    return {
+      constants,
+    };
   },
   components: {
     'board': Board,
@@ -58,7 +62,7 @@ export const GameEnd = Vue.component('game-end', {
   },
   template: `
         <div id="game-end" class="game_end_cont">
-            <h1>Terraforming Mars - Game finished!</h1>
+            <h1>{{ constants.APP_NAME }} - Game finished!</h1>
             <div class="game_end">
                 <div v-if="isSoloGame()">
                     <div v-if="player.isSoloModeWin">
@@ -114,6 +118,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <th>Awards</th>
                                 <th>Greenery</th>
                                 <th>City</th>
+                                <th v-if="player.moon !== undefined">Moon Roads</th>
+                                <th v-if="player.moon !== undefined">Moon Colonies</th>
+                                <th v-if="player.moon !== undefined">Moon Mines</th>
                                 <th>VP</th>
                                 <th>MC</th>
                                 <th v-if="player.gameOptions.showTimers">Timer</th>
@@ -129,6 +136,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>{{ p.victoryPointsBreakdown.awards }}</td>
                                 <td>{{ p.victoryPointsBreakdown.greenery }}</td>
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
+                                <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonRoads }}</td>
+                                <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
+                                <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td>{{ p.megaCredits }}</td>
                                 <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
@@ -158,13 +168,13 @@ export const GameEnd = Vue.component('game-end', {
                 <div class="game-end-flexrow">
                 <div class="game_end_block--board game-end-column">
                     <h2 v-i18n>Final situation on the board</h2>
-                    <board 
-                        :spaces="player.spaces" 
-                        :venusNextExtension="player.gameOptions.venusNextExtension" 
-                        :venusScaleLevel="player.venusScaleLevel" 
+                    <board
+                        :spaces="player.spaces"
+                        :venusNextExtension="player.gameOptions.venusNextExtension"
+                        :venusScaleLevel="player.venusScaleLevel"
                         :boardName ="player.gameOptions.boardName"
-                        :oceans_count="player.oceans" 
-                        :oxygen_level="player.oxygenLevel" 
+                        :oceans_count="player.oceans"
+                        :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
                         :shouldNotify="false"></board>
                 </div>

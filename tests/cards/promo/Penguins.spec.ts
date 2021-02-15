@@ -2,26 +2,26 @@ import {expect} from 'chai';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {maxOutOceans} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('Penguins', function() {
-  let card : Penguins; let player : Player; let game : Game;
+  let card : Penguins; let player : Player;
 
   beforeEach(function() {
     card = new Penguins();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {
-    maxOutOceans(player, game, 7);
-    expect(card.canPlay(player, game)).is.not.true;
+    TestingUtils.maxOutOceans(player, 7);
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    maxOutOceans(player, game, 8);
-    expect(card.canPlay(player, game)).is.true;
+    TestingUtils.maxOutOceans(player, 8);
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should act', function() {

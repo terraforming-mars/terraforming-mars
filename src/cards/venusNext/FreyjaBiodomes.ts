@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -21,9 +20,9 @@ export class FreyjaBiodomes extends Card {
       tags: [Tags.PLANT, Tags.VENUS],
       cost: 14,
 
+      requirements: CardRequirements.builder((b) => b.venus(10)),
       metadata: {
         cardNumber: '227',
-        requirements: CardRequirements.builder((b) => b.venus(10)),
         renderData: CardRenderer.builder((b) => {
           b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
@@ -36,13 +35,13 @@ export class FreyjaBiodomes extends Card {
       },
     });
   };
-  public canPlay(player: Player, game: Game): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
+  public canPlay(player: Player): boolean {
+    return player.getProduction(Resources.ENERGY) >= 1 && player.game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.ANIMAL);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    return resourceCards.filter((card) => card.tags.indexOf(Tags.VENUS) !== -1);
+    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 
   public play(player: Player) {

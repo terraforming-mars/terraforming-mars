@@ -59,6 +59,7 @@ export const Board = Vue.component('board', {
   data: function() {
     return {
       'constants': constants,
+      'isTileHidden': false,
     };
   },
   mounted: function() {
@@ -157,9 +158,24 @@ export const Board = Vue.component('board', {
     getGameBoardClassName: function():string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
+    toggleHideTile: function() {
+      this.isTileHidden = !this.isTileHidden;
+    },
+    toggleHideTileLabel: function(): string {
+      return this.isTileHidden ? 'show tiles' : 'hide tiles';
+    },
+    checkHideTile: function():boolean {
+      return this.isTileHidden;
+    },
   },
   template: `
     <div :class="getGameBoardClassName()">
+        <div class="hide-tile-button-container">
+        <div class="seasonal-cupid"></div>
+        <div class="seasonal-ox"></div>
+        <div class="seasonal-lantern"></div>
+          <div class="hide-tile-button" v-on:click.prevent="toggleHideTile()">{{ toggleHideTileLabel() }}</div>
+        </div>
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
@@ -207,7 +223,7 @@ export const Board = Vue.component('board', {
         </div>
 
         <div class="board" id="main_board">
-            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" :aresExtension="aresExtension" v-for="curSpace in getAllSpacesOnMars()"></board-space>
+            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" :aresExtension="aresExtension" :isTileHidden="checkHideTile()" v-for="curSpace in getAllSpacesOnMars()"></board-space>
             <svg id="board_legend" height="550" width="630" class="board-legend">
                 <g v-if="boardName === 'tharsis'" id="ascraeus_mons" transform="translate(95, 192)">
                     <text class="board-caption">
